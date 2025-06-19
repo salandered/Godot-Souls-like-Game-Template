@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuqdquh30ex6b"]
+
+[ext_resource type="PackedScene" uid="uid://ba453kswchhcg" path="res://=assets/models/tower2blend.blend" id="1_3oxch"]
+
+[node name="tower2blend" instance=ExtResource("1_3oxch")]

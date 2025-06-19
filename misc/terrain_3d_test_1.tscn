@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyhhbv31g07fs"]
+
+[ext_resource type="Terrain3DMaterial" uid="uid://cl68m6hu64jcc" path="res://terr_3d_2/new_terrain_3d_material.tres" id="1_4l580"]
+[ext_resource type="Terrain3DAssets" uid="uid://buxuc48itv5d8" path="res://terr_3d_2/new_terrain_3d_assets.tres" id="2_scmyp"]
+
+[node name="Terrain3D" type="Terrain3D"]
+data_directory = "res://terr_3d_2"
+material = ExtResource("1_4l580")
+assets = ExtResource("2_scmyp")
+show_grid = true
+mesh_lods = 1
+mesh_size = 64
+vertex_spacing = 5.0
+show_region_grid = true
+show_vertex_grid = true
+top_level = true
+metadata/_edit_lock_ = true

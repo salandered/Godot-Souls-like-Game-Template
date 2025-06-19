@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://5vex6ndfrl4h"]
+
+[ext_resource type="PackedScene" uid="uid://b0ji8yj1t14gl" path="res://=assets/models/fgc_skeleton.glb" id="1_g2k62"]
+
+[node name="fgc_skeleton" instance=ExtResource("1_g2k62")]

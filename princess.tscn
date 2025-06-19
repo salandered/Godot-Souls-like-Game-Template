@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgkyc3akf5byf"]
+
+[ext_resource type="Script" uid="uid://xugomsuxm5px" path="res://princess.gd" id="1_mlurr"]
+[ext_resource type="Script" uid="uid://dqvnbhk5thbvw" path="res://=assets/lesson/scripts/hurt_box_3d.gd" id="2_xtddm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0pwim"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtddm"]
+albedo_color = Color(1, 0.463448, 0.611612, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlurr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y80dd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xtddm"]
+radius = 0.3
+
+[node name="IAMEllipse" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_mlurr")
+lerp_power = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_0pwim")
+surface_material_override/0 = SubResource("StandardMaterial3D_xtddm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mlurr")
+
+[node name="HurtBox3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_xtddm")
+metadata/_custom_type_script = "uid://dqvnbhk5thbvw"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox3D"]
+shape = SubResource("CylinderShape3D_y80dd")
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraAnchor"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_xtddm")
+spring_length = 5.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor/SpringArm3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+current = true
+fov = 60.5
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+light_color = Color(1, 1, 0.556863, 1)
+light_energy = 8.893
+light_size = 0.033
+shadow_enabled = true
+spot_range = 9.481
+spot_angle = 42.69

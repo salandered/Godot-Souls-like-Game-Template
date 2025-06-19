@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://x13fwuuiw42j"]
+
+[ext_resource type="Shader" path="res://assets/shaders/screen_shader.gdshader" id="1_5vgw3"]
+[ext_resource type="Texture2D" uid="uid://c207lcdefes3l" path="res://assets/skins/beetle/textures/beetle_eyes.png" id="2_sikoa"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5vgw3")
+shader_parameter/intensity = 2.0
+shader_parameter/screen_color = Color(1, 0.584314, 0, 0.0784314)
+shader_parameter/screen_red_offset = Vector2(0, 0)
+shader_parameter/screen_green_offset = Vector2(0, 0)
+shader_parameter/screen_blue_offset = Vector2(0, 0)
+shader_parameter/pixel_size = 8.0
+shader_parameter/face_texture = ExtResource("2_sikoa")

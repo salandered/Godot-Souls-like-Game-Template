@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bthp3yfoffbj"]
+
+[ext_resource type="Terrain3DMaterial" uid="uid://dxasocc2ad2g6" path="res://terrain3D/tower/new_terrain_3d_material.tres" id="1_201w3"]
+[ext_resource type="Terrain3DAssets" uid="uid://brpa7ci6f6spb" path="res://terrain3D/tower/new_terrain_3d_assets.tres" id="2_vupv2"]
+
+[node name="terrains" type="Node3D"]
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+data_directory = "res://terrain3D/tower"
+material = ExtResource("1_201w3")
+assets = ExtResource("2_vupv2")
+collision_mode = 0
+mesh_lods = 4
+mesh_size = 32
+vertex_spacing = 2.0
+top_level = true
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="cave-1" type="Node3D" parent="."]
