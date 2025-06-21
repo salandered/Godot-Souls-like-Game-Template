@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=18 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://textures/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_1ainy"]
 [ext_resource type="PackedScene" uid="uid://bgkyc3akf5byf" path="res://princess.tscn" id="1_u52ul"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://textures/GroundDirtRocky_COL_1K.jpg" id="8_i2t4f"]
 [ext_resource type="PackedScene" uid="uid://dr6j1h5ta80ui" path="res://scenes/first/tower-map.glb" id="9_i2t4f"]
 [ext_resource type="PackedScene" uid="uid://c34ecnm8aoavq" path="res://scenes/bee.tscn" id="10_2orkt"]
+[ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://ui/FullScreenHandler.gd" id="10_8cye3"]
 [ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://skeleton-local-scene.tscn" id="11_2orkt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u52ul"]
@@ -129,3 +130,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0.1, 0)
 
 [node name="SkeletonCharacter2" parent="." instance=ExtResource("11_2orkt")]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 36, 8.2, -64)
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("10_8cye3")

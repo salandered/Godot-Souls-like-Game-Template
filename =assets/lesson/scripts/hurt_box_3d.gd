@@ -4,7 +4,7 @@
 @icon("res://=assets/icons/hurt_box_3d.svg")
 class_name HurtBox3D extends Area3D
 
-## emit a signal named took_hit when it detects a collision with a HitBox3D node
+# emit a signal named took_hit when it detects a collision with a HitBox3D node
 signal took_hit(hit_box: HitBox3D)
 
 const DAMAGE_SOURCE_PLAYER := 0b01
