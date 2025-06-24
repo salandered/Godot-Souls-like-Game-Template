@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bthp3yfoffbj"]
 
-[ext_resource type="Terrain3DMaterial" uid="uid://dxasocc2ad2g6" path="res://terrain3D/tower/new_terrain_3d_material.tres" id="1_201w3"]
-[ext_resource type="Terrain3DAssets" uid="uid://brpa7ci6f6spb" path="res://terrain3D/tower/new_terrain_3d_assets.tres" id="2_vupv2"]
+[ext_resource type="Terrain3DMaterial" uid="uid://dxasocc2ad2g6" path="res://misc/terrain3D/tower/new_terrain_3d_material.tres" id="1_201w3"]
+[ext_resource type="Terrain3DAssets" uid="uid://brpa7ci6f6spb" path="res://misc/terrain3D/tower/new_terrain_3d_assets.tres" id="2_vupv2"]
 
 [node name="terrains" type="Node3D"]
 

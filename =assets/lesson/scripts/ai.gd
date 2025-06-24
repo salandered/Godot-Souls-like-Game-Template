@@ -65,7 +65,7 @@ class StateIdle extends State:
 
 	func update(_delta: float) -> Events:
 		#print("StateIdle update")
-		var distance := mob.global_position.distance_to(Blackboard.player_global_position)
+		var distance := mob.global_position.distance_to(BlackboardPlayer.player_global_position)
 		if distance > mob.vision_range:
 			#print("distance > mob.vision_range:")
 			return Events.NONE
@@ -78,7 +78,7 @@ class StateIdle extends State:
 		#    (Player is in front of mob -> result will be positive; Behind -> negative)
 		#    (generally use dot product to check if node is in front or behind another. also use it for cones of vision, like here)
 		var cos_max_angle_of_vision := cos(mob.vision_angle)
-		var direction := mob.global_position.direction_to(Blackboard.player_global_position)
+		var direction := mob.global_position.direction_to(BlackboardPlayer.player_global_position)
 		var dot := mob.global_basis.z.dot(direction)
 		
 		# compare resulted dot product to our constant to check if player is in the mob's vision cone
@@ -109,17 +109,17 @@ class StateLookAtPlayer extends State:
 			return Events.FINISHED
 
 		var player_distance := mob.global_position.distance_to(
-			Blackboard.player_global_position
+			BlackboardPlayer.player_global_position
 		)
 		if player_distance > mob.vision_range:
 			return Events.PLAYER_EXITED_LINE_OF_SIGHT
-		#The Blackboard.player_global_position part is how we'll get a reference to the player character. 
+		#The BlackboardPlayer.player_global_position part is how we'll get a reference to the player character. 
 		#It's a class that holds shared data between the mob and the states. 
 		#We'll use it to get a reference to the player character without having to get the player node from the mobs.
 		#It's called "blackboard" by tradition because it's a common term in AI programming. 
 		#It's a shared memory space where you can store data that multiple AI agents can access.
 		var direction := mob.global_position.direction_to(
-			Blackboard.player_global_position
+			BlackboardPlayer.player_global_position
 		)
 		var target_rotation_y := Vector3.FORWARD.signed_angle_to(direction, Vector3.UP) + PI
 		mob.rotation.y = lerp_angle(mob.rotation.y, target_rotation_y, 2.0 * delta)
@@ -195,7 +195,7 @@ class StateChase extends State:
 		#We calculate the distance between the current and desired velocities.
 		#We use Vector3.move_toward() to move the velocity towards the desired velocity by a fraction of the distance. The fraction is the drag factor multiplied by delta.
 		#The method Vector3.move_toward() moves the mob's velocity toward the desired velocity and ensures it can never overshoot. It's a useful function for steering behaviors as it greatly limits jitters and oscillations.
-		var player_position := Blackboard.player_global_position
+		var player_position := BlackboardPlayer.player_global_position
 		var direction := mob.global_position.direction_to(player_position)
 		var desired_velocity := (direction * chase_speed)
 		var velocity_distance := mob.velocity.distance_to(desired_velocity)
@@ -303,6 +303,6 @@ class StateMachine extends Node:
 		_transition(transitions[finished_state][Events.FINISHED])
 
 # From now on, you can access the player position from any state class by writing Blackboard.player_global_position, and it will always point to the same value.
-class Blackboard extends RefCounted:
+class BlackboardPlayer extends RefCounted:
 	# static means belongs to class, not its intance
 	static var player_global_position := Vector3.ZERO

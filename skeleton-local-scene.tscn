@@ -888,8 +888,7 @@ blend_shape_mode = 0
 [node name="SkeletonCharacter" type="CharacterBody3D" node_paths=PackedStringArray("skin")]
 script = ExtResource("1_4nxbt")
 skin = NodePath("MobSkin3D")
-vision_range = 15.0
-vision_angle = 0.7662
+vision_angle = 0.0
 gravity = 27.6
 
 [node name="fgc_skeleton" type="Node3D" parent="."]

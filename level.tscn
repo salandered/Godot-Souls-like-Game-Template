@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=19 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://textures/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_1ainy"]
 [ext_resource type="PackedScene" uid="uid://bgkyc3akf5byf" path="res://princess.tscn" id="1_u52ul"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c34ecnm8aoavq" path="res://scenes/bee.tscn" id="10_2orkt"]
 [ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://ui/FullScreenHandler.gd" id="10_8cye3"]
 [ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://skeleton-local-scene.tscn" id="11_2orkt"]
+[ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="11_aicyk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u52ul"]
 
@@ -89,7 +90,7 @@ size = Vector3(50, 0.0856934, 36)
 material = SubResource("StandardMaterial3D_vonw3")
 
 [node name="IAMEllipse" parent="." instance=ExtResource("1_u52ul")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1, 16, 5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 119.44, 17.8602, 175.189)
 
 [node name="props" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 330, 0, 232)
@@ -133,3 +134,32 @@ transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 36, 8.2,
 
 [node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("10_8cye3")
+
+[node name="birds" type="Node" parent="."]
+
+[node name="Bird" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.999, 14.5756, 157.269)
+
+[node name="Bird8" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.628, 14.5756, 157.269)
+
+[node name="Bird2" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115.53, 14.5756, 160.101)
+
+[node name="Bird9" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.893, 14.5756, 155.645)
+
+[node name="Bird3" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.417, 14.5756, 161.636)
+
+[node name="Bird4" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.056, 14.5146, 161.636)
+
+[node name="Bird5" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.999, 14.5756, 161.008)
+
+[node name="Bird6" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.808, 14.5756, 159.905)
+
+[node name="Bird7" parent="birds" instance=ExtResource("11_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.272, 14.5756, 159.905)

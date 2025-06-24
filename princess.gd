@@ -115,18 +115,22 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_velocity
 	
 	# ANIMATION
+	var is_falling = not is_on_floor() and velocity.y < 0
+	var xz_velocity := Vector3(velocity.x, 0, velocity.z)
+	var is_moving = xz_velocity.length() > stopping_speed # adjusting stopping_speed?
 	if is_just_jumping:
 		_character_skin.jump()
 	elif not is_on_floor() and velocity.y < 0:
 		_character_skin.fall()
 	elif is_on_floor():
-		var xz_velocity := Vector3(velocity.x, 0, velocity.z)
-		if xz_velocity.length() > stopping_speed:
+		if is_moving:
 			_character_skin.set_moving(true)
-			_character_skin.set_moving_speed(inverse_lerp(0.0, max_speed_sprint, xz_velocity.length()))
-		else:
+			_character_skin.set_moving_speed(inverse_lerp(0.0, max_speed_sprint/2, xz_velocity.length()))
+		else: # idle
 			_character_skin.set_moving(false)
 	
+	if Input.is_action_just_pressed("action"):
+		_character_skin.attack(is_falling, is_moving, inverse_lerp(0.0, max_speed_sprint/2, xz_velocity.length()))
 	
 	var was_in_air := not is_on_floor() # was_in_air and just_landed works together
 	var fall_speed := absf(velocity.y)
@@ -136,7 +140,7 @@ func _physics_process(delta: float) -> void:
 	var just_landed := was_in_air and is_on_floor()
 	
 	# That's how the blackboard works. Relevant parts of the game can fill it with data, and the AI can access it without having to know where the data comes from.
-	AI.Blackboard.player_global_position = global_position
+	AI.BlackboardPlayer.player_global_position = global_position
 	
 	#if just_landed:
 		#var impact_intensity := fall_speed / max_fall_speed
