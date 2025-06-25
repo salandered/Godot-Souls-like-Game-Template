@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c34ecnm8aoavq"]
 
-[ext_resource type="PackedScene" uid="uid://482rxnrhe64v" path="res://=assets/lesson/bee_bot/bee_bot_skin_3d.tscn" id="1_1q2x0"]
+[ext_resource type="PackedScene" uid="uid://482rxnrhe64v" path="res://-assets-/x_lesson/bee_bot/bee_bot_skin_3d.tscn" id="1_1q2x0"]
 [ext_resource type="Script" uid="uid://ceqwvvq1dd6a5" path="res://scenes/bee.gd" id="1_vie5o"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1q2x0"]

@@ -4,7 +4,7 @@ var SPEED = 2
 
 @onready var sprite_3d: Sprite3D = $Sprite3D
 
-@onready var player: PlayerFPSController = $"../../IAMEllipse"
+@onready var player: PlayerController = $"../../IAMEllipse"
 
 #@onready var player = get_tree().get_first_nodes_in_group("Player")[0]
 @onready var bt_player: BTPlayer = $BTPlayer

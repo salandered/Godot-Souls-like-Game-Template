@@ -1,8 +1,0 @@
-[gd_resource type="AnimationLibrary" load_steps=2 format=3 uid="uid://bqtmb0thmqnux"]
-
-[ext_resource type="Animation" uid="uid://dcfqxgbfshjvm" path="res://assets/skins/beetle/custom_animations/hurt.res" id="1_yjes1"]
-
-[resource]
-_data = {
-"hurt": ExtResource("1_yjes1")
-}
