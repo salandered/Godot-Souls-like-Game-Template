@@ -1,16 +1,16 @@
 [gd_scene load_steps=19 format=3 uid="uid://bco760cyuo8em"]
 
-[ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_1ainy"]
-[ext_resource type="PackedScene" uid="uid://bgkyc3akf5byf" path="res://scenes/princess.tscn" id="1_u52ul"]
-[ext_resource type="Texture2D" uid="uid://bgp43x0irp3b2" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Metallic.jpg" id="2_n6hdu"]
-[ext_resource type="Texture2D" uid="uid://dygiq2i4cc7ti" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Normal.jpg" id="3_km5ld"]
-[ext_resource type="Texture2D" uid="uid://cwd3ynudkacvi" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Roughness.jpg" id="4_i2t4f"]
-[ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/textures/GroundDirtRocky_COL_1K.jpg" id="8_i2t4f"]
-[ext_resource type="PackedScene" uid="uid://dr6j1h5ta80ui" path="res://scenes/first/tower-map.glb" id="9_i2t4f"]
-[ext_resource type="PackedScene" uid="uid://c34ecnm8aoavq" path="res://scenes/bee.tscn" id="10_2orkt"]
-[ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://ui/FullScreenHandler.gd" id="10_8cye3"]
-[ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://scenes/skeleton-local-scene.tscn" id="11_2orkt"]
-[ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="11_aicyk"]
+[ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
+[ext_resource type="Texture2D" uid="uid://bgp43x0irp3b2" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Metallic.jpg" id="2_m0bv2"]
+[ext_resource type="Texture2D" uid="uid://dygiq2i4cc7ti" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Normal.jpg" id="3_b7m21"]
+[ext_resource type="Texture2D" uid="uid://cwd3ynudkacvi" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Roughness.jpg" id="4_pm6rs"]
+[ext_resource type="PackedScene" uid="uid://bgkyc3akf5byf" path="res://scenes/player/princess.tscn" id="5_vrc4q"]
+[ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/textures/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
+[ext_resource type="PackedScene" uid="uid://dr6j1h5ta80ui" path="res://-assets-/level/first/tower-map.glb" id="7_ivku7"]
+[ext_resource type="PackedScene" uid="uid://c34ecnm8aoavq" path="res://scenes/actors/bee.tscn" id="8_ss4b2"]
+[ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://scenes/actors/skeleton-local-scene.tscn" id="9_qjqsm"]
+[ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://misc/ui/FullScreenHandler.gd" id="10_0fkkc"]
+[ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="11_wyi7n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u52ul"]
 
@@ -33,26 +33,26 @@ fog_height = -0.5
 fog_height_density = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
-albedo_texture = ExtResource("1_1ainy")
-metallic_texture = ExtResource("2_n6hdu")
+albedo_texture = ExtResource("1_pe1ox")
+metallic_texture = ExtResource("2_m0bv2")
 metallic_texture_channel = 4
-roughness_texture = ExtResource("4_i2t4f")
+roughness_texture = ExtResource("4_pm6rs")
 roughness_texture_channel = 4
 normal_enabled = true
 normal_scale = 5.5
-normal_texture = ExtResource("3_km5ld")
+normal_texture = ExtResource("3_b7m21")
 uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2orkt"]
-albedo_texture = ExtResource("1_1ainy")
+albedo_texture = ExtResource("1_pe1ox")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cye3"]
 albedo_color = Color(0.631373, 0.619608, 0.666667, 0.486275)
 albedo_texture_msdf = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aicyk"]
-albedo_texture = ExtResource("8_i2t4f")
+albedo_texture = ExtResource("6_x4oov")
 
 [node name="level" type="Node3D"]
 
@@ -89,7 +89,7 @@ use_collision = true
 size = Vector3(50, 0.0856934, 36)
 material = SubResource("StandardMaterial3D_vonw3")
 
-[node name="IAMEllipse" parent="." instance=ExtResource("1_u52ul")]
+[node name="IAMEllipse" parent="." instance=ExtResource("5_vrc4q")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 119.44, 17.8602, 175.189)
 
 [node name="props" type="Node3D" parent="."]
@@ -121,45 +121,45 @@ use_collision = true
 size = Vector3(0.7, 2, 1)
 material = SubResource("StandardMaterial3D_8cye3")
 
-[node name="tower-map" parent="." instance=ExtResource("9_i2t4f")]
+[node name="tower-map" parent="." instance=ExtResource("7_ivku7")]
 
-[node name="Bee" parent="." instance=ExtResource("10_2orkt")]
+[node name="Bee" parent="." instance=ExtResource("8_ss4b2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 0)
 
-[node name="SkeletonCharacter" parent="." instance=ExtResource("11_2orkt")]
+[node name="SkeletonCharacter" parent="." instance=ExtResource("9_qjqsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0.1, 0)
 
-[node name="SkeletonCharacter2" parent="." instance=ExtResource("11_2orkt")]
+[node name="SkeletonCharacter2" parent="." instance=ExtResource("9_qjqsm")]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 36, 8.2, -64)
 
 [node name="Node3D" type="Node3D" parent="."]
-script = ExtResource("10_8cye3")
+script = ExtResource("10_0fkkc")
 
 [node name="birds" type="Node" parent="."]
 
-[node name="Bird" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.999, 14.5756, 157.269)
 
-[node name="Bird8" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird8" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.628, 14.5756, 157.269)
 
-[node name="Bird2" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird2" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115.53, 14.5756, 160.101)
 
-[node name="Bird9" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird9" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112.893, 14.5756, 155.645)
 
-[node name="Bird3" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird3" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.417, 14.5756, 161.636)
 
-[node name="Bird4" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird4" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.056, 14.5146, 161.636)
 
-[node name="Bird5" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird5" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.999, 14.5756, 161.008)
 
-[node name="Bird6" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird6" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.808, 14.5756, 159.905)
 
-[node name="Bird7" parent="birds" instance=ExtResource("11_aicyk")]
+[node name="Bird7" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.272, 14.5756, 159.905)

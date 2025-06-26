@@ -1,15 +1,16 @@
 extends LimboState
 
-@onready var player_skin: Node3D = %PlayerSkin
+@onready var player_skin: PlayerSkin = %PlayerSkin
 
 const WENT_IDLE := &"WENT_IDLE"
 const INPUT_JUMPED := &"INPUT_JUMPED"
 const STARTED_FALL := &"STARTED_FALL"
+const INPUT_ATTACK := &"INPUT_ATTACK"
 
 
 
 func _enter() -> void:
-	print(">> entered Move")
+	print(">> entered ", name)
 	player_skin.set_moving()
 
 func _update(_delta: float) -> void:
@@ -40,6 +41,9 @@ func _update(_delta: float) -> void:
 	if not player.is_on_floor() and player.velocity.y < 0:
 		get_root().dispatch(STARTED_FALL)
 
+	if Input.is_action_just_pressed("action"):
+		player_skin.attack_with_sword(false)
+		# get_root().dispatch(INPUT_ATTACK)
 
 
 

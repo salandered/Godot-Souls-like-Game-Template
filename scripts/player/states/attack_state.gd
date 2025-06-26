@@ -1,15 +1,14 @@
 extends LimboState
 
-@onready var player_skin: Node3D = %PlayerSkin
+@onready var player_skin: PlayerSkin = %PlayerSkin
 
 
 const GOT_ON_FLOOR := &"GOT_ON_FLOOR"
 
 
 func _enter() -> void:
-	pass
-	#print(">> entered Fall")
-	#player_skin.fall()
+	print(">> entered ", name)
+	player_skin.attack_with_sword()
 
 func _update(_delta: float) -> void:
 	pass

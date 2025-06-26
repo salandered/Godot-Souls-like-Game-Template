@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbeux57d6u68t"
-path.s3tc="res://.godot/imported/tower-map_GroundDirtWeedsPatchy004_NRM_1K.jpg-05bf77cae31f66e922a398059f88ece0.s3tc.ctex"
+path.s3tc="res://.godot/imported/tower-map_GroundDirtWeedsPatchy004_NRM_1K.jpg-f4688c3c96dd9b481c598d25dca5dedd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://scenes/first/tower-map_GroundDirtWeedsPatchy004_NRM_1K.jpg"
-dest_files=["res://.godot/imported/tower-map_GroundDirtWeedsPatchy004_NRM_1K.jpg-05bf77cae31f66e922a398059f88ece0.s3tc.ctex"]
+source_file="res://-assets-/level/first/tower-map_GroundDirtWeedsPatchy004_NRM_1K.jpg"
+dest_files=["res://.godot/imported/tower-map_GroundDirtWeedsPatchy004_NRM_1K.jpg-f4688c3c96dd9b481c598d25dca5dedd.s3tc.ctex"]
 
 [params]
 

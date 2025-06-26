@@ -5,10 +5,11 @@ extends LimboState
 
 const INPUT_MOVED := &"INPUT_MOVED"
 const STARTED_FALL := &"STARTED_FALL"
+const INPUT_ATTACK := &"INPUT_ATTACK"
 
 
 func _enter() -> void:
-	print(">> entered Idle")
+	print(">> entered ", name)
 	print(player_skin)
 	player_skin.idle()
 
@@ -19,6 +20,8 @@ func _update(_delta: float) -> void:
 	
 	agent.move_and_slide()
 
+	player_skin.handle_action(true)
+	
 	if agent.input_move_coming():
 		get_root().dispatch(INPUT_MOVED)
 

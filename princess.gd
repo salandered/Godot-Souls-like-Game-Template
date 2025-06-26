@@ -57,6 +57,7 @@ func _ready() -> void:
 func init_state_machine():
 	# IDLE
 	state_machine.add_transition(idle_state, move_state, idle_state.INPUT_MOVED)
+	# state_machine.add_transition(idle_state, attack_state, idle_state.INPUT_ATTACK)
 	# do we need this?
 	state_machine.add_transition(idle_state, fall_state, idle_state.STARTED_FALL)
 	# idle - jump?
@@ -64,6 +65,7 @@ func init_state_machine():
 	state_machine.add_transition(move_state, idle_state, move_state.WENT_IDLE)
 	state_machine.add_transition(move_state, jump_state, move_state.INPUT_JUMPED)
 	state_machine.add_transition(move_state, fall_state, move_state.STARTED_FALL)
+	# state_machine.add_transition(move_state, attack_state, move_state.INPUT_ATTACK)
 	# JUMP
 	state_machine.add_transition(jump_state, move_state, jump_state.GOT_ON_FLOOR)
 	state_machine.add_transition(jump_state, fall_state, jump_state.STARTED_FALL)
@@ -103,8 +105,6 @@ func input_move_coming() -> bool:
 
 func _physics_process(delta: float) -> void:
 	# var is_falling = not is_on_floor() and velocity.y < 0
-	# if Input.is_action_just_pressed("action"):
-		# _character_skin.attack(is_falling, is_moving, inverse_lerp(0.0, max_speed_sprint/2, xz_velocity.length()))
 	
 	# CAMERA
 	var move_direction: Vector3 = input_move_direction()

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsc2m1bp3ipct"
-path.s3tc="res://.godot/imported/tower-map_GroundDirtWeedsPatchy004_COL_1K.jpg-2988f60b391d4dd31b41003ceabdee76.s3tc.ctex"
+uid="uid://b0xp0xcsfrw8q"
+path.s3tc="res://.godot/imported/tower-map_Stone Dirt Wall 02_diffuse.png-b47732e3ce15df29f52d23d5c04ad1c6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "31fd3de68d4939b29a3706684c4a33d6"
+"md5": "bbbcd5a79903679068530171fa344289"
 }
 
 [deps]
 
-source_file="res://scenes/first/tower-map_GroundDirtWeedsPatchy004_COL_1K.jpg"
-dest_files=["res://.godot/imported/tower-map_GroundDirtWeedsPatchy004_COL_1K.jpg-2988f60b391d4dd31b41003ceabdee76.s3tc.ctex"]
+source_file="res://-assets-/level/first/tower-map_Stone Dirt Wall 02_diffuse.png"
+dest_files=["res://.godot/imported/tower-map_Stone Dirt Wall 02_diffuse.png-b47732e3ce15df29f52d23d5c04ad1c6.s3tc.ctex"]
 
 [params]
 

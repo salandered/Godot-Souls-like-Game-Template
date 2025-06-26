@@ -1,6 +1,6 @@
 extends LimboState
 
-@onready var player_skin: Node3D = %PlayerSkin
+@onready var player_skin: PlayerSkin = %PlayerSkin
 
 
 const STARTED_FALL := &"STARTED_FALL"
@@ -8,7 +8,7 @@ const GOT_ON_FLOOR := &"GOT_ON_FLOOR"
 
 
 func _enter() -> void:
-	print(">> entered Jump")
+	print(">> entered ", name)
 	agent.velocity.y = agent.jump_velocity
 	player_skin.jump()
 
