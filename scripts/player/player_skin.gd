@@ -11,6 +11,7 @@ var weapon_active := false
 
 ## 10 Gobot's MeshInstance3D model.
 #@export var gobot_mesh: MeshInstance3D = null
+@onready var iamellipse: CharacterBody3D = $'../..'
 
 @export var main_animation_player : AnimationPlayer
 
@@ -25,14 +26,16 @@ var moving_blend_path := "parameters/StateMachine/move/blend_position"
 # 0.0 walk - 1.0 run
 @onready var move_speed : float = 0.0 : set = set_moving_speed
 @onready var anim_tree : AnimationTree = $AnimationTree
+@onready var extra_anim = $AnimationTree.get_tree_root().get_node("Extra")
 @onready var anim_move_sm : AnimationNodeStateMachinePlayback = anim_tree.get("parameters/MoveSM/playback")
 @onready var anim_attack_sm : AnimationNodeStateMachinePlayback = anim_tree.get("parameters/AttackSM/playback")
 @onready var first_attack_hold: Timer = $FirstAttackHold
 
-var that_AT_parameter := ""
 var first_attack_toggle := false
 var second_attack_toggle := false
 var is_anim_attacking := false
+
+
 
 func set_is_anim_attacking_(value:bool):
 	is_anim_attacking = value
@@ -64,16 +67,26 @@ var FIRST := false
 enum WeaponType {
 	UNARMED,
 	SWORD,
-	THING,
+	WAND,
 	#BOW # TODO: waiting for ivan
 }
 
-var key_to_weapon_type := {
-	 "slot_1": WeaponType.SWORD,
-	 "slot_3": WeaponType.THING
+var weapon_type_to_node_name := {
+	WeaponType.SWORD: 'military_hatchet',
+	WeaponType.WAND: 'wand'
 }
 
+
+var path_to_weapon_node := "Armature/Skeleton3D/RighthandSlot/"
 var current_weapon := WeaponType.SWORD
+
+func _hide_current_weapon():
+	if current_weapon != WeaponType.UNARMED:
+		get_node(path_to_weapon_node + weapon_type_to_node_name[current_weapon]).hide()
+
+func _show_weapon(weapon_type: WeaponType):
+	if weapon_type != WeaponType.UNARMED:
+		get_node(path_to_weapon_node + weapon_type_to_node_name[weapon_type]).show()
 
 func handle_action(is_idle: bool):
 	if Input.is_action_just_pressed("action"):
@@ -81,26 +94,30 @@ func handle_action(is_idle: bool):
 		match current_weapon:
 			WeaponType.SWORD:
 				attack_with_sword(is_idle)
-			WeaponType.THING:
-				attack_with_thing(is_idle)
+			WeaponType.WAND:
+				attack_with_wand(is_idle)
+				iamellipse.stop_movement(0.3, 0.8)
+
+	if Input.is_action_just_pressed("ui_accept"):
+		hit()
 				
-	# TODO: is_anim_attacking is unreliable in case animation interrupted
+	# TODO: is_anim_attacking is unreliable in case animation was interrupted
+	# TODO: animations to equip/hide
 	if not is_anim_attacking:
 		if Input.is_action_just_pressed("slot_1"):
-			# TODO: well its sword for now
-			current_weapon = key_to_weapon_type.get("slot_1")
+			_hide_current_weapon()
+			current_weapon = WeaponType.SWORD
 			print("switched to current_weapon", current_weapon)
-			$Armature/Skeleton3D/RighthandSlot/military_hatchet.show()
-			# TODO: animation for equiping
-		if Input.is_action_just_pressed("slot_3"):
-			current_weapon = key_to_weapon_type.get("slot_3")
+			_show_weapon(current_weapon)
+		elif Input.is_action_just_pressed("slot_3"):
+			_hide_current_weapon()
+			current_weapon = WeaponType.WAND
 			print("switched to current_weapon", current_weapon)
-			# TODO: animation for equiping
-		if Input.is_action_just_pressed("hide_weapon"):
+			_show_weapon(current_weapon)
+		elif Input.is_action_just_pressed("hide_weapon"):
+			_hide_current_weapon()
 			current_weapon = WeaponType.UNARMED
 			print("switched to current_weapon", current_weapon)
-			$Armature/Skeleton3D/RighthandSlot/military_hatchet.hide()
-			# TODO: animation for equiping
 			
 
 func attack_with_sword(is_idle: bool):
@@ -166,8 +183,20 @@ func attack_with_sword(is_idle: bool):
 		
 	#print("  ")
 
-func attack_with_thing(is_idle: bool):
+func attack_with_wand(is_idle: bool):
+	# if not attacking
+	extra_anim.animation = 'new_stuff/torch_kinda'
+	anim_tree["parameters/Extra1S/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	pass
+
+func hit():
+	print("got HIT")
+	extra_anim.animation = 'LightSword/death'
+	anim_tree["parameters/Extra1S/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+	iamellipse.stop_movement(0.2, 0.2)
+
+
+
 
 func first_attack_toggle__(value: bool):
 	# called by attack_with_sword animation

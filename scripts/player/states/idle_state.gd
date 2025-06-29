@@ -12,6 +12,8 @@ func _enter() -> void:
 	print(">> entered ", name)
 	print(player_skin)
 	player_skin.idle()
+	
+	
 
 
 func _update(_delta: float) -> void:

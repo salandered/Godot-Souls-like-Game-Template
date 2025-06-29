@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://dtsn2vrtwqjvj"]
 
 [ext_resource type="Script" uid="uid://dm4dan2b00jiy" path="res://scripts/skeleton_local_scene.gd" id="1_4nxbt"]
-[ext_resource type="Script" uid="uid://x4tj0ao32edw" path="res://-assets-/x_lesson/scripts/mob_skin_3d.gd" id="2_2awen"]
+[ext_resource type="Script" uid="uid://x4tj0ao32edw" path="res://scripts/mob_skin_3d.gd" id="2_2awen"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqf5m"]
 resource_name = "Material"
@@ -2547,7 +2547,7 @@ bones/235/parent = 230
 bones/235/rest = Transform3D(-1, 8.4719e-08, -4.2092e-08, -6.16376e-08, -0.245976, 0.969276, 7.17625e-08, 0.969275, 0.245976, 5.65537e-07, 0.980102, 6.47023)
 bones/235/enabled = true
 bones/235/position = Vector3(5.65537e-07, 0.980102, 6.47023)
-bones/235/rotation = Quaternion(9.39777e-09, 0.614013, 0.789296, -4.63567e-08)
+bones/235/rotation = Quaternion(9.39779e-09, 0.614013, 0.789296, -4.63567e-08)
 bones/235/scale = Vector3(1, 0.999999, 1)
 bones/236/name = "MCH_chestIKaim"
 bones/236/parent = 226

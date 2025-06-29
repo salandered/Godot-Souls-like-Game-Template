@@ -1,14 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgkyc3akf5byf"]
+[gd_scene load_steps=26 format=3 uid="uid://bgkyc3akf5byf"]
 
 [ext_resource type="Script" uid="uid://xugomsuxm5px" path="res://princess.gd" id="1_mlurr"]
 [ext_resource type="Script" uid="uid://dbm4wymfpfice" path="res://scripts/player/player_skin.gd" id="2_icqdc"]
-[ext_resource type="Script" uid="uid://dqvnbhk5thbvw" path="res://-assets-/x_lesson/scripts/hurt_box_3d.gd" id="2_xtddm"]
+[ext_resource type="Script" uid="uid://dqvnbhk5thbvw" path="res://scripts/hurt_box_3d.gd" id="2_xtddm"]
 [ext_resource type="ArrayMesh" uid="uid://6gggm6tfsoxp" path="res://-assets-/player/peaGirlNode.res" id="3_1150b"]
 [ext_resource type="PackedScene" uid="uid://cwb63277r74cp" path="res://scenes/items/military_hatchet.tscn" id="4_56ycb"]
+[ext_resource type="PackedScene" uid="uid://yv43myd6llib" path="res://-assets-/blender_sources/wand/wand.glb" id="4_qg5sb"]
 [ext_resource type="AnimationLibrary" uid="uid://dm0bdl2f830vj" path="res://-assets-/animations/libraries/BasicAnimLib.res" id="5_1150b"]
 [ext_resource type="AnimationLibrary" uid="uid://diinvc8sg6t5w" path="res://-assets-/animations/libraries/LightSword_.res" id="6_sqycd"]
 [ext_resource type="AnimationLibrary" uid="uid://di62kdesgs52u" path="res://-assets-/animations/libraries/SwordLib.res" id="7_2gtr4"]
+[ext_resource type="Animation" uid="uid://bmu7nylr548g6" path="res://-assets-/animations/new_stuff/brutal_smash.res" id="9_62q7l"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://ck86cvrx5jll3" path="res://-assets-/animations/anim_tree/character_blend_tree-borrowed.tres" id="9_p350s"]
+[ext_resource type="Animation" uid="uid://b2ste2436ht4k" path="res://-assets-/animations/new_stuff/equip_from_back.res" id="10_hhss7"]
+[ext_resource type="Animation" uid="uid://cobsp71bjbwt4" path="res://-assets-/animations/new_stuff/torch_kinda.res" id="11_tawxa"]
 [ext_resource type="Script" uid="uid://voj067abhl3f" path="res://scripts/camera_anchor.gd" id="13_72obf"]
 [ext_resource type="Script" uid="uid://chgikpj6m4q3q" path="res://scripts/player/states/idle_state.gd" id="34_iybgq"]
 [ext_resource type="Script" uid="uid://o56ev1eja5ka" path="res://scripts/player/states/move_state.gd" id="35_dosad"]
@@ -233,10 +237,17 @@ bind/68/name = &"mixamorig_LeftRibbon2"
 bind/68/bone = -1
 bind/68/pose = Transform3D(-94.7976, -31.7834, 1.79948, 29.8884, -86.9148, 39.4018, -10.9592, 37.8898, 91.8927, 45.8153, 90.1454, -52.848)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_y80dd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t0tl1"]
+_data = {
+&"brutal_smash": ExtResource("9_62q7l"),
+&"equip_from_back": ExtResource("10_hhss7"),
+&"torch_kinda": ExtResource("11_tawxa")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xtddm"]
 radius = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y80dd"]
 
 [node name="IAMEllipse" type="CharacterBody3D" node_paths=PackedStringArray("animationTree")]
 collision_layer = 2
@@ -751,6 +762,7 @@ bones/68/rotation = Quaternion(-0.0236943, 0.199938, 0.966443, -0.159532)
 bones/68/scale = Vector3(1, 1, 1)
 
 [node name="Peasant_girl" type="MeshInstance3D" parent="RotationRoot/PlayerSkin/Armature/Skeleton3D"]
+visible = false
 mesh = ExtResource("3_1150b")
 skin = SubResource("Skin_61kov")
 
@@ -759,6 +771,10 @@ transform = Transform3D(0.017453, -0.999848, 1.56717e-06, 0.999848, 0.0174531, -
 bone_name = "mixamorig_RightHand"
 bone_idx = 36
 
+[node name="wand" parent="RotationRoot/PlayerSkin/Armature/Skeleton3D/RighthandSlot" instance=ExtResource("4_qg5sb")]
+transform = Transform3D(0.148513, 8.88683, 0.0109112, -8.86294, 0.148913, -0.651164, -0.651256, 9.53674e-07, 8.86418, -52.0334, 19.8035, 137.426)
+visible = false
+
 [node name="military_hatchet" parent="RotationRoot/PlayerSkin/Armature/Skeleton3D/RighthandSlot" instance=ExtResource("4_56ycb")]
 transform = Transform3D(-8.02741, -148.832, -16.8739, 149.736, -7.54131, -4.71784, 3.83275, -17.0967, 148.973, 79.7826, 13.6823, 10.695)
 
@@ -766,7 +782,8 @@ transform = Transform3D(-8.02741, -148.832, -16.8739, 149.736, -7.54131, -4.7178
 libraries = {
 &"BasicAnim": ExtResource("5_1150b"),
 &"LightSword": ExtResource("6_sqycd"),
-&"Sword": ExtResource("7_2gtr4")
+&"Sword": ExtResource("7_2gtr4"),
+&"new_stuff": SubResource("AnimationLibrary_t0tl1")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="RotationRoot/PlayerSkin"]
@@ -776,6 +793,9 @@ tree_root = ExtResource("9_p350s")
 anim_player = NodePath("../AnimationPlayer")
 parameters/AttackLessLegs/sub_amount = 0.0
 parameters/BlendAttackLegs/blend_amount = 0.0
+parameters/Extra1S/active = false
+parameters/Extra1S/internal_active = false
+parameters/Extra1S/request = 0
 parameters/IdleAttack1Shot/active = false
 parameters/IdleAttack1Shot/internal_active = false
 parameters/IdleAttack1Shot/request = 0
@@ -787,15 +807,6 @@ parameters/SubHead/sub_amount = 1.0
 
 [node name="FirstAttackHold" type="Timer" parent="RotationRoot/PlayerSkin"]
 one_shot = true
-
-[node name="HurtBox3D" type="Area3D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_xtddm")
-metadata/_custom_type_script = "uid://dqvnbhk5thbvw"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CylinderShape3D_y80dd")
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -810,6 +821,7 @@ margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor/SpringArm3D"]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.999993, 0.00375245, 0, -0.00375245, 0.999993, 0, 0, 0)
 current = true
 fov = 60.5
 
@@ -821,6 +833,15 @@ light_size = 0.033
 shadow_enabled = true
 spot_range = 9.481
 spot_angle = 42.69
+
+[node name="HurtBox3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_xtddm")
+metadata/_custom_type_script = "uid://dqvnbhk5thbvw"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_y80dd")
 
 [node name="LimboHSM" type="LimboHSM" parent="."]
 unique_name_in_owner = true
@@ -835,7 +856,4 @@ script = ExtResource("35_dosad")
 script = ExtResource("36_7mkhf")
 
 [node name="FallState" type="LimboState" parent="LimboHSM"]
-script = ExtResource("37_i0vf2")
-
-[node name="AttackState" type="LimboState" parent="LimboHSM"]
 script = ExtResource("37_i0vf2")

@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=36 format=3 uid="uid://ck86cvrx5jll3"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=38 format=3 uid="uid://ck86cvrx5jll3"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5fan7"]
 animation = &"Sword/SliceRightL"
@@ -51,6 +51,13 @@ transitions = ["Start", "SliceRightL", SubResource("AnimationNodeStateMachineTra
 graph_offset = Vector2(-146, 25)
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_aas4o"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8x72g"]
+animation = &"new_stuff/torch_kinda"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ccmg0"]
+fadein_time = 0.2
+fadeout_time = 0.2
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8x72g"]
 fadein_time = 0.2
@@ -135,7 +142,7 @@ filter_enabled = true
 filters = ["Armature/Skeleton3D:mixamorig_Head", "Armature/Skeleton3D:mixamorig_HeadTop_End", "Armature/Skeleton3D:mixamorig_LeftEye", "Armature/Skeleton3D:mixamorig_Neck", "Armature/Skeleton3D:mixamorig_RightEye"]
 
 [resource]
-graph_offset = Vector2(-210.025, 211.726)
+graph_offset = Vector2(136.215, 78.0472)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1f664")
 nodes/Animation/position = Vector2(-680, 460)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5fan7")
@@ -152,6 +159,10 @@ nodes/AttackSM/node = SubResource("AnimationNodeStateMachine_2mg3j")
 nodes/AttackSM/position = Vector2(460, 420)
 nodes/BlendAttackLegs/node = SubResource("AnimationNodeBlend2_aas4o")
 nodes/BlendAttackLegs/position = Vector2(160, -20)
+nodes/Extra/node = SubResource("AnimationNodeAnimation_8x72g")
+nodes/Extra/position = Vector2(940, 300)
+nodes/Extra1S/node = SubResource("AnimationNodeOneShot_ccmg0")
+nodes/Extra1S/position = Vector2(1200, 120)
 nodes/IdleAttack1Shot/node = SubResource("AnimationNodeOneShot_8x72g")
 nodes/IdleAttack1Shot/position = Vector2(760, 100)
 nodes/MoveAttack1Shot/node = SubResource("AnimationNodeOneShot_klbnh")
@@ -160,5 +171,5 @@ nodes/MoveSM/node = SubResource("AnimationNodeStateMachine_k7175")
 nodes/MoveSM/position = Vector2(-520, -20)
 nodes/SubHead/node = SubResource("AnimationNodeSub2_mk3rk")
 nodes/SubHead/position = Vector2(-160, 300)
-nodes/output/position = Vector2(940, 100)
-node_connections = [&"AttackLessLegs", 0, &"AttackAnimation", &"AttackLessLegs", 1, &"Animation", &"BlendAttackLegs", 0, &"MoveSM", &"BlendAttackLegs", 1, &"AnimationBlendAttackLegs", &"IdleAttack1Shot", 0, &"MoveAttack1Shot", &"IdleAttack1Shot", 1, &"AttackSM", &"MoveAttack1Shot", 0, &"BlendAttackLegs", &"MoveAttack1Shot", 1, &"SubHead", &"SubHead", 0, &"AttackLessLegs", &"SubHead", 1, &"Animation 2", &"output", 0, &"IdleAttack1Shot"]
+nodes/output/position = Vector2(1480, 120)
+node_connections = [&"AttackLessLegs", 0, &"AttackAnimation", &"AttackLessLegs", 1, &"Animation", &"BlendAttackLegs", 0, &"MoveSM", &"BlendAttackLegs", 1, &"AnimationBlendAttackLegs", &"Extra1S", 0, &"IdleAttack1Shot", &"Extra1S", 1, &"Extra", &"IdleAttack1Shot", 0, &"MoveAttack1Shot", &"IdleAttack1Shot", 1, &"AttackSM", &"MoveAttack1Shot", 0, &"BlendAttackLegs", &"MoveAttack1Shot", 1, &"SubHead", &"SubHead", 0, &"AttackLessLegs", &"SubHead", 1, &"Animation 2", &"output", 0, &"Extra1S"]

@@ -27,7 +27,7 @@ func _update(_delta: float) -> void:
 		player.accelerate(move_direction, _delta)
 	else:
 		_deccelerate(_delta)
-	
+
 	player.velocity.y -= player.gravity * _delta
 
 	player.move_and_slide()
@@ -41,8 +41,7 @@ func _update(_delta: float) -> void:
 	if not player.is_on_floor() and player.velocity.y < 0:
 		get_root().dispatch(STARTED_FALL)
 
-	if Input.is_action_just_pressed("action"):
-		player_skin.attack_with_sword(false)
+	player_skin.handle_action(false)
 		# get_root().dispatch(INPUT_ATTACK)
 
 

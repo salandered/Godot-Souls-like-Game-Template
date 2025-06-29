@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ca5gx87r37hif" path="res://misc/bird-black.png" id="1_dby45"]
 [ext_resource type="Script" uid="uid://cybd50jmr8ajh" path="res://scenes/actors/bird.gd" id="1_hkvcb"]
-[ext_resource type="BehaviorTree" uid="uid://c8j221l55623m" path="res://scripts/ai/behavior_trees/birds.tres" id="2_0qtmj"]
+[ext_resource type="BehaviorTree" uid="uid://c8j221l55623m" path="res://scripts/npc_logic/behavior_trees/birds.tres" id="2_0qtmj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dby45"]
 

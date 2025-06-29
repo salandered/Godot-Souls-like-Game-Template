@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=20 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
 [ext_resource type="Texture2D" uid="uid://bgp43x0irp3b2" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Metallic.jpg" id="2_m0bv2"]
@@ -6,11 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cwd3ynudkacvi" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_Roughness.jpg" id="4_pm6rs"]
 [ext_resource type="PackedScene" uid="uid://bgkyc3akf5byf" path="res://scenes/player/princess.tscn" id="5_vrc4q"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/textures/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
-[ext_resource type="PackedScene" uid="uid://dr6j1h5ta80ui" path="res://-assets-/level/first/tower-map.glb" id="7_ivku7"]
+[ext_resource type="PackedScene" uid="uid://dr6j1h5ta80ui" path="res://-assets-/blender_sources/first/tower-map.glb" id="7_ivku7"]
 [ext_resource type="PackedScene" uid="uid://c34ecnm8aoavq" path="res://scenes/actors/bee.tscn" id="8_ss4b2"]
 [ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://scenes/actors/skeleton-local-scene.tscn" id="9_qjqsm"]
 [ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://misc/ui/FullScreenHandler.gd" id="10_0fkkc"]
 [ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="11_wyi7n"]
+[ext_resource type="PackedScene" uid="uid://dpft8fwt5pysc" path="res://raw_imports/sitting-local.tscn" id="12_m0bv2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u52ul"]
 
@@ -163,3 +164,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.808, 14.5756, 159.905)
 
 [node name="Bird7" parent="birds" instance=ExtResource("11_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.272, 14.5756, 159.905)
+
+[node name="Node3D2" parent="." instance=ExtResource("12_m0bv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.6408, 14.2659, 133.928)

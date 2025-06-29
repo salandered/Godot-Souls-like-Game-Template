@@ -45,10 +45,16 @@ class_name PlayerController extends CharacterBody3D
 @onready var move_state: LimboState = $LimboHSM/MoveState
 @onready var jump_state: LimboState = $LimboHSM/JumpState
 @onready var fall_state: LimboState = $LimboHSM/FallState
-@onready var attack_state: LimboState = $LimboHSM/AttackState
+# @onready var attack_state: LimboState = $LimboHSM/AttackState
 
 
 @onready var _last_strong_direction := Vector3.FORWARD
+
+
+var speed_modifier := 1.0
+
+
+
 func _ready() -> void:
 	init_state_machine()
 	# in limbo ai: 
@@ -144,7 +150,7 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	
 	# That's how the blackboard works. Relevant parts of the game can fill it with data, and the AI can access it without having to know where the data comes from.
-	AI.BlackboardPlayer.player_global_position = global_position
+	#AI.BlackboardPlayer.player_global_position = global_position
 
 func _orient_character_to_direction(direction: Vector3, delta: float) -> void:
 	var left_axis := Vector3.UP.cross(direction)
@@ -178,12 +184,21 @@ func accelerate(move_direction: Vector3, _delta: float):
 	var velocity_change = acceleration * _delta
 	# move_toward() smoothly interpolates ground velocity to max speed
 	# (and ensures vector cannot get longer than max_speed)
+
+	# TODO: speed_modifier shouldnt be here
 	velocity_ground_plane = velocity_ground_plane.move_toward(
 		move_direction * max_speed,
 		velocity_change
-	)
+	) * speed_modifier
+
 	player.velocity.x = velocity_ground_plane.x
 	player.velocity.z = velocity_ground_plane.z
 	
 	player.velocity.x = velocity_ground_plane.x
 	player.velocity.z = velocity_ground_plane.z
+
+
+func stop_movement(start_duration: float, end_duration: float):
+	var tween = create_tween()
+	tween.tween_property(self, "speed_modifier", 0.2, start_duration)
+	tween.tween_property(self, "speed_modifier", 1.0, end_duration)

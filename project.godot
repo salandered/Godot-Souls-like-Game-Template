@@ -35,11 +35,12 @@ enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addo
 [file_customization]
 
 folder_colors={
-"res://-assets-/": "yellow",
-"res://-assets-/animations/": "orange",
-"res://-assets-/icons/": "gray",
+"res://-assets-/blender_sources/": "orange",
 "res://-assets-/level/": "green",
 "res://-assets-/player/": "pink",
+"res://-assets-/x_icons/": "gray",
+"res://-assets-/x_lesson/": "gray",
+"res://-assets-/x_lesson/scripts/": "teal",
 "res://addons/": "gray",
 "res://misc/": "gray",
 "res://misc/trash_bin/": "red",
@@ -47,6 +48,7 @@ folder_colors={
 "res://scenes/actors/": "teal",
 "res://scenes/level/": "green",
 "res://scenes/player/": "pink",
+"res://scripts/": "teal",
 "res://scripts/player/": "pink"
 }
 
