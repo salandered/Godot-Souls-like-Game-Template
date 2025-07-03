@@ -72,7 +72,7 @@ enum WeaponType {
 }
 
 var weapon_type_to_node_name := {
-	WeaponType.SWORD: 'military_hatchet',
+	WeaponType.SWORD: 'smith_sword',
 	WeaponType.WAND: 'wand'
 }
 
@@ -98,7 +98,7 @@ func handle_action(is_idle: bool):
 				attack_with_wand(is_idle)
 				iamellipse.stop_movement(0.3, 0.8)
 
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("enter"):
 		hit()
 				
 	# TODO: is_anim_attacking is unreliable in case animation was interrupted
@@ -185,13 +185,13 @@ func attack_with_sword(is_idle: bool):
 
 func attack_with_wand(is_idle: bool):
 	# if not attacking
-	extra_anim.animation = 'new_stuff/torch_kinda'
+	extra_anim.animation = 'sword-shield-20/casting'
 	anim_tree["parameters/Extra1S/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	pass
 
 func hit():
 	print("got HIT")
-	extra_anim.animation = 'LightSword/death'
+	extra_anim.animation = 'sword-shield-20/death'
 	anim_tree["parameters/Extra1S/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	iamellipse.stop_movement(0.2, 0.2)
 

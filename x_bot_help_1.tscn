@@ -1,0 +1,195 @@
+[gd_scene load_steps=58 format=3 uid="uid://di74hun14oobd"]
+
+[ext_resource type="PackedScene" uid="uid://jntdxb5voqmk" path="res://raw_imports/x-bot-HELP-1.glb" id="1_fe1ph"]
+[ext_resource type="Animation" path="res://animation-20/sword-shield/Armature_mixamo_com_Layer0.res" id="2_stnxa"]
+[ext_resource type="Animation" uid="uid://6cmp11vpg2wu" path="res://animation-20/basic/Idle.res" id="3_textu"]
+[ext_resource type="Animation" uid="uid://c7toc4d7cq2sd" path="res://animation-20/basic/Standard Walk.res" id="4_omml6"]
+[ext_resource type="Animation" uid="uid://c6dqo0cxx4je2" path="res://animation-20/sword-shield/X Bot.res" id="5_sq3n7"]
+[ext_resource type="Animation" uid="uid://bf1c1tsvfygq8" path="res://animation-20/sword-shield/X Bot_001.res" id="6_a8svk"]
+[ext_resource type="Animation" uid="uid://cg3xagnp3kakl" path="res://animation-20/sword-shield/sheath sword 1.res" id="7_why67"]
+[ext_resource type="Animation" uid="uid://bqx46gr5sxo5h" path="res://animation-20/sword-shield/sheath sword 2.res" id="8_x7gnk"]
+[ext_resource type="Animation" uid="uid://bhigar6qew04k" path="res://animation-20/sword-shield/sword and shield 180 turn.res" id="9_nd8gw"]
+[ext_resource type="Animation" uid="uid://cc0j5bfteip1x" path="res://animation-20/sword-shield/sword and shield 180 turn (2).res" id="10_wire4"]
+[ext_resource type="Animation" uid="uid://b8ptxer0nng53" path="res://animation-20/sword-shield/sword and shield attack.res" id="11_808or"]
+[ext_resource type="Animation" uid="uid://bdgwj6oa885r6" path="res://animation-20/sword-shield/sword and shield attack (2).res" id="12_i1i03"]
+[ext_resource type="Animation" uid="uid://dsf32neaa1pxv" path="res://animation-20/sword-shield/sword and shield attack (3).res" id="13_tt3nb"]
+[ext_resource type="Animation" uid="uid://dmsrcbcgq0trj" path="res://animation-20/sword-shield/sword and shield attack (4).res" id="14_nlb1r"]
+[ext_resource type="Animation" uid="uid://chqt2myr8t3s8" path="res://animation-20/sword-shield/sword and shield block.res" id="15_8v2hl"]
+[ext_resource type="Animation" uid="uid://c0k4vkgbb6k8a" path="res://animation-20/sword-shield/sword and shield block (2).res" id="16_752el"]
+[ext_resource type="Animation" uid="uid://dokkmfwgwipfe" path="res://animation-20/sword-shield/sword and shield block idle.res" id="17_1yelo"]
+[ext_resource type="Animation" uid="uid://dyshpehyktn6t" path="res://animation-20/sword-shield/sword and shield block_001.res" id="18_01s6n"]
+[ext_resource type="Animation" uid="uid://cv34vc3seqd0b" path="res://animation-20/sword-shield/sword and shield casting.res" id="19_qv4te"]
+[ext_resource type="Animation" uid="uid://b60fq5t7djjos" path="res://animation-20/sword-shield/sword and shield casting (2).res" id="20_e3ynk"]
+[ext_resource type="Animation" uid="uid://cgy1g0c2v4yyw" path="res://animation-20/sword-shield/sword and shield crouch.res" id="21_dum8j"]
+[ext_resource type="Animation" uid="uid://clbx14gd3t3q1" path="res://animation-20/sword-shield/sword and shield crouch block.res" id="22_bwdc5"]
+[ext_resource type="Animation" uid="uid://o1y8qbxsf2h6" path="res://animation-20/sword-shield/sword and shield crouch block (2).res" id="23_kywpp"]
+[ext_resource type="Animation" uid="uid://cc5yuffx2mjcr" path="res://animation-20/sword-shield/sword and shield crouch block idle.res" id="24_winga"]
+[ext_resource type="Animation" uid="uid://bguut7fm24ii0" path="res://animation-20/sword-shield/sword and shield crouch idle.res" id="25_y0osu"]
+[ext_resource type="Animation" uid="uid://css1uyxioxdvu" path="res://animation-20/sword-shield/sword and shield crouching.res" id="26_hhhmr"]
+[ext_resource type="Animation" uid="uid://cu1wr3kttma4q" path="res://animation-20/sword-shield/sword and shield crouching (2).res" id="27_2lr54"]
+[ext_resource type="Animation" uid="uid://dygs6iciejl6d" path="res://animation-20/sword-shield/sword and shield crouching (3).res" id="28_su2pu"]
+[ext_resource type="Animation" uid="uid://cmhchps7vcbjq" path="res://animation-20/sword-shield/sword and shield death.res" id="29_hawqu"]
+[ext_resource type="Animation" uid="uid://bhcetwq0crbm" path="res://animation-20/sword-shield/sword and shield death (2).res" id="30_5fmsp"]
+[ext_resource type="Animation" uid="uid://ca5js5ok5cc4o" path="res://animation-20/sword-shield/sword and shield idle.res" id="31_ho01m"]
+[ext_resource type="Animation" uid="uid://do6jlvnlgmyiy" path="res://animation-20/sword-shield/sword and shield idle (2).res" id="32_ci610"]
+[ext_resource type="Animation" uid="uid://b3qhjbnm0s470" path="res://animation-20/sword-shield/sword and shield idle (3).res" id="33_77jie"]
+[ext_resource type="Animation" uid="uid://c4qegvcdj7yu6" path="res://animation-20/sword-shield/sword and shield idle (4).res" id="34_lwhd2"]
+[ext_resource type="Animation" uid="uid://d3sfm1vdxd7r4" path="res://animation-20/sword-shield/sword and shield impact.res" id="35_3gf6k"]
+[ext_resource type="Animation" uid="uid://cx3u3mhn8aqwv" path="res://animation-20/sword-shield/sword and shield impact (2).res" id="36_qjxev"]
+[ext_resource type="Animation" uid="uid://dyruu8mox8npv" path="res://animation-20/sword-shield/sword and shield impact (3).res" id="37_k3p63"]
+[ext_resource type="Animation" uid="uid://ykt0j7oqr4h4" path="res://animation-20/sword-shield/sword and shield jump.res" id="38_1dta6"]
+[ext_resource type="Animation" uid="uid://cevqp7nu205wg" path="res://animation-20/sword-shield/sword and shield jump (2).res" id="39_fkua8"]
+[ext_resource type="Animation" uid="uid://b24uqa6gh6deg" path="res://animation-20/sword-shield/sword and shield kick.res" id="40_pnuyj"]
+[ext_resource type="Animation" uid="uid://csaf25ngvpbvn" path="res://animation-20/sword-shield/sword and shield power up.res" id="41_4geoc"]
+[ext_resource type="Animation" uid="uid://bskuwbljhw68k" path="res://animation-20/sword-shield/sword and shield run.res" id="42_vfv8i"]
+[ext_resource type="Animation" uid="uid://bde372f4gxp4y" path="res://animation-20/sword-shield/sword and shield run (2).res" id="43_s0n6a"]
+[ext_resource type="Animation" uid="uid://duswqar8wuh0i" path="res://animation-20/sword-shield/sword and shield slash.res" id="44_c0d5k"]
+[ext_resource type="Animation" uid="uid://ddwjx7b7k6odq" path="res://animation-20/sword-shield/sword and shield slash (2).res" id="45_8wgnn"]
+[ext_resource type="Animation" uid="uid://dq3onuptng4wy" path="res://animation-20/sword-shield/sword and shield slash (3).res" id="46_6fgtt"]
+[ext_resource type="Animation" uid="uid://du78ongojrhav" path="res://animation-20/sword-shield/sword and shield slash (4).res" id="47_p487l"]
+[ext_resource type="Animation" uid="uid://buexcbb4f5uge" path="res://animation-20/sword-shield/sword and shield slash (5).res" id="48_uyv1b"]
+[ext_resource type="Animation" uid="uid://dceqom2xt2yk0" path="res://animation-20/sword-shield/sword and shield strafe.res" id="49_eo3mt"]
+[ext_resource type="Animation" uid="uid://dgv8ucx7djhmi" path="res://animation-20/sword-shield/sword and shield strafe (2).res" id="50_rs2bl"]
+[ext_resource type="Animation" uid="uid://crikuiewe1eyh" path="res://animation-20/sword-shield/sword and shield strafe (3).res" id="51_teqk5"]
+[ext_resource type="Animation" uid="uid://mwopijps5ntq" path="res://animation-20/sword-shield/sword and shield strafe (4).res" id="52_edn1a"]
+[ext_resource type="Animation" uid="uid://iodimaiyu5u7" path="res://animation-20/sword-shield/sword and shield turn.res" id="53_slyel"]
+[ext_resource type="Animation" uid="uid://cycp4h7i3cu6h" path="res://animation-20/sword-shield/sword and shield turn (2).res" id="54_x477j"]
+[ext_resource type="Animation" uid="uid://do8gjdxol02ef" path="res://animation-20/sword-shield/sword and shield walk.res" id="55_rake2"]
+[ext_resource type="Animation" uid="uid://bft5evyy3ryea" path="res://animation-20/sword-shield/sword and shield walk (2).res" id="56_jvrdd"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mub1r"]
+_data = {
+&"Armature|mixamo_com|Layer0": ExtResource("2_stnxa"),
+&"Idle": ExtResource("3_textu"),
+&"Standard Walk": ExtResource("4_omml6"),
+&"X Bot": ExtResource("5_sq3n7"),
+&"X Bot_001": ExtResource("6_a8svk"),
+&"sheath sword 1": ExtResource("7_why67"),
+&"sheath sword 2": ExtResource("8_x7gnk"),
+&"sword and shield 180 turn": ExtResource("9_nd8gw"),
+&"sword and shield 180 turn (2)": ExtResource("10_wire4"),
+&"sword and shield attack": ExtResource("11_808or"),
+&"sword and shield attack (2)": ExtResource("12_i1i03"),
+&"sword and shield attack (3)": ExtResource("13_tt3nb"),
+&"sword and shield attack (4)": ExtResource("14_nlb1r"),
+&"sword and shield block": ExtResource("15_8v2hl"),
+&"sword and shield block (2)": ExtResource("16_752el"),
+&"sword and shield block idle": ExtResource("17_1yelo"),
+&"sword and shield block_001": ExtResource("18_01s6n"),
+&"sword and shield casting": ExtResource("19_qv4te"),
+&"sword and shield casting (2)": ExtResource("20_e3ynk"),
+&"sword and shield crouch": ExtResource("21_dum8j"),
+&"sword and shield crouch block": ExtResource("22_bwdc5"),
+&"sword and shield crouch block (2)": ExtResource("23_kywpp"),
+&"sword and shield crouch block idle": ExtResource("24_winga"),
+&"sword and shield crouch idle": ExtResource("25_y0osu"),
+&"sword and shield crouching": ExtResource("26_hhhmr"),
+&"sword and shield crouching (2)": ExtResource("27_2lr54"),
+&"sword and shield crouching (3)": ExtResource("28_su2pu"),
+&"sword and shield death": ExtResource("29_hawqu"),
+&"sword and shield death (2)": ExtResource("30_5fmsp"),
+&"sword and shield idle": ExtResource("31_ho01m"),
+&"sword and shield idle (2)": ExtResource("32_ci610"),
+&"sword and shield idle (3)": ExtResource("33_77jie"),
+&"sword and shield idle (4)": ExtResource("34_lwhd2"),
+&"sword and shield impact": ExtResource("35_3gf6k"),
+&"sword and shield impact (2)": ExtResource("36_qjxev"),
+&"sword and shield impact (3)": ExtResource("37_k3p63"),
+&"sword and shield jump": ExtResource("38_1dta6"),
+&"sword and shield jump (2)": ExtResource("39_fkua8"),
+&"sword and shield kick": ExtResource("40_pnuyj"),
+&"sword and shield power up": ExtResource("41_4geoc"),
+&"sword and shield run": ExtResource("42_vfv8i"),
+&"sword and shield run (2)": ExtResource("43_s0n6a"),
+&"sword and shield slash": ExtResource("44_c0d5k"),
+&"sword and shield slash (2)": ExtResource("45_8wgnn"),
+&"sword and shield slash (3)": ExtResource("46_6fgtt"),
+&"sword and shield slash (4)": ExtResource("47_p487l"),
+&"sword and shield slash (5)": ExtResource("48_uyv1b"),
+&"sword and shield strafe": ExtResource("49_eo3mt"),
+&"sword and shield strafe (2)": ExtResource("50_rs2bl"),
+&"sword and shield strafe (3)": ExtResource("51_teqk5"),
+&"sword and shield strafe (4)": ExtResource("52_edn1a"),
+&"sword and shield turn": ExtResource("53_slyel"),
+&"sword and shield turn (2)": ExtResource("54_x477j"),
+&"sword and shield walk": ExtResource("55_rake2"),
+&"sword and shield walk (2)": ExtResource("56_jvrdd")
+}
+
+[node name="x-bot-HELP-1" instance=ExtResource("1_fe1ph")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+transform = Transform3D(1.00443, 0, 0, 0, 1.00443, 0, 0, 0, 1.00443, 0, 0, 0)
+bones/1/position = Vector3(-0.00839512, 0.881136, 0.0227011)
+bones/1/rotation = Quaternion(0.0810018, -0.455817, 0.0312457, 0.885829)
+bones/2/rotation = Quaternion(-0.0164798, 0.0344151, -0.02094, 0.999052)
+bones/3/rotation = Quaternion(0.0107616, 0.00904677, 0.0219853, 0.999659)
+bones/4/rotation = Quaternion(0.014781, 0.00998214, 0.0106167, 0.999785)
+bones/5/rotation = Quaternion(-0.0172448, 0.0862799, -0.00458198, 0.996111)
+bones/6/position = Vector3(1.01002e-08, 0.0934189, 0.0284104)
+bones/6/rotation = Quaternion(-0.0405752, 0.20791, -0.024117, 0.977008)
+bones/7/rotation = Quaternion(-0.368484, 0.586863, -0.643547, -0.325052)
+bones/8/rotation = Quaternion(0.409043, -0.0759094, -0.0995767, 0.903884)
+bones/9/position = Vector3(-1.21389e-07, 0.278415, -6.692e-08)
+bones/9/rotation = Quaternion(0.0313245, 0.0249148, -0.605038, 0.79519)
+bones/10/position = Vector3(2.00964e-07, 0.283288, 1.41152e-07)
+bones/10/rotation = Quaternion(0.0833914, 0.00100674, -0.240037, 0.967175)
+bones/11/position = Vector3(0.0268186, 0.0246483, 0.0157397)
+bones/11/rotation = Quaternion(0.458589, 0.0130958, 0.054082, 0.886905)
+bones/12/position = Vector3(-3.06409e-08, 0.0418899, -8.80313e-08)
+bones/12/rotation = Quaternion(-0.0905856, -0.157794, -0.0294185, 0.982868)
+bones/13/position = Vector3(7.46289e-08, 0.0341631, 6.83982e-08)
+bones/13/rotation = Quaternion(-0.162276, 0.133909, 0.1015, 0.972334)
+bones/14/position = Vector3(0.0225984, 0.0910828, 0.00517872)
+bones/14/rotation = Quaternion(0.510561, 0.0139723, 0.0223168, 0.859438)
+bones/15/rotation = Quaternion(0.548688, -0.0209619, -0.0317997, 0.835159)
+bones/16/rotation = Quaternion(0.495769, -0.0127301, 0.0114832, 0.868285)
+bones/17/position = Vector3(-1.41788e-07, 0.0953251, 4.76428e-07)
+bones/17/rotation = Quaternion(0.561157, 0.00922655, -0.00559884, 0.827639)
+bones/18/rotation = Quaternion(0.671765, -0.0276895, -0.0314806, 0.739577)
+bones/19/rotation = Quaternion(0.281473, -0.00450668, 0.0131227, 0.959469)
+bones/20/position = Vector3(-0.0186512, 0.091036, 0.000430705)
+bones/20/rotation = Quaternion(0.636599, 0.0198185, 0.0360457, 0.770097)
+bones/21/rotation = Quaternion(0.596523, -0.00102249, -0.01187, 0.802508)
+bones/22/rotation = Quaternion(0.334984, 0.00400375, 0.00955991, 0.942167)
+bones/23/position = Vector3(-0.0380627, 0.0807668, 0.00486704)
+bones/23/rotation = Quaternion(0.686426, 0.0247711, -0.0238905, 0.726385)
+bones/24/rotation = Quaternion(0.457213, 0.000378223, 0.000169719, 0.889357)
+bones/25/rotation = Quaternion(0.223509, -0.000106423, -0.000757972, 0.974702)
+bones/26/rotation = Quaternion(0.543557, 0.504369, -0.511925, 0.433695)
+bones/27/rotation = Quaternion(0.362259, 0.0559071, 0.229862, 0.901558)
+bones/28/rotation = Quaternion(0.181662, -0.204168, 0.699238, 0.660592)
+bones/29/rotation = Quaternion(0.0284621, 0.000328564, 0.00328316, 0.999589)
+bones/30/position = Vector3(-0.0268174, 0.0246618, 0.0157621)
+bones/30/rotation = Quaternion(0.378634, -0.0476547, 0.209449, 0.900276)
+bones/31/rotation = Quaternion(-0.0487082, 0.109204, -0.165614, 0.978915)
+bones/32/rotation = Quaternion(0.226597, 0.435179, -0.195512, 0.849146)
+bones/33/position = Vector3(-0.0225986, 0.0910931, 0.00518024)
+bones/33/rotation = Quaternion(0.647724, 0.0204838, 0.0721441, 0.758175)
+bones/34/rotation = Quaternion(0.554866, 0.0213553, 0.0319048, 0.831054)
+bones/35/rotation = Quaternion(0.57045, 0.009812, -0.0142002, 0.821151)
+bones/36/position = Vector3(-2.38377e-07, 0.095334, -5.07392e-07)
+bones/36/rotation = Quaternion(0.685937, -0.0492839, 0.0174505, 0.725781)
+bones/37/rotation = Quaternion(0.619233, 0.0260364, 0.0339059, 0.784043)
+bones/38/rotation = Quaternion(0.553597, 0.00837914, -0.0111869, 0.832668)
+bones/39/position = Vector3(0.0186509, 0.0910453, 0.00043011)
+bones/39/rotation = Quaternion(0.709632, -0.0517401, 0.00368714, 0.702661)
+bones/40/rotation = Quaternion(0.517283, -0.00514426, 0.0099996, 0.855741)
+bones/41/rotation = Quaternion(0.591323, -0.00685389, -0.00780487, 0.806368)
+bones/42/position = Vector3(0.0380627, 0.0807778, 0.00486862)
+bones/42/rotation = Quaternion(0.680919, -0.103999, 0.00131173, 0.724935)
+bones/43/rotation = Quaternion(0.602547, -0.000109965, 0.000549559, 0.798084)
+bones/44/rotation = Quaternion(0.411115, 1.07279e-05, 0.000416291, 0.911584)
+bones/45/rotation = Quaternion(-0.24527, 0.249876, 0.908013, 0.230038)
+bones/46/rotation = Quaternion(-0.387464, -0.00251486, -0.0491409, 0.920571)
+bones/47/rotation = Quaternion(0.530743, 0.113208, 0.230864, 0.807588)
+bones/48/rotation = Quaternion(0.34644, -0.0099078, 0.00205713, 0.938017)
+bones/49/rotation = Quaternion(0.368377, 0.439343, 0.799765, -0.17791)
+bones/50/rotation = Quaternion(-0.402422, 0.129068, -0.00885773, 0.906267)
+bones/51/rotation = Quaternion(0.431041, -0.0369654, -0.0756148, 0.898398)
+bones/52/rotation = Quaternion(0.360696, 0.0407265, -0.0196575, 0.931587)
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_mub1r")
+}

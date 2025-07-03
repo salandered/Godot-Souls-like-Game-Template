@@ -20,6 +20,7 @@ mono_crash.*.json
 
 # Project non essentials
 raw_blender/
+raw_import/
 misc/
 
 # IN QUESTION
