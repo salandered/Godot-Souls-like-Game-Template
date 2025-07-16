@@ -59,12 +59,12 @@ class StateIdle extends State:
 		super("Idle", init_mob)
 		
 	func enter() -> void:
-		print("StateIdle enter")
+		print("AI StateIdle enter")
 		# It's also a perfect place to start playing sounds, particles, or any other effect that should play when the state begins.
 		mob.skin.play("idle")
 
 	func update(_delta: float) -> Events:
-		#print("StateIdle update")
+		#print("AI StateIdle update")
 		var distance := mob.global_position.distance_to(BlackboardPlayer.player_global_position)
 		if distance > mob.vision_range:
 			#print("distance > mob.vision_range:")
@@ -252,7 +252,7 @@ class StateMachine extends Node:
 					)
 
 	func activate(initial_state: State = null) -> void:
-		print("initial_state", initial_state)
+		print("AI initial_state ", initial_state)
 		if initial_state != null:
 			current_state = initial_state
 		assert(
@@ -260,7 +260,7 @@ class StateMachine extends Node:
 			"Activated the state machine but the state variable is null. " +
 			"Please assign a starting state to the state machine."
 		)
-		print("current_state.finished.connect", initial_state)
+		print("AI current_state.finished.connect", initial_state)
 		current_state.finished.connect(_on_state_finished.bind(current_state))
 		current_state.enter()
 		set_physics_process(true)
@@ -288,11 +288,11 @@ class StateMachine extends Node:
 	func _transition(new_state: State) -> void:
 		current_state.exit()
 		current_state.finished.disconnect(_on_state_finished)
-		print("exiting ", current_state.name)
+		print("AI exiting ", current_state.name)
 		current_state = new_state
 		current_state.finished.connect(_on_state_finished.bind(current_state))
 		current_state.enter()
-		print("entering ", current_state.name)
+		print("AI entering ", current_state.name)
 
 	func _on_state_finished(finished_state: State) -> void:
 		assert(

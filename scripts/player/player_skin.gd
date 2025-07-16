@@ -11,12 +11,12 @@ var weapon_active := false
 
 ## 10 Gobot's MeshInstance3D model.
 #@export var gobot_mesh: MeshInstance3D = null
-@onready var iamellipse: CharacterBody3D = $'../..'
+# TODO: oh so bad
+@onready var iamellipse: CharacterBody3D = $'../../..'
 
-@export var main_animation_player : AnimationPlayer
+@export var main_animation_player: AnimationPlayer
 
-# TODO: why it is not MoveSM?
-var moving_blend_path := "parameters/StateMachine/move/blend_position"
+var moving_blend_path := "parameters/MoveSM/move/blend_position"
 
 # False : set animation to "idle"
 # True : set animation to "move"
@@ -24,20 +24,20 @@ var moving_blend_path := "parameters/StateMachine/move/blend_position"
 
 # Blend value between the walk and run cycle
 # 0.0 walk - 1.0 run
-@onready var move_speed : float = 0.0 : set = set_moving_speed
-@onready var anim_tree : AnimationTree = $AnimationTree
-@onready var extra_anim = $AnimationTree.get_tree_root().get_node("Extra")
-@onready var anim_move_sm : AnimationNodeStateMachinePlayback = anim_tree.get("parameters/MoveSM/playback")
-@onready var anim_attack_sm : AnimationNodeStateMachinePlayback = anim_tree.get("parameters/AttackSM/playback")
-@onready var first_attack_hold: Timer = $FirstAttackHold
+@onready var move_speed: float = 0.0: set = set_moving_speed
+@onready var anim_tree: AnimationTree = %AnimationTree
+@onready var extra_anim = %AnimationTree.get_tree_root().get_node("Extra")
+# https://docs.godotengine.org/en/stable/classes/class_animationnodestatemachineplayback.html#class-animationnodestatemachineplayback
+@onready var anim_move_sm: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/MoveSM/playback")
+@onready var anim_attack_sm: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/AttackSM/playback")
+@onready var first_attack_hold: Timer = %FirstAttackHold
 
 var first_attack_toggle := false
 var second_attack_toggle := false
 var is_anim_attacking := false
 
 
-
-func set_is_anim_attacking_(value:bool):
+func set_is_anim_attacking_(value: bool):
 	is_anim_attacking = value
 	
 func _ready():
@@ -45,19 +45,19 @@ func _ready():
 	main_animation_player["playback_default_blend_time"] = 0.1
 
 func idle():
-	print('==== idle!')
-	print(anim_move_sm)
 	anim_move_sm.travel("idle")
 
 func set_moving():
 	anim_move_sm.travel("move")
 	
-func set_moving_speed(value : float):
+func set_moving_speed(value: float):
 	move_speed = clamp(value, 0.0, 1.0)
+	# print("ms ", move_speed)
 	anim_tree.set(moving_blend_path, move_speed)
 	
 func jump():
 	anim_move_sm.travel("jump")
+
 
 func fall():
 	anim_move_sm.travel("fall")
@@ -76,17 +76,19 @@ var weapon_type_to_node_name := {
 	WeaponType.WAND: 'wand'
 }
 
-
-var path_to_weapon_node := "Armature/Skeleton3D/RighthandSlot/"
 var current_weapon := WeaponType.SWORD
+@onready var righthand_slot: BoneAttachment3D = %RighthandSlot
+
 
 func _hide_current_weapon():
 	if current_weapon != WeaponType.UNARMED:
-		get_node(path_to_weapon_node + weapon_type_to_node_name[current_weapon]).hide()
+		var _name: String = "pivot/" + weapon_type_to_node_name[current_weapon]
+		righthand_slot.get_node(_name).hide()
 
 func _show_weapon(weapon_type: WeaponType):
 	if weapon_type != WeaponType.UNARMED:
-		get_node(path_to_weapon_node + weapon_type_to_node_name[weapon_type]).show()
+		var _name: String = "pivot/" + weapon_type_to_node_name[weapon_type]
+		righthand_slot.get_node(_name).show()
 
 func handle_action(is_idle: bool):
 	if Input.is_action_just_pressed("action"):
@@ -130,10 +132,8 @@ func attack_with_sword(is_idle: bool):
 		#print(move_speed)
 		#print(1 - move_speed)
 	#i+=1
-	
 	# print("AAA >>>>>>>>>>>")
 	#var a := animation_tree.tree_root
-	
 	# var a = animation_tree.tree_root.get_node("AnimationBlendAttackLegs")
 	# print(a)
 	# print(typeof(a))
@@ -142,11 +142,10 @@ func attack_with_sword(is_idle: bool):
 		#animation_tree.set("parameters/AttackRunAdd/add_amount", 1)
 	#endregion
 	#print("== attacking?", attacking, "      idle?", idle)
-	
 	var first_attack_name := 'SliceRightL'
 	var second_attack_name := 'SliceLeftR'
 	
-	print("timer", first_attack_hold.time_left)
+	# print("timer", first_attack_hold.time_left)
 	print(first_attack_toggle, " ", second_attack_toggle)
 	# no attack_with_sword at all
 	var is_os_active: bool = anim_tree.get("parameters/IdleAttack1Shot/active")
@@ -174,7 +173,7 @@ func attack_with_sword(is_idle: bool):
 			anim_attack_sm.travel(second_attack_name)
 			#anim_tree["parameters/IdleAttack1Shot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 			# and one shot is triggered already
-		else: 
+		else:
 			# no logic for moving and second attack_with_sword so far
 			pass
 	# second attack_with_sword hold
@@ -194,8 +193,6 @@ func hit():
 	extra_anim.animation = 'sword-shield-20/death'
 	anim_tree["parameters/Extra1S/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	iamellipse.stop_movement(0.2, 0.2)
-
-
 
 
 func first_attack_toggle__(value: bool):

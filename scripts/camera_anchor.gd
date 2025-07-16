@@ -11,17 +11,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	var is_mouse_input := event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	
-	# region 10 mouse code
-	#var is_mouse_captured := Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
-	var is_mouse_button := event is InputEventMouseButton
-	var is_escape_pressed := event.is_action_pressed("ui_cancel")
 
-	#if is_mouse_button and not is_mouse_captured:
-		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#elif is_escape_pressed and is_mouse_captured:
-		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	# endregion
-	
 	if event.is_action_pressed("wheel_up"):
 		_spring_arm.spring_length -= 1
 	if event.is_action_pressed("wheel_down"):

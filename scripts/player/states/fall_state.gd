@@ -11,7 +11,6 @@ func _enter() -> void:
 	player_skin.fall()
 
 func _update(_delta: float) -> void:
-	
 	agent.velocity.y -= agent.gravity * _delta
 	agent.velocity.y = maxf(agent.velocity.y, -agent.max_fall_speed)
 

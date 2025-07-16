@@ -1,7 +1,7 @@
 class_name MobSkeleton3D extends Mob3D # Mob3D extends from Character
 
 func _ready() -> void:
-	print("_ready ")
+	print("MobSkeleton3D _ready ")
 	var state_machine := AI.StateMachine.new()
 	add_child(state_machine)
 	
@@ -17,7 +17,7 @@ func _ready() -> void:
 			AI.Events.PLAYER_EXITED_LINE_OF_SIGHT: idle,
 		},
 	}
-	print("state_machine.activate ")
+	print("AI state_machine.activate ")
 	state_machine.activate(idle)
 	
 	#state_machine.is_debugging = true

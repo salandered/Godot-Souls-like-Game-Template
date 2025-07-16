@@ -142,7 +142,6 @@ filter_enabled = true
 filters = ["Armature/Skeleton3D:mixamorig_Head", "Armature/Skeleton3D:mixamorig_HeadTop_End", "Armature/Skeleton3D:mixamorig_LeftEye", "Armature/Skeleton3D:mixamorig_Neck", "Armature/Skeleton3D:mixamorig_RightEye"]
 
 [resource]
-graph_offset = Vector2(-610.749, -92.0642)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1f664")
 nodes/Animation/position = Vector2(-680, 460)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5fan7")

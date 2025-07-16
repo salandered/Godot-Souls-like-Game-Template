@@ -1,21 +1,25 @@
 class_name PlayerController extends CharacterBody3D
 
-@export_range(0.001, 1.0) var mouse_sensitivity := 0.001
+@export_range(0.001, 0.01) var mouse_sensitivity := 0.001
 
 @export_category("Ground movement")
-@export_range(1.0, 50.0, 0.1) var max_speed_jog := 10.0
-@export_range(1.0, 80.0, 0.1) var max_speed_sprint := 60.0
-@export_range(1.0, 100.0, 0.1) var acceleration_jog := 40.0
-@export_range(1.0, 100.0, 0.1) var acceleration_sprint := 100.0
-@export_range(1.0, 100.0, 0.1) var deceleration := 70.0
+@export_range(1.0, 10.0, 0.2) var max_speed_walk := 2.0
+@export_range(1.0, 20.0, 1.0) var max_speed_run := 10.0
+@export_range(10.0, 40.0, 1.0) var max_speed_sprint := 40.0
+
+@export_range(0.4, 10.0, 1.0) var acceleration_walk := 40.0
+@export_range(1.0, 30.0, 1.0) var acceleration_run := 40.0
+@export_range(1.0, 50.0, 1.0) var acceleration_sprint := 60.0
+
+@export_range(1.0, 80.0, 1.0) var deceleration := 80.0
 
 @export_category("Air movement")
 # gravity is 17 m/s² and max_fall is 20 =>
 # * if player falls for one second -> fall speed will increase by 17 m/s.
 # * player will reach max fall speed after ~ 1.18 seconds (20 m/s / 17 m/s²).
-@export_range(1.0, 100.0, 0.1) var gravity := 60.0
-@export_range(1.0, 100.0, 0.1) var max_fall_speed := 80.0
-@export_range(1.0, 40.0, 0.1) var jump_velocity := 20.0
+@export_range(1.0, 40.0, 1.0) var gravity := 17.0
+@export_range(1.0, 40.0, 1.0) var max_fall_speed := 20.0
+@export_range(1.0, 20.0, 1.0) var jump_velocity := 5
 
 @onready var _camera: Camera3D = %Camera3D
 @onready var _cam_anchor: Node3D = %CameraAnchor
@@ -40,6 +44,7 @@ class_name PlayerController extends CharacterBody3D
 # region: SM assumptions
 # 1. State knows or may be not
 # endregion
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 @onready var idle_state: LimboState = $LimboHSM/IdleState
 @onready var move_state: LimboState = $LimboHSM/MoveState
@@ -53,7 +58,9 @@ class_name PlayerController extends CharacterBody3D
 
 var speed_modifier := 1.0
 
-
+func _on_animation_player_animation_finished():
+	print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+	pass
 
 func _ready() -> void:
 	init_state_machine()
@@ -66,16 +73,16 @@ func init_state_machine():
 	# state_machine.add_transition(idle_state, attack_state, idle_state.INPUT_ATTACK)
 	# do we need this?
 	state_machine.add_transition(idle_state, fall_state, idle_state.STARTED_FALL)
-	# idle - jump?
+	state_machine.add_transition(idle_state, jump_state, idle_state.INPUT_JUMPED)
 	# MOVE
 	state_machine.add_transition(move_state, idle_state, move_state.WENT_IDLE)
 	state_machine.add_transition(move_state, jump_state, move_state.INPUT_JUMPED)
 	state_machine.add_transition(move_state, fall_state, move_state.STARTED_FALL)
 	# state_machine.add_transition(move_state, attack_state, move_state.INPUT_ATTACK)
 	# JUMP
-	state_machine.add_transition(jump_state, move_state, jump_state.GOT_ON_FLOOR)
+	state_machine.add_transition(jump_state, idle_state, jump_state.GOT_ON_FLOOR)
+	state_machine.add_transition(jump_state, move_state, jump_state.GOT_ON_FLOOR_MOVING)
 	state_machine.add_transition(jump_state, fall_state, jump_state.STARTED_FALL)
-	# jump - idle?
 	# FALL
 	state_machine.add_transition(fall_state, move_state, fall_state.GOT_ON_FLOOR)
 
@@ -86,7 +93,6 @@ func init_state_machine():
 	
 
 func input_move_direction() -> Vector3:
-	# bool 
 	#region CONVERTING 2D -> 3D
 	# 1. 
 	# 2. rotates the input direction to be relative to the camera's look direction
@@ -102,6 +108,18 @@ func input_move_direction() -> Vector3:
 	var move_direction_2d := raw_input_2d.rotated(-1.0 * _camera.global_rotation.y)
 	var move_direction := Vector3(move_direction_2d.x, 0.0, move_direction_2d.y)
 
+
+	#region from TPS GDquest
+	# var input := Vector3.ZERO
+	# # This is to ensure that diagonal input isn't stronger than axis aligned input
+	# input.x = - raw_input_2d.x * sqrt(1.0 - raw_input_2d.y * raw_input_2d.y / 2.0)
+	# input.z = + raw_input_2d.y * sqrt(1.0 - raw_input_2d.x * raw_input_2d.x / 2.0)
+
+	# input = _cam_anchor.global_transform.basis * input
+	# input.y = 0.0
+	# return input
+	#endregion
+
 	return move_direction
 
 func input_move_coming() -> bool:
@@ -111,7 +129,6 @@ func input_move_coming() -> bool:
 
 func _physics_process(delta: float) -> void:
 	# var is_falling = not is_on_floor() and velocity.y < 0
-	
 	# CAMERA
 	var move_direction: Vector3 = input_move_direction()
 	if input_move_coming():
@@ -124,6 +141,15 @@ func _physics_process(delta: float) -> void:
 	if input_move_coming():
 		accelerate(move_direction, delta)
 
+	if Input.is_action_just_pressed("dev_speed_up"):
+		max_speed_run *= 2
+		acceleration_run *= 2
+		jump_velocity *= 2
+	if Input.is_action_just_pressed("dev_speed_down"):
+		max_speed_run /= 2
+		acceleration_run /= 2
+		jump_velocity /= 2
+
 
 	#region: 10 just_landed_logic
 	# var was_in_air := not is_on_floor() # was_in_air and just_landed works together
@@ -134,7 +160,6 @@ func _physics_process(delta: float) -> void:
 	# var just_landed := was_in_air and is_on_floor()
 	
 
-	
 	#if just_landed:
 		#var impact_intensity := fall_speed / max_fall_speed
 		#
@@ -150,16 +175,14 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	
 	# That's how the blackboard works. Relevant parts of the game can fill it with data, and the AI can access it without having to know where the data comes from.
-	#AI.BlackboardPlayer.player_global_position = global_position
+	AI.BlackboardPlayer.player_global_position = global_position
 
 func _orient_character_to_direction(direction: Vector3, delta: float) -> void:
 	var left_axis := Vector3.UP.cross(direction)
 	var rotation_basis := Basis(left_axis, Vector3.UP, direction).get_rotation_quaternion()
 	var model_scale := _rotation_root.transform.basis.get_scale()
-	var _what = _rotation_root.transform.basis.get_rotation_quaternion()
-	var _the = _what.slerp(rotation_basis, delta * rotation_speed)
-	_rotation_root.transform.basis = Basis(_the).scaled(model_scale)
-	# move_and_slide()
+	var _smth = _rotation_root.transform.basis.get_rotation_quaternion().slerp(rotation_basis, delta * rotation_speed)
+	_rotation_root.transform.basis = Basis(_smth).scaled(model_scale)
 
 
 func _orient_character_to_direction_all__(delta: float) -> void:
@@ -173,19 +196,21 @@ func _orient_character_to_direction_all__(delta: float) -> void:
 
 func accelerate(move_direction: Vector3, _delta: float):
 	var player := self
-	var max_speed = player.max_speed_jog
-	var acceleration = player.acceleration_jog
+	# move_
+	var max_speed = player.max_speed_walk
+	var acceleration = player.acceleration_walk
+	# TODO: walk to run for now
 	if Input.is_action_pressed("sprint"):
-		max_speed = player.max_speed_sprint
-		acceleration = player.acceleration_sprint
+		max_speed = player.max_speed_run
+		acceleration = player.acceleration_run
+	# print("acc ", acceleration)
 	
 	# ground means no Y. 2D vector could be used but Vector3 is clearer.
 	var velocity_ground_plane := Vector3(player.velocity.x, 0.0, player.velocity.z)
 	var velocity_change = acceleration * _delta
 	# move_toward() smoothly interpolates ground velocity to max speed
 	# (and ensures vector cannot get longer than max_speed)
-
-	# TODO: speed_modifier shouldnt be here
+	# TODO: speed_modifier shouldnt be here (hit tests)
 	velocity_ground_plane = velocity_ground_plane.move_toward(
 		move_direction * max_speed,
 		velocity_change
@@ -194,9 +219,26 @@ func accelerate(move_direction: Vector3, _delta: float):
 	player.velocity.x = velocity_ground_plane.x
 	player.velocity.z = velocity_ground_plane.z
 	
+	# region: TPS GDquest
+	# var y_velocity := velocity.y # separate y velocity to not interpolate on the gravity
+	# velocity.y = 0.0
+	# velocity = velocity.lerp(move_direction * max_speed, acceleration * _delta)
+	# # if move_direction.length() == 0 and velocity.length() < stopping_speed:
+	# 	# velocity = Vector3.ZERO
+	# velocity.y = y_velocity
+	# endregion
+
+
+func deccelerate(_delta):
+	var player := self
+	var velocity_ground_plane := Vector3(player.velocity.x, 0.0, player.velocity.z)
+	# moves towards zero
+	velocity_ground_plane = velocity_ground_plane.move_toward(
+		Vector3.ZERO,
+		player.deceleration * _delta
+	)
 	player.velocity.x = velocity_ground_plane.x
 	player.velocity.z = velocity_ground_plane.z
-
 
 func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()
