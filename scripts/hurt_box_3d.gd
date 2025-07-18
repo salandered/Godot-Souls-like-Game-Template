@@ -1,7 +1,7 @@
 ## i d rather call it hit box
 
 @tool
-@icon("res://-assets-/icons/hurt_box_3d.svg")
+@icon("res://-assets-/x_icons/hurt_box_3d.svg")
 class_name HurtBox3D extends Area3D
 
 # emit a signal named took_hit when it detects a collision with a HitBox3D node
@@ -34,5 +34,5 @@ func _init() -> void:
 	monitorable = true
 	area_entered.connect(func _on_area_entered(area: Area3D) -> void:
 		if area is HitBox3D:
-			took_hit.emit(area)  # takes a HitBox3D as an argument
+			took_hit.emit(area) # takes a HitBox3D as an argument
 	)

@@ -3,7 +3,7 @@
 # @tool tells Godot to run the script in editor. 
 # change damage_source prop. in the Inspector -> setter func will be called
 @tool
-@icon("res://assets/icons/hit_box_3d.svg")
+@icon("res://assets/x_icons/hit_box_3d.svg")
 class_name HitBox3D extends Area3D
 
 ## Emitted when the hit box hits a hurt box.

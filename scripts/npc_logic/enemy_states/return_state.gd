@@ -2,31 +2,32 @@ extends LimboState
 
 ## Returning to default behaviour (like just go towards spawn place after giving up a chase)
 
-@onready var player_skin: PlayerSkin = %PlayerSkin
-
-
-const INPUT_MOVED := &"INPUT_MOVED"
-const INPUT_JUMPED := &"INPUT_JUMPED"
-const STARTED_FALL := &"STARTED_FALL"
-const INPUT_ATTACK := &"INPUT_ATTACK"
+@onready var anim_tree = %AnimationTree
+const NOT_DEFAULT_TARGET := &"NOT_DEFAULT_TARGET"
+const RETURNED := &"RETURNED"
 
 
 func _enter() -> void:
-	print(">> entered ", name)
-	# print(player_skin)
-	player_skin.idle()
+	var npc := agent
+	print("|| NPC entered ", name)
+	npc.target = npc.default_target
 	
 	
 func _update(_delta: float) -> void:
-	agent.velocity.y -= agent.gravity * _delta
-	agent.velocity.y = maxf(agent.velocity.y, -agent.max_fall_speed)
-	agent.move_and_slide()
-	player_skin.handle_action(true)
-	if agent.input_move_coming():
-		get_root().dispatch(INPUT_MOVED)
-	if Input.is_action_just_pressed("jump"):
-		print("J")
-		get_root().dispatch(INPUT_JUMPED)
+	var npc := agent
+	npc.apply_gravity(_delta)
+	anim_tree.set_movement()
 
-	if not agent.is_on_floor() and agent.velocity.y < 0:
-		get_root().dispatch(STARTED_FALL)
+	npc.rotate_character()
+	npc.update_direction()
+	npc.free_movement(_delta)
+	evaluate_state()
+
+	npc.move_and_slide()
+
+func evaluate_state():
+	var npc := agent
+
+	var near = (npc.get_target_distance() < 0.3)
+	if near:
+		get_root().dispatch(RETURNED)

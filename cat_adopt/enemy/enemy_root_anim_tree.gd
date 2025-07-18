@@ -1,78 +1,69 @@
 extends AnimationTree
 
-@onready var enemy : CharacterBody3D = get_parent()
 @onready var last_oneshot = null
-@onready var anim_length : float = .5
-@onready var state_machine_node : AnimationNodeStateMachinePlayback = self["parameters/Movement/playback"]
-@export var max_attack_count : int = 2
+@onready var anim_sm: AnimationNodeStateMachinePlayback = self["parameters/Movement/playback"]
 @onready var attack_count
-@onready var hurt_count :int = 1
+# todo 
+@onready var enemy_base: CharacterBody3D = $'..'
 
-
-signal animation_measured(anim_length)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	enemy.attack_started.connect(_on_attack_started)
-	enemy.retreat_started.connect(_on_retreat_started)
-	enemy.hurt_started.connect(_on_hurt_started)
-	enemy.parried_started.connect(_on_parried_started)
-	enemy.death_started.connect(_on_death_started)
-	animation_started.connect(_on_animation_started)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	set_movement()
+	pass
 
-func set_movement():
-	var speed : Vector2 = Vector2.ZERO
-	var near
-	match enemy.current_state:
-		enemy.state.FREE:
-			near = (enemy.target.global_position.distance_to(enemy.global_position) < .2)
-			if near:
-				speed.y = 0.0
+
+func set_movement(variant: String = "unset"):
+	var current_state = enemy_base.state_machine.get_active_state().name
+	var _speed: Vector2 = Vector2.ZERO
+	var target_distance: float
+	match current_state:
+		"IdleState":
+			# todo: check
+			# print("IdleState near", target.global_position.distance_to(global_position))
+			# print("   - target ", target.global_position)
+			# print("   - NPC ", global_position)
+			_speed.y = 0.0 if (enemy_base.get_target_distance() < 0.3) else 0.5
+		"ReturningState":
+			_speed.y = 0.0 if (enemy_base.get_target_distance() < 0.3) else 0.5
+		"ChaseState":
+			if variant == "Combat":
+				_speed.y = 0.0
 			else:
-				speed.y = .5
-		enemy.state.CHASE:
-			near = (enemy.target.global_position.distance_to(enemy.global_position) < 4.0)
-			if near:
-				speed.y = .5
-			else:
-				speed.y = 1.0
-		enemy.state.DEAD:
-			speed.y = 0.0
-			
-	var blend = lerp(get("parameters/Movement/Movement2D/blend_position"),speed,.1)
-	set("parameters/Movement/Movement2D/blend_position",blend)
+				target_distance = enemy_base.get_target_distance()
+				if target_distance > 4.0:
+					_speed.y = 1.0
+				elif target_distance > 3.0:
+					_speed.y = 0.5
+				elif target_distance > 2.0:
+					_speed.y = 0.5
+				elif target_distance > 0:
+					_speed.y = 0.0
+		"DeadState":
+			_speed.y = 0.0
+	# print("speed: ", _speed)
+	var blend = lerp(get("parameters/Movement/Movement2D/blend_position"), _speed, 0.1)
+	set("parameters/Movement/Movement2D/blend_position", blend)
 
-func _on_attack_started():
-	attack_count = randi_range(1,max_attack_count)
-	request_oneshot("attack")
 
-func _on_retreat_started():
-	request_oneshot("retreat")
-
-func request_oneshot(oneshot:String):
+func _request_oneshot(oneshot: String):
 	last_oneshot = oneshot
-	set("parameters/" + oneshot + "/request",true)
+	print("parameters/" + oneshot + "/request")
+	set("parameters/" + oneshot + "/request", true)
 
-func abort_oneshot(oneshot):
-	set("parameters/"+ str(oneshot) + "/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+func _abort_oneshot(oneshot):
+	set("parameters/" + str(oneshot) + "/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
-func _on_hurt_started():
-	hurt_count = randi_range(1,2)
-	abort_oneshot(last_oneshot)
-	request_oneshot("hurt")
 
-func _on_parried_started():
-	abort_oneshot(last_oneshot)
-	request_oneshot("parried")
-	
-func _on_death_started():
-	abort_oneshot(last_oneshot)
-	state_machine_node.travel("Dead")
+func attack():
+	attack_count = randi_range(1, 2) # agent.max_attack_count)
+	_request_oneshot("attack")
 
-func _on_animation_started(anim_name):
-	anim_length = get_node(anim_player).get_animation(anim_name).length
-	animation_measured.emit(anim_length)
+func retreat():
+	_request_oneshot("retreat")
+
+func hurt():
+	_abort_oneshot(last_oneshot)
+	_request_oneshot("hurt")
+
+
+func die():
+	_abort_oneshot(last_oneshot)
+	anim_sm.travel("Dead")

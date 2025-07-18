@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=32 format=3 uid="uid://chj3rjkhratr2"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=33 format=3 uid="uid://chj3rjkhratr2"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nefhb"]
 animation = &"MeleeLib/root-Slash1"
@@ -28,10 +28,14 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_272i4"]
 states/MeleeLib_root-Slash1/node = SubResource("AnimationNodeAnimation_nefhb")
-states/MeleeLib_root-Slash1/position = Vector2(473, 55)
+states/MeleeLib_root-Slash1/position = Vector2(473, 54)
 states/MeleeLib_root-Slash2/node = SubResource("AnimationNodeAnimation_ckruy")
-states/MeleeLib_root-Slash2/position = Vector2(478, 163)
+states/MeleeLib_root-Slash2/position = Vector2(473, 163)
 transitions = ["Start", "MeleeLib_root-Slash1", SubResource("AnimationNodeStateMachineTransition_eqtkf"), "Start", "MeleeLib_root-Slash2", SubResource("AnimationNodeStateMachineTransition_0k84x"), "MeleeLib_root-Slash1", "End", SubResource("AnimationNodeStateMachineTransition_36612"), "MeleeLib_root-Slash2", "End", SubResource("AnimationNodeStateMachineTransition_brhjx")]
+graph_offset = Vector2(78, -22)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0oaa8"]
+animation = &"MeleeLib/HeavySpin"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5qi6e"]
 animation = &"MeleeLib/root-Retreat"
@@ -140,13 +144,15 @@ fadein_time = 0.2
 fadeout_time = 0.2
 
 [resource]
-graph_offset = Vector2(-341.92, 77.3023)
+graph_offset = Vector2(-240.981, 69.0596)
 nodes/ATTACK_tree/node = SubResource("AnimationNodeStateMachine_272i4")
-nodes/ATTACK_tree/position = Vector2(380, 340)
+nodes/ATTACK_tree/position = Vector2(420, 480)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_5qi6e")
 nodes/Animation/position = Vector2(-240, 320)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0oaa8")
+"nodes/Animation 2/position" = Vector2(560, 340)
 nodes/HURT_tree/node = SubResource("AnimationNodeStateMachine_mk1ii")
-nodes/HURT_tree/position = Vector2(220, 340)
+nodes/HURT_tree/position = Vector2(160, 440)
 nodes/Movement/node = SubResource("AnimationNodeStateMachine_8apep")
 nodes/Movement/position = Vector2(-460, 120)
 nodes/attack/node = SubResource("AnimationNodeOneShot_bmcih")

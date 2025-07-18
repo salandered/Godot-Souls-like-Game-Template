@@ -1,30 +1,29 @@
 extends LimboState
 
-@onready var player_skin: PlayerSkin = %PlayerSkin
-
-
-const INPUT_MOVED := &"INPUT_MOVED"
-const INPUT_JUMPED := &"INPUT_JUMPED"
-const STARTED_FALL := &"STARTED_FALL"
-const INPUT_ATTACK := &"INPUT_ATTACK"
+@onready var anim_tree = %AnimationTree
+# const TO_CHASE := &"TO_CHASE"
 
 
 func _enter() -> void:
-	print(">> entered ", name)
-	# print(player_skin)
-	player_skin.idle()
-	
-	
-func _update(_delta: float) -> void:
-	agent.velocity.y -= agent.gravity * _delta
-	agent.velocity.y = maxf(agent.velocity.y, -agent.max_fall_speed)
-	agent.move_and_slide()
-	player_skin.handle_action(true)
-	if agent.input_move_coming():
-		get_root().dispatch(INPUT_MOVED)
-	if Input.is_action_just_pressed("jump"):
-		print("J")
-		get_root().dispatch(INPUT_JUMPED)
+	print("|| NPC entered ", name)
+	print("    > target ", agent.target)
 
-	if not agent.is_on_floor() and agent.velocity.y < 0:
-		get_root().dispatch(STARTED_FALL)
+func _update(_delta: float) -> void:
+	var npc := agent
+
+	npc.apply_gravity(_delta)
+	anim_tree.set_movement()
+	# Idle just stands for now ->
+	# npc.rotate_character()
+	# npc.update_direction()
+	# npc.free_movement(_delta)
+
+	# evaluate_state()
+
+	npc.move_and_slide()
+
+
+# func evaluate_state(): ## depending on distance to target, run or walk
+# 	if agent.target == agent.default_target:
+# 		# as expected
+# 		return
