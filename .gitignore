@@ -16,7 +16,7 @@ data_*/
 mono_crash.*.json
 
 # VScode
-.vscode/
+# .vscode/
 
 # Project non essentials
 raw_blender/

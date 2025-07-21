@@ -1,0 +1,123 @@
+{
+	// Dynamic Settings
+	// "editor.hover.enabled": false,
+	// Static settings
+	// godot
+	"godotTools.editorPath.godot4": "c:\\safe\\godot\\Godot_v4.4.1-stable_win64.exe\\Godot_v4.4.1-stable_win64.exe",
+	// exlude from file view
+	"files.exclude": {
+		// godot 
+		"**/*.res": true,
+		"**/*.gd.uid": true,
+		// images
+		"**/*.jpg": true,
+		"**/*.png": true,
+		"**/*.png.import": true,
+		"**/*.jpg.import": true,
+		"**/*.svg.import": true,
+		"**/*.tmp": true,
+	},
+	// dont open file again in split view
+	"workbench.editor.revealIfOpen": true,
+	// against copilot
+	"editor.inlineSuggest.enabled": false,
+	// FOLDER COLORS EXAMPLE
+	// "workbench.colorCustomizations": {
+	//     "folderPathColor.custom1": "#FF4488",
+	//     "folderPathColor.custom2": "#88ff44",
+	// },
+	// "folder-path-color.folders": [
+	//     {
+	//         "path": "frontend",
+	//         "symbol": "SR",
+	//         "tooltip": "Source files"
+	//     },
+	// ]
+	// COLORS
+	"workbench.colorCustomizations": {
+		// BUILD IN
+		// "editor.findMatchBackground": "#FF5555AA", // active match (the one you’re on)
+		// "editor.findMatchBorder": "#FF0000",
+		"editor.findMatchHighlightBackground": "#faf8993a", // all other matches
+		// "editor.findMatchHighlightBorder": "#0000FF"
+		// COLORFUL FOLDERS
+		"folderPathColor.custom1": "#fccbdd",
+		"folderPathColor.custom2": "#ff8aef",
+		"folderPathColor.custom3": "#c3c78d",
+		"folderPathColor.custom4": "#a4d4b2",
+	},
+	// COLORFUL FOLDERS
+	"folder-path-color.folders": [
+		{
+			"path": "-assets-",
+			"color": "custom3"
+		},
+		{
+			"path": "scripts/player",
+			"color": "custom2"
+		},
+		{
+			"path": "scripts",
+			"color": "custom4"
+		},
+	],
+	// No built in git color on files (conflict with colorful folders)
+	"git.decorations.enabled": false,
+	// Fighting with space indents
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	// File view more shifted
+	"workbench.tree.indent": 14,
+	//
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": "entity.name.type.class.gdscript",
+				"settings": {
+					"foreground": "#2CDFC7E3"
+					// "foreground": "#43e0cbc5"
+				}
+			},
+			{
+				"scope": "entity.name.function.gdscript",
+				"settings": {
+					"foreground": "#5ECFE6"
+					// "foreground": "#70baff"
+				}
+			},
+			{
+				"scope": "variable.other.property.gdscript",
+				"settings": {
+					"foreground": "#D9BCFF"
+					// "foreground": "#e4d0ffe8"
+				}
+			}
+		]
+	},
+	// COPIED FROM GLOBAL SETTINGS JIC. 
+	// May be useful for setting project from git on another machine. Uncomment if needed
+	// godot specific
+	//"workbench.colorTheme": "Godot 4",
+	// "[gdscript]": {},
+	// "godotTools.lsp.serverPort": 6005,
+	// other
+	//"editor.fontWeight": 1,
+	// "editor.foldingHighlight": false,
+	// "editor.minimap.enabled": false,
+	// "explorer.confirmDragAndDrop": false,
+	// "explorer.confirmDelete": false,
+	// "git.enableSmartCommit": true,
+	// "editor.lineNumbers": "off",
+	// "github.copilot.editor.enableCodeActions": false,
+	// "diffEditor.ignoreTrimWhitespace": false,
+	// "workbench.editor.tabSizing": "shrink",
+	// "editor.semanticTokenColorCustomizations": {},
+	// "python.analysis.aiCodeActions": {
+	// 	"implementAbstractClasses": true
+	// },
+	// "editor.inlineSuggest.showToolbar": "never",
+	// "github.copilot.nextEditSuggestions.enabled": false,
+	// "editor.formatOnSave": true,
+	// "workbench.statusBar.visible": false,
+	// "telemetry.feedback.enabled": false,
+}

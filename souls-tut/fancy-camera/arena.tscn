@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://7pjtrp02m5bl"]
+
+[ext_resource type="PackedScene" uid="uid://bdjn7polkkito" path="res://scenes/utility/yellow_floor.tscn" id="1_l6g8s"]
+[ext_resource type="PackedScene" uid="uid://d07fixsqagjq1" path="res://scenes/utility/tele_camera_from_above.tscn" id="3_6ufsf"]
+[ext_resource type="PackedScene" uid="uid://dasieqpeg1ep3" path="res://souls-tut/fancy-camera/princess-local-player.tscn" id="3_a0v0j"]
+[ext_resource type="PackedScene" uid="uid://g0m5obp7e0ju" path="res://scenes/utility/sunny_world_environment.tscn" id="3_xnwbk"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="5_ccv2e"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" parent="." instance=ExtResource("1_l6g8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -4.37151)
+
+[node name="PrincessLocalPlayer" parent="." instance=ExtResource("3_a0v0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00549269, -0.300727, 0.0112109)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("3_xnwbk")]
+
+[node name="Camera3D" parent="." instance=ExtResource("3_6ufsf")]
+
+[node name="Target" parent="." instance=ExtResource("5_ccv2e")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, -4.6648, 0.0225072, -3.0639)

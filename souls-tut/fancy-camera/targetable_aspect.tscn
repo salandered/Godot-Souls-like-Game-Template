@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc030ubgkaf18"]
+
+[ext_resource type="Script" uid="uid://sra67e40jd6f" path="res://souls-tut/fancy-camera/targetable_aspect.gd" id="1_mxpn8"]
+
+[node name="TargetableAspect" type="Node3D"]
+script = ExtResource("1_mxpn8")
+
+[node name="LookAt" type="Node3D" parent="."]
+
+[node name="TargetMarker" type="Node3D" parent="."]

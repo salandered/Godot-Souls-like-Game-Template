@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://drjqcoul7pinv"]
+
+[ext_resource type="Script" uid="uid://bpr17wdedc64x" path="res://souls-tut/Player/player.gd" id="1_siche"]
+[ext_resource type="PackedScene" uid="uid://dkl1i7wju7vba" path="res://souls-tut/Player/PlayerVisuals/PlayerVisuals.tscn" id="2_yjnpd"]
+[ext_resource type="PackedScene" uid="uid://eec5ujuowf51" path="res://souls-tut/Player/PlayerModel/PlayerModel.tscn" id="3_b4ws5"]
+[ext_resource type="Script" uid="uid://bdmng5y2k5j0o" path="res://souls-tut/Player/Input/input_gatherer.gd" id="4_k1mdb"]
+[ext_resource type="Script" uid="uid://cyu5toxx2swl7" path="res://souls-tut/Player/camera.gd" id="5_ye3f7"]
+[ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://souls-tut/fancy-camera/local_camera.tscn" id="6_e8a10"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d0r5q"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8a10"]
+albedo_color = Color(0.0962022, 0.627141, 0.55397, 1)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_siche")
+
+[node name="Visuals" parent="." instance=ExtResource("2_yjnpd")]
+
+[node name="Model" parent="." instance=ExtResource("3_b4ws5")]
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("4_k1mdb")
+
+[node name="CameraMount" type="Node3D" parent="."]
+top_level = true
+script = ExtResource("5_ye3f7")
+
+[node name="PlayerCamera" type="Camera3D" parent="CameraMount"]
+transform = Transform3D(-1, -5.07667e-08, 7.11722e-08, -2.09273e-08, 0.929455, 0.368936, -8.4881e-08, 0.368936, -0.929455, 0, 3.47206, -2.86976)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_d0r5q")
+
+[node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("6_e8a10")]
+unique_name_in_owner = true
+look_at_ = NodePath("../CameraFocus")
+hor_sense = 1.0
+ver_sense = 1.0
+min_vertical_angle = 0.1
+max_vertical_angle = 2.0
+follow_speed = 0.05
+lerp_speed = 8.0
+
+[node name="CameraFocus" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 1.04239, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraFocus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0200904)
+material_override = SubResource("StandardMaterial3D_e8a10")
+radius = 0.3
