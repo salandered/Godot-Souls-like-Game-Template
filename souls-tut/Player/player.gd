@@ -9,19 +9,19 @@ extends CharacterBody3D
 @onready var camera_focus: Node3D = $CameraFocus
 
 func _ready():
-	print("Player is ready")
+	Print.print_ready(self)
 	visuals.accept_model(model)
 	model.animator.play("run")
 
 
 func _physics_process(delta):
-	# CONTROLLER
+	# CONTROLLER (INPUT)
 	var input = input_gatherer.gather_input()
 	
-	# MODEL
+	# MODEL (SIMULATION)
 	model.update(input, delta)
 	
-	# VISUALISE
+	# VISUALISE (PRESENTATION)
 	# Visuals -> follow parent transformations
 	
 	input.queue_free()

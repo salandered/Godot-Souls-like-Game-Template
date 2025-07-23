@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://dkl1i7wju7vba"]
 
-[ext_resource type="Script" path="res://souls-tut/Player/PlayerVisuals/player_visuals.gd" id="1_o4em2"]
+[ext_resource type="Script" uid="uid://bm1glbgw5uawg" path="res://souls-tut/Player/PlayerVisuals/player_visuals.gd" id="1_o4em2"]
 [ext_resource type="PackedScene" uid="uid://bb0o3byg0f0uh" path="res://souls-tut/Weapons/Skins/SwordVisuals1.tscn" id="2_3ywgv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ja257"]

@@ -1,11 +1,23 @@
 extends Node
-class_name StatesData
+class_name StatesDataRepository
 
-@onready var backend_animations_database = $BackendAnimationsDatabase
-
-
-var animation_ended: bool
+@onready var state_database = $StatesDatabase
 
 
-func get_value(animation: String, track: int, time: float):
-	pass
+# "ask them about the hypothetical parameter status at a given time if it was playing"
+# called from player state
+
+func get_vulnerable(animation: String, timecode: float) -> bool:
+	var data = state_database.get_animation(animation)
+	var track = data.find_track("StatesDatabase:is_vulnerable", Animation.TYPE_VALUE)
+	return state_database.get_boolean_value(animation, track, timecode)
+
+func get_interruptable(animation: String, timecode: float) -> bool:
+	var data = state_database.get_animation(animation)
+	var track = data.find_track("StatesDatabase:is_interruptable", Animation.TYPE_VALUE)
+	return state_database.get_boolean_value(animation, track, timecode)
+
+func get_parryable(animation: String, timecode: float) -> bool:
+	var data = state_database.get_animation(animation)
+	var track = data.find_track("StatesDatabase:is_parryable", Animation.TYPE_VALUE)
+	return state_database.get_boolean_value(animation, track, timecode)

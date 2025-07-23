@@ -1,14 +1,18 @@
 extends Node
 class_name Combo
 
+@onready var move: BasePlayerState
 
-var triggered_state: String
+## Combo result this combo invokes (eg: next_attack)
+## Assigned in check_combos to queue state 
+@export var triggered_move : String
 
-
-func is_triggered(_input: InputPackage) -> bool:
+## decides if the combo is triggered
+func is_triggered(input: InputPackage) -> bool:
 	return false
 
 
+# region: FAIR DOCS
 # As basic combos have one plain function, which is always called in some BasePlayerState's check_relevance
 # function at the first string, it seems like we are over-abstracting a bit. Why don't we
 # just put a code that decides if slash_1 progresses into slash_2 in slash_1 directly and
@@ -34,3 +38,4 @@ func is_triggered(_input: InputPackage) -> bool:
 
 # The Combos code is a module for creating additional layers of conditional transitions that can be
 # added, mixed, copied and deleted without your base check_relevance function changing a symbol.
+# endregion

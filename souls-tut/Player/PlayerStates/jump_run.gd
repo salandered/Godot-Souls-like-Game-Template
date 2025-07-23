@@ -1,5 +1,4 @@
 extends BasePlayerState
-class_name JumpRunState
 
 const VERTICAL_SPEED_ADDED: float = 2.5
 
@@ -10,11 +9,12 @@ const JUMP_TIMING = 0.1
 var jumped: bool = false
 
 func _ready():
-	animation = "jump_run"
 	state_name = "jump_run"
+	backend_animation = animation + "params"
+	
 
 
-func check_relevance(_input: InputPackage):
+func default_lifecycle(_input: InputPackage):
 	if works_longer_than(TRANSITION_TIMING):
 		jumped = false
 		return "midair"
@@ -28,12 +28,3 @@ func update(_input: InputPackage, delta):
 			player.velocity.y += VERTICAL_SPEED_ADDED
 			jumped = true
 	player.move_and_slide()
-
-
-# func check_relevance(input_data: InputData):
-# 	if player.is_on_floor():
-# 		input_data.actions.sort_custom(sort_states_by_priorities)
-# 		# todo check length
-# 		return input_data.actions[0]
-# 	# todo return something sane
-# 	return "jump"

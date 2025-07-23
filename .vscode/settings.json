@@ -36,10 +36,10 @@
 	// COLORS
 	"workbench.colorCustomizations": {
 		// BUILD IN
-		// "editor.findMatchBackground": "#FF5555AA", // active match (the one you’re on)
-		// "editor.findMatchBorder": "#FF0000",
-		"editor.findMatchHighlightBackground": "#faf8993a", // all other matches
-		// "editor.findMatchHighlightBorder": "#0000FF"
+		"editor.findMatchBackground": "#f5eda80e", // active match (the one you’re on)
+		"editor.findMatchBorder": "#fa902ccb",
+		"editor.findMatchHighlightBackground": "#ffffff00", // all other matches
+		"editor.findMatchHighlightBorder": "#feffc686",
 		// COLORFUL FOLDERS
 		"folderPathColor.custom1": "#fccbdd",
 		"folderPathColor.custom2": "#ff8aef",

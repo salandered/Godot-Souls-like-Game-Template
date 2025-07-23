@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://chektgcvmhoqw"]
+
+[ext_resource type="Script" uid="uid://ovu1kxjpr74i" path="res://Player/HumanoidModel/HumanoidHitbox.gd" id="1_pq8q7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47cuq"]
+radius = 0.3
+height = 1.85
+
+[node name="Root" type="BoneAttachment3D"]
+transform = Transform3D(0.634621, -0.156295, -0.756854, 0.00655897, 0.98039, -0.196956, 0.772795, 0.120029, 0.623202, 0, 0, 0)
+bone_name = "Hips"
+bone_idx = 0
+use_external_skeleton = true
+external_skeleton = NodePath("../GeneralSkeleton")
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 1.86265e-09, 0, 1.86265e-09, 1, 1.49012e-08, -3.72529e-09, 1.49012e-08, 1, 0, -0.055, 0)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_pq8q7")
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, -1.21072e-08, 3.72529e-09, 9.31323e-10, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_47cuq")

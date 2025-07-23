@@ -8,6 +8,10 @@ class_name PlayerVisuals
 
 @onready var sword_visuals_1 = $SwordVisuals1
 
+@onready var stamina_label = $"Stamina _bar_"
+@onready var health_label = $"Health _bar_"
+
+
 func accept_model(_model: PlayerModel):
 	model = _model
 	beta_surface.skeleton = _model.skeleton.get_path()
@@ -15,8 +19,16 @@ func accept_model(_model: PlayerModel):
 
 
 func _process(_delta):
+	update_resources_interface()
 	adjust_weapon_visuals()
 
 
 func adjust_weapon_visuals():
+	# todo: problems when active_weapon not only a sword
+	# To snap weapon visuals to the model
 	sword_visuals_1.global_transform = model.active_weapon.global_transform
+
+func update_resources_interface():
+	if not model.is_enemy:
+		stamina_label.text = "Stamina " + "%10.3f" % model.resources.stamina
+		health_label.text = "Health " + "%10.3f" % model.resources.health

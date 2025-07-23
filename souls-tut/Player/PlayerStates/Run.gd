@@ -1,5 +1,4 @@
 extends BasePlayerState
-class_name RunState
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -8,17 +7,15 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	animation = "run"
+	backend_animation = animation + "params"
 	state_name = PlayerState.run
 
 
-func check_relevance(input: InputPackage):
+func default_lifecycle(input: InputPackage):
 	if not player.is_on_floor():
 		return "midair"
 	
-	input.actions.sort_custom(states_priority_sort)
-	if input.actions[0] == "run":
-		return "okay"
-	return input.actions[0]
+	return best_input_that_can_be_paid(input)
 
 
 func update(input: InputPackage, delta: float):

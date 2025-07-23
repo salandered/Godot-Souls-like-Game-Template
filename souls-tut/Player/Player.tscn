@@ -13,7 +13,7 @@ radius = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8a10"]
 albedo_color = Color(0.0962022, 0.627141, 0.55397, 1)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="PlayerPack" type="CharacterBody3D"]
 script = ExtResource("1_siche")
 
 [node name="Visuals" parent="." instance=ExtResource("2_yjnpd")]
@@ -37,12 +37,6 @@ shape = SubResource("CapsuleShape3D_d0r5q")
 [node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("6_e8a10")]
 unique_name_in_owner = true
 look_at_ = NodePath("../CameraFocus")
-hor_sense = 1.0
-ver_sense = 1.0
-min_vertical_angle = 0.1
-max_vertical_angle = 2.0
-follow_speed = 0.05
-lerp_speed = 8.0
 
 [node name="CameraFocus" type="Node3D" parent="."]
 unique_name_in_owner = true
