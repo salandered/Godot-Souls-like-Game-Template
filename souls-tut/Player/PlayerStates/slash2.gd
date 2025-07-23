@@ -30,7 +30,7 @@ func update(_input: InputPackage, _delta: float):
 func pack_hit_data(weapon: WeaponOh) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
-	hit.hit_move_animation = animation
+	hit.hit_state_animation = animation
 	hit.is_parryable = is_parryable()
 	hit.weapon = player.model.active_weapon
 	return hit

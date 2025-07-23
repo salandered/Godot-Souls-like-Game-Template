@@ -23,23 +23,23 @@ var current_state: BasePlayerState
 
 @onready var states = {
 	# move
-	PlayerState.idle: $States/IdleState,
-	PlayerState.run: $States/RunState,
-	PlayerState.sprint: $States/SprintState,
-	PlayerState.jump_run: $States/JumpRunState,
-	PlayerState.midair: $States/MidairState,
-	PlayerState.landing_run: $States/LandingRunState,
-	PlayerState.jump_sprint: $States/JumpSprintState,
-	PlayerState.landing_sprint: $States/LandingSprintState,
+	PlayerState.idle: $States/Idle,
+	PlayerState.run: $States/Run,
+	PlayerState.sprint: $States/Sprint,
+	PlayerState.jump_run: $States/JumpRun,
+	PlayerState.midair: $States/Midair,
+	PlayerState.landing_run: $States/LandingRun,
+	PlayerState.jump_sprint: $States/JumpSprint,
+	PlayerState.landing_sprint: $States/LandingSprint,
 	# combat
-	PlayerState.slash_1: $States/Slash1State,
-	PlayerState.slash_2: $States/Slash2State,
-	PlayerState.slash_3: $States/Slash3State,
-	PlayerState.staggered: $States/StaggeredState,
-	PlayerState.parry: $States/ParryState,
-	PlayerState.riposte: $States/RiposteState,
-	PlayerState.parried: $States/ParriedState,
-	PlayerState.death: $States/DeathState,
+	PlayerState.slash_1: $States/Slash1,
+	PlayerState.slash_2: $States/Slash2,
+	PlayerState.slash_3: $States/Slash3,
+	PlayerState.staggered: $States/Staggered,
+	PlayerState.parry: $States/Parry,
+	PlayerState.parried: $States/Parried,
+	PlayerState.riposte: $States/Riposte,
+	PlayerState.death: $States/Death,
 }
 
 
@@ -49,28 +49,32 @@ func _ready():
 	for state: BasePlayerState in states.values():
 		state.player = player
 		state.resources = resources
-		state.states_data_repo = $MovesData
+		state.states_data_repo = $StatesData
 		state.assign_combos()
 
 
 func update(input: InputPackage, delta: float):
+	# print("actions gathered ", input.actions)
 	input = combat.contextualize(input)
+	# print("actions contextualise ", input.actions)
 
 	var relevance = current_state.check_relevance(input)
+	# print("relevance", relevance)
 	
 	if relevance != "okay": # todo not okay
 		switch_to(relevance)
 
 	current_state.update_resources(delta)
 	current_state.update(input, delta)
+	# print("")
 
 
 func switch_to(state: String):
-	print(" = Playerstateswitching = ")
-	print("", current_state, ' ->')
+	# print(" = Playerstateswitching = ")
+	# print("", current_state, ' ->')
 	current_state.on_exit_state()
 	current_state = states[state]
-	print("", current_state)
+	# print("", current_state)
 	current_state.on_enter_state()
 	current_state.mark_enter_state()
 	resources.pay_resource_cost(current_state)

@@ -46,7 +46,8 @@ environment = SubResource("Environment_8ihuv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_4xdhy")
 use_collision = true
-size = Vector3(39.0254, 1, 45.0029)
+collision_layer = 3
+size = Vector3(64.4893, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("2_ldsoa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -64,27 +65,34 @@ transform = Transform3D(1, 0, 0, 0, 0.918605, 0.395177, 0, -0.395177, 0.918605, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90411, 0.504346, 1.79941)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
+collision_layer = 3
 size = Vector3(2, 2, 2)
 
 [node name="Box2" type="CSGBox3D" parent="."]
 transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 3.28412, 0.504346, -3.06418)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
+collision_layer = 3
 size = Vector3(2, 2, 2)
 
 [node name="Box3" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.249653, -0.968335, 0, 0.968335, -0.249653, 0, 0, 0, 1, -4.61402, -0.635017, 2.20094)
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
+collision_layer = 3
 size = Vector3(2, 10, 2)
 
 [node name="Target" parent="." instance=ExtResource("4_ldsoa")]
 transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, 4.05916, 0, 6.08874)
 
 [node name="Enemy" parent="." instance=ExtResource("5_fnxa0")]
-transform = Transform3D(-0.674302, 0, -0.738455, 0, 1, 0, 0.738455, 0, -0.674302, 15.4347, 0, -7.9854)
-script = null
+transform = Transform3D(-0.0251998, 0, -0.999682, 0, 1, 0, 0.999682, 0, -0.0251998, 15.4347, 0, -7.9854)
 
 [node name="Enemy2" parent="." instance=ExtResource("5_fnxa0")]
-transform = Transform3D(0.540666, 0, -0.841237, 0, 1, 0, 0.841237, 0, 0.540666, 9.70319, 0, -13.8686)
-script = null
+transform = Transform3D(-0.101317, 0, -0.994854, 0, 1, 0, 0.994854, 0, -0.101317, 9.5099, 0, -14.6784)
+
+[node name="AI" parent="Enemy2" index="0"]
+mode = "spamming parry"
+
+[editable path="Enemy"]
+[editable path="Enemy2"]

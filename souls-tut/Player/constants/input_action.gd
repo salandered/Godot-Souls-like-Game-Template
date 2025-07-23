@@ -1,4 +1,4 @@
-class_name InputAction extends RefCounted
+class_name InAction extends RefCounted
 
 
 # move basic
@@ -14,6 +14,7 @@ const dash = "dash"
 # attack
 const hit = "hit"
 const light_attack = "light_attack"
+const parry := "parry"
 
 # system
 const force_quit = "force_quit"

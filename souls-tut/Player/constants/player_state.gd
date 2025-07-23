@@ -51,6 +51,7 @@ static func sort_by_priority(states: Array) -> Array:
 		push_error("states empty")
 	var sorted = states.duplicate()
 	sorted.sort_custom(PlayerState._priority_sort)
+	
 	return sorted
 
 ## For now assumes that states not empty

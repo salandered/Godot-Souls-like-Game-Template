@@ -9,7 +9,7 @@ var jumped: bool = false
 
 func _ready():
 	animation = "jump_sprint"
-	backend_animation = animation + "params"
+	backend_animation = animation + "_params"
 
 
 func default_lifecycle(_input: InputPackage):

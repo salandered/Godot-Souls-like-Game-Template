@@ -3,6 +3,10 @@ extends BasePlayerState
 
 const ANIMATION_END = 0.9833
 
+func _ready():
+	animation = "staggered"
+	backend_animation = animation + "_params"
+	state_name = PlayerState.staggered
 
 func default_lifecycle(input: InputPackage):
 	if works_longer_than(ANIMATION_END):

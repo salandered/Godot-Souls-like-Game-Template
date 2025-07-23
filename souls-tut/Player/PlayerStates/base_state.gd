@@ -122,20 +122,22 @@ func check_relevance(input: InputPackage) -> String:
 
 ## docs from Ep. 3
 ## If state can invoke a combo in its transition logic, it asks its combos if they are triggered.
-## If they are, they store the triggered action into a 'queued move' field.
-## => states can use 'queued move' field for transitions without losing it.
+## If they are, they store the triggered action into a 'queued state' field.
+## => states can use 'queued state' field for transitions without losing it.
 func check_combos(input: InputPackage):
 	for combo: Combo in combos:
+		# print("COMBO", combo.triggered_state)
 		if combo.is_triggered(input) and resources.can_be_paid(player.model.states[combo.triggered_state]):
 			has_queued_state = true
 			queued_state = combo.triggered_state
 
 ## choosing the input with the highest priority that we can also pay for
 func best_input_that_can_be_paid(input: InputPackage) -> String:
-	var actions := PlayerState.sort_by_priority(input.actions)
-	for action: String in input.actions:
-		if resources.can_be_paid(player.model.moves[action]):
-			if player.model.moves[action] == self:
+	var sorted_actions := PlayerState.sort_by_priority(input.actions)
+	# print("--- after sort_by_priority ", sorted_actions)
+	for action: String in sorted_actions:
+		if resources.can_be_paid(player.model.states[action]):
+			if player.model.states[action] == self:
 				return "okay"
 			else:
 				return action
@@ -168,11 +170,11 @@ func assign_combos():
 	for child in get_children():
 		if child is Combo:
 			combos.append(child)
-			child.move = self
+			child.state = self # combo.state here
 
 ## overidden in states
 func pack_hit_data(_weapon: WeaponOh) -> HitData:
-	print("someone tries to get hit by default Move")
+	print("someone tries to get hit by default State")
 	return HitData.blank()
 
 # GET MODIFIERS BASED ON ANIMATION

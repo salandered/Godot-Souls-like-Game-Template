@@ -56,6 +56,7 @@ func lose_stamina(amount: float):
 		stamina -= amount
 		if stamina < 1:
 			statuses.append("fatique")
+			# print("~~~ fatique")
 
 
 func gain_stamina(amount: float):
@@ -65,3 +66,4 @@ func gain_stamina(amount: float):
 		stamina = max_stamina
 	if stamina > FATIQUE_TRESHOLD:
 		statuses.erase("fatique")
+		# print("~~~ fatique erased")

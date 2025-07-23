@@ -6,7 +6,7 @@ const TRANSITION_TIMING = 0.2
 
 func _ready():
 	animation = "landing_sprint"
-	backend_animation = animation + "params"
+	backend_animation = animation + "_params"
 	state_name = "landing_sprint"
 
 

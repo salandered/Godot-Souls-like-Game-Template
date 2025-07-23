@@ -20,7 +20,7 @@ func default_lifecycle(input: InputPackage) -> String:
 	var best_input = best_input_that_can_be_paid(input)
 	
 	if works_longer_than(TRANSITION_TIMING):
-		if has_queued_state and resources.can_be_paid(player.model.moves[queued_state]):
+		if has_queued_state and resources.can_be_paid(player.model.states[queued_state]):
 			has_queued_state = false
 			return queued_state
 		# we are cutting this automatic idle transition, because the whole animation end 
@@ -32,7 +32,7 @@ func default_lifecycle(input: InputPackage) -> String:
 	return "okay"
 	
 	
-	#if works_longer_than(COMBO_TIMING) and has_queued_state and resources.can_be_paid(player.model.moves[queued_state]):
+	#if works_longer_than(COMBO_TIMING) and has_queued_state and resources.can_be_paid(player.model.states[queued_state]):
 		#has_queued_state = false
 		#return queued_state
 	#elif works_longer_than(TRANSITION_TIMING) and best_input != "idle" or works_longer_than(ANIMATION_END):
@@ -69,7 +69,7 @@ func get_delta_position(delta_time: float) -> Vector3:
 func pack_hit_data(weapon: WeaponOh) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
-	hit.hit_move_animation = animation
+	hit.hit_state_animation = animation
 	hit.is_parryable = is_parryable()
 	hit.weapon = player.model.active_weapon
 	return hit

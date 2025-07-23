@@ -5,6 +5,13 @@ const ANIMATION_END = 4.8
 
 var hit_damage = 100
 
+
+func _ready():
+	animation = "riposte"
+	backend_animation = animation + "e_params"
+	state_name = PlayerState.riposte
+	
+	
 func default_lifecycle(input: InputPackage):
 	if works_longer_than(ANIMATION_END):
 		return best_input_that_can_be_paid(input)
@@ -21,7 +28,7 @@ func update(_input: InputPackage, _delta):
 func pack_hit_data(weapon: WeaponOh) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
-	hit.hit_move_animation = animation
+	hit.hit_state_animation = animation
 	hit.is_parryable = is_parryable()
 	hit.weapon = player.model.active_weapon
 	return hit

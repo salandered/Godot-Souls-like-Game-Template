@@ -10,7 +10,7 @@ func default_lifecycle(input) -> String:
 	if not player.is_on_floor():
 		return "midair"
 	
-	if has_queued_state and resources.can_be_paid(player.model.moves[queued_state]):
+	if has_queued_state and resources.can_be_paid(player.model.states[queued_state]):
 		has_queued_state = false
 		return queued_state
 	

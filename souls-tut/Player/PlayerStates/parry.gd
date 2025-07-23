@@ -6,9 +6,14 @@ const PARRY_WINDOW_END: float = 1
 
 const ANIMATION_END: float = 1.3667
 
+func _ready():
+	animation = "parry"
+	backend_animation = animation + "_params"
+	state_name = PlayerState.parry
+
 func default_lifecycle(input: InputPackage):
 	if works_longer_than(ANIMATION_END):
-		if has_queued_state and resources.can_be_paid(player.model.moves[queued_state]):
+		if has_queued_state and resources.can_be_paid(player.model.states[queued_state]):
 			has_queued_state = false
 			return queued_state
 		return best_input_that_can_be_paid(input)

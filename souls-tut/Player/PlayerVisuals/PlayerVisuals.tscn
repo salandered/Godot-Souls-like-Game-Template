@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dkl1i7wju7vba"]
+[gd_scene load_steps=10 format=4 uid="uid://dkl1i7wju7vba"]
 
 [ext_resource type="Script" uid="uid://bm1glbgw5uawg" path="res://souls-tut/Player/PlayerVisuals/player_visuals.gd" id="1_o4em2"]
 [ext_resource type="PackedScene" uid="uid://bb0o3byg0f0uh" path="res://souls-tut/Weapons/Skins/SwordVisuals1.tscn" id="2_3ywgv"]
@@ -229,6 +229,9 @@ bind/64/name = &"mixamorig_LeftToe_End"
 bind/64/bone = -1
 bind/64/pose = Transform3D(1, 0, -1.36424e-12, -1.59162e-12, -7.35163e-08, 1, -1.86265e-09, -1, -1.03326e-07, -0.0820778, -0.17246, 1.40793e-06)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pcc"]
+albedo_color = Color(1, 0.420167, 0.29, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sswca"]
 resource_name = "Beta_HighLimbsGeoSG3"
 cull_mode = 2
@@ -255,6 +258,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fapch"]
+albedo_color = Color(0.270588, 0.333333, 1, 1)
+
 [node name="Visuals" type="Node3D"]
 script = ExtResource("1_o4em2")
 
@@ -262,10 +268,33 @@ script = ExtResource("1_o4em2")
 mesh = SubResource("ArrayMesh_mmssq")
 skin = SubResource("Skin_gsieq")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_y5pcc")
 
 [node name="Beta_Surface" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1fl2i")
 skin = SubResource("Skin_gsieq")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_fapch")
 
 [node name="SwordVisuals1" parent="." instance=ExtResource("2_3ywgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.14315)
+
+[node name="Stamina _bar_" type="Label" parent="."]
+offset_left = 93.0
+offset_top = 91.0
+offset_right = 251.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 35
+text = "Stamina: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health _bar_" type="Label" parent="."]
+offset_left = 90.0
+offset_top = 153.0
+offset_right = 247.0
+offset_bottom = 202.0
+theme_override_font_sizes/font_size = 35
+text = "Health: "
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -12,7 +12,7 @@ var landing_height: float = 1.163
 
 func _ready():
 	animation = "midair"
-	backend_animation = animation + "params"
+	backend_animation = animation + "_params"
 	state_name = PlayerState.midair
 
 

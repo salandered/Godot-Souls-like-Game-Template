@@ -7,7 +7,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	animation = "run"
-	backend_animation = animation + "params"
+	backend_animation = animation + "_params"
 	state_name = PlayerState.run
 
 

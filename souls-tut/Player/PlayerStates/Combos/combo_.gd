@@ -1,11 +1,11 @@
 extends Node
 class_name Combo
 
-@onready var move: BasePlayerState
+@onready var state: BasePlayerState
 
 ## Combo result this combo invokes (eg: next_attack)
 ## Assigned in check_combos to queue state 
-@export var triggered_move : String
+@export var triggered_state: String
 
 ## decides if the combo is triggered
 func is_triggered(input: InputPackage) -> bool:

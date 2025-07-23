@@ -4,7 +4,7 @@ class_name HitData
 var is_parryable: bool
 var damage: float
 ## hit source animation (for debug purposes)
-var hit_move_animation: String
+var hit_state_animation: String
 
 var weapon: WeaponOh
 

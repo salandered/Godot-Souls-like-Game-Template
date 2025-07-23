@@ -10,9 +10,9 @@ var jumped: bool = false
 
 func _ready():
 	state_name = "jump_run"
-	backend_animation = animation + "params"
+	animation = "jump_run"
+	backend_animation = animation + "_params"
 	
-
 
 func default_lifecycle(_input: InputPackage):
 	if works_longer_than(TRANSITION_TIMING):

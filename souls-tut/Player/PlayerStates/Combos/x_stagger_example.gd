@@ -25,5 +25,5 @@ extends Combo
 
 
 # Godot has a specific term for a node plus script package with manageable constants: it's called a 'scene.' 
-# - Stagger is a combo that will be nested into its moves in the form of a scene.
+# - Stagger is a combo that will be nested into its states in the form of a scene.
 # - This scene has the same script trigger but has different timing windows that you can even export and edit them directly here in the editor.

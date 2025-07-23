@@ -1,4 +1,4 @@
-extends CharacterBody3D # why
+extends Area3D
 class_name WeaponOh
 
 ## To get a hit only once per attack.
@@ -19,6 +19,10 @@ var is_attacking: bool = false
 ## Maps input actions to states.
 ## Examples: sword map 'light attack pressed' to slash, while stuff to spell.
 var basic_attacks: Dictionary
+
+func get_hit_data() -> HitData:
+	print("someone tries to get hit by default Weapon")
+	return HitData.blank()
 
 
 ## MVC PAC Ep. 3

@@ -1,0 +1,11 @@
+[gd_scene load_steps=0 format=3 uid="uid://nas6f0l7dhdm"]
+
+[node name="Health _bar_" type="Label"]
+offset_left = 90.0
+offset_top = 153.0
+offset_right = 247.0
+offset_bottom = 202.0
+theme_override_font_sizes/font_size = 35
+text = "Health: "
+horizontal_alignment = 1
+vertical_alignment = 1
