@@ -33,13 +33,9 @@ func gather_input() -> InputPackage:
 	if Input.is_action_just_pressed(InAction.light_attack):
 		new_input.combat_actions.append(InDataCombatAction.light_attack_pressed)
 	
-	# if new_input.actions.is_empty():
-	# 	new_input.actions.append(InDataAction.idle)
-
 	# SYSTEM
 	if Input.is_action_just_pressed(InAction.force_quit):
 		get_tree().quit()
-
 
 	return new_input
 

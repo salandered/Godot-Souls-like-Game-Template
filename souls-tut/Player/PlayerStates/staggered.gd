@@ -1,19 +1,6 @@
 extends BasePlayerState
 
 
-const ANIMATION_END = 0.9833
-
-func _ready():
-	animation = "staggered"
-	backend_animation = animation + "_params"
-	state_name = PlayerState.staggered
-
-func default_lifecycle(input: InputPackage):
-	if works_longer_than(ANIMATION_END):
-		return best_input_that_can_be_paid(input)
-	return "okay"
-
-
 #func update(input : InputPackage, delta : float):
 	# do gravity staff
 	# I know it just stands in the air, but to be just staggered-and-falling is boring,

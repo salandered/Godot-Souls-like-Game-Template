@@ -1,9 +1,8 @@
 extends CharacterBody3D
 
-
-@onready var ai = $AI
-@onready var model = $Model as PlayerModel
-@onready var visuals = $Visuals as PlayerVisuals
+@export var ai:Node
+@export var model:PlayerModel
+@export var visuals:PlayerVisuals
 
 
 func _ready():

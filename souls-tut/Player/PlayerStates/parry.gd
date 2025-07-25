@@ -1,23 +1,8 @@
 extends BasePlayerState
 
 
-const PARRY_WINDOW_START: float = 0.2
-const PARRY_WINDOW_END: float = 1
-
-const ANIMATION_END: float = 1.3667
-
-func _ready():
-	animation = "parry"
-	backend_animation = animation + "_params"
-	state_name = PlayerState.parry
-
-func default_lifecycle(input: InputPackage):
-	if works_longer_than(ANIMATION_END):
-		if has_queued_state and resources.can_be_paid(player.model.states[queued_state]):
-			has_queued_state = false
-			return queued_state
-		return best_input_that_can_be_paid(input)
-	return "okay"
+const PARRY_WINDOW_START : float = 0.2
+const PARRY_WINDOW_END : float = 1
 
 
 func react_on_hit(hit: HitData):
@@ -27,6 +12,6 @@ func react_on_hit(hit: HitData):
 		hit.weapon.holder.current_state.react_on_parry(hit)
 		print("parry triggered")
 	else:
-		try_force_state("staggered")
+		super.react_on_hit(hit)
 	# delete hit package to avoid memory leaks
 	hit.queue_free()

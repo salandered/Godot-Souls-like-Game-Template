@@ -30,6 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.43215, 6.11606)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="CameraNest"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.991808)
+visible = false
 material_override = SubResource("StandardMaterial3D_3e4lf")
 
 [node name="FocusPoint" type="Node3D" parent="."]

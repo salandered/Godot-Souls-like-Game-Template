@@ -271,14 +271,20 @@ height = 0.4
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkxf5"]
 albedo_color = Color(1, 0.113725, 1, 1)
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("ai", "model", "visuals")]
 script = ExtResource("1_uc728")
+ai = NodePath("AI")
+model = NodePath("Model")
+visuals = NodePath("Visuals")
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource("2_64i8o")
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." node_paths=PackedStringArray("beta_joints", "beta_surface", "sword_visuals_1")]
 script = ExtResource("3_svrt4")
+beta_joints = NodePath("Beta_Joints")
+beta_surface = NodePath("Beta_Surface")
+sword_visuals_1 = NodePath("SwordVisuals1")
 
 [node name="Beta_Joints" type="MeshInstance3D" parent="Visuals"]
 material_override = SubResource("StandardMaterial3D_k17n6")
@@ -295,9 +301,10 @@ skeleton = NodePath("")
 [node name="SwordVisuals1" parent="Visuals" instance=ExtResource("4_acrdf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3883)
 
-[node name="Model" parent="." instance=ExtResource("3_a34b5")]
+[node name="Model" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_a34b5")]
 visible = false
 is_enemy = true
+player = NodePath("..")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201519, 0)

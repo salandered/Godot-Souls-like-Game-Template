@@ -1,21 +1,6 @@
 extends BasePlayerState
 
-
-const ANIMATION_END = 4.8
-
 var hit_damage = 100
-
-
-func _ready():
-	animation = "riposte"
-	backend_animation = animation + "e_params"
-	state_name = PlayerState.riposte
-	
-	
-func default_lifecycle(input: InputPackage):
-	if works_longer_than(ANIMATION_END):
-		return best_input_that_can_be_paid(input)
-	return "okay"
 
 
 func update(_input: InputPackage, _delta):

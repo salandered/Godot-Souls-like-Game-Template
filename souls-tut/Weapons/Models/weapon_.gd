@@ -21,7 +21,7 @@ var is_attacking: bool = false
 var basic_attacks: Dictionary
 
 func get_hit_data() -> HitData:
-	print("someone tries to get hit by default Weapon")
+	print("someone tries to get hit by default WeaponOh")
 	return HitData.blank()
 
 

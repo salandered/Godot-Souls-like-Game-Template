@@ -1,14 +1,9 @@
 extends BasePlayerState
 
+const SPEED = 3.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-
-func _ready():
-	animation = "run"
-	backend_animation = animation + "_params"
-	state_name = PlayerState.run
 
 
 func default_lifecycle(input: InputPackage):

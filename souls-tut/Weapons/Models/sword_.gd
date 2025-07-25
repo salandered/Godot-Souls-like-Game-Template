@@ -5,7 +5,7 @@ class_name SwordOh
 func _ready():
 	base_damage = 10
 	basic_attacks = {
-		InDataCombatAction.light_attack_pressed: PlayerState.slash_1
+		InDataCombatAction.light_attack_pressed: PlayerState.longsword_1
 	}
 
 

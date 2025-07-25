@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://b6h2mf8m3b8iu"]
 
-[ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://souls-tut/Assets/Textures/texture_07.png" id="1_jrlrw"]
+[ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://souls-tut/Assets/Textures/texture_07.png" id="1_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://souls-tut/Assets/Textures/texture_09.png" id="3_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
@@ -19,8 +19,9 @@ sky = SubResource("Sky_t1f0q")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xdhy"]
-albedo_texture = ExtResource("1_jrlrw")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldsoa"]
+albedo_color = Color(1, 0.524, 0.16, 1)
+albedo_texture = ExtResource("1_fnxa0")
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkxf5"]
@@ -44,7 +45,7 @@ environment = SubResource("Environment_8ihuv")
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-material_override = SubResource("StandardMaterial3D_4xdhy")
+material_override = SubResource("StandardMaterial3D_ldsoa")
 use_collision = true
 collision_layer = 3
 size = Vector3(64.4893, 1, 45.0029)
@@ -52,9 +53,8 @@ size = Vector3(64.4893, 1, 45.0029)
 [node name="Player" parent="." instance=ExtResource("2_ldsoa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Player"]
+[node name="PlayerDebugSphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
-visible = false
 material_override = SubResource("StandardMaterial3D_qkxf5")
 radius = 0.2
 

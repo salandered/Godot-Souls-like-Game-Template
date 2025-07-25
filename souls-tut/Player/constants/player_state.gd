@@ -12,7 +12,11 @@ const jump_sprint := "jump_sprint"
 const landing_sprint := "landing_sprint"
 # combat
 const slash_1 := "slash_1"
+const longsword_1 := "longsword_1"
+
 const slash_2 := "slash_2"
+const longsword_2 := "longsword_2"
+
 const slash_3 := "slash_3"
 const staggered := "staggered"
 const parry := "parry"

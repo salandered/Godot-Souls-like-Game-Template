@@ -41,7 +41,7 @@ func lose_health(amount: float):
 	if not god_mode:
 		health -= amount
 		if health < 1:
-			model.current_state.try_force_state("death")
+			model.current_state.try_force_state(PlayerState.death)
 
 
 func gain_health(amount: float):

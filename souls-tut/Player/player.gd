@@ -1,22 +1,23 @@
 extends CharacterBody3D
 
 
-@onready var input_gatherer = $Input as InputGatherer
-@onready var model = $Model as PlayerModel
-@onready var visuals = $Visuals as PlayerVisuals
-@onready var camera_mount = $CameraMount
+@export var input_gatherer: InputGatherer
+@export var model: PlayerModel
+@export var visuals: PlayerVisuals
+@export var camera_mount: Node3D
+@export var collider: CollisionShape3D
+@onready var camera_focus: Node3D = %CameraFocus
 @onready var fancy_camera: FancyCamera = %FancyCamera
-@onready var camera_focus: Node3D = $CameraFocus
+
 
 func _ready():
-	Print.print_ready(self)
+	#Print.print_ready(self)
 	visuals.accept_model(model)
-	model.animator.play("run")
 
 
 func _physics_process(delta):
 	# CONTROLLER (INPUT)
-	var input = input_gatherer.gather_input()
+	var input := input_gatherer.gather_input()
 	
 	# MODEL (SIMULATION)
 	model.update(input, delta)
@@ -24,4 +25,4 @@ func _physics_process(delta):
 	# VISUALISE (PRESENTATION)
 	# Visuals -> follow parent transformations
 	
-	input.queue_free()
+	#input.queue_free() ep 4

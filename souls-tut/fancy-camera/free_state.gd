@@ -60,7 +60,7 @@ func _rotate_offset(new_focus: Vector3) -> void:
 	offset = offset.rotated(Vector3.UP, signed_alpha)
 
 func _move_camera_mount() -> void:
-	var camera_focus_position : Vector3 = root_player.camera_focus.global_position
+	var camera_focus_position: Vector3 = root_player.camera_focus.global_position
 	camera_mount.global_position = camera_mount.global_position.lerp(camera_focus_position, follow_speed)
 	camera_nest.global_position = camera_mount.global_position + offset
 

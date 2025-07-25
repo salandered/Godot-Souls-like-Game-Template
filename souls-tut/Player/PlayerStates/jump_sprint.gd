@@ -7,10 +7,6 @@ const JUMP_TIMING = 0.0657
 
 var jumped: bool = false
 
-func _ready():
-	animation = "jump_sprint"
-	backend_animation = animation + "_params"
-
 
 func default_lifecycle(_input: InputPackage):
 	if works_longer_than(TRANSITION_TIMING):
@@ -19,7 +15,8 @@ func default_lifecycle(_input: InputPackage):
 	else:
 		return "okay"
 
-func update(input: InputPackage, delta):
+
+func update(_input: InputPackage, _delta):
 	if works_longer_than(JUMP_TIMING):
 		if not jumped:
 			player.velocity.y += VERTICAL_SPEED_ADDED

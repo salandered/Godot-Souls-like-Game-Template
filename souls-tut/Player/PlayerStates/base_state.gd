@@ -3,21 +3,21 @@ class_name BasePlayerState
 
 
 var player: CharacterBody3D
-
+var animator: AnimationPlayer
 var resources: HumanoidResources
+var combat: HumanoidCombat
+var states_data_repo: StatesDataRepository
+var container: HumanoidStates
 
-# unique fields to redefine
 @export var animation: String
+@export var state_name: String
+@export var priority: int
 @export var backend_animation: String
-@export var animator: AnimationPlayer
-
-var state_name: String # deleted in episode 4...
 
 # I can tolerate up to two _costs, 
 # the moment I need a third one, I'll create a small ResourceCost class to pay them.
 @export var stamina_cost: float = 0
 
-# general fields for internal usage
 @onready var combos: Array[Combo]
 
 var enter_state_time: float
@@ -25,35 +25,15 @@ var enter_state_time: float
 # TODO: has_queued_state and queued_state can be one var (probably)
 # or queued_state is an array (wow)
 var has_queued_state: bool = false
-var queued_state: String = "none, drop error please"
+var queued_state: String = "nexistent queued state, error"
 
 var has_forced_state: bool = false
-var forced_state: String = "none, drop error please"
+var forced_state: String = "nonexistent forced state, error"
 
-const SPEED = 3.0
-@export var RUN_SPEED: float = 5.0
-
-## parameters windows incorporation way N2
-# here and below in methods because I chose this way
-var states_data_repo: StatesDataRepository
-
-
-# region: original velocity_by_input for RUN
-# func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-# 	var new_velocity = player.velocity
-	
-# 	var direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
-# 	new_velocity.x = direction.x * SPEED
-# 	new_velocity.z = direction.z * SPEED
-	
-# 	if not player.is_on_floor():
-# 		new_velocity.y -= gravity * delta
-	
-# 	return new_velocity
-# endregion
+var DURATION: float
 
 # region: FAIR DOCS: General States heir usage guide.
-
+#
 # > check_relevance function aims to be short and simple.
 # 	Its general structure is as follows: 
 #	if (state is ready to transition) :
@@ -66,7 +46,7 @@ var states_data_repo: StatesDataRepository
 # 	if you are tempted to add third branching operator into your check_relevance function,
 #	seriously consider if Combo can do this logic for you, you won't regret its usage I promise.
 #	(Combo is clickable even from comments btw)
-
+#
 # > update functions manages perframe behaviour of your BasePlayerState.
 #	There are two update types: constant change and a single dynamic update on some timing.
 #	To implement simple constant changes, try to find some physics abstraction for them to make
@@ -79,44 +59,49 @@ var states_data_repo: StatesDataRepository
 #	in any shape way or form in the States code directly. This way your BasePlayerState "backend" is free from
 #	thousand different ways someone (probably you from the future) can mess up your skeleton, scene composition,
 #	animations, names libraries etc.
-
+#
 # extends Node
 # class_name PlayerBaseState
-
-
+#
+#
 # var player: CharacterBody3D
-
-
+#
+#
 #  # transition logic
 # func check_relevance(input_data: InputData) -> String:
 # 	# todo - current check_relevance s in states look not optimized
 # 	print_debug("error, implement the check_relevance function on your state")
 # 	return "error, implement the check_relevance function on your state"
-
-
+#
+#
 # func update(input_data: InputData, delta: float):
 # 	pass
-
+#
 # func on_enter_state():
 # 	pass
-
+#
 # func on_exit_state():
 # 	pass
 #
 # endregion
 
 
-# When a transition occurs, we ask three questions: 
+# ep 4: When a transition occurs, we ask three questions: 
 # 1. does something from the past force us to transition somewhere? 
 # 2. If not, does something textual from the present modify our inputs? 
 # 3. if nothing above, what vanilla state wants to default to?
 func check_relevance(input: InputPackage) -> String:
+	if accepts_queueing():
+		check_combos(input)
+	
+	if has_queued_state and transitions_to_queued():
+		try_force_state(queued_state)
+		has_queued_state = false
+	
 	if has_forced_state:
 		has_forced_state = false
 		return forced_state
-	# nah, too early
-	check_combos(input) # but we need to individually deny combos
-	# too late
+		
 	return default_lifecycle(input) # and also to work in updates sometime
 
 
@@ -127,21 +112,21 @@ func check_relevance(input: InputPackage) -> String:
 func check_combos(input: InputPackage):
 	for combo: Combo in combos:
 		# print("COMBO", combo.triggered_state)
-		if combo.is_triggered(input) and resources.can_be_paid(player.model.states[combo.triggered_state]):
+		if combo.is_triggered(input) and resources.can_be_paid(container.states[combo.triggered_state]):
 			has_queued_state = true
 			queued_state = combo.triggered_state
 
 ## choosing the input with the highest priority that we can also pay for
 func best_input_that_can_be_paid(input: InputPackage) -> String:
-	var sorted_actions := PlayerState.sort_by_priority(input.actions)
-	# print("--- after sort_by_priority ", sorted_actions)
-	for action: String in sorted_actions:
-		if resources.can_be_paid(player.model.states[action]):
-			if player.model.states[action] == self:
+	input.actions.sort_custom(container.states_priority_sort)
+	for action in input.actions:
+		if resources.can_be_paid(container.states[action]):
+			if container.states[action] == self:
 				return "okay"
 			else:
 				return action
 	return "throwing because for some reason input.actions doesn't contain even idle"
+
 
 ## Updating may be not too far from current state updating: regeneration could be dependent on the current state.
 ## => define the base state `update_resources` function with delegating the job to the resources.
@@ -151,10 +136,35 @@ func update_resources(delta: float):
 		resources.update(delta)
 
 
-# INTERFACE METHODS
-func default_lifecycle(_input: InputPackage) -> String:
-	# can return idle, but I want this error to be thrown to make future's life easier
-	return "implement default lyfecycle pepega " + animation
+func transitions_to_queued() -> bool:
+	return states_data_repo.get_transitions_to_queued(backend_animation, get_progress())
+
+func accepts_queueing() -> bool:
+	return states_data_repo.get_accepts_queueing(backend_animation, get_progress())
+
+
+# # GET MODIFIERS BASED ON ANIMATION
+func is_vulnerable() -> bool:
+	return states_data_repo.get_vulnerable(backend_animation, get_progress())
+
+func is_interruptable() -> bool:
+	return states_data_repo.get_interruptable(backend_animation, get_progress())
+
+func is_parryable() -> bool:
+	return states_data_repo.get_parryable(backend_animation, get_progress())
+
+func get_root_position_delta(delta_time: float) -> Vector3:
+	return states_data_repo.get_root_delta_pos(backend_animation, get_progress(), delta_time)
+
+func right_weapon_hurts() -> bool:
+	return states_data_repo.get_right_weapon_hurts(backend_animation, get_progress())
+
+
+# "default-default", works for animations that just linger
+func default_lifecycle(input: InputPackage):
+	if works_longer_than(DURATION):
+		return best_input_that_can_be_paid(input)
+	return "okay"
 
 func update(_input: InputPackage, _delta: float):
 	pass
@@ -164,7 +174,6 @@ func on_enter_state():
 
 func on_exit_state():
 	pass
-# END INTERFACE METHODS
 
 func assign_combos():
 	for child in get_children():
@@ -176,16 +185,6 @@ func assign_combos():
 func pack_hit_data(_weapon: WeaponOh) -> HitData:
 	print("someone tries to get hit by default State")
 	return HitData.blank()
-
-# GET MODIFIERS BASED ON ANIMATION
-func is_vulnerable() -> bool:
-	return states_data_repo.get_vulnerable(backend_animation, get_progress())
-
-func is_interruptable() -> bool:
-	return states_data_repo.get_interruptable(backend_animation, get_progress())
-
-func is_parryable() -> bool:
-	return states_data_repo.get_parryable(backend_animation, get_progress())
 
 
 # DEFAULT BEHAVIOURS ON MODIFIERS
@@ -212,6 +211,7 @@ func try_force_state(new_forced_state: String):
 
 ## needed in states like run and sprint. will be here for now
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+	var RUN_SPEED := 5.0
 	var _velocity = Vector3.ZERO
 	var forward_speed = input.forward_input
 	var orbit_speed = input.orbit_input
@@ -230,6 +230,7 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	if forward_speed != 0.0:
 		# var grounded_target := fancy_camera.camera_nest.global_position
 		# grounded_target.y = player.global_position.y
+		# TODO: RUN_SPEED to export
 		_velocity -= player.global_position.direction_to(grounded_target) * forward_speed * RUN_SPEED
 
 	if orbit_speed != 0.0:

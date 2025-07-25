@@ -2,16 +2,17 @@ extends Node
 class_name PlayerModel
 
 # todo consider: not a fan of sharing logic between enemy/player
+
 @export var is_enemy: bool = false
 
+@export var player: CharacterBody3D
+@export var skeleton: Skeleton3D
+@export var animator: AnimationPlayer
+@export var combat: HumanoidCombat
+@export var resources: HumanoidResources
 
-@onready var player = $".."
-@onready var skeleton = %GeneralSkeleton
-@onready var animator = $SkeletonAnimator
-@onready var combat = $Combat as HumanoidCombat
-@onready var resources = $Resources as HumanoidResources
-
-@onready var active_weapon: WeaponOh = $RightWrist/WeaponSocket/SwordOh as SwordOh
+@export var active_weapon: WeaponOh
+@export var states_container: HumanoidStates
 # @onready var weapons = {
 # 	"sword" = $....Sword,
 # 	"bow" = $....Bow,
@@ -21,36 +22,11 @@ class_name PlayerModel
 
 var current_state: BasePlayerState
 
-@onready var states = {
-	# move
-	PlayerState.idle: $States/Idle,
-	PlayerState.run: $States/Run,
-	PlayerState.sprint: $States/Sprint,
-	PlayerState.jump_run: $States/JumpRun,
-	PlayerState.midair: $States/Midair,
-	PlayerState.landing_run: $States/LandingRun,
-	PlayerState.jump_sprint: $States/JumpSprint,
-	PlayerState.landing_sprint: $States/LandingSprint,
-	# combat
-	PlayerState.slash_1: $States/Slash1,
-	PlayerState.slash_2: $States/Slash2,
-	PlayerState.slash_3: $States/Slash3,
-	PlayerState.staggered: $States/Staggered,
-	PlayerState.parry: $States/Parry,
-	PlayerState.parried: $States/Parried,
-	PlayerState.riposte: $States/Riposte,
-	PlayerState.death: $States/Death,
-}
-
 
 func _ready():
-	assert(len(states) == 16) # some stability
-	current_state = states[PlayerState.idle]
-	for state: BasePlayerState in states.values():
-		state.player = player
-		state.resources = resources
-		state.states_data_repo = $StatesData
-		state.assign_combos()
+	states_container.player = player
+	states_container.accept_states()
+	current_state = states_container.states["idle"]
 
 
 func update(input: InputPackage, delta: float):
@@ -70,11 +46,10 @@ func update(input: InputPackage, delta: float):
 
 
 func switch_to(state: String):
-	# print(" = Playerstateswitching = ")
-	# print("", current_state, ' ->')
+	if not is_enemy:
+		print(current_state.state_name + " -> " + state)
 	current_state.on_exit_state()
-	current_state = states[state]
-	# print("", current_state)
+	current_state = states_container.states[state]
 	current_state.on_enter_state()
 	current_state.mark_enter_state()
 	resources.pay_resource_cost(current_state)
