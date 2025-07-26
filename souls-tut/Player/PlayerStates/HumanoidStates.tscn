@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://mb445vwvgkm" path="res://souls-tut/Player/PlayerModel/states_data_storage.gd" id="2_gw8ng"]
 [ext_resource type="Script" uid="uid://c56pthyjpp1oj" path="res://souls-tut/Player/PlayerStates/idle.gd" id="3_3i4ho"]
 [ext_resource type="PackedScene" uid="uid://bjxvmgetwrvkc" path="res://souls-tut/Player/PlayerStates/Combos/RiposteCombo.tscn" id="4_dk1be"]
-[ext_resource type="Script" uid="uid://pgbwugk4arw4" path="res://souls-tut/Player/PlayerStates/run.gd" id="5_x42n8"]
+[ext_resource type="Script" uid="uid://pgbwugk4arw4" path="res://souls-tut/Player/PlayerStates/run_.gd" id="5_x42n8"]
 [ext_resource type="Script" uid="uid://bg6x8m58hinma" path="res://souls-tut/Player/PlayerStates/sprint_.gd" id="6_anp4l"]
 [ext_resource type="Script" uid="uid://cjl44cm1nc1by" path="res://souls-tut/Player/PlayerStates/jump_run.gd" id="7_kqvhr"]
 [ext_resource type="Script" uid="uid://jbh115eat2yo" path="res://souls-tut/Player/PlayerStates/jump_sprint.gd" id="8_vafur"]

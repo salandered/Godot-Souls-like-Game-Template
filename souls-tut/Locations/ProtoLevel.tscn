@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=12 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://souls-tut/Assets/Textures/texture_07.png" id="1_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
 [ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://souls-tut/Assets/Textures/texture_09.png" id="3_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
-[ext_resource type="PackedScene" uid="uid://bnpi3bwbag2wk" path="res://souls-tut/Enemies/Humanoid/Enemy.tscn" id="5_fnxa0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -84,15 +83,3 @@ size = Vector3(2, 10, 2)
 
 [node name="Target" parent="." instance=ExtResource("4_ldsoa")]
 transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, 4.05916, 0, 6.08874)
-
-[node name="Enemy" parent="." instance=ExtResource("5_fnxa0")]
-transform = Transform3D(-0.0251998, 0, -0.999682, 0, 1, 0, 0.999682, 0, -0.0251998, 15.4347, 0, -7.9854)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_fnxa0")]
-transform = Transform3D(-0.101317, 0, -0.994854, 0, 1, 0, 0.994854, 0, -0.101317, 9.5099, 0, -14.6784)
-
-[node name="AI" parent="Enemy2" index="0"]
-mode = "spamming parry"
-
-[editable path="Enemy"]
-[editable path="Enemy2"]

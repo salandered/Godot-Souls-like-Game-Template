@@ -1,6 +1,9 @@
 extends Node
 class_name BasePlayerState
 
+@export var SPEED = 3.0
+@export var TURN_SPEED = 2
+@export var ANGULAR_SPEED = 13
 
 var player: CharacterBody3D
 var animator: AnimationPlayer
@@ -84,6 +87,37 @@ var DURATION: float
 # 	pass
 #
 # endregion
+
+
+func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+	var _velocity := Vector3.ZERO
+	var forward_speed := input.forward_input
+	var orbit_speed := input.orbit_input
+
+	if player.fancy_camera.is_target_locked:
+		forward_speed *= -1
+		orbit_speed *= -1
+
+	var grounded_target: Vector3
+	if player.fancy_camera.is_target_locked and player.fancy_camera.locked_target:
+		grounded_target = player.fancy_camera.locked_target.global_position
+	else:
+		grounded_target = player.fancy_camera.camera_nest.global_position
+	grounded_target.y = player.global_position.y
+
+	if forward_speed != 0.0:
+		_velocity -= player.global_position.direction_to(grounded_target) \
+					 * forward_speed * SPEED
+
+	if orbit_speed != 0.0:
+		var d: float = orbit_speed * SPEED * delta
+		var target_direction := grounded_target - player.global_position
+		var distance_to_target := target_direction.length()
+		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
+		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
+		var d_vector := grounded_target - rotated_dir - player.global_position
+		_velocity += d_vector / delta
+	return _velocity
 
 
 # ep 4: When a transition occurs, we ask three questions: 
@@ -207,46 +241,6 @@ func try_force_state(new_forced_state: String):
 		forced_state = new_forced_state
 	elif PlayerState.states_priority[new_forced_state] >= PlayerState.states_priority[forced_state]:
 		forced_state = new_forced_state
-
-
-## needed in states like run and sprint. will be here for now
-func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-	var RUN_SPEED := 5.0
-	var _velocity = Vector3.ZERO
-	var forward_speed = input.forward_input
-	var orbit_speed = input.orbit_input
-
-	if player.fancy_camera.is_target_locked:
-		forward_speed *= -1
-		orbit_speed *= -1
-
-	var grounded_target: Vector3
-	if player.fancy_camera.is_target_locked and player.fancy_camera.locked_target:
-		grounded_target = player.fancy_camera.locked_target.global_position
-	else:
-		grounded_target = player.fancy_camera.camera_nest.global_position
-	grounded_target.y = player.global_position.y
-	
-	if forward_speed != 0.0:
-		# var grounded_target := fancy_camera.camera_nest.global_position
-		# grounded_target.y = player.global_position.y
-		# TODO: RUN_SPEED to export
-		_velocity -= player.global_position.direction_to(grounded_target) * forward_speed * RUN_SPEED
-
-	if orbit_speed != 0.0:
-		var d: float = orbit_speed * RUN_SPEED * delta
-		# var grounded_target := fancy_camera.camera_nest.global_position
-		# grounded_target.y = player.global_position.y
-
-		var target_direction := grounded_target - player.global_position # R1
-		var distance_to_target := target_direction.length()
-		var alpha = -2.0 * asin(d / (2.0 * distance_to_target))
-		var rotated_dir := target_direction.rotated(Vector3.UP, alpha) # R2
-		var orb_pt = grounded_target + rotated_dir
-		var d_vector := grounded_target - rotated_dir - player.global_position
-		_velocity += d_vector / delta
-
-	return _velocity.limit_length(RUN_SPEED)
 
 
 # TIME MANAGEMENT

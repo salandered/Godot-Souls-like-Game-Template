@@ -10,5 +10,3 @@ func default_lifecycle(input) -> String:
 
 func on_enter_state():
 	player.velocity = Vector3.ZERO
-
-	player.velocity = Vector3.ZERO

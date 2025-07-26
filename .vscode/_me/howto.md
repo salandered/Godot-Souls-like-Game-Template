@@ -5,6 +5,10 @@
 macOS/Linux:
 ~/.vscode/extensions
 
+
+## Keymap
+copy is in _me
+
 ## Godot theme
 name: ryanabx.godot-vscode-theme-0.0.5 extension
 
