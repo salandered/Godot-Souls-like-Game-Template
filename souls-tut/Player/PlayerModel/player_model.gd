@@ -40,14 +40,13 @@ func update(input: InputPackage, delta: float):
 	if relevance != "okay": # todo not okay
 		switch_to(relevance)
 
-	current_state.update_resources(delta)
-	current_state.update(input, delta)
+	current_state._update(input, delta)
 	# print("")
 
 
 func switch_to(state: String):
-	if not is_enemy:
-		print(current_state.state_name + " -> " + state)
+	# if not is_enemy:
+		# print(current_state.state_name + " -> " + state)
 	current_state.on_exit_state()
 	current_state = states_container.states[state]
 	current_state.on_enter_state()

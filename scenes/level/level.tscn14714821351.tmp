@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c34ecnm8aoavq" path="res://scenes/actors/bee.tscn" id="8_ss4b2"]
 [ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://scenes/actors/skeleton_character.tscn" id="9_qjqsm"]
 [ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://scripts/ui/FullScreenHandler.gd" id="10_0fkkc"]
-[ext_resource type="PackedScene" uid="uid://cii2rketpnbly" path="res://cat_adopt/enemy-adopting/enemy_base_root_motion-ad.tscn" id="10_m0bv2"]
+[ext_resource type="PackedScene" uid="uid://cii2rketpnbly" path="res://misc/cat_adopt/enemy-adopting/enemy_base_root_motion-ad.tscn" id="10_m0bv2"]
 [ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="11_wyi7n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u52ul"]

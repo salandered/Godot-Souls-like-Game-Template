@@ -26,14 +26,12 @@ func default_lifecycle(_input: InputPackage):
 
 
 func update(_input: InputPackage, _delta):
-	var _velocity := velocity_by_input(_input, _delta)
-	rotate_player(_velocity, _delta)
 	player.velocity.y -= gravity * _delta
 	player.move_and_slide()
 
 ## Divide velocity and look direction
-func rotate_player(_velocity: Vector3, delta: float):
-	var input_direction := _velocity.normalized()
+func process_input_vector(input: InputPackage, delta: float):
+	var input_direction := velocity_by_input(input, delta).normalized()
 	var input_delta_vector = input_direction * DELTA_VECTOR_LENGTH
 	
 	jump_direction = (jump_direction + input_delta_vector).limit_length(player.velocity.length())

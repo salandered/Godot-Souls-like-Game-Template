@@ -27,6 +27,7 @@ var is_target_locked := false
 var locked_target: Node3D
 
 func _ready() -> void:
+	# TODO: length is changing after locking
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	print('FancyCamera ready ')
 	print("		root_player ", root_player)

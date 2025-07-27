@@ -3,7 +3,6 @@ class_name BasePlayerState
 
 @export var SPEED = 3.0
 @export var TURN_SPEED = 2
-@export var ANGULAR_SPEED = 13
 
 var player: CharacterBody3D
 var animator: AnimationPlayer
@@ -16,6 +15,7 @@ var container: HumanoidStates
 @export var state_name: String
 @export var priority: int
 @export var backend_animation: String
+@export var tracking_angular_speed: float = 10
 
 # I can tolerate up to two _costs, 
 # the moment I need a third one, I'll create a small ResourceCost class to pay them.
@@ -161,6 +161,11 @@ func best_input_that_can_be_paid(input: InputPackage) -> String:
 				return action
 	return "throwing because for some reason input.actions doesn't contain even idle"
 
+func _update(input: InputPackage, delta: float):
+	update_resources(delta)
+	if tracks_input_vector():
+		process_input_vector(input, delta)
+	update(input, delta)
 
 ## Updating may be not too far from current state updating: regeneration could be dependent on the current state.
 ## => define the base state `update_resources` function with delegating the job to the resources.
@@ -169,6 +174,21 @@ func best_input_that_can_be_paid(input: InputPackage) -> String:
 func update_resources(delta: float):
 		resources.update(delta)
 
+## default implementation
+## To redefine the processing, override the method in the state script.
+## To stop the direction input completely for a state
+##     - either false the backend track, or redefine the state getter for the window to return false
+##     - or override the processing with pass
+func process_input_vector(input: InputPackage, delta: float):
+	# var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
+	# todo: this is that strange valocity chain
+	var input_direction := velocity_by_input(input, delta).normalized()
+	var face_direction = player.basis.z
+	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
+	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
+
+
+# GET MODIFIERS BASED ON BACKEND ANIMATION
 
 func transitions_to_queued() -> bool:
 	return states_data_repo.get_transitions_to_queued(backend_animation, get_progress())
@@ -176,8 +196,12 @@ func transitions_to_queued() -> bool:
 func accepts_queueing() -> bool:
 	return states_data_repo.get_accepts_queueing(backend_animation, get_progress())
 
+func tracks_input_vector() -> bool:
+	return states_data_repo.tracks_input_vector(backend_animation, get_progress())
 
-# # GET MODIFIERS BASED ON ANIMATION
+func accepts_tracking_direction() -> bool:
+	return states_data_repo.accepts_tracking_direction(backend_animation, get_progress())
+
 func is_vulnerable() -> bool:
 	return states_data_repo.get_vulnerable(backend_animation, get_progress())
 
@@ -239,7 +263,7 @@ func try_force_state(new_forced_state: String):
 	if not has_forced_state:
 		has_forced_state = true
 		forced_state = new_forced_state
-	elif PlayerState.states_priority[new_forced_state] >= PlayerState.states_priority[forced_state]:
+	elif container.states[new_forced_state].priority >= container.states[forced_state].priority:
 		forced_state = new_forced_state
 
 

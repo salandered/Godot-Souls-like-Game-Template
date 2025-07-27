@@ -38,7 +38,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg")
 
 [file_customization]
 
@@ -54,7 +54,6 @@ folder_colors={
 "res://-assets-/x_lesson/": "gray",
 "res://-assets-/x_lesson/scripts/": "teal",
 "res://addons/": "gray",
-"res://cat_adopt/": "purple",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
 "res://misc/trash_bin/": "red",

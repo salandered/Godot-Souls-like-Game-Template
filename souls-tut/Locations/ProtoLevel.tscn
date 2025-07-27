@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=13 format=3 uid="uid://b6h2mf8m3b8iu"]
 
-[ext_resource type="Texture2D" uid="uid://cxakm34q14rbi" path="res://souls-tut/Assets/Textures/texture_07.png" id="1_fnxa0"]
+[ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="2_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
-[ext_resource type="Texture2D" uid="uid://q67efx1u7rk1" path="res://souls-tut/Assets/Textures/texture_09.png" id="3_fnxa0"]
+[ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/models/1/textures/Stone Dirt Wall 02_diffuse.png" id="3_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
+[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/MobFSM/MobFSM.tscn" id="5_fnxa0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,18 +20,17 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldsoa"]
-albedo_color = Color(1, 0.524, 0.16, 1)
-albedo_texture = ExtResource("1_fnxa0")
+albedo_color = Color(0.23, 0.1242, 0.1242, 1)
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkxf5"]
 albedo_color = Color(1, 0.113725, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bmwg"]
-albedo_texture = ExtResource("3_fnxa0")
+albedo_texture = ExtResource("2_fnxa0")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip2nn"]
-albedo_texture = ExtResource("3_fnxa0")
+albedo_texture = ExtResource("3_8ohcw")
 uv1_triplanar = true
 
 [node name="ProtoLevel" type="Node3D"]
@@ -50,7 +50,7 @@ collision_layer = 3
 size = Vector3(64.4893, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("2_ldsoa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4125, -0.5, 0)
 
 [node name="PlayerDebugSphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
@@ -83,3 +83,7 @@ size = Vector3(2, 10, 2)
 
 [node name="Target" parent="." instance=ExtResource("4_ldsoa")]
 transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, 4.05916, 0, 6.08874)
+
+[node name="Mob" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.385796, -12.4576)
+player = NodePath("../Player")

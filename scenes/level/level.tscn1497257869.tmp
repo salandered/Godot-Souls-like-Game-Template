@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dtsn2vrtwqjvj" path="res://scenes/actors/skeleton_character.tscn" id="9_qjqsm"]
 [ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://scripts/ui/FullScreenHandler.gd" id="10_0fkkc"]
 [ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="11_wyi7n"]
-[ext_resource type="PackedScene" uid="uid://cq2lr6sclvutj" path="res://cat_adopt/enemy/enemy_base_root_motion.tscn" id="12_m0bv2"]
+[ext_resource type="PackedScene" uid="uid://cq2lr6sclvutj" path="res://misc/cat_adopt/enemy/enemy_base_root_motion.tscn" id="12_m0bv2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u52ul"]
 

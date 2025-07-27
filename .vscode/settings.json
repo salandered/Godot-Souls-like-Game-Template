@@ -41,7 +41,7 @@
 		"editor.findMatchHighlightBackground": "#ffffff00", // all other matches
 		"editor.findMatchHighlightBorder": "#feffc686",
 		// COLORFUL FOLDERS
-		"folderPathColor.custom1": "#fccbdd",
+		"folderPathColor.custom1": "#ffa9c8",
 		"folderPathColor.custom2": "#ff8aef",
 		"folderPathColor.custom3": "#c3c78d",
 		"folderPathColor.custom4": "#a4d4b2",
@@ -59,6 +59,10 @@
 		{
 			"path": "scripts",
 			"color": "custom4"
+		},
+		{
+			"path": "souls-tut/Enemies",
+			"color": "custom1"
 		},
 	],
 	// No built in git color on files (conflict with colorful folders)

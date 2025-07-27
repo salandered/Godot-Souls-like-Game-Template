@@ -21,6 +21,7 @@ script = ExtResource("1_16fd4")
 unique_name_in_owner = true
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="CameraMount"]
+visible = false
 material_override = SubResource("StandardMaterial3D_bv6qf")
 radius = 0.283265
 
@@ -37,6 +38,7 @@ material_override = SubResource("StandardMaterial3D_3e4lf")
 unique_name_in_owner = true
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="FocusPoint"]
+visible = false
 material_override = SubResource("StandardMaterial3D_7lptl")
 radius = 0.356115
 

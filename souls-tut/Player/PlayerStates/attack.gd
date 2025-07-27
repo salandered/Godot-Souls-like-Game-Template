@@ -17,7 +17,6 @@ func default_lifecycle(input: InputPackage) -> String:
 	
 func update(_input: InputPackage, delta):
 	move_player(delta)
-	
 	player.model.active_weapon.is_attacking = right_weapon_hurts()
 
 

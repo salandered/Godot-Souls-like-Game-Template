@@ -6,11 +6,11 @@
 [ext_resource type="Script" uid="uid://bdmng5y2k5j0o" path="res://souls-tut/Player/Input/input_gatherer.gd" id="4_k1mdb"]
 [ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://souls-tut/fancy-camera/local_camera.tscn" id="6_e8a10"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d0r5q"]
-radius = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8a10"]
 albedo_color = Color(0.0962022, 0.627141, 0.55397, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d0r5q"]
+radius = 0.2
 
 [node name="PlayerPack" type="CharacterBody3D" node_paths=PackedStringArray("input_gatherer", "model", "visuals", "collider")]
 script = ExtResource("1_siche")
@@ -27,10 +27,6 @@ player = NodePath("..")
 [node name="Input" type="Node" parent="."]
 script = ExtResource("4_k1mdb")
 
-[node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_d0r5q")
-
 [node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("6_e8a10")]
 unique_name_in_owner = true
 look_at_ = NodePath("../CameraFocus")
@@ -43,5 +39,9 @@ transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 1.04239, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0200904)
 material_override = SubResource("StandardMaterial3D_e8a10")
 radius = 0.3
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_d0r5q")
 
 [editable path="FancyCamera"]

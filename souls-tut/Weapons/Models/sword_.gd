@@ -10,4 +10,6 @@ func _ready():
 
 
 func get_hit_data():
+	if holder == null:
+		print("Holder is nil")
 	return holder.current_state.pack_hit_data(self)

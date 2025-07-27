@@ -230,7 +230,7 @@ bind/64/bone = -1
 bind/64/pose = Transform3D(1, 0, -1.36424e-12, -1.59162e-12, -7.35163e-08, 1, -1.86265e-09, -1, -1.03326e-07, -0.0820778, -0.17246, 1.40793e-06)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pcc"]
-albedo_color = Color(1, 0.420167, 0.29, 1)
+albedo_color = Color(0.29, 0.668667, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sswca"]
 resource_name = "Beta_HighLimbsGeoSG3"
@@ -259,7 +259,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fapch"]
-albedo_color = Color(0.270588, 0.333333, 1, 1)
+albedo_color = Color(0.42, 0.468333, 1, 1)
 
 [node name="Visuals" type="Node3D" node_paths=PackedStringArray("beta_joints", "beta_surface", "sword_visuals_1", "stamina_label", "health_label")]
 script = ExtResource("1_o4em2")

@@ -50,3 +50,13 @@ func get_right_weapon_hurts(animation: String, timecode: float) -> bool:
 	var data = state_database.get_animation(animation)
 	var track = data.find_track("StatesDatabase:right_hand_weapon_hurts", Animation.TYPE_VALUE)
 	return state_database.get_boolean_value(animation, track, timecode)
+
+func tracks_input_vector(animation: String, timecode: float) -> bool:
+	var data = state_database.get_animation(animation)
+	var track = data.find_track("StatesDatabase:tracks_input_vector", Animation.TYPE_VALUE)
+	return state_database.get_boolean_value(animation, track, timecode)
+
+func accepts_tracking_direction(animation: String, timecode: float) -> bool:
+	var data = state_database.get_animation(animation)
+	var track = data.find_track("StatesDatabase:accepts_tracking_direction", Animation.TYPE_VALUE)
+	return state_database.get_boolean_value(animation, track, timecode)

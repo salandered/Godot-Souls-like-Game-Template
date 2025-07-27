@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://eec5ujuowf51"]
+[gd_scene load_steps=73 format=3 uid="uid://eec5ujuowf51"]
 
 [ext_resource type="Script" uid="uid://b6mars68cfupu" path="res://souls-tut/Player/PlayerModel/player_model.gd" id="1_jqlg1"]
 [ext_resource type="Script" uid="uid://bvrdyfinqtson" path="res://souls-tut/Player/PlayerModel/combat.gd" id="2_enhu3"]
@@ -16,7 +16,6 @@
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/jump_run.res" id="11_cw3v7"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/awaiting_ripost.res" id="12_0274k"]
 [ext_resource type="PackedScene" uid="uid://6t1bl235yea4" path="res://souls-tut/Weapons/Models/Sword.tscn" id="12_u3ttd"]
-[ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://souls-tut/Player/PlayerModel/humanoid_hitbox.gd" id="12_xlo1i"]
 [ext_resource type="Script" uid="uid://jdwlw1l5wj5a" path="res://souls-tut/Player/PlayerModel/downcast.gd" id="13_8rqv5"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/death.res" id="13_n22nm"]
 [ext_resource type="Script" uid="uid://c56pthyjpp1oj" path="res://souls-tut/Player/PlayerStates/idle.gd" id="14_8sqpr"]
@@ -42,6 +41,7 @@
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/ripost.res" id="28_25vik"]
 [ext_resource type="Script" uid="uid://c2df0ndjfoshm" path="res://souls-tut/Player/PlayerStates/staggered.gd" id="30_muxpp"]
 [ext_resource type="Script" uid="uid://csrw3sq3i40g0" path="res://souls-tut/Player/PlayerStates/parry.gd" id="31_elypd"]
+[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://souls-tut/Player/PlayerModel/Hurtbox.tscn" id="31_lyjjr"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/slash_3.res" id="32_f8mov"]
 [ext_resource type="Script" uid="uid://besu8ffe3adxd" path="res://souls-tut/Player/PlayerStates/parried.gd" id="32_rfy5o"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/sprint.res" id="32_yvwmm"]
@@ -79,10 +79,6 @@ _data = {
 &"sprint": ExtResource("32_yvwmm"),
 &"staggered": ExtResource("23_2lt0w")
 }
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47cuq"]
-radius = 0.3
-height = 1.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djdo1"]
 albedo_color = Color(0, 0.639216, 0, 1)
@@ -177,6 +173,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_hvv52"]
 resource_name = "idle_params"
@@ -260,6 +268,18 @@ tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -353,6 +373,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_k4gcf"]
 resource_name = "jump_sprint_params"
@@ -440,6 +472,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.0657),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_btaql"]
@@ -529,6 +573,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.250889),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_g3aab"]
 resource_name = "landing_sprint_params"
@@ -616,6 +672,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_rn0qe"]
@@ -713,6 +781,18 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.6591, 0.7853),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.338599, 0.660019),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -817,6 +897,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.187062, 0.398938),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_26uy7"]
 resource_name = "midair_params"
@@ -905,92 +997,17 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
-
-[sub_resource type="Animation" id="Animation_pkrgc"]
-resource_name = "params_template"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StatesDatabase:is_parryable")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StatesDatabase:is_interruptable")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("StatesDatabase:is_grabable")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("StatesDatabase:root_position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_1phgd"]
@@ -1075,6 +1092,18 @@ tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1168,6 +1197,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_24p3a"]
 resource_name = "riposte_params"
@@ -1251,6 +1292,18 @@ tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1344,6 +1397,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_8w4kj"]
 resource_name = "slash_3_params"
@@ -1431,6 +1496,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_np6q6"]
@@ -1520,6 +1597,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_4hl1x"]
 resource_name = "staggered_params"
@@ -1608,6 +1697,129 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_pkrgc"]
+resource_name = "template_params"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_udg8f"]
 _data = {
@@ -1620,14 +1832,14 @@ _data = {
 &"longsword_1_params": SubResource("Animation_rn0qe"),
 &"longsword_2_params": SubResource("Animation_7m6go"),
 &"midair_params": SubResource("Animation_26uy7"),
-&"params_template": SubResource("Animation_pkrgc"),
 &"parried_params": SubResource("Animation_1phgd"),
 &"parry_params": SubResource("Animation_dg7sv"),
 &"riposte_params": SubResource("Animation_24p3a"),
 &"run_params": SubResource("Animation_knkca"),
 &"slash_3_params": SubResource("Animation_8w4kj"),
 &"sprint_params": SubResource("Animation_np6q6"),
-&"staggered_params": SubResource("Animation_4hl1x")
+&"staggered_params": SubResource("Animation_4hl1x"),
+&"template_params": SubResource("Animation_pkrgc")
 }
 
 [node name="PlayerModel" type="Node3D" node_paths=PackedStringArray("skeleton", "animator", "combat", "resources", "active_weapon", "states_container")]
@@ -2123,15 +2335,8 @@ bone_idx = 0
 use_external_skeleton = true
 external_skeleton = NodePath("../GeneralSkeleton")
 
-[node name="Hitbox" type="Area3D" parent="Root"]
-transform = Transform3D(1, 1.86265e-09, 0, 1.86265e-09, 1, 1.49012e-08, -3.72529e-09, 1.49012e-08, 1, 0, -0.055, 0)
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("12_xlo1i")
-
-[node name="HitboxCollider" type="CollisionShape3D" parent="Root/Hitbox"]
-transform = Transform3D(1, -1.21072e-08, 3.72529e-09, 9.31323e-10, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_47cuq")
+[node name="HurtBox" parent="Root" node_paths=PackedStringArray("processor") instance=ExtResource("31_lyjjr")]
+processor = NodePath("../..")
 
 [node name="RightWrist" type="BoneAttachment3D" parent="."]
 transform = Transform3D(-8.0678e-08, -1, 1.19209e-07, -2.79397e-08, -1.19209e-07, -1, 1, -8.0678e-08, -2.79397e-08, -0.713332, 1.44057, -0.0554854)
@@ -2143,7 +2348,7 @@ external_skeleton = NodePath("../GeneralSkeleton")
 [node name="WeaponSocket" type="Node3D" parent="RightWrist"]
 transform = Transform3D(1, 1.78814e-07, -4.47035e-07, 5.36442e-07, 1, 7.7486e-07, 3.72529e-07, -4.76837e-07, 1, 0.00821424, 0.0627739, 0.0286357)
 
-[node name="SwordOh" parent="RightWrist/WeaponSocket" node_paths=PackedStringArray("holder") instance=ExtResource("12_u3ttd")]
+[node name="SwordOh" parent="RightWrist/WeaponSocket" node_paths=PackedStringArray("holder") groups=["players_weapon"] instance=ExtResource("12_u3ttd")]
 transform = Transform3D(0.155062, 0.932331, 0.326672, -0.876806, 0.282232, -0.389304, -0.455157, -0.226062, 0.861236, 0, 0, 0)
 collision_mask = 4
 holder = NodePath("../../..")
@@ -2177,6 +2382,8 @@ libraries = {
 }
 script = ExtResource("35_n22nm")
 transitions_to_queued = true
+tracks_input_vector = true
+accepts_tracking_direction = true
 
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource("14_8sqpr")
@@ -2194,6 +2401,7 @@ animation = "run"
 state_name = "run"
 priority = 2
 backend_animation = "run_params"
+tracking_angular_speed = 15.0
 
 [node name="Sprint" type="Node" parent="States"]
 script = ExtResource("16_oafsk")
@@ -2240,6 +2448,7 @@ priority = 10
 backend_animation = "landing_sprint_params"
 
 [node name="Longsword1" parent="States" instance=ExtResource("45_n22nm")]
+RELEASES_PRIORITY = 1.2
 animation = "longsword_1"
 state_name = "longsword_1"
 priority = 15
@@ -2251,6 +2460,7 @@ primary_input = "longsword_1"
 triggered_state = "longsword_2"
 
 [node name="Longsword2" parent="States" instance=ExtResource("45_n22nm")]
+RELEASES_PRIORITY = 1.06
 animation = "longsword_2"
 state_name = "longsword_2"
 priority = 15
