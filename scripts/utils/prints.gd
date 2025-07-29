@@ -1,6 +1,13 @@
 class_name Print extends RefCounted
 
 
+static func print_debug_(text, info_indents: int = 0):
+	var tabs_prefix = ""
+	if info_indents:
+		for i in range(info_indents):
+			tabs_prefix += "    "
+	print(info_indents, "[DEBUG] ", text)
+
 static func print_ready(node: Node, info_indents: int = 0):
 	print("||", node.name, " ready()")
 	print_info(node, "", 1)

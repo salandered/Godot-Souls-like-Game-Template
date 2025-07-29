@@ -1856,6 +1856,8 @@ script = ExtResource("2_th5lj")
 
 [node name="Resources" type="Node" parent="."]
 script = ExtResource("2_ymymu")
+health = 400.0
+max_health = 400.0
 stamina = 300.0
 max_stamina = 300.0
 

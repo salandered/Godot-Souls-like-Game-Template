@@ -44,4 +44,28 @@ radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_d0r5q")
 
+[node name="debug_labels" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="debug_labels"]
+offset_left = 684.0
+offset_top = 5.0
+offset_right = 795.0
+offset_bottom = 54.0
+text = "nest to player:
+"
+
+[node name="Label2" type="Label" parent="debug_labels"]
+offset_left = 687.0
+offset_top = 36.0
+offset_right = 823.0
+offset_bottom = 59.0
+text = "camera to player:"
+
+[node name="Label3" type="Label" parent="debug_labels"]
+offset_left = 686.0
+offset_top = 70.0
+offset_right = 822.0
+offset_bottom = 93.0
+text = "offset"
+
 [editable path="FancyCamera"]

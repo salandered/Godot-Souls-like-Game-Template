@@ -35,7 +35,8 @@ func process_input_vector(input: InputPackage, delta: float):
 	var input_delta_vector = input_direction * DELTA_VECTOR_LENGTH
 	
 	jump_direction = (jump_direction + input_delta_vector).limit_length(player.velocity.length())
-	player.look_at(player.global_position - jump_direction)
+	if jump_direction.length_squared() > 0.0001:
+		player.look_at(player.global_position - jump_direction)
 	
 	var new_velocity = (player.velocity + input_delta_vector).limit_length(player.velocity.length())
 	player.velocity = new_velocity

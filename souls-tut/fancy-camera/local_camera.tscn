@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl7w5h28u6d36"]
+[gd_scene load_steps=9 format=3 uid="uid://dl7w5h28u6d36"]
 
 [ext_resource type="Script" uid="uid://cpfh86vdgd0ep" path="res://souls-tut/fancy-camera/fancy_camera.gd" id="1_16fd4"]
 [ext_resource type="Script" uid="uid://cdvueio120xey" path="res://souls-tut/fancy-camera/locked_state.gd" id="2_cq342"]
@@ -7,12 +7,18 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bv6qf"]
 albedo_color = Color(0.939333, 0.09, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lfwa"]
+albedo_color = Color(1, 0.991667, 0.5, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e4lf"]
 albedo_color = Color(0.0884501, 0.61, 0.061, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lptl"]
 albedo_color = Color(1, 0.16, 0.174, 1)
 metallic = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5bba"]
+albedo_color = Color(0.21, 0.21, 0.21, 1)
 
 [node name="FancyCamera" type="Node"]
 script = ExtResource("1_16fd4")
@@ -25,22 +31,27 @@ visible = false
 material_override = SubResource("StandardMaterial3D_bv6qf")
 radius = 0.283265
 
+[node name="CSGBox3D" type="CSGBox3D" parent="CameraMount"]
+transform = Transform3D(0.973625, 0, 0, 0, 0.795634, 0, 0, 0, 0.415539, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6lfwa")
+size = Vector3(0.289307, 0.341797, 0.743164)
+
 [node name="CameraNest" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.43215, 6.11606)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraNest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.991808)
-visible = false
+[node name="CSGSphereNest" type="CSGSphere3D" parent="CameraNest"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0277233)
 material_override = SubResource("StandardMaterial3D_3e4lf")
+radius = 0.7
 
 [node name="FocusPoint" type="Node3D" parent="."]
 unique_name_in_owner = true
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="FocusPoint"]
-visible = false
 material_override = SubResource("StandardMaterial3D_7lptl")
-radius = 0.356115
+radius = 0.2
 
 [node name="LockedCamera" type="Node" parent="."]
 unique_name_in_owner = true
@@ -56,5 +67,5 @@ transform = Transform3D(1, 0, 0, 0, 0.872752, 0.488164, 0, -0.488164, 0.872752, 
 current = true
 fov = 50.2
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="PlayerCamera"]
-visible = false
+[node name="CSGBox3D" type="CSGBox3D" parent="PlayerCamera"]
+material_override = SubResource("StandardMaterial3D_g5bba")
