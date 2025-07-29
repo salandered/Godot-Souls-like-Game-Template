@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=23 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="2_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/models/1/textures/Stone Dirt Wall 02_diffuse.png" id="3_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/MobFSM/MobFSM.tscn" id="5_fnxa0"]
+[ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://souls-tut/Enemies/Gundyr/nonHFSM/Gundyr.tscn" id="6_8ohcw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,10 +18,14 @@ sky_material = SubResource("ProceduralSkyMaterial_jw8o1")
 background_mode = 2
 sky = SubResource("Sky_t1f0q")
 tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldsoa"]
 albedo_color = Color(0.23, 0.1242, 0.1242, 1)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
+albedo_color = Color(0.13, 0.222, 0.25, 1)
+metallic = 1.0
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkxf5"]
@@ -33,10 +38,48 @@ albedo_texture = ExtResource("2_fnxa0")
 albedo_texture = ExtResource("3_8ohcw")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ohcw"]
+albedo_color = Color(0.7928, 0.8, 0.368, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfelf"]
+albedo_color = Color(0.15, 0.915, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_364n8"]
+albedo_color = Color(0.136167, 0.43, 0, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ohcw"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hfelf"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_364n8"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_6a1yn"]
+input_0/name = "state_0"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "state_1"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ohcw"]
+graph_offset = Vector2(13.0771, 165.596)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_hfelf")
+nodes/Animation/position = Vector2(280, 280)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_8ohcw")
+"nodes/Animation 2/position" = Vector2(260, 460)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_364n8")
+nodes/Blend2/position = Vector2(799.785, 335.055)
+nodes/Transita/node = SubResource("AnimationNodeTransition_6a1yn")
+nodes/Transita/position = Vector2(520, 300)
+node_connections = [&"Blend2", 0, &"Transita", &"Transita", 0, &"Animation", &"Transita", 1, &"Animation 2"]
+
 [node name="ProtoLevel" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(0.9, 0.955, 1, 1)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -47,43 +90,112 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_ldsoa")
 use_collision = true
 collision_layer = 3
-size = Vector3(64.4893, 1, 45.0029)
+size = Vector3(117.309, 1, 45.0029)
+
+[node name="Floor2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.7929, 36.4189)
+material_override = SubResource("StandardMaterial3D_6a1yn")
+use_collision = true
+collision_layer = 3
+size = Vector3(117.309, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("2_ldsoa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4125, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4125, -0.5, 8.39536)
 
 [node name="PlayerDebugSphere" type="CSGSphere3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_qkxf5")
 radius = 0.2
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.918605, 0.395177, 0, -0.395177, 0.918605, 0, 5.32085, 8.02546)
+[node name="Mob" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7839, -0.385796, -9.72842)
+player = NodePath("../Player")
 
-[node name="Box1" type="CSGBox3D" parent="."]
+[node name="props" type="Node" parent="."]
+
+[node name="Box1" type="CSGBox3D" parent="props"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90411, 0.504346, 1.79941)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
 size = Vector3(2, 2, 2)
 
-[node name="Box2" type="CSGBox3D" parent="."]
+[node name="Box2" type="CSGBox3D" parent="props"]
 transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 3.28412, 0.504346, -3.06418)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
 size = Vector3(2, 2, 2)
 
-[node name="Box3" type="CSGBox3D" parent="."]
+[node name="Box3" type="CSGBox3D" parent="props"]
 transform = Transform3D(-0.249653, -0.968335, 0, 0.968335, -0.249653, 0, 0, 0, 1, -4.61402, -0.635017, 2.20094)
 material_override = SubResource("StandardMaterial3D_ip2nn")
 use_collision = true
 collision_layer = 3
 size = Vector3(2, 10, 2)
 
-[node name="Target" parent="." instance=ExtResource("4_ldsoa")]
-transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, 4.05916, 0, 6.08874)
+[node name="Box4" type="CSGBox3D" parent="props"]
+transform = Transform3D(-0.00216117, -0.00838259, 0.999963, 0.756532, -0.653946, -0.00384691, 0.653954, 0.756495, 0.00775499, -24.9253, -7.57285, 32.6662)
+material_override = SubResource("StandardMaterial3D_ip2nn")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 29.3169, 2)
 
-[node name="Mob" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.385796, -12.4576)
+[node name="Target" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, -21.4792, 0, 13.3959)
+material_override = SubResource("StandardMaterial3D_8ohcw")
+label = "yellow"
+
+[node name="Target2" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.755734, 0, 0.677248, 0, 2.47654, 0, -0.677248, 0, 0.755734, -21.4792, 0, -7.73452)
+label = "red"
+
+[node name="Target4" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.33271, 0, 0.958699, 0, 2.47654, 0, -0.958699, 0, 0.33271, -29.1486, 0, 0.558307)
+material_override = SubResource("StandardMaterial3D_hfelf")
+label = "blue"
+
+[node name="Target3" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.755734, 0, 0.677248, 0, 2.47654, 0, -0.677248, 0, 0.755734, -51.0469, 0, -7.73452)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "green"
+
+[node name="Target5" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.11903, 0, 1.00779, 0, 2.47654, 0, -1.00779, 0, 0.11903, -36.9728, 0, 11.6034)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_2"
+
+[node name="Target6" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(-0.127697, 0, 1.00672, 0, 2.47654, 0, -1.00672, 0, -0.127697, -38.1401, 0, 9.37053)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_3"
+
+[node name="Target7" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.310874, 0, 0.966, 0, 2.47654, 0, -0.966, 0, 0.310874, -38.1401, 0, 6.21931)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_4"
+
+[node name="Target8" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, -36.2618, 0, 15.0567)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_5"
+
+[node name="TestCamera1" type="Camera3D" parent="props" groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 0.53534, 0.844636, 0, -0.844636, 0.53534, -15.347, 11.5904, 16.3507)
+
+[node name="TestCamera2" type="Camera3D" parent="props" groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 0.0339225, 0.999424, 0, -0.999424, 0.0339225, -23.7169, 45.315, 13.2688)
+fov = 29.0
+near = 0.023
+
+[node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_8ohcw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4774, 0, -9.2572)
 player = NodePath("../Player")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_8ohcw")
+parameters/Blend2/blend_amount = 0
+parameters/Transita/current_state = ""
+parameters/Transita/transition_request = "state_0"
+parameters/Transita/current_index = -1

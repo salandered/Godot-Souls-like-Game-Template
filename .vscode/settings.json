@@ -45,6 +45,7 @@
 		"folderPathColor.custom2": "#ff8aef",
 		"folderPathColor.custom3": "#c3c78d",
 		"folderPathColor.custom4": "#a4d4b2",
+		"folderPathColor.custom5": "#94f0c5d5",
 	},
 	// COLORFUL FOLDERS
 	"folder-path-color.folders": [
@@ -54,7 +55,7 @@
 		},
 		{
 			"path": "scripts/player",
-			"color": "custom2"
+			"color": "custom2"wwda
 		},
 		{
 			"path": "scripts",
@@ -63,6 +64,10 @@
 		{
 			"path": "souls-tut/Enemies",
 			"color": "custom1"
+		},
+		{
+			"path": "souls-tut/fancy-camera",
+			"color": "custom5"
 		},
 	],
 	// No built in git color on files (conflict with colorful folders)

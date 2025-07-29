@@ -1,5 +1,5 @@
 extends Area3D
-# TODO: change to Weapon
+# TODO: change to Weapon or BaseWeapon
 class_name WeaponOh
 
 ## To get a hit only once per attack.
@@ -12,6 +12,7 @@ var hitbox_ignore_list: Array[Area3D]
 ## deciding between casual animation and a strike
 var is_attacking: bool = false
 
+@export var weapon_name: String
 @export var holder: Node
 
 @export var base_damage: float = 10

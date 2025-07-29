@@ -6,6 +6,8 @@ var damage: float
 ## hit source animation (for debug purposes)
 var hit_state_animation: String
 
+var effects: Dictionary
+
 var weapon: WeaponOh
 
 static func blank() -> HitData:
