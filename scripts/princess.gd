@@ -7,6 +7,7 @@ class_name PlayerController extends CharacterBody3D
 @export_range(1.0, 20.0, 1.0) var max_speed_run := 10.0
 @export_range(10.0, 40.0, 1.0) var max_speed_sprint := 40.0
 
+
 @export_range(0.4, 10.0, 1.0) var acceleration_walk := 40.0
 @export_range(1.0, 30.0, 1.0) var acceleration_run := 40.0
 @export_range(1.0, 50.0, 1.0) var acceleration_sprint := 60.0

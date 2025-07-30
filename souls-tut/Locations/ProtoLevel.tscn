@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=18 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="2_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
@@ -46,34 +46,6 @@ albedo_color = Color(0.15, 0.915, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_364n8"]
 albedo_color = Color(0.136167, 0.43, 0, 1)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ohcw"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hfelf"]
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_364n8"]
-
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_6a1yn"]
-input_0/name = "state_0"
-input_0/auto_advance = false
-input_0/break_loop_at_end = false
-input_0/reset = true
-input_1/name = "state_1"
-input_1/auto_advance = false
-input_1/break_loop_at_end = false
-input_1/reset = true
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ohcw"]
-graph_offset = Vector2(13.0771, 165.596)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_hfelf")
-nodes/Animation/position = Vector2(280, 280)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_8ohcw")
-"nodes/Animation 2/position" = Vector2(260, 460)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_364n8")
-nodes/Blend2/position = Vector2(799.785, 335.055)
-nodes/Transita/node = SubResource("AnimationNodeTransition_6a1yn")
-nodes/Transita/position = Vector2(520, 300)
-node_connections = [&"Blend2", 0, &"Transita", &"Transita", 0, &"Animation", &"Transita", 1, &"Animation 2"]
 
 [node name="ProtoLevel" type="Node3D"]
 
@@ -192,10 +164,3 @@ near = 0.023
 [node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_8ohcw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4774, 0, -9.2572)
 player = NodePath("../Player")
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_8ohcw")
-parameters/Blend2/blend_amount = 0
-parameters/Transita/current_state = ""
-parameters/Transita/transition_request = "state_0"
-parameters/Transita/current_index = -1

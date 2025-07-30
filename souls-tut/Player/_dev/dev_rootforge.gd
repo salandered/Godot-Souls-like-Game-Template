@@ -1,8 +1,8 @@
 extends Node
+@onready var skeleton_animator: AnimationPlayer = %DEV_SkeletonAnimator
+@onready var state_database: AnimationPlayer = %StatesDatabase
 
-@onready var skeleton_animator = $"../SkeletonAnimator"
-@onready var state_database = $"../States/StatesData/StatesDatabase"
-@onready var model = $".."
+@onready var model: PlayerModel = $"../.."
 
 func _ready():
 	#DEV_nail_z_coordinate("longsword_2_1h", "longsword_2_params", -0.062)

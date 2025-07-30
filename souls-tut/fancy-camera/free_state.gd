@@ -36,7 +36,7 @@ func _move_focus_point() -> void:
 		fc.focus.global_position = new_focus
 
 func _rotate_offset(new_focus: Vector3) -> void:
-	#  Moves from one offset to another after Focus Point movement. 
+	#  States from one offset to another after Focus Point movement. 
 	#  To do it we count this angle and rotate the offset by the vertical axis. 
 	#  Additional vars  with zero and Y coordinate is due to wanting only the angle of the projected horizontally picture 
 	#  		and not the angle in 3D between these vectors. 
@@ -120,7 +120,7 @@ func _calc_locked_offset(locked_target: Node3D, offset_: Vector3) -> Vector3:
 
 func _find_target() -> Node3D:
 	var all_targets = get_tree().get_nodes_in_group("targetable")
-	print("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
+	# print("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
 	var candidates := []
 	for target in all_targets:
 		if _good_candidate(target):
@@ -128,11 +128,11 @@ func _find_target() -> Node3D:
 	
 	if not candidates.is_empty():
 		var player = fc.player
-		print("    > candidates before sorting: ", candidates.map(func(t): return t.label))
+		# print("    > candidates before sorting: ", candidates.map(func(t): return t.label))
 		_sort_targets_by_player_distance(candidates)
-		print("    > candidates after sorting: ", candidates.map(func(t): return t.label))
+		# print("    > candidates after sorting: ", candidates.map(func(t): return t.label))
 		return candidates[0]
-	print("   > nothing ")
+	# print("   > nothing ")
 	return null
 
 
@@ -143,22 +143,22 @@ func _good_candidate(target: Node3D) -> bool:
 	var min_dot = cos(half_fov)
 
 	if not fc.camera.is_position_in_frustum(target.global_position):
-		_print.call(target.label, "frustum")
+		# _print.call(target.label, "frustum")
 		return false
 	if fc.camera_focus_further_than(target, fc.TARGET_LOCK_DISTANCE_SQUARED):
-		_print.call(target.label, "distance")
+		# _print.call(target.label, "distance")
 		return false
 
 	var camera_to_target = (target.global_position - fc.camera.global_transform.origin).normalized()
 	var camera_forward = - fc.camera.global_transform.basis.z
 	if camera_forward.dot(camera_to_target) < min_dot:
-		_print.call(target.label, "angle between camera forward and target")
+		# _print.call(target.label, "angle between camera forward and target")
 		return false
 
 	var player_to_target = (target.global_position - fc.player.global_transform.origin).normalized()
 	var player_forward = fc.player.global_transform.basis.z
 	if player_forward.dot(player_to_target) < 0:
-		_print.call(target.label, "behind player")
+		# _print.call(target.label, "behind player")
 		return false
 	
 	return true

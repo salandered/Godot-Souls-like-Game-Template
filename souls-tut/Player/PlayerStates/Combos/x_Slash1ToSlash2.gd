@@ -1,4 +1,4 @@
-extends Combo
+extends Combo_
 
 # That is example of hardcoded combo implementation.
 # Node structure was:
@@ -20,7 +20,7 @@ extends Combo
 # 	return false
 
 # region: Slash2ToSlash3
-# extends Combo
+# extends Combo_
 
 # @onready var slash_2 = $".." as Slash2State
 

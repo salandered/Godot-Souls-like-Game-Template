@@ -12,7 +12,8 @@ var hitbox_ignore_list: Array[Area3D]
 ## deciding between casual animation and a strike
 var is_attacking: bool = false
 
-@export var weapon_name: String
+@export var weapon_name: String # do we need this?
+
 @export var holder: Node
 
 @export var base_damage: float = 10

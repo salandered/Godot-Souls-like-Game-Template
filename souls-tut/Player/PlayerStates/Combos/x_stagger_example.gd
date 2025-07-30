@@ -1,4 +1,4 @@
-extends Combo
+extends Combo_
 
 # @export var root_state: BasePlayerState
 

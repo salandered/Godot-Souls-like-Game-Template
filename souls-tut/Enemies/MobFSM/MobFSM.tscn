@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://cg7xnbmiad2l1" path="res://souls-tut/Enemies/MobFSM/return.gd" id="6_b3grc"]
 [ext_resource type="PackedScene" uid="uid://bb0o3byg0f0uh" path="res://souls-tut/Weapons/Skins/SwordVisuals1.tscn" id="6_yx6ag"]
 [ext_resource type="PackedScene" uid="uid://6t1bl235yea4" path="res://souls-tut/Weapons/Models/Sword.tscn" id="7_stidv"]
-[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://souls-tut/Player/PlayerModel/Hurtbox.tscn" id="8_2q7ci"]
+[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://souls-tut/Player/PlayerModel/HitBox.tscn" id="8_2q7ci"]
 [ext_resource type="Script" uid="uid://besvu8rkuxij" path="res://souls-tut/Enemies/MobFSM/resources.gd" id="10_i6528"]
 [ext_resource type="Script" uid="uid://c28j6e4bifwur" path="res://souls-tut/Enemies/MobFSM/death.gd" id="16_fju5c"]
 
@@ -784,7 +784,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.906805, 0)
 shape = SubResource("CapsuleShape3D_f21qa")
 
 [node name="Root" type="BoneAttachment3D" parent="."]
-transform = Transform3D(-0.467623, 0.0837819, 0.879949, 0.0301842, 0.996431, -0.078832, -0.883413, -0.0103031, -0.468483, -2.49625e-05, 0.941294, -3.8268e-06)
+transform = Transform3D(-0.467622, 0.0837821, 0.879949, 0.0301842, 0.996431, -0.0788321, -0.883413, -0.0103031, -0.468482, -2.49625e-05, 0.941294, -3.8268e-06)
 bone_name = "Hips"
 bone_idx = 0
 use_external_skeleton = true
@@ -796,7 +796,7 @@ processor = NodePath("../../StateMachine")
 ignored_weapon_groups = Array[String](["enemys_weapon"])
 
 [node name="RightWrist" type="BoneAttachment3D" parent="."]
-transform = Transform3D(0.909038, 0.40743, 0.0874634, 0.368477, -0.687888, -0.625327, -0.194612, 0.600675, -0.775446, 0.153158, 0.920877, 0.393728)
+transform = Transform3D(0.909039, 0.407428, 0.0874623, 0.368475, -0.68789, -0.625327, -0.194611, 0.600675, -0.775446, 0.153157, 0.920877, 0.393728)
 bone_name = "RightHand"
 bone_idx = 10
 use_external_skeleton = true

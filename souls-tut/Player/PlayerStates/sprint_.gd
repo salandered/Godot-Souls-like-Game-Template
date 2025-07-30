@@ -1,7 +1,5 @@
 extends BasePlayerState
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export var sprint_stamina_cost = 20 # per sec so multiply by delta
 
@@ -31,7 +29,7 @@ func process_input_vector(input: InputPackage, delta: float):
 	else:
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
-	animator.speed_scale = player.velocity.length() / SPEED
+	animator.set_speed_scale(player.velocity.length() / SPEED)
 
 func on_exit_state():
-	animator.speed_scale = 1
+	animator.set_speed_scale(1)

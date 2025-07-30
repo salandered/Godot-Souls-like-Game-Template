@@ -24,6 +24,13 @@ func gather_input() -> InputPackage:
 	if Input.is_action_pressed(InAction.parry):
 		new_input.actions.append(InDataAction.parry)
 
+	if Input.is_action_pressed("roll"):
+		new_input.actions.append("roll")
+	
+	if Input.is_action_pressed("block"):
+		new_input.actions.append("block")
+
+		
 	if Input.is_action_pressed(InAction.jump):
 		if new_input.actions.has(InDataAction.sprint):
 			new_input.actions.append(InDataAction.jump_sprint)
@@ -32,18 +39,11 @@ func gather_input() -> InputPackage:
 	
 	if Input.is_action_just_pressed(InAction.light_attack):
 		new_input.combat_actions.append(InDataCombatAction.light_attack_pressed)
+	#if Input.is_action_just_pressed("heavy_attack"):
+		#new_input.combat_actions.append("heavy_attack_pressed")
 	
 	# SYSTEM
 	if Input.is_action_just_pressed(InAction.force_quit):
 		get_tree().quit()
 
 	return new_input
-
-	# if Input.is_action_just_pressed("hit"):
-	# 	new_input.actions.append("hit")
-	
-	# if Input.is_action_just_pressed("roll"):
-	# 	new_input.actions.append("roll")
-		
-	# if Input.is_action_just_pressed("dash"):
-	# 	new_input.actions.append("dash")

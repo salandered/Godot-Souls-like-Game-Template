@@ -1,23 +1,23 @@
-[gd_scene load_steps=25 format=3 uid="uid://ctnk7afgi232j"]
+[gd_scene load_steps=25 format=3 uid="uid://cq4pvacdp4c8d"]
 
-[ext_resource type="Animation" uid="uid://bjbk32n7ai2oi" path="res://Assets/Ready Animations/awaiting_ripost.res" id="1_kcl8x"]
-[ext_resource type="Animation" uid="uid://cvpiiqokxohra" path="res://Assets/Ready Animations/dance.res" id="2_jft5o"]
-[ext_resource type="Animation" uid="uid://ddosojhrnxc3p" path="res://Assets/Ready Animations/death.res" id="3_lsg10"]
-[ext_resource type="Animation" uid="uid://dhghfp5evtdy0" path="res://Assets/Ready Animations/idle_longsword.res" id="4_f20gn"]
-[ext_resource type="Animation" uid="uid://c64nn2dioo6c2" path="res://Assets/Ready Animations/idle_shield.res" id="5_ont04"]
-[ext_resource type="Animation" uid="uid://bvsqnjfp0plnw" path="res://Assets/Ready Animations/idle_warrior.res" id="6_i1wu8"]
-[ext_resource type="Animation" uid="uid://bf1d4282m1ryw" path="res://Assets/Ready Animations/jump_run.res" id="7_ntbet"]
-[ext_resource type="Animation" uid="uid://q6o7ddogrjmv" path="res://Assets/Ready Animations/jump_sprint.res" id="8_68nfv"]
-[ext_resource type="Animation" uid="uid://dcklgh1qspg7t" path="res://Assets/Ready Animations/landing_run.res" id="9_6t1br"]
-[ext_resource type="Animation" uid="uid://cjry5u8re5msd" path="res://Assets/Ready Animations/landing_sprint.res" id="10_5jd4e"]
-[ext_resource type="Animation" uid="uid://cdqyr4vcns7am" path="res://Assets/Ready Animations/longsword_Z_PROJECTED.res" id="11_tsqeo"]
-[ext_resource type="Animation" uid="uid://kux8ogygvefj" path="res://Assets/Ready Animations/longsword_2_Z_PROJECTED.res" id="12_mpwpw"]
-[ext_resource type="Animation" uid="uid://bll6etjl7wd6m" path="res://Assets/Ready Animations/midair.res" id="13_h2rcp"]
-[ext_resource type="Animation" uid="uid://dho7uykss61yg" path="res://Assets/Ready Animations/parried.res" id="14_1dx4c"]
-[ext_resource type="Animation" uid="uid://jyjqrq6kiasc" path="res://Assets/Ready Animations/parry.res" id="15_a07j2"]
-[ext_resource type="Animation" uid="uid://bmqy70w024rc" path="res://Assets/Ready Animations/ripost.res" id="16_7xnr7"]
-[ext_resource type="Animation" uid="uid://cmcjn7n1ht11v" path="res://Assets/Ready Animations/stagger.res" id="17_km2e1"]
-[ext_resource type="Script" uid="uid://6heleolni4m5" path="res://Player/HumanoidModel/SkeletonAnimator.gd" id="18_80712"]
+[ext_resource type="Animation" uid="uid://bjbk32n7ai2oi" path="res://Assets/Ready Animations/awaiting_ripost.res" id="1_towt5"]
+[ext_resource type="Animation" uid="uid://cvpiiqokxohra" path="res://Assets/Ready Animations/dance.res" id="2_r3sx8"]
+[ext_resource type="Animation" uid="uid://ddosojhrnxc3p" path="res://Assets/Ready Animations/death.res" id="3_7kv3x"]
+[ext_resource type="Animation" uid="uid://dhghfp5evtdy0" path="res://Assets/Ready Animations/idle_longsword.res" id="4_saols"]
+[ext_resource type="Animation" uid="uid://c64nn2dioo6c2" path="res://Assets/Ready Animations/idle_shield.res" id="5_uksg4"]
+[ext_resource type="Animation" uid="uid://bvsqnjfp0plnw" path="res://Assets/Ready Animations/idle_warrior.res" id="6_tymrf"]
+[ext_resource type="Animation" uid="uid://bf1d4282m1ryw" path="res://Assets/Ready Animations/jump_run.res" id="7_xdnlp"]
+[ext_resource type="Animation" uid="uid://q6o7ddogrjmv" path="res://Assets/Ready Animations/jump_sprint.res" id="8_ykxlv"]
+[ext_resource type="Animation" uid="uid://dcklgh1qspg7t" path="res://Assets/Ready Animations/landing_run.res" id="9_l054r"]
+[ext_resource type="Animation" uid="uid://cjry5u8re5msd" path="res://Assets/Ready Animations/landing_sprint.res" id="10_mtg4t"]
+[ext_resource type="Animation" uid="uid://cdqyr4vcns7am" path="res://Assets/Ready Animations/longsword_Z_PROJECTED.res" id="11_y3sjf"]
+[ext_resource type="Animation" uid="uid://kux8ogygvefj" path="res://Assets/Ready Animations/longsword_2_Z_PROJECTED.res" id="12_3jrq8"]
+[ext_resource type="Animation" uid="uid://bll6etjl7wd6m" path="res://Assets/Ready Animations/midair.res" id="13_ij7or"]
+[ext_resource type="Animation" uid="uid://dho7uykss61yg" path="res://Assets/Ready Animations/parried.res" id="14_t51n2"]
+[ext_resource type="Animation" uid="uid://jyjqrq6kiasc" path="res://Assets/Ready Animations/parry.res" id="15_q351g"]
+[ext_resource type="Animation" uid="uid://bmqy70w024rc" path="res://Assets/Ready Animations/ripost.res" id="16_1idjm"]
+[ext_resource type="Animation" uid="uid://cmcjn7n1ht11v" path="res://Assets/Ready Animations/stagger.res" id="17_4rha7"]
+[ext_resource type="Script" uid="uid://cfpw7ybp0gwcu" path="res://Player/HumanoidModel/SkeletonAnimator.gd" id="18_xghnq"]
 
 [sub_resource type="Animation" id="Animation_k5lpg"]
 resource_name = "TPose"
@@ -2520,35 +2520,35 @@ tracks/71/interp = 1
 tracks/71/loop_wrap = true
 tracks/71/keys = PackedFloat32Array(0, 1, 1.49012e-08, 1.49012e-08, 0, 1)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_evg5s"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3o6mw"]
 _data = {
 &"TPose": SubResource("Animation_k5lpg"),
-&"awaiting_ripost": ExtResource("1_kcl8x"),
-&"dance": ExtResource("2_jft5o"),
-&"death": ExtResource("3_lsg10"),
+&"awaiting_ripost": ExtResource("1_towt5"),
+&"dance": ExtResource("2_r3sx8"),
+&"death": ExtResource("3_7kv3x"),
 &"idle": SubResource("Animation_k577b"),
-&"idle_longsword": ExtResource("4_f20gn"),
-&"idle_shield": ExtResource("5_ont04"),
-&"idle_warrior": ExtResource("6_i1wu8"),
-&"jump_run": ExtResource("7_ntbet"),
-&"jump_sprint": ExtResource("8_68nfv"),
-&"landing_run": ExtResource("9_6t1br"),
-&"landing_sprint": ExtResource("10_5jd4e"),
-&"longsword_1": ExtResource("11_tsqeo"),
-&"longsword_2": ExtResource("12_mpwpw"),
-&"midair": ExtResource("13_h2rcp"),
-&"parried": ExtResource("14_1dx4c"),
-&"parry": ExtResource("15_a07j2"),
-&"riposte": ExtResource("16_7xnr7"),
+&"idle_longsword": ExtResource("4_saols"),
+&"idle_shield": ExtResource("5_uksg4"),
+&"idle_warrior": ExtResource("6_tymrf"),
+&"jump_run": ExtResource("7_xdnlp"),
+&"jump_sprint": ExtResource("8_ykxlv"),
+&"landing_run": ExtResource("9_l054r"),
+&"landing_sprint": ExtResource("10_mtg4t"),
+&"longsword_1": ExtResource("11_y3sjf"),
+&"longsword_2": ExtResource("12_3jrq8"),
+&"midair": ExtResource("13_ij7or"),
+&"parried": ExtResource("14_t51n2"),
+&"parry": ExtResource("15_q351g"),
+&"riposte": ExtResource("16_1idjm"),
 &"run": SubResource("Animation_tlquh"),
 &"slash_3": SubResource("Animation_kbxkj"),
 &"sprint": SubResource("Animation_rvpwv"),
-&"staggered": ExtResource("17_km2e1")
+&"staggered": ExtResource("17_4rha7")
 }
 
-[node name="SkeletonAnimator" type="AnimationPlayer"]
+[node name="DEV_SkeletonAnimator" type="AnimationPlayer"]
 libraries = {
-&"": SubResource("AnimationLibrary_evg5s")
+&"": SubResource("AnimationLibrary_3o6mw")
 }
 playback_default_blend_time = 0.15
-script = ExtResource("18_80712")
+script = ExtResource("18_xghnq")

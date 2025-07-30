@@ -5,14 +5,17 @@ class_name PlayerModel
 
 @export var is_enemy: bool = false
 
-@export var player: CharacterBody3D
-@export var skeleton: Skeleton3D
-@export var animator: AnimationPlayer
-@export var combat: HumanoidCombat
-@export var resources: HumanoidResources
+@onready var player = $".."
+@onready var skeleton = %GeneralSkeleton
+@onready var animator = $SplitBodyAnimator
+@onready var combat = $Combat as HumanoidCombat
+@onready var resources = $Resources as HumanoidResources
+@onready var hitbox: Hitbox_ = %HitBox
+@onready var legs = $Legs as Legs
+@onready var area_awareness = $AreaAwareness as AreaAwareness
 
-@export var active_weapon: WeaponOh
-@export var states_container: HumanoidStates
+@onready var active_weapon: SwordOh = %SwordOh
+@onready var states_container = $States as HumanoidStates
 # @onready var weapons = {
 # 	"sword" = $....Sword,
 # 	"bow" = $....Bow,
@@ -27,29 +30,24 @@ func _ready():
 	states_container.player = player
 	states_container.accept_states()
 	current_state = states_container.states["idle"]
+	switch_to("idle")
+	legs.current_legs_state = states_container.get_state_by_name("idle")
+	legs.accept_behaviours()
 
 
 func update(input: InputPackage, delta: float):
-	# print("actions gathered ", input.actions)
 	input = combat.contextualize(input)
-	# print("actions contextualise ", input.actions)
-
+	area_awareness.last_input_package = input
 	var relevance = current_state.check_relevance(input)
-	# print("relevance", relevance)
-	
 	if relevance != "okay": # todo not okay
 		switch_to(relevance)
-
+	current_state.update_resources(delta) # moved back here for now, because of TorsoMoves triggering _update from legs behaviour -> doubledipping
 	current_state._update(input, delta)
-	# print("")
 
 
 func switch_to(state: String):
 	# if not is_enemy:
 		# print(current_state.state_name + " -> " + state)
-	current_state.on_exit_state()
+	current_state._on_exit_state()
 	current_state = states_container.states[state]
-	current_state.on_enter_state()
-	current_state.mark_enter_state()
-	resources.pay_resource_cost(current_state)
-	animator.play(current_state.animation)
+	current_state._on_enter_state()

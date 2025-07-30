@@ -1,4 +1,4 @@
-extends Combo
+extends Combo_
 
 class_name ConsecutiveAttack
 

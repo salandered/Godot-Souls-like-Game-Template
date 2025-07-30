@@ -1,6 +1,5 @@
 extends BasePlayerState
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 const TRANSITION_TIMING = 0.2
 

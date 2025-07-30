@@ -1,7 +1,7 @@
 [gd_scene load_steps=39 format=3 uid="uid://cq5d3f6aft2bn"]
 
-[ext_resource type="Script" uid="uid://ca1uq3m7rkvlg" path="res://souls-tut/Player/PlayerModel/states_data.gd" id="1_ti7vh"]
-[ext_resource type="Script" uid="uid://mb445vwvgkm" path="res://souls-tut/Player/PlayerModel/states_data_storage.gd" id="2_gw8ng"]
+[ext_resource type="Script" uid="uid://ca1uq3m7rkvlg" path="res://souls-tut/Player/PlayerAnim/states_data.gd" id="1_ti7vh"]
+[ext_resource type="Script" uid="uid://mb445vwvgkm" path="res://souls-tut/Player/PlayerAnim/states_data_storage.gd" id="2_gw8ng"]
 [ext_resource type="Script" uid="uid://c56pthyjpp1oj" path="res://souls-tut/Player/PlayerStates/idle.gd" id="3_3i4ho"]
 [ext_resource type="PackedScene" uid="uid://bjxvmgetwrvkc" path="res://souls-tut/Player/PlayerStates/Combos/RiposteCombo.tscn" id="4_dk1be"]
 [ext_resource type="Script" uid="uid://pgbwugk4arw4" path="res://souls-tut/Player/PlayerStates/run_.gd" id="5_x42n8"]

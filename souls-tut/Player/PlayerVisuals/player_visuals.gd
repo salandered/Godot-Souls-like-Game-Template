@@ -1,14 +1,15 @@
 extends Node3D
 class_name PlayerVisuals
 
-@export var beta_joints: MeshInstance3D
-@export var beta_surface: MeshInstance3D
-
-@export var sword_visuals_1: Node3D
-@export var stamina_label: Label
-@export var health_label: Label
-
 var model: PlayerModel
+
+
+@onready var beta_joints = $Beta_Joints
+@onready var beta_surface = $Beta_Surface
+
+@onready var sword_visuals_1 = $SwordVisuals1
+@onready var stamina_label = $"Stamina _bar_"
+@onready var health_label = $"Health _bar_"
 
 
 func accept_model(_model: PlayerModel):
@@ -28,8 +29,6 @@ func adjust_weapon_visuals():
 	sword_visuals_1.global_transform = model.active_weapon.global_transform
 
 func update_resources_interface():
-	if stamina_label != null:
+	if not model.is_enemy:
 		stamina_label.text = "Stamina " + "%10.3f" % model.resources.stamina
-	
-	if health_label != null:
 		health_label.text = "Health " + "%10.3f" % model.resources.health

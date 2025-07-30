@@ -5,11 +5,14 @@ class_name BasePlayerState
 @export var TURN_SPEED = 2
 
 var player: CharacterBody3D
-var animator: AnimationPlayer
+var animator: SplitBodyAnimator
+var skeleton: Skeleton3D
 var resources: HumanoidResources
 var combat: HumanoidCombat
 var states_data_repo: StatesDataRepository
 var container: HumanoidStates
+var area_awareness: AreaAwareness
+var legs: Legs
 
 @export var animation: String
 @export var state_name: String
@@ -17,13 +20,17 @@ var container: HumanoidStates
 @export var backend_animation: String
 @export var tracking_angular_speed: float = 10
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 # I can tolerate up to two _costs, 
 # the moment I need a third one, I'll create a small ResourceCost class to pay them.
 @export var stamina_cost: float = 0
 
-@onready var combos: Array[Combo]
+@onready var combos: Array[Combo_]
 
 var enter_state_time: float
+var initial_position: Vector3
+var frame_length = 0.016
 
 # TODO: has_queued_state and queued_state can be one var (probably)
 # or queued_state is an array (wow)
@@ -47,8 +54,8 @@ var DURATION: float
 # 	BasePlayerState readyness for transition is generally a simple function based on timings or statuses of the player.
 #	If you are starting to understand that your transition readyness is a complex method, OR
 # 	if you are tempted to add third branching operator into your check_relevance function,
-#	seriously consider if Combo can do this logic for you, you won't regret its usage I promise.
-#	(Combo is clickable even from comments btw)
+#	seriously consider if Combo_ can do this logic for you, you won't regret its usage I promise.
+#	(Combo_ is clickable even from comments btw)
 #
 # > update functions manages perframe behaviour of your BasePlayerState.
 #	There are two update types: constant change and a single dynamic update on some timing.
@@ -144,7 +151,7 @@ func check_relevance(input: InputPackage) -> String:
 ## If they are, they store the triggered action into a 'queued state' field.
 ## => states can use 'queued state' field for transitions without losing it.
 func check_combos(input: InputPackage):
-	for combo: Combo in combos:
+	for combo: Combo_ in combos:
 		# print("COMBO", combo.triggered_state)
 		if combo.is_triggered(input) and resources.can_be_paid(container.states[combo.triggered_state]):
 			has_queued_state = true
@@ -162,10 +169,13 @@ func best_input_that_can_be_paid(input: InputPackage) -> String:
 	return "throwing because for some reason input.actions doesn't contain even idle"
 
 func _update(input: InputPackage, delta: float):
-	update_resources(delta)
 	if tracks_input_vector():
 		process_input_vector(input, delta)
 	update(input, delta)
+
+func update(_input: InputPackage, _delta: float):
+	pass
+
 
 ## Updating may be not too far from current state updating: regeneration could be dependent on the current state.
 ## => define the base state `update_resources` function with delegating the job to the resources.
@@ -199,8 +209,11 @@ func accepts_queueing() -> bool:
 func tracks_input_vector() -> bool:
 	return states_data_repo.tracks_input_vector(backend_animation, get_progress())
 
-func accepts_tracking_direction() -> bool:
-	return states_data_repo.accepts_tracking_direction(backend_animation, get_progress())
+func time_til_unlocking() -> float:
+	# TODO: delete?
+	if tracks_input_vector():
+		return 0
+	return states_data_repo.time_til_next_controllable_frame(backend_animation, get_progress())
 
 func is_vulnerable() -> bool:
 	return states_data_repo.get_vulnerable(backend_animation, get_progress())
@@ -217,6 +230,8 @@ func get_root_position_delta(delta_time: float) -> Vector3:
 func right_weapon_hurts() -> bool:
 	return states_data_repo.get_right_weapon_hurts(backend_animation, get_progress())
 
+# END
+
 
 # "default-default", works for animations that just linger
 func default_lifecycle(input: InputPackage):
@@ -224,18 +239,26 @@ func default_lifecycle(input: InputPackage):
 		return best_input_that_can_be_paid(input)
 	return "okay"
 
-func update(_input: InputPackage, _delta: float):
-	pass
+
+func _on_enter_state():
+	initial_position = player.global_position
+	resources.pay_resource_cost(self)
+	mark_enter_state()
+	on_enter_state()
+	animator.update_body_animations()
 
 func on_enter_state():
 	pass
+
+func _on_exit_state():
+	on_exit_state()
 
 func on_exit_state():
 	pass
 
 func assign_combos():
 	for child in get_children():
-		if child is Combo:
+		if child is Combo_:
 			combos.append(child)
 			child.state = self # combo.state here
 
@@ -252,8 +275,12 @@ func react_on_hit(hit: HitData):
 	if is_vulnerable():
 		resources.lose_health(hit.damage)
 	if is_interruptable():
-		try_force_state("staggered")
-	hit.queue_free()
+		# TODO rewrite for better effects processing, this scales badly
+		if hit.effects.has("pushback") and hit.effects["pushback"]:
+			area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
+			try_force_state("pushback")
+		else:
+			try_force_state("staggered")
 
 # Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
 func react_on_parry(_hit: HitData):

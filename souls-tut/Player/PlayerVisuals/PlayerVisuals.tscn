@@ -261,13 +261,8 @@ blend_shape_mode = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fapch"]
 albedo_color = Color(0.42, 0.468333, 1, 1)
 
-[node name="Visuals" type="Node3D" node_paths=PackedStringArray("beta_joints", "beta_surface", "sword_visuals_1", "stamina_label", "health_label")]
+[node name="Visuals" type="Node3D"]
 script = ExtResource("1_o4em2")
-beta_joints = NodePath("Beta_Joints")
-beta_surface = NodePath("Beta_Surface")
-sword_visuals_1 = NodePath("SwordVisuals1")
-stamina_label = NodePath("Stamina _bar_")
-health_label = NodePath("Health _bar_")
 
 [node name="Beta_Joints" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_mmssq")

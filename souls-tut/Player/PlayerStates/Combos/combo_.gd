@@ -1,9 +1,9 @@
 extends Node
-class_name Combo
+class_name Combo_
 
 @onready var state: BasePlayerState
 
-## Combo result this combo invokes (eg: next_attack)
+## Combo_ result this combo invokes (eg: next_attack)
 ## Assigned in check_combos to queue state 
 @export var triggered_state: String
 
@@ -30,7 +30,7 @@ func is_triggered(input: InputPackage) -> bool:
 # that you need some randomised heads choping finishers.
 # Will it ever be easier than just creating a combo with 7-strings logic and droping it on your States?
 # And we even query our combos work with get_children() collection from a BasePlayerState, so there is
-# a fantom combo priority system being powered just by Combo nodes order in the editor. Sick!
+# a fantom combo priority system being powered just by Combo_ nodes order in the editor. Sick!
 
 # The BasePlayerState code is a super-basic action logic, think, 
 # "what your game was with a linear inputs where every action has a hotkey and no secondary inputs", 

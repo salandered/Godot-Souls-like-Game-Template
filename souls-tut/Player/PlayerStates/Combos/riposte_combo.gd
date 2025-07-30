@@ -1,4 +1,4 @@
-extends Combo
+extends Combo_
 
 func is_triggered(input: InputPackage) -> bool:
 	# if input.actions.has( current weapon light attack state code ) in future for scalability

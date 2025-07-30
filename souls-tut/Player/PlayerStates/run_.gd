@@ -1,9 +1,6 @@
 extends BasePlayerState
 
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 func _ready():
 	SPEED = 3.0
 	TURN_SPEED = 2
@@ -29,7 +26,7 @@ func process_input_vector(input: InputPackage, delta: float):
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
 	# _velocity.limit_length(SPEED) ?
-	animator.speed_scale = player.velocity.length() / SPEED
+	animator.set_speed_scale(player.velocity.length() / SPEED)
 
 # prev 
 # func rotate(_velocity: Vector3, delta: float):
@@ -41,4 +38,4 @@ func process_input_vector(input: InputPackage, delta: float):
 # 	return _velocity.limit_length(SPEED)
 
 func on_exit_state():
-	animator.speed_scale = 1
+	animator.set_speed_scale(1)
