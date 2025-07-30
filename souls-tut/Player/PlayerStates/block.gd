@@ -1,4 +1,4 @@
-extends TorsoPartialMove
+extends TorsoPartialState
 
 @export var block_coefficient: float = 0.5
 @export var block_sector: float = 3.14

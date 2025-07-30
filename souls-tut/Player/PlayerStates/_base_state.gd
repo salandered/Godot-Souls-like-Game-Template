@@ -13,6 +13,8 @@ var states_data_repo: StatesDataRepository
 var container: HumanoidStates
 var area_awareness: AreaAwareness
 var legs: Legs
+var left_wrist: BoneAttachment3D
+
 
 @export var animation: String
 @export var state_name: String
@@ -281,6 +283,15 @@ func react_on_hit(hit: HitData):
 			try_force_state("pushback")
 		else:
 			try_force_state("staggered")
+
+func react_on_spell(spell_hit: SpellHitData):
+	if is_vulnerable():
+		resources.lose_health(spell_hit.damage)
+	if is_interruptable():
+		try_force_state("staggered")
+	#spell_hit.queue_free()
+	spell_hit.spell.target_contacted(player)
+
 
 # Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
 func react_on_parry(_hit: HitData):

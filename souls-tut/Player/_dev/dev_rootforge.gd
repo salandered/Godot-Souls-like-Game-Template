@@ -25,5 +25,5 @@ func _ready():
 			#var position_without_z = position
 			#position_without_z.z = value
 			#animation.track_set_key_value(hips_track, i, position_without_z)
-		#ResourceSaver.save(animation, "res://Assets/Ready Animations/" + anima tion_name + "_Z_PROJECTED.res")
-		#ResourceSaver.save(backend_animation, "res://Player/States/BackendAnimations/" + into_backend_animation + "_WITH_ROOT.res")
+		#ResourceSaver.save(animation, "res://souls-tut/Assets/Ready Animations/" + anima tion_name + "_Z_PROJECTED.res")
+		#ResourceSaver.save(backend_animation, "res://souls-tut/Player/States/BackendAnimations/" + into_backend_animation + "_WITH_ROOT.res")

@@ -1,7 +1,13 @@
 extends BasePlayerState
-## This class is a move that also has a lower torso behavior working as a separate SM
-class_name TorsoPartialMove
+## This class is a state that also has a lower torso behavior working as a separate SM
+class_name TorsoPartialState
 
+
+# from enemy 4
+@export_group("torso_adjustment")
+@export var x_adjustment: float
+@export var y_adjustment: float
+@export var z_adjustment: float
 
 @export var legs_behaviour: LegsBehaviour
 
@@ -15,6 +21,10 @@ func _update(input: InputPackage, delta: float):
 	legs_behaviour.update(input, delta)
 	# TODO TODO CHECK ???
 	update(input, delta)
+
+	# in enhemy4
+	# legs_behaviour.update(input, delta)
+	# super._update(input, delta)
 
 
 func _on_enter_state():

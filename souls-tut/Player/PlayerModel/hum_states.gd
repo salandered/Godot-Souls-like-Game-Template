@@ -10,6 +10,7 @@ class_name HumanoidStates
 @export var area_awareness: AreaAwareness
 @export var states_data_repo: StatesDataRepository
 @export var legs: Legs
+@export var left_wrist: BoneAttachment3D
 
 var states: Dictionary # { string : State }, where string is State heirs name
 
@@ -22,6 +23,7 @@ func accept_states():
 			child.animator = animator
 			child.skeleton = skeleton
 			child.resources = resources
+			child.left_wrist = left_wrist
 			child.combat = combat
 			child.states_data_repo = states_data_repo
 			child.container = self
@@ -29,6 +31,15 @@ func accept_states():
 			child.area_awareness = area_awareness
 			child.legs = legs
 			child.assign_combos()
+
+			if child.priority <= 0:
+				print_debug("Error for ", child.state_name)
+
+			if child.animation.is_empty():
+				print_debug("Error for ", child.state_name)
+
+			if child.backend_animation.is_empty():
+				print_debug("Error for ", child.state_name)
 
 
 func states_priority_sort(a: String, b: String):

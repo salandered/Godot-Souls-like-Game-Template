@@ -41,7 +41,7 @@ func update(input: InputPackage, delta: float):
 	var relevance = current_state.check_relevance(input)
 	if relevance != "okay": # todo not okay
 		switch_to(relevance)
-	current_state.update_resources(delta) # moved back here for now, because of TorsoMoves triggering _update from legs behaviour -> doubledipping
+	current_state.update_resources(delta) # moved back here for now, because of TorsoStates triggering _update from legs behaviour -> doubledipping
 	current_state._update(input, delta)
 
 

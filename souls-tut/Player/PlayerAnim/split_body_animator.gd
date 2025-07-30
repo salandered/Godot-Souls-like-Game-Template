@@ -49,7 +49,7 @@ func set_torso_animation(animation: String):
 	#print(torso_animator.current_animation + " changing to " + animation + "_torso")
 	torso_animator.play(animation + "_torso")
 
-# This triggers at the moments of first animation change after exiting TorsoPartialMove.
+# This triggers at the moments of first animation change after exiting TorsoPartialState.
 # Imagine we had running legs with 0.5 sec progress, and now we need to Run with full body.
 # without this method, torso will start to animate Run from the animation start and will be
 # desynced with legs, which will cause gibberish animation
@@ -60,9 +60,9 @@ func synchronize_if_needed():
 
 
 func update_playmode():
-	if model.current_state is TorsoPartialMove:
+	if model.current_state is TorsoPartialState:
 		full_body_mode = false
-	if not model.current_state is TorsoPartialMove:
+	if not model.current_state is TorsoPartialState:
 		full_body_mode = true
 
 

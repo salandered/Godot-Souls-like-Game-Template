@@ -15,7 +15,7 @@ func update(input: InputPackage, delta: float):
 	current_legs_state._update(input, delta)
 
 
-## transition logic now returns nothing. The class expects it to change the current move before updating
+## transition logic now returns nothing. The class expects it to change the current state before updating
 func transition_legs_state(_input, _delta):
 	pass
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://22ajsc42q5hx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2h7bn"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.02
+
+[node name="LeftWrist" type="BoneAttachment3D"]
+transform = Transform3D(-5.96045e-08, 1, 5.96045e-08, -3.16649e-08, 5.96045e-08, -1, -1, -5.96045e-08, 3.16649e-08, 0, 0, 0)
+bone_name = "LeftHand"
+bone_idx = 34
+use_external_skeleton = true
+external_skeleton = NodePath("../GeneralSkeleton")
+
+[node name="ShieldSocket" type="Node3D" parent="."]
+transform = Transform3D(1, -1.78814e-07, -9.31323e-09, 0, 1, -9.96515e-08, -1.86265e-09, 4.72646e-08, 1, -0.00563631, 0.0467862, -0.0384882)
+
+[node name="Shield" type="MeshInstance3D" parent="ShieldSocket"]
+transform = Transform3D(0.983325, -0.00519968, 0.181782, -0.179677, 0.126485, 0.975561, -0.0280654, -0.991955, 0.123441, -0.000131972, -0.001284, 0.0052008)
+mesh = SubResource("CylinderMesh_2h7bn")

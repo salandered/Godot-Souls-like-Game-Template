@@ -46,7 +46,7 @@ func on_contact(area: Node3D):
 # 	#print(area.name)
 # 	if is_eligible_attacking_weapon(area):
 # 		area.hitbox_ignore_list.append(self)
-# 		processor.current_move.react_on_hit(area.get_hit_data())
+# 		processor.current_state.react_on_hit(area.get_hit_data())
 # endregion
 
 ## we need a way to know contact was made with an enemy weapon

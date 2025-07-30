@@ -24,12 +24,23 @@ func gather_input() -> InputPackage:
 	if Input.is_action_pressed(InAction.parry):
 		new_input.actions.append(InDataAction.parry)
 
+
+	if Input.is_action_pressed("withdraw"):
+		new_input.actions.append("withdraw")
+
+
 	if Input.is_action_pressed("roll"):
 		new_input.actions.append("roll")
 	
 	if Input.is_action_pressed("block"):
 		new_input.actions.append("block")
 
+
+	if Input.is_action_pressed("shield_throw"):
+		new_input.actions.append("shield_throw")
+	
+	if Input.is_action_pressed("shield_throw_reload"):
+		new_input.actions.append("shield_throw_reload")
 		
 	if Input.is_action_pressed(InAction.jump):
 		if new_input.actions.has(InDataAction.sprint):

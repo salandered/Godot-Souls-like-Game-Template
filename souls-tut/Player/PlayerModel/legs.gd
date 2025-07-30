@@ -2,7 +2,7 @@ extends Node
 class_name Legs
 
 
-# The more suited approach will be inherit BasePlayerState once more to define LegsMove 
+# The more suited approach will be inherit BasePlayerState once more to define LegsState 
 # then those heirs will register themselves here on_enter state.
 # This way we could escape the need to manually call update() here.
 # But I wanted a fast makeshift patch to work

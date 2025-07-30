@@ -1,0 +1,2 @@
+extends BasePlayerState
+class_name LegsState

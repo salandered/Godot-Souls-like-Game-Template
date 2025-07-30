@@ -1,7 +1,7 @@
 extends Node
 class_name StatesDataRepository
 
-@onready var state_database = $StatesDatabase
+@onready var state_database = %StatesDatabase
 
 
 

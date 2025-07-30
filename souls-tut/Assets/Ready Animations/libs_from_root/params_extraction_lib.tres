@@ -3187,8 +3187,8 @@ tracks/7/keys = {
 _data = {
 &"block_params": SubResource("Animation_2o315"),
 &"block_reaction_params": SubResource("Animation_kinm8"),
-&"cheese_throw_params": SubResource("Animation_webtw"),
-&"cheese_throw_reload_params": SubResource("Animation_t60oo"),
+&"shield_throw_params": SubResource("Animation_webtw"),
+&"shield_throw_reload_params": SubResource("Animation_t60oo"),
 &"death_params": SubResource("Animation_62tvw"),
 &"greatsword_heavy_1_params": SubResource("Animation_xnxe5"),
 &"greatsword_heavy_2_params": SubResource("Animation_rb110"),
