@@ -12,7 +12,7 @@ func DEV_extract_root_position_track(from: String):
 	var animation = load("res://souls-tut/Assets/Ready Animations/Gundyr/moving/" + from + ".res") as Animation
 	var backend_animation = load("res://souls-tut/Assets/Ready Animations/Gundyr/backend/" + from + "_backend.res") as Animation
 	var hips_track = animation.find_track("%GeneralSkeleton:Hips", Animation.TYPE_POSITION_3D)
-	var root_pos_track = backend_animation.find_track("MoveDatabase:root_position", Animation.TYPE_VALUE)
+	var root_pos_track = backend_animation.find_track("StatesDatabase:root_position", Animation.TYPE_VALUE)
 	for i: int in animation.track_get_key_count(hips_track):
 		var position = animation.track_get_key_value(hips_track, i)
 		var time = animation.track_get_key_time(hips_track, i)

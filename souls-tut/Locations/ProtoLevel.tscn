@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=19 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="2_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/MobFSM/MobFSM.tscn" id="5_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://souls-tut/Enemies/Gundyr/nonHFSM/Gundyr.tscn" id="6_8ohcw"]
+[ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://souls-tut/Enemies/Opponent/Opponent.tscn" id="7_hfelf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -58,11 +59,11 @@ shadow_enabled = true
 environment = SubResource("Environment_8ihuv")
 
 [node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -10.521)
 material_override = SubResource("StandardMaterial3D_ldsoa")
 use_collision = true
 collision_layer = 3
-size = Vector3(117.309, 1, 45.0029)
+size = Vector3(117.309, 1, 66.0449)
 
 [node name="Floor2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.7929, 36.4189)
@@ -81,7 +82,7 @@ material_override = SubResource("StandardMaterial3D_qkxf5")
 radius = 0.2
 
 [node name="Mob" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7839, -0.385796, -9.72842)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.784, -0.5, -9.728)
 player = NodePath("../Player")
 
 [node name="props" type="Node" parent="."]
@@ -134,22 +135,22 @@ material_override = SubResource("StandardMaterial3D_364n8")
 label = "green"
 
 [node name="Target5" parent="props" instance=ExtResource("4_ldsoa")]
-transform = Transform3D(0.11903, 0, 1.00779, 0, 2.47654, 0, -1.00779, 0, 0.11903, -36.9728, 0, 11.6034)
+transform = Transform3D(0.11903, 0, 1.00779, 0, 2.47654, 0, -1.00779, 0, 0.11903, -36.9728, 0.5718, 11.6034)
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_2"
 
 [node name="Target6" parent="props" instance=ExtResource("4_ldsoa")]
-transform = Transform3D(-0.127697, 0, 1.00672, 0, 2.47654, 0, -1.00672, 0, -0.127697, -38.1401, 0, 9.37053)
+transform = Transform3D(-0.127697, 0, 1.00672, 0, 2.47654, 0, -1.00672, 0, -0.127697, -38.1401, 0.636556, 9.37053)
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_3"
 
 [node name="Target7" parent="props" instance=ExtResource("4_ldsoa")]
-transform = Transform3D(0.310874, 0, 0.966, 0, 2.47654, 0, -0.966, 0, 0.310874, -38.1401, 0, 6.21931)
+transform = Transform3D(0.310874, 0, 0.966, 0, 2.47654, 0, -0.966, 0, 0.310874, -38.1401, 0.767229, 6.21931)
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_4"
 
 [node name="Target8" parent="props" instance=ExtResource("4_ldsoa")]
-transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, -36.2618, 0, 15.0567)
+transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, -36.2618, 0.670066, 15.0567)
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_5"
 
@@ -162,5 +163,9 @@ fov = 29.0
 near = 0.023
 
 [node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_8ohcw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4774, 0, -9.2572)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.477, -0.5, -9.257)
+player = NodePath("../Player")
+
+[node name="Opponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_hfelf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.114, -0.5, -8.365)
 player = NodePath("../Player")

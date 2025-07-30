@@ -25,6 +25,17 @@ func pay_resource_cost(state: BasePlayerState):
 	lose_stamina(state.stamina_cost)
 
 
+func pay_block_cost(damage: float, blocking_coefficient: float):
+	if damage * blocking_coefficient <= stamina:
+		lose_stamina(damage * blocking_coefficient)
+	else:
+		var unblocked_portion = damage - stamina / blocking_coefficient
+		lose_stamina(stamina)
+		lose_health(unblocked_portion)
+		# do some punishing shit like force guardbreak or smth
+		print("was guardbroken")
+
+
 ## high-level methods to trim the bureaucracy
 func can_be_paid(state: BasePlayerState) -> bool:
 	if stamina > 0 or state.stamina_cost == 0:

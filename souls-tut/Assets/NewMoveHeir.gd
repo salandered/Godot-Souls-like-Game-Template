@@ -1,4 +1,4 @@
-extends State
+extends BasePlayerState
 
 # redefine your new State fields in the editor, set up 
 

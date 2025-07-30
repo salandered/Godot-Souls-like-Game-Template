@@ -1,6 +1,17 @@
 extends BasePlayerState
+class_name AttackState
 
 @export var RELEASES_PRIORITY: float
+
+@export_group("enemy communication")
+# in reality is a dynamic parameter, but for now I just return the maximum attacking radius
+# when looking forward, ie root bone Z delta 
+# plus the length of the weapon in "the extremum pose"
+# (eye-measured in animator's interface)
+@export var attack_radius: float
+@export var extremum_timing: float
+@export var posttracking_radius: float
+
 
 var hit_damage = 10 # will be a function of player stats in the future
 
@@ -42,3 +53,7 @@ func pack_hit_data(weapon: WeaponOh) -> HitData:
 func on_exit_state():
 	player.model.active_weapon.hitbox_ignore_list.clear()
 	player.model.active_weapon.is_attacking = false
+
+
+func time_til_priority_release() -> float:
+	return RELEASES_PRIORITY - get_progress()
