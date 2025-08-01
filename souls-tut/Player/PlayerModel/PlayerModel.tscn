@@ -79,7 +79,7 @@
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/weapon_block.res" id="70_40g42"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/withdraw.res" id="71_njpiu"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/block.res" id="72_cilx3"]
-[ext_resource type="Animation" path="res://pushback_Z_PROJECTED.res" id="79_2ndu4"]
+[ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/pushback_Z_PROJECTED.res" id="79_2ndu4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djdo1"]
 albedo_color = Color(0, 0.639216, 0, 1)
@@ -2514,7 +2514,7 @@ unique_name_in_owner = true
 processor = NodePath("../..")
 
 [node name="RightWrist" type="BoneAttachment3D" parent="."]
-transform = Transform3D(0.567204, -0.183106, 0.802965, 0.181908, -0.923038, -0.338985, 0.803237, 0.33834, -0.490242, -0.277498, 0.856748, -0.0188732)
+transform = Transform3D(0.567205, -0.183107, 0.802964, 0.181908, -0.923037, -0.338986, 0.803236, 0.33834, -0.490243, -0.277498, 0.856746, -0.018873)
 bone_name = "RightHand"
 bone_idx = 10
 use_external_skeleton = true
@@ -2530,7 +2530,7 @@ collision_mask = 4
 holder = NodePath("../../..")
 
 [node name="LeftWrist" type="BoneAttachment3D" parent="."]
-transform = Transform3D(0.741228, 0.147971, -0.654741, -0.423228, -0.654071, -0.626952, -0.521018, 0.741819, -0.42219, 0.300758, 0.892603, 0.12577)
+transform = Transform3D(0.741228, 0.14797, -0.654741, -0.423229, -0.654071, -0.626952, -0.521017, 0.74182, -0.422191, 0.300757, 0.8926, 0.12577)
 bone_name = "LeftHand"
 bone_idx = 34
 use_external_skeleton = true

@@ -14,7 +14,7 @@ func react_on_hit(hit: HitData):
 	else:
 		super.react_on_hit(hit)
 	# delete hit package to avoid memory leaks
-	hit.queue_free()
+	# hit.queue_free()
 
 
 func best_input_that_can_be_paid(input: InputPackage) -> String:

@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjbmkc53iwu64"]
+[gd_scene load_steps=4 format=3 uid="uid://cjbmkc53iwu64"]
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://scenes/utility/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://souls-tut/fancy-camera/targetable_aspect.tscn" id="1_vud1n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7ncb"]
 albedo_color = Color(1, 0, 0.0166664, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0iwo"]
-albedo_color = Color(0.3, 0.568333, 1, 1)
 
 [node name="Target" type="CSGBox3D"]
 transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 0, 0, 0)
@@ -17,18 +14,4 @@ size = Vector3(0.417908, 1, 0.271484)
 script = ExtResource("1_g7ncb")
 
 [node name="TargetableAspect" parent="." instance=ExtResource("1_vud1n")]
-
-[node name="LookAt" parent="TargetableAspect" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0740579, 0.191761)
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="TargetableAspect/LookAt" index="0"]
-transform = Transform3D(0.348877, 0, 0, 0, 0.159332, 0, 0, 0, 0.348877, 0, 0, 0)
-
-[node name="TargetMarker" parent="TargetableAspect" index="1"]
-transform = Transform3D(0.54851, 0, 0, 0, 0.54851, 0, 0, 0, 0.54851, 0, 0.18909, 0.213096)
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="TargetableAspect/TargetMarker" index="0"]
-transform = Transform3D(0.388625, 0, 0, 0, 0.185336, 0, 0, 0, 0.388625, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_p0iwo")
-
-[editable path="TargetableAspect"]
+transform = Transform3D(1, 0, 0, 0, 0.45222, 0, 0, 0, 1, 0, -0.435078, 0)

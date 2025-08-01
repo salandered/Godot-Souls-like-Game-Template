@@ -4,7 +4,6 @@ class_name StatesDataRepository
 @onready var state_database = %StatesDatabase
 
 
-
 func get_root_delta_pos(animation: String, progress: float, delta: float) -> Vector3:
 	var data = state_database.get_animation(animation)
 	var track = data.find_track("StatesDatabase:root_position", Animation.TYPE_VALUE)

@@ -1,15 +1,15 @@
 extends OpponentBehaviour
 
 
-var max_radius : float = 4
-var min_radius : float = 2
+var max_radius: float = 4
+var min_radius: float = 2
 
 var run_speed = 3
 
-var trajectories : Array[PackedVector3Array]
-var current_trajectory : PackedVector3Array
-var current_direction_index : int
-var current_direction_distance : float
+var trajectories: Array[PackedVector3Array]
+var current_trajectory: PackedVector3Array
+var current_direction_index: int
+var current_direction_distance: float
 
 func _ready():
 	accept_trajectories()
@@ -17,7 +17,7 @@ func _ready():
 	#print(left_trajectory)
 
 
-func formulate_input(delta : float) -> OpponentActionInput:
+func formulate_input(delta: float) -> OpponentActionInput:
 	#if beliefs.distance_to_player() > max_radius or beliefs.distance_to_player() < min_radius:
 		##print(beliefs.distance_to_player())
 		#return radius_input(delta)
@@ -33,10 +33,10 @@ func formulate_input(delta : float) -> OpponentActionInput:
 	#return next_input
 
 
-func trajectory_input(delta : float):
-	var current_delta : Vector3 = current_trajectory[current_direction_index + 1] - current_trajectory[current_direction_index]
-	var d_cen : Vector3 = current_delta.project(current_trajectory[current_direction_index])
-	var d_orb : Vector3 = current_delta - d_cen
+func trajectory_input(delta: float):
+	var current_delta: Vector3 = current_trajectory[current_direction_index + 1] - current_trajectory[current_direction_index]
+	var d_cen: Vector3 = current_delta.project(current_trajectory[current_direction_index])
+	var d_orb: Vector3 = current_delta - d_cen
 	var direction_to_player = beliefs.character_direction_to_player() * -1 * sign(current_trajectory[current_direction_index].dot(d_cen))
 	var relative_cen = direction_to_player * d_cen.length()
 	var relative_orb = d_orb.rotated(Vector3.UP, d_cen.signed_angle_to(relative_cen, Vector3.UP))
@@ -45,10 +45,10 @@ func trajectory_input(delta : float):
 	return next_input
 
 
-func update(input : OpponentActionInput, delta : float):
+func update(input: OpponentActionInput, delta: float):
 	current_action.update(input, delta)
 	current_direction_distance += run_speed * delta
-	var current_delta : Vector3 = current_trajectory[current_direction_index + 1] - current_trajectory[current_direction_index]
+	var current_delta: Vector3 = current_trajectory[current_direction_index + 1] - current_trajectory[current_direction_index]
 	if current_direction_distance >= current_delta.length():
 		current_direction_index += 1
 		current_direction_distance = 0
