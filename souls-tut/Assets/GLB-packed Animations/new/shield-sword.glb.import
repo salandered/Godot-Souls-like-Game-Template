@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://tmu05pqjmfng"
-path="res://.godot/imported/shield-sword.glb-3035fab2eaf808f8bca1649f6e18d694.scn"
+valid=false
 
 [deps]
 
 source_file="res://souls-tut/Assets/GLB-packed Animations/new/shield-sword.glb"
-dest_files=["res://.godot/imported/shield-sword.glb-3035fab2eaf808f8bca1649f6e18d694.scn"]
 
 [params]
 

@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://be43ltugxifir"
-path="res://.godot/imported/strafe.glb-7f5326df72c0e9b3d69dd441a5c4ddc8.scn"
+valid=false
 
 [deps]
 
 source_file="res://souls-tut/Assets/GLB-packed Animations/new/strafe.glb"
-dest_files=["res://.godot/imported/strafe.glb-7f5326df72c0e9b3d69dd441a5c4ddc8.scn"]
 
 [params]
 
