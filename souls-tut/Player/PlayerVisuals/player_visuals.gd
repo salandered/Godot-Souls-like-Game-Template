@@ -6,6 +6,8 @@ var model: PlayerModel
 
 @onready var beta_joints = $Beta_Joints
 @onready var beta_surface = $Beta_Surface
+@onready var test_body: MeshInstance3D = $ch_body_002
+
 
 @onready var sword_visuals_1 = $SwordVisuals1
 @onready var stamina_label = $"Stamina _bar_"
@@ -16,6 +18,7 @@ func accept_model(_model: PlayerModel):
 	model = _model
 	beta_surface.skeleton = _model.skeleton.get_path()
 	beta_joints.skeleton = _model.skeleton.get_path()
+	test_body.skeleton = _model.skeleton.get_path()
 
 
 func _process(_delta):

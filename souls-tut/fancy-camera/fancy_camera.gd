@@ -16,8 +16,7 @@ class_name FancyCamera
 @export var MIN_VERTICAL_ANGLE: float = 0.62
 @export var MAX_VERTICAL_ANGLE: float = 1.87
 @export var FOLLOW_SPEED: float = 0.05
-@export var TARGET_LOCK_DISTANCE_SQUARED = 128
-@export var LOCKING_ANGLE = 30
+
 
 @onready var csg_sphere_nest: CSGSphere3D = %CSGSphereNest
 @export var look_at_: Node3D # assign Player/CameraFocus here
@@ -39,8 +38,12 @@ class_name FancyCamera
 @onready var free_camera: FreeCameraState = %FreeCamera
 @onready var locked_camera: LockedCameraState = %LockedCamera
 
+var fov_pointer := 0
+
+var SPRING_ARM_COLLISION_MASK = 1
+@export var PLAYER_ROTATE_SPEED: float = 5.0
+
 var mouse_is_captured: bool = true
-var is_target_locked := false
 var locked_target: Node3D
 
 func _ready() -> void:
@@ -63,7 +66,7 @@ func _input(event):
 	if event.is_action_released("mouse_mode_switch"):
 		input_switch_mouse()
 
-	if event is InputEventMouseMotion and mouse_is_captured and not is_target_locked:
+	if event is InputEventMouseMotion and mouse_is_captured:
 		var d_hor = event.relative.x
 		var d_ver = event.relative.y
 		current_state.input_mouse_movement(d_hor, d_ver)
@@ -79,6 +82,14 @@ func input_switch_mouse():
 	mouse_is_captured = not mouse_is_captured
 
 
-func camera_focus_further_than(node: Node3D, distance: float) -> bool:
-	var camera_focus_pos = player.camera_focus.global_position
-	return camera_focus_pos.distance_squared_to(node.global_position) > distance
+func _unhandled_input(event):
+	if event.is_action_released("dev_camera_fov"):
+		change_fov()
+
+func change_fov():
+	fov_pointer += 1
+	var fovs = [10, 25, 50, 100]
+
+	var fov = fovs[fov_pointer % fovs.size()]
+
+	camera.fov = fov

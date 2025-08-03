@@ -28,7 +28,18 @@ script = ExtResource("4_k1mdb")
 
 [node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("6_e8a10")]
 unique_name_in_owner = true
+FOCUS_FOLLOWING_WEIGHT = 0.1
+CAM_MOUNT_FOLLOWING_WEIGHT = 0.12
+CAM_NEST_FOLLOWING_WEIGHT = 0.07
+OFFSET_BLEND_DURATION_ON_LOCK = 0.6
+TARGET_DROP_DISTANCE_SQUARED = 200
+HOR_SENSE = 1.0
+VER_SENSE = 1.0
+MIN_VERTICAL_ANGLE = 0.62
+MAX_VERTICAL_ANGLE = 1.87
+FOLLOW_SPEED = 0.05
 look_at_ = NodePath("../CameraFocus")
+PLAYER_ROTATE_SPEED = 5.0
 
 [node name="CameraFocus" type="Node3D" parent="."]
 unique_name_in_owner = true

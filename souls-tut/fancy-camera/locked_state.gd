@@ -58,13 +58,30 @@ func _move_camera_nest() -> void:
 	)
 
 func _move_camera() -> void:
-	if not fc.camera.position.is_equal_approx(fc.nest.position):
-		fc.camera.position = fc.nest.position
+	var mount_pos := fc.mount.global_position
+	var nest_pos := fc.nest.global_position
+	var space_state := fc.camera.get_world_3d().direct_space_state
+
+	var query := PhysicsRayQueryParameters3D.create(mount_pos, nest_pos)
+	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
+
+	var result = space_state.intersect_ray(query)
+
+	var final_pos := nest_pos
+	if result:
+		var hit_pos = result.position + result.normal * 0.05
+		var max_dist = (nest_pos - mount_pos).length()
+		var actual_dist = (hit_pos - mount_pos).length()
+		if actual_dist < max_dist:
+			final_pos = hit_pos
+
+	fc.camera.global_position = final_pos
 	fc.camera.look_at(fc.focus.global_position)
 
 func _check_distance() -> void:
 	# checks if the distance between the player and target is too big and drops the target if triggered
-	if fc.camera_focus_further_than(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
+	if fc.player.model.area_awareness.camera_focus_further_than(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
 		# print("dropping ", distance, " ", TARGET_DROP_DISTANCE_SQUARED)
 		_drop_target()
 
@@ -80,8 +97,8 @@ func _drop_target() -> void:
 	restored_offset = restored_offset.normalized() * fc.free_camera.offset.length()
 	fc.free_camera.offset = restored_offset
 	fc.current_state = fc.free_camera
-	fc.is_target_locked = false
 	fc.locked_target = fc.nest
+	fc.player.model.area_awareness.drop_target()
 	print("		fc.locked_target ", fc.locked_target)
 	print("DROP ended")
 

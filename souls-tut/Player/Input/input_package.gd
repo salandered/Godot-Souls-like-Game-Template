@@ -4,6 +4,8 @@ class_name InputPackage
 var actions: Array[String]
 var combat_actions: Array[String]
 
+var target_lock: bool = false
+
 var input_direction: Vector2
 
 # Fancy camera

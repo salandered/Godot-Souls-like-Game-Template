@@ -7,5 +7,7 @@ const sprint := "sprint"
 const jump_sprint := "jump_sprint"
 const jump_run := "jump_run"
 
+const strafe := "strafe"
+
 const parry := "parry"
 # const slash_1 := "slash_1"

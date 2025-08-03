@@ -9,6 +9,9 @@ func gather_input() -> InputPackage:
 		- Input.get_action_strength(InAction.move_back)
 	new_input.orbit_input = Input.get_action_strength(InAction.move_right) \
 		- Input.get_action_strength(InAction.move_left)
+
+	if Input.is_action_just_released("lock_target"):
+		new_input.actions.append(InDataAction.strafe)
 	
 	# MAIN
 	new_input.actions.append(InDataAction.idle)

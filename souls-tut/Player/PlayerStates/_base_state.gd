@@ -103,12 +103,12 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	var forward_speed := input.forward_input
 	var orbit_speed := input.orbit_input
 
-	if player.fancy_camera.is_target_locked:
+	if area_awareness.is_target_locked():
 		forward_speed *= -1
 		orbit_speed *= -1
 
 	var grounded_target: Vector3
-	if player.fancy_camera.is_target_locked and player.fancy_camera.locked_target:
+	if area_awareness.is_target_locked():
 		grounded_target = player.fancy_camera.locked_target.global_position
 	else:
 		grounded_target = player.fancy_camera.nest.global_position

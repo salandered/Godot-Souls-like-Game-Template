@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Opponent
 
 @export var player : CharacterBody3D
-
+@export var awake : bool = false
 @onready var animator = $AnimationPlayer
 @onready var behaviours = $Behaviours as OpponentsBehaviourContainer
 var current_behaviour : OpponentBehaviour
@@ -18,11 +18,16 @@ func _ready():
 
 
 func _physics_process(delta):
-	if current_behaviour._is_open_to_reconsiderations():
+	if current_behaviour._is_open_to_reconsiderations() and awake:
 		var most_intended_behaviour = brain.get_most_intended_behaviour()
 		if behaviour_needs_to_change(most_intended_behaviour):
 			switch_to(most_intended_behaviour)
 	current_behaviour._update(delta)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("dev_awake_opponent"):
+		awake = not awake
+
 
 func behaviour_needs_to_change(most_intended_behaviour : String) -> bool:
 	return not most_intended_behaviour == current_behaviour.behaviour_name or current_behaviour.forced_to_reconsider

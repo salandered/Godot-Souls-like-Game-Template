@@ -12,6 +12,7 @@ var offset: Vector3
 func initialise():
 	offset = fc.nest.global_position - fc.mount.global_position
 	look_at_ = fc.look_at_
+	
 	print("FreeCameraState ready()")
 	print("		look_at_ ", look_at_)
 	print("		offset ", offset)
@@ -59,17 +60,37 @@ func _move_camera_mount() -> void:
 	fc.nest.global_position = fc.mount.global_position + offset
 
 func _move_camera(delta: float) -> void:
-	# TODO: alternative?
+	# alternative from chat.
 	# @export var LERP_SPEED: float = 8.0
 	# var camera_nest_position = fc.nest.global_position
 	# var orig = fc.camera.global_transform.origin.lerp(camera_nest_position, delta * lerp_speed)
 	# fc.camera.global_transform = Transform3D(fc.camera.global_transform.basis, orig)
 	# fc.camera.look_at(fc.focus.global_position)
-	if not fc.camera.position.is_equal_approx(fc.nest.position):
-		fc.camera.position = fc.nest.position
+	# Working fair original 
+	# if not fc.camera.position.is_equal_approx(fc.nest.position):
+	# 	fc.camera.position = fc.nest.position
+	# fc.camera.look_at(fc.focus.global_position)
+	var from := fc.mount.global_position
+	var to := fc.nest.global_position
+	var space_state := fc.camera.get_world_3d().direct_space_state
+
+	var query := PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK # define this in your FancyCamera if needed
+
+	var result := space_state.intersect_ray(query)
+
+	var final_pos := to
+
+	if result:
+		var hit_pos = result.position + result.normal * 0.05
+		if (hit_pos - from).length_squared() < (to - from).length_squared():
+			final_pos = hit_pos
+
+	fc.camera.global_position = final_pos
 	fc.camera.look_at(fc.focus.global_position)
 
-
+	
 func input_mouse_movement(d_x: float, d_y: float) -> void:
 	# takes the Delta mouse movement and somehow counts a Delta angle from that movement length.
 	# Then, we rotate offset vector by that angle using the correspondent axis.
@@ -90,14 +111,12 @@ func input_mouse_movement(d_x: float, d_y: float) -> void:
 		offset = new_offset
 
 func input_target_lock():
-	print("LOCK started")
-	var locked_target = _find_target()
+	var locked_target = fc.player.model.area_awareness.lock_target()
 	if locked_target:
-		fc.is_target_locked = true
-		fc.current_state = fc.locked_camera
 		fc.locked_target = locked_target
 		print("		fc.locked_target ", fc.locked_target)
-		fc.locked_camera.look_at_ = locked_target.look_at_point
+		fc.current_state = fc.locked_camera
+		fc.locked_camera.look_at_ = fc.locked_target.look_at_point
 		
 		# fc.locked_camera.offset = fc.nest.global_position - fc.mount.global_position
 		fc.locked_camera.offset = offset
@@ -117,55 +136,3 @@ func _calc_locked_offset(locked_target: Node3D, offset_: Vector3) -> Vector3:
 	var new_offset = (center_projected - new_focus_projected).normalized() * offset_xz_length
 	new_offset.y = offset_.y
 	return new_offset
-
-func _find_target() -> Node3D:
-	var all_targets = get_tree().get_nodes_in_group("targetable")
-	# print("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
-	var candidates := []
-	for target in all_targets:
-		if _good_candidate(target):
-			candidates.append(target)
-	
-	if not candidates.is_empty():
-		var player = fc.player
-		# print("    > candidates before sorting: ", candidates.map(func(t): return t.label))
-		_sort_targets_by_player_distance(candidates)
-		# print("    > candidates after sorting: ", candidates.map(func(t): return t.label))
-		return candidates[0]
-	# print("   > nothing ")
-	return null
-
-
-func _good_candidate(target: Node3D) -> bool:
-	# TODO: may be add raycast from the camera or player to the target to ensure there's no obstacle in the way
-	var _print = func(label, reason): print("    x ", label, " ", reason)
-	var half_fov = deg_to_rad(fc.LOCKING_ANGLE) # narrows to ±30°
-	var min_dot = cos(half_fov)
-
-	if not fc.camera.is_position_in_frustum(target.global_position):
-		# _print.call(target.label, "frustum")
-		return false
-	if fc.camera_focus_further_than(target, fc.TARGET_LOCK_DISTANCE_SQUARED):
-		# _print.call(target.label, "distance")
-		return false
-
-	var camera_to_target = (target.global_position - fc.camera.global_transform.origin).normalized()
-	var camera_forward = - fc.camera.global_transform.basis.z
-	if camera_forward.dot(camera_to_target) < min_dot:
-		# _print.call(target.label, "angle between camera forward and target")
-		return false
-
-	var player_to_target = (target.global_position - fc.player.global_transform.origin).normalized()
-	var player_forward = fc.player.global_transform.basis.z
-	if player_forward.dot(player_to_target) < 0:
-		# _print.call(target.label, "behind player")
-		return false
-	
-	return true
-
-func _sort_targets_by_player_distance(targets: Array) -> void:
-	targets.sort_custom(
-			func(a, b): \
-				return a.global_position.distance_to(fc.player.global_position) \
-				< b.global_position.distance_to(fc.player.global_position)
-		)
