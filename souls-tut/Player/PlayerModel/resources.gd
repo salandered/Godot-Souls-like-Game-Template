@@ -32,7 +32,7 @@ func pay_block_cost(damage: float, blocking_coefficient: float):
 		var unblocked_portion = damage - stamina / blocking_coefficient
 		lose_stamina(stamina)
 		lose_health(unblocked_portion)
-		# do some punishing shit like force guardbreak or smth
+		# something punish like force guardbreak 
 		print("was guardbroken")
 
 

@@ -111,16 +111,16 @@ func input_mouse_movement(d_x: float, d_y: float) -> void:
 		offset = new_offset
 
 func input_target_lock():
-	var locked_target = fc.player.model.area_awareness.lock_target()
-	if locked_target:
-		fc.locked_target = locked_target
-		print("		fc.locked_target ", fc.locked_target)
+	var found_target = fc.player.model.area_awareness.find_target()
+	if found_target:
+		fc.locked_target = found_target
+		print("		fc.found_target ", fc.locked_target)
 		fc.current_state = fc.locked_camera
 		fc.locked_camera.look_at_ = fc.locked_target.look_at_point
 		
 		# fc.locked_camera.offset = fc.nest.global_position - fc.mount.global_position
 		fc.locked_camera.offset = offset
-		fc.locked_camera.target_offset = _calc_locked_offset(locked_target, offset)
+		fc.locked_camera.target_offset = _calc_locked_offset(found_target, offset)
 		fc.locked_camera.offset_transition_t = 0.0
 
 		print("LOCK SUCCESFULL")

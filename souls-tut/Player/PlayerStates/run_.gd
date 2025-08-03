@@ -36,6 +36,7 @@ func process_input_vector(input: InputPackage, delta: float):
 # 	if abs(angle) >= ANGULAR_SPEED * delta:
 # 		_velocity = face_direction.rotated(Vector3.UP, sign(angle) * ANGULAR_SPEED * delta) * TURN_SPEED
 # 	return _velocity.limit_length(SPEED)
+# endregion
 
 func on_exit_state():
 	animator.set_speed_scale(1)

@@ -1,11 +1,12 @@
 extends Node
 class_name AreaAwareness
 
+@onready var states: HumanoidStates = $"../States"
+
 
 @onready var player = $"../.."
 var last_pushback_vector: Vector3
 var last_input_package: InputPackage
-
 var locked_target: Node3D
 
 
@@ -19,22 +20,48 @@ func get_floor_distance() -> float:
 	return 999999
 
 
+func contextualize(new_input: InputPackage) -> InputPackage:
+	_translate_to_strafe(new_input)
+	return new_input
+
+var to_strafe = {
+		PlayerState.run: PlayerState.strafe,
+		PlayerState.idle: PlayerState.strafe
+	}
+
+
+func _translate_to_strafe(new_input: InputPackage):
+	if is_camera_locked():
+		# print("AA actions ", new_input.actions)
+		new_input.actions.sort_custom(states.states_priority_sort)
+		var prioritized_state: String = new_input.actions[0] # safe
+		var translated_to_strafe = to_strafe.get(prioritized_state)
+
+		if translated_to_strafe:
+			# print("   AA ", prioritized_state, " -> ", translated_to_strafe)
+			new_input.actions.erase(prioritized_state)
+			new_input.actions.append(translated_to_strafe)
+			# print("   AA actions result: ", new_input.actions)
+
+
+func is_camera_locked() -> bool:
+	return player.fancy_camera.current_state is LockedCameraState
+
 func is_target_locked() -> bool:
 	return locked_target != null
 
-func lock_target() -> Node3D:
-	locked_target = _find_target()
-		# print("		fc.locked_target ", locked_target)
-		# print("LOCK SUCCESFULL")
+func get_camera_locked_target() -> Node3D:
+	return player.fancy_camera.locked_target
+
+func get_locked_target() -> Node3D:
 	return locked_target
-		# print("xLOCK NOT")
+
 		
+# func drop_target():
+# 	camera_locked_target = null
 
-func drop_target():
-	locked_target = null
 
-
-func _find_target():
+func find_target():
 	var all_targets = get_tree().get_nodes_in_group("targetable")
 	# print("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
 	var candidates := []
@@ -50,10 +77,16 @@ func _find_target():
 	# print("   > nothing ")
 	return null
 
+func camera_focus_further_than(node: Node3D, distance: float) -> bool:
+	var camera_focus_pos = player.camera_focus.global_position
+	return camera_focus_pos.distance_squared_to(node.global_position) > distance
+
+
 func _good_candidate(target: Node3D) -> bool:
 	# TODO: may be add raycast from the camera or player to the target to ensure there's no obstacle in the way
 	var _print = func(label, reason): print("    x ", label, " ", reason)
-	var half_fov = deg_to_rad(LOCKING_ANGLE) # narrows to ±30°
+	# print(LOCKING_ANGLE)
+	var half_fov = deg_to_rad(30) # narrows to ±30°
 	var min_dot = cos(half_fov)
 
 	if not player.fancy_camera.camera.is_position_in_frustum(target.global_position):
@@ -83,8 +116,3 @@ func _sort_targets_by_player_distance(targets: Array) -> void:
 				return a.global_position.distance_to(player.global_position) \
 				< b.global_position.distance_to(player.global_position)
 		)
-
-
-func camera_focus_further_than(node: Node3D, distance: float) -> bool:
-	var camera_focus_pos = player.camera_focus.global_position
-	return camera_focus_pos.distance_squared_to(node.global_position) > distance

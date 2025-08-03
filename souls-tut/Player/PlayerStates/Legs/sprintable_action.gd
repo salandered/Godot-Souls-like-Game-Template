@@ -1,5 +1,6 @@
 extends LegsBehaviour
 
+## SprintBehaviour
 
 func transition_legs_state(input, _delta):
 	var target_state: String

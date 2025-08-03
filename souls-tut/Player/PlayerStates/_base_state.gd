@@ -12,7 +12,7 @@ var combat: HumanoidCombat
 var states_data_repo: StatesDataRepository
 var container: HumanoidStates
 var area_awareness: AreaAwareness
-var legs: Legs
+var legs_manager: LegsManager
 var left_wrist: BoneAttachment3D
 
 

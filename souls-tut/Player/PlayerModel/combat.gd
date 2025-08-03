@@ -28,13 +28,6 @@ func translate_combat_actions(new_input: InputPackage):
 		new_input.combat_actions.sort_custom(_priority_sort)
 		var prioritized_action: String = new_input.combat_actions[0] # safe
 		var translated_to_state: String = model.active_weapon.basic_attacks[prioritized_action]
-		# region: TODO: here another moment where state is treated as input package action
-		# it's ok while InDataAction is subset of PlayerState
-		# but ideally should be context transition (another translation oh).
-		# or treat basic_attacks not as InDataCombatAction: PlayerState
-		# but InDataCombatAction -> InDataAction ?
-		# OR InDataAction is just PlayerState? consider this
-		# endregion
 		new_input.actions.append(translated_to_state)
 
 func filter_with_resources(input: InputPackage):

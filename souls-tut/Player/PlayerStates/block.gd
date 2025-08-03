@@ -32,7 +32,7 @@ func react_on_hit(hit: HitData):
 func update_resources(_delta: float):
 	pass # normally would be some routine, but we only regenerate stamina now, so empty method
 
-# Don't forget you can even override the class getters!)
+# Don't forget you can even override the class getters!
 # For example, we can override backend animation getter to consider blocking sector also.
 #func is_grabbable():
 	# if grabbed from blocking sector - nope, if from the back - yup

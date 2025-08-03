@@ -7,7 +7,7 @@
 	// exlude from file view
 	"files.exclude": {
 		// godot 
-		"**/*.res": true,
+		// "**/*.res": true,
 		"**/*.gd.uid": true,
 		// images
 		"**/*.jpg": true,
@@ -41,25 +41,22 @@
 		"editor.findMatchHighlightBackground": "#ffffff00", // all other matches
 		"editor.findMatchHighlightBorder": "#feffc686",
 		// COLORFUL FOLDERS
-		"folderPathColor.custom1": "#ffa9c8",
+		// "folderPathColor.custom_yellow": "#ff8aef",
+		//
+		"folderPathColor.custom1": "#ffa9c8", // tender enemy
 		"folderPathColor.custom2": "#ff8aef",
-		"folderPathColor.custom3": "#c3c78d",
-		"folderPathColor.custom4": "#a4d4b2",
+		"folderPathColor.custom3": "#c3c78d", // dark misc yellow
+		"folderPathColor.custom4": "#a4d4b2", // tender green
 		"folderPathColor.custom5": "#94f0c5d5",
+		"folderPathColor.custom6": "#cdcf90",
+		"folderPathColor.custom7": "#cdcf90", // yellow accent
 	},
 	// COLORFUL FOLDERS
+	// Predefined color names: blue, magenta, red, cyan, green, yellow.
 	"folder-path-color.folders": [
 		{
 			"path": "-assets-",
 			"color": "custom3"
-		},
-		{
-			"path": "scripts/player",
-			"color": "custom2"wwda
-		},
-		{
-			"path": "scripts",
-			"color": "custom4"
 		},
 		{
 			"path": "souls-tut/Enemies",
@@ -68,6 +65,10 @@
 		{
 			"path": "souls-tut/fancy-camera",
 			"color": "custom5"
+		},
+		{
+			"path": "souls-tut/Player/PlayerModel/area_awareness.gd",
+			"color": "custom7"
 		},
 	],
 	// No built in git color on files (conflict with colorful folders)

@@ -9,37 +9,38 @@ class_name HumanoidStates
 @export var combat: HumanoidCombat
 @export var area_awareness: AreaAwareness
 @export var states_data_repo: StatesDataRepository
-@export var legs: Legs
+@export var legs_manager: LegsManager
 @export var left_wrist: BoneAttachment3D
 
 var states: Dictionary # { string : State }, where string is State heirs name
 
-
-func accept_states():
-	for child in get_children():
+func _get_state_descendants(node: Node) -> Array:
+	var descendants := []
+	for child in node.get_children():
 		if child is BasePlayerState:
-			states[child.state_name] = child
-			child.player = player
-			child.animator = animator
-			child.skeleton = skeleton
-			child.resources = resources
-			child.left_wrist = left_wrist
-			child.combat = combat
-			child.states_data_repo = states_data_repo
-			child.container = self
-			child.DURATION = states_data_repo.get_duration(child.backend_animation)
-			child.area_awareness = area_awareness
-			child.legs = legs
-			child.assign_combos()
+			descendants.append(child)
+		descendants.append_array(_get_state_descendants(child))
+	return descendants
+	
+func accept_states():
+	for state: BasePlayerState in _get_state_descendants(self):
+		states[state.state_name] = state
+		state.player = player
+		state.animator = animator
+		state.skeleton = skeleton
+		state.resources = resources
+		state.left_wrist = left_wrist
+		state.combat = combat
+		state.states_data_repo = states_data_repo
+		state.container = self
+		state.DURATION = states_data_repo.get_duration(state.backend_animation)
+		state.area_awareness = area_awareness
+		state.legs_manager = legs_manager
+		state.assign_combos()
 
-			if child.priority <= 0:
-				print_debug("Error for ", child.state_name)
-
-			if child.animation.is_empty():
-				print_debug("Error for ", child.state_name)
-
-			if child.backend_animation.is_empty():
-				print_debug("Error for ", child.state_name)
+		assert(state.priority and state.priority >= 0, " priority problem for state: " + state.state_name)
+		assert(state.animation and not state.animation.is_empty(), " animation problem for state: " + state.state_name)
+		assert(state.backend_animation and not state.backend_animation.is_empty(), " backend_animation problem for state: " + state.state_name)
 
 
 func states_priority_sort(a: String, b: String):

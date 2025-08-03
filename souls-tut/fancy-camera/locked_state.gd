@@ -98,7 +98,6 @@ func _drop_target() -> void:
 	fc.free_camera.offset = restored_offset
 	fc.current_state = fc.free_camera
 	fc.locked_target = fc.nest
-	fc.player.model.area_awareness.drop_target()
 	print("		fc.locked_target ", fc.locked_target)
 	print("DROP ended")
 
