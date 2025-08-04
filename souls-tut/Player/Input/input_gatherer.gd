@@ -1,30 +1,36 @@
 extends Node
 class_name InputGatherer
 
-func gather_input() -> InputPackage:
+
+const LONG_PRESS_THRESHOLD: float = 0.2
+
+var _press_timer: float = 0.0
+var _long_press_triggered: bool = false
+
+func gather_input(delta: float) -> InputPackage:
 	var new_input = InputPackage.new()
 
-	# FOR FANCY CAMERA
-	new_input.forward_input = Input.get_action_strength(InAction.move_forward) \
-		- Input.get_action_strength(InAction.move_back)
-	new_input.orbit_input = Input.get_action_strength(InAction.move_right) \
-		- Input.get_action_strength(InAction.move_left)
+	_gather_lock_target(new_input, delta)
 
-	if Input.is_action_just_released("lock_target"):
-		new_input.target_lock = true
-	
+	# FOR FANCY CAMERA
+	new_input.forward_input = Input.get_action_strength(RawAction.move_forward) \
+		- Input.get_action_strength(RawAction.move_back)
+	new_input.orbit_input = Input.get_action_strength(RawAction.move_right) \
+		- Input.get_action_strength(RawAction.move_left)
+
+
 	# MAIN
 	new_input.actions.append(PlayerState.idle)
 
 	new_input.input_direction = Input.get_vector(
-		InAction.move_left, InAction.move_right, InAction.move_forward, InAction.move_back)
+		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
 	if new_input.input_direction != Vector2.ZERO:
 		new_input.actions.append(PlayerState.run)
-		if Input.is_action_pressed(InAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
+		if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
 			new_input.actions.append(PlayerState.sprint)
 	
-	if Input.is_action_pressed(InAction.parry):
+	if Input.is_action_pressed(RawAction.parry):
 		new_input.actions.append(PlayerState.parry)
 
 
@@ -45,19 +51,38 @@ func gather_input() -> InputPackage:
 	if Input.is_action_pressed("shield_throw_reload"):
 		new_input.actions.append("shield_throw_reload")
 		
-	if Input.is_action_pressed(InAction.jump):
+	if Input.is_action_pressed(RawAction.jump):
 		if new_input.actions.has(PlayerState.sprint):
 			new_input.actions.append(PlayerState.jump_sprint)
 		else:
 			new_input.actions.append(PlayerState.jump_run)
 	
-	if Input.is_action_just_pressed(InAction.light_attack):
+	if Input.is_action_just_pressed(RawAction.light_attack):
 		new_input.combat_actions.append(InDataCombatAction.light_attack_pressed)
 	#if Input.is_action_just_pressed("heavy_attack"):
 		#new_input.combat_actions.append("heavy_attack_pressed")
 	
+
 	# SYSTEM
-	if Input.is_action_just_pressed(InAction.force_quit):
+	if Input.is_action_just_pressed(RawAction.force_quit):
 		get_tree().quit()
 
 	return new_input
+
+
+func _gather_lock_target(new_input: InputPackage, delta: float):
+	if Input.is_action_pressed(RawAction.lock_target):
+		_press_timer += delta
+		
+		if not _long_press_triggered and _press_timer >= LONG_PRESS_THRESHOLD:
+			_long_press_triggered = true
+			print("[input] target_lock_LONG_pressed")
+			new_input.target_lock_long_pressed = true
+			_press_timer = 0.0
+	
+	if Input.is_action_just_released(RawAction.lock_target):
+		if not _long_press_triggered:
+			print("[input] target_lock_pressed")
+			new_input.target_lock_pressed = true
+		_press_timer = 0.0
+		_long_press_triggered = false

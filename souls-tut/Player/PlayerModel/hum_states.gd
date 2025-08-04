@@ -51,4 +51,5 @@ func states_priority_sort(a: String, b: String):
 
 
 func get_state_by_name(state_name: String) -> BasePlayerState:
+	assert(states.has(state_name), "states dict doesn't have " + state_name)
 	return states[state_name]

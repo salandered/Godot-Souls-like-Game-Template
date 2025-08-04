@@ -8,20 +8,47 @@ class_name AreaAwareness
 var last_pushback_vector: Vector3
 var last_input_package: InputPackage
 var locked_target: Node3D
+var strafe_lock: bool = false
+var camera_just_locked: bool = false
 
+enum LockState {
+		ALL_UNLOCKED, # strafe cant be locked while camera unlocked
+		CAMERA_LOCKED_STRAFE_UNLOCKED,
+		ALL_LOCKED,
+	}
+
+var current_lock_state: LockState = LockState.ALL_UNLOCKED
 
 @export var LOCKING_ANGLE = 30
 @export var TARGET_LOCK_DISTANCE_SQUARED = 128
 @onready var downcast = $Downcast as RayCast3D
 
-func get_floor_distance() -> float:
-	if downcast.is_colliding():
-		return downcast.global_position.distance_to(downcast.get_collision_point())
-	return 999999
+func _choose_lock_state() -> LockState:
+	if current_lock_state == LockState.ALL_UNLOCKED:
+		if is_camera_locked():
+			# may change to ALL_LOCKED
+			return LockState.CAMERA_LOCKED_STRAFE_UNLOCKED
 
+	elif current_lock_state == LockState.CAMERA_LOCKED_STRAFE_UNLOCKED:
+		if not is_camera_locked():
+			return LockState.ALL_UNLOCKED
+		if last_input_package.target_lock_long_pressed:
+			return LockState.ALL_LOCKED
+
+	elif current_lock_state == LockState.ALL_LOCKED:
+		if not is_camera_locked():
+			return LockState.ALL_UNLOCKED
+
+		if last_input_package.target_lock_long_pressed:
+			return LockState.CAMERA_LOCKED_STRAFE_UNLOCKED
+	
+	return current_lock_state
 
 func contextualize(new_input: InputPackage) -> InputPackage:
-	_translate_to_strafe(new_input)
+	current_lock_state = _choose_lock_state()
+
+	if current_lock_state == LockState.ALL_LOCKED:
+		_translate_to_strafe(new_input)
 	return new_input
 
 var to_strafe = {
@@ -31,17 +58,21 @@ var to_strafe = {
 
 
 func _translate_to_strafe(new_input: InputPackage):
-	if is_camera_locked():
-		# print("AA actions ", new_input.actions)
-		new_input.actions.sort_custom(states.states_priority_sort)
-		var prioritized_state: String = new_input.actions[0] # safe
-		var translated_to_strafe = to_strafe.get(prioritized_state)
+	# print("AA actions ", new_input.actions)
+	new_input.actions.sort_custom(states.states_priority_sort)
+	var prioritized_state: String = new_input.actions[0] # safe
+	var translated_to_strafe = to_strafe.get(prioritized_state)
 
-		if translated_to_strafe:
-			# print("   AA ", prioritized_state, " -> ", translated_to_strafe)
-			new_input.actions.erase(prioritized_state)
-			new_input.actions.append(translated_to_strafe)
-			# print("   AA actions result: ", new_input.actions)
+	if translated_to_strafe:
+		# print("   AA ", prioritized_state, " -> ", translated_to_strafe)
+		new_input.actions.erase(prioritized_state)
+		new_input.actions.append(translated_to_strafe)
+		# print("   AA actions result: ", new_input.actions)
+
+func get_floor_distance() -> float:
+	if downcast.is_colliding():
+		return downcast.global_position.distance_to(downcast.get_collision_point())
+	return 999999
 
 
 func is_camera_locked() -> bool:

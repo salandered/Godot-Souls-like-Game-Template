@@ -46,10 +46,7 @@ func update(input: InputPackage, delta: float):
 	# TODO TODO: moved back here, TorsoStates triggers _update from legs behaviour -> doubledipping
 	current_state.update_resources(delta)
 	
-	if current_state.state_name == "strafe":
-		current_state._update(input, delta)
-	else:
-		current_state._update(input, delta)
+	current_state._update(input, delta)
 
 func switch_to(state: String):
 	if not is_enemy:

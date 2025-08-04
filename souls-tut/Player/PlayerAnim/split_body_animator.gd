@@ -4,15 +4,48 @@
 extends Node
 class_name SplitBodyAnimator
 
-@onready var torso_animator = $TorsoAnim
-@onready var legs_animator = $LegsAnim
+
+@onready var torso_animator: AnimationPlayer = $TorsoAnim
+@onready var legs_animator: AnimationPlayer = $LegsAnim
 
 @export var model: PlayerModel
-@export var skeleton: Skeleton3D # MixamoSkeleton
+@export var skeleton: Skeleton3D
 var full_body_mode: bool = true
 
 var synchronization_delta = 0.01
 
+func _ready():
+	configure_blending_times()
+
+
+func configure_blending_times():
+	_set_blend_time(A.strafe_R, A.strafe_L, 0.5)
+	# _set_blend_time("ss_strafe/strafe_L", "ss_strafe/strafe_R", 0.5)
+	_set_blend_time(A.strafe_R, A.strafe_idle, 0.5)
+	_set_blend_time(A.strafe_L, A.strafe_idle, 0.5)
+	_set_blend_time(A.strafe_R, A.strafe_forward, 0.5)
+	_set_blend_time(A.strafe_L, A.strafe_back, 0.5)
+	_set_blend_time(A.idle_longsword, A.strafe_idle, 1)
+	_set_blend_time(A.strafe_idle, A.idle_longsword, 1)
+	#_set_blend_time("jump_sprint", "midair", 0.5)
+	#_set_blend_time("landing_run", "sprint", 0.3)
+	#_set_blend_time("landing_sprint", A.run, 0.3)
+	#_set_blend_time("idle", "longsword_1", 0.5)
+	#_set_blend_time("idle", "parry", 0.3)
+	#_set_blend_time("parry", "idle", 0.3)
+	#_set_blend_time("longsword_1", "idle_longsword", 0.8)
+	#_set_blend_time("longsword_1", A.run, 0.3)
+	#_set_blend_time("longsword_1", "sprint", 0.3)
+	#_set_blend_time("longsword_1", "longsword_2", 0.3)
+
+
+func _set_blend_time(from: String, to: String, time: float):
+	u.assert_has_animation(torso_animator, from + "_torso")
+	u.assert_has_animation(torso_animator, to + "_torso")
+	u.assert_has_animation(legs_animator, from + "_legs")
+	u.assert_has_animation(legs_animator, to + "_legs")
+	torso_animator.set_blend_time(from + "_torso", to + "_torso", time)
+	legs_animator.set_blend_time(from + "_legs", to + "_legs", time)
 
 func update_body_animations():
 	_update_playmode()
@@ -42,6 +75,22 @@ func _update_playmode():
 	else:
 		full_body_mode = true
 
+func __play_not_splitted(animation: String, custom_speed: float = 1.0):
+	# TODO: DANGER temporary method for invokin animator in random places...
+	legs_animator.stop()
+	torso_animator.stop()
+	legs_animator.play(animation, custom_speed)
+
+func __set_custom_animations(animation, full_body_mode_: bool = true):
+	# TODO: temporary method for invokin animator in random places...
+	if full_body_mode_:
+		_set_legs_animation(animation)
+		_set_torso_animation(animation)
+		_synchronize_if_needed()
+	else:
+		# probably support only full_body_mode_
+		_set_legs_animation(model.legs_manager.current_legs_state.animation)
+		_set_torso_animation(animation)
 
 func _set_animations():
 	if full_body_mode:
@@ -54,13 +103,17 @@ func _set_animations():
 
 
 func _set_legs_animation(animation: String):
-	#print(legs_animator.current_animation + " changing to " + animation + "_legs")
-	legs_animator.play(animation + "_legs")
+	var animation_name = animation + "_legs"
+	print(legs_animator.current_animation + " changing to " + animation_name)
+	u.assert_has_animation(legs_animator, animation_name)
+	legs_animator.play(animation_name)
 
 
 func _set_torso_animation(animation: String):
-	#print(torso_animator.current_animation + " changing to " + animation + "_torso")
-	torso_animator.play(animation + "_torso")
+	var animation_name = animation + "_torso"
+	print(torso_animator.current_animation + " changing to " + animation_name)
+	u.assert_has_animation(torso_animator, animation_name)
+	torso_animator.play(animation_name)
 
 # This triggers at the moments of first animation change after exiting TorsoPartialState.
 # Imagine we had running legs with 0.5 sec progress, and now we need to Run with full body.

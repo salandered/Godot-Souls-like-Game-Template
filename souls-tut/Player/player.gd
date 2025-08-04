@@ -17,6 +17,7 @@ var debug_cams: Array[Node]
 var cam_i := 0
 
 
+
 func _ready():
 	#Print.print_ready(self)
 	visuals.accept_model(model)
@@ -48,7 +49,7 @@ func _update_debug_interface():
 
 func _physics_process(delta):
 	# CONTROLLER (INPUT)
-	var input := input_gatherer.gather_input()
+	var input := input_gatherer.gather_input(delta)
 	
 	# MODEL (SIMULATION)
 	model.update(input, delta)

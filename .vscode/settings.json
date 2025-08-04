@@ -21,18 +21,21 @@
 	"workbench.editor.revealIfOpen": true,
 	// against copilot
 	"editor.inlineSuggest.enabled": false,
-	// FOLDER COLORS EXAMPLE
-	// "workbench.colorCustomizations": {
-	//     "folderPathColor.custom1": "#FF4488",
-	//     "folderPathColor.custom2": "#88ff44",
-	// },
-	// "folder-path-color.folders": [
-	//     {
-	//         "path": "frontend",
-	//         "symbol": "SR",
-	//         "tooltip": "Source files"
-	//     },
-	// ]
+	"editor.suggestSelection": "recentlyUsed",
+	/* FOLDER COLORS EXAMPLE
+	"workbench.colorCustomizations": {
+	    "folderPathColor.custom1": "#FF4488",
+	    "folderPathColor.custom2": "#88ff44",
+	},
+	"folder-path-color.folders": [
+	    {
+	        "path": "frontend",
+	        "symbol": "SR",
+	        "tooltip": "Source files"
+	    },
+	]
+	*/
+	//
 	// COLORS
 	"workbench.colorCustomizations": {
 		// BUILD IN
@@ -44,11 +47,11 @@
 		// "folderPathColor.custom_yellow": "#ff8aef",
 		//
 		"folderPathColor.custom1": "#ffa9c8", // tender enemy
-		"folderPathColor.custom2": "#ff8aef",
+		"folderPathColor.custom2": "#d88ad8", // animation player
 		"folderPathColor.custom3": "#c3c78d", // dark misc yellow
 		"folderPathColor.custom4": "#a4d4b2", // tender green
 		"folderPathColor.custom5": "#94f0c5d5",
-		"folderPathColor.custom6": "#cdcf90",
+		"folderPathColor.custom6": "#dfdfdf", // white
 		"folderPathColor.custom7": "#cdcf90", // yellow accent
 	},
 	// COLORFUL FOLDERS
@@ -70,6 +73,14 @@
 			"path": "souls-tut/Player/PlayerModel/area_awareness.gd",
 			"color": "custom7"
 		},
+		{
+			"path": "souls-tut/Player/PlayerStates/_base_state.gd",
+			"color": "custom6"
+		},
+		{
+			"path": "souls-tut/Player/PlayerAnim/split_body_animator.gd",
+			"color": "custom2"
+		},
 	],
 	// No built in git color on files (conflict with colorful folders)
 	"git.decorations.enabled": false,
@@ -78,7 +89,7 @@
 	"editor.detectIndentation": false,
 	// File view more shifted
 	"workbench.tree.indent": 14,
-	//
+	// Probably duplicates my custom edits to theme extension
 	"editor.tokenColorCustomizations": {
 		"textMateRules": [
 			{
@@ -104,30 +115,175 @@
 			}
 		]
 	},
-	// COPIED FROM GLOBAL SETTINGS JIC. 
-	// May be useful for setting project from git on another machine. Uncomment if needed
-	// godot specific
-	//"workbench.colorTheme": "Godot 4",
-	// "[gdscript]": {},
-	// "godotTools.lsp.serverPort": 6005,
-	// other
-	//"editor.fontWeight": 1,
-	// "editor.foldingHighlight": false,
-	// "editor.minimap.enabled": false,
-	// "explorer.confirmDragAndDrop": false,
-	// "explorer.confirmDelete": false,
-	// "git.enableSmartCommit": true,
-	// "editor.lineNumbers": "off",
-	// "github.copilot.editor.enableCodeActions": false,
-	// "diffEditor.ignoreTrimWhitespace": false,
-	// "workbench.editor.tabSizing": "shrink",
-	// "editor.semanticTokenColorCustomizations": {},
-	// "python.analysis.aiCodeActions": {
-	// 	"implementAbstractClasses": true
-	// },
-	// "editor.inlineSuggest.showToolbar": "never",
-	// "github.copilot.nextEditSuggestions.enabled": false,
-	// "editor.formatOnSave": true,
-	// "workbench.statusBar.visible": false,
-	// "telemetry.feedback.enabled": false,
+	//
+	// HIGHLIGHT EXTENSION
+	"highlight.regexes": {
+		// Highlight every instance of "A." (e.g., A.my_static_method)
+		"\\b(A\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+					// "fontWeight": "bold"
+				}
+			]
+		},
+		// Highlight the action names that follow "InAction."
+		"(RawAction\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5"
+				}, // This applies a subtle color to the "InAction." part
+				{
+					// "color": "#FFEEA1E5",
+				} // This applies the yellow color to the word
+			]
+		},
+		"(PlayerState\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				}, // This applies a subtle color to the "InAction." part
+				{
+					// "color": "#FFEEA1E5",
+				} // This applies the yellow color to the word
+			]
+		}
+	}
+}
+/* EXAMPLES 1 (CHECK FOR SANITY)
+	"highlight.regexes": {
+		// EXAMPLES
+		// 1. Highlight the '_run' and '_cleanup' functions to make them stand out.
+		//    We use a regex to match the function definition and give it a background color.
+		"^(func)( )(_run|_cleanup)": {
+			"regexFlags": "gm",
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "white",
+					"backgroundColor": "#FF5733"
+				}, // 'func' keyword
+				{}, // space
+				{
+					"backgroundColor": "#FF5733",
+					"color": "white"
+				} // '_run' or '_cleanup'
+			]
+		},
+		// 2. Highlight all 'assert' statements in pink to draw attention to sanity checks.
+		"\\b(assert)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "deeppink"
+				}
+			]
+		},
+		// 3. Highlight the 'hips_track' variable to make a key variable stand out.
+		"\\b(hips_track)\\b": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"backgroundColor": "#2980b9",
+					"color": "#ffffff",
+					"fontWeight": "bold"
+				}
+			]
+		},
+		// 4. Highlight all 'const' definitions in a specific color.
+		"^(const)(.*?)(?= = )": {
+			"regexFlags": "gm",
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e74c3c"
+				},
+				{
+					"color": "#e74c3c"
+				}
+			]
+		}
+	}
+	*/
+//
+/* EXAMPLES 2 (CHECK FOR SANITY)
+	"highlight.regexes": {
+	1. Highlight all custom comment tags like @TOOL or @BUG.
+	   We'll give the tag a distinct color and the rest of the comment a different style.
+	    "^(//\\s*)((?:@TOOL|@BUG|@NOTE|@TODO))(.+)": {
+	        "regexFlags": "gm",
+	        "filterLanguageRegex": "gdscript",
+	        "decorations": [
+	            { "color": "#808080" }, // The '//' part of the comment
+	            { "color": "#00ff7f", "fontWeight": "bold" }, // The tag itself (@TOOL, etc.)
+	            { "color": "#808080", "fontStyle": "italic" } // The rest of the comment text
+	        ]
+	    },
+	    // 2. Highlight the names of Godot's built-in signals and custom signals.
+	    //    This makes signal connections much easier to spot.
+	    "(\\.(?:connect|emit_signal|is_connected))\\(\\s*\"([a-zA-Z_\\d]+)\"": {
+	        "filterLanguageRegex": "gdscript",
+	        "decorations": [
+	            {}, // The method call (e.g., .connect)
+	            { "color": "#ff007f", "fontWeight": "bold" } // The signal name string
+	        ]
+	    },
+	    // 3. Highlight key functions like _ready() or _process(delta) to jump out at you.
+	    "^(func\\s+)(_ready|_process|_input|_unhandled_input|_physics_process)(.*)": {
+	        "regexFlags": "gm",
+	        "filterLanguageRegex": "gdscript",
+	        "decorations": [
+	            {}, // The 'func' keyword
+	            { "color": "#ff8c00", "fontWeight": "bold" }, // The function name
+	            {}  // The rest of the line
+	        ]
+	    },
+	    // 4. Highlight 'const' definitions in a more advanced way.
+	    //    The 'const' keyword gets one color, and the variable name gets another.
+	    "^(const)\\s+([a-zA-Z_\\d]+)\\b": {
+	        "regexFlags": "gm",
+	        "filterLanguageRegex": "gdscript",
+	        "decorations": [
+	            { "color": "#00bfff", "fontWeight": "bold" }, // The 'const' keyword
+	            { "color": "#ffff00" }                        // The variable name
+	        ]
+	    },
+	    // 5. Highlight all 'yield' statements to spot asynchronous code. (Godot 3.x)
+	    "\\b(yield)\\b": {
+	        "filterLanguageRegex": "gdscript",
+	        "decorations": [{ "color": "#ffd700", "fontStyle": "italic" }]
+	    },
+	}
+	*/
+//
+/* --- COPIED FROM GLOBAL SETTINGS JIC ----  
+	May be useful for setting project from git on another machine. Uncomment if needed
+	godot specific
+	"workbench.colorTheme": "Godot 4",
+	"[gdscript]": {},
+	"godotTools.lsp.serverPort": 6005,
+	other
+	"editor.fontWeight": 1,
+	"editor.foldingHighlight": false,
+	"editor.minimap.enabled": false,
+	"explorer.confirmDragAndDrop": false,
+	"explorer.confirmDelete": false,
+	"git.enableSmartCommit": true,
+	"editor.lineNumbers": "off",
+	"github.copilot.editor.enableCodeActions": false,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"workbench.editor.tabSizing": "shrink",
+	"editor.semanticTokenColorCustomizations": {},
+	"python.analysis.aiCodeActions": {
+		"implementAbstractClasses": true
+	},
+	"editor.inlineSuggest.showToolbar": "never",
+	"github.copilot.nextEditSuggestions.enabled": false,
+	"editor.formatOnSave": true,
+	"workbench.statusBar.visible": false,
+	"telemetry.feedback.enabled": false,
+	*/
 }

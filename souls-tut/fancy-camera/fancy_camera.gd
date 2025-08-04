@@ -28,7 +28,6 @@ class_name FancyCamera
 # - Camera Focus is the player's chest zone that is being followed by a Focus Point.
 # - Focus Poing, Mount, Nest and PlayerCamera are children of Fancy Camera.
 @onready var player: CharacterBody3D = $".."
-@onready var root_player: CharacterBody3D = $".."
 @onready var focus: Node3D = $FocusPoint
 @onready var mount: Node3D = $CameraMount
 @onready var nest: Node3D = $CameraNest
@@ -51,30 +50,36 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	free_camera.initialise()
 	print('FancyCamera ready ')
-	print("		player ", player)
 
 func _physics_process(delta: float) -> void:
+	var input: InputPackage = player.model.area_awareness.last_input_package
+	# TODO: target switch on mouse move (or mouse scroll which is simplier)
+	
+	
+	if input.target_lock_pressed:
+		current_state.input_target_lock()
+
 	current_state.update(delta)
 
 
 func _input(event):
-	# TODO: target switch on mouse move (or mouse scroll which is simplier)
-	if event.is_action_released("lock_target"):
-		print("PRESSED lock_target")
-		current_state.input_target_lock()
-
 	if event.is_action_released("mouse_mode_switch"):
-		input_switch_mouse()
+		_input_switch_mouse()
 
 	if event is InputEventMouseMotion and mouse_is_captured:
 		var d_hor = event.relative.x
 		var d_ver = event.relative.y
 		current_state.input_mouse_movement(d_hor, d_ver)
 
+
+	if event.is_action_released("dev_camera_fov"):
+		_change_fov()
+
 	if event.is_action_pressed("debug_toggle_nest"):
 		csg_sphere_nest.visible = !csg_sphere_nest.visible
 
-func input_switch_mouse():
+
+func _input_switch_mouse():
 	if mouse_is_captured:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:
@@ -82,11 +87,7 @@ func input_switch_mouse():
 	mouse_is_captured = not mouse_is_captured
 
 
-func _unhandled_input(event):
-	if event.is_action_released("dev_camera_fov"):
-		change_fov()
-
-func change_fov():
+func _change_fov():
 	fov_pointer += 1
 	var fovs = [10, 25, 50, 100]
 

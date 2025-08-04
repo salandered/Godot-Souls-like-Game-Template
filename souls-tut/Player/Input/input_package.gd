@@ -1,12 +1,14 @@
 extends Resource
 class_name InputPackage
 
+var input_direction: Vector2
+
 var actions: Array[String]
 var combat_actions: Array[String]
 
-var target_lock: bool = false
-
-var input_direction: Vector2
+# Target
+var target_lock_pressed: bool = false
+var target_lock_long_pressed: bool = false
 
 # Fancy camera
 var forward_input := 0.0

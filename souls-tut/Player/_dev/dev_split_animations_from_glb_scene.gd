@@ -27,6 +27,9 @@ func save_torso_animations(player: AnimationPlayer, skeleton: Skeleton3D):
 		if not idiot_proof(animation_name):
 			continue
 		var animation = player.get_animation(animation_name) as Animation
+		if not animation:
+			push_error("Animation not found: " + animation_name)
+			return
 		var new_animation: Animation = Animation.new()
 		new_animation.length = animation.length
 		#print(animation_name + ":")
@@ -50,6 +53,9 @@ func save_legs_animations(player: AnimationPlayer, skeleton: Skeleton3D):
 		if not idiot_proof(animation_name):
 			continue
 		var animation = player.get_animation(animation_name) as Animation
+		if not animation:
+			push_error("Animations not found: " + animation_name)
+			return
 		var new_animation: Animation = Animation.new()
 		new_animation.length = animation.length
 		#print(animation_name + ":")

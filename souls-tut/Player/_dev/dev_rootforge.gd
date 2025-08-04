@@ -8,14 +8,14 @@ enum Axes {
 }
 
 # -> SET TO AXES AND VALUE (would be nailed to this value)
-# var nail_axis: Axes = Axes.Z
-# var nail_value: float = -0.062
+var nail_axis: Axes = Axes.Z
+var nail_value: float = -0.062
 
-var nail_axis: Axes = Axes.X
-var nail_value: float = 0.0
+#var nail_axis: Axes = Axes.X
+#var nail_value: float = 0.0
 
 # -> CHECK ANIM NAMES (without lib prefix) and LIB PREFIX
-var result_anim_name := "strafe-R"
+var result_anim_name := "walk"
 var result_backend_anim_name := "strafe-R_params"
 var lib := "ss/"
 
