@@ -29,6 +29,7 @@ func _ready():
 	states_container.accept_states()
 	current_state = states_container.states["idle"]
 	switch_to("idle")
+	
 	legs_manager.current_legs_state = states_container.get_state_by_name("idle")
 	legs_manager.accept_behaviours()
 
@@ -47,7 +48,7 @@ func update(input: InputPackage, delta: float):
 	current_state._update(input, delta)
 
 func switch_to(state: String):
-	print(current_state.state_name + " -> " + state)
+	# print(current_state.state_name + " -> " + state)
 	current_state._on_exit_state()
 	current_state = states_container.states[state]
 	current_state._on_enter_state()

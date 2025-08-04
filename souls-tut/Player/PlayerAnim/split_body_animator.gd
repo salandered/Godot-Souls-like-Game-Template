@@ -104,14 +104,14 @@ func _set_animations():
 
 func _set_legs_animation(animation: String):
 	var animation_name = animation + "_legs"
-	print(legs_animator.current_animation + " changing to " + animation_name)
+	# print_._prefix("Anim", legs_animator.current_animation + " changing to " + animation_name)
 	u.assert_has_animation(legs_animator, animation_name)
 	legs_animator.play(animation_name)
 
 
 func _set_torso_animation(animation: String):
 	var animation_name = animation + "_torso"
-	print(torso_animator.current_animation + " changing to " + animation_name)
+	# print_._prefix("Anim", torso_animator.current_animation + " changing to " + animation_name)
 	u.assert_has_animation(torso_animator, animation_name)
 	torso_animator.play(animation_name)
 

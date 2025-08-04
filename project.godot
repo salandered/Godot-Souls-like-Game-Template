@@ -68,7 +68,8 @@ folder_colors={
 "res://souls-tut/Assets/Ready Animations/_backups/": "gray",
 "res://souls-tut/Assets/Ready Animations/_forged/": "red",
 "res://souls-tut/Assets/Ready Animations/shield-sword/": "blue",
-"res://souls-tut/Enemies/Gundyr/": "pink"
+"res://souls-tut/Enemies/Gundyr/": "pink",
+"res://souls-tut/Enemies/Gundyr/states/leafes/": "green"
 }
 
 [input]

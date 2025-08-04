@@ -7,7 +7,7 @@
 	// exlude from file view
 	"files.exclude": {
 		// godot 
-		// "**/*.res": true,
+		"**/*.res": true,
 		"**/*.gd.uid": true,
 		// images
 		"**/*.jpg": true,
@@ -65,6 +65,10 @@
 		{
 			"path": "souls-tut/Enemies/SimpleEnemy",
 			"color": "custom1"
+		},
+		{
+			"path": "souls-tut/Enemies/Gundyr",
+			"color": "custom2"
 		},
 		{
 			"path": "souls-tut/fancy-camera",

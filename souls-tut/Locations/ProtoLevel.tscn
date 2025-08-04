@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/models/1/textures/Stone Dirt Wall 02_diffuse.png" id="3_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="5_fnxa0"]
-[ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://souls-tut/Enemies/Gundyr/nonHFSM/Gundyr.tscn" id="6_8ohcw"]
+[ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://souls-tut/Enemies/Gundyr/Gundyr.tscn" id="6_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://souls-tut/Enemies/Opponent/Opponent.tscn" id="7_hfelf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]

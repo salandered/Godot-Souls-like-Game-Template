@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://chjl1d5amktti"]
 
-[ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://souls-tut/Weapon/player_hitbox.gd" id="1_cc6lf"]
+[ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://souls-tut/Weapon/hitbox.gd" id="1_cc6lf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47cuq"]
 radius = 0.3

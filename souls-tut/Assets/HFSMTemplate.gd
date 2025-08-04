@@ -1,4 +1,4 @@
-extends HFSM
+extends BaseHFSMState
 
 
 #these are the functions you might to redefine to create a custom logic:
@@ -8,7 +8,7 @@ func check_transition(delta) -> TransitionData:
 	return TransitionData.new(true, "to what")
 
 
-# choose_internal_state is the function that is being called exactly one time on_enter of HFSM
+# choose_internal_state is the function that is being called exactly one time on_enter of BaseHFSMState
 # which is also a container. Return the state in which this sub state machine starts
 func choose_internal_state() -> TransitionData:
 	return TransitionData.new(true, "where to start")

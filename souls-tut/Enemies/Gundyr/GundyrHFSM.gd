@@ -1,4 +1,4 @@
-extends HFSM 
+extends BaseHFSMState
 
 
 func check_transition(_delta) -> TransitionData:
