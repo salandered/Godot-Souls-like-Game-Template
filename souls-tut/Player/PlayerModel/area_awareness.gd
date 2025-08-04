@@ -1,7 +1,7 @@
 extends Node
 class_name AreaAwareness
 
-@onready var states: HumanoidStates = $"../States"
+@onready var container: PlayerStatesContainer = %StatesContainer
 
 
 @onready var player = $"../.."
@@ -59,7 +59,7 @@ var to_strafe = {
 
 func _translate_to_strafe(new_input: InputPackage):
 	# print("AA actions ", new_input.actions)
-	new_input.actions.sort_custom(states.states_priority_sort)
+	new_input.actions.sort_custom(container.states_priority_sort)
 	var prioritized_state: String = new_input.actions[0] # safe
 	var translated_to_strafe = to_strafe.get(prioritized_state)
 

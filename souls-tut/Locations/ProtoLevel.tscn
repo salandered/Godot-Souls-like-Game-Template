@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/models/1/textures/Stone Dirt Wall 02_diffuse.png" id="3_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
-[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/MobFSM/MobFSM.tscn" id="5_fnxa0"]
+[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="5_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://souls-tut/Enemies/Gundyr/nonHFSM/Gundyr.tscn" id="6_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://souls-tut/Enemies/Opponent/Opponent.tscn" id="7_hfelf"]
 
@@ -29,8 +29,8 @@ albedo_color = Color(0.13, 0.222, 0.25, 1)
 metallic = 1.0
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkxf5"]
-albedo_color = Color(1, 0.113725, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apr74"]
+albedo_color = Color(1.2514e-06, 0.498226, 0.619505, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bmwg"]
 albedo_texture = ExtResource("2_fnxa0")
@@ -73,15 +73,13 @@ collision_layer = 3
 size = Vector3(117.309, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("2_ldsoa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4125, -0.5, 8.39536)
+transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 2.21322, -0.5, -8.71522)
 
-[node name="PlayerDebugSphere" type="CSGSphere3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974622, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_qkxf5")
-radius = 0.2
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Player"]
+transform = Transform3D(0.258369, 0, 0, 0, 0.258369, 0, 0, 0, 0.258369, 0, 1.02682, 0)
+material_override = SubResource("StandardMaterial3D_apr74")
 
-[node name="Mob" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
+[node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.784, -0.5, -9.728)
 player = NodePath("../Player")
 

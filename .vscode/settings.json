@@ -54,6 +54,7 @@
 		"folderPathColor.custom6": "#dfdfdf", // white
 		"folderPathColor.custom7": "#cdcf90", // yellow accent
 	},
+	//
 	// COLORFUL FOLDERS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
 	"folder-path-color.folders": [
@@ -62,7 +63,7 @@
 			"color": "custom3"
 		},
 		{
-			"path": "souls-tut/Enemies",
+			"path": "souls-tut/Enemies/SimpleEnemy",
 			"color": "custom1"
 		},
 		{
@@ -82,6 +83,7 @@
 			"color": "custom2"
 		},
 	],
+	//
 	// No built in git color on files (conflict with colorful folders)
 	"git.decorations.enabled": false,
 	// Fighting with space indents
@@ -150,10 +152,29 @@
 					// "color": "#FFEEA1E5",
 				} // This applies the yellow color to the word
 			]
+		},
+		"(SEState\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				}, // This applies a subtle color to the "InAction." part
+				{
+					// "color": "#FFEEA1E5",
+				} // This applies the yellow color to the word
+			]
+		},
+		"\\b(print_\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#A3A3F5",
+				}
+			]
 		}
 	}
-}
-/* EXAMPLES 1 (CHECK FOR SANITY)
+	//
+	/* EXAMPLES 1 (CHECK FOR SANITY)
 	"highlight.regexes": {
 		// EXAMPLES
 		// 1. Highlight the '_run' and '_cleanup' functions to make them stand out.
@@ -207,59 +228,81 @@
 			]
 		}
 	}
-	*/
-//
-/* EXAMPLES 2 (CHECK FOR SANITY)
+	EXAMPLES 2 (CHECK FOR SANITY)
 	"highlight.regexes": {
 	1. Highlight all custom comment tags like @TOOL or @BUG.
 	   We'll give the tag a distinct color and the rest of the comment a different style.
 	    "^(//\\s*)((?:@TOOL|@BUG|@NOTE|@TODO))(.+)": {
-	        "regexFlags": "gm",
-	        "filterLanguageRegex": "gdscript",
-	        "decorations": [
-	            { "color": "#808080" }, // The '//' part of the comment
-	            { "color": "#00ff7f", "fontWeight": "bold" }, // The tag itself (@TOOL, etc.)
-	            { "color": "#808080", "fontStyle": "italic" } // The rest of the comment text
-	        ]
-	    },
-	    // 2. Highlight the names of Godot's built-in signals and custom signals.
-	    //    This makes signal connections much easier to spot.
-	    "(\\.(?:connect|emit_signal|is_connected))\\(\\s*\"([a-zA-Z_\\d]+)\"": {
-	        "filterLanguageRegex": "gdscript",
-	        "decorations": [
-	            {}, // The method call (e.g., .connect)
-	            { "color": "#ff007f", "fontWeight": "bold" } // The signal name string
-	        ]
-	    },
-	    // 3. Highlight key functions like _ready() or _process(delta) to jump out at you.
-	    "^(func\\s+)(_ready|_process|_input|_unhandled_input|_physics_process)(.*)": {
-	        "regexFlags": "gm",
-	        "filterLanguageRegex": "gdscript",
-	        "decorations": [
-	            {}, // The 'func' keyword
-	            { "color": "#ff8c00", "fontWeight": "bold" }, // The function name
-	            {}  // The rest of the line
-	        ]
-	    },
-	    // 4. Highlight 'const' definitions in a more advanced way.
-	    //    The 'const' keyword gets one color, and the variable name gets another.
-	    "^(const)\\s+([a-zA-Z_\\d]+)\\b": {
-	        "regexFlags": "gm",
-	        "filterLanguageRegex": "gdscript",
-	        "decorations": [
-	            { "color": "#00bfff", "fontWeight": "bold" }, // The 'const' keyword
-	            { "color": "#ffff00" }                        // The variable name
-	        ]
-	    },
-	    // 5. Highlight all 'yield' statements to spot asynchronous code. (Godot 3.x)
-	    "\\b(yield)\\b": {
-	        "filterLanguageRegex": "gdscript",
-	        "decorations": [{ "color": "#ffd700", "fontStyle": "italic" }]
-	    },
+			"regexFlags": "gm",
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#808080"
+				}, // The '//' part of the comment
+				{
+					"color": "#00ff7f",
+					"fontWeight": "bold"
+				}, // The tag itself (@TOOL, etc.)
+				{
+					"color": "#808080",
+					"fontStyle": "italic"
+				} // The rest of the comment text
+			]
+		},
+		// 2. Highlight the names of Godot's built-in signals and custom signals.
+		//    This makes signal connections much easier to spot.
+		"(\\.(?:connect|emit_signal|is_connected))\\(\\s*\"([a-zA-Z_\\d]+)\"": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{}, // The method call (e.g., .connect)
+				{
+					"color": "#ff007f",
+					"fontWeight": "bold"
+				} // The signal name string
+			]
+		},
+		// 3. Highlight key functions like _ready() or _process(delta) to jump out at you.
+		"^(func\\s+)(_ready|_process|_input|_unhandled_input|_physics_process)(.*)": {
+			"regexFlags": "gm",
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{}, // The 'func' keyword
+				{
+					"color": "#ff8c00",
+					"fontWeight": "bold"
+				}, // The function name
+				{} // The rest of the line
+			]
+		},
+		// 4. Highlight 'const' definitions in a more advanced way.
+		//    The 'const' keyword gets one color, and the variable name gets another.
+		"^(const)\\s+([a-zA-Z_\\d]+)\\b": {
+			"regexFlags": "gm",
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#00bfff",
+					"fontWeight": "bold"
+				}, // The 'const' keyword
+				{
+					"color": "#ffff00"
+				} // The variable name
+			]
+		},
+		// 5. Highlight all 'yield' statements to spot asynchronous code. (Godot 3.x)
+		"\\b(yield)\\b": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ffd700",
+					"fontStyle": "italic"
+				}
+			]
+		},
 	}
 	*/
-//
-/* --- COPIED FROM GLOBAL SETTINGS JIC ----  
+	//
+	/* --- COPIED FROM GLOBAL SETTINGS JIC ----  
 	May be useful for setting project from git on another machine. Uncomment if needed
 	godot specific
 	"workbench.colorTheme": "Godot 4",

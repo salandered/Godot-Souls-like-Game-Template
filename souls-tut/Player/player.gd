@@ -17,16 +17,15 @@ var debug_cams: Array[Node]
 var cam_i := 0
 
 
-
 func _ready():
-	#Print.print_ready(self)
+	#print_.print_ready(self)
 	visuals.accept_model(model)
 
 	debug_cams = get_tree().get_nodes_in_group("debug_cameras")
-	Print.print_debug_(debug_cams)
+	print_._debug_(debug_cams)
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
-	Print.print_debug_("cam_i: " + str(cam_i))
+	print_._debug_("cam_i: " + str(cam_i))
 
 func _process(_delta):
 	_update_debug_interface()
@@ -64,7 +63,7 @@ func _physics_process(delta):
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_cycle_cam"):
 		cam_i = (cam_i + 1) % debug_cams.size()
-		Print.print_debug_("cam_i: " + str(cam_i))
+		print_._debug_("cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 

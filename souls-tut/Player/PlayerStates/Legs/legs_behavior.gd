@@ -6,7 +6,7 @@ class_name LegsBehaviour
 
 
 var model: PlayerModel
-var states_container: HumanoidStates
+var states_container: PlayerStatesContainer
 var legs_manager: LegsManager
 
 # legs state is just ordinary BasePlayerState.

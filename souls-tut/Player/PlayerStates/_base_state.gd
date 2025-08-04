@@ -1,4 +1,4 @@
-extends Node
+extends StateUtils
 class_name BasePlayerState
 
 @export var SPEED = 3.0
@@ -10,7 +10,7 @@ var skeleton: Skeleton3D
 var resources: HumanoidResources
 var combat: HumanoidCombat
 var states_data_repo: StatesDataRepository
-var container: HumanoidStates
+var container: PlayerStatesContainer
 var area_awareness: AreaAwareness
 var legs_manager: LegsManager
 var left_wrist: BoneAttachment3D
@@ -30,7 +30,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var combos: Array[Combo_]
 
-var enter_state_time: float
+
 var initial_position: Vector3
 var frame_length = 0.016
 
@@ -46,7 +46,7 @@ var DURATION: float
 
 # region: FAIR DOCS: General States heir usage guide.
 #
-# > check_relevance function aims to be short and simple.
+# > check_transition function aims to be short and simple.
 # 	Its general structure is as follows: 
 #	if (state is ready to transition) :
 #		transition to the highest priority out there
@@ -55,7 +55,7 @@ var DURATION: float
 #
 # 	BasePlayerState readyness for transition is generally a simple function based on timings or statuses of the player.
 #	If you are starting to understand that your transition readyness is a complex method, OR
-# 	if you are tempted to add third branching operator into your check_relevance function,
+# 	if you are tempted to add third branching operator into your check_transition function,
 #	seriously consider if Combo_ can do this logic for you, you won't regret its usage I promise.
 #	(Combo_ is clickable even from comments btw)
 #
@@ -80,10 +80,10 @@ var DURATION: float
 #
 #
 #  # transition logic
-# func check_relevance(input_data: InputData) -> String:
-# 	# todo - current check_relevance s in states look not optimized
-# 	print_debug("error, implement the check_relevance function on your state")
-# 	return "error, implement the check_relevance function on your state"
+# func check_transition(input_data: InputData) -> String:
+# 	# todo - current check_transition s in states look not optimized
+# 	print_debug("error, implement the check_transition function on your state")
+# 	return "error, implement the check_transition function on your state"
 #
 #
 # func update(input_data: InputData, delta: float):
@@ -133,7 +133,7 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 1. does something from the past force us to transition somewhere? 
 # 2. If not, does something textual from the present modify our inputs? 
 # 3. if nothing above, what vanilla state wants to default to?
-func check_relevance(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> String:
 	if accepts_queueing():
 		check_combos(input)
 	
@@ -303,29 +303,3 @@ func try_force_state(new_forced_state: String):
 		forced_state = new_forced_state
 	elif container.states[new_forced_state].priority >= container.states[forced_state].priority:
 		forced_state = new_forced_state
-
-
-# TIME MANAGEMENT
-func mark_enter_state():
-	enter_state_time = Time.get_unix_time_from_system()
-
-func get_progress() -> float:
-	var now = Time.get_unix_time_from_system()
-	return now - enter_state_time
-
-func works_longer_than(time: float) -> bool:
-	if get_progress() >= time:
-		return true
-	return false
-
-func works_less_than(time: float) -> bool:
-	if get_progress() < time:
-		return true
-	return false
-
-func works_between(start: float, finish: float) -> bool:
-	var progress = get_progress()
-	if progress >= start and progress <= finish:
-		return true
-	return false
-# END TIME MANAGEMENT

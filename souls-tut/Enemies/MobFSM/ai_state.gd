@@ -1,7 +1,7 @@
 extends Node
-class_name AIState
+class_name BaseSEState
 # much functional is duplicated with players State, I'm currently thinking about
-# identifying a common ancestor class for State (new base ancestor) -> PlayerState and State -> AIState
+# identifying a common ancestor class for State (new base ancestor) -> PlayerState and State -> BaseSEState
 # not so sold on it tho, as player has both transition and updating dependent on input package, and
 # an enemy doesn't. So all I save are some fields and reactions code. The classes might be just similar.
 

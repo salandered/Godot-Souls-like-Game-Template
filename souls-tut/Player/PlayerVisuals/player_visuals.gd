@@ -35,6 +35,5 @@ func adjust_weapon_visuals():
 	sword_visuals_1.global_transform = model.active_weapon.global_transform
 
 func update_resources_interface():
-	if not model.is_enemy:
-		stamina_label.text = "Stamina " + "%10.3f" % model.resources.stamina
-		health_label.text = "Health " + "%10.3f" % model.resources.health
+	stamina_label.text = "Stamina " + "%10.3f" % model.resources.stamina
+	health_label.text = "Health " + "%10.3f" % model.resources.health

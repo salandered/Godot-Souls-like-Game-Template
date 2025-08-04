@@ -3,8 +3,6 @@ class_name PlayerModel
 
 # todo consider: not a fan of sharing logic between enemy/player
 
-@export var is_enemy: bool = false
-
 @onready var player = $".."
 @onready var skeleton = %GeneralSkeleton
 @onready var animator = $SplitBodyAnimator
@@ -15,7 +13,7 @@ class_name PlayerModel
 @onready var area_awareness = $AreaAwareness as AreaAwareness
 
 @onready var active_weapon: SwordOh = %SwordOh
-@onready var states_container = $States as HumanoidStates
+@onready var states_container = $StatesContainer as PlayerStatesContainer
 # @onready var weapons = {
 # 	"sword" = $....Sword,
 # 	"bow" = $....Bow,
@@ -39,18 +37,17 @@ func update(input: InputPackage, delta: float):
 	input = combat.contextualize(input)
 	input = area_awareness.contextualize(input)
 	area_awareness.last_input_package = input
-	var relevance = current_state.check_relevance(input)
-	if relevance != "okay": # todo not okay
-		switch_to(relevance)
-	
+	var verdict = current_state.check_transition(input)
+	if verdict != "okay": # todo not okay
+		switch_to(verdict)
+
 	# TODO TODO: moved back here, TorsoStates triggers _update from legs behaviour -> doubledipping
 	current_state.update_resources(delta)
 	
 	current_state._update(input, delta)
 
 func switch_to(state: String):
-	if not is_enemy:
-		print(current_state.state_name + " -> " + state)
+	print(current_state.state_name + " -> " + state)
 	current_state._on_exit_state()
 	current_state = states_container.states[state]
 	current_state._on_enter_state()
