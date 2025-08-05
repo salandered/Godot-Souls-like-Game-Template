@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Opponent
 
-@export var player: CharacterBody3D
+@export var player: Princess
 @export var awake: bool = false
 @onready var animator = $AnimationPlayer
 @onready var behaviours = $Behaviours as OpponentsBehaviourContainer

@@ -4,7 +4,7 @@ class_name OpponentBeliefs
 @export var character: CharacterBody3D
 @export var character_resources: OpponentResources
 @export var actions_container: OpponentActionContainer
-var player: CharacterBody3D
+var player: Princess
 
 @onready var actions = $"../Actions" as OpponentActionContainer
 

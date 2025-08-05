@@ -2,7 +2,7 @@ extends Node
 class_name PlayerStatesContainer
 
 
-@export var player: CharacterBody3D
+@export var player: Princess
 @export var animator: SplitBodyAnimator
 @export var skeleton: Skeleton3D
 @export var resources: HumanoidResources

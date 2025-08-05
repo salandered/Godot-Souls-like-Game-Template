@@ -1,7 +1,7 @@
 extends CharacterBody3D
+class_name Gundyr
 
-
-@export var player: CharacterBody3D
+@export var player: Princess
 @onready var state_machine = $GundyrHFSM as BaseHFSMState
 
 

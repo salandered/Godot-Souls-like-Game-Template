@@ -4,6 +4,8 @@ extends BaseSEState
 @export var tracking_angular_speed: float = 2
 var direction_decider: int # 1 or -1
 
+# TODO: whats going on here
+
 
 func on_enter_state():
 	if ra.coinflip():

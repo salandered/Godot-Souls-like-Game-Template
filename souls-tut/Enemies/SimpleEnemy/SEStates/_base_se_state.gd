@@ -12,12 +12,27 @@ var container: SEStatesContainer
 var animator: SEAnimator
 var resources: EnemyResources
 var right_weapon: WeaponOh
+var traits: TraitsContainer
 
 var spawn_point: Vector3
 
-func check_transition(delta: float) -> String:
-	assert(false, "implement transition logic for " + state_name)
-	return ""
+
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+func _check_transition(delta: float) -> String:
+	# if not me.is_on_floor() and not me.current_state.name == SEState.death:
+		# return SEState.midair
+	me.velocity.y -= gravity * delta
+	
+
+	return check_transition(delta)
+
+
+## default check_transition. to override
+func check_transition(delta) -> String:
+	# if works longer than too much than do something calm
+	return me.CURRENT
+
 
 func _update(delta: float):
 	update(delta)
@@ -28,7 +43,6 @@ func update(delta: float):
 
 func _on_enter_state():
 	mark_enter_state()
-
 	on_enter_state()
 	animator.update_animation()
 

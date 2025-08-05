@@ -1,7 +1,10 @@
 extends BaseSEState
 
+@export var commitment: float = 3
 
 func check_transition(delta: float) -> String:
+	if not works_longer_than(commitment):
+		return me.CURRENT
 	if me.global_position.distance_to(spawn_point) < 1:
 		return SEState.idle
 	return me.CURRENT

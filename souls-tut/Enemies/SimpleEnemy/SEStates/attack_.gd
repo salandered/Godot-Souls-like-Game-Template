@@ -5,7 +5,7 @@ extends BaseSEState
 @export var hit_damage: int = 20
 
 func check_transition(delta: float) -> String:
-	if works_longer_than(animation_length):
+	if works_longer_than(animation_length - 0.1):
 		if player.global_position.distance_to(me.global_position) < me.attack_radius:
 			return SEState.attack
 		if player.global_position.distance_to(spawn_point) > me.deaggro_radius:

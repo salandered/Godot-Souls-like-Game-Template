@@ -27,7 +27,7 @@ class_name FancyCamera
 # - Offset Vector is important, it defines the camera's arm length.
 # - Camera Focus is the player's chest zone that is being followed by a Focus Point.
 # - Focus Poing, Mount, Nest and PlayerCamera are children of Fancy Camera.
-@onready var player: CharacterBody3D = $".."
+@onready var player: Princess = $".."
 @onready var focus: Node3D = $FocusPoint
 @onready var mount: Node3D = $CameraMount
 @onready var nest: Node3D = $CameraNest

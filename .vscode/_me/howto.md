@@ -28,6 +28,8 @@ for reloading: developer reload
 
 ## Copilot
 
+Choosing models
+[text](https://docs.github.com/en/copilot/reference/ai-models/model-comparison#recommended-models-by-task)
 
 Ctrl+. (Control + period).
 This shortcut will present a lightbulb icon or a menu with available actions relevant to your current cursor position or selected code, including suggestions from Copilot if applicable.

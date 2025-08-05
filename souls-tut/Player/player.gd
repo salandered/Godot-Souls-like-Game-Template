@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Princess
 
 @export var input_gatherer: InputGatherer
 @export var model: PlayerModel

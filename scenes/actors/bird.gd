@@ -2,10 +2,8 @@ extends CharacterBody3D
 
 var SPEED = 2
 
+@export var player: Princess
 @onready var sprite_3d: Sprite3D = $Sprite3D
-@onready var iam_ellipse: CharacterBody3D = $IAMEllipse
-@onready var player: CharacterBody3D = %IAMEllipse
-#@onready var player = get_tree().get_first_nodes_in_group("Player")[0]
 @onready var bt_player: BTPlayer = $BTPlayer
 
 

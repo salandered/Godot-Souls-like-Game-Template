@@ -4,7 +4,7 @@ class_name BasePlayerState
 @export var SPEED = 3.0
 @export var TURN_SPEED = 2
 
-var player: CharacterBody3D
+var player: Princess
 var animator: SplitBodyAnimator
 var skeleton: Skeleton3D
 var resources: HumanoidResources
@@ -133,6 +133,7 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 1. does something from the past force us to transition somewhere? 
 # 2. If not, does something textual from the present modify our inputs? 
 # 3. if nothing above, what vanilla state wants to default to?
+## Not to override
 func check_transition(input: InputPackage) -> String:
 	if accepts_queueing():
 		check_combos(input)
@@ -236,6 +237,7 @@ func right_weapon_hurts() -> bool:
 
 
 # "default-default", works for animations that just linger
+## override
 func default_lifecycle(input: InputPackage):
 	if works_longer_than(DURATION):
 		return best_input_that_can_be_paid(input)
@@ -274,8 +276,7 @@ func pack_hit_data(_weapon: WeaponOh) -> HitData:
 #  - most of our states react on being hit universally
 #    they check for interruptibility frames and do stagger (or don't). 
 func react_on_hit(hit: HitData):
-	print("BaseState: react_on_hit called")
-	print("Hit Data: ", hit)
+	# print("BaseState: react_on_hit called")
 	if is_vulnerable():
 		resources.lose_health(hit.damage)
 	if is_interruptable():

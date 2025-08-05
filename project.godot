@@ -60,7 +60,6 @@ folder_colors={
 "res://raw_imports/": "orange",
 "res://scenes/level/": "green",
 "res://scenes/player/": "pink",
-"res://scripts/": "teal",
 "res://scripts/player/": "pink",
 "res://souls-tut/Assets/": "yellow",
 "res://souls-tut/Assets/Ready Animations/": "orange",

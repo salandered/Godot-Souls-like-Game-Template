@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6h2mf8m3b8iu"]
+[gd_scene load_steps=22 format=3 uid="uid://b6h2mf8m3b8iu"]
 
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://souls-tut/Locations/proto_level.gd" id="1_364n8"]
+[ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="2_6a1yn"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="2_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://souls-tut/Player/Player.tscn" id="2_ldsoa"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/models/1/textures/Stone Dirt Wall 02_diffuse.png" id="3_8ohcw"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://souls-tut/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="5_fnxa0"]
 [ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://souls-tut/Enemies/Gundyr/Gundyr.tscn" id="6_8ohcw"]
 [ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://souls-tut/Enemies/Opponent/Opponent.tscn" id="7_hfelf"]
+[ext_resource type="PackedScene" uid="uid://cq2lr6sclvutj" path="res://misc/cat_adopt/enemy/skeleton_advance.tscn" id="10_apr74"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -52,6 +54,10 @@ uv1_triplanar = true
 [node name="ProtoLevel" type="Node3D"]
 script = ExtResource("1_364n8")
 
+[node name="Bird" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_6a1yn")]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 16.5992, -0.142535, 6.97814)
+player = NodePath("../Player")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 light_color = Color(0.9, 0.955, 1, 1)
@@ -68,7 +74,7 @@ transform = Transform3D(0.258369, 0, 0, 0, 0.258369, 0, 0, 0, 0.258369, 0, 1.026
 material_override = SubResource("StandardMaterial3D_apr74")
 
 [node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.784, -0.5, -9.728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.784, -0.452475, -9.728)
 player = NodePath("../Player")
 
 [node name="props" type="Node" parent="."]
@@ -82,6 +88,27 @@ size = Vector3(2, 2, 2)
 
 [node name="Box2" type="CSGBox3D" parent="props"]
 transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 3.28412, 0.504346, -3.06418)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box5" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 13.1093, 0.504346, -13.4263)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box7" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 11.0835, 0.504346, -13.4263)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box6" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.989987, 0, -0.14116, 0, 1, 0, 0.14116, 0, 0.989987, 15.2712, 0.504346, -13.4263)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
@@ -171,3 +198,6 @@ material_override = SubResource("StandardMaterial3D_6a1yn")
 use_collision = true
 collision_layer = 3
 size = Vector3(117.309, 1, 45.0029)
+
+[node name="SkeletonAdvance" parent="." instance=ExtResource("10_apr74")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 28, 0, 0)
