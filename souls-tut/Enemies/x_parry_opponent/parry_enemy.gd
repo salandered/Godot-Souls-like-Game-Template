@@ -7,6 +7,9 @@ extends CharacterBody3D
 
 
 func _ready():
+	collision_layer = Collision.Layers.OTHER_CHAR_COL
+	collision_mask = Collision.Mask.OTHER_CHAR_COL
+	
 	visuals.accept_model(model)
 	#$CameraMount/PlayerCamera.current = false
 	#print_tree_pretty()

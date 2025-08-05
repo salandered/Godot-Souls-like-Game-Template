@@ -49,11 +49,3 @@ func update(_input: InputPackage, _delta: float):
 			change_animation_to(A.strafe_forward)
 		else:
 			change_animation_to(A.strafe_back)
-
-func change_animation_to(animation_: String):
-	if animation != animation_:
-		animation = animation_
-		if backend_animation == A.to_backend_lazy(animation):
-			push_error("probably unreachable")
-		backend_animation = A.to_backend_lazy(animation)
-		animator.update_body_animations()

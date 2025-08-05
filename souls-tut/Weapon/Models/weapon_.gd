@@ -23,6 +23,13 @@ var is_attacking: bool = false
 ## Examples: sword map 'light attack pressed' to slash, while stuff to spell.
 var basic_attacks: Dictionary
 
+func _ready():
+	collision_layer = Collision.Layers.WEAPON_AREA
+	collision_mask = Collision.Mask.WEAPON_AREA
+	if not holder:
+		push_error("Weapon has no holder assigned. This is a bug.")
+	
+
 func get_hit_data() -> HitData:
 	push_error("someone tries to get hit by default WeaponOh")
 	return HitData.blank()

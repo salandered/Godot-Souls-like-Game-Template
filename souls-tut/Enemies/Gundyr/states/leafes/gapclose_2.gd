@@ -23,18 +23,18 @@ func update(delta):
 func rotate_character(delta):
 	var adjusted_direction = direction_to_player().rotated(Vector3.UP, angle_adjustment)
 	
-	var face_direction = character.basis.z
+	var face_direction = me.basis.z
 	var angle = face_direction.signed_angle_to(adjusted_direction, Vector3.UP)
-	character.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
+	me.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
 
 
 func move_character(delta):
 	var delta_pos = get_root_position_delta(delta)
 	delta_pos.y = 0
-	character.velocity = (character.get_quaternion() * delta_pos / delta) * gapclosing_coefficient
-	if not character.is_on_floor():
-		character.velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
-	character.move_and_slide()
+	me.velocity = (me.get_quaternion() * delta_pos / delta) * gapclosing_coefficient
+	if not me.is_on_floor():
+		me.velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
+	me.move_and_slide()
 
 
 func pack_hit_data(weapon: WeaponOh) -> HitData:

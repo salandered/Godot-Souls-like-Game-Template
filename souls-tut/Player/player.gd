@@ -18,6 +18,10 @@ var cam_i := 0
 
 
 func _ready():
+	collision_layer = Collision.Layers.PLAYER_COL
+	collision_mask = Collision.Mask.PLAYER_COL
+
+
 	#print_.print_ready(self)
 	visuals.accept_model(model)
 

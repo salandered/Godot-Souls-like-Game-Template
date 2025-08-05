@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name SECharacter
 
 @export_group("Player")
 @export var player: CharacterBody3D
@@ -11,7 +12,7 @@ extends CharacterBody3D
 @export var aggro_radius: float = 8
 @export var attack_radius: float = 2
 @export var deaggro_radius: float = 10
-@export var animator: AnimationPlayer
+@export var animator: SEAnimator
 @export var right_weapon: WeaponOh
 @export var resources: EnemyResources
 @onready var container = $StatesContainer as SEStatesContainer
@@ -24,6 +25,9 @@ var current_state: BaseSEState
 
 
 func _ready():
+	collision_layer = Collision.Layers.OTHER_CHAR_COL
+	collision_mask = Collision.Mask.OTHER_CHAR_COL
+	
 	container.me = self
 	spawn_point = global_position
 	container.accept_states()
@@ -35,13 +39,11 @@ func _physics_process(delta):
 	var verdict = current_state.check_transition(delta)
 	if not verdict == CURRENT:
 		switch_to(verdict)
-	current_state.update(delta)
+	current_state._update(delta)
 
 
 func switch_to(state: String):
-	print_._prefix("SE", current_state.state_name + " -> " + state)
-	current_state.on_exit()
+	print_.prefix("SE", current_state.state_name + " -> " + state)
+	current_state._on_exit_state()
 	current_state = container.states[state]
-	current_state.mark_enter_state()
-	current_state.on_enter()
-	animator.play(current_state.animation)
+	current_state._on_enter_state()

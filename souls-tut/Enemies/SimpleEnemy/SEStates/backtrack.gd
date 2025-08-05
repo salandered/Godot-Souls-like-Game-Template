@@ -16,10 +16,12 @@ func update(delta):
 	me.move_and_slide()
 
 
-func on_enter():
+func on_enter_state():
+	pass
 	# boosted for test purposes
-	animator.speed_scale = me.return_speed / me.speed
+	# animator.speed_scale = me.return_speed / me.speed
 
 
-func on_exit():
-	animator.speed_scale = 1
+func on_exit_state():
+	pass
+	# animator.speed_scale = 1

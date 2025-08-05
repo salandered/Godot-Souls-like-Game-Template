@@ -1,12 +1,10 @@
-extends Node
+extends EnemyStateUtils
 class_name BaseHFSMState
 
 # The global export fields section. You don't need to set them up for each state,
 # do only for the top layer single state that contains the whole state machine.
 @export_group("Container Fields")
 @export var animator: AnimationPlayer
-@export var character: CharacterBody3D
-@export var player: CharacterBody3D
 @export var states_data_repo: GundyrStatesData
 @export var resources: HFSMResources
 @export var weapons: Array[WeaponOh]
@@ -17,7 +15,6 @@ class_name BaseHFSMState
 @export var state_name: String
 @export var animation: String
 @export var backend_animation: String
-var enter_state_time: float
 
 var states: Dictionary # { String : BaseHFSMState }
 var current_state: BaseHFSMState = self
@@ -98,7 +95,7 @@ func update(_delta: float):
 	pass
 
 func _switch_to(state: String):
-	print_._prefix("Gundyr", current_state.state_name + " -> " + state, 1)
+	print_.prefix("Gundyr", current_state.state_name + " -> " + state, 1)
 	if current_state != self:
 		current_state._on_exit()
 	current_state = states[state]
@@ -136,7 +133,7 @@ func on_enter():
 func _accept_export_fields():
 	for state in states.values():
 		state.animator = animator
-		state.character = character
+		state.me = me
 		state.player = player
 		state.states_data_repo = states_data_repo
 		state.resources = resources
@@ -188,54 +185,16 @@ func aura_hurts() -> bool:
 # BACKEND ANIMATION GETTERS ENDS
 
 
-# TIME MANAGEMENT
-func mark_enter_state():
-	enter_state_time = Time.get_unix_time_from_system()
-
-func get_progress() -> float:
-	var now = Time.get_unix_time_from_system()
-	return now - enter_state_time
-
-func works_longer_than(time: float) -> bool:
-	return get_progress() >= time
-
-func works_less_than(time: float) -> bool:
-	return get_progress() < time
-
-func works_between(start: float, finish: float) -> bool:
-	var progress = get_progress()
-	return progress >= start and progress <= finish
-# TIME MANAGEMENT ENDS
-
-
 # SUGAR
 func get_animation_length() -> float:
 	return animator.get_animation(animation).length
 
-func distance_to_player() -> float:
-	return character.global_position.distance_to(player.global_position)
-
-func angle_to_player() -> float:
-	return character.basis.z.angle_to(projected_direction_to_player())
-
-func direction_to_player() -> Vector3:
-	return character.global_position.direction_to(player.global_position)
-
-func projected_direction_to_player() -> Vector3:
-	return character.global_position.direction_to(get_projected_player_pos())
-
-func get_projected_player_pos() -> Vector3:
-	var player_pos = player.global_position
-	player_pos.y = character.global_position.y
-	return player_pos
 
 func get_lowest_active_state() -> BaseHFSMState:
 	if is_container:
 		return current_state.get_lowest_active_state()
 	return self
 
-func coinflip() -> bool:
-	return randi() % 2 == 1
 
 ## means that we most probably 1 or 2 frames from the end of the lifecycle
 func close_to_the_end_of_animation() -> bool:

@@ -310,6 +310,15 @@ dev_camera_fov={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Env-col"
+3d_physics/layer_2="Player-col"
+3d_physics/layer_3="OtherChar-col"
+3d_physics/layer_4="Hitbox-area"
+3d_physics/layer_5="Weapon-area"
+3d_physics/layer_6="Item-col"
+
 [limbo_ai]
 
 behavior_tree/behavior_tree_default_dir="res://scripts/npc_logic/behavior_trees"

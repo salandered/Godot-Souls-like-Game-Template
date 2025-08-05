@@ -26,3 +26,4 @@ mesh = SubResource("CylinderMesh_ogtqp")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_7liu0")
+disabled = true

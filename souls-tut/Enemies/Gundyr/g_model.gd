@@ -6,6 +6,10 @@ extends CharacterBody3D
 
 
 func _ready():
+	collision_layer = Collision.Layers.OTHER_CHAR_COL
+	collision_mask = Collision.Mask.OTHER_CHAR_COL
+
+	
 	state_machine.player = player
 	state_machine._on_enter()
 	state_machine._accept_export_fields()

@@ -20,15 +20,17 @@ func update(delta):
 
 
 func manage_weapon():
-	# if works_between(0.4786, 0.7185):
-	# 	right_weapon.is_attacking = true
-	# else:
-	right_weapon.is_attacking = false
+	if works_between(0.4786, 0.7185):
+		right_weapon.is_attacking = true
+	else:
+		right_weapon.is_attacking = false
 
 
-func on_exit():
+func on_enter_state():
 	right_weapon.hitbox_ignore_list.clear()
 	right_weapon.is_attacking = false
+	print("on attack collistions")
+	print_.collisions(right_weapon)
 
 
 func pack_hit_data(weapon: WeaponOh) -> HitData:

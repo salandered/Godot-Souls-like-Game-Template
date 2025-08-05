@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cpr2otl56mflk"]
+[gd_scene load_steps=49 format=4 uid="uid://cpr2otl56mflk"]
 
 [ext_resource type="Script" uid="uid://cgjj4jhd0p6qj" path="res://souls-tut/Enemies/SimpleEnemy/se_model.gd" id="1_5h74w"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/slash_1.res" id="2_sbcid"]
@@ -9,13 +9,35 @@
 [ext_resource type="Script" uid="uid://nk1enh2btvqv" path="res://souls-tut/Enemies/SimpleEnemy/SEStates/attack_.gd" id="5_ihg53"]
 [ext_resource type="Animation" path="res://souls-tut/Assets/Ready Animations/death.res" id="5_qjkq5"]
 [ext_resource type="Script" uid="uid://dkqjnsg7v8s1c" path="res://souls-tut/Enemies/SimpleEnemy/se_visuals.gd" id="5_soegf"]
+[ext_resource type="Animation" uid="uid://b1hdfkkch5pfs" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/death.res" id="6_3vpn3"]
 [ext_resource type="Script" uid="uid://cg7xnbmiad2l1" path="res://souls-tut/Enemies/SimpleEnemy/SEStates/backtrack.gd" id="6_b3grc"]
 [ext_resource type="PackedScene" uid="uid://bb0o3byg0f0uh" path="res://souls-tut/Weapon/Skins/SwordVisuals1.tscn" id="6_yx6ag"]
 [ext_resource type="PackedScene" uid="uid://6t1bl235yea4" path="res://souls-tut/Weapon/Models/Sword.tscn" id="7_stidv"]
+[ext_resource type="Animation" uid="uid://brjicfc73nbbi" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/elbow.res" id="7_w231t"]
 [ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://souls-tut/Weapon/HitBox.tscn" id="8_2q7ci"]
+[ext_resource type="Animation" uid="uid://dlyiiq5g2e3em" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/gapclose.res" id="8_jud50"]
+[ext_resource type="Animation" uid="uid://ccyf3nj2nw0pm" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/gapclose_1.res" id="9_6awvl"]
 [ext_resource type="Script" uid="uid://besvu8rkuxij" path="res://souls-tut/Enemies/SimpleEnemy/se_resources.gd" id="10_i6528"]
+[ext_resource type="Animation" uid="uid://hnsfrbemn4u4" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/gapclose_2.res" id="10_m0u8j"]
+[ext_resource type="Animation" uid="uid://c4j428oxjv6h4" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/kick.res" id="11_1226p"]
 [ext_resource type="Script" uid="uid://d0jfjqkc0pypp" path="res://souls-tut/Enemies/SimpleEnemy/se_container.gd" id="11_vysit"]
+[ext_resource type="Animation" uid="uid://5r2fbac4td2q" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/phase_switch.res" id="12_w50qb"]
+[ext_resource type="Animation" uid="uid://bwlxeufit5567" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/scare_off.res" id="13_yn2rw"]
+[ext_resource type="Animation" uid="uid://b430npl6fawip" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/shoulder_kick_placeholder.res" id="14_rd7ku"]
+[ext_resource type="Animation" uid="uid://b58cg2buuj55i" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_1.res" id="15_8c65c"]
+[ext_resource type="Animation" uid="uid://bnxfkm32oi6ce" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_2.res" id="16_e83av"]
 [ext_resource type="Script" uid="uid://c28j6e4bifwur" path="res://souls-tut/Enemies/SimpleEnemy/SEStates/death.gd" id="16_fju5c"]
+[ext_resource type="Animation" uid="uid://cdiytekt7g8aw" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_3.res" id="17_y0u67"]
+[ext_resource type="Animation" uid="uid://dbeov5w2f7ew0" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_4.res" id="18_mx0ge"]
+[ext_resource type="Animation" uid="uid://bllll701rn265" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_5.res" id="19_b3os0"]
+[ext_resource type="Animation" uid="uid://duax6q6nvl1v7" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_6.res" id="20_aeauo"]
+[ext_resource type="Animation" uid="uid://u1o5mkssywvd" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_7.res" id="21_ip6ra"]
+[ext_resource type="Animation" uid="uid://dooapc0a0chah" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/slash_8.res" id="22_3i808"]
+[ext_resource type="Animation" uid="uid://84e4tjfymnl8" path="res://souls-tut/Assets/Ready Animations/Gundyr/moving/test.res" id="23_y377x"]
+[ext_resource type="Animation" uid="uid://dxg133xeicpbw" path="res://souls-tut/Assets/Ready Animations/strafe_left.res" id="24_q3q8q"]
+[ext_resource type="Animation" uid="uid://b3j0ljxaxngdk" path="res://souls-tut/Assets/Ready Animations/strafe_right.res" id="25_bbbex"]
+[ext_resource type="Script" uid="uid://bowk2dt3jlc28" path="res://souls-tut/Enemies/SimpleEnemy/se_animator.gd" id="26_w231t"]
+[ext_resource type="Script" uid="uid://du7droem72ta8" path="res://souls-tut/Enemies/SimpleEnemy/SEStates/orbit.gd" id="34_g2dqy"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qkjfy"]
 _data = {
@@ -23,6 +45,30 @@ _data = {
 &"idle": ExtResource("4_srjlh"),
 &"run": ExtResource("3_1u2cs"),
 &"slash_1": ExtResource("2_sbcid")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwaad"]
+_data = {
+&"death": ExtResource("6_3vpn3"),
+&"elbow": ExtResource("7_w231t"),
+&"gapclose": ExtResource("8_jud50"),
+&"gapclose_1": ExtResource("9_6awvl"),
+&"gapclose_2": ExtResource("10_m0u8j"),
+&"kick": ExtResource("11_1226p"),
+&"phase_switch": ExtResource("12_w50qb"),
+&"scare_off": ExtResource("13_yn2rw"),
+&"shoulder_kick_placeholder": ExtResource("14_rd7ku"),
+&"slash_1": ExtResource("15_8c65c"),
+&"slash_2": ExtResource("16_e83av"),
+&"slash_3": ExtResource("17_y0u67"),
+&"slash_4": ExtResource("18_mx0ge"),
+&"slash_5": ExtResource("19_b3os0"),
+&"slash_6": ExtResource("20_aeauo"),
+&"slash_7": ExtResource("21_ip6ra"),
+&"slash_8": ExtResource("22_3i808"),
+&"strafe_left": ExtResource("24_q3q8q"),
+&"strafe_right": ExtResource("25_bbbex"),
+&"test": ExtResource("23_y377x")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4s2e"]
@@ -291,7 +337,7 @@ height = 1.7
 
 [node name="SimpleEnemy" type="CharacterBody3D" node_paths=PackedStringArray("animator", "right_weapon", "resources")]
 script = ExtResource("1_5h74w")
-animator = NodePath("AnimationPlayer")
+animator = NodePath("Node")
 right_weapon = NodePath("RightWrist/WeaponSocket/Sword")
 resources = NodePath("Resources")
 
@@ -345,7 +391,7 @@ bones/6/name = "mixamorig_HeadTop_End"
 bones/6/parent = 5
 bones/6/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13542e-08, 0.220374, 0.075011)
 bones/6/enabled = true
-bones/6/position = Vector3(2.13542e-08, 0.220374, 0.075011)
+bones/6/position = Vector3(7.36158e-09, 0.244513, 0.0593551)
 bones/6/rotation = Quaternion(0, 0, 0, 1)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "RightShoulder"
@@ -716,7 +762,7 @@ bones/59/name = "mixamorig_RightToe_End"
 bones/59/parent = 58
 bones/59/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31183e-08, 0.0927812, 6.77602e-06)
 bones/59/enabled = true
-bones/59/position = Vector3(-1.34494e-08, 0.0927813, 6.77436e-06)
+bones/59/position = Vector3(-0.0288344, 0.164241, 0.0625236)
 bones/59/rotation = Quaternion(0, 0, 0, 1)
 bones/59/scale = Vector3(1, 1, 1)
 bones/60/name = "LeftUpperLeg"
@@ -751,13 +797,19 @@ bones/64/name = "mixamorig_LeftToe_End"
 bones/64/parent = 63
 bones/64/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26551e-08, 0.0927813, 6.74148e-06)
 bones/64/enabled = true
-bones/64/position = Vector3(-3.26551e-08, 0.0927813, 6.74148e-06)
+bones/64/position = Vector3(0.0288345, 0.165104, 0.0625453)
 bones/64/rotation = Quaternion(0, 0, 0, 1)
 bones/64/scale = Vector3(1, 1, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("me")]
+script = ExtResource("26_w231t")
+me = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node"]
+root_node = NodePath("../..")
 libraries = {
-&"": SubResource("AnimationLibrary_qkjfy")
+&"": SubResource("AnimationLibrary_qkjfy"),
+&"gundyr": SubResource("AnimationLibrary_wwaad")
 }
 playback_default_blend_time = 0.15
 
@@ -795,8 +847,9 @@ external_skeleton = NodePath("../GeneralSkeleton")
 
 [node name="Hitbox" parent="Root" node_paths=PackedStringArray("processor") instance=ExtResource("8_2q7ci")]
 transform = Transform3D(-0.467623, 0.0301842, -0.883413, 0.0837819, 0.996431, -0.0103031, 0.879949, -0.078832, -0.468482, -0.0300874, -0.992736, 0.07856)
+collision_mask = 8
 processor = NodePath("../..")
-ignored_weapon_groups = Array[String](["enemys_weapon"])
+ignored_weapon_groups = Array[String]([""])
 
 [node name="RightWrist" type="BoneAttachment3D" parent="."]
 transform = Transform3D(0.909038, 0.40743, 0.0874634, 0.368477, -0.687888, -0.625327, -0.194612, 0.600675, -0.775446, 0.153158, 0.920877, 0.393728)
@@ -810,8 +863,10 @@ transform = Transform3D(0.325568, 0.945519, 0, -0.945519, 0.325568, 0, 0, 0, 1, 
 
 [node name="Sword" parent="RightWrist/WeaponSocket" node_paths=PackedStringArray("holder") groups=["enemys_weapon"] instance=ExtResource("7_stidv")]
 transform = Transform3D(0.999593, -0.0284684, -0.00176529, 0.0285111, 0.999059, 0.0326348, 0.000834521, -0.0326719, 0.999466, 0, 0, 0)
-collision_mask = 4
-holder = NodePath("../../../StatesContainer")
+collision_layer = 0
+collision_mask = 0
+weapon_name = "enemy_sword"
+holder = NodePath("../../..")
 
 [node name="Resources" type="Node" parent="."]
 script = ExtResource("10_i6528")
@@ -822,26 +877,19 @@ script = ExtResource("11_vysit")
 
 [node name="Idle" type="Node" parent="StatesContainer"]
 script = ExtResource("3_65kpw")
-state_name = "idle"
-animation = "idle"
 
 [node name="Pursuit" type="Node" parent="StatesContainer"]
 script = ExtResource("4_uname")
-state_name = "pursuit"
-animation = "run"
+
+[node name="Orbit" type="Node" parent="StatesContainer"]
+script = ExtResource("34_g2dqy")
 
 [node name="Attack" type="Node" parent="StatesContainer"]
 script = ExtResource("5_ihg53")
 animation_length = 1.3
-state_name = "attack"
-animation = "slash_1"
 
 [node name="Backtrack" type="Node" parent="StatesContainer"]
 script = ExtResource("6_b3grc")
-state_name = "backtrack"
-animation = "run"
 
 [node name="Death" type="Node" parent="StatesContainer"]
 script = ExtResource("16_fju5c")
-state_name = "death"
-animation = "death"

@@ -1,7 +1,7 @@
 extends Node
 class_name EnemyResources
 
-@onready var me: CharacterBody3D = $"../"
+@onready var me: SECharacter = $"../"
 
 @export var max_health: float = 100
 @export var health: float = 100

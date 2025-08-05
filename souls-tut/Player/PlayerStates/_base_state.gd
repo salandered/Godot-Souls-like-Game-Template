@@ -274,6 +274,8 @@ func pack_hit_data(_weapon: WeaponOh) -> HitData:
 #  - most of our states react on being hit universally
 #    they check for interruptibility frames and do stagger (or don't). 
 func react_on_hit(hit: HitData):
+	print("BaseState: react_on_hit called")
+	print("Hit Data: ", hit)
 	if is_vulnerable():
 		resources.lose_health(hit.damage)
 	if is_interruptable():
@@ -303,3 +305,12 @@ func try_force_state(new_forced_state: String):
 		forced_state = new_forced_state
 	elif container.states[new_forced_state].priority >= container.states[forced_state].priority:
 		forced_state = new_forced_state
+
+
+func change_animation_to(animation_: String):
+	if animation != animation_:
+		animation = animation_
+		if backend_animation == A.to_backend_lazy(animation):
+			push_error("probably unreachable")
+		backend_animation = A.to_backend_lazy(animation)
+		animator.update_body_animations()

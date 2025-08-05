@@ -12,6 +12,6 @@ func check_transition(_delta) -> TransitionData:
 
 
 func update(_delta: float):
-	character.look_at(get_projected_player_pos(), Vector3.UP, true)
-	character.velocity = character.basis.z * speed
-	character.move_and_slide()
+	me.look_at(get_projected_player_pos(), Vector3.UP, true)
+	me.velocity = me.basis.z * speed
+	me.move_and_slide()

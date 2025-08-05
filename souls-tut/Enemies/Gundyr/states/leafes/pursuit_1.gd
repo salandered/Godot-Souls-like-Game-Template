@@ -9,15 +9,15 @@ func check_transition(_delta):
 
 
 func update(delta: float):
-	var face_direction = character.basis.z
+	var face_direction = me.basis.z
 	var angle = face_direction.signed_angle_to(projected_direction_to_player(), Vector3.UP)
 	if abs(angle) >= tracking_angular_speed * delta:
-		character.velocity = face_direction.rotated(Vector3.UP, sign(angle) * tracking_angular_speed * delta) * speed
-		character.rotate_y(sign(angle) * tracking_angular_speed * delta)
+		me.velocity = face_direction.rotated(Vector3.UP, sign(angle) * tracking_angular_speed * delta) * speed
+		me.rotate_y(sign(angle) * tracking_angular_speed * delta)
 	else:
-		character.velocity = face_direction.rotated(Vector3.UP, angle) * speed
-		character.rotate_y(angle)
+		me.velocity = face_direction.rotated(Vector3.UP, angle) * speed
+		me.rotate_y(angle)
 	
-	#character.look_at(get_projected_player_pos(), Vector3.UP, true)
-	#character.velocity = character.basis.z * speed
-	character.move_and_slide()
+	#me.look_at(get_projected_player_pos(), Vector3.UP, true)
+	#me.velocity = me.basis.z * speed
+	me.move_and_slide()

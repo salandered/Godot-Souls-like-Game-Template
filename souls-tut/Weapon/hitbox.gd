@@ -11,12 +11,22 @@ class_name Hitbox_
 @export var ignored_weapon_groups: Array[String]
 
 func _ready():
+	collision_layer = Collision.Layers.HITBOX_AREA
+	collision_mask = Collision.Mask.HITBOX_AREA
+	
+	print("Hitbox_ ready")
+	print(processor, processor.get_path())
+	print(ignored_weapon_groups)
+	print_.collisions(self)
+	print("")
 	area_entered.connect(on_contact)
 
 
 func on_contact(area: Node3D):
+	print("Hitbox contacted ", area.name)
+
 	if is_eligible_attacking_weapon(area):
-		#print("is_eligible_attacking_weapon ", area.get_hit_data())
+		print("is_eligible_attacking_weapon ", area.get_hit_data())
 		area.hitbox_ignore_list.append(self)
 		processor.current_state.react_on_hit(area.get_hit_data())
 
@@ -26,6 +36,7 @@ func is_eligible_attacking_weapon(area: Node3D) -> bool:
 		return false
 	
 	var weapon: WeaponOh = area
+	
 
 	if _not_ignored_weapon(weapon) \
 		and not weapon.hitbox_ignore_list.has(self) \

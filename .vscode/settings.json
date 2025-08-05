@@ -1,7 +1,9 @@
 {
-	// Dynamic Settings
+	// DYNAMIC
 	// "editor.hover.enabled": false,
-	// Static settings
+	//
+	//
+	// 
 	// godot
 	"godotTools.editorPath.godot4": "c:\\safe\\godot\\Godot_v4.4.1-stable_win64.exe\\Godot_v4.4.1-stable_win64.exe",
 	// exlude from file view
@@ -19,9 +21,16 @@
 	},
 	// dont open file again in split view
 	"workbench.editor.revealIfOpen": true,
-	// against copilot
-	"editor.inlineSuggest.enabled": false,
+	//
+	// FIGHTING COPILOT
+	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
+	"github.copilot.editor.enableCodeActions": false, // no yellow stars
+	// "editor.inlineSuggest.enabled": false,
+	// "github.copilot.enable" : true,
+	"editor.inlineSuggest.edits.renderSideBySide": "auto", // show inline suggestions in the same line
+	// 
 	"editor.suggestSelection": "recentlyUsed",
+	// "editor.inlineSuggest.showToolbar": "never", // description of inline suggestion off (annoying)
 	/* FOLDER COLORS EXAMPLE
 	"workbench.colorCustomizations": {
 	    "folderPathColor.custom1": "#FF4488",
@@ -49,19 +58,61 @@
 		"folderPathColor.custom1": "#ffa9c8", // tender enemy
 		"folderPathColor.custom2": "#d88ad8", // animation player
 		"folderPathColor.custom3": "#c3c78d", // dark misc yellow
-		"folderPathColor.custom4": "#a4d4b2", // tender green
-		"folderPathColor.custom5": "#94f0c5d5",
+		"folderPathColor.custom4": "#92b69fe5", // utils
+		"folderPathColor.custom5": "#94f0c5d5", //or #a4d4b2 tender green 2 
 		"folderPathColor.custom6": "#dfdfdf", // white
 		"folderPathColor.custom7": "#cdcf90", // yellow accent
+		"folderPathColor.custom8": "#e681bffb", // model accent
+		"folderPathColor.custom9": "#8aa8c9", // state blue 
+		"folderPathColor.custom10": "#d1abe7", // states enemy
 	},
 	//
 	// COLORFUL FOLDERS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
 	"folder-path-color.folders": [
+		// AA
+		{
+			"path": "souls-tut/Player/PlayerModel/area_awareness.gd",
+			"color": "custom7"
+		},
+		// WHITY
+		{
+			"path": "souls-tut/Player/PlayerStates/_base_state.gd",
+			"color": "custom6"
+		},
+		{
+			"path": "souls-tut/Enemies/SimpleEnemy/SEStates/_base_se_state.gd",
+			"color": "custom6"
+		},
+		// ANIM
+		{
+			"path": "souls-tut/Player/PlayerAnim/split_body_animator.gd",
+			"color": "custom2"
+		},
+		{
+			"path": "souls-tut/Player/PlayerAnim/split_body_animator.gd",
+			"color": "custom2"
+		},
+		// MODEL
+		{
+			"path": "souls-tut/Enemies/SimpleEnemy/se_model.gd",
+			"color": "custom8"
+		},
+		{
+			"path": "souls-tut/Player/PlayerModel/player_model.gd",
+			"color": "custom8"
+		},
+		// DARK YELLOW
 		{
 			"path": "-assets-",
 			"color": "custom3"
 		},
+		//
+		{
+			"path": "souls-tut/Enemies/SimpleEnemy/SEStates",
+			"color": "custom10"
+		},
+		// ENEMY
 		{
 			"path": "souls-tut/Enemies/SimpleEnemy",
 			"color": "custom1"
@@ -70,21 +121,24 @@
 			"path": "souls-tut/Enemies/Gundyr",
 			"color": "custom2"
 		},
+		// CAMERA
 		{
 			"path": "souls-tut/fancy-camera",
 			"color": "custom5"
 		},
 		{
-			"path": "souls-tut/Player/PlayerModel/area_awareness.gd",
-			"color": "custom7"
+			"path": "souls-tut/fancy-camera",
+			"color": "custom5"
 		},
+		// STATE
 		{
-			"path": "souls-tut/Player/PlayerStates/_base_state.gd",
-			"color": "custom6"
+			"path": "souls-tut/Player/PlayerStates/move-fight",
+			"color": "custom9"
 		},
+		// UTILS
 		{
-			"path": "souls-tut/Player/PlayerAnim/split_body_animator.gd",
-			"color": "custom2"
+			"path": "souls-tut/Utils",
+			"color": "custom4"
 		},
 	],
 	//
@@ -126,6 +180,15 @@
 	"highlight.regexes": {
 		// Highlight every instance of "A." (e.g., A.my_static_method)
 		"\\b(A\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+					// "fontWeight": "bold"
+				}
+			]
+		},
+		"\\b(SEA\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -327,7 +390,7 @@
 	"python.analysis.aiCodeActions": {
 		"implementAbstractClasses": true
 	},
-	"editor.inlineSuggest.showToolbar": "never",
+		
 	"github.copilot.nextEditSuggestions.enabled": false,
 	"editor.formatOnSave": true,
 	"workbench.statusBar.visible": false,

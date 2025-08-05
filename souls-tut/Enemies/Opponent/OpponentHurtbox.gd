@@ -17,6 +17,12 @@ class_name OpponentHurtbox
 # But for now it is what it is.
 @export var ignored_spell_groups: Array[String]
 
+func _ready() -> void:
+	collision_layer = Collision.Layers.HITBOX_AREA
+	collision_mask = Collision.Mask.HITBOX_AREA
+	if not processor:
+		push_error("Hurtbox has no processor assigned. This is a bug.")
+	
 
 func _physics_process(_delta):
 	if has_overlapping_areas():
