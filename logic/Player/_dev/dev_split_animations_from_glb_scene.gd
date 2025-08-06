@@ -43,7 +43,7 @@ func save_torso_animations(player: AnimationPlayer, skeleton: Skeleton3D):
 			var bone_index = skeleton.find_bone(bone_name)
 			if torso_indeces.has(bone_index):
 				animation.copy_track(track, new_animation)
-		ResourceSaver.save(new_animation, "res://souls-tut/Assets/Ready Animations/mixamo_torso_animations/" + animation_name + "_torso.res")
+		ResourceSaver.save(new_animation, "res://-assets-/animations/Ready Animations/mixamo_torso_animations/" + animation_name + "_torso.res")
 
 
 func save_legs_animations(player: AnimationPlayer, skeleton: Skeleton3D):
@@ -69,7 +69,7 @@ func save_legs_animations(player: AnimationPlayer, skeleton: Skeleton3D):
 			var bone_index = skeleton.find_bone(bone_name)
 			if legs_indeces.has(bone_index):
 				animation.copy_track(track, new_animation)
-		ResourceSaver.save(new_animation, "res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/" + animation_name + "_legs.res")
+		ResourceSaver.save(new_animation, "res://-assets-/animations/Ready Animations/mixamo_legs_animations/" + animation_name + "_legs.res")
 
 
 func idiot_proof(animation_name: String):

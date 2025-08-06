@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c34ecnm8aoavq"]
+
+[ext_resource type="PackedScene" uid="uid://482rxnrhe64v" path="res://-assets-/Models/bee_bot/bee_bot_skin_3d.tscn" id="1_1q2x0"]
+[ext_resource type="Script" uid="uid://ceqwvvq1dd6a5" path="res://logic/Actors/bee.gd" id="1_vie5o"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1q2x0"]
+
+[node name="Bee" type="CharacterBody3D" node_paths=PackedStringArray("skin")]
+script = ExtResource("1_vie5o")
+skin = NodePath("BeeBotSkin3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13122, 0)
+shape = SubResource("CylinderShape3D_1q2x0")
+
+[node name="BeeBotSkin3D" parent="." instance=ExtResource("1_1q2x0")]

@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbmx8j77ecm2"]
-
-[ext_resource type="PackedScene" uid="uid://d026mtryn4knp" path="res://raw_imports/rose-gold-29-06-3.glb" id="1_crlql"]
-
-[node name="rose-gold-29-06-3" instance=ExtResource("1_crlql")]

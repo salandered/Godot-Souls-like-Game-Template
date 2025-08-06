@@ -27,12 +27,12 @@
 [ext_resource type="Script" uid="uid://dtiog1qc4fgow" path="res://logic/Enemies/Opponent/Brain/ReactionIntentions/RestoreShield.gd" id="12_tcufy"]
 [ext_resource type="Script" uid="uid://bugwoenqwvac8" path="res://logic/Enemies/Opponent/Behaviours/Wander.gd" id="16_jagfx"]
 [ext_resource type="Script" uid="uid://bspwtqcoxif3o" path="res://logic/Enemies/Opponent/Brain/ProactiveIntention/Pursue.gd" id="16_uajqs"]
-[ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/textures/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="19_ggpf5"]
+[ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="19_ggpf5"]
 [ext_resource type="Script" uid="uid://umb453v5dfwa" path="res://logic/Enemies/Opponent/Actions/Run.gd" id="19_whkls"]
 [ext_resource type="Script" uid="uid://dsi4r7ttkfgm2" path="res://logic/Enemies/Opponent/Actions/Sprint.gd" id="20_q2lb6"]
 [ext_resource type="Script" uid="uid://c5aa5jchgmuii" path="res://logic/Enemies/Opponent/Behaviours/Block.gd" id="21_v8455"]
 [ext_resource type="Script" uid="uid://cctx6crmqbbb3" path="res://logic/Enemies/Opponent/Actions/Longsword1.gd" id="22_6f4e1"]
-[ext_resource type="AnimationLibrary" uid="uid://b5skulr4lvugh" path="res://logic/Assets/Ready Animations/lib-params-actions.res" id="23_pvimx"]
+[ext_resource type="AnimationLibrary" uid="uid://b5skulr4lvugh" path="res://-assets-/animations/lib-params-actions.res" id="23_pvimx"]
 [ext_resource type="Script" uid="uid://ddc8n2bql4mkj" path="res://logic/Enemies/Opponent/Actions/Staggered.gd" id="25_2ybub"]
 [ext_resource type="Script" uid="uid://cf3oaeqflc2yg" path="res://logic/Enemies/Opponent/Behaviours/Outspace.gd" id="25_yneac"]
 [ext_resource type="Script" uid="uid://cspbe8im8qoj0" path="res://logic/Enemies/Opponent/Behaviours/GuaranteedStrike.gd" id="26_4dm4f"]
@@ -47,8 +47,8 @@
 [ext_resource type="Script" uid="uid://cnk21rqjtjbak" path="res://logic/Enemies/Opponent/Behaviours/AvoidPlayer.gd" id="37_ivdbi"]
 [ext_resource type="Script" uid="uid://bi1e7pyrhxjt4" path="res://logic/Enemies/Opponent/Behaviours/Pursue.gd" id="39_5onqy"]
 [ext_resource type="Script" uid="uid://c8hqk4ncggisq" path="res://logic/Enemies/Opponent/Behaviours/ShieldThrow.gd" id="40_0bpyj"]
-[ext_resource type="AnimationLibrary" uid="uid://xh1cj0pjb3ww" path="res://logic/Assets/Ready Animations/controller_lib.res" id="48_pvimx"]
-[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/fancy-camera/targetable_aspect.tscn" id="49_d8l4k"]
+[ext_resource type="AnimationLibrary" uid="uid://dwu070x6p0m56" path="res://-assets-/animations/Ready-anim/libs/opponent-lib.res" id="48_24kiw"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/Player/fancy-camera/targetable_aspect.tscn" id="49_d8l4k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ugicx"]
 albedo_color = Color(1, 0.72549, 0, 1)
@@ -1026,7 +1026,6 @@ libraries = {
 script = ExtResource("4_bnuwg")
 is_interruptable = true
 is_vulnerable = true
-root_position = Vector3(-0.0369179, 0.893786, -0.0617579)
 
 [node name="Actions" type="Node" parent="." node_paths=PackedStringArray("beliefs", "character", "animator", "actions_data", "resources", "right_hand_weapon", "left_wrist")]
 script = ExtResource("2_rdgj5")
@@ -1189,7 +1188,7 @@ behaviour_name = "shield_throw"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": ExtResource("48_pvimx")
+&"": ExtResource("48_24kiw")
 }
 playback_default_blend_time = 0.15
 

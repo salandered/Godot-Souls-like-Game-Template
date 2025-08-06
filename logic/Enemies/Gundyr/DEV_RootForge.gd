@@ -10,8 +10,8 @@ func _run():
 
 
 func DEV_extract_root_position_track(from: String):
-	var animation = load("res://souls-tut/Assets/Ready Animations/Gundyr/moving/" + from + ".res") as Animation
-	var backend_animation = load("res://souls-tut/Assets/Ready Animations/Gundyr/backend/" + from + "_backend.res") as Animation
+	var animation = load("res://-assets-/animations/Ready Animations/Gundyr/moving/" + from + ".res") as Animation
+	var backend_animation = load("res://-assets-/animations/Ready Animations/Gundyr/backend/" + from + "_backend.res") as Animation
 	var hips_track = animation.find_track("%GeneralSkeleton:Hips", Animation.TYPE_POSITION_3D)
 	var root_pos_track = backend_animation.find_track("StatesDatabase:root_position", Animation.TYPE_VALUE)
 	for i: int in animation.track_get_key_count(hips_track):
@@ -21,7 +21,7 @@ func DEV_extract_root_position_track(from: String):
 
 
 func DEV_nail_z_coordinate(name: String, value: float):
-	var animation = load("res://souls-tut/Assets/Ready Animations/Gundyr/moving/" + name + ".res") as Animation
+	var animation = load("res://-assets-/animations/Ready Animations/Gundyr/moving/" + name + ".res") as Animation
 	var rooted_version = animation.duplicate(true)
 	var hips_track = rooted_version.find_track("%GeneralSkeleton:Hips", Animation.TYPE_POSITION_3D)
 	print(rooted_version.track_get_key_count(hips_track))
@@ -32,4 +32,4 @@ func DEV_nail_z_coordinate(name: String, value: float):
 		var position_without_z = position
 		position_without_z.z = value
 		rooted_version.track_set_key_value(hips_track, i, position_without_z)
-	ResourceSaver.save(rooted_version, "res://souls-tut/Assets/Ready Animations/Gundyr/rooted/" + name + "_Z_PROJECTED.res")
+	ResourceSaver.save(rooted_version, "res://-assets-/animations/Ready Animations/Gundyr/rooted/" + name + "_Z_PROJECTED.res")

@@ -15,7 +15,6 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="RetroRoom"
-run/main_scene="uid://b6h2mf8m3b8iu"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -44,31 +43,23 @@ enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg")
 
 folder_colors={
 "res://-assets-/animations/": "yellow",
+"res://-assets-/animations/GLB-packed-anim/": "orange",
+"res://-assets-/animations/Ready-anim/": "blue",
+"res://-assets-/animations/Ready-anim/Gundyr/": "pink",
+"res://-assets-/animations/Ready-anim/_backups/": "gray",
+"res://-assets-/animations/Ready-anim/_forged/": "red",
+"res://-assets-/animations/Ready-anim/shield-sword/": "blue",
 "res://-assets-/animations/animation-30/": "yellow",
 "res://-assets-/blender_sources/": "orange",
 "res://-assets-/blender_sources/player/": "pink",
-"res://-assets-/level/": "green",
-"res://-assets-/npc/": "teal",
-"res://-assets-/player/": "pink",
+"res://-assets-/raw_imports/": "orange",
 "res://-assets-/x_icons/": "gray",
-"res://-assets-/x_lesson/": "gray",
-"res://-assets-/x_lesson/scripts/": "teal",
 "res://addons/": "gray",
-"res://logic/Assets/": "yellow",
-"res://logic/Assets/Ready Animations/": "orange",
-"res://logic/Assets/Ready Animations/Gundyr/": "pink",
-"res://logic/Assets/Ready Animations/_backups/": "gray",
-"res://logic/Assets/Ready Animations/_forged/": "red",
-"res://logic/Assets/Ready Animations/shield-sword/": "blue",
 "res://logic/Enemies/Gundyr/": "pink",
 "res://logic/Enemies/Gundyr/states/leafes/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
-"res://misc/trash_bin/": "red",
-"res://raw_imports/": "orange",
-"res://scenes/level/": "green",
-"res://scenes/player/": "pink",
-"res://scripts/player/": "pink"
+"res://misc/trash_bin/": "red"
 }
 
 [input]

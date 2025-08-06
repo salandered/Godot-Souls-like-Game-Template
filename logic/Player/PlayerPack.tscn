@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dkl1i7wju7vba" path="res://logic/Player/PlayerVisuals/PlayerVisuals.tscn" id="2_yjnpd"]
 [ext_resource type="PackedScene" uid="uid://eec5ujuowf51" path="res://logic/Player/PlayerModel/PlayerModel.tscn" id="3_b4ws5"]
 [ext_resource type="Script" uid="uid://bdmng5y2k5j0o" path="res://logic/Player/Input/input_gatherer.gd" id="4_k1mdb"]
-[ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://logic/fancy-camera/local_camera.tscn" id="6_e8a10"]
+[ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://logic/Player/fancy-camera/local_camera.tscn" id="6_e8a10"]
 [ext_resource type="Script" uid="uid://dmgh3f3ilowde" path="res://logic/Player/debug_labels.gd" id="6_vbojx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8a10"]

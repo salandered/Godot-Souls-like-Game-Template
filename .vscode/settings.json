@@ -87,34 +87,34 @@
 	"folder-path-color.folders": [
 		// AA
 		{
-			"path": "souls-tut/Player/PlayerModel/area_awareness.gd",
+			"path": "logic/Player/PlayerModel/area_awareness.gd",
 			"color": "custom7"
 		},
 		// WHITY
 		{
-			"path": "souls-tut/Player/PlayerStates/_base_state.gd",
+			"path": "logic/Player/PlayerStates/_base_state.gd",
 			"color": "custom6"
 		},
 		{
-			"path": "souls-tut/Enemies/SimpleEnemy/SEStates/_base_se_state.gd",
+			"path": "logic/Enemies/SimpleEnemy/SEStates/_base_se_state.gd",
 			"color": "custom6"
 		},
 		// ANIM
 		{
-			"path": "souls-tut/Player/PlayerAnim/split_body_animator.gd",
+			"path": "logic/Player/PlayerAnim/split_body_animator.gd",
 			"color": "custom2"
 		},
 		{
-			"path": "souls-tut/Player/PlayerAnim/split_body_animator.gd",
+			"path": "logic/Player/PlayerAnim/split_body_animator.gd",
 			"color": "custom2"
 		},
 		// MODEL
 		{
-			"path": "souls-tut/Enemies/SimpleEnemy/se_model.gd",
+			"path": "logic/Enemies/SimpleEnemy/se_model.gd",
 			"color": "custom8"
 		},
 		{
-			"path": "souls-tut/Player/PlayerModel/player_model.gd",
+			"path": "logic/Player/PlayerModel/player_model.gd",
 			"color": "custom8"
 		},
 		// DARK YELLOW
@@ -124,35 +124,35 @@
 		},
 		//
 		{
-			"path": "souls-tut/Enemies/SimpleEnemy/SEStates",
+			"path": "logic/Enemies/SimpleEnemy/SEStates",
 			"color": "custom10"
 		},
 		// ENEMY
 		{
-			"path": "souls-tut/Enemies/SimpleEnemy",
+			"path": "logic/Enemies/SimpleEnemy",
 			"color": "custom1"
 		},
 		{
-			"path": "souls-tut/Enemies/Gundyr",
+			"path": "logic/Enemies/Gundyr",
 			"color": "custom2"
 		},
 		// CAMERA
 		{
-			"path": "souls-tut/fancy-camera",
+			"path": "logic/fancy-camera",
 			"color": "custom5"
 		},
 		{
-			"path": "souls-tut/fancy-camera",
+			"path": "logic/fancy-camera",
 			"color": "custom5"
 		},
 		// STATE
 		{
-			"path": "souls-tut/Player/PlayerStates/move-fight",
+			"path": "logic/Player/PlayerStates/move-fight",
 			"color": "custom9"
 		},
 		// UTILS
 		{
-			"path": "souls-tut/Utils",
+			"path": "logic/Utils",
 			"color": "custom4"
 		},
 	],
