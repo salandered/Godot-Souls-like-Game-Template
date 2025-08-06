@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://qn4p6uaoqsub"
+path.s3tc="res://.godot/imported/military_hatchet_Image_1.png-fa0f7b8049985f687d3bd7c8aa9cf79f.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "7f0811a1b02c5cf1455095ae201a2699"
+}
+
+[deps]
+
+source_file="res://-assets-/Textures/textures_/military_hatchet_Image_1.png"
+dest_files=["res://.godot/imported/military_hatchet_Image_1.png-fa0f7b8049985f687d3bd7c8aa9cf79f.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=8
+roughness/src_normal="res://=assets/military_hatchet_Image_2.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

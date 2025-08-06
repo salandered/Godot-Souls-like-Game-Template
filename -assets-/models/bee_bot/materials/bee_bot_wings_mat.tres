@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cruyb7vmbaabx"]
+
+[ext_resource type="Shader" uid="uid://b3djawojm8ktg" path="res://-assets-/Models/bee_bot/shader/bee_wings_shader.gdshader" id="1_gm48y"]
+[ext_resource type="Texture2D" uid="uid://blaqa1tkmd0xx" path="res://-assets-/Models/bee_bot/textures/wing_pattern.png" id="2_e7b64"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gm48y")
+shader_parameter/wing_pattern_sampler = ExtResource("2_e7b64")
+shader_parameter/emission_color = Color(1, 0.584314, 0, 1)
+shader_parameter/global_intensity = 1.0
