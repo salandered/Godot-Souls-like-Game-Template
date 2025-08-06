@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://drjqcoul7pinv"]
+
+[ext_resource type="Script" uid="uid://bpr17wdedc64x" path="res://logic/Player/player.gd" id="1_siche"]
+[ext_resource type="PackedScene" uid="uid://dkl1i7wju7vba" path="res://logic/Player/PlayerVisuals/PlayerVisuals.tscn" id="2_yjnpd"]
+[ext_resource type="PackedScene" uid="uid://eec5ujuowf51" path="res://logic/Player/PlayerModel/PlayerModel.tscn" id="3_b4ws5"]
+[ext_resource type="Script" uid="uid://bdmng5y2k5j0o" path="res://logic/Player/Input/input_gatherer.gd" id="4_k1mdb"]
+[ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://logic/fancy-camera/local_camera.tscn" id="6_e8a10"]
+[ext_resource type="Script" uid="uid://dmgh3f3ilowde" path="res://logic/Player/debug_labels.gd" id="6_vbojx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8a10"]
+albedo_color = Color(0.0962022, 0.627141, 0.55397, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d0r5q"]
+radius = 0.2
+
+[node name="PlayerPack" type="CharacterBody3D" node_paths=PackedStringArray("input_gatherer", "model", "visuals", "collider")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_siche")
+input_gatherer = NodePath("Input")
+model = NodePath("Model")
+visuals = NodePath("Visuals")
+collider = NodePath("Collider")
+
+[node name="Visuals" parent="." instance=ExtResource("2_yjnpd")]
+
+[node name="Model" parent="." instance=ExtResource("3_b4ws5")]
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("4_k1mdb")
+
+[node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("6_e8a10")]
+unique_name_in_owner = true
+look_at_ = NodePath("../CameraFocus")
+
+[node name="CameraFocus" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 1.04239, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraFocus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0200904)
+material_override = SubResource("StandardMaterial3D_e8a10")
+radius = 0.3
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_d0r5q")
+
+[node name="dev_labels" type="Node" parent="."]
+script = ExtResource("6_vbojx")
+
+[node name="Label" type="Label" parent="dev_labels"]
+offset_left = 746.0
+offset_top = 7.0
+offset_right = 857.0
+offset_bottom = 56.0
+text = "nest to player:
+"
+
+[node name="Label2" type="Label" parent="dev_labels"]
+offset_left = 748.0
+offset_top = 55.0
+offset_right = 945.0
+offset_bottom = 78.0
+text = ">>"
+
+[node name="Label3" type="Label" parent="dev_labels"]
+offset_left = 823.0
+offset_top = 437.0
+offset_right = 1139.0
+offset_bottom = 625.0
+text = ">>"
+
+[editable path="FancyCamera"]

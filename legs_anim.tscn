@@ -1,13 +1,13 @@
 [gd_scene load_steps=34 format=3 uid="uid://83yir44368is"]
 
-[ext_resource type="Animation" uid="uid://cexv2ydwpxsr4" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/block_legs.res" id="1_1p8rp"]
-[ext_resource type="Animation" uid="uid://cu0g1uystqj46" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/block_reaction_legs.res" id="2_xa0e0"]
-[ext_resource type="Animation" uid="uid://bvr3qpwont18" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/idle_longsword_legs.res" id="3_2yvvp"]
-[ext_resource type="Animation" uid="uid://b6bdjps28bdbv" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/roll_legs.res" id="4_4e5nk"]
-[ext_resource type="Animation" uid="uid://fc1r2rewxqal" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/shield_shot_legs.res" id="5_v6414"]
-[ext_resource type="Animation" uid="uid://bns7s2taujboc" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/shield_shot_reload_legs.res" id="6_27hqc"]
-[ext_resource type="Animation" uid="uid://d1uw7j630aje1" path="res://souls-tut/Assets/Ready Animations/mixamo_legs_animations/walk_legs.res" id="7_4fvhw"]
-[ext_resource type="AnimationLibrary" uid="uid://b3dgj7f4yjuy3" path="res://souls-tut/Assets/Ready Animations/libs/legs/ss.res" id="8_5sks7"]
+[ext_resource type="Animation" uid="uid://cexv2ydwpxsr4" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/block_legs.res" id="1_1p8rp"]
+[ext_resource type="Animation" uid="uid://cu0g1uystqj46" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/block_reaction_legs.res" id="2_xa0e0"]
+[ext_resource type="Animation" uid="uid://bvr3qpwont18" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/idle_longsword_legs.res" id="3_2yvvp"]
+[ext_resource type="Animation" uid="uid://b6bdjps28bdbv" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/roll_legs.res" id="4_4e5nk"]
+[ext_resource type="Animation" uid="uid://fc1r2rewxqal" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/shield_shot_legs.res" id="5_v6414"]
+[ext_resource type="Animation" uid="uid://bns7s2taujboc" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/shield_shot_reload_legs.res" id="6_27hqc"]
+[ext_resource type="Animation" uid="uid://d1uw7j630aje1" path="res://logic/Assets/Ready Animations/mixamo_legs_animations/walk_legs.res" id="7_4fvhw"]
+[ext_resource type="AnimationLibrary" uid="uid://b3dgj7f4yjuy3" path="res://logic/Assets/Ready Animations/libs/legs/ss.res" id="8_5sks7"]
 
 [sub_resource type="Animation" id="Animation_tv155"]
 length = 0.0333333

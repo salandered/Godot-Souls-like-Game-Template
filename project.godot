@@ -54,21 +54,21 @@ folder_colors={
 "res://-assets-/x_lesson/": "gray",
 "res://-assets-/x_lesson/scripts/": "teal",
 "res://addons/": "gray",
+"res://logic/Assets/": "yellow",
+"res://logic/Assets/Ready Animations/": "orange",
+"res://logic/Assets/Ready Animations/Gundyr/": "pink",
+"res://logic/Assets/Ready Animations/_backups/": "gray",
+"res://logic/Assets/Ready Animations/_forged/": "red",
+"res://logic/Assets/Ready Animations/shield-sword/": "blue",
+"res://logic/Enemies/Gundyr/": "pink",
+"res://logic/Enemies/Gundyr/states/leafes/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
 "res://misc/trash_bin/": "red",
 "res://raw_imports/": "orange",
 "res://scenes/level/": "green",
 "res://scenes/player/": "pink",
-"res://scripts/player/": "pink",
-"res://souls-tut/Assets/": "yellow",
-"res://souls-tut/Assets/Ready Animations/": "orange",
-"res://souls-tut/Assets/Ready Animations/Gundyr/": "pink",
-"res://souls-tut/Assets/Ready Animations/_backups/": "gray",
-"res://souls-tut/Assets/Ready Animations/_forged/": "red",
-"res://souls-tut/Assets/Ready Animations/shield-sword/": "blue",
-"res://souls-tut/Enemies/Gundyr/": "pink",
-"res://souls-tut/Enemies/Gundyr/states/leafes/": "green"
+"res://scripts/player/": "pink"
 }
 
 [input]

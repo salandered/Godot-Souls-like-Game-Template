@@ -1,0 +1,203 @@
+[gd_scene load_steps=22 format=3 uid="uid://b6h2mf8m3b8iu"]
+
+[ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/proto_level.gd" id="1_364n8"]
+[ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://scenes/actors/bird.tscn" id="2_6a1yn"]
+[ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="2_fnxa0"]
+[ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://logic/Player/PlayerPack.tscn" id="2_ldsoa"]
+[ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/models/1/textures/Stone Dirt Wall 02_diffuse.png" id="3_8ohcw"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://scenes/utility/SimpleTarget.tscn" id="4_ldsoa"]
+[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="5_fnxa0"]
+[ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://logic/Enemies/Gundyr/Gundyr.tscn" id="6_8ohcw"]
+[ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://logic/Enemies/Opponent/Opponent.tscn" id="7_hfelf"]
+[ext_resource type="PackedScene" uid="uid://cq2lr6sclvutj" path="res://misc/cat_adopt/enemy/skeleton_advance.tscn" id="10_apr74"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_t1f0q"]
+sky_material = SubResource("ProceduralSkyMaterial_jw8o1")
+
+[sub_resource type="Environment" id="Environment_8ihuv"]
+background_mode = 2
+sky = SubResource("Sky_t1f0q")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apr74"]
+albedo_color = Color(1.2514e-06, 0.498226, 0.619505, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bmwg"]
+albedo_texture = ExtResource("2_fnxa0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip2nn"]
+albedo_texture = ExtResource("3_8ohcw")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ohcw"]
+albedo_color = Color(0.7928, 0.8, 0.368, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfelf"]
+albedo_color = Color(0.15, 0.915, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_364n8"]
+albedo_color = Color(0.136167, 0.43, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldsoa"]
+albedo_color = Color(0.23, 0.1242, 0.1242, 1)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
+albedo_color = Color(0.13, 0.222, 0.25, 1)
+metallic = 1.0
+uv1_triplanar = true
+
+[node name="ProtoLevel" type="Node3D"]
+script = ExtResource("1_364n8")
+
+[node name="Bird" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_6a1yn")]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 16.5992, -0.142535, 6.97814)
+player = NodePath("../Player")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(0.9, 0.955, 1, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8ihuv")
+
+[node name="Player" parent="." instance=ExtResource("2_ldsoa")]
+transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 2.21322, -0.5, -8.71522)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Player"]
+transform = Transform3D(0.258369, 0, 0, 0, 0.258369, 0, 0, 0, 0.258369, 0, 1.02682, 0)
+material_override = SubResource("StandardMaterial3D_apr74")
+
+[node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_fnxa0")]
+transform = Transform3D(0.109006, 0, -0.994041, 0, 1, 0, 0.994041, 0, 0.109006, 12.784, -0.26063, -7.05658)
+player = NodePath("../Player")
+
+[node name="props" type="Node" parent="."]
+
+[node name="Box1" type="CSGBox3D" parent="props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90411, 0.504346, 1.79941)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box2" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 3.28412, 0.504346, -3.06418)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box5" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 13.1093, 0.504346, -13.4263)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box7" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.5576, 0, 0.83011, 0, 1, 0, -0.83011, 0, 0.5576, 11.0835, 0.504346, -13.4263)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box6" type="CSGBox3D" parent="props"]
+transform = Transform3D(0.989987, 0, -0.14116, 0, 1, 0, 0.14116, 0, 0.989987, 15.2712, 0.504346, -13.4263)
+material_override = SubResource("StandardMaterial3D_2bmwg")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box3" type="CSGBox3D" parent="props"]
+transform = Transform3D(-0.249653, -0.968335, 0, 0.968335, -0.249653, 0, 0, 0, 1, -4.61402, -0.635017, 2.20094)
+material_override = SubResource("StandardMaterial3D_ip2nn")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 10, 2)
+
+[node name="Box4" type="CSGBox3D" parent="props"]
+transform = Transform3D(-0.00216117, -0.00838259, 0.999963, 0.756532, -0.653946, -0.00384691, 0.653954, 0.756495, 0.00775499, -24.9253, -7.57285, 32.6662)
+material_override = SubResource("StandardMaterial3D_ip2nn")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 29.3169, 2)
+
+[node name="Target" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, -21.4792, 0, 13.3959)
+material_override = SubResource("StandardMaterial3D_8ohcw")
+label = "yellow"
+
+[node name="Target2" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.755734, 0, 0.677248, 0, 2.47654, 0, -0.677248, 0, 0.755734, -21.4792, 0, -7.73452)
+label = "red"
+
+[node name="Target4" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.33271, 0, 0.958699, 0, 2.47654, 0, -0.958699, 0, 0.33271, -29.1486, 0, 0.558307)
+material_override = SubResource("StandardMaterial3D_hfelf")
+label = "blue"
+
+[node name="Target3" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.755734, 0, 0.677248, 0, 2.47654, 0, -0.677248, 0, 0.755734, -51.0469, 0, -7.73452)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "green"
+
+[node name="Target5" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.11903, 0, 1.00779, 0, 2.47654, 0, -1.00779, 0, 0.11903, -36.9728, 0.5718, 11.6034)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_2"
+
+[node name="Target6" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(-0.127697, 0, 1.00672, 0, 2.47654, 0, -1.00672, 0, -0.127697, -38.1401, 0.636556, 9.37053)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_3"
+
+[node name="Target7" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(0.310874, 0, 0.966, 0, 2.47654, 0, -0.966, 0, 0.310874, -38.1401, 0.767229, 6.21931)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_4"
+
+[node name="Target8" parent="props" instance=ExtResource("4_ldsoa")]
+transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, -36.2618, 0.670066, 15.0567)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_5"
+
+[node name="TestCamera1" type="Camera3D" parent="props" groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 0.53534, 0.844636, 0, -0.844636, 0.53534, -15.347, 11.5904, 16.3507)
+
+[node name="TestCamera2" type="Camera3D" parent="props" groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 0.0339225, 0.999424, 0, -0.999424, 0.0339225, -23.7169, 45.315, 13.2688)
+fov = 29.0
+near = 0.023
+
+[node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_8ohcw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.477, -0.5, -9.257)
+player = NodePath("../Player")
+
+[node name="Opponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_hfelf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.114, -0.5, -8.365)
+player = NodePath("../Player")
+
+[node name="level" type="Node" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -10.521)
+material_override = SubResource("StandardMaterial3D_ldsoa")
+use_collision = true
+collision_layer = 3
+size = Vector3(117.309, 1, 66.0449)
+
+[node name="Floor2" type="CSGBox3D" parent="level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.7929, 36.4189)
+material_override = SubResource("StandardMaterial3D_6a1yn")
+use_collision = true
+collision_layer = 3
+size = Vector3(117.309, 1, 45.0029)
+
+[node name="SkeletonAdvance" parent="." instance=ExtResource("10_apr74")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 28, 0, 0)

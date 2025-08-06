@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4bm1ogsxjkhx"]
-
-[ext_resource type="Script" uid="uid://4a0bok4yy1i6" path="res://souls-tut/Player/PlayerStates/move-fight/attack.gd" id="1_an82i"]
-
-[node name="Attack" type="Node"]
-script = ExtResource("1_an82i")
