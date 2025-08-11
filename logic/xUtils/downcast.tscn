@@ -12,6 +12,7 @@ collision_mask = 2
 script = ExtResource("1_tplgi")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-visible = false
+transform = Transform3D(0.696185, 0, 0, 0, 0.444589, 0, 0, 0, 1, 0, 0, 0)
+layers = 0
 material_override = SubResource("StandardMaterial3D_djdo1")
 radius = 0.2

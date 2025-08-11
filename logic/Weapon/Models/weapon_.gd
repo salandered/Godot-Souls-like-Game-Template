@@ -25,7 +25,7 @@ var basic_attacks: Dictionary
 
 func _ready():
 	collision_layer = Collision.Layers.WEAPON_AREA
-	collision_mask = Collision.Mask.WEAPON_AREA
+	collision_mask = Collision.Mask.WEAPON_AREA_MASK
 	if not holder:
 		push_error("Weapon has no holder assigned")
 	

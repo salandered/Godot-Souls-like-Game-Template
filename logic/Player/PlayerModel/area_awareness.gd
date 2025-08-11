@@ -71,7 +71,9 @@ func _translate_to_strafe(new_input: InputPackage):
 
 func get_floor_distance() -> float:
 	if downcast.is_colliding():
+		#print('-------------- colliding')
 		return downcast.global_position.distance_to(downcast.get_collision_point())
+	#print('-------------- not colliding')
 	return 999999
 
 

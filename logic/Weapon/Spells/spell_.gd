@@ -10,7 +10,7 @@ var hitbox_ignore_list: Array[Area3D]
 
 func _ready():
 	collision_layer = Collision.Layers.WEAPON_AREA
-	collision_mask = Collision.Mask.WEAPON_AREA
+	collision_mask = Collision.Mask.WEAPON_AREA_MASK
 	
 	# if not hitbox_ignore_list:
 	# 	hitbox_ignore_list = []

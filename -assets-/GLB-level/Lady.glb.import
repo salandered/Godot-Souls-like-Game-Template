@@ -1,0 +1,48 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bcc28is3utanj"
+path="res://.godot/imported/Lady.glb-5426188bf0592745e09fe7039a4a0b2f.scn"
+
+[deps]
+
+source_file="res://-assets-/GLB-level/Lady.glb"
+dest_files=["res://.godot/imported/Lady.glb-5426188bf0592745e09fe7039a4a0b2f.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"Poliigon_ConcreteFloorPoured_7656_1K": {
+"use_external/enabled": true,
+"use_external/path": "res://-assets-/materials-shared/Poliigon_ConcreteFloorPoured_7656_1K.tres"
+},
+"water-rocks": {
+"use_external/enabled": true,
+"use_external/path": "res://-assets-/materials-shared/water-rocks-2k-or.tres"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

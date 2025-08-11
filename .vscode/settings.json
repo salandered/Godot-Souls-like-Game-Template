@@ -67,6 +67,9 @@
 		"errorLens.errorForeground": "#fd578177",
 		"errorLens.errorBackground": "#ffffff00",
 		"errorLens.messageBackgroundMode": "none",
+		"errorLens.warningBackground": "#ffffff00",
+		"errorLens.warningForeground": "#dba35ab9",
+		"errorLens.infoBackground": "#ffffff00",
 		// COLORFUL FOLDERS
 		// "folderPathColor.custom_yellow": "#ff8aef",
 		//
@@ -138,11 +141,7 @@
 		},
 		// CAMERA
 		{
-			"path": "logic/fancy-camera",
-			"color": "custom5"
-		},
-		{
-			"path": "logic/fancy-camera",
+			"path": "logic/Player/fancy-camera",
 			"color": "custom5"
 		},
 		// STATE
@@ -152,7 +151,7 @@
 		},
 		// UTILS
 		{
-			"path": "logic/Utils",
+			"path": "logic/xUtils",
 			"color": "custom4"
 		},
 	],

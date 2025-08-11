@@ -12,7 +12,7 @@ class_name Hitbox_
 
 func _ready():
 	collision_layer = Collision.Layers.HITBOX_AREA
-	collision_mask = Collision.Mask.HITBOX_AREA
+	collision_mask = Collision.Mask.HITBOX_AREA_MASK
 	
 	print("Hitbox_ ready")
 	print(processor, processor.get_path())

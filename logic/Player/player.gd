@@ -4,7 +4,6 @@ class_name Princess
 @export var input_gatherer: InputGatherer
 @export var model: PlayerModel
 @export var visuals: PlayerVisuals
-@export var camera_mount: Node3D
 @export var collider: CollisionShape3D
 @onready var camera_focus: Node3D = %CameraFocus
 @onready var fancy_camera: FancyCamera = %FancyCamera
@@ -18,7 +17,7 @@ var cam_i := 0
 
 func _ready():
 	collision_layer = Collision.Layers.PLAYER_COL
-	collision_mask = Collision.Mask.PLAYER_COL
+	collision_mask = Collision.Mask.PLAYER_COL_MASK
 
 
 	#print_.print_ready(self)
@@ -32,8 +31,6 @@ func _ready():
 
 func _process(_delta):
 	dev_labels._dev_player_info()
-
-
 
 
 func _physics_process(delta):
@@ -56,6 +53,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		print_._debug_("cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
+	if event.is_action_pressed("debug_unstuck"):
+		global_position.y += 1.5
+		print_._debug_("Unstuck: moved player up by 1.5 units")
 
 
 # the section below contains some getters utilised by enemies to

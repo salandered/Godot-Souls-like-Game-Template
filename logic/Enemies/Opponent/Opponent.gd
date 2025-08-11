@@ -13,7 +13,7 @@ var current_behaviour: OpponentBehaviour
 
 func _ready():
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
-	collision_mask = Collision.Mask.OTHER_CHAR_COL
+	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 
 	beliefs.player = player
 	current_behaviour = behaviours.get_behaviour("idle")

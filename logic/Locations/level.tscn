@@ -1,10 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=35 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
-[ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/proto_level.gd" id="5_j4sqn"]
+[ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level.gd" id="5_j4sqn"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://logic/Player/PlayerPack.tscn" id="6_mtufd"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
-[ext_resource type="PackedScene" uid="uid://dr6j1h5ta80ui" path="res://-assets-/blender_sources/first/tower-map.glb" id="7_ivku7"]
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="7_ol10w"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
@@ -12,6 +11,19 @@
 [ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://logic/Enemies/Gundyr/Gundyr.tscn" id="11_msgxt"]
 [ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://logic/Actors/bird.tscn" id="11_wyi7n"]
 [ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://logic/Enemies/Opponent/Opponent.tscn" id="12_lt24o"]
+[ext_resource type="PackedScene" uid="uid://djurhvpvjkyhk" path="res://-assets-/GLB-level/tower-map.glb" id="12_ol10w"]
+[ext_resource type="PackedScene" uid="uid://h66ehs7nr8t5" path="res://-assets-/GLB-level/cave-spikes.glb" id="13_rhpv6"]
+[ext_resource type="PackedScene" uid="uid://bcc28is3utanj" path="res://-assets-/GLB-level/Lady.glb" id="14_yhj1i"]
+[ext_resource type="PackedScene" uid="uid://cmwm84jinm62k" path="res://-assets-/GLB-level/cave-meta.glb" id="15_yhj1i"]
+[ext_resource type="PackedScene" uid="uid://bayn0io4087i5" path="res://-assets-/GLB-level/lake.glb" id="16_2mukc"]
+[ext_resource type="PackedScene" uid="uid://bibwyqhjwxrlm" path="res://plane_001_.tscn" id="17_2mukc"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_m0bv2"]
+vertices = PackedVector3Array(24.698, 14.4859, 78.2551, 24.698, 14.4859, 213.005, 157.948, 14.4859, 213.005, 157.948, 14.4859, 78.2551)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5mfl"]
+albedo_color = Color(0.19796, 3.51956e-07, 0.00407733, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jw8o1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -54,13 +66,6 @@ albedo_color = Color(0.15, 0.915, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_364n8"]
 albedo_color = Color(0.136167, 0.43, 0, 1)
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_m0bv2"]
-vertices = PackedVector3Array(24.698, 14.4859, 78.2551, 24.698, 14.4859, 213.005, 157.948, 14.4859, 213.005, 157.948, 14.4859, 78.2551)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5mfl"]
-albedo_color = Color(1, 0.390571, 0.343745, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldsoa"]
 albedo_color = Color(0.23, 0.1242, 0.1242, 1)
 uv1_triplanar = true
@@ -78,6 +83,18 @@ script = ExtResource("5_j4sqn")
 
 [node name="a_not_important" type="Node" parent="."]
 
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="a_not_important"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57913, -13.394, -54.803)
+visible = false
+navigation_mesh = SubResource("NavigationMesh_m0bv2")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="a_not_important/NavigationRegion3D"]
+transform = Transform3D(2.68324, 0, 0, 0, 1.5876, 0, 0, 0, 3.76916, 91.279, 14.0539, 145.6)
+visible = false
+use_collision = true
+size = Vector3(50, 0.0856934, 36)
+material = SubResource("StandardMaterial3D_e5mfl")
+
 [node name="light" type="Node3D" parent="a_not_important"]
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="a_not_important/light"]
@@ -85,6 +102,7 @@ environment = SubResource("Environment_8ihuv")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="a_not_important/light"]
 transform = Transform3D(-0.625, 0.578305, -0.524345, -0.433012, 0.302053, 0.849273, 0.649519, 0.757843, 0.0616299, 32.5766, 32.5, 68.75)
+visible = false
 light_color = Color(1, 0.858824, 0.796078, 1)
 light_energy = 0.357
 shadow_enabled = true
@@ -92,6 +110,7 @@ directional_shadow_mode = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="a_not_important/light"]
 transform = Transform3D(-0.866026, 0.433012, -0.25, 0, 0.5, 0.866025, 0.5, 0.75, -0.433013, 46, 106, 0)
+visible = false
 light_energy = 0.34
 shadow_enabled = true
 directional_shadow_mode = 0
@@ -111,7 +130,7 @@ size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="a_not_important/props"]
-transform = Transform3D(1.46112, 0, -1.54358, 0, 2.07535, 0, 1.54358, 0, 1.46112, -307.533, 6.72472, -140.393)
+transform = Transform3D(1.46112, 0, -1.54358, 0, 2.07535, 0, 1.54358, 0, 1.46112, -221.325, 6.72472, -140.393)
 use_collision = true
 size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
@@ -254,22 +273,19 @@ transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_5"
 
-[node name="tower-map" parent="." instance=ExtResource("7_ivku7")]
-
 [node name="platforms" type="Node3D" parent="."]
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="platforms"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57913, -13.394, -54.803)
-navigation_mesh = SubResource("NavigationMesh_m0bv2")
+[node name="Plane_001 " parent="platforms" instance=ExtResource("17_2mukc")]
+transform = Transform3D(0.0148172, 0, 0.99989, 0, 1, 0, -0.99989, 0, 0.0148172, 79.2376, -0.255445, -16.3341)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="platforms/NavigationRegion3D"]
-transform = Transform3D(2.68324, 0, 0, 0, 1.5876, 0, 0, 0, 3.76916, 91.279, 14.0539, 145.6)
+[node name="CSGBox3D2" type="CSGBox3D" parent="platforms"]
+transform = Transform3D(2.68324, 0, 0, 0, 1.5876, 0, 0, 0, 3.76916, 92.423, -10.6219, 91.0669)
 use_collision = true
 size = Vector3(50, 0.0856934, 36)
 material = SubResource("StandardMaterial3D_e5mfl")
 
 [node name="Floor" type="CSGBox3D" parent="platforms"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.7063, 0.059845, -10.521)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.7063, -14.3009, -112.984)
 material_override = SubResource("StandardMaterial3D_ldsoa")
 use_collision = true
 collision_layer = 3
@@ -283,14 +299,14 @@ collision_layer = 3
 size = Vector3(117.309, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("6_mtufd")]
-transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 69.8924, 0.771047, 36.1923)
+transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 69.8924, 0.582142, 8.26659)
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="Player"]
 transform = Transform3D(0.258369, 0, 0, 0, 0.258369, 0, 0, 0, 0.258369, 0, 1.02682, 0)
 material_override = SubResource("StandardMaterial3D_apr74")
 
 [node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_ol10w")]
-transform = Transform3D(0.109006, 0, -0.994041, 0, 1, 0, 0.994041, 0, 0.109006, 80.4632, 0.587354, -7.05658)
+transform = Transform3D(0.109006, 0, -0.994041, 0, 1, 0, 0.994041, 0, 0.109006, 90.1315, 0.587354, -17.7948)
 player = NodePath("../Player")
 
 [node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_msgxt")]
@@ -300,3 +316,13 @@ player = NodePath("../Player")
 [node name="Opponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_lt24o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5652, 0.683969, -8.365)
 player = NodePath("../Player")
+
+[node name="-CAVE-SPIKES" parent="." instance=ExtResource("13_rhpv6")]
+
+[node name="-THE_LADY" parent="." instance=ExtResource("14_yhj1i")]
+
+[node name="-TOWER-MAP" parent="." instance=ExtResource("12_ol10w")]
+
+[node name="-CAVE-META" parent="." instance=ExtResource("15_yhj1i")]
+
+[node name="-LAKE-THING" parent="." instance=ExtResource("16_2mukc")]

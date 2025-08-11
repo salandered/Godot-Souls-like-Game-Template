@@ -12,7 +12,7 @@ func default_lifecycle(input: InputPackage):
 	return best_input_that_can_be_paid(input)
 
 
-func update(_input: InputPackage, _delta: float):
+func update(input: InputPackage, _delta: float):
 	player.move_and_slide()
 
 func process_input_vector(input: InputPackage, delta: float):
@@ -40,3 +40,10 @@ func process_input_vector(input: InputPackage, delta: float):
 
 func on_exit_state():
 	animator.set_speed_scale(1)
+
+
+func _input(event):
+	if event.is_action_released("dev_speed_up"):
+		SPEED += 10
+	if event.is_action_released("dev_speed_down"):
+		SPEED -= 10

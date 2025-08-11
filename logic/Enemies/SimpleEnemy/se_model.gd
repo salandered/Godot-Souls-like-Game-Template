@@ -37,7 +37,7 @@ var current_state: BaseSEState
 
 func _ready():
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
-	collision_mask = Collision.Mask.OTHER_CHAR_COL
+	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	container.me = self
 	spawn_point = global_position
 	traits_container.accept_traits()
