@@ -23,6 +23,7 @@ raw_blender/
 raw_imports/
 misc/
 
-# IN QUESTION
-addons/
-# addons/godot-git-plugin
+# Almost all addons
+addons/favorite_scenes
+addons/limboai
+addons/terrain_3d
