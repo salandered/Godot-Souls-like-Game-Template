@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqh56seeosa6e" path="res://-assets-/x_icons/skull_icon.png" id="2_vjhre"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4ijc"]
-albedo_color = Color(1, 0.13, 0.13, 1)
+albedo_color = Color(0.81, 0.378, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d40q5"]
 albedo_color = Color(0.53154, 0.577478, 0.208378, 1)
@@ -19,11 +19,12 @@ script = ExtResource("1_mxpn8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799408, 0)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="LookAt"]
-transform = Transform3D(0.456498, 0, 0, 0, 0.456498, 0, 0, 0, 0.456498, 0, 0, 0)
+transform = Transform3D(0.61888, 0, 0, 0, 0.256377, 0, 0, 0, 0.464633, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_c4ijc")
 
 [node name="TargetMarker" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3727, 0)
+visible = false
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="TargetMarker"]
 transform = Transform3D(0.457915, 0, 0, 0, 0.457915, 0, 0, 0, 0.457915, 0, -0.0103282, 0)

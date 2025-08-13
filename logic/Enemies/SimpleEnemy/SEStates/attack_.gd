@@ -28,7 +28,7 @@ func update(delta):
 
 
 func manage_weapon():
-	if works_between(0.3786, 0.8185):
+	if works_between(0.3786, 0.7185):
 		right_weapon.is_attacking = true
 	else:
 		right_weapon.is_attacking = false

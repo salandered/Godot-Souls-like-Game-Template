@@ -5,7 +5,13 @@ class_name BasePlayerState
 @export var TURN_SPEED = 2
 
 var player: Princess
-var animator: SplitBodyAnimator
+
+var animation_settings: AnimationPlayer
+
+var full_body_animator: SimpleAnimator_
+var legs_animator: SimpleAnimator_
+var torso_animator: SimpleAnimator_
+
 var skeleton: Skeleton3D
 var resources: HumanoidResources
 var combat: HumanoidCombat
@@ -16,7 +22,6 @@ var legs_manager: LegsManager
 var left_wrist: BoneAttachment3D
 
 
-@export var animation: String
 @export var state_name: String
 @export var priority: int
 @export var backend_animation: String
@@ -43,6 +48,13 @@ var has_forced_state: bool = false
 var forced_state: String = "nonexistent forced state, error"
 
 var DURATION: float
+
+@export_group("animation")
+@export var animation: String
+@export var anim_settings: String = "animator"
+@export var settings_switch_time: float = 0.2
+@export var animation_blend_time: float = 0.2
+
 
 # region: FAIR DOCS: General States heir usage guide.
 #
@@ -251,7 +263,26 @@ func _on_enter_state():
 	mark_enter_state()
 	iteration_mark_state()
 	on_enter_state()
-	animator.update_body_animations()
+
+	animate()
+
+
+func animate():
+	if anim_settings and animation:
+		print_.prefix("SKM", "_base animate with " + anim_settings + " settings_switch_time " + str(settings_switch_time))
+		# anim_settings - "animator" or "torso_legs_split"
+		if animation_settings.current_animation == anim_settings:
+			# if pose-to-pose transition inside one modifier -> we use one blending mechanism
+			full_body_animator.play(animation, animation_blend_time)
+		else:
+			# and if modifier-to-modifier transition -> we switch in modifier poses instantly. 
+			full_body_animator.play(animation, 0)
+		# on enter state, settings_animator plays the needed settings template
+		# It's purple node =>  inside the frame, this thing executes before the first sk modifier
+		# anim_settings - "animator" or "torso_legs_split"
+		animation_settings.play(anim_settings, settings_switch_time)
+	else:
+		push_warning("No animation settings or animation found")
 
 func on_enter_state():
 	pass
@@ -310,10 +341,10 @@ func try_force_state(new_forced_state: String):
 		forced_state = new_forced_state
 
 
-func change_animation_to(animation_: String):
-	if animation != animation_:
-		animation = animation_
-		if backend_animation == A.to_backend_lazy(animation):
-			push_error("probably unreachable")
-		backend_animation = A.to_backend_lazy(animation)
-		animator.update_body_animations()
+#func change_animation_to(animation_: String):
+	#if animation != animation_:
+		#animation = animation_
+		#if backend_animation == A.to_backend_lazy(animation):
+			#push_error("probably unreachable")
+		#backend_animation = A.to_backend_lazy(animation)
+		#animator.update_body_animations()

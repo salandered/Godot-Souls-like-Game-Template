@@ -9,7 +9,7 @@
 	// exlude from file view
 	"files.exclude": {
 		// godot 
-		"**/*.res": true,
+		// "**/*.res": true,
 		"**/*.gd.uid": true,
 		// images
 		"**/*.jpg": true,
@@ -154,6 +154,11 @@
 			"path": "logic/xUtils",
 			"color": "custom4"
 		},
+		// ANIM
+		{
+			"path": "logic/Player/PlayerAnim/sk-m",
+			"color": "custom2"
+		}
 	],
 	//
 	// No built in git color on files (conflict with colorful folders)

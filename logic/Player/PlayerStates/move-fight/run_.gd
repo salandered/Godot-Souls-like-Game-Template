@@ -26,7 +26,7 @@ func process_input_vector(input: InputPackage, delta: float):
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
 	# _velocity.limit_length(SPEED) ?
-	animator.set_speed_scale(player.velocity.length() / SPEED)
+	# animator.set_speed_scale(player.velocity.length() / SPEED)
 
 # prev 
 # func rotate(_velocity: Vector3, delta: float):
@@ -38,8 +38,8 @@ func process_input_vector(input: InputPackage, delta: float):
 # 	return _velocity.limit_length(SPEED)
 # endregion
 
-func on_exit_state():
-	animator.set_speed_scale(1)
+# func on_exit_state():
+# 	animator.set_speed_scale(1)
 
 
 func _input(event):

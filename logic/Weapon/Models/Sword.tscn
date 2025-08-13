@@ -11,6 +11,7 @@ collision_layer = 4
 script = ExtResource("1_h1qbp")
 
 [node name="Handle" type="CSGBox3D" parent="."]
+visible = false
 size = Vector3(0.05, 0.2, 0.05)
 
 [node name="HitZone" type="CollisionShape3D" parent="."]

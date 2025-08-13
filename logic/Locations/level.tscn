@@ -299,18 +299,18 @@ collision_layer = 3
 size = Vector3(117.309, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("6_mtufd")]
-transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 69.8924, 0.582142, 8.26659)
+transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 69.8924, 0.294313, 8.26659)
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="Player"]
 transform = Transform3D(0.258369, 0, 0, 0, 0.258369, 0, 0, 0, 0.258369, 0, 1.02682, 0)
 material_override = SubResource("StandardMaterial3D_apr74")
 
 [node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_ol10w")]
-transform = Transform3D(0.109006, 0, -0.994041, 0, 1, 0, 0.994041, 0, 0.109006, 90.1315, 0.587354, -17.7948)
+transform = Transform3D(0.109006, 0, -0.994041, 0, 1, 0, 0.994041, 0, 0.109006, 77.0015, 0.0300203, 1.69908)
 player = NodePath("../Player")
 
 [node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_msgxt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.2022, 0.347984, -9.257)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.2022, 0.247515, -9.257)
 player = NodePath("../Player")
 
 [node name="Opponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_lt24o")]

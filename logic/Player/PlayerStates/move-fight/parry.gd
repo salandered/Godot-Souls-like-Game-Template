@@ -28,7 +28,7 @@ func best_input_that_can_be_paid(input: InputPackage) -> String:
 				#return action
 	return "throwing because for some reason input.actions doesn't contain even idle"
 
-# TODO revisit&rethink, tech debt certainly / see Roll State
-func on_exit_state():
-	animator.reset_torso_animation()
-	animator.reset_legs_animation()
+# # TODO revisit&rethink, tech debt certainly / see Roll State
+# func on_exit_state():
+# 	animator.reset_torso_animation()
+# 	animator.reset_legs_animation()

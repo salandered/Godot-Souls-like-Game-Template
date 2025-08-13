@@ -38,20 +38,21 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg")
+enabled=PackedStringArray("res://addons/custom_anim/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://-assets-/GLB-level/": "green",
 "res://-assets-/animations/": "yellow",
-"res://-assets-/animations/GLB-packed-anim/": "gray",
-"res://-assets-/animations/Ready-anim/": "blue",
+"res://-assets-/animations/GLB-packed-anim-old/": "gray",
+"res://-assets-/animations/Ready-anim/": "gray",
 "res://-assets-/animations/Ready-anim/Gundyr/": "pink",
 "res://-assets-/animations/Ready-anim/_backups/": "gray",
 "res://-assets-/animations/Ready-anim/_forged/": "red",
 "res://-assets-/animations/Ready-anim/shield-sword/": "blue",
 "res://-assets-/animations/animation-30/": "yellow",
+"res://-assets-/animations/standard-skeleton/": "blue",
 "res://-assets-/blender_sources/": "orange",
 "res://-assets-/blender_sources/player/": "pink",
 "res://-assets-/materials-shared/": "red",

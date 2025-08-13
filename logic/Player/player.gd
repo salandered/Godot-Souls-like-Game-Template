@@ -11,8 +11,10 @@ class_name Princess
 @onready var dev_labels: Node = $dev_labels
 
 
+
 var debug_cams: Array[Node]
 var cam_i := 0
+
 
 
 func _ready():

@@ -1,12 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bb0o3byg0f0uh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_310c4"]
-albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
-metallic = 1.0
+[ext_resource type="PackedScene" uid="uid://ks55cmdw1wwc" path="res://-assets-/blender_sources/smith_sword/smith_sword.glb" id="1_r56jv"]
 
 [node name="SwordVisuals1" type="Node3D"]
 
-[node name="Core" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.702255, 0)
-material_override = SubResource("StandardMaterial3D_310c4")
-size = Vector3(0.05, 1.5, 0.05)
+[node name="smith_sword" parent="." instance=ExtResource("1_r56jv")]
+transform = Transform3D(-0.726824, 6.3541e-08, 0, -6.3541e-08, -0.726824, 0, 0, 0, 0.726824, 0, 1.0823, 0)

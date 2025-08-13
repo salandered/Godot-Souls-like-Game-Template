@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://gg4aeprhgefk"]
+
+[ext_resource type="Script" uid="uid://cbc4n4qfo0qvb" path="res://logic/Player/PlayerModel/legs_manager.gd" id="1_66xql"]
+[ext_resource type="Script" uid="uid://bab2tcd8icw5f" path="res://logic/Player/PlayerStates/Legs/walkable_gesture.gd" id="2_q6tgm"]
+[ext_resource type="Script" uid="uid://dt7ybjhtfv4g1" path="res://logic/Player/PlayerStates/Legs/sprintable_action.gd" id="3_0jye8"]
+
+[node name="LegsManager" type="Node" node_paths=PackedStringArray("model")]
+script = ExtResource("1_66xql")
+model = NodePath("")
+
+[node name="WalkableGesture" type="Node" parent="."]
+script = ExtResource("2_q6tgm")
+
+[node name="SprintableAction" type="Node" parent="."]
+script = ExtResource("3_0jye8")

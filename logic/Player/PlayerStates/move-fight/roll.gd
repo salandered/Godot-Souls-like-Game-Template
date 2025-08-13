@@ -28,8 +28,8 @@ func move_player(delta: float):
 #   - Currently Parry State also uses this (parries can be spammed) 
 #   - But I’d rather avoid adding another exported bool.
 func on_enter_state():
-	animator.reset_torso_animation()
-	animator.reset_legs_animation()
+	# animator.reset_torso_animation()
+	# animator.reset_legs_animation()
 	
 
 	# In DS3 walk uses smooth 180° turns; roll snaps instantly.

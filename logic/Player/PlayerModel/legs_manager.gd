@@ -2,6 +2,15 @@ extends Node
 class_name LegsManager
 
 
+#@export var combat: HumanoidCombat
+#@export var area_awareness: AreaAwareness
+@export var player: Princess
+@export var anim_settings: AnimationPlayer
+# @onready var torso: PlayerStatesContainer = %Torso
+#@export var legs_behavior
+#@export var legs_actions
+
+
 # The more suited approach will be inherit BasePlayerState once more to define LegsState 
 # then those heirs will register themselves here on_enter state.
 # This way we could escape the need to manually call update() here.

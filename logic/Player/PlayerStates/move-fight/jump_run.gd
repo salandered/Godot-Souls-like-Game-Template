@@ -11,10 +11,12 @@ const JUMP_TIMING = 0.1
 
 var jumped: bool = false
 
+
+
 func _ready():
-	state_name = "jump_run"
-	animation = "jump_run"
-	backend_animation = animation + "_params"
+	#state_name = "jump_run"
+	#animation = "jump_run"
+	#backend_animation = animation + "_params"
 
 	SPEED = 3.0
 	
@@ -35,7 +37,7 @@ func update(input: InputPackage, _delta):
 func process_jump():
 	if works_longer_than(JUMP_TIMING):
 		if not jumped:
-			player.velocity = player.basis.z * SPEED
+			#player.velocity = player.basis.z * SPEED
 			player.velocity.y += VERTICAL_SPEED_ADDED
 			jumped = true
 
@@ -48,3 +50,4 @@ func _input(event):
 		VERTICAL_SPEED_ADDED += 10
 	if event.is_action_released("dev_speed_down"):
 		VERTICAL_SPEED_ADDED -= 10
+		

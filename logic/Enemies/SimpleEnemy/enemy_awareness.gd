@@ -9,6 +9,8 @@ class_name EnemyAwareness
 
 @export var debug_sight_cone: bool = true
 var sight_cone_visual: MeshInstance3D
+var conus_color := Color(1, 0.5, 1, 0.25)
+
 
 func _ready():
 	if me == null:
@@ -81,7 +83,7 @@ func __create_sight_cone_visual():
 
 func _make_sight_material() -> StandardMaterial3D:
 	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(1, 1, 0, 0.04)
+	mat.albedo_color = conus_color
 	mat.flags_transparent = true
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	return mat

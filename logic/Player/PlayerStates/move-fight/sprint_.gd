@@ -29,7 +29,19 @@ func process_input_vector(input: InputPackage, delta: float):
 	else:
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
-	animator.set_speed_scale(player.velocity.length() / SPEED)
+	# animator.set_speed_scale(player.velocity.length() / SPEED)
 
-func on_exit_state():
-	animator.set_speed_scale(1)
+
+# sk mod
+func animate():
+	print_.prefix("SKM", "sprint animate with " + anim_settings + " settings_switch_time " + str(settings_switch_time))
+	if animation_settings.current_animation == anim_settings:
+		legs_animator.play(animation, animation_blend_time)
+		torso_animator.play(animation, animation_blend_time)
+	else:
+		legs_animator.play(animation, 0)
+		torso_animator.play(animation, 0)
+	animation_settings.play(anim_settings, settings_switch_time)
+
+# func on_exit_state():
+# 	# animator.set_speed_scale(1)

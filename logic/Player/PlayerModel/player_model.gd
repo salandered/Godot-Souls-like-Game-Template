@@ -1,11 +1,9 @@
 extends Node
 class_name PlayerModel
 
-# todo consider: not a fan of sharing logic between enemy/player
-
 @onready var player: Princess = $".."
 @onready var skeleton = %GeneralSkeleton
-@onready var animator = $SplitBodyAnimator
+# @onready var animator = $SplitBodyAnimator
 @onready var combat = $Combat as HumanoidCombat
 @onready var resources = $Resources as HumanoidResources
 @onready var hitbox: Hitbox_ = %HitBox
@@ -20,8 +18,39 @@ class_name PlayerModel
 # 	"greatsword" = $....Greatsword,
 # 	....
 # }
+@onready var meta: SkeletonModifierMeta = %Meta
+@onready var full_body: SimpleAnimator_ = %FullBody
+@onready var torso: SimpleAnimator_ = %Torso
+@onready var legs_animator: SimpleAnimator_ = %Legs
 
 var current_state: BasePlayerState
+
+
+	# current_behaviour._on_enter_behaviour(InputPackage.new())
+	# legs.current_behaviour._on_enter_behaviour(InputPackage.new())
+
+	# run_TEMP_dev_bullshit()
+
+
+# func update(input: InputPackage, delta: float):
+# 	combat.add_context(input)
+# 	area_awareness.add_context(input)
+# 	var transition_verdict = current_behaviour.check_relevance(input)
+# 	if transition_verdict != "okay":
+# 		print(current_behaviour.behaviour_name + " -> " + transition_verdict)
+# 		## call the previous behaviour's `on_exit_state`, change behaviour, and call its internal `_on_enter_state`.
+# 		current_behaviour._on_exit_behaviour()
+# 		current_behaviour = state_machine.get_behaviour_by_name(transition_verdict)
+# 		state_machine.current_behaviour = current_behaviour
+# 		current_behaviour._on_enter_behaviour(input)
+# 	current_behaviour.update(input, delta)
+
+# func get_skeleton() -> Skeleton3D:
+# 	return kaj_skeleton
+
+# # dev layer, TODO delete the code below when a version hits
+# func run_TEMP_dev_bullshit():
+# 	pass
 
 
 func _ready():
@@ -33,6 +62,19 @@ func _ready():
 	legs_manager.current_legs_state = states_container.get_state_by_name("idle")
 	legs_manager.accept_behaviours()
 
+	accept_modifiers()
+
+func accept_modifiers():
+	var animators := [full_body, torso, legs_animator]
+	for a_ in animators:
+		a_.current_animation = a_.native_animator.get_animation("idle_longsword")
+		a_.current_animation_cycling = a_.current_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
+		a_.current_animation_progress = 0
+		a_.previous_animation = a_.native_animator.get_animation("idle_longsword")
+		a_.previous_animation_cycling = a_.previous_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
+		a_.previous_animation_progress = 0
+		a_.__initialised = true
+	meta.__initialised = true
 
 func update(input: InputPackage, delta: float):
 	if fly_mode_enabled:
@@ -46,7 +88,7 @@ func update(input: InputPackage, delta: float):
 	if verdict != "okay": # todo not okay
 		switch_to(verdict)
 
-	# TODO TODO: moved back here, TorsoStates triggers _update from legs behaviour -> doubledipping
+	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behaviour -> doubledipping
 	current_state.update_resources(delta)
 	
 	current_state._update(input, delta)

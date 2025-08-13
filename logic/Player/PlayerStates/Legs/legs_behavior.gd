@@ -1,6 +1,6 @@
 extends Node
 ## Small SM
-## The states of the SM are the exact same states our main SM uses.
+## The states of the SM are the same states our main SM uses.
 ## Two core methods, transition logic and update logic. 
 class_name LegsBehaviour
 
@@ -13,6 +13,10 @@ var legs_manager: LegsManager
 var current_legs_state: BasePlayerState
 
 
+## called in TorsoPartialState update() which overrides BasePlayerState update but calls it inside :D
+## so it kinda like:
+## BasePlayerState._update -> TorsoPartialState.update -> this update() -> 
+##     -> transition_legs_state -> (if needed) change_state [here ANIMATION]-> _update() of BasePlayerState again but for legs state
 func update(input: InputPackage, delta: float):
 	transition_legs_state(input, delta)
 	current_legs_state._update(input, delta)
@@ -26,5 +30,5 @@ func transition_legs_state(_input, _delta):
 func change_state(next_state: String):
 	current_legs_state = states_container.get_state_by_name(next_state)
 	# why not using LegsBehaviour where state already stored?
-	legs_manager.current_legs_state = current_legs_state
-	model.animator.update_legs_animation()
+	legs_manager.current_legs_state = current_legs_state # just stores state
+	model.legs_animator.play(current_legs_state.animation)
