@@ -1,9 +1,6 @@
 extends BasePlayerState
 
 
-# todo
-
-
 @export var DELTA_VECTOR_LENGTH = 0.1
 var jump_direction: Vector3
 
@@ -17,8 +14,10 @@ func default_lifecycle(_input: InputPackage):
 		xz_velocity.y = 0
 		if xz_velocity.length_squared() >= 10:
 			return "landing_sprint"
+		print_.prefix("PSM midair", str(floor_distance) + " < " + str(landing_height) + " => landing_run")
 		return "landing_run"
 	else:
+		print_.prefix("PSM midair", "still midair")
 		# still falling
 		return "okay"
 

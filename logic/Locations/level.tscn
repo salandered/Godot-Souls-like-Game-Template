@@ -1,16 +1,13 @@
-[gd_scene load_steps=35 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=32 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level.gd" id="5_j4sqn"]
 [ext_resource type="PackedScene" uid="uid://drjqcoul7pinv" path="res://logic/Player/PlayerPack.tscn" id="6_mtufd"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
-[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="7_ol10w"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/xUtils/simple_target/SimpleTarget.tscn" id="10_2mukc"]
-[ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://logic/Enemies/Gundyr/Gundyr.tscn" id="11_msgxt"]
 [ext_resource type="PackedScene" uid="uid://b4vyxh3h5jfjx" path="res://logic/Actors/bird.tscn" id="11_wyi7n"]
-[ext_resource type="PackedScene" uid="uid://dm3t5ale8pmho" path="res://logic/Enemies/Opponent/Opponent.tscn" id="12_lt24o"]
 [ext_resource type="PackedScene" uid="uid://djurhvpvjkyhk" path="res://-assets-/GLB-level/tower-map.glb" id="12_ol10w"]
 [ext_resource type="PackedScene" uid="uid://h66ehs7nr8t5" path="res://-assets-/GLB-level/cave-spikes.glb" id="13_rhpv6"]
 [ext_resource type="PackedScene" uid="uid://bcc28is3utanj" path="res://-assets-/GLB-level/Lady.glb" id="14_yhj1i"]
@@ -131,6 +128,30 @@ material = SubResource("StandardMaterial3D_m0bv2")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="a_not_important/props"]
 transform = Transform3D(1.46112, 0, -1.54358, 0, 2.07535, 0, 1.54358, 0, 1.46112, -221.325, 6.72472, -140.393)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_m0bv2")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="a_not_important/props"]
+transform = Transform3D(3.56934, 0, -0.143784, 0, 8.06603, 0, 0.254477, 0, 2.01674, -140.248, 24.3919, -476.317)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_m0bv2")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="a_not_important/props"]
+transform = Transform3D(3.69869, 0, -0.143412, 0, 3.87906, 0, 0.263699, 0, 2.01152, -185.101, 7.80318, -445.589)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_m0bv2")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="a_not_important/props"]
+transform = Transform3D(-0.854372, 7.83155, 0.0344166, -3.46558, -1.93072, 0.139604, 0.254477, 7.45599e-09, 2.01674, -140.248, -6.03901, -426.961)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_m0bv2")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="a_not_important/props"]
+transform = Transform3D(3.96593, 0, -0.143535, 0, 22.5991, 0, 0.282751, 0, 2.01325, -109.745, 24.3919, -476.317)
 use_collision = true
 size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
@@ -291,6 +312,13 @@ use_collision = true
 collision_layer = 3
 size = Vector3(117.309, 1, 66.0449)
 
+[node name="Floor3" type="CSGBox3D" parent="platforms"]
+transform = Transform3D(1.53575, 0, 0, 0, 1.53575, 0, 0, 0, 1.53575, 186.598, 0.862021, -210.598)
+material_override = SubResource("StandardMaterial3D_ldsoa")
+use_collision = true
+collision_layer = 3
+size = Vector3(117.309, 1, 66.0449)
+
 [node name="Floor2" type="CSGBox3D" parent="platforms"]
 transform = Transform3D(3.43273, 0, 0, 0, 5.6516, 0, 0, 0, 5.6516, 44.8172, -22.2648, 3.26938)
 material_override = SubResource("StandardMaterial3D_6a1yn")
@@ -299,23 +327,11 @@ collision_layer = 3
 size = Vector3(117.309, 1, 45.0029)
 
 [node name="Player" parent="." instance=ExtResource("6_mtufd")]
-transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 69.8924, 0.294313, 8.26659)
+transform = Transform3D(0.208134, 0, 0.9781, 0, 1, 0, -0.9781, 0, 0.208134, 239.363, 1.75786, -214.039)
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="Player"]
 transform = Transform3D(0.258369, 0, 0, 0, 0.258369, 0, 0, 0, 0.258369, 0, 1.02682, 0)
 material_override = SubResource("StandardMaterial3D_apr74")
-
-[node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_ol10w")]
-transform = Transform3D(0.109006, 0, -0.994041, 0, 1, 0, 0.994041, 0, 0.109006, 77.0015, 0.0300203, 1.69908)
-player = NodePath("../Player")
-
-[node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_msgxt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.2022, 0.247515, -9.257)
-player = NodePath("../Player")
-
-[node name="Opponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_lt24o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5652, 0.683969, -8.365)
-player = NodePath("../Player")
 
 [node name="-CAVE-SPIKES" parent="." instance=ExtResource("13_rhpv6")]
 

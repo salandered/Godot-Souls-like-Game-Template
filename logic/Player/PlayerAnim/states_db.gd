@@ -1,6 +1,7 @@
 extends AnimationPlayer
 
 
+# DO NOT DELETE THIS!
 @export var root_position: Vector3
 @export var transitions_to_queued: bool
 @export var accepts_queueing: bool

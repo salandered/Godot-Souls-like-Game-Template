@@ -22,18 +22,15 @@ var legs_manager: LegsManager
 var left_wrist: BoneAttachment3D
 
 
-@export var state_name: String
-@export var priority: int
-@export var backend_animation: String
-@export var tracking_angular_speed: float = 10
+var state_name: String
+var animation: String
+var animator_set: String
+var backend_animation: String
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # I can tolerate up to two _costs, 
 # the moment I need a third one, I'll create a small ResourceCost class to pay them.
-@export var stamina_cost: float = 0
-
-@onready var combos: Array[Combo_]
 
 
 var initial_position: Vector3
@@ -49,11 +46,12 @@ var forced_state: String = "nonexistent forced state, error"
 
 var DURATION: float
 
-@export_group("animation")
-@export var animation: String
-@export var anim_settings: String = "animator"
+@export var tracking_angular_speed: float = 10
+@export var priority: int
 @export var settings_switch_time: float = 0.2
 @export var animation_blend_time: float = 0.2
+@export var stamina_cost: float = 0
+@onready var combos: Array[Combo_]
 
 
 # region: FAIR DOCS: General States heir usage guide.
@@ -268,21 +266,29 @@ func _on_enter_state():
 
 
 func animate():
-	if anim_settings and animation:
-		print_.prefix("SKM", "_base animate with " + anim_settings + " settings_switch_time " + str(settings_switch_time))
-		# anim_settings - "animator" or "torso_legs_split"
-		if animation_settings.current_animation == anim_settings:
-			# if pose-to-pose transition inside one modifier -> we use one blending mechanism
-			full_body_animator.play(animation, animation_blend_time)
-		else:
-			# and if modifier-to-modifier transition -> we switch in modifier poses instantly. 
-			full_body_animator.play(animation, 0)
-		# on enter state, settings_animator plays the needed settings template
-		# It's purple node =>  inside the frame, this thing executes before the first sk modifier
-		# anim_settings - "animator" or "torso_legs_split"
-		animation_settings.play(anim_settings, settings_switch_time)
+	print_.prefix("SKM", "_base _animate with " + animator_set + " settings_switch_time " + str(settings_switch_time))
+	# animator_set - like "full_body" or "torso_legs"
+	if animation_settings.current_animation == animator_set:
+		# if pose-to-pose transition inside one modifier -> we use one blending mechanism
+		full_body_animator.play(animation, animation_blend_time)
 	else:
-		push_warning("No animation settings or animation found")
+		# and if modifier-to-modifier transition -> we switch in modifier poses instantly. 
+		full_body_animator.play(animation, 0)
+	# on enter state, settings_animator plays the needed settings template
+	# It's purple node =>  inside the frame, this thing executes before the first sk modifier
+	animation_settings.play(animator_set, settings_switch_time)
+
+# Sprint
+# func _animate():
+# 	print_.prefix("SKM", "sprint _animate with " + animator_set + " settings_switch_time " + str(settings_switch_time))
+# 	if animation_settings.current_animation == animator_set:
+# 		legs_animator.play(animation, animation_blend_time)
+# 		torso_animator.play(animation, animation_blend_time)
+# 	else:
+# 		legs_animator.play(animation, 0)
+# 		torso_animator.play(animation, 0)
+# 	animation_settings.play(animator_set, settings_switch_time)
+
 
 func on_enter_state():
 	pass

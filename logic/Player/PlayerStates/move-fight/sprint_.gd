@@ -32,16 +32,5 @@ func process_input_vector(input: InputPackage, delta: float):
 	# animator.set_speed_scale(player.velocity.length() / SPEED)
 
 
-# sk mod
-func animate():
-	print_.prefix("SKM", "sprint animate with " + anim_settings + " settings_switch_time " + str(settings_switch_time))
-	if animation_settings.current_animation == anim_settings:
-		legs_animator.play(animation, animation_blend_time)
-		torso_animator.play(animation, animation_blend_time)
-	else:
-		legs_animator.play(animation, 0)
-		torso_animator.play(animation, 0)
-	animation_settings.play(anim_settings, settings_switch_time)
-
 # func on_exit_state():
 # 	# animator.set_speed_scale(1)

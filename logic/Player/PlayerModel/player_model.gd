@@ -95,7 +95,7 @@ func update(input: InputPackage, delta: float):
 
 
 func switch_to(state: String):
-	# print(current_state.state_name + " -> " + state)
+	print_.prefix("=PSM=", current_state.state_name + " -> " + state)
 	current_state._on_exit_state()
 	current_state = states_container.states[state]
 	current_state._on_enter_state()
@@ -108,7 +108,7 @@ func _handle_fly_mode(input: InputPackage, delta: float):
 	# var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
 	# todo: this is that strange valocity chain
 	var tracking_angular_speed := 4
-	var input_direction := velocity_by_input(input, delta).normalized()
+	var input_direction := __velocity_by_input(input, delta).normalized()
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
 	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
@@ -119,9 +119,9 @@ func _handle_fly_mode(input: InputPackage, delta: float):
 
 	player.velocity = input_direction
 	if input.actions.has(PlayerState.jump_run):
-		player.velocity.y += 5
+		player.velocity.y += 8
 	if input.combat_actions.has(InDataCombatAction.heavy_attack_pressed):
-		player.velocity.y -= 5
+		player.velocity.y -= 8
 
 	
 	player.move_and_slide() # No gravity by default unless applied manually
@@ -143,7 +143,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("dev_speed_down"):
 		fly_speed -= 5
 
-func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	var _velocity := Vector3.ZERO
 	var forward_speed := input.forward_input
 

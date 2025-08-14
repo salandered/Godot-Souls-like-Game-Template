@@ -1,0 +1,983 @@
+[gd_scene load_steps=42 format=3 uid="uid://dfwtt8jxn6pn0"]
+
+[ext_resource type="Script" uid="uid://bylq7l65yrb2j" path="res://logic/Player/PlayerModel/container.gd" id="1_bcl4b"]
+[ext_resource type="Script" uid="uid://ca1uq3m7rkvlg" path="res://logic/Player/PlayerAnim/states_repository.gd" id="2_la0ht"]
+[ext_resource type="AnimationLibrary" uid="uid://bjy06va0gnipa" path="res://-assets-/animations/Ready-anim/libs/libs_from_root/params_extraction_lib_STATES.res" id="3_a51xw"]
+[ext_resource type="AnimationLibrary" uid="uid://dmhb0cf1jko63" path="res://-assets-/animations/standard-skeleton/jumps-v1/param/jumps-v1-LIB.tres" id="4_cvckn"]
+[ext_resource type="Script" uid="uid://dg1rk7ew8xoxu" path="res://logic/Player/PlayerAnim/states_db.gd" id="5_e42qc"]
+[ext_resource type="Script" uid="uid://dy5q4u24dsteq" path="res://logic/Player/PlayerStates/move-fight/withdraw.gd" id="6_poenb"]
+[ext_resource type="Script" uid="uid://o7a4fxurn3iv" path="res://logic/Player/PlayerStates/move-fight/shield_throw.gd" id="7_1gun4"]
+[ext_resource type="PackedScene" uid="uid://b0dnm0bpjbeuc" path="res://logic/Weapon/Spells/ShieldThrow.tscn" id="8_wbm7b"]
+[ext_resource type="Script" uid="uid://c83k64f1j8eyu" path="res://logic/Player/PlayerStates/move-fight/shield_throw_reload.gd" id="9_2uorj"]
+[ext_resource type="PackedScene" uid="uid://d4bm1ogsxjkhx" path="res://logic/Player/PlayerStates/Attack.tscn" id="10_em3lk"]
+[ext_resource type="PackedScene" uid="uid://bg5gwofry0vww" path="res://logic/Player/PlayerStates/Combos/ConsecutiveAttack.tscn" id="11_ggkhu"]
+[ext_resource type="Script" uid="uid://fbscqrhhex3o" path="res://logic/Player/PlayerStates/move-fight/block.gd" id="12_bovdd"]
+[ext_resource type="Script" uid="uid://s8xbfgbmbtm5" path="res://logic/Player/PlayerStates/move-fight/block_reaction.gd" id="13_0t5wo"]
+[ext_resource type="Script" uid="uid://rr1j4nrewt6c" path="res://logic/Player/PlayerStates/move-fight/pushback.gd" id="14_mkiul"]
+[ext_resource type="Script" uid="uid://c2df0ndjfoshm" path="res://logic/Player/PlayerStates/move-fight/staggered.gd" id="15_lbfph"]
+[ext_resource type="Script" uid="uid://csrw3sq3i40g0" path="res://logic/Player/PlayerStates/move-fight/parry.gd" id="16_np0uc"]
+[ext_resource type="PackedScene" uid="uid://bjxvmgetwrvkc" path="res://logic/Player/PlayerStates/Combos/RiposteCombo.tscn" id="17_5inlu"]
+[ext_resource type="Script" uid="uid://besu8ffe3adxd" path="res://logic/Player/PlayerStates/move-fight/parried.gd" id="18_ahuj8"]
+[ext_resource type="Script" uid="uid://cof4xevg1itsv" path="res://logic/Player/PlayerStates/move-fight/riposte.gd" id="19_fs47c"]
+[ext_resource type="Script" uid="uid://c56pthyjpp1oj" path="res://logic/Player/PlayerStates/move-fight/idle.gd" id="20_1t62d"]
+[ext_resource type="Script" uid="uid://cvqcxou7wbcon" path="res://logic/Player/PlayerStates/move-fight/walk.gd" id="21_t2y71"]
+[ext_resource type="Script" uid="uid://pgbwugk4arw4" path="res://logic/Player/PlayerStates/move-fight/run_.gd" id="22_5gp8l"]
+[ext_resource type="Script" uid="uid://g4bqf5nuphkb" path="res://logic/Player/PlayerStates/move-fight/strafe.gd" id="23_q4kcx"]
+[ext_resource type="Script" uid="uid://bg6x8m58hinma" path="res://logic/Player/PlayerStates/move-fight/sprint_.gd" id="24_y1du5"]
+[ext_resource type="Script" uid="uid://cjl44cm1nc1by" path="res://logic/Player/PlayerStates/move-fight/jump_run.gd" id="25_l627n"]
+[ext_resource type="Script" uid="uid://jbh115eat2yo" path="res://logic/Player/PlayerStates/move-fight/jump_sprint.gd" id="26_sun8d"]
+[ext_resource type="Script" uid="uid://dy1qw87r341rx" path="res://logic/Player/PlayerStates/move-fight/midair.gd" id="27_gqfe4"]
+[ext_resource type="Script" uid="uid://g3ipt06mad3b" path="res://logic/Player/PlayerStates/move-fight/landing_run.gd" id="28_obo3m"]
+[ext_resource type="Script" uid="uid://1ul88lxur6gv" path="res://logic/Player/PlayerStates/move-fight/landing_sprint.gd" id="29_yhyf2"]
+[ext_resource type="Script" uid="uid://b3nqsfjtvpujc" path="res://logic/Player/PlayerStates/move-fight/roll.gd" id="30_xe82m"]
+[ext_resource type="Script" uid="uid://bsh6itcr6hwhs" path="res://logic/Player/PlayerStates/move-fight/death.gd" id="31_lntw3"]
+
+[sub_resource type="Animation" id="Animation_ve8je"]
+resource_name = "idle_params"
+length = 2.5333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_af6qk"]
+_data = {
+&"idle-param": SubResource("Animation_ve8je")
+}
+
+[sub_resource type="Animation" id="Animation_af6qk"]
+resource_name = "_template_params"
+length = 1.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gnu1v"]
+resource_name = "_template_params"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oc2p8"]
+resource_name = "_template_params"
+length = 1.1667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pkr7j"]
+resource_name = "_template_params"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_73ntt"]
+_data = {
+&"strafe_L-param": SubResource("Animation_af6qk"),
+&"strafe_L_fast-param": SubResource("Animation_gnu1v"),
+&"strafe_R-param": SubResource("Animation_oc2p8"),
+&"strafe_R_fast-param": SubResource("Animation_pkr7j")
+}
+
+[sub_resource type="Animation" id="Animation_repdo"]
+resource_name = "_template_params"
+length = 2.5333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ylfet"]
+resource_name = "_template_params"
+length = 1.1333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatesDatabase:is_parryable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatesDatabase:is_vulnerable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatesDatabase:is_interruptable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatesDatabase:is_grabable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatesDatabase:root_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatesDatabase:transitions_to_queued")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatesDatabase:accepts_queueing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("StatesDatabase:tracks_input_vector")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbgxs"]
+_data = {
+&"ss-idle_param": SubResource("Animation_repdo"),
+&"walk_Z_param": SubResource("Animation_ylfet")
+}
+
+[node name="StatesContainer" type="Node" node_paths=PackedStringArray("animation_settings", "resources", "combat", "area_awareness", "states_data_repo", "legs_manager", "left_wrist", "full_body_animator", "legs_animator", "torso_animator")]
+script = ExtResource("1_bcl4b")
+animation_settings = NodePath("")
+resources = NodePath("")
+combat = NodePath("")
+area_awareness = NodePath("")
+states_data_repo = NodePath("StatesRepo")
+legs_manager = NodePath("")
+left_wrist = NodePath("")
+full_body_animator = NodePath("")
+legs_animator = NodePath("")
+torso_animator = NodePath("")
+
+[node name="StatesRepo" type="Node" parent="."]
+script = ExtResource("2_la0ht")
+
+[node name="StatesDatabase" type="AnimationPlayer" parent="StatesRepo"]
+unique_name_in_owner = true
+libraries = {
+&"": ExtResource("3_a51xw"),
+&"jumps-v1-LIB": ExtResource("4_cvckn"),
+&"ss": SubResource("AnimationLibrary_af6qk"),
+&"ss_strafe": SubResource("AnimationLibrary_73ntt"),
+&"test": SubResource("AnimationLibrary_lbgxs")
+}
+script = ExtResource("5_e42qc")
+transitions_to_queued = true
+is_vulnerable = true
+is_interruptable = true
+is_grabable = true
+tracks_input_vector = true
+
+[node name="fighting" type="Node" parent="."]
+
+[node name="Withdraw" type="Node" parent="fighting"]
+script = ExtResource("6_poenb")
+state_name = "withdraw"
+priority = 15
+backend_animation = "withdraw_params"
+animation = "withdraw"
+
+[node name="ShieldThrow" type="Node" parent="fighting"]
+script = ExtResource("7_1gun4")
+spell_release_timing = 0.919
+spell = ExtResource("8_wbm7b")
+state_name = "shield_throw"
+priority = 16
+backend_animation = "shield_throw_params"
+tracking_angular_speed = 45.0
+stamina_cost = 20.0
+animation = "shield_throw"
+
+[node name="ShieldThrowReload" type="Node" parent="fighting"]
+script = ExtResource("9_2uorj")
+state_name = "shield_throw_reload"
+priority = 17
+backend_animation = "shield_throw_reload_params"
+tracking_angular_speed = 0.0
+animation = "shield_throw_reload"
+
+[node name="Longsword1" parent="fighting" instance=ExtResource("10_em3lk")]
+RELEASES_PRIORITY = 1.2
+state_name = "longsword_1"
+priority = 15
+backend_animation = "longsword_1_params"
+stamina_cost = 20.0
+animation = "longsword_1"
+
+[node name="ConsecutiveAttack" parent="fighting/Longsword1" instance=ExtResource("11_ggkhu")]
+primary_input = "longsword_1"
+triggered_state = "longsword_2"
+
+[node name="Longsword2" parent="fighting" instance=ExtResource("10_em3lk")]
+RELEASES_PRIORITY = 1.06
+state_name = "longsword_2"
+priority = 15
+backend_animation = "longsword_2_params"
+stamina_cost = 20.0
+animation = "longsword_2"
+
+[node name="ConsecutiveAttack" parent="fighting/Longsword2" instance=ExtResource("11_ggkhu")]
+primary_input = "longsword_2"
+triggered_state = "longsword_2"
+
+[node name="Block" type="Node" parent="fighting"]
+script = ExtResource("12_bovdd")
+state_name = "block"
+priority = 21
+backend_animation = "block_params"
+animation = "block"
+anim_settings = "torso_legs_split"
+
+[node name="BlockReaction" type="Node" parent="fighting"]
+script = ExtResource("13_0t5wo")
+state_name = "block_reaction"
+priority = 90
+backend_animation = "block_reaction_params"
+tracking_angular_speed = 0.0
+animation = "block_reaction"
+
+[node name="Pushback" type="Node" parent="fighting"]
+script = ExtResource("14_mkiul")
+state_name = "pushback"
+priority = 101
+backend_animation = "pushback_params"
+animation = "pushback"
+
+[node name="Staggered" type="Node" parent="fighting"]
+script = ExtResource("15_lbfph")
+state_name = "staggered"
+priority = 100
+backend_animation = "staggered_params"
+animation = "staggered"
+
+[node name="Parry" type="Node" parent="fighting"]
+script = ExtResource("16_np0uc")
+state_name = "parry"
+priority = 20
+backend_animation = "parry_params"
+stamina_cost = 15.0
+animation = "parry"
+
+[node name="Riposte" parent="fighting/Parry" instance=ExtResource("17_5inlu")]
+triggered_state = "riposte"
+
+[node name="Parried" type="Node" parent="fighting"]
+script = ExtResource("18_ahuj8")
+state_name = "parried"
+priority = 100
+backend_animation = "parried_params"
+animation = "parried"
+
+[node name="Riposte" type="Node" parent="fighting"]
+script = ExtResource("19_fs47c")
+state_name = "riposte"
+priority = 25
+backend_animation = "riposte_params"
+animation = "riposte"
+
+[node name="movement" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="movement"]
+script = ExtResource("20_1t62d")
+state_name = "idle"
+priority = 1
+backend_animation = "idle_params"
+animation = "idle_longsword"
+
+[node name="Riposte" parent="movement/Idle" instance=ExtResource("17_5inlu")]
+triggered_state = "riposte"
+
+[node name="Walk" type="Node" parent="movement"]
+script = ExtResource("21_t2y71")
+state_name = "walk"
+priority = 2
+backend_animation = "walk_params"
+animation = "test/walk"
+
+[node name="Run" type="Node" parent="movement"]
+script = ExtResource("22_5gp8l")
+state_name = "run"
+priority = 2
+backend_animation = "run_params"
+tracking_angular_speed = 15.0
+animation = "run"
+
+[node name="Strafe" type="Node" parent="movement"]
+script = ExtResource("23_q4kcx")
+state_name = "strafe"
+priority = 3
+backend_animation = "ss_strafe/strafe_R_params"
+animation = "ss_strafe/strafe_R"
+
+[node name="Sprint" type="Node" parent="movement"]
+script = ExtResource("24_y1du5")
+state_name = "sprint"
+priority = 3
+backend_animation = "sprint_params"
+animation = "sprint"
+anim_settings = "torso_legs_split"
+
+[node name="JumpRun" type="Node" parent="movement"]
+script = ExtResource("25_l627n")
+state_name = "jump_run"
+priority = 10
+backend_animation = "jump_run_params"
+stamina_cost = 10.0
+animation = "jump_run"
+
+[node name="JumpSprint" type="Node" parent="movement"]
+script = ExtResource("26_sun8d")
+state_name = "jump_sprint"
+priority = 10
+backend_animation = "jump_sprint_params"
+stamina_cost = 20.0
+animation = "jump_sprint"
+
+[node name="Midair" type="Node" parent="movement"]
+script = ExtResource("27_gqfe4")
+state_name = "midair"
+priority = 10
+backend_animation = "midair_params"
+animation = "midair"
+
+[node name="LandingRun" type="Node" parent="movement"]
+script = ExtResource("28_obo3m")
+state_name = "landing_run"
+priority = 10
+backend_animation = "landing_run_params"
+animation = "landing_run"
+
+[node name="LandingSprint" type="Node" parent="movement"]
+script = ExtResource("29_yhyf2")
+state_name = "landing_sprint"
+priority = 10
+backend_animation = "landing_sprint_params"
+animation = "landing_sprint"
+
+[node name="Roll" type="Node" parent="movement"]
+script = ExtResource("30_xe82m")
+state_name = "roll"
+priority = 20
+backend_animation = "roll_params"
+stamina_cost = 20.0
+animation = "roll"
+
+[node name="Death" type="Node" parent="movement"]
+script = ExtResource("31_lntw3")
+state_name = "death"
+priority = 200
+backend_animation = "death_params"
+animation = "death"

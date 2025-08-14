@@ -38,7 +38,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/custom_anim/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg")
+enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg")
 
 [file_customization]
 
@@ -46,6 +46,7 @@ folder_colors={
 "res://-assets-/GLB-level/": "green",
 "res://-assets-/animations/": "yellow",
 "res://-assets-/animations/GLB-packed-anim-old/": "gray",
+"res://-assets-/animations/GLB-packed/": "orange",
 "res://-assets-/animations/Ready-anim/": "gray",
 "res://-assets-/animations/Ready-anim/Gundyr/": "pink",
 "res://-assets-/animations/Ready-anim/_backups/": "gray",

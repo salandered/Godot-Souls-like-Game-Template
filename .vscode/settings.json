@@ -18,6 +18,7 @@
 		"**/*.jpg.import": true,
 		"**/*.svg.import": true,
 		"**/*.tmp": true,
+		"**/*.TMP": true,
 	},
 	// dont open file again in split view
 	"workbench.editor.revealIfOpen": true,

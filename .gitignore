@@ -25,5 +25,5 @@ misc/
 
 # Almost all addons
 addons/favorite_scenes
-addons/limboai
+# addons/limboai
 addons/terrain_3d

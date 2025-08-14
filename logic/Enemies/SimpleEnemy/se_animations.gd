@@ -30,4 +30,4 @@ const parry := "parry"
 
 
 static func to_backend_lazy(animation: String) -> String:
-	return animation + "_params"
+	return animation + "-param"

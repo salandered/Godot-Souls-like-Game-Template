@@ -12,12 +12,10 @@ const JUMP_TIMING = 0.1
 var jumped: bool = false
 
 
-
 func _ready():
 	#state_name = "jump_run"
 	#animation = "jump_run"
-	#backend_animation = animation + "_params"
-
+	#backend_animation = animation + "-param"
 	SPEED = 3.0
 	
 
@@ -50,4 +48,3 @@ func _input(event):
 		VERTICAL_SPEED_ADDED += 10
 	if event.is_action_released("dev_speed_down"):
 		VERTICAL_SPEED_ADDED -= 10
-		

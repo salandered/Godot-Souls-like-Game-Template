@@ -11,10 +11,8 @@ class_name Princess
 @onready var dev_labels: Node = $dev_labels
 
 
-
 var debug_cams: Array[Node]
 var cam_i := 0
-
 
 
 func _ready():
@@ -31,8 +29,8 @@ func _ready():
 	cam_i = len(debug_cams) - 1
 	print_._debug_("cam_i: " + str(cam_i))
 
-func _process(_delta):
-	dev_labels._dev_player_info()
+# func _process(_delta):
+# 	dev_labels._label_player_info()
 
 
 func _physics_process(delta):

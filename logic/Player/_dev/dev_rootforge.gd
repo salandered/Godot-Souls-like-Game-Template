@@ -16,7 +16,7 @@ extends EditorScript
 
 # # -> CHECK ANIM NAMES (without lib prefix) and LIB PREFIX
 # var result_anim_name := "walk"
-# var result_backend_anim_name := "strafe-R_params"
+# var result_backend_anim_name := "strafe-R-param"
 # var lib := "ss/"
 
 # # -> FOLDER TO SAVE RESULTS (relative to ANIMATION_FOLDER)

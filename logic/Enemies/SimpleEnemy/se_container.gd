@@ -3,15 +3,15 @@ class_name SEStatesContainer
 
 var me: SECharacter
 
-var node_to_state_data: Dictionary = { # { Node name : StateData }
-	"Idle": StateData.new(SEState.idle, SEA.idle, "", 1, 0.4, -1),
-	"Pursuit": StateData.new(SEState.pursuit, SEA.run, "", 7, 0.5, 9),
-	"Follow": StateData.new(SEState.follow, SEA.walk, "", 5, 0.5, 7),
-	"Midair": StateData.new(SEState.midair, SEA.midair, "", -1, -1, -1),
-	"Orbit": StateData.new(SEState.orbit, SEA.strafe_L, "", 2, 0.5, 5),
-	"Death": StateData.new(SEState.death, SEA.death, "", -1, -1, -1),
-	"Backtrack": StateData.new(SEState.backtrack, SEA.run, "", -1, 1, 15),
-	"Attack": StateData.new(SEState.attack, SEA.attack_1, "", 8, -1, -1),
+var node_to_state_data: Dictionary = { # { Node name : SEStateData }
+	"Idle": SEStateData.new(SEState.idle, SEA.idle, "", 1, 0.4, -1),
+	"Pursuit": SEStateData.new(SEState.pursuit, SEA.run, "", 7, 0.5, 9),
+	"Follow": SEStateData.new(SEState.follow, SEA.walk, "", 5, 0.5, 7),
+	"Midair": SEStateData.new(SEState.midair, SEA.midair, "", -1, -1, -1),
+	"Orbit": SEStateData.new(SEState.orbit, SEA.strafe_L, "", 2, 0.5, 5),
+	"Death": SEStateData.new(SEState.death, SEA.death, "", -1, -1, -1),
+	"Backtrack": SEStateData.new(SEState.backtrack, SEA.run, "", -1, 1, 15),
+	"Attack": SEStateData.new(SEState.attack, SEA.attack_1, "", 8, -1, -1),
 }
 
 
@@ -28,8 +28,8 @@ func _get_state_descendants(node: Node) -> Array:
 func accept_states():
 	for node: BaseSEState in _get_state_descendants(self):
 		print("node.get_name() ", node.get_name())
-		var state_data: StateData = node_to_state_data.get(node.get_name())
-		assert(state_data, "StateData for " + node.get_name() + " not found")
+		var state_data: SEStateData = node_to_state_data.get(node.get_name())
+		assert(state_data, "SEStateData for " + node.get_name() + " not found")
 
 		print("state_data.state_name ", state_data.state_name)
 
@@ -39,7 +39,7 @@ func accept_states():
 		
 		node.state_name = state_data.state_name
 		node.animation = state_data.animation_name
-		node.backend_animation = SEA.to_backend_lazy(state_data.animation_name)
+		node.backend_animation = state_data.backend_animation_name
 		node.global_commitment = state_data.global_commitment
 		node.iteration_commitment = state_data.iteration_commitment
 		node.fatigue = state_data.fatigue

@@ -1,20 +1,37 @@
 class_name PlayerState extends RefCounted
 
-# TODO: unite all this and @onready var states with one structure
+
+# fight 
+const withdraw := "withdraw"
+const shield_throw := "shield_throw"
+const shield_throw_reload := "shield_throw_reload"
+const longsword1 := "longsword_1"
+const longsword2 := "longsword_2"
+const block := "block"
+const block_reaction := "block_reaction"
+const pushback := "pushback"
+const staggered := "staggered"
+const parry := "parry"
+const parried := "parried"
+const riposte := "riposte"
+
 # move
 const idle := "idle"
+const walk := "test/walk"
 const run := "run"
+const strafe := "strafe"
 const sprint := "sprint"
 const jump_run := "jump_run"
+const jump_sprint := "jump_sprint"
 const midair := "midair"
 const landing_run := "landing_run"
-const jump_sprint := "jump_sprint"
 const landing_sprint := "landing_sprint"
+const roll := "roll"
+const death := "death"
+# move
 
 
-const strafe := "strafe"
-
-
+# raw
 # combat
 const slash_1 := "slash_1"
 const longsword_1 := "longsword_1"
@@ -23,11 +40,6 @@ const slash_2 := "slash_2"
 const longsword_2 := "longsword_2"
 
 const slash_3 := "slash_3"
-const staggered := "staggered"
-const parry := "parry"
-const riposte := "riposte"
-const parried := "parried"
-const death := "death"
 
 
 # const states_priority: Dictionary = {

@@ -50,12 +50,12 @@ func _physics_process(delta):
 	var verdict = current_state._check_transition(delta)
 	if not verdict == CURRENT and not verdict == CURRENT_NEW_ITER:
 		switch_to(verdict)
-	player.dev_labels._dev_enemy_info(self)
+	player.dev_labels._label_enemy_info(self)
 	current_state._update(delta)
 
 
 func switch_to(state: String):
-	print_.prefix("==SE==", current_state.state_name + " -> " + state)
+	print_.prefix(">SE", current_state.state_name + " -> " + state)
 	current_state._on_exit_state()
 	current_state = container.states[state]
 	current_state._on_enter_state()
