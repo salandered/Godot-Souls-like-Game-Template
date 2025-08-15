@@ -54,6 +54,8 @@ var DURATION: float
 @onready var combos: Array[Combo_]
 
 
+@export var legs_behavior: LegsBehavior
+
 # region: FAIR DOCS: General States heir usage guide.
 #
 # > check_transition function aims to be short and simple.
@@ -69,14 +71,14 @@ var DURATION: float
 #	seriously consider if Combo_ can do this logic for you, you won't regret its usage I promise.
 #	(Combo_ is clickable even from comments btw)
 #
-# > update functions manages perframe behaviour of your BasePlayerState.
+# > update functions manages perframe behavior of your BasePlayerState.
 #	There are two update types: constant change and a single dynamic update on some timing.
 #	To implement simple constant changes, try to find some physics abstraction for them to make
 #	engine work for you. If your constant changes are too complex, try to avoid hardcoding 
-#	the behaviour into a giant update, better shove the changes data into a backend animation or
+#	the behavior into a giant update, better shove the changes data into a backend animation or
 #	some other data structure resource.
 #	To implement timed changes, use a flag and work with timings via get_progress() and Co.
-#	To roughly base your internal timings on the players behaviour, you can check skeleton
+#	To roughly base your internal timings on the players behavior, you can check skeleton
 #	animation for reference. But for the love of god please avoid referensing skeleton and animator
 #	in any shape way or form in the States code directly. This way your BasePlayerState "backend" is free from
 #	thousand different ways someone (probably you from the future) can mess up your skeleton, scene composition,
@@ -311,7 +313,7 @@ func pack_hit_data(_weapon: WeaponOh) -> HitData:
 	return HitData.blank()
 
 
-# DEFAULT BEHAVIOURS ON MODIFIERS
+# DEFAULT BEHAVIORS ON MODIFIERS
 #  - most of our states react on being hit universally
 #    they check for interruptibility frames and do stagger (or don't). 
 func react_on_hit(hit: HitData):

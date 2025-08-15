@@ -10,7 +10,7 @@ class_name TorsoPartialState
 @export var z_adjustment: float
 
 ## lower torso behavior working as a separate SM
-@export var legs_behaviour: LegsBehaviour
+@export var legs_behavior: LegsBehaviorOld
 
 ## Calling legs behavior to update on update tick.
 ##    - overrides BasePlayerState method
@@ -18,19 +18,19 @@ class_name TorsoPartialState
 ##      => calls process_input_vector of a usual state,
 ##         which is default BasePlayerState or specific state's implementation
 func process_input_vector(input, delta):
-	legs_behaviour.current_legs_state.process_input_vector(input, delta)
+	legs_behavior.current_legs_state.process_input_vector(input, delta)
 
 
 ## Overrides an internal method of BasePlayerState!
 ## Only adds new lines and calls the base implementation.
 func _update(input: InputPackage, delta: float):
 	# skeleton.add_torso_correction(x_adjustment, y_adjustment, z_adjustment)
-	legs_behaviour.update(input, delta)
+	legs_behavior.update(input, delta)
 	# TODO TODO CHECK ???
 	update(input, delta)
 
 	# in enhemy4
-	# legs_behaviour.update(input, delta)
+	# legs_behavior.update(input, delta)
 	# super._update(input, delta)
 
 

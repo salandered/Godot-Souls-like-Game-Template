@@ -2,7 +2,7 @@ extends Node
 ## Small SM
 ## The states of the SM are the same states our main SM uses.
 ## Two core methods, transition logic and update logic. 
-class_name LegsBehaviour
+class_name LegsBehaviorOld
 
 
 var model: PlayerModel
@@ -22,13 +22,13 @@ func update(input: InputPackage, delta: float):
 	current_legs_state._update(input, delta)
 
 
-## Implemented in LegsBehaviour heirs. Calls change_state()
+## Implemented in LegsBehavior heirs. Calls change_state()
 func transition_legs_state(_input, _delta):
 	pass
 
-## used in LegsBehaviour heirs
+## used in LegsBehavior heirs
 func change_state(next_state: String):
 	current_legs_state = states_container.get_state_by_name(next_state)
-	# why not using LegsBehaviour where state already stored?
+	# why not using LegsBehavior where state already stored?
 	legs_manager.current_legs_state = current_legs_state # just stores state
 	model.legs_animator.play(current_legs_state.animation)

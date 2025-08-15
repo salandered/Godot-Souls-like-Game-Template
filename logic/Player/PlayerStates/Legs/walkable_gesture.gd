@@ -1,4 +1,4 @@
-extends LegsBehaviour
+extends LegsBehaviorOld
 
 
 func transition_legs_state(input, _delta):

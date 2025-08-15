@@ -43,7 +43,7 @@ func on_enter_state():
 		# the clamp construction is here to 
 		# 1) prevent look_at annoying errors when our velocity is zero and it can't look_at properly
 		# 3) have a way to scale from velocity. The longer the vector is, the harder it is to modify it by adding a delta.
-		#    Scaling jump_direction with velocity is giving us that natural behaviour of faster jumps (sprints)
+		#    Scaling jump_direction with velocity is giving us that natural behavior of faster jumps (sprints)
 		#    being less controllable, and jumps from standing position being more volatile.
 		#    The dependance on velocity paramter is not critical, delete this if you don't like the approach.
 	jump_direction = Vector3(player.basis.z) * clamp(player.velocity.length(), 1, 999999)

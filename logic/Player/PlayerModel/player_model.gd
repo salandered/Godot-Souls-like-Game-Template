@@ -26,8 +26,8 @@ class_name PlayerModel
 var current_state: BasePlayerState
 
 
-	# current_behaviour._on_enter_behaviour(InputPackage.new())
-	# legs.current_behaviour._on_enter_behaviour(InputPackage.new())
+	# current_behavior._on_enter_behavior(InputPackage.new())
+	# legs.current_behavior._on_enter_behavior(InputPackage.new())
 
 	# run_TEMP_dev_bullshit()
 
@@ -35,15 +35,15 @@ var current_state: BasePlayerState
 # func update(input: InputPackage, delta: float):
 # 	combat.add_context(input)
 # 	area_awareness.add_context(input)
-# 	var transition_verdict = current_behaviour.check_relevance(input)
+# 	var transition_verdict = current_behavior.check_relevance(input)
 # 	if transition_verdict != "okay":
-# 		print(current_behaviour.behaviour_name + " -> " + transition_verdict)
-# 		## call the previous behaviour's `on_exit_state`, change behaviour, and call its internal `_on_enter_state`.
-# 		current_behaviour._on_exit_behaviour()
-# 		current_behaviour = state_machine.get_behaviour_by_name(transition_verdict)
-# 		state_machine.current_behaviour = current_behaviour
-# 		current_behaviour._on_enter_behaviour(input)
-# 	current_behaviour.update(input, delta)
+# 		print(current_behavior.behavior_name + " -> " + transition_verdict)
+# 		## call the previous behavior's `on_exit_state`, change behavior, and call its internal `_on_enter_state`.
+# 		current_behavior._on_exit_behavior()
+# 		current_behavior = state_machine.get_behavior_by_name(transition_verdict)
+# 		state_machine.current_behavior = current_behavior
+# 		current_behavior._on_enter_behavior(input)
+# 	current_behavior.update(input, delta)
 
 # func get_skeleton() -> Skeleton3D:
 # 	return kaj_skeleton
@@ -60,7 +60,7 @@ func _ready():
 	switch_to("idle")
 	
 	legs_manager.current_legs_state = states_container.get_state_by_name("idle")
-	legs_manager.accept_behaviours()
+	legs_manager.accept_behaviors()
 
 	accept_modifiers()
 
@@ -88,7 +88,7 @@ func update(input: InputPackage, delta: float):
 	if verdict != "okay": # todo not okay
 		switch_to(verdict)
 
-	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behaviour -> doubledipping
+	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behavior -> doubledipping
 	current_state.update_resources(delta)
 	
 	current_state._update(input, delta)

@@ -6,7 +6,7 @@ class_name Princess
 @export var visuals: PlayerVisuals
 @export var collider: CollisionShape3D
 @onready var camera_focus: Node3D = %CameraFocus
-@onready var fancy_camera: FancyCamera = %FancyCamera
+@onready var fancy_camera: FancyCamera = %FancyCamera2
 
 @onready var dev_labels: Node = $dev_labels
 
