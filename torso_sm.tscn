@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://si5j617ciby7"]
 
-[ext_resource type="Script" uid="uid://dt6ap2ari76w0" path="res://logic/Player/PlayerModel/torso_behavior/torso_beh.gd" id="1_ke6cs"]
-[ext_resource type="Script" uid="uid://bj43du6wpv85e" path="res://logic/Player/PlayerModel/legs_behavior/jog_torso.gd" id="2_y82an"]
-[ext_resource type="Script" uid="uid://doqhk61rq5one" path="res://logic/Player/PlayerModel/torso_behavior/torso_sprint.gd" id="3_piift"]
-[ext_resource type="Script" uid="uid://b5ladpyf688sa" path="res://logic/Player/PlayerModel/torso_behavior/simple_attack.gd" id="4_vc5en"]
-[ext_resource type="Script" uid="uid://cy02mpqgojh5o" path="res://logic/Player/PlayerModel/torso_behavior/attack_charged.gd" id="5_0hi3i"]
+[ext_resource type="Script" uid="uid://dt6ap2ari76w0" path="res://logic/Player/PlayerModel/torso_behavior/torso_behavior.gd" id="1_ke6cs"]
+[ext_resource type="Script" uid="uid://bj43du6wpv85e" path="res://logic/Player/PlayerModel/torso_behavior/behavior/jog_torso.gd" id="2_y82an"]
+[ext_resource type="Script" uid="uid://doqhk61rq5one" path="res://logic/Player/PlayerModel/torso_behavior/behavior/torso_sprint.gd" id="3_piift"]
+[ext_resource type="Script" uid="uid://b5ladpyf688sa" path="res://logic/Player/PlayerModel/torso_behavior/behavior/simple_attack.gd" id="4_vc5en"]
+[ext_resource type="Script" uid="uid://cy02mpqgojh5o" path="res://logic/Player/PlayerModel/torso_behavior/behavior/attack_charged.gd" id="5_0hi3i"]
 
 [node name="TorsoSM" type="Node"]
 script = ExtResource("1_ke6cs")

@@ -7,11 +7,10 @@ class_name PlayerModel
 @onready var combat = $Combat as HumanoidCombat
 @onready var resources = $Resources as HumanoidResources
 @onready var hitbox: Hitbox_ = %HitBox
-@onready var legs_manager = $LegsManager as LegsManager
 @onready var area_awareness = $AreaAwareness as AreaAwareness
 
 @onready var active_weapon: SwordOh = %SwordOh
-@onready var states_container = $StatesContainer as PlayerStatesContainer
+@onready var container = %StatesContainer as PlayerStatesContainer
 # @onready var weapons = {
 # 	"sword" = $....Sword,
 # 	"bow" = $....Bow,
@@ -23,46 +22,29 @@ class_name PlayerModel
 @onready var torso: SimpleAnimator_ = %Torso
 @onready var legs_animator: SimpleAnimator_ = %Legs
 
-var current_state: BasePlayerState
+var current_state: PlayerState
 
-
-	# current_behavior._on_enter_behavior(InputPackage.new())
-	# legs.current_behavior._on_enter_behavior(InputPackage.new())
-
-	# run_TEMP_dev_bullshit()
-
-
-# func update(input: InputPackage, delta: float):
-# 	combat.add_context(input)
-# 	area_awareness.add_context(input)
-# 	var transition_verdict = current_behavior.check_relevance(input)
-# 	if transition_verdict != "okay":
-# 		print(current_behavior.behavior_name + " -> " + transition_verdict)
-# 		## call the previous behavior's `on_exit_state`, change behavior, and call its internal `_on_enter_state`.
-# 		current_behavior._on_exit_behavior()
-# 		current_behavior = state_machine.get_behavior_by_name(transition_verdict)
-# 		state_machine.current_behavior = current_behavior
-# 		current_behavior._on_enter_behavior(input)
-# 	current_behavior.update(input, delta)
-
-# func get_skeleton() -> Skeleton3D:
-# 	return kaj_skeleton
-
-# # dev layer, TODO delete the code below when a version hits
-# func run_TEMP_dev_bullshit():
-# 	pass
-
+@onready var player_sm: PlayerSM = %PlayerSM
+@onready var legs_sm: LegsSM = %LegsSM
 
 func _ready():
-	states_container.player = player
-	states_container.accept_states()
-	current_state = states_container.states["idle"]
-	switch_to("idle")
-	
-	legs_manager.current_legs_state = states_container.get_state_by_name("idle")
-	legs_manager.accept_behaviors()
+	container.player = player
+
+	container.accept_legs_behaviors()
+	container.accept_player_states()
+	container.accept_actions()
+	container.accept_legs_actions()
+
+
+	player_sm.initialise()
 
 	accept_modifiers()
+
+
+func update(input: InputPackage, delta: float):
+	player_sm.update(input, delta)
+	# legs_sm.update(input, delta)
+	
 
 func accept_modifiers():
 	var animators := [full_body, torso, legs_animator]
@@ -75,30 +57,6 @@ func accept_modifiers():
 		a_.previous_animation_progress = 0
 		a_.__initialised = true
 	meta.__initialised = true
-
-func update(input: InputPackage, delta: float):
-	if fly_mode_enabled:
-		_handle_fly_mode(input, delta)
-		return
-
-	input = combat.contextualize(input)
-	input = area_awareness.contextualize(input)
-	area_awareness.last_input_package = input
-	var verdict = current_state.check_transition(input)
-	if verdict != "okay": # todo not okay
-		switch_to(verdict)
-
-	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behavior -> doubledipping
-	current_state.update_resources(delta)
-	
-	current_state._update(input, delta)
-
-
-func switch_to(state: String):
-	print_.prefix("=PSM=", current_state.state_name + " -> " + state)
-	current_state._on_exit_state()
-	current_state = states_container.states[state]
-	current_state._on_enter_state()
 
 
 var fly_mode_enabled := false
@@ -118,7 +76,7 @@ func _handle_fly_mode(input: InputPackage, delta: float):
 		input_direction = input_direction.normalized() * fly_speed
 
 	player.velocity = input_direction
-	if input.actions.has(PlayerState.jump_run):
+	if input.actions.has(PS.jump_run):
 		player.velocity.y += 8
 	if input.combat_actions.has(InDataCombatAction.heavy_attack_pressed):
 		player.velocity.y -= 8

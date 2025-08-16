@@ -48,7 +48,7 @@ func on_enter_state():
 func best_input_that_can_be_paid(input: InputPackage) -> String:
 	input.actions.sort_custom(container.states_priority_sort)
 	for action in input.actions:
-		if resources.can_be_paid(container.states[action]):
+		if resources.can_be_paid(container.state_by_name(action)):
 			return action
 			#if container.states[action] == self:
 				#return "okay"

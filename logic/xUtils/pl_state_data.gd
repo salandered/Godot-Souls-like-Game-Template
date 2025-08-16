@@ -1,25 +1,16 @@
 extends Resource
-class_name PlayerStateData
+class_name PSData
 
 
 var state_name: String
-var animation_name: String
-var backend_animation_name: String
-var animator_set: String
+var priority: int
+var legs_behavior_name: String
 
 func _init(
 		state_name_: String,
-		animation_name_: String,
-		backend_anim_name_: String = "",
-		animator_set_: String = ""
+		priority_: int,
+		legs_behavior_name_: String
 	) -> void:
 	self.state_name = state_name_
-	self.animation_name = animation_name_
-	if backend_anim_name_ == "":
-		self.backend_animation_name = animation_name_ + "-param"
-	else:
-		self.backend_animation_name = backend_anim_name_
-	if animator_set_ == "":
-		self.animator_set = "full_body"
-	else:
-		self.animator_set = animator_set_
+	self.priority = priority_
+	self.legs_behavior_name = legs_behavior_name_

@@ -229,6 +229,17 @@
 				} // This applies the yellow color to the word
 			]
 		},
+		"(PS\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				}, // This applies a subtle color to the "InAction." part
+				{
+					// "color": "#FFEEA1E5",
+				} // This applies the yellow color to the word
+			]
+		},
 		"(PlayerState\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

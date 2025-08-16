@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://dfwtt8jxn6pn0"]
 
-[ext_resource type="Script" uid="uid://bylq7l65yrb2j" path="res://logic/Player/PlayerModel/container.gd" id="1_bcl4b"]
+[ext_resource type="Script" uid="uid://bylq7l65yrb2j" path="res://logic/Player/PlayerModel/beh_container.gd" id="1_bcl4b"]
 [ext_resource type="Script" uid="uid://ca1uq3m7rkvlg" path="res://logic/Player/PlayerAnim/states_repository.gd" id="2_la0ht"]
 [ext_resource type="AnimationLibrary" uid="uid://bjy06va0gnipa" path="res://-assets-/animations/Ready-anim/libs/libs_from_root/params_extraction_lib_STATES.res" id="3_a51xw"]
 [ext_resource type="AnimationLibrary" uid="uid://dmhb0cf1jko63" path="res://-assets-/animations/standard-skeleton/jumps-v1/param/jumps-v1-LIB.tres" id="4_cvckn"]

@@ -52,8 +52,8 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 	return new_input
 
 var to_strafe = {
-		PlayerState.run: PlayerState.strafe,
-		PlayerState.idle: PlayerState.strafe
+		PS.run: PS.strafe,
+		PS.idle: PS.strafe
 	}
 
 

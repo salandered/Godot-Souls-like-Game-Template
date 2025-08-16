@@ -13,12 +13,12 @@ func _ready():
 
 	base_damage = 10
 	basic_attacks = {
-		InDataCombatAction.light_attack_pressed: PlayerState.longsword_1
+		InDataCombatAction.light_attack_pressed: PS.longsword_1
 	}
 
 
 func get_hit_data():
-	if not __safe_checks(): 
+	if not __safe_checks():
 		return HitData.blank()
 	return holder.current_state.pack_hit_data(self)
 

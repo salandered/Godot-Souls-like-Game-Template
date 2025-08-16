@@ -20,18 +20,18 @@ func gather_input(delta: float) -> InputPackage:
 
 
 	# MAIN
-	new_input.actions.append(PlayerState.idle)
+	# new_input.actions.append(PS.idle)
 
 	new_input.input_direction = Input.get_vector(
 		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
 	if new_input.input_direction != Vector2.ZERO:
-		new_input.actions.append(PlayerState.run)
-		if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
-			new_input.actions.append(PlayerState.sprint)
+		new_input.actions.append(PS.run)
+		# if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
+			# new_input.actions.append(PS.sprint)
 	
 	if Input.is_action_pressed(RawAction.parry):
-		new_input.actions.append(PlayerState.parry)
+		new_input.actions.append(PS.parry)
 
 
 	if Input.is_action_pressed("withdraw"):
@@ -52,10 +52,10 @@ func gather_input(delta: float) -> InputPackage:
 		new_input.actions.append("shield_throw_reload")
 		
 	if Input.is_action_pressed(RawAction.jump):
-		if new_input.actions.has(PlayerState.sprint):
-			new_input.actions.append(PlayerState.jump_sprint)
+		if new_input.actions.has(PS.sprint):
+			new_input.actions.append(PS.jump_sprint)
 		else:
-			new_input.actions.append(PlayerState.jump_run)
+			new_input.actions.append(PS.jump_run)
 	
 	if Input.is_action_just_pressed(RawAction.light_attack):
 		new_input.combat_actions.append(InDataCombatAction.light_attack_pressed)

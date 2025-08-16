@@ -1,1 +1,2 @@
-extends TorsoPartialState
+extends BasePlayerState
+# extends TorsoPartialState

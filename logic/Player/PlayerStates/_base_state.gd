@@ -18,7 +18,7 @@ var combat: HumanoidCombat
 var states_data_repo: StatesDataRepository
 var container: PlayerStatesContainer
 var area_awareness: AreaAwareness
-var legs_manager: LegsManager
+# var legs_manager: LegsManager
 var left_wrist: BoneAttachment3D
 
 
@@ -28,9 +28,6 @@ var animator_set: String
 var backend_animation: String
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-# I can tolerate up to two _costs, 
-# the moment I need a third one, I'll create a small ResourceCost class to pay them.
 
 
 var initial_position: Vector3
@@ -53,8 +50,6 @@ var DURATION: float
 @export var stamina_cost: float = 0
 @onready var combos: Array[Combo_]
 
-
-@export var legs_behavior: LegsBehavior
 
 # region: FAIR DOCS: General States heir usage guide.
 #
@@ -83,29 +78,6 @@ var DURATION: float
 #	in any shape way or form in the States code directly. This way your BasePlayerState "backend" is free from
 #	thousand different ways someone (probably you from the future) can mess up your skeleton, scene composition,
 #	animations, names libraries etc.
-#
-# extends Node
-# class_name PlayerBaseState
-#
-#
-# var player: CharacterBody3D
-#
-#
-#  # transition logic
-# func check_transition(input_data: InputData) -> String:
-# 	# todo - current check_transition s in states look not optimized
-# 	print_debug("error, implement the check_transition function on your state")
-# 	return "error, implement the check_transition function on your state"
-#
-#
-# func update(input_data: InputData, delta: float):
-# 	pass
-#
-# func on_enter_state():
-# 	pass
-#
-# func on_exit_state():
-# 	pass
 #
 # endregion
 
@@ -258,7 +230,7 @@ func default_lifecycle(input: InputPackage):
 
 func _on_enter_state():
 	initial_position = player.global_position
-	resources.pay_resource_cost(self)
+	# resources.pay_resource_cost(self)
 	# print_.prefix("SE", ">>> mark timers", 2)
 	mark_enter_state()
 	iteration_mark_state()

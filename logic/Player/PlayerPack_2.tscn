@@ -14,24 +14,24 @@ albedo_color = Color(0.0962022, 0.627141, 0.55397, 1)
 radius = 0.2
 height = 1.8
 
-[node name="PlayerPack2" type="CharacterBody3D" node_paths=PackedStringArray("input_gatherer", "model", "visuals", "collider")]
+[node name="PlayerPack" type="CharacterBody3D" node_paths=PackedStringArray("input_gatherer", "model", "visuals", "collider")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_fevej")
-input_gatherer = NodePath("Input2")
-model = NodePath("Model2")
-visuals = NodePath("Visuals2")
+input_gatherer = NodePath("Input")
+model = NodePath("Model")
+visuals = NodePath("Visuals")
 collider = NodePath("Collider")
 
-[node name="Visuals2" parent="." instance=ExtResource("2_t2ex8")]
+[node name="Visuals" parent="." instance=ExtResource("2_t2ex8")]
 
-[node name="Model2" parent="." instance=ExtResource("3_6g2cb")]
+[node name="Model" parent="." instance=ExtResource("3_6g2cb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, 0)
 
-[node name="Input2" type="Node" parent="."]
+[node name="Input" type="Node" parent="."]
 script = ExtResource("4_501po")
 
-[node name="FancyCamera2" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("5_rigv3")]
+[node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("5_rigv3")]
 unique_name_in_owner = true
 look_at_ = NodePath("../CameraFocus")
 
@@ -99,4 +99,4 @@ offset_right = 1151.0
 offset_bottom = 711.0
 text = "SK M Info"
 
-[editable path="FancyCamera2"]
+[editable path="FancyCamera"]

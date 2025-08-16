@@ -6,7 +6,7 @@ const TRANSITION_TIMING = 0.2
 # landings aren't default-defaults, this TRANSITION_TIMING != DURATION
 # DURATION is much longer, but we are releasing the priorit early
 # and the rest of the animation is just for smoother blending
-func default_lifecycle(input : InputPackage):
+func default_lifecycle(input: InputPackage):
 	# demonstration of innate trashyness of mixing built in is_on_floor() and advanced techs
 	#if not player.is_on_floor():
 		#return "midair"
@@ -25,6 +25,6 @@ func update(_input: InputPackage, delta):
 # 		# TODO: possible input actions and states are not the same sets
 # 		# seems like always false if action not in states
 # 		# See also: combat system
-# 		return PlayerState.prioritized(input.actions)
+# 		return PS.prioritized(input.actions)
 # 	else:
 # 		return "okay"

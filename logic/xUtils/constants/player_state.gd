@@ -1,6 +1,7 @@
-class_name PlayerState extends RefCounted
+extends RefCounted
+class_name PS
 
-
+# STATES
 # fight 
 const withdraw := "withdraw"
 const shield_throw := "shield_throw"
@@ -28,7 +29,38 @@ const landing_run := "landing_run"
 const landing_sprint := "landing_sprint"
 const roll := "roll"
 const death := "death"
-# move
+
+# ACTIONS
+const action_withdraw := "action_withdraw"
+const action_shield_throw := "action_shield_throw"
+const action_shield_throw_reload := "action_shield_throw_reload"
+const action_longsword1 := "action_longsword_1"
+const action_longsword2 := "action_longsword_2"
+const action_block := "action_block"
+const action_block_reaction := "action_block_reaction"
+const action_pushback := "action_pushback"
+const action_staggered := "action_staggered"
+const action_parry := "action_parry"
+const action_parried := "action_parried"
+const action_riposte := "action_riposte"
+
+const action_idle := "action_idle"
+const action_walk := "test/action_walk"
+const action_run := "action_run"
+const action_strafe := "action_strafe"
+const action_sprint := "action_sprint"
+const action_jump_run := "action_jump_run"
+const action_jump_sprint := "action_jump_sprint"
+const action_midair := "action_midair"
+const action_landing_run := "action_landing_run"
+const action_landing_sprint := "action_landing_sprint"
+const action_roll := "action_roll"
+const action_death := "action_death"
+
+const legs_action_double := "double"
+const legs_action_idle := action_idle
+const legs_action_run := action_run
+const legs_action_sprint := action_sprint
 
 
 # raw
@@ -72,7 +104,7 @@ const slash_3 := "slash_3"
 # 	if states.is_empty():
 # 		push_error("states empty")
 # 	var sorted = states.duplicate()
-# 	sorted.sort_custom(PlayerState._priority_sort)
+# 	sorted.sort_custom(PS._priority_sort)
 	
 # 	return sorted
 

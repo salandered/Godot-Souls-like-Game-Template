@@ -6,7 +6,7 @@ class_name Princess
 @export var visuals: PlayerVisuals
 @export var collider: CollisionShape3D
 @onready var camera_focus: Node3D = %CameraFocus
-@onready var fancy_camera: FancyCamera = %FancyCamera2
+@onready var fancy_camera: FancyCamera = %FancyCamera
 
 @onready var dev_labels: Node = $dev_labels
 
@@ -65,7 +65,8 @@ func hp_percentage() -> float:
 	return model.resources.health / model.resources.max_health
 
 func is_attacking() -> bool:
-	return model.current_state is AttackState
+	return false
+	# return model.current_state is AttackState
 
 func current_attack_radius() -> float:
 	if not is_attacking():
@@ -121,7 +122,7 @@ func time_til_next_last_locked_frame() -> float:
 # pandora's box potentialy, better return immutable snapshot copy or use getters for fields,
 # otherwise some out-of-palyer functional can mess with controller's flow
 # but who cares
-func get_current_state() -> BasePlayerState:
+func get_current_state() -> PlayerState:
 	return model.current_state
 
 

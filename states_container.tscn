@@ -1,6 +1,6 @@
 [gd_scene load_steps=41 format=3 uid="uid://m2fbpmk2m8l6"]
 
-[ext_resource type="Script" uid="uid://bylq7l65yrb2j" path="res://logic/Player/PlayerModel/container.gd" id="1_a3m4g"]
+[ext_resource type="Script" uid="uid://bylq7l65yrb2j" path="res://logic/Player/PlayerModel/beh_container.gd" id="1_a3m4g"]
 [ext_resource type="Script" uid="uid://ca1uq3m7rkvlg" path="res://logic/Player/PlayerAnim/states_repository.gd" id="2_ail14"]
 [ext_resource type="AnimationLibrary" uid="uid://bjy06va0gnipa" path="res://-assets-/animations/Ready-anim/libs/libs_from_root/params_extraction_lib_STATES.res" id="3_kt6ng"]
 [ext_resource type="Script" uid="uid://dg1rk7ew8xoxu" path="res://logic/Player/PlayerAnim/states_db.gd" id="4_rywcb"]

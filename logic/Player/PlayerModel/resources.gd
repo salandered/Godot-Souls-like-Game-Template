@@ -21,7 +21,7 @@ func update(delta: float):
 
 
 ## high-level methods to trim the bureaucracy
-func pay_resource_cost(state: BasePlayerState):
+func pay_resource_cost(state: PlayerState):
 	lose_stamina(state.stamina_cost)
 
 
@@ -37,7 +37,7 @@ func pay_block_cost(damage: float, blocking_coefficient: float):
 
 
 ## high-level methods to trim the bureaucracy
-func can_be_paid(state: BasePlayerState) -> bool:
+func can_be_paid(state: PlayerState) -> bool:
 	if stamina > 0 or state.stamina_cost == 0:
 		return true
 	return false
@@ -52,7 +52,7 @@ func lose_health(amount: float):
 	if not god_mode:
 		health -= amount
 		if health < 1:
-			model.current_state.try_force_state(PlayerState.death)
+			model.current_state.try_force_state(PS.death)
 
 
 func gain_health(amount: float):

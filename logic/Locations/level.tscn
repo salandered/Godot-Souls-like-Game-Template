@@ -323,7 +323,7 @@ use_collision = true
 collision_layer = 3
 size = Vector3(117.309, 1, 45.0029)
 
-[node name="PlayerPack_2" parent="." instance=ExtResource("9_ol10w")]
+[node name="PlayerPack" parent="." instance=ExtResource("9_ol10w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6847, 14.5881, -31.948)
 
 [node name="-CAVE-SPIKES" parent="." instance=ExtResource("13_rhpv6")]
