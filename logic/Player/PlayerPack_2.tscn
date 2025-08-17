@@ -72,31 +72,34 @@ offset_bottom = 78.0
 text = ">>"
 
 [node name="Label3" type="Label" parent="dev_labels"]
-offset_left = 747.0
-offset_top = 99.0
-offset_right = 1063.0
-offset_bottom = 287.0
+offset_left = 23.0
+offset_top = 496.0
+offset_right = 358.0
+offset_bottom = 636.0
+theme_override_font_sizes/font_size = 18
 text = ">>"
 
 [node name="Label4" type="Label" parent="dev_labels"]
-offset_left = 619.0
-offset_top = 523.0
-offset_right = 808.0
-offset_bottom = 711.0
+offset_left = 575.0
+offset_top = 522.0
+offset_right = 764.0
+offset_bottom = 710.0
 text = "SK M Info"
 
 [node name="Label5" type="Label" parent="dev_labels"]
-offset_left = 807.0
-offset_top = 523.0
-offset_right = 996.0
-offset_bottom = 711.0
+offset_left = 730.0
+offset_top = 520.0
+offset_right = 919.0
+offset_bottom = 708.0
+theme_override_font_sizes/font_size = 16
 text = "SK M Info"
 
 [node name="Label6" type="Label" parent="dev_labels"]
-offset_left = 977.0
-offset_top = 523.0
-offset_right = 1151.0
-offset_bottom = 711.0
+offset_left = 969.0
+offset_top = 519.0
+offset_right = 1143.0
+offset_bottom = 707.0
+theme_override_font_sizes/font_size = 16
 text = "SK M Info"
 
 [editable path="FancyCamera"]

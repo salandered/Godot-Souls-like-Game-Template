@@ -4,9 +4,10 @@ class_name SimpleAnimator_
 @export var native_animator: AnimationPlayer
 @onready var skeleton = get_skeleton()
 
-@export var white_list_start: int
-@export var white_list_end: int
-@export var white_list_root: bool
+@export var a_name: String
+# @export var white_list_start: int
+# @export var white_list_end: int
+# @export var white_list_root: bool
 
 var current_animation: Animation
 # Animation also can be cyclical to linger infinitely, and each animation needs a variable to count progress for data interpolation. 
@@ -90,11 +91,17 @@ func update_skeleton():
 	# - It works because in GDScript, this parameter in `for` loop syntax can be many things
 	# 	- we abuse this fact by making it a collection of integers if we have a white list export field defined
 	# 	- or if not (we work on the whole skeleton), we make this variable into a single integer value that represents all bones of the skeleton.
-	if white_list_start and white_list_end:
-		bone_list = range(white_list_start, white_list_end + 1)
-		if white_list_root:
-			bone_list.append(0)
-	else:
+	if a_name == 't':
+		bone_list = range(1, 44)
+	if a_name == 'l':
+		bone_list = range(45, 52)
+		bone_list.append(0)
+		bone_list.append(1)
+		bone_list.append(2)
+		# bone_list.append(3)
+
+
+	if a_name == 'f_b':
 		bone_list = range(0, skeleton.get_bone_count())
 	
 	for bone in bone_list:

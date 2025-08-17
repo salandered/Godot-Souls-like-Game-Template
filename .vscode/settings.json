@@ -71,19 +71,25 @@
 		"errorLens.warningBackground": "#ffffff00",
 		"errorLens.warningForeground": "#dba35ab9",
 		"errorLens.infoBackground": "#ffffff00",
+		// BOOKMARKS
+		"bookmarks.lineBackground": "#6c6aff22", // Background color for a bookmarked line.
+		"bookmarks.lineBorder": "#ffffff00", // Border color for a bookmarked line.
+		"bookmarks.overviewRuler": "#157EFB88", // Marker color for the overview ruler.
 		// COLORFUL FOLDERS
 		// "folderPathColor.custom_yellow": "#ff8aef",
 		//
 		"folderPathColor.custom1": "#ffa9c8", // tender enemy
-		"folderPathColor.custom2": "#d88ad8", // animation player
+		"folderPathColor.animation": "#d88ad8", // animation player
 		"folderPathColor.custom3": "#c3c78d", // dark misc yellow
 		"folderPathColor.custom4": "#92b69fe5", // utils
 		"folderPathColor.custom5": "#94f0c5d5", //or #a4d4b2 tender green 2 
 		"folderPathColor.custom6": "#dfdfdf", // white
 		"folderPathColor.custom7": "#cdcf90", // yellow accent
 		"folderPathColor.custom8": "#e681bffb", // model accent
-		"folderPathColor.custom9": "#8aa8c9", // state blue 
+		"folderPathColor.custom9": "#497cca", // state blue 
 		"folderPathColor.custom10": "#d1abe7", // states enemy
+		"folderPathColor.custom11": "#f1cf8ee3",
+		"folderPathColor.custom12": "#92b9e4", // 8aa8c9
 	},
 	//
 	// COLORFUL FOLDERS
@@ -96,7 +102,7 @@
 		},
 		// WHITY
 		{
-			"path": "logic/Player/PlayerStates/_base_state.gd",
+			"path": "logic/Player/PlayerModel/player_sm/_pl_state.gd",
 			"color": "custom6"
 		},
 		{
@@ -108,9 +114,14 @@
 			"path": "logic/Player/PlayerAnim/split_body_animator.gd",
 			"color": "custom2"
 		},
+		//
 		{
-			"path": "logic/Player/PlayerAnim/split_body_animator.gd",
-			"color": "custom2"
+			"path": "logic/Player/PlayerModel/legs_sm",
+			"color": "custom11"
+		},
+		{
+			"path": "logic/Player/PlayerModel/player_sm",
+			"color": "custom12"
 		},
 		// MODEL
 		{
@@ -158,7 +169,7 @@
 		// ANIM
 		{
 			"path": "logic/Player/PlayerAnim/sk-m",
-			"color": "custom2"
+			"color": "animation"
 		}
 	],
 	//
@@ -195,6 +206,36 @@
 			}
 		]
 	},
+	// ========================
+	// Bookmarks Extension Settings
+	// ========================
+	// Allows navigation through all files that contain bookmarks.
+	"bookmarks.navigateThroughAllFiles": true,
+	// Allows navigation to wrap around at the first and last bookmarks in scope.
+	"bookmarks.wrapNavigation": true,
+	// If set to true, bookmarks are saved in the project, which is useful for version control.
+	"bookmarks.saveBookmarksInProject": false,
+	// Path to another image to be shown as a bookmark icon (16x16 px).
+	// "bookmarks.gutterIconPath": "",
+	// Enables bookmarks commands to be displayed on the editor context menu.
+	"bookmarks.showCommandsInContextMenu": true,
+	// Enables the new Sticky engine for improved source change detections and undo operations.
+	"bookmarks.experimental.enableNewStickyEngine": true,
+	// If a line with a bookmark is deleted, this keeps the bookmark on the next available line.
+	"bookmarks.keepBookmarksOnLineDelete": false,
+	// Workaround for formatters (like Prettier) that break the Sticky engine.
+	// Can be turned off if `experimental.enableNewStickyEngine` is true.
+	"bookmarks.useWorkaroundForFormatters": false,
+	// Controls if the Bookmarks side bar should start expanded.
+	"bookmarks.sideBar.expanded": false,
+	// Controls the count badge on the Bookmark icon in the Activity Bar.
+	// `all` shows the total count, `files` shows the number of files with bookmarks.
+	"bookmarks.sideBar.countBadge": "all",
+	// Controls how multi-cursor toggles handle bookmarked lines.
+	"bookmarks.multicursor.toggleMode": "allLinesAtOnce",
+	// Controls how labels are suggested when creating bookmarks.
+	"bookmarks.label.suggestion": "dontUse",
+	// Controls the location where the editor reveals a bookmarked line.
 	//
 	// HIGHLIGHT EXTENSION
 	"highlight.regexes": {
@@ -234,6 +275,17 @@
 			"decorations": [
 				{
 					"color": "#5da9ff"
+				}, // This applies a subtle color to the "InAction." part
+				{
+					// "color": "#FFEEA1E5",
+				} // This applies the yellow color to the word
+			]
+		},
+		"(LS\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#f3c56ff3"
 				}, // This applies a subtle color to the "InAction." part
 				{
 					// "color": "#FFEEA1E5",

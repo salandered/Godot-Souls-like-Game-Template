@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjxvmgetwrvkc"]
+
+[ext_resource type="Script" uid="uid://dqgpciv48anx0" path="res://logic/Player/PlayerModel/player_sm/states/Combos/riposte_combo.gd" id="1_hm647"]
+
+[node name="Riposte" type="Node"]
+script = ExtResource("1_hm647")
+triggered_state = "ripost"

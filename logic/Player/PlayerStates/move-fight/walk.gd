@@ -5,7 +5,7 @@ func _ready() -> void:
 	SPEED = 1.5
 	TURN_SPEED = 1
 
-func default_lifecycle(input: InputPackage):
+func check_transition(input: InputPackage):
 	if not player.is_on_floor():
 		return "midair"
 	

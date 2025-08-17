@@ -2,7 +2,7 @@ extends BasePlayerState
 
 # redefine your new State fields in the editor, set up 
 
-func default_lifecycle(input: InputPackage):
+func check_transition(input: InputPackage):
 	pass
 
 

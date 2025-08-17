@@ -17,7 +17,7 @@ const parried := "parried"
 const riposte := "riposte"
 
 # move
-const idle := "idle"
+# const idle := "idle"
 const walk := "test/walk"
 const run := "run"
 const strafe := "strafe"
@@ -44,7 +44,10 @@ const action_parry := "action_parry"
 const action_parried := "action_parried"
 const action_riposte := "action_riposte"
 
-const action_idle := "action_idle"
+const dummy_action := "dummy_action"
+const dummy_action_idle := "dummy_action_idle"
+const action_idle := "action_run_idle"
+const action_sprint_idle := "action_sprint_idle"
 const action_walk := "test/action_walk"
 const action_run := "action_run"
 const action_strafe := "action_strafe"
@@ -56,12 +59,6 @@ const action_landing_run := "action_landing_run"
 const action_landing_sprint := "action_landing_sprint"
 const action_roll := "action_roll"
 const action_death := "action_death"
-
-const legs_action_double := "double"
-const legs_action_idle := action_idle
-const legs_action_run := action_run
-const legs_action_sprint := action_sprint
-
 
 # raw
 # combat

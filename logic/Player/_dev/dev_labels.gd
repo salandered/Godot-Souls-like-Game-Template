@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 	if Engine.get_process_frames() % frequency == 0:
 		_label_player_info()
 		_label_sk_m_info()
+		_label_state_info()
 
 func _label_player_info():
 	var p_pos = player.model.global_position
@@ -32,6 +33,23 @@ func _label_player_info():
 	label_2.text = "offset " + "%10.3f" % free_offset
 	label_2.text += "\n %10.3f" % locked_offset
 
+
+func _label_state_info():
+	var c_s := player.model.player_sm.current_state
+	if not c_s:
+		label_3.text = "NO current state"
+		return
+	if not c_s.current_action:
+		label_3.text += "\nNO current action"
+		return
+	if not c_s.legs_sm.current_behavior:
+		label_3.text += "\nNO legs behavior"
+		return
+	if not c_s.legs_sm.current_action:
+		label_3.text += "\nNO legs behavior action"
+		return
+	label_3.text = "state  %7s     act  %7s " % [str(c_s.state_name), str(c_s.current_action.action_name)]
+	label_3.text += "\nlegs  %7s   act  %7s " % [str(c_s.legs_sm.current_behavior.behavior_name), str(c_s.legs_sm.current_action.action_name)]
 
 func _label_sk_m_info():
 	var full_body_a := player.model.full_body

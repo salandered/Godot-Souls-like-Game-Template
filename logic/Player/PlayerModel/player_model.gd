@@ -22,14 +22,14 @@ class_name PlayerModel
 @onready var torso: SimpleAnimator_ = %Torso
 @onready var legs_animator: SimpleAnimator_ = %Legs
 
-var current_state: PlayerState
 
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
 
 func _ready():
 	container.player = player
-
+	player_sm.player = player
+	
 	container.accept_legs_behaviors()
 	container.accept_player_states()
 	container.accept_actions()
@@ -43,7 +43,7 @@ func _ready():
 
 func update(input: InputPackage, delta: float):
 	player_sm.update(input, delta)
-	# legs_sm.update(input, delta)
+	player.move_and_slide()
 	
 
 func accept_modifiers():

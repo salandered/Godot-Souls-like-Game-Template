@@ -18,7 +18,7 @@ func _ready():
 # func on_enter_state():
 # 	pass
 
-func default_lifecycle(input: InputPackage):
+func check_transition(input: InputPackage):
 	if not player.is_on_floor():
 		return "midair"
 	

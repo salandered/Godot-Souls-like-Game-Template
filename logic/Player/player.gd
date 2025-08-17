@@ -11,6 +11,9 @@ class_name Princess
 @onready var dev_labels: Node = $dev_labels
 
 
+var current_state: PlayerState
+
+
 var debug_cams: Array[Node]
 var cam_i := 0
 
@@ -66,64 +69,64 @@ func hp_percentage() -> float:
 
 func is_attacking() -> bool:
 	return false
-	# return model.current_state is AttackState
+	# return current_state is AttackState
 
 func current_attack_radius() -> float:
 	if not is_attacking():
 		return 0
-	return model.current_state.attack_radius
+	return current_state.attack_radius
 
 func current_attack_locked_time_left() -> float:
 	if not is_attacking():
 		return 0
-	return model.current_state.time_til_priority_release()
+	return current_state.time_til_priority_release()
 
 func current_state_initial_position() -> Vector3:
-	return model.current_state.initial_position
+	return current_state.initial_position
 
 func current_state_posttracking_radius() -> float:
-	return model.current_state.posttracking_radius
+	return current_state.posttracking_radius
 
 func time_til_attack_connection() -> float:
 	if not is_attacking():
 		return 99999
-	return model.current_state.extremum_timing - model.current_state.get_progress()
+	return current_state.extremum_timing - current_state.get_progress()
 
 func is_rolling() -> bool:
-	return model.current_state.state_name == "roll"
+	return current_state.state_name == "roll"
 
 func roll_time_left() -> float:
 	if is_rolling():
-		return model.current_state.DURATION - model.current_state.get_progress()
+		return current_state.DURATION - current_state.get_progress()
 	return 0
 
 func get_roll_endpoint() -> Vector3:
 	if is_rolling():
-		return model.current_state.endpoint
+		return current_state.endpoint
 	return Vector3(1000, 1000, 1000)
 
 func get_current_state_position_after(time: float) -> Vector3:
-	var states_data = model.current_state.states_data_repo as StatesDataRepository
-	var data_track = model.current_state.backend_animation
-	var future = model.current_state.get_progress() + time
+	var states_data = current_state.states_data_repo as StatesDataRepository
+	var data_track = current_state.backend_animation
+	var future = current_state.get_progress() + time
 	# you can check out the original method usage, it is used to "go back in time"
 	# but technically nothing stops us from predicting future with it as well
 	var predicted_delta_pos = states_data.get_root_delta_pos(data_track, future, time)
 	return global_position + get_quaternion() * predicted_delta_pos
 
 func is_locked_in_animation() -> bool:
-	return not model.current_state.tracks_input_vector()
+	return not current_state.tracks_input_vector()
 
 func time_til_next_last_locked_frame() -> float:
 	if not is_locked_in_animation():
 		return 0
-	return model.current_state.time_til_unlocking()
+	return current_state.time_til_unlocking()
 
 # pandora's box potentialy, better return immutable snapshot copy or use getters for fields,
 # otherwise some out-of-palyer functional can mess with controller's flow
 # but who cares
 func get_current_state() -> PlayerState:
-	return model.current_state
+	return current_state
 
 
 # works but stuns the game, need some other approach(

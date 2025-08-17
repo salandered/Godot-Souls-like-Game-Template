@@ -20,37 +20,36 @@ func gather_input(delta: float) -> InputPackage:
 
 
 	# MAIN
-	# new_input.actions.append(PS.idle)
+	new_input.actions.append(PS.run) # was idle as default
 
 	new_input.input_direction = Input.get_vector(
 		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
 	if new_input.input_direction != Vector2.ZERO:
-		new_input.actions.append(PS.run)
-		# if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
-			# new_input.actions.append(PS.sprint)
+		# new_input.actions.append(PS.run)
+		if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
+			new_input.actions.append(PS.sprint)
 	
 	if Input.is_action_pressed(RawAction.parry):
 		new_input.actions.append(PS.parry)
 
-
 	if Input.is_action_pressed("withdraw"):
-		new_input.actions.append("withdraw")
+		new_input.actions.append(PS.withdraw)
 
 
 	if Input.is_action_pressed("roll"):
-		new_input.actions.append("roll")
-	
+		new_input.actions.append(PS.roll)
+
 	if Input.is_action_pressed("block"):
-		new_input.actions.append("block")
+		new_input.actions.append(PS.block)
 
 
 	if Input.is_action_pressed("shield_throw"):
-		new_input.actions.append("shield_throw")
-	
+		new_input.actions.append(PS.shield_throw)
+
 	if Input.is_action_pressed("shield_throw_reload"):
-		new_input.actions.append("shield_throw_reload")
-		
+		new_input.actions.append(PS.shield_throw_reload)
+
 	if Input.is_action_pressed(RawAction.jump):
 		if new_input.actions.has(PS.sprint):
 			new_input.actions.append(PS.jump_sprint)

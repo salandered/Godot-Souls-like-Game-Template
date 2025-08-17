@@ -4,7 +4,7 @@ extends BasePlayerState
 @export var block_sector: float = 3.14
 
 
-func default_lifecycle(input: InputPackage):
+func check_transition(input: InputPackage):
 	if not player.is_on_floor():
 		return "midair"
 	return best_input_that_can_be_paid(input)

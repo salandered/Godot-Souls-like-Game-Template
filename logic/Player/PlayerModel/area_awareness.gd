@@ -53,7 +53,7 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 
 var to_strafe = {
 		PS.run: PS.strafe,
-		PS.idle: PS.strafe
+		# PS.idle: PS.strafe
 	}
 
 

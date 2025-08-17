@@ -12,6 +12,7 @@ var __initialised: bool = false
 func _process_modification():
 	# TODO: problem with get_skeleton() on the start. Work in 4.3 but not 4.4. Check with Godot 4.5
 	if __initialised and get_skeleton():
+		pass
 		for child in get_skeleton().get_children():
 			if child is SkeletonModifier3D:
 				if child.influence == 0:

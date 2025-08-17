@@ -118,7 +118,7 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 2. If not, does something textual from the present modify our inputs? 
 # 3. if nothing above, what vanilla state wants to default to?
 ## Not to override
-func check_transition(input: InputPackage) -> String:
+func _check_transition(input: InputPackage) -> String:
 	if accepts_queueing():
 		check_combos(input)
 	
@@ -130,7 +130,7 @@ func check_transition(input: InputPackage) -> String:
 		has_forced_state = false
 		return forced_state
 		
-	return default_lifecycle(input) # and also to work in updates sometime
+	return check_transition(input) # and also to work in updates sometime
 
 
 ## docs from Ep. 3
@@ -222,7 +222,7 @@ func right_weapon_hurts() -> bool:
 
 # "default-default", works for animations that just linger
 ## override
-func default_lifecycle(input: InputPackage):
+func check_transition(input: InputPackage):
 	if works_longer_than(DURATION):
 		return best_input_that_can_be_paid(input)
 	return "okay"
