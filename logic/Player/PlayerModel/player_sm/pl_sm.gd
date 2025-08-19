@@ -47,11 +47,12 @@ func update(input: InputPackage, delta: float) -> void:
 
 	var verdict := current_state.check_transition(input)
 	if verdict != "okay":
-		print_.prefix("PSM State", current_state.state_name + " -> " + verdict)
+		print_.prefix("PSM State", current_state.state_name + " => " + verdict)
 		
 		current_state._on_exit_state()
+		# no current_state is next state
 		current_state = container.state_by_name(verdict)
-		player.current_state = current_state
+		player.current_state = current_state # for something outside
 		current_state._on_enter_state(input)
 
 

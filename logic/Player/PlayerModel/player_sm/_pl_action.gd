@@ -17,12 +17,12 @@ var legs_animator: SimpleAnimator_
 
 
 # var animator_set: String
-var backend_animation: String
 
 var action_name: String
 # var anim_settings: String = "simple"
 var animation: String
-@export var blend_time: float = 0.2 # small internal crossfade; set to 0 to snap ? chat suggested
+var backend_animation: String
+var blend_time: float = 0.2
 
 
 var animation_duration: float = 0
@@ -55,7 +55,9 @@ func on_exit_action() -> void:
 	pass
 	
 func animate():
-	print_.prefix("~~ PSM Action PLAY", animation)
+	# if animation == "roll" or animation == "block":
+		# print_.prefix("~~ SOS", "")
+	print_.prefix("▶️ PSM Action ", animation + " with blend time " + str(blend_time), 8)
 	torso_animator.play(animation, blend_time)
 	# print_.prefix("SKM", "_base _animate with " + animator_set + " settings_switch_time " + str(settings_switch_time))
 	# # animator_set - like "full_body" or "torso_legs"

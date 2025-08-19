@@ -1,6 +1,6 @@
 extends Combo_
 
-# @export var root_state: BasePlayerState
+# @export var root_state: PlayerState
 
 # # @export var panic_click_block: float
 

@@ -4,8 +4,8 @@ extends PlayerState
 
 ## in container set for run state legs_behavior = RunLegs Node
 
-func update(input: InputPackage, delta: float):
-	current_action.update(input, delta)
+# func update(input: InputPackage, delta: float):
+# 	current_action.update(input, delta)
 
 
 func transition_logic(input: InputPackage) -> String:

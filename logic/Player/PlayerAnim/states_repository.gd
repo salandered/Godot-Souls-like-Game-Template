@@ -6,6 +6,8 @@ class_name StatesDataRepository
 
 func get_root_delta_pos(animation: String, progress: float, delta: float) -> Vector3:
 	var data = _get_animation(animation)
+	# if not data:
+		# return Vector3.ZERO
 	var track = data.find_track("StatesDatabase:root_position", Animation.TYPE_VALUE)
 	if data.track_get_key_count(track) == 0:
 		return Vector3.ZERO
@@ -34,7 +36,11 @@ func get_parryable(animation: String, timecode: float) -> bool:
 	return _get_boolean_value(animation, "StatesDatabase:is_parryable", timecode)
 
 func get_duration(animation: String) -> float:
-	return _get_animation(animation).length
+	var data = _get_animation(animation)
+	# if not data:
+		# push_error("get_duration returned faked 1.0 because no " + animation + " found")
+		# return 1.0
+	return data.length
 
 func get_right_weapon_hurts(animation: String, timecode: float) -> bool:
 	return _get_boolean_value(animation, "StatesDatabase:right_hand_weapon_hurts", timecode)
@@ -47,6 +53,8 @@ func tracks_input_vector(animation: String, timecode: float) -> bool:
 
 func _get_boolean_value(animation: String, track_name: String, timecode: float) -> bool:
 	var data = _get_animation(animation)
+	# if not data:
+		# return false
 	var track = data.find_track(track_name, Animation.TYPE_VALUE)
 	if track == -1:
 		push_error("Track not found: " + track_name + " in animation " + animation)
@@ -54,5 +62,8 @@ func _get_boolean_value(animation: String, track_name: String, timecode: float) 
 
 func _get_animation(animation: String) -> Animation:
 	var data = state_database.get_animation(animation)
+	# if not data:
+		# push_error("No param animation found: " + animation + " in states DB")
+		# return null
 	assert(data, "No animation '" + animation + "' in states DB")
 	return data

@@ -5,9 +5,6 @@ class_name SimpleAnimator_
 @onready var skeleton = get_skeleton()
 
 @export var a_name: String
-# @export var white_list_start: int
-# @export var white_list_end: int
-# @export var white_list_root: bool
 
 var current_animation: Animation
 # Animation also can be cyclical to linger infinitely, and each animation needs a variable to count progress for data interpolation. 
@@ -27,6 +24,7 @@ var is_blending: bool = false
 var blend_duration: float # seconds
 var blend_time_spent: float # seconds
 var blending_percentage: float # [0 ; 1]
+
 
 # lazily use Unix time in milliseconds, just as in model states. 
 # If you want to have a pause in your game or some time coefficients or to be immune to system time change attacks, create a better time calculation
@@ -82,27 +80,28 @@ func play(next_animation: String, over_time: float = 0):
 
 func _process_modification():
 	if __initialised:
-		update_time()
-		update_blend_values()
-		update_skeleton()
+		_update_time()
+		_update_blend_values()
+		_update_skeleton()
 
 
-func update_skeleton():
+func _update_skeleton():
 	# - It works because in GDScript, this parameter in `for` loop syntax can be many things
 	# 	- we abuse this fact by making it a collection of integers if we have a white list export field defined
 	# 	- or if not (we work on the whole skeleton), we make this variable into a single integer value that represents all bones of the skeleton.
-	if a_name == 't':
+	if a_name == 'torso':
 		bone_list = range(1, 44)
-	if a_name == 'l':
+	elif a_name == 'legs':
 		bone_list = range(45, 52)
 		bone_list.append(0)
-		bone_list.append(1)
-		bone_list.append(2)
+		bone_list.append(1) # ?
+		# bone_list.append(2)
 		# bone_list.append(3)
 
-
-	if a_name == 'f_b':
+	elif a_name == 'full_body':
 		bone_list = range(0, skeleton.get_bone_count())
+	else:
+		push_error("no a_name or its unknown")
 	
 	for bone in bone_list:
 		# For each suggested bone, we first calculate its pose according to the `current_animation` and its progress.
@@ -116,7 +115,7 @@ func update_skeleton():
 			skeleton.set_bone_pose(bone, curr_transform)
 
 
-func update_time():
+func _update_time():
 	# Each frame, first thing we do is we manage our time awareness. 
 		# - We do it by calculating the delta between now and the last call.
 		# - We then add this delta to our animation progresses, and if animations are cycling, we undergo a cycle switch.
@@ -131,7 +130,7 @@ func update_time():
 		previous_animation_progress = fmod(previous_animation_progress, previous_animation.length)
 
 
-func update_blend_values():
+func _update_blend_values():
 # We use the delta time value we just got and add it to blending_time_counter, 
 # and then we update blending_percentage value. 
 	if is_blending:

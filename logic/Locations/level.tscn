@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=32 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level.gd" id="5_j4sqn"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
+[ext_resource type="Script" uid="uid://bq3071y4ctlbk" path="res://logic/xUtils/ui/FullScreenHandler.gd" id="8_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PlayerPack_2.tscn" id="9_ol10w"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/xUtils/simple_target/SimpleTarget.tscn" id="10_2mukc"]
@@ -276,6 +277,11 @@ transform = Transform3D(0.11903, 0, 1.00779, 0, 2.47654, 0, -1.00779, 0, 0.11903
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_2"
 
+[node name="Target9" parent="a_not_important/targets" instance=ExtResource("10_2mukc")]
+transform = Transform3D(0.11903, 0, 1.00779, 0, 2.47654, 0, -1.00779, 0, 0.11903, -14.4758, 14.3735, -31.9722)
+material_override = SubResource("StandardMaterial3D_364n8")
+label = "group_2"
+
 [node name="Target6" parent="a_not_important/targets" instance=ExtResource("10_2mukc")]
 transform = Transform3D(-0.127697, 0, 1.00672, 0, 2.47654, 0, -1.00672, 0, -0.127697, 98.5882, 1.41347, 9.37053)
 material_override = SubResource("StandardMaterial3D_364n8")
@@ -290,6 +296,9 @@ label = "group_4"
 transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, 100.466, 1.44698, 15.0567)
 material_override = SubResource("StandardMaterial3D_364n8")
 label = "group_5"
+
+[node name="ui" type="Node3D" parent="a_not_important"]
+script = ExtResource("8_yhj1i")
 
 [node name="platforms" type="Node3D" parent="."]
 

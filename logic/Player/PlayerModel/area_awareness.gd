@@ -64,7 +64,7 @@ func _translate_to_strafe(new_input: InputPackage):
 	var translated_to_strafe = to_strafe.get(prioritized_state)
 
 	if translated_to_strafe:
-		# print("   AA ", prioritized_state, " -> ", translated_to_strafe)
+		# print("   AA ", prioritized_state, " => ", translated_to_strafe)
 		new_input.actions.erase(prioritized_state)
 		new_input.actions.append(translated_to_strafe)
 		# print("   AA actions result: ", new_input.actions)

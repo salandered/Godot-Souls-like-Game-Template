@@ -1,6 +1,8 @@
 extends SkeletonModifier3D
-class_name SkeletonModifierMeta
+class_name BeginModifier
 
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var end_modifier: EndModifier = %_End
 
 var __initialised: bool = false
 
@@ -12,10 +14,16 @@ var __initialised: bool = false
 func _process_modification():
 	# TODO: problem with get_skeleton() on the start. Work in 4.3 but not 4.4. Check with Godot 4.5
 	if __initialised and get_skeleton():
-		pass
+		restore_pose()
 		for child in get_skeleton().get_children():
 			if child is SkeletonModifier3D:
 				if child.influence == 0:
 					child.active = false
 				else:
 					child.active = true
+
+func restore_pose():
+	var cache = end_modifier.cache as Dictionary
+	if not cache.is_empty():
+		for bone in get_skeleton().get_bone_count():
+			get_skeleton().set_bone_pose(bone, cache[bone])

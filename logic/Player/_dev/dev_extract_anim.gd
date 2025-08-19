@@ -2,12 +2,11 @@
 extends EditorScript
 
 
-
-# -> MAKE SURE SKELETON IN GLB IS RETARGETED
+# -> !! MAKE SURE SKELETON IN GLB IS RETARGETED !!
 
 # -> CHANGE THIS (without .glb)
 
-const SOURCE_GLB_NAME := "jumps-v1" # "s-s" "test-export-1"
+const SOURCE_GLB_NAME := "jump-up-land-v3" # "s-s" "test-export-1"
 
 # -> CHANGE THIS: will be removed from animation names
 const PREFIX_TO_REMOVE := "" # "sword and shield"
@@ -25,13 +24,13 @@ const PARAM_ANIM_PROPERTIES := [
 	{"name": "is_interruptable", "type": TYPE_BOOL, "value": true},
 	{"name": "is_parryable", "type": TYPE_BOOL, "value": false},
 	# {"name": "is_grabable", "type": TYPE_BOOL, "value": true}, # not used now
-	{"name": "root_position", "type": TYPE_VECTOR3, "value": false}, # NOTE: root_position IS EMPTY, VALUE HERE DOES NOT MATTER
+	{"name": "root_position", "type": TYPE_VECTOR3, "value": Vector3.ZERO},
 	{"name": "right_hand_weapon_hurts", "type": TYPE_BOOL, "value": false},
 	{"name": "tracks_input_vector", "type": TYPE_BOOL, "value": true},
 ]
 
 # -> CHECK THIS (could be changed later)
-const LOOP_KEYWORDS := ["idle", "run", "walk", "strafe", "loop"]
+const LOOP_KEYWORDS := ["idle", "run", "sprint", "jog", "walk", "strafe", "loop", "cycle"]
 const NOT_LOOP_KEYWORDS := ["jump", "land"] # priority over LOOP_KEYWORDS
 
 
@@ -169,7 +168,7 @@ static func _update_mode_for_type(t: int) -> int:
 func _create_param_animation(base_animation: Animation, unified_param_name: String) -> Animation:
 	var param_anim := Animation.new()
 	param_anim.length = base_animation.length
-	param_anim.loop_mode = Animation.LOOP_NONE
+	param_anim.loop_mode = Animation.LOOP_NONE # no loop for -param
 	param_anim.resource_name = unified_param_name
 
 	var states_db_path_str := "StatesDatabase"
@@ -184,14 +183,19 @@ func _create_param_animation(base_animation: Animation, unified_param_name: Stri
 
 		param_anim.track_set_path(track_index, prop_path)
 
-		if name == "root_position":
-			continue
+		# if name == "root_position":
+			# continue
 
 		# Use discrete updates for bool/int to avoid interpolation artifacts
 		param_anim.value_track_set_update_mode(track_index, _update_mode_for_type(ptype))
 
 		# insert keys 
 		param_anim.track_insert_key(track_index, 0.0, pvalue)
+
+
+		# Optional: duplicate last key at end for loop stability
+		# if param_anim.loop_mode != Animation.LOOP_NONE:
+		# 	param_anim.track_insert_key(track_index, param_anim.length, pvalue)
 
 	return param_anim
 

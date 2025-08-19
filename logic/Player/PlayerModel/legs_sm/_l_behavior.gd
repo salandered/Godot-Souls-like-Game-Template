@@ -14,6 +14,7 @@ var player_state: PlayerState # set by SM when switching
 
 var behavior_name: String
 
+
 var supported_actions: Array[String] = []
 
 func update(_input: InputPackage, _delta: float):
@@ -23,10 +24,10 @@ func switch_action_to(next_action_name: String, input: InputPackage):
 	var previous_action := legs_sm.current_action
 
 	if previous_action.action_name == next_action_name and not next_action_name == LS.legs_action_double:
-		print_.prefix("LSM Action", "switch_action_to called with same action, NO SWITCH", 2)
+		print_.prefix("LSM Action", "switch called with same " + previous_action.action_name + "⚪ NO SWITCH", 2)
 		return
 
-	print_.prefix("LSM Action", "legs action " + previous_action.action_name + " -> " + next_action_name, 2)
+	print_.prefix("LSM Action ", "legs action " + previous_action.action_name + " => " + next_action_name, 2)
 
 	previous_action._on_exit_action()
 
@@ -52,8 +53,9 @@ func _on_enter_behavior(_input: InputPackage):
 	if not __new_behavior_supports_current_action() or __double_behavior_coming():
 		print_.prefix("LSM Beh", "on enter: choose_initial_action", 1)
 		var choosen_action := choose_initial_action(_input)
-		if choosen_action:
-			switch_action_to(choosen_action, _input)
+		if choosen_action == "":
+			push_error("No valid action found")
+		switch_action_to(choosen_action, _input)
 	else:
 		print_.prefix("LSM Beh", "on enter: new beh can use current action so no switch for now", 1)
 
@@ -69,7 +71,8 @@ func _on_exit_behavior():
 ## this means behaviors with one supported action don't need to choose at all
 func choose_initial_action(input) -> String:
 	print_.prefix("LSM Action INITIAL", "using base choose_initial_action: pick first", 2)
-	if supported_actions.is_empty():
-		print_.prefix("LSM Action INITIAL", "supported_actions is empty, nothing to choose", 2)
-		return ""
+	assert(len(supported_actions) > 0)
+	# if supported_actions.is_empty():
+		# print_.prefix("LSM Action INITIAL", "supported_actions is empty, nothing to choose", 2)
+		# return ""
 	return supported_actions[0]

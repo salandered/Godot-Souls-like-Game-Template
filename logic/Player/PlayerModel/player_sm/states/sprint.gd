@@ -9,9 +9,9 @@ func transition_logic(input: InputPackage) -> String:
 	return best_input_that_can_be_paid(input)
 
 
-func update(input: InputPackage, delta: float):
-	# _mirror_legs_action(input)
-	current_action.update(input, delta)
+# func update(input: InputPackage, delta: float):
+# 	# _mirror_legs_action(input)
+# 	current_action.update(input, delta)
 
 # func _mirror_legs_action(input: InputPackage):
 # 	if current_action.action_name != legs_sm.current_action.action_name:

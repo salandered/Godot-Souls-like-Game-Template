@@ -35,12 +35,25 @@ script = ExtResource("4_501po")
 unique_name_in_owner = true
 look_at_ = NodePath("../CameraFocus")
 
+[node name="CSGBox3D" parent="FancyCamera/CameraMount" index="1"]
+visible = false
+
+[node name="CSGSphereNest" parent="FancyCamera/CameraNest" index="0"]
+visible = false
+
+[node name="CSGSphere3D" parent="FancyCamera/FocusPoint" index="0"]
+visible = false
+
+[node name="CSGBox3D" parent="FancyCamera/PlayerCamera" index="0"]
+visible = false
+
 [node name="CameraFocus" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 1.04239, 0)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="CameraFocus"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0200904)
+visible = false
 material_override = SubResource("StandardMaterial3D_e8a10")
 radius = 0.3
 

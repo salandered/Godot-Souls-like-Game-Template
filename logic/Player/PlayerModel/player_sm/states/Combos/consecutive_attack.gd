@@ -6,6 +6,7 @@ class_name ConsecutiveAttack
 
 
 func is_triggered(input: InputPackage):
+	# TODO: not actions ...
 	if input.actions.has(primary_input):
 		return true
 	return false

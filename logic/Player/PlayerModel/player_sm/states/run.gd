@@ -10,16 +10,21 @@ func transition_logic(input: InputPackage) -> String:
 	return best_input_that_can_be_paid(input)
 
 
+func choose_default_action() -> String:
+	if not legs_sm.current_action:
+		push_error("something wrong")
+	var name_ = legs_sm.current_action.action_name
+	if not name_:
+		push_error("something wrong")
+	return name_
+
 func update(input: InputPackage, delta: float):
 	_mirror_legs_action(input)
-	current_action.update(input, delta)
+	# current_action.update(input, delta)
 
 func _mirror_legs_action(input: InputPackage):
 	if current_action.action_name != legs_sm.current_action.action_name:
+		print_.prefix("PSM mirror", state_name + ": " + current_action.action_name + " -> legs's " + legs_sm.current_action.action_name, 1)
 		switch_action_to(legs_sm.current_action.action_name, input)
 	# else:
-		# print_.prefix("PS |" + state_name + "|", "not switching", 5)
-
-
-func on_enter_state(input: InputPackage):
-	switch_action_to(PS.action_idle, input) # overrides default in this case
+		# print_.prefix("PS  |" + state_name + "|", "not switching", 5)

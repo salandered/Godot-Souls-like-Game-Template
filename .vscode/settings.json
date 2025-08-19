@@ -95,6 +95,10 @@
 	// COLORFUL FOLDERS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
 	"folder-path-color.folders": [
+		{
+			"path": "logic/Player/PlayerModel/player_sm/pl_container.gd",
+			"color": "custom5"
+		}
 		// AA
 		{
 			"path": "logic/Player/PlayerModel/area_awareness.gd",
@@ -170,7 +174,9 @@
 		{
 			"path": "logic/Player/PlayerAnim/sk-m",
 			"color": "animation"
-		}
+		},
+		//
+		//
 	],
 	//
 	// No built in git color on files (conflict with colorful folders)

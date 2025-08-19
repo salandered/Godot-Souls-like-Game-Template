@@ -1,6 +1,8 @@
 class_name print_ extends RefCounted
 
 
+const DEBUG = "DEBUG"
+
 static func prefix(prefix_: String, text: String, info_indents: int = 0):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)
 	prefix_ = "[" + prefix_ + "]" + "  "
@@ -45,7 +47,7 @@ static func __calculate_tab_prefix(info_indents: int) -> String:
 
 static func collisions(node: Node, info_indents: int = 0, layer_: bool = true):
 	var layer = "none"
-	if layer_: 
+	if layer_:
 		layer = node.collision_layer
 	var mask = node.collision_mask
 		# Debug print the values

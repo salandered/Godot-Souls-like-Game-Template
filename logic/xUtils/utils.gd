@@ -2,8 +2,14 @@ extends RefCounted
 class_name u
 
 
-static func assert_has_animation(animator: AnimationPlayer, animation: String):
-	assert(animator.has_animation(animation), "Animator " + animator.name + " has no animation '" + animation + "'")
+static func assert_has_animation(animator: AnimationPlayer, animation: String, fatal: bool = true) -> bool:
+	if fatal:
+		assert(animator.has_animation(animation), "Animator " + animator.name + " has no animation '" + animation + "'")
+		return true
+	if not animator.has_animation(animation):
+		push_warning("Animator " + animator.name + " has no animation '" + animation + "'")
+		return false
+	return true
 
 
 static func safe_look_at(

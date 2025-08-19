@@ -2,7 +2,7 @@ extends Combo_
 
 func is_triggered(input: InputPackage) -> bool:
 	# if input.actions.has( current weapon light attack state code ) in future for scalability
-	if input.actions.has(PS.longsword1) and have_target_for_ripost():
+	if input.actions.has(PS.longsword_1) and have_target_for_ripost():
 		return true
 	return false
 

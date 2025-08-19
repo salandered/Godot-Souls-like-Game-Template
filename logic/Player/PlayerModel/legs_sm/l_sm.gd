@@ -1,3 +1,6 @@
+@tool
+@icon("res://-assets-/x_icons/node-colors/orange-2.png")
+
 extends Node
 class_name LegsSM
 
@@ -28,7 +31,7 @@ func switch_to(next_legs_behavior: LegsBehavior, input: InputPackage):
 	if next_legs_behavior == current_behavior and next_legs_behavior.behavior_name != LS.legs_double_behavior:
 		print_.prefix("LSM Behavior", "not switching legs (same behavior) " + current_behavior.behavior_name, 2)
 		return
-	print_.prefix("LSM Behavior", "legs behavior " + current_behavior.behavior_name + " -> " + next_legs_behavior.behavior_name, 2)
+	print_.prefix("LSM Behavior", "legs behavior " + current_behavior.behavior_name + " => " + next_legs_behavior.behavior_name, 2)
 	current_behavior._on_exit_behavior()
 	current_behavior = next_legs_behavior
 	current_behavior.player_state = player_sm.current_state

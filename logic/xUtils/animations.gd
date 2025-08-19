@@ -1,12 +1,15 @@
 extends RefCounted
 class_name A
 
-
 # LIBS
-# -anim-jumps-all1-LIB/C-fall-HW-param
-const _ss_strafe_LIB = "ss_strafe/"
-const _ss_LIB = "ss/"
-const _jump_LIB = "jumps-v1-LIB/"
+const _jump = "jumps-v2-LIB" + "/"
+const _jump_up_land_ = "jump-up-land-v3-LIB" + "/"
+const _jump_up_land_HPG = "jump-up-land-v3-LIB-HPG" + "/"
+const _run = "run-v5-LIB" + "/"
+const _ss_loco = "ss-loco-LIB" + "/"
+const _strafe = "strafe-v2-LIB" + "/"
+const _ss_attack = "ss-attack-LIB" + "/"
+const _ff = "global-fair" + "/"
 
 # ANIMATOR SETS
 const SET_full_body := "full_body"
@@ -14,48 +17,59 @@ const SET_full_body_torso := "full_body_torso"
 const SET_torso_legs := "torso_legs"
 
 
-# raw but used
-const idle_longsword := "idle_longsword"
-const strafe_R := _ss_strafe_LIB + "strafe_R"
-const strafe_L := _ss_strafe_LIB + "strafe_L"
-const strafe_idle := _ss_LIB + "idle"
-const strafe_forward := _ss_LIB + "walk"
-const strafe_back := _ss_LIB + "walk"
+# -- MOVE ANIM
 
-# fight 
-const withdraw := _jump_LIB + "C-fall-HW"
-const shield_throw := "shield_throw"
-const shield_throw_reload := "shield_throw_reload"
-const longsword1 := "longsword_1"
-const longsword2 := "longsword_2"
-const block := "block"
-const block_reaction := "block_reaction"
-const pushback := "pushback"
-const staggered := "staggered"
-const parry := "parry"
-const parried := "parried"
-const riposte := "riposte"
+# peaceful move
+# const walk := "walk"
+const midair := _jump + "B-Fall-loop-HOK"
+const jump_run := _jump_up_land_HPG + "B-UP-ss-jump-run-RP"
+const jump_sprint := jump_run
 
-# move
-const idle := "idle"
-const walk := _ss_LIB + "walk"
-const run := "run"
-# const strafe := "strafe"
-const sprint := "sprint"
-const jump_run := _jump_LIB + "C-jump-idle-UP-HW"
-const jump_sprint := "jump_sprint"
-const midair := "midair"
-const landing_run := "landing_sprint"
-const landing_sprint := "landing_sprint"
-const roll := "roll"
-const death := "death"
+const landing_run := _jump_up_land_HPG + "B-LAND-ss-jump-run-RP"
+const landing_sprint := landing_run
+const hard_fall := _jump_up_land_HPG + "C-fall-HW-hard-land-idle-trim-pin"
+
+const roll := _ff + "roll"
+const death := _ss_loco + "C-death-2"
 
 
-# raw
+# combat move
+const combat_idle := _ss_loco + "B-idle"
+const combat_walk := _ss_loco + "C-walk"
+const combat_walk_back := _ss_loco + "C-walk-back"
 
-const longsword_1 := "longsword_1"
-const longsword_2 := "longsword_2"
+const combat_run := _run + "B-Jog-Forward-v2"
+const combat_sprint := _run + "B-Fast-Run-v2"
 
+# strafe
+const strafe_L := _strafe + "A-ss-strafe-L"
+const strafe_R := _strafe + "A-ss-strafe-R"
+const strafe_idle := combat_idle
+const strafe_forward := combat_walk
+const strafe_back := combat_walk_back
 
-static func to_backend_lazy(animation: String) -> String:
-	return animation + "-param"
+# -- MOVE ANIM END
+
+# -- FIGHT 
+const withdraw := _jump + "C-fall-HW" # TODO
+
+const block_forward := _ss_attack + "C-block-forward"
+const block_to_idle := _ss_attack + "C-block-to-idle"
+const block_reaction := _ff + "block_reaction"
+const pushback := _ff + "pushback"
+const staggered := _ss_attack + "B-head-impact"
+const parry := _ff + "parry"
+const parried := _ff + "parried"
+const riposte_attack := longsword_1
+# -- FIGHT END
+
+# TODO: old longsword_ anim + param RM -> translate to new Skeleton and Root.
+#       then this anims can be used 
+const longsword_1 := _ff + "longsword_1"
+const longsword_2 := _ff + "longsword_2"
+# and may be these ones
+const shield_throw := _ff + "shield_throw"
+const shield_throw_reload := _ff + "shield_throw_reload"
+const idle_longsword := _ff + "idle_longsword"
+#  "sprint" ?
+# jump_sprint?

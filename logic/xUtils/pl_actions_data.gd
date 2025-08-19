@@ -6,6 +6,7 @@ var action_name: String
 var animation_name: String
 var backend_animation_name: String
 # var animator_set: String
+var blend_time: float
 var dummy: bool
 
 func _init(
@@ -13,7 +14,8 @@ func _init(
 		action_name_: String,
 		animation_name_: String,
 		backend_anim_name_: String = "",
-		dummy_: bool = false
+		blend_time_: float = 0.2,
+		dummy_: bool = false,
 		# animator_set_: String = ""
 	) -> void:
 	self.state_name = state_name_
@@ -27,4 +29,5 @@ func _init(
 	# 	self.animator_set = "full_body"
 	# else:
 	# 	self.animator_set = animator_set_
+	self.blend_time = blend_time_
 	self.dummy = dummy_

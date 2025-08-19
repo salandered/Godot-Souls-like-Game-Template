@@ -14,6 +14,6 @@ extends LegsAction
 func animate(previous_action: LegsAction, _input: InputPackage):
 	var animation_ := legs_sm.current_behavior.player_state.current_action.animation
 	
-	print_.prefix("~~ LSM Action PLAY DOUBLE", "anim: " + animation_, 2)
+	print_.prefix("~~ LSM Action ▶️ 🔗 PLAY DOUBLE", "anim: " + animation_, 8)
 	
 	legs_animator.play(animation_, 0.2)
