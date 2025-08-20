@@ -11,9 +11,10 @@ extends LegsAction
 # func animate(previous_action: LegsAction, input: InputPackage):
 	# legs_sm.current_behavior.player_state.setup_legs_animator(previous_action, input)
 ## can be overriden (see double action)
-func animate(previous_action: LegsAction, _input: InputPackage):
-	var animation_ := legs_sm.current_behavior.player_state.current_action.animation
+func animate():
+	# var animation_ := legs_sm.current_behavior.player_state.current_action.animation
+	var animation_ := legs_sm.player_sm.current_state.current_action.animation
 	
 	print_.prefix("~~ LSM Action ▶️ 🔗 PLAY DOUBLE", "anim: " + animation_, 8)
 	
-	legs_animator.play(animation_, 0.2)
+	legs_sm.legs_animator.play(animation_, 0.2)

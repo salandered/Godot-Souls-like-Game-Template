@@ -8,12 +8,12 @@ func _ready() -> void:
 	LS.legs_action_sprint,
 	]
 
-func update(input: InputPackage, delta: float):
+func update(input: InputPackage, delta: float) -> void:
 	_choose_action(input)
 	legs_sm.current_action.update(input, delta)
 
 
-func _choose_action(input: InputPackage):
+func _choose_action(input: InputPackage) -> void:
 	if input.actions.has(PS.sprint):
 		switch_action_to(LS.legs_action_sprint, input)
 	elif input.actions.has(PS.run):

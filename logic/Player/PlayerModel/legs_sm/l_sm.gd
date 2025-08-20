@@ -15,6 +15,9 @@ class_name LegsSM
 
 enum MotionType {IDLE, START, CYCLE, STOP}
 
+@export var legs_animator: SimpleAnimator_
+
+
 var current_behavior: LegsBehavior
 # it should be here! current_action is managed by the "pool" of actions. Behavior changes may or may NOT change current action.
 var current_action: LegsAction
@@ -28,7 +31,7 @@ func update(input: InputPackage, delta: float) -> void:
 
 
 func switch_to(next_legs_behavior: LegsBehavior, input: InputPackage):
-	if next_legs_behavior == current_behavior and next_legs_behavior.behavior_name != LS.legs_double_behavior:
+	if next_legs_behavior == current_behavior and next_legs_behavior.behavior_name != LS.legs_behavior_double:
 		print_.prefix("LSM Behavior", "not switching legs (same behavior) " + current_behavior.behavior_name, 2)
 		return
 	print_.prefix("LSM Behavior", "legs behavior " + current_behavior.behavior_name + " => " + next_legs_behavior.behavior_name, 2)

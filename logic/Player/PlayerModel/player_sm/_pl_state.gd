@@ -2,17 +2,14 @@ extends Node
 # extends StateUtils ?
 class_name PlayerState
 
-
 # TODO: has_queued_state and queued_state can be one var (probably)
 # or queued_state is an array (wow)
-
 
 var has_queued_state: bool = false
 var queued_state: String = "nexistent queued state, error"
 
 var has_forced_state: bool = false
 var forced_state: String = "nonexistent forced state, error"
-
 
 var player_sm: PlayerSM
 var legs_sm: LegsSM
@@ -23,7 +20,6 @@ var states_data_repo: StatesDataRepository
 
 var enter_state_time: float
 
-
 @export var SPEED = 3.0
 @export var TURN_SPEED = 2
 
@@ -32,18 +28,14 @@ var resources: HumanoidResources
 var container: PlayerStatesContainer
 var left_wrist: BoneAttachment3D
 
-
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 
 var initial_position: Vector3
 
 @export var tracking_angular_speed: float = 10
 @export var settings_switch_time: float = 0.2
-
 @export var stamina_cost: float = 0
 
- 
 @onready var combos: Array[Combo_]
 
 ## torso states just have a fixed legs_behavior attached to them. 
@@ -52,13 +44,14 @@ var legs_behavior: LegsBehavior
 var state_name: String
 var priority: int
 
-
-var current_action: PlayerAction
+var current_action: BaseAction
 var default_action_name: String # first child or dummy action node
 
-func _get_DURATION():
-	return current_action.DURATION
- # 🟠 
+var depends_on_legs: bool = false
+
+func _action_delegated_to_legs() -> bool:
+	return current_action is LegsAction
+
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	return player_sm.velocity_by_input(input, delta)
@@ -85,9 +78,63 @@ func check_transition(input: InputPackage) -> String:
 
 ## can be overriden: see Run
 func transition_logic(_input: InputPackage) -> String:
-	if current_action.works_longer_than(_get_DURATION()):
+	if current_action.works_longer_than(current_action.DURATION):
 		return best_input_that_can_be_paid(_input)
 	return "okay"
+
+
+func _update(input: InputPackage, delta: float):
+	legs_sm.current_behavior.update(input, delta)
+	# used to be this. we need it here or ?
+
+	if depends_on_legs:
+		current_action = legs_sm.current_action
+
+
+	if not depends_on_legs and current_action.tracks_input_vector(): # DANGER: depends_on_legs is important
+		process_input_vector(input, delta)
+
+
+	update(input, delta)
+
+func update(_input: InputPackage, _delta: float):
+	pass
+
+# looks like can be overriden. Test usage in Run
+func choose_default_action() -> String:
+	return default_action_name
+
+
+func _on_enter_state(input: InputPackage):
+	# choose_initial_leg_behavior(input) # this is advanded use where torso state can use legs behavior
+	## - single legs beh attached to player state => all we need is to forcibly call the legs SM to switch into this defined state.
+	# used to be here
+	initial_position = player.global_position
+	resources.pay_resource_cost(self)
+	# mark_enter_state()
+	
+	
+	legs_behavior.player_state = self # duplicates legs_sm.switch_to logic?
+
+	# TODO: stupid split. or not?
+	if depends_on_legs:
+		player_sm.torso_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
+		print_.prefix("PSM enter", "!dependent! " + state_name + ". Actions delegated to legs, NO SWITCHES ⚪⚪ while we in it", 1)
+		legs_sm.switch_to(legs_behavior, input)
+	else: # state leads legs. RIGHT NOW ITS ONLY DOUBLE. complex attacks expecting
+		if legs_behavior.behavior_name != LS.legs_behavior_double:
+			push_warning("we found state which leads legs but not double legs. Investigate!!")
+
+		default_action_name = choose_default_action()
+		assert(default_action_name, state_name + " No default actions for non depended state which is probably an error ")
+		# if not default_action_name:
+			# print_.prefix("PSM enter ", state_name + " No default actions for non depended state which is probably an error ", 1)
+
+		print_.prefix("PSM enter ", state_name + " switch to DEFAULT action " + default_action_name, 1)
+		switch_action_to(default_action_name, input)
+		legs_sm.switch_to(legs_behavior, input)
+
+	on_enter_state(input)
 
 
 func switch_action_to(next_action_name: String, input: InputPackage):
@@ -96,57 +143,11 @@ func switch_action_to(next_action_name: String, input: InputPackage):
 		return
 	if current_action:
 		print_.prefix("PSM Action", "switch action " + current_action.action_name + " => " + next_action_name, 1)
-		current_action._on_exit_action()
 	else:
 		print_.prefix("PSM Action", "NO CURRENT ACTION ⚪ action => " + next_action_name, 1)
 	current_action = container.action_by_name(next_action_name)
 	current_action._on_enter_action(input)
 
-
-func _update(input: InputPackage, delta: float):
-	legs_sm.current_behavior.update(input, delta)
-	# used to be this. we need it here or ?
-	if current_action.tracks_input_vector():
-		process_input_vector(input, delta)
-	update(input, delta)
-
-func update(_input: InputPackage, _delta: float):
-	pass
-
-# look like can be overriden. Test usage in Run
-func choose_default_action() -> String:
-	return default_action_name
-
-func _on_enter_state(input: InputPackage):
-	# choose_initial_leg_behavior(input) # this is advanded use where torso state can use legs behavior
-	## - single legs beh attached to player state => and all we need to do is to forcibly call the legs SM to switch into this defined state.
-	# used to be here
-	initial_position = player.global_position
-	resources.pay_resource_cost(self)
-	# mark_enter_state()
-
-
-	# TODO: stupid. Double legs depends on player action (for animation), 
-	#       while Loco legs like Running lead the current Player action. => This if ocurred.
-	if legs_behavior.behavior_name == LS.legs_double_behavior:
-		default_action_name = choose_default_action()
-		print_.prefix("PSM on enter ", state_name + " uses DOUBLE legs, switch to DEFAULT action " + default_action_name, 1)
-		switch_action_to(default_action_name, input)
-		legs_behavior.player_state = self # duplicates legs_sm.switch_to logic?
-		# could be dependent on player's current_action
-		legs_sm.switch_to(legs_behavior, input)
-	else:
-		legs_behavior.player_state = self
-		legs_sm.switch_to(legs_behavior, input)
-		# overriden for RUN
-		# OR: use specific if for RUN which explicitly chooses legs action after legs_sm.switch_to
-		default_action_name = choose_default_action()
-		print_.prefix("PSM on enter ", state_name + " switch to DEFAULT action  " + default_action_name, 1)
-		switch_action_to(default_action_name, input)
-		# could be dependent on player's current_action
-
-
-	on_enter_state(input)
 
 # func choose_initial_leg_behavior(input: InputPackage):
 	# pass

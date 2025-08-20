@@ -18,7 +18,7 @@ var debug_cams: Array[Node]
 var cam_i := 0
 
 
-func _ready():
+func _ready() -> void:
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Mask.PLAYER_COL_MASK
 
@@ -32,11 +32,11 @@ func _ready():
 	cam_i = len(debug_cams) - 1
 	print_._debug_("cam_i: " + str(cam_i))
 
-# func _process(_delta):
+# func _process(_delta) -> void:
 # 	dev_labels._label_player_info()
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	# CONTROLLER (INPUT)
 	var input := input_gatherer.gather_input(delta)
 	

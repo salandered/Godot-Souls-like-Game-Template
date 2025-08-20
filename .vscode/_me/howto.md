@@ -1,3 +1,12 @@
+
+## emoji
+	# ☠️
+	# 💀
+	# 💀
+	# ☠️
+	# 🦴
+	# 🦴
+
 ## Extension folder
 %USERPROFILE%\.vscode\extensions
 

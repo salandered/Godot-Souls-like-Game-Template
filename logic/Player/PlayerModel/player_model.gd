@@ -64,6 +64,18 @@ func accept_modifiers():
 	_begin.__initialised = true
 	_end.__initialised = true
 
+# region
+# func _ready():
+# 	# TODO: this is not triggered. Added accept_modifiers(). Check with Godot 4.5
+	#       see also: https://github.com/godotengine/godot/issues/106463
+# 	# When we prepare our node, we make sure both animation fields are filled with "do nothing" animation. 
+# 	current_animation = native_animator.get_animation("idle_longsword")
+# 	current_animation_cycling = current_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
+# 	current_animation_progress = 0
+# 	previous_animation = native_animator.get_animation("idle_longsword")
+# 	previous_animation_cycling = previous_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
+# 	previous_animation_progress = 0
+# endregion
 
 var fly_mode_enabled := false
 var fly_speed := 15

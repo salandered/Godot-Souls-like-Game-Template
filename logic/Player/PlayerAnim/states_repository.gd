@@ -36,10 +36,15 @@ func get_parryable(animation: String, timecode: float) -> bool:
 	return _get_boolean_value(animation, "StatesDatabase:is_parryable", timecode)
 
 func get_duration(animation: String) -> float:
-	var data = _get_animation(animation)
+	# TODO TODO bad bad
+	if animation == "-":
+		return 0
+	var data := _get_animation(animation)
 	# if not data:
 		# push_error("get_duration returned faked 1.0 because no " + animation + " found")
 		# return 1.0
+	if data.length == 0:
+		push_error("Empty animation! not good!")
 	return data.length
 
 func get_right_weapon_hurts(animation: String, timecode: float) -> bool:

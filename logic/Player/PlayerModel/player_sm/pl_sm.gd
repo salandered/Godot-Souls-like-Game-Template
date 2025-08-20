@@ -9,10 +9,10 @@ var player: Princess
 
 # Fixed animator setup (we stick to SimpleAnimator_ now)
 @export var torso_animator: SimpleAnimator_ # the Torso skeleton modifier
+@export var legs_animator: SimpleAnimator_
 @export var animations_source: AnimationPlayer # clip library for torso actions (if actions read from here)
 # @export var torso_anim_settings: AnimationPlayer # settings player if you ever need to fade torso influence
 @export var animation_settings: AnimationPlayer # settings player if you ever need to fade torso influence
-
 
 var current_state: PlayerState
 
@@ -24,12 +24,11 @@ var current_state: PlayerState
 func initialise():
 	var empty_input := InputPackage.new()
 
-	current_state = container.state_by_name(PS.run)
-	# current_state.current_action = container.action_by_name(PS.action_idle)
-
 	# todo: better
+	current_state = container.state_by_name(PS.run)
 	legs_sm.current_behavior = container.legs_behavior_by_name(current_state.legs_behavior.behavior_name)
 	legs_sm.current_action = container.legs_action_by_name(legs_sm.current_behavior.supported_actions[0])
+	current_state.current_action = legs_sm.current_action
 	legs_sm.current_behavior._on_enter_behavior(empty_input)
 
 	current_state._on_enter_state(empty_input)
@@ -50,7 +49,7 @@ func update(input: InputPackage, delta: float) -> void:
 		print_.prefix("PSM State", current_state.state_name + " => " + verdict)
 		
 		current_state._on_exit_state()
-		# no current_state is next state
+		# now current_state is next state
 		current_state = container.state_by_name(verdict)
 		player.current_state = current_state # for something outside
 		current_state._on_enter_state(input)

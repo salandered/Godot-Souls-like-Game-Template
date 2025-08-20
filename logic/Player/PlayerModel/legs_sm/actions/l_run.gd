@@ -6,8 +6,6 @@ extends LegsAction
 func update(input: InputPackage, delta: float):
 	process_input_vector(input, delta)
 
-	# player.move_and_slide()
-
 
 func process_input_vector(input: InputPackage, delta: float):
 	var input_direction := velocity_by_input(input, delta).normalized()

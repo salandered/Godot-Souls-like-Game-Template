@@ -18,7 +18,7 @@ func _ready() -> void:
 		# LS.legs_action_sprint_to_run,
 	]
 
-func update(input: InputPackage, delta: float):
+func update(input: InputPackage, delta: float) -> void:
 	_choose_action(input)
 	legs_sm.current_action.update(input, delta)
 

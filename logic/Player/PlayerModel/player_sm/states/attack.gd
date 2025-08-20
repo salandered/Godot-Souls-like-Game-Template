@@ -22,7 +22,7 @@ func check_transition(input: InputPackage) -> String:
 	var best_input = best_input_that_can_be_paid(input)
 	if current_action.works_longer_than(RELEASES_PRIORITY):
 		# todo: or best_input != "idle", what?
-		if current_action.works_longer_than(_get_DURATION()) or best_input != "idle":
+		if current_action.works_longer_than(current_action.DURATION) or best_input != "idle":
 			return best_input
 	return "okay"
 	

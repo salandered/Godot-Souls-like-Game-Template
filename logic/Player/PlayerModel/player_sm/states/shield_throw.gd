@@ -5,12 +5,12 @@ extends PlayerState
 var casted = false
 
 
-func update(_input: InputPackage, _delta: float):
+func update(_input: InputPackage, _delta: float) -> void:
 	if current_action.works_longer_than(spell_release_timing) and not casted:
 		spawn_spell()
 
 
-func spawn_spell():
+func spawn_spell() -> void:
 	var new_shield_shot: ShieldThrow = spell.instantiate()
 	new_shield_shot.caster = player
 	new_shield_shot.add_to_group("players_spell")
@@ -22,5 +22,5 @@ func spawn_spell():
 	#print(combat.shield_shot_charges)
 
 
-func on_enter_state(_input: InputPackage):
+func on_enter_state(_input: InputPackage) -> void:
 	casted = false

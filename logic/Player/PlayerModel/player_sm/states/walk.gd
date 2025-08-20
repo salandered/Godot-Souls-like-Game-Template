@@ -1,4 +1,5 @@
 extends PlayerState
+## WALK
 
 # func _ready() -> void:
 # 	SPEED = 1.5
@@ -24,3 +25,29 @@ extends PlayerState
 # 	else:
 # 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 # 		player.rotate_y(angle)
+
+
+# func update(input: InputPackage, delta : float):
+# 	check_animation_settings()
+
+# # we are but a parrot state
+# func check_animation_settings():
+# 	if torso_anim_settings.current_animation != legs.legs_anim_settings.current_animation:
+# 		torso_anim_settings.play(legs.legs_anim_settings.current_animation, 0.35)
+
+# func transition_logic(input: InputPackage) -> String:
+# 	input = translate_actions_to_behaviours(input)
+# 	return best_input_that_can_be_paid(input)
+
+# func translate_actions_to_behaviours(input : InputPackage) -> InputPackage:
+# 	# todo smth like append default locomotion mode there
+# 	input.behaviour_names.append("jog")
+# 	input = map_with_dictionary(input, behaviour_map)
+# 	return input
+
+
+# func choose_initial_behaviour(_input : InputPackage):
+# 	simple_torso.sync_and_follow(legs.simple_animator, 0.15)
+
+# func on_exit_behaviour():
+# 	legs.simple_animator.remove_follower()

@@ -26,8 +26,9 @@ var blend_time_spent: float # seconds
 var blending_percentage: float # [0 ; 1]
 
 
-# lazily use Unix time in milliseconds, just as in model states. 
-# If you want to have a pause in your game or some time coefficients or to be immune to system time change attacks, create a better time calculation
+# TODO: Unix time in milliseconds, just as in model states. 
+# If you want to have a pause in your game or some time coefficients or to be immune to system time change attacks, 
+# create a better time calculation
 var last_processing_time: float = 0 # seconds unix from system
 var delta: float = 0 # seconds
 var now: float = 0 # seconds unix from system
@@ -39,18 +40,40 @@ var previous_transform: Transform3D
 var bone_position_track: int
 var bone_rotation_track: int
 
+
+var follower: SimpleAnimator_
+
+var derivative_delta: float = 0.02
+
 var __initialised: bool = false
 
-# func _ready():
-# 	# TODO: this is not triggered. Added accept_modifiers(). Check with Godot 4.5
-	#       see also: https://github.com/godotengine/godot/issues/106463
-# 	# When we prepare our node, we make sure both animation fields are filled with "do nothing" animation. 
-# 	current_animation = native_animator.get_animation("idle_longsword")
-# 	current_animation_cycling = current_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
-# 	current_animation_progress = 0
-# 	previous_animation = native_animator.get_animation("idle_longsword")
-# 	previous_animation_cycling = previous_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
-# 	previous_animation_progress = 0
+
+func sync_and_follow(another_animator: SimpleAnimator_, over_time: float = 0.0):
+	if another_animator == self:
+		push_error("You can't sync and follow yourself dumbass")
+		return
+	if not another_animator.a_name == "legs":
+		assert(false, "we are not ready for this")
+
+	previous_animation = current_animation
+	previous_animation_cycling = current_animation_cycling
+	previous_animation_progress = current_animation_progress
+
+	current_animation = another_animator.current_animation
+	current_animation_cycling = another_animator.current_animation_cycling
+	current_animation_progress = another_animator.current_animation_progress
+
+	now = another_animator.now
+	last_processing_time = another_animator.last_processing_time
+	delta = 0.0 # ?
+
+	if over_time > 0:
+		is_blending = true
+		blend_time_spent = 0
+		blending_percentage = 0
+		blend_duration = over_time
+
+	another_animator.accept_follower(self)
 
 
 func play(next_animation: String, over_time: float = 0):
@@ -77,6 +100,9 @@ func play(next_animation: String, over_time: float = 0):
 		blend_time_spent = 0
 		blending_percentage = 0
 
+	if _has_follower():
+		print_.prefix("SKM 💀", "Modifier '" + a_name + "' makes follower '" + follower.a_name + "' play anim " + next_animation + " over time " + str(over_time))
+		follower.play(next_animation, over_time)
 
 func _process_modification():
 	if __initialised:
@@ -94,7 +120,7 @@ func _update_skeleton():
 	elif a_name == 'legs':
 		bone_list = range(45, 52)
 		bone_list.append(0)
-		bone_list.append(1) # ?
+		# bone_list.append(1) # ?
 		# bone_list.append(2)
 		# bone_list.append(3)
 
@@ -129,10 +155,9 @@ func _update_time():
 	if previous_animation_progress > previous_animation.length and previous_animation_cycling:
 		previous_animation_progress = fmod(previous_animation_progress, previous_animation.length)
 
-
-func _update_blend_values():
 # We use the delta time value we just got and add it to blending_time_counter, 
 # and then we update blending_percentage value. 
+func _update_blend_values():
 	if is_blending:
 		blend_time_spent += delta
 		blending_percentage = blend_time_spent / blend_duration
@@ -168,3 +193,34 @@ func calculate_bone_pose(bone_idx: int, animation: Animation, anim_progress: flo
 
 func bone_to_track_name(bone_index: int) -> String:
 	return "%GeneralSkeleton:" + skeleton.get_bone_name(bone_index)
+
+
+func accept_follower(new_follower: SimpleAnimator_):
+	if new_follower == self:
+		push_error("You cant follow yourself dumbass")
+		return
+	if follower == new_follower:
+		push_warning("Already has this exact follower dumbass")
+		return
+	print_.prefix("SKM 💀", "Modifier '" + a_name + "' accepted follower '" + new_follower.a_name + "'")
+	follower = new_follower
+
+func remove_follower():
+	print_.prefix("SKM 💀", "Modifier '" + a_name + "' removes follower '" + follower.a_name + "'")
+	follower = null
+
+
+# func calculate_root_velocity() -> Vector3:
+# 	var resulting_velocity: Vector3
+# 	var adjustment_delta: float = Time.get_unix_time_from_system() - last_update
+# 	var curr_now: float = fmod(curr_progress + adjustment_delta, curr_cycle_length)
+
+# 	resulting_velocity = lerp(curr_right_anim.get_root_velocity(curr_now), curr_left_anim.get_root_velocity(curr_now), curr_direction)
+
+# 	if is_blending_spectres:
+# 		var prev_now: float = fmod(prev_progress + adjustment_delta, prev_cycle_length)
+# 		var prev_velocity = lerp(prev_right_anim.get_root_velocity(prev_now), prev_left_anim.get_root_velocity(prev_now), prev_direction)
+
+
+func _has_follower() -> bool:
+	return follower != null
