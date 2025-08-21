@@ -8,9 +8,9 @@ var player: Princess
 
 var animation_settings: AnimationPlayer
 
-var full_body_animator: SimpleAnimator_
-var legs_animator: SimpleAnimator_
-var torso_animator: SimpleAnimator_
+var full_body_animator: ModifierAnimator
+var legs_animator: ModifierAnimator
+var torso_animator: ModifierAnimator
 
 var skeleton: Skeleton3D
 var resources: HumanoidResources

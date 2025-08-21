@@ -19,12 +19,15 @@ func gather_input(delta: float) -> InputPackage:
 		- Input.get_action_strength(RawAction.move_left)
 
 
-	# MAIN
+	# MOVEMENT
+
 	new_input.actions.append(PS.run) # was idle as default
 
 	new_input.input_direction = Input.get_vector(
 		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
+	
+	# MAIN
 	if new_input.input_direction != Vector2.ZERO:
 		# new_input.actions.append(PS.run)
 		if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting

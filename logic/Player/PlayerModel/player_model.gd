@@ -17,15 +17,17 @@ class_name PlayerModel
 # 	....
 # }
 @onready var _begin: BeginModifier = %_Begin
-@onready var full_body: SimpleAnimator_ = %FullBody
-@onready var torso: SimpleAnimator_ = %Torso
-@onready var legs_animator: SimpleAnimator_ = %Legs
+@onready var full_body: ModifierAnimator = %FullBody
+@onready var torso: ModifierAnimator = %Torso
+@onready var legs_animator: ModifierAnimator = %Legs
 @onready var _end: EndModifier = %_End
+@onready var limp: LimpModifier = %Limp
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
+
 
 func _ready():
 	container.player = player
@@ -46,6 +48,10 @@ func _ready():
 
 
 func update(input: InputPackage, delta: float):
+	if fly_mode_enabled:
+		_handle_fly_mode(input, delta)
+		return
+
 	player_sm.update(input, delta)
 	player.move_and_slide()
 	
@@ -54,15 +60,16 @@ func accept_modifiers():
 	var animators := [full_body, torso, legs_animator]
 	for a_ in animators:
 		u.assert_has_animation(a_.native_animator, A.combat_idle)
-		a_.current_animation = a_.native_animator.get_animation(A.combat_idle)
-		a_.current_animation_cycling = a_.current_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
-		a_.current_animation_progress = 0
-		a_.previous_animation = a_.native_animator.get_animation(A.combat_idle)
-		a_.previous_animation_cycling = a_.previous_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
-		a_.previous_animation_progress = 0
+		a_.current_anim = a_.native_animator.get_animation(A.combat_idle)
+		a_.current_anim_cycling = a_.current_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
+		a_.current_anim_progress = 0
+		a_.previous_anim = a_.native_animator.get_animation(A.combat_idle)
+		a_.previous_anim_cycling = a_.previous_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
+		a_.previous_anim_progress = 0
 		a_.__initialised = true
 	_begin.__initialised = true
 	_end.__initialised = true
+	# limp.initialise()
 
 # region
 # func _ready():
@@ -81,8 +88,6 @@ var fly_mode_enabled := false
 var fly_speed := 15
 
 func _handle_fly_mode(input: InputPackage, delta: float):
-	# var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
-	# todo: this is that strange valocity chain
 	var tracking_angular_speed := 4
 	var input_direction := __velocity_by_input(input, delta).normalized()
 	var face_direction = player.basis.z
@@ -143,7 +148,19 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("dev_change_run_anim_prev"):
 		_run_anim_i = (_run_anim_i - 1 + run_anims.size()) % run_anims.size()
 		__apply()
+	
+	if event.is_action_pressed("dev_8"):
+		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.1)
+		player_sm.torso_animator.play_overlay(A.hit_reaction, 0.12, 0.20, 0.18, 1)
+		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0, -1, 0, 1)
+		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
+	if event.is_action_pressed("dev_9"):
+		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
+		player_sm.torso_animator.play_overlay(A.hit_reaction, 0.2, 0.05, 0.2, 1)
+		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
+# Heavy stagger: slower and longer
+		
 
 func __apply() -> void:
 	var run_action := container.action_by_name(PS.action_run)

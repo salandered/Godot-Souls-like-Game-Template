@@ -6,10 +6,8 @@ class_name StatesDataRepository
 
 func get_root_delta_pos(animation: String, progress: float, delta: float) -> Vector3:
 	var data = _get_animation(animation)
-	# if not data:
-		# return Vector3.ZERO
 	var track = data.find_track("StatesDatabase:root_position", Animation.TYPE_VALUE)
-	if data.track_get_key_count(track) == 0:
+	if data.track_get_key_count(track) <= 1: # 0 or 1.
 		return Vector3.ZERO
 	var previous_pos = data.value_track_interpolate(track, progress - delta)
 	var current_pos = data.value_track_interpolate(track, progress)

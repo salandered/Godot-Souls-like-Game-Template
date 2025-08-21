@@ -6,7 +6,7 @@ const TRANSITION_TIMING = 0.2
 # landings aren't default-defaults, this TRANSITION_TIMING != DURATION
 # DURATION is much longer, but we are releasing the priorit early
 # and the rest of the animation is just for smoother blending
-func transition_logic(input: InputPackage):
+func transition_logic(input: InputPackage) -> String:
 	# demonstration of innate trashyness of mixing built in is_on_floor() and advanced techs
 	#if not player.is_on_floor():
 		#return "midair"

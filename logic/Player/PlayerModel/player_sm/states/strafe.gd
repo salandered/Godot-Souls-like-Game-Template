@@ -18,7 +18,7 @@ func _ready():
 # func on_enter_state():
 # 	pass
 
-func check_transition(input: InputPackage):
+func check_transition(input: InputPackage) -> String:
 	if not player.is_on_floor():
 		return "midair"
 	

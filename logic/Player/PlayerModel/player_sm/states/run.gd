@@ -33,5 +33,5 @@ func transition_logic(input: InputPackage) -> String:
 # 	player_sm.torso_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
 
 func on_exit_state():
-	# of couse the same animator. in perfect world legs_sm.legs_animator to var
+	# of course the same animator. in perfect world legs_sm.legs_animator to var
 	legs_sm.legs_animator.remove_follower()

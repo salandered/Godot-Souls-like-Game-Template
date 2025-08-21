@@ -34,7 +34,7 @@ func filter_with_resources(input: InputPackage):
 	if model.resources.statuses.has("fatique"):
 		input.actions.erase("sprint")
 
-static func _priority_sort(a: String, b: String):
+static func _priority_sort(a: String, b: String) -> bool:
 	if inputs_priority[a] > inputs_priority[b]:
 		return true
 	else:

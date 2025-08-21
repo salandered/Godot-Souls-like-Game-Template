@@ -7,9 +7,9 @@ class_name PlayerSM
 
 var player: Princess
 
-# Fixed animator setup (we stick to SimpleAnimator_ now)
-@export var torso_animator: SimpleAnimator_ # the Torso skeleton modifier
-@export var legs_animator: SimpleAnimator_
+# Fixed animator setup (we stick to ModifierAnimator now)
+@export var torso_animator: ModifierAnimator # the Torso skeleton modifier
+@export var legs_animator: ModifierAnimator
 @export var animations_source: AnimationPlayer # clip library for torso actions (if actions read from here)
 # @export var torso_anim_settings: AnimationPlayer # settings player if you ever need to fade torso influence
 @export var animation_settings: AnimationPlayer # settings player if you ever need to fade torso influence
@@ -46,7 +46,7 @@ func update(input: InputPackage, delta: float) -> void:
 
 	var verdict := current_state.check_transition(input)
 	if verdict != "okay":
-		print_.prefix("PSM State", current_state.state_name + " => " + verdict)
+		print_.prefix("PSM ↪️", current_state.state_name + " => " + verdict)
 		
 		current_state._on_exit_state()
 		# now current_state is next state

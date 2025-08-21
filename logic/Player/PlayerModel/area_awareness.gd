@@ -94,10 +94,10 @@ func get_locked_target() -> Node3D:
 # 	camera_locked_target = null
 
 
-func find_target():
+func find_target() -> Node:
 	var all_targets = get_tree().get_nodes_in_group("targetable")
 	# print("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
-	var candidates := []
+	var candidates: Array[Node] = []
 	for target in all_targets:
 		if _good_candidate(target):
 			candidates.append(target)

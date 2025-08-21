@@ -16,9 +16,9 @@ var player: Princess
 @export var player_sm: PlayerSM
 
 @export_group("animation")
-@export var full_body_animator: SimpleAnimator_
-@export var legs_animator: SimpleAnimator_
-@export var torso_animator: SimpleAnimator_
+@export var full_body_animator: ModifierAnimator
+@export var legs_animator: ModifierAnimator
+@export var torso_animator: ModifierAnimator
 # @export var animation_settings: AnimationPlayer
 # @export var torso_anim_settings: AnimationPlayer
 # @export var legs_anim_settings: AnimationPlayer
@@ -141,7 +141,7 @@ func legs_action_by_name(action_name: String) -> LegsAction:
 	return _leg_actions[action_name]
 
 
-func accept_player_states():
+func accept_player_states() -> void:
 	for child: PlayerState in _get_all_descendants(player_sm, "PlayerState"):
 		print("child.get_name() ", child.get_name())
 		var state_data: PSData = _state_data.get(child.get_name())
@@ -298,8 +298,8 @@ func _get_all_descendants(node: Node, target_type: StringName) -> Array:
 
 	return descendants
 
-func _get_state_descendants(node: Node) -> Array:
-	var descendants: Array = []
+func _get_state_descendants(node: Node) -> Array[Node]:
+	var descendants: Array[Node] = []
 	
 	for child in node.get_children():
 		if child is PlayerAction:

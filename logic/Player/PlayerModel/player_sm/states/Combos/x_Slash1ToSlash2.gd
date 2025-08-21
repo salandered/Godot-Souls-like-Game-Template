@@ -14,7 +14,7 @@ extends Combo_
 # 	triggered_state = "slash_2"
 
 
-# func is_triggered(input: InputPackage):
+# func is_triggered(input: InputPackage) -> bool:
 # 	if input.actions.has("slash_1") and slash_1.works_longer_than(PANIC_CLICK_PREVENTION):
 # 		return true
 # 	return false
@@ -29,7 +29,7 @@ extends Combo_
 # func _ready():
 # 	triggered_state = "slash_3"
 
-# func is_triggered(input: InputPackage):
+# func is_triggered(input: InputPackage) -> bool:
 # 	if input.actions.has("slash_1") and slash_2.works_longer_than(PANIC_CLICK_PREVENTION):
 # 		return true
 # 	return false

@@ -85,11 +85,11 @@ offset_bottom = 78.0
 text = ">>"
 
 [node name="Label3" type="Label" parent="dev_labels"]
-offset_left = 23.0
-offset_top = 496.0
-offset_right = 358.0
-offset_bottom = 636.0
-theme_override_font_sizes/font_size = 18
+offset_left = 10.0
+offset_top = 470.0
+offset_right = 345.0
+offset_bottom = 610.0
+theme_override_font_sizes/font_size = 16
 text = ">>"
 
 [node name="Label4" type="Label" parent="dev_labels"]

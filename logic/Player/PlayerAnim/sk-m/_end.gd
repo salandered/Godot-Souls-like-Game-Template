@@ -1,18 +1,18 @@
 extends SkeletonModifier3D
 class_name EndModifier
 
-@onready var torso: SimpleAnimator_ = %Torso
-@onready var legs: SimpleAnimator_ = %Legs
+@onready var torso: ModifierAnimator = %Torso
+@onready var legs: ModifierAnimator = %Legs
 @onready var animation_settings: AnimationPlayer = %AnimationSettings
 
 #@onready var debug_label = $"animation debug label"
 
-@export var provides_root_velocity : bool
+@export var provides_root_velocity: bool
 
 var __initialised: bool = false
 
-var last_pose : Vector3
-var cache : Dictionary
+var last_pose: Vector3
+var cache: Dictionary
 
 func bake_pose():
 	for bone in get_skeleton().get_bone_count():

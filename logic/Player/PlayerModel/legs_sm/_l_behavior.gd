@@ -24,7 +24,8 @@ func switch_action_to(next_action_name: String, input: InputPackage):
 	var previous_action := legs_sm.current_action
 
 	if previous_action.action_name == next_action_name and not next_action_name == LS.legs_action_double:
-		print_.prefix("LSM Action", "switch called with same " + previous_action.action_name + "⚪ NO SWITCH", 2)
+		# this print important but spams a lot
+		# print_.prefix("LSM Action", "switch called with same " + previous_action.action_name + "⚪ NO SWITCH", 2)
 		return
 
 	print_.prefix("LSM Action ", "legs action " + previous_action.action_name + " => " + next_action_name, 2)

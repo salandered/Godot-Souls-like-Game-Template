@@ -212,7 +212,7 @@ func _is_looped_animation(anim_name: String) -> bool:
 	return false
 
 
-func _save_anim_lib(anim_library: AnimationLibrary, lib_save_path: String):
+func _save_anim_lib(anim_library: AnimationLibrary, lib_save_path: String) -> void:
 	var err_save_library := ResourceSaver.save(anim_library, lib_save_path)
 	if err_save_library != OK:
 		push_warning("Failed to save AnimationLibrary: " + lib_save_path + " (Error code: %d)" % err_save_library)

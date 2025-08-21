@@ -22,8 +22,9 @@
 	},
 	// dont open file again in split view
 	"workbench.editor.revealIfOpen": true,
-	//
-	// FIGHTING COPILOT
+	//---------------------------------------
+	// ---------- FIGHTING COPILOT ----------
+	//---------------------------------------
 	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
 	"github.copilot.editor.enableCodeActions": false, // no yellow stars
 	"editor.inlineSuggest.enabled": true,
@@ -98,7 +99,7 @@
 		{
 			"path": "logic/Player/PlayerModel/player_sm/pl_container.gd",
 			"color": "custom5"
-		}
+		},
 		// AA
 		{
 			"path": "logic/Player/PlayerModel/area_awareness.gd",

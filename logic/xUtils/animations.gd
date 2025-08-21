@@ -21,7 +21,7 @@ const SET_torso_legs := "torso_legs"
 
 # peaceful move
 # const walk := "walk"
-const midair := _jump + "B-Fall-loop-HOK"
+const midair := _jump + "B-Fall-loop-HOK" # TODO: change rotation of anim
 const jump_run := _jump_up_land_HPG + "B-UP-ss-jump-run-RP"
 const jump_sprint := jump_run
 
@@ -29,7 +29,7 @@ const landing_run := _jump_up_land_HPG + "B-LAND-ss-jump-run-RP"
 const landing_sprint := landing_run
 const hard_fall := _jump_up_land_HPG + "C-fall-HW-hard-land-idle-trim-pin"
 
-const roll := _ff + "roll"
+const roll := midair # todo
 const death := _ss_loco + "C-death-2"
 
 
@@ -56,11 +56,14 @@ const withdraw := _jump + "C-fall-HW" # TODO
 const block_forward := _ss_attack + "C-block-forward"
 const block_to_idle := _ss_attack + "C-block-to-idle"
 const block_reaction := _ff + "block_reaction"
-const pushback := _ff + "pushback"
+const pushback := midair # todo
 const staggered := _ss_attack + "B-head-impact"
 const parry := _ff + "parry"
 const parried := _ff + "parried"
 const riposte_attack := longsword_1
+
+
+const hit_reaction := _ss_attack + "C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
 # -- FIGHT END
 
 # TODO: old longsword_ anim + param RM -> translate to new Skeleton and Root.

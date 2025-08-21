@@ -71,7 +71,7 @@ static func pick_random(array: Array):
     return array[randi() % array.size()]
 
 ## Pick random weighted element from array based on weights
-static func pick_weighted(items: Array, weights: Array[float]):
+static func pick_weighted(items: Array, weights: Array[float]) -> Variant:
     if items.is_empty() or weights.is_empty() or items.size() != weights.size():
         return null
     

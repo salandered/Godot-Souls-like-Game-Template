@@ -10,8 +10,6 @@ func _ready():
 func update(input: InputPackage, delta: float):
 	process_input_vector(input, delta)
 
-	# player.move_and_slide()
-
 
 func process_input_vector(input: InputPackage, delta: float):
 	var input_direction := velocity_by_input(input, delta).normalized()
@@ -23,7 +21,7 @@ func process_input_vector(input: InputPackage, delta: float):
 	else:
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
-	# animator.set_speed_scale(player.velocity.length() / SPEED)
+	legs_sm.legs_animator.set_speed_scale(player.velocity.length() / SPEED)
 
 func _input(event):
 	if event.is_action_released("dev_speed_up"):
@@ -31,5 +29,6 @@ func _input(event):
 	if event.is_action_released("dev_speed_down"):
 		SPEED -= 10
 
-# func on_exit_state():
-# 	# animator.set_speed_scale(1)
+func on_exit_action():
+	print_.prefix(">>> on exit sprint", "reset_speed_scale")
+	legs_sm.legs_animator.reset_speed_scale()

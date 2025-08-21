@@ -15,7 +15,7 @@ class_name LegsSM
 
 enum MotionType {IDLE, START, CYCLE, STOP}
 
-@export var legs_animator: SimpleAnimator_
+@export var legs_animator: ModifierAnimator
 
 
 var current_behavior: LegsBehavior

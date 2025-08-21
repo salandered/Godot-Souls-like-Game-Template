@@ -17,7 +17,7 @@ func _ready():
 	}
 
 
-func get_hit_data():
+func get_hit_data() -> HitData:
 	if not __safe_checks():
 		return HitData.blank()
 	return holder.current_state.pack_hit_data(self)

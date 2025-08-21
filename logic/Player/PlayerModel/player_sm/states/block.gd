@@ -4,7 +4,7 @@ extends PlayerState
 @export var block_sector: float = 3.14
 
 
-func check_transition(input: InputPackage):
+func check_transition(input: InputPackage) -> String:
 	if not player.is_on_floor():
 		return PS.midair
 	return best_input_that_can_be_paid(input)

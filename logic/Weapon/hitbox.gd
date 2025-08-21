@@ -29,11 +29,10 @@ func on_contact(area: Node3D):
 		area.hitbox_ignore_list.append(self)
 
 
-		if not __safe_checks(): 
+		if not __safe_checks():
 			return
 
 		processor.current_state.react_on_hit(area.get_hit_data())
-
 
 
 func is_eligible_attacking_weapon(area: Node3D) -> bool:
@@ -56,7 +55,6 @@ func _not_ignored_weapon(area: Node3D) -> bool:
 		if area.is_in_group(group):
 			return false
 	return true
-
 
 
 func __safe_checks() -> bool:
