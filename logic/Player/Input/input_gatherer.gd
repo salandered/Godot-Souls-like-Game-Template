@@ -59,8 +59,9 @@ func gather_input(delta: float) -> InputPackage:
 		else:
 			new_input.actions.append(PS.jump_run)
 	
+	# ATTACK
 	if Input.is_action_just_pressed(RawAction.light_attack):
-		new_input.combat_actions.append(InDataCombatAction.light_attack_pressed)
+		new_input.combat_actions.append(CombatAction.light_attack_pressed)
 	#if Input.is_action_just_pressed("heavy_attack"):
 		#new_input.combat_actions.append("heavy_attack_pressed")
 	

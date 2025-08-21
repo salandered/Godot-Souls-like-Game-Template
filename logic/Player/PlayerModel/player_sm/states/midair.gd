@@ -7,7 +7,7 @@ extends PlayerState
 var jump_direction: Vector3 = Vector3.ZERO
 
 
-func transition_logic(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> String:
 	var floor_distance := area_awareness.get_floor_distance()
 	if floor_distance < landing_height:
 		var xz_velocity = player.velocity

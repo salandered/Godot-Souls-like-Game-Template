@@ -41,12 +41,12 @@ func choose_initial_action(input: InputPackage) -> String:
 		initial_action = LS.legs_action_run
 	else:
 		initial_action = LS.legs_action_idle
-	print_.prefix("LSM Beh INITIAL", "based on input vector -> " + initial_action, 1)
+	print_.prefix("LSM Behavior INITIAL", "based on input vector -> " + initial_action, 2)
 	return initial_action
 	# TODO: how to choose_initial_action if we came from double behavior. lets say sprint was using double. 
 	# or any loco state like sprint should be in legs now?
 	# NOTE: also we can use input.actions! like in sptrint
-	# print_.prefix("LSM Beh INITIAL", "using idle choose_initial_action based on " + str(legs_sm.current_action.motion_type), 1)
+	# print_.prefix("LSM Behavior INITIAL", "using idle choose_initial_action based on " + str(legs_sm.current_action.motion_type), 1)
 	# match legs_sm.current_action.motion_type:
 	# 	legs_sm.MotionType.IDLE:
 	# 		switch_action_to(LS.legs_action_idle, input)

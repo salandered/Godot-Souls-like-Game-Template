@@ -44,7 +44,7 @@ func update(input: InputPackage, delta: float) -> void:
 	input = area_awareness.contextualize(input)
 	area_awareness.last_input_package = input
 
-	var verdict := current_state.check_transition(input)
+	var verdict := current_state._check_transition(input)
 	if verdict != "okay":
 		print_.prefix("PSM ↪️", current_state.state_name + " => " + verdict)
 		

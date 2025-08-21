@@ -18,7 +18,7 @@ func _ready() -> void:
 	#backend_animation = animation + "-param"
 	SPEED = 3.0
 
-func transition_logic(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> String:
 	if current_action.works_longer_than(TRANSITION_TIMING):
 		jumped = false
 		return PS.midair

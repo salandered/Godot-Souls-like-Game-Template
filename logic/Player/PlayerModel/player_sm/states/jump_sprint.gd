@@ -12,7 +12,7 @@ var jumped: bool = false
 func _ready():
 	SPEED = 5.0
 
-func transition_logic(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> String:
 	if current_action.works_longer_than(TRANSITION_TIMING):
 		jumped = false
 		return PS.midair

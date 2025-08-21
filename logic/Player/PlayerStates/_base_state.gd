@@ -119,7 +119,7 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 3. if nothing above, what vanilla state wants to default to?
 ## Not to override
 func _check_transition(input: InputPackage) -> String:
-	if accepts_queueing():
+	if accepts_queueing():w
 		check_combos(input)
 	
 	if has_queued_state and transitions_to_queued():
@@ -140,9 +140,9 @@ func _check_transition(input: InputPackage) -> String:
 func check_combos(input: InputPackage):
 	for combo: Combo_ in combos:
 		# print("COMBO", combo.triggered_state)
-		if combo.is_triggered(input) and resources.can_be_paid(container.states[combo.triggered_state]):
+		if combo.is_triggered(input) and resources.can_be_paid(container.states[combo.state_to_trigger]):
 			has_queued_state = true
-			queued_state = combo.triggered_state
+			queued_state = combo.state_to_trigger
 
 ## choosing the input with the highest priority that we can also pay for
 func best_input_that_can_be_paid(input: InputPackage) -> String:

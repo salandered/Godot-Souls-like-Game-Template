@@ -43,7 +43,7 @@ func process_input_vector(input: InputPackage, delta: float):
 
 
 func on_exit_action():
-	print_.prefix(">>> on exit run", "reset_speed_scale")
+	print_.prefix("LSM Action", "exit: reset_speed_scale", 3)
 	legs_sm.legs_animator.reset_speed_scale()
 	
 func _input(event):

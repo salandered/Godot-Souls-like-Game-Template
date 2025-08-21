@@ -10,8 +10,8 @@ class_name HumanoidCombat
 
 
 static var inputs_priority: Dictionary = {
-	InDataCombatAction.light_attack_pressed: 1,
-	InDataCombatAction.heavy_attack_pressed: 2,
+	CombatAction.light_attack_pressed: 1,
+	CombatAction.heavy_attack_pressed: 2,
 }
 
 
@@ -26,8 +26,8 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 func translate_combat_actions(new_input: InputPackage):
 	if not new_input.combat_actions.is_empty():
 		new_input.combat_actions.sort_custom(_priority_sort)
-		var prioritized_action: String = new_input.combat_actions[0] # safe
-		var translated_to_state: String = model.active_weapon.basic_attacks[prioritized_action]
+		var best_action: String = new_input.combat_actions[0] # safe
+		var translated_to_state: String = model.active_weapon.basic_attacks[best_action]
 		new_input.actions.append(translated_to_state)
 
 func filter_with_resources(input: InputPackage):

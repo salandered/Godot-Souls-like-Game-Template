@@ -15,6 +15,6 @@ func animate():
 	# var animation_ := legs_sm.current_behavior.player_state.current_action.animation
 	var animation_ := legs_sm.player_sm.current_state.current_action.animation
 	
-	print_.prefix("~~ LSM Action ▶️ 🔗 PLAY DOUBLE", "anim: " + animation_, 8)
+	print_.prefix("▶️ 🔗LSM Action PLAY DOUBLE", "anim: " + animation_, 8)
 	
 	legs_sm.legs_animator.play(animation_, 0.2)

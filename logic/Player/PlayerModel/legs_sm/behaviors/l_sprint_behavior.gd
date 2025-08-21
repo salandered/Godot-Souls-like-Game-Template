@@ -22,5 +22,5 @@ func _choose_action(input: InputPackage) -> void:
 		switch_action_to(LS.legs_action_idle, input)
 
 func choose_initial_action(input: InputPackage) -> String:
-	print_.prefix("LSM Beh Sprint INITIAL", "choosing legs_action_sprint", 1)
+	print_.prefix("LSM Behavior Sprint INITIAL", "choosing legs_action_sprint", 2)
 	return LS.legs_action_sprint

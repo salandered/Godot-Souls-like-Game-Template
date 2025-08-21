@@ -55,7 +55,7 @@ var _state_data: Dictionary = { # { Node name : PSData }
 var _player_action_data: Dictionary = { # { Node name : PlayerActionData }
 	# move
 	# "Walk": PlayerActionData.new(PS.walk,PS.action_block, A.walk, "walk-param", , ),
-	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_block, A.strafe_R, ),
+	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_strafe, A.strafe_R, ),
 	# "IdleSprintAction": PlayerActionData.new(PS.run, PS.action_sprint_idle, A.idle, ),
 	"SprintAction": PlayerActionData.new(PS.sprint, PS.action_sprint, A.combat_sprint, ),
 	"JumpRunAction": PlayerActionData.new(PS.jump_run, PS.action_jump_run, A.jump_run, ),

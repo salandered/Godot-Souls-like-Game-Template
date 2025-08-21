@@ -60,8 +60,10 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 1. does something from the past force us to transition somewhere? 
 # 2. If not, does something textual from the present modify our inputs? 
 # 3. if nothing above, what vanilla state wants to default to?
-## Not to override ## used to be called check_transition
-func check_transition(input: InputPackage) -> String:
+## Not to override ## used to be called _check_transition
+func _check_transition(input: InputPackage) -> String:
+	# if current_action.action_name == PS.action_longsword_1:
+		# print_.prefix("Combo 🗡️", str(current_action.accepts_queueing()))
 	if current_action.accepts_queueing():
 		check_combos(input)
 	if has_queued_state and current_action.transitions_to_queued(): # was transitions_to_queued()
@@ -72,12 +74,13 @@ func check_transition(input: InputPackage) -> String:
 		has_forced_state = false
 		return forced_state
 	
+	## can be overriden
 	# used to be called default lifecycle
-	return transition_logic(input) # and also to work in updates sometime
+	return check_transition(input)
 
 
-## can be overriden: see Run
-func transition_logic(_input: InputPackage) -> String:
+## can be overriden: see Run or attack.gd
+func check_transition(_input: InputPackage) -> String:
 	if current_action.works_longer_than(current_action.DURATION):
 		return best_input_that_can_be_paid(_input)
 	return "okay"
@@ -119,7 +122,7 @@ func _on_enter_state(input: InputPackage):
 	# TODO: stupid split. or not?
 	if depends_on_legs:
 		player_sm.torso_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
-		print_.prefix("PSM enter", "!dependent! " + state_name + ". Actions delegated to legs, NO SWITCHES ⚪⚪ while we in it", 1)
+		print_.prefix("PSM state", "enter: DEPENDENT state. Actions delegated to legs, NO SWITCHES ⚪⚪", 1)
 		legs_sm.switch_to(legs_behavior, input)
 	else: # state leads legs. RIGHT NOW ITS ONLY DOUBLE. complex attacks expecting
 		if legs_behavior.behavior_name != LS.legs_behavior_double:
@@ -130,7 +133,7 @@ func _on_enter_state(input: InputPackage):
 		# if not default_action_name:
 			# print_.prefix("PSM enter ", state_name + " No default actions for non depended state which is probably an error ", 1)
 
-		print_.prefix("PSM enter ", state_name + " switch to DEFAULT action " + default_action_name, 1)
+		print_.prefix("PSM enter", " switch to DEFAULT action " + default_action_name, 1)
 		switch_action_to(default_action_name, input)
 		legs_sm.switch_to(legs_behavior, input)
 
@@ -144,7 +147,7 @@ func switch_action_to(next_action_name: String, input: InputPackage):
 	if current_action:
 		print_.prefix("PSM Action", "switch action " + current_action.action_name + " => " + next_action_name, 1)
 	else:
-		print_.prefix("PSM Action", "NO CURRENT ACTION ⚪ action => " + next_action_name, 1)
+		print_.prefix("PSM Action", "No current action ⚪ => " + next_action_name, 1)
 	current_action = container.action_by_name(next_action_name)
 	current_action._on_enter_action(input)
 
@@ -188,10 +191,14 @@ func try_force_state(new_forced_state: String):
 ## => states can use 'queued state' field for transitions without losing it.
 func check_combos(input: InputPackage):
 	for combo: Combo_ in combos:
+		print_.prefix("Combo 🗡️", "checking combo " + combo.name + " with state_to_trigger " + combo.state_to_trigger)
 		# print("COMBO", combo.triggered_state)
-		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(combo.triggered_state)):
+		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(combo.state_to_trigger)):
 			has_queued_state = true
-			queued_state = combo.triggered_state
+			queued_state = combo.state_to_trigger
+			print_.prefix("Combo 🗡️", "Queued: " + queued_state, 1)
+		else:
+			print_.prefix("Combo 🗡️", "Declined", 1)
 
 ## choosing the input with the highest priority that we can also pay for
 func best_input_that_can_be_paid(input: InputPackage) -> String:
@@ -229,8 +236,9 @@ func process_input_vector(input: InputPackage, delta: float):
 func assign_combos():
 	for child in get_children():
 		if child is Combo_:
+			print_.prefix("Container", "For state " + state_name + " assigned combo " + child.name, 0, L.INFO)
 			combos.append(child)
-			child.state = self # combo.state here
+			child.state = self
 
 ## overidden in states
 func pack_hit_data(_weapon: WeaponOh) -> HitData:
@@ -278,7 +286,7 @@ func react_on_parry(_hit: HitData):
 
 # region: FAIR DOCS: Ep 3 or 4 General States heir usage guide.
 #
-# > check_transition function aims to be short and simple.
+# > _check_transition function aims to be short and simple.
 # 	Its general structure is as follows: 
 #	if (state is ready to transition) :
 #		transition to the highest priority out there
@@ -287,7 +295,7 @@ func react_on_parry(_hit: HitData):
 #
 # 	BasePlayerState readyness for transition is generally a simple function based on timings or statuses of the player.
 #	If you are starting to understand that your transition readyness is a complex method, OR
-# 	if you are tempted to add third branching operator into your check_transition function,
+# 	if you are tempted to add third branching operator into your _check_transition function,
 #	seriously consider if Combo_ can do this logic for you, you won't regret its usage I promise.
 #
 # > update functions manages perframe behavior of your BasePlayerState.

@@ -1,17 +1,26 @@
-class_name print_ extends RefCounted
+extends RefCounted
+class_name print_
 
 
-const DEBUG = "DEBUG"
-
-static func prefix(prefix_: String, text: String, info_indents: int = 0):
+static func prefix(prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)
 	prefix_ = "[" + prefix_ + "]" + "  "
+	match level:
+		L.DEBUG:
+			prefix_ = L.DEBUG + " " + prefix_
+		L.INFO:
+			prefix_ = L.INFO + " " + prefix_
+		L.WARN:
+			prefix_ = L.WARN + " " + prefix_
+		L.ERROR:
+			prefix_ = L.ERROR + " " + prefix_
+
 	print(tabs_prefix, prefix_, text)
 
 
 static func _debug_(text, info_indents: int = 0):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)
-	print(tabs_prefix, "[DEBUG] ", text)
+	print(tabs_prefix, L.DEBUG, " ", text)
 
 static func _ready(node: Node, info_indents: int = 0):
 	print("||", node.name, " ready()")

@@ -1,4 +1,4 @@
-class_name InDataCombatAction extends RefCounted
+class_name CombatAction extends RefCounted
 
 
 const light_attack_pressed := "light_attack_pressed"

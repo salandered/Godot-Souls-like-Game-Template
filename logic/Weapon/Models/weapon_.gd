@@ -20,7 +20,11 @@ var is_attacking: bool = false
 
 
 ## Maps input actions to states.
-## Examples: sword map 'light attack pressed' to slash, while stuff to spell.
+## Examples: Sword maps 'light attack pressed' to slash, while stuff to spell.
+## Like this:
+## basic_attacks = {
+## 	CombatAction.light_attack_pressed: PS.longsword_1
+## }
 var basic_attacks: Dictionary
 
 func _ready():

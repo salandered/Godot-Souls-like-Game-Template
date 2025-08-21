@@ -13,7 +13,7 @@ func _ready():
 
 	base_damage = 10
 	basic_attacks = {
-		InDataCombatAction.light_attack_pressed: PS.longsword_1
+		CombatAction.light_attack_pressed: PS.longsword_1
 	}
 
 

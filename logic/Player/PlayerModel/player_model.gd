@@ -101,7 +101,7 @@ func _handle_fly_mode(input: InputPackage, delta: float):
 	player.velocity = input_direction
 	if input.actions.has(PS.jump_run):
 		player.velocity.y += 8
-	if input.combat_actions.has(InDataCombatAction.heavy_attack_pressed):
+	if input.combat_actions.has(CombatAction.heavy_attack_pressed):
 		player.velocity.y -= 8
 
 	
@@ -172,9 +172,9 @@ func __apply() -> void:
 		run_action.animation = anim_name
 		run_action.backend_animation = anim_name + "-param"
 		l_run_action.animation = anim_name
-		print_.prefix(print_.DEBUG, "run anim -> " + anim_name)
+		print_.prefix(L.DEBUG, "run anim -> " + anim_name)
 	else:
-		print_.prefix(print_.DEBUG, "run anim not found -> " + anim_name)
+		print_.prefix(L.DEBUG, "run anim not found -> " + anim_name)
 
 
 func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:

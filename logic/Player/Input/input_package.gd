@@ -3,6 +3,7 @@ class_name InputPackage
 
 var input_direction: Vector2
 
+# NOTE: for now actions contains player states like PS.run
 var actions: Array[String]
 var combat_actions: Array[String]
 

@@ -63,7 +63,8 @@
 		"editor.findMatchBorder": "#fa902ccb",
 		"editor.findMatchHighlightBackground": "#ffffff00", // all other matches
 		"editor.findMatchHighlightBorder": "#feffc686",
-		"editorError.foreground": "#fd5ca7a8", // semi-transparent red
+		// color of wave like underline
+		"editorError.foreground": "#fd5ca75b", // semi-transparent red
 		"editorWarning.foreground": "#FFFF0033", // semi-transparent yellow
 		// ERROR LENS
 		"errorLens.errorForeground": "#fd578177",
@@ -246,6 +247,7 @@
 	//
 	// HIGHLIGHT EXTENSION
 	"highlight.regexes": {
+	
 		// Highlight every instance of "A." (e.g., A.my_static_method)
 		"\\b(A\\.)": {
 			"filterLanguageRegex": "gdscript",
