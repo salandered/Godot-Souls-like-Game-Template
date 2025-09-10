@@ -36,7 +36,8 @@ func _ready() -> void:
 # 	dev_labels._label_player_info()
 
 
-func _physics_process(delta) -> void:
+# TODO: _process or _physics_process? changed to _process for now
+func _process(delta) -> void:
 	# CONTROLLER (INPUT)
 	var input := input_gatherer.gather_input(delta)
 	
@@ -51,11 +52,18 @@ func _physics_process(delta) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_cycle_cam"):
+	if event.is_action_pressed("dev_cycle_cam"):
 		cam_i = (cam_i + 1) % debug_cams.size()
 		print_._debug_("cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
+
+	elif event.is_action_pressed("dev_cycle_cam_prev"):
+		cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
+		print_._debug_("cam_i: " + str(cam_i))
+		if debug_cams[cam_i].has_method("make_current"):
+			debug_cams[cam_i].make_current()
+
 	if event.is_action_pressed("debug_unstuck"):
 		global_position.y += 1.5
 		print_._debug_("Unstuck: moved player up by 1.5 units")

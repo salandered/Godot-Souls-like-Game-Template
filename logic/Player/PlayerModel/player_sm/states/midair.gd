@@ -17,7 +17,7 @@ func check_transition(input: InputPackage) -> String:
 		print_.prefix("PSM midair", str(floor_distance) + " < " + str(landing_height) + " => landing_run")
 		return PS.landing_run
 	else:
-		print_.prefix("PSM midair", "still midair")
+		# print_.prefix("PSM midair", "still midair")
 		# still falling
 		return "okay"
 

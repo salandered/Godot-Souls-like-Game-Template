@@ -21,11 +21,11 @@ func _process(delta: float) -> void:
 
 func _label_player_info():
 	var p_pos = player.model.global_position
-	var nest_pos := player.fancy_camera.nest.global_position
+	# var nest_pos := player.fancy_camera.nest.global_position
 	var camera_pos := player.fancy_camera.camera.global_position
 	
-	
-	label.text = "player to nest " + "%10.3f" % p_pos.distance_to(nest_pos)
+	label.text = ""
+	# label.text = "player to nest " + "%10.3f" % p_pos.distance_to(nest_pos)
 	label.text += "\n player to cam " + "%10.3f" % p_pos.distance_to(camera_pos)
 
 	var free_offset = player.fancy_camera.free_camera.offset.length() if player.fancy_camera.free_camera.offset else 0.0
@@ -38,7 +38,7 @@ func _label_state_info():
 	var c_s := player.model.player_sm.current_state
 	var t_anim := c_s.player_sm.torso_animator
 	var l_anim := c_s.legs_sm.legs_animator
-	var limp_anim := player.model.limp
+	#var limp_anim := player.model.limp
 	if not c_s:
 		label_3.text = "NO current state"
 		return

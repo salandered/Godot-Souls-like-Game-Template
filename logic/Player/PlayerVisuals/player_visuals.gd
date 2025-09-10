@@ -3,25 +3,28 @@ class_name PlayerVisuals
 
 var model: PlayerModel
 
-@onready var beta_joints = $beta/Beta_Joints
-@onready var beta_surface = $beta/Beta_Surface
-@onready var princess: Node3D = $princess
-
+@onready var all_data: Node3D = $all_data
 
 @onready var sword_visuals_1 = $SwordVisuals1
 @onready var stamina_label = $"Stamina _bar_"
 @onready var health_label = $"Health _bar_"
 
-# TODO: flying head without eys
+func _get_mesh_descendants(node: Node) -> Array:
+	var descendants := []
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			if child.is_visible_in_tree():
+				descendants.append(child)
+		descendants.append_array(_get_mesh_descendants(child))
+	return descendants
+
+# TODO: flying head without eyes
 func accept_model(_model: PlayerModel):
 	model = _model
 
-	for child in princess.get_children():
-		if child is MeshInstance3D:
-			child.skeleton = _model.skeleton.get_path()
+	for child: MeshInstance3D in _get_mesh_descendants(all_data):
+		child.skeleton = _model.skeleton.get_path()
 
-	beta_surface.skeleton = _model.skeleton.get_path()
-	beta_joints.skeleton = _model.skeleton.get_path()
 
 
 func _process(_delta):

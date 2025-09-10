@@ -22,7 +22,7 @@ func process_input_vector(input: InputPackage, delta: float):
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
 	# _velocity.limit_lensgth(SPEED) ?
-	legs_sm.legs_animator.set_speed_scale(player.velocity.length() / SPEED)
+	# legs_sm.legs_animator.set_speed_scale(player.velocity.length() / SPEED)
 
 	# region FAIR LOGIC
 	#if combat.current_camera_mode == combat.CameraMode.FREE:
@@ -44,7 +44,7 @@ func process_input_vector(input: InputPackage, delta: float):
 
 func on_exit_action():
 	print_.prefix("LSM Action", "exit: reset_speed_scale", 3)
-	legs_sm.legs_animator.reset_speed_scale()
+	# legs_sm.legs_animator.reset_speed_scale()
 	
 func _input(event):
 	if event.is_action_released("dev_speed_up"):

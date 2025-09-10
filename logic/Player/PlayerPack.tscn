@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://6qtp0fjtkn64"]
+
+[ext_resource type="Script" uid="uid://bpr17wdedc64x" path="res://logic/Player/player.gd" id="1_fevej"]
+[ext_resource type="PackedScene" uid="uid://dkl1i7wju7vba" path="res://logic/Player/PlayerVisuals/PlayerVisuals.tscn" id="2_t2ex8"]
+[ext_resource type="PackedScene" uid="uid://eec5ujuowf51" path="res://logic/Player/PlayerModel/PlayerModel.tscn" id="3_6g2cb"]
+[ext_resource type="Script" uid="uid://bdmng5y2k5j0o" path="res://logic/Player/Input/input_gatherer.gd" id="4_501po"]
+[ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://logic/Player/fancy-camera/local_camera.tscn" id="5_rigv3"]
+[ext_resource type="Script" uid="uid://dmgh3f3ilowde" path="res://logic/Player/_dev/dev_labels.gd" id="6_h5e6b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8a10"]
+albedo_color = Color(0.0962022, 0.627141, 0.55397, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d0r5q"]
+radius = 0.2
+height = 1.8
+
+[node name="PlayerPack" type="CharacterBody3D" node_paths=PackedStringArray("input_gatherer", "model", "visuals", "collider")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_fevej")
+input_gatherer = NodePath("Input")
+model = NodePath("Model")
+visuals = NodePath("Visuals")
+collider = NodePath("Collider")
+
+[node name="Visuals" parent="." instance=ExtResource("2_t2ex8")]
+
+[node name="Model" parent="." instance=ExtResource("3_6g2cb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, 0)
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("4_501po")
+
+[node name="CameraFocus" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 1.04239, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraFocus"]
+transform = Transform3D(0.743464, 0, 0, 0, 0.743464, 0, 0, 0, 0.743464, 0, 0, 0.0200904)
+material_override = SubResource("StandardMaterial3D_e8a10")
+radius = 0.3
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_d0r5q")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Collider"]
+transform = Transform3D(0.236, 0, 0, 0, 1.8, 0, 0, 0, 0.544, -0.354801, 0, -0.0309453)
+size = Vector3(0.431641, 1, 0.299316)
+
+[node name="dev_labels" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_h5e6b")
+
+[node name="Label" type="Label" parent="dev_labels"]
+offset_left = 746.0
+offset_top = 7.0
+offset_right = 857.0
+offset_bottom = 56.0
+text = "nest to player:
+"
+
+[node name="Label2" type="Label" parent="dev_labels"]
+offset_left = 748.0
+offset_top = 55.0
+offset_right = 945.0
+offset_bottom = 78.0
+text = ">>"
+
+[node name="Label3" type="Label" parent="dev_labels"]
+offset_left = 10.0
+offset_top = 470.0
+offset_right = 345.0
+offset_bottom = 610.0
+theme_override_font_sizes/font_size = 16
+text = ">>"
+
+[node name="Label4" type="Label" parent="dev_labels"]
+offset_left = 575.0
+offset_top = 522.0
+offset_right = 764.0
+offset_bottom = 710.0
+text = "SK M Info"
+
+[node name="Label5" type="Label" parent="dev_labels"]
+offset_left = 730.0
+offset_top = 520.0
+offset_right = 919.0
+offset_bottom = 708.0
+theme_override_font_sizes/font_size = 16
+text = "SK M Info"
+
+[node name="Label6" type="Label" parent="dev_labels"]
+offset_left = 969.0
+offset_top = 519.0
+offset_right = 1143.0
+offset_bottom = 707.0
+theme_override_font_sizes/font_size = 16
+text = "SK M Info"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.801484, 0, -0.598017, 0, 1, 0, 0.598017, 0, 0.801484, -1.57505, 1, 1.04827)
+fov = 111.7
+
+[node name="Camera3D3" type="Camera3D" parent="." groups=["debug_cameras"]]
+transform = Transform3D(-0.999269, 2.3266e-10, 0.0382307, 0.00347425, 0.995862, 0.0908095, -0.0380725, 0.0908759, -0.995134, 0.364876, 1.56286, -6.7469)
+fov = 27.7
+
+[node name="Camera3D5" type="Camera3D" parent="." groups=["debug_cameras"]]
+transform = Transform3D(-0.999813, -0.00729372, 0.0179351, 0.0185301, -0.0919398, 0.995592, -0.00561262, 0.995738, 0.0920577, 0.0312506, 10.5268, -0.137002)
+fov = 36.9
+
+[node name="Camera3D4" type="Camera3D" parent="." groups=["debug_cameras"]]
+transform = Transform3D(0.999931, 0, 0.0117808, -0.00110642, 0.99558, 0.0939107, -0.0117288, -0.0939172, 0.995511, 0.100186, 1, 1.56948)
+fov = 106.5
+
+[node name="Camera3D2" type="Camera3D" parent="." groups=["debug_cameras"]]
+transform = Transform3D(0.582719, 0, 0.812674, 0, 1, 0, -0.812674, 0, 0.582719, 3.60944, 1.06203, 0.161762)
+fov = 65.4
+
+[node name="FancyCamera" parent="." node_paths=PackedStringArray("look_at_") instance=ExtResource("5_rigv3")]
+unique_name_in_owner = true
+look_at_ = NodePath("../CameraFocus")

@@ -54,7 +54,7 @@ func _action_delegated_to_legs() -> bool:
 
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-	return player_sm.velocity_by_input(input, delta)
+	return player_sm.__velocity_by_input(input, delta)
 
 # ep 4: When a transition occurs, we ask three questions: 
 # 1. does something from the past force us to transition somewhere? 
@@ -88,7 +88,6 @@ func check_transition(_input: InputPackage) -> String:
 
 func _update(input: InputPackage, delta: float):
 	legs_sm.current_behavior.update(input, delta)
-	# used to be this. we need it here or ?
 
 	if depends_on_legs:
 		current_action = legs_sm.current_action
@@ -125,9 +124,8 @@ func _on_enter_state(input: InputPackage):
 		print_.prefix("PSM state", "enter: DEPENDENT state. Actions delegated to legs, NO SWITCHES ⚪⚪", 1)
 		legs_sm.switch_to(legs_behavior, input)
 	else: # state leads legs. RIGHT NOW ITS ONLY DOUBLE. complex attacks expecting
-		if legs_behavior.behavior_name != LS.legs_behavior_double:
-			push_warning("we found state which leads legs but not double legs. Investigate!!")
-
+		#if legs_behavior.behavior_name != LS.legs_behavior_double:
+			#push_warning("we found state which leads legs but not double legs. Investigate!!")
 		default_action_name = choose_default_action()
 		assert(default_action_name, state_name + " No default actions for non depended state which is probably an error ")
 		# if not default_action_name:
@@ -227,7 +225,7 @@ func update_resources(delta: float):
 func process_input_vector(input: InputPackage, delta: float):
 	# var input_direction = (player.camera_mount.basis * Vector3(-input.input_direction.x, 0, -input.input_direction.y)).normalized()
 	# todo: this is that strange valocity chain
-	var input_direction := player_sm.velocity_by_input(input, delta).normalized()
+	var input_direction := velocity_by_input(input, delta).normalized()
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
 	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))

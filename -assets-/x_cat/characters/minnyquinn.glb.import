@@ -15,9 +15,11 @@ dest_files=["res://.godot/imported/minnyquinn.glb-a3e48fa5864b1b2b693b112cf46ee6
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -32,26 +34,34 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={
 "materials": {
 "Cloth": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://misc/cat_adopt/assets/scalemail.tres"
 },
 "Eyes": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://misc/cat_adopt/assets/characters/eyes.tres"
 },
 "Hair": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://misc/cat_adopt/assets/characters/hair_material.tres"
 },
 "Metal": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://misc/cat_adopt/assets/metal_blue.tres"
 },
 "Skin": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": "res://misc/cat_adopt/assets/characters/skin_f.tres"
 }
 },

@@ -5,13 +5,24 @@ class_name FreeCameraState
 
 
 # Tells our camera what to focus on
-var look_at_: Node3D
+var look_at_: Node3D # CameraFocus node
 var offset: Vector3
+
+@export_group("Camera distance smoothing")
+@export var expand_time: float = 0.35 # how fast to float back to default
+@export var max_expand_speed: float = 12.0
+
+var _current_len: float
+var _default_len: float
 
 
 func initialise():
 	offset = fc.nest.global_position - fc.mount.global_position
 	look_at_ = fc.look_at_
+	fc.camera.global_position = fc.look_at_.global_position + offset
+
+	_default_len = offset.length()
+	_current_len = _default_len
 	
 	print("FreeCameraState ready()")
 	print("		look_at_ ", look_at_)
@@ -27,6 +38,125 @@ func update(delta: float):
 	_move_camera_mount()
 	_move_camera(delta)
 
+# @export_group("Camera Collision")
+# @export var camera_radius: float = 0.3
+# @export var collision_offset: float = 0.2
+@export var camera_radius: float = 0.15 # try 0.25–0.35
+
+
+func _move_camera(delta: float) -> void:
+	var from := fc.mount.global_position
+	var to := fc.nest.global_position
+	var arm_dir := (to - from).normalized()
+	var desired_len := (to - from).length()
+	var target_len: float = min(desired_len, _default_len)
+	var final_pos: Vector3
+
+	if not fc.__dev_camera_cols:
+		final_pos = from + arm_dir * _current_len
+		fc.camera.global_position = final_pos
+		u.safe_look_at(fc.camera, fc.focus.global_position)
+		return
+
+	var space_state := fc.camera.get_world_3d().direct_space_state
+	
+	# Calculate basis vectors perpendicular to the arm direction
+	# This ensures offsets are always relative to the camera's orientation
+	var right = Vector3.UP.cross(arm_dir).normalized()
+	if right.length() < 0.1: # Handle case when arm_dir is parallel to UP
+		right = Vector3.RIGHT.cross(arm_dir).normalized()
+	var up = arm_dir.cross(right).normalized()
+	
+	# Use multiple raycasts with offsets perpendicular to arm direction
+	# Build a local frame perpendicular to the arm (so offsets rotate with the arm)
+	var right_axis := arm_dir.cross(Vector3.UP)
+	if right_axis.length_squared() < 1e-4:
+		right_axis = arm_dir.cross(Vector3.FORWARD)
+	right_axis = right_axis.normalized()
+	var up_axis := right_axis.cross(arm_dir).normalized()
+
+	var collision_offset := 0.2 # keep your old margin if you like it
+	var ray_offsets := [
+		Vector3.ZERO,
+		right_axis * camera_radius,
+		- right_axis * camera_radius,
+		up_axis * camera_radius,
+		- up_axis * camera_radius,
+	]
+	
+	var min_hit_len = desired_len
+	
+	for offset_vec in ray_offsets:
+		var ray_from = from + offset_vec
+		var ray_to = to + offset_vec
+		
+		var query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
+		query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+		query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
+		
+		var result := space_state.intersect_ray(query)
+		if result:
+			# Instead of offsetting by normal, calculate distance along arm
+			# This handles grazing angles better
+			var hit_vec = result.position - from
+			var hit_dist_along_arm = hit_vec.dot(arm_dir)
+			min_hit_len = min(min_hit_len, hit_dist_along_arm)
+	
+	# Apply collision offset along the arm direction
+	if min_hit_len < desired_len:
+		target_len = min(min_hit_len - collision_offset, _default_len)
+	
+	# --- asymmetric smoothing (contract now, expand smoothly)
+	if target_len < _current_len:
+		_current_len = target_len # instant contract (A/C)
+	else:
+		var k := 1.0 - exp(-delta / expand_time) # smooth grow (B)
+		var step := (target_len - _current_len) * k
+		var cap := max_expand_speed * delta
+		if step > cap:
+			step = cap
+		_current_len += step
+
+	# --- place camera using the smoothed length
+	final_pos = from + arm_dir * _current_len
+	
+	# Final check to ensure we're not clipping through geometry
+	if _check_camera_penetration(final_pos):
+		final_pos = _resolve_penetration(from, final_pos, arm_dir)
+	
+	fc.camera.global_position = final_pos
+	u.safe_look_at(fc.camera, fc.focus.global_position)
+
+func _check_camera_penetration(camera_pos: Vector3) -> bool:
+	var space_state = fc.camera.get_world_3d().direct_space_state
+	
+	# Use a small sphere cast to check if camera would be inside geometry
+	var shape = SphereShape3D.new()
+	shape.radius = 0.3 # Camera volume radius
+	
+	var params = PhysicsShapeQueryParameters3D.new()
+	params.shape = shape
+	params.transform = Transform3D(Basis(), camera_pos)
+	params.collision_mask = fc.SPRING_ARM_COLLISION_MASK
+	params.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+	
+	var results = space_state.intersect_shape(params, 1)
+	return results.size() > 0
+
+func _resolve_penetration(from: Vector3, camera_pos: Vector3, direction: Vector3) -> Vector3:
+	var space_state = fc.camera.get_world_3d().direct_space_state
+	
+	# Cast a ray to find a safe position
+	var query := PhysicsRayQueryParameters3D.create(from, camera_pos)
+	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
+	
+	var result := space_state.intersect_ray(query)
+	if result:
+		# Move camera to the collision point with a safe offset
+		return result.position + result.normal * 0.3
+	
+	return camera_pos # Fallback to original position
 
 func _move_focus_point() -> void:
 	var camera_focus_position := look_at_.global_position # look_at_ = CameraFocus
@@ -58,37 +188,6 @@ func _move_camera_mount() -> void:
 	var camera_focus_position: Vector3 = fc.player.camera_focus.global_position
 	fc.mount.global_position = fc.mount.global_position.lerp(camera_focus_position, fc.FOLLOW_SPEED)
 	fc.nest.global_position = fc.mount.global_position + offset
-
-func _move_camera(delta: float) -> void:
-	# alternative from chat.
-	# @export var LERP_SPEED: float = 8.0
-	# var camera_nest_position = fc.nest.global_position
-	# var orig = fc.camera.global_transform.origin.lerp(camera_nest_position, delta * lerp_speed)
-	# fc.camera.global_transform = Transform3D(fc.camera.global_transform.basis, orig)
-	# fc.camera.look_at(fc.focus.global_position)
-	# Working fair original 
-	# if not fc.camera.position.is_equal_approx(fc.nest.position):
-	# 	fc.camera.position = fc.nest.position
-	# fc.camera.look_at(fc.focus.global_position)
-	var from := fc.mount.global_position
-	var to := fc.nest.global_position
-	var space_state := fc.camera.get_world_3d().direct_space_state
-
-	var query := PhysicsRayQueryParameters3D.create(from, to)
-	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
-	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK # define this in your FancyCamera if needed
-
-	var result := space_state.intersect_ray(query)
-
-	var final_pos := to
-
-	if result:
-		var hit_pos = result.position + result.normal * 0.05
-		if (hit_pos - from).length_squared() < (to - from).length_squared():
-			final_pos = hit_pos
-
-	fc.camera.global_position = final_pos
-	u.safe_look_at(fc.camera, fc.focus.global_position)
 
 	
 func input_mouse_movement(d_x: float, d_y: float) -> void:

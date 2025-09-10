@@ -21,15 +21,17 @@ class_name PlayerModel
 @onready var torso: ModifierAnimator = %Torso
 @onready var legs_animator: ModifierAnimator = %Legs
 @onready var _end: EndModifier = %_End
-@onready var limp: LimpModifier = %Limp
+#@onready var limp: LimpModifier = %Limp
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
+@onready var bones: Node3D = %bones
 
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	container.player = player
 	player_sm.player = player
 	
@@ -45,11 +47,13 @@ func _ready():
 
 	# DEBUG ANIMATIONS
 	_reload_run_anims_from_library()
-
+	
+	bones.accept_bones()
 
 func update(input: InputPackage, delta: float):
 	if fly_mode_enabled:
 		_handle_fly_mode(input, delta)
+		player.move_and_slide()
 		return
 
 	player_sm.update(input, delta)
@@ -89,7 +93,7 @@ var fly_speed := 15
 
 func _handle_fly_mode(input: InputPackage, delta: float):
 	var tracking_angular_speed := 4
-	var input_direction := __velocity_by_input(input, delta).normalized()
+	var input_direction := __fly_velocity_by_input(input, delta).normalized()
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
 	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
@@ -105,9 +109,6 @@ func _handle_fly_mode(input: InputPackage, delta: float):
 		player.velocity.y -= 8
 
 	
-	player.move_and_slide() # No gravity by default unless applied manually
-
-
 func __toggle_fly_mode():
 	fly_mode_enabled = !fly_mode_enabled
 	if fly_mode_enabled:
@@ -177,7 +178,7 @@ func __apply() -> void:
 		print_.prefix(L.DEBUG, "run anim not found -> " + anim_name)
 
 
-func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+func __fly_velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	var _velocity := Vector3.ZERO
 	var forward_speed := input.forward_input
 

@@ -27,4 +27,4 @@ func animate():
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	# todo: oh fuck what is this dependency
-	return player.model.player_sm.velocity_by_input(input, delta)
+	return player.model.player_sm.__velocity_by_input(input, delta)
