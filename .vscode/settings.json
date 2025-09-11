@@ -82,13 +82,13 @@
 		//
 		"folderPathColor.custom1": "#ffa9c8", // tender enemy
 		"folderPathColor.animation": "#d88ad8", // animation player
-		"folderPathColor.custom3": "#c3c78d", // dark misc yellow
-		"folderPathColor.custom4": "#92b69fe5", // utils
+		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
+		"folderPathColor.utils": "#92b69fe5", // utils
 		"folderPathColor.custom5": "#94f0c5d5", //or #a4d4b2 tender green 2 
-		"folderPathColor.custom6": "#dfdfdf", // white
+		"folderPathColor.white_": "#dfdfdf", // white
 		"folderPathColor.custom7": "#cdcf90", // yellow accent
-		"folderPathColor.custom8": "#e681bffb", // model accent
-		"folderPathColor.custom9": "#497cca", // state blue 
+		"folderPathColor.model": "#e681bffb", // model accent
+		"folderPathColor.states_blue": "#497cca", // state blue 
 		"folderPathColor.custom10": "#d1abe7", // states enemy
 		"folderPathColor.custom11": "#f1cf8ee3",
 		"folderPathColor.custom12": "#92b9e4", // 8aa8c9
@@ -109,16 +109,16 @@
 		// WHITY
 		{
 			"path": "logic/Player/PlayerModel/player_sm/_pl_state.gd",
-			"color": "custom6"
+			"color": "white_"
 		},
 		{
 			"path": "logic/Enemies/SimpleEnemy/SEStates/_base_se_state.gd",
-			"color": "custom6"
+			"color": "white_"
 		},
 		// ANIM
 		{
 			"path": "logic/Player/PlayerAnim/split_body_animator.gd",
-			"color": "custom2"
+			"color": "animation"
 		},
 		//
 		{
@@ -132,16 +132,16 @@
 		// MODEL
 		{
 			"path": "logic/Enemies/SimpleEnemy/se_model.gd",
-			"color": "custom8"
+			"color": "model"
 		},
 		{
 			"path": "logic/Player/PlayerModel/player_model.gd",
-			"color": "custom8"
+			"color": "model"
 		},
 		// DARK YELLOW
 		{
 			"path": "-assets-",
-			"color": "custom3"
+			"color": "dark_misc"
 		},
 		//
 		{
@@ -155,7 +155,7 @@
 		},
 		{
 			"path": "logic/Enemies/Gundyr",
-			"color": "custom2"
+			"color": "animation"
 		},
 		// CAMERA
 		{
@@ -164,13 +164,13 @@
 		},
 		// STATE
 		{
-			"path": "logic/Player/PlayerStates/move-fight",
-			"color": "custom9"
+			"path": "logic/Player/PlayerModel/player_sm/states",
+			"color": "states_blue"
 		},
 		// UTILS
 		{
 			"path": "logic/xUtils",
-			"color": "custom4"
+			"color": "utils"
 		},
 		// ANIM
 		{
@@ -247,7 +247,6 @@
 	//
 	// HIGHLIGHT EXTENSION
 	"highlight.regexes": {
-	
 		// Highlight every instance of "A." (e.g., A.my_static_method)
 		"\\b(A\\.)": {
 			"filterLanguageRegex": "gdscript",

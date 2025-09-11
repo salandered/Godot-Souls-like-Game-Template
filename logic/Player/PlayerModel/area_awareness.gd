@@ -137,9 +137,9 @@ func _good_candidate(target: Node3D) -> bool:
 
 	var player_to_target = (target.global_position - player.global_transform.origin).normalized()
 	var player_forward = player.global_transform.basis.z
-	if player_forward.dot(player_to_target) < 0:
-		# _print.call(target.label, "behind player")
-		return false
+	# if player_forward.dot(player_to_target) < 0:
+	# 	# _print.call(target.label, "behind player")
+	# 	return false
 	
 	return true
 

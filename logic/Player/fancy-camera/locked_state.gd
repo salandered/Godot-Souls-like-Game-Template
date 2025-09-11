@@ -1,106 +1,128 @@
 extends CameraState
 class_name LockedCameraState
 
+var target: Node3D
+var lock_offset: Vector3
 
-@onready var fc: FancyCamera = $".."
+# -- Blending State --
+var is_blending := false
+var blend_timer := 0.0
+var blend_duration := 0.4 # 0.3-0.6 seconds (shorter = snappier lock, longer = smoother)
 
-var look_at_: Node3D
-var offset: Vector3
+# State captured on the frame of locking, to anchor the blend
+var blend_start_yaw_rad := 0.0
+var blend_start_horizontal_len := 0.0
 
 
-var target_offset: Vector3
-var offset_transition_t := 0.0
+func switch_from_free(found_target: Node):
+	target = found_target.look_at_point
 
-func _ready():
-	look_at_ = fc.look_at_
-	print("LockedCameraState ready()")
-	print("		look_at_ ", look_at_)
+	# --- "Seed from reality, not state." ---
+	# Capture the true offset at the moment of locking to prevent any jump.
+	lock_offset = fc.nest.global_position - fc.mount.global_position
+	# lock_offset = fc.camera.global_position - fc.mount.global_position
+	
+	var cam_minus_mount := fc.camera.global_position - fc.mount.global_position
+	var err := (cam_minus_mount - lock_offset).length()
+	# print("[~~ lock: err_to_offset_on_entry=", err)
+	# --- Anchor the blend ---
+	# Store the initial conditions. The blend will always be from this
+	# fixed start-point to the moving end-point.
+	var current_offset_xz := Vector2(lock_offset.x, lock_offset.z)
+	blend_start_yaw_rad = current_offset_xz.angle()
 
+	blend_start_horizontal_len = current_offset_xz.length()
+	if blend_start_horizontal_len < 0.05: # optional to try
+		blend_start_horizontal_len = 0.05
+
+	is_blending = true
+	blend_timer = 0.0
+	
+	# print("[~~LOCK ENT post ", u.fr(), "]", fc.__dbg_main_info(), " target=", str(target))
 
 func update(delta: float) -> void:
-	# In locked state we try to position camera in a way that keeps the player between the Camera Nest and the target. 
-	# print(offset_transition_t)
-	if offset_transition_t < 1.0:
-		offset_transition_t = min(1.0, offset_transition_t + delta / fc.OFFSET_BLEND_DURATION_ON_LOCK)
-		offset = offset.lerp(target_offset, offset_transition_t)
-	
+	# print("[~~LOCK UPD pre ", u.fr(), "]", fc.__dbg_main_info())
+	# move the anchor points
 	_move_focus_point()
+	_move_camera_mount()
+	
+	# calculate the rotation based on their new positions
+	_rotate_offset_locked(delta)
+	
+	# position the camera elements
 	_move_camera_nest()
-	_move_camera()
-	_check_distance()
+	fc.camera_movement.move_camera(delta)
+
+	# print("[~~LOCK UPD post ", u.fr(), "]", fc.__Cvec(), fc.__CM(), fc.__CF())
+
 
 func _move_focus_point() -> void:
-	var new_focus = lerp(fc.focus.global_position, look_at_.global_position, fc.FOCUS_FOLLOWING_WEIGHT)
-	if offset_transition_t >= 1.0:
-		_rotate_offset_locked(new_focus)
-	fc.focus.global_position = new_focus
+	fc.focus.global_position = lerp_position_(fc.focus, target, fc.LOCKED_FOCUS_TARGET_WEIGHT)
 
-func _rotate_offset_locked(new_focus: Vector3) -> void:
-	# counts the direction from target to player, then builds the new offset Vector with this direction from the ground up, changing its X and Z coordinates and saving its Y coordinate.
-	var new_focus_projected := Vector3(new_focus.x, 0, new_focus.z)
-	var center_projected: Vector3 = fc.player.camera_focus.global_position
-	center_projected.y = 0
-	var offset_xz_length := sqrt(offset.x * offset.x + offset.z * offset.z)
-	var new_offset := (center_projected - new_focus_projected).normalized() * offset_xz_length
-	new_offset.y = offset.y
-	offset = new_offset
+func _move_camera_mount() -> void:
+	fc.mount.global_position = lerp_position_(fc.mount, fc.player.camera_focus, fc.LOCKED_MOUNT_CHEST_WEIGHT)
 
 func _move_camera_nest() -> void:
-	fc.mount.global_position = lerp(
-		fc.mount.global_position,
-		fc.player.camera_focus.global_position,
-		fc.CAM_MOUNT_FOLLOWING_WEIGHT
-	)
-	fc.nest.global_position = lerp(
-		fc.nest.global_position,
-		fc.mount.global_position + offset,
-		fc.CAM_NEST_FOLLOWING_WEIGHT
-	)
+	fc.nest.global_position = lerp_position_(fc.nest, fc.mount.global_position + lock_offset, fc.LOCKED_NEST_MOUNT_WEIGHT)
 
-func _move_camera() -> void:
-	var mount_pos := fc.mount.global_position
-	var nest_pos := fc.nest.global_position
-	var space_state := fc.camera.get_world_3d().direct_space_state
 
-	var query := PhysicsRayQueryParameters3D.create(mount_pos, nest_pos)
-	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
-	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
+func _rotate_offset_locked(delta: float) -> void:
+	var _off_before := lock_offset
 
-	var result = space_state.intersect_ray(query)
+	# desired direction is from the target to the camera's direct anchor (the mount).
+	var desired_dir_xz := Vector2(fc.mount.global_position.x - target.global_position.x, fc.mount.global_position.z - target.global_position.z).normalized()
 
-	var final_pos := nest_pos
-	if result:
-		var hit_pos = result.position + result.normal * 0.05
-		var max_dist = (nest_pos - mount_pos).length()
-		var actual_dist = (hit_pos - mount_pos).length()
-		if actual_dist < max_dist:
-			final_pos = hit_pos
+	# against zero radius (player is directly on top of the target or something)
+	if desired_dir_xz.length_squared() < 0.0001: return
 
-	fc.camera.global_position = final_pos
-	u.safe_look_at(fc.camera, fc.focus.global_position)
+	var desired_yaw := desired_dir_xz.angle()
+	var current_yaw := Vector2(_off_before.x, _off_before.z).angle()
+	# print("[~~lock: yaw_cur=", rad_to_deg(current_yaw), " yaw_des=", rad_to_deg(desired_yaw), " delta_wrapped=", rad_to_deg(wrapf(desired_yaw - current_yaw, -PI, PI)), " len_h_start=", blend_start_horizontal_len)
 
-func _check_distance() -> void:
-	# checks if the distance between the player and target is too big and drops the target if triggered
-	if fc.player.model.area_awareness.camera_focus_further_than(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
-		# print("dropping ", distance, " ", TARGET_DROP_DISTANCE_SQUARED)
-		_drop_target()
+	if is_blending:
+		# --- SMOOTH BLEND (YAW INTERPOLATION) ---
+		blend_timer += delta
+		var t_linear = clamp(blend_timer / blend_duration, 0.0, 1.0)
+		var t_eased := u.ease_in_out(t_linear)
 
-func input_target_lock():
-	_drop_target()
+		# get the target angle
+		var desired_yaw_rad := desired_dir_xz.angle()
+		
+		# Interpolate from the fixed starting yaw to the current desired yaw.
+		# lerp_angle correctly handles the shortest path (e.g., -170° to 170°).
+		var blended_yaw_rad := lerp_angle(blend_start_yaw_rad, desired_yaw_rad, t_eased)
+		
+		# Reconstruct the offset vector from the blended angle and fixed radius
+		var final_xz := Vector2.from_angle(blended_yaw_rad) * blend_start_horizontal_len
+		lock_offset.x = final_xz.x
+		lock_offset.z = final_xz.y
 
-func _drop_target() -> void:
-	print("DROP started")
-	fc.free_camera.look_at_ = fc.player.camera_focus
-	# offset reassignment is to avoid the camera leap, as the last offset the free camera remembers is the offset when it passed the priority to the locked state
-	# fc.free_camera.offset = fc.nest.global_position - fc.mount.global_position
-	var restored_offset = fc.nest.global_position - fc.mount.global_position
-	restored_offset = restored_offset.normalized() * fc.free_camera.offset.length()
-	fc.free_camera.offset = restored_offset
-	fc.current_state = fc.free_camera
-	fc.locked_target = fc.nest
-	print("		fc.locked_target ", fc.locked_target)
-	print("DROP ended")
+		if t_linear >= 1.0:
+			is_blending = false
+			# print("~~ LOCK BLEND FINISHED")
+	else:
+		# --- RESPONSIVE LOCK (DIRECT ASSIGNMENT) ---
+		# After blending, snap directly to the desired orientation for control
+		var current_horizontal_len = Vector2(lock_offset.x, lock_offset.z).length()
+		
+		# against a zero length if camera is perfectly vertical
+		if current_horizontal_len < 0.0001:
+			current_horizontal_len = blend_start_horizontal_len
+
+		var final_xz = desired_dir_xz * current_horizontal_len
+		lock_offset.x = final_xz.x
+		lock_offset.z = final_xz.y
+
+	# DEV
+	# var nest_mount_vec_len := (fc.nest.global_position - fc.mount.global_position).length()
+	# var delta_off_angle: float = u.pp_v3_angle_deg(_off_before, lock_offset, false)
+	# var arc_len = snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
+	# print("[~~LOCK UPD rot ", u.fr(), "]",
+	# 	" angle_delta_deg=", str(delta_off_angle),
+	# 	" arc_len=", str(arc_len),
+	# 	" off_b4=", u.pp_vec3(_off_before), " |len=", u.round_01(lock_offset.length()),
+	# 	" off_after=", u.pp_vec3(lock_offset), " |len=", u.round_01(lock_offset.length()))
+
 
 func input_mouse_movement(d_x: float, d_y: float) -> void:
-	# nothing to do in locked state
-	pass
+	lock_offset = vertical_mouse_movement(d_x, d_y, lock_offset)

@@ -13,4 +13,5 @@ script = ExtResource("1_tplgi")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 transform = Transform3D(0.327567, 5.55112e-17, 0, 0, 0.161903, -4.96308e-24, 0, 0, 0.327567, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_uoyj3")

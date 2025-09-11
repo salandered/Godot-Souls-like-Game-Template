@@ -11,6 +11,7 @@ func gather_input(delta: float) -> InputPackage:
 	var new_input = InputPackage.new()
 
 	_gather_lock_target(new_input, delta)
+	
 
 	# FOR FANCY CAMERA
 	new_input.forward_input = Input.get_action_strength(RawAction.move_forward) \

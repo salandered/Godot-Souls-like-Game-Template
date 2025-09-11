@@ -2,31 +2,61 @@ extends Node
 class_name FancyCamera
 
 
-@export_group("Locked camera")
-@export var FOCUS_FOLLOWING_WEIGHT = 0.1
-@export var CAM_MOUNT_FOLLOWING_WEIGHT = 0.12
-@export var CAM_NEST_FOLLOWING_WEIGHT = 0.07
+@export_group("Following Weights")
+@export var FREE_MOUNT_CHEST_WEIGHT: float = 0.1
+@export var FREE_FOCUS_CHEST_WEIGHT: float = 0.1
+@export var FREE_NEST_MOUNT_WEIGHT: float = 0.9
+
+@export var LOCKED_FOCUS_TARGET_WEIGHT: float = 0.05 # Base 0.05. Range: 0.03 to 0.08
+@export var LOCKED_MOUNT_CHEST_WEIGHT: float = 0.12
+# NOTE: important to keep them equal
+#       If different, big camera snap on unlocking.  
+#       If both small, free cam super unresponsive 
+@export var LOCKED_NEST_MOUNT_WEIGHT: float = FREE_NEST_MOUNT_WEIGHT
+
+@export_group("Blend change state Settings")
 @export var OFFSET_BLEND_DURATION_ON_LOCK := 0.6
-@export var TARGET_DROP_DISTANCE_SQUARED = 200
+@export var OFFSET_BLEND_DURATION_ON_UNLOCK := 0.6
+@export var FREEZE_FRAMES_ON_UNLOCK := 1
+
+@export_group("Collision Settings")
+@export var COL_EXPAND_TIME: float = 0.35 # how fast to float back to default
+@export var COL_MAX_EXPAND_SPEED: float = 12.0
+@export var COL_OFFSET: float = 0.2
+@export var COLLISION_CAM_RADIUS: float = 0.15 # try 0.25–0.35
+
+@export_group("CAM_MOVEMENT")
+@export var HOR_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
+@export var VER_SENSE: float = 0.8 # 70–90% of horizontal (so 1.8 – 5.0 if you follow the same 0.001 scale).
+# θ = 0° → camera straight above the mount (boom pointing straight up).
+# θ = 90° → camera level with the mount (boom perfectly horizontal).
+# θ = 180° → camera straight below the mount.
+# => min is kinda max (high cam angle), and max is lower camera guard
+# also todo keep them in degs, and rads are in math
+@export var MIN_VERTICAL_ANGLE: float = deg_to_rad(22.0) # ≈ 0.384 # 15 – 25
+@export var MAX_VERTICAL_ANGLE: float = deg_to_rad(130.0) # ≈ 2.268 # 120 – 135
+# Bigger = less flicker on the rail, smaller = crisper limit
+@export var VERT_EPS: float = deg_to_rad(0.3) # ≈ 0.0052 | 0.003 is ~0.17° tolerance # 0.2 – 0.6
 
 
-@export_group("Free camera")
-@export var HOR_SENSE: float = 1.0
-@export var VER_SENSE: float = 1.0
-@export var MIN_VERTICAL_ANGLE: float = 0.12
-@export var MAX_VERTICAL_ANGLE: float = 2.2
-@export var FOLLOW_SPEED: float = 0.05
+@export var TARGET_DROP_DISTANCE_SQUARED = 400
 
-
-#@onready var csg_sphere_nest: CSGSphere3D = %CSGSphereNest
-@export var look_at_: Node3D # CameraFocus node here!
+@export var look_at_: Node3D # CameraFocus node or target
 
 # DOCS
 # - Camera looks constantly at Focus Point and tries to position itself on Camera Nest, located relatively to the Focus Point.
 # - Focus Point follows target, either the player or the enemy.
 # - Offset Vector is important, it defines the camera's arm length.
-# - Camera Focus is the player's chest zone that is being followed by a Focus Point.
-# - Focus Poing, Mount, Nest and PlayerCamera are children of Fancy Camera.
+# - Camera Focus is the player's chest zone that is being followed by a Focus Point while in free state. Child of the Player
+# - Camera Mount is a point where the camera mount is located. For now it follows player's chest and equal to FocusPoint in a free state.
+# - Camera Nest is a point where camera should be, located relative to the Focus Point
+# - Focus Point, Mount, Nest and PlayerCamera are children of Fancy Camera.
+#
+# - Camera flows expectedly:
+#	Focus Point -> LookAt
+#	Camera Mount -> Player
+#	Camera Nest -> Camera Mount + offset
+#	Camera -> Camera Nest
 @onready var player: Princess = $".."
 @onready var focus: Node3D = %FocusPoint
 @onready var mount: Node3D = %CameraMount
@@ -34,64 +64,109 @@ class_name FancyCamera
 @onready var camera: Camera3D = %PlayerCamera
 
 @onready var current_state: CameraState = $FreeCamera
-@onready var free_camera: FreeCameraState = %FreeCamera
-@onready var locked_camera: LockedCameraState = %LockedCamera
+@onready var free_state: FreeCameraState = %FreeCamera
+@onready var locked_state: LockedCameraState = %LockedCamera
 
-var fov_pointer := 0
+@onready var camera_movement: CameraMovement = %CameraMovement
+
+@export_group("Locking Smoothing")
+@export var LOCKED_MAX_YAW_SPEED_DEG_PER_SEC: float = 360.0
 
 var SPRING_ARM_COLLISION_MASK = 1
-@export var PLAYER_ROTATE_SPEED: float = 5.0
-
 
 var locked_target: Node3D
 
-var __dev_camera_cols := false
+var accumulated_mouse_delta := Vector2.ZERO
 
-var csg_objects = []
+# DEV
+var __fov_pointer := 0
+var __dev_camera_cols := true
+var __csg_objects = []
 
-
-func _get_descendants(node: Node) -> Array:
-	var descendants := []
-	for child in node.get_children():
-		if child is CSGBox3D or child is CSGSphere3D:
-			descendants.append(child)
-		descendants.append_array(_get_descendants(child))
-	return descendants
 
 func _ready() -> void:
-	# TODO: length is changing after locking
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	free_camera.initialise()
-	print('FancyCamera ready ')
 	
+	__csg_objects = __get_descendants(self)
 	
-	csg_objects = _get_descendants(self)
+	initialise()
+
+
+func initialise():
+	# POSISITONS INIT
+	# 1. look_at_ is always Player's chest (CameraFocus) in the Free State
+	# 2. Free State is always first state to enter 
+	# => we treat look_at_ as chest here in initialise() 
+	var chest = look_at_
+
+	focus.global_position = chest.global_position # Focus Point to player's chest
+	mount.global_position = chest.global_position # same
+	
+	# Calculate initial_offset based on player's forward direction
+	# was: initial_offset = fc.nest.global_position - fc.mount.global_position
+	# HERE IS INITIAL LENGTH BETWEEN PLAYER AND CAMERA. NOT IN THE VIEWPORT
+	var _player_forward := -player.global_transform.basis.z
+	var initial_offset := _player_forward * 3.0 + Vector3(0, 2.0, 0) # 5 units behind, 2 units up
+	
+	nest.global_position = mount.global_position + initial_offset # nest relative to mount using the free_offset
+	
+	camera.global_position = nest.global_position # may be position closer in case of wall
+	
+	# FREE STATE INIT
+	free_state.fc = self
+	free_state.chest = chest
+	free_state.free_offset = initial_offset
+
+	# LOCKED STATE INIT
+	locked_state.fc = self
+
+	# CAMERA INIT
+	camera_movement._default_len = initial_offset.length()
+	camera_movement._current_len = initial_offset.length()
+	
+	print("Fancy Camera Initialisation ended.")
+	print("    initial_offset is ", __free_off())
 
 
 func _process(delta: float) -> void:
-	var input: InputPackage = player.model.area_awareness.last_input_package
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
+	var d_hor := accumulated_mouse_delta.x
+	var d_ver := accumulated_mouse_delta.y
+	accumulated_mouse_delta = Vector2.ZERO
 	
-	
-	if input.target_lock_pressed:
-		current_state.input_target_lock()
+	if Input.is_action_just_pressed(RawAction.lock_target):
+		if current_state == free_state:
+			var found_target = player.model.area_awareness.find_target()
+			if found_target:
+				print("~~~~LOCK PRESSED AND FOUND")
+				print("[~~FREE->LOCKED ", u.fr() + "] ", __Cvec(), __free_off(), " target=", str(found_target))
+				
+				locked_target = found_target
+				current_state = locked_state
+				
+				locked_state.switch_from_free(locked_target)
+			else:
+				print("xLOCK NOT")
+		elif current_state == locked_state:
+			print_.prefix("UNLOCK", "fr_n " + str(u.fr()))
+			locked_target = nest
+			current_state = free_state
+			free_state.switch_from_locked()
 
+	current_state.input_mouse_movement(d_hor, d_ver)
 	current_state.update(delta)
 
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		var d_hor = event.relative.x
-		var d_ver = event.relative.y
-		current_state.input_mouse_movement(d_hor, d_ver)
+		accumulated_mouse_delta += event.relative
 
-	
 	if event.is_action_released("dev_camera_fov"):
-		_change_fov()
+		__change_fov()
 	
 	if event.is_action_pressed("debug_toggle_nest"):
-		print("Toggling visibility of CSG objects for ", len(csg_objects), " objects")
-		for obj in csg_objects:
+		print("Toggling visibility of CSG objects for ", len(__csg_objects), " objects")
+		for obj in __csg_objects:
 			obj.visible = not obj.visible
 
 	if event.is_action_pressed("dev_camera_cols"):
@@ -99,11 +174,73 @@ func _input(event):
 		print("dev_camera_cols")
 
 
-func _change_fov():
+# DEV
+
+func __dbg_main_info() -> String:
+	var r = __Cvec() + __Mvec() + __Nvec() + __Fvec() + __free_off() + __lock_off()
+	return r
+
+func __free_off() -> String:
+	var r = " free off=" + u.pp_vec3(free_state.free_offset) + " len=" + u.round_01(free_state.free_offset.length())
+	return r
+
+func __lock_off() -> String:
+	var r = " lock off=" + u.pp_vec3(locked_state.lock_offset) + " len=" + u.round_01(locked_state.lock_offset.length())
+	return r
+
+func __Cvec() -> String:
+	return " C=" + u.pp_vec3(camera.global_position)
+
+func __Mvec() -> String:
+	return " M=" + u.pp_vec3(mount.global_position)
+
+func __Nvec() -> String:
+	return " N=" + u.pp_vec3(nest.global_position)
+
+func __Fvec() -> String:
+	return " F=" + u.pp_vec3(focus.global_position)
+
+func __CP() -> String:
+	return " C->Pl=" + u.round_01((camera.global_position - player.camera_focus.global_position).length())
+
+func __CN() -> String:
+	return " C->N=" + u.round_01((camera.global_position - nest.global_position).length())
+
+func __CM() -> String:
+	return " C->M=" + u.round_01((camera.global_position - mount.global_position).length())
+
+func __CF() -> String:
+	return " C->F=" + u.round_01((camera.global_position - focus.global_position).length())
+
+func __angle_player_camera_target() -> String:
+	# Vectors from player and camera to the target, projected to XZ
+	var player_to_target = Vector2(locked_target.global_position.x - player.camera_focus.global_position.x, locked_target.global_position.z - player.camera_focus.global_position.z).normalized()
+	var camera_to_target = Vector2(locked_target.global_position.x - camera.global_position.x, locked_target.global_position.z - camera.global_position.z).normalized()
+
+	var angle := str(rad_to_deg(player_to_target.angle_to(camera_to_target)))
+	return angle
+
+
+func __change_fov():
 	print("changed fov")
-	fov_pointer += 1
+	__fov_pointer += 1
 	var fovs = [10, 25, 50, 100]
-
-	var fov = fovs[fov_pointer % fovs.size()]
-
+	var fov = fovs[__fov_pointer % fovs.size()]
 	camera.fov = fov
+
+
+func __get_descendants(node: Node) -> Array:
+	var descendants := []
+	for child in node.get_children():
+		if child is CSGBox3D or child is CSGSphere3D:
+			descendants.append(child)
+		descendants.append_array(__get_descendants(child))
+	return descendants
+
+
+# TODO: think of renaming
+# Boom: vector from pivot (mount/chest) to the camera. free_offset / lock_offset.
+# Boom length: _default_len and _current_len.
+# Pivot: the anchor to orbit around — mount.
+# Desired/ideal camera: nest (pre-collision point).
+# Resolved/actual camera: camera after collision solver.

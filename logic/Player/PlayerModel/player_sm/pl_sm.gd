@@ -63,26 +63,6 @@ func update(input: InputPackage, delta: float) -> void:
 ## TODO: i dont fucking know there to put this function! 
 ##       also it is a hack, i dont know how to glue fancy camera with changing player velocity for now
 func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-	# TEST
-	# var velocity = player.velocity
-	# var raw_input := Input.get_vector(RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
-	# var move_speed := 8.0
-	# var acceleration := 4.0
-	# var stopping_speed := 1.0
-	# var _move_direction := Vector3.ZERO
-	# # This is to ensure that diagonal input isn't stronger than axis aligned input
-	# _move_direction.x = raw_input.x * sqrt(1.0 - raw_input.y * raw_input.y / 2.0)
-	# _move_direction.z = raw_input.y * sqrt(1.0 - raw_input.x * raw_input.x / 2.0)
-	# _move_direction = player.fancy_camera.camera.global_transform.basis * _move_direction
-	# _move_direction.y = 0.0
-	# var y_velocity = velocity.y
-	# velocity.y = 0.0
-	# velocity = velocity.lerp(_move_direction * move_speed, acceleration * delta)
-	# if _move_direction.length() == 0 and velocity.length() < stopping_speed:
-	# 	velocity = Vector3.ZERO
-	# velocity.y = 0
-	# return velocity
-	# TEST END
 	var _velocity := Vector3.ZERO
 	var forward_speed := input.forward_input
 	var orbit_speed := input.orbit_input
@@ -111,3 +91,25 @@ func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 		var d_vector := grounded_target - rotated_dir - player.global_position
 		_velocity += d_vector / delta
 	return _velocity
+
+
+	# TEST
+	# var velocity = player.velocity
+	# var raw_input := Input.get_vector(RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
+	# var move_speed := 8.0
+	# var acceleration := 4.0
+	# var stopping_speed := 1.0
+	# var _move_direction := Vector3.ZERO
+	# # This is to ensure that diagonal input isn't stronger than axis aligned input
+	# _move_direction.x = raw_input.x * sqrt(1.0 - raw_input.y * raw_input.y / 2.0)
+	# _move_direction.z = raw_input.y * sqrt(1.0 - raw_input.x * raw_input.x / 2.0)
+	# _move_direction = player.fancy_camera.camera.global_transform.basis * _move_direction
+	# _move_direction.y = 0.0
+	# var y_velocity = velocity.y
+	# velocity.y = 0.0
+	# velocity = velocity.lerp(_move_direction * move_speed, acceleration * delta)
+	# if _move_direction.length() == 0 and velocity.length() < stopping_speed:
+	# 	velocity = Vector3.ZERO
+	# velocity.y = 0
+	# return velocity
+	# TEST END

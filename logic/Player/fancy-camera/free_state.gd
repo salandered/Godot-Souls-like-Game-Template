@@ -1,237 +1,91 @@
 extends CameraState
 class_name FreeCameraState
 
-@onready var fc: FancyCamera = $".."
 
+var chest: Node3D # CameraFocus node while not locked
+var free_offset: Vector3
 
-# Tells our camera what to focus on
-var look_at_: Node3D # CameraFocus node
-var offset: Vector3
-
-@export_group("Camera distance smoothing")
-@export var expand_time: float = 0.35 # how fast to float back to default
-@export var max_expand_speed: float = 12.0
-
-var _current_len: float
-var _default_len: float
-
-
-func initialise():
-	offset = fc.nest.global_position - fc.mount.global_position
-	look_at_ = fc.look_at_
-	fc.camera.global_position = fc.look_at_.global_position + offset
-
-	_default_len = offset.length()
-	_current_len = _default_len
+func switch_from_locked():
+	print("DROP started")
+	chest = fc.player.camera_focus # Players chest
+	var restored_offset = fc.nest.global_position - fc.mount.global_position
+	free_offset = restored_offset.normalized() * free_offset.length()
+	# free_offset = fc.nest.global_position - fc.mount.global_position
+	# second option against snapping, but optional
+	# _current_len = (fc.nest.global_position - fc.mount.global_position).length()
 	
-	print("FreeCameraState ready()")
-	print("		look_at_ ", look_at_)
-	print("		offset ", offset)
+	print("DROP ended")
 
-
+# region: old docs
+# Character moved: 
+# - First Focus Point follows the character. 
+# - Then Camera Mount and Camera Nest mimics Focus movements
+#   we don't want to change the free_offset length, and we don't want to simply translate it.
+# - In the end, adjust camera position and the line of sight.
+# endregion
 func update(delta: float):
-	# Imagine, the character moved. 
-	# - First, we make the Focus Point the character. The core function is `rotate_offset`. 
-	# - Then, we adjust Camera Mount and Camera Nest to mimic Focus movements, but we don't want to change the offset length, and we don't want to simply translate it.
-	# - Then, in the end, we adjust camera position and the line of sight.
-	_move_focus_point()
+	var prev_focus_pos = fc.focus.global_position
+
+	_move_focus_point() # changes fc.focus
+
+	_rotate_offset(prev_focus_pos, fc.focus.global_position)
+
 	_move_camera_mount()
-	_move_camera(delta)
+	_move_camera_nest()
 
-# @export_group("Camera Collision")
-# @export var camera_radius: float = 0.3
-# @export var collision_offset: float = 0.2
-@export var camera_radius: float = 0.15 # try 0.25–0.35
+	fc.camera_movement.move_camera(delta)
+	
 
-
-func _move_camera(delta: float) -> void:
-	var from := fc.mount.global_position
-	var to := fc.nest.global_position
-	var arm_dir := (to - from).normalized()
-	var desired_len := (to - from).length()
-	var target_len: float = min(desired_len, _default_len)
-	var final_pos: Vector3
-
-	if not fc.__dev_camera_cols:
-		final_pos = from + arm_dir * _current_len
-		fc.camera.global_position = final_pos
-		u.safe_look_at(fc.camera, fc.focus.global_position)
-		return
-
-	var space_state := fc.camera.get_world_3d().direct_space_state
-	
-	# Calculate basis vectors perpendicular to the arm direction
-	# This ensures offsets are always relative to the camera's orientation
-	var right = Vector3.UP.cross(arm_dir).normalized()
-	if right.length() < 0.1: # Handle case when arm_dir is parallel to UP
-		right = Vector3.RIGHT.cross(arm_dir).normalized()
-	var up = arm_dir.cross(right).normalized()
-	
-	# Use multiple raycasts with offsets perpendicular to arm direction
-	# Build a local frame perpendicular to the arm (so offsets rotate with the arm)
-	var right_axis := arm_dir.cross(Vector3.UP)
-	if right_axis.length_squared() < 1e-4:
-		right_axis = arm_dir.cross(Vector3.FORWARD)
-	right_axis = right_axis.normalized()
-	var up_axis := right_axis.cross(arm_dir).normalized()
-
-	var collision_offset := 0.2 # keep your old margin if you like it
-	var ray_offsets := [
-		Vector3.ZERO,
-		right_axis * camera_radius,
-		- right_axis * camera_radius,
-		up_axis * camera_radius,
-		- up_axis * camera_radius,
-	]
-	
-	var min_hit_len = desired_len
-	
-	for offset_vec in ray_offsets:
-		var ray_from = from + offset_vec
-		var ray_to = to + offset_vec
-		
-		var query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
-		query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
-		query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
-		
-		var result := space_state.intersect_ray(query)
-		if result:
-			# Instead of offsetting by normal, calculate distance along arm
-			# This handles grazing angles better
-			var hit_vec = result.position - from
-			var hit_dist_along_arm = hit_vec.dot(arm_dir)
-			min_hit_len = min(min_hit_len, hit_dist_along_arm)
-	
-	# Apply collision offset along the arm direction
-	if min_hit_len < desired_len:
-		target_len = min(min_hit_len - collision_offset, _default_len)
-	
-	# --- asymmetric smoothing (contract now, expand smoothly)
-	if target_len < _current_len:
-		_current_len = target_len # instant contract (A/C)
-	else:
-		var k := 1.0 - exp(-delta / expand_time) # smooth grow (B)
-		var step := (target_len - _current_len) * k
-		var cap := max_expand_speed * delta
-		if step > cap:
-			step = cap
-		_current_len += step
-
-	# --- place camera using the smoothed length
-	final_pos = from + arm_dir * _current_len
-	
-	# Final check to ensure we're not clipping through geometry
-	if _check_camera_penetration(final_pos):
-		final_pos = _resolve_penetration(from, final_pos, arm_dir)
-	
-	fc.camera.global_position = final_pos
-	u.safe_look_at(fc.camera, fc.focus.global_position)
-
-func _check_camera_penetration(camera_pos: Vector3) -> bool:
-	var space_state = fc.camera.get_world_3d().direct_space_state
-	
-	# Use a small sphere cast to check if camera would be inside geometry
-	var shape = SphereShape3D.new()
-	shape.radius = 0.3 # Camera volume radius
-	
-	var params = PhysicsShapeQueryParameters3D.new()
-	params.shape = shape
-	params.transform = Transform3D(Basis(), camera_pos)
-	params.collision_mask = fc.SPRING_ARM_COLLISION_MASK
-	params.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
-	
-	var results = space_state.intersect_shape(params, 1)
-	return results.size() > 0
-
-func _resolve_penetration(from: Vector3, camera_pos: Vector3, direction: Vector3) -> Vector3:
-	var space_state = fc.camera.get_world_3d().direct_space_state
-	
-	# Cast a ray to find a safe position
-	var query := PhysicsRayQueryParameters3D.create(from, camera_pos)
-	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
-	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
-	
-	var result := space_state.intersect_ray(query)
-	if result:
-		# Move camera to the collision point with a safe offset
-		return result.position + result.normal * 0.3
-	
-	return camera_pos # Fallback to original position
+	# print("[~~FREE UPD post", u.fr(), "]", fc.__dbg_main_info())
 
 func _move_focus_point() -> void:
-	var camera_focus_position := look_at_.global_position # look_at_ = CameraFocus
-	var focus_point_position := fc.focus.global_position
-	if not focus_point_position.is_equal_approx(camera_focus_position):
-		var new_focus = lerp(focus_point_position, camera_focus_position, fc.FOLLOW_SPEED)
-		_rotate_offset(new_focus)
-		fc.focus.global_position = new_focus
+	# chest is CameraFocus (chest) while in free state
+	if not fc.focus.global_position.is_equal_approx(chest.global_position):
+		# Focus Point follows player's chest
+		fc.focus.global_position = lerp_position_(fc.focus, chest, fc.FREE_FOCUS_CHEST_WEIGHT)
 
-func _rotate_offset(new_focus: Vector3) -> void:
-	#  States from one offset to another after Focus Point movement. 
-	#  To do it we count this angle and rotate the offset by the vertical axis. 
-	#  Additional vars  with zero and Y coordinate is due to wanting only the angle of the projected horizontally picture 
-	#  		and not the angle in 3D between these vectors. 
-	#  Decider part is once again uses the cross product to decide if we want to rotate to the right or to the left.
-	var new_focus_projected := Vector3(new_focus.x, 0, new_focus.z)
-	var old_offset_projected := Vector3(-offset.x, 0, -offset.z)
-	var center := fc.focus.global_position + offset
-	var center_projected := Vector3(center.x, 0, center.z)
+# region: old docs
+#  from one free_offset to another after Focus Point movement. 
+#  To do it we count this angle and rotate the free_offset by the vertical axis. 
+#  Additional vars  with zero and Y coordinate is due to wanting only the angle of the projected horizontally picture 
+#  		and not the angle in 3D between these vectors. 
+#  Decider part is once again uses the cross product to decide if we want to rotate to the right or to the left.
+# endregion
+func _rotate_offset(prev_focus_pos: Vector3, new_focus_pos: Vector3) -> void:
+	var new_focus_xz := Vector3(new_focus_pos.x, 0, new_focus_pos.z)
+	var old_offset_xz := Vector3(-free_offset.x, 0, -free_offset.z)
+	# if prev_focus_pos is changed to new, then no circular movement
+	var center := prev_focus_pos + free_offset
+	var center_xz := Vector3(center.x, 0, center.z)
 
-	var new_direction := new_focus_projected - center_projected
-	var alpha := new_direction.angle_to(old_offset_projected)
+	var new_direction := new_focus_xz - center_xz
+	var alpha := new_direction.angle_to(old_offset_xz)
 
-	var decider = new_direction.cross(old_offset_projected)
+	var decider = new_direction.cross(old_offset_xz)
 	var signed_alpha: float = alpha if decider.y < 0 else -alpha
-	offset = offset.rotated(Vector3.UP, signed_alpha)
+	free_offset = free_offset.rotated(Vector3.UP, signed_alpha)
+
 
 func _move_camera_mount() -> void:
-	var camera_focus_position: Vector3 = fc.player.camera_focus.global_position
-	fc.mount.global_position = fc.mount.global_position.lerp(camera_focus_position, fc.FOLLOW_SPEED)
-	fc.nest.global_position = fc.mount.global_position + offset
+	fc.mount.global_position = lerp_position_(fc.mount, fc.player.camera_focus, fc.FREE_MOUNT_CHEST_WEIGHT)
 
-	
-func input_mouse_movement(d_x: float, d_y: float) -> void:
-	# takes the Delta mouse movement and somehow counts a Delta angle from that movement length.
-	# Then, we rotate offset vector by that angle using the correspondent axis.
-	# Delta movements are very small, and `sin(Alpha) ~ Alpha`. 
+func _move_camera_nest() -> void:
+	fc.nest.global_position = lerp_position_(fc.nest, fc.mount.global_position + free_offset, fc.FREE_NEST_MOUNT_WEIGHT)
+
+
+# region: old docs
+	# takes the Delta 🖱️ movement and somehow counts a Delta angle from that movement length.
+	# Then, we rotate free_offset vector by that angle using the correspondent axis.
+	# Delta movement is small => sin(Alpha) ~ Alpha. 
 	#    => divide by a thousand and multiply by a sensitivity number for the user to modify the sensitivity.
 	# For the horizontal movement, it's always ok because the rotation axis is just a vertical axis.
 	# The axis of vertical rotation is dynamic; we need to calculate it.
 	#    - Use vector operation called Vector Cross Product (or Vector Crossing). 
 	#			(Built-in way to get a vector which is perpendicular to two given vectors simultaneously.)
-	#    - One of such vectors is the vertical axis, and the other one is just our offset.
-	offset = offset.rotated(Vector3.UP, -d_x * fc.HOR_SENSE * 0.001)
+	#    - One of such vectors is the vertical axis, and the other one is just our free_offset.
+func input_mouse_movement(d_x: float, d_y: float) -> void:
+	# HORIZONTAL
+	free_offset = free_offset.rotated(Vector3.UP, -d_x * fc.HOR_SENSE * 0.001)
 
-	var axis := offset.cross(Vector3.UP).normalized()
-	var angle = d_y * fc.VER_SENSE * 0.001
-	var new_offset = offset.rotated(axis, angle)
-	var new_offset_angle = new_offset.angle_to(Vector3.UP)
-	if new_offset_angle > fc.MIN_VERTICAL_ANGLE and new_offset_angle < fc.MAX_VERTICAL_ANGLE:
-		offset = new_offset
-
-func input_target_lock():
-	var found_target = fc.player.model.area_awareness.find_target()
-	if found_target:
-		fc.locked_target = found_target
-		print("		fc.found_target ", fc.locked_target)
-		fc.current_state = fc.locked_camera
-		fc.locked_camera.look_at_ = fc.locked_target.look_at_point
-		
-		# fc.locked_camera.offset = fc.nest.global_position - fc.mount.global_position
-		fc.locked_camera.offset = offset
-		fc.locked_camera.target_offset = _calc_locked_offset(found_target, offset)
-		fc.locked_camera.offset_transition_t = 0.0
-
-		print("LOCK SUCCESFULL")
-	else:
-		print("xLOCK NOT")
-
-func _calc_locked_offset(locked_target: Node3D, offset_: Vector3) -> Vector3:
-	var new_focus = locked_target.look_at_point.global_position
-	var new_focus_projected := Vector3(new_focus.x, 0, new_focus.z)
-	var center_projected = fc.player.camera_focus.global_position
-	center_projected.y = 0
-	var offset_xz_length := sqrt(offset_.x * offset_.x + offset_.z * offset_.z)
-	var new_offset = (center_projected - new_focus_projected).normalized() * offset_xz_length
-	new_offset.y = offset_.y
-	return new_offset
+	# VERTICAL 
+	free_offset = vertical_mouse_movement(d_x, d_y, free_offset)

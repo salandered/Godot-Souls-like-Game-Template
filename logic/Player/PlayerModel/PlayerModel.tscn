@@ -893,6 +893,7 @@ libraries = {
 }
 
 [node name="_dev" type="Node3D" parent="."]
+visible = false
 
 [node name="mesh" type="Node3D" parent="_dev"]
 
@@ -1704,6 +1705,7 @@ transform = Transform3D(1, 1.78814e-07, -4.47035e-07, 5.36442e-07, 1, 7.7486e-07
 [node name="SwordOh" parent="bones/RightWrist/WeaponSocket" node_paths=PackedStringArray("holder") groups=["players_weapon"] instance=ExtResource("12_u3ttd")]
 unique_name_in_owner = true
 transform = Transform3D(0.155062, 0.932331, 0.326672, -0.876806, 0.282232, -0.389304, -0.455157, -0.226062, 0.861236, 0, 0, 0)
+visible = false
 collision_layer = 0
 collision_mask = 0
 weapon_name = "player_sword"
@@ -1711,19 +1713,22 @@ holder = NodePath("../../../..")
 
 [node name="CSGTorus3D-TODO-bracelett" type="CSGTorus3D" parent="bones/RightWrist"]
 transform = Transform3D(0.0672514, 4.44089e-16, 0, 4.44089e-16, 0.0672514, 1.51592e-16, 0, 1.51592e-16, 0.0672514, 0, 0, 0)
+visible = false
 
 [node name="LeftWrist2" type="BoneAttachment3D" parent="bones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.72729e-08, 0.997523, 0.0155431)
+transform = Transform3D(0.5765446, -0.117826015, -0.8085254, -0.020611465, 0.9871354, -0.15855241, 0.81680566, 0.108077414, 0.566699, -0.00681533, 0.847862, 0.00876675)
+visible = false
 bone_name = "Hips"
 bone_idx = 1
 use_external_skeleton = true
-external_skeleton = NodePath("")
+external_skeleton = NodePath("../../GeneralSkeleton")
 
 [node name="root" type="BoneAttachment3D" parent="bones"]
 bone_name = "Root"
 bone_idx = 0
 use_external_skeleton = true
-external_skeleton = NodePath("")
+external_skeleton = NodePath("../../GeneralSkeleton")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="bones/root"]
 transform = Transform3D(0.224402, 0, 0, 0, 0.224402, 0, 0, 0, 0.224402, -0.565065, 0, 0.0457371)
+visible = false

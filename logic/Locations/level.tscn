@@ -222,6 +222,12 @@ use_collision = true
 size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
 
+[node name="CSGBox3D10" type="CSGBox3D" parent="a_not_important/props"]
+transform = Transform3D(0.010361906, 0, -1.4389468, 0, 5.7866077, 0, 0.23386101, 0, 0.06375677, 394.52252, 0.11865425, -145.83437)
+use_collision = true
+size = Vector3(7.86353, 4.007324, 10.8867)
+material = SubResource("StandardMaterial3D_m0bv2")
+
 [node name="CSGBox3D7" type="CSGBox3D" parent="a_not_important/props"]
 transform = Transform3D(3.96593, 0, -0.143535, 0, 22.5991, 0, 0.282751, 0, 2.01325, -109.745, 24.3919, -476.317)
 use_collision = true
@@ -300,6 +306,27 @@ use_collision = true
 collision_layer = 3
 size = Vector3(2, 29.3169, 2)
 
+[node name="Target" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 732.52, -9.1690445, 92.2908)
+
+[node name="Target4" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 734.62286, -7.986768, 92.2908)
+
+[node name="Target5" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 737.6514, -6.884427, 92.2908)
+
+[node name="Target6" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 741.08624, -5.852056, 92.2908)
+
+[node name="Target2" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 722.27893, -9.489404, 94.54727)
+
+[node name="Target7" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 733.58496, -10.37084, 97.0645)
+
+[node name="Target3" parent="a_not_important/proto_props" instance=ExtResource("10_2mukc")]
+transform = Transform3D(1.01479, 0, 0, 0, 2.47654, 0, 0, 0, 1.01479, 743.79614, -4.576928, 91.247116)
+
 [node name="targets" type="Node3D" parent="a_not_important"]
 
 [node name="Target" parent="a_not_important/targets" instance=ExtResource("10_2mukc")]
@@ -363,6 +390,12 @@ use_collision = true
 size = Vector3(50, 0.0856934, 36)
 material = SubResource("StandardMaterial3D_e5mfl")
 
+[node name="CSGBox3D4" type="CSGBox3D" parent="platforms"]
+transform = Transform3D(2.68324, 0, 0, 0, 1.5876, 0, 0, 0, 3.76916, 697.7643, -10.6219, 91.0669)
+use_collision = true
+size = Vector3(50, 0.0856934, 36)
+material = SubResource("StandardMaterial3D_e5mfl")
+
 [node name="Floor" type="CSGBox3D" parent="platforms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.7063, -14.3009, -133.428)
 material_override = SubResource("StandardMaterial3D_ldsoa")
@@ -410,7 +443,7 @@ size = Vector3(1, 1, 1.35938)
 [node name="TestCamera1" type="Camera3D" parent="__cameras"]
 transform = Transform3D(1, 0, 0, 0, -0.293957, 0.955819, 0, -0.955819, -0.293957, -13.1227, -2.13466, 9.34876)
 
-[node name="TestCamera6" type="Camera3D" parent="__cameras" groups=["debug_cameras"]]
+[node name="TestCamera6" type="Camera3D" parent="__cameras"]
 transform = Transform3D(0.991767, 0.0772035, -0.10217, 0.101364, 0.0143021, 0.994747, 0.0782592, -0.996913, 0.00635869, -41.6545, 26.4576, 14.5127)
 fov = 40.5
 
@@ -420,6 +453,11 @@ transform = Transform3D(-0.962218, -0.098164, -0.253968, -0.0639911, 0.988153, -
 [node name="TestCamera2" type="Camera3D" parent="__cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.0339225, 0.999424, 0, -0.999424, 0.0339225, 199.039, 39.2468, 106.192)
 fov = 29.0
+near = 0.023
+
+[node name="TestCamera7" type="Camera3D" parent="__cameras" groups=["debug_cameras"]]
+transform = Transform3D(0.9999811, 0.006146399, -4.8942206e-06, 0, 0.0007962743, 0.9999997, 0.0061464007, -0.9999808, 0.00079625926, 730.28687, 43.503864, 92.05607)
+fov = 20.1
 near = 0.023
 
 [node name="TestCamera3" type="Camera3D" parent="__cameras"]
@@ -435,4 +473,4 @@ near = 0.016
 far = 4007.75
 
 [node name="PlayerPack" parent="." instance=ExtResource("9_ol10w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.789143, 13.228283, -24.367947)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 721.8059, -10.553876, 89.87808)
