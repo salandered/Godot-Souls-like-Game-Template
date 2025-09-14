@@ -27,7 +27,7 @@ class_name FancyCamera
 
 @export_group("CAM_MOVEMENT")
 @export var HOR_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
-@export var VER_SENSE: float = 0.8 # 70–90% of horizontal (so 1.8 – 5.0 if you follow the same 0.001 scale).
+@export var VER_SENSE: float = HOR_SENSE * 0.8 # 70–90% of horizontal (so 1.8 – 5.0 if you follow the same 0.001 scale).
 # θ = 0° → camera straight above the mount (boom pointing straight up).
 # θ = 90° → camera level with the mount (boom perfectly horizontal).
 # θ = 180° → camera straight below the mount.
@@ -81,6 +81,7 @@ var accumulated_mouse_delta := Vector2.ZERO
 # DEV
 var __fov_pointer := 0
 var __dev_camera_cols := true
+var __dev_camera_visuals := false
 var __csg_objects = []
 
 
@@ -88,6 +89,8 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	__csg_objects = __get_descendants(self)
+
+	__toggle_camera_visuals()
 	
 	initialise()
 
@@ -130,15 +133,14 @@ func initialise():
 
 func _process(delta: float) -> void:
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
-	var d_hor := accumulated_mouse_delta.x
-	var d_ver := accumulated_mouse_delta.y
+	var d_x := accumulated_mouse_delta.x
+	var d_y := accumulated_mouse_delta.y
 	accumulated_mouse_delta = Vector2.ZERO
 	
 	if Input.is_action_just_pressed(RawAction.lock_target):
 		if current_state == free_state:
 			var found_target = player.model.area_awareness.find_target()
 			if found_target:
-				print("~~~~LOCK PRESSED AND FOUND")
 				print("[~~FREE->LOCKED ", u.fr() + "] ", __Cvec(), __free_off(), " target=", str(found_target))
 				
 				locked_target = found_target
@@ -153,7 +155,7 @@ func _process(delta: float) -> void:
 			current_state = free_state
 			free_state.switch_from_locked()
 
-	current_state.input_mouse_movement(d_hor, d_ver)
+	current_state.input_mouse_movement(d_x, d_y)
 	current_state.update(delta)
 
 
@@ -166,16 +168,19 @@ func _input(event):
 	
 	if event.is_action_pressed("debug_toggle_nest"):
 		print("Toggling visibility of CSG objects for ", len(__csg_objects), " objects")
-		for obj in __csg_objects:
-			obj.visible = not obj.visible
+		__dev_camera_visuals = not __dev_camera_visuals
+		__toggle_camera_visuals()
 
 	if event.is_action_pressed("dev_camera_cols"):
 		__dev_camera_cols = not __dev_camera_cols
 		print("dev_camera_cols")
 
+func __toggle_camera_visuals():
+	for obj in __csg_objects:
+		obj.visible = __dev_camera_visuals
+	
 
-# DEV
-
+# region: DEV
 func __dbg_main_info() -> String:
 	var r = __Cvec() + __Mvec() + __Nvec() + __Fvec() + __free_off() + __lock_off()
 	return r
@@ -237,6 +242,7 @@ func __get_descendants(node: Node) -> Array:
 		descendants.append_array(__get_descendants(child))
 	return descendants
 
+# endregion
 
 # TODO: think of renaming
 # Boom: vector from pivot (mount/chest) to the camera. free_offset / lock_offset.

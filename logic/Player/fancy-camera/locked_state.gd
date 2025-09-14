@@ -4,7 +4,6 @@ class_name LockedCameraState
 var target: Node3D
 var lock_offset: Vector3
 
-# -- Blending State --
 var is_blending := false
 var blend_timer := 0.0
 var blend_duration := 0.4 # 0.3-0.6 seconds (shorter = snappier lock, longer = smoother)
@@ -52,6 +51,10 @@ func update(delta: float) -> void:
 	# position the camera elements
 	_move_camera_nest()
 	fc.camera_movement.move_camera(delta)
+
+	# TODO TODO: return check_distance
+	# TODO: not only distance, but line of sight? 
+	# 		what if enemy falls, we are doomed to look at floor
 
 	# print("[~~LOCK UPD post ", u.fr(), "]", fc.__Cvec(), fc.__CM(), fc.__CF())
 

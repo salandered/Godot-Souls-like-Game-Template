@@ -23,7 +23,7 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 		# TODO: no extensive testing was made when lock using bigger free state guards than lock state allows
 		min_vertical_angle = fc.MIN_VERTICAL_ANGLE + 0.3
 		max_vertical_angle = fc.MAX_VERTICAL_ANGLE - 0.3
-		vertical_sense = fc.VER_SENSE * 0.8
+		vertical_sense = fc.VER_SENSE * 0.5
 
 
 	var vertical_axis := offset.cross(Vector3.UP)

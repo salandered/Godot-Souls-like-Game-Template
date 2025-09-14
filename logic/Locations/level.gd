@@ -1,6 +1,10 @@
 extends Node3D
+@onready var player_pack: Princess = $PlayerPack
+@onready var lighting: Node3D = $LIGHTING
+@onready var world_environment: WorldEnvironment = $LIGHTING/WorldEnvironment
 
 
+var entrypoint: Entrypoint
 # recursively sets collision layer and mask for all CSG nodes in the tree
 func _set_collision_recursive(node):
 	if node is CSGBox3D or node is CSGTorus3D or node is CSGCylinder3D:
@@ -15,3 +19,13 @@ func _set_collision_recursive(node):
 
 func _ready():
 	_set_collision_recursive(self)
+
+
+func make_camera_current():
+	player_pack.fancy_camera.camera.make_current()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("menu"):
+		print("Esc pressed")
+		entrypoint.show_menu()

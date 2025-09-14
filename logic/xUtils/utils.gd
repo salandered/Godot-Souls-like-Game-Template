@@ -56,3 +56,12 @@ static func safe_look_at(
 		return false
 	node.look_at(target, up, use_model_front)
 	return true
+
+
+static func pp_file_load_err(err, path: String):
+	if err == OK:
+		print(path + " loaded successfully")
+	elif err == ERR_DOES_NOT_EXIST:
+		print(path + " no file found")
+	else:
+		print(path + " error loading:", err)

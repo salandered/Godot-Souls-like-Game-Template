@@ -27,7 +27,7 @@
 	//---------------------------------------
 	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
 	"github.copilot.editor.enableCodeActions": false, // no yellow stars
-	"editor.inlineSuggest.enabled": true,
+	"editor.inlineSuggest.enabled": false,
 	//
 	// Code completions settings
 	// "github.copilot.enable": true,
@@ -266,38 +266,37 @@
 				}
 			]
 		},
-		// Highlight the action names that follow "InAction."
 		"(RawAction\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
 					"color": "#FFEEA1E5"
-				}, // This applies a subtle color to the "InAction." part
+				},
 				{
 					// "color": "#FFEEA1E5",
-				} // This applies the yellow color to the word
+				}
 			]
 		},
-		"(PS\\.)(\\w+)": {
+		"\\b(PS\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
 					"color": "#5da9ff"
-				}, // This applies a subtle color to the "InAction." part
+				},
 				{
 					// "color": "#FFEEA1E5",
-				} // This applies the yellow color to the word
+				}
 			]
 		},
-		"(LS\\.)(\\w+)": {
+		"\\b(LS\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
 					"color": "#f3c56ff3"
-				}, // This applies a subtle color to the "InAction." part
+				},
 				{
 					// "color": "#FFEEA1E5",
-				} // This applies the yellow color to the word
+				}
 			]
 		},
 		"(PlayerState\\.)(\\w+)": {
@@ -305,10 +304,10 @@
 			"decorations": [
 				{
 					"color": "#5da9ff"
-				}, // This applies a subtle color to the "InAction." part
+				},
 				{
 					// "color": "#FFEEA1E5",
-				} // This applies the yellow color to the word
+				}
 			]
 		},
 		"(SEState\\.)(\\w+)": {
@@ -316,10 +315,10 @@
 			"decorations": [
 				{
 					"color": "#5da9ff"
-				}, // This applies a subtle color to the "InAction." part
+				},
 				{
 					// "color": "#FFEEA1E5",
-				} // This applies the yellow color to the word
+				}
 			]
 		},
 		"(traits)(\\.)(\\w+)": {
@@ -328,11 +327,12 @@
 				{
 					"color": "#d1d1d1d7",
 					"fontWeight": "bold",
+					// invalid but works
 					"textDecoration": "underline"
 				},
 				{
 					// "color": "#FFEEA1E5",
-				} // This applies the yellow color to the word
+				}
 			]
 		},
 		"\\b(print_\\.)": {
