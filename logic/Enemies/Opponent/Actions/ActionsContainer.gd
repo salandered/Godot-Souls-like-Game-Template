@@ -8,7 +8,7 @@ class_name OpponentActionContainer
 @export var actions_data: OpponentActionsData
 @export var resources: OpponentResources
 
-@export var right_hand_weapon: WeaponOh
+@export var right_hand_weapon: BaseWeapon
 @export var left_wrist: BoneAttachment3D
 
 var actions: Dictionary # { String : OpponentAction }

@@ -19,7 +19,7 @@ class_name SECharacter
 
 @export var animator: SEAnimator
 @export var awareness: EnemyAwareness
-@export var right_weapon: WeaponOh
+@export var right_weapon: BaseWeapon
 @export var resources: EnemyResources
 @onready var container = $StatesContainer as SEStatesContainer
 @onready var traits_container: TraitsContainer = $TraitsContainer

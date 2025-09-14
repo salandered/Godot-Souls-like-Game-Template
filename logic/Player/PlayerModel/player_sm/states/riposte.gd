@@ -10,7 +10,7 @@ func update(_input: InputPackage, _delta):
 		player.model.active_weapon.is_attacking = false
 
 
-func pack_hit_data(weapon: WeaponOh) -> HitData:
+func pack_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
 	hit.hit_state_animation = current_action.animation

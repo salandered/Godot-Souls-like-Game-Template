@@ -88,7 +88,7 @@ var __csg_objects = []
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	__csg_objects = __get_descendants(self)
+	__csg_objects = get_descendants.csg(self)
 
 	__toggle_camera_visuals()
 	
@@ -186,24 +186,24 @@ func __dbg_main_info() -> String:
 	return r
 
 func __free_off() -> String:
-	var r = " free off=" + u.pp_vec3(free_state.free_offset) + " len=" + u.round_01(free_state.free_offset.length())
+	var r = " free off=" + pp.pp_vec3(free_state.free_offset) + " len=" + u.round_01(free_state.free_offset.length())
 	return r
 
 func __lock_off() -> String:
-	var r = " lock off=" + u.pp_vec3(locked_state.lock_offset) + " len=" + u.round_01(locked_state.lock_offset.length())
+	var r = " lock off=" + pp.pp_vec3(locked_state.lock_offset) + " len=" + u.round_01(locked_state.lock_offset.length())
 	return r
 
 func __Cvec() -> String:
-	return " C=" + u.pp_vec3(camera.global_position)
+	return " C=" + pp.pp_vec3(camera.global_position)
 
 func __Mvec() -> String:
-	return " M=" + u.pp_vec3(mount.global_position)
+	return " M=" + pp.pp_vec3(mount.global_position)
 
 func __Nvec() -> String:
-	return " N=" + u.pp_vec3(nest.global_position)
+	return " N=" + pp.pp_vec3(nest.global_position)
 
 func __Fvec() -> String:
-	return " F=" + u.pp_vec3(focus.global_position)
+	return " F=" + pp.pp_vec3(focus.global_position)
 
 func __CP() -> String:
 	return " C->Pl=" + u.round_01((camera.global_position - player.camera_focus.global_position).length())
@@ -233,14 +233,6 @@ func __change_fov():
 	var fov = fovs[__fov_pointer % fovs.size()]
 	camera.fov = fov
 
-
-func __get_descendants(node: Node) -> Array:
-	var descendants := []
-	for child in node.get_children():
-		if child is CSGBox3D or child is CSGSphere3D:
-			descendants.append(child)
-		descendants.append_array(__get_descendants(child))
-	return descendants
 
 # endregion
 

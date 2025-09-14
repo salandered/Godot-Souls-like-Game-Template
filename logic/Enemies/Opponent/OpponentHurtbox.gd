@@ -47,7 +47,7 @@ func on_body_contact(body: PhysicsBody3D):
 
 
 func is_eligible_attacking_weapon(area: Node3D) -> bool:
-	if area is WeaponOh and is_not_ignored(area) and not area.hitbox_ignore_list.has(self) and area.is_attacking:
+	if area is BaseWeapon and is_not_ignored(area) and not area.hitbox_ignore_list.has(self) and area.is_attacking:
 		return true
 	return false
 

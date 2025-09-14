@@ -11,6 +11,7 @@ var menu_scene: PackedScene
 var _level: Node3D = null
 var _menu: Control = null
 
+var __skip_menu: bool = false
 var __dev_pre_load_level: bool = false
 var __dev_load_menu: bool = true
 
@@ -24,6 +25,10 @@ func is_level_loaded() -> bool:
 	return _level != null
 
 func _ready() -> void:
+	if __skip_menu:
+		__dev_pre_load_level = true
+		__dev_load_menu = false
+
 	randomize()
 	# get_window().mode = Settings.config_file.get_value("video", "display_mode")
 

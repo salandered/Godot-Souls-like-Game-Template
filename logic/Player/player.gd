@@ -8,8 +8,9 @@ class_name Princess
 @onready var camera_focus: Node3D = %CameraFocus
 @onready var fancy_camera: FancyCamera = %FancyCamera
 
-@onready var dev_labels: Node = $dev_labels
+@onready var dev_labels: Node = %_dev_labels
 
+@onready var right_player_weapon: PlayerWeapon = $Weapons/RightPlayerWeapon
 
 var current_state: PlayerState
 
@@ -24,13 +25,16 @@ func _ready() -> void:
 
 
 	#print_.print_ready(self)
-	visuals.accept_model(model)
+	visuals.accept_model_data(model)
 
 	debug_cams = get_tree().get_nodes_in_group("debug_cameras")
 	print_._debug_(debug_cams)
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
 	print_._debug_("cam_i: " + str(cam_i))
+	
+	right_player_weapon.accept_model_data(model)
+	model.active_weapon = right_player_weapon.specific_weapon
 
 # func _process(_delta) -> void:
 # 	dev_labels._label_player_info()

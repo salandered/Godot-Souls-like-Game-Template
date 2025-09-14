@@ -1,16 +1,16 @@
 extends Node3D
+class_name PlayerBones
 
+@onready var right_wrist_marker: Marker3D = $RightWrist/Marker3D
 @onready var general_skeleton: Skeleton3D = %GeneralSkeleton
+@onready var right_wrist: BoneAttachment3D = $RightWrist
 
-func _get_descendants(node: Node) -> Array:
-	var descendants := []
-	for child in node.get_children():
-		if child is BoneAttachment3D:
-			descendants.append(child)
-		descendants.append_array(_get_descendants(child))
-	return descendants
+#var specific_weapon: BaseWeapon
+
+#func _ready():
+	#specific_weapon = get_descendants.base_weapons_only_one(right_wrist)
 
 # TODO: flying head without eyes
 func accept_bones():
-	for child: BoneAttachment3D in _get_descendants(self):
+	for child: BoneAttachment3D in get_descendants.bone_attachments(self):
 		child.set_external_skeleton(general_skeleton.get_path())

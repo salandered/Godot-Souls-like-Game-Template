@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5481pylkhhk0"]
 
-[ext_resource type="Texture2D" uid="uid://gnsovrtic7g4" path="res://ui/experiment.hdr" id="1_cpr8l"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dvfds"]
+load_path = "res://.godot/imported/experiment.hdr-284191e11b376ec7af50c850a75b8710.bptc.ctex"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aosi0"]
-panorama = ExtResource("1_cpr8l")
+panorama = SubResource("CompressedTexture2D_dvfds")
 
 [sub_resource type="Sky" id="Sky_0dm4h"]
 sky_material = SubResource("PanoramaSkyMaterial_aosi0")

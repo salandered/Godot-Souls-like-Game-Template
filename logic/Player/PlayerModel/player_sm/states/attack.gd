@@ -41,7 +41,7 @@ func root_movement(delta: float):
 		has_forced_state = true
 		forced_state = PS.midair
 
-func pack_hit_data(weapon: WeaponOh) -> HitData:
+func pack_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
 	hit.hit_state_animation = current_action.animation

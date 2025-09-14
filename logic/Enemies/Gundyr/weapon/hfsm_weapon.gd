@@ -1,4 +1,4 @@
-extends WeaponOh
+extends BaseWeapon
 class_name HFSMWeapon
 
 

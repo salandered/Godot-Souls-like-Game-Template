@@ -8,14 +8,8 @@ class_name PlayerModel
 @onready var resources = $Resources as HumanoidResources
 @onready var hitbox: Hitbox_ = %HitBox
 @onready var area_awareness = $AreaAwareness as AreaAwareness
-@onready var active_weapon: SwordOh = %SwordOh
 @onready var container = %StatesContainer as PlayerStatesContainer
-# @onready var weapons = {
-# 	"sword" = $....Sword,
-# 	"bow" = $....Bow,
-# 	"greatsword" = $....Greatsword,
-# 	....
-# }
+
 @onready var _begin: BeginModifier = %_Begin
 @onready var full_body: ModifierAnimator = %FullBody
 @onready var torso: ModifierAnimator = %Torso
@@ -27,11 +21,16 @@ class_name PlayerModel
 
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
-@onready var bones: Node3D = %bones
+@onready var bones: PlayerBones = %bones
 
+
+var active_weapon: BaseWeapon
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	
+	
 	container.player = player
 	player_sm.player = player
 	

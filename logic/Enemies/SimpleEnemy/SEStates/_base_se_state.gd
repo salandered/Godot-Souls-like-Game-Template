@@ -14,7 +14,7 @@ var fatigue: float
 var container: SEStatesContainer
 var animator: SEAnimator
 var resources: EnemyResources
-var right_weapon: WeaponOh
+var right_weapon: BaseWeapon
 var traits: TraitsContainer
 
 var spawn_point: Vector3

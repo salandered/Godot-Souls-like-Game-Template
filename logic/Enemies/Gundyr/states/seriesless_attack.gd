@@ -48,7 +48,7 @@ func move_character(delta):
 	me.move_and_slide()
 
 
-func pack_hit_data(weapon: WeaponOh) -> HitData:
+func pack_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
 	hit.hit_state_animation = animation

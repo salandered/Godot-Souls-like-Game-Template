@@ -65,7 +65,7 @@ func _ready():
 
 func _load_settings():
 	var err = config_file.load(CONFIG_FILE_PATH)
-	u.pp_file_load_err(err, CONFIG_FILE_PATH)
+	pp.pp_file_load_err(err, CONFIG_FILE_PATH)
 	print_.prefix("SETTINGS", "Loaded config file\n" + config_file.to_string() + "\n")
 
 	var DEFAULTS = MY_DEFAULTS # NOTE

@@ -280,7 +280,7 @@ extends StateUtils
 # 			child.state = self # combo.state here
 
 # ## overidden in states
-# func pack_hit_data(_weapon: WeaponOh) -> HitData:
+# func pack_hit_data(_weapon: BaseWeapon) -> HitData:
 # 	print("someone tries to get hit by default State")
 # 	return HitData.blank()
 

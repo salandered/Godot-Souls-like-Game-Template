@@ -36,10 +36,10 @@ func on_contact(area: Node3D):
 
 
 func is_eligible_attacking_weapon(area: Node3D) -> bool:
-	if not area is WeaponOh:
+	if not area is BaseWeapon:
 		return false
 	
-	var weapon: WeaponOh = area
+	var weapon: BaseWeapon = area
 	
 
 	if _not_ignored_weapon(weapon) \

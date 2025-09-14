@@ -142,7 +142,7 @@ func legs_action_by_name(action_name: String) -> LegsAction:
 
 
 func accept_player_states() -> void:
-	for child: PlayerState in _get_all_descendants(player_sm, "PlayerState"):
+	for child: PlayerState in get_descendants.player_states_by_type(player_sm, "PlayerState"):
 		print("child.get_name() ", child.get_name())
 		var state_data: PSData = _state_data.get(child.get_name())
 		# assert(state_data, "PSData for " + child.get_name() + " not found")
@@ -190,7 +190,7 @@ func accept_player_states() -> void:
 	print()
 
 func accept_player_actions():
-	for child: PlayerAction in _get_all_descendants(player_sm, "PlayerAction"):
+	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
 		print("child.get_name() ", child.get_name())
 		var action_data: PlayerActionData = _player_action_data.get(child.get_name())
 		# assert(action_data, "PlayerActionData for " + child.get_name() + " not found")
@@ -224,7 +224,7 @@ func accept_player_actions():
 
 
 func accept_legs_behaviors():
-	for child: LegsBehavior in _get_all_descendants(legs_sm, "LegsBehavior"):
+	for child: LegsBehavior in get_descendants.player_states_by_type(legs_sm, "LegsBehavior"):
 		print("node.get_name() ", child.get_name())
 		var behavior_data: LegBehaviorData = _legs_behavior_data.get(child.get_name())
 		if not behavior_data:
@@ -245,7 +245,7 @@ func accept_legs_behaviors():
 
 
 func accept_legs_actions():
-	for child: LegsAction in _get_all_descendants(legs_sm, "LegsAction"):
+	for child: LegsAction in get_descendants.player_states_by_type(legs_sm, "LegsAction"):
 		print("node.get_name() ", child.get_name())
 		var action_data: LegActionData = _legs_action_data.get(child.get_name())
 		if not action_data:
@@ -278,31 +278,3 @@ func states_priority_sort(a: String, b: String) -> bool:
 		return true
 	else:
 		return false
-
-
-func _get_all_descendants(node: Node, target_type: StringName) -> Array:
-	var descendants: Array = []
-	
-	for child in node.get_children():
-		match target_type:
-			"PlayerState":
-				if child is PlayerState: descendants.append(child)
-			"PlayerAction":
-				if child is PlayerAction: descendants.append(child)
-			"LegsBehavior":
-				if child is LegsBehavior: descendants.append(child)
-			"LegsAction":
-				if child is LegsAction: descendants.append(child)
-			
-		descendants.append_array(_get_all_descendants(child, target_type))
-
-	return descendants
-
-func _get_state_descendants(node: Node) -> Array[Node]:
-	var descendants: Array[Node] = []
-	
-	for child in node.get_children():
-		if child is PlayerAction:
-			descendants.append(child)
-
-	return descendants

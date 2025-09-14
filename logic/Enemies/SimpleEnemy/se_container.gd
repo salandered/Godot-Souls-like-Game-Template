@@ -17,16 +17,9 @@ var node_to_state_data: Dictionary = { # { Node name : SEStateData }
 
 var states: Dictionary # { String : BaseSEState }
 
-func _get_state_descendants(node: Node) -> Array:
-	var descendants := []
-	for child in node.get_children():
-		if child is BaseSEState:
-			descendants.append(child)
-		descendants.append_array(_get_state_descendants(child))
-	return descendants
-	
+
 func accept_states():
-	for node: BaseSEState in _get_state_descendants(self):
+	for node: BaseSEState in get_descendants.base_se_states(self):
 		print("node.get_name() ", node.get_name())
 		var state_data: SEStateData = node_to_state_data.get(node.get_name())
 		assert(state_data, "SEStateData for " + node.get_name() + " not found")

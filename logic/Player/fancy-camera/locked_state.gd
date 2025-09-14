@@ -118,13 +118,13 @@ func _rotate_offset_locked(delta: float) -> void:
 
 	# DEV
 	# var nest_mount_vec_len := (fc.nest.global_position - fc.mount.global_position).length()
-	# var delta_off_angle: float = u.pp_v3_angle_deg(_off_before, lock_offset, false)
+	# var delta_off_angle: float = pp.pp_v3_angle_deg(_off_before, lock_offset, false)
 	# var arc_len = snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
 	# print("[~~LOCK UPD rot ", u.fr(), "]",
 	# 	" angle_delta_deg=", str(delta_off_angle),
 	# 	" arc_len=", str(arc_len),
-	# 	" off_b4=", u.pp_vec3(_off_before), " |len=", u.round_01(lock_offset.length()),
-	# 	" off_after=", u.pp_vec3(lock_offset), " |len=", u.round_01(lock_offset.length()))
+	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", u.round_01(lock_offset.length()),
+	# 	" off_after=", pp.pp_vec3(lock_offset), " |len=", u.round_01(lock_offset.length()))
 
 
 func input_mouse_movement(d_x: float, d_y: float) -> void:

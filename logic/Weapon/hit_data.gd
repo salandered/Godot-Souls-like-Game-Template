@@ -8,7 +8,7 @@ var hit_state_animation: String
 
 var effects: Dictionary
 
-var weapon: WeaponOh
+var weapon: BaseWeapon
 
 static func blank() -> HitData:
 	return HitData.new()

@@ -91,7 +91,7 @@ var entrypoint: Entrypoint
 @onready var volumetric_fog_disabled = volumetric_fog_menu.get_node("Disabled")
 @onready var volumetric_fog_enabled = volumetric_fog_menu.get_node("Enabled")
 
-@onready var camera_3d: Camera3D = $Camera3D
+@onready var camera_3d: Camera3D = %Camera3D
 
 
 func make_camera_current():

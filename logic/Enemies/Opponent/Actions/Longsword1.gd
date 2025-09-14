@@ -12,7 +12,7 @@ func update(input: OpponentActionInput, delta: float):
 	right_hand_weapon.is_attacking = right_weapon_hurts()
 
 
-func form_hit_data(weapon: WeaponOh) -> HitData:
+func form_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
 	hit.hit_state_animation = animation

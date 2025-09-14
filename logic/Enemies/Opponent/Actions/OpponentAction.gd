@@ -19,7 +19,7 @@ var character: CharacterBody3D
 var action_data_repo: OpponentActionsData
 var resources: OpponentResources
 
-var right_hand_weapon: WeaponOh
+var right_hand_weapon: BaseWeapon
 var left_wrist: BoneAttachment3D
 
 var work_start: float

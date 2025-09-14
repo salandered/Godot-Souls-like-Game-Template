@@ -7,7 +7,7 @@ class_name BaseHFSMState
 @export var animator: AnimationPlayer
 @export var states_data_repo: GundyrStatesData
 @export var resources: HFSMResources
-@export var weapons: Array[WeaponOh]
+@export var weapons: Array[BaseWeapon]
 
 # These fields must be set for each state indivdually.
 # states without animation and backend animation (containers) don't need animation field
