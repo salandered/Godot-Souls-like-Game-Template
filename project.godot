@@ -15,15 +15,23 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="RetroRoom"
-run/main_scene="uid://dmp13e1xswsm0"
+run/main_scene="uid://c66xg4go6ct4v"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://-assets-/default_bus_layout.tres"
 
 [autoload]
 
 CameraMode="*res://logic/xUtils/ui/CameraMode.tscn"
-Settings="*res://ui/settings.gd"
+Settings="*res://ui/_TPS/settings.gd"
 FullscreenHandler="*res://ui/fullscreen_handler.gd"
+AppConfig="*res://addons/maaacks_game_template/base/scenes/autoloads/app_config.tscn"
+SceneLoader="*res://addons/maaacks_game_template/base/scenes/autoloads/scene_loader.tscn"
+ProjectMusicController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_music_controller.tscn"
+ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_ui_sound_controller.tscn"
 
 [debug]
 
@@ -33,13 +41,9 @@ gdscript/warnings/unused_private_class_variable=0
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
-[display]
-
-window/size/always_on_top=true
-
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg")
+enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
 
 [file_customization]
 
@@ -62,16 +66,27 @@ folder_colors={
 "res://-assets-/x_blend/": "orange",
 "res://-assets-/x_icons/": "gray",
 "res://addons/": "gray",
+"res://addons/maaacks_game_template/base/scenes/opening/": "gray",
 "res://logic/Enemies/Gundyr/": "pink",
 "res://logic/Enemies/Gundyr/states/leafes/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
-"res://misc/trash_bin/": "red"
+"res://misc/maacks_examples/": "teal",
+"res://misc/maacks_examples/scenes/_later/": "yellow",
+"res://misc/maacks_examples/scenes/_later/opening/": "gray",
+"res://misc/trash_bin/": "red",
+"res://ui/main_menu/": "pink",
+"res://ui/options_menu/": "pink",
+"res://ui/pause_menu/": "pink"
 }
 
 [global_group]
 
 debug_cameras=""
+
+[gui]
+
+theme/custom="uid://dngnbhs1qjqyy"
 
 [importer_defaults]
 
@@ -323,6 +338,50 @@ dev_toggle_fullscreen_1={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+t1={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":91,"key_label":0,"unicode":91,"location":0,"echo":false,"script":null)
+]
+}
+t2={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":93,"key_label":0,"unicode":93,"location":0,"echo":false,"script":null)
+]
+}
+t3={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":59,"key_label":0,"unicode":59,"location":0,"echo":false,"script":null)
+]
+}
+t4={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":39,"key_label":0,"unicode":39,"location":0,"echo":false,"script":null)
+]
+}
+t5={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":92,"key_label":0,"unicode":92,"location":0,"echo":false,"script":null)
+]
+}
+t6={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":44,"key_label":0,"unicode":44,"location":0,"echo":false,"script":null)
+]
+}
+t7={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":46,"key_label":0,"unicode":46,"location":0,"echo":false,"script":null)
+]
+}
+t8={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":47,"key_label":0,"unicode":47,"location":0,"echo":false,"script":null)
+]
+}
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
 
 [layer_names]
 
@@ -333,6 +392,14 @@ dev_toggle_fullscreen_1={
 3d_physics/layer_5="Weapon-area"
 3d_physics/layer_6="Item-col"
 
+[maaacks_game_template]
+
+disable_install_audio_busses=true
+disable_update_check=false
+disable_install_wizard=true
+copy_path="res://misc/maacks_examples/"
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)

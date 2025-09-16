@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=28 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
-[ext_resource type="PackedScene" uid="uid://b8sj75wbb08k4" path="res://flicker_omni.tscn" id="2_dnvo4"]
+[ext_resource type="PackedScene" path="res://-assets-/flicker_omni.tscn" id="2_dnvo4"]
+[ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="2_ifnij"]
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level.gd" id="5_j4sqn"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PlayerPack.tscn" id="9_ol10w"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/xUtils/simple_target/SimpleTarget.tscn" id="10_2mukc"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/pause_menu_controller.gd" id="10_ifnij"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
 albedo_color = Color(0.21579322, 0.17943612, 0.15248129, 1)
@@ -411,5 +413,9 @@ material = SubResource("StandardMaterial3D_e5mfl")
 transform = Transform3D(0.9999811, 0.006146399, -4.8942206e-06, 0, 0.0007962743, 0.9999997, 0.0061464007, -0.9999808, 0.00079625926, -406.5986, 43.503864, -71.10961)
 fov = 20.1
 near = 0.023
+
+[node name="ui" type="Node" parent="."]
+script = ExtResource("10_ifnij")
+pause_menu_packed = ExtResource("2_ifnij")
 
 [editable path="TOWER"]

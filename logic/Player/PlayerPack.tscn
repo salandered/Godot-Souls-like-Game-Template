@@ -1,7 +1,8 @@
-[gd_scene load_steps=133 format=4 uid="uid://6qtp0fjtkn64"]
+[gd_scene load_steps=137 format=4 uid="uid://6qtp0fjtkn64"]
 
 [ext_resource type="Script" uid="uid://bpr17wdedc64x" path="res://logic/Player/player.gd" id="1_vj6qj"]
 [ext_resource type="Script" uid="uid://bgtjtwktr4xs3" path="res://logic/Player/feelings.gd" id="2_8b0qh"]
+[ext_resource type="Script" uid="uid://17nc1ssx6vug" path="res://logic/Player/ui_feelings.gd" id="2_in5dw"]
 [ext_resource type="Script" uid="uid://bm1glbgw5uawg" path="res://logic/Player/PlayerVisuals/player_visuals.gd" id="2_ots4d"]
 [ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Player/SmithSword.tscn" id="4_8b0qh"]
 [ext_resource type="Script" uid="uid://bdmng5y2k5j0o" path="res://logic/Player/Input/input_gatherer.gd" id="4_501po"]
@@ -98,6 +99,51 @@
 [ext_resource type="Script" uid="uid://b3nqsfjtvpujc" path="res://logic/Player/PlayerModel/player_sm/states/roll.gd" id="93_bpe6c"]
 [ext_resource type="Script" uid="uid://cxs75uid7n5dj" path="res://logic/Player/PlayerModel/bones.gd" id="94_nkdgf"]
 [ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Weapon/HitBox.tscn" id="95_xdwa8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7t703"]
+bg_color = Color(0.6431373, 0.5882353, 0.56078434, 0.4745098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.51511717, 0.46212667, 0.43556714, 0.4745098)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.22352941, 0, 0, 0.14117648)
+shadow_size = 2
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_in5dw"]
+bg_color = Color(0.99172133, 0.5081542, 0.6702413, 0.5294118)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8927848, 0.1141701, 0.48050004, 0.5294118)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.3788154, 0.0001870361, 0.41449252, 0.24705882)
+shadow_size = 2
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6lif"]
+bg_color = Color(0.08311582, 0.31508356, 1, 0.5294118)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.04775112, 0.21419427, 0.42561996, 0.5294118)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.3788154, 0.0001870361, 0.41449252, 0.24705882)
+shadow_size = 2
+shadow_offset = Vector2(-2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8pp3"]
 resource_name = "material_0.001"
@@ -877,30 +923,40 @@ collider = NodePath("Collider")
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Feelings" type="Node" parent="UI"]
-script = ExtResource("2_8b0qh")
+[node name="UIFeelings" type="Node" parent="UI"]
+script = ExtResource("2_in5dw")
 
-[node name="Stamina _bar_" type="Label" parent="UI/Feelings"]
-offset_left = 22.0
-offset_top = 17.0
-offset_right = 180.0
-offset_bottom = 66.0
-theme_override_font_sizes/font_size = 24
-text = "Stamina: "
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIFeelings"]
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 326.0
+offset_bottom = 68.0
 
-[node name="Health _bar_" type="Label" parent="UI/Feelings"]
-offset_left = 13.0
-offset_top = 55.0
-offset_right = 169.0
-offset_bottom = 104.0
-theme_override_font_sizes/font_size = 24
-text = "Health: "
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HealthBar" type="ProgressBar" parent="UI/UIFeelings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7t703")
+theme_override_styles/fill = SubResource("StyleBoxFlat_in5dw")
+value = 67.0
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="UI/UIFeelings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7t703")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s6lif")
+value = 67.0
+show_percentage = false
 
 [node name="inventory" type="Node" parent="UI"]
+
+[node name="Feelings" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_8b0qh")
 
 [node name="Weapons" type="Node" parent="."]
 
@@ -1914,6 +1970,9 @@ offset_right = 1143.0
 offset_bottom = 707.0
 theme_override_font_sizes/font_size = 16
 text = "SK M Info"
+
+[connection signal="SIG_health_changed" from="Feelings" to="UI/UIFeelings" method="_on_feelings_sig_health_changed"]
+[connection signal="SIG_stamina_changed" from="Feelings" to="UI/UIFeelings" method="_on_feelings_sig_stamina_changed"]
 
 [editable path="Model/bones/RightWrist/Marker3D/SmithSword"]
 [editable path="FancyCamera"]

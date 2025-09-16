@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://b1m4vvgtlxkd4"]
+
+[node name="HSeparator" type="HSeparator"]
+custom_minimum_size = Vector2(0, 20)
