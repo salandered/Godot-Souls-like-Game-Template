@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://jtkogl4lhvf3"]
+
+[ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/Weapon/SmithSword/smith_sword.gd" id="1_sk2nb"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Weapon/SmithSword/weapon_hurt_box.tscn" id="2_lfwdn"]
+[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword_2.glb" id="2_sk2nb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk2nb"]
+albedo_color = Color(0.57341117, 0.77726656, 0.9999986, 1)
+
+[node name="SmithSword" type="Node3D"]
+script = ExtResource("1_sk2nb")
+
+[node name="WeaponHurtBox" parent="." instance=ExtResource("2_lfwdn")]
+
+[node name="Handle" type="Marker3D" parent="."]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.78026605, 0)
+
+[node name="CSGBox" type="CSGBox3D" parent="Handle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00083007663, 0.0039306283, -0.008166505)
+material_override = SubResource("StandardMaterial3D_sk2nb")
+size = Vector3(0.031542968, 0.1395996, 0.03366699)
+metadata/_edit_lock_ = true
+
+[node name="Visuals" parent="." instance=ExtResource("2_sk2nb")]

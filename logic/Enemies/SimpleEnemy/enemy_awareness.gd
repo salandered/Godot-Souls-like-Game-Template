@@ -3,8 +3,8 @@ class_name EnemyAwareness
 
 
 @export var sight_mask: int = Collision.Layers.ENVIRONMENT_COL | Collision.Layers.PLAYER_COL
+@onready var me: SECharacter = $"../.."
 
-@onready var me: SECharacter = get_parent()
 @onready var downcast = $Downcast as RayCast3D
 
 @export var debug_sight_cone: bool = true

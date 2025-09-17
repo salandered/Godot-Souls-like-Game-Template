@@ -121,7 +121,7 @@ func check_relevance():
 	var found_target = fc.player.model.area_awareness.find_target()
 	if found_target:
 		fc.locked_target = found_target
-		print("		fc.found_target ", fc.locked_target)
+		print_.fancy_cam("", "		fc.found_target " + str(fc.locked_target))
 		fc.current_state = fc.locked_camera
 		fc.locked_camera.look_at_ = fc.locked_target.look_at_point
 		
@@ -133,9 +133,9 @@ func check_relevance():
 		fc.locked_camera._blending = true
 		fc.locked_camera._just_locked = true
 
-		print("LOCK SUCCESFULL")
+		print_.fancy_cam("", "LOCK SUCCESFULL")
 	else:
-		print("xLOCK NOT")
+		print_.fancy_cam("", "xLOCK NOT")
 
 
 # func _move_camera(delta: float) -> void:
@@ -217,7 +217,7 @@ const DEG := 57.295779513 # rad→deg
 
 # 	var allow := predicted_theta > fc.MIN_VERTICAL_ANGLE and predicted_theta < fc.MAX_VERTICAL_ANGLE
 
-# 	print("[~~FREE VERT pre ", u.fr(), "]",
+# 	print_.fancy_cam("[~~FREE VERT pre ", u.fr(), "]",
 # 		" off_pitch=", str(off_pitch * DEG),
 # 		" theta_up=", str(theta_up * DEG),
 # 		" pred_theta=", str(predicted_theta * DEG),
@@ -244,7 +244,7 @@ const DEG := 57.295779513 # rad→deg
 # 	if __dbg_last_geom_pitch == __dbg_last_geom_pitch:
 # 		d_geom = (geom_pitch - __dbg_last_geom_pitch) * DEG
 
-# 	print("[~~FREE VERT post ", u.fr(), "]",
+# 	print_.fancy_cam("[~~FREE VERT post ", u.fr(), "]",
 # 		" off_pitch=", str(off_pitch * DEG),
 # 		" geom_pitch=", str(geom_pitch * DEG),
 # 		" θ_off=", str(theta_off * DEG),

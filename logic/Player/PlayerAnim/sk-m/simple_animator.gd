@@ -49,8 +49,6 @@ var speed_scale := 1.0
 
 
 # --- Overlay / impact animation ------------------------------------------
-# var overlay_anim: Animation
-# var overlay_anim_progress: float = 0
 # var overlay_anim_cycling: bool = false
 
 # var is_overlay_active: bool = false
@@ -70,6 +68,7 @@ var overlay_local_speed := 1.0
 
 # Plays a one-shot or looping overlay on top of whatever is currently running.
 # `over_time` governs how quickly the overlay fades in *and* back out.
+# region: some version
 # func play_overlay(next_animation: String, over_time: float = 0.1):
 # 	# Reset overlay clock
 # 	overlay_blend_time_spent = 0
@@ -86,6 +85,7 @@ var overlay_local_speed := 1.0
 	
 # 	overlay_anim_progress = 0
 # 	overlay_anim_cycling = overlay_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
+# endregion
 func play_overlay(name_: String, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
 	overlay_anim = native_animator.get_animation(name_)
 	if overlay_anim == null:
@@ -182,7 +182,7 @@ func play(next_animation: String, over_time: float = 0):
 		blending_percentage = 0
 
 	if _has_follower():
-		print_.prefix("SKM 💀", "'" + a_name + "' makes follower '" + follower.a_name + "' play anim " + next_animation + " over time " + str(over_time))
+		print_.skm("", "'" + a_name + "' makes follower '" + follower.a_name + "' play anim " + next_animation + " over time " + str(over_time))
 		follower.play(next_animation, over_time)
 
 func _process_modification():
@@ -315,12 +315,12 @@ func accept_follower(new_follower: ModifierAnimator):
 	if follower == new_follower:
 		push_warning("Already has this exact follower dumbass")
 		return
-	print_.prefix("SKM 💀", "'" + a_name + "' accepted follower '" + new_follower.a_name + "'")
+	print_.skm("", "'" + a_name + "' accepted follower '" + new_follower.a_name + "'")
 	follower = new_follower
 
 func remove_follower():
-	if follower: print_.prefix("SKM 💀", "'" + a_name + "' removes follower '" + follower.a_name + "'")
-	else: print_.prefix("SKM 💀", "'" + a_name + "' can't remove null follower")
+	if follower: print_.skm("", "'" + a_name + "' removes follower '" + follower.a_name + "'")
+	else: print_.skm("", "'" + a_name + "' can't remove null follower")
 	follower = null
 
 

@@ -1,5 +1,5 @@
 extends Node3D
-@onready var player_pack: Princess = $PlayerPack
+@onready var player_pack: Princess = $PrincessPack
 @onready var lighting: Node3D = $LIGHTING
 @onready var world_environment: WorldEnvironment = $LIGHTING/WorldEnvironment
 

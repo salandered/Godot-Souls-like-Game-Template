@@ -30,5 +30,6 @@ func _input(event):
 		SPEED -= 10
 
 func on_exit_action():
-	print_.prefix(">>> on exit sprint", "reset_speed_scale")
+	pass
+	# print_.prefix(">>> on exit sprint", "reset_speed_scale")
 	# legs_sm.legs_animator.reset_speed_scale()

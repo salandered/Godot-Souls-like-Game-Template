@@ -32,20 +32,20 @@ func _check_transition(delta: float) -> String:
 
 	__print_counter += 1
 	# if __print_counter % __frequency == 0:
-		# print_.prefix("SE", "~~ " + str(get_iteration_progress()) + " / " + str(get_progress()) + " ~~ ")
+		# print_.se("", "~~ " + str(get_iteration_progress()) + " / " + str(get_progress()) + " ~~ ")
 
 	if iteration_works_less_than(iteration_commitment) and verdict != me.CURRENT and verdict != me.CURRENT_NEW_ITER:
-		print_.prefix("SE", state_name + ": iteration_works_less. " + verdict + " rejected")
+		print_.se("", state_name + ": iteration_works_less. " + verdict + " rejected")
 		# here no mark_state_iteration(), we are still in the same iteration
 		return me.CURRENT
 
 	if verdict != me.CURRENT and verdict != me.CURRENT_NEW_ITER:
-		print_.prefix("||||SE", verdict + " not rejected ", 2)
+		print_.se("||||", verdict + " not rejected ", 2)
 	
 	# i quess global_commitment and fatigue should be decided in the state itself
 
 	if verdict == me.CURRENT_NEW_ITER:
-		print_.prefix("SE", state_name + ": new iteration, mark_state_iteration", 2)
+		print_.se("", state_name + ": new iteration, mark_state_iteration", 2)
 		iteration_mark_state()
 	return verdict
 
@@ -64,7 +64,7 @@ func update(delta: float):
 
 
 func _on_enter_state():
-	print_.prefix("SE", ">>> mark timers", 2)
+	print_.se("", ">>> mark timers", 2)
 	mark_enter_state()
 	iteration_mark_state()
 	on_enter_state()

@@ -14,10 +14,10 @@ func check_transition(input: InputPackage) -> String:
 		xz_velocity.y = 0
 		if xz_velocity.length_squared() >= 10:
 			return PS.landing_run # TODO WAS SPRINT
-		print_.prefix("PSM midair", str(floor_distance) + " < " + str(landing_height) + " => landing_run")
+		print_.psm("midair", str(floor_distance) + " < " + str(landing_height) + " => landing_run")
 		return PS.landing_run
 	else:
-		# print_.prefix("PSM midair", "still midair")
+		# print_.psm("midair", "still midair")
 		# still falling
 		return "okay"
 

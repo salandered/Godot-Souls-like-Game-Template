@@ -3,7 +3,7 @@ extends BaseSEState
 
 func check_transition(delta: float) -> String:
 	if me.global_position.distance_to(spawn_point) < 2:
-		print_.prefix("SE", "backtrack decision: reached spawn point, idle")
+		print_.se("", "backtrack decision: reached spawn point, idle")
 		return SEState.idle
 	return me.CURRENT
 

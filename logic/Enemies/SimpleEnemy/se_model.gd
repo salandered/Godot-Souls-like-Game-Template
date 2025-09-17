@@ -21,8 +21,8 @@ class_name SECharacter
 @export var awareness: EnemyAwareness
 @export var right_weapon: BaseWeapon
 @export var resources: EnemyResources
-@onready var container = $StatesContainer as SEStatesContainer
-@onready var traits_container: TraitsContainer = $TraitsContainer
+@onready var container = %StatesContainer as SEStatesContainer
+@onready var traits_container: TraitsContainer = %TraitsContainer
 
 
 @export var raw_traits_resource: EnemyTraitsResource
@@ -33,6 +33,7 @@ const CURRENT = "_current"
 const CURRENT_NEW_ITER = "_current_new_iter"
 
 var current_state: BaseSEState
+@onready var right_enemy_weapon: RightEnemyWeapon = $WeaponSystem/RightEnemyWeapon
 
 
 func _ready():
@@ -41,7 +42,9 @@ func _ready():
 	container.me = self
 	spawn_point = global_position
 	traits_container.accept_traits()
+	right_enemy_weapon.accept_model_data()
 	container.accept_states()
+	
 	current_state = container.states["idle"]
 	switch_to("idle")
 	
@@ -55,7 +58,7 @@ func _physics_process(delta):
 
 
 func switch_to(state: String):
-	print_.prefix(">SE", current_state.state_name + " -> " + state)
+	print_.se(">", current_state.state_name + " -> " + state)
 	current_state._on_exit_state()
 	current_state = container.states[state]
 	current_state._on_enter_state()

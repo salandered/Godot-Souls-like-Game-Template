@@ -33,7 +33,7 @@ func _ready() -> void:
 	cam_i = len(debug_cams) - 1
 	print_._debug_("cam_i: " + str(cam_i))
 	
-	right_player_weapon.accept_model_data(model)
+	right_player_weapon.accept_data(self)
 	model.active_weapon = right_player_weapon.specific_weapon
 
 # func _process(_delta) -> void:

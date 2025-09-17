@@ -6,19 +6,19 @@ extends BaseSEState
 
 func check_transition(delta: float) -> String:
 	# if we are in attack, we better attack
-	print_.prefix("SE", "attack_: check_transition")
+	print_.se("", "attack_: check_transition")
 
 	if distance_to_player() > me.fight_distance:
-		print_.prefix("SE", "attack decision: player too far, backtrack")
+		print_.se("", "attack decision: player too far, backtrack")
 		return SEState.backtrack
 	if distance_to_player() > me.attack_distance:
-		print_.prefix("SE", "attack decision: player too far, backtrack")
+		print_.se("", "attack decision: player too far, backtrack")
 		return SEState.follow
 	if works_longer_than(fatigue):
-		print_.prefix("SE", "attack decision: fatigue " + str(fatigue) + " " + str(get_progress()) + " => idle")
+		print_.se("", "attack decision: fatigue " + str(fatigue) + " " + str(get_progress()) + " => idle")
 		return SEState.idle
 
-	print_.prefix("SE", "attack decision: still attack")
+	print_.se("", "attack decision: still attack")
 	return SEState.attack # not me.CURRENT!
 
 
@@ -29,13 +29,13 @@ func update(delta):
 
 func manage_weapon():
 	if works_between(0.3786, 0.7185):
-		right_weapon.is_attacking = true
+		right_weapon.is_attacking = false # DANGER: should be true for working
 	else:
 		right_weapon.is_attacking = false
 
 
 func on_enter_state():
-	print("on_enter_state for attack, hb ignore ", right_weapon.hitbox_ignore_list, " reseted")
+	print_.se("attack on_enter", "weapon hb ignore " + str(right_weapon.hitbox_ignore_list) + " reset", 1, L.FORCE_PRINT)
 	iteration_commitment = animation_length
 	right_weapon.hitbox_ignore_list.clear()
 	right_weapon.is_attacking = false

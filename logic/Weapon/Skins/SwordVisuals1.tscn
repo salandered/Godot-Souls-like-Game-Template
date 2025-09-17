@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bb0o3byg0f0uh"]
-
-[ext_resource type="PackedScene" uid="uid://ks55cmdw1wwc" path="res://-assets-/blender_sources/smith_sword/smith_sword.glb" id="1_r56jv"]
-
-[node name="SwordVisuals1" type="Node3D"]
-
-[node name="smith_sword" parent="." instance=ExtResource("1_r56jv")]
-transform = Transform3D(-0.726824, 6.3541e-08, 0, -6.3541e-08, -0.726824, 0, 0, 0, 0.726824, 0, 1.0823, 0)

@@ -37,7 +37,9 @@ var _loading_start_time : int
 
 func update_total_loading_progress() -> void:
 	# 
-	_total_loading_progress = _scene_loading_progress
+	#var inverted_progress = 1.0 - _scene_loading_progress
+	#_total_loading_progress = 1.0 - (inverted_progress * inverted_progress)
+	_total_loading_progress = sqrt(_scene_loading_progress)
 
 func _reset_loading_stage() -> void:
 	_stall_stage = StallStage.STARTED

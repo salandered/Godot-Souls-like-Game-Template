@@ -1,7 +1,7 @@
 extends Node
 class_name Menu
 
-var entrypoint: Entrypoint
+# var entrypoint: Entrypoint
 
 # SETTINGS SUBMENU
 

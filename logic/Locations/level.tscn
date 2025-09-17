@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=29 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
 [ext_resource type="PackedScene" path="res://-assets-/flicker_omni.tscn" id="2_dnvo4"]
@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
 [ext_resource type="PackedScene" uid="uid://dug2h6xkfk71h" path="res://-assets-/GLB-level/tower-map.glb" id="9_k3uw0"]
-[ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PlayerPack.tscn" id="9_ol10w"]
+[ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PrincessPack.tscn" id="9_ol10w"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/xUtils/simple_target/SimpleTarget.tscn" id="10_2mukc"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/pause_menu_controller.gd" id="10_ifnij"]
+[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="10_j4sqn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
 albedo_color = Color(0.21579322, 0.17943612, 0.15248129, 1)
@@ -207,8 +208,8 @@ transform = Transform3D(0.456299, 0.29037, -0.841116, 0, 0.945259, 0.326322, 0.8
 [node name="TOWER" parent="." instance=ExtResource("9_k3uw0")]
 metadata/_edit_lock_ = true
 
-[node name="-- collisions tower--" parent="TOWER/TOWER" index="1"]
-visible = false
+[node name="CSGBox3D" type="CSGBox3D" parent="TOWER"]
+transform = Transform3D(3.0488966, 0, 0, 0, 2.887945, 0, 0, 0, 8.093599, 0, 24.046017, -26.244783)
 
 [node name="__cameras" type="Node" parent="."]
 
@@ -229,13 +230,13 @@ size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
-transform = Transform3D(3.69869, 0, -0.143412, 0, 3.87906, 0, 0.263699, 0, 2.01152, 190.671, 7.80318, -213.58899)
+transform = Transform3D(3.69869, 0, -0.143412, 0, 3.87906, 0, 0.263699, 0, 2.01152, 131.27817, 7.80318, -56.019638)
 use_collision = true
 size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
-transform = Transform3D(-0.854372, 7.83155, 0.0344166, -3.46558, -1.93072, 0.139604, 0.254477, 7.45599e-09, 2.01674, 235.524, -6.03901, -194.961)
+transform = Transform3D(-0.8323285, 7.83155, 0.021961648, -3.376165, -1.93072, 0.089083, 0.24791126, 7.45599e-09, 1.2869062, 152.13867, -13.03666, 42.97055)
 use_collision = true
 size = Vector3(7.86353, 6.77539, 10.8867)
 material = SubResource("StandardMaterial3D_m0bv2")
@@ -254,14 +255,14 @@ collision_layer = 3
 size = Vector3(2, 2, 2)
 
 [node name="Box5" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
-transform = Transform3D(1.1295682, 0, 2.097755, 0, 2.7141519, 0, -1.6816101, 0, 1.4091002, 305.96786, 4.0357375, -207.24602)
+transform = Transform3D(1.1295682, 0, 2.097755, 0, 2.7141519, 0, -1.6816101, 0, 1.4091002, 197.18231, -8.318838, 10.65844)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
 size = Vector3(2, 2, 2)
 
 [node name="Box7" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
-transform = Transform3D(1.1295682, 0, 2.097755, 0, 2.7141519, 0, -1.6816101, 0, 1.4091002, 300.21533, 4.0357375, -207.24602)
+transform = Transform3D(1.1295682, 0, 2.097755, 0, 2.7141519, 0, -1.6816101, 0, 1.4091002, 209.69858, -9.044115, 11.273102)
 material_override = SubResource("StandardMaterial3D_2bmwg")
 use_collision = true
 collision_layer = 3
@@ -371,8 +372,12 @@ material_override = SubResource("StandardMaterial3D_k3uw0")
 use_collision = true
 size = Vector3(1, 1, 1.35938)
 
-[node name="PlayerPack" parent="." instance=ExtResource("9_ol10w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -415.07956, -10.553876, -73.2876)
+[node name="PrincessPack" parent="." instance=ExtResource("9_ol10w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -417.4566, -10.553876, -70.595184)
+
+[node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_j4sqn")]
+transform = Transform3D(-0.11949576, 0, -0.9928347, 0, 1, 0, 0.9928347, 0, -0.11949576, -423.20657, -10.4149885, -67.09622)
+player = NodePath("../PrincessPack")
 
 [node name="🎯 _TARGET_ARENA" type="Node3D" parent="."]
 
@@ -417,5 +422,3 @@ near = 0.023
 [node name="ui" type="Node" parent="."]
 script = ExtResource("10_ifnij")
 pause_menu_packed = ExtResource("2_ifnij")
-
-[editable path="TOWER"]

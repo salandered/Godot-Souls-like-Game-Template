@@ -68,5 +68,5 @@ func iteration_works_between(start: float, finish: float) -> bool:
 
 
 func __reject() -> bool:
-	print_.prefix("TM", "time manage rejected -1", 5)
+	# print_.prefix("TM", "time manage rejected -1", 5)
 	return false

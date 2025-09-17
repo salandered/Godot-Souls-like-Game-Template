@@ -7,13 +7,13 @@ signal game_started
 signal game_exited
 
 ## Defines the path to the game scene.
-@export_file("*.tscn") var game_scene_path : String
-@export var options_packed_scene : PackedScene
-@export var credits_packed_scene : PackedScene
+@export_file("*.tscn") var game_scene_path: String
+@export var options_packed_scene: PackedScene
+@export var credits_packed_scene: PackedScene
 
 @export_group("Extra Settings")
-@export var signal_game_start : bool = false
-@export var signal_game_exit : bool = false
+@export var signal_game_start: bool = false
+@export var signal_game_exit: bool = false
 
 var options_scene
 var credits_scene
@@ -31,7 +31,7 @@ var sub_menu
 @onready var back_button = %BackButton
 
 
-@export var confirm_new_game : bool = true
+@export var confirm_new_game: bool = true
 @onready var continue_game_button = %ContinueGameButton
 
 # A versatile base class for a main menu UI.
@@ -44,8 +44,14 @@ var sub_menu
 # - Interacts with the GameState autoload to manage save data.
 @onready var camera_3d: Camera3D = %Camera3D
 
+@export var bypass_menu_and_start_game: bool = true # <-- Add this line
 
 func _ready() -> void:
+	# Check if the bypass flag is enabled
+	if bypass_menu_and_start_game:
+		# If a saved game exists, continue it. Otherwise, start a new one.
+		load_game_scene()
+		return # Stop here to prevent loading the menu UI
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	# Show the mouse cursor
 	flow_control_container.show()
@@ -95,7 +101,7 @@ func _show_menu() -> void:
 	back_button.hide()
 	menu_container.show()
 
-func _open_sub_menu(menu : Control) -> void:
+func _open_sub_menu(menu: Control) -> void:
 	sub_menu = menu
 	sub_menu.show()
 	_hide_menu()
@@ -109,10 +115,10 @@ func _close_sub_menu() -> void:
 	_show_menu()
 	sub_menu_closed.emit()
 
-func _event_is_mouse_button_released(event : InputEvent) -> bool:
+func _event_is_mouse_button_released(event: InputEvent) -> bool:
 	return event is InputEventMouseButton and not event.is_pressed()
 
-func _input(event : InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_cancel"):
 		if sub_menu:
 			_close_sub_menu()

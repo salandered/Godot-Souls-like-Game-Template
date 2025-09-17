@@ -63,7 +63,7 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 ## Not to override ## used to be called _check_transition
 func _check_transition(input: InputPackage) -> String:
 	# if current_action.action_name == PS.action_longsword_1:
-		# print_.prefix("Combo 🗡️", str(current_action.accepts_queueing()))
+		# print_.combo("", str(current_action.accepts_queueing()))
 	if current_action.accepts_queueing():
 		check_combos(input)
 	if has_queued_state and current_action.transitions_to_queued(): # was transitions_to_queued()
@@ -121,7 +121,7 @@ func _on_enter_state(input: InputPackage):
 	# TODO: stupid split. or not?
 	if depends_on_legs:
 		player_sm.torso_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
-		print_.prefix("PSM state", "enter: DEPENDENT state. Actions delegated to legs, NO SWITCHES ⚪⚪", 1)
+		print_.psm("state", "enter: DEPENDENT state. Actions delegated to legs, NO SWITCHES ⚪⚪", 1)
 		legs_sm.switch_to(legs_behavior, input)
 	else: # state leads legs. RIGHT NOW ITS ONLY DOUBLE. complex attacks expecting
 		#if legs_behavior.behavior_name != LS.legs_behavior_double:
@@ -129,9 +129,9 @@ func _on_enter_state(input: InputPackage):
 		default_action_name = choose_default_action()
 		assert(default_action_name, state_name + " No default actions for non depended state which is probably an error ")
 		# if not default_action_name:
-			# print_.prefix("PSM enter ", state_name + " No default actions for non depended state which is probably an error ", 1)
+			# print_.psm("enter ", state_name + " No default actions for non depended state which is probably an error ", 1)
 
-		print_.prefix("PSM enter", " switch to DEFAULT action " + default_action_name, 1)
+		print_.psm("enter", " switch to DEFAULT action " + default_action_name, 1)
 		switch_action_to(default_action_name, input)
 		legs_sm.switch_to(legs_behavior, input)
 
@@ -140,12 +140,12 @@ func _on_enter_state(input: InputPackage):
 
 func switch_action_to(next_action_name: String, input: InputPackage):
 	if current_action and current_action.action_name == next_action_name:
-		print_.prefix("PSM Action ", "same next action ⚪ NO SWITCH to " + next_action_name, 1)
+		print_.psm("Action", "same next action ⚪ NO SWITCH to " + next_action_name, 1)
 		return
 	if current_action:
-		print_.prefix("PSM Action", "switch action " + current_action.action_name + " => " + next_action_name, 1)
+		print_.psm("Action", "switch action " + current_action.action_name + " => " + next_action_name, 1)
 	else:
-		print_.prefix("PSM Action", "No current action ⚪ => " + next_action_name, 1)
+		print_.psm("Action", "No current action ⚪ => " + next_action_name, 1)
 	current_action = container.action_by_name(next_action_name)
 	current_action._on_enter_action(input)
 
@@ -189,14 +189,14 @@ func try_force_state(new_forced_state: String):
 ## => states can use 'queued state' field for transitions without losing it.
 func check_combos(input: InputPackage):
 	for combo: Combo_ in combos:
-		print_.prefix("Combo 🗡️", "checking combo " + combo.name + " with state_to_trigger " + combo.state_to_trigger)
+		print_.combo("", "checking combo " + combo.name + " with state_to_trigger " + combo.state_to_trigger)
 		# print("COMBO", combo.triggered_state)
 		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(combo.state_to_trigger)):
 			has_queued_state = true
 			queued_state = combo.state_to_trigger
-			print_.prefix("Combo 🗡️", "Queued: " + queued_state, 1)
+			print_.combo("", "Queued: " + queued_state, 1)
 		else:
-			print_.prefix("Combo 🗡️", "Declined", 1)
+			print_.combo("", "Declined", 1)
 
 ## choosing the input with the highest priority that we can also pay for
 func best_input_that_can_be_paid(input: InputPackage) -> String:

@@ -30,7 +30,7 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 	var axis_len := vertical_axis.length()
 	
 	if axis_len < 1e-6: # axis degenerate near straight-up/down — ignoring this frame
-		print("vert mouse move skip frame")
+		print_.fancy_cam("", "vert mouse move skip frame")
 		return offset
 
 	vertical_axis = vertical_axis / axis_len
@@ -55,11 +55,11 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 			var scale := clampf((theta_target - theta_now) / denom, 0.0, 1.0)
 			offset = offset.rotated(vertical_axis, rot_angle * scale)
 		else: # denom ~ 0 means input had ~no theta change; do nothing this frame
-			print("vert mouse move skip frame")
+			print_.fancy_cam("", "vert mouse move skip frame")
 	
 	# DEV
 	# var theta_after := acos(clamp(free_offset.normalized().dot(Vector3.UP), -1.0, 1.0))
-	# print("[vertSAT] θ_now=", rad_to_deg(theta_now),
+	# print_.fancy_cam("[vertSAT] θ_now=", rad_to_deg(theta_now),
 	# 	" θ_pred=", rad_to_deg(theta_pred),
 	# 	" θ_target=", rad_to_deg(theta_target),
 	# 	" θ_after=", rad_to_deg(theta_after))

@@ -143,14 +143,14 @@ func legs_action_by_name(action_name: String) -> LegsAction:
 
 func accept_player_states() -> void:
 	for child: PlayerState in get_descendants.player_states_by_type(player_sm, "PlayerState"):
-		print("child.get_name() ", child.get_name())
+		print_.container("", "child.get_name() " + child.get_name())
 		var state_data: PSData = _state_data.get(child.get_name())
 		# assert(state_data, "PSData for " + child.get_name() + " not found")
 		if not state_data:
 			push_error("No state data found for: " + child.get_name())
 			continue
 
-		print("state_data.state_name ", state_data.state_name)
+		print_.container("", "state_data.state_name " + state_data.state_name)
 
 		_states[state_data.state_name] = child
 
@@ -185,19 +185,19 @@ func accept_player_states() -> void:
 		assert(child.state_name and not child.state_name.is_empty(), " state_name problem for state ")
 		assert(child.priority and child.priority >= 0, " priority problem for state: " + child.state_name)
 
-	print("===========  Accepted states ===========")
-	print(_states)
-	print()
+	print_.container("", "===========  Accepted states ===========")
+	print_.container("", str(_states))
+	print("")
 
 func accept_player_actions():
 	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
-		print("child.get_name() ", child.get_name())
+		print_.container("", "child.get_name() " + child.get_name())
 		var action_data: PlayerActionData = _player_action_data.get(child.get_name())
 		# assert(action_data, "PlayerActionData for " + child.get_name() + " not found")
 		if not action_data:
 			push_error("No action data found for: " + child.get_name())
 			continue
-		print("action_data.action_name ", action_data.action_name)
+		print_.container("", "action_data.action_name " + action_data.action_name)
 
 		_player_actions[action_data.action_name] = child
 		
@@ -218,19 +218,19 @@ func accept_player_actions():
 		assert(child.animation and not child.animation.is_empty(), " animation problem for action: " + child.action_name)
 		assert(child.backend_animation and not child.backend_animation.is_empty(), " backend_animation problem for action: " + child.action_name)
 		# assert(node.animator_set and not node.animator_set.is_empty(), " animator_set problem for action: " + node.action_name)
-	print("===========  Accepted actions ===========")
-	print(_player_actions)
-	print()
+	print_.container("", "===========  Accepted actions ===========")
+	print_.container("", str(_player_actions))
+	print("")
 
 
 func accept_legs_behaviors():
 	for child: LegsBehavior in get_descendants.player_states_by_type(legs_sm, "LegsBehavior"):
-		print("node.get_name() ", child.get_name())
+		print_.container("", "node.get_name() " + child.get_name())
 		var behavior_data: LegBehaviorData = _legs_behavior_data.get(child.get_name())
 		if not behavior_data:
 			push_error("No behavior data found for: " + child.get_name())
 			continue
-		print("behavior_data.behavior_name ", behavior_data.behavior_name)
+		print_.container("", "behavior_data.behavior_name " + behavior_data.behavior_name)
 		_legs_behaviors[behavior_data.behavior_name] = child
 
 		child.behavior_name = behavior_data.behavior_name
@@ -246,12 +246,12 @@ func accept_legs_behaviors():
 
 func accept_legs_actions():
 	for child: LegsAction in get_descendants.player_states_by_type(legs_sm, "LegsAction"):
-		print("node.get_name() ", child.get_name())
+		print_.container("", "node.get_name() " + child.get_name())
 		var action_data: LegActionData = _legs_action_data.get(child.get_name())
 		if not action_data:
 			push_error("No action data found for: " + child.get_name())
 			continue
-		print("action_data.action_name ", action_data.action_name)
+		print_.container("", "action_data.action_name " + action_data.action_name)
 		_leg_actions[action_data.action_name] = child
 		
 		# base action

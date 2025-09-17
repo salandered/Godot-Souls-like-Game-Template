@@ -20,11 +20,11 @@ var states: Dictionary # { String : BaseSEState }
 
 func accept_states():
 	for node: BaseSEState in get_descendants.base_se_states(self):
-		print("node.get_name() ", node.get_name())
+		print_.container("", "node.get_name() " + node.get_name())
 		var state_data: SEStateData = node_to_state_data.get(node.get_name())
 		assert(state_data, "SEStateData for " + node.get_name() + " not found")
 
-		print("state_data.state_name ", state_data.state_name)
+		print_.container("", "state_data.state_name " + state_data.state_name)
 
 		states[state_data.state_name] = node
 		

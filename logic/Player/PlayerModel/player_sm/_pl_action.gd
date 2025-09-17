@@ -13,7 +13,7 @@ var player_sm: PlayerSM
 func animate():
 	# if animation == "roll" or animation == "block":
 		# print_.prefix("~~ SOS", "")
-	print_.prefix("▶️ PSM Action ", animation + " with blend time " + str(blend_time), 8)
+	print_.psm("▶️ Action ", animation + " with blend time " + str(blend_time), 8)
 	player_sm.torso_animator.play(animation, blend_time)
 	# print_.prefix("SKM", "_base _animate with " + animator_set + " settings_switch_time " + str(settings_switch_time))
 	# # animator_set - like "full_body" or "torso_legs"

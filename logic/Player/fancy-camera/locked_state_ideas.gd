@@ -12,8 +12,8 @@ var _just_locked := false # first-frame nest freeze (prevents base-point rebase)
 
 func _ready():
 	look_at_ = fc.look_at_
-	print("LockedCameraState ready()")
-	print("		look_at_ ", look_at_)
+	print_.fancy_cam("", "LockedCameraState ready()")
+	print_.fancy_cam("", "		look_at_ " + str(look_at_))
 
 
 func update(delta: float) -> void:
@@ -110,14 +110,14 @@ func _move_camera() -> void:
 func _check_distance() -> void:
 	# checks if the distance between the player and target is too big and drops the target if triggered
 	if fc.player.model.area_awareness.camera_focus_further_than(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
-		# print("dropping ", distance, " ", TARGET_DROP_DISTANCE_SQUARED)
+		# print_.fancy_cam("dropping ", distance, " ", TARGET_DROP_DISTANCE_SQUARED)
 		_drop_target()
 
 func check_relevance():
 	_drop_target()
 
 func _drop_target() -> void:
-	print("DROP started")
+	print_.fancy_cam("", "DROP started")
 
 	var mount_pos := fc.mount.global_position
 	var cam_pos := fc.camera.global_position
@@ -131,7 +131,7 @@ func _drop_target() -> void:
 
 	fc.current_state = fc.free_camera
 	fc.locked_target = fc.nest
-	print("DROP ended")
+	print_.fancy_cam("", "DROP ended")
 
 	
 func input_mouse_movement(d_x: float, d_y: float) -> void:

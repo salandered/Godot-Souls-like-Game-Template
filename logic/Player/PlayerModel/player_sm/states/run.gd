@@ -24,7 +24,7 @@ func check_transition(input: InputPackage) -> String:
 
 # func _mirror_legs_action(input: InputPackage):
 # 	if current_action.action_name != legs_sm.current_action.action_name:
-# 		print_.prefix("PSM mirror", state_name + ": " + current_action.action_name + " -> legs's " + legs_sm.current_action.action_name, 1)
+# 		print_.psm("mirror", state_name + ": " + current_action.action_name + " -> legs's " + legs_sm.current_action.action_name, 1)
 # 		switch_action_to(legs_sm.current_action.action_name, input)
 # 	# else:
 # 		# print_.prefix("PS  |" + state_name + "|", "not switching", 5)

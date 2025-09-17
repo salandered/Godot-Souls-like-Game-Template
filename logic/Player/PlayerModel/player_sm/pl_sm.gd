@@ -46,7 +46,7 @@ func update(input: InputPackage, delta: float) -> void:
 
 	var verdict := current_state._check_transition(input)
 	if verdict != "okay":
-		print_.prefix("PSM ↪️", current_state.state_name + " => " + verdict)
+		print_.psm("↪️", current_state.state_name + " => " + verdict)
 		
 		current_state._on_exit_state()
 		# now current_state is next state

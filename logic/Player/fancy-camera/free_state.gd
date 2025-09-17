@@ -6,7 +6,7 @@ var chest: Node3D # CameraFocus node while not locked
 var free_offset: Vector3
 
 func switch_from_locked():
-	print("DROP started")
+	print_.fancy_cam("", "DROP started")
 	chest = fc.player.camera_focus # Players chest
 	var restored_offset = fc.nest.global_position - fc.mount.global_position
 	free_offset = restored_offset.normalized() * free_offset.length()
@@ -14,7 +14,7 @@ func switch_from_locked():
 	# second option against snapping, but optional
 	# _current_len = (fc.nest.global_position - fc.mount.global_position).length()
 	
-	print("DROP ended")
+	print_.fancy_cam("", "DROP ended")
 
 # region: old docs
 # Character moved: 
@@ -36,7 +36,7 @@ func update(delta: float):
 	fc.camera_movement.move_camera(delta)
 	
 
-	# print("[~~FREE UPD post", u.fr(), "]", fc.__dbg_main_info())
+	# print_.fancy_cam("[~~FREE UPD post", u.fr(), "]", fc.__dbg_main_info())
 
 func _move_focus_point() -> void:
 	# chest is CameraFocus (chest) while in free state

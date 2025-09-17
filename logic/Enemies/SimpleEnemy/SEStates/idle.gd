@@ -4,28 +4,23 @@ extends BaseSEState
 var __detected := false
 
 func check_transition(delta: float) -> String:
-
-	
-	
-
-
 	var detect := me.awareness.detect_player()
 	if detect.is_not_detected():
-		# print_.prefix("SE", "idle decision: not detected → idle " + me.CURRENT)
+		# print_.se("", "idle decision: not detected → idle " + me.CURRENT)
 		return me.CURRENT # not me.CURRENT_NEW_ITER because we are ready to go anytime
 	
 
 	if not __detected:
 		__detected = true
-		print_.prefix("SE"," !!! DETECTED")
+		print_.se("", " !!! DETECTED")
 
 	var aggression := traits.aggression.normalized()
-	print_.prefix("SE", "player detected and aggression is: " + str(aggression) + " ")
+	print_.se("", "player detected and aggression is: " + str(aggression) + " ")
 
 	# next if detected somehow
 
 	if detect.is_only_heard():
-		print_.prefix("SE", "idle decision: is_only_heard => pursuit")
+		print_.se("", "idle decision: is_only_heard => pursuit")
 		return SEState.pursuit
 
 	# next if detected and seen
@@ -33,26 +28,26 @@ func check_transition(delta: float) -> String:
 	# TODO: likely follow if player is spotted but from a big distances
 
 	if distance_to_player() > me.fight_distance:
-		print_.prefix("SE", "distance_to_player(" + str(distance_to_player()) + ") > fight_distance(" + str(me.fight_distance) + ") => idle " + me.CURRENT)
+		print_.se("", "distance_to_player(" + str(distance_to_player()) + ") > fight_distance(" + str(me.fight_distance) + ") => idle " + me.CURRENT)
 		# Turn towards player and remain idle
 		me.look_at(me.player.global_position, Vector3.UP)
 		return me.CURRENT
 
 	# in fight distance
 	if distance_to_player() < me.attack_distance:
-		print_.prefix("SE", "idle decision: to close! attack")
+		print_.se("", "idle decision: to close! attack")
 		return SEState.attack
 	
 
 	# in fight but not attack
 	if ra.chance(aggression):
-		print_.prefix("SE", "idle decision: ra  pursuit")
+		print_.se("", "idle decision: ra  pursuit")
 		return SEState.follow
 	elif ra.chance(aggression * 0.5): # smaller chance
-		print_.prefix("SE", "idle decision: ra follow")
+		print_.se("", "idle decision: ra follow")
 		return SEState.follow
 	else:
-		print_.prefix("SE", "idle decision: ra => idle")
+		print_.se("", "idle decision: ra => idle")
 		return me.CURRENT
 
 

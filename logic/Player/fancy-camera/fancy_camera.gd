@@ -127,8 +127,8 @@ func initialise():
 	camera_movement._default_len = initial_offset.length()
 	camera_movement._current_len = initial_offset.length()
 	
-	print("Fancy Camera Initialisation ended.")
-	print("    initial_offset is ", __free_off())
+	print_.fancy_cam("", "Fancy Camera Initialisation ended.")
+	print_.fancy_cam("    initial_offset is ", __free_off())
 
 
 func _process(delta: float) -> void:
@@ -141,16 +141,16 @@ func _process(delta: float) -> void:
 		if current_state == free_state:
 			var found_target = player.model.area_awareness.find_target()
 			if found_target:
-				print("[~~FREE->LOCKED ", u.fr() + "] ", __Cvec(), __free_off(), " target=", str(found_target))
+				print_.fancy_cam("~~FREE->LOCKED " + u.fr() + "] ", __Cvec() + __free_off() + " target=" + str(found_target))
 				
 				locked_target = found_target
 				current_state = locked_state
 				
 				locked_state.switch_from_free(locked_target)
 			else:
-				print("xLOCK NOT")
+				print_.fancy_cam("", "xLOCK NOT")
 		elif current_state == locked_state:
-			print_.prefix("UNLOCK", "fr_n " + str(u.fr()))
+			print_.fancy_cam("UNLOCK", "fr_n " + str(u.fr()))
 			locked_target = nest
 			current_state = free_state
 			free_state.switch_from_locked()
@@ -167,13 +167,13 @@ func _input(event):
 		__change_fov()
 	
 	if event.is_action_pressed("debug_toggle_nest"):
-		print("Toggling visibility of CSG objects for ", len(__csg_objects), " objects")
+		print_.fancy_cam("", "Toggling visibility of CSG objects for " + str(len(__csg_objects)) + " objects")
 		__dev_camera_visuals = not __dev_camera_visuals
 		__toggle_camera_visuals()
 
 	if event.is_action_pressed("dev_camera_cols"):
 		__dev_camera_cols = not __dev_camera_cols
-		print("dev_camera_cols")
+		print_.fancy_cam("", "dev_camera_cols")
 
 func __toggle_camera_visuals():
 	for obj in __csg_objects:
@@ -227,7 +227,7 @@ func __angle_player_camera_target() -> String:
 
 
 func __change_fov():
-	print("changed fov")
+	print_.dev("", "changed fov")
 	__fov_pointer += 1
 	var fovs = [10, 25, 50, 100]
 	var fov = fovs[__fov_pointer % fovs.size()]

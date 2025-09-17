@@ -23,9 +23,9 @@ func have_target_for_ripost() -> bool:
 	print_.prefix("Combo 🗡️ ", "ripost(): victims in group: " + str(parried_victims.size()))
 	for player in parried_victims:
 		var dist = player.global_position.distance_to(state.player.global_position)
-		print_.prefix("Combo 🗡️", "candidate: " + str(player.name) + " dist: " + str(dist))
+		print_.combo("", "candidate: " + str(player.name) + " dist: " + str(dist))
 		if dist < 2.0:
-			print_.prefix("Combo 🗡️", "ripost target acquired")
+			print_.combo("", "ripost target acquired")
 			return true
 	print_.prefix("Combo 🗡️ ", "ripost: no target in range")
 	return false

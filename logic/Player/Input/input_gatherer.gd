@@ -80,13 +80,13 @@ func _gather_lock_target(new_input: InputPackage, delta: float):
 		
 		if not _long_press_triggered and _press_timer >= LONG_PRESS_THRESHOLD:
 			_long_press_triggered = true
-			print("[input] target_lock_LONG_pressed")
+			print_.input_gathering("", "target_lock_LONG_pressed")
 			new_input.target_lock_long_pressed = true
 			_press_timer = 0.0
 	
 	if Input.is_action_just_released(RawAction.lock_target):
 		if not _long_press_triggered:
-			print("[input] target_lock_pressed")
+			print_.input_gathering("", "target_lock_pressed")
 			new_input.target_lock_pressed = true
 		_press_timer = 0.0
 		_long_press_triggered = false

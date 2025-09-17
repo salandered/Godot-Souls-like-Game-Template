@@ -1,0 +1,175 @@
+extends RefCounted
+class_name print_
+
+
+# TODO: filtr for log levels
+
+
+const input_gathering_PRINT := true
+const DEV_PRINT := true
+const FANCY_CAM_PRINT := false
+const CONTAINER_PRINT := false
+const HIT_B_PRINT := true
+const COLLISION_PRINT := false
+const SE_PRINT := false
+const SKM_PRINT := false
+const PSM_PRINT := false
+const LSM_BEH_PRINT := false
+const LSM_ACTION_PRINT := false
+const COMBO_PRINT := false
+
+
+static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not input_gathering_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "Input" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+static func dev(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not DEV_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "dev" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+static func fancy_cam(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not FANCY_CAM_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "Fancy" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func hit_b(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not HIT_B_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "💢 HB" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not CONTAINER_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "Container" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not SE_PRINT and level != L.FORCE_PRINT: return
+
+	add_prefix_ = "SE" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not PSM_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "PSM" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not LSM_BEH_PRINT and level != L.FORCE_PRINT: return
+		
+	add_prefix_ = "LSM Behavior" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not LSM_ACTION_PRINT and level != L.FORCE_PRINT: return
+		
+	add_prefix_ = "LSM Action" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not COMBO_PRINT and level != L.FORCE_PRINT: return
+		
+	add_prefix_ = "Combo 🗡️" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func skm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not SKM_PRINT and level != L.FORCE_PRINT: return
+		
+	add_prefix_ = "SKM 💀" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func prefix(prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	var tabs_prefix := __calculate_tab_prefix(info_indents)
+	prefix_ = "[" + prefix_ + "]" + "  "
+	match level:
+		L.DEBUG:
+			prefix_ = L.DEBUG + " " + prefix_
+		L.INFO:
+			prefix_ = L.INFO + " " + prefix_
+		L.WARN:
+			prefix_ = L.WARN + " " + prefix_
+		L.ERROR:
+			prefix_ = L.ERROR + " " + prefix_
+
+	print(tabs_prefix, prefix_, text)
+
+
+static func _debug_(text, info_indents: int = 0):
+	var tabs_prefix := __calculate_tab_prefix(info_indents)
+	print(tabs_prefix, L.DEBUG, " ", text)
+
+static func _ready(node: Node, info_indents: int = 0):
+	print("||", node.name, " ready()")
+	_info(node, "", 1)
+
+
+static func _info(node: Node, prefix_: String = "", info_indents: int = 0):
+	"""
+	Prints detailed information about the given node for debugging purposes.
+	"""
+	if prefix_:
+		print(prefix_)
+
+	var tabs_prefix := __calculate_tab_prefix(info_indents)
+
+	print(tabs_prefix, "Node name: ", node.name)
+	print(tabs_prefix, "Node type: ", node.get_class())
+	print(tabs_prefix, "Node path: ", node.get_path())
+	# print("Is inside tree:", node.is_inside_tree())
+	# print("Parent:", node.get_parent())
+	# print("Children count:", node.get_child_count())
+	# var groups = node.get_groups()
+	# print("Groups:", ", ".join(groups) if groups.size() > 0 else "(none)")
+
+
+static func __calculate_tab_prefix(info_indents: int) -> String:
+	var tabs_prefix = ""
+	if info_indents:
+		for i in range(info_indents):
+			tabs_prefix += "    "
+	return tabs_prefix
+
+
+static func collisions(node: Node, info_indents: int = 0, layer_: bool = true, level: String = L.NOTSET):
+	if not COLLISION_PRINT and level != L.FORCE_PRINT: return
+	print("COLLISION LAYER AND MASK")
+	var layer = "none"
+	if layer_:
+		layer = node.collision_layer
+	var mask = node.collision_mask
+		# Debug print the values
+	if layer_: print("Collision Layer: ", layer, " (binary: ", str(layer).pad_zeros(32), ")")
+	print("Collision Mask: ", mask, " (binary: ", str(mask).pad_zeros(32), ")")
+
+	# Alternative: print in binary format more clearly
+	if layer_: print("Collision Layer binary: ", String.num_uint64(layer, 2))
+	print("Collision Mask binary: ", String.num_uint64(mask, 2))
+	
+	# Print the bit positions (layer numbers)
+	if layer_: print("Collision Layer: ", __get_bit_position(layer), " (value: ", layer, ")")
+	print("Collision Mask bit position: ", __get_bit_position(mask), " (value: ", mask, ")")
+
+	print("")
+
+static func __get_bit_position(value: int) -> int:
+	# Returns the position of the first set bit (0-indexed)
+	if value == 0:
+		return -1
+	for i in range(32):
+		if value & (1 << i):
+			return i
+	return -1

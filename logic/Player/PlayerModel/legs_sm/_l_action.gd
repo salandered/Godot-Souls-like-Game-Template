@@ -21,7 +21,7 @@ func update(_input: InputPackage, _delta: float):
 
 ## can be overriden (see double action)
 func animate():
-	print_.prefix("▶️ LSM Action ", "animation " + animation, 8)
+	print_.lsm_action("▶️ Action", "animation " + animation, 8)
 	legs_sm.legs_animator.play(animation, 0.2)
 
 

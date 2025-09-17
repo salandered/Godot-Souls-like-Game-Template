@@ -5,22 +5,22 @@ func check_transition(delta: float) -> String:
 	var aggression := traits.aggression.normalized()
 
 	if works_longer_than(fatigue):
-		print_.prefix("SE", "pursuit decision: fatigue => idle         " + str(get_progress()) + "      " + str(fatigue))
+		print_.se("", "pursuit decision: fatigue => idle         " + str(get_progress()) + "      " + str(fatigue))
 		return SEState.idle
 
 	if distance_to_player() < me.attack_distance:
 		if ra.chance(aggression):
-			print_.prefix("SE", "pursuit decision: <attack_distance => attack")
+			print_.se("", "pursuit decision: <attack_distance => attack")
 			return SEState.attack
 		elif ra.chance(aggression * 0.5):
-			print_.prefix("SE", "pursuit decision: <attack_distance but ra => idle")
+			print_.se("", "pursuit decision: <attack_distance but ra => idle")
 			return SEState.idle
 		else:
-			print_.prefix("SE", "pursuit decision: <attack_distance => attack")
+			print_.se("", "pursuit decision: <attack_distance => attack")
 			return SEState.attack
 
 	if distance_to_player() > me.sight_distance:
-		print_.prefix("SE", "pursuit decision: >sight_distance => backtrack")
+		print_.se("", "pursuit decision: >sight_distance => backtrack")
 		return SEState.backtrack
 
 	return me.CURRENT

@@ -41,5 +41,5 @@ func works_between(start: float, finish: float) -> bool:
 
 
 func __reject() -> bool:
-	print_.prefix("oooo TM oooo ", "time manage rejected -1", 5)
+	# print_.prefix("oooo TM oooo ", "time manage rejected -1", 5)
 	return false

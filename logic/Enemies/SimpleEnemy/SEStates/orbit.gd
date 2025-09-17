@@ -8,7 +8,7 @@ var direction_decider: int # 1 or -1
 
 
 func on_enter_state():
-	print_.prefix("SE", "orbit: on_enter_state")
+	print_.se("", "orbit: on_enter_state")
 	if ra.coinflip():
 		direction_decider = -1
 		change_animation_to(SEA.strafe_L)
@@ -18,12 +18,12 @@ func on_enter_state():
 
 
 func check_transition(delta: float) -> String:
-	print_.prefix("SE", "orbit: check_transition")
+	print_.se("", "orbit: check_transition")
 	if player.global_position.distance_to(me.global_position) < me.attack_distance:
-		print_.prefix("SE", "orbit decision: attack")
+		print_.se("", "orbit decision: attack")
 		return SEState.attack
 	if distance_to_player() > me.fight_distance:
-		print_.prefix("SE", "orbit decision: backtrack")
+		print_.se("", "orbit decision: backtrack")
 		return SEState.backtrack
 	return me.CURRENT
 
@@ -36,5 +36,5 @@ func _update(delta):
 
 
 func on_exit():
-	print_.prefix("SE", "orbit: on_exit")
+	print_.se("", "orbit: on_exit")
 	pass
