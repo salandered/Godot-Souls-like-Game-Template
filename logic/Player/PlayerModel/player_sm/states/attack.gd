@@ -37,7 +37,7 @@ func root_movement(delta: float):
 	delta_pos.y = 0
 	player.velocity = player.get_quaternion() * delta_pos / delta
 	if not player.is_on_floor():
-		player.velocity.y -= gravity * delta
+		player.velocity.y -= u.gravity * delta
 		has_forced_state = true
 		forced_state = PS.midair
 

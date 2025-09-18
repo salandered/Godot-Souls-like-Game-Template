@@ -1,7 +1,7 @@
 extends Node
-class_name EnemyResources
+class_name EnemyFeelings
 
-@onready var me: SECharacter = $"../"
+var me: SECharacter
 
 @export var max_health: float = 100
 @export var health: float = 100

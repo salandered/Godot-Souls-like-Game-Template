@@ -1,10 +1,11 @@
+@tool
 class_name M_PauseMenu
 extends OverlaidMenu
 
-@export var options_packed_scene : PackedScene
-@export_file("*.tscn") var main_menu_scene : String
+@export var options_packed_scene: PackedScene
+@export_file("*.tscn") var main_menu_scene: String
 
-var popup_open : Node
+var popup_open: Node
 
 func close_popup() -> void:
 	if popup_open != null:

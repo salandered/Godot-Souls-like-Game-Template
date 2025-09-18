@@ -26,6 +26,12 @@ func direction_to_(target: Variant) -> Vector3:
 		push_error("Invalid target type for direction_to_")
 		return Vector3.ZERO
 
+func look_at_player(grounded: bool = false):
+	var target = player.global_position
+	if grounded:
+		target = get_projected_player_pos()
+	u.safe_look_at(me, target, Vector3.UP, true)
+
 func projected_direction_to_player() -> Vector3:
 	return me.global_position.direction_to(get_projected_player_pos())
 

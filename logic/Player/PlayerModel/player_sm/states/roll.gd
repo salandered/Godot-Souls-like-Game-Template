@@ -18,7 +18,7 @@ func move_player(delta: float):
 	player.velocity.x = rotated_delta.x
 	player.velocity.z = rotated_delta.z
 	if not player.is_on_floor():
-		player.velocity.y -= gravity * delta
+		player.velocity.y -= u.gravity * delta
 
 # TODO To move this reset logic into the base State? 
 # It’s a quick hack for one‑shot animations that can chain (e.g. roll → roll). 

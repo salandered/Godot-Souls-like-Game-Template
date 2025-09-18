@@ -3,7 +3,8 @@ class_name EnemyAwareness
 
 
 @export var sight_mask: int = Collision.Layers.ENVIRONMENT_COL | Collision.Layers.PLAYER_COL
-@onready var me: SECharacter = $"../.."
+
+var me: SECharacter
 
 @onready var downcast = $Downcast as RayCast3D
 
@@ -12,10 +13,7 @@ var sight_cone_visual: MeshInstance3D
 var conus_color := Color(1, 0.5, 1, 0.25)
 
 
-func _ready():
-	if me == null:
-		push_error("EnemyAwareness must be a child of SECharacter")
-		return
+func initialise():
 	if debug_sight_cone:
 		__create_sight_cone_visual()
 
@@ -53,7 +51,7 @@ func get_floor_distance() -> float:
 	return 999999
 
 func _is_in_sight_cone(target_position: Vector3) -> bool:
-	var forward = - me.global_transform.basis.z
+	var forward = me.global_transform.basis.z
 	forward.y = 0
 	forward = forward.normalized()
 	var to_target = target_position - me.global_position
@@ -96,8 +94,8 @@ func _update_sight_cone_mesh():
 	for i in range(segments):
 		var a1 = lerp(-half_angle, half_angle, float(i) / segments)
 		var a2 = lerp(-half_angle, half_angle, float(i + 1) / segments)
-		var p1 = Vector3(sin(a1), 0, -cos(a1)) * me.sight_distance
-		var p2 = Vector3(sin(a2), 0, -cos(a2)) * me.sight_distance
+		var p1 = Vector3(sin(a1), 0, cos(a1)) * me.sight_distance
+		var p2 = Vector3(sin(a2), 0, cos(a2)) * me.sight_distance
 		mesh.surface_add_vertex(Vector3.ZERO)
 		mesh.surface_add_vertex(p1)
 		mesh.surface_add_vertex(p2)

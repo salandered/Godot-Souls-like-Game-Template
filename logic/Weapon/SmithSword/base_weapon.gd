@@ -33,6 +33,12 @@ func _ready():
 	weapon_hurt_box.collision_layer = Collision.Layers.WEAPON_AREA
 	weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
 
+	
+	assert(weapon_hurt_box is Area3D, "Weapon is missing an Area3D node named 'WeaponArea'.")
+	assert(weapon_hurt_box.get_child(0), "The 'WeaponArea' must have a CollisionShape3D child.")
+	assert(weapon_handle, "Weapon is missing a node named 'Handle'.")
+	
+
 #var _calc_attachment_to_weapon: bool = true
 #func _process(delta: float) -> void:
 	#if _calc_attachment_to_weapon:

@@ -28,8 +28,6 @@ var resources: HumanoidResources
 var container: PlayerStatesContainer
 var left_wrist: BoneAttachment3D
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 var initial_position: Vector3
 
 @export var tracking_angular_speed: float = 10

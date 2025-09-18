@@ -17,7 +17,7 @@ var current_state: PlayerState
 
 var debug_cams: Array[Node]
 var cam_i := 0
-
+var __collisions_enabled: bool = true
 
 func _ready() -> void:
 	collision_layer = Collision.Layers.PLAYER_COL
@@ -72,6 +72,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		global_position.y += 1.5
 		print_._debug_("Unstuck: moved player up by 1.5 units")
 
+
+	if event.is_action_pressed("dev_cols"):
+		__collisions_enabled = not __collisions_enabled
+		if __collisions_enabled:
+			collision_mask = Collision.Mask.PLAYER_COL_MASK
+		else:
+			collision_mask = Collision.Mask._DEV_ZERO_MASK
+		
 
 # the section below contains some getters utilised by enemies to
 # analyze battle situation, currently it's used in Opponent project

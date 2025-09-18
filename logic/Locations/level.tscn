@@ -376,7 +376,7 @@ size = Vector3(1, 1, 1.35938)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -417.4566, -10.553876, -70.595184)
 
 [node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_j4sqn")]
-transform = Transform3D(-0.11949576, 0, -0.9928347, 0, 1, 0, 0.9928347, 0, -0.11949576, -423.20657, -10.4149885, -67.09622)
+transform = Transform3D(0.8893205, 0, -0.45728427, 0, 1, 0, 0.45728427, 0, 0.8893205, -425.25134, -9.533049, -66.220665)
 player = NodePath("../PrincessPack")
 
 [node name="🎯 _TARGET_ARENA" type="Node3D" parent="."]

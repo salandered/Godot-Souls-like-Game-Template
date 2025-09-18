@@ -1,59 +1,60 @@
 extends EnemyStateUtils
 class_name BaseSEState
-# TODO Consider: Common ancestor class State for BaseSEState and BaseSEState
-#  - player state relies on input-dependent transitions and updates, whereas the enemy state does not
-#    => only some fields and reaction logic would be shared, making the classes similar but not unified
 
 var state_name: String
 var animation: String
 var backend_animation: String
+
+## global_commitment is how long enemy should persist doing current state
+## iteration_commitment is how long enemy should persist doing current state after last deciding to continue it
+## fatigue is how long enemy should persist doing current state before calming down
 var global_commitment: float
 var iteration_commitment: float
 var fatigue: float
 
 var container: SEStatesContainer
 var animator: SEAnimator
-var resources: EnemyResources
+var resources: EnemyFeelings
 var right_weapon: BaseWeapon
 var traits: TraitsContainer
 
 var spawn_point: Vector3
 
-var __print_counter := 0
-var __frequency := 10
+var __rejected: int = 0 # only for convinient debug prints
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-func _check_transition(delta: float) -> String:
+func _check_transition(delta: float) -> Verdict:
 	if not me.is_on_floor() and not me.current_state.name == SEState.death:
-		return SEState.midair
+		return Verdict.new(SEState.midair)
 
 	var verdict = check_transition(delta)
+	
+	# print_.se("", "~~ " + str(get_iteration_progress()) + " / " + str(get_progress()) + " ~~ ", 0, "", 4)
 
-	__print_counter += 1
-	# if __print_counter % __frequency == 0:
-		# print_.se("", "~~ " + str(get_iteration_progress()) + " / " + str(get_progress()) + " ~~ ")
+	# here no mark_state_iteration(), we are still in the same iteration
+	if iteration_works_less_than(iteration_commitment) and not verdict.is_current():
+		if __rejected < 3: print_.se_check_trans(state_name, "iteration < commitment. => " + verdict.next_state + " rejected ✖️", 2)
+		__rejected += 1
+		return Verdict.new()
+	__rejected = 0
 
-	if iteration_works_less_than(iteration_commitment) and verdict != me.CURRENT and verdict != me.CURRENT_NEW_ITER:
-		print_.se("", state_name + ": iteration_works_less. " + verdict + " rejected")
-		# here no mark_state_iteration(), we are still in the same iteration
-		return me.CURRENT
-
-	if verdict != me.CURRENT and verdict != me.CURRENT_NEW_ITER:
-		print_.se("||||", verdict + " not rejected ", 2)
+	# if not verdict.is_current():
+		# print_.se_check_trans(state_name, verdict + " not rejected ", 2)
 	
 	# i quess global_commitment and fatigue should be decided in the state itself
-
-	if verdict == me.CURRENT_NEW_ITER:
-		print_.se("", state_name + ": new iteration, mark_state_iteration", 2)
+	if verdict.request_new_iter:
+		print_.se_check_trans(state_name, "new iteration requested => same state, iter-mark-state", 2)
 		iteration_mark_state()
+		return Verdict.new("", true)
+
+	print_.se_check_trans(state_name, "final verdict", 3)
 	return verdict
 
 
-## default check_transition. to override
-func check_transition(delta) -> String:
-	# if works longer than too much than do something calm
-	return me.CURRENT
+## Default check_transition to override. 
+## Called at the beginning of generic _check_transition.
+func check_transition(delta: float) -> Verdict:
+	print_.se_check_trans(state_name, "DEFAULT check_transition returns CURRENT", 3)
+	return Verdict.new()
 
 
 func _update(delta: float):
@@ -64,7 +65,7 @@ func update(delta: float):
 
 
 func _on_enter_state():
-	print_.se("", ">>> mark timers", 2)
+	print_.se(state_name, "on_enter_state. Mark all timers", 1)
 	mark_enter_state()
 	iteration_mark_state()
 	on_enter_state()
@@ -77,6 +78,7 @@ func _on_exit_state():
 	on_exit_state()
 
 func on_exit_state():
+	print_.se(state_name, "on_exit_state", 1)
 	pass
 
 
@@ -89,7 +91,4 @@ func react_on_hit(hit: HitData):
 func change_animation_to(animation_: String):
 	if animation != animation_:
 		animation = animation_
-		# if backend_animation == A.to_backend_lazy(animation):
-			# push_error("probably unreachable")
-		# backend_animation = A.to_backend_lazy(animation)
 		animator.update_animation()

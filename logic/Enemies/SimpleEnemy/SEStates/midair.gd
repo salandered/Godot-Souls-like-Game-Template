@@ -2,21 +2,20 @@ extends BaseSEState
 
 var landing_height: float = 2
 
-func check_transition(delta: float) -> String:
-	print_.se("", "midair: check_transition")
+func check_transition(delta: float) -> Verdict:
 	var floor_distance := me.awareness.get_floor_distance()
-	print_.se("", "Floor distance: %s" % str(floor_distance))
+	print_.se_check_trans(state_name, "Floor distance: %s" % str(floor_distance))
 	if floor_distance < landing_height:
-		print_.se("", "midair decision: landing, backtrack")
+		print_.se_check_trans(state_name, "landing, backtrack")
 		# TODO: change
-		return SEState.backtrack
+		return Verdict.new(SEState.backtrack)
 	else:
-		print_.se("", "midair decision: still falling")
+		print_.se_check_trans(state_name, "still falling")
 		# still falling
-		return me.CURRENT
+		return Verdict.new()
 
 
 func update(delta):
-	print_.se("", "midair: update")
-	me.velocity.y -= gravity * delta
+	print_.se(state_name, "update")
+	me.velocity.y -= u.gravity * delta
 	me.move_and_slide()

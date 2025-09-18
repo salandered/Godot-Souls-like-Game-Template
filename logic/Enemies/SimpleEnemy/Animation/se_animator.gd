@@ -33,7 +33,7 @@ func _set_blend_time(from: String, to: String, time: float):
 
 
 func set_speed_scale(speed: float):
-	# TODO: difference from calling builtin set_speed_scale() ??
+	# TODO: difference from calling builtin set_speed_scale() ?
 	_animator.speed_scale = speed
 
 

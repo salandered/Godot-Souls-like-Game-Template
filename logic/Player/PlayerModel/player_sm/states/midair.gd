@@ -33,7 +33,7 @@ func on_enter_state(input: InputPackage) -> void:
 
 	
 func update(input: InputPackage, delta: float) -> void:
-	player.velocity.y -= gravity * delta
+	player.velocity.y -= u.gravity * delta
 	current_action.update(input, delta)
 
 

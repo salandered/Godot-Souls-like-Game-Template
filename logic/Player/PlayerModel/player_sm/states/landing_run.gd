@@ -16,7 +16,7 @@ func check_transition(input: InputPackage) -> String:
 
 
 func update(_input: InputPackage, delta):
-	player.velocity.y -= gravity * delta
+	player.velocity.y -= u.gravity * delta
 
 # ex ep 2
 # func check_relevance(input: InputPackage):

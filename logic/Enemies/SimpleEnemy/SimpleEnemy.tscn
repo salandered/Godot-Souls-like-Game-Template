@@ -1,12 +1,12 @@
 [gd_scene load_steps=97 format=4 uid="uid://cpr2otl56mflk"]
 
 [ext_resource type="Script" uid="uid://cgjj4jhd0p6qj" path="res://logic/Enemies/SimpleEnemy/se_model.gd" id="1_5h74w"]
-[ext_resource type="Script" uid="uid://dwxloslblxih3" path="res://logic/Enemies/SimpleEnemy/traits_system/resource_enemy_traits.gd" id="2_6awvl"]
-[ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/Enemies/SimpleEnemy/enemy_awareness.gd" id="2_jud50"]
+[ext_resource type="Script" uid="uid://dwxloslblxih3" path="res://logic/Enemies/e_traits/resource_enemy_traits.gd" id="2_6awvl"]
+[ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/Enemies/e_awareness/enemy_awareness.gd" id="2_jud50"]
 [ext_resource type="Animation" uid="uid://bwtna6wt1dgfp" path="res://-assets-/animations/Ready-anim/tut-anim/slash_1.res" id="2_sbcid"]
 [ext_resource type="Animation" uid="uid://cm347resjgf08" path="res://-assets-/animations/Ready-anim/tut-anim/run.res" id="3_1u2cs"]
 [ext_resource type="Script" uid="uid://bivbms1ghr415" path="res://logic/Enemies/SimpleEnemy/SEStates/idle.gd" id="3_65kpw"]
-[ext_resource type="Script" uid="uid://dd6lfyjqwmvjw" path="res://logic/Enemies/SimpleEnemy/traits_system/traits_container.gd" id="3_1226p"]
+[ext_resource type="Script" uid="uid://dd6lfyjqwmvjw" path="res://logic/Enemies/e_traits/traits_container.gd" id="3_1226p"]
 [ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/xUtils/downcast.tscn" id="4_1226p"]
 [ext_resource type="Animation" uid="uid://c64nn2dioo6c2" path="res://-assets-/animations/Ready-anim/tut-anim/idle_shield.res" id="4_srjlh"]
 [ext_resource type="Script" uid="uid://dgh165nk0b7ce" path="res://logic/Enemies/SimpleEnemy/SEStates/pursuit.gd" id="4_uname"]
@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Weapon/hurt_hit/HitBox.tscn" id="8_2q7ci"]
 [ext_resource type="Animation" uid="uid://dlyiiq5g2e3em" path="res://-assets-/animations/Ready-anim/Gundyr/moving/gapclose.res" id="8_jud50"]
 [ext_resource type="Animation" uid="uid://ccyf3nj2nw0pm" path="res://-assets-/animations/Ready-anim/Gundyr/moving/gapclose_1.res" id="9_6awvl"]
-[ext_resource type="Script" uid="uid://besvu8rkuxij" path="res://logic/Enemies/SimpleEnemy/se_resources.gd" id="10_i6528"]
+[ext_resource type="Script" uid="uid://besvu8rkuxij" path="res://logic/Enemies/e_feelings/se_feelings.gd" id="10_i6528"]
 [ext_resource type="Animation" uid="uid://hnsfrbemn4u4" path="res://-assets-/animations/Ready-anim/Gundyr/moving/gapclose_2.res" id="10_m0u8j"]
 [ext_resource type="Animation" uid="uid://c4j428oxjv6h4" path="res://-assets-/animations/Ready-anim/Gundyr/moving/kick.res" id="11_1226p"]
 [ext_resource type="Animation" uid="uid://bgfh1dlpai812" path="res://-assets-/animations/Ready-anim/tut-anim/TPose.res" id="11_u0mj7"]
@@ -54,7 +54,7 @@
 [ext_resource type="Animation" uid="uid://bvsqnjfp0plnw" path="res://-assets-/animations/Ready-anim/tut-anim/idle_warrior.res" id="25_3ifj7"]
 [ext_resource type="Animation" uid="uid://b3j0ljxaxngdk" path="res://-assets-/animations/Ready-anim/tut-anim/strafe_right.res" id="25_bbbex"]
 [ext_resource type="Animation" uid="uid://bf1d4282m1ryw" path="res://-assets-/animations/Ready-anim/tut-anim/jump_run.res" id="26_5koeh"]
-[ext_resource type="Script" uid="uid://bowk2dt3jlc28" path="res://logic/Enemies/SimpleEnemy/se_animator.gd" id="26_w231t"]
+[ext_resource type="Script" uid="uid://bowk2dt3jlc28" path="res://logic/Enemies/SimpleEnemy/Animation/se_animator.gd" id="26_w231t"]
 [ext_resource type="Animation" uid="uid://q6o7ddogrjmv" path="res://-assets-/animations/Ready-anim/tut-anim/jump_sprint.res" id="27_mfqef"]
 [ext_resource type="Animation" uid="uid://dcklgh1qspg7t" path="res://-assets-/animations/Ready-anim/tut-anim/landing_run.res" id="28_h6bko"]
 [ext_resource type="Animation" uid="uid://cjry5u8re5msd" path="res://-assets-/animations/Ready-anim/tut-anim/landing_sprint.res" id="29_qnkf6"]
@@ -374,12 +374,12 @@ bind/52/pose = Transform3D(1, 3.69255e-08, 4.63969e-07, 4.66185e-07, -2.18279e-1
 radius = 0.3
 height = 1.7
 
-[node name="SimpleEnemy" type="CharacterBody3D" node_paths=PackedStringArray("animator", "awareness", "right_weapon", "resources")]
+[node name="SimpleEnemy" type="CharacterBody3D" node_paths=PackedStringArray("animator", "awareness", "right_weapon", "feelings")]
 script = ExtResource("1_5h74w")
 animator = NodePath("Model/Animator")
 awareness = NodePath("Model/AreaAwareness")
 right_weapon = NodePath("Model/bones/RightWrist/WeaponSocket/SmithSword")
-resources = NodePath("Resources")
+feelings = NodePath("Feelings")
 raw_traits_resource = SubResource("Resource_w50qb")
 
 [node name="dev_box" type="CSGBox3D" parent="."]
@@ -776,8 +776,10 @@ script = ExtResource("2_jud50")
 debug_shape_custom_color = Color(0.597637, 0.0414575, 0.253137, 1)
 debug_shape_thickness = 4
 
-[node name="Downcast" parent="Model/AreaAwareness" node_paths=PackedStringArray("root_attachment") instance=ExtResource("4_1226p")]
-root_attachment = NodePath("../../bones/Root")
+[node name="Downcast" parent="Model/AreaAwareness" node_paths=PackedStringArray("bone_attachment") instance=ExtResource("4_1226p")]
+debug_shape_custom_color = Color(0, 0.3019608, 0, 1)
+bone_attachment = NodePath("../../bones/Hips")
+__csg_visuals = true
 
 [node name="Animator" type="Node" parent="Model" node_paths=PackedStringArray("me")]
 unique_name_in_owner = true
@@ -824,13 +826,14 @@ script = ExtResource("16_fju5c")
 
 [node name="bones" type="Node3D" parent="Model"]
 
-[node name="Root" type="BoneAttachment3D" parent="Model/bones"]
+[node name="Hips" type="BoneAttachment3D" parent="Model/bones"]
+transform = Transform3D(0.46762258, -0.08378194, -0.8799488, 0.030184198, 0.9964309, -0.07883198, 0.8834128, 0.010303065, 0.46848243, 2.387976e-05, 0.90046704, 3.661029e-06)
 bone_name = "Hips"
-bone_idx = 0
+bone_idx = 1
 use_external_skeleton = true
 external_skeleton = NodePath("../../GeneralSkeleton")
 
-[node name="Hitbox" parent="Model/bones/Root" node_paths=PackedStringArray("processor") instance=ExtResource("8_2q7ci")]
+[node name="Hitbox" parent="Model/bones/Hips" node_paths=PackedStringArray("processor") instance=ExtResource("8_2q7ci")]
 transform = Transform3D(-0.467623, 0.0301842, -0.883413, 0.0837819, 0.996431, -0.0103031, 0.879949, -0.078832, -0.468482, -0.0300874, -0.992736, 0.07856)
 collision_mask = 8
 processor = NodePath("../../../..")
@@ -871,8 +874,9 @@ shape = SubResource("CapsuleShape3D_f21qa")
 [node name="RightEnemyWeapon" type="Node" parent="WeaponSystem"]
 script = ExtResource("76_jl20v")
 
-[node name="Resources" type="Node" parent="."]
+[node name="Feelings" type="Node" parent="."]
 script = ExtResource("10_i6528")
+max_health = null
 health = 20.0
 
 [node name="TargetableAspect" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("88_62ksi")]

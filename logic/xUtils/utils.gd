@@ -2,7 +2,16 @@ extends RefCounted
 # here are all utils which dont have their separate more focused module
 class_name u
 
-static func fr() -> String:
+static var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+static var __ := " " # tpdo: is it a safe name :D
+static var cln := ": "
+static var s_cln := "; "
+static var arr := " -> "
+static var hence := " => "
+
+
+static func fr(to_str: bool = true) -> Variant:
 	return "fr_n-" + str(Engine.get_process_frames())
 
 
@@ -29,16 +38,17 @@ static func ease_in_out(x: float) -> float:
 
 
 static func safe_look_at(
-	node: Node3D,
+	from_who: Node3D,
 	target: Vector3,
 	up: Vector3 = Vector3.UP,
+	# by default -Z is pointed to target. built in use_model_front solves that
 	use_model_front: bool = false,
 	eps: float = 0.001
 ) -> bool:
-	var dir = target - node.global_transform.origin
+	var dir = target - from_who.global_transform.origin
 	if dir.length_squared() < eps * eps:
 		return false
 	if abs(dir.normalized().dot(up)) > 1.0 - eps:
 		return false
-	node.look_at(target, up, use_model_front)
+	from_who.look_at(target, up, use_model_front)
 	return true

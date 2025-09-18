@@ -13,9 +13,6 @@ var motion_type: LegsSM.MotionType
 @export var TURN_SPEED: float = 2.0
 
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-
 func update(_input: InputPackage, _delta: float):
 	pass
 

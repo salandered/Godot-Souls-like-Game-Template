@@ -20,7 +20,7 @@ class_name SECharacter
 @export var animator: SEAnimator
 @export var awareness: EnemyAwareness
 @export var right_weapon: BaseWeapon
-@export var resources: EnemyResources
+@export var feelings: EnemyFeelings
 @onready var container = %StatesContainer as SEStatesContainer
 @onready var traits_container: TraitsContainer = %TraitsContainer
 
@@ -29,8 +29,6 @@ class_name SECharacter
 
 var spawn_point: Vector3
 
-const CURRENT = "_current"
-const CURRENT_NEW_ITER = "_current_new_iter"
 
 var current_state: BaseSEState
 @onready var right_enemy_weapon: RightEnemyWeapon = $WeaponSystem/RightEnemyWeapon
@@ -42,23 +40,25 @@ func _ready():
 	container.me = self
 	spawn_point = global_position
 	traits_container.accept_traits()
-	right_enemy_weapon.accept_model_data()
+	right_enemy_weapon.accept_data(self)
 	container.accept_states()
-	
+	awareness.me = self
+	awareness.initialise()
+	feelings.me = self
 	current_state = container.states["idle"]
-	switch_to("idle")
+	switch_to(SEState.idle)
 	
 
 func _physics_process(delta):
 	var verdict = current_state._check_transition(delta)
-	if not verdict == CURRENT and not verdict == CURRENT_NEW_ITER:
-		switch_to(verdict)
+	if not verdict.is_current():
+		switch_to(verdict.next_state)
 	player.dev_labels._label_enemy_info(self)
 	current_state._update(delta)
 
 
 func switch_to(state: String):
-	print_.se(">", current_state.state_name + " -> " + state)
+	print_.se("↪️", current_state.state_name + u.arr + state)
 	current_state._on_exit_state()
 	current_state = container.states[state]
 	current_state._on_enter_state()

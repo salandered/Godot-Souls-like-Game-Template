@@ -11,12 +11,21 @@ const FANCY_CAM_PRINT := false
 const CONTAINER_PRINT := false
 const HIT_B_PRINT := true
 const COLLISION_PRINT := false
-const SE_PRINT := false
+const SE_PRINT := true
 const SKM_PRINT := false
 const PSM_PRINT := false
 const LSM_BEH_PRINT := false
 const LSM_ACTION_PRINT := false
 const COMBO_PRINT := false
+
+
+static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
+	var result_freq = max(global_freq, arg_freq)
+	assert(result_freq > 0)
+
+	if result_freq == 1 or u.fr(false) % result_freq == 0:
+		return true
+	return false
 
 
 static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
@@ -52,11 +61,18 @@ static func container(add_prefix_: String, text: String, info_indents: int = 0, 
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET, freq: int = 1):
 	if not SE_PRINT and level != L.FORCE_PRINT: return
+	if not _is_freq_satisfied(1, freq): return
 
 	add_prefix_ = "SE" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
+
+# add_prefix_ is state_name here in most cases
+static func se_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET, freq: int = 1):
+	add_prefix_ = "transition ❔" + " " + add_prefix_
+	if info_indents == 0: info_indents = 2 # if not specified, lets shift it all
+	se(add_prefix_, text, info_indents, level, freq)
 
 static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
 	if not PSM_PRINT and level != L.FORCE_PRINT: return

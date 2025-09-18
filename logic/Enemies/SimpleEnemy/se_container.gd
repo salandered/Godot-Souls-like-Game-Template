@@ -42,7 +42,7 @@ func accept_states():
 		node.player = me.player
 		node.spawn_point = me.spawn_point
 		node.right_weapon = me.right_weapon
-		node.resources = me.resources
+		node.resources = me.feelings
 		node.traits = me.traits_container
 		node.container = self
 		# state.animation = state_anims[state.state_name]
@@ -52,12 +52,6 @@ func accept_states():
 		assert(node.global_commitment, " global_commitment problem for state: " + node.state_name)
 		assert(node.iteration_commitment, " iteration_commitment problem for state: " + node.state_name)
 		assert(node.fatigue, " fatigue problem for state: " + node.state_name)
-
-# func states_priority_sort(a: String, b: String):
-# 	if states[a].priority > states[b].priority:
-# 		return true
-# 	else:
-# 		return false
 
 
 # func get_state_by_name(state_name: String) -> BasePlayerState:

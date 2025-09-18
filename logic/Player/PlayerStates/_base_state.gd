@@ -27,8 +27,6 @@ extends StateUtils
 # var animator_set: String
 # var backend_animation: String
 
-# var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 
 # var initial_position: Vector3
 # var frame_length = 0.016
