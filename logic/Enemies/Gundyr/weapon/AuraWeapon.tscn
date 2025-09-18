@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjcs17bklx6cp"]
 
-[ext_resource type="Script" uid="uid://c7dxiap561s3p" path="res://logic/Enemies/Gundyr/weapon/hfsm_weapon.gd" id="1_jkypu"]
+[ext_resource type="Script" uid="uid://c7dxiap561s3p" path="res://logic/Enemies/Gundyr/weapon/halberd.gd" id="1_jkypu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sndmm"]
 radius = 5.0

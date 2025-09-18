@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends BaseEnemyCharacter
 class_name SECharacter
 
 @export_group("Player")
@@ -37,14 +37,16 @@ var current_state: BaseSEState
 func _ready():
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
-	container.me = self
+	
 	spawn_point = global_position
 	traits_container.accept_traits()
 	right_enemy_weapon.accept_data(self)
+	container.me = self
 	container.accept_states()
 	awareness.me = self
 	awareness.initialise()
 	feelings.me = self
+
 	current_state = container.states["idle"]
 	switch_to(SEState.idle)
 	

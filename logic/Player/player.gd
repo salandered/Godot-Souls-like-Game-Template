@@ -10,7 +10,7 @@ class_name Princess
 
 @onready var dev_labels: Node = %_dev_labels
 
-@onready var right_player_weapon: PlayerWeapon = $Weapons/RightPlayerWeapon
+@onready var right_player_weapon: RightPlayerWeapon = $Weapons/RightPlayerWeapon
 
 var current_state: PlayerState
 

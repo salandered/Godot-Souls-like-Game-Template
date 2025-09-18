@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dh7cg8licq77s"]
 
-[ext_resource type="Script" uid="uid://c7dxiap561s3p" path="res://logic/Enemies/Gundyr/weapon/hfsm_weapon.gd" id="1_8w6tc"]
+[ext_resource type="Script" uid="uid://c7dxiap561s3p" path="res://logic/Enemies/Gundyr/weapon/halberd.gd" id="1_8w6tc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwfvy"]
 

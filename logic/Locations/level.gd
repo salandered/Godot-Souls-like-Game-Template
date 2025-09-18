@@ -9,7 +9,7 @@ func _set_collision_recursive(node):
 	if node is CSGBox3D or node is CSGTorus3D or node is CSGCylinder3D:
 		node.collision_layer = Collision.Layers.ENVIRONMENT_COL
 		node.collision_mask = Collision.Mask.ENVIRONMENT_COL_MASK
-		print_.prefix("Collision", "Set collision layer and mask for CSGBox3D: " + node.name)
+		print_.collisions(node)
 	# do not traverse children if node is Character3D
 	if node is CharacterBody3D:
 		return

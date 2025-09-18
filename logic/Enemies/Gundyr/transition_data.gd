@@ -1,13 +1,16 @@
 extends Resource
-class_name TransitionData
+class_name VerdictHSM
 
-# TODO: why both vars. 
-# check that empty string in target_state is always used with needs_switch = false
-var needs_switch: bool
+## Empty "" means no switching
 var target_state: String
+## for log purposes
+var _comment: String
 
-# you can send some other data between your states
+## VerdictHSM.new() means no needs_switch
+func _init(target_state_: String = "", comment_: String = ""):
+	_comment = comment_
+	target_state = target_state_
 
-func _init(verdict: bool, next_state: String):
-	needs_switch = verdict
-	target_state = next_state
+
+func needs_switch() -> bool:
+	return target_state != ""

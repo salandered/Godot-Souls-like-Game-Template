@@ -20,7 +20,7 @@ func _ready():
 	print("--- Hitbox_ ready ---")
 	print(processor, processor.get_path())
 	print(ignored_weapon_groups)
-	print_.collisions(self, 0, true, L.FORCE_PRINT)
+	print_.collisions(self, 0, true, L.NOTSET)
 
 
 func on_contact(area: Node3D):

@@ -2,8 +2,8 @@ extends StateUtils
 class_name EnemyStateUtils
 
 
-@export var me: SECharacter
-@export var player: Princess
+var me: BaseEnemyCharacter
+var player: Princess
 
 func distance_to_player() -> float:
 	return me.global_position.distance_to(player.global_position)

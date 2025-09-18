@@ -2,7 +2,7 @@ extends BaseSEState
 
 
 func check_transition(delta: float) -> Verdict:
-	var detect := me.awareness.detect_player()
+	var detect: Detection = me.awareness.detect_player()
 	if detect.is_not_detected():
 		# print_.se("", "not detected → idle " + me.CURRENT)
 		return Verdict.new() # not me.CURRENT_NEW_ITER because we are ready to go anytime

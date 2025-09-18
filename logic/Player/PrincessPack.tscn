@@ -1837,9 +1837,6 @@ unique_name_in_owner = true
 transform = Transform3D(-4.371137e-08, -1, 0, 0.9999999, -4.3711395e-08, -2.4469202e-15, 6.1954455e-15, 0, 0.9999999, 0.79146934, -5.9604645e-08, 0)
 metadata/_edit_lock_ = true
 
-[node name="Handle" parent="Model/bones/RightWrist/Marker3D/SmithSword" index="1"]
-visible = false
-
 [node name="CSGBox3D" type="CSGBox3D" parent="Model/bones/RightWrist/Marker3D"]
 transform = Transform3D(0.104990855, 2.220446e-16, 0, 8.881784e-16, 0.03831687, -2.4469194e-15, 2.220446e-16, 1.4487365e-14, 1, 0, 0, 0)
 visible = false

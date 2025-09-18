@@ -1,5 +1,15 @@
 extends Node3D
 class_name BaseWeapon
+# CHECKLIST
+# Weapon consists of
+# - area3D - WeaponHurtBox - PACKED SCENE
+#       - collision HurtBoxCol of area3D IS NOT in packed scene, because godot doesnt like scaling col that way
+# - weapon visual mesh - optional (e.g. leg kick)
+# - holder - assigned by the holder (owner)
+# also
+# - Scene in owner tree should have group.
+# - HurtBoxCol should be adjusted (scale)
+# - WeaponHurtBox and Visuals - unique names
 
 ## To get a hit only once per attack.
 ## If hitbox doesn't find itself in the list
@@ -14,10 +24,7 @@ var is_attacking: bool = false
 var weapon_name: String
 var holder: Node # yes it can be not Node3D
 var weapon_hurt_box: WeaponHurtBox
-var weapon_handle: Marker3D
-var weapon_visuals: MeshInstance3D
-
-var target_attachment: Node3D
+var weapon_visuals: MeshInstance3D = null
 
 var base_damage: float = 10
 ## Maps input actions to states.
@@ -34,21 +41,12 @@ func _ready():
 	weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
 
 	
+	if not weapon_visuals:
+		print("Note: Weapon", u.__, weapon_name, u.__, "has no visuals")
+
 	assert(weapon_hurt_box is Area3D, "Weapon is missing an Area3D node named 'WeaponArea'.")
 	assert(weapon_hurt_box.get_child(0), "The 'WeaponArea' must have a CollisionShape3D child.")
-	assert(weapon_handle, "Weapon is missing a node named 'Handle'.")
 	
-
-#var _calc_attachment_to_weapon: bool = true
-#func _process(delta: float) -> void:
-	#if _calc_attachment_to_weapon:
-		## how the weapon is positioned relative to the attachment at design time
-		#attachment_to_weapon = target_attachment.global_transform.affine_inverse() * global_transform
-		#_calc_attachment_to_weapon = false
-#
-	#global_transform = target_attachment.global_transform * attachment_to_weapon
-#
-
 
 func get_hit_data() -> HitData:
 	if not __safe_checks():

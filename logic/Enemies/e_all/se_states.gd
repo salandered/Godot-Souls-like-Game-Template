@@ -1,4 +1,5 @@
-class_name SEState extends RefCounted
+extends RefCounted
+class_name SEState
 
 const idle := "idle"
 const orbit := "orbit"

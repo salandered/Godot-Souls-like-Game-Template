@@ -32,7 +32,7 @@ func _check_transition(delta: float) -> Verdict:
 
 	# here no mark_state_iteration(), we are still in the same iteration
 	if iteration_works_less_than(iteration_commitment) and not verdict.is_current():
-		if __rejected < 3: print_.se_check_trans(state_name, "iteration < commitment. => " + verdict.next_state + " rejected ✖️", 2)
+		if __rejected < 2: print_.se_check_trans(state_name, "iteration < commitment. => " + verdict.next_state + " rejected ✖️", 2)
 		__rejected += 1
 		return Verdict.new()
 	__rejected = 0

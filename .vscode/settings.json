@@ -20,6 +20,7 @@
 		"**/*.tmp": true,
 		"**/*.TMP": true,
 	},
+	// godot ends
 	// dont open file again in split view
 	"workbench.editor.revealIfOpen": true,
 	//---------------------------------------
@@ -80,47 +81,61 @@
 		// COLORFUL FOLDERS
 		// "folderPathColor.custom_yellow": "#ff8aef",
 		//
-		"folderPathColor.custom1": "#ffa9c8", // tender enemy
-		"folderPathColor.animation": "#d88ad8", // animation player
 		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
 		"folderPathColor.utils": "#92b69fe5", // utils
+		"folderPathColor.model": "#e681bffb", // model accent
+		"folderPathColor.custom7": "#cdcf90", // yellow accent (awareness)
+		"folderPathColor.custom1": "#ffa9c8", // tender enemy
+		"folderPathColor.custom13": "#a9c5d8", // enemy
+		"folderPathColor.custom10": "#d1abe7", // states enemy
+		"folderPathColor.animation": "#d88ad8", // animation player
 		"folderPathColor.custom5": "#94f0c5d5", //or #a4d4b2 tender green 2 
 		"folderPathColor.white_": "#dfdfdf", // white
-		"folderPathColor.custom7": "#cdcf90", // yellow accent
-		"folderPathColor.model": "#e681bffb", // model accent
-		"folderPathColor.states_blue": "#497cca", // state blue 
-		"folderPathColor.custom10": "#d1abe7", // states enemy
-		"folderPathColor.custom11": "#f1cf8ee3",
+		"folderPathColor.states_blue": "#6692d4", // state blue 
+		"folderPathColor.custom11": "#f1cf8ee3", // legs SM
 		"folderPathColor.custom12": "#92b9e4", // 8aa8c9
+		// "folderPathColor.custom14": "#f08ec4", // 8aa8c9
 	},
 	//
 	// COLORFUL FOLDERS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
+	//**/components/* - Matches any folder named "components" at any depth
+	// src/**/test - Matches any "test" folder inside the "src" directory at any depth
+	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	"folder-path-color.folders": [
 		{
 			"path": "logic/Player/PlayerModel/player_sm/pl_container.gd",
 			"color": "custom5"
 		},
-		// AA
+		// AREA AWARENESS
 		{
-			"path": "logic/Player/PlayerModel/area_awareness.gd",
+			"path": "*_awareness.gd",
 			"color": "custom7"
 		},
 		// WHITY
 		{
-			"path": "logic/Player/PlayerModel/player_sm/_pl_state.gd",
+			"path": "*_pl_state.gd",
 			"color": "white_"
 		},
 		{
-			"path": "logic/Enemies/SimpleEnemy/SEStates/_base_se_state.gd",
+			"path": "*_base_se_state.gd",
+			"color": "white_"
+		},
+		{
+			"path": "*_base_HFSM.gd",
 			"color": "white_"
 		},
 		// ANIM
 		{
-			"path": "logic/Player/PlayerAnim/split_body_animator.gd",
+			"path": "*_animator.gd",
 			"color": "animation"
 		},
-		//
+		// PLAYER STATE
+		{
+			"path": "logic/Player/PlayerModel/player_sm/states",
+			"color": "states_blue"
+		},
+		// PLAYER SM
 		{
 			"path": "logic/Player/PlayerModel/legs_sm",
 			"color": "custom11"
@@ -131,11 +146,7 @@
 		},
 		// MODEL
 		{
-			"path": "logic/Enemies/SimpleEnemy/se_model.gd",
-			"color": "model"
-		},
-		{
-			"path": "logic/Player/PlayerModel/player_model.gd",
+			"path": "*_model.gd",
 			"color": "model"
 		},
 		// DARK YELLOW
@@ -143,9 +154,17 @@
 			"path": "-assets-",
 			"color": "dark_misc"
 		},
-		//
+		// ENEMY STATES
 		{
 			"path": "logic/Enemies/SimpleEnemy/SEStates",
+			"color": "custom10"
+		},
+		{
+			"path": "logic/Enemies/Gundyr/hsme_states/leafes",
+			"color": "custom5"
+		},
+		{
+			"path": "logic/Enemies/Gundyr/hsme_states",
 			"color": "custom10"
 		},
 		// ENEMY
@@ -155,17 +174,12 @@
 		},
 		{
 			"path": "logic/Enemies/Gundyr",
-			"color": "animation"
+			"color": "custom13"
 		},
 		// CAMERA
 		{
 			"path": "logic/Player/fancy-camera",
 			"color": "custom5"
-		},
-		// STATE
-		{
-			"path": "logic/Player/PlayerModel/player_sm/states",
-			"color": "states_blue"
 		},
 		// UTILS
 		{
@@ -266,6 +280,15 @@
 				}
 			]
 		},
+		"\\b(HSMEA\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+					// "fontWeight": "bold"
+				}
+			]
+		},
 		"(RawAction\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -311,6 +334,17 @@
 			]
 		},
 		"(SEState\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(HSMEState\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{

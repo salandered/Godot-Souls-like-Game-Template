@@ -24,6 +24,13 @@ static func base_se_states(node: Node) -> Array:
 		descendants.append_array(base_se_states(child))
 	return descendants
 
+static func base_hsme_states(node: Node) -> Array:
+	var descendants := []
+	for child in node.get_children():
+		if child is BaseHSMEState:
+			descendants.append(child)
+		descendants.append_array(base_hsme_states(child))
+	return descendants
 
 static func csg(node: Node) -> Array:
 	var descendants := []

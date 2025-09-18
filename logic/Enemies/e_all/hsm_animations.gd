@@ -1,0 +1,24 @@
+extends RefCounted
+class_name HSMEA
+
+
+const idle := "idle"
+const awakening := "awakening"
+const walk_forward := "walk_forward"
+const scare_off := "scare_off"
+const gapclose_1 := "gapclose_1"
+const slash_1 := "slash_1"
+const slash_2 := "slash_2"
+const slash_3 := "slash_3"
+const slash_4 := "slash_4"
+const slash_5 := "slash_5"
+const slash_6 := "slash_6"
+const phase_switch := "phase_switch"
+const pursuit_run := "pursuit_run"
+const gapclose_2 := "gapclose_2"
+const kick := "kick"
+const elbow := "elbow"
+const shoulder_kick_placeholder := "shoulder_kick_placeholder"
+const slash_7 := "slash_7"
+const slash_8 := "slash_8"
+const death := "death"
