@@ -6,7 +6,7 @@ class_name OpponentBeliefs
 @export var actions_container: OpponentActionContainer
 var player: Princess
 
-@onready var actions = $"../Actions" as OpponentActionContainer
+@onready var actions = $"../OEActions" as OpponentActionContainer
 
 var our_collision_radius: float = 0.3
 var frame_duration = 0.016

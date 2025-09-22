@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
-[ext_resource type="PackedScene" path="res://-assets-/flicker_omni.tscn" id="2_dnvo4"]
+[ext_resource type="PackedScene" uid="uid://b8sj75wbb08k4" path="res://-assets-/x_misc/flicker_omni.tscn" id="2_dnvo4"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="2_ifnij"]
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level.gd" id="5_j4sqn"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dug2h6xkfk71h" path="res://-assets-/GLB-level/tower-map.glb" id="9_k3uw0"]
 [ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PrincessPack.tscn" id="9_ol10w"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
-[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/xUtils/simple_target/SimpleTarget.tscn" id="10_2mukc"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Common/simple_target/SimpleTarget.tscn" id="10_2mukc"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/pause_menu_controller.gd" id="10_ifnij"]
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="10_j4sqn"]
 [ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://logic/Enemies/Gundyr/Gundyr.tscn" id="11_mtufd"]
@@ -377,11 +377,11 @@ size = Vector3(1, 1, 1.35938)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -417.4566, -10.553876, -70.595184)
 
 [node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_j4sqn")]
-transform = Transform3D(0.8893205, 0, -0.45728427, 0, 1, 0, 0.45728427, 0, 0.8893205, -454.16086, -9.533049, -66.220665)
+transform = Transform3D(0.8893205, 0, -0.45728427, 0, 1, 0, 0.45728427, 0, 0.8893205, -422.42648, -9.533049, -53.735134)
 player = NodePath("../PrincessPack")
 
 [node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_mtufd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -428.26843, -10.324496, -61.241226)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -464.42145, -10.324496, -61.241226)
 player = NodePath("../PrincessPack")
 
 [node name="🎯 _TARGET_ARENA" type="Node3D" parent="."]

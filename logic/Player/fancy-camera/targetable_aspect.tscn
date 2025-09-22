@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bc030ubgkaf18"]
 
 [ext_resource type="Script" uid="uid://sra67e40jd6f" path="res://logic/Player/fancy-camera/targetable_aspect.gd" id="1_mxpn8"]
-[ext_resource type="Texture2D" uid="uid://dqh56seeosa6e" path="res://-assets-/x_icons/skull_icon.png" id="2_vjhre"]
+[ext_resource type="Texture2D" uid="uid://dqh56seeosa6e" path="res://-assets-/x_misc/x_icons/skull_icon.png" id="2_vjhre"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4ijc"]
 albedo_color = Color(0, 0.6323461, 0.035899956, 1)

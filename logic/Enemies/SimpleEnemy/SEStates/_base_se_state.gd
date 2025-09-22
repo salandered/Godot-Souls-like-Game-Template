@@ -37,9 +37,6 @@ func _check_transition(delta: float) -> Verdict:
 		return Verdict.new()
 	__rejected = 0
 
-	# if not verdict.is_current():
-		# print_.se_check_trans(state_name, verdict + " not rejected ", 2)
-	
 	# i quess global_commitment and fatigue should be decided in the state itself
 	if verdict.request_new_iter:
 		print_.se_check_trans(state_name, "new iteration requested => same state, iter-mark-state", 2)

@@ -21,7 +21,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://-assets-/default_bus_layout.tres"
+buses/default_bus_layout="res://-assets-/x_misc/default_bus_layout.tres"
 
 [autoload]
 
@@ -63,12 +63,12 @@ folder_colors={
 "res://-assets-/blender_sources/player/": "pink",
 "res://-assets-/materials-shared/": "red",
 "res://-assets-/raw_imports/": "orange",
-"res://-assets-/x_blend/": "orange",
-"res://-assets-/x_icons/": "gray",
+"res://-assets-/x_misc/x_icons/": "gray",
 "res://addons/": "gray",
 "res://addons/maaacks_game_template/base/scenes/opening/": "gray",
-"res://logic/Enemies/Gundyr/": "pink",
+"res://logic/Enemies/Gundyr/": "blue",
 "res://logic/Enemies/Gundyr/hsme_states/leafes/": "green",
+"res://logic/Enemies/SimpleEnemy/": "pink",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
 "res://misc/maacks_examples/": "teal",

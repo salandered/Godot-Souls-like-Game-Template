@@ -1,3 +1,5 @@
+# ================= GODOT
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia
@@ -6,6 +8,11 @@
 .import/
 export.cfg
 export_credentials.cfg
+
+# ================== PYTHON
+*__pycache__/*
+
+# ================== MISC
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -17,6 +24,8 @@ mono_crash.*.json
 
 # VScode
 # .vscode/
+
+# ================= PROJECT FS
 
 # Project non essentials
 raw_blender/

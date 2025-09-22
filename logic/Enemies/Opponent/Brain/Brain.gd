@@ -26,7 +26,7 @@ func get_most_intended_behaviour() -> String:
 	return most_intended_proaction()
 
 func most_intended_proaction() -> String:
-	brain_debug_panel.text = ""                 # <-----DEV-----
+	brain_debug_panel.text = ""               
 	var current_best_choice = default_proaction # which is set to Idle, i.e. do nothing
 	for proaction in proactions:
 		proaction._recalculate_intention()

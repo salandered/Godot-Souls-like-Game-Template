@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://logic/scripts/skeleton_local_scene.gd" id="1_4nxbt"]
 [ext_resource type="Script" uid="uid://x4tj0ao32edw" path="res://misc/old_scripts/mob_skin_3d.gd" id="2_2awen"]
-[ext_resource type="ArrayMesh" uid="uid://b826fw73g5irr" path="res://-assets-/skeleton_mesh_test.res" id="2_gkl83"]
+[ext_resource type="ArrayMesh" uid="uid://b826fw73g5irr" path="res://-assets-/x_misc/skeleton_mesh_test.res" id="2_gkl83"]
 [ext_resource type="AnimationLibrary" uid="uid://b6fe0juujj3b6" path="res://-assets-/animations/Ready-anim/libs/libraries30/x_sw-sh-pack-ske.res" id="4_hfu64"]
 
 [sub_resource type="Skin" id="Skin_kwo28"]
