@@ -7,19 +7,19 @@ extends PlayerState
 var jump_direction: Vector3 = Vector3.ZERO
 
 
-func check_transition(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> PLVerdict:
 	var floor_distance := area_awareness.get_floor_distance()
 	if floor_distance < landing_height:
 		var xz_velocity = player.velocity
 		xz_velocity.y = 0
 		if xz_velocity.length_squared() >= 10:
-			return PS.landing_run # TODO WAS SPRINT
+			return PLVerdict.new(PS.landing_run) # TODO WAS SPRINT
 		print_.psm("midair", str(floor_distance) + " < " + str(landing_height) + " => landing_run")
-		return PS.landing_run
+		return PLVerdict.new(PS.landing_run)
 	else:
 		# print_.psm("midair", "still midair")
 		# still falling
-		return "okay"
+		return PLVerdict.new("")
 
 func on_enter_state(input: InputPackage) -> void:
 		# the clamp construction is here to 

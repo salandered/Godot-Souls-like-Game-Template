@@ -2,14 +2,6 @@ extends Node
 # extends StateUtils ?
 class_name PlayerState
 
-# TODO: has_queued_state and queued_state can be one var (probably)
-# or queued_state is an array (wow)
-
-var has_queued_state: bool = false
-var queued_state: String = "nexistent queued state, error"
-
-var has_forced_state: bool = false
-var forced_state: String = "nonexistent forced state, error"
 
 var player_sm: PlayerSM
 var legs_sm: LegsSM
@@ -47,9 +39,20 @@ var default_action_name: String # first child or dummy action node
 
 var depends_on_legs: bool = false
 
+
+var queued_state: String = ""
+var forced_state: String = ""
+
+
 func _action_delegated_to_legs() -> bool:
 	return current_action is LegsAction
 
+
+func has_queued_state() -> bool:
+	return queued_state != ""
+
+func has_forced_state() -> bool:
+	return forced_state != ""
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	return player_sm.__velocity_by_input(input, delta)
@@ -58,30 +61,30 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 1. does something from the past force us to transition somewhere? 
 # 2. If not, does something textual from the present modify our inputs? 
 # 3. if nothing above, what vanilla state wants to default to?
-## Not to override ## used to be called _check_transition
-func _check_transition(input: InputPackage) -> String:
+## Not to override
+func _check_transition(input: InputPackage) -> PLVerdict:
 	# if current_action.action_name == PS.action_longsword_1:
 		# print_.combo("", str(current_action.accepts_queueing()))
 	if current_action.accepts_queueing():
 		check_combos(input)
-	if has_queued_state and current_action.transitions_to_queued(): # was transitions_to_queued()
+	if has_queued_state() and current_action.transitions_to_queued(): # was transitions_to_queued()
 		try_force_state(queued_state)
-		has_queued_state = false
+		queued_state = ""
 	
-	if has_forced_state:
-		has_forced_state = false
-		return forced_state
+	if has_forced_state():
+		var verdict = PLVerdict.new(forced_state)
+		forced_state = ""
+		return verdict
 	
-	## can be overriden
-	# used to be called default lifecycle
+	## can be overriden	# used to be called default lifecycle
 	return check_transition(input)
 
 
 ## can be overriden: see Run or attack.gd
-func check_transition(_input: InputPackage) -> String:
+func check_transition(_input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(current_action.DURATION):
 		return best_input_that_can_be_paid(_input)
-	return "okay"
+	return PLVerdict.new()
 
 
 func _update(input: InputPackage, delta: float):
@@ -167,15 +170,13 @@ func on_exit_state():
 
 
 func try_queue_state(new_queued_state: String):
-	if not has_queued_state:
+	if not has_queued_state():
 		queued_state = new_queued_state
-		has_queued_state = true
 	elif container.state_by_name(new_queued_state).priority > container.state_by_name(queued_state).priority:
 		queued_state = new_queued_state
 
 func try_force_state(new_forced_state: String):
-	if not has_forced_state:
-		has_forced_state = true
+	if not has_forced_state():
 		forced_state = new_forced_state
 	elif container.state_by_name(new_forced_state).priority >= container.state_by_name(forced_state).priority:
 		forced_state = new_forced_state
@@ -190,22 +191,21 @@ func check_combos(input: InputPackage):
 		print_.combo("", "checking combo " + combo.name + " with state_to_trigger " + combo.state_to_trigger)
 		# print("COMBO", combo.triggered_state)
 		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(combo.state_to_trigger)):
-			has_queued_state = true
 			queued_state = combo.state_to_trigger
 			print_.combo("", "Queued: " + queued_state, 1)
 		else:
 			print_.combo("", "Declined", 1)
 
 ## choosing the input with the highest priority that we can also pay for
-func best_input_that_can_be_paid(input: InputPackage) -> String:
+func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
 	input.actions.sort_custom(container.states_priority_sort)
 	for action in input.actions:
 		if resources.can_be_paid(container.state_by_name(action)):
 			if container.state_by_name(action) == self:
-				return "okay"
+				return PLVerdict.new()
 			else:
-				return action
-	return "throwing because for some reason input.actions is empty"
+				return PLVerdict.new(action)
+	return PLVerdict.new("", "throwing because for some reason input.actions is empty")
 
 
 ## Updating may be not too far from current state updating: regeneration could be dependent on the current state.
@@ -280,30 +280,18 @@ func react_on_parry(_hit: HitData):
 		#animator.update_body_animations()
 
 
-# region: FAIR DOCS: Ep 3 or 4 General States heir usage guide.
+# region: SOME DOCS
+#   check_transition()
+# 	BasePlayerState conditions for transition is generally a simple function based on timings or states of the player.
+#	If check_transition is a complex method, another state or usage of Combo_
 #
-# > _check_transition function aims to be short and simple.
-# 	Its general structure is as follows: 
-#	if (state is ready to transition) :
-#		transition to the highest priority out there
-#	else:
-#		return "okay" to save our managing status.
-#
-# 	BasePlayerState readyness for transition is generally a simple function based on timings or statuses of the player.
-#	If you are starting to understand that your transition readyness is a complex method, OR
-# 	if you are tempted to add third branching operator into your _check_transition function,
-#	seriously consider if Combo_ can do this logic for you, you won't regret its usage I promise.
-#
-# > update functions manages perframe behavior of your BasePlayerState.
-#	There are two update types: constant change and a single dynamic update on some timing.
-#	To implement simple constant changes, try to find some physics abstraction for them to make
-#	engine work for you. If your constant changes are too complex, try to avoid hardcoding 
-#	the behavior into a giant update, better shove the changes data into a backend animation or
-#	some other data structure resource.
-#	To implement timed changes, use a flag and work with timings via get_progress() and Co.
-#	To roughly base your internal timings on the players behavior, you can check skeleton
-#	animation for reference. But for the love of god please avoid referensing skeleton and animator
-#	in any shape way or form in the States code directly. This way your BasePlayerState "backend" is free from
-#	thousand different ways someone (probably you from the future) can mess up your skeleton, scene composition,
-#	animations, names libraries etc.
+#   update() functions manages perframe behavior of your BasePlayerState.
+#	There are two update types: 
+#	     constant change
+#        single dynamic update on some timing.
+#	To implement simple constant changes, try to find physics abstraction for them to make
+#	engine work for you. If changes are too complex, try to avoid hardcoding 
+#	the behavior into a giant update, better delegate the changes to backend animation or
+#	some other system.
+#	To implement timed changes, use a flag and work with timings via get_progress() etc.
 # endregion

@@ -41,13 +41,13 @@ func on_enter_state(_input):
 		#player.look_at(player.global_position + input_direction, Vector3.UP, true)
 
 
-func best_input_that_can_be_paid(input: InputPackage) -> String:
+func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
 	input.actions.sort_custom(container.states_priority_sort)
 	for action in input.actions:
 		if resources.can_be_paid(container.state_by_name(action)):
-			return action
+			return PLVerdict.new(action)
 			#if container.states[action] == self:
-				#return "okay"
+				#PLVerdict.new("")
 			#else:
 				#return action
-	return "throwing because for some reason input.actions doesn't contain even idle"
+	return PLVerdict.new("", "throwing because for some reason input.actions doesn't contain even idle")

@@ -67,7 +67,7 @@ func choose_initial_action(input) -> String:
 	assert(len(supported_actions) > 0)
 	# if supported_actions.is_empty():
 		# print_.lsm_action(" INITIAL", "supported_actions is empty, nothing to choose", 3)
-		# return ""
+		# ""
 	return supported_actions[0]
 
 

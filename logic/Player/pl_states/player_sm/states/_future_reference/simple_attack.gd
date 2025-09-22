@@ -22,7 +22,7 @@ var double_action: LegsAction
 # 	# if current_action.acts_longer_than(releases_priority):
 # 	# 	if current_action.animation_ended() or input.actions.has("move"):
 # 	# 		return best_input
-# 	return "okay"
+# 	return PLVerdict.new("")
 
 # func translate_actions_to_behaviors(input: InputPackage) -> InputPackage:
 # 	input.behavior_names.append("run")

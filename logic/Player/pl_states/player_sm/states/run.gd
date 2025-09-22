@@ -4,9 +4,9 @@ extends PlayerState
 ## in container set for run state legs_behavior = RunLegs Node
 
 
-func check_transition(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
-		return PS.midair
+		return PLVerdict.new(PS.midair)
 	return best_input_that_can_be_paid(input)
 
 # func choose_default_action() -> String:

@@ -34,11 +34,11 @@ extends PlayerState
 # 	input = translate_actions_to_behaviors(input)
 # 	if current_action.action_name == "release":
 # 		var best_input = best_input_that_can_be_paid(input)
-# 		if current_action.acts_longer_than(releases_priority) and best_input != "run": # TODO != base locomoti
+# 		if current_action.acts_longer_than(releases_priority) and best_input.next_state != "run": # TODO != base locomoti
 # 			return best_input
 # 		if current_action.animation_ended():
 # 			return best_input
-# 	return "okay"
+# 	return PLVerdict.new("")
 
 # func translate_actions_to_behaviors(input: InputPackage) -> InputPackage:
 # 	input = map_with_dictionary(input, behavior_map)

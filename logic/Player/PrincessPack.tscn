@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=4 uid="uid://6qtp0fjtkn64"]
+[gd_scene load_steps=204 format=4 uid="uid://6qtp0fjtkn64"]
 
 [ext_resource type="Script" uid="uid://bpr17wdedc64x" path="res://logic/Player/player.gd" id="1_vj6qj"]
 [ext_resource type="Script" uid="uid://bgtjtwktr4xs3" path="res://logic/Player/feelings.gd" id="2_8b0qh"]
@@ -27,9 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://b50oebqjejx1q" path="res://-assets-/GLB-char/pl-skeleton-2_denim_fabric_06_rough.png" id="20_p0ipq"]
 [ext_resource type="Texture2D" uid="uid://d2cp4y8crdo1n" path="res://-assets-/GLB-char/pl-skeleton-2_denim_fabric_06_nor_gl.png" id="21_ppv5s"]
 [ext_resource type="Script" uid="uid://b6mars68cfupu" path="res://logic/Player/pl_model.gd" id="23_k0qpn"]
-[ext_resource type="Script" uid="uid://2lla5tar7xpy" path="res://logic/Player/pl_states/resources.gd" id="24_7t703"]
-[ext_resource type="Script" uid="uid://bvrdyfinqtson" path="res://logic/Player/pl_states/combat.gd" id="25_in5dw"]
-[ext_resource type="Script" uid="uid://dt64wx5dvgasr" path="res://logic/Player/pl_states/area_awareness.gd" id="26_s6lif"]
+[ext_resource type="Script" uid="uid://2lla5tar7xpy" path="res://logic/Player/resources.gd" id="24_7t703"]
+[ext_resource type="Script" uid="uid://bvrdyfinqtson" path="res://logic/Player/combat.gd" id="25_in5dw"]
+[ext_resource type="Script" uid="uid://dt64wx5dvgasr" path="res://logic/Player/area_awareness.gd" id="26_s6lif"]
 [ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/Common/downcast.tscn" id="27_wxfnu"]
 [ext_resource type="AnimationLibrary" uid="uid://c7akx2725ibip" path="res://-assets-/animations/Ready-anim/global-fair.res" id="28_c3s4v"]
 [ext_resource type="Animation" uid="uid://ugqndauwfcwt" path="res://-assets-/animations/GLB-packed/from_IR/SO-anims/OS block left low.res" id="28_t6aan"]
@@ -98,14 +98,11 @@
 [ext_resource type="Script" uid="uid://bu3njuurvrejw" path="res://logic/Player/pl_states/player_sm/states/sprint.gd" id="60_78lda"]
 [ext_resource type="Animation" uid="uid://bxscacbae818c" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run back right.res" id="60_q5qft"]
 [ext_resource type="Animation" uid="uid://c65tumpsiey7p" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run back.res" id="61_kd0ux"]
-[ext_resource type="Script" uid="uid://cj5701alqj2ir" path="res://logic/Player/pl_states/player_sm/actions/sprint_action.gd" id="61_u8im0"]
 [ext_resource type="Animation" uid="uid://oqmskv2sftjv" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run forward left.res" id="62_l2l88"]
 [ext_resource type="Script" uid="uid://g4bqf5nuphkb" path="res://logic/Player/pl_states/player_sm/states/strafe.gd" id="62_suj8i"]
 [ext_resource type="Animation" uid="uid://duvgkyp42rehf" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run forward right.res" id="63_jixjl"]
-[ext_resource type="Script" uid="uid://bdyplbijor26b" path="res://logic/Player/pl_states/player_sm/actions/strafe_action.gd" id="63_t6ok6"]
 [ext_resource type="Script" uid="uid://d3vjj0pv67s4o" path="res://logic/Player/pl_states/player_sm/states/jump_run.gd" id="64_d2kqf"]
 [ext_resource type="Animation" uid="uid://w5ujdlrdyqft" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run forward.res" id="64_ke6g0"]
-[ext_resource type="Script" uid="uid://hh162yfqobdd" path="res://logic/Player/pl_states/player_sm/actions/jump_run_action.gd" id="65_0xete"]
 [ext_resource type="Animation" uid="uid://s2ta23tnrdp7" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run left.res" id="65_204ph"]
 [ext_resource type="Script" uid="uid://chi2qkcu7k6p8" path="res://logic/Player/pl_states/player_sm/states/jump_sprint.gd" id="66_le6ih"]
 [ext_resource type="Animation" uid="uid://bn3ilibd1sa7c" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl run right.res" id="66_n130m"]
@@ -127,7 +124,7 @@
 [ext_resource type="Animation" uid="uid://dekqcmqwn85gh" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl walk forward left.res" id="74_t53s8"]
 [ext_resource type="Script" uid="uid://ct4svyukvvkna" path="res://logic/Player/pl_states/player_sm/actions/dummy_action.gd" id="75_23se4"]
 [ext_resource type="Animation" uid="uid://b8obwgqwh54lp" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl walk forward right.res" id="75_pvi0x"]
-[ext_resource type="PackedScene" uid="uid://d4bm1ogsxjkhx" path="res://logic/Player/pl_states/Attack.tscn" id="76_68i0s"]
+[ext_resource type="PackedScene" uid="uid://d4bm1ogsxjkhx" path="res://logic/Player/Attack.tscn" id="76_68i0s"]
 [ext_resource type="Animation" uid="uid://dh234aymlw17l" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl walk forward.res" id="76_i7pyc"]
 [ext_resource type="Animation" uid="uid://deywy2qnnjmik" path="res://-assets-/animations/GLB-packed/from_IR/SOl-anims/OSl walk left.res" id="77_p1drg"]
 [ext_resource type="PackedScene" uid="uid://bg5gwofry0vww" path="res://logic/Player/pl_states/player_sm/states/Combos/ConsecutiveAttack.tscn" id="77_tierq"]
@@ -164,7 +161,7 @@
 [ext_resource type="Animation" uid="uid://bpgrmsgvhwasx" path="res://-assets-/animations/GLB-packed/from_IR/SOp-anims/OSp O stab stomach vic.res" id="93_5mwix"]
 [ext_resource type="Script" uid="uid://b3nqsfjtvpujc" path="res://logic/Player/pl_states/player_sm/states/roll.gd" id="93_bpe6c"]
 [ext_resource type="Animation" uid="uid://cbmnvnhdvv28u" path="res://-assets-/animations/GLB-packed/from_IR/SOp-anims/OSp O stab stomach.res" id="94_ckbfw"]
-[ext_resource type="Script" uid="uid://cxs75uid7n5dj" path="res://logic/Player/pl_states/bones.gd" id="94_nkdgf"]
+[ext_resource type="Script" uid="uid://cxs75uid7n5dj" path="res://logic/Player/bones.gd" id="94_nkdgf"]
 [ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/hurt_hit/HitBox.tscn" id="95_xdwa8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7t703"]
@@ -1814,19 +1811,19 @@ script = ExtResource("59_8bh0c")
 script = ExtResource("60_78lda")
 
 [node name="SprintAction" type="Node" parent="Model/StatesContainer/PlayerSM/Sprint"]
-script = ExtResource("61_u8im0")
+script = ExtResource("75_23se4")
 
 [node name="Strafe" type="Node" parent="Model/StatesContainer/PlayerSM"]
 script = ExtResource("62_suj8i")
 
 [node name="StrafeAction" type="Node" parent="Model/StatesContainer/PlayerSM/Strafe"]
-script = ExtResource("63_t6ok6")
+script = ExtResource("75_23se4")
 
 [node name="JumpRun" type="Node" parent="Model/StatesContainer/PlayerSM"]
 script = ExtResource("64_d2kqf")
 
 [node name="JumpRunAction" type="Node" parent="Model/StatesContainer/PlayerSM/JumpRun"]
-script = ExtResource("65_0xete")
+script = ExtResource("75_23se4")
 
 [node name="JumpSprint" type="Node" parent="Model/StatesContainer/PlayerSM"]
 script = ExtResource("66_le6ih")

@@ -28,9 +28,6 @@ var active_weapon: BaseWeapon
 
 func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	
-	
 	container.player = player
 	player_sm.player = player
 	
@@ -74,21 +71,18 @@ func accept_modifiers():
 	_end.__initialised = true
 	# limp.initialise()
 
-# region
-# func _ready():
-# 	# TODO: this is not triggered. Added accept_modifiers(). Check with Godot 4.5
-	#       see also: https://github.com/godotengine/godot/issues/106463
-# 	# When we prepare our node, we make sure both animation fields are filled with "do nothing" animation. 
-# 	current_animation = native_animator.get_animation("idle_longsword")
-# 	current_animation_cycling = current_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
-# 	current_animation_progress = 0
-# 	previous_animation = native_animator.get_animation("idle_longsword")
-# 	previous_animation_cycling = previous_animation.loop_mode == Animation.LoopMode.LOOP_LINEAR
-# 	previous_animation_progress = 0
-# endregion
+
+# BELOW DEV ONLY
+
 
 var fly_mode_enabled := false
 var fly_speed := 15
+
+var _run_anim_i: int = 0
+var run_lib := "run-v5-LIB"
+
+var run_anims: PackedStringArray = [] # will be filled like ["run-v5-LIB/Running", …]
+
 
 func _handle_fly_mode(input: InputPackage, delta: float):
 	var tracking_angular_speed := 4
@@ -126,11 +120,6 @@ func _reload_run_anims_from_library() -> void:
 	# run_anims.sort() # alphabetical is fine; remove if you prefer original order
 	_run_anim_i = clampi(_run_anim_i, 0, max(0, run_anims.size() - 1))
 
-var _run_anim_i: int = 0
-var run_lib := "run-v5-LIB"
-
-var run_anims: PackedStringArray = [] # will be filled like ["run-v5-LIB/Running", …]
-
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dev_fly_mode"):
@@ -142,12 +131,12 @@ func _input(event: InputEvent) -> void:
 		fly_speed -= 5
 
 
-	if event.is_action_pressed("dev_change_run_anim"):
-		_run_anim_i = (_run_anim_i + 1) % run_anims.size()
-		__apply()
-	elif event.is_action_pressed("dev_change_run_anim_prev"):
-		_run_anim_i = (_run_anim_i - 1 + run_anims.size()) % run_anims.size()
-		__apply()
+	# if event.is_action_pressed("dev_change_run_anim"):
+	# 	_run_anim_i = (_run_anim_i + 1) % run_anims.size()
+	# 	__apply()
+	# elif event.is_action_pressed("dev_change_run_anim_prev"):
+	# 	_run_anim_i = (_run_anim_i - 1 + run_anims.size()) % run_anims.size()
+	# 	__apply()
 	
 	if event.is_action_pressed("dev_8"):
 		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.1)
@@ -159,22 +148,20 @@ func _input(event: InputEvent) -> void:
 		player_sm.torso_animator.play_overlay(A.hit_reaction, 0.2, 0.05, 0.2, 1)
 		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
-# Heavy stagger: slower and longer
-		
 
-func __apply() -> void:
-	var run_action := container.action_by_name(PS.action_run)
-	var l_run_action := container.legs_action_by_name(LS.legs_action_run)
-	if run_anims.is_empty():
-		return
-	var anim_name: String = run_anims[_run_anim_i] # already "run-v5-LIB/Running"
-	if animation_player.has_animation(anim_name):
-		run_action.animation = anim_name
-		run_action.backend_animation = anim_name + "-param"
-		l_run_action.animation = anim_name
-		print_.prefix(L.DEBUG, "run anim -> " + anim_name)
-	else:
-		print_.prefix(L.DEBUG, "run anim not found -> " + anim_name)
+# func __apply() -> void:
+# 	var run_action := container.action_by_name(PS.action_run)
+# 	var l_run_action := container.legs_action_by_name(LS.legs_action_run)
+# 	if run_anims.is_empty():
+# 		return
+# 	var anim_name: String = run_anims[_run_anim_i] # already "run-v5-LIB/Running"
+# 	if animation_player.has_animation(anim_name):
+# 		run_action.animation = anim_name
+# 		run_action.backend_animation = anim_name + "-param"
+# 		l_run_action.animation = anim_name
+# 		print_.prefix(L.DEBUG, "run anim -> " + anim_name)
+# 	else:
+# 		print_.prefix(L.DEBUG, "run anim not found -> " + anim_name)
 
 
 func __fly_velocity_by_input(input: InputPackage, delta: float) -> Vector3:

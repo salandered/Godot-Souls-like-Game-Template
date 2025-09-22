@@ -45,17 +45,17 @@ func update(input: InputPackage, delta: float) -> void:
 	area_awareness.last_input_package = input
 
 	var verdict := current_state._check_transition(input)
-	if verdict != "okay":
-		print_.psm("↪️", current_state.state_name + " => " + verdict)
+	if verdict.needs_switch():
+		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		
 		current_state._on_exit_state()
 		# now current_state is next state
-		current_state = container.state_by_name(verdict)
+		current_state = container.state_by_name(verdict.next_state)
 		player.current_state = current_state # for something outside
 		current_state._on_enter_state(input)
 
 
-	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behavior -> doubledipping
+	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behavior -> double dipping
 	# current_state.update_resources(delta)
 	current_state._update(input, delta)
 

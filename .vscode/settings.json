@@ -114,7 +114,11 @@
 		},
 		// WHITY
 		{
-			"path": "*_pl_state.gd",
+			"path": "*_base_state.gd",
+			"color": "white_"
+		},
+		{
+			"path": "*_base*",
 			"color": "white_"
 		},
 		{
@@ -132,16 +136,16 @@
 		},
 		// PLAYER STATE
 		{
-			"path": "logic/Player/PlayerModel/player_sm/states",
+			"path": "logic/Player/pl_states/player_sm/states",
 			"color": "states_blue"
 		},
 		// PLAYER SM
 		{
-			"path": "logic/Player/PlayerModel/legs_sm",
+			"path": "logic/Player/pl_states/legs_sm",
 			"color": "custom11"
 		},
 		{
-			"path": "logic/Player/PlayerModel/player_sm",
+			"path": "logic/Player/pl_states/player_sm",
 			"color": "custom12"
 		},
 		// MODEL
@@ -188,7 +192,7 @@
 		},
 		// ANIM
 		{
-			"path": "logic/Player/PlayerAnim/sk-m",
+			"path": "logic/Player/pl_anim/sk-m",
 			"color": "animation"
 		},
 		//

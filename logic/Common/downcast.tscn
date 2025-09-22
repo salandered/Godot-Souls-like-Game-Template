@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwpwvkdbpjo50"]
 
-[ext_resource type="Script" uid="uid://jdwlw1l5wj5a" path="res://logic/Player/pl_states/downcast.gd" id="1_tplgi"]
+[ext_resource type="Script" uid="uid://jdwlw1l5wj5a" path="res://logic/Common/downcast.gd" id="1_tplgi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uoyj3"]
 albedo_color = Color(0, 0.7, 0.338333, 1)

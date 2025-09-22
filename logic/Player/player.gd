@@ -81,9 +81,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			collision_mask = Collision.Mask._DEV_ZERO_MASK
 		
 
-# the section below contains some getters utilised by enemies to
-# analyze battle situation, currently it's used in Opponent project
-# if you only read this file to look at player's controller code, skip freely
+# ONLY GETTERS FOR OPPONENT PROJECT
 func hp_percentage() -> float:
 	return model.resources.health / model.resources.max_health
 
@@ -142,15 +140,6 @@ func time_til_next_last_locked_frame() -> float:
 		return 0
 	return current_state.time_til_unlocking()
 
-# pandora's box potentialy, better return immutable snapshot copy or use getters for fields,
-# otherwise some out-of-palyer functional can mess with controller's flow
-# but who cares
+# TODO: return only name
 func get_current_state() -> PlayerState:
 	return current_state
-
-
-# works but stuns the game, need some other approach(
-#func get_guaranteed_positions_list() -> Array[Array]:
-	#var positions_list = model.current_state.get_guaranteed_positions_list()
-	#print(model.current_state.state_name + str(positions_list))
-	#return positions_list

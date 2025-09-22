@@ -12,12 +12,12 @@ var jumped: bool = false
 func _ready():
 	SPEED = 5.0
 
-func check_transition(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(TRANSITION_TIMING):
 		jumped = false
-		return PS.midair
+		return PLVerdict.new(PS.midair)
 	else:
-		return "okay"
+		return PLVerdict.new("")
 
 
 func update(input: InputPackage, delta: float) -> void:

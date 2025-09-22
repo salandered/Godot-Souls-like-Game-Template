@@ -1,4 +1,4 @@
-import bpy
+import bpy # pyright: ignore[reportMissingImports]
 
 # --- config ---
 ACTION_NAME   = ""              # "" => use armature's current AnimData action

@@ -7,7 +7,7 @@ extends PlayerState
 
 # func check_transition(input: InputPackage):
 # 	if not player.is_on_floor():
-# 		return "midair"
+# 		return PLVerdict.new("midair"
 	
 # 	return best_input_that_can_be_paid(input)
 

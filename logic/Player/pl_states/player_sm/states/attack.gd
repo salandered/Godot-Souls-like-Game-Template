@@ -16,15 +16,15 @@ class_name AttackState
 
 var hit_damage = 10 # will be a function of player stats in the future
 
-func check_transition(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> PLVerdict:
 	var best_input = best_input_that_can_be_paid(input)
 	if current_action.works_longer_than(RELEASES_PRIORITY):
 		# this reads as: if we are at the end of attack anim (> RELEASES_PRIORITY but < DURATION) 
 		# and there is a best input which is not idle, we can switch to it. so we run or make new attack not waiting for exact end of the current attack
 		# but if best is idle, we better wait for the end (and then blend to idle because what else to do)
-		if current_action.works_longer_than(current_action.DURATION) or best_input != "idle":
+		if current_action.works_longer_than(current_action.DURATION) or best_input.next_state != "idle":
 			return best_input
-	return "okay"
+	return PLVerdict.new("")
 	
 	
 func update(_input: InputPackage, delta):
@@ -38,7 +38,6 @@ func root_movement(delta: float):
 	player.velocity = player.get_quaternion() * delta_pos / delta
 	if not player.is_on_floor():
 		player.velocity.y -= u.gravity * delta
-		has_forced_state = true
 		forced_state = PS.midair
 
 func pack_hit_data(weapon: BaseWeapon) -> HitData:

@@ -18,9 +18,9 @@ func _ready():
 # func on_enter_state():
 # 	pass
 
-func check_transition(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
-		return "midair"
+		PLVerdict.new("midair")
 	
 	return best_input_that_can_be_paid(input)
 

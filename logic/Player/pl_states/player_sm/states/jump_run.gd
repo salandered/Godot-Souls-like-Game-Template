@@ -18,12 +18,12 @@ func _ready() -> void:
 	#backend_animation = animation + "-param"
 	SPEED = 3.0
 
-func check_transition(input: InputPackage) -> String:
+func check_transition(input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(TRANSITION_TIMING):
 		jumped = false
-		return PS.midair
+		return PLVerdict.new(PS.midair)
 	else:
-		return "okay"
+		return PLVerdict.new("")
 
 func on_enter_state(input: InputPackage) -> void:
 	player.velocity = player.velocity.normalized() * SPEED
