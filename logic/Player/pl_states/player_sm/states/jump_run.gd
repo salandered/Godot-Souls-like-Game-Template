@@ -15,7 +15,7 @@ var jumped: bool = false
 func _ready() -> void:
 	#state_name = "jump_run"
 	#animation = "jump_run"
-	#backend_animation = animation + "-param"
+	#backend_animation = animation + A.PARAM_SUFFIX
 	SPEED = 3.0
 
 func check_transition(input: InputPackage) -> PLVerdict:

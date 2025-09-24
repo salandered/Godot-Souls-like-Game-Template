@@ -132,14 +132,6 @@ func get_current_state_position_after(time: float) -> Vector3:
 	var predicted_delta_pos = states_data.get_root_delta_pos(data_track, future, time)
 	return global_position + get_quaternion() * predicted_delta_pos
 
-func is_locked_in_animation() -> bool:
-	return not current_state.tracks_input_vector()
-
-func time_til_next_last_locked_frame() -> float:
-	if not is_locked_in_animation():
-		return 0
-	return current_state.time_til_unlocking()
-
 # TODO: return only name
 func get_current_state() -> PlayerState:
 	return current_state

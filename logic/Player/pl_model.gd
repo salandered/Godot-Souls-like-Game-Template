@@ -157,7 +157,7 @@ func _input(event: InputEvent) -> void:
 # 	var anim_name: String = run_anims[_run_anim_i] # already "run-v5-LIB/Running"
 # 	if animation_player.has_animation(anim_name):
 # 		run_action.animation = anim_name
-# 		run_action.backend_animation = anim_name + "-param"
+# 		run_action.backend_animation = anim_name + A.PARAM_SUFFIX
 # 		l_run_action.animation = anim_name
 # 		print_.prefix(L.DEBUG, "run anim -> " + anim_name)
 # 	else:

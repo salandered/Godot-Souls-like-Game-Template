@@ -12,13 +12,16 @@ var motion_type: LegsSM.MotionType
 @export var SPEED: float = 3.0
 @export var TURN_SPEED: float = 2.0
 
+var SPEED_SCALE: float = 1.0
 
+## Not abstract! It can be empty and not overriden. (double action)
 func update(_input: InputPackage, _delta: float):
 	pass
 
+
 ## can be overriden (see double action)
-func animate():
-	print_.lsm_action("▶️ Action", "animation " + animation, 8)
+func animate(): # ▶️
+	print_.lsm_action(action_name + em.play, "animation " + animation, 8)
 	legs_sm.legs_animator.play(animation, 0.2)
 
 

@@ -1,4 +1,5 @@
-class_name RawAction extends RefCounted
+extends RefCounted
+class_name RawAction
 
 
 # move arrows

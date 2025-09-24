@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b8sj75wbb08k4" path="res://-assets-/x_misc/flicker_omni.tscn" id="2_dnvo4"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="2_ifnij"]
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level.gd" id="5_j4sqn"]
+[ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/Textures/simple/texture_08.png" id="5_ol10w"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
 [ext_resource type="PackedScene" uid="uid://dug2h6xkfk71h" path="res://-assets-/GLB-level/tower-map.glb" id="9_k3uw0"]
@@ -12,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Common/simple_target/SimpleTarget.tscn" id="10_2mukc"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/pause_menu_controller.gd" id="10_ifnij"]
 [ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="10_j4sqn"]
-[ext_resource type="PackedScene" uid="uid://2msrn7w4y4fg" path="res://logic/Enemies/Gundyr/Gundyr.tscn" id="11_mtufd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
 albedo_color = Color(0.21579322, 0.17943612, 0.15248129, 1)
@@ -26,19 +26,21 @@ albedo_color = Color(0.136167, 0.43, 0, 1)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_t1f0q"]
+[sub_resource type="Sky" id="Sky_mtufd"]
 sky_material = SubResource("ProceduralSkyMaterial_jw8o1")
 
 [sub_resource type="Environment" id="Environment_8ihuv"]
 background_mode = 2
 background_energy_multiplier = 0.5
-sky = SubResource("Sky_t1f0q")
+sky = SubResource("Sky_mtufd")
 tonemap_mode = 2
 
 [sub_resource type="VoxelGIData" id="VoxelGIData_k3uw0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0bv2"]
 albedo_color = Color(0.0346965, 0.18184, 0.344346, 1)
+albedo_texture = ExtResource("5_ol10w")
+uv1_scale = Vector3(5, 5, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bmwg"]
 albedo_texture = ExtResource("8_rhpv6")
@@ -64,7 +66,9 @@ albedo_color = Color(0.7928, 0.8, 0.368, 1)
 albedo_color = Color(0.15, 0.915, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5mfl"]
-albedo_color = Color(0.19796, 3.51956e-07, 0.00407733, 1)
+albedo_color = Color(0.32294998, 0.1319595, 0, 1)
+albedo_texture = ExtResource("5_ol10w")
+uv1_scale = Vector3(20, 20, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3uw0"]
 albedo_color = Color(0.896416, 0.683071, 0, 1)
@@ -378,10 +382,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -417.4566, -10.553876, -70.59
 
 [node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_j4sqn")]
 transform = Transform3D(0.8893205, 0, -0.45728427, 0, 1, 0, 0.45728427, 0, 0.8893205, -422.42648, -9.533049, -53.735134)
-player = NodePath("../PrincessPack")
-
-[node name="Gundyr" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_mtufd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -464.42145, -10.324496, -61.241226)
 player = NodePath("../PrincessPack")
 
 [node name="🎯 _TARGET_ARENA" type="Node3D" parent="."]

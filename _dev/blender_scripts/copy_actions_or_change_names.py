@@ -248,11 +248,11 @@ def rename_actions_replacing_word(term_from: str, term_to: str, is_prefix: bool)
 if __name__ == "__main__":
     print("")
     # 1
-#    add_prefix_to_all_actions(prefix="O")
+#    add_prefix_to_all_actions(add_prefix="O")
     # 2
 #    copy_all_actions_add_prefix(prefix="RM")    
-    # 3
-#    copy_retarget_actions_add_prefix("SWSc")
+    # 3 - AFTER ROOT BAKED
+#    copy_retarget_actions_add_prefix("SWSl")
     
     
     
@@ -260,4 +260,6 @@ if __name__ == "__main__":
     
     # dev
     
-    add_prefix_to_all_actions(prefix="O walk")
+#    add_prefix_to_all_actions(add_prefix="Walk Combat")
+#    remove_word_from_actions(keyword_to_remove = "root.")
+#    remove_word_from_actions(keyword_to_remove = "|Unreal Take|Base Layer")

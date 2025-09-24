@@ -1,38 +1,61 @@
 extends LegsBehavior
 
-var to_walk_treshold: float = 0.5
-
 
 ## RunLegs behaviour is also a SM. It consists of idle and run (also can be start and end animations)
 
-## `LegsBehavior` states have the type called `LegsActions`, and `legs_actions` are instantiated once and live in a shared pool instead of being a copy per behavior. 
-## Firstly, this helps to combat pyramidization. Our SMs don't have any doubles in their states. I use `walk_stop` and `idle` in both `run_locomotion` cycle and in `walk_locomotion` cycle. 
-## The only doubled logic is line, telling that idle is used here (and same in WalkLegs, for example)
+## `LegsBehavior` states manages `LegsActions`, and legs actions are instantiated once and live in a shared pool 
+##  instead of being a copy per behavior. 
+## => Our SMs don't have duplicates in their states. 
+##    We can use `walk_stop` and `idle` in both `run_locomotion` and  `walk_locomotion` cycles. 
+##    Duplicated is a line telling that idle is used here in supported_actions
 
-const IDLE_GRACE := 0.12 # seconds
-var _idle_timer := 0.0
 
 func _ready() -> void:
 	supported_actions = [
 		LS.legs_action_idle,
-		LS.legs_action_run
-		# LS.legs_action_sprint_to_run,
+		LS.legs_action_run,
+		LS.legs_action_run_start,
 	]
 
 func update(input: InputPackage, delta: float) -> void:
 	_choose_action(input, delta)
 	legs_sm.current_action.update(input, delta)
+	_just_left_idle = false
 
+var _just_left_idle := false
+const START_THRESHOLD := 0.25 # tweak
+const IDLE_COMMITMENT := 0.12 # seconds
+const RUN_START_COMMITMENT := 0.2 # seconds
 
 func _choose_action(input: InputPackage, delta: float) -> void:
-	if input.input_direction != Vector2.ZERO:
-		_idle_timer = 0.0
-		# avoid redundant switches if your SM doesn't already guard
-		switch_action_to(LS.legs_action_run, input)
-	else:
-		_idle_timer += delta
-		if _idle_timer >= IDLE_GRACE:
-			switch_action_to(LS.legs_action_idle, input)
+	var is_moving := input.input_direction.length() >= START_THRESHOLD
+	var current_action = legs_sm.current_action
+
+	if current_action.action_name == LS.legs_action_idle:
+		if is_moving and current_action.get_progress() > IDLE_COMMITMENT:
+			switch_action_to(LS.legs_action_run_start, input)
+			return
+	
+	if current_action.action_name == LS.legs_action_run_start:
+		if is_moving:
+			if current_action.DURATION / current_action.SPEED_SCALE - current_action.get_progress() < 0.08: # tweak may be
+				switch_action_to(LS.legs_action_run, input)
+				return
+		else:
+			if current_action.get_progress() > RUN_START_COMMITMENT:
+				switch_action_to(LS.legs_action_idle, input) # run end later
+
+	if current_action.action_name == LS.legs_action_run:
+		if not is_moving:
+			switch_action_to(LS.legs_action_idle, input) # run end later
+	
+	# if input.input_direction != Vector2.ZERO:
+	# 	_idle_timer = 0.0
+	# 	switch_action_to(LS.legs_action_run, input)
+	# else:
+	# 	_idle_timer += delta
+	# 	if _idle_timer >= IDLE_COMMITMENT:
+	# 		switch_action_to(LS.legs_action_idle, input)
 
 
 func choose_initial_action(input: InputPackage) -> String:
@@ -43,9 +66,12 @@ func choose_initial_action(input: InputPackage) -> String:
 		initial_action = LS.legs_action_idle
 	print_.lsm_beh(" INITIAL", "based on input vector -> " + initial_action, 2)
 	return initial_action
-	# TODO: how to choose_initial_action if we came from double behavior. lets say sprint was using double. 
-	# or any loco state like sprint should be in legs now?
-	# NOTE: also we can use input.actions! like in sptrint
+	
+	# NOTE Quesion: how to choose_initial_action if we came from double behavior. lets say sprint was using double. 
+	# or any loco state like sprint should be in legs now? Well i think yes
+	# NOTE: also we can use input.actions. like in sprint. but should we
+	
+	# [another approach]
 	# print_.lsm_beh(" INITIAL", "using idle choose_initial_action based on " + str(legs_sm.current_action.motion_type), 1)
 	# match legs_sm.current_action.motion_type:
 	# 	legs_sm.MotionType.IDLE:

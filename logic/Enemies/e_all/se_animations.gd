@@ -27,7 +27,3 @@ const jump_sprint := "jump_sprint"
 const longsword_1 := "longsword_1"
 const longsword_2 := "longsword_2"
 const parry := "parry"
-
-
-static func to_backend_lazy(animation: String) -> String:
-	return animation + "-param"

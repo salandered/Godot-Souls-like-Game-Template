@@ -4,7 +4,7 @@ extends Combo_
 # Node structure was:
 	# Slash1
 	#   - ToSlash2
-# Being replaced by ConsecutiveAttack which is parametrised with primary_input, next_attack etc
+# Being replaced by AttackCombo which is parametrised with primary_input, next_attack etc
 
 # @onready var slash_1 = $".." as Slash1State
 

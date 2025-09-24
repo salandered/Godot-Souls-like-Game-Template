@@ -14,8 +14,6 @@ extends PlayerState
 # func process_input_vector(input: InputPackage, delta: float):
 # 	if tracks_input_vector():
 # 		var input_direction = camera.basis * input.get_vector3()
-# 		if not input_direction and combat.current_camera_mode == combat.CameraMode.LOCKED:
-# 			input_direction = combat.direction_to_target()
 
 # 		var face_direction = player.basis.z
 # 		var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
@@ -25,7 +23,7 @@ extends PlayerState
 
 # func move_with_root(_delta: float):
 # 	var current_rotation = player.get_quaternion()
-# 	var velocity: Vector3 = current_rotation * double_action.legs_animator.calculate_root_velocity()
+# 	var velocity: Vector3 = current_rotation * double_action.animator.calculate_root_velocity()
 # 	player.set_velocity(velocity)
 # 	#seek_land(delta)
 # 	player.move_and_slide()
@@ -72,7 +70,6 @@ extends PlayerState
 # 	if previous_action.legs_animator == double_action.legs_animator: # ie both are simple of AnimatorModifier
 # 		double_action.legs_animator.play(current_action.animation, 0.15)
 # 	else:
-# 		print("here")
 # 		double_action.legs_animator.play(current_action.animation, 0)
 # 		double_action.legs_anim_settings.play("simple", 0.15)
 

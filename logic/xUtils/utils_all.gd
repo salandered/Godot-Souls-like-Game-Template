@@ -4,12 +4,18 @@ class_name u
 
 static var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-static var __ := " " # tpdo: is it a safe name :D
+static var __ := " " # todo: is it a safe name :D
 static var cln := ": "
 static var s_cln := "; "
 static var arr := " -> "
 static var hence := " => "
 
+static func in_q(something: Variant, spaces: bool = true) -> String:
+	var r = "'" + str(something) + "'"
+	return in_sp(r) if spaces else r
+
+static func in_sp(something: Variant) -> String:
+	return " " + str(something) + " "
 
 static func fr(to_str: bool = true) -> Variant:
 	return "fr_n-" + str(Engine.get_process_frames())
@@ -19,6 +25,10 @@ static func round_01(f: float) -> String:
 	assert(f is float)
 	return str(snapped(f, 0.01))
 
+
+# TODO: consider 4.5 update
+static func not_implemented(context = ""):
+	push_error(str(context), " abstract update is called")
 
 static func assert_has_animation(animator: AnimationPlayer, animation: String, fatal: bool = true) -> bool:
 	if fatal:

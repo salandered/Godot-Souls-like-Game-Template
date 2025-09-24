@@ -18,27 +18,31 @@ var hit_damage = 10 # will be a function of player stats in the future
 
 func check_transition(input: InputPackage) -> PLVerdict:
 	var best_input = best_input_that_can_be_paid(input)
-	if current_action.works_longer_than(RELEASES_PRIORITY):
-		# this reads as: if we are at the end of attack anim (> RELEASES_PRIORITY but < DURATION) 
-		# and there is a best input which is not idle, we can switch to it. so we run or make new attack not waiting for exact end of the current attack
-		# but if best is idle, we better wait for the end (and then blend to idle because what else to do)
-		if current_action.works_longer_than(current_action.DURATION) or best_input.next_state != "idle":
-			return best_input
+	if current_action.works_longer_than(current_action.DURATION):
+		return best_input
+	# TODO: works not as intended wo idle state !! also RELEASES_PRIORITY should be dependent on current_action.DURATION! and sometimes turned off
+	# if current_action.works_longer_than(RELEASES_PRIORITY):
+	# 	print_.psm_check_trans(state_name, "works longer than " + str(RELEASES_PRIORITY) + " => choosing best input")
+	# 	# this reads as: if we are at the end of attack anim (> RELEASES_PRIORITY but < DURATION) 
+	# 	# and there is a best input which is not idle, we can switch to it. so we run or make new attack not waiting for exact end of the current attack
+	# 	# but if best is idle, we better wait for the end (and then blend to idle because what else to do)
+	# 	if best_input.next_state != "idle":
+	# 		return best_input
 	return PLVerdict.new("")
 	
 	
 func update(_input: InputPackage, delta):
-	root_movement(delta)
-	player.model.active_weapon.is_attacking = current_action.right_weapon_hurts()
+	move_with_root(delta)
+	player.model.active_weapon.is_attacking = current_action.weapon_hurts()
 
+func move_with_root(delta: float) -> void:
+	var delta_pos := player_sm.torso_animator.get_root_velocity()
+	player.velocity = player.get_quaternion() * delta_pos
 
-func root_movement(delta: float):
-	var delta_pos = current_action.get_root_position_delta(delta)
-	delta_pos.y = 0
-	player.velocity = player.get_quaternion() * delta_pos / delta
 	if not player.is_on_floor():
 		player.velocity.y -= u.gravity * delta
 		forced_state = PS.midair
+
 
 func pack_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()

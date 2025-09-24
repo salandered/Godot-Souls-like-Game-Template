@@ -45,6 +45,8 @@ func update(input: InputPackage, delta: float) -> void:
 	area_awareness.last_input_package = input
 
 	var verdict := current_state._check_transition(input)
+	if verdict.comment:
+		print_.psm("Final verdict", "has something important to say:" + verdict.comment)
 	if verdict.needs_switch():
 		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		

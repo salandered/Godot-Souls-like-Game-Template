@@ -1,17 +1,14 @@
 @tool
-@icon("res://-assets-/x_icons/node-colors/orange-2.png")
+@icon("res://-assets-/x_misc/x_icons/node-colors/orange-2.png")
 
 extends Node
 class_name LegsSM
 
-#@export var behaviors_cont: LegsBehaviorsContainer
 @export var container: PlayerStatesContainer
 @export var player_sm: PlayerSM
 @export var area_awareness: AreaAwareness
 
-# @export var camera: FancyCamera
 @export var combat: HumanoidCombat
-# @export var legs_anim_settings: AnimationPlayer
 
 enum MotionType {IDLE, START, CYCLE, STOP}
 
@@ -19,11 +16,9 @@ enum MotionType {IDLE, START, CYCLE, STOP}
 
 
 var current_behavior: LegsBehavior
-# it should be here! current_action is managed by the "pool" of actions. Behavior changes may or may NOT change current action.
+# it should be here! current_action is managed by the "pool" of actions. 
+# Behavior changes may or may NOT change current action.
 var current_action: LegsAction
-
-
-# func _ready() -> void:
 
 
 func update(input: InputPackage, delta: float) -> void:

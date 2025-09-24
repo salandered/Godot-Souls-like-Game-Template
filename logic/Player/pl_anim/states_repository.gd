@@ -1,72 +1,86 @@
 extends Node
 class_name StatesDataRepository
 
-@onready var state_database: AnimationPlayer = %StatesDatabase
-
-
-func get_root_delta_pos(animation: String, progress: float, delta: float) -> Vector3:
-	var data = _get_animation(animation)
-	var track = data.find_track("StatesDatabase:root_position", Animation.TYPE_VALUE)
-	if data.track_get_key_count(track) <= 1: # 0 or 1.
-		return Vector3.ZERO
-	var previous_pos = data.value_track_interpolate(track, progress - delta)
-	var current_pos = data.value_track_interpolate(track, progress)
-	var delta_pos = current_pos - previous_pos
-	return delta_pos
+@onready var state_db: StatesDatabase = %StatesDatabase
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
 # "ask them about the hypothetical parameter status at a given time if it was playing"
-# called from player state
 
-func get_transitions_to_queued(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:transitions_to_queued", timecode)
+# Param DOCS are in states_db.gd
 
-func get_accepts_queueing(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:accepts_queueing", timecode)
+var _fail_if_no_anim: bool = true
+var _warn_no_param_anim_found: bool = false
 
-func get_vulnerable(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:is_vulnerable", timecode)
 
-func get_interruptable(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:is_interruptable", timecode)
+const DEFAULT_PARAMS := {
+	state_db.TRANSITIONS_TO_QUEUED: false,
+	state_db.ACCEPTS_QUEUEING: false,
+	state_db.IS_PARRYABLE: false,
+	state_db.IS_VULNERABLE: true,
+	state_db.IS_INTERRUPTABLE: true,
+	state_db.WEAPON_HURTS: false,
+	state_db.TRACKS_INPUT_VECTOR: true,
+	state_db.ROOT_MOTION: false,
+}
 
-func get_parryable(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:is_parryable", timecode)
 
-func get_duration(animation: String) -> float:
+func get_duration(anim_name: String) -> float:
 	# TODO TODO bad bad
-	if animation == "-":
+	if anim_name == "-":
 		return 0
-	var data := _get_animation(animation)
-	# if not data:
-		# push_error("get_duration returned faked 1.0 because no " + animation + " found")
-		# return 1.0
-	if data.length == 0:
-		push_error("Empty animation! not good!")
-	return data.length
+	var anim := state_db.get_anim(anim_name)
+	if not anim:
+		if _warn_no_param_anim_found: print(anim_name + " wasnt found, using len of real animation")
+		return _get_len_using_original_anim(anim_name)
 
-func get_right_weapon_hurts(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:right_hand_weapon_hurts", timecode)
+	if anim.length == 0:
+		push_error("Empty anim_name! not good!")
+		
+	return anim.length
 
-func tracks_input_vector(animation: String, timecode: float) -> bool:
-	return _get_boolean_value(animation, "StatesDatabase:tracks_input_vector", timecode)
+
+func get_transitions_to_queued(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.TRANSITIONS_TO_QUEUED, timecode)
+
+func get_accepts_queueing(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.ACCEPTS_QUEUEING, timecode)
+
+func get_parryable(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.IS_PARRYABLE, timecode)
+
+func get_vulnerable(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.IS_VULNERABLE, timecode)
+
+func get_interruptable(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.IS_INTERRUPTABLE, timecode)
+
+func get_weapon_hurts(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.WEAPON_HURTS, timecode)
+
+func get_tracks_input_vector(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.TRACKS_INPUT_VECTOR, timecode)
+
+func get_root_motion(anim_name: String, timecode: float) -> bool:
+	return _get_boolean_value(anim_name, state_db.ROOT_MOTION, timecode)
 
 
 # low level methods
+func _get_boolean_value(anim_name: String, param_name: String, timecode: float) -> bool:
+	var anim: Animation = state_db.get_anim(anim_name)
+	if not anim:
+		if _warn_no_param_anim_found: print(anim_name + " wasn found, using default values")
+		return DEFAULT_PARAMS[param_name]
 
-func _get_boolean_value(animation: String, track_name: String, timecode: float) -> bool:
-	var data = _get_animation(animation)
-	# if not data:
-		# return false
-	var track = data.find_track(track_name, Animation.TYPE_VALUE)
+	var track_name = state_db.STATES_DB + ":" + param_name
+	var track = anim.find_track(track_name, Animation.TYPE_VALUE)
 	if track == -1:
-		push_error("Track not found: " + track_name + " in animation " + animation)
-	return data.value_track_interpolate(track, timecode)
+		push_error("Track not found: " + track_name + " in animation " + anim_name)
+		return DEFAULT_PARAMS[param_name]
+	return anim.value_track_interpolate(track, timecode)
 
-func _get_animation(animation: String) -> Animation:
-	var data = state_database.get_animation(animation)
-	# if not data:
-		# push_error("No param animation found: " + animation + " in states DB")
-		# return null
-	assert(data, "No animation '" + animation + "' in states DB")
-	return data
+
+func _get_len_using_original_anim(anim_name: String) -> float:
+	# param animation can be lost, but real one must be there
+	u.assert_has_animation(animation_player, anim_name, false)
+	return animation_player.get_animation(anim_name).length

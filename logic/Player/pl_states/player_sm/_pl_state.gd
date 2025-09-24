@@ -26,7 +26,7 @@ var initial_position: Vector3
 @export var settings_switch_time: float = 0.2
 @export var stamina_cost: float = 0
 
-@onready var combos: Array[Combo_]
+@onready var state_combos: Array[Combo_]
 
 ## torso states just have a fixed legs_behavior attached to them. 
 ## It is simply wired in the editor via an export field. 
@@ -63,17 +63,18 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # 3. if nothing above, what vanilla state wants to default to?
 ## Not to override
 func _check_transition(input: InputPackage) -> PLVerdict:
-	# if current_action.action_name == PS.action_longsword_1:
+	# if current_action.action_name == PS.action_longsword_1: # old dev print 
 		# print_.combo("", str(current_action.accepts_queueing()))
 	if current_action.accepts_queueing():
 		check_combos(input)
-	if has_queued_state() and current_action.transitions_to_queued(): # was transitions_to_queued()
+	if has_queued_state() and current_action.transitions_to_queued():
+		print_.psm_check_trans(state_name, "queued 👥 exists, trying it as a force state")
 		try_force_state(queued_state)
 		queued_state = ""
-	
 	if has_forced_state():
+		print_.psm_check_trans(state_name, "forced 🦾 state prevailed" + forced_state + " (specific state checks skipped)")
 		var verdict = PLVerdict.new(forced_state)
-		forced_state = ""
+		forced_state = "" # forced_state is emptied after verdict creation
 		return verdict
 	
 	## can be overriden	# used to be called default lifecycle
@@ -83,8 +84,22 @@ func _check_transition(input: InputPackage) -> PLVerdict:
 ## can be overriden: see Run or attack.gd
 func check_transition(_input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(current_action.DURATION):
+		print_.psm_check_trans(state_name + " default checks", "works longer than " + str(current_action.DURATION) + " => choosing best input")
 		return best_input_that_can_be_paid(_input)
 	return PLVerdict.new()
+
+## choosing the input with the highest priority that we can allow
+func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
+	input.actions.sort_custom(container.states_priority_sort)
+	for action in input.actions:
+		if resources.can_be_paid(container.state_by_name(action)):
+			# TODO: just action == state_name?
+			if container.state_by_name(action) == self:
+				return PLVerdict.new()
+			else:
+				print_.psm_check_trans(state_name, "best input choosen " + str(action))
+				return PLVerdict.new(action)
+	return PLVerdict.new("", "throwing because for some reason input.actions is empty")
 
 
 func _update(input: InputPackage, delta: float):
@@ -92,7 +107,6 @@ func _update(input: InputPackage, delta: float):
 
 	if depends_on_legs:
 		current_action = legs_sm.current_action
-
 
 	if not depends_on_legs and current_action.tracks_input_vector(): # DANGER: depends_on_legs is important
 		process_input_vector(input, delta)
@@ -182,30 +196,17 @@ func try_force_state(new_forced_state: String):
 		forced_state = new_forced_state
 
 
-## docs from Ep. 3
-## If state can invoke a combo in its transition logic, it asks its combos if they are triggered.
-## If they are, they store the triggered action into a 'queued state' field.
-## => states can use 'queued state' field for transitions without losing it.
+## State asks its state_combos if they are triggered.
+## If they are, it queues combo's next state
+## TODO: If several combos triggered - we will queues the last one. Not critical, but some priority logic needed
 func check_combos(input: InputPackage):
-	for combo: Combo_ in combos:
-		print_.combo("", "checking combo " + combo.name + " with state_to_trigger " + combo.state_to_trigger)
-		# print("COMBO", combo.triggered_state)
-		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(combo.state_to_trigger)):
-			queued_state = combo.state_to_trigger
-			print_.combo("", "Queued: " + queued_state, 1)
-		else:
-			print_.combo("", "Declined", 1)
-
-## choosing the input with the highest priority that we can also pay for
-func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
-	input.actions.sort_custom(container.states_priority_sort)
-	for action in input.actions:
-		if resources.can_be_paid(container.state_by_name(action)):
-			if container.state_by_name(action) == self:
-				return PLVerdict.new()
-			else:
-				return PLVerdict.new(action)
-	return PLVerdict.new("", "throwing because for some reason input.actions is empty")
+	for combo: Combo_ in state_combos:
+		var next_state_candidate = combo.state_to_trigger
+		print_.psm_check_trans(state_name, "checking combo " + combo.name + " with state_to_trigger " + next_state_candidate)
+		
+		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(next_state_candidate)):
+			queued_state = next_state_candidate
+			print_.psm_check_trans(state_name, "Queued 👥 next state: " + queued_state, 1)
 
 
 ## Updating may be not too far from current state updating: regeneration could be dependent on the current state.
@@ -233,7 +234,7 @@ func assign_combos():
 	for child in get_children():
 		if child is Combo_:
 			print_.prefix("Container", "For state " + state_name + " assigned combo " + child.name, 0, L.INFO)
-			combos.append(child)
+			state_combos.append(child)
 			child.state = self
 
 ## overidden in states

@@ -1,7 +1,6 @@
 extends Node
 ## Legs SM consists of states called LegsBehavior. 
-## LegsBehavior is just a piece of transition logic, all it does is it 
-## manages on what action updates our legs currently
+## LegsBehavior is a piece of transition logic, it only manages what action updates our legs currently
 class_name LegsBehavior
 
 var container: PlayerStatesContainer
@@ -17,8 +16,12 @@ var behavior_name: String
 var supported_actions: Array[String] = []
 
 
+## Not abstract! It can be empty and not overriden. (double behavior)
 func update(_input: InputPackage, _delta: float):
+	# todo: i suppose it should be here, not in implementations:
+		# legs_sm.current_action.update(_input, _delta)
 	pass
+
 
 func switch_action_to(next_action_name: String, input: InputPackage):
 	var previous_action := legs_sm.current_action
@@ -28,7 +31,7 @@ func switch_action_to(next_action_name: String, input: InputPackage):
 		# print_.lsm_action("", "switch called with same " + previous_action.action_name + "⚪ NO SWITCH", 3)
 		return
 
-	print_.lsm_action("", "action " + previous_action.action_name + " => " + next_action_name, 3)
+	print_.lsm_action("↪️", "action " + previous_action.action_name + " => " + next_action_name, 3)
 
 	previous_action._on_exit_action()
 
@@ -43,14 +46,14 @@ func _on_enter_behavior(_input: InputPackage):
 	## we don't bother switching it and instead work directly from here, analysing the next input. 
 	if not __new_behavior_supports_current_action() or __double_behavior_coming():
 		var choosen_action := choose_initial_action(_input)
-		print_.lsm_beh("", "enter: choose INITIAL -> " + choosen_action, 2)
+		print_.lsm_beh(behavior_name, "enter: choose INITIAL -> " + choosen_action, 2)
 		if choosen_action == "":
 			push_error("No valid action found")
 
 		switch_action_to(choosen_action, _input)
 
 	else:
-		print_.lsm_beh("", "enter: can use current action so NO SWITCH ⚪ ", 2)
+		print_.lsm_beh(behavior_name, "enter: can use current action so NO SWITCH ⚪ ", 2)
 
 	on_enter_behavior(_input)
 
@@ -63,7 +66,7 @@ func _on_exit_behavior():
 ## can be overriden
 ## behaviors with one supported action don't need to override
 func choose_initial_action(input) -> String:
-	print_.lsm_action(" INITIAL", "using base choose_initial_action: pick first", 3)
+	print_.lsm_action("INITIAL", "using base choose_initial_action: pick first", 3)
 	assert(len(supported_actions) > 0)
 	# if supported_actions.is_empty():
 		# print_.lsm_action(" INITIAL", "supported_actions is empty, nothing to choose", 3)

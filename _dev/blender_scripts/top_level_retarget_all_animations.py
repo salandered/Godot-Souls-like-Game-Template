@@ -13,6 +13,7 @@ import bpy, os, sys, importlib
 #       - Current pose is ON
 # Both armatures VISIBLE
 # [Optionally] Source armature RM copied and deleted
+# Pose asset clicked/reloaded. Some glitch with a new project
 
 # CONFIG
 ARM_SOURCE         = "UE4 Armature"   # source armature

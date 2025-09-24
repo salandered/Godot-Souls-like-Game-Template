@@ -5,8 +5,8 @@ applyTo: '**'
 This project is a Godot engine game written in GDScript. It is a souls-like 3D game with a focus on nice character controller and combat mechanics.
 
 ## Version compliance
-We use Godot version 4.4.
-Important: Every change should be according to the official documentation: https://docs.godotengine.org/en/stable/
+We use Godot version 4.5. Usually this means any 4+ info will be compatable.
+Important: Changes should be according to the official documentation: https://docs.godotengine.org/en/stable/
 
 ## Project structure
 All scripts and logic are in "logic/" folder. You don't need to see any other root folders.

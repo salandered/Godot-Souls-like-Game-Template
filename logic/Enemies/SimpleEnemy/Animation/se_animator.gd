@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/node-colors/purple.png")
+@icon("res://-assets-/x_misc/x_icons/node-colors/purple.png")
 
 extends Node
 class_name SEAnimator

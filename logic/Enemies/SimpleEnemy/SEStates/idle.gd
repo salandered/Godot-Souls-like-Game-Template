@@ -20,7 +20,7 @@ func check_transition(delta: float) -> Verdict:
 
 	# TODO: likely follow if player is spotted but from a big distances
 	if distance_to_player() > me.fight_distance:
-		print_.se_check_trans(state_name, "dist to pl " + str(distance_to_player()) + " > fight dist " + str(me.fight_distance) + " => rotating and idle " + me.CURRENT)
+		print_.se_check_trans(state_name, "dist to pl " + str(distance_to_player()) + " > fight dist " + str(me.fight_distance) + " => rotating and idle " + Verdict.CURRENT)
 		# Turn towards player and remain idle
 		look_at_player()
 		return Verdict.new()

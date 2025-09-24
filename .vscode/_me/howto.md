@@ -1,10 +1,7 @@
 
 ## emoji
-	# ☠️
-	# 💀
 	# 💀
 	# ☠️
-	# 🦴
 	# 🦴
 
 ## Extension folder

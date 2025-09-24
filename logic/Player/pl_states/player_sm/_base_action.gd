@@ -25,7 +25,7 @@ var DURATION: float
 # INTERFACE 
 
 func update(_input: InputPackage, _delta: float):
-	pass
+	u.not_implemented(action_name)
 
 
 func _on_enter_action(input: InputPackage) -> void:
@@ -59,15 +59,6 @@ func transitions_to_queued() -> bool:
 func accepts_queueing() -> bool:
 	return states_data_repo.get_accepts_queueing(backend_animation, get_progress())
 
-func tracks_input_vector() -> bool:
-	return states_data_repo.tracks_input_vector(backend_animation, get_progress())
-
-func time_til_unlocking() -> float:
-	# TODO: delete?
-	if tracks_input_vector():
-		return 0
-	return states_data_repo.time_til_next_controllable_frame(backend_animation, get_progress())
-
 func is_vulnerable() -> bool:
 	return states_data_repo.get_vulnerable(backend_animation, get_progress())
 
@@ -77,10 +68,16 @@ func is_interruptable() -> bool:
 func is_parryable() -> bool:
 	return states_data_repo.get_parryable(backend_animation, get_progress())
 
-func get_root_position_delta(delta_time: float) -> Vector3:
-	return states_data_repo.get_root_delta_pos(backend_animation, get_progress(), delta_time)
+func weapon_hurts() -> bool:
+	return states_data_repo.get_weapon_hurts(backend_animation, get_progress())
 
-func right_weapon_hurts() -> bool:
-	return states_data_repo.get_right_weapon_hurts(backend_animation, get_progress())
+func tracks_input_vector() -> bool:
+	return states_data_repo.get_tracks_input_vector(backend_animation, get_progress())
 
+
+# TODO: interesting but do we need this?
+# func time_til_unlocking() -> float:
+# 	if tracks_input_vector():
+# 		return 0
+# 	return states_data_repo.time_til_next_controllable_frame(backend_animation, get_progress())
 # END

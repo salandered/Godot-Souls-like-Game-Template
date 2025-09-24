@@ -1,3 +1,5 @@
+@tool
+@icon("res://-assets-/x_misc/x_icons/icon_grid.png")
 extends Node
 class_name SEStatesContainer
 

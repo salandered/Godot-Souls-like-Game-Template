@@ -18,14 +18,21 @@ const SE_PRINT := false
 const HSME_PRINT := true
 
 # PLAYER
-const PSM_PRINT := false
-const LSM_BEH_PRINT := false
-const LSM_ACTION_PRINT := false
-const SKM_PRINT := false
-const COMBO_PRINT := false
+const PSM_PRINT := true
+const LSM_BEH_PRINT := true
+const LSM_ACTION_PRINT := true
+const SKM_PRINT := true
+const COMBO_PRINT := true
 
-# ENEMY
+static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
+	var result_freq = max(global_freq, arg_freq)
+	assert(result_freq > 0)
 
+	if result_freq == 1 or u.fr(false) % result_freq == 0:
+		return true
+	return false
+
+# region: ENEMY logs
 
 static func hsme(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET, freq: int = 1):
 	if not HSME_PRINT and level != L.FORCE_PRINT: return
@@ -47,17 +54,10 @@ static func se_check_trans(add_prefix_: String, text: String, info_indents: int 
 	add_prefix_ = "transition ❔" + " " + add_prefix_
 	if info_indents == 0: info_indents = 2 # if not specified, lets shift it all
 	se(add_prefix_, text, info_indents, level, freq)
-# 
 
+# endregion
 
-static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
-	var result_freq = max(global_freq, arg_freq)
-	assert(result_freq > 0)
-
-	if result_freq == 1 or u.fr(false) % result_freq == 0:
-		return true
-	return false
-
+# region: SYSTEMS logs
 
 static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
 	if not input_gathering_PRINT and level != L.FORCE_PRINT: return
@@ -91,11 +91,20 @@ static func container(add_prefix_: String, text: String, info_indents: int = 0, 
 	add_prefix_ = "Container" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
+# endregion
 
 static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
 	if not PSM_PRINT and level != L.FORCE_PRINT: return
 	
 	add_prefix_ = "PSM" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+
+static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not PSM_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "PSM transition ❔" + " " + add_prefix_
+	if info_indents == 0: info_indents = 2 # if not specified, lets shift it all
 	prefix(add_prefix_, text, info_indents, level)
 
 
@@ -125,6 +134,7 @@ static func skm(add_prefix_: String, text: String, info_indents: int = 0, level:
 	add_prefix_ = "SKM 💀" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
+# -------------------
 
 static func prefix(prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)

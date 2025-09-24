@@ -65,10 +65,14 @@
 		"editor.findMatchHighlightBackground": "#ffffff00", // all other matches
 		"editor.findMatchHighlightBorder": "#feffc686",
 		// color of wave like underline
-		"editorError.foreground": "#fd5ca75b", // semi-transparent red
+		// "#fd5ca75b", // semi-transparent red
+		"editorError.foreground": "#fd5ca75b", // 🚨 semi-transparent red
+		// "editorError.foreground": "#fd5ca700", // ⏺ FAKE TURN OFF
 		"editorWarning.foreground": "#FFFF0033", // semi-transparent yellow
 		// ERROR LENS
-		"errorLens.errorForeground": "#fd578177",
+		// "#fd578177", // more gentle red
+		// "errorLens.errorForeground": "#fd578177", // 🚨 more gentle red
+		"errorLens.errorForeground": "#fd578100", // ⏺ FAKE TURN OFF
 		"errorLens.errorBackground": "#ffffff00",
 		"errorLens.messageBackgroundMode": "none",
 		"errorLens.warningBackground": "#ffffff00",
@@ -89,7 +93,7 @@
 		"folderPathColor.custom13": "#a9c5d8", // enemy
 		"folderPathColor.custom10": "#d1abe7", // states enemy
 		"folderPathColor.animation": "#d88ad8", // animation player
-		"folderPathColor.custom5": "#94f0c5d5", //or #a4d4b2 tender green 2 
+		"folderPathColor.custom5": "#c3ddd2d5", //or #a4d4b2 tender green 2 
 		"folderPathColor.white_": "#dfdfdf", // white
 		"folderPathColor.states_blue": "#6692d4", // state blue 
 		"folderPathColor.custom11": "#f1cf8ee3", // legs SM
@@ -104,7 +108,7 @@
 	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	"folder-path-color.folders": [
 		{
-			"path": "logic/Player/PlayerModel/player_sm/pl_container.gd",
+			"path": "*_container.gd",
 			"color": "custom5"
 		},
 		// AREA AWARENESS
@@ -129,6 +133,14 @@
 			"path": "*_base_HFSM.gd",
 			"color": "white_"
 		},
+		{
+			"path": "*_pl_state.gd",
+			"color": "white_"
+		},
+		{
+			"path": "*_pl_action.gd",
+			"color": "white_"
+		},
 		// ANIM
 		{
 			"path": "*_animator.gd",
@@ -139,10 +151,14 @@
 			"path": "logic/Player/pl_states/player_sm/states",
 			"color": "states_blue"
 		},
+		{
+			"path": "logic/Player/pl_states/legs_sm/actions",
+			"color": "custom11"
+		},
 		// PLAYER SM
 		{
 			"path": "logic/Player/pl_states/legs_sm",
-			"color": "custom11"
+			"color": "custom7"
 		},
 		{
 			"path": "logic/Player/pl_states/player_sm",
@@ -379,6 +395,18 @@
 				{
 					"color": "#A3A3F5",
 				}
+			]
+		},
+		"(# region:)(.*)": {
+			"decorations": [
+				{
+					"color": "#eba0eb80", // Style for '# region:'
+					// "fontStyle": "italic"
+				},
+				// {
+				// "color": "#808080", // Style for the text after it
+				// "fontStyle": "italic"
+				// }
 			]
 		}
 	}

@@ -31,7 +31,7 @@
 [ext_resource type="Script" uid="uid://dsi4r7ttkfgm2" path="res://logic/Enemies/Opponent/Actions/Sprint.gd" id="20_q2lb6"]
 [ext_resource type="Script" uid="uid://c5aa5jchgmuii" path="res://logic/Enemies/Opponent/Behaviours/Block.gd" id="21_v8455"]
 [ext_resource type="Script" uid="uid://cctx6crmqbbb3" path="res://logic/Enemies/Opponent/Actions/Longsword1.gd" id="22_6f4e1"]
-[ext_resource type="AnimationLibrary" uid="uid://b5skulr4lvugh" path="res://-assets-/animations/lib-params-actions.res" id="23_pvimx"]
+[ext_resource type="AnimationLibrary" uid="uid://b5skulr4lvugh" path="res://-assets-/animations/legacy-anim/lib-params-actions.res" id="23_pvimx"]
 [ext_resource type="Script" uid="uid://ddc8n2bql4mkj" path="res://logic/Enemies/Opponent/Actions/Staggered.gd" id="25_2ybub"]
 [ext_resource type="Script" uid="uid://cf3oaeqflc2yg" path="res://logic/Enemies/Opponent/Behaviours/Outspace.gd" id="25_yneac"]
 [ext_resource type="Script" uid="uid://cspbe8im8qoj0" path="res://logic/Enemies/Opponent/Behaviours/GuaranteedStrike.gd" id="26_4dm4f"]
@@ -46,7 +46,7 @@
 [ext_resource type="Script" uid="uid://cnk21rqjtjbak" path="res://logic/Enemies/Opponent/Behaviours/AvoidPlayer.gd" id="37_ivdbi"]
 [ext_resource type="Script" uid="uid://bi1e7pyrhxjt4" path="res://logic/Enemies/Opponent/Behaviours/Pursue.gd" id="39_5onqy"]
 [ext_resource type="Script" uid="uid://c8hqk4ncggisq" path="res://logic/Enemies/Opponent/Behaviours/shield_throw.gd" id="40_0bpyj"]
-[ext_resource type="AnimationLibrary" uid="uid://dwu070x6p0m56" path="res://-assets-/animations/Ready-anim/libs/opponent-lib.res" id="48_24kiw"]
+[ext_resource type="AnimationLibrary" uid="uid://dwu070x6p0m56" path="res://-assets-/animations/legacy-anim/libs/opponent-lib.res" id="48_24kiw"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/Player/fancy-camera/targetable_aspect.tscn" id="49_d8l4k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnf3x"]

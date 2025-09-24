@@ -15,7 +15,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="RetroRoom"
-run/main_scene="uid://bco760cyuo8em"
+run/main_scene="uid://mdwtc0gt416o"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -50,14 +50,11 @@ enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addo
 folder_colors={
 "res://-assets-/GLB-level/": "green",
 "res://-assets-/animations/": "yellow",
-"res://-assets-/animations/GLB-packed-anim-old/": "gray",
 "res://-assets-/animations/GLB-packed/": "blue",
-"res://-assets-/animations/Ready-anim/": "gray",
-"res://-assets-/animations/Ready-anim/Gundyr/": "pink",
-"res://-assets-/animations/Ready-anim/_backups/": "gray",
-"res://-assets-/animations/Ready-anim/_forged/": "red",
-"res://-assets-/animations/Ready-anim/shield-sword/": "blue",
-"res://-assets-/animations/animation-30/": "yellow",
+"res://-assets-/animations/legacy-anim/": "gray",
+"res://-assets-/animations/legacy-anim/GLB-packed-anim-old/": "gray",
+"res://-assets-/animations/legacy-anim/Gundyr/": "pink",
+"res://-assets-/animations/legacy-anim/shield-sword/": "blue",
 "res://-assets-/animations/standard-skeleton/": "blue",
 "res://-assets-/blender_sources/": "orange",
 "res://-assets-/blender_sources/player/": "pink",

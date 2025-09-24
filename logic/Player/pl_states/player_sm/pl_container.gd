@@ -1,3 +1,6 @@
+@tool
+@icon("res://-assets-/x_misc/x_icons/icon_grid.png")
+
 extends Node
 class_name PlayerStatesContainer
 
@@ -23,7 +26,7 @@ var player: Princess
 # @export var torso_anim_settings: AnimationPlayer
 # @export var legs_anim_settings: AnimationPlayer
 
-var _state_data: Dictionary = { # { Node name : PSData }
+var _player_state_data: Dictionary = { # { Node name : PSData }
 	# move
 	# "Walk": PSData.new(PS.walk, 2),
 	"Run": PSData.new(PS.run, 2, LS.legs_behavior_run, true),
@@ -54,8 +57,8 @@ var _state_data: Dictionary = { # { Node name : PSData }
 
 var _player_action_data: Dictionary = { # { Node name : PlayerActionData }
 	# move
-	# "Walk": PlayerActionData.new(PS.walk,PS.action_block, A.walk, "walk-param", , ),
-	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_strafe, A.strafe_R, ),
+	# "Walk": PlayerActionData.new(PS.walk,PS.action_block, A.walk, ),
+	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_strafe, A.run_R, ),
 	# "IdleSprintAction": PlayerActionData.new(PS.run, PS.action_sprint_idle, A.idle, ),
 	"SprintAction": PlayerActionData.new(PS.sprint, PS.action_sprint, A.combat_sprint, ),
 	"JumpRunAction": PlayerActionData.new(PS.jump_run, PS.action_jump_run, A.jump_run, ),
@@ -98,13 +101,15 @@ var _legs_behavior_data: Dictionary = {
 }
 
 var _legs_action_data: Dictionary = {
-	"IdleAction": LegActionData.new(LS.legs_behavior_run, LS.legs_action_idle, A.combat_idle, "", 0.2, LegsSM.MotionType.IDLE),
-	"RunAction": LegActionData.new(LS.legs_behavior_run, LS.legs_action_run, A.combat_run, "", 0.2, LegsSM.MotionType.CYCLE),
-	"SprintAction": LegActionData.new(LS.legs_behavior_sprint, LS.legs_action_sprint, A.combat_sprint, "", 0.2, LegsSM.MotionType.CYCLE),
-	# "JumpStartAction": LegActionData.new(LS.legs_behavior_run, LS.legs_action_jump_start, A.jump_run, LegsSM.MotionType.IDLE),
-	# "AirAction": LegActionData.new(LS.legs_action_air, A.midair, LegsSM.MotionType.IDLE),
-	# "LandAction": LegActionData.new(LS.legs_behavior_run, LS.legs_action_land, A.landing_run, LegsSM.MotionType.IDLE),
-	"DoubleAction": LegActionData.new(LS.legs_behavior_double, LS.legs_action_double, "-", "-", 0.2, LegsSM.MotionType.IDLE),
+	"IdleAction": LegActionData.new(LS.legs_action_idle, A.combat_idle, "", 0.2, LegsSM.MotionType.IDLE),
+	"WalkStartAction": LegActionData.new(LS.legs_action_walk_start, A.combat_walk_start, "", 0.2, LegsSM.MotionType.START),
+	"RunStartAction": LegActionData.new(LS.legs_action_run_start, A.combat_run_start, "", 0.2, LegsSM.MotionType.START),
+	"RunAction": LegActionData.new(LS.legs_action_run, A.combat_run, "", 0.2, LegsSM.MotionType.CYCLE),
+	"SprintAction": LegActionData.new(LS.legs_action_sprint, A.combat_sprint, "", 0.2, LegsSM.MotionType.CYCLE),
+	# "JumpStartAction": LegActionData.new(LS.legs_action_jump_start, A.jump_run, LegsSM.MotionType.IDLE),
+	# "AirAction": LegActionData.new(LA.midair, LegsSM.MotionType.IDLE),
+	# "LandAction": LegActionData.new(LS.legs_action_land, A.landing_run, LegsSM.MotionType.IDLE),
+	"DoubleAction": LegActionData.new(LS.legs_action_double, "-", "-", 0.2, LegsSM.MotionType.IDLE),
 }
 
 
@@ -144,7 +149,7 @@ func legs_action_by_name(action_name: String) -> LegsAction:
 func accept_player_states() -> void:
 	for child: PlayerState in get_descendants.player_states_by_type(player_sm, "PlayerState"):
 		print_.container("", "child.get_name() " + child.get_name())
-		var state_data: PSData = _state_data.get(child.get_name())
+		var state_data: PSData = _player_state_data.get(child.get_name())
 		# assert(state_data, "PSData for " + child.get_name() + " not found")
 		if not state_data:
 			push_error("No state data found for: " + child.get_name())
@@ -207,7 +212,7 @@ func accept_player_actions():
 		child.animation = action_data.animation_name
 		child.backend_animation = action_data.backend_animation_name
 		child.blend_time = action_data.blend_time
-		child.DURATION = states_data_repo.get_duration(action_data.backend_animation_name)
+		child.DURATION = states_data_repo.get_duration(action_data.animation_name)
 		# node.animator_set = action_data.animator_set
 		child.states_data_repo = states_data_repo
 
@@ -260,7 +265,7 @@ func accept_legs_actions():
 		child.animation = action_data.animation_name
 		child.backend_animation = action_data.backend_animation_name
 		child.blend_time = action_data.blend_time
-		child.DURATION = states_data_repo.get_duration(action_data.backend_animation_name)
+		child.DURATION = states_data_repo.get_duration(action_data.animation_name)
 		child.states_data_repo = states_data_repo
 		
 		# specific

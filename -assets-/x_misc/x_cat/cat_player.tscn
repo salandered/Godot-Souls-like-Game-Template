@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://misc/cat_adopt/player/player_charbody3D.gd" id="1_4per7"]
 [ext_resource type="Material" uid="uid://bqecby27hsm6w" path="res://-assets-/x_misc/x_cat/metal_blue.tres" id="2_rwysw"]
-[ext_resource type="AnimationLibrary" uid="uid://d3h8qu2uqwwdf" path="res://-assets-/animations/Ready-anim/libs/MeleeLib.res" id="3_8tvpy"]
+[ext_resource type="AnimationLibrary" uid="uid://d3h8qu2uqwwdf" path="res://-assets-/animations/legacy-anim/libs/MeleeLib.res" id="3_8tvpy"]
 [ext_resource type="Script" path="res://misc/cat_adopt/player/player_anim_tree.gd" id="3_f2g20"]
 [ext_resource type="Material" uid="uid://b513rxekm2q4s" path="res://-assets-/x_misc/x_cat/characters/eyes.tres" id="3_yniln"]
 [ext_resource type="Script" path="res://misc/cat_adopt/player/equipment_system/equipment_system.gd" id="4_bebk6"]
