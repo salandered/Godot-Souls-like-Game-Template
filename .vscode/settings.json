@@ -23,12 +23,12 @@
 	// godot ends
 	// dont open file again in split view
 	"workbench.editor.revealIfOpen": true,
-	//---------------------------------------
-	// ---------- FIGHTING COPILOT ----------
-	//---------------------------------------
+	//--------------------------------------------
+	//-----------🤖 FIGHTING COPILOT 🤖----------
+	//--------------------------------------------
 	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
 	"github.copilot.editor.enableCodeActions": false, // no yellow stars
-	"editor.inlineSuggest.enabled": false,
+	"editor.inlineSuggest.enabled": true,
 	//
 	// Code completions settings
 	// "github.copilot.enable": true,
@@ -87,18 +87,22 @@
 		//
 		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
 		"folderPathColor.utils": "#92b69fe5", // utils
-		"folderPathColor.model": "#e681bffb", // model accent
-		"folderPathColor.custom7": "#cdcf90", // yellow accent (awareness)
-		"folderPathColor.custom1": "#ffa9c8", // tender enemy
+		"folderPathColor.model": "#e681bfe0", // model accent
+		"folderPathColor.awareness": "#cdcf90", // yellow accent (awareness)
+		"folderPathColor.turquoise": "#ffa9c8", // tender enemy
 		"folderPathColor.custom13": "#a9c5d8", // enemy
 		"folderPathColor.custom10": "#d1abe7", // states enemy
 		"folderPathColor.animation": "#d88ad8", // animation player
-		"folderPathColor.custom5": "#c3ddd2d5", //or #a4d4b2 tender green 2 
-		"folderPathColor.white_": "#dfdfdf", // white
+		"folderPathColor.camera_green": "#94f0c5d5", //or #a4d4b2 tender green 2 # camera
+		"folderPathColor.white_": "#ececec", // white
 		"folderPathColor.states_blue": "#6692d4", // state blue 
 		"folderPathColor.custom11": "#f1cf8ee3", // legs SM
 		"folderPathColor.custom12": "#92b9e4", // 8aa8c9
-		// "folderPathColor.custom14": "#f08ec4", // 8aa8c9
+		"folderPathColor.custom14": "#92b9e4", // 8aa8c9
+		"folderPathColor.orange_shade_2": "#92b9e4", // 8aa8c9
+		"folderPathColor.gray_ignore": "#9ea4ac", // 8aa8c9
+		"folderPathColor.green_shade_3": "#92b9e4", // 8aa8c9
+		"folderPathColor.blue_shade_3": "#92b9e4", // 8aa8c9
 	},
 	//
 	// COLORFUL FOLDERS
@@ -114,23 +118,20 @@
 		// AREA AWARENESS
 		{
 			"path": "*_awareness.gd",
-			"color": "custom7"
+			"color": "awareness"
+		},
+		// GRAY IGNORE
+		{
+			"path": "*_ideas*",
+			"color": "gray_ignore"
+		},
+		{
+			"path": "*_history*",
+			"color": "gray_ignore"
 		},
 		// WHITY
 		{
-			"path": "*_base_state.gd",
-			"color": "white_"
-		},
-		{
 			"path": "*_base*",
-			"color": "white_"
-		},
-		{
-			"path": "*_base_se_state.gd",
-			"color": "white_"
-		},
-		{
-			"path": "*_base_HFSM.gd",
 			"color": "white_"
 		},
 		{
@@ -158,7 +159,7 @@
 		// PLAYER SM
 		{
 			"path": "logic/Player/pl_states/legs_sm",
-			"color": "custom7"
+			"color": "awareness"
 		},
 		{
 			"path": "logic/Player/pl_states/player_sm",
@@ -199,7 +200,7 @@
 		// CAMERA
 		{
 			"path": "logic/Player/fancy-camera",
-			"color": "custom5"
+			"color": "camera_green"
 		},
 		// UTILS
 		{
@@ -408,7 +409,18 @@
 				// "fontStyle": "italic"
 				// }
 			]
-		}
+		},
+		"\\b(current_anim)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9c582f3"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
 	}
 	//
 	//  "decorations": [

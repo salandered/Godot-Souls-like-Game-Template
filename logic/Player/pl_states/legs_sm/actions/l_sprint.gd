@@ -25,9 +25,9 @@ func process_input_vector(input: InputPackage, delta: float):
 
 func _input(event):
 	if event.is_action_released("dev_speed_up"):
-		SPEED += 10
+		SPEED += 6
 	if event.is_action_released("dev_speed_down"):
-		SPEED -= 10
+		SPEED -= 6
 
 func on_exit_action():
 	pass

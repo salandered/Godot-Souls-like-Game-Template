@@ -44,10 +44,6 @@ var queued_state: String = ""
 var forced_state: String = ""
 
 
-func _action_delegated_to_legs() -> bool:
-	return current_action is LegsAction
-
-
 func has_queued_state() -> bool:
 	return queued_state != ""
 

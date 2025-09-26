@@ -18,7 +18,7 @@ extends EditorScript
 
 # -> CHANGE THIS (without .glb)
 #    NOTE: Library will be called using this name. Consider renaming .glb to something shorter. 
-const SOURCE_GLB_NAME := "start-end-mini" # "s-s" "test-export-1"
+const SOURCE_GLB_NAME := "all-axe" # "s-s" "test-export-1"
 
 # -> CHANGE THIS: will be removed from animation names
 const PREFIX_TO_REMOVE := "" # "sword and shield"
@@ -27,24 +27,9 @@ const PREFIX_TO_REMOVE := "" # "sword and shield"
 # -> CHECK THIS (usually we need param))
 const PARAM := true
 
-
-# -> CHECK THIS (could be changed later)
-const PARAM_ANIM_PROPERTIES := [
-	{"name": StatesDatabase.TRANSITIONS_TO_QUEUED, "type": TYPE_BOOL, "value": false},
-	{"name": StatesDatabase.ACCEPTS_QUEUEING, "type": TYPE_BOOL, "value": false},
-	{"name": StatesDatabase.IS_PARRYABLE, "type": TYPE_BOOL, "value": false},
-	{"name": StatesDatabase.IS_VULNERABLE, "type": TYPE_BOOL, "value": true},
-	{"name": StatesDatabase.IS_INTERRUPTABLE, "type": TYPE_BOOL, "value": true},
-	{"name": StatesDatabase.WEAPON_HURTS, "type": TYPE_BOOL, "value": false},
-	{"name": StatesDatabase.TRACKS_INPUT_VECTOR, "type": TYPE_BOOL, "value": true},
-	{"name": StatesDatabase.ROOT_MOTION, "type": TYPE_BOOL, "value": false},
-]
-
 # -> CHECK THIS (could be changed later)
 const LOOP_KEYWORDS := ["idle", "run", "sprint", "jog", "walk", "strafe", "loop", "cycle"]
 const NOT_LOOP_KEYWORDS := ["jump", "land", "start", "end", "turn", "180", "90", "roll"] # priority over LOOP_KEYWORDS
-
-
 # ---
 
 # "res://-assets-/animations/GLB-packed/"
@@ -56,6 +41,17 @@ var glb_path: String = SOURCE_GLB_PATH + SOURCE_GLB_NAME + ".glb"
 var target_dir := TARGET_ROOT_FOLDER.path_join(SOURCE_GLB_NAME)
 var target_param_dir := target_dir.path_join("param")
 
+# -> CHECK THIS (can be changed later)
+const PARAM_ANIM_PROPERTIES := [
+	{"name": StatesDatabase.TRANSITIONS_TO_QUEUED, "type": TYPE_BOOL, "value": false},
+	{"name": StatesDatabase.ACCEPTS_QUEUEING, "type": TYPE_BOOL, "value": false},
+	{"name": StatesDatabase.IS_PARRYABLE, "type": TYPE_BOOL, "value": false},
+	{"name": StatesDatabase.IS_VULNERABLE, "type": TYPE_BOOL, "value": true},
+	{"name": StatesDatabase.IS_INTERRUPTABLE, "type": TYPE_BOOL, "value": true},
+	{"name": StatesDatabase.WEAPON_HURTS, "type": TYPE_BOOL, "value": false},
+	{"name": StatesDatabase.TRACKS_INPUT_VECTOR, "type": TYPE_BOOL, "value": true},
+	{"name": StatesDatabase.ROOT_MOTION, "type": TYPE_BOOL, "value": false},
+]
 
 # --- Script global vars ---
 var instance: Node

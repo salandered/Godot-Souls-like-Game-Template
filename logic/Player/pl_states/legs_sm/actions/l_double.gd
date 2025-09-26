@@ -17,4 +17,4 @@ func animate(): # ▶️🔗
 	
 	print_.lsm_action(action_name + em.play, em.linked + "PLAY DOUBLE anim: " + animation_, 8)
 	
-	legs_sm.legs_animator.play(animation_, 0.2)
+	legs_sm.legs_animator.set_anim_to_play(animation_, 0.2)

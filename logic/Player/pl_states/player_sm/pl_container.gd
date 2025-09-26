@@ -31,7 +31,7 @@ var _player_state_data: Dictionary = { # { Node name : PSData }
 	# "Walk": PSData.new(PS.walk, 2),
 	"Run": PSData.new(PS.run, 2, LS.legs_behavior_run, true),
 	"Strafe": PSData.new(PS.strafe, 3),
-	"Sprint": PSData.new(PS.sprint, 3, LS.legs_behavior_sprint),
+	"Sprint": PSData.new(PS.sprint, 3, LS.legs_behavior_sprint, true),
 	"JumpRun": PSData.new(PS.jump_run, 10),
 	"JumpSprint": PSData.new(PS.jump_sprint, 10),
 	"Midair": PSData.new(PS.midair, 10),
@@ -59,8 +59,6 @@ var _player_action_data: Dictionary = { # { Node name : PlayerActionData }
 	# move
 	# "Walk": PlayerActionData.new(PS.walk,PS.action_block, A.walk, ),
 	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_strafe, A.run_R, ),
-	# "IdleSprintAction": PlayerActionData.new(PS.run, PS.action_sprint_idle, A.idle, ),
-	"SprintAction": PlayerActionData.new(PS.sprint, PS.action_sprint, A.combat_sprint, ),
 	"JumpRunAction": PlayerActionData.new(PS.jump_run, PS.action_jump_run, A.jump_run, ),
 	"JumpSprintAction": PlayerActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint, ),
 	"MidairAction": PlayerActionData.new(PS.midair, PS.action_midair, A.midair, ),

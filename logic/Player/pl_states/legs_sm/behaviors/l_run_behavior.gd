@@ -10,22 +10,22 @@ extends LegsBehavior
 ##    Duplicated is a line telling that idle is used here in supported_actions
 
 
+const START_THRESHOLD := 0.25 # tweak
+const IDLE_COMMITMENT := 0.12 # seconds
+const RUN_START_COMMITMENT := 0.2 # seconds
+
+
 func _ready() -> void:
 	supported_actions = [
 		LS.legs_action_idle,
-		LS.legs_action_run,
 		LS.legs_action_run_start,
+		LS.legs_action_run,
 	]
 
 func update(input: InputPackage, delta: float) -> void:
 	_choose_action(input, delta)
 	legs_sm.current_action.update(input, delta)
-	_just_left_idle = false
 
-var _just_left_idle := false
-const START_THRESHOLD := 0.25 # tweak
-const IDLE_COMMITMENT := 0.12 # seconds
-const RUN_START_COMMITMENT := 0.2 # seconds
 
 func _choose_action(input: InputPackage, delta: float) -> void:
 	var is_moving := input.input_direction.length() >= START_THRESHOLD
@@ -33,12 +33,13 @@ func _choose_action(input: InputPackage, delta: float) -> void:
 
 	if current_action.action_name == LS.legs_action_idle:
 		if is_moving and current_action.get_progress() > IDLE_COMMITMENT:
-			switch_action_to(LS.legs_action_run_start, input)
+			# switch_action_to(LS.legs_action_run_start, input)
+			switch_action_to(LS.legs_action_run, input)
 			return
 	
 	if current_action.action_name == LS.legs_action_run_start:
 		if is_moving:
-			if current_action.DURATION / current_action.SPEED_SCALE - current_action.get_progress() < 0.08: # tweak may be
+			if current_action.DURATION / current_action.SPEED_SCALE - current_action.get_progress() < 0.1: # tweak may be
 				switch_action_to(LS.legs_action_run, input)
 				return
 		else:
@@ -49,6 +50,7 @@ func _choose_action(input: InputPackage, delta: float) -> void:
 		if not is_moving:
 			switch_action_to(LS.legs_action_idle, input) # run end later
 	
+	# region: first version
 	# if input.input_direction != Vector2.ZERO:
 	# 	_idle_timer = 0.0
 	# 	switch_action_to(LS.legs_action_run, input)
@@ -56,6 +58,7 @@ func _choose_action(input: InputPackage, delta: float) -> void:
 	# 	_idle_timer += delta
 	# 	if _idle_timer >= IDLE_COMMITMENT:
 	# 		switch_action_to(LS.legs_action_idle, input)
+	# endregion
 
 
 func choose_initial_action(input: InputPackage) -> String:

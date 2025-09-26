@@ -3,7 +3,7 @@ extends LegsBehavior
 func _ready() -> void:
 	supported_actions = [
 		LS.legs_action_double
-		]
+	]
 
 # func on_enter_behavior(_input: InputPackage) -> void:
 # 	pass

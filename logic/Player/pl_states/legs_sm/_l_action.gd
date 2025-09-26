@@ -22,7 +22,7 @@ func update(_input: InputPackage, _delta: float):
 ## can be overriden (see double action)
 func animate(): # ▶️
 	print_.lsm_action(action_name + em.play, "animation " + animation, 8)
-	legs_sm.legs_animator.play(animation, 0.2)
+	legs_sm.legs_animator.set_anim_to_play(animation, 0.2)
 
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:

@@ -48,9 +48,9 @@ func on_exit_action():
 	
 func _input(event):
 	if event.is_action_released("dev_speed_up"):
-		SPEED += 10
+		SPEED += 6
 	if event.is_action_released("dev_speed_down"):
-		SPEED -= 10
+		SPEED -= 6
 
 # region FAIR LOGIC
 # func move_with_root(_delta: float):

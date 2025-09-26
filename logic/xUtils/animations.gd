@@ -19,6 +19,7 @@ const _SWS_loco_p2 = "SWS-loco-p2-LIB" + "/"
 const _EP_p1 = "EP-p1-LIB" + "/"
 const _EP_p2 = "EP-p2-LIB" + "/"
 
+const _all_axe = "all-axe-LIB" + "/"
 const _axe_for_player = "axe-for-player-v1-LIB" + "/"
 const _axe_slices = "axe-slices-LIB" + "/"
 
@@ -28,10 +29,10 @@ const _specifics = "_specifics" + "/"
 
 
 # -- MOVE ANIM  NOTE: usual loco and combat loco are mixed for now
-const combat_idle := _ss_loco + "B-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
+const combat_idle := _all_axe + "L-combat-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
 const combat_walk := _EP_p1 + "EP-p1-O-Walk-Combat" # _ss_loco + "C-walk"
 const combat_walk_start := _SWS_loco_p2 + "SWSlp2-O-walk-start" # _ss_loco + "C-walk"
-const combat_run_start := _specifics + "Idle To Sprint_001"
+const combat_run_start := _specifics + "Idle To Sprint_001" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
 const combat_walk_back := _EP_p1 + "EP-p1-O-Walk-Combat-B" # _ss_loco + "C-walk-back"
 const combat_run := _run + "B-Jog-Forward-v2" # "SWSl-O-run-F" # _run + "B-Jog-Forward-v2"
 const combat_sprint := _run + "B-Fast-Run-v2" # _SWS_loco + "SWSl-O-sptrint-F" # _run + "B-Fast-Run-v2"
@@ -56,8 +57,8 @@ const death := midair # _ss_loco + "C-death-2"
 
 
 # -- FIGHT 
-const longsword_1 := _SWS_combo + "SWSc-O-combo-1-all" # _axe_for_player + "Ex-attack-slice-RL" # _ff + "longsword_1"
-const longsword_2 := _axe_slices + "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "longsword_2"
+const longsword_1 := _all_axe + "aIP-attack-slice-RL" # _ff + "longsword_1" # _SWS_combo + "SWSc-O-combo-1-all" #
+const longsword_2 := _all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "longsword_2"
 
 const withdraw := midair # _jump + "C-fall-HW" # TODO
 const block_forward := _OS_fight + "OS-block-left" # _ss_attack + "C-block-forward"

@@ -20,5 +20,5 @@ func check_transition(input: InputPackage) -> PLVerdict:
 #  		# print_.prefix("PS |" + state_name + "|", "not switching", 5)
 
 
-func on_enter_state(input: InputPackage):
-	switch_action_to(PS.action_sprint, input) # overrides default in this case
+func on_exit_state():
+	legs_sm.legs_animator.remove_follower()

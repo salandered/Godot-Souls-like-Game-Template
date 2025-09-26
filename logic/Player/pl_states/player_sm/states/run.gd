@@ -32,6 +32,7 @@ func check_transition(input: InputPackage) -> PLVerdict:
 # func animate(_input: InputPackage):
 # 	player_sm.torso_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
 
+# TODO: do we need it? certainly not here
 func on_exit_state():
 	# of course the same animator. in perfect world legs_sm.legs_animator to var
 	legs_sm.legs_animator.remove_follower()

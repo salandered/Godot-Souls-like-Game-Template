@@ -199,7 +199,7 @@ def get_actions_by_prefix(prefix: str) -> List[str]:
 
 
 
-def rename_actions_replacing_word(term_from: str, term_to: str, is_prefix: bool) -> None:
+def rename_actions_replacing_word(term_from: str, term_to: str, is_prefix: bool = False) -> None:
     """
     Rename Actions by either:
       - prefix: if is_prefix=True, replace leading `term_from` with `term_to`
@@ -263,3 +263,6 @@ if __name__ == "__main__":
 #    add_prefix_to_all_actions(add_prefix="Walk Combat")
 #    remove_word_from_actions(keyword_to_remove = "root.")
 #    remove_word_from_actions(keyword_to_remove = "|Unreal Take|Base Layer")
+#    remove_word_from_actions(keyword_to_remove = "forward")
+    rename_actions_replacing_word("left", "L")
+    rename_actions_replacing_word("right", "R")

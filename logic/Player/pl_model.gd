@@ -3,7 +3,6 @@ class_name PlayerModel
 
 @onready var player: Princess = $".."
 @onready var skeleton = %GeneralSkeleton
-# @onready var animator = $SplitBodyAnimator
 @onready var combat = $Combat as HumanoidCombat
 @onready var resources = $Resources as HumanoidResources
 @onready var hitbox: Hitbox_ = %HitBox
@@ -11,11 +10,9 @@ class_name PlayerModel
 @onready var container = %StatesContainer as PlayerStatesContainer
 
 @onready var _begin: BeginModifier = %_Begin
-@onready var full_body: ModifierAnimator = %FullBody
-@onready var torso: ModifierAnimator = %Torso
+@onready var torso_animator: ModifierAnimator = %Torso
 @onready var legs_animator: ModifierAnimator = %Legs
 @onready var _end: EndModifier = %_End
-#@onready var limp: LimpModifier = %Limp
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
@@ -57,18 +54,18 @@ func update(input: InputPackage, delta: float):
 	
 
 func accept_modifiers():
-	var animators := [full_body, torso, legs_animator]
-	for a_ in animators:
-		u.assert_has_animation(a_.native_animator, A.combat_idle)
-		a_.current_anim = a_.native_animator.get_animation(A.combat_idle)
-		a_.current_anim_cycling = a_.current_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
-		a_.current_anim_progress = 0
-		a_.previous_anim = a_.native_animator.get_animation(A.combat_idle)
-		a_.previous_anim_cycling = a_.previous_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
-		a_.previous_anim_progress = 0
-		a_.__initialised = true
-	_begin.__initialised = true
-	_end.__initialised = true
+	var animators := [torso_animator, legs_animator]
+	for animator in animators:
+		u.assert_has_animation(animator.native_animator, A.combat_idle)
+		animator.current_anim = animator.native_animator.get_animation(A.combat_idle)
+		animator.current_anim_cycling = animator.current_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
+		animator.current_anim_progress = 0
+		animator.previous_anim = animator.native_animator.get_animation(A.combat_idle)
+		animator.previous_anim_cycling = animator.previous_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
+		animator.previous_anim_progress = 0
+		animator.initialise()
+	_begin.initialise()
+	_end.initialise()
 	# limp.initialise()
 
 
@@ -113,9 +110,9 @@ func _reload_run_anims_from_library() -> void:
 	run_anims.clear()
 	if animation_player == null:
 		return
-	var prefix := run_lib + "/"
+	var anim_lib := A._run
 	for name_ in animation_player.get_animation_list():
-		if name_.begins_with(prefix):
+		if name_.begins_with(anim_lib):
 			run_anims.append(name_)
 	# run_anims.sort() # alphabetical is fine; remove if you prefer original order
 	_run_anim_i = clampi(_run_anim_i, 0, max(0, run_anims.size() - 1))
@@ -140,12 +137,12 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("dev_8"):
 		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.1)
-		player_sm.torso_animator.play_overlay(A.hit_reaction, 0.12, 0.20, 0.18, 1)
+		player_sm.torso_animator.set_overlay_anim(A.hit_reaction, 0.12, 0.20, 0.18, 1)
 		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0, -1, 0, 1)
 		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed("dev_9"):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		player_sm.torso_animator.play_overlay(A.hit_reaction, 0.2, 0.05, 0.2, 1)
+		player_sm.torso_animator.set_overlay_anim(A.hit_reaction, 0.2, 0.05, 0.2, 1)
 		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
 

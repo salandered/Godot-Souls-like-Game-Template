@@ -10,6 +10,7 @@ class_name AttackState
 # plus the length of the weapon in "the extremum pose"
 # (eye-measured in animator's interface)
 @export var attack_radius: float
+
 @export var extremum_timing: float
 @export var posttracking_radius: float
 
@@ -32,7 +33,7 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	
 	
 func update(_input: InputPackage, delta):
-	move_with_root(delta)
+	# move_with_root(delta)
 	player.model.active_weapon.is_attacking = current_action.weapon_hurts()
 
 func move_with_root(delta: float) -> void:

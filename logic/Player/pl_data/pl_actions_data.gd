@@ -16,7 +16,6 @@ func _init(
 		backend_anim_name_: String = "",
 		blend_time_: float = 0.2,
 		dummy_: bool = false,
-		# animator_set_: String = ""
 	) -> void:
 	self.state_name = state_name_
 	self.action_name = action_name_
@@ -25,9 +24,6 @@ func _init(
 		self.backend_animation_name = A.to_backend_anim(animation_name_)
 	else:
 		self.backend_animation_name = backend_anim_name_
-	# if animator_set_ == "":
-	# 	self.animator_set = "full_body"
-	# else:
-	# 	self.animator_set = animator_set_
+
 	self.blend_time = blend_time_
 	self.dummy = dummy_

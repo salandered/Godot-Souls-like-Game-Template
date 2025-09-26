@@ -12,7 +12,7 @@ macOS/Linux:
 
 
 ## Color folders extension
-extansion: %USERPROFILE%\.vscode\extensions\visbydev.folder-path-color-0.0.15
+extansion: %USERPROFILE%\.vscode\extensions\visbydev.folder-path-color-0.0.16
 *changed .js and package.json to support more custom colors. changed copies saved in _me*
 
 

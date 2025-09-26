@@ -6,6 +6,9 @@ class_name BeginModifier
 
 var __initialised: bool = false
 
+func initialise():
+	__initialised = true
+
 # because we manage our modifiers via influence manipulations, we often have active ones with 0 influence
 # to not waste our computation power on them, the first "meta modifier" deactivates 0-influenced ones
 # and activates non-zero modifiers.

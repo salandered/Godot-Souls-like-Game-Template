@@ -46,14 +46,14 @@ func _on_enter_behavior(_input: InputPackage):
 	## we don't bother switching it and instead work directly from here, analysing the next input. 
 	if not __new_behavior_supports_current_action() or __double_behavior_coming():
 		var choosen_action := choose_initial_action(_input)
-		print_.lsm_beh(behavior_name, "enter: choose INITIAL -> " + choosen_action, 2)
+		print_.lsm_beh(behavior_name + " on enter", "choose INITIAL -> " + choosen_action, 2)
 		if choosen_action == "":
 			push_error("No valid action found")
 
 		switch_action_to(choosen_action, _input)
 
 	else:
-		print_.lsm_beh(behavior_name, "enter: can use current action so NO SWITCH ⚪ ", 2)
+		print_.lsm_beh(behavior_name + " on enter", "can use current action so NO SWITCH ⚪ ", 2)
 
 	on_enter_behavior(_input)
 

@@ -1,3 +1,5 @@
+@tool
+@icon("uid://b5xt1a7igr101")
 extends Node3D
 class_name PlayerBones
 

@@ -65,11 +65,9 @@ func _label_state_info():
 		str(t_anim.active), str(l_anim.active), ]
 
 func _label_sk_m_info():
-	var full_body_a := player.model.full_body
-	var torso_a := player.model.torso
+	var torso_a := player.model.torso_animator
 	var legs_a := player.model.legs_animator
 
-	label_4.text = __sk_m_label(full_body_a)
 	label_5.text = __sk_m_label(torso_a)
 	label_6.text = __sk_m_label(legs_a)
 
