@@ -6,7 +6,6 @@ class_name HealthSystem
 @onready var health_label = $"Health _bar_"
 
 
-
 func _process(_delta):
 	update_resources_interface()
 

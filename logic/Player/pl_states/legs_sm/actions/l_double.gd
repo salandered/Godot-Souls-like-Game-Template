@@ -13,7 +13,7 @@ extends LegsAction
 ## overrides
 func animate(): # ▶️🔗
 	# var animation_ := legs_sm.current_behavior.player_state.current_action.animation
-	var animation_ := legs_sm.player_sm.current_state.current_action.animation
+	var animation_ := legs_sm.player_sm.current_state.current_action.anim_name
 	
 	print_.lsm_action(action_name + em.play, em.linked + "PLAY DOUBLE anim: " + animation_, 8)
 	

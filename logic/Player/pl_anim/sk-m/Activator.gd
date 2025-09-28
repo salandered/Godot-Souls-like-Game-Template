@@ -1,7 +1,7 @@
 extends SkeletonModifier3D
 class_name BeginModifier
 
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var animation_player: AnimationPlayer = %NativeAnimator
 @onready var end_modifier: EndModifier = %_End
 
 var __initialised: bool = false

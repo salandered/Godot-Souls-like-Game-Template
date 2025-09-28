@@ -1,7 +1,7 @@
 extends SkeletonModifier3D
 class_name EndModifier
 
-@onready var torso: ModifierAnimator = %Torso
+@onready var full_body: ModifierAnimator = %FullBody
 @onready var legs: ModifierAnimator = %Legs
 @onready var animation_settings: AnimationPlayer = %AnimationSettings
 

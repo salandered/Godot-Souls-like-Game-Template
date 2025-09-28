@@ -26,8 +26,8 @@ func _configure_blending_times():
 
 
 func _set_blend_time(from: String, to: String, time: float):
-	u.assert_has_animation(_animator, from)
-	u.assert_has_animation(_animator, to)
+	ua.assert_has_animation(_animator, from)
+	ua.assert_has_animation(_animator, to)
 	# TODO: both sides?
 	_animator.set_blend_time(from, to, time)
 
@@ -44,6 +44,6 @@ func reset_animation():
 func update_animation():
 	var animation := me.current_state.animation
 	# print_._prefix("Anim", current_animation + " changing to " + animation_name)
-	u.assert_has_animation(_animator, animation)
+	ua.assert_has_animation(_animator, animation)
 	if _animator.current_animation != animation:
 		_animator.play(animation)

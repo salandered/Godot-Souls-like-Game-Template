@@ -8,11 +8,9 @@ class_name PlayerSM
 var player: Princess
 
 # Fixed animator setup (we stick to ModifierAnimator now)
-@export var torso_animator: ModifierAnimator # the Torso skeleton modifier
+@export var full_body_animator: ModifierAnimator
 @export var legs_animator: ModifierAnimator
-@export var animations_source: AnimationPlayer # clip library for torso actions (if actions read from here)
-# @export var torso_anim_settings: AnimationPlayer # settings player if you ever need to fade torso influence
-@export var animation_settings: AnimationPlayer # settings player if you ever need to fade torso influence
+@export var animation_settings: AnimationPlayer
 
 var current_state: PlayerState
 

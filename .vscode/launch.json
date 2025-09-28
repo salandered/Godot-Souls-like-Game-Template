@@ -9,7 +9,6 @@
 			"type": "godot",
 			"request": "launch",
 			"project": "${workspaceFolder}",
-			// some other
 			// "address": "127.0.0.1",
 			// "port": 6007,
 			// "scene": "main|current|pinned|<path>",

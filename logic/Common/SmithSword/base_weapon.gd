@@ -42,7 +42,7 @@ func _ready():
 
 	
 	if not weapon_visuals:
-		print("Note: Weapon", u.__, weapon_name, u.__, "has no visuals")
+		print("Note: Weapon", pp.__, weapon_name, pp.__, "has no visuals")
 
 	assert(weapon_hurt_box is Area3D, "Weapon is missing an Area3D node named 'WeaponArea'.")
 	assert(weapon_hurt_box.get_child(0), "The 'WeaponArea' must have a CollisionShape3D child.")

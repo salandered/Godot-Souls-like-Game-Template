@@ -70,9 +70,6 @@ use_collision = true
 size = Vector3(50, 0.0856934, 36)
 material = SubResource("StandardMaterial3D_4k4b0")
 
-[node name="PrincessPack" parent="." instance=ExtResource("2_n4uti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.243117, -13.683216)
-
 [node name="LIGHTING" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="LIGHTING"]
@@ -301,3 +298,6 @@ material = SubResource("StandardMaterial3D_1ic6w")
 transform = Transform3D(1, 0, 0, 0, 0.033922516, 0.99942446, 0, -0.99942446, 0.033922516, 402.85303, 32.377388, -209.47502)
 fov = 29.0
 near = 0.023
+
+[node name="PrincessPack" parent="." instance=ExtResource("2_n4uti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.930099, -6.2846966)

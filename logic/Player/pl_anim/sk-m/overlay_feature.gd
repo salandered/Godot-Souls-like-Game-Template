@@ -10,7 +10,7 @@ class_name OverlayFeature
 # var overlay_blend_time_spent: float = 0 # seconds
 # var overlay_blending_percentage: float = 0 # [0 ; 1]
 
-var overlay_anim: Animation
+var overlay_anim: AnimationData
 var overlay_anim_progress := 0.0
 var overlay_is_active := false
 
@@ -40,11 +40,11 @@ var overlay_local_speed := 1.0
 # 	overlay_anim_progress = 0
 # 	overlay_anim_cycling = overlay_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
 # endregion
-func set_overlay_anim(_overlay_anim: Animation, name_: String, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
+func set_overlay_anim(_overlay_anim: AnimationData, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
 	overlay_anim = _overlay_anim
 	overlay_fade_in = max(fade_in, 0.01)
 	overlay_fade_out = max(fade_out, 0.01)
-	overlay_hold = overlay_anim.length - overlay_fade_in - overlay_fade_out if hold < 0 else hold
+	overlay_hold = overlay_anim.duration - overlay_fade_in - overlay_fade_out if hold < 0 else hold
 	
 	overlay_anim_progress = 0
 	overlay_local_speed = local_speed # new var; see §3

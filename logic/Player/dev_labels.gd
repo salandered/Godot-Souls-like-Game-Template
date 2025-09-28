@@ -6,8 +6,8 @@ extends Node
 @onready var label_state_info: Label = $LabelStateInfo
 @onready var label_subs_psm: Label = $LabelSubsPSM
 @onready var label_4: Label = $Label4
-@onready var label_5: Label = $Label5
-@onready var label_6: Label = $Label6
+@onready var modifier_ar: Label = %modifier_ar
+@onready var modifier_ar_2: Label = %modifier_ar_2
 
 @onready var player: Princess = $".."
 
@@ -15,9 +15,9 @@ extends Node
 var frequency := 4
 
 func _process(delta: float) -> void:
-	if Engine.get_process_frames() % frequency == 0:
+	if u.fr(false) % frequency == 0:
 		_label_player_info()
-		_label_sk_m_info()
+		_label_modifer_animator_info()
 		_label_state_info()
 
 func _label_player_info():
@@ -38,8 +38,6 @@ func _label_player_info():
 
 func _label_state_info():
 	var c_s := player.model.player_sm.current_state
-	var t_anim := c_s.player_sm.torso_animator
-	var l_anim := c_s.legs_sm.legs_animator
 	#var limp_anim := player.model.limp
 	if not c_s:
 		label_state_info.text = "NO current state"
@@ -53,35 +51,46 @@ func _label_state_info():
 	if not c_s.legs_sm.current_action:
 		label_state_info.text += "\nNO legs behavior action"
 		return
-	label_state_info.text = "state  %7s     act  %7s " % [str(c_s.state_name), str(c_s.current_action.action_name)]
-	label_state_info.text += "\nlegs  %7s   act  %7s " % [str(c_s.legs_sm.current_behavior.behavior_name), str(c_s.legs_sm.current_action.action_name)]
-	label_state_info.text += "\n speed scale: %4.2f  %4.2f" % [t_anim.speed_scale, l_anim.speed_scale]
-	label_state_info.text += "\n followers: %15s  %15s" % [str(t_anim.follower), str(l_anim.follower)]
-	# label_state_info.text += "\n influences: %4.2f %4.2f %4.2f | active: %4s %4s %4s" % \
-	# 	[t_anim.influence, l_anim.influence, limp_anim.influence, \
-	# 	str(t_anim.active), str(l_anim.active), str(limp_anim.active)]
-	label_state_info.text += "\n influences: %4.2f %4.2f | active: %4s %4s" % \
-		[t_anim.influence, l_anim.influence, \
-		str(t_anim.active), str(l_anim.active), ]
-
-func _label_sk_m_info():
-	var torso_a := player.model.torso_animator
-	var legs_a := player.model.legs_animator
-
-	label_5.text = __sk_m_label(torso_a)
-	label_6.text = __sk_m_label(legs_a)
+	label_state_info.text = "state  %20s   act  %20s " % [str(c_s.state_name), str(c_s.current_action.action_name)]
+	label_state_info.text += "\nlegs  %20s   act  %20s " % [str(c_s.legs_sm.current_behavior.behavior_name), str(c_s.legs_sm.current_action.action_name)]
+	label_state_info.text += "\nprogress pl action %6.2f  l action  %6.2f " % [c_s.current_action.get_progress(), c_s.legs_sm.current_action.get_progress()]
 
 
-func __sk_m_label(animator: ModifierAnimator) -> String:
+func _label_modifer_animator_info():
+	var t_ar := player.model.full_body_animator
+	var l_ar := player.model.legs_animator
+
+	modifier_ar.text = __one_animator_data(t_ar)
+	modifier_ar_2.text = __one_animator_data(l_ar)
+
+var _prev_blend_text = ""
+
+func __one_animator_data(ar: ModifierAnimator) -> String:
+	var c_an = ar.curr_anim
 	var text := ""
-	text += (animator.current_anim.resource_name if animator.current_anim else "-None-")
-	text += "\n %5.2f" % [animator.current_anim_progress]
-	text += "  l:" + str(animator.current_anim_cycling)
+	text += "      follower: %15s " % [ar.follower.a_name if ar.follower else " -- "] + "    infl " + str(ar.influence)
+	text += "\n %25s" % [c_an.anim_name if c_an else "-None-"]
+	text += "  loop:" + str(ar.curr_anim_looping)
+	text += "\n %5.2f" % [ar.curr_anim_progress]
+	
 
-	if animator.is_blending:
-		text += "\nb" + "%5.1f" % (animator.blending_percentage * 100) + "%"
-		text += " " + "%7.2f" % animator.blend_time_spent + "/" + "%7.2f" % animator.blend_duration
-		text += "\n from: " + (animator.previous_anim.resource_name if animator.previous_anim else "-None-")
+	text += "\nAnim:  Start %5.2f | End %5.2f | Duration %5.2f | Native len %5.2f\n" % [
+		c_an.start_time,
+		c_an.end_time,
+		c_an.duration,
+		c_an.native_anim.length
+	]
+
+	if ar.is_blending:
+		var blend_text = ""
+		blend_text += "\n blend " + "%6.1f" % (ar.blending_percentage * 100) + "%"
+		blend_text += " " + "%8.2f" % ar.blend_time_spent + "/" + "%8.2f" % ar.blend_duration
+		blend_text += "\n from: " + (ar.prev_anim.anim_name if ar.prev_anim else "-None-")
+		blend_text += "\n speed scale: %4.2f" % [ar.global_speed_scale]
+		text += blend_text
+		_prev_blend_text = blend_text
+	else:
+		text += _prev_blend_text
 
 	return text
 

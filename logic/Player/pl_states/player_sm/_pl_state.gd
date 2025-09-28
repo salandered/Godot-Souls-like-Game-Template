@@ -8,8 +8,7 @@ var legs_sm: LegsSM
 var player: Princess
 var combat: HumanoidCombat
 var area_awareness: AreaAwareness
-var states_data_repo: StatesDataRepository
-
+var anim_container: AnimationContainer
 var enter_state_time: float
 
 @export var SPEED = 3.0
@@ -61,9 +60,9 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 func _check_transition(input: InputPackage) -> PLVerdict:
 	# if current_action.action_name == PS.action_longsword_1: # old dev print 
 		# print_.combo("", str(current_action.accepts_queueing()))
-	if current_action.accepts_queueing():
+	if current_action.allows_queue():
 		check_combos(input)
-	if has_queued_state() and current_action.transitions_to_queued():
+	if has_queued_state() and current_action.switches_to_queue():
 		print_.psm_check_trans(state_name, "queued 👥 exists, trying it as a force state")
 		try_force_state(queued_state)
 		queued_state = ""
@@ -130,11 +129,11 @@ func _on_enter_state(input: InputPackage):
 	legs_behavior.player_state = self # duplicates legs_sm.switch_to logic?
 
 	# TODO: stupid split. or not?
-	if depends_on_legs:
-		player_sm.torso_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
+	if depends_on_legs: # like Run state or Sprint state
+		player_sm.full_body_animator.sync_and_follow(legs_sm.legs_animator, 0.15)
 		print_.psm("state", "enter: DEPENDENT state. Actions delegated to legs, NO SWITCHES ⚪⚪", 1)
 		legs_sm.switch_to(legs_behavior, input)
-	else: # state leads legs. RIGHT NOW ITS ONLY DOUBLE. complex attacks expecting
+	else: # state leads legs.  like Attack or Jump or Midair
 		#if legs_behavior.behavior_name != LS.legs_behavior_double:
 			#push_warning("we found state which leads legs but not double legs. Investigate!!")
 		default_action_name = choose_default_action()

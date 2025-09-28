@@ -186,11 +186,11 @@ func __dbg_main_info() -> String:
 	return r
 
 func __free_off() -> String:
-	var r = " free off=" + pp.pp_vec3(free_state.free_offset) + " len=" + u.round_01(free_state.free_offset.length())
+	var r = " free off=" + pp.pp_vec3(free_state.free_offset) + " len=" + pp.round_01(free_state.free_offset.length())
 	return r
 
 func __lock_off() -> String:
-	var r = " lock off=" + pp.pp_vec3(locked_state.lock_offset) + " len=" + u.round_01(locked_state.lock_offset.length())
+	var r = " lock off=" + pp.pp_vec3(locked_state.lock_offset) + " len=" + pp.round_01(locked_state.lock_offset.length())
 	return r
 
 func __Cvec() -> String:
@@ -206,16 +206,16 @@ func __Fvec() -> String:
 	return " F=" + pp.pp_vec3(focus.global_position)
 
 func __CP() -> String:
-	return " C->Pl=" + u.round_01((camera.global_position - player.camera_focus.global_position).length())
+	return " C->Pl=" + pp.round_01((camera.global_position - player.camera_focus.global_position).length())
 
 func __CN() -> String:
-	return " C->N=" + u.round_01((camera.global_position - nest.global_position).length())
+	return " C->N=" + pp.round_01((camera.global_position - nest.global_position).length())
 
 func __CM() -> String:
-	return " C->M=" + u.round_01((camera.global_position - mount.global_position).length())
+	return " C->M=" + pp.round_01((camera.global_position - mount.global_position).length())
 
 func __CF() -> String:
-	return " C->F=" + u.round_01((camera.global_position - focus.global_position).length())
+	return " C->F=" + pp.round_01((camera.global_position - focus.global_position).length())
 
 func __angle_player_camera_target() -> String:
 	# Vectors from player and camera to the target, projected to XZ

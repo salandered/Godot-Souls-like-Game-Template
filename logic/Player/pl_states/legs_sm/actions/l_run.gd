@@ -1,7 +1,10 @@
 extends LegsAction
 
-@export var tracking_angular_speed: float = 12
+var ANGULAR_SPEED: float = 12
+@export var acceleration_curve: Curve
 
+var current_speed_t: float = 0.0 # [0,1] progress along curve
+var acceleration_time: float = 0.5 # How long to reach full speed
 
 func _ready():
 	SPEED = 3.0
@@ -13,17 +16,25 @@ func update(input: InputPackage, delta: float):
 
 func process_input_vector(input: InputPackage, delta: float):
 	var input_direction := velocity_by_input(input, delta).normalized()
+
+	# Handle acceleration
+	if input_direction.length() > 0:
+		current_speed_t = min(current_speed_t + delta / acceleration_time, 1.0)
+	else:
+		current_speed_t = max(current_speed_t - delta / acceleration_time, 0.0)
+	var speed_multiplier = acceleration_curve.sample(current_speed_t)
+	# print(" current_speed_t: ", pp.round_01(current_speed_t), "   speed_multiplier: ", pp.round_01(speed_multiplier))
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
-	if abs(angle) >= tracking_angular_speed * delta:
-		player.velocity = face_direction.rotated(Vector3.UP, sign(angle) * tracking_angular_speed * delta) * TURN_SPEED # SPEED or TURN_SPEED?
-		player.rotate_y(sign(angle) * tracking_angular_speed * delta)
+	if abs(angle) >= ANGULAR_SPEED * delta:
+		player.velocity = face_direction.rotated(Vector3.UP, sign(angle) * ANGULAR_SPEED * delta) * TURN_SPEED * speed_multiplier
+		player.rotate_y(sign(angle) * ANGULAR_SPEED * delta)
 	else:
-		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
+		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED * speed_multiplier
 		player.rotate_y(angle)
-	# _velocity.limit_lensgth(SPEED) ?
-	# legs_sm.legs_animator.set_speed_scale(player.velocity.length() / SPEED)
 
+	legs_sm.legs_animator.set_global_speed_scale(player.velocity.length() / SPEED)
+	
 	# region: FAIR LOGIC
 	#if combat.current_camera_mode == combat.CameraMode.FREE:
 		#var input_direction = camera.basis.z
@@ -41,16 +52,41 @@ func process_input_vector(input: InputPackage, delta: float):
 		#player.basis = Basis(new_x, Vector3.UP, new_z).orthonormalized()
 	# endregion
 
+var blend = 0.2
+
+## overrides for start_from
+func animate(): # ▶️
+	# TODO: here we use start_from form adjusting run animation.
+	# i think this data should be in animation, not a state (leg action in this case)
+	# so state or action knows not an anim name as string, but a more complex structure.
+	# and changing animation should change its paramerers like start_from 
+	print_.lsm_action(action_name + em.play, "animation " + anim_name, 8)
+	legs_sm.legs_animator.set_anim_to_play(anim_name, blend)
 
 func on_exit_action():
-	print_.lsm_action(action_name, "exit: reset_speed_scale", 3)
-	# legs_sm.legs_animator.reset_speed_scale()
+	# print_.lsm_action(action_name, "exit: reset_speed_scale", 3)
+	legs_sm.legs_animator.reset_global_speed_scale()
+	current_speed_t = 0
 	
 func _input(event):
 	if event.is_action_released("dev_speed_up"):
 		SPEED += 6
 	if event.is_action_released("dev_speed_down"):
 		SPEED -= 6
+
+	# if event.is_action_released("t1"):
+	# 	start_from += 0.05
+	# 	print("blend time ", start_from)
+	# if event.is_action_released("t2"):
+	# 	start_from -= 0.05
+	# 	print("blend time ", start_from)
+
+	if event.is_action_released("t3"):
+		blend += 0.1
+		print("blend time ", blend)
+	if event.is_action_released("t4"):
+		blend -= 0.1
+		print("blend time ", blend)
 
 # region FAIR LOGIC
 # func move_with_root(_delta: float):

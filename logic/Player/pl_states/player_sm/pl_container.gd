@@ -7,11 +7,11 @@ class_name PlayerStatesContainer
 # -- set by model
 var player: Princess
 
+
 # @export var skeleton: Skeleton3D
 @export var resources: HumanoidResources
 @export var combat: HumanoidCombat
 @export var area_awareness: AreaAwareness
-@export var states_data_repo: StatesDataRepository
 @export var left_wrist: BoneAttachment3D
 
 @export_group("SM")
@@ -19,10 +19,9 @@ var player: Princess
 @export var player_sm: PlayerSM
 
 @export_group("animation")
-@export var full_body_animator: ModifierAnimator
 @export var legs_animator: ModifierAnimator
 @export var torso_animator: ModifierAnimator
-# @export var animation_settings: AnimationPlayer
+@export var anim_container: AnimationContainer
 # @export var torso_anim_settings: AnimationPlayer
 # @export var legs_anim_settings: AnimationPlayer
 
@@ -67,7 +66,7 @@ var _player_action_data: Dictionary = { # { Node name : PlayerActionData }
 	"RollAction": PlayerActionData.new(PS.roll, PS.action_roll, A.roll, ),
 	"DeathAction": PlayerActionData.new(PS.death, PS.action_death, A.death, ),
 	# fight
-	"Longsword1Action": PlayerActionData.new(PS.longsword_1, PS.action_longsword_1, A.longsword_1, ),
+	"Longsword1Action": PlayerActionData.new(PS.longsword_1, PS.action_longsword_1, A.longsword_1, "Established/axe-attack-slice-RL-param"),
 	"Longsword2Action": PlayerActionData.new(PS.longsword_2, PS.action_longsword_2, A.longsword_2, ),
 	"BlockAction": PlayerActionData.new(PS.block, PS.action_block, A.block_forward, ),
 	"BlockReactionAction": PlayerActionData.new(PS.block_reaction, PS.action_block_reaction, A.block_reaction, ),
@@ -107,7 +106,7 @@ var _legs_action_data: Dictionary = {
 	# "JumpStartAction": LegActionData.new(LS.legs_action_jump_start, A.jump_run, LegsSM.MotionType.IDLE),
 	# "AirAction": LegActionData.new(LA.midair, LegsSM.MotionType.IDLE),
 	# "LandAction": LegActionData.new(LS.legs_action_land, A.landing_run, LegsSM.MotionType.IDLE),
-	"DoubleAction": LegActionData.new(LS.legs_action_double, "-", "-", 0.2, LegsSM.MotionType.IDLE),
+	"DoubleAction": LegActionData.new(LS.legs_action_double, A.fake_anim, "", 0.2, LegsSM.MotionType.IDLE),
 }
 
 
@@ -177,11 +176,11 @@ func accept_player_states() -> void:
 		child.resources = resources
 		child.left_wrist = left_wrist
 		child.combat = combat
-		child.states_data_repo = states_data_repo
 		child.container = self
 		child.area_awareness = area_awareness
 		child.player_sm = player_sm
 		child.legs_sm = legs_sm
+		child.anim_container = anim_container
 		child.assign_combos()
 
 		assert(child.legs_behavior, " legs_behavior problem for state: " + child.state_name)
@@ -207,18 +206,18 @@ func accept_player_actions():
 		# base action
 		child.player = player
 		child.action_name = action_data.action_name
-		child.animation = action_data.animation_name
+		child.anim_name = action_data.animation_name
 		child.backend_animation = action_data.backend_animation_name
 		child.blend_time = action_data.blend_time
-		child.DURATION = states_data_repo.get_duration(action_data.animation_name)
+		child.DURATION = anim_container.get_by_name(action_data.animation_name).duration
 		# node.animator_set = action_data.animator_set
-		child.states_data_repo = states_data_repo
+		child.anim_container = anim_container
 
 		# specific
 		child.player_sm = player_sm
 
-		assert(child.action_name and not child.action_name.is_empty(), " animation problem for action_name")
-		assert(child.animation and not child.animation.is_empty(), " animation problem for action: " + child.action_name)
+		assert(child.action_name and not child.action_name.is_empty(), " action_name problem")
+		assert(child.anim_name and not child.anim_name.is_empty(), " animation problem for action: " + child.action_name)
 		assert(child.backend_animation and not child.backend_animation.is_empty(), " backend_animation problem for action: " + child.action_name)
 		# assert(node.animator_set and not node.animator_set.is_empty(), " animator_set problem for action: " + node.action_name)
 	print_.container("", "===========  Accepted actions ===========")
@@ -244,7 +243,7 @@ func accept_legs_behaviors():
 		child.container = self
 		child.area_awareness = area_awareness
 
-		assert(child.behavior_name and not child.behavior_name.is_empty(), " animation problem for behavior")
+		assert(child.behavior_name and not child.behavior_name.is_empty(), " behavior_name problem for behavior")
 
 
 func accept_legs_actions():
@@ -259,21 +258,20 @@ func accept_legs_actions():
 		
 		# base action
 		child.player = player
+		child.legs_sm = legs_sm
+		child.anim_container = anim_container
+
+		# specific
 		child.action_name = action_data.action_name
-		child.animation = action_data.animation_name
+		child.anim_name = action_data.animation_name
 		child.backend_animation = action_data.backend_animation_name
 		child.blend_time = action_data.blend_time
-		child.DURATION = states_data_repo.get_duration(action_data.animation_name)
-		child.states_data_repo = states_data_repo
-		
-		# specific
-		child.legs_sm = legs_sm
+		child.DURATION = anim_container.get_by_name(action_data.animation_name).duration
 		child.motion_type = action_data.motion_type
-		# node.animator_set = action_data.animator_set
-		# child.legs_anim_settings = legs_anim_settings
 
-		assert(child.action_name and not child.action_name.is_empty(), " animation problem for action_name")
-		assert(child.animation and not child.animation.is_empty(), " animation problem for action: " + child.action_name)
+		
+		assert(child.action_name and not child.action_name.is_empty(), "action_name problem for")
+		assert(child.anim_name and not child.anim_name.is_empty(), " animation problem for action: " + child.action_name)
 		
 
 func states_priority_sort(a: String, b: String) -> bool:

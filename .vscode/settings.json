@@ -1,11 +1,12 @@
 {
 	// DYNAMIC
-	// "editor.hover.enabled": false,
+	"editor.hover.enabled": false,
+	// "editor.hover.delay": 400,
 	//
 	//
 	// 
 	// godot
-	"godotTools.editorPath.godot4": "c:\\safe\\godot\\Godot_v4.4.1-stable_win64.exe\\Godot_v4.4.1-stable_win64.exe",
+	"godotTools.editorPath.godot4": "C:\\safe\\godot\\_godot_support\\_v4.5-lts\\Godot_v4.5-stable_win64.exe",
 	// exlude from file view
 	"files.exclude": {
 		// godot 
@@ -27,22 +28,22 @@
 	//-----------🤖 FIGHTING COPILOT 🤖----------
 	//--------------------------------------------
 	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
-	"github.copilot.editor.enableCodeActions": false, // no yellow stars
-	"editor.inlineSuggest.enabled": true,
+	// "github.copilot.editor.enableCodeActions": false, // no yellow stars
+	"editor.inlineSuggest.enabled": false,
 	//
 	// Code completions settings
 	// "github.copilot.enable": true,
-	"editor.inlineSuggest.syntaxHighlightingEnabled": false,
+	// "editor.inlineSuggest.syntaxHighlightingEnabled": false,
 	//
 	// NES settings
-	"github.copilot.nextEditSuggestions.enabled": true,
-	"editor.inlineSuggest.edits.allowCodeShifting": "never",
-	"editor.inlineSuggest.edits.renderSideBySide": "never", // show inline suggestions in the same line
+	// "github.copilot.nextEditSuggestions.enabled": true,
+	// "editor.inlineSuggest.edits.allowCodeShifting": "never",
+	// "editor.inlineSuggest.edits.renderSideBySide": "never", // show inline suggestions in the same line
 	// "editor.inlineSuggest.edits.showCollapsed": true, // can be configured from UI button
 	// 
 	// Suggestions (not copilot)
 	"editor.suggestSelection": "recentlyUsed",
-	"editor.inlineSuggest.showToolbar": "never", // listed in copilot Code completions settings
+	// "editor.inlineSuggest.showToolbar": "never", // listed in copilot Code completions settings
 	/* FOLDER COLORS EXAMPLE
 	"workbench.colorCustomizations": {
 	    "folderPathColor.custom1": "#FF4488",
@@ -68,7 +69,8 @@
 		// "#fd5ca75b", // semi-transparent red
 		"editorError.foreground": "#fd5ca75b", // 🚨 semi-transparent red
 		// "editorError.foreground": "#fd5ca700", // ⏺ FAKE TURN OFF
-		"editorWarning.foreground": "#FFFF0033", // semi-transparent yellow
+		"editorWarning.foreground": "#ffff002a", // semi-transparent yellow
+		// "editorInfo.foreground": "#ffff002a", // semi-transparent yellow
 		// ERROR LENS
 		// "#fd578177", // more gentle red
 		// "errorLens.errorForeground": "#fd578177", // 🚨 more gentle red
@@ -76,7 +78,7 @@
 		"errorLens.errorBackground": "#ffffff00",
 		"errorLens.messageBackgroundMode": "none",
 		"errorLens.warningBackground": "#ffffff00",
-		"errorLens.warningForeground": "#dba35ab9",
+		"errorLens.warningForeground": "#dba35a91",
 		"errorLens.infoBackground": "#ffffff00",
 		// BOOKMARKS
 		"bookmarks.lineBackground": "#6c6aff22", // Background color for a bookmarked line.
@@ -96,8 +98,8 @@
 		"folderPathColor.camera_green": "#94f0c5d5", //or #a4d4b2 tender green 2 # camera
 		"folderPathColor.white_": "#ececec", // white
 		"folderPathColor.states_blue": "#6692d4", // state blue 
-		"folderPathColor.custom11": "#f1cf8ee3", // legs SM
-		"folderPathColor.custom12": "#92b9e4", // 8aa8c9
+		"folderPathColor.custom11": "#f0c078d5", // orange
+		"folderPathColor.custom12": "#caeed5", // 8aa8c9
 		"folderPathColor.custom14": "#92b9e4", // 8aa8c9
 		"folderPathColor.orange_shade_2": "#92b9e4", // 8aa8c9
 		"folderPathColor.gray_ignore": "#9ea4ac", // 8aa8c9
@@ -111,9 +113,22 @@
 	// src/**/test - Matches any "test" folder inside the "src" directory at any depth
 	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	"folder-path-color.folders": [
+		// ANIM (NOT PLAYER)
+		{
+			"path": "*anim.gd",
+			"color": "custom11"
+		},
+		{
+			"path": "*anim_*",
+			"color": "custom11"
+		},
+		{
+			"path": "*animation*",
+			"color": "custom11"
+		},
 		{
 			"path": "*_container.gd",
-			"color": "custom5"
+			"color": "custom12"
 		},
 		// AREA AWARENESS
 		{
@@ -163,7 +178,7 @@
 		},
 		{
 			"path": "logic/Player/pl_states/player_sm",
-			"color": "custom12"
+			"color": "blue_shade_3"
 		},
 		// MODEL
 		{
@@ -202,6 +217,10 @@
 			"path": "logic/Player/fancy-camera",
 			"color": "camera_green"
 		},
+		{
+			"path": "*camera*",
+			"color": "camera_green"
+		},
 		// UTILS
 		{
 			"path": "logic/xUtils",
@@ -210,6 +229,14 @@
 		// ANIM
 		{
 			"path": "logic/Player/pl_anim/sk-m",
+			"color": "animation"
+		},
+		// {
+		// 	"path": "*anim*",
+		// 	"color": "custom11"
+		// },
+		{
+			"path": "*_animator*",
 			"color": "animation"
 		},
 		//
@@ -410,7 +437,7 @@
 				// }
 			]
 		},
-		"\\b(current_anim)": {
+		"\\b(curr_anim)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -421,149 +448,26 @@
 				}
 			]
 		},
-	}
-	//
-	//  "decorations": [
-	//         {
-	//             "color": "#ddcdcd",
-	//             "fontWeight": "bold",
-	//             "backgroundColor": "#333333",
-	//             "overviewRulerColor": "white",
-	//             "borderWidth": "1px",
-	//             "borderColor": "#5d5d5d",
-	//             "borderStyle": "solid"
-	//         },
-	//         {
-	//             "color": "#FFEEA1E5",
-	//             "fontStyle": "italic"
-	//         }
-	/* EXAMPLES 1 (CHECK FOR SANITY)
-	"highlight.regexes": {
-		// EXAMPLES
-		// 1. Highlight the '_run' and '_cleanup' functions to make them stand out.
-		//    We use a regex to match the function definition and give it a background color.
-		"^(func)( )(_run|_cleanup)": {
-			"regexFlags": "gm",
+		"\\b(prev_anim)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "white",
-					"backgroundColor": "#FF5733"
-				}, // 'func' keyword
-				{}, // space
-				{
-					"backgroundColor": "#FF5733",
-					"color": "white"
-				} // '_run' or '_cleanup'
-			]
-		},
-		// 2. Highlight all 'assert' statements in pink to draw attention to sanity checks.
-		"\\b(assert)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "deeppink"
-				}
-			]
-		},
-		// 3. Highlight the 'hips_track' variable to make a key variable stand out.
-		"\\b(hips_track)\\b": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"backgroundColor": "#2980b9",
-					"color": "#ffffff",
-					"fontWeight": "bold"
-				}
-			]
-		},
-		// 4. Highlight all 'const' definitions in a specific color.
-		"^(const)(.*?)(?= = )": {
-			"regexFlags": "gm",
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#e74c3c"
+					"color": "#93afecf3"
 				},
 				{
-					"color": "#e74c3c"
-				}
-			]
-		}
-	}
-	EXAMPLES 2 (CHECK FOR SANITY)
-	"highlight.regexes": {
-	1. Highlight all custom comment tags like @TOOL or @BUG.
-	   We'll give the tag a distinct color and the rest of the comment a different style.
-	    "^(//\\s*)((?:@TOOL|@BUG|@NOTE|@TODO))(.+)": {
-			"regexFlags": "gm",
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#808080"
-				}, // The '//' part of the comment
-				{
-					"color": "#00ff7f",
-					"fontWeight": "bold"
-				}, // The tag itself (@TOOL, etc.)
-				{
-					"color": "#808080",
-					"fontStyle": "italic"
-				} // The rest of the comment text
-			]
-		},
-		// 2. Highlight the names of Godot's built-in signals and custom signals.
-		//    This makes signal connections much easier to spot.
-		"(\\.(?:connect|emit_signal|is_connected))\\(\\s*\"([a-zA-Z_\\d]+)\"": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{}, // The method call (e.g., .connect)
-				{
-					"color": "#ff007f",
-					"fontWeight": "bold"
-				} // The signal name string
-			]
-		},
-		// 3. Highlight key functions like _ready() or _process(delta) to jump out at you.
-		"^(func\\s+)(_ready|_process|_input|_unhandled_input|_physics_process)(.*)": {
-			"regexFlags": "gm",
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{}, // The 'func' keyword
-				{
-					"color": "#ff8c00",
-					"fontWeight": "bold"
-				}, // The function name
-				{} // The rest of the line
-			]
-		},
-		// 4. Highlight 'const' definitions in a more advanced way.
-		//    The 'const' keyword gets one color, and the variable name gets another.
-		"^(const)\\s+([a-zA-Z_\\d]+)\\b": {
-			"regexFlags": "gm",
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#00bfff",
-					"fontWeight": "bold"
-				}, // The 'const' keyword
-				{
-					"color": "#ffff00"
-				} // The variable name
-			]
-		},
-		// 5. Highlight all 'yield' statements to spot asynchronous code. (Godot 3.x)
-		"\\b(yield)\\b": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#ffd700",
-					"fontStyle": "italic"
+					// "color": "#FFEEA1E5",
 				}
 			]
 		},
-	}
-	*/
+		"(?<!\\w)(@abstract)(?!\\w)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ebc47c"
+				}
+			]
+		},
+	},
 	//
 	/* --- COPIED FROM GLOBAL SETTINGS JIC ----  
 	May be useful for setting project from git on another machine. Uncomment if needed
@@ -592,4 +496,5 @@
 	"workbench.statusBar.visible": false,
 	"telemetry.feedback.enabled": false,
 	*/
+	"editor.lightbulb.enabled": "off"
 }

@@ -29,7 +29,7 @@ func switch_to(next_legs_behavior: LegsBehavior, input: InputPackage):
 	if next_legs_behavior == current_behavior and next_legs_behavior.behavior_name != LS.legs_behavior_double:
 		print_.lsm_beh("", "not switching legs (same behavior) " + current_behavior.behavior_name, 2)
 		return
-	print_.lsm_beh("", "legs behavior " + current_behavior.behavior_name + " => " + next_legs_behavior.behavior_name, 2)
+	print_.lsm_beh(em.switch, pp.ts(current_behavior.behavior_name, "=>", next_legs_behavior.behavior_name), 2)
 	current_behavior._on_exit_behavior()
 	current_behavior = next_legs_behavior
 	current_behavior.player_state = player_sm.current_state

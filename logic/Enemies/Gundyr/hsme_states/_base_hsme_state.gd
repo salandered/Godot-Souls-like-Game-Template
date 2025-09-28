@@ -48,7 +48,7 @@ func choose_internal_state() -> VerdictHSM:
 
 
 func _switch_to(state: String):
-	print_.hsme("↪️", current_state.state_name + u.arr + state)
+	print_.hsme("↪️", current_state.state_name + pp.arr + state)
 	if current_state != self:
 		current_state._on_exit()
 	current_state = container.get_state_by_name(state)

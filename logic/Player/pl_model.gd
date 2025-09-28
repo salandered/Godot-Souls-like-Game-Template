@@ -10,16 +10,17 @@ class_name PlayerModel
 @onready var container = %StatesContainer as PlayerStatesContainer
 
 @onready var _begin: BeginModifier = %_Begin
-@onready var torso_animator: ModifierAnimator = %Torso
+@onready var full_body_animator: ModifierAnimator = %FullBody
 @onready var legs_animator: ModifierAnimator = %Legs
 @onready var _end: EndModifier = %_End
 
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var animation_player: AnimationPlayer = %NativeAnimator
 
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
 @onready var bones: PlayerBones = %bones
 
+@onready var anim_container: PlayerAnimationContainer = %AnimContainer
 
 var active_weapon: BaseWeapon
 
@@ -28,6 +29,7 @@ func _ready():
 	container.player = player
 	player_sm.player = player
 	
+	anim_container._accept_animations() # NOTE: should be before accepting states!
 	container.accept_legs_behaviors()
 	container.accept_player_states()
 	container.accept_player_actions()
@@ -54,15 +56,14 @@ func update(input: InputPackage, delta: float):
 	
 
 func accept_modifiers():
-	var animators := [torso_animator, legs_animator]
-	for animator in animators:
-		u.assert_has_animation(animator.native_animator, A.combat_idle)
-		animator.current_anim = animator.native_animator.get_animation(A.combat_idle)
-		animator.current_anim_cycling = animator.current_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
-		animator.current_anim_progress = 0
-		animator.previous_anim = animator.native_animator.get_animation(A.combat_idle)
-		animator.previous_anim_cycling = animator.previous_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
-		animator.previous_anim_progress = 0
+	var animators := [full_body_animator, legs_animator]
+	for animator: ModifierAnimator in animators:
+		animator.curr_anim = anim_container.get_by_name(A.combat_idle)
+		animator.curr_anim_looping = animator.curr_anim.is_looping
+		animator.curr_anim_progress = 0
+		animator.prev_anim = anim_container.get_by_name(A.combat_idle)
+		animator.prev_anim_looping = animator.prev_anim.is_looping
+		animator.prev_anim_progress = 0
 		animator.initialise()
 	_begin.initialise()
 	_end.initialise()
@@ -110,7 +111,7 @@ func _reload_run_anims_from_library() -> void:
 	run_anims.clear()
 	if animation_player == null:
 		return
-	var anim_lib := A._run
+	var anim_lib := A.lib._run
 	for name_ in animation_player.get_animation_list():
 		if name_.begins_with(anim_lib):
 			run_anims.append(name_)
@@ -136,14 +137,14 @@ func _input(event: InputEvent) -> void:
 	# 	__apply()
 	
 	if event.is_action_pressed("dev_8"):
-		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.1)
-		player_sm.torso_animator.set_overlay_anim(A.hit_reaction, 0.12, 0.20, 0.18, 1)
-		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0, -1, 0, 1)
-		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
+		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0.1)
+		player_sm.full_body_animator.set_overlay_anim(A.hit_reaction, 0.12, 0.20, 0.18, 1)
+		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0, -1, 0, 1)
+		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed("dev_9"):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		player_sm.torso_animator.set_overlay_anim(A.hit_reaction, 0.2, 0.05, 0.2, 1)
-		# player_sm.torso_animator.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
+		player_sm.full_body_animator.set_overlay_anim(A.hit_reaction, 0.2, 0.05, 0.2, 1)
+		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
 
 # func __apply() -> void:

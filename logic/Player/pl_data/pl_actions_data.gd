@@ -5,7 +5,6 @@ var state_name: String
 var action_name: String
 var animation_name: String
 var backend_animation_name: String
-# var animator_set: String
 var blend_time: float
 var dummy: bool
 

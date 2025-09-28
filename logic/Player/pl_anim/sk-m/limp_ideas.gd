@@ -79,8 +79,8 @@ func _process_modification():
 
 func _update_phase():
 	if not is_instance_valid(player_sm): return
-	var anim_progress := player_sm.torso_animator.current_anim_progress
-	var anim_length := player_sm.torso_animator.current_anim.length
+	var anim_progress := player_sm.full_body_animator.curr_anim_progress
+	var anim_length := player_sm.full_body_animator.curr_anim.duration
 
 	if anim_length > 0:
 		_phase = TAU * fposmod(anim_progress / anim_length, 1.0)

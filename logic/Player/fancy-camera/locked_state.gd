@@ -123,8 +123,8 @@ func _rotate_offset_locked(delta: float) -> void:
 	# print_.fancy_cam("[~~LOCK UPD rot ", u.fr(), "]",
 	# 	" angle_delta_deg=", str(delta_off_angle),
 	# 	" arc_len=", str(arc_len),
-	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", u.round_01(lock_offset.length()),
-	# 	" off_after=", pp.pp_vec3(lock_offset), " |len=", u.round_01(lock_offset.length()))
+	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", pp.round_01(lock_offset.length()),
+	# 	" off_after=", pp.pp_vec3(lock_offset), " |len=", pp.round_01(lock_offset.length()))
 
 
 func input_mouse_movement(d_x: float, d_y: float) -> void:

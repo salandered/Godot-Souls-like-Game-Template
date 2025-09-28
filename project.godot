@@ -41,6 +41,10 @@ gdscript/warnings/unused_private_class_variable=0
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
@@ -405,4 +409,6 @@ copy_path="res://misc/maacks_examples/"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)

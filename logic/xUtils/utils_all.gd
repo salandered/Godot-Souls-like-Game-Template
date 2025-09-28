@@ -4,41 +4,30 @@ class_name u
 
 static var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-static var __ := " " # todo: is it a safe name :D
-static var cln := ": "
-static var s_cln := "; "
-static var arr := " -> "
-static var hence := " => "
 
-static func in_q(something: Variant, spaces: bool = true) -> String:
-	var r = "'" + str(something) + "'"
-	return in_sp(r) if spaces else r
-
-static func in_sp(something: Variant) -> String:
-	return " " + str(something) + " "
-
-static func fr(to_str: bool = true) -> Variant:
-	return "fr_n-" + str(Engine.get_process_frames())
-
-
-static func round_01(f: float) -> String:
-	assert(f is float)
-	return str(snapped(f, 0.01))
+static func fr(to_str_: bool = true) -> Variant:
+	if to_str_:
+		return "fr_n-" + str(Engine.get_process_frames())
+	else:
+		return Engine.get_process_frames()
 
 
 # TODO: consider 4.5 update
 static func not_implemented(context = ""):
-	push_error(str(context), " abstract update is called")
+	push_error(str(context), " abstract function is called")
 
-static func assert_has_animation(animator: AnimationPlayer, animation: String, fatal: bool = true) -> bool:
+
+static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "", fatal: bool = false) -> Variant:
+	var key_exists: bool = dict.has(key)
+	
+	if key_exists:
+		return dict[key]
+
+	var msg = pp.ts("Dict does not have key", pp.in_q(key), "Context:", context)
 	if fatal:
-		assert(animator.has_animation(animation), "Animator " + animator.name + " has no animation '" + animation + "'")
-		return true
-	if not animator.has_animation(animation):
-		push_warning("Animator " + animator.name + " has no animation '" + animation + "'")
-		return false
-	return true
-
+		assert(false, msg)
+	print_.warn(msg)
+	return null
 
 # ease-in-out S-curve
 # takes a linear progress value (0 to 1) and returns a smoothed value (0 to 1)

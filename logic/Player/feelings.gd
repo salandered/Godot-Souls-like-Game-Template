@@ -35,13 +35,13 @@ func change_stamina(amount: int) -> void:
 	print("Changed stamina ", amount)
 
 
-# --- Example of how to use it (optional, for testing) ---
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("t1"):
-		change_health(10)
-		change_stamina(15)
+# # --- Example of how to use it (optional, for testing) ---
+# func _input(event: InputEvent) -> void:
+# 	if event.is_action_pressed("t1"):
+# 		change_health(10)
+# 		change_stamina(15)
 
-	if event.is_action_pressed("t2"):
-		change_health(-10)
-		change_stamina(-15)
+# 	if event.is_action_pressed("t2"):
+# 		change_health(-10)
+# 		change_stamina(-15)
 		

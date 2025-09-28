@@ -18,7 +18,7 @@ extends EditorScript
 
 # -> CHANGE THIS (without .glb)
 #    NOTE: Library will be called using this name. Consider renaming .glb to something shorter. 
-const SOURCE_GLB_NAME := "all-axe" # "s-s" "test-export-1"
+const SOURCE_GLB_NAME := "axe-rm-jumps" # "s-s" "test-export-1"
 
 # -> CHANGE THIS: will be removed from animation names
 const PREFIX_TO_REMOVE := "" # "sword and shield"
@@ -28,12 +28,12 @@ const PREFIX_TO_REMOVE := "" # "sword and shield"
 const PARAM := true
 
 # -> CHECK THIS (could be changed later)
-const LOOP_KEYWORDS := ["idle", "run", "sprint", "jog", "walk", "strafe", "loop", "cycle"]
+const LOOP_KEYWORDS := ["idle", "run", "sprint", "jog", "walk", "strafe", "loop", "cycle", "midair"]
 const NOT_LOOP_KEYWORDS := ["jump", "land", "start", "end", "turn", "180", "90", "roll"] # priority over LOOP_KEYWORDS
 # ---
 
 # "res://-assets-/animations/GLB-packed/"
-const SOURCE_GLB_PATH := "res://-assets-/animations/GLB-packed/basic_packs/" 
+const SOURCE_GLB_PATH := "res://-assets-/animations/GLB-packed/axe/"  # basic_packs
 #const SOURCE_GLB_PATH := "res://-assets-/animations/GLB-packed/from_IR/" 
 const TARGET_ROOT_FOLDER := "res://-assets-/animations/standard-skeleton/"
 const ANIMATION_PLAYER_PATH := "AnimationPlayer"

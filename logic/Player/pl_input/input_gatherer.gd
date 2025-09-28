@@ -9,7 +9,7 @@ var _long_press_triggered: bool = false
 
 func gather_input(delta: float) -> InputPackage:
 	var new_input = InputPackage.new()
-
+	new_input.duplicate_deep()
 	_gather_lock_target(new_input, delta)
 	
 
