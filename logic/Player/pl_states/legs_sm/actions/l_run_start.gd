@@ -6,10 +6,12 @@ func _ready() -> void:
 	SPEED_SCALE = 1
 
 func on_enter_action(_input: InputPackage) -> void:
-	legs_sm.legs_animator.set_global_speed_scale(SPEED_SCALE)
+	# 🚧
+	legs_sm.full_body_animator.set_global_speed_scale(SPEED_SCALE)
 
 func on_exit_action() -> void:
-	legs_sm.legs_animator.reset_global_speed_scale()
+	# 🚧
+	legs_sm.full_body_animator.reset_global_speed_scale()
 
 
 func update(input: InputPackage, delta: float):

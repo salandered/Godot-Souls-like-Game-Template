@@ -2,10 +2,10 @@ extends Combo_
 
 
 func is_triggered(input: InputPackage) -> bool:
-	print_.combo(name, "Checking for trigger for state " + state.state_name + \
-			" triggered_state: " + state_to_trigger + \
-			" current input.actions: " + str(input.actions)
-			)
+	print_.combo(name, pp.ts("is_triggered?",
+				"triggered_state:", state_to_trigger,
+				"current input.actions:", input.actions
+			))
 	print_.combo(name, "Checks only PS.longsword_1 for now")
 	# if input.actions.has( current weapon light attack state code ) in future for scalability
 	if input.actions.has(PS.longsword_1) and have_target_for_ripost():
@@ -21,9 +21,9 @@ func is_triggered(input: InputPackage) -> bool:
 func have_target_for_ripost() -> bool: # 🗡️
 	var parried_victims = get_tree().get_nodes_in_group("parried_humanoid")
 	print_.combo(name, "ripost(): victims in group: " + str(parried_victims.size()))
-	for player in parried_victims:
-		var dist = player.global_position.distance_to(state.player.global_position)
-		print_.combo(name, pp.ts("candidate:", player.name, "dist:", dist))
+	for npc_ in parried_victims:
+		var dist = npc_.global_position.distance_to(player.global_position)
+		print_.combo(name, pp.ts("candidate:", npc_.name, "dist:", dist))
 		if dist < 2.0:
 			print_.combo("", "ripost target acquired")
 			return true

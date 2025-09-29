@@ -31,20 +31,17 @@ func initialise():
 
 	current_state._on_enter_state(empty_input)
 
-	animation_settings.play(A.SET_torso_legs, 0.2)
+	animation_settings.play(A.SET_full_body, 0.2)
 
 
 func update(input: InputPackage, delta: float) -> void:
-	# if fly_mode_enabled:
-	# 	_handle_fly_mode(input, delta)
-	# 	return
 	input = combat.contextualize(input)
 	input = area_awareness.contextualize(input)
 	area_awareness.last_input_package = input
 
 	var verdict := current_state._check_transition(input)
 	if verdict.comment:
-		print_.psm("Final verdict", "has something important to say:" + verdict.comment)
+		print_.psm("Final verdict ⚖️", "has something important to say:" + verdict.comment)
 	if verdict.needs_switch():
 		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		
@@ -55,7 +52,7 @@ func update(input: InputPackage, delta: float) -> void:
 		current_state._on_enter_state(input)
 
 
-	# TODO TODO: moved back here, TorsoStates triggers _update from legs_animator behavior -> double dipping
+	# TODO: moved back here, Player States triggers _update from legs_animator behavior -> double dipping
 	# current_state.update_resources(delta)
 	current_state._update(input, delta)
 

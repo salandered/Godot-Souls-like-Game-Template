@@ -99,7 +99,6 @@ static func from_backend_anim(anim_name: String) -> String:
 
 
 #--------------
-const SET_torso_legs := "torso_legs"
+const SET_full_body := "full_body"
 
 #-------------------
-

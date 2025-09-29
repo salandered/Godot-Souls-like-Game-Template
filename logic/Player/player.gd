@@ -27,7 +27,6 @@ func _ready() -> void:
 
 	jump_data = UsualJumpData.new()
 
-	#print_.print_ready(self)
 	visuals.accept_model_data(model)
 
 	debug_cams = get_tree().get_nodes_in_group("debug_cameras")

@@ -4,17 +4,12 @@ class_name PlayerAction
 
 var player_sm: PlayerSM
 
-# var animations_source: AnimationPlayer
-# var torso_anim_settings: AnimationPlayer
-# var animator_set: String
-# var anim_settings: String = "simple"
-
 # not abstract
 func update(_input: InputPackage, _delta: float):
 	pass
 
 
-func animate():
+func animate(): # ▶️
 	# if animation == "roll" or animation == "block":
 		# print_.prefix("~~ SOS", "")
 	print_.psm("▶️ Action " + action_name, anim_name + " with blend time " + str(blend_time), 8)

@@ -80,3 +80,11 @@ static func mesh_instances(node: Node, is_visible: bool = false) -> Array:
 				descendants.append(child)
 		descendants.append_array(mesh_instances(child))
 	return descendants
+
+
+static func combos_one_level(node: Node) -> Array:
+	var descendants := []
+	for child in node.get_children():
+		if child is Combo_:
+			descendants.append(child)
+	return descendants

@@ -33,7 +33,8 @@ func process_input_vector(input: InputPackage, delta: float):
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED * speed_multiplier
 		player.rotate_y(angle)
 
-	legs_sm.legs_animator.set_global_speed_scale(player.velocity.length() / SPEED)
+	# 🚧
+	legs_sm.full_body_animator.set_global_speed_scale(player.velocity.length() / SPEED)
 	
 	# region: FAIR LOGIC
 	#if combat.current_camera_mode == combat.CameraMode.FREE:
@@ -54,18 +55,17 @@ func process_input_vector(input: InputPackage, delta: float):
 
 var blend = 0.2
 
-## overrides for start_from
+## overrides
 func animate(): # ▶️
-	# TODO: here we use start_from form adjusting run animation.
-	# i think this data should be in animation, not a state (leg action in this case)
-	# so state or action knows not an anim name as string, but a more complex structure.
-	# and changing animation should change its paramerers like start_from 
-	print_.lsm_action(action_name + em.play, "animation " + anim_name, 8)
-	legs_sm.legs_animator.set_anim_to_play(anim_name, blend)
+	print_.lsm_action(action_name + "▶️", "animation " + anim_name, 8)
+	# 🚧
+	legs_sm.full_body_animator.set_anim_to_play(anim_name, blend)
+	# legs_sm.legs_animator.set_anim_to_play(anim_name, blend)
 
 func on_exit_action():
+	# 🚧
 	# print_.lsm_action(action_name, "exit: reset_speed_scale", 3)
-	legs_sm.legs_animator.reset_global_speed_scale()
+	legs_sm.full_body_animator.reset_global_speed_scale()
 	current_speed_t = 0
 	
 func _input(event):
@@ -88,10 +88,8 @@ func _input(event):
 		blend -= 0.1
 		print("blend time ", blend)
 
-# region FAIR LOGIC
+# region: FAIR LOGIC
 # func move_with_root(_delta: float):
-# 	pass # rewrite this with my setup
-	# region FAIR LOGIC
 	#var current_rotation: Quaternion
 	#if combat.current_camera_mode == combat.CameraMode.FREE:
 		#current_rotation = camera.get_quaternion()
@@ -102,8 +100,6 @@ func _input(event):
 	#player.move_and_slide()
 
 # func setup_animator(previous_action: LegsAction, _input: InputPackage):
-# 	pass
-	# dont know how it works with new animators from the roadmap
 	#if previous_action.legs_animator == legs_animator: # ie both are LegsLocomotion of Locomotion
 		#if previous_action.action_name == "run_loco_start":
 			#legs_animator.transition(cycle_spectre, 0)

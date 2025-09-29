@@ -68,7 +68,7 @@ var _prev_blend_text = ""
 func __one_animator_data(ar: ModifierAnimator) -> String:
 	var c_an = ar.curr_anim
 	var text := ""
-	text += "      follower: %15s " % [ar.follower.a_name if ar.follower else " -- "] + "    infl " + str(ar.influence)
+	text += "  infl " + str(ar.influence)
 	text += "\n %25s" % [c_an.anim_name if c_an else "-None-"]
 	text += "  loop:" + str(ar.curr_anim_looping)
 	text += "\n %5.2f" % [ar.curr_anim_progress]

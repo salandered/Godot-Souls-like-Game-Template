@@ -2,17 +2,14 @@
 extends BaseAction
 class_name LegsAction
 
-
-# var legs_anim_settings: AnimationPlayer
-# @export var anim_settings: String = "simple"
-
 var legs_sm: LegsSM
+
 var motion_type: LegsSM.MotionType
 
-@export var SPEED: float = 3.0
-@export var TURN_SPEED: float = 2.0
-
+var SPEED: float = 3.0
+var TURN_SPEED: float = 2.0
 var SPEED_SCALE: float = 1.0
+
 
 ## Not abstract! It can be empty and not overriden. (double action)
 func update(_input: InputPackage, _delta: float):
@@ -22,7 +19,9 @@ func update(_input: InputPackage, _delta: float):
 ## can be overriden (see double action)
 func animate(): # ▶️
 	print_.lsm_action(action_name + em.play, "animation " + anim_name, 8)
-	legs_sm.legs_animator.set_anim_to_play(anim_name, 0.2)
+	
+	# 🚧
+	legs_sm.full_body_animator.set_anim_to_play(anim_name, 0.2)
 
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:

@@ -19,15 +19,12 @@ var player: Princess
 @export var player_sm: PlayerSM
 
 @export_group("animation")
-@export var legs_animator: ModifierAnimator
-@export var torso_animator: ModifierAnimator
 @export var anim_container: AnimationContainer
-# @export var torso_anim_settings: AnimationPlayer
-# @export var legs_anim_settings: AnimationPlayer
 
 var _player_state_data: Dictionary = { # { Node name : PSData }
 	# move
 	# "Walk": PSData.new(PS.walk, 2),
+	# TODO: seems like depends_on_legs_ true equails to having not legs_double_beh default
 	"Run": PSData.new(PS.run, 2, LS.legs_behavior_run, true),
 	"Strafe": PSData.new(PS.strafe, 3),
 	"Sprint": PSData.new(PS.sprint, 3, LS.legs_behavior_sprint, true),
@@ -181,7 +178,13 @@ func accept_player_states() -> void:
 		child.player_sm = player_sm
 		child.legs_sm = legs_sm
 		child.anim_container = anim_container
-		child.assign_combos()
+
+		var combos := get_descendants.combos_one_level(child)
+		for combo: Combo_ in combos:
+			print_.container("", "For state " + child.state_name + " assigned combo " + combo.name)
+			combo.player = player
+		
+		child.state_combos = combos
 
 		assert(child.legs_behavior, " legs_behavior problem for state: " + child.state_name)
 		assert(child.state_name and not child.state_name.is_empty(), " state_name problem for state ")
@@ -190,6 +193,7 @@ func accept_player_states() -> void:
 	print_.container("", "===========  Accepted states ===========")
 	print_.container("", str(_states))
 	print("")
+
 
 func accept_player_actions():
 	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):

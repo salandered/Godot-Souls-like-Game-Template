@@ -1,6 +1,8 @@
 extends PlayerState
 ## WALK
 
+
+# region: future reference
 # func _ready() -> void:
 # 	SPEED = 1.5
 # 	TURN_SPEED = 1
@@ -48,6 +50,4 @@ extends PlayerState
 
 # func choose_initial_behaviour(_input : InputPackage):
 # 	simple_torso.sync_and_follow(legs.simple_animator, 0.15)
-
-# func on_exit_behaviour():
-# 	legs.simple_animator.remove_follower()
+# endregion

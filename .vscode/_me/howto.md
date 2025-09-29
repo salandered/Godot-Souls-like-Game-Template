@@ -15,6 +15,9 @@ macOS/Linux:
 extansion: %USERPROFILE%\.vscode\extensions\visbydev.folder-path-color-0.0.16
 *changed .js and package.json to support more custom colors. changed copies saved in _me*
 
+## Highlight extension
+docs: [text](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)
+
 
 ## Godot theme extension
 name: ryanabx.godot-vscode-theme-0.0.5 extension

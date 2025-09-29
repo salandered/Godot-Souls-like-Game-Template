@@ -1,8 +1,7 @@
 extends Node
 class_name Combo_
 
-## assigned in assign_combos of PlayerState
-@onready var state: PlayerState
+@onready var player: Princess
 
 ## Combo_ result this combo invokes (eg: next_attack)
 ## Assigned in check_combos to queue state 
@@ -23,7 +22,7 @@ func is_triggered(input: InputPackage) -> bool:
 #
 # Imagine modifying it all every time adding another elif into PlayerState's _check_transition.
 
-# Also we assgn combos to state using get_children(), so there may be a some 
+# Also we assign combos to state using get_children(), so there may be a some 
 # combo priority system being powered just by Combo_ nodes order in the editor. 
 #
 # The PlayerState code is a basic action logic:

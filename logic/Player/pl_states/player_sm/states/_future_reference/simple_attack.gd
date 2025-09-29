@@ -9,7 +9,7 @@ var double_action: LegsAction
 # SIMPLE ATTACK IS USED FOR REFERENCE FOR NOW
 
 
-# this was in torso state (_base)
+# this was in player state (_base)
 # func map_with_combos(input) -> InputPackage:
 # 	for combo in combos:
 # 		combo.map(input)

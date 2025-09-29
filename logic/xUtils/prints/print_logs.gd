@@ -13,19 +13,22 @@ const DEV_PRINT := true
 const input_gathering_PRINT := true
 const FANCY_CAM_PRINT := false
 const CONTAINER_PRINT := false
-const HIT_B_PRINT := true
 const COLLISION_PRINT := false
 
 # ENEMY
 const SE_PRINT := false
 const HSME_PRINT := true
 
+# FIGHT
+const COMBO_PRINT := true
+const HIT_B_PRINT := true
+
+
 # PLAYER
 const PSM_PRINT := true
 const LSM_BEH_PRINT := true
 const LSM_ACTION_PRINT := true
 const SKM_PRINT := true
-const COMBO_PRINT := true
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	var result_freq = max(global_freq, arg_freq)
@@ -81,13 +84,6 @@ static func fancy_cam(add_prefix_: String, text: String, info_indents: int = 0, 
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func hit_b(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not HIT_B_PRINT and level != L.FORCE_PRINT: return
-	
-	add_prefix_ = "💢 HB" + " " + add_prefix_
-	prefix(add_prefix_, text, info_indents, level)
-
-
 static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
 	if not CONTAINER_PRINT and level != L.FORCE_PRINT: return
 	
@@ -95,6 +91,31 @@ static func container(add_prefix_: String, text: String, info_indents: int = 0, 
 	prefix(add_prefix_, text, info_indents, level)
 
 # endregion
+
+
+# region FIGHT logs
+
+static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not COMBO_PRINT and level != L.FORCE_PRINT: return
+		
+	add_prefix_ = "[Fight 🗡️]" + " " + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
+static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not COMBO_PRINT and level != L.FORCE_PRINT: return
+		
+	add_prefix_ = "Combo🗡️🗡️" + " " + add_prefix_
+	fight(add_prefix_, text, info_indents, level)
+
+
+static func h_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
+	if not HIT_B_PRINT and level != L.FORCE_PRINT: return
+	
+	add_prefix_ = "💢 HBox" + " " + add_prefix_
+	fight(add_prefix_, text, info_indents, level)
+
+# endregion
+
 
 # region: PLAYER logs
 static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
@@ -122,13 +143,6 @@ static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0,
 	if not LSM_ACTION_PRINT and level != L.FORCE_PRINT: return
 		
 	add_prefix_ = "LSM Action" + " " + add_prefix_
-	prefix(add_prefix_, text, info_indents, level)
-
-
-static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not COMBO_PRINT and level != L.FORCE_PRINT: return
-		
-	add_prefix_ = "Combo 🗡️" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 

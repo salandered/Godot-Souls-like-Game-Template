@@ -11,7 +11,10 @@ static var hence := " => "
 static func ts(...parts: Array) -> String:
 	var r = ""
 	for part in parts:
-		r += str(part) + " "
+		if part is float:
+			r += str(pp.round_01(part)) + " "
+		else:
+			r += str(part) + " "
 	return r
 
 static func in_q(something: Variant, spaces: bool = false) -> String:

@@ -1,4 +1,3 @@
-#extends TorsoPartialState
 extends PlayerState
 
 @export var charge_restore_timing: float = 3.5

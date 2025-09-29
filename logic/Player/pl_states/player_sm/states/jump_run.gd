@@ -38,7 +38,7 @@ func update(input: InputPackage, delta: float) -> void:
 
 func move_with_hybrid_root(delta: float) -> void:
 	# Get XZ root motion from animation (Y zeroed)
-	# var xz_root_velocity := player_sm.torso_animator.get_root_velocity(true)
+	# var xz_root_velocity := player_sm.full_body_animator.get_root_velocity(true)
 	# Apply rotation to root motion
 	# var xz_delta_pos = player.get_quaternion() * xz_root_velocity
 	# Combine: XZ from root motion, Y from physics
@@ -80,9 +80,9 @@ func debug_velocities() -> void:
 # region: If you want more control, you can also extract both Y and XZ components and blend them:
 # func move_with_hybrid_root_advanced(delta: float) -> void:
 # 	# Get full root motion including Y
-# 	var full_root_velocity := player_sm.torso_animator.get_root_velocity(false)
+# 	var full_root_velocity := player_sm.full_body_animator.get_root_velocity(false)
 # 	# Get XZ-only root motion  
-# 	var xz_root_velocity := player_sm.torso_animator.get_root_velocity(true)
+# 	var xz_root_velocity := player_sm.full_body_animator.get_root_velocity(true)
 	
 # 	# Extract just the Y component from animation
 # 	var anim_y_velocity = full_root_velocity.y
@@ -108,7 +108,7 @@ func debug_velocities() -> void:
 # region: For comparison, here's how you'd organize states by their root motion needs:
 # Base state class addition
 # func move_with_root(delta: float, use_y: bool = false) -> void:
-# 	var root_velocity := player_sm.torso_animator.get_root_velocity(not use_y)
+# 	var root_velocity := player_sm.full_body_animator.get_root_velocity(not use_y)
 # 	player.velocity = player.get_quaternion() * root_velocity
 	
 # 	# Add gravity if we're ignoring animation Y

@@ -1,5 +1,6 @@
-extends ActionUtils
+@abstract
 class_name BaseAction
+extends ActionUtils
 
 # var animator_set: String
 # var anim_settings: String = "simple"
@@ -24,8 +25,7 @@ var DURATION: float
 
 # INTERFACE 
 
-func update(_input: InputPackage, _delta: float):
-	u.not_implemented(action_name)
+@abstract func update(_input: InputPackage, _delta: float)
 
 
 func _on_enter_action(input: InputPackage) -> void:
@@ -41,11 +41,10 @@ func _on_exit_action() -> void:
 	on_exit_action()
 
 func on_exit_action() -> void:
-	# Override per action for cleanup (e.g., clear block flag)
 	pass
 	
 
-func animate():
+func animate() -> void:
 	pass
 
 # INTERFACE ENDS

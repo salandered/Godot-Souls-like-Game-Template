@@ -417,6 +417,55 @@
 				}
 			]
 		},
+		"(?<=func\\s)(update)(?=\\()": { // func update(...)
+			"decorations": [
+				{
+					"textDecoration": "underline double",
+				},
+			]
+		},
+		"(?<=func\\s_?)(on_enter_action)(?=\\()": { // func _on_enter_action(...)
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		"(?<=func\\s_?)(on_enter_state)(?=\\()": { // func _on_enter_action(...)
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		"(?<=func\\s_?)(on_enter_behavior)(?=\\()": { // func _on_enter_action(...)
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		"(?<=func\\s_?)(on_exit_action)(?=\\()": { // func _on_exit_action(...)
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		"(?<=func\\s_?)(on_exit_state)(?=\\()": { // func _on_exit_action(...)
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		"(?<=func\\s_?)(on_exit_behavior)(?=\\()": { // func on_exit_behavior(...)
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
 		"\\b(print_\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -467,6 +516,50 @@
 				}
 			]
 		},
+		// EXAMPLES
+		// "(SECRET_KEY)": {
+		// 	"decorations": [
+		// 		{
+		// 			"color": "#FF4444", // Make the text itself red
+		// 			"outline": "1px solid #FF0000", // Add a 1px solid red outline
+		// 		}
+		// 	]
+		// },
+		// "(TODO:|FIXME:)": {
+		// 	"decorations": [
+		// 		{
+		// 			"backgroundColor": "#FFA500", // An orange color
+		// 			"color": "#1E1E1E", // Dark text color for contrast
+		// 			"fontWeight": "bold"
+		// 		}
+		// 	]
+		// },
+		// /** awfd
+		// wad*/
+		// "(/\\*\\*[\\s\\S]*?\\*/)": {
+		// 	"decorations": [
+		// 		{
+		// 			"color": "#222a33",
+		// 			// "backgroundColor": "#aff3ff",
+		// 			"borderRadius": "4px", // Give the box rounded corners
+		// 			"border": "1px solid #FFA500" // A solid border
+		// 		},
+		// 		// {
+		// 		// 			"borderRadius": "4px", // Give the box rounded corners
+		// 		// 			"border": "1px solid rgba(255, 255, 255, 0.2)" // A solid border
+		// 		// 		}
+		// 	]
+		// },
+		// "(SUCCESS)": {
+		// 	"decorations": [
+		// 		{
+		// 			"color": "#00FF00", // Bright green text
+		// 			"fontWeight": "bolder",
+		// 			"letterSpacing": "2px", // Space out the letters
+		// 			"textDecoration": "underline double #FFA500" // A wavy green underline
+		// 		}
+		// 	]
+		// },
 	},
 	//
 	/* --- COPIED FROM GLOBAL SETTINGS JIC ----  

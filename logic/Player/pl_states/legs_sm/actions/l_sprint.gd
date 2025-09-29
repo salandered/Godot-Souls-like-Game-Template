@@ -21,7 +21,8 @@ func process_input_vector(input: InputPackage, delta: float):
 	else:
 		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED
 		player.rotate_y(angle)
-	legs_sm.legs_animator.set_global_speed_scale(player.velocity.length() / SPEED)
+	# 🚧
+	legs_sm.full_body_animator.set_global_speed_scale(player.velocity.length() / SPEED)
 
 func _input(event):
 	if event.is_action_released("dev_speed_up"):
@@ -30,5 +31,5 @@ func _input(event):
 		SPEED -= 6
 
 func on_exit_action():
-	# print_.prefix(">>> on exit sprint", "reset_speed_scale")
-	legs_sm.legs_animator.reset_global_speed_scale()
+	# 🚧
+	legs_sm.full_body_animator.reset_global_speed_scale()

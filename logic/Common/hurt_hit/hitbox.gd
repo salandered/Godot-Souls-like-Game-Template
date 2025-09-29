@@ -39,7 +39,7 @@ func on_contact(area: Node3D):
 	if weapon.hitbox_ignore_list.has(self):
 		return
 
-	print_.hit_b(processor.name, "Area leaded to weapon '" + weapon.weapon_name + "' by '" + weapon.holder.name + "'")
+	print_.h_box(processor.name, "Area leaded to weapon '" + weapon.weapon_name + "' by '" + weapon.holder.name + "'")
 
 	weapon.hitbox_ignore_list.append(self)
 

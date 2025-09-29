@@ -18,7 +18,3 @@ func check_transition(input: InputPackage) -> PLVerdict:
 # 		switch_action_to(legs_sm.current_action.action_name, input)
 #  	# else:
 #  		# print_.prefix("PS |" + state_name + "|", "not switching", 5)
-
-
-func on_exit_state():
-	legs_sm.legs_animator.remove_follower()

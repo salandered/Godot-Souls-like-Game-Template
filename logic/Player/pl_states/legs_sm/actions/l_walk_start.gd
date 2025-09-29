@@ -6,10 +6,12 @@ func _ready() -> void:
 	SPEED_SCALE = 1.5
 
 func on_enter_action(_input: InputPackage) -> void:
-	legs_sm.legs_animator.set_global_speed_scale(SPEED_SCALE)
+	# 🚧
+	legs_sm.full_body_animator.set_global_speed_scale(SPEED_SCALE)
 
 func on_exit_action() -> void:
-	legs_sm.legs_animator.reset_global_speed_scale()
+	# 🚧
+	legs_sm.full_body_animator.reset_global_speed_scale()
 
 
 func update(input: InputPackage, delta: float):
@@ -27,5 +29,6 @@ func process_input_vector(input: InputPackage, delta: float):
 		player.rotate_y(angle)
 
 func move_with_root(delta: float) -> void:
-	var root_vel := legs_sm.legs_animator.get_root_velocity()
+	# 🚧
+	var root_vel := legs_sm.full_body_animator.get_root_velocity()
 	player.velocity = player.get_quaternion() * root_vel
