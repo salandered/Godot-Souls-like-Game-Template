@@ -18,7 +18,7 @@ const RUN_START_COMMITMENT := 0.2 # seconds
 func _ready() -> void:
 	supported_actions = [
 		LS.legs_action_idle,
-		LS.legs_action_run_start,
+		# LS.legs_action_sprint_start,
 		LS.legs_action_run,
 	]
 
@@ -29,27 +29,27 @@ func update(input: InputPackage, delta: float) -> void:
 
 func _choose_action(input: InputPackage, delta: float) -> void:
 	var is_moving := input.input_direction.length() >= START_THRESHOLD
-	var current_action = legs_sm.current_action
+	var curr_action = legs_sm.current_action
 
-	if current_action.action_name == LS.legs_action_idle:
-		if is_moving and current_action.get_progress() > IDLE_COMMITMENT:
-			# switch_action_to(LS.legs_action_run_start, input)
-			switch_action_to(LS.legs_action_run, input)
-			return
-	
-	if current_action.action_name == LS.legs_action_run_start:
-		if is_moving:
-			if current_action.DURATION / current_action.SPEED_SCALE - current_action.get_progress() < 0.1: # tweak may be
+	match curr_action.motion_type:
+		MotionType.IDLE:
+			if is_moving and curr_action.get_progress() > IDLE_COMMITMENT:
+				# switch_action_to(LS.legs_action_run_start, input)
 				switch_action_to(LS.legs_action_run, input)
 				return
-		else:
-			if current_action.get_progress() > RUN_START_COMMITMENT:
-				switch_action_to(LS.legs_action_idle, input) # run end later
-
-	if current_action.action_name == LS.legs_action_run:
-		if not is_moving:
-			switch_action_to(LS.legs_action_idle, input) # run end later
 	
+		# MotionType.START:
+		# 	if is_moving:
+		# 		if current_action.DURATION / current_action.SPEED_SCALE - current_action.get_progress() < 0.1: # tweak may be
+		# 			switch_action_to(LS.legs_action_run, input)
+		# 			return
+		# 	else:
+		# 		if current_action.get_progress() > RUN_START_COMMITMENT:
+		# 			switch_action_to(LS.legs_action_idle, input) # run end later
+		MotionType.LOOP:
+			if not is_moving:
+				switch_action_to(LS.legs_action_idle, input) # run end later
+		
 	# region: first version
 	# if input.input_direction != Vector2.ZERO:
 	# 	_idle_timer = 0.0

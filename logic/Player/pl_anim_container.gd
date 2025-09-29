@@ -12,7 +12,7 @@ var _animations = [
 	AnimationData.new(A.combat_idle),
 	AnimationData.new(A.combat_walk),
 	AnimationData.new(A.combat_walk_start),
-	AnimationData.new(A.combat_run_start),
+	AnimationData.new(A.combat_sprint_start),
 	AnimationData.new(A.combat_walk_back),
 	AnimationData.new(A.combat_run),
 	AnimationData.new(A.combat_sprint),
@@ -75,6 +75,8 @@ func _accept_animations() -> void:
 
 		_anim_by_name[anim.anim_name] = anim
 
+		if anim.anim_name == A.longsword_1:
+			print("~~", anim._to_string())
 	_anim_by_name[A.fake_anim] = AnimationData.new(A.fake_anim, 0, 1, 1)
 
 

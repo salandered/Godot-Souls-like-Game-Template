@@ -126,12 +126,11 @@ func get_roll_endpoint() -> Vector3:
 	return Vector3(1000, 1000, 1000)
 
 func get_current_state_position_after(time: float) -> Vector3:
-	var data_track = current_state.backend_animation
-	var future = current_state.get_progress() + time
+	# TODO: turned off, code here is obsolete
+	# var data_track = current_state.backend_animation
+	# var future = current_state.get_progress() + time
 	# you can check out the original method usage, it is used to "go back in time"
 	# but technically nothing stops us from predicting future with it as well
-
-	# TODO: turned off while get_root_delta_pos is being transformated
 	# var predicted_delta_pos = states_data.get_root_delta_pos(data_track, future, time)
 	# return global_position + get_quaternion() * predicted_delta_pos
 	return Vector3.UP

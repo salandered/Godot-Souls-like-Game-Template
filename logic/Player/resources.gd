@@ -42,11 +42,6 @@ func can_be_paid(state: PlayerState) -> bool:
 		return true
 	return false
 
-# region: Variant of polymorphism, but it doesn't work
-#func can_be_paid(state_name : String) -> bool:
-	#var state = model.states[state_name]
-	#return can_be_paid(state)
-# endregion
 
 func lose_health(amount: float):
 	if not god_mode:

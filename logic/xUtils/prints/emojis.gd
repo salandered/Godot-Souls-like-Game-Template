@@ -10,6 +10,7 @@ const lookup = "🔎"
 const verdict = "⚖️"
 const queued = "👥"
 const forced = "🦾"
+const check = "❔"
 
 # important
 const warn = "⚠️"

@@ -4,7 +4,7 @@ class_name LegsAction
 
 var legs_sm: LegsSM
 
-var motion_type: LegsSM.MotionType
+var motion_type: String ## see MotionType
 
 var SPEED: float = 3.0
 var TURN_SPEED: float = 2.0
@@ -19,9 +19,8 @@ func update(_input: InputPackage, _delta: float):
 ## can be overriden (see double action)
 func animate(): # ▶️
 	print_.lsm_action(action_name + em.play, "animation " + anim_name, 8)
-	
-	# 🚧
-	legs_sm.full_body_animator.set_anim_to_play(anim_name, 0.2)
+		
+	animator_manager.set_anim_to_play(anim_name, blend_time)
 
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:

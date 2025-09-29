@@ -787,7 +787,7 @@ loop_mode = 1
 markers = [{
 "color": Color(1, 0.23137255, 0.09019608, 1),
 "name": &"start",
-"time": -1.6857147e-09
+"time": 0.26666668
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

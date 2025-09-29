@@ -37,8 +37,8 @@ func react_on_hit(hit: HitData):
 # 	print_.prefix("SKM", "block animate '" + animator_set + "' animation " + animation + "| settings_switch_time " + str(settings_switch_time))
 # 	if animation_settings.current_animation == animator_set:
 # 		torso_animator.play(animation, animation_blend_time)
-# 		# full_body_animator.play(animation, animation_blend_time)
+# 		# animator_manager.play(animation, animation_blend_time)
 # 	else:
 # 		torso_animator.play(animation, 0)
-# 		full_body_animator.play(animation, 0)
+# 		animator_manager.play(animation, 0)
 # 	# animation_settings.play(animator_set, settings_switch_time)

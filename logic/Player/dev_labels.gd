@@ -11,14 +11,35 @@ extends Node
 
 @onready var player: Princess = $".."
 
+var _visible: bool = true
 
-var frequency := 4
+var frequency := 2
+
+var all_labels = []
+
+func _ready() -> void:
+	all_labels = [
+		label,
+		label_2,
+		label_state_info,
+		label_subs_psm,
+		label_4,
+		modifier_ar,
+		modifier_ar_2
+	]
 
 func _process(delta: float) -> void:
 	if u.fr(false) % frequency == 0:
 		_label_player_info()
 		_label_modifer_animator_info()
 		_label_state_info()
+
+func _input(event):
+	if event.is_action_released("kp_7"):
+		_visible = not _visible
+		for l: Label in all_labels:
+			l.visible = _visible
+
 
 func _label_player_info():
 	var p_pos = player.model.global_position
@@ -57,8 +78,8 @@ func _label_state_info():
 
 
 func _label_modifer_animator_info():
-	var t_ar := player.model.full_body_animator
-	var l_ar := player.model.legs_animator
+	var t_ar := player.model.animator_manager.full_body
+	var l_ar := player.model.animator_manager.legs
 
 	modifier_ar.text = __one_animator_data(t_ar)
 	modifier_ar_2.text = __one_animator_data(l_ar)

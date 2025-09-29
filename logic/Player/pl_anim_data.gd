@@ -41,7 +41,6 @@ func get_marker_by_name(marker_name: String) -> M.Marker:
 	return null
 
 # PARAMETERS
-# TODO: speed_scale matters
 func switches_to_queue(timestamp) -> bool:
 	return _get_value_from_track(SWITCHES_TO_QUEUE, timestamp)
 

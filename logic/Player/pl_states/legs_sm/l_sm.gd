@@ -10,11 +10,35 @@ class_name LegsSM
 
 @export var combat: HumanoidCombat
 
-enum MotionType {IDLE, START, CYCLE, STOP}
+# TODO: fast solution. Design proper action (or states) ability to share data.
+class TranferData extends RefCounted:
+	var action_name: String
+	var _transfer: Dictionary
 
-@export var full_body_animator: ModifierAnimator
-@export var legs_animator: ModifierAnimator
+	func _init(action_name_: String, data_ = null) -> void:
+		action_name = action_name_
+		if data_ == null:
+			_transfer = {}
+		elif data_ is Dictionary:
+			_transfer = data_.duplicate_deep()
+		else:
+			_transfer = {}
 
+	func get_by_key(key: String) -> Variant: # its better be a string
+		return u.safe_get_dict_key(_transfer, key, "Getting _transfer from TranferData")
+
+	func get_by_key_if_action(action_name_: String, key: String) -> Variant: # its better be a string
+		if action_name == action_name_:
+			return get_by_key(key)
+		return null
+
+	func fill(action_name_: String, data_: Dictionary):
+		var msg = pp.ts("| keys:", str(data_.keys()) + str(data_.values()) if data_ is Dictionary else "| data is not a Dict" + em.warn)
+		print_.lsm_beh("TransferData fill for " + pp.in_q(action_name_), msg, 2)
+		action_name = action_name_
+		_transfer = data_.duplicate_deep()
+
+var transfer_data = TranferData.new("")
 
 var current_behavior: LegsBehavior
 # It should belong here! current_action is managed by the "pool" of actions. 

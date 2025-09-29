@@ -7,9 +7,7 @@ class_name PlayerSM
 
 var player: Princess
 
-# Fixed animator setup (we stick to ModifierAnimator now)
-@export var full_body_animator: ModifierAnimator
-@export var legs_animator: ModifierAnimator
+@export var animator_manager: AnimatorManager
 @export var animation_settings: AnimationPlayer
 
 var current_state: PlayerState

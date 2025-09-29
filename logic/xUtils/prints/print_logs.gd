@@ -2,7 +2,7 @@ extends RefCounted
 class_name print_
 
 
-# TODO: filtr for log levels
+# TODO: filter for log levels
 
 
 # 
@@ -20,6 +20,7 @@ const SE_PRINT := false
 const HSME_PRINT := true
 
 # FIGHT
+const FIGHT_PRINT := true
 const COMBO_PRINT := true
 const HIT_B_PRINT := true
 
@@ -28,7 +29,7 @@ const HIT_B_PRINT := true
 const PSM_PRINT := true
 const LSM_BEH_PRINT := true
 const LSM_ACTION_PRINT := true
-const SKM_PRINT := true
+const SKM_PRINT := false
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	var result_freq = max(global_freq, arg_freq)
@@ -96,7 +97,7 @@ static func container(add_prefix_: String, text: String, info_indents: int = 0, 
 # region FIGHT logs
 
 static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not COMBO_PRINT and level != L.FORCE_PRINT: return
+	if not FIGHT_PRINT and level != L.FORCE_PRINT: return
 		
 	add_prefix_ = "[Fight 🗡️]" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)

@@ -49,7 +49,7 @@ func update(input: InputPackage, delta: float) -> void:
 		
 		# Use root motion until control returns
 		if not has_control and current_action.works_longer_than(control_return_time):
-			var xz_root = player_sm.full_body_animator.get_root_velocity(true)
+			var xz_root = animator_manager.get_root_velocity(true)
 			var xz_delta = player.get_quaternion() * xz_root
 			player.velocity.x = xz_delta.x
 			player.velocity.z = xz_delta.z

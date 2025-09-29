@@ -38,7 +38,7 @@ func update(_input: InputPackage, delta):
 	player.model.active_weapon.is_attacking = current_action.weapon_hurts()
 
 func move_with_root(delta: float) -> void:
-	var delta_pos := player_sm.full_body_animator.get_root_velocity()
+	var delta_pos := animator_manager.get_root_velocity()
 	player.velocity = player.get_quaternion() * delta_pos
 
 	if not player.is_on_floor():

@@ -9,6 +9,9 @@ var player: Princess
 var combat: HumanoidCombat
 var area_awareness: AreaAwareness
 var anim_container: AnimationContainer
+var animator_manager: AnimatorManager
+
+
 var enter_state_time: float
 
 @export var SPEED = 3.0
@@ -57,8 +60,10 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # - if not, what vanilla state wants to be defaulted to?
 ## Not to override
 func _check_transition(input: InputPackage) -> PLVerdict:
-	# if current_action.action_name == PS.action_longsword_1: # old dev print 
-		# print_.combo("", str(current_action.accepts_queueing()))
+	if current_action.action_name == PS.action_longsword_1: # old dev print
+		print_.combo("", str(current_action.allows_queue()))
+		if current_action.get_progress() > 0.8333:
+			print("----")
 	if current_action.allows_queue():
 		check_combos(input)
 	if _has_queued_state() and current_action.switches_to_queue():

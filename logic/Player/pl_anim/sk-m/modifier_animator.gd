@@ -1,4 +1,6 @@
 extends SkeletonModifier3D
+## WARNING: should not be called directly!
+## 			AnimatorManager manages all modifier animators
 class_name ModifierAnimator
 
 @export var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
@@ -46,17 +48,14 @@ var global_speed_scale := 1.0
 
 
 func initialise():
-	# 45 - first leg bone
+	## NOTE: 0 - root is not animated here. If animation is RM, use get_root_velocity()
+	## 45 - first leg bone
 	if animator_name == 'full_body':
-		# bone_list = range(1, 45)
 		bone_list = range(1, 52)
 	elif animator_name == 'legs':
 		bone_list = range(45, 52)
-		# bone_list.append(0) # root is not animated here. If animation is RM, use get_root_velocity()
-		# bone_list.append(1) # TODO consider: giving hips bone to legs?
 	else:
 		push_error("no animator_name or its unknown")
-	
 	__initialised = true
 
 
@@ -68,26 +67,21 @@ func set_overlay_anim(anim_name: String, fade_in: float = 0.1, hold: float = -1.
 	overlay.set_overlay_anim(anim, fade_in, hold, fade_out, local_speed)
 
 
-func _set_previous_animation():
-	prev_anim = curr_anim
-	prev_anim_looping = curr_anim_looping
-	prev_anim_progress = curr_anim_progress
-
-
 func set_anim_to_play(anim_name: String, blend_for: float = 0):
 	if blend_for < 0:
 		push_error("can't blend two animations over " + str(blend_for))
 		blend_for = 0
 	
 	var anim: AnimationData = anim_container.get_by_name(anim_name)
-
 	if anim == null:
 		push_error("Animation not found: " + anim_name)
 		return
 
 	last_processing_time = Time.get_unix_time_from_system()
 	
-	_set_previous_animation()
+	prev_anim = curr_anim
+	prev_anim_looping = curr_anim_looping
+	prev_anim_progress = curr_anim_progress
 	
 	curr_anim = anim
 	# NOTE: progress always starts with 0. Custom start_time will be added when 
@@ -110,9 +104,9 @@ func _process_modification():
 
 
 func _update_time():
-	# Each frame, first thing we do is we manage our time awareness. 
-		# - We do it by calculating the custom_delta between now and the last call.
-		# - We then add this custom_delta to our animation progresses, and if animations are cycling, we undergo a cycle switch.
+	# Each frame we manage our time awareness. 
+		# - Calculate the custom_delta between now and the last call.
+		# - Then add this custom_delta to curr anim progresses.
 	now = Time.get_unix_time_from_system()
 	custom_delta = now - last_processing_time
 	last_processing_time = now
@@ -144,15 +138,15 @@ func _update_skeleton():
 		# For each suggested bone, we first calculate its pose according to the `curr_anim` and its progress.
 		#   - If we don't blend, that's our work for the bone.
 		#   - If we do blend, we need to also calculate this bone's pose according to the `prev_anim` and its progress, and then interpolate those two transforms via `blending_progress` value.
-		curr_transform = calculate_bone_pose(bone_idx, curr_anim, curr_anim_progress)
+		curr_transform = _calculate_bone_pose(bone_idx, curr_anim, curr_anim_progress)
 		if is_blending:
-			prev_transform = calculate_bone_pose(bone_idx, prev_anim, prev_anim_progress)
+			prev_transform = _calculate_bone_pose(bone_idx, prev_anim, prev_anim_progress)
 			curr_transform = prev_transform.interpolate_with(curr_transform, blending_percentage)
 		
 		curr_transform = overlay.apply_overlay(bone_idx, curr_transform, self)
 		skeleton.set_bone_pose(bone_idx, curr_transform)
 	
-func calculate_bone_pose(bone_idx: int, anim: AnimationData, anim_progress: float) -> Transform3D:
+func _calculate_bone_pose(bone_idx: int, anim: AnimationData, anim_progress: float) -> Transform3D:
 	# - We search for a position track by turning our bone index into track path.
 	# 	  - If -1, it means that `AnimationResource` doesn't contain such a track. For example, that bone doesn't move in this animation. 
 	# 	In this case, we set transform's `origin` to the origin of our bone; we don't touch it.

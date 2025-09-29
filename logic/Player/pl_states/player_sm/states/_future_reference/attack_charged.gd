@@ -73,6 +73,5 @@ extends PlayerState
 # 		double_action.legs_animator.play(current_action.animation, 0)
 # 		double_action.legs_anim_settings.play("simple", 0.15)
 
-# # TODO redefine properly, install backend animations framework again
 # func tracks_input_vector() -> bool:
 # 	return current_action.acts_between(0.2, 0.4) and current_action.action_name == "release"

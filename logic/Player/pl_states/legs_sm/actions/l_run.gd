@@ -3,7 +3,7 @@ extends LegsAction
 var ANGULAR_SPEED: float = 12
 @export var acceleration_curve: Curve
 
-var current_speed_t: float = 0.0 # [0,1] progress along curve
+var curr_speed_time: float = 0.0 # [0,1] progress along curve
 var acceleration_time: float = 0.5 # How long to reach full speed
 
 func _ready():
@@ -19,54 +19,37 @@ func process_input_vector(input: InputPackage, delta: float):
 
 	# Handle acceleration
 	if input_direction.length() > 0:
-		current_speed_t = min(current_speed_t + delta / acceleration_time, 1.0)
+		curr_speed_time = min(curr_speed_time + delta / acceleration_time, 1.0)
 	else:
-		current_speed_t = max(current_speed_t - delta / acceleration_time, 0.0)
-	var speed_multiplier = acceleration_curve.sample(current_speed_t)
-	# print(" current_speed_t: ", pp.round_01(current_speed_t), "   speed_multiplier: ", pp.round_01(speed_multiplier))
+		curr_speed_time = max(curr_speed_time - delta / acceleration_time, 0.0)
+
+	var CURVE_SPEED = acceleration_curve.sample(curr_speed_time)
+	print(pp.ts(" curr_speed_time: ", curr_speed_time, " CURVE_SPEED", CURVE_SPEED))
+	
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
 	if abs(angle) >= ANGULAR_SPEED * delta:
-		player.velocity = face_direction.rotated(Vector3.UP, sign(angle) * ANGULAR_SPEED * delta) * TURN_SPEED * speed_multiplier
+		var face_dir_rotated := face_direction.rotated(Vector3.UP, sign(angle) * ANGULAR_SPEED * delta)
+		player.velocity = face_dir_rotated * TURN_SPEED * CURVE_SPEED
 		player.rotate_y(sign(angle) * ANGULAR_SPEED * delta)
 	else:
-		player.velocity = face_direction.rotated(Vector3.UP, angle) * SPEED * speed_multiplier
+		var face_dir_rotated := face_direction.rotated(Vector3.UP, angle)
+		player.velocity = face_dir_rotated * SPEED * CURVE_SPEED
 		player.rotate_y(angle)
 
-	# 🚧
-	legs_sm.full_body_animator.set_global_speed_scale(player.velocity.length() / SPEED)
+	animator_manager.set_global_speed_scale(player.velocity.length() / SPEED)
 	
-	# region: FAIR LOGIC
-	#if combat.current_camera_mode == combat.CameraMode.FREE:
-		#var input_direction = camera.basis.z
-		#var face_direction = player.basis.z
-		#var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
-		#var new_z = player.basis.z.rotated(Vector3.UP, clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
-		#var new_x = - new_z.cross(Vector3.UP)
-		#player.basis = Basis(new_x, Vector3.UP, new_z).orthonormalized()
-	#else:
-		#var input_direction = combat.direction_to_target()
-		#var face_direction = player.basis.z
-		#var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
-		#var new_z = player.basis.z.rotated(Vector3.UP, clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
-		#var new_x = - new_z.cross(Vector3.UP)
-		#player.basis = Basis(new_x, Vector3.UP, new_z).orthonormalized()
-	# endregion
 
-var blend = 0.2
-
-## overrides
+## overrides for blend tests
+var blend = 0.3 # WORKED GOOD!!
 func animate(): # ▶️
 	print_.lsm_action(action_name + "▶️", "animation " + anim_name, 8)
-	# 🚧
-	legs_sm.full_body_animator.set_anim_to_play(anim_name, blend)
-	# legs_sm.legs_animator.set_anim_to_play(anim_name, blend)
+	
+	animator_manager.set_anim_to_play(anim_name, blend)
 
 func on_exit_action():
-	# 🚧
-	# print_.lsm_action(action_name, "exit: reset_speed_scale", 3)
-	legs_sm.full_body_animator.reset_global_speed_scale()
-	current_speed_t = 0
+	animator_manager.reset_global_speed_scale()
+	curr_speed_time = 0
 	
 func _input(event):
 	if event.is_action_released("dev_speed_up"):
@@ -74,19 +57,30 @@ func _input(event):
 	if event.is_action_released("dev_speed_down"):
 		SPEED -= 6
 
-	# if event.is_action_released("t1"):
-	# 	start_from += 0.05
-	# 	print("blend time ", start_from)
-	# if event.is_action_released("t2"):
-	# 	start_from -= 0.05
-	# 	print("blend time ", start_from)
-
 	if event.is_action_released("t3"):
 		blend += 0.1
 		print("blend time ", blend)
 	if event.is_action_released("t4"):
 		blend -= 0.1
 		print("blend time ", blend)
+
+
+# region: FAIR LOGIC for process input vector
+#if combat.current_camera_mode == combat.CameraMode.FREE:
+	#var input_direction = camera.basis.z
+	#var face_direction = player.basis.z
+	#var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
+	#var new_z = player.basis.z.rotated(Vector3.UP, clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
+	#var new_x = - new_z.cross(Vector3.UP)
+	#player.basis = Basis(new_x, Vector3.UP, new_z).orthonormalized()
+#else:
+	#var input_direction = combat.direction_to_target()
+	#var face_direction = player.basis.z
+	#var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
+	#var new_z = player.basis.z.rotated(Vector3.UP, clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
+	#var new_x = - new_z.cross(Vector3.UP)
+	#player.basis = Basis(new_x, Vector3.UP, new_z).orthonormalized()
+# endregion
 
 # region: FAIR LOGIC
 # func move_with_root(_delta: float):

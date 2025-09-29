@@ -20,6 +20,7 @@ var player: Princess
 
 @export_group("animation")
 @export var anim_container: AnimationContainer
+@onready var animator_manager: AnimatorManager = %AnimatorManager
 
 var _player_state_data: Dictionary = { # { Node name : PSData }
 	# move
@@ -63,7 +64,7 @@ var _player_action_data: Dictionary = { # { Node name : PlayerActionData }
 	"RollAction": PlayerActionData.new(PS.roll, PS.action_roll, A.roll, ),
 	"DeathAction": PlayerActionData.new(PS.death, PS.action_death, A.death, ),
 	# fight
-	"Longsword1Action": PlayerActionData.new(PS.longsword_1, PS.action_longsword_1, A.longsword_1, "Established/axe-attack-slice-RL-param"),
+	"Longsword1Action": PlayerActionData.new(PS.longsword_1, PS.action_longsword_1, A.longsword_1),
 	"Longsword2Action": PlayerActionData.new(PS.longsword_2, PS.action_longsword_2, A.longsword_2, ),
 	"BlockAction": PlayerActionData.new(PS.block, PS.action_block, A.block_forward, ),
 	"BlockReactionAction": PlayerActionData.new(PS.block_reaction, PS.action_block_reaction, A.block_reaction, ),
@@ -95,15 +96,15 @@ var _legs_behavior_data: Dictionary = {
 }
 
 var _legs_action_data: Dictionary = {
-	"IdleAction": LegActionData.new(LS.legs_action_idle, A.combat_idle, "", 0.2, LegsSM.MotionType.IDLE),
-	"WalkStartAction": LegActionData.new(LS.legs_action_walk_start, A.combat_walk_start, "", 0.2, LegsSM.MotionType.START),
-	"RunStartAction": LegActionData.new(LS.legs_action_run_start, A.combat_run_start, "", 0.2, LegsSM.MotionType.START),
-	"RunAction": LegActionData.new(LS.legs_action_run, A.combat_run, "", 0.2, LegsSM.MotionType.CYCLE),
-	"SprintAction": LegActionData.new(LS.legs_action_sprint, A.combat_sprint, "", 0.2, LegsSM.MotionType.CYCLE),
-	# "JumpStartAction": LegActionData.new(LS.legs_action_jump_start, A.jump_run, LegsSM.MotionType.IDLE),
-	# "AirAction": LegActionData.new(LA.midair, LegsSM.MotionType.IDLE),
-	# "LandAction": LegActionData.new(LS.legs_action_land, A.landing_run, LegsSM.MotionType.IDLE),
-	"DoubleAction": LegActionData.new(LS.legs_action_double, A.fake_anim, "", 0.2, LegsSM.MotionType.IDLE),
+	"IdleAction": LegActionData.new(LS.legs_action_idle, A.combat_idle, 0.2, MotionType.IDLE),
+	"WalkStartAction": LegActionData.new(LS.legs_action_walk_start, A.combat_walk_start, 0.2, MotionType.START),
+	"SprintStartAction": LegActionData.new(LS.legs_action_sprint_start, A.combat_sprint_start, 0.2, MotionType.START),
+	"RunAction": LegActionData.new(LS.legs_action_run, A.combat_run, 0.2, MotionType.LOOP),
+	"SprintAction": LegActionData.new(LS.legs_action_sprint, A.combat_sprint, 0.6, MotionType.LOOP),
+	# "JumpStartAction": LegActionData.new(LS.legs_action_jump_start, A.jump_run, MotionType.IDLE),
+	# "AirAction": LegActionData.new(LA.midair, MotionType.IDLE),
+	# "LandAction": LegActionData.new(LS.legs_action_land, A.landing_run, MotionType.IDLE),
+	"DoubleAction": LegActionData.new(LS.legs_action_double, A.fake_anim, 0.2, MotionType.IDLE),
 }
 
 
@@ -178,6 +179,7 @@ func accept_player_states() -> void:
 		child.player_sm = player_sm
 		child.legs_sm = legs_sm
 		child.anim_container = anim_container
+		child.animator_manager = animator_manager
 
 		var combos := get_descendants.combos_one_level(child)
 		for combo: Combo_ in combos:
@@ -209,21 +211,21 @@ func accept_player_actions():
 		
 		# base action
 		child.player = player
-		child.action_name = action_data.action_name
-		child.anim_name = action_data.animation_name
-		child.backend_animation = action_data.backend_animation_name
-		child.blend_time = action_data.blend_time
-		child.DURATION = anim_container.get_by_name(action_data.animation_name).duration
-		# node.animator_set = action_data.animator_set
+		child.player_sm = player_sm
+		child.container = self
+		child.animator_manager = animator_manager
 		child.anim_container = anim_container
 
 		# specific
-		child.player_sm = player_sm
+		var anim := anim_container.get_by_name(action_data.animation_name)
+		child.anim = anim
+		child.anim_name = anim.anim_name
+		child.DURATION = anim.duration
+		child.blend_time = action_data.blend_time
+		child.action_name = action_data.action_name
 
 		assert(child.action_name and not child.action_name.is_empty(), " action_name problem")
 		assert(child.anim_name and not child.anim_name.is_empty(), " animation problem for action: " + child.action_name)
-		assert(child.backend_animation and not child.backend_animation.is_empty(), " backend_animation problem for action: " + child.action_name)
-		# assert(node.animator_set and not node.animator_set.is_empty(), " animator_set problem for action: " + node.action_name)
 	print_.container("", "===========  Accepted actions ===========")
 	print_.container("", str(_player_actions))
 	print("")
@@ -263,17 +265,21 @@ func accept_legs_actions():
 		# base action
 		child.player = player
 		child.legs_sm = legs_sm
+		child.container = self
 		child.anim_container = anim_container
+		child.animator_manager = animator_manager
+
 
 		# specific
+		var anim := anim_container.get_by_name(action_data.animation_name)
+		child.anim = anim
+		child.anim_name = anim.anim_name
+		child.DURATION = anim.duration
+		
 		child.action_name = action_data.action_name
-		child.anim_name = action_data.animation_name
-		child.backend_animation = action_data.backend_animation_name
 		child.blend_time = action_data.blend_time
-		child.DURATION = anim_container.get_by_name(action_data.animation_name).duration
 		child.motion_type = action_data.motion_type
 
-		
 		assert(child.action_name and not child.action_name.is_empty(), "action_name problem for")
 		assert(child.anim_name and not child.anim_name.is_empty(), " animation problem for action: " + child.action_name)
 		

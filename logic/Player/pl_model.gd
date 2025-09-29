@@ -9,18 +9,13 @@ class_name PlayerModel
 @onready var area_awareness = $AreaAwareness as AreaAwareness
 @onready var container = %StatesContainer as PlayerStatesContainer
 
-@onready var _begin: BeginModifier = %_Begin
-@onready var full_body_animator: ModifierAnimator = %FullBody
-@onready var legs_animator: ModifierAnimator = %Legs
-@onready var _end: EndModifier = %_End
-
-@onready var animation_player: AnimationPlayer = %NativeAnimator
-
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
 @onready var bones: PlayerBones = %bones
 
+@onready var animation_player: AnimationPlayer = %NativeAnimator
 @onready var anim_container: PlayerAnimationContainer = %AnimContainer
+@onready var animator_manager: AnimatorManager = %AnimatorManager
 
 var active_weapon: BaseWeapon
 
@@ -38,7 +33,7 @@ func _ready():
 
 	player_sm.initialise()
 
-	accept_modifiers()
+	animator_manager.accept_modifiers(anim_container)
 
 	# DEBUG ANIMATIONS
 	_reload_run_anims_from_library()
@@ -55,23 +50,7 @@ func update(input: InputPackage, delta: float):
 	player.move_and_slide()
 	
 
-func accept_modifiers():
-	var animators := [full_body_animator, legs_animator]
-	for animator: ModifierAnimator in animators:
-		animator.curr_anim = anim_container.get_by_name(A.combat_idle)
-		animator.curr_anim_looping = animator.curr_anim.is_looping
-		animator.curr_anim_progress = 0
-		animator.prev_anim = anim_container.get_by_name(A.combat_idle)
-		animator.prev_anim_looping = animator.prev_anim.is_looping
-		animator.prev_anim_progress = 0
-		animator.initialise()
-	_begin.initialise()
-	_end.initialise()
-	# limp.initialise()
-
-
-# BELOW DEV ONLY
-
+# region: DEV ONLY
 
 var fly_mode_enabled := false
 var fly_speed := 15
@@ -137,30 +116,14 @@ func _input(event: InputEvent) -> void:
 	# 	__apply()
 	
 	if event.is_action_pressed("dev_8"):
-		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0.1)
-		player_sm.full_body_animator.set_overlay_anim(A.hit_reaction, 0.12, 0.20, 0.18, 1)
-		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0, -1, 0, 1)
-		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
+		# animator_manager.play_overlay(A.hit_reaction, 0.1)
+		animator_manager.set_overlay_anim(A.hit_reaction, 0.12, 0.20, 0.18, 1)
+		# animator_manager.play_overlay(A.hit_reaction, 0, -1, 0, 1)
+		# animator_manager.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed("dev_9"):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		player_sm.full_body_animator.set_overlay_anim(A.hit_reaction, 0.2, 0.05, 0.2, 1)
-		# player_sm.full_body_animator.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
-
-
-# func __apply() -> void:
-# 	var run_action := container.action_by_name(PS.action_run)
-# 	var l_run_action := container.legs_action_by_name(LS.legs_action_run)
-# 	if run_anims.is_empty():
-# 		return
-# 	var anim_name: String = run_anims[_run_anim_i] # already "run-v5-LIB/Running"
-# 	if animation_player.has_animation(anim_name):
-# 		run_action.animation = anim_name
-# 		run_action.backend_animation = anim_name + A.PARAM_SUFFIX
-# 		l_run_action.animation = anim_name
-# 		print_.prefix(L.DEBUG, "run anim -> " + anim_name)
-# 	else:
-# 		print_.prefix(L.DEBUG, "run anim not found -> " + anim_name)
-
+		animator_manager.set_overlay_anim(A.hit_reaction, 0.2, 0.05, 0.2, 1)
+		# animator_manager.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
 func __fly_velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	var _velocity := Vector3.ZERO
@@ -186,3 +149,6 @@ func __fly_velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 		var d_vector := grounded_target - rotated_dir - player.global_position
 		_velocity += d_vector / delta
 	return _velocity
+
+
+# endregion

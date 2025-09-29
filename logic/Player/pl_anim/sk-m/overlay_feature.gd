@@ -74,7 +74,7 @@ func _update_blend_values(custom_delta):
 func apply_overlay(bone_idx: int, current_transform: Transform3D, animator: ModifierAnimator) -> Transform3D:
 	# --- Overlay on top of current_transform ---------------------------------------------------
 	if overlay_is_active and overlay_weight > 0:
-		var overlay_transform := animator.calculate_bone_pose(bone_idx, overlay_anim, overlay_anim_progress)
+		var overlay_transform := animator._calculate_bone_pose(bone_idx, overlay_anim, overlay_anim_progress)
 		current_transform = current_transform.interpolate_with(overlay_transform, overlay_weight)
 	return current_transform
 
