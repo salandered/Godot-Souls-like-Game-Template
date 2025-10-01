@@ -16,70 +16,47 @@ const RUN_START_COMMITMENT := 0.2 # seconds
 
 
 func _ready() -> void:
-	supported_actions = [
-		LS.legs_action_idle,
-		# LS.legs_action_sprint_start,
-		LS.legs_action_run,
-	]
+	var supported = {
+		MotionType.IDLE: Leg.Act.idle,
+		MotionType.START: Leg.Act.run,
+		MotionType.LOOP: Leg.Act.run,
+		MotionType.STOP: Leg.Act.run,
+	}
+	
+	supported_actions = SupportedActions.new(supported)
+		
 
-func update(input: InputPackage, delta: float) -> void:
-	_choose_action(input, delta)
-	legs_sm.current_action.update(input, delta)
-
-
-func _choose_action(input: InputPackage, delta: float) -> void:
+func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 	var is_moving := input.input_direction.length() >= START_THRESHOLD
 	var curr_action = legs_sm.current_action
+	var next_action = supported_actions.get_by_motion(curr_action.motion_type)
 
 	match curr_action.motion_type:
 		MotionType.IDLE:
-			if is_moving and curr_action.get_progress() > IDLE_COMMITMENT:
-				# switch_action_to(LS.legs_action_run_start, input)
-				switch_action_to(LS.legs_action_run, input)
-				return
+			if is_moving and curr_action.progress() > IDLE_COMMITMENT:
+				next_action = Leg.Act.run
+				print_.lsm_beh_ch(behavior_name, curr_action.motion_type, is_moving, pp.compare_w("prog >", "IDLE_COMMIT", IDLE_COMMITMENT), next_action)
 	
 		# MotionType.START:
 		# 	if is_moving:
 		# 		if current_action.DURATION / current_action.SPEED_SCALE - current_action.get_progress() < 0.1: # tweak may be
-		# 			switch_action_to(LS.legs_action_run, input)
+		# 			switch_action_to(Leg.Act.legs_action_run, input)
 		# 			return
 		# 	else:
 		# 		if current_action.get_progress() > RUN_START_COMMITMENT:
-		# 			switch_action_to(LS.legs_action_idle, input) # run end later
+		# 			switch_action_to(Leg.Act.legs_action_idle, input) # run end later
 		MotionType.LOOP:
 			if not is_moving:
-				switch_action_to(LS.legs_action_idle, input) # run end later
-		
-	# region: first version
-	# if input.input_direction != Vector2.ZERO:
-	# 	_idle_timer = 0.0
-	# 	switch_action_to(LS.legs_action_run, input)
-	# else:
-	# 	_idle_timer += delta
-	# 	if _idle_timer >= IDLE_COMMITMENT:
-	# 		switch_action_to(LS.legs_action_idle, input)
-	# endregion
+				next_action = Leg.Act.idle
+				print_.lsm_beh_ch(behavior_name, curr_action.motion_type, is_moving, "", next_action)
+	
+	return LNextActionVerdict.new(next_action)
 
 
-func choose_initial_action(input: InputPackage) -> String:
-	var initial_action: String
-	if input.input_direction != Vector2.ZERO:
-		initial_action = LS.legs_action_run
-	else:
-		initial_action = LS.legs_action_idle
-	print_.lsm_beh(" INITIAL", "based on input vector -> " + initial_action, 2)
-	return initial_action
+func choose_initial_action(input: InputPackage) -> LNextActionVerdict:
+	var curr_action = legs_sm.current_action
+	var initial_action_name := ""
 	
-	# NOTE Quesion: how to choose_initial_action if we came from double behavior. lets say sprint was using double. 
-	# or any loco state like sprint should be in legs now? Well i think yes
-	# NOTE: also we can use input.actions. like in sprint. but should we
-	
-	# [another approach]
-	# print_.lsm_beh(" INITIAL", "using idle choose_initial_action based on " + str(legs_sm.current_action.motion_type), 1)
-	# match legs_sm.current_action.motion_type:
-	# 	legs_sm.MotionType.IDLE:
-	# 		switch_action_to(LS.legs_action_idle, input)
-	# 		return
-	# 	legs_sm.MotionType.CYCLE:
-	# 		switch_action_to(LS.legs_action_run, input)
-	# 		return
+	initial_action_name = supported_actions.get_by_motion(curr_action.motion_type)
+	print_.lsm_beh("INITIAL", pp.s("based on curr_act motion", curr_action.motion_type, "->", initial_action_name))
+	return LNextActionVerdict.new(initial_action_name)

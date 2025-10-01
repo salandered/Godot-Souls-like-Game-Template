@@ -8,12 +8,13 @@ class MarkerName:
 
 	# specific
 	const JUMP_LAUNCH = "jump_launch"
+	const LOCO_LOOP_L_LEG_FULL_CONTACT = "left_leg_full_contact"
 
 
 class Marker extends RefCounted:
 	var time: float
 	var marker_name: String
 
-	func _init(time_: float = -1, marker_name_: String = "") -> void:
+	func _init(time_: float, marker_name_: String) -> void:
 		time = time_
 		marker_name = marker_name_

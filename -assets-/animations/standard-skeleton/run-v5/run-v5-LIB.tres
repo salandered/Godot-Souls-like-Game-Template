@@ -4,6 +4,11 @@
 resource_name = "B Fast Run (1) v2"
 length = 0.56666666
 loop_mode = 1
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"left_leg_full_contact",
+"time": 0.23333333
+}]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -394,6 +399,11 @@ tracks/54/keys = PackedFloat32Array(0, 1, -1.9220169e-08, 0.99985117, 0.01725179
 resource_name = "B Fast Run v2"
 length = 0.6666667
 loop_mode = 1
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"left_leg_full_contact",
+"time": 0.23333333
+}]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -785,9 +795,13 @@ resource_name = "B-Jog-Forward-v2"
 length = 0.8333333
 loop_mode = 1
 markers = [{
-"color": Color(1, 0.23137255, 0.09019608, 1),
-"name": &"start",
-"time": 0.26666668
+"color": Color(1, 1, 1, 1),
+"name": &"left_leg_full_contact",
+"time": 0.29053715
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"test_start",
+"time": 0.2667
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

@@ -33,7 +33,7 @@ func _manage_weapon():
 
 
 func on_enter_state():
-	print_.se(state_name + " on_enter", "weapon hb ignore " + str(right_weapon.hitbox_ignore_list) + " reset", 1, L.FORCE_PRINT)
+	print_.se(state_name + " on_enter", "weapon hb ignore " + str(right_weapon.hitbox_ignore_list) + " reset", 1, LogL.FORCE_PRINT)
 	iteration_commitment = animation_length
 	right_weapon.hitbox_ignore_list.clear()
 	right_weapon.is_attacking = false

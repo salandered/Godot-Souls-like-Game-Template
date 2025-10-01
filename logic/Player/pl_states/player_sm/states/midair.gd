@@ -10,7 +10,7 @@ var peak_reached := false
 
 func on_enter_state(input: InputPackage) -> void:
 	peak_reached = player.velocity.y <= 0
-	print_.psm("on enter " + state_name, pp.ts("peak_reached", peak_reached,
+	print_.psm(pp.on_ent + state_name, pp.s("peak_reached", peak_reached,
 	"jump_fall_gravity", player.jump_data.jump_fall_gravity,
 	"jump_up_gravity", player.jump_data.jump_up_gravity))
 	
@@ -29,7 +29,7 @@ func update(input: InputPackage, delta: float) -> void:
 	apply_air_control(input, delta)
 	
 	debug_velocities()
-	# print_.psm(state_name, pp.ts("player vel:", pp.pp_vec3(player.velocity), "peak_reached", peak_reached))
+	# print_.psm(state_name, pp.s("player vel:", pp.pp_vec3(player.velocity), "peak_reached", peak_reached))
 
 func apply_air_control(input: InputPackage, delta: float) -> void:
 	var input_dir := velocity_by_input(input, delta)
@@ -69,7 +69,7 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	
 	# # Trigger landing animation early (0.2s before impact)
 	# if time_to_impact < 0.2 and player.velocity.y < 0:
-	# 	  print_.psm("midair", pp.ts("Pre-landing trigger: ", time_to_impact, "s to impact"))
+	# 	  print_.psm("midair", pp.s("Pre-landing trigger: ", time_to_impact, "s to impact"))
 		# return PLVerdict.new(PS.landing_run)
 	return PLVerdict.new("")
 

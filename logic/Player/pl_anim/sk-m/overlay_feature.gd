@@ -10,8 +10,7 @@ class_name OverlayFeature
 # var overlay_blend_time_spent: float = 0 # seconds
 # var overlay_blending_percentage: float = 0 # [0 ; 1]
 
-var overlay_anim: AnimationData
-var overlay_anim_progress := 0.0
+var overlay_playback: AnimPlayback
 var overlay_is_active := false
 
 var overlay_fade_in := 0.1 # seconds
@@ -31,22 +30,22 @@ var overlay_local_speed := 1.0
 	
 # 	overlay_blend_duration = max(over_time, 0.01)
 	
-# 	overlay_anim = native_animator.get_animation(next_animation)
-# 	if overlay_anim == null:
+# 	overlay_playback = native_animator.get_animation(next_animation)
+# 	if overlay_playback == null:
 # 		push_error("Overlay animation not found: " + next_animation)
 # 		is_overlay_active = false
 # 		return
 	
 # 	overlay_anim_progress = 0
-# 	overlay_anim_cycling = overlay_anim.loop_mode == Animation.LoopMode.LOOP_LINEAR
+# 	overlay_anim_cycling = overlay_playback.loop_mode == Animation.LoopMode.LOOP_LINEAR
 # endregion
-func set_overlay_anim(_overlay_anim: AnimationData, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
-	overlay_anim = _overlay_anim
+func set_overlay_anim(anim: AnimationData, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
+	overlay_playback = AnimPlayback.new(anim, 0.0, 0.0)
+	
 	overlay_fade_in = max(fade_in, 0.01)
 	overlay_fade_out = max(fade_out, 0.01)
-	overlay_hold = overlay_anim.duration - overlay_fade_in - overlay_fade_out if hold < 0 else hold
+	overlay_hold = overlay_playback.anim.duration - overlay_fade_in - overlay_fade_out if hold < 0 else hold
 	
-	overlay_anim_progress = 0
 	overlay_local_speed = local_speed # new var; see §3
 	overlay_is_active = true
 	overlay_weight = 0
@@ -57,9 +56,9 @@ func set_overlay_anim(_overlay_anim: AnimationData, fade_in: float = 0.1, hold: 
 func _update_blend_values(custom_delta):
 	# Overlay fade-in / hold / fade-out
 	if overlay_is_active:
-		overlay_anim_progress += custom_delta * overlay_local_speed
+		overlay_playback.time_spent += custom_delta * overlay_local_speed
 
-		var t := overlay_anim_progress
+		var t := overlay_playback.time_spent
 		if t < overlay_fade_in:
 			overlay_weight = t / overlay_fade_in
 		elif t < overlay_fade_in + overlay_hold:
@@ -74,7 +73,7 @@ func _update_blend_values(custom_delta):
 func apply_overlay(bone_idx: int, current_transform: Transform3D, animator: ModifierAnimator) -> Transform3D:
 	# --- Overlay on top of current_transform ---------------------------------------------------
 	if overlay_is_active and overlay_weight > 0:
-		var overlay_transform := animator._calculate_bone_pose(bone_idx, overlay_anim, overlay_anim_progress)
+		var overlay_transform := animator._calculate_bone_pose(bone_idx, overlay_playback)
 		current_transform = current_transform.interpolate_with(overlay_transform, overlay_weight)
 	return current_transform
 
@@ -84,5 +83,5 @@ func apply_overlay(bone_idx: int, current_transform: Transform3D, animator: Modi
 	# Overlay timing
 	# if is_overlay_active:
 	# 	overlay_anim_progress += custom_delta * speed_scale
-	# 	if overlay_anim_progress > overlay_anim.length and overlay_anim_cycling:
-	# 		overlay_anim_progress = fmod(overlay_anim_progress, overlay_anim.length)
+	# 	if overlay_anim_progress > overlay_playback.length and overlay_anim_cycling:
+	# 		overlay_anim_progress = fmod(overlay_anim_progress, overlay_playback.length)

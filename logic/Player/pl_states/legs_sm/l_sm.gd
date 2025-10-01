@@ -33,8 +33,8 @@ class TranferData extends RefCounted:
 		return null
 
 	func fill(action_name_: String, data_: Dictionary):
-		var msg = pp.ts("| keys:", str(data_.keys()) + str(data_.values()) if data_ is Dictionary else "| data is not a Dict" + em.warn)
-		print_.lsm_beh("TransferData fill for " + pp.in_q(action_name_), msg, 2)
+		var msg = pp.s("| keys:", pp._dict(data_) if data_ is Dictionary else "| data is not a Dict" + em.warn)
+		print_.lsm_beh("TransferData fill for " + pp.in_q(action_name_), msg)
 		action_name = action_name_
 		_transfer = data_.duplicate_deep()
 
@@ -44,7 +44,7 @@ var current_behavior: LegsBehavior
 # It should belong here! current_action is managed by the "pool" of actions. 
 # Behavior changes may or may NOT change current action.
 var current_action: LegsAction
-
+var prev_action: LegsAction
 
 func update(input: InputPackage, delta: float) -> void:
 	current_behavior.update(input, delta)
@@ -52,9 +52,9 @@ func update(input: InputPackage, delta: float) -> void:
 
 func switch_to(next_behavior: LegsBehavior, input: InputPackage):
 	if next_behavior == current_behavior:
-		print_.lsm_beh("", "not switching legs (same behavior) " + current_behavior.behavior_name, 2)
+		print_.lsm_beh("", "not switching legs (same behavior) " + current_behavior.behavior_name)
 		return
-	print_.lsm_beh("↪️", pp.ts(current_behavior.behavior_name, "=>", next_behavior.behavior_name), 2)
+	print_.lsm_beh("↪️", pp.s(current_behavior.behavior_name, "=>", next_behavior.behavior_name))
 	current_behavior._on_exit_behavior()
 	current_behavior = next_behavior
 	current_behavior._on_enter_behavior(input)

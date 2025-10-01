@@ -1,13 +1,5 @@
 extends PlayerState
 
-## we have a main state called run, and it uses the legs behavior called run_legs. 
-
-## in container set for run state legs_behavior = RunLegs Node
-
-# func update(input: InputPackage, delta: float):
-# 	current_action.update(input, delta)
-
-
 func check_transition(input: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
 		return PLVerdict.new(PS.midair)

@@ -26,9 +26,10 @@ var _player_state_data: Dictionary = { # { Node name : PSData }
 	# move
 	# "Walk": PSData.new(PS.walk, 2),
 	# TODO: seems like depends_on_legs_ true equails to having not legs_double_beh default
-	"Run": PSData.new(PS.run, 2, LS.legs_behavior_run, true),
+	"Idle": PSData.new(PS.idle, 1, Leg.Beh.idle, true),
+	"Run": PSData.new(PS.run, 2, Leg.Beh.run, true),
 	"Strafe": PSData.new(PS.strafe, 3),
-	"Sprint": PSData.new(PS.sprint, 3, LS.legs_behavior_sprint, true),
+	"Sprint": PSData.new(PS.sprint, 3, Leg.Beh.sprint, true),
 	"JumpRun": PSData.new(PS.jump_run, 10),
 	"JumpSprint": PSData.new(PS.jump_sprint, 10),
 	"Midair": PSData.new(PS.midair, 10),
@@ -39,7 +40,7 @@ var _player_state_data: Dictionary = { # { Node name : PSData }
 	# fight
 	"Longsword1": PSData.new(PS.longsword_1, 15),
 	"Longsword2": PSData.new(PS.longsword_2, 15),
-	"Block": PSData.new(PS.block, 21, LS.legs_behavior_run),
+	"Block": PSData.new(PS.block, 21, Leg.Beh.run),
 	"BlockReaction": PSData.new(PS.block_reaction, 90),
 	"Withdraw": PSData.new(PS.withdraw, 15),
 	"ShieldThrow": PSData.new(PS.shield_throw, 16),
@@ -54,28 +55,28 @@ var _player_state_data: Dictionary = { # { Node name : PSData }
 
 var _player_action_data: Dictionary = { # { Node name : PlayerActionData }
 	# move
-	# "Walk": PlayerActionData.new(PS.walk,PS.action_block, A.walk, ),
-	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_strafe, A.run_R, ),
-	"JumpRunAction": PlayerActionData.new(PS.jump_run, PS.action_jump_run, A.jump_run, ),
-	"JumpSprintAction": PlayerActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint, ),
-	"MidairAction": PlayerActionData.new(PS.midair, PS.action_midair, A.midair, ),
-	"LandingRunAction": PlayerActionData.new(PS.landing_run, PS.action_landing_run, A.landing_run, ),
-	"LandingSprintAction": PlayerActionData.new(PS.landing_sprint, PS.action_landing_sprint, A.landing_sprint, ),
-	"RollAction": PlayerActionData.new(PS.roll, PS.action_roll, A.roll, ),
-	"DeathAction": PlayerActionData.new(PS.death, PS.action_death, A.death, ),
+	# "Walk": PlayerActionData.new(PS.walk,PS.action_block, A.walk ),
+	"StrafeAction": PlayerActionData.new(PS.strafe, PS.action_strafe, A.run_R),
+	"JumpRunAction": PlayerActionData.new(PS.jump_run, PS.action_jump_run, A.jump_run),
+	"JumpSprintAction": PlayerActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint),
+	"MidairAction": PlayerActionData.new(PS.midair, PS.action_midair, A.midair),
+	"LandingRunAction": PlayerActionData.new(PS.landing_run, PS.action_landing_run, A.landing_run),
+	"LandingSprintAction": PlayerActionData.new(PS.landing_sprint, PS.action_landing_sprint, A.landing_sprint),
+	"RollAction": PlayerActionData.new(PS.roll, PS.action_roll, A.roll),
+	"DeathAction": PlayerActionData.new(PS.death, PS.action_death, A.death),
 	# fight
 	"Longsword1Action": PlayerActionData.new(PS.longsword_1, PS.action_longsword_1, A.longsword_1),
-	"Longsword2Action": PlayerActionData.new(PS.longsword_2, PS.action_longsword_2, A.longsword_2, ),
-	"BlockAction": PlayerActionData.new(PS.block, PS.action_block, A.block_forward, ),
-	"BlockReactionAction": PlayerActionData.new(PS.block_reaction, PS.action_block_reaction, A.block_reaction, ),
-	"WithdrawAction": PlayerActionData.new(PS.withdraw, PS.action_withdraw, A.withdraw, ),
-	"ShieldThrowAction": PlayerActionData.new(PS.shield_throw, PS.action_shield_throw, A.shield_throw, ),
-	"ShieldThrowReloadAction": PlayerActionData.new(PS.shield_throw_reload, PS.action_shield_throw_reload, A.shield_throw_reload, ),
-	"PushbackAction": PlayerActionData.new(PS.pushback, PS.action_pushback, A.pushback, ),
-	"StaggeredAction": PlayerActionData.new(PS.staggered, PS.action_staggered, A.staggered, ),
-	"ParryAction": PlayerActionData.new(PS.parry, PS.action_parry, A.parry, ),
-	"ParriedAction": PlayerActionData.new(PS.parried, PS.action_parried, A.parried, ),
-	"RiposteAction": PlayerActionData.new(PS.riposte, PS.action_riposte, A.riposte_attack, ),
+	"Longsword2Action": PlayerActionData.new(PS.longsword_2, PS.action_longsword_2, A.longsword_2),
+	"BlockAction": PlayerActionData.new(PS.block, PS.action_block, A.block_forward),
+	"BlockReactionAction": PlayerActionData.new(PS.block_reaction, PS.action_block_reaction, A.block_reaction),
+	"WithdrawAction": PlayerActionData.new(PS.withdraw, PS.action_withdraw, A.withdraw),
+	"ShieldThrowAction": PlayerActionData.new(PS.shield_throw, PS.action_shield_throw, A.shield_throw),
+	"ShieldThrowReloadAction": PlayerActionData.new(PS.shield_throw_reload, PS.action_shield_throw_reload, A.shield_throw_reload),
+	"PushbackAction": PlayerActionData.new(PS.pushback, PS.action_pushback, A.pushback),
+	"StaggeredAction": PlayerActionData.new(PS.staggered, PS.action_staggered, A.staggered),
+	"ParryAction": PlayerActionData.new(PS.parry, PS.action_parry, A.parry),
+	"ParriedAction": PlayerActionData.new(PS.parried, PS.action_parried, A.parried),
+	"RiposteAction": PlayerActionData.new(PS.riposte, PS.action_riposte, A.riposte_attack),
 }
 
 func _get_actions_by_state(state: String) -> Array[PlayerActionData]:
@@ -88,23 +89,21 @@ func _get_actions_by_state(state: String) -> Array[PlayerActionData]:
 
 
 var _legs_behavior_data: Dictionary = {
-	# "IdleLegs": LegBehaviorData.new(LS.legs_idle_behavior),
-	"RunLegs": LegBehaviorData.new(LS.legs_behavior_run),
-	"SprintLegs": LegBehaviorData.new(LS.legs_behavior_sprint),
-	# "AirLegs": LegBehaviorData.new(LS.legs_air_behavior),
-	"DoubleLegs": LegBehaviorData.new(LS.legs_behavior_double),
+	"IdleLegs": LegBehaviorData.new(Leg.Beh.idle),
+	"RunLegs": LegBehaviorData.new(Leg.Beh.run),
+	"SprintLegs": LegBehaviorData.new(Leg.Beh.sprint),
+	# "AirLegs": LegBehaviorData.new(Leg.legs_air_behavior),
+	"DoubleLegs": LegBehaviorData.new(Leg.Beh.double),
 }
 
 var _legs_action_data: Dictionary = {
-	"IdleAction": LegActionData.new(LS.legs_action_idle, A.combat_idle, 0.2, MotionType.IDLE),
-	"WalkStartAction": LegActionData.new(LS.legs_action_walk_start, A.combat_walk_start, 0.2, MotionType.START),
-	"SprintStartAction": LegActionData.new(LS.legs_action_sprint_start, A.combat_sprint_start, 0.2, MotionType.START),
-	"RunAction": LegActionData.new(LS.legs_action_run, A.combat_run, 0.2, MotionType.LOOP),
-	"SprintAction": LegActionData.new(LS.legs_action_sprint, A.combat_sprint, 0.6, MotionType.LOOP),
-	# "JumpStartAction": LegActionData.new(LS.legs_action_jump_start, A.jump_run, MotionType.IDLE),
-	# "AirAction": LegActionData.new(LA.midair, MotionType.IDLE),
-	# "LandAction": LegActionData.new(LS.legs_action_land, A.landing_run, MotionType.IDLE),
-	"DoubleAction": LegActionData.new(LS.legs_action_double, A.fake_anim, 0.2, MotionType.IDLE),
+	"IdleAction": LegActionData.new(Leg.Act.idle, A.combat_idle, MotionType.IDLE),
+	"WalkStartAction": LegActionData.new(Leg.Act.walk_start, A.combat_walk_start, MotionType.START),
+	"IdleToSprintAction": LegActionData.new(Leg.Act.idle_to_sprint, A.combat_idle_to_sprint, MotionType.START),
+	# "RunToSprintAction": LegActionData.new(Leg.Act.run_to_sprint, A.combat_sprint_start,  MotionType.START),
+	"RunAction": LegActionData.new(Leg.Act.run, A.combat_run, MotionType.LOOP),
+	"SprintAction": LegActionData.new(Leg.Act.sprint, A.combat_sprint, MotionType.LOOP),
+	"DoubleAction": LegActionData.new(Leg.Act.double, A.fake_anim, MotionType.IDLE),
 }
 
 
@@ -201,9 +200,8 @@ func accept_player_actions():
 	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
 		print_.container("", "child.get_name() " + child.get_name())
 		var action_data: PlayerActionData = _player_action_data.get(child.get_name())
-		# assert(action_data, "PlayerActionData for " + child.get_name() + " not found")
 		if not action_data:
-			push_error("No action data found for: " + child.get_name())
+			print_.warn("No action data found for: " + child.get_name() + " Will be skipped")
 			continue
 		print_.container("", "action_data.action_name " + action_data.action_name)
 
@@ -217,15 +215,15 @@ func accept_player_actions():
 		child.anim_container = anim_container
 
 		# specific
-		var anim := anim_container.get_by_name(action_data.animation_name)
+		var anim := anim_container.get_by_name(action_data.anim_id)
 		child.anim = anim
+		child.anim_id = anim.anim_id
 		child.anim_name = anim.anim_name
 		child.DURATION = anim.duration
-		child.blend_time = action_data.blend_time
 		child.action_name = action_data.action_name
 
 		assert(child.action_name and not child.action_name.is_empty(), " action_name problem")
-		assert(child.anim_name and not child.anim_name.is_empty(), " animation problem for action: " + child.action_name)
+		assert(child.anim_id and not child.anim_id.is_empty(), " animation problem for action: " + child.action_name)
 	print_.container("", "===========  Accepted actions ===========")
 	print_.container("", str(_player_actions))
 	print("")
@@ -257,7 +255,7 @@ func accept_legs_actions():
 		print_.container("", "node.get_name() " + child.get_name())
 		var action_data: LegActionData = _legs_action_data.get(child.get_name())
 		if not action_data:
-			push_error("No action data found for: " + child.get_name())
+			print_.warn("No action data found for: " + child.get_name() + " Will be skipped")
 			continue
 		print_.container("", "action_data.action_name " + action_data.action_name)
 		_leg_actions[action_data.action_name] = child
@@ -271,17 +269,17 @@ func accept_legs_actions():
 
 
 		# specific
-		var anim := anim_container.get_by_name(action_data.animation_name)
+		var anim := anim_container.get_by_name(action_data.anim_id)
 		child.anim = anim
+		child.anim_id = anim.anim_id
 		child.anim_name = anim.anim_name
 		child.DURATION = anim.duration
 		
 		child.action_name = action_data.action_name
-		child.blend_time = action_data.blend_time
 		child.motion_type = action_data.motion_type
 
 		assert(child.action_name and not child.action_name.is_empty(), "action_name problem for")
-		assert(child.anim_name and not child.anim_name.is_empty(), " animation problem for action: " + child.action_name)
+		assert(child.anim_id and not child.anim_id.is_empty(), " animation problem for action: " + child.action_name)
 		
 
 func states_priority_sort(a: String, b: String) -> bool:

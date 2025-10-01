@@ -9,7 +9,6 @@ var _long_press_triggered: bool = false
 
 func gather_input(delta: float) -> InputPackage:
 	var new_input = InputPackage.new()
-	new_input.duplicate_deep()
 	_gather_lock_target(new_input, delta)
 	
 
@@ -22,15 +21,15 @@ func gather_input(delta: float) -> InputPackage:
 
 	# MOVEMENT
 
-	new_input.actions.append(PS.run) # was idle as default
-
 	new_input.input_direction = Input.get_vector(
 		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
 	
 	# MAIN
+	new_input.actions.append(PS.idle) # was idle as default
+	
 	if new_input.input_direction != Vector2.ZERO:
-		# new_input.actions.append(PS.run)
+		new_input.actions.append(PS.run)
 		if Input.is_action_pressed(RawAction.sprint): # sprint is hidden here to avoid standing in place and sprinting
 			new_input.actions.append(PS.sprint)
 	

@@ -1,6 +1,8 @@
 @tool
 @icon("res://-assets-/x_misc/x_icons/node-colors/purple.png")
 extends Node
+
+## NOTE: CLIENT CODE COMMUNICATES WITH ANIMATORS ONLY VIA THIS FACADE
 class_name AnimatorManager
 
 @onready var full_body: ModifierAnimator = %FullBody
@@ -9,40 +11,75 @@ class_name AnimatorManager
 @onready var _begin: BeginModifier = %_Begin
 @onready var _end: EndModifier = %_End
 
+@onready var anim_container: PlayerAnimationContainer = %AnimContainer
+
+## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
+
 func set_overlay_anim(anim_name: String, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0) -> void:
-	full_body.set_overlay_anim(anim_name, fade_in, hold, fade_out, local_speed)
+	var anim: AnimationData = anim_container.get_by_name(anim_name)
+	if anim == null:
+		push_error("Overlay anim not found: " + anim_name)
+		return
+	full_body.set_overlay_anim(anim, fade_in, hold, fade_out, local_speed)
 
 
-func set_anim_to_play(anim_name: String, blend_for: float = 0) -> void:
-	full_body.set_anim_to_play(anim_name, blend_for)
+func set_anim_to_play(anim_name: String, blend_for: float = 0, start_time_offset: float = 0) -> void:
+	if blend_for < 0:
+		print_.warn("blend_for < 0 is not supported, 0 will be used:" + str(blend_for))
+		blend_for = 0
 
+	if start_time_offset < 0:
+		print_.warn("start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset))
+		start_time_offset = 0
 
-func get_root_velocity(y_zeroed: bool = true) -> Vector3:
-	return full_body.get_root_velocity(y_zeroed)
+	var anim: AnimationData = anim_container.get_by_name(anim_name)
+	if anim == null:
+		push_error("set_anim_to_play fail: animation not found: " + anim_name)
+		return
 
-
-func get_current_anim_progress() -> float:
-	return full_body.get_current_anim_progress()
+	full_body.set_anim_to_play(anim, blend_for, start_time_offset)
 
 
 func set_global_speed_scale(new_scale: float):
-	full_body.set_global_speed_scale(new_scale)
+	var max_speed_scale = 2
+	var min_speed_scale = 0.4
+	new_scale = snappedf(new_scale, 0.01)
+	if new_scale < min_speed_scale or new_scale > max_speed_scale:
+		# u.print_warn(pp.s("extreme speed scale:", new_scale, "Was:", global_speed_scale, "Will be clamped between", max_speed_scale))
+		new_scale = clamp(new_scale, min_speed_scale, max_speed_scale)
+	
+	if absf(full_body.global_speed_scale - new_scale) > 0.001:
+		full_body.set_global_speed_scale(new_scale)
 
 
 func reset_global_speed_scale():
 	full_body.reset_global_speed_scale()
 
 
-func accept_modifiers(anim_container):
-	var animators := [full_body, legs]
-	for animator: ModifierAnimator in animators:
-		animator.curr_anim = anim_container.get_by_name(A.combat_idle)
-		animator.curr_anim_looping = animator.curr_anim.is_looping
-		animator.curr_anim_progress = 0
-		animator.prev_anim = anim_container.get_by_name(A.combat_idle)
-		animator.prev_anim_looping = animator.prev_anim.is_looping
-		animator.prev_anim_progress = 0
-		animator.initialise()
+## READ INFO ABOUT WHAT'S PLAYING
+
+func get_root_velocity(y_zeroed: bool = true) -> Vector3:
+	return full_body.get_root_velocity(y_zeroed)
+
+
+func get_current_anim_effective_progress() -> float:
+	return full_body.curr_playback.get_effective_progress()
+
+
+func get_current_anim_time_spent() -> float:
+	return full_body.curr_playback.time_spent
+
+
+func get_current_blend_duration() -> float:
+	return full_body.blend_playback.duration
+
+## INTERNAL
+
+func _accept_modifiers():
+	var initial_anim = anim_container.get_by_name(A.combat_idle)
+	full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
+	full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
+	full_body.initialise()
+	
 	_begin.initialise()
 	_end.initialise()
-	# limp.initialise()

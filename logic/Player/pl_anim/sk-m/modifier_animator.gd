@@ -6,29 +6,8 @@ class_name ModifierAnimator
 @export var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
 @onready var skeleton = get_skeleton()
 @onready var overlay: OverlayFeature = %overlay ## responsible for overlaying another anim
-@onready var anim_container: PlayerAnimationContainer = %AnimContainer
 
 @export var animator_name: String ## name of animator
-
-var curr_anim: AnimationData
-# Animation can be cyclical to be playing in loop
-var curr_anim_looping: bool = true
-# counts progress for data interpolation. 
-var curr_anim_progress: float = 0 # seconds
-
-# for blending between two animations
-var prev_anim: AnimationData
-var prev_anim_looping: bool = true
-var prev_anim_progress: float = 0 # seconds
-
-# is_blending decides if we blend between the animations
-# `blending_percentage`:
-#    - If zero, then it's full previous animation. If one, we play full current animation.
-#    - Is calculated using the time over which we blend and counting the progress of the process.
-var is_blending: bool = false
-var blend_duration: float # seconds
-var blend_time_spent: float # seconds
-var blending_percentage: float # [0 ; 1]
 
 # TODO: Unix time in milliseconds, just as in model states. 
 # Need a better time calculation
@@ -43,8 +22,15 @@ var prev_transform: Transform3D
 var __initialised: bool = false
 
 ## for animation non related effects like slow mo
-## animation speed scale stored in itslef and is handled separately
-var global_speed_scale := 1.0
+## note that animation may have it's own speed scale. They will be multiplied.
+var _dev_hard_speed_scale = true # for tests
+var global_speed_scale := 1
+
+var blend_playback := BlendPlayback.new()
+
+var curr_playback: AnimPlayback
+## for blending between two animations
+var prev_playback: AnimPlayback
 
 
 func initialise():
@@ -59,41 +45,22 @@ func initialise():
 	__initialised = true
 
 
-func set_overlay_anim(anim_name: String, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
-	var anim: AnimationData = anim_container.get_by_name(anim_name)
-	if anim == null:
-		push_error("Overlay anim not found: " + anim_name)
-		return
+func set_overlay_anim(anim: AnimationData, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
 	overlay.set_overlay_anim(anim, fade_in, hold, fade_out, local_speed)
 
 
-func set_anim_to_play(anim_name: String, blend_for: float = 0):
-	if blend_for < 0:
-		push_error("can't blend two animations over " + str(blend_for))
-		blend_for = 0
-	
-	var anim: AnimationData = anim_container.get_by_name(anim_name)
-	if anim == null:
-		push_error("Animation not found: " + anim_name)
-		return
-
+func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):
 	last_processing_time = Time.get_unix_time_from_system()
 	
-	prev_anim = curr_anim
-	prev_anim_looping = curr_anim_looping
-	prev_anim_progress = curr_anim_progress
-	
-	curr_anim = anim
-	# NOTE: progress always starts with 0. Custom start_time will be added when 
-	#       getting info from the native (original animation)
-	curr_anim_progress = 0
-	curr_anim_looping = curr_anim.is_looping
+	blend_playback.reset()
+
+	prev_playback = curr_playback
+	curr_playback = AnimPlayback.new(anim, 0.0, start_time_offset)
 
 	if blend_for > 0:
-		is_blending = true
-		blend_duration = blend_for
-		blend_time_spent = 0
-		blending_percentage = 0
+		blend_playback.start(blend_for)
+
+	print_.skm(animator_name, __log_state())
 
 
 func _process_modification():
@@ -106,83 +73,68 @@ func _process_modification():
 func _update_time():
 	# Each frame we manage our time awareness. 
 		# - Calculate the custom_delta between now and the last call.
-		# - Then add this custom_delta to curr anim progresses.
+		# - Then add this custom_delta to curr anim's time_spent.
 	now = Time.get_unix_time_from_system()
 	custom_delta = now - last_processing_time
 	last_processing_time = now
 
-	curr_anim_progress += custom_delta * _EFFECTIVE_SPEED_SCALE(curr_anim)
-	prev_anim_progress += custom_delta * _EFFECTIVE_SPEED_SCALE(prev_anim)
-	# if curr_anim.anim_name == A.combat_run:
-		# print("~~~", str(curr_anim))
-	if curr_anim_progress > curr_anim.duration and curr_anim_looping:
-		curr_anim_progress = fmod(curr_anim_progress, curr_anim.duration)
-	if prev_anim_progress > prev_anim.duration and prev_anim_looping:
-		prev_anim_progress = fmod(prev_anim_progress, prev_anim.duration)
+	curr_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
+	
+	if blend_playback.is_blending:
+		prev_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(prev_playback)
+
+	if curr_playback.time_spent > curr_playback.anim.duration and curr_playback.anim.is_looping:
+		curr_playback.time_spent = fmod(curr_playback.time_spent, curr_playback.anim.duration)
+	if blend_playback.is_blending and prev_playback.time_spent > prev_playback.anim.duration and prev_playback.anim.is_looping:
+		prev_playback.time_spent = fmod(prev_playback.time_spent, prev_playback.anim.duration)
 
 
-# We use the custom_delta time value we just got and add it to blending_time_counter, 
-# and then we update blending_percentage value. 
 func _update_blend_values():
-	if is_blending:
-		blend_time_spent += custom_delta
-		blending_percentage = blend_time_spent / blend_duration
-		if blending_percentage >= 1:
-			blending_percentage = 1
-			blend_time_spent = 0
-			is_blending = false
+	blend_playback.update(custom_delta)
 	overlay._update_blend_values(custom_delta)
+
 
 func _update_skeleton():
 	for bone_idx in bone_list:
-		# For each suggested bone, we first calculate its pose according to the `curr_anim` and its progress.
+		# For each suggested bone, we first calculate its pose according to the `curr_playback` and its time spent.
 		#   - If we don't blend, that's our work for the bone.
-		#   - If we do blend, we need to also calculate this bone's pose according to the `prev_anim` and its progress, and then interpolate those two transforms via `blending_progress` value.
-		curr_transform = _calculate_bone_pose(bone_idx, curr_anim, curr_anim_progress)
-		if is_blending:
-			prev_transform = _calculate_bone_pose(bone_idx, prev_anim, prev_anim_progress)
-			curr_transform = prev_transform.interpolate_with(curr_transform, blending_percentage)
+		#   - If we do blend, we need to also calculate this bone's pose according to the `prev_playback` and its time spent, 
+		#     and then interpolate those two transforms via blending progress.
+		curr_transform = _calculate_bone_pose(bone_idx, curr_playback)
+		if blend_playback.is_blending:
+			prev_transform = _calculate_bone_pose(bone_idx, prev_playback)
+			curr_transform = prev_transform.interpolate_with(curr_transform, blend_playback.percentage)
 		
 		curr_transform = overlay.apply_overlay(bone_idx, curr_transform, self)
 		skeleton.set_bone_pose(bone_idx, curr_transform)
 	
-func _calculate_bone_pose(bone_idx: int, anim: AnimationData, anim_progress: float) -> Transform3D:
+
+func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
 	# - We search for a position track by turning our bone index into track path.
 	# 	  - If -1, it means that `AnimationResource` doesn't contain such a track. For example, that bone doesn't move in this animation. 
 	# 	In this case, we set transform's `origin` to the origin of our bone; we don't touch it.
-	# 	  - If we find the track, we interpolate the value from it using progress.
-	# - then we do the same with rotation. The only difference is type casting because animation stores rotation data in quaternions, but `Transform3D` stores it in basis vector triples.
+	# 	  - If we find the track, we interpolate the value from it using effective anim time.
+	# - then we do the same with rotation. Difference is type casting because animation stores rotation data in quaternions, but `Transform3D` stores it in basis vector triples.
 	var result_transform: Transform3D
 	
-	var bone_position_track := anim.native_anim.find_track(_bone_to_track_name(bone_idx), Animation.TYPE_POSITION_3D)
+	var bone_position_track := playback.native_anim.find_track(_bone_to_track_name(bone_idx), Animation.TYPE_POSITION_3D)
 	if bone_position_track != -1:
-		result_transform.origin = anim.native_anim.position_track_interpolate(bone_position_track, _SAMPLE_TIME(anim))
+		result_transform.origin = playback.native_anim.position_track_interpolate(bone_position_track, playback.get_effective_progress())
 	else:
 		result_transform.origin = skeleton.get_bone_pose(bone_idx).origin
 
-	var bone_rotation_track := anim.native_anim.find_track(_bone_to_track_name(bone_idx), Animation.TYPE_ROTATION_3D)
+	var bone_rotation_track := playback.native_anim.find_track(_bone_to_track_name(bone_idx), Animation.TYPE_ROTATION_3D)
 	if bone_rotation_track != -1:
-		result_transform.basis = Basis(anim.native_anim.rotation_track_interpolate(bone_rotation_track, _SAMPLE_TIME(anim)))
+		result_transform.basis = Basis(playback.native_anim.rotation_track_interpolate(bone_rotation_track, playback.get_effective_progress()))
 	else:
 		result_transform.basis = skeleton.get_bone_pose(bone_idx).basis
 	
 	return result_transform
 
-func _SAMPLE_TIME(anim: AnimationData) -> float:
-	if anim == curr_anim:
-		if curr_anim_looping:
-			return fmod(curr_anim_progress + curr_anim.start_time, curr_anim.duration)
-		else:
-			return curr_anim_progress + curr_anim.start_time
-	else:
-		if prev_anim_looping:
-			return fmod(prev_anim_progress + prev_anim.start_time, prev_anim.duration)
-		else:
-			return prev_anim_progress + prev_anim.start_time
 
+func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
+	return global_speed_scale * playback.anim.speed_scale
 
-func _EFFECTIVE_SPEED_SCALE(anim: AnimationData) -> float:
-	return global_speed_scale * anim.speed_scale
 
 func _bone_to_track_name(bone_index: int) -> String:
 	return "%GeneralSkeleton:" + skeleton.get_bone_name(bone_index)
@@ -190,13 +142,13 @@ func _bone_to_track_name(bone_index: int) -> String:
 
 func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 	var root_track_path := _bone_to_track_name(0)
-	var pos_track := curr_anim.native_anim.find_track(root_track_path, Animation.TYPE_POSITION_3D)
-	if pos_track == -1 or curr_anim.native_anim.track_get_key_count(pos_track) <= 1:
+	var pos_track := curr_playback.native_anim.find_track(root_track_path, Animation.TYPE_POSITION_3D)
+	if pos_track == -1 or curr_playback.native_anim.track_get_key_count(pos_track) <= 1:
 		return Vector3.ZERO
 
-	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(curr_anim)
-	var prev_pos: Vector3 = curr_anim.native_anim.position_track_interpolate(pos_track, _SAMPLE_TIME(curr_anim) - scaled_delta)
-	var curr_pos: Vector3 = curr_anim.native_anim.position_track_interpolate(pos_track, _SAMPLE_TIME(curr_anim))
+	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
+	var prev_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, curr_playback.get_effective_progress() - scaled_delta)
+	var curr_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, curr_playback.get_effective_progress())
 	var delta_pos = curr_pos - prev_pos
 	if y_zeroed:
 		delta_pos.y = 0
@@ -205,21 +157,25 @@ func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 
 	return (delta_pos / scaled_delta) * global_speed_scale
 
-func get_current_anim_progress() -> float:
-	return curr_anim_progress
-
 
 func set_global_speed_scale(new_scale: float):
-	var max_speed_scale = 2
-	var min_speed_scale = 0.4
-	if new_scale < min_speed_scale or new_scale > max_speed_scale:
-		# u.print_warn(pp.ts("extreme speed scale:", new_scale, "Was:", global_speed_scale, "Will be clamped between", max_speed_scale))
-		global_speed_scale = clamp(new_scale, 0.2, 2.0)
-	else:
-		global_speed_scale = new_scale
-	
 	# print_.skm(animator_name, "new scale set: " + str(new_scale))
+	if _dev_hard_speed_scale:
+		return
+	global_speed_scale = new_scale
+
 
 func reset_global_speed_scale():
-	print_.skm(animator_name, "scale reset to 1")
-	set_global_speed_scale(1)
+	if _dev_hard_speed_scale:
+		return
+	# print_.skm(animator_name, "scale reset to 1")
+	set_global_speed_scale(1.0)
+
+
+func __log_state() -> String:
+	var nt = "\n\t\t\t"
+	var msg = pp.s(
+		"TO:  ", curr_playback,
+		nt, "FROM:  ", prev_playback,
+		nt, "BLEND:  ", blend_playback, "  glob speed", global_speed_scale)
+	return msg

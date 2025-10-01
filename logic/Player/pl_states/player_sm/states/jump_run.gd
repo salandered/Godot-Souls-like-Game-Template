@@ -5,17 +5,17 @@ var LAUNCH_TIMING = 0.0657 # When in animation the character actually leaves gro
 var jumped := false
 
 func on_enter_state(input: InputPackage) -> void:
-	var anim: AnimationData = anim_container.get_by_name(current_action.anim_name)
+	var anim: AnimationData = current_action.anim
 	var marker := anim.get_marker_by_name(M.MarkerName.JUMP_LAUNCH)
 	if marker:
 		LAUNCH_TIMING = marker.time
 	jumped = false
 	player.velocity = player.velocity.normalized() * player.jump_data.jump_speed
-	print_.psm("on enter " + state_name, str(player.jump_data))
+	print_.psm(pp.on_ent + state_name, str(player.jump_data))
 
 
 func on_exit_state() -> void:
-	print_.psm("on exit " + state_name, pp.ts("player.velocity.y", player.velocity.y))
+	print_.psm(pp.on_ex + state_name, pp.s("player.velocity.y", player.velocity.y))
 
 
 func check_transition(input: InputPackage) -> PLVerdict:
@@ -54,9 +54,9 @@ func debug_velocities() -> void:
 	var xz_root = animator_manager.get_root_velocity(true)
 	var rotated_xz = player.get_quaternion() * xz_root
 	
-	# print_.psm(state_name, pp.ts("state progress in sc ", current_action.get_progress()))
-	# print_.psm(state_name, pp.ts("~~jumped: ", jumped, " physics_y_velocity: ", physics_y_velocity, " player.velocity.y: ", player.velocity.y))
-	# print_.psm(state_name, pp.ts("~~xz_root: ", xz_root, " rotated_xz: ", rotated_xz))
+	# print_.psm(state_name, pp.s("state progress in sc ", current_action.get_progress()))
+	# print_.psm(state_name, pp.s("~~jumped: ", jumped, " physics_y_velocity: ", physics_y_velocity, " player.velocity.y: ", player.velocity.y))
+	# print_.psm(state_name, pp.s("~~xz_root: ", xz_root, " rotated_xz: ", rotated_xz))
 	
 	# Green arrow for XZ movement (from player position)
 	var xz_end = player.global_position + Vector3(rotated_xz.x, 0, rotated_xz.z)

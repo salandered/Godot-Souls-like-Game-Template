@@ -23,7 +23,7 @@ func initialise():
 	# todo: better
 	current_state = container.state_by_name(PS.run)
 	legs_sm.current_behavior = container.legs_behavior_by_name(current_state.legs_behavior.behavior_name)
-	legs_sm.current_action = container.legs_action_by_name(legs_sm.current_behavior.supported_actions[0])
+	legs_sm.current_action = container.legs_action_by_name(legs_sm.current_behavior.supported_actions.actions[0])
 	current_state.current_action = legs_sm.current_action
 	legs_sm.current_behavior._on_enter_behavior(empty_input)
 
@@ -41,11 +41,14 @@ func update(input: InputPackage, delta: float) -> void:
 	if verdict.comment:
 		print_.psm("Final verdict ⚖️", "has something important to say:" + verdict.comment)
 	if verdict.needs_switch():
+		print('\n')
 		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		
 		current_state._on_exit_state()
 		# now current_state is next state
 		current_state = container.state_by_name(verdict.next_state)
+		if current_state.state_name == PS.run:
+			print()
 		player.current_state = current_state # for something outside
 		current_state._on_enter_state(input)
 

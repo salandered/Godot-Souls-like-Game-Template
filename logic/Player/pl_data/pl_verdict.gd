@@ -1,4 +1,4 @@
-extends Resource
+extends RefCounted
 class_name PLVerdict
 
 ## Empty string means not needs_switch

@@ -46,11 +46,11 @@ var states: Dictionary # { String : BaseHSMEState }
 
 func accept_states():
 	for node: BaseHSMEState in get_descendants.base_hsme_states(self):
-		print_.container("", "node.get_name() " + node.get_name(), 0, L.FORCE_PRINT)
+		print_.container("", "node.get_name() " + node.get_name(), 0, LogL.FORCE_PRINT)
 		var state_data: HSMEStateData = node_to_state_data.get(node.get_name())
 		assert(state_data, "HSMEStateData for " + node.get_name() + " not found")
 
-		print_.container("", "state_data.state_name " + state_data.state_name, 0, L.FORCE_PRINT)
+		print_.container("", "state_data.state_name " + state_data.state_name, 0, LogL.FORCE_PRINT)
 
 		states[state_data.state_name] = node
 		
@@ -61,7 +61,7 @@ func accept_states():
 		
 		if _has_state_child(node):
 			node.is_container = true
-		print_.container("", "is_container " + str(node.is_container), 0, L.FORCE_PRINT)
+		print_.container("", "is_container " + str(node.is_container), 0, LogL.FORCE_PRINT)
 
 		# common
 		node.me = me

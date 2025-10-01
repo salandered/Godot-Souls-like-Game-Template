@@ -12,8 +12,8 @@ func update(_input: InputPackage, _delta: float):
 func animate(): # ▶️
 	# if animation == "roll" or animation == "block":
 		# print_.prefix("~~ SOS", "")
-	print_.psm("▶️ Action " + action_name, anim_name + " with blend time " + str(blend_time), 8)
-	animator_manager.set_anim_to_play(anim_name, blend_time)
+	print_.psm("▶️ Action " + action_name, anim_id + " with blend time " + str(default_blend_time), 8)
+	animator_manager.set_anim_to_play(anim_id, default_blend_time)
 
 	# region: future reference
 	# print_.prefix("SKM", "_base _animate with " + animator_set + " settings_switch_time " + str(settings_switch_time))

@@ -6,7 +6,7 @@ class_name AttackCombo
 
 
 func is_triggered(input: InputPackage) -> bool:
-	print_.combo(name, pp.ts("is_triggered?",
+	print_.combo(name, pp.s("is_triggered?",
 					"Primary input:", primary_input,
 					"state_to_trigger:", state_to_trigger,
 					"current input.actions:", input.actions

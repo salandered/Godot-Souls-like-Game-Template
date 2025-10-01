@@ -10,9 +10,10 @@ var animator_manager: AnimatorManager
 var action_name: String
 
 var anim: AnimationData
+var anim_id: String ## same as anim.anim_id
 var anim_name: String ## same as anim.anim_name
-var blend_time: float = 0.2
-var DURATION: float ## same as anim.duration
+var default_blend_time: float = 0.2
+var DURATION: float ## shortcut for anim.duration
 
 var _enter_action_time: float
 
@@ -28,41 +29,52 @@ func get_progress_real_time() -> float:
 
 ## Uses progress from animator, accounts for all speed scales 
 ## (which can even change dynamically)
-func get_progress() -> float:
-	return animator_manager.get_current_anim_progress()
+func progress() -> float:
+	return animator_manager.get_current_anim_time_spent()
 
 
+## NOTE: If it's a looping animation, returns time till next cycle, not an end of the action.
 func time_remaining() -> float:
-	## NOTE: If it's a looping animation, returns time till next cycle, not an end of the action.
-	return DURATION - animator_manager.get_current_anim_progress()
+	return DURATION - animator_manager.get_current_anim_time_spent()
 
+
+## Like time_remaining(), but takes into account the blend time of the next state.
+## It would be needed for a smooth switch.
+## WARNING: next action's default_blend_time is used!
+## NOTE: If it's a looping animation, the function kinda losts its sense, but still valid.
+##       It will return the time we have if we wanna switch inside the current cycle.
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
-	## Like time_remaining(), but takes into account the blend time of the next state.
-	## It would be needed for a smooth switch.
-	## NOTE: If it's a looping animation, the function kinda losts its sense, but still valid.
-	##       It will return the time we have if we wanna switch inside the current cycle.
 	var action := container.legs_action_by_name(next_action_name)
-	return DURATION - animator_manager.get_current_anim_progress() - action.blend_time
+	return max(DURATION - animator_manager.get_current_anim_time_spent() - action.default_blend_time, 0.0)
+
+
+## Time remaining till a moment, when current animation would be blended 100%. 
+## This important for the next switch considerations: if A action wants to switch the current B one, 
+## but current one is still blending from the previous C animation, there would be noticable visual snap. 
+## Reason: C to B blend would be interrupted by B to A.
+## Note: using actual blend duration from manager is better than rely on current action's data or desires.
+func time_remaining_for_blend_to_complete() -> float:
+	return max(animator_manager.get_current_blend_duration() - animator_manager.get_current_anim_time_spent(), 0.0)
 
 
 func works_longer_than(time: float) -> bool:
 	if time == -1: return __reject()
-	if get_progress() >= time:
+	if progress() >= time:
 		return true
 	return false
 
 
 func works_less_than(time: float) -> bool:
 	if time == -1: return __reject()
-	if get_progress() < time:
+	if progress() < time:
 		return true
 	return false
 
 
 func works_between(start: float, finish: float) -> bool:
 	if start == -1 or finish == -1: return __reject()
-	var progress = get_progress()
-	if progress >= start and progress <= finish:
+	var progress_ = progress()
+	if progress_ >= start and progress_ <= finish:
 		return true
 	return false
 
@@ -87,14 +99,14 @@ func _on_enter_action(input: InputPackage) -> void:
 func on_enter_action(_input: InputPackage) -> void:
 	pass
 
-
+## NOTE: overriden in LegsAction (may be a hint that abstraction layers not quite there)
 func _on_exit_action() -> void:
 	on_exit_action()
 
 func on_exit_action() -> void:
 	pass
 	
-## TODO: DANGER: Action must implement set_overlay_anim, otherwise get_progress() 
+## TODO: DANGER: Action must implement set_overlay_anim, otherwise progress() 
 ## would stuck and return final progress of the previous action
 ## For now some action may not use an animation, but then they either should work only with
 ## get_progress_real_time (and know what they doing), or not working with the time at all.
@@ -106,29 +118,29 @@ func on_exit_action() -> void:
 # region: GET ANIMATION PARAMETERS
 
 func switches_to_queue() -> bool:
-	return anim.switches_to_queue(get_progress())
+	return anim.switches_to_queue(progress())
 
 func allows_queue() -> bool:
-	return anim.allows_queue(get_progress())
+	return anim.allows_queue(progress())
 
 func is_vulnerable() -> bool:
-	return anim.vulnerable(get_progress())
+	return anim.vulnerable(progress())
 
 func is_interruptable() -> bool:
-	return anim.interruptable(get_progress())
+	return anim.interruptable(progress())
 
 func weapon_hurts() -> bool:
-	return anim.weapon_hurts(get_progress())
+	return anim.weapon_hurts(progress())
 
 func tracks_input_vector() -> bool:
-	return anim.tracks_input_vector(get_progress())
+	return anim.tracks_input_vector(progress())
 
 
 # TODO: interesting but do we need this?
 # func time_til_unlocking() -> float:
 # 	if tracks_input_vector():
 # 		return 0
-# 	return states_data_repo.time_til_next_controllable_frame(backend_animation, get_progress())
+# 	return states_data_repo.time_til_next_controllable_frame(backend_animation, progress())
 
 
 # endregion

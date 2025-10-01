@@ -19,7 +19,7 @@ var hit_damage = 10 # will be a function of player stats in the future
 
 func check_transition(input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(current_action.DURATION):
-		print_.psm_check_trans(state_name, pp.ts("Works > anim DURATION", current_action.DURATION, "=> choosing best input"))
+		print_.psm_check_trans(state_name, pp.s("Works > anim DURATION", current_action.DURATION, "=> choosing best input"))
 		var best_input = best_input_that_can_be_paid(input)
 		return best_input
 	# TODO: works not as intended wo idle state !! also RELEASES_PRIORITY should be dependent on current_action.DURATION! and sometimes turned off
@@ -49,7 +49,7 @@ func move_with_root(delta: float) -> void:
 func pack_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
-	hit.hit_state_animation = current_action.anim_name
+	hit.hit_state_animation = current_action.anim_id ## what
 	hit.is_parryable = current_action.is_parryable()
 	hit.weapon = player.model.active_weapon
 	return hit
@@ -62,4 +62,4 @@ func on_exit_state():
 
 ## what for?
 func time_til_priority_release() -> float:
-	return RELEASES_PRIORITY - current_action.get_progress()
+	return RELEASES_PRIORITY - current_action.progress()

@@ -11,8 +11,10 @@ const verdict = "⚖️"
 const queued = "👥"
 const forced = "🦾"
 const check = "❔"
+const gray_x = "✖️"
 
 # important
+const pin = "📌"
 const warn = "⚠️"
 const wip = "🚧"
 const crucial = "💥"

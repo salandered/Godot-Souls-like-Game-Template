@@ -38,7 +38,7 @@ func _init():
 	jump_fall_gravity = calculate_fall_gravity(jump_height, time_to_descent)
 
 func _to_string() -> String:
-	return pp.ts(
+	return pp.s(
 		"jump_speed", jump_speed,
 		"up_gravity", jump_up_gravity,
 		"fall_gravity", jump_fall_gravity,

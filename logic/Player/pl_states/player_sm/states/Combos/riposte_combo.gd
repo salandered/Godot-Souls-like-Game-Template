@@ -2,7 +2,7 @@ extends Combo_
 
 
 func is_triggered(input: InputPackage) -> bool:
-	print_.combo(name, pp.ts("is_triggered?",
+	print_.combo(name, pp.s("is_triggered?",
 				"triggered_state:", state_to_trigger,
 				"current input.actions:", input.actions
 			))
@@ -23,7 +23,7 @@ func have_target_for_ripost() -> bool: # 🗡️
 	print_.combo(name, "ripost(): victims in group: " + str(parried_victims.size()))
 	for npc_ in parried_victims:
 		var dist = npc_.global_position.distance_to(player.global_position)
-		print_.combo(name, pp.ts("candidate:", npc_.name, "dist:", dist))
+		print_.combo(name, pp.s("candidate:", npc_.name, "dist:", dist))
 		if dist < 2.0:
 			print_.combo("", "ripost target acquired")
 			return true

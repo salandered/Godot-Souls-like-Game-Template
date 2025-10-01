@@ -66,7 +66,7 @@ func on_ground_contact() -> void:
 	player.velocity.x *= momentum_preservation * impact_factor
 	player.velocity.z *= momentum_preservation * impact_factor
 	
-	print_.psm("CONTACT", pp.ts("impact_vel", player.velocity.y, "xz_speed", Vector3(player.velocity.x, 0, player.velocity.z).length()))
+	print_.psm("CONTACT", pp.s("impact_vel", player.velocity.y, "xz_speed", Vector3(player.velocity.x, 0, player.velocity.z).length()))
 
 func check_transition(input: InputPackage) -> PLVerdict:
 	# Can transition once we're through impact and into run blend

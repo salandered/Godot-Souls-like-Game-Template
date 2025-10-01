@@ -12,8 +12,6 @@ var anim_container: AnimationContainer
 var animator_manager: AnimatorManager
 
 
-var enter_state_time: float
-
 @export var SPEED = 3.0
 @export var TURN_SPEED = 2
 
@@ -60,10 +58,8 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 # - if not, what vanilla state wants to be defaulted to?
 ## Not to override
 func _check_transition(input: InputPackage) -> PLVerdict:
-	if current_action.action_name == PS.action_longsword_1: # old dev print
-		print_.combo("", str(current_action.allows_queue()))
-		if current_action.get_progress() > 0.8333:
-			print("----")
+	# if current_action.action_name == PS.action_longsword_1: # old dev print
+		# print_.combo("", str(current_action.allows_queue()))
 	if current_action.allows_queue():
 		check_combos(input)
 	if _has_queued_state() and current_action.switches_to_queue():
@@ -71,7 +67,7 @@ func _check_transition(input: InputPackage) -> PLVerdict:
 		try_force_state(queued_state)
 		queued_state = ""
 	if _has_forced_state():
-		print_.psm_check_trans(state_name, pp.ts("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)"))
+		print_.psm_check_trans(state_name, pp.s("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)"))
 		var verdict = PLVerdict.new(forced_state)
 		forced_state = "" # forced_state is reset after verdict creation
 		return verdict
@@ -82,7 +78,7 @@ func _check_transition(input: InputPackage) -> PLVerdict:
 ## can be overriden: see Run or attack.gd
 func check_transition(_input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(current_action.DURATION):
-		print_.psm_check_trans(state_name + " default check", pp.ts("Works > anim DURATION", current_action.DURATION, "=> choosing best input"))
+		print_.psm_check_trans(state_name + " default check", pp.s("Works > anim DURATION", current_action.DURATION, "=> choosing best input"))
 		return best_input_that_can_be_paid(_input)
 	return PLVerdict.new()
 
@@ -134,12 +130,12 @@ func _on_enter_state(input: InputPackage):
 
 	## For now depends_on_legs means legs_behavior is not double. It's Run or Sprint beh.
 	if depends_on_legs:
-		print_.psm(state_name + " on enter", "Dependent state. Actions delegated to legs, no switch here ⚪", 1)
+		print_.psm(state_name + pp.on_ent, "Dependent state. Actions delegated to legs, no switch here ⚪")
 		legs_sm.switch_to(legs_behavior, input)
 	else: ## state leads legs.  like Attack or Jump or Midair
 		default_action_name = choose_default_action() # NOTE: safe. Container checked that non dependent state has an action.
 
-		print_.psm(state_name + " on enter", "Switch to default action " + default_action_name, 1)
+		print_.psm(state_name + pp.on_ent, "Switch to default action " + default_action_name)
 		switch_action_to(default_action_name, input)
 		legs_sm.switch_to(legs_behavior, input) # NOTE: for now, here is double always!
 
@@ -158,9 +154,9 @@ func switch_action_to(next_action_name: String, input: InputPackage):
 	# 	=> leg_behavior don't carry its curr action with it.
 	# endregion
 	if current_action:
-		print_.psm("Action ↪️", pp.ts("switch action", current_action.action_name, "=>", next_action_name), 1)
+		print_.psm("Action ↪️", pp.s("switch action", current_action.action_name, "=>", next_action_name))
 	else:
-		print_.psm("Action ↪️", "No current action => " + next_action_name, 1)
+		print_.psm("Action ↪️", "No current action => " + next_action_name)
 	current_action = container.action_by_name(next_action_name)
 	current_action._on_enter_action(input)
 
@@ -192,13 +188,14 @@ func try_force_state(new_forced_state: String):
 ## If they are, it queues combo's next state
 ## TODO: If several combos triggered - we will queues the last one. Not critical, but some priority logic needed
 func check_combos(input: InputPackage):
+	print(input.actions)
 	for combo: Combo_ in state_combos:
 		var next_state_candidate = combo.state_to_trigger
 		print_.psm_check_trans(state_name, "checking combo " + combo.name + " with state_to_trigger " + next_state_candidate)
 		
 		if combo.is_triggered(input) and resources.can_be_paid(container.state_by_name(next_state_candidate)):
 			queued_state = next_state_candidate
-			print_.psm_check_trans(state_name, "Queued 👥 next state: " + queued_state, 1)
+			print_.psm_check_trans(state_name, "Queued 👥 next state: " + queued_state)
 
 
 ## Updating may be not too far from current state updating: regeneration could be dependent on the current state.

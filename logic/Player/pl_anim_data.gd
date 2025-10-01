@@ -1,7 +1,8 @@
 extends Resource
 class_name AnimationData
 
-var anim_name: String
+var anim_id: String ## lib + resource_name
+var anim_name: String ## resource_name
 var start_time: float
 var end_time: float
 var duration: float
@@ -11,7 +12,8 @@ var native_anim: Animation
 var markers: Dictionary # {str: M.Marker}
 
 func _init(
-		_name,
+		_anim_id,
+		_name = "",
 		_start = 0,
 		_end = 0,
 		_duration = 0,
@@ -20,6 +22,7 @@ func _init(
 		_native_anim = null,
 		markers_ = null
 		):
+	anim_id = _anim_id
 	anim_name = _name
 	start_time = _start
 	end_time = _end
@@ -34,11 +37,7 @@ func _init(
 
 ## Client code may get some specific marker directly.
 func get_marker_by_name(marker_name: String) -> M.Marker:
-	if marker_name in markers:
-		return markers[marker_name]
-		
-	print_.warn(pp.ts("Animation", anim_name, "has no marker", pp.in_q(marker_name)))
-	return null
+	return u.safe_get_dict_key(markers, marker_name, "get marker from anim data")
 
 # PARAMETERS
 func switches_to_queue(timestamp) -> bool:
@@ -68,6 +67,8 @@ func tracks_input_vector(timestamp) -> bool:
 
 func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 	var _track_name = _track_begins + param_name
+	if not native_anim:
+		print("WTF")
 	var _track = native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
 	if _track == -1:
@@ -157,8 +158,8 @@ func _to_string() -> String:
 	return "\n".join(parts)
 
 func to_string_compact() -> String:
-	return "AnimationData(\"%s\", %.3f-%.3f, dur=%.3f, scale=%.3f, loop=%s, markers=%d)" % [
-		anim_name, start_time, end_time, duration, speed_scale, is_looping, markers.size()
+	return "%24s: %4.2f-%4.2f, dur %4.2f, scale %1.2f, lp %5s, markers %2d" % [
+		pp.in_q(anim_name), start_time, end_time, duration, speed_scale, str(is_looping), markers.size()
 	]
 
 # endregion

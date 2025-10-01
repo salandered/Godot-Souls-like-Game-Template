@@ -186,24 +186,24 @@ func __dbg_main_info() -> String:
 	return r
 
 func __free_off() -> String:
-	var r = " free off=" + pp.pp_vec3(free_state.free_offset) + " len=" + pp.round_01(free_state.free_offset.length())
+	var r = " free off=" + pp.vec3(free_state.free_offset) + " len=" + pp.round_01(free_state.free_offset.length())
 	return r
 
 func __lock_off() -> String:
-	var r = " lock off=" + pp.pp_vec3(locked_state.lock_offset) + " len=" + pp.round_01(locked_state.lock_offset.length())
+	var r = " lock off=" + pp.vec3(locked_state.lock_offset) + " len=" + pp.round_01(locked_state.lock_offset.length())
 	return r
 
 func __Cvec() -> String:
-	return " C=" + pp.pp_vec3(camera.global_position)
+	return " C=" + pp.vec3(camera.global_position)
 
 func __Mvec() -> String:
-	return " M=" + pp.pp_vec3(mount.global_position)
+	return " M=" + pp.vec3(mount.global_position)
 
 func __Nvec() -> String:
-	return " N=" + pp.pp_vec3(nest.global_position)
+	return " N=" + pp.vec3(nest.global_position)
 
 func __Fvec() -> String:
-	return " F=" + pp.pp_vec3(focus.global_position)
+	return " F=" + pp.vec3(focus.global_position)
 
 func __CP() -> String:
 	return " C->Pl=" + pp.round_01((camera.global_position - player.camera_focus.global_position).length())

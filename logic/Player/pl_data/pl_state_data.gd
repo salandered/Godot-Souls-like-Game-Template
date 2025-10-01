@@ -10,7 +10,7 @@ var depends_on_legs: bool
 func _init(
 		state_name_: String,
 		priority_: int,
-		legs_behavior_name_: String = LS.legs_behavior_double,
+		legs_behavior_name_: String = Leg.Beh.double,
 		depends_on_legs_: bool = false
 	) -> void:
 	self.state_name = state_name_

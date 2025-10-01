@@ -5,25 +5,20 @@ class_name u
 static var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
-static func fr(to_str_: bool = true) -> Variant:
+static func fr(to_str_: bool = true, str_prefix: bool = false) -> Variant:
 	if to_str_:
+		if not str_prefix:
+			return str(Engine.get_process_frames())
 		return "fr_n-" + str(Engine.get_process_frames())
 	else:
 		return Engine.get_process_frames()
 
 
-# TODO: consider 4.5 update
-static func not_implemented(context = ""):
-	push_error(str(context), " abstract function is called")
-
-
 static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "", fatal: bool = false) -> Variant:
-	var key_exists: bool = dict.has(key)
-	
-	if key_exists:
+	if dict.has(key):
 		return dict[key]
 
-	var msg = pp.ts("Dict does not have key", pp.in_q(key), "Context:", context)
+	var msg = pp.s("Context:", context, "\nDict does not have key", pp.in_q(key), "Dict: ", pp._dict(dict))
 	if fatal:
 		assert(false, msg)
 	print_.warn(msg)
@@ -51,3 +46,28 @@ static func safe_look_at(
 		return false
 	from_who.look_at(target, up, use_model_front)
 	return true
+
+
+static func _dev_change_t12_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
+	return _dev_change_param(event, param, param_name, step, "t1", "t2")
+
+static func _dev_change_t34_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
+	return _dev_change_param(event, param, param_name, step, "t3", "t4")
+
+static func _dev_change_t58_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
+	return _dev_change_param(event, param, param_name, step, "t5", "t8")
+
+static func _dev_change_t67_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
+	return _dev_change_param(event, param, param_name, step, "t6", "t7")
+
+static func _dev_change_param(
+	event, param, param_name: String = "some param", step: float = 0.1, key_a: String = "t1", key_b: String = "t2") -> Variant:
+	var prev_param = param
+	if event.is_action_released(key_a):
+		param -= step
+	if event.is_action_released(key_b):
+		param += step
+
+	if prev_param != param:
+		prints("~~", param_name, prev_param, pp.arr, param)
+	return param

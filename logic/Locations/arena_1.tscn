@@ -22,7 +22,6 @@ sky_material = SubResource("ProceduralSkyMaterial_tv3r5")
 
 [sub_resource type="Environment" id="Environment_n4uti"]
 background_mode = 2
-background_energy_multiplier = 0.5
 sky = SubResource("Sky_t1f0q")
 tonemap_mode = 2
 
@@ -76,8 +75,16 @@ material = SubResource("StandardMaterial3D_4k4b0")
 environment = SubResource("Environment_n4uti")
 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="LIGHTING"]
-transform = Transform3D(0.409763, -0.907647, -0.0909457, 0.51511, 0.147955, 0.844257, -0.752832, -0.392792, 0.528165, -4.55778, 65.2919, 20.0495)
+transform = Transform3D(0.409763, -0.907647, -0.09094584, 0.51511, 0.14795543, 0.8442576, -0.752832, -0.39279267, 0.5281647, -4.55778, 49.5378, 20.0495)
 light_color = Color(0.896619, 0.879746, 0.879949, 1)
+light_energy = 0.6
+shadow_enabled = true
+shadow_blur = 2.97
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="LIGHTING"]
+transform = Transform3D(-0.16090669, 0.98416895, -0.07430019, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -4.55778, 55.176132, -60.997986)
+light_color = Color(0.896619, 0.879746, 0.879949, 1)
+light_energy = 0.8
 shadow_enabled = true
 shadow_blur = 2.97
 
@@ -120,10 +127,12 @@ light_size = 0.831
 omni_range = 15.206
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(0.985984, 0.0646411, -0.153808, 0, 0.921893, 0.387444, 0.16684, -0.382014, 0.908972, 24.1268, 16.067, -15.8916)
+transform = Transform3D(0.985984, 0.06464123, -0.15380864, 0, 0.92189306, 0.38744447, 0.16684, -0.382014, 0.90897185, 1.5642624, 16.067, -19.275932)
 light_color = Color(1, 0.955252, 0.906542, 1)
-light_energy = 0.535
-light_size = 0.831
+light_energy = 6.163
+light_indirect_energy = 8.724
+light_volumetric_fog_energy = 5.083
+light_size = 3.161
 omni_range = 15.206
 
 [node name="OmniLight3D9" type="OmniLight3D" parent="LIGHTING"]
@@ -300,4 +309,4 @@ fov = 29.0
 near = 0.023
 
 [node name="PrincessPack" parent="." instance=ExtResource("2_n4uti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.930099, -6.2846966)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.312599, -6.2846966)

@@ -33,7 +33,7 @@ func _ready():
 
 	player_sm.initialise()
 
-	animator_manager.accept_modifiers(anim_container)
+	animator_manager._accept_modifiers()
 
 	# DEBUG ANIMATIONS
 	_reload_run_anims_from_library()

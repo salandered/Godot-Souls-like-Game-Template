@@ -6,7 +6,7 @@ class_name print_
 
 
 # 
-const FR := false
+const FR := true
 
 # SYSTEMS
 const DEV_PRINT := true
@@ -20,7 +20,7 @@ const SE_PRINT := false
 const HSME_PRINT := true
 
 # FIGHT
-const FIGHT_PRINT := true
+const FIGHT_PRINT := false
 const COMBO_PRINT := true
 const HIT_B_PRINT := true
 
@@ -29,7 +29,7 @@ const HIT_B_PRINT := true
 const PSM_PRINT := true
 const LSM_BEH_PRINT := true
 const LSM_ACTION_PRINT := true
-const SKM_PRINT := false
+const SKM_PRINT := true
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	var result_freq = max(global_freq, arg_freq)
@@ -41,23 +41,23 @@ static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 
 # region: ENEMY logs
 
-static func hsme(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET, freq: int = 1):
-	if not HSME_PRINT and level != L.FORCE_PRINT: return
+static func hsme(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
+	if not HSME_PRINT and level != LogL.FORCE_PRINT: return
 	if not _is_freq_satisfied(1, freq): return
 
 	add_prefix_ = "HSM" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET, freq: int = 1):
-	if not SE_PRINT and level != L.FORCE_PRINT: return
+static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
+	if not SE_PRINT and level != LogL.FORCE_PRINT: return
 	if not _is_freq_satisfied(1, freq): return
 
 	add_prefix_ = "SE" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 # add_prefix_ is state_name here in most cases
-static func se_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET, freq: int = 1):
+static func se_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
 	add_prefix_ = "transition ❔" + " " + add_prefix_
 	if info_indents == 0: info_indents = 2 # if not specified, lets shift it all
 	se(add_prefix_, text, info_indents, level, freq)
@@ -66,27 +66,27 @@ static func se_check_trans(add_prefix_: String, text: String, info_indents: int 
 
 # region: SYSTEMS logs
 
-static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not input_gathering_PRINT and level != L.FORCE_PRINT: return
+static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not input_gathering_PRINT and level != LogL.FORCE_PRINT: return
 	
 	add_prefix_ = "Input" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
-static func dev(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not DEV_PRINT and level != L.FORCE_PRINT: return
+static func dev(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not DEV_PRINT and level != LogL.FORCE_PRINT: return
 	
 	add_prefix_ = "dev" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
-static func fancy_cam(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not FANCY_CAM_PRINT and level != L.FORCE_PRINT: return
+static func fancy_cam(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not FANCY_CAM_PRINT and level != LogL.FORCE_PRINT: return
 	
 	add_prefix_ = "Fancy" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not CONTAINER_PRINT and level != L.FORCE_PRINT: return
+static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not CONTAINER_PRINT and level != LogL.FORCE_PRINT: return
 	
 	add_prefix_ = "Container" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
@@ -94,23 +94,23 @@ static func container(add_prefix_: String, text: String, info_indents: int = 0, 
 # endregion
 
 
-# region FIGHT logs
+# region: FIGHT logs
 
-static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not FIGHT_PRINT and level != L.FORCE_PRINT: return
+static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not FIGHT_PRINT and level != LogL.FORCE_PRINT: return
 		
 	add_prefix_ = "[Fight 🗡️]" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
-static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not COMBO_PRINT and level != L.FORCE_PRINT: return
+static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not COMBO_PRINT and level != LogL.FORCE_PRINT: return
 		
 	add_prefix_ = "Combo🗡️🗡️" + " " + add_prefix_
 	fight(add_prefix_, text, info_indents, level)
 
 
-static func h_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not HIT_B_PRINT and level != L.FORCE_PRINT: return
+static func h_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not HIT_B_PRINT and level != LogL.FORCE_PRINT: return
 	
 	add_prefix_ = "💢 HBox" + " " + add_prefix_
 	fight(add_prefix_, text, info_indents, level)
@@ -119,59 +119,92 @@ static func h_box(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 
 # region: PLAYER logs
-static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not PSM_PRINT and level != L.FORCE_PRINT: return
+
+
+static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	add_prefix_ = "transition ❔" + " " + add_prefix_
+	if info_indents == 0: info_indents = 1
+	psm(add_prefix_, text, info_indents, level)
+
+
+static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not PSM_PRINT and level != LogL.FORCE_PRINT: return
 	
 	add_prefix_ = "PSM" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not PSM_PRINT and level != L.FORCE_PRINT: return
-	
-	add_prefix_ = "PSM transition ❔" + " " + add_prefix_
-	if info_indents == 0: info_indents = 2 # if not specified, lets shift it all
-	prefix(add_prefix_, text, info_indents, level)
+static func lsm_beh_ch(add_prefix_: String, motion_type: String, is_moving, text, decision, info_indents: int = 0, level: String = LogL.NOTSET):
+	var msg = pp.s("motion_type", motion_type, "is_moving", is_moving, text, "=>", decision)
+	add_prefix_ = "choose action ❔" + " " + add_prefix_
+	lsm_beh(add_prefix_, msg, info_indents, level)
 
-
-static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not LSM_BEH_PRINT and level != L.FORCE_PRINT: return
+static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not LSM_BEH_PRINT and level != LogL.FORCE_PRINT: return
 		
 	add_prefix_ = "LSM Behavior" + " " + add_prefix_
+	if info_indents == 0: info_indents = 3
 	prefix(add_prefix_, text, info_indents, level)
 
-static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not LSM_ACTION_PRINT and level != L.FORCE_PRINT: return
+static func lsm_action_anim(add_prefix_: String, anim_name: String, prev_action_name, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
+	var msg = pp.s(
+		"anim", anim_name,
+		"based on prev action", pp.in_q(prev_action_name) + ":",
+		"blend_time", blend_time,
+		"start_time_offset", start_time_offset
+		)
+	add_prefix_ = "▶️" + " " + add_prefix_
+	lsm_action(add_prefix_, msg, info_indents, level)
+
+	
+static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not LSM_ACTION_PRINT and level != LogL.FORCE_PRINT: return
 		
 	add_prefix_ = "LSM Action" + " " + add_prefix_
+	if info_indents == 0: info_indents = 5
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func skm(add_prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	if not SKM_PRINT and level != L.FORCE_PRINT: return
+static func skm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not SKM_PRINT and level != LogL.FORCE_PRINT: return
 		
 	add_prefix_ = "SKM 💀" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 # endregion
+
 # -------------------
 
-static func prefix(prefix_: String, text: String, info_indents: int = 0, level: String = L.NOTSET):
-	var tabs_prefix := __calculate_tab_prefix(info_indents)
-	prefix_ = pp.in_sq(prefix_) + " "
-	if FR:
-		prefix_ = pp.in_sq(u.fr()) + " " + prefix_ + " "
-	match level:
-		L.DEBUG:
-			prefix_ = L.DEBUG + " " + prefix_
-		L.INFO:
-			prefix_ = L.INFO + " " + prefix_
-		L.WARN:
-			prefix_ = L.WARN + " " + prefix_
-		L.ERROR:
-			prefix_ = L.ERROR + " " + prefix_
+static var _last_prefix_msg = ""
 
-	print(tabs_prefix, prefix_, text)
+static func prefix(prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	var tabs_prefix := __calculate_tab_prefix(info_indents)
+	prefix_ = prefix_.strip_edges()
+	prefix_ = pp.in_sq(prefix_)
+	match level:
+		LogL.DEBUG:
+			prefix_ = LogL.DEBUG + " " + prefix_
+		LogL.INFO:
+			prefix_ = LogL.INFO + " " + prefix_
+		LogL.WARN:
+			prefix_ = LogL.WARN + " " + prefix_
+		LogL.ERROR:
+			prefix_ = LogL.ERROR + " " + prefix_
+
+	prefix_ = prefix_.strip_edges()
+	
+	var fr_ = ""
+	if FR:
+		fr_ = "%6s" % [u.fr() + "| "]
+	
+	var result_msg = tabs_prefix + "  " + prefix_ + "  " + text
+	
+	if result_msg == _last_prefix_msg:
+		print("%4s" % ["| "], result_msg)
+		return
+
+	_last_prefix_msg = result_msg
+	print(fr_, result_msg)
 
 
 static func _ready(node: Node, info_indents: int = 0):
@@ -204,8 +237,8 @@ static func __calculate_tab_prefix(info_indents: int) -> String:
 	return tabs_prefix
 
 
-static func collisions(node: Node, info_indents: int = 0, layer_: bool = true, level: String = L.NOTSET):
-	if not COLLISION_PRINT and level != L.FORCE_PRINT: return
+static func collisions(node: Node, info_indents: int = 0, layer_: bool = true, level: String = LogL.NOTSET):
+	if not COLLISION_PRINT and level != LogL.FORCE_PRINT: return
 	print("COLLISION LAYER AND MASK")
 	var layer = "none"
 	if layer_:

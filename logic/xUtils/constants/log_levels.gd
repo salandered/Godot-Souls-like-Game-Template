@@ -1,5 +1,5 @@
 extends RefCounted
-class_name L
+class_name LogL
 
 const NOTSET = ""
 const DEBUG = "[DEBUG]"

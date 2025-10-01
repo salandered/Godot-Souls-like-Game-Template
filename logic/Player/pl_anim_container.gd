@@ -12,7 +12,7 @@ var _animations = [
 	AnimationData.new(A.combat_idle),
 	AnimationData.new(A.combat_walk),
 	AnimationData.new(A.combat_walk_start),
-	AnimationData.new(A.combat_sprint_start),
+	AnimationData.new(A.combat_idle_to_sprint),
 	AnimationData.new(A.combat_walk_back),
 	AnimationData.new(A.combat_run),
 	AnimationData.new(A.combat_sprint),
@@ -30,7 +30,7 @@ var _animations = [
 	AnimationData.new(A.death),
 	# fight
 	AnimationData.new(A.longsword_1),
-	AnimationData.new(A.longsword_2, 0, 0, 0, 0.85),
+	AnimationData.new(A.longsword_2, "", 0, 0, 0, 0.85),
 	AnimationData.new(A.withdraw),
 	AnimationData.new(A.block_forward),
 	AnimationData.new(A.block_reaction),
@@ -43,8 +43,6 @@ var _animations = [
 	AnimationData.new(A.shield_throw),
 	AnimationData.new(A.shield_throw_reload),
 	AnimationData.new(A.idle_longsword),
-	#
-	AnimationData.new(A.idle_longsword),
 ]
 
 var _anim_by_name := {}
@@ -52,32 +50,37 @@ var _anim_by_name := {}
 
 ## MAIN INTERFACE
 func get_by_name(anim_name: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_name, anim_name, "")
+	return u.safe_get_dict_key(_anim_by_name, anim_name, "PlayerAnimationContainer.get_by_name")
 
 
 func _accept_animations() -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
-		if not ua.assert_has_animation(native_player, anim.anim_name, false):
+		if not ua.assert_has_animation(native_player, anim.anim_id, false):
 			continue
-		var native_anim: Animation = native_player.get_animation(anim.anim_name)
+		var native_anim: Animation = native_player.get_animation(anim.anim_id)
 		anim.native_anim = native_anim
 		
+		# name
+		anim.anim_name = native_anim.resource_name
+
 		# is looping
 		anim.is_looping = (native_anim.loop_mode == Animation.LOOP_LINEAR)
 
 		# timings
 		__enrich_with_end_start_times(anim)
-
+		if anim.anim_id == A.combat_run or anim.anim_id == A.combat_sprint:
+			print()
 		# all markers # todo: this can be used before __enrich_with_end_start_times
 		var markers = __get_animation_markers(anim.native_anim)
 		anim.markers = markers
 
-		_anim_by_name[anim.anim_name] = anim
+		_anim_by_name[anim.anim_id] = anim
 
-		if anim.anim_name == A.longsword_1:
+		if anim.anim_id == A.longsword_1:
 			print("~~", anim._to_string())
-	_anim_by_name[A.fake_anim] = AnimationData.new(A.fake_anim, 0, 1, 1)
+			
+	_anim_by_name[A.fake_anim] = AnimationData.new(A.fake_anim, A.fake_anim, 0, 1, 1)
 
 
 func __enrich_with_end_start_times(anim: AnimationData):
