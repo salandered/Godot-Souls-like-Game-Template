@@ -146,7 +146,7 @@
 		},
 		// GRAY IGNORE
 		{
-			"path": "*_ideas*",
+			"path": "*_idea*",
 			"color": "gray_ignore"
 		},
 		{
@@ -425,7 +425,7 @@
 				}
 			]
 		},
-		"(?<=func\\s)(update)(?=\\()": { // func update(...)
+		"(?<=func\\s_?)(update)(?=\\()": { // func update(...)
 			"decorations": [
 				{
 					"textDecoration": "underline double",

@@ -29,7 +29,7 @@ const HIT_B_PRINT := true
 const PSM_PRINT := true
 const LSM_BEH_PRINT := true
 const LSM_ACTION_PRINT := true
-const SKM_PRINT := true
+const SKM_PRINT := false
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	var result_freq = max(global_freq, arg_freq)
@@ -135,7 +135,8 @@ static func psm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String, is_moving, text, decision, info_indents: int = 0, level: String = LogL.NOTSET):
-	var msg = pp.s("motion_type", motion_type, "is_moving", is_moving, text, "=>", decision)
+	is_moving = str(is_moving) + ", " if text else str(is_moving)
+	var msg = pp.s("motion", motion_type + ",", "is_moving: ", is_moving, text, "=>", decision)
 	add_prefix_ = "choose action ❔" + " " + add_prefix_
 	lsm_beh(add_prefix_, msg, info_indents, level)
 
@@ -148,12 +149,13 @@ static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, le
 
 static func lsm_action_anim(add_prefix_: String, anim_name: String, prev_action_name, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
 	var msg = pp.s(
-		"anim", anim_name,
-		"based on prev action", pp.in_q(prev_action_name) + ":",
-		"blend_time", blend_time,
-		"start_time_offset", start_time_offset
+		"anim: ", pp.in_q(anim_name),
+		"Params based on prev", pp.in_q(prev_action_name) + ":",
+		"blend_t", blend_time,
+		"start_t_off", start_time_offset
 		)
 	add_prefix_ = "▶️" + " " + add_prefix_
+	if info_indents == 0: info_indents = 7
 	lsm_action(add_prefix_, msg, info_indents, level)
 
 	

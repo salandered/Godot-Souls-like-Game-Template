@@ -20,8 +20,8 @@ func on_enter_action(input: InputPackage):
 
 func on_exit_action():
 	animator_manager.reset_global_speed_scale()
-	curr_speed_time = 0
-
+	var final_speed = player.velocity.length()
+	legs_sm.transfer_data.fill(action_name, {"manual_speed": final_speed})
 
 func update(input: InputPackage, delta: float):
 	process_input_vector(input, delta)
@@ -37,8 +37,6 @@ func process_input_vector(input: InputPackage, delta: float):
 			if input_direction.length() > 0 and not speed_curve_interpolator.is_complete():
 				CURVE_SPEED = speed_curve_interpolator.update(delta)
 
-	# print(pp.s(" curr_speed_time: ", curr_speed_time, " CURVE_SPEED", CURVE_SPEED))
-	
 	var face_dir = player.basis.z
 	var angle = face_dir.signed_angle_to(input_direction, Vector3.UP)
 	if abs(angle) >= ANGULAR_SPEED * delta:
@@ -71,12 +69,11 @@ func animate(): # ▶️
 			var r = sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
 				start_time_offset = r
-	print("~~~", start_time_offset)
-	print_.lsm_action_anim(action_name, anim_name, legs_sm.prev_action.action_name, blend_time, start_time_offset, 8)
+	__log_anim(blend_time, start_time_offset)
 	animator_manager.set_anim_to_play(anim_id, blend_time, start_time_offset)
 
 
 func _input(event):
 	SPEED = u._dev_change_param(event, SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
-	_dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
-	_next_anim_correction = u._dev_change_t34_param(event, _next_anim_correction, "_next_anim_correction", 0.02)
+	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
+	# _next_anim_correction = u._dev_change_t34_param(event, _next_anim_correction, "_next_anim_correction", 0.02)

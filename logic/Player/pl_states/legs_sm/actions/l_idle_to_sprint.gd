@@ -2,21 +2,15 @@ extends LegsAction
 
 var ANGULAR_SPEED: float = 4
 
-func _ready() -> void:
-	SPEED_SCALE = 1
-
-func on_enter_action(_input: InputPackage) -> void:
-	animator_manager.set_global_speed_scale(SPEED_SCALE)
 
 func on_exit_action() -> void:
-	animator_manager.reset_global_speed_scale()
 	var final_rm_speed = animator_manager.get_root_velocity().length()
 	legs_sm.transfer_data.fill(action_name, {"rm_speed": final_rm_speed})
 
 
 func update(input: InputPackage, delta: float):
 	process_input_vector(input, delta)
-	move_with_root(delta)
+	_move_with_root(delta)
 
 
 func process_input_vector(input: InputPackage, delta: float):
@@ -28,6 +22,6 @@ func process_input_vector(input: InputPackage, delta: float):
 	else:
 		player.rotate_y(angle)
 
-func move_with_root(delta: float) -> void:
+func _move_with_root(delta: float) -> void:
 	var root_vel := animator_manager.get_root_velocity()
 	player.velocity = player.get_quaternion() * root_vel

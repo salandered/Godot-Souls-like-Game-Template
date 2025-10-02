@@ -82,9 +82,9 @@ func _label_state_info():
 	if not c_s.legs_sm.current_action:
 		label_state_info.text += "\nNO legs behavior action"
 		return
-	label_state_info.text = "state %30s   act %30s " % [str(c_s.state_name), str(c_s.current_action.action_name)]
-	label_state_info.text += "\nlegs %30s   act %30s " % [str(c_s.legs_sm.current_behavior.behavior_name), str(c_s.legs_sm.current_action.action_name)]
-	label_state_info.text += "\nprogress pl action %6.2f  l action  %6.2f " % [c_s.current_action.progress(), c_s.legs_sm.current_action.progress()]
+	label_state_info.text = "state %20s   act %20s " % [str(c_s.state_name), str(c_s.current_action.action_name)]
+	label_state_info.text += "\nlegs %20s   act %20s " % [str(c_s.legs_sm.current_behavior.behavior_name), str(c_s.legs_sm.current_action.action_name)]
+	label_state_info.text += "\nprogress pl action %6.2f  l action  %6.2f " % [c_s.current_action.time_spent(), c_s.legs_sm.current_action.time_spent()]
 
 
 func _label_modifier_animator_info():

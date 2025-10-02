@@ -23,8 +23,10 @@ var __initialised: bool = false
 
 ## for animation non related effects like slow mo
 ## note that animation may have it's own speed scale. They will be multiplied.
-var _dev_hard_speed_scale = true # for tests
-var global_speed_scale := 1
+# var _dev_hard_speed_scale = true # for tests
+var _dev_hard_speed_scale = false
+# var global_speed_scale := 0.4
+var global_speed_scale := 1.0
 
 var blend_playback := BlendPlayback.new()
 
@@ -139,7 +141,6 @@ func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
 func _bone_to_track_name(bone_index: int) -> String:
 	return "%GeneralSkeleton:" + skeleton.get_bone_name(bone_index)
 
-
 func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 	var root_track_path := _bone_to_track_name(0)
 	var pos_track := curr_playback.native_anim.find_track(root_track_path, Animation.TYPE_POSITION_3D)
@@ -147,15 +148,59 @@ func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 		return Vector3.ZERO
 
 	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
-	var prev_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, curr_playback.get_effective_progress() - scaled_delta)
-	var curr_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, curr_playback.get_effective_progress())
-	var delta_pos = curr_pos - prev_pos
-	if y_zeroed:
-		delta_pos.y = 0
-	if custom_delta <= 0.0:
-		return Vector3.ZERO
+	var curr_progress = curr_playback.get_effective_progress()
+	var prev_progress = max(0.0, curr_progress - scaled_delta)
+	
+	var prev_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, prev_progress)
+	var curr_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, curr_progress)
+	var curr_velocity = (curr_pos - prev_pos) / scaled_delta if scaled_delta > 0 else Vector3.ZERO
+	
+	# TODO: experimental! It might be anim is not rm, but track is not empty. Result is unknown
+	if blend_playback.is_blending:
+		var prev_pos_track := prev_playback.native_anim.find_track(root_track_path, Animation.TYPE_POSITION_3D)
+		var prev_velocity := Vector3.ZERO # Default to zero if no root motion
+		
+		# Only calculate prev velocity if the track exists and has data
+		if prev_pos_track != -1 and prev_playback.native_anim.track_get_key_count(prev_pos_track) > 1:
+			var prev_scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(prev_playback)
+			var prev_curr_progress = prev_playback.get_effective_progress()
+			var prev_prev_progress = max(0.0, prev_curr_progress - prev_scaled_delta)
+			
+			var prev_prev_pos: Vector3 = prev_playback.native_anim.position_track_interpolate(prev_pos_track, prev_prev_progress)
+			var prev_curr_pos: Vector3 = prev_playback.native_anim.position_track_interpolate(prev_pos_track, prev_curr_progress)
+			prev_velocity = (prev_curr_pos - prev_prev_pos) / prev_scaled_delta if prev_scaled_delta > 0 else Vector3.ZERO
+		
+		# Blend the velocities
+		curr_velocity = prev_velocity.lerp(curr_velocity, blend_playback.percentage)
 
-	return (delta_pos / scaled_delta) * global_speed_scale
+	# print_.prefix("", pp.s("~~~~prev_pos", pp.vec3(prev_pos), "len", prev_pos.length()) + " " +
+	# pp.s("curr_pos", pp.vec3(curr_pos), "len", curr_pos.length()) + " " +
+	# pp.s("delta_pos", pp.vec3(delta_pos), "len", delta_pos.length()))
+	if y_zeroed:
+		curr_velocity.y = 0
+	
+	return curr_velocity * global_speed_scale
+
+
+# experimantal. not really working. 
+# RM driven animation usually root rotation at hips. But hips also have their usual rotation. 
+# root rotation from hips should be retargeted to root bone.
+func get_root_rotation() -> float:
+	var hip_track_path := _bone_to_track_name(1)
+	var rot_track := curr_playback.native_anim.find_track(hip_track_path, Animation.TYPE_ROTATION_3D)
+	if rot_track == -1:
+		return 0.0
+	
+	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
+	var curr_progress = curr_playback.get_effective_progress()
+	var prev_progress = max(0.0, curr_progress - scaled_delta)
+	
+	var prev_rot: Quaternion = curr_playback.native_anim.rotation_track_interpolate(rot_track, prev_progress)
+	var curr_rot: Quaternion = curr_playback.native_anim.rotation_track_interpolate(rot_track, curr_progress)
+	
+	# Get Y-axis rotation difference
+	var delta_rot = prev_rot.inverse() * curr_rot
+	return delta_rot.get_euler().y # Returns radians
 
 
 func set_global_speed_scale(new_scale: float):

@@ -31,14 +31,15 @@ class lib:
 # -- MOVE ANIM  NOTE: usual loco and combat loco are mixed for now
 
 
-const combat_idle := lib.all_axe + "L-combat-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
-const combat_walk := lib._ss_loco + "C-walk" # _EP_p1 + "EP-p1-O-Walk-Combat" # _ss_loco + "C-walk"
-const combat_walk_start := lib._SWS_loco_p2 + "SWSlp2-O-walk-start" # _ss_loco + "C-walk"
-const combat_idle_to_sprint := lib.start_end_v2 + "L RM Idle To Sprint" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
-const combat_run_to_idle := lib.start_end_v2 + "L RM run to stop" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
-const combat_walk_back := lib._ss_loco + "C-walk-back" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
-const combat_run := lib._run + "B-Jog-Forward-v2" # "SWSl-O-run-F" # _run + "B-Jog-Forward-v2"
-const combat_sprint := lib._run + "B-Fast-Run-v2" # _SWS_loco + "SWSl-O-sptrint-F" # _run + "B-Fast-Run-v2"
+const idle := lib.all_axe + "L-combat-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
+const walk := lib._ss_loco + "C-walk" # _EP_p1 + "EP-p1-O-Walk-Combat" # _ss_loco + "C-walk"
+# const combat_walk_start := lib._SWS_loco_p2 + "SWSlp2-O-walk-start" # _ss_loco + "C-walk"
+const idle_to_sprint := lib.start_end_v2 + "L RM Idle To Sprint" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
+const idle_turn_to_run_L := lib.start_end_v2 + "L RM Turn To Running L"
+const sprint_to_idle := lib.start_end_v2 + "L RM run to stop" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
+const walk_back := lib._ss_loco + "C-walk-back" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
+const run := lib._run + "B-Jog-Forward-v2" # "SWSl-O-run-F" # _run + "B-Jog-Forward-v2"
+const sprint := lib._run + "B-Fast-Run-v2" # _SWS_loco + "SWSl-O-sptrint-F" # _run + "B-Fast-Run-v2"
 
 # strafe
 const run_L := lib._SWS_loco + "SWSl-O-run-L-blended" # _strafe + "A-ss-strafe-L"

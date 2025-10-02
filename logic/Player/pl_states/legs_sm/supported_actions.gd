@@ -9,15 +9,15 @@ var actions := []
 func _init(motion_to_action_: Dictionary):
 	_motion_type_to_action = motion_to_action_
 	
-	for action in _motion_type_to_action.values():
-		if action not in actions:
-			actions.append(action)
+	for action_name in _motion_type_to_action.values():
+		if action_name not in actions:
+			actions.append(action_name)
 
 	__validation()
 	print_.lsm_beh(" _ready()", _to_string())
 
 
-func get_by_motion(motion) -> String:
+func by_motion(motion) -> String:
 	return _motion_type_to_action[motion]
 
 

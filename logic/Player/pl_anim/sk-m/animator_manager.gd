@@ -12,6 +12,7 @@ class_name AnimatorManager
 @onready var _end: EndModifier = %_End
 
 @onready var anim_container: PlayerAnimationContainer = %AnimContainer
+@onready var native_animator: AnimationPlayer = %NativeAnimator
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 
@@ -76,7 +77,10 @@ func get_current_blend_duration() -> float:
 ## INTERNAL
 
 func _accept_modifiers():
-	var initial_anim = anim_container.get_by_name(A.combat_idle)
+	var initial_anim = anim_container.get_by_name(A.idle)
+
+
+	native_animator.play(A.idle)
 	full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.initialise()

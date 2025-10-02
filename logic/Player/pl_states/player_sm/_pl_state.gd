@@ -131,7 +131,11 @@ func _on_enter_state(input: InputPackage):
 	## For now depends_on_legs means legs_behavior is not double. It's Run or Sprint beh.
 	if depends_on_legs:
 		print_.psm(state_name + pp.on_ent, "Dependent state. Actions delegated to legs, no switch here ⚪")
-		legs_sm.switch_to(legs_behavior, input)
+		## WARNING testing idle
+		if state_name == PS.idle and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run]:
+			print_.psm(state_name + pp.on_ent, "No switching legs behavior" + em.red_x)
+		else:
+			legs_sm.switch_to(legs_behavior, input)
 	else: ## state leads legs.  like Attack or Jump or Midair
 		default_action_name = choose_default_action() # NOTE: safe. Container checked that non dependent state has an action.
 

@@ -22,14 +22,14 @@ var _enter_action_time: float
 func mark_enter_action() -> void:
 	_enter_action_time = Time.get_unix_time_from_system()
 
-## Uses real time linear progress
+## Uses real time linear time_spent
 func get_progress_real_time() -> float:
 	var now = Time.get_unix_time_from_system()
 	return now - _enter_action_time
 
-## Uses progress from animator, accounts for all speed scales 
+## Uses time_spent from animator, accounts for all speed scales 
 ## (which can even change dynamically)
-func progress() -> float:
+func time_spent() -> float:
 	return animator_manager.get_current_anim_time_spent()
 
 
@@ -59,21 +59,21 @@ func time_remaining_for_blend_to_complete() -> float:
 
 func works_longer_than(time: float) -> bool:
 	if time == -1: return __reject()
-	if progress() >= time:
+	if time_spent() >= time:
 		return true
 	return false
 
 
 func works_less_than(time: float) -> bool:
 	if time == -1: return __reject()
-	if progress() < time:
+	if time_spent() < time:
 		return true
 	return false
 
 
 func works_between(start: float, finish: float) -> bool:
 	if start == -1 or finish == -1: return __reject()
-	var progress_ = progress()
+	var progress_ = time_spent()
 	if progress_ >= start and progress_ <= finish:
 		return true
 	return false
@@ -106,8 +106,8 @@ func _on_exit_action() -> void:
 func on_exit_action() -> void:
 	pass
 	
-## TODO: DANGER: Action must implement set_overlay_anim, otherwise progress() 
-## would stuck and return final progress of the previous action
+## TODO: DANGER: Action must implement set_overlay_anim, otherwise time_spent() 
+## would stuck and return final time_spent of the previous action
 ## For now some action may not use an animation, but then they either should work only with
 ## get_progress_real_time (and know what they doing), or not working with the time at all.
 @abstract func animate() -> void
@@ -118,29 +118,29 @@ func on_exit_action() -> void:
 # region: GET ANIMATION PARAMETERS
 
 func switches_to_queue() -> bool:
-	return anim.switches_to_queue(progress())
+	return anim.switches_to_queue(time_spent())
 
 func allows_queue() -> bool:
-	return anim.allows_queue(progress())
+	return anim.allows_queue(time_spent())
 
 func is_vulnerable() -> bool:
-	return anim.vulnerable(progress())
+	return anim.vulnerable(time_spent())
 
 func is_interruptable() -> bool:
-	return anim.interruptable(progress())
+	return anim.interruptable(time_spent())
 
 func weapon_hurts() -> bool:
-	return anim.weapon_hurts(progress())
+	return anim.weapon_hurts(time_spent())
 
 func tracks_input_vector() -> bool:
-	return anim.tracks_input_vector(progress())
+	return anim.tracks_input_vector(time_spent())
 
 
 # TODO: interesting but do we need this?
 # func time_til_unlocking() -> float:
 # 	if tracks_input_vector():
 # 		return 0
-# 	return states_data_repo.time_til_next_controllable_frame(backend_animation, progress())
+# 	return states_data_repo.time_til_next_controllable_frame(backend_animation, time_spent())
 
 
 # endregion

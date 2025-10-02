@@ -27,6 +27,11 @@ static func in_sq(something: Variant, spaces: bool = false) -> String:
 	var r = "[" + str(something) + "]"
 	return in_sp(r) if spaces else r
 
+
+static func in_br(something: Variant, spaces: bool = false) -> String:
+	var r = "(" + str(something) + ")"
+	return in_sp(r) if spaces else r
+
 static func in_sp(something: Variant) -> String:
 	return " " + str(something) + " "
 
@@ -64,7 +69,7 @@ static func _array(array_: Array, json: bool = false) -> String:
 	return r.strip_edges()
 
 static func vec3(v: Vector3) -> String:
-	return "(%3.2f %3.2f %3.2f)" % [v.x, v.y, v.z]
+	return "(%3.3f %3.3f %3.3f)" % [v.x, v.y, v.z]
 
 
 static func vec2(v: Vector2) -> String:

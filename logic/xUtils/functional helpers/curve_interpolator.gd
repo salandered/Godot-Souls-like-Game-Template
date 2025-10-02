@@ -9,6 +9,8 @@ var _completed: bool = false
 
 ## idempotent
 func initialise(curve_: Curve, duration_: float) -> void:
+	assert(curve_)
+
 	curve = curve_
 	duration = duration_
 	progress = 0.0

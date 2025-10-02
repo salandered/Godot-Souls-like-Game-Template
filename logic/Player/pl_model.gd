@@ -30,9 +30,8 @@ func _ready():
 	container.accept_player_actions()
 	container.accept_legs_actions()
 
-
+	
 	player_sm.initialise()
-
 	animator_manager._accept_modifiers()
 
 	# DEBUG ANIMATIONS

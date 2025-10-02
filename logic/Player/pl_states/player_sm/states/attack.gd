@@ -62,4 +62,4 @@ func on_exit_state():
 
 ## what for?
 func time_til_priority_release() -> float:
-	return RELEASES_PRIORITY - current_action.progress()
+	return RELEASES_PRIORITY - current_action.time_spent()

@@ -11,6 +11,8 @@ class_name LegsSM
 @export var combat: HumanoidCombat
 
 # TODO: fast solution. Design proper action (or states) ability to share data.
+## for now its supposed to store only prev action data
+## (u should not get data from some random past state, while its possible)
 class TranferData extends RefCounted:
 	var action_name: String
 	var _transfer: Dictionary
@@ -24,12 +26,12 @@ class TranferData extends RefCounted:
 		else:
 			_transfer = {}
 
-	func get_by_key(key: String) -> Variant: # its better be a string
+	func _get_by_key(key: String) -> Variant:
 		return u.safe_get_dict_key(_transfer, key, "Getting _transfer from TranferData")
 
-	func get_by_key_if_action(action_name_: String, key: String) -> Variant: # its better be a string
+	func get_by_key_if_action(action_name_: String, key: String) -> Variant:
 		if action_name == action_name_:
-			return get_by_key(key)
+			return _get_by_key(key)
 		return null
 
 	func fill(action_name_: String, data_: Dictionary):
@@ -37,6 +39,11 @@ class TranferData extends RefCounted:
 		print_.lsm_beh("TransferData fill for " + pp.in_q(action_name_), msg)
 		action_name = action_name_
 		_transfer = data_.duplicate_deep()
+
+	func _reset():
+		action_name = ""
+		_transfer = {}
+
 
 var transfer_data = TranferData.new("")
 
@@ -52,9 +59,11 @@ func update(input: InputPackage, delta: float) -> void:
 
 func switch_to(next_behavior: LegsBehavior, input: InputPackage):
 	if next_behavior == current_behavior:
-		print_.lsm_beh("", "not switching legs (same behavior) " + current_behavior.behavior_name)
+		print_.lsm_beh("", "not switching legs, same behavior:" + current_behavior.behavior_name)
 		return
-	print_.lsm_beh("↪️", pp.s(current_behavior.behavior_name, "=>", next_behavior.behavior_name))
+	print_.lsm_beh("↪️", pp.s(current_behavior.behavior_name, " = > ", next_behavior.behavior_name))
 	current_behavior._on_exit_behavior()
+	if next_behavior.behavior_name == Leg.Beh.sprint:
+		print()
 	current_behavior = next_behavior
 	current_behavior._on_enter_behavior(input)

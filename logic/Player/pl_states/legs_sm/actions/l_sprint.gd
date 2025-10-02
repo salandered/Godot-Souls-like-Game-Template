@@ -63,12 +63,12 @@ func animate(): # ▶️
 			var r = sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
 				start_time_offset = r
-	print_.lsm_action_anim(action_name, anim_name, legs_sm.prev_action.action_name, blend_time, start_time_offset, 8)
+	__log_anim(blend_time, start_time_offset)
 	animator_manager.set_anim_to_play(anim_id, blend_time, start_time_offset)
 
 
 func _input(event):
 	SPEED = u._dev_change_param(event, SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
-	_dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
+	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 
-	_next_anim_correction = u._dev_change_t67_param(event, _next_anim_correction, "_next_anim_correction", 0.02)
+	# _next_anim_correction = u._dev_change_t67_param(event, _next_anim_correction, "_next_anim_correction", 0.02)

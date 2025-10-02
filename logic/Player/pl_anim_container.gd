@@ -9,13 +9,13 @@ class_name PlayerAnimationContainer
 
 var _animations = [
 	# loco
-	AnimationData.new(A.combat_idle),
-	AnimationData.new(A.combat_walk),
-	AnimationData.new(A.combat_walk_start),
-	AnimationData.new(A.combat_idle_to_sprint),
-	AnimationData.new(A.combat_walk_back),
-	AnimationData.new(A.combat_run),
-	AnimationData.new(A.combat_sprint),
+	AnimationData.new(A.idle),
+	AnimationData.new(A.walk),
+	AnimationData.new(A.idle_to_sprint),
+	AnimationData.new(A.idle_turn_to_run_L),
+	AnimationData.new(A.sprint_to_idle, "", 0, 0, 0, 0.85),
+	AnimationData.new(A.run),
+	AnimationData.new(A.sprint),
 	AnimationData.new(A.run_L),
 	AnimationData.new(A.run_R),
 	# loco jump
@@ -69,7 +69,7 @@ func _accept_animations() -> void:
 
 		# timings
 		__enrich_with_end_start_times(anim)
-		if anim.anim_id == A.combat_run or anim.anim_id == A.combat_sprint:
+		if anim.anim_id == A.run or anim.anim_id == A.sprint:
 			print()
 		# all markers # todo: this can be used before __enrich_with_end_start_times
 		var markers = __get_animation_markers(anim.native_anim)
