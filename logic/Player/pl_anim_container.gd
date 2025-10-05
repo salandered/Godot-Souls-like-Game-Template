@@ -12,17 +12,18 @@ var _animations = [
 	AnimationData.new(A.idle),
 	AnimationData.new(A.walk),
 	AnimationData.new(A.idle_to_sprint),
-	AnimationData.new(A.idle_turn_to_run_L),
-	AnimationData.new(A.sprint_to_idle, "", 0, 0, 0, 0.85),
+	AnimationData.new(A.idle_turn_to_run_L, 1.0, true),
+	AnimationData.new(A.sprint_to_idle, 0.85),
 	AnimationData.new(A.run),
 	AnimationData.new(A.sprint),
-	AnimationData.new(A.run_L),
+	# AnimationData.new(A.run_L),
 	AnimationData.new(A.run_R),
+	AnimationData.new(A.turn_180_R, 1.0, true),
+	AnimationData.new(A.turn_180_L, 1.0, true),
 	# loco jump
 	AnimationData.new(A.midair),
-	AnimationData.new(A.jump_run),
+	AnimationData.new(A.small_jump_run),
 	AnimationData.new(A.jump_sprint),
-	AnimationData.new(A.landing_run),
 	AnimationData.new(A.landing_sprint),
 	AnimationData.new(A.jump_idle),
 	AnimationData.new(A.roll),
@@ -30,18 +31,12 @@ var _animations = [
 	AnimationData.new(A.death),
 	# fight
 	AnimationData.new(A.longsword_1),
-	AnimationData.new(A.longsword_2, "", 0, 0, 0, 0.85),
-	AnimationData.new(A.withdraw),
-	AnimationData.new(A.block_forward),
-	AnimationData.new(A.block_reaction),
+	AnimationData.new(A.longsword_2, 0.85),
 	AnimationData.new(A.hit_reaction),
-	AnimationData.new(A.pushback),
 	AnimationData.new(A.staggered),
 	AnimationData.new(A.parry),
 	AnimationData.new(A.parried),
 	AnimationData.new(A.riposte_attack),
-	AnimationData.new(A.shield_throw),
-	AnimationData.new(A.shield_throw_reload),
 	AnimationData.new(A.idle_longsword),
 ]
 
@@ -79,8 +74,22 @@ func _accept_animations() -> void:
 
 		if anim.anim_id == A.longsword_1:
 			print("~~", anim._to_string())
-			
-	_anim_by_name[A.fake_anim] = AnimationData.new(A.fake_anim, A.fake_anim, 0, 1, 1)
+	
+
+	# TODO: for double action. It should not play it at all
+	_anim_by_name[A.fake_anim] = _anim_by_name[A.midair]
+
+
+	# VALIDATION
+	var invalid_animations := []
+	for anim in _anim_by_name.values():
+		if not AnimationData.__validate_anim(anim):
+			invalid_animations.append(anim.anim_name)
+		else:
+			print(anim.anim_name + " is valid")
+
+	if invalid_animations.size() > 0:
+		print_.warn("Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)])
 
 
 func __enrich_with_end_start_times(anim: AnimationData):

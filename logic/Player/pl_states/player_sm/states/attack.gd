@@ -18,8 +18,8 @@ class_name AttackState
 var hit_damage = 10 # will be a function of player stats in the future
 
 func check_transition(input: InputPackage) -> PLVerdict:
-	if current_action.works_longer_than(current_action.DURATION):
-		print_.psm_check_trans(state_name, pp.s("Works > anim DURATION", current_action.DURATION, "=> choosing best input"))
+	if current_action.time_remaining() < 0.0:
+		print_.psm_check_trans(state_name, pp.s("time_remaining < 0.0 => choosing best input"))
 		var best_input = best_input_that_can_be_paid(input)
 		return best_input
 	# TODO: works not as intended wo idle state !! also RELEASES_PRIORITY should be dependent on current_action.DURATION! and sometimes turned off

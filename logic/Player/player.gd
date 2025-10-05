@@ -84,6 +84,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 
 # ONLY GETTERS FOR OPPONENT PROJECT
+# TODO: code is old
 func hp_percentage() -> float:
 	return model.resources.health / model.resources.max_health
 
@@ -116,9 +117,10 @@ func is_rolling() -> bool:
 	return current_state.state_name == "roll"
 
 func roll_time_left() -> float:
-	if is_rolling():
-		return current_state.DURATION - current_state.get_progress()
 	return 0
+	# if is_rolling():
+	# 	return current_state.DURATION - current_state.get_progress()
+	# return 0
 
 func get_roll_endpoint() -> Vector3:
 	if is_rolling():

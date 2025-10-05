@@ -58,11 +58,11 @@ func check_transition(input: InputPackage) -> PLVerdict:
 		
 		# Heavy landing check
 		if player.velocity.y < -15.0:
-			return PLVerdict.new(PS.landing_run) # PS.landing_heavy) # If you have this state
+			return PLVerdict.new(PS.landing_sprint) # PS.landing_heavy) # If you have this state
 		elif xz_speed > 1.0:
-			return PLVerdict.new(PS.landing_run)
+			return PLVerdict.new(PS.landing_sprint)
 		else:
-			return PLVerdict.new(PS.landing_run) # PS.landing_idle) # If you have this
+			return PLVerdict.new(PS.landing_sprint) # PS.landing_idle) # If you have this
 	
 	# Calculate time until landing based on current fall speed
 	# var time_to_impact = floor_distance / abs(player.velocity.y) if player.velocity.y < 0 else 999
@@ -70,7 +70,7 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	# # Trigger landing animation early (0.2s before impact)
 	# if time_to_impact < 0.2 and player.velocity.y < 0:
 	# 	  print_.psm("midair", pp.s("Pre-landing trigger: ", time_to_impact, "s to impact"))
-		# return PLVerdict.new(PS.landing_run)
+		# return PLVerdict.new(PS.landing_sprint)
 	return PLVerdict.new("")
 
 
@@ -105,9 +105,9 @@ func debug_velocities() -> void:
 # 		var xz_velocity = player.velocity
 # 		xz_velocity.y = 0
 # 		if xz_velocity.length_squared() >= 10:
-# 			return PLVerdict.new(PS.landing_run) # TODO WAS SPRINT
+# 			return PLVerdict.new(PS.landing_sprint) # TODO WAS SPRINT
 # 		print_.psm_check_trans(state_name, str(floor_distance) + " < " + str(landing_height) + " => landing_run")
-# 		return PLVerdict.new(PS.landing_run)
+# 		return PLVerdict.new(PS.landing_sprint)
 # 	else:
 # 		# print_.psm("midair", "still midair")
 # 		# still falling

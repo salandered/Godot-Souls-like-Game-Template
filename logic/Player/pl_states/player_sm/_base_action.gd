@@ -10,10 +10,8 @@ var animator_manager: AnimatorManager
 var action_name: String
 
 var anim: AnimationData
-var anim_id: String ## same as anim.anim_id
-var anim_name: String ## same as anim.anim_name
+
 var default_blend_time: float = 0.2
-var DURATION: float ## shortcut for anim.duration
 
 var _enter_action_time: float
 
@@ -35,7 +33,7 @@ func time_spent() -> float:
 
 ## NOTE: If it's a looping animation, returns time till next cycle, not an end of the action.
 func time_remaining() -> float:
-	return DURATION - animator_manager.get_current_anim_time_spent()
+	return anim.duration - animator_manager.get_current_anim_time_spent()
 
 
 ## Like time_remaining(), but takes into account the blend time of the next state.
@@ -45,7 +43,8 @@ func time_remaining() -> float:
 ##       It will return the time we have if we wanna switch inside the current cycle.
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 	var action := container.legs_action_by_name(next_action_name)
-	return max(DURATION - animator_manager.get_current_anim_time_spent() - action.default_blend_time, 0.0)
+	var blend_time: float = action.blend_time_by_state.get(action_name, action.default_blend_time)
+	return max(anim.duration - animator_manager.get_current_anim_time_spent() - blend_time, 0.0)
 
 
 ## Time remaining till a moment, when current animation would be blended 100%. 

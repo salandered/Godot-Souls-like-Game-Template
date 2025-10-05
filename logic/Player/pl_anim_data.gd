@@ -10,30 +10,16 @@ var speed_scale: float
 var is_looping: bool
 var native_anim: Animation
 var markers: Dictionary # {str: M.Marker}
+var uses_root_rotation: bool
 
 func _init(
 		_anim_id,
-		_name = "",
-		_start = 0,
-		_end = 0,
-		_duration = 0,
 		_speed_scale: float = 1.0,
-		_loop = false,
-		_native_anim = null,
-		markers_ = null
+		_uses_root_rotation: bool = false
 		):
 	anim_id = _anim_id
-	anim_name = _name
-	start_time = _start
-	end_time = _end
-	duration = _duration
 	speed_scale = _speed_scale
-	is_looping = _loop
-	native_anim = _native_anim
-	markers = markers_ if markers_ else {}
-
-	if native_anim and not validate_track_values():
-		print_.warn("Animation '%s' has invalid track values!" % anim_name)
+	uses_root_rotation = _uses_root_rotation
 
 ## Client code may get some specific marker directly.
 func get_marker_by_name(marker_name: String) -> M.Marker:
@@ -96,31 +82,6 @@ func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 		elif key_value != null:
 			return bool(key_value)
 	return DEFAULT_PARAMS[param_name] # Last resort
-
-func validate_track_values() -> bool:
-	var all_valid = true
-	
-	for param_name in [SWITCHES_TO_QUEUE, ALLOWS_QUEUE, VULNERABLE, INTERRUPTABLE, WEAPON_HURTS, TRACKS_INPUT_VECTOR]:
-		var track_name = _track_begins + param_name
-		var track_idx = native_anim.find_track(track_name, Animation.TYPE_VALUE)
-		
-		if track_idx == -1:
-			continue # Track not existing is OK
-		
-		var key_count = native_anim.track_get_key_count(track_idx)
-		if key_count == 0:
-			print_.warn("Track '%s' exists but has no keys" % param_name)
-			continue
-		
-		# Check first key (frame 0 area)
-		var first_value = native_anim.track_get_key_value(track_idx, 0)
-		if first_value == null:
-			print_.warn("Track '%s' has null value at first key! Fix in animation editor." % param_name)
-			all_valid = false
-		elif not first_value is bool:
-			print_.warn("Track '%s' first key is not boolean: %s (%s)" % [param_name, str(first_value), type_string(typeof(first_value))])
-	
-	return all_valid
 
 
 # region: print to str
@@ -186,5 +147,73 @@ const DEFAULT_PARAMS := {
 }
 
 const _track_begins = "%AnimParameters:"
+
+# endregion
+
+
+# region: VALIDATION
+
+static func __validate_track_values(anim: AnimationData) -> bool:
+	var all_valid = true
+	
+	for param_name in [SWITCHES_TO_QUEUE, ALLOWS_QUEUE, VULNERABLE, INTERRUPTABLE, WEAPON_HURTS, TRACKS_INPUT_VECTOR]:
+		var track_name = _track_begins + param_name
+		var track_idx = anim.native_anim.find_track(track_name, Animation.TYPE_VALUE)
+		
+		if track_idx == -1:
+			continue # Track not existing is OK
+		
+		var key_count = anim.native_anim.track_get_key_count(track_idx)
+		if key_count == 0:
+			print_.warn("Track '%s' exists but has no keys" % param_name)
+			continue
+		
+		# Check first key (frame 0 area)
+		var first_value = anim.native_anim.track_get_key_value(track_idx, 0)
+		if first_value == null:
+			print_.warn("Track '%s' has null value at first key! Fix in animation editor." % param_name)
+			all_valid = false
+		elif not first_value is bool:
+			print_.warn("Track '%s' first key is not boolean: %s (%s)" % [param_name, str(first_value), type_string(typeof(first_value))])
+	
+	return all_valid
+
+
+static func __validate_anim(anim_data: AnimationData) -> bool:
+	# base field validation (not null)
+	if anim_data.anim_id == null:
+		return false
+	
+	if anim_data.anim_name == null:
+		return false
+	
+	if anim_data.native_anim == null:
+		return false
+
+	if anim_data.markers == null:
+		return false
+	
+
+	# specific field validation
+	if anim_data.start_time < 0:
+		return false
+	
+	if anim_data.end_time <= anim_data.start_time:
+		return false
+	
+	if anim_data.duration <= 0:
+		return false
+	
+	if anim_data.speed_scale <= 0:
+		return false
+
+
+	# native anim tracks data (experimental)
+	if not __validate_track_values(anim_data):
+		print_.warn("Animation '%s' has invalid track values!" % anim_data.anim_name)
+		return false
+	
+	return true
+
 
 # endregion

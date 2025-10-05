@@ -77,8 +77,8 @@ func _check_transition(input: InputPackage) -> PLVerdict:
 
 ## can be overriden: see Run or attack.gd
 func check_transition(_input: InputPackage) -> PLVerdict:
-	if current_action.works_longer_than(current_action.DURATION):
-		print_.psm_check_trans(state_name + " default check", pp.s("Works > anim DURATION", current_action.DURATION, "=> choosing best input"))
+	if current_action.time_remaining() <= 0.0:
+		print_.psm_check_trans(state_name + " default check", pp.s("time_remaining < 0 => choosing best input"))
 		return best_input_that_can_be_paid(_input)
 	return PLVerdict.new()
 

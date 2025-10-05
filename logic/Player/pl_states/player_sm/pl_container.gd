@@ -143,14 +143,12 @@ func accept_player_actions():
 
 		# specific
 		var anim := anim_container.get_by_name(action_data.anim_id)
+		assert(anim, "no anim with " + action_data.anim_id)
 		child.anim = anim
-		child.anim_id = anim.anim_id
-		child.anim_name = anim.anim_name
-		child.DURATION = anim.duration
 		child.action_name = action_data.action_name
 
 		assert(child.action_name and not child.action_name.is_empty(), " action_name problem")
-		assert(child.anim_id and not child.anim_id.is_empty(), " animation problem for action: " + child.action_name)
+
 	print_.container("", "===========  Accepted actions ===========")
 	print_.container("", str(_player_actions))
 	print("")
@@ -203,15 +201,11 @@ func accept_legs_actions():
 		# specific
 		var anim := anim_container.get_by_name(action_data.anim_id)
 		child.anim = anim
-		child.anim_id = anim.anim_id
-		child.anim_name = anim.anim_name
-		child.DURATION = anim.duration
 		
 		child.action_name = action_data.action_name
 		child.motion_type = action_data.motion_type
 
 		assert(child.action_name and not child.action_name.is_empty(), "action_name problem for")
-		assert(child.anim_id and not child.anim_id.is_empty(), " animation problem for action: " + child.action_name)
 		
 
 func states_priority_sort(a: String, b: String) -> bool:

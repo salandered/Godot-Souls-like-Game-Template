@@ -1,0 +1,36 @@
+const aramture name
+const anim name
+const result anim name
+
+
+
+- copy anim and name result anim name
+- link armature and result anim name
+- select mode for armature
+- select hips bone and alt P clear parent
+- pose mode, select root, add copy Rotation constraint for bone. target - Hips, axis Z. World spaces for both. (no inverted axis selected)
+- bake action: 
+	- frames = anim frames, 
+	- checked: only selected bones, visual keying, clear constraints, overwrite curr action. 
+	- bake data: Pose. 
+	- Channel: all or rotation. by default was all and it worked
+
+check: root rotates according to anim. not fast. anim works also as expected. (global anim rotation could ve been changed after alt P ). no crazy fast things
+
+
+- parent hips to root (as they were)
+- pose mode, select Hips
+- Copy Rotation from Root, only Z! no inverse. everything else defaulted.
+
+check: aniamtion look as it should be, no nuances.
+
+- bake (Hips still selected in Pose mode)
+
+
+=== TROUBLESHOOTING ===
+
+if ORIGINAL aniamtion suddenly breaks
+   - its not anim or armature. 
+   - After playing anim with real ROOT ROTATION, root stucks in some specific position. it breaks other animations. 
+   - just reset the pose before playing other animations on an armature which was playing root rotation. 
+   - (kinda same wtih root location, but in that case the influence of prev anim is obvious. while here it can scare the crap out of u)

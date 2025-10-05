@@ -1,181 +1,102 @@
+# small_jump_run.gd
 extends PlayerState
 
+# Animation timings
+var TAKEOFF_TIME := 0.35 # When we actually leave ground
+var LANDING_TIME := 1.1 # When first foot touches down
 
-var LAUNCH_TIMING = 0.0657 # When in animation the character actually leaves ground
-var jumped := false
+# Jump parameters (easily tweakable)
+var JUMP_VELOCITY_Y := 1.8 # Lower than regular jump's 2.5
+var FORWARD_SPEED := 3.0 # Maintain run speed
+var AIR_CONTROL_STRENGTH := 0.12 # Subtle air control
+
+# State tracking
+var phase := "prep" # "prep", "airborne", "recovery"
+var initial_forward_dir: Vector3
 
 func on_enter_state(input: InputPackage) -> void:
-	var anim: AnimationData = current_action.anim
-	var marker := anim.get_marker_by_name(M.MarkerName.JUMP_LAUNCH)
-	if marker:
-		LAUNCH_TIMING = marker.time
-	jumped = false
-	player.velocity = player.velocity.normalized() * player.jump_data.jump_speed
-	print_.psm(pp.on_ent + state_name, str(player.jump_data))
+	phase = "prep"
+	# Capture current movement direction
+	initial_forward_dir = player.velocity.normalized()
+	if initial_forward_dir.length() < 0.1:
+		initial_forward_dir = player.basis.z
+	
+	# Maintain forward momentum
+	player.velocity = initial_forward_dir * FORWARD_SPEED
+	player.velocity.y = -2.0 # Slight downward to stay grounded during prep
 
 
 func on_exit_state() -> void:
-	print_.psm(pp.on_ex + state_name, pp.s("player.velocity.y", player.velocity.y))
-
-
-func check_transition(input: InputPackage) -> PLVerdict:
-	var treshhold = current_action.DURATION - 0.05
-	if current_action.works_longer_than(treshhold):
-		print_.psm_check_trans(state_name, pp.compare_w("Work longer than", "", treshhold) + "=> midair")
-		return PLVerdict.new(PS.midair)
-	return PLVerdict.new("")
+	# Ensure we're grounded when exiting
+	if player.velocity.y > 0:
+		player.velocity.y = 0
 
 
 func update(input: InputPackage, delta: float) -> void:
-	if not jumped and current_action.works_longer_than(LAUNCH_TIMING):
-		player.velocity.y += 2.5
-		jumped = true
-		print_.psm(state_name, "JUMPED! Setting physics_y_velocity to: " + str(player.jump_data.jump_speed))
+	var time = current_action.time_spent()
 	
-	# move_with_hybrid_root(delta)
+	# Phase transitions based on animation timing
+	if phase == "prep" and time >= TAKEOFF_TIME:
+		phase = "airborne"
+		player.velocity.y = JUMP_VELOCITY_Y
+		print_.psm(state_name, "Takeoff! Y velocity: " + str(JUMP_VELOCITY_Y))
+	elif phase == "airborne" and time >= LANDING_TIME:
+		phase = "recovery"
+		player.velocity.y = -2.0 # Stick to ground
+		print_.psm(state_name, "Landed!")
 	
-	# debug_velocities()
+	# Phase-specific behavior
+	match phase:
+		"prep":
+			# Still on ground, maintain forward motion
+			keep_forward_momentum(delta)
+		
+		"airborne":
+			# Apply gravity
+			player.velocity.y -= player.jump_data.jump_fall_gravity * delta
+			# Air control
+			apply_air_control(input, delta)
+		
+		"recovery":
+			# On ground, blend back to run
+			keep_forward_momentum(delta)
 
-func move_with_hybrid_root(delta: float) -> void:
-	# Get XZ root motion from animation (Y zeroed)
-	# var xz_root_velocity := animator_manager.get_root_velocity(true)
-	# Apply rotation to root motion
-	# var xz_delta_pos = player.get_quaternion() * xz_root_velocity
-	# Combine: XZ from root motion, Y from physics
-	# player.velocity.x = xz_delta_pos.x
-	# player.velocity.z = xz_delta_pos.z
-	if jumped:
-		player.velocity.y -= player.jump_data.jump_up_gravity * delta
-	else:
-		# Before jump, keep grounded
-		player.velocity.y = -2.0 # Small downward to stay on floor
-
-func debug_velocities() -> void:
+func keep_forward_momentum(delta: float) -> void:
+	# Option 1: Use root motion XZ if animation has it
 	var xz_root = animator_manager.get_root_velocity(true)
-	var rotated_xz = player.get_quaternion() * xz_root
+	if xz_root.length() > 0.1:
+		player.velocity.x = (player.get_quaternion() * xz_root).x
+		player.velocity.z = (player.get_quaternion() * xz_root).z
+	# Option 2: Otherwise maintain speed
+	else:
+		var current_xz = Vector3(player.velocity.x, 0, player.velocity.z)
+		if current_xz.length() < FORWARD_SPEED * 0.5:
+			player.velocity.x = initial_forward_dir.x * FORWARD_SPEED
+			player.velocity.z = initial_forward_dir.z * FORWARD_SPEED
+
+func apply_air_control(input: InputPackage, delta: float) -> void:
+	var input_dir := velocity_by_input(input, delta)
+	input_dir.y = 0
+	input_dir = input_dir.normalized()
 	
-	# print_.psm(state_name, pp.s("state progress in sc ", current_action.get_progress()))
-	# print_.psm(state_name, pp.s("~~jumped: ", jumped, " physics_y_velocity: ", physics_y_velocity, " player.velocity.y: ", player.velocity.y))
-	# print_.psm(state_name, pp.s("~~xz_root: ", xz_root, " rotated_xz: ", rotated_xz))
+	if input_dir.length() < 0.1:
+		return
 	
-	# Green arrow for XZ movement (from player position)
-	var xz_end = player.global_position + Vector3(rotated_xz.x, 0, rotated_xz.z)
-	DebugDraw3D.draw_arrow(
-		player.global_position,
-		xz_end,
-		Color.GREEN,
-		0.2
-	)
+	var current_xz = Vector3(player.velocity.x, 0, player.velocity.z)
+	var current_speed = current_xz.length()
 	
-	# Blue arrow for Y velocity (scale it down for visibility)
-	if jumped:
-		var y_end = player.global_position + Vector3(0, player.current_jump_velocity_y * 0.1, 0)
-		DebugDraw3D.draw_arrow(
-			player.global_position,
-			y_end,
-			Color.BLUE,
-			0.2
-		)
-
-# region: If you want more control, you can also extract both Y and XZ components and blend them:
-# func move_with_hybrid_root_advanced(delta: float) -> void:
-# 	# Get full root motion including Y
-# 	var full_root_velocity := animator_manager.get_root_velocity(false)
-# 	# Get XZ-only root motion  
-# 	var xz_root_velocity := animator_manager.get_root_velocity(true)
+	# Redirect without changing speed much
+	var target_velocity = input_dir * current_speed
+	current_xz = current_xz.lerp(target_velocity, AIR_CONTROL_STRENGTH * delta)
 	
-# 	# Extract just the Y component from animation
-# 	var anim_y_velocity = full_root_velocity.y
+	player.velocity.x = current_xz.x
+	player.velocity.z = current_xz.z
+
+func check_transition(input: InputPackage) -> PLVerdict:
+	# Exit when animation completes
+	if current_action.time_remaining() < 0.05:
+		return PLVerdict.new(PS.run)
+	if not player.is_on_floor() and phase == 'recovery':
+		return PLVerdict.new(PS.midair)
 	
-# 	# Apply rotation
-# 	var rotated_xz = player.get_quaternion() * xz_root_velocity
-	
-# 	# Blend animation Y with physics Y (optional - for subtle polish)
-# 	var y_blend_factor = 0.2  # How much animation Y affects final Y
-# 	var final_y = physics_y_velocity
-# 	if not jumped:  # Before launch, use more animation
-# 		final_y = lerp(physics_y_velocity, anim_y_velocity, 0.8)
-# 	else:  # After launch, mostly physics with subtle anim influence
-# 		final_y = lerp(physics_y_velocity, physics_y_velocity + anim_y_velocity, y_blend_factor)
-	
-# 	player.velocity = Vector3(rotated_xz.x, final_y, rotated_xz.z)
-	
-# 	# Update physics Y for next frame
-# 	if jumped:
-# 		physics_y_velocity -= up_gravity * delta
-# endregion
-
-# region: For comparison, here's how you'd organize states by their root motion needs:
-# Base state class addition
-# func move_with_root(delta: float, use_y: bool = false) -> void:
-# 	var root_velocity := animator_manager.get_root_velocity(not use_y)
-# 	player.velocity = player.get_quaternion() * root_velocity
-	
-# 	# Add gravity if we're ignoring animation Y
-# 	if not use_y and not player.is_on_floor():
-# 		player.velocity.y -= u.gravity * delta
-
-# # Usage in different states:
-# # attack.gd - Pure XZ root motion
-# func update(input: InputPackage, delta: float) -> void:
-# 	move_with_root(delta, false)  # XZ only
-	
-# # climb_ledge.gd - Full XYZ root motion  
-# func update(input: InputPackage, delta: float) -> void:
-# 	move_with_root(delta, true)  # Use animation Y
-	
-# # jump_start.gd - Hybrid
-# func update(input: InputPackage, delta: float) -> void:
-# 	move_with_hybrid_root(delta)  # Custom blend
-# endregion
-
-# Key Decision Points: When to use each approach
-
-# Pure XZ Root Motion (Y physics):
-
-	# Jump states (start, midair, land)
-	# Normal movement (walk, run, sprint)
-	# Combat moves that stay grounded
-
-# Full XYZ Root Motion:
-
-	# Climb/vault animations
-	# Synchronized takedowns
-	# Cutscene-like movements
-	# Getting up from ragdoll
-
-# No Root Motion (pure physics):
-
-	# Midair state after jump
-	# Knockback/damage reactions
-	# Swimming/flying
-
-
-# AS IT WAS
-# var VERTICAL_SPEED_ADDED: float = 2.5
-
-# # values based on animation jump_run
-# const TRANSITION_TIMING = 0.44
-# const JUMP_TIMING = 0.1
-
-# var jumped: bool = false
-
-# func _ready() -> void:
-# 	SPEED = 3.0
-
-# func check_transition(input: InputPackage) -> PLVerdict:
-# 	if current_action.works_longer_than(TRANSITION_TIMING):
-# 		jumped = false
-# 		return PLVerdict.new(PS.midair)
-# 	else:
-# 		return PLVerdict.new("")
-
-# func on_enter_state(input: InputPackage) -> void:
-# 	player.velocity = player.velocity.normalized() * SPEED
-
-# func update(input: InputPackage, delta: float) -> void:
-# 	if current_action.works_longer_than(JUMP_TIMING):
-# 		if not jumped:
-# 			#player.velocity = player.basis.z * SPEED
-# 			player.velocity.y += VERTICAL_SPEED_ADDED
-# 			jumped = true
+	return PLVerdict.new("")

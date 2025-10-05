@@ -15,6 +15,7 @@ func initialise(start: float, target: float, duration_: float) -> void:
 	duration = duration_
 	timer = 0.0
 
+## Returns target_value when done
 func update(delta: float) -> float:
 	if timer < duration:
 		timer += delta

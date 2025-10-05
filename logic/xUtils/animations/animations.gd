@@ -32,6 +32,7 @@ class lib:
 
 
 const idle := lib.all_axe + "L-combat-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
+
 const walk := lib._ss_loco + "C-walk" # _EP_p1 + "EP-p1-O-Walk-Combat" # _ss_loco + "C-walk"
 # const combat_walk_start := lib._SWS_loco_p2 + "SWSlp2-O-walk-start" # _ss_loco + "C-walk"
 const idle_to_sprint := lib.start_end_v2 + "L RM Idle To Sprint" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
@@ -41,15 +42,20 @@ const walk_back := lib._ss_loco + "C-walk-back" # _EP_p1 + "EP-p1-O-Walk-Combat-
 const run := lib._run + "B-Jog-Forward-v2" # "SWSl-O-run-F" # _run + "B-Jog-Forward-v2"
 const sprint := lib._run + "B-Fast-Run-v2" # _SWS_loco + "SWSl-O-sptrint-F" # _run + "B-Fast-Run-v2"
 
+const turn_180_R := lib._ss_loco + "RMR ss 180 turn R"
+const turn_180_L := lib._ss_loco + "RMR ss 180 turn L"
+
+
 # strafe
-const run_L := lib._SWS_loco + "SWSl-O-run-L-blended" # _strafe + "A-ss-strafe-L"
+# const run_L := lib._SWS_loco + "SWSl-O-run-L-blended" # _strafe + "A-ss-strafe-L"
 const run_R := lib._SWS_loco + "SWSl-O-run-R-blended" # _strafe + "A-ss-strafe-R"
 
 # air
 # todo jump-roll A-Quick-Roll-To-Run
 const midair := lib.jump_v4 + "Midair-Hok" # TODO: change rotation of anim
-const jump_run := lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-UP-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-start"
-const landing_run := lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-LAND-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-end"
+# const jump_run := lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-UP-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-start"
+const small_jump_run := lib.axe_rm_jump + "LL-jump-running"
+# const landing_run := lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-LAND-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-end"
 const jump_sprint := lib.jump_v4 + "RM-Run-Jump-all"
 const landing_sprint := lib.jump_v4 + "RM-Run-Jump-ver-land"
 const jump_idle := lib._bit_of_glue + "A-Idle-Jumping-ver3"
@@ -85,7 +91,7 @@ const idle_longsword := midair # _ff + "idle_longsword"
 
 #--------------
 
-# TODO: why we use it and can ve drop it
+
 const fake_anim := "fake anim"
 
 #--------------

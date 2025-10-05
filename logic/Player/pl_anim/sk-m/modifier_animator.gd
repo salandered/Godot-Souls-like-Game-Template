@@ -25,7 +25,7 @@ var __initialised: bool = false
 ## note that animation may have it's own speed scale. They will be multiplied.
 # var _dev_hard_speed_scale = true # for tests
 var _dev_hard_speed_scale = false
-# var global_speed_scale := 0.4
+# var global_speed_scale := 1.0
 var global_speed_scale := 1.0
 
 var blend_playback := BlendPlayback.new()
@@ -33,6 +33,8 @@ var blend_playback := BlendPlayback.new()
 var curr_playback: AnimPlayback
 ## for blending between two animations
 var prev_playback: AnimPlayback
+
+# todo: flying bone attachments
 
 
 func initialise():
@@ -70,6 +72,7 @@ func _process_modification():
 		_update_time()
 		_update_blend_values()
 		_update_skeleton()
+		# _apply_residual_rotation()
 
 
 func _update_time():
@@ -82,7 +85,8 @@ func _update_time():
 
 	curr_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
 	
-	if blend_playback.is_blending:
+	## prev_playback plays as if it still was a curr one.
+	if prev_playback.time_spent < prev_playback.anim.duration:
 		prev_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(prev_playback)
 
 	if curr_playback.time_spent > curr_playback.anim.duration and curr_playback.anim.is_looping:
@@ -119,13 +123,13 @@ func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
 	# - then we do the same with rotation. Difference is type casting because animation stores rotation data in quaternions, but `Transform3D` stores it in basis vector triples.
 	var result_transform: Transform3D
 	
-	var bone_position_track := playback.native_anim.find_track(_bone_to_track_name(bone_idx), Animation.TYPE_POSITION_3D)
+	var bone_position_track := __get_position_track(bone_idx, playback.native_anim)
 	if bone_position_track != -1:
 		result_transform.origin = playback.native_anim.position_track_interpolate(bone_position_track, playback.get_effective_progress())
 	else:
 		result_transform.origin = skeleton.get_bone_pose(bone_idx).origin
 
-	var bone_rotation_track := playback.native_anim.find_track(_bone_to_track_name(bone_idx), Animation.TYPE_ROTATION_3D)
+	var bone_rotation_track := __get_rotation_track(bone_idx, playback.native_anim)
 	if bone_rotation_track != -1:
 		result_transform.basis = Basis(playback.native_anim.rotation_track_interpolate(bone_rotation_track, playback.get_effective_progress()))
 	else:
@@ -138,69 +142,105 @@ func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
 	return global_speed_scale * playback.anim.speed_scale
 
 
-func _bone_to_track_name(bone_index: int) -> String:
-	return "%GeneralSkeleton:" + skeleton.get_bone_name(bone_index)
+func get_prev_root_rotation() -> float:
+	var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
+	# var residual_rotation = prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
+	var residual_rotation = prev_rotation_delta * global_speed_scale
+	if abs(residual_rotation) > 0.0001:
+		print("[MOD_ANIM] get_prev_root_rotation(): delta=%.4f | result=%.4f" % [
+			prev_rotation_delta,
+			residual_rotation
+		])
+
+	return residual_rotation
 
 func get_root_velocity(y_zeroed: bool = true) -> Vector3:
-	var root_track_path := _bone_to_track_name(0)
-	var pos_track := curr_playback.native_anim.find_track(root_track_path, Animation.TYPE_POSITION_3D)
-	if pos_track == -1 or curr_playback.native_anim.track_get_key_count(pos_track) <= 1:
-		return Vector3.ZERO
-
-	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
-	var curr_progress = curr_playback.get_effective_progress()
-	var prev_progress = max(0.0, curr_progress - scaled_delta)
+	var curr_velocity = _calculate_velocity_delta(curr_playback, 0)
 	
-	var prev_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, prev_progress)
-	var curr_pos: Vector3 = curr_playback.native_anim.position_track_interpolate(pos_track, curr_progress)
-	var curr_velocity = (curr_pos - prev_pos) / scaled_delta if scaled_delta > 0 else Vector3.ZERO
-	
-	# TODO: experimental! It might be anim is not rm, but track is not empty. Result is unknown
 	if blend_playback.is_blending:
-		var prev_pos_track := prev_playback.native_anim.find_track(root_track_path, Animation.TYPE_POSITION_3D)
-		var prev_velocity := Vector3.ZERO # Default to zero if no root motion
-		
-		# Only calculate prev velocity if the track exists and has data
-		if prev_pos_track != -1 and prev_playback.native_anim.track_get_key_count(prev_pos_track) > 1:
-			var prev_scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(prev_playback)
-			var prev_curr_progress = prev_playback.get_effective_progress()
-			var prev_prev_progress = max(0.0, prev_curr_progress - prev_scaled_delta)
-			
-			var prev_prev_pos: Vector3 = prev_playback.native_anim.position_track_interpolate(prev_pos_track, prev_prev_progress)
-			var prev_curr_pos: Vector3 = prev_playback.native_anim.position_track_interpolate(prev_pos_track, prev_curr_progress)
-			prev_velocity = (prev_curr_pos - prev_prev_pos) / prev_scaled_delta if prev_scaled_delta > 0 else Vector3.ZERO
-		
-		# Blend the velocities
+		var prev_velocity = _calculate_velocity_delta(prev_playback, 0)
 		curr_velocity = prev_velocity.lerp(curr_velocity, blend_playback.percentage)
-
-	# print_.prefix("", pp.s("~~~~prev_pos", pp.vec3(prev_pos), "len", prev_pos.length()) + " " +
-	# pp.s("curr_pos", pp.vec3(curr_pos), "len", curr_pos.length()) + " " +
-	# pp.s("delta_pos", pp.vec3(delta_pos), "len", delta_pos.length()))
+	
 	if y_zeroed:
 		curr_velocity.y = 0
 	
 	return curr_velocity * global_speed_scale
 
 
-# experimantal. not really working. 
-# RM driven animation usually root rotation at hips. But hips also have their usual rotation. 
-# root rotation from hips should be retargeted to root bone.
-func get_root_rotation() -> float:
-	var hip_track_path := _bone_to_track_name(1)
-	var rot_track := curr_playback.native_anim.find_track(hip_track_path, Animation.TYPE_ROTATION_3D)
+func get_root_rotation(y_only: bool = true) -> float:
+	var curr_rotation_delta = _calculate_rotation_delta(curr_playback, 0)
+	
+	# if blend_playback.is_blending:
+	# 	var prev_rot_track := __get_rotation_track(0, prev_playback.native_anim)
+		
+	# 	# Only blend if previous animation also has rotation
+	# 	if prev_rot_track != -1:
+	# 		var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
+	# 		curr_rotation_delta = lerp(prev_rotation_delta, curr_rotation_delta, blend_playback.percentage)
+	# 		# prints(u.fr(), "ROT_BLEND", curr_rotation_delta)
+	
+	return curr_rotation_delta * global_speed_scale
+
+
+func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int) -> Vector3:
+	var pos_track := __get_position_track(bone_idx, playback.native_anim)
+	if pos_track == -1 or playback.native_anim.track_get_key_count(pos_track) <= 1:
+		return Vector3.ZERO
+	
+	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(playback)
+	var curr_progress = playback.get_effective_progress()
+	var prev_progress = max(0.0, curr_progress - scaled_delta)
+	
+	var prev_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, prev_progress)
+	var curr_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, curr_progress)
+	
+	return (curr_pos - prev_pos) / scaled_delta if scaled_delta > 0 else Vector3.ZERO
+
+
+func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
+	var rot_track := __get_rotation_track(bone_idx, playback.native_anim)
 	if rot_track == -1:
 		return 0.0
 	
-	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
-	var curr_progress = curr_playback.get_effective_progress()
+	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(playback)
+	var curr_progress = playback.get_effective_progress()
 	var prev_progress = max(0.0, curr_progress - scaled_delta)
 	
-	var prev_rot: Quaternion = curr_playback.native_anim.rotation_track_interpolate(rot_track, prev_progress)
-	var curr_rot: Quaternion = curr_playback.native_anim.rotation_track_interpolate(rot_track, curr_progress)
+	var prev_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, prev_progress)
+	var curr_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, curr_progress)
 	
-	# Get Y-axis rotation difference
 	var delta_rot = prev_rot.inverse() * curr_rot
-	return delta_rot.get_euler().y # Returns radians
+	var rotation_delta = delta_rot.get_euler().y
+	
+	# Handle angle wrapping
+	if rotation_delta > PI:
+		rotation_delta -= TAU
+	elif rotation_delta < -PI:
+		rotation_delta += TAU
+	
+	return rotation_delta
+
+
+## Kinda not Animator's logic, but suits here for now
+func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
+	var root_pos_track := __get_position_track(0, anim.native_anim)
+	
+	if root_pos_track == -1 or anim.native_anim.track_get_key_count(root_pos_track) <= 1:
+		return 0.0
+	
+	# Sample at start and a small delta to get initial velocity
+	var sample_delta = 0.016 # One frame at 60fps
+	var start_time = anim.start_time
+	var pos_at_start = anim.native_anim.position_track_interpolate(root_pos_track, start_time)
+	var pos_at_delta = anim.native_anim.position_track_interpolate(root_pos_track, start_time + sample_delta)
+	
+	var velocity = (pos_at_delta - pos_at_start) / sample_delta
+	velocity.y = 0
+	
+	var result = velocity.length() * anim.speed_scale
+	# print("[RUN_STOP] calc_start_vel: pos_start=%s pos_delta=%s -> vel=%.2f" % [
+	# 	pp.vec3(pos_at_start), pp.vec3(pos_at_delta), result ])
+	return result
 
 
 func set_global_speed_scale(new_scale: float):
@@ -215,6 +255,30 @@ func reset_global_speed_scale():
 		return
 	# print_.skm(animator_name, "scale reset to 1")
 	set_global_speed_scale(1.0)
+
+
+# region: helpers
+
+func __bone_idx_to_track_path(bone_idx: int) -> String:
+	# TODO what if non existent bone_idx
+	# TODO make a dict once and use. dont use get_bone_name every frame
+	return "%GeneralSkeleton:" + skeleton.get_bone_name(bone_idx)
+
+
+func __get_position_track(bone_idx: int, native_anim: Animation) -> int:
+	## if not, returns -1
+	var track_path = __bone_idx_to_track_path(bone_idx)
+	var pos_track := native_anim.find_track(track_path, Animation.TYPE_POSITION_3D)
+	return pos_track
+
+
+func __get_rotation_track(bone_idx: int, native_anim: Animation) -> int:
+	## if not, returns -1
+	var track_path = __bone_idx_to_track_path(bone_idx)
+	var rot_track := native_anim.find_track(track_path, Animation.TYPE_ROTATION_3D)
+	return rot_track
+
+# endregion
 
 
 func __log_state() -> String:

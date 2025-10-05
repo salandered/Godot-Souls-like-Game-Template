@@ -62,10 +62,18 @@ func reset_global_speed_scale():
 func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 	return full_body.get_root_velocity(y_zeroed)
 
+func get_root_rotation(y_only: bool = true) -> float:
+	return full_body.get_root_rotation(y_only)
+
+
+func get_prev_root_rotation() -> float:
+	return full_body.get_prev_root_rotation()
 
 func get_current_anim_effective_progress() -> float:
 	return full_body.curr_playback.get_effective_progress()
 
+func get_prev_anim_time_spent() -> float:
+	return full_body.prev_playback.time_spent
 
 func get_current_anim_time_spent() -> float:
 	return full_body.curr_playback.time_spent
@@ -73,6 +81,16 @@ func get_current_anim_time_spent() -> float:
 
 func get_current_blend_duration() -> float:
 	return full_body.blend_playback.duration
+
+
+func is_blending() -> bool:
+	return full_body.blend_playback.is_blending
+
+func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
+	return full_body.calculate_animation_start_root_velocity(anim)
+
+func get_prev_blend_percentage() -> float:
+	return full_body.blend_playback.prev_percentage
 
 ## INTERNAL
 

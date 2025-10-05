@@ -17,7 +17,7 @@ var supported_actions: SupportedActions
 func update(_input: InputPackage, _delta: float):
 	var verdict: LNextActionVerdict = choose_action(_input, _delta)
 	switch_action_to(verdict, _input) # yes, always. In LegsBehavior switch_action_to is smart
-	legs_sm.current_action.update(_input, _delta)
+	legs_sm.current_action._update(_input, _delta)
 
 
 func _on_enter_behavior(_input: InputPackage):
@@ -62,10 +62,10 @@ func switch_action_to(verdict: LNextActionVerdict, input: InputPackage):
 		# print_.lsm_action("", pp.s("switch declined ✖️: same action", next_action_name))
 		return
 	
-	if next_action_name != Leg.Act.double and curr_action_name != Leg.Act.double \
-		and legs_sm.current_action.time_remaining_for_blend_to_complete() > 0.1: # ideally 0, but small tolerance is ok
-		print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️: current", curr_action_name, "needs time to blend from the prev one."))
-		return
+	# if next_action_name != Leg.Act.double and curr_action_name != Leg.Act.double \
+	# 	and legs_sm.current_action.time_remaining_for_blend_to_complete() > 0.1: # ideally 0, but small tolerance is ok
+	# 	print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️: current", curr_action_name, "needs time to blend from the prev one."))
+	# 	return
 		
 	# SWITCH
 	print_.lsm_action("↪️", "action " + curr_action_name + " => " + next_action_name)

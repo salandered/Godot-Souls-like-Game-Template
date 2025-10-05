@@ -43,8 +43,8 @@ func gather_input(delta: float) -> InputPackage:
 	if Input.is_action_pressed("roll"):
 		new_input.actions.append(PS.roll)
 
-	if Input.is_action_pressed("block"):
-		new_input.actions.append(PS.block)
+	# if Input.is_action_pressed("block"):
+		# new_input.actions.append(PS.block)
 
 
 	if Input.is_action_pressed("shield_throw"):
@@ -57,7 +57,7 @@ func gather_input(delta: float) -> InputPackage:
 		if new_input.actions.has(PS.sprint):
 			new_input.actions.append(PS.jump_sprint)
 		else:
-			new_input.actions.append(PS.jump_run)
+			new_input.actions.append(PS.small_jump_run)
 	
 	# ATTACK
 	if Input.is_action_just_pressed(RawAction.light_attack):
