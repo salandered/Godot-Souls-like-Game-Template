@@ -1,20 +1,18 @@
 extends LegsBehavior
 
 
-## RunLegs behaviour is also a SM. It consists of idle and run (also can be start and end animations)
-
-## `LegsBehavior` states manages `LegsActions`, and legs actions are instantiated once and live in a shared pool 
-##  instead of being a copy per behavior. 
-## => Our SMs don't have duplicates in their states. 
-##    We can use `walk_stop` and `idle` in both `run_locomotion` and  `walk_locomotion` cycles. 
-##    Duplicated is a line telling that idle is used here in supported_actions
-
-
 const START_THRESHOLD := 0.25 # tweak
 const IDLE_COMMIT := 0.12 # seconds
 const START_COMMIT := 0.92 # seconds
 
-	
+var stop_delay: float = 0.1
+var _stop_timer: DelayTimer = DelayTimer.new()
+
+
+func _ready():
+	_stop_timer.initialise(stop_delay)
+
+
 func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 	var is_moving := input.input_direction.length() >= START_THRESHOLD
 	var curr_action = legs_sm.current_action
@@ -24,15 +22,13 @@ func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 	match curr_motion_type:
 		MotionType.IDLE:
 			if is_moving and curr_action.works_longer_than(IDLE_COMMIT):
-				# var target_direction = player.model.player_sm.__velocity_by_input(input, delta).normalized()
-				# var angle_to_target = player.basis.z.signed_angle_to(target_direction, Vector3.UP)
-				# var turn_direction = sign(angle_to_target)
-				# if is_zero_approx(turn_direction): # If input is straight back
-					# turn_direction = 1.0 # Default to a left turn for perfect 180s
-				# legs_sm.transfer_data.fill("turn_decision", {"direction": turn_direction})
-					# 
-				next_action_name = supported_actions.by_motion(MotionType.START)
-				__log_decision_data(is_moving, pp.compare_w("works >", "commit", IDLE_COMMIT), next_action_name)
+				var angle = player.model.__angle_between_player_and_input(input, delta)
+				if abs(angle) > deg_to_rad(130.0):
+					next_action_name = supported_actions.by_motion(MotionType.START)
+					__log_decision_data(is_moving, "Angle > 150 deg", next_action_name)
+				else:
+					next_action_name = supported_actions.by_motion(MotionType.LOOP)
+					__log_decision_data(is_moving, "Angle <= 150 deg", next_action_name)
 	
 	
 		MotionType.START:
@@ -47,9 +43,21 @@ func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 		
 
 		MotionType.LOOP:
-			if not is_moving:
-				next_action_name = supported_actions.by_motion(MotionType.STOP)
-				__log_decision_data(is_moving, "", next_action_name)
+			if is_moving:
+				if input.reverse_data.is_reversed:
+					next_action_name = supported_actions.by_motion(MotionType.START) # TURN
+					__log_decision_data(is_moving, "Reversing: %s" % input.reverse_data, next_action_name)
+			
+				_stop_timer.reset()
+			else:
+				if input.reverse_data.is_reversed:
+					next_action_name = supported_actions.by_motion(MotionType.START) # TURN
+					__log_decision_data(is_moving, "Reversing: %s" % input.reverse_data, next_action_name)
+				else:
+					# Normal stop logic when not moving and not reversing
+					if _stop_timer.update(delta):
+						next_action_name = supported_actions.by_motion(MotionType.STOP)
+						__log_decision_data(is_moving, "_stop_timer expired", next_action_name)
 
 	return LNextActionVerdict.new(next_action_name)
 
@@ -57,3 +65,4 @@ func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 # func _input(event):
 # 	_dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 # 	_next_anim_correction = u._dev_change_t34_param(event, _next_anim_correction, "_next_anim_correction", 0.02)
+			# Check if we have valid turn intent

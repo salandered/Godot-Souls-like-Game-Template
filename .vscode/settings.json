@@ -607,5 +607,16 @@
 		"**/addons/**": true,
 		"**/misc/**": true,
 		"**/-assets-/**": true,
-	}
+	},
+	"favorites.resources": [
+		{
+			"filePath": "logic\\_tests\\unit",
+			"group": "Default"
+		},
+		{
+			"filePath": "logic\\_tests\\unit\\test_input_gatherer.gd",
+			"group": "Default"
+		}
+	],
+	"favorites.sortOrder": "ASC"
 }

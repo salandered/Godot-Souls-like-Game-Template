@@ -6,6 +6,7 @@ static var cln := ": "
 static var s_cln := "; "
 static var arr := " -> "
 static var hence := " => "
+static var angle := " ∠ "
 
 static var on_ent := " on-entr "
 static var on_ex := " on-exit "
@@ -58,6 +59,7 @@ static func _dict(dict_: Dictionary, json: bool = false) -> String:
 		r += in_q(key_) + " -> " + in_q(value_) + '\n'
 	return r.strip_edges()
 
+
 static func _array(array_: Array, json: bool = false) -> String:
 	if json:
 		return JSON.stringify(array_, "\t")
@@ -85,6 +87,14 @@ static func vec3_angle_deg(a: Vector3, b: Vector3, to_str: bool = true) -> Varia
 	r = snapped(r, 0.00001)
 	if to_str:
 		return str(r)
+	return r
+
+
+static func rad2deg(angle: float, to_str: bool = true) -> Variant:
+	var r = rad_to_deg(angle)
+	r = snapped(r, 0.01)
+	if to_str:
+		return str(r) + "°"
 	return r
 
 

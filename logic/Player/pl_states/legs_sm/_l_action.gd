@@ -37,6 +37,7 @@ func on_exit_action() -> void:
 	pass
 
 
+## experimental 
 func _apply_residual_rotation():
 	# If we blend to non root rot anim from root rot anim (e.g. turn_180 -> run),
 	# then we need to apply root rot leftover separately
@@ -48,6 +49,7 @@ func _apply_residual_rotation():
 			if abs(rotation_delta) > 0.001:
 				# print(u.fr() + "[RESIDUAL_ROT] Action '%s' applying residual rotation of %.4f from prev action '%s'" % [action_name, rotation_delta, legs_sm.prev_action.action_name])
 				player.rotate_y(rotation_delta)
+
 
 ## default implementation. Called automatically.
 ## Use cases to override: mute playing animation or using situational blend_time.
@@ -121,9 +123,10 @@ class Angle:
 
 # endregion
 
+
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	# todo: oh fuck what is this dependency
-	return player.model.player_sm.__velocity_by_input(input, delta)
+	return player.model.__velocity_by_input(input, delta)
 
 
 func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:

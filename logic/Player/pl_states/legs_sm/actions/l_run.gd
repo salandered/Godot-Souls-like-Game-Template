@@ -18,6 +18,7 @@ func _ready():
 	SPEED = 3.0
 	ANGULAR_SPEED = 12.0
 	TURN_SPEED = 2.0
+
 	blend_time_by_state = {
 		Leg.Act.idle: 0.3 + _dev_add_blend, # 0.3 WORKED GOOD!!
 		Leg.Act.sprint: 0.3 + _dev_add_blend,
@@ -31,8 +32,7 @@ func on_enter_action(input: InputPackage):
 		prints(u.fr(), "[RUN] no _turn_completed data. assuming turn completed")
 		turn_completed = true
 
-
-	elif not _turn_completed:
+	elif _turn_completed == false:
 		turn_completed = false
 		target_angle = legs_sm.transfer_data.get_by_key_if_action(Leg.Act.turn_180, "target_angle")
 		accumulated_rotation = legs_sm.transfer_data.get_by_key_if_action(Leg.Act.turn_180, "accumulated_rotation")
@@ -59,8 +59,8 @@ func on_exit_action():
 
 
 func update(input: InputPackage, delta: float):
-	var CURVE_SPEED = 1.0 # Default multiplier
-	var RESULT_SPEED = SPEED # Default actual speed
+	var CURVE_SPEED = 1.0 # default multiplier
+	var RESULT_SPEED = SPEED # default actual speed
 
 
 	match legs_sm.prev_action.action_name:
@@ -68,33 +68,32 @@ func update(input: InputPackage, delta: float):
 			CURVE_SPEED = speed_curve_interpolator.update(delta)
 		Leg.Act.turn_180:
 			RESULT_SPEED = speed_interpolator.update(delta)
-			# prints(u.fr(), "interpolator returned RESULT_SPEED", RESULT_SPEED)
-
+	
+	# turn_completed = true
 	if not turn_completed:
-		# --- Rotation Logic ---
-		var rotation_this_frame = animator_manager.get_prev_root_rotation()
+		var rotation_delta = animator_manager.get_prev_root_rotation()
 		var remaining_angle = target_angle - accumulated_rotation
 
-		if sign(rotation_this_frame) != sign(remaining_angle) and abs(remaining_angle) > 0.02: # ~1 degree tolerance
-			print(u.fr(), "[RUN_COMPLETION] Counter-rotation detected. Ending turn.")
+		var _log_msg = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rotation_delta)
+		if rotation_delta < 0 and remaining_angle > 0 or rotation_delta > 0 and remaining_angle < 0:
+			prints(u.fr(), em.pin + "counter rotation, ending turn", _log_msg)
 			turn_completed = true
 		else:
-			var log_msg = "rem=%.2f°, recv=%.2f°" % [rad_to_deg(remaining_angle), rad_to_deg(rotation_this_frame)]
-
-			if abs(rotation_this_frame) >= abs(remaining_angle):
+			if abs(rotation_delta) >= abs(remaining_angle):
 				player.rotate_y(remaining_angle)
 				turn_completed = true
-				print(u.fr(), "[RUN_COMPLETION] CLAMPED. %s. Turn Complete." % log_msg)
+				prints(u.fr(), "Turn complete.", _log_msg)
 			else:
-				player.rotate_y(rotation_this_frame)
-				accumulated_rotation += rotation_this_frame
-				print(u.fr(), "[RUN_COMPLETION] APPLIED. %s" % log_msg)
+				player.rotate_y(rotation_delta)
+				accumulated_rotation += rotation_delta
+				prints(u.fr(), "applied", _log_msg)
 
 		player.velocity = player.basis.z * RESULT_SPEED
+		# TODO: experiment with blending from this and process_input_vector
+		# move_with_input_vector(input, delta, CURVE_SPEED, RESULT_SPEED)
 
 	else:
 		process_input_vector(input, delta, CURVE_SPEED, RESULT_SPEED)
-
 
 	animator_manager.set_global_speed_scale(player.velocity.length() / RESULT_SPEED)
 

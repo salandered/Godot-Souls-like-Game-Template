@@ -41,16 +41,19 @@ func _input(event):
 
 func _label_inputs():
 	var last_input: InputPackage = player.model.area_awareness.last_input_package
-	
+	var vel_by_input_ = player.model.__velocity_by_input(last_input, 0.016)
 	var t := ""
 	t += "input_dir " + pp.vec2(last_input.input_direction)
 	t += "  len %5.2f" % [last_input.input_direction.length()]
+	t += "  forward strength %5.2f" % [last_input.forward_input]
+	t += "  orbit (hor) strength %5.2f" % [last_input.orbit_input]
 	t += "\nactions: " + pp._array(last_input.actions)
 	t += "\ncombat: " + pp._array(last_input.combat_actions)
 	t += "\ntarget lock: pressed " + str(last_input.target_lock_pressed)
 	t += " long " + str(last_input.target_lock_long_pressed)
 	t += "\ncam forward %5.2f  orbit %5.2f" % [last_input.forward_input, last_input.orbit_input]
-
+	t += "\n vel_by_input_" + pp.s(pp.vec3(vel_by_input_), vel_by_input_.length())
+	t += "\n vel_by_input_ norm" + pp.s(pp.vec3(vel_by_input_.normalized()), vel_by_input_.normalized().length())
 	label_inputs.text = t
 
 

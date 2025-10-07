@@ -50,7 +50,7 @@ func _has_forced_state() -> bool:
 	return forced_state != ""
 
 func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-	return player_sm.__velocity_by_input(input, delta)
+	return player.model.__velocity_by_input(input, delta)
 
 
 # - does something from the past forces us to switch? 
@@ -133,7 +133,7 @@ func _on_enter_state(input: InputPackage):
 		print_.psm(state_name + pp.on_ent, "Dependent state. Actions delegated to legs, no switch here ⚪")
 		## WARNING testing idle
 		if state_name == PS.idle and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run]:
-			print_.psm(state_name + pp.on_ent, "No switching legs behavior" + em.red_x)
+			print_.psm(state_name + pp.on_ent, "No switching legs behavior" + em.gray_x)
 		else:
 			legs_sm.switch_to(legs_behavior, input)
 	else: ## state leads legs.  like Attack or Jump or Midair

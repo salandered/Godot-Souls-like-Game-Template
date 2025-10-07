@@ -47,7 +47,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
+enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
 
 [file_customization]
 
@@ -70,6 +70,7 @@ folder_colors={
 "res://logic/Enemies/Gundyr/": "blue",
 "res://logic/Enemies/Gundyr/hsme_states/leafes/": "green",
 "res://logic/Enemies/SimpleEnemy/": "pink",
+"res://logic/_tests/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
 "res://misc/maacks_examples/": "teal",

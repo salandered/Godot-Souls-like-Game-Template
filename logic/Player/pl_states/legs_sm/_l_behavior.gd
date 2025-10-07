@@ -1,7 +1,9 @@
 extends Node
 class_name LegsBehavior
-## Legs SM consists of states called LegsBehavior. 
-## LegsBehavior manages what action updates our legs currently.
+## Legs SM consists of states called LegsBehavior. LegsBehavior is also a SM.
+## `LegsBehavior` manages `LegsActions`, and legs actions live in a shared pool 
+##    => We can use `walk_stop` and `idle` in both `run_locomotion` and  `walk_locomotion` cycles. 
+##    (See SupportedActions)
 
 var container: PlayerStatesContainer
 var legs_sm: LegsSM # set by SM

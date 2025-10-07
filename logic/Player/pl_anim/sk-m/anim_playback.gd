@@ -25,15 +25,23 @@ func get_effective_progress() -> float:
 
 
 func _to_string() -> String:
-	var time_spent_pct = (time_spent / anim.duration) * 100 if anim.duration > 0 else .0
-	var msg = "AnimPlay: %24s %5.1f (%5.2f/%5.2f) off:%5.2f ef-pr %5.2f" % [
+	var msg = "AnimPlay: %20s Prog %5.2f  %5.2f / %5.2f  offset %5.2f" % [
 		pp.in_q(anim.anim_name),
-		time_spent_pct,
+		get_effective_progress(),
 		time_spent,
 		anim.duration,
 		start_offset,
-		get_effective_progress()
 	]
-
 	msg += '\n\t\t\t' + anim.to_string_compact()
+	return msg
+
+
+func _to_string_short() -> String:
+	var msg = "Prog %5.2f  %5.2f / %5.2f  off %5.2f  %20s " % [
+		get_effective_progress(),
+		time_spent,
+		anim.duration,
+		start_offset,
+		pp.in_q(anim.anim_name),
+	]
 	return msg

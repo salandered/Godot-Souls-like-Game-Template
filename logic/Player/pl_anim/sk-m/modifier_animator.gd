@@ -36,7 +36,6 @@ var prev_playback: AnimPlayback
 
 # todo: flying bone attachments
 
-
 func initialise():
 	## NOTE: 0 - root is not animated here. If animation is RM, use get_root_velocity()
 	## 45 - first leg bone
@@ -143,16 +142,17 @@ func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
 
 
 func get_prev_root_rotation() -> float:
+	if prev_playback.get_effective_progress() >= prev_playback.anim.duration:
+		print_.skm(animator_name, "Will return 0.0. effective_prog >= anim.duration. Details:" + prev_playback._to_string_short(), 0, LogL.FORCE_PRINT)
+		return 0.0
 	var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
-	# var residual_rotation = prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
-	var residual_rotation = prev_rotation_delta * global_speed_scale
-	if abs(residual_rotation) > 0.0001:
-		print("[MOD_ANIM] get_prev_root_rotation(): delta=%.4f | result=%.4f" % [
-			prev_rotation_delta,
-			residual_rotation
-		])
+	# var rotation_ = prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
+	var rotation_ = prev_rotation_delta * global_speed_scale
+	# if abs(rotation_) > 0.0001:
+	#  	print_.skm("", "get_prev_root_rotation(): delta=%.4f | result=%.4f" % [prev_rotation_delta, residual_rotation])
 
-	return residual_rotation
+	return rotation_
+
 
 func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 	var curr_velocity = _calculate_velocity_delta(curr_playback, 0)
@@ -170,11 +170,13 @@ func get_root_velocity(y_zeroed: bool = true) -> Vector3:
 func get_root_rotation(y_only: bool = true) -> float:
 	var curr_rotation_delta = _calculate_rotation_delta(curr_playback, 0)
 	
+	# NOTE: Not supporing two animations in a row woth root rotation. 
+	#       For one root rot and other w/o it,  this should be checked for sanity
 	# if blend_playback.is_blending:
 	# 	var prev_rot_track := __get_rotation_track(0, prev_playback.native_anim)
 		
 	# 	# Only blend if previous animation also has rotation
-	# 	if prev_rot_track != -1:
+	# 	if prev_rot_track != -1: # WARNING: what of track existed but we dont use it? switch to AnimationData
 	# 		var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
 	# 		curr_rotation_delta = lerp(prev_rotation_delta, curr_rotation_delta, blend_playback.percentage)
 	# 		# prints(u.fr(), "ROT_BLEND", curr_rotation_delta)

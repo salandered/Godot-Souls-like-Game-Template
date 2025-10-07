@@ -58,37 +58,7 @@ func update(input: InputPackage, delta: float) -> void:
 	current_state._update(input, delta)
 
 
-## TODO: i dont fucking know there to put this function! 
-##       also it is a hack, i dont know how to glue fancy camera with changing player velocity for now
-func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-	var _velocity := Vector3.ZERO
-	var forward_speed := input.forward_input
-	var orbit_speed := input.orbit_input
 
-	if legs_sm.area_awareness.is_camera_locked():
-		forward_speed *= -1
-		orbit_speed *= -1
-	
-	var grounded_target: Vector3
-	if legs_sm.area_awareness.is_camera_locked():
-		grounded_target = player.fancy_camera.locked_target.global_position
-	else:
-		grounded_target = player.fancy_camera.nest.global_position
-	grounded_target.y = player.global_position.y
-
-	if forward_speed != 0.0:
-		_velocity -= player.global_position.direction_to(grounded_target) \
-					 * forward_speed * SPEED
-
-	if orbit_speed != 0.0:
-		var d: float = orbit_speed * SPEED * delta
-		var target_direction := grounded_target - player.global_position
-		var distance_to_target := target_direction.length()
-		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
-		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
-		var d_vector := grounded_target - rotated_dir - player.global_position
-		_velocity += d_vector / delta
-	return _velocity
 
 
 	# TEST

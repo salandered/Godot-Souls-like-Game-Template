@@ -49,6 +49,61 @@ func update(input: InputPackage, delta: float):
 	player.move_and_slide()
 	
 
+# region: VELOCITY BY INPUT LOGIC
+
+@export var SPEED: float = 3.0
+
+# region: legendary TODO
+## Player SM, fancy camera and input gathering are nicely separated in diff systems
+## But this essential func needs them all together and => a lot of the bad symptoms:
+##    - it's the only logic of such sort (and it's not just glue but math going on here)
+##    - it makes every placement of it wrong (now here just because player is the head of everything)
+##    - constants like SPEED are separated from every other loco config
+## 
+## In order to understand why that happened and what to do we need to rethink the whole PlayerPack.
+## (like may be a new abstract 'input' layer which knows about both: input gathering and camera data)
+## And it's much simplier to just leave this small ball of mud here.
+## '__' is used to point out that its not in the right place (when it is referenced by client code)
+# endregion
+func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+	var _velocity := Vector3.ZERO
+	var forward_speed := input.forward_input
+	var orbit_speed := input.orbit_input
+
+	if area_awareness.is_camera_locked():
+		forward_speed *= -1
+		orbit_speed *= -1
+	
+	var grounded_target: Vector3
+	if area_awareness.is_camera_locked():
+		grounded_target = player.fancy_camera.locked_target.global_position
+	else:
+		grounded_target = player.fancy_camera.nest.global_position
+	grounded_target.y = player.global_position.y
+
+	if forward_speed != 0.0:
+		_velocity -= player.global_position.direction_to(grounded_target) * forward_speed * SPEED
+
+	if orbit_speed != 0.0:
+		var d: float = orbit_speed * SPEED * delta
+		var target_direction := grounded_target - player.global_position
+		var distance_to_target := target_direction.length()
+		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
+		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
+		var d_vector := grounded_target - rotated_dir - player.global_position
+		_velocity += d_vector / delta
+	return _velocity
+
+
+func __angle_between_player_and_input(input: InputPackage, delta: float) -> float:
+	var face_dir = player.basis.z
+	var input_dir = __velocity_by_input(input, delta).normalized()
+	var angle = face_dir.signed_angle_to(input_dir, Vector3.UP)
+	return angle
+
+
+# endregion
+
 # region: DEV ONLY
 
 var fly_mode_enabled := false
