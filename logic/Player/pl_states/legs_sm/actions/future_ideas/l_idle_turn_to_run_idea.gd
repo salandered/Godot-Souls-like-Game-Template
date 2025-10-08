@@ -5,7 +5,7 @@ extends LegsAction
 var curr_speed_time: float = 0.0 # [0,1] progress along curve
 var acceleration_time: float = 0.5 # How long to reach full speed
 
-# var speed_curve_interpolator = CurveInterpolator.new()
+# var speed_curve_interpolator = EaseCurveInterpolator.new()
 
 # func _ready():
 # 	SPEED = 3.0

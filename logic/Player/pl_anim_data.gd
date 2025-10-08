@@ -3,8 +3,12 @@ class_name AnimationData
 
 var anim_id: String ## lib + resource_name
 var anim_name: String ## resource_name
-var start_time: float
-var end_time: float
+## DANGER: should not be used. 
+##         needs more time for accurate implementation inside the animator.
+##         use Animator's 'start_time_offset' to achieve the similar effect
+##         same with _end_time. 
+var _start_time: float
+var _end_time: float ## end_time should be working fine but needs testing
 var duration: float
 var speed_scale: float
 var is_looping: bool
@@ -61,8 +65,8 @@ func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 		# print_.warn("Track not found: " + _track_name + " in animation " + anim_name)
 		return DEFAULT_PARAMS[param_name]
 
-	# NOTE the '+ start_time' shift. It's important
-	var value = native_anim.value_track_interpolate(_track, timestamp + start_time)
+	# NOTE the '+ _start_time' shift. It's important
+	var value = native_anim.value_track_interpolate(_track, timestamp + _start_time)
 	if value is bool:
 		return value
 
@@ -91,8 +95,8 @@ func _to_string() -> String:
 	
 	parts.append("AnimationData {")
 	parts.append("  anim_name: \"%s\"" % anim_name)
-	parts.append("  start_time: %.3f" % start_time)
-	parts.append("  end_time: %.3f" % end_time)
+	parts.append("  _start_time: %.3f" % _start_time)
+	parts.append("  _end_time: %.3f" % _end_time)
 	parts.append("  duration: %.3f" % duration)
 	parts.append("  speed_scale: %.3f" % speed_scale)
 	parts.append("  is_looping: %s" % is_looping)
@@ -120,7 +124,7 @@ func _to_string() -> String:
 
 func to_string_compact() -> String:
 	return "%24s: %4.2f-%4.2f, dur %4.2f, scale %1.2f, lp %5s, markers %2d" % [
-		pp.in_q(anim_name), start_time, end_time, duration, speed_scale, str(is_looping), markers.size()
+		pp.in_q(anim_name), _start_time, _end_time, duration, speed_scale, str(is_looping), markers.size()
 	]
 
 # endregion
@@ -195,10 +199,10 @@ static func __validate_anim(anim_data: AnimationData) -> bool:
 	
 
 	# specific field validation
-	if anim_data.start_time < 0:
+	if anim_data._start_time < 0:
 		return false
 	
-	if anim_data.end_time <= anim_data.start_time:
+	if anim_data._end_time <= anim_data._start_time:
 		return false
 	
 	if anim_data.duration <= 0:

@@ -17,6 +17,12 @@ export_credentials.cfg
 # Imported translations (automatically generated from CSV files)
 *.translation
 
+# claude instructions and godot docs mcp config
+.claude/
+.mcp.json
+# copilot
+.github
+
 # Mono-specific ignores
 .mono/
 data_*/

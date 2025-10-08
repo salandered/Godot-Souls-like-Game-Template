@@ -16,6 +16,7 @@ class Act:
 	const idle := "l_action_idle🧍"
 	const run := "l_action_run🏃"
 	const turn_180 := "l_turn_180 ↻"
+	const fast_turn_180 := "l_fast_turn_180 ↻💨"
 	const idle_turn_to_run_L := "l_idle_turn_to_run_L🏃↻"
 	const sprint_to_idle := "l_action_sprint_to_idle🏃💨🧍"
 	const run_to_idle := "l_action_run_to_idle🏃🧍"

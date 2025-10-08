@@ -13,47 +13,35 @@ var _was_running: bool = false
 var _idle_frame_count: int = 0
 
 
-const TURN_INTENT_TIME_THRESHOLD: float = 0.05 # Minimum time difference to determine intent
-
 const MIN_REVERSE_HOLD_TIME: float = 0.1
 const SEQUENTIAL_PRESS_THRESHOLD: float = 0.35
-
-class KeyPress:
-	var is_pressed: bool = false
-	var is_just_pressed: bool = false
-	var is_just_released: bool = false
-	var last_press_time: float = -999.0
-	var last_release_time: float = -999.0
-
-	func update(action: String, current_time: float) -> void:
-		is_pressed = Input.is_action_pressed(action)
-		is_just_pressed = Input.is_action_just_pressed(action)
-		is_just_released = Input.is_action_just_released(action)
-
-		if is_just_pressed:
-			last_press_time = current_time
-		
-		if is_just_released:
-			last_release_time = current_time
-
-	func get_time_since_press(current_time: float) -> float:
-		if last_press_time < 0:
-			return INF
-		return current_time - last_press_time
 
 
 var _forward_key: KeyPress = KeyPress.new()
 var _back_key: KeyPress = KeyPress.new()
-var _left_key: KeyPress = KeyPress.new()
 var _right_key: KeyPress = KeyPress.new()
+var _left_key: KeyPress = KeyPress.new()
 
 
 func _update_key_press_timestamps() -> void:
 	var current_time = Time.get_ticks_msec() / 1000.0
 	_forward_key.update(RawAction.move_forward, current_time)
 	_back_key.update(RawAction.move_back, current_time)
-	_left_key.update(RawAction.move_left, current_time)
 	_right_key.update(RawAction.move_right, current_time)
+	_left_key.update(RawAction.move_left, current_time)
+
+
+func _any_vert_pressed() -> bool:
+	return _forward_key.is_pressed or _back_key.is_pressed
+
+func _any_hor_pressed() -> bool:
+	return _right_key.is_pressed or _left_key.is_pressed
+
+func _just_pressed_and_pressed(key_1: KeyPress, key_2: KeyPress) -> bool:
+	return key_1.is_just_pressed and key_2.is_pressed
+
+func _just_pressed_and_not_pressed(key_1: KeyPress, key_2: KeyPress) -> bool:
+	return key_1.is_just_pressed and not key_2.is_pressed
 
 
 func _determine_turn_intent(new_input: InputPackage) -> void:
@@ -64,53 +52,53 @@ func _determine_turn_intent(new_input: InputPackage) -> void:
 	var current_time = Time.get_ticks_msec() / 1000.0
 		
 	# PHASE 1: Check all overlap cases
-	if _right_key.is_just_pressed and _left_key.is_pressed:
+	if _just_pressed_and_pressed(_right_key, _left_key) and not _any_vert_pressed():
 		var hold_duration = _left_key.get_time_since_press(current_time)
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			reverse_data.initialise(DV.name_to_vec[DV.LEFT], DV.name_to_vec[DV.RIGHT], "strafe", 0.0)
 			return
 	
-	if _left_key.is_just_pressed and _right_key.is_pressed:
+	if _just_pressed_and_pressed(_left_key, _right_key) and not _any_vert_pressed():
 		var hold_duration = _right_key.get_time_since_press(current_time)
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			reverse_data.initialise(DV.name_to_vec[DV.RIGHT], DV.name_to_vec[DV.LEFT], "strafe", 0.0)
 			return
 
-	if _back_key.is_just_pressed and _forward_key.is_pressed:
+	if _just_pressed_and_pressed(_back_key, _forward_key) and not _any_hor_pressed():
 		var hold_duration = _forward_key.get_time_since_press(current_time)
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			reverse_data.initialise(DV.name_to_vec[DV.FORWARD], DV.name_to_vec[DV.BACK], "forward", 0.0)
 			return
 
-	if _forward_key.is_just_pressed and _back_key.is_pressed:
+	if _just_pressed_and_pressed(_forward_key, _back_key) and not _any_hor_pressed():
 		var hold_duration = _back_key.get_time_since_press(current_time)
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			reverse_data.initialise(DV.name_to_vec[DV.BACK], DV.name_to_vec[DV.FORWARD], "forward", 0.0)
 			return
 
 	# PHASE 2: Check all sequential cases if no overlap was found
-	if _right_key.is_just_pressed and not _left_key.is_pressed:
+	if _just_pressed_and_not_pressed(_right_key, _left_key) and not _any_vert_pressed():
 		if _left_key.last_release_time > 0:
 			var time_since_release = current_time - _left_key.last_release_time
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
 				reverse_data.initialise(DV.name_to_vec[DV.LEFT], DV.name_to_vec[DV.RIGHT], "strafe", time_since_release)
 				return
-	
-	if _left_key.is_just_pressed and not _right_key.is_pressed:
+
+	if _just_pressed_and_not_pressed(_left_key, _right_key) and not _any_vert_pressed():
 		if _right_key.last_release_time > 0:
 			var time_since_release = current_time - _right_key.last_release_time
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
 				reverse_data.initialise(DV.name_to_vec[DV.RIGHT], DV.name_to_vec[DV.LEFT], "strafe", time_since_release)
 				return
-				
-	if _back_key.is_just_pressed and not _forward_key.is_pressed:
+
+	if _just_pressed_and_not_pressed(_back_key, _forward_key) and not _any_hor_pressed():
 		if _forward_key.last_release_time > 0:
 			var time_since_release = current_time - _forward_key.last_release_time
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
 				reverse_data.initialise(DV.name_to_vec[DV.FORWARD], DV.name_to_vec[DV.BACK], "forward", time_since_release)
 				return
 
-	if _forward_key.is_just_pressed and not _back_key.is_pressed:
+	if _just_pressed_and_not_pressed(_forward_key, _back_key) and not _any_hor_pressed():
 		if _back_key.last_release_time > 0:
 			var time_since_release = current_time - _back_key.last_release_time
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:

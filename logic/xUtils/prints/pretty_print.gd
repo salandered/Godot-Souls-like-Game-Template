@@ -51,13 +51,7 @@ static func _dict(dict_: Dictionary, json: bool = false) -> String:
 		return JSON.stringify(dict_, "\t")
 	if dict_.is_empty():
 		return "{}"
-	var r = ""
-	for key_ in dict_.keys():
-		var value_ = dict_[key_]
-		if value_ is float:
-			value_ = round_01(value_)
-		r += in_q(key_) + " -> " + in_q(value_) + '\n'
-	return r.strip_edges()
+	return __recursive_dict(dict_)
 
 
 static func _array(array_: Array, json: bool = false) -> String:
@@ -77,6 +71,12 @@ static func vec3(v: Vector3) -> String:
 static func vec2(v: Vector2) -> String:
 	return "(%4.2f %4.2f)" % [v.x, v.y]
 
+
+static func round_001(f: float) -> String:
+	assert(f is float)
+	return str(snapped(f, 0.001))
+
+
 static func round_01(f: float) -> String:
 	assert(f is float)
 	return str(snapped(f, 0.01))
@@ -90,8 +90,8 @@ static func vec3_angle_deg(a: Vector3, b: Vector3, to_str: bool = true) -> Varia
 	return r
 
 
-static func rad2deg(angle: float, to_str: bool = true) -> Variant:
-	var r = rad_to_deg(angle)
+static func rad2deg(angle_: float, to_str: bool = true) -> Variant:
+	var r = rad_to_deg(angle_)
 	r = snapped(r, 0.01)
 	if to_str:
 		return str(r) + "°"
@@ -105,3 +105,31 @@ static func file_load_err(err, path: String):
 		print(path + " no file found")
 	else:
 		print(path + " error loading:", err)
+
+
+# region: inner helpers
+
+static func __recursive_dict(dict_: Dictionary, indent: String = "") -> String:
+	var r = "\n"
+	var next_indent = indent + "\t"
+	
+	for key_ in dict_.keys():
+		var value_ = dict_[key_]
+		var value_str: String
+		
+		if value_ is float:
+			value_str = str(round_001(value_))
+		elif value_ is Dictionary:
+			value_str = __recursive_dict(value_, next_indent)
+		else:
+			value_str = in_q(str(value_)) # str() for safety
+		
+		r += next_indent + in_q(key_) + " : " + value_str + "\n"
+	
+	if not dict_.is_empty():
+		r = r.trim_suffix(",\n")
+	
+	r += indent
+	return r
+
+# endregion

@@ -95,10 +95,11 @@ func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	return _velocity
 
 
-func __angle_between_player_and_input(input: InputPackage, delta: float) -> float:
+func __angle_between_player_and_input(input: InputPackage, delta: float, _log: bool = false) -> float:
 	var face_dir = player.basis.z
 	var input_dir = __velocity_by_input(input, delta).normalized()
 	var angle = face_dir.signed_angle_to(input_dir, Vector3.UP)
+	if _log: prints("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
 	return angle
 
 

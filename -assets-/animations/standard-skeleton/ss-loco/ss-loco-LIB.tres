@@ -1,9 +1,12 @@
-[gd_resource type="AnimationLibrary" load_steps=14 format=3 uid="uid://c5tmox85wlvtf"]
+[gd_resource type="AnimationLibrary" load_steps=17 format=3 uid="uid://c5tmox85wlvtf"]
 
 [ext_resource type="Animation" uid="uid://dbavk63t52h8t" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/RM ss turn 90 L GOOD.res" id="2_ckybx"]
 [ext_resource type="Animation" uid="uid://brrmj8t4yrmal" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/RMR ss 180 turn L.res" id="3_ckybx"]
-[ext_resource type="Animation" uid="uid://c3hcccd885yxv" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/ss 180 fast GOOD.res" id="3_nyp4g"]
+[ext_resource type="Animation" uid="uid://8ty8c0a7gcj0" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR ss 180 fast turn L.res" id="4_i7o4w"]
 [ext_resource type="Animation" uid="uid://b0ru6ly32on0l" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/RMR ss 180 turn R.res" id="4_nyp4g"]
+[ext_resource type="Animation" uid="uid://dvgnrpuguqd84" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR ss 180 fast turn R.res" id="5_k2smt"]
+[ext_resource type="Animation" uid="uid://cwry7viqdj06j" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR Turn 90 To Run L.res" id="6_yidfj"]
+[ext_resource type="Animation" uid="uid://irgob5vtoik5" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR Turn 90 To Run R.res" id="7_xgs72"]
 
 [sub_resource type="Animation" id="Animation_2q5jt"]
 resource_name = "A sheath end"
@@ -3523,7 +3526,10 @@ _data = {
 &"C-walk": SubResource("Animation_bpoab"),
 &"C-walk-back": SubResource("Animation_bduq5"),
 &"RM ss turn 90 L GOOD": ExtResource("2_ckybx"),
+&"RMR Turn 90 To Run L": ExtResource("6_yidfj"),
+&"RMR Turn 90 To Run R": ExtResource("7_xgs72"),
+&"RMR ss 180 fast turn L": ExtResource("4_i7o4w"),
+&"RMR ss 180 fast turn R": ExtResource("5_k2smt"),
 &"RMR ss 180 turn L": ExtResource("3_ckybx"),
-&"RMR ss 180 turn R": ExtResource("4_nyp4g"),
-&"ss 180 fast GOOD": ExtResource("3_nyp4g")
+&"RMR ss 180 turn R": ExtResource("4_nyp4g")
 }

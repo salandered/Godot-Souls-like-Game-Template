@@ -15,45 +15,60 @@ var default_blend_time: float = 0.2
 
 var _enter_action_time: float
 
+
 # region: TIME MANAGEMENT
 
 func mark_enter_action() -> void:
 	_enter_action_time = Time.get_unix_time_from_system()
 
-## Uses real time linear time_spent
-func get_progress_real_time() -> float:
+## needs mark_enter_action to be set beforehand
+func get_real_time_spent() -> float:
 	var now = Time.get_unix_time_from_system()
 	return now - _enter_action_time
+
+
+func _effective_duration() -> float:
+	return animator_manager.get_curr_anim_effective_duration()
+
+
+func effective_time_spent() -> float:
+	return animator_manager.get_current_anim_effective_progress()
 
 ## Uses time_spent from animator, accounts for all speed scales 
 ## (which can even change dynamically)
 func time_spent() -> float:
-	return animator_manager.get_current_anim_time_spent()
+	return animator_manager.get_curr_anim_time_spent()
 
 
-## NOTE: If it's a looping animation, returns time till next cycle, not an end of the action.
+## NOTE: does not support looping animations.
 func time_remaining() -> float:
-	return anim.duration - animator_manager.get_current_anim_time_spent()
+	if anim.is_looping:
+		print_.warn("Will return big meaningless number: time_remaining does not support looping anims. " + anim.anim_name)
+		return Constants.BIG_MEANINGLESS_NUMBER
+	return _effective_duration() - time_spent()
 
 
 ## Like time_remaining(), but takes into account the blend time of the next state.
 ## It would be needed for a smooth switch.
-## WARNING: next action's default_blend_time is used!
-## NOTE: If it's a looping animation, the function kinda losts its sense, but still valid.
-##       It will return the time we have if we wanna switch inside the current cycle.
+## NOTE: makes no sense for looping animations => unsupported
+## WARNING TODO: does not account for speed scaling
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
+	if anim.is_looping:
+		print_.warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
+		return Constants.BIG_MEANINGLESS_NUMBER
 	var action := container.legs_action_by_name(next_action_name)
-	var blend_time: float = action.blend_time_by_state.get(action_name, action.default_blend_time)
-	return max(anim.duration - animator_manager.get_current_anim_time_spent() - blend_time, 0.0)
+	var blend_time: float = action.blend_time_by_action.get(action_name, action.default_blend_time)
+	return max(time_remaining() - blend_time, 0.0)
 
 
 ## Time remaining till a moment, when current animation would be blended 100%. 
-## This important for the next switch considerations: if A action wants to switch the current B one, 
-## but current one is still blending from the previous C animation, there would be noticable visual snap. 
+## This is important for the next switch considerations: if A action wants to switch the current B one, 
+## but B is still blending from the previous C animation, there would be noticable visual snap. 
 ## Reason: C to B blend would be interrupted by B to A.
 ## Note: using actual blend duration from manager is better than rely on current action's data or desires.
+## WARNING TODO: does not account for speed scaling
 func time_remaining_for_blend_to_complete() -> float:
-	return max(animator_manager.get_current_blend_duration() - animator_manager.get_current_anim_time_spent(), 0.0)
+	return max(animator_manager.get_curr_blend_duration() - time_spent(), 0.0)
 
 
 func works_longer_than(time: float) -> bool:
@@ -72,8 +87,7 @@ func works_less_than(time: float) -> bool:
 
 func works_between(start: float, finish: float) -> bool:
 	if start == -1 or finish == -1: return __reject()
-	var progress_ = time_spent()
-	if progress_ >= start and progress_ <= finish:
+	if time_spent() >= start and time_spent() <= finish:
 		return true
 	return false
 
@@ -108,7 +122,7 @@ func on_exit_action() -> void:
 ## TODO: DANGER: Action must implement set_overlay_anim, otherwise time_spent() 
 ## would stuck and return final time_spent of the previous action
 ## For now some action may not use an animation, but then they either should work only with
-## get_progress_real_time (and know what they doing), or not working with the time at all.
+## get_real_time_spent (and know what they doing), or not working with the time at all.
 @abstract func animate() -> void
 
 # endregion

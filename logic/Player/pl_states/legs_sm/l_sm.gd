@@ -10,42 +10,8 @@ class_name LegsSM
 
 @export var combat: HumanoidCombat
 
-# TODO: fast solution. Design proper action (or states) ability to share data.
-## for now its supposed to store only prev action data
-## (u should not get data from some random past state, while its possible)
-class TranferData extends RefCounted:
-	var action_name: String
-	var _transfer: Dictionary
 
-	func _init(action_name_: String, data_ = null) -> void:
-		action_name = action_name_
-		if data_ == null:
-			_transfer = {}
-		elif data_ is Dictionary:
-			_transfer = data_.duplicate_deep()
-		else:
-			_transfer = {}
-
-	func _get_by_key(key: String) -> Variant:
-		return u.safe_get_dict_key(_transfer, key, "Getting _transfer from TranferData")
-
-	func get_by_key_if_action(action_name_: String, key: String) -> Variant:
-		if action_name == action_name_:
-			return _get_by_key(key)
-		return null
-
-	func fill(action_name_: String, data_: Dictionary):
-		var msg = pp.s("| keys:", pp._dict(data_) if data_ is Dictionary else "| data is not a Dict" + em.warn)
-		print_.lsm_beh("TransferData fill for " + pp.in_q(action_name_), msg)
-		action_name = action_name_
-		_transfer = data_.duplicate_deep()
-
-	func _reset():
-		action_name = ""
-		_transfer = {}
-
-
-var transfer_data = TranferData.new("")
+var _transfer_data: TranferData = TranferData.new()
 
 var current_behavior: LegsBehavior
 # It should belong here! current_action is managed by the "pool" of actions. 
@@ -55,6 +21,19 @@ var prev_action: LegsAction
 
 func update(input: InputPackage, delta: float) -> void:
 	current_behavior.update(input, delta)
+
+
+# TODO: fast solution. Design proper action (or states) ability to share data.
+## for now its supposed to store only prev action data
+## so actions can only use these methods for working with tranfer data
+func fill_tranfer_data(tranfer_turn_data):
+	## auto setting current action
+	_transfer_data.fill(current_action.action_name, tranfer_turn_data)
+
+func get_tranfer_data_by_key(key) -> Variant:
+	## auto getting prev one
+	var data = _transfer_data.get_by_action_and_key(prev_action.action_name, key)
+	return data
 
 
 func switch_to(next_behavior: LegsBehavior, input: InputPackage):

@@ -224,6 +224,7 @@ func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
 
 
 ## Kinda not Animator's logic, but suits here for now
+## needs polishing
 func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
 	var root_pos_track := __get_position_track(0, anim.native_anim)
 	
@@ -232,7 +233,7 @@ func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
 	
 	# Sample at start and a small delta to get initial velocity
 	var sample_delta = 0.016 # One frame at 60fps
-	var start_time = anim.start_time
+	var start_time = anim._start_time
 	var pos_at_start = anim.native_anim.position_track_interpolate(root_pos_track, start_time)
 	var pos_at_delta = anim.native_anim.position_track_interpolate(root_pos_track, start_time + sample_delta)
 	
@@ -240,8 +241,6 @@ func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
 	velocity.y = 0
 	
 	var result = velocity.length() * anim.speed_scale
-	# print("[RUN_STOP] calc_start_vel: pos_start=%s pos_delta=%s -> vel=%.2f" % [
-	# 	pp.vec3(pos_at_start), pp.vec3(pos_at_delta), result ])
 	return result
 
 

@@ -11,12 +11,12 @@ func _ready():
 	ANGULAR_SPEED = 2.0 # Allow slight turning while stopping
 	TURN_SPEED = 2.0
 
-	blend_time_by_state = {
+	blend_time_by_action = {
 		Leg.Act.run: 0.2 + _dev_add_blend
 	}
 
 func on_enter_action(input: InputPackage) -> void:
-	var prev_speed = legs_sm.transfer_data.get_by_key_if_action(Leg.Act.run, "manual_speed")
+	var prev_speed = legs_sm.get_tranfer_data_by_key("manual_speed")
 	if prev_speed and prev_speed is float:
 		var rm_start_speed = animator_manager.calculate_animation_start_root_velocity(anim)
 		extra_speed = max(0.0, prev_speed - rm_start_speed) # Just the number
@@ -49,7 +49,7 @@ func _move_with_root(delta: float) -> void:
 
 func animate(): # ▶️
 	var start_time_offset := 0.0
-	var blend_time: float = blend_time_by_state.get(legs_sm.prev_action.action_name, default_blend_time)
+	var blend_time: float = blend_time_by_action.get(legs_sm.prev_action.action_name, default_blend_time)
 	
 	__log_anim(blend_time, start_time_offset)
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)

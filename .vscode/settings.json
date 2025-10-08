@@ -31,7 +31,8 @@
 	//--------------------------------------------
 	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
 	// "github.copilot.editor.enableCodeActions": false, // no yellow stars
-	"editor.inlineSuggest.enabled": false,
+	// configured in keybindings.json
+	// "editor.inlineSuggest.enabled": true,
 	//
 	// Code completions settings
 	// "github.copilot.enable": true,
@@ -475,6 +476,14 @@
 			]
 		},
 		"\\b(print_\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#A3A3F5",
+				}
+			]
+		},
+		"\\b(prints\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{

@@ -1,11 +1,9 @@
-extends RefCounted
+extends BaseInterpolator
 class_name FloatLinearInterpolator
 
 var start_value: float
 var target_value: float
 var current_value: float
-var timer: float = 0.0
-var duration: float
 
 ## idempotent
 func initialise(start: float, target: float, duration_: float) -> void:
@@ -19,11 +17,9 @@ func initialise(start: float, target: float, duration_: float) -> void:
 func update(delta: float) -> float:
 	if timer < duration:
 		timer += delta
-		var weight = clampf(timer / duration, 0.0, 1.0)
+		var weight = _get_progress()
 		current_value = lerp(start_value, target_value, weight)
 	else:
 		current_value = target_value
-	return current_value
 
-func is_complete() -> bool:
-	return timer >= duration
+	return current_value

@@ -1,65 +1,70 @@
 extends LegsBehavior
 
 
-const START_THRESHOLD := 0.25 # tweak
 const IDLE_COMMIT := 0.12 # seconds
 const START_COMMIT := 0.92 # seconds
 
-var stop_delay: float = 0.1
-var _stop_timer: DelayTimer = DelayTimer.new()
+var TO_STOP_DELAY: float = 0.2
+var ANGLE_FOR_U_TURN = 130
+var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 
 func _ready():
-	_stop_timer.initialise(stop_delay)
+	_non_moving_timer.initialise(TO_STOP_DELAY)
 
 
 func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
-	var is_moving := input.input_direction.length() >= START_THRESHOLD
 	var curr_action = legs_sm.current_action
 	var curr_motion_type = legs_sm.current_action.motion_type
-	var next_action_name = supported_actions.by_motion(curr_motion_type)
+	var next_action_name = supported_actions.convert_to_supported(curr_action)
 
 	match curr_motion_type:
 		MotionType.IDLE:
-			if is_moving and curr_action.works_longer_than(IDLE_COMMIT):
-				var angle = player.model.__angle_between_player_and_input(input, delta)
-				if abs(angle) > deg_to_rad(130.0):
-					next_action_name = supported_actions.by_motion(MotionType.START)
-					__log_decision_data(is_moving, "Angle > 150 deg", next_action_name)
+			if is_moving(input) and curr_action.works_longer_than(IDLE_COMMIT):
+				if abs_angle_pl_input_greater_than(input, delta, ANGLE_FOR_U_TURN):
+					next_action_name = supported_actions.by_name(Leg.Act.turn_180)
+					__log_decision_data(input, pp.compare_w("Angle >", "", ANGLE_FOR_U_TURN), next_action_name)
 				else:
-					next_action_name = supported_actions.by_motion(MotionType.LOOP)
-					__log_decision_data(is_moving, "Angle <= 150 deg", next_action_name)
+					next_action_name = supported_actions.default_by_motion(MotionType.START)
+					__log_decision_data(input, pp.compare_w("Angle <", "", ANGLE_FOR_U_TURN), next_action_name)
 	
 	
 		MotionType.START:
-			if is_moving:
-				if curr_action.time_remaining() <= 0.3: # curr_action.time_remaining_for_smooth_switch(supported_actions.by_motion(MotionType.LOOP)) <= 0.0:
-					next_action_name = supported_actions.by_motion(MotionType.LOOP)
-					__log_decision_data(is_moving, "time for smooth sw < 0.05", next_action_name)
+			if is_moving(input):
+				if curr_action.time_remaining_for_smooth_switch(supported_actions.default_by_motion(MotionType.LOOP)) <= 0.0: # if curr_action.time_remaining() <= 0.3: # curr_action.time_remaining_for_smooth_switch(supported_actions.by_motion(MotionType.LOOP)) <= 0.0:
+					next_action_name = supported_actions.default_by_motion(MotionType.LOOP)
+					__log_decision_data(input, "time for smooth sw < ", next_action_name)
 			else:
 				if curr_action.time_remaining() < 0.3:
-					next_action_name = supported_actions.by_motion(MotionType.IDLE)
-					__log_decision_data(is_moving, pp.compare_w("works >", "commit", START_COMMIT), next_action_name)
+					next_action_name = supported_actions.default_by_motion(MotionType.IDLE)
+					__log_decision_data(input, pp.compare_w("works >", "commit", START_COMMIT), next_action_name)
 		
-
+		
 		MotionType.LOOP:
-			if is_moving:
-				if input.reverse_data.is_reversed:
-					next_action_name = supported_actions.by_motion(MotionType.START) # TURN
-					__log_decision_data(is_moving, "Reversing: %s" % input.reverse_data, next_action_name)
-			
-				_stop_timer.reset()
-			else:
-				if input.reverse_data.is_reversed:
-					next_action_name = supported_actions.by_motion(MotionType.START) # TURN
-					__log_decision_data(is_moving, "Reversing: %s" % input.reverse_data, next_action_name)
-				else:
-					# Normal stop logic when not moving and not reversing
-					if _stop_timer.update(delta):
-						next_action_name = supported_actions.by_motion(MotionType.STOP)
-						__log_decision_data(is_moving, "_stop_timer expired", next_action_name)
+			next_action_name = _from_loop_decision(input, delta, next_action_name)
+
+				
+		MotionType.STOP: # stop in run is idle currently
+			pass
 
 	return LNextActionVerdict.new(next_action_name)
+
+
+func _from_loop_decision(input: InputPackage, delta: float, next_action_name) -> String:
+	if is_reverse_moving(input): # and abs_angle_pl_input_greater_than(input, delta, ANGLE_FOR_U_TURN):
+		next_action_name = supported_actions.by_name(Leg.Act.turn_180)
+		__log_decision_data(input, "", next_action_name)
+		_non_moving_timer.reset()
+
+	elif is_moving(input): # normally nothing to do but we reset a timer
+		_non_moving_timer.reset()
+
+	elif not is_moving(input):
+		if _non_moving_timer.update(delta): # not moving / reversing and we waited some time in such condition
+			next_action_name = supported_actions.default_by_motion(MotionType.STOP)
+			__log_decision_data(input, "_non_moving_timer expired", next_action_name)
+	
+	return next_action_name
 
 
 # func _input(event):

@@ -134,9 +134,11 @@ static func psm(add_prefix_: String, text: String, info_indents: int = 0, level:
 	prefix(add_prefix_, text, info_indents, level)
 
 
-static func lsm_beh_ch(add_prefix_: String, motion_type: String, is_moving, text, decision, info_indents: int = 0, level: String = LogL.NOTSET):
-	is_moving = str(is_moving) + ", " if text else str(is_moving)
-	var msg = pp.s("motion", motion_type + ",", "is_moving: ", is_moving, text, "=>", decision)
+static func lsm_beh_ch(add_prefix_: String, motion_type: String, is_moving, is_reverse_moving, text, decision, info_indents: int = 0, level: String = LogL.NOTSET):
+	var msg = pp.s("motion", motion_type + ",",
+		"is_moving", str(is_moving) + ",",
+		"is_reverse_moving", str(is_reverse_moving) + ",",
+		text, "=>", decision)
 	add_prefix_ = "choose action ❔" + " " + add_prefix_
 	lsm_beh(add_prefix_, msg, info_indents, level)
 

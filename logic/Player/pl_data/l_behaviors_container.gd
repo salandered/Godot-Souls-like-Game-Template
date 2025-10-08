@@ -5,37 +5,48 @@ class BehaviorData:
 	var behavior_name: String
 	var supported_actions: SupportedActions
 
-
-	func _init(behavior_name_: String, supported_: Dictionary) -> void:
+	func _init(behavior_name_: String, supported_: SupportedActions) -> void:
 		behavior_name = behavior_name_
-		supported_actions = SupportedActions.new(supported_)
+		supported_actions = supported_
 
 
 var node_to_behavior_data: Dictionary = {
-	"IdleLegs": BehaviorData.new(Leg.Beh.idle, {
-		MotionType.IDLE: Leg.Act.idle,
-		MotionType.START: Leg.Act.idle,
-		MotionType.LOOP: Leg.Act.idle,
-		MotionType.STOP: Leg.Act.idle,
-	}),
-	"RunLegs": BehaviorData.new(Leg.Beh.run, {
-		MotionType.IDLE: Leg.Act.idle,
-		MotionType.START: Leg.Act.turn_180,
-		MotionType.LOOP: Leg.Act.run,
-		MotionType.STOP: Leg.Act.idle,
-	}),
-	"SprintLegs": BehaviorData.new(Leg.Beh.sprint, {
-		MotionType.IDLE: Leg.Act.idle,
-		MotionType.START: Leg.Act.idle_to_sprint,
-		MotionType.LOOP: Leg.Act.sprint,
-		MotionType.STOP: Leg.Act.sprint_to_idle,
-	}),
-	"DoubleLegs": BehaviorData.new(Leg.Beh.double, {
-		MotionType.IDLE: Leg.Act.double,
-		MotionType.START: Leg.Act.double,
-		MotionType.LOOP: Leg.Act.double,
-		MotionType.STOP: Leg.Act.double,
-	}),
+	"IdleLegs": BehaviorData.new(Leg.Beh.idle,
+		SupportedActions.new({
+			MotionType.IDLE: Leg.Act.idle,
+			MotionType.START: Leg.Act.idle,
+			MotionType.LOOP: Leg.Act.idle,
+			MotionType.STOP: Leg.Act.idle,
+		},
+		[]
+	)),
+	"RunLegs": BehaviorData.new(Leg.Beh.run,
+		SupportedActions.new({
+			MotionType.IDLE: Leg.Act.idle,
+			MotionType.START: Leg.Act.run,
+			MotionType.LOOP: Leg.Act.run,
+			MotionType.STOP: Leg.Act.idle,
+		},
+		[Leg.Act.turn_180]
+	)),
+	"SprintLegs": BehaviorData.new(Leg.Beh.sprint,
+		SupportedActions.new({
+			MotionType.IDLE: Leg.Act.idle,
+			MotionType.START: Leg.Act.idle_to_sprint,
+			MotionType.LOOP: Leg.Act.sprint,
+			MotionType.STOP: Leg.Act.sprint_to_idle,
+		},
+		[Leg.Act.fast_turn_180]
+	)),
+	"DoubleLegs": BehaviorData.new(Leg.Beh.double,
+		SupportedActions.new({
+			MotionType.IDLE: Leg.Act.double,
+			MotionType.START: Leg.Act.double,
+			MotionType.LOOP: Leg.Act.double,
+			MotionType.STOP: Leg.Act.double,
+		},
+		[]
+	)),
 }
 
 
@@ -60,6 +71,7 @@ var node_to_action_data: Dictionary = {
 	# "RunToSprintAction": LegActionData.ActionData.new(Leg.Act.run_to_sprint, A.combat_sprint_start,  MotionType.START),
 	"Run": ActionData.new(Leg.Act.run, A.run, MotionType.LOOP),
 	"Turn180": ActionData.new(Leg.Act.turn_180, A.turn_180_R, MotionType.START),
+	"FastTurn180": ActionData.new(Leg.Act.fast_turn_180, A.fast_turn_180_R, MotionType.START),
 	# "IdleTurnToRunL": ActionData.new(Leg.Act.idle_turn_to_run_L, A.idle_turn_to_run_L, MotionType.START),
 	"SprintToIdle": ActionData.new(Leg.Act.sprint_to_idle, A.sprint_to_idle, MotionType.STOP),
 	"Sprint": ActionData.new(Leg.Act.sprint, A.sprint, MotionType.LOOP),

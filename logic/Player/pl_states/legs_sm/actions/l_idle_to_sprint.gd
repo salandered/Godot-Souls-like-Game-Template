@@ -9,7 +9,7 @@ func _ready():
 
 func on_exit_action() -> void:
 	var final_rm_speed = animator_manager.get_root_velocity().length()
-	legs_sm.transfer_data.fill(action_name, {"rm_speed": final_rm_speed})
+	legs_sm.fill_tranfer_data({"rm_speed": final_rm_speed})
 
 
 func update(input: InputPackage, delta: float):

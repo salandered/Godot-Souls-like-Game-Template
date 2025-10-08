@@ -45,6 +45,8 @@ const sprint := lib._run + "B-Fast-Run-v2" # _SWS_loco + "SWSl-O-sptrint-F" # _r
 const turn_180_R := lib._ss_loco + "RMR ss 180 turn R"
 const turn_180_L := lib._ss_loco + "RMR ss 180 turn L"
 
+const fast_turn_180_R := lib._ss_loco + "RMR ss 180 fast turn R"
+const fast_turn_180_L := lib._ss_loco + "RMR ss 180 fast turn L"
 
 # strafe
 # const run_L := lib._SWS_loco + "SWSl-O-run-L-blended" # _strafe + "A-ss-strafe-L"

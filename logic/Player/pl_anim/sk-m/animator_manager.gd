@@ -24,7 +24,7 @@ func set_overlay_anim(anim_name: String, fade_in: float = 0.1, hold: float = -1.
 	full_body.set_overlay_anim(anim, fade_in, hold, fade_out, local_speed)
 
 
-func set_anim_to_play(anim_name: String, blend_for: float = 0, start_time_offset: float = 0) -> void:
+func set_anim_to_play(anim_name: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if blend_for < 0:
 		print_.warn("blend_for < 0 is not supported, 0 will be used:" + str(blend_for))
 		blend_for = 0
@@ -75,11 +75,14 @@ func get_current_anim_effective_progress() -> float:
 func get_prev_anim_time_spent() -> float:
 	return full_body.prev_playback.time_spent
 
-func get_current_anim_time_spent() -> float:
+func get_curr_anim_time_spent() -> float:
 	return full_body.curr_playback.time_spent
 
+func get_curr_anim_effective_duration() -> float:
+	return full_body.curr_playback.get_effective_duration()
 
-func get_current_blend_duration() -> float:
+
+func get_curr_blend_duration() -> float:
 	return full_body.blend_playback.duration
 
 

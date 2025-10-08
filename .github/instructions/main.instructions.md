@@ -6,7 +6,7 @@ This project is a Godot engine game written in GDScript. It is a souls-like 3D g
 
 ## Version compliance
 We use Godot version 4.5. Usually this means any 4+ info will be compatable.
-Important: Changes should be according to the official documentation: https://docs.godotengine.org/en/stable/
+Important: Changes should be according to the official docs: https://docs.godotengine.org/en/stable/
 
 ## Project structure
 All scripts and logic are in "logic/" folder. You don't need to see any other root folders.
@@ -21,8 +21,8 @@ Use only tabs for indentations, no spaces at all!
 
 ## Coding style
 * Rule of thumb: use the style of a project.
-* don't check for null variables which must be there by design. Check once in ready() or not check at all.
-* aim to 95 characters line length max. (if you need longer: use variables, new lines '\', place comments above a line, etc)
+* don't check for null variables which must be there by design.
+* aim to ~100 characters line length max. 
 * do not delete current comments while editing or refactoring code.
 
 ## Philosophy

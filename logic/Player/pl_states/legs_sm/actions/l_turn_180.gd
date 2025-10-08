@@ -1,104 +1,84 @@
 extends LegsAction
 
+@export var accel_from_apex_curve: Curve
 
-const POSITION_CUTOFF_TIME := 0.5342 + 0.0 # TODO: change to marker
 
 var initial_rotation: Quaternion
-var target_angle: float
-var accumulated_rotation: float = 0.0
-var rotation_complete: bool = false
 
-## TODO: some universal system for different "sub animations" in one action
-var turn_direction: String = "right"
+var speed_curve_from_apex = EaseCurveInterpolator.new()
 
+var curr_turn: TurnData = TurnData.new()
 
-func _calculate_target_angle(input: InputPackage) -> float:
-	var target_angle_: float
-	if input.reverse_data.is_reversed:
-		target_angle_ = - PI + 0.05 # wrapf excludes PI so we're consistent with the next branch
-		prints("\n\t target ∠:", pp.rad2deg(target_angle_))
-		prints("\t Reverse type: %s" % input.reverse_data.type, "Full rev data:", input.reverse_data)
-	else: # Use standard input direction
-		var _face_dir = player.basis.z
-		var _input_dir = velocity_by_input(input, 0.016).normalized()
-		var _signed_angle = _face_dir.signed_angle_to(_input_dir, Vector3.UP)
-		target_angle_ = wrapf(_signed_angle, -PI, PI)
-		prints("\n\t target ∠:", pp.rad2deg(target_angle_), "t ∠ before wrapf", _signed_angle)
-		prints("\t _face_dir", _face_dir, "_input_dir", pp.vec3(_input_dir))
-	return target_angle_
-
+var INCREASE_ROTATION: float = 1.0
 
 func on_enter_action(_input: InputPackage) -> void:
-	prints(u.fr() + " ========= TURN_ENTER  =========")
+	prints(u.fr(), "------- turn on enter")
+	
 	initial_rotation = player.quaternion
-	target_angle = _calculate_target_angle(_input)
-	var angle_sign = signf(target_angle)
-	if angle_sign <= 0:
-		turn_direction = "right"
-		if angle_sign == 0: print_.warn("Turn angle is zero; defaulting to a 'right' turn.")
-	else:
-		turn_direction = "left"
+	prints("Initial rotation (quaternion)", initial_rotation)
+	
+	# TURN DATA
+	var _target_angle = calculate_target_angle(_input)
+	var _turn_dir = turn_direction_by_target_angle(_target_angle)
+	curr_turn.initialise(_target_angle, _turn_dir)
 
-	accumulated_rotation = 0.0
-	rotation_complete = false
+	# SPEED CONFIG
+	speed_curve_from_apex.initialise(accel_from_apex_curve, 0.3)
 
-	prints("\t turn decision:", turn_direction)
-	prints("\t Initial rotation (quaternion): %s" % initial_rotation)
-
-
+	match legs_sm.prev_action.action_name:
+		Leg.Act.run:
+			INCREASE_ROTATION = 1.1
+		Leg.Act.idle:
+			INCREASE_ROTATION = 1.0
+	
 func on_exit_action() -> void:
-	prints(u.fr() + " ========= TURN_EXIT =========")
-	var final_rm_speed = player.velocity.length()
-	var turn_data = {"rm_speed": final_rm_speed}
+	prints(u.fr(), "------- turn on exit")
+	
+	var tranfer_turn_data = {}
+	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
+	tranfer_turn_data["rm_speed"] = player.velocity.length()
+	
+	legs_sm.fill_tranfer_data(tranfer_turn_data)
 
-	if not rotation_complete:
-		turn_data["turn_completed"] = false
-		turn_data["target_angle"] = target_angle
-		turn_data["accumulated_rotation"] = accumulated_rotation
-		prints("\t Exit before complete. Will populate tranfer data")
+	speed_curve_from_apex.reset()
 
-	legs_sm.transfer_data.fill(action_name, turn_data)
-
-	__log_turn_exit(turn_data)
+	__log_turn_exit()
 
 
 func update(input: InputPackage, delta: float):
-	if not rotation_complete:
+	var SPEED_MULT = 1.0
+	if not curr_turn.turn_completed:
 		var rotation_delta = animator_manager.get_root_rotation()
-		# if abs(rotation_delta) > 0.001:
-		# 	print(u.fr(), "  > Animation is rotating by: %.4f" % rotation_delta)
-		if abs(accumulated_rotation + rotation_delta) >= abs(target_angle):
-			var remaining_rotation = target_angle - accumulated_rotation
-			player.rotate_y(remaining_rotation)
-			rotation_complete = true
-			print(u.fr() + "Turn completed at %.3fs: %.1f°" % [time_spent(), rad_to_deg(target_angle)])
-		else:
-			player.rotate_y(rotation_delta)
-			accumulated_rotation += rotation_delta
+		var result = apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
+		curr_turn.update(result.completed, result.accum_rot)
 			
-	if time_spent() < POSITION_CUTOFF_TIME:
+	if time_spent() < Constants.TURN_180_APEX_TIME:
 		var root_vel = animator_manager.get_root_velocity()
 		player.velocity = initial_rotation * root_vel
+		# prints("~~b4", time_spent(), SPEED_MULT, player.velocity.length())
 	else:
-		# not rotating is fine if turn animation has root rotation from the first frame to the last.
-		move_with_input_vector(input, delta)
+		# WARNING: currently turn180-> run configured in a way, that we cut right on apex.
+		# => this wont be run, but code is ready to handle this
+		SPEED_MULT = speed_curve_from_apex.update(delta)
+		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, player.velocity.length())
+		move_with_input_vector(input, delta, SpeedConfig.new(SPEED_MULT))
 
 
 func animate(): # ▶️
 	var blend_time := 0.2
 
-	if turn_direction == "right":
+	## TODO: some universal system for different "sub animations" in one action
+	if curr_turn.is_turn_dir_right:
 		anim = anim_container.get_by_name(A.turn_180_R)
 	else:
 		anim = anim_container.get_by_name(A.turn_180_L)
 	
-	__log_anim(blend_time, 0.0)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, 0.0)
+	__log_anim(blend_time)
+	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
 
 
-func __log_turn_exit(turn_data):
+func __log_turn_exit():
 	var _final_rotation = player.quaternion.angle_to(initial_rotation)
-	var _error_angle = accumulated_rotation - target_angle
-	prints("accum rotation", pp.rad2deg(accumulated_rotation), "fin rotation", pp.rad2deg(_final_rotation))
-	prints("Target:", pp.rad2deg(target_angle), "Error:", pp.rad2deg(_error_angle))
-	prints("Tranfer data", pp._dict(turn_data))
+	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
+	prints("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
+		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

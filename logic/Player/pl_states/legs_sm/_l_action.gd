@@ -8,12 +8,15 @@ var motion_type: String ## see MotionType
 
 ## meant to be overriden if action uses them
 var SPEED: float = 2.0
-var TURN_SPEED: float = 2.0
+## how fast the character moves forward while rotating
+## usually lesser than SPEED
+var TURN_SPEED: float = 1.6 # todo: consider tying to SPEED
+## how fast the character rotates (changes facing direction)
 ## 4 means ~ 230. max a player can turn in one frame is ANGULAR_SPEED * delta == 4.0 * 0.0167 = ~ 3.8 degrees.
 var ANGULAR_SPEED: float = 4.0
 var SPEED_SCALE: float = 1.0
 
-var blend_time_by_state = {
+var blend_time_by_action = {
 	
 }
 
@@ -37,7 +40,7 @@ func on_exit_action() -> void:
 	pass
 
 
-## experimental 
+## experimental and not used 
 func _apply_residual_rotation():
 	# If we blend to non root rot anim from root rot anim (e.g. turn_180 -> run),
 	# then we need to apply root rot leftover separately
@@ -67,51 +70,85 @@ func move_with_root(delta: float) -> void:
 ## Common process_input_vector logic. If needed, actions should explicitely call in update()
 # region: code
 
-func process_input_vector(input: InputPackage, delta: float, speed_multiplier: float = 1.0, override_speed: float = -1.0):
-	var angle := _calculate_allowed_angle(input, delta)
-	_move_with_input_vector(angle, input, delta, speed_multiplier, override_speed)
+func process_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
+	if speed_config == null:
+		speed_config = SpeedConfig.new() # defaults
+	var angle := _calculate_allowed_angle(input, delta, speed_config)
+	_move_with_input_vector(angle, input, delta, speed_config)
+	_rotate_with_input_vector(angle, input, delta)
+
+func move_with_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
+	if speed_config == null:
+		speed_config = SpeedConfig.new() # defaults
+	var angle := _calculate_allowed_angle(input, delta, speed_config)
+	_move_with_input_vector(angle, input, delta, speed_config)
+
+
+func rotate_with_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
+	if speed_config == null:
+		speed_config = SpeedConfig.new() # defaults
+	var angle := _calculate_allowed_angle(input, delta, speed_config)
 	_rotate_with_input_vector(angle, input, delta)
 
 
-func move_with_input_vector(input: InputPackage, delta: float, speed_multiplier: float = 1.0, override_speed: float = -1.0):
-	var angle := _calculate_allowed_angle(input, delta)
-	_move_with_input_vector(angle, input, delta, speed_multiplier, override_speed)
+func _move_with_input_vector(angle: Angle, input: InputPackage, delta: float, speed_config: SpeedConfig):
+	var _speed = SPEED
+	if speed_config.override_speed != -1.0:
+		_speed = speed_config.override_speed
 
+	var _turn_speed = TURN_SPEED
+	if speed_config.override_turn_speed != -1.0:
+		_turn_speed = speed_config.override_turn_speed
 
-func rotate_with_input_vector(input: InputPackage, delta: float):
-	var angle := _calculate_allowed_angle(input, delta)
-	_rotate_with_input_vector(angle, input, delta)
-
-
-func _move_with_input_vector(angle: Angle, input: InputPackage, delta: float, speed_multiplier: float = 1.0, override_speed: float = -1.0):
-	var speed = SPEED
-	if override_speed != -1.0:
-		speed = override_speed
-	
 	var _face_dir = player.basis.z
 	var face_dir_rotated := _face_dir.rotated(Vector3.UP, angle.value)
 
 	if angle.cut:
-		player.velocity = face_dir_rotated * TURN_SPEED * speed_multiplier
+		player.velocity = face_dir_rotated * _turn_speed * speed_config.speed_multiplier
 	else:
-		player.velocity = face_dir_rotated * speed * speed_multiplier
+		player.velocity = face_dir_rotated * _speed * speed_config.speed_multiplier
 
 
 func _rotate_with_input_vector(angle: Angle, input: InputPackage, delta: float):
 	player.rotate_y(angle.value)
 
 
-func _calculate_allowed_angle(input: InputPackage, delta: float) -> Angle:
+func _calculate_allowed_angle(input: InputPackage, delta: float, speed_config: SpeedConfig) -> Angle:
+	var _angular_speed = ANGULAR_SPEED
+	if speed_config.override_angular_sp != -1.0:
+		_angular_speed = speed_config.override_angular_sp
+
 	var input_direction := velocity_by_input(input, delta).normalized()
 
 	var _face_dir = player.basis.z
 	var angle = _face_dir.signed_angle_to(input_direction, Vector3.UP)
 
-	if abs(angle) >= ANGULAR_SPEED * delta: # reads as 'max rotation allowed in this frame'
-		return Angle.new(sign(angle) * ANGULAR_SPEED * delta, true)
+	if abs(angle) >= _angular_speed * delta: # reads as 'max rotation allowed in this frame'
+		return Angle.new(sign(angle) * _angular_speed * delta, true)
 	else:
 		return Angle.new(angle)
 
+
+func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary:
+	var remaining_angle = target_angle_ - accum_rot_
+	var _log_msg = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rot_delta)
+
+	if check_counter_rot: # do we need this at all if animation s good?
+		var is_counter_rotating = (rot_delta < 0 and remaining_angle > 0) or \
+								  (rot_delta > 0 and remaining_angle < 0)
+		if is_counter_rotating:
+			prints(u.fr(), em.pin + "counter rotation, ending turn", _log_msg)
+			return {"completed": true, "accum_rot": accum_rot_}
+
+	if abs(rot_delta) >= abs(remaining_angle):
+		player.rotate_y(remaining_angle)
+		prints(u.fr(), "Turn complete .", _log_msg)
+		return {"completed": true, "accum_rot": target_angle_}
+	else:
+		player.rotate_y(rot_delta)
+		var new_rotation = accum_rot_ + rot_delta
+		# prints(u.fr(), "applied", _log_msg)
+		return {"completed": false, "accum_rot": new_rotation}
 
 class Angle:
 	var value: float
@@ -149,5 +186,28 @@ func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 	return result_offset
 
 
-func __log_anim(blend_time, start_time_offset):
+func calculate_target_angle(input: InputPackage) -> float:
+	var target_angle: float
+	if input.reverse_data.is_reversed:
+		target_angle = - PI + 0.05
+		prints("\n\t target ∠:", pp.rad2deg(target_angle))
+		prints("\t Reverse type and full data", input.reverse_data.type, input.reverse_data)
+	else:
+		var _signed_angle = player.model.__angle_between_player_and_input(input, 0.016, true)
+		target_angle = wrapf(_signed_angle, -PI, PI)
+		prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
+	return target_angle
+
+
+func turn_direction_by_target_angle(target_angle: float) -> String:
+	var turn_direction: String
+	if signf(target_angle) <= 0:
+		turn_direction = "right"
+		if signf(target_angle) == 0: print_.warn("Turn angle is zero; defaulting to a 'right' turn.")
+	else:
+		turn_direction = "left"
+	prints("\t turn decision:", turn_direction)
+	return turn_direction
+
+func __log_anim(blend_time, start_time_offset = 0.0):
 	print_.lsm_action_anim(action_name, anim.anim_name, legs_sm.prev_action.action_name, blend_time, start_time_offset)

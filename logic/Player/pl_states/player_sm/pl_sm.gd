@@ -23,7 +23,7 @@ func initialise():
 	# todo: better
 	current_state = container.state_by_name(PS.run)
 	legs_sm.current_behavior = container.legs_behavior_by_name(current_state.legs_behavior.behavior_name)
-	legs_sm.current_action = container.legs_action_by_name(legs_sm.current_behavior.supported_actions.actions[0])
+	legs_sm.current_action = container.legs_action_by_name(legs_sm.current_behavior.supported_actions.action_names[0])
 	current_state.current_action = legs_sm.current_action
 	legs_sm.current_behavior._on_enter_behavior(empty_input)
 
@@ -56,9 +56,6 @@ func update(input: InputPackage, delta: float) -> void:
 	# TODO: moved back here, Player States triggers _update from legs_animator behavior -> double dipping
 	# current_state.update_resources(delta)
 	current_state._update(input, delta)
-
-
-
 
 
 	# TEST

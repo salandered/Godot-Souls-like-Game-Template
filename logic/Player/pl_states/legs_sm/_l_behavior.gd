@@ -28,7 +28,7 @@ func _on_enter_behavior(_input: InputPackage):
 	# It's now safe because choose_action always returns an action belonging to its behavior.
 	#   - it can not not deciding on an action (i.e. return empty verdict)
 	#   - decided action cant be but supported by behavior.
-	# This magic happens thanks to 'next_action_name = supported_actions.by_motion(curr_motion_type)'
+	# This magic happens thanks to mandatory 'convert_to_supported' in SupportedActions
 	# NOTE: switch_action_to still can decline this decision.
 	on_enter_behavior(_input)
 
@@ -36,9 +36,9 @@ func _on_enter_behavior(_input: InputPackage):
 ## usualy is overriden
 ## behaviors with one supported action should not override 
 func choose_action(_input, _delta) -> LNextActionVerdict:
-	if len(supported_actions.actions) > 1:
-		print_.warn("default choose_action called when supported_actions.actions > 1 for " + behavior_name)
-	return LNextActionVerdict.new(supported_actions.actions[0])
+	if len(supported_actions.action_names) > 1:
+		print_.warn("default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
+	return LNextActionVerdict.new(supported_actions.action_names[0])
 
 
 ## to override
@@ -76,6 +76,32 @@ func switch_action_to(verdict: LNextActionVerdict, input: InputPackage):
 	legs_sm.current_action._on_enter_action(input)
 
 
-func __log_decision_data(is_moving, additional_checks: String, next_action_name: String):
+# region: sugar for decision checks
+
+func is_moving(input) -> bool:
+	## note that on a keyboard it's either 0 or 1 
+	return input.input_direction.length() > 0.1
+
+func is_reverse_moving(input) -> bool:
+	## is_moving can show zero while two keys pressed at once.
+	## input.reverse_data captures such case.
+	## but it also captures very fast sequential presses 
+	## => is_reverse_moving and is_moving answers may or may not overlap 
+	##    => WARNING: their order is important
+	return input.reverse_data.is_reversed
+
+func abs_angle_pl_input_greater_than(input, delta, angle_in_deg) -> bool:
+	var angle = player.model.__angle_between_player_and_input(input, delta)
+	# prints("~~~~~~~~~", abs(angle), deg_to_rad(angle_in_deg))
+	return abs(angle) > deg_to_rad(angle_in_deg)
+
+# endregion
+
+func __log_decision_data(input, additional_checks: String, next_action_name: String):
 	var _curr_motion_type = legs_sm.current_action.motion_type
-	print_.lsm_beh_ch(behavior_name, _curr_motion_type, is_moving, additional_checks, next_action_name)
+	print_.lsm_beh_ch(behavior_name,
+		_curr_motion_type,
+		is_moving(input),
+		is_reverse_moving(input),
+		additional_checks,
+		next_action_name)

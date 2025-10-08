@@ -20,6 +20,8 @@ var _animations = [
 	AnimationData.new(A.run_R),
 	AnimationData.new(A.turn_180_R, 1.0, true),
 	AnimationData.new(A.turn_180_L, 1.0, true),
+	AnimationData.new(A.fast_turn_180_R, 1.0, true),
+	AnimationData.new(A.fast_turn_180_L, 1.0, true),
 	# loco jump
 	AnimationData.new(A.midair),
 	AnimationData.new(A.small_jump_run),
@@ -119,8 +121,8 @@ func __enrich_with_end_start_times(anim: AnimationData):
 			_end_time = native_anim.length
 		_duration = _end_time - _start_time
 
-	anim.start_time = _start_time
-	anim.end_time = _end_time
+	anim._start_time = _start_time
+	anim._end_time = _end_time
 	anim.duration = _duration
 
 
