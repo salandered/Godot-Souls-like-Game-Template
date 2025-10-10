@@ -1,7 +1,6 @@
 extends CharacterBody3D
 class_name Princess
 
-@export var input_gatherer: InputGatherer
 @export var model: PlayerModel
 @export var visuals: PlayerVisuals
 @export var collider: CollisionShape3D
@@ -45,7 +44,7 @@ func _ready() -> void:
 # TODO: _process or _physics_process? changed to _process for now
 func _process(delta) -> void:
 	# CONTROLLER (INPUT)
-	var input := input_gatherer.gather_input(delta)
+	var input := InputManager.current_input
 	
 	# MODEL (SIMULATION)
 	model.update(input, delta)
@@ -54,8 +53,6 @@ func _process(delta) -> void:
 	# VISUALISE (PRESENTATION)
 	# Visuals -> follow parent transformations
 	
-	#input.queue_free() ep 4
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_cycle_cam"):
@@ -81,8 +78,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			collision_mask = Collision.Mask.PLAYER_COL_MASK
 		else:
 			collision_mask = Collision.Mask._DEV_ZERO_MASK
-
-
 
 
 # ONLY GETTERS FOR OPPONENT PROJECT

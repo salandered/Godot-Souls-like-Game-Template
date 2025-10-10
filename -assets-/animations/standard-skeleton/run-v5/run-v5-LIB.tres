@@ -795,7 +795,7 @@ resource_name = "B-Jog-Forward-v2"
 length = 0.8333333
 loop_mode = 1
 markers = [{
-"color": Color(1, 1, 1, 1),
+"color": Color(1, 0.9606667, 0.41000003, 1),
 "name": &"left_leg_full_contact",
 "time": 0.29053715
 }, {

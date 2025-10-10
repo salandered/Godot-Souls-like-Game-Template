@@ -4,20 +4,20 @@ extends BaseSEState
 @export var animation_length: float
 @export var hit_damage: int = 20
 
-func check_transition(delta: float) -> Verdict:
+func check_transition(delta: float) -> SEVerdict:
 	# if we are in attack, we better attack
 	if distance_to_player() > me.fight_distance:
 		print_.se_check_trans(state_name, "player too far => backtrack")
-		return Verdict.new(SEState.backtrack)
+		return SEVerdict.new(SEState.backtrack)
 	if distance_to_player() > me.attack_distance:
 		print_.se_check_trans(state_name, "player too far => follow")
-		return Verdict.new(SEState.follow)
+		return SEVerdict.new(SEState.follow)
 	if works_longer_than(fatigue):
 		print_.se_check_trans(state_name, ">fatigue " + str(fatigue) + " " + str(get_progress()) + " => idle")
-		return Verdict.new(SEState.idle)
+		return SEVerdict.new(SEState.idle)
 
 	print_.se_check_trans(state_name, "still attack")
-	return Verdict.new(SEState.attack) # not me.CURRENT! upd: why?
+	return SEVerdict.new(SEState.attack) # not me.CURRENT! upd: why?
 
 
 func update(delta):

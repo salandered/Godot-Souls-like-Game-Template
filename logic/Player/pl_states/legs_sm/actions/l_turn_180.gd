@@ -11,10 +11,13 @@ var curr_turn: TurnData = TurnData.new()
 
 var INCREASE_ROTATION: float = 1.0
 
+
+var TURN_180_APEX_TIME: float
+
 func on_enter_action(_input: InputPackage) -> void:
 	prints(u.fr(), "------- turn on enter")
 	
-	initial_rotation = player.quaternion
+	initial_rotation = get_player().quaternion
 	prints("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA
@@ -30,13 +33,16 @@ func on_enter_action(_input: InputPackage) -> void:
 			INCREASE_ROTATION = 1.1
 		Leg.Act.idle:
 			INCREASE_ROTATION = 1.0
+
+	TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+	
 	
 func on_exit_action() -> void:
 	prints(u.fr(), "------- turn on exit")
 	
 	var tranfer_turn_data = {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
-	tranfer_turn_data["rm_speed"] = player.velocity.length()
+	tranfer_turn_data["rm_speed"] = get_player().velocity.length()
 	
 	legs_sm.fill_tranfer_data(tranfer_turn_data)
 
@@ -52,15 +58,15 @@ func update(input: InputPackage, delta: float):
 		var result = apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
-	if time_spent() < Constants.TURN_180_APEX_TIME:
+	if time_spent() < TURN_180_APEX_TIME:
 		var root_vel = animator_manager.get_root_velocity()
-		player.velocity = initial_rotation * root_vel
-		# prints("~~b4", time_spent(), SPEED_MULT, player.velocity.length())
+		get_player().velocity = initial_rotation * root_vel
+		# prints("~~b4", time_spent(), SPEED_MULT, get_player().velocity.length())
 	else:
 		# WARNING: currently turn180-> run configured in a way, that we cut right on apex.
 		# => this wont be run, but code is ready to handle this
 		SPEED_MULT = speed_curve_from_apex.update(delta)
-		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, player.velocity.length())
+		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, get_player().velocity.length())
 		move_with_input_vector(input, delta, SpeedConfig.new(SPEED_MULT))
 
 
@@ -78,7 +84,7 @@ func animate(): # ▶️
 
 
 func __log_turn_exit():
-	var _final_rotation = player.quaternion.angle_to(initial_rotation)
+	var _final_rotation = get_player().quaternion.angle_to(initial_rotation)
 	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
 	prints("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
 		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

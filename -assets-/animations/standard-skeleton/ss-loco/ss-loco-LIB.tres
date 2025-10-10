@@ -5,7 +5,7 @@
 [ext_resource type="Animation" uid="uid://8ty8c0a7gcj0" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR ss 180 fast turn L.res" id="4_i7o4w"]
 [ext_resource type="Animation" uid="uid://b0ru6ly32on0l" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/RMR ss 180 turn R.res" id="4_nyp4g"]
 [ext_resource type="Animation" uid="uid://dvgnrpuguqd84" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR ss 180 fast turn R.res" id="5_k2smt"]
-[ext_resource type="Animation" uid="uid://cwry7viqdj06j" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR Turn 90 To Run L.res" id="6_yidfj"]
+[ext_resource type="Animation" uid="uid://bbg5kf51fqogt" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR Turn 90 To Run L.res" id="6_yidfj"]
 [ext_resource type="Animation" uid="uid://irgob5vtoik5" path="res://-assets-/animations/standard-skeleton/ss/ss-turn-rm-rot/v2/RMR Turn 90 To Run R.res" id="7_xgs72"]
 
 [sub_resource type="Animation" id="Animation_2q5jt"]

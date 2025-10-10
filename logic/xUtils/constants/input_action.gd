@@ -1,4 +1,6 @@
 extends RefCounted
+## 'Actions' stands for Input Action as this term is used by Godot 
+## Has nothing to do with SM's actions which this project uses.
 class_name RawAction
 
 

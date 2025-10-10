@@ -264,7 +264,7 @@ material_override = SubResource("StandardMaterial3D_f83oq")
 label = "yellow"
 
 [node name="Target2" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
-transform = Transform3D(0.755734, 0, 0.677248, 0, 2.47654, 0, -0.677248, 0, 0.755734, 102.2914, -3.253601, -26.931793)
+transform = Transform3D(0.755734, 0, 0.677248, 0, 2.47654, 0, -0.677248, 0, 0.755734, 124.2862, -3.253601, 27.803984)
 label = "red"
 
 [node name="Target3" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]

@@ -1,11 +1,10 @@
-extends Resource
-class_name Verdict
+extends BaseVerdict
+class_name SEVerdict
 
 
 const CURRENT = "_current"
 
-## NOTE: By default is CURRENT
-var next_state: String
+## NOTE: next_state by default is CURRENT
 var request_new_iter: bool
 
 func _init(_next_state: String = CURRENT, _request_new_iter: bool = false):

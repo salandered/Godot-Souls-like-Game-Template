@@ -9,7 +9,7 @@ func _ready():
 
 
 func update(_input: InputPackage, _delta: float) -> void:
-	player.velocity = Vector3.ZERO
+	get_player().velocity = Vector3.ZERO
 
 
 func animate(): # ▶️

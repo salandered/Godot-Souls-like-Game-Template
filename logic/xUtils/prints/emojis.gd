@@ -11,11 +11,12 @@ const verdict = "⚖️"
 const queued = "👥"
 const forced = "🦾"
 const check = "❔"
-const gray_x = "✖️"
+const gray_x = "✖️" # declined
 
 # important
 const pin = "📌"
 const warn = "⚠️"
+const mb_warn = "🚸" # let's catch and then decide
 const wip = "🚧"
 const crucial = "💥"
 const red_x = "❌"

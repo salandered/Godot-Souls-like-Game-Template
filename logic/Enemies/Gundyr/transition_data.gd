@@ -1,16 +1,8 @@
-extends Resource
+extends BaseVerdict
 class_name VerdictHSM
 
-## Empty "" means no switching
-var target_state: String
-## for log purposes
-var _comment: String
 
-## VerdictHSM.new() means no needs_switch
-func _init(target_state_: String = "", comment_: String = ""):
-	_comment = comment_
-	target_state = target_state_
-
+## VerdictHSM.new() means no need to switch
 
 func needs_switch() -> bool:
-	return target_state != ""
+	return next_state != ""

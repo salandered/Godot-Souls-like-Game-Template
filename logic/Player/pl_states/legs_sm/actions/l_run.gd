@@ -17,15 +17,17 @@ var curr_turn: TurnData = TurnData.new()
 ## In the future this feature may be deleted or separated into something bigger.
 var COMPLETE_ROOT_TURN_FEATURE: bool = false
 
-func _ready():
+func initialise():
 	SPEED = 3.0
 	TURN_SPEED = 2.0
 	ANGULAR_SPEED = 10.0
 
+	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name.TURN_180_APEX, 0.25)
+	
 	blend_time_by_action = {
-		Leg.Act.idle: 0.3 + _dev_add_blend, # 0.3 WORKED GOOD!!
-		Leg.Act.sprint: 0.3 + _dev_add_blend,
-		Leg.Act.turn_180: 0.8 - Constants.TURN_180_APEX_TIME
+		Leg.Act.idle: 0.3, # 0.3 WORKED GOOD!!
+		Leg.Act.sprint: 0.3,
+		Leg.Act.turn_180: turn_180_blend_time,
 	}
 
 func on_enter_action(input: InputPackage):
@@ -49,7 +51,7 @@ func on_enter_action(input: InputPackage):
 
 func on_exit_action():
 	animator_manager.reset_global_speed_scale()
-	var final_speed = player.velocity.length()
+	var final_speed = get_player().velocity.length()
 	legs_sm.fill_tranfer_data({"manual_speed": final_speed})
 
 	speed_mult_from_idle.reset()
@@ -76,7 +78,7 @@ func update(input: InputPackage, delta: float):
 		speed_config.tie_turn_sp_to_speed(0.6)
 		process_input_vector(input, delta, speed_config)
 
-	animator_manager.set_global_speed_scale(player.velocity.length() / CURR_SPEED)
+	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
 
 
 var _next_anim_correction = 0.08
@@ -106,7 +108,7 @@ func _complete_root_turn(CURR_SPEED):
 	var result = apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
 	curr_turn.update(result.completed, result.accum_rot)
 
-	player.velocity = player.basis.z * CURR_SPEED
+	get_player().velocity = get_player().basis.z * CURR_SPEED
 	# OR move_with_input_vector(input, delta, CURVE_SPEED, RESULT_SPEED)
 
 var _dev_add_blend = 0

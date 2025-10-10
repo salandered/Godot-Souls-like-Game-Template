@@ -5,7 +5,9 @@ const IDLE_COMMIT := 0.12 # seconds
 const START_COMMIT := 0.92 # seconds
 
 var TO_STOP_DELAY: float = 0.2
-var ANGLE_FOR_U_TURN = 130
+var ANGLE_FOR_U_TURN_MIN = 130.0
+# var ANGLE_FOR_90_TURN_MIN = 30
+# var ANGLE_FOR_90_TURN_MAX = 130
 var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 
@@ -20,28 +22,14 @@ func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 
 	match curr_motion_type:
 		MotionType.IDLE:
-			if is_moving(input) and curr_action.works_longer_than(IDLE_COMMIT):
-				if abs_angle_pl_input_greater_than(input, delta, ANGLE_FOR_U_TURN):
-					next_action_name = supported_actions.by_name(Leg.Act.turn_180)
-					__log_decision_data(input, pp.compare_w("Angle >", "", ANGLE_FOR_U_TURN), next_action_name)
-				else:
-					next_action_name = supported_actions.default_by_motion(MotionType.START)
-					__log_decision_data(input, pp.compare_w("Angle <", "", ANGLE_FOR_U_TURN), next_action_name)
-	
-	
+			next_action_name = _from_IDLE_decision(input, delta, next_action_name)
+
 		MotionType.START:
-			if is_moving(input):
-				if curr_action.time_remaining_for_smooth_switch(supported_actions.default_by_motion(MotionType.LOOP)) <= 0.0: # if curr_action.time_remaining() <= 0.3: # curr_action.time_remaining_for_smooth_switch(supported_actions.by_motion(MotionType.LOOP)) <= 0.0:
-					next_action_name = supported_actions.default_by_motion(MotionType.LOOP)
-					__log_decision_data(input, "time for smooth sw < ", next_action_name)
-			else:
-				if curr_action.time_remaining() < 0.3:
-					next_action_name = supported_actions.default_by_motion(MotionType.IDLE)
-					__log_decision_data(input, pp.compare_w("works >", "commit", START_COMMIT), next_action_name)
-		
-		
+			next_action_name = _from_START_decision(input, delta, next_action_name)
+
+
 		MotionType.LOOP:
-			next_action_name = _from_loop_decision(input, delta, next_action_name)
+			next_action_name = _from_LOOP_decision(input, delta, next_action_name)
 
 				
 		MotionType.STOP: # stop in run is idle currently
@@ -50,8 +38,41 @@ func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 	return LNextActionVerdict.new(next_action_name)
 
 
-func _from_loop_decision(input: InputPackage, delta: float, next_action_name) -> String:
-	if is_reverse_moving(input): # and abs_angle_pl_input_greater_than(input, delta, ANGLE_FOR_U_TURN):
+func _from_IDLE_decision(input: InputPackage, delta: float, next_action_name) -> String:
+	var curr_action = legs_sm.current_action
+	var angle_deg = get_abs_angle_pl_input_deg(input, delta)
+
+	if is_moving(input) and curr_action.works_longer_than(IDLE_COMMIT):
+		if angle_deg > ANGLE_FOR_U_TURN_MIN:
+			next_action_name = supported_actions.by_name(Leg.Act.turn_180)
+			__log_decision_data(input, pp.compare(">", "angle_deg", angle_deg, "", ANGLE_FOR_U_TURN_MIN), next_action_name)
+		
+
+		else:
+			next_action_name = supported_actions.default_by_motion(MotionType.START)
+			__log_decision_data(input, pp.compare("<", "angle_deg", angle_deg, "", ANGLE_FOR_U_TURN_MIN), next_action_name)
+	
+	return next_action_name
+
+
+func _from_START_decision(input: InputPackage, delta: float, next_action_name) -> String:
+	var curr_action = legs_sm.current_action
+	if is_moving(input):
+		match curr_action.action_name:
+			Leg.Act.turn_180:
+				if curr_action.time_remaining_for_smooth_switch(supported_actions.default_by_motion(MotionType.LOOP)) <= 0.0: # if curr_action.time_remaining() <= 0.3: # curr_action.time_remaining_for_smooth_switch(supported_actions.by_motion(MotionType.LOOP)) <= 0.0:
+					next_action_name = supported_actions.default_by_motion(MotionType.LOOP)
+					__log_decision_data(input, "time for smooth sw < ", next_action_name)
+	else:
+		if curr_action.time_remaining() < 0.3:
+			next_action_name = supported_actions.default_by_motion(MotionType.IDLE)
+			__log_decision_data(input, pp.compare_w("works >", "commit", START_COMMIT), next_action_name)
+
+	return next_action_name
+
+
+func _from_LOOP_decision(input: InputPackage, delta: float, next_action_name) -> String:
+	if is_reverse_moving(input): # and abs_angle_pl_input_greater_than(input, delta, ANGLE_FOR_U_TURN_MIN):
 		next_action_name = supported_actions.by_name(Leg.Act.turn_180)
 		__log_decision_data(input, "", next_action_name)
 		_non_moving_timer.reset()

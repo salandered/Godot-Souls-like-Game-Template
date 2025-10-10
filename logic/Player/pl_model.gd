@@ -25,11 +25,7 @@ func _ready():
 	player_sm.player = player
 	
 	anim_container._accept_animations() # NOTE: should be before accepting states!
-	container.accept_legs_behaviors()
-	container.accept_player_states()
-	container.accept_player_actions()
-	container.accept_legs_actions()
-
+	container.accept_all()
 	
 	player_sm.initialise()
 	animator_manager._accept_modifiers()

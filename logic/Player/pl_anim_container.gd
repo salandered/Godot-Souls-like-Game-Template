@@ -10,18 +10,21 @@ class_name PlayerAnimationContainer
 var _animations = [
 	# loco
 	AnimationData.new(A.idle),
-	AnimationData.new(A.walk),
 	AnimationData.new(A.idle_to_sprint),
-	AnimationData.new(A.idle_turn_to_run_L, 1.0, true),
+	
 	AnimationData.new(A.sprint_to_idle, 0.85),
 	AnimationData.new(A.run),
 	AnimationData.new(A.sprint),
-	# AnimationData.new(A.run_L),
-	AnimationData.new(A.run_R),
 	AnimationData.new(A.turn_180_R, 1.0, true),
 	AnimationData.new(A.turn_180_L, 1.0, true),
 	AnimationData.new(A.fast_turn_180_R, 1.0, true),
 	AnimationData.new(A.fast_turn_180_L, 1.0, true),
+	#
+	AnimationData.new(A.combat_walk),
+	AnimationData.new(A.combat_walk_back),
+	AnimationData.new(A.strafe_R),
+	AnimationData.new(A.strafe_L),
+
 	# loco jump
 	AnimationData.new(A.midair),
 	AnimationData.new(A.small_jump_run),
@@ -70,7 +73,7 @@ func _accept_animations() -> void:
 			print()
 		# all markers # todo: this can be used before __enrich_with_end_start_times
 		var markers = __get_animation_markers(anim.native_anim)
-		anim.markers = markers
+		anim._markers = markers
 
 		_anim_by_name[anim.anim_id] = anim
 
@@ -101,21 +104,21 @@ func __enrich_with_end_start_times(anim: AnimationData):
 	var _end_time: float = native_anim.length
 	var _duration = 0
 
-	var _has_start_marker: bool = native_anim.has_marker(M.MarkerName.START)
-	var _has_end_marker: bool = native_anim.has_marker(M.MarkerName.END)
+	var _has_start_marker: bool = native_anim.has_marker(Marker.Name.START)
+	var _has_end_marker: bool = native_anim.has_marker(Marker.Name.END)
 
 	if anim.is_looping:
 		# WARNING: The animation is always considered to run for its full length to loop correctly.
 		#    - 'end' marker is ignored for looping _animations. 
 		#    - 'start' marker does not influence the duration!
 		if _has_start_marker:
-			_start_time = native_anim.get_marker_time(M.MarkerName.START)
+			_start_time = native_anim.get_marker_time(Marker.Name.START)
 		_duration = native_anim.length
 	else:
 		if _has_start_marker:
-			_start_time = native_anim.get_marker_time(M.MarkerName.START)
+			_start_time = native_anim.get_marker_time(Marker.Name.START)
 		if _has_end_marker:
-			_end_time = native_anim.get_marker_time(M.MarkerName.END)
+			_end_time = native_anim.get_marker_time(Marker.Name.END)
 		if _start_time > _end_time:
 			print_.warn("markers: _start_time > _end_time, _end_time will be ignored")
 			_end_time = native_anim.length
@@ -136,7 +139,7 @@ static func __get_animation_markers(animation: Animation) -> Dictionary:
 	for marker_name in marker_names:
 		var marker_time: float = animation.get_marker_time(marker_name)
 		
-		var marker = M.Marker.new(marker_time, marker_name)
+		var marker = Marker.new(marker_time, marker_name)
 		markers_dict[marker_name] = marker
 	
 	return markers_dict

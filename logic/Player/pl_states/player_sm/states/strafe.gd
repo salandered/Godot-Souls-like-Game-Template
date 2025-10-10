@@ -8,15 +8,6 @@ func _ready():
 	SPEED = 1.5
 	TURN_SPEED = 1
 
-# func _on_enter_state():
-# 	initial_position = player.global_position
-# 	resources.pay_resource_cost(self)
-# 	mark_enter_state()
-# 	on_enter_state()
-# 	animator.update_body_animations()
-
-# func on_enter_state():
-# 	pass
 
 func check_transition(input: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
@@ -25,14 +16,14 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	return best_input_that_can_be_paid(input)
 
 
-func process_input_vector(input: InputPackage, delta: float) -> void:
-	player.velocity = velocity_by_input(input, delta)
+# func process_input_vector(input: InputPackage, delta: float) -> void:
+# 	player.velocity = velocity_by_input(input, delta)
 
-func update(_input: InputPackage, _delta: float):
-	var target_pos = player.fancy_camera.locked_target.global_position
-	target_pos.y = player.global_position.y
-	u.safe_look_at(player, target_pos)
-	player.rotate_y(PI) # some logic in velocity_by_input with locked camera makes a character be 180 reversed
+# func update(_input: InputPackage, _delta: float):
+# 	var target_pos = player.fancy_camera.locked_target.global_position
+# 	target_pos.y = player.global_position.y
+# 	u.safe_look_at(player, target_pos)
+# 	player.rotate_y(PI) # some logic in velocity_by_input with locked camera makes a character be 180 reversed
 
 	# # Decide animation based on movement input
 	# if abs(_input.forward_input) < 0.1 and abs(_input.orbit_input) < 0.1:

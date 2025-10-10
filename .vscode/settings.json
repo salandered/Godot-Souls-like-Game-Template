@@ -426,6 +426,14 @@
 				}
 			]
 		},
+		"(?<=func\\s_?)(initialise)(?=\\()": { // func update(...)
+			"decorations": [
+				{
+					// "color": "#5ec4d8b2",
+					"textDecoration": "underline wavy #5ec4d8b2",
+				},
+			]
+		},
 		"(?<=func\\s_?)(update)(?=\\()": { // func update(...)
 			"decorations": [
 				{

@@ -24,7 +24,7 @@ var acceleration_time: float = 0.5 # How long to reach full speed
 # 	animator_manager.set_global_speed_scale(SPEED_SCALE)
 # 	var input_direction := velocity_by_input(_input, 0.016).normalized()
 # 	if input_direction.length() > 0.1:
-# 		var face_direction = player.basis.z
+# 		var face_direction = get_player().basis.z
 # 		remaining_rotation = face_direction.signed_angle_to(input_direction, Vector3.UP)
 
 
@@ -34,7 +34,7 @@ var acceleration_time: float = 0.5 # How long to reach full speed
 # 	# Rotate gradually
 # 	if abs(remaining_rotation) > 0.01:
 # 		var rotation_this_frame = sign(remaining_rotation) * min(abs(remaining_rotation), ROTATION_SPEED * delta)
-# 		player.rotate_y(rotation_this_frame + 0.01)
+# 		get_player().rotate_y(rotation_this_frame + 0.01)
 # 		remaining_rotation -= rotation_this_frame
 
 

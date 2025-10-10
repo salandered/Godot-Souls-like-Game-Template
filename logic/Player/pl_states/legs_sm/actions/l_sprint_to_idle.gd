@@ -37,13 +37,13 @@ func _move_with_root(delta: float) -> void:
 	# print_.prefix("~~", "root_vel " + pp.vec3(root_vel))
 	var fade_factor = fade_interpolator.update(delta)
 	var extra_vel_local = Vector3(0, 0, extra_speed * fade_factor) # Animation +Z
-	player.velocity = player.get_quaternion() * (root_vel + extra_vel_local)
+	get_player().velocity = get_player().get_quaternion() * (root_vel + extra_vel_local)
 
 	# print("[RUN_STOP] root_vel: %s (%.2f) | fade: %.2f | extra: %s (%.2f) | final: %s (%.2f)" % [
 	# 	pp.vec3(root_vel), root_vel.length(),
 	# 	fade_factor,
 	# 	pp.vec3(current_extra), current_extra.length(),
-	# 	pp.vec3(player.velocity), player.velocity.length()
+	# 	pp.vec3(get_player().velocity), get_player().velocity.length()
 	# ])
 
 

@@ -11,7 +11,8 @@ const FR := true
 # SYSTEMS
 const DEV_PRINT := true
 const input_gathering_PRINT := true
-const FANCY_CAM_PRINT := false
+const FANCY_CAM_PRINT := true
+const AWARENESS := true
 const CONTAINER_PRINT := false
 const COLLISION_PRINT := false
 
@@ -26,9 +27,10 @@ const HIT_B_PRINT := true
 
 
 # PLAYER
-const PSM_PRINT := true
+const PSM_PRINT := false
 const LSM_BEH_PRINT := true
 const LSM_ACTION_PRINT := true
+const STRAFE_ACTION_PRINT := true
 const SKM_PRINT := false
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
@@ -38,6 +40,7 @@ static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	if result_freq == 1 or u.fr(false) % result_freq == 0:
 		return true
 	return false
+
 
 # region: ENEMY logs
 
@@ -81,7 +84,7 @@ static func dev(add_prefix_: String, text: String, info_indents: int = 0, level:
 static func fancy_cam(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	if not FANCY_CAM_PRINT and level != LogL.FORCE_PRINT: return
 	
-	add_prefix_ = "Fancy" + " " + add_prefix_
+	add_prefix_ = "🎥 Cam" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
 
 
@@ -90,6 +93,17 @@ static func container(add_prefix_: String, text: String, info_indents: int = 0, 
 	
 	add_prefix_ = "Container" + " " + add_prefix_
 	prefix(add_prefix_, text, info_indents, level)
+
+static func aware_target(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not AWARENESS and level != LogL.FORCE_PRINT: return
+	add_prefix_ = "🎯" + " " + add_prefix_
+	aware_target(add_prefix_, text, info_indents, level)
+
+static func aware(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if not AWARENESS and level != LogL.FORCE_PRINT: return
+	add_prefix_ = "👀" + add_prefix_
+	prefix(add_prefix_, text, info_indents, level)
+
 
 # endregion
 
@@ -135,11 +149,11 @@ static func psm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String, is_moving, is_reverse_moving, text, decision, info_indents: int = 0, level: String = LogL.NOTSET):
-	var msg = pp.s("motion", motion_type + ",",
-		"is_moving", str(is_moving) + ",",
-		"is_reverse_moving", str(is_reverse_moving) + ",",
+	var msg = pp.s("mt", motion_type + ",",
+		"moving", str(is_moving) + ",",
+		"reverse", str(is_reverse_moving) + ",",
 		text, "=>", decision)
-	add_prefix_ = "choose action ❔" + " " + add_prefix_
+	add_prefix_ = "choose act ❔" + " " + add_prefix_
 	lsm_beh(add_prefix_, msg, info_indents, level)
 
 static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
@@ -148,6 +162,7 @@ static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, le
 	add_prefix_ = "LSM Behavior" + " " + add_prefix_
 	if info_indents == 0: info_indents = 3
 	prefix(add_prefix_, text, info_indents, level)
+
 
 static func lsm_action_anim(add_prefix_: String, anim_name: String, prev_action_name, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
 	var msg = pp.s(

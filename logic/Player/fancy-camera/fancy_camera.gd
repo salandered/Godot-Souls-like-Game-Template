@@ -1,7 +1,6 @@
 extends Node
 class_name FancyCamera
 
-
 @export_group("Following Weights")
 @export var FREE_MOUNT_CHEST_WEIGHT: float = 0.1
 @export var FREE_FOCUS_CHEST_WEIGHT: float = 0.1
@@ -9,7 +8,7 @@ class_name FancyCamera
 
 @export var LOCKED_FOCUS_TARGET_WEIGHT: float = 0.05 # Base 0.05. Range: 0.03 to 0.08
 @export var LOCKED_MOUNT_CHEST_WEIGHT: float = 0.12
-# NOTE: important to keep them equal
+# NOTE: important to keep them equal for now
 #       If different, big camera snap on unlocking.  
 #       If both small, free cam super unresponsive 
 @export var LOCKED_NEST_MOUNT_WEIGHT: float = FREE_NEST_MOUNT_WEIGHT
@@ -28,9 +27,9 @@ class_name FancyCamera
 @export_group("CAM_MOVEMENT")
 @export var HOR_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
 @export var VER_SENSE: float = HOR_SENSE * 0.8 # 70–90% of horizontal (so 1.8 – 5.0 if you follow the same 0.001 scale).
-# θ = 0° → camera straight above the mount (boom pointing straight up).
-# θ = 90° → camera level with the mount (boom perfectly horizontal).
-# θ = 180° → camera straight below the mount.
+	# angle = 0° → camera straight above the mount (offset pointing straight up)
+	# angle = 90° → camera level with the mount (offset perfectly horizontal)
+	# angle = 180° → camera straight below the mount
 # => min is kinda max (high cam angle), and max is lower camera guard
 # also todo keep them in degs, and rads are in math
 @export var MIN_VERTICAL_ANGLE: float = deg_to_rad(22.0) # ≈ 0.384 # 15 – 25
@@ -38,22 +37,22 @@ class_name FancyCamera
 # Bigger = less flicker on the rail, smaller = crisper limit
 @export var VERT_EPS: float = deg_to_rad(0.3) # ≈ 0.0052 | 0.003 is ~0.17° tolerance # 0.2 – 0.6
 
-
+@export_group("Other")
+@export var LOCKED_MAX_YAW_SPEED_DEG_PER_SEC: float = 360.0 # Locking Smoothing
 @export var TARGET_DROP_DISTANCE_SQUARED = 400
+@export var look_at_: Node3D # CameraFocus or target
 
-@export var look_at_: Node3D # CameraFocus node or target
-
-# DOCS
-# - Camera looks constantly at Focus Point and tries to position itself on Camera Nest, located relatively to the Focus Point.
+## DOCS
+# - Camera looks constantly at Focus Point and tries to position itself on Camera Nest
 # - Focus Point follows target, either the player or the enemy.
-# - Offset Vector is important, it defines the camera's arm length.
-# - Camera Focus is the player's chest zone that is being followed by a Focus Point while in free state. Child of the Player
-# - Camera Mount is a point where the camera mount is located. For now it follows player's chest and equal to FocusPoint in a free state.
-# - Camera Nest is a point where camera should be, located relative to the Focus Point
+# - Offset - Vector from the pivot (mount/chest) to the cam. Defines the camera's arm length.
+# - Camera Focus - player's chest that is followed by a Focus Point while in free state. NOTE: Child of the Player
+# - Camera Mount - for now it follows player's chest and equal to FocusPoint in a free state.
+# - Camera Nest - where camera should be (pre-collision). Nest = Mount + offset
 # - Focus Point, Mount, Nest and PlayerCamera are children of Fancy Camera.
 #
-# - Camera flows expectedly:
-#	Focus Point -> LookAt
+# - So it all follows each other:
+#	Focus Point -> LookAt (CameraFocus or target)
 #	Camera Mount -> Player
 #	Camera Nest -> Camera Mount + offset
 #	Camera -> Camera Nest
@@ -69,20 +68,15 @@ class_name FancyCamera
 
 @onready var camera_movement: CameraMovement = %CameraMovement
 
-@export_group("Locking Smoothing")
-@export var LOCKED_MAX_YAW_SPEED_DEG_PER_SEC: float = 360.0
 
-var SPRING_ARM_COLLISION_MASK = 1
+var SPRING_ARM_COLLISION_MASK = 1 # to do: collision sys
 
 var locked_target: Node3D
 
 var accumulated_mouse_delta := Vector2.ZERO
 
-# DEV
-var __fov_pointer := 0
-var __dev_camera_cols := true
-var __dev_camera_visuals := false
-var __csg_objects = []
+var FREE_STATE_NAME = "free_state"
+var LOCKED_STATE_NAME = "locked_state"
 
 
 func _ready() -> void:
@@ -96,7 +90,7 @@ func _ready() -> void:
 
 
 func initialise():
-	# POSISITONS INIT
+	# POSITIONS INIT
 	# 1. look_at_ is always Player's chest (CameraFocus) in the Free State
 	# 2. Free State is always first state to enter 
 	# => we treat look_at_ as chest here in initialise() 
@@ -119,50 +113,75 @@ func initialise():
 	free_state.fc = self
 	free_state.chest = chest
 	free_state.free_offset = initial_offset
+	free_state.state_name = FREE_STATE_NAME
 
 	# LOCKED STATE INIT
 	locked_state.fc = self
+	locked_state.state_name = LOCKED_STATE_NAME
 
 	# CAMERA INIT
 	camera_movement._default_len = initial_offset.length()
 	camera_movement._current_len = initial_offset.length()
 	
-	print_.fancy_cam("", "Fancy Camera Initialisation ended.")
-	print_.fancy_cam("    initial_offset is ", __free_off())
+	print_.fancy_cam("", "Fancy Camera Initialisation ended." + " Initial_offset is " + __free_off())
 
 
 func _process(delta: float) -> void:
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
+	# NOTE: this is second place when we gather input (main being in pl model for pl SM)
+	#   And i currently think it's ok for different systems to listen to input. 
+	#   Another approach would be gathering it in one place and then sending commands / signals to camera etc.
 	var d_x := accumulated_mouse_delta.x
 	var d_y := accumulated_mouse_delta.y
 	accumulated_mouse_delta = Vector2.ZERO
 	
-	if Input.is_action_just_pressed(RawAction.lock_target):
-		if current_state == free_state:
+	var input: InputPackage = InputManager.current_input
+	# print(u.fr() + "//~~~CAM ", input.target_lock)
+
+	_consider_switching_state(input)
+
+	current_state.input_mouse_movement(d_x, d_y)
+	current_state.update(delta)
+
+
+func _consider_switching_state(input: InputPackage):
+	if input.target_lock.no_tap():
+		return
+
+	match current_state.state_name:
+		FREE_STATE_NAME when input.target_lock.tap_or_double_tap():
 			var found_target = player.model.area_awareness.find_target()
 			if found_target:
-				print_.fancy_cam("~~FREE->LOCKED " + u.fr() + "] ", __Cvec() + __free_off() + " target=" + str(found_target))
+				print_.fancy_cam("FREE -> LOCKED ", __Cvec() + __free_off() + " target=" + str(found_target))
 				
 				locked_target = found_target
 				current_state = locked_state
 				
 				locked_state.switch_from_free(locked_target)
 			else:
-				print_.fancy_cam("", "xLOCK NOT")
-		elif current_state == locked_state:
-			print_.fancy_cam("UNLOCK", "fr_n " + str(u.fr()))
+				print_.fancy_cam("", em.gray_x + "LOCK NOT (no target found)")
+		LOCKED_STATE_NAME when input.target_lock.tap:
+			print_.fancy_cam("LOCKED -> FREE", "")
 			locked_target = nest
 			current_state = free_state
 			free_state.switch_from_locked()
 
-	current_state.input_mouse_movement(d_x, d_y)
-	current_state.update(delta)
+func is_locked_state():
+	return current_state.state_name == LOCKED_STATE_NAME
+
+func is_free_state():
+	return current_state.state_name == FREE_STATE_NAME
 
 
+## NOTE. This is here and not in auto loaded input_manager.gd
+## - Mouse motion is fundamentally different (event-based vs frame-based)
+## - Camera is the only thing that needs mouse motion anyway
+## If this changes - consider moving to that singleton.
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion: # todo: get such data in InGatherer as well?
 		accumulated_mouse_delta += event.relative
 
+	# dev
 	if event.is_action_released("dev_camera_fov"):
 		__change_fov()
 	
@@ -175,12 +194,20 @@ func _input(event):
 		__dev_camera_cols = not __dev_camera_cols
 		print_.fancy_cam("", "dev_camera_cols")
 
+
+# region: DEV
+
+var __fov_pointer := 0
+var __dev_camera_cols := true
+var __dev_camera_visuals := false
+var __csg_objects = []
+
+
 func __toggle_camera_visuals():
 	for obj in __csg_objects:
 		obj.visible = __dev_camera_visuals
 	
 
-# region: DEV
 func __dbg_main_info() -> String:
 	var r = __Cvec() + __Mvec() + __Nvec() + __Fvec() + __free_off() + __lock_off()
 	return r
@@ -225,7 +252,6 @@ func __angle_player_camera_target() -> String:
 	var angle := str(rad_to_deg(player_to_target.angle_to(camera_to_target)))
 	return angle
 
-
 func __change_fov():
 	print_.dev("", "changed fov")
 	__fov_pointer += 1
@@ -233,12 +259,11 @@ func __change_fov():
 	var fov = fovs[__fov_pointer % fovs.size()]
 	camera.fov = fov
 
-
 # endregion
 
-# TODO: think of renaming
-# Boom: vector from pivot (mount/chest) to the camera. free_offset / lock_offset.
+# TODO: Heard that real game dev terms are:
+# Boom: vector from pivot (mount/chest) to the camera. Now is free_offset / lock_offset.
 # Boom length: _default_len and _current_len.
-# Pivot: the anchor to orbit around — mount.
+# Pivot: the anchor to orbit around (mount).
 # Desired/ideal camera: nest (pre-collision point).
 # Resolved/actual camera: camera after collision solver.

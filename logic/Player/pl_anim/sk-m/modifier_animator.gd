@@ -71,7 +71,6 @@ func _process_modification():
 		_update_time()
 		_update_blend_values()
 		_update_skeleton()
-		# _apply_residual_rotation()
 
 
 func _update_time():

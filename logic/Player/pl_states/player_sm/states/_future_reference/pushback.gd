@@ -96,7 +96,7 @@ func _move_camera() -> void:
 
 func _check_distance() -> void:
 	# checks if the distance between the player and target is too big and drops the target if triggered
-	if fc.player.model.area_awareness.camera_focus_further_than(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
+	if fc.player.model.area_awareness.camera_focus_further_than_squared(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
 		# print("dropping ", distance, " ", TARGET_DROP_DISTANCE_SQUARED)
 		_drop_target()
 

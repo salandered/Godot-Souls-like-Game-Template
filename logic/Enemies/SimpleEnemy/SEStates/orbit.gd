@@ -7,14 +7,14 @@ var direction_decider: int # 1 or -1
 # TODO: whats going on here
 
 
-func check_transition(delta: float) -> Verdict:
+func check_transition(delta: float) -> SEVerdict:
 	if distance_to_player() < me.attack_distance:
 		print_.se_check_trans(state_name, "<attack_distance => attack")
-		return Verdict.new(SEState.attack)
+		return SEVerdict.new(SEState.attack)
 	if distance_to_player() > me.fight_distance:
 		print_.se_check_trans(state_name, ">fight_distance => backtrack")
-		return Verdict.new(SEState.backtrack)
-	return Verdict.new()
+		return SEVerdict.new(SEState.backtrack)
+	return SEVerdict.new()
 
 # The lazy way to do this, not the circular movement
 func _update(delta):

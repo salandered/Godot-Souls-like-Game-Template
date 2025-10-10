@@ -35,13 +35,13 @@ class ActionData:
 		anim_id = anim_id_
 
 
-var node_to_player_state_data: Dictionary = { # { Node name : StateData }
+var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 	# move
 	# "Walk": StateData.new(PS.walk, 2),
 	# TODO: seems like depends_on_legs_ true equals to having not legs_double_beh default
 	"Idle": StateData.new(PS.idle, 1, Leg.Beh.idle, true),
 	"Run": StateData.new(PS.run, 2, Leg.Beh.run, true),
-	"Strafe": StateData.new(PS.strafe, 3),
+	"Strafe": StateData.new(PS.strafe, 2, Leg.Beh.strafe, true),
 	"Sprint": StateData.new(PS.sprint, 3, Leg.Beh.sprint, true),
 	"SmallJumpRun": StateData.new(PS.small_jump_run, 10),
 	"JumpSprint": StateData.new(PS.jump_sprint, 10),
@@ -60,10 +60,9 @@ var node_to_player_state_data: Dictionary = { # { Node name : StateData }
 }
 
 
-var node_to_player_action_data: Dictionary = { # { Node name : ActionData }
+var node_to_pl_action_data: Dictionary = { # { Node name : ActionData }
 	# move
 	# "Walk": ActionData.new(PS.walk,PS.action_block, A.walk ),
-	"StrafeAction": ActionData.new(PS.strafe, PS.action_strafe, A.run_R),
 	"SmallJumpRunAction": ActionData.new(PS.small_jump_run, PS.action_small_jump_run, A.small_jump_run),
 	"JumpSprintAction": ActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint),
 	"LandingSprintAction": ActionData.new(PS.landing_sprint, PS.action_landing_sprint, A.landing_sprint),

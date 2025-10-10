@@ -46,10 +46,7 @@ const action_riposte := "action_riposte🖊️"
 
 const action_idle := "action_run_idle🖊️"
 const action_sprint_idle := "action_sprint_idle🖊️"
-const action_walk := "action_walk🖊️"
 
-const action_strafe := "action_strafe🖊️"
-const action_sprint := "action_sprint🖊️"
 const action_small_jump_run := "action_small_jump_run🖊️"
 const action_jump_sprint := "action_jump_sprint🖊️"
 const action_midair := "action_midair🖊️"

@@ -22,9 +22,9 @@ var spawn_point: Vector3
 
 var __rejected: int = 0 # only for convinient debug prints
 
-func _check_transition(delta: float) -> Verdict:
+func _check_transition(delta: float) -> SEVerdict:
 	if not me.is_on_floor() and not me.current_state.name == SEState.death:
-		return Verdict.new(SEState.midair)
+		return SEVerdict.new(SEState.midair)
 
 	var verdict = check_transition(delta)
 	
@@ -34,14 +34,14 @@ func _check_transition(delta: float) -> Verdict:
 	if iteration_works_less_than(iteration_commitment) and not verdict.is_current():
 		if __rejected < 2: print_.se_check_trans(state_name, "iteration < commitment. => " + verdict.next_state + " rejected ✖️", 2)
 		__rejected += 1
-		return Verdict.new()
+		return SEVerdict.new()
 	__rejected = 0
 
 	# i quess global_commitment and fatigue should be decided in the state itself
 	if verdict.request_new_iter:
 		print_.se_check_trans(state_name, "new iteration requested => same state, iter-mark-state", 2)
 		iteration_mark_state()
-		return Verdict.new("", true)
+		return SEVerdict.new("", true)
 
 	print_.se_check_trans(state_name, "final verdict", 3)
 	return verdict
@@ -49,9 +49,9 @@ func _check_transition(delta: float) -> Verdict:
 
 ## Default check_transition to override. 
 ## Called at the beginning of generic _check_transition.
-func check_transition(delta: float) -> Verdict:
+func check_transition(delta: float) -> SEVerdict:
 	print_.se_check_trans(state_name, "DEFAULT check_transition returns CURRENT", 3)
-	return Verdict.new()
+	return SEVerdict.new()
 
 
 func _update(delta: float):

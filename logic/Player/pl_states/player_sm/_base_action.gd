@@ -2,7 +2,6 @@
 class_name BaseAction
 extends Node
 
-var player: Princess
 var container: PlayerStatesContainer
 var anim_container: AnimationContainer
 var animator_manager: AnimatorManager
@@ -15,6 +14,12 @@ var default_blend_time: float = 0.2
 
 var _enter_action_time: float
 
+
+## if action needs something special to work. Would be called from states container.
+## Reason: We rarely can rely on _ready
+func initialise():
+	pass
+	
 
 # region: TIME MANAGEMENT
 
@@ -31,21 +36,27 @@ func _effective_duration() -> float:
 	return animator_manager.get_curr_anim_effective_duration()
 
 
-func effective_time_spent() -> float:
+## Use this for comparison with absolute data (native anim timings). 
+## Usually it's a work with the markers.
+## Accounts for all speed scales 
+## May start with start offsets
+func effective_time_spent() -> float: # ✔️
 	return animator_manager.get_current_anim_effective_progress()
 
-## Uses time_spent from animator, accounts for all speed scales 
-## (which can even change dynamically)
-func time_spent() -> float:
+
+## Use this for working with relative data (animator's timeline).
+## Example: working with blend times.
+## Time_spent starts with 0.
+## Accounts for all speed scales 
+func time_spent() -> float: # ✔️
 	return animator_manager.get_curr_anim_time_spent()
 
 
-## NOTE: does not support looping animations.
-func time_remaining() -> float:
+## NOTE: in case of looping animations returns big number
+func time_remaining() -> float: # ✔️
 	if anim.is_looping:
-		print_.warn("Will return big meaningless number: time_remaining does not support looping anims. " + anim.anim_name)
 		return Constants.BIG_MEANINGLESS_NUMBER
-	return _effective_duration() - time_spent()
+	return _effective_duration() - time_spent() # or: duration - eff time spent
 
 
 ## Like time_remaining(), but takes into account the blend time of the next state.

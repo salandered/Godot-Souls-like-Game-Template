@@ -28,7 +28,7 @@ func _update(delta: float):
 	if is_container:
 		var verdict = current_state.check_transition(delta)
 		if verdict.needs_switch():
-			_switch_to(verdict.target_state)
+			_switch_to(verdict.next_state)
 		
 		# call ur children to do stuff
 		current_state._update(delta)
@@ -63,7 +63,7 @@ func _on_enter():
 	on_enter()
 	if is_container:
 		var first_state_transition = choose_internal_state()
-		_switch_to(first_state_transition.target_state)
+		_switch_to(first_state_transition.next_state)
 
 ## internal function, use on_exit() to override
 func _on_exit():

@@ -6,7 +6,7 @@ var jumped := false
 
 func on_enter_state(input: InputPackage) -> void:
 	var anim: AnimationData = current_action.anim
-	var marker := anim.get_marker_by_name(M.MarkerName.JUMP_LAUNCH)
+	var marker := anim.get_marker_by_name(Marker.Name.JUMP_LAUNCH)
 	if marker:
 		LAUNCH_TIMING = marker.time
 	jumped = false

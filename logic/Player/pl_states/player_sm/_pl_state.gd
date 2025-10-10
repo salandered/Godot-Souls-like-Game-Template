@@ -132,7 +132,8 @@ func _on_enter_state(input: InputPackage):
 	if depends_on_legs:
 		print_.psm(state_name + pp.on_ent, "Dependent state. Actions delegated to legs, no switch here ⚪")
 		## WARNING testing idle
-		if state_name == PS.idle and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run]:
+		if state_name == PS.idle \
+			and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run, Leg.Beh.strafe]:
 			print_.psm(state_name + pp.on_ent, "No switching legs behavior" + em.gray_x)
 		else:
 			legs_sm.switch_to(legs_behavior, input)

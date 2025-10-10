@@ -13,7 +13,7 @@ var duration: float
 var speed_scale: float
 var is_looping: bool
 var native_anim: Animation
-var markers: Dictionary # {str: M.Marker}
+var _markers: Dictionary # {str: Marker}
 var uses_root_rotation: bool
 
 func _init(
@@ -26,8 +26,21 @@ func _init(
 	uses_root_rotation = _uses_root_rotation
 
 ## Client code may get some specific marker directly.
-func get_marker_by_name(marker_name: String) -> M.Marker:
-	return u.safe_get_dict_key(markers, marker_name, "get marker from anim data")
+func get_marker_by_name(marker_name: String) -> Marker:
+	return u.safe_get_dict_key(_markers, marker_name, "get marker from anim data")
+
+## returns time withing anim.duration
+## returns -1 or default_value (if set) in case of problems
+func get_marker_time_by_name(marker_name: String, default_value: float = -1) -> float:
+	var marker = get_marker_by_name(marker_name)
+	if not marker:
+		print_.warn("marker not found " + marker_name)
+		return default_value
+	if duration - marker.time < 0.0:
+		print_.warn("marker time outside the duration")
+		return default_value
+	return marker.time
+
 
 # PARAMETERS
 func switches_to_queue(timestamp) -> bool:
@@ -106,25 +119,25 @@ func _to_string() -> String:
 	else:
 		parts.append("  native_anim: null")
 	
-	if markers.size() > 0:
-		var marker_names = markers.keys()
+	if _markers.size() > 0:
+		var marker_names = _markers.keys()
 		marker_names.sort() # Sort for consistent output
-		parts.append("  markers: %d marker(s) [%s]" % [markers.size(), ", ".join(marker_names)])
+		parts.append("  _markers: %d marker(s) [%s]" % [_markers.size(), ", ".join(marker_names)])
 		
 		# Optionally detailed
 		# for marker_name in marker_names:
-		#     var marker = markers[marker_name]
+		#     var marker = _markers[marker_name]
 		#     parts.append("    - %s: %s" % [marker_name, str(marker)])
 	else:
-		parts.append("  markers: {} (empty)")
+		parts.append("  _markers: {} (empty)")
 	
 	parts.append("}")
 	
 	return "\n".join(parts)
 
 func to_string_compact() -> String:
-	return "%24s: %4.2f-%4.2f, dur %4.2f, scale %1.2f, lp %5s, markers %2d" % [
-		pp.in_q(anim_name), _start_time, _end_time, duration, speed_scale, str(is_looping), markers.size()
+	return "%24s: %4.2f-%4.2f, dur %4.2f, scale %1.2f, lp %5s, _markers %2d" % [
+		pp.in_q(anim_name), _start_time, _end_time, duration, speed_scale, str(is_looping), _markers.size()
 	]
 
 # endregion
@@ -194,7 +207,10 @@ static func __validate_anim(anim_data: AnimationData) -> bool:
 	if anim_data.native_anim == null:
 		return false
 
-	if anim_data.markers == null:
+	# TODO: add validation, that marker time is within anim_data duration and start-end times. 
+	#       technically marker can be outside of that (but not outside native_anum len, of course).
+	#       for simplicity, lets not support that for now
+	if anim_data._markers == null: # (no markers is fine, would be empty dict)
 		return false
 	
 

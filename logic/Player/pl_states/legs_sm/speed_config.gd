@@ -23,3 +23,18 @@ func tie_turn_sp_to_speed(multiplier: float):
 		print_.warn("cant use override_speed that is not set. Will remain as it was: " + str(override_turn_speed))
 		return
 	override_turn_speed = override_speed * multiplier
+
+func get_override_speed(default: float) -> float:
+	if override_speed != -1.0:
+		return override_speed
+	return default
+
+func get_override_angular_sp(default: float) -> float:
+	if override_angular_sp != -1.0:
+		return override_angular_sp
+	return default
+
+func get_override_turn_speed(default: float) -> float:
+	if override_turn_speed != -1.0:
+		return override_turn_speed
+	return default

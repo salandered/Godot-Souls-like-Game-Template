@@ -57,7 +57,7 @@ func update(input: InputPackage, delta: float):
 	var speed_config = SpeedConfig.new(1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
 	process_input_vector(input, delta, speed_config)
 
-	animator_manager.set_global_speed_scale(player.velocity.length() / CURR_SPEED)
+	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
 
 
 func animate(): # ▶️

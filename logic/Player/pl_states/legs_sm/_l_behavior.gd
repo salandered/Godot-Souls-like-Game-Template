@@ -7,7 +7,6 @@ class_name LegsBehavior
 
 var container: PlayerStatesContainer
 var legs_sm: LegsSM # set by SM
-var player: Princess
 var combat: HumanoidCombat
 var area_awareness: AreaAwareness # FILL ME if you use it
 var player_state: PlayerState # set by SM when switching
@@ -15,6 +14,10 @@ var player_state: PlayerState # set by SM when switching
 var behavior_name: String
 
 var supported_actions: SupportedActions
+
+func get_player() -> Princess:
+	return legs_sm.player_sm.player
+
 
 func update(_input: InputPackage, _delta: float):
 	var verdict: LNextActionVerdict = choose_action(_input, _delta)
@@ -90,10 +93,13 @@ func is_reverse_moving(input) -> bool:
 	##    => WARNING: their order is important
 	return input.reverse_data.is_reversed
 
-func abs_angle_pl_input_greater_than(input, delta, angle_in_deg) -> bool:
-	var angle = player.model.__angle_between_player_and_input(input, delta)
-	# prints("~~~~~~~~~", abs(angle), deg_to_rad(angle_in_deg))
-	return abs(angle) > deg_to_rad(angle_in_deg)
+func get_abs_angle_pl_input(input, delta) -> float:
+	var angle = get_player().model.__angle_between_player_and_input(input, delta)
+	return abs(angle)
+
+func get_abs_angle_pl_input_deg(input, delta) -> float:
+	var angle = get_player().model.__angle_between_player_and_input(input, delta)
+	return rad_to_deg(abs(angle))
 
 # endregion
 

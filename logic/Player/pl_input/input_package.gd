@@ -7,9 +7,25 @@ var input_direction: Vector2
 var actions: Array[String]
 var combat_actions: Array[String]
 
-# Target
-var target_lock_pressed: bool = false
-var target_lock_long_pressed: bool = false
+class TargetLockInput:
+	## NOTE: all are mutually exclusive
+	var tap_waiting: bool = false
+	var tap: bool = false
+	var double_tap: bool = false
+	
+	func no_tap() -> bool:
+		return not (tap_waiting or tap or double_tap)
+
+	func any_tap() -> bool:
+		return tap_waiting or tap or double_tap
+	
+	func tap_or_double_tap() -> bool:
+		return tap or double_tap
+
+	func _to_string() -> String:
+		return pp.s(" (", tap_waiting, tap, double_tap, ")")
+
+var target_lock: TargetLockInput = TargetLockInput.new()
 
 # Fancy camera
 var forward_input := 0.0
@@ -17,14 +33,11 @@ var orbit_input := 0.0
 
 # 
 
-var move_press: MovementPress = MovementPress.new()
-
 var reverse_data: ReverseData = ReverseData.new()
 
-
+# 
 func _to_string() -> String:
 	var parts = []
-	parts.append(str(move_press))
 	parts.append("input_dir: %s" % input_direction)
 	if not actions.is_empty():
 		parts.append("actions: %s" % ", ".join(actions))

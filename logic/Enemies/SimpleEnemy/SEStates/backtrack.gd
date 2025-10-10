@@ -1,11 +1,11 @@
 extends BaseSEState
 
 
-func check_transition(delta: float) -> Verdict:
+func check_transition(delta: float) -> SEVerdict:
 	if me.global_position.distance_to(spawn_point) < 2:
 		print_.se_check_trans(state_name, "reached spawn point => idle", 2)
-		return Verdict.new(SEState.idle)
-	return Verdict.new()
+		return SEVerdict.new(SEState.idle)
+	return SEVerdict.new()
 
 
 func update(delta):

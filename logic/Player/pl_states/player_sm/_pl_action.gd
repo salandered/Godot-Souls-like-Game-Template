@@ -9,6 +9,9 @@ func update(_input: InputPackage, _delta: float):
 	pass
 
 
+func get_player() -> Princess:
+	return player_sm.player
+
 func animate(): # ▶️
 	# if animation == "roll" or animation == "block":
 		# print_.prefix("~~ SOS", "")
