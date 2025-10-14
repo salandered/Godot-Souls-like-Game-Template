@@ -12,9 +12,13 @@ class_name CameraMovement
 var _current_len: float
 var _default_len: float
 
+
+func _exclude_colliders() -> Array:
+	return [fc.player, fc.mount, fc.nest, fc.camera]
+
 func _just_follow_nest() -> void:
 	# Works really well, but in real world there are collisions ...
-	fc.camera.global_position = fc.nest.global_position # follow nest
+	fc.camera.global_position = fc.nest.global_position 
 	u.safe_look_at(fc.camera, fc.focus.global_position)
 
 	# was like that, but big snapping on unlocking:
@@ -88,13 +92,14 @@ func _calc_min_hit_len_via_raycasts(arm_dir: Vector3, from: Vector3, to: Vector3
 		var ray_to = to + offset_vec
 		
 		var query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
-		query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+		query.exclude = _exclude_colliders()
 		query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
 		
 		var result := space_state.intersect_ray(query)
 		if result:
 			# instead of offsetting by normal, calculate distance along arm
-			# handles grazing angles better
+			# handles grazing angles better 
+			# (Grazing angle is defined as the angle formed between the beam axis and the surface at which the measurement is taken)
 			var hit_vec = result.position - from
 			var hit_dist_along_arm = hit_vec.dot(arm_dir)
 			min_hit_len = min(min_hit_len, hit_dist_along_arm)
@@ -112,7 +117,7 @@ func _check_camera_penetration(camera_pos: Vector3) -> bool:
 	params.shape = shape
 	params.transform = Transform3D(Basis(), camera_pos)
 	params.collision_mask = fc.SPRING_ARM_COLLISION_MASK
-	params.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+	params.exclude = _exclude_colliders()
 	
 	var results = space_state.intersect_shape(params, 1)
 	return results.size() > 0
@@ -122,7 +127,7 @@ func _resolve_penetration(from: Vector3, camera_pos: Vector3, direction: Vector3
 	
 	# cast a ray to find a safe position
 	var query := PhysicsRayQueryParameters3D.create(from, camera_pos)
-	query.exclude = [fc.player, fc.mount, fc.nest, fc.camera]
+	query.exclude = _exclude_colliders()
 	query.collision_mask = fc.SPRING_ARM_COLLISION_MASK
 	
 	var result := space_state.intersect_ray(query)

@@ -4,6 +4,7 @@ class_name LockedCameraState
 var target: Node3D
 var lock_offset: Vector3
 
+# todo - another contant
 var blend_timer := DelayTimer.new()
 var BLEND_DURATION := 0.4 # 0.3-0.6 seconds (shorter = snappier lock, longer = smoother)
 

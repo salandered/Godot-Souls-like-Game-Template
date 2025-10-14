@@ -1,4 +1,9 @@
-[gd_resource type="AnimationLibrary" load_steps=5 format=3 uid="uid://c3igq75g47fhk"]
+[gd_resource type="AnimationLibrary" load_steps=9 format=3 uid="uid://c3igq75g47fhk"]
+
+[ext_resource type="Animation" uid="uid://bomleh4xmbh6n" path="res://-assets-/animations/standard-skeleton/ss/walk/walk b.res" id="1_2c1yu"]
+[ext_resource type="Animation" uid="uid://d3k2sn34xhgro" path="res://-assets-/animations/standard-skeleton/ss/walk/walk f.res" id="2_2tp8j"]
+[ext_resource type="Animation" uid="uid://w0jvcdqyc3ti" path="res://-assets-/animations/standard-skeleton/ss/walk/walk b2.res" id="3_pk3xj"]
+[ext_resource type="Animation" uid="uid://chc6wxj22fw86" path="res://-assets-/animations/standard-skeleton/ss/walk/walk F2.res" id="4_r34j6"]
 
 [sub_resource type="Animation" id="Animation_24k0g"]
 resource_name = "A strafe L"
@@ -1565,5 +1570,9 @@ _data = {
 &"A-strafe-L": SubResource("Animation_24k0g"),
 &"A-strafe-R": SubResource("Animation_j1t6a"),
 &"B-strafe-run-L": SubResource("Animation_awben"),
-&"B-strafe-run-R-strange": SubResource("Animation_3ad5p")
+&"B-strafe-run-R-strange": SubResource("Animation_3ad5p"),
+&"walk b": ExtResource("1_2c1yu"),
+&"walk b2": ExtResource("3_pk3xj"),
+&"walk f": ExtResource("2_2tp8j"),
+&"walk f2": ExtResource("4_r34j6")
 }

@@ -11,6 +11,7 @@ func initialise(curve_: Curve, duration_: float) -> void:
 	duration = duration_
 	timer = 0.0
 
+
 ## Returns final curve value when done
 ## Essentially returns 'curved' progress, so result is [0, 1].
 func update(delta: float) -> float:

@@ -165,7 +165,16 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 ## STRAFE MOVEMENT
 # region: code 
 
-## used with strafe behavior actions
+func move_forward_or_back(direction_sign: float, delta: float, speed_config: SpeedConfig = null):
+	if speed_config == null:
+		speed_config = SpeedConfig.new()
+	var _speed = speed_config.get_override_speed(SPEED)
+	
+	# direction_sign: 1.0 for forward, -1.0 for backward
+	var forward_vec = get_player().basis.z * direction_sign
+	get_player().velocity = forward_vec * _speed * speed_config.speed_multiplier
+
+
 func strafe_with_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
 	if speed_config == null:
 		speed_config = SpeedConfig.new()
@@ -180,13 +189,27 @@ func strafe_with_input_vector(input: InputPackage, delta: float, speed_config: S
 	get_player().velocity = direction * _speed * speed_config.speed_multiplier
 
 
-func look_at_target(use_model_front: bool = true) -> void:
-	# Assuming camera lock implies a valid target exists.
+func look_at_target(delta: float, use_model_front: bool = true) -> void:
 	if legs_sm.area_awareness.is_camera_locked():
-		var target_pos = get_player().fancy_camera.locked_target.global_position
-		# Ignore the height difference for rotation to keep the character upright.
+		var target_pos = legs_sm.area_awareness.get_camera_locked_target().global_position
 		target_pos.y = get_player().global_position.y
-		u.safe_look_at(get_player(), target_pos, Vector3.UP, use_model_front)
+
+		var dir_to_target = get_player().global_position.direction_to(target_pos)
+		var face_dir = get_player().global_basis.z
+		
+		var remaining_angle = face_dir.signed_angle_to(dir_to_target, Vector3.UP)
+		
+		var max_rot_this_frame = ANGULAR_SPEED * delta # maximum rotation allowed in this single frame
+		var rotation_this_frame = clampf(remaining_angle, -max_rot_this_frame, max_rot_this_frame)
+		
+		get_player().rotate_y(rotation_this_frame)
+
+# func look_at_target(use_model_front: bool = true) -> void:
+# 	if legs_sm.area_awareness.is_camera_locked():
+# 		var target_pos = get_player().fancy_camera.locked_target.global_position
+# 		# Ignore the height difference for rotation to keep the character upright.
+# 		target_pos.y = get_player().global_position.y
+# 		u.safe_look_at(get_player(), target_pos, Vector3.UP, use_model_front)
 
 # endregion
 
@@ -197,7 +220,7 @@ func look_at_target(use_model_front: bool = true) -> void:
 
 func calculate_target_angle(input: InputPackage) -> float:
 	var target_angle: float
-	if input.reverse_data.is_reversed:
+	if input.reverse_data.is_reversed():
 		target_angle = - PI + 0.05
 		prints("\n\t target ∠:", pp.rad2deg(target_angle))
 		prints("\t Reverse type and full data", input.reverse_data.type, input.reverse_data)
@@ -231,19 +254,37 @@ func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 	#       (before current action hits set_anim_to_play)
 	var prev_anim_progress = animator_manager.get_current_anim_effective_progress()
 	var prev_anim = legs_sm.prev_action.anim
+	var next_anim = anim
 	var prev_l_leg_contact = prev_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact = anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact = next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if prev_l_leg_contact and next_l_leg_contact:
 		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(
 			prev_anim_progress,
 			prev_anim.duration,
 			prev_l_leg_contact.time,
-			anim.duration,
+			next_anim.duration,
 			next_l_leg_contact.time + next_anim_correction
 		)
 	return result_offset
 
+
+func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: float = 0.0) -> float:
+	var result_offset = -1
+	var curr_anim_progress = animator_manager.get_current_anim_effective_progress()
+	var curr_anim = anim
+	var curr_l_leg_contact = curr_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact = next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	if curr_l_leg_contact and next_l_leg_contact:
+		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
+		result_offset = AnimHelpers.calculate_synced_anim_offset(
+			curr_anim_progress,
+			curr_anim.duration,
+			curr_l_leg_contact.time,
+			next_anim.duration,
+			next_l_leg_contact.time + next_anim_correction
+		)
+	return result_offset
 
 ## return -1 in case of problems or default value
 func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_name_: String, default_value: float = -1) -> float:

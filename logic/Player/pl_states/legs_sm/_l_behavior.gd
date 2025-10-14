@@ -91,7 +91,10 @@ func is_reverse_moving(input) -> bool:
 	## but it also captures very fast sequential presses 
 	## => is_reverse_moving and is_moving answers may or may not overlap 
 	##    => WARNING: their order is important
-	return input.reverse_data.is_reversed
+	return input.reverse_data.is_reversed()
+
+func is_pure_reverse_moving(input) -> bool:
+	return input.reverse_data.is_pure_reversed()
 
 func get_abs_angle_pl_input(input, delta) -> float:
 	var angle = get_player().model.__angle_between_player_and_input(input, delta)
@@ -109,5 +112,6 @@ func __log_decision_data(input, additional_checks: String, next_action_name: Str
 		_curr_motion_type,
 		is_moving(input),
 		is_reverse_moving(input),
+		is_pure_reverse_moving(input),
 		additional_checks,
 		next_action_name)

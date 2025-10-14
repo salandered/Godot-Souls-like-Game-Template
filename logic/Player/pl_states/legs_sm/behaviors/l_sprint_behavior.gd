@@ -55,7 +55,7 @@ func choose_action(input: InputPackage, delta: float) -> LNextActionVerdict:
 
 
 func _from_loop_decision(input: InputPackage, delta: float, next_action_name) -> String:
-	if is_reverse_moving(input):
+	if is_pure_reverse_moving(input):
 		next_action_name = supported_actions.by_name(Leg.Act.fast_turn_180)
 		__log_decision_data(input, "", next_action_name)
 		_non_moving_timer.reset()

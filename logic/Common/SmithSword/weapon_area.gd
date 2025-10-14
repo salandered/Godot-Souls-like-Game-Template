@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/hurt_box_3d.svg")
+@icon("res://-assets-/x_misc/x_icons/red/hurt_box_3d.svg")
 extends Area3D
 class_name WeaponHurtBox
 

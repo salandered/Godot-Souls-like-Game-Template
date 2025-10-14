@@ -1,4 +1,6 @@
 extends BaseDetector
+
+## seems like non static would be easier
 class_name DetectReverse
 
 
@@ -6,11 +8,65 @@ const MIN_REVERSE_HOLD_TIME: float = 0.1
 const SEQUENTIAL_PRESS_THRESHOLD: float = 0.35
 
 
-static func _any_vert_pressed(forward_key, back_key) -> bool:
-	return forward_key.is_pressed or back_key.is_pressed
+class DirectionalKeys:
+	var forward_key: KeyPress
+	var back_key: KeyPress
+	var left_key: KeyPress
+	var right_key: KeyPress
 
-static func _any_hor_pressed(right_key, left_key) -> bool:
-	return right_key.is_pressed or left_key.is_pressed
+	func _init(_forward: KeyPress, _back: KeyPress, _left: KeyPress, _right: KeyPress):
+		forward_key = _forward
+		back_key = _back
+		left_key = _left
+		right_key = _right
+
+
+static func _any_vert_pressed(keys: DirectionalKeys) -> bool:
+	return keys.forward_key.is_pressed or keys.back_key.is_pressed
+
+static func _any_hor_pressed(keys: DirectionalKeys) -> bool:
+	return keys.right_key.is_pressed or keys.left_key.is_pressed
+
+
+static func _check_overlap(k_just_pressed: KeyPress, k_pressed: KeyPress, all_keys: DirectionalKeys, action_to_vector: Dictionary,
+	reverse_data: ReverseData, type: ReverseData.ReverseType) -> bool:
+	var other_keys_are_pressed: bool
+	if type == ReverseData.ReverseType.HORIZONTAL:
+		other_keys_are_pressed = _any_vert_pressed(all_keys)
+	else: # ReverseData.ReverseType.VERTICAL
+		other_keys_are_pressed = _any_hor_pressed(all_keys)
+
+	if _just_pressed_and_pressed(k_just_pressed, k_pressed):
+		var hold_duration = k_pressed.get_time_since_press(_current_time())
+		if hold_duration >= MIN_REVERSE_HOLD_TIME:
+			var from_vector = action_to_vector[k_pressed.raw_action]
+			var to_vector = action_to_vector[k_just_pressed.raw_action]
+
+			reverse_data.initialise(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
+			return true
+			
+	return false
+
+
+static func _check_sequential(k_just_pressed: KeyPress, k_not_pressed: KeyPress, all_keys: DirectionalKeys, action_to_vector: Dictionary,
+	reverse_data: ReverseData, type: ReverseData.ReverseType) -> bool:
+	var other_keys_are_pressed: bool
+	if type == ReverseData.ReverseType.HORIZONTAL:
+		other_keys_are_pressed = _any_vert_pressed(all_keys)
+	else: # ReverseData.ReverseType.VERTICAL
+		other_keys_are_pressed = _any_hor_pressed(all_keys)
+
+	if _just_pressed_and_not_pressed(k_just_pressed, k_not_pressed):
+		if k_not_pressed.was_released_at_least_one():
+			var time_since_release = _current_time() - k_not_pressed.last_release_time
+			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
+				var from_vector = action_to_vector[k_not_pressed.raw_action]
+				var to_vector = action_to_vector[k_just_pressed.raw_action]
+				
+				reverse_data.initialise(from_vector, to_vector, type, time_since_release, other_keys_are_pressed)
+				return true
+				
+	return false
 
 
 static func detect_reverse_data(new_input: InputPackage,
@@ -20,61 +76,26 @@ static func detect_reverse_data(new_input: InputPackage,
 	left_key: KeyPress,
 	delta: float
 ) -> void:
-	# TODO: template both phases in a way, so its iteration over 4 pair of keys and not 4 if-s
 	var reverse_data := new_input.reverse_data
 	reverse_data.reset()
+
+	var all_keys = DirectionalKeys.new(forward_key, back_key, left_key, right_key)
 	
-			
+	var action_to_vector = {
+		forward_key.raw_action: Vector2(0, -1),
+		back_key.raw_action: Vector2(0, 1),
+		left_key.raw_action: Vector2(-1, 0),
+		right_key.raw_action: Vector2(1, 0)
+	}
+
 	# PHASE 1: Check all overlap cases
-	if _just_pressed_and_pressed(right_key, left_key) and not _any_vert_pressed(forward_key, back_key):
-		var hold_duration = left_key.get_time_since_press(_current_time())
-		if hold_duration >= MIN_REVERSE_HOLD_TIME:
-			reverse_data.initialise(DV.name_to_vec[DV.LEFT], DV.name_to_vec[DV.RIGHT], "strafe", 0.0)
-			return
+	if _check_overlap(right_key, left_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.HORIZONTAL): return
+	if _check_overlap(left_key, right_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.HORIZONTAL): return
+	if _check_overlap(back_key, forward_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.VERTICAL): return
+	if _check_overlap(forward_key, back_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.VERTICAL): return
 
-	if _just_pressed_and_pressed(left_key, right_key) and not _any_vert_pressed(forward_key, back_key):
-		var hold_duration = right_key.get_time_since_press(_current_time())
-		if hold_duration >= MIN_REVERSE_HOLD_TIME:
-			reverse_data.initialise(DV.name_to_vec[DV.RIGHT], DV.name_to_vec[DV.LEFT], "strafe", 0.0)
-			return
-
-	if _just_pressed_and_pressed(back_key, forward_key) and not _any_hor_pressed(right_key, left_key):
-		var hold_duration = forward_key.get_time_since_press(_current_time())
-		if hold_duration >= MIN_REVERSE_HOLD_TIME:
-			reverse_data.initialise(DV.name_to_vec[DV.FORWARD], DV.name_to_vec[DV.BACK], "forward", 0.0)
-			return
-
-	if _just_pressed_and_pressed(forward_key, back_key) and not _any_hor_pressed(right_key, left_key):
-		var hold_duration = back_key.get_time_since_press(_current_time())
-		if hold_duration >= MIN_REVERSE_HOLD_TIME:
-			reverse_data.initialise(DV.name_to_vec[DV.BACK], DV.name_to_vec[DV.FORWARD], "forward", 0.0)
-			return
-
-	# PHASE 2: Check all sequential cases if no overlap was found
-	if _just_pressed_and_not_pressed(right_key, left_key) and not _any_vert_pressed(forward_key, back_key):
-		if left_key.was_released_at_least_one():
-			var time_since_release = _current_time() - left_key.last_release_time
-			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
-				reverse_data.initialise(DV.name_to_vec[DV.LEFT], DV.name_to_vec[DV.RIGHT], "strafe", time_since_release)
-				return
-
-	if _just_pressed_and_not_pressed(left_key, right_key) and not _any_vert_pressed(forward_key, back_key):
-		if right_key.was_released_at_least_one():
-			var time_since_release = _current_time() - right_key.last_release_time
-			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
-				reverse_data.initialise(DV.name_to_vec[DV.RIGHT], DV.name_to_vec[DV.LEFT], "strafe", time_since_release)
-				return
-
-	if _just_pressed_and_not_pressed(back_key, forward_key) and not _any_hor_pressed(right_key, left_key):
-		if forward_key.was_released_at_least_one():
-			var time_since_release = _current_time() - forward_key.last_release_time
-			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
-				reverse_data.initialise(DV.name_to_vec[DV.FORWARD], DV.name_to_vec[DV.BACK], "forward", time_since_release)
-				return
-
-	if _just_pressed_and_not_pressed(forward_key, back_key) and not _any_hor_pressed(right_key, left_key):
-		if back_key.was_released_at_least_one():
-			var time_since_release = _current_time() - back_key.last_release_time
-			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
-				reverse_data.initialise(DV.name_to_vec[DV.BACK], DV.name_to_vec[DV.FORWARD], "forward", time_since_release)
-				return
+	# PHASE 2: Check all sequential cases
+	if _check_sequential(right_key, left_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.HORIZONTAL): return
+	if _check_sequential(left_key, right_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.HORIZONTAL): return
+	if _check_sequential(back_key, forward_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.VERTICAL): return
+	if _check_sequential(forward_key, back_key, all_keys, action_to_vector, reverse_data, ReverseData.ReverseType.VERTICAL): return

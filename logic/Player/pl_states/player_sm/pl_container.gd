@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/icon_grid.png")
+@icon("res://-assets-/x_misc/x_icons/white/icon_grid.png")
 
 extends Node
 class_name PlayerStatesContainer
@@ -23,7 +23,7 @@ var player: Princess
 
 func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer.ActionData]:
 	var result: Array[StatesContainer.ActionData] = []
-	for action_data: StatesContainer.ActionData in states_container.node_to_pl_action_data.values():
+	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
 		if action_data.state_name == state:
 			result.append(action_data)
 	return result
@@ -135,15 +135,14 @@ func _accept_player_states() -> void:
 
 func _accept_player_actions():
 	var states_container = StatesContainer.new()
-
-	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
-		print_.container("", "child.get_name() " + child.get_name())
-		var action_data: StatesContainer.ActionData = states_container.node_to_pl_action_data.get(child.get_name())
-		if not action_data:
-			print_.warn("No action data found for: " + child.get_name() + " Will be skipped")
-			continue
-		print_.container("", "action_data.action_name " + action_data.action_name)
-
+	
+	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
+		var child = PlayerAction.new() # Create a generic PlayerAction node
+		
+		child.name = u.to_pascal_case(action_data.action_name)
+		
+		print_.container("", "Creating action: " + action_data.action_name)
+		
 		_player_actions[action_data.action_name] = child
 		
 		# base action
@@ -151,15 +150,18 @@ func _accept_player_actions():
 		child.container = self
 		child.animator_manager = animator_manager
 		child.anim_container = anim_container
-
-		# specific
-		var anim := anim_container.get_by_name(action_data.anim_id)
+		
+		# specific 
+		var anim = anim_container.get_by_name(action_data.anim_id)
 		assert(anim, "no anim with " + action_data.anim_id)
 		child.anim = anim
 		child.action_name = action_data.action_name
-
-		assert(child.action_name and not child.action_name.is_empty(), " action_name problem")
-
+		
+		assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
+		
+		
+		add_child(child) # Add to tree
+	
 	print_.container("", "===========  Accepted actions ===========")
 	print_.container("", str(_player_actions))
 	print("")

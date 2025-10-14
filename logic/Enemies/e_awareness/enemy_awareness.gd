@@ -1,3 +1,5 @@
+@tool
+@icon("res://-assets-/x_misc/x_icons/yellow/icon_visibility.png")
 extends Node3D
 class_name EnemyAwareness
 

@@ -10,7 +10,7 @@ const DIR_CHANGE_COOLDOWN := 0.1
 
 func initialise():
 	dir_change_cooldown.initialise(DIR_CHANGE_COOLDOWN)
-	SPEED = 1.3
+	SPEED = 1.05
 
 
 func _update_strafe_direction(input: InputPackage, on_enter: bool = false) -> StrafeDir:
@@ -31,7 +31,7 @@ func on_exit_action() -> void:
 
 
 func update(input: InputPackage, delta: float) -> void:
-	look_at_target()
+	look_at_target(delta)
 
 	strafe_with_input_vector(input, delta, SpeedConfig.new(1, SPEED))
 	

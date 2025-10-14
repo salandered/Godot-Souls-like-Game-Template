@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/hit_box_3d.svg")
+@icon("res://-assets-/x_misc/x_icons/red/hit_box_3d.svg")
 extends Area3D
 
 ## Area which CAN BE damaged. Opposed to an area which DAMAGES.

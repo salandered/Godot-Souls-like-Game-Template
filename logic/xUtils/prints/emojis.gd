@@ -12,6 +12,8 @@ const queued = "👥"
 const forced = "🦾"
 const check = "❔"
 const gray_x = "✖️" # declined
+const mark = "✴️"
+const mark_2 = "✳️"
 
 # important
 const pin = "📌"

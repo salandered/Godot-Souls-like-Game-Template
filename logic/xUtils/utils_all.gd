@@ -71,3 +71,12 @@ static func _dev_change_param(
 	if prev_param != param:
 		prints("~~", param_name, prev_param, pp.arr, param)
 	return param
+
+
+static func to_pascal_case(snake_case: String) -> String:
+	var words = snake_case.split("_")
+	var result = ""
+	for word in words:
+		if word.length() > 0:
+			result += word.capitalize()
+	return result

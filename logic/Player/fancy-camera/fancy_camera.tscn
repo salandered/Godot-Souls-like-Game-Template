@@ -542,8 +542,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1
 
 [node name="CSGSphereNest2" type="CSGSphere3D" parent="CameraNest"]
 unique_name_in_owner = true
-transform = Transform3D(0.49291146, 0, 3.5527137e-15, 0, 0.58407485, 0, 0, 0, 0.5692398, 0, 0, 0)
-visible = false
+transform = Transform3D(0.49291146, 0, 3.5527137e-15, 0, 0.58407485, 0, 0, 0, 0.5692398, -1.9487203e-08, 0, 0.22290754)
 material_override = SubResource("StandardMaterial3D_3e4lf")
 radius = 0.7
 

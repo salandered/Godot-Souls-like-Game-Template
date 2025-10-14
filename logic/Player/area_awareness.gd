@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/node-colors/yellow.png")
+@icon("res://-assets-/x_misc/x_icons/yellow/icon_visibility.png")
 extends Node
 class_name AreaAwareness
 

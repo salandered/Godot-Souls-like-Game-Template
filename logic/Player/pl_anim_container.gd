@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/icon_grid.png")
+@icon("res://-assets-/x_misc/x_icons/white/icon_grid.png")
 
 extends AnimationContainer
 class_name PlayerAnimationContainer
@@ -20,10 +20,10 @@ var _animations = [
 	AnimationData.new(A.fast_turn_180_R, 1.0, true),
 	AnimationData.new(A.fast_turn_180_L, 1.0, true),
 	#
-	AnimationData.new(A.combat_walk),
-	AnimationData.new(A.combat_walk_back),
-	AnimationData.new(A.strafe_R),
-	AnimationData.new(A.strafe_L),
+	AnimationData.new(A.combat_walk, 1.1),
+	AnimationData.new(A.combat_walk_back, 1.1),
+	AnimationData.new(A.strafe_R, 1.1),
+	AnimationData.new(A.strafe_L, 1.1),
 
 	# loco jump
 	AnimationData.new(A.midair),
@@ -34,9 +34,13 @@ var _animations = [
 	AnimationData.new(A.roll),
 	#
 	AnimationData.new(A.death),
+
 	# fight
-	AnimationData.new(A.longsword_1),
-	AnimationData.new(A.longsword_2, 0.85),
+	AnimationData.new(A.heavy_axe_slice_1),
+	AnimationData.new(A.heavy_axe_slice_2, 0.85),
+	# 
+
+
 	AnimationData.new(A.hit_reaction),
 	AnimationData.new(A.staggered),
 	AnimationData.new(A.parry),
@@ -77,7 +81,7 @@ func _accept_animations() -> void:
 
 		_anim_by_name[anim.anim_id] = anim
 
-		if anim.anim_id == A.longsword_1:
+		if anim.anim_id == A.heavy_axe_slice_1:
 			print("~~", anim._to_string())
 	
 

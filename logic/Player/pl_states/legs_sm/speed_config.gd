@@ -38,3 +38,10 @@ func get_override_turn_speed(default: float) -> float:
 	if override_turn_speed != -1.0:
 		return override_turn_speed
 	return default
+
+func _to_string() -> String:
+	var parts = ["sp mult %.2f" % speed_multiplier]
+	if override_speed != -1.0: parts.append("sp %.1f" % override_speed)
+	if override_angular_sp != -1.0: parts.append("ang sp %.1f" % override_angular_sp)
+	if override_turn_speed != -1.0: parts.append("turn sp %.1f" % override_turn_speed)
+	return "Sp Conf:(%s)" % ",".join(parts)

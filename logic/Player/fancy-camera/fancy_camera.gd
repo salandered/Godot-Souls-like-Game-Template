@@ -2,9 +2,9 @@ extends Node
 class_name FancyCamera
 
 @export_group("Following Weights")
-@export var FREE_MOUNT_CHEST_WEIGHT: float = 0.1
-@export var FREE_FOCUS_CHEST_WEIGHT: float = 0.1
-@export var FREE_NEST_MOUNT_WEIGHT: float = 0.9
+@export var FREE_MOUNT_CHEST_WEIGHT: float = 0.1 # tested with 0.1
+@export var FREE_FOCUS_CHEST_WEIGHT: float = 0.1 # tested with 0.1
+@export var FREE_NEST_MOUNT_WEIGHT: float = 0.7 # tested with 0.9
 
 @export var LOCKED_FOCUS_TARGET_WEIGHT: float = 0.05 # Base 0.05. Range: 0.03 to 0.08
 @export var LOCKED_MOUNT_CHEST_WEIGHT: float = 0.12

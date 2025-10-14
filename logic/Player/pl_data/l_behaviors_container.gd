@@ -54,8 +54,7 @@ var node_to_l_behavior_data: Dictionary = {
 			MotionType.STOP: Leg.Act.idle,
 			},
 			[
-				Leg.Act.combat_walk_forward,
-				Leg.Act.combat_walk_back,
+				Leg.Act.combat_walk,
 			]
 	)),
 	"SprintLegs": BehaviorData.new(Leg.Beh.sprint,
@@ -87,8 +86,7 @@ var node_to_l_action_data: Dictionary = {
 	"Turn180": ActionData.new(Leg.Act.turn_180, A.turn_180_R, MotionType.START),
 
 	"Strafe": ActionData.new(Leg.Act.strafe, A.strafe_R, MotionType.LOOP),
-	"CombatWalkForward": ActionData.new(Leg.Act.combat_walk_forward, A.combat_walk, MotionType.LOOP),
-	"CombatWalkBack": ActionData.new(Leg.Act.combat_walk_back, A.combat_walk_back, MotionType.LOOP),
+	"CombatWalk": ActionData.new(Leg.Act.combat_walk, A.combat_walk, MotionType.LOOP),
 
 	"FastTurn180": ActionData.new(Leg.Act.fast_turn_180, A.fast_turn_180_R, MotionType.START),
 	"SprintToIdle": ActionData.new(Leg.Act.sprint_to_idle, A.sprint_to_idle, MotionType.STOP),

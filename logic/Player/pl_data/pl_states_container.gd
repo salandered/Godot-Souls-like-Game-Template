@@ -60,20 +60,20 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 }
 
 
-var node_to_pl_action_data: Dictionary = { # { Node name : ActionData }
+var pl_action_data_list: Array[ActionData] = [
 	# move
 	# "Walk": ActionData.new(PS.walk,PS.action_block, A.walk ),
-	"SmallJumpRunAction": ActionData.new(PS.small_jump_run, PS.action_small_jump_run, A.small_jump_run),
-	"JumpSprintAction": ActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint),
-	"LandingSprintAction": ActionData.new(PS.landing_sprint, PS.action_landing_sprint, A.landing_sprint),
-	"MidairAction": ActionData.new(PS.midair, PS.action_midair, A.midair),
-	"RollAction": ActionData.new(PS.roll, PS.action_roll, A.roll),
-	"DeathAction": ActionData.new(PS.death, PS.action_death, A.death),
+	ActionData.new(PS.small_jump_run, PS.action_small_jump_run, A.small_jump_run),
+	ActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint),
+	ActionData.new(PS.landing_sprint, PS.action_landing_sprint, A.landing_sprint),
+	ActionData.new(PS.midair, PS.action_midair, A.midair),
+	ActionData.new(PS.roll, PS.action_roll, A.roll),
+	ActionData.new(PS.death, PS.action_death, A.death),
 	# fight
-	"Longsword1Action": ActionData.new(PS.longsword_1, PS.action_longsword_1, A.longsword_1),
-	"Longsword2Action": ActionData.new(PS.longsword_2, PS.action_longsword_2, A.longsword_2),
-	"StaggeredAction": ActionData.new(PS.staggered, PS.action_staggered, A.staggered),
-	"ParryAction": ActionData.new(PS.parry, PS.action_parry, A.parry),
-	"ParriedAction": ActionData.new(PS.parried, PS.action_parried, A.parried),
-	"RiposteAction": ActionData.new(PS.riposte, PS.action_riposte, A.riposte_attack),
-}
+	ActionData.new(PS.longsword_1, PS.action_longsword_1, A.heavy_axe_slice_1),
+	ActionData.new(PS.longsword_2, PS.action_longsword_2, A.heavy_axe_slice_2),
+	ActionData.new(PS.staggered, PS.action_staggered, A.staggered),
+	ActionData.new(PS.parry, PS.action_parry, A.parry),
+	ActionData.new(PS.parried, PS.action_parried, A.parried),
+	ActionData.new(PS.riposte, PS.action_riposte, A.riposte_attack),
+]

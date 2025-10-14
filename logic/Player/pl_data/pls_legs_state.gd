@@ -18,8 +18,7 @@ class Act:
 	const run := "l_action_run🏃"
 
 	const strafe := "l_action_strafe🚶🏻‍♀️"
-	const combat_walk_forward := "l_action_combat_forward✏️"
-	const combat_walk_back := "l_action_combat_back✏️"
+	const combat_walk := "l_action_combat_walk✏️"
 
 	const turn_180 := "l_turn_180 ↻"
 	const fast_turn_180 := "l_fast_turn_180 ↻💨"

@@ -49,8 +49,8 @@ const fast_turn_180_R := lib._ss_loco + "RMR ss 180 fast turn R"
 const fast_turn_180_L := lib._ss_loco + "RMR ss 180 fast turn L"
 
 # strafe
-const combat_walk := lib._ss_loco + "C-walk" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
-const combat_walk_back := lib._ss_loco + "C-walk-back" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
+const combat_walk := lib._strafe + "walk f2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
+const combat_walk_back := lib._strafe + "walk b2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
 const strafe_L := lib._strafe + "A-strafe-L" # "SWSl-O-run-L-blended"
 const strafe_R := lib._strafe + "A-strafe-R" # "SWSl-O-run-R-blended"
 
@@ -71,8 +71,10 @@ const death := midair # _ss_loco + "C-death-2"
 
 
 # -- FIGHT 
-const longsword_1 := lib.all_axe + "aIP-attack-slice-RL" # _ff + "longsword_1" # _SWS_combo + "SWSc-O-combo-1-all" #
-const longsword_2 := lib.all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "longsword_2"
+## LIGHT SLICES
+const heavy_axe_slice_1 := lib.all_axe + "aIP-attack-slice-RL" # _ff + "heavy_axe_slice_1" # _SWS_combo + "SWSc-O-combo-1-all" #
+const heavy_axe_slice_2 := lib.all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "heavy_axe_slice_2"
+
 
 const withdraw := midair # _jump + "C-fall-HW" # TODO
 const block_forward := lib._ss_attack + "C-block-forward" # _OS_fight + "OS-block-left" # _ss_attack + "C-block-forward"
@@ -85,7 +87,7 @@ const staggered := midair # _ss_attack + "B-head-impact"
 
 const parry := midair # _ff + "parry"
 const parried := midair # _ff + "parried"
-const riposte_attack := longsword_1
+const riposte_attack := heavy_axe_slice_1
 # -- FIGHT END
 
 const shield_throw := midair # _ff + "shield_throw"
