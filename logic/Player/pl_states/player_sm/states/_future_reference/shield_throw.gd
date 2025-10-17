@@ -15,7 +15,7 @@ func spawn_spell() -> void:
 	new_shield_shot.caster = player
 	new_shield_shot.add_to_group("players_spell")
 	add_child(new_shield_shot)
-	new_shield_shot.global_position = left_wrist.global_position
+	new_shield_shot.global_position = player.global_position # left_wrist.global_position
 	new_shield_shot.set_direction(player.basis.z)
 	casted = true
 	combat.shield_throw_charges = combat.shield_throw_charges - 1

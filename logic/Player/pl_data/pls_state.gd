@@ -6,8 +6,7 @@ class_name PS # player states and actions
 const withdraw := "withdraw"
 const shield_throw := "shield_throw"
 const shield_throw_reload := "shield_throw_reload"
-const longsword_1 := "longsword_1"
-const longsword_2 := "longsword_2"
+
 const block := "block"
 const block_reaction := "block_reaction"
 const pushback := "pushback"
@@ -15,6 +14,13 @@ const staggered := "staggered"
 const parry := "parry"
 const parried := "parried"
 const riposte := "riposte"
+
+## attacks
+const longsword_1 := "longsword_1"
+const longsword_2 := "longsword_2"
+
+const axe_slice_1 := "axe_slice_1"
+const axe_slice_2 := "axe_slice_2"
 
 # move
 # TODO const walk := "test/walk"
@@ -31,29 +37,35 @@ const roll := "roll"
 const death := "death"
 
 # ACTIONS
-const action_withdraw := "action_withdraw🖊️"
-const action_shield_throw := "action_shield_throw🖊️"
-const action_shield_throw_reload := "action_shield_throw_reload🖊️"
-const action_longsword_1 := "action_longsword_1🖊️"
-const action_longsword_2 := "action_longsword_2🖊️"
-const action_block := "action_block🖊️"
-const action_block_reaction := "action_block_reaction🖊️"
-const action_pushback := "action_pushback🖊️"
-const action_staggered := "action_staggered🖊️"
-const action_parry := "action_parry🖊️"
-const action_parried := "action_parried🖊️"
-const action_riposte := "action_riposte🖊️"
+class Act:
+	const withdraw := "action_withdraw🖊️"
+	const shield_throw := "action_shield_throw🖊️"
+	const shield_throw_reload := "action_shield_throw_reload🖊️"
+	
+	## attacks
+	const longsword_1 := "action_longsword_1🖊️"
+	const longsword_2 := "action_longsword_2🖊️"
+	const axe_slice_1 := "action_axe_slice_1🖊️"
+	const axe_slice_2 := "action_axe_slice_2🖊️"
 
-const action_idle := "action_run_idle🖊️"
-const action_sprint_idle := "action_sprint_idle🖊️"
+	const block := "action_block🖊️"
+	const block_reaction := "action_block_reaction🖊️"
+	const pushback := "action_pushback🖊️"
+	const staggered := "action_staggered🖊️"
+	const parry := "action_parry🖊️"
+	const parried := "action_parried🖊️"
+	const riposte := "action_riposte🖊️"
 
-const action_small_jump_run := "action_small_jump_run🖊️"
-const action_jump_sprint := "action_jump_sprint🖊️"
-const action_midair := "action_midair🖊️"
-const action_landing_run := "action_landing_run🖊️"
-const action_landing_sprint := "action_landing_sprint🖊️"
-const action_roll := "action_roll🖊️"
-const action_death := "action_death🖊️"
+	const idle := "action_run_idle🖊️"
+	const sprint_idle := "action_sprint_idle🖊️"
+
+	const small_jump_run := "action_small_jump_run🖊️"
+	const jump_sprint := "action_jump_sprint🖊️"
+	const midair := "action_midair🖊️"
+	const landing_run := "action_landing_run🖊️"
+	const landing_sprint := "action_landing_sprint🖊️"
+	const roll := "action_roll🖊️"
+	const death := "action_death🖊️"
 
 
 # const states_priority: Dictionary = {

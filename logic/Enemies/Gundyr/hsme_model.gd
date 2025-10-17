@@ -1,8 +1,6 @@
 extends BaseEnemyCharacter
 class_name HSMECharacter
 
-@export var player: Princess
-
 
 ## It's all:
 ## - SM
@@ -16,6 +14,18 @@ class_name HSMECharacter
 @export var resources: HFSMResources
 @export var weapons: Array[BaseWeapon]
 @onready var container: HSMStatesContainer = $StatesContainer
+
+
+func get_current_state() -> BaseHSMEState:
+	return state_machine.current_state
+
+func react_on_hit(hit_data: HitData) -> void:
+	get_current_state()._react_on_hit(hit_data)
+
+
+func get_player() -> Princess:
+	return player
+
 
 func _ready():
 	collision_layer = Collision.Layers.OTHER_CHAR_COL

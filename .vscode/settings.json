@@ -202,7 +202,7 @@
 		},
 		// ENEMY STATES
 		{
-			"path": "logic/Enemies/SimpleEnemy/SEStates",
+			"path": "logic/Enemies/SimpleEnemy/se_states",
 			"color": "custom10"
 		},
 		{
@@ -354,6 +354,17 @@
 			"decorations": [
 				{
 					"color": "#5da9ff"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(PS.Act\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#68c3f8"
 				},
 				{
 					// "color": "#FFEEA1E5",

@@ -11,7 +11,7 @@ func check_transition(_delta) -> VerdictHSM:
 func pack_hit_data(weapon: BaseWeapon) -> HitData:
 	var hit = HitData.new()
 	hit.damage = hit_damage
-	hit.hit_state_animation = animation
+	hit.state_anim = animation
 	# hit.is_parryable = is_parryable()
 	hit.weapon = weapon
 	return hit

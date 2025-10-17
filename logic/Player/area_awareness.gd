@@ -30,8 +30,8 @@ var current_lock_state: LockState = LockState.ALL_UNLOCKED
 func _decide_on_lock_state(new_input: InputPackage) -> LockState:
 	# NOTE: camera info is more important that input
 	var is_cam_locked = is_camera_locked()
-	if new_input.target_lock.any_tap():
-		print(u.fr() + "~~~~we are in decide on lock with", new_input.target_lock)
+	# if new_input.target_lock.any_tap():
+		# print(u.fr() + "~~~~we are in decide on lock with", new_input.target_lock)
 	if not is_cam_locked:
 		return LockState.ALL_UNLOCKED
 

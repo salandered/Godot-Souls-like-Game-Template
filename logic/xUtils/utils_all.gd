@@ -80,3 +80,8 @@ static func to_pascal_case(snake_case: String) -> String:
 		if word.length() > 0:
 			result += word.capitalize()
 	return result
+
+
+## point_index starts with zero!
+static func get_curve_point_x(curve: Curve, point_index: int) -> float:
+	return curve.get_point_position(point_index).x

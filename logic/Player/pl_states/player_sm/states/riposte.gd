@@ -10,13 +10,13 @@ func update(_input: InputPackage, _delta):
 		player.model.active_weapon.is_attacking = false
 
 
-func pack_hit_data(weapon: BaseWeapon) -> HitData:
-	var hit = HitData.new()
-	hit.damage = hit_damage
-	hit.hit_state_animation = current_action.anim_id
-	hit.is_parryable = current_action.is_parryable()
-	hit.weapon = player.model.active_weapon
-	return hit
+# func pack_hit_data(weapon: BaseWeapon) -> HitData:
+# 	var hit = HitData.new()
+# 	hit.damage = hit_damage
+# 	hit.state_anim = current_action.anim_id
+# 	hit.is_parryable = current_action.is_parryable()
+# 	hit.weapon = player.model.active_weapon
+# 	return hit
 
 
 func on_exit_state():

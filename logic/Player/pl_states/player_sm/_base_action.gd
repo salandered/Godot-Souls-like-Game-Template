@@ -3,7 +3,7 @@ class_name BaseAction
 extends Node
 
 var container: PlayerStatesContainer
-var anim_container: AnimationContainer
+var anim_container: BaseAnimationContainer
 var animator_manager: AnimatorManager
 
 var action_name: String
@@ -73,12 +73,11 @@ func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 
 
 ## Time remaining till a moment, when current animation would be blended 100%. 
-## This is important for the next switch considerations: if A action wants to switch the current B one, 
-## but B is still blending from the previous C animation, there would be noticable visual snap. 
+## This is important for the next switch considerations: if A action wants to switch the current B anim, 
+## but B is still blending from the previous C animation, there would be a noticable visual snap. 
 ## Reason: C to B blend would be interrupted by B to A.
 ## Note: using actual blend duration from manager is better than rely on current action's data or desires.
-## WARNING TODO: does not account for speed scaling
-func time_remaining_for_blend_to_complete() -> float:
+func till_start_blend_completes() -> float:
 	return max(animator_manager.get_curr_blend_duration() - time_spent(), 0.0)
 
 
@@ -103,8 +102,26 @@ func works_between(start: float, finish: float) -> bool:
 	return false
 
 
+func passed_marker(marker_name: String) -> bool:
+	var marker_time = anim.get_marker_time_by_name(marker_name)
+	if marker_time == -1: return __reject()
+
+	if effective_time_spent() >= marker_time:
+		return true
+	return false
+
+
+func before_marker(marker_name: String) -> bool:
+	var marker_time = anim.get_marker_time_by_name(marker_name)
+	if marker_time == -1: return __reject()
+
+	if effective_time_spent() < marker_time:
+		return true
+	return false
+
+
 func __reject() -> bool:
-	# print_.prefix("oooo TM oooo ", "time manage rejected -1", 5)
+	print_.warn("TM rejected -1!")
 	return false
 
 # endregion

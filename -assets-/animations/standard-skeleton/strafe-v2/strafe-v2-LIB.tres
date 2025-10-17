@@ -1,6 +1,6 @@
 [gd_resource type="AnimationLibrary" load_steps=9 format=3 uid="uid://c3igq75g47fhk"]
 
-[ext_resource type="Animation" uid="uid://bomleh4xmbh6n" path="res://-assets-/animations/standard-skeleton/ss/walk/walk b.res" id="1_2c1yu"]
+[ext_resource type="Animation" uid="uid://vmay7ohmxgy6" path="res://-assets-/animations/standard-skeleton/ss/walk/walk b.res" id="1_2c1yu"]
 [ext_resource type="Animation" uid="uid://d3k2sn34xhgro" path="res://-assets-/animations/standard-skeleton/ss/walk/walk f.res" id="2_2tp8j"]
 [ext_resource type="Animation" uid="uid://w0jvcdqyc3ti" path="res://-assets-/animations/standard-skeleton/ss/walk/walk b2.res" id="3_pk3xj"]
 [ext_resource type="Animation" uid="uid://chc6wxj22fw86" path="res://-assets-/animations/standard-skeleton/ss/walk/walk F2.res" id="4_r34j6"]
@@ -789,6 +789,11 @@ tracks/54/keys = PackedFloat32Array(0, 1, 0.005554639, 0.9751072, 0.17895284, 0.
 resource_name = "B strafe run L"
 length = 0.6666667
 loop_mode = 1
+markers = [{
+"color": Color(0.9879059, 0.7264175, 0.2694845, 1),
+"name": &"left_leg_full_contact",
+"time": 0.36020255
+}]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -1176,9 +1181,14 @@ tracks/54/loop_wrap = true
 tracks/54/keys = PackedFloat32Array(0, 1, 0.04438549, 0.99658096, -0.030265898, -0.06277092, 0.033333335, 1, 0.026779776, 0.99906236, 0.011345923, -0.032068893, 0.06666667, 1, -0.01483085, 0.9997143, -0.0016450286, 0.01866921, 0.1, 1, -0.039524816, 0.9979825, -0.008281738, 0.048990004, 0.13333334, 1, -0.038470827, 0.99785644, -0.030467927, 0.043291226, 0.16666667, 1, -0.043904383, 0.9974973, -0.015755743, 0.05313315, 0.2, 1, -0.026176486, 0.9989035, -0.026543707, 0.028317027, 0.23333333, 1, -0.011016088, 0.99822664, -0.05844009, 0.0026509603, 0.26666668, 1, -0.019301146, 0.97785604, 0.17584935, 0.111812264, 0.3, 1, -0.0151122045, 0.99015856, 0.120842904, 0.06895211, 0.33333334, 1, -0.010847235, 0.99747914, 0.06522852, 0.02574508, 0.36666667, 1, -0.012489798, 0.99990433, 0.0020664334, 0.005554098, 0.4, 1, -0.00603225, 0.99998, 0.0017718971, 0.0005866734, 0.43333334, 1, -0.0014984813, 0.9999933, 0.0032896101, -0.00034595892, 0.46666667, 1, 0.04285926, 0.99573857, -0.07085651, -0.040583182, 0.5, 1, 0.120103136, 0.9839834, -0.12797001, -0.031232491, 0.53333336, 1, 0.1401435, 0.98304296, -0.109416604, -0.044880215, 0.56666666, 1, 0.12787333, 0.98665404, -0.083946615, -0.055812623, 0.6, 1, 0.10625285, 0.98894185, -0.07801396, -0.067955896, 0.6333333, 1, 0.08456285, 0.9905815, -0.072030276, -0.0800547, 0.6666667, 1, 0.044385456, 0.99658084, -0.030265927, -0.062770784)
 
 [sub_resource type="Animation" id="Animation_3ad5p"]
-resource_name = "B strafe run R strange"
+resource_name = "B-strafe-run-R-strange"
 length = 0.7
 loop_mode = 1
+markers = [{
+"color": Color(0.9879059, 0.7264175, 0.2694845, 1),
+"name": &"left_leg_full_contact",
+"time": 0.30208632
+}]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://jtkogl4lhvf3"]
+
+[ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/Common/Weapons/SmithSword/smith_sword.gd" id="1_sk2nb"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/Weapons/hurt_box/WeaponHurtBox.tscn" id="2_lfwdn"]
+[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword_2.glb" id="2_sk2nb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
+radius = 0.2
+height = 1.1584473
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfwdn"]
+albedo_color = Color(0.7294118, 0.39607844, 0.39607844, 1)
+
+[node name="SmithSword" type="Node3D"]
+script = ExtResource("1_sk2nb")
+
+[node name="WeaponHurtBox" parent="." instance=ExtResource("2_lfwdn")]
+
+[node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
+transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0, 0.3348894, 0)
+shape = SubResource("CapsuleShape3D_6hf6c")
+debug_color = Color(0.8352941, 0.0627451, 0.28235295, 0.32941177)
+
+[node name="Visuals" parent="." instance=ExtResource("2_sk2nb")]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.0399609, 0, 0, 0, 0.45005602, 0, 0, 0, 0.02624012, 0, 0.45049554, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_lfwdn")
+
+[editable path="WeaponHurtBox"]

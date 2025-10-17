@@ -1,41 +1,44 @@
 extends PlayerState
 class_name AttackState
 
-## TODO: should be less then attack DURATION for achiving its effect
+## TODO: should be less then attack DURATION for achieving its effect
 @export var RELEASES_PRIORITY: float # 1.2
 
 @export_group("enemy communication")
-# in reality is a dynamic parameter, but for now I just return the maximum attacking radius
-# when looking forward, ie root bone Z delta 
-# plus the length of the weapon in "the extremum pose"
-# (eye-measured in animator's interface)
-@export var attack_radius: float
+@export var attack_radius: float # approximate and static for now
 
 @export var extremum_timing: float
 @export var posttracking_radius: float
 
 
-var hit_damage = 10 # will be a function of player stats in the future
+var hit_damage = 10
+
+
+func on_enter_state(_input: InputPackage):
+	combat.set_hit_data(hit_damage, current_action.anim.anim_id)
+
 
 func check_transition(input: InputPackage) -> PLVerdict:
-	if current_action.time_remaining() < 0.0:
+	var verdict = best_next_state_from_input(input)
+	
+	if current_action.time_remaining() <= 0.0:
 		print_.psm_check_trans(state_name, pp.s("time_remaining < 0.0 => choosing best input"))
-		var best_input = best_input_that_can_be_paid(input)
-		return best_input
-	# TODO: works not as intended wo idle state !! also RELEASES_PRIORITY should be dependent on current_action.DURATION! and sometimes turned off
-	# if current_action.works_longer_than(RELEASES_PRIORITY):
-	# 	print_.psm_check_trans(state_name, "works longer than " + str(RELEASES_PRIORITY) + " => choosing best input")
-	# 	# this reads as: if we are at the end of attack anim (> RELEASES_PRIORITY but < DURATION) 
-	# 	# and there is a best input which is not idle, we can switch to it. so we run or make new attack not waiting for exact end of the current attack
-	# 	# but if best is idle, we better wait for the end (and then blend to idle because what else to do)
-	# 	if best_input.next_state != "idle":
-	# 		return best_input
+		return verdict
+	
+	if current_action.passed_marker(Marker.Name.ALLOWS_SWITCH):
+		# this reads as: if we are at the end of attack anim (> ALLOWS_SWITCH but < DURATION)
+		# and there is a best input which is not idle, we can switch to it. 
+		# => we dont wait for the exact end of the current anim
+		if verdict.next_state != PS.idle:
+			print_.psm_check_trans(state_name, pp.s("passed marker", Marker.Name.ALLOWS_SWITCH, "=> chose best non idle input"))
+			return verdict
 	return PLVerdict.new("")
 	
 	
 func update(_input: InputPackage, delta):
 	# move_with_root(delta)
-	player.model.active_weapon.is_attacking = current_action.weapon_hurts()
+	combat.update_is_attacking(current_action.weapon_hurts())
+
 
 func move_with_root(delta: float) -> void:
 	var delta_pos := animator_manager.get_root_velocity()
@@ -46,18 +49,8 @@ func move_with_root(delta: float) -> void:
 		forced_state = PS.midair
 
 
-func pack_hit_data(weapon: BaseWeapon) -> HitData:
-	var hit = HitData.new()
-	hit.damage = hit_damage
-	hit.hit_state_animation = current_action.anim_id ## what
-	hit.is_parryable = current_action.is_parryable()
-	hit.weapon = player.model.active_weapon
-	return hit
-
-
 func on_exit_state():
-	player.model.active_weapon.hitbox_ignore_list.clear()
-	player.model.active_weapon.is_attacking = false
+	combat.reset_active_weapon()
 
 
 ## what for?

@@ -11,14 +11,9 @@ func _ready():
 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	
 	visuals.accept_model(model)
-	#$CameraMount/PlayerCamera.current = false
-	#print_tree_pretty()
 
 
 func _physics_process(delta):
 	var input = ai.create_input(delta)
 	model.update(input, delta)
-	
-	# Visuals -> follow parent transformations
-	
 	input.queue_free()

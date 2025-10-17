@@ -174,19 +174,111 @@ func move_forward_or_back(direction_sign: float, delta: float, speed_config: Spe
 	var forward_vec = get_player().basis.z * direction_sign
 	get_player().velocity = forward_vec * _speed * speed_config.speed_multiplier
 
-
-func strafe_with_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
+func move_strafe(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
 	if speed_config == null:
 		speed_config = SpeedConfig.new()
 	var _speed = speed_config.get_override_speed(SPEED)
-
-	var desired_velocity = velocity_by_input(input, delta)
-	if desired_velocity.is_zero_approx():
+	
+	if input.input_direction.is_zero_approx():
 		get_player().velocity = Vector3.ZERO
 		return
 
-	var direction = desired_velocity.normalized()
-	get_player().velocity = direction * _speed * speed_config.speed_multiplier
+	# Get player's local forward and right vectors
+	var forward_vec = - get_player().global_basis.z
+	var right_vec = get_player().global_basis.x
+	
+	# Combine local vectors based on the raw input to get the desired world direction
+	# input.input_direction.y is forward/back, .x is left/right
+	var desired_direction = (forward_vec * input.input_direction.y + right_vec * input.input_direction.x)
+	
+	# Normalize to ensure diagonal movement isn't faster than cardinal directions
+	var final_velocity = desired_direction.normalized() * _speed * speed_config.speed_multiplier
+	
+	get_player().velocity = final_velocity
+
+
+func move_strafe_with_forward(input: InputPackage, direction_sign: float, delta: float, speed_config: SpeedConfig = null):
+	if speed_config == null:
+		speed_config = SpeedConfig.new()
+	var _speed = speed_config.get_override_speed(SPEED)
+	
+	# Get player's local forward and right vectors
+	var forward_vec = - get_player().global_basis.z
+	var right_vec = get_player().global_basis.x
+	
+	# Get the raw forward/backward input component
+	var forward_component = input.input_direction.y
+	
+	# Construct the final direction by combining raw forward input with the state-controlled strafe direction
+	var desired_direction = (forward_vec * forward_component + right_vec * direction_sign)
+	
+	# If there's no input, stop. Otherwise, move in the calculated direction.
+	if desired_direction.is_zero_approx():
+		get_player().velocity = Vector3.ZERO
+		return
+	
+	var final_velocity = desired_direction.normalized() * _speed * speed_config.speed_multiplier
+	get_player().velocity = final_velocity
+
+# ## deprecated in favor of move_strafe_with_forward
+# func move_strafe(direction_sign: float, delta: float, speed_config: SpeedConfig = null):
+# 	if speed_config == null:
+# 		speed_config = SpeedConfig.new()
+# 	var _speed = speed_config.get_override_speed(SPEED)
+	
+# 	# direction_sign: 1.0 for right, -1.0 for left
+# 	var right_vec = get_player().basis.x * direction_sign
+# 	get_player().velocity = right_vec * _speed * speed_config.speed_multiplier
+
+
+# ## deprecated in favor of move_strafe_with_forward
+# func strafe_with_input_vector(input: InputPackage, direction_sign: float, delta: float, speed_config: SpeedConfig = null):
+# 	if speed_config == null:
+# 		speed_config = SpeedConfig.new()
+# 	var _speed = speed_config.get_override_speed(SPEED)
+
+# 	var desired_velocity = velocity_by_input(input, delta)
+# 	if desired_velocity.is_zero_approx():
+# 		get_player().velocity = Vector3.ZERO
+# 		return
+
+# 	var direction = desired_velocity.normalized()
+	
+# 	# Get player's local space
+# 	var player_basis = get_player().basis
+# 	var player_forward = - player_basis.z
+# 	var player_right = player_basis.x
+	
+# 	# Decompose orbital movement into forward/right components
+# 	var forward_component = direction.dot(player_forward)
+# 	var right_component = direction.dot(player_right)
+	
+# 	# BEFORE correction
+# 	prints(u.fr(), "🔍 BEFORE:",
+# 		"dir_sign:", direction_sign,
+# 		"fwd:", pp.round_01(forward_component),
+# 		"right:", pp.round_01(right_component))
+	
+# 	# Force right component to match current strafe direction (LEFT=-1, RIGHT=+1)
+# 	var corrected_right = abs(right_component) * sign(direction_sign)
+	
+# 	# AFTER correction
+# 	prints(u.fr(), "🔍 AFTER:",
+# 		"corrected_right:", pp.round_01(corrected_right),
+# 		"delta_right:", pp.round_01(corrected_right - right_component))
+	
+# 	# Reconstruct direction: preserve forward/back, enforce left/right
+# 	var corrected_direction = (player_forward * forward_component + player_right * corrected_right).normalized()
+	
+# 	var final_velocity = corrected_direction * _speed * speed_config.speed_multiplier
+	
+# 	prints("🔍 VELOCITY:",
+# 		"old:", pp.vec3(get_player().velocity),
+# 		"new:", pp.vec3(final_velocity),
+# 		"delta:", pp.vec3(final_velocity - get_player().velocity))
+	
+# 	# Apply speed with curves
+# 	get_player().velocity = final_velocity
 
 
 func look_at_target(delta: float, use_model_front: bool = true) -> void:

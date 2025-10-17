@@ -8,7 +8,7 @@ const TRANSITION_TIMING = 0.2
 # and the rest of the animation is just for smoother blending
 func check_transition(input: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(TRANSITION_TIMING):
-		return best_input_that_can_be_paid(input)
+		return best_next_state_from_input(input)
 	return PLVerdict.new("")
 
 

@@ -6,9 +6,9 @@ class_name PlayerState
 var player_sm: PlayerSM
 var legs_sm: LegsSM
 var player: Princess
-var combat: HumanoidCombat
+var combat: PlayerCombat
 var area_awareness: AreaAwareness
-var anim_container: AnimationContainer
+var anim_container: BaseAnimationContainer
 var animator_manager: AnimatorManager
 
 
@@ -79,12 +79,12 @@ func _check_transition(input: InputPackage) -> PLVerdict:
 func check_transition(_input: InputPackage) -> PLVerdict:
 	if current_action.time_remaining() <= 0.0:
 		print_.psm_check_trans(state_name + " default check", pp.s("time_remaining < 0 => choosing best input"))
-		return best_input_that_can_be_paid(_input)
+		return best_next_state_from_input(_input)
 	return PLVerdict.new()
 
 
 ## choosing the input with the highest priority that we can allow
-func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
+func best_next_state_from_input(input: InputPackage) -> PLVerdict:
 	input.actions.sort_custom(container.states_priority_sort)
 	for action in input.actions:
 		if resources.can_be_paid(container.state_by_name(action)):
@@ -94,7 +94,7 @@ func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
 			else:
 				print_.psm_check_trans(state_name, "best input chosen " + str(action))
 				return PLVerdict.new(action)
-	return PLVerdict.new("", "In best_input_that_can_be_paid() input.actions was empty!")
+	return PLVerdict.new("", "best_next_state_from_input() returned nothing!")
 
 
 func _update(input: InputPackage, delta: float):
@@ -193,7 +193,6 @@ func try_force_state(new_forced_state: String):
 ## If they are, it queues combo's next state
 ## TODO: If several combos triggered - we will queues the last one. Not critical, but some priority logic needed
 func check_combos(input: InputPackage):
-	print(input.actions)
 	for combo: Combo_ in state_combos:
 		var next_state_candidate = combo.state_to_trigger
 		print_.psm_check_trans(state_name, "checking combo " + combo.name + " with state_to_trigger " + next_state_candidate)
@@ -224,26 +223,18 @@ func process_input_vector(input: InputPackage, delta: float):
 	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
 
 
-## overidden in states which need it
-func pack_hit_data(_weapon: BaseWeapon) -> HitData:
-	print_.fight(state_name + em.warn, ": pack_hit_data is not implemented, returning blank HitData")
-	return HitData.blank()
-
-
 # DEFAULT BEHAVIORS ON MODIFIERS
-#  - most of our states react on being hit universally
-#    they check for interruptibility frames and do stagger (or don't). 
 func react_on_hit(hit: HitData):
-	print("BaseState: react_on_hit called")
+	print_.fight(state_name, "react_on_hit called")
 	if current_action.is_vulnerable():
 		resources.lose_health(hit.damage)
-	if current_action.is_interruptable():
-		# TODO rewrite for better effects processing, this scales badly
-		if hit.effects.has("pushback") and hit.effects["pushback"]:
-			area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
-			try_force_state("pushback")
-		else:
-			try_force_state("staggered")
+	# if current_action.is_interruptable():
+	# 	# TODO rewrite for better effects processing, this scales badly
+	# 	# if hit.effects.has("pushback") and hit.effects["pushback"]:
+	# 	# 	area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
+	# 	# 	try_force_state("pushback")
+	# 	# else:
+	# 	try_force_state("staggered")
 
 # TODO: ...
 func react_on_spell(spell_hit: SpellHitData):

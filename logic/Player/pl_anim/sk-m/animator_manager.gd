@@ -11,7 +11,7 @@ class_name AnimatorManager
 @onready var _begin: BeginModifier = %_Begin
 @onready var _end: EndModifier = %_End
 
-@onready var anim_container: PlayerAnimationContainer = %AnimContainer
+@onready var anim_container: AnimationContainer = %AnimContainer
 @onready var native_animator: AnimationPlayer = %NativeAnimator
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️

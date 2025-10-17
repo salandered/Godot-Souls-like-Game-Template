@@ -67,7 +67,6 @@ func accept_states():
 		node.me = me
 		node.container = self
 		node.animator = me.animator
-		node.player = me.player
 		node.states_data_repo = me.states_data_repo
 		node.resources = me.resources
 		node.weapons = me.weapons

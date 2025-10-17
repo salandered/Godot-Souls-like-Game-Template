@@ -53,7 +53,7 @@ func update(input: InputPackage, delta: float):
 			CURR_SPEED = speed_from_turn.update(delta)
 			# CURR_ANGULAR_SPEED = angular_from_turn.update(delta)
 	
-	prints("~~~~~~~~~~~~~~", CURR_SPEED, CURR_ANGULAR_SPEED)
+	# prints("~~~~~~~~~~~~~~", CURR_SPEED, CURR_ANGULAR_SPEED)
 	var speed_config = SpeedConfig.new(1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
 	process_input_vector(input, delta, speed_config)
 

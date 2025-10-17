@@ -13,7 +13,7 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
 		PLVerdict.new("midair")
 	
-	return best_input_that_can_be_paid(input)
+	return best_next_state_from_input(input)
 
 
 # func process_input_vector(input: InputPackage, delta: float) -> void:

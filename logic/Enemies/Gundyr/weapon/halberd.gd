@@ -15,7 +15,7 @@ func _ready():
 	weapon_name = "Halberd"
 	
 	base_damage = 10
-	basic_attacks = {
+	_input_to_state = {
 		
 	}
 

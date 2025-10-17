@@ -8,16 +8,15 @@ class_name PlayerStatesContainer
 var player: Princess
 
 @export var resources: HumanoidResources
-@export var combat: HumanoidCombat
+@export var combat: PlayerCombat
 @export var area_awareness: AreaAwareness
-@export var left_wrist: BoneAttachment3D
 
 @export_group("SM")
 @export var legs_sm: LegsSM
 @export var player_sm: PlayerSM
 
 @export_group("animation")
-@export var anim_container: AnimationContainer
+@export var anim_container: BaseAnimationContainer
 @onready var animator_manager: AnimatorManager = %AnimatorManager
 
 
@@ -108,7 +107,6 @@ func _accept_player_states() -> void:
 
 		child.player = player
 		child.resources = resources
-		child.left_wrist = left_wrist
 		child.combat = combat
 		child.container = self
 		child.area_awareness = area_awareness

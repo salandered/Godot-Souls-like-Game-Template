@@ -1,21 +1,21 @@
-[gd_scene load_steps=72 format=4 uid="uid://cpr2otl56mflk"]
+[gd_scene load_steps=73 format=4 uid="uid://cpr2otl56mflk"]
 
 [ext_resource type="Script" uid="uid://cgjj4jhd0p6qj" path="res://logic/Enemies/SimpleEnemy/se_model.gd" id="1_5h74w"]
 [ext_resource type="Script" uid="uid://dwxloslblxih3" path="res://logic/Enemies/e_traits/resource_enemy_traits.gd" id="2_6awvl"]
 [ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/Enemies/e_awareness/enemy_awareness.gd" id="2_jud50"]
 [ext_resource type="Animation" uid="uid://bwtna6wt1dgfp" path="res://-assets-/animations/legacy-anim/tut-anim/slash_1.res" id="2_sbcid"]
 [ext_resource type="Animation" uid="uid://cm347resjgf08" path="res://-assets-/animations/legacy-anim/tut-anim/run.res" id="3_1u2cs"]
-[ext_resource type="Script" uid="uid://bivbms1ghr415" path="res://logic/Enemies/SimpleEnemy/SEStates/idle.gd" id="3_65kpw"]
+[ext_resource type="Script" uid="uid://bivbms1ghr415" path="res://logic/Enemies/SimpleEnemy/se_states/idle.gd" id="3_65kpw"]
 [ext_resource type="Script" uid="uid://dd6lfyjqwmvjw" path="res://logic/Enemies/e_traits/traits_container.gd" id="3_1226p"]
-[ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/Common/downcast.tscn" id="4_1226p"]
+[ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/Common/downcast/downcast.tscn" id="4_1226p"]
 [ext_resource type="Animation" uid="uid://c64nn2dioo6c2" path="res://-assets-/animations/legacy-anim/tut-anim/idle_shield.res" id="4_srjlh"]
-[ext_resource type="Script" uid="uid://dgh165nk0b7ce" path="res://logic/Enemies/SimpleEnemy/SEStates/pursuit.gd" id="4_uname"]
-[ext_resource type="Script" uid="uid://nk1enh2btvqv" path="res://logic/Enemies/SimpleEnemy/SEStates/attack_.gd" id="5_ihg53"]
+[ext_resource type="Script" uid="uid://dgh165nk0b7ce" path="res://logic/Enemies/SimpleEnemy/se_states/pursuit.gd" id="4_uname"]
+[ext_resource type="Script" uid="uid://nk1enh2btvqv" path="res://logic/Enemies/SimpleEnemy/se_states/attack_.gd" id="5_ihg53"]
 [ext_resource type="Animation" uid="uid://ddosojhrnxc3p" path="res://-assets-/animations/legacy-anim/tut-anim/death.res" id="5_qjkq5"]
 [ext_resource type="Script" uid="uid://dkqjnsg7v8s1c" path="res://logic/Enemies/SimpleEnemy/se_visuals.gd" id="5_soegf"]
 [ext_resource type="Animation" uid="uid://b1hdfkkch5pfs" path="res://-assets-/animations/legacy-anim/Gundyr/moving/death.res" id="6_3vpn3"]
-[ext_resource type="Script" uid="uid://cg7xnbmiad2l1" path="res://logic/Enemies/SimpleEnemy/SEStates/backtrack.gd" id="6_b3grc"]
-[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/hurt_hit/HitBox.tscn" id="8_2q7ci"]
+[ext_resource type="Script" uid="uid://cg7xnbmiad2l1" path="res://logic/Enemies/SimpleEnemy/se_states/backtrack.gd" id="6_b3grc"]
+[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/Weapons/hit_box/HitBox.tscn" id="8_2q7ci"]
 [ext_resource type="Animation" uid="uid://ccyf3nj2nw0pm" path="res://-assets-/animations/legacy-anim/Gundyr/moving/gapclose_1.res" id="9_6awvl"]
 [ext_resource type="Script" uid="uid://besvu8rkuxij" path="res://logic/Enemies/e_feelings/se_feelings.gd" id="10_i6528"]
 [ext_resource type="Animation" uid="uid://hnsfrbemn4u4" path="res://-assets-/animations/legacy-anim/Gundyr/moving/gapclose_2.res" id="10_m0u8j"]
@@ -27,7 +27,7 @@
 [ext_resource type="Animation" uid="uid://dqrtk3wjr5bbl" path="res://-assets-/animations/legacy-anim/tut-anim/block_reaction.res" id="14_tyg4u"]
 [ext_resource type="Animation" uid="uid://b58cg2buuj55i" path="res://-assets-/animations/legacy-anim/Gundyr/moving/slash_1.res" id="15_8c65c"]
 [ext_resource type="Animation" uid="uid://bnxfkm32oi6ce" path="res://-assets-/animations/legacy-anim/Gundyr/moving/slash_2.res" id="16_e83av"]
-[ext_resource type="Script" uid="uid://c28j6e4bifwur" path="res://logic/Enemies/SimpleEnemy/SEStates/death.gd" id="16_fju5c"]
+[ext_resource type="Script" uid="uid://c28j6e4bifwur" path="res://logic/Enemies/SimpleEnemy/se_states/death.gd" id="16_fju5c"]
 [ext_resource type="Animation" uid="uid://cdiytekt7g8aw" path="res://-assets-/animations/legacy-anim/Gundyr/moving/slash_3.res" id="17_y0u67"]
 [ext_resource type="Animation" uid="uid://dbeov5w2f7ew0" path="res://-assets-/animations/legacy-anim/Gundyr/moving/slash_4.res" id="18_mx0ge"]
 [ext_resource type="Animation" uid="uid://bllll701rn265" path="res://-assets-/animations/legacy-anim/Gundyr/moving/slash_5.res" id="19_b3os0"]
@@ -40,28 +40,29 @@
 [ext_resource type="Animation" uid="uid://bvsqnjfp0plnw" path="res://-assets-/animations/legacy-anim/tut-anim/idle_warrior.res" id="25_3ifj7"]
 [ext_resource type="Animation" uid="uid://b3j0ljxaxngdk" path="res://-assets-/animations/legacy-anim/tut-anim/strafe_right.res" id="25_bbbex"]
 [ext_resource type="Animation" uid="uid://bf1d4282m1ryw" path="res://-assets-/animations/legacy-anim/tut-anim/jump_run.res" id="26_5koeh"]
-[ext_resource type="Script" uid="uid://bowk2dt3jlc28" path="res://logic/Enemies/SimpleEnemy/Animation/se_animator.gd" id="26_w231t"]
+[ext_resource type="Script" uid="uid://bowk2dt3jlc28" path="res://logic/Enemies/SimpleEnemy/se_anim/se_animator.gd" id="26_w231t"]
 [ext_resource type="Animation" uid="uid://q6o7ddogrjmv" path="res://-assets-/animations/legacy-anim/tut-anim/jump_sprint.res" id="27_mfqef"]
 [ext_resource type="Animation" uid="uid://dcklgh1qspg7t" path="res://-assets-/animations/legacy-anim/tut-anim/landing_run.res" id="28_h6bko"]
 [ext_resource type="Animation" uid="uid://cjry5u8re5msd" path="res://-assets-/animations/legacy-anim/tut-anim/landing_sprint.res" id="29_qnkf6"]
 [ext_resource type="Animation" uid="uid://br0ty3br0ype2" path="res://-assets-/animations/legacy-anim/tut-anim/longsword_1.res" id="30_0e7vx"]
 [ext_resource type="Animation" uid="uid://de150owy7cx3x" path="res://-assets-/animations/legacy-anim/tut-anim/longsword_1_Z_PROJECTED.res" id="31_vpawc"]
 [ext_resource type="Animation" uid="uid://kux8ogygvefj" path="res://-assets-/animations/legacy-anim/tut-anim/longsword_2_Z_PROJECTED.res" id="33_jqfgc"]
-[ext_resource type="Script" uid="uid://du7droem72ta8" path="res://logic/Enemies/SimpleEnemy/SEStates/orbit.gd" id="34_g2dqy"]
+[ext_resource type="Script" uid="uid://du7droem72ta8" path="res://logic/Enemies/SimpleEnemy/se_states/orbit.gd" id="34_g2dqy"]
 [ext_resource type="Animation" uid="uid://cy26fearmpigt" path="res://-assets-/animations/legacy-anim/tut-anim/midair.res" id="35_27js3"]
 [ext_resource type="Animation" uid="uid://dho7uykss61yg" path="res://-assets-/animations/legacy-anim/tut-anim/parried.res" id="36_bhts5"]
-[ext_resource type="Script" uid="uid://bep0jtch7thdd" path="res://logic/Enemies/SimpleEnemy/SEStates/follow.gd" id="37_m0u8j"]
+[ext_resource type="Script" uid="uid://bep0jtch7thdd" path="res://logic/Enemies/SimpleEnemy/se_states/follow.gd" id="37_m0u8j"]
 [ext_resource type="Animation" uid="uid://jyjqrq6kiasc" path="res://-assets-/animations/legacy-anim/tut-anim/parry.res" id="37_nbf87"]
 [ext_resource type="Animation" uid="uid://5uiekxtpmb1" path="res://-assets-/animations/legacy-anim/tut-anim/pushback_exp.res" id="39_bogtj"]
 [ext_resource type="Animation" uid="uid://bmqy70w024rc" path="res://-assets-/animations/legacy-anim/tut-anim/ripost.res" id="40_4udlq"]
-[ext_resource type="Script" uid="uid://6r8m5rnodp2e" path="res://logic/Enemies/SimpleEnemy/SEStates/midair.gd" id="42_yn2rw"]
+[ext_resource type="Script" uid="uid://6r8m5rnodp2e" path="res://logic/Enemies/SimpleEnemy/se_states/midair.gd" id="42_yn2rw"]
 [ext_resource type="Animation" uid="uid://ceiks5ha8eb2r" path="res://-assets-/animations/legacy-anim/tut-anim/slash_2.res" id="46_kuny8"]
+[ext_resource type="PackedScene" uid="uid://88lj8tl6runn" path="res://logic/Common/animation/AnimContainer.tscn" id="48_6ekty"]
 [ext_resource type="Animation" uid="uid://cw4jnal8bhllc" path="res://-assets-/animations/legacy-anim/tut-anim/sprint.res" id="49_62gvd"]
 [ext_resource type="Animation" uid="uid://bdlt13swd1pjo" path="res://-assets-/animations/legacy-anim/tut-anim/weapon_block.res" id="54_nm7vx"]
 [ext_resource type="Animation" uid="uid://bjjdoha2ffepr" path="res://-assets-/animations/legacy-anim/shield-sword/walk.res" id="55_u0mj7"]
 [ext_resource type="Animation" uid="uid://de4h1fayxsxmb" path="res://-assets-/animations/legacy-anim/tut-anim/withdraw.res" id="55_voqbx"]
-[ext_resource type="Script" uid="uid://c3k2utmuwj5wn" path="res://logic/Enemies/SimpleEnemy/right_enemy_weapon.gd" id="76_jl20v"]
-[ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Common/SmithSword/SmithSword.tscn" id="78_0pryl"]
+[ext_resource type="Script" uid="uid://dhhj88fptlapr" path="res://logic/Enemies/SimpleEnemy/se_combat.gd" id="63_wgthr"]
+[ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Common/Weapons/SmithSword/SmithSword.tscn" id="78_0pryl"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/Player/fancy-camera/targetable_aspect.tscn" id="88_62ksi"]
 
 [sub_resource type="Resource" id="Resource_w50qb"]
@@ -324,12 +325,13 @@ bind/52/pose = Transform3D(1, 3.69255e-08, 4.63969e-07, 4.66185e-07, -2.18279e-1
 radius = 0.3
 height = 1.7
 
-[node name="SimpleEnemy" type="CharacterBody3D" node_paths=PackedStringArray("animator", "awareness", "right_weapon", "feelings")]
+[node name="SimpleEnemy" type="CharacterBody3D" node_paths=PackedStringArray("animator", "awareness", "right_weapon", "feelings", "combat")]
 script = ExtResource("1_5h74w")
 animator = NodePath("Model/Animator")
 awareness = NodePath("Model/AreaAwareness")
 right_weapon = NodePath("Model/bones/RightWrist/WeaponSocket/SmithSword")
 feelings = NodePath("Feelings")
+combat = NodePath("SECombat")
 raw_traits_resource = SubResource("Resource_w50qb")
 
 [node name="dev_box" type="CSGBox3D" parent="."]
@@ -339,7 +341,6 @@ transform = Transform3D(0.379307, 0, 0, 0, 0.379307, 0, 0, 0, 0.379307, 0, 0.480
 
 [node name="GeneralSkeleton" type="Skeleton3D" parent="Model"]
 unique_name_in_owner = true
-motion_scale = 0.99752283
 bones/0/name = "Root"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -351,7 +352,7 @@ bones/1/name = "Hips"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.727291e-08, 0.99752283, 0.015543079)
 bones/1/enabled = true
-bones/1/position = Vector3(2.387976e-05, 0.90046704, 3.661029e-06)
+bones/1/position = Vector3(2.3939061e-05, 0.90270317, 3.6703423e-06)
 bones/1/rotation = Quaternion(0.026025364, -0.51486063, 0.033275466, 0.85623246)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Spine"
@@ -726,9 +727,9 @@ script = ExtResource("2_jud50")
 debug_shape_custom_color = Color(0.597637, 0.0414575, 0.253137, 1)
 debug_shape_thickness = 4
 
-[node name="Downcast" parent="Model/AreaAwareness" node_paths=PackedStringArray("bone_attachment") instance=ExtResource("4_1226p")]
+[node name="Downcast" parent="Model/AreaAwareness" node_paths=PackedStringArray("attachment") instance=ExtResource("4_1226p")]
 debug_shape_custom_color = Color(0, 0.3019608, 0, 1)
-bone_attachment = NodePath("../../bones/Hips")
+attachment = NodePath("../../bones/BoneAttachment3D/BitHigher")
 __csg_visuals = true
 
 [node name="Animator" type="Node" parent="Model" node_paths=PackedStringArray("me")]
@@ -744,6 +745,8 @@ libraries = {
 &"gundyr": SubResource("AnimationLibrary_wwaad")
 }
 playback_default_blend_time = 0.15
+
+[node name="AnimContainer" parent="Model/Animator" instance=ExtResource("48_6ekty")]
 
 [node name="StatesContainer" type="Node" parent="Model"]
 unique_name_in_owner = true
@@ -777,20 +780,19 @@ script = ExtResource("16_fju5c")
 [node name="bones" type="Node3D" parent="Model"]
 
 [node name="Hips" type="BoneAttachment3D" parent="Model/bones"]
-transform = Transform3D(0.46762258, -0.08378194, -0.8799488, 0.030184198, 0.9964309, -0.07883198, 0.8834128, 0.010303065, 0.46848243, 2.387976e-05, 0.90046704, 3.661029e-06)
+transform = Transform3D(0.46762258, -0.08378194, -0.8799488, 0.030184198, 0.9964309, -0.07883198, 0.8834128, 0.010303065, 0.46848243, 2.3939061e-05, 0.90270317, 3.6703423e-06)
 bone_name = "Hips"
 bone_idx = 1
 use_external_skeleton = true
 external_skeleton = NodePath("../../GeneralSkeleton")
 
-[node name="Hitbox" parent="Model/bones/Hips" node_paths=PackedStringArray("processor") instance=ExtResource("8_2q7ci")]
-transform = Transform3D(-0.467623, 0.0301842, -0.883413, 0.0837819, 0.996431, -0.0103031, 0.879949, -0.078832, -0.468482, -0.0300874, -0.992736, 0.07856)
-collision_mask = 8
-processor = NodePath("../../../..")
+[node name="Hitbox" parent="Model/bones/Hips" node_paths=PackedStringArray("holder") instance=ExtResource("8_2q7ci")]
+transform = Transform3D(1.0000004, -1.8626503e-09, 3.72529e-09, 1.8626507e-09, 1.0000001, -1.49012e-08, -3.725291e-09, 1.4901202e-08, 1, 0, 0, 0)
+holder = NodePath("../../../..")
 ignored_weapon_groups = Array[String](["ENEMY_WEAPON"])
 
 [node name="RightWrist" type="BoneAttachment3D" parent="Model/bones"]
-transform = Transform3D(-0.90903836, -0.40743044, -0.08746344, 0.3684774, -0.68788844, -0.62532717, 0.19461218, -0.6006746, 0.7754456, -0.1575124, 0.8794149, -0.37720355)
+transform = Transform3D(-0.90903836, -0.40743044, -0.08746344, 0.3684774, -0.68788844, -0.62532717, 0.19461218, -0.6006746, 0.7754456, -0.15751234, 0.88165104, -0.37720355)
 bone_name = "RightHand"
 bone_idx = 10
 use_external_skeleton = true
@@ -799,9 +801,20 @@ external_skeleton = NodePath("../../GeneralSkeleton")
 [node name="WeaponSocket" type="Marker3D" parent="Model/bones/RightWrist"]
 transform = Transform3D(0.325568, 0.945519, 0, -0.945519, 0.325568, 0, 0, 0, 1, 0.0275242, 0.0607529, 0.0400013)
 
-[node name="SmithSword" parent="Model/bones/RightWrist/WeaponSocket" groups=["ENEMY_WEAPON"] instance=ExtResource("78_0pryl")]
+[node name="SmithSword" parent="Model/bones/RightWrist/WeaponSocket" node_paths=PackedStringArray("holder") groups=["ENEMY_WEAPON"] instance=ExtResource("78_0pryl")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 1.6391277e-07, -2.9802322e-08, -7.4505806e-08, -1.0000002, 0, -2.9802322e-08, 1.1920929e-07, 1, -0.011013567, 0.71154267, -0.027953148)
+holder = NodePath("../../../../..")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Model/bones"]
+bone_name = "Root"
+bone_idx = 0
+use_external_skeleton = true
+external_skeleton = NodePath("../../GeneralSkeleton")
+
+[node name="BitHigher" type="Marker3D" parent="Model/bones/BoneAttachment3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08765218, 0)
 
 [node name="TraitsContainer" type="Node" parent="."]
 unique_name_in_owner = true
@@ -819,11 +832,6 @@ skeleton = NodePath("../../Model/GeneralSkeleton")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866797, 0)
 shape = SubResource("CapsuleShape3D_f21qa")
 
-[node name="WeaponSystem" type="Node" parent="."]
-
-[node name="RightEnemyWeapon" type="Node" parent="WeaponSystem"]
-script = ExtResource("76_jl20v")
-
 [node name="Feelings" type="Node" parent="."]
 script = ExtResource("10_i6528")
 max_health = null
@@ -831,3 +839,9 @@ health = 20.0
 
 [node name="TargetableAspect" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("88_62ksi")]
 parent = NodePath("..")
+
+[node name="SECombat" type="Node" parent="."]
+script = ExtResource("63_wgthr")
+metadata/_custom_type_script = "uid://dhhj88fptlapr"
+
+[editable path="Model/bones/Hips/Hitbox"]

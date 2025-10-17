@@ -7,7 +7,7 @@ class_name LegsBehavior
 
 var container: PlayerStatesContainer
 var legs_sm: LegsSM # set by SM
-var combat: HumanoidCombat
+var combat: PlayerCombat
 var area_awareness: AreaAwareness # FILL ME if you use it
 var player_state: PlayerState # set by SM when switching
 

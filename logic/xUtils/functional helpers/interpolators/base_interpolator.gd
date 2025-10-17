@@ -14,9 +14,6 @@ var timer: float = 0.0
 ## should have update()
 ##    - returns final value when done
 
-## should have reset()
-##
-
 
 func reset() -> void:
 	timer = 0.0

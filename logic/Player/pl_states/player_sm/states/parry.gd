@@ -17,7 +17,7 @@ func react_on_hit(hit: HitData):
 	# hit.queue_free()
 
 
-func best_input_that_can_be_paid(input: InputPackage) -> PLVerdict:
+func best_next_state_from_input(input: InputPackage) -> PLVerdict:
 	input.actions.sort_custom(container.states_priority_sort)
 	for action in input.actions:
 		if resources.can_be_paid(container.state_by_name(action)):

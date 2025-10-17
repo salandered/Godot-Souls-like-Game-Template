@@ -23,6 +23,7 @@ func initialise(start: float, target: float, curve_: Curve, duration_: float) ->
 	duration = duration_
 	timer = 0.0
 
+
 ## Returns target_value when done
 func update(delta: float) -> float:
 	if timer < duration:

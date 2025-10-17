@@ -49,9 +49,14 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 	"LandingSprint": StateData.new(PS.landing_sprint, 10),
 	"Roll": StateData.new(PS.roll, 20),
 	"Death": StateData.new(PS.death, 200),
-	# fight
+	
+	## Attacks
 	"Longsword1": StateData.new(PS.longsword_1, 15),
 	"Longsword2": StateData.new(PS.longsword_2, 15),
+	"AxeSlice1": StateData.new(PS.axe_slice_1, 15),
+	"AxeSlice2": StateData.new(PS.axe_slice_2, 15),
+
+
 	"Staggered": StateData.new(PS.staggered, 100),
 	"Parry": StateData.new(PS.parry, 20),
 	"Parried": StateData.new(PS.parried, 100),
@@ -62,18 +67,25 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 
 var pl_action_data_list: Array[ActionData] = [
 	# move
-	# "Walk": ActionData.new(PS.walk,PS.action_block, A.walk ),
-	ActionData.new(PS.small_jump_run, PS.action_small_jump_run, A.small_jump_run),
-	ActionData.new(PS.jump_sprint, PS.action_jump_sprint, A.jump_sprint),
-	ActionData.new(PS.landing_sprint, PS.action_landing_sprint, A.landing_sprint),
-	ActionData.new(PS.midair, PS.action_midair, A.midair),
-	ActionData.new(PS.roll, PS.action_roll, A.roll),
-	ActionData.new(PS.death, PS.action_death, A.death),
+	# "Walk": ActionData.new(PS.walk,PS.Act.block, A.walk ),
+	ActionData.new(PS.small_jump_run, PS.Act.small_jump_run, A.small_jump_run),
+	ActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.jump_sprint),
+	ActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.landing_sprint),
+	ActionData.new(PS.midair, PS.Act.midair, A.midair),
+	ActionData.new(PS.roll, PS.Act.roll, A.roll),
+	ActionData.new(PS.death, PS.Act.death, A.death),
 	# fight
-	ActionData.new(PS.longsword_1, PS.action_longsword_1, A.heavy_axe_slice_1),
-	ActionData.new(PS.longsword_2, PS.action_longsword_2, A.heavy_axe_slice_2),
-	ActionData.new(PS.staggered, PS.action_staggered, A.staggered),
-	ActionData.new(PS.parry, PS.action_parry, A.parry),
-	ActionData.new(PS.parried, PS.action_parried, A.parried),
-	ActionData.new(PS.riposte, PS.action_riposte, A.riposte_attack),
+	
+	## attacks
+	ActionData.new(PS.longsword_1, PS.Act.longsword_1, A.axe_slice_1),
+	ActionData.new(PS.longsword_2, PS.Act.longsword_2, A.axe_slice_2),
+	
+	ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.axe_slice_1),
+	ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.axe_slice_2),
+
+
+	ActionData.new(PS.staggered, PS.Act.staggered, A.staggered),
+	ActionData.new(PS.parry, PS.Act.parry, A.parry),
+	ActionData.new(PS.parried, PS.Act.parried, A.parried),
+	ActionData.new(PS.riposte, PS.Act.riposte, A.riposte_attack),
 ]

@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerSM
 
-@export var combat: HumanoidCombat
+@export var combat: PlayerCombat
 @export var area_awareness: AreaAwareness
 @export var legs_sm: LegsSM
 
@@ -47,7 +47,6 @@ func update(input: InputPackage, delta: float) -> void:
 		current_state._on_exit_state()
 		# now current_state is next state
 		current_state = container.state_by_name(verdict.next_state)
-		player.current_state = current_state
 		current_state._on_enter_state(input)
 
 	# TODO: moved back here, Player States triggers _update from legs_animator behavior -> double dipping

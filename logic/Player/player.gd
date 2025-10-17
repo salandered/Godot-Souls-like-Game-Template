@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends BaseCharacterBody3D
 class_name Princess
 
 @export var model: PlayerModel
@@ -9,9 +9,7 @@ class_name Princess
 
 @onready var dev_labels: Node = %_dev_labels
 
-@onready var right_player_weapon: RightPlayerWeapon = $Weapons/RightPlayerWeapon
-
-var current_state: PlayerState
+@onready var smith_sword: SmithSword = %SmithSword
 
 var jump_data: UsualJumpData
 
@@ -34,11 +32,17 @@ func _ready() -> void:
 	cam_i = len(debug_cams) - 1
 	print_.prefix("dbg", "cam_i: " + str(cam_i))
 	
-	right_player_weapon.accept_data(self)
-	model.active_weapon = right_player_weapon.specific_weapon
+	model.active_weapon = smith_sword
 
 # func _process(_delta) -> void:
 # 	dev_labels._label_player_info()
+
+func get_current_state() -> PlayerState:
+	return model.player_sm.current_state
+
+func react_on_hit(hit_data: HitData) -> void:
+	# safe: PlayerState has default react_on_hit
+	get_current_state().react_on_hit(hit_data)
 
 
 # TODO: _process or _physics_process? changed to _process for now
@@ -92,26 +96,26 @@ func is_attacking() -> bool:
 func current_attack_radius() -> float:
 	if not is_attacking():
 		return 0
-	return current_state.attack_radius
+	return get_current_state().attack_radius
 
 func current_attack_locked_time_left() -> float:
 	if not is_attacking():
 		return 0
-	return current_state.time_til_priority_release()
+	return get_current_state().time_til_priority_release()
 
 func current_state_initial_position() -> Vector3:
-	return current_state.initial_position
+	return get_current_state().initial_position
 
 func current_state_posttracking_radius() -> float:
-	return current_state.posttracking_radius
+	return get_current_state().posttracking_radius
 
 func time_til_attack_connection() -> float:
 	if not is_attacking():
 		return 99999
-	return current_state.extremum_timing - current_state.get_progress()
+	return get_current_state().extremum_timing - get_current_state().get_progress()
 
 func is_rolling() -> bool:
-	return current_state.state_name == "roll"
+	return get_current_state().state_name == "roll"
 
 func roll_time_left() -> float:
 	return 0
@@ -121,7 +125,7 @@ func roll_time_left() -> float:
 
 func get_roll_endpoint() -> Vector3:
 	if is_rolling():
-		return current_state.endpoint
+		return get_current_state().endpoint
 	return Vector3(1000, 1000, 1000)
 
 func get_current_state_position_after(time: float) -> Vector3:
@@ -133,7 +137,3 @@ func get_current_state_position_after(time: float) -> Vector3:
 	# var predicted_delta_pos = states_data.get_root_delta_pos(data_track, future, time)
 	# return global_position + get_quaternion() * predicted_delta_pos
 	return Vector3.UP
-
-# TODO: return only name
-func get_current_state() -> PlayerState:
-	return current_state

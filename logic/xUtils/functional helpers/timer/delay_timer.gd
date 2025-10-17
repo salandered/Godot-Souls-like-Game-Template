@@ -10,10 +10,8 @@ func initialise(duration_: float) -> void:
 	
 ## Returns true when timer expires
 func update(delta: float) -> bool:
+	if not is_initialised(): return false
+	
 	if timer < duration:
 		timer += delta
 	return is_complete()
-
-
-func reset() -> void:
-	timer = 0.0

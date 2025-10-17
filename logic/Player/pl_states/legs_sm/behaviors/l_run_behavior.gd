@@ -6,8 +6,6 @@ const START_COMMIT := 0.92 # seconds
 
 var TO_STOP_DELAY: float = 0.2
 var ANGLE_FOR_U_TURN_MIN = 130.0
-# var ANGLE_FOR_90_TURN_MIN = 30
-# var ANGLE_FOR_90_TURN_MAX = 130
 var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 

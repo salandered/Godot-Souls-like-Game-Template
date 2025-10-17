@@ -1,26 +1,49 @@
 extends RefCounted
 class_name BaseTimer
 
-var duration: float
+var duration: float = -1.0
 var timer: float = 0.0
 
 
-## idempotent
-# func initialise(...) -> void
+## func initialise(...) -> void
+## 	  - idempotent
+##    - sets positive duration
 
 
-## Returns true when timer expires
-# func update(delta: float, ...) -> bool
+## func update(delta: float, ...) -> bool
+## 	  - returns true when timer expires
 
 
-# func reset() -> void
+## hard reset, timer needs to be initialised again
+func turn_off() -> void:
+	timer = 0.0
+	duration = -1.0
+
+
+## resets to zero, but timer is ready to be updated
+func reset() -> void:
+	timer = 0.0
+
+
+func is_initialised() -> bool:
+	if duration == -1.0:
+		return false
+	return true
+
 
 func is_complete() -> bool:
+	if not is_initialised():
+		return false
 	return timer >= duration
+
+
+func is_in_progress() -> bool:
+	return is_initialised() and not is_complete()
 
 
 func get_elapsed() -> float:
 	return timer
+
 
 func get_remaining() -> float:
 	return max(0.0, duration - timer)

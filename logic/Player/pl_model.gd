@@ -3,7 +3,7 @@ class_name PlayerModel
 
 @onready var player: Princess = $".."
 @onready var skeleton = %GeneralSkeleton
-@onready var combat = $Combat as HumanoidCombat
+@onready var combat = $Combat as PlayerCombat
 @onready var resources = $Resources as HumanoidResources
 @onready var hitbox: Hitbox_ = %HitBox
 @onready var area_awareness = $AreaAwareness as AreaAwareness
@@ -13,8 +13,8 @@ class_name PlayerModel
 @onready var legs_sm: LegsSM = %LegsSM
 @onready var bones: PlayerBones = %bones
 
-@onready var animation_player: AnimationPlayer = %NativeAnimator
-@onready var anim_container: PlayerAnimationContainer = %AnimContainer
+@onready var native_player: AnimationPlayer = %NativeAnimator
+@onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: AnimatorManager = %AnimatorManager
 
 var active_weapon: BaseWeapon
@@ -24,7 +24,7 @@ func _ready():
 	container.player = player
 	player_sm.player = player
 	
-	anim_container._accept_animations() # NOTE: should be before accepting states!
+	anim_container._accept_animations(native_player) # NOTE: should be before accepting states!
 	container.accept_all()
 	
 	player_sm.initialise()
@@ -139,10 +139,10 @@ func __toggle_fly_mode():
 
 func _reload_run_anims_from_library() -> void:
 	run_anims.clear()
-	if animation_player == null:
+	if native_player == null:
 		return
 	var anim_lib := A.lib._run
-	for name_ in animation_player.get_animation_list():
+	for name_ in native_player.get_animation_list():
 		if name_.begins_with(anim_lib):
 			run_anims.append(name_)
 	# run_anims.sort() # alphabetical is fine; remove if you prefer original order

@@ -15,6 +15,8 @@ func initialise(duration_: float, callback: Callable = Callable()) -> void:
 
 ## Returns true when timer expires
 func update(delta: float) -> bool:
+	if not is_initialised(): return false
+
 	if timer < duration:
 		timer += delta
 		
@@ -28,4 +30,5 @@ func update(delta: float) -> bool:
 
 func reset() -> void:
 	timer = 0.0
+	duration = -1.0
 	_has_triggered = false # Allow re-triggering after reset

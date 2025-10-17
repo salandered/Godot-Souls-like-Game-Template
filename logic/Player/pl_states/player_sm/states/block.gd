@@ -7,7 +7,7 @@ extends PlayerState
 func check_transition(input: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
 		return PLVerdict.new(PS.midair)
-	return best_input_that_can_be_paid(input)
+	return best_next_state_from_input(input)
 
 
 # Overrides react_on_hit to handle blocking via stamina (and cuts regen while shielded)

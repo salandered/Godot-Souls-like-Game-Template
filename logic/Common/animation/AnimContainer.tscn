@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://88lj8tl6runn"]
+
+[ext_resource type="Script" uid="uid://c5olmybak1goj" path="res://logic/Common/animation/anim_container.gd" id="1_gy3oa"]
+
+[node name="AnimContainer" type="Node"]
+script = ExtResource("1_gy3oa")
