@@ -36,7 +36,7 @@ const TURN_INTENT_TIME_THRESHOLD = 0.05
 # 		gatherer._back_press_time = params.back_time
 		
 # 		# when
-# 		gatherer._determine_turn_intent(input)
+# 		gatherer._determine_turn_intent(input_)
 		
 # 		# then
 # 		assert_true(input.turn_intent_known, "Should know turn intent when time diff is sufficient")
@@ -53,7 +53,7 @@ const TURN_INTENT_TIME_THRESHOLD = 0.05
 # 		gatherer._back_press_time = 1.0 + TURN_INTENT_TIME_THRESHOLD - 0.01
 		
 # 		# when
-# 		gatherer._determine_turn_intent(input)
+# 		gatherer._determine_turn_intent(input_)
 		
 # 		# then
 # 		assert_false(input.turn_intent_known, "Should not know turn intent when time diff is too small")
@@ -68,7 +68,7 @@ const TURN_INTENT_TIME_THRESHOLD = 0.05
 # 		gatherer._right_press_time = params.right_time
 		
 # 		# when
-# 		gatherer._determine_turn_intent(input)
+# 		gatherer._determine_turn_intent(input_)
 		
 # 		# then
 # 		assert_true(input.turn_intent_known, "Should know turn intent for strafing")

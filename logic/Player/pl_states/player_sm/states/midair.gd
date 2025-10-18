@@ -8,13 +8,14 @@ var terminal_velocity := -20.0
 
 var peak_reached := false
 
-func on_enter_state(input: InputPackage) -> void:
+func on_enter_state(input_: InputPackage) -> void:
 	peak_reached = player.velocity.y <= 0
 	print_.psm(pp.on_ent + state_name, pp.s("peak_reached", peak_reached,
 	"jump_fall_gravity", player.jump_data.jump_fall_gravity,
 	"jump_up_gravity", player.jump_data.jump_up_gravity))
 	
-func update(input: InputPackage, delta: float) -> void:
+
+func update(input_: InputPackage, delta: float) -> void:
 	# Continue using the shared velocity variable
 	if player.velocity.y > 0.1:
 		player.velocity.y -= player.jump_data.jump_up_gravity * delta
@@ -26,13 +27,14 @@ func update(input: InputPackage, delta: float) -> void:
 	player.velocity.y = max(player.velocity.y, terminal_velocity)
 	
 	# Air control
-	apply_air_control(input, delta)
+	apply_air_control(input_, delta)
 	
 	debug_velocities()
 	# print_.psm(state_name, pp.s("player vel:", pp.pp_vec3(player.velocity), "peak_reached", peak_reached))
 
-func apply_air_control(input: InputPackage, delta: float) -> void:
-	var input_dir := velocity_by_input(input, delta)
+
+func apply_air_control(input_: InputPackage, delta: float) -> void:
+	var input_dir := velocity_by_input(input_, delta)
 	input_dir.y = 0
 	input_dir = input_dir.normalized()
 	
@@ -49,7 +51,8 @@ func apply_air_control(input: InputPackage, delta: float) -> void:
 	player.velocity.x = current_xz.x
 	player.velocity.z = current_xz.z
 
-func check_transition(input: InputPackage) -> PLVerdict:
+
+func check_transition(input_: InputPackage) -> PLVerdict:
 	var floor_distance = area_awareness.get_floor_distance()
 	
 	if floor_distance < landing_height and peak_reached:
@@ -99,7 +102,7 @@ func debug_velocities() -> void:
 # 
 # var DELTA_VECTOR_LENGTH: float = 0.30
 # var jump_direction: Vector3 = Vector3.ZERO
-# func check_transition(input: InputPackage) -> PLVerdict:
+# func check_transition(input_: InputPackage) -> PLVerdict:
 # 	var floor_distance := area_awareness.get_floor_distance()
 # 	if floor_distance < landing_height:
 # 		var xz_velocity = player.velocity
@@ -113,7 +116,7 @@ func debug_velocities() -> void:
 # 		# still falling
 # 		return PLVerdict.new("")
 
-# func on_enter_state(input: InputPackage) -> void:
+# func on_enter_state(input_: InputPackage) -> void:
 # 		# the clamp construction is here to 
 # 		# 1) prevent look_at annoying errors when our velocity is zero and it can't look_at properly
 # 		# 3) have a way to scale from velocity. The longer the vector is, the harder it is to modify it by adding a delta.
@@ -124,14 +127,14 @@ func debug_velocities() -> void:
 # 	jump_direction.y = 0
 
 	
-# func update(input: InputPackage, delta: float) -> void:
+# func update(input_: InputPackage, delta: float) -> void:
 # 	player.velocity.y -= u.gravity * delta
-# 	current_action.update(input, delta)
+# 	current_action.update(input_, delta)
 
 
 # ## Divide velocity and look direction
-# func process_input_vector(input: InputPackage, delta: float):
-# 	var input_direction := velocity_by_input(input, delta).normalized()
+# func process_input_vector(input_: InputPackage, delta: float):
+# 	var input_direction := velocity_by_input(input_, delta).normalized()
 # 	var input_delta_vector = input_direction * DELTA_VECTOR_LENGTH
 	
 # 	# ep 6: (jump_direction + input_delta_vector * delta).limit_length(clamp(player.velocity.length(), 1, 999999))

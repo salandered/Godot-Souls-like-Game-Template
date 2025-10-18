@@ -6,7 +6,7 @@ class_name PlayerModel
 @onready var combat = $Combat as PlayerCombat
 @onready var resources = $Resources as HumanoidResources
 @onready var hitbox: Hitbox_ = %HitBox
-@onready var area_awareness = $AreaAwareness as AreaAwareness
+@onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var container = %StatesContainer as PlayerStatesContainer
 
 @onready var player_sm: PlayerSM = %PlayerSM
@@ -35,13 +35,13 @@ func _ready():
 	
 	bones.accept_bones()
 
-func update(input: InputPackage, delta: float):
+func update(input_: InputPackage, delta: float):
 	if fly_mode_enabled:
-		_handle_fly_mode(input, delta)
+		_handle_fly_mode(input_, delta)
 		player.move_and_slide()
 		return
 
-	player_sm.update(input, delta)
+	player_sm.update(input_, delta)
 	player.move_and_slide()
 	
 
@@ -61,10 +61,10 @@ func update(input: InputPackage, delta: float):
 ## And it's much simplier to just leave this small ball of mud here.
 ## '__' is used to point out that its not in the right place (when it is referenced by client code)
 # endregion
-func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	var _velocity := Vector3.ZERO
-	var forward_speed := input.forward_input
-	var orbit_speed := input.orbit_input
+	var forward_speed := input_.forward_input
+	var orbit_speed := input_.orbit_input
 
 	if area_awareness.is_camera_locked():
 		forward_speed *= -1
@@ -91,9 +91,9 @@ func __velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	return _velocity
 
 
-func __angle_between_player_and_input(input: InputPackage, delta: float, _log: bool = false) -> float:
+func __angle_between_player_and_input(input_: InputPackage, delta: float, _log: bool = false) -> float:
 	var face_dir = player.basis.z
-	var input_dir = __velocity_by_input(input, delta).normalized()
+	var input_dir = __velocity_by_input(input_, delta).normalized()
 	var angle = face_dir.signed_angle_to(input_dir, Vector3.UP)
 	if _log: prints("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
 	return angle
@@ -112,9 +112,9 @@ var run_lib := "run-v5-LIB"
 var run_anims: PackedStringArray = [] # will be filled like ["run-v5-LIB/Running", …]
 
 
-func _handle_fly_mode(input: InputPackage, delta: float):
+func _handle_fly_mode(input_: InputPackage, delta: float):
 	var tracking_angular_speed := 4
-	var input_direction := __fly_velocity_by_input(input, delta).normalized()
+	var input_direction := __fly_velocity_by_input(input_, delta).normalized()
 	var face_direction = player.basis.z
 	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
 	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
@@ -124,9 +124,9 @@ func _handle_fly_mode(input: InputPackage, delta: float):
 		input_direction = input_direction.normalized() * fly_speed
 
 	player.velocity = input_direction
-	if input.actions.has(PS.small_jump_run):
+	if input_.actions.has(PS.small_jump_run):
 		player.velocity.y += 8
-	if input.combat_actions.has(CombatAction.heavy_attack_pressed):
+	if input_.combat_actions.has(CombatAction.heavy_attack_pressed):
 		player.velocity.y -= 8
 
 	
@@ -141,7 +141,7 @@ func _reload_run_anims_from_library() -> void:
 	run_anims.clear()
 	if native_player == null:
 		return
-	var anim_lib := A.lib._run
+	var anim_lib := A._lib._run
 	for name_ in native_player.get_animation_list():
 		if name_.begins_with(anim_lib):
 			run_anims.append(name_)
@@ -172,20 +172,20 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("dev_8"):
 		# animator_manager.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.hit_reaction, 0.12, 0.20, 0.18, 1)
+		animator_manager.set_overlay_anim(A.combat.hit_reaction, 0.12, 0.20, 0.18, 1)
 		# animator_manager.play_overlay(A.hit_reaction, 0, -1, 0, 1)
 		# animator_manager.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed("dev_9"):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.hit_reaction, 0.2, 0.05, 0.2, 1)
+		animator_manager.set_overlay_anim(A.combat.hit_reaction, 0.2, 0.05, 0.2, 1)
 		# animator_manager.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
-func __fly_velocity_by_input(input: InputPackage, delta: float) -> Vector3:
+func __fly_velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	var _velocity := Vector3.ZERO
-	var forward_speed := input.forward_input
+	var forward_speed := input_.forward_input
 
 
-	var orbit_speed := input.orbit_input
+	var orbit_speed := input_.orbit_input
 
 	var grounded_target: Vector3
 	grounded_target = player.fancy_camera.nest.global_position

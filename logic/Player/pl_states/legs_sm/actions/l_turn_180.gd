@@ -14,14 +14,14 @@ var INCREASE_ROTATION: float = 1.0
 
 var TURN_180_APEX_TIME: float
 
-func on_enter_action(_input: InputPackage) -> void:
+func on_enter_action(input_: InputPackage) -> void:
 	prints(u.fr(), "------- turn on enter")
 	
 	initial_rotation = get_player().quaternion
 	prints("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA
-	var _target_angle = calculate_target_angle(_input)
+	var _target_angle = calculate_target_angle(input_)
 	var _turn_dir = turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
@@ -51,11 +51,11 @@ func on_exit_action() -> void:
 	__log_turn_exit()
 
 
-func update(input: InputPackage, delta: float):
+func update(input_: InputPackage, delta: float):
 	var SPEED_MULT = 1.0
 	if not curr_turn.turn_completed:
 		var rotation_delta = animator_manager.get_root_rotation()
-		var result = apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
+		var result = pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
 	if time_spent() < TURN_180_APEX_TIME:
@@ -67,7 +67,7 @@ func update(input: InputPackage, delta: float):
 		# => this wont be run, but code is ready to handle this
 		SPEED_MULT = speed_curve_from_apex.update(delta)
 		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, get_player().velocity.length())
-		move_with_input_vector(input, delta, SpeedConfig.new(SPEED_MULT))
+		pm().move_with_input_vector(input_, delta, SpeedConfig.new(default_sp, SPEED_MULT))
 
 
 func animate(): # ▶️
@@ -75,10 +75,10 @@ func animate(): # ▶️
 
 	## TODO: some universal system for different "sub animations" in one action
 	if curr_turn.is_turn_dir_right:
-		anim = anim_container.get_by_name(A.turn_180_R)
+		anim = anim_container.get_by_name(A.move.turn_180_R)
 	else:
-		anim = anim_container.get_by_name(A.turn_180_L)
-	
+		anim = anim_container.get_by_name(A.move.turn_180_L)
+
 	__log_anim(blend_time)
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
 

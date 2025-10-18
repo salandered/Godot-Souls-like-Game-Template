@@ -5,6 +5,7 @@ extends Node
 ## NOTE: CLIENT CODE COMMUNICATES WITH ANIMATORS ONLY VIA THIS FACADE
 class_name AnimatorManager
 
+@onready var root_animator: RootAnimator = %RootAnimator
 @onready var full_body: ModifierAnimator = %FullBody
 @onready var legs: ModifierAnimator = %Legs
 
@@ -13,6 +14,7 @@ class_name AnimatorManager
 
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var native_animator: AnimationPlayer = %NativeAnimator
+
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 
@@ -59,15 +61,6 @@ func reset_global_speed_scale():
 
 ## READ INFO ABOUT WHAT'S PLAYING
 
-func get_root_velocity(y_zeroed: bool = true) -> Vector3:
-	return full_body.get_root_velocity(y_zeroed)
-
-func get_root_rotation(y_only: bool = true) -> float:
-	return full_body.get_root_rotation(y_only)
-
-
-func get_prev_root_rotation() -> float:
-	return full_body.get_prev_root_rotation()
 
 func get_current_anim_effective_progress() -> float:
 	return full_body.curr_playback.get_effective_progress()
@@ -81,27 +74,36 @@ func get_curr_anim_time_spent() -> float:
 func get_curr_anim_effective_duration() -> float:
 	return full_body.curr_playback.get_effective_duration()
 
-
 func get_curr_blend_duration() -> float:
 	return full_body.blend_playback.duration
-
 
 func is_blending() -> bool:
 	return full_body.blend_playback.is_blending
 
-func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
-	return full_body.calculate_animation_start_root_velocity(anim)
-
 func get_prev_blend_percentage() -> float:
 	return full_body.blend_playback.prev_percentage
+
+
+func get_root_velocity(y_zeroed: bool = true) -> Vector3:
+	return root_animator.get_root_velocity(y_zeroed)
+
+func get_root_rotation(y_only: bool = true) -> float:
+	return root_animator.get_root_rotation(y_only)
+
+func get_prev_root_rotation() -> float:
+	return root_animator.get_prev_root_rotation()
+
+func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
+	return root_animator.calculate_animation_start_root_velocity(anim)
+
 
 ## INTERNAL
 
 func _accept_modifiers():
-	var initial_anim = anim_container.get_by_name(A.idle)
+	var initial_anim = anim_container.get_by_name(A.move.idle)
 
 
-	native_animator.play(A.idle)
+	native_animator.play(A.move.idle)
 	full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.initialise()

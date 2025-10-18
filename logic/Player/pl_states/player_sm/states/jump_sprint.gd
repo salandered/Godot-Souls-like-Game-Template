@@ -12,7 +12,7 @@ var jumped: bool = false
 func _ready():
 	SPEED = 5.0
 
-func check_transition(input: InputPackage) -> PLVerdict:
+func check_transition(input_: InputPackage) -> PLVerdict:
 	if current_action.works_longer_than(TRANSITION_TIMING):
 		print_.psm_check_trans(state_name, pp.compare_w("Work longer than", "", TRANSITION_TIMING) + "=> midair")
 		jumped = false
@@ -20,13 +20,13 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	return PLVerdict.new("")
 
 
-func update(input: InputPackage, delta: float) -> void:
+func update(input_: InputPackage, delta: float) -> void:
 	if current_action.works_longer_than(JUMP_TIMING):
 		if not jumped:
 			player.velocity.y += VERTICAL_SPEED_ADDED
 			jumped = true
 
-func on_enter_state(input: InputPackage) -> void:
+func on_enter_state(input_: InputPackage) -> void:
 	player.velocity = player.velocity.normalized() * SPEED
 
 

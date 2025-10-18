@@ -1,33 +1,34 @@
-## Legs_behaviors states have the type called Legs_Actions, and legs_actions are instantiated once and live in a shared pool instead of being a copy per behavior. 
-extends BaseAction
+## are instantiated once and live in a shared pool instead of being a copy per behavior. 
 class_name LegsAction
+extends BaseAction
 
 var legs_sm: LegsSM
 
 var motion_type: String ## see MotionType
 
-## meant to be overriden if action uses them
-var SPEED: float = 2.0
-## how fast the character moves forward while rotating
-## usually lesser than SPEED
-var TURN_SPEED: float = 1.6 # todo: consider tying to SPEED
-## how fast the character rotates (changes facing direction)
-## 4 means ~ 230. max a player can turn in one frame is ANGULAR_SPEED * delta == 4.0 * 0.0167 = ~ 3.8 degrees.
-var ANGULAR_SPEED: float = 4.0
+var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
+
 var SPEED_SCALE: float = 1.0
 
 var blend_time_by_action = {}
 
 
+## to override if needed
+func initialise() -> void:
+	pass
+
+func pm() -> PlayerMovement:
+	return legs_sm.player_sm.player_movement
+
 func get_player() -> Princess:
 	return legs_sm.player_sm.player
 
-func _update(_input: InputPackage, _delta: float):
-	update(_input, _delta)
+func _update(input_: InputPackage, _delta: float):
+	update(input_, _delta)
 	# _apply_residual_rotation()
 
 ## Not abstract! It can be empty. (double action)
-func update(_input: InputPackage, _delta: float):
+func update(input_: InputPackage, _delta: float):
 	pass
 
 
@@ -65,259 +66,19 @@ func animate(): # ▶️
 
 ## Common move/rotate logic. If needed, actions should explicitely call in update()
 
-## MOVING WITH INPUT VECTOR
-# region: code
-
-func process_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
-	if speed_config == null:
-		speed_config = SpeedConfig.new()
-	var angle := _calculate_allowed_angle(input, delta, speed_config)
-	_move_with_input_vector(angle, input, delta, speed_config)
-	get_player().rotate_y(angle.value)
-
-func move_with_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
-	if speed_config == null:
-		speed_config = SpeedConfig.new()
-	var angle := _calculate_allowed_angle(input, delta, speed_config)
-	_move_with_input_vector(angle, input, delta, speed_config)
-
-
-func rotate_with_input_vector(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
-	if speed_config == null:
-		speed_config = SpeedConfig.new()
-	var angle := _calculate_allowed_angle(input, delta, speed_config)
-	get_player().rotate_y(angle.value)
-
-
-func _move_with_input_vector(angle: AllowedAngle, input: InputPackage, delta: float, speed_config: SpeedConfig):
-	var _speed = speed_config.get_override_speed(SPEED)
-	var _turn_speed = speed_config.get_override_turn_speed(TURN_SPEED)
-
-	var _face_dir = get_player().basis.z
-	var face_dir_rotated := _face_dir.rotated(Vector3.UP, angle.value)
-
-	if angle.cut:
-		get_player().velocity = face_dir_rotated * _turn_speed * speed_config.speed_multiplier
-	else:
-		get_player().velocity = face_dir_rotated * _speed * speed_config.speed_multiplier
-
-
-func _calculate_allowed_angle(input: InputPackage, delta: float, speed_config: SpeedConfig) -> AllowedAngle:
-	var _angular_speed = ANGULAR_SPEED
-	if speed_config.override_angular_sp != -1.0:
-		_angular_speed = speed_config.override_angular_sp
-
-	var input_direction := velocity_by_input(input, delta).normalized()
-
-	var _face_dir = get_player().basis.z
-	var angle = _face_dir.signed_angle_to(input_direction, Vector3.UP)
-
-	if abs(angle) >= _angular_speed * delta: # reads as 'max rotation allowed in this frame'
-		return AllowedAngle.new(sign(angle) * _angular_speed * delta, true)
-	else:
-		return AllowedAngle.new(angle)
-
-class AllowedAngle:
-	var value: float
-	var cut: float
-
-	func _init(_value, _cut: bool = false) -> void:
-		value = _value
-		cut = _cut
-
-
-# endregion
-
-
-## MOVING WITH ROOT
-# region: code 
-
-func move_with_root(delta: float) -> void:
-	var root_vel := animator_manager.get_root_velocity()
-	get_player().velocity = get_player().get_quaternion() * root_vel
-
-
-func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary:
-	var remaining_angle = target_angle_ - accum_rot_
-	var _log_msg = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rot_delta)
-
-	if check_counter_rot: # do we need this at all if animation s good?
-		var is_counter_rotating = (rot_delta < 0 and remaining_angle > 0) or \
-								  (rot_delta > 0 and remaining_angle < 0)
-		if is_counter_rotating:
-			prints(u.fr(), em.pin + "counter rotation, ending turn", _log_msg)
-			return {"completed": true, "accum_rot": accum_rot_}
-
-	if abs(rot_delta) >= abs(remaining_angle):
-		get_player().rotate_y(remaining_angle)
-		prints(u.fr(), "Turn complete .", _log_msg)
-		return {"completed": true, "accum_rot": target_angle_}
-	else:
-		get_player().rotate_y(rot_delta)
-		var new_rotation = accum_rot_ + rot_delta
-		# prints(u.fr(), "applied", _log_msg)
-		return {"completed": false, "accum_rot": new_rotation}
-
-
-# endregion
-
-
-## STRAFE MOVEMENT
-# region: code 
-
-func move_forward_or_back(direction_sign: float, delta: float, speed_config: SpeedConfig = null):
-	if speed_config == null:
-		speed_config = SpeedConfig.new()
-	var _speed = speed_config.get_override_speed(SPEED)
-	
-	# direction_sign: 1.0 for forward, -1.0 for backward
-	var forward_vec = get_player().basis.z * direction_sign
-	get_player().velocity = forward_vec * _speed * speed_config.speed_multiplier
-
-func move_strafe(input: InputPackage, delta: float, speed_config: SpeedConfig = null):
-	if speed_config == null:
-		speed_config = SpeedConfig.new()
-	var _speed = speed_config.get_override_speed(SPEED)
-	
-	if input.input_direction.is_zero_approx():
-		get_player().velocity = Vector3.ZERO
-		return
-
-	# Get player's local forward and right vectors
-	var forward_vec = - get_player().global_basis.z
-	var right_vec = get_player().global_basis.x
-	
-	# Combine local vectors based on the raw input to get the desired world direction
-	# input.input_direction.y is forward/back, .x is left/right
-	var desired_direction = (forward_vec * input.input_direction.y + right_vec * input.input_direction.x)
-	
-	# Normalize to ensure diagonal movement isn't faster than cardinal directions
-	var final_velocity = desired_direction.normalized() * _speed * speed_config.speed_multiplier
-	
-	get_player().velocity = final_velocity
-
-
-func move_strafe_with_forward(input: InputPackage, direction_sign: float, delta: float, speed_config: SpeedConfig = null):
-	if speed_config == null:
-		speed_config = SpeedConfig.new()
-	var _speed = speed_config.get_override_speed(SPEED)
-	
-	# Get player's local forward and right vectors
-	var forward_vec = - get_player().global_basis.z
-	var right_vec = get_player().global_basis.x
-	
-	# Get the raw forward/backward input component
-	var forward_component = input.input_direction.y
-	
-	# Construct the final direction by combining raw forward input with the state-controlled strafe direction
-	var desired_direction = (forward_vec * forward_component + right_vec * direction_sign)
-	
-	# If there's no input, stop. Otherwise, move in the calculated direction.
-	if desired_direction.is_zero_approx():
-		get_player().velocity = Vector3.ZERO
-		return
-	
-	var final_velocity = desired_direction.normalized() * _speed * speed_config.speed_multiplier
-	get_player().velocity = final_velocity
-
-# ## deprecated in favor of move_strafe_with_forward
-# func move_strafe(direction_sign: float, delta: float, speed_config: SpeedConfig = null):
-# 	if speed_config == null:
-# 		speed_config = SpeedConfig.new()
-# 	var _speed = speed_config.get_override_speed(SPEED)
-	
-# 	# direction_sign: 1.0 for right, -1.0 for left
-# 	var right_vec = get_player().basis.x * direction_sign
-# 	get_player().velocity = right_vec * _speed * speed_config.speed_multiplier
-
-
-# ## deprecated in favor of move_strafe_with_forward
-# func strafe_with_input_vector(input: InputPackage, direction_sign: float, delta: float, speed_config: SpeedConfig = null):
-# 	if speed_config == null:
-# 		speed_config = SpeedConfig.new()
-# 	var _speed = speed_config.get_override_speed(SPEED)
-
-# 	var desired_velocity = velocity_by_input(input, delta)
-# 	if desired_velocity.is_zero_approx():
-# 		get_player().velocity = Vector3.ZERO
-# 		return
-
-# 	var direction = desired_velocity.normalized()
-	
-# 	# Get player's local space
-# 	var player_basis = get_player().basis
-# 	var player_forward = - player_basis.z
-# 	var player_right = player_basis.x
-	
-# 	# Decompose orbital movement into forward/right components
-# 	var forward_component = direction.dot(player_forward)
-# 	var right_component = direction.dot(player_right)
-	
-# 	# BEFORE correction
-# 	prints(u.fr(), "🔍 BEFORE:",
-# 		"dir_sign:", direction_sign,
-# 		"fwd:", pp.round_01(forward_component),
-# 		"right:", pp.round_01(right_component))
-	
-# 	# Force right component to match current strafe direction (LEFT=-1, RIGHT=+1)
-# 	var corrected_right = abs(right_component) * sign(direction_sign)
-	
-# 	# AFTER correction
-# 	prints(u.fr(), "🔍 AFTER:",
-# 		"corrected_right:", pp.round_01(corrected_right),
-# 		"delta_right:", pp.round_01(corrected_right - right_component))
-	
-# 	# Reconstruct direction: preserve forward/back, enforce left/right
-# 	var corrected_direction = (player_forward * forward_component + player_right * corrected_right).normalized()
-	
-# 	var final_velocity = corrected_direction * _speed * speed_config.speed_multiplier
-	
-# 	prints("🔍 VELOCITY:",
-# 		"old:", pp.vec3(get_player().velocity),
-# 		"new:", pp.vec3(final_velocity),
-# 		"delta:", pp.vec3(final_velocity - get_player().velocity))
-	
-# 	# Apply speed with curves
-# 	get_player().velocity = final_velocity
-
-
-func look_at_target(delta: float, use_model_front: bool = true) -> void:
-	if legs_sm.area_awareness.is_camera_locked():
-		var target_pos = legs_sm.area_awareness.get_camera_locked_target().global_position
-		target_pos.y = get_player().global_position.y
-
-		var dir_to_target = get_player().global_position.direction_to(target_pos)
-		var face_dir = get_player().global_basis.z
-		
-		var remaining_angle = face_dir.signed_angle_to(dir_to_target, Vector3.UP)
-		
-		var max_rot_this_frame = ANGULAR_SPEED * delta # maximum rotation allowed in this single frame
-		var rotation_this_frame = clampf(remaining_angle, -max_rot_this_frame, max_rot_this_frame)
-		
-		get_player().rotate_y(rotation_this_frame)
-
-# func look_at_target(use_model_front: bool = true) -> void:
-# 	if legs_sm.area_awareness.is_camera_locked():
-# 		var target_pos = get_player().fancy_camera.locked_target.global_position
-# 		# Ignore the height difference for rotation to keep the character upright.
-# 		target_pos.y = get_player().global_position.y
-# 		u.safe_look_at(get_player(), target_pos, Vector3.UP, use_model_front)
-
-# endregion
-
 
 ## TURN LOGIC
 # region: code 
 
 
-func calculate_target_angle(input: InputPackage) -> float:
+func calculate_target_angle(input_: InputPackage) -> float:
 	var target_angle: float
-	if input.reverse_data.is_reversed():
+	if input_.reverse_data.is_reversed():
 		target_angle = - PI + 0.05
 		prints("\n\t target ∠:", pp.rad2deg(target_angle))
-		prints("\t Reverse type and full data", input.reverse_data.type, input.reverse_data)
+		prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
 	else:
-		var _signed_angle = get_player().model.__angle_between_player_and_input(input, 0.016, true)
+		var _signed_angle = get_player().model.__angle_between_player_and_input(input_, 0.016, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
 		prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
@@ -395,8 +156,8 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_nam
 # endregion
 
 
-func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
-	return get_player().model.__velocity_by_input(input, delta)
+func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
+	return get_player().model.__velocity_by_input(input_, delta)
 
 
 func __log_anim(blend_time, start_time_offset = 0.0):

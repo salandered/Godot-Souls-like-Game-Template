@@ -64,15 +64,29 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 	return new_input
 
 
-func _translate_to_strafe(new_input: InputPackage):
-	var _to_strafe = {
-		PS.run: PS.strafe,
-	}
+# const TO_ROLL_MAP = {
+# 	PS.small_jump_run: PS.roll,
+# 	PS.jump_sprint: PS.roll,
+# }
+
+
+const TO_STRAFE_MAP = {
+	PS.run: PS.strafe,
+	PS.small_jump_run: PS.dodge,
+	PS.jump_sprint: PS.dodge,
+}
+
+
+func _apply_translation(new_input: InputPackage, translation_map: Dictionary):
 	for i in range(new_input.actions.size()):
 		var current_action = new_input.actions[i]
 		
-		if current_action in _to_strafe:
-			new_input.actions[i] = _to_strafe[current_action]
+		if current_action in translation_map:
+			new_input.actions[i] = translation_map[current_action]
+
+
+func _translate_to_strafe(new_input: InputPackage):
+	_apply_translation(new_input, TO_STRAFE_MAP)
 
 
 func is_camera_locked() -> bool:

@@ -135,21 +135,21 @@ func _process(delta: float) -> void:
 	var d_y := accumulated_mouse_delta.y
 	accumulated_mouse_delta = Vector2.ZERO
 	
-	var input: InputPackage = InputManager.current_input
+	var input_: InputPackage = InputManager.current_input
 	# print(u.fr() + "//~~~CAM ", input.target_lock)
 
-	_consider_switching_state(input)
+	_consider_switching_state(input_)
 
 	current_state.input_mouse_movement(d_x, d_y)
 	current_state.update(delta)
 
 
-func _consider_switching_state(input: InputPackage):
-	if input.target_lock.no_tap():
+func _consider_switching_state(input_: InputPackage):
+	if input_.target_lock.no_tap():
 		return
 
 	match current_state.state_name:
-		FREE_STATE_NAME when input.target_lock.tap_or_double_tap():
+		FREE_STATE_NAME when input_.target_lock.tap_or_double_tap():
 			var found_target = player.model.area_awareness.find_target()
 			if found_target:
 				print_.fancy_cam("FREE -> LOCKED ", __Cvec() + __free_off() + " target=" + str(found_target))
@@ -160,7 +160,7 @@ func _consider_switching_state(input: InputPackage):
 				locked_state.switch_from_free(locked_target)
 			else:
 				print_.fancy_cam("", em.gray_x + "LOCK NOT (no target found)")
-		LOCKED_STATE_NAME when input.target_lock.tap:
+		LOCKED_STATE_NAME when input_.target_lock.tap:
 			print_.fancy_cam("LOCKED -> FREE", "")
 			locked_target = nest
 			current_state = free_state

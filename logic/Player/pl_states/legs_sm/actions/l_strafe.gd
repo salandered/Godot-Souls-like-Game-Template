@@ -10,12 +10,18 @@ var speed_mult_from_idle = EaseCurveInterpolator.new()
 const ACCEL_FROM_IDLE_TIME: float = 0.35
 
 const OPP_DIR_CHANGE_DURATION: float = 0.16
-const SLIGHT_DIR_CHANGE_DURATION: float = 0.08
+const SLIGHT_DIR_CHANGE_DURATION: float = 0.1
+const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.08
 
-const ANIM_L: String = A.strafe_L
-const ANIM_R: String = A.strafe_R
+const ANIM_L: String = A.strafe.strafe_L
+const ANIM_R: String = A.strafe.strafe_R
 const SPEED_R: float = 2.1
 const SPEED_L: float = 2.0
+
+const ANIM_F: String = A.strafe.combat_run_f
+const ANIM_B: String = A.strafe.combat_run_b
+const SPEED_F: float = 1.9
+const SPEED_B: float = 1.6
 
 var sync_loco_anim_correction: float = 0.18
 
@@ -24,19 +30,31 @@ var curr_direction: StrafeDirection
 
 var opposite_dir_change := StrafeDirChange.new()
 var slight_dir_change := StrafeDirChange.new()
+var slightest_dir_change := StrafeDirChange.new()
+
+
+func __reset_changers():
+	opposite_dir_change.reset()
+	slight_dir_change.reset()
+	slightest_dir_change.reset()
+
+func __reset_changers_cooldown():
+	opposite_dir_change.cooldown.reset()
+	slight_dir_change.cooldown.reset()
+	slightest_dir_change.cooldown.reset()
 
 
 func initialise():
-	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L)
+	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B)
 	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION)
 	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION)
-	
+	slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION)
 
-func on_enter_action(input: InputPackage) -> void:
-	curr_direction.set_direction(curr_direction.detect_dir_from_input(input, true))
+
+func on_enter_action(input_: InputPackage) -> void:
+	curr_direction.set_direction(curr_direction.detect_dir_from_input(input_, true))
 	
-	opposite_dir_change.reset()
-	slight_dir_change.reset()
+	__reset_changers()
 
 	match legs_sm.prev_action.action_name:
 		Leg.Act.idle:
@@ -48,7 +66,7 @@ func on_exit_action() -> void:
 	animator_manager.reset_global_speed_scale()
 
 
-func update(input: InputPackage, delta: float) -> void:
+func update(input_: InputPackage, delta: float) -> void:
 	var SPEED_MULT = 1.0
 
 	match legs_sm.prev_action.action_name:
@@ -57,40 +75,48 @@ func update(input: InputPackage, delta: float) -> void:
 	
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
+	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
 
 	##
-	look_at_target(delta)
+	pm().look_at_target(delta)
 
-	var _sp_config = SpeedConfig.new(SPEED_MULT, curr_direction.get_curr_speed())
-	move_strafe_with_forward(input, -curr_direction.get_dir_int(), delta, _sp_config) # note the minus
+
+	var _sp_config = SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed())
+	if curr_direction.is_pure_vertical():
+		pm().move_forward_or_back(curr_direction.get_dir_int(), delta, _sp_config)
+	else:
+		pm().move_strafe_with_forward(input_, -curr_direction.get_dir_int(), delta, _sp_config) # note the minus
 	
 	opposite_dir_change.async_change_update(delta)
 	slight_dir_change.async_change_update(delta)
 
-	var new_dir = curr_direction.detect_dir_from_input(input)
-	if curr_direction.would_be_opposite_change(new_dir):
-		if opposite_dir_change.cooldown.update(delta):
-			print_.lsm_action_strafe("", "~~ opposite dir change and change_cooldown completed")
-			opposite_dir_change.speed_dip_init()
-			opposite_dir_change.async_change_init(_on_change_dir_timer_complete.bind(true))
-			
-			opposite_dir_change.cooldown.reset()
-			slight_dir_change.cooldown.reset()
-			print_.lsm_action_strafe("", "~~ opp dir change and dip triggered")
+	var new_dir = curr_direction.detect_dir_from_input(input_)
+	match curr_direction.would_be_change_of_type(new_dir):
+		StrafeDirection.ChangeType.OPPOSITE:
+			if opposite_dir_change.cooldown.update(delta):
+				opposite_dir_change.speed_dip_init()
+				opposite_dir_change.async_change_init(_on_change_dir_timer_complete.bind(true))
+				
+				__reset_changers_cooldown()
+				print_.lsm_action_strafe("", "~~ OPPOSITE dir change and dip triggered")
 
-	elif curr_direction.would_be_slight_change(new_dir):
-		if slight_dir_change.cooldown.update(delta):
-			print_.lsm_action_strafe("", "~~ slight dir change and change_cooldown completed")
-			slight_dir_change.speed_dip_init()
-			slight_dir_change.async_change_init(_on_change_dir_timer_complete.bind(false))
-			
-			slight_dir_change.cooldown.reset()
-			opposite_dir_change.cooldown.reset()
-			print_.lsm_action_strafe("", "~~ slight dir change and dip triggered")
+		StrafeDirection.ChangeType.SLIGHT:
+			if slight_dir_change.cooldown.update(delta):
+				slight_dir_change.speed_dip_init()
+				slight_dir_change.async_change_init(_on_change_dir_timer_complete.bind(false))
+				
+				__reset_changers_cooldown()
+				print_.lsm_action_strafe("", "~~ SLIGHT dir change and dip triggered")
+		
+		StrafeDirection.ChangeType.SLIGHTEST:
+			if slightest_dir_change.cooldown.update(delta):
+				_on_change_dir_timer_complete(false)
+				
+				__reset_changers_cooldown()
+				print_.lsm_action_strafe("", "~~ SLIGHTEST dir change")
 
-	else: # no change
-		opposite_dir_change.cooldown.reset()
-		slight_dir_change.cooldown.reset()
+		StrafeDirection.ChangeType.SAME:
+			__reset_changers_cooldown()
 
 
 	animator_manager.set_global_speed_scale(SPEED_MULT)
@@ -98,7 +124,7 @@ func update(input: InputPackage, delta: float) -> void:
 
 func _on_change_dir_timer_complete(is_opposite_change: bool):
 	var new_dir = curr_direction.detect_dir_from_input(InputManager.current_input)
-	print_.lsm_action_strafe("", "_on_change_dir_timer_complete, new_dir: " + str(new_dir))
+	print_.lsm_action_strafe("", pp.s("_on_change_dir_timer_complete, new_dir:", StrafeDirection.Dir.find_key(new_dir)))
 	curr_direction.set_direction(new_dir)
 	_switch_animation(is_opposite_change)
 
@@ -112,15 +138,16 @@ func animate(): # ▶️
 
 func _switch_animation(is_opposite_change: bool):
 	var next_anim = anim_container.get_by_name(curr_direction.get_curr_anim_id())
-	
+	var curr_anim = anim
+
 	var start_offset = 0
 	var blend_time := 0.2
 
-	if next_anim.anim_id == anim.anim_id:
+	if next_anim.anim_id == curr_anim.anim_id:
 		print_.lsm_action_strafe("", "_switch_animation same anim, won't switch")
 		return
 
-	if anim.anim_id in curr_direction.get_all_anims():
+	if next_anim.anim_id in curr_direction.get_all_anims() and curr_anim.anim_id in curr_direction.get_all_anims():
 		var r = sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:
 			start_offset = r

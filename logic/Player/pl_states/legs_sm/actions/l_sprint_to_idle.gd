@@ -7,15 +7,15 @@ var extra_speed: float = 0.0 # Not vector!
 
 
 func _ready():
-	SPEED = 3.0
-	ANGULAR_SPEED = 2.0 # Allow slight turning while stopping
-	TURN_SPEED = 2.0
+	default_sp.SPEED = 3.0
+	default_sp.ANGULAR_SPEED = 2.0 # Allow slight turning while stopping
+	default_sp.TURN_SPEED = 2.0
 
 	blend_time_by_action = {
 		Leg.Act.run: 0.2 + _dev_add_blend
 	}
 
-func on_enter_action(input: InputPackage) -> void:
+func on_enter_action(input_: InputPackage) -> void:
 	var prev_speed = legs_sm.get_tranfer_data_by_key("manual_speed")
 	if prev_speed and prev_speed is float:
 		var rm_start_speed = animator_manager.calculate_animation_start_root_velocity(anim)
@@ -27,8 +27,8 @@ func on_enter_action(input: InputPackage) -> void:
 		fade_interpolator.initialise(0.0, 0.0, 0.0)
 
 
-func update(input: InputPackage, delta: float):
-	rotate_with_input_vector(input, delta)
+func update(input_: InputPackage, delta: float):
+	pm().rotate_with_input_vector(input_, delta)
 	_move_with_root(delta)
 
 

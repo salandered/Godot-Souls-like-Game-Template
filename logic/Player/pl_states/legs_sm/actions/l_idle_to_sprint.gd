@@ -2,9 +2,9 @@ extends LegsAction
 
 
 func _ready():
-	SPEED = 3.0
-	ANGULAR_SPEED = 4
-	TURN_SPEED = 2.0
+	default_sp.SPEED = 3.0
+	default_sp.ANGULAR_SPEED = 4
+	default_sp.TURN_SPEED = 2.0
 
 
 func on_exit_action() -> void:
@@ -12,6 +12,6 @@ func on_exit_action() -> void:
 	legs_sm.fill_tranfer_data({"rm_speed": final_rm_speed})
 
 
-func update(input: InputPackage, delta: float):
-	rotate_with_input_vector(input, delta)
-	move_with_root(delta)
+func update(input_: InputPackage, delta: float):
+	pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))
+	pm().move_with_root(delta)

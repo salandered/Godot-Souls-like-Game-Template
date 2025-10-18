@@ -23,20 +23,20 @@ extends PlayerState
 var landing_phase := "pre_landing"
 var has_control := false
 
-func on_enter_state(input: InputPackage) -> void:
+func on_enter_state(input_: InputPackage) -> void:
 	landing_phase = "pre_landing"
 	has_control = false
 	
 	# Still falling during prep
 	print_.psm("enter " + state_name, "Starting pre-landing")
 
-func update(input: InputPackage, delta: float) -> void:
+func update(input_: InputPackage, delta: float) -> void:
 	if landing_phase == "pre_landing":
 		# Continue falling while playing prep animation
 		player.velocity.y -= player.jump_data.jump_fall_gravity * delta
 		
 		# Keep forward momentum
-		apply_air_control(input, delta)
+		apply_air_control(input_, delta)
 		
 		# Check ground contact
 		if player.is_on_floor() or area_awareness.get_floor_distance() < 0.05:
@@ -55,7 +55,7 @@ func update(input: InputPackage, delta: float) -> void:
 			player.velocity.z = xz_delta.z
 		else:
 			has_control = true
-			process_input_vector(input, delta)
+			pm().rotate_with_input_vector_simple(input_, delta)
 
 func on_ground_contact() -> void:
 	# Impact moment - adjust momentum but keep moving
@@ -68,7 +68,7 @@ func on_ground_contact() -> void:
 	
 	print_.psm("CONTACT", pp.s("impact_vel", player.velocity.y, "xz_speed", Vector3(player.velocity.x, 0, player.velocity.z).length()))
 
-func check_transition(input: InputPackage) -> PLVerdict:
+func check_transition(input_: InputPackage) -> PLVerdict:
 	# Can transition once we're through impact and into run blend
 	if landing_phase == "running" and current_action.time_remaining() <= 0.2:
 		var xz_speed = Vector3(player.velocity.x, 0, player.velocity.z).length()
@@ -80,9 +80,9 @@ func check_transition(input: InputPackage) -> PLVerdict:
 	
 	return PLVerdict.new("")
 
-func apply_air_control(input: InputPackage, delta: float) -> void:
+func apply_air_control(input_: InputPackage, delta: float) -> void:
 	# Minimal air control during pre-landing
-	var input_dir := velocity_by_input(input, delta)
+	var input_dir := velocity_by_input(input_, delta)
 	input_dir.y = 0
 	input_dir = input_dir.normalized()
 	

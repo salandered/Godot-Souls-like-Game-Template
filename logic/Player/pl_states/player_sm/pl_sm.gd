@@ -9,10 +9,12 @@ var player: Princess
 
 @export var animator_manager: AnimatorManager
 @export var animation_settings: AnimationPlayer
+@onready var container: PlayerStatesContainer = %StatesContainer
+@onready var player_movement: PlayerMovement = %PlayerMovement
+
 
 var current_state: PlayerState
 
-@onready var container: PlayerStatesContainer = %StatesContainer
 
 @export var SPEED: float = 3.0
 @export var TURN_SPEED: float = 2.0
@@ -32,12 +34,12 @@ func initialise():
 	animation_settings.play(A.SET_full_body, 0.2)
 
 
-func update(input: InputPackage, delta: float) -> void:
-	input = combat.contextualize(input)
-	input = area_awareness.contextualize(input)
-	area_awareness.last_input_package = input
+func update(input_: InputPackage, delta: float) -> void:
+	input_ = combat.contextualize(input_)
+	input_ = area_awareness.contextualize(input_)
+	area_awareness.last_input_package = input_
 
-	var verdict := current_state._check_transition(input)
+	var verdict := current_state._check_transition(input_)
 	verdict._speak_freely()
 
 	if verdict.needs_switch():
@@ -47,8 +49,8 @@ func update(input: InputPackage, delta: float) -> void:
 		current_state._on_exit_state()
 		# now current_state is next state
 		current_state = container.state_by_name(verdict.next_state)
-		current_state._on_enter_state(input)
+		current_state._on_enter_state(input_)
 
 	# TODO: moved back here, Player States triggers _update from legs_animator behavior -> double dipping
 	# current_state.update_resources(delta)
-	current_state._update(input, delta)
+	current_state._update(input_, delta)

@@ -54,9 +54,18 @@ var node_to_l_behavior_data: Dictionary = {
 			MotionType.STOP: Leg.Act.idle,
 			},
 			[
-				Leg.Act.vert_locked_run,
+				# Leg.Act.vert_locked_run,
 			]
 	)),
+	# "DodgeLegs": BehaviorData.new(Leg.Beh.dodge,
+	# 	SupportedActions.new({
+	# 		MotionType.IDLE: Leg.Act.idle,
+	# 		MotionType.START: Leg.Act.dodge,
+	# 		MotionType.LOOP: Leg.Act.dodge,
+	# 		MotionType.STOP: Leg.Act.idle,
+	# 		},
+	# 		[]
+	# )),
 	"SprintLegs": BehaviorData.new(Leg.Beh.sprint,
 		SupportedActions.new({
 			MotionType.IDLE: Leg.Act.idle,
@@ -79,19 +88,20 @@ var node_to_l_behavior_data: Dictionary = {
 
 
 var node_to_l_action_data: Dictionary = {
-	"IdleToSprint": ActionData.new(Leg.Act.idle_to_sprint, A.idle_to_sprint, MotionType.START),
-	
-	"Idle": ActionData.new(Leg.Act.idle, A.idle, MotionType.IDLE),
-	"Run": ActionData.new(Leg.Act.run, A.run, MotionType.LOOP),
-	"Turn180": ActionData.new(Leg.Act.turn_180, A.turn_180_R, MotionType.START),
+	"IdleToSprint": ActionData.new(Leg.Act.idle_to_sprint, A.move.idle_to_sprint, MotionType.START),
 
-	"Strafe": ActionData.new(Leg.Act.strafe, A.strafe_R, MotionType.LOOP),
+	"Idle": ActionData.new(Leg.Act.idle, A.move.idle, MotionType.IDLE),
+	"Run": ActionData.new(Leg.Act.run, A.move.run, MotionType.LOOP),
+	"Turn180": ActionData.new(Leg.Act.turn_180, A.move.turn_180_R, MotionType.START),
+
+	"Strafe": ActionData.new(Leg.Act.strafe, A.strafe.strafe_R, MotionType.LOOP),
 	# "VertLockedWalk": ActionData.new(Leg.Act.vert_locked_walk, A.combat_walk_f, MotionType.LOOP),
-	"VertLockedRun": ActionData.new(Leg.Act.vert_locked_run, A.combat_run_f, MotionType.LOOP),
+	# "VertLockedRun": ActionData.new(Leg.Act.vert_locked_run, A.strafe.combat_run_f, MotionType.LOOP),
+	# "Dodge": ActionData.new(Leg.Act.dodge, A.dodge.dodge_R, MotionType.IDLE),
 
-	"FastTurn180": ActionData.new(Leg.Act.fast_turn_180, A.fast_turn_180_R, MotionType.START),
-	"SprintToIdle": ActionData.new(Leg.Act.sprint_to_idle, A.sprint_to_idle, MotionType.STOP),
-	"Sprint": ActionData.new(Leg.Act.sprint, A.sprint, MotionType.LOOP),
+	"FastTurn180": ActionData.new(Leg.Act.fast_turn_180, A.move.fast_turn_180_R, MotionType.START),
+	"SprintToIdle": ActionData.new(Leg.Act.sprint_to_idle, A.move.sprint_to_idle, MotionType.STOP),
+	"Sprint": ActionData.new(Leg.Act.sprint, A.move.sprint, MotionType.LOOP),
 	"Double": ActionData.new(Leg.Act.double, A.fake_anim, MotionType.IDLE),
 	# "RunToSprintAction": LegActionData.ActionData.new(Leg.Act.run_to_sprint, A.combat_sprint_start,  MotionType.START),
 	# "Turn90ToRun": ActionData.new(Leg.Act.turn_90_to_run, A.turn_90_to_run_R, MotionType.START),

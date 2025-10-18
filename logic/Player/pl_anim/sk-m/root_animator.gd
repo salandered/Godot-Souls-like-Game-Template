@@ -1,0 +1,122 @@
+extends Node
+## Sub part of ModifierAnimator which calculates root related data
+class_name RootAnimator
+
+@onready var full_body: ModifierAnimator = %FullBody
+
+
+func get_global_speed_scale() -> float:
+	return full_body.global_speed_scale
+
+func get_curr_playback() -> AnimPlayback:
+	return full_body.curr_playback
+
+func get_prev_playback() -> AnimPlayback:
+	return full_body.prev_playback
+
+func get_blend_playback() -> BlendPlayback:
+	return full_body.blend_playback
+
+func get_custom_delta() -> float:
+	return full_body.custom_delta
+
+
+func get_prev_root_rotation() -> float:
+	if get_prev_playback().get_effective_progress() >= get_prev_playback().anim.duration:
+		print_.skm("RootAnimator", "Will return 0.0. effective_prog >= anim.duration. Details:" + get_prev_playback()._to_string_short(), 0, LogL.FORCE_PRINT)
+		return 0.0
+	var prev_rotation_delta = _calculate_rotation_delta(get_prev_playback(), 0)
+	# var rotation_ = prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
+	var rotation_ = prev_rotation_delta * get_global_speed_scale()
+	# if abs(rotation_) > 0.0001:
+	#  	print_.skm("", "get_prev_root_rotation(): delta=%.4f | result=%.4f" % [prev_rotation_delta, residual_rotation])
+
+	return rotation_
+
+
+func get_root_velocity(y_zeroed: bool = true) -> Vector3:
+	var curr_velocity = _calculate_velocity_delta(get_curr_playback(), 0)
+	
+	if get_blend_playback().is_blending:
+		var prev_velocity = _calculate_velocity_delta(get_prev_playback(), 0)
+		curr_velocity = prev_velocity.lerp(curr_velocity, get_blend_playback().percentage)
+	
+	if y_zeroed:
+		curr_velocity.y = 0
+	
+	return curr_velocity * get_global_speed_scale()
+
+
+func get_root_rotation(y_only: bool = true) -> float:
+	var curr_rotation_delta = _calculate_rotation_delta(get_curr_playback(), 0)
+	
+	# NOTE: Not supporing two animations in a row with root rotation. 
+	#       For one root rot and other w/o it, this should be checked for sanity
+	# if blend_playback.is_blending:
+	# 	var prev_rot_track := __get_rotation_track(0, prev_playback.native_anim)
+		
+	# 	# Only blend if previous animation also has rotation
+	# 	if prev_rot_track != -1: # WARNING: what if track existed but we dont use it? switch to AnimationData
+	# 		var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
+	# 		curr_rotation_delta = lerp(prev_rotation_delta, curr_rotation_delta, blend_playback.percentage)
+	# 		# prints(u.fr(), "ROT_BLEND", curr_rotation_delta)
+	
+	return curr_rotation_delta * get_global_speed_scale()
+
+
+func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int) -> Vector3:
+	var pos_track := full_body.__get_position_track(bone_idx, playback.native_anim)
+	if pos_track == -1 or playback.native_anim.track_get_key_count(pos_track) <= 1:
+		return Vector3.ZERO
+	
+	var scaled_delta = get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
+	var curr_progress = playback.get_effective_progress()
+	var prev_progress = max(0.0, curr_progress - scaled_delta)
+	
+	var prev_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, prev_progress)
+	var curr_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, curr_progress)
+	
+	return (curr_pos - prev_pos) / scaled_delta if scaled_delta > 0 else Vector3.ZERO
+
+
+func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
+	var rot_track := full_body.__get_rotation_track(bone_idx, playback.native_anim)
+	if rot_track == -1:
+		return 0.0
+	
+	var scaled_delta = get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
+	var curr_progress = playback.get_effective_progress()
+	var prev_progress = max(0.0, curr_progress - scaled_delta)
+	
+	var prev_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, prev_progress)
+	var curr_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, curr_progress)
+	
+	var delta_rot = prev_rot.inverse() * curr_rot
+	var rotation_delta = delta_rot.get_euler().y
+	
+	# Handle angle wrapping
+	if rotation_delta > PI:
+		rotation_delta -= TAU
+	elif rotation_delta < -PI:
+		rotation_delta += TAU
+	
+	return rotation_delta
+
+## needs polishing
+func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
+	var root_pos_track := full_body.__get_position_track(0, anim.native_anim)
+	
+	if root_pos_track == -1 or anim.native_anim.track_get_key_count(root_pos_track) <= 1:
+		return 0.0
+	
+	# Sample at start and a small delta to get initial velocity
+	var sample_delta = 0.016 # One frame at 60fps
+	var start_time = anim._start_time
+	var pos_at_start = anim.native_anim.position_track_interpolate(root_pos_track, start_time)
+	var pos_at_delta = anim.native_anim.position_track_interpolate(root_pos_track, start_time + sample_delta)
+	
+	var velocity = (pos_at_delta - pos_at_start) / sample_delta
+	velocity.y = 0
+	
+	var result = velocity.length() * anim.speed_scale
+	return result

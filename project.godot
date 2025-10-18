@@ -71,6 +71,7 @@ folder_colors={
 "res://-assets-/x_misc/x_icons/yellow/": "yellow",
 "res://addons/": "gray",
 "res://addons/maaacks_game_template/base/scenes/opening/": "gray",
+"res://ideas/": "gray",
 "res://logic/Common/Weapons/": "red",
 "res://logic/Common/animation/": "orange",
 "res://logic/Enemies/Gundyr/": "blue",

@@ -7,24 +7,54 @@ var anim_container: BaseAnimationContainer
 var animator_manager: AnimatorManager
 
 var action_name: String
-
 var anim: AnimationData
-
 var default_blend_time: float = 0.2
 
 var _enter_action_time: float
 
 
+# region: INTERFACE 
+
 ## if action needs something special to work. Would be called from states container.
 ## Reason: We rarely can rely on _ready
-func initialise():
+@abstract func initialise() -> void
+
+
+@abstract func update(input_: InputPackage, _delta: float)
+
+
+func _on_enter_action(input_: InputPackage) -> void:
+	mark_enter_action()
+	on_enter_action(input_)
+	animate()
+
+
+func on_enter_action(input_: InputPackage) -> void:
 	pass
+
+## NOTE: overriden in LegsAction (may be a hint that abstraction layers not quite there)
+func _on_exit_action() -> void:
+	on_exit_action()
+
+
+func on_exit_action() -> void:
+	pass
+
 	
+## TODO: DANGER: Action must implement set_overlay_anim, otherwise time_spent() 
+## would stuck and return final time_spent of the previous action
+## For now some action may not use an animation, but then they either should work only with
+## get_real_time_spent (and know what they doing), or not working with the time at all.
+@abstract func animate() -> void
+
+# endregion
+
 
 # region: TIME MANAGEMENT
 
 func mark_enter_action() -> void:
 	_enter_action_time = Time.get_unix_time_from_system()
+
 
 ## needs mark_enter_action to be set beforehand
 func get_real_time_spent() -> float:
@@ -127,35 +157,6 @@ func __reject() -> bool:
 # endregion
 
 
-# region: INTERFACE 
-
-@abstract func update(_input: InputPackage, _delta: float)
-
-
-func _on_enter_action(input: InputPackage) -> void:
-	mark_enter_action()
-	on_enter_action(input)
-	animate()
-
-func on_enter_action(_input: InputPackage) -> void:
-	pass
-
-## NOTE: overriden in LegsAction (may be a hint that abstraction layers not quite there)
-func _on_exit_action() -> void:
-	on_exit_action()
-
-func on_exit_action() -> void:
-	pass
-	
-## TODO: DANGER: Action must implement set_overlay_anim, otherwise time_spent() 
-## would stuck and return final time_spent of the previous action
-## For now some action may not use an animation, but then they either should work only with
-## get_real_time_spent (and know what they doing), or not working with the time at all.
-@abstract func animate() -> void
-
-# endregion
-
-
 # region: GET ANIMATION PARAMETERS
 
 func switches_to_queue() -> bool:
@@ -182,6 +183,5 @@ func tracks_input_vector() -> bool:
 # 	if tracks_input_vector():
 # 		return 0
 # 	return states_data_repo.time_til_next_controllable_frame(backend_animation, time_spent())
-
 
 # endregion

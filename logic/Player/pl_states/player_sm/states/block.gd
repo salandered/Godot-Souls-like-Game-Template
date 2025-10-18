@@ -4,10 +4,10 @@ extends PlayerState
 @export var block_sector: float = 3.14
 
 
-func check_transition(input: InputPackage) -> PLVerdict:
+func check_transition(input_: InputPackage) -> PLVerdict:
 	if not player.is_on_floor():
 		return PLVerdict.new(PS.midair)
-	return best_next_state_from_input(input)
+	return best_next_state_from_input(input_)
 
 
 # Overrides react_on_hit to handle blocking via stamina (and cuts regen while shielded)

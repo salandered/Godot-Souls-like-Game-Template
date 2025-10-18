@@ -7,6 +7,7 @@ class Beh:
 	const idle := "l_behavior_idle"
 	const run := "l_behavior_run"
 	const strafe := "l_behavior_strafe🚶🏻‍♀️"
+	# const dodge := "l_behavior_dodge🤸"
 	const sprint := "l_behavior_sprint"
 	const double := "l_behavior_double"
 # const l_behavior_air := "l_behavior_air"
@@ -18,8 +19,9 @@ class Act:
 	const run := "l_action_run🏃"
 
 	const strafe := "l_action_strafe🚶🏻‍♀️"
-	const vert_locked_walk := "l_vert_locked_walk✏️"
-	const vert_locked_run := "l_vert_locked_run✏️"
+	# const vert_locked_walk := "l_vert_locked_walk✏️"
+	# const vert_locked_run := "l_vert_locked_run✏️"
+	# const dodge := "l_dodge🤸"
 
 	const turn_180 := "l_turn_180 ↻"
 	const fast_turn_180 := "l_fast_turn_180 ↻💨"

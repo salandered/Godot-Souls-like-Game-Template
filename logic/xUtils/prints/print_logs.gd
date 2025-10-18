@@ -23,12 +23,12 @@ const COMBO_B := true
 const HIT_BOX_B := true
 
 # PLAYER
-const PSM_B := false
+const PSM_B := true
 const SKM_B := false
 
 # PLAYER LSM
 const LSM_BEH_B := true
-const LSM_ACTION_STRAFE_B := false
+const LSM_ACTION_STRAFE_B := true
 const LSM_ACTION_B := true
 
 # endregion
@@ -153,7 +153,6 @@ static func lsm_action_strafe(add_prefix_: String, text: String, info_indents: i
 static func lsm_action_anim(add_prefix_: String, anim_name: String, prev_action_name, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
 	var msg = pp.s(
 		"anim: ", pp.in_q(anim_name),
-		"Params based on prev", pp.in_q(prev_action_name) + ":",
 		"blend_t", blend_time,
 		"start_t_off", start_time_offset
 		)

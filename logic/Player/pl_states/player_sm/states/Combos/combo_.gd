@@ -9,7 +9,7 @@ extends Node
 @export var state_to_trigger: String
 
 ## main method. decides if the combo is triggered
-@abstract func is_triggered(input: InputPackage) -> bool
+@abstract func is_triggered(input_: InputPackage) -> bool
 
 
 # region: DOCS: PHILOSOPY AND DETAILS BEHIND COMBO

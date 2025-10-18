@@ -48,10 +48,10 @@ func react_on_hit(hit_data: HitData) -> void:
 # TODO: _process or _physics_process? changed to _process for now
 func _process(delta) -> void:
 	# CONTROLLER (INPUT)
-	var input := InputManager.current_input
+	var input_ := InputManager.current_input
 	
 	# MODEL (SIMULATION)
-	model.update(input, delta)
+	model.update(input_, delta)
 	
 	
 	# VISUALISE (PRESENTATION)

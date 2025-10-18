@@ -18,9 +18,9 @@ var curr_turn: TurnData = TurnData.new()
 var COMPLETE_ROOT_TURN_FEATURE: bool = false
 
 func initialise():
-	SPEED = 3.0
-	TURN_SPEED = 2.0
-	ANGULAR_SPEED = 10.0
+	default_sp.SPEED = 3.0
+	default_sp.TURN_SPEED = 2.0
+	default_sp.ANGULAR_SPEED = 10.0
 
 	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name.TURN_180_APEX, 0.25)
 	
@@ -30,7 +30,7 @@ func initialise():
 		Leg.Act.turn_180: turn_180_blend_time,
 	}
 
-func on_enter_action(input: InputPackage):
+func on_enter_action(input_: InputPackage):
 	match legs_sm.prev_action.action_name:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
@@ -39,8 +39,8 @@ func on_enter_action(input: InputPackage):
 			if not start_speed:
 				print_.warn("no start_speed! will use 1.0")
 				start_speed = 1.0
-			speed_from_turn.initialise(start_speed + 1.5, SPEED, accel_from_turn_curve, accel_from_turn_time)
-			angular_sp_from_turn.initialise(ANGULAR_SPEED / 3, ANGULAR_SPEED, 1)
+			speed_from_turn.initialise(start_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
+			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1)
 			var raw_turn_data = legs_sm.get_tranfer_data_by_key("turn_data")
 			if raw_turn_data == null:
 				prints(u.fr(), "no 'turn_data' data. assuming turn completed")
@@ -58,10 +58,10 @@ func on_exit_action():
 	speed_from_turn.reset()
 	angular_sp_from_turn.reset()
 
-func update(input: InputPackage, delta: float):
+func update(input_: InputPackage, delta: float):
 	var SPEED_MULT = 1.0 # default multiplier
-	var CURR_SPEED = SPEED # default actual speed
-	var CURR_ANGULAR_SPEED = ANGULAR_SPEED
+	var CURR_SPEED = default_sp.SPEED # default actual speed
+	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
 
 	match legs_sm.prev_action.action_name:
 		Leg.Act.idle:
@@ -74,9 +74,9 @@ func update(input: InputPackage, delta: float):
 		_complete_root_turn(CURR_SPEED)
 	else:
 		# prints("~~", SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
-		var speed_config = SpeedConfig.new(SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
+		var speed_config = SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
 		speed_config.tie_turn_sp_to_speed(0.6)
-		process_input_vector(input, delta, speed_config)
+		pm().process_input_vector(input_, delta, speed_config)
 
 	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
 
@@ -91,7 +91,7 @@ func animate(): # ▶️
 	
 	match legs_sm.prev_action.action_name:
 		Leg.Act.idle:
-			start_time_offset = 0.2667 # sync with idle where left leg forward
+			start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:
 			start_time_offset = __start_time_offset_dev # sync with idle where left leg forward
 		Leg.Act.sprint:
@@ -105,15 +105,15 @@ func animate(): # ▶️
 
 func _complete_root_turn(CURR_SPEED):
 	var rotation_delta = animator_manager.get_prev_root_rotation()
-	var result = apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
+	var result = pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
 	curr_turn.update(result.completed, result.accum_rot)
 
 	get_player().velocity = get_player().basis.z * CURR_SPEED
-	# OR move_with_input_vector(input, delta, CURVE_SPEED, RESULT_SPEED)
+	# OR move_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
 
 var _dev_add_blend = 0
 
 func _input(event):
-	SPEED = u._dev_change_param(event, SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
+	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 	__start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)

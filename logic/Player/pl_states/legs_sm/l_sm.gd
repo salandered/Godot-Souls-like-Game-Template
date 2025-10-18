@@ -19,8 +19,8 @@ var current_behavior: LegsBehavior
 var current_action: LegsAction
 var prev_action: LegsAction
 
-func update(input: InputPackage, delta: float) -> void:
-	current_behavior.update(input, delta)
+func update(input_: InputPackage, delta: float) -> void:
+	current_behavior.update(input_, delta)
 
 
 # TODO: fast solution. Design proper action (or states) ability to share data.
@@ -36,7 +36,7 @@ func get_tranfer_data_by_key(key) -> Variant:
 	return data
 
 
-func switch_to(next_behavior: LegsBehavior, input: InputPackage):
+func switch_to(next_behavior: LegsBehavior, input_: InputPackage):
 	if next_behavior == current_behavior:
 		print_.lsm_beh("", "not switching legs, same behavior: " + current_behavior.behavior_name)
 		return
@@ -45,4 +45,4 @@ func switch_to(next_behavior: LegsBehavior, input: InputPackage):
 	if next_behavior.behavior_name == Leg.Beh.sprint:
 		print()
 	current_behavior = next_behavior
-	current_behavior._on_enter_behavior(input)
+	current_behavior._on_enter_behavior(input_)

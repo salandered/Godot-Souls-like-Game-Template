@@ -54,9 +54,9 @@ func _translate_combat_actions(new_input: InputPackage):
 		if translated_to_state:
 			new_input.actions.append(translated_to_state)
 
-# func filter_with_resources(input: InputPackage):
+# func filter_with_resources(input_: InputPackage):
 # 	if model.resources.statuses.has("fatique"):
-# 		input.actions.erase("sprint")
+# 		input_.actions.erase("sprint")
 
 static func _priority_sort(a: String, b: String) -> bool:
 	if _inputs_priority[a] > _inputs_priority[b]:

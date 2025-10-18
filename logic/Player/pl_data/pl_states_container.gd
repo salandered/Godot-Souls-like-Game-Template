@@ -43,7 +43,10 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 	"Run": StateData.new(PS.run, 2, Leg.Beh.run, true),
 	"Strafe": StateData.new(PS.strafe, 2, Leg.Beh.strafe, true),
 	"Sprint": StateData.new(PS.sprint, 3, Leg.Beh.sprint, true),
-	"SmallJumpRun": StateData.new(PS.small_jump_run, 10),
+	
+	"Dodge": StateData.new(PS.dodge, 10),
+	
+	# "SmallJumpRun": StateData.new(PS.small_jump_run, 10),
 	"JumpSprint": StateData.new(PS.jump_sprint, 10),
 	"Midair": StateData.new(PS.midair, 10),
 	"LandingSprint": StateData.new(PS.landing_sprint, 10),
@@ -68,24 +71,27 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 var pl_action_data_list: Array[ActionData] = [
 	# move
 	# "Walk": ActionData.new(PS.walk,PS.Act.block, A.walk ),
-	ActionData.new(PS.small_jump_run, PS.Act.small_jump_run, A.small_jump_run),
-	ActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.jump_sprint),
-	ActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.landing_sprint),
-	ActionData.new(PS.midair, PS.Act.midair, A.midair),
+	# ActionData.new(PS.small_jump_run, PS.Act.small_jump_run, A.air.small_jump_run),
+	ActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.air.jump_sprint),
+	ActionData.new(PS.midair, PS.Act.midair, A.air.midair),
+	ActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.air.landing_sprint),
+	
 	ActionData.new(PS.roll, PS.Act.roll, A.roll),
 	ActionData.new(PS.death, PS.Act.death, A.death),
-	# fight
+
+
+	ActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R),
 	
 	## attacks
-	ActionData.new(PS.longsword_1, PS.Act.longsword_1, A.axe_slice_1),
-	ActionData.new(PS.longsword_2, PS.Act.longsword_2, A.axe_slice_2),
-	
-	ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.axe_slice_1),
-	ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.axe_slice_2),
+	ActionData.new(PS.longsword_1, PS.Act.longsword_1, A.attack.axe_slice_1),
+	ActionData.new(PS.longsword_2, PS.Act.longsword_2, A.attack.axe_slice_2),
+
+	ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1),
+	ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2),
 
 
-	ActionData.new(PS.staggered, PS.Act.staggered, A.staggered),
-	ActionData.new(PS.parry, PS.Act.parry, A.parry),
-	ActionData.new(PS.parried, PS.Act.parried, A.parried),
-	ActionData.new(PS.riposte, PS.Act.riposte, A.riposte_attack),
+	ActionData.new(PS.staggered, PS.Act.staggered, A.combat.staggered),
+	ActionData.new(PS.parry, PS.Act.parry, A.combat.parry),
+	ActionData.new(PS.parried, PS.Act.parried, A.combat.parried),
+	ActionData.new(PS.riposte, PS.Act.riposte, A.combat.riposte_attack),
 ]

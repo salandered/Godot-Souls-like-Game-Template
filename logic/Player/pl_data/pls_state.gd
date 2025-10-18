@@ -28,6 +28,7 @@ const idle := "idle"
 const run := "run"
 const strafe := "strafe"
 const sprint := "sprint"
+const dodge := "dodge"
 const small_jump_run := "jump_run"
 const jump_sprint := "jump_sprint"
 const midair := "midair"
@@ -56,8 +57,7 @@ class Act:
 	const parried := "action_parried🖊️"
 	const riposte := "action_riposte🖊️"
 
-	const idle := "action_run_idle🖊️"
-	const sprint_idle := "action_sprint_idle🖊️"
+	# const idle := "action_run_idle🖊️"
 
 	const small_jump_run := "action_small_jump_run🖊️"
 	const jump_sprint := "action_jump_sprint🖊️"
@@ -65,6 +65,7 @@ class Act:
 	const landing_run := "action_landing_run🖊️"
 	const landing_sprint := "action_landing_sprint🖊️"
 	const roll := "action_roll🖊️"
+	const dodge := "action_dodge🖊️"
 	const death := "action_death🖊️"
 
 

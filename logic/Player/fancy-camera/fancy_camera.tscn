@@ -539,6 +539,7 @@ material_override = SubResource("StandardMaterial3D_6recs")
 [node name="CameraNest" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3441956, -2.6694846)
+visible = false
 
 [node name="CSGSphereNest2" type="CSGSphere3D" parent="CameraNest"]
 unique_name_in_owner = true

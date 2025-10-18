@@ -67,9 +67,19 @@ func accept_all():
 	_accept_player_actions()
 	_accept_legs_actions()
 
-	# specific individual actions preparations. Analogue of _ready()
+	# specific set ups. Analogue of _ready()
+	_initialise_pl_state()
+	_initialise_pl_actions()
 	_initialise_legs_actions()
 
+
+func _initialise_pl_state():
+	for state: PlayerState in _states.values():
+		state.initialise()
+
+func _initialise_pl_actions():
+	for action: PlayerAction in _player_actions.values():
+		action.initialise()
 
 func _initialise_legs_actions():
 	for action: LegsAction in _leg_actions.values():
@@ -134,10 +144,21 @@ func _accept_player_states() -> void:
 func _accept_player_actions():
 	var states_container = StatesContainer.new()
 	
+	var explicit_pl_actions = {}
+	for pl_act in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
+		explicit_pl_actions[pl_act.name] = pl_act
+	print_.container(em.pin, "explicit_pl_actions" + pp._dict(explicit_pl_actions))
+
 	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
-		var child = PlayerAction.new() # Create a generic PlayerAction node
-		
-		child.name = u.to_pascal_case(action_data.action_name)
+		var node_name = u.to_pascal_case(action_data.action_name)
+
+		var child = null
+		if explicit_pl_actions.has(node_name):
+			child = explicit_pl_actions[node_name]
+			print_.container("", node_name + " found in explicit_pl_actions")
+		else:
+			child = PlayerAction.new()
+			child.name = node_name
 		
 		print_.container("", "Creating action: " + action_data.action_name)
 		
@@ -157,8 +178,8 @@ func _accept_player_actions():
 		
 		assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
 		
-		
-		add_child(child) # Add to tree
+		if not explicit_pl_actions.has(node_name):
+			add_child(child) # add to tree
 	
 	print_.container("", "===========  Accepted actions ===========")
 	print_.container("", str(_player_actions))

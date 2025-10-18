@@ -1,7 +1,7 @@
 extends PlayerState
 
 
-func on_enter_state(input: InputPackage):
+func on_enter_state(input_: InputPackage):
 	player.add_to_group("parried_humanoid")
 
 

@@ -53,6 +53,16 @@ func _label_inputs():
 	t += "\ncam forward %5.2f  orbit %5.2f" % [last_input.forward_input, last_input.orbit_input]
 	t += "\n vel_by_input_" + pp.s(pp.vec3(vel_by_input_), vel_by_input_.length())
 	t += "\n vel_by_input_ norm" + pp.s(pp.vec3(vel_by_input_.normalized()), vel_by_input_.normalized().length())
+	
+	var curr_dir = "-none-"
+	if player.model.legs_sm:
+		if player.model.legs_sm.current_action:
+			if player.model.legs_sm.current_action.action_name == Leg.Act.strafe:
+				var strafe_act = player.model.legs_sm.current_action
+				if strafe_act.curr_direction:
+					curr_dir = strafe_act.curr_direction.pp_curr_dir()
+
+	t += "\n 8-dir-strafe   " + str(curr_dir)
 	label_inputs.text = t
 
 

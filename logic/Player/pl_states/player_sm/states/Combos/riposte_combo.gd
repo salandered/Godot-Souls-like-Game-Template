@@ -1,14 +1,14 @@
 extends Combo_
 
 
-func is_triggered(input: InputPackage) -> bool:
+func is_triggered(input_: InputPackage) -> bool:
 	print_.combo(name, pp.s("is_triggered?",
 				"triggered_state:", state_to_trigger,
-				"current input.actions:", input.actions
+				"current input_.actions:", input_.actions
 			))
 	print_.combo(name, "Checks only PS.longsword_1 for now")
-	# if input.actions.has( current weapon light attack state code ) in future for scalability
-	if input.actions.has(PS.longsword_1) and have_target_for_ripost():
+	# if input_.actions.has( current weapon light attack state code ) in future for scalability
+	if input_.actions.has(PS.longsword_1) and have_target_for_ripost():
 		print_.combo(name, "triggered")
 		return true
 	return false

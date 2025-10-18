@@ -9,9 +9,11 @@ var speed_from_turn = FloatLinearInterpolator.new()
 var angular_from_turn = FloatLinearInterpolator.new()
 
 func _ready():
-	SPEED = 5.0
-	TURN_SPEED = 3.2
-	ANGULAR_SPEED = 10
+	default_sp.SPEED = 5.0
+	default_sp.TURN_SPEED = 3.2
+	default_sp.ANGULAR_SPEED = 10
+
+	
 	blend_time_by_action = {
 		Leg.Act.idle_to_sprint: 0.6,
 		Leg.Act.run: 0.3,
@@ -19,21 +21,21 @@ func _ready():
 	}
 	
 
-func on_enter_action(input: InputPackage):
+func on_enter_action(input_: InputPackage):
 	# means no interpolation. Will be returning constant
 	match legs_sm.prev_action.action_name:
 		Leg.Act.idle_to_sprint:
 			var _start_speed = legs_sm.get_tranfer_data_by_key("rm_speed")
 			if _start_speed:
-				speed_from_idle.initialise(_start_speed, SPEED, SPEED_LERP_TIME)
+				speed_from_idle.initialise(_start_speed, default_sp.SPEED, SPEED_LERP_TIME)
 		# Leg.Act.legs_action_run: # do later
 		Leg.Act.fast_turn_180:
 			var _start_speed = legs_sm.get_tranfer_data_by_key("rm_speed")
 			if _start_speed:
-				speed_from_turn.initialise(_start_speed, SPEED, accel_time_from_turn)
+				speed_from_turn.initialise(_start_speed, default_sp.SPEED, accel_time_from_turn)
 			else:
-				speed_from_turn.initialise(SPEED, SPEED, 0)
-			angular_from_turn.initialise(ANGULAR_SPEED / 10, ANGULAR_SPEED, 1.0)
+				speed_from_turn.initialise(default_sp.SPEED, default_sp.SPEED, 0)
+			angular_from_turn.initialise(default_sp.ANGULAR_SPEED / 10, default_sp.ANGULAR_SPEED, 1.0)
 
 	print_.lsm_action(action_name + pp.on_ent, "")
 
@@ -42,9 +44,9 @@ func on_exit_action():
 	animator_manager.reset_global_speed_scale()
 
 
-func update(input: InputPackage, delta: float):
-	var CURR_SPEED = SPEED # default actual speed
-	var CURR_ANGULAR_SPEED = ANGULAR_SPEED
+func update(input_: InputPackage, delta: float):
+	var CURR_SPEED = default_sp.SPEED # default actual speed
+	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
 
 	match legs_sm.prev_action.action_name:
 		Leg.Act.idle_to_sprint:
@@ -54,8 +56,8 @@ func update(input: InputPackage, delta: float):
 			# CURR_ANGULAR_SPEED = angular_from_turn.update(delta)
 	
 	# prints("~~~~~~~~~~~~~~", CURR_SPEED, CURR_ANGULAR_SPEED)
-	var speed_config = SpeedConfig.new(1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
-	process_input_vector(input, delta, speed_config)
+	var speed_config = SpeedConfig.new(default_sp, 1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
+	pm().process_input_vector(input_, delta, speed_config)
 
 	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
 
@@ -80,7 +82,7 @@ var _next_anim_correction = 0.12
 
 
 func _input(event):
-	SPEED = u._dev_change_param(event, SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
+	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 
 	# _next_anim_correction = u._dev_change_t67_param(event, _next_anim_correction, "_next_anim_correction", 0.02)

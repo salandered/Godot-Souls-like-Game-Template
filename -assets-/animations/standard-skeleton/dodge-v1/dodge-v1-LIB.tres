@@ -809,6 +809,15 @@ tracks/56/keys = PackedFloat32Array(0, 1, -5.03475e-06, 0.99987197, 0.015998274,
 [sub_resource type="Animation" id="Animation_jwhgb"]
 resource_name = "A Standing Dodge R"
 length = 0.8666666
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"from_run",
+"time": 0.23869799
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"to_run",
+"time": 0.5981328
+}]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true

@@ -4,13 +4,24 @@ class_name PlayerAction
 
 var player_sm: PlayerSM
 
+
+## to override if needed
+func initialise() -> void:
+	pass
+
+
 # not abstract
-func update(_input: InputPackage, _delta: float):
+func update(input_: InputPackage, _delta: float):
 	pass
 
 
 func get_player() -> Princess:
 	return player_sm.player
+
+
+func pm() -> PlayerMovement:
+	return player_sm.player_movement
+
 
 func animate(): # ▶️
 	# if animation == "roll" or animation == "block":

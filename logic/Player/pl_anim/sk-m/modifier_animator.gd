@@ -9,15 +9,12 @@ class_name ModifierAnimator
 
 @export var animator_name: String ## name of animator
 
-# TODO: Unix time in milliseconds, just as in model states. 
-# Need a better time calculation
+# TODO: Unix time in millisecond, needs a better time calculation
 var last_processing_time: float = 0 # seconds unix from system
 var custom_delta := 0.0 # seconds
 var now := 0.0 # seconds unix from system
 
 var bone_list: Array
-var curr_transform: Transform3D
-var prev_transform: Transform3D
 
 var __initialised: bool = false
 
@@ -74,7 +71,7 @@ func _process_modification():
 
 
 func _update_time():
-	# Each frame we manage our time awareness. 
+	# Each frame we manage time awareness. 
 		# - Calculate the custom_delta between now and the last call.
 		# - Then add this custom_delta to curr anim's time_spent.
 	now = Time.get_unix_time_from_system()
@@ -89,6 +86,7 @@ func _update_time():
 
 	if curr_playback.time_spent > curr_playback.anim.duration and curr_playback.anim.is_looping:
 		curr_playback.time_spent = fmod(curr_playback.time_spent, curr_playback.anim.duration)
+	
 	if blend_playback.is_blending and prev_playback.time_spent > prev_playback.anim.duration and prev_playback.anim.is_looping:
 		prev_playback.time_spent = fmod(prev_playback.time_spent, prev_playback.anim.duration)
 
@@ -104,9 +102,9 @@ func _update_skeleton():
 		#   - If we don't blend, that's our work for the bone.
 		#   - If we do blend, we need to also calculate this bone's pose according to the `prev_playback` and its time spent, 
 		#     and then interpolate those two transforms via blending progress.
-		curr_transform = _calculate_bone_pose(bone_idx, curr_playback)
+		var curr_transform = _calculate_bone_pose(bone_idx, curr_playback)
 		if blend_playback.is_blending:
-			prev_transform = _calculate_bone_pose(bone_idx, prev_playback)
+			var prev_transform = _calculate_bone_pose(bone_idx, prev_playback)
 			curr_transform = prev_transform.interpolate_with(curr_transform, blend_playback.percentage)
 		
 		curr_transform = overlay.apply_overlay(bone_idx, curr_transform, self)
@@ -138,109 +136,6 @@ func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
 
 func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
 	return global_speed_scale * playback.anim.speed_scale
-
-
-func get_prev_root_rotation() -> float:
-	if prev_playback.get_effective_progress() >= prev_playback.anim.duration:
-		print_.skm(animator_name, "Will return 0.0. effective_prog >= anim.duration. Details:" + prev_playback._to_string_short(), 0, LogL.FORCE_PRINT)
-		return 0.0
-	var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
-	# var rotation_ = prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
-	var rotation_ = prev_rotation_delta * global_speed_scale
-	# if abs(rotation_) > 0.0001:
-	#  	print_.skm("", "get_prev_root_rotation(): delta=%.4f | result=%.4f" % [prev_rotation_delta, residual_rotation])
-
-	return rotation_
-
-
-func get_root_velocity(y_zeroed: bool = true) -> Vector3:
-	var curr_velocity = _calculate_velocity_delta(curr_playback, 0)
-	
-	if blend_playback.is_blending:
-		var prev_velocity = _calculate_velocity_delta(prev_playback, 0)
-		curr_velocity = prev_velocity.lerp(curr_velocity, blend_playback.percentage)
-	
-	if y_zeroed:
-		curr_velocity.y = 0
-	
-	return curr_velocity * global_speed_scale
-
-
-func get_root_rotation(y_only: bool = true) -> float:
-	var curr_rotation_delta = _calculate_rotation_delta(curr_playback, 0)
-	
-	# NOTE: Not supporing two animations in a row woth root rotation. 
-	#       For one root rot and other w/o it,  this should be checked for sanity
-	# if blend_playback.is_blending:
-	# 	var prev_rot_track := __get_rotation_track(0, prev_playback.native_anim)
-		
-	# 	# Only blend if previous animation also has rotation
-	# 	if prev_rot_track != -1: # WARNING: what of track existed but we dont use it? switch to AnimationData
-	# 		var prev_rotation_delta = _calculate_rotation_delta(prev_playback, 0)
-	# 		curr_rotation_delta = lerp(prev_rotation_delta, curr_rotation_delta, blend_playback.percentage)
-	# 		# prints(u.fr(), "ROT_BLEND", curr_rotation_delta)
-	
-	return curr_rotation_delta * global_speed_scale
-
-
-func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int) -> Vector3:
-	var pos_track := __get_position_track(bone_idx, playback.native_anim)
-	if pos_track == -1 or playback.native_anim.track_get_key_count(pos_track) <= 1:
-		return Vector3.ZERO
-	
-	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(playback)
-	var curr_progress = playback.get_effective_progress()
-	var prev_progress = max(0.0, curr_progress - scaled_delta)
-	
-	var prev_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, prev_progress)
-	var curr_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, curr_progress)
-	
-	return (curr_pos - prev_pos) / scaled_delta if scaled_delta > 0 else Vector3.ZERO
-
-
-func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
-	var rot_track := __get_rotation_track(bone_idx, playback.native_anim)
-	if rot_track == -1:
-		return 0.0
-	
-	var scaled_delta = custom_delta * _EFFECTIVE_SPEED_SCALE(playback)
-	var curr_progress = playback.get_effective_progress()
-	var prev_progress = max(0.0, curr_progress - scaled_delta)
-	
-	var prev_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, prev_progress)
-	var curr_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, curr_progress)
-	
-	var delta_rot = prev_rot.inverse() * curr_rot
-	var rotation_delta = delta_rot.get_euler().y
-	
-	# Handle angle wrapping
-	if rotation_delta > PI:
-		rotation_delta -= TAU
-	elif rotation_delta < -PI:
-		rotation_delta += TAU
-	
-	return rotation_delta
-
-
-## Kinda not Animator's logic, but suits here for now
-## needs polishing
-func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
-	var root_pos_track := __get_position_track(0, anim.native_anim)
-	
-	if root_pos_track == -1 or anim.native_anim.track_get_key_count(root_pos_track) <= 1:
-		return 0.0
-	
-	# Sample at start and a small delta to get initial velocity
-	var sample_delta = 0.016 # One frame at 60fps
-	var start_time = anim._start_time
-	var pos_at_start = anim.native_anim.position_track_interpolate(root_pos_track, start_time)
-	var pos_at_delta = anim.native_anim.position_track_interpolate(root_pos_track, start_time + sample_delta)
-	
-	var velocity = (pos_at_delta - pos_at_start) / sample_delta
-	velocity.y = 0
-	
-	var result = velocity.length() * anim.speed_scale
-	return result
 
 
 func set_global_speed_scale(new_scale: float):

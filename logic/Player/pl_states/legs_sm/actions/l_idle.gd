@@ -8,7 +8,7 @@ func _ready():
 	}
 
 
-func update(_input: InputPackage, _delta: float) -> void:
+func update(input_: InputPackage, _delta: float) -> void:
 	get_player().velocity = Vector3.ZERO
 
 
