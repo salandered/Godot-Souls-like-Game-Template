@@ -4,7 +4,7 @@ extends PlayerState
 var reloaded = false
 
 func update(input_, _delta):
-	if current_action.works_longer_than(charge_restore_timing) and not reloaded:
+	if curr_state_action.works_longer_than(charge_restore_timing) and not reloaded:
 		combat.shield_throw_charges = combat.shield_throw_charges + 1
 		reloaded = true
 

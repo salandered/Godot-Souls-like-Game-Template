@@ -67,11 +67,20 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 
 }
 
+var node_to_pl_action: Dictionary = { # { Node name : ActionData }
+	"_DoubleAction": ActionData.new(PS.for_double, PS.Act.double, A.fake_anim),
+	"DodgeAction": ActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R),
+
+	## attacks
+	"AxeSlice1Action": ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1),
+	"AxeSlice2Action": ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2),
+}
 
 var pl_action_data_list: Array[ActionData] = [
 	# move
 	# "Walk": ActionData.new(PS.walk,PS.Act.block, A.walk ),
 	# ActionData.new(PS.small_jump_run, PS.Act.small_jump_run, A.air.small_jump_run),
+
 	ActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.air.jump_sprint),
 	ActionData.new(PS.midair, PS.Act.midair, A.air.midair),
 	ActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.air.landing_sprint),
@@ -79,15 +88,9 @@ var pl_action_data_list: Array[ActionData] = [
 	ActionData.new(PS.roll, PS.Act.roll, A.roll),
 	ActionData.new(PS.death, PS.Act.death, A.death),
 
-
-	ActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R),
-	
 	## attacks
 	ActionData.new(PS.longsword_1, PS.Act.longsword_1, A.attack.axe_slice_1),
 	ActionData.new(PS.longsword_2, PS.Act.longsword_2, A.attack.axe_slice_2),
-
-	ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1),
-	ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2),
 
 
 	ActionData.new(PS.staggered, PS.Act.staggered, A.combat.staggered),

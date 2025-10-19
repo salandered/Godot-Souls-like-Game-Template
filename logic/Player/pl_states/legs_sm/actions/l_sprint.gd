@@ -23,14 +23,14 @@ func _ready():
 
 func on_enter_action(input_: InputPackage):
 	# means no interpolation. Will be returning constant
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle_to_sprint:
-			var _start_speed = legs_sm.get_tranfer_data_by_key("rm_speed")
+			var _start_speed = player_sm.get_tranfer_data_by_key("rm_speed")
 			if _start_speed:
 				speed_from_idle.initialise(_start_speed, default_sp.SPEED, SPEED_LERP_TIME)
 		# Leg.Act.legs_action_run: # do later
 		Leg.Act.fast_turn_180:
-			var _start_speed = legs_sm.get_tranfer_data_by_key("rm_speed")
+			var _start_speed = player_sm.get_tranfer_data_by_key("rm_speed")
 			if _start_speed:
 				speed_from_turn.initialise(_start_speed, default_sp.SPEED, accel_time_from_turn)
 			else:
@@ -48,7 +48,7 @@ func update(input_: InputPackage, delta: float):
 	var CURR_SPEED = default_sp.SPEED # default actual speed
 	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
 
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle_to_sprint:
 			CURR_SPEED = speed_from_idle.update(delta)
 		Leg.Act.fast_turn_180:
@@ -64,9 +64,9 @@ func update(input_: InputPackage, delta: float):
 
 func animate(): # ▶️
 	var start_time_offset := 0.0
-	var blend_time: float = blend_time_by_action.get(legs_sm.prev_action.action_name, default_blend_time)
+	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
 	
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle_to_sprint:
 			start_time_offset = 0.5
 		Leg.Act.run:

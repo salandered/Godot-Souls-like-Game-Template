@@ -4,7 +4,7 @@ var hit_damage = 100
 
 
 func update(input_: InputPackage, _delta):
-	if current_action.works_between(2.2, 3.6): # turn into parameter
+	if curr_state_action.works_between(2.2, 3.6): # turn into parameter
 		player.model.active_weapon.is_attacking = true
 	else:
 		player.model.active_weapon.is_attacking = false

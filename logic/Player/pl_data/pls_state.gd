@@ -24,6 +24,10 @@ const axe_slice_2 := "axe_slice_2"
 
 # move
 # TODO const walk := "test/walk"
+
+const for_double := "for_double"
+
+
 const idle := "idle"
 const run := "run"
 const strafe := "strafe"
@@ -39,6 +43,8 @@ const death := "death"
 
 # ACTIONS
 class Act:
+	const double := "action_double👭🏻"
+
 	const withdraw := "action_withdraw🖊️"
 	const shield_throw := "action_shield_throw🖊️"
 	const shield_throw_reload := "action_shield_throw_reload🖊️"

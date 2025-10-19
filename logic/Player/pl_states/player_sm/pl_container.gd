@@ -7,22 +7,22 @@ class_name PlayerStatesContainer
 # -- set by model
 var player: Princess
 
-@export var resources: HumanoidResources
-@export var combat: PlayerCombat
-@export var area_awareness: AreaAwareness
-
-@export_group("SM")
-@export var legs_sm: LegsSM
-@export var player_sm: PlayerSM
-
-@export_group("animation")
-@export var anim_container: BaseAnimationContainer
+@onready var legs_sm: LegsSM = %LegsSM
+@onready var player_sm: PlayerSM = %PlayerSM
+@onready var resources: HumanoidResources = %Resources
+@onready var combat: PlayerCombat = %Combat
+@onready var area_awareness: AreaAwareness = %AreaAwareness
+@onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: AnimatorManager = %AnimatorManager
 
 
 func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer.ActionData]:
 	var result: Array[StatesContainer.ActionData] = []
 	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
+		if action_data.state_name == state:
+			result.append(action_data)
+
+	for action_data: StatesContainer.ActionData in states_container.node_to_pl_action.values():
 		if action_data.state_name == state:
 			result.append(action_data)
 	return result
@@ -85,6 +85,7 @@ func _initialise_legs_actions():
 	for action: LegsAction in _leg_actions.values():
 		action.initialise()
 
+
 func _accept_player_states() -> void:
 	var states_container = StatesContainer.new()
 
@@ -144,47 +145,42 @@ func _accept_player_states() -> void:
 func _accept_player_actions():
 	var states_container = StatesContainer.new()
 	
-	var explicit_pl_actions = {}
-	for pl_act in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
-		explicit_pl_actions[pl_act.name] = pl_act
-	print_.container(em.pin, "explicit_pl_actions" + pp._dict(explicit_pl_actions))
+	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
+		print_.container("pl_act", "child.get_name() " + child.get_name())
+		var action_data: StatesContainer.ActionData = states_container.node_to_pl_action.get(child.get_name())
+		__add_action_data(action_data, child)
 
 	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
 		var node_name = u.to_pascal_case(action_data.action_name)
-
-		var child = null
-		if explicit_pl_actions.has(node_name):
-			child = explicit_pl_actions[node_name]
-			print_.container("", node_name + " found in explicit_pl_actions")
-		else:
-			child = PlayerAction.new()
-			child.name = node_name
-		
-		print_.container("", "Creating action: " + action_data.action_name)
-		
-		_player_actions[action_data.action_name] = child
-		
-		# base action
-		child.player_sm = player_sm
-		child.container = self
-		child.animator_manager = animator_manager
-		child.anim_container = anim_container
-		
-		# specific 
-		var anim = anim_container.get_by_name(action_data.anim_id)
-		assert(anim, "no anim with " + action_data.anim_id)
-		child.anim = anim
-		child.action_name = action_data.action_name
-		
-		assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
-		
-		if not explicit_pl_actions.has(node_name):
-			add_child(child) # add to tree
+		print_.container("pl_act", "Creating action: " + action_data.action_name)
+		var child = PlayerAction.new()
+		child.name = node_name
+		__add_action_data(action_data, child)
+		add_child(child) # add to tree
 	
-	print_.container("", "===========  Accepted actions ===========")
-	print_.container("", str(_player_actions))
-	print("")
+	print_.container("pl_act", "===========  Accepted actions ===========")
+	print_.container("pl_act", str(_player_actions))
+	print("pl_act")
 
+func __add_action_data(action_data, child):
+	_player_actions[action_data.action_name] = child
+	
+	# base action
+	child.player_sm = player_sm
+	child.container = self
+	child.animator_manager = animator_manager
+	child.anim_container = anim_container
+	child.player_sm = player_sm
+	
+	# specific 
+	# child.parent_state = state_by_name(action_data.state_name)
+	var anim = anim_container.get_by_name(action_data.anim_id)
+	assert(anim, "no anim with " + action_data.anim_id)
+	child.anim = anim
+	child.action_name = action_data.action_name
+	
+	assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
+	
 
 func _accept_legs_behaviors():
 	var leg_beh_container = LegBehaviorContainer.new()
@@ -226,6 +222,8 @@ func _accept_legs_actions():
 		child.container = self
 		child.anim_container = anim_container
 		child.animator_manager = animator_manager
+		child.player_sm = player_sm
+		
 
 		# specific
 		var anim := anim_container.get_by_name(action_data.anim_id)

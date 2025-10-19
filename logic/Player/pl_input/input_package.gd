@@ -33,10 +33,44 @@ var orbit_input := 0.0
 
 
 #
-
 var reverse_data: ReverseData = ReverseData.new()
 
+#
+var jump_key: KeyPress = null
+#
+
+func detect_strafe_dir() -> StrafeDir.E:
+	var dir: StrafeDir.E
+
+	if reverse_data.is_reversed():
+		var _target_dir := reverse_data.target_dir
+		var target_dir := StrafeDir.from_vector(_target_dir)
+		print_.prefix("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, StrafeDir.name_(target_dir)))
+		return target_dir
+		
+	if abs(orbit_input) < 0.01: # Pure Forward/Backward (no strafe input)
+		if forward_input >= 0.0:
+			dir = StrafeDir.E.FORWARD
+		else:
+			dir = StrafeDir.E.BACKWARD
+	elif orbit_input > 0.0: # Right Group
+		if forward_input > 0.0:
+			dir = StrafeDir.E.RIGHT_F
+		elif forward_input < 0.0:
+			dir = StrafeDir.E.RIGHT_B
+		else:
+			dir = StrafeDir.E.RIGHT
+	else: # Left Group
+		if forward_input > 0.0:
+			dir = StrafeDir.E.LEFT_F
+		elif forward_input < 0.0:
+			dir = StrafeDir.E.LEFT_B
+		else:
+			dir = StrafeDir.E.LEFT
+
+	return dir
 # 
+
 func _to_string() -> String:
 	var parts = []
 	parts.append("input_dir: %s" % input_direction)

@@ -48,7 +48,7 @@ func update(input_: InputPackage, delta: float) -> void:
 		player.velocity.y = -2.0 # Stick to ground
 		
 		# Use root motion until control returns
-		if not has_control and current_action.works_longer_than(control_return_time):
+		if not has_control and curr_state_action.works_longer_than(control_return_time):
 			var xz_root = animator_manager.get_root_velocity(true)
 			var xz_delta = player.get_quaternion() * xz_root
 			player.velocity.x = xz_delta.x
@@ -70,7 +70,7 @@ func on_ground_contact() -> void:
 
 func check_transition(input_: InputPackage) -> PLVerdict:
 	# Can transition once we're through impact and into run blend
-	if landing_phase == "running" and current_action.time_remaining() <= 0.2:
+	if landing_phase == "running" and curr_state_action.time_remaining() <= 0.2:
 		var xz_speed = Vector3(player.velocity.x, 0, player.velocity.z).length()
 		
 		if xz_speed > min_run_speed:

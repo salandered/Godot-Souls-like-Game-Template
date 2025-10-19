@@ -13,7 +13,7 @@ func update(input_: InputPackage, _delta: float) -> void:
 
 
 func animate(): # ▶️
-	var blend_time: float = blend_time_by_action.get(legs_sm.prev_action.action_name, default_blend_time)
+	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
 	var start_time_offset := 0.0
 
 			

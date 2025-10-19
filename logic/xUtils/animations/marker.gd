@@ -21,3 +21,6 @@ class Name:
 	const TURN_COMPLETE = "TURN_COMPLETE"
 	const GIVE_UP_RM = "give_up_rm"
 	const ALLOWS_SWITCH = "allows_switch"
+	
+	const FROM_RUN = "from_run"
+	const TO_RUN = "to_run"

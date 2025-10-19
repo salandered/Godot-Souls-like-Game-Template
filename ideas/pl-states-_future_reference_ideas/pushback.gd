@@ -6,7 +6,7 @@ extends PlayerState
 func update(input_: InputPackage, delta: float):
 	u.safe_look_at(player, player.global_position + area_awareness.last_pushback_vector)
 	
-	var delta_pos = current_action.get_root_position_delta(delta)
+	var delta_pos = curr_state_action.get_root_position_delta(delta)
 	delta_pos.y = 0
 	player.velocity = (player.get_quaternion() * delta_pos / delta) * movement_multiplier
 	if not player.is_on_floor():

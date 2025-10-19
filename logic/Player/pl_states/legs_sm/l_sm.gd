@@ -11,29 +11,14 @@ class_name LegsSM
 @export var combat: PlayerCombat
 
 
-var _transfer_data: TranferData = TranferData.new()
-
 var current_behavior: LegsBehavior
 # It should belong here! current_action is managed by the "pool" of actions. 
 # Behavior changes may or may NOT change current action.
 var current_action: LegsAction
-var prev_action: LegsAction
+
 
 func update(input_: InputPackage, delta: float) -> void:
 	current_behavior.update(input_, delta)
-
-
-# TODO: fast solution. Design proper action (or states) ability to share data.
-## for now its supposed to store only prev action data
-## so actions can only use these methods for working with tranfer data
-func fill_tranfer_data(tranfer_turn_data):
-	## auto setting current action
-	_transfer_data.fill(current_action.action_name, tranfer_turn_data)
-
-func get_tranfer_data_by_key(key) -> Variant:
-	## auto getting prev one
-	var data = _transfer_data.get_by_action_and_key(prev_action.action_name, key)
-	return data
 
 
 func switch_to(next_behavior: LegsBehavior, input_: InputPackage):

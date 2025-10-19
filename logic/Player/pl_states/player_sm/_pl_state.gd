@@ -32,14 +32,18 @@ var legs_behavior: LegsBehavior
 var state_name: String
 var priority: int
 
-var current_action: BaseAction
-var default_action_name: String # first child or dummy action node
 
 var depends_on_legs: bool = false
 
-
 var queued_state: String = ""
 var forced_state: String = ""
+
+var default_action_name: String # first child or dummy action node
+var curr_state_action: PlayerAction
+
+
+func curr_global_action() -> BaseAction:
+	return player_sm.get_current_action()
 
 
 func _has_queued_state() -> bool:
@@ -47,6 +51,7 @@ func _has_queued_state() -> bool:
 
 func _has_forced_state() -> bool:
 	return forced_state != ""
+
 
 func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	return player.model.__velocity_by_input(input_, delta)
@@ -59,14 +64,17 @@ func pm() -> PlayerMovement:
 func initialise():
 	pass
 
+# CHECK TRANSITION
+# region: code
+
 # - does something from the past forces us to switch? 
 # - if not, does something from the present modify our inputs? 
 # - if not, what vanilla state wants to be defaulted to?
 ## Not to override
 func _check_transition(input_: InputPackage) -> PLVerdict:
-	if current_action.allows_queue():
+	if curr_global_action().allows_queue():
 		check_combos(input_)
-	if _has_queued_state() and current_action.switches_to_queue():
+	if _has_queued_state() and curr_global_action().switches_to_queue():
 		print_.psm_check_trans(state_name, "queued 👥 exists, trying it as a force state")
 		try_force_state(queued_state)
 		queued_state = ""
@@ -81,7 +89,7 @@ func _check_transition(input_: InputPackage) -> PLVerdict:
 
 ## can be overriden: see Run or attack.gd
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if current_action.time_remaining() <= 0.0:
+	if curr_global_action().time_remaining() <= 0.0:
 		print_.psm_check_trans(state_name + " default check", pp.s("time_remaining < 0 => choosing best input"))
 		return best_next_state_from_input(input_)
 	return PLVerdict.new()
@@ -100,14 +108,13 @@ func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
 				return PLVerdict.new(action)
 	return PLVerdict.new("", "best_next_state_from_input() returned nothing!")
 
+# endregion
+
 
 func _update(input_: InputPackage, delta: float):
 	legs_sm.current_behavior.update(input_, delta)
-
-	if depends_on_legs:
-		current_action = legs_sm.current_action
-
-	# if not depends_on_legs and current_action.tracks_input_vector(): # DANGER: depends_on_legs is important
+	curr_state_action.update(input_, delta)
+	# if not depends_on_legs and curr_state_action.tracks_input_vector(): # DANGER: depends_on_legs is important
 	# 	pm().rotate_with_input_vector_simple(input_, delta)
 
 	update(input_, delta)
@@ -133,43 +140,47 @@ func _on_enter_state(input_: InputPackage):
 
 	## For now depends_on_legs means legs_behavior is not double. E.g Run or Sprint beh.
 	if depends_on_legs:
-		print_.psm(state_name + pp.on_ent, "Dependent state. Actions delegated to legs, no action switch here✖️")
+		__log_state_ent("Dependent state. Actions delegated to legs, no state action switch✖️ - double")
 		## WARNING testing idle
+		on_enter_state(input_)
+		switch_action_to(PS.Act.double, input_)
 		if state_name == PS.idle \
 			and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run, Leg.Beh.strafe]:
-			print_.psm(state_name + pp.on_ent, "No switching legs behavior" + em.gray_x)
+			__log_state_ent("No switching legs behavior" + em.gray_x)
 		else:
 			legs_sm.switch_to(legs_behavior, input_)
-		on_enter_state(input_)
 	else: ## state leads legs.  like Attack or Jump or Midair
 		default_action_name = choose_default_action() # NOTE: safe. Container checked that non dependent state has an action.
 
-		print_.psm(state_name + pp.on_ent, "Switch to default action " + default_action_name)
+		__log_state_ent("Switch to default action " + pp.in_q(default_action_name))
 		
-		## on_enter_state is before on_action_state
-		on_enter_state(input_)
+		
 		switch_action_to(default_action_name, input_)
+		on_enter_state(input_) ## on_enter_state should be before on_action_state | OF AFTER?
 		legs_sm.switch_to(legs_behavior, input_) # NOTE: for now, here is always double
 
 
 func switch_action_to(next_action_name: String, input_: InputPackage):
 	# region: NOTE: we dont check if current action is the same as next_action_name
-	# When state was left, it preserved its current_action attribute. On enter it would still have it. 
+	# When state was left, it preserved its curr_state_action attribute. On enter it would still have it. 
 	# So it is not like we compare here curr action of prev state with next_action_name of new one.
 	# We compare curr action of new one from the past with the its next_action_name right now. 
 	# And they are probably the same, but switch is needed.
 	#
 	# In case of problems, consider different approach: reset curr action to null on_exit_state.
 	# 
-	# See also different mechanic with legs states: current_action belongs to legs_sm, not leg_behavior. 
+	# See also different mechanic with legs states: curr_state_action belongs to legs_sm, not leg_behavior. 
 	# 	=> leg_behavior don't carry its curr action with it.
 	# endregion
-	if current_action:
-		print_.psm("Action ↪️", pp.s("switch action", current_action.action_name, "=>", next_action_name))
+	if curr_state_action:
+		print_.psm("Action ↪️", pp.s("switch action", curr_state_action.action_name, "=>", next_action_name))
+		curr_state_action._on_exit_action()
 	else:
 		print_.psm("Action ↪️", "No current action => " + next_action_name)
-	current_action = container.action_by_name(next_action_name)
-	current_action._on_enter_action(input_)
+
+	curr_state_action = container.action_by_name(next_action_name)
+	curr_state_action.parent_state = self
+	curr_state_action._on_enter_action(input_)
 
 
 func on_enter_state(input_: InputPackage):
@@ -220,9 +231,9 @@ func update_resources(delta: float):
 # DEFAULT BEHAVIORS ON MODIFIERS
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "react_on_hit called")
-	if current_action.is_vulnerable():
+	if curr_global_action().is_vulnerable():
 		resources.lose_health(hit.damage)
-	# if current_action.is_interruptable():
+	# if curr_global_action().is_interruptable():
 	# 	# TODO rewrite for better effects processing, this scales badly
 	# 	# if hit.effects.has("pushback") and hit.effects["pushback"]:
 	# 	# 	area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
@@ -232,9 +243,9 @@ func react_on_hit(hit: HitData):
 
 # TODO: ...
 func react_on_spell(spell_hit: SpellHitData):
-	if current_action.is_vulnerable():
+	if curr_global_action().is_vulnerable():
 		resources.lose_health(spell_hit.damage)
-	if current_action.is_interruptable():
+	if curr_global_action().is_interruptable():
 		try_force_state("staggered")
 	#spell_hit.queue_free()
 	spell_hit.spell.target_contacted(player)
@@ -260,3 +271,7 @@ func react_on_parry(_hit: HitData):
 
 #	To implement timed changes, use a flag and work with timings via get_progress() etc.
 # endregion
+
+
+func __log_state_ent(text):
+	print_.psm(state_name + pp.on_ent, text)

@@ -12,7 +12,7 @@ func update(input_: InputPackage, delta):
 
 
 func move_player(delta: float):
-	var delta_pos = current_action.get_root_position_delta(delta)
+	var delta_pos = curr_state_action.get_root_position_delta(delta)
 	delta_pos.y = 0
 	var rotated_delta = player.get_quaternion() * delta_pos / delta
 	player.velocity.x = rotated_delta.x

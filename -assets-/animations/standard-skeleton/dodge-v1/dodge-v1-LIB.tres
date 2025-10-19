@@ -406,6 +406,15 @@ tracks/56/keys = PackedFloat32Array(0, 1, 5.2452183e-06, 0.9998715, 0.016024917,
 [sub_resource type="Animation" id="Animation_ttuo4"]
 resource_name = "A Standing Dodge L"
 length = 0.9
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"from_run",
+"time": 0.3039236
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"to_run",
+"time": 0.6536439
+}]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -812,11 +821,11 @@ length = 0.8666666
 markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"from_run",
-"time": 0.23869799
+"time": 0.16666667
 }, {
 "color": Color(1, 1, 1, 1),
 "name": &"to_run",
-"time": 0.5981328
+"time": 0.7
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

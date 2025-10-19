@@ -1,18 +1,18 @@
 extends LegsLockedVertMoveAction
 
 
-func initialise():
-	ACCEL_FROM_IDLE_TIME = 0.4
-	DIR_CHANGE_TIME = 0.2
+# func initialise():
+# 	ACCEL_FROM_IDLE_TIME = 0.4
+# 	DIR_CHANGE_TIME = 0.2
 
-	ANIM_F = A.strafe.combat_run_f
-	ANIM_B = A.strafe.combat_run_b
-	SPEED_F = 1.9
-	SPEED_B = 1.6
+# 	ANIM_F = A.strafe.combat_run_f
+# 	ANIM_B = A.strafe.combat_run_b
+# 	SPEED_F = 1.9
+# 	SPEED_B = 1.6
 
-	next_anim_correction = 0.93
+# 	next_anim_correction = 0.93
 	
-	__initialise()
+# 	__initialise()
 
 	
 # var _next_anim_correction = 0.93

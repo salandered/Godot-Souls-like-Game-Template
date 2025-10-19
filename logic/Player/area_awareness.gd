@@ -65,14 +65,12 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 
 
 # const TO_ROLL_MAP = {
-# 	PS.small_jump_run: PS.roll,
 # 	PS.jump_sprint: PS.roll,
 # }
 
 
 const TO_STRAFE_MAP = {
 	PS.run: PS.strafe,
-	PS.small_jump_run: PS.dodge,
 	PS.jump_sprint: PS.dodge,
 }
 

@@ -6,7 +6,7 @@ var casted = false
 
 
 func update(input_: InputPackage, _delta: float) -> void:
-	if current_action.works_longer_than(spell_release_timing) and not casted:
+	if curr_state_action.works_longer_than(spell_release_timing) and not casted:
 		spawn_spell()
 
 

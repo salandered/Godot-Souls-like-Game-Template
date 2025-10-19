@@ -13,6 +13,7 @@ var _visible: bool = true
 
 var all_labels = []
 
+
 func _ready() -> void:
 	all_labels = [
 		label_inputs,
@@ -23,14 +24,16 @@ func _ready() -> void:
 	]
 	modifier_ar_2.visible = false
 
+
 func _process(delta: float) -> void:
 	if u.fr(false) % 2 == 0:
-		_label_player_info()
+		_label_camera_info()
 		_label_modifier_animator_info()
 		_label_state_info()
 
 	if u.fr(false) % 1 == 0:
 		_label_inputs()
+
 
 func _input(event):
 	if event.is_action_released("kp_7"):
@@ -40,63 +43,83 @@ func _input(event):
 
 
 func _label_inputs():
-	var last_input: InputPackage = player.model.area_awareness.last_input_package
-	var vel_by_input_ = player.model.__velocity_by_input(last_input, 0.016)
+	var input_: InputPackage = player.model.area_awareness.last_input_package
+	var vel_by_input_ = player.model.__velocity_by_input(input_, 0.016)
 	var t := ""
-	t += "input_dir " + pp.vec2(last_input.input_direction)
-	t += "  len %5.2f" % [last_input.input_direction.length()]
-	t += "  forward strength %5.2f" % [last_input.forward_input]
-	t += "  orbit (hor) strength %5.2f" % [last_input.orbit_input]
-	t += "\nactions: " + pp._array(last_input.actions)
-	t += "\ncombat: " + pp._array(last_input.combat_actions)
-	t += "\ntarget lock " + str(last_input.target_lock)
-	t += "\ncam forward %5.2f  orbit %5.2f" % [last_input.forward_input, last_input.orbit_input]
+	t += "input_dir " + pp.vec2(input_.input_direction)
+	t += "  len %5.2f" % [input_.input_direction.length()]
+	t += "  forward strength %5.2f" % [input_.forward_input]
+	t += "  orbit (hor) strength %5.2f" % [input_.orbit_input]
+	t += "\nactions: " + pp._array(input_.actions)
+	t += "\ncombat: " + pp._array(input_.combat_actions)
+	t += "\ntarget lock " + str(input_.target_lock)
+	t += "\ncam forward %5.2f  orbit %5.2f" % [input_.forward_input, input_.orbit_input]
 	t += "\n vel_by_input_" + pp.s(pp.vec3(vel_by_input_), vel_by_input_.length())
 	t += "\n vel_by_input_ norm" + pp.s(pp.vec3(vel_by_input_.normalized()), vel_by_input_.normalized().length())
 	
 	var curr_dir = "-none-"
-	if player.model.legs_sm:
-		if player.model.legs_sm.current_action:
-			if player.model.legs_sm.current_action.action_name == Leg.Act.strafe:
-				var strafe_act = player.model.legs_sm.current_action
-				if strafe_act.curr_direction:
-					curr_dir = strafe_act.curr_direction.pp_curr_dir()
-
-	t += "\n 8-dir-strafe   " + str(curr_dir)
+	t += "\n 8-dir-strafe   " + StrafeDir.name_(input_.detect_strafe_dir())
 	label_inputs.text = t
 
 
-func _label_player_info():
+func _label_camera_info():
 	var p_pos = player.model.global_position
-	var nest_pos := player.fancy_camera.nest.global_position
-	var camera_pos := player.fancy_camera.camera.global_position
+	var nest_pos := __cam().nest.global_position
+	var camera_pos := __cam().camera.global_position
 	
 	label_cam.text = "player to nest " + "%8.2f" % p_pos.distance_to(nest_pos)
 	label_cam.text += "\n player to cam " + "%8.2f" % p_pos.distance_to(camera_pos)
 
-	var free_offset = player.fancy_camera.free_state.free_offset.length() if player.fancy_camera.free_state.free_offset else 0.0
-	var lock_offset := player.fancy_camera.locked_state.lock_offset.length() if player.fancy_camera.locked_state.lock_offset else 0.0
-	label_cam.text += "\nfree off " + "%8.2f" % free_offset
-	label_cam.text += "\n lock off " + "%8.2f" % lock_offset
+	var free_off = __cam().free_state.free_offset.length() if __cam().free_state.free_offset else 0.0
+	var lock_off := __cam().locked_state.lock_offset.length() if __cam().locked_state.lock_offset else 0.0
+	label_cam.text += "\nfree off " + "%8.2f" % free_off
+	label_cam.text += "\n lock off " + "%8.2f" % lock_off
 	
 
 func _label_state_info():
-	var c_s := player.model.player_sm.current_state
+	var c_s := __c_s()
+
+	var t := ""
+	var error: bool = false
 	if not c_s:
-		label_state_info.text = "NO current state"
-		return
-	if not c_s.current_action:
-		label_state_info.text += "\nNO current action"
-		return # WARNING: not best idea to return. other data will be skipped
+		t += em.warn + "NO current state"
+		error = true
 	if not c_s.legs_sm.current_behavior:
-		label_state_info.text += "\nNO legs behavior"
-		return
+		t += em.warn + "\nNO legs behavior"
+		error = true
 	if not c_s.legs_sm.current_action:
-		label_state_info.text += "\nNO legs behavior action"
+		t += em.warn + "\nNO legs behavior action"
+		error = true
+	if not __pl_sm().get_current_action():
+		t += em.warn + "\n"
+		error = true
+	if not __pl_sm().get_prev_action():
+		t += em.warn + "\n"
+		error = true
+	if error:
+		label_state_info.text = t
 		return
-	label_state_info.text = "state %20s   act %20s " % [str(c_s.state_name), str(c_s.current_action.action_name)]
-	label_state_info.text += "\nlegs %20s   act %20s " % [str(c_s.legs_sm.current_behavior.behavior_name), str(c_s.legs_sm.current_action.action_name)]
-	label_state_info.text += "\nprogress pl action %6.2f  l action  %6.2f " % [c_s.current_action.time_spent(), c_s.legs_sm.current_action.time_spent()]
+
+
+	var curr_st = c_s.state_name
+	var curr_st_act = "NONE"
+	var curr_st_act_time_spent = 0.0
+	if c_s.curr_state_action:
+		curr_st_act = c_s.curr_state_action.action_name
+		curr_st_act_time_spent = c_s.curr_state_action.time_spent()
+	
+	var curr_l_b = c_s.legs_sm.current_behavior.behavior_name
+	var curr_l_act = c_s.legs_sm.current_action.action_name
+	var curr_gl_act = __pl_sm().get_current_action().action_name
+	var prev_gl_act = __pl_sm().get_prev_action().action_name
+	
+	t += "state/st act  %20s %20s " % [curr_st, curr_st_act]
+	t += "\nl_beh / l_act  %20s %20s " % [curr_l_b, curr_l_act]
+	t += "\nAct: gl/st/legs   %20s %20s %20s " % [curr_gl_act, curr_st_act, curr_l_act]
+	t += "\nAct: gl from prev  %20s (%16s)" % [curr_gl_act, prev_gl_act]
+	t += "\nprogress pl action %6.2f  l action  %6.2f " % [curr_st_act_time_spent, c_s.legs_sm.current_action.time_spent()]
+	
+	label_state_info.text = t
 
 
 func _label_modifier_animator_info():
@@ -105,6 +128,22 @@ func _label_modifier_animator_info():
 	modifier_ar.text = animator.__log_state()
 	# modifier_ar_2.text = __one_animator_data(l_ar)
 
+
+func __l_action(act_name) -> LegsAction:
+	if player.model.legs_sm:
+		if player.model.legs_sm.current_action:
+			if player.model.legs_sm.current_action.action_name == act_name:
+				return player.model.legs_sm.current_action
+	return null
+
+func __c_s() -> PlayerState:
+	return player.model.player_sm.current_state
+
+func __pl_sm() -> PlayerSM:
+	return player.model.player_sm
+
+func __cam() -> FancyCamera:
+	return player.fancy_camera
 
 # FROM OUTSIDE THE PLAYER
 

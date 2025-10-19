@@ -11,7 +11,6 @@ var curr_turn: TurnData = TurnData.new()
 
 var INCREASE_ROTATION: float = 1.0
 
-
 var TURN_180_APEX_TIME: float
 
 func on_enter_action(input_: InputPackage) -> void:
@@ -28,7 +27,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	# SPEED CONFIG
 	speed_curve_from_apex.initialise(accel_from_apex_curve, 0.3)
 
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.run:
 			INCREASE_ROTATION = 1.1
 		Leg.Act.idle:
@@ -44,7 +43,7 @@ func on_exit_action() -> void:
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	tranfer_turn_data["rm_speed"] = get_player().velocity.length()
 	
-	legs_sm.fill_tranfer_data(tranfer_turn_data)
+	player_sm.fill_tranfer_data(tranfer_turn_data)
 
 	speed_curve_from_apex.reset()
 

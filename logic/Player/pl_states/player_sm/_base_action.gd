@@ -5,12 +5,16 @@ extends Node
 var container: PlayerStatesContainer
 var anim_container: BaseAnimationContainer
 var animator_manager: AnimatorManager
+var player_sm: PlayerSM
+
 
 var action_name: String
 var anim: AnimationData
 var default_blend_time: float = 0.2
 
 var _enter_action_time: float
+
+var blend_time_by_action = {}
 
 
 # region: INTERFACE 
@@ -24,33 +28,40 @@ var _enter_action_time: float
 
 
 func _on_enter_action(input_: InputPackage) -> void:
+	player_sm.update_current_action(self) # before on_enter_action!
 	mark_enter_action()
 	on_enter_action(input_)
 	animate()
 
 
+## to override
 func on_enter_action(input_: InputPackage) -> void:
 	pass
 
-## NOTE: overriden in LegsAction (may be a hint that abstraction layers not quite there)
+
 func _on_exit_action() -> void:
 	on_exit_action()
 
 
+## to override
 func on_exit_action() -> void:
 	pass
-
 	
-## TODO: DANGER: Action must implement set_overlay_anim, otherwise time_spent() 
-## would stuck and return final time_spent of the previous action
-## For now some action may not use an animation, but then they either should work only with
-## get_real_time_spent (and know what they doing), or not working with the time at all.
-@abstract func animate() -> void
+	
+## default implementation. Called automatically.
+## Example use cases to override: mute playing animation or using situational blend_time.
+## TODO: DANGER: If an action mutes playing anim (not calling set_anim_to_play), 
+## TM like time_spent() would stuck and return final values from the previous actions.
+## Such animations should work with functions like get_real_time_spent or not work with the TM at all.
+func animate(): # ▶️
+	__log_anim(default_blend_time, 0.0)
+	animator_manager.set_anim_to_play(anim.anim_id, default_blend_time)
+
 
 # endregion
 
 
-# region: TIME MANAGEMENT
+# region: TIME MANAGEMENT (TM)
 
 func mark_enter_action() -> void:
 	_enter_action_time = Time.get_unix_time_from_system()
@@ -134,7 +145,9 @@ func works_between(start: float, finish: float) -> bool:
 
 func passed_marker(marker_name: String) -> bool:
 	var marker_time = anim.get_marker_time_by_name(marker_name)
-	if marker_time == -1: return __reject()
+	if marker_time == -1:
+		print_.warn("passed_marker - no time - will return false", true)
+		return __reject()
 
 	if effective_time_spent() >= marker_time:
 		return true
@@ -143,7 +156,9 @@ func passed_marker(marker_name: String) -> bool:
 
 func before_marker(marker_name: String) -> bool:
 	var marker_time = anim.get_marker_time_by_name(marker_name)
-	if marker_time == -1: return __reject()
+	if marker_time == -1:
+		print_.warn("before_marker - no time - will return false", true)
+		return __reject()
 
 	if effective_time_spent() < marker_time:
 		return true
@@ -185,3 +200,7 @@ func tracks_input_vector() -> bool:
 # 	return states_data_repo.time_til_next_controllable_frame(backend_animation, time_spent())
 
 # endregion
+
+
+func __log_anim(blend_time, start_time_offset = 0.0):
+	print_.lsm_action_anim(action_name, anim.anim_name, blend_time, start_time_offset)

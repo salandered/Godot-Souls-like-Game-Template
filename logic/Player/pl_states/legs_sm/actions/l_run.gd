@@ -31,17 +31,17 @@ func initialise():
 	}
 
 func on_enter_action(input_: InputPackage):
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 		Leg.Act.turn_180:
-			var start_speed = legs_sm.get_tranfer_data_by_key("rm_speed")
+			var start_speed = player_sm.get_tranfer_data_by_key("rm_speed")
 			if not start_speed:
 				print_.warn("no start_speed! will use 1.0")
 				start_speed = 1.0
 			speed_from_turn.initialise(start_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
 			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1)
-			var raw_turn_data = legs_sm.get_tranfer_data_by_key("turn_data")
+			var raw_turn_data = player_sm.get_tranfer_data_by_key("turn_data")
 			if raw_turn_data == null:
 				prints(u.fr(), "no 'turn_data' data. assuming turn completed")
 				curr_turn.hard_complete()
@@ -52,7 +52,7 @@ func on_enter_action(input_: InputPackage):
 func on_exit_action():
 	animator_manager.reset_global_speed_scale()
 	var final_speed = get_player().velocity.length()
-	legs_sm.fill_tranfer_data({"manual_speed": final_speed})
+	player_sm.fill_tranfer_data({"manual_speed": final_speed})
 
 	speed_mult_from_idle.reset()
 	speed_from_turn.reset()
@@ -63,7 +63,7 @@ func update(input_: InputPackage, delta: float):
 	var CURR_SPEED = default_sp.SPEED # default actual speed
 	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
 
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 		Leg.Act.turn_180:
@@ -87,9 +87,9 @@ var __start_time_offset_dev = 0.0
 
 func animate(): # ▶️
 	var start_time_offset := 0.0
-	var blend_time: float = blend_time_by_action.get(legs_sm.prev_action.action_name, default_blend_time)
+	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
 	
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:

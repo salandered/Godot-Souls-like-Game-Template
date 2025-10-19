@@ -19,12 +19,13 @@ func on_enter_action(input_: InputPackage) -> void:
 	# APEX
 	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
 
+
 func on_exit_action() -> void:
 	var tranfer_turn_data = {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	tranfer_turn_data["rm_speed"] = get_player().velocity.length()
 	
-	legs_sm.fill_tranfer_data(tranfer_turn_data)
+	player_sm.fill_tranfer_data(tranfer_turn_data)
 
 	__log_turn_exit()
 

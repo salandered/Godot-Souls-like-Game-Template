@@ -11,6 +11,7 @@ var _idle_frame_count: int = 0
 const DOUBLE_TAP_THRESHOLD: float = 0.2
 
 
+var _jump_key: KeyPress = KeyPress.new(RawAction.jump)
 var _forward_key: KeyPress = KeyPress.new(RawAction.move_forward)
 var _back_key: KeyPress = KeyPress.new(RawAction.move_back)
 var _right_key: KeyPress = KeyPress.new(RawAction.move_right)
@@ -23,11 +24,14 @@ func _current_time():
 	return Time.get_ticks_msec() / 1000.0
 
 func _update_key_press_timestamps() -> void:
-	_forward_key.update(_current_time())
-	_back_key.update(_current_time())
-	_right_key.update(_current_time())
-	_left_key.update(_current_time())
-	_target_lock_key.update(_current_time())
+	var _curr_time = _current_time()
+	
+	_jump_key.update(_curr_time)
+	_forward_key.update(_curr_time)
+	_back_key.update(_curr_time)
+	_right_key.update(_curr_time)
+	_left_key.update(_curr_time)
+	_target_lock_key.update(_curr_time)
 
 var _target_lock_is_waiting := false
 var _target_lock_wait_start_time := 0.0
@@ -106,12 +110,13 @@ func gather_input(delta: float) -> InputPackage:
 		new_input.actions.append(PS.roll)
 
 
-	if Input.is_action_pressed(RawAction.jump):
+	# new_input.jump_key = _jump_key
+	if Input.is_action_just_pressed(RawAction.jump):
 		if new_input.actions.has(PS.sprint):
 			new_input.actions.append(PS.jump_sprint)
 		else:
-			new_input.actions.append(PS.small_jump_run)
-	
+			new_input.actions.append(PS.dodge) # NOTE: dodge
+	 
 	# FIGHT 
 	
 	# if Input.is_action_pressed("block"):

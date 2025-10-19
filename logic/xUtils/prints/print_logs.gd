@@ -10,7 +10,7 @@ const DEV_B := true
 const input_gathering_B := true
 const FANCY_CAM_B := false
 const AWARENESS_B := true
-const CONTAINER_B := false
+const CONTAINER_B := true
 const COLLISION_B := false
 
 # ENEMY
@@ -104,12 +104,16 @@ static func fight(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 # region: PLAYER logs
 
+static var PSM_ACTION := PrintData.new(PSM_B, "PSM Action", 2, psm)
 static var PSM_CHECK_TRANS_PRINT := PrintData.new(PSM_B, "transition ❔", 1, psm)
 static var PSM_PRINT := PrintData.new(PSM_B, "PSM", 0, prefix)
 static var SKM_PRINT := PrintData.new(SKM_B, "SKM 💀", 0, prefix)
 
 static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(PSM_CHECK_TRANS_PRINT, add_prefix_, text, info_indents, level)
+
+static func psm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(PSM_ACTION, add_prefix_, text, info_indents, level)
 
 static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(PSM_PRINT, add_prefix_, text, info_indents, level)
@@ -150,7 +154,7 @@ static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, le
 static func lsm_action_strafe(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(LSM_ACTION_STRAFE, add_prefix_, text, info_indents, level)
 
-static func lsm_action_anim(add_prefix_: String, anim_name: String, prev_action_name, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
+static func lsm_action_anim(add_prefix_: String, anim_name: String, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
 	var msg = pp.s(
 		"anim: ", pp.in_q(anim_name),
 		"blend_t", blend_time,
@@ -313,8 +317,9 @@ static func __get_bit_position(value: int) -> int:
 	return -1
 
 
-static func warn(text: String):
+static func warn(text: String, crucial: bool = false):
 	text = em.warn + "warning " + text
+	if crucial: text = em.crucial_x2 + text
 	print(text)
 
 static func debug(text: String):

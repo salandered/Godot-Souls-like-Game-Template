@@ -23,7 +23,6 @@ const ANIM_B: String = A.strafe.combat_run_b
 const SPEED_F: float = 1.9
 const SPEED_B: float = 1.6
 
-var sync_loco_anim_correction: float = 0.18
 
 var curr_direction: StrafeDirection
 
@@ -52,11 +51,13 @@ func initialise():
 
 
 func on_enter_action(input_: InputPackage) -> void:
-	curr_direction.set_direction(curr_direction.detect_dir_from_input(input_, true))
+	var _dir := input_.detect_strafe_dir()
+	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + StrafeDir.name_(_dir))
+	curr_direction.set_direction(_dir)
 	
 	__reset_changers()
 
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
@@ -69,10 +70,11 @@ func on_exit_action() -> void:
 func update(input_: InputPackage, delta: float) -> void:
 	var SPEED_MULT = 1.0
 
-	match legs_sm.prev_action.action_name:
+	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 	
+
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
@@ -90,12 +92,14 @@ func update(input_: InputPackage, delta: float) -> void:
 	opposite_dir_change.async_change_update(delta)
 	slight_dir_change.async_change_update(delta)
 
-	var new_dir = curr_direction.detect_dir_from_input(input_)
+	var new_dir = input_.detect_strafe_dir()
+	if new_dir != curr_direction.get_curr_dir():
+		print_.lsm_action_strafe(pp.on_upd, pp.s("new dir", curr_direction.pp_curr_dir(), "=>", StrafeDir.name_(new_dir)))
 	match curr_direction.would_be_change_of_type(new_dir):
 		StrafeDirection.ChangeType.OPPOSITE:
 			if opposite_dir_change.cooldown.update(delta):
 				opposite_dir_change.speed_dip_init()
-				opposite_dir_change.async_change_init(_on_change_dir_timer_complete.bind(true))
+				opposite_dir_change.async_change_init(_change_dir.bind(true))
 				
 				__reset_changers_cooldown()
 				print_.lsm_action_strafe("", "~~ OPPOSITE dir change and dip triggered")
@@ -103,14 +107,14 @@ func update(input_: InputPackage, delta: float) -> void:
 		StrafeDirection.ChangeType.SLIGHT:
 			if slight_dir_change.cooldown.update(delta):
 				slight_dir_change.speed_dip_init()
-				slight_dir_change.async_change_init(_on_change_dir_timer_complete.bind(false))
+				slight_dir_change.async_change_init(_change_dir.bind(false))
 				
 				__reset_changers_cooldown()
 				print_.lsm_action_strafe("", "~~ SLIGHT dir change and dip triggered")
 		
 		StrafeDirection.ChangeType.SLIGHTEST:
 			if slightest_dir_change.cooldown.update(delta):
-				_on_change_dir_timer_complete(false)
+				_change_dir(false)
 				
 				__reset_changers_cooldown()
 				print_.lsm_action_strafe("", "~~ SLIGHTEST dir change")
@@ -122,10 +126,11 @@ func update(input_: InputPackage, delta: float) -> void:
 	animator_manager.set_global_speed_scale(SPEED_MULT)
 
 
-func _on_change_dir_timer_complete(is_opposite_change: bool):
-	var new_dir = curr_direction.detect_dir_from_input(InputManager.current_input)
-	print_.lsm_action_strafe("", pp.s("_on_change_dir_timer_complete, new_dir:", StrafeDirection.Dir.find_key(new_dir)))
+func _change_dir(is_opposite_change: bool):
+	# ?? question: is it good that we re evalutaing dir. bake into callback?
+	var new_dir = InputManager.current_input.detect_strafe_dir()
 	curr_direction.set_direction(new_dir)
+	print_.lsm_action_strafe("", pp.s("_change_dir to", curr_direction.pp_curr_dir()))
 	_switch_animation(is_opposite_change)
 
 
@@ -136,6 +141,11 @@ func animate(): # ▶️
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
 
 
+var sync_loco_anim_correction: float = 0.18
+var __dev_add: float = 0.0
+
+# TODO idea: switch animatiions only if blend time is complete.
+# animations are in queue, while direction is changes as usual
 func _switch_animation(is_opposite_change: bool):
 	var next_anim = anim_container.get_by_name(curr_direction.get_curr_anim_id())
 	var curr_anim = anim
@@ -148,6 +158,11 @@ func _switch_animation(is_opposite_change: bool):
 		return
 
 	if next_anim.anim_id in curr_direction.get_all_anims() and curr_anim.anim_id in curr_direction.get_all_anims():
+		if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
+			sync_loco_anim_correction = 0.0 + __dev_add
+			print(em.pin, em.mark)
+			print(em.pin, em.mark)
+			print(em.pin, em.mark)
 		var r = sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:
 			start_offset = r
@@ -161,3 +176,7 @@ func _switch_animation(is_opposite_change: bool):
 
 	__log_anim(blend_time, start_offset)
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_offset)
+
+
+func _input(event):
+	__dev_add = u._dev_change_t34_param(event, __dev_add, "__dev_add", 0.05)

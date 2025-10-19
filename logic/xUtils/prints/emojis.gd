@@ -12,6 +12,7 @@ const queued = "👥"
 const forced = "🦾"
 const check = "❔"
 const gray_x = "✖️" # declined
+const exit = "🚪"
 const mark = "✴️"
 const mark_2 = "✳️"
 
@@ -21,5 +22,6 @@ const warn = "⚠️"
 const mb_warn = "🚸" # let's catch and then decide
 const wip = "🚧"
 const crucial = "💥"
+const crucial_x2 = "💥💥"
 const red_x = "❌"
 const bug = "🐞"

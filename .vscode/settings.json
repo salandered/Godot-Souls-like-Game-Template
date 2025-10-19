@@ -544,6 +544,30 @@
 				}
 			]
 		},
+		"\\b(curr_global_action)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ecc893",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(curr_state_action)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#96c3eeec",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
 		"(?<!\\w)(@abstract)(?!\\w)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

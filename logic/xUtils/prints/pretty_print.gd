@@ -9,7 +9,19 @@ static var hence := " => "
 static var angle := " ∠ "
 
 static var on_ent := " on-entr "
-static var on_ex := " on-exit "
+static var on_ext := " on-exit "
+static var on_upd := " upd "
+
+
+static func list_(parts: Array) -> String:
+	var r = ""
+	for part in parts:
+		if part is float:
+			r += str(pp.round_01(part)) + " "
+		else:
+			r += str(part) + " "
+	return r
+
 
 static func s(...parts: Array) -> String:
 	var r = ""

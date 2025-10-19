@@ -1,8 +1,8 @@
 extends BaseAction
 class_name PlayerAction
 
-
-var player_sm: PlayerSM
+## every player action has a direct access to its state.
+var parent_state: PlayerState
 
 
 ## to override if needed
@@ -23,22 +23,16 @@ func pm() -> PlayerMovement:
 	return player_sm.player_movement
 
 
-func animate(): # ▶️
-	# if animation == "roll" or animation == "block":
-		# print_.prefix("~~ SOS", "")
-	print_.psm("▶️ Action " + action_name, anim.anim_id + " with blend time " + str(default_blend_time), 8)
-	animator_manager.set_anim_to_play(anim.anim_id, default_blend_time)
+func _on_exit_action() -> void:
+	__log_action_ext("🚪Exited!")
+	on_exit_action()
 
-	# region: future reference
-	# print_.prefix("SKM", "_base _animate with " + animator_set + " settings_switch_time " + str(settings_switch_time))
-	# # animator_set - like "full_body" or "torso_legs"
-	# if animation_settings.current_animation == animator_set:
-	# 	# if pose-to-pose transition inside one modifier -> we use one blending mechanism
-	# 	animator_manager.play(animation, animation_blend_time)
-	# else:
-	# 	# and if modifier-to-modifier transition -> we switch in modifier poses instantly. 
-	# 	animator_manager.play(animation, 0)
-	# # on enter state, settings_animator plays the needed settings template
-	# # It's purple node =>  inside the frame, this thing executes before the first sk modifier
-	# animation_settings.play(animator_set, settings_switch_time)
-	# endregion
+
+func __log_action_ent(...parts: Array):
+	print_.psm_action(action_name + pp.on_ent, pp.list_(parts))
+
+func __log_action_ext(...parts: Array):
+	print_.psm_action(action_name + pp.on_ext, pp.list_(parts))
+
+func __log_action(...parts: Array):
+	print_.psm_action(action_name, pp.list_(parts))

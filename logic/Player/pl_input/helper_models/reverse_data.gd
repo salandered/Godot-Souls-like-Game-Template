@@ -14,10 +14,11 @@ var type: ReverseType = ReverseType.NONE
 ## if they overlapped, then 0.
 ## is sequential, then <= SEQUENTIAL_PRESS_THRESHOLD
 var time_delta: float
-var prev_dir: Vector2 = Vector2.ZERO
-var target_dir: Vector2 = Vector2.ZERO
+var prev_dir: Vector2
+var target_dir: Vector2
 ## was any other directional key pressed during the reversal?
 var other_keys_was_pressed: bool = false
+
 
 ## should be created only via this method
 func initialise(prev_dir_, target_dir_, type_: ReverseType, time_delta_, other_keys_was_pressed_: bool = false) -> void:
@@ -57,6 +58,7 @@ func _to_string() -> String:
 		% [type, prev_name, target_name, time_delta, other_keys_was_pressed]
 
 func _vector_to_direction_name(dir: Vector2) -> String:
+	# todo: some vector enum
 	if dir == Vector2(0, -1):
 		return "forward"
 	elif dir == Vector2(0, 1):
