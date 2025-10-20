@@ -9,7 +9,7 @@ static var hence := " => "
 static var angle := " ∠ "
 
 static var on_ent := " on-entr "
-static var on_ext := " on-exit "
+static var on_ext := " on-exit🚪 "
 static var on_upd := " upd "
 
 

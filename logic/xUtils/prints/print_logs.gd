@@ -104,7 +104,7 @@ static func fight(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 # region: PLAYER logs
 
-static var PSM_ACTION := PrintData.new(PSM_B, "PSM Action", 2, psm)
+static var PSM_ACTION := PrintData.new(PSM_B, "Action", 2, psm)
 static var PSM_CHECK_TRANS_PRINT := PrintData.new(PSM_B, "transition ❔", 1, psm)
 static var PSM_PRINT := PrintData.new(PSM_B, "PSM", 0, prefix)
 static var SKM_PRINT := PrintData.new(SKM_B, "SKM 💀", 0, prefix)

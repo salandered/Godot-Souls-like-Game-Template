@@ -84,8 +84,8 @@ func get_prev_blend_percentage() -> float:
 	return full_body.blend_playback.prev_percentage
 
 
-func get_root_velocity(y_zeroed: bool = true) -> Vector3:
-	return root_animator.get_root_velocity(y_zeroed)
+func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true) -> Vector3:
+	return root_animator.get_root_velocity(y_zeroed, use_blending)
 
 func get_root_rotation(y_only: bool = true) -> float:
 	return root_animator.get_root_rotation(y_only)
@@ -93,8 +93,8 @@ func get_root_rotation(y_only: bool = true) -> float:
 func get_prev_root_rotation() -> float:
 	return root_animator.get_prev_root_rotation()
 
-func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
-	return root_animator.calculate_animation_start_root_velocity(anim)
+func calculate_animation_start_root_velocity(anim: AnimationData, start_time_offset: float = 0.0, backwards: bool = false) -> float:
+	return root_animator.calculate_animation_start_root_velocity(anim, start_time_offset, backwards)
 
 
 ## INTERNAL

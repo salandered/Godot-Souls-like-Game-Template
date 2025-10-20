@@ -1,7 +1,7 @@
 extends RefCounted
 class_name em
 
-
+# 
 const play = "▶️"
 const linked = "🔗"
 const switch = "↪️"
@@ -13,6 +13,9 @@ const forced = "🦾"
 const check = "❔"
 const gray_x = "✖️" # declined
 const exit = "🚪"
+const briefcase = "💼"
+
+# temp
 const mark = "✴️"
 const mark_2 = "✳️"
 

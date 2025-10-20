@@ -23,9 +23,7 @@ const ANIM_B: String = A.strafe.combat_run_b
 const SPEED_F: float = 1.9
 const SPEED_B: float = 1.6
 
-
 var curr_direction: StrafeDirection
-
 
 var opposite_dir_change := StrafeDirChange.new()
 var slight_dir_change := StrafeDirChange.new()
@@ -51,19 +49,19 @@ func initialise():
 
 
 func on_enter_action(input_: InputPackage) -> void:
+	speed_mult_from_idle.reset()
+	__reset_changers()
+
 	var _dir := input_.detect_strafe_dir()
 	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + StrafeDir.name_(_dir))
 	curr_direction.set_direction(_dir)
 	
-	__reset_changers()
-
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
 
 func on_exit_action() -> void:
-	speed_mult_from_idle.reset()
 	animator_manager.reset_global_speed_scale()
 
 
@@ -73,15 +71,12 @@ func update(input_: InputPackage, delta: float) -> void:
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
-	
 
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
 
-	##
 	pm().look_at_target(delta)
-
 
 	var _sp_config = SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed())
 	if curr_direction.is_pure_vertical():
@@ -127,7 +122,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 
 func _change_dir(is_opposite_change: bool):
-	# ?? question: is it good that we re evalutaing dir. bake into callback?
+	# ?? question: is it ok that we re evalutaing dir. bake into callback?
 	var new_dir = InputManager.current_input.detect_strafe_dir()
 	curr_direction.set_direction(new_dir)
 	print_.lsm_action_strafe("", pp.s("_change_dir to", curr_direction.pp_curr_dir()))
@@ -144,7 +139,7 @@ func animate(): # ▶️
 var sync_loco_anim_correction: float = 0.18
 var __dev_add: float = 0.0
 
-# TODO idea: switch animatiions only if blend time is complete.
+# TODO idea: switch animations only if blend time is complete.
 # animations are in queue, while direction is changes as usual
 func _switch_animation(is_opposite_change: bool):
 	var next_anim = anim_container.get_by_name(curr_direction.get_curr_anim_id())
@@ -160,8 +155,6 @@ func _switch_animation(is_opposite_change: bool):
 	if next_anim.anim_id in curr_direction.get_all_anims() and curr_anim.anim_id in curr_direction.get_all_anims():
 		if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
 			sync_loco_anim_correction = 0.0 + __dev_add
-			print(em.pin, em.mark)
-			print(em.pin, em.mark)
 			print(em.pin, em.mark)
 		var r = sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:

@@ -66,9 +66,13 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 		# spams a lot
 		# print_.lsm_action("", pp.s("switch declined ✖️: same action", next_action_name))
 		return
-	
+	## hard coded tranfer, but seems like its ok, we dont have too many actions 
+	if next_action_name == Leg.Act.sprint and curr_action_name == Leg.Act.run \
+		and legs_sm.current_action.till_blend_completes() > 0.0:
+		print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️:", curr_action_name, "needs time to blend from the prev one."))
+		return
 	# if next_action_name != Leg.Act.double and curr_action_name != Leg.Act.double \
-	# 	and legs_sm.current_action.time_remaining_for_blend_to_complete() > 0.1: # ideally 0, but small tolerance is ok
+	# 	and legs_sm.current_action.till_blend_completes() > 0.1: # ideally 0, but small tolerance is ok
 	# 	print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️: current", curr_action_name, "needs time to blend from the prev one."))
 	# 	return
 		

@@ -34,7 +34,7 @@ func get_marker_by_name(marker_name: String) -> Marker:
 func get_marker_time_by_name(marker_name: String, default_value: float = -1) -> float:
 	var marker = get_marker_by_name(marker_name)
 	if not marker:
-		print_.warn("marker not found " + marker_name)
+		print_.warn("marker not found " + pp.in_q(marker_name))
 		return default_value
 	if duration - marker.time < 0.0:
 		print_.warn("marker time outside the duration")

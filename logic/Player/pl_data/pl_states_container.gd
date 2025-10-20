@@ -58,14 +58,17 @@ var node_to_pl_state_data: Dictionary = { # { Node name : StateData }
 	"Longsword2": StateData.new(PS.longsword_2, 15),
 	"AxeSlice1": StateData.new(PS.axe_slice_1, 15),
 	"AxeSlice2": StateData.new(PS.axe_slice_2, 15),
+	"AttackFromRun": StateData.new(PS.attack_from_run, 15),
 
 
 	"Staggered": StateData.new(PS.staggered, 100),
 	"Parry": StateData.new(PS.parry, 20),
 	"Parried": StateData.new(PS.parried, 100),
 	"Riposte": StateData.new(PS.riposte, 25),
-
 }
+
+
+## PLAYER ACTIONS
 
 var node_to_pl_action: Dictionary = { # { Node name : ActionData }
 	"_DoubleAction": ActionData.new(PS.for_double, PS.Act.double, A.fake_anim),
@@ -74,6 +77,7 @@ var node_to_pl_action: Dictionary = { # { Node name : ActionData }
 	## attacks
 	"AxeSlice1Action": ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1),
 	"AxeSlice2Action": ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2),
+	"AttackFromRunAction": ActionData.new(PS.attack_from_run, PS.Act.attack_from_run, A.attack.attack_from_run),
 }
 
 var pl_action_data_list: Array[ActionData] = [
@@ -91,7 +95,6 @@ var pl_action_data_list: Array[ActionData] = [
 	## attacks
 	ActionData.new(PS.longsword_1, PS.Act.longsword_1, A.attack.axe_slice_1),
 	ActionData.new(PS.longsword_2, PS.Act.longsword_2, A.attack.axe_slice_2),
-
 
 	ActionData.new(PS.staggered, PS.Act.staggered, A.combat.staggered),
 	ActionData.new(PS.parry, PS.Act.parry, A.combat.parry),

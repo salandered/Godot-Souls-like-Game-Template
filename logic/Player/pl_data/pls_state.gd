@@ -21,6 +21,7 @@ const longsword_2 := "longsword_2"
 
 const axe_slice_1 := "axe_slice_1"
 const axe_slice_2 := "axe_slice_2"
+const attack_from_run := "attack_from_run"
 
 # move
 # TODO const walk := "test/walk"
@@ -50,10 +51,12 @@ class Act:
 	const shield_throw_reload := "action_shield_throw_reload🖊️"
 	
 	## attacks
-	const longsword_1 := "action_longsword_1🖊️"
-	const longsword_2 := "action_longsword_2🖊️"
-	const axe_slice_1 := "action_axe_slice_1🖊️"
-	const axe_slice_2 := "action_axe_slice_2🖊️"
+	const longsword_1 := "action_longsword_1🗡"
+	const longsword_2 := "action_longsword_2🗡"
+	const axe_slice_1 := "action_axe_slice_1🗡"
+	const axe_slice_2 := "action_axe_slice_2🗡"
+	const attack_from_run := "action_attack_from_run🗡"
+	
 
 	const block := "action_block🖊️"
 	const block_reaction := "action_block_reaction🖊️"

@@ -8,6 +8,8 @@ var accel_from_idle_time: float = 0.5 # How long to reach full speed
 var accel_from_turn_time: float = 0.5
 
 var speed_mult_from_idle = EaseCurveInterpolator.new()
+var angular_sp_from_idle = FloatLinearInterpolator.new()
+var turn_sp_from_idle = FloatLinearInterpolator.new()
 var speed_from_turn = FloatCurveInterpolator.new()
 var angular_sp_from_turn = FloatLinearInterpolator.new()
 
@@ -31,16 +33,21 @@ func initialise():
 	}
 
 func on_enter_action(input_: InputPackage):
+	speed_mult_from_idle.reset()
+	speed_from_turn.reset()
+	angular_sp_from_turn.reset()
+	angular_sp_from_idle.reset()
+	turn_sp_from_idle.reset()
+
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
+			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
 		Leg.Act.turn_180:
-			var start_speed = player_sm.get_tranfer_data_by_key("rm_speed")
-			if not start_speed:
-				print_.warn("no start_speed! will use 1.0")
-				start_speed = 1.0
-			speed_from_turn.initialise(start_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
-			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1)
+			var _inherited_speed = get_player().velocity.length()
+			speed_from_turn.initialise(_inherited_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
+			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
 			var raw_turn_data = player_sm.get_tranfer_data_by_key("turn_data")
 			if raw_turn_data == null:
 				prints(u.fr(), "no 'turn_data' data. assuming turn completed")
@@ -50,22 +57,21 @@ func on_enter_action(input_: InputPackage):
 				prints(u.fr(), " Inherited turn:", str(curr_turn))
 
 func on_exit_action():
+	__log_action_ext("last speed", get_player().velocity.length())
 	animator_manager.reset_global_speed_scale()
-	var final_speed = get_player().velocity.length()
-	player_sm.fill_tranfer_data({"manual_speed": final_speed})
 
-	speed_mult_from_idle.reset()
-	speed_from_turn.reset()
-	angular_sp_from_turn.reset()
 
 func update(input_: InputPackage, delta: float):
 	var SPEED_MULT = 1.0 # default multiplier
 	var CURR_SPEED = default_sp.SPEED # default actual speed
 	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
+	var TURN_SPEED = default_sp.TURN_SPEED
 
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
+			TURN_SPEED = turn_sp_from_idle.update(delta)
 		Leg.Act.turn_180:
 			CURR_SPEED = speed_from_turn.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_turn.update(delta)
@@ -74,7 +80,7 @@ func update(input_: InputPackage, delta: float):
 		_complete_root_turn(CURR_SPEED)
 	else:
 		# prints("~~", SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
-		var speed_config = SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
+		var speed_config = SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
 		speed_config.tie_turn_sp_to_speed(0.6)
 		pm().process_input_vector(input_, delta, speed_config)
 

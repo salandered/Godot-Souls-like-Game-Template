@@ -5,7 +5,7 @@ const IDLE_COMMIT := 0.12 # seconds
 const START_COMMIT := 0.92 # seconds
 
 var TO_STOP_DELAY: float = 0.2
-var ANGLE_FOR_U_TURN_MIN = 130.0
+var ANGLE_FOR_U_TURN_MIN = 110.0
 var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 
@@ -21,6 +21,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	match curr_motion_type:
 		MotionType.IDLE:
 			next_action_name = _from_IDLE_decision(input_, delta, next_action_name)
+
 
 		MotionType.START:
 			next_action_name = _from_START_decision(input_, delta, next_action_name)

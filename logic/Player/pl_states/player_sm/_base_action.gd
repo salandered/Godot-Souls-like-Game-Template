@@ -118,7 +118,7 @@ func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 ## but B is still blending from the previous C animation, there would be a noticable visual snap. 
 ## Reason: C to B blend would be interrupted by B to A.
 ## Note: using actual blend duration from manager is better than rely on current action's data or desires.
-func till_start_blend_completes() -> float:
+func till_blend_completes() -> float:
 	return max(animator_manager.get_curr_blend_duration() - time_spent(), 0.0)
 
 

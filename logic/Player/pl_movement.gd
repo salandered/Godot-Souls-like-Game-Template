@@ -137,21 +137,14 @@ func move_strafe_with_forward(input_: InputPackage, direction_sign: float, delta
 	var _speed = speed_config.get_speed()
 	var _speed_mult = speed_config.get_speed_multiplier()
 	
-	# if input_.input_direction.is_zero_approx():
-	# 	_player.velocity = Vector3.ZERO
-	# 	return
-
-	# Get player's local forward and right vectors
 	var forward_vec = - _player.global_basis.z
 	var right_vec = _player.global_basis.x
 	
-	# Get the raw forward/backward input component
-	var forward_component = input_.input_direction.y
+	var forward_component = input_.input_direction.y # raw forward/backward input component
 	
-	# Construct the final direction by combining raw forward input with the state-controlled strafe direction
+	# final dir by combining raw f input and the state-controlled strafe direction
 	var desired_direction = (forward_vec * forward_component + right_vec * direction_sign)
 	
-	# If there's no input, stop. Otherwise, move in the calculated direction.
 	if desired_direction.is_zero_approx():
 		_player.velocity = Vector3.ZERO
 		return

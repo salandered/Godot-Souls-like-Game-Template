@@ -7,9 +7,9 @@ func _ready():
 	default_sp.TURN_SPEED = 2.0
 
 
-func on_exit_action() -> void:
-	var final_rm_speed = animator_manager.get_root_velocity().length()
-	player_sm.fill_tranfer_data({"rm_speed": final_rm_speed})
+# func on_exit_action() -> void:
+	# var final_rm_speed = animator_manager.get_root_velocity().length()
+	# player_sm.fill_tranfer_data({"root_vel_speed": final_rm_speed})
 
 
 func update(input_: InputPackage, delta: float):

@@ -57,7 +57,7 @@ func get_hit_data() -> HitData:
 	return _hit_data
 
 
-func translate_input_to_state(combat_action: String) -> String:
+func translate_input_to_state(combat_action: String, new_input: InputPackage, delta: float) -> String:
 	if combat_action in _input_to_state:
 		return _input_to_state[combat_action]
 	else:

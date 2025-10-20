@@ -22,19 +22,19 @@ func _ready():
 	
 
 func on_enter_action(input_: InputPackage):
+	speed_from_idle.reset()
+	speed_from_turn.reset()
+	angular_from_turn.reset()
+
 	# means no interpolation. Will be returning constant
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle_to_sprint:
-			var _start_speed = player_sm.get_tranfer_data_by_key("rm_speed")
-			if _start_speed:
-				speed_from_idle.initialise(_start_speed, default_sp.SPEED, SPEED_LERP_TIME)
+			var _inherited_speed = get_player().velocity.length()
+			speed_from_idle.initialise(_inherited_speed, default_sp.SPEED, SPEED_LERP_TIME)
 		# Leg.Act.legs_action_run: # do later
 		Leg.Act.fast_turn_180:
-			var _start_speed = player_sm.get_tranfer_data_by_key("rm_speed")
-			if _start_speed:
-				speed_from_turn.initialise(_start_speed, default_sp.SPEED, accel_time_from_turn)
-			else:
-				speed_from_turn.initialise(default_sp.SPEED, default_sp.SPEED, 0)
+			var _inherited_speed = get_player().velocity.length()
+			speed_from_turn.initialise(_inherited_speed, default_sp.SPEED, accel_time_from_turn)
 			angular_from_turn.initialise(default_sp.ANGULAR_SPEED / 10, default_sp.ANGULAR_SPEED, 1.0)
 
 	print_.lsm_action(action_name + pp.on_ent, "")

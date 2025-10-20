@@ -16,6 +16,7 @@ class _lib:
 	const _OS_loco = "OS-loco-v2-LIB" + "/"
 	const _OS_fight = "OS-fight-LIB" + "/"
 	const _SWS_combo = "SWS-combo-LIB" + "/"
+	const _SWS_att = "SWS-att-LIB" + "/"
 	const _SWS_loco = "SWS-loco-v2-LIB" + "/"
 	const _SWS_loco_p2 = "SWS-loco-p2-LIB" + "/"
 	const _EP_p1 = "EP-p1-LIB" + "/"
@@ -66,7 +67,7 @@ class strafe:
 class dodge:
 	const dodge_R := _lib._dodge + "A-Standing-Dodge-R"
 	const dodge_L := _lib._dodge + "A-Standing-Dodge-L"
-	const dodge_F := _lib._dodge + "A-Standing-Dodge-F"
+	const dodge_F := _lib._dodge + "A-standing-dodge-F"
 	const dodge_B := _lib._dodge + "A-Standing-Dodge-B"
 
 
@@ -90,6 +91,8 @@ const death := air.midair # _ss_loco + "C-death-2"
 class attack:
 	const axe_slice_1 := _lib.all_axe + "aIP-attack-slice-RL" # _ff + "axe_slice_1" # _SWS_combo + "SWSc-O-combo-1-all" #
 	const axe_slice_2 := _lib.all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "axe_slice_2"
+	const attack_from_run := _lib._SWS_att + "SWS-O-bit-stab"
+	
 
 class combat:
 	const withdraw := air.midair # _jump + "C-fall-HW" # TODO

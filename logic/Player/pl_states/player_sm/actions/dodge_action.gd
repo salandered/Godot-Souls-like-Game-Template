@@ -1,57 +1,72 @@
 extends PlayerAction
 
 
+@export var dodge_x_curve: Curve
+
+var dodge_x_peak_speed: float = 6.0
+var dodge_x_dur_correction: float = 0.0
+
+var speed_x_interpolator = HillInterpolator.new()
+
+
+const ANIM_F: String = A.dodge.dodge_F
+const ANIM_B: String = A.dodge.dodge_B
 const ANIM_R: String = A.dodge.dodge_R
 const ANIM_L: String = A.dodge.dodge_L
 
-# Speeds are not used by this action (root motion)
-# but are required by DualDirection's constructor
 const SPEED_R: float = 1.0
 const SPEED_L: float = 1.0
 
+var curr_dodge_dir: DodgeDirection
 
-var direction: DualDirection
-
+var start_time_offset = 0.0
 
 func initialise():
-	direction = DualDirection.new(SPEED_R, SPEED_L, ANIM_R, ANIM_L)
-	__log_action("hello from initialise" + em.pin)
-
+	curr_dodge_dir = DodgeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_R, ANIM_F, SPEED_L, ANIM_B)
 	blend_time_by_action = {
-		Leg.Act.idle_to_sprint: 0.6,
 		Leg.Act.run: 0.3,
-		Leg.Act.fast_turn_180: 0.2
 	}
+	
 
-func _detect_dodge_direction(input_: InputPackage) -> DualDirection.Dir:
-	# Right - PRIMARY, Left - SECONDARY
-	var _original_dir = input_.detect_strafe_dir()
-	var dir = StrafeDir.simplify(_original_dir)
-	__log_action_ent("detected dodge dir:", StrafeDir.name_(dir), pp.in_br("from " + StrafeDir.name_(_original_dir)))
-	if dir == StrafeDir.E.RIGHT:
-		return DualDirection.Dir.PRIMARY
-	else:
-		return DualDirection.Dir.SECONDARY
+func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
+	var _anim_start = actual_anim.get_marker_time_by_name(Marker.Name.FROM_RUN, 0.0)
+	var _anim_end = actual_anim.get_marker_time_by_name(Marker.Name.TO_RUN, 1.0)
+	start_time_offset = _anim_start # NOTE: side effect
+	return _anim_end - _anim_start
 
 
 func on_enter_action(input_: InputPackage) -> void:
-	var _dir = _detect_dodge_direction(input_)
-	direction.set_direction(_dir)
+	# DIRECTION
+	var _strafe_dir = input_.detect_strafe_dir()
+	curr_dodge_dir.set_direction_from_strafe_dir(_strafe_dir)
 
-func on_exit_action() -> void:
-	var final_rm_speed = animator_manager.get_root_velocity().length()
-	player_sm.fill_tranfer_data({"rm_speed": final_rm_speed})
-	var _alt_sp = get_player().velocity.length()
-	__log_action_ext("final_rm_speed/_alt_sp", final_rm_speed, _alt_sp)
+	# INTERPOLATOR
+	var _inherited_speed = get_player().velocity.length()
+	var _actual_anim = anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
+	var _anim_effective_dur = _calculate_anim_effective_duration(_actual_anim)
+	speed_x_interpolator.initialise(_inherited_speed, 2, dodge_x_peak_speed, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
 	
+	__log_action_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
+		"from strafe", StrafeDir.name_(_strafe_dir),
+		"calc_anim_dur", _anim_effective_dur,
+	)
+
+
+func update(input_: InputPackage, delta: float) -> void:
+	pm().look_at_target(delta)
+
+	var current_speed = speed_x_interpolator.update(delta)
+	
+	var _curr_world_vector = curr_dodge_dir.current_world_vector(get_player().basis)
+	get_player().velocity = _curr_world_vector * current_speed
+
+	# pm().move_with_root(delta)
+
 
 func animate(): # ▶️
 	var blend_time := 0.1
-	var start_time_offset = 0.0
 	
-	anim = anim_container.get_by_name(direction.anim_id)
-	
-	start_time_offset = anim.get_marker_time_by_name(Marker.Name.FROM_RUN, 0.0)
+	anim = anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
 	
 	__log_anim(blend_time, start_time_offset)
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)

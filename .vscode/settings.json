@@ -494,6 +494,14 @@
 				},
 			]
 		},
+		"\\b(__log_[a-zA-Z0-9_]*)(?=\\s*\\()": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#77b2dade", // Soft Blue-Green color
+				}
+			]
+		},
 		"\\b(print_\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

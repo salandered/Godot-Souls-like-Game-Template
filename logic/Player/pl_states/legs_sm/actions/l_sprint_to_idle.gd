@@ -2,9 +2,10 @@ extends LegsAction
 
 
 var fade_interpolator = FloatLinearInterpolator.new()
-var fade_time: float = 0.1 # how long to fade extra velocity
+var fade_time: float = 0.3 # how long to fade extra velocity
 var extra_speed: float = 0.0
 
+var start_time_offset := 0.0
 
 func _ready():
 	default_sp.SPEED = 3.0
@@ -16,15 +17,14 @@ func _ready():
 	}
 
 func on_enter_action(input_: InputPackage) -> void:
-	var prev_speed = player_sm.get_tranfer_data_by_key("manual_speed")
-	if prev_speed and prev_speed is float:
-		var rm_start_speed = animator_manager.calculate_animation_start_root_velocity(anim)
-		extra_speed = max(0.0, prev_speed - rm_start_speed)
-		fade_interpolator.initialise(1.0, 0.0, fade_time)
-		print_.lsm_action(action_name + pp.on_ent, "prev: %.2f, rm_start: %.2f, extra: %.2f" % [prev_speed, rm_start_speed, extra_speed])
-	else:
-		extra_speed = 0.0
-		fade_interpolator.initialise(0.0, 0.0, 0.0)
+	var _inherited_speed = get_player().velocity.length()
+	var rm_start_speed = animator_manager.calculate_animation_start_root_velocity(anim)
+	extra_speed = max(0.0, _inherited_speed - rm_start_speed)
+	fade_interpolator.initialise(1.0, 0.0, fade_time)
+
+	__log_action_ent(
+		"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %
+		[_inherited_speed, start_time_offset, rm_start_speed, extra_speed])
 
 
 func update(input_: InputPackage, delta: float):
@@ -33,13 +33,19 @@ func update(input_: InputPackage, delta: float):
 
 
 func _move_with_root(delta: float) -> void:
-	var root_vel := animator_manager.get_root_velocity()
+	var root_vel := animator_manager.get_root_velocity(true, false)
 	var fade_factor = fade_interpolator.update(delta)
 	var extra_vel_local = Vector3(0, 0, extra_speed * fade_factor) # Animation +Z
-	get_player().velocity = get_player().get_quaternion() * (root_vel + extra_vel_local)
+	var final_local_vel = root_vel + extra_vel_local
+	get_player().velocity = get_player().get_quaternion() * final_local_vel
+
+	if fade_factor > 0.0:
+		__log_action(
+			"RootVel.z: %.2f, Fade: %.2f, ExtraVel.z: %.2f, FinLocal.z: %.2f, FinalGlSp: %.2f" %
+			[root_vel.z, fade_factor, extra_vel_local.z, final_local_vel.z, get_player().velocity.length()])
+
 
 func animate(): # ▶️
-	var start_time_offset := 0.0
 	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
 	
 	__log_anim(blend_time, start_time_offset)

@@ -1,25 +1,31 @@
 extends BaseInterpolator
 class_name FloatLinearInterpolator
 
-var start_value: float
-var target_value: float
-var current_value: float
+var _start_value: float
+var _target_value: float
+var _current_value: float
 
 ## idempotent
 func initialise(start: float, target: float, duration_: float) -> void:
-	start_value = start
-	target_value = target
-	current_value = start
-	duration = duration_
-	timer = 0.0
+	self._start_value = start
+	self._target_value = target
+	self._current_value = start
 
-## Returns target_value when done
+	self.duration = duration_
+	self.timer = 0.0
+
+
+## Returns _target_value when done
 func update(delta: float) -> float:
 	if timer < duration:
 		timer += delta
 		var weight = _get_progress()
-		current_value = lerp(start_value, target_value, weight)
+		_current_value = lerp(_start_value, _target_value, weight)
 	else:
-		current_value = target_value
+		_current_value = _target_value
 
-	return current_value
+	return _current_value
+
+
+func get_current_value() -> float:
+	return _current_value

@@ -79,17 +79,17 @@ func update_current_action(next_action: BaseAction):
 	var next_act_name = next_action.action_name
 
 	if next_act_name == Leg.Act.double:
-		print_.prefix(em.pin, "✖️ declined legs double update to curr. staying with " + curr_act_name)
+		# print_.prefix("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
 		return
 	if next_act_name == PS.Act.double:
-		print_.prefix(em.pin, "✖️ declined state double update to curr. staying with " + curr_act_name)
+		# print_.prefix("", "✖️ declined state double update to curr. staying with " + curr_act_name)
 		return
 
 	if next_act_name == curr_act_name:
 		print_.prefix(em.pin, "✖️🚸 came with the same action " + curr_act_name)
 
-	print_.prefix(em.pin, curr_act_name + " moved to prev")
-	print_.prefix(em.pin, next_act_name + " is set for curr")
+	print_.prefix("", curr_act_name + " moved to prev")
+	print_.prefix("", next_act_name + " is set for curr")
 	
 	_prev_action = _current_action
 	_current_action = next_action
@@ -98,7 +98,7 @@ func update_current_action(next_action: BaseAction):
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	input_ = combat.contextualize(input_)
+	input_ = combat.contextualize(input_, delta)
 	input_ = area_awareness.contextualize(input_)
 	area_awareness.last_input_package = input_
 

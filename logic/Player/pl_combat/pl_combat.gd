@@ -36,23 +36,25 @@ func reset_active_weapon() -> void:
 	print_.fight("PlCombat", "reset active weapon")
 
 
-func contextualize(new_input: InputPackage) -> InputPackage:
+func contextualize(new_input: InputPackage, delta) -> InputPackage:
 	# actualise_shieldshot(new_input)
-	_translate_combat_actions(new_input)
+	_translate_combat_actions(new_input, delta)
 	# filter_with_resources(new_input)
 	return new_input
 
 ## translates the input to basic states with the help of the current weapon
-func _translate_combat_actions(new_input: InputPackage):
-	if not new_input.combat_actions.is_empty():
-		new_input.combat_actions.sort_custom(_priority_sort)
-		var best_action: String = new_input.combat_actions[0] # safe
-		print_.fight("PlCombat", "best action is " + best_action)
-		var translated_to_state: String = model.active_weapon.translate_input_to_state(best_action)
-		print_.fight("PlCombat", "translated to state " + translated_to_state)
+func _translate_combat_actions(new_input: InputPackage, delta):
+	if new_input.combat_actions.is_empty():
+		return
 
-		if translated_to_state:
-			new_input.actions.append(translated_to_state)
+	new_input.combat_actions.sort_custom(_priority_sort)
+	var best_action: String = new_input.combat_actions[0] # safe
+	print_.fight("PlCombat", "best action is " + best_action)
+	var _translated: String = model.active_weapon.translate_input_to_state(best_action, new_input, delta)
+	print_.fight("PlCombat", "translated to state " + _translated)
+
+	if _translated:
+		new_input.actions.append(_translated)
 
 # func filter_with_resources(input_: InputPackage):
 # 	if model.resources.statuses.has("fatique"):

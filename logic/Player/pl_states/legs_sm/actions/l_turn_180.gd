@@ -2,7 +2,6 @@ extends LegsAction
 
 @export var accel_from_apex_curve: Curve
 
-
 var initial_rotation: Quaternion
 
 var speed_curve_from_apex = EaseCurveInterpolator.new()
@@ -10,14 +9,18 @@ var speed_curve_from_apex = EaseCurveInterpolator.new()
 var curr_turn: TurnData = TurnData.new()
 
 var INCREASE_ROTATION: float = 1.0
-
 var TURN_180_APEX_TIME: float
 
+
+func initialise() -> void:
+	TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+
+
 func on_enter_action(input_: InputPackage) -> void:
-	prints(u.fr(), "------- turn on enter")
+	speed_curve_from_apex.reset()
 	
 	initial_rotation = get_player().quaternion
-	prints("Initial rotation (quaternion)", initial_rotation)
+	__log_action_ent("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA
 	var _target_angle = calculate_target_angle(input_)
@@ -33,21 +36,14 @@ func on_enter_action(input_: InputPackage) -> void:
 		Leg.Act.idle:
 			INCREASE_ROTATION = 1.0
 
-	TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
-	
 	
 func on_exit_action() -> void:
-	prints(u.fr(), "------- turn on exit")
-	
 	var tranfer_turn_data = {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
-	tranfer_turn_data["rm_speed"] = get_player().velocity.length()
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)
-
-	speed_curve_from_apex.reset()
-
-	__log_turn_exit()
+	
+	__log_action_ext(__log_turn_exit())
 
 
 func update(input_: InputPackage, delta: float):
@@ -82,8 +78,8 @@ func animate(): # ▶️
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
 
 
-func __log_turn_exit():
+func __log_turn_exit() -> String:
 	var _final_rotation = get_player().quaternion.angle_to(initial_rotation)
 	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
-	prints("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
+	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
 		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

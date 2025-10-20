@@ -20,7 +20,11 @@ class Name:
 	const TURN_180_APEX = "APEX"
 	const TURN_COMPLETE = "TURN_COMPLETE"
 	const GIVE_UP_RM = "give_up_rm"
+	
+	# strongly recommended in attack states
 	const ALLOWS_SWITCH = "allows_switch"
 	
+	# to mimick from run anims (e.g. dodge)
 	const FROM_RUN = "from_run"
 	const TO_RUN = "to_run"
+	const TO_IDLE = "to_idle"

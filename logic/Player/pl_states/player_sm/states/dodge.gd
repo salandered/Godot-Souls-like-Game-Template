@@ -15,8 +15,3 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 
 func on_enter_state(input_: InputPackage) -> void:
 	pass
-
-
-func update(input_: InputPackage, delta: float) -> void:
-	# look_at_target(delta)
-	pm().move_with_root(delta)

@@ -130,3 +130,13 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_nam
 	return blend_time
 
 # endregion
+
+
+func __log_action_ent(...parts: Array):
+	print_.lsm_action(action_name + pp.on_ent, pp.list_(parts))
+
+func __log_action_ext(...parts: Array):
+	print_.lsm_action(action_name + pp.on_ext, pp.list_(parts))
+
+func __log_action(...parts: Array):
+	print_.lsm_action(action_name, pp.list_(parts))

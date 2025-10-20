@@ -34,10 +34,11 @@ func get_prev_root_rotation() -> float:
 	return rotation_
 
 
-func get_root_velocity(y_zeroed: bool = true) -> Vector3:
+func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true) -> Vector3:
 	var curr_velocity = _calculate_velocity_delta(get_curr_playback(), 0)
 	
-	if get_blend_playback().is_blending:
+
+	if use_blending and get_blend_playback().is_blending:
 		var prev_velocity = _calculate_velocity_delta(get_prev_playback(), 0)
 		curr_velocity = prev_velocity.lerp(curr_velocity, get_blend_playback().percentage)
 	
@@ -72,7 +73,7 @@ func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int) -> Vector3
 	var scaled_delta = get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
 	var curr_progress = playback.get_effective_progress()
 	var prev_progress = max(0.0, curr_progress - scaled_delta)
-	
+	# prints(em.mark_2, prev_progress, curr_progress)
 	var prev_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, prev_progress)
 	var curr_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, curr_progress)
 	
@@ -103,7 +104,7 @@ func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
 	return rotation_delta
 
 ## needs polishing
-func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
+func calculate_animation_start_root_velocity(anim: AnimationData, start_time_offset: float = 0.0, backwards: bool = false) -> float:
 	var root_pos_track := full_body.__get_position_track(0, anim.native_anim)
 	
 	if root_pos_track == -1 or anim.native_anim.track_get_key_count(root_pos_track) <= 1:
@@ -111,7 +112,10 @@ func calculate_animation_start_root_velocity(anim: AnimationData) -> float:
 	
 	# Sample at start and a small delta to get initial velocity
 	var sample_delta = 0.016 # One frame at 60fps
-	var start_time = anim._start_time
+	var start_time = anim._start_time + start_time_offset
+	if backwards:
+		start_time -= sample_delta
+	# prints("root vel", em.mark_2, start_time, start_time + sample_delta)
 	var pos_at_start = anim.native_anim.position_track_interpolate(root_pos_track, start_time)
 	var pos_at_delta = anim.native_anim.position_track_interpolate(root_pos_track, start_time + sample_delta)
 	

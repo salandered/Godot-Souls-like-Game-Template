@@ -3,13 +3,17 @@ class_name InputGatherer
 
 
 const LONG_PRESS_THRESHOLD: float = 0.2
+const MOVE_ATTACK_THRESHOLD: float = 0.1
+const RUN_ATTACK_CONFIRM_DELAY: float = 0.2
+const SPRINT_TO_RUN_DELAY: float = 0.2
 
+var _to_run_attack_timer: DelayTimer = DelayTimer.new()
+var _to_run_after_sprint_timer: DelayTimer = DelayTimer.new()
 
-var idle_buffer_frames: int = 0 ## FOR FUTURE
 var _was_running: bool = false
-var _idle_frame_count: int = 0
 const DOUBLE_TAP_THRESHOLD: float = 0.2
 
+var _move_start_time: float = -1.0
 
 var _jump_key: KeyPress = KeyPress.new(RawAction.jump)
 var _forward_key: KeyPress = KeyPress.new(RawAction.move_forward)
@@ -17,6 +21,9 @@ var _back_key: KeyPress = KeyPress.new(RawAction.move_back)
 var _right_key: KeyPress = KeyPress.new(RawAction.move_right)
 var _left_key: KeyPress = KeyPress.new(RawAction.move_left)
 var _target_lock_key: KeyPress = KeyPress.new(RawAction.lock_target)
+var _light_attack_key: KeyPress = KeyPress.new(RawAction.light_attack)
+var _sprint_key: KeyPress = KeyPress.new(RawAction.sprint)
+
 var _target_lock_detector: TapDetector = TapDetector.new(DOUBLE_TAP_THRESHOLD)
 
 
@@ -32,10 +39,8 @@ func _update_key_press_timestamps() -> void:
 	_right_key.update(_curr_time)
 	_left_key.update(_curr_time)
 	_target_lock_key.update(_curr_time)
-
-var _target_lock_is_waiting := false
-var _target_lock_wait_start_time := 0.0
-
+	_light_attack_key.update(_curr_time)
+	_sprint_key.update(_curr_time)
 
 func _detect_double_tap(key: KeyPress) -> bool:
 	if key.is_just_pressed and key.was_released_at_least_one():
@@ -50,13 +55,12 @@ func gather_input(delta: float) -> InputPackage:
 
 	_update_key_press_timestamps()
 
-
 	# FOR FANCY CAMERA
+
 	new_input.forward_input = Input.get_action_strength(RawAction.move_forward) \
 		- Input.get_action_strength(RawAction.move_back)
 	new_input.orbit_input = Input.get_action_strength(RawAction.move_right) \
 		- Input.get_action_strength(RawAction.move_left)
-
 
 	# DETECT PRESS COMBINATIONS
 
@@ -80,24 +84,36 @@ func gather_input(delta: float) -> InputPackage:
 	
 	var _has_input = new_input.input_direction != Vector2.ZERO
 	
+	if _has_input:
+		if _move_start_time < 0.0: # movement just started
+			_move_start_time = _current_time()
+	else:
+		_move_start_time = -1.0 # movement stopped
+
 	# MAIN
+
+	if _to_run_after_sprint_timer.is_in_progress():
+		_to_run_after_sprint_timer.update(delta)
 
 	new_input.actions.append(PS.idle) # was idle as default
 	
-	# todo: make a reusable readable logic out of this
 	if _has_input:
 		new_input.actions.append(PS.run)
-		if Input.is_action_pressed(RawAction.sprint): # sprint is here to avoid in place sprinting
+		
+		if _sprint_key.is_pressed:
 			new_input.actions.append(PS.sprint)
-		_idle_frame_count = 0
-		_was_running = true
-	else:
-		# No input this frame - check if we should postpone idle
-		if _was_running and _idle_frame_count < idle_buffer_frames:
-			new_input.actions.append(PS.run)
-			_idle_frame_count += 1
-		else:
-			_was_running = false
+			_to_run_after_sprint_timer.turn_off() # cancel timer if sprint is pressed again
+		
+		elif _sprint_key.is_just_released:
+			_to_run_after_sprint_timer.initialise(SPRINT_TO_RUN_DELAY)
+			new_input.actions.append(PS.sprint) # keep sprinting for this frame
+		
+		elif _to_run_after_sprint_timer.is_in_progress():
+			new_input.actions.append(PS.sprint) # continue sprinting
+		
+	else: # no input this frame
+		_to_run_after_sprint_timer.turn_off() # cancel timer if no moving
+		
 	
 	if Input.is_action_pressed(RawAction.parry):
 		new_input.actions.append(PS.parry)
@@ -105,12 +121,9 @@ func gather_input(delta: float) -> InputPackage:
 	if Input.is_action_pressed("withdraw"):
 		new_input.actions.append(PS.withdraw)
 
-
 	if Input.is_action_pressed("roll"):
 		new_input.actions.append(PS.roll)
 
-
-	# new_input.jump_key = _jump_key
 	if Input.is_action_just_pressed(RawAction.jump):
 		if new_input.actions.has(PS.sprint):
 			new_input.actions.append(PS.jump_sprint)
@@ -128,10 +141,34 @@ func gather_input(delta: float) -> InputPackage:
 	# if Input.is_action_pressed("shield_throw_reload"):
 	# 	new_input.actions.append(PS.shield_throw_reload)
 
-	if Input.is_action_just_pressed(RawAction.light_attack):
-		new_input.combat_actions.append(CombatAction.light_attack_pressed)
+	if _to_run_attack_timer.is_initialised(): # if timer is ok we update it
+		_to_run_attack_timer.update(delta)
+		
+		var is_still_moving = new_input.input_direction != Vector2.ZERO
+		
+		if not is_still_moving: # while timer was ok situation changed, abort
+			_to_run_attack_timer.turn_off()
+		elif _to_run_attack_timer.is_complete(): # Timer finished AND player is still moving
+			new_input.combat_actions.append(CombatAction.light_attack_pressed_when_move)
+			_to_run_attack_timer.turn_off()
+
+	if _light_attack_key.is_just_pressed:
+		if _to_run_attack_timer.is_in_progress(): # we r busy with waiting for timer
+			pass
+		else:
+			var is_moving = _move_start_time > 0.0
+			var move_duration = 0.0
+			if is_moving:
+				move_duration = _current_time() - _move_start_time
+			
+			if is_moving and move_duration >= MOVE_ATTACK_THRESHOLD:
+				# start the timer which would fire the action
+				_to_run_attack_timer.initialise(RUN_ATTACK_CONFIRM_DELAY)
+			else:
+				# default attack
+				new_input.combat_actions.append(CombatAction.light_attack_pressed)
+
 	#if Input.is_action_just_pressed("heavy_attack"):
 		#new_input.combat_actions.append("heavy_attack_pressed")
-	
 
 	return new_input

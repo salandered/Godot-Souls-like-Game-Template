@@ -7,28 +7,30 @@ var curr_turn: TurnData = TurnData.new()
 
 var FAST_TURN_180_APEX_TIME: float
 
+
+func initialise() -> void:
+	# APEX
+	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+
+
 func on_enter_action(input_: InputPackage) -> void:
 	initial_rotation = get_player().quaternion
-	prints("Initial rotation (quaternion)", initial_rotation)
+	__log_action_ent("Initial rotation (quaternion)", initial_rotation)
 
 	# TURN DATA
 	var _target_angle = calculate_target_angle(input_)
 	var _turn_dir = turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
-	# APEX
-	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
-
 
 func on_exit_action() -> void:
 	var tranfer_turn_data = {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
-	tranfer_turn_data["rm_speed"] = get_player().velocity.length()
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)
 
-	__log_turn_exit()
-
+	__log_action_ext(__log_turn_exit())
+	
 
 func update(input_: InputPackage, delta: float):
 	if not curr_turn.turn_completed:
@@ -55,8 +57,8 @@ func animate(): # ▶️
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
 
 
-func __log_turn_exit():
+func __log_turn_exit() -> String:
 	var _final_rotation = get_player().quaternion.angle_to(initial_rotation)
 	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
-	prints("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
+	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
 		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

@@ -24,7 +24,7 @@ func pm() -> PlayerMovement:
 
 
 func _on_exit_action() -> void:
-	__log_action_ext("🚪Exited!")
+	# __log_action_ext("🚪Exited!")
 	on_exit_action()
 
 
