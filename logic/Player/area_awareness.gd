@@ -6,7 +6,7 @@ class_name AreaAwareness
 @onready var container: PlayerStatesContainer = %StatesContainer
 
 
-@onready var player = $"../.."
+@onready var player: Princess = $"../.."
 
 
 var last_pushback_vector: Vector3 # todo: what
@@ -22,14 +22,14 @@ enum LockState {
 
 var current_lock_state: LockState = LockState.ALL_UNLOCKED
 
-@export var LOCKING_ANGLE = 30
-@export var TARGET_LOCK_DISTANCE_SQUARED = 128
-@onready var downcast = $Downcast as RayCast3D
+@export var LOCKING_ANGLE := 30.0
+@export var TARGET_LOCK_DISTANCE_SQUARED := 128.0
+@onready var downcast := $Downcast as RayCast3D
 
 
 func _decide_on_lock_state(new_input: InputPackage) -> LockState:
 	# NOTE: camera info is more important that input
-	var is_cam_locked = is_camera_locked()
+	var is_cam_locked := is_camera_locked()
 	# if new_input.target_lock.any_tap():
 		# print(u.fr() + "~~~~we are in decide on lock with", new_input.target_lock)
 	if not is_cam_locked:
@@ -77,7 +77,7 @@ const TO_STRAFE_MAP = {
 
 func _apply_translation(new_input: InputPackage, translation_map: Dictionary):
 	for i in range(new_input.actions.size()):
-		var current_action = new_input.actions[i]
+		var current_action := new_input.actions[i]
 		
 		if current_action in translation_map:
 			new_input.actions[i] = translation_map[current_action]
@@ -113,7 +113,7 @@ func get_floor_distance() -> float:
 
 
 func find_target() -> Node:
-	var all_targets = get_tree().get_nodes_in_group("targetable")
+	var all_targets := get_tree().get_nodes_in_group("targetable")
 	# print_.aware_target("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
 	var candidates: Array[Node] = []
 	for target in all_targets:
@@ -130,14 +130,14 @@ func find_target() -> Node:
 
 
 func camera_focus_further_than_squared(node: Node3D, distance: float) -> bool:
-	var camera_focus_pos = player.camera_focus.global_position
+	var camera_focus_pos := player.camera_focus.global_position
 	return camera_focus_pos.distance_squared_to(node.global_position) > distance
 
 
 func _is_good_candidate(target: Node3D) -> bool:
 	# TODO: consider raycast from the cam or pl to the target to ensure there's no obstacle
-	var half_fov = deg_to_rad(30) # narrows to ±30°
-	var min_dot = cos(half_fov)
+	var half_fov := deg_to_rad(30) # narrows to ±30°
+	var min_dot := cos(half_fov)
 
 	if not player.fancy_camera.camera.is_position_in_frustum(target.global_position):
 		# __log_candidate(target, "frustum")
@@ -146,14 +146,14 @@ func _is_good_candidate(target: Node3D) -> bool:
 		# _print.call(target, "distance")
 		return false
 
-	var camera_to_target = (target.global_position - player.fancy_camera.camera.global_transform.origin).normalized()
-	var camera_forward = - player.fancy_camera.camera.global_transform.basis.z
+	var camera_to_target := (target.global_position - player.fancy_camera.camera.global_transform.origin).normalized()
+	var camera_forward := - player.fancy_camera.camera.global_transform.basis.z
 	if camera_forward.dot(camera_to_target) < min_dot:
 		# _print.call(target, "angle between camera forward and target")
 		return false
 
-	var player_to_target = (target.global_position - player.global_transform.origin).normalized()
-	var player_forward = player.global_transform.basis.z
+	var player_to_target := (target.global_position - player.global_transform.origin).normalized()
+	var player_forward := player.global_transform.basis.z
 	# if player_forward.dot(player_to_target) < 0:
 	# 	# _print.call(target, "behind player")
 	# 	return false

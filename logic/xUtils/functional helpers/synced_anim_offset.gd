@@ -10,14 +10,14 @@ static func calculate_synced_anim_offset(
 	target_pivot_time: float
 ) -> float:
 	# normalized phase (0-1) relative to pivot time
-	var phase_in_cycle = fmod(source_anim_progress - source_pivot_time + source_anim_duration, source_anim_duration)
-	var normalized_phase = phase_in_cycle / source_anim_duration
+	var phase_in_cycle := fmod(source_anim_progress - source_pivot_time + source_anim_duration, source_anim_duration)
+	var normalized_phase := phase_in_cycle / source_anim_duration
 	
 	# map this phase to target animation
-	var target_phase_time = normalized_phase * target_anim_duration
+	var target_phase_time := normalized_phase * target_anim_duration
 	
 	# adjust for target's pivot time
-	var target_start_offset = fmod(target_phase_time + target_pivot_time, target_anim_duration)
+	var target_start_offset := fmod(target_phase_time + target_pivot_time, target_anim_duration)
 	
 	return target_start_offset
 

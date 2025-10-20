@@ -13,6 +13,6 @@ func _init(next_state_: String = "", comment_: String = ""):
 
 
 func _speak_freely():
-	var name_ = get_script().get_global_name()
+	var name_: Variant = get_script().get_global_name()
 	if _comment:
-		print_.prefix("I, " + name_ + "⚖️", "have something important to say: " + _comment)
+		print_.prefix("I, " + str(name_) + "⚖️", "have something important to say: " + _comment)

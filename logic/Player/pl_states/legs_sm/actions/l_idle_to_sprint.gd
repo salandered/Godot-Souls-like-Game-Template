@@ -8,7 +8,7 @@ func _ready():
 
 
 # func on_exit_action() -> void:
-	# var final_rm_speed = animator_manager.get_root_velocity().length()
+	# var final_rm_speed := animator_manager.get_root_velocity().length()
 	# player_sm.fill_tranfer_data({"root_vel_speed": final_rm_speed})
 
 

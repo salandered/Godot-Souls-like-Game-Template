@@ -27,7 +27,7 @@ func on_contact(area: Node3D):
 	if not area is WeaponHurtBox:
 		return
 
-	var _weapon_area = area as WeaponHurtBox
+	var _weapon_area := area as WeaponHurtBox
 	var weapon: BaseWeapon = _weapon_area.base_weapon
 	
 	if _is_weapon_mine(weapon):
@@ -41,7 +41,7 @@ func on_contact(area: Node3D):
 
 	weapon.hitbox_ignore_list.append(self)
 
-	var _hit_data = weapon.get_hit_data()
+	var _hit_data := weapon.get_hit_data()
 	if not _hit_data:
 		print_.h_box(holder.name, em.warn + "weapon hit data is null")
 	else:

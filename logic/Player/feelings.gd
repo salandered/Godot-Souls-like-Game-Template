@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func change_health(amount: int) -> void:
-	var new_health = current_health + amount
+	var new_health := current_health + amount
 	
 	current_health = clamp(new_health, 0, max_health)
 
@@ -27,7 +27,7 @@ func change_health(amount: int) -> void:
 func change_stamina(amount: int) -> void:
 	# TODO: not its the same as health but actually it should work differently
 	# when u sprint run stamina decreases constantly
-	var new_stamina = current_stamina + amount
+	var new_stamina := current_stamina + amount
 
 	current_stamina = clamp(new_stamina, 0, max_stamina)
 	

@@ -9,7 +9,7 @@ var free_offset: Vector3
 func switch_from_locked():
 	print_.fancy_cam(state_name, "DROP started")
 	chest = fc.player.camera_focus
-	var restored_offset = fc.nest.global_position - fc.mount.global_position
+	var restored_offset := fc.nest.global_position - fc.mount.global_position
 	free_offset = restored_offset.normalized() * free_offset.length()
 	# tried: free_offset = fc.nest.global_position - fc.mount.global_position
 	# another option against snapping to try
@@ -19,7 +19,7 @@ func switch_from_locked():
 
 
 func update(delta: float):
-	var prev_focus_pos = fc.focus.global_position
+	var prev_focus_pos := fc.focus.global_position
 
 	_move_focus_point() # Focus Point follows player's chest
 
@@ -56,7 +56,7 @@ func _rotate_offset(prev_focus_pos: Vector3, new_focus_pos: Vector3) -> void:
 	var new_direction := new_focus_xz - center_xz
 	var alpha := new_direction.angle_to(old_offset_xz)
 
-	var decider = new_direction.cross(old_offset_xz)
+	var decider := new_direction.cross(old_offset_xz)
 	var signed_alpha: float = alpha if decider.y < 0 else -alpha
 	free_offset = free_offset.rotated(Vector3.UP, signed_alpha)
 

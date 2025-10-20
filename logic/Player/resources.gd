@@ -10,7 +10,7 @@ class_name HumanoidResources
 @export var max_stamina: float = 100
 @export var stamina_regeneration_rate: float = 10 # per sec, because then we'll multiply on delta
 
-@onready var model = $".." as PlayerModel
+@onready var model: PlayerModel = $".."
 
 var statuses: Array[String]
 const FATIQUE_TRESHOLD = 20
@@ -29,7 +29,7 @@ func pay_block_cost(damage: float, blocking_coefficient: float):
 	if damage * blocking_coefficient <= stamina:
 		lose_stamina(damage * blocking_coefficient)
 	else:
-		var unblocked_portion = damage - stamina / blocking_coefficient
+		var unblocked_portion := damage - stamina / blocking_coefficient
 		lose_stamina(stamina)
 		lose_health(unblocked_portion)
 		# something punish like force guardbreak 

@@ -31,7 +31,7 @@ static func simplify(dir: E) -> E:
 
 
 static func from_vector(vector: Vector2) -> E:
-	var r = -1
+	var r := -1
 	match vector:
 		Vector2(0, -1): r = E.FORWARD
 		Vector2(0, 1): r = E.BACKWARD

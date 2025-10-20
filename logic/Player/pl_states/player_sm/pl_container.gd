@@ -87,7 +87,7 @@ func _initialise_legs_actions():
 
 
 func _accept_player_states() -> void:
-	var states_container = StatesContainer.new()
+	var states_container := StatesContainer.new()
 
 	for child: PlayerState in get_descendants.player_states_by_type(player_sm, "PlayerState"):
 		print_.container("", "child.get_name() " + child.get_name())
@@ -143,7 +143,7 @@ func _accept_player_states() -> void:
 
 
 func _accept_player_actions():
-	var states_container = StatesContainer.new()
+	var states_container := StatesContainer.new()
 	
 	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
 		print_.container("pl_act", "child.get_name() " + child.get_name())
@@ -151,9 +151,9 @@ func _accept_player_actions():
 		__add_action_data(action_data, child)
 
 	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
-		var node_name = u.to_pascal_case(action_data.action_name)
+		var node_name := u.to_pascal_case(action_data.action_name)
 		print_.container("pl_act", "Creating action: " + action_data.action_name)
-		var child = PlayerAction.new()
+		var child := PlayerAction.new()
 		child.name = node_name
 		__add_action_data(action_data, child)
 		add_child(child) # add to tree
@@ -174,7 +174,7 @@ func __add_action_data(action_data, child):
 	
 	# specific 
 	# child.parent_state = state_by_name(action_data.state_name)
-	var anim = anim_container.get_by_name(action_data.anim_id)
+	var anim := anim_container.get_by_name(action_data.anim_id)
 	assert(anim, "no anim with " + action_data.anim_id)
 	child.anim = anim
 	child.action_name = action_data.action_name
@@ -183,7 +183,7 @@ func __add_action_data(action_data, child):
 	
 
 func _accept_legs_behaviors():
-	var leg_beh_container = LegBehaviorContainer.new()
+	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsBehavior in get_descendants.player_states_by_type(legs_sm, "LegsBehavior"):
 		print_.container("", "node.get_name() " + child.get_name())
 		var behavior_data: LegBehaviorContainer.BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
@@ -207,7 +207,7 @@ func _accept_legs_behaviors():
 
 
 func _accept_legs_actions():
-	var leg_beh_container = LegBehaviorContainer.new()
+	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsAction in get_descendants.player_states_by_type(legs_sm, "LegsAction"):
 		print_.container("", "node.get_name() " + child.get_name())
 		var action_data: LegBehaviorContainer.ActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())

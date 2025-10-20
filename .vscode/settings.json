@@ -545,7 +545,40 @@
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#93afecf3"
+					"color": "#8bb8f1fa"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(prev_prev_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#eca593f3"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(prev_blend_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#8bb8f1fa"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(curr_blend_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9c582f3"
 				},
 				{
 					// "color": "#FFEEA1E5",

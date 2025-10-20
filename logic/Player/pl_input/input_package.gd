@@ -76,7 +76,7 @@ func detect_strafe_dir() -> StrafeDir.E:
 # 
 
 func _to_string() -> String:
-	var parts = []
+	var parts := []
 	parts.append("input_dir: %s" % input_direction)
 	if not actions.is_empty():
 		parts.append("actions: %s" % ", ".join(actions))

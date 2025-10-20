@@ -59,6 +59,6 @@ func __validation():
 	for type_ in MotionType.get_all_types():
 		assert(_motion_type_to_default_action.has(type_),
 			pp.s("SupportedActions must contain all motion types:", type_, "is missing"))
-		var value = _motion_type_to_default_action[type_]
+		var value: Variant = _motion_type_to_default_action[type_]
 		assert(value is String and value != "")
 	assert(len(action_names) > 0, "action_names len empty")

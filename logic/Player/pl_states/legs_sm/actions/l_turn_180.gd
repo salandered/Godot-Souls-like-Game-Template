@@ -4,7 +4,7 @@ extends LegsAction
 
 var initial_rotation: Quaternion
 
-var speed_curve_from_apex = EaseCurveInterpolator.new()
+var speed_curve_from_apex := EaseCurveInterpolator.new()
 
 var curr_turn: TurnData = TurnData.new()
 
@@ -20,11 +20,12 @@ func on_enter_action(input_: InputPackage) -> void:
 	speed_curve_from_apex.reset()
 	
 	initial_rotation = get_player().quaternion
+	prints("~~~ Turn Enter: is_reversed?", input_.reverse_data.is_reversed(), "Input Vec:", input_.input_direction)
 	__log_action_ent("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA
-	var _target_angle = calculate_target_angle(input_)
-	var _turn_dir = turn_direction_by_target_angle(_target_angle)
+	var _target_angle := calculate_target_angle(input_)
+	var _turn_dir: = turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
 	# SPEED CONFIG
@@ -38,7 +39,7 @@ func on_enter_action(input_: InputPackage) -> void:
 
 	
 func on_exit_action() -> void:
-	var tranfer_turn_data = {}
+	var tranfer_turn_data: = {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)
@@ -47,14 +48,14 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float):
-	var SPEED_MULT = 1.0
+	var SPEED_MULT: = 1.0
 	if not curr_turn.turn_completed:
-		var rotation_delta = animator_manager.get_root_rotation()
-		var result = pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
+		var rotation_delta: = animator_manager.get_root_rotation()
+		var result := pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
 	if time_spent() < TURN_180_APEX_TIME:
-		var root_vel = animator_manager.get_root_velocity()
+		var root_vel: = animator_manager.get_root_velocity()
 		get_player().velocity = initial_rotation * root_vel
 		# prints("~~b4", time_spent(), SPEED_MULT, get_player().velocity.length())
 	else:
@@ -69,17 +70,19 @@ func animate(): # ▶️
 	var blend_time := 0.2
 
 	## TODO: some universal system for different "sub animations" in one action
-	if curr_turn.is_turn_dir_right:
+	if curr_turn.is_turn_dir_right():
 		anim = anim_container.get_by_name(A.move.turn_180_R)
+		prints("~~~~ Turn Animate: Chose RIGHT animation")
 	else:
 		anim = anim_container.get_by_name(A.move.turn_180_L)
+		prints("~~~~ Turn Animate: Chose LEFT animation")
 
 	__log_anim(blend_time)
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
 
 
 func __log_turn_exit() -> String:
-	var _final_rotation = get_player().quaternion.angle_to(initial_rotation)
-	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
+	var _final_rotation := get_player().quaternion.angle_to(initial_rotation)
+	var _error_angle := curr_turn.accum_rotation - curr_turn.target_angle
 	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
 		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

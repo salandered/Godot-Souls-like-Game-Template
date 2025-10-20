@@ -52,8 +52,8 @@ func _to_string() -> String:
 	if not _is_reversed:
 		return "ReverseData: none"
 	
-	var prev_name = _vector_to_direction_name(prev_dir)
-	var target_name = _vector_to_direction_name(target_dir)
+	var prev_name := _vector_to_direction_name(prev_dir)
+	var target_name: = _vector_to_direction_name(target_dir)
 	return "ReverseData: %s reversal (%s -> %s) [%.4f, %s]" \
 		% [type, prev_name, target_name, time_delta, other_keys_was_pressed]
 

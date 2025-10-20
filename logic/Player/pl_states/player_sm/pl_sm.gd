@@ -41,6 +41,7 @@ func initialise():
 	# legs sm level
 	legs_sm.current_behavior = _run_beh
 	legs_sm.current_action = _idle_action
+	legs_sm.prev_action = _idle_action
 
 	#
 	animation_settings.play(A.SET_full_body, 0.2) # todo: delete
@@ -56,7 +57,7 @@ func fill_tranfer_data(tranfer_turn_data):
 
 func get_tranfer_data_by_key(key) -> Variant:
 	## auto getting prev one
-	var data = _transfer_data.get_by_action_and_key(_prev_action.action_name, key)
+	var data: Variant = _transfer_data.get_by_action_and_key(_prev_action.action_name, key)
 	return data
 
 
@@ -74,9 +75,9 @@ func update_current_action(next_action: BaseAction):
 		# curr_act_name = "-none-"
 		# print_.prefix(em.pin, "no _current_action. Should happen only on start up.")
 	# else:
-	var curr_act_name = _current_action.action_name
+	var curr_act_name := _current_action.action_name
 		
-	var next_act_name = next_action.action_name
+	var next_act_name := next_action.action_name
 
 	if next_act_name == Leg.Act.double:
 		# print_.prefix("", "✖️ declined legs double update to curr. staying with " + curr_act_name)

@@ -1,6 +1,6 @@
 extends PlayerState
 
-@export var sprint_stamina_cost = 20 # per sec so multiply by delta
+@export var sprint_stamina_cost := 20.0 # per sec so multiply by delta
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:

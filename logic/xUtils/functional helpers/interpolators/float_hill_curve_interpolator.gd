@@ -25,11 +25,11 @@ func initialise(start: float, end: float, peak: float, curve_: Curve, duration_:
 func update(delta: float) -> float:
 	if timer < duration:
 		timer += delta
-		var raw_progress = _get_progress()
+		var raw_progress := _get_progress()
 		
-		var base_value = lerp(start_value, end_value, raw_progress)
-		var burst_factor = curve.sample(raw_progress)
-		current_value = lerp(base_value, peak_value, burst_factor)
+		var base_value := lerpf(start_value, end_value, raw_progress)
+		var burst_factor := curve.sample(raw_progress)
+		current_value = lerpf(base_value, peak_value, burst_factor)
 
 	else:
 		current_value = end_value

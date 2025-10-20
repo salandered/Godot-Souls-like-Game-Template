@@ -4,9 +4,9 @@ var SPEED_LERP_TIME: float = 0.5 # Time to interpolate to target speed
 
 var accel_time_from_turn: float = 0.3 # How long to reach full speed
 
-var speed_from_idle = FloatLinearInterpolator.new()
-var speed_from_turn = FloatLinearInterpolator.new()
-var angular_from_turn = FloatLinearInterpolator.new()
+var speed_from_idle: = FloatLinearInterpolator.new()
+var speed_from_turn := FloatLinearInterpolator.new()
+var angular_from_turn: = FloatLinearInterpolator.new()
 
 func _ready():
 	default_sp.SPEED = 5.0
@@ -29,11 +29,11 @@ func on_enter_action(input_: InputPackage):
 	# means no interpolation. Will be returning constant
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle_to_sprint:
-			var _inherited_speed = get_player().velocity.length()
+			var _inherited_speed := get_player().velocity.length()
 			speed_from_idle.initialise(_inherited_speed, default_sp.SPEED, SPEED_LERP_TIME)
 		# Leg.Act.legs_action_run: # do later
 		Leg.Act.fast_turn_180:
-			var _inherited_speed = get_player().velocity.length()
+			var _inherited_speed := get_player().velocity.length()
 			speed_from_turn.initialise(_inherited_speed, default_sp.SPEED, accel_time_from_turn)
 			angular_from_turn.initialise(default_sp.ANGULAR_SPEED / 10, default_sp.ANGULAR_SPEED, 1.0)
 
@@ -45,8 +45,8 @@ func on_exit_action():
 
 
 func update(input_: InputPackage, delta: float):
-	var CURR_SPEED = default_sp.SPEED # default actual speed
-	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
+	var CURR_SPEED := default_sp.SPEED # default actual speed
+	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle_to_sprint:
@@ -56,7 +56,7 @@ func update(input_: InputPackage, delta: float):
 			# CURR_ANGULAR_SPEED = angular_from_turn.update(delta)
 	
 	# prints("~~~~~~~~~~~~~~", CURR_SPEED, CURR_ANGULAR_SPEED)
-	var speed_config = SpeedConfig.new(default_sp, 1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
+	var speed_config := SpeedConfig.new(default_sp, 1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
 	pm().process_input_vector(input_, delta, speed_config)
 
 	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
@@ -70,15 +70,15 @@ func animate(): # ▶️
 		Leg.Act.idle_to_sprint:
 			start_time_offset = 0.5
 		Leg.Act.run:
-			var r = sync_with_prev_loco_anim(_next_anim_correction)
+			var r := sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
 				start_time_offset = r
 	__log_anim(blend_time, start_time_offset)
 	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)
 
 
-var _dev_add_blend = 0
-var _next_anim_correction = 0.12
+var _dev_add_blend := 0.0
+var _next_anim_correction: = 0.12
 
 
 func _input(event):

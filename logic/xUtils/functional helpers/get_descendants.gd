@@ -3,7 +3,7 @@ class_name get_descendants
 
 
 static func base_weapons_only_one(node: Node) -> BaseWeapon:
-	var r = base_weapons(node)
+	var r := base_weapons(node)
 	assert(len(r) == 1, "expected 1 base weapon, got " + str(len(r)))
 	return r[0]
 

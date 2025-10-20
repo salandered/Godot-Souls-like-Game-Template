@@ -87,7 +87,7 @@ func _rotate_offset_locked(delta: float) -> void:
 	if not blend_timer.is_complete():
 		# --- SMOOTH BLEND (YAW INTERPOLATION) ---
 		blend_timer.update(delta)
-		var t_linear = clamp(blend_timer.get_elapsed() / blend_timer.duration, 0.0, 1.0)
+		var t_linear := clampf(blend_timer.get_elapsed() / blend_timer.duration, 0.0, 1.0)
 		var t_eased := u.ease_in_out(t_linear)
 
 		# get the target angle
@@ -105,20 +105,20 @@ func _rotate_offset_locked(delta: float) -> void:
 	else:
 		# --- RESPONSIVE LOCK (DIRECT ASSIGNMENT) ---
 		# After blending, snap directly to the desired orientation for control
-		var current_hor_len = Vector2(lock_offset.x, lock_offset.z).length()
+		var current_hor_len := Vector2(lock_offset.x, lock_offset.z).length()
 		
 		# against a zero length if camera is perfectly vertical
 		if current_hor_len < Constants.EPSILON_5:
 			current_hor_len = blend_start_hor_len
 
-		var final_xz = desired_dir_xz * current_hor_len
+		var final_xz := desired_dir_xz * current_hor_len
 		lock_offset.x = final_xz.x
 		lock_offset.z = final_xz.y
 
 	# LOGS
 	# var nest_mount_vec_len := (fc.nest.global_position - fc.mount.global_position).length()
 	# var delta_off_angle: float = pp.pp_v3_angle_deg(_off_before, lock_offset, false)
-	# var arc_len = snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
+	# var arc_len := snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
 	# print_.fancy_cam("[~~LOCK UPD rot ", u.fr(), "]",
 	# 	" angle_delta_deg=", str(delta_off_angle),
 	# 	" arc_len=", str(arc_len),

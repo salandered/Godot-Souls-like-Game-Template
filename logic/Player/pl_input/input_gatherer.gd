@@ -27,11 +27,11 @@ var _sprint_key: KeyPress = KeyPress.new(RawAction.sprint)
 var _target_lock_detector: TapDetector = TapDetector.new(DOUBLE_TAP_THRESHOLD)
 
 
-func _current_time():
+func _current_time()-> float:
 	return Time.get_ticks_msec() / 1000.0
 
 func _update_key_press_timestamps() -> void:
-	var _curr_time = _current_time()
+	var _curr_time := _current_time()
 	
 	_jump_key.update(_curr_time)
 	_forward_key.update(_curr_time)
@@ -44,14 +44,14 @@ func _update_key_press_timestamps() -> void:
 
 func _detect_double_tap(key: KeyPress) -> bool:
 	if key.is_just_pressed and key.was_released_at_least_one():
-		var time_since_release = _current_time() - key.last_release_time
+		var time_since_release := _current_time() - key.last_release_time
 		if time_since_release <= DOUBLE_TAP_THRESHOLD:
 			return true
 	return false
 
 
 func gather_input(delta: float) -> InputPackage:
-	var new_input = InputPackage.new()
+	var new_input := InputPackage.new()
 
 	_update_key_press_timestamps()
 
@@ -82,7 +82,7 @@ func gather_input(delta: float) -> InputPackage:
 	new_input.input_direction = Input.get_vector(
 		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
-	var _has_input = new_input.input_direction != Vector2.ZERO
+	var _has_input := new_input.input_direction != Vector2.ZERO
 	
 	if _has_input:
 		if _move_start_time < 0.0: # movement just started
@@ -144,7 +144,7 @@ func gather_input(delta: float) -> InputPackage:
 	if _to_run_attack_timer.is_initialised(): # if timer is ok we update it
 		_to_run_attack_timer.update(delta)
 		
-		var is_still_moving = new_input.input_direction != Vector2.ZERO
+		var is_still_moving: = new_input.input_direction != Vector2.ZERO
 		
 		if not is_still_moving: # while timer was ok situation changed, abort
 			_to_run_attack_timer.turn_off()
@@ -156,8 +156,8 @@ func gather_input(delta: float) -> InputPackage:
 		if _to_run_attack_timer.is_in_progress(): # we r busy with waiting for timer
 			pass
 		else:
-			var is_moving = _move_start_time > 0.0
-			var move_duration = 0.0
+			var is_moving := _move_start_time > 0.0
+			var move_duration: = 0.0
 			if is_moving:
 				move_duration = _current_time() - _move_start_time
 			

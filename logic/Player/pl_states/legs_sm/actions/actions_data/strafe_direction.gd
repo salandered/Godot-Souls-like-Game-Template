@@ -76,7 +76,7 @@ func get_all_anims() -> Array[String]:
 
 
 ## sum is 28
-static var all_dir_pairs = [
+static var all_dir_pairs := [
 	# todo: some hash
 	# 180 OPPOSITE (most frequent)
 	[StrafeDir.E.FORWARD, StrafeDir.E.BACKWARD, ChangeType.OPPOSITE],

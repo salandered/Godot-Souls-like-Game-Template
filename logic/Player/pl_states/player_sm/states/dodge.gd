@@ -7,7 +7,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 	
 	if curr_state_action.passed_marker(Marker.Name.TO_RUN):
 		print_.psm_check_trans(state_name, pp.s("passed_marker TO_RUN => choosing best input"))
-		var verdict = best_next_state_from_input(input_)
+		var verdict := best_next_state_from_input(input_)
 		return verdict
 
 	return PLVerdict.new("")

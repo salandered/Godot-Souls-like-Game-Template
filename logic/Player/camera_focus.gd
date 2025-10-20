@@ -6,7 +6,7 @@ extends Node3D
 @export var follow_speed: float = 4
 
 func _process(delta: float) -> void:
-	var target_position = Vector3(hips.global_position.x, self.global_position.y, hips.global_position.z)
+	var target_position := Vector3(hips.global_position.x, self.global_position.y, hips.global_position.z)
 	
 	self.global_position = self.global_position.lerp(target_position, follow_speed * delta)
 

@@ -19,7 +19,7 @@ func _active_weapon() -> BaseWeapon:
 
 
 func set_hit_data(hit_damage, anim_id: String) -> void:
-	var hit_data = HitData.new()
+	var hit_data := HitData.new()
 	hit_data.initialise(hit_damage, anim_id, _active_weapon())
 	_active_weapon()._hit_data = hit_data
 	print_.fight("PlCombat", "set hit data: " + str(hit_data))

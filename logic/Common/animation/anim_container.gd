@@ -8,7 +8,7 @@ extends BaseAnimationContainer
 class_name AnimationContainer
 
 
-var _animations = [
+var _animations := [
 	## loco
 	AnimationData.new(A.move.idle),
 	AnimationData.new(A.move.idle_to_sprint),
@@ -86,8 +86,11 @@ func _accept_animations(native_player: AnimationPlayer) -> void:
 		__enrich_with_end_start_times(anim)
 		
 		# all markers # todo: this can be used before __enrich_with_end_start_times
-		var markers = __get_animation_markers(anim.native_anim)
+		var markers := __get_animation_markers(anim.native_anim)
 		anim._markers = markers
+
+		# Build the track cache for this animation
+		anim._track_path_to_idx = __build_track_cache(anim.native_anim)
 
 		_anim_by_name[anim.anim_id] = anim
 
@@ -108,12 +111,25 @@ func _accept_animations(native_player: AnimationPlayer) -> void:
 		print_.warn("Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)])
 
 
+static func __build_track_cache(native_anim: Animation) -> Dictionary:
+	var cache := {"pos": {}, "rot": {}}
+	for i in range(native_anim.get_track_count()):
+		var path: String = native_anim.track_get_path(i)
+		var type: int = native_anim.track_get_type(i)
+		
+		if type == Animation.TYPE_POSITION_3D:
+			cache["pos"][path] = i
+		elif type == Animation.TYPE_ROTATION_3D:
+			cache["rot"][path] = i
+	return cache
+
+
 func __enrich_with_end_start_times(anim: AnimationData):
-	var native_anim = anim.native_anim
+	var native_anim := anim.native_anim
 
 	var _start_time: float = 0.0
 	var _end_time: float = native_anim.length
-	var _duration = 0
+	var _duration := 0.0
 
 	var _has_start_marker: bool = native_anim.has_marker(Marker.Name.START)
 	var _has_end_marker: bool = native_anim.has_marker(Marker.Name.END)
@@ -150,7 +166,7 @@ static func __get_animation_markers(animation: Animation) -> Dictionary:
 	for marker_name in marker_names:
 		var marker_time: float = animation.get_marker_time(marker_name)
 		
-		var marker = Marker.new(marker_time, marker_name)
+		var marker := Marker.new(marker_time, marker_name)
 		markers_dict[marker_name] = marker
 	
 	return markers_dict

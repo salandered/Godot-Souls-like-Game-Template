@@ -50,10 +50,3 @@ func _to_string() -> String:
 		time_spent,
 		duration
 	]
-
-# func _to_string() -> String:
-# 	if not is_blending:
-# 		return "Blend[■■■■■] 100%"
-# 	var bars = int(percentage * 5)
-# 	var progress_bar = "■".repeat(bars) + "□".repeat(5 - bars)
-# 	return "Blend[%s] %.0f%%" % [progress_bar, percentage * 100]

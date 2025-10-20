@@ -6,14 +6,14 @@ const BACK = "back"
 const LEFT = "left"
 const RIGHT = "right"
 
-static var name_to_vec = {
+static var name_to_vec := {
 	FORWARD: Vector2(0, -1),
 	BACK: Vector2(0, 1),
 	LEFT: Vector2(-1, 0),
 	RIGHT: Vector2(1, 0)
 }
 
-static var vec_to_name = {
+static var vec_to_name := {
 	Vector2(0, -1): FORWARD,
 	Vector2(0, 1): BACK,
 	Vector2(-1, 0): LEFT,

@@ -14,7 +14,7 @@ var default_blend_time: float = 0.2
 
 var _enter_action_time: float
 
-var blend_time_by_action = {}
+var blend_time_by_action := {}
 
 
 # region: INTERFACE 
@@ -69,7 +69,7 @@ func mark_enter_action() -> void:
 
 ## needs mark_enter_action to be set beforehand
 func get_real_time_spent() -> float:
-	var now = Time.get_unix_time_from_system()
+	var now := Time.get_unix_time_from_system()
 	return now - _enter_action_time
 
 
@@ -144,7 +144,7 @@ func works_between(start: float, finish: float) -> bool:
 
 
 func passed_marker(marker_name: String) -> bool:
-	var marker_time = anim.get_marker_time_by_name(marker_name)
+	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		print_.warn("passed_marker - no time - will return false", true)
 		return __reject()
@@ -155,7 +155,7 @@ func passed_marker(marker_name: String) -> bool:
 
 
 func before_marker(marker_name: String) -> bool:
-	var marker_time = anim.get_marker_time_by_name(marker_name)
+	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		print_.warn("before_marker - no time - will return false", true)
 		return __reject()

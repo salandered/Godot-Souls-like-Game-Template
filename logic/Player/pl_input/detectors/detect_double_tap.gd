@@ -60,7 +60,7 @@ func _reset_flags() -> void:
 ## Internal check to see if a key press qualifies as the second tap in a sequence.
 func _is_valid_double_tap(key: KeyPress, current_time: float) -> bool:
 	if key.is_just_pressed and key.was_released_at_least_one():
-		var time_since_release = current_time - key.last_release_time
+		var time_since_release := current_time - key.last_release_time
 		if time_since_release <= _threshold:
 			return true
 	return false

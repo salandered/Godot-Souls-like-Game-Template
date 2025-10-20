@@ -17,14 +17,14 @@ func _process(delta: float) -> void:
 		previous_position = Vector3.INF
 		return
 
-	var current_position = target_node.global_position
+	var current_position := target_node.global_position
 
 	if previous_position != Vector3.INF:
 		# 1. Calculate the interpolation factor using a sine wave.
 		# This creates a smooth value that oscillates between 0.0 and 1.0.
-		var t = (sin(time_elapsed * color_cycle_speed) + 1.0) / 2.0
+		var t := (sin(time_elapsed * color_cycle_speed) + 1.0) / 2.0
 		
-		var current_color = path_color_a.lerp(path_color_b, t)
+		var current_color := path_color_a.lerp(path_color_b, t)
 		
 		DebugDraw3D.draw_line(previous_position, current_position, current_color, path_duration)
 	

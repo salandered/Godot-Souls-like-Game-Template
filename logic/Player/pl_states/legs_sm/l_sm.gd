@@ -15,10 +15,16 @@ var current_behavior: LegsBehavior
 # It should belong here! current_action is managed by the "pool" of actions. 
 # Behavior changes may or may NOT change current action.
 var current_action: LegsAction
+var prev_action: LegsAction ## curr and prev in LSM context
 
 
 func update(input_: InputPackage, delta: float) -> void:
 	current_behavior.update(input_, delta)
+
+
+func set_current_action(new_action: LegsAction):
+	prev_action = current_action
+	current_action = new_action
 
 
 func switch_to(next_behavior: LegsBehavior, input_: InputPackage):

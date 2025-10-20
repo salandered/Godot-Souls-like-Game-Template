@@ -28,8 +28,8 @@ func initialise(start: float, target: float, curve_: Curve, duration_: float) ->
 func update(delta: float) -> float:
 	if timer < duration:
 		timer += delta
-		var raw_progress = _get_progress()
-		var eased_progress = curve.sample(raw_progress)
+		var raw_progress := _get_progress()
+		var eased_progress := curve.sample(raw_progress)
 		current_value = lerp(start_value, target_value, eased_progress)
 	else:
 		current_value = target_value

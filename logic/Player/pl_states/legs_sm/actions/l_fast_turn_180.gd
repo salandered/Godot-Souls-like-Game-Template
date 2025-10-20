@@ -18,13 +18,13 @@ func on_enter_action(input_: InputPackage) -> void:
 	__log_action_ent("Initial rotation (quaternion)", initial_rotation)
 
 	# TURN DATA
-	var _target_angle = calculate_target_angle(input_)
-	var _turn_dir = turn_direction_by_target_angle(_target_angle)
+	var _target_angle := calculate_target_angle(input_)
+	var _turn_dir := turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
 
 func on_exit_action() -> void:
-	var tranfer_turn_data = {}
+	var tranfer_turn_data := {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)
@@ -34,12 +34,12 @@ func on_exit_action() -> void:
 
 func update(input_: InputPackage, delta: float):
 	if not curr_turn.turn_completed:
-		var rotation_delta = animator_manager.get_root_rotation()
-		var result = pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation)
+		var rotation_delta := animator_manager.get_root_rotation()
+		var result := pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
 	if time_spent() < FAST_TURN_180_APEX_TIME:
-		var root_vel = animator_manager.get_root_velocity()
+		var root_vel := animator_manager.get_root_velocity()
 		get_player().velocity = initial_rotation * root_vel
 	else:
 		pm().move_with_input_vector(input_, delta)
@@ -58,7 +58,7 @@ func animate(): # ▶️
 
 
 func __log_turn_exit() -> String:
-	var _final_rotation = get_player().quaternion.angle_to(initial_rotation)
-	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
+	var _final_rotation := get_player().quaternion.angle_to(initial_rotation)
+	var _error_angle := curr_turn.accum_rotation - curr_turn.target_angle
 	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
 		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

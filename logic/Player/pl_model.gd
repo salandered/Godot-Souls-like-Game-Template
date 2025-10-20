@@ -2,12 +2,12 @@ extends Node
 class_name PlayerModel
 
 @onready var player: Princess = $".."
-@onready var skeleton = %GeneralSkeleton
-@onready var combat = $Combat as PlayerCombat
-@onready var resources = $Resources as HumanoidResources
+@onready var skeleton: Skeleton3D = %GeneralSkeleton
+@onready var combat: PlayerCombat = $Combat
+@onready var resources: HumanoidResources = $Resources
 @onready var hitbox: Hitbox_ = %HitBox
 @onready var area_awareness: AreaAwareness = %AreaAwareness
-@onready var container = %StatesContainer as PlayerStatesContainer
+@onready var container: PlayerStatesContainer = %StatesContainer
 
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var legs_sm: LegsSM = %LegsSM
@@ -92,9 +92,9 @@ func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 
 
 func __angle_between_player_and_input(input_: InputPackage, delta: float, _log: bool = false) -> float:
-	var face_dir = player.basis.z
-	var input_dir = __velocity_by_input(input_, delta).normalized()
-	var angle = face_dir.signed_angle_to(input_dir, Vector3.UP)
+	var face_dir := player.basis.z
+	var input_dir := __velocity_by_input(input_, delta).normalized()
+	var angle := face_dir.signed_angle_to(input_dir, Vector3.UP)
 	if _log: prints("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
 	return angle
 
@@ -115,8 +115,8 @@ var run_anims: PackedStringArray = [] # will be filled like ["run-v5-LIB/Running
 func _handle_fly_mode(input_: InputPackage, delta: float):
 	var tracking_angular_speed := 4
 	var input_direction := __fly_velocity_by_input(input_, delta).normalized()
-	var face_direction = player.basis.z
-	var angle = face_direction.signed_angle_to(input_direction, Vector3.UP)
+	var face_direction := player.basis.z
+	var angle := face_direction.signed_angle_to(input_direction, Vector3.UP)
 	player.rotate_y(clamp(angle, -tracking_angular_speed * delta, tracking_angular_speed * delta))
 
 	# Normalize and scale

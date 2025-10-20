@@ -41,7 +41,7 @@ func _init(_anim: AnimationData, _time_spent: float, _offset: float):
 ## this is a link between time_spent (animator's timeline) and real keyframe data. 
 ## (while both accounts for a speed scales)
 func get_effective_progress() -> float:
-	var time = time_spent + start_offset
+	var time := time_spent + start_offset
 	if anim.is_looping:
 		return fmod(time, anim.duration)
 	return time
@@ -55,7 +55,7 @@ func get_effective_duration() -> float:
 
 
 func _to_string() -> String:
-	var msg = "AnimPlay: %20s Prog/EffDur: %5.2f / %5.2f  TimeSpent/dur: %5.2f / %5.2f  offset %5.2f" % [
+	var msg := "AnimPlay: %20s Prog/EffDur: %5.2f / %5.2f  TimeSpent/dur: %5.2f / %5.2f  offset %5.2f" % [
 		pp.in_q(anim.anim_name),
 		get_effective_progress(),
 		get_effective_duration(),
@@ -68,7 +68,7 @@ func _to_string() -> String:
 
 
 func _to_string_short() -> String:
-	var msg = "Prog %5.2f  %5.2f / %5.2f  off %5.2f  %20s " % [
+	var msg := "Prog %5.2f  %5.2f / %5.2f  off %5.2f  %20s " % [
 		get_effective_progress(),
 		time_spent,
 		anim.duration,

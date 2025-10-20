@@ -55,10 +55,10 @@ func _process(delta: float) -> void:
 	
 	# Apply rotation based on mouse movement
 	if _mouse_motion != Vector2.ZERO:
-		var rotation_input = - _mouse_motion.x * mouse_sensitivity
-		var tilt_input = - _mouse_motion.y * mouse_sensitivity
+		var rotation_input := -_mouse_motion.x * mouse_sensitivity
+		var tilt_input := -_mouse_motion.y * mouse_sensitivity
 		
-		var euler_rotation = camera.global_transform.basis.get_euler()
+		var euler_rotation := camera.global_transform.basis.get_euler()
 		euler_rotation.x += tilt_input
 		euler_rotation.x = clamp(euler_rotation.x, -PI / 2 + 0.01, PI / 2 - 0.01) # Limit vertical rotation
 		euler_rotation.y += rotation_input

@@ -5,7 +5,7 @@ class_name EnemyStateUtils
 var me: BaseEnemyCharacter
 
 
-func get_player():
+func get_player() -> Princess:
 	return me.player
 
 #
@@ -31,7 +31,7 @@ func direction_to_(target: Variant) -> Vector3:
 		return Vector3.ZERO
 
 func look_at_player(grounded: bool = false):
-	var target = get_player().global_position
+	var target := get_player().global_position
 	if grounded:
 		target = get_projected_player_pos()
 	u.safe_look_at(me, target, Vector3.UP, true)
@@ -40,6 +40,6 @@ func projected_direction_to_player() -> Vector3:
 	return me.global_position.direction_to(get_projected_player_pos())
 
 func get_projected_player_pos() -> Vector3:
-	var player_pos = get_player().global_position
+	var player_pos := get_player().global_position
 	player_pos.y = me.global_position.y
 	return player_pos

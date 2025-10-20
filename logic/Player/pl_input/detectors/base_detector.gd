@@ -10,7 +10,7 @@ class_name BaseDetector
 # > 0.5: Sluggish
 
 
-static func _current_time():
+static func _current_time() -> float:
 	return Time.get_ticks_msec() / 1000.0
 
 

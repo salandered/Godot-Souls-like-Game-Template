@@ -2,7 +2,7 @@ extends RefCounted
 # here are all utils which dont have their separate more focused module
 class_name u
 
-static var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 static func fr(to_str_: bool = true, str_prefix: bool = false) -> Variant:
@@ -18,7 +18,7 @@ static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "
 	if dict.has(key):
 		return dict[key]
 
-	var msg = pp.s("Context:", context, "\nDict does not have key", pp.in_q(key), "Dict: ", pp._dict(dict))
+	var msg := pp.s("Context:", context, "\nDict does not have key", pp.in_q(key), "Dict: ", pp._dict(dict))
 	if fatal:
 		assert(false, msg)
 	print_.warn(msg)
@@ -39,7 +39,7 @@ static func safe_look_at(
 	use_model_front: bool = false,
 	eps: float = 0.001
 ) -> bool:
-	var dir = target - from_who.global_transform.origin
+	var dir: = target - from_who.global_transform.origin
 	if dir.length_squared() < eps * eps:
 		return false
 	if abs(dir.normalized().dot(up)) > 1.0 - eps:
@@ -61,8 +61,8 @@ static func _dev_change_t67_param(event, param, param_name: String = "some param
 	return _dev_change_param(event, param, param_name, step, "t6", "t7")
 
 static func _dev_change_param(
-	event, param, param_name: String = "some param", step: float = 0.1, key_a: String = "t1", key_b: String = "t2") -> Variant:
-	var prev_param = param
+	event, param: Variant, param_name: String = "some param", step: float = 0.1, key_a: String = "t1", key_b: String = "t2") -> Variant:
+	var prev_param: Variant = param
 	if event.is_action_released(key_a):
 		param -= step
 	if event.is_action_released(key_b):
@@ -74,8 +74,8 @@ static func _dev_change_param(
 
 
 static func to_pascal_case(snake_case: String) -> String:
-	var words = snake_case.split("_")
-	var result = ""
+	var words := snake_case.split("_")
+	var result := ""
 	for word in words:
 		if word.length() > 0:
 			result += word.capitalize()

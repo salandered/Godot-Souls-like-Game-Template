@@ -19,10 +19,10 @@ func is_triggered(input_: InputPackage) -> bool:
 # needs to be notified it is being ripost-grabbed, probably via some State.react_on_ripost(). 
 # But the workflow is correct, nothing conceptual will change, just better animations etc. 
 func have_target_for_ripost() -> bool: # 🗡️
-	var parried_victims = get_tree().get_nodes_in_group("parried_humanoid")
+	var parried_victims := get_tree().get_nodes_in_group("parried_humanoid")
 	print_.combo(name, "ripost(): victims in group: " + str(parried_victims.size()))
 	for npc_ in parried_victims:
-		var dist = npc_.global_position.distance_to(player.global_position)
+		var dist: float = npc_.global_position.distance_to(player.global_position)
 		print_.combo(name, pp.s("candidate:", npc_.name, "dist:", dist))
 		if dist < 2.0:
 			print_.combo("", "ripost target acquired")

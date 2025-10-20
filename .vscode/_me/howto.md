@@ -65,3 +65,9 @@ editor.inlineSuggest.edits.allowCodeShifting - configure if Copilot NES is able 
 editor.inlineSuggest.edits.renderSideBySide - configure if Copilot NES can show larger suggestions side-by-side if possible, or if Copilot NES should always show larger suggestions below the relevant code.
 	* auto (default): show larger edit suggestions side-by-side if there is enough space in the viewport, otherwise the suggestions are shown below the relevant code.
 	* never: never show suggestions side-by-side, always show suggestions below the relevant code.
+
+##################
+
+## misc
+
+# var \w+ = 

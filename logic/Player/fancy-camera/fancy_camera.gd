@@ -14,8 +14,8 @@ class_name FancyCamera
 @export var LOCKED_NEST_MOUNT_WEIGHT: float = FREE_NEST_MOUNT_WEIGHT
 
 @export_group("Blend change state Settings")
-@export var OFFSET_BLEND_DURATION_ON_LOCK := 0.6
-@export var OFFSET_BLEND_DURATION_ON_UNLOCK := 0.6
+@export var OFFSET_BLEND_DURATION_ON_LOCK: float = 0.6
+@export var OFFSET_BLEND_DURATION_ON_UNLOCK: float = 0.6
 @export var FREEZE_FRAMES_ON_UNLOCK := 1
 
 @export_group("Collision Settings")
@@ -39,7 +39,7 @@ class_name FancyCamera
 
 @export_group("Other")
 @export var LOCKED_MAX_YAW_SPEED_DEG_PER_SEC: float = 360.0 # Locking Smoothing
-@export var TARGET_DROP_DISTANCE_SQUARED = 400
+@export var TARGET_DROP_DISTANCE_SQUARED: float = 400.0
 @export var look_at_: Node3D # CameraFocus or target
 
 ## DOCS
@@ -69,14 +69,14 @@ class_name FancyCamera
 @onready var camera_movement: CameraMovement = %CameraMovement
 
 
-var SPRING_ARM_COLLISION_MASK = 1 # to do: collision sys
+var SPRING_ARM_COLLISION_MASK := 1 # to do: collision sys
 
 var locked_target: Node3D
 
 var accumulated_mouse_delta := Vector2.ZERO
 
-var FREE_STATE_NAME = "free_state"
-var LOCKED_STATE_NAME = "locked_state"
+var FREE_STATE_NAME := "free_state"
+var LOCKED_STATE_NAME := "locked_state"
 
 
 func _ready() -> void:
@@ -94,7 +94,7 @@ func initialise():
 	# 1. look_at_ is always Player's chest (CameraFocus) in the Free State
 	# 2. Free State is always first state to enter 
 	# => we treat look_at_ as chest here in initialise() 
-	var chest = look_at_
+	var chest := look_at_
 
 	focus.global_position = chest.global_position # Focus Point to player's chest
 	mount.global_position = chest.global_position # same
@@ -150,7 +150,7 @@ func _consider_switching_state(input_: InputPackage):
 
 	match current_state.state_name:
 		FREE_STATE_NAME when input_.target_lock.tap_or_double_tap():
-			var found_target = player.model.area_awareness.find_target()
+			var found_target := player.model.area_awareness.find_target()
 			if found_target:
 				print_.fancy_cam("FREE -> LOCKED ", __Cvec() + __free_off() + " target=" + str(found_target))
 				
@@ -246,8 +246,8 @@ func __CF() -> String:
 
 func __angle_player_camera_target() -> String:
 	# Vectors from player and camera to the target, projected to XZ
-	var player_to_target = Vector2(locked_target.global_position.x - player.camera_focus.global_position.x, locked_target.global_position.z - player.camera_focus.global_position.z).normalized()
-	var camera_to_target = Vector2(locked_target.global_position.x - camera.global_position.x, locked_target.global_position.z - camera.global_position.z).normalized()
+	var player_to_target := Vector2(locked_target.global_position.x - player.camera_focus.global_position.x, locked_target.global_position.z - player.camera_focus.global_position.z).normalized()
+	var camera_to_target := Vector2(locked_target.global_position.x - camera.global_position.x, locked_target.global_position.z - camera.global_position.z).normalized()
 
 	var angle := str(rad_to_deg(player_to_target.angle_to(camera_to_target)))
 	return angle

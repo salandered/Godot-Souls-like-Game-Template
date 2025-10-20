@@ -14,11 +14,11 @@ func iteration_mark_state() -> void:
 
 
 func get_progress() -> float:
-	var now = Time.get_unix_time_from_system()
+	var now := Time.get_unix_time_from_system()
 	return now - enter_state_time
 
 func get_iteration_progress() -> float:
-	var now = Time.get_unix_time_from_system()
+	var now := Time.get_unix_time_from_system()
 	return now - iteration_enter_state_time
 
 func works_longer_than(time: float) -> bool:
@@ -52,7 +52,7 @@ func iteration_works_less_than(time: float) -> bool:
 func works_between(start: float, finish: float) -> bool:
 	if start == -1 or finish == -1:
 		return __reject()
-	var progress = get_progress()
+	var progress := get_progress()
 	if progress >= start and progress <= finish:
 		return true
 	return false
@@ -60,7 +60,7 @@ func works_between(start: float, finish: float) -> bool:
 func iteration_works_between(start: float, finish: float) -> bool:
 	if start == -1 or finish == -1:
 		return __reject()
-	var progress = get_iteration_progress()
+	var progress := get_iteration_progress()
 	if progress >= start and progress <= finish:
 		return true
 	return false

@@ -49,8 +49,8 @@ func update(input_: InputPackage, delta: float) -> void:
 		
 		# Use root motion until control returns
 		if not has_control and curr_state_action.works_longer_than(control_return_time):
-			var xz_root = animator_manager.get_root_velocity(true)
-			var xz_delta = player.get_quaternion() * xz_root
+			var xz_root := animator_manager.get_root_velocity(true)
+			var xz_delta := player.get_quaternion() * xz_root
 			player.velocity.x = xz_delta.x
 			player.velocity.z = xz_delta.z
 		else:
@@ -62,7 +62,7 @@ func on_ground_contact() -> void:
 	player.velocity.y = 0
 	
 	# Less momentum loss since we're running through it
-	var impact_factor = clamp(abs(player.velocity.y) / 20.0, 0.7, 1.0)
+	var impact_factor: = clampf(abs(player.velocity.y) / 20.0, 0.7, 1.0)
 	player.velocity.x *= momentum_preservation * impact_factor
 	player.velocity.z *= momentum_preservation * impact_factor
 	
@@ -71,7 +71,7 @@ func on_ground_contact() -> void:
 func check_transition(input_: InputPackage) -> PLVerdict:
 	# Can transition once we're through impact and into run blend
 	if landing_phase == "running" and curr_state_action.time_remaining() <= 0.2:
-		var xz_speed = Vector3(player.velocity.x, 0, player.velocity.z).length()
+		var xz_speed: = Vector3(player.velocity.x, 0, player.velocity.z).length()
 		
 		if xz_speed > min_run_speed:
 			return PLVerdict.new(PS.run)
@@ -87,7 +87,7 @@ func apply_air_control(input_: InputPackage, delta: float) -> void:
 	input_dir = input_dir.normalized()
 	
 	if input_dir.length() > 0.1:
-		var current_xz = Vector3(player.velocity.x, 0, player.velocity.z)
+		var current_xz := Vector3(player.velocity.x, 0, player.velocity.z)
 		current_xz = current_xz.lerp(input_dir * current_xz.length(), 0.1 * delta)
 		player.velocity.x = current_xz.x
 		player.velocity.z = current_xz.z

@@ -37,7 +37,7 @@ static func _check_overlap(k_just_pressed: KeyPress, k_pressed: KeyPress, all_ke
 		other_keys_are_pressed = _any_hor_pressed(all_keys)
 
 	if _just_pressed_and_pressed(k_just_pressed, k_pressed):
-		var hold_duration = k_pressed.get_time_since_press(_current_time())
+		var hold_duration := k_pressed.get_time_since_press(_current_time())
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			var from_vector = action_to_vector[k_pressed.raw_action]
 			var to_vector = action_to_vector[k_just_pressed.raw_action]
@@ -58,7 +58,7 @@ static func _check_sequential(k_just_pressed: KeyPress, k_not_pressed: KeyPress,
 
 	if _just_pressed_and_not_pressed(k_just_pressed, k_not_pressed):
 		if k_not_pressed.was_released_at_least_one():
-			var time_since_release = _current_time() - k_not_pressed.last_release_time
+			var time_since_release := _current_time() - k_not_pressed.last_release_time
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
 				var from_vector = action_to_vector[k_not_pressed.raw_action]
 				var to_vector = action_to_vector[k_just_pressed.raw_action]
@@ -79,9 +79,9 @@ static func detect_reverse_data(new_input: InputPackage,
 	var reverse_data := new_input.reverse_data
 	reverse_data.reset()
 
-	var all_keys = DirectionalKeys.new(forward_key, back_key, left_key, right_key)
+	var all_keys := DirectionalKeys.new(forward_key, back_key, left_key, right_key)
 	
-	var action_to_vector = {
+	var action_to_vector := {
 		forward_key.raw_action: Vector2(0, -1),
 		back_key.raw_action: Vector2(0, 1),
 		left_key.raw_action: Vector2(-1, 0),

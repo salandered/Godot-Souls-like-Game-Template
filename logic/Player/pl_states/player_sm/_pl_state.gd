@@ -12,8 +12,8 @@ var anim_container: BaseAnimationContainer
 var animator_manager: AnimatorManager
 
 
-@export var SPEED = 3.0
-@export var TURN_SPEED = 2
+@export var SPEED := 3.0
+@export var TURN_SPEED := 2.0
 
 var skeleton: Skeleton3D
 var resources: HumanoidResources
@@ -22,8 +22,8 @@ var left_wrist: BoneAttachment3D
 
 var initial_position: Vector3
 
-@export var tracking_angular_speed: float = 10
-@export var stamina_cost: float = 0
+@export var tracking_angular_speed: float = 10.0
+@export var stamina_cost: float = 0.0
 
 var state_combos: Array # [Combo_]
 
@@ -80,7 +80,7 @@ func _check_transition(input_: InputPackage) -> PLVerdict:
 		queued_state = ""
 	if _has_forced_state():
 		print_.psm_check_trans(state_name, pp.s("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)"))
-		var verdict = PLVerdict.new(forced_state)
+		var verdict := PLVerdict.new(forced_state)
 		forced_state = "" # forced_state is reset after verdict creation
 		return verdict
 	
@@ -212,7 +212,7 @@ func try_force_state(new_forced_state: String):
 ## TODO: If several combos triggered - we will queues the last one. Not critical, but some priority logic needed
 func check_combos(input_: InputPackage):
 	for combo: Combo_ in state_combos:
-		var next_state_candidate = combo.state_to_trigger
+		var next_state_candidate := combo.state_to_trigger
 		print_.psm_check_trans(state_name, "checking combo " + combo.name + " with state_to_trigger " + next_state_candidate)
 		
 		if combo.is_triggered(input_) and resources.can_be_paid(container.state_by_name(next_state_candidate)):

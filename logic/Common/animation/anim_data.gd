@@ -6,7 +6,6 @@ var anim_name: String ## resource_name
 ## DANGER: should not be used. 
 ##         needs more time for accurate implementation inside the animator.
 ##         use Animator's 'start_time_offset' to achieve the similar effect
-##         same with _end_time. 
 var _start_time: float
 var _end_time: float ## end_time should be working fine but needs testing
 var duration: float
@@ -15,6 +14,8 @@ var is_looping: bool
 var native_anim: Animation
 var _markers: Dictionary # {str: Marker}
 var uses_root_rotation: bool
+# { "pos": {track_path: track_idx, ...}, "rot": {track_path: track_idx, ...} }
+var _track_path_to_idx := {"pos": {}, "rot": {}}
 
 func _init(
 		_anim_id,
@@ -25,14 +26,27 @@ func _init(
 	speed_scale = _speed_scale
 	uses_root_rotation = _uses_root_rotation
 
+
+func get_pos_track_idx(track_path: String) -> int:
+	if track_path in _track_path_to_idx["pos"]:
+		return _track_path_to_idx["pos"][track_path]
+	return -1
+
+func get_rot_track_idx(track_path: String) -> int:
+	if track_path in _track_path_to_idx["rot"]:
+		return _track_path_to_idx["rot"][track_path]
+	return -1
+
+
 ## Client code may get some specific marker directly.
 func get_marker_by_name(marker_name: String) -> Marker:
 	return u.safe_get_dict_key(_markers, marker_name, "get marker from anim data")
 
+
 ## returns time withing anim.duration
 ## returns -1 or default_value (if set) in case of problems
 func get_marker_time_by_name(marker_name: String, default_value: float = -1) -> float:
-	var marker = get_marker_by_name(marker_name)
+	var marker := get_marker_by_name(marker_name)
 	if not marker:
 		print_.warn("marker not found " + pp.in_q(marker_name))
 		return default_value
@@ -69,17 +83,17 @@ func tracks_input_vector(timestamp) -> bool:
 
 
 func _get_value_from_track(param_name: String, timestamp: float) -> bool:
-	var _track_name = _track_begins + param_name
+	var _track_name := _anim_param_track_prefix + param_name
 	if not native_anim:
 		print("WTF")
-	var _track = native_anim.find_track(_track_name, Animation.TYPE_VALUE)
+	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
 	if _track == -1:
 		# print_.warn("Track not found: " + _track_name + " in animation " + anim_name)
 		return DEFAULT_PARAMS[param_name]
 
 	# NOTE the '+ _start_time' shift. It's important
-	var value = native_anim.value_track_interpolate(_track, timestamp + _start_time)
+	var value: Variant = native_anim.value_track_interpolate(_track, timestamp + _start_time)
 	if value is bool:
 		return value
 
@@ -89,10 +103,10 @@ func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 		return DEFAULT_PARAMS[param_name]
 	# try nearest key
 	print_.warn("Interpolation failed for '%s' at %.3f, trying nearest key lookup" % [_track_name, timestamp])
-	var key_index = native_anim.track_find_key(_track, timestamp, Animation.FIND_MODE_NEAREST)
+	var key_index := native_anim.track_find_key(_track, timestamp, Animation.FIND_MODE_NEAREST)
 	if key_index != -1:
-		var key_value = native_anim.track_get_key_value(_track, key_index)
-		var key_time = native_anim.track_get_key_time(_track, key_index)
+		var key_value: Variant = native_anim.track_get_key_value(_track, key_index)
+		var key_time: Variant = native_anim.track_get_key_time(_track, key_index)
 		print_.debug("Found nearest key at index %d, time %.3f, value: %s" % [key_index, key_time, str(key_value)])
 		if key_value != null and key_value is bool:
 			return key_value
@@ -106,7 +120,7 @@ func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 func _to_string() -> String:
 	var parts: Array[String] = []
 	
-	parts.append("AnimationData {")
+	parts.append("AnimationData\n")
 	parts.append("  anim_name: \"%s\"" % anim_name)
 	parts.append("  _start_time: %.3f" % _start_time)
 	parts.append("  _end_time: %.3f" % _end_time)
@@ -120,19 +134,11 @@ func _to_string() -> String:
 		parts.append("  native_anim: null")
 	
 	if _markers.size() > 0:
-		var marker_names = _markers.keys()
+		var marker_names := _markers.keys()
 		marker_names.sort() # Sort for consistent output
 		parts.append("  _markers: %d marker(s) [%s]" % [_markers.size(), ", ".join(marker_names)])
-		
-		# Optionally detailed
-		# for marker_name in marker_names:
-		#     var marker = _markers[marker_name]
-		#     parts.append("    - %s: %s" % [marker_name, str(marker)])
 	else:
-		parts.append("  _markers: {} (empty)")
-	
-	parts.append("}")
-	
+		parts.append("  _markers: {}")
 	return "\n".join(parts)
 
 func to_string_compact() -> String:
@@ -163,7 +169,7 @@ const DEFAULT_PARAMS := {
 	TRACKS_INPUT_VECTOR: true,
 }
 
-const _track_begins = "%AnimParameters:"
+const _anim_param_track_prefix := "%AnimParameters:"
 
 # endregion
 
@@ -171,22 +177,22 @@ const _track_begins = "%AnimParameters:"
 # region: VALIDATION
 
 static func __validate_track_values(anim: AnimationData) -> bool:
-	var all_valid = true
+	var all_valid := true
 	
-	for param_name in [SWITCHES_TO_QUEUE, ALLOWS_QUEUE, VULNERABLE, INTERRUPTABLE, WEAPON_HURTS, TRACKS_INPUT_VECTOR]:
-		var track_name = _track_begins + param_name
-		var track_idx = anim.native_anim.find_track(track_name, Animation.TYPE_VALUE)
+	for param_name: String in [SWITCHES_TO_QUEUE, ALLOWS_QUEUE, VULNERABLE, INTERRUPTABLE, WEAPON_HURTS, TRACKS_INPUT_VECTOR]:
+		var track_name := _anim_param_track_prefix + param_name
+		var track_idx := anim.native_anim.find_track(track_name, Animation.TYPE_VALUE)
 		
 		if track_idx == -1:
 			continue # Track not existing is OK
 		
-		var key_count = anim.native_anim.track_get_key_count(track_idx)
+		var key_count := anim.native_anim.track_get_key_count(track_idx)
 		if key_count == 0:
 			print_.warn("Track '%s' exists but has no keys" % param_name)
 			continue
 		
 		# Check first key (frame 0 area)
-		var first_value = anim.native_anim.track_get_key_value(track_idx, 0)
+		var first_value: Variant = anim.native_anim.track_get_key_value(track_idx, 0)
 		if first_value == null:
 			print_.warn("Track '%s' has null value at first key! Fix in animation editor." % param_name)
 			all_valid = false
@@ -200,10 +206,8 @@ static func __validate_anim(anim_data: AnimationData) -> bool:
 	# base field validation (not null)
 	if anim_data.anim_id == null:
 		return false
-	
 	if anim_data.anim_name == null:
 		return false
-	
 	if anim_data.native_anim == null:
 		return false
 
@@ -213,20 +217,15 @@ static func __validate_anim(anim_data: AnimationData) -> bool:
 	if anim_data._markers == null: # (no markers is fine, would be empty dict)
 		return false
 	
-
 	# specific field validation
 	if anim_data._start_time < 0:
 		return false
-	
 	if anim_data._end_time <= anim_data._start_time:
 		return false
-	
 	if anim_data.duration <= 0:
 		return false
-	
 	if anim_data.speed_scale <= 0:
 		return false
-
 
 	# native anim tracks data (experimental)
 	if not __validate_track_values(anim_data):

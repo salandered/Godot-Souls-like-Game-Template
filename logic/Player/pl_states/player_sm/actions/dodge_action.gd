@@ -6,7 +6,7 @@ extends PlayerAction
 var dodge_x_peak_speed: float = 6.0
 var dodge_x_dur_correction: float = 0.0
 
-var speed_x_interpolator = HillInterpolator.new()
+var speed_x_interpolator := HillInterpolator.new()
 
 
 const ANIM_F: String = A.dodge.dodge_F
@@ -19,7 +19,7 @@ const SPEED_L: float = 1.0
 
 var curr_dodge_dir: DodgeDirection
 
-var start_time_offset = 0.0
+var start_time_offset := 0.0
 
 func initialise():
 	curr_dodge_dir = DodgeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_R, ANIM_F, SPEED_L, ANIM_B)
@@ -29,21 +29,21 @@ func initialise():
 	
 
 func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
-	var _anim_start = actual_anim.get_marker_time_by_name(Marker.Name.FROM_RUN, 0.0)
-	var _anim_end = actual_anim.get_marker_time_by_name(Marker.Name.TO_RUN, 1.0)
+	var _anim_start := actual_anim.get_marker_time_by_name(Marker.Name.FROM_RUN, 0.0)
+	var _anim_end := actual_anim.get_marker_time_by_name(Marker.Name.TO_RUN, 1.0)
 	start_time_offset = _anim_start # NOTE: side effect
 	return _anim_end - _anim_start
 
 
 func on_enter_action(input_: InputPackage) -> void:
 	# DIRECTION
-	var _strafe_dir = input_.detect_strafe_dir()
+	var _strafe_dir := input_.detect_strafe_dir()
 	curr_dodge_dir.set_direction_from_strafe_dir(_strafe_dir)
 
 	# INTERPOLATOR
-	var _inherited_speed = get_player().velocity.length()
-	var _actual_anim = anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
-	var _anim_effective_dur = _calculate_anim_effective_duration(_actual_anim)
+	var _inherited_speed := get_player().velocity.length()
+	var _actual_anim := anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
+	var _anim_effective_dur := _calculate_anim_effective_duration(_actual_anim)
 	speed_x_interpolator.initialise(_inherited_speed, 2, dodge_x_peak_speed, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
 	
 	__log_action_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
@@ -55,9 +55,9 @@ func on_enter_action(input_: InputPackage) -> void:
 func update(input_: InputPackage, delta: float) -> void:
 	pm().look_at_target(delta)
 
-	var current_speed = speed_x_interpolator.update(delta)
+	var current_speed := speed_x_interpolator.update(delta)
 	
-	var _curr_world_vector = curr_dodge_dir.current_world_vector(get_player().basis)
+	var _curr_world_vector := curr_dodge_dir.current_world_vector(get_player().basis)
 	get_player().velocity = _curr_world_vector * current_speed
 
 	# pm().move_with_root(delta)

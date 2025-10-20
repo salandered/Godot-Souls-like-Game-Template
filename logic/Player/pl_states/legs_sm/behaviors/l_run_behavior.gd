@@ -5,7 +5,7 @@ const IDLE_COMMIT := 0.12 # seconds
 const START_COMMIT := 0.92 # seconds
 
 var TO_STOP_DELAY: float = 0.2
-var ANGLE_FOR_U_TURN_MIN = 110.0
+var ANGLE_FOR_U_TURN_MIN: = 110.0
 var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 
@@ -14,9 +14,9 @@ func _ready():
 
 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
-	var curr_action = legs_sm.current_action
-	var curr_motion_type = legs_sm.current_action.motion_type
-	var next_action_name = supported_actions.convert_to_supported(curr_action)
+	var curr_action := legs_sm.current_action
+	var curr_motion_type := legs_sm.current_action.motion_type
+	var next_action_name := supported_actions.convert_to_supported(curr_action)
 
 	match curr_motion_type:
 		MotionType.IDLE:
@@ -38,11 +38,12 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 
 
 func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -> String:
-	var curr_action = legs_sm.current_action
-	var angle_deg = get_abs_angle_pl_input_deg(input_, delta)
+	var curr_action := legs_sm.current_action
+	var angle_deg := get_abs_angle_pl_input_deg(input_, delta)
 
 	if is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
 		if angle_deg > ANGLE_FOR_U_TURN_MIN:
+			prints("~~~~ Turn Trigger: from IDLE. Angle:", angle_deg)
 			next_action_name = supported_actions.by_name(Leg.Act.turn_180)
 			__log_decision_data(input_, pp.compare(">", "angle_deg", angle_deg, "", ANGLE_FOR_U_TURN_MIN), next_action_name)
 		
@@ -55,7 +56,7 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -
 
 
 func _from_START_decision(input_: InputPackage, delta: float, next_action_name) -> String:
-	var curr_action = legs_sm.current_action
+	var curr_action := legs_sm.current_action
 	if is_moving(input_):
 		match curr_action.action_name:
 			Leg.Act.turn_180:
@@ -72,6 +73,7 @@ func _from_START_decision(input_: InputPackage, delta: float, next_action_name) 
 
 func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name) -> String:
 	if is_pure_reverse_moving(input_): # and abs_angle_pl_input_greater_than(input_, delta, ANGLE_FOR_U_TURN_MIN):
+		prints("~~~ Turn Trigger: from LOOP (is_pure_reverse_moving)")
 		next_action_name = supported_actions.by_name(Leg.Act.turn_180)
 		__log_decision_data(input_, "", next_action_name)
 		_non_moving_timer.reset()

@@ -41,11 +41,11 @@ func apply_air_control(input_: InputPackage, delta: float) -> void:
 	if input_dir.length() < 0.1:
 		return
 	
-	var current_xz = Vector3(player.velocity.x, 0, player.velocity.z)
-	var current_speed = current_xz.length()
+	var current_xz := Vector3(player.velocity.x, 0, player.velocity.z)
+	var current_speed := current_xz.length()
 	
 	# Subtle redirection without speed increase
-	var target_velocity = input_dir * current_speed
+	var target_velocity := input_dir * current_speed
 	current_xz = current_xz.lerp(target_velocity, air_control_strength * delta)
 	
 	player.velocity.x = current_xz.x
@@ -53,11 +53,11 @@ func apply_air_control(input_: InputPackage, delta: float) -> void:
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	var floor_distance = area_awareness.get_floor_distance()
+	var floor_distance := area_awareness.get_floor_distance()
 	
 	if floor_distance < landing_height and peak_reached:
 		print_.psm_check_trans(state_name, pp.compare("<", "floor_distance", floor_distance, "landing_height", landing_height) + "=> landing_run")
-		var xz_speed = Vector3(player.velocity.x, 0, player.velocity.z).length()
+		var xz_speed := Vector3(player.velocity.x, 0, player.velocity.z).length()
 		
 		# Heavy landing check
 		if player.velocity.y < -15.0:
@@ -78,10 +78,10 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 
 
 func debug_velocities() -> void:
-	var current_xz = Vector3(player.velocity.x, 0, player.velocity.z)
+	var current_xz := Vector3(player.velocity.x, 0, player.velocity.z)
 	
 	# Green arrow for XZ movement (from player position)
-	var xz_end = player.global_position + Vector3(current_xz.x, 0, current_xz.z)
+	var xz_end := player.global_position + Vector3(current_xz.x, 0, current_xz.z)
 	DebugDraw3D.draw_arrow(
 		player.global_position,
 		xz_end,
@@ -90,7 +90,7 @@ func debug_velocities() -> void:
 	)
 	
 	# Blue arrow for Y velocity (scale it down for visibility)
-	var y_end = player.global_position + Vector3(0, player.velocity.y * 0.1, 0)
+	var y_end: = player.global_position + Vector3(0, player.velocity.y * 0.1, 0)
 	DebugDraw3D.draw_arrow(
 		player.global_position,
 		y_end,

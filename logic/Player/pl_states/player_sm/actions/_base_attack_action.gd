@@ -8,7 +8,7 @@ var extremum_timing: float
 var posttracking_radius: float
 
 
-var hit_damage = 10
+var hit_damage := 10
 
 
 func on_enter_action(input_: InputPackage):

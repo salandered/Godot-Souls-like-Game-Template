@@ -44,8 +44,8 @@ func set_anim_to_play(anim_name: String, blend_for: float = 0.0, start_time_offs
 
 
 func set_global_speed_scale(new_scale: float):
-	var max_speed_scale = 2
-	var min_speed_scale = 0.4
+	var max_speed_scale := 2
+	var min_speed_scale := 0.4
 	new_scale = snappedf(new_scale, 0.01)
 	if new_scale < min_speed_scale or new_scale > max_speed_scale:
 		# u.print_warn(pp.s("extreme speed scale:", new_scale, "Was:", global_speed_scale, "Will be clamped between", max_speed_scale))
@@ -75,13 +75,13 @@ func get_curr_anim_effective_duration() -> float:
 	return full_body.curr_playback.get_effective_duration()
 
 func get_curr_blend_duration() -> float:
-	return full_body.blend_playback.duration
+	return full_body.curr_blend_playback.duration
 
 func is_blending() -> bool:
-	return full_body.blend_playback.is_blending
+	return full_body.curr_blend_playback.is_blending
 
 func get_prev_blend_percentage() -> float:
-	return full_body.blend_playback.prev_percentage
+	return full_body.curr_blend_playback.prev_percentage
 
 
 func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true) -> Vector3:
@@ -100,7 +100,7 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 ## INTERNAL
 
 func _accept_modifiers():
-	var initial_anim = anim_container.get_by_name(A.move.idle)
+	var initial_anim := anim_container.get_by_name(A.move.idle)
 
 
 	native_animator.play(A.move.idle)

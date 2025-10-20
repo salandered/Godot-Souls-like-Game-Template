@@ -19,7 +19,7 @@ func initialise(start: float, target: float, duration_: float) -> void:
 func update(delta: float) -> float:
 	if timer < duration:
 		timer += delta
-		var weight = _get_progress()
+		var weight := _get_progress()
 		_current_value = lerp(_start_value, _target_value, weight)
 	else:
 		_current_value = _target_value

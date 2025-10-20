@@ -24,7 +24,7 @@ func _init(
 
 
 func _to_string() -> String:
-	var parts = ["sp %.2f" % SPEED]
+	var parts := ["sp %.2f" % SPEED]
 	parts.append("turn sp %.1f" % TURN_SPEED)
 	parts.append("ang sp %.1f" % ANGULAR_SPEED)
 	return "Sp Conf:(%s)" % ", ".join(parts)

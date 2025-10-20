@@ -57,7 +57,7 @@ func get_turn_speed() -> float:
 
 
 func _to_string() -> String:
-	var parts = ["sp mult %.2f" % _speed_mult]
+	var parts := ["sp mult %.2f" % _speed_mult]
 	if _speed != -1.0: parts.append("sp %.1f" % _speed)
 	if _angular_sp != -1.0: parts.append("ang sp %.1f" % _angular_sp)
 	if _turn_speed != -1.0: parts.append("turn sp %.1f" % _turn_speed)

@@ -67,10 +67,10 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 		# print_.lsm_action("", pp.s("switch declined ✖️: same action", next_action_name))
 		return
 	## hard coded tranfer, but seems like its ok, we dont have too many actions 
-	if next_action_name == Leg.Act.sprint and curr_action_name == Leg.Act.run \
-		and legs_sm.current_action.till_blend_completes() > 0.0:
-		print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️:", curr_action_name, "needs time to blend from the prev one."))
-		return
+	# if next_action_name == Leg.Act.sprint and curr_action_name == Leg.Act.run \
+	# 	and legs_sm.current_action.till_blend_completes() > 0.0:
+	# 	print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️:", curr_action_name, "needs time to blend from the prev one."))
+	# 	return
 	# if next_action_name != Leg.Act.double and curr_action_name != Leg.Act.double \
 	# 	and legs_sm.current_action.till_blend_completes() > 0.1: # ideally 0, but small tolerance is ok
 	# 	print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️: current", curr_action_name, "needs time to blend from the prev one."))
@@ -79,7 +79,7 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 	# SWITCH
 	print_.lsm_action("↪️", "action " + curr_action_name + " => " + next_action_name)
 	legs_sm.current_action._on_exit_action()
-	legs_sm.current_action = container.legs_action_by_name(next_action_name)
+	legs_sm.set_current_action(container.legs_action_by_name(next_action_name))
 	legs_sm.current_action._on_enter_action(input_)
 
 
@@ -104,17 +104,17 @@ func is_switch_from_unsupported_action() -> bool:
 	return not supported_actions.is_action_supported(legs_sm.current_action.action_name)
 
 func get_abs_angle_pl_input(input_, delta) -> float:
-	var angle = get_player().model.__angle_between_player_and_input(input_, delta)
+	var angle := get_player().model.__angle_between_player_and_input(input_, delta)
 	return abs(angle)
 
 func get_abs_angle_pl_input_deg(input_, delta) -> float:
-	var angle = get_player().model.__angle_between_player_and_input(input_, delta)
+	var angle := get_player().model.__angle_between_player_and_input(input_, delta)
 	return rad_to_deg(abs(angle))
 
 # endregion
 
 func __log_decision_data(input_, additional_checks: String, next_action_name: String):
-	var _curr_motion_type = legs_sm.current_action.motion_type
+	var _curr_motion_type := legs_sm.current_action.motion_type
 	print_.lsm_beh_ch(behavior_name,
 		_curr_motion_type,
 		is_moving(input_),

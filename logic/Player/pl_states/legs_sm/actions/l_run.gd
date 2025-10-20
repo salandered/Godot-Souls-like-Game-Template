@@ -7,11 +7,11 @@ extends LegsAction
 var accel_from_idle_time: float = 0.5 # How long to reach full speed
 var accel_from_turn_time: float = 0.5
 
-var speed_mult_from_idle = EaseCurveInterpolator.new()
-var angular_sp_from_idle = FloatLinearInterpolator.new()
-var turn_sp_from_idle = FloatLinearInterpolator.new()
-var speed_from_turn = FloatCurveInterpolator.new()
-var angular_sp_from_turn = FloatLinearInterpolator.new()
+var speed_mult_from_idle := EaseCurveInterpolator.new()
+var angular_sp_from_idle := FloatLinearInterpolator.new()
+var turn_sp_from_idle := FloatLinearInterpolator.new()
+var speed_from_turn := FloatCurveInterpolator.new()
+var angular_sp_from_turn := FloatLinearInterpolator.new()
 
 var curr_turn: TurnData = TurnData.new()
 
@@ -45,10 +45,10 @@ func on_enter_action(input_: InputPackage):
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
 		Leg.Act.turn_180:
-			var _inherited_speed = get_player().velocity.length()
+			var _inherited_speed := get_player().velocity.length()
 			speed_from_turn.initialise(_inherited_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
 			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
-			var raw_turn_data = player_sm.get_tranfer_data_by_key("turn_data")
+			var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
 			if raw_turn_data == null:
 				prints(u.fr(), "no 'turn_data' data. assuming turn completed")
 				curr_turn.hard_complete()
@@ -62,10 +62,10 @@ func on_exit_action():
 
 
 func update(input_: InputPackage, delta: float):
-	var SPEED_MULT = 1.0 # default multiplier
-	var CURR_SPEED = default_sp.SPEED # default actual speed
-	var CURR_ANGULAR_SPEED = default_sp.ANGULAR_SPEED
-	var TURN_SPEED = default_sp.TURN_SPEED
+	var SPEED_MULT := 1.0 # default multiplier
+	var CURR_SPEED := default_sp.SPEED # default actual speed
+	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
+	var TURN_SPEED := default_sp.TURN_SPEED
 
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
@@ -80,15 +80,15 @@ func update(input_: InputPackage, delta: float):
 		_complete_root_turn(CURR_SPEED)
 	else:
 		# prints("~~", SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
-		var speed_config = SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
+		var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
 		speed_config.tie_turn_sp_to_speed(0.6)
 		pm().process_input_vector(input_, delta, speed_config)
 
 	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
 
 
-var _next_anim_correction = 0.08
-var __start_time_offset_dev = 0.0
+var _next_anim_correction := 0.08
+var __start_time_offset_dev := 0.0
 
 
 func animate(): # ▶️
@@ -101,7 +101,7 @@ func animate(): # ▶️
 		Leg.Act.turn_180:
 			start_time_offset = __start_time_offset_dev # sync with idle where left leg forward
 		Leg.Act.sprint:
-			var r = sync_with_prev_loco_anim(_next_anim_correction)
+			var r := sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
 				start_time_offset = r
 			
@@ -110,14 +110,14 @@ func animate(): # ▶️
 
 
 func _complete_root_turn(CURR_SPEED):
-	var rotation_delta = animator_manager.get_prev_root_rotation()
-	var result = pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
+	var rotation_delta := animator_manager.get_prev_root_rotation()
+	var result := pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
 	curr_turn.update(result.completed, result.accum_rot)
 
 	get_player().velocity = get_player().basis.z * CURR_SPEED
 	# OR move_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
 
-var _dev_add_blend = 0
+var _dev_add_blend := 0.0
 
 func _input(event):
 	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")

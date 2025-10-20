@@ -5,7 +5,7 @@ extends LegsAction
 @export var slght_dir_change_curve: Curve # for slight direction changes
 
 
-var speed_mult_from_idle = EaseCurveInterpolator.new()
+var speed_mult_from_idle := EaseCurveInterpolator.new()
 
 const ACCEL_FROM_IDLE_TIME: float = 0.35
 
@@ -66,7 +66,7 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	var SPEED_MULT = 1.0
+	var SPEED_MULT := 1.0
 
 	match player_sm.get_prev_action().action_name:
 		Leg.Act.idle:
@@ -78,7 +78,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	pm().look_at_target(delta)
 
-	var _sp_config = SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed())
+	var _sp_config := SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed())
 	if curr_direction.is_pure_vertical():
 		pm().move_forward_or_back(curr_direction.get_dir_int(), delta, _sp_config)
 	else:
@@ -87,7 +87,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	opposite_dir_change.async_change_update(delta)
 	slight_dir_change.async_change_update(delta)
 
-	var new_dir = input_.detect_strafe_dir()
+	var new_dir := input_.detect_strafe_dir()
 	if new_dir != curr_direction.get_curr_dir():
 		print_.lsm_action_strafe(pp.on_upd, pp.s("new dir", curr_direction.pp_curr_dir(), "=>", StrafeDir.name_(new_dir)))
 	match curr_direction.would_be_change_of_type(new_dir):
@@ -123,7 +123,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 func _change_dir(is_opposite_change: bool):
 	# ?? question: is it ok that we re evalutaing dir. bake into callback?
-	var new_dir = InputManager.current_input.detect_strafe_dir()
+	var new_dir := InputManager.current_input.detect_strafe_dir()
 	curr_direction.set_direction(new_dir)
 	print_.lsm_action_strafe("", pp.s("_change_dir to", curr_direction.pp_curr_dir()))
 	_switch_animation(is_opposite_change)
@@ -142,10 +142,10 @@ var __dev_add: float = 0.0
 # TODO idea: switch animations only if blend time is complete.
 # animations are in queue, while direction is changes as usual
 func _switch_animation(is_opposite_change: bool):
-	var next_anim = anim_container.get_by_name(curr_direction.get_curr_anim_id())
-	var curr_anim = anim
+	var next_anim := anim_container.get_by_name(curr_direction.get_curr_anim_id())
+	var curr_anim := anim
 
-	var start_offset = 0
+	var start_offset := 0.0
 	var blend_time := 0.2
 
 	if next_anim.anim_id == curr_anim.anim_id:
@@ -156,7 +156,7 @@ func _switch_animation(is_opposite_change: bool):
 		if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
 			sync_loco_anim_correction = 0.0 + __dev_add
 			print(em.pin, em.mark)
-		var r = sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
+		var r := sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:
 			start_offset = r
 		# for perfect smoothness it should be equal to timer cooldowns

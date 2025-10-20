@@ -5,7 +5,7 @@ class_name ShieldThrow
 @export var speed: float = 20
 var lifetime: float = 1
 var spawn_time: float
-var damage = 30
+var damage := 30
 
 
 func _ready():
@@ -27,7 +27,7 @@ func destroy_if_old():
 
 
 func get_hit_data() -> SpellHitData:
-	var spell_data = SpellHitData.new()
+	var spell_data := SpellHitData.new()
 	spell_data.damage = damage
 	spell_data.spell_name = "shield_shot"
 	spell_data.spell = self

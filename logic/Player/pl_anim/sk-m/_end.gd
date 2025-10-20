@@ -5,7 +5,7 @@ class_name EndModifier
 @onready var legs: ModifierAnimator = %Legs
 @onready var animation_settings: AnimationPlayer = %AnimationSettings
 
-#@onready var debug_label = $"animation debug label"
+#@onready var debug_label := $"animation debug label"
 
 @export var provides_root_velocity: bool
 

@@ -18,7 +18,7 @@ func _exclude_colliders() -> Array:
 
 func _just_follow_nest() -> void:
 	# Works really well, but in real world there are collisions ...
-	fc.camera.global_position = fc.nest.global_position 
+	fc.camera.global_position = fc.nest.global_position
 	u.safe_look_at(fc.camera, fc.focus.global_position)
 
 	# was like that, but big snapping on unlocking:
@@ -85,11 +85,11 @@ func _calc_min_hit_len_via_raycasts(arm_dir: Vector3, from: Vector3, to: Vector3
 		- up_axis * fc.COLLISION_CAM_RADIUS,
 	]
 	
-	var min_hit_len = desired_len
+	var min_hit_len := desired_len
 	
-	for offset_vec in ray_offsets:
-		var ray_from = from + offset_vec
-		var ray_to = to + offset_vec
+	for offset_vec: Vector3 in ray_offsets:
+		var ray_from := from + offset_vec
+		var ray_to := to + offset_vec
 		
 		var query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
 		query.exclude = _exclude_colliders()
@@ -107,23 +107,23 @@ func _calc_min_hit_len_via_raycasts(arm_dir: Vector3, from: Vector3, to: Vector3
 	return min_hit_len
 
 func _check_camera_penetration(camera_pos: Vector3) -> bool:
-	var space_state = fc.camera.get_world_3d().direct_space_state
+	var space_state := fc.camera.get_world_3d().direct_space_state
 	
 	# small sphere cast to check if camera would be inside geometry
-	var shape = SphereShape3D.new()
+	var shape := SphereShape3D.new()
 	shape.radius = 0.3 # Camera volume radius # todo - another constant
 	
-	var params = PhysicsShapeQueryParameters3D.new()
+	var params := PhysicsShapeQueryParameters3D.new()
 	params.shape = shape
 	params.transform = Transform3D(Basis(), camera_pos)
 	params.collision_mask = fc.SPRING_ARM_COLLISION_MASK
 	params.exclude = _exclude_colliders()
 	
-	var results = space_state.intersect_shape(params, 1)
+	var results := space_state.intersect_shape(params, 1)
 	return results.size() > 0
 
 func _resolve_penetration(from: Vector3, camera_pos: Vector3, direction: Vector3) -> Vector3:
-	var space_state = fc.camera.get_world_3d().direct_space_state
+	var space_state: = fc.camera.get_world_3d().direct_space_state
 	
 	# cast a ray to find a safe position
 	var query := PhysicsRayQueryParameters3D.create(from, camera_pos)

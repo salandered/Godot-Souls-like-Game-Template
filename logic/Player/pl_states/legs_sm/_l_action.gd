@@ -39,7 +39,7 @@ func _apply_residual_rotation():
 	if animator_manager.is_blending() \
 		and player_sm.get_prev_action().anim.uses_root_rotation \
 		and not anim.uses_root_rotation:
-			var rotation_delta = animator_manager.get_prev_root_rotation()
+			var rotation_delta := animator_manager.get_prev_root_rotation()
 			if abs(rotation_delta) > 0.001:
 				# print(u.fr() + "[RESIDUAL_ROT] Action '%s' applying residual rotation of %.4f from prev action '%s'" % [action_name, rotation_delta, player_sm.get_prev_action().action_name])
 				get_player().rotate_y(rotation_delta)
@@ -55,7 +55,7 @@ func calculate_target_angle(input_: InputPackage) -> float:
 		prints("\n\t target ∠:", pp.rad2deg(target_angle))
 		prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
 	else:
-		var _signed_angle = get_player().model.__angle_between_player_and_input(input_, 0.016, true)
+		var _signed_angle := get_player().model.__angle_between_player_and_input(input_, 0.016, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
 		prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
@@ -77,14 +77,14 @@ func turn_direction_by_target_angle(target_angle: float) -> String:
 # region: code 
 
 func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
-	var result_offset = -1
+	var result_offset := -1.0
 	# NOTE: Action is switched, but animator still treats an anim from prev action as "current" 
 	#       (before current action hits set_anim_to_play)
-	var prev_anim_progress = animator_manager.get_current_anim_effective_progress()
-	var prev_anim = player_sm.get_prev_action().anim
-	var next_anim = anim
-	var prev_l_leg_contact = prev_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact = next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var prev_anim_progress := animator_manager.get_current_anim_effective_progress()
+	var prev_anim := player_sm.get_prev_action().anim
+	var next_anim := anim
+	var prev_l_leg_contact := prev_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if prev_l_leg_contact and next_l_leg_contact:
 		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(
@@ -98,11 +98,11 @@ func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 
 
 func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: float = 0.0) -> float:
-	var result_offset = -1
-	var curr_anim_progress = animator_manager.get_current_anim_effective_progress()
-	var curr_anim = anim
-	var curr_l_leg_contact = curr_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact = next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var result_offset := -1.0
+	var curr_anim_progress := animator_manager.get_current_anim_effective_progress()
+	var curr_anim := anim
+	var curr_l_leg_contact := curr_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if curr_l_leg_contact and next_l_leg_contact:
 		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(

@@ -1,7 +1,7 @@
 extends RayCast3D
 
 @export var attachment: Node3D
-@onready var csg_sphere_3d = $CSGSphere3D
+@onready var csg_sphere_3d := $CSGSphere3D
 @export var __csg_visuals: bool = false
 
 
