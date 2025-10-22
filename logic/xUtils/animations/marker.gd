@@ -11,7 +11,7 @@ func _init(time_: float, marker_name_: String) -> void:
 	marker_name = marker_name_
 
 
-class Name:
+class Name_:
 	const START = "start"
 	const END = "end"
 
@@ -22,6 +22,8 @@ class Name:
 	const LAND_START = "land_start"
 	const LEG_CONTACT = "leg_contact"
 	const RUN_AGAIN = "run_again"
+	const PEAK = "PEAK"
+
 
 	const LOCO_LOOP_L_LEG_FULL_CONTACT = "left_leg_full_contact"
 	const TURN_180_APEX = "APEX"

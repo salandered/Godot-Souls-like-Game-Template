@@ -66,6 +66,9 @@ func is_zero_health() -> bool:
 
 
 ## called from Player SM
+func _update(delta: float, stamina_drain: float = 0.0):
+	update(delta, -stamina_drain)
+
 ## requested_stamina_rate is negative if it's a drain
 ## (positive for gain)
 func update(delta: float, requested_stamina_rate: float = 0.0):

@@ -26,7 +26,7 @@ func _init(motion_to_action_: Dictionary, additional_actions: Array):
 
 
 ## mandatory method for every behavior's initial decision
-func convert_to_supported(action: LegsAction) -> String:
+func convert_to_supported(action: BaseAction) -> String:
 	if is_action_supported(action.action_name):
 		return action.action_name
 	else:

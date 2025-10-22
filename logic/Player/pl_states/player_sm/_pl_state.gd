@@ -1,10 +1,21 @@
 extends StateUtils
+## Base class for State Player
+## Does many things:
+	## manages basic state and action switches.
+	## 	  includes high level legs SM switches
+	## check transitions, i.e checks when and how to switch itself
+	##    includes managing combos and queued/forced states.
+	## reacts on external events, like react on hit
+## TODO: state became 'too' smart. File is bloated with tons of logic. 
+##       think of separating some parts.
+##       main idea for now: do checking transitions (combos, etc) on a Player SM level
+##       (state is too self aware now)
 class_name PlayerState
 
 # common
 var player_sm: PlayerSM
 var legs_sm: LegsSM
-var player: Princess
+var _player: Princess
 var combat: PlayerCombat
 var area_awareness: AreaAwareness
 var anim_container: BaseAnimationContainer
@@ -37,23 +48,31 @@ var curr_state_action: PlayerAction
 var _time_spent: float = 0.0
 
 
+func get_player() -> Princess:
+	return _player
+
+
 func time_spent():
 	return _time_spent
 
 
 func curr_global_action() -> BaseAction:
-	return player_sm.get_current_action()
+	return player_sm.get_curr_action()
 
 
-func _has_queued_state() -> bool:
+func prev_global_action() -> BaseAction:
+	return player_sm.get_prev_action()
+
+
+func _has_queued_state(name_: String) -> bool:
+	return queued_state == name_
+
+
+func _has_any_queued_state() -> bool:
 	return queued_state != ""
 
-func _has_forced_state() -> bool:
+func _has_any_forced_state() -> bool:
 	return forced_state != ""
-
-
-func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
-	return player.model.__velocity_by_input(input_, delta)
 
 
 func pm() -> PlayerMovement:
@@ -72,11 +91,11 @@ func initialise():
 ## Not to override
 func _check_transition(input_: InputPackage) -> PLVerdict:
 	_check_combos(input_)
-	if _has_queued_state() and curr_global_action().switches_to_queue():
+	if _has_any_queued_state() and curr_global_action().switches_to_queue():
 		__log_psm_check("queued 👥 exists, trying it as a force state")
-		try_force_state(queued_state)
+		try_set_force_state(queued_state)
 		queued_state = ""
-	if _has_forced_state():
+	if _has_any_forced_state():
 		__log_psm_check("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)")
 		var verdict := PLVerdict.new(forced_state)
 		forced_state = "" # forced_state is reset after verdict creation
@@ -124,14 +143,11 @@ func _update(input_: InputPackage, delta: float):
 	_update_feelings(delta)
 	legs_sm.current_behavior.update(input_, delta)
 	curr_state_action.update(input_, delta)
-	# if not depends_on_legs and curr_state_action.tracks_input_vector(): # DANGER: depends_on_legs is important
-	# 	pm().rotate_with_input_vector_simple(input_, delta)
-
 	update(input_, delta)
 
 
 func _update_feelings(delta):
-	feelings.update(delta, -stamina_drain) # note the minus
+	feelings._update(delta, stamina_drain)
 
 
 ## to override
@@ -146,10 +162,10 @@ func choose_default_action() -> String:
 
 func _on_enter_state(input_: InputPackage):
 	_time_spent = 0.0
-	# choose_initial_leg_behavior(input_) # this is advanded use where player state can use legs behavior
-	## - single legs beh attached to player state => 
+	# choose_initial_leg_behavior(input_) # this is advanded use where _player state can use legs behavior
+	## - single legs beh attached to _player state => 
 	##    => all is needed is to call the legs SM to switch into this defined state.
-	initial_position = player.global_position # used to be here, check
+	initial_position = _player.global_position # used to be here, check
 	feelings.pay_state_cost(stamina_cost)
 	
 	legs_behavior.player_state = self
@@ -157,9 +173,9 @@ func _on_enter_state(input_: InputPackage):
 	## For now depends_on_legs means legs_behavior is not double. E.g Run or Sprint beh.
 	if depends_on_legs:
 		__log_state_ent("Dependent state. Actions delegated to legs, no state action switch✖️ - double")
-		## WARNING testing idle
 		on_enter_state(input_)
 		switch_action_to(PS.Act.double, input_)
+		## WARNING testing idle
 		if state_name == PS.idle \
 			and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run, Leg.Beh.strafe]:
 			__log_state_ent("No switching legs behavior", em.gray_x)
@@ -211,15 +227,15 @@ func on_exit_state():
 	pass
 
 
-func try_queue_state(new_queued_state: String):
-	if not _has_queued_state():
+func try_set_queued_state(new_queued_state: String):
+	if not _has_any_queued_state():
 		queued_state = new_queued_state
 	elif container.state_by_name(new_queued_state).priority > container.state_by_name(queued_state).priority:
 		queued_state = new_queued_state
 
 
-func try_force_state(new_forced_state: String):
-	if not _has_forced_state():
+func try_set_force_state(new_forced_state: String):
+	if not _has_any_forced_state():
 		forced_state = new_forced_state
 	elif container.state_by_name(new_forced_state).priority >= container.state_by_name(forced_state).priority:
 		forced_state = new_forced_state
@@ -235,7 +251,7 @@ func _check_combos(input_: InputPackage):
 		var _stamina_cost = container.state_by_name(next_state_candidate).stamina_cost
 		if combo.is_triggered(input_, state_name, curr_global_action()):
 			if feelings.can_be_paid(_stamina_cost):
-				queued_state = next_state_candidate
+				queued_state = next_state_candidate # todo: try_set_queued_state
 				__log_psm_check("Queued 👥 next state: " + queued_state)
 				return # prioritised combo finishes checks
 			else:
@@ -251,28 +267,28 @@ func react_on_hit(hit: HitData):
 	# 	# TODO rewrite for better effects processing, this scales badly
 	# 	# if hit.effects.has("pushback") and hit.effects["pushback"]:
 	# 	# 	area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
-	# 	# 	try_force_state("pushback")
+	# 	# 	try_set_force_state("pushback")
 	# 	# else:
-	# 	try_force_state("staggered")
+	# 	try_set_force_state("staggered")
 
 # TODO: ...
 func react_on_spell(spell_hit: SpellHitData):
 	if curr_global_action().is_vulnerable():
 		feelings._change_health(-spell_hit.damage)
 	if curr_global_action().is_interruptable():
-		try_force_state("staggered")
+		try_set_force_state("staggered")
 	#spell_hit.queue_free()
-	spell_hit.spell.target_contacted(player)
+	spell_hit.spell.target_contacted(_player)
 
 # TODO: ...
 # Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
 func react_on_parry(_hit: HitData):
-	try_force_state("parried")
+	try_set_force_state("parried")
 
 
 # region: SOME DOCS
 #   check_transition()
-# 	BasePlayerState's conditions for transition is generally a simple function based on timings or states of the player.
+# 	BasePlayerState's conditions for transition is generally a simple function based on timings or states of the _player.
 #	If check_transition is a complex method, another state or usage of Combo_
 #
 #   update() functions manages perframe behavior of your BasePlayerState.
@@ -287,6 +303,8 @@ func react_on_parry(_hit: HitData):
 # endregion
 
 
+# region: LOGS
+
 func __log_state_ent(...parts: Array):
 	print_.psm(state_name + pp.on_ent, pp.list_(parts))
 
@@ -299,3 +317,9 @@ func __log_state_upd(...parts: Array):
 
 func __log_psm_check(...parts: Array):
 	print_.psm_check_trans(state_name, pp.list_(parts))
+
+func __log_time_spent():
+	print_.psm(state_name, pp.s("Time spent: state -", time_spent(), "action - ", curr_state_action.time_spent()))
+
+
+# endregion

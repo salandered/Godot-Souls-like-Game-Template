@@ -6,8 +6,8 @@ class BehaviorData:
 	var supported_actions: SupportedActions
 
 	func _init(behavior_name_: String, supported_: SupportedActions) -> void:
-		behavior_name = behavior_name_
-		supported_actions = supported_
+		self.behavior_name = behavior_name_
+		self.supported_actions = supported_
 
 
 class ActionData:
@@ -20,9 +20,9 @@ class ActionData:
 			anim_id_: String,
 			motion_type_: String,
 		) -> void:
-		action_name = action_name_
-		anim_id = anim_id_
-		motion_type = motion_type_
+		self.action_name = action_name_
+		self.anim_id = anim_id_
+		self.motion_type = motion_type_
 
 
 var node_to_l_behavior_data: Dictionary = {

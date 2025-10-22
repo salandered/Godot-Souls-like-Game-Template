@@ -6,11 +6,49 @@ class_name PlayerMovement
 @onready var animator_manager: AnimatorManager = %AnimatorManager
 
 
+## GETTERS
+# region: code
+
 func get_player() -> Princess:
 	return _player
 
 func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	return _player.model.__velocity_by_input(input_, delta)
+
+
+func safe_is_on_floor() -> bool:
+	return _player.is_on_floor() or area_awareness.floor_dist_under_tolerated_height()
+
+
+func almost_on_floor() -> bool:
+	return not _player.is_on_floor() and area_awareness.floor_dist_under_tolerated_height()
+
+
+func get_curr_velocity_len() -> float:
+	return _player.velocity.length()
+
+func get_curr_xz_velocity_len() -> float:
+	return Vector3(_player.velocity.x, 0, _player.velocity.z).length()
+
+func get_curr_y_velocity() -> float:
+	return _player.velocity.y
+
+# endregion
+
+## BASIC MOVING
+# region: code
+
+func set_velocity(velocity: Vector3):
+	_player.velocity = velocity
+
+
+## gravity is expected to be positive value.
+## if no gravitym default will be used
+func apply_gravity(delta, gravity: float = u.gravity):
+	_player.velocity.y -= gravity * delta
+
+
+# endregion
 
 
 ## MOVING WITH INPUT VECTOR
@@ -80,6 +118,21 @@ class AllowedAngle:
 	func _init(_value, _cut: bool = false) -> void:
 		value = _value
 		cut = _cut
+
+
+var _DELTA_VECTOR_LENGTH: float = 0.30
+## some peculiar version which divides velocity and look direction
+func process_input_vector_air(input_: InputPackage, delta: float, jump_direction: Vector3):
+	var _input_direction := velocity_by_input(input_, delta).normalized()
+	var _input_delta_vector = _input_direction * _DELTA_VECTOR_LENGTH
+	
+	# ep 6: (jump_direction + input_delta_vector * delta).limit_length(clamp(_player.velocity.length(), 1, 999999))
+	jump_direction = (jump_direction + _input_delta_vector).limit_length(_player.velocity.length())
+	# u.safe_look_at(_player, _player.global_position - jump_direction)
+
+	# ep 6: (player.velocity + input_delta_vector * delta).limit_length(_player.velocity.length())
+	var new_velocity = (_player.velocity + _input_delta_vector).limit_length(_player.velocity.length())
+	_player.velocity = new_velocity
 
 # endregion
 
@@ -171,5 +224,23 @@ func look_at_target(delta: float, use_model_front: bool = true, speed_config: Sp
 		var rotation_this_frame := clampf(remaining_angle, -max_rot_this_frame, max_rot_this_frame)
 		
 		_player.rotate_y(rotation_this_frame)
+
+# endregion
+
+
+## LOGGING
+# region: code
+
+func __pp_vel_y():
+	return pp.s(get_curr_y_velocity())
+
+func __pp_gl_pos_y():
+	return pp.s(get_player().global_position.y)
+
+func __pp_vel_xz_len():
+	return pp.s(get_curr_xz_velocity_len())
+
+func __pp_vel():
+	return pp.s("vel.y / gl_pos.y / vel.xz.len", __pp_vel_y(), __pp_gl_pos_y(), __pp_vel_xz_len())
 
 # endregion

@@ -11,12 +11,12 @@ class_name AnimationContainer
 var _animations := [
 	## loco
 	AnimationData.new(A.move.idle),
-	AnimationData.new(A.move.idle_to_sprint),
+	AnimationData.new(A.move.idle_to_sprint, 1.3),
 	AnimationData.new(A.move.sprint_to_idle, 0.85),
 	AnimationData.new(A.move.run),
 	AnimationData.new(A.move.sprint),
-	AnimationData.new(A.move.turn_180_R, 1.0, true),
-	AnimationData.new(A.move.turn_180_L, 1.0, true),
+	AnimationData.new(A.move.turn_180_R, 1.2, true),
+	AnimationData.new(A.move.turn_180_L, 1.2, true),
 	AnimationData.new(A.move.fast_turn_180_R, 1.0, true),
 	AnimationData.new(A.move.fast_turn_180_L, 1.0, true),
 	# loco strafe
@@ -27,17 +27,20 @@ var _animations := [
 	AnimationData.new(A.strafe.strafe_R, 0.8),
 	AnimationData.new(A.strafe.strafe_L, 0.8),
 
-	# loco dodge
+	## dodge
 	AnimationData.new(A.dodge.dodge_R),
 	AnimationData.new(A.dodge.dodge_L),
 	AnimationData.new(A.dodge.dodge_F),
 	AnimationData.new(A.dodge.dodge_B),
 
-	# loco jump
+	# air
 	AnimationData.new(A.air.midair),
-	AnimationData.new(A.air.jump_sprint),
-	AnimationData.new(A.air.landing_sprint),
+	AnimationData.new(A.air.jump_sprint, 0.8),
+	AnimationData.new(A.air.landing_sprint, 0.9),
 	AnimationData.new(A.air.jump_idle),
+
+
+	#
 	AnimationData.new(A.roll),
 	#
 	AnimationData.new(A.death),
@@ -130,21 +133,21 @@ func __enrich_with_end_start_times(anim: AnimationData):
 	var _end_time: float = native_anim.length
 	var _duration := 0.0
 
-	var _has_start_marker: bool = native_anim.has_marker(Marker.Name.START)
-	var _has_end_marker: bool = native_anim.has_marker(Marker.Name.END)
+	var _has_start_marker: bool = native_anim.has_marker(Marker.Name_.START)
+	var _has_end_marker: bool = native_anim.has_marker(Marker.Name_.END)
 
 	if anim.is_looping:
 		# WARNING: The animation is always considered to run for its full length to loop correctly.
 		#    - 'end' marker is ignored for looping _animations. 
 		#    - 'start' marker does not influence the duration!
 		if _has_start_marker:
-			_start_time = native_anim.get_marker_time(Marker.Name.START)
+			_start_time = native_anim.get_marker_time(Marker.Name_.START)
 		_duration = native_anim.length
 	else:
 		if _has_start_marker:
-			_start_time = native_anim.get_marker_time(Marker.Name.START)
+			_start_time = native_anim.get_marker_time(Marker.Name_.START)
 		if _has_end_marker:
-			_end_time = native_anim.get_marker_time(Marker.Name.END)
+			_end_time = native_anim.get_marker_time(Marker.Name_.END)
 		if _start_time > _end_time:
 			print_.warn("markers: _start_time > _end_time, _end_time will be ignored")
 			_end_time = native_anim.length

@@ -20,10 +20,10 @@ func _ready():
 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	_reason = ""
-	var curr_action := get_lsm_curr_action()
-	var curr_action_name := get_lsm_curr_action().action_name
-	var prev_action_name := get_lsm_prev_action().action_name
-	var curr_motion_type := get_lsm_curr_action().motion_type
+	var curr_action := get_curr_action()
+	var curr_action_name := get_curr_action().action_name
+	var prev_action_name := get_prev_action().action_name
+	var curr_motion_type := get_curr_action().motion_type
 	var next_action_name := supported_actions.convert_to_supported(curr_action)
 
 	match curr_motion_type:
@@ -83,9 +83,9 @@ func _from_loop_decision(input_: InputPackage, delta: float, next_action_name) -
 
 func _is_short_run() -> bool:
 	## specific hard coded check but its ok
-	var curr_action := get_lsm_curr_action()
-	var curr_action_name := get_lsm_curr_action().action_name
-	var prev_action_name := get_lsm_prev_action().action_name
+	var curr_action := get_curr_action()
+	var curr_action_name := get_curr_action().action_name
+	var prev_action_name := get_prev_action().action_name
 	
 	var result := false
 	result = curr_action_name == Leg.Act.run and prev_action_name == Leg.Act.idle

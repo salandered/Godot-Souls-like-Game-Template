@@ -93,7 +93,7 @@ func _label_state_info():
 	if not c_s.legs_sm.get_curr_action():
 		t += em.warn + "\nNO legs behavior action"
 		error = true
-	if not __pl_sm().get_current_action():
+	if not __pl_sm().get_curr_action():
 		t += em.warn + "\n"
 		error = true
 	if not __pl_sm().get_prev_action():
@@ -114,7 +114,7 @@ func _label_state_info():
 	var curr_l_b = c_s.legs_sm.current_behavior.behavior_name
 	var curr_l_act = c_s.legs_sm.get_curr_action().action_name
 	var curr_l_act_time_spent = c_s.legs_sm.get_curr_action().time_spent()
-	var curr_gl_act = __pl_sm().get_current_action().action_name
+	var curr_gl_act = __pl_sm().get_curr_action().action_name
 	var prev_gl_act = __pl_sm().get_prev_action().action_name
 	
 	t += "state/st act  %20s %20s " % [curr_st, curr_st_act]

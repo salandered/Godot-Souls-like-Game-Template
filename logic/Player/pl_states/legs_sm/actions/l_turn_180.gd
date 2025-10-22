@@ -13,7 +13,7 @@ var TURN_180_APEX_TIME: float
 
 
 func initialise() -> void:
-	TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+	TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name_.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
 
 
 func on_enter_action(input_: InputPackage) -> void:
@@ -61,7 +61,7 @@ func update(input_: InputPackage, delta: float):
 		# WARNING: currently turn180-> run configured in a way, that we cut right on apex.
 		# => this wont be run, but code is ready to handle this
 		SPEED_MULT = speed_curve_from_apex.update(delta)
-		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, get_curr_velocity())
+		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, pm().get_curr_velocity_len())
 		pm().move_with_input_vector(input_, delta, SpeedConfig.new(default_sp, SPEED_MULT))
 
 

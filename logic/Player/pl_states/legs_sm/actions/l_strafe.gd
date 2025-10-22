@@ -15,13 +15,13 @@ const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.08
 
 const ANIM_L: String = A.strafe.strafe_L
 const ANIM_R: String = A.strafe.strafe_R
-const SPEED_R: float = 2.1
-const SPEED_L: float = 2.0
+const SPEED_R: float = 2.4
+const SPEED_L: float = 2.3
 
 const ANIM_F: String = A.strafe.combat_run_f
 const ANIM_B: String = A.strafe.combat_run_b
-const SPEED_F: float = 1.9
-const SPEED_B: float = 1.6
+const SPEED_F: float = 2.6
+const SPEED_B: float = 1.9
 
 var curr_direction: StrafeDirection
 
@@ -160,7 +160,7 @@ func _switch_animation(is_opposite_change: bool):
 		if r != -1:
 			start_time_offset = r
 		# for perfect smoothness it should be equal to timer cooldowns
-		blend_time = 0.2 if is_opposite_change else 0.1
+		blend_time = 0.2 if is_opposite_change else 0.2
 	else:
 		blend_time = 0.3
 		print_.warn(action_name + "_switch_animation but not from strafe anim O_o")

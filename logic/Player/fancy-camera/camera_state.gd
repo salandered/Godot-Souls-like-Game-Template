@@ -57,6 +57,8 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 		var denom := theta_pred - theta_now
 		if abs(denom) > Constants.EPSILON_9: # why so many different epsilons ...
 			var scale := clampf((theta_target - theta_now) / denom, 0.0, 1.0)
+			# TODO
+			# DANGER: seems like offset = offset.rotated is a bad practice: Rot error will be accumulating.
 			offset = offset.rotated(vertical_axis, rot_angle * scale)
 		else: # denom ~ 0 means input had ~no theta change; do nothing this frame
 			print_.fancy_cam("", "vert mouse move skip frame")

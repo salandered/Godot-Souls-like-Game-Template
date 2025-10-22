@@ -11,7 +11,7 @@ var FAST_TURN_180_APEX_TIME: float
 
 func initialise() -> void:
 	# APEX
-	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(Marker.Name_.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
 
 
 func on_enter_action(input_: InputPackage) -> void:
@@ -41,7 +41,7 @@ func update(input_: InputPackage, delta: float):
 			
 	if time_spent() < FAST_TURN_180_APEX_TIME:
 		var root_vel := animator_manager.get_root_velocity()
-		get_player().velocity = initial_rotation * root_vel
+		pm().set_velocity(initial_rotation * root_vel)
 	else:
 		pm().move_with_input_vector(input_, delta)
 

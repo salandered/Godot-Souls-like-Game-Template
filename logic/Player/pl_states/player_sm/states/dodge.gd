@@ -2,13 +2,17 @@ extends PlayerState
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if not player.is_on_floor():
+	if not pm().safe_is_on_floor():
 		return PLVerdict.new(PS.midair)
 	
-	if curr_state_action.passed_marker(Marker.Name.TO_RUN):
-		print_.psm_check_trans(state_name, pp.s("passed_marker TO_RUN => choosing best input"))
-		var verdict := best_next_state_from_input(input_)
-		return verdict
+	if curr_state_action.passed_marker(Marker.Name_.TO_RUN):
+		if not _has_queued_state(PS.dodge):
+			print_.psm_check_trans(state_name, pp.s("passed_marker TO_RUN => choosing best input"))
+			var verdict := best_next_state_from_input(input_)
+			return verdict
+		else:
+			print_.psm_check_trans(state_name, pp.s("passed_marker TO_RUN but we have another dodge queued => wait"))
+			
 
 	return PLVerdict.new("")
 

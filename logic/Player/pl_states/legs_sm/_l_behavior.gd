@@ -18,12 +18,18 @@ var supported_actions: SupportedActions
 func get_player() -> Princess:
 	return legs_sm.get_player()
 
-
 func get_lsm_curr_action() -> LegsAction:
 	return legs_sm.get_curr_action()
 
 func get_lsm_prev_action() -> LegsAction:
 	return legs_sm.get_prev_action()
+
+
+func get_curr_action() -> BaseAction:
+	return legs_sm.player_sm.get_curr_action()
+
+func get_prev_action() -> BaseAction:
+	return legs_sm.player_sm.get_prev_action()
 
 
 func update(input_: InputPackage, _delta: float):
@@ -108,7 +114,7 @@ func is_pure_reverse_moving(input_) -> bool:
 	return input_.reverse_data.is_pure_reversed()
 
 func is_switch_from_unsupported_action() -> bool:
-	return not supported_actions.is_action_supported(get_lsm_curr_action().action_name)
+	return not supported_actions.is_action_supported(get_curr_action().action_name)
 
 func get_abs_angle_pl_input(input_, delta) -> float:
 	var angle := get_player().model.__angle_between_player_and_input(input_, delta)
@@ -121,7 +127,7 @@ func get_abs_angle_pl_input_deg(input_, delta) -> float:
 # endregion
 
 func __log_decision_data(input_, additional_checks: String, next_action_name: String):
-	var _curr_motion_type := get_lsm_curr_action().motion_type
+	var _curr_motion_type := get_curr_action().motion_type
 	print_.lsm_beh_ch(behavior_name,
 		_curr_motion_type,
 		is_moving(input_),

@@ -4,6 +4,7 @@ class_name RootAnimator
 
 @onready var full_body: ModifierAnimator = %FullBody
 
+const ROOT_IDX := 0
 
 func get_global_speed_scale() -> float:
 	return full_body.global_speed_scale
@@ -25,7 +26,7 @@ func get_prev_root_rotation() -> float:
 	if get_prev_playback().get_effective_progress() >= get_prev_playback().anim.duration:
 		print_.skm("RootAnimator", "Will return 0.0. effective_prog >= anim.duration. Details:" + get_prev_playback()._to_string_short(), 0, LogL.FORCE_PRINT)
 		return 0.0
-	var prev_rotation_delta := _calculate_rotation_delta(get_prev_playback(), 0)
+	var prev_rotation_delta := _calculate_rotation_delta(get_prev_playback(), ROOT_IDX)
 	# var rotation_ := prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
 	var rotation_ := prev_rotation_delta * get_global_speed_scale()
 	# if abs(rotation_) > 0.0001:
@@ -34,12 +35,22 @@ func get_prev_root_rotation() -> float:
 	return rotation_
 
 
-func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true) -> Vector3:
-	var curr_velocity := _calculate_velocity_delta(get_curr_playback(), 0)
+func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true, backwards: bool = false) -> Vector3:
+	var curr_playback = get_curr_playback()
+	var curr_eff_progress := curr_playback.get_effective_progress()
+	if curr_eff_progress < 0.016:
+		print_.prefix_s(em.mark, "curr_eff_progress", curr_eff_progress, "< 0.016 -> we at the beginning of the anim. backwards to true")
+		backwards = true
+	elif curr_playback.anim.duration - curr_eff_progress < 0.016:
+		print_.prefix_s(em.mark, "anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
+			"< 0.016 -> we at the end f the anim. backwards to false")
+		backwards = false
+
+	var curr_velocity := _calculate_velocity_delta(get_curr_playback(), ROOT_IDX, backwards)
 	
 
 	if use_blending and get_blend_playback().is_blending:
-		var prev_velocity := _calculate_velocity_delta(get_prev_playback(), 0)
+		var prev_velocity := _calculate_velocity_delta(get_prev_playback(), ROOT_IDX, backwards)
 		curr_velocity = prev_velocity.lerp(curr_velocity, get_blend_playback().percentage)
 	
 	if y_zeroed:
@@ -49,7 +60,7 @@ func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true) -> Vect
 
 
 func get_root_rotation(y_only: bool = true) -> float:
-	var curr_rotation_delta := _calculate_rotation_delta(get_curr_playback(), 0)
+	var curr_rotation_delta := _calculate_rotation_delta(get_curr_playback(), ROOT_IDX)
 	
 	# NOTE: Not supporing two animations in a row with root rotation. 
 	#       For one root rot and other w/o it, this should be checked for sanity
@@ -65,7 +76,7 @@ func get_root_rotation(y_only: bool = true) -> float:
 	return curr_rotation_delta * get_global_speed_scale()
 
 
-func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int) -> Vector3:
+func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int, backwards: bool = false) -> Vector3:
 	var _track_path := full_body.__bone_idx_to_track_path(bone_idx)
 	var pos_track := playback.anim.get_pos_track_idx(_track_path)
 
@@ -74,7 +85,12 @@ func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int) -> Vector3
 	
 	var scaled_delta := get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
 	var curr_progress := playback.get_effective_progress()
-	var prev_progress: float = max(0.0, curr_progress - scaled_delta)
+	var prev_progress := curr_progress - scaled_delta
+	if backwards:
+		curr_progress += scaled_delta
+		prev_progress += scaled_delta
+
+	prev_progress = max(0.0, prev_progress)
 	# prints(em.mark_2, prev_progress, curr_progress)
 	var prev_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, prev_progress)
 	var curr_pos: Vector3 = playback.native_anim.position_track_interpolate(pos_track, curr_progress)
@@ -108,7 +124,7 @@ func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
 
 ## needs polishing
 func calculate_animation_start_root_velocity(anim: AnimationData, start_time_offset: float = 0.0, backwards: bool = false) -> float:
-	var _track_path := full_body.__bone_idx_to_track_path(0)
+	var _track_path := full_body.__bone_idx_to_track_path(ROOT_IDX)
 	var root_pos_track := anim.get_pos_track_idx(_track_path)
 	
 	if root_pos_track == -1 or anim.native_anim.track_get_key_count(root_pos_track) <= 1:

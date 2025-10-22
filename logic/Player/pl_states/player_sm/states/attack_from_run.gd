@@ -3,17 +3,17 @@ extends AttackState
 
 ## overrides
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if not player.is_on_floor():
+	if not get_player().is_on_floor():
 		return PLVerdict.new(PS.midair)
 
 	
-	if curr_state_action.passed_marker(Marker.Name.ALLOWS_SWITCH):
+	if curr_state_action.passed_marker(Marker.Name_.ALLOWS_SWITCH):
 		var verdict := best_next_state_from_input(input_)
 		if verdict.next_state != PS.idle:
 			print_.psm_check_trans(state_name, pp.s("passed marker ALLOWS_SWITCH => chose best non idle input"))
 			return verdict
 
-	if curr_state_action.passed_marker(Marker.Name.TO_IDLE):
+	if curr_state_action.passed_marker(Marker.Name_.TO_IDLE):
 		var verdict := best_next_state_from_input(input_)
 		print_.psm_check_trans(state_name, pp.s("passed_marker TO_IDLE => best_next_state"))
 		return verdict

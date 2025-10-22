@@ -45,7 +45,7 @@ func set_anim_to_play(anim_name: String, blend_for: float = 0.0, start_time_offs
 
 func set_global_speed_scale(new_scale: float):
 	var max_speed_scale := 2
-	var min_speed_scale := 0.4
+	var min_speed_scale := 0.1
 	new_scale = snappedf(new_scale, 0.01)
 	if new_scale < min_speed_scale or new_scale > max_speed_scale:
 		# u.print_warn(pp.s("extreme speed scale:", new_scale, "Was:", global_speed_scale, "Will be clamped between", max_speed_scale))
@@ -84,8 +84,8 @@ func get_prev_blend_percentage() -> float:
 	return full_body.curr_blend_playback.prev_percentage
 
 
-func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true) -> Vector3:
-	return root_animator.get_root_velocity(y_zeroed, use_blending)
+func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true, backwards: bool = false) -> Vector3:
+	return root_animator.get_root_velocity(y_zeroed, use_blending, backwards)
 
 func get_root_rotation(y_only: bool = true) -> float:
 	return root_animator.get_root_rotation(y_only)

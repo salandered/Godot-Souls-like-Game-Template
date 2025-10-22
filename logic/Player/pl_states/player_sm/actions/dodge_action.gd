@@ -27,8 +27,8 @@ func initialise():
 	
 
 func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
-	var _anim_start := actual_anim.get_marker_time_by_name(Marker.Name.FROM_RUN, 0.0)
-	var _anim_end := actual_anim.get_marker_time_by_name(Marker.Name.TO_RUN, 1.0)
+	var _anim_start := actual_anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.0)
+	var _anim_end := actual_anim.get_marker_time_by_name(Marker.Name_.TO_RUN, 1.0)
 	start_time_offset = _anim_start # NOTE: side effect
 	return _anim_end - _anim_start
 
@@ -39,7 +39,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	curr_dodge_dir.set_direction_from_strafe_dir(_strafe_dir)
 
 	# INTERPOLATOR
-	var _inherited_speed := get_curr_velocity()
+	var _inherited_speed := pm().get_curr_velocity_len()
 	var _actual_anim := anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
 	var _anim_effective_dur := _calculate_anim_effective_duration(_actual_anim)
 	speed_x_interpolator.initialise(_inherited_speed, 2, dodge_x_peak_speed, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
@@ -51,14 +51,16 @@ func on_enter_action(input_: InputPackage) -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	pm().look_at_target(delta)
+	if player_sm.area_awareness.is_camera_locked():
+		pm().look_at_target(delta)
 
 	var current_speed := speed_x_interpolator.update(delta)
 	
 	var _curr_world_vector = curr_dodge_dir.current_world_vector(get_player().basis)
 	get_player().velocity = _curr_world_vector * current_speed
 
-	# pm().move_with_root(delta)
+	if tracks_input_vector():
+		pm().rotate_with_input_vector(input_, delta)
 
 
 func animate(): # ▶️

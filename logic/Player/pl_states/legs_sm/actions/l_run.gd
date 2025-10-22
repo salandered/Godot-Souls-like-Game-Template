@@ -11,7 +11,8 @@ var speed_mult_from_idle := EaseCurveInterpolator.new()
 var angular_sp_from_idle := FloatLinearInterpolator.new()
 var turn_sp_from_idle := FloatLinearInterpolator.new()
 var speed_from_turn := FloatCurveInterpolator.new()
-var angular_sp_from_turn := FloatLinearInterpolator.new()
+var angular_sp := FloatLinearInterpolator.new()
+var speed_from_inherited := FloatLinearInterpolator.new()
 
 var curr_turn: TurnData = TurnData.new()
 
@@ -21,31 +22,40 @@ func initialise():
 	default_sp.TURN_SPEED = 2.0
 	default_sp.ANGULAR_SPEED = 10.0
 
-	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name.TURN_180_APEX, 0.25)
+	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name_.TURN_180_APEX, 0.25)
 	
 	blend_time_by_action = {
 		Leg.Act.idle: 0.3, # 0.3 WORKED GOOD!!
 		Leg.Act.sprint: 0.3,
 		Leg.Act.turn_180: turn_180_blend_time,
+		PS.Act.landing_sprint: 0.4,
+		PS.Act.dodge: 0.3
 	}
 
 func on_enter_action(input_: InputPackage):
 	speed_mult_from_idle.reset()
 	speed_from_turn.reset()
-	angular_sp_from_turn.reset()
+	angular_sp.reset()
 	angular_sp_from_idle.reset()
 	turn_sp_from_idle.reset()
 
+
+	var _inherited_speed := pm().get_curr_velocity_len()
+	speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, accel_from_idle_time)
+	
 	match PREV_ACTION:
-		Leg.Act.idle, PS.Act.axe_slice_1: # experimenting with new actions besides idle
+		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
+		Leg.Act.sprint:
+			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.4)
 		Leg.Act.turn_180:
-			var _inherited_speed := get_curr_velocity()
 			speed_from_turn.initialise(_inherited_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
-			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
-	
+			angular_sp.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
+		PS.Act.landing_sprint:
+			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.5)
+			angular_sp.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.5)
 
 func on_exit_action():
 	animator_manager.reset_global_speed_scale()
@@ -53,24 +63,29 @@ func on_exit_action():
 
 func update(input_: InputPackage, delta: float):
 	var SPEED_MULT := 1.0 # default multiplier
-	var CURR_SPEED := default_sp.SPEED # default actual speed
+	var CURR_SPEED = speed_from_inherited.update(delta)
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var TURN_SPEED := default_sp.TURN_SPEED
-
 	match PREV_ACTION:
-		Leg.Act.idle, PS.Act.axe_slice_1:
+		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
+			CURR_SPEED = default_sp.SPEED
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
 			TURN_SPEED = turn_sp_from_idle.update(delta)
+		Leg.Act.sprint:
+			CURR_SPEED = speed_from_inherited.update(delta)
 		Leg.Act.turn_180:
 			CURR_SPEED = speed_from_turn.update(delta)
-			CURR_ANGULAR_SPEED = angular_sp_from_turn.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp.update(delta)
+		PS.Act.landing_sprint:
+			CURR_SPEED = speed_from_inherited.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp.update(delta)
 
 	var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
 	speed_config.tie_turn_sp_to_speed(0.6)
 	pm().process_input_vector(input_, delta, speed_config)
 
-	animator_manager.set_global_speed_scale(get_curr_velocity() / CURR_SPEED)
+	animator_manager.set_global_speed_scale(pm().get_curr_velocity_len() / CURR_SPEED)
 
 
 var _next_anim_correction := 0.08
@@ -82,7 +97,7 @@ func animate(): # ▶️
 	start_time_offset = default_start_time_offset
 
 	match PREV_ACTION:
-		Leg.Act.idle, PS.Act.axe_slice_1:
+		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
 			start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:
 			start_time_offset = __start_time_offset_dev # sync with idle where left leg forward

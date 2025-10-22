@@ -24,6 +24,7 @@ const default_start_time_offset: float = 0.0
 
 # 
 var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
+var motion_type: String ## see MotionType
 
 #
 var _enter_action_time: float
@@ -39,15 +40,6 @@ var PREV_ACTION: String = ""
 func get_player() -> Princess:
 	return player_sm.get_player()
 	
-func get_curr_velocity() -> float:
-	return get_player().velocity.length()
-
-func get_curr_xz_velocity() -> float:
-	return Vector3(get_player().velocity.x, 0, get_player().velocity.z).length()
-
-func get_curr_y_velocity() -> float:
-	return Vector3(0, get_player().velocity.y, 0).length()
-
 
 func pm() -> PlayerMovement:
 	return player_sm.player_movement
@@ -69,6 +61,7 @@ func _on_enter_action(input_: InputPackage) -> void:
 		player_sm.legs_sm.set_current_action(self) # very second line
 	elif self is PlayerAction:
 		player_sm.current_state.curr_state_action = self
+	
 	mark_enter_action()
 	on_enter_action(input_)
 	animate()
@@ -80,6 +73,8 @@ func on_enter_action(input_: InputPackage) -> void:
 
 
 func _on_exit_action() -> void:
+	# TODO DANGER: while testing splitted SM, this may work after next action processed _on_enter_action 
+	#    this is really bad but almost anything could be set up _on_enter_action and then its ok.
 	on_exit_action()
 
 
@@ -193,13 +188,13 @@ func works_between(start: float, finish: float) -> bool:
 	return false
 
 
-func passed_marker(marker_name: String) -> bool:
+func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		print_.warn("passed_marker - no time - will return false", true)
 		return __reject()
 
-	if effective_time_spent() >= marker_time:
+	if effective_time_spent() >= marker_time + add_time:
 		return true
 	return false
 

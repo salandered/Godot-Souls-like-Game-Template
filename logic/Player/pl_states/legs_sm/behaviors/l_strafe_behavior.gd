@@ -16,7 +16,7 @@ func on_enter_behavior(input_: InputPackage):
 
 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
-	var curr_action := get_lsm_curr_action()
+	var curr_action := get_curr_action()
 	var curr_motion_type := curr_action.motion_type
 	var next_action_name := supported_actions.convert_to_supported(curr_action)
 
@@ -42,7 +42,7 @@ func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name) -
 	if is_moving(input_) or is_reverse_moving(input_):
 		var decision := _decide_move_action(input_, delta)
 		next_action_name = decision.name
-		if next_action_name != get_lsm_curr_action().action_name:
+		if next_action_name != get_curr_action().action_name:
 			__log_decision_data(input_, decision.reason, next_action_name)
 		_non_moving_timer.reset()
 	

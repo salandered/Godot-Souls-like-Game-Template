@@ -5,9 +5,9 @@ var hit_damage = 100
 
 func update(input_: InputPackage, _delta):
 	if curr_state_action.works_between(2.2, 3.6): # turn into parameter
-		player.model.active_weapon.is_attacking = true
+		get_player().model.active_weapon.is_attacking = true
 	else:
-		player.model.active_weapon.is_attacking = false
+		get_player().model.active_weapon.is_attacking = false
 
 
 # func pack_hit_data(weapon: BaseWeapon) -> HitData:
@@ -20,5 +20,5 @@ func update(input_: InputPackage, _delta):
 
 
 func on_exit_state():
-	player.model.active_weapon.hitbox_ignore_list.clear()
-	player.model.active_weapon.is_attacking = false
+	get_player().model.active_weapon.hitbox_ignore_list.clear()
+	get_player().model.active_weapon.is_attacking = false

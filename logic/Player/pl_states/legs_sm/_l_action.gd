@@ -4,10 +4,6 @@ extends BaseAction
 
 var legs_sm: LegsSM
 
-var motion_type: String ## see MotionType
-
-
-
 
 ## to override if needed
 func initialise() -> void:
@@ -68,8 +64,8 @@ func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 	var prev_anim_progress := animator_manager.get_current_anim_effective_progress()
 	var prev_anim := container.l_action_by_name(PREV_ACTION).anim
 	var next_anim := anim
-	var prev_l_leg_contact := prev_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var prev_l_leg_contact := prev_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if prev_l_leg_contact and next_l_leg_contact:
 		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(
@@ -86,8 +82,8 @@ func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: fl
 	var result_offset := -1.0
 	var curr_anim_progress := animator_manager.get_current_anim_effective_progress()
 	var curr_anim := anim
-	var curr_l_leg_contact := curr_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var curr_l_leg_contact := curr_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if curr_l_leg_contact and next_l_leg_contact:
 		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(

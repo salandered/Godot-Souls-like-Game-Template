@@ -14,11 +14,11 @@ func update(input_: InputPackage, delta):
 func move_player(delta: float):
 	var delta_pos = curr_state_action.get_root_position_delta(delta)
 	delta_pos.y = 0
-	var rotated_delta = player.get_quaternion() * delta_pos / delta
-	player.velocity.x = rotated_delta.x
-	player.velocity.z = rotated_delta.z
-	if not player.is_on_floor():
-		player.velocity.y -= u.gravity * delta
+	var rotated_delta = _player.get_quaternion() * delta_pos / delta
+	_player.velocity.x = rotated_delta.x
+	_player.velocity.z = rotated_delta.z
+	if not _player.is_on_floor():
+		_player.velocity.y -= u.gravity * delta
 
 # TODO To move this reset logic into the base State? 
 # It’s a quick hack for one‑shot animations that can chain (e.g. roll → roll). 

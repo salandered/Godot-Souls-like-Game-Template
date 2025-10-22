@@ -14,8 +14,8 @@ func _ready():
 
 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
-	var curr_action := get_lsm_curr_action()
-	var curr_motion_type := get_lsm_curr_action().motion_type
+	var curr_action := get_curr_action()
+	var curr_motion_type := get_curr_action().motion_type
 	var next_action_name := supported_actions.convert_to_supported(curr_action)
 
 	match curr_motion_type:
@@ -38,7 +38,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 
 
 func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -> String:
-	var curr_action := get_lsm_curr_action()
+	var curr_action := get_curr_action()
 	var angle_deg := get_abs_angle_pl_input_deg(input_, delta)
 
 	if is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
@@ -55,7 +55,7 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -
 
 
 func _from_START_decision(input_: InputPackage, delta: float, next_action_name) -> String:
-	var curr_action := get_lsm_curr_action()
+	var curr_action := get_curr_action()
 	if is_moving(input_):
 		match curr_action.action_name:
 			Leg.Act.turn_180:

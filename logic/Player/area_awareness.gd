@@ -103,6 +103,28 @@ func get_camera_locked_target() -> Node3D:
 # func drop_target():
 # 	camera_locked_target = null
 
+var extreme_landing_height: float = 1.1
+var landing_height: float = 0.6
+var tolerate_height: float = 0.1
+
+
+func floor_dist_under_extreme_landing_height(_log: bool = true) -> bool:
+	var _r = get_floor_distance() <= extreme_landing_height
+	if _log: __log_floor_dist("<= land height", extreme_landing_height, "? =>", _r)
+	return _r
+
+
+func floor_dist_under_landing_height(_log: bool = true) -> bool:
+	var _r = get_floor_distance() <= landing_height
+	if _log: __log_floor_dist("<= land height", landing_height, "? =>", _r)
+	return _r
+
+
+func floor_dist_under_tolerated_height(_log: bool = true) -> bool:
+	var _r = get_floor_distance() <= tolerate_height
+	if _log: __log_floor_dist("<= tolerate height", tolerate_height, "? =>", _r)
+	return _r
+
 
 func get_floor_distance() -> float:
 	if downcast.is_colliding():
@@ -147,7 +169,7 @@ func _is_good_candidate(target: Node3D) -> bool:
 		return false
 
 	var camera_to_target := (target.global_position - player.fancy_camera.camera.global_transform.origin).normalized()
-	var camera_forward := - player.fancy_camera.camera.global_transform.basis.z
+	var camera_forward := -player.fancy_camera.camera.global_transform.basis.z
 	if camera_forward.dot(camera_to_target) < min_dot:
 		# _print.call(target, "angle between camera forward and target")
 		return false
@@ -172,5 +194,9 @@ func _sort_targets_by_player_distance(targets: Array) -> void:
 
 func __log_candidate(target, reason):
 	print_.aware_target("candidate" + em.gray_x, pp.s("target.lbl:", target.label, "Reason:", reason))
+
+
+func __log_floor_dist(...parts: Array):
+	print_.aware("", pp.s("floor_dist", get_floor_distance(), pp.list_(parts)))
 
 # endregion

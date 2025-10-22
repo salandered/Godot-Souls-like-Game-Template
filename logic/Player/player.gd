@@ -11,7 +11,7 @@ class_name Princess
 
 @onready var smith_sword: SmithSword = %SmithSword
 
-var jump_data: UsualJumpData
+# var jump_data: UsualJumpData
 
 
 var debug_cams: Array[Node]
@@ -22,7 +22,7 @@ func _ready() -> void:
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Mask.PLAYER_COL_MASK
 
-	jump_data = UsualJumpData.new()
+	# jump_data = UsualJumpData.new()
 
 	visuals.accept_model_data(model)
 
@@ -56,6 +56,9 @@ func _process(delta) -> void:
 	
 	# VISUALISE (PRESENTATION)
 	# Visuals -> follow parent transformations
+
+	# seems like every frame is ok. may be try to make it once per N frames for safety
+	basis = basis.orthonormalized()
 	
 
 func _unhandled_input(event: InputEvent) -> void:

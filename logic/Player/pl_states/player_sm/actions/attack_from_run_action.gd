@@ -14,7 +14,7 @@ func initialise() -> void:
 		Leg.Act.run: 0.4,
 		Leg.Act.sprint: 0.4
 	}
-	start_time_offset = anim.get_marker_time_by_name(Marker.Name.FROM_RUN, 0.1)
+	start_time_offset = anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.1)
 
 
 func on_enter_action(input_: InputPackage) -> void:
@@ -25,7 +25,7 @@ func on_enter_action(input_: InputPackage) -> void:
 		Leg.Act.sprint:
 			global_extra_speed = 2
 			fade_time = 0.4
-	var _inherited_speed := get_curr_velocity()
+	var _inherited_speed := pm().get_curr_velocity_len()
 	var rm_start_speed := animator_manager.calculate_animation_start_root_velocity(anim, start_time_offset, true)
 	extra_speed = max(0.0, _inherited_speed - rm_start_speed + global_extra_speed)
 	fade_interpolator.initialise(1.0, 0.0, fade_time)

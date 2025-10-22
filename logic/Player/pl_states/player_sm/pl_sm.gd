@@ -59,13 +59,14 @@ func fill_tranfer_data(tranfer_turn_data):
 	_transfer_data.fill(_current_action.action_name, tranfer_turn_data)
 
 
+## optional return
 func get_tranfer_data_by_key(key) -> Variant:
 	## auto getting prev one
 	var data: Variant = _transfer_data.get_by_action_and_key(_prev_action.action_name, key)
 	return data
 
 
-func get_current_action() -> BaseAction:
+func get_curr_action() -> BaseAction:
 	return _current_action
 
 
@@ -94,8 +95,8 @@ func update_current_action(next_action: BaseAction) -> String:
 	if next_act_name == curr_act_name:
 		print_.prefix(em.pin, "✖️🚸 came with the same action " + curr_act_name)
 
-	# print_.prefix("", pp.s(next_act_name, "is set for curr |",
-	# 	curr_act_name, "moved to prev"), 12)
+	print_.prefix("[[]]", pp.s(next_act_name, "is set for curr |",
+		curr_act_name, "moved to prev"), 18)
 	
 	_prev_action = _current_action
 	_current_action = next_action

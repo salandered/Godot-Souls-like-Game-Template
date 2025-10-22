@@ -127,7 +127,7 @@ func _accept_player_states() -> void:
 
 
 		# common
-		child.player = player
+		child._player = player
 		child.feelings = feelings
 		child.combat = combat
 		child.container = self
@@ -174,7 +174,7 @@ func _accept_player_actions():
 	print_.container("pl_act", str(_player_actions))
 	print("pl_act")
 
-func __add_action_data(action_data, child):
+func __add_action_data(action_data: StatesContainer.ActionData, child):
 	_player_actions[action_data.action_name] = child
 	
 	# base action
@@ -189,6 +189,7 @@ func __add_action_data(action_data, child):
 	assert(anim, "no anim with " + action_data.anim_id)
 	child.anim = anim
 	child.action_name = action_data.action_name
+	child.motion_type = action_data.motion_type
 	
 	assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
 	

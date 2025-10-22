@@ -69,7 +69,6 @@ class Act:
 
 	const jump_sprint := "pla_jump_sprint🖊️"
 	const midair := "pla_midair🖊️"
-	const landing_run := "pla_landing_run🖊️"
 	const landing_sprint := "pla_landing_sprint🖊️"
 	const roll := "pla_roll🖊️"
 	const dodge := "pla_dodge🤸"

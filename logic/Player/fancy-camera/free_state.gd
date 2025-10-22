@@ -58,6 +58,9 @@ func _rotate_offset(prev_focus_pos: Vector3, new_focus_pos: Vector3) -> void:
 
 	var decider := new_direction.cross(old_offset_xz)
 	var signed_alpha: float = alpha if decider.y < 0 else -alpha
+
+	# TODO
+	# DANGER: seems like offset = offset.rotated is a bad practice: Rot error will be accumulating.
 	free_offset = free_offset.rotated(Vector3.UP, signed_alpha)
 
 
@@ -84,3 +87,6 @@ func input_mouse_movement(d_x: float, d_y: float) -> void:
 
 	# VERTICAL 
 	free_offset = vertical_mouse_movement(d_x, d_y, free_offset)
+
+	# TODO
+	# DANGER: seems like offset = offset.rotated is a bad practice: Rot error will be accumulating.
