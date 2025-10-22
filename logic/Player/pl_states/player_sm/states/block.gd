@@ -22,7 +22,7 @@ func react_on_hit(hit: HitData):
 	# if hit comes from shielded side, block: pay stamina instead of health
 	if face_direction.angle_to(hit_direction) < block_sector / 2:
 		print(" ~~~ blocked a hit")
-		resources.pay_block_cost(hit.damage, block_coefficient)
+		# resources.pay_block_cost(hit.damage, block_coefficient)
 		try_force_state("block_reaction")
 	else:
 		# unblocked hit: fall back to default reaction

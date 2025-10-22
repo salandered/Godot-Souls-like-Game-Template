@@ -31,6 +31,7 @@ var target_lock: TargetLockInput = TargetLockInput.new()
 var forward_input := 0.0
 var orbit_input := 0.0
 
+#
 
 #
 var reverse_data: ReverseData = ReverseData.new()
@@ -49,7 +50,7 @@ func detect_strafe_dir() -> StrafeDir.E:
 	if reverse_data.is_reversed():
 		var _target_dir := reverse_data.target_dir
 		var target_dir := StrafeDir.from_vector(_target_dir)
-		print_.prefix("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, StrafeDir.name_(target_dir)))
+		# print_.prefix("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, StrafeDir.name_(target_dir)))
 		return target_dir
 		
 	if abs(orbit_input) < 0.01: # Pure Forward/Backward (no strafe input)

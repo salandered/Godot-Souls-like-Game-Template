@@ -30,6 +30,14 @@ static func ease_in_out(x: float) -> float:
 	x = clampf(x, 0.0, 1.0)
 	return 0.5 * (1.0 - cos(x * PI))
 
+static func safe_has_key(key: String, dict: Dictionary, soft_crucial: bool = false, fast_fail: bool = false) -> bool:
+	var exists = key in dict
+	if not exists:
+		if fast_fail:
+			assert(false, "Key '" + str(key) + "' not found in dictionary")
+		else:
+			print_.warn("Key '" + str(key) + "' not found in dictionary", soft_crucial)
+	return exists
 
 static func safe_look_at(
 	from_who: Node3D,
@@ -39,7 +47,7 @@ static func safe_look_at(
 	use_model_front: bool = false,
 	eps: float = 0.001
 ) -> bool:
-	var dir: = target - from_who.global_transform.origin
+	var dir := target - from_who.global_transform.origin
 	if dir.length_squared() < eps * eps:
 		return false
 	if abs(dir.normalized().dot(up)) > 1.0 - eps:

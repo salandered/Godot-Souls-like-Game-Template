@@ -10,12 +10,3 @@ func _ready():
 
 func update(input_: InputPackage, _delta: float) -> void:
 	get_player().velocity = Vector3.ZERO
-
-
-func animate(): # ▶️
-	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
-	var start_time_offset := 0.0
-
-			
-	__log_anim(blend_time, start_time_offset)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)

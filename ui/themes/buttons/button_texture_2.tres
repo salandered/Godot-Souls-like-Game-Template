@@ -1,10 +1,12 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cg2khdcvd3ova"]
 
-[ext_resource type="Texture2D" uid="uid://coqvd8l6k4088" path="res://ui/themes/buttons/emFQZmfAoG.png" id="1_glqml"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cf5ta"]
+load_path = "res://.godot/imported/g5lIOlQpYb.png-1b2cfbd9229b0ca362012414eba74c3a.ctex"
 
 [resource]
 content_margin_top = 4.0
 content_margin_bottom = 4.0
-texture = ExtResource("1_glqml")
+texture = SubResource("CompressedTexture2D_cf5ta")
 axis_stretch_vertical = 1
 region_rect = Rect2(5.610077, 4.7114716, 387.9719, 157.66893)
+modulate_color = Color(0.87408215, 1.2212517, 1.5923643, 1)

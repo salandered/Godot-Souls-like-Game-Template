@@ -1,9 +1,8 @@
-[gd_resource type="Theme" load_steps=27 format=3 uid="uid://dngnbhs1qjqyy"]
+[gd_resource type="Theme" load_steps=26 format=3 uid="uid://dngnbhs1qjqyy"]
 
 [ext_resource type="StyleBox" uid="uid://ctas7l1ddksp1" path="res://ui/themes/buttons/button_texture_1_hover.tres" id="1_86wfo"]
 [ext_resource type="Texture2D" uid="uid://b4qf0w7eu1ajq" path="res://ui/themes/wZZNl7ooWl.png" id="1_sx7a4"]
 [ext_resource type="StyleBox" uid="uid://d5grt08wa8so" path="res://ui/themes/buttons/button_texture_1.tres" id="2_sx7a4"]
-[ext_resource type="FontFile" uid="uid://du4qma3ci473" path="res://ui/themes/Yrsa-Light.ttf" id="4_86wfo"]
 [ext_resource type="StyleBox" uid="uid://xfjyq8ix6pfu" path="res://ui/themes/panel/invisible_panel.tres" id="4_mrpaj"]
 [ext_resource type="Texture2D" uid="uid://coqvd8l6k4088" path="res://ui/themes/buttons/emFQZmfAoG.png" id="4_o8ban"]
 [ext_resource type="Texture2D" uid="uid://bau21w0g0meor" path="res://ui/themes/buttons/HCCD8Bm153.png" id="6_cf62b"]
@@ -105,8 +104,6 @@ texture_margin_right = 16.0
 texture_margin_bottom = 4.0
 
 [resource]
-default_font = ExtResource("4_86wfo")
-default_font_size = 30
 Button/colors/font_hover_color = Color(1, 0.92806923, 0.88031965, 1)
 Button/colors/font_pressed_color = Color(0.43904907, 0.43904915, 0.43904895, 1)
 Button/constants/outline_size = 4

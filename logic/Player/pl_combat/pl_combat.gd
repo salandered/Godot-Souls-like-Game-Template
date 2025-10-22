@@ -8,9 +8,10 @@ class_name PlayerCombat
 @onready var model = $".." as PlayerModel
 
 
-static var _inputs_priority: Dictionary = {
+static var _combat_inputs_priority: Dictionary = {
 	CombatAction.light_attack_pressed: 1,
-	CombatAction.heavy_attack_pressed: 2,
+	CombatAction.light_attack_pressed_when_move: 2,
+	CombatAction.heavy_attack_pressed: 3,
 }
 
 
@@ -44,24 +45,20 @@ func contextualize(new_input: InputPackage, delta) -> InputPackage:
 
 ## translates the input to basic states with the help of the current weapon
 func _translate_combat_actions(new_input: InputPackage, delta):
-	if new_input.combat_actions.is_empty():
-		return
-
-	new_input.combat_actions.sort_custom(_priority_sort)
-	var best_action: String = new_input.combat_actions[0] # safe
-	print_.fight("PlCombat", "best action is " + best_action)
-	var _translated: String = model.active_weapon.translate_input_to_state(best_action, new_input, delta)
-	print_.fight("PlCombat", "translated to state " + _translated)
-
-	if _translated:
-		new_input.actions.append(_translated)
+	# new_input.combat_actions.sort_custom(_priority_sort)
+	# var _best_action: String = new_input.combat_actions[0] # safe
+	var _translated: Array = model.active_weapon.translate_combat_input_to_state(new_input.combat_actions)
+	
+	new_input.actions.append_array(_translated)
 
 # func filter_with_resources(input_: InputPackage):
 # 	if model.resources.statuses.has("fatique"):
 # 		input_.actions.erase("sprint")
 
+
 static func _priority_sort(a: String, b: String) -> bool:
-	if _inputs_priority[a] > _inputs_priority[b]:
+	# 0 means lowest
+	if _combat_inputs_priority[a] > _combat_inputs_priority[b]:
 		return true
 	else:
 		return false

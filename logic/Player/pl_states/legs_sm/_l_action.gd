@@ -6,7 +6,7 @@ var legs_sm: LegsSM
 
 var motion_type: String ## see MotionType
 
-var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
+
 
 
 ## to override if needed
@@ -14,35 +14,20 @@ func initialise() -> void:
 	pass
 
 
-func pm() -> PlayerMovement:
-	return legs_sm.player_sm.player_movement
+func get_lsm_curr_action() -> LegsAction:
+	return legs_sm.get_curr_action()
 
-
-func get_player() -> Princess:
-	return legs_sm.player_sm.player
+func get_lsm_prev_action() -> LegsAction:
+	return legs_sm.get_prev_action()
 
 
 func _update(input_: InputPackage, _delta: float):
 	update(input_, _delta)
-	# _apply_residual_rotation()
+
 
 ## Not abstract! It can be empty. (double action)
 func update(input_: InputPackage, _delta: float):
 	pass
-
-
-## experimental and not used 
-func _apply_residual_rotation():
-	# If we blend to non root rot anim from root rot anim (e.g. turn_180 -> run),
-	# then we need to apply root rot leftover separately
-	# (curr non root rot action doesn't know anything about root rot management)
-	if animator_manager.is_blending() \
-		and player_sm.get_prev_action().anim.uses_root_rotation \
-		and not anim.uses_root_rotation:
-			var rotation_delta := animator_manager.get_prev_root_rotation()
-			if abs(rotation_delta) > 0.001:
-				# print(u.fr() + "[RESIDUAL_ROT] Action '%s' applying residual rotation of %.4f from prev action '%s'" % [action_name, rotation_delta, player_sm.get_prev_action().action_name])
-				get_player().rotate_y(rotation_delta)
 
 
 ## TURN LOGIC
@@ -52,12 +37,12 @@ func calculate_target_angle(input_: InputPackage) -> float:
 	var target_angle: float
 	if input_.reverse_data.is_reversed():
 		target_angle = - PI + 0.05
-		prints("\n\t target ∠:", pp.rad2deg(target_angle))
-		prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
+		# prints("\n\t target ∠:", pp.rad2deg(target_angle))
+		# prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
 	else:
 		var _signed_angle := get_player().model.__angle_between_player_and_input(input_, 0.016, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
-		prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
+		# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
 
 
@@ -68,7 +53,7 @@ func turn_direction_by_target_angle(target_angle: float) -> String:
 		if signf(target_angle) == 0: print_.warn("Turn angle is zero; defaulting to a 'right' turn.")
 	else:
 		turn_direction = TurnData.TURN_DIR_LEFT
-	prints("\t turn decision:", turn_direction)
+	# prints("\t turn decision:", turn_direction)
 	return turn_direction
 
 # endregion
@@ -81,7 +66,7 @@ func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 	# NOTE: Action is switched, but animator still treats an anim from prev action as "current" 
 	#       (before current action hits set_anim_to_play)
 	var prev_anim_progress := animator_manager.get_current_anim_effective_progress()
-	var prev_anim := player_sm.get_prev_action().anim
+	var prev_anim := container.l_action_by_name(PREV_ACTION).anim
 	var next_anim := anim
 	var prev_l_leg_contact := prev_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name.LOCO_LOOP_L_LEG_FULL_CONTACT)
@@ -117,17 +102,17 @@ func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: fl
 
 ## return -1 in case of problems or default value
 func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_name_: String, default_value: float = -1) -> float:
-	var blend_time: float = -1
-	var _anim := container.legs_action_by_name(action_name_).anim
+	var blend_time_: float = -1
+	var _anim := container.l_action_by_name(action_name_).anim
 	if not _anim:
-		print_.warn("blend_time == -1 inside calculate_blend_time_from_prev_anim_marker")
+		print_.warn("blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
 	var _marker_time := _anim.get_marker_time_by_name(marker_name_)
 	if _marker_time == -1:
-		print_.warn("blend_time == -1 inside calculate_blend_time_from_prev_anim_marker")
+		print_.warn("blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
-	blend_time = _anim.duration - _marker_time
-	return blend_time
+	blend_time_ = _anim.duration - _marker_time
+	return blend_time_
 
 # endregion
 

@@ -87,7 +87,7 @@ func _unhandled_input(event: InputEvent) -> void:
 # ONLY GETTERS FOR OPPONENT PROJECT
 # TODO: code is old
 func hp_percentage() -> float:
-	return model.resources.health / model.resources.max_health
+	return model.feelings.current_health / model.feelings.max_health
 
 func is_attacking() -> bool:
 	return false

@@ -15,7 +15,14 @@ class Name:
 	const START = "start"
 	const END = "end"
 
+	# jump
+	
 	const JUMP_LAUNCH = "jump_launch"
+	const JUMP_START_END = "jump_start_end"
+	const LAND_START = "land_start"
+	const LEG_CONTACT = "leg_contact"
+	const RUN_AGAIN = "run_again"
+
 	const LOCO_LOOP_L_LEG_FULL_CONTACT = "left_leg_full_contact"
 	const TURN_180_APEX = "APEX"
 	const TURN_COMPLETE = "TURN_COMPLETE"

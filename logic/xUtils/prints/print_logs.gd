@@ -25,6 +25,7 @@ const HIT_BOX_B := true
 # PLAYER
 const PSM_B := true
 const SKM_B := false
+const FEEL_B := true
 
 # PLAYER LSM
 const LSM_BEH_B := true
@@ -108,6 +109,7 @@ static var PSM_ACTION := PrintData.new(PSM_B, "Action", 2, psm)
 static var PSM_CHECK_TRANS_PRINT := PrintData.new(PSM_B, "transition ❔", 1, psm)
 static var PSM_PRINT := PrintData.new(PSM_B, "PSM", 0, prefix)
 static var SKM_PRINT := PrintData.new(SKM_B, "SKM 💀", 0, prefix)
+static var FEEL_PRINT := PrintData.new(PSM_B, "FEEL🤍", 10, prefix)
 
 static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(PSM_CHECK_TRANS_PRINT, add_prefix_, text, info_indents, level)
@@ -121,15 +123,19 @@ static func psm(add_prefix_: String, text: String, info_indents: int = 0, level:
 static func skm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(SKM_PRINT, add_prefix_, text, info_indents, level)
 
+static func feel(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(FEEL_PRINT, add_prefix_, text, info_indents, level)
+
 # endregion
 
 # region: PLAYER LSM LOGS
 
-static var LSM_BEH_CH := PrintData.new(LSM_BEH_B, "choose act ❔", 3, lsm_beh)
-static var LSM_BEH_PRINT := PrintData.new(LSM_BEH_B, "LSM Behavior", 3, prefix)
-static var LSM_ACTION_STRAFE := PrintData.new(LSM_ACTION_STRAFE_B, "Strafe", 5, lsm_action)
-static var LSM_ACTION_ANIM := PrintData.new(LSM_ACTION_B, "▶️", 7, lsm_action)
-static var LSM_ACTION := PrintData.new(LSM_ACTION_B, "LSM Action", 5, prefix)
+static var LSM_BEH_CH := PrintData.new(LSM_BEH_B, "choose act ❔", 4, lsm_beh)
+static var LSM_BEH_PRINT := PrintData.new(LSM_BEH_B, "Behavior", 4, lsm)
+static var LSM_ACTION_STRAFE := PrintData.new(LSM_ACTION_STRAFE_B, "Strafe", 6, lsm_action)
+static var LSM_ACTION_ANIM := PrintData.new(LSM_ACTION_B, "▶️", 16, lsm_action)
+static var LSM_ACTION := PrintData.new(LSM_ACTION_B, "Action", 6, lsm)
+static var LSM_PRINT := PrintData.new(LSM_BEH_B, "LSM", 3, prefix)
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 	is_moving, is_reverse_moving, is_pure_reverse_moving, text, decision,
@@ -154,16 +160,24 @@ static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, le
 static func lsm_action_strafe(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(LSM_ACTION_STRAFE, add_prefix_, text, info_indents, level)
 
-static func lsm_action_anim(add_prefix_: String, anim_name: String, blend_time, start_time_offset, info_indents: int = 0, level: String = LogL.NOTSET):
+static func lsm_action_anim(
+	add_prefix_: String, anim_name: String,
+	blend_time, start_time_offset, prev_act_name,
+	info_indents: int = 0, level: String = LogL.NOTSET):
 	var msg = pp.s(
-		"anim: ", pp.in_q(anim_name),
-		"blend_t", blend_time,
-		"start_t_off", start_time_offset
+		"anim", pp.in_q(anim_name),
+		"blend t", blend_time,
+		"start off", start_time_offset,
+		"prev", pp.in_q(prev_act_name)
 		)
 	_generic(LSM_ACTION_ANIM, add_prefix_, msg, info_indents, level)
 
 static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(LSM_ACTION, add_prefix_, text, info_indents, level)
+
+static func lsm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(LSM_PRINT, add_prefix_, text, info_indents, level)
+
 
 # endregion
 
@@ -223,6 +237,13 @@ class PrintData:
 		log_func.call(log_data.add_prefix_, log_data.text, log_data.info_indents, log_data.level)
 
 static var _last_prefix_msg = ""
+
+static func prefix_s(...parts: Array[Variant]):
+	if parts.is_empty():
+		parts = ["empty prefix", "empty text"]
+		
+	var _msg = pp.list_(parts.slice(1))
+	prefix(parts[0], _msg)
 
 static func prefix(prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)

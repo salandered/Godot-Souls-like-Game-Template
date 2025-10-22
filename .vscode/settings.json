@@ -123,6 +123,11 @@
 	// src/**/test - Matches any "test" folder inside the "src" directory at any depth
 	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	"folder-path-color.folders": [
+		// FEELINGS
+		{
+			"path": "*feelings.gd",
+			"color": "turquoise"
+		},
 		// ANIM (NOT PLAYER)
 		{
 			"path": "*anim.gd",
@@ -260,32 +265,6 @@
 	"editor.detectIndentation": false,
 	// File view more shifted
 	"workbench.tree.indent": 12,
-	// Probably duplicates my custom edits to theme extension
-	// "editor.tokenColorCustomizations": {
-	// 	"textMateRules": [
-	// 		{
-	// 			"scope": "entity.name.type.class.gdscript",
-	// 			"settings": {
-	// 				"foreground": "#2CDFC7E3"
-	// 				// "foreground": "#43e0cbc5"
-	// 			}
-	// 		},
-	// 		{
-	// 			"scope": "entity.name.function.gdscript",
-	// 			"settings": {
-	// 				"foreground": "#5ECFE6"
-	// 				// "foreground": "#70baff"
-	// 			}
-	// 		},
-	// 		{
-	// 			"scope": "variable.other.property.gdscript",
-	// 			"settings": {
-	// 				"foreground": "#D9BCFF"
-	// 				// "foreground": "#e4d0ffe8"
-	// 			}
-	// 		}
-	// 	]
-	// },
 	// ========================
 	// Bookmarks Extension Settings
 	// ========================
@@ -498,26 +477,26 @@
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#77b2dade", // Soft Blue-Green color
+					"color": "#77b2dade",
 				}
 			]
 		},
-		"\\b(print_\\.)": {
+		"\\b(print_\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#A3A3F5",
+					"color": "#77b2dade",
 				}
 			]
 		},
-		"\\b(prints\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#A3A3F5",
-				}
-			]
-		},
+		// "\\b(print_\\.)": {
+		// 	"filterLanguageRegex": "gdscript",
+		// 	"decorations": [
+		// 		{
+		// 			"color": "#A3A3F5",
+		// 		}
+		// 	]
+		// },
 		"(# region:)(.*)": {
 			"decorations": [
 				{
@@ -528,6 +507,28 @@
 				// "color": "#808080", // Style for the text after it
 				// "fontStyle": "italic"
 				// }
+			]
+		},
+		"(stamina)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#91acf7ee"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(health)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#a1e4a1e7"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
 			]
 		},
 		"\\b(curr_playback)": {
@@ -708,6 +709,10 @@
 		},
 		{
 			"filePath": "logic\\_tests\\unit\\test_input_gatherer.gd",
+			"group": "Default"
+		},
+		{
+			"filePath": "ideas",
 			"group": "Default"
 		}
 	],

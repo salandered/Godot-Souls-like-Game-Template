@@ -10,11 +10,47 @@ var player_sm: PlayerSM
 
 var action_name: String
 var anim: AnimationData
-var default_blend_time: float = 0.2
 
+
+# anim parameters
+var start_time_offset_by_action := {}
+var blend_time_by_action := {}
+
+var blend_time: float = 0.2
+var start_time_offset: float = 0.0
+
+const default_blend_time: float = 0.2
+const default_start_time_offset: float = 0.0
+
+# 
+var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
+
+#
 var _enter_action_time: float
 
-var blend_time_by_action := {}
+
+## assigned while updating current global action as the VERY FIRST operation of the action.
+## excessive, but provides an extra gurantee that prev action would not change throughout 
+## the current action (self) life cycle.
+## => strongly recommended to use this instead of alternative ways like player_sm.get_prev_action
+var PREV_ACTION: String = ""
+
+
+func get_player() -> Princess:
+	return player_sm.get_player()
+	
+func get_curr_velocity() -> float:
+	return get_player().velocity.length()
+
+func get_curr_xz_velocity() -> float:
+	return Vector3(get_player().velocity.x, 0, get_player().velocity.z).length()
+
+func get_curr_y_velocity() -> float:
+	return Vector3(0, get_player().velocity.y, 0).length()
+
+
+func pm() -> PlayerMovement:
+	return player_sm.player_movement
 
 
 # region: INTERFACE 
@@ -28,7 +64,11 @@ var blend_time_by_action := {}
 
 
 func _on_enter_action(input_: InputPackage) -> void:
-	player_sm.update_current_action(self) # before on_enter_action!
+	PREV_ACTION = player_sm.update_current_action(self) # NOTE: very first line of curr action
+	if self is LegsAction:
+		player_sm.legs_sm.set_current_action(self) # very second line
+	elif self is PlayerAction:
+		player_sm.current_state.curr_state_action = self
 	mark_enter_action()
 	on_enter_action(input_)
 	animate()
@@ -50,13 +90,23 @@ func on_exit_action() -> void:
 	
 ## default implementation. Called automatically.
 ## Example use cases to override: mute playing animation or using situational blend_time.
+## NOTE: called AFTER the on_enter_action()
 ## TODO: DANGER: If an action mutes playing anim (not calling set_anim_to_play), 
 ## TM like time_spent() would stuck and return final values from the previous actions.
 ## Such animations should work with functions like get_real_time_spent or not work with the TM at all.
 func animate(): # ▶️
-	__log_anim(default_blend_time, 0.0)
-	animator_manager.set_anim_to_play(anim.anim_id, default_blend_time)
+	# if action set some specific value, we should not override it using dict, which would probably result in default
+	if blend_time == default_blend_time:
+		blend_time = blend_time_by_action.get(PREV_ACTION, default_blend_time)
+	if start_time_offset == default_start_time_offset:
+		start_time_offset = start_time_offset_by_action.get(PREV_ACTION, default_start_time_offset)
+	
+	set_anim_to_play()
 
+## strongly recommended to use from overriden animate()
+func set_anim_to_play():
+	__log_anim()
+	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)
 
 # endregion
 
@@ -108,9 +158,9 @@ func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 	if anim.is_looping:
 		print_.warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
 		return Constants.BIG_MEANINGLESS_NUMBER
-	var action := container.legs_action_by_name(next_action_name)
-	var blend_time: float = action.blend_time_by_action.get(action_name, action.default_blend_time)
-	return max(time_remaining() - blend_time, 0.0)
+	var action := container.l_action_by_name(next_action_name)
+	var _blend_time: float = action.blend_time_by_action.get(action_name, action.default_blend_time)
+	return max(time_remaining() - _blend_time, 0.0)
 
 
 ## Time remaining till a moment, when current animation would be blended 100%. 
@@ -175,22 +225,22 @@ func __reject() -> bool:
 # region: GET ANIMATION PARAMETERS
 
 func switches_to_queue() -> bool:
-	return anim.switches_to_queue(time_spent())
+	return anim.switches_to_queue(effective_time_spent())
 
 func allows_queue() -> bool:
-	return anim.allows_queue(time_spent())
+	return anim.allows_queue(effective_time_spent())
 
 func is_vulnerable() -> bool:
-	return anim.vulnerable(time_spent())
+	return anim.vulnerable(effective_time_spent())
 
 func is_interruptable() -> bool:
-	return anim.interruptable(time_spent())
+	return anim.interruptable(effective_time_spent())
 
 func weapon_hurts() -> bool:
-	return anim.weapon_hurts(time_spent())
+	return anim.weapon_hurts(effective_time_spent())
 
 func tracks_input_vector() -> bool:
-	return anim.tracks_input_vector(time_spent())
+	return anim.tracks_input_vector(effective_time_spent())
 
 
 # TODO: interesting but do we need this?
@@ -202,5 +252,5 @@ func tracks_input_vector() -> bool:
 # endregion
 
 
-func __log_anim(blend_time, start_time_offset = 0.0):
-	print_.lsm_action_anim(action_name, anim.anim_name, blend_time, start_time_offset)
+func __log_anim():
+	print_.lsm_action_anim(action_name, anim.anim_name, blend_time, start_time_offset, PREV_ACTION)

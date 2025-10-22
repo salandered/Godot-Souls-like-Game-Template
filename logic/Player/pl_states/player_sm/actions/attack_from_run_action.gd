@@ -5,8 +5,8 @@ var fade_interpolator := FloatLinearInterpolator.new()
 var fade_time: float = 0.4 # how long to fade extra velocity
 var extra_speed: float = 0.0
 
-var start_time_offset := 0.0
 var global_extra_speed := 1.0
+
 
 func initialise() -> void:
 	hit_damage = 9
@@ -18,21 +18,21 @@ func initialise() -> void:
 
 
 func on_enter_action(input_: InputPackage) -> void:
-	match player_sm.get_prev_action().action_name:
+	match PREV_ACTION:
 		Leg.Act.run:
 			global_extra_speed = 1
 			fade_time = 0.3
 		Leg.Act.sprint:
 			global_extra_speed = 2
 			fade_time = 0.4
-	var _inherited_speed := get_player().velocity.length()
+	var _inherited_speed := get_curr_velocity()
 	var rm_start_speed := animator_manager.calculate_animation_start_root_velocity(anim, start_time_offset, true)
 	extra_speed = max(0.0, _inherited_speed - rm_start_speed + global_extra_speed)
 	fade_interpolator.initialise(1.0, 0.0, fade_time)
 
-	__log_action_ent(
-		"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %
-		[_inherited_speed, start_time_offset, rm_start_speed, extra_speed])
+	# __log_action_ent(
+	# 	"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %
+	# 	[_inherited_speed, start_time_offset, rm_start_speed, extra_speed])
 
 
 func update(input_: InputPackage, delta: float):
@@ -55,12 +55,5 @@ func _move_with_root(delta: float) -> void:
 	# if fade_factor > 0.0:
 	# 	__log_action(
 	# 		"RootVel.z: %.2f, Fade: %.2f, ExtraVel.z: %.2f, FinLocal.z: %.2f, FinalGlSp: %.2f" %
-	# 		[root_vel.z, fade_factor, extra_vel_local.z, final_local_vel.z, get_player().velocity.length()])
+	# 		[root_vel.z, fade_factor, extra_vel_local.z, final_local_vel.z, get_curr_speed()])
 	fade_interpolator.update(delta)
-
-
-func animate(): # ▶️
-	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
-	
-	__log_anim(blend_time, start_time_offset)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)

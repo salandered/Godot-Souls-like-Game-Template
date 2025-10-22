@@ -15,6 +15,8 @@ albedo_color = Color(0.7294118, 0.39607844, 0.39607844, 1)
 script = ExtResource("1_sk2nb")
 
 [node name="WeaponHurtBox" parent="." instance=ExtResource("2_lfwdn")]
+collision_layer = 16
+collision_mask = 8
 
 [node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
 transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0, 0.3348894, 0)

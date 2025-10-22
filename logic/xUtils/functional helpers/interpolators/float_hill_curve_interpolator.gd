@@ -18,8 +18,8 @@ func initialise(start: float, end: float, peak: float, curve_: Curve, duration_:
 	duration = duration_
 	timer = 0.0
 	current_value = start_value
-	print_.prefix("HillInterpolator",
-		pp.s("Init: start", start_value, "end", end_value, "peak", peak_value, "dur", duration), 7)
+	# print_.prefix("HillInterpolator",
+		# pp.s("Init: start", start_value, "end", end_value, "peak", peak_value, "dur", duration), 7)
 
 ## Returns end_value when done
 func update(delta: float) -> float:

@@ -33,11 +33,11 @@ var is_attacking: bool = false
 var _hit_data: HitData = null
 
 ## E.g: Sword maps 'light attack pressed' to slash, while staff to spell.
-## _input_to_state = {
+## _input_action_to_state = {
 ## 	CombatAction.light_attack_pressed: PS.longsword_1
 ## }
 ## NOTE: specific to player only. Is here for now for simplicity.
-var _input_to_state: Dictionary = {} # input actions to states
+var _input_action_to_state: Dictionary = {} # input actions to states
 
 
 func _ready():
@@ -57,9 +57,15 @@ func get_hit_data() -> HitData:
 	return _hit_data
 
 
-func translate_input_to_state(combat_action: String, new_input: InputPackage, delta: float) -> String:
-	if combat_action in _input_to_state:
-		return _input_to_state[combat_action]
-	else:
-		print_.warn("BaseWeapon: weapon '%s' has no mapping for combat action '%s'" % [weapon_name, combat_action])
-		return ""
+func translate_combat_input_to_state(combat_actions: Array) -> Array:
+	var _translated = []
+	
+	for act in combat_actions:
+		if u.safe_has_key(act, _input_action_to_state):
+			_translated.append(_input_action_to_state[act])
+
+	if not combat_actions.is_empty() and _translated.is_empty():
+		print_.warn(pp.s("BaseWeapon", weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))
+	if not _translated.is_empty():
+		print_.fight("PlCombat", pp.s("actions ", combat_actions, "translatedToSt", _translated))
+	return _translated

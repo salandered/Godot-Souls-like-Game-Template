@@ -16,7 +16,7 @@ func _ready():
 	weapon_visuals = mesh
 	weapon_name = "smith_sword"
 	
-	_input_to_state = {
+	_input_action_to_state = {
 		CombatAction.light_attack_pressed: PS.axe_slice_1,
 		CombatAction.light_attack_pressed_when_move: PS.attack_from_run
 	}

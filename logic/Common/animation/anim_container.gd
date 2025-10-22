@@ -35,7 +35,6 @@ var _animations := [
 
 	# loco jump
 	AnimationData.new(A.air.midair),
-	AnimationData.new(A.air.small_jump_run),
 	AnimationData.new(A.air.jump_sprint),
 	AnimationData.new(A.air.landing_sprint),
 	AnimationData.new(A.air.jump_idle),

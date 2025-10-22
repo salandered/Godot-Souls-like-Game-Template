@@ -5,7 +5,7 @@ class_name PlayerSM
 @export var area_awareness: AreaAwareness
 @export var legs_sm: LegsSM
 
-var player: Princess
+var _player: Princess
 
 @export var animator_manager: AnimatorManager
 @export var animation_settings: AnimationPlayer
@@ -25,10 +25,10 @@ var _prev_action: BaseAction
 func initialise():
 	var empty_input := InputPackage.new()
 
-	var _idle_action := container.legs_action_by_name(Leg.Act.idle)
-	var _double_st_action := container.action_by_name(PS.Act.double)
+	var _idle_action := container.l_action_by_name(Leg.Act.idle)
+	var _double_st_action := container.pl_action_by_name(PS.Act.double)
 	var _run_state := container.state_by_name(PS.run)
-	var _run_beh := container.legs_behavior_by_name(Leg.Beh.run)
+	var _run_beh := container.l_behavior_by_name(Leg.Beh.run)
 	
 	# global level
 	current_state = _run_state
@@ -40,11 +40,15 @@ func initialise():
 
 	# legs sm level
 	legs_sm.current_behavior = _run_beh
-	legs_sm.current_action = _idle_action
-	legs_sm.prev_action = _idle_action
+	legs_sm._current_action = _idle_action
+	legs_sm._prev_action = _idle_action
 
 	#
 	animation_settings.play(A.SET_full_body, 0.2) # todo: delete
+
+
+func get_player() -> Princess:
+	return _player
 
 
 # TODO: fast solution. Design proper action (or states) ability to share data.
@@ -69,7 +73,8 @@ func get_prev_action() -> BaseAction:
 	return _prev_action
 
 
-func update_current_action(next_action: BaseAction):
+## returns newly shifted previous action name
+func update_current_action(next_action: BaseAction) -> String:
 	# var curr_act_name = ""
 	# if not _current_action:
 		# curr_act_name = "-none-"
@@ -81,21 +86,23 @@ func update_current_action(next_action: BaseAction):
 
 	if next_act_name == Leg.Act.double:
 		# print_.prefix("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
-		return
+		return _prev_action.action_name
 	if next_act_name == PS.Act.double:
 		# print_.prefix("", "✖️ declined state double update to curr. staying with " + curr_act_name)
-		return
+		return _prev_action.action_name
 
 	if next_act_name == curr_act_name:
 		print_.prefix(em.pin, "✖️🚸 came with the same action " + curr_act_name)
 
-	print_.prefix("", curr_act_name + " moved to prev")
-	print_.prefix("", next_act_name + " is set for curr")
+	# print_.prefix("", pp.s(next_act_name, "is set for curr |",
+	# 	curr_act_name, "moved to prev"), 12)
 	
 	_prev_action = _current_action
 	_current_action = next_action
 	if _prev_action and next_act_name == _prev_action.action_name:
 		print_.prefix(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
+	
+	return _prev_action.action_name
 
 
 func update(input_: InputPackage, delta: float) -> void:
@@ -115,6 +122,5 @@ func update(input_: InputPackage, delta: float) -> void:
 		current_state = container.state_by_name(verdict.next_state)
 		current_state._on_enter_state(input_)
 
-	# TODO: moved back here, Player States triggers _update from legs_animator behavior -> double dipping
-	# current_state.update_resources(delta)
+
 	current_state._update(input_, delta)

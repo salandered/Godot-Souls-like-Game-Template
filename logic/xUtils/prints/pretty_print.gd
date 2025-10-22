@@ -58,12 +58,12 @@ static func compare_w(what_happened: String, text_2: String, val_2: float) -> St
 	var r = s(what_happened, text_2, round_01(val_2))
 	return r
 
-static func _dict(dict_: Dictionary, json: bool = false) -> String:
+static func _dict(dict_: Dictionary, json: bool = false, one_string: bool = false) -> String:
 	if json:
 		return JSON.stringify(dict_, "\t")
 	if dict_.is_empty():
 		return "{}"
-	return __recursive_dict(dict_)
+	return __recursive_dict(dict_, "", one_string)
 
 
 static func _array(array_: Array, json: bool = false) -> String:
@@ -119,11 +119,14 @@ static func file_load_err(err, path: String):
 		print(path + " error loading:", err)
 
 
+# region: domain helpers
+
+
 # region: inner helpers
 
-static func __recursive_dict(dict_: Dictionary, indent: String = "") -> String:
-	var r = "\n"
-	var next_indent = indent + "\t"
+static func __recursive_dict(dict_: Dictionary, indent: String = "", one_string: bool = false) -> String:
+	var r = "" if one_string else "\n"
+	var next_indent = "" if one_string else indent + "\t"
 	
 	for key_ in dict_.keys():
 		var value_ = dict_[key_]
@@ -136,7 +139,8 @@ static func __recursive_dict(dict_: Dictionary, indent: String = "") -> String:
 		else:
 			value_str = in_q(str(value_)) # str() for safety
 		
-		r += next_indent + in_q(key_) + " : " + value_str + "\n"
+		r += next_indent + in_q(key_) + " : " + value_str
+		r += " " if one_string else "\n"
 	
 	if not dict_.is_empty():
 		r = r.trim_suffix(",\n")

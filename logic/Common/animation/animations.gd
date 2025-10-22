@@ -75,7 +75,6 @@ class air:
 	# todo jump-roll A-Quick-Roll-To-Run
 	const midair := _lib.jump_v4 + "Midair-Hok" # TODO: change rotation of anim
 	# const jump_run := _lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-UP-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-start"
-	const small_jump_run := _lib.axe_rm_jump + "LL-jump-running"
 	# const landing_run := _lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-LAND-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-end"
 	const jump_sprint := _lib.jump_v4 + "RM-Run-Jump-all"
 	const landing_sprint := _lib.jump_v4 + "RM-Run-Jump-ver-land"

@@ -4,7 +4,7 @@ extends LegsAction
 @export var accel_from_turn_curve: Curve
 
 
-var accel_from_idle_time: float = 0.5 # How long to reach full speed
+var accel_from_idle_time: float = 0.5
 var accel_from_turn_time: float = 0.5
 
 var speed_mult_from_idle := EaseCurveInterpolator.new()
@@ -15,9 +15,6 @@ var angular_sp_from_turn := FloatLinearInterpolator.new()
 
 var curr_turn: TurnData = TurnData.new()
 
-## NOTE: currently adjusting SpeedConfig solves non completed root turn better than this.
-## In the future this feature may be deleted or separated into something bigger.
-var COMPLETE_ROOT_TURN_FEATURE: bool = false
 
 func initialise():
 	default_sp.SPEED = 3.0
@@ -39,25 +36,18 @@ func on_enter_action(input_: InputPackage):
 	angular_sp_from_idle.reset()
 	turn_sp_from_idle.reset()
 
-	match player_sm.get_prev_action().action_name:
-		Leg.Act.idle:
+	match PREV_ACTION:
+		Leg.Act.idle, PS.Act.axe_slice_1: # experimenting with new actions besides idle
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
 		Leg.Act.turn_180:
-			var _inherited_speed := get_player().velocity.length()
+			var _inherited_speed := get_curr_velocity()
 			speed_from_turn.initialise(_inherited_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
 			angular_sp_from_turn.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
-			var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
-			if raw_turn_data == null:
-				prints(u.fr(), "no 'turn_data' data. assuming turn completed")
-				curr_turn.hard_complete()
-			else:
-				curr_turn.initialise_from_dict(raw_turn_data)
-				prints(u.fr(), " Inherited turn:", str(curr_turn))
+	
 
 func on_exit_action():
-	__log_action_ext("last speed", get_player().velocity.length())
 	animator_manager.reset_global_speed_scale()
 
 
@@ -67,8 +57,8 @@ func update(input_: InputPackage, delta: float):
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var TURN_SPEED := default_sp.TURN_SPEED
 
-	match player_sm.get_prev_action().action_name:
-		Leg.Act.idle:
+	match PREV_ACTION:
+		Leg.Act.idle, PS.Act.axe_slice_1:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
 			TURN_SPEED = turn_sp_from_idle.update(delta)
@@ -76,15 +66,11 @@ func update(input_: InputPackage, delta: float):
 			CURR_SPEED = speed_from_turn.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_turn.update(delta)
 
-	if not curr_turn.turn_completed and COMPLETE_ROOT_TURN_FEATURE:
-		_complete_root_turn(CURR_SPEED)
-	else:
-		# prints("~~", SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED)
-		var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
-		speed_config.tie_turn_sp_to_speed(0.6)
-		pm().process_input_vector(input_, delta, speed_config)
+	var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
+	speed_config.tie_turn_sp_to_speed(0.6)
+	pm().process_input_vector(input_, delta, speed_config)
 
-	animator_manager.set_global_speed_scale(get_player().velocity.length() / CURR_SPEED)
+	animator_manager.set_global_speed_scale(get_curr_velocity() / CURR_SPEED)
 
 
 var _next_anim_correction := 0.08
@@ -92,11 +78,11 @@ var __start_time_offset_dev := 0.0
 
 
 func animate(): # ▶️
-	var start_time_offset := 0.0
-	var blend_time: float = blend_time_by_action.get(player_sm.get_prev_action().action_name, default_blend_time)
-	
-	match player_sm.get_prev_action().action_name:
-		Leg.Act.idle:
+	blend_time = blend_time_by_action.get(PREV_ACTION, default_blend_time)
+	start_time_offset = default_start_time_offset
+
+	match PREV_ACTION:
+		Leg.Act.idle, PS.Act.axe_slice_1:
 			start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:
 			start_time_offset = __start_time_offset_dev # sync with idle where left leg forward
@@ -105,21 +91,41 @@ func animate(): # ▶️
 			if r != -1:
 				start_time_offset = r
 			
-	__log_anim(blend_time, start_time_offset)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)
+	set_anim_to_play()
 
-
-func _complete_root_turn(CURR_SPEED):
-	var rotation_delta := animator_manager.get_prev_root_rotation()
-	var result := pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
-	curr_turn.update(result.completed, result.accum_rot)
-
-	get_player().velocity = get_player().basis.z * CURR_SPEED
-	# OR move_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
 
 var _dev_add_blend := 0.0
 
 func _input(event):
 	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
-	__start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)
+	# __start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)
+
+
+## NOTE: currently adjusting SpeedConfig solves non completed root turn better than this.
+## In the future this feature may be deleted or separated into something bigger.
+var COMPLETE_ROOT_TURN_FEATURE: bool = false
+# region: COMPLETE_ROOT_TURN_FEATURE
+# from on enter match turn
+	# var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
+	# if raw_turn_data == null:
+		# prints(u.fr(), "no 'turn_data' data. assuming turn completed")
+		# curr_turn.hard_complete()
+	# else:
+		# curr_turn.initialise_from_dict(raw_turn_data)
+		# prints(u.fr(), " Inherited turn:", str(curr_turn))
+
+# from update
+	# if COMPLETE_ROOT_TURN_FEATURE and not curr_turn.turn_completed:
+	# 	_complete_root_turn(CURR_SPEED)
+	# else:
+		
+# func _complete_root_turn(CURR_SPEED):
+# 	var rotation_delta := animator_manager.get_prev_root_rotation()
+# 	var result := pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
+# 	curr_turn.update(result.completed, result.accum_rot)
+
+# 	get_player().velocity = get_player().basis.z * CURR_SPEED
+# 	# OR move_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
+# endregione_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
+# endregion

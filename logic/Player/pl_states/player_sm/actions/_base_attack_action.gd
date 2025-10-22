@@ -17,7 +17,7 @@ func on_enter_action(input_: InputPackage):
 
 func update(input_: InputPackage, delta):
 	if tracks_input_vector():
-		pm().rotate_with_input_vector_simple(input_, delta)
+		pm().rotate_with_input_vector(input_, delta)
 	pm().move_with_root(delta)
 	player_sm.combat.update_is_attacking(weapon_hurts())
 

@@ -2,18 +2,11 @@ extends RefCounted
 class_name InputGatherer
 
 
-const LONG_PRESS_THRESHOLD: float = 0.2
-const MOVE_ATTACK_THRESHOLD: float = 0.1
-const RUN_ATTACK_CONFIRM_DELAY: float = 0.2
 const SPRINT_TO_RUN_DELAY: float = 0.2
 
-var _to_run_attack_timer: DelayTimer = DelayTimer.new()
 var _to_run_after_sprint_timer: DelayTimer = DelayTimer.new()
 
-var _was_running: bool = false
 const DOUBLE_TAP_THRESHOLD: float = 0.2
-
-var _move_start_time: float = -1.0
 
 var _jump_key: KeyPress = KeyPress.new(RawAction.jump)
 var _forward_key: KeyPress = KeyPress.new(RawAction.move_forward)
@@ -27,7 +20,7 @@ var _sprint_key: KeyPress = KeyPress.new(RawAction.sprint)
 var _target_lock_detector: TapDetector = TapDetector.new(DOUBLE_TAP_THRESHOLD)
 
 
-func _current_time()-> float:
+func _current_time() -> float:
 	return Time.get_ticks_msec() / 1000.0
 
 func _update_key_press_timestamps() -> void:
@@ -84,12 +77,6 @@ func gather_input(delta: float) -> InputPackage:
 	
 	var _has_input := new_input.input_direction != Vector2.ZERO
 	
-	if _has_input:
-		if _move_start_time < 0.0: # movement just started
-			_move_start_time = _current_time()
-	else:
-		_move_start_time = -1.0 # movement stopped
-
 	# MAIN
 
 	if _to_run_after_sprint_timer.is_in_progress():
@@ -140,34 +127,15 @@ func gather_input(delta: float) -> InputPackage:
 
 	# if Input.is_action_pressed("shield_throw_reload"):
 	# 	new_input.actions.append(PS.shield_throw_reload)
-
-	if _to_run_attack_timer.is_initialised(): # if timer is ok we update it
-		_to_run_attack_timer.update(delta)
-		
-		var is_still_moving: = new_input.input_direction != Vector2.ZERO
-		
-		if not is_still_moving: # while timer was ok situation changed, abort
-			_to_run_attack_timer.turn_off()
-		elif _to_run_attack_timer.is_complete(): # Timer finished AND player is still moving
-			new_input.combat_actions.append(CombatAction.light_attack_pressed_when_move)
-			_to_run_attack_timer.turn_off()
+	
+	if _light_attack_key.is_just_pressed:
+		new_input.combat_actions.append(CombatAction.light_attack_pressed)
 
 	if _light_attack_key.is_just_pressed:
-		if _to_run_attack_timer.is_in_progress(): # we r busy with waiting for timer
-			pass
-		else:
-			var is_moving := _move_start_time > 0.0
-			var move_duration: = 0.0
-			if is_moving:
-				move_duration = _current_time() - _move_start_time
-			
-			if is_moving and move_duration >= MOVE_ATTACK_THRESHOLD:
-				# start the timer which would fire the action
-				_to_run_attack_timer.initialise(RUN_ATTACK_CONFIRM_DELAY)
-			else:
-				# default attack
-				new_input.combat_actions.append(CombatAction.light_attack_pressed)
-
+		new_input.combat_actions.append(CombatAction.light_attack_pressed)
+		if new_input.actions.has(PS.run) or new_input.actions.has(PS.sprint):
+			new_input.combat_actions.append(CombatAction.light_attack_pressed_when_move)
+	
 	#if Input.is_action_just_pressed("heavy_attack"):
 		#new_input.combat_actions.append("heavy_attack_pressed")
 

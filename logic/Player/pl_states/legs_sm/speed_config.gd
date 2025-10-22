@@ -29,7 +29,7 @@ func _init(
 
 func tie_turn_sp_to_speed(multiplier: float):
 	if _speed == -1:
-		print_.warn("cant use _speed that is not set. Will remain as it was: " + str(_turn_speed))
+		print_.warn("cant use _speed that is not set. _turn_speed will remain as it was: " + str(_turn_speed))
 		return
 	_turn_speed = _speed * multiplier
 

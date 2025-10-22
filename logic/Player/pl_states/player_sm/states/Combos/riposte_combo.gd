@@ -1,7 +1,9 @@
+@tool
+@icon("res://-assets-/x_misc/x_icons/white/icon_propeller.png")
 extends Combo_
 
 
-func is_triggered(input_: InputPackage) -> bool:
+func is_triggered(input_: InputPackage, curr_state_name: String, curr_act: BaseAction) -> bool:
 	print_.combo(name, pp.s("is_triggered?",
 				"triggered_state:", state_to_trigger,
 				"current input_.actions:", input_.actions

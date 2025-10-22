@@ -2381,9 +2381,13 @@ tracks/55/keys = PackedFloat32Array(0, 1, 4.704139e-08, 0.99991703, 0.012881309,
 resource_name = "RM-Run-Jump-all"
 length = 0.9
 markers = [{
-"color": Color(1, 0.23137255, 0.09019608, 1),
-"name": &"end",
-"time": 0.3
+"color": Color(1, 1, 1, 1),
+"name": &"jump_start_end",
+"time": 0.4564051
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"jump_launch",
+"time": 0.044336494
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -2782,9 +2786,17 @@ tracks/55/keys = PackedFloat32Array(0, 1, 3.776406e-08, 0.9967735, -0.08026466, 
 resource_name = "RM-Run-Jump-ver-land"
 length = 0.9
 markers = [{
-"color": Color(0, 1, 0.1833334, 1),
-"name": &"start",
-"time": 0.4
+"color": Color(1, 1, 1, 1),
+"name": &"run_again",
+"time": 0.76806456
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"land_start",
+"time": 0.46666667
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"leg_contact",
+"time": 0.6333333
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

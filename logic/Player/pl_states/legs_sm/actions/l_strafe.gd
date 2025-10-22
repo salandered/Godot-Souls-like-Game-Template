@@ -56,7 +56,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + StrafeDir.name_(_dir))
 	curr_direction.set_direction(_dir)
 	
-	match player_sm.get_prev_action().action_name:
+	match PREV_ACTION:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
@@ -68,7 +68,7 @@ func on_exit_action() -> void:
 func update(input_: InputPackage, delta: float) -> void:
 	var SPEED_MULT := 1.0
 
-	match player_sm.get_prev_action().action_name:
+	match PREV_ACTION:
 		Leg.Act.idle:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 
@@ -90,6 +90,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	var new_dir := input_.detect_strafe_dir()
 	if new_dir != curr_direction.get_curr_dir():
 		print_.lsm_action_strafe(pp.on_upd, pp.s("new dir", curr_direction.pp_curr_dir(), "=>", StrafeDir.name_(new_dir)))
+	
 	match curr_direction.would_be_change_of_type(new_dir):
 		StrafeDirection.ChangeType.OPPOSITE:
 			if opposite_dir_change.cooldown.update(delta):
@@ -130,10 +131,9 @@ func _change_dir(is_opposite_change: bool):
 
 
 func animate(): # ▶️
-	var blend_time := 0.3
+	blend_time = 0.3
 	anim = anim_container.get_by_name(curr_direction.get_curr_anim_id())
-	__log_anim(blend_time)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
+	set_anim_to_play()
 
 
 var sync_loco_anim_correction: float = 0.18
@@ -145,8 +145,8 @@ func _switch_animation(is_opposite_change: bool):
 	var next_anim := anim_container.get_by_name(curr_direction.get_curr_anim_id())
 	var curr_anim := anim
 
-	var start_offset := 0.0
-	var blend_time := 0.2
+	blend_time = default_blend_time
+	start_time_offset = default_start_time_offset
 
 	if next_anim.anim_id == curr_anim.anim_id:
 		print_.lsm_action_strafe("", "_switch_animation same anim, won't switch")
@@ -158,7 +158,7 @@ func _switch_animation(is_opposite_change: bool):
 			print(em.pin, em.mark)
 		var r := sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:
-			start_offset = r
+			start_time_offset = r
 		# for perfect smoothness it should be equal to timer cooldowns
 		blend_time = 0.2 if is_opposite_change else 0.1
 	else:
@@ -167,9 +167,9 @@ func _switch_animation(is_opposite_change: bool):
 	
 	anim = next_anim # only after sync_with_curr_loco_anim!
 
-	__log_anim(blend_time, start_offset)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_offset)
+	__log_anim()
+	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)
 
 
-func _input(event):
-	__dev_add = u._dev_change_t34_param(event, __dev_add, "__dev_add", 0.05)
+# func _input(event):
+	# __dev_add = u._dev_change_t34_param(event, __dev_add, "__dev_add", 0.05)

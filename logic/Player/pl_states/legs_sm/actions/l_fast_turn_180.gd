@@ -5,6 +5,7 @@ var initial_rotation: Quaternion
 
 var curr_turn: TurnData = TurnData.new()
 
+var INCREASE_ROTATION: float = 1.1
 var FAST_TURN_180_APEX_TIME: float
 
 
@@ -35,7 +36,7 @@ func on_exit_action() -> void:
 func update(input_: InputPackage, delta: float):
 	if not curr_turn.turn_completed:
 		var rotation_delta := animator_manager.get_root_rotation()
-		var result := pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation)
+		var result := pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
 	if time_spent() < FAST_TURN_180_APEX_TIME:
@@ -46,15 +47,12 @@ func update(input_: InputPackage, delta: float):
 
 
 func animate(): # ▶️
-	var blend_time := 0.2
-
 	if curr_turn.is_turn_dir_right():
 		anim = anim_container.get_by_name(A.move.fast_turn_180_R)
 	else:
 		anim = anim_container.get_by_name(A.move.fast_turn_180_L)
 
-	__log_anim(blend_time)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
+	set_anim_to_play()
 
 
 func __log_turn_exit() -> String:

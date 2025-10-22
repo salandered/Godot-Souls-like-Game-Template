@@ -20,18 +20,18 @@ func on_enter_action(input_: InputPackage) -> void:
 	speed_curve_from_apex.reset()
 	
 	initial_rotation = get_player().quaternion
-	prints("~~~ Turn Enter: is_reversed?", input_.reverse_data.is_reversed(), "Input Vec:", input_.input_direction)
+	# prints("~~~ Turn Enter: is_reversed?", input_.reverse_data.is_reversed(), "Input Vec:", input_.input_direction)
 	__log_action_ent("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA
 	var _target_angle := calculate_target_angle(input_)
-	var _turn_dir: = turn_direction_by_target_angle(_target_angle)
+	var _turn_dir := turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
 	# SPEED CONFIG
 	speed_curve_from_apex.initialise(accel_from_apex_curve, 0.3)
 
-	match player_sm.get_prev_action().action_name:
+	match PREV_ACTION:
 		Leg.Act.run:
 			INCREASE_ROTATION = 1.1
 		Leg.Act.idle:
@@ -39,7 +39,7 @@ func on_enter_action(input_: InputPackage) -> void:
 
 	
 func on_exit_action() -> void:
-	var tranfer_turn_data: = {}
+	var tranfer_turn_data := {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)
@@ -48,37 +48,31 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float):
-	var SPEED_MULT: = 1.0
+	var SPEED_MULT := 1.0
 	if not curr_turn.turn_completed:
-		var rotation_delta: = animator_manager.get_root_rotation()
+		var rotation_delta := animator_manager.get_root_rotation()
 		var result := pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
 	if time_spent() < TURN_180_APEX_TIME:
-		var root_vel: = animator_manager.get_root_velocity()
+		var root_vel := animator_manager.get_root_velocity()
 		get_player().velocity = initial_rotation * root_vel
-		# prints("~~b4", time_spent(), SPEED_MULT, get_player().velocity.length())
 	else:
 		# WARNING: currently turn180-> run configured in a way, that we cut right on apex.
 		# => this wont be run, but code is ready to handle this
 		SPEED_MULT = speed_curve_from_apex.update(delta)
-		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, get_player().velocity.length())
+		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, get_curr_velocity())
 		pm().move_with_input_vector(input_, delta, SpeedConfig.new(default_sp, SPEED_MULT))
 
 
 func animate(): # ▶️
-	var blend_time := 0.2
-
+	blend_time = 0.2
 	## TODO: some universal system for different "sub animations" in one action
 	if curr_turn.is_turn_dir_right():
 		anim = anim_container.get_by_name(A.move.turn_180_R)
-		prints("~~~~ Turn Animate: Chose RIGHT animation")
 	else:
 		anim = anim_container.get_by_name(A.move.turn_180_L)
-		prints("~~~~ Turn Animate: Chose LEFT animation")
-
-	__log_anim(blend_time)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time)
+	set_anim_to_play()
 
 
 func __log_turn_exit() -> String:

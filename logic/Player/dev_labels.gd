@@ -5,7 +5,6 @@ extends Node
 @onready var label_cam: Label = %label_cam
 @onready var label_state_info: Label = %LabelStateInfo
 @onready var modifier_ar: Label = %modifier_ar
-@onready var modifier_ar_2: Label = %modifier_ar_2
 
 @onready var player: Princess = $".."
 
@@ -17,17 +16,15 @@ var all_labels = []
 func _ready() -> void:
 	all_labels = [
 		label_inputs,
-		label_cam,
+		# label_cam,
 		label_state_info,
 		modifier_ar,
-		# modifier_ar_2
 	]
-	modifier_ar_2.visible = false
 
 
 func _process(delta: float) -> void:
 	if u.fr(false) % 2 == 0:
-		_label_camera_info()
+		# _label_camera_info()
 		_label_modifier_animator_info()
 		_label_state_info()
 
@@ -59,6 +56,12 @@ func _label_inputs():
 	
 	var curr_dir = "-none-"
 	t += "\n 8-dir-strafe   " + StrafeDir.name_(input_.detect_strafe_dir())
+
+		
+	t += "\nhealth/stamina %5.2f/%5.2f" % [
+		player.model.feelings._current_health,
+		player.model.feelings._current_stamina
+		]
 	label_inputs.text = t
 
 
@@ -87,7 +90,7 @@ func _label_state_info():
 	if not c_s.legs_sm.current_behavior:
 		t += em.warn + "\nNO legs behavior"
 		error = true
-	if not c_s.legs_sm.current_action:
+	if not c_s.legs_sm.get_curr_action():
 		t += em.warn + "\nNO legs behavior action"
 		error = true
 	if not __pl_sm().get_current_action():
@@ -109,7 +112,8 @@ func _label_state_info():
 		curr_st_act_time_spent = c_s.curr_state_action.time_spent()
 	
 	var curr_l_b = c_s.legs_sm.current_behavior.behavior_name
-	var curr_l_act = c_s.legs_sm.current_action.action_name
+	var curr_l_act = c_s.legs_sm.get_curr_action().action_name
+	var curr_l_act_time_spent = c_s.legs_sm.get_curr_action().time_spent()
 	var curr_gl_act = __pl_sm().get_current_action().action_name
 	var prev_gl_act = __pl_sm().get_prev_action().action_name
 	
@@ -117,8 +121,8 @@ func _label_state_info():
 	t += "\nl_beh / l_act  %20s %20s " % [curr_l_b, curr_l_act]
 	t += "\nAct: gl/st/legs   %20s %20s %20s " % [curr_gl_act, curr_st_act, curr_l_act]
 	t += "\nAct: gl from prev  %20s (%16s)" % [curr_gl_act, prev_gl_act]
-	t += "\nprogress pl action %6.2f  l action  %6.2f " % [curr_st_act_time_spent, c_s.legs_sm.current_action.time_spent()]
-	
+	t += "\nprogress pl action %6.2f  l action  %6.2f " % [curr_st_act_time_spent, curr_l_act_time_spent]
+
 	label_state_info.text = t
 
 
@@ -131,9 +135,9 @@ func _label_modifier_animator_info():
 
 func __l_action(act_name) -> LegsAction:
 	if player.model.legs_sm:
-		if player.model.legs_sm.current_action:
-			if player.model.legs_sm.current_action.action_name == act_name:
-				return player.model.legs_sm.current_action
+		if player.model.legs_sm._current_action:
+			if player.model.legs_sm._current_action.action_name == act_name:
+				return player.model.legs_sm._current_action
 	return null
 
 func __c_s() -> PlayerState:

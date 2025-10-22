@@ -1,8 +1,7 @@
-extends Node
-# extends StateUtils ?
+extends StateUtils
 class_name PlayerState
 
-
+# common
 var player_sm: PlayerSM
 var legs_sm: LegsSM
 var player: Princess
@@ -10,36 +9,36 @@ var combat: PlayerCombat
 var area_awareness: AreaAwareness
 var anim_container: BaseAnimationContainer
 var animator_manager: AnimatorManager
-
-
-@export var SPEED := 3.0
-@export var TURN_SPEED := 2.0
-
-var skeleton: Skeleton3D
-var resources: HumanoidResources
+var feelings: PlayerFeelings
 var container: PlayerStatesContainer
-var left_wrist: BoneAttachment3D
 
-var initial_position: Vector3
-
-@export var tracking_angular_speed: float = 10.0
-@export var stamina_cost: float = 0.0
-
-var state_combos: Array # [Combo_]
+# specific static state data
+var state_name: String
+var priority: int = 0
+var stamina_cost: float = 0.0
+var stamina_drain: float = 0.0 # experimenting, not in StateData
 
 ## Player states have a fixed legs_behavior attached to them. 
 var legs_behavior: LegsBehavior
-var state_name: String
-var priority: int
-
-
 var depends_on_legs: bool = false
+var default_action_name: String # first child or dummy action node
 
+var state_combos_sorted: Array # [Combo_]
+
+# smth
+var initial_position: Vector3
+
+# dynamic
 var queued_state: String = ""
 var forced_state: String = ""
 
-var default_action_name: String # first child or dummy action node
 var curr_state_action: PlayerAction
+
+var _time_spent: float = 0.0
+
+
+func time_spent():
+	return _time_spent
 
 
 func curr_global_action() -> BaseAction:
@@ -72,14 +71,13 @@ func initialise():
 # - if not, what vanilla state wants to be defaulted to?
 ## Not to override
 func _check_transition(input_: InputPackage) -> PLVerdict:
-	if curr_global_action().allows_queue():
-		check_combos(input_)
+	_check_combos(input_)
 	if _has_queued_state() and curr_global_action().switches_to_queue():
-		print_.psm_check_trans(state_name, "queued 👥 exists, trying it as a force state")
+		__log_psm_check("queued 👥 exists, trying it as a force state")
 		try_force_state(queued_state)
 		queued_state = ""
 	if _has_forced_state():
-		print_.psm_check_trans(state_name, pp.s("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)"))
+		__log_psm_check("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)")
 		var verdict := PLVerdict.new(forced_state)
 		forced_state = "" # forced_state is reset after verdict creation
 		return verdict
@@ -90,28 +88,40 @@ func _check_transition(input_: InputPackage) -> PLVerdict:
 ## can be overriden: see Run or attack.gd
 func check_transition(input_: InputPackage) -> PLVerdict:
 	if curr_global_action().time_remaining() <= 0.0:
-		print_.psm_check_trans(state_name + " default check", pp.s("time_remaining < 0 => choosing best input"))
+		__log_psm_check("[default check]", "time_remaining < 0 => choosing best input")
 		return best_next_state_from_input(input_)
 	return PLVerdict.new()
 
 
 ## choosing the input with the highest priority that we can allow
 func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
-	input_.actions.sort_custom(container.states_priority_sort)
-	for action in input_.actions:
-		if resources.can_be_paid(container.state_by_name(action)):
-			# TODO: just action == state_name?
-			if container.state_by_name(action) == self:
+	var _input_actions_sorted = container.states_sort_by_priority(input_.actions)
+	for input_action: String in _input_actions_sorted:
+		if _check_feelings_can_be_paid(input_action):
+			if input_action == state_name: # we
 				return PLVerdict.new()
 			else:
-				print_.psm_check_trans(state_name, "best input chosen " + str(action))
-				return PLVerdict.new(action)
-	return PLVerdict.new("", "best_next_state_from_input() returned nothing!")
+				__log_psm_check("best input chosen ", input_action)
+				return PLVerdict.new(input_action)
+	return PLVerdict.new("", "best-next-state-from-inp returned nothing! return empty verdict")
+
+
+func _check_feelings_can_be_paid(input_action: String) -> bool:
+	var _stamina_cost = container.state_by_name(input_action).stamina_cost
+	var _stamina_drain = container.state_by_name(input_action).stamina_drain
+		
+	if feelings.can_be_paid(_stamina_cost) and feelings.can_allow_stamina_drain(_stamina_drain):
+		return true
+	__log_psm_check(em.black_h, "can't pay for state", input_action, "cost", _stamina_cost, "drain", _stamina_drain)
+	return false
+
 
 # endregion
 
 
 func _update(input_: InputPackage, delta: float):
+	_time_spent += delta
+	_update_feelings(delta)
 	legs_sm.current_behavior.update(input_, delta)
 	curr_state_action.update(input_, delta)
 	# if not depends_on_legs and curr_state_action.tracks_input_vector(): # DANGER: depends_on_legs is important
@@ -120,6 +130,11 @@ func _update(input_: InputPackage, delta: float):
 	update(input_, delta)
 
 
+func _update_feelings(delta):
+	feelings.update(delta, -stamina_drain) # note the minus
+
+
+## to override
 func update(input_: InputPackage, _delta: float):
 	pass
 
@@ -130,11 +145,12 @@ func choose_default_action() -> String:
 
 
 func _on_enter_state(input_: InputPackage):
+	_time_spent = 0.0
 	# choose_initial_leg_behavior(input_) # this is advanded use where player state can use legs behavior
 	## - single legs beh attached to player state => 
 	##    => all is needed is to call the legs SM to switch into this defined state.
 	initial_position = player.global_position # used to be here, check
-	resources.pay_resource_cost(self)
+	feelings.pay_state_cost(stamina_cost)
 	
 	legs_behavior.player_state = self
 
@@ -146,13 +162,13 @@ func _on_enter_state(input_: InputPackage):
 		switch_action_to(PS.Act.double, input_)
 		if state_name == PS.idle \
 			and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run, Leg.Beh.strafe]:
-			__log_state_ent("No switching legs behavior" + em.gray_x)
+			__log_state_ent("No switching legs behavior", em.gray_x)
 		else:
 			legs_sm.switch_to(legs_behavior, input_)
 	else: ## state leads legs.  like Attack or Jump or Midair
 		default_action_name = choose_default_action() # NOTE: safe. Container checked that non dependent state has an action.
 
-		__log_state_ent("Switch to default action " + pp.in_q(default_action_name))
+		__log_state_ent("Switch to default action", pp.in_q(default_action_name))
 		
 		
 		switch_action_to(default_action_name, input_)
@@ -172,15 +188,17 @@ func switch_action_to(next_action_name: String, input_: InputPackage):
 	# See also different mechanic with legs states: curr_state_action belongs to legs_sm, not leg_behavior. 
 	# 	=> leg_behavior don't carry its curr action with it.
 	# endregion
+	if curr_state_action and curr_state_action.action_name == PS.Act.double and next_action_name == PS.Act.double:
+		# print_.psm("Action ↪️", "Double to double => no switch.")
+		return
 	if curr_state_action:
 		print_.psm("Action ↪️", pp.s("switch action", curr_state_action.action_name, "=>", next_action_name))
 		curr_state_action._on_exit_action()
 	else:
 		print_.psm("Action ↪️", "No current action => " + next_action_name)
 
-	curr_state_action = container.action_by_name(next_action_name)
-	curr_state_action.parent_state = self
-	curr_state_action._on_enter_action(input_)
+	var next_action = container.pl_action_by_name(next_action_name)
+	next_action._on_enter_action(input_)
 
 
 func on_enter_state(input_: InputPackage):
@@ -207,32 +225,28 @@ func try_force_state(new_forced_state: String):
 		forced_state = new_forced_state
 
 
-## State checks its state_combos if they are triggered.
-## If they are, it queues combo's next state
-## TODO: If several combos triggered - we will queues the last one. Not critical, but some priority logic needed
-func check_combos(input_: InputPackage):
-	for combo: Combo_ in state_combos:
+## State checks its state_combos_sorted if they are triggered. 
+## If they are, it queues combo's next state.
+## Combos are sorted by their priority: highest to lowest.
+func _check_combos(input_: InputPackage):
+	for combo: Combo_ in state_combos_sorted: # by priority
 		var next_state_candidate := combo.state_to_trigger
-		print_.psm_check_trans(state_name, "checking combo " + combo.name + " with state_to_trigger " + next_state_candidate)
-		
-		if combo.is_triggered(input_) and resources.can_be_paid(container.state_by_name(next_state_candidate)):
-			queued_state = next_state_candidate
-			print_.psm_check_trans(state_name, "Queued 👥 next state: " + queued_state)
-
-
-## Updating may be not too far from current state updating: regeneration could be dependent on the current state.
-## => define the base state `update_resources` function with delegating the job to the resources.
-## -> default regenerations can be defined in the resource class, but it's possible to redefine this function in some states.
-## 		for example, to stop stamina from regenerating under a shield block.
-func update_resources(delta: float):
-		resources.update(delta)
+		# __log_psm_check("checking combo", combo.name, "with state_to_trigger", next_state_candidate)
+		var _stamina_cost = container.state_by_name(next_state_candidate).stamina_cost
+		if combo.is_triggered(input_, state_name, curr_global_action()):
+			if feelings.can_be_paid(_stamina_cost):
+				queued_state = next_state_candidate
+				__log_psm_check("Queued 👥 next state: " + queued_state)
+				return # prioritised combo finishes checks
+			else:
+				__log_psm_check("Combo trigger can't pay stamina", _stamina_cost)
 
 
 # DEFAULT BEHAVIORS ON MODIFIERS
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "react_on_hit called")
 	if curr_global_action().is_vulnerable():
-		resources.lose_health(hit.damage)
+		feelings._change_health(-hit.damage)
 	# if curr_global_action().is_interruptable():
 	# 	# TODO rewrite for better effects processing, this scales badly
 	# 	# if hit.effects.has("pushback") and hit.effects["pushback"]:
@@ -244,7 +258,7 @@ func react_on_hit(hit: HitData):
 # TODO: ...
 func react_on_spell(spell_hit: SpellHitData):
 	if curr_global_action().is_vulnerable():
-		resources.lose_health(spell_hit.damage)
+		feelings._change_health(-spell_hit.damage)
 	if curr_global_action().is_interruptable():
 		try_force_state("staggered")
 	#spell_hit.queue_free()
@@ -273,5 +287,15 @@ func react_on_parry(_hit: HitData):
 # endregion
 
 
-func __log_state_ent(text):
-	print_.psm(state_name + pp.on_ent, text)
+func __log_state_ent(...parts: Array):
+	print_.psm(state_name + pp.on_ent, pp.list_(parts))
+
+func __log_state_exit(...parts: Array):
+	print_.psm(state_name + pp.on_ext, pp.list_(parts))
+
+func __log_state_upd(...parts: Array):
+	print_.psm(state_name + pp.on_upd, pp.list_(parts))
+
+
+func __log_psm_check(...parts: Array):
+	print_.psm_check_trans(state_name, pp.list_(parts))

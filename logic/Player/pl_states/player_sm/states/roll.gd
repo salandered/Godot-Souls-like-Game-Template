@@ -42,9 +42,9 @@ func on_enter_state(input_):
 
 
 func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
-	input_.actions.sort_custom(container.states_priority_sort)
+	input_.actions.sort_custom(container._states_priority_sort)
 	for action in input_.actions:
-		if resources.can_be_paid(container.state_by_name(action)):
+		if feelings.can_be_paid(container.state_by_name(action).stamina_cost):
 			return PLVerdict.new(action)
 			#if container.states[action] == self:
 				#PLVerdict.new("")

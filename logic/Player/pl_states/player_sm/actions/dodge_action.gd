@@ -19,8 +19,6 @@ const SPEED_L: float = 1.0
 
 var curr_dodge_dir: DodgeDirection
 
-var start_time_offset := 0.0
-
 func initialise():
 	curr_dodge_dir = DodgeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_R, ANIM_F, SPEED_L, ANIM_B)
 	blend_time_by_action = {
@@ -41,7 +39,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	curr_dodge_dir.set_direction_from_strafe_dir(_strafe_dir)
 
 	# INTERPOLATOR
-	var _inherited_speed := get_player().velocity.length()
+	var _inherited_speed := get_curr_velocity()
 	var _actual_anim := anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
 	var _anim_effective_dur := _calculate_anim_effective_duration(_actual_anim)
 	speed_x_interpolator.initialise(_inherited_speed, 2, dodge_x_peak_speed, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
@@ -57,16 +55,15 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	var current_speed := speed_x_interpolator.update(delta)
 	
-	var _curr_world_vector := curr_dodge_dir.current_world_vector(get_player().basis)
+	var _curr_world_vector = curr_dodge_dir.current_world_vector(get_player().basis)
 	get_player().velocity = _curr_world_vector * current_speed
 
 	# pm().move_with_root(delta)
 
 
 func animate(): # ▶️
-	var blend_time := 0.1
+	blend_time = 0.1
 	
 	anim = anim_container.get_by_name(curr_dodge_dir.get_curr_anim_id())
 	
-	__log_anim(blend_time, start_time_offset)
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)
+	set_anim_to_play()

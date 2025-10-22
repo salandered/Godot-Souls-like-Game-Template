@@ -38,12 +38,12 @@ func rotate_with_input_vector(input_: InputPackage, delta: float, speed_config: 
 	_player.rotate_y(angle.value)
 
 
-var _tracking_angular_speed := 10.0
-func rotate_with_input_vector_simple(input_: InputPackage, delta: float):
-	var input_direction := velocity_by_input(input_, delta).normalized()
-	var face_direction := _player.basis.z
-	var angle := face_direction.signed_angle_to(input_direction, Vector3.UP)
-	_player.rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
+# var _tracking_angular_speed := 2.0
+# func rotate_with_input_vector_simple(input_: InputPackage, delta: float):
+# 	var input_direction := velocity_by_input(input_, delta).normalized()
+# 	var face_direction := _player.basis.z
+# 	var angle := face_direction.signed_angle_to(input_direction, Vector3.UP)
+# 	_player.rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
 
 
 func _move_with_input_vector(angle: AllowedAngle, input_: InputPackage, delta: float, speed_config: SpeedConfig):

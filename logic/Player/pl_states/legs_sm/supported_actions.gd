@@ -30,7 +30,7 @@ func convert_to_supported(action: LegsAction) -> String:
 	if is_action_supported(action.action_name):
 		return action.action_name
 	else:
-		print_.lsm_beh("", pp.in_q(action.action_name) + " is not supported. will return default supported with the same motion type")
+		# print_.lsm_beh("", pp.in_q(action.action_name) + " is not supported. will return default supported with the same motion type")
 		return default_by_motion(action.motion_type)
 
 

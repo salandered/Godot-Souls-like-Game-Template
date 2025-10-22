@@ -16,13 +16,20 @@ var behavior_name: String
 var supported_actions: SupportedActions
 
 func get_player() -> Princess:
-	return legs_sm.player_sm.player
+	return legs_sm.get_player()
+
+
+func get_lsm_curr_action() -> LegsAction:
+	return legs_sm.get_curr_action()
+
+func get_lsm_prev_action() -> LegsAction:
+	return legs_sm.get_prev_action()
 
 
 func update(input_: InputPackage, _delta: float):
 	var verdict: LNextActionVerdict = choose_action(input_, _delta)
 	switch_action_to(verdict, input_) # yes, always. In LegsBehavior switch_action_to is smart
-	legs_sm.current_action._update(input_, _delta)
+	get_lsm_curr_action()._update(input_, _delta)
 
 
 func _on_enter_behavior(input_: InputPackage):
@@ -54,7 +61,7 @@ func _on_exit_behavior():
 
 
 func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
-	var curr_action_name := legs_sm.current_action.action_name
+	var curr_action_name := get_lsm_curr_action().action_name
 	var next_action_name := verdict.next_action
 	
 	# VALIDATE THE SWITCH
@@ -78,9 +85,9 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 		
 	# SWITCH
 	print_.lsm_action("↪️", "action " + curr_action_name + " => " + next_action_name)
-	legs_sm.current_action._on_exit_action()
-	legs_sm.set_current_action(container.legs_action_by_name(next_action_name))
-	legs_sm.current_action._on_enter_action(input_)
+	get_lsm_curr_action()._on_exit_action()
+	var _next_action = container.l_action_by_name(next_action_name)
+	_next_action._on_enter_action(input_)
 
 
 # region: sugar for decision checks
@@ -101,7 +108,7 @@ func is_pure_reverse_moving(input_) -> bool:
 	return input_.reverse_data.is_pure_reversed()
 
 func is_switch_from_unsupported_action() -> bool:
-	return not supported_actions.is_action_supported(legs_sm.current_action.action_name)
+	return not supported_actions.is_action_supported(get_lsm_curr_action().action_name)
 
 func get_abs_angle_pl_input(input_, delta) -> float:
 	var angle := get_player().model.__angle_between_player_and_input(input_, delta)
@@ -114,7 +121,7 @@ func get_abs_angle_pl_input_deg(input_, delta) -> float:
 # endregion
 
 func __log_decision_data(input_, additional_checks: String, next_action_name: String):
-	var _curr_motion_type := legs_sm.current_action.motion_type
+	var _curr_motion_type := get_lsm_curr_action().motion_type
 	print_.lsm_beh_ch(behavior_name,
 		_curr_motion_type,
 		is_moving(input_),

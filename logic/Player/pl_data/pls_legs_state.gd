@@ -7,33 +7,32 @@ class Beh:
 	const idle := "l_behavior_idle"
 	const run := "l_behavior_run"
 	const strafe := "l_behavior_strafe🚶🏻‍♀️"
-	# const dodge := "l_behavior_dodge🤸"
+	# const dodge := "la_behavior_dodge🤸"
 	const sprint := "l_behavior_sprint"
 	const double := "l_behavior_double"
-# const l_behavior_air := "l_behavior_air"
+# const l_behavior_air := "la_behavior_air"
 
 
 # LEGS ACTION
 class Act:
-	const idle := "l_action_idle🧍"
-	const run := "l_action_run🏃"
+	const idle := "la_idle🧍"
+	const run := "la_run🏃"
 
-	const strafe := "l_action_strafe🚶🏻‍♀️"
-	# const vert_locked_walk := "l_vert_locked_walk✏️"
-	# const vert_locked_run := "l_vert_locked_run✏️"
-	# const dodge := "l_dodge🤸"
+	const strafe := "la_strafe🚶🏻‍♀️"
+	# const vert_locked_walk := "la_vert_locked_walk✏️"
+	# const vert_locked_run := "la_vert_locked_run✏️"
+	# const dodge := "la_dodge🤸"
 
-	const turn_180 := "l_turn_180 ↻"
-	const fast_turn_180 := "l_fast_turn_180 ↻💨"
-	const sprint_to_idle := "l_action_sprint_to_idle🏃💨🧍"
-	const run_to_idle := "l_action_run_to_idle🏃🧍"
-	const idle_to_sprint := "l_action_idle2sprint🧍🏃💨"
-	const run_to_sprint := "l_action_run2sprint✏️"
-	const sprint := "l_action_sprint🏃💨"
-	const land := "l_action_land✏️"
-	const double := "l_action_double👯"
+	const turn_180 := "la_turn_180 ↻"
+	const fast_turn_180 := "la_fast_turn_180 ↻💨"
+	const sprint_to_idle := "la_sprint_to_idle✏️"
+	const run_to_idle := "la_run_to_idle🏃🧍"
+	const idle_to_sprint := "la_idle_to_sprint✏️"
+	const run_to_sprint := "la_run_to_sprint✏️"
+	const sprint := "la_sprint🏃💨"
+	const double := "la_double👯"
 
-	# const walk_start := "l_action_walk_start✏️"
-	# const turn_90_to_run := "l_turn_90_to_run_R ↪🏃" # from idle
-	# const l_action_jump_start := "l_action_jump_start"
-	# const l_action_midair := "l_action_midair"
+	# const walk_start := "la_action_walk_start✏️"
+	# const turn_90_to_run := "la_turn_90_to_run_R ↪🏃" # from idle
+	# const l_action_jump_start := "la_action_jump_start"
+	# const l_action_midair := "la_action_midair"

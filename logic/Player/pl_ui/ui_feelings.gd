@@ -2,61 +2,103 @@ extends Node
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var stamina_bar: ProgressBar = %StaminaBar
 
-@onready var feelings: PlayerFeelings = %Feelings
+@onready var pl_feelings: PlayerFeelings = %Feelings
 
-## How long the health change animation should take, in seconds.
-@export var animation_duration_health: float = 0.2
-@export var animation_duration_stamina: float = 0.5
+## How long the change animation should take, in seconds
+var ANIM_DURATION_HEALTH: float = 0.2
+var ANIM_DURATION_STAMINA_HIT: float = 0.2 # fancy tween
+var ANIM_DURATION_STAMINA_REGEN: float = 0.1 # fast tween
+##
+const STAMINA_LERP_SPEED = 10.0
+##
+const STAMINA_BIG_CHANGE_THRESHOLD = 3.0
 
-var _max_health: int
+##
 var _health_tween: Tween
-
-var _max_stamina: int
 var _stamina_tween: Tween
+var _stamina_flash_tween: Tween
+
+var _prev_health: float
+var _prev_stamina: float
 
 
 func _ready() -> void:
-	_max_health = feelings.max_health
-	health_bar.max_value = _max_health
-	health_bar.value = _max_health
+	health_bar.max_value = pl_feelings.max_health
+	health_bar.value = pl_feelings.get_current_health()
+	_prev_health = pl_feelings.get_current_health()
 	
-	_max_stamina = feelings.max_stamina
-	stamina_bar.max_value = _max_stamina
-	stamina_bar.value = _max_stamina
+	stamina_bar.max_value = pl_feelings.max_stamina
+	stamina_bar.value = pl_feelings.get_current_stamina()
+	_prev_stamina = pl_feelings.get_current_stamina()
 
-func _on_feelings_sig_health_changed(new_health: int) -> void:
-	_animate_health_change(new_health)
-
-func _on_feelings_sig_stamina_changed(new_stamina: int) -> void:
-	_animate_stamina_change(new_stamina)
+	pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
 
-# Private helper function to handle the tweening logic.
+func _process(delta: float):
+	_update_health_bar()
+	_update_stamina_bar(delta)
+
+
+func _update_health_bar():
+	var current_health = pl_feelings.get_current_health()
+	if current_health == _prev_health:
+		return
+
+	_animate_health_change(current_health)
+	_prev_health = current_health
+
+
+func _update_stamina_bar(delta):
+	var current_stamina = pl_feelings.get_current_stamina()
+	if current_stamina == _prev_stamina:
+		return
+
+	var change_amount = abs(current_stamina - _prev_stamina)
+	
+	if change_amount > STAMINA_BIG_CHANGE_THRESHOLD:
+		_animate_stamina_change(current_stamina, ANIM_DURATION_STAMINA_HIT)
+	else:
+		# stamina_bar.value = current_stamina
+		stamina_bar.value = lerp(stamina_bar.value, current_stamina, STAMINA_LERP_SPEED * delta)
+	
+	if pl_feelings.is_in_fatigue():
+		stamina_bar.modulate = Color(1.077, 0.711, 0.412, 1.0)
+	else:
+		stamina_bar.modulate = Color(1, 1, 1)
+	_prev_stamina = current_stamina
+
+
+func _animate_stamina_flash():
+	pass
+	# if _stamina_flash_tween:
+	# 	_stamina_flash_tween.kill()
+	# _stamina_flash_tween = create_tween()
+	# _stamina_flash_tween.set_loops(3)
+	# _stamina_flash_tween.tween_property(stamina_bar, "modulate", Color(1.8, 1.8, 1.8), 0.15)
+	# _stamina_flash_tween.tween_property(stamina_bar, "modulate", Color(1, 1, 1), 0.15)
+
+	
 func _animate_health_change(target_value: int) -> void:
-	# If a previous animation is running, stop it immediately.
 	if _health_tween:
 		_health_tween.kill()
 	
-	# Create a new tween to animate from the current value to the target value.
 	_health_tween = create_tween()
 	_health_tween.tween_property(
-		health_bar, 
-		"value", 
-		target_value, 
-		animation_duration_health
+		health_bar,
+		"value",
+		target_value,
+		ANIM_DURATION_HEALTH
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	
-func _animate_stamina_change(target_value: int) -> void:
-	# If a previous animation is running, stop it immediately.
+func _animate_stamina_change(target_value: int, duration: float) -> void:
 	if _stamina_tween:
 		_stamina_tween.kill()
 	
-	# Create a new tween to animate from the current value to the target value.
 	_stamina_tween = create_tween()
 	_stamina_tween.tween_property(
-		stamina_bar, 
-		"value", 
-		target_value, 
-		animation_duration_stamina
+		stamina_bar,
+		"value",
+		target_value,
+		duration
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
