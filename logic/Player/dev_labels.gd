@@ -40,8 +40,8 @@ func _input(event):
 
 
 func _label_inputs():
-	var input_: InputPackage = player.model.area_awareness.last_input_package
-	var vel_by_input_ = player.model.__velocity_by_input(input_, 0.016)
+	var input_: InputPackage = __pl().model.area_awareness.last_input_package
+	var vel_by_input_ = __pl().player_movement.__velocity_by_input(input_, Constants.ONE_FRAME)
 	var t := ""
 	t += "input_dir " + pp.vec2(input_.input_direction)
 	t += "  len %5.2f" % [input_.input_direction.length()]
@@ -55,12 +55,13 @@ func _label_inputs():
 	t += "\n vel_by_input_ norm" + pp.s(pp.vec3(vel_by_input_.normalized()), vel_by_input_.normalized().length())
 	
 	var curr_dir = "-none-"
-	t += "\n 8-dir-strafe   " + StrafeDir.name_(input_.detect_strafe_dir())
-
+	t += "\n 8-dir-strafe   " + Direction.name_(input_.detect_strafe_dir())
+	var relative_dir = __pl().player_movement.detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
+	t += "\n 8-dir-new   " + Direction.name_(relative_dir)
 		
 	t += "\nhealth/stamina %5.2f/%5.2f" % [
-		player.model.feelings._current_health,
-		player.model.feelings._current_stamina
+		 __pl().model.feelings._current_health,
+		 __pl().model.feelings._current_stamina
 		]
 	label_inputs.text = t
 
@@ -134,20 +135,24 @@ func _label_modifier_animator_info():
 
 
 func __l_action(act_name) -> LegsAction:
-	if player.model.legs_sm:
-		if player.model.legs_sm._current_action:
-			if player.model.legs_sm._current_action.action_name == act_name:
-				return player.model.legs_sm._current_action
+	if __pl().model.legs_sm:
+		if __pl().model.legs_sm._current_action:
+			if __pl().model.legs_sm._current_action.action_name == act_name:
+				return __pl().model.legs_sm._current_action
 	return null
 
+
+func __pl():
+	return player
+
 func __c_s() -> PlayerState:
-	return player.model.player_sm.current_state
+	return __pl().model.player_sm.current_state
 
 func __pl_sm() -> PlayerSM:
-	return player.model.player_sm
+	return __pl().model.player_sm
 
 func __cam() -> FancyCamera:
-	return player.fancy_camera
+	return __pl().fancy_camera
 
 # FROM OUTSIDE THE PLAYER
 

@@ -38,12 +38,12 @@ func get_prev_root_rotation() -> float:
 func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true, backwards: bool = false) -> Vector3:
 	var curr_playback = get_curr_playback()
 	var curr_eff_progress := curr_playback.get_effective_progress()
-	if curr_eff_progress < 0.016:
-		print_.prefix_s(em.mark, "curr_eff_progress", curr_eff_progress, "< 0.016 -> we at the beginning of the anim. backwards to true")
+	if curr_eff_progress < Constants.ONE_FRAME:
+		print_.prefix_s("✔", "curr_eff_progress", curr_eff_progress, "< Constants.ONE_FRAME -> we at the beginning of the anim. backwards to true")
 		backwards = true
-	elif curr_playback.anim.duration - curr_eff_progress < 0.016:
-		print_.prefix_s(em.mark, "anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
-			"< 0.016 -> we at the end f the anim. backwards to false")
+	elif curr_playback.anim.duration - curr_eff_progress < Constants.ONE_FRAME:
+		print_.prefix_s("✔", "anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
+			"< Constants.ONE_FRAME -> we at the end f the anim. backwards to false")
 		backwards = false
 
 	var curr_velocity := _calculate_velocity_delta(get_curr_playback(), ROOT_IDX, backwards)
@@ -131,7 +131,7 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 		return 0.0
 	
 	# Sample at start and a small delta to get initial velocity
-	var sample_delta := 0.016 # One frame at 60fps
+	var sample_delta := Constants.ONE_FRAME # One frame at 60fps
 	var start_time := anim._start_time + start_time_offset
 	if backwards:
 		start_time -= sample_delta

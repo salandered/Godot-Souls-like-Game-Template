@@ -36,7 +36,7 @@ func calculate_target_angle(input_: InputPackage) -> float:
 		# prints("\n\t target ∠:", pp.rad2deg(target_angle))
 		# prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
 	else:
-		var _signed_angle := get_player().model.__angle_between_player_and_input(input_, 0.016, true)
+		var _signed_angle := pm().get_signed_angle_pl_input(input_, Constants.ONE_FRAME, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
 		# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle

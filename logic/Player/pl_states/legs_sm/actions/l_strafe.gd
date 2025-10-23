@@ -10,8 +10,13 @@ var speed_mult_from_idle := EaseCurveInterpolator.new()
 const ACCEL_FROM_IDLE_TIME: float = 0.35
 
 const OPP_DIR_CHANGE_DURATION: float = 0.16
-const SLIGHT_DIR_CHANGE_DURATION: float = 0.1
-const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.08
+const SLIGHT_DIR_CHANGE_DURATION: float = 0.08
+const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.02
+
+
+## TODO: this begs the question, do we need explicit idle action in strafe behavior at all?
+## 		 since adding NEUTRAL direction, here in strafe there is lot of logic for idle.
+const ANIM_IDLE: String = A.move.idle
 
 const ANIM_L: String = A.strafe.strafe_L
 const ANIM_R: String = A.strafe.strafe_R
@@ -42,7 +47,7 @@ func __reset_changers_cooldown():
 
 
 func initialise():
-	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B)
+	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B, ANIM_IDLE)
 	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION)
 	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION)
 	slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION)
@@ -53,7 +58,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	__reset_changers()
 
 	var _dir := input_.detect_strafe_dir()
-	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + StrafeDir.name_(_dir))
+	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + Direction.name_(_dir))
 	curr_direction.set_direction(_dir)
 	
 	match PREV_ACTION:
@@ -63,6 +68,7 @@ func on_enter_action(input_: InputPackage) -> void:
 
 func on_exit_action() -> void:
 	animator_manager.reset_global_speed_scale()
+	__reset_changers()
 
 
 func update(input_: InputPackage, delta: float) -> void:
@@ -89,7 +95,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	var new_dir := input_.detect_strafe_dir()
 	if new_dir != curr_direction.get_curr_dir():
-		print_.lsm_action_strafe(pp.on_upd, pp.s("new dir", curr_direction.pp_curr_dir(), "=>", StrafeDir.name_(new_dir)))
+		print_.lsm_action_strafe(pp.on_upd, pp.s("new dir", curr_direction.pp_curr_dir(), "=>", Direction.name_(new_dir)))
 	
 	match curr_direction.would_be_change_of_type(new_dir):
 		StrafeDirection.ChangeType.OPPOSITE:
@@ -139,8 +145,7 @@ func animate(): # ▶️
 var sync_loco_anim_correction: float = 0.18
 var __dev_add: float = 0.0
 
-# TODO idea: switch animations only if blend time is complete.
-# animations are in queue, while direction is changes as usual
+
 func _switch_animation(is_opposite_change: bool):
 	var next_anim := anim_container.get_by_name(curr_direction.get_curr_anim_id())
 	var curr_anim := anim
@@ -160,7 +165,7 @@ func _switch_animation(is_opposite_change: bool):
 		if r != -1:
 			start_time_offset = r
 		# for perfect smoothness it should be equal to timer cooldowns
-		blend_time = 0.2 if is_opposite_change else 0.2
+		blend_time = 0.24 if is_opposite_change else 0.2
 	else:
 		blend_time = 0.3
 		print_.warn(action_name + "_switch_animation but not from strafe anim O_o")

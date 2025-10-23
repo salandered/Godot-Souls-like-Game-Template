@@ -17,32 +17,33 @@ enum ChangeType {
 }
 
 
-var _curr_dir: StrafeDir.E = StrafeDir.E.RIGHT # default jic
+var _curr_dir: Direction.Dir = Direction.Dir.NEUTRAL
 var _dir_data: Dictionary = {}
 
 
-func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String):
+func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String, anim_idle: String):
 	_dir_data = {
-		StrafeDir.E.FORWARD: _DirData.new(speed_f, anim_f),
-		StrafeDir.E.BACKWARD: _DirData.new(speed_b, anim_b),
-		StrafeDir.E.RIGHT: _DirData.new(speed_r, anim_r),
-		StrafeDir.E.RIGHT_F: _DirData.new(speed_r, anim_r),
-		StrafeDir.E.RIGHT_B: _DirData.new(speed_r, anim_r),
-		StrafeDir.E.LEFT: _DirData.new(speed_l, anim_l),
-		StrafeDir.E.LEFT_F: _DirData.new(speed_l, anim_l),
-		StrafeDir.E.LEFT_B: _DirData.new(speed_l, anim_l)
+		Direction.Dir.NEUTRAL: _DirData.new(0.0, anim_idle), # this anim probably would never play
+		Direction.Dir.FORWARD: _DirData.new(speed_f, anim_f),
+		Direction.Dir.BACKWARD: _DirData.new(speed_b, anim_b),
+		Direction.Dir.RIGHT: _DirData.new(speed_r, anim_r),
+		Direction.Dir.RIGHT_F: _DirData.new(speed_r, anim_r),
+		Direction.Dir.RIGHT_B: _DirData.new(speed_r, anim_r),
+		Direction.Dir.LEFT: _DirData.new(speed_l, anim_l),
+		Direction.Dir.LEFT_F: _DirData.new(speed_l, anim_l),
+		Direction.Dir.LEFT_B: _DirData.new(speed_l, anim_l)
 	}
 
 
 func is_pure_vertical() -> bool:
-	return _curr_dir in [StrafeDir.E.FORWARD, StrafeDir.E.BACKWARD]
+	return _curr_dir in [Direction.Dir.FORWARD, Direction.Dir.BACKWARD]
 
 
-func set_direction(dir: StrafeDir.E):
+func set_direction(dir: Direction.Dir):
 	_curr_dir = dir
 
 
-func get_curr_dir() -> StrafeDir.E:
+func get_curr_dir() -> Direction.Dir:
 	return _curr_dir
 
 
@@ -56,13 +57,13 @@ func get_curr_speed() -> float:
 
 func get_dir_int() -> int:
 	match _curr_dir:
-		StrafeDir.E.FORWARD:
+		Direction.Dir.FORWARD:
 			return 1
-		StrafeDir.E.BACKWARD:
+		Direction.Dir.BACKWARD:
 			return -1
-		StrafeDir.E.RIGHT, StrafeDir.E.RIGHT_F, StrafeDir.E.RIGHT_B:
+		Direction.Dir.RIGHT, Direction.Dir.RIGHT_F, Direction.Dir.RIGHT_B:
 			return 1
-		StrafeDir.E.LEFT, StrafeDir.E.LEFT_F, StrafeDir.E.LEFT_B:
+		Direction.Dir.LEFT, Direction.Dir.LEFT_F, Direction.Dir.LEFT_B:
 			return -1
 	return 0 # should not happen
 
@@ -75,55 +76,57 @@ func get_all_anims() -> Array[String]:
 	return anims
 
 
-## sum is 28
+## sum is 28 for 8 directions
 static var all_dir_pairs := [
 	# todo: some hash
 	# 180 OPPOSITE (most frequent)
-	[StrafeDir.E.FORWARD, StrafeDir.E.BACKWARD, ChangeType.OPPOSITE],
-	[StrafeDir.E.RIGHT, StrafeDir.E.LEFT, ChangeType.OPPOSITE],
+	[Direction.Dir.FORWARD, Direction.Dir.BACKWARD, ChangeType.OPPOSITE],
+	[Direction.Dir.RIGHT, Direction.Dir.LEFT, ChangeType.OPPOSITE],
 	
 	# 90 VERT STRAFE SPAM (frequent) (e.g W pressed A/D spams)
-	[StrafeDir.E.RIGHT_F, StrafeDir.E.LEFT_F, ChangeType.SLIGHT],
-	[StrafeDir.E.RIGHT_B, StrafeDir.E.LEFT_B, ChangeType.SLIGHT],
+	[Direction.Dir.RIGHT_F, Direction.Dir.LEFT_F, ChangeType.SLIGHT],
+	[Direction.Dir.RIGHT_B, Direction.Dir.LEFT_B, ChangeType.SLIGHT],
 
 	# other 90
-	[StrafeDir.E.FORWARD, StrafeDir.E.RIGHT, ChangeType.SLIGHT],
-	[StrafeDir.E.FORWARD, StrafeDir.E.LEFT, ChangeType.SLIGHT],
-	[StrafeDir.E.BACKWARD, StrafeDir.E.RIGHT, ChangeType.SLIGHT],
-	[StrafeDir.E.BACKWARD, StrafeDir.E.LEFT, ChangeType.SLIGHT],
+	[Direction.Dir.FORWARD, Direction.Dir.RIGHT, ChangeType.SLIGHT],
+	[Direction.Dir.FORWARD, Direction.Dir.LEFT, ChangeType.SLIGHT],
+	[Direction.Dir.BACKWARD, Direction.Dir.RIGHT, ChangeType.SLIGHT],
+	[Direction.Dir.BACKWARD, Direction.Dir.LEFT, ChangeType.SLIGHT],
 	
 	# other 90
-	[StrafeDir.E.LEFT_F, StrafeDir.E.LEFT_B, ChangeType.SLIGHT],
-	[StrafeDir.E.RIGHT_F, StrafeDir.E.RIGHT_B, ChangeType.SLIGHT],
+	[Direction.Dir.LEFT_F, Direction.Dir.LEFT_B, ChangeType.SLIGHT],
+	[Direction.Dir.RIGHT_F, Direction.Dir.RIGHT_B, ChangeType.SLIGHT],
 
 	# 45 SLIGHTEST
-	[StrafeDir.E.FORWARD, StrafeDir.E.RIGHT_F, ChangeType.SLIGHTEST],
-	[StrafeDir.E.FORWARD, StrafeDir.E.LEFT_F, ChangeType.SLIGHTEST],
-	[StrafeDir.E.BACKWARD, StrafeDir.E.RIGHT_B, ChangeType.SLIGHTEST],
-	[StrafeDir.E.BACKWARD, StrafeDir.E.LEFT_B, ChangeType.SLIGHTEST],
-	[StrafeDir.E.RIGHT, StrafeDir.E.RIGHT_F, ChangeType.SLIGHTEST],
-	[StrafeDir.E.RIGHT, StrafeDir.E.RIGHT_B, ChangeType.SLIGHTEST],
-	[StrafeDir.E.LEFT, StrafeDir.E.LEFT_F, ChangeType.SLIGHTEST],
-	[StrafeDir.E.LEFT, StrafeDir.E.LEFT_B, ChangeType.SLIGHTEST],
+	[Direction.Dir.FORWARD, Direction.Dir.RIGHT_F, ChangeType.SLIGHTEST],
+	[Direction.Dir.FORWARD, Direction.Dir.LEFT_F, ChangeType.SLIGHTEST],
+	[Direction.Dir.BACKWARD, Direction.Dir.RIGHT_B, ChangeType.SLIGHTEST],
+	[Direction.Dir.BACKWARD, Direction.Dir.LEFT_B, ChangeType.SLIGHTEST],
+	[Direction.Dir.RIGHT, Direction.Dir.RIGHT_F, ChangeType.SLIGHTEST],
+	[Direction.Dir.RIGHT, Direction.Dir.RIGHT_B, ChangeType.SLIGHTEST],
+	[Direction.Dir.LEFT, Direction.Dir.LEFT_F, ChangeType.SLIGHTEST],
+	[Direction.Dir.LEFT, Direction.Dir.LEFT_B, ChangeType.SLIGHTEST],
 
 	# 135
-	[StrafeDir.E.FORWARD, StrafeDir.E.RIGHT_B, ChangeType.OPPOSITE],
-	[StrafeDir.E.FORWARD, StrafeDir.E.LEFT_B, ChangeType.OPPOSITE],
-	[StrafeDir.E.BACKWARD, StrafeDir.E.RIGHT_F, ChangeType.OPPOSITE],
-	[StrafeDir.E.BACKWARD, StrafeDir.E.LEFT_F, ChangeType.OPPOSITE],
-	[StrafeDir.E.RIGHT, StrafeDir.E.LEFT_F, ChangeType.OPPOSITE],
-	[StrafeDir.E.RIGHT, StrafeDir.E.LEFT_B, ChangeType.OPPOSITE],
-	[StrafeDir.E.LEFT, StrafeDir.E.RIGHT_F, ChangeType.OPPOSITE],
-	[StrafeDir.E.LEFT, StrafeDir.E.RIGHT_B, ChangeType.OPPOSITE],
+	[Direction.Dir.FORWARD, Direction.Dir.RIGHT_B, ChangeType.OPPOSITE],
+	[Direction.Dir.FORWARD, Direction.Dir.LEFT_B, ChangeType.OPPOSITE],
+	[Direction.Dir.BACKWARD, Direction.Dir.RIGHT_F, ChangeType.OPPOSITE],
+	[Direction.Dir.BACKWARD, Direction.Dir.LEFT_F, ChangeType.OPPOSITE],
+	[Direction.Dir.RIGHT, Direction.Dir.LEFT_F, ChangeType.OPPOSITE],
+	[Direction.Dir.RIGHT, Direction.Dir.LEFT_B, ChangeType.OPPOSITE],
+	[Direction.Dir.LEFT, Direction.Dir.RIGHT_F, ChangeType.OPPOSITE],
+	[Direction.Dir.LEFT, Direction.Dir.RIGHT_B, ChangeType.OPPOSITE],
 	
 	# 180 OPPOSITE (less frequent)
-	[StrafeDir.E.RIGHT_F, StrafeDir.E.LEFT_B, ChangeType.OPPOSITE],
-	[StrafeDir.E.RIGHT_B, StrafeDir.E.LEFT_F, ChangeType.OPPOSITE],
+	[Direction.Dir.RIGHT_F, Direction.Dir.LEFT_B, ChangeType.OPPOSITE],
+	[Direction.Dir.RIGHT_B, Direction.Dir.LEFT_F, ChangeType.OPPOSITE],
 ]
 
 
-func would_be_change_of_type(new_dir: StrafeDir.E) -> ChangeType:
+func would_be_change_of_type(new_dir: Direction.Dir) -> ChangeType:
 	if _curr_dir == new_dir: return ChangeType.SAME
+	if _curr_dir == Direction.Dir.NEUTRAL or new_dir == Direction.Dir.NEUTRAL:
+		return ChangeType.SAME # or SLIGHTEST
 
 	for collection in all_dir_pairs:
 		if __both_in_group(_curr_dir, new_dir, collection):
@@ -142,5 +145,5 @@ static func __both_in_group(dir_1, dir_2, group: Array) -> bool:
 	return dir_1 in group and dir_2 in group
 
 
-static func pp_dir_name(dir: StrafeDir.E) -> String:
-	return StrafeDir.name_(dir)
+static func pp_dir_name(dir: Direction.Dir) -> String:
+	return Direction.name_(dir)

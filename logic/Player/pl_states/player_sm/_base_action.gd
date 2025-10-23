@@ -248,4 +248,4 @@ func tracks_input_vector() -> bool:
 
 
 func __log_anim():
-	print_.lsm_action_anim(action_name, anim.anim_name, blend_time, start_time_offset, PREV_ACTION)
+	print_.any_action_anim(action_name, anim.anim_name, blend_time, start_time_offset, PREV_ACTION)

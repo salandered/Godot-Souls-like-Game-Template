@@ -1,6 +1,6 @@
 extends PlayerAction
 
-var momentum_preservation := 1.2
+var momentum_preservation := 1.05
 var is_landed := false
 
 

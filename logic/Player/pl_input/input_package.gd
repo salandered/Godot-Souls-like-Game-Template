@@ -44,34 +44,39 @@ func is_running() -> bool:
 var jump_key: KeyPress = null
 #
 
-func detect_strafe_dir() -> StrafeDir.E:
-	var dir: StrafeDir.E
+# ```
+
+
+func detect_strafe_dir() -> Direction.Dir:
+	var dir: Direction.Dir
 
 	if reverse_data.is_reversed():
 		var _target_dir := reverse_data.target_dir
-		var target_dir := StrafeDir.from_vector(_target_dir)
-		# print_.prefix("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, StrafeDir.name_(target_dir)))
+		var target_dir := Direction.from_vector(_target_dir)
+		# print_.prefix("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, Direction.name_(target_dir)))
 		return target_dir
 		
 	if abs(orbit_input) < 0.01: # Pure Forward/Backward (no strafe input)
-		if forward_input >= 0.0:
-			dir = StrafeDir.E.FORWARD
+		if abs(forward_input) < 0.01:
+			dir = Direction.Dir.NEUTRAL
+		elif forward_input > 0.0:
+			dir = Direction.Dir.FORWARD
 		else:
-			dir = StrafeDir.E.BACKWARD
+			dir = Direction.Dir.BACKWARD
 	elif orbit_input > 0.0: # Right Group
 		if forward_input > 0.0:
-			dir = StrafeDir.E.RIGHT_F
+			dir = Direction.Dir.RIGHT_F
 		elif forward_input < 0.0:
-			dir = StrafeDir.E.RIGHT_B
+			dir = Direction.Dir.RIGHT_B
 		else:
-			dir = StrafeDir.E.RIGHT
+			dir = Direction.Dir.RIGHT
 	else: # Left Group
 		if forward_input > 0.0:
-			dir = StrafeDir.E.LEFT_F
+			dir = Direction.Dir.LEFT_F
 		elif forward_input < 0.0:
-			dir = StrafeDir.E.LEFT_B
+			dir = Direction.Dir.LEFT_B
 		else:
-			dir = StrafeDir.E.LEFT
+			dir = Direction.Dir.LEFT
 
 	return dir
 # 

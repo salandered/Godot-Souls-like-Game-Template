@@ -42,6 +42,10 @@ func reset() -> void:
 	percentage = 0.0
 
 
+func time_remaining() -> float:
+	return duration - time_spent
+
+
 func _to_string() -> String:
 	if not is_blending:
 		return "Blend[OFF]"

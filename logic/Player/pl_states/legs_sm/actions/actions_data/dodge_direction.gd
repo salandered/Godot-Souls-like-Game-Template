@@ -11,6 +11,7 @@ class _DirData:
 
 
 enum Dir {
+	NEUTRAL,
 	FORWARD,
 	BACKWARD,
 	RIGHT,
@@ -18,12 +19,13 @@ enum Dir {
 	}
 
 
-var _curr_dir: Dir = Dir.FORWARD # default jic
+var _curr_dir: Dir = Dir.NEUTRAL
 var _dir_data: Dictionary = {}
 
 
 func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String):
 	_dir_data = {
+		Dir.NEUTRAL: _DirData.new(speed_f, anim_f), # NOTE: intentionally using forward dodge for now
 		Dir.FORWARD: _DirData.new(speed_f, anim_f),
 		Dir.BACKWARD: _DirData.new(speed_b, anim_b),
 		Dir.RIGHT: _DirData.new(speed_r, anim_r),
@@ -34,6 +36,8 @@ func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed
 ## Returns the world-space vector for the current dodge direction
 func current_world_vector(player_basis: Basis) -> Vector3:
 	match _curr_dir:
+		Dir.NEUTRAL:
+			return player_basis.z
 		Dir.FORWARD:
 			return player_basis.z
 		Dir.BACKWARD:
@@ -45,30 +49,22 @@ func current_world_vector(player_basis: Basis) -> Vector3:
 	return Vector3.ZERO
 
 
-func is_pure_vertical() -> bool:
-	return _curr_dir in [Dir.FORWARD, Dir.BACKWARD]
-
-
-## Sets the simplified 4-way dodge direction from the 8-way strafe input
-func set_direction_from_strafe_dir(strafe_dir: StrafeDir.E):
-	match strafe_dir:
-		StrafeDir.E.FORWARD:
+func set_direction_simplified(dir: Direction.Dir):
+	match dir:
+		Direction.Dir.NEUTRAL:
+			_curr_dir = Dir.NEUTRAL
+		Direction.Dir.FORWARD:
 			_curr_dir = Dir.FORWARD
-		StrafeDir.E.BACKWARD:
+		Direction.Dir.BACKWARD:
 			_curr_dir = Dir.BACKWARD
-		StrafeDir.E.RIGHT, StrafeDir.E.RIGHT_F, StrafeDir.E.RIGHT_B:
+		Direction.Dir.RIGHT, Direction.Dir.RIGHT_F, Direction.Dir.RIGHT_B:
 			_curr_dir = Dir.RIGHT
-		StrafeDir.E.LEFT, StrafeDir.E.LEFT_F, StrafeDir.E.LEFT_B:
+		Direction.Dir.LEFT, Direction.Dir.LEFT_F, Direction.Dir.LEFT_B:
 			_curr_dir = Dir.LEFT
-		_:
-			# Default to FORWARD if input is neutral or unhandled
-			_curr_dir = Dir.FORWARD
+		_: # unreachable
+			_curr_dir = Dir.NEUTRAL
 
 	
-func set_direction(dir: Dir):
-	_curr_dir = dir
-
-
 func get_curr_dir() -> Dir:
 	return _curr_dir
 

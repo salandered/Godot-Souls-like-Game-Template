@@ -46,7 +46,5 @@ func switch_to(next_behavior: LegsBehavior, input_: InputPackage):
 		return
 	print_.lsm_beh("↪️", pp.s(current_behavior.behavior_name, " => ", next_behavior.behavior_name))
 	current_behavior._on_exit_behavior()
-	if next_behavior.behavior_name == Leg.Beh.sprint:
-		print()
 	current_behavior = next_behavior
 	current_behavior._on_enter_behavior(input_)

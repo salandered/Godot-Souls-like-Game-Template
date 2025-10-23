@@ -18,6 +18,9 @@ var supported_actions: SupportedActions
 func get_player() -> Princess:
 	return legs_sm.get_player()
 
+func pm() -> PlayerMovement:
+	return legs_sm.player_sm.player_movement
+
 func get_lsm_curr_action() -> LegsAction:
 	return legs_sm.get_curr_action()
 
@@ -96,7 +99,7 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 	_next_action._on_enter_action(input_)
 
 
-# region: sugar for decision checks
+# region: shortcuts for decision checks
 
 func is_moving(input_) -> bool:
 	## note that on a keyboard it's either 0 or 1 
@@ -115,14 +118,6 @@ func is_pure_reverse_moving(input_) -> bool:
 
 func is_switch_from_unsupported_action() -> bool:
 	return not supported_actions.is_action_supported(get_curr_action().action_name)
-
-func get_abs_angle_pl_input(input_, delta) -> float:
-	var angle := get_player().model.__angle_between_player_and_input(input_, delta)
-	return abs(angle)
-
-func get_abs_angle_pl_input_deg(input_, delta) -> float:
-	var angle := get_player().model.__angle_between_player_and_input(input_, delta)
-	return rad_to_deg(abs(angle))
 
 # endregion
 

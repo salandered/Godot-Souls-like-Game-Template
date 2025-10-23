@@ -13,7 +13,7 @@ func get_player() -> Princess:
 	return _player
 
 func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
-	return _player.model.__velocity_by_input(input_, delta)
+	return __velocity_by_input(input_, delta)
 
 
 func safe_is_on_floor() -> bool:
@@ -33,7 +33,51 @@ func get_curr_xz_velocity_len() -> float:
 func get_curr_y_velocity() -> float:
 	return _player.velocity.y
 
+
+func get_signed_angle_pl_input(input_, delta, __log) -> float:
+	var angle := __angle_between_player_and_input(input_, delta, __log)
+	return angle
+
+func get_abs_angle_pl_input(input_, delta) -> float:
+	var angle := __angle_between_player_and_input(input_, delta)
+	return abs(angle)
+
 # endregion
+
+
+func detect_dir_relative_to_facing(input_: InputPackage, delta: float) -> Direction.Dir:
+	if abs(input_.forward_input) < 0.01 and abs(input_.orbit_input) < 0.01:
+		return Direction.Dir.NEUTRAL
+	
+	var angle_rad = __angle_between_player_and_input(input_, delta)
+	var angle_deg = rad_to_deg(angle_rad)
+	
+	return _angle_to_direction(angle_deg)
+
+
+func _angle_to_direction(angle_deg: float) -> Direction.Dir:
+	# Normalize angle to -180 to 180 range
+	angle_deg = wrapf(angle_deg, -180.0, 180.0)
+	
+	angle_deg = - angle_deg
+	# 8-directional mapping (45° sectors)
+	if angle_deg >= -22.5 and angle_deg < 22.5:
+		return Direction.Dir.FORWARD
+	elif angle_deg >= 22.5 and angle_deg < 67.5:
+		return Direction.Dir.RIGHT_F
+	elif angle_deg >= 67.5 and angle_deg < 112.5:
+		return Direction.Dir.RIGHT
+	elif angle_deg >= 112.5 and angle_deg < 157.5:
+		return Direction.Dir.RIGHT_B
+	elif angle_deg >= 157.5 or angle_deg < -157.5:
+		return Direction.Dir.BACKWARD
+	elif angle_deg >= -157.5 and angle_deg < -112.5:
+		return Direction.Dir.LEFT_B
+	elif angle_deg >= -112.5 and angle_deg < -67.5:
+		return Direction.Dir.LEFT
+	else: # -67.5 to -22.5
+		return Direction.Dir.LEFT_F
+
 
 ## BASIC MOVING
 # region: code
@@ -46,7 +90,6 @@ func set_velocity(velocity: Vector3):
 ## if no gravitym default will be used
 func apply_gravity(delta, gravity: float = u.gravity):
 	_player.velocity.y -= gravity * delta
-
 
 # endregion
 
@@ -224,11 +267,69 @@ func look_at_target(delta: float, use_model_front: bool = true, speed_config: Sp
 		var rotation_this_frame := clampf(remaining_angle, -max_rot_this_frame, max_rot_this_frame)
 		
 		_player.rotate_y(rotation_this_frame)
+		# prints("~~~~", rotation_this_frame)
 
 # endregion
 
 
-## LOGGING
+## VELOCITY BY INPUT LOGIC
+# region: code
+
+# region: big TODO
+## Player SM, fancy camera and input gathering are nicely separated in diff systems
+## But this essential func needs them all together and => a lot of the bad symptoms:
+##    - it's the only logic of such sort (and it's not just glue but math going on here)
+##    - it makes every placement of it wrong (now here just because player is the head of everything)
+##    - constants like __VEL_SPEED are separated from every other loco config
+## 
+## In order to understand why that happened and what to do we need to either rethink the PlayerPack.
+## (like may be a new abstract 'input' layer which knows about both: input gathering and camera data)
+## Or rewrite current logic. I suspect same can be done easier.
+## And it's much simplier to just leave this small ball of mud here.
+# endregion
+var __VEL_SPEED: float = 3.0
+func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
+	var _velocity := Vector3.ZERO
+	var forward_speed := input_.forward_input
+	var orbit_speed := input_.orbit_input
+
+	if area_awareness.is_camera_locked():
+		forward_speed *= -1
+		orbit_speed *= -1
+	
+	var grounded_target: Vector3
+	if area_awareness.is_camera_locked():
+		grounded_target = _player.fancy_camera.locked_target.global_position
+	else:
+		grounded_target = _player.fancy_camera.nest.global_position
+	grounded_target.y = _player.global_position.y
+
+	if forward_speed != 0.0:
+		_velocity -= _player.global_position.direction_to(grounded_target) * forward_speed * __VEL_SPEED
+
+	if orbit_speed != 0.0:
+		var d: float = orbit_speed * __VEL_SPEED * delta
+		var target_direction := grounded_target - _player.global_position
+		var distance_to_target := target_direction.length()
+		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
+		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
+		var d_vector := grounded_target - rotated_dir - _player.global_position
+		_velocity += d_vector / delta
+	return _velocity
+
+
+func __angle_between_player_and_input(input_: InputPackage, delta: float, __log: bool = false) -> float:
+	var face_dir := _player.basis.z
+	var input_dir := __velocity_by_input(input_, delta).normalized()
+	var angle := face_dir.signed_angle_to(input_dir, Vector3.UP)
+	if __log: print_.prefix_s("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
+	return angle
+
+
+# endregion
+
+
+## __LOGGING
 # region: code
 
 func __pp_vel_y():

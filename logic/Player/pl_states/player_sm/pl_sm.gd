@@ -115,7 +115,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	verdict._speak_freely()
 
 	if verdict.needs_switch():
-		print('\n')
+		print("")
 		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		
 		current_state._on_exit_state()

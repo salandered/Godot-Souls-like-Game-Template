@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerModel
 
-@onready var player: Princess = $".."
+@onready var _player: Princess = $".."
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
 @onready var combat: PlayerCombat = $Combat
 @onready var feelings: PlayerFeelings = %Feelings
@@ -21,8 +21,8 @@ var active_weapon: BaseWeapon
 
 func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	container.player = player
-	player_sm._player = player
+	container.player = _player
+	player_sm._player = _player
 	
 	anim_container._accept_animations(native_player) # NOTE: should be before accepting states!
 	container.accept_all()
@@ -38,68 +38,12 @@ func _ready():
 func update(input_: InputPackage, delta: float):
 	if fly_mode_enabled:
 		_handle_fly_mode(input_, delta)
-		player.move_and_slide()
+		_player.move_and_slide()
 		return
 
 	player_sm.update(input_, delta)
-	player.move_and_slide()
+	_player.move_and_slide()
 	
-
-# region: VELOCITY BY INPUT LOGIC
-
-@export var VEL_SPEED: float = 3.0
-
-# region: legendary TODO
-## Player SM, fancy camera and input gathering are nicely separated in diff systems
-## But this essential func needs them all together and => a lot of the bad symptoms:
-##    - it's the only logic of such sort (and it's not just glue but math going on here)
-##    - it makes every placement of it wrong (now here just because player is the head of everything)
-##    - constants like VEL_SPEED are separated from every other loco config
-## 
-## In order to understand why that happened and what to do we need to rethink the whole PlayerPack.
-## (like may be a new abstract 'input' layer which knows about both: input gathering and camera data)
-## And it's much simplier to just leave this small ball of mud here.
-## '__' is used to point out that its not in the right place (when it is referenced by client code)
-# endregion
-func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
-	var _velocity := Vector3.ZERO
-	var forward_speed := input_.forward_input
-	var orbit_speed := input_.orbit_input
-
-	if area_awareness.is_camera_locked():
-		forward_speed *= -1
-		orbit_speed *= -1
-	
-	var grounded_target: Vector3
-	if area_awareness.is_camera_locked():
-		grounded_target = player.fancy_camera.locked_target.global_position
-	else:
-		grounded_target = player.fancy_camera.nest.global_position
-	grounded_target.y = player.global_position.y
-
-	if forward_speed != 0.0:
-		_velocity -= player.global_position.direction_to(grounded_target) * forward_speed * VEL_SPEED
-
-	if orbit_speed != 0.0:
-		var d: float = orbit_speed * VEL_SPEED * delta
-		var target_direction := grounded_target - player.global_position
-		var distance_to_target := target_direction.length()
-		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
-		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
-		var d_vector := grounded_target - rotated_dir - player.global_position
-		_velocity += d_vector / delta
-	return _velocity
-
-
-func __angle_between_player_and_input(input_: InputPackage, delta: float, _log: bool = false) -> float:
-	var face_dir := player.basis.z
-	var input_dir := __velocity_by_input(input_, delta).normalized()
-	var angle := face_dir.signed_angle_to(input_dir, Vector3.UP)
-	if _log: prints("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
-	return angle
-
-
-# endregion
 
 # region: DEV ONLY
 
@@ -115,25 +59,25 @@ var run_anims: PackedStringArray = [] # will be filled like ["run-v5-LIB/Running
 func _handle_fly_mode(input_: InputPackage, delta: float):
 	var _tracking_angular_speed := 4
 	var input_direction := __fly_velocity_by_input(input_, delta).normalized()
-	var face_direction := player.basis.z
+	var face_direction := _player.basis.z
 	var angle := face_direction.signed_angle_to(input_direction, Vector3.UP)
-	player.rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
+	_player.rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
 
 	# Normalize and scale
 	if input_direction != Vector3.ZERO:
 		input_direction = input_direction.normalized() * fly_speed
 
-	player.velocity = input_direction
+	_player.velocity = input_direction
 	if input_.actions.has(PS.dodge):
-		player.velocity.y += 8
+		_player.velocity.y += 8
 	if input_.combat_actions.has(CombatAction.heavy_attack_pressed):
-		player.velocity.y -= 8
+		_player.velocity.y -= 8
 
 	
 func __toggle_fly_mode():
 	fly_mode_enabled = !fly_mode_enabled
 	if fly_mode_enabled:
-		player.velocity = Vector3.ZERO
+		_player.velocity = Vector3.ZERO
 	print("*** Fly mode: ", fly_mode_enabled)
 
 
@@ -188,20 +132,20 @@ func __fly_velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	var orbit_speed := input_.orbit_input
 
 	var grounded_target: Vector3
-	grounded_target = player.fancy_camera.nest.global_position
-	grounded_target.y = player.global_position.y
+	grounded_target = _player.fancy_camera.nest.global_position
+	grounded_target.y = _player.global_position.y
 
 	if forward_speed != 0.0:
-		_velocity -= player.global_position.direction_to(grounded_target) \
+		_velocity -= _player.global_position.direction_to(grounded_target) \
 					 * forward_speed * 5
 
 	if orbit_speed != 0.0:
 		var d: float = orbit_speed * 5 * delta
-		var target_direction := grounded_target - player.global_position
+		var target_direction := grounded_target - _player.global_position
 		var distance_to_target := target_direction.length()
 		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
 		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
-		var d_vector := grounded_target - rotated_dir - player.global_position
+		var d_vector := grounded_target - rotated_dir - _player.global_position
 		_velocity += d_vector / delta
 	return _velocity
 

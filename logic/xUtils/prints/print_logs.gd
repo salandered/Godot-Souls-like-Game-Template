@@ -26,6 +26,7 @@ const HIT_BOX_B := true
 const PSM_B := true
 const SKM_B := false
 const FEEL_B := true
+const ACTION_ANIM_B := true
 
 # PLAYER LSM
 const LSM_BEH_B := true
@@ -105,11 +106,24 @@ static func fight(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 # region: PLAYER logs
 
+static var ACTION_ANIM := PrintData.new(ACTION_ANIM_B, "▶️", 16, psm)
 static var PSM_ACTION := PrintData.new(PSM_B, "Action", 2, psm)
 static var PSM_CHECK_TRANS_PRINT := PrintData.new(PSM_B, "transition ❔", 1, psm)
 static var PSM_PRINT := PrintData.new(PSM_B, "PSM", 0, prefix)
 static var SKM_PRINT := PrintData.new(SKM_B, "SKM 💀", 0, prefix)
 static var FEEL_PRINT := PrintData.new(PSM_B, "FEEL🤍", 10, prefix)
+
+static func any_action_anim(
+	add_prefix_: String, anim_name: String,
+	blend_time, start_time_offset, prev_act_name,
+	info_indents: int = 0, level: String = LogL.NOTSET):
+	var msg = pp.s(
+		"anim", pp.in_q(anim_name),
+		"blend t", blend_time,
+		"start off", start_time_offset,
+		"prev", pp.in_q(prev_act_name)
+		)
+	_generic(ACTION_ANIM, add_prefix_, msg, info_indents, level)
 
 static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(PSM_CHECK_TRANS_PRINT, add_prefix_, text, info_indents, level)
@@ -133,7 +147,6 @@ static func feel(add_prefix_: String, text: String, info_indents: int = 0, level
 static var LSM_BEH_CH := PrintData.new(LSM_BEH_B, "choose act ❔", 4, lsm_beh)
 static var LSM_BEH_PRINT := PrintData.new(LSM_BEH_B, "Behavior", 4, lsm)
 static var LSM_ACTION_STRAFE := PrintData.new(LSM_ACTION_STRAFE_B, "Strafe", 6, lsm_action)
-static var LSM_ACTION_ANIM := PrintData.new(LSM_ACTION_B, "▶️", 16, lsm_action)
 static var LSM_ACTION := PrintData.new(LSM_ACTION_B, "Action", 6, lsm)
 static var LSM_PRINT := PrintData.new(LSM_BEH_B, "LSM", 3, prefix)
 
@@ -159,18 +172,6 @@ static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, le
 
 static func lsm_action_strafe(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(LSM_ACTION_STRAFE, add_prefix_, text, info_indents, level)
-
-static func lsm_action_anim(
-	add_prefix_: String, anim_name: String,
-	blend_time, start_time_offset, prev_act_name,
-	info_indents: int = 0, level: String = LogL.NOTSET):
-	var msg = pp.s(
-		"anim", pp.in_q(anim_name),
-		"blend t", blend_time,
-		"start off", start_time_offset,
-		"prev", pp.in_q(prev_act_name)
-		)
-	_generic(LSM_ACTION_ANIM, add_prefix_, msg, info_indents, level)
 
 static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(LSM_ACTION, add_prefix_, text, info_indents, level)

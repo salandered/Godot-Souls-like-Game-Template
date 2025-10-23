@@ -1,8 +1,8 @@
 extends LegsBehavior
 
 
-const IDLE_COMMIT := 0.12 # seconds
-var TO_STOP_DELAY: float = 0.2
+const IDLE_COMMIT := 0.14 # seconds
+var TO_STOP_DELAY: float = 0.16
 
 var _non_moving_timer: DelayTimer = DelayTimer.new()
 

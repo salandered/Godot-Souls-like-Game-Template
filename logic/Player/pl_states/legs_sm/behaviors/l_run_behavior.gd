@@ -39,7 +39,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 
 func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -> String:
 	var curr_action := get_curr_action()
-	var angle_deg := get_abs_angle_pl_input_deg(input_, delta)
+	var angle_deg := rad_to_deg(pm().get_abs_angle_pl_input(input_, delta))
 
 	if is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
 		if angle_deg > ANGLE_FOR_U_TURN_MIN:

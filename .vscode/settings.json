@@ -564,6 +564,28 @@
 				}
 			]
 		},
+		"\\b(prev_prev_prev_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#fc6e6ef3"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(prev_prev_blend_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#eca593f3"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
 		"\\b(prev_blend_playback)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

@@ -24,7 +24,7 @@ func initialise():
 	blend_time_by_action = {
 		Leg.Act.run: 0.3,
 	}
-	
+
 
 func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
 	var _anim_start := actual_anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.0)
@@ -34,9 +34,12 @@ func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
 
 
 func on_enter_action(input_: InputPackage) -> void:
-	# DIRECTION
-	var _strafe_dir := input_.detect_strafe_dir()
-	curr_dodge_dir.set_direction_from_strafe_dir(_strafe_dir)
+	var _original_dir: Direction.Dir
+	if player_sm.area_awareness.is_camera_locked():
+		_original_dir = input_.detect_strafe_dir()
+	else:
+		_original_dir = pm().detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
+	curr_dodge_dir.set_direction_simplified(_original_dir)
 
 	# INTERPOLATOR
 	var _inherited_speed := pm().get_curr_velocity_len()
@@ -45,7 +48,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	speed_x_interpolator.initialise(_inherited_speed, 2, dodge_x_peak_speed, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
 	
 	__log_action_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
-		"from strafe", StrafeDir.name_(_strafe_dir),
+		"from strafe", Direction.name_(_original_dir),
 		"calc_anim_dur", _anim_effective_dur,
 	)
 
@@ -59,8 +62,8 @@ func update(input_: InputPackage, delta: float) -> void:
 	var _curr_world_vector = curr_dodge_dir.current_world_vector(get_player().basis)
 	get_player().velocity = _curr_world_vector * current_speed
 
-	if tracks_input_vector():
-		pm().rotate_with_input_vector(input_, delta)
+	# if tracks_input_vector():
+	# 	pm().rotate_with_input_vector(input_, delta)
 
 
 func animate(): # ▶️
