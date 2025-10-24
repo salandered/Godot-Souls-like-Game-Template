@@ -48,16 +48,16 @@ func move_character(delta):
 	me.move_and_slide()
 
 
-func pack_hit_data(weapon: BaseWeapon) -> HitData:
-	var hit = HitData.new()
-	hit.damage = hit_damage
-	hit.state_anim = animation
-	# hit.is_parryable = is_parryable()
-	if pushes_back:
-		hit.effects["pushback"] = true
-		hit.effects["pushback_direction"] = projected_direction_to_player()
-	hit.weapon = weapon
-	return hit
+# func pack_hit_data(weapon: BaseWeapon) -> HitData:
+# 	var hit = HitData.new()
+# 	hit.damage = hit_damage
+# 	hit.state_anim = animation
+# 	# hit.is_parryable = is_parryable()
+# 	if pushes_back:
+# 		hit.effects["pushback"] = true
+# 		hit.effects["pushback_direction"] = projected_direction_to_player()
+# 	hit.weapon = weapon
+# 	return hit
 
 
 func on_exit():

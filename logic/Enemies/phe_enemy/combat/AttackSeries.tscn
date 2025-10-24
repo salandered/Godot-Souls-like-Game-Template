@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwghkp7lhgokx"]
+
+[ext_resource type="Script" uid="uid://bs7sjioimpc6h" path="res://logic/Enemies/phe_enemy/phe_states/attack_series_1.gd" id="1_ftui8"]
+
+[node name="AttackSeries" type="Node" node_paths=PackedStringArray("combo_starters")]
+script = ExtResource("1_ftui8")
+combo_starters = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+state_name = "attack_series"

@@ -322,7 +322,7 @@ func __angle_between_player_and_input(input_: InputPackage, delta: float, __log:
 	var face_dir := _player.basis.z
 	var input_dir := __velocity_by_input(input_, delta).normalized()
 	var angle := face_dir.signed_angle_to(input_dir, Vector3.UP)
-	if __log: print_.prefix_s("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
+	# if __log: print_.prefix_s("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
 	return angle
 
 

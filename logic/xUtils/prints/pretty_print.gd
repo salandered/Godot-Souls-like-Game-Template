@@ -8,9 +8,10 @@ static var arr := " -> "
 static var hence := " => "
 static var angle := " ∠ "
 
-static var on_ent := " on-entr "
-static var on_ext := " on-exit🚪 "
-static var on_upd := " upd "
+static var on_ent := " on-entr↪"
+static var on_ext := " on-exit↩"
+static var on_upd := " upd"
+static var on_internal_upd := " _upd"
 
 
 static func list_(parts: Array) -> String:

@@ -95,8 +95,8 @@ func update_current_action(next_action: BaseAction) -> String:
 	if next_act_name == curr_act_name:
 		print_.prefix(em.pin, "✖️🚸 came with the same action " + curr_act_name)
 
-	print_.prefix("[[]]", pp.s(next_act_name, "is set for curr |",
-		curr_act_name, "moved to prev"), 18)
+	# print_.prefix("[[]]", pp.s(next_act_name, "is set for curr |",
+		# curr_act_name, "moved to prev"), 18)
 	
 	_prev_action = _current_action
 	_current_action = next_action

@@ -4,8 +4,10 @@ class_name BaseHSMEState
 var animator: AnimationPlayer
 var states_data_repo: GundyrStatesData
 var resources: HFSMResources
-var weapons: Array[BaseWeapon]
+var weapons: Array[HSMEWeapon]
+var active_weapon: HSMEWeapon
 var container: HSMStatesContainer
+var combat: HSMECombat
 
 
 # These fields must be set for each state indivdually.
@@ -20,7 +22,7 @@ var current_state: BaseHSMEState = self
 var is_container: bool = false
 
 
-## We call it from physics update in the top level of HSMECharacter.
+## called from above
 func _update(delta: float):
 	# do ur stuff
 	update(delta)
@@ -96,15 +98,17 @@ func react_on_hit(hit: HitData):
 
 ## call this in update method in states that use weapons anyhow
 func manage_weapons():
-	for weapon in weapons:
-		weapon.is_attacking = states_data_repo.is_attacking(weapon.weapon_name, backend_animation, get_progress())
+	combat.update_is_attacking(states_data_repo.is_attacking(active_weapon.weapon_name, backend_animation, get_progress()))
+	# for weapon in weapons:
+		# weapon.is_attacking = states_data_repo.is_attacking(weapon.weapon_name, backend_animation, get_progress())
 
 ## this needs to be called on_exit of every state that touches weapons
 ## We need to to clear weapon ignore list andto deactivate weapons.
 func deactivate_weapons():
-	for weapon in weapons:
-		weapon.hitbox_ignore_list.clear()
-		weapon.is_attacking = false
+	pass
+	# for weapon in weapons:
+		# weapon.hitbox_ignore_list.clear()
+		# weapon.is_attacking = false
 
 
 # BACKEND ANIMATION GETTERS
@@ -141,15 +145,3 @@ func get_lowest_active_state() -> BaseHSMEState:
 ## means that we most probably 1 or 2 frames from the end of the lifecycle
 func close_to_the_end_of_animation() -> bool:
 	return get_progress() / get_animation_length() > 0.98
-
-
-# region >>> OLD DOCS <<<
-# Design something on paper.
-# Then create a node and attach a new heir of BaseHSMEState to it.
-# Then start from defining fields in container: state_name always and animation + backed animation if needed.
-# If you new heir is a container, feel in the choose_internal_state() method
-# 	or delete it if the new heir is bottom-level state.
-# Then write down the transition logic for the new heir in check_transition.
-# Then if you need, put some custom initializations or destructors in on_enter() and on_exit() methods.
-# Lastly, write the update logic. 
-# endregion

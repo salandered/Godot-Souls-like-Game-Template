@@ -1,3 +1,5 @@
+@tool
+@icon("res://-assets-/x_misc/x_icons/red/icon_sword.png")
 extends Node3D
 class_name BaseWeapon
 
@@ -30,14 +32,8 @@ var hitbox_ignore_list: Array[Area3D]
 var is_attacking: bool = false
 
 
+## manipulated by combat 
 var _hit_data: HitData = null
-
-## E.g: Sword maps 'light attack pressed' to slash, while staff to spell.
-## _input_action_to_state = {
-## 	CombatAction.light_attack_pressed: PS.longsword_1
-## }
-## NOTE: specific to player only. Is here for now for simplicity.
-var _input_action_to_state: Dictionary = {} # input actions to states
 
 
 func _ready():
@@ -57,15 +53,13 @@ func get_hit_data() -> HitData:
 	return _hit_data
 
 
-func translate_combat_input_to_state(combat_actions: Array) -> Array:
-	var _translated = []
-	
-	for act in combat_actions:
-		if u.safe_has_key(act, _input_action_to_state):
-			_translated.append(_input_action_to_state[act])
+func set_hit_data(hit_data: HitData):
+	_hit_data = hit_data
 
-	if not combat_actions.is_empty() and _translated.is_empty():
-		print_.warn(pp.s("BaseWeapon", weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))
-	if not _translated.is_empty():
-		print_.fight("PlCombat", pp.s("actions ", combat_actions, "translatedToSt", _translated))
-	return _translated
+
+func reset_hit_data():
+	_hit_data = null
+
+
+func __pp_holder() -> String:
+	return holder.name

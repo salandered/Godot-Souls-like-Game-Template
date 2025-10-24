@@ -5,17 +5,12 @@ class_name print_
 # 
 const FRAME_PRINT := true
 
-# SYSTEMS
-const DEV_B := true
-const input_gathering_B := true
-const FANCY_CAM_B := false
-const AWARENESS_B := true
-const CONTAINER_B := true
-const COLLISION_B := false
 
 # ENEMY
 const SE_B := false
 const HSME_B := true
+const PHE_CHECK_B := true
+const PHE_B := true
 
 # FIGHT
 const FIGHT_B := true
@@ -23,15 +18,23 @@ const COMBO_B := true
 const HIT_BOX_B := true
 
 # PLAYER
-const PSM_B := true
+const PSM_B := false
 const SKM_B := false
 const FEEL_B := true
-const ACTION_ANIM_B := true
+const ACTION_ANIM_B := false
 
 # PLAYER LSM
-const LSM_BEH_B := true
-const LSM_ACTION_STRAFE_B := true
-const LSM_ACTION_B := true
+const LSM_BEH_B := false
+const LSM_ACTION_STRAFE_B := false
+const LSM_ACTION_B := false
+
+# PL SYSTEMS
+const DEV_B := false
+const input_gathering_B := false
+const FANCY_CAM_B := false
+const AWARENESS_B := false
+const CONTAINER_B := false
+const COLLISION_B := false
 
 # endregion
 
@@ -40,11 +43,23 @@ const LSM_ACTION_B := true
 # region: ENEMY logs
 
 static var HSME_PRINT := PrintData.new(HSME_B, "HSM", 0, prefix)
+static var PHE_CHECK_PRINT := PrintData.new(PHE_CHECK_B, "transition ❔", 1, phe_sm)
+static var PHE_ANIM_PRINT := PrintData.new(PHE_B, "▶️ anim", 12, phe_sm)
+static var PHE_SM_PRINT := PrintData.new(PHE_B, "🗿PH", 1, prefix)
 static var SE_PRINT := PrintData.new(SE_B, "SE", 0, prefix)
 static var SE_CHECK_TRANS_PRINT := PrintData.new(SE_B, "transition ❔", 2, se)
 
 static func hsme(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
 	_generic(HSME_PRINT, add_prefix_, text, info_indents, level, freq)
+
+static func phe_anim(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
+	_generic(PHE_ANIM_PRINT, add_prefix_, text, info_indents, level, freq)
+
+static func phe_check(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
+	_generic(PHE_CHECK_PRINT, add_prefix_, text, info_indents, level, freq)
+
+static func phe_sm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
+	_generic(PHE_SM_PRINT, add_prefix_, text, info_indents, level, freq)
 
 static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
 	_generic(SE_PRINT, add_prefix_, text, info_indents, level, freq)

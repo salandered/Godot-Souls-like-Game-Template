@@ -38,18 +38,18 @@ func _decide_on_lock_state(new_input: InputPackage) -> LockState:
 	# next if camera is locked
 	match current_lock_state:
 		LockState.ALL_UNLOCKED:
-			print(u.fr() + "~~~~return ALL_LOCKED", new_input.target_lock)
+			# print(u.fr() + "~~~~return ALL_LOCKED", new_input.target_lock)
 			return LockState.ALL_LOCKED
 		
 		LockState.ALL_LOCKED:
 			if new_input.target_lock.double_tap:
-				print(u.fr() + "~~~~return CAMERA_LOCKED_MOVE_UNLOCKED", new_input.target_lock)
+				# print(u.fr() + "~~~~return CAMERA_LOCKED_MOVE_UNLOCKED", new_input.target_lock)
 
 				return LockState.CAMERA_LOCKED_MOVE_UNLOCKED
 
 		LockState.CAMERA_LOCKED_MOVE_UNLOCKED:
 			if new_input.target_lock.double_tap:
-				print(u.fr() + "~~~~return ALL_LOCKED", new_input.target_lock)
+				# print(u.fr() + "~~~~return ALL_LOCKED", new_input.target_lock)
 
 				return LockState.ALL_LOCKED
 

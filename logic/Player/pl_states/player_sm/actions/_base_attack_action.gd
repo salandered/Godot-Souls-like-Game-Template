@@ -12,7 +12,7 @@ var hit_damage := 10
 
 
 func on_enter_action(input_: InputPackage):
-	player_sm.combat.set_hit_data(hit_damage, anim.anim_id)
+	player_sm.combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
 
 
 func update(input_: InputPackage, delta):

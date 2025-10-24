@@ -212,11 +212,19 @@
 		},
 		{
 			"path": "logic/Enemies/Gundyr/hsme_states/leafes",
-			"color": "custom5"
+			"color": "utils"
 		},
 		{
 			"path": "logic/Enemies/Gundyr/hsme_states",
 			"color": "custom10"
+		},
+		{
+			"path": "logic/Enemies/phe_enemy/phe_states/leafes",
+			"color": "utils"
+		},
+		{
+			"path": "logic/Enemies/phe_enemy/phe_states",
+			"color": "custom13"
 		},
 		// ENEMY
 		{
@@ -226,6 +234,10 @@
 		{
 			"path": "logic/Enemies/Gundyr",
 			"color": "custom13"
+		},
+		{
+			"path": "logic/Enemies/phe_enemy",
+			"color": "custom10"
 		},
 		// CAMERA
 		{
@@ -308,6 +320,15 @@
 				}
 			]
 		},
+		"\\b(PHEA\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+					// "fontWeight": "bold"
+				}
+			]
+		},
 		"\\b(HSMEA\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -381,6 +402,17 @@
 			]
 		},
 		"(SEState\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(PHEState\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -626,6 +658,18 @@
 				{
 					"color": "#96c3eeec",
 					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(combat)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ff9b8ef8",
+					// "fontWeight": "bold",
 				},
 				{
 					// "color": "#FFEEA1E5",

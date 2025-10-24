@@ -70,6 +70,8 @@ func accept_states():
 		node.states_data_repo = me.states_data_repo
 		node.resources = me.resources
 		node.weapons = me.weapons
+		node.active_weapon = me.active_weapon
+		node.combat = me.combat
 
 
 		# state.animation = state_anims[state.state_name]

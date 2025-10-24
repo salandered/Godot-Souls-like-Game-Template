@@ -12,8 +12,10 @@ class_name HSMECharacter
 @export var animator: AnimationPlayer
 @export var states_data_repo: GundyrStatesData
 @export var resources: HFSMResources
-@export var weapons: Array[BaseWeapon]
+@export var weapons: Array[HSMEWeapon]
+@export var active_weapon: HSMEWeapon
 @onready var container: HSMStatesContainer = $StatesContainer
+@onready var combat: HSMECombat = %Combat
 
 
 func get_current_state() -> BaseHSMEState:
@@ -34,7 +36,6 @@ func _ready():
 	container.me = self
 	container.accept_states()
 
-	state_machine.player = player
 	state_machine._on_enter()
 
 

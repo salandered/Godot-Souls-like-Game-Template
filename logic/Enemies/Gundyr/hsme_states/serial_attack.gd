@@ -8,6 +8,17 @@ extends BaseHSMEState
 @export var tracking_angular_speed: float = 1
 
 
+func on_enter():
+	get_parent().attacks_to_do -= 1
+	combat.set_hit_data_to_active_weapon(hit_damage, animation)
+
+
+func on_exit():
+	combat.reset_active_weapon()
+
+	deactivate_weapons()
+
+
 func check_transition(_delta) -> VerdictHSM:
 	if works_longer_than(get_animation_length()):
 		if get_parent().attacks_to_do > 0:
@@ -38,20 +49,3 @@ func move_character(delta):
 	if not me.is_on_floor():
 		me.velocity.y -= u.gravity * delta
 	me.move_and_slide()
-
-
-func pack_hit_data(weapon: BaseWeapon) -> HitData:
-	var hit = HitData.new()
-	hit.damage = hit_damage
-	hit.state_anim = animation
-	#hit.is_parryable = is_parryable()
-	hit.weapon = weapon
-	return hit
-
-
-func on_enter():
-	get_parent().attacks_to_do -= 1
-
-
-func on_exit():
-	deactivate_weapons()

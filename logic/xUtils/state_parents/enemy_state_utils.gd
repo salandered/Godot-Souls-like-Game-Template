@@ -1,8 +1,11 @@
+# @abstract
 extends StateUtils
 class_name EnemyStateUtils
 
 
 var me: BaseEnemyCharacter
+
+# @abstract func get_me() -> BaseEnemyCharacter
 
 
 func get_player() -> Princess:

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlriiromrcvyr"]
+
+[ext_resource type="Script" uid="uid://cb2tk8kyykp51" path="res://logic/Enemies/phe_enemy/phe_states/seriesless_attack.gd" id="1_7e1d8"]
+
+[node name="Attack" type="Node"]
+script = ExtResource("1_7e1d8")
