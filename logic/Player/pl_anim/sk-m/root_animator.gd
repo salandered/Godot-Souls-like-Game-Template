@@ -23,7 +23,7 @@ func get_custom_delta() -> float:
 
 
 func get_prev_root_rotation() -> float:
-	if get_prev_playback().get_effective_progress() >= get_prev_playback().anim.duration:
+	if get_prev_playback().get_effective_time_spent() >= get_prev_playback().anim.duration:
 		print_.skm("RootAnimator", "Will return 0.0. effective_prog >= anim.duration. Details:" + get_prev_playback()._to_string_short(), 0, LogL.FORCE_PRINT)
 		return 0.0
 	var prev_rotation_delta := _calculate_rotation_delta(get_prev_playback(), ROOT_IDX)
@@ -37,12 +37,12 @@ func get_prev_root_rotation() -> float:
 
 func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true, backwards: bool = false) -> Vector3:
 	var curr_playback = get_curr_playback()
-	var curr_eff_progress := curr_playback.get_effective_progress()
+	var curr_eff_progress := curr_playback.get_effective_time_spent()
 	if curr_eff_progress < Constants.ONE_FRAME:
-		# print_.prefix_s("✔", "curr_eff_progress", curr_eff_progress, "< Constants.ONE_FRAME -> we at the beginning of the anim. backwards to true")
+		# print_.dev("✔", "curr_eff_progress", curr_eff_progress, "< Constants.ONE_FRAME -> we at the beginning of the anim. backwards to true")
 		backwards = true
 	elif curr_playback.anim.duration - curr_eff_progress < Constants.ONE_FRAME:
-		# print_.prefix_s("✔", "anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
+		# print_.dev("✔", "anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
 			# "< Constants.ONE_FRAME -> we at the end f the anim. backwards to false")
 		backwards = false
 
@@ -84,7 +84,7 @@ func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int, backwards:
 		return Vector3.ZERO
 	
 	var scaled_delta := get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
-	var curr_progress := playback.get_effective_progress()
+	var curr_progress := playback.get_effective_time_spent()
 	var prev_progress := curr_progress - scaled_delta
 	if backwards:
 		curr_progress += scaled_delta
@@ -105,7 +105,7 @@ func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
 		return 0.0
 	
 	var scaled_delta := get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
-	var curr_progress := playback.get_effective_progress()
+	var curr_progress := playback.get_effective_time_spent()
 	var prev_progress: float = max(0.0, curr_progress - scaled_delta)
 	
 	var prev_rot: Quaternion = playback.native_anim.rotation_track_interpolate(rot_track, prev_progress)

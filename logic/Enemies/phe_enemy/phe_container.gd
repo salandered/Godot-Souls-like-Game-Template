@@ -10,102 +10,130 @@ var me: PHCharacter
 class _Data:
 	var state_name: String
 	## NOTE: In HSM can be empty "" for phases
-	var anim_name: String
+	var anim_id: String
+	var commitment: float
+	var fatigue: float
 
 	func _init(
 			state_name_: String,
-			anim_name_: String = "",
+			anim_id_: String = "",
+			commitment_: float = 0.4,
+			fatigue_: float = 20
 		) -> void:
 		self.state_name = state_name_
-		self.anim_name = anim_name_
+		self.anim_id = anim_id_
+		self.commitment = commitment_
+		self.fatigue = fatigue_
 
 
 var node_to_state_data: Dictionary = {
-	"_Top": _Data.new(PHEState._TOP),
-	"Life": _Data.new(PHEState.life),
+	"_Top": _Data.new(PHEState._TOP, "", -1, -1),
+	"Life": _Data.new(PHEState.life, "", -1, -1),
 	
-	"StillLifePhase": _Data.new(PHEState.still_life_phase),
-	"Sleep": _Data.new(PHEState.sleep, PHEA.sleep),
-	"Awaken": _Data.new(PHEState.awaken, PHEA.awaken),
+	"StillLifePhase": _Data.new(PHEState.still_life_phase, "", -1, -1),
+	"Sleep": _Data.new(PHEState.Leaf.sleep, PHEA.unsorted.sleep, -1, -1),
+	"Awaken": _Data.new(PHEState.Leaf.awaken, PHEA.unsorted.awaken),
 
-	"PursuingPhase": _Data.new(PHEState.pursuing_phase),
-	"Orbit": _Data.new(PHEState.orbit, PHEA.strafe_right),
-	"Pursue": _Data.new(PHEState.pursue, PHEA.walk_forward),
+	"PursuingPhase": _Data.new(PHEState.pursuing_phase, "", -1, -1),
+	"CombatIdle": _Data.new(PHEState.Leaf.combat_idle, PHEA.loco.combat_idle, 0.6),
+	"Orbit": _Data.new(PHEState.Leaf.orbit, PHEA.loco.strafe_right, 1.4),
+	"SlowPursue": _Data.new(PHEState.Leaf.slow_pursue, PHEA.loco.walk_forward, 0.8),
+	"Pursue": _Data.new(PHEState.Leaf.pursue, PHEA.loco.run_forward, 0.5),
 	
-	#
-	# "Combat_1": _Data.new(PHEState.combat_1, ""),
-	# "Scare-off": _Data.new(PHEState.scare_off, PHA.scare_off),
-	# "GapClose": _Data.new(PHEState.gapclose, PHA.gapclose_1),
-	# "AttackSeries": _Data.new(PHEState.attack_series, ""),
-	# "Attack1": _Data.new(PHEState.attack_1, PHA.slash_1),
-	# "Attack2": _Data.new(PHEState.attack_2, PHA.slash_2),
-	# "Attack3": _Data.new(PHEState.attack_3, PHA.slash_3),
-	# "Attack4": _Data.new(PHEState.attack_4, PHA.slash_4),
-	# "Attack5": _Data.new(PHEState.attack_5, PHA.slash_5),
-	# "Attack6": _Data.new(PHEState.attack_6, PHA.slash_6),
-	# "PhaseSwitch": _Data.new(PHEState.phase_switch, PHA.phase_switch),
+	"CombatPhase": _Data.new(PHEState.combat_phase),
+	"ScareOff": _Data.new(PHEState.Leaf.scare_off, PHEA.attack.scare_off),
+	"GapCloserAttack": _Data.new(PHEState.Leaf.gap_closer_attack, PHEA.attack.gap_closer),
+	
+	"AttackClubSeries": _Data.new(PHEState.attack_club_series),
+	"ClubPart1": _Data.new(PHEState.Leaf.club_part_1, PHEA.attack.club_part_1),
+	"ClubPart2": _Data.new(PHEState.Leaf.club_part_2, PHEA.attack.club_part_2),
+	"ClubPart3_4": _Data.new(PHEState.Leaf.club_part_3_4, PHEA.attack.club_part_3_4),
+	
+	"AttackPickSingle": _Data.new(PHEState.attack_pick_single),
+	"Attack360High": _Data.new(PHEState.Leaf.attack_360_high, PHEA.attack.attack_360_high),
+	"Attack360Low": _Data.new(PHEState.Leaf.attack_360_low, PHEA.attack.attack_360_low),
+	"AttackUp": _Data.new(PHEState.Leaf.attack_up, PHEA.attack.attack_up),
+	"AttackDown": _Data.new(PHEState.Leaf.attack_down, PHEA.attack.attack_down),
+	"FancyAttack": _Data.new(PHEState.Leaf.fancy_attack, PHEA.attack.fancy_attack),
+	"Death": _Data.new(PHEState.Leaf.death, PHEA.unsorted.death)
+	
+	# "PhaseSwitch": _Data.new(PHEState.phase_switch, PHEA.phase_switch),
 	# "Phase_2": _Data.new(PHEState.phase_2, ""),
-	# "Pursuit_2": _Data.new(PHEState.pursuit, PHA.pursuit_run),
-	# "Gapclose": _Data.new(PHEState.gapclose, PHA.gapclose_2),
-	# "Kick": _Data.new(PHEState.kick, PHA.kick),
-	# "Elbow": _Data.new(PHEState.elbow, PHA.elbow),
-	# "Shoulder": _Data.new(PHEState.shoulder_kick, PHA.shoulder_kick_placeholder),
-	# "Attack24": _Data.new(PHEState.slash_4, PHA.slash_4),
-	# "Attack25": _Data.new(PHEState.slash_5, PHA.slash_5),
-	# "Attack7": _Data.new(PHEState.slash_7, PHA.slash_7),
-	# "Attack8": _Data.new(PHEState.slash_8, PHA.slash_8),
-	# "Death": _Data.new(PHEState.death, PHA.death)
+	# "Pursuit_2": _Data.new(PHEState.pursuit, PHEA.pursuit_run),
+	# "Gapclose": _Data.new(PHEState.gapclose, PHEA.gapclose_2),
 }
 
 
-var states: Dictionary # { String : BasePHState }
+var _states: Dictionary # { String : BasePHEState }
 
 
 func accept_states():
-	for node: BasePHState in get_descendants.base_ph_states(self):
+	_accept_states()
+	_initialise_state()
+
+
+func _initialise_state():
+	for state: BasePHEState in _states.values():
+		state.initialise()
+
+func _accept_states():
+	for descendant: get_descendants.Descendant in get_descendants.base_ph_states_with_depth(self):
+		var node: BasePHEState = descendant.node_
+		var depth := descendant.depth
+		node.state_depth = depth
+
 		print_.container("", "node.get_name() " + node.get_name(), 0, LogL.FORCE_PRINT)
 		var state_data: _Data = node_to_state_data.get(node.get_name())
-		assert(state_data, "_Data for " + node.get_name() + " not found")
+		if not state_data:
+			print_.warn(pp.s("_Data for", node.get_name(), "not found, skipping"))
+			continue
 
-		print_.container("", "state_data.state_name " + state_data.state_name, 0, LogL.FORCE_PRINT)
 
-		states[state_data.state_name] = node
+		_states[state_data.state_name] = node
 		
 		# specific
 		node.state_name = state_data.state_name
-		node.animation = state_data.anim_name
+
+
+		node.fatigue = state_data.fatigue
+		node.commitment = state_data.commitment
 		
 		var children = _get_one_level_children(node)
 		if children.size() > 0:
-			node.is_container = true
-			node.current_lower_state = children[0] # default
-			print_.container("", "is_container " + str(node.is_container), 0, LogL.FORCE_PRINT)
+			node.is_composite = true
 
+		print_.container("", pp.s("st name", state_data.state_name, "is_composite " + str(node.is_composite)), 0, LogL.FORCE_PRINT)
+
+		
+		if not node.is_composite:
+			var _anim := me.anim_container.get_by_anim_id(state_data.anim_id)
+			node.anim = _anim
 
 		# common
 		node.me = me
 		node.container = self
-		node.animator = me.animator
-		node.states_data_repo = me.states_data_repo
+		node.native_player = me.native_player
 		node.phe_feelings = me.phe_feelings
-		node.weapons = me.weapons
 		node.active_weapon = me.active_weapon
 		node.combat = me.combat
+		node.e_movement = me.enemy_movement
+		node.animator_manager = me.animator_manager
+		node.anim_container = me.anim_container
 
 
 		# state.animation = state_anims[state.state_name]
-		assert(node.state_name and not node.state_name.is_empty(), " state name missing on one of the states " + str(node))
+		assert(node.state_name and not node.state_name.is_empty(), " state name missing on one of the _states " + str(node))
 
 
-func _get_one_level_children(node: BasePHState) -> Array[BasePHState]:
-	var _children: Array[BasePHState] = []
+func _get_one_level_children(node: BasePHEState) -> Array[BasePHEState]:
+	var _children: Array[BasePHEState] = []
 	for child in node.get_children():
-		if child is BasePHState:
-			var _child_casted: BasePHState = child
+		if child is BasePHEState:
+			var _child_casted: BasePHEState = child
 			_children.append(_child_casted)
 	return _children
 
 
-func get_state_by_name(state_name: String) -> BasePHState:
-	assert(states.has(state_name), "states dict doesn't have " + state_name)
-	return states[state_name]
+func get_state_by_name(state_name: String) -> BasePHEState:
+	assert(_states.has(state_name), "_states dict doesn't have " + state_name)
+	return _states[state_name]

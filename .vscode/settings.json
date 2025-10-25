@@ -95,11 +95,9 @@
 		"bookmarks.lineBorder": "#ffffff00", // Border color for a bookmarked line.
 		"bookmarks.overviewRuler": "#157EFB88", // Marker color for the overview ruler.
 		// COLORFUL FOLDERS
-		// "folderPathColor.custom_yellow": "#ff8aef",
-		//
 		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
 		"folderPathColor.utils": "#92b69fe5", // utils
-		"folderPathColor.model": "#e681bfe0", // model accent
+		"folderPathColor.model": "#eea6ccf6", // model accent
 		"folderPathColor.awareness": "#cdcf90", // yellow accent (awareness)
 		"folderPathColor.turquoise": "#ffa9c8", // tender enemy
 		"folderPathColor.custom13": "#a9c5d8", // enemy
@@ -109,11 +107,11 @@
 		"folderPathColor.white_": "#ececec", // white
 		"folderPathColor.states_blue": "#6692d4", // state blue 
 		"folderPathColor.custom11": "#f0c078d5", // orange
-		"folderPathColor.custom12": "#caeed5", // 8aa8c9
+		"folderPathColor.custom12": "#caeed5", // container
 		"folderPathColor.custom14": "#92b9e4", // 8aa8c9
 		"folderPathColor.orange_shade_2": "#92b9e4", // 8aa8c9
 		"folderPathColor.gray_ignore": "#9ea4ac", // 8aa8c9
-		"folderPathColor.green_shade_3": "#92b9e4", // 8aa8c9
+		"folderPathColor.green_shade_3": "#a4cfa3f5", // leafes
 		"folderPathColor.blue_shade_3": "#92b9e4", // 8aa8c9
 	},
 	//
@@ -126,7 +124,7 @@
 		// FEELINGS
 		{
 			"path": "*feelings.gd",
-			"color": "turquoise"
+			"color": "turquoise",
 		},
 		// ANIM (NOT PLAYER)
 		{
@@ -211,16 +209,12 @@
 			"color": "custom10"
 		},
 		{
-			"path": "logic/Enemies/Gundyr/hsme_states/leafes",
-			"color": "utils"
-		},
-		{
-			"path": "logic/Enemies/Gundyr/hsme_states",
-			"color": "custom10"
-		},
-		{
 			"path": "logic/Enemies/phe_enemy/phe_states/leafes",
-			"color": "utils"
+			"color": "green_shade_3"
+		},
+		{
+			"path": "logic/Enemies/phe_enemy/phe_states/phases",
+			"color": "states_blue"
 		},
 		{
 			"path": "logic/Enemies/phe_enemy/phe_states",
@@ -230,10 +224,6 @@
 		{
 			"path": "logic/Enemies/SimpleEnemy",
 			"color": "custom1"
-		},
-		{
-			"path": "logic/Enemies/Gundyr",
-			"color": "custom13"
 		},
 		{
 			"path": "logic/Enemies/phe_enemy",
@@ -329,15 +319,6 @@
 				}
 			]
 		},
-		"\\b(HSMEA\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#FFEEA1E5",
-					// "fontWeight": "bold"
-				}
-			]
-		},
 		"(RawAction\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -423,15 +404,12 @@
 				}
 			]
 		},
-		"(HSMEState\\.)(\\w+)": {
+		"\\b(PHEState\\.Leaf\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#5da9ff"
+					"color": "#99f5bcee"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
 			]
 		},
 		"(traits)(\\.)(\\w+)": {
@@ -448,7 +426,7 @@
 				}
 			]
 		},
-		"(?<=func\\s_?)(initialise)(?=\\()": { // func update(...)
+		"(?<=func\\s_?)(initialise)(?=\\()": {
 			"decorations": [
 				{
 					// "color": "#5ec4d8b2",
@@ -463,42 +441,14 @@
 				},
 			]
 		},
-		"(?<=func\\s_?)(on_enter_action)(?=\\()": { // func _on_enter_action(...)
+		"(on_enter_\\w+)(?=\\()": { // func _on_enter_something() or func on_enter_something()
 			"decorations": [
 				{
 					"textDecoration": "underline #f0c078d5",
 				},
 			]
 		},
-		"(?<=func\\s_?)(on_enter_state)(?=\\()": { // func _on_enter_action(...)
-			"decorations": [
-				{
-					"textDecoration": "underline #f0c078d5",
-				},
-			]
-		},
-		"(?<=func\\s_?)(on_enter_behavior)(?=\\()": { // func _on_enter_action(...)
-			"decorations": [
-				{
-					"textDecoration": "underline #f0c078d5",
-				},
-			]
-		},
-		"(?<=func\\s_?)(on_exit_action)(?=\\()": { // func _on_exit_action(...)
-			"decorations": [
-				{
-					"textDecoration": "underline #f0c078d5",
-				},
-			]
-		},
-		"(?<=func\\s_?)(on_exit_state)(?=\\()": { // func _on_exit_action(...)
-			"decorations": [
-				{
-					"textDecoration": "underline #f0c078d5",
-				},
-			]
-		},
-		"(?<=func\\s_?)(on_exit_behavior)(?=\\()": { // func on_exit_behavior(...)
+		"(on_exit_\\w+)(?=\\()": { // ex (?<=func\\s_?)(on_exit_\\w+)(?=\\()
 			"decorations": [
 				{
 					"textDecoration": "underline #f0c078d5",
@@ -521,14 +471,6 @@
 				}
 			]
 		},
-		// "\\b(print_\\.)": {
-		// 	"filterLanguageRegex": "gdscript",
-		// 	"decorations": [
-		// 		{
-		// 			"color": "#A3A3F5",
-		// 		}
-		// 	]
-		// },
 		"(# region:)(.*)": {
 			"decorations": [
 				{

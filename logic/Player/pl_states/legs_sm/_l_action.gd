@@ -17,12 +17,8 @@ func get_lsm_prev_action() -> LegsAction:
 	return legs_sm.get_prev_action()
 
 
-func _update(input_: InputPackage, _delta: float):
-	update(input_, _delta)
-
-
 ## Not abstract! It can be empty. (double action)
-func update(input_: InputPackage, _delta: float):
+func update(input_: InputPackage, delta: float):
 	pass
 
 
@@ -58,41 +54,16 @@ func turn_direction_by_target_angle(target_angle: float) -> String:
 # region: code 
 
 func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
-	var result_offset := -1.0
+	var prev_anim := container.l_action_by_name(PREV_ACTION).anim
 	# NOTE: Action is switched, but animator still treats an anim from prev action as "current" 
 	#       (before current action hits set_anim_to_play)
-	var prev_anim_progress := animator_manager.get_current_anim_effective_progress()
-	var prev_anim := container.l_action_by_name(PREV_ACTION).anim
-	var next_anim := anim
-	var prev_l_leg_contact := prev_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	if prev_l_leg_contact and next_l_leg_contact:
-		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
-		result_offset = AnimHelpers.calculate_synced_anim_offset(
-			prev_anim_progress,
-			prev_anim.duration,
-			prev_l_leg_contact.time,
-			next_anim.duration,
-			next_l_leg_contact.time + next_anim_correction
-		)
+	var prev_anim_progress := get_animator_manager().get_current_anim_effective_time_spent()
+	var result_offset = AnimHelpers.sync_with_loco_anim(prev_anim, prev_anim_progress, anim, next_anim_correction)
 	return result_offset
 
-
 func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: float = 0.0) -> float:
-	var result_offset := -1.0
-	var curr_anim_progress := animator_manager.get_current_anim_effective_progress()
-	var curr_anim := anim
-	var curr_l_leg_contact := curr_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	if curr_l_leg_contact and next_l_leg_contact:
-		# print("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
-		result_offset = AnimHelpers.calculate_synced_anim_offset(
-			curr_anim_progress,
-			curr_anim.duration,
-			curr_l_leg_contact.time,
-			next_anim.duration,
-			next_l_leg_contact.time + next_anim_correction
-		)
+	var curr_anim_progress := get_animator_manager().get_current_anim_effective_time_spent()
+	var result_offset = AnimHelpers.sync_with_loco_anim(anim, curr_anim_progress, next_anim, next_anim_correction)
 	return result_offset
 
 

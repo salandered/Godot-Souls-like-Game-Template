@@ -31,26 +31,24 @@ func _decide_on_lock_state(new_input: InputPackage) -> LockState:
 	# NOTE: camera info is more important that input
 	var is_cam_locked := is_camera_locked()
 	# if new_input.target_lock.any_tap():
-		# print(u.fr() + "~~~~we are in decide on lock with", new_input.target_lock)
+		# __log_aware("~~~~we are in decide on lock with", new_input.target_lock)
 	if not is_cam_locked:
 		return LockState.ALL_UNLOCKED
 
 	# next if camera is locked
 	match current_lock_state:
 		LockState.ALL_UNLOCKED:
-			# print(u.fr() + "~~~~return ALL_LOCKED", new_input.target_lock)
+			# __log_aware("~~~~return ALL_LOCKED", new_input.target_lock)
 			return LockState.ALL_LOCKED
 		
 		LockState.ALL_LOCKED:
 			if new_input.target_lock.double_tap:
-				# print(u.fr() + "~~~~return CAMERA_LOCKED_MOVE_UNLOCKED", new_input.target_lock)
-
+				# __log_aware("~~~~return CAMERA_LOCKED_MOVE_UNLOCKED", new_input.target_lock)
 				return LockState.CAMERA_LOCKED_MOVE_UNLOCKED
 
 		LockState.CAMERA_LOCKED_MOVE_UNLOCKED:
 			if new_input.target_lock.double_tap:
-				# print(u.fr() + "~~~~return ALL_LOCKED", new_input.target_lock)
-
+				# __log_aware("~~~~return ALL_LOCKED", new_input.target_lock)
 				return LockState.ALL_LOCKED
 
 	
@@ -128,9 +126,9 @@ func floor_dist_under_tolerated_height(_log: bool = true) -> bool:
 
 func get_floor_distance() -> float:
 	if downcast.is_colliding():
-		#print('-------------- colliding')
+		#__log_aware('-------------- colliding')
 		return downcast.global_position.distance_to(downcast.get_collision_point())
-	#print('-------------- not colliding')
+	#__log_aware('-------------- not colliding')
 	return Constants.BIG_MEANINGLESS_NUMBER
 
 
@@ -143,11 +141,11 @@ func find_target() -> Node:
 			candidates.append(target)
 	
 	if not candidates.is_empty():
-		# print("    > candidates before sorting: ", candidates.map(func(t): return t.label))
+		# __log_aware("    > candidates before sorting: ", candidates.map(func(t): return t.label))
 		_sort_targets_by_player_distance(candidates)
-		# print("    > candidates after sorting: ", candidates.map(func(t): return t.label))
+		# __log_aware("    > candidates after sorting: ", candidates.map(func(t): return t.label))
 		return candidates[0]
-	# print("   > nothing ")
+	# __log_aware("   > nothing ")
 	return null
 
 
@@ -191,6 +189,10 @@ func _sort_targets_by_player_distance(targets: Array) -> void:
 
 
 # region: LOG
+
+func __log_aware(...parts: Array):
+		print_.aware("", pp.list_(parts))
+
 
 func __log_candidate(target, reason):
 	print_.aware_target("candidate" + em.gray_x, pp.s("target.lbl:", target.label, "Reason:", reason))

@@ -5,7 +5,7 @@ class_name StateUtils
 var enter_state_time: float
 var iteration_enter_state_time: float
 
-# TIME MANAGEMENT
+# TIME MANAGEMENT # TODO: switch to better time management system
 func mark_enter_state() -> void:
 	enter_state_time = Time.get_unix_time_from_system()
 
@@ -27,6 +27,7 @@ func works_longer_than(time: float) -> bool:
 	if get_progress() >= time:
 		return true
 	return false
+
 
 func iteration_works_longer_than(time: float) -> bool:
 	if time == -1:
@@ -68,5 +69,5 @@ func iteration_works_between(start: float, finish: float) -> bool:
 
 
 func __reject() -> bool:
-	# print_.prefix("TM", "time manage rejected -1", 5)
+	# print_.dev("TM", "time manage rejected -1", 5)
 	return false

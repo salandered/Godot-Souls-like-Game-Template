@@ -49,7 +49,7 @@ static func in_br(something: Variant, spaces: bool = false) -> String:
 static func in_sp(something: Variant) -> String:
 	return " " + str(something) + " "
 
-static func compare(what_happened: String, text_1: String, val_1: float, text_2: String, val_2: float) -> String:
+static func compare(text_1: String, val_1: float, what_happened: String, text_2: String, val_2: float) -> String:
 	# what_happened e.g.: "works longer than"
 	var r = s(text_1, round_01(val_1), what_happened, text_2, round_01(val_2))
 	return r
@@ -113,11 +113,11 @@ static func rad2deg(angle_: float, to_str: bool = true) -> Variant:
 
 static func file_load_err(err, path: String):
 	if err == OK:
-		print(path + " loaded successfully")
+		print_.dev(path + " loaded successfully")
 	elif err == ERR_DOES_NOT_EXIST:
-		print(path + " no file found")
+		print_.dev(path + " no file found")
 	else:
-		print(path + " error loading:", err)
+		print_.dev(path + " error loading:" + str(err))
 
 
 # region: domain helpers

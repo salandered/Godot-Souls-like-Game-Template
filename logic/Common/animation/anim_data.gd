@@ -85,7 +85,7 @@ func tracks_input_vector(timestamp) -> bool:
 func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 	var _track_name := _anim_param_track_prefix + param_name
 	if not native_anim:
-		print("WTF")
+		print_.warn("")
 	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
 	if _track == -1:
@@ -107,7 +107,7 @@ func _get_value_from_track(param_name: String, timestamp: float) -> bool:
 	if key_index != -1:
 		var key_value: Variant = native_anim.track_get_key_value(_track, key_index)
 		var key_time: Variant = native_anim.track_get_key_time(_track, key_index)
-		print_.debug("Found nearest key at index %d, time %.3f, value: %s" % [key_index, key_time, str(key_value)])
+		print_.note("Found nearest key at index %d, time %.3f, value: %s" % [key_index, key_time, str(key_value)])
 		if key_value != null and key_value is bool:
 			return key_value
 		elif key_value != null:

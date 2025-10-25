@@ -1,4 +1,5 @@
-extends Node3D
+@tool
+extends BaseVisuals
 class_name PlayerVisuals
 
 

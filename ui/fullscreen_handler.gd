@@ -21,7 +21,7 @@ func _toggle_fullscreen_initial_method(event: InputEvent) -> void:
 
 
 func _toggle_mouse_capture() -> void:
-	print("mouse_mode_switch")
+	print("~~~~~~~~~~ mouse_mode_switch")
 	if mouse_is_captured:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:

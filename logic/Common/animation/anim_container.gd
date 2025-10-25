@@ -2,72 +2,21 @@
 @icon("res://-assets-/x_misc/x_icons/white/icon_grid.png")
 
 extends BaseAnimationContainer
-## for simplicity this container is used for all characters
-##      in the future _animations may be unique per character, 
-## 		while _accept_animations will be separated to a single logic piece
+## for simplicity this container is used for all characters.
+## if native_player dont have animation name from _animations, it will simply skip it
 class_name AnimationContainer
 
 
-var _animations := [
-	## loco
-	AnimationData.new(A.move.idle),
-	AnimationData.new(A.move.idle_to_sprint, 1.3),
-	AnimationData.new(A.move.sprint_to_idle, 0.85),
-	AnimationData.new(A.move.run),
-	AnimationData.new(A.move.sprint),
-	AnimationData.new(A.move.turn_180_R, 1.2, true),
-	AnimationData.new(A.move.turn_180_L, 1.2, true),
-	AnimationData.new(A.move.fast_turn_180_R, 1.0, true),
-	AnimationData.new(A.move.fast_turn_180_L, 1.0, true),
-	# loco strafe
-	# AnimationData.new(A.combat_walk_f, 1.1),
-	# AnimationData.new(A.combat_walk_b, 1.1),
-	AnimationData.new(A.strafe.combat_run_f, 1.0),
-	AnimationData.new(A.strafe.combat_run_b, 1.0),
-	AnimationData.new(A.strafe.strafe_R, 0.8),
-	AnimationData.new(A.strafe.strafe_L, 0.8),
-
-	## dodge
-	AnimationData.new(A.dodge.dodge_R),
-	AnimationData.new(A.dodge.dodge_L),
-	AnimationData.new(A.dodge.dodge_F),
-	AnimationData.new(A.dodge.dodge_B),
-
-	# air
-	AnimationData.new(A.air.midair),
-	AnimationData.new(A.air.jump_sprint, 0.8),
-	AnimationData.new(A.air.landing_sprint, 0.9),
-	AnimationData.new(A.air.jump_idle),
-
-
-	#
-	AnimationData.new(A.roll),
-	#
-	AnimationData.new(A.death),
-
-	## fight
-	# fight attacks
-	AnimationData.new(A.attack.axe_slice_1),
-	AnimationData.new(A.attack.axe_slice_2, 0.85),
-	AnimationData.new(A.attack.attack_from_run),
-	# 
-	AnimationData.new(A.combat.hit_reaction),
-	AnimationData.new(A.combat.staggered),
-	AnimationData.new(A.combat.parry),
-	AnimationData.new(A.combat.parried),
-	AnimationData.new(A.combat.riposte_attack),
-	AnimationData.new(A.combat.idle_longsword),
-]
-
-var _anim_by_name := {}
+var _anim_by_id := {}
 
 
 ## MAIN INTERFACE
-func get_by_name(anim_name: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_name, anim_name, "AnimationContainer.get_by_name")
+func get_by_anim_id(anim_id: String) -> AnimationData:
+	return u.safe_get_dict_key(_anim_by_id, anim_id, "AnimationContainer.get_by_anim_id")
+
 
 ## native_player - player's player, se's player, etc
-func _accept_animations(native_player: AnimationPlayer) -> void:
+func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
 		if not native_player.has_animation(anim.anim_id):
@@ -94,20 +43,16 @@ func _accept_animations(native_player: AnimationPlayer) -> void:
 		# Build the track cache for this animation
 		anim._track_path_to_idx = __build_track_cache(anim.native_anim)
 
-		_anim_by_name[anim.anim_id] = anim
-
-
-	# TODO: for double action. It should not play it at all
-	_anim_by_name[A.fake_anim] = _anim_by_name[A.air.midair]
+		_anim_by_id[anim.anim_id] = anim
 
 
 	# VALIDATION
 	var invalid_animations := []
-	for anim in _anim_by_name.values():
+	for anim in _anim_by_id.values():
 		if not AnimationData.__validate_anim(anim):
 			invalid_animations.append(anim.anim_name)
 		else:
-			print(anim.anim_name + " is valid")
+			print_.container("", anim.anim_name + " is valid")
 
 	if invalid_animations.size() > 0:
 		print_.warn("Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)])

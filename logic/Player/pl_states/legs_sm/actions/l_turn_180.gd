@@ -36,6 +36,8 @@ func on_enter_action(input_: InputPackage) -> void:
 			INCREASE_ROTATION = 1.1
 		Leg.Act.idle:
 			INCREASE_ROTATION = 1.0
+		_:
+			INCREASE_ROTATION = 1.0
 
 	
 func on_exit_action() -> void:
@@ -50,28 +52,27 @@ func on_exit_action() -> void:
 func update(input_: InputPackage, delta: float):
 	var SPEED_MULT := 1.0
 	if not curr_turn.turn_completed:
-		var rotation_delta := animator_manager.get_root_rotation()
+		var rotation_delta := get_animator_manager().get_root_rotation()
 		var result := pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
 	if time_spent() < TURN_180_APEX_TIME:
-		var root_vel := animator_manager.get_root_velocity()
+		var root_vel := get_animator_manager().get_root_velocity()
 		get_player().velocity = initial_rotation * root_vel
 	else:
 		# WARNING: currently turn180-> run configured in a way, that we cut right on apex.
 		# => this wont be run, but code is ready to handle this
 		SPEED_MULT = speed_curve_from_apex.update(delta)
-		prints(em.pin + "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, pm().get_curr_velocity_len())
+		__log_action(em.pin, "Life after Apex. time spent | speed mult | pl.vel.len", time_spent(), SPEED_MULT, pm().get_curr_velocity_len())
 		pm().move_with_input_vector(input_, delta, SpeedConfig.new(default_sp, SPEED_MULT))
 
 
 func animate(): # ▶️
-	blend_time = 0.2
 	## TODO: some universal system for different "sub animations" in one action
 	if curr_turn.is_turn_dir_right():
-		anim = anim_container.get_by_name(A.move.turn_180_R)
+		anim = anim_container.get_by_anim_id(A.move.turn_180_R)
 	else:
-		anim = anim_container.get_by_name(A.move.turn_180_L)
+		anim = anim_container.get_by_anim_id(A.move.turn_180_L)
 	set_anim_to_play()
 
 

@@ -3,6 +3,7 @@ class_name ra
 
 
 # MOST BASIC
+
 static func coinflip() -> bool:
 	return randi() % 2 == 1
 
@@ -15,7 +16,7 @@ static func chance(probability: float, coefficient: float = 1.0) -> bool:
 static func int_range(min_val: int, max_val: int) -> int:
 	return randi_range(min_val, max_val)
 
-## Returns random float between min and max
+## Returns random float between min and max (inclusive)
 static func float_range(min_val: float, max_val: float) -> float:
 	return randf_range(min_val, max_val)
 
@@ -64,6 +65,7 @@ static func patrol_offset(max_radius: float = 5.0) -> Vector3:
 	return Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
 
 # SOME ARRAY LOGIC
+
 ## Pick random element from array
 static func pick_random(array: Array):
 	if array.is_empty():

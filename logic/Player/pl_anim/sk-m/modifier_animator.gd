@@ -1,6 +1,6 @@
 extends SkeletonModifier3D
 ## WARNING: should not be called directly!
-## 			AnimatorManager manages all modifier animators
+## 			PlAnimatorManager manages all modifier animators
 class_name ModifierAnimator
 
 @export var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
@@ -167,7 +167,7 @@ func _update_skeleton():
 
 				# D->C blend
 				if prev_prev_blend_playback.is_blending and prev_prev_prev_playback:
-					if not print_4: print_.prefix_s(em.mark, "4 animations!", __log_blend_state())
+					# if not print_4: print_.dev(em.mark, "4 animations!", __log_blend_state())
 					print_4 = true
 					var prev_prev_prev_transform := _calculate_bone_pose(bone_idx, prev_prev_prev_playback) # Pose for D
 					# calculate D->C blend first
@@ -200,7 +200,7 @@ func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
 		
 	var bone_pos_track := playback.anim.get_pos_track_idx(_track_path)
 	var bone_rot_track := playback.anim.get_rot_track_idx(_track_path)
-	var playback_eff_progress := playback.get_effective_progress()
+	var playback_eff_progress := playback.get_effective_time_spent()
 
 	if bone_pos_track != -1:
 		result_transform.origin = playback.native_anim.position_track_interpolate(bone_pos_track, playback_eff_progress)

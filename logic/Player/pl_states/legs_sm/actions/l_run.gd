@@ -17,6 +17,16 @@ var speed_from_inherited := FloatLinearInterpolator.new()
 var curr_turn: TurnData = TurnData.new()
 
 
+var _resettable = [
+	speed_mult_from_idle,
+	angular_sp_from_idle,
+	turn_sp_from_idle,
+	speed_from_turn,
+	angular_sp,
+	speed_from_inherited
+]
+
+
 func initialise():
 	default_sp.SPEED = 3.0
 	default_sp.TURN_SPEED = 2.0
@@ -24,21 +34,16 @@ func initialise():
 
 	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name_.TURN_180_APEX, 0.25)
 	
-	blend_time_by_action = {
-		Leg.Act.idle: 0.3, # 0.3 WORKED GOOD!!
+	blend_time.set_by_prev_action({
+		Leg.Act.idle: 0.3, # 0.3 works good
 		Leg.Act.sprint: 0.3,
 		Leg.Act.turn_180: turn_180_blend_time,
 		PS.Act.landing_sprint: 0.4,
 		PS.Act.dodge: 0.3
-	}
+	})
 
 func on_enter_action(input_: InputPackage):
-	speed_mult_from_idle.reset()
-	speed_from_turn.reset()
-	angular_sp.reset()
-	angular_sp_from_idle.reset()
-	turn_sp_from_idle.reset()
-
+	u.reset_all(_resettable)
 
 	var _inherited_speed := pm().get_curr_velocity_len()
 	speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, accel_from_idle_time)
@@ -58,7 +63,7 @@ func on_enter_action(input_: InputPackage):
 			angular_sp.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.5)
 
 func on_exit_action():
-	animator_manager.reset_global_speed_scale()
+	get_animator_manager().reset_global_speed_scale()
 
 
 func update(input_: InputPackage, delta: float):
@@ -83,9 +88,9 @@ func update(input_: InputPackage, delta: float):
 
 	var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
 	speed_config.tie_turn_sp_to_speed(0.6)
-	pm().process_input_vector(input_, delta, speed_config)
+	pm().move_rotate_with_input_vector(input_, delta, speed_config)
 
-	animator_manager.set_global_speed_scale(pm().get_curr_velocity_len() / CURR_SPEED)
+	get_animator_manager().set_global_speed_scale(pm().get_curr_velocity_len() / CURR_SPEED)
 
 
 var _next_anim_correction := 0.08
@@ -93,20 +98,19 @@ var __start_time_offset_dev := 0.0
 
 
 func animate(): # ▶️
-	blend_time = blend_time_by_action.get(PREV_ACTION, default_blend_time)
-	start_time_offset = default_start_time_offset
+	var custom_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
 
 	match PREV_ACTION:
 		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
-			start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
+			custom_start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:
-			start_time_offset = __start_time_offset_dev # sync with idle where left leg forward
+			custom_start_time_offset = __start_time_offset_dev # sync with idle where left leg forward
 		Leg.Act.sprint:
 			var r := sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
-				start_time_offset = r
+				custom_start_time_offset = r
 			
-	set_anim_to_play()
+	set_anim_to_play(-1, custom_start_time_offset)
 
 
 var _dev_add_blend := 0.0
@@ -136,7 +140,7 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 	# else:
 		
 # func _complete_root_turn(CURR_SPEED):
-# 	var rotation_delta := animator_manager.get_prev_root_rotation()
+# 	var rotation_delta := get_animator_manager().get_prev_root_rotation()
 # 	var result := pm().apply_root_rotation(rotation_delta, curr_turn.target_angle, curr_turn.accum_rotation, true)
 # 	curr_turn.update(result.completed, result.accum_rot)
 

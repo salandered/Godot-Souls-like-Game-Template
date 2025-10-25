@@ -42,7 +42,7 @@ func _ready():
 	weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
 
 	if not weapon_visuals:
-		print(pp.s(em.pin, "Note: Weapon", pp.in_q(weapon_name), "has no visuals"))
+		print_.note(pp.s(em.pin, "Note: Weapon", pp.in_q(weapon_name), "has no visuals"))
 
 	assert(weapon_hurt_box is Area3D, "Weapon is missing an Area3D node named 'WeaponArea'.")
 	assert(weapon_hurt_box.get_child(0), "The 'WeaponArea' must have a CollisionShape3D child.")

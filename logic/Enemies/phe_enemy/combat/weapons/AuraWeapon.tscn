@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://unjjnf0oxr50"]
 
-[ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/Enemies/phe_enemy/combat/weapons/halberd.gd" id="1_jc7g0"]
+[ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/Enemies/phe_enemy/combat/weapons/big_pinga_blade.gd" id="1_jc7g0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sndmm"]
 radius = 5.0

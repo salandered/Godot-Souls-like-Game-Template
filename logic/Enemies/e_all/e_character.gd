@@ -1,3 +1,6 @@
+#@tool
+#@icon("res://-assets-/x_misc/x_icons/red/icon_skull.png")
+
 @abstract
 class_name BaseEnemyCharacter
 extends BaseCharacterBody3D

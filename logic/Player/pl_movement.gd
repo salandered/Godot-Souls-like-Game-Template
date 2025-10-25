@@ -3,7 +3,15 @@ class_name PlayerMovement
 
 @onready var _player: Princess = $".."
 @onready var area_awareness: AreaAwareness = %AreaAwareness
-@onready var animator_manager: AnimatorManager = %AnimatorManager
+@onready var animator_manager: PlAnimatorManager = %AnimatorManager
+
+
+## DOCS
+# region
+# - what we call 'move' is officially called 'translate' i suppose
+#   'move' might be seen to abstract but it is used in Blender3D (G key)
+# - 'rotate' for rotating player.
+# endregion
 
 
 ## GETTERS
@@ -98,7 +106,7 @@ func apply_gravity(delta, gravity: float = u.gravity):
 # region: code
 
 
-func process_input_vector(input_: InputPackage, delta: float, speed_config: SpeedConfig = null):
+func move_rotate_with_input_vector(input_: InputPackage, delta: float, speed_config: SpeedConfig = null):
 	if speed_config == null:
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(input_, delta, speed_config)
@@ -117,14 +125,6 @@ func rotate_with_input_vector(input_: InputPackage, delta: float, speed_config: 
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(input_, delta, speed_config)
 	_player.rotate_y(angle.value)
-
-
-# var _tracking_angular_speed := 2.0
-# func rotate_with_input_vector_simple(input_: InputPackage, delta: float):
-# 	var input_direction := velocity_by_input(input_, delta).normalized()
-# 	var face_direction := _player.basis.z
-# 	var angle := face_direction.signed_angle_to(input_direction, Vector3.UP)
-# 	_player.rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
 
 
 func _move_with_input_vector(angle: AllowedAngle, input_: InputPackage, delta: float, speed_config: SpeedConfig):
@@ -196,12 +196,12 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 		var is_counter_rotating := (rot_delta < 0 and remaining_angle > 0) or \
 								  (rot_delta > 0 and remaining_angle < 0)
 		if is_counter_rotating:
-			prints(u.fr(), em.pin + "counter rotation, ending turn", _log_msg)
+			print_.dev("", em.pin + "counter rotation, ending turn " + _log_msg)
 			return {"completed": true, "accum_rot": accum_rot_}
 
 	if abs(rot_delta) >= abs(remaining_angle):
 		_player.rotate_y(remaining_angle)
-		prints(u.fr(), "Turn complete .", _log_msg)
+		print_.dev("", "Turn complete. " + _log_msg)
 		return {"completed": true, "accum_rot": target_angle_}
 	else:
 		_player.rotate_y(rot_delta)
@@ -322,7 +322,7 @@ func __angle_between_player_and_input(input_: InputPackage, delta: float, __log:
 	var face_dir := _player.basis.z
 	var input_dir := __velocity_by_input(input_, delta).normalized()
 	var angle := face_dir.signed_angle_to(input_dir, Vector3.UP)
-	# if __log: print_.prefix_s("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
+	# if __log: print_.dev("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
 	return angle
 
 

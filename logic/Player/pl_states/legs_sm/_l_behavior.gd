@@ -35,10 +35,10 @@ func get_prev_action() -> BaseAction:
 	return legs_sm.player_sm.get_prev_action()
 
 
-func update(input_: InputPackage, _delta: float):
-	var verdict: LNextActionVerdict = choose_action(input_, _delta)
+func update(input_: InputPackage, delta: float):
+	var verdict: LNextActionVerdict = choose_action(input_, delta)
 	switch_action_to(verdict, input_) # yes, always. In LegsBehavior switch_action_to is smart
-	get_lsm_curr_action()._update(input_, _delta)
+	get_lsm_curr_action()._update(input_, delta)
 
 
 func _on_enter_behavior(input_: InputPackage):
@@ -54,7 +54,7 @@ func _on_enter_behavior(input_: InputPackage):
 
 ## usualy is overriden
 ## behaviors with one supported action should not override 
-func choose_action(input_, _delta) -> LNextActionVerdict:
+func choose_action(input_, delta) -> LNextActionVerdict:
 	if len(supported_actions.action_names) > 1:
 		print_.warn("default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
 	return LNextActionVerdict.new(supported_actions.action_names[0])

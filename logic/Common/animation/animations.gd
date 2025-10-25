@@ -1,8 +1,6 @@
 extends RefCounted
 class_name A
 
-# LIBS
-
 class _lib:
 	const _jump = "jumps-v2-LIB" + "/"
 	const jump_v4 = "jump-v4-LIB" + "/"
@@ -30,8 +28,6 @@ class _lib:
 
 
 # -- MOVE ANIM  NOTE: usual loco and combat loco are mixed for now
-
-const fake_anim := "fake anim"
 
 
 class move:
@@ -92,6 +88,9 @@ class attack:
 	const axe_slice_2 := _lib.all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "axe_slice_2"
 	const attack_from_run := _lib._SWS_att + "SWS-O-bit-stab"
 	
+	const sword_slash_1 := _lib._ss_attack + "B-slash-R-L-RM-1"
+	const sword_slash_2 := _lib._ss_attack + "B-slash-L-R-RM-2"
+
 
 class combat:
 	const withdraw := air.midair # _jump + "C-fall-HW" # TODO

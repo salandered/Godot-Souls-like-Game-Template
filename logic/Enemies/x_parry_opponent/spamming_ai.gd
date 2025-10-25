@@ -24,5 +24,5 @@ func create_input(delta) -> InputPackage:
 			hit_treshold -= hits_period
 		return new_enemy_input
 	else:
-		print("your enemies are not working properly")
+		# print("your enemies are not working properly")
 		return null

@@ -72,7 +72,7 @@ func _process(delta: float) -> void:
 
 
 func _toggle_camera_mode() -> void:
-	print("Toggling camera mode. Current speed: ", camera_speed)
+	print_.fancy_cam("Toggling camera mode. Current speed: ", camera_speed)
 	if visible:
 		get_tree().paused = false
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

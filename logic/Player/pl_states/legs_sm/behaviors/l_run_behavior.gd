@@ -44,12 +44,12 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -
 	if is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
 		if angle_deg > ANGLE_FOR_U_TURN_MIN:
 			next_action_name = supported_actions.by_name(Leg.Act.turn_180)
-			__log_decision_data(input_, pp.compare(">", "angle_deg", angle_deg, "", ANGLE_FOR_U_TURN_MIN), next_action_name)
+			__log_decision_data(input_, pp.compare("angle_deg", angle_deg, ">", "", ANGLE_FOR_U_TURN_MIN), next_action_name)
 		
 
 		else:
 			next_action_name = supported_actions.default_by_motion(MotionType.START)
-			__log_decision_data(input_, pp.compare("<", "angle_deg", angle_deg, "", ANGLE_FOR_U_TURN_MIN), next_action_name)
+			__log_decision_data(input_, pp.compare("angle_deg", angle_deg, "<", "", ANGLE_FOR_U_TURN_MIN), next_action_name)
 	
 	return next_action_name
 

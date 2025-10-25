@@ -18,7 +18,7 @@ static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "
 	if dict.has(key):
 		return dict[key]
 
-	var msg := pp.s("Context:", context, "\nDict does not have key", pp.in_q(key), "Dict: ", pp._dict(dict))
+	var msg := pp.s("Context:", context, "\nDict does not have key", pp.in_q(key)) # , "Dict: ", pp._dict(dict))
 	if fatal:
 		assert(false, msg)
 	print_.warn(msg)
@@ -40,12 +40,12 @@ static func safe_has_key(key: String, dict: Dictionary, soft_crucial: bool = fal
 	return exists
 
 static func safe_look_at(
-	from_who: Node3D,
-	target: Vector3,
-	up: Vector3 = Vector3.UP,
-	# by default -Z is pointed to target. built in use_model_front solves that
-	use_model_front: bool = false,
-	eps: float = 0.001
+		from_who: Node3D,
+		target: Vector3,
+		up: Vector3 = Vector3.UP,
+		# by default -Z is pointed to target. built in use_model_front solves that
+		use_model_front: bool = false,
+		eps: float = 0.001
 ) -> bool:
 	var dir := target - from_who.global_transform.origin
 	if dir.length_squared() < eps * eps:
@@ -77,7 +77,7 @@ static func _dev_change_param(
 		param += step
 
 	if prev_param != param:
-		prints("~~", param_name, prev_param, pp.arr, param)
+		print_.dev("~~ ", pp.s(param_name, prev_param, pp.arr, param), 0, LogL.FORCE_PRINT)
 	return param
 
 
@@ -93,3 +93,9 @@ static func to_pascal_case(snake_case: String) -> String:
 ## point_index starts with zero!
 static func get_curve_point_x(curve: Curve, point_index: int) -> float:
 	return curve.get_point_position(point_index).x
+
+
+static func reset_all(resettable: Array):
+	for item in resettable:
+		if item.has_method("reset"):
+			item.reset()

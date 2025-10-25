@@ -5,8 +5,9 @@ extends Node
 @onready var label_cam: Label = %label_cam
 @onready var label_state_info: Label = %LabelStateInfo
 @onready var modifier_ar: Label = %modifier_ar
+@onready var label_enemy: Label = %label_enemy
 
-@onready var player: Princess = $".."
+@onready var player: Princess = $"../.."
 
 var _visible: bool = true
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 		# label_cam,
 		label_state_info,
 		modifier_ar,
+		label_enemy
 	]
 
 
@@ -63,6 +65,11 @@ func _label_inputs():
 		 __pl().model.feelings._current_health,
 		 __pl().model.feelings._current_stamina
 		]
+	# t += "\n\n"
+	# t += "\nhealth/stamina %5.2f/%5.2f" % [
+	# 	 __pl().model.feelings._current_health,
+	# 	 __pl().model.feelings._current_stamina
+	# 	]
 	label_inputs.text = t
 
 
@@ -156,9 +163,16 @@ func __cam() -> FancyCamera:
 
 # FROM OUTSIDE THE PLAYER
 
-func _label_enemy_info(enemy: SECharacter):
-	pass
-	# var e_pos = enemy.global_position
-	# var p_pos = player.model.global_position
-	# label_state_info.text = "enemy to pl " + "%5.1f" % e_pos.distance_to(p_pos)
-	# label_state_info.text += "\n st-time %7.3f %7.3f" % [enemy.current_state.get_progress(), enemy.current_state.get_iteration_progress()]
+func _label_phe_enemy_info(enemy: PHCharacter):
+	var pl_e_dist := pp.round_01(enemy.enemy_movement.distance_to_player())
+	var pl_e_angle: String = pp.rad2deg(enemy.enemy_movement.signed_angle_to_player(), true)
+	var c_l_s := enemy.get_curr_leaf_state()
+	var _cls_name := '- no curr state - '
+	var _cls_ts := -1.0
+	if c_l_s:
+		_cls_name = c_l_s.state_name
+		_cls_ts = c_l_s.get_actual_time_spent()
+		
+
+	label_enemy.text = "PL->E   %s  %s " % [pl_e_dist, pl_e_angle]
+	label_enemy.text += "\n ST/ts  %s  %5.1f" % [_cls_name, _cls_ts]

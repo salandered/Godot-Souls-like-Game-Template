@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://mdwtc0gt416o"]
+[gd_scene load_steps=24 format=3 uid="uid://mdwtc0gt416o"]
 
-[ext_resource type="Material" uid="uid://8g6pruru41s6" path="res://-assets-/materials-shared/Poliigon_ConcreteFloorPoured_7656_1K.tres" id="1_hnne2"]
+[ext_resource type="Material" uid="uid://8g6pruru41s6" path="res://-assets-/materials-shared/Poli-ConcreteFloorPoured_7656_1K.tres" id="1_hnne2"]
 [ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/Textures/simple/texture_08.png" id="1_tv3r5"]
 [ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PrincessPack.tscn" id="2_n4uti"]
 [ext_resource type="Texture2D" uid="uid://dl5jjiun3k281" path="res://ui/themes/buttons/g5lIOlQpYb.png" id="2_sr72e"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="5_ccwh7"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_6cxb7"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Common/simple_target/SimpleTarget.tscn" id="7_hnne2"]
-[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="8_l1fmd"]
 [ext_resource type="PackedScene" uid="uid://b1utm8k7mwvh2" path="res://logic/Enemies/phe_enemy/PHEnemy.tscn" id="11_hnne2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tv3r5"]
@@ -262,10 +261,6 @@ near = 0.023
 [node name="PrincessPack" parent="." instance=ExtResource("2_n4uti")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.312599, -6.2846966)
 
-[node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_l1fmd")]
-transform = Transform3D(0.02460668, 0, 0.9996972, 0, 1, 0, -0.9996972, 0, 0.02460668, 12.109536, 7.2970533, -8.620094)
-player = NodePath("../PrincessPack")
-
 [node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_hnne2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.16633, 7.53316, -5.3474064)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.895256, 7.316541, 0)
 player = NodePath("../PrincessPack")

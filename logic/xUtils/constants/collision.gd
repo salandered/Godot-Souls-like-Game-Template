@@ -20,10 +20,3 @@ enum Mask {
 	ITEM_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL,
 	_DEV_ZERO_MASK = 0
 }
-
-# # Inspector-friendly exports
-# @export(int, FLAGS, "Player", "OtherChar", "Weapon", "Hitbox", "Item", "Env")
-# var collision_layer := Layers.PLAYER_COL
-
-# @export(int, FLAGS, "Player", "OtherChar", "Weapon", "Hitbox", "Item", "Env")
-# var collision_mask := player_col_mask

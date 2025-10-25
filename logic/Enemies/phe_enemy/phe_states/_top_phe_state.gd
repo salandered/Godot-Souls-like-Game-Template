@@ -1,11 +1,12 @@
-extends BasePHState
+extends BasePHEState
 
 
-func check_transition(_delta) -> VerdictPH:
-	return VerdictPH.new("", PHEState.life + " is never being transitioned")
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+	_reason = PHEState.life + " is never being transitioned"
+	return VerdictPH.new(_next_state, _reason)
 
 
-func choose_internal_state() -> VerdictPH:
-	var _state = PHEState.life
-	__log_phe_choose(_state, "(from root state)")
-	return VerdictPH.new(_state)
+func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+	_next_state = PHEState.life
+	_reason = _next_state + " is only internal state" + " (from top state)"
+	return VerdictPH.new(_next_state, _reason)

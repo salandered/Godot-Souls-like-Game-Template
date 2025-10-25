@@ -1,33 +1,27 @@
 @abstract
 class_name BaseAction
-extends Node
+extends ActionTimeManagement
 
 var container: PlayerStatesContainer
-var anim_container: BaseAnimationContainer
-var animator_manager: AnimatorManager
+
+
 var player_sm: PlayerSM
 
 
 var action_name: String
-var anim: AnimationData
 
 
-# anim parameters
-var start_time_offset_by_action := {}
-var blend_time_by_action := {}
+var blend_time = ActionData.BlendTime.new()
+var start_time_offset = ActionData.StartTimeOffset.new()
 
-var blend_time: float = 0.2
-var start_time_offset: float = 0.0
+## do not use this in actions. Use blend_time and start_time_offset features
+var _actual_blend_time: float
+var _actual_start_time_offset: float
 
-const default_blend_time: float = 0.2
-const default_start_time_offset: float = 0.0
 
 # 
 var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
 var motion_type: String ## see MotionType
-
-#
-var _enter_action_time: float
 
 
 ## assigned while updating current global action as the VERY FIRST operation of the action.
@@ -35,6 +29,10 @@ var _enter_action_time: float
 ## the current action (self) life cycle.
 ## => strongly recommended to use this instead of alternative ways like player_sm.get_prev_action
 var PREV_ACTION: String = ""
+
+
+func get_animator_manager() -> PlAnimatorManager:
+	return animator_manager
 
 
 func get_player() -> Princess:
@@ -52,7 +50,12 @@ func pm() -> PlayerMovement:
 @abstract func initialise() -> void
 
 
-@abstract func update(input_: InputPackage, _delta: float)
+func _update(input_: InputPackage, delta: float):
+	accumulate_time_spent(delta)
+	update(input_, delta)
+
+
+@abstract func update(input_: InputPackage, delta: float)
 
 
 func _on_enter_action(input_: InputPackage) -> void:
@@ -81,80 +84,48 @@ func _on_exit_action() -> void:
 ## to override
 func on_exit_action() -> void:
 	pass
-	
-	
+
+
 ## default implementation. Called automatically.
-## Example use cases to override: mute playing animation or using situational blend_time.
+## Example use cases to override: mute playing animation or using situational _actual_blend_time.
 ## NOTE: called AFTER the on_enter_action()
 ## TODO: DANGER: If an action mutes playing anim (not calling set_anim_to_play), 
 ## TM like time_spent() would stuck and return final values from the previous actions.
 ## Such animations should work with functions like get_real_time_spent or not work with the TM at all.
 func animate(): # ▶️
-	# if action set some specific value, we should not override it using dict, which would probably result in default
-	if blend_time == default_blend_time:
-		blend_time = blend_time_by_action.get(PREV_ACTION, default_blend_time)
-	if start_time_offset == default_start_time_offset:
-		start_time_offset = start_time_offset_by_action.get(PREV_ACTION, default_start_time_offset)
-	
-	set_anim_to_play()
+	set_anim_to_play() # seems like we dont need animate/set_anim_to_play separation anymore
+
 
 ## strongly recommended to use from overriden animate()
-func set_anim_to_play():
+func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_offset: float = -1.0) -> void:
+	_actual_blend_time = blend_time.calculate_actual(PREV_ACTION)
+	if override_blend_time != -1.0:
+		_actual_blend_time = override_blend_time
+	_actual_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	if override_start_time_offset != -1.0:
+		_actual_start_time_offset = override_start_time_offset
+		
 	__log_anim()
-	animator_manager.set_anim_to_play(anim.anim_id, blend_time, start_time_offset)
+	get_animator_manager().set_anim_to_play(anim.anim_id, _actual_blend_time, _actual_start_time_offset)
+	# _actual_blend_time = default_blend_time
+	# _actual_start_time_offset = default_start_time_offset
 
 # endregion
 
 
-# region: TIME MANAGEMENT (TM)
-
-func mark_enter_action() -> void:
-	_enter_action_time = Time.get_unix_time_from_system()
-
-
-## needs mark_enter_action to be set beforehand
-func get_real_time_spent() -> float:
-	var now := Time.get_unix_time_from_system()
-	return now - _enter_action_time
-
-
-func _effective_duration() -> float:
-	return animator_manager.get_curr_anim_effective_duration()
-
-
-## Use this for comparison with absolute data (native anim timings). 
-## Usually it's a work with the markers.
-## Accounts for all speed scales 
-## May start with start offsets
-func effective_time_spent() -> float: # ✔️
-	return animator_manager.get_current_anim_effective_progress()
-
-
-## Use this for working with relative data (animator's timeline).
-## Example: working with blend times.
-## Time_spent starts with 0.
-## Accounts for all speed scales 
-func time_spent() -> float: # ✔️
-	return animator_manager.get_curr_anim_time_spent()
-
-
-## NOTE: in case of looping animations returns big number
-func time_remaining() -> float: # ✔️
-	if anim.is_looping:
-		return Constants.BIG_MEANINGLESS_NUMBER
-	return _effective_duration() - time_spent() # or: duration - eff time spent
-
+# region: SPECIFIC TIME MANAGEMENT (TM)
 
 ## Like time_remaining(), but takes into account the blend time of the next state.
 ## It would be needed for a smooth switch.
 ## NOTE: makes no sense for looping animations => unsupported
-## WARNING TODO: does not account for speed scaling
+## NOTE: less important after modifier started to support multiple blends
+## WARNING: does not account for speed scaling
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 	if anim.is_looping:
 		print_.warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
 		return Constants.BIG_MEANINGLESS_NUMBER
 	var action := container.l_action_by_name(next_action_name)
-	var _blend_time: float = action.blend_time_by_action.get(action_name, action.default_blend_time)
+	var _blend_time: float = action.blend_time.calculate_actual(action_name)
 	return max(time_remaining() - _blend_time, 0.0)
 
 
@@ -164,55 +135,7 @@ func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 ## Reason: C to B blend would be interrupted by B to A.
 ## Note: using actual blend duration from manager is better than rely on current action's data or desires.
 func till_blend_completes() -> float:
-	return max(animator_manager.get_curr_blend_duration() - time_spent(), 0.0)
-
-
-func works_longer_than(time: float) -> bool:
-	if time == -1: return __reject()
-	if time_spent() >= time:
-		return true
-	return false
-
-
-func works_less_than(time: float) -> bool:
-	if time == -1: return __reject()
-	if time_spent() < time:
-		return true
-	return false
-
-
-func works_between(start: float, finish: float) -> bool:
-	if start == -1 or finish == -1: return __reject()
-	if time_spent() >= start and time_spent() <= finish:
-		return true
-	return false
-
-
-func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
-	var marker_time := anim.get_marker_time_by_name(marker_name)
-	if marker_time == -1:
-		print_.warn("passed_marker - no time - will return false", true)
-		return __reject()
-
-	if effective_time_spent() >= marker_time + add_time:
-		return true
-	return false
-
-
-func before_marker(marker_name: String) -> bool:
-	var marker_time := anim.get_marker_time_by_name(marker_name)
-	if marker_time == -1:
-		print_.warn("before_marker - no time - will return false", true)
-		return __reject()
-
-	if effective_time_spent() < marker_time:
-		return true
-	return false
-
-
-func __reject() -> bool:
-	print_.warn("TM rejected -1!")
-	return false
+	return max(get_animator_manager().get_curr_blend_duration() - time_spent(), 0.0)
 
 # endregion
 
@@ -248,4 +171,4 @@ func tracks_input_vector() -> bool:
 
 
 func __log_anim():
-	print_.any_action_anim(action_name, anim.anim_name, blend_time, start_time_offset, PREV_ACTION)
+	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)

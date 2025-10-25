@@ -36,7 +36,7 @@ func set_current_action(new_action: LegsAction):
 	var __old_prev_name := _prev_action.action_name
 	_prev_action = _current_action
 	_current_action = new_action
-	# print_.prefix("[]", pp.s("curr ->", _current_action.action_name,
+	# print_.dev("[]", pp.s("curr ->", _current_action.action_name,
 		# "| prev ->", _prev_action.action_name, pp.in_br("from " + __old_prev_name)), 20)
 
 

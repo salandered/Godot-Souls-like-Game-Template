@@ -14,9 +14,9 @@ var _input_action_to_state: Dictionary = {} # input actions to states
 func translate_combat_input_to_state(combat_actions: Array) -> Array:
 	var _translated = []
 	
-	for act in combat_actions:
-		if u.safe_has_key(act, _input_action_to_state):
-			_translated.append(_input_action_to_state[act])
+	for input_action in combat_actions:
+		if u.safe_has_key(input_action, _input_action_to_state):
+			_translated.append(_input_action_to_state[input_action])
 
 	if not combat_actions.is_empty() and _translated.is_empty():
 		print_.warn(pp.s("BaseWeapon", weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))

@@ -53,7 +53,7 @@ func detect_strafe_dir() -> Direction.Dir:
 	if reverse_data.is_reversed():
 		var _target_dir := reverse_data.target_dir
 		var target_dir := Direction.from_vector(_target_dir)
-		# print_.prefix("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, Direction.name_(target_dir)))
+		# print_.dev("detect_strafe_dir", pp.s("reverse is true, orig target dir / result", _target_dir, Direction.name_(target_dir)))
 		return target_dir
 		
 	if abs(orbit_input) < 0.01: # Pure Forward/Backward (no strafe input)

@@ -16,12 +16,12 @@ const parried := "parried"
 const riposte := "riposte"
 
 ## attacks
-const longsword_1 := "longsword_1"
-const longsword_2 := "longsword_2"
-
 const axe_slice_1 := "axe_slice_1"
 const axe_slice_2 := "axe_slice_2"
 const attack_from_run := "attack_from_run"
+
+const sword_slash_1 := "sword_slash_1"
+const sword_slash_2 := "sword_slash_2"
 
 # move
 # TODO const walk := "test/walk"
@@ -50,13 +50,14 @@ class Act:
 	const shield_throw_reload := "pla_shield_throw_reload🖊️"
 	
 	## attacks
-	const longsword_1 := "pla_longsword_1🗡"
-	const longsword_2 := "pla_longsword_2🗡"
 	const axe_slice_1 := "pla_axe_slice_1🗡"
 	const axe_slice_2 := "pla_axe_slice_2🗡"
 	const attack_from_run := "pla_attack_from_run🗡"
 	
+	const sword_slash_1 := "pla_sword_slash_1🗡"
+	const sword_slash_2 := "pla_sword_slash_2🗡"
 
+	# 
 	const block := "pla_block🖊️"
 	const block_reaction := "pla_block_reaction🖊️"
 	const pushback := "pla_pushback🖊️"

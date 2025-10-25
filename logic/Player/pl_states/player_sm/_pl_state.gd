@@ -19,7 +19,7 @@ var _player: Princess
 var combat: PlayerCombat
 var area_awareness: AreaAwareness
 var anim_container: BaseAnimationContainer
-var animator_manager: AnimatorManager
+var animator_manager: PlAnimatorManager
 var feelings: PlayerFeelings
 var container: PlayerStatesContainer
 
@@ -142,7 +142,7 @@ func _update(input_: InputPackage, delta: float):
 	_time_spent += delta
 	_update_feelings(delta)
 	legs_sm.current_behavior.update(input_, delta)
-	curr_state_action.update(input_, delta)
+	curr_state_action._update(input_, delta)
 	update(input_, delta)
 
 
@@ -151,7 +151,7 @@ func _update_feelings(delta):
 
 
 ## to override
-func update(input_: InputPackage, _delta: float):
+func update(input_: InputPackage, delta: float):
 	pass
 
 

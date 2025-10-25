@@ -13,16 +13,16 @@ var player: Princess
 @onready var combat: PlayerCombat = %Combat
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var anim_container: AnimationContainer = %AnimContainer
-@onready var animator_manager: AnimatorManager = %AnimatorManager
+@onready var animator_manager: PlAnimatorManager = %AnimatorManager
 
 
-func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer.ActionData]:
-	var result: Array[StatesContainer.ActionData] = []
-	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
+func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer._ActionData]:
+	var result: Array[StatesContainer._ActionData] = []
+	for action_data: StatesContainer._ActionData in states_container.pl_action_data_list:
 		if action_data.state_name == state:
 			result.append(action_data)
 
-	for action_data: StatesContainer.ActionData in states_container.node_to_pl_action.values():
+	for action_data: StatesContainer._ActionData in states_container.node_to_pl_action.values():
 		if action_data.state_name == state:
 			result.append(action_data)
 	return result
@@ -39,7 +39,7 @@ var _leg_actions: Dictionary # { Node name : LegsAction }
 
 func state_by_name(state_name: String) -> PlayerState:
 	# if not _states.has(state_name):
-	# 	print_.prefix("ERROR =PSContainer=", "state_by_name: " + state_name + " not found")
+	# 	print_.dev("ERROR =PSContainer=", "state_by_name: " + state_name + " not found")
 	# 	push_error("ERROR =PSContainer= state_by_name: " + state_name + " not found")
 	# 	return _states[PS.run]
 	assert(_states.has(state_name), "_states dict doesn't have " + state_name)
@@ -89,9 +89,9 @@ func _initialise_legs_actions():
 func _accept_player_states() -> void:
 	var states_container := StatesContainer.new()
 
-	for child: PlayerState in get_descendants.player_states_by_type(player_sm, "PlayerState"):
+	for child: PlayerState in get_descendants.player_states(player_sm):
 		print_.container("", "child.get_name() " + child.get_name())
-		var state_data: StatesContainer.StateData = states_container.node_to_pl_state_data.get(child.get_name())
+		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.get_name())
 		# assert(state_data, "StateData for " + child.get_name() + " not found")
 		if not state_data:
 			push_error("No state data found for: " + child.get_name())
@@ -144,7 +144,7 @@ func _accept_player_states() -> void:
 
 	print_.container("", "===========  Accepted states ===========")
 	print_.container("", str(_states))
-	print("")
+	print_.container("", "")
 
 
 func _sort_combos_by_priority(combos: Array) -> Array:
@@ -157,12 +157,12 @@ func _sort_combos_by_priority(combos: Array) -> Array:
 func _accept_player_actions():
 	var states_container := StatesContainer.new()
 	
-	for child: PlayerAction in get_descendants.player_states_by_type(player_sm, "PlayerAction"):
+	for child: PlayerAction in get_descendants.player_actions(player_sm):
 		print_.container("pl_act", "child.get_name() " + child.get_name())
-		var action_data: StatesContainer.ActionData = states_container.node_to_pl_action.get(child.get_name())
+		var action_data: StatesContainer._ActionData = states_container.node_to_pl_action.get(child.get_name())
 		__add_action_data(action_data, child)
 
-	for action_data: StatesContainer.ActionData in states_container.pl_action_data_list:
+	for action_data: StatesContainer._ActionData in states_container.pl_action_data_list:
 		var node_name := u.to_pascal_case(action_data.action_name)
 		print_.container("pl_act", "Creating action: " + action_data.action_name)
 		var child := PlayerAction.new()
@@ -172,9 +172,9 @@ func _accept_player_actions():
 	
 	print_.container("pl_act", "===========  Accepted actions ===========")
 	print_.container("pl_act", str(_player_actions))
-	print("pl_act")
+	print_.container("", "")
 
-func __add_action_data(action_data: StatesContainer.ActionData, child):
+func __add_action_data(action_data: StatesContainer._ActionData, child):
 	_player_actions[action_data.action_name] = child
 	
 	# base action
@@ -185,7 +185,7 @@ func __add_action_data(action_data: StatesContainer.ActionData, child):
 	child.player_sm = player_sm
 	
 	# specific 
-	var anim := anim_container.get_by_name(action_data.anim_id)
+	var anim := anim_container.get_by_anim_id(action_data.anim_id)
 	assert(anim, "no anim with " + action_data.anim_id)
 	child.anim = anim
 	child.action_name = action_data.action_name
@@ -196,9 +196,9 @@ func __add_action_data(action_data: StatesContainer.ActionData, child):
 
 func _accept_legs_behaviors():
 	var leg_beh_container := LegBehaviorContainer.new()
-	for child: LegsBehavior in get_descendants.player_states_by_type(legs_sm, "LegsBehavior"):
+	for child: LegsBehavior in get_descendants.legs_behaviors(legs_sm):
 		print_.container("", "node.get_name() " + child.get_name())
-		var behavior_data: LegBehaviorContainer.BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
+		var behavior_data: LegBehaviorContainer._BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
 		if not behavior_data:
 			push_error("No behavior data found for: " + child.get_name())
 			continue
@@ -220,9 +220,9 @@ func _accept_legs_behaviors():
 
 func _accept_legs_actions():
 	var leg_beh_container := LegBehaviorContainer.new()
-	for child: LegsAction in get_descendants.player_states_by_type(legs_sm, "LegsAction"):
+	for child: LegsAction in get_descendants.legs_actions(legs_sm):
 		print_.container("", "node.get_name() " + child.get_name())
-		var action_data: LegBehaviorContainer.ActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
+		var action_data: LegBehaviorContainer._ActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
 		if not action_data:
 			print_.warn("No action data found for: " + child.get_name() + " Will be skipped")
 			continue
@@ -238,7 +238,7 @@ func _accept_legs_actions():
 		
 
 		# specific
-		var anim := anim_container.get_by_name(action_data.anim_id)
+		var anim := anim_container.get_by_anim_id(action_data.anim_id)
 		child.anim = anim
 		child.action_name = action_data.action_name
 		child.motion_type = action_data.motion_type

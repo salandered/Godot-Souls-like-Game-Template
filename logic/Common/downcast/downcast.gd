@@ -6,11 +6,11 @@ extends RayCast3D
 
 
 ## TROUBLESHOOTING: 
-##  - attachment should be bone like Hips and correctly identified
+##  - attachment should be bone like Hips or Root and correctly identified
 ##  - after changing Skeleton, bone attachments could bug without reassigning their bones.
 ##  - for 'Debug Shape' Debug visual options should be checked
-##  - if attachment is root, it's better be a bit higher than root. 
-##    Otherwise we can sink though the floor
+##  - if attachment is Root, it's better be a bit higher than it. 
+##    (otherwise we can sink though the floor)
 
 func _ready():
 	collision_mask = Collision.Layers.ENVIRONMENT_COL

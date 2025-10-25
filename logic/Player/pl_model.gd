@@ -15,7 +15,7 @@ class_name PlayerModel
 
 @onready var native_player: AnimationPlayer = %NativeAnimator
 @onready var anim_container: AnimationContainer = %AnimContainer
-@onready var animator_manager: AnimatorManager = %AnimatorManager
+@onready var animator_manager: PlAnimatorManager = %AnimatorManager
 
 var active_weapon: BaseWeapon
 
@@ -24,7 +24,8 @@ func _ready():
 	container.player = _player
 	player_sm._player = _player
 	
-	anim_container._accept_animations(native_player) # NOTE: should be before accepting states!
+	var _pl_anim_container := PlAnimList.new()
+	anim_container._accept_animations(_pl_anim_container.list_of_animations, native_player) # NOTE: should be before accepting states!
 	container.accept_all()
 	
 	player_sm.initialise()
@@ -78,7 +79,7 @@ func __toggle_fly_mode():
 	fly_mode_enabled = !fly_mode_enabled
 	if fly_mode_enabled:
 		_player.velocity = Vector3.ZERO
-	print("*** Fly mode: ", fly_mode_enabled)
+	print_.dev("*** Fly mode: ", fly_mode_enabled)
 
 
 func _reload_run_anims_from_library() -> void:

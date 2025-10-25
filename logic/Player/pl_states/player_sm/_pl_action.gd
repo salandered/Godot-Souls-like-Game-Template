@@ -8,7 +8,7 @@ func initialise() -> void:
 
 
 # not abstract
-func update(input_: InputPackage, _delta: float):
+func update(input_: InputPackage, delta: float):
 	pass
 
 

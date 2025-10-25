@@ -33,5 +33,5 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("t5"):
-		print("Debug path cleared.")
+		print_.dev("Debug path cleared.")
 		path_points.clear()

@@ -17,10 +17,9 @@ func _ready():
 	
 	area_entered.connect(on_contact)
 	
-	print("--- Hitbox_ ready ---")
-	print(holder, holder.get_path())
-	print(ignored_weapon_groups)
-	print_.collisions(self, 0, true, LogL.NOTSET)
+	print_.h_box("", "--- Hitbox_ ready ---")
+	print_.h_box("", "ignored_weapon_groups " + str(ignored_weapon_groups))
+	# print_.collisions(self, 0, true, LogL.NOTSET)
 
 
 func on_contact(area: Node3D):
@@ -64,7 +63,7 @@ func _is_weapon_mine(weapon: BaseWeapon) -> bool:
 # If our weapon was inside an enemy when our attack started, we could never connect. 
 # Now `Hurtbox` works as expected and logs all intersections.
 #  		- example: our weapon was inside an enemy when our attack started, we could never connect
-# func _physics_process(_delta):
+# func _physics_process(delta):
 # 	if has_overlapping_areas():
 # 		for area in get_overlapping_areas():
 # 			on_area_contact(area)

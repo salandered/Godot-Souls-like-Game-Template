@@ -19,7 +19,7 @@ script = ExtResource("1_mxpn8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799408, 0)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="LookAt"]
-transform = Transform3D(0.7946862, 0, 0, 0, 0.256377, 0, 0, 0, 0.3581005, 0, 0, 0)
+transform = Transform3D(0.37062925, 0, 0, 0, 0.256377, 0, 0, 0, 0.3581005, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_c4ijc")
 
 [node name="TargetMarker" type="Node3D" parent="."]

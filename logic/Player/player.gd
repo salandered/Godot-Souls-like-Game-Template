@@ -28,14 +28,14 @@ func _ready() -> void:
 	visuals.accept_model_data(model)
 
 	debug_cams = get_tree().get_nodes_in_group("debug_cameras")
-	print_.prefix("dbg", str(debug_cams))
+	print_.dev("dbg", str(debug_cams))
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
-	print_.prefix("dbg", "cam_i: " + str(cam_i))
+	print_.dev("dbg", "cam_i: " + str(cam_i))
 	
 	model.active_weapon = smith_sword
 
-# func _process(_delta) -> void:
+# func _process(delta) -> void:
 # 	dev_labels._label_player_info()
 
 func get_current_state() -> PlayerState:
@@ -65,19 +65,19 @@ func _process(delta) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_cycle_cam"):
 		cam_i = (cam_i + 1) % debug_cams.size()
-		print_.prefix("dbg", "cam_i: " + str(cam_i))
+		print_.dev("dbg", "cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 
 	elif event.is_action_pressed("dev_cycle_cam_prev"):
 		cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
-		print_.prefix("dbg", "cam_i: " + str(cam_i))
+		print_.dev("dbg", "cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 
 	if event.is_action_pressed("debug_unstuck"):
 		global_position.y += 1.5
-		print_.prefix("dbg", "Unstuck: moved player up by 1.5 units")
+		print_.dev("dbg", "Unstuck: moved player up by 1.5 units")
 
 
 	if event.is_action_pressed("dev_cols"):

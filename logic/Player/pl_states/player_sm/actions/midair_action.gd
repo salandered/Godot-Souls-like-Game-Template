@@ -5,9 +5,9 @@ var jump_direction: Vector3 = Vector3.ZERO
 
 
 func initialise() -> void:
-	blend_time_by_action = {
+	blend_time.set_by_prev_action({
 		PS.Act.jump_sprint: 0.5
-	}
+	})
 
 func on_enter_action(input_: InputPackage) -> void:
 		# the clamp construction:

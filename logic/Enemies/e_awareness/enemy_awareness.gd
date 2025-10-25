@@ -6,24 +6,25 @@ class_name EnemyAwareness
 
 @export var sight_mask: int = Collision.Layers.ENVIRONMENT_COL | Collision.Layers.PLAYER_COL
 
-var me: SECharacter
+var me: BaseEnemyCharacter
 
+## expects downcast as a child
 @onready var downcast = $Downcast as RayCast3D
 
 @export var debug_sight_cone: bool = true
-var sight_cone_visual: MeshInstance3D
-var conus_color := Color(1, 0.5, 1, 0.25)
 
 
 func initialise():
 	if debug_sight_cone:
 		__create_sight_cone_visual()
 
+
 func detect_player() -> Detection:
 	var seen = can_see_player()
 	var heard = can_hear_player()
 	var dist = me.global_position.distance_to(me.player.global_position)
 	return Detection.new(seen, heard, dist)
+
 
 func can_see_player() -> bool:
 	var player = me.player
@@ -43,14 +44,17 @@ func can_see_player() -> bool:
 		return false
 	return true
 
+
 func can_hear_player() -> bool:
-	# TODO: add calm player states. or better yet calm attribute of player states
+	# TODO: add calm attribute of player states
 	return me.global_position.distance_to(me.player.global_position) <= me.hearing_distance
+
 
 func get_floor_distance() -> float:
 	if downcast.is_colliding():
 		return downcast.global_position.distance_to(downcast.get_collision_point())
 	return 999999
+
 
 func _is_in_sight_cone(target_position: Vector3) -> bool:
 	var forward = me.global_transform.basis.z
@@ -61,6 +65,7 @@ func _is_in_sight_cone(target_position: Vector3) -> bool:
 	to_target = to_target.normalized()
 	var half_fov = deg_to_rad(me.sight_angle_degrees * 0.5)
 	return forward.dot(to_target) >= cos(half_fov)
+
 
 func _is_sight_blocked(from_pos: Vector3, to_pos: Vector3) -> bool:
 	var query = PhysicsRayQueryParameters3D.new()
@@ -74,21 +79,31 @@ func _is_sight_blocked(from_pos: Vector3, to_pos: Vector3) -> bool:
 		return false
 	return hit.collider != me.player
 
+
+## DEV
+# region: code
+
+var sight_cone_visual: MeshInstance3D
+var conus_color := Color(1, 0.5, 1, 0.25)
+
+
 func __create_sight_cone_visual():
 	sight_cone_visual = MeshInstance3D.new()
 	add_child(sight_cone_visual)
 	sight_cone_visual.position = Vector3.UP * 1.5
-	sight_cone_visual.material_override = _make_sight_material()
-	_update_sight_cone_mesh()
+	sight_cone_visual.material_override = __make_sight_material()
+	__update_sight_cone_mesh()
 
-func _make_sight_material() -> StandardMaterial3D:
+
+func __make_sight_material() -> StandardMaterial3D:
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = conus_color
 	mat.flags_transparent = true
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	return mat
 
-func _update_sight_cone_mesh():
+
+func __update_sight_cone_mesh():
 	var mesh = ImmediateMesh.new()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	var half_angle = deg_to_rad(me.sight_angle_degrees * 0.5)
@@ -103,3 +118,5 @@ func _update_sight_cone_mesh():
 		mesh.surface_add_vertex(p2)
 	mesh.surface_end()
 	sight_cone_visual.mesh = mesh
+
+# endregion

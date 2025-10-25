@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bco760cyuo8em"]
+[gd_scene load_steps=29 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://b8sj75wbb08k4" path="res://-assets-/x_misc/flicker_omni.tscn" id="2_dnvo4"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Common/simple_target/SimpleTarget.tscn" id="10_2mukc"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/pause_menu_controller.gd" id="10_ifnij"]
-[ext_resource type="PackedScene" uid="uid://cpr2otl56mflk" path="res://logic/Enemies/SimpleEnemy/SimpleEnemy.tscn" id="10_j4sqn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
 albedo_color = Color(0.21579322, 0.17943612, 0.15248129, 1)
@@ -379,10 +378,6 @@ size = Vector3(1, 1, 1.35938)
 
 [node name="PrincessPack" parent="." instance=ExtResource("9_ol10w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -417.4566, -10.553876, -70.595184)
-
-[node name="SimpleEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_j4sqn")]
-transform = Transform3D(0.8893205, 0, -0.45728427, 0, 1, 0, 0.45728427, 0, 0.8893205, -422.42648, -9.533049, -53.735134)
-player = NodePath("../PrincessPack")
 
 [node name="🎯 _TARGET_ARENA" type="Node3D" parent="."]
 

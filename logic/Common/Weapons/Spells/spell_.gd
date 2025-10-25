@@ -23,7 +23,7 @@ func _ready():
 	# spell_name = "Spell of " + caster.name
 
 func get_hit_data() -> SpellHitData:
-	print("someone tries to get hit by default Spell")
+	# print("someone tries to get hit by default Spell")
 	return SpellHitData.blank()
 
 

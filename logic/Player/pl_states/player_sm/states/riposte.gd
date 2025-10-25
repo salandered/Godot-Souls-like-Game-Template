@@ -3,7 +3,7 @@ extends PlayerState
 var hit_damage = 100
 
 
-func update(input_: InputPackage, _delta):
+func update(input_: InputPackage, delta):
 	if curr_state_action.works_between(2.2, 3.6): # turn into parameter
 		get_player().model.active_weapon.is_attacking = true
 	else:

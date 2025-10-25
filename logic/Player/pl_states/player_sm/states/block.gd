@@ -21,7 +21,7 @@ func react_on_hit(hit: HitData):
 
 	# if hit comes from shielded side, block: pay stamina instead of health
 	if face_direction.angle_to(hit_direction) < block_sector / 2:
-		print(" ~~~ blocked a hit")
+		print_.fight("", " ~~~ blocked a hit")
 		# resources.pay_block_cost(hit.damage, block_coefficient)
 		try_set_force_state("block_reaction")
 	else:
@@ -29,16 +29,16 @@ func react_on_hit(hit: HitData):
 		super.react_on_hit(hit)
 
 
-# func update_resources(_delta: float):
+# func update_resources(delta: float):
 # 	pass # normally would be some routine, but we only regenerate stamina now, so empty method
 
 # func _animate():
 # 	animator_set = "full_body_torso"
-# 	print_.prefix("SKM", "block animate '" + animator_set + "' animation " + animation + "| settings_switch_time " + str(settings_switch_time))
+# 	print_.dev("SKM", "block animate '" + animator_set + "' animation " + animation + "| settings_switch_time " + str(settings_switch_time))
 # 	if animation_settings.current_animation == animator_set:
 # 		torso_animator.play(animation, animation_blend_time)
-# 		# animator_manager.play(animation, animation_blend_time)
+# 		# get_animator_manager().play(animation, animation_blend_time)
 # 	else:
 # 		torso_animator.play(animation, 0)
-# 		animator_manager.play(animation, 0)
+# 		get_animator_manager().play(animation, 0)
 # 	# animation_settings.play(animator_set, settings_switch_time)

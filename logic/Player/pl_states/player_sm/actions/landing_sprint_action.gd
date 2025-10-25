@@ -5,13 +5,13 @@ var is_landed := false
 
 
 func initialise() -> void:
-	start_time_offset = anim.get_marker_time_by_name(Marker.Name_.LAND_START, default_start_time_offset)
+	start_time_offset.set_specific(anim.get_marker_time_by_name(Marker.Name_.LAND_START, 0.05))
 
 	default_sp.ANGULAR_SPEED = 2.0
 
-	blend_time_by_action = {
+	blend_time.set_by_prev_action({
 		PS.Act.midair: 0.3
-	}
+	})
 
 
 func on_enter_action(input_: InputPackage) -> void:

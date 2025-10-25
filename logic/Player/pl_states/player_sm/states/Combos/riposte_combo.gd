@@ -8,9 +8,9 @@ func is_triggered(input_: InputPackage, curr_state_name: String, curr_act: BaseA
 				"triggered_state:", state_to_trigger,
 				"current input_.actions:", input_.actions
 			))
-	print_.combo(name, "Checks only PS.longsword_1 for now")
+	print_.combo(name, "Checks only PS.axe_slice_1 for now")
 	# if input_.actions.has( current weapon light attack state code ) in future for scalability
-	if input_.actions.has(PS.longsword_1) and have_target_for_ripost():
+	if input_.actions.has(PS.axe_slice_1) and have_target_for_ripost():
 		print_.combo(name, "triggered")
 		return true
 	return false

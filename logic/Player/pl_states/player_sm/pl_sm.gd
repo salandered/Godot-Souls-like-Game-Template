@@ -7,7 +7,7 @@ class_name PlayerSM
 
 var _player: Princess
 
-@export var animator_manager: AnimatorManager
+@export var animator_manager: PlAnimatorManager
 @export var animation_settings: AnimationPlayer
 @onready var container: PlayerStatesContainer = %StatesContainer
 @onready var player_movement: PlayerMovement = %PlayerMovement
@@ -79,29 +79,29 @@ func update_current_action(next_action: BaseAction) -> String:
 	# var curr_act_name = ""
 	# if not _current_action:
 		# curr_act_name = "-none-"
-		# print_.prefix(em.pin, "no _current_action. Should happen only on start up.")
+		# print_.dev(em.pin, "no _current_action. Should happen only on start up.")
 	# else:
 	var curr_act_name := _current_action.action_name
 		
 	var next_act_name := next_action.action_name
 
 	if next_act_name == Leg.Act.double:
-		# print_.prefix("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
+		# print_.dev("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
 		return _prev_action.action_name
 	if next_act_name == PS.Act.double:
-		# print_.prefix("", "✖️ declined state double update to curr. staying with " + curr_act_name)
+		# print_.dev("", "✖️ declined state double update to curr. staying with " + curr_act_name)
 		return _prev_action.action_name
 
 	if next_act_name == curr_act_name:
-		print_.prefix(em.pin, "✖️🚸 came with the same action " + curr_act_name)
+		print_.dev(em.pin, "✖️🚸 came with the same action " + curr_act_name)
 
-	# print_.prefix("[[]]", pp.s(next_act_name, "is set for curr |",
+	# print_.dev("[[]]", pp.s(next_act_name, "is set for curr |",
 		# curr_act_name, "moved to prev"), 18)
 	
 	_prev_action = _current_action
 	_current_action = next_action
 	if _prev_action and next_act_name == _prev_action.action_name:
-		print_.prefix(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
+		print_.dev(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
 	
 	return _prev_action.action_name
 
@@ -115,7 +115,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	verdict._speak_freely()
 
 	if verdict.needs_switch():
-		print("")
+		print_.psm("", "")
 		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		
 		current_state._on_exit_state()
