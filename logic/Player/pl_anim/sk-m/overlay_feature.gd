@@ -1,49 +1,84 @@
 extends Node
 class_name OverlayFeature
 
+class OverlayConfig:
+	var weight: float
+	var fade_in: float
+	var fade_out: float
+	var speed_scale: float
+	## seconds at full weight
+	## if not set, will be calculated using anim dur, and fade in/out
+	var hold: float
+	var bone_mask: Array[int]
+
+	func _init(weight_: float = 0.5, fade_in_: float = 0.1, fade_out_: float = 0.1, speed_scale_: float = 1.0, hold_: float = -1.0, bone_mask_: Array[int] = []):
+		self.weight = weight_
+		self.fade_in = fade_in_
+		self.fade_out = fade_out_
+		self.speed_scale = speed_scale_
+		self.hold = hold_
+		self.bone_mask = bone_mask_
+
+	func _to_string() -> String:
+		return "~~~OverlayCfg[w:%.1f, in:%.1f, out:%.1f, spd:%.1f, h:%.1f]" % [weight, fade_in, fade_out, speed_scale, hold]
 
 class OverlayTiming:
 	var fade_in: float
-	var hold: float # seconds at full weight
+	var hold: float
 	var fade_out: float
+	var weight: float
 
-	func _init(fade_in_: float, hold_: float, fade_out_: float, overlay_playback_: AnimPlayback):
-		fade_in = max(fade_in_, 0.01)
-		hold = overlay_playback_.anim.duration - fade_in - fade_out_ if hold_ < 0 else hold_
-		fade_out = max(fade_out_, 0.01)
+	func _init(anim_dur_: float, overlay_config: OverlayConfig):
+		self.fade_in = max(overlay_config.fade_in, 0.01)
+		if overlay_config.hold == -1.0:
+			self.hold = anim_dur_ - overlay_config.fade_in - overlay_config.fade_out
+		else:
+			self.hold = overlay_config.hold
+		self.fade_out = max(overlay_config.fade_out, 0.01)
+		self.weight = overlay_config.weight
 
 	func get_total_duration() -> float:
 		return fade_in + hold + fade_out
 
 	func get_weight_at_time(time_spent: float) -> float:
 		if time_spent < fade_in:
-			return time_spent / fade_in
+			return (time_spent / fade_in) * weight
 		elif time_spent < fade_in + hold:
-			return 1.0
+			return weight
 		elif time_spent < get_total_duration():
-			return 1.0 - (time_spent - fade_in - hold) / fade_out
+			return weight * (1.0 - (time_spent - fade_in - hold) / fade_out)
 		else:
 			return 0.0
+	
+	func _to_string() -> String:
+		return "~~~OverlayTiming[w:%.1f, in:%.1f, hold:%.1f, out:%.1f, total:%.1f]" % [weight, fade_in, hold, fade_out, get_total_duration()]
 
-			
 var overlay_playback: AnimPlayback
 var overlay_is_active := false
 
 var overlay_weight := 0.0 # 0-1, is updated according to OverlayTiming
 var overlay_global_speed := 1.0
 
-# All timing values are now stored in this single object
+var bone_mask: Array[int] = []
+
 var timing: OverlayTiming
 
-# Plays a one-shot or looping overlay on top of whatever is currently running.
-# `over_time` governs how quickly the overlay fades in *and* back out.
+# plays a one-shot or looping overlay on top of whats currently playing.
 
-func set_overlay_anim(anim: AnimationData, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, global_speed: float = 1.0):
+func set_overlay_anim(anim: AnimationData, overlay_config: OverlayFeature.OverlayConfig):
 	overlay_playback = AnimPlayback.new(anim, 0.0, 0.0)
 	
-	timing = OverlayTiming.new(fade_in, hold, fade_out, overlay_playback)
+	var anim_duration = anim.duration
+	if anim.does_marker_exist(Marker.Name_.OVERLAY_START) and anim.does_marker_exist(Marker.Name_.OVERLAY_END):
+		var start_t = anim.get_marker_time_by_name(Marker.Name_.OVERLAY_START)
+		var end_t = anim.get_marker_time_by_name(Marker.Name_.OVERLAY_END)
+		anim_duration = end_t - start_t
+		print_.skm("~~~Overlay", pp.s("used markers for overlay anim", pp.in_q(anim.anim_name), "start:", start_t, "end:", end_t, "orig dur/new:", anim.duration, anim_duration))
+	timing = OverlayTiming.new(anim_duration, overlay_config)
 	
-	overlay_global_speed = global_speed
+	print_.skm("~~~Overlay", pp.s(timing))
+	overlay_global_speed = overlay_config.speed_scale
+	bone_mask = overlay_config.bone_mask
 	overlay_is_active = true
 	overlay_weight = 0
 
@@ -64,9 +99,14 @@ func _update_blend_values(custom_delta):
 			
 
 func apply_overlay(bone_idx: int, current_transform: Transform3D, animator: ModifierAnimator) -> Transform3D:
-	if overlay_is_active and overlay_weight > 0:
-		var overlay_transform := animator._calculate_bone_pose(bone_idx, overlay_playback)
-		current_transform = current_transform.interpolate_with(overlay_transform, overlay_weight)
+	if not overlay_is_active or overlay_weight <= 0:
+		return current_transform
+	
+	if not bone_mask.is_empty() and not bone_mask.has(bone_idx):
+		return current_transform
+
+	var overlay_transform := animator._calculate_bone_pose(bone_idx, overlay_playback)
+	current_transform = current_transform.interpolate_with(overlay_transform, overlay_weight)
 	return current_transform
 
 

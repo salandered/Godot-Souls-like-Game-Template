@@ -1,4 +1,4 @@
-extends BasePHEState
+extends BasePHELeaf
 
 
 var default_range: float = 2.5

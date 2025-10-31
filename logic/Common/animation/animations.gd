@@ -66,6 +66,8 @@ class dodge:
 	const dodge_F := _lib._dodge + "A-standing-dodge-F"
 	const dodge_B := _lib._dodge + "A-Standing-Dodge-B"
 
+	const dodge_R_head := _lib._dodge + "B-Dodging-head-R"
+	const dodge_L_head := _lib._dodge + "B-Dodging-head-L"
 
 class air:
 	# todo jump-roll A-Quick-Roll-To-Run

@@ -463,6 +463,15 @@
 				}
 			]
 		},
+		"\\b(_reason\\s*\\+?=\\s*\".*)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#82b1ddd2", // !!!!! 82ddddde
+					"fontStyle": "italic"
+				}
+			]
+		},
 		"\\b(print_\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -471,7 +480,7 @@
 				}
 			]
 		},
-		"(# region:)(.*)": {
+		"(# region)(.*)": {
 			"decorations": [
 				{
 					"color": "#eba0eb80", // Style for '# region:'

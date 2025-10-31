@@ -7,17 +7,18 @@ class _lib:
 	const _axe_all = "axe" + "/"
 	const _axe_pl = "axe-from-player" + "/"
 	const _not_axe = "BG-not-axe" + "/"
+	const _some_from_pl = "some-from-pl" + "/"
 
 
-class unsorted:
-	const big_react := _lib._axe_all + "big react"
-	const small_react := _lib._axe_all + "react small"
-	const sleep := _lib._not_axe + "sleep"
-	const awaken := _lib._not_axe + "awakening"
-	const death := _lib._not_axe + "death"
-	
+const big_react := _lib._axe_all + "big react"
+const small_react := _lib._axe_all + "react small"
+const sleep := _lib._not_axe + "sleep"
+const awaken := _lib._not_axe + "awakening"
+const death := _lib._not_axe + "death"
+
 
 class loco:
+	const dodge_b := _lib._some_from_pl + "A-Standing-Dodge-B"
 	const combat_idle := _lib._axe_pl + "L-combat-idle"
 	const walk_forward := _lib._axe_all + "unarmed walk forward"
 	const strafe_right := _lib._axe_all + "strafe R"
@@ -54,13 +55,14 @@ class legacy:
 
 var list_of_animations: Array[AnimationData] = [
 	## unsorted
-	AnimationData.new(unsorted.big_react),
-	AnimationData.new(unsorted.small_react),
-	AnimationData.new(unsorted.sleep),
-	AnimationData.new(unsorted.awaken),
-	AnimationData.new(unsorted.death),
+	AnimationData.new(big_react),
+	AnimationData.new(small_react),
+	AnimationData.new(sleep),
+	AnimationData.new(awaken),
+	AnimationData.new(death),
 	
 	## loco
+	AnimationData.new(loco.dodge_b),
 	AnimationData.new(loco.combat_idle),
 	AnimationData.new(loco.walk_forward),
 	AnimationData.new(loco.strafe_right),
@@ -68,7 +70,7 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(loco.run_forward),
 
 	## attacks
-	AnimationData.new(attack.scare_off),
+	AnimationData.new(attack.scare_off, 1.1),
 	AnimationData.new(attack.gap_closer),
 	AnimationData.new(attack.attack_360_high),
 	AnimationData.new(attack.attack_360_low),

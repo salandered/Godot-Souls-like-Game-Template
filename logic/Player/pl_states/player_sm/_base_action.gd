@@ -1,6 +1,6 @@
 @abstract
 class_name BaseAction
-extends ActionTimeManagement
+extends PlActionTimeManagement
 
 var container: PlayerStatesContainer
 
@@ -59,13 +59,13 @@ func _update(input_: InputPackage, delta: float):
 
 
 func _on_enter_action(input_: InputPackage) -> void:
+	mark_enter_state() # NOTE: used word 'state', its ok
 	PREV_ACTION = player_sm.update_current_action(self) # NOTE: very first line of curr action
 	if self is LegsAction:
 		player_sm.legs_sm.set_current_action(self) # very second line
 	elif self is PlayerAction:
 		player_sm.current_state.curr_state_action = self
 	
-	mark_enter_action()
 	on_enter_action(input_)
 	animate()
 

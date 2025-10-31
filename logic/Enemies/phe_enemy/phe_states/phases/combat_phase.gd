@@ -1,8 +1,5 @@
-extends BasePHEState
+extends BasePHEComposite
 class_name PHECombatPhase
-
-var GAP_CLOSER_RAD: float = 8.5
-var SCAREOFF_RAD: float = 1.7
 
 
 func is_ended() -> bool:
@@ -14,22 +11,24 @@ func _attack_ended() -> bool:
 	var _r: bool = true # safer to assume it's ended by default
 	match current_substate_.state_name:
 		PHEState.Leaf.gap_closer_attack, PHEState.Leaf.scare_off:
-			if current_substate_.time_remaining() > 0.2:
+			if current_substate_.time_remaining() > 0.25:
 				_r = false
 		PHEState.attack_club_series:
+			_r = current_substate_.is_ended()
+		PHEState.attack_pick_single:
 			_r = current_substate_.is_ended()
 	return _r
 
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
-	if distance_to_player() >= GAP_CLOSER_RAD:
-		_reason = "distance_to_player() > GAP_CLOSER_RAD " + str(GAP_CLOSER_RAD)
+	if dist_to_player_greater(PHEConfig.GAP_CLOSER_RAD):
+		_reason = "pl_dist_greater_than GAP_CLOSER_RAD " + str(PHEConfig.GAP_CLOSER_RAD)
 		_next_state = PHEState.Leaf.gap_closer_attack
-	elif distance_to_player() <= SCAREOFF_RAD:
-		_reason = "distance_to_player() < SCAREOFF_RAD " + str(SCAREOFF_RAD)
-		_next_state = PHEState.Leaf.scare_off
-	else:
-		_reason = pp.round_01(distance_to_player()) + " dist < gap-closer and > scare-off"
-		_next_state = PHEState.attack_club_series
+	elif dist_to_player_less(PHEConfig.SUPER_CLOSE):
+		_reason = "pl_dist_less_than SUPER_CLOSE " + str(PHEConfig.SUPER_CLOSE)
+		_next_state = ra.spick_weighted({PHEState.attack_club_series: 0.3, PHEState.Leaf.scare_off: 0.7})
 
+	else:
+		_reason = "SUPER_CLOSE < dist < GAP_CLOSER_RAD"
+		_next_state = ra.spick_weighted({PHEState.attack_club_series: 0.6, PHEState.Leaf.scare_off: 0.4})
 	return VerdictPH.new(_next_state, _reason)

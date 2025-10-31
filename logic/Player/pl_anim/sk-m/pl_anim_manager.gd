@@ -17,12 +17,12 @@ class_name PlAnimatorManager
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 
-func set_overlay_anim(anim_id: String, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0) -> void:
+func set_overlay_anim(anim_id: String, overlay_config: OverlayFeature.OverlayConfig) -> void:
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 	if anim == null:
 		push_error("Overlay anim not found: " + anim_id)
 		return
-	full_body.set_overlay_anim(anim, fade_in, hold, fade_out, local_speed)
+	full_body.set_overlay_anim(anim, overlay_config)
 
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:

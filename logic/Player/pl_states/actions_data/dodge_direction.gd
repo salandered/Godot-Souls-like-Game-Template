@@ -68,6 +68,8 @@ func set_direction_simplified(dir: Direction.Dir):
 func get_curr_dir() -> Dir:
 	return _curr_dir
 
+func is_horizontal() -> bool:
+	return _curr_dir == DodgeDirection.Dir.RIGHT or _curr_dir == DodgeDirection.Dir.LEFT
 
 func get_curr_anim_id() -> String:
 	return _dir_data[_curr_dir].anim_id

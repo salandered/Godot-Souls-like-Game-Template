@@ -183,8 +183,8 @@ func _is_good_candidate(target: Node3D) -> bool:
 func _sort_targets_by_player_distance(targets: Array) -> void:
 	targets.sort_custom(
 			func(a, b): \
-				return a.global_position.distance_to(player.global_position) \
-				< b.global_position.distance_to(player.global_position)
+				return a.global_position.distance_squared_to(player.global_position) \
+				< b.global_position.distance_squared_to(player.global_position)
 		)
 
 

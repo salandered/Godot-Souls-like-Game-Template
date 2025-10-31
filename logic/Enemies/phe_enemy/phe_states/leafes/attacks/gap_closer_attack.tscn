@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mo53jly3ddam"]
+
+[ext_resource type="Script" uid="uid://o6wuugynfa6u" path="res://logic/Enemies/phe_enemy/phe_states/leafes/attacks/gap_closer_attack.gd" id="1_dv8sn"]
+
+[node name="GapCloserAttack" type="Node"]
+script = ExtResource("1_dv8sn")

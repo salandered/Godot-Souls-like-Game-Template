@@ -1,4 +1,4 @@
-extends BasePHEState
+extends BasePHELeaf
 class_name BasePHEAttack
 
 var hit_damage: float = 30

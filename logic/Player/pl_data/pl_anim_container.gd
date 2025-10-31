@@ -26,6 +26,8 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.dodge.dodge_L),
 	AnimationData.new(A.dodge.dodge_F),
 	AnimationData.new(A.dodge.dodge_B),
+	AnimationData.new(A.dodge.dodge_R_head),
+	AnimationData.new(A.dodge.dodge_L_head),
 
 	# air
 	AnimationData.new(A.air.midair),

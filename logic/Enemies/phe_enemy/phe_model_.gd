@@ -25,8 +25,8 @@ var _state_history: Array[String] = []
 var fatigue_raised: bool = false
 
 
-var _curr_state_leaf: BasePHEState
-var _prev_state_leaf: BasePHEState
+var _curr_leaf: BasePHELeaf
+var _prev_leaf: BasePHELeaf
 
 
 ## TROUBLESHOOTING
@@ -39,9 +39,8 @@ func _ready():
 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	state_machine = _top
 
-
-	animator_manager.native_player.root_motion_track = NodePath("%GeneralSkeleton:Root")
-
+	animator_manager.initialise()
+	
 
 	var _anim_list := PHEA.new()
 	anim_container._accept_animations(_anim_list.list_of_animations, native_player) # NOTE: should be before accepting states!
@@ -51,8 +50,8 @@ func _ready():
 	container.accept_states()
 
 	var _sleep_state = container.get_state_by_name(PHEState.Leaf.sleep)
-	_curr_state_leaf = _sleep_state
-	_prev_state_leaf = _sleep_state
+	_curr_leaf = _sleep_state
+	_prev_leaf = _sleep_state
 
 	fatigue_raised = false
 	# state_machine.current_state = container.get_state_by_name(PHEState.Leaf.awaken)
@@ -71,17 +70,13 @@ func get_player() -> Princess:
 
 
 ## returns newly shifted previous leaf state name
-func update_current_leaf_state(next_state_leaf: BasePHEState) -> String:
-	if next_state_leaf.is_composite:
-		print_.warn("update_current_leaf_state been given composite state, skipping update")
-		return _prev_state_leaf.state_name
-
-	var curr_state_name := _curr_state_leaf.state_name
-	var next_state_name := next_state_leaf.state_name
+func update_curr_leaf_state(next_state: BasePHELeaf) -> String:
+	var curr_state_name := _curr_leaf.state_name
+	var next_state_name := next_state.state_name
 
 	# if next_state_name == Leg.Act.double:
 	# 	# print_.dev("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
-	# 	return _prev_state_leaf.state_name
+	# 	return _prev_leaf.state_name
 
 	if next_state_name == curr_state_name:
 		print_.phe_sm(em.pin, "✖️🚸 came with the same state " + curr_state_name)
@@ -89,14 +84,14 @@ func update_current_leaf_state(next_state_leaf: BasePHEState) -> String:
 	# print_.dev("[[]]", pp.s(next_act_name, "is set for curr |",
 		# curr_act_name, "moved to prev"), 18)
 	
-	_prev_state_leaf = _curr_state_leaf
-	_curr_state_leaf = next_state_leaf
+	_prev_leaf = _curr_leaf
+	_curr_leaf = next_state
 	
-	return _prev_state_leaf.state_name
+	return _prev_leaf.state_name
 
 
-func get_curr_leaf_state() -> BasePHEState:
-	return _curr_state_leaf
+func get_curr_leaf_state() -> BasePHELeaf:
+	return _curr_leaf
 
 func update_state_history(state_name_):
 	_state_history.append(state_name_)

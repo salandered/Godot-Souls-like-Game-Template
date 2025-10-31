@@ -1,4 +1,4 @@
-extends BasePHEState
+extends BasePHELeaf
 var decel_speed: float = 20
 
 func update(delta):

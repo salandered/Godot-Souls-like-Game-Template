@@ -47,7 +47,7 @@ func can_see_player() -> bool:
 
 func can_hear_player() -> bool:
 	# TODO: add calm attribute of player states
-	return me.global_position.distance_to(me.player.global_position) <= me.hearing_distance
+	return me.global_position.distance_squared_to(me.player.global_position) <= u.fpow2(me.hearing_distance)
 
 
 func get_floor_distance() -> float:

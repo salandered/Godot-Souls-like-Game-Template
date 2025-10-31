@@ -1,4 +1,4 @@
-extends BasePHEState
+extends BasePHELeaf
 class_name BasePHEPursue
 
 var speed_from_inherited := FloatLinearInterpolator.new()

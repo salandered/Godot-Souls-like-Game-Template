@@ -75,5 +75,8 @@ static func combos_one_level(node: Node) -> Array:
 
 # 
 
-static func base_ph_states_with_depth(node: Node) -> Array[Descendant]:
-	return get_descendants_filtered_with_depth(node, func(n): return n is BasePHEState)
+static func base_ph_composite_states_with_depth(node: Node) -> Array[Descendant]:
+	return get_descendants_filtered_with_depth(node, func(n): return n is BasePHEComposite)
+
+static func base_ph_leaf_states(node: Node) -> Array:
+	return get_descendants_filtered(node, func(n): return n is BasePHELeaf)

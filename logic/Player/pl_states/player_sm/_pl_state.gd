@@ -1,4 +1,4 @@
-extends StateUtils
+extends TimeManagement
 ## Base class for State Player
 ## Does many things:
 	## manages basic state and action switches.
@@ -45,15 +45,9 @@ var forced_state: String = ""
 
 var curr_state_action: PlayerAction
 
-var _time_spent: float = 0.0
-
 
 func get_player() -> Princess:
 	return _player
-
-
-func time_spent():
-	return _time_spent
 
 
 func curr_global_action() -> BaseAction:
@@ -139,7 +133,8 @@ func _check_feelings_can_be_paid(input_action: String) -> bool:
 
 
 func _update(input_: InputPackage, delta: float):
-	_time_spent += delta
+	accumulate_time_spent(delta)
+
 	_update_feelings(delta)
 	legs_sm.current_behavior.update(input_, delta)
 	curr_state_action._update(input_, delta)
@@ -161,7 +156,7 @@ func choose_default_action() -> String:
 
 
 func _on_enter_state(input_: InputPackage):
-	_time_spent = 0.0
+	mark_enter_state()
 	# choose_initial_leg_behavior(input_) # this is advanded use where _player state can use legs behavior
 	## - single legs beh attached to _player state => 
 	##    => all is needed is to call the legs SM to switch into this defined state.
@@ -319,7 +314,7 @@ func __log_psm_check(...parts: Array):
 	print_.psm_check_trans(state_name, pp.list_(parts))
 
 func __log_time_spent():
-	print_.psm(state_name, pp.s("Time spent: state -", time_spent(), "action - ", curr_state_action.time_spent()))
+	print_.psm(state_name, pp.s("Time spent: state -", get_actual_time_spent(), "action - ", curr_state_action.time_spent()))
 
 
 # endregion

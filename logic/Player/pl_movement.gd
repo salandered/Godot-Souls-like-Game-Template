@@ -50,8 +50,6 @@ func get_abs_angle_pl_input(input_, delta) -> float:
 	var angle := __angle_between_player_and_input(input_, delta)
 	return abs(angle)
 
-# endregion
-
 
 func detect_dir_relative_to_facing(input_: InputPackage, delta: float) -> Direction.Dir:
 	if abs(input_.forward_input) < 0.01 and abs(input_.orbit_input) < 0.01:
@@ -86,6 +84,8 @@ func _angle_to_direction(angle_deg: float) -> Direction.Dir:
 	else: # -67.5 to -22.5
 		return Direction.Dir.LEFT_F
 
+
+# endregion
 
 ## BASIC MOVING
 # region: code
@@ -249,7 +249,7 @@ func move_strafe_with_forward(input_: InputPackage, direction_sign: float, delta
 	_player.velocity = final_velocity
 
 
-func look_at_target(delta: float, use_model_front: bool = true, speed_config: SpeedConfig = null) -> void:
+func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 	if speed_config == null:
 		speed_config = SpeedConfig.new()
 	var _ang_speed := speed_config.get_angular_sp()
@@ -279,7 +279,7 @@ func look_at_target(delta: float, use_model_front: bool = true, speed_config: Sp
 ## Player SM, fancy camera and input gathering are nicely separated in diff systems
 ## But this essential func needs them all together and => a lot of the bad symptoms:
 ##    - it's the only logic of such sort (and it's not just glue but math going on here)
-##    - it makes every placement of it wrong (now here just because player is the head of everything)
+##    - it makes every placement of it wrong (in pl movement it almost ok)
 ##    - constants like __VEL_SPEED are separated from every other loco config
 ## 
 ## In order to understand why that happened and what to do we need to either rethink the PlayerPack.

@@ -1,4 +1,5 @@
-extends EnemyStateUtils
+extends RefCounted
+# extends EnemyStateUtils
 class_name BaseSEState
 
 # var state_name: String

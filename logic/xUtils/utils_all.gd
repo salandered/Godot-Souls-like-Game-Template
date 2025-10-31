@@ -99,3 +99,9 @@ static func reset_all(resettable: Array):
 	for item in resettable:
 		if item.has_method("reset"):
 			item.reset()
+
+static func fpow2(number: float) -> float:
+	return number * number
+
+static func ipow2(number: int) -> int:
+	return number * number

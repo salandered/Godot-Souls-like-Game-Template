@@ -29,6 +29,10 @@ func distance_to_player() -> float:
 	return me.global_position.distance_to(get_player().global_position)
 
 
+func square_distance_to_player() -> float:
+	return me.global_position.distance_squared_to(get_player().global_position)
+
+
 func distance_to_(target: Node3D) -> float:
 	return me.global_position.distance_to(target.global_position)
 

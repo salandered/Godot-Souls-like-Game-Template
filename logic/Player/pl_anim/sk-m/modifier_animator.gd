@@ -70,8 +70,8 @@ func initialise():
 	__initialised = true
 
 
-func set_overlay_anim(anim: AnimationData, fade_in: float = 0.1, hold: float = -1.0, fade_out: float = 0.15, local_speed: float = 1.0):
-	overlay.set_overlay_anim(anim, fade_in, hold, fade_out, local_speed)
+func set_overlay_anim(anim: AnimationData, overlay_config: OverlayFeature.OverlayConfig):
+	overlay.set_overlay_anim(anim, overlay_config)
 
 
 func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):
@@ -91,7 +91,7 @@ func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offs
 	if blend_for > 0:
 		curr_blend_playback.start(blend_for)
 
-	print_.skm(animator_name, __log_state())
+	# print_.skm(animator_name, __log_state())
 
 
 func _process_modification():

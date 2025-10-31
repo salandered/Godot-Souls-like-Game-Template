@@ -42,6 +42,10 @@ func get_rot_track_idx(track_path: String) -> int:
 func get_marker_by_name(marker_name: String) -> Marker:
 	return u.safe_get_dict_key(_markers, marker_name, "get marker from anim data")
 
+func does_marker_exist(marker_name: String) -> bool:
+	var marker := get_marker_by_name(marker_name)
+	return marker != null
+
 
 ## returns time withing anim.duration
 ## returns -1 or default_value (if set) in case of problems

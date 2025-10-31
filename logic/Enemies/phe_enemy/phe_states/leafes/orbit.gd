@@ -1,4 +1,4 @@
-extends BasePHEState
+extends BasePHELeaf
 
 @export var dir_change_curve: Curve # for opposite direction changes
 @export var accel_from_idle_curve: Curve
@@ -37,6 +37,9 @@ func initialise() -> void:
 	blend_time.set_by_prev_action({
 		PHEState.Leaf.scare_off: 0.34,
 		PHEState.Leaf.combat_idle: 0.3,
+		PHEState.Leaf.club_part_1: 0.3,
+		PHEState.Leaf.club_part_2: 0.4,
+		PHEState.Leaf.club_part_3_4: 0.3,
 	})
 
 

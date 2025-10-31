@@ -1,11 +1,7 @@
-extends BasePHEState
+extends BasePHEComposite
 
 
-var phase_switch_hp_treshold := 0.5 # % of maximum
-var combat_radius: float = 3.5
-
-
-var pursue_phase_for = PHEHelpers.WillDoFor.new(3, 9, PHEState.pursuing_phase)
+var loco_for = PHEHelpers.WillDoFor.new(3, 9, PHEState.combat_loco)
 
 
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
@@ -17,33 +13,31 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		PHEState.still_life_phase:
 			if current_substate.is_ended():
 				_reason = "still_life_phase is ended"
-				pursue_phase_for.set_random()
-				_next_state = PHEState.pursuing_phase
+				loco_for.set_random()
+				_next_state = PHEState.combat_loco
 
-		PHEState.pursuing_phase:
-			# will_pursue_for = 999999
-			if pursue_phase_for.is_done(current_substate) or distance_to_player() < combat_radius:
-				_reason = pp.s(pursue_phase_for.__pp_is_done(), "and dist-to-pl < combat_rad", combat_radius)
+		PHEState.combat_loco:
+			if dist_to_player_less(PHEConfig.COMBAT_RAD) and ra.chance(0.5):
+				_reason = "dist-to-pl < COMBAT_RAD and flipped"
 				_next_state = PHEState.combat_phase
-			# gap close please
-			elif ra.chance(0.8) and distance_to_player() > 9:
-				_reason = pp.s("ra.chance(0.4) and distance_to_player() > 12")
-				_next_state = PHEState.combat_phase
+			elif loco_for.is_done(current_substate) and dist_to_player_greater(PHEConfig.GAP_CLOSER_RAD + 0.2):
+				_reason = pp.s("loco_for is done and dist > GAP_CLOSER_RAD+0.2")
+				_next_state = PHEState.combat_phase # gap closer
 
 
 		PHEState.combat_phase:
 			if current_substate.is_ended():
 				_reason = "combat_phase is ended"
-				pursue_phase_for.set_random()
-				_next_state = PHEState.pursuing_phase
+				loco_for.set_random()
+				_next_state = PHEState.combat_loco
 	# later
 	# 	if phe_feelings.health < phe_feelings.max_health * phase_switch_hp_treshold:
 	# 		return VerdictPH.new(PHEState.combat_phase_angry)
 
 	# NOTE: unique to life
 	if me.fatigue_raised:
-		_next_state = PHEState.pursuing_phase # safest for now
-		_reason += "Declined: Some state raised 'fatigue_raised', we switch to " + _next_state
+		_next_state = PHEState.combat_loco # safest for now
+		_reason += em.pin + "Declined: Some state raised 'fatigue_raised', we switch to " + _next_state
 		me.fatigue_raised = false
 
 	return VerdictPH.new(_next_state, _reason)

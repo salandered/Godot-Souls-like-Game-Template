@@ -37,3 +37,12 @@ class Name_:
 	const FROM_RUN = "from_run"
 	const TO_RUN = "to_run"
 	const TO_IDLE = "to_idle"
+
+
+	# HSM anim 
+	const COMMIT = "commit"
+
+
+	# overlay
+	const OVERLAY_START = "overlay_start"
+	const OVERLAY_END = "overlay_end"

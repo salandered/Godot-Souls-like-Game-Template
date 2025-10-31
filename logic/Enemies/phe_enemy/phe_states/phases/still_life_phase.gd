@@ -1,8 +1,8 @@
-extends BasePHEState
+extends BasePHEComposite
 class_name PHEStillLifePhase
 
-var _is_awaken: bool = false
 
+var _is_awaken: bool = false
 var _to_awake: bool = false
 
 

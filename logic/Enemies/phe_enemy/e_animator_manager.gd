@@ -7,6 +7,8 @@ class_name EnemyAnimatorManager
 
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var native_player: AnimationPlayer = %NativePlayer
+@onready var general_skeleton: Skeleton3D = %GeneralSkeleton
+
 
 # Track the starting position to calculate time_spent
 var _curr_anim_start_position: float = 0.0
@@ -160,3 +162,18 @@ func __log_new_anim(prev_anim: AnimationData, new_anim: AnimationData):
 
 func __log_(...parts: Array):
 	print_.anim_manager("", pp.list_(parts))
+
+
+func initialise():
+	# dont rely on UI setting, it will be lost on almost any change, super fragile.
+	native_player.root_motion_track = NodePath("%GeneralSkeleton:Root")
+	_reset_root_motion()
+	native_player.play(PHEA.sleep)
+	
+
+func _reset_root_motion() -> void:
+	var root_bone_id = general_skeleton.find_bone("Root")
+	general_skeleton.set_bone_pose_position(root_bone_id, Vector3.ZERO)
+	
+	# may be also reset the whole character:
+	# global_position = spawn_position

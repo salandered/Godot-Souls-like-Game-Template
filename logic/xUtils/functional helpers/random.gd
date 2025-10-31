@@ -73,7 +73,8 @@ static func pick_random(array: Array):
 	return array[randi() % array.size()]
 
 ## Pick random weighted element from array based on weights
-static func pick_weighted(items: Array, weights: Array[float]) -> Variant:
+## Example: pick_weighted([1, 2, 3], [0.2, 0.4, 0.4]) returns 1 with 20% chance
+static func pick_weighted(items: Array[Variant], weights: Array[float]) -> Variant:
 	if items.is_empty() or weights.is_empty() or items.size() != weights.size():
 		return null
 	
@@ -90,3 +91,31 @@ static func pick_weighted(items: Array, weights: Array[float]) -> Variant:
 			return items[i]
 	
 	return items[-1]
+
+## Pick random value from dictionary where keys are values and dict values are probabilities
+## Example: pick_weighted_dict({1: 0.2, 2: 0.4, 3: 0.4}) returns 1 with 20% chance
+## {1: 0.2, 2: 0.4, 3: 0.4} is the same as {1: 2, 2: 4, 3: 4}
+## Sum of the values doesnt matter. It will be normalised
+static func ipick_weighted(weighted_values: Dictionary) -> int:
+	if weighted_values.is_empty():
+		return 0
+	
+	var keys: Array[int] = []
+	var values: Array[float] = []
+	for key in weighted_values.keys():
+		keys.append(key)
+		values.append(weighted_values[key])
+	
+	return pick_weighted(keys, values)
+
+static func spick_weighted(weighted_values: Dictionary) -> String:
+	if weighted_values.is_empty():
+		return ""
+	
+	var keys: Array[String] = []
+	var values: Array[float] = []
+	for key in weighted_values.keys():
+		keys.append(key)
+		values.append(weighted_values[key])
+	
+	return pick_weighted(keys, values)
