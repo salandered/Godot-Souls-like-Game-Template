@@ -30,13 +30,19 @@ static func ease_in_out(x: float) -> float:
 	x = clampf(x, 0.0, 1.0)
 	return 0.5 * (1.0 - cos(x * PI))
 
-static func safe_has_key(key: String, dict: Dictionary, soft_crucial: bool = false, fast_fail: bool = false) -> bool:
+
+static func safe_has_key(key: String, dict: Dictionary, fallback: String) -> bool:
 	var exists = key in dict
 	if not exists:
-		if fast_fail:
-			assert(false, "Key '" + str(key) + "' not found in dictionary")
-		else:
-			print_.warn("Key '" + str(key) + "' not found in dictionary", soft_crucial)
+		match fallback:
+			Fallback.FAIL:
+				assert(false, "Key '" + str(key) + "' not found in dictionary")
+			Fallback.WARN, Fallback.WARN_CRUCIAL:
+				print_.warn("Key '" + str(key) + "' not found in dictionary", fallback == Fallback.WARN_CRUCIAL)
+			Fallback.SOFT:
+				pass
+			_:
+				print_.warn("Key '" + str(key) + "' not found in dictionary", false)
 	return exists
 
 static func safe_look_at(
@@ -105,3 +111,15 @@ static func fpow2(number: float) -> float:
 
 static func ipow2(number: int) -> int:
 	return number * number
+
+
+static func safe_cast_array_of_strings(array: Array[Variant]) -> Array[String]:
+	var list_casted: Array[String] = []
+	for item in array:
+		if item is not String:
+			print_.warn(
+				pp.s("Array contains non-string value: ", item, " | Array:", pp.list_(array),
+				"Fallback: will return empty array."))
+			return []
+	list_casted.assign(array)
+	return list_casted

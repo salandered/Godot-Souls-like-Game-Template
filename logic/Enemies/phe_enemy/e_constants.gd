@@ -6,7 +6,9 @@ class_name PHEConfig
 const MAX_DEPTH = 5
 
 ## Logic
-const PHASE_SWITCH_HP_TRESHOLD := 0.5 # % of maximum
+const PHASE_SWITCH_HP_TRESHOLD := 0.4 # % of maximum
+
+## Chances
 
 ## dist to player
 const REAL_FAR: float = 16

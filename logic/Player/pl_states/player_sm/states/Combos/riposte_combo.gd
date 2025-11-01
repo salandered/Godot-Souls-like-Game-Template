@@ -3,7 +3,7 @@
 extends Combo_
 
 
-func is_triggered(input_: InputPackage, curr_state_name: String, curr_act: BaseAction) -> bool:
+func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: BaseAction) -> bool:
 	print_.combo(name, pp.s("is_triggered?",
 				"triggered_state:", state_to_trigger,
 				"current input_.actions:", input_.actions

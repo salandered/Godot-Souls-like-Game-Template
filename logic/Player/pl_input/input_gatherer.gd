@@ -84,7 +84,7 @@ func gather_input(delta: float) -> InputPackage:
 
 	new_input.actions.append(PS.idle) # was idle as default
 	
-	if _has_input:
+	if _has_input or new_input.reverse_data.is_reversed():
 		new_input.actions.append(PS.run)
 		
 		if _sprint_key.is_pressed:

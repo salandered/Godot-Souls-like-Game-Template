@@ -80,6 +80,7 @@ folder_colors={
 "res://logic/Player/fancy-camera/": "teal",
 "res://logic/Player/pl_anim/": "purple",
 "res://logic/Player/pl_combat/": "pink",
+"res://logic/Player/pl_data/anim_data/": "orange",
 "res://logic/Player/pl_input/": "green",
 "res://logic/Player/pl_states/": "blue",
 "res://logic/_tests/": "green",

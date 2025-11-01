@@ -85,6 +85,19 @@ func _angle_to_direction(angle_deg: float) -> Direction.Dir:
 		return Direction.Dir.LEFT_F
 
 
+## returns 0.0 if no target
+func get_signed_angle_pl_target() -> float:
+	if area_awareness.is_camera_locked():
+		var target_pos := area_awareness.get_camera_locked_target().global_position
+		target_pos.y = _player.global_position.y
+
+		var dir_to_target := _player.global_position.direction_to(target_pos)
+		var _face_dir := _player.global_basis.z
+		
+		var angle := _face_dir.signed_angle_to(dir_to_target, Vector3.UP)
+		return angle
+	return 0.0
+
 # endregion
 
 ## BASIC MOVING
@@ -98,6 +111,13 @@ func set_velocity(velocity: Vector3):
 ## if no gravitym default will be used
 func apply_gravity(delta, gravity: float = u.gravity):
 	_player.velocity.y -= gravity * delta
+
+
+func apply_friction(delta: float, friction_value: float = 5.0):
+	var new_velocity := _player.velocity
+	new_velocity.x = move_toward(new_velocity.x, 0.0, friction_value * delta)
+	new_velocity.z = move_toward(new_velocity.z, 0.0, friction_value * delta)
+	_player.velocity = new_velocity
 
 # endregion
 

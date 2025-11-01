@@ -42,7 +42,7 @@ func _input(event):
 
 
 func _label_inputs():
-	var input_: InputPackage = __pl().model.area_awareness.last_input_package
+	var input_: InputPackage = InputManager.get_current_input()
 	var vel_by_input_ = __pl().player_movement.__velocity_by_input(input_, Constants.ONE_FRAME)
 	var t := ""
 	t += "input_dir " + pp.vec2(input_.input_direction)

@@ -1,7 +1,7 @@
 extends BasePHEAttack
 
 var decel_speed: float = 20
-# NOTE: bell like, start and ends with 0
+# NOTE: bell like, start and ends with 0.5
 @export var scare_off_anim_speed_curve: Curve
 
 var anim_speed_bump := EaseCurveSampler.new()
@@ -20,7 +20,7 @@ func _calculate_speed_scale() -> float:
 	if _anim_duration <= 0.0:
 		return 1.0
 	var _anim_progress = get_animator_manager().get_current_anim_effective_time_spent() / _anim_duration
-	var _speed_scale = 1 + anim_speed_bump.sample_at_progress(_anim_progress)
+	var _speed_scale = 0.5 + anim_speed_bump.sample_at_progress(_anim_progress)
 	return _speed_scale
 		
 

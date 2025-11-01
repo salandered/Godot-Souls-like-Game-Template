@@ -43,7 +43,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 					_reason += pp.compare_w("works >", "commit", START_COMMIT)
 		
 		MotionType.LOOP:
-			next_action_name = _from_loop_decision(input_, delta, next_action_name)
+			next_action_name = _from_LOOP_decision(input_, delta, next_action_name)
 
 		MotionType.STOP:
 			if is_moving(input_):
@@ -61,7 +61,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	return LNextActionVerdict.new(next_action_name)
 
 
-func _from_loop_decision(input_: InputPackage, delta: float, next_action_name) -> String:
+func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name) -> String:
 	if is_pure_reverse_moving(input_):
 		next_action_name = supported_actions.by_name(Leg.Act.fast_turn_180)
 		_reason += "is_pure_reverse_moving"

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/Textures/nature/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="5_ccwh7"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_6cxb7"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Common/simple_target/SimpleTarget.tscn" id="7_hnne2"]
-[ext_resource type="PackedScene" uid="uid://b1utm8k7mwvh2" path="res://logic/Enemies/phe_enemy/PHEnemy.tscn" id="11_hnne2"]
+[ext_resource type="PackedScene" uid="uid://evk2ymgbxjn6" path="res://logic/Enemies/phe_enemy/PHEnemy_.tscn" id="10_6cxb7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tv3r5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -261,6 +261,6 @@ near = 0.023
 [node name="PrincessPack" parent="." instance=ExtResource("2_n4uti")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.312599, -6.2846966)
 
-[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_hnne2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.895256, 7.316541, 0)
+[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_6cxb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.952051, 7.4352646, -8.906692)
 player = NodePath("../PrincessPack")

@@ -6,6 +6,9 @@ class_name DetectReverse
 
 const MIN_REVERSE_HOLD_TIME: float = 0.1
 const SEQUENTIAL_PRESS_THRESHOLD: float = 0.35
+## how long to keep detecting reversal after second key pressed
+## 0.15 is ~9 frames
+const MAX_REVERSE_OVERLAP_TIME: float = 0.18
 
 
 class DirectionalKeys:
@@ -36,11 +39,27 @@ static func _check_overlap(k_just_pressed: KeyPress, k_pressed: KeyPress, all_ke
 	else: # ReverseData.ReverseType.VERTICAL
 		other_keys_are_pressed = _any_hor_pressed(all_keys)
 
+	# FIRST FRAME: catch the initial reversal press
 	if _just_pressed_and_pressed(k_just_pressed, k_pressed):
 		var hold_duration := k_pressed.get_time_since_press(_current_time())
+		# print_.input_gathering("🕵🏻Reverse Detection FIRST FRAME", pp.s(hold_duration, MIN_REVERSE_HOLD_TIME))
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			var from_vector = action_to_vector[k_pressed.raw_action]
 			var to_vector = action_to_vector[k_just_pressed.raw_action]
+
+			reverse_data.initialise(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
+			return true
+	
+	# SUBSEQUENT FRAMES: catch reversal while both keys held (extended window)
+	var k_ex_just_pressed = k_just_pressed # we look for a key that was just pressed several frames ago (and still pressed ofc)
+	if _pressed_and_pressed(k_ex_just_pressed, k_pressed):
+		var old_key_duration := k_pressed.get_time_since_press(_current_time())
+		var new_key_duration := k_ex_just_pressed.get_time_since_press(_current_time())
+		# print_.input_gathering("🕵🏻Reverse Detection EXTENDED", pp.s(old_key_duration, MIN_REVERSE_HOLD_TIME, new_key_duration, MAX_REVERSE_OVERLAP_TIME))
+		# same check for k_pressed, ex just pressed key must be recent
+		if old_key_duration >= MIN_REVERSE_HOLD_TIME and new_key_duration < MAX_REVERSE_OVERLAP_TIME:
+			var from_vector = action_to_vector[k_pressed.raw_action]
+			var to_vector = action_to_vector[k_ex_just_pressed.raw_action]
 
 			reverse_data.initialise(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
 			return true
@@ -59,6 +78,7 @@ static func _check_sequential(k_just_pressed: KeyPress, k_not_pressed: KeyPress,
 	if _just_pressed_and_not_pressed(k_just_pressed, k_not_pressed):
 		if k_not_pressed.was_released_at_least_one():
 			var time_since_release := _current_time() - k_not_pressed.last_release_time
+			# print_.input_gathering("🕵🏻Reverse Detection SEQUENTIAL", pp.s(time_since_release, SEQUENTIAL_PRESS_THRESHOLD))
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
 				var from_vector = action_to_vector[k_not_pressed.raw_action]
 				var to_vector = action_to_vector[k_just_pressed.raw_action]

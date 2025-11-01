@@ -18,7 +18,7 @@ func _ready():
 	_input_action_to_state = {
 		# CombatAction.light_attack_pressed: PS.axe_slice_1,
 		CombatAction.light_attack_pressed: PS.sword_slash_1,
-		CombatAction.light_attack_pressed_when_move: PS.attack_from_run
+		# CombatAction.light_attack_pressed_when_move: PS.attack_from_run
 	}
 
 	super._ready()

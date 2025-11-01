@@ -109,7 +109,6 @@ func update_current_action(next_action: BaseAction) -> String:
 func update(input_: InputPackage, delta: float) -> void:
 	input_ = combat.contextualize(input_, delta)
 	input_ = area_awareness.contextualize(input_)
-	area_awareness.last_input_package = input_
 
 	var verdict := current_state._check_transition(input_)
 	verdict._speak_freely()

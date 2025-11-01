@@ -17,5 +17,8 @@ static func _current_time() -> float:
 static func _just_pressed_and_pressed(key_1: KeyPress, key_2: KeyPress) -> bool:
 	return key_1.is_just_pressed and key_2.is_pressed
 
+static func _pressed_and_pressed(key_1: KeyPress, key_2: KeyPress) -> bool:
+	return key_1.is_pressed and key_2.is_pressed
+
 static func _just_pressed_and_not_pressed(key_1: KeyPress, key_2: KeyPress) -> bool:
 	return key_1.is_just_pressed and not key_2.is_pressed

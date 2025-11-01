@@ -40,8 +40,8 @@ var state_combos_sorted: Array # [Combo_]
 var initial_position: Vector3
 
 # dynamic
-var queued_state: String = ""
-var forced_state: String = ""
+var queued_state: MetaState.Queued = MetaState.Queued.new()
+var forced_state: MetaState.Forced = MetaState.Forced.new()
 
 var curr_state_action: PlayerAction
 
@@ -58,19 +58,9 @@ func prev_global_action() -> BaseAction:
 	return player_sm.get_prev_action()
 
 
-func _has_queued_state(name_: String) -> bool:
-	return queued_state == name_
-
-
-func _has_any_queued_state() -> bool:
-	return queued_state != ""
-
-func _has_any_forced_state() -> bool:
-	return forced_state != ""
-
-
 func pm() -> PlayerMovement:
 	return player_sm.player_movement
+
 
 ## to override if needed.
 func initialise():
@@ -85,14 +75,14 @@ func initialise():
 ## Not to override
 func _check_transition(input_: InputPackage) -> PLVerdict:
 	_check_combos(input_)
-	if _has_any_queued_state() and curr_global_action().switches_to_queue():
+	if queued_state.is_set() and curr_global_action().switches_to_queue():
 		__log_psm_check("queued 👥 exists, trying it as a force state")
-		try_set_force_state(queued_state)
-		queued_state = ""
-	if _has_any_forced_state():
-		__log_psm_check("forced 🦾 state prevailed", forced_state, "(specific state checks skipped)")
-		var verdict := PLVerdict.new(forced_state)
-		forced_state = "" # forced_state is reset after verdict creation
+		forced_state.try_set_from_another(queued_state, true)
+		queued_state.reset() # important!
+	if forced_state.is_set():
+		__log_psm_check(forced_state, "prevailed", " (specific state checks skipped)")
+		var verdict := PLVerdict.new(forced_state.get_state_name())
+		forced_state.reset() # forced_state is reset after verdict creation
 		return verdict
 	
 	return check_transition(input_)
@@ -128,6 +118,22 @@ func _check_feelings_can_be_paid(input_action: String) -> bool:
 	__log_psm_check(em.black_h, "can't pay for state", input_action, "cost", _stamina_cost, "drain", _stamina_drain)
 	return false
 
+
+## State checks its state_combos_sorted if they are triggered. 
+## If they are, it queues combo's next state.
+## Combos are sorted by their priority: highest to lowest.
+func _check_combos(input_: InputPackage):
+	for combo: Combo_ in state_combos_sorted: # by priority
+		var next_state_candidate := combo.state_to_trigger
+		# __log_psm_check("checking combo", combo.name, "with state_to_trigger", next_state_candidate)
+		var _state = container.state_by_name(next_state_candidate)
+		if combo.is_triggered(input_, state_name, curr_global_action()):
+			if feelings.can_be_paid(_state.stamina_cost):
+				queued_state.set_state(next_state_candidate, _state.priority) # todo: try_set_queued_state
+				__log_psm_check("Queued 👥 next state: ", queued_state)
+				return # prioritised combo finishes checks
+			else:
+				__log_psm_check("Combo trigger can't pay stamina", _state.stamina_cost)
 
 # endregion
 
@@ -216,41 +222,12 @@ func on_enter_state(input_: InputPackage):
 	pass
 
 func _on_exit_state():
+	queued_state.reset()
+	forced_state.reset()
 	on_exit_state()
 	
 func on_exit_state():
 	pass
-
-
-func try_set_queued_state(new_queued_state: String):
-	if not _has_any_queued_state():
-		queued_state = new_queued_state
-	elif container.state_by_name(new_queued_state).priority > container.state_by_name(queued_state).priority:
-		queued_state = new_queued_state
-
-
-func try_set_force_state(new_forced_state: String):
-	if not _has_any_forced_state():
-		forced_state = new_forced_state
-	elif container.state_by_name(new_forced_state).priority >= container.state_by_name(forced_state).priority:
-		forced_state = new_forced_state
-
-
-## State checks its state_combos_sorted if they are triggered. 
-## If they are, it queues combo's next state.
-## Combos are sorted by their priority: highest to lowest.
-func _check_combos(input_: InputPackage):
-	for combo: Combo_ in state_combos_sorted: # by priority
-		var next_state_candidate := combo.state_to_trigger
-		# __log_psm_check("checking combo", combo.name, "with state_to_trigger", next_state_candidate)
-		var _stamina_cost = container.state_by_name(next_state_candidate).stamina_cost
-		if combo.is_triggered(input_, state_name, curr_global_action()):
-			if feelings.can_be_paid(_stamina_cost):
-				queued_state = next_state_candidate # todo: try_set_queued_state
-				__log_psm_check("Queued 👥 next state: " + queued_state)
-				return # prioritised combo finishes checks
-			else:
-				__log_psm_check("Combo trigger can't pay stamina", _stamina_cost)
 
 
 # DEFAULT BEHAVIORS ON MODIFIERS
@@ -270,15 +247,16 @@ func react_on_hit(hit: HitData):
 func react_on_spell(spell_hit: SpellHitData):
 	if curr_global_action().is_vulnerable():
 		feelings._change_health(-spell_hit.damage)
-	if curr_global_action().is_interruptable():
-		try_set_force_state("staggered")
+	# if curr_global_action().is_interruptable():
+		# forced_state.try_set("staggered", 0)
 	#spell_hit.queue_free()
 	spell_hit.spell.target_contacted(_player)
 
 # TODO: ...
 # Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
 func react_on_parry(_hit: HitData):
-	try_set_force_state("parried")
+	pass
+	# try_set_force_state("parried")
 
 
 # region: SOME DOCS

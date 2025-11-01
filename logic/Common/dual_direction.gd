@@ -55,3 +55,8 @@ func get_curr_anim_id() -> String:
 
 func get_all_anim_ids() -> Array[String]:
 	return [_anim_id_primary, _anim_id_secondary]
+
+
+func _to_string() -> String:
+	var dir_str = "PRIMARY" if _curr_dir == Dir.PRIMARY else "SECONDARY"
+	return "DualDirection(Dir: %s, Speed: %f, Anim: %s)" % [dir_str, _speed, _anim_id]

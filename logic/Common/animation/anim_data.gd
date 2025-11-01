@@ -40,7 +40,7 @@ func get_rot_track_idx(track_path: String) -> int:
 
 ## Client code may get some specific marker directly.
 func get_marker_by_name(marker_name: String) -> Marker:
-	return u.safe_get_dict_key(_markers, marker_name, "get marker from anim data")
+	return u.safe_get_dict_key(_markers, marker_name, "get marker from anim " + anim_id)
 
 func does_marker_exist(marker_name: String) -> bool:
 	var marker := get_marker_by_name(marker_name)

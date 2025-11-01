@@ -8,8 +8,8 @@ var accel_from_inherited: float = 0.6
 var accel_from_idle: float = 0.5
 var ONE_DIR_COMMIT: float = 9.0
 
-var SPEED_R: float = 2.2
-var SPEED_L: float = 2.1
+var SPEED_R: float = 2.4
+var SPEED_L: float = 2.3
 var curr_direction: DualDirection
 
 var opposite_dir_change := StrafeDirChange.new()
@@ -102,6 +102,7 @@ func _choose_initial_direction(to_opposite: bool = false):
 	curr_direction.set_direction(DualDirection.Dir.PRIMARY if ra.coinflip() else DualDirection.Dir.SECONDARY)
 	anim = me.anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
 	_set_up_commit_timer()
+	__log_ent("chosen initial direction", curr_direction)
 
 
 func _change_dir():

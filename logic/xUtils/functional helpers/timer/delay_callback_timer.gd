@@ -30,7 +30,7 @@ func update(delta: float) -> bool:
 ## overrides
 func reset() -> void:
 	timer = 0.0
-	_has_triggered = true # allow re-triggering after reset
+	_has_triggered = true # no re-triggering after reset
 
 
 ## overrides

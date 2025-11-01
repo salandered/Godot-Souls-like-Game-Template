@@ -67,9 +67,13 @@ var node_to_composite_state_data: Dictionary = {
 
 	"StillLifePhase": _CSData.new(PHEState.still_life_phase, _CommitData.new(-1, -1)),
 	"CombatLoco": _CSData.new(PHEState.combat_loco, _CommitData.new(-1, -1)),
-	"CombatPhase": _CSData.new(PHEState.combat_phase),
+	"CombatAttacking": _CSData.new(PHEState.combat_attacking),
 	"AttackClubSeries": _CSData.new(PHEState.attack_club_series),
 	"AttackPickSingle": _CSData.new(PHEState.attack_pick_single),
+	"AttackFromDodgeSeries": _CSData.new(PHEState.attack_from_dodge_series),
+	"Attack360Series": _CSData.new(PHEState.attack_360_series),
+	
+	"DodgeSeries": _CSData.new(PHEState.dodge_series),
 }
 
 
@@ -84,6 +88,7 @@ var node_to_leaf_state_data: Dictionary = {
 	"SlowPursue": _LStData.new(PHEState.Leaf.slow_pursue, _AData.new(PHEA.loco.walk_forward), _CommitData.new(0.4), ),
 	"Pursue": _LStData.new(PHEState.Leaf.pursue, _AData.new(PHEA.loco.run_forward), _CommitData.new(0.4), ),
 	"Dodge": _LStData.new(PHEState.Leaf.dodge, _AData.new(PHEA.loco.dodge_b)),
+	"JumpTowards": _LStData.new(PHEState.Leaf.jump_towards, _AData.new(PHEA.loco.jump_towards)),
 
 	## attack
 	"ScareOff": _LStData.new(PHEState.Leaf.scare_off, _AData.new(PHEA.attack.scare_off)),
@@ -95,7 +100,8 @@ var node_to_leaf_state_data: Dictionary = {
 	"Attack360Low": _LStData.new(PHEState.Leaf.attack_360_low, _AData.new(PHEA.attack.attack_360_low)),
 	"AttackUp": _LStData.new(PHEState.Leaf.attack_up, _AData.new(PHEA.attack.attack_up)),
 	"AttackDown": _LStData.new(PHEState.Leaf.attack_down, _AData.new(PHEA.attack.attack_down)),
-	"FancyAttack": _LStData.new(PHEState.Leaf.fancy_attack, _AData.new(PHEA.attack.fancy_attack)),
+	"FancyGapCloser": _LStData.new(PHEState.Leaf.fancy_gap_closer, _AData.new(PHEA.attack.fancy_gap_closer)),
+	"SwordSlide": _LStData.new(PHEState.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide)),
 
 	# "PhaseSwitch": _LStData.new(PHEState.phase_switch, PHEA.phase_switch),
 }
@@ -107,6 +113,7 @@ var _states: Dictionary # { String : BasePHEState }
 func get_state_by_name(state_name: String) -> BasePHEState:
 	if not _states.has(state_name):
 		print_.warn(pp.s("_states dict doesn't have ", state_name), true)
+		return null
 	return _states[state_name]
 
 
@@ -117,7 +124,7 @@ func accept_states():
 
 func _initialise_states():
 	for state: BasePHEState in _states.values():
-		state.initialise()
+		state._initialise()
 
 
 func __accept_base_state(node: BasePHEState, state_data: BaseStData):
@@ -174,5 +181,7 @@ func _accept_states():
 		var _anim := me.anim_container.get_by_anim_id(lst_data.anim_data.anim_id)
 		node.anim = _anim
 		node.y_offset_adjustment = lst_data.anim_data.y_offset_adjustment
+
+		assert(node.anim and node.anim.anim_id, "node anim problem")
 
 		__accept_base_state(node, lst_data)

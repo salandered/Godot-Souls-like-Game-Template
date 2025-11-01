@@ -17,6 +17,15 @@ var speed_from_inherited := FloatLinearInterpolator.new()
 var curr_turn: TurnData = TurnData.new()
 
 
+const IDLE_LIKE_ACTIONS = [
+	Leg.Act.idle,
+	PS.Act.axe_slice_1,
+	PS.Act.axe_slice_2,
+	PS.Act.sword_slash_1,
+	PS.Act.sword_slash_2,
+	PS.Act.attack_from_run,
+	PS.Act.dodge
+]
 var _resettable = [
 	speed_mult_from_idle,
 	angular_sp_from_idle,
@@ -48,8 +57,9 @@ func on_enter_action(input_: InputPackage):
 	var _inherited_speed := pm().get_curr_velocity_len()
 	speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, accel_from_idle_time)
 	
+
 	match PREV_ACTION:
-		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
+		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
@@ -63,6 +73,7 @@ func on_enter_action(input_: InputPackage):
 			angular_sp.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.5)
 
 func on_exit_action():
+	u.reset_all(_resettable)
 	get_animator_manager().reset_global_speed_scale()
 
 
@@ -72,7 +83,7 @@ func update(input_: InputPackage, delta: float):
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var TURN_SPEED := default_sp.TURN_SPEED
 	match PREV_ACTION:
-		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
+		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			CURR_SPEED = default_sp.SPEED
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
@@ -101,7 +112,7 @@ func animate(): # ▶️
 	var custom_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
 
 	match PREV_ACTION:
-		Leg.Act.idle, PS.Act.axe_slice_1, PS.Act.axe_slice_2, PS.Act.attack_from_run, PS.Act.dodge:
+		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			custom_start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:
 			custom_start_time_offset = __start_time_offset_dev # sync with idle where left leg forward

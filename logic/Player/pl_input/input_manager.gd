@@ -1,18 +1,22 @@
 extends Node
 
-## Works via Auto-Load.
+## Works via Auto-Load
 
 var _input_gatherer: InputGatherer
-var current_input: InputPackage
+var _current_input: InputPackage
 
 func _ready() -> void:
 	_input_gatherer = InputGatherer.new()
 	
 	# process input before other nodes
-	process_priority = -100 # seems like its safe and sound, but keep an eye on that
+	process_priority = -100 # seems like its safe and works, but keep an eye
+
+
+func get_current_input() -> InputPackage:
+	return _current_input
 
 func _process(delta: float) -> void:
-	current_input = _input_gatherer.gather_input(delta)
+	_current_input = _input_gatherer.gather_input(delta)
 
 
 	if Input.is_action_just_pressed(RawAction.force_quit):

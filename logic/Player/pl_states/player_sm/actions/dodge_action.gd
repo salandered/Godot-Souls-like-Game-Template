@@ -129,6 +129,6 @@ var __sp_scale = 1.2
 func _input(event):
 	# END_SPEED = u._dev_change_param(event, END_SPEED, "END_SPEED", 0.5)
 # 	# 	0.5, "dev_speed_down", "dev_speed_up")
-	__weight = u._dev_change_t12_param(event, __weight, "__weight", 0.1)
+	# __weight = u._dev_change_t12_param(event, __weight, "__weight", 0.1)
 	__sp_scale = u._dev_change_t34_param(event, __sp_scale, "__sp_scale", 0.1)
 # 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)

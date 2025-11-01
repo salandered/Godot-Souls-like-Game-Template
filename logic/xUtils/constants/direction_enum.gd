@@ -60,3 +60,45 @@ static func to_vector(dir: Dir) -> Vector2:
 		Dir.LEFT_F: return Vector2(-1, -1)
 		Dir.LEFT_B: return Vector2(-1, 1)
 		_: return Vector2.ZERO # unreachable
+
+
+static func get_right_group() -> Array[Dir]:
+	return [Dir.RIGHT, Dir.RIGHT_F, Dir.RIGHT_B]
+
+
+static func get_left_group() -> Array[Dir]:
+	return [Dir.LEFT, Dir.LEFT_F, Dir.LEFT_B]
+
+
+static func get_forward_group() -> Array[Dir]:
+	return [Dir.FORWARD, Dir.LEFT_F, Dir.RIGHT_F]
+
+
+static func get_backward_group() -> Array[Dir]:
+	return [Dir.BACKWARD, Dir.LEFT_B, Dir.RIGHT_B]
+
+
+static func get_simplified(include_neutral: bool = false) -> Array[Dir]:
+	var _r = [Dir.FORWARD, Dir.BACKWARD, Dir.LEFT, Dir.RIGHT]
+	if include_neutral:
+		_r.append(Dir.NEUTRAL)
+	return _r
+
+static func get_diagonal() -> Array[Dir]:
+	return [Dir.LEFT_F, Dir.RIGHT_F, Dir.LEFT_B, Dir.RIGHT_B]
+
+
+static func get_all_moving(include_neutral: bool = false) -> Array[Dir]:
+	var _r = [
+		Dir.FORWARD,
+		Dir.BACKWARD,
+		Dir.RIGHT,
+		Dir.RIGHT_F,
+		Dir.RIGHT_B,
+		Dir.LEFT,
+		Dir.LEFT_F,
+		Dir.LEFT_B
+	]
+	if include_neutral:
+		_r.append(Dir.NEUTRAL)
+	return _r

@@ -20,10 +20,12 @@ var state_machine: BasePHEState
 const BREADCRUMB_SIZE = 10
 var _state_history: Array[String] = []
 
+
+# TODO: some system for flags. (or alternative with events)
 # if any state works longer than fatigue, flag is raised. 
 # HSME SM than switches to the most safest state
 var fatigue_raised: bool = false
-
+var angry_raised: bool = false
 
 var _curr_leaf: BasePHELeaf
 var _prev_leaf: BasePHELeaf
@@ -54,6 +56,7 @@ func _ready():
 	_prev_leaf = _sleep_state
 
 	fatigue_raised = false
+	angry_raised = false
 	# state_machine.current_state = container.get_state_by_name(PHEState.Leaf.awaken)
 	state_machine._on_enter_state()
 
@@ -62,7 +65,8 @@ func get_current_state() -> BasePHEState:
 	return state_machine.get_current_substate()
 
 func react_on_hit(hit_data: HitData) -> void:
-	get_current_state()._react_on_hit(hit_data)
+	pass
+	# get_current_state()._react_on_hit(hit_data)
 
 
 func get_player() -> Princess:

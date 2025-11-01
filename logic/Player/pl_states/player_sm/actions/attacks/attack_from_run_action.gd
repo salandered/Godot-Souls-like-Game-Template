@@ -39,10 +39,8 @@ func on_enter_action(input_: InputPackage) -> void:
 func update(input_: InputPackage, delta: float):
 	if tracks_input_vector():
 		pm().rotate_with_input_vector(input_, delta)
-	# pm().move_with_root(delta)
-	player_sm.combat.update_is_attacking(weapon_hurts())
-	# pm().rotate_with_input_vector(input_, delta)
 	_move_with_root(delta)
+	player_sm.combat.update_is_attacking(weapon_hurts())
 
 
 func _move_with_root(delta: float) -> void:

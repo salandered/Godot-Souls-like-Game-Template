@@ -5,7 +5,7 @@ extends RefCounted
 # Node structure was:
 	# Slash1
 	#   - ToSlash2
-# Being replaced by AttackCombo which is parametrised with primary_input, next_attack etc
+# Being replaced by NextStateCombo which is parametrised with primary_input, next_attack etc
 
 # @onready var slash_1 = $".." as Slash1State
 

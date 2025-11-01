@@ -15,7 +15,7 @@ extends Node
 @export var priority: int = 0 # 0 means lowest
 
 ## main method. decides if the combo is triggered
-@abstract func is_triggered(input_: InputPackage, curr_state_name: String, curr_act: BaseAction) -> bool
+@abstract func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: BaseAction) -> bool
 
 
 # region: DOCS: PHILOSOPY AND DETAILS BEHIND COMBO

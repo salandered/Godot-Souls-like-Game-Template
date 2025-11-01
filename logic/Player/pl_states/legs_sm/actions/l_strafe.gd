@@ -4,8 +4,8 @@ extends LegsAction
 @export var dir_change_curve: Curve # for opposite direction changes
 @export var slght_dir_change_curve: Curve # for slight direction changes
 
+@export var ang_speed_on_enter_curve: Curve
 
-var speed_mult_from_idle := EaseCurveInterpolator.new()
 
 const ACCEL_FROM_IDLE_TIME: float = 0.21
 
@@ -20,25 +20,34 @@ const ANIM_IDLE: String = A.move.idle
 
 const ANIM_L: String = A.strafe.strafe_L
 const ANIM_R: String = A.strafe.strafe_R
-const SPEED_R: float = 2.9
-const SPEED_L: float = 2.8
+const SPEED_R: float = 2.9 + 0.4
+const SPEED_L: float = 2.8 + 0.4
 
 const ANIM_F: String = A.strafe.combat_run_f
 const ANIM_B: String = A.strafe.combat_run_b
-const SPEED_F: float = 3.1
-const SPEED_B: float = 2.4
+const SPEED_F: float = 3.1 + 0.4
+const SPEED_B: float = 2.4 + 0.4
 
 var curr_direction: StrafeDirection
+
+var speed_mult_from_idle := EaseCurveInterpolator.new()
 
 var opposite_dir_change := StrafeDirChange.new()
 var slight_dir_change := StrafeDirChange.new()
 var slightest_dir_change := StrafeDirChange.new()
 
+var ang_speed_on_enter := FloatCurveInterpolator.new()
+
+var TURN_THRESHOLD_DEG: float = 15
+const DECELERATION_FRICTION: float = 8.0
+
+
 var _resettable = [
 	speed_mult_from_idle,
 	opposite_dir_change,
 	slight_dir_change,
-	slightest_dir_change
+	slightest_dir_change,
+	ang_speed_on_enter
 ]
 
 var _changers_cooldown = [
@@ -48,7 +57,7 @@ var _changers_cooldown = [
 ]
 
 func initialise():
-	default_sp.ANGULAR_SPEED = 7
+	default_sp.ANGULAR_SPEED = 8
 	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B, ANIM_IDLE)
 	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
 	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION, 2)
@@ -66,6 +75,8 @@ func on_enter_action(input_: InputPackage) -> void:
 	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + Direction.name_(_dir))
 	curr_direction.set_direction(_dir)
 	
+	# ang_speed_on_enter.initialise(1, default_sp.ANGULAR_SPEED - 4, ang_speed_on_enter_curve, 0.5)
+
 	match PREV_ACTION:
 		Leg.Act.idle:
 			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
@@ -80,27 +91,32 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	# var TURN_SPEED := default_sp.TURN_SPEED
+	var ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var SPEED_MULT := 1.0
 
 	match PREV_ACTION:
 		Leg.Act.idle:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 
-
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
 
-	var _sp_config := SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed())
-	
+	var _sp_config := SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed(), ANGULAR_SPEED)
+
 	pm().look_at_target(delta, _sp_config)
 
-	if curr_direction.is_pure_vertical():
-		pm().move_forward_or_back(curr_direction.get_dir_int(), delta, _sp_config)
+	var remaining_angle_to_target := absf(pm().get_signed_angle_pl_target())
+
+	if remaining_angle_to_target < deg_to_rad(TURN_THRESHOLD_DEG):
+		if curr_direction.is_pure_vertical():
+			pm().move_forward_or_back(curr_direction.get_dir_int(), delta, _sp_config)
+		else:
+			pm().move_strafe_with_forward(input_, -curr_direction.get_dir_int(), delta, _sp_config) # note the minus
 	else:
-		pm().move_strafe_with_forward(input_, -curr_direction.get_dir_int(), delta, _sp_config) # note the minus
-	
+		# pm().set_velocity(Vector3.ZERO)
+		pm().apply_friction(delta, DECELERATION_FRICTION)
+
 	opposite_dir_change.async_change_update(delta)
 	slight_dir_change.async_change_update(delta)
 
@@ -138,18 +154,23 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	get_animator_manager().set_global_speed_scale(SPEED_MULT)
 
-
 func _change_dir(is_opposite_change: bool, new_dir: Direction.Dir):
 	# ?? question: is it ok that we re evalutaing dir. bake into callback?
-	var actual_new_dir := InputManager.current_input.detect_strafe_dir()
+	# upd: answer is probably no
+	var actual_new_dir := InputManager._current_input.detect_strafe_dir()
 	curr_direction.set_direction(actual_new_dir)
 	print_.lsm_action_strafe("", pp.s("_change_dir to", curr_direction.pp_curr_dir()))
 	_switch_animation(is_opposite_change)
 
 
 func animate(): # ▶️
+	var custom_blend_time = blend_time.calculate_actual(PREV_ACTION)
+	match PREV_ACTION:
+		Leg.Act.sprint:
+			if curr_direction.get_curr_dir() in Direction.get_right_group():
+				custom_blend_time = 0.1
 	anim = anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
-	set_anim_to_play()
+	set_anim_to_play(custom_blend_time)
 
 
 var sync_loco_anim_correction: float = 0.18
@@ -168,7 +189,9 @@ func _switch_animation(is_opposite_change: bool):
 		print_.lsm_action_strafe("", "_switch_animation same anim, won't switch")
 		return
 
-	if curr_anim.anim_id in curr_direction.get_all_anim_ids():
+	if _one_anim_is_idle(curr_anim, next_anim):
+		_custom_blend_time = 0.25
+	elif curr_anim.anim_id in curr_direction.get_all_anim_ids():
 		if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
 			sync_loco_anim_correction = 0.0 + __dev_add
 			__log_action(em.pin, em.mark)
@@ -186,5 +209,9 @@ func _switch_animation(is_opposite_change: bool):
 	set_anim_to_play(_custom_blend_time, _custom_start_time_offset)
 
 
+func _one_anim_is_idle(curr_anim: AnimationData, next_anim: AnimationData) -> bool:
+	return curr_anim.anim_id == ANIM_IDLE or next_anim.anim_id == ANIM_IDLE
+
+
 # func _input(event):
-	# __dev_add = u._dev_change_t34_param(event, __dev_add, "__dev_add", 0.05)
+# 	TURN_THRESHOLD_DEG = u._dev_change_t34_param(event, TURN_THRESHOLD_DEG, "TURN_THRESHOLD_DEG", 15)

@@ -10,7 +10,6 @@ class_name AreaAwareness
 
 
 var last_pushback_vector: Vector3 # todo: what
-var last_input_package: InputPackage
 
 # var locked_target: Node3D
 

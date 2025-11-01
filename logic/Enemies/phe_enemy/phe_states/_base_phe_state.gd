@@ -27,9 +27,15 @@ var fatigue: float = 20
 
 @abstract func validate_substate_depth(parent_depth: int) -> bool
 
+
 ## if state needs something special to work. Would be called from states container.
+func _initialise() -> void:
+	initialise()
+
+
 func initialise() -> void:
 	pass
+
 
 func get_animator_manager() -> EnemyAnimatorManager:
 	return animator_manager
@@ -154,5 +160,10 @@ func __log_warn(crucial: bool, ...parts: Array):
 	print_.warn(pp.s(__log_state(), pp.list_(parts),
 		"\n\t\t", me.__pp_state_history()),
 		crucial)
+
+
+func __log_forgot_implement(sbs_name: String, function_name: String, fallback: String, ...parts: Array):
+	var _msg = "forgot to implement '%s' logic in '%s()'. Fallback: %s" % [sbs_name, function_name, fallback]
+	__log_warn(true, _msg)
 
 # endregion

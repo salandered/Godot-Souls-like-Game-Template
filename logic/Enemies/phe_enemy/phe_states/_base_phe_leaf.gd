@@ -29,13 +29,13 @@ func _on_enter_state():
 	me.update_state_history(state_name)
 
 
-	set_anim_to_play()
-
 	if __is_entered:
 		__log_warn(true, "Already entered")
 	__is_entered = true
 
 	on_enter_state()
+	# NOTE: after entering
+	set_anim_to_play()
 
 	
 ## internal

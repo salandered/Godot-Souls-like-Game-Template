@@ -121,6 +121,11 @@
 	// src/**/test - Matches any "test" folder inside the "src" directory at any depth
 	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	"folder-path-color.folders": [
+		// INPUT
+		{
+			"path": "*input*",
+			"color": "green_shade_3",
+		},
 		// FEELINGS
 		{
 			"path": "*feelings.gd",

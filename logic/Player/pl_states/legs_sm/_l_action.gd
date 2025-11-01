@@ -90,5 +90,8 @@ func __log_action_ent(...parts: Array):
 func __log_action_ext(...parts: Array):
 	print_.lsm_action(action_name + pp.on_ext, pp.list_(parts))
 
+func __log_action_upd(...parts: Array):
+	print_.lsm_action(action_name + pp.on_upd, pp.list_(parts))
+
 func __log_action(...parts: Array):
 	print_.lsm_action(action_name, pp.list_(parts))

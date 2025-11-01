@@ -24,6 +24,7 @@ class loco:
 	const strafe_right := _lib._axe_all + "strafe R"
 	const strafe_left := _lib._axe_all + "strafe L"
 	const run_forward := _lib._axe_all + "unarmed run forward" # OR combat run forward
+	const jump_towards := _lib._some_from_pl + "LL-jump-running"
 
 
 class attack:
@@ -40,8 +41,8 @@ class attack:
 	const club_part_2 := _lib._not_axe + "ADD One Hand Club Combo part2"
 	const club_part_3_4 := _lib._not_axe + "ADD One Hand Club Combo part3"
 	
-	const fancy_attack := _lib._not_axe + "ADD great sword jump attack"
-
+	const fancy_gap_closer := _lib._not_axe + "ADD great sword jump attack"
+	const sword_slide := _lib._not_axe + "ADD great sword slide attack"
 	## later: too high
 	# const axe_slice_1 := _lib._axe_all + "at RL 1 finite"
 	# const axe_slice_2 := _lib._axe_all + "slash_4"
@@ -68,10 +69,12 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(loco.strafe_right),
 	AnimationData.new(loco.strafe_left),
 	AnimationData.new(loco.run_forward),
+	AnimationData.new(loco.jump_towards),
 
 	## attacks
 	AnimationData.new(attack.scare_off, 1.1),
 	AnimationData.new(attack.gap_closer),
+	AnimationData.new(attack.fancy_gap_closer),
 	AnimationData.new(attack.attack_360_high),
 	AnimationData.new(attack.attack_360_low),
 	AnimationData.new(attack.attack_up),
@@ -79,7 +82,8 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(attack.club_part_1, 0.6),
 	AnimationData.new(attack.club_part_2, 0.5),
 	AnimationData.new(attack.club_part_3_4, 0.5),
-	AnimationData.new(attack.fancy_attack),
+	
+	AnimationData.new(attack.sword_slide),
 	
 
 	## legacy

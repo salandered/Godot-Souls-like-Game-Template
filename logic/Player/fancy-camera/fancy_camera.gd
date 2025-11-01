@@ -135,7 +135,7 @@ func _process(delta: float) -> void:
 	var d_y := accumulated_mouse_delta.y
 	accumulated_mouse_delta = Vector2.ZERO
 	
-	var input_: InputPackage = InputManager.current_input
+	var input_: InputPackage = InputManager._current_input
 	# print(u.fr() + "//~~~CAM ", input.target_lock)
 
 	_consider_switching_state(input_)

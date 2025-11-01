@@ -1,3 +1,4 @@
+@abstract
 extends BasePHEState
 class_name BasePHEComposite
 
@@ -11,9 +12,29 @@ var __current_substate: BasePHEState = null
 
 var __is_entered: bool = false
 
+# todo: add validation that composite sbs are the same as in node tree
+var supported_substates: SupportedSubstates
+
 
 func validate_substate_depth(parent_depth: int) -> bool:
 	return state_depth - parent_depth == 1
+
+
+func _initialise():
+	initialise()
+
+	# after usual initialise
+	supported_substates = SupportedSubstates.new(
+		get_supported_substates(),
+		state_name
+	)
+	
+
+func initialise() -> void:
+	pass
+
+
+@abstract func get_supported_substates() -> Array[String]
 
 
 func _on_enter_state():
@@ -80,7 +101,8 @@ func _update(delta: float):
 		else:
 			__state_declined = "x"
 			_switch_substate(verdict.next_state)
-		
+	elif state_name != PHEState._TOP and not self is BasePHEAttackSeries:
+		__log_phe_decision("NO SWITCH", verdict.get_reason())
 	# call ur children to do stuff
 	if get_current_substate() != null:
 		get_current_substate()._update(delta)
@@ -102,11 +124,16 @@ func get_current_substate() -> BasePHEState:
 func set_current_substate(next_state_name: String) -> void:
 	var _next_substate = container.get_state_by_name(next_state_name)
 	if not _next_substate:
-		__log_warn(true, "set_current_substate: state not found", next_state_name, "!! won't set")
+		__log_warn(true, "set_current_substate: state not found", next_state_name, "Fallback: return, not set")
 		return
 
 	if not _next_substate.validate_substate_depth(state_depth):
-		__log_warn(true, "substate_depth issue. Curr depth", state_depth, "next_state_name", next_state_name)
+		__log_warn(true, "set_current_substate: depth issue. Curr depth", state_depth, "next_state_name", next_state_name, "Fallback: return, not set")
+		return
+	
+	if not supported_substates.is_state_supported(next_state_name):
+		__log_warn(true, "set_current_substate: not supported. ", supported_substates.__pp_state_not_supported(next_state_name), state_depth, "Fallback: return, not set")
+		return
 
 	__current_substate = _next_substate
 

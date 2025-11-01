@@ -6,7 +6,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 		return PLVerdict.new(PS.midair)
 	
 	if curr_state_action.passed_marker(Marker.Name_.TO_RUN):
-		if not _has_queued_state(PS.dodge):
+		if not queued_state.is_set_to(PS.dodge):
 			print_.psm_check_trans(state_name, pp.s("passed_marker TO_RUN => choosing best input"))
 			var verdict := best_next_state_from_input(input_)
 			return verdict

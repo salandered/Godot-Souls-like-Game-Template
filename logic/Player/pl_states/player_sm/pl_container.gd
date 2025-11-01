@@ -249,7 +249,7 @@ func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	# 0 means lowest
 	var _safe_sorted: Array[String]
 	for item in state_names:
-		if u.safe_has_key(item, _states, true):
+		if u.safe_has_key(item, _states, Fallback.WARN_CRUCIAL):
 			_safe_sorted.append(item)
 	_safe_sorted.sort_custom(_states_priority_sort)
 	return _safe_sorted

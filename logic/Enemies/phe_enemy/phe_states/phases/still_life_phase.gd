@@ -6,6 +6,13 @@ var _is_awaken: bool = false
 var _to_awake: bool = false
 
 
+func get_supported_substates() -> Array[String]:
+	return [
+			PHEState.Leaf.sleep,
+			PHEState.Leaf.awaken,
+		]
+
+
 func is_ended() -> bool:
 	return _is_awaken
 
@@ -21,6 +28,9 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 				__log_phe_check("finished awaken anim")
 				_is_awaken = true
 
+		_:
+			__log_forgot_implement(current_substate.state_name, "check_substate_transition", "will be in current sbs + _is_awaken true")
+			_is_awaken = true
 	return VerdictPH.new(_next_state, _reason)
 
 

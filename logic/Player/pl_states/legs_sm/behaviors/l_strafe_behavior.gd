@@ -17,6 +17,8 @@ func on_enter_behavior(input_: InputPackage):
 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	var curr_action := get_curr_action()
+	var curr_action_name := get_curr_action().action_name
+	var prev_action_name := get_prev_action().action_name
 	var curr_motion_type := curr_action.motion_type
 	var next_action_name := supported_actions.convert_to_supported(curr_action)
 

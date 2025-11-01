@@ -19,17 +19,17 @@ const COMBO_B := true
 const HIT_BOX_B := true
 
 # PLAYER PSM
-const PSM_B := true
-const SKM_B := true
-const ACTION_ANIM_B := true
+const PSM_B := false
+const SKM_B := false
+const ACTION_ANIM_B := false
 
 # PLAYER LSM
-const LSM_BEH_B := true
-const LSM_ACTION_STRAFE_B := true
-const LSM_ACTION_B := true
+const LSM_BEH_B := false
+const LSM_ACTION_STRAFE_B := false
+const LSM_ACTION_B := false
 
 # PL SYSTEMS
-const FEEL_B := true
+const FEEL_B := false
 const input_gathering_B := false
 const FANCY_CAM_B := false
 const AWARENESS_B := false

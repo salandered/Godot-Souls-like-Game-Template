@@ -1,3 +1,4 @@
+@abstract
 extends BasePHEComposite
 class_name BasePHEAttackSeries
 
@@ -5,11 +6,39 @@ class_name BasePHEAttackSeries
 var SWITCH_ANIM_BEFORE = 0.2
 var PL_DIST_TO_END = 8
 
-## To be filled by child class: [ ["attack_a"], ["attack_a", "attack_b"] ]
-var attack_series_list: Array = []
 
 var _chosen_attack_series: Array[String] = []
 var _current_attack_idx: int = -1
+
+
+## NOTE DOC: 
+##	  - Implement get_attack_series_list() which returns non empty series
+##	  - Implement pick_series_idx. Simplest: call default_pick_series_idx()
+##    - Recommended: set config values in initialise()
+##
+
+## Result is like this: [ ["attack_a"], ["attack_a", "attack_b"] ]
+@abstract func get_attack_series_list() -> Array
+
+@abstract func pick_series_idx() -> int
+
+
+## Most basic implementation for pick_series_idx
+func default_pick_series_idx() -> int:
+	var random_index = randi_range(0, get_attack_series_list().size() - 1)
+	return random_index
+
+
+func _flatten_attack_series_list() -> Array[String]:
+	var unique_dict := {}
+	for series in get_attack_series_list():
+		for attack in series:
+			unique_dict[attack] = true
+	return u.safe_cast_array_of_strings(unique_dict.keys())
+
+
+func get_supported_substates() -> Array[String]:
+	return _flatten_attack_series_list()
 
 
 func is_ended() -> bool:
@@ -34,7 +63,7 @@ func _is_ended() -> bool:
 		_r = false
 	
 	if _r == true:
-		__log_upd('_is_ended', 'curr attack idx', _current_attack_idx, _current_substate.time_remaining())
+		__log_upd('_is_ended', 'curr attack idx', _current_attack_idx, _current_substate.time_remaining(), _chosen_attack_series)
 	
 	return _r
 
@@ -56,19 +85,22 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason)
 
 
-## override this for complex picking logic
-## Default behavior: pick a random series
-func _pick_attack_series() -> Array[String]:
-	if attack_series_list.is_empty():
-		__log_warn(true, "_pick_attack_series: 'attack_series_list' list is empty!")
+func pick_attack_series() -> Array[String]:
+	if get_attack_series_list().is_empty():
+		__log_warn(true, "pick_attack_series: 'attack_series_list' list is empty!", "Fallback: return []")
 		return []
-	var attack_series_casted: Array[String] = []
-	attack_series_casted.assign(attack_series_list.pick_random())
-	return attack_series_casted
+	var picked_idx = pick_series_idx()
+	
+	if picked_idx < 0 or picked_idx >= get_attack_series_list().size():
+		__log_warn(true, "picked_idx", picked_idx, "is outside the", get_attack_series_list(), "Fallback: will pick 0 index")
+		picked_idx = 1
+		
+	var picked_series = get_attack_series_list()[picked_idx]
+	return u.safe_cast_array_of_strings(picked_series)
 
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
-	_chosen_attack_series = _pick_attack_series()
+	_chosen_attack_series = pick_attack_series()
 	
 	if _chosen_attack_series.is_empty():
 		_reason = "No valid combo found"

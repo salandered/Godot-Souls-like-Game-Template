@@ -26,7 +26,7 @@ func move_player(delta: float):
 #   - Without this hack, chaining roll→roll will hold the final pose of the first roll during the second.
 #   - Currently Parry State also uses this (parries can be spammed) 
 #   - But I’d rather avoid adding another exported bool.
-func on_enter_state(input_):
+# func on_enter_state(input_):
 	# animator.reset_torso_animation()
 	# animator.reset_legs_animation()
 	# In DS3 walk uses smooth 180° turns; roll snaps instantly.
@@ -35,7 +35,7 @@ func on_enter_state(input_):
 	# I cache the last input, so roll’s `_on_enter` grabs it and snaps direction.
 	# After snapping, roll remains locked—no further input or rotation until animation ends.
 	# TODO: velocity_by_input here needs delta ... 
-	var input = area_awareness.last_input_package
+	# var input = area_awareness.last_input_package
 	#var input_direction := velocity_by_input(input_, delta).normalized()
 	#if input_direction:
 		#player.look_at(player.global_position + input_direction, Vector3.UP, true)

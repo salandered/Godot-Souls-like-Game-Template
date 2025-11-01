@@ -1,6 +1,10 @@
 extends BasePHEComposite
 
 
+func get_supported_substates() -> Array[String]:
+	return [PHEState.life]
+
+
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
 	_reason = PHEState.life + " is never being transitioned"
 	return VerdictPH.new(_next_state, _reason)
