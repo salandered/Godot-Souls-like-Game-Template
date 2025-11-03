@@ -81,7 +81,7 @@ func _is_sight_blocked(from_pos: Vector3, to_pos: Vector3) -> bool:
 
 
 ## DEV
-# region: code
+# region
 
 var sight_cone_visual: MeshInstance3D
 var conus_color := Color(1, 0.5, 1, 0.25)

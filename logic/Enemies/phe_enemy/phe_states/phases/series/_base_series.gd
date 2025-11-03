@@ -143,7 +143,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		var _next_index := current_attack_number + 1
 		__log_upd("attack index + 1. curr/next", current_attack_number, _next_index)
 		if _next_index < _chosen_attack_series.size(): # next attack exists
-			__log_upd("gonna switch to next attack curr/next", current_attack_number, _next_index)
+			# __log_upd("gonna switch to next attack curr/next", current_attack_number, _next_index)
 			current_attack_number = _next_index
 			_next_state = _chosen_attack_series[current_attack_number]
 			var _remaining := _chosen_attack_series.size() - (current_attack_number + 1)

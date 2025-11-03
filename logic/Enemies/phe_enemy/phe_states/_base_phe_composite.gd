@@ -104,8 +104,8 @@ func _update(delta: float) -> void:
 		else:
 			__state_declined = "x"
 			_switch_substate(verdict.next_state)
-	elif state_name != PHEState._TOP and not self is BasePHEAttackSeries and __prev_now_switch_msg != verdict.get_reason():
-		__log_phe_decision("NO SWITCH", verdict.get_reason())
+	elif state_name != PHES._TOP and not self is BasePHEAttackSeries and __prev_now_switch_msg != verdict.get_reason():
+		__log_phe_decision("NO SWITCH for", pp.in_q(get_safe_curr_sbs_name()), verdict.get_reason(), "Verdict data:", verdict)
 		__prev_now_switch_msg = verdict.get_reason()
 		
 	# call ur children to do stuff
@@ -122,8 +122,14 @@ func works_less_than_commitment() -> bool:
 	return CommitCheck.works_less_than_commitment(self)
 
 
+## nullable
 func get_current_substate() -> BasePHEState:
 	return __current_substate
+
+
+func get_safe_curr_sbs_name() -> String:
+	if __current_substate: return __current_substate.state_name
+	return "-x-"
 
 
 func set_current_substate(next_state_name: String) -> void:
@@ -223,14 +229,6 @@ func works_less_than(time: float) -> bool:
 	return get_actual_time_spent() < time
 
 
-func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: float, curr_sbs_name: String, next_sbs_name: String, __log_context: String = ""):
-	# NOTE: out states tend to return empty string, meaning that no switch needed. Monitors are not ready for this
-	if next_sbs_name == "":
-		next_sbs_name = curr_sbs_name
-	for monitor in __monitors:
-		monitor.auto_update(delta, curr_sbs_name, next_sbs_name, -1, -1, __log_context)
-
-
 # region: __LOGS
 
 func __log_indent() -> int:
@@ -239,7 +237,7 @@ func __log_indent() -> int:
 
 func __log_state() -> String:
 	var _r := ""
-	if state_name == PHEState._TOP:
+	if state_name == PHES._TOP:
 		_r += "☐"
 	else:
 		_r += "▨"

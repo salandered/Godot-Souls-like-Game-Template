@@ -398,7 +398,7 @@
 				}
 			]
 		},
-		"(PHEState\\.)(\\w+)": {
+		"(PHES\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -409,7 +409,7 @@
 				}
 			]
 		},
-		"\\b(PHEState\\.Leaf\\.)": {
+		"\\b(PHES\\.Leaf\\.)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{

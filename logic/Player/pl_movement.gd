@@ -15,7 +15,7 @@ class_name PlayerMovement
 
 
 ## GETTERS
-# region: code
+# region
 
 func get_player() -> Princess:
 	return _player
@@ -101,7 +101,7 @@ func get_signed_angle_pl_target() -> float:
 # endregion
 
 ## BASIC MOVING
-# region: code
+# region
 
 func set_velocity(velocity: Vector3):
 	_player.velocity = velocity
@@ -123,7 +123,7 @@ func apply_friction(delta: float, friction_value: float = 5.0):
 
 
 ## MOVING WITH INPUT VECTOR
-# region: code
+# region
 
 
 func move_rotate_with_input_vector(input_: InputPackage, delta: float, speed_config: SpeedConfig = null):
@@ -201,7 +201,7 @@ func process_input_vector_air(input_: InputPackage, delta: float, jump_direction
 
 
 ## MOVING WITH ROOT
-# region: code 
+# region 
 
 func move_with_root(delta: float) -> void:
 	var root_vel := animator_manager.get_root_velocity()
@@ -234,7 +234,7 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 
 
 ## STRAFE MOVEMENT
-# region: code 
+# region 
 
 func move_forward_or_back(direction_sign: float, delta: float, speed_config: SpeedConfig = null):
 	if speed_config == null:
@@ -293,7 +293,7 @@ func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 
 
 ## VELOCITY BY INPUT LOGIC
-# region: code
+# region
 
 # region: big TODO
 ## Player SM, fancy camera and input gathering are nicely separated in diff systems
@@ -350,7 +350,7 @@ func __angle_between_player_and_input(input_: InputPackage, delta: float, __log:
 
 
 ## __LOGGING
-# region: code
+# region
 
 func __pp_vel_y() -> String:
 	return pp.s(get_curr_y_velocity())

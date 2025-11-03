@@ -7,9 +7,11 @@ func initialise() -> void:
 
 func get_attack_series_list() -> Array:
 	return [
-		[PHEState.Leaf.club_part_1],
-		[PHEState.Leaf.club_part_1, PHEState.Leaf.club_part_2],
-		[PHEState.Leaf.club_part_1, PHEState.Leaf.club_part_2, PHEState.Leaf.club_part_3_4]
+		[PHES.Leaf.club_part_1],
+		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2],
+		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2, PHES.Leaf.club_part_3_4],
+		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2, PHES.Leaf.attack_360_high],
+		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2, PHES.Leaf.club_part_3_4, PHES.Leaf.attack_360_high]
 	]
 
 
@@ -17,13 +19,15 @@ func pick_series_idx() -> int:
 	var _idx := ra.ipick_weighted({
 		0: 0.2,
 		1: 0.4,
-		2: 0.3
+		2: 0.4,
+		3: 0.2,
+		4: 0.05
 	})
 	return _idx
 
 
 func condition_to_next_switch(current_substate: BasePHELeaf) -> bool:
-	var _r: = current_substate.time_remaining() < SWITCH_ANIM_BEFORE
+	var _r := current_substate.time_remaining() < SWITCH_ANIM_BEFORE
 	# print_.dev(">>>>>>>>>>>", current_substate.time_remaining())
 	if _r:
 		var _oh := current_substate.time_remaining()

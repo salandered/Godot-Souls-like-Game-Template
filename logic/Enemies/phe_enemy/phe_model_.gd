@@ -53,13 +53,13 @@ func _ready() -> void:
 	
 	container.accept_states()
 
-	var _sleep_state := container.get_state_by_name(PHEState.Leaf.sleep)
+	var _sleep_state := container.get_state_by_name(PHES.Leaf.sleep)
 	_curr_leaf = _sleep_state
 	_prev_leaf = _sleep_state
 
 	fatigue_raised = false
 	angry_raised = false
-	# state_machine.current_state = container.get_state_by_name(PHEState.Leaf.awaken)
+	# state_machine.current_state = container.get_state_by_name(PHES.Leaf.awaken)
 	state_machine._on_enter_state()
 
 
@@ -84,8 +84,8 @@ func update_curr_leaf_state(next_state: BasePHELeaf) -> String:
 	# 	# print_.dev("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
 	# 	return _prev_leaf.state_name
 
-	if next_state_name == curr_state_name:
-		print_.phe_sm(em.pin, "✖️🚸 came with the same state " + curr_state_name)
+	# if next_state_name == curr_state_name:
+		# print_.phe_sm(em.pin, "✖️🚸 came with the same state " + curr_state_name)
 
 	# print_.dev("[[]]", pp.s(next_act_name, "is set for curr |",
 		# curr_act_name, "moved to prev"), 18)

@@ -32,3 +32,8 @@ func needs_switch() -> bool:
 	if next_state != "":
 		_r = true
 	return _r
+
+
+func _to_string() -> String:
+	var _msg := pp.s("nextSt/switchSame/OverCom", pp.in_q(next_state), _switch_on_same, _override_commit)
+	return _msg

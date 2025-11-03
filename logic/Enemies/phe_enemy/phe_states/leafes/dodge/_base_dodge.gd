@@ -18,11 +18,11 @@ func initialise() -> void:
 	var from_run := anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.1)
 
 	start_time_offset.set_by_prev_action({
-		PHEState.Leaf.pursue: from_run,
-		PHEState.Leaf.dodge_B: from_run,
-		PHEState.Leaf.dodge_F: from_run,
-		PHEState.Leaf.dodge_R: from_run,
-		PHEState.Leaf.dodge_L: from_run,
+		PHES.Leaf.pursue: from_run,
+		PHES.Leaf.dodge_B: from_run,
+		PHES.Leaf.dodge_F: from_run,
+		PHES.Leaf.dodge_R: from_run,
+		PHES.Leaf.dodge_L: from_run,
 	})
 
 	initialise_implementation()

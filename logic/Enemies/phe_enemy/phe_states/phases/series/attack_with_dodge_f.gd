@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges := [PHEState.Leaf.dodge_R, PHEState.Leaf.dodge_L, PHEState.Leaf.dodge_F, PHEState.Leaf.dodge_B]
+var all_the_dodges := [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
 
 
 func initialise() -> void:
@@ -11,16 +11,15 @@ func initialise() -> void:
 
 func get_attack_series_list() -> Array:
 	return [
-		[PHEState.Leaf.dodge_F, PHEState.Leaf.dodge_F],
-		[PHEState.Leaf.dodge_F, PHEState.Leaf.sword_slide],
-		[PHEState.Leaf.dodge_R, PHEState.Leaf.dodge_R, PHEState.Leaf.sword_slide],
+		[PHES.Leaf.dodge_F, PHES.Leaf.sword_slide],
+		[PHES.Leaf.dodge_R, PHES.Leaf.sword_slide],
 	]
 
 
 func pick_series_idx() -> int:
-	var _idx = 0 if not me.angry_raised else 1
+	var _idx = 0
 	if distance_to_player() < config.COMBAT_RAD():
-		_idx = 2
+		_idx = 1
 	return _idx
 
 

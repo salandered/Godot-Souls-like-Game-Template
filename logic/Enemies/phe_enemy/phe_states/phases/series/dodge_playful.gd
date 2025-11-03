@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges := [PHEState.Leaf.dodge_R, PHEState.Leaf.dodge_L, PHEState.Leaf.dodge_F, PHEState.Leaf.dodge_B]
+var all_the_dodges := [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
 
 func initialise() -> void:
 	SWITCH_ANIM_BEFORE = 0.2
@@ -10,22 +10,23 @@ func initialise() -> void:
 
 func get_attack_series_list() -> Array:
 	return [
-		[PHEState.Leaf.dodge_L],
-		[PHEState.Leaf.dodge_R],
-		[PHEState.Leaf.dodge_F, PHEState.Leaf.dodge_B],
-		[PHEState.Leaf.dodge_B],
+		[PHES.Leaf.dodge_L],
+		[PHES.Leaf.dodge_R],
+		[PHES.Leaf.dodge_F, PHES.Leaf.dodge_B],
+		[PHES.Leaf.dodge_B],
 	]
 
 
 func pick_series_idx() -> int:
+	var idx_2_chance = 0.0 if distance_to_player() < config.DODGE_RAD() else 0.2
 	var _idx := ra.ipick_weighted({
 		0: 0.4,
 		1: 0.4,
-		2: 0.2,
+		2: idx_2_chance,
 		3: 0.0
 	})
-	# if soemhow happended we are too close, no dodge forward etc
-	if dist_to_player_less(config.COMBAT_RAD()):
+	# if somehow happended we are too close, no dodge forward etc
+	if dist_to_player_less(config.COMBAT_RAD() - 0.1):
 		_idx = 3
 	return _idx
 

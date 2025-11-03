@@ -1,14 +1,14 @@
 extends BasePHEComposite
 
 
-var idle_for := PHEHelpers.WillDoFor.new(2.8, 6, PHEState.Leaf.combat_idle)
-var pursue_for := PHEHelpers.WillDoFor.new(4, 12, PHEState.Leaf.pursue)
-var orbit_for := PHEHelpers.WillDoFor.new(3, 7, PHEState.Leaf.orbit)
-# var non_orbit_for := PHEHelpers.WillDoFor.new(2, 5, PHEState.Leaf.orbit)
-var non_idle_for := PHEHelpers.WillDoFor.new(2, 3.5, PHEState.Leaf.combat_idle)
-var not_dodge_back_for := PHEHelpers.WillNotDoFor.new(5, 7, PHEState.dodge_back_series)
-var not_dodge_playful_for := PHEHelpers.WillNotDoFor.new(8, 12, PHEState.dodge_playful)
-var not_jump_for := PHEHelpers.WillNotDoFor.new(4, 9, PHEState.Leaf.jump_towards)
+var idle_for := PHEHelpers.WillDoFor.new(2.8, 5, PHES.Leaf.combat_idle)
+var pursue_for := PHEHelpers.WillDoFor.new(4, 12, PHES.Leaf.pursue)
+var orbit_for := PHEHelpers.WillDoFor.new(3, 7, PHES.Leaf.orbit)
+# var non_orbit_for := PHEHelpers.WillDoFor.new(2, 5, PHES.Leaf.orbit)
+var non_idle_for := PHEHelpers.WillDoFor.new(2, 3.5, PHES.Leaf.combat_idle)
+var not_dodge_back_for := PHEHelpers.WillNotDoFor.new(8, 12, PHES.dodge_back_series)
+var not_dodge_playful_for := PHEHelpers.WillNotDoFor.new(11, 15, PHES.dodge_playful)
+var not_jump_for := PHEHelpers.WillNotDoFor.new(4, 9, PHES.Leaf.jump_towards)
 
 
 var __monitors: Array[PHEHelpers.MonitorFor] = [
@@ -33,12 +33,12 @@ func initialise() -> void:
 
 func get_supported_substates() -> Array[String]:
 	return [
-			PHEState.Leaf.pursue,
-			PHEState.Leaf.orbit,
-			PHEState.Leaf.combat_idle,
-			PHEState.Leaf.jump_towards,
-			PHEState.dodge_back_series,
-			PHEState.dodge_playful,
+			PHES.Leaf.pursue,
+			PHES.Leaf.orbit,
+			PHES.Leaf.combat_idle,
+			PHES.Leaf.jump_towards,
+			PHES.dodge_back_series,
+			PHES.dodge_playful,
 		]
 
 
@@ -54,7 +54,7 @@ func is_ended() -> bool:
 		_reason += "some WillDo not done"
 		_r = false
 	 
-	elif _current_substate.state_name in [PHEState.Leaf.jump_towards, PHEState.dodge_back_series, PHEState.dodge_playful] \
+	elif _current_substate.state_name in [PHES.Leaf.jump_towards, PHES.dodge_back_series, PHES.dodge_playful] \
 		and not _current_substate.is_ended():
 		_reason += "some finite substate not ended"
 		_r = false
@@ -66,7 +66,7 @@ func is_ended() -> bool:
 		_reason += "empty else caught, by defailt we end"
 	
 	if _r == true:
-		__log_upd("is_ended true. Reason:", _reason, "Context:", time_spent(), pp.in_q(_current_substate.state_name), _current_substate.time_remaining())
+		__log_upd("is_ended true. Reason:", _reason, "Context:", time_spent(), pp.in_q(_current_substate.state_name))
 	
 	return _r
 
@@ -79,92 +79,95 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	var dist := distance_to_player()
 
 	match current_substate.state_name:
-		PHEState.Leaf.pursue:
+		PHES.Leaf.pursue:
 			if pursue_for.is_done():
 				_reason += "pursue_for.is_done |"
 				if dist > config.REAL_FAR():
 					_reason += "dist > REAL_FAR"
 					if not_jump_for.is_done():
-						_next_state = PHEState.Leaf.jump_towards
+						_next_state = PHES.Leaf.jump_towards
 				elif dist > config.CLOSE_TO_ORBIT():
 					_reason += "dist > CLOSE_TO_ORBIT"
 					if not_jump_for.is_done():
-						_next_state = PHEState.Leaf.jump_towards
+						_next_state = PHES.Leaf.jump_towards
 				elif dist > config.ORBIT_RAD():
 					_reason += "dist > ORBIT_RAD"
 					if not me.angry_raised:
 						_next_state = ra.spick_weighted({
-							PHEState.Leaf.combat_idle: 0.4,
-							PHEState.Leaf.orbit: 0.6})
+							PHES.Leaf.combat_idle: 0.4,
+							PHES.Leaf.orbit: 0.6})
 				elif dist > config.DODGE_RAD():
 					_reason += "dist > DODGE_RAD"
 					if not_dodge_playful_for.is_done():
-						_next_state = PHEState.dodge_playful
+						_next_state = PHES.dodge_playful
 					else:
-						_next_state = PHEState.Leaf.combat_idle
+						_next_state = PHES.Leaf.combat_idle
 				elif dist > config.COMBAT_RAD():
 					_reason += "dist > COMBAT_RAD"
 					_next_state = ra.spick_weighted({
-						PHEState.Leaf.combat_idle: 0.4 if not me.angry_raised else 0.0,
-						PHEState.Leaf.orbit: 0.6})
+						PHES.Leaf.combat_idle: 0.4 if not me.angry_raised else 0.0,
+						PHES.Leaf.orbit: 0.6})
 				elif dist > config.TOO_CLOSE():
 					_reason += "dist > TOO_CLOSE"
 					if not_dodge_back_for.is_done():
-						_next_state = PHEState.dodge_back_series
+						_next_state = PHES.dodge_back_series
 				else: # too close, hard dodge
 					_reason += "dist < TOO_CLOSE"
-					_next_state = PHEState.dodge_back_series
+					_next_state = PHES.dodge_back_series
 			else:
 				_reason += "pursue_for not done |"
 				if dist < config.TOO_CLOSE():
-					_next_state = PHEState.dodge_back_series
+					_next_state = PHES.Leaf.combat_idle
 					_reason += "dist < TOO_CLOSE"
 				elif dist < config.COMBAT_RAD():
 					_reason += "dist < COMBAT_RAD"
 					if not me.angry_raised:
 						_next_state = ra.spick_weighted({
-							PHEState.Leaf.combat_idle: 0.4 if not me.angry_raised else 0.0,
-							PHEState.Leaf.orbit: 0.6})
+							PHES.Leaf.combat_idle: 0.4 if not me.angry_raised else 0.0,
+							PHES.Leaf.orbit: 0.6})
 				else:
 					_reason += "pursue while we can"
 	
-		PHEState.Leaf.orbit:
+		PHES.Leaf.orbit:
 			if orbit_for.is_done():
 				_reason += "orbit_for.is_done |"
 				if dist > config.CLOSE_TO_ORBIT() + 2:
-					_next_state = PHEState.Leaf.pursue
+					_next_state = PHES.Leaf.pursue
 					_reason += "dist > CLOSE_TO_ORBIT + 2"
 				elif dist > config.ORBIT_RAD():
 					_reason += "dist > ORBIT_RAD"
-					if not_dodge_playful_for.is_done():
-						_next_state = PHEState.dodge_playful
-					elif ra.chance(0.4 if not me.angry_raised else 0.0):
-						_next_state = PHEState.Leaf.combat_idle
+					_next_state = state_angry(PHES.Leaf.combat_idle, PHES.Leaf.pursue)
+					if ra.chance(0.1):
+						_next_state = PHES.dodge_playful
+					elif ra.chance(0.4):
+						_next_state = PHES.Leaf.pursue
 				elif dist > config.COMBAT_RAD():
 					_reason += "dist > COMBAT_RAD"
 					if not_dodge_playful_for.is_done():
-						_next_state = PHEState.dodge_playful
+						_next_state = PHES.dodge_playful
 				elif dist > config.TOO_CLOSE():
 					_reason += "dist > TOO_CLOSE"
 					if not_dodge_playful_for.is_done() and ra.chance(0.5):
-						_next_state = PHEState.dodge_playful
+						_next_state = PHES.dodge_playful
 					elif not_dodge_back_for.is_done():
-						_next_state = PHEState.dodge_back_series
+						_next_state = PHES.dodge_back_series
 				else: # too close, hard dodge
 					_reason += "dist < TOO_CLOSE"
-					_next_state = PHEState.dodge_back_series
+					_next_state = PHES.dodge_back_series
 			else: # here we look for edge cases (too far/too close)
 				_reason += " orbit_for not done |"
-				if dist > config.REAL_FAR() + 2:
+				if dist > config.REAL_FAR() - 1.0:
 					var _verdict := _distance_to_pursue_sbs(_next_state, _reason)
 					_next_state = _verdict.next_state
 					_reason += _verdict.get_reason() + ""
 				elif dist < config.TOO_CLOSE():
-					_next_state = PHEState.dodge_back_series
+					_next_state = flip_state(PHES.dodge_back_series, PHES.dodge_playful)
 					_reason += "dist < TOO_CLOSE"
 				else:
 					_reason += "orbiting while we can"
-		PHEState.Leaf.combat_idle:
+
+
+		PHES.Leaf.combat_idle:
 			if idle_for.is_done():
 				_reason += "idle_for.is_done |"
 				var _verdict := _distance_to_pursue_sbs(_next_state, _reason)
@@ -172,18 +175,18 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 				_reason += _verdict.get_reason() + ""
 			else: # (too far/too close)
 				_reason += "idle_for not done |"
-				if dist > config.REAL_FAR() + 3:
+				if dist > config.REAL_FAR():
 					var _verdict := _distance_to_pursue_sbs(_next_state, _reason)
 					_next_state = _verdict.next_state
 					_reason += _verdict.get_reason() + ""
 				# if with not_dodge_back_for, we help player
 				elif dist < config.TOO_CLOSE() and not_dodge_back_for.is_done():
 					_reason += "dist < TOO_CLOSE"
-					_next_state = PHEState.dodge_back_series
+					_next_state = PHES.dodge_back_series
 				else:
 					_reason += "idling while we can"
 	
-		PHEState.dodge_back_series, PHEState.dodge_playful, PHEState.Leaf.jump_towards:
+		PHES.dodge_back_series, PHES.dodge_playful, PHES.Leaf.jump_towards:
 			if current_substate.is_ended():
 				_reason += "dodge or jump_towards ended => _distance_to_pursue_sbs"
 				var _verdict := _distance_to_pursue_sbs(_next_state, _reason)
@@ -198,6 +201,12 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			_next_state = _verdict.next_state
 			_reason += "|" + _verdict.get_reason()
 
+	if not me.angry_raised:
+		orbit_for.calibrate_min_max(3, 7)
+		idle_for.calibrate_min_max(2.4, 4)
+	else:
+		orbit_for.calibrate_min_max(2, 4)
+		idle_for.calibrate_min_max(2.1, 3)
 	_auto_update_monitors(__monitors, delta, current_substate.state_name, _next_state, "upd")
 
 	return VerdictPH.new(_next_state, _reason)
@@ -214,33 +223,35 @@ func _distance_to_pursue_sbs(_next_state, _reason) -> VerdictPH:
 	var dist := distance_to_player()
 	if dist > config.REAL_FAR():
 		_reason += "dist > REAL_FAR"
-		_next_state = PHEState.Leaf.pursue
-		if ra.chance(0.2 if not me.angry_raised else 0.4) and not_jump_for.is_done():
-			_next_state = PHEState.Leaf.jump_towards
+		if chance_angry(0.2, 0.4) and not_jump_for.is_done():
+			_next_state = PHES.Leaf.jump_towards
+		else:
+			_next_state = PHES.Leaf.pursue
 	elif dist > config.CLOSE_TO_ORBIT():
 		_reason += "dist > CLOSE_TO_ORBIT"
-		_next_state = PHEState.Leaf.pursue
-		if ra.chance(0.2 if not me.angry_raised else 0.4) and not_jump_for.is_done():
-			_next_state = PHEState.Leaf.jump_towards
-		if ra.chance(0.3 if not me.angry_raised else 0.0):
-			_next_state = PHEState.Leaf.combat_idle
+		if chance_angry(0.2, 0.4) and not_jump_for.is_done():
+			_next_state = PHES.Leaf.jump_towards
+		if chance_angry(0.3, 0.0):
+			_next_state = PHES.Leaf.combat_idle
+		else:
+			_next_state = PHES.Leaf.pursue
 	elif dist > config.ORBIT_RAD():
 		_reason += "dist > ORBIT_RAD"
-		_next_state = PHEState.Leaf.orbit
+		_next_state = state_angry(PHES.Leaf.orbit, PHES.Leaf.pursue)
+		if ra.chance(0.4):
+			_next_state = PHES.Leaf.pursue
 	elif dist > config.DODGE_RAD():
 		_reason += "dist > DODGE_RAD"
-		_next_state = PHEState.Leaf.orbit if ra.coinflip() \
-			else PHEState.Leaf.combat_idle
+		_next_state = flip_w_angry(PHES.Leaf.orbit, PHES.Leaf.combat_idle, PHES.Leaf.pursue)
 	elif dist > config.COMBAT_RAD():
 		_reason += "dist > COMBAT_RAD"
-		_next_state = PHEState.Leaf.orbit if ra.coinflip() \
-			else PHEState.Leaf.combat_idle
+		_next_state = flip_state(PHES.Leaf.orbit, PHES.Leaf.combat_idle)
 	elif dist > config.TOO_CLOSE():
 		_reason += "dist > TOO_CLOSE"
-		_next_state = PHEState.Leaf.orbit
+		_next_state = PHES.Leaf.orbit
 	else: # too close, hard dodge
 		_reason += "dist < TOO_CLOSE"
-		_next_state = PHEState.dodge_back_series
+		_next_state = PHES.dodge_back_series
 
 
 	return VerdictPH.new(_next_state, _reason)

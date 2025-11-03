@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges := [PHEState.Leaf.dodge_R, PHEState.Leaf.dodge_L, PHEState.Leaf.dodge_F, PHEState.Leaf.dodge_B]
+var all_the_dodges := [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
 
 
 func initialise() -> void:
@@ -11,15 +11,17 @@ func initialise() -> void:
 
 func get_attack_series_list() -> Array:
 	return [
-		[PHEState.Leaf.dodge_B, PHEState.Leaf.attack_360_low],
-		[PHEState.Leaf.dodge_B, PHEState.Leaf.sword_slide],
+		[PHES.Leaf.dodge_B, PHES.Leaf.attack_360_low],
+		[PHES.Leaf.dodge_B, PHES.Leaf.sword_slide],
+		[PHES.Leaf.dodge_B, PHES.Leaf.gap_closer],
 	]
 
 
 func pick_series_idx() -> int:
 	var _idx := ra.ipick_weighted({
-		0: 0.9 if not me.angry_raised else 0.2,
-		1: 0.05 if not me.angry_raised else 0.8,
+		0: fvalue_angry(0.9, 0.2),
+		1: fvalue_angry(0.05, 0.6),
+		2: fvalue_angry(0.1, 0.6),
 	})
 	return _idx
 

@@ -35,13 +35,3 @@ func update(delta):
 	e_movement.rotate_towards_player(delta, sp_config)
 	e_movement.move_with_root(delta)
 	manage_weapons()
-
-# var decel_speed: float = 20
-
-# func smooth_stop(delta):
-# 	var horizontal_vel = Vector3(me.velocity.x, 0, me.velocity.z)
-	
-# 	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, decel_speed * delta)
-	
-# 	me.velocity.x = horizontal_vel.x
-# 	me.velocity.z = horizontal_vel.z

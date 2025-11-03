@@ -67,7 +67,7 @@ func initialise() -> void:
 	pass
 
 # CHECK TRANSITION
-# region: code
+# region
 
 # - does something from the past forces us to switch? 
 # - if not, does something from the present modify our inputs? 

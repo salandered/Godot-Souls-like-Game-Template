@@ -16,14 +16,14 @@ var curr_direction: DualDirection
 var opposite_dir_change := StrafeDirChange.new()
 var speed_from_inherited := FloatLinearInterpolator.new()
 var speed_mult_from_idle := EaseCurveInterpolator.new()
-var angular_sp := FloatLinearInterpolator.new()
+var angular_accel := FloatLinearInterpolator.new()
 var _one_dir_timer: DelayTimer = DelayTimer.new()
 
 var _resettable := [
 	opposite_dir_change,
 	speed_from_inherited,
 	speed_mult_from_idle,
-	angular_sp,
+	angular_accel,
 	_one_dir_timer
 ]
 
@@ -37,16 +37,16 @@ func initialise() -> void:
 
 	blend_time.set_specific(0.35)
 	blend_time.set_by_prev_action({
-		PHEState.Leaf.scare_off: 0.34,
-		PHEState.Leaf.combat_idle: 0.3,
-		PHEState.Leaf.club_part_1: 0.3,
-		PHEState.Leaf.club_part_2: 0.4,
-		PHEState.Leaf.club_part_3_4: 0.3,
+		PHES.Leaf.scare_off: 0.34,
+		PHES.Leaf.combat_idle: 0.3,
+		PHES.Leaf.club_part_1: 0.3,
+		PHES.Leaf.club_part_2: 0.4,
+		PHES.Leaf.club_part_3_4: 0.3,
 	})
 
 
 func _get_curr_direction_speed() -> float:
-	var _add := 0.0 if not me.angry_raised else 1.0
+	var _add := 0.0 if not me.angry_raised else 2.0
 	return curr_direction.get_curr_speed() + _add
 
 
@@ -59,9 +59,9 @@ func on_enter_state() -> void:
 	_inherited_speed = clampf(_inherited_speed, _inherited_speed, 2.0)
 	__log_ent("_inherited_speed clamped", _inherited_speed)
 	speed_from_inherited.initialise(_inherited_speed, _get_curr_direction_speed(), accel_from_inherited + 1.0)
-	angular_sp.initialise(1.0, default_sp.ANGULAR_SPEED, 0.8)
+	angular_accel.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
 	match PREV_LEAF:
-		PHEState.Leaf.combat_idle:
+		PHES.Leaf.combat_idle:
 			speed_mult_from_idle.initialise(accel_from_idle_curve, accel_from_idle + 1.0)
 
 
@@ -77,11 +77,11 @@ func update(delta: float) -> void:
 
 	
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
-	CURR_ANGULAR_SPEED = angular_sp.update(delta)
+	CURR_ANGULAR_SPEED = angular_accel.update(delta)
 
 
 	match PREV_LEAF:
-		PHEState.Leaf.combat_idle:
+		PHES.Leaf.combat_idle:
 			SPEED_MULT *= speed_mult_from_idle.update(delta)
 		_:
 			CURR_SPEED = speed_from_inherited.update(delta)
@@ -101,7 +101,7 @@ func update(delta: float) -> void:
 		opposite_dir_change.cooldown.reset()
 		__log_upd("OPPOSITE dir change and dip triggered")
 
-	get_animator_manager().set_global_speed_scale(maxf(SPEED_MULT, 0.5))
+	get_animator_manager().set_global_speed_scale(maxf(SPEED_MULT + fvalue_angry(0.0, 0.3), 0.5))
 
 
 func _set_up_commit_timer():
@@ -111,9 +111,9 @@ func _set_up_commit_timer():
 
 func _choose_initial_direction(to_opposite: bool = false):
 	match PREV_LEAF:
-		PHEState.Leaf.dodge_R:
+		PHES.Leaf.dodge_R:
 			curr_direction.set_direction(DualDirection.Dir.PRIMARY)
-		PHEState.Leaf.dodge_L:
+		PHES.Leaf.dodge_L:
 			curr_direction.set_direction(DualDirection.Dir.SECONDARY)
 
 		_:

@@ -32,11 +32,11 @@ var _slow_angry_preset := ActionModeSwitcher.Preset.new(ModeName.SLOW, 1.7 + 0.4
 var curr_mode: ActionModeSwitcher
 
 func initialise() -> void:
-	default_sp.ANGULAR_SPEED = 3
+	default_sp.ANGULAR_SPEED = 2.5
 	
 	blend_time.set_by_prev_action({
-		PHEState.Leaf.awaken: 0.3,
-		PHEState.Leaf.combat_idle: 0.3,
+		PHES.Leaf.awaken: 0.3,
+		PHES.Leaf.combat_idle: 0.3,
 	})
 
 	curr_mode = ActionModeSwitcher.new(_slow_preset, _fast_preset)
@@ -50,12 +50,18 @@ func _decide_on_mode_on_enter():
 
 	var dist := distance_to_player()
 	var _reason: String = ""
-	if dist >= config.REAL_FAR():
-		curr_mode.set_mode(ModeName.FAST)
-		_reason += "dist > REAL_FAR"
+	if not me.angry_raised:
+		if dist >= config.REAL_FAR():
+			curr_mode.set_mode(ModeName.FAST)
+			_reason += "dist > REAL_FAR"
+		else:
+			_reason += "dist < REAL_FAR"
+			curr_mode.set_mode(ModeName.SLOW)
 	else:
-		_reason += "dist < REAL_FAR"
-		curr_mode.set_mode(ModeName.SLOW)
+		if dist >= config.COMBAT_RAD() - 0.2:
+			curr_mode.set_mode(ModeName.FAST)
+		else:
+			curr_mode.set_mode(ModeName.SLOW)
 
 	__log_decide_on_mode(true, "-x-", _reason)
 
@@ -71,7 +77,7 @@ func _update_mode() -> bool:
 		ModeName.FAST:
 			if distance_to_player() < config.CLOSE_TO_ORBIT() - subtract_rad():
 				_reason += "dist < CLOSE_TO_ORBIT"
-				curr_mode.set_mode(ModeName.SLOW)
+				curr_mode.set_mode(svalue_angry(ModeName.SLOW, ModeName.FAST))
 		ModeName.SLOW:
 			if distance_to_player() >= config.REAL_FAR() - subtract_rad():
 				_reason += "dist > REAL_FAR"
@@ -95,7 +101,7 @@ func on_enter_state() -> void:
 	__log_ent("_inherited_speed, speed will be ", _inherited_speed, "->", curr_mode.get_curr_speed())
 
 	speed_from_inherited.initialise(_inherited_speed, curr_mode.get_curr_speed(), 0.4)
-	angular_sp.initialise(1.0, default_sp.ANGULAR_SPEED, 0.8)
+	angular_sp.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
 
 
 func on_exit_state() -> void:

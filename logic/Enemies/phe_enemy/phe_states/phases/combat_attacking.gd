@@ -4,14 +4,14 @@ class_name PHECombatAttacking
 
 func get_supported_substates() -> Array[String]:
 	return [
-			PHEState.Leaf.gap_closer,
-			PHEState.Leaf.scare_off,
-			PHEState.Leaf.attack_up,
-			PHEState.attack_club_series,
-			PHEState.attack_pick_single,
-			PHEState.attack_from_dodge_b,
-			PHEState.attack_with_dodge_f,
-			PHEState.attack_360_series,
+			PHES.Leaf.gap_closer,
+			PHES.Leaf.scare_off,
+			PHES.Leaf.attack_up,
+			PHES.attack_club_series,
+			PHES.attack_pick_single,
+			PHES.attack_from_dodge_b,
+			PHES.attack_with_dodge_f,
+			PHES.attack_360_series,
 		]
 
 
@@ -67,29 +67,26 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	if dist > config.GAP_CLOSER_RAD():
 		_reason = "pl_dist_greater_than GAP_CLOSER_RAD"
 		_next_state = ra.spick_weighted({
-			PHEState.Leaf.gap_closer: 0.4 if not me.angry_raised else 0.8,
-			PHEState.attack_with_dodge_f: 0.6 if not me.angry_raised else 0.2})
-
+			PHES.Leaf.gap_closer: fvalue_angry(0.4, 0.9),
+			PHES.attack_with_dodge_f: fvalue_angry(0.0, 0.1)})
 	elif dist > config.ORBIT_RAD():
-		_next_state = PHEState.attack_with_dodge_f
+		_next_state = PHES.attack_with_dodge_f
 	elif dist > config.COMBAT_RAD():
 		_next_state = ra.spick_weighted({
-			PHEState.attack_360_series: 0.5,
-			PHEState.attack_pick_single: 0.5})
+			PHES.attack_360_series: 0.5,
+			PHES.attack_pick_single: 0.5})
 	elif dist > config.TOO_CLOSE():
 		_reason = "SUPER_CLOSE < dist < GAP_CLOSER_RAD"
 		_next_state = ra.spick_weighted({
-			PHEState.attack_club_series if not me.angry_raised \
-				else PHEState.attack_360_series: 0.8,
-			PHEState.attack_pick_single: 0.1,
-			PHEState.Leaf.scare_off: 0.1,
-			PHEState.attack_from_dodge_b: 0.0 if not me.angry_raised else 0.4})
+			state_angry(PHES.attack_club_series, PHES.attack_360_series): 0.7,
+			PHES.attack_pick_single: fvalue_angry(0.4, 0.5),
+			PHES.Leaf.scare_off: 0.2,
+			PHES.attack_from_dodge_b: fvalue_angry(0.0, 0.4)})
 	else:
 		_reason = "dist < SUPER_CLOSE"
 		_next_state = ra.spick_weighted({
-			PHEState.attack_from_dodge_b: 0.1 if not me.angry_raised else 0.7,
-			PHEState.Leaf.scare_off if not me.angry_raised \
-				else PHEState.attack_360_series: 0.5,
-			PHEState.attack_pick_single: 0.3}
+			PHES.attack_from_dodge_b: fvalue_angry(0.1, 0.5),
+			state_angry(PHES.Leaf.scare_off, PHES.attack_360_series): fvalue_angry(0.6, 0.5),
+			PHES.attack_pick_single: fvalue_angry(0.3, 0.3)}
 		)
 	return VerdictPH.new(_next_state, _reason)

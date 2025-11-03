@@ -1,5 +1,7 @@
 extends RefCounted
-class_name PHEState
+## Stands for Phase Enemy State
+## 'Phase' means HSM state (that happened)
+class_name PHES
 
 const _TOP = "_TOP"
 const life := "life"
@@ -22,6 +24,7 @@ class Leaf:
 	const sleep := "sleep"
 	const awaken := "awaken"
 	const death := "death"
+	const phase_switch := "phase_switch🕹️"
 
 	## loco
 	const combat_idle := "combat_idle"
@@ -46,5 +49,3 @@ class Leaf:
 	const attack_360_low := "attack_360_low"
 	const attack_up := "attack_up"
 	const attack_down := "attack_down"
-
-	const phase_switch := "phase_switch"

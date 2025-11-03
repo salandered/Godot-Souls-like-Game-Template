@@ -23,7 +23,7 @@ func update(input_: InputPackage, delta: float):
 
 
 ## TURN LOGIC
-# region: code 
+# region 
 
 func calculate_target_angle(input_: InputPackage) -> float:
 	var target_angle: float
@@ -51,7 +51,7 @@ func turn_direction_by_target_angle(target_angle: float) -> String:
 # endregion
 
 ## ANIMS BLEND TIMES / OFFSETS ETC
-# region: code 
+# region 
 
 func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 	var prev_anim := container.l_action_by_name(PREV_ACTION).anim

@@ -15,6 +15,8 @@ const small_react := _lib._axe_all + "react small"
 const sleep := _lib._not_axe + "sleep"
 const awaken := _lib._not_axe + "awakening"
 const death := _lib._not_axe + "death"
+const phase_switch := _lib._legacy + "phase_switch"
+const phase_switch_loop := _lib._legacy + "phase_switch_loop"
 
 
 class loco:
@@ -52,15 +54,6 @@ class attack:
 	const club_part_3_4 := _lib._not_axe + "ADD One Hand Club Combo part3"
 	
 	const sword_slide := _lib._not_axe + "ADD great sword slide attack"
-	## later: too high
-	# const axe_slice_1 := _lib._axe_all + "at RL 1 finite"
-	# const axe_slice_2 := _lib._axe_all + "slash_4"
-	# const combo_slices12 := _lib._axe_all + "combo 2 at"
-	# etc from axe
-
-class legacy:
-	const phase_switch := _lib._legacy + "phase_switch"
-	const gapclose_2 := _lib._legacy + "gapclose_2"
 
 
 var list_of_animations: Array[AnimationData] = [
@@ -68,6 +61,8 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(big_react),
 	AnimationData.new(small_react),
 	AnimationData.new(sleep),
+	AnimationData.new(phase_switch, 0.7),
+	AnimationData.new(phase_switch_loop),
 	AnimationData.new(awaken),
 	AnimationData.new(death),
 	
@@ -100,9 +95,7 @@ var list_of_animations: Array[AnimationData] = [
 	
 	AnimationData.new(attack.sword_slide),
 	
-
 	## legacy
-	AnimationData.new(legacy.phase_switch),
-	AnimationData.new(legacy.gapclose_2),
+
 	
 ]

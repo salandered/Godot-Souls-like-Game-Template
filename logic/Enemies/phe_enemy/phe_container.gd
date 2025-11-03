@@ -62,54 +62,56 @@ class _LStData extends BaseStData:
 
 
 var node_to_composite_state_data: Dictionary = {
-	"_Top": _CSData.new(PHEState._TOP, _CommitData.new(-1, -1)),
-	"Life": _CSData.new(PHEState.life, _CommitData.new(-1, -1)),
+	"_Top": _CSData.new(PHES._TOP, _CommitData.new(-1, -1)),
+	"Life": _CSData.new(PHES.life, _CommitData.new(-1, -1)),
 
-	"StillLifePhase": _CSData.new(PHEState.still_life_phase, _CommitData.new(-1, -1)),
-	"CombatPhase": _CSData.new(PHEState.combat_phase, _CommitData.new(-1, -1)),
-	"DeathPhase": _CSData.new(PHEState.death_phase, _CommitData.new(-1, -1)),
+	"StillLifePhase": _CSData.new(PHES.still_life_phase, _CommitData.new(-1, -1)),
+	"CombatPhase": _CSData.new(PHES.combat_phase, _CommitData.new(-1, -1)),
+	"DeathPhase": _CSData.new(PHES.death_phase, _CommitData.new(-1, -1)),
 	
-	"CombatLoco": _CSData.new(PHEState.combat_loco, _CommitData.new(-1, -1)),
-	"CombatAttacking": _CSData.new(PHEState.combat_attacking),
-	"AttackClubSeries": _CSData.new(PHEState.attack_club_series),
-	"AttackPickSingle": _CSData.new(PHEState.attack_pick_single),
-	"AttackFromDodgeB": _CSData.new(PHEState.attack_from_dodge_b),
-	"AttackWithDodgeF": _CSData.new(PHEState.attack_with_dodge_f),
-	"Attack360Series": _CSData.new(PHEState.attack_360_series),
+	"CombatLoco": _CSData.new(PHES.combat_loco, _CommitData.new(-1, -1)),
+	"CombatAttacking": _CSData.new(PHES.combat_attacking),
+	"AttackClubSeries": _CSData.new(PHES.attack_club_series),
+	"AttackPickSingle": _CSData.new(PHES.attack_pick_single),
+	"AttackFromDodgeB": _CSData.new(PHES.attack_from_dodge_b),
+	"AttackWithDodgeF": _CSData.new(PHES.attack_with_dodge_f),
+	"Attack360Series": _CSData.new(PHES.attack_360_series),
 	
-	"DodgeBackSeries": _CSData.new(PHEState.dodge_back_series),
-	"DodgePlayful": _CSData.new(PHEState.dodge_playful),
+	"DodgeBackSeries": _CSData.new(PHES.dodge_back_series),
+	"DodgePlayful": _CSData.new(PHES.dodge_playful),
 }
 
 
 var node_to_leaf_state_data: Dictionary = {
-	"Sleep": _LStData.new(PHEState.Leaf.sleep, _AData.new(PHEA.sleep, -0.15), _CommitData.new(-1, -1), ),
-	"Awaken": _LStData.new(PHEState.Leaf.awaken, _AData.new(PHEA.awaken, -0.15), ),
-	"Death": _LStData.new(PHEState.Leaf.death, _AData.new(PHEA.death)),
+	## one time
+	"Sleep": _LStData.new(PHES.Leaf.sleep, _AData.new(PHEA.sleep, -0.15), _CommitData.new(-1, -1), ),
+	"Awaken": _LStData.new(PHES.Leaf.awaken, _AData.new(PHEA.awaken, -0.15), ),
+	"Death": _LStData.new(PHES.Leaf.death, _AData.new(PHEA.death)),
+	"PhaseSwitch": _LStData.new(PHES.Leaf.phase_switch, _AData.new(PHEA.phase_switch, -0.3)),
 
 	## loco
-	"CombatIdle": _LStData.new(PHEState.Leaf.combat_idle, _AData.new(PHEA.loco.combat_idle, -0.03), _CommitData.new(0.4), ),
-	"Pursue": _LStData.new(PHEState.Leaf.pursue, _AData.new(PHEA.loco.run_forward, -0.06), _CommitData.new(0.3, 30)),
-	"Orbit": _LStData.new(PHEState.Leaf.orbit, _AData.new(PHEA.loco.strafe_right), _CommitData.new(0.5)),
-	"DodgeB": _LStData.new(PHEState.Leaf.dodge_B, _AData.new(PHEA.loco.dodge_B, -0.05)),
-	"DodgeF": _LStData.new(PHEState.Leaf.dodge_F, _AData.new(PHEA.loco.dodge_F, -0.05)),
-	"DodgeL": _LStData.new(PHEState.Leaf.dodge_L, _AData.new(PHEA.loco.dodge_L, -0.05)),
-	"DodgeR": _LStData.new(PHEState.Leaf.dodge_R, _AData.new(PHEA.loco.dodge_R, -0.05)),
-	"JumpTowards": _LStData.new(PHEState.Leaf.jump_towards, _AData.new(PHEA.loco.jump_towards, -0.06)),
+	"CombatIdle": _LStData.new(PHES.Leaf.combat_idle, _AData.new(PHEA.loco.combat_idle, -0.03), _CommitData.new(0.4), ),
+	"Pursue": _LStData.new(PHES.Leaf.pursue, _AData.new(PHEA.loco.run_forward, -0.06), _CommitData.new(0.3, 30)),
+	"Orbit": _LStData.new(PHES.Leaf.orbit, _AData.new(PHEA.loco.strafe_right), _CommitData.new(0.5)),
+	"DodgeB": _LStData.new(PHES.Leaf.dodge_B, _AData.new(PHEA.loco.dodge_B, -0.05)),
+	"DodgeF": _LStData.new(PHES.Leaf.dodge_F, _AData.new(PHEA.loco.dodge_F, -0.05)),
+	"DodgeL": _LStData.new(PHES.Leaf.dodge_L, _AData.new(PHEA.loco.dodge_L, -0.05)),
+	"DodgeR": _LStData.new(PHES.Leaf.dodge_R, _AData.new(PHEA.loco.dodge_R, -0.05)),
+	"JumpTowards": _LStData.new(PHES.Leaf.jump_towards, _AData.new(PHEA.loco.jump_towards, -0.1)),
 
 	## attack
-	"ScareOff": _LStData.new(PHEState.Leaf.scare_off, _AData.new(PHEA.attack.scare_off, -0.25)),
-	"GapCloser": _LStData.new(PHEState.Leaf.gap_closer, _AData.new(PHEA.attack.gap_closer, -0.2)),
-	"ClubPart1": _LStData.new(PHEState.Leaf.club_part_1, _AData.new(PHEA.attack.club_part_1, -0.15)),
-	"ClubPart2": _LStData.new(PHEState.Leaf.club_part_2, _AData.new(PHEA.attack.club_part_2, -0.15)),
-	"ClubPart3_4": _LStData.new(PHEState.Leaf.club_part_3_4, _AData.new(PHEA.attack.club_part_3_4, -0.15)),
-	"Attack360High": _LStData.new(PHEState.Leaf.attack_360_high, _AData.new(PHEA.attack.attack_360_high, -0.15)),
-	"Attack360Low": _LStData.new(PHEState.Leaf.attack_360_low, _AData.new(PHEA.attack.attack_360_low, -0.15)),
-	"AttackUp": _LStData.new(PHEState.Leaf.attack_up, _AData.new(PHEA.attack.attack_up, -0.13)),
-	"AttackDown": _LStData.new(PHEState.Leaf.attack_down, _AData.new(PHEA.attack.attack_down, -0.15)),
-	"SwordSlide": _LStData.new(PHEState.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide, -0.15)),
+	"ScareOff": _LStData.new(PHES.Leaf.scare_off, _AData.new(PHEA.attack.scare_off, -0.25)),
+	"GapCloser": _LStData.new(PHES.Leaf.gap_closer, _AData.new(PHEA.attack.gap_closer, -0.24)),
+	"ClubPart1": _LStData.new(PHES.Leaf.club_part_1, _AData.new(PHEA.attack.club_part_1, -0.15)),
+	"ClubPart2": _LStData.new(PHES.Leaf.club_part_2, _AData.new(PHEA.attack.club_part_2, -0.15)),
+	"ClubPart3_4": _LStData.new(PHES.Leaf.club_part_3_4, _AData.new(PHEA.attack.club_part_3_4, -0.15)),
+	"Attack360High": _LStData.new(PHES.Leaf.attack_360_high, _AData.new(PHEA.attack.attack_360_high, -0.15)),
+	"Attack360Low": _LStData.new(PHES.Leaf.attack_360_low, _AData.new(PHEA.attack.attack_360_low, -0.15)),
+	"AttackUp": _LStData.new(PHES.Leaf.attack_up, _AData.new(PHEA.attack.attack_up, -0.13)),
+	"AttackDown": _LStData.new(PHES.Leaf.attack_down, _AData.new(PHEA.attack.attack_down, -0.15)),
+	"SwordSlide": _LStData.new(PHES.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide, -0.15)),
 
-	# "PhaseSwitch": _LStData.new(PHEState.phase_switch, PHEA.phase_switch),
+	# "PhaseSwitch": _LStData.new(PHES.phase_switch, PHEA.phase_switch),
 }
 
 var _states: Dictionary # { String : BasePHEState }

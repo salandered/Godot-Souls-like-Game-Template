@@ -151,7 +151,7 @@ func deactivate_weapons() -> void:
 
 
 ## ANIM BASED TIME MANAGEMENT
-# region: code
+# region
 
 func effective_time_spent() -> float:
 	return ActionTimeManagement.effective_time_spent(get_animator_manager(), self)
@@ -196,7 +196,7 @@ func before_marker(marker_name: String) -> bool:
 
 
 ## SPECIFIC LOGIC
-# region: code
+# region
 
 
 func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: float = 0.0) -> float:
@@ -245,6 +245,6 @@ func __log_timings() -> String:
 	return _time_msg
 
 func __log_anim():
-	print_.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
+	if __LOG_ANIM: print_.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
 
 # endregion

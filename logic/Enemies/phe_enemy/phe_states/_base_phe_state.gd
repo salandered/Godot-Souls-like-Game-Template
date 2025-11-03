@@ -121,8 +121,54 @@ func direction_to_(target: Variant) -> Vector3:
 
 # endregion
 
+## COMMON HELPERS
+# region
+
+func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: float, curr_sbs_name: String, next_sbs_name: String, __log_context: String = ""):
+	# NOTE: out states tend to return empty string, meaning that no switch needed. Monitors are not ready for this
+	if next_sbs_name == "":
+		next_sbs_name = curr_sbs_name
+	for monitor in __monitors:
+		monitor.auto_update(delta, curr_sbs_name, next_sbs_name, -1, -1, __log_context)
+
+
+func state_angry(state_usual: String, state_angry_: String) -> String:
+	return state_usual if not me.angry_raised else state_angry_
+
+
+func fvalue_angry(value_usual_: float, value_angry_: float) -> float:
+	return value_usual_ if not me.angry_raised else value_angry_
+
+func svalue_angry(value_usual_: String, value_angry_: String) -> String:
+	return value_usual_ if not me.angry_raised else value_angry_
+
+func chance_angry(chance_usual: float, chance_angry_: float) -> float:
+	return ra.chance(fvalue_angry(chance_usual, chance_angry_))
+
+
+## 50% chance or third if angry
+func flip_w_angry(state_a: String, state_b: String, state_angry_: String) -> String:
+	if me.angry_raised: return state_angry_
+	return flip_state(state_a, state_b)
+
+
+## 50% chance
+func flip_state(state_a: String, state_b: String) -> String:
+	return state_a if ra.coinflip() else state_b
+
+## returns 'state_a' with chance 'chance' else 'state_b'
+func flip_chance(chance: float, state_a: String, state_b: String) -> String:
+	return state_a if ra.chance(chance) else state_b
+
+
+# endregion
+
 
 # region: __LOGS
+
+
+var __LOG_EXIT: bool = false
+var __LOG_ANIM: bool = false
 
 func __get_common_context() -> String:
 	var _msg := ""
@@ -153,7 +199,7 @@ func __log_ent(...parts: Array):
 @abstract func __log_timings() -> String
 
 func __log_ext(...parts: Array):
-	print_.phe_sm(pp.s(__log_state(), pp.on_ext, __log_timings()), pp.list_(parts), __log_indent())
+	if __LOG_EXIT: print_.phe_sm(pp.s(__log_state(), pp.on_ext, __log_timings()), pp.list_(parts), __log_indent())
 
 func __log_phe__upd(...parts: Array):
 	print_.phe_sm(__log_state() + pp.on_internal_upd, pp.list_(parts), __log_indent())
@@ -174,5 +220,4 @@ func __log_forgot_implement(sbs_name: String, function_name: String, fallback: S
 	var _msg := "forgot to implement '%s' logic in '%s()'. Fallback: %s" % [sbs_name, function_name, fallback]
 	__log_warn(true, _msg)
 
-# endregion
 # endregion

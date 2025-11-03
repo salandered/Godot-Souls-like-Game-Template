@@ -23,7 +23,7 @@ func get_player() -> Princess:
 
 
 ## PLAYER UTILS
-# region: code
+# region
 
 func distance_to_player() -> float:
 	return me.global_position.distance_to(get_player().global_position)
@@ -63,7 +63,7 @@ func get_player_position_grounded() -> Vector3:
 
 
 ## BASIC UTILS
-# region: code
+# region
 
 
 func direction_to_(target: Variant) -> Vector3:
@@ -87,7 +87,7 @@ func get_curr_velocity_len() -> float:
 
 
 ## MOVING
-# region: code
+# region
 
 
 func look_at_player(grounded: bool = false):
@@ -110,6 +110,13 @@ func rotate_towards_player(delta: float, speed_config: SpeedConfig = null, angle
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(delta, speed_config, angle_adjustment)
 	me.rotate_y(angle.value)
+
+
+func smooth_xz_stop(delta, decel_speed: float):
+	var horizontal_vel := Vector3(me.velocity.x, 0, me.velocity.z)
+	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, decel_speed * delta)
+	me.velocity.x = horizontal_vel.x
+	me.velocity.z = horizontal_vel.z
 
 
 func _calculate_allowed_angle(delta: float, speed_config: SpeedConfig, angle_adjustment: float = 0.0) -> AllowedAngle:
@@ -145,12 +152,13 @@ func _move_toward_player(angle: AllowedAngle, speed_config: SpeedConfig):
 func apply_gravity(delta) -> bool:
 	if not me.is_on_floor():
 		me.velocity.y -= u.gravity * delta
+		me.velocity.y -= u.gravity * 1.5 * delta
 		return true
 	return false
 
 
 ## MOVING WITH ROOT
-# region: code 
+# region 
 
 
 func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = true, scale_y: bool = true, __log: bool = false) -> void:
@@ -175,7 +183,7 @@ func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = 
 
 
 ## STRAFE
-# region: code
+# region
 
 ## _direction is +-1. -1 means right
 func orbit(_direction: int = 1, speed_config: SpeedConfig = null):

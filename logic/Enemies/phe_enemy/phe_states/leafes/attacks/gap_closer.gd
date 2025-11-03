@@ -32,8 +32,6 @@ func _decide_mode_on_enter():
 
 func on_enter_state() -> void:
 	_decide_mode_on_enter()
-	if mode_switcher.get_curr_mode_name() == USUAL:
-		APPLY_GRAVITY = false
 	gap_calculator = GapJumpCalculator.new(mode_switcher.get_curr_speed())
 	gap_calculator.set_coef(distance_to_player(), me.angry_raised)
 	
@@ -52,7 +50,9 @@ func update(delta):
 	elif before_marker(Marker.Name_.LAND_START):
 		var y_root_scale: bool = true
 		if mode_switcher.get_curr_mode_name() == USUAL:
+			APPLY_GRAVITY = false
 			y_root_scale = false
 		e_movement.move_with_root(delta, gap_calculator.get_curr_coef(), true, y_root_scale)
 	else:
+		APPLY_GRAVITY = true
 		e_movement.move_with_root(delta)

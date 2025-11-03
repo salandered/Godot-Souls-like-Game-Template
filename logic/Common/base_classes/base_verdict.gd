@@ -34,3 +34,4 @@ func _speak_freely() -> void:
 	var name_: Variant = get_script().get_global_name()
 	if _comment:
 		print_.dev("I, " + str(name_) + "⚖️", "have something important to say: " + _comment)
+
