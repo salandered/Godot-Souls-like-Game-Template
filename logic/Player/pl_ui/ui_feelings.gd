@@ -40,7 +40,7 @@ func _process(delta: float):
 
 
 func _update_health_bar():
-	var current_health = pl_feelings.get_current_health()
+	var current_health := pl_feelings.get_current_health()
 	if current_health == _prev_health:
 		return
 
@@ -49,11 +49,11 @@ func _update_health_bar():
 
 
 func _update_stamina_bar(delta):
-	var current_stamina = pl_feelings.get_current_stamina()
+	var current_stamina := pl_feelings.get_current_stamina()
 	if current_stamina == _prev_stamina:
 		return
 
-	var change_amount = abs(current_stamina - _prev_stamina)
+	var change_amount := absf(current_stamina - _prev_stamina)
 	
 	if change_amount > STAMINA_BIG_CHANGE_THRESHOLD:
 		_animate_stamina_change(current_stamina, ANIM_DURATION_STAMINA_HIT)
@@ -78,7 +78,7 @@ func _animate_stamina_flash():
 	# _stamina_flash_tween.tween_property(stamina_bar, "modulate", Color(1, 1, 1), 0.15)
 
 	
-func _animate_health_change(target_value: int) -> void:
+func _animate_health_change(target_value: float) -> void:
 	if _health_tween:
 		_health_tween.kill()
 	
@@ -91,7 +91,7 @@ func _animate_health_change(target_value: int) -> void:
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	
-func _animate_stamina_change(target_value: int, duration: float) -> void:
+func _animate_stamina_change(target_value: float, duration: float) -> void:
 	if _stamina_tween:
 		_stamina_tween.kill()
 	

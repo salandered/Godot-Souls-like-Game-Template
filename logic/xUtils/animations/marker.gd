@@ -1,6 +1,17 @@
 extends RefCounted
 class_name Marker
 
+## DOCS
+# Animation Markers are persistent - they're part of the Animation resource structure.
+# 
+# For native Godot animations (.res): Markers save automatically.
+# 
+# For imported animations (GLB/FBX): Enable "Save to File" in Advanced Import Settings
+# to create a separate .res file, otherwise markers will be lost on reimport! WARNING
+# 
+# Note: Markers are NOT "custom tracks" - they're timeline metadata.
+# The "Keep Custom Tracks" setting only applies to actual anim tracks.
+
 
 var time: float
 var marker_name: String
@@ -16,7 +27,6 @@ class Name_:
 	const END = "end"
 
 	# jump
-	
 	const JUMP_LAUNCH = "jump_launch"
 	const JUMP_START_END = "jump_start_end"
 	const LAND_START = "land_start"
@@ -24,24 +34,25 @@ class Name_:
 	const RUN_AGAIN = "run_again"
 	const PEAK = "PEAK"
 
-
+	# strongly recommended in any loco loop anim 
 	const LOCO_LOOP_L_LEG_FULL_CONTACT = "left_leg_full_contact"
 	const TURN_180_APEX = "APEX"
 	const TURN_COMPLETE = "TURN_COMPLETE"
 	const GIVE_UP_RM = "give_up_rm"
 	
-	# strongly recommended in attack states
+	# strongly recommended in attack states for player
+	# good to check for enemy attack states 
 	const ALLOWS_SWITCH = "allows_switch"
 	
-	# to mimick from run anims (e.g. dodge)
+	# for now in enemy for specific series logic
+	const EARLY_SERIES_SWITCH = "EARLY_SERIES_SWITCH"
+	
+	# to mimick that animation is from run (not idle pose) (e.g. dodge)
 	const FROM_RUN = "from_run"
 	const TO_RUN = "to_run"
 	const TO_IDLE = "to_idle"
 
-
 	# HSM anim 
-	const COMMIT = "commit"
-
 
 	# overlay
 	const OVERLAY_START = "overlay_start"

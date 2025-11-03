@@ -9,7 +9,7 @@ var ANGLE_FOR_U_TURN_MIN := 110.0
 var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 
-func _ready():
+func _ready() -> void:
 	_non_moving_timer.initialise(TO_STOP_DELAY)
 
 

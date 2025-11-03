@@ -7,7 +7,7 @@ class_name PingaBlade
 @onready var visuals: Node3D = %Visuals
 
 
-func _ready():
+func _ready() -> void:
 	var mesh: MeshInstance3D = visuals.get_child(0)
 	assert(mesh and mesh is MeshInstance3D)
 	

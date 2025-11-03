@@ -6,7 +6,7 @@ class_name BeginModifier
 
 var __initialised: bool = false
 
-func initialise():
+func initialise() -> void:
 	__initialised = true
 
 # because we manage our modifiers via influence manipulations, we often have active ones with 0 influence

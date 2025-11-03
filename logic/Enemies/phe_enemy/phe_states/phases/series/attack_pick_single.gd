@@ -17,9 +17,24 @@ func get_attack_series_list() -> Array:
 
 
 func pick_series_idx() -> int:
-	var _idx = ra.ipick_weighted({
-		0: 0.4 if not me.angry_raised else 0.6,
-		1: 0.4 if not me.angry_raised else 0.2,
-		2: 0.2 if not me.angry_raised else 0.6,
+	var _idx := 0
+	if not me.angry_raised:
+		_idx = ra.ipick_weighted({
+			0: 0.0,
+			1: 0.9,
+			2: 0.05,
+		})
+	else:
+		_idx = ra.ipick_weighted({
+			0: 0.9,
+			1: 0.0,
+			2: 0.4,
 	})
+
 	return _idx
+
+func condition_to_next_switch(current_substate: BasePHELeaf) -> bool:
+	return default_condition_to_next_switch(current_substate)
+	
+func condition_to_end(current_substate: BasePHELeaf) -> bool:
+	return default_condition_to_end(current_substate)

@@ -14,16 +14,6 @@ static func fr(to_str_: bool = true, str_prefix: bool = false) -> Variant:
 		return Engine.get_process_frames()
 
 
-static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "", fatal: bool = false) -> Variant:
-	if dict.has(key):
-		return dict[key]
-
-	var msg := pp.s("Context:", context, "\nDict does not have key", pp.in_q(key)) # , "Dict: ", pp._dict(dict))
-	if fatal:
-		assert(false, msg)
-	print_.warn(msg)
-	return null
-
 # ease-in-out S-curve
 # takes a linear progress value (0 to 1) and returns a smoothed value (0 to 1)
 static func ease_in_out(x: float) -> float:
@@ -31,18 +21,26 @@ static func ease_in_out(x: float) -> float:
 	return 0.5 * (1.0 - cos(x * PI))
 
 
-static func safe_has_key(key: String, dict: Dictionary, fallback: String) -> bool:
-	var exists = key in dict
+## returns null if key does not exist
+static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "", fallback: String = Fallback.WARN_CRUCIAL) -> Variant:
+	if safe_has_key(dict, key, fallback):
+		return dict[key]
+	else:
+		return null
+
+
+static func safe_has_key(dict: Dictionary, key: String, fallback: String = Fallback.WARN_CRUCIAL) -> bool:
+	var exists := key in dict
 	if not exists:
 		match fallback:
 			Fallback.FAIL:
 				assert(false, "Key '" + str(key) + "' not found in dictionary")
 			Fallback.WARN, Fallback.WARN_CRUCIAL:
-				print_.warn("Key '" + str(key) + "' not found in dictionary", fallback == Fallback.WARN_CRUCIAL)
+				print_.warn_raw(fallback == Fallback.WARN_CRUCIAL, "Key '" + str(key) + "' not found in dictionary")
 			Fallback.SOFT:
 				pass
 			_:
-				print_.warn("Key '" + str(key) + "' not found in dictionary", false)
+				print_.warn_raw(false, "Key '" + str(key) + "' not found in dictionary")
 	return exists
 
 static func safe_look_at(
@@ -117,9 +115,8 @@ static func safe_cast_array_of_strings(array: Array[Variant]) -> Array[String]:
 	var list_casted: Array[String] = []
 	for item in array:
 		if item is not String:
-			print_.warn(
-				pp.s("Array contains non-string value: ", item, " | Array:", pp.list_(array),
-				"Fallback: will return empty array."))
+			print_.warn_raw(false,
+				"Array contains non-string value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
 			return []
 	list_casted.assign(array)
 	return list_casted

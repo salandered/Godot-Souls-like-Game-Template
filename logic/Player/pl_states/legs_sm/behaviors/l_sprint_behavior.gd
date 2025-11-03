@@ -14,7 +14,7 @@ var _non_moving_timer: DelayTimer = DelayTimer.new()
 
 var _reason: String = ""
 
-func _ready():
+func _ready() -> void:
 	_non_moving_timer.initialise(TO_STOP_DELAY)
 
 

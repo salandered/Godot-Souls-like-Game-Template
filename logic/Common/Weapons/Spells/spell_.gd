@@ -8,7 +8,7 @@ var spell_name: String
 var hitbox_ignore_list: Array[Area3D]
 
 
-func _ready():
+func _ready() -> void:
 	collision_layer = Collision.Layers.WEAPON_AREA
 	collision_mask = Collision.Mask.WEAPON_AREA_MASK
 	

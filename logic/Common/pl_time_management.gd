@@ -1,8 +1,9 @@
 extends TimeManagement
 # TODO: merge with AnimTimeManagement
+#       this also means validating that PlayerAnimatorManager aligns with BaseAnimatorManager
 class_name PlActionTimeManagement
 
-var animator_manager: BaseAnimatorManager
+var animator_manager: PlAnimatorManager
 var anim_container: BaseAnimationContainer
 
 var anim: AnimationData
@@ -18,7 +19,7 @@ func _effective_duration() -> float:
 ## May start with start offsets
 func effective_time_spent() -> float: # ✔️
 	if not animator_manager.get_curr_anim().is_looping:
-		return animator_manager.get_current_anim_effective_time_spent()
+		return animator_manager.get_curr_anim_effective_time_spent()
 	else:
 		return get_actual_time_spent()
 
@@ -36,9 +37,9 @@ func time_spent() -> float: # ✔️
 
 ## NOTE: in case of looping animations returns big number
 func time_remaining() -> float: # ✔️
-	var _curr_anim = animator_manager.get_curr_anim()
+	var _curr_anim := animator_manager.get_curr_anim()
 	if not _curr_anim:
-		print_.note("direct_time_remaining - not _curr_anim, return 0.0")
+		print_.note(false, "direct_time_remaining - not _curr_anim, return 0.0")
 		return 0.0
 	if _curr_anim.is_looping:
 		return Constants.BIG_MEANINGLESS_NUMBER
@@ -69,7 +70,7 @@ func works_between(start: float, finish: float) -> bool:
 func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
-		print_.warn("passed_marker - no time - will return false", true)
+		print_.warn_raw(true, "passed_marker - no time - will return false")
 		return __reject()
 
 	if effective_time_spent() >= marker_time + add_time:
@@ -80,7 +81,7 @@ func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 func before_marker(marker_name: String) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
-		print_.warn("before_marker - no time - will return false", true)
+		print_.warn_raw(true, "before_marker - no time - will return false", )
 		return __reject()
 
 	if effective_time_spent() < marker_time:
@@ -89,5 +90,5 @@ func before_marker(marker_name: String) -> bool:
 
 
 func __reject() -> bool:
-	print_.warn("TM rejected -1!")
+	print_.warn_raw(false, "TM rejected -1!")
 	return false

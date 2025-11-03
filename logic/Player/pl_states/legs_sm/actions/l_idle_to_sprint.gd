@@ -1,7 +1,7 @@
 extends LegsAction
 
 
-func _ready():
+func _ready() -> void:
 	default_sp.SPEED = 3.0
 	default_sp.ANGULAR_SPEED = 4
 	default_sp.TURN_SPEED = 2.0

@@ -6,5 +6,5 @@ var label: String = "not assigned"
 
 @onready var look_at_point = $LookAt
 
-func _ready():
+func _ready() -> void:
 	add_to_group("targetable")

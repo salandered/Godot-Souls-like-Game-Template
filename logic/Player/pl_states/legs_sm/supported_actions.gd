@@ -43,7 +43,7 @@ func by_name(requested_name: String) -> String:
 	## (because of convert_to_supported mechanic) 
 	## But we may prevent this in the future: we ll return default action by the same type. 
 	if not is_action_supported(requested_name):
-		print_.warn(requested_name + " cant be find in supported actions: " + str(action_names))
+		print_.warn_raw(false, requested_name + " cant be find in supported actions: " + str(action_names))
 	return requested_name
 
 

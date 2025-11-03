@@ -14,9 +14,13 @@ func _init(states_: Array[String], parent_state_: String):
 
 
 func is_state_supported(requested_name: String) -> bool:
-	var _r = requested_name in state_names
+	var _r := requested_name in state_names
 
 	return _r
+
+
+func get_first_one() -> String:
+	return state_names[0]
 
 
 func _to_string() -> String:
@@ -30,11 +34,11 @@ func __validation():
 # region __LOGS
 
 func __pp_state_supported(requested_name: String) -> String:
-	var _msg = pp.s(requested_name, "is supported.", _to_string())
+	var _msg := pp.s(requested_name, "is supported.", _to_string())
 	return _msg
 
 func __pp_state_not_supported(requested_name: String) -> String:
-	var _msg = pp.s(requested_name, "is not supported" + em.warn, _to_string())
+	var _msg := pp.s(requested_name, "is not supported" + em.warn, _to_string())
 	return _msg
 
 func __log_(...parts: Array):

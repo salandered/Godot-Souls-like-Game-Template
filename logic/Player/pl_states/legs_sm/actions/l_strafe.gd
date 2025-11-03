@@ -56,7 +56,7 @@ var _changers_cooldown = [
 	slightest_dir_change.cooldown
 ]
 
-func initialise():
+func initialise() -> void:
 	default_sp.ANGULAR_SPEED = 8
 	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B, ANIM_IDLE)
 	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
@@ -194,7 +194,7 @@ func _switch_animation(is_opposite_change: bool):
 	elif curr_anim.anim_id in curr_direction.get_all_anim_ids():
 		if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
 			sync_loco_anim_correction = 0.0 + __dev_add
-			__log_action(em.pin, em.mark)
+			__log_action(em.pin, em.mark_alt)
 		var r := sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:
 			_custom_start_time_offset = r
@@ -202,7 +202,7 @@ func _switch_animation(is_opposite_change: bool):
 		_custom_blend_time = 0.24 if is_opposite_change else 0.3
 	else:
 		_custom_blend_time = 0.3
-		print_.warn(action_name + "_switch_animation but not from strafe anim O_o")
+		print_.warn_raw(false, action_name + "_switch_animation but not from strafe anim O_o")
 	
 	anim = next_anim # only after sync_with_curr_loco_anim!
 

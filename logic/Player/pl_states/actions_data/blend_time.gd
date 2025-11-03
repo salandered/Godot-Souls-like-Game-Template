@@ -2,12 +2,14 @@ extends RefCounted
 class_name ActionData
 
 class BlendTime:
-	const DEFAULT: float = 0.2
+	var DEFAULT: float = 0.2
 	
 	var by_prev_action: Dictionary = {}
 	var action_specific: float = DEFAULT
 	
-	
+	func _init(default_: float = 0.2) -> void:
+		DEFAULT = default_
+
 	## Priority:
 	## - by prev action
 	## - specific

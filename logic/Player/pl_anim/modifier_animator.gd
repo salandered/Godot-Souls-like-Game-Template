@@ -52,7 +52,7 @@ var prev_prev_prev_playback: AnimPlayback # Animation D
 var _bone_idx_to_track := {}
 # todo: flying bone attachments
 
-func initialise():
+func initialise() -> void:
 	## NOTE: 0 - root is not animated here. If animation is RM, use get_root_velocity()
 	## 45 - first leg bone
 	if animator_name == 'full_body':
@@ -158,12 +158,12 @@ func _update_skeleton():
 
 		if curr_blend_playback.is_blending:
 			var prev_transform := _calculate_bone_pose(bone_idx, prev_playback) # Pose for animation B
-			var blend_base = prev_transform # Start assuming a simple B->A blend
+			var blend_base := prev_transform # Start assuming a simple B->A blend
 
 			# Check if the C->B blend is active
 			if prev_blend_playback.is_blending and prev_prev_playback:
 				var prev_prev_transform := _calculate_bone_pose(bone_idx, prev_prev_playback) # Pose for C
-				var blend_base_prev = prev_prev_transform # Start assuming a C->B blend
+				var blend_base_prev := prev_prev_transform # Start assuming a C->B blend
 
 				# D->C blend
 				if prev_prev_blend_playback.is_blending and prev_prev_prev_playback:
@@ -263,9 +263,9 @@ func __log_state() -> String:
 # Add this function to your modifier_animator.gd script
 
 func __log_blend_state() -> String:
-	var anim_names = []
-	var blend_times = []
-	var times_left = []
+	var anim_names := []
+	var blend_times := []
+	var times_left := []
 
 	if prev_prev_blend_playback.is_blending and prev_prev_prev_playback and prev_prev_playback:
 		anim_names.append(prev_prev_prev_playback.anim.anim_name) # D
@@ -283,7 +283,7 @@ func __log_blend_state() -> String:
 		blend_times.append(curr_blend_playback.duration)
 		times_left.append(curr_blend_playback.time_remaining())
 	
-	var overlap_duration = "-unknown-"
+	var overlap_duration := "-unknown-"
 	if len(times_left) == 3:
 		overlap_duration = pp.round_001(min(times_left[0], times_left[1], times_left[2]))
 	

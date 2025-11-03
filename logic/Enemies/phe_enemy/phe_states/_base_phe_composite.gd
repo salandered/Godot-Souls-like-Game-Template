@@ -20,7 +20,7 @@ func validate_substate_depth(parent_depth: int) -> bool:
 	return state_depth - parent_depth == 1
 
 
-func _initialise():
+func _initialise() -> void:
 	initialise()
 
 	# after usual initialise
@@ -34,10 +34,17 @@ func initialise() -> void:
 	pass
 
 
+func is_ended() -> bool:
+	if commitment == -1.0:
+		return false
+	else:
+		return works_longer_than(commitment)
+
+
 @abstract func get_supported_substates() -> Array[String]
 
 
-func _on_enter_state():
+func _on_enter_state() -> void:
 	mark_enter_state()
 
 	me.update_state_history(state_name)
@@ -47,21 +54,19 @@ func _on_enter_state():
 	__is_entered = true
 
 	
-	var _next_state = ""
-	var _reason = ""
-	var initial_state_verdict = choose_initial_substate(_next_state, _reason)
-	if not initial_state_verdict.needs_switch():
-		__log_warn(true, "choose_initial_substate returned empty verdict!")
-		return
+	var _next_state := ""
+	var _reason := ""
+	var initial_state_verdict := _choose_initial_substate(_next_state, _reason)
+
 	__log_phe_decision("Initial choice |", initial_state_verdict.get_reason(), " |", __get_common_context(), " => ", initial_state_verdict.next_state)
 	_switch_substate(initial_state_verdict.next_state)
 
-	# after choose_initial_substate!
+	# after choose_initial_substate! or not.. But order is important
 	on_enter_state()
 
 
 ## internal
-func _on_exit_state():
+func _on_exit_state() -> void:
 	__log_ext("")
 	if not __is_entered:
 		__log_warn(true, "Calling exit while not entered")
@@ -74,9 +79,9 @@ func _on_exit_state():
 
 
 var __state_declined: String = "x"
-
+var __prev_now_switch_msg: String = "xx"
 ## for the top state this is called from model
-func _update(delta: float):
+func _update(delta: float) -> void:
 	accumulate_time_spent(delta)
 	if works_longer_than_fatigue():
 		me.fatigue_raised = true
@@ -84,25 +89,25 @@ func _update(delta: float):
 	# do ur stuff
 	update(delta)
 
-	var verdict = _check_substate_transition(delta)
+	var verdict := _check_substate_transition(delta)
+
+	# todo one big mess here
 	if verdict.needs_switch():
 		if __state_declined != verdict.next_state:
 			__log_phe_decision(verdict.get_reason(), " |", __get_common_context(), " => ", verdict.next_state)
-		# else:
-			# __log_phe_decision("still want", verdict.next_state)
-		var _current_sbs = get_current_substate()
-		if _current_sbs != null and _current_sbs.works_less_than_commitment():
-			# todo: consider adding new state to queue
-			# print_.note(__state_declined, true)
+		var _current_sbs := get_current_substate()
+		if not verdict.override_commit_raised() and (_current_sbs != null and _current_sbs.works_less_than_commitment()):
 			if __state_declined != verdict.next_state:
-				__log_phe_decision(em.pin, "curr sbs worked < commit, switch declined ✖️",
-					pp.in_q(_current_sbs.state_name), "Commit", _current_sbs.commitment, " |", _current_sbs.__log_timings())
+				__log_phe_decision(em.pin, "curr sbs '%s' worked < %.2f commit, switch to '%s' declined ✖️. Curr sbs timings: %s" \
+					% [_current_sbs.state_name, _current_sbs.commitment, verdict.next_state, _current_sbs.__log_timings()])
 			__state_declined = verdict.next_state
 		else:
 			__state_declined = "x"
 			_switch_substate(verdict.next_state)
-	elif state_name != PHEState._TOP and not self is BasePHEAttackSeries:
+	elif state_name != PHEState._TOP and not self is BasePHEAttackSeries and __prev_now_switch_msg != verdict.get_reason():
 		__log_phe_decision("NO SWITCH", verdict.get_reason())
+		__prev_now_switch_msg = verdict.get_reason()
+		
 	# call ur children to do stuff
 	if get_current_substate() != null:
 		get_current_substate()._update(delta)
@@ -122,7 +127,7 @@ func get_current_substate() -> BasePHEState:
 
 
 func set_current_substate(next_state_name: String) -> void:
-	var _next_substate = container.get_state_by_name(next_state_name)
+	var _next_substate := container.get_state_by_name(next_state_name)
 	if not _next_substate:
 		__log_warn(true, "set_current_substate: state not found", next_state_name, "Fallback: return, not set")
 		return
@@ -145,19 +150,33 @@ func reset_current_substate() -> void:
 ## not to override
 ## wrapper around check_substate_transition, makes important checks
 func _check_substate_transition(delta) -> VerdictPH:
-	var _next_state = ""
-	var _reason = ""
-	var current_substate_ = get_current_substate()
+	var _next_state := ""
+	var _reason := ""
+	var current_substate_ := get_current_substate()
 	if not current_substate_: # DANGER: should not happen! very crucial
-		print_.warn("no current_substate_ in _check_substate_transition. returning empty verdict", true)
+		print_.warn_raw(false, "no current_substate_ in _check_substate_transition. returning empty verdict")
 		return VerdictPH.new()
-	var _sbs_verdict = check_substate_transition(delta, current_substate_, "", "")
+	var _sbs_verdict := check_substate_transition(delta, current_substate_, "", "")
 	
-	# NOTE: for now no difference between empty verdict and verdict with the same next state
-	if _sbs_verdict.next_state == current_substate_.state_name:
+	# NOTE: for now empty verdict means we don't switch from current state.
+	#       but states can return the name explicitly, so we check this here.
+	#       And if state returns the name explicitly, meaning new switch, it sets a flag
+	if _sbs_verdict.next_state == current_substate_.state_name and not _sbs_verdict.switch_on_same_raised():
 		_sbs_verdict.reset_next_state()
+	elif _sbs_verdict.next_state == "" and _sbs_verdict.switch_on_same_raised():
+		__log_phe_check("Next state '' but needs switch. We explicitly assign curr subs", current_substate_.state_name)
+		_sbs_verdict.next_state = current_substate_.state_name
 	
 	return _sbs_verdict
+
+
+## not to override
+func _choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+	var _initial_sbs_verdict := choose_initial_substate(_next_state, _reason)
+	if not _initial_sbs_verdict.needs_switch():
+		__log_warn_v2(true, "returned empty verdict!", "choose_initial_substate", "return first supported sbs")
+		_initial_sbs_verdict.next_state = supported_substates.get_first_one()
+	return _initial_sbs_verdict
 
 
 ## usually overriden
@@ -166,8 +185,7 @@ func _check_substate_transition(delta) -> VerdictPH:
 ## '_reason' - is empty string on function entry. State should fill it and add to verdict reason
 ## all this args could ve been initiated inside check_substate_transition, 
 ## but this way all function implementations are more uniformed and less verbose and prone to error
-## NOTE: for simplicity, return of this function is always 'return VerdictPH.new(_next_state, _reason)'
-## NOTE: won't be called for leaf states at all
+## NOTE: for simplicity, last line should be always 'return VerdictPH.new(_next_state, _reason)'
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
 	_reason = "default implementation"
 	return VerdictPH.new(_next_state, _reason)
@@ -175,8 +193,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 ## '_next_state' - is empty string on function entry. State will fill it and set to verdict
 ## '_reason' - is empty string on function entry. State should fill it and add to verdict reason
-## NOTE: for simplicity, return of this function is always 'return VerdictPH.new(_next_state, _reason)'
-## NOTE: won't be called for leaf states at all
+## NOTE: for simplicity, last line should be always 'return VerdictPH.new(_next_state, _reason)'
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	_reason = em.crucial_x2 + "state must implement choose_initial_substate!"
 	return VerdictPH.new(_next_state, _reason)
@@ -196,6 +213,9 @@ func _switch_substate(next_state_name: String):
 	get_current_substate()._on_enter_state()
 
 
+func time_spent() -> float:
+	return get_actual_time_spent()
+
 func works_longer_than(time: float) -> bool:
 	return get_actual_time_spent() > time
 
@@ -203,14 +223,22 @@ func works_less_than(time: float) -> bool:
 	return get_actual_time_spent() < time
 
 
+func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: float, curr_sbs_name: String, next_sbs_name: String, __log_context: String = ""):
+	# NOTE: out states tend to return empty string, meaning that no switch needed. Monitors are not ready for this
+	if next_sbs_name == "":
+		next_sbs_name = curr_sbs_name
+	for monitor in __monitors:
+		monitor.auto_update(delta, curr_sbs_name, next_sbs_name, -1, -1, __log_context)
+
+
 # region: __LOGS
 
 func __log_indent() -> int:
-	var _m = {0: 0, 1: 1, 2: 3, 3: 5, 4: 8, 5: 10}
+	var _m := {0: 0, 1: 1, 2: 3, 3: 5, 4: 8, 5: 10}
 	return _m.get(state_depth, 18)
 
 func __log_state() -> String:
-	var _r = ""
+	var _r := ""
 	if state_name == PHEState._TOP:
 		_r += "☐"
 	else:
@@ -219,14 +247,14 @@ func __log_state() -> String:
 	_r += " "
 	_r += pp.in_sq(str(state_depth))
 	_r += "-> "
-	var _curr_sbs = get_current_substate()
+	var _curr_sbs := get_current_substate()
 	_r += _curr_sbs.state_name if _curr_sbs else "-x-"
 	return _r
 
 
 func __log_timings() -> String:
-	var _actual_time_spent = get_actual_time_spent()
-	var _time_msg = ""
+	var _actual_time_spent := get_actual_time_spent()
+	var _time_msg := ""
 	_time_msg += pp.round_01(_actual_time_spent) + "| "
 
 	return _time_msg

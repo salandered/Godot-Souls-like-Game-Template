@@ -12,7 +12,7 @@ var combat: PHCombat
 var native_player: AnimationPlayer
 var animator_manager: EnemyAnimatorManager
 var e_movement: EnemyMovement
-
+var config: PHEConfig
 
 var state_name: String
 
@@ -49,12 +49,12 @@ func get_animator_manager() -> EnemyAnimatorManager:
 
 
 ## to override
-func on_exit_state():
+func on_exit_state() -> void:
 	pass
 
 
 ## to override
-func on_enter_state():
+func on_enter_state() -> void:
 	pass
 
 
@@ -68,15 +68,16 @@ func on_enter_state():
 
 
 ## To override
-func update(delta: float):
+func update(delta: float) -> void:
 	pass
 
 
-## any state can update the value returning from this function.
-## example: attack state can signal that it ended using this.
-## Using of this function is a decision of the parent state. It could ignore it.
-func is_ended() -> bool:
-	return false
+## Any state can signal to its parent that it's ended.
+## Parent state decides on what to do with this information freely (including ignoring it).
+## But NOTE: 
+##   - strongly recommended to use this mechanics if substate describes finite action like attack or jump.
+##   - in case of any uncertainty return 'true'. 
+@abstract func is_ended() -> bool
 
 
 func get_player() -> Princess:
@@ -85,7 +86,11 @@ func get_player() -> Princess:
 # endregion
 
 
+@abstract func time_spent() -> float
+
+
 @abstract func works_longer_than(time: float) -> bool
+
 
 @abstract func works_less_than(time: float) -> bool
 
@@ -120,7 +125,7 @@ func direction_to_(target: Variant) -> Vector3:
 # region: __LOGS
 
 func __get_common_context() -> String:
-	var _msg = ""
+	var _msg := ""
 	_msg += pp.s("Pl->E", pp.round_01(distance_to_player()),
 		"∠" + pp.rad2deg(signed_angle_to_player(), true))
 	return _msg
@@ -157,13 +162,17 @@ func __log_upd(...parts: Array):
 	print_.phe_sm(__log_state() + pp.on_upd, pp.list_(parts), __log_indent())
 
 func __log_warn(crucial: bool, ...parts: Array):
-	print_.warn(pp.s(__log_state(), pp.list_(parts),
+	print_.warn_raw(crucial, pp.s(__log_state(), pp.list_(parts),
 		"\n\t\t", me.__pp_state_history()),
-		crucial)
+		)
 
+func __log_warn_v2(crucial: bool, what: String, where: String, fallback: String, ...parts: Array):
+	var _parts := pp.list_(parts)
+	print_.warn(crucial, what, where, fallback, _parts, "\n\t\t", __log_state(), me.__pp_state_history())
 
 func __log_forgot_implement(sbs_name: String, function_name: String, fallback: String, ...parts: Array):
-	var _msg = "forgot to implement '%s' logic in '%s()'. Fallback: %s" % [sbs_name, function_name, fallback]
+	var _msg := "forgot to implement '%s' logic in '%s()'. Fallback: %s" % [sbs_name, function_name, fallback]
 	__log_warn(true, _msg)
 
+# endregion
 # endregion

@@ -29,6 +29,6 @@ func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
 	return PLVerdict.new("", "throwing because for some reason input.actions doesn't contain even idle")
 
 # # TODO revisit&rethink, tech debt certainly / see Roll State
-# func on_exit_state():
+# func on_exit_state() -> void:
 # 	animator.reset_torso_animation()
 # 	animator.reset_legs_animation()

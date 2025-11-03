@@ -40,7 +40,7 @@ class_name SECharacter
 # 	current_state.react_on_hit(hit_data)
 
 
-# func _ready():
+# func _ready() -> void:
 # 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 # 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	

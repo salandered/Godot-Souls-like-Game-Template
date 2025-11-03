@@ -19,7 +19,7 @@ class_name PlayerModel
 
 var active_weapon: BaseWeapon
 
-func _ready():
+func _ready() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	container.player = _player
 	player_sm._player = _player

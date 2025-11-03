@@ -14,23 +14,23 @@ var me: BaseEnemyCharacter
 @export var debug_sight_cone: bool = true
 
 
-func initialise():
+func initialise() -> void:
 	if debug_sight_cone:
 		__create_sight_cone_visual()
 
 
 func detect_player() -> Detection:
-	var seen = can_see_player()
-	var heard = can_hear_player()
-	var dist = me.global_position.distance_to(me.player.global_position)
+	var seen := can_see_player()
+	var heard := can_hear_player()
+	var dist := me.global_position.distance_to(me.player.global_position)
 	return Detection.new(seen, heard, dist)
 
 
 func can_see_player() -> bool:
-	var player = me.player
-	var own_pos = me.global_position
-	var target_pos = player.global_position
-	var to_player = target_pos - own_pos
+	var player := me.player
+	var own_pos := me.global_position
+	var target_pos := player.global_position
+	var to_player := target_pos - own_pos
 	# cheap distance check
 	if to_player.length() > me.sight_distance:
 		return false
@@ -38,8 +38,8 @@ func can_see_player() -> bool:
 	if not _is_in_sight_cone(target_pos):
 		return false
 	# obstacle check
-	var eye_pos = own_pos + Vector3.UP * 1.5
-	var player_eye = target_pos + Vector3.UP * 1.0
+	var eye_pos := own_pos + Vector3.UP * 1.5
+	var player_eye := target_pos + Vector3.UP * 1.0
 	if _is_sight_blocked(eye_pos, player_eye):
 		return false
 	return true
@@ -57,18 +57,18 @@ func get_floor_distance() -> float:
 
 
 func _is_in_sight_cone(target_position: Vector3) -> bool:
-	var forward = me.global_transform.basis.z
+	var forward := me.global_transform.basis.z
 	forward.y = 0
 	forward = forward.normalized()
-	var to_target = target_position - me.global_position
+	var to_target := target_position - me.global_position
 	to_target.y = 0
 	to_target = to_target.normalized()
-	var half_fov = deg_to_rad(me.sight_angle_degrees * 0.5)
+	var half_fov := deg_to_rad(me.sight_angle_degrees * 0.5)
 	return forward.dot(to_target) >= cos(half_fov)
 
 
 func _is_sight_blocked(from_pos: Vector3, to_pos: Vector3) -> bool:
-	var query = PhysicsRayQueryParameters3D.new()
+	var query := PhysicsRayQueryParameters3D.new()
 	query.from = from_pos
 	query.to = to_pos
 	query.exclude = [me]
@@ -96,7 +96,7 @@ func __create_sight_cone_visual():
 
 
 func __make_sight_material() -> StandardMaterial3D:
-	var mat = StandardMaterial3D.new()
+	var mat := StandardMaterial3D.new()
 	mat.albedo_color = conus_color
 	mat.flags_transparent = true
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -104,14 +104,14 @@ func __make_sight_material() -> StandardMaterial3D:
 
 
 func __update_sight_cone_mesh():
-	var mesh = ImmediateMesh.new()
+	var mesh := ImmediateMesh.new()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	var half_angle = deg_to_rad(me.sight_angle_degrees * 0.5)
-	var segments = 24
+	var half_angle := deg_to_rad(me.sight_angle_degrees * 0.5)
+	var segments := 24.0
 	for i in range(segments):
-		var a1 = lerp(-half_angle, half_angle, float(i) / segments)
-		var a2 = lerp(-half_angle, half_angle, float(i + 1) / segments)
-		var p1 = Vector3(sin(a1), 0, cos(a1)) * me.sight_distance
+		var a1 := lerpf(-half_angle, half_angle, float(i) / segments)
+		var a2 := lerpf(-half_angle, half_angle, float(i + 1) / segments)
+		var p1 = Vector3(sin(a1), 0, cos(a1)) * me.sight_distance # interface violation ....
 		var p2 = Vector3(sin(a2), 0, cos(a2)) * me.sight_distance
 		mesh.surface_add_vertex(Vector3.ZERO)
 		mesh.surface_add_vertex(p1)

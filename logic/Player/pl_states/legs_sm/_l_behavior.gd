@@ -56,7 +56,7 @@ func _on_enter_behavior(input_: InputPackage):
 ## behaviors with one supported action should not override 
 func choose_action(input_, delta) -> LNextActionVerdict:
 	if len(supported_actions.action_names) > 1:
-		print_.warn("default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
+		print_.warn_raw(false, "default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
 	return LNextActionVerdict.new(supported_actions.action_names[0])
 
 
@@ -75,7 +75,7 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 	
 	# VALIDATE THE SWITCH
 	if next_action_name == "":
-		print_.warn("Next action is empty str. This is normally should not happen ❌. Not switching from" + curr_action_name)
+		print_.warn_raw(false, "Next action is empty str. This is normally should not happen ❌. Not switching from" + curr_action_name)
 		return
 
 	if curr_action_name == next_action_name:
@@ -95,7 +95,7 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 	# SWITCH
 	print_.lsm_action("↪️", "action " + curr_action_name + " => " + next_action_name)
 	get_lsm_curr_action()._on_exit_action()
-	var _next_action = container.l_action_by_name(next_action_name)
+	var _next_action := container.l_action_by_name(next_action_name)
 	_next_action._on_enter_action(input_)
 
 

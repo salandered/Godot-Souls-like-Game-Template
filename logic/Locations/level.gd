@@ -16,7 +16,7 @@ func _set_collision_recursive(node):
 	for child in node.get_children():
 		_set_collision_recursive(child)
 
-func _ready():
+func _ready() -> void:
 	_set_collision_recursive(self)
 
 

@@ -9,5 +9,5 @@ extends AnimationPlayer
 
 
 func get_boolean_value(animation: String, track: int, timecode: float) -> bool:
-	var data = get_animation(animation)
+	var data := get_animation(animation)
 	return data.value_track_interpolate(track, timecode)

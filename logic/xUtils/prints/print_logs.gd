@@ -14,9 +14,9 @@ const CONTAINER_B := false
 const E_CONTAINER_B := true
 
 # FIGHT
-const FIGHT_B := true
-const COMBO_B := true
-const HIT_BOX_B := true
+const FIGHT_B := false
+const COMBO_B := false
+const HIT_BOX_B := false
 
 # PLAYER PSM
 const PSM_B := false
@@ -133,9 +133,9 @@ static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 	if is_reverse_moving == true:
 		is_reverse_moving = str(is_reverse_moving) + em.pin
 	if is_pure_reverse_moving == true:
-		is_pure_reverse_moving = str(is_pure_reverse_moving) + em.mark
+		is_pure_reverse_moving = str(is_pure_reverse_moving) + em.mark_alt
 	
-	var msg = pp.s("mt", motion_type + ",",
+	var msg := pp.s("mt", motion_type + ",",
 		"moving", str(is_moving) + ",",
 		"reverse", str(is_reverse_moving) + ",",
 		"pure_reverse", str(is_pure_reverse_moving) + ",",
@@ -240,13 +240,13 @@ static func _generic(
 	if not print_data.PRINT_BOOL and level != LogL.FORCE_PRINT: return
 	if not _is_freq_satisfied(1, freq): return
 
-	var log_data = LogData.new(add_prefix_, str(text), info_indents, level)
+	var log_data := LogData.new(add_prefix_, str(text), info_indents, level)
 	log_data.add_prefix_ = print_data.const_prefix + " " + log_data.add_prefix_
 	if log_data.info_indents == 0: log_data.info_indents = print_data.const_indent
 	print_data.call_log_func(log_data)
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
-	var result_freq = max(global_freq, arg_freq)
+	var result_freq := maxi(global_freq, arg_freq)
 	assert(result_freq > 0)
 
 	if result_freq == 1 or u.fr(false) % result_freq == 0:
@@ -305,9 +305,9 @@ static func prefix(prefix_: String, text: String = "", info_indents: int = 0, le
 
 	prefix_ = prefix_.strip_edges()
 	
-	var fr_ = ""
+	var fr_ := ""
 	if _FRAME_PRINT:
-		var _metka = " "
+		var _metka := " "
 		if u.fr(false) % 15 == 0 and u.fr(false) != 0:
 			_metka = "-"
 		if u.fr(false) % 60 == 0 and u.fr(false) != 0:
@@ -386,15 +386,22 @@ static func __get_bit_position(value: int) -> int:
 			return i
 	return -1
 
-static func warn(text: String, crucial: bool = false):
-	text = em.warn + "warning " + text
-	if crucial: text = em.crucial_x2 + text
-	print("\t", text)
+static func warn_raw(crucial: bool = false, ...parts: Array):
+	var _msg = em.warn + "warning " + pp.list_(parts)
+	if crucial: _msg = em.crucial_x2 + _msg
+	print("\t", _msg)
 
 
-static func note(text: String, bright: bool = false):
-	text = em.pin + "NOTE " + text
-	if bright: text = em.mark_2 + text
-	print("\t", text)
+static func warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
+	var _msg = "Problem: %s. Where: '%s'. Fallback: %s" % [what, where, fallback]
+	if not details.is_empty():
+		_msg += " Details: " + pp.list_(details)
+	warn_raw(crucial, _msg)
+	
+
+static func note(bright: bool, ...parts: Array):
+	var _msg = em.pin_alt + "NOTE (not warn) " + pp.list_(parts)
+	if bright: _msg = em.mark_x2 + _msg
+	print("\t", _msg)
 
 # endregion

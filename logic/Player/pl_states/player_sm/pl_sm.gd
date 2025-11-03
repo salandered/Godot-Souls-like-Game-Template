@@ -22,7 +22,7 @@ var _current_action: BaseAction
 var _prev_action: BaseAction
 
 
-func initialise():
+func initialise() -> void:
 	var empty_input := InputPackage.new()
 
 	var _idle_action := container.l_action_by_name(Leg.Act.idle)
@@ -92,8 +92,8 @@ func update_current_action(next_action: BaseAction) -> String:
 		# print_.dev("", "✖️ declined state double update to curr. staying with " + curr_act_name)
 		return _prev_action.action_name
 
-	if next_act_name == curr_act_name:
-		print_.dev(em.pin, "✖️🚸 came with the same action " + curr_act_name)
+	# if next_act_name == curr_act_name:
+		# print_.dev(em.pin, "✖️🚸 came with the same action " + curr_act_name)
 
 	# print_.dev("[[]]", pp.s(next_act_name, "is set for curr |",
 		# curr_act_name, "moved to prev"), 18)

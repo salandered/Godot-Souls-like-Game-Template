@@ -1,7 +1,6 @@
 extends BasePHELeaf
 
 
+func is_ended() -> bool:
+	return time_remaining() <= 0.05
 
-func update(delta):
-	if time_remaining() <= 0.1:
-		me.queue_free()

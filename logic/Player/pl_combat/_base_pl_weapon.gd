@@ -12,14 +12,14 @@ var _input_action_to_state: Dictionary = {} # input actions to states
 
 
 func translate_combat_input_to_state(combat_actions: Array) -> Array:
-	var _translated = []
+	var _translated := []
 	
 	for input_action in combat_actions:
-		if u.safe_has_key(input_action, _input_action_to_state, Fallback.SOFT):
+		if u.safe_has_key(_input_action_to_state, input_action, Fallback.SOFT):
 			_translated.append(_input_action_to_state[input_action])
 
 	if not combat_actions.is_empty() and _translated.is_empty():
-		print_.warn(pp.s("BaseWeapon", weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))
+		print_.warn_raw(false, pp.s("BaseWeapon", weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))
 	# if not _translated.is_empty():
 		# print_.fight("PlCombat", pp.s("actions ", combat_actions, "translatedToSt", _translated))
 	return _translated

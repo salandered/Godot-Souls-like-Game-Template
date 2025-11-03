@@ -8,7 +8,7 @@ var spawn_time: float
 var damage := 30
 
 
-func _ready():
+func _ready() -> void:
 	spawn_time = Time.get_unix_time_from_system()
 
 

@@ -106,19 +106,19 @@ var tolerate_height: float = 0.1
 
 
 func floor_dist_under_extreme_landing_height(_log: bool = true) -> bool:
-	var _r = get_floor_distance() <= extreme_landing_height
+	var _r := get_floor_distance() <= extreme_landing_height
 	if _log: __log_floor_dist("<= land height", extreme_landing_height, "? =>", _r)
 	return _r
 
 
 func floor_dist_under_landing_height(_log: bool = true) -> bool:
-	var _r = get_floor_distance() <= landing_height
+	var _r := get_floor_distance() <= landing_height
 	if _log: __log_floor_dist("<= land height", landing_height, "? =>", _r)
 	return _r
 
 
 func floor_dist_under_tolerated_height(_log: bool = true) -> bool:
-	var _r = get_floor_distance() <= tolerate_height
+	var _r := get_floor_distance() <= tolerate_height
 	if _log: __log_floor_dist("<= tolerate height", tolerate_height, "? =>", _r)
 	return _r
 

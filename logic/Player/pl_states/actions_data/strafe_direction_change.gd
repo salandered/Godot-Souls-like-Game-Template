@@ -23,7 +23,7 @@ func initialise(curve: Curve, duration: float, curve_bottom_point_idx: int = -1)
 	else:
 		# correct curve_bottom_point_idx is important. usually 1 or 2. (they start from 0)
 		dip_time_ratio = u.get_curve_point_x(curve, curve_bottom_point_idx)
-	print_.note(pp.s("StrafeDirChange init", em.pin, "note the dip_time_ratio:", dip_time_ratio))
+	print_.note(false, "StrafeDirChange init", "note the dip_time_ratio:", dip_time_ratio)
 
 
 func speed_dip_update(delta) -> float:

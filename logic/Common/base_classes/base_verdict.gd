@@ -20,7 +20,7 @@ func get_reason() -> String:
 	return _reason
 
 
-func reset_next_state():
+func reset_next_state() -> void:
 	next_state = ""
 
 
@@ -30,7 +30,7 @@ func update_reason(reason_: String):
 	_reason = _reason + " | " + reason_
 
 
-func _speak_freely():
+func _speak_freely() -> void:
 	var name_: Variant = get_script().get_global_name()
 	if _comment:
 		print_.dev("I, " + str(name_) + "⚖️", "have something important to say: " + _comment)

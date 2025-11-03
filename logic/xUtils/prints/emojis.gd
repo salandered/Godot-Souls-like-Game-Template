@@ -17,8 +17,9 @@ const exit = "🚪"
 const briefcase = "💼"
 
 # temp
-const mark = "✴️"
-const mark_2 = "✳️"
+const mark = "✳️"
+const mark_x2 = "✳️✳️"
+const mark_alt = "✴️"
 
 # important
 const pin = "📌"

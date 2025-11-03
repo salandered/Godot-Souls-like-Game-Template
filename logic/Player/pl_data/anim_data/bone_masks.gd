@@ -82,7 +82,7 @@ static func get_upper_body(no_head_neck: bool = false) -> PackedInt32Array:
 	
 
 static func get_upper_body_with_hips() -> PackedInt32Array:
-	var upper_body = get_upper_body()
+	var upper_body := get_upper_body()
 	var hips := PackedInt32Array([1])
 	hips.append_array(upper_body)
 	return hips

@@ -36,7 +36,7 @@ func get_prev_root_rotation() -> float:
 
 
 func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true, backwards: bool = false) -> Vector3:
-	var curr_playback = get_curr_playback()
+	var curr_playback := get_curr_playback()
 	var curr_eff_progress := curr_playback.get_effective_time_spent()
 	if curr_eff_progress < Constants.ONE_FRAME:
 		# print_.dev("✔", "curr_eff_progress", curr_eff_progress, "< Constants.ONE_FRAME -> we at the beginning of the anim. backwards to true")
@@ -132,7 +132,7 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 	
 	# Sample at start and a small delta to get initial velocity
 	var sample_delta := Constants.ONE_FRAME # One frame at 60fps
-	var start_time := anim._start_time + start_time_offset
+	var start_time := start_time_offset
 	if backwards:
 		start_time -= sample_delta
 	# prints("root vel", em.mark_2, start_time, start_time + sample_delta)

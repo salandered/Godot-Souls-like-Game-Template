@@ -6,7 +6,7 @@ extends CharacterBody3D
 @onready var visuals = $Visuals as PlayerVisuals
 
 
-func _ready():
+func _ready() -> void:
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	

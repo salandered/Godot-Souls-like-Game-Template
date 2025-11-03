@@ -54,27 +54,27 @@ class_name BaseSEState
 # 	return SEVerdict.new()
 
 
-# func _update(delta: float):
+# func _update(delta: float) -> void:
 # 	update(delta)
 
-# func update(delta: float):
+# func update(delta: float) -> void:
 # 	pass
 
 
-# func _on_enter_state():
+# func _on_enter_state()-> void:
 # 	print_.se(state_name, "on_enter_state. Mark all timers", 1)
 # 	mark_enter_state()
 # 	iteration_mark_state()
 # 	on_enter_state()
 # 	animator.update_animation()
 
-# func on_enter_state():
+# func on_enter_state()-> void:
 # 	pass
 
-# func _on_exit_state():
+# func _on_exit_state() -> void:
 # 	on_exit_state()
 
-# func on_exit_state():
+# func on_exit_state() -> void:
 # 	print_.se(state_name, "on_exit_state", 1)
 # 	pass
 

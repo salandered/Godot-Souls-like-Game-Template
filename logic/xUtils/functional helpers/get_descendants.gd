@@ -64,7 +64,7 @@ static func legs_actions(node: Node) -> Array:
 #
 
 static func mesh_instances(node: Node, is_visible: bool = false, one_level: bool = false) -> Array:
-	var filter = func(n):
+	var filter := func(n):
 		if n is MeshInstance3D:
 			return not is_visible or n.is_visible_in_tree()
 		return false

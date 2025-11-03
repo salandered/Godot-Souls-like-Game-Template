@@ -11,7 +11,7 @@ var speed_from_turn := FloatCurveInterpolator.new()
 var angular_sp := FloatLinearInterpolator.new()
 
 
-func _ready():
+func _ready() -> void:
 	default_sp.SPEED = 5.0
 	default_sp.TURN_SPEED = 3.2
 	default_sp.ANGULAR_SPEED = 10
@@ -117,4 +117,4 @@ func _input(event):
 	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 3, "dev_speed_down", "dev_speed_up")
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 
-	__start_time_offset_dev = u._dev_change_t67_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.04)
+	# __start_time_offset_dev = u._dev_change_t67_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.04)

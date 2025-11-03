@@ -42,7 +42,7 @@ func state_by_name(state_name: String) -> PlayerState:
 	# 	print_.dev("ERROR =PSContainer=", "state_by_name: " + state_name + " not found")
 	# 	push_error("ERROR =PSContainer= state_by_name: " + state_name + " not found")
 	# 	return _states[PS.run]
-	assert(_states.has(state_name), "_states dict doesn't have " + state_name)
+	assert(_states.has(state_name), "_states dict doesn't have " + pp.in_q(state_name))
 	return _states[state_name]
 
 
@@ -149,7 +149,7 @@ func _accept_player_states() -> void:
 
 func _sort_combos_by_priority(combos: Array) -> Array:
 	# 0 means lowest
-	var sorted = combos.duplicate()
+	var sorted := combos.duplicate()
 	sorted.sort_custom(func(a: Combo_, b: Combo_): return a.priority > b.priority)
 	return sorted
 
@@ -224,7 +224,7 @@ func _accept_legs_actions():
 		print_.container("", "node.get_name() " + child.get_name())
 		var action_data: LegBehaviorContainer._ActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
 		if not action_data:
-			print_.warn("No action data found for: " + child.get_name() + " Will be skipped")
+			print_.warn_raw(false, "No action data found for: " + child.get_name() + " Will be skipped")
 			continue
 		print_.container("", "action_data.action_name " + action_data.action_name)
 		_leg_actions[action_data.action_name] = child
@@ -249,7 +249,7 @@ func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	# 0 means lowest
 	var _safe_sorted: Array[String]
 	for item in state_names:
-		if u.safe_has_key(item, _states, Fallback.WARN_CRUCIAL):
+		if u.safe_has_key(_states, item, Fallback.WARN_CRUCIAL):
 			_safe_sorted.append(item)
 	_safe_sorted.sort_custom(_states_priority_sort)
 	return _safe_sorted

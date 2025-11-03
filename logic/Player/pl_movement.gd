@@ -55,8 +55,8 @@ func detect_dir_relative_to_facing(input_: InputPackage, delta: float) -> Direct
 	if abs(input_.forward_input) < 0.01 and abs(input_.orbit_input) < 0.01:
 		return Direction.Dir.NEUTRAL
 	
-	var angle_rad = __angle_between_player_and_input(input_, delta)
-	var angle_deg = rad_to_deg(angle_rad)
+	var angle_rad := __angle_between_player_and_input(input_, delta)
+	var angle_deg := rad_to_deg(angle_rad)
 	
 	return _angle_to_direction(angle_deg)
 
@@ -187,14 +187,14 @@ var _DELTA_VECTOR_LENGTH: float = 0.30
 ## some peculiar version which divides velocity and look direction
 func process_input_vector_air(input_: InputPackage, delta: float, jump_direction: Vector3):
 	var _input_direction := velocity_by_input(input_, delta).normalized()
-	var _input_delta_vector = _input_direction * _DELTA_VECTOR_LENGTH
+	var _input_delta_vector := _input_direction * _DELTA_VECTOR_LENGTH
 	
 	# ep 6: (jump_direction + input_delta_vector * delta).limit_length(clamp(_player.velocity.length(), 1, 999999))
 	jump_direction = (jump_direction + _input_delta_vector).limit_length(_player.velocity.length())
 	# u.safe_look_at(_player, _player.global_position - jump_direction)
 
 	# ep 6: (player.velocity + input_delta_vector * delta).limit_length(_player.velocity.length())
-	var new_velocity = (_player.velocity + _input_delta_vector).limit_length(_player.velocity.length())
+	var new_velocity := (_player.velocity + _input_delta_vector).limit_length(_player.velocity.length())
 	_player.velocity = new_velocity
 
 # endregion
@@ -352,16 +352,16 @@ func __angle_between_player_and_input(input_: InputPackage, delta: float, __log:
 ## __LOGGING
 # region: code
 
-func __pp_vel_y():
+func __pp_vel_y() -> String:
 	return pp.s(get_curr_y_velocity())
 
-func __pp_gl_pos_y():
+func __pp_gl_pos_y() -> String:
 	return pp.s(get_player().global_position.y)
 
-func __pp_vel_xz_len():
+func __pp_vel_xz_len() -> String:
 	return pp.s(get_curr_xz_velocity_len())
 
-func __pp_vel():
+func __pp_vel() -> String:
 	return pp.s("vel.y / gl_pos.y / vel.xz.len", __pp_vel_y(), __pp_gl_pos_y(), __pp_vel_xz_len())
 
 # endregion

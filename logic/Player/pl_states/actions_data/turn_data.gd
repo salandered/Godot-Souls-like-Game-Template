@@ -54,5 +54,5 @@ func to_dict() -> Dictionary:
 
 func __validate():
 	if not turn_direction in [TURN_DIR_RIGHT, TURN_DIR_LEFT]:
-		print_.warn("Will be set to TURN_DIR_RIGHT. Not turn_direction in [TURN_DIR_RIGHT, TURN_DIR_LEFT]: " + turn_direction)
+		print_.warn_raw(false, "Will be set to TURN_DIR_RIGHT. Not turn_direction in [TURN_DIR_RIGHT, TURN_DIR_LEFT]: " + turn_direction)
 		turn_direction = TURN_DIR_RIGHT

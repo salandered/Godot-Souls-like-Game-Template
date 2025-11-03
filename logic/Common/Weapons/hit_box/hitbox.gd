@@ -11,7 +11,7 @@ class_name Hitbox_
 @export var ignored_weapon_groups: Array[String]
 
 
-func _ready():
+func _ready() -> void:
 	collision_layer = Collision.Layers.HITBOX_AREA
 	collision_mask = Collision.Mask.HITBOX_AREA_MASK
 	

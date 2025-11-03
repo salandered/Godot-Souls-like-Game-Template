@@ -24,7 +24,7 @@ var direction_decider: int # 1 or -1
 # 	me.move_and_slide()
 
 
-# func on_enter_state():
+# func on_enter_state()-> void:
 # 	if ra.coinflip():
 # 		direction_decider = -1
 # 		change_animation_to(SEA.strafe_L)

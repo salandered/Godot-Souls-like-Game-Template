@@ -89,7 +89,7 @@ func _ready() -> void:
 	initialise()
 
 
-func initialise():
+func initialise() -> void:
 	# POSITIONS INIT
 	# 1. look_at_ is always Player's chest (CameraFocus) in the Free State
 	# 2. Free State is always first state to enter 
@@ -200,7 +200,7 @@ func _input(event):
 var __fov_pointer := 0
 var __dev_camera_cols := true
 var __dev_camera_visuals := false
-var __csg_objects = []
+var __csg_objects := []
 
 
 func __toggle_camera_visuals():

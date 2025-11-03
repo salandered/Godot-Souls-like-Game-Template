@@ -42,7 +42,7 @@ func turn_direction_by_target_angle(target_angle: float) -> String:
 	var turn_direction: String
 	if signf(target_angle) <= 0:
 		turn_direction = TurnData.TURN_DIR_RIGHT
-		if signf(target_angle) == 0: print_.warn("Turn angle is zero; defaulting to a 'right' turn.")
+		if signf(target_angle) == 0: print_.warn_raw(false, "Turn angle is zero; defaulting to a 'right' turn.")
 	else:
 		turn_direction = TurnData.TURN_DIR_LEFT
 	# prints("\t turn decision:", turn_direction)
@@ -57,13 +57,13 @@ func sync_with_prev_loco_anim(next_anim_correction: float = 0.0) -> float:
 	var prev_anim := container.l_action_by_name(PREV_ACTION).anim
 	# NOTE: Action is switched, but animator still treats an anim from prev action as "current" 
 	#       (before current action hits set_anim_to_play)
-	var prev_anim_progress := get_animator_manager().get_current_anim_effective_time_spent()
-	var result_offset = AnimHelpers.sync_with_loco_anim(prev_anim, prev_anim_progress, anim, next_anim_correction)
+	var prev_anim_progress: float = get_animator_manager().get_curr_anim_effective_time_spent()
+	var result_offset := AnimHelpers.sync_with_loco_anim(prev_anim, prev_anim_progress, anim, next_anim_correction)
 	return result_offset
 
 func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: float = 0.0) -> float:
-	var curr_anim_progress := get_animator_manager().get_current_anim_effective_time_spent()
-	var result_offset = AnimHelpers.sync_with_loco_anim(anim, curr_anim_progress, next_anim, next_anim_correction)
+	var curr_anim_progress: float = get_animator_manager().get_curr_anim_effective_time_spent()
+	var result_offset := AnimHelpers.sync_with_loco_anim(anim, curr_anim_progress, next_anim, next_anim_correction)
 	return result_offset
 
 
@@ -72,11 +72,11 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_nam
 	var blend_time_: float = -1
 	var _anim := container.l_action_by_name(action_name_).anim
 	if not _anim:
-		print_.warn("blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
+		print_.warn_raw(false, "blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
 	var _marker_time := _anim.get_marker_time_by_name(marker_name_)
 	if _marker_time == -1:
-		print_.warn("blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
+		print_.warn_raw(false, "blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
 	blend_time_ = _anim.duration - _marker_time
 	return blend_time_

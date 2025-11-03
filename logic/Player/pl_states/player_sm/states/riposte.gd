@@ -19,6 +19,6 @@ func update(input_: InputPackage, delta):
 # 	return hit
 
 
-func on_exit_state():
+func on_exit_state() -> void:
 	get_player().model.active_weapon.hitbox_ignore_list.clear()
 	get_player().model.active_weapon.is_attacking = false

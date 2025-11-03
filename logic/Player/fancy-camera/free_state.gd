@@ -18,7 +18,7 @@ func switch_from_locked():
 	print_.fancy_cam(state_name, "DROP ended")
 
 
-func update(delta: float):
+func update(delta: float) -> void:
 	var prev_focus_pos := fc.focus.global_position
 
 	_move_focus_point() # Focus Point follows player's chest

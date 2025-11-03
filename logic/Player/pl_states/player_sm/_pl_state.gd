@@ -63,7 +63,7 @@ func pm() -> PlayerMovement:
 
 
 ## to override if needed.
-func initialise():
+func initialise() -> void:
 	pass
 
 # CHECK TRANSITION
@@ -98,7 +98,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 
 ## choosing the input with the highest priority that we can allow
 func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
-	var _input_actions_sorted = container.states_sort_by_priority(input_.actions)
+	var _input_actions_sorted := container.states_sort_by_priority(input_.actions)
 	for input_action: String in _input_actions_sorted:
 		if _check_feelings_can_be_paid(input_action):
 			if input_action == state_name: # we
@@ -110,8 +110,8 @@ func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
 
 
 func _check_feelings_can_be_paid(input_action: String) -> bool:
-	var _stamina_cost = container.state_by_name(input_action).stamina_cost
-	var _stamina_drain = container.state_by_name(input_action).stamina_drain
+	var _stamina_cost := container.state_by_name(input_action).stamina_cost
+	var _stamina_drain := container.state_by_name(input_action).stamina_drain
 		
 	if feelings.can_be_paid(_stamina_cost) and feelings.can_allow_stamina_drain(_stamina_drain):
 		return true
@@ -126,7 +126,7 @@ func _check_combos(input_: InputPackage):
 	for combo: Combo_ in state_combos_sorted: # by priority
 		var next_state_candidate := combo.state_to_trigger
 		# __log_psm_check("checking combo", combo.name, "with state_to_trigger", next_state_candidate)
-		var _state = container.state_by_name(next_state_candidate)
+		var _state := container.state_by_name(next_state_candidate)
 		if combo.is_triggered(input_, state_name, curr_global_action()):
 			if feelings.can_be_paid(_state.stamina_cost):
 				queued_state.set_state(next_state_candidate, _state.priority) # todo: try_set_queued_state
@@ -214,19 +214,19 @@ func switch_action_to(next_action_name: String, input_: InputPackage):
 	else:
 		print_.psm("Action ↪️", "No current action => " + next_action_name)
 
-	var next_action = container.pl_action_by_name(next_action_name)
+	var next_action := container.pl_action_by_name(next_action_name)
 	next_action._on_enter_action(input_)
 
 
 func on_enter_state(input_: InputPackage):
 	pass
 
-func _on_exit_state():
+func _on_exit_state() -> void:
 	queued_state.reset()
 	forced_state.reset()
 	on_exit_state()
 	
-func on_exit_state():
+func on_exit_state() -> void:
 	pass
 
 

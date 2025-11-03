@@ -5,7 +5,6 @@ class_name PHCharacter
 ## It's all: SM, Base state, Root state
 var state_machine: BasePHEState
 
-@export_group("Container Fields")
 @onready var container: PHContainer = $StatesContainer
 @onready var combat: PHCombat = %Combat
 @onready var enemy_movement: EnemyMovement = %EnemyMovement
@@ -15,6 +14,7 @@ var state_machine: BasePHEState
 @onready var _top: BasePHEState = %_Top
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var active_weapon: PingaBlade = $bones/RightWrist/WeaponSocket/BigPingaBlade
+@onready var config: PHEConfig = %Config
 
 
 const BREADCRUMB_SIZE = 10
@@ -36,7 +36,7 @@ var _prev_leaf: BasePHELeaf
 ##    => check root_motion_track of NativePlayer!
 ##       it's very fragile, any change of node tree and it's gone
 
-func _ready():
+func _ready() -> void:
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	state_machine = _top
@@ -46,12 +46,14 @@ func _ready():
 
 	var _anim_list := PHEA.new()
 	anim_container._accept_animations(_anim_list.list_of_animations, native_player) # NOTE: should be before accepting states!
-
+	
+	config.me = self
 	enemy_movement.me = self
 	container.me = self
+	
 	container.accept_states()
 
-	var _sleep_state = container.get_state_by_name(PHEState.Leaf.sleep)
+	var _sleep_state := container.get_state_by_name(PHEState.Leaf.sleep)
 	_curr_leaf = _sleep_state
 	_prev_leaf = _sleep_state
 

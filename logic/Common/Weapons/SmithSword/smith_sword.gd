@@ -6,7 +6,7 @@ class_name SmithSword
 @onready var _visuals: Node3D = $Visuals
 
 
-func _ready():
+func _ready() -> void:
 	## here the specific weapon SmithSword assignes all necessary weapon attributes
 	var mesh: MeshInstance3D = _visuals.get_child(0)
 	assert(mesh and mesh is MeshInstance3D)

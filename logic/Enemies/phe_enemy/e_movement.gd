@@ -115,11 +115,11 @@ func rotate_towards_player(delta: float, speed_config: SpeedConfig = null, angle
 func _calculate_allowed_angle(delta: float, speed_config: SpeedConfig, angle_adjustment: float = 0.0) -> AllowedAngle:
 	var _angular_speed := speed_config.get_angular_sp()
 
-	var target_dir = projected_direction_to_player()
+	var target_dir := projected_direction_to_player()
 	if angle_adjustment != 0.0:
 		target_dir = target_dir.rotated(Vector3.UP, angle_adjustment)
 		
-	var angle = face_dir().signed_angle_to(target_dir, Vector3.UP)
+	var angle := face_dir().signed_angle_to(target_dir, Vector3.UP)
 	
 	if abs(angle) >= _angular_speed * delta: # reads as 'max rotation allowed in this frame'
 		return AllowedAngle.new(sign(angle) * _angular_speed * delta, true)
@@ -132,7 +132,7 @@ func _move_toward_player(angle: AllowedAngle, speed_config: SpeedConfig):
 	var _turn_speed := speed_config.get_turn_speed()
 	var _speed_mult := speed_config.get_speed_multiplier()
 
-	var face_dir_rotated = face_dir().rotated(Vector3.UP, angle.value)
+	var face_dir_rotated := face_dir().rotated(Vector3.UP, angle.value)
 	
 	if angle.cut: # sharp turn - slower speed
 		me.velocity = face_dir_rotated * _turn_speed * _speed_mult
@@ -152,20 +152,27 @@ func apply_gravity(delta) -> bool:
 ## MOVING WITH ROOT
 # region: code 
 
-func move_with_root(delta: float) -> void:
-	var delta_pos = animator_manager.get_root_motion_position(true)
-	me.velocity = me.get_quaternion() * delta_pos / delta
-	# need this?
-	# var new_vel = me.get_quaternion() * delta_pos / delta
-	# new_vel.y = me.velocity.y
-	# me.velocity = new_vel
 
-func move_with_root_scaled(delta: float, scale_factor: float) -> void:
-	var delta_pos = animator_manager.get_root_motion_position(true)
-	delta_pos.y = 0
-	var new_vel = (me.get_quaternion() * delta_pos / delta) * scale_factor
-	new_vel.y = me.velocity.y
-	me.velocity = new_vel
+func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = true, scale_y: bool = true, __log: bool = false) -> void:
+	var delta_pos := animator_manager.get_root_motion_position(not y_included)
+	if __log: print("ROOT MOTION - Raw delta_pos: ", delta_pos, " | y_included: ", y_included)
+	
+	if y_included:
+		var _new_vel := (me.get_quaternion() * delta_pos / delta)
+		if scale_y:
+			_new_vel *= scale_factor
+		else:
+			# Scale only X and Z, keep Y unscaled
+			_new_vel.x *= scale_factor
+			_new_vel.z *= scale_factor
+		if __log: print("ROOT MOTION - New velocity (Y included, scale_y: ", scale_y, "): ", _new_vel)
+		me.velocity = _new_vel
+	else:
+		var __new_vel := (me.get_quaternion() * delta_pos / delta) * scale_factor
+		__new_vel.y = me.velocity.y
+		if __log: print("ROOT MOTION - New velocity (Y preserved): ", __new_vel, " | Old Y: ", me.velocity.y)
+		me.velocity = __new_vel
+
 
 ## STRAFE
 # region: code
@@ -176,7 +183,7 @@ func orbit(_direction: int = 1, speed_config: SpeedConfig = null):
 		speed_config = SpeedConfig.new()
 	var _speed := speed_config.get_speed()
 	
-	var strafe_vec = Vector3.UP.cross(direction_to_player()) * _speed * _direction
+	var strafe_vec := Vector3.UP.cross(direction_to_player()) * _speed * _direction
 	strafe_vec.y = me.velocity.y # preserve Y-velocity for gravity
 	me.velocity = strafe_vec
 

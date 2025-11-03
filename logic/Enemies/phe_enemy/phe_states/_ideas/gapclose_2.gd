@@ -1,4 +1,5 @@
-extends BasePHEState
+extends RefCounted
+# extends BasePHEState
 
 
 # var default_range: float = 2.2
@@ -45,8 +46,8 @@ extends BasePHEState
 # 	return hit
 
 
-# func on_enter_state():
+# func on_enter_state()-> void:
 # 	gapclosing_coefficient = distance_to_player() / default_range
 
-# func on_exit_state():
+# func on_exit_state() -> void:
 # 	deactivate_weapons()

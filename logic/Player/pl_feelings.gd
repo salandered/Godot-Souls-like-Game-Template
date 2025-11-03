@@ -4,7 +4,7 @@ extends Node
 class_name PlayerFeelings
 
 var statuses: Dictionary # todo: system
-var FATIGUE_STATUS = "FATIGUE〰️"
+var FATIGUE_STATUS := "FATIGUE〰️"
 
 var __god_mode: bool = true
 
@@ -74,7 +74,7 @@ func _update(delta: float, stamina_drain: float = 0.0):
 func update(delta: float, requested_stamina_rate: float = 0.0):
 	## requested_stamina_rate overrides stamina_regen_rate
 	if not IN_ZERO_DRAIN:
-		var result_rate = stamina_regen_rate
+		var result_rate := stamina_regen_rate
 		if requested_stamina_rate != 0.0:
 			result_rate = requested_stamina_rate
 		_change_stamina(result_rate * delta)
@@ -176,7 +176,7 @@ func can_allow_stamina_rate(stamina_rate: float = 0.0) -> bool:
 
 # region: ZERO DRAIN
 
-func _on_zero_drain_ended():
+func _on_zero_drain_ended() -> void:
 	IN_ZERO_DRAIN = false
 	if _current_stamina <= 0.0:
 		_current_stamina += 0.5 # give it a little bump just to be safe
@@ -185,7 +185,7 @@ func _on_zero_drain_ended():
 
 ## if zero reached, we spent some time ignoring changes
 ## zero timer and setting fatigue should be atomic operation.
-func _trigger_reach_zero():
+func _trigger_reach_zero() -> void:
 	if IN_ZERO_DRAIN: return # already was triggered
 	
 	statuses[FATIGUE_STATUS] = true
@@ -198,7 +198,7 @@ func _trigger_reach_zero():
 
 func __log_feel_check_stamina(prefix, amount, decision, ...context: Array):
 	if decision == true: return
-	var _msg = pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp._dict(statuses, false, true))
+	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp._dict(statuses, false, true))
 	print_.feel(prefix, pp.s(_msg, " ", pp.list_(context) + "=>", decision))
 
 

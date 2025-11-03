@@ -68,6 +68,13 @@ editor.inlineSuggest.edits.renderSideBySide - configure if Copilot NES can show 
 
 ##################
 
-## misc
+# misc
 
-# var \w+ = 
+
+## Code quality
+
+regex for typings cleanup
+var \w+ = 
+func \w+\(\):
+
+consider '_:' in match statements

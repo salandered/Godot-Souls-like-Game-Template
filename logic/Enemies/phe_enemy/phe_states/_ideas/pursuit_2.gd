@@ -1,4 +1,5 @@
-extends BasePHEState
+extends RefCounted
+# extends BasePHEState
 
 
 # var pursuit_drop_radius: float = 3.5
@@ -11,6 +12,6 @@ extends BasePHEState
 # 	return VerdictPH.new()
 
 
-# func update(delta: float):
+# func update(delta: float) -> void:
 # 	e_movement.look_at_player(true)
 # 	me.velocity = me.basis.z * speed

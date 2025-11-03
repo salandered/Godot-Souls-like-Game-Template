@@ -36,13 +36,13 @@ var is_attacking: bool = false
 var _hit_data: HitData = null
 
 
-func _ready():
+func _ready() -> void:
 	weapon_hurt_box.base_weapon = self
 	weapon_hurt_box.collision_layer = Collision.Layers.WEAPON_AREA
 	weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
 
 	if not weapon_visuals:
-		print_.note(pp.s(em.pin, "Note: Weapon", pp.in_q(weapon_name), "has no visuals"))
+		print_.note(false, "Note: Weapon", pp.in_q(weapon_name), "has no visuals")
 
 	assert(weapon_hurt_box is Area3D, "Weapon is missing an Area3D node named 'WeaponArea'.")
 	assert(weapon_hurt_box.get_child(0), "The 'WeaponArea' must have a CollisionShape3D child.")

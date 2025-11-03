@@ -3,8 +3,8 @@ class_name AnimPlayback
 
 var anim: AnimationData
 var native_anim: Animation # shortcut for anim.native_anim
-var time_spent: float ## in sc
-## Will start animation from a specific timestamp. Note that it adds up with animation's .start_time
+var time_spent: float ## in sc, scaled
+## Will start animation from a specific timestamp
 var start_offset: float ## in sc
 
 ## -- DOCS: Examples of all the timelines --

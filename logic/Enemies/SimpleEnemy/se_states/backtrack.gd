@@ -21,12 +21,12 @@ extends BaseSEState
 # 	me.move_and_slide()
 
 
-# func on_enter_state():
+# func on_enter_state()-> void:
 # 	# boosted for test purposes
 # 	# animator.speed_scale = me.return_speed / me.pursuit_speed
 # 	pass
 
 
-# func on_exit_state():
+# func on_exit_state() -> void:
 # 	# animator.speed_scale = 1
 # 	pass

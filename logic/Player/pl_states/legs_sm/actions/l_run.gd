@@ -26,7 +26,7 @@ const IDLE_LIKE_ACTIONS = [
 	PS.Act.attack_from_run,
 	PS.Act.dodge
 ]
-var _resettable = [
+var _resettable := [
 	speed_mult_from_idle,
 	angular_sp_from_idle,
 	turn_sp_from_idle,
@@ -36,7 +36,7 @@ var _resettable = [
 ]
 
 
-func initialise():
+func initialise() -> void:
 	default_sp.SPEED = 3.0
 	default_sp.TURN_SPEED = 2.0
 	default_sp.ANGULAR_SPEED = 10.0
@@ -109,7 +109,7 @@ var __start_time_offset_dev := 0.0
 
 
 func animate(): # ▶️
-	var custom_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	var custom_start_time_offset := start_time_offset.calculate_actual(PREV_ACTION)
 
 	match PREV_ACTION:
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:

@@ -8,7 +8,7 @@ var state_name: String
 var fc: FancyCamera
 
 
-func update(delta: float):
+func update(delta: float) -> void:
 	pass
 
 

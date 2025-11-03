@@ -33,7 +33,7 @@ func set_direction(dir: Dir):
 			_anim_id = _anim_id_secondary
 
 
-func flip_direction():
+func flip_direction() -> void:
 	set_direction(Dir.SECONDARY if _curr_dir == Dir.PRIMARY else Dir.PRIMARY)
 
 
@@ -58,5 +58,5 @@ func get_all_anim_ids() -> Array[String]:
 
 
 func _to_string() -> String:
-	var dir_str = "PRIMARY" if _curr_dir == Dir.PRIMARY else "SECONDARY"
+	var dir_str := "PRIMARY" if _curr_dir == Dir.PRIMARY else "SECONDARY"
 	return "DualDirection(Dir: %s, Speed: %f, Anim: %s)" % [dir_str, _speed, _anim_id]

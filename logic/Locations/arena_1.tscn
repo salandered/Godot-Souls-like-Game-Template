@@ -262,5 +262,5 @@ near = 0.023
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.312599, -6.2846966)
 
 [node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_6cxb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.952051, 7.4352646, -8.906692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613037, 7.4523425, 0)
 player = NodePath("../PrincessPack")

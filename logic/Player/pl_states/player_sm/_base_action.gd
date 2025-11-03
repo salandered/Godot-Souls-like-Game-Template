@@ -87,16 +87,15 @@ func on_exit_action() -> void:
 
 
 ## default implementation. Called automatically.
-## Example use cases to override: mute playing animation or using situational _actual_blend_time.
+## Example use cases to override: mute playing animation or overriden values for set_anim_to_play
 ## NOTE: called AFTER the on_enter_action()
 ## TODO: DANGER: If an action mutes playing anim (not calling set_anim_to_play), 
-## TM like time_spent() would stuck and return final values from the previous actions.
-## Such animations should work with functions like get_real_time_spent or not work with the TM at all.
+## 		TM like time_spent() would stuck and return final values from the previous actions.
+## 		Such animations should work with functions like get_real_time_spent or not work with the TM at all.
 func animate(): # ▶️
-	set_anim_to_play() # seems like we dont need animate/set_anim_to_play separation anymore
+	set_anim_to_play()
 
 
-## strongly recommended to use from overriden animate()
 func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_offset: float = -1.0) -> void:
 	_actual_blend_time = blend_time.calculate_actual(PREV_ACTION)
 	if override_blend_time != -1.0:
@@ -122,7 +121,7 @@ func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_off
 ## WARNING: does not account for speed scaling
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 	if anim.is_looping:
-		print_.warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
+		print_.warn_raw(false, "Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
 		return Constants.BIG_MEANINGLESS_NUMBER
 	var action := container.l_action_by_name(next_action_name)
 	var _blend_time: float = action.blend_time.calculate_actual(action_name)

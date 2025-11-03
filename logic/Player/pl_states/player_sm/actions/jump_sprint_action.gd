@@ -27,7 +27,7 @@ func update(input_: InputPackage, delta: float) -> void:
 		if not is_jumped:
 			__log_action_upd("passed_marker JUMP_LAUNCH and is_jumped false => + VERT_SPEED_BUMP")
 			get_player().velocity.y += VERT_SPEED_BUMP
-			var _face_dir = get_player().global_basis.z
+			var _face_dir := get_player().global_basis.z
 			get_player().velocity += _face_dir * FORWARD_SPEED_BUMP
 			is_jumped = true
 

@@ -45,7 +45,7 @@
 	// "editor.inlineSuggest.edits.showCollapsed": true, // can be configured from UI button
 	// 
 	// Suggestions (not copilot)
-	"editor.suggestSelection": "recentlyUsed",
+	"editor.suggestSelection": "recentlyUsedByPrefix",
 	// "editor.inlineSuggest.showToolbar": "never", // listed in copilot Code completions settings
 	/* FOLDER COLORS EXAMPLE
 	"workbench.colorCustomizations": {
@@ -108,12 +108,12 @@
 		"folderPathColor.states_blue": "#6692d4", // state blue 
 		"folderPathColor.custom11": "#f0c078d5", // orange
 		"folderPathColor.custom12": "#caeed5", // container
-		"folderPathColor.custom14": "#92b9e4", // 8aa8c9
-		"folderPathColor.orange_shade_2": "#92b9e4", // 8aa8c9
-		"folderPathColor.gray_ignore": "#9ea4ac", // 8aa8c9
+		"folderPathColor.custom14": "#92b9e4",
+		"folderPathColor.orange_shade_2": "#92b9e4",
+		"folderPathColor.gray_ignore": "#9ea4ac",
 		"folderPathColor.green_shade_3": "#a4cfa3f5", // leafes
-		"folderPathColor.blue_shade_3": "#92b9e4", // 8aa8c9
-	},
+		"folderPathColor.blue_shade_3": "#92b9e4",
+	}, // !!!!! nice color 82ddddde (also 8aa8c9 )
 	//
 	// COLORFUL FOLDERS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
@@ -417,6 +417,28 @@
 				},
 			]
 		},
+		"(BasePHE)(Leaf)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					// first group
+				},
+				{
+					"color": "#99f5bcee"
+				}
+			]
+		},
+		"(BasePHE)(Composite)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					// first group
+				},
+				{
+					"color": "#99d8f5ee"
+				}
+			]
+		},
 		"(traits)(\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -431,7 +453,26 @@
 				}
 			]
 		},
+		"\\b(_:)(?=\\r?\\n)": {
+			"decorations": [
+				{
+					// "color": "#fff346",
+					"fontWeight": "bold",
+					"backgroundColor": "#3b5552",
+					// "borderRadius": "2px", // Give the box rounded corners
+					// "border": "1px dashed #68fff786" // A solid border
+				},
+			]
+		},
 		"(?<=func\\s_?)(initialise)(?=\\()": {
+			"decorations": [
+				{
+					// "color": "#5ec4d8b2",
+					"textDecoration": "underline wavy #5ec4d8b2",
+				},
+			]
+		},
+		"(?<=func\\s_?)(initialise_implementation)(?=\\()": {
 			"decorations": [
 				{
 					// "color": "#5ec4d8b2",
@@ -468,11 +509,11 @@
 				}
 			]
 		},
-		"\\b(_reason\\s*\\+?=\\s*\".*)": {
+		"\\b(_reason\\s*\\+?=\\s*.*)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#82b1ddd2", // !!!!! 82ddddde
+					"color": "#82b1ddd2",
 					"fontStyle": "italic"
 				}
 			]

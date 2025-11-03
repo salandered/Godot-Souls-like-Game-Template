@@ -11,8 +11,8 @@ class _CommitData:
 	var commitment: float
 	var fatigue: float
 	func _init(
-			commitment_: float = PHEConfig.DEF_COMMITMENT,
-			fatigue_: float = PHEConfig.DEF_FATIGUE,
+			commitment_: float = PHEStaticConfig.DEF_COMMITMENT,
+			fatigue_: float = PHEStaticConfig.DEF_FATIGUE,
 		) -> void:
 		self.commitment = commitment_
 		self.fatigue = fatigue_
@@ -23,7 +23,7 @@ class _AData:
 	var y_offset_adjustment: float
 	func _init(
 			anim_id_: String,
-			y_offset_adjustment_: float = PHEConfig.DEFAULT_Y_OFFSET
+			y_offset_adjustment_: float = PHEStaticConfig.DEFAULT_Y_OFFSET
 		) -> void:
 		self.anim_id = anim_id_
 		self.y_offset_adjustment = y_offset_adjustment_
@@ -66,42 +66,48 @@ var node_to_composite_state_data: Dictionary = {
 	"Life": _CSData.new(PHEState.life, _CommitData.new(-1, -1)),
 
 	"StillLifePhase": _CSData.new(PHEState.still_life_phase, _CommitData.new(-1, -1)),
+	"CombatPhase": _CSData.new(PHEState.combat_phase, _CommitData.new(-1, -1)),
+	"DeathPhase": _CSData.new(PHEState.death_phase, _CommitData.new(-1, -1)),
+	
 	"CombatLoco": _CSData.new(PHEState.combat_loco, _CommitData.new(-1, -1)),
 	"CombatAttacking": _CSData.new(PHEState.combat_attacking),
 	"AttackClubSeries": _CSData.new(PHEState.attack_club_series),
 	"AttackPickSingle": _CSData.new(PHEState.attack_pick_single),
-	"AttackFromDodgeSeries": _CSData.new(PHEState.attack_from_dodge_series),
+	"AttackFromDodgeB": _CSData.new(PHEState.attack_from_dodge_b),
+	"AttackWithDodgeF": _CSData.new(PHEState.attack_with_dodge_f),
 	"Attack360Series": _CSData.new(PHEState.attack_360_series),
 	
-	"DodgeSeries": _CSData.new(PHEState.dodge_series),
+	"DodgeBackSeries": _CSData.new(PHEState.dodge_back_series),
+	"DodgePlayful": _CSData.new(PHEState.dodge_playful),
 }
 
 
 var node_to_leaf_state_data: Dictionary = {
-	"Sleep": _LStData.new(PHEState.Leaf.sleep, _AData.new(PHEA.sleep), _CommitData.new(-1, -1), ),
-	"Awaken": _LStData.new(PHEState.Leaf.awaken, _AData.new(PHEA.awaken), ),
+	"Sleep": _LStData.new(PHEState.Leaf.sleep, _AData.new(PHEA.sleep, -0.15), _CommitData.new(-1, -1), ),
+	"Awaken": _LStData.new(PHEState.Leaf.awaken, _AData.new(PHEA.awaken, -0.15), ),
 	"Death": _LStData.new(PHEState.Leaf.death, _AData.new(PHEA.death)),
 
 	## loco
-	"CombatIdle": _LStData.new(PHEState.Leaf.combat_idle, _AData.new(PHEA.loco.combat_idle, 0.0), _CommitData.new(0.4), ),
+	"CombatIdle": _LStData.new(PHEState.Leaf.combat_idle, _AData.new(PHEA.loco.combat_idle, -0.03), _CommitData.new(0.4), ),
+	"Pursue": _LStData.new(PHEState.Leaf.pursue, _AData.new(PHEA.loco.run_forward, -0.06), _CommitData.new(0.3, 30)),
 	"Orbit": _LStData.new(PHEState.Leaf.orbit, _AData.new(PHEA.loco.strafe_right), _CommitData.new(0.5)),
-	"SlowPursue": _LStData.new(PHEState.Leaf.slow_pursue, _AData.new(PHEA.loco.walk_forward), _CommitData.new(0.4), ),
-	"Pursue": _LStData.new(PHEState.Leaf.pursue, _AData.new(PHEA.loco.run_forward), _CommitData.new(0.4), ),
-	"Dodge": _LStData.new(PHEState.Leaf.dodge, _AData.new(PHEA.loco.dodge_b)),
-	"JumpTowards": _LStData.new(PHEState.Leaf.jump_towards, _AData.new(PHEA.loco.jump_towards)),
+	"DodgeB": _LStData.new(PHEState.Leaf.dodge_B, _AData.new(PHEA.loco.dodge_B, -0.05)),
+	"DodgeF": _LStData.new(PHEState.Leaf.dodge_F, _AData.new(PHEA.loco.dodge_F, -0.05)),
+	"DodgeL": _LStData.new(PHEState.Leaf.dodge_L, _AData.new(PHEA.loco.dodge_L, -0.05)),
+	"DodgeR": _LStData.new(PHEState.Leaf.dodge_R, _AData.new(PHEA.loco.dodge_R, -0.05)),
+	"JumpTowards": _LStData.new(PHEState.Leaf.jump_towards, _AData.new(PHEA.loco.jump_towards, -0.06)),
 
 	## attack
-	"ScareOff": _LStData.new(PHEState.Leaf.scare_off, _AData.new(PHEA.attack.scare_off)),
-	"GapCloserAttack": _LStData.new(PHEState.Leaf.gap_closer_attack, _AData.new(PHEA.attack.gap_closer)),
-	"ClubPart1": _LStData.new(PHEState.Leaf.club_part_1, _AData.new(PHEA.attack.club_part_1)),
-	"ClubPart2": _LStData.new(PHEState.Leaf.club_part_2, _AData.new(PHEA.attack.club_part_2)),
-	"ClubPart3_4": _LStData.new(PHEState.Leaf.club_part_3_4, _AData.new(PHEA.attack.club_part_3_4)),
-	"Attack360High": _LStData.new(PHEState.Leaf.attack_360_high, _AData.new(PHEA.attack.attack_360_high)),
-	"Attack360Low": _LStData.new(PHEState.Leaf.attack_360_low, _AData.new(PHEA.attack.attack_360_low)),
-	"AttackUp": _LStData.new(PHEState.Leaf.attack_up, _AData.new(PHEA.attack.attack_up)),
-	"AttackDown": _LStData.new(PHEState.Leaf.attack_down, _AData.new(PHEA.attack.attack_down)),
-	"FancyGapCloser": _LStData.new(PHEState.Leaf.fancy_gap_closer, _AData.new(PHEA.attack.fancy_gap_closer)),
-	"SwordSlide": _LStData.new(PHEState.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide)),
+	"ScareOff": _LStData.new(PHEState.Leaf.scare_off, _AData.new(PHEA.attack.scare_off, -0.25)),
+	"GapCloser": _LStData.new(PHEState.Leaf.gap_closer, _AData.new(PHEA.attack.gap_closer, -0.2)),
+	"ClubPart1": _LStData.new(PHEState.Leaf.club_part_1, _AData.new(PHEA.attack.club_part_1, -0.15)),
+	"ClubPart2": _LStData.new(PHEState.Leaf.club_part_2, _AData.new(PHEA.attack.club_part_2, -0.15)),
+	"ClubPart3_4": _LStData.new(PHEState.Leaf.club_part_3_4, _AData.new(PHEA.attack.club_part_3_4, -0.15)),
+	"Attack360High": _LStData.new(PHEState.Leaf.attack_360_high, _AData.new(PHEA.attack.attack_360_high, -0.15)),
+	"Attack360Low": _LStData.new(PHEState.Leaf.attack_360_low, _AData.new(PHEA.attack.attack_360_low, -0.15)),
+	"AttackUp": _LStData.new(PHEState.Leaf.attack_up, _AData.new(PHEA.attack.attack_up, -0.13)),
+	"AttackDown": _LStData.new(PHEState.Leaf.attack_down, _AData.new(PHEA.attack.attack_down, -0.15)),
+	"SwordSlide": _LStData.new(PHEState.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide, -0.15)),
 
 	# "PhaseSwitch": _LStData.new(PHEState.phase_switch, PHEA.phase_switch),
 }
@@ -112,7 +118,7 @@ var _states: Dictionary # { String : BasePHEState }
 ## returns null if no state found
 func get_state_by_name(state_name: String) -> BasePHEState:
 	if not _states.has(state_name):
-		print_.warn(pp.s("_states dict doesn't have ", state_name), true)
+		print_.warn_raw(true, pp.s("_states dict doesn't have ", pp.in_q(state_name)))
 		return null
 	return _states[state_name]
 
@@ -143,6 +149,7 @@ func __accept_base_state(node: BasePHEState, state_data: BaseStData):
 	node.native_player = me.native_player
 	node.animator_manager = me.animator_manager
 	node.e_movement = me.enemy_movement
+	node.config = me.config
 	# 	
 	print_.e_container("Accepted", pp.s("st name", state_data.state_name))
 
@@ -160,11 +167,11 @@ func _accept_states():
 
 		node.state_depth = depth
 
-		assert(node.state_depth <= PHEConfig.MAX_DEPTH, "too much")
+		assert(node.state_depth <= PHEStaticConfig.MAX_DEPTH, "too much")
 
 		var state_data: _CSData = node_to_composite_state_data.get(node.get_name())
 		if not state_data:
-			print_.warn(pp.s("_CSData for", node.get_name(), "not found, skipping"))
+			print_.warn_raw(false, pp.s("_CSData for", node.get_name(), "not found, skipping"))
 			continue
 
 		__accept_base_state(node, state_data)
@@ -175,7 +182,7 @@ func _accept_states():
 
 		var lst_data: _LStData = node_to_leaf_state_data.get(node.get_name())
 		if not lst_data:
-			print_.warn(pp.s("_LStData for", node.get_name(), "not found, skipping"))
+			print_.warn_raw(false, "_LStData for", node.get_name(), "not found, skipping")
 			continue
 
 		var _anim := me.anim_container.get_by_anim_id(lst_data.anim_data.anim_id)

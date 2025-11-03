@@ -72,16 +72,18 @@ class_name MetaState
 
 	## like Queued or Forced
 	func __log_(...parts: Array) -> void:
-		print_.dev(__pp_type(), pp.list_(parts))
+		pass
+		# print_.dev(__pp_type(), pp.list_(parts))
 
 	func _to_string() -> String:
 		return __pp_curr_state()
 	# endregion
 
 
-## DANGER: godot tool formatter doesnt like this setup. something with @abstract method. 
-## On foramatting will damage this function declaration
-class Queued extends _MetaState:
+## NOTE: godot tool formatter doesnt like this setup. something with @abstract method. 
+## '\' helps
+class Queued \
+	extends _MetaState:
 	func __pp_type() -> String:
 		return "QueuedState👥"
 

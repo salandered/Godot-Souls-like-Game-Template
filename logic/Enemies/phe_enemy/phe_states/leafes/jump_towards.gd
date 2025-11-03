@@ -1,34 +1,27 @@
 extends BasePHELeaf
 
+var gap_config := GapJumpCalculator.new(0.2, 0.8, 2.6)
 
-var default_range: float = 2.5
-var GAP_COEF: float
-var hit_damage: float = 30
 var sp_config: SpeedConfig
 
-var angle_adjustment: float = 0 # radians
 
-
-func initialise():
+func initialise() -> void:
+	TIME_REMAINING_TO_END = 0.2
 	default_sp.ANGULAR_SPEED = 1.0
 	sp_config = SpeedConfig.new(default_sp)
 
 
 func update(delta):
-	e_movement.rotate_towards_player(delta, sp_config, angle_adjustment)
+	e_movement.rotate_towards_player(delta, sp_config)
 
 	if before_marker(Marker.Name_.JUMP_LAUNCH):
 		e_movement.move_with_root(delta)
 	elif before_marker(Marker.Name_.LAND_START):
-		e_movement.move_with_root_scaled(delta, GAP_COEF)
+		e_movement.move_with_root(delta, gap_config.get_curr_coef(), true, false)
 	else:
 		e_movement.move_with_root(delta)
 	
 
-func on_enter_state():
-	GAP_COEF = distance_to_player() / default_range
-	__log_ent("dist to pl/default_range/GAP_COEF", distance_to_player(), default_range, GAP_COEF)
-
-
-func on_exit_state():
-	deactivate_weapons()
+func on_enter_state() -> void:
+	gap_config.set_coef(distance_to_player(), me.angry_raised)
+	__log_ent(gap_config.__log_(distance_to_player(), me.angry_raised))

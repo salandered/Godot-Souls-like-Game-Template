@@ -34,29 +34,33 @@ static func s(...parts: Array) -> String:
 	return r
 
 static func in_q(something: Variant, spaces: bool = false) -> String:
-	var r = "'" + str(something) + "'"
+	var r := "'" + str(something) + "'"
 	return in_sp(r) if spaces else r
 
 static func in_sq(something: Variant, spaces: bool = false) -> String:
-	var r = "[" + str(something) + "]"
+	var r := "[" + str(something) + "]"
 	return in_sp(r) if spaces else r
-
 
 static func in_br(something: Variant, spaces: bool = false) -> String:
-	var r = "(" + str(something) + ")"
+	var r: = "(" + str(something) + ")"
 	return in_sp(r) if spaces else r
+
+static func in_curl(something: Variant, spaces: bool = false) -> String:
+	var r := "{" + str(something) + "}"
+	return in_sp(r) if spaces else r
+
 
 static func in_sp(something: Variant) -> String:
 	return " " + str(something) + " "
 
 static func compare(text_1: String, val_1: float, what_happened: String, text_2: String, val_2: float) -> String:
 	# what_happened e.g.: "works longer than"
-	var r = s(text_1, round_01(val_1), what_happened, text_2, round_01(val_2))
+	var r := s(text_1, round_01(val_1), what_happened, text_2, round_01(val_2))
 	return r
 
 static func compare_w(what_happened: String, text_2: String, val_2: float) -> String:
 	# what_happened e.g.: "works longer than"
-	var r = s(what_happened, text_2, round_01(val_2))
+	var r := s(what_happened, text_2, round_01(val_2))
 	return r
 
 static func _dict(dict_: Dictionary, json: bool = false, one_string: bool = false) -> String:
@@ -72,7 +76,7 @@ static func _array(array_: Array, json: bool = false) -> String:
 		return JSON.stringify(array_, "\t")
 	if array_.size() == 0:
 		return "[empty]"
-	var r = ""
+	var r := ""
 	for item in array_:
 		r += " " + str(item)
 	return r.strip_edges()

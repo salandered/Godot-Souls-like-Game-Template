@@ -12,7 +12,7 @@ extends RayCast3D
 ##  - if attachment is Root, it's better be a bit higher than it. 
 ##    (otherwise we can sink though the floor)
 
-func _ready():
+func _ready() -> void:
 	collision_mask = Collision.Layers.ENVIRONMENT_COL
 
 func _process(delta):

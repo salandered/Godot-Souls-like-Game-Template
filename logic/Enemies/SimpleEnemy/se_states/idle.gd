@@ -47,5 +47,5 @@ extends BaseSEState
 # # 	# do we need this?
 # # 	me.move_and_slide()
 
-# func on_exit_state():
+# func on_exit_state() -> void:
 # 	pass

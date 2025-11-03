@@ -9,7 +9,7 @@ class_name SEAnimator
 # @export var me: SECharacter
 
 
-# func _ready():
+# func _ready() -> void:
 # 	_configure_blending_times()
 
 

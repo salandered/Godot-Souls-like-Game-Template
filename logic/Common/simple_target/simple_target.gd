@@ -4,7 +4,7 @@ extends CSGBox3D
 @onready var targetable_aspect: Targetable_ = $TargetableAspect
 
 
-func _ready():
+func _ready() -> void:
 	if not label:
 		label = str(get_path())
 	targetable_aspect.label = label

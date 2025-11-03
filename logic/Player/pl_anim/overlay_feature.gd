@@ -68,10 +68,10 @@ var timing: OverlayTiming
 func set_overlay_anim(anim: AnimationData, overlay_config: OverlayFeature.OverlayConfig):
 	overlay_playback = AnimPlayback.new(anim, 0.0, 0.0)
 	
-	var anim_duration = anim.duration
+	var anim_duration := anim.duration
 	if anim.does_marker_exist(Marker.Name_.OVERLAY_START) and anim.does_marker_exist(Marker.Name_.OVERLAY_END):
-		var start_t = anim.get_marker_time_by_name(Marker.Name_.OVERLAY_START)
-		var end_t = anim.get_marker_time_by_name(Marker.Name_.OVERLAY_END)
+		var start_t := anim.get_marker_time_by_name(Marker.Name_.OVERLAY_START)
+		var end_t := anim.get_marker_time_by_name(Marker.Name_.OVERLAY_END)
 		anim_duration = end_t - start_t
 		print_.skm("~~~Overlay", pp.s("used markers for overlay anim", pp.in_q(anim.anim_name), "start:", start_t, "end:", end_t, "orig dur/new:", anim.duration, anim_duration))
 	timing = OverlayTiming.new(anim_duration, overlay_config)

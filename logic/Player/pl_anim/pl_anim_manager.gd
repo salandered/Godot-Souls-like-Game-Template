@@ -27,11 +27,11 @@ func set_overlay_anim(anim_id: String, overlay_config: OverlayFeature.OverlayCon
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if blend_for < 0:
-		print_.warn("blend_for < 0 is not supported, 0 will be used:" + str(blend_for))
+		print_.warn_raw(false, "blend_for < 0 is not supported, 0 will be used:" + str(blend_for))
 		blend_for = 0
 
 	if start_time_offset < 0:
-		print_.warn("start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset))
+		print_.warn_raw(false, "start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset))
 		start_time_offset = 0
 
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
@@ -60,7 +60,7 @@ func reset_global_speed_scale():
 
 ## READ INFO ABOUT WHAT'S PLAYING
 
-func get_current_anim_effective_time_spent() -> float:
+func get_curr_anim_effective_time_spent() -> float:
 	return full_body.curr_playback.get_effective_time_spent()
 
 func get_prev_anim_time_spent() -> float:
@@ -81,9 +81,17 @@ func is_blending() -> bool:
 func get_prev_blend_percentage() -> float:
 	return full_body.curr_blend_playback.prev_percentage
 
-
 func get_curr_anim() -> AnimationData:
 	return full_body.curr_playback.anim
+
+
+# TODO WARNING: validate this and get_curr_anim_effective_time_spent. 
+# 				One of them violates the interface doc!
+func get_curr_anim_position_unscaled() -> float:
+	return full_body.curr_playback.get_effective_time_spent()
+
+func get_curr_anim_duration_unscaled() -> float:
+	return full_body.curr_playback.anim.duration
 
 ## ROOT
 

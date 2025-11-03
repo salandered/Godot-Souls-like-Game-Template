@@ -6,7 +6,7 @@ var fade_time: float = 0.3 # how long to fade extra velocity
 var extra_speed: float = 0.0
 
 
-func _ready():
+func _ready() -> void:
 	default_sp.SPEED = 3.0
 	default_sp.ANGULAR_SPEED = 2.0 # allow slight turning while stopping
 	default_sp.TURN_SPEED = 2.0

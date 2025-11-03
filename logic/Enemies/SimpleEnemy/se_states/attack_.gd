@@ -21,13 +21,13 @@ extends BaseSEState
 # 	return SEVerdict.new(SEState.attack) # not me.CURRENT! upd: why?
 
 
-# func on_enter_state():
+# func on_enter_state()-> void:
 # 	print_.se(state_name + " on_enter", "")
 # 	iteration_commitment = animation_length
 # 	combat.set_hit_data(hit_damage, anim_id)
 
 
-# func on_exit_state():
+# func on_exit_state() -> void:
 # 	combat.reset_active_weapon()
 
 	

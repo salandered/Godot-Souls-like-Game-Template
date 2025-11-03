@@ -14,7 +14,7 @@ var __initialised: bool = false
 var last_pose: Vector3
 var cache: Dictionary
 
-func initialise():
+func initialise() -> void:
 	__initialised = true
 
 func bake_pose():

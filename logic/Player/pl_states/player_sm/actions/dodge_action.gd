@@ -25,7 +25,7 @@ var second_dodge: bool = false
 
 var upper_body_mask: PackedInt32Array
 
-func initialise():
+func initialise() -> void:
 	curr_dodge_dir = DodgeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_R, ANIM_F, SPEED_L, ANIM_B)
 	blend_time.set_by_prev_action({
 		Leg.Act.run: 0.1, # or 0.1?
@@ -94,7 +94,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	var current_speed := speed_x_interpolator.update(delta)
 	
-	var _curr_world_vector = curr_dodge_dir.current_world_vector(get_player().basis)
+	var _curr_world_vector := curr_dodge_dir.current_world_vector(get_player().basis)
 	get_player().velocity = _curr_world_vector * current_speed
 
 	# not in this version
@@ -119,16 +119,16 @@ func animate(): # ▶️
 			__log_action_upd("~~~~Unexpected direction:", curr_dodge_dir.pp_curr_dir())
 			anim_id_to_overlay = A.dodge.dodge_R_head # fallback
 		# experimental but cool
-		var _overlay_config = OverlayFeature.OverlayConfig.new(__weight, 0.1, 0.15, __sp_scale, -1.0, upper_body_mask)
+		var _overlay_config := OverlayFeature.OverlayConfig.new(__weight, 0.1, 0.15, __sp_scale, -1.0, upper_body_mask)
 		get_animator_manager().set_overlay_anim(anim_id_to_overlay, _overlay_config)
 
 
-var __weight = 0.5
-var __sp_scale = 1.2
+var __weight := 0.5
+var __sp_scale := 1.2
 
-func _input(event):
-	# END_SPEED = u._dev_change_param(event, END_SPEED, "END_SPEED", 0.5)
-# 	# 	0.5, "dev_speed_down", "dev_speed_up")
-	# __weight = u._dev_change_t12_param(event, __weight, "__weight", 0.1)
-	__sp_scale = u._dev_change_t34_param(event, __sp_scale, "__sp_scale", 0.1)
-# 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
+# func _input(event):
+# 	# END_SPEED = u._dev_change_param(event, END_SPEED, "END_SPEED", 0.5)
+# # 	# 	0.5, "dev_speed_down", "dev_speed_up")
+# 	# __weight = u._dev_change_t12_param(event, __weight, "__weight", 0.1)
+# 	__sp_scale = u._dev_change_t34_param(event, __sp_scale, "__sp_scale", 0.1)
+# # 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
