@@ -8,7 +8,6 @@ class_name PlayerSM
 var _player: Princess
 
 @export var animator_manager: PlAnimatorManager
-@export var animation_settings: AnimationPlayer
 @onready var container: PlayerStatesContainer = %StatesContainer
 @onready var player_movement: PlayerMovement = %PlayerMovement
 
@@ -43,9 +42,6 @@ func initialise() -> void:
 	legs_sm.current_behavior = _run_beh
 	legs_sm._current_action = _idle_action
 	legs_sm._prev_action = _idle_action
-
-	#
-	animation_settings.play(A.SET_full_body, 0.2) # todo: delete
 
 
 func get_player() -> Princess:

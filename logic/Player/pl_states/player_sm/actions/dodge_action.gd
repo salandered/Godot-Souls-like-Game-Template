@@ -32,7 +32,7 @@ func initialise() -> void:
 	})
 
 	default_sp.ANGULAR_SPEED = 1
-	upper_body_mask = BoneMasks.get_upper_body(true)
+	upper_body_mask = BoneMask.get_upper_body(true)
 
 func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
 	var _anim_start := actual_anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.0)
@@ -119,7 +119,11 @@ func animate(): # ▶️
 			__log_action_upd("~~~~Unexpected direction:", curr_dodge_dir.pp_curr_dir())
 			anim_id_to_overlay = A.dodge.dodge_R_head # fallback
 		# experimental but cool
-		var _overlay_config := OverlayFeature.OverlayConfig.new(__weight, 0.1, 0.15, __sp_scale, -1.0, upper_body_mask)
+		var _overlay_config := OverlayConfig.new(
+			OverlayConfig.Weight.new(__weight),
+			OverlayConfig.Blend.new(0.1, 0.15),
+			__sp_scale,
+			upper_body_mask)
 		get_animator_manager().set_overlay_anim(anim_id_to_overlay, _overlay_config)
 
 

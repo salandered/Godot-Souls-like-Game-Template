@@ -4,9 +4,9 @@ extends BaseAnimatorManager
 ## NOTE: CLIENT CODE COMMUNICATES WITH ANIMATORS ONLY VIA THIS FACADE
 class_name PlAnimatorManager
 
-@onready var root_animator: RootAnimator = %RootAnimator
-@onready var full_body: ModifierAnimator = %FullBody
-@onready var legs: ModifierAnimator = %Legs
+@onready var root_animator: PlayerRootAnimator = %RootAnimator
+@onready var full_body: PlayerModifierAnimator = %FullBody
+@onready var overlay_modifer: OverlayModifier = %OverlayModifer
 
 @onready var _begin: BeginModifier = %_Begin
 @onready var _end: EndModifier = %_End
@@ -16,13 +16,14 @@ class_name PlAnimatorManager
 
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
+# region 
 
-func set_overlay_anim(anim_id: String, overlay_config: OverlayFeature.OverlayConfig) -> void:
+func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig) -> void:
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 	if anim == null:
 		push_error("Overlay anim not found: " + anim_id)
 		return
-	full_body.set_overlay_anim(anim, overlay_config)
+	overlay_modifer.set_overlay_anim(anim, overlay_config)
 
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
@@ -57,8 +58,11 @@ func set_global_speed_scale(new_scale: float):
 func reset_global_speed_scale():
 	full_body.reset_global_speed_scale()
 
+# endregion
+
 
 ## READ INFO ABOUT WHAT'S PLAYING
+# region 
 
 func get_curr_anim_effective_time_spent() -> float:
 	return full_body.curr_playback.get_effective_time_spent()
@@ -107,17 +111,20 @@ func get_prev_root_rotation() -> float:
 func calculate_animation_start_root_velocity(anim: AnimationData, start_time_offset: float = 0.0, backwards: bool = false) -> float:
 	return root_animator.calculate_animation_start_root_velocity(anim, start_time_offset, backwards)
 
+# endregion
+
 
 ## INTERNAL
 
-func _accept_modifiers():
+func initialise():
 	var initial_anim := anim_container.get_by_anim_id(A.move.idle)
 
-
 	native_animator.play(A.move.idle)
+
 	full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.initialise()
+	overlay_modifer.initialise()
 	
 	_begin.initialise()
 	_end.initialise()

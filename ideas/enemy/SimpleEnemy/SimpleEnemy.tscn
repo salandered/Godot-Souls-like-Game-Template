@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://dkqjnsg7v8s1c" path="res://ideas/enemy/SimpleEnemy/se_visuals.gd" id="5_soegf"]
 [ext_resource type="Animation" uid="uid://b1hdfkkch5pfs" path="res://-assets-/animations/legacy-anim/Gundyr/moving/death.res" id="6_3vpn3"]
 [ext_resource type="Script" uid="uid://cg7xnbmiad2l1" path="res://ideas/enemy/SimpleEnemy/se_states/backtrack.gd" id="6_b3grc"]
-[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/Weapons/hit_box/HitBox.tscn" id="8_2q7ci"]
+[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/combat/hit_box/HitBox.tscn" id="8_2q7ci"]
 [ext_resource type="Animation" uid="uid://ccyf3nj2nw0pm" path="res://-assets-/animations/legacy-anim/Gundyr/moving/gapclose_1.res" id="9_6awvl"]
 [ext_resource type="Script" path="res://logic/Enemies/e_feelings/se_feelings.gd" id="10_i6528"]
 [ext_resource type="Animation" uid="uid://hnsfrbemn4u4" path="res://-assets-/animations/legacy-anim/Gundyr/moving/gapclose_2.res" id="10_m0u8j"]
@@ -62,7 +62,7 @@
 [ext_resource type="Animation" uid="uid://bjjdoha2ffepr" path="res://-assets-/animations/legacy-anim/shield-sword/walk.res" id="55_u0mj7"]
 [ext_resource type="Animation" uid="uid://de4h1fayxsxmb" path="res://-assets-/animations/legacy-anim/tut-anim/withdraw.res" id="55_voqbx"]
 [ext_resource type="Script" uid="uid://dhhj88fptlapr" path="res://ideas/enemy/SimpleEnemy/se_combat.gd" id="63_wgthr"]
-[ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Common/Weapons/SmithSword/SmithSword.tscn" id="78_0pryl"]
+[ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Common/combat/SmithSword/SmithSword.tscn" id="78_0pryl"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/Player/fancy-camera/targetable_aspect.tscn" id="88_62ksi"]
 
 [sub_resource type="Resource" id="Resource_w50qb"]

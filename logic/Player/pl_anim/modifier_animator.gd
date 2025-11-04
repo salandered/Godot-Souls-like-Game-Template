@@ -1,20 +1,15 @@
 extends SkeletonModifier3D
 ## WARNING: should not be called directly!
 ## 			PlAnimatorManager manages all modifier animators
-class_name ModifierAnimator
+class_name PlayerModifierAnimator
 
 @export var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
 @onready var skeleton := get_skeleton()
-@onready var overlay: OverlayFeature = %overlay ## responsible for overlaying another anim
 
 @export var animator_name: String ## name of animator
 
-# TODO: Unix time in millisecond, needs a better time calculation
-var last_processing_time: float = 0 # seconds unix from system
-var custom_delta := 0.0 # seconds
-var now := 0.0 # seconds unix from system
 
-var bone_list: Array
+var bone_mask: Array
 
 var __initialised: bool = false
 
@@ -25,8 +20,10 @@ var _dev_hard_speed_scale := false
 # var global_speed_scale := 1.0
 var global_speed_scale := 1.0
 
+
+# region: DOCS
 # TODO: Consider "weighted blend system"
-# Maintain a list of active AnimPlayback s, each with a weight (0.0 to 1.0)
+# Maintain a list of active AnimPlaybacks, each with a weight (0.0 to 1.0)
 # when set_anim_to_play is called:
 #   - Mark all existing playbacks in the list to fade out
 #   - Add new AnimPlayback to the list with weight 0.0, marked to fade in
@@ -39,6 +36,8 @@ var global_speed_scale := 1.0
 #   - Calculate the total weight of all active playbacks.
 #   - Compute the final pose 
 #     (weighted average blend of all calculated poses, using their normalized weights (weight/total_weight))
+# endregion
+
 
 var curr_blend_playback := BlendPlayback.new() # The active B->A blend
 var prev_blend_playback := BlendPlayback.new() # The interrupted C->B blend
@@ -52,30 +51,50 @@ var prev_prev_prev_playback: AnimPlayback # Animation D
 var _bone_idx_to_track := {}
 # todo: flying bone attachments
 
-func initialise() -> void:
-	## NOTE: 0 - root is not animated here. If animation is RM, use get_root_velocity()
-	## 45 - first leg bone
-	if animator_name == 'full_body':
-		bone_list = range(1, 52)
-	elif animator_name == 'legs':
-		bone_list = range(45, 52)
-	else:
-		push_error("no animator_name or its unknown")
 
-	var full_range := range(0, 52)
-		# Pre-cache all bone track paths into the dictionary
-	for bone_idx in full_range:
-		_bone_idx_to_track[bone_idx] = "%GeneralSkeleton:" + skeleton.get_bone_name(bone_idx)
+class CustomDelta:
+	# TODO: Unix time in millisecond, needs a better time calculation
+	var last_process_time: float # seconds unix from system
+	var delta: float # seconds
+	var now: float # seconds unix from system
+
+	func _init(last_process_time_: float = 0.0, delta_: float = 0.0, now_: float = 0.0) -> void:
+		self.last_process_time = last_process_time_
+		self.delta = delta_
+		self.now = now_
+
+
+	func update():
+		now = _get_curr_time()
+		delta = now - last_process_time
+		last_process_time = now
+
+	func update_last_process_time():
+		last_process_time = _get_curr_time()
+
+	func _get_curr_time():
+		return Time.get_unix_time_from_system()
+
+
+var __custom_delta: CustomDelta = CustomDelta.new()
+
+
+func initialise() -> void:
+	BoneTools.validate_skeleton(skeleton)
+
+	assert(animator_name == "full_body", "no animator_name or its unknown. Only 'full_body' is supported")
+	
+	## NOTE: root is not animated here. See PlayerRootAnimator
+	bone_mask = BoneMask.get_full_body_no_root()
+
+	# Pre-cache all bone track paths into the dictionary
+	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
 	__initialised = true
 
 
-func set_overlay_anim(anim: AnimationData, overlay_config: OverlayFeature.OverlayConfig):
-	overlay.set_overlay_anim(anim, overlay_config)
-
-
 func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):
-	last_processing_time = Time.get_unix_time_from_system()
+	__custom_delta.update_last_process_time()
 	
 	# shift anim playbacks down.
 	prev_prev_prev_playback = prev_prev_playback
@@ -96,20 +115,15 @@ func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offs
 
 func _process_modification():
 	if __initialised:
-		_update_time()
-		_update_blend_values()
-		_update_skeleton()
+		# calculate custom_delta between now and the last call.
+		__custom_delta.update()
+		# add custom_delta to curr anim's time_spent.
+		_update_time(__custom_delta.delta)
+		_update_blend_values(__custom_delta.delta)
+		_update_skeleton(__custom_delta.delta)
 
 
-func _update_time():
-	# Each frame we manage time awareness. 
-		# - Calculate the custom_delta between now and the last call.
-		# - Then add this custom_delta to curr anim's time_spent.
-	now = Time.get_unix_time_from_system()
-	custom_delta = now - last_processing_time
-	last_processing_time = now
-
-
+func _update_time(custom_delta: float):
 	#  update curr animation (A)
 	curr_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
 	if curr_playback.time_spent > curr_playback.anim.duration and curr_playback.anim.is_looping:
@@ -140,18 +154,17 @@ func _update_time():
 			prev_prev_prev_playback.time_spent = fmod(prev_prev_prev_playback.time_spent, prev_prev_prev_playback.anim.duration)
 
 
-func _update_blend_values():
+func _update_blend_values(custom_delta: float):
 	curr_blend_playback.update(custom_delta) # new B->A blend
 	prev_blend_playback.update(custom_delta) # interrupted C->B blend
 	prev_prev_blend_playback.update(custom_delta) # twice-interrupted D->C blend
 
-	overlay._update_blend_values(custom_delta)
 
 var print_4: bool = false
 
-func _update_skeleton():
+func _update_skeleton(custom_delta: float):
 	print_4 = false
-	for bone_idx in bone_list:
+	for bone_idx in bone_mask:
 		# Pose for the newest animation (A)
 		var curr_transform := _calculate_bone_pose(bone_idx, curr_playback)
 		var final_transform: Transform3D
@@ -183,7 +196,6 @@ func _update_skeleton():
 			# just play A
 			final_transform = curr_transform
 
-		final_transform = overlay.apply_overlay(bone_idx, final_transform, self)
 		skeleton.set_bone_pose(bone_idx, final_transform)
 
 
@@ -241,7 +253,6 @@ func reset_global_speed_scale():
 # region: helpers
 
 func __bone_idx_to_track_path(bone_idx: int) -> String:
-	# cached version of "%GeneralSkeleton:" + skeleton.get_bone_name(bone_idx)
 	return _bone_idx_to_track[bone_idx]
 
 # endregion

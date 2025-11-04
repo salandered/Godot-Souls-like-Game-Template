@@ -113,13 +113,3 @@ class combat:
 	const idle_longsword := air.midair # _ff + "idle_longsword"
 
 # endregion
-
-#--------------
-
-# --------------
-
-
-#--------------
-const SET_full_body := "full_body"
-
-#-------------------

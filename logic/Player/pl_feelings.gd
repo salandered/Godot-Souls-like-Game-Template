@@ -6,7 +6,7 @@ class_name PlayerFeelings
 var FATIGUE_STATUS := "FATIGUE〰️"
 
 const FATIGUE_THRESHOLD = 5.0
-const max_stamina: float = 60.0
+const max_stamina: float = 120.0
 
 var stamina_regen_rate: float = 5.0 # per sec
 

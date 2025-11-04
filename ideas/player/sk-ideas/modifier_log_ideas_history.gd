@@ -1,5 +1,5 @@
 extends SkeletonModifier3D
-# class_name ModifierAnimator
+# class_name PlayerModifierAnimator
 
 # var derivative_delta: float = 0.02 # what ?
 

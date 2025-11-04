@@ -111,14 +111,14 @@ func _start_low_health_pulse() -> void:
 	_pulse_tween = create_tween().set_loops()
 	_pulse_tween.tween_property(
 		health_bar,
-		"scale",
-		Vector2(1.05, 1.05),
+		"modulate:a", # Just alpha channel
+		0.5,
 		PULSE_DURATION * 0.5
 	).set_trans(Tween.TRANS_SINE)
 	_pulse_tween.tween_property(
 		health_bar,
-		"scale",
-		Vector2.ONE,
+		"modulate:a",
+		1.0,
 		PULSE_DURATION * 0.5
 	).set_trans(Tween.TRANS_SINE)
 
@@ -127,36 +127,4 @@ func _stop_low_health_pulse() -> void:
 	_is_pulsing = false
 	if _pulse_tween:
 		_pulse_tween.kill()
-	health_bar.scale = Vector2.ONE
-
-
-# ALTERNATIVE
-# func _start_low_health_pulse() -> void:
-# 	if _is_pulsing:
-# 		return
-# 	_is_pulsing = true
-	
-# 	if _pulse_tween:
-# 		_pulse_tween.kill()
-	
-# 	# Flash opacity instead of scale
-# 	_pulse_tween = create_tween().set_loops()
-# 	_pulse_tween.tween_property(
-# 		health_bar,
-# 		"modulate:a", # Just alpha channel
-# 		0.5,
-# 		PULSE_DURATION * 0.5
-# 	).set_trans(Tween.TRANS_SINE)
-# 	_pulse_tween.tween_property(
-# 		health_bar,
-# 		"modulate:a",
-# 		1.0,
-# 		PULSE_DURATION * 0.5
-# 	).set_trans(Tween.TRANS_SINE)
-
-
-# func _stop_low_health_pulse() -> void:
-# 	_is_pulsing = false
-# 	if _pulse_tween:
-# 		_pulse_tween.kill()
-# 	health_bar.modulate.a = 1.0
+	health_bar.modulate.a = 1.0

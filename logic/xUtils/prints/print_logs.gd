@@ -40,7 +40,7 @@ const AWARENESS_B := false
 const SE_B := false
 const PHE_CHECK_B := false
 const PHE_B := false
-const ANIM_MANAGER_B := false
+const E_ANIM_MANAGER_B := true
 # endregion
 
 #----------------------
@@ -206,7 +206,7 @@ static var PHE_CHECK_PRINT := PrintData.new(PHE_CHECK_B, "transition ❔", 0, ph
 static var PHE_SM_PRINT := PrintData.new(PHE_B, "🗿", 1, prefix)
 static var SE_PRINT := PrintData.new(SE_B, "SE", 0, prefix)
 static var SE_CHECK_TRANS_PRINT := PrintData.new(SE_B, "transition ❔", 2, se)
-static var ANIM_MANAGER_PRINT := PrintData.new(ANIM_MANAGER_B, "E▷", 12, prefix)
+static var ANIM_MANAGER_PRINT := PrintData.new(E_ANIM_MANAGER_B, "E▷", 12, prefix)
 
 
 static func phe_anim(add_prefix_: String, anim_name: String,

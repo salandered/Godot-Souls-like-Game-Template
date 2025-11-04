@@ -10,13 +10,15 @@ class _lib:
 	const _some_from_pl = "some-from-pl" + "/"
 
 
-const big_react := _lib._axe_all + "big react"
-const small_react := _lib._axe_all + "react small"
 const sleep := _lib._not_axe + "sleep"
 const awaken := _lib._not_axe + "awakening"
 const death := _lib._not_axe + "death"
 const phase_switch := _lib._legacy + "phase_switch"
 const phase_switch_loop := _lib._legacy + "phase_switch_loop"
+
+const react_from_L := _lib._axe_pl + "react large from left"
+const react_from_R := _lib._axe_pl + "react large from right"
+const react_gut := _lib._axe_pl + "react large gut"
 
 
 class loco:
@@ -57,14 +59,15 @@ class attack:
 
 
 var list_of_animations: Array[AnimationData] = [
-	## unsorted
-	AnimationData.new(big_react),
-	AnimationData.new(small_react),
 	AnimationData.new(sleep),
 	AnimationData.new(phase_switch, 0.7),
 	AnimationData.new(phase_switch_loop),
 	AnimationData.new(awaken),
 	AnimationData.new(death),
+
+	AnimationData.new(react_from_L),
+	AnimationData.new(react_from_R),
+	AnimationData.new(react_gut),
 	
 	## loco
 	AnimationData.new(loco.dodge_B),

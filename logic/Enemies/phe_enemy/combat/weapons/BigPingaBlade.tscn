@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=4 uid="uid://ope03u0gwdw4"]
 
 [ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/Enemies/phe_enemy/combat/weapons/big_pinga_blade.gd" id="1_hj5gq"]
-[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/Weapons/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/combat/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
 [ext_resource type="Texture2D" uid="uid://c5p030jupnpbn" path="res://-assets-/GLB-items/pinga/pinga_Image_3.jpg" id="3_32qab"]
 [ext_resource type="Texture2D" uid="uid://h71q26ebbndv" path="res://-assets-/GLB-items/pinga/pinga_Image_4.png" id="4_uqsym"]
 [ext_resource type="Texture2D" uid="uid://d2prooq5ihrq7" path="res://-assets-/GLB-items/pinga/pinga_Image_5.jpg" id="5_sq0ua"]

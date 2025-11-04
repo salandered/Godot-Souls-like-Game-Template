@@ -13,6 +13,9 @@ static func fr(to_str_: bool = true, str_prefix: bool = false) -> Variant:
 	else:
 		return Engine.get_process_frames()
 
+static func ifr() -> int:
+	return Engine.get_process_frames()
+
 
 # ease-in-out S-curve
 # takes a linear progress value (0 to 1) and returns a smoothed value (0 to 1)
@@ -117,6 +120,28 @@ static func safe_cast_array_of_strings(array: Array[Variant]) -> Array[String]:
 		if item is not String:
 			print_.warn_raw(false,
 				"Array contains non-string value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
+			return []
+	list_casted.assign(array)
+	return list_casted
+
+
+static func safe_cast_array_of_int(array: Array[Variant]) -> Array[int]:
+	var list_casted: Array[int] = []
+	for item in array:
+		if item is not int:
+			print_.warn_raw(false,
+				"Array contains non-int value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
+			return []
+	list_casted.assign(array)
+	return list_casted
+
+
+static func safe_cast_array_of_float(array: Array[Variant]) -> Array[float]:
+	var list_casted: Array[float] = []
+	for item in array:
+		if item is not float:
+			print_.warn_raw(false,
+				"Array contains non-float value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
 			return []
 	list_casted.assign(array)
 	return list_casted

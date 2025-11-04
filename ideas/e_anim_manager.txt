@@ -1,0 +1,14 @@
+## FUTRURE METHODS 
+
+# func seek(seconds: float, update: bool = false, update_only: bool = false) -> void:
+# 	native_player.seek(seconds, update, update_only)
+
+# func play_backwards(anim_name: String = "", custom_blend: float = -1) -> void:
+# 	native_player.play_backwards(anim_name, custom_blend)
+
+# func queue(anim_name: String) -> void:
+# 	# Queue animation to play after current one finishes
+# 	native_player.queue(anim_name)
+
+# func set_blend_time(anim_from: String, anim_to: String, seconds: float) -> void:
+# 	native_player.set_blend_time(anim_from, anim_to, seconds)

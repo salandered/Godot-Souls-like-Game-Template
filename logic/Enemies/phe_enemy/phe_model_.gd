@@ -119,3 +119,23 @@ func react_on_hit(hit_data: HitData) -> void:
 
 func __pp_state_history():
 	return "state history" + pp.in_sq(pp.list_(_state_history))
+
+
+func _input(event: InputEvent) -> void:
+	var bone_mask = BoneMask.get_upper_body()
+	if event.is_action_pressed("dev_8"):
+		animator_manager.set_overlay_anim(PHEA.react_from_R,
+		OverlayConfig.new(
+			OverlayConfig.Weight.new(0.5),
+			OverlayConfig.Blend.new(0.12, 0.18),
+			1.0,
+			bone_mask
+			))
+	if event.is_action_pressed("dev_9"):
+		animator_manager.set_overlay_anim(PHEA.react_from_R,
+		OverlayConfig.new(
+			OverlayConfig.Weight.new(1.0),
+			OverlayConfig.Blend.new(0.2, 0.2),
+			1.0,
+			bone_mask
+		))

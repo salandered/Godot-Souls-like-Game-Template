@@ -1,10 +1,10 @@
-[gd_scene load_steps=173 format=4 uid="uid://6qtp0fjtkn64"]
+[gd_scene load_steps=169 format=4 uid="uid://6qtp0fjtkn64"]
 
 [ext_resource type="Script" uid="uid://bpr17wdedc64x" path="res://logic/Player/player.gd" id="1_vj6qj"]
 [ext_resource type="Script" uid="uid://17nc1ssx6vug" path="res://logic/Player/pl_ui/ui_feelings.gd" id="2_in5dw"]
 [ext_resource type="Script" uid="uid://bm1glbgw5uawg" path="res://logic/Player/pl_visuals/player_visuals.gd" id="2_ots4d"]
 [ext_resource type="StyleBox" uid="uid://cg2khdcvd3ova" path="res://ui/themes/buttons/button_texture_2.tres" id="3_w1mlt"]
-[ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Common/Weapons/SmithSword/SmithSword.tscn" id="4_8b0qh"]
+[ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/Common/combat/SmithSword/SmithSword.tscn" id="4_8b0qh"]
 [ext_resource type="Texture2D" uid="uid://cvr6umtbf020m" path="res://-assets-/GLB-char/player/pl-skeleton-2_pnl1qwStr4.png" id="5_hmbx1"]
 [ext_resource type="PackedScene" uid="uid://dl7w5h28u6d36" path="res://logic/Player/fancy-camera/fancy_camera.tscn" id="5_rigv3"]
 [ext_resource type="Script" uid="uid://dmgh3f3ilowde" path="res://logic/Player/dev_labels.gd" id="6_h5e6b"]
@@ -39,7 +39,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://sj2jpjm4wpd3" path="res://-assets-/animations/standard-skeleton/bit-of-glue-v1/bit-of-glue-v1-LIB.tres" id="36_64kbd"]
 [ext_resource type="AnimationLibrary" uid="uid://c5u7x4aoa7o4x" path="res://-assets-/animations/standard-skeleton/jumps-v2/jumps-v2-LIB.tres" id="36_eoa6y"]
 [ext_resource type="AnimationLibrary" uid="uid://mcxcrdwd3t2u" path="res://-assets-/animations/standard-skeleton/jump-v4/jump-v4-LIB.tres" id="36_mlfb7"]
-[ext_resource type="Script" uid="uid://hl08tmflh7qe" path="res://logic/Player/pl_anim/_activator.gd" id="36_tb3uv"]
+[ext_resource type="Script" uid="uid://hl08tmflh7qe" path="res://logic/Player/pl_anim/_begin.gd" id="36_tb3uv"]
 [ext_resource type="AnimationLibrary" uid="uid://cih3284k6ul57" path="res://-assets-/animations/standard-skeleton/run-v5/run-v5-LIB.tres" id="37_64kbd"]
 [ext_resource type="Script" uid="uid://b0oretcavw4a5" path="res://logic/Player/pl_anim/modifier_animator.gd" id="37_o6f0b"]
 [ext_resource type="AnimationLibrary" uid="uid://c3p1k2utr76rc" path="res://-assets-/animations/standard-skeleton/ss/ss-attack/ss-attack-LIB.tres" id="38_erked"]
@@ -61,12 +61,12 @@
 [ext_resource type="Script" uid="uid://g1e18f4xtjxh" path="res://logic/Player/pl_states/legs_sm/behaviors/l_run_behavior.gd" id="51_i2tdh"]
 [ext_resource type="Script" uid="uid://ddxysnlpncov6" path="res://logic/Player/pl_anim/pl_anim_manager.gd" id="51_s6ehr"]
 [ext_resource type="Script" uid="uid://d27tcno7myqe0" path="res://logic/Player/pl_states/legs_sm/behaviors/l_sprint_behavior.gd" id="52_vrft4"]
-[ext_resource type="Script" uid="uid://bevn5gun8jkca" path="res://logic/Player/pl_anim/overlay_feature.gd" id="53_7nydh"]
 [ext_resource type="Script" uid="uid://m01287pb5dtq" path="res://logic/Player/pl_states/legs_sm/behaviors/l_double_behavior.gd" id="53_oykih"]
 [ext_resource type="Script" uid="uid://cjfl7dnni6tye" path="res://logic/Player/pl_states/legs_sm/actions/l_idle.gd" id="54_y5erw"]
-[ext_resource type="Script" uid="uid://cm1d6p84n0eoj" path="res://logic/Player/pl_anim/root_animator.gd" id="55_1pcnm"]
+[ext_resource type="Script" uid="uid://cm1d6p84n0eoj" path="res://logic/Player/pl_anim/pl_root_animator.gd" id="55_1pcnm"]
 [ext_resource type="Script" uid="uid://dbllsmy14nfyy" path="res://logic/Player/pl_states/legs_sm/actions/l_run.gd" id="55_4wjxg"]
 [ext_resource type="Script" uid="uid://dial21jcmh1sn" path="res://logic/Player/pl_states/legs_sm/actions/l_sprint.gd" id="56_sl8yy"]
+[ext_resource type="Script" uid="uid://w18g1qw71l62" path="res://logic/Common/skeleton_modifers/overlay_modifier.gd" id="56_t6aan"]
 [ext_resource type="Script" uid="uid://c0pfcfbslrnxm" path="res://logic/Player/pl_states/legs_sm/actions/l_double.gd" id="57_r8wx2"]
 [ext_resource type="Script" uid="uid://67rgj6b7h8fh" path="res://logic/Player/pl_states/player_sm/pl_sm.gd" id="58_s0ywv"]
 [ext_resource type="Script" uid="uid://bgsdflhg6nuty" path="res://logic/Player/pl_states/player_sm/states/run.gd" id="59_8bh0c"]
@@ -102,9 +102,9 @@
 [ext_resource type="Script" uid="uid://besu8ffe3adxd" path="res://logic/Player/pl_states/player_sm/states/parried.gd" id="91_rmrst"]
 [ext_resource type="Script" uid="uid://cof4xevg1itsv" path="res://logic/Player/pl_states/player_sm/states/riposte.gd" id="92_kne2k"]
 [ext_resource type="Script" uid="uid://cmredwoc6sm27" path="res://logic/Player/pl_states/player_sm/states/roll.gd" id="93_bpe6c"]
-[ext_resource type="Script" uid="uid://cxs75uid7n5dj" path="res://logic/Player/bones.gd" id="94_nkdgf"]
+[ext_resource type="Script" uid="uid://cxs75uid7n5dj" path="res://logic/Player/pl_bones.gd" id="94_nkdgf"]
 [ext_resource type="Script" uid="uid://dcbgkaxw2d1na" path="res://logic/Player/pl_states/player_sm/states/dodge.gd" id="95_w1mlt"]
-[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/Weapons/hit_box/HitBox.tscn" id="95_xdwa8"]
+[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/Common/combat/hit_box/HitBox.tscn" id="95_xdwa8"]
 [ext_resource type="Script" uid="uid://d0ajoqp4oihws" path="res://logic/Player/pl_states/player_sm/states/state_groups/states_attack.gd" id="96_d3lx0"]
 [ext_resource type="Script" uid="uid://4a0bok4yy1i6" path="res://logic/Player/pl_states/player_sm/states/attacks/axe_slice_2.gd" id="96_f4g5w"]
 [ext_resource type="Script" uid="uid://c8wyxpudy1kkh" path="res://logic/Player/pl_states/player_sm/states/state_groups/heavy_axe_slice.gd" id="97_f4g5w"]
@@ -118,7 +118,6 @@
 [ext_resource type="Script" uid="uid://dlr3gbwohm16o" path="res://logic/Player/pl_states/player_sm/states/attacks/sword_slash_1.gd" id="106_t6aan"]
 [ext_resource type="Script" uid="uid://b3oe4v0dtarmm" path="res://logic/Player/pl_states/player_sm/actions/attacks/sword_slash_1_action.gd" id="107_ilopi"]
 [ext_resource type="Script" uid="uid://dvug43lry02ny" path="res://logic/Player/pl_states/player_sm/states/attacks/sword_slash_2.gd" id="108_8t3gb"]
-[ext_resource type="Script" uid="uid://sc10k00rjoto" path="res://logic/Player/root.gd" id="109_w0452"]
 [ext_resource type="Script" uid="uid://cfqrlieqgjoo8" path="res://logic/Player/pl_states/player_sm/actions/attacks/sword_slash_2_action.gd" id="109_wpy7p"]
 [ext_resource type="Script" uid="uid://bmks7eh467h3" path="res://logic/Player/pl_states/player_sm/states/state_logic/check_transition.gd" id="111_mlfb7"]
 [ext_resource type="Script" uid="uid://bt3h7xtdwao6p" path="res://logic/Player/pl_movement.gd" id="114_w1mlt"]
@@ -713,7 +712,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%AnimParameters:weapon_hurts")
+tracks/0/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:weapon_hurts")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -725,7 +724,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%AnimParameters:tracks_input_vector")
+tracks/1/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:tracks_input_vector")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -737,7 +736,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("%AnimParameters:allows_queue")
+tracks/2/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:allows_queue")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -749,7 +748,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("%AnimParameters:switches_to_queue")
+tracks/3/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:switches_to_queue")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1172,67 +1171,6 @@ _data = {
 &"L RM run to stop ver2": ExtResource("43_41od0")
 }
 
-[sub_resource type="Animation" id="Animation_n5ikm"]
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GeneralSkeleton/FullBody:influence")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GeneralSkeleton/Legs:influence")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_e8wkk"]
-resource_name = "full_body"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GeneralSkeleton/FullBody:influence")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GeneralSkeleton/Legs:influence")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8owf"]
-_data = {
-&"RESET": SubResource("Animation_n5ikm"),
-&"full_body": SubResource("Animation_e8wkk")
-}
-
 [sub_resource type="Curve" id="Curve_mlfb7"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.56578946, 0.48792887), -2.6114738, -2.6114738, 0, 0, Vector2(0.85197365, 0), -0.0053644725, 0.0, 0, 0]
 point_count = 3
@@ -1508,8 +1446,13 @@ debug_shape_thickness = 4
 attachment = NodePath("../../bones/root/BitHigher")
 __csg_visuals = true
 
-[node name="NativeAnimator" type="AnimationPlayer" parent="Model"]
+[node name="AnimatorManager" type="Node" parent="Model"]
 unique_name_in_owner = true
+script = ExtResource("51_s6ehr")
+
+[node name="NativeAnimator" type="AnimationPlayer" parent="Model/AnimatorManager"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_w0452"),
 &"SWS-att-LIB": ExtResource("30_q415q"),
@@ -1530,12 +1473,16 @@ libraries = {
 &"strafe-v2-LIB": ExtResource("40_ul52f")
 }
 
-[node name="AnimContainer" parent="Model/NativeAnimator" instance=ExtResource("48_s6ehr")]
-unique_name_in_owner = true
-
-[node name="AnimParameters" type="Node" parent="Model/NativeAnimator"]
+[node name="AnimParameters" type="Node" parent="Model/AnimatorManager/NativeAnimator"]
 unique_name_in_owner = true
 script = ExtResource("46_w0452")
+
+[node name="AnimContainer" parent="Model/AnimatorManager" instance=ExtResource("48_s6ehr")]
+unique_name_in_owner = true
+
+[node name="RootAnimator" type="Node" parent="Model/AnimatorManager"]
+unique_name_in_owner = true
+script = ExtResource("55_1pcnm")
 
 [node name="GeneralSkeleton" type="Skeleton3D" parent="Model"]
 unique_name_in_owner = true
@@ -1955,12 +1902,12 @@ top_level = false
 visible = true
 visibility_parent = NodePath("")
 active = true
-influence = 0.0
+influence = 1.0
 script = ExtResource("37_o6f0b")
-native_animator = NodePath("../../NativeAnimator")
+native_animator = NodePath("../../AnimatorManager/NativeAnimator")
 animator_name = "full_body"
 
-[node name="Legs" type="SkeletonModifier3D" parent="Model/GeneralSkeleton" node_paths=PackedStringArray("native_animator")]
+[node name="OverlayModifer" type="SkeletonModifier3D" parent="Model/GeneralSkeleton"]
 _import_path = NodePath("")
 unique_name_in_owner = true
 process_mode = 0
@@ -1977,10 +1924,9 @@ top_level = false
 visible = true
 visibility_parent = NodePath("")
 active = true
-influence = 0.0
-script = ExtResource("37_o6f0b")
-native_animator = NodePath("../../NativeAnimator")
-animator_name = "legs"
+influence = 1.0
+script = ExtResource("56_t6aan")
+metadata/_custom_type_script = "uid://w18g1qw71l62"
 
 [node name="_End" type="SkeletonModifier3D" parent="Model/GeneralSkeleton"]
 _import_path = NodePath("")
@@ -2001,25 +1947,6 @@ visibility_parent = NodePath("")
 active = true
 influence = 1.0
 script = ExtResource("38_pv48x")
-
-[node name="overlay" type="Node" parent="Model/GeneralSkeleton"]
-unique_name_in_owner = true
-script = ExtResource("53_7nydh")
-
-[node name="AnimatorManager" type="Node" parent="Model/GeneralSkeleton"]
-unique_name_in_owner = true
-script = ExtResource("51_s6ehr")
-
-[node name="AnimationSettings" type="AnimationPlayer" parent="Model/GeneralSkeleton"]
-unique_name_in_owner = true
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_i8owf")
-}
-
-[node name="RootAnimator" type="Node" parent="Model/GeneralSkeleton"]
-unique_name_in_owner = true
-script = ExtResource("55_1pcnm")
 
 [node name="StatesContainer" type="Node" parent="Model"]
 unique_name_in_owner = true
@@ -2090,14 +2017,13 @@ accel_from_apex_curve = ExtResource("70_kwemi")
 [node name="FastTurn180" type="Node" parent="Model/StatesContainer/LegsSM/LegsAction/actions_start_stop"]
 script = ExtResource("70_5flrn")
 
-[node name="PlayerSM" type="Node" parent="Model/StatesContainer" node_paths=PackedStringArray("combat", "area_awareness", "legs_sm", "animator_manager", "animation_settings")]
+[node name="PlayerSM" type="Node" parent="Model/StatesContainer" node_paths=PackedStringArray("combat", "area_awareness", "legs_sm", "animator_manager")]
 unique_name_in_owner = true
 script = ExtResource("58_s0ywv")
 combat = NodePath("../../Combat")
 area_awareness = NodePath("../../AreaAwareness")
 legs_sm = NodePath("../LegsSM")
-animator_manager = NodePath("../../GeneralSkeleton/AnimatorManager")
-animation_settings = NodePath("../../GeneralSkeleton/AnimationSettings")
+animator_manager = NodePath("../../AnimatorManager")
 
 [node name="states_loco" type="Node" parent="Model/StatesContainer/PlayerSM"]
 
@@ -2267,7 +2193,6 @@ external_skeleton = NodePath("../../GeneralSkeleton")
 [node name="HitBox" parent="Model/bones/Hips" node_paths=PackedStringArray("holder") instance=ExtResource("95_xdwa8")]
 unique_name_in_owner = true
 holder = NodePath("../../../..")
-ignored_weapon_groups = Array[String](["PLAYER_WEAPON"])
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="Model/bones/Hips"]
 transform = Transform3D(0.151043, -5.82495e-26, 5.29396e-23, -1.71261e-24, 0.151043, 0, -5.29396e-23, 0, 0.151043, 0, 0, 0)
@@ -2307,9 +2232,9 @@ transform = Transform3D(0.0672514, 4.44089e-16, 0, 4.44089e-16, 0.0672514, 1.515
 visible = false
 
 [node name="--test" type="BoneAttachment3D" parent="Model/bones"]
-transform = Transform3D(0.93779165, 0.3418888, -0.06048794, -0.34440103, 0.8939392, -0.2868112, -0.043985013, 0.2898013, 0.95607555, -0.008912917, 1.3958288, 0.4839331)
-bone_name = "Neck"
-bone_idx = 5
+transform = Transform3D(0.8886595, 0.44697735, 0.102446675, 0.07924968, 0.070347644, -0.9943697, -0.4516675, 0.8917747, 0.027092308, 0.18204439, 0.035619088, 0.48923537)
+bone_name = "LeftToes"
+bone_idx = 52
 use_external_skeleton = true
 external_skeleton = NodePath("../../GeneralSkeleton")
 
@@ -2319,7 +2244,6 @@ bone_name = "Root"
 bone_idx = 0
 use_external_skeleton = true
 external_skeleton = NodePath("../../GeneralSkeleton")
-script = ExtResource("109_w0452")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="Model/bones/root"]
 transform = Transform3D(0.224402, 0, 0, 0, 0.224402, 0, 0, 0, 0.224402, 0.62327194, 0, 0.0457371)

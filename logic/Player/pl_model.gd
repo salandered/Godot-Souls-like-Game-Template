@@ -31,7 +31,7 @@ func _ready() -> void:
 	container.accept_all()
 	
 	player_sm.initialise()
-	animator_manager._accept_modifiers()
+	animator_manager.initialise()
 
 	# DEBUG ANIMATIONS
 	_reload_run_anims_from_library()
@@ -119,13 +119,26 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("dev_8"):
 		# animator_manager.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.combat.hit_reaction, OverlayFeature.OverlayConfig.new(0.8, 0.12, 0.18, 1, 0.20))
+		animator_manager.set_overlay_anim(A.combat.hit_reaction,
+		OverlayConfig.new(
+			OverlayConfig.Weight.new(0.5),
+			OverlayConfig.Blend.new(0.12, 0.18),
+			1.0,
+			[]
+			))
 		# animator_manager.play_overlay(A.hit_reaction, 0, -1, 0, 1)
 		# animator_manager.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed("dev_9"):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.combat.hit_reaction, OverlayFeature.OverlayConfig.new(1.0, 0.2, 0.2, 1, 0.05, ))
+		animator_manager.set_overlay_anim(A.combat.hit_reaction,
+				OverlayConfig.new(
+			OverlayConfig.Weight.new(1.0),
+			OverlayConfig.Blend.new(0.2, 0.2),
+			1.0,
+			[]
+		))
 		# animator_manager.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
+
 
 func __fly_velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	var _velocity := Vector3.ZERO
