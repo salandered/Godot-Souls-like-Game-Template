@@ -23,13 +23,13 @@ var _prev_stamina: float
 
 
 func _ready() -> void:
-	health_bar.max_value = pl_feelings.max_health
-	health_bar.value = pl_feelings.get_current_health()
-	_prev_health = pl_feelings.get_current_health()
+	health_bar.max_value = pl_feelings.get_max_health()
+	health_bar.value = pl_feelings.get_curr_health()
+	_prev_health = pl_feelings.get_curr_health()
 	
 	stamina_bar.max_value = pl_feelings.max_stamina
-	stamina_bar.value = pl_feelings.get_current_stamina()
-	_prev_stamina = pl_feelings.get_current_stamina()
+	stamina_bar.value = pl_feelings.get_curr_stamina()
+	_prev_stamina = pl_feelings.get_curr_stamina()
 
 	pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
@@ -40,7 +40,7 @@ func _process(delta: float):
 
 
 func _update_health_bar():
-	var current_health := pl_feelings.get_current_health()
+	var current_health := pl_feelings.get_curr_health()
 	if current_health == _prev_health:
 		return
 
@@ -49,7 +49,7 @@ func _update_health_bar():
 
 
 func _update_stamina_bar(delta):
-	var current_stamina := pl_feelings.get_current_stamina()
+	var current_stamina := pl_feelings.get_curr_stamina()
 	if current_stamina == _prev_stamina:
 		return
 

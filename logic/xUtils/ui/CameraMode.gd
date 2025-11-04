@@ -80,7 +80,7 @@ func _toggle_camera_mode() -> void:
 		camera.queue_free()
 		hide()
 		
-		for node in get_tree().get_nodes_in_group("camera_mode_toggle"):
+		for node in get_tree().get_nodes_in_group(Groups.Dev.camera_mode_toggle):
 			node.show()
 	else:
 		get_tree().paused = true
@@ -93,5 +93,5 @@ func _toggle_camera_mode() -> void:
 		camera.fov = _cached_camera.fov
 		camera.global_transform = _cached_camera.global_transform
 		
-		for node in get_tree().get_nodes_in_group("camera_mode_toggle"):
+		for node in get_tree().get_nodes_in_group(Groups.Dev.camera_mode_toggle):
 			node.hide()

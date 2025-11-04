@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cngt87lk8mdi"]
+
+[ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://logic/Common/Weapons/hit_box/hitbox.gd" id="1_5ms84"]
+
+[node name="Hitbox" type="Area3D" node_paths=PackedStringArray("holder")]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_5ms84")
+holder = NodePath("")
+ignored_weapon_groups = Array[String](["ENEMY_WEAPON"])

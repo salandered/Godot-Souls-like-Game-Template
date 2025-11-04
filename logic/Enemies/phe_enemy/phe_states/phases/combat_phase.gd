@@ -106,9 +106,10 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 
 func _phase_switch_check() -> bool:
+	# already switched
 	if me.angry_raised == true:
 		return false
-	return phe_feelings.health < phe_feelings.max_health * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD
+	return phe_feelings.is_lower_phase_switch()
 
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
@@ -124,10 +125,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("t2"):
 		if not me.angry_raised:
 			# me.angry_raised = true will be raised by state flow
-			phe_feelings.health = phe_feelings.max_health * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD - 1
+			phe_feelings._set_specific_health(phe_feelings.get_max_health() * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD - 1)
 			print("~~~~~ dev PHASE SWITCH to ANGRY")
 
 		else:
 			me.angry_raised = false
-			phe_feelings.health = phe_feelings.max_health
+			phe_feelings._set_specific_health(phe_feelings.get_max_health())
 			print("~~~~~ dev PHASE SWITCH TO USUAL")

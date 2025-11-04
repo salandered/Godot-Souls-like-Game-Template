@@ -3,7 +3,7 @@
 
 @abstract
 class_name BaseEnemyCharacter
-extends BaseCharacterBody3D
+extends BaseCharacter
 
 @export_group("Player")
 @export var player: Princess

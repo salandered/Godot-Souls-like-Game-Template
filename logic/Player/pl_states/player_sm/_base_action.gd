@@ -160,14 +160,5 @@ func tracks_input_vector() -> bool:
 	return anim.tracks_input_vector(effective_time_spent())
 
 
-# TODO: interesting but do we need this?
-# func time_til_unlocking() -> float:
-# 	if tracks_input_vector():
-# 		return 0
-# 	return states_data_repo.time_til_next_controllable_frame(backend_animation, time_spent())
-
-# endregion
-
-
 func __log_anim():
 	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)

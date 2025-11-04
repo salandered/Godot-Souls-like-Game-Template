@@ -1,25 +1,25 @@
-extends Resource
+extends RefCounted
 class_name HitData
 
-# var is_parryable: bool
 var damage: float
-var state_anim: String
+var anim_id: String
 var weapon: BaseWeapon
+# var is_parryable: bool
 # var effects: Dictionary
 
 
-func initialise(
-	# is_parryable_: bool = false,
+func _init(
 	damage_: float,
-	state_anim_: String,
 	weapon_: BaseWeapon,
+	anim_id_: String,
+	# is_parryable_: bool = false,
 	# effects_: Dictionary = {}
 ) -> void:
+	self.damage = damage_
+	self.weapon = weapon_
+	self.anim_id = anim_id_
 	# is_parryable = is_parryable_
-	damage = damage_
-	state_anim = state_anim_
-	weapon = weapon_
 	# effects = effects_
 
 func _to_string() -> String:
-	return pp.s("HitData: dmg", damage, "state_anim", state_anim, "weapon", weapon)
+	return pp.s("HitData dmg", damage, "anim", anim_id, "weapon_name", weapon.weapon_name)

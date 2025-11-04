@@ -9,7 +9,8 @@ var global_extra_speed := 1.0
 
 
 func initialise() -> void:
-	hit_damage = 9
+	hit_damage = 12
+
 	blend_time.set_by_prev_action({
 		Leg.Act.run: 0.4,
 		Leg.Act.sprint: 0.4
@@ -31,6 +32,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	extra_speed = max(0.0, _inherited_speed - rm_start_speed + global_extra_speed)
 	fade_interpolator.initialise(1.0, 0.0, fade_time)
 
+	player_sm.combat.set_hit_data_to_weapon(hit_damage, anim.anim_id)
 	# __log_action_ent(
 	# 	"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %
 	# 	[_inherited_speed, start_time_offset, rm_start_speed, extra_speed])

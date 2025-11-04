@@ -480,6 +480,20 @@
 				},
 			]
 		},
+		"(?<=func\\s_?)(physics_process)(?=\\()": { // func _physics_process(...)
+			"decorations": [
+				{
+					"textDecoration": "underline double",
+				},
+			]
+		},
+		"(?<=func\\s_?)(process)(?=\\()": { // func _physics_process(...)
+			"decorations": [
+				{
+					"textDecoration": "underline double",
+				},
+			]
+		},
 		"(?<=func\\s_?)(update)(?=\\()": { // func update(...)
 			"decorations": [
 				{

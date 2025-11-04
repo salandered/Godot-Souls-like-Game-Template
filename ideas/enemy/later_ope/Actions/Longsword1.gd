@@ -9,7 +9,7 @@ var initial_position: Vector3
 func update(input: OpponentActionInput, delta: float):
 	move_by_root_motion(delta)
 	track_player_if_possible(input, delta)
-	right_hand_weapon.is_attacking = right_weapon_hurts()
+	right_hand_weapon._is_attacking = right_weapon_hurts()
 
 
 func form_hit_data(weapon: BaseWeapon) -> HitData:
@@ -27,4 +27,4 @@ func on_enter_action():
 
 func on_exit_action():
 	right_hand_weapon.hitbox_ignore_list.clear()
-	right_hand_weapon.is_attacking = false
+	right_hand_weapon._is_attacking = false

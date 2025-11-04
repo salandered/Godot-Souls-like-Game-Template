@@ -26,7 +26,7 @@ func initialise_implementation():
 
 
 func on_enter_state() -> void:
-	combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
+	combat.set_hit_data_to_weapon(hit_damage, anim.anim_id)
 
 
 func on_exit_state() -> void:

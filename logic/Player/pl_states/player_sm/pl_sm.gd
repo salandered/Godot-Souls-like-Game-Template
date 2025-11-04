@@ -16,6 +16,7 @@ var _player: Princess
 var _transfer_data: TranferData = TranferData.new()
 
 
+## not nullable 
 var current_state: PlayerState
 
 var _current_action: BaseAction
@@ -100,8 +101,8 @@ func update_current_action(next_action: BaseAction) -> String:
 	
 	_prev_action = _current_action
 	_current_action = next_action
-	if _prev_action and next_act_name == _prev_action.action_name:
-		print_.dev(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
+	# if _prev_action and next_act_name == _prev_action.action_name:
+		# print_.dev(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
 	
 	return _prev_action.action_name
 

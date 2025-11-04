@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://crtv4ruqpencg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ptp1h"]
+load_path = "res://.godot/imported/wZZNl7ooWl.png-89aee342f0b8c84824800b901ab32938.ctex"
+
+[resource]
+texture = SubResource("CompressedTexture2D_ptp1h")
+texture_margin_left = 56.512806
+region_rect = Rect2(0.64086914, 36.71791, 742.46136, 60.410233)
+modulate_color = Color(0.28276289, 0.018541824, 0, 1)

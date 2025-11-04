@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/red/hurt_box_3d.svg")
+@icon("res://-assets-/x_misc/x_icons/red/comet-red.svg")
 extends Area3D
 
 ## Weapon area which DAMAGES.

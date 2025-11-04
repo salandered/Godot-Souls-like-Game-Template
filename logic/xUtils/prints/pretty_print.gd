@@ -42,7 +42,7 @@ static func in_sq(something: Variant, spaces: bool = false) -> String:
 	return in_sp(r) if spaces else r
 
 static func in_br(something: Variant, spaces: bool = false) -> String:
-	var r: = "(" + str(something) + ")"
+	var r := "(" + str(something) + ")"
 	return in_sp(r) if spaces else r
 
 static func in_curl(something: Variant, spaces: bool = false) -> String:

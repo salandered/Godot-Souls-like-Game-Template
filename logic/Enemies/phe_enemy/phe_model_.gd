@@ -42,7 +42,6 @@ func _ready() -> void:
 	state_machine = _top
 
 	animator_manager.initialise()
-	
 
 	var _anim_list := PHEA.new()
 	anim_container._accept_animations(_anim_list.list_of_animations, native_player) # NOTE: should be before accepting states!
@@ -59,16 +58,12 @@ func _ready() -> void:
 
 	fatigue_raised = false
 	angry_raised = false
-	# state_machine.current_state = container.get_state_by_name(PHES.Leaf.awaken)
 	state_machine._on_enter_state()
 
 
 func get_current_state() -> BasePHEState:
+	## returns curr substate of the top state
 	return state_machine.get_current_substate()
-
-func react_on_hit(hit_data: HitData) -> void:
-	pass
-	# get_current_state()._react_on_hit(hit_data)
 
 
 func get_player() -> Princess:
@@ -79,10 +74,6 @@ func get_player() -> Princess:
 func update_curr_leaf_state(next_state: BasePHELeaf) -> String:
 	var curr_state_name := _curr_leaf.state_name
 	var next_state_name := next_state.state_name
-
-	# if next_state_name == Leg.Act.double:
-	# 	# print_.dev("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
-	# 	return _prev_leaf.state_name
 
 	# if next_state_name == curr_state_name:
 		# print_.phe_sm(em.pin, "✖️🚸 came with the same state " + curr_state_name)
@@ -99,19 +90,32 @@ func update_curr_leaf_state(next_state: BasePHELeaf) -> String:
 func get_curr_leaf_state() -> BasePHELeaf:
 	return _curr_leaf
 
+
 func update_state_history(state_name_):
 	_state_history.append(state_name_)
 	if _state_history.size() > BREADCRUMB_SIZE:
 		_state_history.pop_front()
 
 
-func __pp_state_history():
-	return "state history" + pp.in_sq(pp.list_(_state_history))
-
-
 func _physics_process(delta):
 	state_machine._update(delta)
 	move_and_slide()
 
-
 	player.dev_labels._label_phe_enemy_info(self)
+
+
+func apply_hit(hit_data: HitData) -> void:
+	combat.apply_hit(hit_data)
+
+
+## todo: here with apply_hit and react_on_hit we go back and forth
+##       should be simplified 
+func react_on_hit(hit_data: HitData) -> void:
+	var _curr_state = get_current_state()
+	if not _curr_state:
+		print_.warn(false, "no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
+		return
+	_curr_state.react_on_hit(hit_data)
+
+func __pp_state_history():
+	return "state history" + pp.in_sq(pp.list_(_state_history))

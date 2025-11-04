@@ -18,12 +18,12 @@ func set_special_flags(switch_on_same_: bool = false, override_commit_: bool = f
 
 
 func override_commit_raised() -> bool:
-	if _override_commit: print_.note(true, "override_commit_raised returns true")
+	# if _override_commit: print_.note(false, "override_commit_raised returns true")
 	return _override_commit
 	
 	
 func switch_on_same_raised() -> bool:
-	if _switch_on_same: print_.note(true, "_switch_on_same_raised returns true")
+	# if _switch_on_same: print_.note(false, "_switch_on_same_raised returns true")
 	return _switch_on_same
 
 

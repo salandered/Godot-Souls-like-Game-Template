@@ -15,6 +15,7 @@ class MonitorFor:
 	## NOTE: should be updated in _process using accumulate_time()
 	var _timer: float = -1.0
 
+	var __LOG_B: bool = false
 
 	func _init(min_: float, max_: float, state_name_: String) -> void:
 		self._min = min_
@@ -120,7 +121,7 @@ class MonitorFor:
 		return pp.s(_our_state, "is done. worked >", _duration)
 
 	func __log_(...parts: Array):
-		print_.dev(__pp_my_name(), pp.list_(parts), 17)
+		if __LOG_B: print_.dev(__pp_my_name(), pp.list_(parts), 17)
 
 	func __pp_my_name() -> String:
 		return "MonitorFor"

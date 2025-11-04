@@ -36,7 +36,7 @@ var default_action_name: String # first child or dummy action node
 
 var state_combos_sorted: Array # [Combo_]
 
-# smth
+## position of player at the end of the current state
 var initial_position: Vector3
 
 # dynamic
@@ -166,7 +166,7 @@ func _on_enter_state(input_: InputPackage):
 	# choose_initial_leg_behavior(input_) # this is advanded use where _player state can use legs behavior
 	## - single legs beh attached to _player state => 
 	##    => all is needed is to call the legs SM to switch into this defined state.
-	initial_position = _player.global_position # used to be here, check
+	initial_position = _player.global_position
 	feelings.pay_state_cost(stamina_cost)
 	
 	legs_behavior.player_state = self
@@ -230,7 +230,6 @@ func on_exit_state() -> void:
 	pass
 
 
-# DEFAULT BEHAVIORS ON MODIFIERS
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "react_on_hit called")
 	if curr_global_action().is_vulnerable():

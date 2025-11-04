@@ -1,20 +1,15 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/white/icon_heart.png")
-extends Node
+extends BaseFeelings
 class_name PlayerFeelings
 
-var statuses: Dictionary # todo: system
+
 var FATIGUE_STATUS := "FATIGUE〰️"
 
-var __god_mode: bool = true
-
 const FATIGUE_THRESHOLD = 5.0
-const max_health: float = 60.0
 const max_stamina: float = 60.0
 
 var stamina_regen_rate: float = 5.0 # per sec
 
-var _current_health: float
 var _current_stamina: float
 
 signal SIG_cant_be_paid
@@ -25,8 +20,7 @@ var zero_drain_timer := DelayCallbackTimer.new()
 var IN_ZERO_DRAIN: bool = false
 
 
-func _ready() -> void:
-	_current_health = max_health
+func initialise() -> void:
 	_current_stamina = max_stamina
 	
 	statuses = {
@@ -34,21 +28,15 @@ func _ready() -> void:
 	}
 
 
-func _process(delta: float) -> void:
-	if zero_drain_timer.is_in_progress():
-		zero_drain_timer.update(delta)
+func is_player() -> bool:
+	return true
 
 
-# region: SHORTCUTS FOR PSM
+func get_max_health() -> float:
+	return 60
 
 func pay_state_cost(amount: float):
 	_change_stamina(-amount)
-
-func add_health(amount: float):
-	_change_health(amount)
-
-func lose_health(amount: float):
-	_change_health(-amount)
 
 func add_stamina(amount: float):
 	_change_stamina(amount)
@@ -62,7 +50,16 @@ func can_allow_stamina_drain(amount: float) -> bool:
 func is_zero_health() -> bool:
 	return _current_health <= 0
 
-# endregion
+func get_curr_health() -> float:
+	return _current_health
+
+func get_curr_stamina() -> float:
+	return _current_stamina
+
+
+func _process(delta: float) -> void:
+	if zero_drain_timer.is_in_progress():
+		zero_drain_timer.update(delta)
 
 
 ## called from Player SM
@@ -80,31 +77,10 @@ func update(delta: float, requested_stamina_rate: float = 0.0):
 		_change_stamina(result_rate * delta)
 
 
-func get_current_health() -> float:
-	return _current_health
-
-func get_current_stamina() -> float:
-	return _current_stamina
-
-
-func _change_health(amount: float) -> void:
-	if amount == 0.0: return
-	if __god_mode:
-		if abs(amount) > 1: print_.feel("health", pp.s("not changed: god mode"))
-		return
-
-	var _new_health := _current_health + amount
-	_current_health = clampf(_new_health, 0, max_health)
-	
-	# TODO if _current_health <= 0.0:
-	
-	if abs(amount) > 1: print_.feel("health", pp.s("changed", amount))
-
-
 func _change_stamina(amount: float) -> void:
 	if amount == 0.0: return
 	if __god_mode:
-		if abs(amount) > 1: print_.feel("health", pp.s("not changed: god mode"))
+		if abs(amount) > 1: __log_feel("stamina", pp.s("not changed: god mode"))
 		return
 	
 	if IN_ZERO_DRAIN: return
@@ -117,19 +93,19 @@ func _change_stamina(amount: float) -> void:
 
 	if is_in_fatigue() and _current_stamina > FATIGUE_THRESHOLD:
 		statuses[FATIGUE_STATUS] = false
-		print_.feel("stamina", pp.s("erase status", FATIGUE_STATUS))
+		__log_feel("stamina", pp.s("erase status", FATIGUE_STATUS))
 
-	if abs(amount) > 1: print_.feel("stamina", pp.s("changed", amount))
+	if abs(amount) > 1: __log_feel("stamina", pp.s("changed", amount))
 
 
 func change_stamina_regen_rate(amount: float) -> void:
 	var _new_stamina_regen_rate := stamina_regen_rate + amount
 	stamina_regen_rate = clampf(_new_stamina_regen_rate, 0.0, 100)
-	print_.feel("stamina regen rate", pp.s("changed", amount))
+	__log_feel("stamina regen rate", pp.s("changed", amount))
 
 
 func is_in_fatigue() -> bool:
-	return statuses[FATIGUE_STATUS]
+	return check_status(FATIGUE_STATUS)
 
 
 func can_be_paid(amount: float) -> bool:
@@ -180,7 +156,7 @@ func _on_zero_drain_ended() -> void:
 	IN_ZERO_DRAIN = false
 	if _current_stamina <= 0.0:
 		_current_stamina += 0.5 # give it a little bump just to be safe
-	print_.feel("stamina", "zero_drain ended, stamina bumped to" + str(_current_stamina))
+	__log_feel("stamina", "zero_drain ended, stamina bumped to" + str(_current_stamina))
 
 
 ## if zero reached, we spent some time ignoring changes
@@ -191,7 +167,7 @@ func _trigger_reach_zero() -> void:
 	statuses[FATIGUE_STATUS] = true
 	zero_drain_timer.initialise(ZERO_DRAIN_TIME, _on_zero_drain_ended)
 	IN_ZERO_DRAIN = true
-	print_.feel("stamina", pp.s("set status", FATIGUE_STATUS, "and triggered zero_drain_timer with", ZERO_DRAIN_TIME))
+	__log_feel("stamina", pp.s("set status", FATIGUE_STATUS, "and triggered zero_drain_timer with", ZERO_DRAIN_TIME))
 
 # endregion
 
@@ -199,7 +175,7 @@ func _trigger_reach_zero() -> void:
 func __log_feel_check_stamina(prefix, amount, decision, ...context: Array):
 	if decision == true: return
 	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp._dict(statuses, false, true))
-	print_.feel(prefix, pp.s(_msg, " ", pp.list_(context) + "=>", decision))
+	__log_feel(prefix, _msg, " ", pp.list_(context) + "=>", decision)
 
 
 # region: DEV
@@ -212,6 +188,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("t2"):
 		lose_health(10)
 		lose_stamina(15)
+
+# endregion:
 
 
 # LATER

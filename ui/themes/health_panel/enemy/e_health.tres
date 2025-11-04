@@ -1,0 +1,9 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bx5fjl1q7x0eg"]
+
+[ext_resource type="Texture2D" uid="uid://b4qf0w7eu1ajq" path="res://ui/themes/wZZNl7ooWl.png" id="1_vkfti"]
+
+[resource]
+texture = ExtResource("1_vkfti")
+texture_margin_left = 56.512806
+region_rect = Rect2(0.64086914, 36.71791, 742.46136, 60.410233)
+modulate_color = Color(0.9999996, 0.7756998, 0.76168317, 1)

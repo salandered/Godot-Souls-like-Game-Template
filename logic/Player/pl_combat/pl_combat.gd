@@ -6,6 +6,16 @@ class_name PlayerCombat
 @onready var model = $".." as PlayerModel
 
 
+func is_player() -> bool:
+	return true
+
+func get_me() -> BaseCharacter:
+	return model._player
+
+
+func get_combat_name() -> String:
+	return "Player Combat"
+
 func get_active_weapon() -> BaseWeapon:
 	return model.active_weapon
 
@@ -23,7 +33,7 @@ func _translate_combat_actions(new_input: InputPackage, delta):
 	new_input.actions.append_array(_translated)
 
 
-# region: Future
+# region: Ideas
 
 # static var _combat_inputs_priority: Dictionary = {
 # 	CombatAction.light_attack_pressed: 1,
@@ -43,6 +53,7 @@ func _translate_combat_actions(new_input: InputPackage, delta):
 # 	else:
 # 		return false
 
+# endregion
 
 # region: demo of magic abilities
 # @export_group("spellbook")
@@ -54,6 +65,4 @@ func _translate_combat_actions(new_input: InputPackage, delta):
 # 		new_input.actions.erase("shield_throw")
 # 	if shield_throw_charges == max_shield_throw_charges:
 # 		new_input.actions.erase("shield_throw_reload")
-# endregion
-
 # endregion

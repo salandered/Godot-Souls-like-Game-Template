@@ -153,7 +153,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		else:
 			# NOTE: we don't change current_attack_number here. is_ended should be true
 			if not _series_forgotten.is_initialised():
-				__log_warn(false, "_series_forgotten init!")
+				# __log_warn(false, "_series_forgotten init!")
 				_series_forgotten.initialise(0.1)
 				_reason += pp.s(em.warn, "series ended! parent not switches us! wait 0.1 sec and return one more move with idx 0")
 				return VerdictPH.new(_next_state, _reason)

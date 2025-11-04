@@ -132,7 +132,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jlhn3")
 
-[node name="BigPingaBlade" type="Node3D" groups=["enemys_weapon"]]
+[node name="BigPingaBlade" type="Node3D"]
 script = ExtResource("1_hj5gq")
 
 [node name="WeaponHurtBox" parent="." instance=ExtResource("2_kngnu")]

@@ -132,7 +132,7 @@ func get_floor_distance() -> float:
 
 
 func find_target() -> Node:
-	var all_targets := get_tree().get_nodes_in_group("targetable")
+	var all_targets := get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
 	# print_.aware_target("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
 	var candidates: Array[Node] = []
 	for target in all_targets:

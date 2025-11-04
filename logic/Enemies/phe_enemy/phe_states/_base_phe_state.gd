@@ -95,6 +95,8 @@ func get_player() -> Princess:
 @abstract func works_less_than(time: float) -> bool
 
 
+@abstract func react_on_hit(hit_data: HitData) -> void
+
 ## MOVEMENT SHORTCUTS
 # region
 

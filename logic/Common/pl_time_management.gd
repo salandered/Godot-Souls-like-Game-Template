@@ -6,6 +6,7 @@ class_name PlActionTimeManagement
 var animator_manager: PlAnimatorManager
 var anim_container: BaseAnimationContainer
 
+## not nulllable
 var anim: AnimationData
 
 

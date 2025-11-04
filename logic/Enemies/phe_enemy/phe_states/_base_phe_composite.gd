@@ -229,6 +229,14 @@ func works_less_than(time: float) -> bool:
 	return get_actual_time_spent() < time
 
 
+func react_on_hit(hit_data: HitData) -> void:
+	var _curr_sbs = get_current_substate()
+	if not _curr_sbs:
+		__log_warn_v2(false, "no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
+		return
+	_curr_sbs.react_on_hit(hit_data)
+
+
 # region: __LOGS
 
 func __log_indent() -> int:

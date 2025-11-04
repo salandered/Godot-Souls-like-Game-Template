@@ -17,7 +17,9 @@ class_name PlayerModel
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 
+
 var active_weapon: BaseWeapon
+
 
 func _ready() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

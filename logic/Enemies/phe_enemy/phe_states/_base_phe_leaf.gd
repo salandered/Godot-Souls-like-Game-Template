@@ -78,8 +78,8 @@ func _update(delta: float) -> void:
 
 	if APPLY_GRAVITY:
 		var _applied := e_movement.apply_gravity(delta)
-		if _applied:
-			__log_phe__upd("applied gravity ☄️")
+		# if _applied:
+			# __log_phe__upd("applied gravity ☄️")
 		
 
 func works_longer_than_fatigue() -> bool:
@@ -92,8 +92,9 @@ func works_less_than_commitment() -> bool:
 func get_lowest_active_state() -> BasePHELeaf:
 	return self
 
-## to implement
+
 func react_on_hit(hit: HitData):
+	__log_phe("react_on_hit, will lose health", pp.in_q(hit))
 	phe_feelings.lose_health(hit.damage)
 
 

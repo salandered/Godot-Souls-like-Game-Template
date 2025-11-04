@@ -8,15 +8,18 @@ const _FRAME_PRINT := true
 # COMMON
 const DEV_B := true
 const COLLISION_B := false
+const FEEL_B := true
+
 
 # CONTAINER
 const CONTAINER_B := false
-const E_CONTAINER_B := true
+const E_CONTAINER_B := false
 
 # FIGHT
-const FIGHT_B := false
-const COMBO_B := false
-const HIT_BOX_B := false
+const FIGHT_B := true
+const COMBO_B := true
+const HIT_HURT_BOX_B := true
+const WEAPON_B := true
 
 # PLAYER PSM
 const PSM_B := false
@@ -29,19 +32,30 @@ const LSM_ACTION_STRAFE_B := false
 const LSM_ACTION_B := false
 
 # PL SYSTEMS
-const FEEL_B := false
 const input_gathering_B := false
 const FANCY_CAM_B := false
 const AWARENESS_B := false
 
 # ENEMY
 const SE_B := false
-const PHE_CHECK_B := true
-const PHE_B := true
-const ANIM_MANAGER_B := true
+const PHE_CHECK_B := false
+const PHE_B := false
+const ANIM_MANAGER_B := false
 # endregion
 
 #----------------------
+
+## COMMON
+
+static var PL_FEEL_PRINT := PrintData.new(FEEL_B, "feel🤍", 10, prefix)
+static var E_FEEL_PRINT := PrintData.new(FEEL_B, "🗿feel🖤", 10, prefix)
+
+
+static func feel(for_player: bool, add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	if for_player:
+		_generic(PL_FEEL_PRINT, add_prefix_, text, info_indents, level)
+	else:
+		_generic(E_FEEL_PRINT, add_prefix_, text, info_indents, level)
 
 
 # region: CONTAINER
@@ -61,19 +75,24 @@ static func e_container(add_prefix_: String, text: String, info_indents: int = 0
 
 # region: FIGHT logs
 
-static var SE_FIGHT_PRINT := PrintData.new(FIGHT_B, "SE", 0, fight)
-static var COMBO_PRINT := PrintData.new(COMBO_B, "Combo🗡️🗡️", 0, fight)
-static var H_BOX_PRINT := PrintData.new(HIT_BOX_B, "💢 HBox", 0, fight)
-static var FIGHT_PRINT := PrintData.new(FIGHT_B, "🗡️", 0, prefix)
+static var COMBO_PRINT := PrintData.new(COMBO_B, "Combo xx", 0, fight)
+static var HIT_BOX_PRINT := PrintData.new(HIT_HURT_BOX_B, "💢 HitBox", 1, fight)
+static var HURT_BOX_PRINT := PrintData.new(HIT_HURT_BOX_B, "🔻 HurtBox", 1, fight)
+static var WEAPON_PRINT := PrintData.new(WEAPON_B, "🗡️ Weapon", 0, fight)
+static var FIGHT_PRINT := PrintData.new(FIGHT_B, "⚔️", 0, prefix)
 
-static func se_fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(SE_FIGHT_PRINT, add_prefix_, text, info_indents, level)
 
 static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(COMBO_PRINT, add_prefix_, text, info_indents, level)
 
-static func h_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(H_BOX_PRINT, add_prefix_, text, info_indents, level)
+static func hit_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(HIT_BOX_PRINT, add_prefix_, text, info_indents, level)
+
+static func hurt_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(HIT_BOX_PRINT, add_prefix_, text, info_indents, level)
+
+static func weapon(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(WEAPON_PRINT, add_prefix_, text, info_indents, level)
 
 static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(FIGHT_PRINT, add_prefix_, text, info_indents, level)
@@ -87,7 +106,6 @@ static var PSM_ACTION := PrintData.new(PSM_B, "Action", 2, psm)
 static var PSM_CHECK_TRANS_PRINT := PrintData.new(PSM_B, "transition ❔", 1, psm)
 static var PSM_PRINT := PrintData.new(PSM_B, "PSM", 0, prefix)
 static var SKM_PRINT := PrintData.new(SKM_B, "SKM 💀", 0, prefix)
-static var FEEL_PRINT := PrintData.new(PSM_B, "FEEL🤍", 10, prefix)
 
 static func any_action_anim(
 	add_prefix_: String, anim_name: String,
@@ -112,9 +130,6 @@ static func psm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 static func skm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(SKM_PRINT, add_prefix_, text, info_indents, level)
-
-static func feel(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(FEEL_PRINT, add_prefix_, text, info_indents, level)
 
 # endregion
 

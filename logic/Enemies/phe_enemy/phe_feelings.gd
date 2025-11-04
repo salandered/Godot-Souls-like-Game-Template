@@ -1,19 +1,22 @@
-extends Node
+@tool
+extends BaseFeelings
 class_name PHEFeelings
 
 
-var max_health: float = 600
-var health: float = 600
+const MAX_HEALTH = 200
+
+func is_player() -> bool:
+	return false
 
 
-func lose_health(amount: float):
-	health -= amount
-	#if health < 1:
-		#state_machine.switch_to("death")
+func initialise():
+	pass
 
 
-func gain_health(amount: float):
-	if health + amount <= max_health:
-		health += amount
-	else:
-		health = max_health
+func get_max_health() -> float:
+	return MAX_HEALTH
+
+
+func is_lower_phase_switch() -> bool:
+	var _r = get_curr_health() < get_max_health() * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD
+	return _r
