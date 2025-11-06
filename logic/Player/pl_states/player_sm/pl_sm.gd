@@ -16,7 +16,7 @@ var _transfer_data: TranferData = TranferData.new()
 
 
 ## not nullable 
-var current_state: PlayerState
+var current_state: BasePlayerState
 
 var _current_action: BaseAction
 var _prev_action: BaseAction

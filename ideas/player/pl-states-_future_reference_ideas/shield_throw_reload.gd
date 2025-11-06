@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 @export var charge_restore_timing: float = 3.5
 var reloaded = false

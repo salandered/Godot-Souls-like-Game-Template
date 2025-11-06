@@ -1,3 +1,3 @@
 @tool
 extends BaseWeapon
-class_name PHWeapon
+class_name PHEWeapon

@@ -1,1 +1,1 @@
-extends PlayerState
+extends BasePlayerState

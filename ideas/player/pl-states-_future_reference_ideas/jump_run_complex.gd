@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 var LAUNCH_TIMING = 0.0657 # When in animation the character actually leaves ground

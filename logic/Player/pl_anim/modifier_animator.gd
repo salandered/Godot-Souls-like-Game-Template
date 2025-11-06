@@ -5,6 +5,7 @@ class_name PlayerModifierAnimator
 
 @export var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
 @onready var skeleton := get_skeleton()
+@onready var root_animator: PlayerRootAnimator = %RootAnimator
 
 @export var animator_name: String ## name of animator
 
@@ -52,30 +53,6 @@ var _bone_idx_to_track := {}
 # todo: flying bone attachments
 
 
-class CustomDelta:
-	# TODO: Unix time in millisecond, needs a better time calculation
-	var last_process_time: float # seconds unix from system
-	var delta: float # seconds
-	var now: float # seconds unix from system
-
-	func _init(last_process_time_: float = 0.0, delta_: float = 0.0, now_: float = 0.0) -> void:
-		self.last_process_time = last_process_time_
-		self.delta = delta_
-		self.now = now_
-
-
-	func update():
-		now = _get_curr_time()
-		delta = now - last_process_time
-		last_process_time = now
-
-	func update_last_process_time():
-		last_process_time = _get_curr_time()
-
-	func _get_curr_time():
-		return Time.get_unix_time_from_system()
-
-
 var __custom_delta: CustomDelta = CustomDelta.new()
 
 
@@ -90,6 +67,8 @@ func initialise() -> void:
 	# Pre-cache all bone track paths into the dictionary
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
+
+	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT])
 	__initialised = true
 
 
@@ -160,10 +139,10 @@ func _update_blend_values(custom_delta: float):
 	prev_prev_blend_playback.update(custom_delta) # twice-interrupted D->C blend
 
 
-var print_4: bool = false
+var __print_4: bool = false
 
 func _update_skeleton(custom_delta: float):
-	print_4 = false
+	__print_4 = false
 	for bone_idx in bone_mask:
 		# Pose for the newest animation (A)
 		var curr_transform := _calculate_bone_pose(bone_idx, curr_playback)
@@ -180,8 +159,8 @@ func _update_skeleton(custom_delta: float):
 
 				# D->C blend
 				if prev_prev_blend_playback.is_blending and prev_prev_prev_playback:
-					# if not print_4: print_.dev(em.mark, "4 animations!", __log_blend_state())
-					print_4 = true
+					# if not __print_4: print_.dev(em.mark, "4 animations!", __log_blend_state())
+					__print_4 = true
 					var prev_prev_prev_transform := _calculate_bone_pose(bone_idx, prev_prev_prev_playback) # Pose for D
 					# calculate D->C blend first
 					blend_base_prev = prev_prev_prev_transform.interpolate_with(prev_prev_transform, prev_prev_blend_playback.percentage)
@@ -200,37 +179,10 @@ func _update_skeleton(custom_delta: float):
 
 
 func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
-	# Search for a pos track by turning bone index into track path.
-	# 	- If -1, it means that anim dont have it. E.g that bone doesn't move in this animation. 
-	# 	  => we set transform's `origin` to the origin of our bone; we don't touch it.
-	#   - If track's found, we get interpolated value from it using effective anim time.
-	# Same with rotation. Difference is type casting because anim stores rot data in quaternions, 
-	# 	but `Transform3D` stores it in basis vector triples.
-	var result_transform: Transform3D
+	return BoneTools.calculate_bone_pose_for_anim_playback(
+		bone_idx, playback, skeleton, _bone_idx_to_track
+	)
 	
-	var _track_path: String = _bone_idx_to_track[bone_idx]
-		
-	var bone_pos_track := playback.anim.get_pos_track_idx(_track_path)
-	var bone_rot_track := playback.anim.get_rot_track_idx(_track_path)
-	var playback_eff_progress := playback.get_effective_time_spent()
-
-	if bone_pos_track != -1:
-		result_transform.origin = playback.native_anim.position_track_interpolate(bone_pos_track, playback_eff_progress)
-	else:
-		# var rest_origin = skeleton.get_bone_rest(bone_idx).origin # Rest pose
-		# var current_origin = skeleton.get_bone_pose(bone_idx).origin # Current pose
-		# if rest_origin != current_origin:
-			# print("Bone %d - Rest: %v, Current: %v" % [bone_idx, rest_origin, current_origin])
-		# result_transform.origin = current_origin
-		result_transform.origin = skeleton.get_bone_pose(bone_idx).origin
-
-	if bone_rot_track != -1:
-		result_transform.basis = Basis(playback.native_anim.rotation_track_interpolate(bone_rot_track, playback_eff_progress))
-	else:
-		result_transform.basis = skeleton.get_bone_pose(bone_idx).basis
-	
-	return result_transform
-
 
 func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
 	return global_speed_scale * playback.anim.speed_scale
@@ -250,12 +202,7 @@ func reset_global_speed_scale():
 	set_global_speed_scale(1.0)
 
 
-# region: helpers
-
-func __bone_idx_to_track_path(bone_idx: int) -> String:
-	return _bone_idx_to_track[bone_idx]
-
-# endregion
+## __LOG
 
 
 func __log_state() -> String:

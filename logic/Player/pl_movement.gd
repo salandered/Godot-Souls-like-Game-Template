@@ -108,7 +108,7 @@ func set_velocity(velocity: Vector3):
 
 
 ## gravity is expected to be positive value.
-## if no gravitym default will be used
+## if no gravity, default will be used
 func apply_gravity(delta, gravity: float = u.gravity):
 	_player.velocity.y -= gravity * delta
 
@@ -203,10 +203,17 @@ func process_input_vector_air(input_: InputPackage, delta: float, jump_direction
 ## MOVING WITH ROOT
 # region 
 
-func move_with_root(delta: float) -> void:
-	var root_vel := animator_manager.get_root_velocity()
-	_player.velocity = _player.get_quaternion() * root_vel
 
+## applies a local-space velocity (e.g., from root motion) to the player
+func apply_local_velocity_as_global(local_velocity: Vector3):
+	_player.velocity = _player.get_quaternion() * local_velocity
+
+
+func move_with_root(delta: float, extra_vel: Vector3 = Vector3.ZERO, y_zeroed: bool = true, use_blending: bool = false) -> void:
+	var root_vel := animator_manager.get_root_velocity(y_zeroed, use_blending)
+	var final_local_vel := root_vel + extra_vel
+	apply_local_velocity_as_global(final_local_vel)
+	
 
 func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary:
 	var remaining_angle := target_angle_ - accum_rot_

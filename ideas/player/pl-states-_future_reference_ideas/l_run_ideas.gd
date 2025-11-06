@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 # region: FAIR LOGIC for process input vector
 #if combat.current_camera_mode == combat.CameraMode.FREE:

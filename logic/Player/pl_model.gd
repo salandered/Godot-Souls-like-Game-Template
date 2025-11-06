@@ -16,6 +16,7 @@ class_name PlayerModel
 @onready var native_player: AnimationPlayer = %NativeAnimator
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
+@onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
 
 
 var active_weapon: BaseWeapon
@@ -27,7 +28,13 @@ func _ready() -> void:
 	player_sm._player = _player
 	
 	var _pl_anim_container := PlAnimList.new()
-	anim_container._accept_animations(_pl_anim_container.list_of_animations, native_player) # NOTE: should be before accepting states!
+	# NOTE: should be before accepting states!
+	anim_container._accept_animations(
+		_pl_anim_container.list_of_animations,
+		native_player,
+		AnimParamsContainer.TRACK_PREFIX,
+		AnimParamsContainer.get_all_params())
+		 
 	container.accept_all()
 	
 	player_sm.initialise()
@@ -119,7 +126,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("dev_8"):
 		# animator_manager.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.combat.hit_reaction,
+		animator_manager.set_overlay_anim(A.react.hit_reaction,
 		OverlayConfig.new(
 			OverlayConfig.Weight.new(0.5),
 			OverlayConfig.Blend.new(0.12, 0.18),
@@ -130,7 +137,7 @@ func _input(event: InputEvent) -> void:
 		# animator_manager.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed("dev_9"):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.combat.hit_reaction,
+		animator_manager.set_overlay_anim(A.react.hit_reaction,
 				OverlayConfig.new(
 			OverlayConfig.Weight.new(1.0),
 			OverlayConfig.Blend.new(0.2, 0.2),

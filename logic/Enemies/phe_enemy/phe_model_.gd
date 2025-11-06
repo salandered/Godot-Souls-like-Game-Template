@@ -2,24 +2,23 @@ extends BaseEnemyCharacter
 class_name PHCharacter
 
 
+@onready var config: PHEConfig = %Config
+@onready var container: PHContainer = %StatesContainer
+@onready var enemy_movement: EnemyMovement = %EnemyMovement
+@onready var native_player: AnimationPlayer = %NativePlayer
+@onready var anim_container: AnimationContainer = %AnimContainer
+@onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
+@onready var anim_params_container: EAnimParamsContainer = %AnimParamsContainer
+@onready var phe_feelings: PHEFeelings = $PHEFeelings
+@onready var combat: PHECombat = %Combat
+@onready var _top: BasePHEState = %_Top
+
+
 ## It's all: SM, Base state, Root state
 var state_machine: BasePHEState
 
-@onready var container: PHContainer = $StatesContainer
-@onready var combat: PHCombat = %Combat
-@onready var enemy_movement: EnemyMovement = %EnemyMovement
-@onready var native_player: AnimationPlayer = %NativePlayer
-@onready var anim_container: AnimationContainer = $AnimContainer
-@onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
-@onready var _top: BasePHEState = %_Top
-@onready var phe_feelings: PHEFeelings = $PHEFeelings
-@onready var active_weapon: PingaBlade = $bones/RightWrist/WeaponSocket/BigPingaBlade
-@onready var config: PHEConfig = %Config
-
-
 const BREADCRUMB_SIZE = 10
 var _state_history: Array[String] = []
-
 
 # TODO: some system for flags. (or alternative with events)
 # if any state works longer than fatigue, flag is raised. 
@@ -41,10 +40,15 @@ func _ready() -> void:
 	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
 	state_machine = _top
 
+	combat.initialise()
 	animator_manager.initialise()
 
 	var _anim_list := PHEA.new()
-	anim_container._accept_animations(_anim_list.list_of_animations, native_player) # NOTE: should be before accepting states!
+	anim_container._accept_animations(
+		_anim_list.list_of_animations,
+		native_player,
+		EAnimParamsContainer.TRACK_PREFIX,
+		EAnimParamsContainer.get_all_params()) # NOTE: should be before accepting states!
 	
 	config.me = self
 	enemy_movement.me = self
@@ -121,10 +125,13 @@ func __pp_state_history():
 	return "state history" + pp.in_sq(pp.list_(_state_history))
 
 
+## DEV
+
+
 func _input(event: InputEvent) -> void:
 	var bone_mask = BoneMask.get_upper_body()
 	if event.is_action_pressed("dev_8"):
-		animator_manager.set_overlay_anim(PHEA.react_from_R,
+		animator_manager.set_overlay_anim(PHEA.react.react_from_R,
 		OverlayConfig.new(
 			OverlayConfig.Weight.new(0.5),
 			OverlayConfig.Blend.new(0.12, 0.18),
@@ -132,7 +139,7 @@ func _input(event: InputEvent) -> void:
 			bone_mask
 			))
 	if event.is_action_pressed("dev_9"):
-		animator_manager.set_overlay_anim(PHEA.react_from_R,
+		animator_manager.set_overlay_anim(PHEA.react.react_from_R,
 		OverlayConfig.new(
 			OverlayConfig.Weight.new(1.0),
 			OverlayConfig.Blend.new(0.2, 0.2),

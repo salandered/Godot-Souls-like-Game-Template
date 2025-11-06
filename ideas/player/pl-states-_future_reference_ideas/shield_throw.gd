@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 @export var spell_release_timing: float = 1
 @export var spell: PackedScene

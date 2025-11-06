@@ -21,6 +21,7 @@ class _lib:
 	const _EP_p2 = "EP-p2-LIB" + "/"
 
 	const all_axe = "all-axe-LIB" + "/"
+	const testing = "testing" + "/"
 	const axe_rm_jump = "axe-rm-jumps-LIB" + "/"
 
 	const _bit_of_glue = "bit-of-glue-v1-LIB" + "/"
@@ -99,8 +100,6 @@ class combat:
 	const block_forward := _lib._ss_attack + "C-block-forward" # _OS_fight + "OS-block-left" # _ss_attack + "C-block-forward"
 	# const block_to_idle := _ss_attack + "C-block-to-idle"
 
-	const block_reaction := air.midair # _ff + "block_reaction" # _OS_fight + "OS-hit-react" # _ff + "block_reaction"
-	const hit_reaction := _lib._ss_attack + "C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
 	const pushback := air.midair # todo
 	const staggered := air.midair # _ss_attack + "B-head-impact"
 
@@ -112,4 +111,14 @@ class combat:
 	const shield_throw_reload := air.midair # _ff + "shield_throw_reload"
 	const idle_longsword := air.midair # _ff + "idle_longsword"
 
+
+class react:
+	const block_reaction := air.midair # _ff + "block_reaction" # _OS_fight + "OS-hit-react" # _ff + "block_reaction"
+	const hit_reaction := _lib._ss_attack + "C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
+	const head_B = _lib._ss_attack + "B-head-impact"
+	const from_R = _lib.all_axe + "react large from right"
+	const from_L = _lib.all_axe + "react large from left"
+	const gut = _lib.all_axe + "react large gut"
+	const dodge_F_hit = _lib.testing + "OS-hit-react-forward"
+	const dodge_B_hit = _lib.testing + "OS-hit-react-back"
 # endregion

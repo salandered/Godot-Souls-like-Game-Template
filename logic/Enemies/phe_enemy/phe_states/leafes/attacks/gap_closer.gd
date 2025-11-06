@@ -9,6 +9,9 @@ const USUAL = "usual"
 const POWER = "power"
 
 
+
+
+
 func initialise_implementation():
 	default_sp.ANGULAR_SPEED = 1.0
 	sp_config = SpeedConfig.new(default_sp)
@@ -39,8 +42,10 @@ func on_enter_state() -> void:
 	
 	__log_ent("Mode:", mode_switcher.get_curr_mode_name(), "Gap config", gap_calculator.__log_(distance_to_player(), me.angry_raised))
 
+
 func on_exit_state() -> void:
 	APPLY_GRAVITY = true
+
 
 func update(delta):
 	e_movement.rotate_towards_player(delta, sp_config, angle_adjustment)

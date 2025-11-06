@@ -34,6 +34,7 @@ func _cleanup_old_hits() -> void:
 ## nullable
 @abstract func get_active_weapon() -> BaseWeapon
 
+
 @abstract func is_player() -> bool
 
 ## non nullable
@@ -50,7 +51,7 @@ func apply_hit(hit_data: HitData) -> void:
 		__log_(hit_id, "is already processed")
 		return
 	else:
-		__log_(hit_id, "not processed")
+		__log_(hit_id, "not processed, will be")
 
 	_mark_hit_processed(hit_id)
 	_cleanup_old_hits()
@@ -58,10 +59,10 @@ func apply_hit(hit_data: HitData) -> void:
 	get_me().react_on_hit(hit_data)
 
 
-func set_hit_data_to_weapon(hit_damage: float, anim_id: String) -> void:
+func set_hit_data_to_active_weapon(hit_damage: float, anim_id: String) -> void:
 	var weapon := get_active_weapon()
 	if not weapon:
-		__log_warn("no weapon", "set_hit_data_to_weapon", "return")
+		__log_warn("no weapon", "set_hit_data_to_active_weapon", "return")
 		return
 	var hit_data := HitData.new(hit_damage, weapon, anim_id)
 	weapon.set_hit_data(hit_data)
@@ -91,8 +92,8 @@ func reset_active_weapon() -> void:
 
 func __log_(...parts: Array):
 	# using weapon holder as name of BaseCombat
-	if is_player(): print_.fight(get_combat_name(), pp.list_(parts))
+	print_.fight(get_combat_name(), pp.list_(parts))
 
 
-func __log_warn(what: String, where: String, fallback: String):
-	print_.warn(false, what, "BaseCombat " + where, fallback)
+func __log_warn(what: String, where: String, fallback: String, ...context: Array):
+	print_.warn(false, what, "BaseCombat " + where, fallback, pp.list_(context))

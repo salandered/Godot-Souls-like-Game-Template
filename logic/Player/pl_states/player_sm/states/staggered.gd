@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 #func update(input : InputPackage, delta : float):

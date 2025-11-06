@@ -13,6 +13,10 @@ class_name NextStateCombo
 
 @export var needs_allows_queue: bool = true
 
+## empty string means no marker needed
+## if marker doens't exist, combo won't be triggered
+@export var needs_passed_marker: String = ""
+
 
 func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: BaseAction) -> bool:
 	var decision: bool = true
@@ -21,6 +25,8 @@ func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: Ba
 	if not input_.actions.has(needs_input):
 		decision = false
 	if curr_state_name != needs_curr_state:
+		decision = false
+	if needs_passed_marker != "" and not curr_action.passed_marker(needs_passed_marker):
 		decision = false
 	__log_next_state_combo_decision(decision, input_, curr_state_name, curr_action)
 	return decision
@@ -37,5 +43,6 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 			"neededCurrSt", needs_curr_state,
 			"needsAllowsQueue", needs_allows_queue,
 			"neededInp", needs_input,
+			"needs_passed_marker", needs_passed_marker,
 			"st2trigger", state_to_trigger,
 			"=>", decision))

@@ -115,7 +115,7 @@ static func get_both_arms() -> Array[int]:
 
 
 static func get_full_body_with_root() -> Array[int]:
-	return _range(BoneIdx.ROOT, Constants.BONE_COUNT) # All 53 bones (Root to LeftToes)
+	return _range(BoneIdx.ROOT, Constants.BONE_COUNT) # All 53 bones
 
 
 static func get_full_body_no_root() -> Array[int]:

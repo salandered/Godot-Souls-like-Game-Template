@@ -1,5 +1,5 @@
 # small_jump_run.gd
-extends PlayerState
+extends BasePlayerState
 
 # Animation timings
 var TAKEOFF_TIME := 0.35 # When we actually leave ground

@@ -4,8 +4,8 @@ extends LegsAction
 @export var accel_from_turn_curve: Curve
 
 
-var accel_from_idle_time: float = 0.5
-var accel_from_turn_time: float = 0.5
+var accel_from_idle_time: float = 0.3
+var accel_from_turn_time: float = 0.3
 
 var speed_mult_from_idle := EaseCurveInterpolator.new()
 var angular_sp_from_idle := FloatLinearInterpolator.new()
@@ -26,6 +26,7 @@ const IDLE_LIKE_ACTIONS = [
 	PS.Act.attack_from_run,
 	PS.Act.dodge
 ]
+
 var _resettable := [
 	speed_mult_from_idle,
 	angular_sp_from_idle,

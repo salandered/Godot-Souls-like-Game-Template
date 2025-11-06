@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 # # CHARGED ATTACK IS USED FOR REFERENCE FOR NOW

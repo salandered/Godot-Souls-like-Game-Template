@@ -152,7 +152,7 @@ func __l_action(act_name) -> LegsAction:
 func __pl():
 	return player
 
-func __c_s() -> PlayerState:
+func __c_s() -> BasePlayerState:
 	return __pl().model.player_sm.current_state
 
 func __pl_sm() -> PlayerSM:

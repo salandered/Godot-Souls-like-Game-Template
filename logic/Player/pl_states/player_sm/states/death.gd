@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 func on_exit_state() -> void:

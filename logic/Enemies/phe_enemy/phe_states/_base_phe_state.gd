@@ -7,12 +7,13 @@ var me: PHCharacter
 var container: PHContainer
 var anim_container: BaseAnimationContainer
 var phe_feelings: PHEFeelings
-var active_weapon: PHWeapon
-var combat: PHCombat
+var combat: PHECombat
 var native_player: AnimationPlayer
 var animator_manager: EnemyAnimatorManager
 var e_movement: EnemyMovement
+var anim_params_container: EAnimParamsContainer
 var config: PHEConfig
+
 
 var state_name: String
 
@@ -171,6 +172,7 @@ func flip_chance(chance: float, state_a: String, state_b: String) -> String:
 
 var __LOG_EXIT: bool = false
 var __LOG_ANIM: bool = false
+var __LOG_OVERLAY_ANIM: bool = true
 
 func __get_common_context() -> String:
 	var _msg := ""

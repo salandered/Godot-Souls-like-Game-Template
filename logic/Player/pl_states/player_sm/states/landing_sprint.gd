@@ -1,5 +1,5 @@
 # landing_run.gd - running landing
-extends PlayerState
+extends BasePlayerState
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:

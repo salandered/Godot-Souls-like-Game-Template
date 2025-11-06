@@ -31,7 +31,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 				_reason = "still_life_phase not ended"
 
 		PHES.combat_phase:
-			if phe_feelings.get_curr_health() < 1:
+			if phe_feelings.is_zero_health():
 				_reason = "health < 1"
 				_next_state = PHES.death_phase
 		

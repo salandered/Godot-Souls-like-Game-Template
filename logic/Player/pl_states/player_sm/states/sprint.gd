@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 func _ready() -> void:

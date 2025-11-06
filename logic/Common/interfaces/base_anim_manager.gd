@@ -9,6 +9,12 @@ extends Node
 @abstract func initialise()
 
 
+@abstract func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float) -> void
+
+
+@abstract func set_anim_to_play(anim_id: String, blend_for: float, start_time_offset: float) -> void
+
+
 ## Should account for all speed scales (returns real life seconds)
 ## May start with anim start offset
 @abstract func get_curr_anim_effective_time_spent() -> float

@@ -12,15 +12,6 @@ func update(input: OpponentActionInput, delta: float):
 	right_hand_weapon._is_attacking = right_weapon_hurts()
 
 
-func form_hit_data(weapon: BaseWeapon) -> HitData:
-	var hit = HitData.new()
-	hit.damage = hit_damage
-	hit.state_anim = animation
-	hit.is_parryable = false
-	#hit.is_parryable = is_parryable()
-	hit.weapon = weapon
-	return hit
-
 func on_enter_action():
 	initial_position = character.global_position
 	beliefs.last_attack_timing = Time.get_unix_time_from_system()

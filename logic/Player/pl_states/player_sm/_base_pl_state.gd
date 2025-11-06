@@ -10,7 +10,7 @@ extends TimeManagement
 ##       think of separating some parts.
 ##       main idea for now: do checking transitions (combos, etc) on a Player SM level
 ##       (state is too self aware now)
-class_name PlayerState
+class_name BasePlayerState
 
 # common
 var player_sm: PlayerSM

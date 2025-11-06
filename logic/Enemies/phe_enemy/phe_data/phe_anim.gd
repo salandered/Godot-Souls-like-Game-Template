@@ -16,9 +16,11 @@ const death := _lib._not_axe + "death"
 const phase_switch := _lib._legacy + "phase_switch"
 const phase_switch_loop := _lib._legacy + "phase_switch_loop"
 
-const react_from_L := _lib._axe_pl + "react large from left"
-const react_from_R := _lib._axe_pl + "react large from right"
-const react_gut := _lib._axe_pl + "react large gut"
+
+class react:
+	const react_from_L := _lib._axe_pl + "react large from left"
+	const react_from_R := _lib._axe_pl + "react large from right"
+	const react_gut := _lib._axe_pl + "react large gut"
 
 
 class loco:
@@ -65,9 +67,9 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(awaken),
 	AnimationData.new(death),
 
-	AnimationData.new(react_from_L),
-	AnimationData.new(react_from_R),
-	AnimationData.new(react_gut),
+	AnimationData.new(react.react_from_L),
+	AnimationData.new(react.react_from_R),
+	AnimationData.new(react.react_gut),
 	
 	## loco
 	AnimationData.new(loco.dodge_B),

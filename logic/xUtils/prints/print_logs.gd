@@ -40,6 +40,7 @@ const AWARENESS_B := false
 const SE_B := false
 const PHE_CHECK_B := false
 const PHE_B := false
+const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := true
 # endregion
 
@@ -47,8 +48,8 @@ const E_ANIM_MANAGER_B := true
 
 ## COMMON
 
-static var PL_FEEL_PRINT := PrintData.new(FEEL_B, "feel🤍", 10, prefix)
-static var E_FEEL_PRINT := PrintData.new(FEEL_B, "🗿feel🖤", 10, prefix)
+static var PL_FEEL_PRINT := PrintData.PrintInstance.new(FEEL_B, "feel🤍", 10, prefix)
+static var E_FEEL_PRINT := PrintData.PrintInstance.new(FEEL_B, "🗿feel🖤", 10, prefix)
 
 
 static func feel(for_player: bool, add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
@@ -60,8 +61,8 @@ static func feel(for_player: bool, add_prefix_: String, text: String, info_inden
 
 # region: CONTAINER
 
-static var CONTAINER_PRINT := PrintData.new(CONTAINER_B, "Container", 0, prefix)
-static var E_CONTAINER_PRINT := PrintData.new(E_CONTAINER_B, "Container", 0, prefix)
+static var CONTAINER_PRINT := PrintData.PrintInstance.new(CONTAINER_B, "Container", 0, prefix)
+static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(E_CONTAINER_B, "Container", 0, prefix)
 
 
 static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
@@ -75,11 +76,11 @@ static func e_container(add_prefix_: String, text: String, info_indents: int = 0
 
 # region: FIGHT logs
 
-static var COMBO_PRINT := PrintData.new(COMBO_B, "Combo xx", 0, fight)
-static var HIT_BOX_PRINT := PrintData.new(HIT_HURT_BOX_B, "💢 HitBox", 1, fight)
-static var HURT_BOX_PRINT := PrintData.new(HIT_HURT_BOX_B, "🔻 HurtBox", 1, fight)
-static var WEAPON_PRINT := PrintData.new(WEAPON_B, "🗡️ Weapon", 0, fight)
-static var FIGHT_PRINT := PrintData.new(FIGHT_B, "⚔️", 0, prefix)
+static var COMBO_PRINT := PrintData.PrintInstance.new(COMBO_B, "Combo xx", 0, fight)
+static var HIT_BOX_PRINT := PrintData.PrintInstance.new(HIT_HURT_BOX_B, "💢 HitBox", 1, fight)
+static var HURT_BOX_PRINT := PrintData.PrintInstance.new(HIT_HURT_BOX_B, "🔻 HurtBox", 1, fight)
+static var WEAPON_PRINT := PrintData.PrintInstance.new(WEAPON_B, "🗡️ Weapon", 0, fight)
+static var FIGHT_PRINT := PrintData.PrintInstance.new(FIGHT_B, "⚔️", 0, prefix)
 
 
 static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
@@ -101,11 +102,11 @@ static func fight(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 # region: PLAYER PSM
 
-static var ACTION_ANIM := PrintData.new(ACTION_ANIM_B, "▷", 16, psm)
-static var PSM_ACTION := PrintData.new(PSM_B, "Action", 2, psm)
-static var PSM_CHECK_TRANS_PRINT := PrintData.new(PSM_B, "transition ❔", 1, psm)
-static var PSM_PRINT := PrintData.new(PSM_B, "PSM", 0, prefix)
-static var SKM_PRINT := PrintData.new(SKM_B, "SKM 💀", 0, prefix)
+static var ACTION_ANIM := PrintData.PrintInstance.new(ACTION_ANIM_B, "▷", 16, psm)
+static var PSM_ACTION := PrintData.PrintInstance.new(PSM_B, "Action", 2, psm)
+static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(PSM_B, "transition ❔", 1, psm)
+static var PSM_PRINT := PrintData.PrintInstance.new(PSM_B, "PSM", 0, prefix)
+static var SKM_PRINT := PrintData.PrintInstance.new(SKM_B, "SKM 💀", 0, prefix)
 
 static func any_action_anim(
 	add_prefix_: String, anim_name: String,
@@ -135,11 +136,11 @@ static func skm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 # region: PLAYER LSM
 
-static var LSM_BEH_CH := PrintData.new(LSM_BEH_B, "choose act ❔", 4, lsm_beh)
-static var LSM_BEH_PRINT := PrintData.new(LSM_BEH_B, "Behavior", 4, lsm)
-static var LSM_ACTION_STRAFE := PrintData.new(LSM_ACTION_STRAFE_B, "Strafe", 6, lsm_action)
-static var LSM_ACTION := PrintData.new(LSM_ACTION_B, "Action", 6, lsm)
-static var LSM_PRINT := PrintData.new(LSM_BEH_B, "LSM", 3, prefix)
+static var LSM_BEH_CH := PrintData.PrintInstance.new(LSM_BEH_B, "choose act ❔", 4, lsm_beh)
+static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LSM_BEH_B, "Behavior", 4, lsm)
+static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LSM_ACTION_STRAFE_B, "Strafe", 6, lsm_action)
+static var LSM_ACTION := PrintData.PrintInstance.new(LSM_ACTION_B, "Action", 6, lsm)
+static var LSM_PRINT := PrintData.PrintInstance.new(LSM_BEH_B, "LSM", 3, prefix)
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 	is_moving, is_reverse_moving, is_pure_reverse_moving, text, decision,
@@ -175,11 +176,11 @@ static func lsm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 # region: PLAYER SYSTEMS
 
-static var INPUT_GATHERING_PRINT := PrintData.new(input_gathering_B, "Input", 0, prefix)
-static var DEV_PRINT := PrintData.new(DEV_B, "dev", 0, prefix)
-static var FANCY_CAM_PRINT := PrintData.new(FANCY_CAM_B, "🎥 Cam", 0, prefix)
-static var AWARE_TARGET_PRINT := PrintData.new(AWARENESS_B, "🎯", 0, prefix)
-static var AWARE_PRINT := PrintData.new(AWARENESS_B, "👀", 0, prefix)
+static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(input_gathering_B, "Input", 0, prefix)
+static var DEV_PRINT := PrintData.PrintInstance.new(DEV_B, "dev", 0, prefix)
+static var FANCY_CAM_PRINT := PrintData.PrintInstance.new(FANCY_CAM_B, "🎥 Cam", 0, prefix)
+static var AWARE_TARGET_PRINT := PrintData.PrintInstance.new(AWARENESS_B, "🎯", 0, prefix)
+static var AWARE_PRINT := PrintData.PrintInstance.new(AWARENESS_B, "👀", 0, prefix)
 
 static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(INPUT_GATHERING_PRINT, add_prefix_, text, info_indents, level)
@@ -201,12 +202,12 @@ static func aware(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 # region: ENEMY logs
 
-static var PHE_ANIM_PRINT := PrintData.new(PHE_B, "▷ anim", 16, phe_sm)
-static var PHE_CHECK_PRINT := PrintData.new(PHE_CHECK_B, "transition ❔", 0, phe_sm)
-static var PHE_SM_PRINT := PrintData.new(PHE_B, "🗿", 1, prefix)
-static var SE_PRINT := PrintData.new(SE_B, "SE", 0, prefix)
-static var SE_CHECK_TRANS_PRINT := PrintData.new(SE_B, "transition ❔", 2, se)
-static var ANIM_MANAGER_PRINT := PrintData.new(E_ANIM_MANAGER_B, "E▷", 12, prefix)
+static var PHE_ANIM_PRINT := PrintData.PrintInstance.new(PHE_ANIM_B, "▷ anim", 16, phe_sm)
+static var PHE_CHECK_PRINT := PrintData.PrintInstance.new(PHE_CHECK_B, "transition ❔", 0, phe_sm)
+static var PHE_SM_PRINT := PrintData.PrintInstance.new(PHE_B, "🗿", 1, prefix)
+static var SE_PRINT := PrintData.PrintInstance.new(SE_B, "SE", 0, prefix)
+static var SE_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(SE_B, "transition ❔", 2, se)
+static var ANIM_MANAGER_PRINT := PrintData.PrintInstance.new(E_ANIM_MANAGER_B, "E▷", 12, prefix)
 
 
 static func phe_anim(add_prefix_: String, anim_name: String,
@@ -218,6 +219,19 @@ static func phe_anim(add_prefix_: String, anim_name: String,
 		"start-off", start_time_offset,
 		"sp-scale", sp_scale,
 		" (prev", pp.in_q(prev_leaf_state), ")"
+		)
+	_generic(PHE_ANIM_PRINT, add_prefix_, msg, info_indents, level)
+	
+
+static func phe_overlay_anim(add_prefix_: String, anim_name: String,
+	overlay_config: OverlayConfig,
+	start_time_offset = 0.0, sp_scale: float = 1.0,
+	info_indents: int = 0, level: String = LogL.NOTSET):
+	var msg = pp.s(
+		"anim", pp.in_q(anim_name),
+		"", overlay_config,
+		"start-off", start_time_offset,
+		"sp-scale", sp_scale,
 		)
 	_generic(PHE_ANIM_PRINT, add_prefix_, msg, info_indents, level)
 	
@@ -245,7 +259,7 @@ static func anim_manager(add_prefix_: String, text: String, info_indents: int = 
 # region: INFRASTRUCTURE
 
 static func _generic(
-		print_data: PrintData,
+		print_data: PrintData.PrintInstance,
 		add_prefix_: String,
 		text: Variant,
 		info_indents: int,
@@ -255,7 +269,7 @@ static func _generic(
 	if not print_data.PRINT_BOOL and level != LogL.FORCE_PRINT: return
 	if not _is_freq_satisfied(1, freq): return
 
-	var log_data := LogData.new(add_prefix_, str(text), info_indents, level)
+	var log_data := PrintData.LogData.new(add_prefix_, str(text), info_indents, level)
 	log_data.add_prefix_ = print_data.const_prefix + " " + log_data.add_prefix_
 	if log_data.info_indents == 0: log_data.info_indents = print_data.const_indent
 	print_data.call_log_func(log_data)
@@ -267,33 +281,6 @@ static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	if result_freq == 1 or u.fr(false) % result_freq == 0:
 		return true
 	return false
-
-class LogData:
-	var add_prefix_: String
-	var text: String
-	var info_indents: int
-	var level: String
-
-	func _init(add_prefix__: String, text_: String, info_indents_: int, level_: String):
-		self.add_prefix_ = add_prefix__
-		self.text = text_
-		self.info_indents = info_indents_
-		self.level = level_
-
-class PrintData:
-	var PRINT_BOOL: bool
-	var const_prefix: String
-	var const_indent: int
-	var log_func: Callable
-
-	func _init(PRINT_BOOL_: bool, const_prefix_: String, const_indent_: int, log_func_: Callable) -> void:
-		self.PRINT_BOOL = PRINT_BOOL_
-		self.const_prefix = const_prefix_
-		self.const_indent = const_indent_
-		self.log_func = log_func_
-
-	func call_log_func(log_data: LogData) -> void:
-		log_func.call(log_data.add_prefix_, log_data.text, log_data.info_indents, log_data.level)
 
 static var _last_prefix_msg = ""
 

@@ -6,7 +6,7 @@ var container: PlayerStatesContainer
 
 
 var player_sm: PlayerSM
-
+var anim_params_container: AnimParamsContainer
 
 var action_name: String
 
@@ -142,23 +142,29 @@ func till_blend_completes() -> float:
 # region: GET ANIMATION PARAMETERS
 
 func switches_to_queue() -> bool:
-	return anim.switches_to_queue(effective_time_spent())
+	return anim_params_container.switches_to_queue(anim.native_anim, effective_time_spent())
 
 func allows_queue() -> bool:
-	return anim.allows_queue(effective_time_spent())
+	return anim_params_container.allows_queue(anim.native_anim, effective_time_spent())
 
 func is_vulnerable() -> bool:
-	return anim.vulnerable(effective_time_spent())
+	return anim_params_container.vulnerable(anim.native_anim, effective_time_spent())
 
 func is_interruptable() -> bool:
-	return anim.interruptable(effective_time_spent())
+	return anim_params_container.interruptable(anim.native_anim, effective_time_spent())
 
-func weapon_hurts() -> bool:
-	return anim.weapon_hurts(effective_time_spent())
+func weapon_hurts(__log: bool = false) -> bool:
+	var _r = anim_params_container.weapon_hurts(anim.native_anim, effective_time_spent())
+	if _r and __log:
+		print_.prefix("// HURT")
+	return _r
 
 func tracks_input_vector() -> bool:
-	return anim.tracks_input_vector(effective_time_spent())
+	return anim_params_container.tracks_input_vector(anim.native_anim, effective_time_spent())
+
+# endregion
 
 
+## __LOGS
 func __log_anim():
 	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)

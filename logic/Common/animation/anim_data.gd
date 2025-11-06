@@ -60,64 +60,6 @@ func get_marker_time_by_name(marker_name: String, default_value: float = -1) -> 
 	return marker.time
 
 
-# PARAMETERS
-func switches_to_queue(timestamp) -> bool:
-	return _get_value_from_track(SWITCHES_TO_QUEUE, timestamp)
-
-	
-func allows_queue(timestamp) -> bool:
-	return _get_value_from_track(ALLOWS_QUEUE, timestamp)
-
-	
-func vulnerable(timestamp) -> bool:
-	# return _get_value_from_track(VULNERABLE, timestamp)
-	return true
-	
-func interruptable(timestamp) -> bool:
-	# return _get_value_from_track(INTERRUPTABLE, timestamp)
-	return true
-	
-func weapon_hurts(timestamp) -> bool:
-	return _get_value_from_track(WEAPON_HURTS, timestamp)
-
-func tracks_input_vector(timestamp) -> bool:
-	return _get_value_from_track(TRACKS_INPUT_VECTOR, timestamp)
-
-# PARAMETERS END
-
-
-func _get_value_from_track(param_name: String, timestamp: float) -> bool:
-	var _track_name := _anim_param_track_prefix + param_name
-	if not native_anim:
-		print_.warn_raw(false, "")
-	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
-	
-	if _track == -1:
-		# print_.warn("Track not found: " + _track_name + " in animation " + anim_name)
-		return DEFAULT_PARAMS[param_name]
-
-	var value: Variant = native_anim.value_track_interpolate(_track, timestamp)
-	if value is bool:
-		return value
-
-	# WARNING: Normally return value should be bool already. But there was a bug when it was not.
-	if native_anim.track_get_key_count(_track) == 0: # no keys
-		print_.warn_raw(false, "Track '%s' has no keys, using default" % _track_name)
-		return DEFAULT_PARAMS[param_name]
-	# try nearest key
-	print_.warn_raw(false, "Interpolation failed for '%s' at %.3f, trying nearest key lookup" % [_track_name, timestamp])
-	var key_index := native_anim.track_find_key(_track, timestamp, Animation.FIND_MODE_NEAREST)
-	if key_index != -1:
-		var key_value: Variant = native_anim.track_get_key_value(_track, key_index)
-		var key_time: Variant = native_anim.track_get_key_time(_track, key_index)
-		print_.note(false, "Found nearest key at index %d, time %.3f, value: %s" % [key_index, key_time, str(key_value)])
-		if key_value != null and key_value is bool:
-			return key_value
-		elif key_value != null:
-			return bool(key_value)
-	return DEFAULT_PARAMS[param_name] # Last resort
-
-
 # region: print to str
 
 func _to_string() -> String:
@@ -152,36 +94,17 @@ func to_string_compact() -> String:
 
 # region: CONSTANTS
 
-# Track names
-const SWITCHES_TO_QUEUE := "switches_to_queue"
-const ALLOWS_QUEUE := "allows_queue"
-const VULNERABLE := "vulnerable"
-const INTERRUPTABLE := "interruptable"
-const WEAPON_HURTS := "weapon_hurts"
-const TRACKS_INPUT_VECTOR := "tracks_input_vector"
-
-# If no track
-const DEFAULT_PARAMS := {
-	SWITCHES_TO_QUEUE: false,
-	ALLOWS_QUEUE: false,
-	VULNERABLE: true,
-	INTERRUPTABLE: true,
-	WEAPON_HURTS: false,
-	TRACKS_INPUT_VECTOR: true,
-}
-
-const _anim_param_track_prefix := "%AnimParameters:"
 
 # endregion
 
 
 # region: VALIDATION
 
-static func __validate_track_values(anim: AnimationData) -> bool:
+static func __validate_track_values(anim: AnimationData, param_prefix: String, param_tracks: Array[String]) -> bool:
 	var all_valid := true
 	
-	for param_name: String in [SWITCHES_TO_QUEUE, ALLOWS_QUEUE, VULNERABLE, INTERRUPTABLE, WEAPON_HURTS, TRACKS_INPUT_VECTOR]:
-		var track_name := _anim_param_track_prefix + param_name
+	for param_name: String in param_tracks:
+		var track_name := param_prefix + param_name
 		var track_idx := anim.native_anim.find_track(track_name, Animation.TYPE_VALUE)
 		
 		if track_idx == -1:
@@ -203,7 +126,7 @@ static func __validate_track_values(anim: AnimationData) -> bool:
 	return all_valid
 
 
-static func __validate_anim(anim_data: AnimationData) -> bool:
+static func __validate_anim(anim_data: AnimationData, param_prefix: String, param_tracks: Array[String]) -> bool:
 	# base field validation (not null)
 	if anim_data.anim_id == null:
 		return false
@@ -223,7 +146,7 @@ static func __validate_anim(anim_data: AnimationData) -> bool:
 		return false
 
 	# native anim tracks data (experimental)
-	if not __validate_track_values(anim_data):
+	if not __validate_track_values(anim_data, param_prefix, param_tracks):
 		print_.warn_raw(false, "Animation '%s' has invalid track values!" % anim_data.anim_name)
 		return false
 	

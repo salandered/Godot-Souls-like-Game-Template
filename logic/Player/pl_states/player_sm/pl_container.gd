@@ -14,6 +14,7 @@ var player: Princess
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
+@onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
 
 
 func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer._ActionData]:
@@ -28,7 +29,7 @@ func _get_actions_by_state(state: String, states_container: StatesContainer) -> 
 	return result
 
 
-var _states: Dictionary # { string : PlayerState }
+var _states: Dictionary # { string : BasePlayerState }
 
 var _player_actions: Dictionary # { string : PlayerAction }
 
@@ -37,7 +38,7 @@ var _legs_behaviors: Dictionary # { string : LegsBehavior }
 var _leg_actions: Dictionary # { Node name : LegsAction }
 
 
-func state_by_name(state_name: String) -> PlayerState:
+func state_by_name(state_name: String) -> BasePlayerState:
 	# if not _states.has(state_name):
 	# 	print_.dev("ERROR =PSContainer=", "state_by_name: " + state_name + " not found")
 	# 	push_error("ERROR =PSContainer= state_by_name: " + state_name + " not found")
@@ -74,7 +75,7 @@ func accept_all():
 
 
 func _initialise_pl_state():
-	for state: PlayerState in _states.values():
+	for state: BasePlayerState in _states.values():
 		state.initialise()
 
 func _initialise_pl_actions():
@@ -89,7 +90,7 @@ func _initialise_legs_actions():
 func _accept_player_states() -> void:
 	var states_container := StatesContainer.new()
 
-	for child: PlayerState in get_descendants.player_states(player_sm):
+	for child: BasePlayerState in get_descendants.player_states(player_sm):
 		print_.container("", "child.get_name() " + child.get_name())
 		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.get_name())
 		# assert(state_data, "StateData for " + child.get_name() + " not found")
@@ -160,29 +161,31 @@ func _accept_player_actions():
 	for child: PlayerAction in get_descendants.player_actions(player_sm):
 		print_.container("pl_act", "child.get_name() " + child.get_name())
 		var action_data: StatesContainer._ActionData = states_container.node_to_pl_action.get(child.get_name())
-		__add_action_data(action_data, child)
+		__apply_base_action_data(action_data, child)
 
 	for action_data: StatesContainer._ActionData in states_container.pl_action_data_list:
 		var node_name := u.to_pascal_case(action_data.action_name)
 		print_.container("pl_act", "Creating action: " + action_data.action_name)
 		var child := PlayerAction.new()
 		child.name = node_name
-		__add_action_data(action_data, child)
+		__apply_base_action_data(action_data, child)
 		add_child(child) # add to tree
 	
 	print_.container("pl_act", "===========  Accepted actions ===========")
 	print_.container("pl_act", str(_player_actions))
 	print_.container("", "")
 
-func __add_action_data(action_data: StatesContainer._ActionData, child):
+
+func __apply_base_action_data(action_data: StatesContainer._ActionData, child: BaseAction):
 	_player_actions[action_data.action_name] = child
 	
-	# base action
+	# common
 	child.player_sm = player_sm
 	child.container = self
 	child.animator_manager = animator_manager
 	child.anim_container = anim_container
 	child.player_sm = player_sm
+	child.anim_params_container = anim_params_container
 	
 	# specific 
 	var anim := anim_container.get_by_anim_id(action_data.anim_id)

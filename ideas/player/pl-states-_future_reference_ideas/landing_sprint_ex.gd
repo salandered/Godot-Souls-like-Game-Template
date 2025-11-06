@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 # const TRANSITION_TIMING = 0.2

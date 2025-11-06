@@ -1,6 +1,6 @@
-extends Node
-
+@abstract
 class_name CameraState
+extends Node
 
 
 var state_name: String
@@ -8,12 +8,10 @@ var state_name: String
 var fc: FancyCamera
 
 
-func update(delta: float) -> void:
-	pass
+@abstract func update(delta: float) -> void
 
 
-func input_mouse_movement(d_x: float, d_y: float):
-	pass
+@abstract func input_mouse_movement(d_x: float, d_y: float)
 
 
 func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3:

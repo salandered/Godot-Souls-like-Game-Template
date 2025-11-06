@@ -56,7 +56,7 @@ func _update_stamina_bar(delta):
 	var change_amount := absf(current_stamina - _prev_stamina)
 	
 	if change_amount > STAMINA_BIG_CHANGE_THRESHOLD:
-		_animate_stamina_change(current_stamina, ANIM_DURATION_STAMINA_HIT)
+		_animate_stamina_change(current_stamina)
 	else:
 		# stamina_bar.value = current_stamina
 		stamina_bar.value = lerp(stamina_bar.value, current_stamina, STAMINA_LERP_SPEED * delta)
@@ -79,26 +79,24 @@ func _animate_stamina_flash():
 
 	
 func _animate_health_change(target_value: float) -> void:
-	if _health_tween:
-		_health_tween.kill()
+	UIUtils.kill_tween_if_exists(_health_tween)
 	
-	_health_tween = create_tween()
-	_health_tween.tween_property(
+	_health_tween = UIUtils.animate_property(
+		self,
 		health_bar,
 		"value",
 		target_value,
 		ANIM_DURATION_HEALTH
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	)
 	
 	
-func _animate_stamina_change(target_value: float, duration: float) -> void:
-	if _stamina_tween:
-		_stamina_tween.kill()
+func _animate_stamina_change(target_value: float) -> void:
+	UIUtils.kill_tween_if_exists(_stamina_tween)
 	
-	_stamina_tween = create_tween()
-	_stamina_tween.tween_property(
+	_stamina_tween = UIUtils.animate_property(
+		self,
 		stamina_bar,
 		"value",
 		target_value,
-		duration
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		ANIM_DURATION_STAMINA_HIT
+	)

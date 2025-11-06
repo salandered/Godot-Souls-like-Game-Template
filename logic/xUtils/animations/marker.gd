@@ -43,6 +43,7 @@ class Name_:
 	# strongly recommended in attack states for player
 	# good to check for enemy attack states 
 	const ALLOWS_SWITCH = "allows_switch"
+	const ALLOWS_SWITCH_TO_ITSELF = "allows_switch_to_itself" # used in basic attack
 	
 	# for now in enemy for specific series logic
 	const EARLY_SERIES_SWITCH = "EARLY_SERIES_SWITCH"

@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 const PARRY_WINDOW_START: float = 0.2

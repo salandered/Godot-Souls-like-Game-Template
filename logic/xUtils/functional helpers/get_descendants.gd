@@ -50,7 +50,7 @@ static func bone_attachments(node: Node) -> Array:
 #
 
 static func player_states(node: Node) -> Array:
-	return get_descendants_filtered(node, func(n): return n is PlayerState)
+	return get_descendants_filtered(node, func(n): return n is BasePlayerState)
 
 static func player_actions(node: Node) -> Array:
 	return get_descendants_filtered(node, func(n): return n is PlayerAction)

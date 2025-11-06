@@ -44,13 +44,13 @@ var list_of_animations: Array[AnimationData] = [
 	## attacks
 	AnimationData.new(A.attack.axe_slice_1),
 	AnimationData.new(A.attack.axe_slice_2, 0.85),
-	AnimationData.new(A.attack.attack_from_run),
+	AnimationData.new(A.attack.attack_from_run, 1.2),
 	
-	AnimationData.new(A.attack.sword_slash_1),
-	AnimationData.new(A.attack.sword_slash_2),
+	AnimationData.new(A.attack.sword_slash_1, 1.2),
+	AnimationData.new(A.attack.sword_slash_2, 1.2),
 	
 	## fight
-	AnimationData.new(A.combat.hit_reaction),
+	AnimationData.new(A.react.hit_reaction),
 	AnimationData.new(A.combat.staggered),
 	AnimationData.new(A.combat.parry),
 	AnimationData.new(A.combat.parried),

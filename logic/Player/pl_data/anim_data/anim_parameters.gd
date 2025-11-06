@@ -2,6 +2,19 @@ extends Node
 
 # ANIMATED PARAMS ## VARS HERE CORRESPONDS AS IS TO TRACK IN ANIMATION PLAYER 
 
+
+## DOCS
+## DANGER ## On moving AnimParamters or NativeAnimator nodes, 
+## 	track paths will be recalculated! 
+## Code uses TRACK_PREFIX := "%AnimParameters:"'
+##
+## Good track path: %AnimParameters:switches_to_queue
+## Example after revaluation: 'AnimatorManager/NativeAnimator/AnimParameters:switches_to_queue'
+##
+## What can be done in the future: not hard-coded track prefix (some auto search using parameter names)
+## or going through different "paths" of how track can be referenced (akward)
+
+
 # region: switches_to_queue and allows_queue docs
 ## Another state can be queued while current is playing.
 ## 'switches_to_queue' means that current action can be switched to queued right now.

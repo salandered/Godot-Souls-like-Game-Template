@@ -8,7 +8,7 @@ var FATIGUE_STATUS := "FATIGUE〰️"
 const FATIGUE_THRESHOLD = 5.0
 const max_stamina: float = 120.0
 
-var stamina_regen_rate: float = 5.0 # per sec
+var stamina_regen_rate: float = 15.0 # per sec
 
 var _current_stamina: float
 

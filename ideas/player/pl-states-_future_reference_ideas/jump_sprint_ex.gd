@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 # var VERTICAL_SPEED_ADDED: float = 2.5

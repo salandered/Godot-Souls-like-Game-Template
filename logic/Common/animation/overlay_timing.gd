@@ -25,15 +25,22 @@ func get_total_duration() -> float:
 
 
 func get_weight_at_time(time_spent: float) -> float:
+	return _get_weight_curve(time_spent, weight)
+
+
+func get_hips_weight_at_time(time_spent: float) -> float:
+	return _get_weight_curve(time_spent, hips_weight)
+
+
+func _get_weight_curve(time_spent: float, target_weight: float) -> float:
 	if time_spent < fade_in:
-		return (time_spent / fade_in) * weight
+		return (time_spent / fade_in) * target_weight
 	elif time_spent < fade_in + hold:
-		return weight
+		return target_weight
 	elif time_spent < get_total_duration():
-		return weight * (1.0 - (time_spent - fade_in - hold) / fade_out)
+		return target_weight * (1.0 - (time_spent - fade_in - hold) / fade_out)
 	else:
 		return 0.0
-
 
 func _to_string() -> String:
 	return "OverlTmg[w/wh:%.1f/%.1f, in:%.1f, hold:%.1f, out:%.1f, total:%.1f]" % [weight, hips_weight, fade_in, hold, fade_out, get_total_duration()]

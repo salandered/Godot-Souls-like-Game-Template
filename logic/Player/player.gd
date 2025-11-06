@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 ## not nullable in theory
-func get_current_state() -> PlayerState:
+func get_current_state() -> BasePlayerState:
 	return model.player_sm.current_state
 
 
@@ -103,7 +103,7 @@ func is_dodging() -> bool:
 	return curr_state.state_name == PS.dodge
 
 
-func _get_curr_state_with_warn(caller_log: String = "") -> PlayerState:
+func _get_curr_state_with_warn(caller_log: String = "") -> BasePlayerState:
 	if not get_current_state():
 		print_.warn(false, "get_current_state() is null", caller_log, "return null")
 		return null

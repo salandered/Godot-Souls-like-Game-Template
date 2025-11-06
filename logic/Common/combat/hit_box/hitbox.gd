@@ -30,9 +30,13 @@ func on_contact(incoming_area: Node3D):
 	
 	if _is_weapon_mine(weapon):
 		return
-	if not weapon._is_attacking:
+
+	print_.prefix("Contact registered")
+	if not weapon.is_attacking():
+		print_.prefix("Not attacking")
 		return
 	if weapon.is_in_contact_hitbox_list(self):
+		__log_("is_in_contact_hitbox_list true", weapon._contact_hitbox_list, self)
 		return
 	weapon.add_hitbox_to_contact_list(self)
 

@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 var landing_height: float = 0.6
 

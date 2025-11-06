@@ -106,8 +106,6 @@ folder_colors={
 [global_group]
 
 debug_cameras=""
-PLAYER_WEAPON=""
-ENEMY_WEAPON=""
 
 [gui]
 

@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
 radius = 0.08935547
-height = 1.2008057
+height = 1.4203186
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfwdn"]
 albedo_color = Color(0.7294118, 0.39607844, 0.39607844, 1)
@@ -19,7 +19,7 @@ collision_layer = 16
 collision_mask = 8
 
 [node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0, 0.32302907, 0)
+transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0, 0.26156545, 0)
 shape = SubResource("CapsuleShape3D_6hf6c")
 debug_color = Color(0.8352941, 0.0627451, 0.28235295, 0.32941177)
 

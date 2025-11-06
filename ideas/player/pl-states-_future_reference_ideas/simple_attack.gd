@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 @export var releases_priority: float
 @export var animation: String

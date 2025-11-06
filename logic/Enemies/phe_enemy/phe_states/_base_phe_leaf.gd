@@ -7,8 +7,6 @@ var blend_time := ActionData.BlendTime.new(0.3)
 var start_time_offset := ActionData.StartTimeOffset.new()
 
 var y_offset_adjustment: float
-var _actual_blend_time: float
-var _actual_start_time_offset: float
 
 # see player's PREV_ACTION for a reference
 var PREV_LEAF: String = ""
@@ -89,13 +87,60 @@ func works_less_than_commitment() -> bool:
 	return CommitCheck.works_less_than_commitment_leaf(self)
 
 
-func get_lowest_active_state() -> BasePHELeaf:
-	return self
+## REACTIONS TO EXTERNAL EVENTS
+# region
 
+## DOCS
+## WARNING most simple raw code here for now
+## i dont know how it will play out
+## Leafs can override react_on_hit to mute, or override pickers _pick
 
+## can be overriden
 func react_on_hit(hit: HitData):
 	__log_phe("react_on_hit, will lose health", pp.in_q(hit))
+	# animator_manager.set_overlay_anim()
 	phe_feelings.lose_health(hit.damage)
+	
+	var anim_id_ = _pick_react_anim(hit)
+	
+	var overlay_weight: float
+	if hit.damage < 1.0:
+		overlay_weight = 0.0
+	else:
+		overlay_weight = _pick_overlay_weight(hit)
+	
+	var bone_mask = _pick_bone_mask(hit)
+	
+	var overlay_config = OverlayConfig.new(
+		OverlayConfig.Weight.new(overlay_weight, overlay_weight / 2),
+		OverlayConfig.Blend.new(),
+		1.0,
+		bone_mask)
+	
+	set_overlay_anim_to_play(anim_id_, overlay_config)
+
+
+func _pick_react_anim(hit: HitData) -> String:
+	var _r: String = PHEA.react.react_from_R
+	if hit.anim_id == A.attack.attack_from_run:
+		_r = PHEA.react.react_gut
+	elif hit.damage > 10:
+		_r = PHEA.react.react_gut
+	else:
+		_r = ra.spick_random(PHEA.react.react_from_R, PHEA.react.react_from_L)
+	return _r
+
+
+func _pick_overlay_weight(hit: HitData) -> float:
+	var mapped_value = hit.damage / 15.0 ## very approximately
+	return clampf(mapped_value, 0.0, 1.0)
+
+
+func _pick_bone_mask(hit: HitData) -> Array[int]:
+	return BoneMask.get_upper_body()
+
+
+# endregion
 
 
 ## default implementation. Called automatically.
@@ -106,49 +151,20 @@ func animate() -> void: # ▶️
 
 
 func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_offset: float = -1.0) -> void:
-	_actual_blend_time = blend_time.calculate_actual(PREV_LEAF)
+	var _actual_blend_time = blend_time.calculate_actual(PREV_LEAF)
 	if override_blend_time != -1.0:
 		_actual_blend_time = override_blend_time
-	_actual_start_time_offset = start_time_offset.calculate_actual(PREV_LEAF)
+	var _actual_start_time_offset = start_time_offset.calculate_actual(PREV_LEAF)
 	if override_start_time_offset != -1.0:
 		_actual_start_time_offset = override_start_time_offset
 		
-	__log_anim()
+	__log_anim(_actual_blend_time, _actual_start_time_offset)
 	get_animator_manager().set_anim_to_play(anim.anim_id, _actual_blend_time, _actual_start_time_offset)
 
 
-# region: BACKEND ANIMATION GETTERS
-
-# TODO: this is not working right now
-func get_root_position_delta(delta: float) -> Vector3:
-	return Vector3.ZERO
-	# return states_data_repo.get_root_delta_pos(backend_animation, get_progress(), delta)
-
-func halberd_hurts() -> bool:
-	return false
-	# return states_data_repo.get_halberd_hurts(backend_animation, get_progress())
-
-func aura_hurts() -> bool:
-	return false
-	# return states_data_repo.get_halberd_hurts(backend_animation, get_progress())
-
-# endregion
-
-
-## call this in update method in states that use weapons anyhow
-func manage_weapons() -> void:
-	pass
-	# combat.update_is_attacking(states_data_repo.is_attacking(active_weapon.weapon_name, backend_animation, get_progress()))
-	# for weapon in weapons:
-		# weapon.is_attacking = states_data_repo.is_attacking(weapon.weapon_name, backend_animation, get_progress())
-
-## this needs to be called on_exit_state of every state that touches weapons
-## We need to to clear weapon ignore list andto deactivate weapons.
-func deactivate_weapons() -> void:
-	pass
-	# for weapon in weapons:
-		# weapon.hitbox_ignore_list.clear()
-		# weapon.is_attacking = false
+func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayConfig) -> void:
+	__log_overlay_anim(overlay_anim_id, overlay_config)
+	get_animator_manager().set_overlay_anim(overlay_anim_id, overlay_config)
 
 
 ## ANIM BASED TIME MANAGEMENT
@@ -192,6 +208,28 @@ func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 
 func before_marker(marker_name: String) -> bool:
 	return ActionTimeManagement.before_marker(marker_name, get_animator_manager(), anim, self)
+
+# endregion
+
+
+# region: GET ANIMATION PARAMETERS
+
+func is_vulnerable() -> bool:
+	return anim_params_container.is_vulnerable(anim.native_anim, effective_time_spent())
+
+func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
+	var _r: bool = false
+	match weapon_name:
+		WeaponNames.big_pinga_blade:
+			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
+		WeaponNames.bg_aura_weapon:
+			_r = anim_params_container.is_aura_hurts(anim.native_anim, effective_time_spent())
+		_:
+			__log_warn_v2(false, "unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
+	if _r and __log:
+		print_.prefix("// HURT")
+	return _r
+
 
 # endregion
 
@@ -245,7 +283,10 @@ func __log_timings() -> String:
 
 	return _time_msg
 
-func __log_anim():
+func __log_anim(_actual_blend_time, _actual_start_time_offset):
 	if __LOG_ANIM: print_.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
+
+func __log_overlay_anim(overlay_anim_id: String, overlay_config):
+	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(state_name, overlay_anim_id, overlay_config)
 
 # endregion

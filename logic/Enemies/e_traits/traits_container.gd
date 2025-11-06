@@ -1,6 +1,6 @@
 extends Node
 class_name TraitsContainer
-@onready var me: SECharacter = $".."
+@onready var me: BaseEnemyCharacter = $".."
 
 var strength: Trait
 var speed: Trait

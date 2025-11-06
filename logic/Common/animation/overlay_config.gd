@@ -5,7 +5,7 @@ class Weight:
 	var global: float
 	var hips: float
 
-	func _init(global_: float = 1.0, hips_: float = -1.0) -> void:
+	func _init(global_: float = 0.5, hips_: float = -1.0) -> void:
 		if hips_ == -1.0:
 			hips_ = global_
 		self.global = global_

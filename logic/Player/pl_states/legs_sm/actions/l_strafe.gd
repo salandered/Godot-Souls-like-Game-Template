@@ -4,10 +4,8 @@ extends LegsAction
 @export var dir_change_curve: Curve # for opposite direction changes
 @export var slght_dir_change_curve: Curve # for slight direction changes
 
-@export var ang_speed_on_enter_curve: Curve
 
-
-const ACCEL_FROM_IDLE_TIME: float = 0.21
+const ACCEL_FROM_IDLE_TIME: float = 0.41
 
 const OPP_DIR_CHANGE_DURATION: float = 0.16
 const SLIGHT_DIR_CHANGE_DURATION: float = 0.08
@@ -30,24 +28,24 @@ const SPEED_B: float = 2.4 + 0.4
 
 var curr_direction: StrafeDirection
 
+var speed_from_inherited := FloatLinearInterpolator.new()
 var speed_mult_from_idle := EaseCurveInterpolator.new()
-
+var angular_sp_from_idle := FloatLinearInterpolator.new()
 var opposite_dir_change := StrafeDirChange.new()
 var slight_dir_change := StrafeDirChange.new()
 var slightest_dir_change := StrafeDirChange.new()
-
-var ang_speed_on_enter := FloatCurveInterpolator.new()
 
 var TURN_THRESHOLD_DEG: float = 15
 const DECELERATION_FRICTION: float = 8.0
 
 
 var _resettable = [
+	speed_from_inherited,
 	speed_mult_from_idle,
+	angular_sp_from_idle,
 	opposite_dir_change,
 	slight_dir_change,
 	slightest_dir_change,
-	ang_speed_on_enter
 ]
 
 var _changers_cooldown = [
@@ -64,9 +62,45 @@ func initialise() -> void:
 	slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
 
 	blend_time.set_by_prev_action({
-			Leg.Act.sprint: 0.3
+			Leg.Act.sprint: 0.3,
+			# PS.Act.sword_slash_1: 0.6
 	})
 
+
+const IDLE_LIKE_ACTIONS = [
+	Leg.Act.idle,
+	PS.Act.axe_slice_1,
+	PS.Act.axe_slice_2,
+	PS.Act.sword_slash_1,
+	PS.Act.sword_slash_2,
+	PS.Act.attack_from_run,
+
+]
+
+
+func _inherit_dodge_speed_if_same_direction():
+	var _inherited_speed := pm().get_curr_velocity_len()
+	## animator manager treats prev anim as curr because we are in on_enter_action
+	var prev_anim_id = get_animator_manager().get_curr_anim().anim_id
+	var curr_dir := curr_direction.get_curr_dir()
+	var _inherit_speed: bool = false
+	if prev_anim_id == A.dodge.dodge_R and curr_dir in Direction.get_right_group():
+		_inherit_speed = true
+	elif prev_anim_id == A.dodge.dodge_L and curr_dir in Direction.get_left_group():
+		_inherit_speed = true
+	elif prev_anim_id == A.dodge.dodge_F and curr_dir in Direction.get_forward_group():
+		_inherit_speed = true
+	elif prev_anim_id == A.dodge.dodge_B and curr_dir in Direction.get_backward_group():
+		_inherit_speed = true
+
+	if _inherit_speed:
+		print("_inherit_speed //////////")
+		speed_from_inherited.initialise(_inherited_speed, curr_direction.get_curr_speed(), 0.3)
+		speed_mult_from_idle.initialise(accel_from_idle_curve, 0.0)
+
+	else:
+		speed_from_inherited.initialise(curr_direction.get_curr_speed(), curr_direction.get_curr_speed(), 0.0)
+		speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
 func on_enter_action(input_: InputPackage) -> void:
 	u.reset_all(_resettable)
@@ -75,15 +109,21 @@ func on_enter_action(input_: InputPackage) -> void:
 	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + Direction.name_(_dir))
 	curr_direction.set_direction(_dir)
 	
-	# ang_speed_on_enter.initialise(1, default_sp.ANGULAR_SPEED - 4, ang_speed_on_enter_curve, 0.5)
 
 	match PREV_ACTION:
-		Leg.Act.idle:
+		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
+		# Leg.Act.idle:
+			default_sp.ANGULAR_SPEED = 3
 			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
+			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.7)
+		
+		PS.Act.dodge:
+			default_sp.ANGULAR_SPEED = 8
+			_inherit_dodge_speed_if_same_direction()
 
-		# Leg.Act.sprint:
-			# if curr_direction.get_curr_dir() == Direction.Dir.RIGHT:
-				# default_sp.ANGULAR_SPEED = 8
+		Leg.Act.sprint:
+			default_sp.ANGULAR_SPEED = 8
+
 
 func on_exit_action() -> void:
 	get_animator_manager().reset_global_speed_scale()
@@ -91,18 +131,28 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	var ANGULAR_SPEED := default_sp.ANGULAR_SPEED
+	var CURR_SPEED = curr_direction.get_curr_speed()
+	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var SPEED_MULT := 1.0
 
 	match PREV_ACTION:
-		Leg.Act.idle:
+		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
+		PS.Act.dodge:
+			SPEED_MULT = speed_mult_from_idle.update(delta)
+			CURR_SPEED = speed_from_inherited.update(delta)
 
+
+	var _prev_sp_mult = SPEED_MULT
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
+	
+	# print_.prefix_s("origSpM/final/currSP", _prev_sp_mult, SPEED_MULT, CURR_SPEED)
 
-	var _sp_config := SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed(), ANGULAR_SPEED)
+
+	var _sp_config := SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed(), CURR_ANGULAR_SPEED)
 
 	pm().look_at_target(delta, _sp_config)
 
@@ -168,7 +218,7 @@ func animate(): # ▶️
 	match PREV_ACTION:
 		Leg.Act.sprint:
 			if curr_direction.get_curr_dir() in Direction.get_right_group():
-				custom_blend_time = 0.1
+				custom_blend_time = 0.15
 	anim = anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
 	set_anim_to_play(custom_blend_time)
 

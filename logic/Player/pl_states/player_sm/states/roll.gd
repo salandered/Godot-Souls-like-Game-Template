@@ -1,6 +1,6 @@
 ## A simple locked-in animation. It just transports the player while marking him as invincible. 
 
-extends PlayerState
+extends BasePlayerState
 
 # the point where we predict the roll will end
 # (no physics simulations currently, just a vector add up)

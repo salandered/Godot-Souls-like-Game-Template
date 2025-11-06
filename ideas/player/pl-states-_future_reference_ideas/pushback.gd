@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 
 @export var movement_multiplier: float = 2

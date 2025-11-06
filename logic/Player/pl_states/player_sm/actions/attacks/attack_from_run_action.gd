@@ -1,14 +1,7 @@
 extends BaseAttackAction
 
 
-var fade_interpolator := FloatLinearInterpolator.new()
-var fade_time: float = 0.4 # how long to fade extra velocity
-var extra_speed: float = 0.0
-
-var global_extra_speed := 1.0
-
-
-func initialise() -> void:
+func initialise_implementation() -> void:
 	hit_damage = 12
 
 	blend_time.set_by_prev_action({
@@ -19,42 +12,37 @@ func initialise() -> void:
 
 
 func on_enter_action(input_: InputPackage) -> void:
+	player_sm.combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
+
 	match PREV_ACTION:
-		Leg.Act.run:
-			global_extra_speed = 1
-			fade_time = 0.3
+		Leg.Act.run: # run is not supported right now
+			GLOBAL_EXTRA_SPEED = 1
+			FADE_TIME = 0.3
 		Leg.Act.sprint:
-			global_extra_speed = 2
-			fade_time = 0.4
+			GLOBAL_EXTRA_SPEED = 2
+			FADE_TIME = 0.4
+	
 	var _inherited_speed := pm().get_curr_velocity_len()
 	var _start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
-	var rm_start_speed := get_animator_manager().calculate_animation_start_root_velocity(anim, _start_time_offset, true)
-	extra_speed = max(0.0, _inherited_speed - rm_start_speed + global_extra_speed)
-	fade_interpolator.initialise(1.0, 0.0, fade_time)
-
-	player_sm.combat.set_hit_data_to_weapon(hit_damage, anim.anim_id)
-	# __log_action_ent(
-	# 	"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %
-	# 	[_inherited_speed, start_time_offset, rm_start_speed, extra_speed])
+	var root_start_speed := get_animator_manager().calculate_animation_start_root_velocity(anim, _start_time_offset, true)
+	extra_speed = max(0.0, _inherited_speed - root_start_speed + GLOBAL_EXTRA_SPEED)
+	fade_interpolator.initialise(1.0, 0.0, FADE_TIME)
+	__log_action_ent("inheritedSp", _inherited_speed, " rootStartSp", root_start_speed, " extraSp", extra_speed)
 
 
 func update(input_: InputPackage, delta: float):
 	if tracks_input_vector():
 		pm().rotate_with_input_vector(input_, delta)
-	_move_with_root(delta)
-	player_sm.combat.update_is_attacking(weapon_hurts())
-
-
-func _move_with_root(delta: float) -> void:
-	var root_vel := get_animator_manager().get_root_velocity(true, false)
+	
+	# var root_vel := get_animator_manager().get_root_velocity(true, false)
 	var fade_factor := fade_interpolator.get_current_value()
 	var extra_vel_local := Vector3(0, 0, extra_speed * fade_factor) # Animation +Z
-	var final_local_vel := root_vel + extra_vel_local
 	
-	get_player().velocity = get_player().get_quaternion() * final_local_vel
+	pm().move_with_root(delta, extra_vel_local, true, false)
 	
 	# if fade_factor > 0.0:
 	# 	__log_action(
 	# 		"RootVel.z: %.2f, Fade: %.2f, ExtraVel.z: %.2f, FinLocal.z: %.2f, FinalGlSp: %.2f" %
 	# 		[root_vel.z, fade_factor, extra_vel_local.z, final_local_vel.z, get_curr_speed()])
 	fade_interpolator.update(delta)
+	player_sm.combat.update_is_attacking(weapon_hurts())

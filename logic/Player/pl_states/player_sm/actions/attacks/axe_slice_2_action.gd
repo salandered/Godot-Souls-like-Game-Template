@@ -1,5 +1,5 @@
 extends BaseAttackAction
 
 
-func initialise() -> void:
+func initialise_implementation() -> void:
 	hit_damage = 15

@@ -49,12 +49,12 @@ var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
 	"Idle": _StateData.new(PS.idle, 1, Leg.Beh.idle, true),
 	"Run": _StateData.new(PS.run, 2, Leg.Beh.run, true),
 	"Strafe": _StateData.new(PS.strafe, 2, Leg.Beh.strafe, true),
-	# sprint drains stamina, but costs just a bit as well
+	# Sprint drains stamina, but costs just a bit as well
 	"Sprint": _StateData.new(PS.sprint, 3, Leg.Beh.sprint, true, 0.5),
 	
 	"Dodge": _StateData.new(PS.dodge, 10, Leg.Beh.double, false, 5.0),
 	
-	"JumpSprint": _StateData.new(PS.jump_sprint, 10, Leg.Beh.double, false, 2.0),
+	"JumpSprint": _StateData.new(PS.jump_sprint, 10, Leg.Beh.double, false, 10.0),
 	"Midair": _StateData.new(PS.midair, 10, Leg.Beh.double, false, 0.0),
 	"LandingSprint": _StateData.new(PS.landing_sprint, 10, Leg.Beh.double, false, 0.0),
 	"Roll": _StateData.new(PS.roll, 20, Leg.Beh.double, false, 5.0),
@@ -62,12 +62,12 @@ var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
 
 	## Attacks
 	"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 10.0),
-	"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 10.0),
+	"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 12.0),
 	# priority a bit higher
 	"AttackFromRun": _StateData.new(PS.attack_from_run, 16, Leg.Beh.double, false, 8.0),
 
 	"SwordSlash1": _StateData.new(PS.sword_slash_1, 15, Leg.Beh.double, false, 10.0),
-	"SwordSlash2": _StateData.new(PS.sword_slash_2, 15, Leg.Beh.double, false, 10.0),
+	"SwordSlash2": _StateData.new(PS.sword_slash_2, 15, Leg.Beh.double, false, 12.0),
 
 	# 
 	"Staggered": _StateData.new(PS.staggered, 100, Leg.Beh.double, false, 0.0),
@@ -93,7 +93,7 @@ var node_to_pl_action: Dictionary = { # { Node name : _ActionData }
 	## attacks
 	"AxeSlice1Action": _ActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1, MotionType.IDLE),
 	"AxeSlice2Action": _ActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2, MotionType.IDLE),
-	"AttackFromRunAction": _ActionData.new(PS.attack_from_run, PS.Act.attack_from_run, A.attack.attack_from_run, MotionType.STOP),
+	"AttackFromRunAction": _ActionData.new(PS.attack_from_run, PS.Act.attack_from_run, A.attack.attack_from_run, MotionType.IDLE),
 	
 	"SwordSlash1Action": _ActionData.new(PS.sword_slash_1, PS.Act.sword_slash_1, A.attack.sword_slash_1, MotionType.IDLE),
 	"SwordSlash2Action": _ActionData.new(PS.sword_slash_2, PS.Act.sword_slash_2, A.attack.sword_slash_2, MotionType.IDLE),

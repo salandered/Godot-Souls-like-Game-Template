@@ -2,10 +2,11 @@ extends RefCounted
 class_name ra
 
 
-# MOST BASIC
+## MOST BASIC
 
 static func coinflip() -> bool:
 	return randi() % 2 == 1
+
 
 ## Returns true with given probability (0.0 to 1.0)
 static func chance(probability: float, coefficient: float = 1.0) -> bool:
@@ -23,8 +24,9 @@ static func float_range(min_val: float, max_val: float) -> float:
 ## Returns random time between min and max
 static func wait_time(min_seconds: float = 0.5, max_seconds: float = 2.0) -> float:
 	return randf_range(min_seconds, max_seconds)
-# MOST BASIC END
 
+
+## 
 
 ## Returns true if should attack based on aggression level (0.0 to 1.0)
 static func should_attack(aggression: float) -> bool:
@@ -32,7 +34,7 @@ static func should_attack(aggression: float) -> bool:
 
 ## Returns random attack pattern from available attacks
 static func attack_pattern(available_attacks: Array[String]) -> String:
-	return pick_random(available_attacks)
+	return pick_random_array(available_attacks)
 
 ## Returns true if enemy should change behavior based on boredom factor
 static func should_change_behavior(boredom_threshold: float = 0.3) -> bool:
@@ -48,7 +50,11 @@ static func distance_triggered_action(distance: float, min_distance: float, max_
 		return false
 	return randf() < probability
 
-# SOME ROTATION LOGIC
+
+## Angle
+# region
+
+
 ## Returns random movement direction (normalized Vector3)
 static func wander_direction() -> Vector3:
 	var angle: float = randf() * TAU
@@ -64,13 +70,12 @@ static func patrol_offset(max_radius: float = 5.0) -> Vector3:
 	var radius: float = randf() * max_radius
 	return Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
 
-# SOME ARRAY LOGIC
 
-## Pick random element from array
-static func pick_random(array: Array):
-	if array.is_empty():
-		return null
-	return array[randi() % array.size()]
+# endregion
+
+
+## Pick weighted (dict)
+# region
 
 ## Pick random weighted element from array based on weights
 ## Example: pick_weighted([1, 2, 3], [0.2, 0.4, 0.4]) returns 1 with 20% chance
@@ -119,3 +124,59 @@ static func spick_weighted(weighted_values: Dictionary) -> String:
 		values.append(weighted_values[key])
 	
 	return pick_weighted(keys, values)
+
+# endregion
+
+
+## Pick random element from array
+# region
+
+static func pick_random_array(array: Array) -> Variant:
+	if array.is_empty():
+		return null
+	return _pick_random(array)
+
+
+static func pick_random(...elements: Array) -> Variant:
+	return pick_random_array(elements)
+
+
+static func spick_random_array(array: Array[String]) -> String:
+	if array.is_empty():
+		return ""
+	return _pick_random(array)
+
+
+static func spick_random(...elements: Array) -> String:
+	var _elements = u.safe_cast_array_of_strings(elements)
+	return spick_random_array(_elements)
+
+
+## returns 0 of empty
+static func ipick_random_array(array: Array[int]) -> int:
+	if array.is_empty():
+		return 0
+	return _pick_random(array)
+
+
+static func ipick_random(...elements: Array) -> int:
+	var _elements = u.safe_cast_array_of_int(elements)
+	return ipick_random_array(_elements)
+
+
+## returns 0.0 of empty
+static func fpick_random_array(array: Array[float]) -> float:
+	if array.is_empty():
+		return 0.0
+	return _pick_random(array)
+
+
+static func fpick_random(...elements: Array) -> float:
+	var _elements = u.safe_cast_array_of_float(elements)
+	return fpick_random_array(_elements)
+
+
+static func _pick_random(array: Array):
+	return array[randi_range(0, array.size() - 1)]
+
+# endregion

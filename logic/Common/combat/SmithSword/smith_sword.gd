@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	weapon_hurt_box = _weapon_hurt_box
 	weapon_visuals = mesh
-	weapon_name = "smith_sword"
+	weapon_name = WeaponNames.smith_sword
 	
 	_input_action_to_state = {
 		# CombatAction.light_attack_pressed: PS.axe_slice_1,

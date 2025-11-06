@@ -397,7 +397,7 @@ tracks/55/loop_wrap = true
 tracks/55/keys = PackedFloat32Array(0, 1, 0.031937536, 0.99855936, 0.023179978, -0.036353495, 0.033333335, 1, 0.031937536, 0.9985595, 0.023179978, -0.036353495, 0.06666667, 1, 0.031937536, 0.99855936, 0.023179978, -0.036353495, 0.1, 1, 0.031937536, 0.9985595, 0.023179978, -0.036353502, 0.13333334, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.16666667, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.2, 1, 0.031937532, 0.9985595, 0.023179919, -0.0363535, 0.23333333, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.26666668, 1, 0.031937536, 0.9985595, 0.023179978, -0.036353502, 0.3, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.33333334, 1, 0.031937536, 0.9985595, 0.023179978, -0.036353502, 0.36666667, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.4, 1, 0.031937532, 0.9985595, 0.023179978, -0.0363535, 0.43333334, 1, 0.031937536, 0.9985595, 0.023180008, -0.036353502, 0.46666667, 1, 0.031937532, 0.9985595, 0.023179978, -0.0363535, 0.5, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.53333336, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.56666666, 1, 0.03193753, 0.9985595, 0.023180008, -0.036353502, 0.6, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.6333333, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.6666667, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.7, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.73333335, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.76666665, 1, 0.031937532, 0.99855936, 0.023179978, -0.0363535, 0.8, 1, 0.03193753, 0.99855936, 0.023179978, -0.036353502, 0.8333333, 1, 0.03193753, 0.9985595, 0.023179978, -0.036353502, 0.8666667, 1, 0.03193753, 0.9985595, 0.023180008, -0.036353502, 0.9, 1, 0.03193753, 0.99855936, 0.023179978, -0.036353502, 0.93333334, 1, 0.031937525, 0.99855936, 0.023179978, -0.036353506, 0.96666664, 1, 0.03193753, 0.99855936, 0.023179978, -0.036353502, 1, 1, 0.03193753, 0.99855936, 0.023179978, -0.036353502, 1.0333333, 1, 0.03193753, 0.99855936, 0.023179978, -0.036353502)
 
 [sub_resource type="Animation" id="Animation_ph33a"]
-resource_name = "B head impact"
+resource_name = "B-head-impact"
 length = 0.7
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -1195,7 +1195,7 @@ tracks/55/keys = PackedFloat32Array(0, 1, 0.03193607, 0.9985558, 0.023180127, -0
 tracks/56/type = "value"
 tracks/56/imported = false
 tracks/56/enabled = true
-tracks/56/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:switches_to_queue")
+tracks/56/path = NodePath("%AnimParameters:switches_to_queue")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
@@ -1207,7 +1207,7 @@ tracks/56/keys = {
 tracks/57/type = "value"
 tracks/57/imported = false
 tracks/57/enabled = true
-tracks/57/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:allows_queue")
+tracks/57/path = NodePath("%AnimParameters:allows_queue")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
@@ -1219,11 +1219,11 @@ tracks/57/keys = {
 tracks/58/type = "value"
 tracks/58/imported = false
 tracks/58/enabled = true
-tracks/58/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:weapon_hurts")
+tracks/58/path = NodePath("%AnimParameters:weapon_hurts")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
-"times": PackedFloat32Array(0, 0.76666665, 0.93333334),
+"times": PackedFloat32Array(0, 0.7, 0.96666664),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1231,7 +1231,7 @@ tracks/58/keys = {
 tracks/59/type = "value"
 tracks/59/imported = false
 tracks/59/enabled = true
-tracks/59/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:tracks_input_vector")
+tracks/59/path = NodePath("%AnimParameters:tracks_input_vector")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/keys = {
@@ -1248,6 +1248,10 @@ markers = [{
 "color": Color(0.9879059, 0.7264175, 0.2694845, 1),
 "name": &"allows_switch",
 "time": 1.2666667
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"allows_switch_to_itself",
+"time": 0.96666664
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -1644,7 +1648,7 @@ tracks/55/keys = PackedFloat32Array(0, 1, 0.031935982, 0.9985558, 0.023179859, -
 tracks/56/type = "value"
 tracks/56/imported = false
 tracks/56/enabled = true
-tracks/56/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:switches_to_queue")
+tracks/56/path = NodePath("%AnimParameters:switches_to_queue")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
@@ -1656,11 +1660,11 @@ tracks/56/keys = {
 tracks/57/type = "value"
 tracks/57/imported = false
 tracks/57/enabled = true
-tracks/57/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:allows_queue")
+tracks/57/path = NodePath("%AnimParameters:allows_queue")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.93333334),
+"times": PackedFloat32Array(0, 0.5, 0.96666664),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1668,11 +1672,11 @@ tracks/57/keys = {
 tracks/58/type = "value"
 tracks/58/imported = false
 tracks/58/enabled = true
-tracks/58/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:weapon_hurts")
+tracks/58/path = NodePath("%AnimParameters:weapon_hurts")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.56666666, 0.76666665),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1680,7 +1684,7 @@ tracks/58/keys = {
 tracks/59/type = "value"
 tracks/59/imported = false
 tracks/59/enabled = true
-tracks/59/path = NodePath("AnimatorManager/NativeAnimator/AnimParameters:tracks_input_vector")
+tracks/59/path = NodePath("%AnimParameters:tracks_input_vector")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/keys = {

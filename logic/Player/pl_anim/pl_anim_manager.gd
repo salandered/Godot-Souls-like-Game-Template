@@ -18,12 +18,12 @@ class_name PlAnimatorManager
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 # region 
 
-func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig) -> void:
+func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float = 0.0) -> void:
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 	if anim == null:
 		push_error("Overlay anim not found: " + anim_id)
 		return
-	overlay_modifer.set_overlay_anim(anim, overlay_config)
+	overlay_modifer.set_overlay_anim(anim, overlay_config, start_time_offset)
 
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
@@ -99,7 +99,7 @@ func get_curr_anim_duration_unscaled() -> float:
 
 ## ROOT
 
-func get_root_velocity(y_zeroed: bool = true, use_blending: bool = true, backwards: bool = false) -> Vector3:
+func get_root_velocity(y_zeroed: bool = true, use_blending: bool = false, backwards: bool = false) -> Vector3:
 	return root_animator.get_root_velocity(y_zeroed, use_blending, backwards)
 
 func get_root_rotation(y_only: bool = true) -> float:

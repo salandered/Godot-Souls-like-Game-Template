@@ -574,6 +574,28 @@
 				}
 			]
 		},
+		"\\b(curr_overlay)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9c582f3"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(prev_overlay)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#8bb8f1fa"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
 		"\\b(curr_playback)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

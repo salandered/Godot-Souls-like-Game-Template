@@ -109,7 +109,7 @@ var node_to_leaf_state_data: Dictionary = {
 	"Attack360Low": _LStData.new(PHES.Leaf.attack_360_low, _AData.new(PHEA.attack.attack_360_low, -0.15)),
 	"AttackUp": _LStData.new(PHES.Leaf.attack_up, _AData.new(PHEA.attack.attack_up, -0.13)),
 	"AttackDown": _LStData.new(PHES.Leaf.attack_down, _AData.new(PHEA.attack.attack_down, -0.15)),
-	"SwordSlide": _LStData.new(PHES.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide, -0.15)),
+	"SwordSlide": _LStData.new(PHES.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide, -0.25)),
 
 	# "PhaseSwitch": _LStData.new(PHES.phase_switch, PHEA.phase_switch),
 }
@@ -146,11 +146,11 @@ func __accept_base_state(node: BasePHEState, state_data: BaseStData):
 	node.container = self
 	node.anim_container = me.anim_container
 	node.phe_feelings = me.phe_feelings
-	node.active_weapon = me.active_weapon
 	node.combat = me.combat
 	node.native_player = me.native_player
 	node.animator_manager = me.animator_manager
 	node.e_movement = me.enemy_movement
+	node.anim_params_container = me.anim_params_container
 	node.config = me.config
 	# 	
 	print_.e_container("Accepted", pp.s("st name", state_data.state_name))

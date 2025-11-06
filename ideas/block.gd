@@ -1,4 +1,4 @@
-extends PlayerState
+extends BasePlayerState
 
 @export var block_coefficient: float = 0.5
 @export var block_sector: float = 3.14
@@ -23,7 +23,7 @@ func react_on_hit(hit: HitData):
 	if face_direction.angle_to(hit_direction) < block_sector / 2:
 		print_.fight("", " ~~~ blocked a hit")
 		# resources.pay_block_cost(hit.damage, block_coefficient)
-		try_set_force_state("block_reaction")
+		# try_set_force_state("block_reaction")
 	else:
 		# unblocked hit: fall back to default reaction
 		super.react_on_hit(hit)

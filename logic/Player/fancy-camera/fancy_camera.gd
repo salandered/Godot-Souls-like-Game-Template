@@ -8,7 +8,7 @@ class_name FancyCamera
 
 @export var LOCKED_FOCUS_TARGET_WEIGHT: float = 0.05 # Base 0.05. Range: 0.03 to 0.08
 @export var LOCKED_MOUNT_CHEST_WEIGHT: float = 0.12
-# NOTE: important to keep them equal for now
+# WARNING: important to keep them equal for now
 #       If different, big camera snap on unlocking.  
 #       If both small, free cam super unresponsive 
 @export var LOCKED_NEST_MOUNT_WEIGHT: float = FREE_NEST_MOUNT_WEIGHT
@@ -138,9 +138,12 @@ func _process(delta: float) -> void:
 	var input_: InputPackage = InputManager._current_input
 	# print(u.fr() + "//~~~CAM ", input.target_lock)
 
+	# NOTE: seems like better to do movement before switching_state
+	# because locked -> free could use last mouse movement from locked
+	current_state.input_mouse_movement(d_x, d_y)
+
 	_consider_switching_state(input_)
 
-	current_state.input_mouse_movement(d_x, d_y)
 	current_state.update(delta)
 
 
@@ -261,7 +264,7 @@ func __change_fov():
 
 # endregion
 
-# TODO: Heard that real game dev terms are:
+# TODO: Probably real game dev terms:
 # Boom: vector from pivot (mount/chest) to the camera. Now is free_offset / lock_offset.
 # Boom length: _default_len and _current_len.
 # Pivot: the anchor to orbit around (mount).

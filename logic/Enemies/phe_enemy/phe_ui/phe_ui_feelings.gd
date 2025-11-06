@@ -16,7 +16,7 @@ var ANIM_HEALTH_DUR: float = 0.2
 var GHOST_HEALTH_DUR: float = 0.8
 var GHOST_DELAY: float = 0.5
 var PULSE_DURATION: float = 1.0
-
+var FADEOUT_DURATION: float = 1.0
 
 var _is_pulsing: bool = false
 
@@ -24,20 +24,23 @@ var _health_tween: Tween
 var _ghost_tween: Tween
 var _pulse_tween: Tween
 
-
 var _prev_health: float
 
+var _is_fading_out = false
 
 func _ready() -> void:
+	## HEALTH BAR
 	var max_health := e_feelings.get_max_health()
 	health_bar.max_value = max_health
 	health_bar.value = e_feelings.get_curr_health()
 	
+	## GHOST BAR
 	ghost_bar.texture_progress = health_bar.texture_progress # Reuse same texture
 	ghost_bar.max_value = max_health
 	ghost_bar.value = e_feelings.get_curr_health()
 	# ghost_bar.modulate = Color(1, 1, 1, 0.4) # Better in UI
 	
+	## 
 	_prev_health = e_feelings.get_curr_health()
 
 
@@ -66,38 +69,49 @@ func _update_health_bar():
 	elif not e_feelings.is_lower_phase_switch() and _is_pulsing:
 		_stop_low_health_pulse()
 	
+
+	if curr_health <= 0 and not _is_fading_out:
+		_is_fading_out = true
+		_fade_out_and_hide()
+
 	_prev_health = curr_health
 
 
-func _animate_health_change(target_value: float) -> void:
-	if _health_tween:
-		_health_tween.kill()
+func _fade_out_and_hide():
+	if _is_pulsing:
+		_stop_low_health_pulse()
 	
-	_health_tween = create_tween()
-	_health_tween.tween_property(
+	var panels = [health_bar, back_health_bar, ghost_bar]
+	UIUtils.fade_out_and_hide(self, panels, FADEOUT_DURATION)
+
+
+func _animate_health_change(target_value: float) -> void:
+	UIUtils.kill_tween_if_exists(_health_tween)
+
+	_health_tween = UIUtils.animate_property(
+		self,
 		health_bar,
 		"value",
 		target_value,
-		ANIM_HEALTH_DUR
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		ANIM_HEALTH_DUR,
+	)
 
 
 func _animate_ghost_bar_change(from_value: float, to_value: float) -> void:
-	if _ghost_tween:
-		_ghost_tween.kill()
+	UIUtils.kill_tween_if_exists(_ghost_tween)
 	
-	# ghost to prev health immediately
 	ghost_bar.value = from_value
 	
-	# after delay, drain ghost bar to curr health
-	_ghost_tween = create_tween()
-	_ghost_tween.tween_interval(GHOST_DELAY)
-	_ghost_tween.tween_property(
+	var config = TweenConfig.new(Tween.TRANS_QUAD, Tween.EASE_IN)
+	_ghost_tween = UIUtils.animate_property(
+		self,
 		ghost_bar,
 		"value",
 		to_value,
-		GHOST_HEALTH_DUR
-	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		GHOST_HEALTH_DUR,
+		GHOST_DELAY,
+		config
+	)
 
 
 func _start_low_health_pulse() -> void:
@@ -105,26 +119,11 @@ func _start_low_health_pulse() -> void:
 		return
 	_is_pulsing = true
 	
-	if _pulse_tween:
-		_pulse_tween.kill()
+	UIUtils.kill_tween_if_exists(_pulse_tween)
 	
-	_pulse_tween = create_tween().set_loops()
-	_pulse_tween.tween_property(
-		health_bar,
-		"modulate:a", # Just alpha channel
-		0.5,
-		PULSE_DURATION * 0.5
-	).set_trans(Tween.TRANS_SINE)
-	_pulse_tween.tween_property(
-		health_bar,
-		"modulate:a",
-		1.0,
-		PULSE_DURATION * 0.5
-	).set_trans(Tween.TRANS_SINE)
+	_pulse_tween = UIUtils.start_pulse(health_bar, 0.5, PULSE_DURATION)
 
 
 func _stop_low_health_pulse() -> void:
 	_is_pulsing = false
-	if _pulse_tween:
-		_pulse_tween.kill()
-	health_bar.modulate.a = 1.0
+	UIUtils.stop_pulse(health_bar, _pulse_tween)

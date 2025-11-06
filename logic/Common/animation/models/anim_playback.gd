@@ -2,7 +2,6 @@ extends RefCounted
 class_name AnimPlayback
 
 var anim: AnimationData
-var native_anim: Animation # shortcut for anim.native_anim
 var time_spent: float ## in sc, scaled
 ## Will start animation from a specific timestamp
 var start_offset: float ## in sc
@@ -32,7 +31,6 @@ var start_offset: float ## in sc
 
 func _init(_anim: AnimationData, _time_spent: float, _offset: float):
 	anim = _anim
-	native_anim = _anim.native_anim
 	time_spent = _time_spent
 	start_offset = _offset
 
