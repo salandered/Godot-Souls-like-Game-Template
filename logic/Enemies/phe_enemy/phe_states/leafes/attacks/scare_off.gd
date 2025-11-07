@@ -6,11 +6,6 @@ extends BasePHEAttack
 var anim_speed_bump := EaseCurveSampler.new()
 
 
-func react_on_hit(hit: HitData):
-	## mute
-	pass
-
-
 func get_active_weapon_name() -> String:
 	return WeaponNames.bg_aura_weapon
 
@@ -20,9 +15,12 @@ func initialise_implementation() -> void:
 	anim_speed_bump.initialise(scare_off_anim_speed_curve)
 	default_sp.ANGULAR_SPEED = 0.14
 	
-	
+
+	hit_damage = 25
+
 func on_exit_state() -> void:
 	get_animator_manager().reset_global_speed_scale()
+	_combat_reset_active_weapon()
 
 
 # NOTE: here we test anin speed curve in real time. Very promising
@@ -44,3 +42,5 @@ func update(delta):
 	
 	e_movement.rotate_towards_player(delta, sp_config)
 	e_movement.move_with_root(delta)
+
+	_combat_update_is_attacking()

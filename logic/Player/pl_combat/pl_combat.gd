@@ -9,7 +9,7 @@ class_name PlayerCombat
 func is_player() -> bool:
 	return true
 
-func get_me() -> BaseCharacter:
+func get_character() -> BaseCharacter:
 	return model._player
 
 

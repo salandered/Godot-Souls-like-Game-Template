@@ -9,9 +9,6 @@ const USUAL = "usual"
 const POWER = "power"
 
 
-
-
-
 func initialise_implementation():
 	default_sp.ANGULAR_SPEED = 1.0
 	sp_config = SpeedConfig.new(default_sp)
@@ -23,6 +20,7 @@ func initialise_implementation():
 	
 	mode_switcher = ActionModeSwitcher.new(usual_preset, power_preset)
 
+	hit_damage = 35
 
 func _decide_mode_on_enter():
 	if not me.angry_raised:
@@ -34,6 +32,8 @@ func _decide_mode_on_enter():
 
 
 func on_enter_state() -> void:
+	_combat_set_hit_data_to_active_weapon()
+
 	_decide_mode_on_enter()
 	gap_calculator = GapJumpCalculator.new(mode_switcher.get_curr_speed())
 	gap_calculator.set_coef(distance_to_player(), me.angry_raised)
@@ -45,10 +45,11 @@ func on_enter_state() -> void:
 
 func on_exit_state() -> void:
 	APPLY_GRAVITY = true
+	_combat_reset_active_weapon()
 
 
 func update(delta):
-	e_movement.rotate_towards_player(delta, sp_config, angle_adjustment)
+	e_movement.rotate_towards_player(delta, sp_config, deg_to_rad(angle_adjustment_deg))
 
 	if before_marker(Marker.Name_.JUMP_LAUNCH):
 		e_movement.move_with_root(delta)
@@ -61,3 +62,5 @@ func update(delta):
 	else:
 		APPLY_GRAVITY = true
 		e_movement.move_with_root(delta)
+
+	_combat_update_is_attacking()

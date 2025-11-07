@@ -23,7 +23,7 @@ func is_player() -> bool:
 	return false
 
 
-func get_me() -> BaseCharacter:
+func get_character() -> BaseCharacter:
 	return me
 
 
@@ -36,5 +36,5 @@ func get_active_weapon() -> PHEWeapon:
 
 
 func set_active_weapon(weapon_name: String):
-	var _weapon = u.safe_get_dict_key(weapons, weapon_name, "set_active_weapon", Fallback.WARN_CRUCIAL)
+	var _weapon = u.safe_get_dict_key(weapons, weapon_name,null,  "set_active_weapon", Fallback.WARN_CRUCIAL)
 	active_weapon = _weapon

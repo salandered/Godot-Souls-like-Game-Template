@@ -36,6 +36,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 				_reason += "in phase_switch 🕹️"
 				_next_state = PHES.combat_loco
 		PHES.combat_loco:
+			_next_state = PHES.combat_attacking ## DANGER DEV
 			if _phase_switch_check():
 				_reason += " loco to phase_switch 🕹️"
 				me.angry_raised = true

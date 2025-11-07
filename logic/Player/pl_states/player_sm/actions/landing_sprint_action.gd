@@ -18,7 +18,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	is_landed = false
 	get_player().velocity.x *= momentum_preservation
 	get_player().velocity.z *= momentum_preservation
-	__log_action_ent(pm().__pp_vel())
+	__log_ent(pm().__pp_vel())
 
 
 func update(input_: InputPackage, delta: float) -> void:
@@ -34,7 +34,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 
 func __log_land():
-	__log_action_upd("is_landed", is_landed,
+	__log_upd("is_landed", is_landed,
 		"player.vel.y", get_player().velocity.y,
 		"player.vel", get_player().velocity,
 		"player.glob_pos y", get_player().global_position.y

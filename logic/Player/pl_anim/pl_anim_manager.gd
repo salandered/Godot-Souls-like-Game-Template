@@ -117,9 +117,9 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 ## INTERNAL
 
 func initialise():
-	var initial_anim := anim_container.get_by_anim_id(A.move.idle)
+	var initial_anim := anim_container.get_by_anim_id(A.loco.idle)
 
-	native_animator.play(A.move.idle)
+	native_animator.play(A.loco.idle)
 
 	full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)

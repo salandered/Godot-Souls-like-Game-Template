@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dks6m6de557j0" path="res://logic/Enemies/phe_enemy/combat/weapons/aura_weapon.gd" id="1_5akps"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/combat/hurt_box/WeaponHurtBox.tscn" id="2_finp0"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_finp0"]
-height = 2.5291443
-radius = 1.5283203
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_finp0"]
+radius = 2.2089844
+height = 5.5615234
 
 [node name="AuraWeapon" type="Area3D"]
 script = ExtResource("1_5akps")
@@ -14,6 +14,7 @@ script = ExtResource("1_5akps")
 unique_name_in_owner = true
 
 [node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9160614, 0)
-shape = SubResource("CylinderShape3D_finp0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3062575, 0)
+shape = SubResource("CapsuleShape3D_finp0")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
+debug_fill = false

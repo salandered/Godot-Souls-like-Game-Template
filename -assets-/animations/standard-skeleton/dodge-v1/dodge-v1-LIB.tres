@@ -11,6 +11,10 @@ markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"to_run",
 "time": 0.6333333
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"ALLOWS_SWITCH_TO_ATTACK",
+"time": 0.6
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -418,7 +422,7 @@ tracks/57/path = NodePath("%AnimParameters:allows_queue")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
-"times": PackedFloat32Array(0, 0.46666667, 1.3),
+"times": PackedFloat32Array(0, 0.3, 1.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -447,6 +451,10 @@ markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"to_run",
 "time": 0.6666667
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"ALLOWS_SWITCH_TO_ATTACK",
+"time": 0.46666667
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -854,7 +862,7 @@ tracks/57/path = NodePath("%AnimParameters:allows_queue")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
-"times": PackedFloat32Array(0, 0.46666667, 0.9),
+"times": PackedFloat32Array(0, 0.26666668, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -883,6 +891,10 @@ markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"from_run",
 "time": 0.16666667
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"ALLOWS_SWITCH_TO_ATTACK",
+"time": 0.46666667
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -1302,7 +1314,7 @@ tracks/58/path = NodePath("%AnimParameters:allows_queue")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
-"times": PackedFloat32Array(0, 0.43333334, 0.8666666),
+"times": PackedFloat32Array(0, 0.26666668, 0.8666666),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1319,6 +1331,10 @@ markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"to_run",
 "time": 0.8
+}, {
+"color": Color(1, 0.23137255, 0.09019608, 1),
+"name": &"ALLOWS_SWITCH_TO_ATTACK",
+"time": 0.5
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -1726,7 +1742,7 @@ tracks/57/path = NodePath("%AnimParameters:allows_queue")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/keys = {
-"times": PackedFloat32Array(0, 0.56666666, 1),
+"times": PackedFloat32Array(0, 0.33333334, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]

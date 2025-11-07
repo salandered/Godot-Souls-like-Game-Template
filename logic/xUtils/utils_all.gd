@@ -25,11 +25,11 @@ static func ease_in_out(x: float) -> float:
 
 
 ## returns null if key does not exist
-static func safe_get_dict_key(dict: Dictionary, key: String, context: String = "", fallback: String = Fallback.WARN_CRUCIAL) -> Variant:
+static func safe_get_dict_key(dict: Dictionary, key: String, default: Variant = null, context: String = "", fallback: String = Fallback.WARN_CRUCIAL) -> Variant:
 	if safe_has_key(dict, key, fallback):
 		return dict[key]
 	else:
-		return null
+		return default
 
 
 static func safe_has_key(dict: Dictionary, key: String, fallback: String = Fallback.WARN_CRUCIAL) -> bool:

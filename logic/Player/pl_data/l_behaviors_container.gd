@@ -10,19 +10,8 @@ class _BehaviorData:
 		self.supported_actions = supported_
 
 
-class _ActionData:
-	var action_name: String
-	var anim_id: String
-	var motion_type: String
-
-	func _init(
-			action_name_: String,
-			anim_id_: String,
-			motion_type_: String,
-		) -> void:
-		self.action_name = action_name_
-		self.anim_id = anim_id_
-		self.motion_type = motion_type_
+class _LActionData extends StatesContainer._BaseActionData:
+	pass
 
 
 var node_to_l_behavior_data: Dictionary = {
@@ -54,18 +43,9 @@ var node_to_l_behavior_data: Dictionary = {
 			MotionType.STOP: Leg.Act.idle,
 			},
 			[
-				# Leg.Act.vert_locked_run,
+				Leg.Act.turn_180,
 			]
 	)),
-	# "DodgeLegs": _BehaviorData.new(Leg.Beh.dodge,
-	# 	SupportedActions.new({
-	# 		MotionType.IDLE: Leg.Act.idle,
-	# 		MotionType.START: Leg.Act.dodge,
-	# 		MotionType.LOOP: Leg.Act.dodge,
-	# 		MotionType.STOP: Leg.Act.idle,
-	# 		},
-	# 		[]
-	# )),
 	"SprintLegs": _BehaviorData.new(Leg.Beh.sprint,
 		SupportedActions.new({
 			MotionType.IDLE: Leg.Act.idle,
@@ -88,21 +68,16 @@ var node_to_l_behavior_data: Dictionary = {
 
 
 var node_to_l_action_data: Dictionary = {
-	"IdleToSprint": _ActionData.new(Leg.Act.idle_to_sprint, A.move.idle_to_sprint, MotionType.START),
+	"IdleToSprint": _LActionData.new(Leg.Act.idle_to_sprint, A.loco.idle_to_sprint, MotionType.START),
 
-	"Idle": _ActionData.new(Leg.Act.idle, A.move.idle, MotionType.IDLE),
-	"Run": _ActionData.new(Leg.Act.run, A.move.run, MotionType.LOOP),
-	"Turn180": _ActionData.new(Leg.Act.turn_180, A.move.turn_180_R, MotionType.START),
+	"Idle": _LActionData.new(Leg.Act.idle, A.loco.idle, MotionType.IDLE),
+	"Run": _LActionData.new(Leg.Act.run, A.loco.run, MotionType.LOOP),
+	"Turn180": _LActionData.new(Leg.Act.turn_180, A.loco.turn_180_R, MotionType.START),
 
-	"Strafe": _ActionData.new(Leg.Act.strafe, A.strafe.strafe_R, MotionType.LOOP),
-	# "VertLockedWalk": _ActionData.new(Leg.Act.vert_locked_walk, A.combat_walk_f, MotionType.LOOP),
-	# "VertLockedRun": _ActionData.new(Leg.Act.vert_locked_run, A.strafe.combat_run_f, MotionType.LOOP),
-	# "Dodge": _ActionData.new(Leg.Act.dodge, A.dodge.dodge_R, MotionType.IDLE),
+	"Strafe": _LActionData.new(Leg.Act.strafe, A.strafe.strafe_R, MotionType.LOOP),
 
-	"FastTurn180": _ActionData.new(Leg.Act.fast_turn_180, A.move.fast_turn_180_R, MotionType.START),
-	"SprintToIdle": _ActionData.new(Leg.Act.sprint_to_idle, A.move.sprint_to_idle, MotionType.STOP),
-	"Sprint": _ActionData.new(Leg.Act.sprint, A.move.sprint, MotionType.LOOP),
-	"_Double": _ActionData.new(Leg.Act.double, A.air.midair, MotionType.IDLE),
-	# "RunToSprintAction": LegActionData._ActionData.new(Leg.Act.run_to_sprint, A.combat_sprint_start,  MotionType.START),
-	# "Turn90ToRun": _ActionData.new(Leg.Act.turn_90_to_run, A.turn_90_to_run_R, MotionType.START),
+	"FastTurn180": _LActionData.new(Leg.Act.fast_turn_180, A.loco.fast_turn_180_R, MotionType.START),
+	"SprintToIdle": _LActionData.new(Leg.Act.sprint_to_idle, A.loco.sprint_to_idle, MotionType.STOP),
+	"Sprint": _LActionData.new(Leg.Act.sprint, A.loco.sprint, MotionType.LOOP),
+	"_Double": _LActionData.new(Leg.Act.double, A.air.midair, MotionType.IDLE),
 }

@@ -29,16 +29,12 @@ func get_current_state() -> BasePlayerState:
 	return model.player_sm.current_state
 
 
-func apply_hit(hit_data: HitData) -> void:
-	model.combat.apply_hit(hit_data)
-
-
 func react_on_hit(hit_data: HitData) -> void:
-	var _curr_state = get_current_state()
+	var _curr_state := get_current_state()
 	if not _curr_state:
 		print_.warn(false, "no _curr_state", "player's react_on_hit", "no hit applied, it's lost", hit_data)
 		return
-	get_current_state().react_on_hit(hit_data)
+	_curr_state.react_on_hit(hit_data)
 
 
 # TODO: _process or _physics_process? changed to _process: frame issues

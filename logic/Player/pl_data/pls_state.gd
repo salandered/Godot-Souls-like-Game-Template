@@ -3,76 +3,58 @@ class_name PS # player states and actions
 
 # STATES
 # fight 
-const withdraw := "withdraw"
-const shield_throw := "shield_throw"
-const shield_throw_reload := "shield_throw_reload"
 
-const block := "block"
-const block_reaction := "block_reaction"
-const pushback := "pushback"
-const staggered := "staggered"
-const parry := "parry"
-const parried := "parried"
-const riposte := "riposte"
 
 ## attacks
 const axe_slice_1 := "axe_slice_1"
 const axe_slice_2 := "axe_slice_2"
 const attack_from_run := "attack_from_run"
+const attack_from_dodge := "attack_from_dodge"
 
 const sword_slash_1 := "sword_slash_1"
 const sword_slash_2 := "sword_slash_2"
 
-# move
-# TODO const walk := "test/walk"
-
-const for_double := "for_double"
-
-
+## loco
 const idle := "idle"
 const run := "run"
 const strafe := "strafe"
 const sprint := "sprint"
+
+## air
 const dodge := "dodge"
 const jump_sprint := "jump_sprint"
 const midair := "midair"
-const landing_run := "landing_run"
 const landing_sprint := "landing_sprint"
-const roll := "roll"
+
+
+##
 const death := "death"
+const for_double := "for_double"
+const pushback := "pushback"
+
 
 # ACTIONS
 class Act:
 	const double := "pla_double👭🏻"
 
-	const withdraw := "pla_withdraw🖊️"
-	const shield_throw := "pla_shield_throw🖊️"
-	const shield_throw_reload := "pla_shield_throw_reload🖊️"
-	
 	## attacks
 	const axe_slice_1 := "pla_axe_slice_1🗡"
 	const axe_slice_2 := "pla_axe_slice_2🗡"
 	const attack_from_run := "pla_attack_from_run🗡"
+	const attack_from_dodge := "pla_attack_from_dodge🗡"
 	
 	const sword_slash_1 := "pla_sword_slash_1🗡"
 	const sword_slash_2 := "pla_sword_slash_2🗡"
 
-	# 
-	const block := "pla_block🖊️"
-	const block_reaction := "pla_block_reaction🖊️"
 	const pushback := "pla_pushback🖊️"
-	const staggered := "pla_staggered🖊️"
-	const parry := "pla_parry🖊️"
-	const parried := "pla_parried🖊️"
-	const riposte := "pla_riposte🖊️"
 
-	# const idle := "action_run_idle🖊️"
-
+	## air
 	const jump_sprint := "pla_jump_sprint🖊️"
 	const midair := "pla_midair🖊️"
 	const landing_sprint := "pla_landing_sprint🖊️"
-	const roll := "pla_roll🖊️"
 	const dodge := "pla_dodge🤸"
+	
+	##
 	const death := "pla_death🖊️"
 
 

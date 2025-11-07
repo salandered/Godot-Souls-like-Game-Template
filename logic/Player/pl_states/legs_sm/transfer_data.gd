@@ -8,7 +8,7 @@ var _transfer: Dictionary
 
 
 func _get_by_key(key: String) -> Variant:
-	return u.safe_get_dict_key(_transfer, key, "Getting _transfer from TranferData💼")
+	return u.safe_get_dict_key(_transfer, key, null, "Getting _transfer from TranferData💼")
 
 
 ## optional return

@@ -3,7 +3,7 @@ class_name BaseAction
 extends PlActionTimeManagement
 
 var container: PlayerStatesContainer
-
+var feelings: PlayerFeelings
 
 var player_sm: PlayerSM
 var anim_params_container: AnimParamsContainer
@@ -13,10 +13,6 @@ var action_name: String
 
 var blend_time = ActionData.BlendTime.new()
 var start_time_offset = ActionData.StartTimeOffset.new()
-
-## do not use this in actions. Use blend_time and start_time_offset features
-var _actual_blend_time: float
-var _actual_start_time_offset: float
 
 
 # 
@@ -97,17 +93,53 @@ func animate(): # ▶️
 
 
 func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_offset: float = -1.0) -> void:
-	_actual_blend_time = blend_time.calculate_actual(PREV_ACTION)
+	var _actual_blend_time = blend_time.calculate_actual(PREV_ACTION)
 	if override_blend_time != -1.0:
 		_actual_blend_time = override_blend_time
-	_actual_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	var _actual_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
 	if override_start_time_offset != -1.0:
 		_actual_start_time_offset = override_start_time_offset
 		
-	__log_anim()
+	__log_anim(_actual_blend_time, _actual_start_time_offset)
 	get_animator_manager().set_anim_to_play(anim.anim_id, _actual_blend_time, _actual_start_time_offset)
 	# _actual_blend_time = default_blend_time
 	# _actual_start_time_offset = default_start_time_offset
+
+
+func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayConfig) -> void:
+	__log_overlay_anim(overlay_anim_id, overlay_config)
+	get_animator_manager().set_overlay_anim(overlay_anim_id, overlay_config)
+
+
+# endregion
+
+
+# region: REACT
+
+
+func react_on_hit(hit: HitData):
+	print_.fight(action_name, "react_on_hit called")
+	if is_vulnerable():
+		feelings.lose_health(hit.damage)
+	
+	var react_cfg = ReactUtils.calculate_reaction_for_player(hit, action_name)
+	if not react_cfg:
+		__log_upd("state mutes react_on_hit, ignoring")
+		return
+	else:
+		__log_upd("Calculated react_cfg", react_cfg)
+	
+	var actual_overlay_weight = react_cfg.overlay_weight
+	var actual_bone_mask = react_cfg.bone_mask
+
+	var overlay_config = OverlayConfig.new(
+		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
+		OverlayConfig.Blend.new(),
+		1.0,
+		actual_bone_mask)
+
+	set_overlay_anim_to_play(react_cfg.anim_id, overlay_config)
+
 
 # endregion
 
@@ -119,6 +151,7 @@ func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_off
 ## NOTE: makes no sense for looping animations => unsupported
 ## NOTE: less important after modifier started to support multiple blends
 ## WARNING: does not account for speed scaling
+## TODO: oh, can be done with usual functions 
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 	if anim.is_looping:
 		print_.warn_raw(false, "Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
@@ -142,29 +175,51 @@ func till_blend_completes() -> float:
 # region: GET ANIMATION PARAMETERS
 
 func switches_to_queue() -> bool:
-	return anim_params_container.switches_to_queue(anim.native_anim, effective_time_spent())
+	return anim_params_container.is_switches_to_queue(anim.native_anim, effective_time_spent())
 
 func allows_queue() -> bool:
-	return anim_params_container.allows_queue(anim.native_anim, effective_time_spent())
+	return anim_params_container.is_allows_queue(anim.native_anim, effective_time_spent())
 
 func is_vulnerable() -> bool:
-	return anim_params_container.vulnerable(anim.native_anim, effective_time_spent())
+	return anim_params_container.is_vulnerable(anim.native_anim, effective_time_spent())
 
 func is_interruptable() -> bool:
-	return anim_params_container.interruptable(anim.native_anim, effective_time_spent())
+	return anim_params_container.is_interruptable(anim.native_anim, effective_time_spent())
 
 func weapon_hurts(__log: bool = false) -> bool:
-	var _r = anim_params_container.weapon_hurts(anim.native_anim, effective_time_spent())
+	var _r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
 	if _r and __log:
-		print_.prefix("// HURT")
+		print_.prefix_s("// HURT")
 	return _r
 
 func tracks_input_vector() -> bool:
-	return anim_params_container.tracks_input_vector(anim.native_anim, effective_time_spent())
+	return anim_params_container.is_tracks_input_vector(anim.native_anim, effective_time_spent())
 
 # endregion
 
 
 ## __LOGS
-func __log_anim():
+
+var __LOG_OVERLAY_ANIM: bool = true
+
+
+@abstract func __log_function(prefix: String, ...parts: Array) -> void
+
+func __log_ent(...parts: Array):
+	__log_function(action_name + pp.on_ent, pp.list_(parts))
+
+func __log_ext(...parts: Array):
+	__log_function(action_name + pp.on_ext, pp.list_(parts))
+
+func __log_upd(...parts: Array):
+	__log_function(action_name + pp.on_upd, pp.list_(parts))
+
+func __log_action(...parts: Array):
+	__log_function(action_name, pp.list_(parts))
+
+
+func __log_anim(_actual_blend_time, _actual_start_time_offset):
 	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)
+
+func __log_overlay_anim(overlay_anim_id: String, overlay_config):
+	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(action_name, overlay_anim_id, overlay_config)

@@ -23,3 +23,7 @@ const ROOT_BONE: String = "Root"
 const BONE_TRACK_PREFIX: String = "%" + Constants.GENERAL_SKELETON + ":"
 
 const ROOT_TRACK_PATH: String = BONE_TRACK_PREFIX + Constants.ROOT_BONE
+
+
+const PLAYER_MAX_HIT_DAMAGE: float = 15
+const ENEMY_MAX_HIT_DAMAGE: float = 35

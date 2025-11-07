@@ -101,7 +101,7 @@ var node_to_leaf_state_data: Dictionary = {
 
 	## attack
 	"ScareOff": _LStData.new(PHES.Leaf.scare_off, _AData.new(PHEA.attack.scare_off, -0.25)),
-	"GapCloser": _LStData.new(PHES.Leaf.gap_closer, _AData.new(PHEA.attack.gap_closer, -0.24)),
+	"GapCloser": _LStData.new(PHES.Leaf.gap_closer, _AData.new(PHEA.attack.power_gap_closer, -0.24)),
 	"ClubPart1": _LStData.new(PHES.Leaf.club_part_1, _AData.new(PHEA.attack.club_part_1, -0.15)),
 	"ClubPart2": _LStData.new(PHES.Leaf.club_part_2, _AData.new(PHEA.attack.club_part_2, -0.15)),
 	"ClubPart3_4": _LStData.new(PHES.Leaf.club_part_3_4, _AData.new(PHEA.attack.club_part_3_4, -0.15)),

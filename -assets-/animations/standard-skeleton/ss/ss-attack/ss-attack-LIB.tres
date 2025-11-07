@@ -798,7 +798,7 @@ length = 1.5666667
 markers = [{
 "color": Color(0.9879059, 0.7264175, 0.2694845, 1),
 "name": &"allows_switch",
-"time": 1.3666667
+"time": 1.3
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

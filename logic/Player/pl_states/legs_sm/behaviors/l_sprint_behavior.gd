@@ -56,7 +56,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 					_reason += pp.compare_w("time_remaining >", "0.1", STOP_COMMIT)
 
 	if next_action_name != curr_action_name:
-		__log_decision_data(input_, _reason, next_action_name)
+		__log_decision_data(input_, next_action_name, _reason)
 	
 	return LNextActionVerdict.new(next_action_name)
 

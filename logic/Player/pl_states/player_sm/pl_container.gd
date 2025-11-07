@@ -17,13 +17,13 @@ var player: Princess
 @onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
 
 
-func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer._ActionData]:
-	var result: Array[StatesContainer._ActionData] = []
-	for action_data: StatesContainer._ActionData in states_container.pl_action_data_list:
+func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer._PlActionData]:
+	var result: Array[StatesContainer._PlActionData] = []
+	for action_data: StatesContainer._PlActionData in states_container.pl_action_data_list:
 		if action_data.state_name == state:
 			result.append(action_data)
 
-	for action_data: StatesContainer._ActionData in states_container.node_to_pl_action.values():
+	for action_data: StatesContainer._PlActionData in states_container.node_to_pl_action.values():
 		if action_data.state_name == state:
 			result.append(action_data)
 	return result
@@ -160,42 +160,38 @@ func _accept_player_actions():
 	
 	for child: PlayerAction in get_descendants.player_actions(player_sm):
 		print_.container("pl_act", "child.get_name() " + child.get_name())
-		var action_data: StatesContainer._ActionData = states_container.node_to_pl_action.get(child.get_name())
-		__apply_base_action_data(action_data, child)
+		var action_data: StatesContainer._PlActionData = states_container.node_to_pl_action.get(child.get_name())
+		
+		_player_actions[action_data.action_name] = child
 
-	for action_data: StatesContainer._ActionData in states_container.pl_action_data_list:
-		var node_name := u.to_pascal_case(action_data.action_name)
-		print_.container("pl_act", "Creating action: " + action_data.action_name)
-		var child := PlayerAction.new()
-		child.name = node_name
+		child.state_name = action_data.state_name
+
 		__apply_base_action_data(action_data, child)
-		add_child(child) # add to tree
-	
+		
+		
 	print_.container("pl_act", "===========  Accepted actions ===========")
 	print_.container("pl_act", str(_player_actions))
 	print_.container("", "")
 
 
-func __apply_base_action_data(action_data: StatesContainer._ActionData, child: BaseAction):
-	_player_actions[action_data.action_name] = child
-	
-	# common
+func __apply_base_action_data(action_data: StatesContainer._BaseActionData, child: BaseAction):
+	child.action_name = action_data.action_name
+	child.motion_type = action_data.motion_type
 	child.player_sm = player_sm
 	child.container = self
-	child.animator_manager = animator_manager
-	child.anim_container = anim_container
-	child.player_sm = player_sm
-	child.anim_params_container = anim_params_container
+	child.feelings = feelings
 	
-	# specific 
+	# anim data
 	var anim := anim_container.get_by_anim_id(action_data.anim_id)
 	assert(anim, "no anim with " + action_data.anim_id)
 	child.anim = anim
-	child.action_name = action_data.action_name
-	child.motion_type = action_data.motion_type
+	child.animator_manager = animator_manager
+	child.anim_container = anim_container
+	child.anim_params_container = anim_params_container
 	
 	assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
-	
+	assert(child.anim, "action_name problem")
+
 
 func _accept_legs_behaviors():
 	var leg_beh_container := LegBehaviorContainer.new()
@@ -225,7 +221,7 @@ func _accept_legs_actions():
 	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsAction in get_descendants.legs_actions(legs_sm):
 		print_.container("", "node.get_name() " + child.get_name())
-		var action_data: LegBehaviorContainer._ActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
+		var action_data: LegBehaviorContainer._LActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
 		if not action_data:
 			print_.warn_raw(false, "No action data found for: " + child.get_name() + " Will be skipped")
 			continue
@@ -234,17 +230,7 @@ func _accept_legs_actions():
 		
 		# base action
 		child.legs_sm = legs_sm
-		child.container = self
-		child.anim_container = anim_container
-		child.animator_manager = animator_manager
-		child.player_sm = player_sm
-		
-
-		# specific
-		var anim := anim_container.get_by_anim_id(action_data.anim_id)
-		child.anim = anim
-		child.action_name = action_data.action_name
-		child.motion_type = action_data.motion_type
+		__apply_base_action_data(action_data, child)
 
 		assert(child.action_name and not child.action_name.is_empty(), "action_name problem for")
 

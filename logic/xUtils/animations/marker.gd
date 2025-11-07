@@ -43,15 +43,19 @@ class Name_:
 	# strongly recommended in attack states for player
 	# good to check for enemy attack states 
 	const ALLOWS_SWITCH = "allows_switch"
+	#
 	const ALLOWS_SWITCH_TO_ITSELF = "allows_switch_to_itself" # used in basic attack
+	const ALLOWS_SWITCH_TO_ATTACK = "ALLOWS_SWITCH_TO_ATTACK"
 	
 	# for now in enemy for specific series logic
 	const EARLY_SERIES_SWITCH = "EARLY_SERIES_SWITCH"
 	
 	# to mimick that animation is from run (not idle pose) (e.g. dodge)
 	const FROM_RUN = "from_run"
+	const FROM_IDLE = "FROM_IDLE"
 	const TO_RUN = "to_run"
 	const TO_IDLE = "to_idle"
+	const FROM_DODGE = "FROM_DODGE"
 
 	# HSM anim 
 

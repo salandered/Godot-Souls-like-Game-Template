@@ -21,7 +21,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	extra_speed = max(0.0, _inherited_speed - rm_start_speed)
 	fade_interpolator.initialise(1.0, 0.0, fade_time)
 
-	# __log_action_ent(
+	# __log_ent(
 	# 	"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %
 	# 	[_inherited_speed, start_time_offset, rm_start_speed, extra_speed])
 

@@ -5,7 +5,6 @@ class_name PlayerModel
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
 @onready var combat: PlayerCombat = $Combat
 @onready var feelings: PlayerFeelings = %Feelings
-@onready var hitbox: Hitbox_ = %HitBox
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var container: PlayerStatesContainer = %StatesContainer
 
@@ -103,7 +102,6 @@ func _reload_run_anims_from_library() -> void:
 	_run_anim_i = clampi(_run_anim_i, 0, max(0, run_anims.size() - 1))
 
 @onready var visuals: PlayerVisuals = $"../Visuals"
-@onready var csg_box_3d_2: CSGBox3D = $"../CSGBox3D2"
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dev_fly_mode"):
@@ -116,7 +114,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("t8"):
 		visuals.visible = not visuals.visible
-		csg_box_3d_2.visible = not csg_box_3d_2.visible
 	# if event.is_action_pressed("dev_change_run_anim"):
 	# 	_run_anim_i = (_run_anim_i + 1) % run_anims.size()
 	# 	__apply()

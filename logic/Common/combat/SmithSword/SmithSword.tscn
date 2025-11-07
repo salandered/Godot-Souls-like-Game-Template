@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword_2.glb" id="2_sk2nb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
-radius = 0.08935547
+radius = 0.13134766
 height = 1.4203186
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfwdn"]

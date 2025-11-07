@@ -11,12 +11,6 @@ var _resettable := [
 ]
 
 
-func _pick_bone_mask(hit: HitData) -> Array[int]:
-	return BoneMask.get_full_body_no_root()
-
-func _pick_overlay_weight(hit: HitData) -> float:
-	return 0.8
-
 func initialise() -> void:
 	default_sp.ANGULAR_SPEED = 1.5
 

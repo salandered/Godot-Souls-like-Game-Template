@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://ope03u0gwdw4"]
+[gd_scene load_steps=20 format=4 uid="uid://ope03u0gwdw4"]
 
 [ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/Enemies/phe_enemy/combat/weapons/big_pinga_blade.gd" id="1_hj5gq"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/combat/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
@@ -10,17 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://vtrrpfkytq08" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_NormalGL.jpg" id="8_mpgtj"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools/Imphenzia/PixPal/Materials/M_ImphenziaPixPal.tres" id="9_h8ebr"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ods2k"]
-radius = 0.018066406
-height = 0.3363335
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
-radius = 0.018066406
-height = 0.15588093
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u228v"]
-radius = 0.029296875
-height = 0.2837292
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
+radius = 0.7861328
+height = 2.2701416
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sfdt"]
 resource_name = "08___Default.001"
@@ -132,6 +124,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kngnu")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ods2k"]
+radius = 0.07519531
+height = 0.359573
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
+radius = 0.040039063
+height = 0.18536234
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u228v"]
+radius = 0.072265625
+height = 0.31422788
+
 [node name="BigPingaBlade" type="Node3D"]
 script = ExtResource("1_hj5gq")
 
@@ -141,19 +145,9 @@ transform = Transform3D(0.99999994, 0, -7.450581e-09, 0, 1, 0, 3.3527613e-08, -1
 collision_layer = 16
 collision_mask = 8
 
-[node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(4.2080984, -0.6246487, 0.90786976, -0.7110185, -4.2769575, 0.35295862, 0.84194154, -0.48983815, -4.2395387, 0.11907483, 1.5907453, -0.96691656)
-shape = SubResource("CapsuleShape3D_ods2k")
-debug_color = Color(0.84, 0.06719998, 0.28616, 1)
-
-[node name="HurtBoxCol3" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(4.296223, -0.7074937, 0.089118585, -0.5149221, -2.7014878, 3.3768115, -0.49329904, -3.341773, -2.7486796, 0.0652229, 1.1060896, -0.7933041)
-shape = SubResource("CapsuleShape3D_6hf6c")
-debug_color = Color(0.84, 0.06719998, 0.28616, 1)
-
-[node name="HurtBoxCol2" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(4.177995, -0.33017457, 1.1652694, 1.0886619, -0.81024253, -4.132896, 0.5307367, 4.261103, -0.6955725, 0.18005937, 2.0705678, -1.3041168)
-shape = SubResource("CapsuleShape3D_u228v")
+[node name="HurtBoxCol4" type="CollisionShape3D" parent="WeaponHurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.056679938, 1.5394812, 0.07279479)
+shape = SubResource("CapsuleShape3D_hj5gq")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
 [node name="Visuals" type="Node3D" parent="."]
@@ -161,15 +155,47 @@ unique_name_in_owner = true
 transform = Transform3D(-0.9858583, 0.15841751, -0.054660767, 0.04585822, -0.05869904, -0.9972209, -0.16118513, -0.9856264, 0.05060391, -0.008474976, 0.94384664, -0.04381919)
 
 [node name="Pinga_003" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1.2720437, 0.046343382, 0.2934076, -0.38826495, -0.044597946, 0.9555454, 0.076424696, -0.9979306, -0.029078037, 0.069407366, 0.9613814, 0.052831948)
+transform = Transform3D(1.2720438, 0.046343382, 0.2934076, -0.38826498, -0.044597954, 0.9555455, 0.0764247, -0.99793065, -0.029078038, -0.094416246, -0.040373657, 0.10426426)
+gi_mode = 0
+mesh = SubResource("ArrayMesh_0rjq6")
+skeleton = NodePath("")
+
+[node name="Pinga_004" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-0.94977, 0.058022857, 0.6988137, -0.9341217, -0.06580173, -0.70992124, 0.006382879, -0.9961476, 0.08759874, -0.020712744, -0.035051692, 0.10733986)
+gi_mode = 0
+mesh = SubResource("ArrayMesh_0rjq6")
+skeleton = NodePath("")
+
+[node name="Pinga_005" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-0.43094492, 0.034158938, -0.9456158, 1.2566738, -0.06661779, -0.325114, -0.09871444, -0.9971966, -0.010672782, -0.051366903, -0.10641259, 0.11013067)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_0rjq6")
 skeleton = NodePath("")
 
 [node name="chain HP_003" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1.0070726, 0.3843051, -0.73786545, 0.18227193, 0.5728373, 0.8393096, 0.58299595, -0.7314859, 0.3572049, 0.062596075, 1.1153662, -1.1769087)
+transform = Transform3D(1.0070727, 0.38430512, -0.73786557, 0.18227191, 0.5728373, 0.8393096, 0.58299595, -0.73148596, 0.35720494, -0.10122755, 0.11361118, -1.1254766)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_2q8s2")
 skeleton = NodePath("")
+
+[node name="hb_collisions_v1" type="Node" parent="."]
+
+[node name="HurtBoxCol" type="CollisionShape3D" parent="hb_collisions_v1"]
+transform = Transform3D(4.208098, -0.62464863, 0.9078718, -0.7110185, -4.2769575, 0.35295862, 0.8419417, -0.48983812, -4.2395387, 0.1263331, 1.6404425, -0.9612248)
+visible = false
+shape = SubResource("CapsuleShape3D_ods2k")
+debug_color = Color(0.84, 0.06719998, 0.28616, 1)
+
+[node name="HurtBoxCol3" type="CollisionShape3D" parent="hb_collisions_v1"]
+transform = Transform3D(4.2962227, -0.70749366, 0.0891186, -0.5149221, -2.7014878, 3.3768115, -0.4932989, -3.341773, -2.7486796, 0.075651854, 1.1459115, -0.744044)
+visible = false
+shape = SubResource("CapsuleShape3D_6hf6c")
+debug_color = Color(0.84, 0.06719998, 0.28616, 1)
+
+[node name="HurtBoxCol2" type="CollisionShape3D" parent="hb_collisions_v1"]
+transform = Transform3D(4.1779947, -0.33017457, 1.1652693, 1.0886619, -0.81024253, -4.132896, 0.5307368, 4.261103, -0.6955724, 0.18509431, 2.0829234, -1.3690958)
+visible = false
+shape = SubResource("CapsuleShape3D_u228v")
+debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
 [editable path="WeaponHurtBox"]

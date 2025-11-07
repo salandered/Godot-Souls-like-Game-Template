@@ -21,10 +21,15 @@ func on_enter_action(input_: InputPackage) -> void:
 	
 	initial_rotation = get_player().quaternion
 	# prints("~~~ Turn Enter: is_reversed?", input_.reverse_data.is_reversed(), "Input Vec:", input_.input_direction)
-	__log_action_ent("Initial rotation (quaternion)", initial_rotation)
+	__log_ent("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA
-	var _target_angle := calculate_target_angle(input_)
+	var _target_angle
+	if not player_sm.area_awareness.is_camera_locked():
+		_target_angle = calculate_target_angle_by_input(input_)
+	else:
+		_target_angle = calculate_target_angle_by_target(input_)
+
 	var _turn_dir := turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
@@ -46,7 +51,7 @@ func on_exit_action() -> void:
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)
 	
-	__log_action_ext(__log_turn_exit())
+	__log_ext(__log_turn_exit())
 
 
 func update(input_: InputPackage, delta: float):
@@ -70,9 +75,9 @@ func update(input_: InputPackage, delta: float):
 func animate(): # ▶️
 	## TODO: some universal system for different "sub animations" in one action
 	if curr_turn.is_turn_dir_right():
-		anim = anim_container.get_by_anim_id(A.move.turn_180_R)
+		anim = anim_container.get_by_anim_id(A.loco.turn_180_R)
 	else:
-		anim = anim_container.get_by_anim_id(A.move.turn_180_L)
+		anim = anim_container.get_by_anim_id(A.loco.turn_180_L)
 	set_anim_to_play()
 
 

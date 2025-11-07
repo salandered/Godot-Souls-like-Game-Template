@@ -14,3 +14,4 @@ func initialise_implementation() -> void:
 	})
 
 
+	# GLOBAL_EXTRA_SPEED = 0.0

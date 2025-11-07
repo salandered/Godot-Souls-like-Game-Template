@@ -91,53 +91,33 @@ func works_less_than_commitment() -> bool:
 # region
 
 ## DOCS
-## WARNING most simple raw code here for now
+## WARNING simple code here
 ## i dont know how it will play out
-## Leafs can override react_on_hit to mute, or override pickers _pick
+## Leafs can override react_on_hit to mute, or set constants to override calculate_reaction result
 
-## can be overriden
+
 func react_on_hit(hit: HitData):
 	__log_phe("react_on_hit, will lose health", pp.in_q(hit))
 	# animator_manager.set_overlay_anim()
 	phe_feelings.lose_health(hit.damage)
-	
-	var anim_id_ = _pick_react_anim(hit)
-	
-	var overlay_weight: float
-	if hit.damage < 1.0:
-		overlay_weight = 0.0
+
+	var react_cfg = ReactUtils.calculate_reaction_for_enemy(hit, state_name)
+	if not react_cfg:
+		__log_upd("state mutes react_on_hit, ignoring")
+		return
 	else:
-		overlay_weight = _pick_overlay_weight(hit)
+		__log_upd("Calculated react_cfg", react_cfg)
 	
-	var bone_mask = _pick_bone_mask(hit)
-	
+	var actual_overlay_weight = react_cfg.overlay_weight
+	var actual_bone_mask = react_cfg.bone_mask
+
 	var overlay_config = OverlayConfig.new(
-		OverlayConfig.Weight.new(overlay_weight, overlay_weight / 2),
+		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
 		OverlayConfig.Blend.new(),
 		1.0,
-		bone_mask)
-	
-	set_overlay_anim_to_play(anim_id_, overlay_config)
+		actual_bone_mask)
 
-
-func _pick_react_anim(hit: HitData) -> String:
-	var _r: String = PHEA.react.react_from_R
-	if hit.anim_id == A.attack.attack_from_run:
-		_r = PHEA.react.react_gut
-	elif hit.damage > 10:
-		_r = PHEA.react.react_gut
-	else:
-		_r = ra.spick_random(PHEA.react.react_from_R, PHEA.react.react_from_L)
-	return _r
-
-
-func _pick_overlay_weight(hit: HitData) -> float:
-	var mapped_value = hit.damage / 15.0 ## very approximately
-	return clampf(mapped_value, 0.0, 1.0)
-
-
-func _pick_bone_mask(hit: HitData) -> Array[int]:
-	return BoneMask.get_upper_body()
+	set_overlay_anim_to_play(react_cfg.anim_id, overlay_config)
 
 
 # endregion
@@ -288,5 +268,6 @@ func __log_anim(_actual_blend_time, _actual_start_time_offset):
 
 func __log_overlay_anim(overlay_anim_id: String, overlay_config):
 	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(state_name, overlay_anim_id, overlay_config)
+
 
 # endregion

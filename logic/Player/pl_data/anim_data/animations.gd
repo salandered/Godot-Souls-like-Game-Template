@@ -28,10 +28,8 @@ class _lib:
 	const start_end_v2 = "start-end-v2" + "/"
 
 
-# -- MOVE ANIM  NOTE: usual loco and combat loco are mixed for now
-
-
-class move:
+# NOTE: usual loco and combat loco are mixed for now
+class loco:
 	const idle := _lib.all_axe + "L-combat-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
 	# const combat_walk_start := _lib._SWS_loco_p2 + "SWSlp2-O-walk-start" # _ss_loco + "C-walk"
 	const idle_to_sprint := _lib.start_end_v2 + "L RM Idle To Sprint" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
@@ -48,18 +46,15 @@ class move:
 	const fast_turn_180_R := _lib._ss_loco + "RMR ss 180 fast turn R"
 	const fast_turn_180_L := _lib._ss_loco + "RMR ss 180 fast turn L"
 
-
 class strafe:
-	const combat_walk_f := _lib._strafe + "walk f2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
-	const combat_walk_b := _lib._strafe + "walk b2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
-
+	# const combat_walk_f := _lib._strafe + "walk f2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
+	# const combat_walk_b := _lib._strafe + "walk b2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
 	const combat_run_f := _lib.all_axe + "L-combat-run"
 	const combat_run_b := _lib.all_axe + "L-combat-run-B" # "C-run-back"
 
 	## NOTE: use commented anims for slow strafing 
 	const strafe_L := _lib._strafe + "B-strafe-run-L" # "A-strafe-L" # "SWSl-O-run-L-blended"
 	const strafe_R := _lib._strafe + "B-strafe-run-R-strange" # "A-strafe-R" # "SWSl-O-run-R-blended"
-
 
 class dodge:
 	const dodge_R := _lib._dodge + "A-Standing-Dodge-R"
@@ -80,45 +75,41 @@ class air:
 	const jump_idle := _lib._bit_of_glue + "A-Idle-Jumping-ver3"
 	# const hard_fall := # _jump_up_land_HPG + "C-fall-HW-hard-land-idle-trim-pin"
 
-#
-const roll := _lib.jump_v4 + "RM-Sprint-to-Roll" # _OS_fight + "OS-evade-forward" # todo
-const death := air.midair # _ss_loco + "C-death-2"
-
-
-# region: -- FIGHT 
 class attack:
 	const axe_slice_1 := _lib.all_axe + "aIP-attack-slice-RL" # _ff + "axe_slice_1" # _SWS_combo + "SWSc-O-combo-1-all" #
 	const axe_slice_2 := _lib.all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "axe_slice_2"
 	const attack_from_run := _lib._SWS_att + "SWS-O-bit-stab"
+	const attack_from_dodge := _lib._SWS_att + "SWS-O-stab"
 	
 	const sword_slash_1 := _lib._ss_attack + "B-slash-R-L-RM-1"
 	const sword_slash_2 := _lib._ss_attack + "B-slash-L-R-RM-2"
 
-
-class combat:
-	const withdraw := air.midair # _jump + "C-fall-HW" # TODO
-	const block_forward := _lib._ss_attack + "C-block-forward" # _OS_fight + "OS-block-left" # _ss_attack + "C-block-forward"
-	# const block_to_idle := _ss_attack + "C-block-to-idle"
-
-	const pushback := air.midair # todo
-	const staggered := air.midair # _ss_attack + "B-head-impact"
-
-	const parry := air.midair # _ff + "parry"
-	const parried := air.midair # _ff + "parried"
-	const riposte_attack := attack.axe_slice_1
-
-	const shield_throw := air.midair # _ff + "shield_throw"
-	const shield_throw_reload := air.midair # _ff + "shield_throw_reload"
-	const idle_longsword := air.midair # _ff + "idle_longsword"
-
-
 class react:
 	const block_reaction := air.midair # _ff + "block_reaction" # _OS_fight + "OS-hit-react" # _ff + "block_reaction"
 	const hit_reaction := _lib._ss_attack + "C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
-	const head_B = _lib._ss_attack + "B-head-impact"
+	const head_B_large = _lib._ss_attack + "B-head-impact"
 	const from_R = _lib.all_axe + "react large from right"
 	const from_L = _lib.all_axe + "react large from left"
-	const gut = _lib.all_axe + "react large gut"
+	const react_gut = _lib.all_axe + "react large gut"
 	const dodge_F_hit = _lib.testing + "OS-hit-react-forward"
-	const dodge_B_hit = _lib.testing + "OS-hit-react-back"
-# endregion
+	const hit_B_large_rm = _lib.testing + "OS-hit-react-back"
+
+## one time
+const death := air.midair # _ss_loco + "C-death-2"
+
+
+# later
+const roll := _lib.jump_v4 + "RM-Sprint-to-Roll" # _OS_fight + "OS-evade-forward" # todo
+const withdraw := air.midair # _jump + "C-fall-HW" # TODO
+const block_forward := _lib._ss_attack + "C-block-forward" # _OS_fight + "OS-block-left" # _ss_attack + "C-block-forward"
+# const block_to_idle := _ss_attack + "C-block-to-idle"
+
+const pushback := air.midair # todo
+const staggered := air.midair # _ss_attack + "B-head-impact"
+
+const parry := air.midair # _ff + "parry"
+const parried := air.midair # _ff + "parried"
+const riposte_attack := attack.axe_slice_1
+
+const shield_throw := air.midair # _ff + "shield_throw"
+const shield_throw_reload := air.midair # _ff + "shield_throw_reload"

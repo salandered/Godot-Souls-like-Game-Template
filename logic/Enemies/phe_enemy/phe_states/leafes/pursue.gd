@@ -66,20 +66,17 @@ func _decide_on_mode_on_enter():
 	__log_decide_on_mode(true, "-x-", _reason)
 
 
-func subtract_rad():
-	return 0.0 if not me.angry_raised else 3.0
-
 func _update_mode() -> bool:
 	var dist := distance_to_player()
 	var _reason: String = ""
 	var _old_mode_name := curr_mode.get_curr_mode_name()
 	match _old_mode_name:
 		ModeName.FAST:
-			if distance_to_player() < config.CLOSE_TO_ORBIT() - subtract_rad():
+			if distance_to_player() < config.CLOSE_TO_ORBIT() - fvalue_angry(0.0, 3.0):
 				_reason += "dist < CLOSE_TO_ORBIT"
 				curr_mode.set_mode(svalue_angry(ModeName.SLOW, ModeName.FAST))
 		ModeName.SLOW:
-			if distance_to_player() >= config.REAL_FAR() - subtract_rad():
+			if distance_to_player() >= config.REAL_FAR() - fvalue_angry(0.0, 3.0):
 				_reason += "dist > REAL_FAR"
 				curr_mode.set_mode(ModeName.FAST)
 

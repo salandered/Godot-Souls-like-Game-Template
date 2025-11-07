@@ -24,6 +24,7 @@ const IDLE_LIKE_ACTIONS = [
 	PS.Act.sword_slash_1,
 	PS.Act.sword_slash_2,
 	PS.Act.attack_from_run,
+	PS.Act.attack_from_dodge,
 	PS.Act.dodge
 ]
 

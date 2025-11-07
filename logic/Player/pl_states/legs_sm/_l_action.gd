@@ -25,7 +25,7 @@ func update(input_: InputPackage, delta: float):
 ## TURN LOGIC
 # region 
 
-func calculate_target_angle(input_: InputPackage) -> float:
+func calculate_target_angle_by_input(input_: InputPackage) -> float:
 	var target_angle: float
 	if input_.reverse_data.is_reversed():
 		target_angle = - PI + 0.05
@@ -35,6 +35,14 @@ func calculate_target_angle(input_: InputPackage) -> float:
 		var _signed_angle := pm().get_signed_angle_pl_input(input_, Constants.ONE_FRAME, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
 		# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
+	return target_angle
+
+
+func calculate_target_angle_by_target(input_: InputPackage) -> float:
+	var target_angle: float
+	var _signed_angle := pm().get_signed_angle_pl_target()
+	target_angle = wrapf(_signed_angle, -PI, PI)
+	# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
 
 
@@ -84,14 +92,8 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_nam
 # endregion
 
 
-func __log_action_ent(...parts: Array):
-	print_.lsm_action(action_name + pp.on_ent, pp.list_(parts))
+## LOGS
 
-func __log_action_ext(...parts: Array):
-	print_.lsm_action(action_name + pp.on_ext, pp.list_(parts))
 
-func __log_action_upd(...parts: Array):
-	print_.lsm_action(action_name + pp.on_upd, pp.list_(parts))
-
-func __log_action(...parts: Array):
-	print_.lsm_action(action_name, pp.list_(parts))
+func __log_function(prefix: String, ...parts: Array) -> void:
+	print_.lsm_action(prefix, pp.list_(parts))

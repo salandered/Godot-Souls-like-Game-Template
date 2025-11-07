@@ -33,35 +33,33 @@ static func get_all_params() -> Array[String]:
 const TRACK_PREFIX := "%AnimParameters:"
 
 
-func switches_to_queue(anim: Animation, timestamp: float) -> bool:
+func is_switches_to_queue(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, SWITCHES_TO_QUEUE, timestamp)
 
 	
-func allows_queue(anim: Animation, timestamp: float) -> bool:
+func is_allows_queue(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, ALLOWS_QUEUE, timestamp)
 
 	
-func vulnerable(anim: Animation, timestamp: float) -> bool:
+func is_vulnerable(anim: Animation, timestamp: float) -> bool:
 	# return _get_value_from_track(anim, VULNERABLE, timestamp)
 	return true
 	
 
-func interruptable(anim: Animation, timestamp: float) -> bool:
+func is_interruptable(anim: Animation, timestamp: float) -> bool:
 	# return _get_value_from_track(anim, INTERRUPTABLE, timestamp)
 	return true
 	
 
-func weapon_hurts(anim: Animation, timestamp: float) -> bool:
+func is_weapon_hurts(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, WEAPON_HURTS, timestamp)
 
 
-func tracks_input_vector(anim: Animation, timestamp: float) -> bool:
+func is_tracks_input_vector(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, TRACKS_INPUT_VECTOR, timestamp)
 
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:
-	var _default = u.safe_get_dict_key(DEFAULT_PARAMS, param)
-	if _default == null:
-		_default = false
+	var _default = u.safe_get_dict_key(DEFAULT_PARAMS, param, false)
 	var _r := AnimUtils.get_bool_value_from_track(anim, TRACK_PREFIX, param, timestamp, _default)
 	return _r

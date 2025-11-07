@@ -5,16 +5,16 @@ extends LegsAction
 @export var slght_dir_change_curve: Curve # for slight direction changes
 
 
-const ACCEL_FROM_IDLE_TIME: float = 0.41
+const ACCEL_FROM_IDLE_TIME: float = 0.31
 
-const OPP_DIR_CHANGE_DURATION: float = 0.16
+const OPP_DIR_CHANGE_DURATION: float = 0.14
 const SLIGHT_DIR_CHANGE_DURATION: float = 0.08
 const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.02
 
 
 ## TODO: this begs the question, do we need explicit idle action in strafe behavior at all?
 ## 		 since adding NEUTRAL direction, here in strafe there is lot of logic for idle.
-const ANIM_IDLE: String = A.move.idle
+const ANIM_IDLE: String = A.loco.idle
 
 const ANIM_L: String = A.strafe.strafe_L
 const ANIM_R: String = A.strafe.strafe_R
@@ -36,7 +36,7 @@ var slight_dir_change := StrafeDirChange.new()
 var slightest_dir_change := StrafeDirChange.new()
 
 var TURN_THRESHOLD_DEG: float = 15
-const DECELERATION_FRICTION: float = 8.0
+var DECELERATION_FRICTION: float = 8.0
 
 
 var _resettable = [
@@ -61,12 +61,16 @@ func initialise() -> void:
 	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION, 2)
 	slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
 
+	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name_.TURN_180_APEX, 0.25)
 	blend_time.set_by_prev_action({
 			Leg.Act.sprint: 0.3,
-			# PS.Act.sword_slash_1: 0.6
+			Leg.Act.idle: 0.3, # 0.3 works good
+			Leg.Act.turn_180: turn_180_blend_time,
+			PS.Act.landing_sprint: 0.4,
+			PS.Act.dodge: 0.3
 	})
 
-
+	
 const IDLE_LIKE_ACTIONS = [
 	Leg.Act.idle,
 	PS.Act.axe_slice_1,
@@ -74,11 +78,12 @@ const IDLE_LIKE_ACTIONS = [
 	PS.Act.sword_slash_1,
 	PS.Act.sword_slash_2,
 	PS.Act.attack_from_run,
-
+	PS.Act.attack_from_dodge,
 ]
 
 
 func _inherit_dodge_speed_if_same_direction():
+	# todo: should not use animations but dodge dir
 	var _inherited_speed := pm().get_curr_velocity_len()
 	## animator manager treats prev anim as curr because we are in on_enter_action
 	var prev_anim_id = get_animator_manager().get_curr_anim().anim_id
@@ -102,6 +107,7 @@ func _inherit_dodge_speed_if_same_direction():
 		speed_from_inherited.initialise(curr_direction.get_curr_speed(), curr_direction.get_curr_speed(), 0.0)
 		speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
+
 func on_enter_action(input_: InputPackage) -> void:
 	u.reset_all(_resettable)
 
@@ -113,17 +119,23 @@ func on_enter_action(input_: InputPackage) -> void:
 	match PREV_ACTION:
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 		# Leg.Act.idle:
-			default_sp.ANGULAR_SPEED = 3
+			default_sp.ANGULAR_SPEED = 7
 			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
-			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.7)
+			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.4)
+			TURN_THRESHOLD_DEG = 181
 		
+		Leg.Act.turn_180, Leg.Act.fast_turn_180:
+			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 		PS.Act.dodge:
 			default_sp.ANGULAR_SPEED = 8
 			_inherit_dodge_speed_if_same_direction()
+			TURN_THRESHOLD_DEG = 15
 
 		Leg.Act.sprint:
 			default_sp.ANGULAR_SPEED = 8
-
+			TURN_THRESHOLD_DEG = 15
+		_:
+			TURN_THRESHOLD_DEG = 15
 
 func on_exit_action() -> void:
 	get_animator_manager().reset_global_speed_scale()
@@ -139,10 +151,12 @@ func update(input_: InputPackage, delta: float) -> void:
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
+		Leg.Act.turn_180, Leg.Act.fast_turn_180:
+			SPEED_MULT = speed_mult_from_idle.update(delta)
 		PS.Act.dodge:
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_SPEED = speed_from_inherited.update(delta)
-
+			
 
 	var _prev_sp_mult = SPEED_MULT
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
@@ -165,7 +179,7 @@ func update(input_: InputPackage, delta: float) -> void:
 			pm().move_strafe_with_forward(input_, -curr_direction.get_dir_int(), delta, _sp_config) # note the minus
 	else:
 		# pm().set_velocity(Vector3.ZERO)
-		pm().apply_friction(delta, DECELERATION_FRICTION)
+		pm().apply_friction_xz(delta, DECELERATION_FRICTION)
 
 	opposite_dir_change.async_change_update(delta)
 	slight_dir_change.async_change_update(delta)

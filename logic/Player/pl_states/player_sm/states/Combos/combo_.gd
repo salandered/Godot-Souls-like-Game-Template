@@ -7,6 +7,11 @@ extends Node
 
 @onready var player: Princess
 
+## NOTE: state_name, not node name
+@export var needs_curr_state: String
+@export var needs_curr_action: String = "not"
+
+
 ## next state this combo invokes (eg: next_attack)
 ## Will be added in check_combos to queued state 
 ## NOTE: state_name, not node name here

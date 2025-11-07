@@ -113,10 +113,20 @@ func apply_gravity(delta, gravity: float = u.gravity):
 	_player.velocity.y -= gravity * delta
 
 
-func apply_friction(delta: float, friction_value: float = 5.0):
+func apply_friction_xz(delta: float, friction_value: float = 5.0):
 	var new_velocity := _player.velocity
 	new_velocity.x = move_toward(new_velocity.x, 0.0, friction_value * delta)
 	new_velocity.z = move_toward(new_velocity.z, 0.0, friction_value * delta)
+	_player.velocity = new_velocity
+
+
+func apply_friction(delta: float, friction_value: float = 5.0):
+	var horizontal_vel := Vector3(_player.velocity.x, 0, _player.velocity.z)
+	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, friction_value * delta)
+	
+	var new_velocity := _player.velocity
+	new_velocity.x = horizontal_vel.x
+	new_velocity.z = horizontal_vel.z
 	_player.velocity = new_velocity
 
 # endregion

@@ -1,9 +1,9 @@
 extends BasePHELeaf
 class_name BasePHEAttack
 
-var hit_damage: float = 30
+var hit_damage: float = 20
 
-var angle_adjustment: float = 0 # radians
+var angle_adjustment_deg: float = 0
 
 var sp_config: SpeedConfig
 
@@ -31,23 +31,38 @@ func get_active_weapon_name() -> String:
 	return WeaponNames.big_pinga_blade
 
 
-func on_enter_state() -> void:
+## Combat methods to use in case of overriding on_enter_state/on_exit_state/update
+# region
+
+func _combat_set_hit_data_to_active_weapon():
 	combat.set_active_weapon(get_active_weapon_name())
 	combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
 
+func _combat_update_is_attacking():
+	combat.update_active_weapon_is_attacking(is_weapon_hurts(get_active_weapon_name(), true))
+
+func _combat_reset_active_weapon():
+	combat.reset_active_weapon()
+
+# endregion
+
+
+func on_enter_state() -> void:
+	_combat_set_hit_data_to_active_weapon()
+
 
 func on_exit_state() -> void:
-	combat.reset_active_weapon()
+	_combat_reset_active_weapon()
 
 
 func update(delta):
-	e_movement.rotate_towards_player(delta, sp_config, angle_adjustment)
+	e_movement.rotate_towards_player(delta, sp_config, deg_to_rad(angle_adjustment_deg))
 	
 	e_movement.move_with_root(delta, SCALE_ROOT_FACTOR)
-	combat.update_is_attacking(is_weapon_hurts(get_active_weapon_name()))
+	_combat_update_is_attacking()
 
+var LOG_HURT_B: bool = true
 
-var LOG_HURT_B: bool = false
 
 func __log_hurt():
 	if LOG_HURT_B:

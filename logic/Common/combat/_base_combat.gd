@@ -6,8 +6,13 @@ class_name BaseCombat
 extends Node
 
 
-var _processed_hits: Dictionary = {}
 const HIT_BUFFER_DURATION: float = 4.0
+var _processed_hits: Dictionary = {}
+var _character_is_attacking: bool = false
+
+
+func is_character_attacking() -> bool:
+	return _character_is_attacking
 
 
 func _is_hit_processed(hit_id: int) -> bool:
@@ -38,7 +43,7 @@ func _cleanup_old_hits() -> void:
 @abstract func is_player() -> bool
 
 ## non nullable
-@abstract func get_me() -> BaseCharacter
+@abstract func get_character() -> BaseCharacter
 
 
 @abstract func get_combat_name() -> String
@@ -56,7 +61,7 @@ func apply_hit(hit_data: HitData) -> void:
 	_mark_hit_processed(hit_id)
 	_cleanup_old_hits()
 	
-	get_me().react_on_hit(hit_data)
+	get_character().react_on_hit(hit_data)
 
 
 func set_hit_data_to_active_weapon(hit_damage: float, anim_id: String) -> void:
@@ -69,12 +74,20 @@ func set_hit_data_to_active_weapon(hit_damage: float, anim_id: String) -> void:
 	__log_("set hit data to active weapon", weapon, hit_data)
 
 
-func update_is_attacking(is_attacking: bool) -> void:
+func update_active_weapon_is_attacking(is_attacking: bool) -> void:
 	var weapon := get_active_weapon()
 	if not weapon:
-		__log_warn("no weapon", "update_is_attacking", "return")
+		__log_warn("no weapon", "update_active_weapon_is_attacking", "return")
 		return
+
+	_update_is_attacking(weapon, is_attacking)
+
+
+func _update_is_attacking(weapon: BaseWeapon, is_attacking: bool):
+	## important these two to be atomic
 	weapon.set_is_attacking(is_attacking)
+	_character_is_attacking = is_attacking
+	# __log_("_update_is_attacking. is_attacking/weapon", is_attacking, weapon)
 
 
 func reset_active_weapon() -> void:
@@ -84,11 +97,12 @@ func reset_active_weapon() -> void:
 		return
 	weapon.reset_hit_data()
 	weapon.reset_contact_hitbox_list()
-	weapon.set_is_attacking(false)
+	_update_is_attacking(weapon, false)
 	# __log_("reset active weapon")
 
 
 ## __LOGS
+
 
 func __log_(...parts: Array):
 	# using weapon holder as name of BaseCombat

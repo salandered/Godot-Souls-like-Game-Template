@@ -230,12 +230,16 @@ func on_exit_state() -> void:
 	pass
 
 
+# region: REACTION
+
+
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "react_on_hit called")
-	if curr_global_action().is_vulnerable():
-		feelings._change_health(-hit.damage)
+	curr_global_action().react_on_hit(hit)
+
+	
+	# IDEA
 	# if curr_global_action().is_interruptable():
-	# 	# TODO rewrite for better effects processing, this scales badly
 	# 	# if hit.effects.has("pushback") and hit.effects["pushback"]:
 	# 	# 	area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
 	# 	# 	try_set_force_state("pushback")
@@ -245,7 +249,7 @@ func react_on_hit(hit: HitData):
 # TODO: ...
 func react_on_spell(spell_hit: SpellHitData):
 	if curr_global_action().is_vulnerable():
-		feelings._change_health(-spell_hit.damage)
+		feelings.lose_health(spell_hit.damage)
 	# if curr_global_action().is_interruptable():
 		# forced_state.try_set("staggered", 0)
 	#spell_hit.queue_free()
@@ -257,6 +261,7 @@ func react_on_parry(_hit: HitData):
 	pass
 	# try_set_force_state("parried")
 
+# endregion
 
 # region: SOME DOCS
 #   check_transition()

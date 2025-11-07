@@ -102,15 +102,6 @@ func gather_input(delta: float) -> InputPackage:
 		_to_run_after_sprint_timer.turn_off() # cancel timer if no moving
 		
 	
-	if Input.is_action_pressed(RawAction.parry):
-		new_input.actions.append(PS.parry)
-
-	if Input.is_action_pressed("withdraw"):
-		new_input.actions.append(PS.withdraw)
-
-	if Input.is_action_pressed("roll"):
-		new_input.actions.append(PS.roll)
-
 	if Input.is_action_just_pressed(RawAction.jump):
 		if new_input.actions.has(PS.sprint):
 			new_input.actions.append(PS.jump_sprint)

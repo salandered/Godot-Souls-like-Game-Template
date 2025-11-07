@@ -123,7 +123,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 					_reason += "dist < COMBAT_RAD"
 					if not me.angry_raised:
 						_next_state = ra.spick_weighted({
-							PHES.Leaf.combat_idle: 0.4 if not me.angry_raised else 0.0,
+							PHES.Leaf.combat_idle: fvalue_angry(0.4, 0.0),
 							PHES.Leaf.orbit: 0.6})
 				else:
 					_reason += "pursue while we can"

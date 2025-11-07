@@ -121,12 +121,12 @@ func is_switch_from_unsupported_action() -> bool:
 
 # endregion
 
-func __log_decision_data(input_, additional_checks: String, next_action_name: String):
+func __log_decision_data(input_, next_action_name: String, ...additional_checks: Array):
 	var _curr_motion_type := get_curr_action().motion_type
 	print_.lsm_beh_ch(behavior_name,
 		_curr_motion_type,
 		is_moving(input_),
 		is_reverse_moving(input_),
 		is_pure_reverse_moving(input_),
-		additional_checks,
+		pp.list_(additional_checks),
 		next_action_name)

@@ -46,8 +46,7 @@ func initialise() -> void:
 
 
 func _get_curr_direction_speed() -> float:
-	var _add := 0.0 if not me.angry_raised else 2.0
-	return curr_direction.get_curr_speed() + _add
+	return curr_direction.get_curr_speed() + fvalue_angry(0.0, 2.0)
 
 
 func on_enter_state() -> void:

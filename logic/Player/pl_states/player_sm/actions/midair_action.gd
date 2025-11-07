@@ -16,7 +16,7 @@ func on_enter_action(input_: InputPackage) -> void:
 		#    being less controllable, and jumps from standing position being more volatile.
 	jump_direction = Vector3(get_player().basis.z) * clamp(pm().get_curr_velocity_len(), 1.0, Constants.BIG_MEANINGLESS_NUMBER)
 	jump_direction.y = 0
-	__log_action_ent("Starting vel:", pm().get_curr_velocity_len(), "jump_direction", jump_direction)
+	__log_ent("Starting vel:", pm().get_curr_velocity_len(), "jump_direction", jump_direction)
 
 
 func update(input_: InputPackage, delta: float) -> void:

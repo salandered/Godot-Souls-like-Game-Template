@@ -28,7 +28,6 @@ const ACTION_ANIM_B := false
 
 # PLAYER LSM
 const LSM_BEH_B := false
-const LSM_ACTION_STRAFE_B := false
 const LSM_ACTION_B := false
 
 # PL SYSTEMS
@@ -138,7 +137,7 @@ static func skm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 static var LSM_BEH_CH := PrintData.PrintInstance.new(LSM_BEH_B, "choose act ❔", 4, lsm_beh)
 static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LSM_BEH_B, "Behavior", 4, lsm)
-static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LSM_ACTION_STRAFE_B, "Strafe", 6, lsm_action)
+static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LSM_ACTION_B, "Strafe", 6, lsm_action)
 static var LSM_ACTION := PrintData.PrintInstance.new(LSM_ACTION_B, "Action", 6, lsm)
 static var LSM_PRINT := PrintData.PrintInstance.new(LSM_BEH_B, "LSM", 3, prefix)
 

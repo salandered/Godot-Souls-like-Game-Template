@@ -23,7 +23,7 @@ var curr_dodge_dir: DodgeDirection
 # todo: trace several dodges in a row
 var second_dodge: bool = false
 
-var upper_body_mask: PackedInt32Array
+var upper_body_mask: Array[int]
 
 func initialise() -> void:
 	curr_dodge_dir = DodgeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_R, ANIM_F, SPEED_L, ANIM_B)
@@ -33,6 +33,7 @@ func initialise() -> void:
 
 	default_sp.ANGULAR_SPEED = 1
 	upper_body_mask = BoneMask.get_upper_body(true)
+
 
 func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
 	var _anim_start := actual_anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.0)
@@ -72,15 +73,15 @@ func on_enter_action(input_: InputPackage) -> void:
 			END_SPEED = 3.5
 		PS.Act.dodge:
 			second_dodge = true
-			__log_action_ent(em.pin, "second_dodge raised!")
+			__log_ent(em.pin, "second_dodge raised!")
 
 	if second_dodge:
-		PEAK_SPEED -= 2
-		END_SPEED -= 0.4
+		PEAK_SPEED -= 1
+		END_SPEED -= 0.3
 
 	speed_x_interpolator.initialise(_inherited_speed, END_SPEED, PEAK_SPEED, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
 	
-	__log_action_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
+	__log_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
 		"from strafe", Direction.name_(_original_dir),
 		"calc_anim_dur", _anim_effective_dur)
 
@@ -116,18 +117,18 @@ func animate(): # ▶️
 		elif curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.LEFT:
 			anim_id_to_overlay = A.dodge.dodge_L_head
 		else:
-			__log_action_upd("~~~~Unexpected direction:", curr_dodge_dir.pp_curr_dir())
+			__log_upd("~~~~Unexpected direction:", curr_dodge_dir.pp_curr_dir())
 			anim_id_to_overlay = A.dodge.dodge_R_head # fallback
 		# experimental but cool
 		var _overlay_config := OverlayConfig.new(
 			OverlayConfig.Weight.new(__weight),
-			OverlayConfig.Blend.new(0.1, 0.15),
+			OverlayConfig.Blend.new(0.1, 0.15, 0.2),
 			__sp_scale,
 			upper_body_mask)
 		get_animator_manager().set_overlay_anim(anim_id_to_overlay, _overlay_config)
 
 
-var __weight := 0.5
+var __weight := 0.8
 var __sp_scale := 1.2
 
 # func _input(event):

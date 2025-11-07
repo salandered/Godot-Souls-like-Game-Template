@@ -108,10 +108,6 @@ func _physics_process(delta):
 	player.dev_labels._label_phe_enemy_info(self)
 
 
-func apply_hit(hit_data: HitData) -> void:
-	combat.apply_hit(hit_data)
-
-
 ## todo: here with apply_hit and react_on_hit we go back and forth
 ##       should be simplified 
 func react_on_hit(hit_data: HitData) -> void:

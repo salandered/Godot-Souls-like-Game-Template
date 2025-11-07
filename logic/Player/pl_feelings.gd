@@ -33,7 +33,7 @@ func is_player() -> bool:
 
 
 func get_max_health() -> float:
-	return 60
+	return 120
 
 func pay_state_cost(amount: float):
 	_change_stamina(-amount)

@@ -19,7 +19,7 @@ class_name BaseWeapon
 ## assigned by specific implementation
 var weapon_hurt_box: WeaponHurtBox
 var weapon_visuals: MeshInstance3D = null
-var weapon_name: String = "no_weapon_name_needs_fix"
+var weapon_name: String = "no_weapon_name_please_add"
 
 ## To get a hit only once per attack.
 ## Hitbox A on contact: 
@@ -73,7 +73,6 @@ func reset_hit_data():
 ## CONTACT HITBOX LIST MANAGEMENT
 # region
 
-
 func is_in_contact_hitbox_list(hitbox: Hitbox_) -> bool:
 	return hitbox in _contact_hitbox_list
 
@@ -90,7 +89,6 @@ func reset_contact_hitbox_list() -> void:
 	__log_("Reset contact HitB list from", pp.in_q(_contact_hitbox_list))
 	_contact_hitbox_list = []
 
-
 # endregion
 
 
@@ -102,8 +100,8 @@ func __pp_holder() -> String:
 
 
 func _to_string() -> String:
-	return "wepName '%s' Holder '%s' ContactHiBList '%s' isAttack '%s' HitData '%s'" \
-		% [weapon_name, holder.name, pp.list_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
+	return "ID '%s' wepName '%s' Holder '%s' ContactHiBList '%s' isAttack '%s' HitData '%s'" \
+		% [str(get_instance_id()), weapon_name, holder.name, pp.list_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
 
 
 func __log_(...parts: Array):

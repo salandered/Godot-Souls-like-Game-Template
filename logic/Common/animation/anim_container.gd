@@ -12,14 +12,14 @@ var _anim_by_id := {}
 
 ## MAIN INTERFACE
 func get_by_anim_id(anim_id: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_id, anim_id, "AnimationContainer.get_by_anim_id", Fallback.WARN)
+	return u.safe_get_dict_key(_anim_by_id, anim_id, null, "AnimationContainer.get_by_anim_id", Fallback.WARN)
 
 
 ## native_player - player's player, se's player, etc
 func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefix: String, param_tracks: Array[String]) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
-		if not native_player.has_animation(anim.anim_id):
+		if not ua.assert_has_animation(native_player, anim.anim_id, false):
 			continue
 
 		var native_anim: Animation = native_player.get_animation(anim.anim_id)

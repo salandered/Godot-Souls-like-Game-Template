@@ -17,11 +17,6 @@ const phase_switch := _lib._legacy + "phase_switch"
 const phase_switch_loop := _lib._legacy + "phase_switch_loop"
 
 
-class react:
-	const react_from_L := _lib._axe_pl + "react large from left"
-	const react_from_R := _lib._axe_pl + "react large from right"
-	const react_gut := _lib._axe_pl + "react large gut"
-
 
 class loco:
 	## dodge
@@ -59,6 +54,12 @@ class attack:
 	
 	const sword_slide := _lib._not_axe + "ADD great sword slide attack"
 
+
+class react:
+	const react_from_L := _lib._axe_pl + "react large from left"
+	const react_from_R := _lib._axe_pl + "react large from right"
+	const react_gut := _lib._axe_pl + "react large gut"
+	const body_impact := _lib._some_from_pl + "C-body-impact"
 
 var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(sleep),
