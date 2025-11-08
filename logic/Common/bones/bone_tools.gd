@@ -22,6 +22,16 @@ static func calculate_bone_idx_to_track(skeleton: Skeleton3D) -> Dictionary: # {
 
 	return result
 
+static func calculate_root_track(skeleton: Skeleton3D) -> Dictionary: # {int: String}
+	var result = {}
+
+	var full_body := BoneMask.get_full_body_with_root()
+
+	for bone_idx in full_body:
+		result[bone_idx] = Constants.BONE_TRACK_PREFIX + skeleton.get_bone_name(bone_idx)
+
+	return result
+
 
 static func calculate_bone_pose_for_anim_playback(
 		bone_idx: int,

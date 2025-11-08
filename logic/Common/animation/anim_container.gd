@@ -12,7 +12,7 @@ var _anim_by_id := {}
 
 ## MAIN INTERFACE
 func get_by_anim_id(anim_id: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_id, anim_id, null, "AnimationContainer.get_by_anim_id", Fallback.WARN)
+	return u.safe_get_dict_key(_anim_by_id, anim_id, null, Fallback.WARN, "AnimationContainer.get_by_anim_id")
 
 
 ## native_player - player's player, se's player, etc

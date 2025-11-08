@@ -5,7 +5,7 @@ extends BasePlayerState
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if curr_state_action.passed_marker(Marker.Name_.JUMP_START_END):
+	if curr_state_action.passed_marker(MarkerName.JUMP_START_END):
 		if area_awareness.floor_dist_under_extreme_landing_height():
 			__log_psm_check("passed_marker JUMP_START_END and floor_dist_under_extreme_landing_height", "=> landing_sprint")
 			return PLVerdict.new(PS.landing_sprint)

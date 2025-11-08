@@ -18,15 +18,14 @@ var ANIM_FAST_ANGRY := PHEA.loco.combat_run_forward
 var ANIM_SLOW := PHEA.loco.walk_forward
 var ANIM_SLOW_ANGRY := PHEA.loco.combat_walk_forward
 
-class ModeName:
-	const FAST = "fast"
-	const SLOW = "slow"
+const FAST = "fast"
+const SLOW = "slow"
 
-var _fast_preset := ActionModeSwitcher.Preset.new(ModeName.FAST, 5.0, ANIM_FAST)
-var _slow_preset := ActionModeSwitcher.Preset.new(ModeName.SLOW, 1.7, ANIM_SLOW)
+var _fast_preset := ActionModeSwitcher.Preset.new(FAST, 5.0, ANIM_FAST)
+var _slow_preset := ActionModeSwitcher.Preset.new(SLOW, 1.7, ANIM_SLOW)
 
-var _fast_angry_preset := ActionModeSwitcher.Preset.new(ModeName.FAST, 5.0 + 6.0, ANIM_FAST_ANGRY)
-var _slow_angry_preset := ActionModeSwitcher.Preset.new(ModeName.SLOW, 1.7 + 0.4, ANIM_SLOW_ANGRY)
+var _fast_angry_preset := ActionModeSwitcher.Preset.new(FAST, 5.0 + 6.0, ANIM_FAST_ANGRY)
+var _slow_angry_preset := ActionModeSwitcher.Preset.new(SLOW, 1.7 + 0.4, ANIM_SLOW_ANGRY)
 
 
 var curr_mode: ActionModeSwitcher
@@ -52,16 +51,16 @@ func _decide_on_mode_on_enter():
 	var _reason: String = ""
 	if not me.angry_raised:
 		if dist >= config.REAL_FAR():
-			curr_mode.set_mode(ModeName.FAST)
+			curr_mode.set_mode(FAST)
 			_reason += "dist > REAL_FAR"
 		else:
 			_reason += "dist < REAL_FAR"
-			curr_mode.set_mode(ModeName.SLOW)
+			curr_mode.set_mode(SLOW)
 	else:
 		if dist >= config.COMBAT_RAD() - 0.2:
-			curr_mode.set_mode(ModeName.FAST)
+			curr_mode.set_mode(FAST)
 		else:
-			curr_mode.set_mode(ModeName.SLOW)
+			curr_mode.set_mode(SLOW)
 
 	__log_decide_on_mode(true, "-x-", _reason)
 
@@ -71,14 +70,14 @@ func _update_mode() -> bool:
 	var _reason: String = ""
 	var _old_mode_name := curr_mode.get_curr_mode_name()
 	match _old_mode_name:
-		ModeName.FAST:
+		FAST:
 			if distance_to_player() < config.CLOSE_TO_ORBIT() - fvalue_angry(0.0, 3.0):
 				_reason += "dist < CLOSE_TO_ORBIT"
-				curr_mode.set_mode(svalue_angry(ModeName.SLOW, ModeName.FAST))
-		ModeName.SLOW:
+				curr_mode.set_mode(svalue_angry(SLOW, FAST))
+		SLOW:
 			if distance_to_player() >= config.REAL_FAR() - fvalue_angry(0.0, 3.0):
 				_reason += "dist > REAL_FAR"
-				curr_mode.set_mode(ModeName.FAST)
+				curr_mode.set_mode(FAST)
 
 	if _old_mode_name != curr_mode.get_curr_mode_name():
 		__log_decide_on_mode(false, _old_mode_name, _reason)
@@ -109,7 +108,7 @@ func on_exit_state() -> void:
 func update(delta: float) -> void:
 	var ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var CURR_SPEED := curr_mode.get_curr_speed()
-	var __initial_speed := CURR_SPEED
+	# var __initial_speed := CURR_SPEED
 	
 	if _update_mode():
 		_on_mode_switch()
@@ -117,10 +116,10 @@ func update(delta: float) -> void:
 	ANGULAR_SPEED = angular_sp.update(delta)
 	if speed_from_inherited.is_in_progress():
 		CURR_SPEED = speed_from_inherited.update(delta)
-	var __speed_after_inherited := CURR_SPEED
+	# var __speed_after_inherited := CURR_SPEED
 	if speed_from_mode_change.is_in_progress():
 		CURR_SPEED = speed_from_mode_change.update(delta)
-	var __speed_after_mode_change := CURR_SPEED
+	# var __speed_after_mode_change := CURR_SPEED
 
 	var speed_config := SpeedConfig.new(default_sp, 1.0, CURR_SPEED, ANGULAR_SPEED)
 	e_movement.move_rotate_towards_player(delta, speed_config)

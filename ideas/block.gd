@@ -13,7 +13,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 # Overrides react_on_hit to handle blocking via stamina (and cuts regen while shielded)
 func react_on_hit(hit: HitData):
 	# get horizontal hit direction relative to player facing
-	var weapon_position := hit.weapon.global_position
+	var weapon_position := hit.weapon_name.global_position
 	var our_position := get_player().global_position
 	our_position.y = weapon_position.y # ignore vertical difference
 	var hit_direction := our_position.direction_to(weapon_position)

@@ -1,4 +1,4 @@
-var _to_run_attack_timer: DelayTimer = DelayTimer.new()
+var _to_run_attack_timer: SimpleTimer = SimpleTimer.new()
 const MOVE_ATTACK_THRESHOLD: float = 0.1
 const RUN_ATTACK_CONFIRM_DELAY: float = 0.2
 

@@ -6,13 +6,13 @@ class _lib:
 	const _legacy = "legacy" + "/"
 	const _axe_all = "axe" + "/"
 	const _axe_pl = "axe-from-player" + "/"
-	const _not_axe = "BG-not-axe" + "/"
+	const _bg_not_axe = "BG-not-axe" + "/"
 	const _some_from_pl = "some-from-pl" + "/"
 
 
-const sleep := _lib._not_axe + "sleep"
-const awaken := _lib._not_axe + "awakening"
-const death := _lib._not_axe + "death"
+const sleep := _lib._bg_not_axe + "sleep"
+const awaken := _lib._bg_not_axe + "awakening"
+const death := _lib._bg_not_axe + "ss death"
 const phase_switch := _lib._legacy + "phase_switch"
 const phase_switch_loop := _lib._legacy + "phase_switch_loop"
 
@@ -38,8 +38,8 @@ class loco:
 	const jump_towards := _lib._some_from_pl + "LL-jump-running"
 
 class attack:
-	const scare_off := _lib._not_axe + "scare-off" # OR axe scare off
-	const gap_closer := _lib._not_axe + "ADD great sword jump attack"
+	const scare_off := _lib._bg_not_axe + "scare-off" # OR axe scare off
+	# const gap_closer := _lib._bg_not_axe + "ADD great sword jump attack"
 	const power_gap_closer := _lib._axe_all + "RM gap closer" # OR wo attack: unarmed jump running
 	## too high but one is ok
 	const attack_360_high := _lib._axe_all + "at 360 finite"
@@ -48,11 +48,11 @@ class attack:
 	const attack_up := _lib._axe_all + "at low up finite"
 	const attack_down := _lib._axe_all + "at downward finite"
 	
-	const club_part_1 := _lib._not_axe + "ADD One Hand Club Combo part 1B"
-	const club_part_2 := _lib._not_axe + "ADD One Hand Club Combo part2"
-	const club_part_3_4 := _lib._not_axe + "ADD One Hand Club Combo part3"
+	const club_part_1 := _lib._bg_not_axe + "ADD One Hand Club Combo part 1B"
+	const club_part_2 := _lib._bg_not_axe + "ADD One Hand Club Combo part2"
+	const club_part_3_4 := _lib._bg_not_axe + "ADD One Hand Club Combo part3"
 	
-	const sword_slide := _lib._not_axe + "ADD great sword slide attack"
+	const sword_slide := _lib._bg_not_axe + "ADD great sword slide attack"
 
 
 class react:
@@ -60,6 +60,25 @@ class react:
 	const react_from_R := _lib._axe_pl + "react large from right"
 	const react_gut := _lib._axe_pl + "react large gut"
 	const body_impact := _lib._some_from_pl + "C-body-impact"
+
+
+# class fall_stand_up:
+# 	const d_slip_b := _lib._fall_stand_up + "D slip B"
+# 	const stand_up_to_r_rm := _lib._fall_stand_up + "Stand Up to R RM"
+# 	const cool_stand_up := _lib._fall_stand_up + "cool stand-up"
+# 	const cool_stand_up_rm := _lib._fall_stand_up + "cool stand-up RM"
+# 	const fall_b_funny_rm := _lib._fall_stand_up + "fall B funny RM"
+# 	const fall_b_w_roll_rm_y := _lib._fall_stand_up + "fall B w roll RM y"
+# 	const fall_b_w_roll_rm_yx_jic := _lib._fall_stand_up + "fall B w roll RM yx (jic)"
+# 	const hit_push_b_rm := _lib._fall_stand_up + "hit push B rm"
+# 	const slip_fall_f_rm_xy := _lib._fall_stand_up + "slip fall F RM xy"
+# 	const slip_fall_f_rm_y := _lib._fall_stand_up + "slip fall F RM y"
+# 	const stand_up_vertical_adj := _lib._fall_stand_up + "stand up (vertical adj)"
+# 	const stand_up_hstrange := _lib._fall_stand_up + "stand up Hstrange"
+# 	const stand_up_simple := _lib._fall_stand_up + "stand up simple"
+# 	const thrown_l_rm := _lib._fall_stand_up + "thrown L RM"
+# 	const thrown_r_rm := _lib._fall_stand_up + "thrown R RM"
+
 
 var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(sleep),
@@ -90,7 +109,7 @@ var list_of_animations: Array[AnimationData] = [
 	## attacks
 	AnimationData.new(attack.scare_off, 1.1),
 	AnimationData.new(attack.power_gap_closer),
-	AnimationData.new(attack.gap_closer),
+	# AnimationData.new(attack.gap_closer),
 	AnimationData.new(attack.attack_360_high),
 	AnimationData.new(attack.attack_360_low),
 	AnimationData.new(attack.attack_up),

@@ -9,10 +9,6 @@ class_name AreaAwareness
 @onready var player: Princess = $"../.."
 
 
-var last_pushback_vector: Vector3 # todo: what
-
-# var locked_target: Node3D
-
 enum LockState {
 		ALL_UNLOCKED, # strafe cant be locked while camera unlocked => 3 states, not 4
 		CAMERA_LOCKED_MOVE_UNLOCKED,

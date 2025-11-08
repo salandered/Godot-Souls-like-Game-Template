@@ -10,10 +10,13 @@ var anim_params_container: AnimParamsContainer
 
 var action_name: String
 
+## auto used for all actions
+var blend_time = ActionData.BlendTime.new(0.2)
+var start_time_offset = ActionData.StartTimeOffset.new(0.0)
 
-var blend_time = ActionData.BlendTime.new()
-var start_time_offset = ActionData.StartTimeOffset.new()
-
+## manually used by RM actions 
+var extra_root_speed_Z = ActionData.ExtraRootSpeedZ.new(0.0)
+var extra_root_speed_fade_time = ActionData.ExtraRootSpeedFadeTime.new(0.4)
 
 # 
 var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
@@ -117,12 +120,12 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 # region: REACT
 
 
-func react_on_hit(hit: HitData):
+func _react_on_hit(hit: HitData):
 	print_.fight(action_name, "react_on_hit called")
 	if is_vulnerable():
 		feelings.lose_health(hit.damage)
 	
-	var react_cfg = ReactUtils.calculate_reaction_for_player(hit, action_name)
+	var react_cfg = ReactUtils.calculate_reaction_for_pl_action(hit, action_name)
 	if not react_cfg:
 		__log_upd("state mutes react_on_hit, ignoring")
 		return
@@ -134,14 +137,42 @@ func react_on_hit(hit: HitData):
 
 	var overlay_config = OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
-		OverlayConfig.Blend.new(),
+		BlendConfig.new(),
 		1.0,
 		actual_bone_mask)
 
 	set_overlay_anim_to_play(react_cfg.anim_id, overlay_config)
 
+	react_on_hit(hit)
+
+
+## may be overriden in actions
+func react_on_hit(hit):
+	pass
 
 # endregion
+
+
+# todo: we can auto calculate this using MotionType
+const IDLE_LIKE_ACTIONS = [
+	Leg.Act.idle,
+	PS.Act.axe_slice_1,
+	PS.Act.axe_slice_2,
+	PS.Act.sword_slash_1,
+	PS.Act.sword_slash_2,
+	PS.Act.attack_from_run,
+	PS.Act.attack_from_dodge,
+	PS.Act.dodge,
+	PS.Act.pushback,
+	PS.Act.thrown,
+]
+
+const LOOP_LIKE_ACTIONS = [
+	Leg.Act.run,
+	Leg.Act.sprint,
+	Leg.Act.strafe,
+	PS.Act.midair,
+]
 
 
 # region: SPECIFIC TIME MANAGEMENT (TM)
@@ -194,6 +225,21 @@ func weapon_hurts(__log: bool = false) -> bool:
 
 func tracks_input_vector() -> bool:
 	return anim_params_container.is_tracks_input_vector(anim.native_anim, effective_time_spent())
+
+# endregion
+
+
+# region: HELPERS
+
+## if no _speed_extra_X specified, will be 0.0 (ignored)
+func calculate_extra_root_speed(_speed_extra_Z: float, _speed_extra_X: float = 0.0) -> Vector3:
+	var _start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	var _final_extra_speed_Z = pm().calculate_extra_root_speed_Z(anim, _start_time_offset, _speed_extra_Z, true)
+	var _final_extra_speed_X = _speed_extra_X
+	var result = Vector3(_final_extra_speed_X, 0, _final_extra_speed_Z)
+
+	__log_ent("extra root speed Z/X", _final_extra_speed_Z, _final_extra_speed_X)
+	return result
 
 # endregion
 

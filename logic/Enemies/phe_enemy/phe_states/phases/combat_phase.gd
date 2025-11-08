@@ -123,7 +123,7 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("t2"):
+	if event.is_action_pressed(RawAction.t2):
 		if not me.angry_raised:
 			# me.angry_raised = true will be raised by state flow
 			phe_feelings._set_specific_health(phe_feelings.get_max_health() * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD - 1)

@@ -219,17 +219,26 @@ func apply_local_velocity_as_global(local_velocity: Vector3):
 	_player.velocity = _player.get_quaternion() * local_velocity
 
 
-func move_with_root(delta: float, extra_vel: Vector3 = Vector3.ZERO, y_zeroed: bool = true, use_blending: bool = false) -> void:
+## by default only Y is muted.
+## use_blending is not tested
+func move_with_root(delta: float, extra_vel: Vector3 = Vector3.ZERO, y_zeroed: bool = true, x_zeroed: bool = false, z_zeroed: bool = false, use_blending: bool = false) -> void:
+	# animator already handles the 'y_zeroed' part
 	var root_vel := animator_manager.get_root_velocity(y_zeroed, use_blending)
+	
+	if x_zeroed:
+		root_vel.x = 0.0
+	if z_zeroed:
+		root_vel.z = 0.0
+	
 	var final_local_vel := root_vel + extra_vel
 	apply_local_velocity_as_global(final_local_vel)
-	
+
 
 func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary:
 	var remaining_angle := target_angle_ - accum_rot_
 	var _log_msg: String = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rot_delta)
 
-	if check_counter_rot: # do we need this at all if animation s good?
+	if check_counter_rot: # do we need this at all if animation is good?
 		var is_counter_rotating := (rot_delta < 0 and remaining_angle > 0) or \
 								  (rot_delta > 0 and remaining_angle < 0)
 		if is_counter_rotating:
@@ -246,6 +255,14 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 		# prints(u.fr(), "applied", _log_msg)
 		return {"completed": false, "accum_rot": new_rotation}
 
+
+## Z means forward
+func calculate_extra_root_speed_Z(anim: AnimationData, _start_time_offset: float, extra_speed_z: float, __log: bool = false) -> float:
+	var _inherited_speed := get_curr_velocity_len()
+	var root_start_speed := animator_manager.calculate_animation_start_root_velocity(anim, _start_time_offset, true)
+	var _r = max(0.0, _inherited_speed - root_start_speed + extra_speed_z)
+	if __log: __log_("inheritedSp", _inherited_speed, " rootStartSp", root_start_speed, " extraSp Z", _r)
+	return _r
 
 # endregion
 
@@ -381,4 +398,7 @@ func __pp_vel_xz_len() -> String:
 func __pp_vel() -> String:
 	return pp.s("vel.y / gl_pos.y / vel.xz.len", __pp_vel_y(), __pp_gl_pos_y(), __pp_vel_xz_len())
 
+
+func __log_(...parts: Array):
+	print_.psm("Pl Movement", pp.list_(parts))
 # endregion

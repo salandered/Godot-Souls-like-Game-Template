@@ -17,7 +17,7 @@ var opposite_dir_change := StrafeDirChange.new()
 var speed_from_inherited := FloatLinearInterpolator.new()
 var speed_mult_from_idle := EaseCurveInterpolator.new()
 var angular_accel := FloatLinearInterpolator.new()
-var _one_dir_timer: DelayTimer = DelayTimer.new()
+var _one_dir_timer: SimpleTimer = SimpleTimer.new()
 
 var _resettable := [
 	opposite_dir_change,

@@ -20,7 +20,6 @@ class_name PlayerModel
 
 var active_weapon: BaseWeapon
 
-
 func _ready() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	container.player = _player
@@ -52,7 +51,9 @@ func update(input_: InputPackage, delta: float):
 
 	player_sm.update(input_, delta)
 	_player.move_and_slide()
-	
+
+
+
 
 # region: DEV ONLY
 
@@ -104,15 +105,21 @@ func _reload_run_anims_from_library() -> void:
 @onready var visuals: PlayerVisuals = $"../Visuals"
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("dev_fly_mode"):
+	if Input.is_action_just_pressed(RawAction.DEV_H):
+		_player.react_on_hit(HitData.new(10, "from god", PHEA.attack.scare_off))
+	if Input.is_action_just_pressed(RawAction.DEV_J):
+		_player.react_on_hit(HitData.new(10, "from god", PHEA.attack.sword_slide))
+
+
+	if Input.is_action_just_pressed(RawAction.DEV_fly_mode):
 		__toggle_fly_mode()
 
-	if event.is_action_released("dev_speed_up"):
+	if event.is_action_released(RawAction.DEV_speed_up):
 		fly_speed += 5
-	if event.is_action_released("dev_speed_down"):
+	if event.is_action_released(RawAction.DEV_speed_down):
 		fly_speed -= 5
 	
-	if event.is_action_released("t8"):
+	if event.is_action_released(RawAction.t8):
 		visuals.visible = not visuals.visible
 	# if event.is_action_pressed("dev_change_run_anim"):
 	# 	_run_anim_i = (_run_anim_i + 1) % run_anims.size()
@@ -121,25 +128,25 @@ func _input(event: InputEvent) -> void:
 	# 	_run_anim_i = (_run_anim_i - 1 + run_anims.size()) % run_anims.size()
 	# 	__apply()
 	
-	if event.is_action_pressed("dev_8"):
+	if event.is_action_pressed(RawAction.DEV_8):
 		# animator_manager.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.react.hit_reaction,
+		animator_manager.set_overlay_anim(A.react.react_from_L,
 		OverlayConfig.new(
-			OverlayConfig.Weight.new(0.5),
-			OverlayConfig.Blend.new(0.12, 0.18),
+			OverlayConfig.Weight.new(0.8, 0.4),
+			BlendConfig.new(),
 			1.0,
-			[]
+			BoneMask.get_upper_body_with_hips()
 			))
 		# animator_manager.play_overlay(A.hit_reaction, 0, -1, 0, 1)
 		# animator_manager.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
-	if event.is_action_pressed("dev_9"):
+	if event.is_action_pressed(RawAction.DEV_9):
 		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
-		animator_manager.set_overlay_anim(A.react.hit_reaction,
+		animator_manager.set_overlay_anim(A.react.react_from_R,
 				OverlayConfig.new(
-			OverlayConfig.Weight.new(1.0),
-			OverlayConfig.Blend.new(0.2, 0.2),
+			OverlayConfig.Weight.new(1.0, 0.4),
+			BlendConfig.new(),
 			1.0,
-			[]
+			BoneMask.get_upper_body_with_hips()
 		))
 		# animator_manager.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 

@@ -181,11 +181,11 @@ func __log_feel_check_stamina(prefix, amount, decision, ...context: Array):
 # region: DEV
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("t1"):
+	if event.is_action_pressed(RawAction.t1):
 		add_health(10)
 		add_stamina(15)
 
-	if event.is_action_pressed("t2"):
+	if event.is_action_pressed(RawAction.t2):
 		lose_health(10)
 		lose_stamina(15)
 

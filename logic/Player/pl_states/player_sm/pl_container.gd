@@ -38,11 +38,8 @@ var _legs_behaviors: Dictionary # { string : LegsBehavior }
 var _leg_actions: Dictionary # { Node name : LegsAction }
 
 
+## not nullable
 func state_by_name(state_name: String) -> BasePlayerState:
-	# if not _states.has(state_name):
-	# 	print_.dev("ERROR =PSContainer=", "state_by_name: " + state_name + " not found")
-	# 	push_error("ERROR =PSContainer= state_by_name: " + state_name + " not found")
-	# 	return _states[PS.run]
 	assert(_states.has(state_name), "_states dict doesn't have " + pp.in_q(state_name))
 	return _states[state_name]
 

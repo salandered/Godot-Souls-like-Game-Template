@@ -3,7 +3,7 @@ extends LegsBehavior
 const IDLE_COMMIT := 0.12 # seconds
 var TO_STOP_DELAY: float = 0.2
 
-var _non_moving_timer: DelayTimer = DelayTimer.new()
+var _non_moving_timer: SimpleTimer = SimpleTimer.new()
 
 
 # func _ready():

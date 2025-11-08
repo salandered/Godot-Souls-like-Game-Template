@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event):
-	if event.is_action_released("kp_7"):
+	if event.is_action_released(RawAction.DEV_KP7):
 		_visible = not _visible
 		for l: Label in all_labels:
 			l.visible = _visible

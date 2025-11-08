@@ -131,7 +131,7 @@ func on_exit_state() -> void:
 	current_attack_number = -1
 	curr_series_number = -1
 
-var _series_forgotten := DelayTimer.new()
+var _series_forgotten := SimpleTimer.new()
 
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
 	var current_substate_casted: BasePHELeaf = current_substate # safe, see get_supported_substates

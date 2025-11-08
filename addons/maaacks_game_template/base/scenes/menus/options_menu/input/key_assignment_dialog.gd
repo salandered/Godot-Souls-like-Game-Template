@@ -1,23 +1,23 @@
 extends ConfirmationDialog
 
-const LISTENING_TEXT : String = "Listening for input..."
-const FOCUS_HERE_TEXT : String = "Focus here to assign inputs."
-const CONFIRM_INPUT_TEXT : String = "Press again to confirm..."
-const NO_INPUT_TEXT : String = "None"
+const LISTENING_TEXT: String = "Listening for input..."
+const FOCUS_HERE_TEXT: String = "Focus here to assign inputs."
+const CONFIRM_INPUT_TEXT: String = "Press again to confirm..."
+const NO_INPUT_TEXT: String = "None"
 
 enum InputConfirmation {
 	SINGLE,
 	DOUBLE,
 	OK_BUTTON
 }
-@export var input_confirmation : InputConfirmation = InputConfirmation.SINGLE
+@export var input_confirmation: InputConfirmation = InputConfirmation.SINGLE
 
-var last_input_event : InputEvent
-var last_input_text : String
-var listening : bool = false
-var confirming : bool = false
+var last_input_event: InputEvent
+var last_input_text: String
+var listening: bool = false
+var confirming: bool = false
 
-func _record_input_event(event : InputEvent) -> void:
+func _record_input_event(event: InputEvent) -> void:
 	last_input_text = InputEventHelper.get_text(event)
 	if last_input_text.is_empty():
 		return
@@ -25,7 +25,7 @@ func _record_input_event(event : InputEvent) -> void:
 	%InputLabel.text = last_input_text
 	get_ok_button().disabled = false
 
-func _is_recordable_input(event : InputEvent) -> bool:
+func _is_recordable_input(event: InputEvent) -> bool:
 	return event != null and \
 		(event is InputEventKey or \
 		event is InputEventMouseButton or \
@@ -37,7 +37,7 @@ func _is_recordable_input(event : InputEvent) -> bool:
 func _start_listening() -> void:
 	%InputTextEdit.placeholder_text = LISTENING_TEXT
 	listening = true
-	%DelayTimer.start()
+	%SimpleTimer.start()
 
 func _stop_listening() -> void:
 	%InputTextEdit.placeholder_text = FOCUS_HERE_TEXT
@@ -57,26 +57,26 @@ func _ready() -> void:
 	get_ok_button().focus_neighbor_top = ^"../../%InputTextEdit"
 	get_cancel_button().focus_neighbor_top = ^"../../%InputTextEdit"
 
-func _input_matches_last(event : InputEvent) -> bool:
+func _input_matches_last(event: InputEvent) -> bool:
 	return last_input_text == InputEventHelper.get_text(event)
 
-func _is_mouse_input(event : InputEvent) -> bool:
+func _is_mouse_input(event: InputEvent) -> bool:
 	return event is InputEventMouse
 
-func _input_confirms_choice(event : InputEvent) -> bool:
+func _input_confirms_choice(event: InputEvent) -> bool:
 	return confirming and not _is_mouse_input(event) and _input_matches_last(event)
 
-func _should_process_input_event(event : InputEvent) -> bool:
-	return listening and _is_recordable_input(event) and %DelayTimer.is_stopped()
+func _should_process_input_event(event: InputEvent) -> bool:
+	return listening and _is_recordable_input(event) and %SimpleTimer.is_stopped()
 
-func _should_confirm_input_event(event : InputEvent) -> bool:
+func _should_confirm_input_event(event: InputEvent) -> bool:
 	return not _is_mouse_input(event)
 
 func _confirm_choice() -> void:
 	confirmed.emit()
 	hide()
 
-func _process_input_event(event : InputEvent) -> void:
+func _process_input_event(event: InputEvent) -> void:
 	if not _should_process_input_event(event):
 		return
 	if _input_confirms_choice(event):
@@ -91,7 +91,7 @@ func _process_input_event(event : InputEvent) -> void:
 		_confirm_choice()
 	if _should_confirm_input_event(event):
 		confirming = true
-		%DelayTimer.start()
+		%SimpleTimer.start()
 		%InputTextEdit.placeholder_text = CONFIRM_INPUT_TEXT
 
 func _on_input_text_edit_gui_input(event) -> void:

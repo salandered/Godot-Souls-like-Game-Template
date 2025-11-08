@@ -4,7 +4,7 @@ class_name BasePHELeaf
 
 var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
 var blend_time := ActionData.BlendTime.new(0.3)
-var start_time_offset := ActionData.StartTimeOffset.new()
+var start_time_offset := ActionData.StartTimeOffset.new(0.0)
 
 var y_offset_adjustment: float
 
@@ -31,8 +31,8 @@ func validate_substate_depth(parent_depth: int) -> bool:
 ## NOTE: for looping anim time_remaining returns big number, so it would be false
 ##		 but still we allow having ALLOWS_SWITCH just in case to hard stop loop
 func is_ended() -> bool:
-	if anim.does_marker_exist(Marker.Name_.ALLOWS_SWITCH) \
-		and passed_marker(Marker.Name_.ALLOWS_SWITCH):
+	if anim.does_marker_exist(MarkerName.ALLOWS_SWITCH) \
+		and passed_marker(MarkerName.ALLOWS_SWITCH):
 			return true
 	elif time_remaining() < TIME_REMAINING_TO_END:
 		return true
@@ -113,7 +113,7 @@ func react_on_hit(hit: HitData):
 
 	var overlay_config = OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
-		OverlayConfig.Blend.new(),
+		BlendConfig.new(),
 		1.0,
 		actual_bone_mask)
 
@@ -152,6 +152,10 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 
 func effective_time_spent() -> float:
 	return ActionTimeManagement.effective_time_spent(get_animator_manager(), self)
+
+
+func effective_time_spent_unscaled() -> float:
+	return ActionTimeManagement.effective_time_spent_unscaled(get_animator_manager(), self)
 
 
 func effective_duration() -> float:
@@ -195,15 +199,16 @@ func before_marker(marker_name: String) -> bool:
 # region: GET ANIMATION PARAMETERS
 
 func is_vulnerable() -> bool:
-	return anim_params_container.is_vulnerable(anim.native_anim, effective_time_spent())
+	return anim_params_container.is_vulnerable(anim.native_anim, effective_time_spent_unscaled())
+	
 
 func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 	var _r: bool = false
 	match weapon_name:
 		WeaponNames.big_pinga_blade:
-			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
+			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent_unscaled())
 		WeaponNames.bg_aura_weapon:
-			_r = anim_params_container.is_aura_hurts(anim.native_anim, effective_time_spent())
+			_r = anim_params_container.is_aura_hurts(anim.native_anim, effective_time_spent_unscaled())
 		_:
 			__log_warn_v2(false, "unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
 	if _r and __log:

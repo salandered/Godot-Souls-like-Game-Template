@@ -26,6 +26,11 @@ class _lib:
 
 	const _bit_of_glue = "bit-of-glue-v1-LIB" + "/"
 	const start_end_v2 = "start-end-v2" + "/"
+	const _fall_stand_up = "fall-stand-up" + "/"
+
+
+## one time
+const death := air.midair # _ss_loco + "C-death-2"
 
 
 # NOTE: usual loco and combat loco are mixed for now
@@ -72,7 +77,6 @@ class air:
 	# const landing_run := _lib.axe_rm_jump + "LL-jump-running_start" # _jump_up_land_HPG + "B-LAND-ss-jump-run-RP" # _OS_loco + "OSl-jump-place-end"
 	const jump_sprint := _lib.jump_v4 + "RM-Run-Jump-all"
 	const landing_sprint := _lib.jump_v4 + "RM-Run-Jump-ver-land"
-	const jump_idle := _lib._bit_of_glue + "A-Idle-Jumping-ver3"
 	# const hard_fall := # _jump_up_land_HPG + "C-fall-HW-hard-land-idle-trim-pin"
 
 class attack:
@@ -88,14 +92,29 @@ class react:
 	const block_reaction := air.midair # _ff + "block_reaction" # _OS_fight + "OS-hit-react" # _ff + "block_reaction"
 	const hit_reaction := _lib._ss_attack + "C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
 	const head_B_large = _lib._ss_attack + "B-head-impact"
-	const from_R = _lib.all_axe + "react large from right"
-	const from_L = _lib.all_axe + "react large from left"
+	const react_from_R = _lib.all_axe + "react large from right"
+	const react_from_L = _lib.all_axe + "react large from left"
 	const react_gut = _lib.all_axe + "react large gut"
 	const dodge_F_hit = _lib.testing + "OS-hit-react-forward"
 	const hit_B_large_rm = _lib.testing + "OS-hit-react-back"
+	const hit_push_b_rm := _lib._fall_stand_up + "hit push B rm"
 
-## one time
-const death := air.midair # _ss_loco + "C-death-2"
+
+class fall_stand_up:
+	const stand_up_to_r_rm := _lib._fall_stand_up + "Stand Up to R RM"
+	const cool_stand_up := _lib._fall_stand_up + "cool stand-up"
+	const cool_stand_up_rm := _lib._fall_stand_up + "cool stand-up RM"
+	const fall_b_funny_rm := _lib._fall_stand_up + "fall B funny RM"
+	const fall_b_w_roll_rm_y := _lib._fall_stand_up + "fall B w roll RM y"
+	const fall_b_w_roll_rm_yx_jic := _lib._fall_stand_up + "fall B w roll RM yx (jic)"
+	const slip_fall_f_rm_y := _lib._fall_stand_up + "slip fall F RM y"
+	const stand_up_vertical_adj := _lib._fall_stand_up + "stand up (vertical adj)"
+	const stand_up_hstrange := _lib._fall_stand_up + "stand up Hstrange"
+	const stand_up_simple := _lib._fall_stand_up + "stand up simple"
+	const thrown_r_rm := _lib._fall_stand_up + "soccer throw R RM"
+	const thrown_l_rm := _lib._fall_stand_up + "soccer throw L RM"
+	const thrown_r_small_rm := _lib._fall_stand_up + "soccer fall R small"
+	const thrown_l_small_rm := _lib._fall_stand_up + "soccer fall L small"
 
 
 # later

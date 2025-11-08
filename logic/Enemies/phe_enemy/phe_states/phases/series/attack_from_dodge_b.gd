@@ -27,7 +27,7 @@ func pick_series_idx() -> int:
 
 
 func condition_to_next_switch(current_substate: BasePHELeaf) -> bool:
-	var allow_switch_marker := Marker.Name_.ALLOWS_SWITCH
+	var allow_switch_marker := MarkerName.ALLOWS_SWITCH
 
 	if current_substate.state_name in all_the_dodges and current_substate.is_ended():
 		return true

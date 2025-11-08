@@ -21,6 +21,8 @@ var current_state: BasePlayerState
 var _current_action: BaseAction
 var _prev_action: BaseAction
 
+var hit_timer: SimpleTimer = SimpleTimer.new()
+var hit_value_influencer: ValueInfluencer = ValueInfluencer.new(0.8, "hit_value_influencer")
 
 func initialise() -> void:
 	var empty_input := InputPackage.new()
@@ -46,6 +48,10 @@ func initialise() -> void:
 
 func get_player() -> Princess:
 	return _player
+
+
+func apply_hit_influence(value: float, target_multiplier: float = -1.0) -> float:
+	return hit_value_influencer.influence_value(value, hit_timer, target_multiplier)
 
 
 # TODO: fast solution. Design proper action (or states) ability to share data.
@@ -103,9 +109,19 @@ func update_current_action(next_action: BaseAction) -> String:
 	return _prev_action.action_name
 
 
+func react_on_hit(hit_data: HitData) -> void:
+	if not current_state:
+		print_.warn(false, "no _curr_state", "player sm", "no hit applied, it's lost", hit_data)
+		return
+	hit_timer.initialise(0.4)
+	current_state.react_on_hit(hit_data)
+
+
 func update(input_: InputPackage, delta: float) -> void:
 	input_ = combat.contextualize(input_, delta)
 	input_ = area_awareness.contextualize(input_)
+
+	hit_timer.update(delta)
 
 	var verdict := current_state._check_transition(input_)
 	verdict._speak_freely()

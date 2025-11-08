@@ -16,6 +16,11 @@ func on_enter_action(input_: InputPackage) -> void:
 		#    being less controllable, and jumps from standing position being more volatile.
 	jump_direction = Vector3(get_player().basis.z) * clamp(pm().get_curr_velocity_len(), 1.0, Constants.BIG_MEANINGLESS_NUMBER)
 	jump_direction.y = 0
+
+	if player_sm.area_awareness.get_floor_distance() > 12.0 and PREV_ACTION in LOOP_LIKE_ACTIONS:
+		blend_time.set_specific(0.6)
+	else:
+		blend_time.reset_to_default()
 	__log_ent("Starting vel:", pm().get_curr_velocity_len(), "jump_direction", jump_direction)
 
 

@@ -14,6 +14,7 @@ class Preset extends RefCounted:
 	func _to_string() -> String:
 		return "Preset[%s, spd:%.1f, anim:%s]" % [mode_name, speed, anim_id]
 
+
 enum MODE_NAME {ONE, TWO}
 
 var _preset_one: Preset
@@ -27,6 +28,7 @@ var _curr_mode: MODE_NAME = MODE_NAME.ONE
 func _init(preset_one: Preset, preset_two: Preset):
 	self._preset_one = preset_one
 	self._preset_two = preset_two
+
 
 func _get_current_preset() -> Preset:
 	if _curr_mode == MODE_NAME.ONE:

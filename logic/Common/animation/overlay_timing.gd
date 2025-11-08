@@ -12,7 +12,7 @@ var hips_weight: float
 func _init(anim_dur_: float, overlay_config: OverlayConfig):
 	self.fade_in = max(overlay_config.get_fade_in(), 0.01)
 	if overlay_config.get_hold() == -1.0:
-		self.hold = anim_dur_ - overlay_config.get_fade_in() - overlay_config.get_fade_out()
+		self.hold = overlay_config._blend.get_calibrated_hold(anim_dur_)
 	else:
 		self.hold = overlay_config.get_hold()
 	self.fade_out = max(overlay_config.get_fade_out(), 0.01)

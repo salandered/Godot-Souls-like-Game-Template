@@ -43,13 +43,13 @@ var target_param_dir := target_dir.path_join("param")
 
 # -> CHECK THIS (can be changed later)
 var PARAM_ANIM_PROPERTIES := [
-	{"name": AnimationData.SWITCHES_TO_QUEUE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.SWITCHES_TO_QUEUE},
-	{"name": AnimationData.ALLOWS_QUEUE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.ALLOWS_QUEUE},
-	# {"name": AnimationData.IS_PARRYABLE, "type": TYPE_BOOL, "value": false},
-	{"name": AnimationData.VULNERABLE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.VULNERABLE},
-	{"name": AnimationData.INTERRUPTABLE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.SWITCHES_TINTERRUPTABLEO_QUEUE},
-	{"name": AnimationData.WEAPON_HURTS, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.WEAPON_HURTS},
-	{"name": AnimationData.TRACKS_INPUT_VECTOR, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.TRACKS_INPUT_VECTOR},
+	# {"name": AnimationData.SWITCHES_TO_QUEUE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.SWITCHES_TO_QUEUE},
+	# {"name": AnimationData.ALLOWS_QUEUE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.ALLOWS_QUEUE},
+	# # {"name": AnimationData.IS_PARRYABLE, "type": TYPE_BOOL, "value": false},
+	# {"name": AnimationData.VULNERABLE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.VULNERABLE},
+	# {"name": AnimationData.INTERRUPTABLE, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.SWITCHES_TINTERRUPTABLEO_QUEUE},
+	# {"name": AnimationData.WEAPON_HURTS, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.WEAPON_HURTS},
+	# {"name": AnimationData.TRACKS_INPUT_VECTOR, "type": TYPE_BOOL, "value": AnimationData.DEFAULT_PARAMS.TRACKS_INPUT_VECTOR},
 ]
 
 # --- Script global vars ---

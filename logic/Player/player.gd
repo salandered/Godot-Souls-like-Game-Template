@@ -30,11 +30,7 @@ func get_current_state() -> BasePlayerState:
 
 
 func react_on_hit(hit_data: HitData) -> void:
-	var _curr_state := get_current_state()
-	if not _curr_state:
-		print_.warn(false, "no _curr_state", "player's react_on_hit", "no hit applied, it's lost", hit_data)
-		return
-	_curr_state.react_on_hit(hit_data)
+	model.player_sm.react_on_hit(hit_data)
 
 
 # TODO: _process or _physics_process? changed to _process: frame issues
@@ -129,23 +125,23 @@ func __dev_initialise():
 	print_.dev("dbg", "cam_i: " + str(cam_i))
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("dev_cycle_cam"):
+	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
 		cam_i = (cam_i + 1) % debug_cams.size()
 		print_.dev("dbg", "cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 
-	elif event.is_action_pressed("dev_cycle_cam_prev"):
+	elif event.is_action_pressed(RawAction.DEV_CAM_cycle_prev):
 		cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
 		print_.dev("dbg", "cam_i: " + str(cam_i))
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 
-	if event.is_action_pressed("debug_unstuck"):
+	if event.is_action_pressed(RawAction.DEV_unstuck):
 		global_position.y += 1.5
 		print_.dev("dbg", "Unstuck: moved player up by 1.5 units")
 
-	if event.is_action_pressed("dev_cols"):
+	if event.is_action_pressed(RawAction.DEV_cols):
 		__collisions_enabled = not __collisions_enabled
 		if __collisions_enabled:
 			collision_mask = Collision.Mask.PLAYER_COL_MASK

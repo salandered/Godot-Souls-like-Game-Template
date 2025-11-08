@@ -61,7 +61,7 @@ func initialise() -> void:
 	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION, 2)
 	slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
 
-	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name_.TURN_180_APEX, 0.25)
+	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, MarkerName.TURN_180_APEX, 0.25)
 	blend_time.set_by_prev_action({
 			Leg.Act.sprint: 0.3,
 			Leg.Act.idle: 0.3, # 0.3 works good
@@ -71,17 +71,6 @@ func initialise() -> void:
 	})
 
 	
-const IDLE_LIKE_ACTIONS = [
-	Leg.Act.idle,
-	PS.Act.axe_slice_1,
-	PS.Act.axe_slice_2,
-	PS.Act.sword_slash_1,
-	PS.Act.sword_slash_2,
-	PS.Act.attack_from_run,
-	PS.Act.attack_from_dodge,
-]
-
-
 func _inherit_dodge_speed_if_same_direction():
 	# todo: should not use animations but dodge dir
 	var _inherited_speed := pm().get_curr_velocity_len()

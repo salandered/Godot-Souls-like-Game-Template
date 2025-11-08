@@ -185,15 +185,15 @@ func _input(event):
 		accumulated_mouse_delta += event.relative
 
 	# dev
-	if event.is_action_released("dev_camera_fov"):
+	if event.is_action_released(RawAction.DEV_CAM_fov):
 		__change_fov()
 	
-	if event.is_action_pressed("debug_toggle_nest"):
+	if event.is_action_pressed(RawAction.DEV_toggle_nest):
 		print_.fancy_cam("", "Toggling visibility of CSG objects for " + str(len(__csg_objects)) + " objects")
 		__dev_camera_visuals = not __dev_camera_visuals
 		__toggle_camera_visuals()
 
-	if event.is_action_pressed("dev_camera_cols"):
+	if event.is_action_pressed(RawAction.DEV_CAM_cols):
 		__dev_camera_cols = not __dev_camera_cols
 		print_.fancy_cam("", "dev_camera_cols")
 

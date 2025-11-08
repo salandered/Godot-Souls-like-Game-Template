@@ -32,17 +32,17 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.air.midair),
 	AnimationData.new(A.air.jump_sprint, 0.8),
 	AnimationData.new(A.air.landing_sprint, 0.9),
-	AnimationData.new(A.air.jump_idle),
 
 	## react
 	AnimationData.new(A.react.block_reaction),
 	AnimationData.new(A.react.hit_reaction),
 	AnimationData.new(A.react.head_B_large),
-	AnimationData.new(A.react.from_R),
-	AnimationData.new(A.react.from_L),
+	AnimationData.new(A.react.react_from_R),
+	AnimationData.new(A.react.react_from_L),
 	AnimationData.new(A.react.react_gut),
 	AnimationData.new(A.react.dodge_F_hit),
 	AnimationData.new(A.react.hit_B_large_rm),
+	AnimationData.new(A.react.hit_push_b_rm, 0.9),
 
 	## attacks
 	AnimationData.new(A.attack.axe_slice_1),
@@ -55,5 +55,12 @@ var list_of_animations: Array[AnimationData] = [
 
 	## one time
 	AnimationData.new(A.death),
+
+	## fall/stand up
+	AnimationData.new(A.fall_stand_up.thrown_l_rm, 1.0),
+	AnimationData.new(A.fall_stand_up.thrown_r_rm, 1.0),
+	AnimationData.new(A.fall_stand_up.thrown_r_rm, 1.0),
+	AnimationData.new(A.fall_stand_up.thrown_r_small_rm, 1.0),
+	AnimationData.new(A.fall_stand_up.thrown_l_small_rm, 1.0),
 
 ]

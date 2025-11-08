@@ -7,33 +7,10 @@ extends Node
 
 
 const HIT_BUFFER_DURATION: float = 4.0
-var _processed_hits: Dictionary = {}
+var _processed_hits_buffer: Dictionary = {}
 var _character_is_attacking: bool = false
 
-
-func is_character_attacking() -> bool:
-	return _character_is_attacking
-
-
-func _is_hit_processed(hit_id: int) -> bool:
-	return _processed_hits.has(hit_id)
-
-
-func _mark_hit_processed(hit_id: int) -> void:
-	_processed_hits[hit_id] = Time.get_ticks_msec() / 1000.0
-
-
-func _cleanup_old_hits() -> void:
-	var current_time = Time.get_ticks_msec() / 1000.0
-	var to_remove: Array = []
-	
-	for hit_id in _processed_hits:
-		if current_time - _processed_hits[hit_id] > HIT_BUFFER_DURATION:
-			to_remove.append(hit_id)
-	
-	__log_("_cleanup_old_hits, to_remove", to_remove)
-	for hit_id in to_remove:
-		_processed_hits.erase(hit_id)
+var _last_processed_hit: HitData
 
 
 ## nullable
@@ -49,6 +26,38 @@ func _cleanup_old_hits() -> void:
 @abstract func get_combat_name() -> String
 
 
+## nullable
+func get_last_processed_hit() -> HitData:
+	return _last_processed_hit
+
+
+func is_character_attacking() -> bool:
+	return _character_is_attacking
+
+
+## PROCESS HIT
+
+func _is_hit_processed(hit_id: int) -> bool:
+	return _processed_hits_buffer.has(hit_id)
+
+
+func _mark_hit_processed(hit_id: int) -> void:
+	_processed_hits_buffer[hit_id] = Time.get_ticks_msec() / 1000.0
+
+
+func _cleanup_old_hits() -> void:
+	var current_time = Time.get_ticks_msec() / 1000.0
+	var to_remove: Array = []
+	
+	for hit_id in _processed_hits_buffer:
+		if current_time - _processed_hits_buffer[hit_id] > HIT_BUFFER_DURATION:
+			to_remove.append(hit_id)
+	
+	__log_("_cleanup_old_hits, to_remove", to_remove)
+	for hit_id in to_remove:
+		_processed_hits_buffer.erase(hit_id)
+
+
 func apply_hit(hit_data: HitData) -> void:
 	var hit_id = hit_data.get_instance_id()
 	
@@ -57,11 +66,15 @@ func apply_hit(hit_data: HitData) -> void:
 		return
 	else:
 		__log_(hit_id, "not processed, will be")
-
+	
+	_last_processed_hit = hit_data
 	_mark_hit_processed(hit_id)
 	_cleanup_old_hits()
 	
 	get_character().react_on_hit(hit_data)
+
+
+## WORK WITH WEAPON
 
 
 func set_hit_data_to_active_weapon(hit_damage: float, anim_id: String) -> void:
@@ -69,7 +82,7 @@ func set_hit_data_to_active_weapon(hit_damage: float, anim_id: String) -> void:
 	if not weapon:
 		__log_warn("no weapon", "set_hit_data_to_active_weapon", "return")
 		return
-	var hit_data := HitData.new(hit_damage, weapon, anim_id)
+	var hit_data := HitData.new(hit_damage, weapon.weapon_name, anim_id)
 	weapon.set_hit_data(hit_data)
 	__log_("set hit data to active weapon", weapon, hit_data)
 

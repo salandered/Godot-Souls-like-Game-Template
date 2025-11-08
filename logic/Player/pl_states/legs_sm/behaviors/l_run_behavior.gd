@@ -6,7 +6,7 @@ const START_COMMIT := 0.92 # seconds
 
 var TO_STOP_DELAY: float = 0.2
 var ANGLE_FOR_U_TURN_MIN := 110.0
-var _non_moving_timer: DelayTimer = DelayTimer.new()
+var _non_moving_timer: SimpleTimer = SimpleTimer.new()
 
 
 func _ready() -> void:

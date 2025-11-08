@@ -36,7 +36,7 @@ func condition_to_next_switch(current_substate: BasePHELeaf) -> bool:
 			2,
 			current_substate,
 			PHES.Leaf.attack_360_high,
-			Marker.Name_.EARLY_SERIES_SWITCH):
+			MarkerName.EARLY_SERIES_SWITCH):
 		return true
 	return default_condition_to_next_switch(current_substate)
 	

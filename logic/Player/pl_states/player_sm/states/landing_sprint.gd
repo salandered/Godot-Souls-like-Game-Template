@@ -3,7 +3,7 @@ extends BasePlayerState
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if curr_state_action.passed_marker(Marker.Name_.RUN_AGAIN):
+	if curr_state_action.passed_marker(MarkerName.RUN_AGAIN):
 		__log_time_spent()
 		if pm().safe_is_on_floor():
 			__log_psm_check("passed_marker RUN_AGAIN and is_on_floor => best_next_state")

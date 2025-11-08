@@ -15,7 +15,7 @@ func initialise() -> void:
 	TIME_REMAINING_TO_END = 0.2
 	default_sp.ANGULAR_SPEED = 2
 	sp_config = SpeedConfig.new(default_sp)
-	var from_run := anim.get_marker_time_by_name(Marker.Name_.FROM_RUN, 0.1)
+	var from_run := anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.1)
 
 	start_time_offset.set_by_prev_action({
 		PHES.Leaf.pursue: from_run,

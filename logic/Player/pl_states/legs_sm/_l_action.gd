@@ -76,9 +76,14 @@ func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: fl
 
 
 ## return -1 in case of problems or default value
-func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_name_: String, default_value: float = -1) -> float:
+func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_name_: String, default_value: float = -1, not_leg_action: bool = false) -> float:
 	var blend_time_: float = -1
-	var _anim := container.l_action_by_name(action_name_).anim
+	var _anim: AnimationData
+	if not_leg_action: # todo: oh
+		_anim = container.pl_action_by_name(action_name_).anim
+	else:
+		_anim = container.l_action_by_name(action_name_).anim
+
 	if not _anim:
 		print_.warn_raw(false, "blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
@@ -88,6 +93,7 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_nam
 		return default_value
 	blend_time_ = _anim.duration - _marker_time
 	return blend_time_
+
 
 # endregion
 

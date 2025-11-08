@@ -1,4 +1,3 @@
-extends BaseInterpolator
 class_name EaseCurveSampler
 
 var curve: Curve

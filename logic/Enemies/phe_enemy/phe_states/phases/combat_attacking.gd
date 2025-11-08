@@ -15,7 +15,7 @@ func get_supported_substates() -> Array[String]:
 		]
 
 
-var to_next_iteration := DelayTimer.new()
+var to_next_iteration := SimpleTimer.new()
 
 
 func is_ended() -> bool:

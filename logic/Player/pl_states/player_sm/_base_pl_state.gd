@@ -234,17 +234,18 @@ func on_exit_state() -> void:
 
 
 func react_on_hit(hit: HitData):
-	print_.fight(state_name, "react_on_hit called")
-	curr_global_action().react_on_hit(hit)
+	print_.fight(state_name, "we received a hit " + str(hit))
 
-	
-	# IDEA
-	# if curr_global_action().is_interruptable():
-	# 	# if hit.effects.has("pushback") and hit.effects["pushback"]:
-	# 	# 	area_awareness.last_pushback_vector = hit.effects["pushback_direction"]
-	# 	# 	try_set_force_state("pushback")
-	# 	# else:
-	# 	try_set_force_state("staggered")
+	## 1 - check if we need to change state
+	## 2 - if not, we delegate reaction behavior to curr action
+	var react_state_name := ReactUtils.calculate_reaction_for_pl_state(hit)
+	if react_state_name:
+		__log_state_upd("hit leaded to react state", react_state_name)
+		var state = container.state_by_name(react_state_name)
+		forced_state.try_set(react_state_name, state.priority)
+	else:
+		curr_global_action()._react_on_hit(hit)
+
 
 # TODO: ...
 func react_on_spell(spell_hit: SpellHitData):
@@ -281,6 +282,10 @@ func react_on_parry(_hit: HitData):
 
 
 # region: LOGS
+
+func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
+	print_.warn(crucial, what, where + "| in state " + pp.in_q(state_name), fallback, pp.list_(details))
+
 
 func __log_state_ent(...parts: Array):
 	print_.psm(state_name + pp.on_ent, pp.list_(parts))

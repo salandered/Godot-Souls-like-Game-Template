@@ -31,12 +31,21 @@ const landing_sprint := "landing_sprint"
 const death := "death"
 const for_double := "for_double"
 const pushback := "pushback"
+const thrown := "thrown"
+# const stand_up := "stand_up"
 
 
 # ACTIONS
 class Act:
 	const double := "pla_double👭🏻"
 
+	## one time 
+	const pushback := "pla_pushback🖊️"
+	const thrown := "pla_thrown🖊️"
+	# const stand_up := "pla_stand_up"
+	const death := "pla_death🖊️"
+
+	
 	## attacks
 	const axe_slice_1 := "pla_axe_slice_1🗡"
 	const axe_slice_2 := "pla_axe_slice_2🗡"
@@ -46,7 +55,6 @@ class Act:
 	const sword_slash_1 := "pla_sword_slash_1🗡"
 	const sword_slash_2 := "pla_sword_slash_2🗡"
 
-	const pushback := "pla_pushback🖊️"
 
 	## air
 	const jump_sprint := "pla_jump_sprint🖊️"
@@ -54,9 +62,6 @@ class Act:
 	const landing_sprint := "pla_landing_sprint🖊️"
 	const dodge := "pla_dodge🤸"
 	
-	##
-	const death := "pla_death🖊️"
-
 
 # const states_priority: Dictionary = {
 # 	idle: 1,

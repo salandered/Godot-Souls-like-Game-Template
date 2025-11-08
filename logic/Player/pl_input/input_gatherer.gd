@@ -1,12 +1,12 @@
 extends RefCounted
 class_name InputGatherer
 
+# todo: i think it should be in state logic, while InputGatherer is more transparent
+const SPRINT_TO_RUN_DELAY: float = 0.16
 
-const SPRINT_TO_RUN_DELAY: float = 0.2
+var _to_run_after_sprint_timer: SimpleTimer = SimpleTimer.new()
 
-var _to_run_after_sprint_timer: DelayTimer = DelayTimer.new()
-
-const DOUBLE_TAP_THRESHOLD: float = 0.2
+const DOUBLE_TAP_THRESHOLD: float = 0.24
 
 var _jump_key: KeyPress = KeyPress.new(RawAction.jump)
 var _forward_key: KeyPress = KeyPress.new(RawAction.move_forward)
@@ -48,13 +48,6 @@ func gather_input(delta: float) -> InputPackage:
 
 	_update_key_press_timestamps()
 
-	# FOR FANCY CAMERA
-
-	new_input.forward_input = Input.get_action_strength(RawAction.move_forward) \
-		- Input.get_action_strength(RawAction.move_back)
-	new_input.orbit_input = Input.get_action_strength(RawAction.move_right) \
-		- Input.get_action_strength(RawAction.move_left)
-
 	# DETECT PRESS COMBINATIONS
 
 	DetectReverse.detect_reverse_data(new_input, _forward_key, _back_key, _right_key, _left_key, delta)
@@ -72,18 +65,24 @@ func gather_input(delta: float) -> InputPackage:
 
 	# MOVEMENT
 
+	new_input.forward_input = Input.get_action_strength(RawAction.move_forward) \
+		- Input.get_action_strength(RawAction.move_back)
+	new_input.orbit_input = Input.get_action_strength(RawAction.move_right) \
+		- Input.get_action_strength(RawAction.move_left)
+
+
 	new_input.input_direction = Input.get_vector(
 		RawAction.move_left, RawAction.move_right, RawAction.move_forward, RawAction.move_back)
 	
 	var _has_input := new_input.input_direction != Vector2.ZERO
 	
-	# MAIN
+	# LOCO
 
 	if _to_run_after_sprint_timer.is_in_progress():
 		_to_run_after_sprint_timer.update(delta)
 
-	new_input.actions.append(PS.idle) # was idle as default
-	
+	new_input.actions.append(PS.idle)
+
 	if _has_input or new_input.reverse_data.is_reversed():
 		new_input.actions.append(PS.run)
 		
@@ -106,19 +105,11 @@ func gather_input(delta: float) -> InputPackage:
 		if new_input.actions.has(PS.sprint):
 			new_input.actions.append(PS.jump_sprint)
 		else:
-			new_input.actions.append(PS.dodge) # NOTE: dodge
+			# NOTE: raw action is jump but we translate to dodge
+			new_input.actions.append(PS.dodge)
 	 
-	# FIGHT 
-	
-	# if Input.is_action_pressed("block"):
-		# new_input.actions.append(PS.block)
+	# ATTACK
 
-	# if Input.is_action_pressed("shield_throw"):
-	# 	new_input.actions.append(PS.shield_throw)
-
-	# if Input.is_action_pressed("shield_throw_reload"):
-	# 	new_input.actions.append(PS.shield_throw_reload)
-	
 	if _light_attack_key.is_just_pressed:
 		new_input.combat_actions.append(CombatAction.light_attack_pressed)
 

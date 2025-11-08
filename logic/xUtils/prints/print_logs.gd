@@ -22,9 +22,9 @@ const HIT_HURT_BOX_B := true
 const WEAPON_B := true
 
 # PLAYER PSM
-const PSM_B := false
+const PSM_B := true
 const SKM_B := false
-const ACTION_ANIM_B := false
+const ACTION_ANIM_B := true
 
 # PLAYER LSM
 const LSM_BEH_B := false
@@ -286,9 +286,9 @@ static var _last_prefix_msg = ""
 static func prefix_s(...parts: Array[Variant]):
 	if parts.is_empty():
 		parts = ["empty prefix", "empty text"]
-		
+	var _prefix = str(parts[0])
 	var _msg = pp.list_(parts.slice(1))
-	prefix(parts[0], _msg)
+	prefix(_prefix, _msg)
 
 static func prefix(prefix_: String, text: String = "", info_indents: int = 0, level: String = LogL.NOTSET):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)

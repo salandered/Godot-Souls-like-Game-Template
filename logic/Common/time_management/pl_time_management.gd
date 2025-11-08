@@ -17,7 +17,7 @@ func _effective_duration() -> float:
 ## Use this for comparison with absolute data (native anim timings). 
 ## Usually it's a work with the markers.
 ## Accounts for all speed scales 
-## May start with start offsets
+## May start with start offset
 func effective_time_spent() -> float: # ✔️
 	if not animator_manager.get_curr_anim().is_looping:
 		return animator_manager.get_curr_anim_effective_time_spent()
@@ -27,7 +27,7 @@ func effective_time_spent() -> float: # ✔️
 
 ## Use this for working with relative data (animator's timeline).
 ## Example: working with blend times.
-## Time_spent starts with 0.
+## starts with 0.
 ## Accounts for all speed scales 
 func time_spent() -> float: # ✔️
 	if not animator_manager.get_curr_anim().is_looping:

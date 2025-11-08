@@ -24,8 +24,8 @@ static func calculate_synced_anim_offset(
 
 static func sync_with_loco_anim(prev_anim: AnimationData, prev_anim_progress: float, next_anim: AnimationData, next_anim_correction: float = 0.0) -> float:
 	var result_offset := -1.0
-	var curr_l_leg_contact := prev_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
-	var next_l_leg_contact := next_anim.get_marker_by_name(Marker.Name_.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var curr_l_leg_contact := prev_anim.get_marker_by_name(MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT)
+	var next_l_leg_contact := next_anim.get_marker_by_name(MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if curr_l_leg_contact and next_l_leg_contact:
 		# __log_action("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(

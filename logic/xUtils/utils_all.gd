@@ -25,15 +25,15 @@ static func ease_in_out(x: float) -> float:
 
 
 ## returns null if key does not exist
-static func safe_get_dict_key(dict: Dictionary, key: String, default: Variant = null, context: String = "", fallback: String = Fallback.WARN_CRUCIAL) -> Variant:
+static func safe_get_dict_key(dict: Dictionary, key: Variant, default: Variant = null, fallback: String = Fallback.WARN_CRUCIAL, context: String = "") -> Variant:
 	if safe_has_key(dict, key, fallback):
 		return dict[key]
 	else:
 		return default
 
 
-static func safe_has_key(dict: Dictionary, key: String, fallback: String = Fallback.WARN_CRUCIAL) -> bool:
-	var exists := key in dict
+static func safe_has_key(dict: Dictionary, key: Variant, fallback: String = Fallback.WARN_CRUCIAL) -> bool:
+	var exists: bool = key in dict
 	if not exists:
 		match fallback:
 			Fallback.FAIL:
@@ -64,19 +64,19 @@ static func safe_look_at(
 
 
 static func _dev_change_t12_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, "t1", "t2")
+	return _dev_change_param(event, param, param_name, step, RawAction.t1, RawAction.t2)
 
 static func _dev_change_t34_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, "t3", "t4")
+	return _dev_change_param(event, param, param_name, step, RawAction.t3, RawAction.t4)
 
 static func _dev_change_t58_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, "t5", "t8")
+	return _dev_change_param(event, param, param_name, step, RawAction.t5, RawAction.t8)
 
 static func _dev_change_t67_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, "t6", "t7")
+	return _dev_change_param(event, param, param_name, step, RawAction.t6, RawAction.t7)
 
 static func _dev_change_param(
-	event, param: Variant, param_name: String = "some param", step: float = 0.1, key_a: String = "t1", key_b: String = "t2") -> Variant:
+	event, param: Variant, param_name: String = "some param", step: float = 0.1, key_a: String = RawAction.t1, key_b: String = RawAction.t2) -> Variant:
 	var prev_param: Variant = param
 	if event.is_action_released(key_a):
 		param -= step

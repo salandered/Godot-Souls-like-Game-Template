@@ -3,11 +3,11 @@ extends Node
 var mouse_is_captured: bool = true
 
 func _input(event):
-	if event.is_action_pressed("dev_toggle_fullscreen_1"):
+	if event.is_action_pressed(RawAction.DEV_toggle_fullscreen_1):
 		_toggle_fullscreen_initial_method(event)
-	if event.is_action_pressed("dev_toggle_fullscreen_2"):
+	if event.is_action_pressed(RawAction.DEV_toggle_fullscreen_2):
 		_toggle_fullscreen_second_method()
-	if event.is_action_released("mouse_mode_switch"):
+	if event.is_action_released(RawAction.DEV_mouse_mode_switch):
 		_toggle_mouse_capture()
 
 

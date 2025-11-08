@@ -1,6 +1,7 @@
 extends LegsAction
 
 @export var accelerate_from_idle_curve: Curve
+@export var accel_from_fall_curve: Curve
 @export var accel_from_turn_curve: Curve
 
 
@@ -17,17 +18,6 @@ var speed_from_inherited := FloatLinearInterpolator.new()
 var curr_turn: TurnData = TurnData.new()
 
 
-const IDLE_LIKE_ACTIONS = [
-	Leg.Act.idle,
-	PS.Act.axe_slice_1,
-	PS.Act.axe_slice_2,
-	PS.Act.sword_slash_1,
-	PS.Act.sword_slash_2,
-	PS.Act.attack_from_run,
-	PS.Act.attack_from_dodge,
-	PS.Act.dodge
-]
-
 var _resettable := [
 	speed_mult_from_idle,
 	angular_sp_from_idle,
@@ -43,14 +33,16 @@ func initialise() -> void:
 	default_sp.TURN_SPEED = 2.0
 	default_sp.ANGULAR_SPEED = 10.0
 
-	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, Marker.Name_.TURN_180_APEX, 0.25)
+	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, MarkerName.TURN_180_APEX, 0.25)
+	var thrown_blend_time := calculate_blend_time_from_prev_anim_marker(PS.Act.thrown, MarkerName.TO_RUN, 0.25, true)
 	
 	blend_time.set_by_prev_action({
 		Leg.Act.idle: 0.3, # 0.3 works good
 		Leg.Act.sprint: 0.3,
 		Leg.Act.turn_180: turn_180_blend_time,
 		PS.Act.landing_sprint: 0.4,
-		PS.Act.dodge: 0.3
+		PS.Act.dodge: 0.3,
+		PS.Act.thrown: thrown_blend_time
 	})
 
 func on_enter_action(input_: InputPackage):
@@ -61,6 +53,10 @@ func on_enter_action(input_: InputPackage):
 	
 
 	match PREV_ACTION:
+		PS.Act.thrown:
+			speed_mult_from_idle.initialise(accel_from_fall_curve, accel_from_idle_time + 0.2)
+			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
@@ -85,6 +81,11 @@ func update(input_: InputPackage, delta: float):
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var TURN_SPEED := default_sp.TURN_SPEED
 	match PREV_ACTION:
+		PS.Act.thrown:
+			CURR_SPEED = default_sp.SPEED
+			SPEED_MULT = speed_mult_from_idle.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
+			TURN_SPEED = turn_sp_from_idle.update(delta)
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			CURR_SPEED = default_sp.SPEED
 			SPEED_MULT = speed_mult_from_idle.update(delta)
@@ -129,7 +130,7 @@ func animate(): # ▶️
 var _dev_add_blend := 0.0
 
 func _input(event):
-	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, "dev_speed_down", "dev_speed_up")
+	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 	# __start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)
 

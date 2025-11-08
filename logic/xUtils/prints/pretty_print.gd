@@ -124,7 +124,10 @@ static func file_load_err(err, path: String):
 		print_.dev(path + " error loading:" + str(err))
 
 
-# region: domain helpers
+static func bone_mask_(_bone_mask_: Array[int]) -> String:
+	var first_b = _bone_mask_[0] if _bone_mask_.size() > 0 else -1
+	var last_b = _bone_mask_[-1] if _bone_mask_.size() > 0 else -1
+	return "boneMsk [%d-%d] (size %d)" % [first_b, last_b, _bone_mask_.size()]
 
 
 # region: inner helpers

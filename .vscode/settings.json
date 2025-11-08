@@ -324,11 +324,12 @@
 				}
 			]
 		},
-		"(RawAction\\.)(\\w+)": {
+		"(RawAction)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#FFEEA1E5"
+					"color": "#84db6fd7",
+					"fontWeight": "bold",
 				},
 				{
 					// "color": "#FFEEA1E5",

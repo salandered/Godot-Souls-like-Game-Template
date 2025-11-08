@@ -45,5 +45,14 @@ func get_elapsed() -> float:
 	return timer
 
 
+func get_progress() -> float:
+	if not is_initialised():
+		return 0.0
+	if duration == 0.0:
+		return 0.0
+
+	return timer / duration
+
+
 func get_remaining() -> float:
 	return max(0.0, duration - timer)

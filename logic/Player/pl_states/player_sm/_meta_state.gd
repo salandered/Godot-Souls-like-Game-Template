@@ -19,6 +19,8 @@ class_name MetaState
 		_state_priority = new_priority
 
 	func reset() -> void:
+		if _state_name != "" or _state_priority != -1:
+			__log_(pp.in_q(_state_name), pp.in_curl(_state_priority), "will be resetted")
 		_state_name = ""
 		_state_priority = -1
 
@@ -72,8 +74,8 @@ class_name MetaState
 
 	## like Queued or Forced
 	func __log_(...parts: Array) -> void:
-		pass
-		# print_.dev(__pp_type(), pp.list_(parts))
+		# pass
+		print_.prefix_s(pp.s(__pp_type(), get_instance_id()), pp.list_(parts))
 
 	func _to_string() -> String:
 		return __pp_curr_state()

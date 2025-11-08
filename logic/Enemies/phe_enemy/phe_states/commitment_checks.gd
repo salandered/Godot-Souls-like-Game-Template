@@ -45,7 +45,7 @@ static func _is_commitment_done_for_non_loop_anim(state: BasePHELeaf) -> bool:
 	var _result: bool = false
 	var _reason: String = ""
 
-	var _allows_switch_marker_name := Marker.Name_.ALLOWS_SWITCH
+	var _allows_switch_marker_name := MarkerName.ALLOWS_SWITCH
 
 	var _allows_switch_marker_exists := state.anim.does_marker_exist(_allows_switch_marker_name)
 

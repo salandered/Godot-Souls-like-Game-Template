@@ -247,3 +247,16 @@ func input_mouse_movement(d_x: float, d_y: float) -> void:
 # 	var final_xz := Vector2.from_angle(yaw_new) * len_h
 # 	lock_offset.x = final_xz.x
 # 	lock_offset.z = final_xz.y
+
+
+
+
+## SMTH
+
+# camera ...
+# func _check_distance() -> void:
+# 	# checks if the distance between the player and target is too big and drops the target if triggered
+# 	if fc.player.model.area_awareness.camera_focus_further_than_squared(fc.locked_target, fc.TARGET_DROP_DISTANCE_SQUARED):
+# 		# print("dropping ", distance, " ", TARGET_DROP_DISTANCE_SQUARED)
+# 		_drop_target()
+

@@ -1,4 +1,3 @@
-# FloatCurveInterpolator.gd
 extends BaseInterpolator
 
 ## gets the linear progress by _get_progress() -> raw progress (0.0 to 1.0) 

@@ -12,33 +12,20 @@ class Weight:
 		self.hips = hips_
 
 
-class Blend:
-	var fade_in: float
-	var fade_out: float
-	## seconds at full _weight
-	## if not set (-1.0), will be calculated using anim dur, and fade in/out
-	var hold: float
-
-	func _init(fade_in_: float = 0.2, fade_out_: float = 0.2, hold_: float = -1.0) -> void:
-		self.fade_in = fade_in_
-		self.fade_out = fade_out_
-		self.hold = hold_
-
-
 var _weight: Weight
-var _blend: Blend
+var _blend: BlendConfig
 var _speed_scale: float
 var _bone_mask: Array[int]
 
 
 func _init(
 	weight_: Weight = null,
-	blend_: Blend = null,
+	blend_: BlendConfig = null,
 	speed_scale_: float = 1.0,
 	bone_mask_: Array[int] = []
 ):
 	self._weight = weight_ if weight_ != null else Weight.new()
-	self._blend = blend_ if blend_ != null else Blend.new()
+	self._blend = blend_ if blend_ != null else BlendConfig.new()
 	self._speed_scale = speed_scale_
 	self._bone_mask = bone_mask_
 

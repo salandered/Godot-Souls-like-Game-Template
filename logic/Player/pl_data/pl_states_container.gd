@@ -54,7 +54,7 @@ class _PlActionData extends _BaseActionData:
 
 
 var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
-	# move
+	## loco
 	# TODO: seems like depends_on_legs_ true equals to having not legs_double_beh default
 	"Idle": _StateData.new(PS.idle, 1, Leg.Beh.idle, true),
 	"Run": _StateData.new(PS.run, 2, Leg.Beh.run, true),
@@ -62,12 +62,16 @@ var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
 	# Sprint drains stamina, but costs just a bit as well
 	"Sprint": _StateData.new(PS.sprint, 3, Leg.Beh.sprint, true, 0.5),
 	
+	## air
 	"Dodge": _StateData.new(PS.dodge, 10, Leg.Beh.double, false, 5.0),
-	
 	"JumpSprint": _StateData.new(PS.jump_sprint, 10, Leg.Beh.double, false, 10.0),
 	"Midair": _StateData.new(PS.midair, 10, Leg.Beh.double, false, 0.0),
 	"LandingSprint": _StateData.new(PS.landing_sprint, 10, Leg.Beh.double, false, 0.0),
+	
+	## one time
 	"Death": _StateData.new(PS.death, 200, Leg.Beh.double, false, 0.0),
+	"Pushback": _StateData.new(PS.pushback, 100, Leg.Beh.double, false, 0.0),
+	"Thrown": _StateData.new(PS.thrown, 110, Leg.Beh.double, false, 0.0),
 
 	## Attacks
 	"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 10.0),
@@ -92,10 +96,9 @@ var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
 var node_to_pl_action: Dictionary = { # { Node name : _PlActionData }
 	"_DoubleAction": _PlActionData.new(PS.for_double, PS.Act.double, A.air.midair, MotionType.IDLE),
 	
-	#
-	"DodgeAction": _PlActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R, MotionType.START),
 
 	## air
+	"DodgeAction": _PlActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R, MotionType.START),
 	"JumpSprintAction": _PlActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.air.jump_sprint, MotionType.START),
 	"MidairAction": _PlActionData.new(PS.midair, PS.Act.midair, A.air.midair, MotionType.LOOP),
 	"LandingSprintAction": _PlActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.air.landing_sprint, MotionType.LOOP),
@@ -111,11 +114,14 @@ var node_to_pl_action: Dictionary = { # { Node name : _PlActionData }
 
 
 	## one time
+	"PushbackAction": _PlActionData.new(PS.pushback, PS.Act.pushback, A.react.hit_push_b_rm, MotionType.IDLE),
+	"ThrownAction": _PlActionData.new(PS.thrown, PS.Act.thrown, A.fall_stand_up.thrown_r_rm, MotionType.IDLE),
+	# "StandUpAction": _PlActionData.new(PS.stand_up, PS.Act.stand_up, A.fall_stand_up.stand_up_simple, MotionType.IDLE),
+
 	"DeathAction": _PlActionData.new(PS.death, PS.Act.death, A.death, MotionType.IDLE),
 
 
 	# "RollAction": _PlActionData.new(PS.roll, PS.Act.roll, A.roll, MotionType.START),
-	# "StaggeredAction": _PlActionData.new(PS.staggered, PS.Act.staggered, A.combat.staggered, MotionType.IDLE),
 	# "ParryAction": _PlActionData.new(PS.parry, PS.Act.parry, A.combat.parry, MotionType.IDLE),
 	# "ParriedAction": _PlActionData.new(PS.parried, PS.Act.parried, A.combat.parried, MotionType.IDLE),
 	# "RiposteAction": _PlActionData.new(PS.riposte, PS.Act.riposte, A.combat.riposte_attack, MotionType.IDLE),

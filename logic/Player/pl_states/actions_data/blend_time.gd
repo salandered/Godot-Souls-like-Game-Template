@@ -1,13 +1,14 @@
 extends RefCounted
 class_name ActionData
 
-class BlendTime:
-	var DEFAULT: float = 0.2
-	
+
+class _DataByPrevAction:
 	var by_prev_action: Dictionary = {}
-	var action_specific: float = DEFAULT
-	
-	func _init(default_: float = 0.2) -> void:
+	var DEFAULT: float
+	var action_specific: float = -999.0
+
+		
+	func _init(default_: float) -> void:
 		DEFAULT = default_
 
 	## Priority:
@@ -17,7 +18,9 @@ class BlendTime:
 	func calculate_actual(prev_action_name: String) -> float:
 		if by_prev_action.has(prev_action_name):
 			return by_prev_action[prev_action_name]
-		return action_specific
+		if action_specific != -999.0:
+			return action_specific
+		return DEFAULT
 	
 	func set_by_prev_action(by_prev_action_: Dictionary):
 		by_prev_action = by_prev_action_
@@ -28,31 +31,21 @@ class BlendTime:
 
 
 	func reset_to_default():
-		action_specific = DEFAULT
+		action_specific = -999.0
 		by_prev_action.clear()
 
 
-class StartTimeOffset:
-	const DEFAULT: float = 0.0
-	
-	var by_prev_action: Dictionary = {}
-	var action_specific: float = DEFAULT
+class BlendTime extends _DataByPrevAction:
+	pass
 
-	## Priority:
-	## - by prev action
-	## - specific
-	## - default
-	func calculate_actual(prev_action_name: String) -> float:
-		if by_prev_action.has(prev_action_name):
-			return by_prev_action[prev_action_name]
-		return action_specific
-	
-	func set_by_prev_action(by_prev_action_: Dictionary):
-		by_prev_action = by_prev_action_
 
-	func set_specific(action_specific_: float):
-		action_specific = action_specific_
+class StartTimeOffset extends _DataByPrevAction:
+	pass
 
-	func reset_to_default():
-		action_specific = DEFAULT
-		by_prev_action.clear()
+
+class ExtraRootSpeedZ extends _DataByPrevAction:
+	pass
+
+
+class ExtraRootSpeedFadeTime extends _DataByPrevAction:
+	pass

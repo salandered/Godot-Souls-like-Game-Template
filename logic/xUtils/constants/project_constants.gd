@@ -5,6 +5,7 @@ const BIG_MEANINGLESS_NUMBER: float = 99999
 
 # todo: store delta in InputPackage. and use it everywhere
 const ONE_FRAME: float = 0.016 # just for one tick its fine they say
+const THREE_FRAMES: float = ONE_FRAME * 3
 
 const EPSILON_3: float = 0.001
 const EPSILON_5: float = 1e-5

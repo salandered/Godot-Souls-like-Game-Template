@@ -19,6 +19,6 @@ func _process(delta: float) -> void:
 	_current_input = _input_gatherer.gather_input(delta)
 
 
-	if Input.is_action_just_pressed(RawAction.force_quit):
+	if Input.is_action_just_pressed(RawAction.DEV_force_quit):
 		get_tree().quit()
 		return # Don't process input if quitting

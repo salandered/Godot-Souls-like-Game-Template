@@ -9,7 +9,7 @@ const STOP_RESUME_COMMIT := 0.1 # Can't resume immediately
 const STOP_COMMIT := 0.15 # New: how long before can switch from stop
 
 var TO_STOP_DELAY: float = 0.1
-var _non_moving_timer: DelayTimer = DelayTimer.new()
+var _non_moving_timer: SimpleTimer = SimpleTimer.new()
 
 
 var _reason: String = ""
@@ -95,8 +95,8 @@ func _is_short_run() -> bool:
 
 var _dev_test := 0.05
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("t1"):
+	if event.is_action_pressed(RawAction.t1):
 		_dev_test -= 0.05
 
-	if event.is_action_pressed("t2"):
+	if event.is_action_pressed(RawAction.t2):
 		_dev_test += 0.05

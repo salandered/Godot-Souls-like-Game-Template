@@ -5,7 +5,7 @@ var is_landed := false
 
 
 func initialise() -> void:
-	start_time_offset.set_specific(anim.get_marker_time_by_name(Marker.Name_.LAND_START, 0.05))
+	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.LAND_START, 0.05))
 
 	default_sp.ANGULAR_SPEED = 2.0
 

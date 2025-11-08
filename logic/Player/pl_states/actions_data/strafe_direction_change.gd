@@ -3,7 +3,7 @@ class_name StrafeDirChange
 
 
 # can we make an opposite change at all
-var cooldown := DelayTimer.new()
+var cooldown := SimpleTimer.new()
 # postpone the opposite change
 var async_change := DelayCallbackTimer.new()
 var speed_dip := EaseCurveInterpolator.new()

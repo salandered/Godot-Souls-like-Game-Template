@@ -23,7 +23,7 @@ func on_enter_action(input_: InputPackage) -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	if passed_marker(Marker.Name_.JUMP_LAUNCH):
+	if passed_marker(MarkerName.JUMP_LAUNCH):
 		if not is_jumped:
 			__log_upd("passed_marker JUMP_LAUNCH and is_jumped false => + VERT_SPEED_BUMP")
 			get_player().velocity.y += VERT_SPEED_BUMP
@@ -35,7 +35,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	if is_jumped:
 		pm().apply_gravity(delta, GRAVITY_DURING_JUMP)
 	
-	if passed_marker(Marker.Name_.PEAK):
+	if passed_marker(MarkerName.PEAK):
 		if pm().get_curr_y_velocity() > 0:
 			__log_upd("passed_marker PEAK but still going up - clamping velocity")
 			get_player().velocity.y = 0
@@ -45,6 +45,6 @@ func update(input_: InputPackage, delta: float) -> void:
 
 # func _input(event):
 # 	# VERT_SPEED_BUMP = u._dev_change_param(event, VERT_SPEED_BUMP, "VERT_SPEED_BUMP",
-# 	# 	0.5, "dev_speed_down", "dev_speed_up")
+# 	# 	0.5, "dev_speed_down", RawAction.DEV_speed_up)
 # 	VERT_SPEED_BUMP = u._dev_change_t12_param(event, VERT_SPEED_BUMP, "VERT_SPEED_BUMP", 0.5)
 # 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)

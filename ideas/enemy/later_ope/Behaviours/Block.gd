@@ -52,7 +52,7 @@ class Blocking extends BlockSubbehaviour:
 		block_behaviour = parent_behaviour
 	
 	func react_on_hit(hit: HitData):
-		if block_behaviour.position_in_blocking_sector(hit.weapon.holder.global_position):
+		if block_behaviour.position_in_blocking_sector(hit.weapon_name.holder.global_position):
 			block_behaviour.resources.pay_block_cost(hit.damage, block_coefficient)
 			block_behaviour.switch_to_block_reaction()
 		else:
@@ -69,7 +69,7 @@ class BlockReaction extends BlockSubbehaviour:
 		block_behaviour = parent_behaviour
 	
 	func react_on_hit(hit: HitData):
-		if block_behaviour.position_in_blocking_sector(hit.weapon.holder.global_position):
+		if block_behaviour.position_in_blocking_sector(hit.weapon_name.holder.global_position):
 			block_behaviour.resources.pay_block_cost(hit.damage, block_coefficient)
 		else:
 			super.react_on_hit(hit)

@@ -4,7 +4,7 @@ class_name LegsLockedVertMoveAction
 # @export var accel_from_idle_curve: Curve
 # @export var dir_change_curve: Curve
 
-# var dir_change_cooldown := DelayTimer.new()
+# var dir_change_cooldown := SimpleTimer.new()
 # var change_dir_timer = DelayCallbackTimer.new()
 
 # var speed_mult_from_idle = EaseCurveInterpolator.new()

@@ -41,5 +41,5 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("awake Gundyr"):
+	if event.is_action_pressed(RawAction.DEV_awake_enemy):
 		_to_awake = true
