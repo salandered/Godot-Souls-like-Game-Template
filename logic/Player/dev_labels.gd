@@ -49,8 +49,8 @@ func _label_inputs():
 	t += "  len %5.2f" % [input_.input_direction.length()]
 	t += "  forward strength %5.2f" % [input_.forward_input]
 	t += "  orbit (hor) strength %5.2f" % [input_.orbit_input]
-	t += "\nactions: " + pp._array(input_.actions)
-	t += "\ncombat: " + pp._array(input_.combat_actions)
+	t += "\nactions: " + pp.list_(input_.actions)
+	t += "\ncombat: " + pp.list_(input_.combat_actions)
 	t += "\ntarget lock " + str(input_.target_lock)
 	t += "\ncam forward %5.2f  orbit %5.2f" % [input_.forward_input, input_.orbit_input]
 	t += "\n vel_by_input_" + pp.s(pp.vec3(vel_by_input_), vel_by_input_.length())

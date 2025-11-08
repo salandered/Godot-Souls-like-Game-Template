@@ -36,10 +36,9 @@ const FANCY_CAM_B := false
 const AWARENESS_B := false
 
 # ENEMY
-const SE_B := false
-const PHE_CHECK_B := false
-const PHE_B := false
-const PHE_ANIM_B := false
+const PHE_CHECK_B := true
+const PHE_B := true
+const PHE_ANIM_B := true
 const E_ANIM_MANAGER_B := true
 # endregion
 
@@ -204,8 +203,6 @@ static func aware(add_prefix_: String, text: String, info_indents: int = 0, leve
 static var PHE_ANIM_PRINT := PrintData.PrintInstance.new(PHE_ANIM_B, "▷ anim", 16, phe_sm)
 static var PHE_CHECK_PRINT := PrintData.PrintInstance.new(PHE_CHECK_B, "transition ❔", 0, phe_sm)
 static var PHE_SM_PRINT := PrintData.PrintInstance.new(PHE_B, "🗿", 1, prefix)
-static var SE_PRINT := PrintData.PrintInstance.new(SE_B, "SE", 0, prefix)
-static var SE_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(SE_B, "transition ❔", 2, se)
 static var ANIM_MANAGER_PRINT := PrintData.PrintInstance.new(E_ANIM_MANAGER_B, "E▷", 12, prefix)
 
 
@@ -240,12 +237,6 @@ static func phe_check(add_prefix_: String, text: String, info_indents: int = 0, 
 
 static func phe_sm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
 	_generic(PHE_SM_PRINT, add_prefix_, text, info_indents, level, freq)
-
-static func se(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
-	_generic(SE_PRINT, add_prefix_, text, info_indents, level, freq)
-
-static func se_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
-	_generic(SE_CHECK_TRANS_PRINT, add_prefix_, text, info_indents, level, freq)
 
 static func anim_manager(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
 	_generic(ANIM_MANAGER_PRINT, add_prefix_, text, info_indents, level, freq)

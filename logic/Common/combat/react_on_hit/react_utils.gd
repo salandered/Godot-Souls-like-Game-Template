@@ -33,6 +33,9 @@ static var enemy_attack_to_direction = {
 	PHEA.attack.power_gap_closer: AttackDirection.Dir.DOWN,
 	PHEA.attack.sword_slide: AttackDirection.Dir.LEFT,
 	PHEA.attack.scare_off: AttackDirection.Dir.STAB,
+	PHEA.attack.power_up: AttackDirection.Dir.UP,
+	PHEA.attack.stab_low: AttackDirection.Dir.STAB,
+	PHEA.phase_switch: AttackDirection.Dir.STAB,
 	}
 
 static var pl_attack_to_direction = {
@@ -64,9 +67,11 @@ static var attack_dir_to_pl_overlay_anim = {
 static var enemy_attack_to_pl_state_interruption = {
 	PHEA.attack.attack_360_low: PS.thrown,
 	PHEA.attack.attack_up: PS.pushback,
-	PHEA.attack.power_gap_closer: PS.thrown,
+	PHEA.attack.power_gap_closer: PS.pushback,
 	PHEA.attack.sword_slide: PS.thrown,
 	PHEA.attack.scare_off: PS.pushback,
+	PHEA.attack.power_up: PS.thrown,
+	PHEA.phase_switch: PS.thrown
 	}
 
 
@@ -146,9 +151,13 @@ static func _pick_overlay_weight(hit: HitData, max_damage: float) -> float:
 	var linear_value = hit.damage / max_damage
 	var clamped_linear = clampf(linear_value, 0.0, 1.0)
 
+	
+	# 0.3: low hits - more weight
+	# 0.7: low hits - less
+	# if 0.5:
 	# [10, 35] (max 35) -> [0.54, 1.0]
 	# [10, 15] (max 15) -> [0.82, 1.0]
-	var eased_value = ease(clamped_linear, 0.5) # ease out
+	var eased_value = ease(clamped_linear, 0.3) # ease out
 	__log_("Dmg/Max", hit.damage, max_damage, "-> Linear", clamped_linear, "-> Eased", eased_value)
 	return eased_value
 
@@ -200,4 +209,4 @@ static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 
 
 static func __log_(...parts: Array):
-	print_.prefix_s("[ReactUtils]", pp.list_(parts))
+	print_.prefix_s("[🗣️ ReactUtils]", pp.list_(parts))

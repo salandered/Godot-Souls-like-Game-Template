@@ -174,7 +174,7 @@ func _trigger_reach_zero() -> void:
 
 func __log_feel_check_stamina(prefix, amount, decision, ...context: Array):
 	if decision == true: return
-	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp._dict(statuses, false, true))
+	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp.dict_(statuses, false, true))
 	__log_feel(prefix, _msg, " ", pp.list_(context) + "=>", decision)
 
 

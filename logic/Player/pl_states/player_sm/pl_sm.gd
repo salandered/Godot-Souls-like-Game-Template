@@ -1,13 +1,13 @@
 extends Node
 class_name PlayerSM
 
-@export var combat: PlayerCombat
-@export var area_awareness: AreaAwareness
-@export var legs_sm: LegsSM
+@onready var area_awareness: AreaAwareness = %AreaAwareness
+@onready var combat: PlayerCombat = %Combat
+@onready var animator_manager: PlAnimatorManager = %AnimatorManager
+@onready var legs_sm: LegsSM = %LegsSM
 
 var _player: Princess
 
-@export var animator_manager: PlAnimatorManager
 @onready var container: PlayerStatesContainer = %StatesContainer
 @onready var player_movement: PlayerMovement = %PlayerMovement
 

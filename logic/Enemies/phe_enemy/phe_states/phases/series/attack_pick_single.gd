@@ -10,10 +10,12 @@ func initialise() -> void:
 
 func get_attack_series_list() -> Array:
 	return [
-		[PHES.Leaf.attack_up],
-		[PHES.Leaf.attack_down],
-		[PHES.Leaf.attack_up, PHES.Leaf.attack_down],
-		[PHES.Leaf.attack_360_high]
+		[PHES.Leaf.attack_up], # 0
+		[PHES.Leaf.attack_down], # 1
+		[PHES.Leaf.attack_up, PHES.Leaf.attack_down], # 2
+		[PHES.Leaf.attack_360_high], # 3
+		[PHES.Leaf.power_up], # 4
+		[PHES.Leaf.stab_low] # 5
 	]
 
 
@@ -24,14 +26,18 @@ func pick_series_idx() -> int:
 			0: 0.0,
 			1: 0.9,
 			2: 0.05,
-			3: 0.5
+			3: 0.5,
+			4: 0.0,
+			5: 0.5
 		})
 	else:
 		_idx = ra.ipick_weighted({
 			0: 0.9,
 			1: 0.0,
-			2: 0.4,
+			2: 0.5,
 			3: 0.0,
+			4: 0.3,
+			5: 0.0
 	})
 
 	return _idx

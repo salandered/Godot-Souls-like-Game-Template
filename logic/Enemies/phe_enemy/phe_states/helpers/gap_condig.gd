@@ -20,7 +20,7 @@ func get_curr_coef() -> float:
 func set_coef(distance_to_player: float, is_angry: bool = false) -> float:
 	var strength_ := _strength_mult
 	if is_angry:
-		strength_ += 0.1
+		strength_ += 0.4
 	
 	var raw_coef := distance_to_player * strength_
 	_curr_coef = clampf(raw_coef, _min_coef, _max_coef)
@@ -30,7 +30,7 @@ func set_coef(distance_to_player: float, is_angry: bool = false) -> float:
 func __log_(distance_to_player, is_angry: bool):
 	var strength_ := _strength_mult
 	if is_angry:
-		strength_ += 0.1
+		strength_ += 0.4
 		
 	var _msg := pp.s(
 			"dist:", distance_to_player,

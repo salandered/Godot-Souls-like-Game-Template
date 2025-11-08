@@ -13,8 +13,29 @@ var _character_is_attacking: bool = false
 var _last_processed_hit: HitData
 
 
+var _weapons: Dictionary = {} # weapon_name <String> to weapon <BaseWeapon>
+
+
+func initialise():
+	## currently _weapons are all under %bones
+	var _weapons_list = get_descendants.base_weapons(get_parent_node_of_weapons()) as Array[BaseWeapon]
+	assert(not _weapons_list.is_empty(), "No weapons! for " + get_combat_name())
+	for weapon in _weapons_list:
+		_weapons[weapon._weapon_name] = weapon
+	__log_("initialised _weapons", pp.dict_(_weapons))
+
+
 ## nullable
-@abstract func get_active_weapon() -> BaseWeapon
+@abstract func get_parent_node_of_weapons() -> Node3D
+
+
+func get_all_weapons() -> Array[BaseWeapon]:
+	return u.safe_cast_array_of_base_weapon(_weapons.values())
+
+
+## nullable
+func get_weapon(weapon_name: String) -> BaseWeapon:
+	return u.safe_get_dict_key(_weapons, weapon_name, null, Fallback.WARN_CRUCIAL)
 
 
 @abstract func is_player() -> bool
@@ -35,7 +56,8 @@ func is_character_attacking() -> bool:
 	return _character_is_attacking
 
 
-## PROCESS HIT
+## PROCESS HIT FROM MY ENEMY
+# region
 
 func _is_hit_processed(hit_id: int) -> bool:
 	return _processed_hits_buffer.has(hit_id)
@@ -73,24 +95,33 @@ func apply_hit(hit_data: HitData) -> void:
 	
 	get_character().react_on_hit(hit_data)
 
+# endregion
 
-## WORK WITH WEAPON
 
+## PREPARE MY WEAPONS
+# region
 
-func set_hit_data_to_active_weapon(hit_damage: float, anim_id: String) -> void:
-	var weapon := get_active_weapon()
-	if not weapon:
-		__log_warn("no weapon", "set_hit_data_to_active_weapon", "return")
+## DOCS: For simplicity set_hit_data_to_all_weapons and reset_all_weapons work with all weapons,
+##   while usually we work with one specic weapon.
+##   They won't do damage or leave any trace, because most important 
+##   function update_weapon_is_attacking works with specific weapon name.
+##   Still looks akward, switch to using all functions by weapon_name later
+
+func set_hit_data_to_all_weapons(hit_damage: float, anim_id: String) -> void:
+	var weapons := get_all_weapons()
+	if weapons.is_empty():
+		__log_warn(true, "no weapons", "set_hit_data_to_all_weapons", "return")
 		return
-	var hit_data := HitData.new(hit_damage, weapon.weapon_name, anim_id)
-	weapon.set_hit_data(hit_data)
-	__log_("set hit data to active weapon", weapon, hit_data)
+	for weapon in weapons:
+		var hit_data := HitData.new(hit_damage, weapon._weapon_name, anim_id)
+		weapon.set_hit_data(hit_data)
+		__log_("set hit data to weapons", weapon, hit_data)
 
 
-func update_active_weapon_is_attacking(is_attacking: bool) -> void:
-	var weapon := get_active_weapon()
+func update_weapon_is_attacking(weapon_name: String, is_attacking: bool) -> void:
+	var weapon := get_weapon(weapon_name)
 	if not weapon:
-		__log_warn("no weapon", "update_active_weapon_is_attacking", "return")
+		__log_warn(true, "no weapon", "update_weapon_is_attacking", "return")
 		return
 
 	_update_is_attacking(weapon, is_attacking)
@@ -103,24 +134,25 @@ func _update_is_attacking(weapon: BaseWeapon, is_attacking: bool):
 	# __log_("_update_is_attacking. is_attacking/weapon", is_attacking, weapon)
 
 
-func reset_active_weapon() -> void:
-	var weapon := get_active_weapon()
-	if not weapon:
-		__log_warn("no weapon", "reset_active_weapon", "return")
+func reset_all_weapons() -> void:
+	var weapons := get_all_weapons()
+	if weapons.is_empty():
+		__log_warn(true, "no weapons", "reset_all_weapons", "return")
 		return
-	weapon.reset_hit_data()
-	weapon.reset_contact_hitbox_list()
-	_update_is_attacking(weapon, false)
-	# __log_("reset active weapon")
+	for weapon in weapons:
+		weapon.reset_hit_data()
+		weapon.reset_contact_hitbox_list()
+		_update_is_attacking(weapon, false)
+		# __log_("reset active weapon")
+
+# endregion
 
 
 ## __LOGS
 
-
 func __log_(...parts: Array):
-	# using weapon holder as name of BaseCombat
 	print_.fight(get_combat_name(), pp.list_(parts))
 
 
-func __log_warn(what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(false, what, "BaseCombat " + where, fallback, pp.list_(context))
+func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
+	print_.warn(crucial, what, get_combat_name() + " " + where, fallback, pp.list_(context))

@@ -98,6 +98,7 @@ class react:
 	const dodge_F_hit = _lib.testing + "OS-hit-react-forward"
 	const hit_B_large_rm = _lib.testing + "OS-hit-react-back"
 	const hit_push_b_rm := _lib._fall_stand_up + "hit push B rm"
+	const react_dodge_B := _lib._dodge + "E-Dodging-Back-afraid-funny-hands"
 
 
 class fall_stand_up:

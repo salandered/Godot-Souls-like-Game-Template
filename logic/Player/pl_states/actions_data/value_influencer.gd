@@ -27,14 +27,18 @@ func influence_value(value: float, timer: SimpleTimer, override_multiplier: floa
 	## could be cache for calibrated current_blend {timer.duration: BlendConfig} if perf problems
 	current_blend = BlendConfig.new(default_blend.fade_in, default_blend.fade_out, default_blend.hold)
 	current_blend.auto_calibrate(timer_duration, true)
+	__log_(current_blend)
 	
 	var multiplier: float = default_target_multiplier
 	if override_multiplier != -1.0:
 		multiplier = override_multiplier
 
 	var result_multiplier = _get_multiplier(timer, multiplier)
-
-	return value * result_multiplier
+	var result = value * result_multiplier
+	
+	__log_("Val", value, "->", result, "| Mult", result_multiplier, "Elapsed", timer.get_elapsed(), "/", timer_duration)
+	
+	return result
 
 
 func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
@@ -44,17 +48,23 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 	if elapsed_time < current_blend.fade_in:
 		var t = elapsed_time / current_blend.fade_in
 		var eased_t = ease_in_out(t)
-		return lerp(1.0, target_mult, eased_t)
+		var result = lerp(1.0, target_mult, eased_t)
+		__log_("Phase: FADE_IN", "t", t, "-> eased", eased_t, "-> mult", result)
+		return result
 
 	elif elapsed_time < current_blend.fade_in + current_blend.hold:
+		__log_("Phase: HOLD", "mult", target_mult)
 		return target_mult
 		
 	elif elapsed_time < total_duration:
 		var t = (elapsed_time - current_blend.fade_in - current_blend.hold) / current_blend.fade_out
 		var eased_t = ease_in_out(t)
-		return lerp(target_mult, 1.0, eased_t)
+		var result = lerp(target_mult, 1.0, eased_t)
+		__log_("Phase: FADE_OUT", "t", t, "-> eased", eased_t, "-> mult", result)
+		return result
 		
 	else:
+		__log_("Phase: EXPIRED", "mult 1.0")
 		return 1.0
 
 

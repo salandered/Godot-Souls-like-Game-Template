@@ -13,12 +13,16 @@ func get_attack_series_list() -> Array:
 	return [
 		[PHES.Leaf.dodge_F, PHES.Leaf.sword_slide],
 		[PHES.Leaf.dodge_R, PHES.Leaf.sword_slide],
+		[PHES.Leaf.dodge_F, PHES.Leaf.stab_low],
 	]
 
 
 func pick_series_idx() -> int:
+	var dist = distance_to_player()
 	var _idx = 0
-	if distance_to_player() < config.COMBAT_RAD():
+	if dist > config.CLOSE_TO_ORBIT() and not me.angry_raised:
+		_idx = 2
+	if dist < config.COMBAT_RAD():
 		_idx = 1
 	return _idx
 

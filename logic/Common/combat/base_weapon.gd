@@ -1,7 +1,9 @@
 @tool
 @icon("res://-assets-/x_misc/x_icons/red/icon_sword.png")
-extends Node3D
+
+@abstract
 class_name BaseWeapon
+extends Node3D
 
 ## Weapon consists of
 # - WeaponHurtBox (area3D) - PACKED SCENE
@@ -9,24 +11,21 @@ class_name BaseWeapon
 #     - note that godot wants u to change its shape via Shape, not Scale 
 # - Weapon visual mesh - optional (e.g. not visuals for leg kick)
 ## Also
-# - Scene in owner tree should have group.
-# - see description of properties below
 # - see SmithSword implementation for basic approach to all this
 
 ## assigned by the holder (owner)
 @export var holder: BaseCharacter
 
-## assigned by specific implementation
-var weapon_hurt_box: WeaponHurtBox
-var weapon_visuals: MeshInstance3D = null
-var weapon_name: String = "no_weapon_name_please_add"
+## managed by implementation
+var _weapon_hurt_box: WeaponHurtBox
+var _weapon_name: String = "no_weapon_name_please_add"
 
 ## To get a hit only once per attack.
 ## Hitbox A on contact: 
 ##    - if A not on the list, writes itself to the list
 ##    - Further contacts of A with this weapon will be ignored
 ## Usually is cleared by attack states on_exit()
-var _contact_hitbox_list: Array[Hitbox_]
+var _contact_hitbox_list: Array[CharacterHitbox]
 
 ## does it hurt right now, usually is managed by state
 var _is_attacking: bool = false
@@ -37,16 +36,34 @@ var _hit_data: HitData = null
 
 
 func _ready() -> void:
-	assert(weapon_hurt_box is Area3D, "Weapon is missing an Area3D node named 'WeaponArea'.")
-	assert(weapon_hurt_box.get_child(0), "The 'WeaponArea' must have a CollisionShape3D child.")
-	assert(holder, "Set holder!")
+	_weapon_hurt_box = get_weapon_hurt_box()
+	assert(_weapon_hurt_box, "No _weapon_hurt_box provided for " + get_weapon_name())
+	assert(_weapon_hurt_box.get_child(0), "The _weapon_hurt_box must have a CollisionShape3D. " + get_weapon_name())
+	assert(holder, "Set holder! for " + get_weapon_name())
 	
-	weapon_hurt_box.base_weapon = self
-	weapon_hurt_box.collision_layer = Collision.Layers.WEAPON_AREA
-	weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
+	_weapon_hurt_box.base_weapon = self
+	_weapon_hurt_box.collision_layer = Collision.Layers.WEAPON_AREA
+	_weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
 
-	if not weapon_visuals:
-		print_.note(false, "Note: Weapon", pp.in_q(weapon_name), "has no visuals")
+	_weapon_name = get_weapon_name()
+
+	if not get_weapon_visuals():
+		print_.note(false, "Note: Weapon", pp.in_q(get_weapon_name()), "has no visuals")
+
+	initialise()
+
+
+## additional init or validation if needed
+@abstract func initialise() -> void
+
+
+@abstract func get_weapon_hurt_box() -> WeaponHurtBox
+
+
+@abstract func get_weapon_name() -> String
+
+## could be nullable (aura weapon)
+@abstract func get_weapon_visuals() -> MeshInstance3D
 
 
 func is_attacking() -> bool:
@@ -57,7 +74,7 @@ func set_is_attacking(is_attacking_: bool) -> void:
 	_is_attacking = is_attacking_
 
 
-## can be null
+## nullable
 func get_hit_data() -> HitData:
 	return _hit_data
 
@@ -73,11 +90,11 @@ func reset_hit_data():
 ## CONTACT HITBOX LIST MANAGEMENT
 # region
 
-func is_in_contact_hitbox_list(hitbox: Hitbox_) -> bool:
+func is_in_contact_hitbox_list(hitbox: CharacterHitbox) -> bool:
 	return hitbox in _contact_hitbox_list
 
 
-func add_hitbox_to_contact_list(hitbox: Hitbox_) -> void:
+func add_hitbox_to_contact_list(hitbox: CharacterHitbox) -> void:
 	if is_in_contact_hitbox_list(hitbox):
 		print_.warn(false, "wanted to add hitbox to contact list. but its there already", "add_hitbox_to_contact_list", "not add", str(hitbox))
 		return
@@ -101,11 +118,11 @@ func __pp_holder() -> String:
 
 func _to_string() -> String:
 	return "ID '%s' wepName '%s' Holder '%s' ContactHiBList '%s' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), weapon_name, holder.name, pp.list_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
+		% [str(get_instance_id()), _weapon_name, holder.name, pp.list_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
 
 
 func __log_(...parts: Array):
-	print_.weapon(weapon_name, pp.list_(parts))
+	print_.weapon(_weapon_name, pp.list_(parts))
 
 
 # endregion

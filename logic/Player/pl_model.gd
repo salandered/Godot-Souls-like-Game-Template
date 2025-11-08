@@ -35,6 +35,7 @@ func _ready() -> void:
 		 
 	container.accept_all()
 	
+	combat.initialise()
 	player_sm.initialise()
 	animator_manager.initialise()
 
@@ -51,8 +52,6 @@ func update(input_: InputPackage, delta: float):
 
 	player_sm.update(input_, delta)
 	_player.move_and_slide()
-
-
 
 
 # region: DEV ONLY

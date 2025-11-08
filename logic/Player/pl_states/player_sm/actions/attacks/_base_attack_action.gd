@@ -1,10 +1,11 @@
-extends PlayerAction
+@abstract
 class_name BaseAttackAction
+extends PlayerAction
 
 
 ## DOCS
-## - WARNING: implementation must not use initialise, but initialise_implementation()
-## - important to manage weapon via player_sm.combat three times: on_enter, update, on_exit.
+## - see BasePHEAttack for reference
+
 
 ## experimental usage with enemy communication
 var attack_radius: float = 1.0
@@ -30,12 +31,36 @@ func initialise() -> void:
 
 
 # to override instead of initialise
-func initialise_implementation():
-	pass
+@abstract func initialise_implementation() -> void
+
+## what weapons should be attacking in this state (depends on animation ofc)
+@abstract func get_active_weapon_names() -> Array[String]
+
+## most states can use this in theirs get_active_weapon_names
+func default_get_active_weapon_names() -> Array[String]:
+	return [WeaponNames.smith_sword]
+	
+
+## Combat methods to use in case of overriding on_enter_state/on_exit_state/update
+# region
+
+func _combat_set_hit_data_to_all_weapons():
+	player_sm.combat.set_hit_data_to_all_weapons(hit_damage, anim.anim_id)
+
+func _combat_update_is_attacking(__log: bool = false):
+	var _weapon_names = get_active_weapon_names()
+	for weapon_name_ in _weapon_names:
+		player_sm.combat.update_weapon_is_attacking(weapon_name_, is_weapon_hurts(weapon_name_, __log))
+
+func _combat_reset_all_weapons():
+	player_sm.combat.reset_all_weapons()
+
+# endregion
 
 
 func on_enter_action(input_: InputPackage):
-	player_sm.combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
+	_combat_set_hit_data_to_all_weapons()
+
 	if player_sm.area_awareness.is_camera_locked():
 		default_sp.ANGULAR_SPEED = 2
 	else:
@@ -56,7 +81,7 @@ func on_enter_action(input_: InputPackage):
 	
 
 func on_exit_action():
-	player_sm.combat.reset_active_weapon()
+	_combat_reset_all_weapons()
 
 
 func update(input_: InputPackage, delta):
@@ -71,7 +96,7 @@ func update(input_: InputPackage, delta):
 	
 	__log_hurt()
 
-	player_sm.combat.update_active_weapon_is_attacking(weapon_hurts(false))
+	_combat_update_is_attacking()
 
 
 func _adjust_extra_speed_to_strafe_direction() -> Dictionary:

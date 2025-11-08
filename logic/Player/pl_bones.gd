@@ -13,6 +13,6 @@ class_name PlayerBones
 	#specific_weapon = get_descendants.base_weapons_only_one(right_wrist)
 
 # TODO: flying head without eyes
-func accept_bones()-> void:
+func accept_bones() -> void:
 	for child: BoneAttachment3D in get_descendants.bone_attachments(self):
 		child.set_external_skeleton(general_skeleton.get_path())

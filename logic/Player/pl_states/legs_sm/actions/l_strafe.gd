@@ -152,10 +152,13 @@ func update(input_: InputPackage, delta: float) -> void:
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
 	
-	# print_.prefix_s("origSpM/final/currSP", _prev_sp_mult, SPEED_MULT, CURR_SPEED)
 
-
-	var _sp_config := SpeedConfig.new(default_sp, SPEED_MULT, curr_direction.get_curr_speed(), CURR_ANGULAR_SPEED)
+	var _sp_config := SpeedConfig.new(
+		default_sp,
+		SPEED_MULT,
+		player_sm.apply_hit_influence(CURR_SPEED),
+		CURR_ANGULAR_SPEED
+		)
 
 	pm().look_at_target(delta, _sp_config)
 

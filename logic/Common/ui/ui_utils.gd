@@ -4,11 +4,11 @@ class_name UIUtils
 const ALPHA_CHANNEL = "modulate:a"
 
 
-static func fade_out_and_hide(owner: Node, ui_panels: Array[Control], duration: float) -> Tween:
+static func fade_out_and_hide(owner: Node, ui_panels: Array, duration: float) -> Tween:
 	var tween = owner.create_tween()
 	tween.set_parallel(true)
 	
-	for panel in ui_panels:
+	for panel: Control in ui_panels:
 		tween.tween_property(
 			panel,
 			ALPHA_CHANNEL,

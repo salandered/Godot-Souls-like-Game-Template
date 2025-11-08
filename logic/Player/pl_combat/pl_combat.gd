@@ -1,13 +1,19 @@
 @tool
 extends BaseCombat
 class_name PlayerCombat
+@onready var bones: PlayerBones = %bones
 
 
 @onready var model = $".." as PlayerModel
 
 
+func get_parent_node_of_weapons() -> Node3D:
+	return bones
+
+
 func is_player() -> bool:
 	return true
+
 
 func get_character() -> BaseCharacter:
 	return model._player
@@ -16,9 +22,9 @@ func get_character() -> BaseCharacter:
 func get_combat_name() -> String:
 	return "Player Combat"
 
-func get_active_weapon() -> BaseWeapon:
-	return model.active_weapon
 
+## PLAYER SPECIFIC: WORK WITH INPUTS
+# region
 
 func contextualize(new_input: InputPackage, delta) -> InputPackage:
 	# actualise_shieldshot(new_input)
@@ -32,27 +38,26 @@ func _translate_combat_actions(new_input: InputPackage, delta):
 	var _translated: Array = model.active_weapon.translate_combat_input_to_state(new_input.combat_actions)
 	new_input.actions.append_array(_translated)
 
+# endregion
+
+
+# --------------------------
 
 # region: Ideas
-
 # static var _combat_inputs_priority: Dictionary = {
 # 	CombatAction.light_attack_pressed: 1,
 # 	CombatAction.light_attack_pressed_when_move: 2,
 # 	CombatAction.heavy_attack_pressed: 3,
 # }
-
 # func filter_with_resources(input_: InputPackage):
 # 	if model.resources.statuses.has("fatique"):
 # 		input_.actions.erase("sprint")
-
-
 # static func _priority_sort(a: String, b: String) -> bool:
 # 	# 0 means lowest
 # 	if _combat_inputs_priority[a] > _combat_inputs_priority[b]:
 # 		return true
 # 	else:
 # 		return false
-
 # endregion
 
 # region: demo of magic abilities

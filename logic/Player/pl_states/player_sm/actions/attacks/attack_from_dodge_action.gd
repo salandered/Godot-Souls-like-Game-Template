@@ -11,8 +11,12 @@ func initialise_implementation() -> void:
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_DODGE, 0.1))
 
 
+func get_active_weapon_names() -> Array[String]:
+	return default_get_active_weapon_names()
+
+
 func on_enter_action(input_: InputPackage) -> void:
-	player_sm.combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
+	_combat_set_hit_data_to_all_weapons()
 
 	var _speed_extra_Z := DEFAULT_GLOBAL_EXTRA_SPEED_Z
 	var _speed_extra_X := DEFAULT_GLOBAL_EXTRA_SPEED_X

@@ -100,6 +100,7 @@ func update(input_: InputPackage, delta: float):
 			CURR_SPEED = speed_from_inherited.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp.update(delta)
 
+	CURR_SPEED = player_sm.apply_hit_influence(CURR_SPEED)
 	var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
 	speed_config.tie_turn_sp_to_speed(0.6)
 	pm().move_rotate_with_input_vector(input_, delta, speed_config)

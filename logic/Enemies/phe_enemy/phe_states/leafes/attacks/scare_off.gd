@@ -18,9 +18,12 @@ func initialise_implementation() -> void:
 
 	hit_damage = 25
 
+func get_active_weapon_names() -> Array[String]:
+	return [WeaponNames.bg_aura_weapon]
+
 func on_exit_state() -> void:
 	get_animator_manager().reset_global_speed_scale()
-	_combat_reset_active_weapon()
+	_combat_reset_all_weapons()
 
 
 # NOTE: here we test anin speed curve in real time. Very promising

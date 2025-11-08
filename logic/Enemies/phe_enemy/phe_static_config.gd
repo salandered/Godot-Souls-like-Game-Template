@@ -6,7 +6,7 @@ class_name PHEStaticConfig
 const MAX_DEPTH = 5
 
 ## Logic
-const PHASE_SWITCH_HP_TRESHOLD := 0.4 # % of maximum
+const PHASE_SWITCH_HP_TRESHOLD := 0.6 # % of maximum
 
 ## Chances
 

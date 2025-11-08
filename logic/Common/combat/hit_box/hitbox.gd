@@ -3,17 +3,17 @@
 extends Area3D
 
 ## Area which CAN BE damaged. Opposed to an area which DAMAGES.
-class_name Hitbox_
+class_name CharacterHitbox
 
 ## Docs
 ##  - MUST have 'combat' assigned
 ## 
 ##  - Character can have any number of hitboxes. 
-##    Hitbox takes HitData from incoming weapon and passes to BaseCombat.
+##    Hitbox takes HitData from incoming weapon and passes to BaseCombat
 ##    BaseCombat processes any HitData instance only once using unique ID.
 ##    => as long as weapon has the same HitData while contacting with hitboxes, the hit will be processed just once
 ##    
-##  - Multiple registers on contacting same Hitbox_ with the same HurtBox is prevented
+##  - Multiple registers on contacting same CharacterHitbox with the same HurtBox is prevented
 ##    by 'add_hitbox_to_contact_list' logic. It stores contacted hitbox on a weapon side.
 ##    It also means that u can have any number of hurt boxes on a weapon.
 ##    Technically the mechanic of processing any hitbox only once at BaseCombat side makes 'contact_list' less important
@@ -38,7 +38,7 @@ func _ready() -> void:
 	collision_layer = Collision.Layers.HITBOX_AREA
 	collision_mask = Collision.Mask.HITBOX_AREA_MASK
 	# 
-	print_.hit_box(name, "--- Hitbox_ ready ---")
+	print_.hit_box(name, "--- CharacterHitbox ready ---")
 	assert(combat, "Set combat system!")
 
 
@@ -78,15 +78,15 @@ func on_area_contact(incoming_area: Node3D):
 		return
 	weapon.add_hitbox_to_contact_list(self)
 
-	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.weapon_name), "by", pp.in_q(weapon.holder.name)))
+	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon._weapon_name), "by", pp.in_q(weapon.holder.name)))
 
 	var hit_data := weapon.get_hit_data()
 	if not hit_data:
 		__log_warn("weapon hit data is null", "on_area_contact", "return")
 		return
 
-	if combat is PlayerCombat:
-		prints("contact", em.crucial_x2, "/n", em.crucial_x2)
+	# if combat is PlayerCombat:
+		# prints("contact", em.crucial_x2, "/n", em.crucial_x2)
 		
 	__log_("Calling apply_hit with hit data", hit_data)
 	combat.apply_hit(hit_data)

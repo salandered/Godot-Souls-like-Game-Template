@@ -14,16 +14,6 @@ static var on_upd := " upd"
 static var on_internal_upd := " _upd"
 
 
-static func list_(parts: Array) -> String:
-	var r = ""
-	for part in parts:
-		if part is float:
-			r += str(pp.round_01(part)) + " "
-		else:
-			r += str(part) + " "
-	return r
-
-
 static func s(...parts: Array) -> String:
 	var r = ""
 	for part in parts:
@@ -32,6 +22,9 @@ static func s(...parts: Array) -> String:
 		else:
 			r += str(part) + " "
 	return r
+
+
+# region: in 
 
 static func in_q(something: Variant, spaces: bool = false) -> String:
 	var r := "'" + str(something) + "'"
@@ -53,40 +46,7 @@ static func in_curl(something: Variant, spaces: bool = false) -> String:
 static func in_sp(something: Variant) -> String:
 	return " " + str(something) + " "
 
-static func compare(text_1: String, val_1: float, what_happened: String, text_2: String, val_2: float) -> String:
-	# what_happened e.g.: "works longer than"
-	var r := s(text_1, round_01(val_1), what_happened, text_2, round_01(val_2))
-	return r
-
-static func compare_w(what_happened: String, text_2: String, val_2: float) -> String:
-	# what_happened e.g.: "works longer than"
-	var r := s(what_happened, text_2, round_01(val_2))
-	return r
-
-static func _dict(dict_: Dictionary, json: bool = false, one_string: bool = false) -> String:
-	if json:
-		return JSON.stringify(dict_, "\t")
-	if dict_.is_empty():
-		return "{}"
-	return __recursive_dict(dict_, "", one_string)
-
-
-static func _array(array_: Array, json: bool = false) -> String:
-	if json:
-		return JSON.stringify(array_, "\t")
-	if array_.size() == 0:
-		return "[empty]"
-	var r := ""
-	for item in array_:
-		r += " " + str(item)
-	return r.strip_edges()
-
-static func vec3(v: Vector3) -> String:
-	return "(%3.3f %3.3f %3.3f)" % [v.x, v.y, v.z]
-
-
-static func vec2(v: Vector2) -> String:
-	return "(%4.2f %4.2f)" % [v.x, v.y]
+# endregion
 
 
 static func round_001(f: float) -> String:
@@ -114,6 +74,36 @@ static func rad2deg(angle_: float, to_str: bool = true) -> Variant:
 		return str(r) + "°"
 	return r
 
+# region:  basic structures
+
+static func vec3(v: Vector3) -> String:
+	return "(%3.3f %3.3f %3.3f)" % [v.x, v.y, v.z]
+
+static func vec2(v: Vector2) -> String:
+	return "(%4.2f %4.2f)" % [v.x, v.y]
+
+
+static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = false) -> String:
+	if json:
+		return JSON.stringify(_dict_, "\t")
+	if _dict_.is_empty():
+		return "{}"
+	return __recursive_dict(_dict_, "", one_string)
+
+static func list_(parts: Array, json: bool = false) -> String:
+	if json:
+		return JSON.stringify(parts, "\t")
+	if parts.size() == 0:
+		return "[-x-]"
+	var r = ""
+	for part in parts:
+		if part is float:
+			r += str(pp.round_01(part)) + " "
+		else:
+			r += str(part) + " "
+	return r
+
+# endregion
 
 static func file_load_err(err, path: String):
 	if err == OK:
@@ -123,21 +113,29 @@ static func file_load_err(err, path: String):
 	else:
 		print_.dev(path + " error loading:" + str(err))
 
+# region: domain helpers
 
 static func bone_mask_(_bone_mask_: Array[int]) -> String:
 	var first_b = _bone_mask_[0] if _bone_mask_.size() > 0 else -1
 	var last_b = _bone_mask_[-1] if _bone_mask_.size() > 0 else -1
 	return "boneMsk [%d-%d] (size %d)" % [first_b, last_b, _bone_mask_.size()]
 
+## returns name from id (no lib)
+static func anim(anim_id: String) -> String:
+	var pos = anim_id.rfind("/")
+	var _r = anim_id.substr(pos + 1) if pos != -1 else anim_id
+	return pp.in_q(_r)
+
+# endregion
 
 # region: inner helpers
 
-static func __recursive_dict(dict_: Dictionary, indent: String = "", one_string: bool = false) -> String:
+static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string: bool = false) -> String:
 	var r = "" if one_string else "\n"
 	var next_indent = "" if one_string else indent + "\t"
 	
-	for key_ in dict_.keys():
-		var value_ = dict_[key_]
+	for key_ in _dict_.keys():
+		var value_ = _dict_[key_]
 		var value_str: String
 		
 		if value_ is float:
@@ -150,7 +148,7 @@ static func __recursive_dict(dict_: Dictionary, indent: String = "", one_string:
 		r += next_indent + in_q(key_) + " : " + value_str
 		r += " " if one_string else "\n"
 	
-	if not dict_.is_empty():
+	if not _dict_.is_empty():
 		r = r.trim_suffix(",\n")
 	
 	r += indent

@@ -24,7 +24,7 @@ func get_first_one() -> String:
 
 
 func _to_string() -> String:
-	return "SupportedSbs: " + pp._array(state_names)
+	return "SupportedSbs: " + pp.list_(state_names)
 
 
 func __validation():

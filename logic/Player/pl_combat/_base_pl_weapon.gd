@@ -1,6 +1,8 @@
 @tool
-extends BaseWeapon
+
+@abstract
 class_name BasePlayerWeapon
+extends BaseWeapon
 
 
 ## E.g: Sword maps 'light attack pressed' to slash, while staff to spell.
@@ -19,7 +21,7 @@ func translate_combat_input_to_state(combat_actions: Array) -> Array:
 			_translated.append(_input_action_to_state[input_action])
 
 	if not combat_actions.is_empty() and _translated.is_empty():
-		print_.warn_raw(false, pp.s("BaseWeapon", weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))
+		print_.warn_raw(false, pp.s("BaseWeapon", _weapon_name, "has no map for actions", combat_actions, "mapping", _input_action_to_state))
 	# if not _translated.is_empty():
 		# print_.fight("PlCombat", pp.s("actions ", combat_actions, "translatedToSt", _translated))
 	return _translated

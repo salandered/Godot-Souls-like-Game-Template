@@ -43,6 +43,7 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.react.dodge_F_hit),
 	AnimationData.new(A.react.hit_B_large_rm),
 	AnimationData.new(A.react.hit_push_b_rm, 0.9),
+	AnimationData.new(A.react.react_dodge_B, 0.85),
 
 	## attacks
 	AnimationData.new(A.attack.axe_slice_1),

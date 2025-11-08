@@ -3,16 +3,19 @@
 extends PHEWeapon
 class_name AuraWeapon
 
-@onready var _weapon_hurt_box: WeaponHurtBox = %WeaponHurtBox
-#@onready var visuals: Node3D = %Visuals
+@onready var _weapon_hurt_box_: WeaponHurtBox = %WeaponHurtBox
 
 
-func _ready() -> void:
-	#var mesh: MeshInstance3D = visuals.get_child(0)
-	#assert(mesh and mesh is MeshInstance3D)
-	weapon_hurt_box = _weapon_hurt_box
-	#weapon_visuals = mesh
-	weapon_name = WeaponNames.bg_aura_weapon
+func initialise() -> void:
+	pass
 
 
-	super._ready()
+func get_weapon_hurt_box() -> WeaponHurtBox:
+	return _weapon_hurt_box_
+
+func get_weapon_name() -> String:
+	return WeaponNames.bg_aura_weapon
+
+
+func get_weapon_visuals() -> MeshInstance3D:
+	return null

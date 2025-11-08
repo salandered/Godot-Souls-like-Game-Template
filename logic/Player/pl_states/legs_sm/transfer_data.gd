@@ -28,7 +28,7 @@ func get_by_action(action_name_: String) -> Variant:
 
 
 func fill(action_name_: String, data_: Dictionary):
-	var _msg := pp.s(pp._dict(data_) if data_ is Dictionary else "| data is not a Dict ⚠️⚠️")
+	var _msg := pp.s(pp.dict_(data_) if data_ is Dictionary else "| data is not a Dict ⚠️⚠️")
 	# print_.psm("TransferData💼", "fill for " + pp.in_q(action_name_) + ":\t" + _msg)
 	action_name = action_name_
 	_transfer = data_.duplicate_deep()
@@ -42,7 +42,7 @@ func _reset():
 func __log_value(action_name_, key, value):
 	var _v_msg := ""
 	if value is Dictionary:
-		_v_msg = pp._dict(value)
+		_v_msg = pp.dict_(value)
 	elif value == null:
 		_v_msg = "no key or its value is null ⚠️"
 	else:

@@ -8,6 +8,7 @@ class _lib:
 	const _axe_pl = "axe-from-player" + "/"
 	const _bg_not_axe = "BG-not-axe" + "/"
 	const _some_from_pl = "some-from-pl" + "/"
+	const _testing = "testing" + "/"
 
 
 const sleep := _lib._bg_not_axe + "sleep"
@@ -15,7 +16,6 @@ const awaken := _lib._bg_not_axe + "awakening"
 const death := _lib._bg_not_axe + "ss death"
 const phase_switch := _lib._legacy + "phase_switch"
 const phase_switch_loop := _lib._legacy + "phase_switch_loop"
-
 
 
 class loco:
@@ -53,6 +53,8 @@ class attack:
 	const club_part_3_4 := _lib._bg_not_axe + "ADD One Hand Club Combo part3"
 	
 	const sword_slide := _lib._bg_not_axe + "ADD great sword slide attack"
+	const power_up := _lib._testing + "EP-p1-O-power-attack-up_2"
+	const stab_low := _lib._testing + "OS-stab-3_2"
 
 
 class react:
@@ -119,6 +121,8 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(attack.club_part_3_4, 0.7),
 	
 	AnimationData.new(attack.sword_slide),
+	AnimationData.new(attack.power_up, 0.5),
+	AnimationData.new(attack.stab_low, 0.5),
 	
 	## legacy
 

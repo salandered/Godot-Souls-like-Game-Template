@@ -6,3 +6,6 @@ func initialise_implementation() -> void:
 		PHES.Leaf.dodge_B: 0.1,
 	})
 	hit_damage = 25
+
+func get_active_weapon_names() -> Array[String]:
+	return default_get_active_weapon_names()

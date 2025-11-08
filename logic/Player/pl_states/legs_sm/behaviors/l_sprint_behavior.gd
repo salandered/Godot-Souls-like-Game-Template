@@ -30,7 +30,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 		MotionType.IDLE:
 			if is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
 				next_action_name = supported_actions.default_by_motion(MotionType.START)
-				_reason += pp.compare_w("works >", "commit", IDLE_COMMIT)
+				_reason += pp.s("works >", "commit", IDLE_COMMIT)
 	
 		MotionType.START:
 			if is_moving(input_):
@@ -40,7 +40,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 			else:
 				if curr_action.works_longer_than(START_COMMIT):
 					next_action_name = supported_actions.default_by_motion(MotionType.IDLE)
-					_reason += pp.compare_w("works >", "commit", START_COMMIT)
+					_reason += pp.s("works >", "commit", START_COMMIT)
 		
 		MotionType.LOOP:
 			next_action_name = _from_LOOP_decision(input_, delta, next_action_name)
@@ -49,11 +49,11 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 			if is_moving(input_):
 				if curr_action.works_longer_than(STOP_RESUME_COMMIT):
 					next_action_name = supported_actions.default_by_motion(MotionType.LOOP) ## could be START here
-					_reason += pp.compare_w("works >", "commit", STOP_RESUME_COMMIT)
+					_reason += pp.s("works >", "commit", STOP_RESUME_COMMIT)
 			else:
 				if curr_action.time_remaining() < 0.5: # curr_action.works_longer_than(STOP_COMMIT) and
 					next_action_name = supported_actions.default_by_motion(MotionType.IDLE)
-					_reason += pp.compare_w("time_remaining >", "0.1", STOP_COMMIT)
+					_reason += pp.s("time_remaining >", "0.1", STOP_COMMIT)
 
 	if next_action_name != curr_action_name:
 		__log_decision_data(input_, next_action_name, _reason)

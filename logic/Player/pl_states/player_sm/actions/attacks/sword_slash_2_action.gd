@@ -13,3 +13,6 @@ func initialise_implementation() -> void:
 		PS.Act.sword_slash_1: 0.3,
 	})
 
+
+func get_active_weapon_names() -> Array[String]:
+	return default_get_active_weapon_names()

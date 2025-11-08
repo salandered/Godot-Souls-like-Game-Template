@@ -44,6 +44,8 @@ class Leaf:
 	
 	const gap_closer := "gap_closer⁀➴"
 	const sword_slide := "sword_slide"
+	const power_up := "power_up"
+	const stab_low := "stab_low"
 
 	const attack_360_high := "attack_360_high"
 	const attack_360_low := "attack_360_low"

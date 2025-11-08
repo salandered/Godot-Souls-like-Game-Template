@@ -11,8 +11,8 @@
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools/Imphenzia/PixPal/Materials/M_ImphenziaPixPal.tres" id="9_h8ebr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
-radius = 0.7861328
-height = 2.2701416
+radius = 0.7368164
+height = 2.976471
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sfdt"]
 resource_name = "08___Default.001"
@@ -146,7 +146,7 @@ collision_layer = 16
 collision_mask = 8
 
 [node name="HurtBoxCol4" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.056679938, 1.5394812, 0.07279479)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05667996, 1.1863165, 0.07279478)
 shape = SubResource("CapsuleShape3D_hj5gq")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 

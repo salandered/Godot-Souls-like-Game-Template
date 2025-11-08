@@ -20,15 +20,13 @@ func get_attack_series_list() -> Array:
 func pick_series_idx() -> int:
 	var _idx := ra.ipick_weighted({
 		0: fvalue_angry(0.9, 0.2),
-		1: fvalue_angry(0.05, 0.6),
+		1: fvalue_angry(0.05, 0.4),
 		2: fvalue_angry(0.1, 0.6),
 	})
 	return _idx
 
 
 func condition_to_next_switch(current_substate: BasePHELeaf) -> bool:
-	var allow_switch_marker := MarkerName.ALLOWS_SWITCH
-
 	if current_substate.state_name in all_the_dodges and current_substate.is_ended():
 		return true
 

@@ -1,5 +1,6 @@
-extends BasePHELeaf
+@abstract
 class_name BasePHEDodgeLeaf
+extends BasePHELeaf
 
 
 var sp_config: SpeedConfig

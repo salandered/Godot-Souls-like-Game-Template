@@ -162,7 +162,7 @@ const IDLE_LIKE_ACTIONS = [
 	PS.Act.sword_slash_2,
 	PS.Act.attack_from_run,
 	PS.Act.attack_from_dodge,
-	PS.Act.dodge,
+	# PS.Act.dodge,
 	PS.Act.pushback,
 	PS.Act.thrown,
 ]
@@ -217,11 +217,18 @@ func is_vulnerable() -> bool:
 func is_interruptable() -> bool:
 	return anim_params_container.is_interruptable(anim.native_anim, effective_time_spent())
 
-func weapon_hurts(__log: bool = false) -> bool:
-	var _r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
+
+func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
+	var _r: bool = false
+	match weapon_name:
+		WeaponNames.smith_sword:
+			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
+		_:
+			__log_warn(true, "unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
 	if _r and __log:
-		print_.prefix_s("// HURT")
+		print_.prefix("// HURT")
 	return _r
+
 
 func tracks_input_vector() -> bool:
 	return anim_params_container.is_tracks_input_vector(anim.native_anim, effective_time_spent())
@@ -250,6 +257,11 @@ var __LOG_OVERLAY_ANIM: bool = true
 
 
 @abstract func __log_function(prefix: String, ...parts: Array) -> void
+
+func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...parts: Array):
+	var _parts := pp.list_(parts)
+	print_.warn(crucial, what, where, fallback, _parts, "\n\t\t", action_name)
+
 
 func __log_ent(...parts: Array):
 	__log_function(action_name + pp.on_ent, pp.list_(parts))

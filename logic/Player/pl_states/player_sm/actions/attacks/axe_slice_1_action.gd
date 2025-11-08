@@ -11,3 +11,7 @@ func initialise_implementation() -> void:
 	start_time_offset.set_by_prev_action({
 		PS.Act.axe_slice_2: 0.4,
 	})
+
+
+func get_active_weapon_names() -> Array[String]:
+	return default_get_active_weapon_names()

@@ -39,3 +39,7 @@ func get_calibrated_hold(duration: float):
 func auto_calibrate(duration: float, max_possible_hold: bool = false, scale: float = 0.6):
 	auto_fade_in_out_calibrate(duration, scale)
 	auto_hold_calibrate(duration, max_possible_hold)
+
+
+func _to_string() -> String:
+	return "BlendCfg(fade_in/out %s/%s hold %s)" % [pp.s(fade_in), pp.s(fade_out), pp.s(hold)]

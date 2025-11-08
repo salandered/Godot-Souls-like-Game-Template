@@ -16,16 +16,13 @@ func initialise() -> void:
 
 
 func on_enter_action(input_: InputPackage):
+	anim = anim_container.get_by_anim_id(ra.spick_random(A.react.hit_push_b_rm, A.react.react_dodge_B))
+	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0))
+	
 	var r = calculate_extra_root_speed(DEFAULT_GLOBAL_EXTRA_SPEED_Z)
 	_final_extra_speed_Z = r.z
 	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
 	
-
-func _calculate_final_speed_x(extra_speed_x: float) -> float:
-	var _r := extra_speed_x
-	__log_ent("extraSp X", _r)
-	return _r
-
 
 func update(input_: InputPackage, delta):
 	var fade_factor := fade_interpolator.get_current_value()

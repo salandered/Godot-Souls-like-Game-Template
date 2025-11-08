@@ -145,3 +145,14 @@ static func safe_cast_array_of_float(array: Array[Variant]) -> Array[float]:
 			return []
 	list_casted.assign(array)
 	return list_casted
+
+
+static func safe_cast_array_of_base_weapon(array: Array[Variant]) -> Array[BaseWeapon]:
+	var list_casted: Array[BaseWeapon] = []
+	for item in array:
+		if item is not BaseWeapon:
+			print_.warn_raw(false,
+				"Array contains non BaseWeapon value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
+			return []
+	list_casted.assign(array)
+	return list_casted

@@ -16,11 +16,16 @@ func initialise_implementation():
 	# here speed is strength_mult_ for gap_calculator
 	## note: was another gap closer for USUAL but it doesnt fit. Lets just jump
 	var usual_preset := ActionModeSwitcher.Preset.new(USUAL, 0.15, PHEA.loco.jump_towards)
-	var power_preset := ActionModeSwitcher.Preset.new(POWER, 0.5, PHEA.attack.power_gap_closer)
+	var power_preset := ActionModeSwitcher.Preset.new(POWER, 1.0, PHEA.attack.power_gap_closer)
 	
 	mode_switcher = ActionModeSwitcher.new(usual_preset, power_preset)
 
 	hit_damage = 35
+
+
+func get_active_weapon_names() -> Array[String]:
+	return [WeaponNames.big_pinga_blade, WeaponNames.bg_aura_weapon]
+
 
 func _decide_mode_on_enter():
 	if not me.angry_raised:
@@ -32,7 +37,7 @@ func _decide_mode_on_enter():
 
 
 func on_enter_state() -> void:
-	_combat_set_hit_data_to_active_weapon()
+	_combat_set_hit_data_to_all_weapons()
 
 	_decide_mode_on_enter()
 	gap_calculator = GapJumpCalculator.new(mode_switcher.get_curr_speed())
@@ -45,7 +50,7 @@ func on_enter_state() -> void:
 
 func on_exit_state() -> void:
 	APPLY_GRAVITY = true
-	_combat_reset_active_weapon()
+	_combat_reset_all_weapons()
 
 
 func update(delta):

@@ -1,5 +1,6 @@
-extends BasePHELeaf
+@abstract
 class_name BasePHEAttack
+extends BasePHELeaf
 
 var hit_damage: float = 20
 
@@ -12,6 +13,9 @@ var SCALE_ROOT_FACTOR := 1.0
 
 ## DOCS:
 ##   WARNING: implementation must not use initialise, but initialise_implementation()
+##            i made it @abstract so it's easier to follow this pattern.
+##            All weapons must set at least their hit_damage, anyway
+##  Implementations must use combat methods in case of overrding base state methods       
 
 
 func initialise() -> void:
@@ -21,38 +25,40 @@ func initialise() -> void:
 	initialise_implementation()
 
 
-# to override instead of initialise
-func initialise_implementation():
-	pass
+@abstract func initialise_implementation() -> void
+
+## what weapons should be attacking in this state (depends on animation ofc)
+@abstract func get_active_weapon_names() -> Array[String]
 
 
-## override for non default weapon
-func get_active_weapon_name() -> String:
-	return WeaponNames.big_pinga_blade
-
+## most states can use this in theirs get_active_weapon_names
+func default_get_active_weapon_names() -> Array[String]:
+	return [WeaponNames.big_pinga_blade]
+	
 
 ## Combat methods to use in case of overriding on_enter_state/on_exit_state/update
 # region
 
-func _combat_set_hit_data_to_active_weapon():
-	combat.set_active_weapon(get_active_weapon_name())
-	combat.set_hit_data_to_active_weapon(hit_damage, anim.anim_id)
+func _combat_set_hit_data_to_all_weapons():
+	combat.set_hit_data_to_all_weapons(hit_damage, anim.anim_id)
 
 func _combat_update_is_attacking():
-	combat.update_active_weapon_is_attacking(is_weapon_hurts(get_active_weapon_name(), true))
+	var _weapon_names = get_active_weapon_names()
+	for weapon_name_ in _weapon_names:
+		combat.update_weapon_is_attacking(weapon_name_, is_weapon_hurts(weapon_name_, false))
 
-func _combat_reset_active_weapon():
-	combat.reset_active_weapon()
+func _combat_reset_all_weapons():
+	combat.reset_all_weapons()
 
 # endregion
 
 
 func on_enter_state() -> void:
-	_combat_set_hit_data_to_active_weapon()
+	_combat_set_hit_data_to_all_weapons()
 
 
 func on_exit_state() -> void:
-	_combat_reset_active_weapon()
+	_combat_reset_all_weapons()
 
 
 func update(delta):

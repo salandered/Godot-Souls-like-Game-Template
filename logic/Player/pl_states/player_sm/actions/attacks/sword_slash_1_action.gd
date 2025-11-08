@@ -17,3 +17,7 @@ func initialise_implementation() -> void:
 		PS.Act.sword_slash_1: - 1.0
 		})
 	# GLOBAL_EXTRA_SPEED = 0.0
+
+
+func get_active_weapon_names() -> Array[String]:
+	return default_get_active_weapon_names()

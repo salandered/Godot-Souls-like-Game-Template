@@ -68,7 +68,7 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 		_reason = "pl_dist_greater_than GAP_CLOSER_RAD"
 		_next_state = ra.spick_weighted({
 			PHES.Leaf.gap_closer: fvalue_angry(0.4, 0.9),
-			PHES.attack_with_dodge_f: fvalue_angry(0.0, 0.1)})
+			PHES.attack_with_dodge_f: fvalue_angry(0.01, 0.15)})
 	elif dist > config.ORBIT_RAD():
 		_next_state = PHES.attack_with_dodge_f
 	elif dist > config.COMBAT_RAD():
