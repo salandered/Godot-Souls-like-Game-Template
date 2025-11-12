@@ -155,4 +155,5 @@ func __log_(...parts: Array):
 
 
 func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
+	
 	print_.warn(crucial, what, get_combat_name() + " " + where, fallback, pp.list_(context))

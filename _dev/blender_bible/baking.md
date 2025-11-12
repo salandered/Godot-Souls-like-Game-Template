@@ -1,0 +1,2 @@
+- See Notion
+- DO NOT use build in blender baking. Use SimpleBake or TexTools

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c4woejym2ayly"]
+
+[ext_resource type="Texture2D" uid="uid://7tu6ooc1lnvd" path="res://-assets-/materials-shared/_images/tower-map_Rusted Metal.jpg" id="1_t5kh5"]
+
+[resource]
+resource_name = "RustedMetal"
+cull_mode = 2
+albedo_texture = ExtResource("1_t5kh5")
+roughness = 0.5

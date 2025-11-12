@@ -1,10 +1,8 @@
 @tool
 extends BaseCombat
 class_name PlayerCombat
+@onready var _player: Princess = $".."
 @onready var bones: PlayerBones = %bones
-
-
-@onready var model = $".." as PlayerModel
 
 
 func get_parent_node_of_weapons() -> Node3D:
@@ -16,7 +14,7 @@ func is_player() -> bool:
 
 
 func get_character() -> BaseCharacter:
-	return model._player
+	return _player
 
 
 func get_combat_name() -> String:
@@ -35,7 +33,9 @@ func contextualize(new_input: InputPackage, delta) -> InputPackage:
 
 ## translates the input to basic states with the help of the current weapon
 func _translate_combat_actions(new_input: InputPackage, delta):
-	var _translated: Array = model.active_weapon.translate_combat_input_to_state(new_input.combat_actions)
+	# todo: hard coded weapon!
+	var weapon = get_weapon(WeaponNames.smith_sword)
+	var _translated: Array = weapon.translate_combat_input_to_state(new_input.combat_actions)
 	new_input.actions.append_array(_translated)
 
 # endregion
@@ -50,7 +50,7 @@ func _translate_combat_actions(new_input: InputPackage, delta):
 # 	CombatAction.heavy_attack_pressed: 3,
 # }
 # func filter_with_resources(input_: InputPackage):
-# 	if model.resources.statuses.has("fatique"):
+# 	if resources.statuses.has("fatique"):
 # 		input_.actions.erase("sprint")
 # static func _priority_sort(a: String, b: String) -> bool:
 # 	# 0 means lowest

@@ -1,0 +1,6 @@
+[{
+"name": "1",
+"scenes": [{
+&"scene": "res://-assets-/GLB-level/minimal-arena/column/ShatteredColumn.tscn"
+}]
+}]

@@ -1,134 +1,168 @@
-extends Node
-class_name PlayerModel
+extends BaseCharacter
+class_name Princess
 
-@onready var _player: Princess = $".."
+
+# camera
+@onready var fancy_camera: FancyCamera = %FancyCamera
+@onready var camera_focus: Node3D = %CameraFocus
+
+#
+@onready var visuals: PlayerVisuals = %Visuals
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
+@onready var container: PlayerStatesContainer = %StatesContainer
+@onready var bones: PlayerBones = %bones
+
+# essential systems
+@onready var player_movement: PlayerMovement = %PlayerMovement
 @onready var combat: PlayerCombat = $Combat
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
-@onready var container: PlayerStatesContainer = %StatesContainer
-
 @onready var player_sm: PlayerSM = %PlayerSM
-@onready var legs_sm: LegsSM = %LegsSM
-@onready var bones: PlayerBones = %bones
 
-@onready var native_player: AnimationPlayer = %NativeAnimator
+# anim
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
-@onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
+@onready var native_player: AnimationPlayer = %NativeAnimator
+
+# dev
+@onready var __fly_mode: Node3D = $__dev/FlyMode
+@onready var __dev_labels: Node = %_dev_labels
 
 
-var active_weapon: BaseWeapon
+var push_force = 4.0
 
 func _ready() -> void:
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	container.player = _player
-	player_sm._player = _player
+	collision_layer = Collision.Layers.PLAYER_COL
+	collision_mask = Collision.Masks.PLAYER_COL_MASK
+
+	visuals.accept_model_data(self)
 	
+
 	var _pl_anim_container := PlAnimList.new()
 	# NOTE: should be before accepting states!
 	anim_container._accept_animations(
 		_pl_anim_container.list_of_animations,
 		native_player,
-		AnimParamsContainer.TRACK_PREFIX,
+		AnimParamsContainer.TRACK_PREFIX_2,
 		AnimParamsContainer.get_all_params())
 		 
-	container.accept_all()
-	
+	container.accept_all_states(self)
+	player_sm.initialise(self)
+
+	bones.accept_bones()
 	combat.initialise()
-	player_sm.initialise()
 	animator_manager.initialise()
 
-	# DEBUG ANIMATIONS
-	_reload_run_anims_from_library()
+	__dev_initialise()
+
+
+## not nullable in theory
+func get_current_state() -> BasePlayerState:
+	return player_sm.current_state
+
+
+func react_on_hit(hit_data: HitData) -> void:
+	player_sm.react_on_hit(hit_data)
+
+
+# TODO: _process or _physics_process? changed to _process: frame issues
+func _process(delta) -> void:
+	var input_ := InputManager.get_current_input()
+	update(input_, delta)
+	# seems like every frame is ok. may be try to make it once per N frames for safety
+	basis = basis.orthonormalized()
 	
-	bones.accept_bones()
 
 func update(input_: InputPackage, delta: float):
-	if fly_mode_enabled:
-		_handle_fly_mode(input_, delta)
-		_player.move_and_slide()
+	if __fly_mode.fly_mode_enabled:
 		return
 
 	player_sm.update(input_, delta)
-	_player.move_and_slide()
+	move_and_slide()
+	for i in get_slide_collision_count():
+		# prints("~~~~~", i)
+		var collision = get_slide_collision(i)
+		# prints("~~~~~", collision)
+		if collision.get_collider() is RigidBody3D:
+			# prints("~~~~~is RigidBody3D:", collision.get_collider())
+			collision.get_collider().apply_central_impulse(-collision.get_normal() * push_force)
+
+## USED FOR ENEMY PROJECTS
+# region
+
+func hp_percentage() -> float:
+	return feelings.get_curr_health() / feelings.get_max_health()
 
 
-# region: DEV ONLY
-
-var fly_mode_enabled := false
-var fly_speed := 15
-
-var _run_anim_i: int = 0
-var run_lib := "run-v5-LIB"
-
-var run_anims: PackedStringArray = [] # will be filled like ["run-v5-LIB/Running", …]
-
-
-func _handle_fly_mode(input_: InputPackage, delta: float):
-	var _tracking_angular_speed := 4
-	var input_direction := __fly_velocity_by_input(input_, delta).normalized()
-	var face_direction := _player.basis.z
-	var angle := face_direction.signed_angle_to(input_direction, Vector3.UP)
-	_player.rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
-
-	# Normalize and scale
-	if input_direction != Vector3.ZERO:
-		input_direction = input_direction.normalized() * fly_speed
-
-	_player.velocity = input_direction
-	if input_.actions.has(PS.dodge):
-		_player.velocity.y += 8
-	if input_.combat_actions.has(CombatAction.heavy_attack_pressed):
-		_player.velocity.y -= 8
-
-	
-func __toggle_fly_mode():
-	fly_mode_enabled = !fly_mode_enabled
-	if fly_mode_enabled:
-		_player.velocity = Vector3.ZERO
-	print_.dev("*** Fly mode: ", fly_mode_enabled)
+## returns -1.0 or default in case of problems
+func current_attack_radius(default_return: float = -1.0) -> float:
+	if not is_attacking():
+		return default_return
+	var curr_action = _get_curr_action_with_warn("current_attack_radius")
+	if not curr_action:
+		return default_return
+	if not curr_action is BaseAttackAction:
+		return default_return
+	return curr_action.attack_radius
 
 
-func _reload_run_anims_from_library() -> void:
-	run_anims.clear()
-	if native_player == null:
-		return
-	var anim_lib := A._lib._run
-	for name_ in native_player.get_animation_list():
-		if name_.begins_with(anim_lib):
-			run_anims.append(name_)
-	# run_anims.sort() # alphabetical is fine; remove if you prefer original order
-	_run_anim_i = clampi(_run_anim_i, 0, max(0, run_anims.size() - 1))
+func current_state_initial_position() -> Vector3:
+	var curr_state = _get_curr_state_with_warn("current_state_initial_position")
+	if not curr_state:
+		return Vector3.ZERO
+	return curr_state.initial_position
 
-@onready var visuals: PlayerVisuals = $"../Visuals"
+
+## means in attack state (don't confuse with weapon's 'is_attacking')
+func is_attacking() -> bool:
+	var curr_state = _get_curr_state_with_warn("is_attacking")
+	var curr_action = _get_curr_action_with_warn("is_attacking")
+	if curr_state == null or curr_action == null:
+		return false
+	var _state_is_att: bool = curr_state is AttackState
+	var _action_is_att: bool = curr_action is BaseAttackAction
+	if _state_is_att != _action_is_att:
+		print_.warn(false, "no sync between currState/currAct being attacking", "is_attacking", "return true", _state_is_att, _action_is_att)
+	return _state_is_att or _action_is_att
+
+
+func is_dodging() -> bool:
+	var curr_state = _get_curr_state_with_warn("is_dodging")
+	if not curr_state:
+		return false
+	return curr_state.state_name == PS.dodge
+
+
+func _get_curr_state_with_warn(caller_log: String = "") -> BasePlayerState:
+	if not get_current_state():
+		print_.warn(false, "get_current_state() is null", caller_log, "return null")
+		return null
+	return get_current_state()
+
+
+func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
+	var action = player_sm.get_curr_action()
+	if not action:
+		print_.warn(false, "player_sm.get_curr_action() is null", caller_log, "return null")
+		return null
+	return action
+
+# endregion
+
+
+# region: DEV
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_H):
-		_player.react_on_hit(HitData.new(10, "from god", PHEA.attack.scare_off))
+		self.react_on_hit(HitData.new(10, "from god", PHEA.attack.scare_off))
 	if Input.is_action_just_pressed(RawAction.DEV_J):
-		_player.react_on_hit(HitData.new(10, "from god", PHEA.attack.sword_slide))
+		self.react_on_hit(HitData.new(10, "from god", PHEA.attack.sword_slide))
 
 
-	if Input.is_action_just_pressed(RawAction.DEV_fly_mode):
-		__toggle_fly_mode()
-
-	if event.is_action_released(RawAction.DEV_speed_up):
-		fly_speed += 5
-	if event.is_action_released(RawAction.DEV_speed_down):
-		fly_speed -= 5
-	
 	if event.is_action_released(RawAction.t8):
 		visuals.visible = not visuals.visible
-	# if event.is_action_pressed("dev_change_run_anim"):
-	# 	_run_anim_i = (_run_anim_i + 1) % run_anims.size()
-	# 	__apply()
-	# elif event.is_action_pressed("dev_change_run_anim_prev"):
-	# 	_run_anim_i = (_run_anim_i - 1 + run_anims.size()) % run_anims.size()
-	# 	__apply()
 	
 	if event.is_action_pressed(RawAction.DEV_8):
-		# animator_manager.play_overlay(A.hit_reaction, 0.1)
 		animator_manager.set_overlay_anim(A.react.react_from_L,
 		OverlayConfig.new(
 			OverlayConfig.Weight.new(0.8, 0.4),
@@ -136,10 +170,7 @@ func _input(event: InputEvent) -> void:
 			1.0,
 			BoneMask.get_upper_body_with_hips()
 			))
-		# animator_manager.play_overlay(A.hit_reaction, 0, -1, 0, 1)
-		# animator_manager.play_overlay(A.hit_reaction, 0.2, 0.5, 0.2, 0.8)
 	if event.is_action_pressed(RawAction.DEV_9):
-		# player_sm.legs_animator.play_overlay(A.hit_reaction, 0.1)
 		animator_manager.set_overlay_anim(A.react.react_from_R,
 				OverlayConfig.new(
 			OverlayConfig.Weight.new(1.0, 0.4),
@@ -147,33 +178,41 @@ func _input(event: InputEvent) -> void:
 			1.0,
 			BoneMask.get_upper_body_with_hips()
 		))
-		# animator_manager.play_overlay(A.hit_reaction, 0.4, 1, 0.4, 2)
 
 
-func __fly_velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
-	var _velocity := Vector3.ZERO
-	var forward_speed := input_.forward_input
+var debug_cams: Array[Node]
+var cam_i := 0
+var __collisions_enabled: bool = true
 
+func __dev_initialise():
+	debug_cams = get_tree().get_nodes_in_group(Groups.Dev.DEBUG_CAMERAS)
+	print_.dev("dbg", str(debug_cams))
+	debug_cams.append(fancy_camera.camera)
+	cam_i = len(debug_cams) - 1
+	print_.dev("dbg", "cam_i: " + str(cam_i))
 
-	var orbit_speed := input_.orbit_input
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
+		cam_i = (cam_i + 1) % debug_cams.size()
+		print_.dev("dbg", "cam_i: " + str(cam_i))
+		if debug_cams[cam_i].has_method("make_current"):
+			debug_cams[cam_i].make_current()
 
-	var grounded_target: Vector3
-	grounded_target = _player.fancy_camera.nest.global_position
-	grounded_target.y = _player.global_position.y
+	elif event.is_action_pressed(RawAction.DEV_CAM_cycle_prev):
+		cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
+		print_.dev("dbg", "cam_i: " + str(cam_i))
+		if debug_cams[cam_i].has_method("make_current"):
+			debug_cams[cam_i].make_current()
 
-	if forward_speed != 0.0:
-		_velocity -= _player.global_position.direction_to(grounded_target) \
-					 * forward_speed * 5
+	if event.is_action_pressed(RawAction.DEV_unstuck):
+		global_position.y += 1.5
+		print_.dev("dbg", "Unstuck: moved player up by 1.5 units")
 
-	if orbit_speed != 0.0:
-		var d: float = orbit_speed * 5 * delta
-		var target_direction := grounded_target - _player.global_position
-		var distance_to_target := target_direction.length()
-		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
-		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
-		var d_vector := grounded_target - rotated_dir - _player.global_position
-		_velocity += d_vector / delta
-	return _velocity
-
+	if event.is_action_pressed(RawAction.DEV_cols):
+		__collisions_enabled = not __collisions_enabled
+		if __collisions_enabled:
+			collision_mask = Collision.Masks.PLAYER_COL_MASK
+		else:
+			collision_mask = Collision.Masks._DEV_ZERO_MASK
 
 # endregion

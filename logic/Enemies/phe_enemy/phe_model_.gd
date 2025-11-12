@@ -37,7 +37,7 @@ var _prev_leaf: BasePHELeaf
 
 func _ready() -> void:
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
-	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
+	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	state_machine = _top
 
 	combat.initialise()
@@ -104,8 +104,12 @@ func update_state_history(state_name_):
 func _physics_process(delta):
 	state_machine._update(delta)
 	move_and_slide()
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider() is RigidBody3D:
+			collision.get_collider().apply_central_impulse(-collision.get_normal() * 8.0)
 
-	player.dev_labels._label_phe_enemy_info(self)
+	player.__dev_labels._label_phe_enemy_info(self)
 
 
 ## todo: here with apply_hit and react_on_hit we go back and forth

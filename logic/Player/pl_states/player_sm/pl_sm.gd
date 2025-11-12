@@ -24,7 +24,8 @@ var _prev_action: BaseAction
 var hit_timer: SimpleTimer = SimpleTimer.new()
 var hit_value_influencer: ValueInfluencer = ValueInfluencer.new(0.8, "hit_value_influencer")
 
-func initialise() -> void:
+func initialise(player: Princess) -> void:
+	_player = player
 	var empty_input := InputPackage.new()
 
 	var _idle_action := container.l_action_by_name(Leg.Act.idle)

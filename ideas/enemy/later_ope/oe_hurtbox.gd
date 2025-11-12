@@ -19,7 +19,7 @@ class_name OpponentHurtbox
 
 func _ready() -> void:
 	collision_layer = Collision.Layers.HITBOX_AREA
-	collision_mask = Collision.Mask.HITBOX_AREA_MASK
+	collision_mask = Collision.Masks.HITBOX_AREA_MASK
 	if not processor:
 		push_error("Hurtbox has no processor assigned. This is a bug.")
 	

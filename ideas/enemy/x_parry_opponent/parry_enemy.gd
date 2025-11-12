@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 func _ready() -> void:
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
-	collision_mask = Collision.Mask.OTHER_CHAR_COL_MASK
+	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	
 	visuals.accept_model(model)
 

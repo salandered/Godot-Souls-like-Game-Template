@@ -7,7 +7,7 @@ const _FRAME_PRINT := true
 
 # COMMON
 const DEV_B := true
-const COLLISION_B := false
+const COLLISION_B := true
 const FEEL_B := true
 
 
@@ -88,7 +88,7 @@ static func hit_box(add_prefix_: String, text: String, info_indents: int = 0, le
 	_generic(HIT_BOX_PRINT, add_prefix_, text, info_indents, level)
 
 static func hurt_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(HIT_BOX_PRINT, add_prefix_, text, info_indents, level)
+	_generic(HURT_BOX_PRINT, add_prefix_, text, info_indents, level)
 
 static func weapon(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(WEAPON_PRINT, add_prefix_, text, info_indents, level)

@@ -27,7 +27,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if u.fr(false) % 2 == 0:
 		# _label_camera_info()
-		_label_modifier_animator_info()
+		# _label_modifier_animator_info()
 		_label_state_info()
 
 	if u.fr(false) % 1 == 0:
@@ -62,19 +62,19 @@ func _label_inputs():
 	t += "\n 8-dir-new   " + Direction.name_(relative_dir)
 		
 	t += "\nhealth/stamina %5.2f/%5.2f" % [
-		 __pl().model.feelings._current_health,
-		 __pl().model.feelings._current_stamina
+		 __pl().feelings._current_health,
+		 __pl().feelings._current_stamina
 		]
 	# t += "\n\n"
 	# t += "\nhealth/stamina %5.2f/%5.2f" % [
-	# 	 __pl().model.feelings._current_health,
-	# 	 __pl().model.feelings._current_stamina
+	# 	 __pl().feelings._current_health,
+	# 	 __pl().feelings._current_stamina
 	# 	]
 	label_inputs.text = t
 
 
 func _label_camera_info():
-	var p_pos = player.model.global_position
+	var p_pos = player.global_position
 	var nest_pos := __cam().nest.global_position
 	var camera_pos := __cam().camera.global_position
 	
@@ -135,17 +135,17 @@ func _label_state_info():
 
 
 func _label_modifier_animator_info():
-	var animator := player.model.animator_manager.full_body
+	var animator := player.animator_manager.full_body
 
 	modifier_ar.text = animator.__log_state()
 	# modifier_ar_2.text = __one_animator_data(l_ar)
 
 
 func __l_action(act_name) -> LegsAction:
-	if __pl().model.legs_sm:
-		if __pl().model.legs_sm._current_action:
-			if __pl().model.legs_sm._current_action.action_name == act_name:
-				return __pl().model.legs_sm._current_action
+	if __pl().legs_sm:
+		if __pl().legs_sm._current_action:
+			if __pl().legs_sm._current_action.action_name == act_name:
+				return __pl().legs_sm._current_action
 	return null
 
 
@@ -153,10 +153,10 @@ func __pl():
 	return player
 
 func __c_s() -> BasePlayerState:
-	return __pl().model.player_sm.current_state
+	return __pl().player_sm.current_state
 
 func __pl_sm() -> PlayerSM:
-	return __pl().model.player_sm
+	return __pl().player_sm
 
 func __cam() -> FancyCamera:
 	return __pl().fancy_camera

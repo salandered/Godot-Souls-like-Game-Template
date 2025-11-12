@@ -6,7 +6,7 @@ class_name AreaAwareness
 @onready var container: PlayerStatesContainer = %StatesContainer
 
 
-@onready var player: Princess = $"../.."
+@onready var player: Princess = $".."
 
 
 enum LockState {

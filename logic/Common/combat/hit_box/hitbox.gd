@@ -36,7 +36,7 @@ class_name CharacterHitbox
 
 func _ready() -> void:
 	collision_layer = Collision.Layers.HITBOX_AREA
-	collision_mask = Collision.Mask.HITBOX_AREA_MASK
+	collision_mask = Collision.Masks.HITBOX_AREA_MASK
 	# 
 	print_.hit_box(name, "--- CharacterHitbox ready ---")
 	assert(combat, "Set combat system!")

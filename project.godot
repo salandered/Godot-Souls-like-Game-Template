@@ -8,6 +8,11 @@
 
 config_version=5
 
+[addons]
+
+instance_dock/scene_data_file="res://InstanceDockSceneData.txt"
+instance_dock/preview_resolution=Vector2i(64, 64)
+
 [animation]
 
 warnings/check_invalid_track_paths=false
@@ -48,12 +53,20 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/favorite_scenes/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/pixpal_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/glb_post_import/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/pixpal_tools/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://-assets-/GLB-level/": "green",
+"res://-assets-/GLB-level/minimal-arena/": "yellow",
+"res://-assets-/GLB-level/minimal-arena/column/": "pink",
+"res://-assets-/GLB-level/minimal-arena/exit_2/": "blue",
+"res://-assets-/GLB-level/minimal-arena/island/": "red",
+"res://-assets-/GLB-level/minimal-arena/jaw/": "gray",
+"res://-assets-/GLB-level/minimal-arena/lady/": "blue",
+"res://-assets-/GLB-level/minimal-arena/tree_far/": "gray",
+"res://-assets-/GLB-level/tower map/": "gray",
 "res://-assets-/animations/": "yellow",
 "res://-assets-/animations/GLB-packed/": "blue",
 "res://-assets-/animations/legacy-anim/": "gray",
@@ -64,6 +77,17 @@ folder_colors={
 "res://-assets-/blender_sources/": "orange",
 "res://-assets-/blender_sources/player/": "pink",
 "res://-assets-/materials-shared/": "red",
+"res://-assets-/materials-shared/_images/": "blue",
+"res://-assets-/materials-shared/collage-like/": "purple",
+"res://-assets-/materials-shared/concrete/": "gray",
+"res://-assets-/materials-shared/different/": "yellow",
+"res://-assets-/materials-shared/fabric/": "pink",
+"res://-assets-/materials-shared/ground/": "orange",
+"res://-assets-/materials-shared/metal/": "orange",
+"res://-assets-/materials-shared/mines/": "gray",
+"res://-assets-/materials-shared/rocks-stone/": "gray",
+"res://-assets-/materials-shared/wood/": "pink",
+"res://-assets-/materials-shared/x_unsorted/": "gray",
 "res://-assets-/raw_imports/": "orange",
 "res://-assets-/x_misc/x_icons/node-colors/": "blue",
 "res://-assets-/x_misc/x_icons/purple/": "purple",
@@ -71,6 +95,7 @@ folder_colors={
 "res://-assets-/x_misc/x_icons/yellow/": "yellow",
 "res://addons/": "gray",
 "res://addons/maaacks_game_template/base/scenes/opening/": "gray",
+"res://addons/pixpal_tools/": "pink",
 "res://ideas/": "gray",
 "res://ideas/enemy/SimpleEnemy/": "pink",
 "res://logic/Common/animation/": "orange",
@@ -83,6 +108,7 @@ folder_colors={
 "res://logic/Enemies/phe_enemy/phe_states/helpers/": "gray",
 "res://logic/Enemies/phe_enemy/phe_states/leafes/": "green",
 "res://logic/Enemies/phe_enemy/phe_states/phases/": "blue",
+"res://logic/Locations/minimal_arena/": "yellow",
 "res://logic/Player/fancy-camera/": "teal",
 "res://logic/Player/pl_anim/": "purple",
 "res://logic/Player/pl_combat/": "red",
@@ -420,7 +446,4 @@ copy_path="res://misc/maacks_examples/"
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)

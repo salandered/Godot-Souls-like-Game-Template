@@ -39,9 +39,14 @@ raw_imports/
 misc/
 
 # Almost all addons
+# blender_godot_pipeline is ok
+addons/debug_draw_3d
 addons/favorite_scenes
-addons/limboai
-addons/terrain_3d
+addons/gut
+addons/InstanceDock
+# addons/maaacks_game_template - accidently commited already
+# pixpal_tools is ok i guess (made edits)
+
 
 # BIG ASSETS
 -assets-/GLB-level/

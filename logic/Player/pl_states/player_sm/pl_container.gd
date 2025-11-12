@@ -4,8 +4,7 @@
 extends Node
 class_name PlayerStatesContainer
 
-# -- set by model
-var player: Princess
+var _player: Princess
 
 @onready var legs_sm: LegsSM = %LegsSM
 @onready var player_sm: PlayerSM = %PlayerSM
@@ -59,7 +58,8 @@ func l_action_by_name(action_name: String) -> LegsAction:
 	return _leg_actions[action_name]
 
 
-func accept_all():
+func accept_all_states(player_: Princess):
+	_player = player_
 	_accept_legs_behaviors()
 	_accept_player_states()
 	_accept_player_actions()
@@ -119,13 +119,13 @@ func _accept_player_states() -> void:
 		var combos := get_descendants.combos_one_level(child)
 		for combo: Combo_ in combos:
 			print_.container("", pp.s("For state", child.state_name, "assigned combo", combo.name, "priority", combo.priority))
-			combo.player = player
+			combo.player = _player
 		
 		child.state_combos_sorted = _sort_combos_by_priority(combos)
 
 
 		# common
-		child._player = player
+		child._player = _player
 		child.feelings = feelings
 		child.combat = combat
 		child.container = self

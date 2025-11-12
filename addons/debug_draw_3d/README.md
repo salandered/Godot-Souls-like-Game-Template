@@ -40,10 +40,6 @@ Your support adds motivation to develop my public projects.
 * Sphere
 * 3D Text
 
-2D:
-
-* **[Work in progress]**
-
 Overlay:
 
 * Text (with grouping and coloring)
@@ -150,8 +146,8 @@ The entire text overlay can only be placed in one corner.
 
 ## More screenshots
 
-`DebugDrawDemoScene.tscn` in editor
+`DD3DDemo.tscn` in editor
 ![screenshot_2](/images/screenshot_2.png)
 
-`DebugDrawDemoScene.tscn` in play mode
+`DD3DDemo.tscn` in play mode
 ![screenshot_3](/images/screenshot_3.png)

@@ -30,7 +30,8 @@ static func get_all_params() -> Array[String]:
 	return u.safe_cast_array_of_strings(DEFAULT_PARAMS.keys())
 
 
-const TRACK_PREFIX := "%AnimParameters:"
+# const TRACK_PREFIX := "%AnimParameters:"
+const TRACK_PREFIX_2 := "../AnimatorManager/NativeAnimator/AnimParameters:"
 
 
 func is_switches_to_queue(anim: Animation, timestamp: float) -> bool:
@@ -61,5 +62,5 @@ func is_tracks_input_vector(anim: Animation, timestamp: float) -> bool:
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:
 	var _default = u.safe_get_dict_key(DEFAULT_PARAMS, param, false)
-	var _r := AnimUtils.get_bool_value_from_track(anim, TRACK_PREFIX, param, timestamp, _default)
+	var _r := AnimUtils.get_bool_value_from_track(anim, TRACK_PREFIX_2, param, timestamp, _default)
 	return _r

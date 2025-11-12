@@ -4,6 +4,10 @@
 	# ☠️
 	# 🦴
 
+
+## TROUBLESHOOTING
+⚠️ on updating or moving godot.exe change 'godotTools.editorPath.godot4' in settings!
+
 ## Extension folder
 %USERPROFILE%\.vscode\extensions
 
@@ -70,6 +74,8 @@ editor.inlineSuggest.edits.renderSideBySide - configure if Copilot NES can show 
 
 # misc
 
+## usually excluded 
+_dev/**, addons/**, ideas*, *.godot, *.tscn*, *.import, *.git, *.tres
 
 ## Code quality
 

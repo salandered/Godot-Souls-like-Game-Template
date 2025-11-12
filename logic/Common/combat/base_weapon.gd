@@ -43,7 +43,7 @@ func _ready() -> void:
 	
 	_weapon_hurt_box.base_weapon = self
 	_weapon_hurt_box.collision_layer = Collision.Layers.WEAPON_AREA
-	_weapon_hurt_box.collision_mask = Collision.Mask.WEAPON_AREA_MASK
+	_weapon_hurt_box.collision_mask = Collision.Masks.WEAPON_AREA_MASK
 
 	_weapon_name = get_weapon_name()
 

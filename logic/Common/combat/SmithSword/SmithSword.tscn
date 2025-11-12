@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://jtkogl4lhvf3"]
 
-[ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/Common/combat/SmithSword/smith_sword.gd" id="1_sk2nb"]
+[ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/Common/combat/SmithSword/smith_sword.gd" id="1_q502g"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/combat/hurt_box/WeaponHurtBox.tscn" id="2_lfwdn"]
-[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword_2.glb" id="2_sk2nb"]
+[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword/smith_sword_2.glb" id="2_sk2nb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
 radius = 0.13134766
@@ -12,7 +12,7 @@ height = 1.4203186
 albedo_color = Color(0.7294118, 0.39607844, 0.39607844, 1)
 
 [node name="SmithSword" type="Node3D"]
-script = ExtResource("1_sk2nb")
+script = ExtResource("1_q502g")
 
 [node name="WeaponHurtBox" parent="." instance=ExtResource("2_lfwdn")]
 collision_layer = 16

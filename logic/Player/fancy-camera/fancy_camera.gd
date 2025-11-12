@@ -153,7 +153,7 @@ func _consider_switching_state(input_: InputPackage):
 
 	match current_state.state_name:
 		FREE_STATE_NAME when input_.target_lock.tap_or_double_tap():
-			var found_target := player.model.area_awareness.find_target()
+			var found_target := player.area_awareness.find_target()
 			if found_target:
 				print_.fancy_cam("FREE -> LOCKED ", __Cvec() + __free_off() + " target=" + str(found_target))
 				

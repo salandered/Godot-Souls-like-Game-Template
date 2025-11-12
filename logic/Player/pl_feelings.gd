@@ -197,7 +197,7 @@ func _input(event: InputEvent) -> void:
 # 	if not __god_mode:
 # 		health -= amount
 # 		if health < 1:
-# 			model.current_state.try_force_state(PS.death)
+# 			current_state.try_force_state(PS.death)
 
 
 # func pay_block_cost(damage: float, blocking_coefficient: float):

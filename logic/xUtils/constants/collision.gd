@@ -11,12 +11,25 @@ enum Layers {
 	ITEM_COL = 1 << 5, # bit 5
 }
 
-enum Mask {
+enum Masks {
 	ENVIRONMENT_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ITEM_COL,
-	PLAYER_COL_MASK = Layers.OTHER_CHAR_COL | Layers.ITEM_COL | Layers.ENVIRONMENT_COL,
-	OTHER_CHAR_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ITEM_COL | Layers.ENVIRONMENT_COL,
+	PLAYER_COL_MASK = Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL, # | Layers.ITEM_COL,
+	OTHER_CHAR_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL, # | Layers.ITEM_COL,
 	HITBOX_AREA_MASK = Layers.WEAPON_AREA,
 	WEAPON_AREA_MASK = Layers.HITBOX_AREA,
-	ITEM_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL,
+	ITEM_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL | Layers.ITEM_COL,
 	_DEV_ZERO_MASK = 0
 }
+
+
+## TROUBLESHOOTING
+# ISSUE your character sometimes inexplicably speeding up when pushing a RigidBody? 
+# The cause of this problem is that the CharacterBody node has logic to ensure the character stays 
+# stationary on moving platforms, and sometimes when you collide into the rigidbody object it ends up 
+# being counted as a moving platform. 
+# So the CharacterBody inherits the velocity of the rigidbody, because it thinks the rigidbody is 
+# a platform it has to stick to. 
+# SOLUTION you simply have to go into the "Moving Platform" part of the CharacterBody's node settings, 
+# and disable the physics layer you're using for the rigidbody objects. 
+# By default all physics layers are enabled for being affected by the moving platform logic. 
+# Since we don't want objects in this layer to be counted as moving platforms, we just disable that layer.

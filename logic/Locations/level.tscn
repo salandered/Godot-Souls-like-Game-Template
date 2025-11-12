@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/Textures/simple/texture_08.png" id="5_ol10w"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/Textures/nature/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/blender_sources/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]
-[ext_resource type="PackedScene" uid="uid://dug2h6xkfk71h" path="res://-assets-/GLB-level/tower-map.glb" id="9_k3uw0"]
+[ext_resource type="PackedScene" uid="uid://dug2h6xkfk71h" path="res://-assets-/GLB-level/tower map/tower-map.glb" id="9_k3uw0"]
 [ext_resource type="PackedScene" uid="uid://6qtp0fjtkn64" path="res://logic/Player/PrincessPack.tscn" id="9_ol10w"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/Textures/nature/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Common/simple_target/SimpleTarget.tscn" id="10_2mukc"]

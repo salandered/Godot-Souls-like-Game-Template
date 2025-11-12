@@ -25,6 +25,7 @@ const mark_alt = "✴️"
 const pin = "📌"
 const pin_alt = "📍"
 const warn = "⚠️"
+const warn_x2 = "⚠️"
 const mb_warn = "🚸" # let's catch and then decide
 const wip = "🚧"
 const crucial = "💥"
