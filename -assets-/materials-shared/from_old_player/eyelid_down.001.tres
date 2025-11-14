@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://egvb3kw6uwhq"]
+
+[resource]
+resource_name = "eyelid_down.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.15028264, 0.053530667, 0, 1)
+roughness = 0.5

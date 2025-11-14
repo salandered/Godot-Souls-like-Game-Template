@@ -29,7 +29,7 @@ var _resettable := [
 
 
 func initialise() -> void:
-	curr_direction = DualDirection.new(SPEED_R, SPEED_L, PHEA.loco.strafe_right, PHEA.loco.strafe_left)
+	curr_direction = DualDirection.new(SPEED_R, SPEED_L, PHEA.strafe.strafe_right, PHEA.strafe.strafe_left)
 	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
 	default_sp.SPEED = 5.0
 	default_sp.TURN_SPEED = 3.2

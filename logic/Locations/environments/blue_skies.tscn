@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwwngduom3lf"]
+
+[ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/shaders/gdquest-like/sky/blue_sky.tres" id="1_qxid1"]
+
+[sub_resource type="Environment" id="Environment_allox"]
+background_mode = 2
+background_color = Color(0.8, 0.913725, 1, 1)
+sky = ExtResource("1_qxid1")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 1.2
+ssao_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+fog_light_color = Color(0.70566064, 0.8111349, 0.9752062, 1)
+fog_height = -10.14
+fog_height_density = 1.2674
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_emission = Color(1, 1, 1, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_allox")

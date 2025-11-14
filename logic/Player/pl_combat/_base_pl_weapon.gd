@@ -13,6 +13,10 @@ extends BaseWeapon
 var _input_action_to_state: Dictionary = {} # input actions to states
 
 
+func is_player() -> bool:
+	return true
+
+
 func translate_combat_input_to_state(combat_actions: Array) -> Array:
 	var _translated := []
 	

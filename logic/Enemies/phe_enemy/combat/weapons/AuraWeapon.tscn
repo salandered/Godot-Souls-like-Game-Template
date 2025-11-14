@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://unjjnf0oxr50"]
 
 [ext_resource type="Script" uid="uid://dks6m6de557j0" path="res://logic/Enemies/phe_enemy/combat/weapons/aura_weapon.gd" id="1_5akps"]
-[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/Common/combat/hurt_box/WeaponHurtBox.tscn" id="2_finp0"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/CharactersCommon/combat/hurt_box/WeaponHurtBox.tscn" id="2_finp0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_finp0"]
 radius = 2.2089844

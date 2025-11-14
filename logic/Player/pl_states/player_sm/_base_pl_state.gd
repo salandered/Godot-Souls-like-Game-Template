@@ -1,4 +1,4 @@
-extends TimeManagement
+extends BaseCharacterState
 ## Base class for State Player
 ## Does many things:
 	## manages basic state and action switches.
@@ -24,10 +24,13 @@ var feelings: PlayerFeelings
 var container: PlayerStatesContainer
 
 # specific static state data
-var state_name: String
 var priority: int = 0
 var stamina_cost: float = 0.0
 var stamina_drain: float = 0.0 # experimenting, not in StateData
+
+
+# state can turn it off if it handles gravity itself. (like midair)
+var APPLY_GRAVITY: bool = true
 
 ## Player states have a fixed legs_behavior attached to them. 
 var legs_behavior: LegsBehavior
@@ -88,10 +91,10 @@ func _check_transition(input_: InputPackage) -> PLVerdict:
 	return check_transition(input_)
 
 
-## can be overriden: see Run or attack.gd
+## can be overriden
 func check_transition(input_: InputPackage) -> PLVerdict:
 	if curr_global_action().time_remaining() <= 0.0:
-		__log_psm_check("[default check]", "time_remaining < 0 => choosing best input")
+		__log_psm_check("[default check]", "time_remaining < 0 and non looping => choosing best input")
 		return best_next_state_from_input(input_)
 	return PLVerdict.new()
 
@@ -145,6 +148,17 @@ func _update(input_: InputPackage, delta: float):
 	legs_sm.current_behavior.update(input_, delta)
 	curr_state_action._update(input_, delta)
 	update(input_, delta)
+
+	if APPLY_GRAVITY:
+		if area_awareness.is_on_floor():
+			pass
+		## apply gravity if we close to the floor without changing state
+		elif area_awareness.is_almost_on_floor():
+			var _applied := pm().apply_gravity(delta, 2.0)
+			if _applied:
+				__log_state_upd("applied gravity ☄️")
+		else:
+			forced_state.try_set(PS.midair, 50)
 
 
 func _update_feelings(delta):

@@ -56,6 +56,7 @@ func _locked_and_not_sprint() -> bool:
 
 func _decide_on_mode_on_enter():
 	var _reason: String = ""
+	curr_throw = right_throw_pack
 	var hit = player_sm.combat.get_last_processed_hit()
 	if not hit:
 		_reason = "no hit data found => default"

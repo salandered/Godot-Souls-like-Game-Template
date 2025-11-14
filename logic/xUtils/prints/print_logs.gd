@@ -9,22 +9,23 @@ const _FRAME_PRINT := true
 const DEV_B := true
 const COLLISION_B := true
 const FEEL_B := true
-
+const REACT_UTILS_B := false
 
 # CONTAINER
 const CONTAINER_B := false
 const E_CONTAINER_B := false
 
 # FIGHT
-const FIGHT_B := true
-const COMBO_B := true
+const FIGHT_B := false
+const COMBO_B := false
 const HIT_HURT_BOX_B := true
-const WEAPON_B := true
+const WEAPON_B := false
 
 # PLAYER PSM
-const PSM_B := true
+const PSM_B := false
 const SKM_B := false
-const ACTION_ANIM_B := true
+const ACTION_ANIM_B := false
+const META_STATES_B := false
 
 # PLAYER LSM
 const LSM_BEH_B := false
@@ -33,13 +34,13 @@ const LSM_ACTION_B := false
 # PL SYSTEMS
 const input_gathering_B := false
 const FANCY_CAM_B := false
-const AWARENESS_B := false
+const AWARENESS_B := true
 
 # ENEMY
-const PHE_CHECK_B := true
-const PHE_B := true
-const PHE_ANIM_B := true
-const E_ANIM_MANAGER_B := true
+const PHE_CHECK_B := false
+const PHE_B := false
+const PHE_ANIM_B := false
+const E_ANIM_MANAGER_B := false
 # endregion
 
 #----------------------
@@ -193,8 +194,8 @@ static func fancy_cam(add_prefix_: String, text: Variant, info_indents: int = 0,
 static func aware_target(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(AWARE_TARGET_PRINT, add_prefix_, text, info_indents, level)
 
-static func aware(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(AWARE_PRINT, add_prefix_, text, info_indents, level)
+static func aware(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
+	_generic(AWARE_PRINT, add_prefix_, text, info_indents, level, freq)
 
 # endregion
 
@@ -395,5 +396,6 @@ static func note(bright: bool, ...parts: Array):
 	var _msg = em.pin_alt + "NOTE (not warn) " + pp.list_(parts)
 	if bright: _msg = em.mark_x2 + _msg
 	print("\t", _msg)
+
 
 # endregion

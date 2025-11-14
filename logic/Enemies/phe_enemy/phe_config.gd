@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/white/icon_gear.png")
+@icon("res://-assets-/x_icons/white/icon_gear.png")
 extends Node
 class_name PHEConfig
 

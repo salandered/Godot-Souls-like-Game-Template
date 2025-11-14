@@ -75,7 +75,7 @@ func _update(delta: float) -> void:
 	update(delta)
 
 	if APPLY_GRAVITY:
-		var _applied := e_movement.apply_gravity(delta)
+		var _applied := e_movement.apply_gravity(delta, 3.0)
 		# if _applied:
 			# __log_phe__upd("applied gravity ☄️")
 		

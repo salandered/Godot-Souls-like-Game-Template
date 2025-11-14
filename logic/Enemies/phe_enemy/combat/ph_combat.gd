@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/white/icon_sword.png")
+@icon("res://-assets-/x_icons/white/icon_sword.png")
 extends BaseCombat
 class_name PHECombat
 

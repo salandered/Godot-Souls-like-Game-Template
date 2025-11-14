@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cl7elge4hvjpa"]
+
+[resource]
+resource_name = "lipstick.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.47738096, 0.3127052, 0.3473163, 1)
+roughness = 0.7753036

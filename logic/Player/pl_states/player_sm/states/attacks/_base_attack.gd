@@ -3,10 +3,6 @@ class_name AttackState
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if not get_player().is_on_floor():
-		return PLVerdict.new(PS.midair)
-
-		
 	if curr_state_action.passed_marker(MarkerName.ALLOWS_SWITCH):
 	# this reads as: if we are at the end of attack anim (> ALLOWS_SWITCH but < DURATION)
 	# and there is a best input which is not idle, we can switch to it. 

@@ -1,7 +1,8 @@
 extends BasePlayerState
 
-var landing_height: float = 0.6
 
+func initialise() -> void:
+	APPLY_GRAVITY = false
 
 func check_transition(input_: InputPackage) -> PLVerdict:
 	if area_awareness.floor_dist_under_landing_height():

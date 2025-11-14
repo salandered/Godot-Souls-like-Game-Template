@@ -26,11 +26,11 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://-assets-/x_misc/default_bus_layout.tres"
+buses/default_bus_layout=""
 
 [autoload]
 
-CameraMode="*res://logic/xUtils/ui/CameraMode.tscn"
+CameraMode="*res://logic/Locations/_dev/dev_cam_fly/CamFlyMode.tscn"
 Settings="*res://ui/_TPS/settings.gd"
 FullscreenHandler="*res://ui/fullscreen_handler.gd"
 AppConfig="*res://addons/maaacks_game_template/base/scenes/autoloads/app_config.tscn"
@@ -53,7 +53,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/glb_post_import/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/pixpal_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/pixpal_tools/plugin.cfg")
 
 [file_customization]
 
@@ -69,54 +69,38 @@ folder_colors={
 "res://-assets-/GLB-level/tower map/": "gray",
 "res://-assets-/animations/": "yellow",
 "res://-assets-/animations/GLB-packed/": "blue",
-"res://-assets-/animations/legacy-anim/": "gray",
-"res://-assets-/animations/legacy-anim/GLB-packed-anim-old/": "gray",
-"res://-assets-/animations/legacy-anim/Gundyr/": "pink",
-"res://-assets-/animations/legacy-anim/shield-sword/": "blue",
 "res://-assets-/animations/standard-skeleton/": "blue",
-"res://-assets-/blender_sources/": "orange",
-"res://-assets-/blender_sources/player/": "pink",
 "res://-assets-/materials-shared/": "red",
 "res://-assets-/materials-shared/_images/": "blue",
-"res://-assets-/materials-shared/collage-like/": "purple",
-"res://-assets-/materials-shared/concrete/": "gray",
-"res://-assets-/materials-shared/different/": "yellow",
-"res://-assets-/materials-shared/fabric/": "pink",
-"res://-assets-/materials-shared/ground/": "orange",
-"res://-assets-/materials-shared/metal/": "orange",
-"res://-assets-/materials-shared/mines/": "gray",
-"res://-assets-/materials-shared/rocks-stone/": "gray",
-"res://-assets-/materials-shared/wood/": "pink",
 "res://-assets-/materials-shared/x_unsorted/": "gray",
-"res://-assets-/raw_imports/": "orange",
-"res://-assets-/x_misc/x_icons/node-colors/": "blue",
-"res://-assets-/x_misc/x_icons/purple/": "purple",
-"res://-assets-/x_misc/x_icons/red/": "red",
-"res://-assets-/x_misc/x_icons/yellow/": "yellow",
+"res://-assets-/shaders/": "red",
+"res://-assets-/x_icons/node-colors/": "blue",
+"res://-assets-/x_icons/purple/": "purple",
+"res://-assets-/x_icons/red/": "red",
+"res://-assets-/x_icons/yellow/": "yellow",
 "res://addons/": "gray",
 "res://addons/maaacks_game_template/base/scenes/opening/": "gray",
 "res://addons/pixpal_tools/": "pink",
 "res://ideas/": "gray",
 "res://ideas/enemy/SimpleEnemy/": "pink",
-"res://logic/Common/animation/": "orange",
-"res://logic/Common/animation/models/": "purple",
-"res://logic/Common/combat/": "red",
-"res://logic/Common/skeleton_modifers/": "red",
+"res://logic/CharactersCommon/animation/": "orange",
+"res://logic/CharactersCommon/animation/models/": "purple",
+"res://logic/CharactersCommon/combat/": "red",
+"res://logic/CharactersCommon/skeleton_modifers/": "red",
 "res://logic/Enemies/phe_enemy/": "blue",
 "res://logic/Enemies/phe_enemy/combat/": "red",
 "res://logic/Enemies/phe_enemy/phe_anim/": "purple",
 "res://logic/Enemies/phe_enemy/phe_states/helpers/": "gray",
 "res://logic/Enemies/phe_enemy/phe_states/leafes/": "green",
 "res://logic/Enemies/phe_enemy/phe_states/phases/": "blue",
-"res://logic/Locations/minimal_arena/": "yellow",
+"res://logic/Locations/demo_arena/": "yellow",
 "res://logic/Player/fancy-camera/": "teal",
 "res://logic/Player/pl_anim/": "purple",
 "res://logic/Player/pl_combat/": "red",
-"res://logic/Player/pl_data/anim_data/": "orange",
+"res://logic/Player/pl_data/anim_data/": "purple",
 "res://logic/Player/pl_input/": "green",
 "res://logic/Player/pl_states/": "blue",
 "res://logic/Player/pl_states/legs_sm/": "orange",
-"res://logic/_tests/": "green",
 "res://logic/xUtils/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
@@ -436,6 +420,7 @@ locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/t
 3d_physics/layer_4="Hitbox-area"
 3d_physics/layer_5="Weapon-area"
 3d_physics/layer_6="Item-col"
+3d_physics/layer_7="Prop-col"
 
 [maaacks_game_template]
 
@@ -446,4 +431,5 @@ copy_path="res://misc/maacks_examples/"
 
 [rendering]
 
+rendering_device/driver.windows="d3d12"
 environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)

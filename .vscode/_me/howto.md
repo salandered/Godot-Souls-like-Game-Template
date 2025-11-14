@@ -1,12 +1,8 @@
 
-## emoji
-	# 💀
-	# ☠️
-	# 🦴
-
 
 ## TROUBLESHOOTING
 ⚠️ on updating or moving godot.exe change 'godotTools.editorPath.godot4' in settings!
+
 
 ## Extension folder
 %USERPROFILE%\.vscode\extensions
@@ -15,31 +11,47 @@ macOS/Linux:
 ~/.vscode/extensions
 
 
-## Color folders extension
+### Color folders extension
 extansion: %USERPROFILE%\.vscode\extensions\visbydev.folder-path-color-0.0.16
 *changed .js and package.json to support more custom colors. changed copies saved in _me*
 
-## Highlight extension
+### Highlight extension
 docs: [text](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-highlight)
 
-
-## Godot theme extension
+### Godot theme extension
 name: ryanabx.godot-vscode-theme-0.0.5 extension
 
 *i changed some colors. copy saved in _me*
 
 
 ## Keymap
-copy is in _me
+copy is in _me folder
 
 
-## vscode
+## vscode helpers
 for info about colors and scopes: scope
 for reloading: developer reload
 
 
 
-## Copilot
+
+
+## Tips
+
+### usually excluded from seatch while working
+_dev/**, addons/**, ideas*, *.godot, *.tscn*, *.import, *.git, *.tres
+
+
+### Code quality
+
+regex for typings cleanup
+var \w+ = 
+func \w+\(\):
+
+
+## Copilot Settings
+
+(note that copilot works poorly)
 
 Choosing models
 [text](https://docs.github.com/en/copilot/reference/ai-models/model-comparison#recommended-models-by-task)
@@ -69,18 +81,3 @@ editor.inlineSuggest.edits.allowCodeShifting - configure if Copilot NES is able 
 editor.inlineSuggest.edits.renderSideBySide - configure if Copilot NES can show larger suggestions side-by-side if possible, or if Copilot NES should always show larger suggestions below the relevant code.
 	* auto (default): show larger edit suggestions side-by-side if there is enough space in the viewport, otherwise the suggestions are shown below the relevant code.
 	* never: never show suggestions side-by-side, always show suggestions below the relevant code.
-
-##################
-
-# misc
-
-## usually excluded 
-_dev/**, addons/**, ideas*, *.godot, *.tscn*, *.import, *.git, *.tres
-
-## Code quality
-
-regex for typings cleanup
-var \w+ = 
-func \w+\(\):
-
-consider '_:' in match statements

@@ -2,8 +2,6 @@
 extends EditorScenePostImport
 
 const PHYSICS_ROOT_PREFIXES = ["--col", "-- col", "-col", "- col"]
-const VISUAL_ROOT_NAME = "columns"
-
 
 ## DOCS
 ## what should be in blender tree:
@@ -12,16 +10,30 @@ const VISUAL_ROOT_NAME = "columns"
 ##    - See 'auto collision workflow' in blender bible. It automates the process
 ## Export setup: 
 ##    - preserve collection structure 
-
+## NOTE: script needs further polishing
+## LIMITATION: visual mesh and col mesh in blender should have same origin
+##             also apply rot/scale obviously
 
 func _post_import(scene: Node) -> Node:
 	__log_begin()
 
+	reparent_collisions(scene)
+
+	__log_("CLEANUP", "\n=== CLEANUP ===")
+	cleanup_empty_nodes(scene)
+
+	__log_end()
 	
+	return scene
+
+
+# region: REPARENT COLLISIONS
+
+func reparent_collisions(scene):
 	var physics_bodies = {}
 	var nodes_to_reparent = []
 	
-	# FIND COLLISION ROOT 
+	# FIND COLLISION ROOT (collection in blender)
 	var physics_roots: Array
 	for prefix in PHYSICS_ROOT_PREFIXES:
 		var _root = __find_node_by_prefix(scene, prefix)
@@ -73,23 +85,13 @@ func _post_import(scene: Node) -> Node:
 		matched_bodies[normalized_name] = true
 		perform_reparent(item.mesh, item.body)
 	
-	# all collisions matched?
+	# check that all collisions matched
 	for body_name in physics_bodies:
 		if not matched_bodies.has(body_name):
 			__log_error("MATCH_CHECK", "no mesh found for physics body", "collision matching", "continuing without match", "body: " + body_name)
 	
-
 	# FLATTEN
 	flatten_physics_root(physics_root)
-	
-	
-	# --- Cleanup of empty Node3D ---
-	__log_("CLEANUP", "\n=== CLEANUP ===")
-	cleanup_empty_nodes(scene)
-
-	__log_end()
-	
-	return scene
 
 
 ## recursive
@@ -120,33 +122,33 @@ func __find_matching_meshes(node: Node, physics_bodies: Dictionary, nodes_to_rep
 func perform_reparent(visual_mesh: MeshInstance3D, physics_body: StaticBody3D) -> void:
 	__log_("REPARENT", "\n=== REPARENTING: " + visual_mesh.name + " ===")
 	
-	# Store the physics body's LOCAL position (it's already correct!)
 	var body_local_pos = physics_body.position
+	var mesh_local_pos = visual_mesh.position
 	__log_("REPARENT", "  [BEFORE] Physics body local pos: " + str(body_local_pos))
-	__log_("REPARENT", "  [BEFORE] Visual mesh local pos: " + str(visual_mesh.position))
+	__log_("REPARENT", "  [BEFORE] Visual mesh local pos: " + str(mesh_local_pos))
 	
-
+	# Calculate the offset between visual mesh and physics body
+	var offset = mesh_local_pos - body_local_pos
+	__log_("REPARENT", "  [OFFSET] Calculated offset: " + str(offset))
+	
 	if visual_mesh.mesh == null:
 		__log_error("REPARENT", "mesh instance has no mesh resource", "perform_reparent", "script hard stop", "mesh name: " + visual_mesh.name)
 		return
-	# Remove visual mesh from old parent
-	visual_mesh.get_parent().remove_child(visual_mesh)
 	
-	# Add visual mesh to physics body
-	physics_body.add_child(visual_mesh)
-
-	if physics_body.owner == null:
+	var target_owner = physics_body.owner
+	if target_owner == null:
 		__log_error("REPARENT", "physics body has no owner", "perform_reparent", "script hard stop", "body: " + physics_body.name)
 		return
-	visual_mesh.owner = physics_body.owner
 	
-	# Reset visual mesh to identity (it's now a child of the body)
-	visual_mesh.transform = Transform3D.IDENTITY
+	visual_mesh.owner = null
+	visual_mesh.get_parent().remove_child(visual_mesh)
+	physics_body.add_child(visual_mesh)
+	visual_mesh.owner = target_owner
+	
+	visual_mesh.position = offset # CHANGED from Transform3D.IDENTITY
+	
 	__log_("REPARENT", "  [AFTER] Visual mesh local pos: " + str(visual_mesh.position))
-	
-	# Physics body keeps its local position unchanged
 	__log_("REPARENT", "  [AFTER] Physics body local pos: " + str(physics_body.position))
-
 
 func flatten_physics_root(physics_root: Node) -> void:
 	__log_("FLATTEN", "\n=== FLATTENING PHYSICS ROOT ===")
@@ -166,11 +168,15 @@ func flatten_physics_root(physics_root: Node) -> void:
 		__log_("FLATTEN", "  > Moving body: " + body.name)
 		var body_local_pos = body.position
 		
+		if physics_parent.owner == null:
+			__log_error("FLATTEN", "physics_parent has no owner", "flatten_physics_root", "script hard stop", "physics_parent: " + physics_parent.name)
+			return
+		
+		body.owner = null # godot warns, if not unsetting owner before reparenting
+		
 		physics_root.remove_child(body)
 		physics_parent.add_child(body)
-		if physics_parent.owner == null:
-			__log_error("REPARENT", "physics_parent has no owner", "flatten_physics_root", "script hard stop", "physics_parent: " + physics_parent.name)
-			return
+		
 		body.owner = physics_parent.owner
 		body.position = body_local_pos
 	
@@ -178,7 +184,10 @@ func flatten_physics_root(physics_root: Node) -> void:
 	physics_parent.remove_child(physics_root)
 	physics_root.free()
 
+# endregion
 
+
+## recursive
 func cleanup_empty_nodes(node: Node) -> void:
 	var children_to_check = node.get_children().duplicate()
 	

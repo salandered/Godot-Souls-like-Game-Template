@@ -800,7 +800,7 @@
 		// ADDED AS EXPERIMENT
 		"**/addons/**": true,
 		"**/misc/**": true,
-		"**/-assets-/**": true,
+		// "**/-assets-/**": true,
 	},
 	"favorites.resources": [
 		{

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cngt87lk8mdi"]
 
-[ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://logic/Common/combat/hit_box/hitbox.gd" id="1_5ms84"]
+[ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://logic/CharactersCommon/combat/hit_box/hitbox.gd" id="1_5ms84"]
 
 [node name="Hitbox" type="Area3D" node_paths=PackedStringArray("holder")]
 collision_layer = 8

@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/yellow/icon_visibility.png")
+@icon("res://-assets-/x_icons/yellow/icon_visibility.png")
 extends Node
 class_name AreaAwareness
 
@@ -98,24 +98,33 @@ func get_camera_locked_target() -> Node3D:
 
 var extreme_landing_height: float = 1.1
 var landing_height: float = 0.6
-var tolerate_height: float = 0.1
+var tolerated_height: float = 0.2
 
 
-func floor_dist_under_extreme_landing_height(_log: bool = true) -> bool:
+## calls the built in CharacterBody3D.is_on_floor()
+func is_on_floor() -> bool:
+	return player.is_on_floor()
+
+## "not is_on_floor() but close"
+func is_almost_on_floor(_log: bool = false) -> bool:
+	return floor_dist_under_tolerated_height(_log)
+
+
+func floor_dist_under_tolerated_height(_log: bool = false) -> bool:
+	var _r := get_floor_distance() <= tolerated_height
+	if _log: __log_floor_dist("<= tolerate height", tolerated_height, "? =>", _r)
+	return _r
+
+
+func floor_dist_under_extreme_landing_height(_log: bool = false) -> bool:
 	var _r := get_floor_distance() <= extreme_landing_height
 	if _log: __log_floor_dist("<= land height", extreme_landing_height, "? =>", _r)
 	return _r
 
 
-func floor_dist_under_landing_height(_log: bool = true) -> bool:
+func floor_dist_under_landing_height(_log: bool = false) -> bool:
 	var _r := get_floor_distance() <= landing_height
 	if _log: __log_floor_dist("<= land height", landing_height, "? =>", _r)
-	return _r
-
-
-func floor_dist_under_tolerated_height(_log: bool = true) -> bool:
-	var _r := get_floor_distance() <= tolerate_height
-	if _log: __log_floor_dist("<= tolerate height", tolerate_height, "? =>", _r)
 	return _r
 
 
@@ -194,6 +203,6 @@ func __log_candidate(target, reason):
 
 
 func __log_floor_dist(...parts: Array):
-	print_.aware("", pp.s("floor_dist", get_floor_distance(), pp.list_(parts)))
+	print_.aware("", pp.s("floor_dist", get_floor_distance(), pp.list_(parts)) + "exact value " + str(get_floor_distance()))
 
 # endregion

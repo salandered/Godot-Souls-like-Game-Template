@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://q3osrwkgcbi0"]
+
+[ext_resource type="Script" uid="uid://clchluho2atww" path="res://logic/Locations/_dev/dev_cam_fly/cam_fly_mode.gd" id="1_m7l16"]
+
+[node name="CameraMode" type="Node3D"]
+process_mode = 3
+visible = false
+script = ExtResource("1_m7l16")
+mouse_sensitivity = 0.001

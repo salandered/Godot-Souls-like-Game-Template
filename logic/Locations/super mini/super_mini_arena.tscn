@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://m2o3tdaa66rk"]
+
+[ext_resource type="Material" uid="uid://bd35ug7jd8rk4" path="res://-assets-/materials-shared/wood/dark_wooden_planks.tres" id="1_jlrm2"]
+[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/Player/Princess_2.tscn" id="2_ak6i7"]
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/Enemies/phe_enemy/PHEnemy_2.tscn" id="3_q0bx5"]
+[ext_resource type="Texture2D" uid="uid://ujf1akcikwbf" path="res://-assets-/materials-shared/_images/rock_03/Lady_Stone03_Base Color_2k.jpg" id="4_ak6i7"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q0bx5"]
+panorama = ExtResource("4_ak6i7")
+
+[sub_resource type="Sky" id="Sky_k44lm"]
+sky_material = SubResource("PanoramaSkyMaterial_q0bx5")
+
+[sub_resource type="Environment" id="Environment_jlrm2"]
+background_mode = 2
+sky = SubResource("Sky_k44lm")
+
+[node name="super mini arena" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(43.428032, 0, 0, 0, 0.40823415, 0, 0, 0, 48.737656, -0.008735299, 0, -0.009681702)
+material_override = ExtResource("1_jlrm2")
+use_collision = true
+
+[node name="Princess" parent="." instance=ExtResource("2_ak6i7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36798638, 0)
+
+[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_q0bx5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6525927, 0.2793026, 0)
+player = NodePath("../Princess")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jlrm2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6215717, 0.78335726, 0, -0.78335726, 0.6215717, 0, 19.40635, 22.899353)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.66670156, 0.74532473, 0, -0.74532473, -0.66670156, 0, 19.40635, -27.451534)

@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/white/icon_grid.png")
+@icon("res://-assets-/x_icons/white/icon_grid.png")
 extends Node
 class_name PHContainer
 
@@ -92,11 +92,11 @@ var node_to_leaf_state_data: Dictionary = {
 	## loco
 	"CombatIdle": _LStData.new(PHES.Leaf.combat_idle, _AData.new(PHEA.loco.combat_idle, -0.03), _CommitData.new(0.4), ),
 	"Pursue": _LStData.new(PHES.Leaf.pursue, _AData.new(PHEA.loco.run_forward, -0.06), _CommitData.new(0.3, 30)),
-	"Orbit": _LStData.new(PHES.Leaf.orbit, _AData.new(PHEA.loco.strafe_right), _CommitData.new(0.5)),
-	"DodgeB": _LStData.new(PHES.Leaf.dodge_B, _AData.new(PHEA.loco.dodge_B, -0.05)),
-	"DodgeF": _LStData.new(PHES.Leaf.dodge_F, _AData.new(PHEA.loco.dodge_F, -0.05)),
-	"DodgeL": _LStData.new(PHES.Leaf.dodge_L, _AData.new(PHEA.loco.dodge_L, -0.05)),
-	"DodgeR": _LStData.new(PHES.Leaf.dodge_R, _AData.new(PHEA.loco.dodge_R, -0.05)),
+	"Orbit": _LStData.new(PHES.Leaf.orbit, _AData.new(PHEA.strafe.strafe_right), _CommitData.new(0.5)),
+	"DodgeB": _LStData.new(PHES.Leaf.dodge_B, _AData.new(PHEA.dodge.dodge_B, -0.05)),
+	"DodgeF": _LStData.new(PHES.Leaf.dodge_F, _AData.new(PHEA.dodge.dodge_F, -0.05)),
+	"DodgeL": _LStData.new(PHES.Leaf.dodge_L, _AData.new(PHEA.dodge.dodge_L, -0.05)),
+	"DodgeR": _LStData.new(PHES.Leaf.dodge_R, _AData.new(PHEA.dodge.dodge_R, -0.05)),
 	"JumpTowards": _LStData.new(PHES.Leaf.jump_towards, _AData.new(PHEA.loco.jump_towards, -0.1)),
 
 	## attack

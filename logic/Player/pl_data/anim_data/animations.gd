@@ -82,14 +82,15 @@ class air:
 class attack:
 	const axe_slice_1 := _lib.all_axe + "aIP-attack-slice-RL" # _ff + "axe_slice_1" # _SWS_combo + "SWSc-O-combo-1-all" #
 	const axe_slice_2 := _lib.all_axe + "aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "axe_slice_2"
-	const attack_from_run := _lib._SWS_att + "SWS-O-bit-stab"
-	const attack_from_dodge := _lib._SWS_att + "SWS-O-stab"
 	
 	const sword_slash_1 := _lib._ss_attack + "B-slash-R-L-RM-1"
 	const sword_slash_2 := _lib._ss_attack + "B-slash-L-R-RM-2"
+	
+	const attack_from_run := _lib._SWS_att + "SWS-O-bit-stab"
+	const attack_from_dodge := _lib._SWS_att + "SWS-O-stab"
+	
 
 class react:
-	const block_reaction := air.midair # _ff + "block_reaction" # _OS_fight + "OS-hit-react" # _ff + "block_reaction"
 	const hit_reaction := _lib._ss_attack + "C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
 	const head_B_large = _lib._ss_attack + "B-head-impact"
 	const react_from_R = _lib.all_axe + "react large from right"
@@ -124,12 +125,7 @@ const withdraw := air.midair # _jump + "C-fall-HW" # TODO
 const block_forward := _lib._ss_attack + "C-block-forward" # _OS_fight + "OS-block-left" # _ss_attack + "C-block-forward"
 # const block_to_idle := _ss_attack + "C-block-to-idle"
 
-const pushback := air.midair # todo
-const staggered := air.midair # _ss_attack + "B-head-impact"
 
 const parry := air.midair # _ff + "parry"
 const parried := air.midair # _ff + "parried"
 const riposte_attack := attack.axe_slice_1
-
-const shield_throw := air.midair # _ff + "shield_throw"
-const shield_throw_reload := air.midair # _ff + "shield_throw_reload"

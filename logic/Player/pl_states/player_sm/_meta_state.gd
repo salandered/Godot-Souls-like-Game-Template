@@ -74,8 +74,8 @@ class_name MetaState
 
 	## like Queued or Forced
 	func __log_(...parts: Array) -> void:
-		# pass
-		print_.prefix_s(pp.s(__pp_type(), get_instance_id()), pp.list_(parts))
+		if print_.META_STATES_B:
+			print_.prefix_s(pp.s(__pp_type(), get_instance_id()), pp.list_(parts))
 
 	func _to_string() -> String:
 		return __pp_curr_state()

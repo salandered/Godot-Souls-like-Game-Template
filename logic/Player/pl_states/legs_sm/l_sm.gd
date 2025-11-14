@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/node-colors/orange-2.png")
+@icon("res://-assets-/x_icons/node-colors/orange-2.png")
 
 extends Node
 class_name LegsSM

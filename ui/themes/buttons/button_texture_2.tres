@@ -1,7 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cg2khdcvd3ova"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cf5ta"]
-load_path = "res://.godot/imported/g5lIOlQpYb.png-1b2cfbd9229b0ca362012414eba74c3a.ctex"
 
 [resource]
 content_margin_top = 4.0

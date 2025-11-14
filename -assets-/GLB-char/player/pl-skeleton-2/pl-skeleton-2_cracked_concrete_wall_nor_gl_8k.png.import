@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b488qelrmuinj"
-path="res://.godot/imported/pl-skeleton-2_cracked_concrete_wall_nor_gl_8k.png-e1e747e5b5e925f5f525129b23478002.ctex"
+path.s3tc="res://.godot/imported/pl-skeleton-2_cracked_concrete_wall_nor_gl_8k.png-e1e747e5b5e925f5f525129b23478002.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "957d1555039d6116cd4522f203351c5a"
@@ -14,22 +15,22 @@ generator_parameters={
 [deps]
 
 source_file="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_cracked_concrete_wall_nor_gl_8k.png"
-dest_files=["res://.godot/imported/pl-skeleton-2_cracked_concrete_wall_nor_gl_8k.png-e1e747e5b5e925f5f525129b23478002.ctex"]
+dest_files=["res://.godot/imported/pl-skeleton-2_cracked_concrete_wall_nor_gl_8k.png-e1e747e5b5e925f5f525129b23478002.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_cracked_concrete_wall_nor_gl_8k.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

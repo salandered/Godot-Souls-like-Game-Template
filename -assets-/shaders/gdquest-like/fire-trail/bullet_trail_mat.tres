@@ -1,0 +1,50 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bpwl5ft04ck87"]
+
+[sub_resource type="Shader" id="Shader_8ua0s"]
+code = "shader_type spatial;
+ 
+
+uniform sampler2D noise_sampler;
+uniform sampler2D gradient_1D : source_color;
+
+void vertex(){
+	float v = sin((TIME * 4.0 + UV.y) * 10.0) - 0.5;
+ 
+	VERTEX.xz += v * NORMAL.xz * 0.02;
+}
+
+void fragment() {
+	float n = texture(noise_sampler, UV * vec2(1.0, 0.2) + vec2(0.0, TIME)).x;
+	float edge = smoothstep(0.0, 0.8, UV.y);
+	// Place fragment code here.
+	ALPHA = smoothstep(0.0, 0.15, edge * (n + smoothstep(0.6, 1.0, UV.y)));
+	
+	
+	vec3 color = texture(gradient_1D, vec2(n, 0.0)).rgb;
+	ALBEDO = color;
+	EMISSION = color  * 1.4;
+	ROUGHNESS = 0.0;
+	SPECULAR = 0.0;
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_nmj62"]
+colors = PackedColorArray(0.992188, 0.338334, 0.021303, 1, 0.979201, 1, 0.461844, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mfy1m"]
+gradient = SubResource("Gradient_nmj62")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q7vao"]
+seed = 10
+frequency = 0.005
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6o2e"]
+noise = SubResource("FastNoiseLite_q7vao")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_8ua0s")
+shader_parameter/noise_sampler = SubResource("NoiseTexture2D_s6o2e")
+shader_parameter/gradient_1D = SubResource("GradientTexture1D_mfy1m")

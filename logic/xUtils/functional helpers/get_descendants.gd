@@ -39,6 +39,17 @@ static func _get_descendants_filtered(node: Node, filter: Callable, one_level: b
 static func rigid_bodies(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is RigidBody3D)
 
+static func areas(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is Area3D)
+
+
+static func collision_shapes(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is CollisionShape3D)
+
+
+static func static_bodies(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is StaticBody3D)
+
 static func mesh_instances(node: Node, is_visible: bool = false, one_level: bool = false) -> Array:
 	var filter := func(n):
 		if n is MeshInstance3D:
@@ -56,6 +67,10 @@ static func bone_attachments(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BoneAttachment3D)
 
 # endregion
+
+
+static func breakable_areas(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is BreakableArea)
 
 static func base_weapons_only_one(node: Node) -> BaseWeapon:
 	var r := base_weapons(node)

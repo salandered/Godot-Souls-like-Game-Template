@@ -3,10 +3,6 @@ extends AttackState
 
 ## overrides
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if not get_player().is_on_floor():
-		return PLVerdict.new(PS.midair)
-
-	
 	if curr_state_action.passed_marker(MarkerName.ALLOWS_SWITCH):
 		var verdict := best_next_state_from_input(input_)
 		if verdict.next_state != PS.idle:

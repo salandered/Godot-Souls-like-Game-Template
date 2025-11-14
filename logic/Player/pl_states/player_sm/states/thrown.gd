@@ -1,11 +1,14 @@
 extends BasePlayerState
 
 
-func check_transition(input_: InputPackage) -> PLVerdict:
-	if not get_player().is_on_floor():
-		return PLVerdict.new(PS.midair)
+func on_enter_state(input_: InputPackage):
+	APPLY_GRAVITY = false
 
-	
+func check_transition(input_: InputPackage) -> PLVerdict:
+	if curr_state_action.passed_marker(MarkerName.LAND_START):
+		APPLY_GRAVITY = true
+
+	# 
 	if curr_state_action.passed_marker(MarkerName.TO_RUN):
 		var verdict := best_next_state_from_input(input_)
 		__log_psm_check("passed_marker TO_RUN => choosing best input")

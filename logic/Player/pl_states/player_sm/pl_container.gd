@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/white/icon_grid.png")
+@icon("res://-assets-/x_icons/white/icon_grid.png")
 
 extends Node
 class_name PlayerStatesContainer
@@ -39,7 +39,7 @@ var _leg_actions: Dictionary # { Node name : LegsAction }
 
 ## not nullable
 func state_by_name(state_name: String) -> BasePlayerState:
-	assert(_states.has(state_name), "_states dict doesn't have " + pp.in_q(state_name))
+	assert(_states.has(state_name), "_states dict doesn't have " + pp.in_q(state_name) + " " + pp.dict_(_states))
 	return _states[state_name]
 
 

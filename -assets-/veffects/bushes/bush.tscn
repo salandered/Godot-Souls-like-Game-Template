@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://cn8o7sv1osssk"]
+
+[ext_resource type="ArrayMesh" uid="uid://b0k6qsus8yf42" path="res://-assets-/veffects/bushes/bush.obj" id="1_s7d1x"]
+
+[sub_resource type="Shader" id="Shader_djr3a"]
+code = "shader_type spatial;
+render_mode cull_disabled;
+uniform sampler2D wind_noise_sampler;
+
+uniform sampler2D albedo_sampler : source_color;
+uniform sampler2D orm_sampler;
+uniform sampler2D normal_sampler;
+
+void vertex() {
+	float wind_value = texture(wind_noise_sampler, (UV.y) + VERTEX.y + NODE_POSITION_WORLD.xz + vec2(0.0, (TIME * 0.2))).x;
+	VERTEX.xz += (wind_value) * 0.05 * UV.y;
+}
+
+void fragment() {
+	vec4 albedo = texture(albedo_sampler, UV);
+	vec3 orm = texture(orm_sampler, UV).rgb;
+	vec3 normal_map = texture(normal_sampler, UV).rgb;
+	
+	ALBEDO = albedo.rgb * orm.r;
+	ROUGHNESS = orm.g;
+	NORMAL_MAP = normal_map;
+	ALPHA = albedo.a;
+	ALPHA_SCISSOR_THRESHOLD = 0.5;
+}
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j0p4v"]
+load_path = "res://.godot/imported/simple_leaves_albedo.png-b39067d69a3b7c959f58972a05dd6db8.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3rdlg"]
+load_path = "res://.godot/imported/simple_leaves_normal.png-8cec5f74e66d4a645352f52c25400352.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d0424"]
+load_path = "res://.godot/imported/simple_leaves_orm.png-290033f05266e7c2796da9a78c2dd5c8.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d16uw"]
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k6jmi"]
+noise = SubResource("FastNoiseLite_d16uw")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eklh5"]
+render_priority = 0
+shader = SubResource("Shader_djr3a")
+shader_parameter/wind_noise_sampler = SubResource("NoiseTexture2D_k6jmi")
+shader_parameter/albedo_sampler = SubResource("CompressedTexture2D_j0p4v")
+shader_parameter/orm_sampler = SubResource("CompressedTexture2D_d0424")
+shader_parameter/normal_sampler = SubResource("CompressedTexture2D_3rdlg")
+
+[node name="Bush1" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_eklh5")
+mesh = ExtResource("1_s7d1x")

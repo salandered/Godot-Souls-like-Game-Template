@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://68q865r7xmgg"]
+
+[resource]
+resource_name = "eye_light.001"
+cull_mode = 2
+albedo_color = Color(0.41632614, 0.14910395, 0.15599987, 1)
+roughness = 0.5

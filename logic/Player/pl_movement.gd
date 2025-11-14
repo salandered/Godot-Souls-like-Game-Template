@@ -1,4 +1,4 @@
-extends Node
+extends BaseCharacterMovement
 class_name PlayerMovement
 
 @onready var _player: Princess = $".."
@@ -6,12 +6,8 @@ class_name PlayerMovement
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 
 
-## DOCS
-# region
-# - what we call 'move' is officially called 'translate' i suppose
-#   'move' might be seen to abstract but it is used in Blender3D (G key)
-# - 'rotate' for rotating player.
-# endregion
+func get_character() -> Princess:
+	return _player
 
 
 ## GETTERS
@@ -20,26 +16,9 @@ class_name PlayerMovement
 func get_player() -> Princess:
 	return _player
 
+
 func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	return __velocity_by_input(input_, delta)
-
-
-func safe_is_on_floor() -> bool:
-	return _player.is_on_floor() or area_awareness.floor_dist_under_tolerated_height()
-
-
-func almost_on_floor() -> bool:
-	return not _player.is_on_floor() and area_awareness.floor_dist_under_tolerated_height()
-
-
-func get_curr_velocity_len() -> float:
-	return _player.velocity.length()
-
-func get_curr_xz_velocity_len() -> float:
-	return Vector3(_player.velocity.x, 0, _player.velocity.z).length()
-
-func get_curr_y_velocity() -> float:
-	return _player.velocity.y
 
 
 func get_signed_angle_pl_input(input_, delta, __log) -> float:
@@ -89,45 +68,14 @@ func _angle_to_direction(angle_deg: float) -> Direction.Dir:
 func get_signed_angle_pl_target() -> float:
 	if area_awareness.is_camera_locked():
 		var target_pos := area_awareness.get_camera_locked_target().global_position
-		target_pos.y = _player.global_position.y
+		target_pos.y = get_character().global_position.y
 
-		var dir_to_target := _player.global_position.direction_to(target_pos)
-		var _face_dir := _player.global_basis.z
+		var dir_to_target := get_character().global_position.direction_to(target_pos)
+		var _face_dir := get_character().global_basis.z
 		
 		var angle := _face_dir.signed_angle_to(dir_to_target, Vector3.UP)
 		return angle
 	return 0.0
-
-# endregion
-
-## BASIC MOVING
-# region
-
-func set_velocity(velocity: Vector3):
-	_player.velocity = velocity
-
-
-## gravity is expected to be positive value.
-## if no gravity, default will be used
-func apply_gravity(delta, gravity: float = u.gravity):
-	_player.velocity.y -= gravity * delta
-
-
-func apply_friction_xz(delta: float, friction_value: float = 5.0):
-	var new_velocity := _player.velocity
-	new_velocity.x = move_toward(new_velocity.x, 0.0, friction_value * delta)
-	new_velocity.z = move_toward(new_velocity.z, 0.0, friction_value * delta)
-	_player.velocity = new_velocity
-
-
-func apply_friction(delta: float, friction_value: float = 5.0):
-	var horizontal_vel := Vector3(_player.velocity.x, 0, _player.velocity.z)
-	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, friction_value * delta)
-	
-	var new_velocity := _player.velocity
-	new_velocity.x = horizontal_vel.x
-	new_velocity.z = horizontal_vel.z
-	_player.velocity = new_velocity
 
 # endregion
 
@@ -141,7 +89,7 @@ func move_rotate_with_input_vector(input_: InputPackage, delta: float, speed_con
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(input_, delta, speed_config)
 	_move_with_input_vector(angle, input_, delta, speed_config)
-	_player.rotate_y(angle.value)
+	get_character().rotate_y(angle.value)
 
 func move_with_input_vector(input_: InputPackage, delta: float, speed_config: SpeedConfig = null):
 	if speed_config == null:
@@ -154,7 +102,7 @@ func rotate_with_input_vector(input_: InputPackage, delta: float, speed_config: 
 	if speed_config == null:
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(input_, delta, speed_config)
-	_player.rotate_y(angle.value)
+	get_character().rotate_y(angle.value)
 
 
 func _move_with_input_vector(angle: AllowedAngle, input_: InputPackage, delta: float, speed_config: SpeedConfig):
@@ -162,13 +110,13 @@ func _move_with_input_vector(angle: AllowedAngle, input_: InputPackage, delta: f
 	var _turn_speed := speed_config.get_turn_speed()
 	var _speed_mult := speed_config.get_speed_multiplier()
 
-	var _face_dir := _player.basis.z
+	var _face_dir := get_character().basis.z
 	var face_dir_rotated := _face_dir.rotated(Vector3.UP, angle.value)
 
 	if angle.cut:
-		_player.velocity = face_dir_rotated * _turn_speed * _speed_mult
+		get_character().velocity = face_dir_rotated * _turn_speed * _speed_mult
 	else:
-		_player.velocity = face_dir_rotated * _speed * _speed_mult
+		get_character().velocity = face_dir_rotated * _speed * _speed_mult
 
 
 func _calculate_allowed_angle(input_: InputPackage, delta: float, speed_config: SpeedConfig) -> AllowedAngle:
@@ -176,21 +124,13 @@ func _calculate_allowed_angle(input_: InputPackage, delta: float, speed_config: 
 
 	var input_direction := velocity_by_input(input_, delta).normalized()
 
-	var _face_dir := _player.basis.z
+	var _face_dir := get_character().basis.z
 	var angle := _face_dir.signed_angle_to(input_direction, Vector3.UP)
 
 	if abs(angle) >= _angular_speed * delta: # reads as 'max rotation allowed in this frame'
 		return AllowedAngle.new(sign(angle) * _angular_speed * delta, true)
 	else:
 		return AllowedAngle.new(angle)
-
-class AllowedAngle:
-	var value: float
-	var cut: float
-
-	func _init(_value, _cut: bool = false) -> void:
-		value = _value
-		cut = _cut
 
 
 var _DELTA_VECTOR_LENGTH: float = 0.30
@@ -199,24 +139,20 @@ func process_input_vector_air(input_: InputPackage, delta: float, jump_direction
 	var _input_direction := velocity_by_input(input_, delta).normalized()
 	var _input_delta_vector := _input_direction * _DELTA_VECTOR_LENGTH
 	
-	# ep 6: (jump_direction + input_delta_vector * delta).limit_length(clamp(_player.velocity.length(), 1, 999999))
-	jump_direction = (jump_direction + _input_delta_vector).limit_length(_player.velocity.length())
-	# u.safe_look_at(_player, _player.global_position - jump_direction)
+	# ep 6: (jump_direction + input_delta_vector * delta).limit_length(clamp(get_character().velocity.length(), 1, 999999))
+	jump_direction = (jump_direction + _input_delta_vector).limit_length(get_character().velocity.length())
+	# u.safe_look_at(_player, get_character().global_position - jump_direction)
 
-	# ep 6: (player.velocity + input_delta_vector * delta).limit_length(_player.velocity.length())
-	var new_velocity := (_player.velocity + _input_delta_vector).limit_length(_player.velocity.length())
-	_player.velocity = new_velocity
+	# ep 6: (player.velocity + input_delta_vector * delta).limit_length(get_character().velocity.length())
+	var new_velocity := (get_character().velocity + _input_delta_vector).limit_length(get_character().velocity.length())
+	get_character().velocity = new_velocity
 
 # endregion
 
 
 ## MOVING WITH ROOT
+# some logic in the future can be moved to base movement
 # region 
-
-
-## applies a local-space velocity (e.g., from root motion) to the player
-func apply_local_velocity_as_global(local_velocity: Vector3):
-	_player.velocity = _player.get_quaternion() * local_velocity
 
 
 ## by default only Y is muted.
@@ -246,11 +182,11 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 			return {"completed": true, "accum_rot": accum_rot_}
 
 	if abs(rot_delta) >= abs(remaining_angle):
-		_player.rotate_y(remaining_angle)
+		get_character().rotate_y(remaining_angle)
 		print_.dev("", "Turn complete. " + _log_msg)
 		return {"completed": true, "accum_rot": target_angle_}
 	else:
-		_player.rotate_y(rot_delta)
+		get_character().rotate_y(rot_delta)
 		var new_rotation := accum_rot_ + rot_delta
 		# prints(u.fr(), "applied", _log_msg)
 		return {"completed": false, "accum_rot": new_rotation}
@@ -277,8 +213,8 @@ func move_forward_or_back(direction_sign: float, delta: float, speed_config: Spe
 	var _speed_mult := speed_config.get_speed_multiplier()
 	
 	# direction_sign: 1.0 for forward, -1.0 for backward
-	var forward_vec := _player.basis.z * direction_sign
-	_player.velocity = forward_vec * _speed * _speed_mult
+	var forward_vec := get_character().basis.z * direction_sign
+	get_character().velocity = forward_vec * _speed * _speed_mult
 
 
 func move_strafe_with_forward(input_: InputPackage, direction_sign: float, delta: float, speed_config: SpeedConfig = null):
@@ -287,8 +223,8 @@ func move_strafe_with_forward(input_: InputPackage, direction_sign: float, delta
 	var _speed := speed_config.get_speed()
 	var _speed_mult := speed_config.get_speed_multiplier()
 	
-	var forward_vec := -_player.global_basis.z
-	var right_vec := _player.global_basis.x
+	var forward_vec := -get_character().global_basis.z
+	var right_vec := get_character().global_basis.x
 	
 	var forward_component := input_.input_direction.y # raw forward/backward input component
 	
@@ -296,11 +232,11 @@ func move_strafe_with_forward(input_: InputPackage, direction_sign: float, delta
 	var desired_direction := (forward_vec * forward_component + right_vec * direction_sign)
 	
 	if desired_direction.is_zero_approx():
-		_player.velocity = Vector3.ZERO
+		get_character().velocity = Vector3.ZERO
 		return
 	
 	var final_velocity := desired_direction.normalized() * _speed * _speed_mult
-	_player.velocity = final_velocity
+	get_character().velocity = final_velocity
 
 
 func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
@@ -310,17 +246,17 @@ func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 	
 	if area_awareness.is_camera_locked():
 		var target_pos := area_awareness.get_camera_locked_target().global_position
-		target_pos.y = _player.global_position.y
+		target_pos.y = get_character().global_position.y
 
-		var dir_to_target := _player.global_position.direction_to(target_pos)
-		var face_dir := _player.global_basis.z
+		var dir_to_target := get_character().global_position.direction_to(target_pos)
+		var _face_dir := get_character().global_basis.z
 		
-		var remaining_angle := face_dir.signed_angle_to(dir_to_target, Vector3.UP)
+		var remaining_angle := _face_dir.signed_angle_to(dir_to_target, Vector3.UP)
 		
 		var max_rot_this_frame := _ang_speed * delta # maximum rotation allowed in this single frame
 		var rotation_this_frame := clampf(remaining_angle, -max_rot_this_frame, max_rot_this_frame)
 		
-		_player.rotate_y(rotation_this_frame)
+		get_character().rotate_y(rotation_this_frame)
 		# prints("~~~~", rotation_this_frame)
 
 # endregion
@@ -353,52 +289,31 @@ func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	
 	var grounded_target: Vector3
 	if area_awareness.is_camera_locked():
-		grounded_target = _player.fancy_camera.locked_target.global_position
+		grounded_target = get_character().fancy_camera.locked_target.global_position
 	else:
-		grounded_target = _player.fancy_camera.nest.global_position
-	grounded_target.y = _player.global_position.y
+		grounded_target = get_character().fancy_camera.nest.global_position
+	grounded_target.y = get_character().global_position.y
 
 	if forward_speed != 0.0:
-		_velocity -= _player.global_position.direction_to(grounded_target) * forward_speed * __VEL_SPEED
+		_velocity -= get_character().global_position.direction_to(grounded_target) * forward_speed * __VEL_SPEED
 
 	if orbit_speed != 0.0:
 		var d: float = orbit_speed * __VEL_SPEED * delta
-		var target_direction := grounded_target - _player.global_position
+		var target_direction := grounded_target - get_character().global_position
 		var distance_to_target := target_direction.length()
 		var alpha := -2.0 * asin(d / (2.0 * distance_to_target))
 		var rotated_dir := target_direction.rotated(Vector3.UP, alpha)
-		var d_vector := grounded_target - rotated_dir - _player.global_position
+		var d_vector := grounded_target - rotated_dir - get_character().global_position
 		_velocity += d_vector / delta
 	return _velocity
 
 
 func __angle_between_player_and_input(input_: InputPackage, delta: float, __log: bool = false) -> float:
-	var face_dir := _player.basis.z
+	var _face_dir := get_character().basis.z
 	var input_dir := __velocity_by_input(input_, delta).normalized()
-	var angle := face_dir.signed_angle_to(input_dir, Vector3.UP)
+	var angle := _face_dir.signed_angle_to(input_dir, Vector3.UP)
 	# if __log: print_.dev("\t _face_dir", face_dir, "_input_dir", pp.vec3(input_dir))
 	return angle
 
 
-# endregion
-
-
-## __LOGGING
-# region
-
-func __pp_vel_y() -> String:
-	return pp.s(get_curr_y_velocity())
-
-func __pp_gl_pos_y() -> String:
-	return pp.s(get_player().global_position.y)
-
-func __pp_vel_xz_len() -> String:
-	return pp.s(get_curr_xz_velocity_len())
-
-func __pp_vel() -> String:
-	return pp.s("vel.y / gl_pos.y / vel.xz.len", __pp_vel_y(), __pp_gl_pos_y(), __pp_vel_xz_len())
-
-
-func __log_(...parts: Array):
-	print_.psm("Pl Movement", pp.list_(parts))
 # endregion

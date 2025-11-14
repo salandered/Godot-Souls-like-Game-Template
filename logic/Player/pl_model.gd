@@ -29,9 +29,10 @@ class_name Princess
 @onready var __dev_labels: Node = %_dev_labels
 
 
-var push_force = 4.0
+var push_rigid_bodies_force = 4.0
 
-func _ready() -> void:
+
+func initialise() -> void:
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Masks.PLAYER_COL_MASK
 
@@ -44,7 +45,8 @@ func _ready() -> void:
 		_pl_anim_container.list_of_animations,
 		native_player,
 		AnimParamsContainer.TRACK_PREFIX_2,
-		AnimParamsContainer.get_all_params())
+		AnimParamsContainer.get_all_params(),
+		PlRequiredMarkers.anim_to_required_marker)
 		 
 	container.accept_all_states(self)
 	player_sm.initialise(self)
@@ -55,6 +57,9 @@ func _ready() -> void:
 
 	__dev_initialise()
 
+
+func pretty_name() -> String:
+	return "Player"
 
 ## not nullable in theory
 func get_current_state() -> BasePlayerState:
@@ -79,13 +84,7 @@ func update(input_: InputPackage, delta: float):
 
 	player_sm.update(input_, delta)
 	move_and_slide()
-	for i in get_slide_collision_count():
-		# prints("~~~~~", i)
-		var collision = get_slide_collision(i)
-		# prints("~~~~~", collision)
-		if collision.get_collider() is RigidBody3D:
-			# prints("~~~~~is RigidBody3D:", collision.get_collider())
-			collision.get_collider().apply_central_impulse(-collision.get_normal() * push_force)
+	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
 ## USED FOR ENEMY PROJECTS
 # region
@@ -186,10 +185,10 @@ var __collisions_enabled: bool = true
 
 func __dev_initialise():
 	debug_cams = get_tree().get_nodes_in_group(Groups.Dev.DEBUG_CAMERAS)
-	print_.dev("dbg", str(debug_cams))
+	# print_.dev("dbg", str(debug_cams))
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
-	print_.dev("dbg", "cam_i: " + str(cam_i))
+	# print_.dev("dbg", "cam_i: " + str(cam_i))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
@@ -213,6 +212,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if __collisions_enabled:
 			collision_mask = Collision.Masks.PLAYER_COL_MASK
 		else:
-			collision_mask = Collision.Masks._DEV_ZERO_MASK
+			collision_mask = Collision.Masks._ZERO_MASK
 
 # endregion

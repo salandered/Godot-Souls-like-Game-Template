@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_misc/x_icons/red/icon_sword.png")
+@icon("res://-assets-/x_icons/red/icon_sword.png")
 extends PHEWeapon
 class_name AuraWeapon
 

@@ -31,7 +31,8 @@ static func get_all_params() -> Array[String]:
 
 
 # const TRACK_PREFIX := "%AnimParameters:"
-const TRACK_PREFIX_2 := "../AnimatorManager/NativeAnimator/AnimParameters:"
+# const TRACK_PREFIX_2 := "../AnimatorManager/NativeAnimator/AnimParameters:"
+const TRACK_PREFIX_2 := "NativeAnimator/AnimParameters:"
 
 
 func is_switches_to_queue(anim: Animation, timestamp: float) -> bool:

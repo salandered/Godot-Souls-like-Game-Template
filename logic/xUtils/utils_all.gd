@@ -156,3 +156,11 @@ static func safe_cast_array_of_base_weapon(array: Array[Variant]) -> Array[BaseW
 			return []
 	list_casted.assign(array)
 	return list_casted
+
+
+static func check_shape(node: Node3D):
+	var shapes = node.get_children().filter(func(c): return c is CollisionShape3D)
+	
+	print("WeaponHurtBox shapes: ", shapes)
+	if shapes.is_empty():
+		push_error("WeaponHurtBox has NO collision shape!")

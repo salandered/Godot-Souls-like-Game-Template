@@ -1,6 +1,6 @@
 @abstract
 class_name BasePHEState
-extends TimeManagement
+extends BaseCharacterState
 
 
 var me: PHCharacter
@@ -14,8 +14,6 @@ var e_movement: EnemyMovement
 var anim_params_container: EAnimParamsContainer
 var config: PHEConfig
 
-
-var state_name: String
 
 # min time to stay in state. -1 means not applied (like for Top state or some idle state)
 var commitment: float = 0.4

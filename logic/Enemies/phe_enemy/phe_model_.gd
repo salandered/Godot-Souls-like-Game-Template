@@ -35,7 +35,7 @@ var _prev_leaf: BasePHELeaf
 ##    => check root_motion_track of NativePlayer!
 ##       it's very fragile, any change of node tree and it's gone
 
-func _ready() -> void:
+func initialise() -> void:
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	state_machine = _top
@@ -48,7 +48,8 @@ func _ready() -> void:
 		_anim_list.list_of_animations,
 		native_player,
 		EAnimParamsContainer.TRACK_PREFIX,
-		EAnimParamsContainer.get_all_params()) # NOTE: should be before accepting states!
+		EAnimParamsContainer.get_all_params(),
+		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
 	
 	config.me = self
 	enemy_movement.me = self
@@ -64,6 +65,9 @@ func _ready() -> void:
 	angry_raised = false
 	state_machine._on_enter_state()
 
+
+func pretty_name() -> String:
+	return "Enemy"
 
 func get_current_state() -> BasePHEState:
 	## returns curr substate of the top state
@@ -100,14 +104,12 @@ func update_state_history(state_name_):
 	if _state_history.size() > BREADCRUMB_SIZE:
 		_state_history.pop_front()
 
+var push_rigid_bodies_force: float = 8.0
 
 func _physics_process(delta):
 	state_machine._update(delta)
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider() is RigidBody3D:
-			collision.get_collider().apply_central_impulse(-collision.get_normal() * 8.0)
+	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
 	player.__dev_labels._label_phe_enemy_info(self)
 

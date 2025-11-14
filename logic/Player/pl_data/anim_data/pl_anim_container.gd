@@ -34,7 +34,6 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.air.landing_sprint, 0.9),
 
 	## react
-	AnimationData.new(A.react.block_reaction),
 	AnimationData.new(A.react.hit_reaction),
 	AnimationData.new(A.react.head_B_large),
 	AnimationData.new(A.react.react_from_R),

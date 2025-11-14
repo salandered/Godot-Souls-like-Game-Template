@@ -1,5 +1,4 @@
-extends Node
-# see PlayerMovement for a reference
+extends BaseCharacterMovement
 class_name EnemyMovement
 
 
@@ -9,79 +8,50 @@ var me: BaseEnemyCharacter
 @onready var enemy_awareness: EnemyAwareness = %EnemyAwareness
 
 
-class AllowedAngle:
-	var value: float
-	var cut: float
-
-	func _init(_value, _cut: bool = false) -> void:
-		value = _value
-		cut = _cut
+func get_character() -> BaseEnemyCharacter:
+	return me
 
 
 func get_player() -> Princess:
-	return me.player
+	return get_character().player
 
 
 ## PLAYER UTILS
 # region
 
 func distance_to_player() -> float:
-	return me.global_position.distance_to(get_player().global_position)
+	return get_character().global_position.distance_to(get_player().global_position)
 
 
 func square_distance_to_player() -> float:
-	return me.global_position.distance_squared_to(get_player().global_position)
+	return get_character().global_position.distance_squared_to(get_player().global_position)
 
 
 func distance_to_(target: Node3D) -> float:
-	return me.global_position.distance_to(target.global_position)
+	return get_character().global_position.distance_to(target.global_position)
 
 
 func abs_angle_to_player() -> float:
-	return me.basis.z.angle_to(projected_direction_to_player())
+	return get_character().basis.z.angle_to(projected_direction_to_player())
 
 func signed_angle_to_player() -> float:
 	# returns signed angle (-π to π)
-	return me.basis.z.signed_angle_to(projected_direction_to_player(), Vector3.UP)
+	return get_character().basis.z.signed_angle_to(projected_direction_to_player(), Vector3.UP)
 
 
 func direction_to_player() -> Vector3:
-	return me.global_position.direction_to(get_player().global_position)
+	return get_character().global_position.direction_to(get_player().global_position)
 
 
 func projected_direction_to_player() -> Vector3:
-	return me.global_position.direction_to(get_player_position_grounded())
+	return get_character().global_position.direction_to(get_player_position_grounded())
 
 
 func get_player_position_grounded() -> Vector3:
 	var player_pos := get_player().global_position
-	player_pos.y = me.global_position.y
+	player_pos.y = get_character().global_position.y
 	return player_pos
 
-
-# endregion
-
-
-## BASIC UTILS
-# region
-
-
-func direction_to_(target: Variant) -> Vector3:
-	if target is Node3D:
-		return me.global_position.direction_to(target.global_position)
-	elif target is Vector3:
-		return me.global_position.direction_to(target)
-	else:
-		push_error("Invalid target type for direction_to_")
-		return Vector3.ZERO
-
-
-func face_dir() -> Vector3:
-	return me.basis.z
-
-
-func get_curr_velocity_len() -> float:
-	return me.velocity.length()
 
 # endregion
 
@@ -102,21 +72,14 @@ func move_rotate_towards_player(delta: float, speed_config: SpeedConfig = null):
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(delta, speed_config)
 	_move_toward_player(angle, speed_config)
-	me.rotate_y(angle.value)
+	get_character().rotate_y(angle.value)
 
 
 func rotate_towards_player(delta: float, speed_config: SpeedConfig = null, angle_adjustment: float = 0.0):
 	if speed_config == null:
 		speed_config = SpeedConfig.new()
 	var angle := _calculate_allowed_angle(delta, speed_config, angle_adjustment)
-	me.rotate_y(angle.value)
-
-
-func smooth_xz_stop(delta, decel_speed: float):
-	var horizontal_vel := Vector3(me.velocity.x, 0, me.velocity.z)
-	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, decel_speed * delta)
-	me.velocity.x = horizontal_vel.x
-	me.velocity.z = horizontal_vel.z
+	get_character().rotate_y(angle.value)
 
 
 func _calculate_allowed_angle(delta: float, speed_config: SpeedConfig, angle_adjustment: float = 0.0) -> AllowedAngle:
@@ -142,19 +105,11 @@ func _move_toward_player(angle: AllowedAngle, speed_config: SpeedConfig):
 	var face_dir_rotated := face_dir().rotated(Vector3.UP, angle.value)
 	
 	if angle.cut: # sharp turn - slower speed
-		me.velocity = face_dir_rotated * _turn_speed * _speed_mult
+		get_character().velocity = face_dir_rotated * _turn_speed * _speed_mult
 	else:
-		me.velocity = face_dir_rotated * _speed * _speed_mult
+		get_character().velocity = face_dir_rotated * _speed * _speed_mult
 
 # endregion
-
-
-func apply_gravity(delta) -> bool:
-	if not me.is_on_floor():
-		me.velocity.y -= u.gravity * delta
-		me.velocity.y -= u.gravity * 1.5 * delta
-		return true
-	return false
 
 
 ## MOVING WITH ROOT
@@ -166,7 +121,7 @@ func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = 
 	if __log: print("ROOT MOTION - Raw delta_pos: ", delta_pos, " | y_included: ", y_included)
 	
 	if y_included:
-		var _new_vel := (me.get_quaternion() * delta_pos / delta)
+		var _new_vel := (get_character().get_quaternion() * delta_pos / delta)
 		if scale_y:
 			_new_vel *= scale_factor
 		else:
@@ -174,12 +129,12 @@ func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = 
 			_new_vel.x *= scale_factor
 			_new_vel.z *= scale_factor
 		if __log: print("ROOT MOTION - New velocity (Y included, scale_y: ", scale_y, "): ", _new_vel)
-		me.velocity = _new_vel
+		get_character().velocity = _new_vel
 	else:
-		var __new_vel := (me.get_quaternion() * delta_pos / delta) * scale_factor
-		__new_vel.y = me.velocity.y
-		if __log: print("ROOT MOTION - New velocity (Y preserved): ", __new_vel, " | Old Y: ", me.velocity.y)
-		me.velocity = __new_vel
+		var __new_vel := (get_character().get_quaternion() * delta_pos / delta) * scale_factor
+		__new_vel.y = get_character().velocity.y
+		if __log: print("ROOT MOTION - New velocity (Y preserved): ", __new_vel, " | Old Y: ", get_character().velocity.y)
+		get_character().velocity = __new_vel
 
 
 ## STRAFE
@@ -192,7 +147,7 @@ func orbit(_direction: int = 1, speed_config: SpeedConfig = null):
 	var _speed := speed_config.get_speed()
 	
 	var strafe_vec := Vector3.UP.cross(direction_to_player()) * _speed * _direction
-	strafe_vec.y = me.velocity.y # preserve Y-velocity for gravity
-	me.velocity = strafe_vec
+	strafe_vec.y = get_character().velocity.y # preserve Y-velocity for gravity
+	get_character().velocity = strafe_vec
 
 # endregion
