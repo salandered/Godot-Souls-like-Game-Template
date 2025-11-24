@@ -30,8 +30,8 @@ var _resettable := [
 
 func initialise() -> void:
 	default_sp.SPEED = 3.0
-	default_sp.TURN_SPEED = 2.0
-	default_sp.ANGULAR_SPEED = 10.0
+	default_sp.TURN_SPEED = 2.6
+	default_sp.ANGULAR_SPEED = 14.0
 
 	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, MarkerName.TURN_180_APEX, 0.25)
 	var thrown_blend_time := calculate_blend_time_from_prev_anim_marker(PS.Act.thrown, MarkerName.TO_RUN, 0.25, true)
@@ -57,7 +57,15 @@ func on_enter_action(input_: InputPackage):
 			speed_mult_from_idle.initialise(accel_from_fall_curve, accel_from_idle_time + 0.2)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
+		Leg.Act.idle:
+			speed_mult_from_idle.initialise(accel_from_fall_curve, accel_from_idle_time + 0.2)
+			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
+			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
+			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
+		PS.Act.dodge:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
@@ -86,7 +94,17 @@ func update(input_: InputPackage, delta: float):
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
 			TURN_SPEED = turn_sp_from_idle.update(delta)
+		Leg.Act.idle:
+			CURR_SPEED = default_sp.SPEED
+			SPEED_MULT = speed_mult_from_idle.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
+			TURN_SPEED = turn_sp_from_idle.update(delta)
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
+			CURR_SPEED = default_sp.SPEED
+			SPEED_MULT = speed_mult_from_idle.update(delta)
+			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
+			TURN_SPEED = turn_sp_from_idle.update(delta)
+		PS.Act.dodge:
 			CURR_SPEED = default_sp.SPEED
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)

@@ -3,19 +3,23 @@ class_name Direction
 
 
 enum Dir {
-	NEUTRAL,
-	FORWARD,
+	NEUTRAL, # 0
+	FORWARD, # 1
 	BACKWARD,
 	RIGHT,
 	RIGHT_F,
-	RIGHT_B,
+	RIGHT_B, # 5
 	LEFT,
-	LEFT_F,
+	LEFT_F, # 7
 	LEFT_B
 }
 
 static func name_(dir: Dir) -> String:
 	return Dir.find_key(dir)
+
+
+static func full_name_(dir: Dir) -> String:
+	return pp.in_q(str(dir) + "|" + str(Dir.find_key(dir)))
 
 
 static func simplify(dir: Dir) -> Dir:

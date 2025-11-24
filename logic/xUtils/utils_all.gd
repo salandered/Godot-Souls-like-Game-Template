@@ -158,9 +158,7 @@ static func safe_cast_array_of_base_weapon(array: Array[Variant]) -> Array[BaseW
 	return list_casted
 
 
-static func check_shape(node: Node3D):
-	var shapes = node.get_children().filter(func(c): return c is CollisionShape3D)
-	
-	print("WeaponHurtBox shapes: ", shapes)
-	if shapes.is_empty():
-		push_error("WeaponHurtBox has NO collision shape!")
+static func cut_string(text: String, limit: int = 200) -> String:
+	if text.length() <= limit:
+		return text
+	return text.left(limit) + " ... <too long to print>"

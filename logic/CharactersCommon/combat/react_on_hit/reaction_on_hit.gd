@@ -1,5 +1,5 @@
 extends RefCounted
-class_name ReactUtils
+class_name ReactionOnHit
 
 
 class ReactionConfig:
@@ -44,8 +44,10 @@ static var pl_attack_to_direction = {
 	A.attack.attack_from_run: AttackDirection.Dir.STAB,
 	A.attack.attack_from_dodge: AttackDirection.Dir.STAB,
 	A.attack.sword_slash_1: AttackDirection.Dir.LEFT,
-	A.attack.sword_slash_2: AttackDirection.Dir.UP # technically should be RIGHT
+	A.attack.sword_slash_2: AttackDirection.Dir.UP, # technically should be RIGHT
+	A.attack.sword_slash_3: AttackDirection.Dir.DOWN
 	}
+
 
 static var attack_dir_to_enemy_overlay_anim = {
 	AttackDirection.Dir.LEFT: PHEA.react.react_from_L,
@@ -64,14 +66,22 @@ static var attack_dir_to_pl_overlay_anim = {
 	}
 
 
+# todo: probably states as keys, not raw animations
+## here listed only attacks which causes interrupt states
 static var enemy_attack_to_pl_state_interruption = {
 	PHEA.attack.attack_360_low: PS.thrown,
 	PHEA.attack.attack_up: PS.pushback,
-	PHEA.attack.power_gap_closer: PS.pushback,
+	PHEA.attack.power_gap_closer: PS.thrown,
 	PHEA.attack.sword_slide: PS.thrown,
 	PHEA.attack.scare_off: PS.pushback,
 	PHEA.attack.power_up: PS.thrown,
 	PHEA.phase_switch: PS.thrown
+	}
+
+
+## here listed only attacks which causes interrupt states
+static var pl_attack_to_enemy_state_interruption = {
+	A.attack.sword_slash_3: PHES.Leaf.pushback,
 	}
 
 
@@ -194,7 +204,7 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Arr
 # endregion
 
 
-## PL STATE REACT
+## STATE REACT
 # region
 
 
@@ -202,12 +212,19 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Arr
 static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 	var _pl_state: String
 	_pl_state = u.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", Fallback.SOFT)
-	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> State Interruption", pp.in_q(_pl_state))
+	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
 	return _pl_state
+
+## may return ""
+static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
+	var _e_state: String
+	_e_state = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, "", Fallback.SOFT)
+	__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption", pp.in_q(_e_state))
+	return _e_state
 
 # endregion
 
 
 static func __log_(...parts: Array):
 	if print_.REACT_UTILS_B:
-		print_.prefix_s("[🗣️ ReactUtils]", pp.list_(parts))
+		print_.prefix_s("[🗣️ReactionOnHits]", pp.list_(parts))

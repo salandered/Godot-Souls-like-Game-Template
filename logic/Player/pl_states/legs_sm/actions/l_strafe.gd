@@ -33,7 +33,7 @@ var speed_mult_from_idle := EaseCurveInterpolator.new()
 var angular_sp_from_idle := FloatLinearInterpolator.new()
 var opposite_dir_change := StrafeDirChange.new()
 var slight_dir_change := StrafeDirChange.new()
-var slightest_dir_change := StrafeDirChange.new()
+# var slightest_dir_change := StrafeDirChange.new()
 
 var TURN_THRESHOLD_DEG: float = 15
 var DECELERATION_FRICTION: float = 8.0
@@ -45,13 +45,13 @@ var _resettable = [
 	angular_sp_from_idle,
 	opposite_dir_change,
 	slight_dir_change,
-	slightest_dir_change,
+	# slightest_dir_change,
 ]
 
 var _changers_cooldown = [
 	opposite_dir_change.cooldown,
 	slight_dir_change.cooldown,
-	slightest_dir_change.cooldown
+	# slightest_dir_change.cooldown
 ]
 
 func initialise() -> void:
@@ -59,7 +59,7 @@ func initialise() -> void:
 	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B, ANIM_IDLE)
 	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
 	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION, 2)
-	slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
+	# slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
 
 	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, MarkerName.TURN_180_APEX, 0.25)
 	blend_time.set_by_prev_action({
@@ -150,7 +150,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	var _prev_sp_mult = SPEED_MULT
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
-	SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
+	# SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
 	
 
 	var _sp_config := SpeedConfig.new(
@@ -178,44 +178,46 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	var new_dir := input_.detect_strafe_dir()
 	if new_dir != curr_direction.get_curr_dir():
-		print_.lsm_action_strafe(pp.on_upd, pp.s("new dir", curr_direction.pp_curr_dir(), "=>", Direction.name_(new_dir)))
+		print_.lsm_action_strafe(pp.on_upd, pp.s("detected new dir", curr_direction.pp_curr_dir(), "=>", Direction.name_(new_dir)))
 	
 	match curr_direction.would_be_change_of_type(new_dir):
-		StrafeDirection.ChangeType.OPPOSITE:
+		DirPairs.ChangeType.OPPOSITE:
 			if opposite_dir_change.cooldown.update(delta):
 				opposite_dir_change.speed_dip_init()
-				opposite_dir_change.async_change_init(_change_dir.bind(true, new_dir))
+				opposite_dir_change.async_change_init(_change_dir.bind(true, new_dir, true))
 				
 				u.reset_all(_changers_cooldown)
 				print_.lsm_action_strafe("", "~~ OPPOSITE dir change and dip triggered")
 
-		StrafeDirection.ChangeType.SLIGHT:
+		DirPairs.ChangeType.SLIGHT:
 			if slight_dir_change.cooldown.update(delta):
 				slight_dir_change.speed_dip_init()
-				slight_dir_change.async_change_init(_change_dir.bind(false, new_dir))
+				slight_dir_change.async_change_init(_change_dir.bind(false, new_dir, true))
 				
 				u.reset_all(_changers_cooldown)
 				print_.lsm_action_strafe("", "~~ SLIGHT dir change and dip triggered")
 		
-		StrafeDirection.ChangeType.SLIGHTEST:
-			if slightest_dir_change.cooldown.update(delta):
-				_change_dir(false, new_dir)
-				
-				u.reset_all(_changers_cooldown)
-				print_.lsm_action_strafe("", "~~ SLIGHTEST dir change")
+		DirPairs.ChangeType.SLIGHTEST:
+			_change_dir(false, new_dir)
+			
+			u.reset_all(_changers_cooldown)
+			print_.lsm_action_strafe("", "~~ SLIGHTEST dir change")
 
-		StrafeDirection.ChangeType.SAME:
+		DirPairs.ChangeType.SAME:
 			u.reset_all(_changers_cooldown)
 
 
 	get_animator_manager().set_global_speed_scale(SPEED_MULT)
 
-func _change_dir(is_opposite_change: bool, new_dir: Direction.Dir):
+func _change_dir(is_opposite_change: bool, new_dir: Direction.Dir, from_callback: bool = false):
 	# ?? question: is it ok that we re evalutaing dir. bake into callback?
 	# upd: answer is probably no
 	var actual_new_dir := InputManager._current_input.detect_strafe_dir()
 	curr_direction.set_direction(actual_new_dir)
-	print_.lsm_action_strafe("", pp.s("_change_dir to", curr_direction.pp_curr_dir()))
+	print_.lsm_action_strafe("", pp.s(
+		"from_callback is", from_callback,
+		"| _change_dir to", curr_direction.pp_curr_dir(),
+		"while initial was", Direction.name_(new_dir)))
 	_switch_animation(is_opposite_change)
 
 
@@ -248,9 +250,9 @@ func _switch_animation(is_opposite_change: bool):
 	if _one_anim_is_idle(curr_anim, next_anim):
 		_custom_blend_time = 0.25
 	elif curr_anim.anim_id in curr_direction.get_all_anim_ids():
-		if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
-			sync_loco_anim_correction = 0.0 + __dev_add
-			__log_action(em.pin, em.mark_alt)
+		# if curr_anim.anim_id == A.strafe.combat_run_b and next_anim.anim_id in [A.strafe.strafe_L, A.strafe.strafe_R]:
+		# 	sync_loco_anim_correction = 0.0 + __dev_add
+		# 	__log_action(em.pin, em.mark_alt)
 		var r := sync_with_curr_loco_anim(next_anim, sync_loco_anim_correction)
 		if r != -1:
 			_custom_start_time_offset = r

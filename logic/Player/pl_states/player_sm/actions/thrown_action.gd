@@ -28,7 +28,7 @@ class ThrowPack:
 		return "ThrowPack(dir %s, anim %s, peak/end/extra %.1f/%.1f/%.1f)" % [direction, pp.anim(anim_id), peak_speed, end_speed, extra_start_speed]
 
 
-var DEF_PEAK_SP: float = 6.5
+var DEF_PEAK_SP: float = 8.5
 var DEF_END_SP: float = 0.0
 var DEF_EXTRA_START_SP: float = 0.0
 
@@ -50,7 +50,7 @@ func initialise() -> void:
 
 func _locked_and_not_sprint() -> bool:
 	# todoL use actual angle between pl and enemy
-	if player_sm.area_awareness.is_camera_locked() and not PREV_ACTION == Leg.Act.sprint:
+	if player_sm.area_awareness.is_camera_locked(): # and not PREV_ACTION == Leg.Act.sprint:
 		return true
 	return false
 
@@ -63,7 +63,7 @@ func _decide_on_mode_on_enter():
 		__log_decide_on_mode(_reason)
 		return
 		
-	var _attack_dir := ReactUtils.get_attack_dir_by_enemy_attack(hit.anim_id)
+	var _attack_dir := ReactionOnHit.get_attack_dir_by_enemy_attack(hit.anim_id)
 	match _attack_dir:
 		AttackDirection.Dir.LEFT:
 			_reason = "_attack_dir L"
@@ -71,6 +71,9 @@ func _decide_on_mode_on_enter():
 		AttackDirection.Dir.RIGHT:
 			_reason = "_attack_dir R"
 			curr_throw = left_throw_pack if _locked_and_not_sprint() else right_throw_pack
+		AttackDirection.Dir.DOWN:
+			_reason = "_attack_dir DOwn"
+			curr_throw = back_throw_pack if _locked_and_not_sprint() else right_throw_pack
 		_:
 			_reason = "_attack_dir is not L/R"
 			curr_throw = back_throw_pack if _locked_and_not_sprint() else right_throw_pack
@@ -119,8 +122,8 @@ func on_exit_action():
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	# if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
-		# pm().look_at_target(delta)
+	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
+		pm().look_at_target(delta)
 	if before_marker(MarkerName.LAND_START):
 		var current_speed := speed_x_interpolator.update(delta)
 		# __log_upd(speed_x_interpolator._get_progress(), current_speed)

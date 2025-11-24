@@ -78,7 +78,7 @@ func _flatten_attack_series_list() -> Array[String]:
 	for series in get_attack_series_list():
 		for attack in series:
 			unique_dict[attack] = true
-	return u.safe_cast_array_of_strings(unique_dict.keys())
+	return TypeCast.array_of_string(unique_dict.keys())
 
 
 func get_supported_substates() -> Array[String]:
@@ -180,7 +180,7 @@ func pick_attack_series() -> Array[String]:
 		
 	var picked_series: Array = get_attack_series_list()[picked_idx]
 	curr_series_number = picked_idx
-	return u.safe_cast_array_of_strings(picked_series)
+	return TypeCast.array_of_string(picked_series)
 
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:

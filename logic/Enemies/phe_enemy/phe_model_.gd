@@ -11,8 +11,13 @@ class_name PHCharacter
 @onready var anim_params_container: EAnimParamsContainer = %AnimParamsContainer
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var combat: PHECombat = %Combat
+@onready var coll_collider: CollisionShape3D = %CollCollider
 @onready var _top: BasePHEState = %_Top
+@onready var visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
+@onready var camera_target: CameraTarget = %CameraTarget
 
+
+@onready var _start_position := global_transform.origin
 
 ## It's all: SM, Base state, Root state
 var state_machine: BasePHEState
@@ -25,10 +30,15 @@ var _state_history: Array[String] = []
 # HSME SM than switches to the most safest state
 var fatigue_raised: bool = false
 var angry_raised: bool = false
+var death_raised: bool = false
+var death_raised_processed: bool = false
+var visuals: Array[MeshInstance3D]
+
 
 var _curr_leaf: BasePHELeaf
 var _prev_leaf: BasePHELeaf
 
+var push_rigid_bodies_force: float = 8.0
 
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
@@ -47,7 +57,7 @@ func initialise() -> void:
 	anim_container._accept_animations(
 		_anim_list.list_of_animations,
 		native_player,
-		EAnimParamsContainer.TRACK_PREFIX,
+		EAnimParamsContainer.TRACK_PREFIXES,
 		EAnimParamsContainer.get_all_params(),
 		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
 	
@@ -56,6 +66,8 @@ func initialise() -> void:
 	container.me = self
 	
 	container.accept_states()
+
+	visuals = get_descendants.mesh_instances(visuals_root, true)
 
 	var _sleep_state := container.get_state_by_name(PHES.Leaf.sleep)
 	_curr_leaf = _sleep_state
@@ -104,24 +116,79 @@ func update_state_history(state_name_):
 	if _state_history.size() > BREADCRUMB_SIZE:
 		_state_history.pop_front()
 
-var push_rigid_bodies_force: float = 8.0
 
-func _physics_process(delta):
-	state_machine._update(delta)
-	move_and_slide()
-	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
+func _process(delta):
+	if not death_raised:
+		state_machine._update(delta)
+		move_and_slide()
+		PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
-	player.__dev_labels._label_phe_enemy_info(self)
+		player.__dev_labels._label_phe_enemy_info(self)
+	else:
+		on_death_raised()
 
-
-## todo: here with apply_hit and react_on_hit we go back and forth
-##       should be simplified 
 func react_on_hit(hit_data: HitData) -> void:
 	var _curr_state = get_current_state()
 	if not _curr_state:
 		print_.warn(false, "no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
 	_curr_state.react_on_hit(hit_data)
+
+
+func reset_position() -> void:
+	transform.origin = _start_position
+
+
+func on_death_raised() -> void:
+	if death_raised_processed:
+		return
+	
+	coll_collider.disabled = true
+	death_raised_processed = true
+
+	trigger_death_scatter(visuals)
+
+	# todo: it works but need proper checks for external systems to be ready for this
+	# self.queue_free()
+
+
+func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
+	var rigids_container = Node3D.new()
+	rigids_container.name = "EnemyDebrisContainer"
+	get_tree().current_scene.add_child(rigids_container)
+
+	rigids_container.global_position = self.global_position
+	for visual_mesh: MeshInstance3D in mesh_list:
+		if not visual_mesh.mesh: continue
+		
+		# RIGIDBODY
+		var rigid_body = RigidBody3D.new()
+		rigids_container.add_child(rigid_body)
+		
+		# match position/rotation/scale 
+		# note: physics engines dislike scaled RigidBodies
+		rigid_body.global_transform = visual_mesh.global_transform
+		
+		# DUPLICATE VISUALS
+		var new_mesh = visual_mesh.duplicate()
+		rigid_body.add_child(new_mesh)
+		
+		# Reset transform because RB already holds the world position
+		new_mesh.transform = Transform3D.IDENTITY
+		# Detach from skeleton so it doesn't try to animate/deform
+		# new_mesh.skeleton = NodePath("")
+		
+		# COLLISIONS
+		var _convex_shape = visual_mesh.mesh.create_convex_shape(false)
+		var coll_node = CollisionShape3D.new()
+		coll_node.shape = _convex_shape
+		rigid_body.add_child(coll_node)
+		
+		#
+		visual_mesh.visible = false
+
+	prints("end of trigger_death_scatter")
+
 
 func __pp_state_history():
 	return "state history" + pp.in_sq(pp.list_(_state_history))

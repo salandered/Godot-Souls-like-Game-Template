@@ -85,6 +85,7 @@ class attack:
 	
 	const sword_slash_1 := _lib._ss_attack + "B-slash-R-L-RM-1"
 	const sword_slash_2 := _lib._ss_attack + "B-slash-L-R-RM-2"
+	const sword_slash_3 := _lib._ss_attack + "D-slash3-combo-part-3"
 	
 	const attack_from_run := _lib._SWS_att + "SWS-O-bit-stab"
 	const attack_from_dodge := _lib._SWS_att + "SWS-O-stab"

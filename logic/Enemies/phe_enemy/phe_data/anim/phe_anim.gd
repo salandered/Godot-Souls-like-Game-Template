@@ -62,6 +62,7 @@ class react:
 	const react_from_R := _lib._axe_pl + "react large from right"
 	const react_gut := _lib._axe_pl + "react large gut"
 	const body_impact := _lib._some_from_pl + "C-body-impact"
+	const react_dodge_B := _lib._testing + "Standing React Large From Front"
 
 
 # class fall_stand_up:
@@ -89,11 +90,7 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(awaken),
 	AnimationData.new(death),
 
-	AnimationData.new(react.react_from_L),
-	AnimationData.new(react.react_from_R),
-	AnimationData.new(react.react_gut),
-	AnimationData.new(react.body_impact),
-	
+
 	## loco
 	AnimationData.new(dodge.dodge_B),
 	AnimationData.new(dodge.dodge_F),
@@ -125,7 +122,11 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(attack.power_up, 0.5),
 	AnimationData.new(attack.stab_low, 0.5),
 	
-	## legacy
 
-	
+	## react
+	AnimationData.new(react.react_from_L),
+	AnimationData.new(react.react_from_R),
+	AnimationData.new(react.react_gut),
+	AnimationData.new(react.body_impact),
+	AnimationData.new(react.react_dodge_B),
 ]

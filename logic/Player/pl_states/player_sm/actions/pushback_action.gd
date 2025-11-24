@@ -17,6 +17,7 @@ func initialise() -> void:
 
 func on_enter_action(input_: InputPackage):
 	anim = anim_container.get_by_anim_id(ra.spick_random(A.react.hit_push_b_rm, A.react.react_dodge_B))
+	__log_ent("picked random anim", pp.anim(anim.anim_id))
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0))
 	
 	var r = calculate_extra_root_speed(DEFAULT_GLOBAL_EXTRA_SPEED_Z)

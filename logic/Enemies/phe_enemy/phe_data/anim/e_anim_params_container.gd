@@ -19,11 +19,13 @@ const DEFAULT_PARAMS := {
 
 static func get_all_params() -> Array[String]:
 	print_.note(false, "get_all_params", DEFAULT_PARAMS.keys())
-	return u.safe_cast_array_of_strings(DEFAULT_PARAMS.keys())
+	return TypeCast.array_of_string(DEFAULT_PARAMS.keys())
 
 
-# const TRACK_PREFIX := "%AnimParameters:"
-const TRACK_PREFIX := "AnimatorManager/NativePlayer/AnimParameters:"
+const TRACK_PREFIXES: Array[String] = [
+	"%AnimParameters:",
+	"AnimatorManager/NativePlayer/AnimParameters:"]
+
 
 func is_vulnerable(anim: Animation, timestamp: float) -> bool:
 	# return _get_value_from_track(anim, VULNERABLE, timestamp)
@@ -40,5 +42,10 @@ func is_aura_hurts(anim: Animation, timestamp: float) -> bool:
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:
 	var _default = u.safe_get_dict_key(DEFAULT_PARAMS, param, false)
-	var _r := AnimUtils.get_bool_value_from_track(anim, TRACK_PREFIX, param, timestamp, _default)
-	return _r
+	var _track_exists: bool = false
+	for prefix in TRACK_PREFIXES:
+		_track_exists = AnimUtils.is_track_exists(anim, prefix, param)
+		if _track_exists:
+			var _r := AnimUtils.get_bool_value_from_track(anim, prefix, param, timestamp, _default)
+			return _r
+	return _default

@@ -81,7 +81,7 @@ func _translate_to_strafe(new_input: InputPackage):
 
 
 func is_camera_locked() -> bool:
-	return player.fancy_camera.is_locked_state()
+	return player.fancy_camera.is_camera_locked_to_target()
 
 # func is_target_locked() -> bool:
 # 	return locked_target != null
@@ -136,10 +136,16 @@ func get_floor_distance() -> float:
 	return Constants.BIG_MEANINGLESS_NUMBER
 
 
-func find_target() -> Node:
-	var all_targets := get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
+func find_target() -> CameraTarget:
+	var _all_targets = get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
+	for t in _all_targets:
+		if not t is CameraTarget:
+			print_.warn(true, "TARGETABLE group for not CameraTarget node is not supported!", "find_target", "return null", t)
+			return null
+
+	var all_targets := TypeCast.array_of_camera_target(_all_targets)
 	# print_.aware_target("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
-	var candidates: Array[Node] = []
+	var candidates: Array[CameraTarget] = []
 	for target in all_targets:
 		if _is_good_candidate(target):
 			candidates.append(target)
@@ -184,7 +190,7 @@ func _is_good_candidate(target: Node3D) -> bool:
 	return true
 
 
-func _sort_targets_by_player_distance(targets: Array) -> void:
+func _sort_targets_by_player_distance(targets: Array[CameraTarget]) -> void:
 	targets.sort_custom(
 			func(a, b): \
 				return a.global_position.distance_squared_to(player.global_position) \

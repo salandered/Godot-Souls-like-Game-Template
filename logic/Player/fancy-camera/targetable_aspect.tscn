@@ -1,31 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc030ubgkaf18"]
+[gd_scene load_steps=3 format=3 uid="uid://bc030ubgkaf18"]
 
 [ext_resource type="Script" uid="uid://sra67e40jd6f" path="res://logic/Player/fancy-camera/targetable_aspect.gd" id="1_mxpn8"]
-[ext_resource type="Texture2D" uid="uid://dqh56seeosa6e" path="res://-assets-/x_icons/unsorted/skull_icon.png" id="2_vjhre"]
+[ext_resource type="PackedScene" uid="uid://by0bjgl0wv4ry" path="res://logic/Locations/_dev/primitives/CSGStarLike.tscn" id="2_tkwcu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4ijc"]
-albedo_color = Color(0, 0.6323461, 0.035899956, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d40q5"]
-albedo_color = Color(0.53154, 0.577478, 0.208378, 1)
-albedo_texture = ExtResource("2_vjhre")
-uv1_scale = Vector3(2.37, 2.37, 2.37)
-uv1_triplanar = true
-
-[node name="TargetableAspect" type="Node3D"]
+[node name="Target" type="Node3D"]
 script = ExtResource("1_mxpn8")
 
 [node name="LookAt" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799408, 0)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="LookAt"]
-transform = Transform3D(0.37062925, 0, 0, 0, 0.256377, 0, 0, 0, 0.3581005, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_c4ijc")
+[node name="CSGMarker" parent="LookAt" instance=ExtResource("2_tkwcu")]
 
-[node name="TargetMarker" type="Node3D" parent="."]
+[node name="TargetGlow" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3727, 0)
 visible = false
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="TargetMarker"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TargetGlow"]
 transform = Transform3D(0.457915, 0, 0, 0, 0.457915, 0, 0, 0, 0.457915, 0, -0.0103282, 0)
-material_override = SubResource("StandardMaterial3D_d40q5")
+visible = false

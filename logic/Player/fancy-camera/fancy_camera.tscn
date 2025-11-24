@@ -4,19 +4,19 @@
 [ext_resource type="Script" uid="uid://bib68l3buxn3j" path="res://logic/Player/fancy-camera/camera_movement.gd" id="2_bu8o1"]
 [ext_resource type="Script" uid="uid://cdvueio120xey" path="res://logic/Player/fancy-camera/locked_state.gd" id="2_cq342"]
 [ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/Player/fancy-camera/free_state.gd" id="3_wpkwu"]
-[ext_resource type="Texture2D" uid="uid://dg5he6uub28ac" path="res://-assets-/GLB-char/player/pl-skeleton-2_simple boots baked dif.png" id="4_bi67l"]
-[ext_resource type="Texture2D" uid="uid://dtnjyc3tr6yiv" path="res://-assets-/GLB-char/player/pl-skeleton-2_simple boots baked N.png" id="5_f2e0f"]
+[ext_resource type="Texture2D" uid="uid://bu2mdgyngoo1b" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_simple boots baked dif.png" id="4_bi67l"]
+[ext_resource type="Texture2D" uid="uid://d2sblhaelmjq5" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_simple boots baked N.png" id="5_f2e0f"]
 [ext_resource type="Texture2D" uid="uid://dgw4hhuhcf33y" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Fabric029_2d1K-JPG_Color.jpg" id="6_bu8o1"]
-[ext_resource type="Texture2D" uid="uid://rpx6ae5mrcok" path="res://-assets-/GLB-char/player/pl-skeleton-2_Fabric029_2d1K-JPG_Roughness.png" id="7_fbah8"]
-[ext_resource type="Texture2D" uid="uid://yf7rxq8sjm3w" path="res://-assets-/GLB-char/player/pl-skeleton-2_standard top N.png" id="8_iyxhl"]
+[ext_resource type="Texture2D" uid="uid://rpx6ae5mrcok" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Fabric029_2d1K-JPG_Roughness.png" id="7_fbah8"]
+[ext_resource type="Texture2D" uid="uid://yf7rxq8sjm3w" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_standard top N.png" id="8_iyxhl"]
 [ext_resource type="Texture2D" uid="uid://blmp2s8tbbmg2" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Leather033C_4d1K_Color.jpg" id="9_evrw7"]
-[ext_resource type="Texture2D" uid="uid://c3n6vfai5op0o" path="res://-assets-/GLB-char/player/pl-skeleton-2_Leather033C_4d1K_Roughness.png" id="10_pivhq"]
+[ext_resource type="Texture2D" uid="uid://c3n6vfai5op0o" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Leather033C_4d1K_Roughness.png" id="10_pivhq"]
 [ext_resource type="Texture2D" uid="uid://78ers26m4d74" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Leather033C_4d1K_NormalGL.jpg" id="11_yyvtn"]
-[ext_resource type="Texture2D" uid="uid://bbol5l00jjhd4" path="res://-assets-/GLB-char/player/pl-skeleton-2_Image_9.png" id="12_30r7w"]
-[ext_resource type="Texture2D" uid="uid://ccd0q0afpyj73" path="res://-assets-/GLB-char/player/pl-skeleton-2_Image_10.png" id="13_5tn0l"]
+[ext_resource type="Texture2D" uid="uid://bbol5l00jjhd4" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Image_9.png" id="12_30r7w"]
+[ext_resource type="Texture2D" uid="uid://ccd0q0afpyj73" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Image_10.png" id="13_5tn0l"]
 [ext_resource type="Texture2D" uid="uid://8yqoeyb07kvn" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_denim_fabric_06_diff_1k.jpg" id="14_mlroq"]
-[ext_resource type="Texture2D" uid="uid://b50oebqjejx1q" path="res://-assets-/GLB-char/player/pl-skeleton-2_denim_fabric_06_rough.png" id="15_ino1s"]
-[ext_resource type="Texture2D" uid="uid://d2cp4y8crdo1n" path="res://-assets-/GLB-char/player/pl-skeleton-2_denim_fabric_06_nor_gl.png" id="16_dcn0b"]
+[ext_resource type="Texture2D" uid="uid://b50oebqjejx1q" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_denim_fabric_06_rough.png" id="15_ino1s"]
+[ext_resource type="Texture2D" uid="uid://d2cp4y8crdo1n" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_denim_fabric_06_nor_gl.png" id="16_dcn0b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lfwa"]
 albedo_color = Color(1, 0.991667, 0.5, 1)
@@ -64,7 +64,7 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7s1py"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_nd6na"]
 resource_name = "RIG_Some_Groupe_011"
 _surfaces = [{
 "aabb": AABB(-0.0737661, 1.44481, -0.101756, 0.147532, 0.264317, 0.186638),
@@ -291,7 +291,7 @@ cull_mode = 2
 albedo_color = Color(0.144501, 0.123406, 0.106024, 1)
 roughness = 0.898961
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4f8rn"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_sttfw"]
 resource_name = "RIG_Plane_001"
 _surfaces = [{
 "aabb": AABB(-0.171062, -0.00257185, -0.0942065, 0.34213, 0.272147, 0.281729),
@@ -346,7 +346,7 @@ roughness_texture_channel = 1
 normal_enabled = true
 normal_texture = ExtResource("11_yyvtn")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_dkl7v"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_t7d7i"]
 resource_name = "RIG_ZombieGirl_Pants_001"
 _surfaces = [{
 "aabb": AABB(-0.172539, 0.178873, -0.113192, 0.344597, 0.836885, 0.203932),
@@ -391,7 +391,7 @@ roughness_texture_channel = 1
 normal_enabled = true
 normal_texture = ExtResource("8_iyxhl")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4t2nd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_y2b32"]
 resource_name = "RIG_Cloth_Cloth_0_001"
 _surfaces = [{
 "aabb": AABB(-0.664845, 0.809043, -0.134957, 1.30692, 0.660551, 0.248618),
@@ -423,7 +423,7 @@ normal_enabled = true
 normal_texture = ExtResource("16_dcn0b")
 uv1_scale = Vector3(0.999378, 1, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3syeo"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_eygoe"]
 resource_name = "RIG_Some_Groupe_013"
 _surfaces = [{
 "aabb": AABB(-0.818458, 1.34774, -0.102671, 0.12601, 0.0596776, 0.0974983),
@@ -456,7 +456,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_257k8"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ryiyo"]
 resource_name = "RIG_Some_Groupe_015"
 _surfaces = [{
 "aabb": AABB(0.685311, 1.33322, -0.105035, 0.129056, 0.0737214, 0.103166),
@@ -498,18 +498,18 @@ script = ExtResource("2_bu8o1")
 
 [node name="CameraMount" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CameraMount"]
 transform = Transform3D(0.973625, 0, 0, 0, 0.795634, 0, 0, 0, 0.415539, 0, 0, 0)
-visible = false
 material_override = SubResource("StandardMaterial3D_6lfwa")
 size = Vector3(0.289307, 0.341797, 0.743164)
 
 [node name="FocusPoint" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="CSGSphere3D3" type="CSGSphere3D" parent="FocusPoint"]
-visible = false
 material_override = SubResource("StandardMaterial3D_7lptl")
 radius = 0.2
 
@@ -525,7 +525,8 @@ script = ExtResource("3_wpkwu")
 unique_name_in_owner = true
 transform = Transform3D(-1, 8.986408e-09, -8.695968e-08, 0, 0.9947028, 0.10279253, 8.742278e-08, 0.10279253, -0.9947028, 0, 1.62121, -3.1620932)
 current = true
-fov = 50.2
+fov = 62.0
+far = 1000.0
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="PlayerCamera"]
 transform = Transform3D(0.64345056, 8.881784e-16, 1.4210855e-13, 7.5495166e-15, 0.61953735, 1.4901161e-08, -6.750156e-14, -7.450581e-09, 0.76491296, 0, 0, 0.017)
@@ -581,41 +582,41 @@ visible = false
 [node name="body head" type="MeshInstance3D" parent="princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
 gi_mode = 0
-mesh = SubResource("ArrayMesh_7s1py")
+mesh = SubResource("ArrayMesh_nd6na")
 skin = SubResource("Skin_74gor")
 skeleton = NodePath("")
 
 [node name="boots" type="MeshInstance3D" parent="princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
 gi_mode = 0
-mesh = SubResource("ArrayMesh_4f8rn")
+mesh = SubResource("ArrayMesh_sttfw")
 skin = SubResource("Skin_74gor")
 skeleton = NodePath("")
 
 [node name="standard pants" type="MeshInstance3D" parent="princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
 gi_mode = 0
-mesh = SubResource("ArrayMesh_dkl7v")
+mesh = SubResource("ArrayMesh_t7d7i")
 skin = SubResource("Skin_74gor")
 skeleton = NodePath("")
 
 [node name="standard top" type="MeshInstance3D" parent="princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
 gi_mode = 0
-mesh = SubResource("ArrayMesh_4t2nd")
+mesh = SubResource("ArrayMesh_y2b32")
 skin = SubResource("Skin_74gor")
 skeleton = NodePath("")
 
 [node name="body right arm" type="MeshInstance3D" parent="princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
 gi_mode = 0
-mesh = SubResource("ArrayMesh_3syeo")
+mesh = SubResource("ArrayMesh_eygoe")
 skin = SubResource("Skin_74gor")
 skeleton = NodePath("")
 
 [node name="body left arm" type="MeshInstance3D" parent="princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
 gi_mode = 0
-mesh = SubResource("ArrayMesh_257k8")
+mesh = SubResource("ArrayMesh_ryiyo")
 skin = SubResource("Skin_74gor")
 skeleton = NodePath("")

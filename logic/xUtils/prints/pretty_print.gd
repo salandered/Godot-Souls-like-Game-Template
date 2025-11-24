@@ -88,7 +88,9 @@ static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = fal
 		return JSON.stringify(_dict_, "\t")
 	if _dict_.is_empty():
 		return "{}"
-	return __recursive_dict(_dict_, "", one_string)
+	var r = __recursive_dict(_dict_, "", one_string)
+	return u.cut_string(r)
+
 
 static func list_(parts: Array, json: bool = false) -> String:
 	if json:
@@ -98,10 +100,15 @@ static func list_(parts: Array, json: bool = false) -> String:
 	var r = ""
 	for part in parts:
 		if part is float:
-			r += str(pp.round_01(part)) + " "
+			r += pp.round_001(part) + " "
+		elif part is Vector2:
+			r += pp.vec2(part) + " "
+		elif part is Vector3:
+			r += pp.vec3(part) + " "
 		else:
 			r += str(part) + " "
-	return r
+	r = u.cut_string(r)
+	return pp.in_br(r)
 
 # endregion
 

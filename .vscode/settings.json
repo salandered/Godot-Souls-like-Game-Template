@@ -524,6 +524,14 @@
 				}
 			]
 		},
+		"\\b(__log_[a-zA-Z0-9_]*)(?=\\s*\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#77b2dade",
+				}
+			]
+		},
 		"\\b(_reason\\s*\\+?=\\s*.*)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

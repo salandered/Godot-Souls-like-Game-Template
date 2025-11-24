@@ -15,7 +15,7 @@ func initialise() -> void:
 		__log_warn(false, "no shattered_column_scene", "init", "wont be breakable")
 
 	
-	var _mesh_instances = get_descendants.mesh_instances(self)
+	var _mesh_instances = get_descendants.mesh_instances_visible(self)
 	var _areas = get_descendants.breakable_areas(self)
 
 	if len(_mesh_instances) == 0:

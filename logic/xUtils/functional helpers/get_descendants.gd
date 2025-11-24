@@ -43,25 +43,35 @@ static func areas(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is Area3D)
 
 
-static func collision_shapes(node: Node) -> Array:
-	return _get_descendants_filtered(node, func(n): return n is CollisionShape3D)
+static func collision_shapes(node: Node) -> Array[CollisionShape3D]:
+	var r = _get_descendants_filtered(node, func(n): return n is CollisionShape3D)
+	r = TypeCast.array_of_collision_shape(r)
+	return r
 
 
 static func static_bodies(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is StaticBody3D)
 
-static func mesh_instances(node: Node, is_visible: bool = false, one_level: bool = false) -> Array:
+
+static func mesh_instances(node: Node, visible_only: bool = false) -> Array[MeshInstance3D]:
+	var r = _get_descendants_filtered(
+		node,
+		func(n): \
+			return n is MeshInstance3D \
+				and (not visible_only or n.visible == true)
+		)
+	return TypeCast.array_of_mesh_instances(r)
+
+static func mesh_instances_visible(node: Node, is_visible: bool = false, one_level: bool = false) -> Array:
 	var filter := func(n):
 		if n is MeshInstance3D:
+			# why i needed that?
 			return not is_visible or n.is_visible_in_tree()
 		return false
 	return _get_descendants_filtered(node, filter, one_level)
 
-static func combos_one_level(node: Node) -> Array:
-	return _get_descendants_filtered(node, func(n): return n is Combo_, true)
-
-static func csg(node: Node) -> Array:
-	return _get_descendants_filtered(node, func(n): return n is CSGBox3D or n is CSGSphere3D)
+static func csg_primitives(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is CSGPrimitive3D)
 
 static func bone_attachments(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BoneAttachment3D)
@@ -96,6 +106,10 @@ static func legs_actions(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is LegsAction)
 
 # endregion
+
+
+static func combos_one_level(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is Combo_, true)
 
 
 # 

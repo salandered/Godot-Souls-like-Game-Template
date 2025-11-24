@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://0y1ud2u3avhq"]
+
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/Locations/demo_arena/dark_crate.tscn" id="1_o0btg"]
+
+[node name="DarkCratePile" type="Node3D"]
+
+[node name="DarkCrate" parent="." instance=ExtResource("1_o0btg")]
+transform = Transform3D(0.018080637, 0, -0.9998365, 0, 1, 0, 0.9998365, 0, 0.018080637, 0.22094429, 0.45411706, -0.051809788)
+
+[node name="DarkCrate2" parent="." instance=ExtResource("1_o0btg")]
+transform = Transform3D(0.16974513, 0, -0.98548794, 0, 1, 0, 0.98548794, 0, 0.16974513, -0.6761525, 0.45411706, -0.035587072)
+
+[node name="DarkCrate3" parent="." instance=ExtResource("1_o0btg")]
+transform = Transform3D(0.10419868, 0, -0.9945564, 0, 1, 0, 0.9945564, 0, 0.10419868, -0.5922417, 1.1050446, -0.09711468)
+
+[node name="DarkCrate4" parent="." instance=ExtResource("1_o0btg")]
+transform = Transform3D(0.10419868, 0, -0.9945564, 0, 1, 0, 0.9945564, 0, 0.10419868, 0.15024659, 1.1042926, -0.11054158)
+
+[node name="DarkCrate5" parent="." instance=ExtResource("1_o0btg")]
+transform = Transform3D(0.08889322, 0.5687991, -0.8176586, -0.049038183, 0.8224122, 0.56677455, 0.99483323, -0.010285928, 0.100999735, 0.98123443, 0.6217438, -0.06555855)
+
+[node name="DarkCrate6" parent="." instance=ExtResource("1_o0btg")]
+transform = Transform3D(0.770728, 0.022098517, -0.63678104, -0.0027166149, 0.9995034, 0.031398155, 0.6371586, -0.022469565, 0.7704051, -0.42229843, 1.761424, -0.1001879)

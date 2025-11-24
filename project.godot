@@ -20,9 +20,8 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="RetroRoom"
-run/main_scene="uid://mdwtc0gt416o"
+run/main_scene="uid://m2o3tdaa66rk"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
 
 [audio]
 
@@ -53,7 +52,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/pixpal_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/extra_snaps/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
 
 [file_customization]
 
@@ -67,20 +66,21 @@ folder_colors={
 "res://-assets-/GLB-level/minimal-arena/lady/": "blue",
 "res://-assets-/GLB-level/minimal-arena/tree_far/": "gray",
 "res://-assets-/GLB-level/tower map/": "gray",
+"res://-assets-/adopting/": "pink",
 "res://-assets-/animations/": "yellow",
 "res://-assets-/animations/GLB-packed/": "blue",
 "res://-assets-/animations/standard-skeleton/": "blue",
 "res://-assets-/materials-shared/": "red",
 "res://-assets-/materials-shared/_images/": "blue",
-"res://-assets-/materials-shared/x_unsorted/": "gray",
+"res://-assets-/materials-shared/unsorted/": "gray",
 "res://-assets-/shaders/": "red",
-"res://-assets-/x_icons/node-colors/": "blue",
+"res://-assets-/x_icons/blue/": "blue",
 "res://-assets-/x_icons/purple/": "purple",
 "res://-assets-/x_icons/red/": "red",
 "res://-assets-/x_icons/yellow/": "yellow",
 "res://addons/": "gray",
 "res://addons/maaacks_game_template/base/scenes/opening/": "gray",
-"res://addons/pixpal_tools/": "pink",
+"res://addons/pixpal_tools_edited/": "pink",
 "res://ideas/": "gray",
 "res://ideas/enemy/SimpleEnemy/": "pink",
 "res://logic/CharactersCommon/animation/": "orange",
@@ -94,6 +94,7 @@ folder_colors={
 "res://logic/Enemies/phe_enemy/phe_states/leafes/": "green",
 "res://logic/Enemies/phe_enemy/phe_states/phases/": "blue",
 "res://logic/Locations/demo_arena/": "yellow",
+"res://logic/Locations/lights/": "red",
 "res://logic/Player/fancy-camera/": "teal",
 "res://logic/Player/pl_anim/": "purple",
 "res://logic/Player/pl_combat/": "red",
@@ -431,5 +432,5 @@ copy_path="res://misc/maacks_examples/"
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+lights_and_shadows/tighter_shadow_caster_culling=false
 environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)

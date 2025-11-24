@@ -36,7 +36,7 @@ func initialise() -> void:
 ## what weapons should be attacking in this state (depends on animation ofc)
 @abstract func get_active_weapon_names() -> Array[String]
 
-## most states can use this in theirs get_active_weapon_names
+## most states can use this in their get_active_weapon_names
 func default_get_active_weapon_names() -> Array[String]:
 	return [WeaponNames.smith_sword]
 	
@@ -87,7 +87,8 @@ func on_exit_action():
 func update(input_: InputPackage, delta):
 	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
 		pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))
-	
+	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
+		pm().look_at_target(delta)
 	
 	var fade_factor := fade_interpolator.update(delta)
 	var extra_vel_local := Vector3(_final_extra_speed_X * fade_factor, 0, _final_extra_speed_Z * fade_factor) # Animation +Z

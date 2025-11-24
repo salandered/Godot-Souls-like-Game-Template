@@ -1,7 +1,7 @@
 import bpy
 
 REF_NAME = "|col ref to share mods|" # reference object's name
-OUTPUT_COLLECTION_PREFIX = "--col" # like "--collisions lincoln--"
+OUTPUT_COLLECTION_NAME = "--collisions tower--" # like "--collisions lincoln--"
 
 
 # Choose the suffix
@@ -9,52 +9,6 @@ OUTPUT_COLLECTION_PREFIX = "--col" # like "--collisions lincoln--"
 SUFFIX = "-convcolonly"
 
 
-def find_closest_coll_by_prefix(obj, prefix):
-	"""
-	Searches for a collection starting with 'prefix'.
-	1. Looks at siblings of the object's current collection.
-	2. Goes up to the parent collection and looks at its siblings (uncles).
-	3. Repeats upwards until found or root is reached.
-	"""
-	print(f"DEBUG: Starting collection search for prefix '{prefix}' relative to '{obj.name}'")
-	
-	# Build a map of children to parents so we can traverse up
-	child_to_parent = {}
-	for p in bpy.data.collections:
-		for c in p.children:
-			child_to_parent[c] = p
-	# Also map scene root children if possible
-	if bpy.context.scene:
-		for c in bpy.context.scene.collection.children:
-			child_to_parent[c] = bpy.context.scene.collection
-
-	# Start traversal from the object's first collection
-	if not obj.users_collection:
-		print("DEBUG: Object is not in any collection. Search aborted.")
-		return None
-	
-	current_coll = obj.users_collection[0]
-	
-	while current_coll:
-		# Look at parent to find siblings of current_coll
-		parent = child_to_parent.get(current_coll)
-		
-		if parent:
-			print(f"DEBUG:   Checking siblings inside parent collection '{parent.name}'...")
-			# Check all children of this parent (siblings of current_coll)
-			for sibling in parent.children:
-				if sibling.name.startswith(prefix):
-					print(f"DEBUG:   -> FOUND collection: '{sibling.name}'")
-					return sibling
-			# Not found at this level, move up
-			print(f"DEBUG:   No match found in '{parent.name}'. Moving up...")
-			current_coll = parent
-		else:
-			# No parent means we hit the top
-			print("DEBUG:   Hit root level without finding match.")
-			break
-			
-	return None
 
 def ensure_collection(name: str):
 	coll = bpy.data.collections.get(name)
@@ -148,36 +102,38 @@ def make_colonly_for(target: bpy.types.Object, ref: bpy.types.Object, coll: bpy.
 	return B
 
 def main():
-	print("\n=== Script Start ===")
-	ref = bpy.data.objects.get(REF_NAME)
-	if not ref or ref.type != 'MESH':
-		raise RuntimeError(f'Reference "{REF_NAME}" not found or not a mesh.')
-	print(f"DEBUG: Reference object '{REF_NAME}' found.")
-	
-	# Targets = all selected mesh objects except the reference (u only need to select A)
-	targets = [o for o in bpy.context.selected_objects if o.type == 'MESH' and o != ref]
-	if not targets:
-		# fallback: use active if it’s a mesh and not the ref
-		act = bpy.context.view_layer.objects.active
-		if act and act.type == 'MESH' and act != ref:
-			targets = [act]
-	if not targets:
-		raise RuntimeError("Select at least one target Mesh object (A)")
+    print("\n=== Script Start ===")
+    ref = bpy.data.objects.get(REF_NAME)
+    if not ref or ref.type != 'MESH':
+        raise RuntimeError(f'Reference "{REF_NAME}" not found or not a mesh.')
+    print(f"DEBUG: Reference object '{REF_NAME}' found.")
+    
+    # Targets = all selected mesh objects except the reference (u only need to select A)
+    targets = [o for o in bpy.context.selected_objects if o.type == 'MESH' and o != ref]
+    if not targets:
+        # fallback: use active if it’s a mesh and not the ref
+        act = bpy.context.view_layer.objects.active
+        if act and act.type == 'MESH' and act != ref:
+            targets = [act]
+    if not targets:
+        raise RuntimeError("Select at least one target Mesh object (A)")
 
-	print(f"DEBUG: Identified {len(targets)} target object(s).")
+    print(f"DEBUG: Identified {len(targets)} target object(s).")
 
-	# PATCH: Find collection based on the first target
-	# (Assumes all selected objects are roughly in the same area)
-	coll = find_closest_coll_by_prefix(targets[0], OUTPUT_COLLECTION_PREFIX)
-	
-	if not coll:
-		raise RuntimeError(f"Could not find any collection starting with '{OUTPUT_COLLECTION_PREFIX}' near the selected object.")
+    # Get or create the collection by its exact name
+    coll = ensure_collection(OUTPUT_COLLECTION_NAME)
+    
+    if not coll:
+        # This should never happen since ensure_collection creates it
+        raise RuntimeError(f"Could not find or create collection '{OUTPUT_COLLECTION_NAME}'.")
+    
+    print(f"DEBUG: Using target collection '{coll.name}'")
 
-	created = []
-	for t in targets:
-		created.append(make_colonly_for(t, ref, coll))
+    created = []
+    for t in targets:
+        created.append(make_colonly_for(t, ref, coll))
 
-	print(f"=== Finished. Created {len(created)} objects: {[o.name for o in created]} ===")
+    print(f"=== Finished. Created {len(created)} objects: {[o.name for o in created]} ===")
 
 
 if __name__ == "__main__":

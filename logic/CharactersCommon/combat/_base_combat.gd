@@ -30,7 +30,7 @@ func initialise():
 
 
 func get_all_weapons() -> Array[BaseWeapon]:
-	return u.safe_cast_array_of_base_weapon(_weapons.values())
+	return TypeCast.array_of_base_weapon(_weapons.values())
 
 
 ## nullable

@@ -26,7 +26,10 @@ class_name FancyCamera
 
 @export_group("CAM_MOVEMENT")
 @export var HOR_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
-@export var VER_SENSE: float = HOR_SENSE * 0.8 # 70–90% of horizontal (so 1.8 – 5.0 if you follow the same 0.001 scale).
+## by default 0.8 of HOR_SENSE
+@export var VER_SENSE: float = HOR_SENSE * 0.8 # 70–90% of horizontal
+## Used only when locked to target
+@export var LOCKED_VER_SENSE: float = 0.7
 	# angle = 0° → camera straight above the mount (offset pointing straight up)
 	# angle = 90° → camera level with the mount (offset perfectly horizontal)
 	# angle = 180° → camera straight below the mount
@@ -62,15 +65,21 @@ class_name FancyCamera
 @onready var nest: Node3D = %CameraNest
 @onready var camera: Camera3D = %PlayerCamera
 
-@onready var current_state: CameraState = $FreeCamera
 @onready var free_state: FreeCameraState = %FreeCamera
 @onready var locked_state: LockedCameraState = %LockedCamera
 
 @onready var camera_movement: CameraMovement = %CameraMovement
 
+## not nullable
+var current_state: CameraState
 
-var SPRING_ARM_COLLISION_MASK := 1 # to do: collision sys
 
+var SPRING_ARM_COLLISION_MASK := 1 # to do: use Collision
+
+
+## not nullable
+## can be CameraTarget if locked or Node3D if free (nest)
+## TODO: and this is bad! fragile code with lots of type checks
 var locked_target: Node3D
 
 var accumulated_mouse_delta := Vector2.ZERO
@@ -82,7 +91,7 @@ var LOCKED_STATE_NAME := "locked_state"
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	__csg_objects = get_descendants.csg(self)
+	__csg_objects = get_descendants.csg_primitives(self)
 
 	__toggle_camera_visuals()
 	
@@ -101,9 +110,10 @@ func initialise() -> void:
 	
 	# Calculate initial_offset based on player's forward direction
 	# was: initial_offset = fc.nest.global_position - fc.mount.global_position
-	# HERE IS INITIAL LENGTH BETWEEN PLAYER AND CAMERA. NOT IN THE VIEWPORT
+	# TODO WARNING: HERE IS INITIAL LENGTH BETWEEN PLAYER AND CAMERA. NOT IN THE VIEWPORT
+	# 		make some configurable system!
 	var _player_forward := -player.global_transform.basis.z
-	var initial_offset := _player_forward * 3.0 + Vector3(0, 2.0, 0) # 5 units behind, 2 units up
+	var initial_offset := _player_forward * 2.0 + Vector3(0, 1.0, 0) # 5 units behind, 2 units up
 	
 	nest.global_position = mount.global_position + initial_offset # nest relative to mount using the free_offset
 	
@@ -120,9 +130,15 @@ func initialise() -> void:
 	locked_state.state_name = LOCKED_STATE_NAME
 
 	# CAMERA INIT
+	current_state = free_state
+	locked_target = nest
 	camera_movement._default_len = initial_offset.length()
 	camera_movement._current_len = initial_offset.length()
+
+	__dev_initialise()
 	
+	assert(current_state)
+	assert(locked_target)
 	print_.fancy_cam("", "Fancy Camera Initialisation ended." + " Initial_offset is " + __free_off())
 
 
@@ -148,8 +164,18 @@ func _process(delta: float) -> void:
 
 
 func _consider_switching_state(input_: InputPackage):
+	if current_state.state_name == LOCKED_STATE_NAME:
+		# todo: locked_target is CameraTarget and in locked state - atomic operation
+		# TODO: proper system of checking that target exists
+		if not is_instance_valid(locked_target) or locked_target.is_about_to_die():
+			locked_target = nest
+			current_state = free_state
+			free_state.switch_from_locked()
+			prints("~~~~~LOCKED -> FREE", locked_target, "was freed!")
+			return
 	if input_.target_lock.no_tap():
 		return
+
 
 	match current_state.state_name:
 		FREE_STATE_NAME when input_.target_lock.tap_or_double_tap():
@@ -171,6 +197,15 @@ func _consider_switching_state(input_: InputPackage):
 
 func is_locked_state():
 	return current_state.state_name == LOCKED_STATE_NAME
+
+
+func is_camera_locked_to_target() -> bool:
+	if current_state.state_name == LOCKED_STATE_NAME and is_instance_valid(locked_target) and locked_target is CameraTarget:
+		return true
+	else:
+		return false
+	# return current_state.state_name == LOCKED_STATE_NAME
+
 
 func is_free_state():
 	return current_state.state_name == FREE_STATE_NAME
@@ -205,6 +240,10 @@ var __dev_camera_cols := true
 var __dev_camera_visuals := false
 var __csg_objects := []
 
+var fov_cycler: Cycler
+
+func __dev_initialise() -> void:
+	fov_cycler = Cycler.new([50, 60, 70, 80])
 
 func __toggle_camera_visuals():
 	for obj in __csg_objects:
@@ -256,10 +295,8 @@ func __angle_player_camera_target() -> String:
 	return angle
 
 func __change_fov():
-	print_.dev("", "changed fov")
-	__fov_pointer += 1
-	var fovs = [10, 25, 50, 100]
-	var fov = fovs[__fov_pointer % fovs.size()]
+	var fov = fov_cycler.get_next()
+	print_.dev("", pp.s("changed fov to", fov))
 	camera.fov = fov
 
 # endregion

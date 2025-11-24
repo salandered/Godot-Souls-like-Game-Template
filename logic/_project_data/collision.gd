@@ -55,15 +55,18 @@ enum Masks {
 	# probably ENVIRONMENT_COL_MASK should not contain anything
 	ENVIRONMENT_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
 	# not sure of Layers.ITEM_COL for character masks. 
-	# for now chars move rigid bodies, but not vice versa
-	PLAYER_COL_MASK = Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL, # | Layers.ITEM_COL,
-	OTHER_CHAR_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL, # | Layers.ITEM_COL,
+	# for now characters move rigid bodies, but not vice versa
+	PLAYER_COL_MASK = Layers.ENVIRONMENT_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
+	OTHER_CHAR_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
 	HITBOX_AREA_MASK = Layers.WEAPON_AREA,
 	# may be without PROP_COL
 	WEAPON_AREA_MASK = Layers.HITBOX_AREA | Layers.PROP_COL,
 	# Layers.ITEM_COL so items (rigid bodies) not fall through each other
-	ITEM_COL_MASK = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ENVIRONMENT_COL | Layers.ITEM_COL,
+	ITEM_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ITEM_COL,
 	# currently checks for weapon or body hit
 	PROP_COL_MASK = Layers.WEAPON_AREA | Layers.HITBOX_AREA,
+
+	ALL_CHARACTERS = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL,
+
 	_ZERO_MASK = 0
 }

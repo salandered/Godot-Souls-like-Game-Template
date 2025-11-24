@@ -15,7 +15,8 @@ func get_supported_substates() -> Array[String]:
 	return [
 			PHES.combat_loco,
 			PHES.combat_attacking,
-			PHES.Leaf.phase_switch
+			PHES.Leaf.phase_switch,
+			PHES.Leaf.pushback
 		]
 
 
@@ -27,15 +28,42 @@ func on_exit_state() -> void:
 	u.reset_all(__monitors)
 
 
+# todo: swith from this primitive implementation to meta states (see player)
+var major_hit_just_received: bool = false
+
+func react_on_hit(hit_data: HitData) -> void:
+	var _curr_sbs = get_current_substate()
+	if not _curr_sbs:
+		__log_warn_v2(false, "no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
+		return
+	var result = ReactionOnHit.calculate_reaction_for_enemy_state(hit_data)
+	prints("major result", result)
+	if result != "": # result actually have leaf name! but we have only one pushback as an experiment
+		prints("major hit! pushback✋")
+		major_hit_just_received = true
+		phe_feelings.lose_health(hit_data.damage)
+	else:
+		_curr_sbs.react_on_hit(hit_data)
+
+
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
 	var dist = distance_to_player()
 	
 	match current_substate.state_name:
 		PHES.Leaf.phase_switch:
 			if current_substate.is_ended():
-				_reason += "in phase_switch 🕹️"
+				_reason += "phase_switch🕹️ ended"
+				_next_state = PHES.combat_loco
+		PHES.Leaf.pushback:
+			if current_substate.is_ended():
+				_reason += "pushback✋ ended"
+				prints("(major) pushback✋ ended")
 				_next_state = PHES.combat_loco
 		PHES.combat_loco:
+			if major_hit_just_received:
+				_reason += "major_hit_just_received | "
+				_next_state = PHES.Leaf.pushback
+				major_hit_just_received = false
 			# _next_state = PHES.combat_attacking ## DANGER DEV
 			if _phase_switch_check():
 				_reason += " loco to phase_switch 🕹️"
@@ -68,6 +96,10 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 						_next_state = PHES.combat_attacking
 
 		PHES.combat_attacking:
+			if major_hit_just_received:
+				_reason += "major_hit_just_received | "
+				_next_state = PHES.Leaf.pushback
+				major_hit_just_received = false
 			if current_substate.is_ended() and attacking_for.is_done():
 				_reason += "curr sbs is ended and attackingFor done | "
 				if _phase_switch_check():
@@ -110,7 +142,7 @@ func _phase_switch_check() -> bool:
 	# already switched
 	if me.angry_raised == true:
 		return false
-	return phe_feelings.is_lower_phase_switch()
+	return phe_feelings.is_lower_to_switch_phase()
 
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:

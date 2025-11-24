@@ -51,3 +51,6 @@ class Leaf:
 	const attack_360_low := "attack_360_low"
 	const attack_up := "attack_up"
 	const attack_down := "attack_down"
+
+	## react
+	const pushback := "pushback"

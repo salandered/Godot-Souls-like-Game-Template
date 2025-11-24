@@ -37,15 +37,18 @@ mono_crash.*.json
 raw_blender/
 raw_imports/
 misc/
+ideas/
+
 
 # Almost all addons
-# blender_godot_pipeline is ok
-addons/debug_draw_3d
-addons/favorite_scenes
-addons/gut
-addons/InstanceDock
-# addons/maaacks_game_template - accidently commited already
-# pixpal_tools is ok i guess (made edits)
+addons/
+# # blender_godot_pipeline is ok
+# addons/debug_draw_3d
+# addons/favorite_scenes
+# addons/gut
+# addons/InstanceDock
+# # addons/maaacks_game_template - accidently commited already
+# # pixpal_tools is ok i guess (made edits)
 
 
 # BIG ASSETS

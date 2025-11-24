@@ -60,33 +60,37 @@ func on_enter_action(input_: InputPackage) -> void:
 	var _anim_effective_dur := _calculate_anim_effective_duration(_actual_anim)
 
 	# important to reset here
-	PEAK_SPEED = 7.0
+	PEAK_SPEED = 6.0
 	END_SPEED = 2.5
 	match curr_dodge_dir.get_curr_dir():
-		curr_dodge_dir.Dir.FORWARD:
+		curr_dodge_dir.Dir.FORWARD, curr_dodge_dir.Dir.NEUTRAL:
 			PEAK_SPEED = 6.0
 		curr_dodge_dir.Dir.BACKWARD:
-			PEAK_SPEED = 6.0
-		curr_dodge_dir.Dir.RIGHT:
+			PEAK_SPEED += 2.0
+		curr_dodge_dir.Dir.RIGHT, curr_dodge_dir.Dir.LEFT:
+			PEAK_SPEED += 2.0
 			END_SPEED = 2.8
 	
 	match PREV_ACTION:
 		Leg.Act.sprint:
-			PEAK_SPEED = 9
+			PEAK_SPEED += 1.0
 			END_SPEED = 3.5
 		PS.Act.dodge:
 			second_dodge = true
 			__log_ent(em.pin, "second_dodge raised!")
 
 	if second_dodge:
-		PEAK_SPEED -= 1
+		PEAK_SPEED -= 2.0
 		END_SPEED -= 0.3
 
 	speed_x_interpolator.initialise(_inherited_speed, END_SPEED, PEAK_SPEED, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
 	
 	__log_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
 		"from strafe", Direction.name_(_original_dir),
-		"calc_anim_dur", _anim_effective_dur)
+		"calc_anim_dur", _anim_effective_dur,
+		"PEAK_SPEED", PEAK_SPEED,
+		"_inherited_speed", _inherited_speed,
+		"END_SPEED", END_SPEED)
 
 
 func on_exit_action() -> void:

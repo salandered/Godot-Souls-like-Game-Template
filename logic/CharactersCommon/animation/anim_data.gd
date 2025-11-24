@@ -100,33 +100,34 @@ func to_string_compact() -> String:
 
 # region: VALIDATION
 
-static func __validate_track_values(anim: AnimationData, param_prefix: String, param_tracks: Array[String]) -> bool:
+static func __validate_track_values(anim: AnimationData, param_prefixes: Array[String], param_tracks: Array[String]) -> bool:
 	var all_valid := true
 	
 	for param_name: String in param_tracks:
-		var track_name := param_prefix + param_name
-		var track_idx := anim.native_anim.find_track(track_name, Animation.TYPE_VALUE)
+		for param_prefix in param_prefixes:
+			var track_name := param_prefix + param_name
+			var track_idx := anim.native_anim.find_track(track_name, Animation.TYPE_VALUE)
+			
+			if track_idx == -1:
+				continue # Track not existing is OK
+			
+			var key_count := anim.native_anim.track_get_key_count(track_idx)
+			if key_count == 0:
+				print_.warn_raw(false, "Track '%s' exists but has no keys" % param_name)
+				continue
+			
+			# Check first key (frame 0 area)
+			var first_value: Variant = anim.native_anim.track_get_key_value(track_idx, 0)
+			if first_value == null:
+				print_.warn_raw(false, "Track '%s' has null value at first key! Fix in animation editor." % param_name)
+				all_valid = false
+			elif not first_value is bool:
+				print_.warn_raw(false, "Track '%s' first key is not boolean: %s (%s)" % [param_name, str(first_value), type_string(typeof(first_value))])
 		
-		if track_idx == -1:
-			continue # Track not existing is OK
-		
-		var key_count := anim.native_anim.track_get_key_count(track_idx)
-		if key_count == 0:
-			print_.warn_raw(false, "Track '%s' exists but has no keys" % param_name)
-			continue
-		
-		# Check first key (frame 0 area)
-		var first_value: Variant = anim.native_anim.track_get_key_value(track_idx, 0)
-		if first_value == null:
-			print_.warn_raw(false, "Track '%s' has null value at first key! Fix in animation editor." % param_name)
-			all_valid = false
-		elif not first_value is bool:
-			print_.warn_raw(false, "Track '%s' first key is not boolean: %s (%s)" % [param_name, str(first_value), type_string(typeof(first_value))])
-	
 	return all_valid
 
 
-static func __validate_anim(anim_data: AnimationData, param_prefix: String, param_tracks: Array[String], required_markers: Dictionary) -> bool:
+static func __validate_anim(anim_data: AnimationData, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary) -> bool:
 	# base field validation (not null)
 	if anim_data.anim_id == null:
 		return false
@@ -155,7 +156,7 @@ static func __validate_anim(anim_data: AnimationData, param_prefix: String, para
 		return false
 
 	# native anim tracks data (experimental)
-	if not __validate_track_values(anim_data, param_prefix, param_tracks):
+	if not __validate_track_values(anim_data, param_prefixes, param_tracks):
 		print_.warn_raw(false, "Animation '%s' has invalid track values!" % anim_data.anim_name)
 		return false
 	

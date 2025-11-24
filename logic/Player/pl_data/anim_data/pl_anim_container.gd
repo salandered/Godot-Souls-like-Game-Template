@@ -52,6 +52,7 @@ var list_of_animations: Array[AnimationData] = [
 	
 	AnimationData.new(A.attack.sword_slash_1, 1.2),
 	AnimationData.new(A.attack.sword_slash_2, 1.2),
+	AnimationData.new(A.attack.sword_slash_3, 1.2),
 
 	## one time
 	AnimationData.new(A.death),

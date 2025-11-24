@@ -3,7 +3,7 @@ extends BaseFeelings
 class_name PHEFeelings
 
 
-const MAX_HEALTH = 200
+const MAX_HEALTH = 1
 
 func is_player() -> bool:
 	return false
@@ -17,6 +17,6 @@ func get_max_health() -> float:
 	return MAX_HEALTH
 
 
-func is_lower_phase_switch() -> bool:
+func is_lower_to_switch_phase() -> bool:
 	var _r = get_curr_health() < get_max_health() * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD
 	return _r

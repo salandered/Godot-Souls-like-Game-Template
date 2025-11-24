@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://by0bjgl0wv4ry"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4ijc"]
+albedo_color = Color(0.7783351, 0.33443075, 0.051331274, 1)
+emission_enabled = true
+emission = Color(1, 0.3235911, 0, 1)
+emission_energy_multiplier = 0.13
+
+[node name="CSGMarker" type="CSGSphere3D"]
+transform = Transform3D(0.445, 0, 0, 0, 0.445, 0, 0, 0, 0.445, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_c4ijc")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-2.2849072e-08, 0.5227258, 0, -0.5227258, -2.2849072e-08, 0, 0, 0, 0.5227258, 0.8442384, 0, 0)
+cone = true
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(2.3044564e-08, -0.5227065, -0.0044916775, -0.5227258, -2.2652733e-08, -4.5697302e-08, 4.5500965e-08, 0.0044916775, -0.5227065, -0.6945215, 0, 0)
+cone = true
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-2.3022325e-08, 0.0039783493, 0.5227107, -0.5227258, -4.569748e-08, -2.267519e-08, 4.552358e-08, -0.5227107, 0.0039783493, 0.020334559, 0, -0.87236774)
+cone = true
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(2.2917936e-08, -0.0015777221, -0.52272344, -0.5227258, -1.1288761e-13, -2.2918046e-08, 6.9065226e-11, 0.52272344, -0.0015777221, 0.020334559, 0, 0.8239025)
+cone = true

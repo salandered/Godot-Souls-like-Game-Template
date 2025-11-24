@@ -16,7 +16,7 @@ func get_by_anim_id(anim_id: String) -> AnimationData:
 
 
 ## native_player - player's player, se's player, etc
-func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefix: String, param_tracks: Array[String], required_markers: Dictionary) -> void:
+func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
 		if not AnimUtils.assert_has_animation(native_player, anim.anim_id, false):
@@ -49,7 +49,7 @@ func _accept_animations(_animations: Array[AnimationData], native_player: Animat
 	# VALIDATION
 	var invalid_animations := []
 	for anim in _anim_by_id.values():
-		if not AnimationData.__validate_anim(anim, param_prefix, param_tracks, required_markers):
+		if not AnimationData.__validate_anim(anim, param_prefixes, param_tracks, required_markers):
 			invalid_animations.append(anim.anim_name)
 		else:
 			print_.container("", anim.anim_name + " is valid")

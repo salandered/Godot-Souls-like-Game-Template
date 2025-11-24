@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8sj75wbb08k4"]
+[gd_scene load_steps=5 format=3 uid="uid://dlw2fiyg325uk"]
+
+[ext_resource type="Script" uid="uid://bayep8qmvo0vg" path="res://logic/Locations/lights/flicker_omni.gd" id="1_h65r5"]
 
 [sub_resource type="Animation" id="Animation_xbmjo"]
 length = 4.0
@@ -52,7 +54,8 @@ emission = Color(0.743186, 3.83843e-06, 3.85046e-07, 1)
 emission_energy_multiplier = 1.43
 
 [node name="FlickerOmni" type="Node3D"]
-transform = Transform3D(0.833033, 0.0726466, -0.548432, 0, 0.991341, 0.131315, 0.553223, -0.10939, 0.82582, 0, 0, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_h65r5")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 unique_name_in_owner = true

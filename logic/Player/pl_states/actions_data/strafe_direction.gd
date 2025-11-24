@@ -9,14 +9,6 @@ class _DirData:
 		anim_id = _anim_id
 
 
-enum ChangeType {
-	OPPOSITE,
-	SLIGHT,
-	SLIGHTEST,
-	SAME
-}
-
-
 var _curr_dir: Direction.Dir = Direction.Dir.NEUTRAL
 var _dir_data: Dictionary = {}
 
@@ -76,74 +68,31 @@ func get_all_anim_ids() -> Array[String]:
 	return anims
 
 
-## sum is 28 for 8 directions
-static var all_dir_pairs := [
-	# todo: some hash
-	# 180 OPPOSITE (most frequent)
-	[Direction.Dir.FORWARD, Direction.Dir.BACKWARD, ChangeType.OPPOSITE],
-	[Direction.Dir.RIGHT, Direction.Dir.LEFT, ChangeType.OPPOSITE],
-	
-	# 90 VERT STRAFE SPAM (frequent) (e.g W pressed A/D spams)
-	[Direction.Dir.RIGHT_F, Direction.Dir.LEFT_F, ChangeType.SLIGHT],
-	[Direction.Dir.RIGHT_B, Direction.Dir.LEFT_B, ChangeType.SLIGHT],
-
-	# other 90
-	[Direction.Dir.FORWARD, Direction.Dir.RIGHT, ChangeType.SLIGHT],
-	[Direction.Dir.FORWARD, Direction.Dir.LEFT, ChangeType.SLIGHT],
-	[Direction.Dir.BACKWARD, Direction.Dir.RIGHT, ChangeType.SLIGHT],
-	[Direction.Dir.BACKWARD, Direction.Dir.LEFT, ChangeType.SLIGHT],
-	
-	# other 90
-	[Direction.Dir.LEFT_F, Direction.Dir.LEFT_B, ChangeType.SLIGHT],
-	[Direction.Dir.RIGHT_F, Direction.Dir.RIGHT_B, ChangeType.SLIGHT],
-
-	# 45 SLIGHTEST
-	[Direction.Dir.FORWARD, Direction.Dir.RIGHT_F, ChangeType.SLIGHTEST],
-	[Direction.Dir.FORWARD, Direction.Dir.LEFT_F, ChangeType.SLIGHTEST],
-	[Direction.Dir.BACKWARD, Direction.Dir.RIGHT_B, ChangeType.SLIGHTEST],
-	[Direction.Dir.BACKWARD, Direction.Dir.LEFT_B, ChangeType.SLIGHTEST],
-	[Direction.Dir.RIGHT, Direction.Dir.RIGHT_F, ChangeType.SLIGHTEST],
-	[Direction.Dir.RIGHT, Direction.Dir.RIGHT_B, ChangeType.SLIGHTEST],
-	[Direction.Dir.LEFT, Direction.Dir.LEFT_F, ChangeType.SLIGHTEST],
-	[Direction.Dir.LEFT, Direction.Dir.LEFT_B, ChangeType.SLIGHTEST],
-
-	# 135
-	[Direction.Dir.FORWARD, Direction.Dir.RIGHT_B, ChangeType.OPPOSITE],
-	[Direction.Dir.FORWARD, Direction.Dir.LEFT_B, ChangeType.OPPOSITE],
-	[Direction.Dir.BACKWARD, Direction.Dir.RIGHT_F, ChangeType.OPPOSITE],
-	[Direction.Dir.BACKWARD, Direction.Dir.LEFT_F, ChangeType.OPPOSITE],
-	[Direction.Dir.RIGHT, Direction.Dir.LEFT_F, ChangeType.OPPOSITE],
-	[Direction.Dir.RIGHT, Direction.Dir.LEFT_B, ChangeType.OPPOSITE],
-	[Direction.Dir.LEFT, Direction.Dir.RIGHT_F, ChangeType.OPPOSITE],
-	[Direction.Dir.LEFT, Direction.Dir.RIGHT_B, ChangeType.OPPOSITE],
-	
-	# 180 OPPOSITE (less frequent)
-	[Direction.Dir.RIGHT_F, Direction.Dir.LEFT_B, ChangeType.OPPOSITE],
-	[Direction.Dir.RIGHT_B, Direction.Dir.LEFT_F, ChangeType.OPPOSITE],
-]
-
-
-func would_be_change_of_type(new_dir: Direction.Dir) -> ChangeType:
-	if _curr_dir == new_dir: return ChangeType.SAME
+func would_be_change_of_type(new_dir: Direction.Dir) -> DirPairs.ChangeType:
+	if _curr_dir == new_dir: return DirPairs.ChangeType.SAME
 	if _curr_dir == Direction.Dir.NEUTRAL or new_dir == Direction.Dir.NEUTRAL:
-		return ChangeType.SAME # or SLIGHTEST
+		return DirPairs.ChangeType.SAME # or SLIGHTEST
 
-	for collection in all_dir_pairs:
-		if __both_in_group(_curr_dir, new_dir, collection):
-			return collection[2]
+	# prints(Direction.full_name_(_curr_dir), Direction.full_name_(new_dir))
+	var r := DirPairs.get_change_type(_curr_dir, new_dir)
+	if r == -1:
+		r = DirPairs.get_change_type(new_dir, _curr_dir)
 
-	return ChangeType.SAME # unreachable
+	if r != -1:
+		return r
+	else: # should be unreachable
+		print_.warn(true, "not found dirs in DirPairs!", "", "return SAME", _curr_dir, new_dir)
+		return DirPairs.ChangeType.SAME
+
+
+static func __both_in_group(dir_1, dir_2, group: Array) -> bool:
+	return dir_1 in group and dir_2 in group
 
 
 ## helpers
 
 func pp_curr_dir() -> String:
 	return pp_dir_name(_curr_dir)
-
-
-static func __both_in_group(dir_1, dir_2, group: Array) -> bool:
-	return dir_1 in group and dir_2 in group
-
 
 static func pp_dir_name(dir: Direction.Dir) -> String:
 	return Direction.name_(dir)

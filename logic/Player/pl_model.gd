@@ -24,11 +24,16 @@ class_name Princess
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var native_player: AnimationPlayer = %NativeAnimator
 
+# 
+@onready var hit_box_torso: CharacterHitbox = %HitBoxTorso
+
+
 # dev
 @onready var __fly_mode: Node3D = $__dev/FlyMode
 @onready var __dev_labels: Node = %_dev_labels
 
 
+@onready var _start_position := global_transform.origin
 var push_rigid_bodies_force = 4.0
 
 
@@ -44,7 +49,7 @@ func initialise() -> void:
 	anim_container._accept_animations(
 		_pl_anim_container.list_of_animations,
 		native_player,
-		AnimParamsContainer.TRACK_PREFIX_2,
+		AnimParamsContainer.TRACK_PREFIXES,
 		AnimParamsContainer.get_all_params(),
 		PlRequiredMarkers.anim_to_required_marker)
 		 
@@ -70,6 +75,10 @@ func react_on_hit(hit_data: HitData) -> void:
 	player_sm.react_on_hit(hit_data)
 
 
+func reset_position() -> void:
+	transform.origin = _start_position
+
+
 # TODO: _process or _physics_process? changed to _process: frame issues
 func _process(delta) -> void:
 	var input_ := InputManager.get_current_input()
@@ -85,6 +94,9 @@ func update(input_: InputPackage, delta: float):
 	player_sm.update(input_, delta)
 	move_and_slide()
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
+
+
+
 
 ## USED FOR ENEMY PROJECTS
 # region
@@ -149,14 +161,34 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 # endregion
 
 
+# region: __LOGS
+
+func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
+	print_.warn(crucial, what, where + "| player model", fallback, pp.list_(details))
+
+
+# endregion
+
+
 # region: DEV
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_H):
-		self.react_on_hit(HitData.new(10, "from god", PHEA.attack.scare_off))
+		var hit = HitData.new(10, "from god", PHEA.attack.scare_off)
+		combat._last_processed_hit = hit
+		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_J):
-		self.react_on_hit(HitData.new(10, "from god", PHEA.attack.sword_slide))
-
+		var hit = HitData.new(30, "from god", PHEA.attack.sword_slide)
+		combat._last_processed_hit = hit
+		self.react_on_hit(hit)
+	if Input.is_action_just_pressed(RawAction.DEV_K):
+		var hit = HitData.new(10, "from god", PHEA.attack.attack_360_low)
+		combat._last_processed_hit = hit
+		self.react_on_hit(hit)
+	if Input.is_action_just_pressed(RawAction.DEV_L):
+		var hit = HitData.new(30, "from god", PHEA.attack.power_gap_closer)
+		combat._last_processed_hit = hit
+		self.react_on_hit(hit)
 
 	if event.is_action_released(RawAction.t8):
 		visuals.visible = not visuals.visible
@@ -180,6 +212,10 @@ func _input(event: InputEvent) -> void:
 
 
 var debug_cams: Array[Node]
+var csg_visible_initially: Array
+var csg_non_visible_initially: Array
+var csg_visible_cycle: Cycler
+
 var cam_i := 0
 var __collisions_enabled: bool = true
 
@@ -189,6 +225,15 @@ func __dev_initialise():
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
 	# print_.dev("dbg", "cam_i: " + str(cam_i))
+	var _csg_visuals = get_descendants.csg_primitives(self)
+	for _csg: CSGPrimitive3D in _csg_visuals:
+		if _csg.visible:
+			csg_visible_initially.append(_csg)
+		else:
+			csg_non_visible_initially.append(_csg)
+
+	csg_visible_cycle = Cycler.new([[false, false], [true, false], [true, true], [false, true]])
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
@@ -213,5 +258,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			collision_mask = Collision.Masks.PLAYER_COL_MASK
 		else:
 			collision_mask = Collision.Masks._ZERO_MASK
+
+	if event.is_action_pressed(RawAction.DEV_O):
+		var _next_booleans = csg_visible_cycle.get_next()
+		for csg in csg_visible_initially:
+			csg.visible = _next_booleans[0]
+		for csg in csg_non_visible_initially:
+			csg.visible = _next_booleans[1]
+
 
 # endregion

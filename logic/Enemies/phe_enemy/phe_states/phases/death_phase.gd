@@ -12,7 +12,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		PHES.Leaf.death:
 			if current_substate.is_ended():
 				__log_upd("We died")
-				# me.queue_free()
+				me.death_raised = true
 
 	return VerdictPH.new(_next_state, _reason)
 

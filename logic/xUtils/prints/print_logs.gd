@@ -8,7 +8,7 @@ const _FRAME_PRINT := true
 # COMMON
 const DEV_B := true
 const COLLISION_B := true
-const FEEL_B := true
+const FEEL_B := false
 const REACT_UTILS_B := false
 
 # CONTAINER
@@ -33,7 +33,7 @@ const LSM_ACTION_B := false
 
 # PL SYSTEMS
 const input_gathering_B := false
-const FANCY_CAM_B := false
+const FANCY_CAM_B := true
 const AWARENESS_B := true
 
 # ENEMY

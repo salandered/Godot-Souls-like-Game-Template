@@ -148,7 +148,7 @@ static func spick_random_array(array: Array[String]) -> String:
 
 
 static func spick_random(...elements: Array) -> String:
-	var _elements = u.safe_cast_array_of_strings(elements)
+	var _elements = TypeCast.array_of_string(elements)
 	return spick_random_array(_elements)
 
 
@@ -160,7 +160,7 @@ static func ipick_random_array(array: Array[int]) -> int:
 
 
 static func ipick_random(...elements: Array) -> int:
-	var _elements = u.safe_cast_array_of_int(elements)
+	var _elements = TypeCast.array_of_int(elements)
 	return ipick_random_array(_elements)
 
 
@@ -172,7 +172,7 @@ static func fpick_random_array(array: Array[float]) -> float:
 
 
 static func fpick_random(...elements: Array) -> float:
-	var _elements = u.safe_cast_array_of_float(elements)
+	var _elements = TypeCast.array_of_float(elements)
 	return fpick_random_array(_elements)
 
 

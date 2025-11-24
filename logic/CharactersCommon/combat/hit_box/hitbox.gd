@@ -17,9 +17,16 @@ class_name CharacterHitbox
 ##    by 'add_hitbox_to_contact_list' logic. It stores contacted hitbox on a weapon side.
 ##    It also means that u can have any number of hurt boxes on a weapon.
 ##    Technically the mechanic of processing any hitbox only once at BaseCombat side makes 'contact_list' less important
-##    But the weapon knowing what it hits and other character's BaseCombat knowing what hits was applied 
+##    But the weapon knowing what it hits and other character's BaseCombat knowing what hits were applied 
 ##    are two separate bounded contexts (like, player and an enemy)
 ##    So it cleaner this way. Also faster.
+##
+## Hitbox shape conventions (NOTE)
+# region:
+## - Supports ONLY one coll shape CollisionShape 
+## - Supports ONLY CapsuleShape as a shape (Shape3D) of this coll shape (CollisionShape)
+## - CapsuleShape is auto DUPLICATED. This prevents accidental changing several shapes while working with one hitbox.
+# endregion
 ##
 ## About _physics_process implementation
 # region: 
@@ -34,18 +41,76 @@ class_name CharacterHitbox
 @export var combat: BaseCombat
 
 
+## guaranteed one in shape of CapsuleShape3D. can't be zero and not supported several. 
+var _my_coll_shapes: Array[CollisionShape3D]
+var _original_capsule_shape_radius: float
+var _original_capsule_shape_height: float
+
+
 func _ready() -> void:
 	collision_layer = Collision.Layers.HITBOX_AREA
 	collision_mask = Collision.Masks.HITBOX_AREA_MASK
-	# 
-	print_.hit_box(name, "--- CharacterHitbox ready ---")
+	
 	assert(combat, "Set combat system!")
+
+	_my_coll_shapes = get_descendants.collision_shapes(self)
+	if len(_my_coll_shapes) != 1:
+		var msg = pp.s("len of _my_coll_shapes != 1", "Not supported!!", "len:", len(_my_coll_shapes))
+		assert(false, msg)
+
+	var original_shape = _my_coll_shapes[0].shape
+	assert(original_shape != null, "CollisionShape3D has no shape!")
+	assert(original_shape is CapsuleShape3D, "shape is not CapsuleShape3D. Not supported")
+	
+	# Duplicate to avoid shared resource issues
+	_my_coll_shapes[0].shape = original_shape.duplicate()
+	var shape := _my_coll_shapes[0].shape as CapsuleShape3D
+	print_.hit_box(name, "Duplicated capsule shape used in CollisionShape! " + shape.resource_name)
+
+	_original_capsule_shape_radius = shape.radius
+	_original_capsule_shape_height = shape.height
+
+	print_.hit_box(name, "--- CharacterHitbox ready ---")
 
 
 func _physics_process(delta):
 	if has_overlapping_areas():
 		for area in get_overlapping_areas():
 			on_area_contact(area)
+
+
+# region: shape logic
+
+
+func get_collision_shape() -> CollisionShape3D:
+	return _my_coll_shapes[0]
+
+
+## provide capsule size mult values
+func shrink_hitbox(radius_mult: float = 0.7, height_mult: float = 0.6):
+	var coll_shape := get_collision_shape()
+	var shape = coll_shape.shape as CapsuleShape3D
+	shape.radius = _original_capsule_shape_radius * radius_mult
+	shape.height = _original_capsule_shape_height * height_mult
+	__log_("coll capsusle shape shrinked to",
+		pp.list_([shape.radius, shape.height]),
+		"from",
+		pp.list_([_original_capsule_shape_radius, _original_capsule_shape_height]))
+
+
+func restore_hitbox():
+	var coll_shape := get_collision_shape()
+	var shape = coll_shape.shape as CapsuleShape3D
+
+	__log_("coll caps shape restored to orig values",
+		pp.list_([_original_capsule_shape_radius, _original_capsule_shape_height]),
+		"from",
+		pp.list_([shape.radius, shape.height]))
+
+	shape.radius = _original_capsule_shape_radius
+	shape.height = _original_capsule_shape_height
+
+# endregion
 
 func is_player() -> bool:
 	return combat.is_player()

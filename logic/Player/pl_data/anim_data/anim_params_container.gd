@@ -27,12 +27,15 @@ const DEFAULT_PARAMS := {
 
 static func get_all_params() -> Array[String]:
 	print_.note(false, "get_all_params", DEFAULT_PARAMS.keys())
-	return u.safe_cast_array_of_strings(DEFAULT_PARAMS.keys())
+	return TypeCast.array_of_string(DEFAULT_PARAMS.keys())
 
 
-# const TRACK_PREFIX := "%AnimParameters:"
-# const TRACK_PREFIX_2 := "../AnimatorManager/NativeAnimator/AnimParameters:"
-const TRACK_PREFIX_2 := "NativeAnimator/AnimParameters:"
+## track's exact path is very fragile. see docs of PlAnimParameters
+static var TRACK_PREFIXES: Array[String] = [
+	"%AnimParameters:",
+	"../AnimatorManager/NativeAnimator/AnimParameters:",
+	"NativeAnimator/AnimParameters:"
+]
 
 
 func is_switches_to_queue(anim: Animation, timestamp: float) -> bool:
@@ -63,5 +66,10 @@ func is_tracks_input_vector(anim: Animation, timestamp: float) -> bool:
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:
 	var _default = u.safe_get_dict_key(DEFAULT_PARAMS, param, false)
-	var _r := AnimUtils.get_bool_value_from_track(anim, TRACK_PREFIX_2, param, timestamp, _default)
-	return _r
+	var _track_exists: bool = false
+	for prefix in TRACK_PREFIXES:
+		_track_exists = AnimUtils.is_track_exists(anim, prefix, param)
+		if _track_exists:
+			var _r := AnimUtils.get_bool_value_from_track(anim, prefix, param, timestamp, _default)
+			return _r
+	return _default

@@ -82,6 +82,7 @@ var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
 
 	"SwordSlash1": _StateData.new(PS.sword_slash_1, 15, Leg.Beh.double, false, 10.0),
 	"SwordSlash2": _StateData.new(PS.sword_slash_2, 15, Leg.Beh.double, false, 12.0),
+	"SwordSlash3": _StateData.new(PS.sword_slash_3, 15, Leg.Beh.double, false, 15.0),
 
 	# 
 	# "Staggered": _StateData.new(PS.staggered, 100, Leg.Beh.double, false, 0.0),
@@ -111,6 +112,7 @@ var node_to_pl_action: Dictionary = { # { Node name : _PlActionData }
 	
 	"SwordSlash1Action": _PlActionData.new(PS.sword_slash_1, PS.Act.sword_slash_1, A.attack.sword_slash_1, MotionType.IDLE),
 	"SwordSlash2Action": _PlActionData.new(PS.sword_slash_2, PS.Act.sword_slash_2, A.attack.sword_slash_2, MotionType.IDLE),
+	"SwordSlash3Action": _PlActionData.new(PS.sword_slash_3, PS.Act.sword_slash_3, A.attack.sword_slash_3, MotionType.IDLE),
 
 
 	## one time

@@ -16,9 +16,11 @@
 			// engine command line flags
 			// "profiling": false,
 			// "single_threaded_scene": false,
+			//
 			"debug_collisions": true,
-			"debug_paths": false,
-			"debug_navigation": false,
+			// "debug_paths": true,
+			// "debug_navigation": true,
+			//
 			// "debug_avoidance": false,
 			// "debug_stringnames": false,
 			// "frame_delay": 0,

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b2a3ekgqqpyue" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_Color.jpg" id="6_po85w"]
 [ext_resource type="Texture2D" uid="uid://b4wn10ena052b" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_Roughness.png" id="7_jhutn"]
 [ext_resource type="Texture2D" uid="uid://vtrrpfkytq08" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_NormalGL.jpg" id="8_mpgtj"]
-[ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools/Imphenzia/PixPal/Materials/IMPixPal.tres" id="9_h8ebr"]
+[ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="9_h8ebr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
 radius = 0.7368164

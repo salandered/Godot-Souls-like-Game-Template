@@ -31,17 +31,17 @@ class _AData:
 
 class BaseStData:
 	var state_name: String
-	var dur_data: _CommitData
+	var commit_data: _CommitData
 
 	func _init(
 			state_name_: String,
-			dur_data_: _CommitData = null,
+			commit_data_: _CommitData = null,
 		) -> void:
 		self.state_name = state_name_
 
-		if not dur_data_:
-			dur_data_ = _CommitData.new()
-		self.dur_data = dur_data_
+		if not commit_data_:
+			commit_data_ = _CommitData.new()
+		self.commit_data = commit_data_
 
 
 class _CSData extends BaseStData:
@@ -112,8 +112,9 @@ var node_to_leaf_state_data: Dictionary = {
 	"SwordSlide": _LStData.new(PHES.Leaf.sword_slide, _AData.new(PHEA.attack.sword_slide, -0.25)),
 	"PowerUp": _LStData.new(PHES.Leaf.power_up, _AData.new(PHEA.attack.power_up, -0.07)),
 	"StabLow": _LStData.new(PHES.Leaf.stab_low, _AData.new(PHEA.attack.stab_low, -0.07)),
-
-	# "PhaseSwitch": _LStData.new(PHES.phase_switch, PHEA.phase_switch),
+	
+	## react
+	"Pushback": _LStData.new(PHES.Leaf.pushback, _AData.new(PHEA.react.react_dodge_B, -0.1), _CommitData.new(-1, -1)),
 }
 
 var _states: Dictionary # { String : BasePHEState }
@@ -140,8 +141,8 @@ func _initialise_states():
 func __accept_base_state(node: BasePHEState, state_data: BaseStData):
 	# specific
 	node.state_name = state_data.state_name
-	node.fatigue = state_data.dur_data.fatigue
-	node.commitment = state_data.dur_data.commitment
+	node.fatigue = state_data.commit_data.fatigue
+	node.commitment = state_data.commit_data.commitment
 
 	# common
 	node.me = me

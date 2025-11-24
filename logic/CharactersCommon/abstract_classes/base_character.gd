@@ -25,4 +25,7 @@ func _ready() -> void:
 @abstract func react_on_hit(hit_data: HitData) -> void
 
 
+@abstract func reset_position() -> void
+
+
 @abstract func pretty_name() -> String

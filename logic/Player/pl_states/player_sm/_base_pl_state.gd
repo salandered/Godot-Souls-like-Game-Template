@@ -252,7 +252,7 @@ func react_on_hit(hit: HitData):
 
 	## 1 - check if we need to change state
 	## 2 - if not, we delegate reaction behavior to curr action
-	var react_state_name := ReactUtils.calculate_reaction_for_pl_state(hit)
+	var react_state_name := ReactionOnHit.calculate_reaction_for_pl_state(hit)
 	if react_state_name:
 		__log_state_upd("hit leaded to react state", react_state_name)
 		var state = container.state_by_name(react_state_name)

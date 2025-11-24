@@ -1,7 +1,7 @@
 extends CSGBox3D
 
 @export var label: String
-@onready var targetable_aspect: Targetable_ = $TargetableAspect
+@onready var targetable_aspect: CameraTarget = $TargetableAspect
 
 
 func _ready() -> void:

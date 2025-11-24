@@ -1,6 +1,7 @@
 extends Node
 
 @export var target_node: Node3D
+@export var turned_on: bool = false
 @export var path_color_a := Color.YELLOW
 @export var path_color_b := Color.GREEN
 @export var path_duration: float = 60
@@ -12,6 +13,8 @@ var previous_position: Vector3 = Vector3.INF
 var time_elapsed: float = 0.0
 
 func _process(delta: float) -> void:
+	if not turned_on:
+		return
 	time_elapsed += delta
 	if not is_instance_valid(target_node):
 		previous_position = Vector3.INF

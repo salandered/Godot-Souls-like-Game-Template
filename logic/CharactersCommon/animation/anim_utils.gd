@@ -2,6 +2,19 @@ extends RefCounted
 class_name AnimUtils
 
 
+static func is_track_exists(native_anim: Animation, track_prefix: String, param_name: String) -> bool:
+	var _track_name := track_prefix + param_name
+	if not native_anim:
+		print_.warn_raw(false, "")
+		return false
+	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
+	
+	if _track == -1:
+		# print_.warn("Track not found: " + _track_name + " in animation " + anim_name)
+		return false
+	return true
+
+
 ## returns 'false' or 'default_value' in case of any problems
 static func get_bool_value_from_track(native_anim: Animation, track_prefix: String, param_name: String, timestamp: float, default_value: bool = false) -> bool:
 	var _track_name := track_prefix + param_name
@@ -36,6 +49,7 @@ static func get_bool_value_from_track(native_anim: Animation, track_prefix: Stri
 			return key_value
 		elif key_value != null:
 			return bool(key_value)
+			
 	return default_value # Last resort
 
 

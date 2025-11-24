@@ -101,7 +101,7 @@ func react_on_hit(hit: HitData):
 	# animator_manager.set_overlay_anim()
 	phe_feelings.lose_health(hit.damage)
 
-	var react_cfg = ReactUtils.calculate_reaction_for_enemy(hit, state_name)
+	var react_cfg = ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
 	if not react_cfg:
 		__log_upd("state mutes react_on_hit, ignoring")
 		return

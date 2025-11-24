@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://btblvq8d2edyr"]
+[gd_scene load_steps=8 format=4 uid="uid://btblvq8d2edyr"]
 
+[ext_resource type="Script" uid="uid://v8wb46q68q4" path="res://logic/Locations/demo_arena/dark_crate.gd" id="1_l7xcd"]
 [ext_resource type="Texture2D" uid="uid://bktnoy7cqnpfh" path="res://-assets-/GLB-items/barrels/barrel-box_v2_cargo_wooden_decor.jpg" id="1_ryvau"]
 [ext_resource type="Material" uid="uid://dq1jnowy0hm6a" path="res://-assets-/materials-shared/wood/wood_peeling_paint_weathered.001.tres" id="2_ierka"]
 
 [sub_resource type="BoxShape3D" id="2"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.601, 0.601, 0.601)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8355d"]
 resource_name = "Material #66"
@@ -68,6 +69,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lw0xi")
 
 [node name="DarkCrate" type="RigidBody3D"]
+script = ExtResource("1_l7xcd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("2")

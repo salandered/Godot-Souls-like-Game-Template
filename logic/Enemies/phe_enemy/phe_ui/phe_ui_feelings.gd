@@ -64,9 +64,9 @@ func _update_health_bar():
 		# instant ghost bar update on heal
 		ghost_bar.value = curr_health
 	
-	if e_feelings.is_lower_phase_switch() and not _is_pulsing:
+	if e_feelings.is_lower_to_switch_phase() and not _is_pulsing:
 		_start_low_health_pulse()
-	elif not e_feelings.is_lower_phase_switch() and _is_pulsing:
+	elif not e_feelings.is_lower_to_switch_phase() and _is_pulsing:
 		_stop_low_health_pulse()
 	
 

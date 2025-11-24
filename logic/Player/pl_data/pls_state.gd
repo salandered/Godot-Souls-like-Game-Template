@@ -13,6 +13,7 @@ const attack_from_dodge := "attack_from_dodge"
 
 const sword_slash_1 := "sword_slash_1"
 const sword_slash_2 := "sword_slash_2"
+const sword_slash_3 := "sword_slash_3"
 
 ## loco
 const idle := "idle"
@@ -54,6 +55,7 @@ class Act:
 	
 	const sword_slash_1 := "pla_sword_slash_1🗡"
 	const sword_slash_2 := "pla_sword_slash_2🗡"
+	const sword_slash_3 := "pla_sword_slash_3🗡"
 
 
 	## air

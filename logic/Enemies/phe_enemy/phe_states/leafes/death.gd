@@ -3,6 +3,7 @@ extends BasePHELeaf
 
 var DECEL_SPEED = 15
 
+
 func is_ended() -> bool:
 	return time_remaining() <= 0.05
 

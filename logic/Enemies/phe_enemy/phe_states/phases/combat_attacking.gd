@@ -73,7 +73,7 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 		_next_state = PHES.attack_with_dodge_f
 	elif dist > config.COMBAT_RAD():
 		_next_state = ra.spick_weighted({
-			PHES.attack_360_series: 0.5,
+			PHES.attack_360_series: 0.4,
 			PHES.attack_pick_single: 0.5})
 	elif dist > config.TOO_CLOSE():
 		_reason = "SUPER_CLOSE < dist < GAP_CLOSER_RAD"
