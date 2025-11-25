@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c01ayjblhcg1t"]
+
+[ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://ui/ui_utils/options_nodes/m_list_option_control.tscn" id="1_vm7u1"]
+[ext_resource type="Script" uid="uid://brntdgf3sv0s0" path="res://ui/ui_utils/options_nodes/m_vector_2_list_option_control.gd" id="2_k1vcs"]
+
+[node name="OptionControl" instance=ExtResource("1_vm7u1")]
+script = ExtResource("2_k1vcs")

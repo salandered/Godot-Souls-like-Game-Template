@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4r1plptelikw"]
+
+[ext_resource type="Script" uid="uid://cel3jt67kbkpj" path="res://ui/options_menu/tabs/game/m_game_options_menu.gd" id="1_lpwby"]
+[ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="2_7bjas"]
+[ext_resource type="PackedScene" uid="uid://cqmk5mrsxsygy" path="res://ui/options_menu/tabs/game/m_reset_game_control.tscn" id="3_ajr2t"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/themes/separator/h_separator.tscn" id="3_bwa6b"]
+
+[node name="M_Game" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 24
+script = ExtResource("1_lpwby")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+script = ExtResource("2_7bjas")
+search_depth = 2
+
+[node name="HSeparator2" parent="VBoxContainer" instance=ExtResource("3_bwa6b")]
+layout_mode = 2
+
+[node name="ResetGameControl" parent="VBoxContainer" instance=ExtResource("3_ajr2t")]
+layout_mode = 2
+
+[node name="HSeparator" parent="VBoxContainer" instance=ExtResource("3_bwa6b")]
+layout_mode = 2
+
+[connection signal="reset_confirmed" from="VBoxContainer/ResetGameControl" to="." method="_on_ResetGameControl_reset_confirmed"]

@@ -1,6 +1,6 @@
 @tool
 class_name M_PauseMenu
-extends OverlaidMenu
+extends M_OverlaidMenu
 
 @export var options_packed_scene: PackedScene
 @export_file("*.tscn") var main_menu_scene: String
@@ -24,7 +24,7 @@ func _enable_focus() -> void:
 
 func _load_scene(scene_path: String) -> void:
 	_scene_tree.paused = false
-	SceneLoader.load_scene(scene_path)
+	M_SceneLoader.load_scene(scene_path)
 
 func open_options_menu() -> void:
 	var options_scene := options_packed_scene.instantiate()
@@ -72,7 +72,7 @@ func _on_exit_button_pressed() -> void:
 	popup_open = %ConfirmExit
 
 func _on_confirm_restart_confirmed() -> void:
-	SceneLoader.reload_current_scene()
+	M_SceneLoader.reload_current_scene()
 	close()
 
 func _on_confirm_main_menu_confirmed() -> void:

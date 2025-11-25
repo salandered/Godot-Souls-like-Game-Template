@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://ui/main_menu/m_main_menu.gd" id="1_2e4m0"]
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://ui/options_menu/m_options_menu.tscn" id="2_hvsaw"]
-[ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://misc/maacks_examples/scenes/_later/credits/m_scrollable_credits.tscn" id="3_nlybk"]
-[ext_resource type="Texture2D" uid="uid://c6gsd2mdmea8w" path="res://ui/_TPS/floor.png" id="4_y57hi"]
-[ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://addons/maaacks_game_template/base/scripts/ui_sound_controller.gd" id="5_8f36y"]
-[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/music_players/background_music_player.tscn" id="6_85uok"]
-[ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://addons/maaacks_game_template/base/scenes/menus/main_menu/config_name_label.gd" id="7_nt2e5"]
-[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/scripts/capture_focus.gd" id="8_20i7g"]
-[ext_resource type="Script" uid="uid://dmkubt2nsnsbn" path="res://addons/maaacks_game_template/base/scenes/menus/main_menu/config_version_label.gd" id="9_8ao8n"]
+[ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://ui/_later/credits/credits/m_scrollable_credits.tscn" id="3_nlybk"]
+[ext_resource type="Texture2D" uid="uid://c21h0ecvyglu" path="res://ui/ui_assets/images/floor.png" id="4_y57hi"]
+[ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
+[ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://ui/options_menu/music_player/m_background_music_player.tscn" id="6_2e4m0"]
+[ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://ui/main_menu/m_config_name_label.gd" id="7_nt2e5"]
+[ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
+[ext_resource type="Script" uid="uid://dp2exxwlj6afr" path="res://ui/main_menu/m_config_version_label.gd" id="9_nlybk"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dvfds"]
 
@@ -61,9 +61,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2e4m0")
-game_scene_path = "uid://bco760cyuo8em"
+game_scene_path = "uid://m2o3tdaa66rk"
 options_packed_scene = ExtResource("2_hvsaw")
 credits_packed_scene = ExtResource("3_nlybk")
+bypass_menu_and_start_game = false
 
 [node name="MenuScene" type="Node3D" parent="."]
 
@@ -97,9 +98,10 @@ transform = Transform3D(0.99317044, -0.008642152, 0.11635175, 0, 0.9972529, 0.07
 current = true
 
 [node name="UISoundController" type="Node" parent="."]
-script = ExtResource("5_8f36y")
+script = ExtResource("5_2e4m0")
 
-[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("6_85uok")]
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("6_2e4m0")]
+bus = &"Master"
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -188,7 +190,7 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 16
 alignment = 1
 vertical = true
-script = ExtResource("8_20i7g")
+script = ExtResource("8_hvsaw")
 
 [node name="NewGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
 unique_name_in_owner = true
@@ -245,7 +247,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "v0.0.0"
 horizontal_alignment = 2
-script = ExtResource("9_8ao8n")
+script = ExtResource("9_nlybk")
 
 [node name="OptionsContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -299,20 +301,6 @@ grow_vertical = 0
 theme_type_variation = &"LessNoticableButton"
 text = "Back"
 
-[node name="BackButton2" type="Button" parent="FlowControlContainer/FlowControl"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 88.0
-offset_top = -294.0
-offset_right = 209.0
-offset_bottom = -247.0
-grow_vertical = 0
-theme_type_variation = &"LessNoticableButton"
-text = "Back"
-
 [node name="NewGameConfirmationDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 auto_translate_mode = 1
@@ -329,5 +317,4 @@ All progress in the current game will be lost."
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="FlowControlContainer/FlowControl/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="FlowControlContainer/FlowControl/BackButton2" to="." method="_on_back_button_pressed"]
 [connection signal="confirmed" from="NewGameConfirmationDialog" to="." method="_on_new_game_confirmation_dialog_confirmed"]

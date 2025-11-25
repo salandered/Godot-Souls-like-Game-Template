@@ -37,14 +37,14 @@ var sub_menu
 # A versatile base class for a main menu UI.
 # - Handles 'Continue Game' and 'New Game' button presses.
 #     Displays a confirmation pop-up before starting a new game if there's saved data.
-# - Launches the game using the SceneLoader autoload.
+# - Launches the game using the M_SceneLoader autoload.
 # - Emits signals for game start / exit to allow for custom loading or transition logic.
 # - Manages navigation between the main menu and sub-menus (Options, Credits).
 # - Handles exiting the application.
-# - Interacts with the GameState autoload to manage save data.
+# - Interacts with the M_GameState autoload to manage save data.
 @onready var camera_3d: Camera3D = %Camera3D
 
-@export var bypass_menu_and_start_game: bool = true # <-- Add this line
+@export var bypass_menu_and_start_game: bool = true
 
 func _ready() -> void:
 	# Check if the bypass flag is enabled
@@ -60,7 +60,7 @@ func _ready() -> void:
 	
 	if game_scene_path.is_empty():
 		new_game_button.disabled = true
-	continue_game_button.disabled = not GameState.has_game_state()
+	continue_game_button.disabled = not M_GameState.has_game_state()
 	_grab_initial_focus()
 	camera_3d.current = true
 
@@ -73,18 +73,18 @@ func _grab_initial_focus() -> void:
 		new_game_button.grab_focus()
 		
 func load_game_scene() -> void:
-	GameState.start_game()
+	M_GameState.start_game()
 	if signal_game_start:
-		SceneLoader.load_scene(game_scene_path, true)
+		M_SceneLoader.load_scene(game_scene_path, true)
 		game_started.emit()
 	else:
-		SceneLoader.load_scene(game_scene_path)
+		M_SceneLoader.load_scene(game_scene_path)
 
 func new_game() -> void:
-	if confirm_new_game and GameState.has_game_state():
+	if confirm_new_game and M_GameState.has_game_state():
 		%NewGameConfirmationDialog.popup_centered()
 	else:
-		GameState.reset()
+		M_GameState.reset()
 		load_game_scene()
 
 func exit_game() -> void:
@@ -152,11 +152,11 @@ func _on_new_game_button_pressed() -> void:
 	
 
 func _on_continue_game_button_pressed() -> void:
-	GameState.continue_game()
+	M_GameState.continue_game()
 	load_game_scene()
 
 func _on_new_game_confirmation_dialog_confirmed() -> void:
-	GameState.reset()
+	M_GameState.reset()
 	load_game_scene()
 
 

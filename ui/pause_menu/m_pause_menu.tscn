@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsawmyldebwkf"]
 
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
-[ext_resource type="PackedScene" uid="uid://dbs62msmqsk7t" path="res://misc/maacks_examples/scenes/_later/overlaid_menus/mini_options_overlaid_menu.tscn" id="2_s4nj1"]
+[ext_resource type="PackedScene" uid="uid://cikf3o5omnunl" path="res://ui/_later/mini_menu/m_mini_options_overlaid_menu.tscn" id="2_8s11q"]
 [ext_resource type="StyleBox" uid="uid://xfjyq8ix6pfu" path="res://ui/themes/panel/invisible_panel.tres" id="3_8s11q"]
-[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/scripts/capture_focus.gd" id="3_j5dnp"]
+[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://ui/ui_utils/legacy_capture_focus.gd" id="3_j5dnp"]
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3
@@ -14,8 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qfpun")
-options_packed_scene = ExtResource("2_s4nj1")
-main_menu_scene = "res://misc/maacks_examples/scenes/menus/main_menu/main_menu_with_animations.tscn"
+options_packed_scene = ExtResource("2_8s11q")
+main_menu_scene = "uid://c66xg4go6ct4v"
 pauses_game = true
 
 [node name="BackgroundColor" type="ColorRect" parent="."]

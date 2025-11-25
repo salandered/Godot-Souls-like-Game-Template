@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxj0ijmfsrojl"]
 
-[ext_resource type="Script" uid="uid://dl3boenu66g5j" path="res://ui/options_menu/m_master_options_menu.gd" id="1_c486d"]
-[ext_resource type="PackedScene" uid="uid://tsu1vthvgkdg" path="res://ui/options_menu/tabs/M2_input_options_menu.tscn" id="2_3x8ag"]
-[ext_resource type="PackedScene" uid="uid://duapx760ehen" path="res://ui/options_menu/tabs/m_audio_options_menu.tscn" id="5_43u58"]
-[ext_resource type="PackedScene" uid="uid://bue7jd1r7ju2f" path="res://ui/options_menu/tabs/m_video_options.tscn" id="6_mtlev"]
-[ext_resource type="PackedScene" uid="uid://c4r1plptelikw" path="res://ui/options_menu/tabs/m_game_options_menu.tscn" id="7_68ubo"]
+[ext_resource type="Script" uid="uid://dl3boenu66g5j" path="res://ui/options_menu/master/m_master_options_menu.gd" id="1_c486d"]
+[ext_resource type="PackedScene" uid="uid://tsu1vthvgkdg" path="res://ui/options_menu/tabs/controls/M2_input_options_menu.tscn" id="2_3x8ag"]
+[ext_resource type="PackedScene" uid="uid://duapx760ehen" path="res://ui/options_menu/tabs/audio/m_audio_options_menu.tscn" id="5_43u58"]
+[ext_resource type="PackedScene" uid="uid://bue7jd1r7ju2f" path="res://ui/options_menu/tabs/video/m_video_options.tscn" id="6_mtlev"]
+[ext_resource type="PackedScene" uid="uid://c4r1plptelikw" path="res://ui/options_menu/tabs/game/m_game_options_menu.tscn" id="7_68ubo"]
 
 [node name="M_OptionsMenu" type="Control"]
 layout_mode = 3
@@ -30,6 +30,7 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 20
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 tab_alignment = 1
 current_tab = 2

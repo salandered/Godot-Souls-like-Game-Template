@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://duapx760ehen"]
+
+[ext_resource type="Script" uid="uid://dc7or3pae6yi3" path="res://ui/options_menu/tabs/audio/m_audio_options_menu.gd" id="2_13yae"]
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://ui/ui_utils/options_nodes/m_slider_option_control.tscn" id="2_bgi0i"]
+[ext_resource type="PackedScene" uid="uid://dm0tmwxfcv6e4" path="res://ui/options_menu/tabs/audio/m_audio_input_option_control.tscn" id="3_bgi0i"]
+[ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="3_n0k5e"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/themes/separator/h_separator.tscn" id="4_7lrho"]
+[ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://ui/ui_utils/options_nodes/m_toggle_option_control.tscn" id="4_ghcf0"]
+
+[node name="M_Audio" type="MarginContainer"]
+custom_minimum_size = Vector2(305, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 24
+script = ExtResource("2_13yae")
+audio_control_scene = ExtResource("2_bgi0i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+alignment = 1
+script = ExtResource("3_n0k5e")
+search_depth = 3
+
+[node name="HSeparator" parent="VBoxContainer" instance=ExtResource("4_7lrho")]
+layout_mode = 2
+
+[node name="AudioControlContainer" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MuteControl" parent="VBoxContainer" instance=ExtResource("4_ghcf0")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "Mute"
+option_section = 2
+key = "Mute"
+section = "AudioSettings"
+
+[node name="AudioInputOptionControl" parent="VBoxContainer" instance=ExtResource("3_bgi0i")]
+layout_mode = 2
+default_value = "DEFAULT"
+
+[node name="HSeparator2" parent="VBoxContainer" instance=ExtResource("4_7lrho")]
+layout_mode = 2
+
+[connection signal="setting_changed" from="VBoxContainer/MuteControl" to="." method="_on_mute_control_setting_changed"]
