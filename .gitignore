@@ -40,16 +40,8 @@ misc/
 ideas/
 
 
-# Almost all addons
-# addons/
-# # blender_godot_pipeline is ok
-addons/debug_draw_3d
-addons/favorite_scenes
-addons/gut
-addons/InstanceDock
-addons/extra_snaps
-# # addons/maaacks_game_template - accidently commited already
-# # pixpal_tools is ok i guess (made edits)
+# addons
+addons/
 
 
 # BIG ASSETS
