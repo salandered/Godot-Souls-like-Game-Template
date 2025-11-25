@@ -80,7 +80,7 @@ func update(delta: float, requested_stamina_rate: float = 0.0):
 func _change_stamina(amount: float) -> void:
 	if amount == 0.0: return
 	if __god_mode:
-		if abs(amount) > 1: __log_feel("stamina", pp.s("not changed: god mode"))
+		if abs(amount) > 1: __log_("stamina", pp.s("not changed: god mode"))
 		return
 	
 	if IN_ZERO_DRAIN: return
@@ -93,15 +93,15 @@ func _change_stamina(amount: float) -> void:
 
 	if is_in_fatigue() and _current_stamina > FATIGUE_THRESHOLD:
 		statuses[FATIGUE_STATUS] = false
-		__log_feel("stamina", pp.s("erase status", FATIGUE_STATUS))
+		__log_("stamina", pp.s("erase status", FATIGUE_STATUS))
 
-	if abs(amount) > 1: __log_feel("stamina", pp.s("changed", amount))
+	if abs(amount) > 1: __log_("stamina", pp.s("changed", amount))
 
 
 func change_stamina_regen_rate(amount: float) -> void:
 	var _new_stamina_regen_rate := stamina_regen_rate + amount
 	stamina_regen_rate = clampf(_new_stamina_regen_rate, 0.0, 100)
-	__log_feel("stamina regen rate", pp.s("changed", amount))
+	__log_("stamina regen rate", pp.s("changed", amount))
 
 
 func is_in_fatigue() -> bool:
@@ -156,7 +156,7 @@ func _on_zero_drain_ended() -> void:
 	IN_ZERO_DRAIN = false
 	if _current_stamina <= 0.0:
 		_current_stamina += 0.5 # give it a little bump just to be safe
-	__log_feel("stamina", "zero_drain ended, stamina bumped to" + str(_current_stamina))
+	__log_("stamina", "zero_drain ended, stamina bumped to" + str(_current_stamina))
 
 
 ## if zero reached, we spent some time ignoring changes
@@ -167,7 +167,7 @@ func _trigger_reach_zero() -> void:
 	statuses[FATIGUE_STATUS] = true
 	zero_drain_timer.initialise(ZERO_DRAIN_TIME, _on_zero_drain_ended)
 	IN_ZERO_DRAIN = true
-	__log_feel("stamina", pp.s("set status", FATIGUE_STATUS, "and triggered zero_drain_timer with", ZERO_DRAIN_TIME))
+	__log_("stamina", pp.s("set status", FATIGUE_STATUS, "and triggered zero_drain_timer with", ZERO_DRAIN_TIME))
 
 # endregion
 
@@ -175,7 +175,7 @@ func _trigger_reach_zero() -> void:
 func __log_feel_check_stamina(prefix, amount, decision, ...context: Array):
 	if decision == true: return
 	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp.dict_(statuses, false, true))
-	__log_feel(prefix, _msg, " ", pp.list_(context) + "=>", decision)
+	__log_(prefix, _msg, " ", pp.list_(context) + "=>", decision)
 
 
 # region: DEV

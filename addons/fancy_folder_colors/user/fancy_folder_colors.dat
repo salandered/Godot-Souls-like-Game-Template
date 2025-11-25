@@ -1,0 +1,6 @@
+[DAT]
+
+PTH={
+"res://-assets-/x_icons/copper/": Color(0.6289846, 0.42397243, 0.30621925, 1),
+"res://-assets-/x_icons/white/": Color(1, 1, 1, 1)
+}

@@ -82,9 +82,9 @@ static func array_of_base_weapon(array: Array) -> Array[BaseWeapon]:
 	list_casted.assign(_safe_validate_class(array, BaseWeapon, "BaseWeapon"))
 	return list_casted
 
-static func array_of_camera_target(array: Array) -> Array[CameraTarget]:
-	var list_casted: Array[CameraTarget] = []
-	list_casted.assign(_safe_validate_class(array, CameraTarget, "CameraTarget"))
+static func array_of_enemy_camera_target(array: Array) -> Array[EnemyCameraTarget]:
+	var list_casted: Array[EnemyCameraTarget] = []
+	list_casted.assign(_safe_validate_class(array, EnemyCameraTarget, "EnemyCameraTarget"))
 	return list_casted
 
 

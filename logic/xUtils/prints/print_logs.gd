@@ -257,7 +257,10 @@ static func _generic(
 		level: String,
 		freq: int = 1
 	) -> void:
-	if not print_data.PRINT_BOOL and level != LogL.FORCE_PRINT: return
+	if print_data == null or print_data.print_bool == null:
+		# prevents problems on project start up. 
+		return
+	if not print_data.print_bool and level != LogL.FORCE_PRINT: return
 	if not _is_freq_satisfied(1, freq): return
 
 	var log_data := PrintData.LogData.new(add_prefix_, str(text), info_indents, level)

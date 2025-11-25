@@ -72,7 +72,7 @@ var initial_rotation: Quaternion
 # 	var _final_rotation = get_player().quaternion.angle_to(initial_rotation)
 # 	var _error_angle = curr_turn.accum_rotation - curr_turn.target_angle
 # 	prints("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
-# 		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))
+# 		" EnemyCameraTarget:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))
 
 
 ## run beh would be 

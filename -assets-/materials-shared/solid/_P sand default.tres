@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b18r4od72w430"]
+
+[resource]
+resource_name = "_P sand default"
+cull_mode = 2
+albedo_color = Color(0.4874816, 0.42345303, 0.34164992, 1)
+roughness = 0.7516129

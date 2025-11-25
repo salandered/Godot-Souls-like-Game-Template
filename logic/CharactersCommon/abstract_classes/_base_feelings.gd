@@ -18,7 +18,7 @@ var _current_health: float
 
 func _ready() -> void:
 	_current_health = get_max_health()
-	__log_feel("health", "curr health initted with max health", _current_health, get_max_health())
+	__log_("health", "curr health initted with max health", _current_health, get_max_health())
 	statuses = {}
 	initialise()
 
@@ -55,7 +55,7 @@ func get_curr_health() -> float:
 func _change_health(amount: float) -> void:
 	if amount == 0.0: return
 	if __god_mode:
-		if abs(amount) > 1: __log_feel("health", pp.s("not changed: god mode"))
+		if abs(amount) > 1: __log_("health", pp.s("not changed: god mode"))
 		return
 
 	var _new_health := _current_health + amount
@@ -63,7 +63,7 @@ func _change_health(amount: float) -> void:
 	
 	# TODO if _current_health <= 0.0:
 	
-	if abs(amount) > 1: __log_feel("health", pp.s("changed", amount))
+	if abs(amount) > 1: __log_("health", pp.s("changed", amount))
 
 
 func check_status(status_name: String) -> bool:
@@ -76,7 +76,7 @@ func check_status(status_name: String) -> bool:
 
 # region __LOGS
 
-func __log_feel(_prefix: String, ...parts: Array):
+func __log_(_prefix: String, ...parts: Array):
 	print_.feel(is_player(), _prefix, pp.list_(parts))
 
 func __log_warn(what: String, where: String, fallback: String, ...context: Array):

@@ -123,7 +123,7 @@ func _check_camera_penetration(camera_pos: Vector3) -> bool:
 	return results.size() > 0
 
 func _resolve_penetration(from: Vector3, camera_pos: Vector3, direction: Vector3) -> Vector3:
-	var space_state: = fc.camera.get_world_3d().direct_space_state
+	var space_state := fc.camera.get_world_3d().direct_space_state
 	
 	# cast a ray to find a safe position
 	var query := PhysicsRayQueryParameters3D.create(from, camera_pos)

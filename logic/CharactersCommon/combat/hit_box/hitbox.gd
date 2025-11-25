@@ -82,6 +82,7 @@ func _physics_process(delta):
 # region: shape logic
 
 
+## not nullable
 func get_collision_shape() -> CollisionShape3D:
 	return _my_coll_shapes[0]
 
@@ -89,26 +90,12 @@ func get_collision_shape() -> CollisionShape3D:
 ## provide capsule size mult values
 func shrink_hitbox(radius_mult: float = 0.7, height_mult: float = 0.6):
 	var coll_shape := get_collision_shape()
-	var shape = coll_shape.shape as CapsuleShape3D
-	shape.radius = _original_capsule_shape_radius * radius_mult
-	shape.height = _original_capsule_shape_height * height_mult
-	__log_("coll capsusle shape shrinked to",
-		pp.list_([shape.radius, shape.height]),
-		"from",
-		pp.list_([_original_capsule_shape_radius, _original_capsule_shape_height]))
+	CollShapeTranform.shrink_coll_shape_capsule_size(coll_shape, radius_mult, height_mult)
 
 
 func restore_hitbox():
 	var coll_shape := get_collision_shape()
-	var shape = coll_shape.shape as CapsuleShape3D
-
-	__log_("coll caps shape restored to orig values",
-		pp.list_([_original_capsule_shape_radius, _original_capsule_shape_height]),
-		"from",
-		pp.list_([shape.radius, shape.height]))
-
-	shape.radius = _original_capsule_shape_radius
-	shape.height = _original_capsule_shape_height
+	CollShapeTranform.set_coll_shape_capsule_size(coll_shape, _original_capsule_shape_radius, _original_capsule_shape_height)
 
 # endregion
 

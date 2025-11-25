@@ -23,7 +23,7 @@ func switch_from_free(found_target: Node):
 	
 	var cam_minus_mount := fc.camera.global_position - fc.mount.global_position
 	var err := (cam_minus_mount - lock_offset).length()
-	# print_.fancy_cam("[~~ lock: err_to_offset_on_entry=", err)
+	# __log_("[~~ lock: err_to_offset_on_entry=", err)
 	
 	# --- Anchor the blend ---
 	# Store the initial conditions. The blend will always be from this
@@ -37,11 +37,11 @@ func switch_from_free(found_target: Node):
 
 	blend_timer.initialise(BLEND_DURATION)
 	
-	# print_.fancy_cam(state_name + " switch post", pp.s(fc.__dbg_main_info(), " target=", str(target)))
+	# __log_("switch post", fc.__dbg_main_info(), "target=", target)
 
 
 func update(delta: float) -> void:
-	# print_.fancy_cam(state_name + " UPD", fc.__dbg_main_info())
+	# __log_("UPD", fc.__dbg_main_info())
 	# move the anchor points
 	_move_focus_point()
 	_move_camera_mount()
@@ -57,7 +57,7 @@ func update(delta: float) -> void:
 	# TODO: not only distance, but line of sight? 
 	# 		what if enemy falls, we are doomed to look at floor
 
-	# print_.fancy_cam(state_name + " UPD post", pp.s(fc.__Cvec(), fc.__CM(), fc.__CF()))
+	# __log_("UPD post", fc.__Cvec(), fc.__CM(), fc.__CF())
 
 
 func _move_focus_point() -> void:
@@ -81,8 +81,8 @@ func _rotate_offset_locked(delta: float) -> void:
 
 	var desired_yaw := desired_dir_xz.angle()
 	var current_yaw := Vector2(_off_before.x, _off_before.z).angle()
-	# print_.fancy_cam(state_name, pp.s("yaw_cur", rad_to_deg(current_yaw), "yaw_des", rad_to_deg(desired_yaw), 
-		# "delta_wrapped", rad_to_deg(wrapf(desired_yaw - current_yaw, -PI, PI)), "len_h_start", blend_start_hor_len))
+	# __log_("yaw_cur", rad_to_deg(current_yaw), "yaw_des", rad_to_deg(desired_yaw), 
+		# "delta_wrapped", rad_to_deg(wrapf(desired_yaw - current_yaw, -PI, PI)), "len_h_start", blend_start_hor_len)
 
 	if not blend_timer.is_complete():
 		# --- SMOOTH BLEND (YAW INTERPOLATION) ---
@@ -101,7 +101,7 @@ func _rotate_offset_locked(delta: float) -> void:
 		var final_xz := Vector2.from_angle(blended_yaw_rad) * blend_start_hor_len
 		lock_offset.x = final_xz.x
 		lock_offset.z = final_xz.y
-		# print_.fancy_cam("~~ LOCK BLEND FINISHED")
+		# __log_("~~ LOCK BLEND FINISHED")
 	else:
 		# --- RESPONSIVE LOCK (DIRECT ASSIGNMENT) ---
 		# After blending, snap directly to the desired orientation for control
@@ -119,7 +119,7 @@ func _rotate_offset_locked(delta: float) -> void:
 	# var nest_mount_vec_len := (fc.nest.global_position - fc.mount.global_position).length()
 	# var delta_off_angle: float = pp.pp_v3_angle_deg(_off_before, lock_offset, false)
 	# var arc_len := snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
-	# print_.fancy_cam("[~~LOCK UPD rot ", u.fr(), "]",
+	# __log_("[~~LOCK UPD rot ", u.fr(), "]",
 	# 	" angle_delta_deg=", str(delta_off_angle),
 	# 	" arc_len=", str(arc_len),
 	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", pp.round_01(lock_offset.length()),

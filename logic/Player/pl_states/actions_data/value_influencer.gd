@@ -73,5 +73,7 @@ static func ease_in_out(x: float) -> float:
 	return 0.5 * (1.0 - cos(x * PI))
 
 
+var LOG_B: bool = false
+
 func __log_(...parts: Array):
-	print_.prefix("ValueInfluencer " + _influencer_name, pp.list_(parts))
+	if LOG_B: print_.prefix("ValueInfluencer " + _influencer_name, pp.list_(parts))

@@ -18,7 +18,11 @@ static func s(...parts: Array) -> String:
 	var r = ""
 	for part in parts:
 		if part is float:
-			r += str(pp.round_01(part)) + " "
+			r += str(pp.round_001(part)) + " "
+		elif part is Vector3:
+			r += pp.vec3(part)
+		elif part is Vector2:
+			r += pp.vec2(part)
 		else:
 			r += str(part) + " "
 	return r

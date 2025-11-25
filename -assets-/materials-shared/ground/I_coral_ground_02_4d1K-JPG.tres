@@ -7,6 +7,7 @@
 [resource]
 resource_name = "I_coral_ground_02_4d1K-JPG"
 cull_mode = 2
+albedo_color = Color(0.7240258, 0.7240258, 0.7240258, 1)
 albedo_texture = ExtResource("1_e2mrc")
 metallic_texture = ExtResource("2_apyrf")
 metallic_texture_channel = 2

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds5h558epl61c"]
+
+[ext_resource type="PackedScene" uid="uid://dli33k4rnw14" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger.glb" id="1_r4jo3"]
+
+[node name="RIG" instance=ExtResource("1_r4jo3")]

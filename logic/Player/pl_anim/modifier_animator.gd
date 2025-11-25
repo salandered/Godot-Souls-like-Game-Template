@@ -218,8 +218,6 @@ func __log_state() -> String:
 	return msg
 
 
-# Add this function to your modifier_animator.gd script
-
 func __log_blend_state() -> String:
 	var anim_names := []
 	var blend_times := []

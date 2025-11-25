@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://bco760cyuo8em"]
 
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/materials-shared/_images/legacy/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
-[ext_resource type="PackedScene" uid="uid://b8sj75wbb08k4" path="res://logic/Locations/lights/FlickerOmni.tscn" id="2_dnvo4"]
+[ext_resource type="PackedScene" uid="uid://dlw2fiyg325uk" path="res://logic/Locations/lights/FlickerOmni.tscn" id="2_dnvo4"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="2_ifnij"]
 [ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level/level.gd" id="5_j4sqn"]
 [ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/materials-shared/simple/texture_08.png" id="5_ol10w"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://logic/Player/Princess.tscn" id="9_ol10w"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/materials-shared/_images/legacy/Stone Dirt Wall 02_diffuse.png" id="9_yhj1i"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Locations/_dev/simple_target/SimpleTarget.tscn" id="10_2mukc"]
-[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/pause_menu_controller.gd" id="10_ifnij"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/m_pause_menu_controller.gd" id="10_ifnij"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a1yn"]
 albedo_color = Color(0.21579322, 0.17943612, 0.15248129, 1)

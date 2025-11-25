@@ -20,6 +20,8 @@
 		"**/*.png.import": true,
 		"**/*.jpg.import": true,
 		"**/*.svg.import": true,
+		"**/*.ttf.import": true,
+		"**/*.JPG.import": true,
 		"**/*.tmp": true,
 		"**/*.TMP": true,
 	},

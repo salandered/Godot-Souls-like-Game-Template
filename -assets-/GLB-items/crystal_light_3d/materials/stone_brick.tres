@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://j3220y8v4j13"]
+
+[ext_resource type="Texture2D" uid="uid://3ydmt5xu2yal" path="res://screens/light_3d/crystal_light_3d/materials/stone_brick_wall_001_diff_1k.jpg" id="1_pt01r"]
+[ext_resource type="Texture2D" uid="uid://b0b4at5ohtm53" path="res://screens/light_3d/crystal_light_3d/materials/stone_brick_wall_001_nor_dx_1k.jpg" id="2_o2rp6"]
+
+[resource]
+albedo_texture = ExtResource("1_pt01r")
+roughness = 0.8
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = ExtResource("2_o2rp6")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true

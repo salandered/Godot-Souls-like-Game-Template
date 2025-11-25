@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfjl3frt8sa2u"
+uid="uid://yf7rxq8sjm3w"
 path.s3tc="res://.godot/imported/pl-skeleton-2_standard top N.png-73d1b664e49bba2f634d8fcc92a398a3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -30,7 +30,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_standard top N.png"
+roughness/src_normal="res://-assets-/GLB-char/pl-skeleton-2_standard top N.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

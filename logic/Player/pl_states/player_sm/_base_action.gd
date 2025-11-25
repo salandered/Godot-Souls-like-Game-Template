@@ -241,7 +241,7 @@ func tracks_input_vector() -> bool:
 ## if no _speed_extra_X specified, will be 0.0 (ignored)
 func calculate_extra_root_speed(_speed_extra_Z: float, _speed_extra_X: float = 0.0) -> Vector3:
 	var _start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
-	var _final_extra_speed_Z = pm().calculate_extra_root_speed_Z(anim, _start_time_offset, _speed_extra_Z, true)
+	var _final_extra_speed_Z = pm().calculate_extra_root_speed_Z(anim, _start_time_offset, _speed_extra_Z, false)
 	var _final_extra_speed_X = _speed_extra_X
 	var result = Vector3(_final_extra_speed_X, 0, _final_extra_speed_Z)
 

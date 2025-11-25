@@ -96,8 +96,6 @@ func update(input_: InputPackage, delta: float):
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
 
-
-
 ## USED FOR ENEMY PROJECTS
 # region
 

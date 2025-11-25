@@ -17,7 +17,8 @@ class_name Collision
 ##    > Area
 ## WEAPON_AREA - hurt boxes of weapons. 
 ##    > Area
-## 
+## DEBRIS_COL - inert objects, only collide with environment
+##    > can be set to dead CharacterBody collider or something
 ## NOTE: WHERE TO ASSIGN 
 ##       Priority is to assign according layers/masks in _ready. 
 ##		 Also you can batch assign everything in root nodes using get_descendants. 
@@ -49,6 +50,7 @@ enum Layers {
 	WEAPON_AREA = 1 << 4, # bit 4 (damage-dealing)
 	ITEM_COL = 1 << 5, # bit 5
 	PROP_COL = 1 << 6, # bit 6
+	DEBRIS_COL = 1 << 7, # bit 7 -
 }
 
 enum Masks {
@@ -65,7 +67,8 @@ enum Masks {
 	ITEM_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ITEM_COL,
 	# currently checks for weapon or body hit
 	PROP_COL_MASK = Layers.WEAPON_AREA | Layers.HITBOX_AREA,
-
+	DEBRIS_COL_MASK = Layers.ENVIRONMENT_COL,
+	
 	ALL_CHARACTERS = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL,
 
 	_ZERO_MASK = 0

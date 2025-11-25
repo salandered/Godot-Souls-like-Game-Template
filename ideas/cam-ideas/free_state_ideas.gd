@@ -94,7 +94,7 @@ func _move_camera_mount_and_nest(delta: float) -> void:
 	# Used to be: fc.nest.global_position = fc.mount.global_position + offset
 
 func _update_current_length(delta: float) -> void:
-	# Cast from mount toward the ideal (default) length and compute allowed length.
+	# TypeCast from mount toward the ideal (default) length and compute allowed length.
 	_current_len = lerp(_current_len, _default_len, 0.5)
 
 # region: old docs

@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ucaq20d1whqv"]
+
+[ext_resource type="Texture2D" uid="uid://2btvo311vect" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger_Leather033A_4d1K_Color.jpg" id="1_y2k6g"]
+[ext_resource type="Texture2D" uid="uid://cyflmfqmal740" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger_Leather033A_4d1K_Roughness.png" id="2_d18c2"]
+[ext_resource type="Texture2D" uid="uid://dq0x8nd6yxkne" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger_Leather033A_4d1K_NormalGL.jpg" id="3_7swqp"]
+
+[resource]
+resource_name = "I_Leather033A_4d1K-JPG"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_y2k6g")
+metallic_texture = ExtResource("2_d18c2")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_d18c2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_7swqp")

@@ -119,3 +119,8 @@ static func base_ph_composite_states_with_depth(node: Node) -> Array[Descendant]
 
 static func base_ph_leaf_states(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BasePHELeaf)
+
+
+static func enemy_camera_targets(node: Node) -> Array[EnemyCameraTarget]:
+	var r = _get_descendants_filtered(node, func(n): return n is EnemyCameraTarget)
+	return TypeCast.array_of_enemy_camera_target(r)

@@ -16,13 +16,13 @@ class LogData:
 
 
 class PrintInstance:
-	var PRINT_BOOL: bool
+	var print_bool: bool
 	var const_prefix: String
 	var const_indent: int
 	var log_func: Callable
 
-	func _init(PRINT_BOOL_: bool, const_prefix_: String, const_indent_: int, log_func_: Callable) -> void:
-		self.PRINT_BOOL = PRINT_BOOL_
+	func _init(print_bool_: bool, const_prefix_: String, const_indent_: int, log_func_: Callable) -> void:
+		self.print_bool = print_bool_
 		self.const_prefix = const_prefix_
 		self.const_indent = const_indent_
 		self.log_func = log_func_

@@ -43,6 +43,8 @@ const TO_RUN = "to_run"
 const TO_IDLE = "to_idle"
 const FROM_DODGE = "FROM_DODGE"
 
+# enemy death
+const DEATH_SCATTER = "death_scatter"
 
 ## fall/stand-up
 const HALF_STAND_UP = "HALF_STAND_UP"

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://biiy4jbbo0ioo"]
+
+[ext_resource type="Texture2D" uid="uid://8pbbqjcgj67m" path="res://common/3d/assets_3d/textures/texture_atlas.png" id="1_aslh3"]
+
+[resource]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_aslh3")
+roughness = 0.3

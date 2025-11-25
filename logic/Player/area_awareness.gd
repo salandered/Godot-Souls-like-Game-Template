@@ -136,16 +136,16 @@ func get_floor_distance() -> float:
 	return Constants.BIG_MEANINGLESS_NUMBER
 
 
-func find_target() -> CameraTarget:
+func find_target() -> EnemyCameraTarget:
 	var _all_targets = get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
 	for t in _all_targets:
-		if not t is CameraTarget:
-			print_.warn(true, "TARGETABLE group for not CameraTarget node is not supported!", "find_target", "return null", t)
+		if not t is EnemyCameraTarget:
+			print_.warn(true, "TARGETABLE group for not EnemyCameraTarget node is not supported!", "find_target", "return null", t)
 			return null
 
-	var all_targets := TypeCast.array_of_camera_target(_all_targets)
+	var all_targets := TypeCast.array_of_enemy_camera_target(_all_targets)
 	# print_.aware_target("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
-	var candidates: Array[CameraTarget] = []
+	var candidates: Array[EnemyCameraTarget] = []
 	for target in all_targets:
 		if _is_good_candidate(target):
 			candidates.append(target)
@@ -164,7 +164,10 @@ func camera_focus_further_than_squared(node: Node3D, distance: float) -> bool:
 	return camera_focus_pos.distance_squared_to(node.global_position) > distance
 
 
-func _is_good_candidate(target: Node3D) -> bool:
+func _is_good_candidate(target: EnemyCameraTarget) -> bool:
+	if not target.is_active():
+		return false
+
 	# TODO: consider raycast from the cam or pl to the target to ensure there's no obstacle
 	var half_fov := deg_to_rad(30) # narrows to ±30°
 	var min_dot := cos(half_fov)
@@ -190,7 +193,7 @@ func _is_good_candidate(target: Node3D) -> bool:
 	return true
 
 
-func _sort_targets_by_player_distance(targets: Array[CameraTarget]) -> void:
+func _sort_targets_by_player_distance(targets: Array[EnemyCameraTarget]) -> void:
 	targets.sort_custom(
 			func(a, b): \
 				return a.global_position.distance_squared_to(player.global_position) \

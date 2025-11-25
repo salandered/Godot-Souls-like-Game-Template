@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc030ubgkaf18"]
+
+[ext_resource type="Script" uid="uid://sra67e40jd6f" path="res://logic/Player/fancy-camera/camera_target/enemy_camera_target.gd" id="1_mxpn8"]
+[ext_resource type="PackedScene" uid="uid://by0bjgl0wv4ry" path="res://logic/Locations/_dev/primitives/CSGStarLike.tscn" id="2_tkwcu"]
+
+[node name="Target" type="Node3D"]
+script = ExtResource("1_mxpn8")
+
+[node name="LookAt" type="Node3D" parent="."]
+
+[node name="CSGMarker" parent="LookAt" instance=ExtResource("2_tkwcu")]
+
+[node name="TargetGlow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3727, 0)
+visible = false
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TargetGlow"]
+transform = Transform3D(0.457915, 0, 0, 0, 0.457915, 0, 0, 0, 0.457915, 0, -0.0103282, 0)
+visible = false

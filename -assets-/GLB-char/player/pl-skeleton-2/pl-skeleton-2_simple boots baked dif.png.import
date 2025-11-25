@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu2mdgyngoo1b"
-path.s3tc="res://.godot/imported/pl-skeleton-2_simple boots baked dif.png-e97956922c18d60cfd64b114f3685f4c.s3tc.ctex"
+uid="uid://dg5he6uub28ac"
+path.s3tc="res://.godot/imported/pl-skeleton-2_simple boots baked dif.png-3e15a65dd20fd739cc7c208d28f6891d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_simple boots baked dif.png"
-dest_files=["res://.godot/imported/pl-skeleton-2_simple boots baked dif.png-e97956922c18d60cfd64b114f3685f4c.s3tc.ctex"]
+source_file="res://-assets-/GLB-char/player/pl-skeleton-2_simple boots baked dif.png"
+dest_files=["res://.godot/imported/pl-skeleton-2_simple boots baked dif.png-3e15a65dd20fd739cc7c208d28f6891d.s3tc.ctex"]
 
 [params]
 

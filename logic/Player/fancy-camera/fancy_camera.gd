@@ -78,9 +78,7 @@ var SPRING_ARM_COLLISION_MASK := 1 # to do: use Collision
 
 
 ## not nullable
-## can be CameraTarget if locked or Node3D if free (nest)
-## TODO: and this is bad! fragile code with lots of type checks
-var locked_target: Node3D
+var locked_target: BaseCameraTarget
 
 var accumulated_mouse_delta := Vector2.ZERO
 
@@ -90,11 +88,6 @@ var LOCKED_STATE_NAME := "locked_state"
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	__csg_objects = get_descendants.csg_primitives(self)
-
-	__toggle_camera_visuals()
-	
 	initialise()
 
 
@@ -135,11 +128,25 @@ func initialise() -> void:
 	camera_movement._default_len = initial_offset.length()
 	camera_movement._current_len = initial_offset.length()
 
-	__dev_initialise()
 	
 	assert(current_state)
 	assert(locked_target)
-	print_.fancy_cam("", "Fancy Camera Initialisation ended." + " Initial_offset is " + __free_off())
+	
+	__dev_initialise()
+	
+	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
+
+
+func is_locked_state():
+	return current_state.state_name == LOCKED_STATE_NAME
+
+
+func is_camera_locked_to_target() -> bool:
+	return is_locked_state()
+
+
+func is_free_state():
+	return current_state.state_name == FREE_STATE_NAME
 
 
 func _process(delta: float) -> void:
@@ -164,51 +171,41 @@ func _process(delta: float) -> void:
 
 
 func _consider_switching_state(input_: InputPackage):
-	if current_state.state_name == LOCKED_STATE_NAME:
-		# todo: locked_target is CameraTarget and in locked state - atomic operation
-		# TODO: proper system of checking that target exists
-		if not is_instance_valid(locked_target) or locked_target.is_about_to_die():
-			locked_target = nest
-			current_state = free_state
-			free_state.switch_from_locked()
-			prints("~~~~~LOCKED -> FREE", locked_target, "was freed!")
-			return
-	if input_.target_lock.no_tap():
-		return
-
-
 	match current_state.state_name:
-		FREE_STATE_NAME when input_.target_lock.tap_or_double_tap():
-			var found_target := player.area_awareness.find_target()
-			if found_target:
-				print_.fancy_cam("FREE -> LOCKED ", __Cvec() + __free_off() + " target=" + str(found_target))
+		FREE_STATE_NAME:
+			if input_.target_lock.no_tap():
+				return
+			if input_.target_lock.tap_or_double_tap():
+				var found_target := player.area_awareness.find_target()
+				if found_target:
+					_switch_locked_from_free(found_target)
+				else:
+					__log_("", em.gray_x, "LOCK NOT (no target found)")
+		LOCKED_STATE_NAME:
+			if not locked_target.is_active():
+				_switch_free_from_locked("target not active!")
+			if input_.target_lock.no_tap():
+				return
+			if input_.target_lock.tap:
+				_switch_free_from_locked("input_.target_lock.tap")
+		_:
+			__log_warn(true, "unknown current state!", "", "", current_state.state_name)
+
+
+func _switch_free_from_locked(reason: String = ""):
+	__log_("LOCKED -> FREE", "reason", reason)
+	locked_target = nest
+	current_state = free_state
+	free_state.switch_from_locked()
+
+
+func _switch_locked_from_free(found_target: EnemyCameraTarget):
+	__log_("FREE -> LOCKED", __Cvec(), __free_off(), "target=", found_target.pp_name())
 				
-				locked_target = found_target
-				current_state = locked_state
-				
-				locked_state.switch_from_free(locked_target)
-			else:
-				print_.fancy_cam("", em.gray_x + "LOCK NOT (no target found)")
-		LOCKED_STATE_NAME when input_.target_lock.tap:
-			print_.fancy_cam("LOCKED -> FREE", "")
-			locked_target = nest
-			current_state = free_state
-			free_state.switch_from_locked()
-
-func is_locked_state():
-	return current_state.state_name == LOCKED_STATE_NAME
-
-
-func is_camera_locked_to_target() -> bool:
-	if current_state.state_name == LOCKED_STATE_NAME and is_instance_valid(locked_target) and locked_target is CameraTarget:
-		return true
-	else:
-		return false
-	# return current_state.state_name == LOCKED_STATE_NAME
-
-
-func is_free_state():
-	return current_state.state_name == FREE_STATE_NAME
+	locked_target = found_target
+	current_state = locked_state
+	
+	locked_state.switch_from_free(locked_target)
 
 
 ## NOTE. This is here and not in auto loaded input_manager.gd
@@ -216,21 +213,25 @@ func is_free_state():
 ## - Camera is the only thing that needs mouse motion anyway
 ## If this changes - consider moving to that singleton.
 func _input(event):
-	if event is InputEventMouseMotion: # todo: get such data in InGatherer as well?
+	if event is InputEventMouseMotion:
 		accumulated_mouse_delta += event.relative
 
-	# dev
-	if event.is_action_released(RawAction.DEV_CAM_fov):
-		__change_fov()
-	
-	if event.is_action_pressed(RawAction.DEV_toggle_nest):
-		print_.fancy_cam("", "Toggling visibility of CSG objects for " + str(len(__csg_objects)) + " objects")
-		__dev_camera_visuals = not __dev_camera_visuals
-		__toggle_camera_visuals()
+	_dev_input(event)
 
-	if event.is_action_pressed(RawAction.DEV_CAM_cols):
-		__dev_camera_cols = not __dev_camera_cols
-		print_.fancy_cam("", "dev_camera_cols")
+
+## LOGS
+
+
+# region __LOGS
+
+func __log_(_prefix: String, ...parts: Array):
+	print_.fancy_cam(_prefix, pp.list_(parts))
+
+func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
+	print_.warn(crucial, what, where + " FancyCam", fallback, pp.list_(context))
+
+
+# endregion
 
 
 # region: DEV
@@ -242,62 +243,90 @@ var __csg_objects := []
 
 var fov_cycler: Cycler
 
+
 func __dev_initialise() -> void:
+	__csg_objects = get_descendants.csg_primitives(self)
+	__toggle_camera_visuals()
+
 	fov_cycler = Cycler.new([50, 60, 70, 80])
+
+
+func __change_fov():
+	var fov = fov_cycler.get_next()
+	print_.dev("", pp.s("changed fov to", fov))
+	camera.fov = fov
+
 
 func __toggle_camera_visuals():
 	for obj in __csg_objects:
 		obj.visible = __dev_camera_visuals
 	
 
+func _dev_input(event):
+	if event.is_action_released(RawAction.DEV_CAM_fov):
+		__change_fov()
+	
+	if event.is_action_pressed(RawAction.DEV_toggle_nest):
+		__log_("", "Toggling visibility of CSG objects for", len(__csg_objects), "objects")
+		__dev_camera_visuals = not __dev_camera_visuals
+		__toggle_camera_visuals()
+
+	if event.is_action_pressed(RawAction.DEV_CAM_cols):
+		__dev_camera_cols = not __dev_camera_cols
+		__log_("", "dev_camera_cols")
+
+
+# region: dev LOGS
+
 func __dbg_main_info() -> String:
-	var r = __Cvec() + __Mvec() + __Nvec() + __Fvec() + __free_off() + __lock_off()
+	var r = pp.s(__Cvec(), __Mvec(), __Nvec(), __Fvec(), __free_off(), __lock_off())
 	return r
 
 func __free_off() -> String:
-	var r = " free off=" + pp.vec3(free_state.free_offset) + " len=" + pp.round_01(free_state.free_offset.length())
+	var r = pp.s("free off=", free_state.free_offset, "len=", free_state.free_offset.length())
 	return r
 
 func __lock_off() -> String:
-	var r = " lock off=" + pp.vec3(locked_state.lock_offset) + " len=" + pp.round_01(locked_state.lock_offset.length())
+	var r = pp.s("lock off=", locked_state.lock_offset, "len=", locked_state.lock_offset.length())
 	return r
 
 func __Cvec() -> String:
-	return " C=" + pp.vec3(camera.global_position)
+	return pp.s("C=", pp.vec3(camera.global_position))
 
 func __Mvec() -> String:
-	return " M=" + pp.vec3(mount.global_position)
+	return pp.s("M=", pp.vec3(mount.global_position))
 
 func __Nvec() -> String:
-	return " N=" + pp.vec3(nest.global_position)
+	return pp.s("N=", pp.vec3(nest.global_position))
 
 func __Fvec() -> String:
-	return " F=" + pp.vec3(focus.global_position)
+	return pp.s("F=", pp.vec3(focus.global_position))
 
 func __CP() -> String:
-	return " C->Pl=" + pp.round_01((camera.global_position - player.camera_focus.global_position).length())
+	return pp.s("C->Pl=", (camera.global_position - player.camera_focus.global_position).length())
 
 func __CN() -> String:
-	return " C->N=" + pp.round_01((camera.global_position - nest.global_position).length())
+	return pp.s("C->N=", (camera.global_position - nest.global_position).length())
 
 func __CM() -> String:
-	return " C->M=" + pp.round_01((camera.global_position - mount.global_position).length())
+	return pp.s("C->M=", (camera.global_position - mount.global_position).length())
 
 func __CF() -> String:
-	return " C->F=" + pp.round_01((camera.global_position - focus.global_position).length())
+	return pp.s("C->F=", (camera.global_position - focus.global_position).length())
 
 func __angle_player_camera_target() -> String:
 	# Vectors from player and camera to the target, projected to XZ
-	var player_to_target := Vector2(locked_target.global_position.x - player.camera_focus.global_position.x, locked_target.global_position.z - player.camera_focus.global_position.z).normalized()
-	var camera_to_target := Vector2(locked_target.global_position.x - camera.global_position.x, locked_target.global_position.z - camera.global_position.z).normalized()
+	var player_to_target := Vector2(
+		locked_target.global_position.x - player.camera_focus.global_position.x,
+		locked_target.global_position.z - player.camera_focus.global_position.z).normalized()
+	var camera_to_target := Vector2(
+		locked_target.global_position.x - camera.global_position.x,
+		locked_target.global_position.z - camera.global_position.z).normalized()
 
 	var angle := str(rad_to_deg(player_to_target.angle_to(camera_to_target)))
 	return angle
 
-func __change_fov():
-	var fov = fov_cycler.get_next()
-	print_.dev("", pp.s("changed fov to", fov))
-	camera.fov = fov
+# endregion
 
 # endregion
 

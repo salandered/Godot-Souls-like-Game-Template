@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dl7w5h28u6d36"]
+[gd_scene load_steps=43 format=4 uid="uid://dl7w5h28u6d36"]
 
 [ext_resource type="Script" uid="uid://cpfh86vdgd0ep" path="res://logic/Player/fancy-camera/fancy_camera.gd" id="1_16fd4"]
 [ext_resource type="Script" uid="uid://bib68l3buxn3j" path="res://logic/Player/fancy-camera/camera_movement.gd" id="2_bu8o1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/Player/fancy-camera/free_state.gd" id="3_wpkwu"]
 [ext_resource type="Texture2D" uid="uid://bu2mdgyngoo1b" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_simple boots baked dif.png" id="4_bi67l"]
 [ext_resource type="Texture2D" uid="uid://d2sblhaelmjq5" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_simple boots baked N.png" id="5_f2e0f"]
+[ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/Player/fancy-camera/camera_nest.gd" id="5_sttfw"]
 [ext_resource type="Texture2D" uid="uid://dgw4hhuhcf33y" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Fabric029_2d1K-JPG_Color.jpg" id="6_bu8o1"]
 [ext_resource type="Texture2D" uid="uid://rpx6ae5mrcok" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_Fabric029_2d1K-JPG_Roughness.png" id="7_fbah8"]
 [ext_resource type="Texture2D" uid="uid://yf7rxq8sjm3w" path="res://-assets-/GLB-char/player/pl-skeleton-2/pl-skeleton-2_standard top N.png" id="8_iyxhl"]
@@ -541,6 +542,7 @@ material_override = SubResource("StandardMaterial3D_6recs")
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3441956, -2.6694846)
 visible = false
+script = ExtResource("5_sttfw")
 
 [node name="CSGSphereNest2" type="CSGSphere3D" parent="CameraNest"]
 unique_name_in_owner = true

@@ -14,7 +14,6 @@ class_name PHCharacter
 @onready var coll_collider: CollisionShape3D = %CollCollider
 @onready var _top: BasePHEState = %_Top
 @onready var visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
-@onready var camera_target: CameraTarget = %CameraTarget
 
 
 @onready var _start_position := global_transform.origin
@@ -46,10 +45,13 @@ var push_rigid_bodies_force: float = 8.0
 ##       it's very fragile, any change of node tree and it's gone
 
 func initialise() -> void:
+	super.initialise()
+
+	_initialise_coll_collder()
+
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
-	state_machine = _top
-
+	
 	combat.initialise()
 	animator_manager.initialise()
 
@@ -68,6 +70,24 @@ func initialise() -> void:
 	container.accept_states()
 
 	visuals = get_descendants.mesh_instances(visuals_root, true)
+	for v: MeshInstance3D in visuals:
+		print(v.name)
+
+	_initialise_sm()
+
+
+func _initialise_coll_collder():
+	assert(coll_collider)
+	var original_shape = coll_collider.shape
+	assert(original_shape != null, "CollisionShape3D has no shape!")
+	assert(original_shape is CapsuleShape3D, "shape is not CapsuleShape3D. Not supported")
+	
+	# Duplicate to avoid shared resource issues
+	coll_collider.shape = original_shape.duplicate()
+
+
+func _initialise_sm():
+	state_machine = _top
 
 	var _sleep_state := container.get_state_by_name(PHES.Leaf.sleep)
 	_curr_leaf = _sleep_state
@@ -118,13 +138,14 @@ func update_state_history(state_name_):
 
 
 func _process(delta):
-	if not death_raised:
-		state_machine._update(delta)
-		move_and_slide()
-		PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
+	state_machine._update(delta)
+	move_and_slide()
+	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
-		player.__dev_labels._label_phe_enemy_info(self)
-	else:
+	player.__dev_labels._label_phe_enemy_info(self)
+
+
+	if death_raised:
 		on_death_raised()
 
 func react_on_hit(hit_data: HitData) -> void:
@@ -143,51 +164,71 @@ func on_death_raised() -> void:
 	if death_raised_processed:
 		return
 	
-	coll_collider.disabled = true
 	death_raised_processed = true
+	
+	print_.prefix("camera_target.make_inactive()")
+	camera_target.make_inactive()
+	await FrameUtils.wait_process_frames(2)
+	
+	print_.prefix("trigger_death_scatter()")
+	await trigger_death_scatter(visuals)
 
-	trigger_death_scatter(visuals)
+	await FrameUtils.wait_process_frames(5)
+	print_.prefix("coll_collider.disabled = true")
 
-	# todo: it works but need proper checks for external systems to be ready for this
+
+	shrink_coll_capsule()
+
+	self.collision_layer = Collision.Layers.DEBRIS_COL
+	self.collision_mask = Collision.Masks.DEBRIS_COL_MASK
+	
+	await FrameUtils.wait_process_frames(2)
+	
+	# todo: it works but we need proper checks for external systems to be ready for this; also visuals
 	# self.queue_free()
+
+	
+func shrink_coll_capsule():
+	var capsule_shape = coll_collider.shape as CapsuleShape3D
+	var _orig_height = capsule_shape.height
+	var _height_mult = 0.1
+	var _desired_height = _orig_height * _height_mult
+
+	# Calculate offset to keep bottom at same Y
+	# Bottom moves up by half the height reduction, so compensate
+	var height_reduction = _orig_height - _desired_height
+	var offset_down = height_reduction / 2.0
+
+	coll_collider.position.y -= offset_down # Move DOWN (negative Y)
+	CollShapeTranform.shrink_coll_shape_capsule_size(coll_collider, 1.0, _height_mult)
 
 
 func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
+	print_.prefix_s("glob position of an enemy", self.global_position)
 	var rigids_container = Node3D.new()
 	rigids_container.name = "EnemyDebrisContainer"
 	get_tree().current_scene.add_child(rigids_container)
 
 	rigids_container.global_position = self.global_position
+	
 	for visual_mesh: MeshInstance3D in mesh_list:
 		if not visual_mesh.mesh: continue
+		await FrameUtils.wait_one_physics_frame()
+		var physics_config = RigidBodyCreator.PhysicsConfig.new(5.0, 1.5, 0.0, 2.5)
+		var rigid_body := RigidBodyCreator.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)
 		
-		# RIGIDBODY
-		var rigid_body = RigidBody3D.new()
-		rigids_container.add_child(rigid_body)
-		
-		# match position/rotation/scale 
-		# note: physics engines dislike scaled RigidBodies
-		rigid_body.global_transform = visual_mesh.global_transform
-		
-		# DUPLICATE VISUALS
-		var new_mesh = visual_mesh.duplicate()
-		rigid_body.add_child(new_mesh)
-		
-		# Reset transform because RB already holds the world position
-		new_mesh.transform = Transform3D.IDENTITY
-		# Detach from skeleton so it doesn't try to animate/deform
-		# new_mesh.skeleton = NodePath("")
-		
-		# COLLISIONS
-		var _convex_shape = visual_mesh.mesh.create_convex_shape(false)
-		var coll_node = CollisionShape3D.new()
-		coll_node.shape = _convex_shape
-		rigid_body.add_child(coll_node)
-		
-		#
+		if rigid_body:
+			rigids_container.add_child(rigid_body)
+			rigid_body.global_transform = visual_mesh.global_transform
+			
+			var backward = - self.transform.basis.z
+			var direction = (Vector3.UP * 0.94 + backward * 0.44).normalized()
+			var impulse_strength = randf_range(2.0, 7.0)
+			rigid_body.apply_central_impulse(direction * impulse_strength)
+	
+	for visual_mesh: MeshInstance3D in mesh_list:
 		visual_mesh.visible = false
-
-	prints("end of trigger_death_scatter")
+	print_.prefix("end of trigger_death_scatter")
 
 
 func __pp_state_history():

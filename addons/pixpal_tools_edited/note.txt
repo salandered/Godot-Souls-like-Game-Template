@@ -1,0 +1,2 @@
+- original addon: https://github.com/Flynsarmy/gd-pixpal-tools-addon
+- i edited naming, file structure, search method. nothing major

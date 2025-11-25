@@ -1,10 +1,12 @@
-extends CSGBox3D
+extends Node3D
 
 @export var label: String
-@onready var targetable_aspect: CameraTarget = $TargetableAspect
+@onready var camera_target: EnemyCameraTarget = %CameraTarget
 
 
 func _ready() -> void:
 	if not label:
 		label = str(get_path())
-	targetable_aspect.label = label
+	camera_target.label = label
+	
+	camera_target.initialise(self)

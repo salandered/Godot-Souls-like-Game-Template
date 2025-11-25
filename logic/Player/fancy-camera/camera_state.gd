@@ -32,7 +32,7 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 	var axis_len := vertical_axis.length()
 	
 	if axis_len < Constants.EPSILON_5: # axis degenerate near straight-up/down — ignoring this frame
-		print_.fancy_cam("", em.mb_warn + "vert mouse move skip frame")
+		__log_(em.mb_warn, "vert mouse move skip frame")
 		return offset
 
 	vertical_axis = vertical_axis / axis_len
@@ -59,7 +59,7 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 			# DANGER: seems like offset = offset.rotated is a bad practice: Rot error will be accumulating.
 			offset = offset.rotated(vertical_axis, rot_angle * scale)
 		else: # denom ~ 0 means input had ~no theta change; do nothing this frame
-			print_.fancy_cam("", "vert mouse move skip frame")
+			__log_("vert mouse move skip frame")
 	
 	# DEV
 	# var theta_after := acos(clamp(free_offset.normalized().dot(Vector3.UP), -1.0, 1.0))
@@ -88,3 +88,15 @@ func lerp_position_(from: Variant, to: Variant, weight: float) -> Vector3:
 		to_pos = to
 
 	return from_pos.lerp(to_pos, weight)
+
+
+# region __LOGS
+
+func __log_(...parts: Array):
+	fc.__log_(state_name, pp.list_(parts))
+
+func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
+	fc.__log_warn(crucial, what, where + " " + state_name, fallback, pp.list_(context))
+
+
+# endregion

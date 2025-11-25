@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://kn3mf76stt08"]
+
+[ext_resource type="Texture2D" uid="uid://c1nmdobhbfmlv" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_ImphenziaPixel-BaseColor.png" id="1_vgiyw"]
+[ext_resource type="Texture2D" uid="uid://d5vh67b87lna" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_ImphenziaPixel-Emission.png" id="2_118rf"]
+[ext_resource type="Texture2D" uid="uid://bo00sxcfww75s" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_ImphenziaPixel-Attributes.png" id="3_8nhei"]
+
+[resource]
+resource_name = "PixPalMat"
+cull_mode = 2
+albedo_texture = ExtResource("1_vgiyw")
+metallic = 1.0
+metallic_texture = ExtResource("3_8nhei")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_8nhei")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_energy_multiplier = 20.0
+emission_texture = ExtResource("2_118rf")
+texture_filter = 2

@@ -262,13 +262,13 @@ func react_on_hit(hit: HitData):
 
 
 # TODO: ...
-func react_on_spell(spell_hit: SpellHitData):
-	if curr_global_action().is_vulnerable():
-		feelings.lose_health(spell_hit.damage)
-	# if curr_global_action().is_interruptable():
-		# forced_state.try_set("staggered", 0)
-	#spell_hit.queue_free()
-	spell_hit.spell.target_contacted(_player)
+# func react_on_spell(spell_hit: SpellHitData):
+# 	if curr_global_action().is_vulnerable():
+# 		feelings.lose_health(spell_hit.damage)
+# 	# if curr_global_action().is_interruptable():
+# 		# forced_state.try_set("staggered", 0)
+# 	#spell_hit.queue_free()
+# 	spell_hit.spell.target_contacted(_player)
 
 # TODO: ...
 # Eg: every parriable weapon strike transitions into a single "parry" state on successful parry

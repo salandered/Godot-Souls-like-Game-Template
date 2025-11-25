@@ -7,7 +7,7 @@
 &"custom_texture": "res://-assets-/x_icons/unsorted/fire_ball_icon.png",
 &"scene": "res://logic/Locations/lights/FlickerFire.tscn"
 }, {
-&"custom_texture": "res://-assets-/x_icons/blue/icon_bell (2).png",
+&"custom_texture": "res://-assets-/x_icons/yellow/icon_bell.png",
 &"scene": "res://logic/Locations/lights/FlickerOmni.tscn"
 }]
 }]

@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://88lj8tl6runn" path="res://logic/CharactersCommon/animation/anim_container/AnimContainer.tscn" id="48_6ekty"]
 [ext_resource type="Script" uid="uid://dhhj88fptlapr" path="res://ideas/enemy/SimpleEnemy/se_combat.gd" id="63_wgthr"]
 [ext_resource type="PackedScene" uid="uid://jtkogl4lhvf3" path="res://logic/CharactersCommon/combat/weapon/SmithSword/SmithSword.tscn" id="78_0pryl"]
-[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/Player/fancy-camera/targetable_aspect.tscn" id="88_62ksi"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/Player/fancy-camera/camera_target/CameraTarget.tscn" id="88_62ksi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfkb8"]
 resource_name = "Material.017"

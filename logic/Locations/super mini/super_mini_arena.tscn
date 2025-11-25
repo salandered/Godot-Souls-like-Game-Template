@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://m2o3tdaa66rk"]
+[gd_scene load_steps=34 format=4 uid="uid://m2o3tdaa66rk"]
 
 [ext_resource type="Material" uid="uid://bd35ug7jd8rk4" path="res://-assets-/materials-shared/wood/dark_wooden_planks.tres" id="1_jlrm2"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/Player/Princess_2.tscn" id="2_ak6i7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/Locations/props/DarkCratePile.tscn" id="9_od67a"]
 [ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/Locations/props/DarkCrateColumn.tscn" id="10_od67a"]
 [ext_resource type="PackedScene" uid="uid://cwre14np5r5x0" path="res://-assets-/GLB-char/rings.glb" id="11_fah5c"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Locations/_dev/simple_target/SimpleTarget.tscn" id="12_a8lkk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q0bx5"]
 panorama = ExtResource("4_ak6i7")
@@ -270,6 +271,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008735657, 0.65949494, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6525927, 0.587378, 0)
 player = NodePath("../Princess")
 
+[node name="PHEnemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_q0bx5")]
+transform = Transform3D(-0.078772314, 0, 0.99689263, 0, 1, 0, -0.99689263, 0, -0.078772314, -12.618101, 0.587378, 0)
+player = NodePath("../Princess")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jlrm2")
 
@@ -415,3 +420,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.997505, 0, -20.244827)
 
 [node name="rings" parent="." instance=ExtResource("11_fah5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4912796, 0.43913752, -5.6722636)
+
+[node name="Target" parent="." instance=ExtResource("12_a8lkk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.974423, 0.56685376, 0)
+
+[node name="Target2" parent="." instance=ExtResource("12_a8lkk")]
+transform = Transform3D(0.5768459, 0, -0.816853, 0, 1, 0, 0.816853, 0, 0.5768459, 3.974423, 1.4165566, -6.6960936)
+
+[node name="Target3" parent="." instance=ExtResource("12_a8lkk")]
+transform = Transform3D(0.5768459, 0, -0.816853, 0, 1, 0, 0.816853, 0, 0.5768459, 11.849333, 4.6138325, -6.6960936)

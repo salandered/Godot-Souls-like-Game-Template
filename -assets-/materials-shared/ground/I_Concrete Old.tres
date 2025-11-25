@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cbwntc6i15rod"]
+
+[ext_resource type="Texture2D" uid="uid://dk13ebk24kme4" path="res://-assets-/materials-shared/lincoln_Concrete Old_diffuse.png" id="1_rplcd"]
+[ext_resource type="Texture2D" uid="uid://do1p386ap2cdd" path="res://-assets-/materials-shared/lincoln_Concrete Old_roughness.png" id="2_ga355"]
+[ext_resource type="Texture2D" uid="uid://iv567iw7dvwq" path="res://-assets-/materials-shared/lincoln_Concrete Old_normal.png" id="3_oafgr"]
+
+[resource]
+resource_name = "I_Concrete Old"
+cull_mode = 2
+albedo_texture = ExtResource("1_rplcd")
+metallic_texture = ExtResource("2_ga355")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_ga355")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_oafgr")
