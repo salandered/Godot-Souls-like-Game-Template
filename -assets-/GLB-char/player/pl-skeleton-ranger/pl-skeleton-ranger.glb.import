@@ -54,11 +54,6 @@ _subresources={
 "use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Leather033A_4d1K-JPG.tres",
 "use_external/path": "uid://ucaq20d1whqv"
 },
-"I_Leather033C_4d1K-JPG": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Leather033C_4d1K-JPG.tres",
-"use_external/path": "uid://d62qrfkplc38"
-},
 "I_Metal026_4d1K-JPG": {
 "use_external/enabled": false,
 "use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Metal026_4d1K-JPG.tres",

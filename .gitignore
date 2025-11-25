@@ -1,48 +1,46 @@
 # ================= GODOT
-
-# Godot 4+ specific ignores
 .godot/
 .nomedia
-
-# Godot-specific ignores
 .import/
 export.cfg
 export_credentials.cfg
 
+
 # ================== PYTHON
 *__pycache__/*
 
-# ================== MISC
 
-# Imported translations (automatically generated from CSV files)
-*.translation
-
+# ================== Assistants
 # claude instructions and godot docs mcp config
 .claude/
 .mcp.json
 # copilot
 .github
 
+# ================== MISC
+# Imported translations (automatically generated from CSV files)
+*.translation
+
 # Mono-specific ignores
 .mono/
 data_*/
 mono_crash.*.json
 
-# VScode
+# =================== VScode
+# NOTE: Since VS code is preferable way to work with the project, '.vscode/' must be commited!
+# Besides auto files it contains custom readme with configs/info/tips
 # .vscode/
 
-# ================= PROJECT FS
-
+# ================= PROJECT DATA
 # Project non essentials
-raw_blender/
-raw_imports/
 misc/
 ideas/
 
+# ================== ADDONS
+# Ignore full folder but not self written addons or edited third party addons
+addons/*
+!addons/pixpal_tools_edited
 
-# addons
-addons/
 
-
-# BIG ASSETS
+# ================== BIG ASSETS
 -assets-/GLB-level/

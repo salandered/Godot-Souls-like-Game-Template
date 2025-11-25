@@ -52,7 +52,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/extra_snaps/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/extra_snaps/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
 
 [file_customization]
 
