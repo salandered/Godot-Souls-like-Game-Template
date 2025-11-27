@@ -75,6 +75,18 @@ func set_overlay_anim(anim: AnimationData, overlay_config: OverlayConfig, start_
 	__custom_delta.update_last_process_time()
 	__log_(new_timing)
 
+
+## returns 0.0 if no overlay
+func get_time_left() -> float:
+	if not curr_overlay:
+		return 0.0
+
+	var total_duration = curr_overlay.timing.get_total_duration()
+	var time_spent = curr_overlay.playback.time_spent
+	var remaining = total_duration - time_spent
+
+	return max(0.0, remaining)
+
 	
 func _process_modification():
 	if not __initialised:

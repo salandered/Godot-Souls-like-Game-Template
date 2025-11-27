@@ -9,8 +9,8 @@ const result anim name
 - select Edit mode for armature
 - select hips bone and alt+P clear parent
 - pose mode, select root, add copy Rotation constraint for bone. 
-     - target = Our armature and bone Hips
-     - axis Z (only Z, no inverse). 
+	 - target = Our armature and bone Hips
+	 - axis Z (only Z, no inverse). 
 	 - World spaces for both. (no inverted axis selected)
 - bake action (root still selected): 
 	- frames = anim frames, 
@@ -19,7 +19,7 @@ const result anim name
 	- Channel: all or rotation. by default was all and it worked
 
 check: root rotates according to anim. not fast. anim works also as expected. 
-    (global anim rotation could ve been changed after alt P ). no crazy fast things
+	(global anim rotation could ve been changed after alt P ). no crazy fast things
 
 
 - parent hips to root (as they were). Edit mode, Select hips, root, Ctrl+P keep offset

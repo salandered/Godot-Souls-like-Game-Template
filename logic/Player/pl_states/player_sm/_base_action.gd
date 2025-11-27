@@ -121,6 +121,7 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 
 
 func _react_on_hit(hit: HitData):
+	var attacking = [PS.Act.attack_from_run, PS.Act.attack_from_dodge, PS.Act.sword_slash_1, PS.Act.sword_slash_2, PS.Act.sword_slash_3]
 	print_.fight(action_name, "react_on_hit called")
 	if is_vulnerable():
 		feelings.lose_health(hit.damage)
@@ -134,6 +135,7 @@ func _react_on_hit(hit: HitData):
 	
 	var actual_overlay_weight = react_cfg.overlay_weight
 	var actual_bone_mask = react_cfg.bone_mask
+	actual_overlay_weight /= 2.0 if action_name in attacking else 1.0
 
 	var overlay_config = OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),

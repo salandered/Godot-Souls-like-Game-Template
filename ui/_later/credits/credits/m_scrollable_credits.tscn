@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0jvin82yypck"]
 
 [ext_resource type="Script" uid="uid://dwa0f2vkbmcfk" path="res://ui/_later/credits/credits/m_scrollable_credits.gd" id="2_w4uay"]
-[ext_resource type="Script" uid="uid://cc2wtqasev7le" path="res://ui/_later/credits/scripts/credits_label.gd" id="2_xn4wy"]
+[ext_resource type="Script" path="res://ui/_later/credits/scripts/credits_label.gd" id="2_xn4wy"]
 
 [node name="ScrollableCredits" type="Control"]
 layout_mode = 3
@@ -22,46 +22,41 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
 bbcode_enabled = true
-text = "[center][font_size=48]Collaborators[/font_size]
+text = "[center]
+[font_size=32]Assets & Art[/font_size]
 
-[font_size=32]Role[/font_size]
-Person 1  
-Person 2  
-[url=]Person w/ Link[/url]  
-
-[font_size=48]Sourced[/font_size]
-[font_size=32]Asset Type[/font_size]
-[font_size=24]Use Case[/font_size]
-Author: [url=]Name[/url]  
-Source: [url=]Domain : webpage.html[/url]  
-License: [url=]License[/url]
+[font_size=24]Environmental Textures[/font_size]
+Author: Julio Sillet
+Source: [url=https://juliosillet.gumroad.com/]https://juliosillet.gumroad.com/[/url]
+License: CC-BY (Commercial application allowed, No reselling)
+Notes: Used for various surface materials (Wood, Tiles, Concrete, etc.).
 
 [font_size=24]Godot Engine Logo[/font_size]
-Author: Andrea Calabró  
-Source: [url=https://godotengine.org/press/]godotengine.org : press[/url]  
-License: [url=https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt]CC BY 4.0 International[/url] 
+Author: Andrea Calabró
+Source: [url=https://godotengine.org/press/]godotengine.org : press[/url]
+License: [url=https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt]CC BY 4.0 International[/url]
 
-[font_size=48]Tools[/font_size]
-[font_size=24]Godot[/font_size]
-[img=80]res:///ui/ui_assets/maaacks_assets/godot_engine_logo/logo_vertical_color_dark.png[/img]  
-Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
-Source: [url=https://godotengine.org/]godotengine.org[/url]  
-License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url] 
+
+[font_size=32]Core Systems & Templates[/font_size]
 
 [font_size=24]Godot Game Template[/font_size]
-[img=80]res:///ui/ui_assets/maaacks_assets/plugin_logo/logo.png[/img]  
-Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
-Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
-License: [url=LICENSE.txt]MIT License[/url]  
+[img=80]res:///attribution/maaacks_game_template/logo/logo.png[/img]  
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]
+License: [url=/attribution/maaacks_game_template/LICENSE.txt]MIT License[/url]
 
-[font_size=24]Git[/font_size]
-[img=80]res:///ui/ui_assets/maaacks_assets/git_logo/Git-Logo-2Color.png[/img]  
-Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
-Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
-License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
+[font_size=24]Godot Engine[/font_size]
+[img=80]res:///attribution/godot/logo/logo_vertical_color_dark.png[/img] 
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]
+Source: [url=https://godotengine.org/]godotengine.org[/url]
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]
+
+
+[font_size=24]Special thanks[/font_size]
+* me myself and I
 [/center]"
 script = ExtResource("2_xn4wy")
-attribution_file_path = "res://attribution/maaacks_game_template/ATTRIBUTION.md"
+attribution_file_path = "res://attribution/ATTRIBUTION.md"
 h1_font_size = 64
 h2_font_size = 48
 h3_font_size = 32

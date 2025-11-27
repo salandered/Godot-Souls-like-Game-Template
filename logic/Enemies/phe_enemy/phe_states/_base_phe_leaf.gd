@@ -111,6 +111,8 @@ func react_on_hit(hit: HitData):
 	var actual_overlay_weight = react_cfg.overlay_weight
 	var actual_bone_mask = react_cfg.bone_mask
 
+	phe_feelings.get_curr_health()
+
 	var overlay_config = OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
 		BlendConfig.new(),

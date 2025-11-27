@@ -156,6 +156,10 @@ func get_curr_anim() -> AnimationData:
 	return _curr_anim
 
 
+func get_overlay_time_left() -> float:
+	return overlay_modifier.get_time_left()
+
+
 ## ROOT MOTION
 
 func get_root_motion_position(y_zeroed: bool = true, __log: bool = false) -> Vector3:

@@ -24,7 +24,8 @@ func get_active_weapon_names() -> Array[String]:
 func on_exit_state() -> void:
 	get_animator_manager().reset_global_speed_scale()
 	_combat_reset_all_weapons()
-
+	_pushed_rigid_bodies = false
+	
 
 # NOTE: here we test anin speed curve in real time. Very promising
 func _calculate_speed_scale() -> float:
@@ -38,6 +39,7 @@ func _calculate_speed_scale() -> float:
 	var _speed_scale := 0.5 + anim_speed_bump.sample_at_progress(_anim_progress)
 	return _speed_scale
 
+var _pushed_rigid_bodies: bool = false
 
 func update(delta):
 	var _speed_scale := _calculate_speed_scale()
@@ -45,5 +47,9 @@ func update(delta):
 	
 	e_movement.rotate_towards_player(delta, sp_config)
 	e_movement.move_with_root(delta)
+
+	if not _pushed_rigid_bodies and passed_marker(MarkerName.PUSH_ITEMS_AROUND):
+		PushRigidBodies.push_nearby_rigid_bodies(me, fvalue_angry(2, 3.5), fvalue_angry(10, 80))
+		_pushed_rigid_bodies = true
 
 	_combat_update_is_attacking()

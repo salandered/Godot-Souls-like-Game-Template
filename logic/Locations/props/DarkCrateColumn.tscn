@@ -5,25 +5,19 @@
 [node name="DarkCrateColumn" type="Node3D"]
 
 [node name="DarkCrate" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(-0.036155373, 0, -0.9993462, 0, 1, 0, 0.9993462, 0, -0.036155373, 0, 0.53406453, -0.08092737)
+transform = Transform3D(-0.036155373, 0, -0.9993462, 0, 1, 0, 0.9993462, 0, -0.036155373, 0, 0.33438396, -0.08092737)
 
 [node name="DarkCrate2" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1625934, -0.08092737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95145655, -0.08092737)
 
 [node name="DarkCrate3" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(0.9861412, 0, 0.16590825, 0, 1, 0, -0.16590825, 0, 0.9861412, 0, 1.7971122, -0.08092737)
+transform = Transform3D(0.9861412, 0, 0.16590825, 0, 1, 0, -0.16590825, 0, 0.9861412, 0, 1.6013209, -0.08092737)
 
 [node name="DarkCrate4" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.425641, -0.08092737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2527282, -0.08092737)
 
 [node name="DarkCrate5" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(0.008936004, 0, 0.99996006, 0, 1, 0, -0.99996006, 0, 0.008936004, 0.032619596, 3.0444696, -0.08092737)
+transform = Transform3D(0.008936004, 0, 0.99996006, 0, 1, 0, -0.99996006, 0, 0.008936004, 0.032619596, 2.8694384, -0.08092737)
 
 [node name="DarkCrate6" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(0.9402049, 0, -0.3406093, 0, 1, 0, 0.3406093, 0, 0.9402049, 0, 3.6729984, -0.08092737)
-
-[node name="DarkCrate7" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.307517, -0.08092737)
-
-[node name="DarkCrate8" parent="." instance=ExtResource("1_4i2b4")]
-transform = Transform3D(0.9402049, 0, -0.3406093, 0, 1, 0, 0.3406093, 0, 0.9402049, 0, 4.936046, -0.08092737)
+transform = Transform3D(0.9402049, 0, -0.3406093, 0, 1, 0, 0.3406093, 0, 0.9402049, 0, 3.5099435, -0.08092737)

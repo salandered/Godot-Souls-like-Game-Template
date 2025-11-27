@@ -25,4 +25,7 @@ func _process(delta):
 		csg_sphere_3d.global_position = get_collision_point()
 		var _pos = csg_sphere_3d.global_position
 		csg_sphere_3d_2.global_position = Vector3(_pos.x - 0.5, _pos.y, _pos.z)
+	else:
+		csg_sphere_3d.visible = false
+		csg_sphere_3d_2.visible = false
 	if __log_dist: print_.aware("Downcast dist", pp.s(global_position.distance_to(get_collision_point())), 0, "", 4)

@@ -1,6 +1,3 @@
 
-For blender - godot I use collection exporters. This was dont by Blender Studio while doing DogWalk.
+For blender - godot I use collection exporters. This was also done by Blender Studio while doing DogWalk.
 For details - see Notion!
-
-Also:
-- for preserving collections

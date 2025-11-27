@@ -18,7 +18,7 @@ func initialise() -> void:
 func on_enter_state() -> void:
 	y_offset_adjustment = -0.03
 	if not me.angry_raised:
-		if dist_to_player_greater(config.CLOSE_TO_ORBIT() - 1.0) and ra.chance(0.4):
+		if dist_to_player_greater(config.CLOSE_TO_ORBIT() - 2.0) and ra.chance(0.5):
 			anim = anim_container.get_by_anim_id(PHEA.loco.combat_idle_stupid)
 			default_sp.ANGULAR_SPEED = 1.4 - 0.8
 		else:

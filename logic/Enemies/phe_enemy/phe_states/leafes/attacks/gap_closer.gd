@@ -50,7 +50,11 @@ func on_enter_state() -> void:
 
 func on_exit_state() -> void:
 	APPLY_GRAVITY = true
+	_pushed_rigid_bodies = false
 	_combat_reset_all_weapons()
+
+
+var _pushed_rigid_bodies: bool = false
 
 
 func update(delta):
@@ -67,5 +71,10 @@ func update(delta):
 	else:
 		APPLY_GRAVITY = true
 		e_movement.move_with_root(delta)
+
+
+	if not _pushed_rigid_bodies and passed_marker(MarkerName.PUSH_ITEMS_AROUND):
+		PushRigidBodies.push_nearby_rigid_bodies(me, 3.5, 50)
+		_pushed_rigid_bodies = true
 
 	_combat_update_is_attacking()

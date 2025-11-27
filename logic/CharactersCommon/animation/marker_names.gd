@@ -46,6 +46,10 @@ const FROM_DODGE = "FROM_DODGE"
 # enemy death
 const DEATH_SCATTER = "death_scatter"
 
+# 
+const PUSH_ITEMS_AROUND = "push_items_around"
+
+
 ## fall/stand-up
 const HALF_STAND_UP = "HALF_STAND_UP"
 const STAND_UP_GLUE = "STAND_UP_GLUE"

@@ -50,6 +50,10 @@ gdscript/warnings/unused_signal=0
 
 settings/addon_root_folder="res://addons/debug_draw_3d"
 
+[editor]
+
+movie_writer/movie_file="C:/safe/godot/==recordings/rec.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/extra_snaps/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
@@ -72,6 +76,7 @@ folder_colors={
 "res://-assets-/animations/standard-skeleton/": "blue",
 "res://-assets-/materials-shared/": "red",
 "res://-assets-/materials-shared/_images/": "blue",
+"res://-assets-/materials-shared/baked/quad_outfits/": "yellow",
 "res://-assets-/materials-shared/unsorted/": "gray",
 "res://-assets-/shaders/": "red",
 "res://-assets-/x_icons/blue/": "blue",

@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://m8l8pa3l8cb2"]
-
-[resource]
-resource_name = "eyelid_pupil.002"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.040455952, 0, 0.006048422, 1)
-roughness = 0.5

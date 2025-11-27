@@ -1,5 +1,9 @@
-Sharing Materials Between GLB Files
-Setup
+
+## UPD
+after creating post import scripts this info may be out of date
+
+## Sharing Materials Between GLB Files
+# Setup
 
 Import both GLBs - Drop rock.glb and cave.glb into project
 Extract shared material from rock.glb

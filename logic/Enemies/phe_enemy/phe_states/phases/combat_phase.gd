@@ -139,6 +139,10 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 
 func _phase_switch_check() -> bool:
+	## prevents from overlaying 'damaging' switch phase animations
+	if animator_manager.get_overlay_time_left() >= 0.1:
+		return false
+
 	# already switched
 	if me.angry_raised == true:
 		return false

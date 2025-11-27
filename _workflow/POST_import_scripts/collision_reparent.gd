@@ -14,10 +14,10 @@ extends EditorScenePostImport
 
 
 func _post_import(scene: Node) -> Node:
-	__log_pi.start_()
+	__log_script.start_()
 
 	PICollisionReparent.reparent_collisions(scene)
 
-	__log_pi.end_()
+	__log_script.end_()
 	
 	return scene

@@ -8,20 +8,20 @@ var COL_REPARENT: bool = true
 var MATERIAL_REIMPORT: bool = true
 
 func _post_import(scene: Node) -> Node:
-	__log_pi.start_()
+	__log_script.start_("POST IMPORT SCRIPT")
 
 
-	__log_pi.info_("REPARENT_COLLISIONS", "---------")
+	__log_script.info_("REPARENT_COLLISIONS", "---------")
 	PICollisionReparent.reparent_collisions(scene)
 
 
-	__log_pi.info_("MATERIAL_REIMPORT", "---------")
+	__log_script.info_("MATERIAL_REIMPORT", "---------")
 	PIMaterialReimport.material_reimport(scene)
 
 
-	__log_pi.info_("CLEANUP", "\n=== CLEANUP ===")
+	__log_script.info_("CLEANUP", "\n=== CLEANUP ===")
 	PICleanupEmptyNodes.cleanup_empty_nodes(scene)
 
-	__log_pi.end_()
+	__log_script.end_("POST IMPORT SCRIPT")
 
 	return scene

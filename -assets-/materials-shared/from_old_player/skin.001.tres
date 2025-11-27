@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bite7xcgflpbr"]
-
-[resource]
-resource_name = "skin.001"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.78033304, 0.599659, 0.59535134, 1)
-roughness = 0.5

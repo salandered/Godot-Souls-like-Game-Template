@@ -5,7 +5,7 @@ class_name Collision
 ## im not really sure about correct separation. Testing this:
 ## ENVIRONMENT_COL - terrain, all the static objects. [Real physical] 
 ##    > StaticBody, All CSG
-## ITEM_COL - dynamic objects, like boxes or shatters. 
+## ITEM_COL - dynamic objects, like boxes or shatters. NOTE: not the best naming
 ##    > RigidBody
 ## PROP_COL - additional logic for interactable items. Currently used in Area3D which checks for breaking the column
 ##    > Area
@@ -17,7 +17,7 @@ class_name Collision
 ##    > Area
 ## WEAPON_AREA - hurt boxes of weapons. 
 ##    > Area
-## DEBRIS_COL - inert objects, only collide with environment
+## DEBRIS_COL - inert objects, only collide with environment WARNING: try not to use it, as this is experemental
 ##    > can be set to dead CharacterBody collider or something
 ## NOTE: WHERE TO ASSIGN 
 ##       Priority is to assign according layers/masks in _ready. 
@@ -50,7 +50,7 @@ enum Layers {
 	WEAPON_AREA = 1 << 4, # bit 4 (damage-dealing)
 	ITEM_COL = 1 << 5, # bit 5
 	PROP_COL = 1 << 6, # bit 6
-	DEBRIS_COL = 1 << 7, # bit 7 -
+	DEBRIS_COL = 1 << 7, # bit 7
 }
 
 enum Masks {
@@ -61,8 +61,8 @@ enum Masks {
 	PLAYER_COL_MASK = Layers.ENVIRONMENT_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
 	OTHER_CHAR_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
 	HITBOX_AREA_MASK = Layers.WEAPON_AREA,
-	# may be without PROP_COL
-	WEAPON_AREA_MASK = Layers.HITBOX_AREA | Layers.PROP_COL,
+	# may be without PROP_COL; ITEM_COL used to push rigid bodies on hit
+	WEAPON_AREA_MASK = Layers.HITBOX_AREA | Layers.PROP_COL | Layers.ITEM_COL,
 	# Layers.ITEM_COL so items (rigid bodies) not fall through each other
 	ITEM_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ITEM_COL,
 	# currently checks for weapon or body hit

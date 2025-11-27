@@ -29,7 +29,7 @@ func update(input_: InputPackage, delta):
 	
 	__log_hurt()
 
-	_combat_update_is_attacking(true)
+	_combat_update_is_attacking(false)
 
 # DEV
 
