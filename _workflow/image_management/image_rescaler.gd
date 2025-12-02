@@ -6,10 +6,10 @@ const TARGET_FOLDER = "res://-assets-/GLB-char/player/pl-skeleton-ranger/"
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 ## will be ignored of contains
 const IGNORE_WORDS = ["pixel", "pixpal"]
-const TARGET_SCALE_STR = "1k" # Options: "1k", "05k" etc
+const TARGET_SCALE_STR = "05k" # Options: "1k", "05k" etc
 
 
-const OVERWRITE_ORIGINALS = false # true = replace originals, false = create _d1k versions
+const OVERWRITE_ORIGINALS = true # true = replace originals, false = create _d1k versions
 const FORCE_8BIT_NORMALS = true # Convert normal maps to 8-bit per channel
 const NORMAL_MAP_KEYWORDS = ["norm", "normal", "nrm", "nor_gl"]
 
@@ -59,13 +59,13 @@ func _rescale():
 		__log_script.error_("", "Invalid Scale Format", "Config", "Abort", TARGET_SCALE_STR)
 		return
 
-	__log_script.info_("", "Using config",
-		"Target Folder:", pp.in_q(TARGET_FOLDER),
+	__log_script.info_("", "Using CONFIG",
+		"\nTarget Folder:", pp.in_q(TARGET_FOLDER),
 		"\nTarget Scale:", pp.in_q(TARGET_SCALE_STR),
-		"Image extensions", pp.list_(IMAGE_EXTENSIONS),
+		"Image extensions", pp.array_(IMAGE_EXTENSIONS),
 		"Mapped to target Size:", pp.in_q(str(target_image_size) + "px"),
 		"Suffix would be:", pp.in_q(_get_target_file_suffix()),
-		"\nOverwrite originals:", OVERWRITE_ORIGINALS,
+		"\nOverwrite originals (if true, no suffix):", OVERWRITE_ORIGINALS,
 		"Force 8-bit normals:", FORCE_8BIT_NORMALS)
 
 	var dir = DirAccess.open(TARGET_FOLDER)
@@ -102,11 +102,16 @@ func _process_file(dir: DirAccess, source_file_name: String, target_image_size: 
 		return
 
 	__log_script.info_("🖼️", "Processing file", source_file_name)
+
+	# if source_base_name.ends_with(_get_target_file_suffix()):
+	# 	__log_script.info_("⏭️", "Skipping already processed file", source_file_name)
+	# 	return
 	
-	# prevent double processing or processing the output
-	if source_base_name.ends_with(_get_target_file_suffix()):
-		__log_script.info_("⏭️", "Skipping already processed file", source_file_name)
-		return
+	# Only check for suffix if not overwriting originals
+	if not OVERWRITE_ORIGINALS:
+		if source_base_name.ends_with(_get_target_file_suffix()):
+			__log_script.info_("⏭️", "Skipping already processed file", source_file_name)
+			return
 
 	var full_path = TARGET_FOLDER + "/" + source_file_name
 
@@ -121,13 +126,24 @@ func _process_file(dir: DirAccess, source_file_name: String, target_image_size: 
 		__log_script.error_("", "Failed to get image from texture", source_file_name, "Skipping")
 		return
 	
-	var r = _resize_image(img, target_image_size)
+	var is_normal_map = _is_normal_map(source_file_name)
+	if is_normal_map:
+		__log_script.info_("🗺️", "Detected normal map")
+	
+	var r = _resize_image(img, target_image_size, is_normal_map)
 	if not r:
 		return
 
-	# example: ground_rocks__d1k.jpg
-	var target_base_name = source_base_name + _get_target_file_suffix() + "." + extension_
-	var target_path = TARGET_FOLDER + "/" + target_base_name
+	# Determine save path
+	var target_path: String
+	var target_base_name: String
+	if OVERWRITE_ORIGINALS:
+		target_path = full_path
+		target_base_name = source_file_name
+	else:
+		# example: ground_rocks__d1k.jpg
+		target_base_name = source_base_name + _get_target_file_suffix() + "." + extension_
+		target_path = TARGET_FOLDER + "/" + target_base_name
 	
 	var err = OK
 	match extension_:
@@ -136,32 +152,46 @@ func _process_file(dir: DirAccess, source_file_name: String, target_image_size: 
 		_: err = img.save_png(target_path)
 
 	if err == OK:
+		var save_type = "Overwritten" if OVERWRITE_ORIGINALS else "Saved as"
 		__log_script.info_("🖼️✅",
 			"All good for", pp.in_q(source_file_name),
-			"Saved as:", pp.in_q(target_base_name)
+			save_type + ":", pp.in_q(target_base_name)
 		)
 	else:
 		__log_script.error_("", "Failed to save file", target_base_name, "move to next", "Error Code:", err)
 
 
+func _is_normal_map(filename: String) -> bool:
+	var lower_name = filename.to_lower()
+	for keyword in NORMAL_MAP_KEYWORDS:
+		if keyword in lower_name:
+			return true
+	return false
+
+
 ## return false in case of problems
-func _resize_image(img: Image, target_image_size: int) -> bool:
+func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> bool:
 	var width = img.get_width()
 	var height = img.get_height()
 	var max_dim = max(width, height)
 	
-	if max_dim <= target_image_size:
-		__log_script.info_("⏭️", "Skipping, already smaller than target", target_image_size, "Current size:", _get_size_with_x(width, height))
-		return false
-
-
+	# Decompress first (needed for both resizing and bit depth conversion)
 	if img.is_compressed():
 		var err = img.decompress()
 		__log_script.info_("Image was compressed, going to decompress.")
 		if err != OK:
 			__log_script.error_("", "Failed to decompress image", "Error:", err)
 			return false
-
+	
+	# Convert normal maps to 8-bit (even if not resizing)
+	if is_normal_map and FORCE_8BIT_NORMALS:
+		_convert_to_8bit(img)
+	
+	# Check if resize needed
+	if max_dim <= target_image_size:
+		__log_script.info_("⏭️", "Skipping resize, already smaller than target", target_image_size, "Current size:", _get_size_with_x(width, height))
+		# Still return true if we converted bit depth
+		return is_normal_map and FORCE_8BIT_NORMALS
 
 	var scale_ratio = float(target_image_size) / float(max_dim)
 	var new_width = int(width * scale_ratio)
@@ -174,6 +204,13 @@ func _resize_image(img: Image, target_image_size: int) -> bool:
 			"From:", _get_size_with_x(width, height)
 		)
 	return true
+
+
+func _convert_to_8bit(img: Image):
+	var original_format = img.get_format()
+	img.convert(Image.FORMAT_RGB8)
+	__log_script.info_("🎨", "Converted to 8-bit RGB", "From format:", original_format)
+
 
 func _get_size_with_x(width: int, height: int) -> String:
 	return str(width) + "x" + str(height)

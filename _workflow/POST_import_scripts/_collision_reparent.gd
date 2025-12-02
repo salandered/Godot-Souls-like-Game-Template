@@ -28,11 +28,11 @@ static func reparent_collisions(scene):
 			col_collections.append(_col_collection)
 	
 	if len(col_collections) == 0:
-		__log_script.info_("ℹ️ FIND_COL_COLLECTION", "found 0 collections ✖️", "Used prefixes for search:", pp.list_(PIConfig.COLLISION_COLLECTION_PREFIXES))
+		__log_script.info_("ℹ️ FIND_COL_COLLECTION", "found 0 collections ✖️", "Used prefixes for search:", pp.array_(PIConfig.COLLISION_COLLECTION_PREFIXES))
 		return
 	elif len(col_collections) > 1:
 		__log_script.error_("FIND_COL_COLLECTION", "found multiple collections", "_post_import",
-			"script hard stop", "collections:", col_collections, "expected prefixes:", pp.list_(PIConfig.COLLISION_COLLECTION_PREFIXES))
+			"script hard stop", "collections:", col_collections, "expected prefixes:", pp.array_(PIConfig.COLLISION_COLLECTION_PREFIXES))
 		return
 	var col_collection: Node3D = col_collections[0]
 	

@@ -128,5 +128,5 @@ func __log_decision_data(input_, next_action_name: String, ...additional_checks:
 		is_moving(input_),
 		is_reverse_moving(input_),
 		is_pure_reverse_moving(input_),
-		pp.list_(additional_checks),
+		pp.array_(additional_checks),
 		next_action_name)

@@ -29,11 +29,22 @@ var _total_loading_progress: float = 0.0:
 		%ProgressBar.value = _total_loading_progress
 var _loading_start_time: int
 
+@export_group("Visuals")
+@export var background_images: Array[Texture2D]
+@onready var background_texture_rect: TextureRect = %BackgroundTextureRect
+
+
 ## UI for the asynchronous loading process managed by M_SceneLoader.
 ## A controller script for a visual, user-facing loading screen.
 ## It visualizes the loading progress from the M_SceneLoader autoload by updating a progress bar and a text label.
 ## It features a stall detection system that changes the text message if loading takes an unusually long time to keep the user informed.
 ## It includes pop-up dialogs to handle cases where loading gets stuck or fails, giving the user options like waiting or restarting.
+
+
+func _ready() -> void:
+	_setup_background()
+	_apply_vignette_effect()
+
 
 func update_total_loading_progress() -> void:
 	# 
@@ -41,28 +52,37 @@ func update_total_loading_progress() -> void:
 	#_total_loading_progress = 1.0 - (inverted_progress * inverted_progress)
 	_total_loading_progress = sqrt(_scene_loading_progress)
 
+
 func _reset_loading_stage() -> void:
 	_stall_stage = StallStage.STARTED
 	%LoadingTimer.start(state_change_delay)
 
+
 func _reset_loading_start_time() -> void:
 	_loading_start_time = Time.get_ticks_msec()
 
+
 func _get_seconds_waiting() -> int:
 	return int((Time.get_ticks_msec() - _loading_start_time) / 1000.0)
+
 
 func _update_scene_loading_progress() -> void:
 	var new_progress = M_SceneLoader.get_progress()
 	if new_progress > _scene_loading_progress:
 		_scene_loading_progress = new_progress
 
+
 func _set_scene_loading_complete() -> void:
 	_scene_loading_progress = 1.0
 	_scene_loading_complete = true
 
+
 func _reset_scene_loading_progress() -> void:
 	_scene_loading_progress = 0.0
 	_scene_loading_complete = false
+
+# error message
+# region
 
 func _show_loading_stalled_error_message() -> void:
 	if %StalledMessage.visible:
@@ -73,15 +93,19 @@ func _show_loading_stalled_error_message() -> void:
 		%StalledMessage.dialog_text = "Stalled at %d%%. You may try waiting or restarting.\n" % (_scene_loading_progress * 100.0)
 	%StalledMessage.popup()
 
+
 func _show_scene_switching_error_message() -> void:
 	if %ErrorMessage.visible:
 		return
 	%ErrorMessage.dialog_text = "Loading Error: Failed to switch scenes."
 	%ErrorMessage.popup()
 
+# endregion
+
 func _hide_popups() -> void:
 	%ErrorMessage.hide()
 	%StalledMessage.hide()
+
 
 func get_progress_message() -> String:
 	var _progress_message: String
@@ -104,6 +128,7 @@ func get_progress_message() -> String:
 	if _progress_message.contains("%d"):
 		_progress_message = _progress_message % _get_seconds_waiting()
 	return _progress_message
+
 
 func _update_progress_messaging() -> void:
 	%ProgressLabel.text = get_progress_message()
@@ -159,8 +184,11 @@ func _on_confirmation_dialog_canceled() -> void:
 func _on_confirmation_dialog_confirmed() -> void:
 	_reset_loading_stage()
 
+
 func reset() -> void:
 	show()
+	__log_ui.info_("LoadingScreen: reset func started")
+	
 	_reset_loading_stage()
 	_reset_scene_loading_progress()
 	_reset_loading_start_time()
@@ -171,3 +199,46 @@ func close() -> void:
 	set_process(false)
 	_hide_popups()
 	hide()
+
+
+# Background images
+# region
+
+func _setup_background() -> void:
+	if background_images.size() > 0:
+		var random_image = background_images.pick_random()
+		if background_texture_rect:
+			background_texture_rect.texture = random_image
+			__log_ui.info_("LoadingScreen: Set random background -> ", random_image.resource_path.get_file())
+		else:
+			__log_ui.warn_(false, "LoadingScreen: BackgroundTextureRect is null", "", "")
+	else:
+		__log_ui.warn_(false, "LoadingScreen: no background_images", "", "")
+
+func _apply_vignette_effect() -> void:
+	if not background_texture_rect:
+		return
+#
+	## simple vignette shader logic
+	#var code: String = """
+		#shader_type canvas_item;
+		#
+		#uniform float softness : hint_range(0.0, 1.0) = 0.5;
+		#
+		#void fragment() {
+			#vec4 tex_color = texture(TEXTURE, UV);
+			#float dist = distance(UV, vec2(0.5));
+			#// darken edges based on distance from center
+			#float vignette = 1.0 - smoothstep(0.5, 1.5 - softness, dist);
+			#COLOR = vec4(tex_color.rgb * vignette, tex_color.a);
+		#}
+	#"""
+	#
+	#var shader := Shader.new()
+	#shader.code = code
+	#
+	#var mat := ShaderMaterial.new()
+	#mat.shader = shader
+	#background_texture_rect.material = mat
+
+# endregion

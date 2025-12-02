@@ -7,9 +7,9 @@
 [resource]
 resource_name = "I_Concrete005_4d1K-JPG"
 cull_mode = 2
-albedo_color = Color(1.432, 1.3483144, 1.3483144, 1)
+albedo_color = Color(0.7094549, 0.7094549, 0.7094549, 1)
 albedo_texture = ExtResource("1_scobl")
-metallic_texture = ExtResource("2_gl85x")
+metallic_specular = 0.0
 metallic_texture_channel = 2
 roughness_texture = ExtResource("2_gl85x")
 roughness_texture_channel = 1

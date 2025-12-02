@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://csngyn3pjsyrd"]
-
-[ext_resource type="Texture2D" uid="uid://8pbbqjcgj67m" path="res://common/3d/assets_3d/textures/texture_atlas.png" id="1_kusmf"]
-
-[resource]
-resource_local_to_scene = true
-albedo_texture = ExtResource("1_kusmf")
-roughness = 0.5

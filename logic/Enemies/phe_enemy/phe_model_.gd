@@ -144,9 +144,9 @@ func _process(delta):
 
 	player.__dev_labels._label_phe_enemy_info(self)
 
-
 	if death_raised:
 		on_death_raised()
+
 
 func react_on_hit(hit_data: HitData) -> void:
 	var _curr_state = get_current_state()
@@ -232,7 +232,7 @@ func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 
 
 func __pp_state_history():
-	return "state history" + pp.in_sq(pp.list_(_state_history))
+	return "state history" + pp.array_(_state_history)
 
 
 ## DEV

@@ -1,4 +1,8 @@
 [gd_scene format=3 uid="uid://b1m4vvgtlxkd4"]
 
 [node name="HSeparator" type="HSeparator"]
+modulate = Color(0.6561392, 0.6561392, 0.6561392, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(0, 20)
+offset_right = 86.0
+offset_bottom = 20.0

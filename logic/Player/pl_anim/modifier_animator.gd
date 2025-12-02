@@ -244,6 +244,6 @@ func __log_blend_state() -> String:
 		overlap_duration = pp.round_001(min(times_left[0], times_left[1], times_left[2]))
 	
 	return "Blend anims " + "/".join(anim_names) \
-		+"| blend times " + pp.list_(blend_times) \
-		+"| times left " + pp.list_(times_left) \
+		+"| blend times " + pp.array_(blend_times) \
+		+"| times left " + pp.array_(times_left) \
 		+"| overlap (may be) " + str(overlap_duration)

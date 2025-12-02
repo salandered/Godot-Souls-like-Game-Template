@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dgjjclninm4fv"
+path="res://.godot/imported/impact_glass_medium_002.ogg-3885c1c7b9090e60b2d338fc4442598f.oggvorbisstr"
+
+[deps]
+
+source_file="res://-assets-/sound/kenney/addons/kenney impact sounds/impact_glass_medium_002.ogg"
+dest_files=["res://.godot/imported/impact_glass_medium_002.ogg-3885c1c7b9090e60b2d338fc4442598f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

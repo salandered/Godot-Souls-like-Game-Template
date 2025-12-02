@@ -1,0 +1,112 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0jvin82yypck"]
+
+[ext_resource type="Script" uid="uid://dwa0f2vkbmcfk" path="res://ui/main_menu_group/credits/credits/m_scrollable_credits.gd" id="2_w4uay"]
+[ext_resource type="Script" uid="uid://cc2wtqasev7le" path="res://ui/main_menu_group/credits/scripts/credits_label.gd" id="2_xn4wy"]
+
+[node name="ScrollableCredits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_w4uay")
+
+[node name="CreditsLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+bbcode_enabled = true
+text = "[center]
+[font_size=32]Assets & Art[/font_size]
+
+[font_size=24]Environmental Textures[/font_size]
+Author: Julio Sillet
+Source: [url=https://juliosillet.gumroad.com/]https://juliosillet.gumroad.com/[/url]
+License: CC-BY (Commercial application allowed, No reselling)
+Notes: Used for various surface materials (Wood, Tiles, Concrete, etc.).
+
+
+[font_size=24]Military hatchet model M1889[/font_size]
+Author: Virtual Museums of Małopolska
+Source: [url=https://sketchfab.com/3d-models/military-hatchet-model-m1889-1a1dd0efe1cc4a5384f50351b9af5b16]Sketchfab[/url]
+License: [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0 International[/url]
+Note: Modified from original (Retopologized to low-poly, applied new materials).
+
+
+[font_size=24]Additional assets CC-By 4.0 GDQuest (https://www.gdquest.com/)[/font_size]
+License: [url=attribution/gd_quest/node_essentials/LICENSE]CC BY 4.0[/url]
+Notes: Used fire shader with slight modifications 
+
+
+[font_size=32]Core Systems & Templates[/font_size]
+
+[font_size=24]Godot Game Template[/font_size]
+[img=80]res:///attribution/maaacks_game_template/logo/logo.png[/img]  
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]
+License: [url=/attribution/maaacks_game_template/LICENSE.txt]MIT License[/url]
+
+[font_size=24]Godot Engine[/font_size]
+[img=80]res:///attribution/godot/logo/logo_vertical_color_dark.png[/img] 
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]
+Source: [url=https://godotengine.org/]godotengine.org[/url]
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]
+
+
+
+
+[font_size=32]Music[/font_size]
+
+[font_size=24]Symphony For A Broken Orchestra Sample Pack[/font_size]
+Author: Found Sound Nation
+Source: [url=https://brokenorchestra.foundsoundnation.org/#about]brokenorchestra.foundsoundnation.org[/url]
+License: [url=attribution/music/broken_orchestra/sample-pack-terms.pdf]Custom / Royaltee free / mandatory attribution[/url]
+Mandatory Credit: Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra. Symphony for a Broken Orchestra was commissioned by Temple Contemporary at The Tyler School of Art. Major support is provided by The Pew Center for Arts & Heritage, with additional support from the Barra Foundation.
+Notes: Used in the track [].
+
+
+
+[font_size=32]Special thanks[/font_size]
+
+[font_size=24]The Smithsonian Institution[/font_size]
+Source: [url=https://sketchfab.com/smithsonian]Sketchfab[/url]
+Assets: Isthminia panamensis Pyenson et al., 2015: Jaw; Figure of a Dancer; Geochelone carbonaria;
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 Universal[/url]
+
+
+[font_size=24]Tula State Arms Museum[/font_size]
+Source: [url=https://sketchfab.com/ArmsMuseum]Sketchfab[/url]
+Assets: Pinga Throwing Knife;
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 Universal[/url]
+
+
+[font_size=24]Imphenzia PixPal Palette[/font_size]
+
+
+[font_size=24]me myself and I[/font_size]
+
+
+[font_size=32]Other Legal Notices[/font_size]
+
+[font_size=24]Godot Engine Logo[/font_size]
+Author: Andrea Calabró
+Source: [url=https://godotengine.org/press/]godotengine.org : press[/url]
+License: [url=https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt]CC BY 4.0 International[/url]
+[/center]"
+script = ExtResource("2_xn4wy")
+attribution_file_path = "res://attribution/ATTRIBUTION.md"
+h1_font_size = 64
+h2_font_size = 48
+h3_font_size = 32
+h4_font_size = 24
+h5_font_size = 20
+h6_font_size = 16
+bold_headings = true
+max_image_width = 140
+max_image_height = 140

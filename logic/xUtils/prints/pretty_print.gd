@@ -18,13 +18,14 @@ static func s(...parts: Array) -> String:
 	var r = ""
 	for part in parts:
 		if part is float:
-			r += str(pp.round_001(part)) + " "
+			r += str(pp.round_001(part))
 		elif part is Vector3:
 			r += pp.vec3(part)
 		elif part is Vector2:
 			r += pp.vec2(part)
 		else:
-			r += str(part) + " "
+			r += str(part)
+		r += " "
 	return r
 
 
@@ -96,7 +97,7 @@ static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = fal
 	return u.cut_string(r)
 
 
-static func list_(parts: Array, json: bool = false) -> String:
+static func list_(parts: Array, json: bool = false, max_length = 500) -> String:
 	if json:
 		return JSON.stringify(parts, "\t")
 	if parts.size() == 0:
@@ -109,9 +110,16 @@ static func list_(parts: Array, json: bool = false) -> String:
 			r += pp.vec2(part) + " "
 		elif part is Vector3:
 			r += pp.vec3(part) + " "
+		elif part is Array:
+			r += pp.array_(part) + " "
 		else:
 			r += str(part) + " "
-	r = u.cut_string(r)
+	r = u.cut_string(r, max_length)
+	return r
+
+
+static func array_(parts: Array, json: bool = false) -> String:
+	var r = list_(parts, json, 300)
 	return pp.in_br(r)
 
 # endregion

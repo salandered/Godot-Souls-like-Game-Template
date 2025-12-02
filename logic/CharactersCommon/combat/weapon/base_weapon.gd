@@ -120,7 +120,7 @@ func __pp_holder() -> String:
 
 func _to_string() -> String:
 	return "ID '%s' wepName '%s' Holder '%s' ContactHiBList '%s' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), _weapon_name, holder.name, pp.list_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
+		% [str(get_instance_id()), _weapon_name, holder.name, pp.array_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
 
 
 func __log_(...parts: Array):

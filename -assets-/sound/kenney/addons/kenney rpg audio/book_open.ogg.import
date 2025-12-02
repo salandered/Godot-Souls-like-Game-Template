@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlu7nmn61qtk0"
+path="res://.godot/imported/book_open.ogg-96518a828366cba6aff70a381c280a16.oggvorbisstr"
+
+[deps]
+
+source_file="res://-assets-/sound/kenney/addons/kenney rpg audio/book_open.ogg"
+dest_files=["res://.godot/imported/book_open.ogg-96518a828366cba6aff70a381c280a16.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

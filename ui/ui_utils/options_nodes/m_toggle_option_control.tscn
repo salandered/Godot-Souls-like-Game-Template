@@ -19,3 +19,4 @@ vertical_alignment = 1
 [node name="CheckButton" type="CheckButton" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+theme_type_variation = &"DangerCheckButton"

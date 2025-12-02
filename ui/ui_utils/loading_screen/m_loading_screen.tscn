@@ -1,11 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs1rf0cb545oq"]
+[gd_scene load_steps=18 format=3 uid="uid://bs1rf0cb545oq"]
 
 [ext_resource type="Script" uid="uid://dotahls6vtroe" path="res://ui/ui_utils/loading_screen/m_loading_screen.gd" id="1_j1vc5"]
+[ext_resource type="Texture2D" uid="uid://byjv1bmnket7r" path="res://-assets-/ui/loader_backgrounds/collage (1)ds.jpg" id="2_4dwaw"]
+[ext_resource type="Texture2D" uid="uid://xagpcipjba24" path="res://-assets-/ui/loader_backgrounds/collage (2)-ds.jpg" id="3_lioqs"]
+[ext_resource type="Texture2D" uid="uid://ch6w3soy4ufym" path="res://-assets-/ui/loader_backgrounds/collage (3)ds.jpg" id="4_deyge"]
+[ext_resource type="Texture2D" uid="uid://dud5ta817vs5c" path="res://-assets-/ui/loader_backgrounds/collage (4)ds.jpg" id="5_167l7"]
+[ext_resource type="Texture2D" uid="uid://cw6efvrq14ird" path="res://-assets-/ui/loader_backgrounds/collage (5)ds.jpg" id="6_lpyag"]
+[ext_resource type="Texture2D" uid="uid://b5tjneo4waokv" path="res://-assets-/ui/loader_backgrounds/collage (6)ds.jpg" id="7_0ew36"]
+[ext_resource type="Texture2D" uid="uid://cyau4gssrsjjm" path="res://-assets-/ui/loader_backgrounds/collage (7)ds.jpg" id="8_r2ati"]
+[ext_resource type="Texture2D" uid="uid://5ofu2y0m6qn8" path="res://-assets-/ui/loader_backgrounds/collage (8)ds.jpg" id="9_euco8"]
+[ext_resource type="Texture2D" uid="uid://ccs2ft5ib4rhu" path="res://-assets-/ui/loader_backgrounds/collage (9)ds.jpg" id="10_kipgw"]
+[ext_resource type="Texture2D" uid="uid://dv4p73ce0g7nu" path="res://-assets-/ui/loader_backgrounds/collage (10)ds.jpg" id="11_ny3fu"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://ui/themes/menu-theme.tres" id="12_167l7"]
+[ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://ui/ui_utils/nodes/color_rect.tscn" id="12_lioqs"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://ui/menu.gdshader" id="13_deyge"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8f36y"]
+noise = SubResource("FastNoiseLite_y57hi")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_167l7"]
+shader = ExtResource("13_deyge")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_8f36y")
+shader_parameter/distortion_strength = 0.0030000001425
+shader_parameter/speed = 0.1
+shader_parameter/red_amount = 0.9350000444125
+shader_parameter/green_amount = 1.0
+shader_parameter/blue_amount = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 1.0
+shader_parameter/pop_tint = Color(0, 0, 0, 0)
+shader_parameter/vignette_intensity = 1.4190000674025
+shader_parameter/vignette_softness = 0.1970000093575
 
 [node name="M_LoadingScreen" type="CanvasLayer"]
 process_mode = 3
 layer = 20
 script = ExtResource("1_j1vc5")
+background_images = Array[Texture2D]([ExtResource("2_4dwaw"), ExtResource("3_lioqs"), ExtResource("4_deyge"), ExtResource("5_167l7"), ExtResource("6_lpyag"), ExtResource("7_0ew36"), ExtResource("8_r2ati"), ExtResource("9_euco8"), ExtResource("10_kipgw"), ExtResource("11_ny3fu")])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -15,44 +50,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackPanel" type="Panel" parent="Control"]
-visible = false
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="BackgroundColor" type="ColorRect" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
 [node name="BackgroundTextureRect" type="TextureRect" parent="Control"]
-visible = false
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("10_kipgw")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.99814814
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = 482.0
-offset_right = -30.0
-offset_bottom = -166.0
+anchor_bottom = 0.99814814
+offset_left = 9.0
+offset_top = -190.0
+offset_right = 9.0
+offset_bottom = -36.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_constants/margin_left = 140
 theme_override_constants/margin_right = 140
 theme_override_constants/margin_bottom = 20
@@ -64,6 +85,8 @@ theme_override_constants/separation = 50
 [node name="ProgressLabel" type="Label" parent="Control/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("12_167l7")
+theme_override_font_sizes/font_size = 34
 text = "Loading..."
 horizontal_alignment = 1
 
@@ -72,18 +95,21 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 max_value = 1.0
+value = 0.7
 
 [node name="ErrorMessage" type="AcceptDialog" parent="Control"]
 unique_name_in_owner = true
+oversampling_override = 1.0
 title = "Loading Error"
 initial_position = 2
-size = Vector2i(360, 100)
+size = Vector2i(360, 102)
 
 [node name="StalledMessage" type="ConfirmationDialog" parent="Control"]
 unique_name_in_owner = true
+oversampling_override = 1.0
 title = "Loading Stalled"
 initial_position = 2
-size = Vector2i(360, 100)
+size = Vector2i(360, 102)
 ok_button_text = "Try Waiting"
 cancel_button_text = "Reload"
 
@@ -91,6 +117,9 @@ cancel_button_text = "Reload"
 unique_name_in_owner = true
 one_shot = true
 autostart = true
+
+[node name="ColorRect" parent="." instance=ExtResource("12_lioqs")]
+material = SubResource("ShaderMaterial_167l7")
 
 [connection signal="confirmed" from="Control/ErrorMessage" to="." method="_on_error_message_confirmed"]
 [connection signal="canceled" from="Control/StalledMessage" to="." method="_on_confirmation_dialog_canceled"]

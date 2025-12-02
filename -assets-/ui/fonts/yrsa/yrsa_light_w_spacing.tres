@@ -1,0 +1,14 @@
+[gd_resource type="FontVariation" load_steps=3 format=3 uid="uid://cjegrskdlmtod"]
+
+[ext_resource type="FontFile" uid="uid://du4qma3ci473" path="res://ui/themes/Yrsa-Light.ttf" id="1_5d6wg"]
+[ext_resource type="FontFile" uid="uid://dtd1hl8ewfvrf" path="res://ui/themes/Yrsa-Regular.ttf" id="2_xwk6q"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_xwk6q")])
+base_font = ExtResource("1_5d6wg")
+opentype_features = {
+1667329140: 0
+}
+spacing_space = 1
+spacing_top = 1
+spacing_bottom = 1

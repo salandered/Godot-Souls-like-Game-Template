@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjxibnwwxy37t"
+path="res://.godot/imported/tarot_siren 09 14 5.mp3-9989979189f5a386d9ea1f969c0b74ff.mp3str"
+
+[deps]
+
+source_file="res://-assets-/sound/songs/tarot_siren 09 14 5.mp3"
+dest_files=["res://.godot/imported/tarot_siren 09 14 5.mp3-9989979189f5a386d9ea1f969c0b74ff.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

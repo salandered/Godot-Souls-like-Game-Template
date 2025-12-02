@@ -136,7 +136,7 @@ static func set_audio_from_config() -> void:
 # Video
 
 static func set_display_mode(mode: int, window: Window) -> void:
-	window.mode = mode
+	window.mode = mode as Window.Mode
 
 static func set_resolution(value: Vector2i, window: Window, update_config: bool = true) -> void:
 	if value.x == 0 or value.y == 0:
@@ -208,3 +208,36 @@ static func set_from_config() -> void:
 static func set_from_config_and_window(window: Window) -> void:
 	set_from_config()
 	set_video_from_config(window)
+
+
+## 
+
+
+static var white_list = [
+	RawAction.DEV_free_cam,
+	RawAction.DEV_fly_mode,
+	RawAction.DEV_force_quit,
+	RawAction.DEV_CAM_fov
+	]
+
+# OS.is_debug_build() 
+# True: In Editor AND in "Debug" exports.
+# False: Only in final "Release" exports.
+# Benefit: use all keys in a standalone .exe if exported with "Debug" checked. 
+# 		If Release mode, they are gone.
+
+# OS.has_feature("editor"):
+# True: Only inside the Godot Editor.
+# False: In ANY export (Debug or Release).
+# Benefit: keys are vanished the moment you leave the editor.
+static func remove_developer_actions() -> void:
+	if OS.is_debug_build():
+		return
+
+	print("Release Build detected: Purging developer actions...")
+
+	var actions = InputMap.get_actions()
+	for action in actions:
+		if not action in white_list:
+			if action.begins_with("dev_"):
+				InputMap.erase_action(action)

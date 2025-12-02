@@ -71,6 +71,37 @@ var _connected_nodes: Array
 #    - automatically loads the correct current value from your settings file.
 
 
+func _ready() -> void:
+	lock_config_names = lock_config_names
+	option_section = option_section
+	option_name = option_name
+	property_type = property_type
+	
+	# Can be lost somehow. (See default_value description)
+	# And indeed it was lost. So this tries to make a safe default automatically.
+	if default_value == null:
+		match property_type:
+			TYPE_BOOL: default_value = false
+			TYPE_INT: default_value = 0
+			TYPE_FLOAT: default_value = 0.0
+			TYPE_STRING: default_value = ""
+			TYPE_COLOR: default_value = Color.WHITE
+			TYPE_VECTOR2I: default_value = Vector2i(1152, 648) # resolution
+			TYPE_VECTOR2: default_value = Vector2(1152, 648)
+			_: __log_ui.warn_(true, "non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
+		
+		if default_value != null:
+			__log_ui.warn_(false, "Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
+
+	if default_value == null:
+		__log_ui.warn_(true, "Option Control has NULL default_value", "M_OptionControl", "", "Option Name/Section/Key", [option_name, section, key])
+
+	_set_value(_get_setting(default_value))
+	for child in get_children():
+		_connect_option_inputs(child)
+	child_entered_tree.connect(_connect_option_inputs)
+
+
 func _on_setting_changed(value) -> void:
 	if Engine.is_editor_hint(): return
 	M_PlayerConfig.set_config(section, key, value)
@@ -125,16 +156,6 @@ func set_editable(value: bool = true) -> void:
 		if node is Slider or node is SpinBox or node is LineEdit or node is TextEdit:
 			node.editable = editable
 
-func _ready() -> void:
-	lock_config_names = lock_config_names
-	option_section = option_section
-	option_name = option_name
-	property_type = property_type
-	default_value = default_value
-	_set_value(_get_setting(default_value))
-	for child in get_children():
-		_connect_option_inputs(child)
-	child_entered_tree.connect(_connect_option_inputs)
 
 func _set(property: StringName, value: Variant) -> bool:
 	if property == "value":

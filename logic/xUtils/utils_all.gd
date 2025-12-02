@@ -158,7 +158,7 @@ static func safe_cast_array_of_base_weapon(array: Array[Variant]) -> Array[BaseW
 	return list_casted
 
 
-static func cut_string(text: String, limit: int = 200) -> String:
+static func cut_string(text: String, limit: int = 400) -> String:
 	if text.length() <= limit:
 		return text
 	return text.left(limit) + " ... <too long to print>"

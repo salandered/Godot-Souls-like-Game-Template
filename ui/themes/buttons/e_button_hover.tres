@@ -1,0 +1,9 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dp23dxtsqcwc5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1j0yl"]
+load_path = "res://.godot/imported/wZZNl7ooWl.png-89aee342f0b8c84824800b901ab32938.ctex"
+
+[resource]
+texture = SubResource("CompressedTexture2D_1j0yl")
+region_rect = Rect2(5.5, 36.71791, 647, 77.78209)
+modulate_color = Color(0.9999996, 0.7756998, 0.76168317, 1)

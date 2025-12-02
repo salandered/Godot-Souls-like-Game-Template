@@ -11,7 +11,7 @@ static func __print_err_msg(item: Variant, array: Array, pp_type_name: String) -
 				pp.s("Array contains non", pp.in_q(pp_type_name), " value:", pp.in_q(item)),
 				"TypeCast",
 				"return empty array",
-				"Input array", pp.list_(array))
+				"Input array", pp.array_(array))
 	return array
 
 
@@ -89,3 +89,11 @@ static func array_of_enemy_camera_target(array: Array) -> Array[EnemyCameraTarge
 
 
 # endregion
+
+
+# UI
+
+static func array_of_pause_menu_controller(array: Array) -> Array[M_PauseMenuController]:
+	var list_casted: Array[M_PauseMenuController] = []
+	list_casted.assign(_safe_validate_class(array, M_PauseMenuController, "M_PauseMenuController"))
+	return list_casted

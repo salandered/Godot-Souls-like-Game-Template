@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc37235kj4384"]
+[gd_scene load_steps=5 format=3 uid="uid://cc37235kj4384"]
 
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="1_dmagn"]
+[ext_resource type="AudioStream" uid="uid://cxy3a55req2yx" path="res://-assets-/sound/ui_sounds/kenney_ui_audio/click5.wav" id="2_nar8x"]
+[ext_resource type="AudioStream" uid="uid://273m3jxltolf" path="res://-assets-/sound/ui_sounds/kenney_ui_audio/click2.wav" id="3_fpfbd"]
+[ext_resource type="AudioStream" uid="uid://c1ptcpq26be55" path="res://-assets-/sound/ui_sounds/kenney_ui_audio/click1.wav" id="4_de7pg"]
 
 [node name="ProjectUISoundController" type="Node"]
 script = ExtResource("1_dmagn")
+button_pressed = ExtResource("2_nar8x")
+tab_changed = ExtResource("3_fpfbd")
+tab_selected = ExtResource("4_de7pg")

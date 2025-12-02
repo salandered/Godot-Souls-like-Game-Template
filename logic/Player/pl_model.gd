@@ -246,7 +246,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 
-	if event.is_action_pressed(RawAction.DEV_unstuck):
+	if event.is_action_pressed(RawAction.Unstuck):
 		global_position.y += 1.5
 		print_.dev("dbg", "Unstuck: moved player up by 1.5 units")
 

@@ -52,7 +52,7 @@ func default_by_motion(motion) -> String:
 
 
 func _to_string() -> String:
-	return "supported action_names: " + pp.list_(action_names) + "\n_motion_type_to_action:\n" + pp.dict_(_motion_type_to_default_action)
+	return "supported action_names: " + pp.array_(action_names) + "\n_motion_type_to_action:\n" + pp.dict_(_motion_type_to_default_action)
 
 
 func __validation():

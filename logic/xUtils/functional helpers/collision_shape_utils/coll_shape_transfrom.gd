@@ -15,9 +15,9 @@ static func shrink_coll_shape_capsule_size(coll_shape: CollisionShape3D, radius_
 	shape.height = _orig_height * height_mult
 
 	__log_("coll capsusle shape shrinked to",
-		pp.list_([shape.radius, shape.height]),
+		pp.array_([shape.radius, shape.height]),
 		"from",
-		pp.list_([_orig_radius, _orig_height]))
+		pp.array_([_orig_radius, _orig_height]))
 
 
 ## NOTE: consider duplication shape before calling 
@@ -28,9 +28,9 @@ static func set_coll_shape_capsule_size(coll_shape: CollisionShape3D, rad: float
 	var shape = coll_shape.shape as CapsuleShape3D
 
 	__log_("set coll caps shape to values",
-		pp.list_([rad, height]),
+		pp.array_([rad, height]),
 		"from",
-		pp.list_([shape.radius, shape.height]))
+		pp.array_([shape.radius, shape.height]))
 
 	shape.radius = rad
 	shape.height = height

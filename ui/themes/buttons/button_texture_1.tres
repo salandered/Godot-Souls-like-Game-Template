@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://d5grt08wa8so"]
 
-[ext_resource type="Texture2D" uid="uid://b4qf0w7eu1ajq" path="res://ui/themes/wZZNl7ooWl.png" id="1_wohlu"]
+[ext_resource type="Texture2D" uid="uid://ctq82ehf3hxqt" path="res://ui/main_menu_group/main_menu/tuXPs3MNSi.png" id="1_wohlu"]
 
 [resource]
 content_margin_top = 4.0
@@ -8,4 +8,4 @@ content_margin_bottom = 4.0
 texture = ExtResource("1_wohlu")
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-region_rect = Rect2(107.56384, 17.32396, 588.1583, 269.27728)
+region_rect = Rect2(33, 78, 705, 400)

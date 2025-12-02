@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dbcst66vatcfp"
+path="res://.godot/imported/championship_mode.ogg-f09edb5983d2d12af5a30fe8a8a9d60f.oggvorbisstr"
+
+[deps]
+
+source_file="res://-assets-/sound/kenney voiceover pack fighter/championship_mode.ogg"
+dest_files=["res://.godot/imported/championship_mode.ogg-f09edb5983d2d12af5a30fe8a8a9d60f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

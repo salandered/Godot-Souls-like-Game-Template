@@ -17,14 +17,14 @@ const JOYSTICK_LEFT_NAME = "Left Stick"
 const JOYSTICK_RIGHT_NAME = "Right Stick"
 const D_PAD_NAME = "Dpad"
 
-const MOUSE_BUTTONS : Array = ["None", "Left", "Right", "Middle", "Scroll Up", "Scroll Down", "Wheel Left", "Wheel Right"]
+const MOUSE_BUTTONS: Array = ["None", "Left", "Right", "Middle", "Scroll Up", "Scroll Down", "Wheel Left", "Wheel Right"]
 
-const JOYPAD_BUTTON_NAME_MAP : Dictionary = {
-	DEVICE_GENERIC : ["Trigger A", "Trigger B", "Trigger C", "", "", "", "", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right"],
-	DEVICE_XBOX_CONTROLLER : ["A", "B", "X", "Y", "View", "Home", "Menu", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right", "Share"],
-	DEVICE_SWITCH_CONTROLLER : ["B", "A", "Y", "X", "Minus", "", "Plus", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right", "Capture"],
-	DEVICE_PLAYSTATION_CONTROLLER : ["Cross", "Circle", "Square", "Triangle", "Select", "PS", "Options", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right", "Microphone"],
-	DEVICE_STEAMDECK_CONTROLLER : ["A", "B", "X", "Y", "View", "", "Options", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right"]
+const JOYPAD_BUTTON_NAME_MAP: Dictionary = {
+	DEVICE_GENERIC: ["Trigger A", "Trigger B", "Trigger C", "", "", "", "", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right"],
+	DEVICE_XBOX_CONTROLLER: ["A", "B", "X", "Y", "View", "Home", "Menu", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right", "Share"],
+	DEVICE_SWITCH_CONTROLLER: ["B", "A", "Y", "X", "Minus", "", "Plus", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right", "Capture"],
+	DEVICE_PLAYSTATION_CONTROLLER: ["Cross", "Circle", "Square", "Triangle", "Select", "PS", "Options", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right", "Microphone"],
+	DEVICE_STEAMDECK_CONTROLLER: ["A", "B", "X", "Y", "View", "", "Options", "Left Stick Press", "Right Stick Press", "Left Shoulder", "Right Shoulder", "Up", "Down", "Left", "Right"]
 } # Dictionary[String, Array]
 
 const SDL_DEVICE_NAMES: Dictionary = {
@@ -37,7 +37,7 @@ const SDL_DEVICE_NAMES: Dictionary = {
 	DEVICE_SWITCH_JOYCON_COMBINED_CONTROLLER: ["Joy-Con (L/R)", "Combined Joy-Cons"],
 }
 
-const JOY_BUTTON_NAMES : Dictionary = {
+const JOY_BUTTON_NAMES: Dictionary = {
 	JOY_BUTTON_A: "Button A",
 	JOY_BUTTON_B: "Button B",
 	JOY_BUTTON_X: "Button X",
@@ -46,47 +46,47 @@ const JOY_BUTTON_NAMES : Dictionary = {
 	JOY_BUTTON_RIGHT_SHOULDER: "Right Shoulder",
 	JOY_BUTTON_LEFT_STICK: "Left Stick",
 	JOY_BUTTON_RIGHT_STICK: "Right Stick",
-	JOY_BUTTON_START : "Button Start",
-	JOY_BUTTON_GUIDE : "Button Guide",
-	JOY_BUTTON_BACK : "Button Back",
-	JOY_BUTTON_DPAD_UP : D_PAD_NAME + " Up",
-	JOY_BUTTON_DPAD_DOWN : D_PAD_NAME + " Down",
-	JOY_BUTTON_DPAD_LEFT : D_PAD_NAME + " Left",
-	JOY_BUTTON_DPAD_RIGHT : D_PAD_NAME + " Right",
-	JOY_BUTTON_MISC1 : "Misc",
+	JOY_BUTTON_START: "Button Start",
+	JOY_BUTTON_GUIDE: "Button Guide",
+	JOY_BUTTON_BACK: "Button Back",
+	JOY_BUTTON_DPAD_UP: D_PAD_NAME + " Up",
+	JOY_BUTTON_DPAD_DOWN: D_PAD_NAME + " Down",
+	JOY_BUTTON_DPAD_LEFT: D_PAD_NAME + " Left",
+	JOY_BUTTON_DPAD_RIGHT: D_PAD_NAME + " Right",
+	JOY_BUTTON_MISC1: "Misc",
 }
 
-const JOYPAD_DPAD_NAMES : Dictionary = {
-	JOY_BUTTON_DPAD_UP : D_PAD_NAME + " Up",
-	JOY_BUTTON_DPAD_DOWN : D_PAD_NAME + " Down",
-	JOY_BUTTON_DPAD_LEFT : D_PAD_NAME + " Left",
-	JOY_BUTTON_DPAD_RIGHT : D_PAD_NAME + " Right",
+const JOYPAD_DPAD_NAMES: Dictionary = {
+	JOY_BUTTON_DPAD_UP: D_PAD_NAME + " Up",
+	JOY_BUTTON_DPAD_DOWN: D_PAD_NAME + " Down",
+	JOY_BUTTON_DPAD_LEFT: D_PAD_NAME + " Left",
+	JOY_BUTTON_DPAD_RIGHT: D_PAD_NAME + " Right",
 }
 
-const JOY_AXIS_NAMES : Dictionary = {
+const JOY_AXIS_NAMES: Dictionary = {
 	JOY_AXIS_TRIGGER_LEFT: "Left Trigger",
 	JOY_AXIS_TRIGGER_RIGHT: "Right Trigger",
 }
 
-const BUILT_IN_ACTION_NAME_MAP : Dictionary = {
-	"ui_accept" : "Accept",
-	"ui_select" : "Select",
-	"ui_cancel" : "Cancel",
-	"ui_focus_next" : "Focus Next",
-	"ui_focus_prev" : "Focus Prev",
-	"ui_left" : "Left (UI)",
-	"ui_right" : "Right (UI)",
-	"ui_up" : "Up (UI)",
-	"ui_down" : "Down (UI)",
-	"ui_page_up" : "Page Up",
-	"ui_page_down" : "Page Down",
-	"ui_home" : "Home",
-	"ui_end" : "End",
-	"ui_cut" : "Cut",
-	"ui_copy" : "Copy",
-	"ui_paste" : "Paste",
-	"ui_undo" : "Undo",
-	"ui_redo" : "Redo",
+const BUILT_IN_ACTION_NAME_MAP: Dictionary = {
+	"ui_accept": "Accept",
+	"ui_select": "Select",
+	"ui_cancel": "Cancel",
+	"ui_focus_next": "Focus Next",
+	"ui_focus_prev": "Focus Prev",
+	"ui_left": "Left (UI)",
+	"ui_right": "Right (UI)",
+	"ui_up": "Up (UI)",
+	"ui_down": "Down (UI)",
+	"ui_page_up": "Page Up",
+	"ui_page_down": "Page Down",
+	"ui_home": "Home",
+	"ui_end": "End",
+	"ui_cut": "Cut",
+	"ui_copy": "Copy",
+	"ui_paste": "Paste",
+	"ui_undo": "Undo",
+	"ui_redo": "Redo",
 }
 
 static func has_joypad() -> bool:
@@ -98,7 +98,7 @@ static func is_joypad_event(event: InputEvent) -> bool:
 static func is_mouse_event(event: InputEvent) -> bool:
 	return event is InputEventMouseButton or event is InputEventMouseMotion
 
-static func get_device_name_by_id(device_id : int) -> String:
+static func get_device_name_by_id(device_id: int) -> String:
 	if device_id >= 0:
 		var device_name = Input.get_joy_name(device_id)
 		for device_key in SDL_DEVICE_NAMES:
@@ -118,7 +118,7 @@ static func get_device_name(event: InputEvent) -> String:
 static func _display_server_supports_keycode_from_physical():
 	return OS.has_feature("windows") or OS.has_feature("macos") or OS.has_feature("linux")
 
-static func get_text(event : InputEvent) -> String:
+static func get_text(event: InputEvent) -> String:
 	if event == null:
 		return ""
 	if event is InputEventJoypadButton:
@@ -127,10 +127,10 @@ static func get_text(event : InputEvent) -> String:
 	elif event is InputEventJoypadMotion:
 		var full_string := ""
 		var direction_string := ""
-		var is_right_or_down : bool = event.axis_value > 0.0
+		var is_right_or_down: bool = event.axis_value > 0.0
 		if event.axis in JOY_AXIS_NAMES:
 			return JOY_AXIS_NAMES[event.axis]
-		match(event.axis):
+		match (event.axis):
 			JOY_AXIS_LEFT_X:
 				full_string = JOYSTICK_LEFT_NAME
 				direction_string = "Right" if is_right_or_down else "Left"
@@ -146,21 +146,24 @@ static func get_text(event : InputEvent) -> String:
 		full_string += " " + direction_string
 		return full_string
 	elif event is InputEventKey:
-		var keycode : Key = event.get_physical_keycode()
+		var keycode: Key = event.get_physical_keycode()
 		if keycode:
 			keycode = event.get_physical_keycode_with_modifiers()
 		else:
 			keycode = event.get_keycode_with_modifiers()
-		if _display_server_supports_keycode_from_physical():
+
+		# Only translate if it's NOT a special key (like Keypad or F-keys).
+		# 4194304 is the internal ID where "Special Keys" start.
+		if _display_server_supports_keycode_from_physical() and keycode < 4194304:
 			keycode = DisplayServer.keyboard_get_keycode_from_physical(keycode)
 		return OS.get_keycode_string(keycode)
 	return event.as_text()
 
-static func get_device_specific_text(event : InputEvent, device_name : String = "") -> String:
+static func get_device_specific_text(event: InputEvent, device_name: String = "") -> String:
 	if device_name.is_empty():
 		device_name = get_device_name(event)
 	if event is InputEventJoypadButton:
-		var joypad_button : String = ""
+		var joypad_button: String = ""
 		if event.button_index in JOYPAD_DPAD_NAMES:
 			joypad_button = JOYPAD_DPAD_NAMES[event.button_index]
 		elif event.button_index < JOYPAD_BUTTON_NAME_MAP[device_name].size():
@@ -170,6 +173,6 @@ static func get_device_specific_text(event : InputEvent, device_name : String = 
 		return "%s %s" % [device_name, get_text(event)]
 	if event is InputEventMouseButton:
 		if event.button_index < MOUSE_BUTTONS.size():
-			var mouse_button : String = MOUSE_BUTTONS[event.button_index]
+			var mouse_button: String = MOUSE_BUTTONS[event.button_index]
 			return "%s %s" % [DEVICE_MOUSE, mouse_button]
 	return get_text(event).capitalize()

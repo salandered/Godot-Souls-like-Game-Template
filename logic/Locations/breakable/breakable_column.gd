@@ -26,7 +26,7 @@ func initialise() -> void:
 		_breakable_area = null
 	else:
 		_breakable_area = _areas[0]
-		__log_("Signal connected")
+		# __log_("Signal connected")
 
 		_breakable_area.get_SIG_breaking_area_entered().connect(break_myself)
 

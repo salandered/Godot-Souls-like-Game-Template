@@ -58,8 +58,8 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 			# TODO
 			# DANGER: seems like offset = offset.rotated is a bad practice: Rot error will be accumulating.
 			offset = offset.rotated(vertical_axis, rot_angle * scale)
-		else: # denom ~ 0 means input had ~no theta change; do nothing this frame
-			__log_("vert mouse move skip frame")
+		# else: # denom ~ 0 means input had ~no theta change; do nothing this frame
+			# __log_("vert mouse move skip frame")
 	
 	# DEV
 	# var theta_after := acos(clamp(free_offset.normalized().dot(Vector3.UP), -1.0, 1.0))

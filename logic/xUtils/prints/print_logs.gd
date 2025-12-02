@@ -326,6 +326,38 @@ static func __calculate_tab_prefix(info_indents: int) -> String:
 			tabs_prefix += "    "
 	return tabs_prefix
 
+
+class ParsedPrefix:
+	var prefix: String
+	var index: int
+
+	func _init(prefix_: String, index_: int) -> void:
+		prefix = prefix_
+		index = index_
+
+static func parse_prefix(encoded_prefix_: String) -> ParsedPrefix:
+	var parts := encoded_prefix_.split(" ", false)
+
+	if parts.size() == 0:
+		return ParsedPrefix.new("", 0)
+
+	if parts.size() == 1:
+		return ParsedPrefix.new(parts[0], 0)
+
+
+	var prefix_info = parts[0]
+	var index := 0
+	if parts[-1].is_valid_int():
+		var prefix_parts = parts.slice(0, -1) # all except last
+		prefix_info = " ".join(prefix_parts)
+		index = int(parts[-1])
+	else:
+		prefix_info = " ".join(parts) # join all parts
+		index = 0
+
+	return ParsedPrefix.new(prefix_info, index)
+
+
 # endregion
 
 # --------------------------

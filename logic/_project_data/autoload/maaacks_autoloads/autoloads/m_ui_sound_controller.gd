@@ -1,5 +1,7 @@
 extends Node
 class_name M_UISoundController
+
+
 ## Controller for managing all UI sounds in a scene from one place.
 ##
 ## This node manages all of the UI sounds under the provided node path.

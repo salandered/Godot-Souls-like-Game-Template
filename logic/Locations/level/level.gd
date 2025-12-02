@@ -1,4 +1,7 @@
 extends Node3D
+
+## TODO: tie with BaseLevel
+
 @onready var player_pack: Princess = $PrincessPack
 @onready var lighting: Node3D = $LIGHTING
 @onready var world_environment: WorldEnvironment = $LIGHTING/WorldEnvironment

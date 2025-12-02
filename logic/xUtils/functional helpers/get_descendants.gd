@@ -124,3 +124,11 @@ static func base_ph_leaf_states(node: Node) -> Array:
 static func enemy_camera_targets(node: Node) -> Array[EnemyCameraTarget]:
 	var r = _get_descendants_filtered(node, func(n): return n is EnemyCameraTarget)
 	return TypeCast.array_of_enemy_camera_target(r)
+
+
+# UI
+
+static func pause_menu_controller(node: Node) -> Array[M_PauseMenuController]:
+	var r = _get_descendants_filtered(node, func(n): return n is M_PauseMenuController)
+	return TypeCast.array_of_pause_menu_controller(r)
+# 

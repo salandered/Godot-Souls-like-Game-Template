@@ -8,7 +8,6 @@
 resource_name = "dark_wooden_planks"
 cull_mode = 2
 albedo_texture = ExtResource("1_5c7bw")
-metallic_texture = ExtResource("2_yulrl")
 metallic_texture_channel = 2
 roughness_texture = ExtResource("2_yulrl")
 roughness_texture_channel = 1

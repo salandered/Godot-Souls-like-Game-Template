@@ -1,0 +1,14 @@
+
+LABS is part of spitfire.
+LICENSE: https://www.spitfireaudio.com/pages/spitfire-audio-end-user-license-agreement
+
+main points:
+
+Commercial Use: Allowed. You can use these sounds in a commercial game or soundtrack without paying royalties.
+
+Attribution: Not required. You do not need to credit them in your game or marketing.
+
+Redistribution: You cannot share the .vst or sample files with others (even teammates). Each person needs their own download.
+
+"Naked" Samples: You cannot expose the raw sound in a way that allows users to easily extract it (e.g., a single isolated sound effect file). 
+	It must be mixed into a music track or layered with other sounds.

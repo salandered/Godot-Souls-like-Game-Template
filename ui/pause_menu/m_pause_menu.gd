@@ -60,6 +60,7 @@ func _on_restart_button_pressed() -> void:
 	%ConfirmRestart.popup_centered()
 	popup_open = %ConfirmRestart
 
+#
 func _on_options_button_pressed() -> void:
 	open_options_menu()
 

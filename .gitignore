@@ -35,6 +35,7 @@ mono_crash.*.json
 # Project non essentials
 misc/
 ideas/
+-adopting/
 
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons

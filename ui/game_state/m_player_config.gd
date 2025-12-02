@@ -38,8 +38,15 @@ static func set_config(section: String, key: String, value) -> void:
 static func get_config(section: String, key: String, default = null) -> Variant:
 	load_config_file()
 	if section == "" or key == "":
-		print_.warn(true, "empty section or key was asked", "get_config", "return null", section, key)
+		print_.warn(true, "empty section or key was asked", "get_config", "return null", "section/key/default", [section, key, default])
 		return null
+
+	if not config_file.has_section_key(section, key):
+		if default == null:
+			__log_ui.warn_(true, "Config key missing and NO default provided", "get_config", "return null", "section/key/default", [section, key, default])
+			return null
+		return default # if no key but default => return immediately
+	
 	return config_file.get_value(section, key, default)
 
 static func has_section(section: String) -> bool:
