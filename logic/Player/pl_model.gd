@@ -63,7 +63,11 @@ func initialise() -> void:
 	__dev_initialise()
 
 
-func pretty_name() -> String:
+func is_player() -> bool:
+	return true
+
+
+func pp_character_name() -> String:
 	return "Player"
 
 ## not nullable in theory
@@ -155,15 +159,6 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 		print_.warn(false, "player_sm.get_curr_action() is null", caller_log, "return null")
 		return null
 	return action
-
-# endregion
-
-
-# region: __LOGS
-
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
-	print_.warn(crucial, what, where + "| player model", fallback, pp.list_(details))
-
 
 # endregion
 

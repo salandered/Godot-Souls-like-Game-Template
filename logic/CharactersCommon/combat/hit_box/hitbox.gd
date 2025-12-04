@@ -1,7 +1,6 @@
 @tool
 @icon("res://-assets-/x_icons/red/hit_box_3d.svg")
-extends Area3D
-
+extends BaseArea3DCharacterSystem
 ## Area which CAN BE damaged. Opposed to an area which DAMAGES.
 class_name CharacterHitbox
 
@@ -65,12 +64,12 @@ func _ready() -> void:
 	# Duplicate to avoid shared resource issues
 	_my_coll_shapes[0].shape = original_shape.duplicate()
 	var shape := _my_coll_shapes[0].shape as CapsuleShape3D
-	print_.hit_box(name, "Duplicated capsule shape used in CollisionShape! " + shape.resource_name)
+	__log_("Duplicated capsule shape used in CollisionShape! " + shape.resource_name)
 
 	_original_capsule_shape_radius = shape.radius
 	_original_capsule_shape_height = shape.height
 
-	print_.hit_box(name, "--- CharacterHitbox ready ---")
+	__log_("--- CharacterHitbox ready ---")
 
 
 func _physics_process(delta):
@@ -78,6 +77,10 @@ func _physics_process(delta):
 		for area in get_overlapping_areas():
 			on_area_contact(area)
 
+
+func pp_name():
+	var character_name = "Pl" if is_player() else "E"
+	return pp.s(character_name, "💢 HitBox")
 
 # region: shape logic
 
@@ -111,7 +114,7 @@ func on_area_contact(incoming_area: Node3D):
 	var _weapon_area := incoming_area as WeaponHurtBox
 	var weapon: BaseWeapon = _weapon_area.base_weapon
 	if not weapon:
-		__log_warn("weapon is null", "on_area_contact", "return")
+		__log_warn(false, "weapon is null", "on_area_contact", "return")
 		return
 
 	if _is_weapon_mine(weapon):
@@ -129,15 +132,15 @@ func on_area_contact(incoming_area: Node3D):
 
 	## NOTE: adding to contact list only after other checks
 	if weapon.is_in_contact_hitbox_list(self):
-		__log_("is_in_contact_hitbox_list true", weapon._contact_hitbox_list, self)
+		# __log_("is_in_contact_hitbox_list true", "len of contact hitb list", len(weapon.get_contact_hitbox_list()))
 		return
 	weapon.add_hitbox_to_contact_list(self)
 
-	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon._weapon_name), "by", pp.in_q(weapon.holder.name)))
+	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_name()), "by", pp.in_q(weapon.holder.name)))
 
 	var hit_data := weapon.get_hit_data()
 	if not hit_data:
-		__log_warn("weapon hit data is null", "on_area_contact", "return")
+		__log_warn(false, "weapon hit data is null", "on_area_contact", "return")
 		return
 
 	# if combat is PlayerCombat:
@@ -155,21 +158,20 @@ func _is_weapon_mine(weapon: BaseWeapon) -> bool:
 	# certain groups of weapons in the future. See Groups.Weapons 
 
 func _to_string() -> String:
-	return "name '%s' of Combat '%s'" % [name, combat.get_combat_name()]
+	return "name '%s' of Combat '%s'" % [pp_name(), combat.pp_name()]
 
 
 var __EXTRA_LOG_B: bool = false
 
 
-func __log_(...parts: Array):
-	# if not combat.is_player():
-	print_.hit_box(name, pp.list_(parts))
-
 func __log_extra(...parts: Array):
 	# if not combat.is_player():
 	if __EXTRA_LOG_B:
-		print_.hit_box(name, pp.list_(parts))
+		__log_(pp.list_(parts))
 
 
-func __log_warn(what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(false, what, "HitBox " + self.name + " " + where, fallback, pp.list_(context))
+func __LOG_B():
+	return LogToggler.HIT_HURT_BOX_B
+
+func __LOG_INDENT() -> int:
+	return 10

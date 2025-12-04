@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://ui/ui_utils/options_nodes/m_slider_option_control.tscn" id="2_bgi0i"]
 [ext_resource type="PackedScene" uid="uid://dm0tmwxfcv6e4" path="res://ui/main_menu_group/options_menu/tabs/audio/m_audio_input_option_control.tscn" id="3_bgi0i"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="3_n0k5e"]
-[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/themes/separator/h_separator.tscn" id="4_7lrho"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/ui_utils/separator/h_separator.tscn" id="4_7lrho"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://ui/ui_utils/options_nodes/m_toggle_option_control.tscn" id="4_ghcf0"]
 [ext_resource type="PackedScene" uid="uid://b4gwx10tcba27" path="res://ui/ui_utils/nodes/vertical_margin.tscn" id="4_uuhkv"]
 
@@ -49,9 +49,9 @@ option_name = "Mute"
 option_section = 2
 key = "Mute"
 section = "AudioSettings"
+default_value = false
 
 [node name="AudioInputOptionControl" parent="VBoxContainer" instance=ExtResource("3_bgi0i")]
-visible = true
 layout_mode = 2
 default_value = "DEFAULT"
 

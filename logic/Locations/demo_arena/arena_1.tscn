@@ -1,9 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://mdwtc0gt416o"]
+[gd_scene load_steps=33 format=3 uid="uid://mdwtc0gt416o"]
 
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/Locations/demo_arena/arena_1.gd" id="1_sr72e"]
 [ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/materials-shared/simple/texture_08.png" id="1_tv3r5"]
 [ext_resource type="PackedScene" uid="uid://dwwngduom3lf" path="res://logic/Locations/environments/blue_skies.tscn" id="2_d2h10"]
-[ext_resource type="Texture2D" uid="uid://dl5jjiun3k281" path="res://ui/themes/buttons/g5lIOlQpYb.png" id="2_sr72e"]
+[ext_resource type="Texture2D" uid="uid://dl5jjiun3k281" path="res://-assets-/ui/themes/buttons/g5lIOlQpYb.png" id="2_sr72e"]
 [ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/shaders/gdquest-like/sky/blue_sky.tres" id="3_gjxs0"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/materials-shared/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="3_pdbkk"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/materials-shared/_images/legacy/Stone Dirt Wall 02_diffuse.png" id="4_l1fmd"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/Locations/_dev/simple_target/SimpleTarget.tscn" id="7_hnne2"]
 [ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/Locations/demo_arena/dark_crate.tscn" id="11_hnne2"]
 [ext_resource type="PackedScene" uid="uid://sq53nltxquwd" path="res://-assets-/GLB-level/minimal-arena/linkoln/LINCOLN_WRAPPER.tscn" id="13_agoul"]
-[ext_resource type="PackedScene" path="res://-assets-/GLB-level/minimal-arena/lady/LADY_WRAPPER.tscn" id="14_f5x12"]
+[ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://-assets-/GLB-level/minimal-arena/lady/LADY_WRAPPER.tscn" id="14_f5x12"]
 [ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/minimal-arena/island/ISLAND_WRAPPER.tscn" id="15_f83oq"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/Player/Princess_2.tscn" id="16_0nq4r"]
 [ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/minimal-arena/tower/TOWER_WRAPPER.tscn" id="16_7rx1e"]
@@ -63,15 +63,6 @@ albedo_texture = ExtResource("5_ccwh7")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5x12"]
 albedo_texture = ExtResource("6_6cxb7")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f83oq"]
-albedo_color = Color(0.7928, 0.8, 0.368, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rx1e"]
-albedo_color = Color(0.15, 0.915, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tudsi"]
-albedo_color = Color(0.136167, 0.43, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ic6w"]
 albedo_color = Color(0.32294998, 0.1319595, 0, 1)
@@ -173,22 +164,18 @@ material = SubResource("StandardMaterial3D_f5x12")
 
 [node name="Target" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
 transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, 410.885, -17.223618, -205.20702)
-material_override = SubResource("StandardMaterial3D_f83oq")
 label = "yellow"
 
 [node name="Target4" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
 transform = Transform3D(0.33271, 0, 0.958699, 0, 2.47654, 0, -0.958699, 0, 0.33271, 403.216, -17.223618, -218.04442)
-material_override = SubResource("StandardMaterial3D_7rx1e")
 label = "blue"
 
 [node name="Target7" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
 transform = Transform3D(0.310874, 0, 0.966, 0, 2.47654, 0, -0.966, 0, 0.310874, 394.224, -16.456387, -212.38301)
-material_override = SubResource("StandardMaterial3D_tudsi")
 label = "group_4"
 
 [node name="Target8" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
 transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, 396.102, -16.553547, -203.546)
-material_override = SubResource("StandardMaterial3D_tudsi")
 label = "group_5"
 
 [node name="Box4" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]

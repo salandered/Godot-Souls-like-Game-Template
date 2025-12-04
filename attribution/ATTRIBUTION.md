@@ -58,10 +58,10 @@ Author: Found Sound Nation
 Source: [brokenorchestra.foundsoundnation.org](https://brokenorchestra.foundsoundnation.org/#about)
 License: [Custom / Royaltee free / mandatory attribution](attribution/music/broken_orchestra/sample-pack-terms.pdf)
 Attribution: 
->                                                        *Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.* 
->                                                        *Symphony for a Broken Orchestra was commissioned by Temple Contemporary* 
->                                                        *at The Tyler School of Art. Major support is provided by The Pew Center* 
->                                                        *for Arts & Heritage, with additional support from the Barra Foundation.*
+>                                                                                                                              *Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.* 
+>                                                                                                                              *Symphony for a Broken Orchestra was commissioned by Temple Contemporary* 
+>                                                                                                                              *at The Tyler School of Art. Major support is provided by The Pew Center* 
+>                                                                                                                              *for Arts & Heritage, with additional support from the Barra Foundation.*
 Notes: Used in tracks: Siren Tarot.
 
 

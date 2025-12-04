@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://q1hs3gkp7qr0"]
+[gd_scene load_steps=3 format=3 uid="uid://ta367bodbhjs"]
 
 [ext_resource type="PackedScene" uid="uid://dt8721t5cjc0r" path="res://-assets-/animations/GLB-packed/basic_packs/single/sitting.glb" id="1_a8il3"]
 [ext_resource type="Script" uid="uid://cbh2sjk7c8j4y" path="res://-assets-/animations/GLB-packed/basic_packs/single/sitting_wrapper.gd" id="2_jmtx7"]

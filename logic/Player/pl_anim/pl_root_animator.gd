@@ -1,11 +1,14 @@
-extends Node
+extends BaseNodeCharacterSystem
 ## Sub part of PlayerModifierAnimator which calculates root related data
 class_name PlayerRootAnimator
 
 @onready var full_body: PlayerModifierAnimator = %FullBody
 
-
 var _root_track: String
+
+
+func is_player() -> bool:
+	return true
 
 
 func initialise(root_track: String) -> void:
@@ -30,7 +33,7 @@ func get_custom_delta() -> float:
 
 func get_prev_root_rotation() -> float:
 	if get_prev_playback().get_effective_time_spent() >= get_prev_playback().anim.duration:
-		print_.skm("PlayerRootAnimator", "Will return 0.0. effective_prog >= anim.duration. Details:" + get_prev_playback()._to_string_short(), 0, LogL.FORCE_PRINT)
+		__log_("", "Will return 0.0. effective_prog >= anim.duration. Details:", get_prev_playback()._to_string_short())
 		return 0.0
 	var prev_rotation_delta := _calculate_rotation_delta(get_prev_playback(), BoneIdx.ROOT)
 	# var rotation_ := prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
@@ -140,3 +143,18 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 	
 	var result := velocity.length() * anim.speed_scale
 	return result
+
+
+# region __LOGS
+
+func pp_name() -> String:
+	return "SKM 💀 PlayerRootAnimator"
+
+
+func __LOG_B() -> bool:
+	return LogToggler.SKM_B
+
+func __LOG_INDENT() -> int:
+	return 4
+
+# endregion

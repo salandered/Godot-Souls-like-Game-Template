@@ -20,7 +20,7 @@ signal game_exited
 @export_group("Extra Settings")
 @export var signal_game_start: bool = false
 @export var signal_game_exit: bool = false
-@export var bypass_menu_and_start_game: bool = true # added
+@export var __dev_bypass_menu_and_start_game: bool = false # added
 @export var initial_focus_target: Control # added
 
 var options_scene
@@ -57,7 +57,7 @@ var sub_menu
 
 func _ready() -> void:
 	# Check if the bypass flag is enabled
-	if bypass_menu_and_start_game:
+	if __dev_bypass_menu_and_start_game:
 		# If a saved game exists, continue it. Otherwise, start a new one.
 		# load_game_scene()
 		_on_level_1_button_pressed()

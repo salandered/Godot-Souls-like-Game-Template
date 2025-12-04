@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqqngki8bm3iq"]
 
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://ui/ui_utils/legacy_capture_focus.gd" id="2_0708m"]
-[ext_resource type="Script" uid="uid://droejgtv8bu0s" path="res://ui/main_menu_group/main_menu/m_overlaid_menu_container.gd" id="2_owcue"]
+[ext_resource type="Script" uid="uid://droejgtv8bu0s" path="res://ui/_later/mini_menu_via_overlaid/m_overlaid_menu_container.gd" id="2_owcue"]
 
 [node name="OverlaidMenuContainer" type="Control"]
 layout_mode = 3

@@ -1,67 +1,20 @@
 extends RefCounted
 class_name print_
 
-# region: FILTERS
-# 
 const _FRAME_PRINT := true
 
-# COMMON
-const DEV_B := true
-const COLLISION_B := true
-const FEEL_B := false
-const REACT_UTILS_B := false
-
-# CONTAINER
-const CONTAINER_B := false
-const E_CONTAINER_B := false
-
-# FIGHT
-const FIGHT_B := false
-const COMBO_B := false
-const HIT_HURT_BOX_B := true
-const WEAPON_B := false
-
-# PLAYER PSM
-const PSM_B := false
-const SKM_B := false
-const ACTION_ANIM_B := false
-const META_STATES_B := false
-
-# PLAYER LSM
-const LSM_BEH_B := false
-const LSM_ACTION_B := false
-
-# PL SYSTEMS
-const input_gathering_B := false
-const FANCY_CAM_B := true
-const AWARENESS_B := true
-
-# ENEMY
-const PHE_CHECK_B := false
-const PHE_B := false
-const PHE_ANIM_B := false
-const E_ANIM_MANAGER_B := false
-# endregion
-
-#----------------------
 
 ## COMMON
 
-static var PL_FEEL_PRINT := PrintData.PrintInstance.new(FEEL_B, "feel🤍", 10, prefix)
-static var E_FEEL_PRINT := PrintData.PrintInstance.new(FEEL_B, "🗿feel🖤", 10, prefix)
+static var DEV_PRINT := PrintData.PrintInstance.new(LogToggler.DEV_B, "dev", 0, prefix)
 
-
-static func feel(for_player: bool, add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	if for_player:
-		_generic(PL_FEEL_PRINT, add_prefix_, text, info_indents, level)
-	else:
-		_generic(E_FEEL_PRINT, add_prefix_, text, info_indents, level)
-
+static func dev(add_prefix_: String, text: Variant = "", info_indents: int = 0, level: String = LogL.NOTSET):
+	_generic(DEV_PRINT, add_prefix_, text, info_indents, level)
 
 # region: CONTAINER
 
-static var CONTAINER_PRINT := PrintData.PrintInstance.new(CONTAINER_B, "Container", 0, prefix)
-static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(E_CONTAINER_B, "Container", 0, prefix)
+static var CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.CONTAINER_B, "Container", 0, prefix)
+static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.E_CONTAINER_B, "Container", 0, prefix)
 
 
 static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
@@ -75,24 +28,13 @@ static func e_container(add_prefix_: String, text: String, info_indents: int = 0
 
 # region: FIGHT logs
 
-static var COMBO_PRINT := PrintData.PrintInstance.new(COMBO_B, "Combo xx", 0, fight)
-static var HIT_BOX_PRINT := PrintData.PrintInstance.new(HIT_HURT_BOX_B, "💢 HitBox", 1, fight)
-static var HURT_BOX_PRINT := PrintData.PrintInstance.new(HIT_HURT_BOX_B, "🔻 HurtBox", 1, fight)
-static var WEAPON_PRINT := PrintData.PrintInstance.new(WEAPON_B, "🗡️ Weapon", 0, fight)
-static var FIGHT_PRINT := PrintData.PrintInstance.new(FIGHT_B, "⚔️", 0, prefix)
+static var COMBO_PRINT := PrintData.PrintInstance.new(LogToggler.COMBO_B, "Combo xx", 0, fight)
+static var FIGHT_PRINT := PrintData.PrintInstance.new(LogToggler.FIGHT_B, "⚔️", 0, prefix)
 
 
 static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(COMBO_PRINT, add_prefix_, text, info_indents, level)
 
-static func hit_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(HIT_BOX_PRINT, add_prefix_, text, info_indents, level)
-
-static func hurt_box(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(HURT_BOX_PRINT, add_prefix_, text, info_indents, level)
-
-static func weapon(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(WEAPON_PRINT, add_prefix_, text, info_indents, level)
 
 static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(FIGHT_PRINT, add_prefix_, text, info_indents, level)
@@ -101,11 +43,10 @@ static func fight(add_prefix_: String, text: String, info_indents: int = 0, leve
 
 # region: PLAYER PSM
 
-static var ACTION_ANIM := PrintData.PrintInstance.new(ACTION_ANIM_B, "▷", 16, psm)
-static var PSM_ACTION := PrintData.PrintInstance.new(PSM_B, "Action", 2, psm)
-static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(PSM_B, "transition ❔", 1, psm)
-static var PSM_PRINT := PrintData.PrintInstance.new(PSM_B, "PSM", 0, prefix)
-static var SKM_PRINT := PrintData.PrintInstance.new(SKM_B, "SKM 💀", 0, prefix)
+static var ACTION_ANIM := PrintData.PrintInstance.new(LogToggler.ACTION_ANIM_B, "▷", 16, psm)
+static var PSM_ACTION := PrintData.PrintInstance.new(LogToggler.PSM_B, "Action", 2, psm)
+static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "transition ❔", 1, psm)
+static var PSM_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "PSM", 0, prefix)
 
 static func any_action_anim(
 	add_prefix_: String, anim_name: String,
@@ -128,18 +69,16 @@ static func psm_action(add_prefix_: String, text: String, info_indents: int = 0,
 static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(PSM_PRINT, add_prefix_, text, info_indents, level)
 
-static func skm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(SKM_PRINT, add_prefix_, text, info_indents, level)
 
 # endregion
 
 # region: PLAYER LSM
 
-static var LSM_BEH_CH := PrintData.PrintInstance.new(LSM_BEH_B, "choose act ❔", 4, lsm_beh)
-static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LSM_BEH_B, "Behavior", 4, lsm)
-static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LSM_ACTION_B, "Strafe", 6, lsm_action)
-static var LSM_ACTION := PrintData.PrintInstance.new(LSM_ACTION_B, "Action", 6, lsm)
-static var LSM_PRINT := PrintData.PrintInstance.new(LSM_BEH_B, "LSM", 3, prefix)
+static var LSM_BEH_CH := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "choose act ❔", 4, lsm_beh)
+static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "Behavior", 4, lsm)
+static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LogToggler.LSM_ACTION_B, "Strafe", 6, lsm_action)
+static var LSM_ACTION := PrintData.PrintInstance.new(LogToggler.LSM_ACTION_B, "Action", 6, lsm)
+static var LSM_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "LSM", 3, prefix)
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 	is_moving, is_reverse_moving, is_pure_reverse_moving, text, decision,
@@ -175,36 +114,23 @@ static func lsm(add_prefix_: String, text: String, info_indents: int = 0, level:
 
 # region: PLAYER SYSTEMS
 
-static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(input_gathering_B, "Input", 0, prefix)
-static var DEV_PRINT := PrintData.PrintInstance.new(DEV_B, "dev", 0, prefix)
-static var FANCY_CAM_PRINT := PrintData.PrintInstance.new(FANCY_CAM_B, "🎥 Cam", 0, prefix)
-static var AWARE_TARGET_PRINT := PrintData.PrintInstance.new(AWARENESS_B, "🎯", 0, prefix)
-static var AWARE_PRINT := PrintData.PrintInstance.new(AWARENESS_B, "👀", 0, prefix)
+static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(LogToggler.input_gathering_B, "Input", 0, prefix)
+static var FANCY_CAM_PRINT := PrintData.PrintInstance.new(LogToggler.FANCY_CAM_B, "🎥 Cam", 0, prefix)
 
 static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(INPUT_GATHERING_PRINT, add_prefix_, text, info_indents, level)
-
-static func dev(add_prefix_: String, text: Variant = "", info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(DEV_PRINT, add_prefix_, text, info_indents, level)
 
 static func fancy_cam(add_prefix_: String, text: Variant, info_indents: int = 0, level: String = LogL.NOTSET):
 	_generic(FANCY_CAM_PRINT, add_prefix_, text, info_indents, level)
 
 
-static func aware_target(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(AWARE_TARGET_PRINT, add_prefix_, text, info_indents, level)
-
-static func aware(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
-	_generic(AWARE_PRINT, add_prefix_, text, info_indents, level, freq)
-
 # endregion
 
 # region: ENEMY logs
 
-static var PHE_ANIM_PRINT := PrintData.PrintInstance.new(PHE_ANIM_B, "▷ anim", 16, phe_sm)
-static var PHE_CHECK_PRINT := PrintData.PrintInstance.new(PHE_CHECK_B, "transition ❔", 0, phe_sm)
-static var PHE_SM_PRINT := PrintData.PrintInstance.new(PHE_B, "🗿", 1, prefix)
-static var ANIM_MANAGER_PRINT := PrintData.PrintInstance.new(E_ANIM_MANAGER_B, "E▷", 12, prefix)
+static var PHE_ANIM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_ANIM_B, "▷ anim", 16, phe_sm)
+static var PHE_CHECK_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_CHECK_B, "transition ❔", 0, phe_sm)
+static var PHE_SM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_B, "🗿", 1, prefix)
 
 
 static func phe_anim(add_prefix_: String, anim_name: String,
@@ -239,8 +165,6 @@ static func phe_check(add_prefix_: String, text: String, info_indents: int = 0, 
 static func phe_sm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
 	_generic(PHE_SM_PRINT, add_prefix_, text, info_indents, level, freq)
 
-static func anim_manager(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
-	_generic(ANIM_MANAGER_PRINT, add_prefix_, text, info_indents, level, freq)
 
 # endregion
 
@@ -364,11 +288,8 @@ static func parse_prefix(encoded_prefix_: String) -> ParsedPrefix:
 
 # region: UNSORTED
 
-static func _ready_info(node: Node, info_indents: int = 0):
-	print("||", node.name, " ready()")
-	_info(node, "", 1)
 
-static func _info(node: Node, prefix_: String = "", info_indents: int = 0):
+static func node_info(node: Node, prefix_: String = "", info_indents: int = 0):
 	## detailed information about the given node
 	if prefix_:
 		print(prefix_)
@@ -386,7 +307,7 @@ static func _info(node: Node, prefix_: String = "", info_indents: int = 0):
 
 
 static func collisions(node: Node, info_indents: int = 0, layer_: bool = true, level: String = LogL.NOTSET):
-	if not COLLISION_B and level != LogL.FORCE_PRINT: return
+	if not LogToggler.COLLISION_B and level != LogL.FORCE_PRINT: return
 	print("COLLISION LAYER AND MASK")
 	var layer = "none"
 	if layer_: layer = node.collision_layer

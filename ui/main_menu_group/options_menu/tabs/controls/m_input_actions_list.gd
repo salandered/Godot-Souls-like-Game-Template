@@ -216,7 +216,7 @@ func _add_new_button(content: Variant, container: Control, disabled: bool = fals
 	else:
 		new_button.size_flags_vertical = SIZE_EXPAND_FILL
 		
-	new_button.add_theme_font_size_override("font_size", 20)
+	new_button.add_theme_font_size_override("font_size", 28)
 	#new_button.set_size( Vector2(30,10))
 	new_button.theme_type_variation = "InputButton"
 	new_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER

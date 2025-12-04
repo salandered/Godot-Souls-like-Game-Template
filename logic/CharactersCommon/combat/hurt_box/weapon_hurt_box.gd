@@ -1,6 +1,6 @@
 @tool
 @icon("res://-assets-/x_icons/red/comet-red.svg")
-extends Area3D
+extends BaseArea3DCharacterSystem
 
 ## Weapon area which DAMAGES.
 ## HitBox registers collision with it and uses base_weapon for calculations
@@ -30,6 +30,14 @@ func _physics_process(delta):
 	# racks weapon _velocity
 	_velocity = (global_position - _previous_position) / delta
 	_previous_position = global_position
+
+
+func is_player() -> bool:
+	return base_weapon.is_player()
+
+func pp_name():
+	var character_name = "Pl" if is_player() else "E"
+	return pp.s(character_name, get_my_weapon_name(), "🔻 HurtBox")
 
 func _get_weapon_push_force() -> int:
 	if base_weapon.is_player():
@@ -64,8 +72,9 @@ func get_my_weapon_name() -> String:
 
 ## __LOGS
 
-func __log_(...parts: Array):
-	print_.hurt_box(pp.s(name, get_my_weapon_name()), pp.list_(parts))
 
-func __log_warn(what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(false, what, pp.s("HurtBox", name, get_my_weapon_name(), where), fallback, pp.list_(context))
+func __LOG_B():
+	return LogToggler.HIT_HURT_BOX_B
+
+func __LOG_INDENT() -> int:
+	return 10

@@ -2,7 +2,7 @@
 @icon("res://-assets-/x_icons/white/icon_grid.png")
 
 extends BaseAnimationContainer
-## for simplicity this container is used for all characters.
+## for simplicity this container is used for all characters for now.
 ## if native_player dont have animation name from _animations, it will simply skip it
 class_name AnimationContainer
 
@@ -12,7 +12,7 @@ var _anim_by_id := {}
 
 ## MAIN INTERFACE
 func get_by_anim_id(anim_id: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_id, anim_id, null, Fallback.WARN, "AnimationContainer.get_by_anim_id")
+	return u.safe_get_dict_key(_anim_by_id, anim_id, null, Fallback.WARN, pp.s(pp_name(), "get_by_anim_id"))
 
 
 ## native_player - player's player, se's player, etc
@@ -52,10 +52,10 @@ func _accept_animations(_animations: Array[AnimationData], native_player: Animat
 		if not AnimationData.__validate_anim(anim, param_prefixes, param_tracks, required_markers):
 			invalid_animations.append(anim.anim_name)
 		else:
-			print_.container("", anim.anim_name + " is valid")
+			__log_("", anim.anim_name, "is valid")
 
 	if invalid_animations.size() > 0:
-		print_.warn_raw(false, "Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)])
+		__log_warn(false, "Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)], "", "")
 
 
 static func __build_track_cache(native_anim: Animation) -> Dictionary:
@@ -85,3 +85,17 @@ static func __get_animation_markers(animation: Animation) -> Dictionary:
 		markers_dict[marker_name] = marker
 	
 	return markers_dict
+
+
+## WARNING: used for all characters actually
+func is_player() -> bool:
+	return true
+
+func pp_name() -> String:
+	return "Anim Container"
+
+func __LOG_B() -> bool:
+	return LogToggler.CONTAINER_B
+
+func __LOG_INDENT() -> int:
+	return 0

@@ -21,23 +21,23 @@ class_name PlAnimatorManager
 func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float = 0.0) -> void:
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 	if anim == null:
-		push_error("Overlay anim not found: " + anim_id)
+		__log_warn(true, "Overlay anim not found: " + anim_id, "set_overlay_anim", "")
 		return
 	overlay_modifer.set_overlay_anim(anim, overlay_config, start_time_offset)
 
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if blend_for < 0:
-		print_.warn_raw(false, "blend_for < 0 is not supported, 0 will be used:" + str(blend_for))
+		__log_warn(false, "blend_for < 0 is not supported", "set_anim_to_play", "0 will be used", blend_for)
 		blend_for = 0
 
 	if start_time_offset < 0:
-		print_.warn_raw(false, "start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset))
+		__log_warn(false, "start time shift < 0 is not supported", "set_anim_to_play", "0 will be used", start_time_offset)
 		start_time_offset = 0
 
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 	if anim == null:
-		push_error("set_anim_to_play fail: animation not found: " + anim_id)
+		__log_warn(true, "set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 
 	full_body.set_anim_to_play(anim, blend_for, start_time_offset)
@@ -128,3 +128,16 @@ func initialise():
 	
 	_begin.initialise()
 	_end.initialise()
+
+
+func is_player() -> bool:
+	return true
+
+func pp_name() -> String:
+	return "player animator"
+
+func __LOG_INDENT() -> int:
+	return 0
+
+func __LOG_B() -> bool:
+	return true

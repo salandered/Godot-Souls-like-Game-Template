@@ -3,7 +3,7 @@
 
 @abstract
 class_name BaseWeapon
-extends Node3D
+extends BaseNode3DCharacterSystem
 
 ## Weapon consists of
 # - WeaponHurtBox (area3D) - PACKED SCENE
@@ -18,7 +18,6 @@ extends Node3D
 
 ## managed by implementation
 var _weapon_hurt_box: WeaponHurtBox
-var _weapon_name: String = "no_weapon_name_please_add"
 
 ## To get a hit only once per attack.
 ## Hitbox A on contact: 
@@ -43,7 +42,6 @@ func _ready() -> void:
 	
 	_weapon_hurt_box.base_weapon = self
 
-	_weapon_name = get_weapon_name()
 
 	if not get_weapon_visuals():
 		pass
@@ -60,12 +58,14 @@ func _ready() -> void:
 @abstract func get_weapon_hurt_box() -> WeaponHurtBox
 
 
+func pp_name() -> String:
+	return pp.s("🗡️ Weapon", get_weapon_name())
+
+
 @abstract func get_weapon_name() -> String
 
 ## could be nullable (aura weapon)
 @abstract func get_weapon_visuals() -> MeshInstance3D
-
-@abstract func is_player() -> bool
 
 
 func is_attacking() -> bool:
@@ -92,6 +92,10 @@ func reset_hit_data():
 ## CONTACT HITBOX LIST MANAGEMENT
 # region
 
+func get_contact_hitbox_list() -> Array[CharacterHitbox]:
+	return _contact_hitbox_list
+
+
 func is_in_contact_hitbox_list(hitbox: CharacterHitbox) -> bool:
 	return hitbox in _contact_hitbox_list
 
@@ -114,17 +118,14 @@ func reset_contact_hitbox_list() -> void:
 ## __LOGS
 # region
 
-func __pp_holder() -> String:
-	return holder.name
+func __LOG_B():
+	return LogToggler.WEAPON_B
 
+func __LOG_INDENT() -> int:
+	return 0
 
 func _to_string() -> String:
-	return "ID '%s' wepName '%s' Holder '%s' ContactHiBList '%s' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), _weapon_name, holder.name, pp.array_(_contact_hitbox_list), str(_is_attacking), str(_hit_data)]
-
-
-func __log_(...parts: Array):
-	print_.weapon(_weapon_name, pp.list_(parts))
-
+	return "ID '%s' wepName '%s' Holder '%s' Len of ContactHiBList '%d' isAttack '%s' HitData '%s'" \
+		% [str(get_instance_id()), get_weapon_name(), holder.name, len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
 
 # endregion

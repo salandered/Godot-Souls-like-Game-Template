@@ -2,7 +2,7 @@
 @icon("res://-assets-/x_icons/node-colors/purple.png")
 @abstract
 class_name BaseAnimatorManager
-extends Node
+extends BaseNodeCharacterSystem
 
 
 ## E.g: accept modifers, play initial anim, etc

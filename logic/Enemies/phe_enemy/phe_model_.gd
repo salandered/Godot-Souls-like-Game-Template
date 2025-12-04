@@ -71,7 +71,7 @@ func initialise() -> void:
 
 	visuals = get_descendants.mesh_instances(visuals_root, true)
 	for v: MeshInstance3D in visuals:
-		print(v.name)
+		__log_(v.name)
 
 	_initialise_sm()
 
@@ -98,7 +98,7 @@ func _initialise_sm():
 	state_machine._on_enter_state()
 
 
-func pretty_name() -> String:
+func pp_character_name() -> String:
 	return "Enemy"
 
 func get_current_state() -> BasePHEState:

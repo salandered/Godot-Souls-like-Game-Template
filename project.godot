@@ -86,6 +86,8 @@ folder_colors={
 "res://-assets-/materials-shared/unsorted/": "gray",
 "res://-assets-/shaders/": "red",
 "res://-assets-/sound/": "pink",
+"res://-assets-/ui/maaacks_assets/": "orange",
+"res://-assets-/ui_assets/": "pink",
 "res://-assets-/x_icons/blue/": "blue",
 "res://-assets-/x_icons/purple/": "purple",
 "res://-assets-/x_icons/red/": "red",
@@ -127,8 +129,6 @@ folder_colors={
 "res://ui/main_menu_group/options_menu/": "pink",
 "res://ui/overlaid_menu/": "pink",
 "res://ui/pause_menu/": "pink",
-"res://ui/ui_assets/": "teal",
-"res://ui/ui_assets/maaacks_assets/": "orange",
 "res://ui/ui_utils/": "purple"
 }
 

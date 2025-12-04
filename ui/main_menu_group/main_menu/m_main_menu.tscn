@@ -1,17 +1,40 @@
-[gd_scene load_steps=13 format=3 uid="uid://c66xg4go6ct4v"]
+[gd_scene load_steps=17 format=3 uid="uid://c66xg4go6ct4v"]
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://ui/main_menu_group/main_menu/m_main_menu.gd" id="1_2e4m0"]
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://ui/themes/menu-theme.tres" id="1_hvsaw"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui/themes/project-theme.tres" id="1_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://ui/main_menu_group/options_menu/m_options_menu.tscn" id="2_hvsaw"]
-[ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://ui/main_menu_group/credits/credits/m_scrollable_credits.tscn" id="3_nlybk"]
+[ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://ui/main_menu_group/credits/credits/m_credits.tscn" id="3_nlybk"]
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
 [ext_resource type="PackedScene" uid="uid://djsyfeinr8lew" path="res://ui/main_menu_group/main_menu/Menu3dScene.tscn" id="5_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="6_2e4m0"]
 [ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://ui/main_menu_group/main_menu/m_config_name_label.gd" id="7_nt2e5"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
-[ext_resource type="AudioStream" uid="uid://bjxibnwwxy37t" path="res://-assets-/sound/songs/tarot_siren 09 14 5.mp3" id="8_y57hi"]
+[ext_resource type="AudioStream" uid="uid://bjxibnwwxy37t" path="res://-assets-/sound/=tracks=/tarot_siren 09 14 5.mp3" id="8_y57hi"]
 [ext_resource type="Script" uid="uid://dp2exxwlj6afr" path="res://ui/main_menu_group/main_menu/m_config_version_label.gd" id="9_nlybk"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://ui/ui_utils/nodes/color_rect.tscn" id="12_uw7yc"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://ui/menu.gdshader" id="13_rjjho"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
+frequency = 0.0037
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8f36y"]
+noise = SubResource("FastNoiseLite_y57hi")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkb1a"]
+shader = ExtResource("13_rjjho")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_8f36y")
+shader_parameter/distortion_strength = 0.0030000001425
+shader_parameter/speed = 0.1
+shader_parameter/red_amount = 1.0
+shader_parameter/green_amount = 0.9350000444125
+shader_parameter/blue_amount = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 1.0
+shader_parameter/pop_tint = Color(0, 0, 0, 0)
+shader_parameter/vignette_intensity = 1.24400005909
+shader_parameter/vignette_softness = 0.2810000133475
 
 [node name="M_MainMenu" type="Control"]
 layout_mode = 3
@@ -27,13 +50,13 @@ options_packed_scene = ExtResource("2_hvsaw")
 credits_packed_scene = ExtResource("3_nlybk")
 level_1_scene_path = "uid://m2o3tdaa66rk"
 level_2_scene_path = "uid://m2o3tdaa66rk"
-bypass_menu_and_start_game = false
+__dev_bypass_menu_and_start_game = true
 
 [node name="Menu3DScene" parent="." instance=ExtResource("5_hvsaw")]
 unique_name_in_owner = true
 cam_z_min = 46.0
 cam_z_max = 5.0
-cam_duration = 15.0
+cam_duration = 90.0
 parallax_lerp_speed = 1.0
 
 [node name="UISoundController" type="Node" parent="."]
@@ -41,17 +64,6 @@ script = ExtResource("5_2e4m0")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("6_2e4m0")]
 stream = ExtResource("8_y57hi")
-
-[node name="BackgroundTextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
 
 [node name="MenuContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -282,14 +294,6 @@ dialog_text = "Are you sure you want to start a new game?
 
 All progress in the current game will be lost."
 
-[node name="ColorRect" parent="." instance=ExtResource("12_uw7yc")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
 [node name="FadeOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -302,6 +306,10 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="ColorRect" parent="." instance=ExtResource("12_uw7yc")]
+material = SubResource("ShaderMaterial_wkb1a")
+layout_mode = 1
+
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ArenaButton" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/LevelButton" to="." method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
@@ -311,3 +319,5 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="FlowControlContainer/FlowControl/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="confirmed" from="NewGameConfirmationDialog" to="." method="_on_new_game_confirmation_dialog_confirmed"]
+
+[editable path="ColorRect"]

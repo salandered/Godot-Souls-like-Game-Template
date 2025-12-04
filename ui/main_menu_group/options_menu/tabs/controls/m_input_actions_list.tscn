@@ -42,4 +42,4 @@ layout_mode = 2
 [node name="ActionNameLabel" type="Label" parent="ParentBoxContainer/ActionBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28

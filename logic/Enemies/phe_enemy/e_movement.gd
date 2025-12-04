@@ -16,6 +16,10 @@ func get_player() -> Princess:
 	return get_character().player
 
 
+func is_player() -> bool:
+	return false
+
+
 ## PLAYER UTILS
 # region
 
@@ -118,7 +122,7 @@ func _move_toward_player(angle: AllowedAngle, speed_config: SpeedConfig):
 
 func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = true, scale_y: bool = true, __log: bool = false) -> void:
 	var delta_pos := animator_manager.get_root_motion_position(not y_included)
-	if __log: print("ROOT MOTION - Raw delta_pos: ", delta_pos, " | y_included: ", y_included)
+	if __log: __log_("ROOT MOTION", "Raw delta_pos:", delta_pos, "| y_included:", y_included)
 	
 	if y_included:
 		var _new_vel := (get_character().get_quaternion() * delta_pos / delta)
@@ -128,12 +132,12 @@ func move_with_root(delta: float, scale_factor: float = 1.0, y_included: bool = 
 			# Scale only X and Z, keep Y unscaled
 			_new_vel.x *= scale_factor
 			_new_vel.z *= scale_factor
-		if __log: print("ROOT MOTION - New velocity (Y included, scale_y: ", scale_y, "): ", _new_vel)
+		if __log: __log_("ROOT MOTION", "New velocity (Y included, scale_y:", scale_y, "):", _new_vel)
 		get_character().velocity = _new_vel
 	else:
 		var __new_vel := (get_character().get_quaternion() * delta_pos / delta) * scale_factor
 		__new_vel.y = get_character().velocity.y
-		if __log: print("ROOT MOTION - New velocity (Y preserved): ", __new_vel, " | Old Y: ", get_character().velocity.y)
+		if __log: __log_("ROOT MOTION", "New velocity (Y preserved):", __new_vel, "| Old Y:", get_character().velocity.y)
 		get_character().velocity = __new_vel
 
 

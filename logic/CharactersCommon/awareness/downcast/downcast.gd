@@ -28,4 +28,4 @@ func _process(delta):
 	else:
 		csg_sphere_3d.visible = false
 		csg_sphere_3d_2.visible = false
-	if __log_dist: print_.aware("Downcast dist", pp.s(global_position.distance_to(get_collision_point())), 0, "", 4)
+	if __log_dist: print_.prefix("Downcast dist", pp.s(global_position.distance_to(get_collision_point())))

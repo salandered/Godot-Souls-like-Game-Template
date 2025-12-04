@@ -10,6 +10,9 @@ func get_character() -> Princess:
 	return _player
 
 
+func is_player() -> bool:
+	return true
+
 ## GETTERS
 # region
 
@@ -197,7 +200,7 @@ func calculate_extra_root_speed_Z(anim: AnimationData, _start_time_offset: float
 	var _inherited_speed := get_curr_velocity_len()
 	var root_start_speed := animator_manager.calculate_animation_start_root_velocity(anim, _start_time_offset, true)
 	var _r = max(0.0, _inherited_speed - root_start_speed + extra_speed_z)
-	if __log: __log_("inheritedSp", _inherited_speed, " rootStartSp", root_start_speed, " extraSp Z", _r)
+	if __log: __log_("", "inheritedSp", _inherited_speed, " rootStartSp", root_start_speed, " extraSp Z", _r)
 	return _r
 
 # endregion

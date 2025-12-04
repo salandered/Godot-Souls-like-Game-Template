@@ -1,7 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5481pylkhhk0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dvfds"]
-load_path = "res://.godot/imported/experiment.hdr-284191e11b376ec7af50c850a75b8710.bptc.ctex"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aosi0"]
 panorama = SubResource("CompressedTexture2D_dvfds")

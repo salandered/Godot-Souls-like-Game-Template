@@ -810,10 +810,6 @@ markers = [{
 "color": Color(1, 0.9606667, 0.41000003, 1),
 "name": &"left_leg_full_contact",
 "time": 0.29053715
-}, {
-"color": Color(1, 1, 1, 1),
-"name": &"test_start",
-"time": 0.2667
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

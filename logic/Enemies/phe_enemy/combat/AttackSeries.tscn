@@ -2,7 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bs7sjioimpc6h" path="res://logic/Enemies/phe_enemy/phe_states/phases/series/attack_club_series.gd" id="1_ftui8"]
 
-[node name="AttackSeries" type="Node" node_paths=PackedStringArray("combo_starters")]
+[node name="AttackSeries" type="Node"]
 script = ExtResource("1_ftui8")
-combo_starters = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
-state_name = "attack_series"

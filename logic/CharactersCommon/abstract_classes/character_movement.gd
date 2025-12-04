@@ -1,6 +1,6 @@
 @abstract
 class_name BaseCharacterMovement
-extends Node
+extends BaseNodeCharacterSystem
 
 
 ## DOCS
@@ -122,6 +122,18 @@ func apply_local_velocity_as_global(local_velocity: Vector3):
 ## __LOGGING
 # region
 
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0
+
+## just indent:
+
+func pp_name() -> String:
+	return pp.s(get_character().pp_character_name(), " Movement")
+
+
 func __pp_vel_y() -> String:
 	return pp.s(get_curr_y_velocity())
 
@@ -134,6 +146,4 @@ func __pp_vel_xz_len() -> String:
 func __pp_vel() -> String:
 	return pp.s("vel.y / gl_pos.y / vel.xz.len", __pp_vel_y(), __pp_gl_pos_y(), __pp_vel_xz_len())
 
-func __log_(...parts: Array):
-	print_.prefix(get_character().pretty_name() + " Movement", pp.list_(parts))
 # endregion

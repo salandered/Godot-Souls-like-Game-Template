@@ -1,6 +1,6 @@
 @tool
 @icon("res://-assets-/x_icons/yellow/icon_visibility.png")
-extends Node
+extends BaseNodeCharacterSystem
 class_name AreaAwareness
 
 @onready var container: PlayerStatesContainer = %StatesContainer
@@ -20,6 +20,10 @@ var current_lock_state: LockState = LockState.ALL_UNLOCKED
 @export var LOCKING_ANGLE := 30.0
 @export var TARGET_LOCK_DISTANCE_SQUARED := 128.0
 @onready var downcast := $Downcast as RayCast3D
+
+
+func is_player() -> bool:
+	return true
 
 
 func _decide_on_lock_state(new_input: InputPackage) -> LockState:
@@ -130,7 +134,7 @@ func floor_dist_under_landing_height(_log: bool = false) -> bool:
 
 func get_floor_distance() -> float:
 	if downcast.is_colliding():
-		#__log_aware('-------------- colliding')
+		#__log_('-------------- colliding')
 		return downcast.global_position.distance_to(downcast.get_collision_point())
 	#__log_aware('-------------- not colliding')
 	return Constants.BIG_MEANINGLESS_NUMBER
@@ -144,7 +148,7 @@ func find_target() -> EnemyCameraTarget:
 			return null
 
 	var all_targets := TypeCast.array_of_enemy_camera_target(_all_targets)
-	# print_.aware_target("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
+	# __log_("POSSIBLE targets: ", all_targets.map(func(t): return t.label))
 	var candidates: Array[EnemyCameraTarget] = []
 	for target in all_targets:
 		if _is_good_candidate(target):
@@ -176,19 +180,19 @@ func _is_good_candidate(target: EnemyCameraTarget) -> bool:
 		# __log_candidate(target, "frustum")
 		return false
 	if camera_focus_further_than_squared(target, TARGET_LOCK_DISTANCE_SQUARED):
-		# _print.call(target, "distance")
+		# __log_(target, "distance")
 		return false
 
 	var camera_to_target := (target.global_position - player.fancy_camera.camera.global_transform.origin).normalized()
 	var camera_forward := -player.fancy_camera.camera.global_transform.basis.z
 	if camera_forward.dot(camera_to_target) < min_dot:
-		# _print.call(target, "angle between camera forward and target")
+		# __log_(target, "angle between camera forward and target")
 		return false
 
 	var player_to_target := (target.global_position - player.global_transform.origin).normalized()
 	var player_forward := player.global_transform.basis.z
 	# if player_forward.dot(player_to_target) < 0:
-	# 	# _print.call(target, "behind player")
+	# 	# __log_(target, "behind player")
 	# 	return false
 	return true
 
@@ -203,15 +207,22 @@ func _sort_targets_by_player_distance(targets: Array[EnemyCameraTarget]) -> void
 
 # region: LOG
 
-func __log_aware(...parts: Array):
-		print_.aware("", pp.list_(parts))
+
+func pp_name() -> String:
+	return pp.s(player.pp_character_name(), "👀")
+
+func __LOG_INDENT() -> int:
+	return 0
+
+func __LOG_B() -> bool:
+	return LogToggler.AWARENESS_B
 
 
 func __log_candidate(target, reason):
-	print_.aware_target("candidate" + em.gray_x, pp.s("target.lbl:", target.label, "Reason:", reason))
+	__log_("🎯", "candidate ✖️", "target.lbl:", target.label, "Reason:", reason)
 
 
 func __log_floor_dist(...parts: Array):
-	print_.aware("", pp.s("floor_dist", get_floor_distance(), pp.list_(parts)) + "exact value " + str(get_floor_distance()))
+	__log_("floor dist", get_floor_distance(), pp.list_(parts), "exact value", str(get_floor_distance()))
 
 # endregion

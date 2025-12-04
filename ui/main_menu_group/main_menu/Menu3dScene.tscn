@@ -16,7 +16,7 @@
 [ext_resource type="Material" uid="uid://cl8xvgflj5omt" path="res://-assets-/materials-shared/baked/engel/Engel_C.002_Baked.tres" id="10_wlu0h"]
 [ext_resource type="Material" uid="uid://cij8qltchxrj" path="res://-assets-/materials-shared/concrete/damaged_dark_concrete/damaged_concrete_columns_lighter_cleaner.tres" id="11_p5g02"]
 [ext_resource type="Material" uid="uid://d33tt3x8yfdmu" path="res://-assets-/materials-shared/unsorted/concrete_floor_damaged_01.001.tres" id="13_bdepm"]
-[ext_resource type="PackedScene" path="res://-assets-/animations/GLB-packed/basic_packs/single/sitting_WRAPPER.tscn" id="16_ae31p"]
+[ext_resource type="PackedScene" uid="uid://ta367bodbhjs" path="res://-assets-/animations/GLB-packed/basic_packs/single/sitting_WRAPPER.tscn" id="16_ae31p"]
 [ext_resource type="PackedScene" uid="uid://dgkn42tpvmre7" path="res://-assets-/GLB-char/skeleton-16-07/skeleton_16_07_WRAPPER.tscn" id="16_bdepm"]
 [ext_resource type="Material" uid="uid://c714v1c087ob5" path="res://-assets-/materials-shared/MinesTrim.001.tres" id="17_wsm5k"]
 [ext_resource type="Texture2D" uid="uid://brvvc7u5hgfon" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_plaster_grey_04_diff_1k.jpg" id="18_ur5qw"]

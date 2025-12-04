@@ -21,7 +21,7 @@ var _curr_anim: AnimationData
 func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float = 0):
 	var anim = anim_container.get_by_anim_id(anim_id)
 	if anim == null:
-		push_error("Overlay anim not found: " + anim_id)
+		__log_warn(true, "Overlay anim not found: " + anim_id, "set_overlay_anim", "")
 		return
 	
 	overlay_modifier.set_overlay_anim(anim, overlay_config)
@@ -29,23 +29,24 @@ func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if anim_id == "":
-		print()
+		__log_warn(false, "anim_id is empty string", "set_anim_to_play", "will not play anything")
+		return
 	if blend_for < 0:
-		print_.warn_raw(false, "blend_for < 0 is not supported, 0 will be used:" + str(blend_for))
+		__log_warn(false, "blend_for < 0 is not supported, 0 will be used:" + str(blend_for), "", "")
 		blend_for = 0
 	
 	if start_time_offset < 0:
-		print_.warn_raw(false, "start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset))
+		__log_warn(false, "start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset), "", "")
 		start_time_offset = 0
 	
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 
 	if anim == null:
-		push_error("set_anim_to_play fail: animation not found: " + anim_id)
+		__log_warn(true, "set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 
 	if not native_player.has_animation(anim_id):
-		push_error("set_anim_to_play fail: animation not found: " + anim_id)
+		__log_warn(true, "set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 	
 	# NOTE: playing anim and setting _curr_anim is atomic
@@ -165,14 +166,14 @@ func get_overlay_time_left() -> float:
 func get_root_motion_position(y_zeroed: bool = true, __log: bool = false) -> Vector3:
 	var delta_pos := native_player.get_root_motion_position()
 	if __log:
-		print(">> Native root motion RAW: ", delta_pos)
-		print(">> Animation playing: ", native_player.is_playing())
-		print(">> Current animation: ", native_player.current_animation)
-		print(">> Animation position: ", native_player.current_animation_position)
+		__log_(">> Native root motion RAW: ", delta_pos)
+		__log_(">> Animation playing: ", native_player.is_playing())
+		__log_(">> Current animation: ", native_player.current_animation)
+		__log_(">> Animation position: ", native_player.current_animation_position)
 		
 	if y_zeroed:
 		delta_pos.y = 0
-	if __log: print(">> After Y zero (if applicable): ", delta_pos)
+	if __log: __log_(">> After Y zero (if applicable): ", delta_pos)
 	return delta_pos
 
 
@@ -197,10 +198,23 @@ func _reset_root_motion() -> void:
 	# may be also reset the whole character:
 	# global_position = spawn_position
 
+func is_player() -> bool:
+	return false
+
+func pp_name() -> String:
+	return "E▷"
+
 
 ## __LOG
 
+func __LOG_B() -> bool:
+	return LogToggler.E_ANIM_MANAGER_B
 
+
+func __LOG_INDENT() -> int:
+	return 12
+
+	
 func __log_new_anim(prev_anim: AnimationData, new_anim: AnimationData):
 	var _prev_anim_name := "-x-"
 	if prev_anim:
@@ -210,8 +224,4 @@ func __log_new_anim(prev_anim: AnimationData, new_anim: AnimationData):
 		_curr_anim_name,
 		"curr glob-sp-scale", get_global_speed_scale(),
 		"  ", pp.in_br("from prev " + _prev_anim_name))
-	__log_(_msg)
-
-
-func __log_(...parts: Array):
-	print_.anim_manager("", pp.list_(parts))
+	__log_("", _msg)

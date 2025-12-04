@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0skcrklajnxb" path="res://logic/CharactersCommon/combat/hit_box/hitbox.gd" id="1_5ms84"]
 
-[node name="Hitbox" type="Area3D" node_paths=PackedStringArray("holder")]
+[node name="Hitbox" type="Area3D"]
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_5ms84")
-holder = NodePath("")
-ignored_weapon_groups = Array[String](["ENEMY_WEAPON"])

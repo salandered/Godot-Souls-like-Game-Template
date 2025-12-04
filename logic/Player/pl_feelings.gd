@@ -31,6 +31,9 @@ func initialise() -> void:
 func is_player() -> bool:
 	return true
 
+func pp_name() -> String:
+	return "feel🤍"
+
 
 func get_max_health() -> float:
 	return 120
@@ -190,6 +193,10 @@ func _input(event: InputEvent) -> void:
 		lose_stamina(15)
 
 # endregion:
+
+
+func __LOG_B() -> bool:
+	return LogToggler.FEEL_B
 
 
 # LATER

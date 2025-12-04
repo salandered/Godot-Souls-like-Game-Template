@@ -1,6 +1,6 @@
 @tool
 @icon("res://-assets-/x_icons/yellow/icon_visibility.png")
-extends Node3D
+extends BaseNode3DCharacterSystem
 class_name EnemyAwareness
 
 
@@ -12,6 +12,10 @@ var me: BaseEnemyCharacter
 @onready var downcast = $Downcast as RayCast3D
 
 @export var debug_sight_cone: bool = true
+
+
+func is_player() -> bool:
+	return false
 
 
 func initialise() -> void:
@@ -120,3 +124,15 @@ func __update_sight_cone_mesh():
 	sight_cone_visual.mesh = mesh
 
 # endregion
+
+
+## LOG
+
+func pp_name() -> String:
+	return pp.s(me.pp_character_name(), "👀")
+
+func __LOG_INDENT() -> int:
+	return 0
+
+func __LOG_B() -> bool:
+	return LogToggler.AWARENESS_B

@@ -17,7 +17,7 @@ func get_character() -> BaseCharacter:
 	return _player
 
 
-func get_combat_name() -> String:
+func pp_name() -> String:
 	return "Player Combat"
 
 

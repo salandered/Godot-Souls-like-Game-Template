@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cel3jt67kbkpj" path="res://ui/main_menu_group/options_menu/tabs/game/m_game_options_menu.gd" id="1_lpwby"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="2_7bjas"]
 [ext_resource type="PackedScene" uid="uid://cqmk5mrsxsygy" path="res://ui/main_menu_group/options_menu/tabs/game/m_reset_game_control.tscn" id="3_ajr2t"]
-[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/themes/separator/h_separator.tscn" id="3_bwa6b"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/ui_utils/separator/h_separator.tscn" id="3_bwa6b"]
 
 [node name="M_Game" type="MarginContainer"]
 anchors_preset = 15

@@ -19,3 +19,7 @@ func initialise() -> void:
 		t.make_active()
 	assert(len(targets) == 1, pp.s("support exactly one cam target for an enemy, got", len(targets)))
 	camera_target = targets[0]
+
+
+func is_player() -> bool:
+	return false

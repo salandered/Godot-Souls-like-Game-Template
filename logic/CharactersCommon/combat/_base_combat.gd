@@ -3,7 +3,7 @@
 
 @abstract
 class_name BaseCombat
-extends Node
+extends BaseNodeCharacterSystem
 
 
 const HIT_BUFFER_DURATION: float = 4.0
@@ -19,9 +19,9 @@ var _weapons: Dictionary = {} # weapon_name <String> to weapon <BaseWeapon>
 func initialise():
 	## currently _weapons are all under %bones
 	var _weapons_list = get_descendants.base_weapons(get_parent_node_of_weapons()) as Array[BaseWeapon]
-	assert(not _weapons_list.is_empty(), "No weapons! for " + get_combat_name())
+	assert(not _weapons_list.is_empty(), "No weapons! for " + pp_name())
 	for weapon in _weapons_list:
-		_weapons[weapon._weapon_name] = weapon
+		_weapons[weapon.get_weapon_name()] = weapon
 	__log_("initialised _weapons", pp.dict_(_weapons))
 
 
@@ -38,13 +38,8 @@ func get_weapon(weapon_name: String) -> BaseWeapon:
 	return u.safe_get_dict_key(_weapons, weapon_name, null, Fallback.WARN_CRUCIAL)
 
 
-@abstract func is_player() -> bool
-
 ## non nullable
 @abstract func get_character() -> BaseCharacter
-
-
-@abstract func get_combat_name() -> String
 
 
 ## nullable
@@ -113,7 +108,7 @@ func set_hit_data_to_all_weapons(hit_damage: float, anim_id: String) -> void:
 		__log_warn(true, "no weapons", "set_hit_data_to_all_weapons", "return")
 		return
 	for weapon in weapons:
-		var hit_data := HitData.new(hit_damage, weapon._weapon_name, anim_id)
+		var hit_data := HitData.new(hit_damage, weapon.get_weapon_name(), anim_id)
 		weapon.set_hit_data(hit_data)
 		__log_("set hit data to weapons", weapon, hit_data)
 
@@ -148,11 +143,9 @@ func reset_all_weapons() -> void:
 # endregion
 
 
-## __LOGS
-
-func __log_(...parts: Array):
-	print_.fight(get_combat_name(), pp.list_(parts))
+func __LOG_B() -> bool:
+	return LogToggler.FIGHT_B
 
 
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(crucial, what, get_combat_name() + " " + where, fallback, pp.list_(context))
+func __LOG_INDENT() -> int:
+	return LogToggler.DEFAULT_INDENT

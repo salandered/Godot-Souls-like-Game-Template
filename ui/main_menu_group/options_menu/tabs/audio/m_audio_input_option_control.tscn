@@ -13,7 +13,7 @@ option_section = 2
 key = "InputDevice"
 section = "AudioSettings"
 property_type = 4
-default_value = null
+default_value = ""
 
 [node name="OptionLabel" type="Label" parent="."]
 unique_name_in_owner = true

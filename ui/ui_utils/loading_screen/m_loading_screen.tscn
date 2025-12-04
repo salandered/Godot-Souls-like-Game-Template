@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://5ofu2y0m6qn8" path="res://-assets-/ui/loader_backgrounds/collage (8)ds.jpg" id="9_euco8"]
 [ext_resource type="Texture2D" uid="uid://ccs2ft5ib4rhu" path="res://-assets-/ui/loader_backgrounds/collage (9)ds.jpg" id="10_kipgw"]
 [ext_resource type="Texture2D" uid="uid://dv4p73ce0g7nu" path="res://-assets-/ui/loader_backgrounds/collage (10)ds.jpg" id="11_ny3fu"]
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://ui/themes/menu-theme.tres" id="12_167l7"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui/themes/project-theme.tres" id="12_167l7"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://ui/ui_utils/nodes/color_rect.tscn" id="12_lioqs"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://ui/menu.gdshader" id="13_deyge"]
 

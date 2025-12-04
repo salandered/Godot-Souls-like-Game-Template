@@ -1,4 +1,6 @@
 @tool
 @icon("uid://dxj2t2502l71w")
-extends Node3D
+
+@abstract
 class_name BaseVisuals
+extends BaseNode3DCharacterSystem

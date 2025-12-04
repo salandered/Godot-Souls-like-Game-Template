@@ -203,7 +203,7 @@ func _blend_pose(base_pose: Transform3D, overlay_pose: Transform3D, weight: floa
 # region
 
 func __log_(...parts: Array):
-	print_.anim_manager("Overlay", pp.list_(parts))
+	print_.prefix("Overlay", pp.list_(parts), 2)
 
 
 var __LOG_OVERLAY_START_B: bool = false

@@ -6,12 +6,10 @@
 radius = 0.7
 height = 3.0
 
-[node name="Hitbox" type="Area3D" node_paths=PackedStringArray("holder")]
+[node name="Hitbox" type="Area3D"]
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_vo143")
-holder = NodePath("")
-ignored_weapon_groups = Array[String](["ENEMY_WEAPON"])
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)

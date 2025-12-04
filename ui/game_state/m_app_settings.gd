@@ -234,7 +234,7 @@ static func remove_developer_actions() -> void:
 	if OS.is_debug_build():
 		return
 
-	print("Release Build detected: Purging developer actions...")
+	__log_ui.info_("M_AppSettings", "Release Build detected: Purging developer actions...")
 
 	var actions = InputMap.get_actions()
 	for action in actions:

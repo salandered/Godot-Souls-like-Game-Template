@@ -30,4 +30,4 @@ func __log_warn(what: String, where: String, fallback: String, ...context: Array
 
 
 func __log_(...parts: Array):
-	print_.weapon(pp_name(), pp.s(pp.list_(parts), "| label:", label))
+	print_.prefix(pp_name(), pp.s(pp.list_(parts), "| label:", label))

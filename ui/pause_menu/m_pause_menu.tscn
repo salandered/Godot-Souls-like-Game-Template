@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsawmyldebwkf"]
 
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://ui/themes/menu-theme.tres" id="1_8s11q"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui/themes/project-theme.tres" id="1_8s11q"]
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
 [ext_resource type="PackedScene" uid="uid://cikf3o5omnunl" path="res://ui/_later/mini_menu_via_overlaid/m_mini_options_overlaid_menu.tscn" id="2_8s11q"]
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://ui/ui_utils/legacy_capture_focus.gd" id="3_j5dnp"]
-[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/themes/separator/h_separator.tscn" id="4_w5m25"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/ui_utils/separator/h_separator.tscn" id="4_w5m25"]
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3

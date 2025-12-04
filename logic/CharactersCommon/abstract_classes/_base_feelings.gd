@@ -3,7 +3,7 @@
 
 @abstract
 class_name BaseFeelings
-extends Node
+extends BaseNodeCharacterSystem
 
 var statuses: Dictionary # todo: system
 
@@ -24,9 +24,6 @@ func _ready() -> void:
 
 
 @abstract func initialise()
-
-
-@abstract func is_player() -> bool
 
 
 @abstract func get_max_health() -> float
@@ -70,17 +67,9 @@ func check_status(status_name: String) -> bool:
 	if status_name in statuses:
 		return statuses[status_name]
 	else:
-		__log_warn("no status in statuses", "check_status", "return false", pp.in_q(status_name), pp.in_q(statuses))
+		__log_warn(false, "no status in statuses", "check_status", "return false", pp.in_q(status_name), pp.in_q(statuses))
 		return false
 
 
-# region __LOGS
-
-func __log_(_prefix: String, ...parts: Array):
-	print_.feel(is_player(), _prefix, pp.list_(parts))
-
-func __log_warn(what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(false, what, where, fallback, is_player(), pp.list_(context))
-
-
-# endregion
+func __LOG_INDENT() -> int:
+	return LogToggler.FEEL_INDENT

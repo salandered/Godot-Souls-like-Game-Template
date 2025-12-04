@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsxh6v7j0257h"]
 
-[ext_resource type="Script" uid="uid://bi7eqh71flp74" path="res://ui/ui_utils/options_nodes/m_option_control.gd" id="1_2736y"]
+[ext_resource type="Script" uid="uid://badmldrkr7cy1" path="res://ui/ui_utils/options_nodes/m_option_control.gd" id="1_2736y"]
 
 [node name="OptionControl" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 offset_right = 400.0
 offset_bottom = 40.0
 script = ExtResource("1_2736y")
-default_value = null
+default_value = false
 
 [node name="OptionLabel" type="Label" parent="."]
 unique_name_in_owner = true

@@ -159,7 +159,6 @@ func _process(delta: float) -> void:
 	accumulated_mouse_delta = Vector2.ZERO
 	
 	var input_: InputPackage = InputManager._current_input
-	# print(u.fr() + "//~~~CAM ", input.target_lock)
 
 	# NOTE: seems like better to do movement before switching_state
 	# because locked -> free could use last mouse movement from locked

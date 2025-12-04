@@ -37,9 +37,9 @@ func react_on_hit(hit_data: HitData) -> void:
 		__log_warn_v2(false, "no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
 	var result = ReactionOnHit.calculate_reaction_for_enemy_state(hit_data)
-	prints("major result", result)
+	__log_phe("react_on_hit", "major result", result)
 	if result != "": # result actually have leaf name! but we have only one pushback as an experiment
-		prints("major hit! pushback✋")
+		__log_phe("react_on_hit", "major hit! pushback✋")
 		major_hit_just_received = true
 		phe_feelings.lose_health(hit_data.damage)
 	else:
@@ -57,7 +57,6 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		PHES.Leaf.pushback:
 			if current_substate.is_ended():
 				_reason += "pushback✋ ended"
-				prints("(major) pushback✋ ended")
 				_next_state = PHES.combat_loco
 		PHES.combat_loco:
 			if major_hit_just_received:
@@ -163,9 +162,9 @@ func _input(event: InputEvent) -> void:
 		if not me.angry_raised:
 			# me.angry_raised = true will be raised by state flow
 			phe_feelings._set_specific_health(phe_feelings.get_max_health() * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD - 1)
-			print("~~~~~ dev PHASE SWITCH to ANGRY")
+			print_.dev("~~~~~ dev PHASE SWITCH to ANGRY")
 
 		else:
 			me.angry_raised = false
 			phe_feelings._set_specific_health(phe_feelings.get_max_health())
-			print("~~~~~ dev PHASE SWITCH TO USUAL")
+			print_.dev("~~~~~ dev PHASE SWITCH TO USUAL")

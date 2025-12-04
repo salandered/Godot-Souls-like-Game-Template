@@ -226,5 +226,5 @@ static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
 
 
 static func __log_(...parts: Array):
-	if print_.REACT_UTILS_B:
+	if LogToggler.REACT_UTILS_B:
 		print_.prefix_s("[🗣️ReactionOnHits]", pp.list_(parts))
