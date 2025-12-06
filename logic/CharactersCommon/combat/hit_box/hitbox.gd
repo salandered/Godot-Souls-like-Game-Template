@@ -64,7 +64,7 @@ func _ready() -> void:
 	# Duplicate to avoid shared resource issues
 	_my_coll_shapes[0].shape = original_shape.duplicate()
 	var shape := _my_coll_shapes[0].shape as CapsuleShape3D
-	__log_("Duplicated capsule shape used in CollisionShape! " + shape.resource_name)
+	__log_("Duplicated capsule shape used in CollisionShape " + shape.resource_name)
 
 	_original_capsule_shape_radius = shape.radius
 	_original_capsule_shape_height = shape.height
@@ -136,7 +136,7 @@ func on_area_contact(incoming_area: Node3D):
 		return
 	weapon.add_hitbox_to_contact_list(self)
 
-	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_name()), "by", pp.in_q(weapon.holder.name)))
+	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_pp_name()), "by", pp.in_q(weapon.holder.name)))
 
 	var hit_data := weapon.get_hit_data()
 	if not hit_data:

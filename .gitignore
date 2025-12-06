@@ -4,7 +4,7 @@
 .import/
 export.cfg
 export_credentials.cfg
-
+**.tmp
 
 # ================== PYTHON
 *__pycache__/*

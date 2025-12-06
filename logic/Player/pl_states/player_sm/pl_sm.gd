@@ -17,6 +17,7 @@ var _transfer_data: TranferData = TranferData.new()
 
 ## not nullable 
 var current_state: BasePlayerState
+var prev_state_name: String
 
 var _current_action: BaseAction
 var _prev_action: BaseAction
@@ -35,6 +36,7 @@ func initialise(player: Princess) -> void:
 	
 	# global level
 	current_state = _run_state
+	prev_state_name = _run_state.state_name
 	_current_action = _idle_action
 	_prev_action = _idle_action
 
@@ -132,6 +134,7 @@ func update(input_: InputPackage, delta: float) -> void:
 		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
 		
 		current_state._on_exit_state()
+		prev_state_name = current_state.state_name
 		# now current_state is next state
 		current_state = container.state_by_name(verdict.next_state)
 		current_state._on_enter_state(input_)

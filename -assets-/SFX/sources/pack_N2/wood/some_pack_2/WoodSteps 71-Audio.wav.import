@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2fokogu4rdgf"
+path="res://.godot/imported/WoodSteps 71-Audio.wav-8090661c491e5604c5327ec003aa1786.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/pack_N2/wood/some_pack_2/WoodSteps 71-Audio.wav"
+dest_files=["res://.godot/imported/WoodSteps 71-Audio.wav-8090661c491e5604c5327ec003aa1786.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

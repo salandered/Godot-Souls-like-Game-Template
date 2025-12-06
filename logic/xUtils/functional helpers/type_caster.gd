@@ -71,11 +71,27 @@ static func array_of_mesh_instances(array: Array) -> Array[MeshInstance3D]:
 	list_casted.assign(_safe_validate_class(array, MeshInstance3D, "MeshInstance3D"))
 	return list_casted
 
+static func array_of_audio_stream_player_3d(array: Array) -> Array[AudioStreamPlayer3D]:
+	var list_casted: Array[AudioStreamPlayer3D] = []
+	list_casted.assign(_safe_validate_class(array, AudioStreamPlayer3D, "AudioStreamPlayer3D"))
+	return list_casted
+
 
 # endregion
 
 
 # region custom classes
+
+
+static func array_of_anim_marker(array: Array) -> Array[AnimMarker]:
+	var list_casted: Array[AnimMarker] = []
+	list_casted.assign(_safe_validate_class(array, AnimMarker, "AnimMarker"))
+	return list_casted
+
+static func array_of_audio_track_data(array: Array) -> Array[AudioTrackData]:
+	var list_casted: Array[AudioTrackData] = []
+	list_casted.assign(_safe_validate_class(array, AudioTrackData, "AudioTrackData"))
+	return list_casted
 
 static func array_of_base_weapon(array: Array) -> Array[BaseWeapon]:
 	var list_casted: Array[BaseWeapon] = []

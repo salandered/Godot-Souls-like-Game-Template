@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/Locations/demo_arena/arena_1.gd" id="1_sr72e"]
 [ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/materials-shared/simple/texture_08.png" id="1_tv3r5"]
 [ext_resource type="PackedScene" uid="uid://dwwngduom3lf" path="res://logic/Locations/environments/blue_skies.tscn" id="2_d2h10"]
-[ext_resource type="Texture2D" uid="uid://dl5jjiun3k281" path="res://-assets-/ui/themes/buttons/g5lIOlQpYb.png" id="2_sr72e"]
+[ext_resource type="Texture2D" uid="uid://dl5jjiun3k281" path="res://-assets-/ui_assets/themes/buttons/g5lIOlQpYb.png" id="2_sr72e"]
 [ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/shaders/gdquest-like/sky/blue_sky.tres" id="3_gjxs0"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/materials-shared/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="3_pdbkk"]
 [ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/materials-shared/_images/legacy/Stone Dirt Wall 02_diffuse.png" id="4_l1fmd"]

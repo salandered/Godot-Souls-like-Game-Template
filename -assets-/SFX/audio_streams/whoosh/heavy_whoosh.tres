@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://dnqvc318bissn"]
+
+[ext_resource type="AudioStream" uid="uid://dsiirkuy2swh0" path="res://-adopting/sfx_sounds/Medieval Adventure Sound Effect NU/unsorted/SFX_Throw_01_whoosh.wav" id="1_bxixy"]
+[ext_resource type="AudioStream" uid="uid://dib3gxa3m87ck" path="res://-adopting/sfx_sounds/Medieval Adventure Sound Effect NU/unsorted/SFX_Throw_02_whoosh.wav" id="2_8ywdo"]
+[ext_resource type="AudioStream" uid="uid://dkftl47ltq3b7" path="res://-adopting/sfx_sounds/Medieval Adventure Sound Effect NU/unsorted/SFX_Throw_03_whoosh.wav" id="3_5emnk"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_bxixy")
+stream_1/stream = ExtResource("2_8ywdo")
+stream_2/stream = ExtResource("3_5emnk")

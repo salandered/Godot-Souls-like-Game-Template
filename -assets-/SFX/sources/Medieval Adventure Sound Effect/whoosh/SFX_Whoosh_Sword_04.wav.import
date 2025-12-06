@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvyfa820bmgx7"
+path="res://.godot/imported/SFX_Whoosh_Sword_04.wav-404d2f2dc1bbad97279269ce170ab91b.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/whoosh/SFX_Whoosh_Sword_04.wav"
+dest_files=["res://.godot/imported/SFX_Whoosh_Sword_04.wav-404d2f2dc1bbad97279269ce170ab91b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,19 @@
+
+## FAQ mixamo page
+- closest to legal valid info
+
+quote```
+You can use both characters and animations royalty free for personal, commercial, and non-profit projects
+```
+
+## post with more info from employee
+- has specific info, but its just random forum post
+https://community.adobe.com/t5/mixamo-discussions/mixamo-faq-licensing-royalties-ownership-eula-and-tos/td-p/13234775
+
+quote```
+Can I use Fuse and Mixamo for non-profit, commercial, research, or school projects?
+Yes to all. There are no limitations on the types of paid or nonpaid projects you can use as long as it follows the distribution rules above. The only research application Mixamo content can't be used in is training machine-learning models.
+```
+
+## adobe terms: https://www.adobe.com/legal/terms.html
+(no mixamo reference)

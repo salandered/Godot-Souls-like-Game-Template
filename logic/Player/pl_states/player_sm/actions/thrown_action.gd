@@ -25,7 +25,7 @@ class ThrowPack:
 		self.extra_start_speed = extra_start_speed_
 		self.direction = direction_
 	func _to_string() -> String:
-		return "ThrowPack(dir %s, anim %s, peak/end/extra %.1f/%.1f/%.1f)" % [direction, pp.anim(anim_id), peak_speed, end_speed, extra_start_speed]
+		return "ThrowPack(dir %s, anim %s, peak/end/extra %.1f/%.1f/%.1f)" % [direction, pp.anim_n(anim_id), peak_speed, end_speed, extra_start_speed]
 
 
 var DEF_PEAK_SP: float = 8.5
@@ -94,7 +94,7 @@ func _decide_on_mode_on_enter():
 
 func _calculate_interpolator_duration(actual_anim: AnimationData) -> float:
 	var _start := actual_anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0)
-	var _end := actual_anim.get_marker_time_by_name(MarkerName.LAND_START, 1.0)
+	var _end := actual_anim.get_marker_time_by_name(MarkerName.JUMP.LAND_START, 1.0)
 	var _dur = (_end - _start) / anim.speed_scale + 0.1 # + 0.1 to be safe
 	__log_ent("calculated _interpolator_dur", _dur, "using markers with time", _start, _end)
 	return _dur
@@ -124,7 +124,7 @@ func on_exit_action():
 func update(input_: InputPackage, delta: float) -> void:
 	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
 		pm().look_at_target(delta)
-	if before_marker(MarkerName.LAND_START):
+	if before_marker(MarkerName.JUMP.LAND_START):
 		var current_speed := speed_x_interpolator.update(delta)
 		# __log_upd(speed_x_interpolator._get_progress(), current_speed)
 		

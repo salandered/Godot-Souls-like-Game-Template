@@ -60,9 +60,9 @@ var _pushed_rigid_bodies: bool = false
 func update(delta):
 	e_movement.rotate_towards_player(delta, sp_config, deg_to_rad(angle_adjustment_deg))
 
-	if before_marker(MarkerName.JUMP_LAUNCH):
+	if before_marker(MarkerName.JUMP.LAUNCH):
 		e_movement.move_with_root(delta)
-	elif before_marker(MarkerName.LAND_START):
+	elif before_marker(MarkerName.JUMP.LAND_START):
 		var y_root_scale: bool = true
 		if mode_switcher.get_curr_mode_name() == USUAL:
 			APPLY_GRAVITY = false

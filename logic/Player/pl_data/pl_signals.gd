@@ -1,0 +1,2 @@
+extends BaseCharacterSignals
+class_name PlayerSignals

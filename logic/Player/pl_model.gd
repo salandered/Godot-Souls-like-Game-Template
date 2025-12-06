@@ -1,4 +1,9 @@
 extends BaseCharacter
+
+## i m not sure are we the princess or not, but the name stuck.
+## sometimes when 'player' sounds too abstract 
+## (is it main player? animation player? or audio stream player?)
+## and 'main character' is too verbose, use 'princess'
 class_name Princess
 
 
@@ -18,6 +23,8 @@ class_name Princess
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
+@onready var audio_system: PrincessAudioSystem = %AudioSystem
+@onready var anim_sfx_signal_emitter: AnimSFXSignalEmitter = %AnimSFXSignalEmitter
 
 # anim
 @onready var anim_container: AnimationContainer = %AnimContainer
@@ -41,6 +48,9 @@ func initialise() -> void:
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Masks.PLAYER_COL_MASK
 
+
+	var signals := PlayerSignals.new()
+
 	visuals.accept_model_data(self)
 	
 
@@ -53,11 +63,19 @@ func initialise() -> void:
 		AnimParamsContainer.get_all_params(),
 		PlRequiredMarkers.anim_to_required_marker)
 		 
+	bones.accept_bones()
 	container.accept_all_states(self)
 	player_sm.initialise(self)
 
-	bones.accept_bones()
 	combat.initialise()
+
+	## only 1 weapon is supported for player
+	var player_weapon := combat.get_all_weapons()[0]
+	var _weapon_whoosh_signal := player_weapon.get_sfx_whoosh_weapon_signal()
+	print("///////", player_weapon, _weapon_whoosh_signal)
+	audio_system.initialise(signals, self, {audio_system.character_additional_data_key: self})
+	anim_sfx_signal_emitter.initialise(signals, _weapon_whoosh_signal)
+	
 	animator_manager.initialise()
 
 	__dev_initialise()
@@ -73,6 +91,9 @@ func pp_character_name() -> String:
 ## not nullable in theory
 func get_current_state() -> BasePlayerState:
 	return player_sm.current_state
+
+func get_prev_state_name() -> String:
+	return player_sm.prev_state_name
 
 
 func react_on_hit(hit_data: HitData) -> void:

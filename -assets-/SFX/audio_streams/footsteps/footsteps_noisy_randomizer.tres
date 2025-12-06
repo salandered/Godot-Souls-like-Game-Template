@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://dgxixv2fcycqi"]
+
+[ext_resource type="AudioStream" uid="uid://dq01iul8m2pt4" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Footsteps/Wood/Wood Walk 1.wav" id="1_cih5y"]
+[ext_resource type="AudioStream" uid="uid://bn7h621cwackt" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Footsteps/Wood/Wood Walk 2.wav" id="2_0cemb"]
+[ext_resource type="AudioStream" uid="uid://kyueqmumrhl7" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Footsteps/Wood/Wood Walk 4.wav" id="3_2j2t8"]
+[ext_resource type="AudioStream" uid="uid://dxfcamx08nqxl" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Footsteps/Wood/Wood Walk 5.wav" id="4_s0s28"]
+
+[resource]
+random_pitch = 1.05
+streams_count = 4
+stream_0/stream = ExtResource("1_cih5y")
+stream_1/stream = ExtResource("2_0cemb")
+stream_2/stream = ExtResource("3_2j2t8")
+stream_3/stream = ExtResource("4_s0s28")

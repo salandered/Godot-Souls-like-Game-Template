@@ -30,7 +30,7 @@ Notes: Following shaders were used: fire shader; sky shader. Modifications were 
 
 ### Core Systems & Templates
 
-
+ 
 #### Godot Game Template
 ![Maaack Plugin Icon](/attribution/maaacks_game_template/logo/logo.png)  
 Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)

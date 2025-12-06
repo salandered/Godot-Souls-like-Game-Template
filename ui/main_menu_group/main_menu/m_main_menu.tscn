@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://c66xg4go6ct4v"]
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://ui/main_menu_group/main_menu/m_main_menu.gd" id="1_2e4m0"]
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui/themes/project-theme.tres" id="1_hvsaw"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://ui/main_menu_group/options_menu/m_options_menu.tscn" id="2_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://ui/main_menu_group/credits/credits/m_credits.tscn" id="3_nlybk"]
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="6_2e4m0"]
 [ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://ui/main_menu_group/main_menu/m_config_name_label.gd" id="7_nt2e5"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
-[ext_resource type="AudioStream" uid="uid://bjxibnwwxy37t" path="res://-assets-/sound/=tracks=/tarot_siren 09 14 5.mp3" id="8_y57hi"]
+[ext_resource type="AudioStream" uid="uid://bjxibnwwxy37t" path="res://-assets-/music/=tracks=/tarot_siren 09 14 5.mp3" id="8_y57hi"]
 [ext_resource type="Script" uid="uid://dp2exxwlj6afr" path="res://ui/main_menu_group/main_menu/m_config_version_label.gd" id="9_nlybk"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://ui/ui_utils/nodes/color_rect.tscn" id="12_uw7yc"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://ui/menu.gdshader" id="13_rjjho"]

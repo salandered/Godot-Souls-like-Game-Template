@@ -102,8 +102,11 @@ func pp_character_name() -> String:
 	return "Enemy"
 
 func get_current_state() -> BasePHEState:
-	## returns curr substate of the top state
+	## todo: shoud we just return _curr_leaf?
 	return state_machine.get_current_substate()
+
+func get_prev_state_name() -> String:
+	return _prev_leaf.state_name
 
 
 func get_player() -> Princess:

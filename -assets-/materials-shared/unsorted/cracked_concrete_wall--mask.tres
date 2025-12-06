@@ -8,11 +8,12 @@
 resource_name = "cracked_concrete_wall"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.6697165, 0.6697165, 0.6697165, 1)
+albedo_color = Color(0.39138144, 0.39138144, 0.39138144, 1)
 albedo_texture = ExtResource("1_8gq67")
-metallic_texture = ExtResource("2_m13uf")
+metallic_specular = 0.3
 metallic_texture_channel = 2
 roughness_texture = ExtResource("2_m13uf")
 roughness_texture_channel = 1
 normal_enabled = true
 normal_texture = ExtResource("3_mi8ky")
+uv1_scale = Vector3(8, 8, 8)

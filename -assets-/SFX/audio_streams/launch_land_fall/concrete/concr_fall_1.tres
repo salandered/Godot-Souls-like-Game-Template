@@ -1,0 +1,7 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://boa2i8irldakc"]
+
+[ext_resource type="AudioStream" uid="uid://dp8j2p2h4gt3u" path="res://-adopting/sfx_sounds/Footstep N Packs/Concrete/land/ConcreteJump12_fall.wav" id="1_cgkri"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_cgkri")

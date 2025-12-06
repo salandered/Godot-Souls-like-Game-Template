@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dm03bcfludh6w"
+path="res://.godot/imported/Dirt Jump.wav-3cf5c41742239584722303b5f2fd03bf.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Footsteps/Dirt/Dirt Jump.wav"
+dest_files=["res://.godot/imported/Dirt Jump.wav-3cf5c41742239584722303b5f2fd03bf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -23,6 +23,9 @@ func _ready() -> void:
 @abstract func get_current_state() -> BaseCharacterState
 
 
+@abstract func get_prev_state_name() -> String
+
+
 @abstract func react_on_hit(hit_data: HitData) -> void
 
 

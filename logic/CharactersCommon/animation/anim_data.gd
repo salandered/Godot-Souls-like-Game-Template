@@ -12,10 +12,14 @@ var duration: float
 var speed_scale: float
 var is_looping: bool
 var native_anim: Animation
-var _markers: Dictionary # {str: Marker}
+## markers have unique names by Godot design. So we can use marker_name as a dictionary key
+var _markers: Dictionary # {marker_name <String>: <AnimMarker>}
+var _audio_tracks: Dictionary # { timestamp <float>: Array[AudioTrackData] }
+## caches timestamps sorted ASC, built using _audio_tracks
+var _audio_tracks_timestamps_sorted: Array[float]
 var uses_root_rotation: bool
 # { "pos": {track_path: track_idx, ...}, "rot": {track_path: track_idx, ...} }
-var _track_path_to_idx := {"pos": {}, "rot": {}}
+var _tranform_track_path_to_idx := {"pos": {}, "rot": {}}
 
 func _init(
 		_anim_id,
@@ -28,23 +32,38 @@ func _init(
 
 
 func get_pos_track_idx(track_path: String) -> int:
-	if track_path in _track_path_to_idx["pos"]:
-		return _track_path_to_idx["pos"][track_path]
+	if track_path in _tranform_track_path_to_idx["pos"]:
+		return _tranform_track_path_to_idx["pos"][track_path]
 	return -1
 
 func get_rot_track_idx(track_path: String) -> int:
-	if track_path in _track_path_to_idx["rot"]:
-		return _track_path_to_idx["rot"][track_path]
+	if track_path in _tranform_track_path_to_idx["rot"]:
+		return _tranform_track_path_to_idx["rot"][track_path]
 	return -1
 
 
 ## Client code may get some specific marker directly.
-func get_marker_by_name(marker_name: String, fallback: String = Fallback.WARN) -> Marker:
+func get_marker_by_name(marker_name: String, fallback: String = Fallback.WARN) -> AnimMarker:
 	return u.safe_get_dict_key(_markers, marker_name, null, fallback, "get marker from anim " + anim_id)
+
+func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
+	var result = []
+	for marker_name in _markers.keys():
+		if marker_name.begins_with(prefix):
+			result.append(_markers[marker_name])
+	return TypeCast.array_of_anim_marker(result)
 
 func does_marker_exist(marker_name: String) -> bool:
 	var marker := get_marker_by_name(marker_name, Fallback.SOFT)
 	return marker != null
+
+
+func get_audio_tracks_timestamps_sorted() -> Array[float]:
+	return _audio_tracks_timestamps_sorted
+
+func get_audio_tracks_data_by_timestamp(timestamp: float) -> Array[AudioTrackData]:
+	var r = u.safe_get_dict_key(_audio_tracks, timestamp, null)
+	return TypeCast.array_of_audio_track_data(r)
 
 
 ## returns time withing anim.duration
@@ -137,7 +156,7 @@ static func __validate_anim(anim_data: AnimationData, param_prefixes: Array[Stri
 		return false
 
 	# TODO: add validation, that marker time is within anim_data duration. 
-	if anim_data._markers == null: # (no markers is fine, would be empty dict)
+	if anim_data._markers == null: # (no markers is fine, but then it would be empty dict)
 		return false
 
 	var _required_markers = required_markers.get(anim_data.anim_id)
@@ -149,6 +168,14 @@ static func __validate_anim(anim_data: AnimationData, param_prefixes: Array[Stri
 			if not anim_data.does_marker_exist(marker_name):
 				assert(false, pp.s("required marker", pp.in_q(marker_name), "not found! for", anim_data.anim_id))
 	
+
+	if anim_data._audio_tracks == null: # (no data is fine, but then it would be empty dict)
+		return false
+
+	if len(anim_data._audio_tracks) != len(anim_data._audio_tracks_timestamps_sorted):
+		return false
+
+
 	# specific field validation
 	if anim_data.duration <= 0:
 		return false

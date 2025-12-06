@@ -39,11 +39,12 @@ static func safe_has_key(dict: Dictionary, key: Variant, fallback: String = Fall
 			Fallback.FAIL:
 				assert(false, "Key '" + str(key) + "' not found in dictionary")
 			Fallback.WARN, Fallback.WARN_CRUCIAL:
-				print_.warn_raw(fallback == Fallback.WARN_CRUCIAL, "Key '" + str(key) + "' not found in dictionary")
+				print_.warn(fallback == Fallback.WARN_CRUCIAL, pp.s("Key", pp.in_q(key), "not found in dictionary"), "safe_has_key", "return false")
 			Fallback.SOFT:
 				pass
 			_:
-				print_.warn_raw(false, "Key '" + str(key) + "' not found in dictionary")
+				print_.warn(true, pp.s("Key", pp.in_q(key), "not found in dictionary"), "safe_has_key", "return false",
+					"NOTE: Additional problem - unknown fallback value in safe_has_key", pp.in_q(fallback))
 	return exists
 
 static func safe_look_at(
@@ -162,3 +163,17 @@ static func cut_string(text: String, limit: int = 400) -> String:
 	if text.length() <= limit:
 		return text
 	return text.left(limit) + " ... <too long to print>"
+
+
+## awed/name -> name; 
+## awd/awdaw/name -> name; 
+## ../awd/name -> name; 
+## name -> name; 
+## /name -> name; 
+## name/ -> ''; 
+static func get_last_slash_part(raw_string: String) -> String:
+	# NOTE: looks like built in get_file will do. But this is custom approach.
+	## var pos = raw_string.rfind("/")
+	## var _r = raw_string.substr(pos + 1) if pos != -1 else raw_string
+	var _r = raw_string.get_file()
+	return _r

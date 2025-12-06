@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="2_c173l"]
 [ext_resource type="PackedScene" uid="uid://bxp45814v6ydv" path="res://ui/main_menu_group/options_menu/tabs/controls/m_input_actions_list.tscn" id="3_opxo1"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/ui_utils/separator/h_separator.tscn" id="5_nllgd"]
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui/themes/project-theme.tres" id="5_o03tx"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="5_o03tx"]
 [ext_resource type="PackedScene" uid="uid://0e65ib3cy6mf" path="res://ui/main_menu_group/options_menu/tabs/controls/reset_button.tscn" id="5_r1gaj"]
 [ext_resource type="PackedScene" uid="uid://bn4pa8vlswlqf" path="res://ui/main_menu_group/options_menu/tabs/controls/key_assignment_dialog.tscn" id="6_r1gaj"]
 

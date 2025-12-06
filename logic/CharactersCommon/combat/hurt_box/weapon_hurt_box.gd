@@ -47,11 +47,15 @@ func _get_weapon_push_force() -> int:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	if not base_weapon.is_attacking():
+		return
+
+	__log_(em.mark_x2, "going to resolve hit for body", body, body.name)
+	# base_weapon.resolve_hit(body)
+	
 	if not body is RigidBody3D:
 		return
 
-	if not base_weapon.is_attacking():
-		return
 
 	__log_(em.mark_x2, "detected rigid body and we r attacking", body, body.name)
 	# push in direction weapon is moving
@@ -60,7 +64,7 @@ func _on_body_entered(body: Node3D) -> void:
 
 
 func get_my_weapon_name() -> String:
-	return base_weapon.get_weapon_name()
+	return base_weapon.get_weapon_pp_name()
 
 
 # alternative

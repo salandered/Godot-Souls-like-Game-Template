@@ -38,6 +38,7 @@ M_AppConfig="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/app
 M_SceneLoader="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/scene_loader.tscn"
 M_ProjectMusicController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_music_controller.tscn"
 M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_ui_sound_controller.tscn"
+SfxType="*res://logic/systems/audio_system/sfx/sfx_main_types.gd"
 
 [debug]
 
@@ -68,6 +69,7 @@ enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/
 
 folder_colors={
 "res://-adopting/": "pink",
+"res://-adopting/sfx_sounds/freesound_cc0/": "blue",
 "res://-assets-/GLB-level/": "green",
 "res://-assets-/GLB-level/minimal-arena/": "yellow",
 "res://-assets-/GLB-level/minimal-arena/column/": "pink",
@@ -77,6 +79,14 @@ folder_colors={
 "res://-assets-/GLB-level/minimal-arena/lady/": "blue",
 "res://-assets-/GLB-level/minimal-arena/tree_far/": "gray",
 "res://-assets-/GLB-level/tower map/": "gray",
+"res://-assets-/SFX/": "pink",
+"res://-assets-/SFX/audio_streams/": "yellow",
+"res://-assets-/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/": "blue",
+"res://-assets-/SFX/sources/_dev/": "gray",
+"res://-assets-/SFX/sources/fantasy_pack_by_tom_music/": "green",
+"res://-assets-/SFX/sources/freesound_cc0/": "blue",
+"res://-assets-/SFX/sources/pack_N2/wood/walk_or_jog/": "gray",
+"res://-assets-/SFX/test_sounds/": "orange",
 "res://-assets-/animations/": "yellow",
 "res://-assets-/animations/GLB-packed/": "blue",
 "res://-assets-/animations/standard-skeleton/": "blue",
@@ -84,10 +94,10 @@ folder_colors={
 "res://-assets-/materials-shared/_images/": "blue",
 "res://-assets-/materials-shared/baked/quad_outfits/": "yellow",
 "res://-assets-/materials-shared/unsorted/": "gray",
+"res://-assets-/music/": "pink",
 "res://-assets-/shaders/": "red",
-"res://-assets-/sound/": "pink",
-"res://-assets-/ui/maaacks_assets/": "orange",
 "res://-assets-/ui_assets/": "pink",
+"res://-assets-/ui_assets/maaacks_assets/": "orange",
 "res://-assets-/x_icons/blue/": "blue",
 "res://-assets-/x_icons/purple/": "purple",
 "res://-assets-/x_icons/red/": "red",
@@ -115,6 +125,7 @@ folder_colors={
 "res://logic/Player/pl_input/": "green",
 "res://logic/Player/pl_states/": "blue",
 "res://logic/Player/pl_states/legs_sm/": "orange",
+"res://logic/systems/audio_system/": "yellow",
 "res://logic/xUtils/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",

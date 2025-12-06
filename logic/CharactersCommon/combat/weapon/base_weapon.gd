@@ -10,6 +10,8 @@ extends BaseNode3DCharacterSystem
 #     - collision of area3D IS NOT in packed scene
 #     - note that godot wants u to change its shape via Shape, not Scale 
 # - Weapon visual mesh - optional (e.g. not visuals for leg kick)
+# - WeaponSFX packed scene
+
 ## Also
 # - see SmithSword implementation for basic approach to all this
 
@@ -34,35 +36,45 @@ var _is_attacking: bool = false
 var _hit_data: HitData = null
 
 
+var _signals: BaseWeaponSignals
+
 func _ready() -> void:
 	_weapon_hurt_box = get_weapon_hurt_box()
-	assert(_weapon_hurt_box, "No _weapon_hurt_box provided for " + get_weapon_name())
-	assert(_weapon_hurt_box.get_child(0), "The _weapon_hurt_box must have a CollisionShape3D. " + get_weapon_name())
-	assert(holder, "Set holder! for " + get_weapon_name())
+	assert(_weapon_hurt_box, "No _weapon_hurt_box provided for " + get_weapon_pp_name())
+	assert(_weapon_hurt_box.get_child(0), "The _weapon_hurt_box must have a CollisionShape3D. " + get_weapon_pp_name())
+	assert(holder, "Set holder! for " + get_weapon_pp_name())
 	
 	_weapon_hurt_box.base_weapon = self
 
-
 	if not get_weapon_visuals():
 		pass
-		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_name()), "has no visuals")
+		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_pp_name()), "has no visuals")
 	
+	_signals = BaseWeaponSignals.new()
+
+
+	## SFX
+	set_whoosh_weapon_stream()
+	set_hit_weapon_stream()
+	var _audio_system := get_weapon_audio_system()
+	_audio_system.initialise(_signals, self, {})
+
 	_weapon_hurt_box.initialise()
-	initialise()
+	initialise_implementation()
 
 
 ## additional init or validation if needed
-@abstract func initialise() -> void
+@abstract func initialise_implementation() -> void
 
 
 @abstract func get_weapon_hurt_box() -> WeaponHurtBox
 
 
 func pp_name() -> String:
-	return pp.s("🗡️ Weapon", get_weapon_name())
+	return pp.s("🗡️ Weapon", get_weapon_pp_name())
 
 
-@abstract func get_weapon_name() -> String
+@abstract func get_weapon_pp_name() -> String
 
 ## could be nullable (aura weapon)
 @abstract func get_weapon_visuals() -> MeshInstance3D
@@ -76,6 +88,9 @@ func set_is_attacking(is_attacking_: bool) -> void:
 	_is_attacking = is_attacking_
 
 
+## HIT DATA
+# region
+
 ## nullable
 func get_hit_data() -> HitData:
 	return _hit_data
@@ -87,6 +102,8 @@ func set_hit_data(hit_data: HitData):
 
 func reset_hit_data():
 	_hit_data = null
+
+# endregion
 
 
 ## CONTACT HITBOX LIST MANAGEMENT
@@ -115,6 +132,51 @@ func reset_contact_hitbox_list() -> void:
 # endregion
 
 
+## SFX
+
+@abstract func get_weapon_audio_system() -> BaseWeaponAudioSystem
+
+
+func get_sfx_whoosh_weapon_signal() -> Signal:
+	return _signals.get_SFX_whoosh_weapon()
+
+
+func get_sfx_hit_weapon_signal() -> Signal:
+	return _signals.get_SFX_hit_weapon()
+
+
+@abstract func set_whoosh_weapon_stream() -> void
+
+@abstract func set_hit_weapon_stream() -> void
+
+
+## in theory could be nullable
+# # @abstract func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream
+# func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream:
+# 	return null
+
+
+# func play_swing_sfx() -> void:
+# 	var player = get_sfx_swing_player()
+# 	if player:
+# 		# Randomize pitch for realism
+# 		player.pitch_scale = randf_range(0.9, 1.1)
+# 		player.play()
+
+# func resolve_hit(target: Node3D) -> void:
+# 	# SFX
+# 	var player = get_sfx_hit_player()
+# 	if player:
+# 		var stream = get_sfx_hit_stream_for_target(target)
+# 		if stream:
+# 			player.stream = stream
+# 			player.pitch_scale = randf_range(0.9, 1.1)
+# 			player.play()
+	
+# 	# Apply Damage / Physics (Existing logic can go here later)
+# 	__log_("Resolved hit on", target.name)
+
+
 ## __LOGS
 # region
 
@@ -126,6 +188,6 @@ func __LOG_INDENT() -> int:
 
 func _to_string() -> String:
 	return "ID '%s' wepName '%s' Holder '%s' Len of ContactHiBList '%d' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), get_weapon_name(), holder.name, len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
+		% [str(get_instance_id()), get_weapon_pp_name(), holder.name, len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
 
 # endregion

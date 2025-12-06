@@ -1,5 +1,5 @@
 extends RefCounted
-class_name Marker
+class_name AnimMarker
 
 ## DOCS
 # Animation Markers are persistent - they're part of the Animation resource structure.
@@ -20,3 +20,7 @@ var marker_name: String
 func _init(time_: float, marker_name_: String) -> void:
 	time = time_
 	marker_name = marker_name_
+
+
+func _to_string() -> String:
+	return pp.s(pp.in_q(marker_name), time)

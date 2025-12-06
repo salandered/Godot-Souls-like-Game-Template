@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://84u5xg7sdbmx"
+path="res://.godot/imported/Torch Loop.wav-9d78b9fef198e0971ddf701e5a303419.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Torch/Torch Loop.wav"
+dest_files=["res://.godot/imported/Torch Loop.wav-9d78b9fef198e0971ddf701e5a303419.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

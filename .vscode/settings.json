@@ -11,6 +11,7 @@
 	"files.exclude": {
 		// godot 
 		"**/*.res": true,
+		// "**/*.tres": true,
 		"**/*.gd.uid": true,
 		"**/*.blend": true,
 		"**/*.glb": true,

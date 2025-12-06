@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://jtkogl4lhvf3"]
+[gd_scene load_steps=7 format=3 uid="uid://jtkogl4lhvf3"]
 
 [ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/CharactersCommon/combat/weapon/SmithSword/smith_sword.gd" id="1_q502g"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/CharactersCommon/combat/hurt_box/WeaponHurtBox.tscn" id="2_lfwdn"]
 [ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword/smith_sword_2.glb" id="2_sk2nb"]
+[ext_resource type="PackedScene" uid="uid://c3bogm2cs375" path="res://logic/CharactersCommon/combat/weapon/WeaponSfx.tscn" id="4_oli0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
 radius = 0.13134766
@@ -29,5 +30,8 @@ debug_color = Color(0.8352941, 0.0627451, 0.28235295, 0.32941177)
 transform = Transform3D(0.0399609, 0, 0, 0, 0.45005602, 0, 0, 0, 0.02624012, 0, 0.45049554, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_lfwdn")
+
+[node name="WeaponSFX" parent="." instance=ExtResource("4_oli0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3338285, 0)
 
 [editable path="WeaponHurtBox"]

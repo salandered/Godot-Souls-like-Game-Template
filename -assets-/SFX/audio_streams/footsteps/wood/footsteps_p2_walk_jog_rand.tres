@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://bscxijiqusfyk"]
+
+[ext_resource type="AudioStream" uid="uid://yhr6ho4m4yor" path="res://-assets-/SFX/sources/pack_N2/wood/walk_or_jog/WoodSteps 1-Audio.wav" id="1_3l3sa"]
+[ext_resource type="AudioStream" uid="uid://075d3fffv6lq" path="res://-assets-/SFX/sources/pack_N2/wood/walk_or_jog/WoodSteps 2-Audio.wav" id="2_54l7c"]
+[ext_resource type="AudioStream" uid="uid://crwwmvv672k4p" path="res://-assets-/SFX/sources/pack_N2/wood/walk_or_jog/WoodSteps 3-Audio.wav" id="3_oegxj"]
+[ext_resource type="AudioStream" uid="uid://c5fgt0asatm67" path="res://-assets-/SFX/sources/pack_N2/wood/walk_or_jog/WoodSteps 43-Audio.wav" id="4_nb8gs"]
+
+[resource]
+random_pitch = 1.05
+streams_count = 4
+stream_0/stream = ExtResource("1_3l3sa")
+stream_1/stream = ExtResource("2_54l7c")
+stream_2/stream = ExtResource("3_oegxj")
+stream_3/stream = ExtResource("4_nb8gs")

@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://h34rd3knc6l3"]
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://h34rd3knc6l3"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_87o32"]
 resource_name = "Compressor"
@@ -20,6 +20,13 @@ wet = 0.26
 [sub_resource type="AudioEffectFilter" id="AudioEffectFilter_87o32"]
 resource_name = "Filter"
 cutoff_hz = 4548.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_h4dk8"]
+resource_name = "Compressor"
+threshold = -2.7
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_87o32"]
+resource_name = "Delay"
 
 [resource]
 bus/1/name = &"Music"
@@ -46,5 +53,9 @@ bus/3/name = &"SFX"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.0
+bus/3/volume_db = -0.13049698
 bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectCompressor_h4dk8")
+bus/3/effect/0/enabled = false
+bus/3/effect/1/effect = SubResource("AudioEffectDelay_87o32")
+bus/3/effect/1/enabled = false

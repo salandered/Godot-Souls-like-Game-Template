@@ -8,7 +8,7 @@ static var anim_to_required_marker = {
 	PHEA.loco.combat_walk_forward: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],
 	PHEA.loco.run_forward: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],
 	PHEA.loco.combat_run_forward: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],
-	PHEA.loco.jump_towards: [MarkerName.LAND_START, MarkerName.LAND_START],
+	PHEA.loco.jump_towards: [MarkerName.JUMP.LAND_START, MarkerName.JUMP.LAND_START],
 
 	## strafe
 	PHEA.strafe.strafe_right: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],
@@ -23,7 +23,7 @@ static var anim_to_required_marker = {
 
 	## attack
 	# PHEA.attack.scare_off: [MarkerName.ALLOWS_SWITCH],
-	PHEA.attack.power_gap_closer: [MarkerName.JUMP_LAUNCH, MarkerName.LAND_START],
+	PHEA.attack.power_gap_closer: [MarkerName.JUMP.LAUNCH, MarkerName.JUMP.LAND_START],
 	PHEA.attack.attack_360_high: [MarkerName.ALLOWS_SWITCH, MarkerName.EARLY_SERIES_SWITCH],
 	PHEA.attack.attack_360_low: [MarkerName.ALLOWS_SWITCH],
 	PHEA.attack.attack_up: [MarkerName.ALLOWS_SWITCH],

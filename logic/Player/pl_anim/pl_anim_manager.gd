@@ -79,11 +79,14 @@ func get_curr_anim_effective_duration() -> float:
 func get_curr_blend_duration() -> float:
 	return full_body.curr_blend_playback.duration
 
+# func get_curr_blend_time_spent() -> float:
+# 	return full_body.curr_blend_playback.
+
 func is_blending() -> bool:
 	return full_body.curr_blend_playback.is_blending
 
-func get_prev_blend_percentage() -> float:
-	return full_body.curr_blend_playback.prev_percentage
+func get_curr_blend_percentage() -> float:
+	return full_body.curr_blend_playback.percentage
 
 func get_curr_anim() -> AnimationData:
 	return full_body.curr_playback.anim

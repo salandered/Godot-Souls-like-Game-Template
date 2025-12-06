@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ope03u0gwdw4"]
+[gd_scene load_steps=21 format=4 uid="uid://ope03u0gwdw4"]
 
 [ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/Enemies/phe_enemy/combat/weapons/big_pinga_blade.gd" id="1_hj5gq"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/CharactersCommon/combat/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b4wn10ena052b" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_Roughness.png" id="7_jhutn"]
 [ext_resource type="Texture2D" uid="uid://vtrrpfkytq08" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_NormalGL.jpg" id="8_mpgtj"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="9_h8ebr"]
+[ext_resource type="PackedScene" uid="uid://c3bogm2cs375" path="res://logic/CharactersCommon/combat/weapon/WeaponSfx.tscn" id="10_kngnu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
 radius = 0.7368164
@@ -197,5 +198,7 @@ transform = Transform3D(4.1779947, -0.33017457, 1.1652693, 1.0886619, -0.8102425
 visible = false
 shape = SubResource("CapsuleShape3D_u228v")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
+
+[node name="WeaponSFX" parent="." instance=ExtResource("10_kngnu")]
 
 [editable path="WeaponHurtBox"]

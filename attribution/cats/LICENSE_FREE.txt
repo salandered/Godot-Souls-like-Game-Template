@@ -1,0 +1,16 @@
+## from readme
+
+```
+All CC0 content free to be used as you wish without attribution. Although I'll very gratefully be attributed in credits and/or humbly accept your donations.
+This template uses assets created entirely by myself, or from Kenney Assets. Nothing from Mixamo, etc to muddy up the licensing waters.
+```
+
+```
+Creative Commons, but be cool about it Consider donating me a coffee or crediting/thanking me in a game you make with it :)
+```
+
+
+## also
+there is a link to https://choosealicense.com/licenses/unlicense/
+
+

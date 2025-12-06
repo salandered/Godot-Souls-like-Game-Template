@@ -22,9 +22,13 @@ static func _get_descendants_filtered_with_depth(node: Node, filter: Callable, _
 		descendants.append_array(_get_descendants_filtered_with_depth(child, filter, _depth + 1))
 	return descendants
 
-static func _get_descendants_filtered(node: Node, filter: Callable, one_level: bool = false) -> Array:
+static func _get_descendants_filtered(node: Node, filter: Callable, one_level: bool = false, skip_subscenes: bool = false) -> Array:
 	var descendants := []
 	for child in node.get_children():
+		var is_scene_root := not child.scene_file_path.is_empty()
+		if skip_subscenes and is_scene_root:
+			continue
+
 		if filter.call(child):
 			descendants.append(child)
 		if not one_level:
@@ -76,19 +80,24 @@ static func csg_primitives(node: Node) -> Array:
 static func bone_attachments(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BoneAttachment3D)
 
+
+static func audio_stream_players_3D(node: Node, skip_subscenes: bool = false) -> Array[AudioStreamPlayer3D]:
+	var r = _get_descendants_filtered(node, func(n): return n is AudioStreamPlayer3D, false, skip_subscenes)
+	r = TypeCast.array_of_audio_stream_player_3d(r)
+	return r
+
 # endregion
 
+
+# region: custom nodes
 
 static func breakable_areas(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BreakableArea)
 
-static func base_weapons_only_one(node: Node) -> BaseWeapon:
-	var r := base_weapons(node)
-	assert(len(r) == 1, "expected 1 base weapon, got " + str(len(r)))
-	return r[0]
 
-static func base_weapons(node: Node) -> Array:
-	return _get_descendants_filtered(node, func(n): return n is BaseWeapon)
+static func base_weapons(node: Node) -> Array[BaseWeapon]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseWeapon)
+	return TypeCast.array_of_base_weapon(r)
 
 
 # region: player
@@ -132,3 +141,5 @@ static func pause_menu_controller(node: Node) -> Array[M_PauseMenuController]:
 	var r = _get_descendants_filtered(node, func(n): return n is M_PauseMenuController)
 	return TypeCast.array_of_pause_menu_controller(r)
 # 
+
+# endregion

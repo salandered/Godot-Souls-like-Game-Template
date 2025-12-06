@@ -79,6 +79,7 @@ static func rad2deg(angle_: float, to_str: bool = true) -> Variant:
 		return str(r) + "°"
 	return r
 
+
 # region:  basic structures
 
 static func vec3(v: Vector3) -> String:
@@ -140,10 +141,8 @@ static func bone_mask_(_bone_mask_: Array[int]) -> String:
 	return "boneMsk [%d-%d] (size %d)" % [first_b, last_b, _bone_mask_.size()]
 
 ## returns name from id (no lib)
-static func anim(anim_id: String) -> String:
-	var pos = anim_id.rfind("/")
-	var _r = anim_id.substr(pos + 1) if pos != -1 else anim_id
-	return pp.in_q(_r)
+static func anim_n(anim_id: String) -> String:
+	return pp.in_q(u.get_last_slash_part(anim_id))
 
 # endregion
 
