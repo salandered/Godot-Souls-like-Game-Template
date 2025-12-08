@@ -1,7 +1,9 @@
+@abstract
+class_name TimeManagement
 extends Node
+
 ## suits for any node with life cycle like this:
 ##	on_enter - update - on_exit
-class_name TimeManagement
 
 
 var _accumulated_time: float = 0.0
@@ -27,5 +29,9 @@ func get_actual_time_spent() -> float:
 	return _accumulated_time
 
 
-func accumulate_time_spent(delta) -> void:
+## call accumulate_time_spent inside it
+## abstract so u cant forget
+@abstract func call_accumulate_time_spent(delta: float) -> void
+
+func accumulate_time_spent(delta: float) -> void:
 	_accumulated_time += delta

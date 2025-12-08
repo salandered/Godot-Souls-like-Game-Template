@@ -32,11 +32,11 @@ func on_exit_state() -> void:
 var major_hit_just_received: bool = false
 
 func react_on_hit(hit_data: HitData) -> void:
-	var _curr_sbs = get_current_substate()
+	var _curr_sbs := get_current_substate()
 	if not _curr_sbs:
 		__log_warn_v2(false, "no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
-	var result = ReactionOnHit.calculate_reaction_for_enemy_state(hit_data)
+	var result := ReactionOnHit.calculate_reaction_for_enemy_state(hit_data)
 	__log_phe("react_on_hit", "major result", result)
 	if result != "": # result actually have leaf name! but we have only one pushback as an experiment
 		__log_phe("react_on_hit", "major hit! pushback✋")
@@ -47,7 +47,7 @@ func react_on_hit(hit_data: HitData) -> void:
 
 
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
-	var dist = distance_to_player()
+	var dist := distance_to_player()
 	
 	match current_substate.state_name:
 		PHES.Leaf.phase_switch:

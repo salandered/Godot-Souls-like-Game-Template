@@ -10,7 +10,7 @@ func _validate():
 	assert(self._audio_system is BaseWeaponAudioSystem)
 
 
-func _custom_logic(signal_data: Dictionary) -> void:
+func _custom_logic(signal_data: Dictionary[String, Variant]) -> void:
 	pass
 
 

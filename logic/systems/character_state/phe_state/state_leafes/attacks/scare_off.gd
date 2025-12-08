@@ -41,7 +41,7 @@ func _calculate_speed_scale() -> float:
 
 var _pushed_rigid_bodies: bool = false
 
-func update(delta):
+func update(delta: float):
 	var _speed_scale := _calculate_speed_scale()
 	get_animator_manager().set_global_speed_scale(_speed_scale)
 	

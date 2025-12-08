@@ -10,6 +10,6 @@ func initialise() -> void:
 	sp_config = SpeedConfig.new(default_sp)
 
 
-func update(delta):
+func update(delta: float):
 	e_movement.rotate_towards_player(delta, sp_config)
 	e_movement.move_with_root(delta, SCALE_LENGTH)

@@ -49,7 +49,7 @@ var prev_playback: AnimPlayback # Animation B
 var prev_prev_playback: AnimPlayback # Animation C
 var prev_prev_prev_playback: AnimPlayback # Animation D
 
-var _bone_idx_to_track := {}
+var _bone_idx_to_track: Dictionary[int, String] = {}
 # todo: flying bone attachments
 
 
@@ -219,9 +219,9 @@ func __log_state() -> String:
 
 
 func __log_blend_state() -> String:
-	var anim_names := []
-	var blend_times := []
-	var times_left := []
+	var anim_names: Array[String] = []
+	var blend_times: Array[float] = []
+	var times_left: Array[float] = []
 
 	if prev_prev_blend_playback.is_blending and prev_prev_prev_playback and prev_prev_playback:
 		anim_names.append(prev_prev_prev_playback.anim.anim_name) # D

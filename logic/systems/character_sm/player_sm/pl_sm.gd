@@ -60,13 +60,13 @@ func apply_hit_influence(value: float, target_multiplier: float = -1.0) -> float
 # TODO: fast solution. Design proper action (or states) ability to share data.
 ## for now its supposed to store only prev action data
 ## so actions can only use these methods for working with tranfer data
-func fill_tranfer_data(tranfer_turn_data):
+func fill_tranfer_data(tranfer_data: Dictionary[String, Variant]):
 	## auto setting current action
-	_transfer_data.fill(_current_action.action_name, tranfer_turn_data)
+	_transfer_data.fill(_current_action.action_name, tranfer_data)
 
 
 ## optional return
-func get_tranfer_data_by_key(key) -> Variant:
+func get_tranfer_data_by_key(key: String) -> Variant:
 	## auto getting prev one
 	var data: Variant = _transfer_data.get_by_action_and_key(_prev_action.action_name, key)
 	return data

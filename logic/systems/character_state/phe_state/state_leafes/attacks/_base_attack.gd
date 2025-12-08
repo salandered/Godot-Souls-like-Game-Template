@@ -43,7 +43,7 @@ func _combat_set_hit_data_to_all_weapons():
 	combat.set_hit_data_to_all_weapons(hit_damage, anim.anim_id)
 
 func _combat_update_is_attacking():
-	var _weapon_names = get_active_weapon_names()
+	var _weapon_names := get_active_weapon_names()
 	for weapon_name_ in _weapon_names:
 		combat.update_weapon_is_attacking(weapon_name_, is_weapon_hurts(weapon_name_, false))
 
@@ -61,7 +61,7 @@ func on_exit_state() -> void:
 	_combat_reset_all_weapons()
 
 
-func update(delta):
+func update(delta: float):
 	e_movement.rotate_towards_player(delta, sp_config, deg_to_rad(angle_adjustment_deg))
 	
 	e_movement.move_with_root(delta, SCALE_ROOT_FACTOR)

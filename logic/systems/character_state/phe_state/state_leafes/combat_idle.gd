@@ -40,7 +40,7 @@ func on_exit_state() -> void:
 	u.reset_all(_resettable)
 	get_animator_manager().reset_global_speed_scale()
 
-func update(delta):
+func update(delta: float):
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	CURR_ANGULAR_SPEED = angular_accel.update(delta)
 	

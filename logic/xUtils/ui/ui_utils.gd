@@ -5,7 +5,7 @@ const ALPHA_CHANNEL = "modulate:a"
 
 
 static func fade_out_and_hide(owner: Node, ui_panels: Array, duration: float) -> Tween:
-	var tween = owner.create_tween()
+	var tween := owner.create_tween()
 	tween.set_parallel(true)
 	
 	for panel: Control in ui_panels:
@@ -26,7 +26,7 @@ static func fade_out_and_hide(owner: Node, ui_panels: Array, duration: float) ->
 
 
 static func start_pulse(node: Control, min_alpha: float, duration: float) -> Tween:
-	var tween = node.create_tween().set_loops()
+	var tween := node.create_tween().set_loops()
 	tween.tween_property(
 		node,
 		ALPHA_CHANNEL,
@@ -61,7 +61,7 @@ static func animate_property(
 	if not tween_config:
 		tween_config = TweenConfig.new()
 
-	var tween = owner.create_tween()
+	var tween := owner.create_tween()
 	
 	if not delay == -1.0:
 		tween.tween_interval(delay)

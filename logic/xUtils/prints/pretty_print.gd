@@ -15,7 +15,7 @@ static var on_internal_upd := " _upd"
 
 
 static func s(...parts: Array) -> String:
-	var r = ""
+	var r := ""
 	for part in parts:
 		if part is float:
 			r += str(pp.round_001(part))
@@ -65,7 +65,7 @@ static func round_01(f: float) -> String:
 
 
 static func vec3_angle_deg(a: Vector3, b: Vector3, to_str: bool = true) -> Variant:
-	var r = rad_to_deg(a.normalized().angle_to(b.normalized()))
+	var r := rad_to_deg(a.normalized().angle_to(b.normalized()))
 	r = snapped(r, 0.00001)
 	if to_str:
 		return str(r)
@@ -73,7 +73,7 @@ static func vec3_angle_deg(a: Vector3, b: Vector3, to_str: bool = true) -> Varia
 
 
 static func rad2deg(angle_: float, to_str: bool = true) -> Variant:
-	var r = rad_to_deg(angle_)
+	var r := rad_to_deg(angle_)
 	r = snapped(r, 0.01)
 	if to_str:
 		return str(r) + "°"
@@ -103,7 +103,7 @@ static func list_(parts: Array, json: bool = false, max_length = 500) -> String:
 		return JSON.stringify(parts, "\t")
 	if parts.size() == 0:
 		return "[-x-]"
-	var r = ""
+	var r := ""
 	for part in parts:
 		if part is float:
 			r += pp.round_001(part) + " "
@@ -120,7 +120,7 @@ static func list_(parts: Array, json: bool = false, max_length = 500) -> String:
 
 
 static func array_(parts: Array, json: bool = false) -> String:
-	var r = list_(parts, json, 300)
+	var r := list_(parts, json, 300)
 	return pp.in_br(r)
 
 # endregion
@@ -136,8 +136,8 @@ static func file_load_err(err, path: String):
 # region: domain helpers
 
 static func bone_mask_(_bone_mask_: Array[int]) -> String:
-	var first_b = _bone_mask_[0] if _bone_mask_.size() > 0 else -1
-	var last_b = _bone_mask_[-1] if _bone_mask_.size() > 0 else -1
+	var first_b := _bone_mask_[0] if _bone_mask_.size() > 0 else -1
+	var last_b := _bone_mask_[-1] if _bone_mask_.size() > 0 else -1
 	return "boneMsk [%d-%d] (size %d)" % [first_b, last_b, _bone_mask_.size()]
 
 ## returns name from id (no lib)
@@ -149,8 +149,8 @@ static func anim_n(anim_id: String) -> String:
 # region: inner helpers
 
 static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string: bool = false) -> String:
-	var r = "" if one_string else "\n"
-	var next_indent = "" if one_string else indent + "\t"
+	var r := "" if one_string else "\n"
+	var next_indent := "" if one_string else indent + "\t"
 	
 	for key_ in _dict_.keys():
 		var value_ = _dict_[key_]

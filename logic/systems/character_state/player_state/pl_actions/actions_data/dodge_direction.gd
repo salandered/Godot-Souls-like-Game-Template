@@ -20,7 +20,7 @@ enum Dir {
 
 
 var _curr_dir: Dir = Dir.NEUTRAL
-var _dir_data: Dictionary = {}
+var _dir_data: Dictionary[Dir, _DirData] = {}
 
 
 func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String):

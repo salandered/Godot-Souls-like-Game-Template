@@ -12,18 +12,8 @@ static func validate_skeleton(skeleton: Skeleton3D) -> bool: # {int: String}
 	return true
 
 
-static func calculate_bone_idx_to_track(skeleton: Skeleton3D) -> Dictionary: # {int: String}
-	var result = {}
-
-	var full_body := BoneMask.get_full_body_with_root()
-
-	for bone_idx in full_body:
-		result[bone_idx] = Constants.BONE_TRACK_PREFIX + skeleton.get_bone_name(bone_idx)
-
-	return result
-
-static func calculate_root_track(skeleton: Skeleton3D) -> Dictionary: # {int: String}
-	var result = {}
+static func calculate_bone_idx_to_track(skeleton: Skeleton3D) -> Dictionary[int, String]:
+	var result: Dictionary[int, String] = {}
 
 	var full_body := BoneMask.get_full_body_with_root()
 
@@ -37,7 +27,7 @@ static func calculate_bone_pose_for_anim_playback(
 		bone_idx: int,
 		playback: AnimPlayback,
 		skeleton: Skeleton3D,
-		bone_idx_to_track: Dictionary
+		bone_idx_to_track: Dictionary[int, String]
 	) -> Transform3D:
 	# Find pos/rot tracks using the bone's path.
 	# If a track isn't found (-1), use the bone's current pose component (origin/basis).

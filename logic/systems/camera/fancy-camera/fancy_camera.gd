@@ -211,7 +211,7 @@ func _switch_locked_from_free(found_target: EnemyCameraTarget):
 ## - Mouse motion is fundamentally different (event-based vs frame-based)
 ## - Camera is the only thing that needs mouse motion anyway
 ## If this changes - consider moving to that singleton.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		accumulated_mouse_delta += event.relative
 
@@ -261,7 +261,7 @@ func __toggle_camera_visuals():
 		obj.visible = __dev_camera_visuals
 	
 
-func _dev_input(event):
+func _dev_input(event: InputEvent):
 	if event.is_action_released(RawAction.DEV_CAM_fov):
 		__change_fov()
 	

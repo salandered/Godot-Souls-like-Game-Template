@@ -26,13 +26,13 @@ func initialise(curve: Curve, duration: float, curve_bottom_point_idx: int = -1)
 	# print_.note(false, "StrafeDirChange init", "note the dip_time_ratio:", dip_time_ratio)
 
 
-func speed_dip_update(delta) -> float:
+func speed_dip_update(delta: float) -> float:
 	if speed_dip.is_in_progress():
 		return speed_dip.update(delta)
 	return 1.0
 
 
-func async_change_update(delta):
+func async_change_update(delta: float):
 	if async_change.is_in_progress():
 		async_change.update(delta)
 

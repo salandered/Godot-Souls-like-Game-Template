@@ -101,7 +101,7 @@ static func pick_weighted(items: Array[Variant], weights: Array[float]) -> Varia
 ## Example: pick_weighted_dict({1: 0.2, 2: 0.4, 3: 0.4}) returns 1 with 20% chance
 ## {1: 0.2, 2: 0.4, 3: 0.4} is the same as {1: 2, 2: 4, 3: 4}
 ## Sum of the values doesnt matter. It will be normalised
-static func ipick_weighted(weighted_values: Dictionary) -> int:
+static func ipick_weighted(weighted_values: Dictionary[int, float]) -> int:
 	if weighted_values.is_empty():
 		return 0
 	
@@ -113,7 +113,7 @@ static func ipick_weighted(weighted_values: Dictionary) -> int:
 	
 	return pick_weighted(keys, values)
 
-static func spick_weighted(weighted_values: Dictionary) -> String:
+static func spick_weighted(weighted_values: Dictionary[String, float]) -> String:
 	if weighted_values.is_empty():
 		return ""
 	
@@ -148,7 +148,7 @@ static func spick_random_array(array: Array[String]) -> String:
 
 
 static func spick_random(...elements: Array) -> String:
-	var _elements = TypeCast.array_of_string(elements)
+	var _elements: Array[String] = TypeCast.array_of_string(elements)
 	return spick_random_array(_elements)
 
 
@@ -160,7 +160,7 @@ static func ipick_random_array(array: Array[int]) -> int:
 
 
 static func ipick_random(...elements: Array) -> int:
-	var _elements = TypeCast.array_of_int(elements)
+	var _elements: Array[int] = TypeCast.array_of_int(elements)
 	return ipick_random_array(_elements)
 
 
@@ -172,7 +172,7 @@ static func fpick_random_array(array: Array[float]) -> float:
 
 
 static func fpick_random(...elements: Array) -> float:
-	var _elements = TypeCast.array_of_float(elements)
+	var _elements: Array[float] = TypeCast.array_of_float(elements)
 	return fpick_random_array(_elements)
 
 

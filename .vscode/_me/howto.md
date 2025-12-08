@@ -44,9 +44,10 @@ _dev/**, addons/**, ideas*, *.godot, *.tscn*, *.import, *.git, *.tres
 
 ### Code quality
 
-regex for typings cleanup
-var \w+ = 
-func \w+\(\):
+###regex for typings cleanup
+#### var \w+ = 
+#### func \w+\(\):
+#### ^\s*func\s+.*?[,(]\s*\b\w+\b\s*(?![=:])(?=[,)])
 
 
 ## Copilot Settings

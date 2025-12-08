@@ -5,7 +5,7 @@
 class_name BaseFeelings
 extends BaseNodeCharacterSystem
 
-var statuses: Dictionary # todo: system
+var statuses: Dictionary[String, bool] # todo: system
 
 var __god_mode: bool = false
 

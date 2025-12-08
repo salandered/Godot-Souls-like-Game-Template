@@ -13,13 +13,13 @@ var speed_scale: float
 var is_looping: bool
 var native_anim: Animation
 ## markers have unique names by Godot design. So we can use marker_name as a dictionary key
-var _markers: Dictionary # {marker_name <String>: <AnimMarker>}
-var _audio_tracks: Dictionary # { timestamp <float>: Array[AudioTrackData] }
+var _markers: Dictionary[String, AnimMarker] # {marker_name <String>: <AnimMarker>}
+var _audio_tracks: Dictionary[float, Array] # { timestamp <float>: Array[AudioTrackData] }
 ## caches timestamps sorted ASC, built using _audio_tracks
 var _audio_tracks_timestamps_sorted: Array[float]
 var uses_root_rotation: bool
 # { "pos": {track_path: track_idx, ...}, "rot": {track_path: track_idx, ...} }
-var _tranform_track_path_to_idx := {"pos": {}, "rot": {}}
+var _tranform_track_path_to_idx: Dictionary[String, Dictionary] = {"pos": {}, "rot": {}}
 
 func _init(
 		_anim_id,
@@ -47,7 +47,7 @@ func get_marker_by_name(marker_name: String, fallback: String = Fallback.WARN) -
 	return u.safe_get_dict_key(_markers, marker_name, null, fallback, "get marker from anim " + anim_id)
 
 func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
-	var result = []
+	var result: Array[AnimMarker] = []
 	for marker_name in _markers.keys():
 		if marker_name.begins_with(prefix):
 			result.append(_markers[marker_name])
@@ -62,7 +62,7 @@ func get_audio_tracks_timestamps_sorted() -> Array[float]:
 	return _audio_tracks_timestamps_sorted
 
 func get_audio_tracks_data_by_timestamp(timestamp: float) -> Array[AudioTrackData]:
-	var r = u.safe_get_dict_key(_audio_tracks, timestamp, null)
+	var r: Array = u.safe_get_dict_key(_audio_tracks, timestamp, null)
 	return TypeCast.array_of_audio_track_data(r)
 
 
@@ -146,7 +146,7 @@ static func __validate_track_values(anim: AnimationData, param_prefixes: Array[S
 	return all_valid
 
 
-static func __validate_anim(anim_data: AnimationData, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary) -> bool:
+static func __validate_anim(anim_data: AnimationData, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary[String, Array]) -> bool:
 	# base field validation (not null)
 	if anim_data.anim_id == null:
 		return false
@@ -159,12 +159,12 @@ static func __validate_anim(anim_data: AnimationData, param_prefixes: Array[Stri
 	if anim_data._markers == null: # (no markers is fine, but then it would be empty dict)
 		return false
 
-	var _required_markers = required_markers.get(anim_data.anim_id)
+	var _required_markers: Variant = required_markers.get(anim_data.anim_id)
 	if _required_markers == null:
 		pass
 		# prints("_required_markers is null for", anim_data.anim_id)
 	else:
-		for marker_name in _required_markers:
+		for marker_name: String in TypeCast.array_of_string(_required_markers):
 			if not anim_data.does_marker_exist(marker_name):
 				assert(false, pp.s("required marker", pp.in_q(marker_name), "not found! for", anim_data.anim_id))
 	

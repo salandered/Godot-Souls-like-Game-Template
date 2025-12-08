@@ -37,7 +37,7 @@ var blend_audio_bus_idx: int
 func fade_out(duration: float = 0.0) -> Tween:
 	if is_zero_approx(duration): return
 	music_stream_player.bus = audio_bus
-	var tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(music_stream_player, "volume_db", MINIMUM_VOLUME_DB, duration)
 	return tween
 
@@ -48,13 +48,13 @@ func fade_in(duration: float = 0.0) -> Tween:
 	if is_zero_approx(duration): return
 	music_stream_player.bus = blend_audio_bus
 	AudioServer.set_bus_volume_db(blend_audio_bus_idx, MINIMUM_VOLUME_DB)
-	var tween = create_tween()
+	var tween := create_tween()
 	tween.tween_method(_set_sub_audio_volume_db, MINIMUM_VOLUME_DB, 0, duration)
 	return tween
 
 func blend_to(target_volume_db: float, duration: float = 0.0) -> Tween:
 	if not is_zero_approx(duration):
-		var tween = create_tween()
+		var tween := create_tween()
 		tween.tween_property(music_stream_player, "volume_db", target_volume_db, duration)
 		return tween
 	music_stream_player.volume_db = target_volume_db
@@ -76,8 +76,8 @@ func play(playback_position: float = 0.0) -> void:
 func _fade_out_and_free() -> void:
 	if not is_instance_valid(music_stream_player):
 		return
-	var stream_player = music_stream_player
-	var tween = fade_out(fade_out_duration)
+	var stream_player := music_stream_player
+	var tween := fade_out(fade_out_duration)
 	if tween != null:
 		await (tween.finished)
 	stream_player.queue_free()
@@ -99,7 +99,7 @@ func _connect_stream_on_tree_exiting(stream_player: AudioStreamPlayer) -> void:
 
 func _blend_and_remove_stream_player(stream_player: AudioStreamPlayer) -> void:
 	var playback_position := music_stream_player.get_playback_position() + AudioServer.get_time_since_last_mix()
-	var old_stream_player = music_stream_player
+	var old_stream_player := music_stream_player
 	music_stream_player = stream_player
 	music_stream_player.bus = blend_audio_bus
 	play(playback_position)

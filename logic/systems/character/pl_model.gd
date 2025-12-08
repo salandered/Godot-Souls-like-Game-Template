@@ -41,7 +41,7 @@ class_name Princess
 
 
 @onready var _start_position := global_transform.origin
-var push_rigid_bodies_force = 4.0
+var push_rigid_bodies_force : float= 4.0
 
 
 func initialise() -> void:
@@ -105,7 +105,7 @@ func reset_position() -> void:
 
 
 # TODO: _process or _physics_process? changed to _process: frame issues
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
 	# seems like every frame is ok. may be try to make it once per N frames for safety
@@ -132,7 +132,7 @@ func hp_percentage() -> float:
 func current_attack_radius(default_return: float = -1.0) -> float:
 	if not is_attacking():
 		return default_return
-	var curr_action = _get_curr_action_with_warn("current_attack_radius")
+	var curr_action := _get_curr_action_with_warn("current_attack_radius")
 	if not curr_action:
 		return default_return
 	if not curr_action is BaseAttackAction:
@@ -141,7 +141,7 @@ func current_attack_radius(default_return: float = -1.0) -> float:
 
 
 func current_state_initial_position() -> Vector3:
-	var curr_state = _get_curr_state_with_warn("current_state_initial_position")
+	var curr_state := _get_curr_state_with_warn("current_state_initial_position")
 	if not curr_state:
 		return Vector3.ZERO
 	return curr_state.initial_position
@@ -149,8 +149,8 @@ func current_state_initial_position() -> Vector3:
 
 ## means in attack state (don't confuse with weapon's 'is_attacking')
 func is_attacking() -> bool:
-	var curr_state = _get_curr_state_with_warn("is_attacking")
-	var curr_action = _get_curr_action_with_warn("is_attacking")
+	var curr_state := _get_curr_state_with_warn("is_attacking")
+	var curr_action := _get_curr_action_with_warn("is_attacking")
 	if curr_state == null or curr_action == null:
 		return false
 	var _state_is_att: bool = curr_state is AttackState
@@ -161,7 +161,7 @@ func is_attacking() -> bool:
 
 
 func is_dodging() -> bool:
-	var curr_state = _get_curr_state_with_warn("is_dodging")
+	var curr_state := _get_curr_state_with_warn("is_dodging")
 	if not curr_state:
 		return false
 	return curr_state.state_name == PS.dodge
@@ -175,7 +175,7 @@ func _get_curr_state_with_warn(caller_log: String = "") -> BasePlayerState:
 
 
 func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
-	var action = player_sm.get_curr_action()
+	var action := player_sm.get_curr_action()
 	if not action:
 		print_.warn(false, "player_sm.get_curr_action() is null", caller_log, "return null")
 		return null
@@ -188,19 +188,19 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_H):
-		var hit = HitData.new(10, "from god", PHEA.attack.scare_off)
+		var hit := HitData.new(10, "from god", PHEA.attack.scare_off)
 		combat._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_J):
-		var hit = HitData.new(30, "from god", PHEA.attack.sword_slide)
+		var hit := HitData.new(30, "from god", PHEA.attack.sword_slide)
 		combat._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_K):
-		var hit = HitData.new(10, "from god", PHEA.attack.attack_360_low)
+		var hit := HitData.new(10, "from god", PHEA.attack.attack_360_low)
 		combat._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_L):
-		var hit = HitData.new(30, "from god", PHEA.attack.power_gap_closer)
+		var hit := HitData.new(30, "from god", PHEA.attack.power_gap_closer)
 		combat._last_processed_hit = hit
 		self.react_on_hit(hit)
 

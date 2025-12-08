@@ -69,7 +69,7 @@ func _emit_signal_based_on_track_data(audio_track_data: AudioTrackData) -> void:
 	emit_sfx_signal(r_signal, r_signal_data)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	var curr_anim := anim_manager.get_curr_anim()
 	if curr_anim == null:
 		return

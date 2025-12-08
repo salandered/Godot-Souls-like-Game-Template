@@ -24,7 +24,7 @@ var curr_series_number: int = -1
 
 ## returns Array[Array[String]]. 
 ## E.g  [ ["attack_a"], ["attack_a", "attack_b"] ]
-@abstract func get_attack_series_list() -> Array
+@abstract func get_attack_series_list() -> Array[Array]
 
 
 @abstract func pick_series_idx() -> int
@@ -73,10 +73,11 @@ func attack_in_series_passed_marker(curr_series_number_: int, curr_sbs: BasePHEL
 
 	return false
 
+
 func _flatten_attack_series_list() -> Array[String]:
-	var unique_dict := {}
-	for series in get_attack_series_list():
-		for attack in series:
+	var unique_dict: Dictionary[String, bool] = {}
+	for series: Array in get_attack_series_list():
+		for attack: String in TypeCast.array_of_string(series):
 			unique_dict[attack] = true
 	return TypeCast.array_of_string(unique_dict.keys())
 

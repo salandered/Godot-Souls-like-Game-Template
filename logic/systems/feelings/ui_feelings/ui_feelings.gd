@@ -34,7 +34,7 @@ func _ready() -> void:
 	pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	_update_health_bar()
 	_update_stamina_bar(delta)
 
@@ -48,7 +48,7 @@ func _update_health_bar():
 	_prev_health = current_health
 
 
-func _update_stamina_bar(delta):
+func _update_stamina_bar(delta: float):
 	var current_stamina := pl_feelings.get_curr_stamina()
 	if current_stamina == _prev_stamina:
 		return

@@ -48,7 +48,7 @@ func _combat_set_hit_data_to_all_weapons():
 	player_sm.combat.set_hit_data_to_all_weapons(hit_damage, anim.anim_id)
 
 func _combat_update_is_attacking(__log: bool = false):
-	var _weapon_names = get_active_weapon_names()
+	var _weapon_names := get_active_weapon_names()
 	for weapon_name_ in _weapon_names:
 		player_sm.combat.update_weapon_is_attacking(weapon_name_, is_weapon_hurts(weapon_name_, __log))
 
@@ -70,11 +70,11 @@ func on_enter_action(input_: InputPackage):
 	var _speed_extra_X := DEFAULT_GLOBAL_EXTRA_SPEED_X
 	match PREV_ACTION:
 		Leg.Act.strafe:
-			var result = _adjust_extra_speed_to_strafe_direction()
+			var result := _adjust_extra_speed_to_strafe_direction()
 			_speed_extra_Z = result["Z"]
 			_speed_extra_X = result["X"]
 
-	var r = calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
+	var r := calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
 	_final_extra_speed_Z = r.z
 	_final_extra_speed_X = r.x
 	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
@@ -84,7 +84,7 @@ func on_exit_action():
 	_combat_reset_all_weapons()
 
 
-func update(input_: InputPackage, delta):
+func update(input_: InputPackage, delta: float):
 	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
 		pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))
 	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
@@ -100,9 +100,9 @@ func update(input_: InputPackage, delta):
 	_combat_update_is_attacking()
 
 
-func _adjust_extra_speed_to_strafe_direction() -> Dictionary:
+func _adjust_extra_speed_to_strafe_direction() -> Dictionary[String, float]:
 	## animator manager treats prev anim as curr because we are in on_enter_action
-	var prev_anim_id = get_animator_manager().get_curr_anim().anim_id
+	var prev_anim_id := get_animator_manager().get_curr_anim().anim_id
 	# todo: should not use animations but strafe dir
 	var speed_x: float
 	var speed_z: float

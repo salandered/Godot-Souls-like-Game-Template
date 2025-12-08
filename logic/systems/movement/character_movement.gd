@@ -15,9 +15,9 @@ class AllowedAngle:
 	var value: float
 	var cut: float
 
-	func _init(_value, _cut: bool = false) -> void:
-		value = _value
-		cut = _cut
+	func _init(_value: float, _cut: bool = false) -> void:
+		self.value = _value
+		self.cut = _cut
 
 
 ## non nullable
@@ -75,7 +75,7 @@ func set_velocity(velocity: Vector3):
 ## - will be applied only if not is_on_floor() 
 ##       - consider making force apply flag if this will cause problems
 ## - returns true if was applied
-func apply_gravity(delta, multiplier: float = 1.0, gravity: float = u.gravity) -> bool:
+func apply_gravity(delta: float, multiplier: float = 1.0, gravity: float = u.gravity) -> bool:
 	if not get_character().is_on_floor():
 		get_character().velocity.y -= gravity * delta
 		return true
@@ -99,7 +99,7 @@ func apply_friction(delta: float, friction_value: float = 5.0):
 	new_velocity.z = horizontal_vel.z
 	get_character().velocity = new_velocity
 
-func smooth_xz_stop(delta, decel_speed: float):
+func smooth_xz_stop(delta: float, decel_speed: float):
 	var horizontal_vel := Vector3(get_character().velocity.x, 0, get_character().velocity.z)
 	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, decel_speed * delta)
 	get_character().velocity.x = horizontal_vel.x

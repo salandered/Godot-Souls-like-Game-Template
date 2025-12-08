@@ -78,11 +78,14 @@ func _on_exit_state() -> void:
 	on_exit_state()
 
 
+func call_accumulate_time_spent(delta: float) -> void:
+	accumulate_time_spent(delta)
+
 var __state_declined: String = "x"
 var __prev_now_switch_msg: String = "xx"
 ## for the top state this is called from model
 func _update(delta: float) -> void:
-	accumulate_time_spent(delta)
+	call_accumulate_time_spent(delta)
 	if works_longer_than_fatigue():
 		me.fatigue_raised = true
 
@@ -155,7 +158,7 @@ func reset_current_substate() -> void:
 
 ## not to override
 ## wrapper around check_substate_transition, makes important checks
-func _check_substate_transition(delta) -> VerdictPH:
+func _check_substate_transition(delta: float) -> VerdictPH:
 	var _next_state := ""
 	var _reason := ""
 	var current_substate_ := get_current_substate()
@@ -230,7 +233,7 @@ func works_less_than(time: float) -> bool:
 
 
 func react_on_hit(hit_data: HitData) -> void:
-	var _curr_sbs = get_current_substate()
+	var _curr_sbs := get_current_substate()
 	if not _curr_sbs:
 		__log_warn_v2(false, "no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
@@ -240,7 +243,7 @@ func react_on_hit(hit_data: HitData) -> void:
 # region: __LOGS
 
 func __log_indent() -> int:
-	var _m := {0: 0, 1: 1, 2: 3, 3: 5, 4: 8, 5: 10}
+	var _m: Dictionary[int, int] = {0: 0, 1: 1, 2: 3, 3: 5, 4: 8, 5: 10}
 	return _m.get(state_depth, 18)
 
 func __log_state() -> String:

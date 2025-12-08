@@ -5,7 +5,7 @@ class_name get_descendants
 class Descendant:
 	var node_: Node
 	var depth: int
-	func _init(node__, depth_):
+	func _init(node__: Node, depth_: int):
 		self.node_ = node__
 		self.depth = depth_
 

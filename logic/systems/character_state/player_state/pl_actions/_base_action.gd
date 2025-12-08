@@ -11,12 +11,12 @@ var anim_params_container: AnimParamsContainer
 var action_name: String
 
 ## auto used for all actions
-var blend_time = ActionData.BlendTime.new(0.2)
-var start_time_offset = ActionData.StartTimeOffset.new(0.0)
+var blend_time := ActionData.BlendTime.new(0.2)
+var start_time_offset := ActionData.StartTimeOffset.new(0.0)
 
 ## manually used by RM actions 
-var extra_root_speed_Z = ActionData.ExtraRootSpeedZ.new(0.0)
-var extra_root_speed_fade_time = ActionData.ExtraRootSpeedFadeTime.new(0.4)
+var extra_root_speed_Z := ActionData.ExtraRootSpeedZ.new(0.0)
+var extra_root_speed_fade_time := ActionData.ExtraRootSpeedFadeTime.new(0.4)
 
 # 
 var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
@@ -49,8 +49,12 @@ func pm() -> PlayerMovement:
 @abstract func initialise() -> void
 
 
-func _update(input_: InputPackage, delta: float):
+func call_accumulate_time_spent(delta: float) -> void:
 	accumulate_time_spent(delta)
+
+
+func _update(input_: InputPackage, delta: float):
+	call_accumulate_time_spent(delta)
 	update(input_, delta)
 
 
@@ -96,10 +100,10 @@ func animate(): # ▶️
 
 
 func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_offset: float = -1.0) -> void:
-	var _actual_blend_time = blend_time.calculate_actual(PREV_ACTION)
+	var _actual_blend_time := blend_time.calculate_actual(PREV_ACTION)
 	if override_blend_time != -1.0:
 		_actual_blend_time = override_blend_time
-	var _actual_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	var _actual_start_time_offset := start_time_offset.calculate_actual(PREV_ACTION)
 	if override_start_time_offset != -1.0:
 		_actual_start_time_offset = override_start_time_offset
 		
@@ -121,23 +125,23 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 
 
 func _react_on_hit(hit: HitData):
-	var attacking = [PS.Act.attack_from_run, PS.Act.attack_from_dodge, PS.Act.sword_slash_1, PS.Act.sword_slash_2, PS.Act.sword_slash_3]
+	var attacking: Array[String] = [PS.Act.attack_from_run, PS.Act.attack_from_dodge, PS.Act.sword_slash_1, PS.Act.sword_slash_2, PS.Act.sword_slash_3]
 	print_.fight(action_name, "react_on_hit called")
 	if is_vulnerable():
 		feelings.lose_health(hit.damage)
 	
-	var react_cfg = ReactionOnHit.calculate_reaction_for_pl_action(hit, action_name)
+	var react_cfg := ReactionOnHit.calculate_reaction_for_pl_action(hit, action_name)
 	if not react_cfg:
 		__log_upd("state mutes react_on_hit, ignoring")
 		return
 	else:
 		__log_upd("Calculated react_cfg", react_cfg)
 	
-	var actual_overlay_weight = react_cfg.overlay_weight
-	var actual_bone_mask = react_cfg.bone_mask
+	var actual_overlay_weight := react_cfg.overlay_weight
+	var actual_bone_mask := react_cfg.bone_mask
 	actual_overlay_weight /= 2.0 if action_name in attacking else 1.0
 
-	var overlay_config = OverlayConfig.new(
+	var overlay_config := OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
 		BlendConfig.new(),
 		1.0,
@@ -149,7 +153,7 @@ func _react_on_hit(hit: HitData):
 
 
 ## may be overriden in actions
-func react_on_hit(hit):
+func react_on_hit(hit: HitData):
 	pass
 
 # endregion
@@ -242,10 +246,10 @@ func tracks_input_vector() -> bool:
 
 ## if no _speed_extra_X specified, will be 0.0 (ignored)
 func calculate_extra_root_speed(_speed_extra_Z: float, _speed_extra_X: float = 0.0) -> Vector3:
-	var _start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
-	var _final_extra_speed_Z = pm().calculate_extra_root_speed_Z(anim, _start_time_offset, _speed_extra_Z, false)
-	var _final_extra_speed_X = _speed_extra_X
-	var result = Vector3(_final_extra_speed_X, 0, _final_extra_speed_Z)
+	var _start_time_offset := start_time_offset.calculate_actual(PREV_ACTION)
+	var _final_extra_speed_Z := pm().calculate_extra_root_speed_Z(anim, _start_time_offset, _speed_extra_Z, false)
+	var _final_extra_speed_X := _speed_extra_X
+	var result := Vector3(_final_extra_speed_X, 0, _final_extra_speed_Z)
 
 	__log_ent("extra root speed Z/X", _final_extra_speed_Z, _final_extra_speed_X)
 	return result
@@ -278,8 +282,8 @@ func __log_action(...parts: Array):
 	__log_function(action_name, pp.list_(parts))
 
 
-func __log_anim(_actual_blend_time, _actual_start_time_offset):
+func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
 	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)
 
-func __log_overlay_anim(overlay_anim_id: String, overlay_config):
+func __log_overlay_anim(overlay_anim_id: String, overlay_config: OverlayConfig):
 	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(action_name, overlay_anim_id, overlay_config)

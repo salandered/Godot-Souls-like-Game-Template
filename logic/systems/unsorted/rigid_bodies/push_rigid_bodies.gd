@@ -11,17 +11,17 @@ class_name PushRigidBodies
 ## meant to be called nearby the move_and_slide (each frame).
 static func push_rigid_bodies(character: BaseCharacter, push_force: float = 4.0):
 	for _number_of_items_body_collided_with in character.get_slide_collision_count():
-		var collision = character.get_slide_collision(_number_of_items_body_collided_with)
+		var collision := character.get_slide_collision(_number_of_items_body_collided_with)
 		if collision.get_collider() is RigidBody3D:
 			collision.get_collider().apply_central_impulse(-collision.get_normal() * push_force)
 
 
 static func push_nearby_rigid_bodies(character: BaseCharacter, radius: float = 3.0, push_force: float = 200.0):
-	var space_state = character.get_world_3d().direct_space_state
+	var space_state := character.get_world_3d().direct_space_state
 	
 	# create sphere query
-	var query = PhysicsShapeQueryParameters3D.new()
-	var sphere = SphereShape3D.new()
+	var query := PhysicsShapeQueryParameters3D.new()
+	var sphere := SphereShape3D.new()
 	sphere.radius = radius
 	query.shape = sphere
 	query.transform = Transform3D(Basis(), character.global_position)

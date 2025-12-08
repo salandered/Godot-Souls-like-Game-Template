@@ -26,7 +26,7 @@ func initialise() -> void:
 	assert(base_weapon)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# racks weapon _velocity
 	_velocity = (global_position - _previous_position) / delta
 	_previous_position = global_position
@@ -36,7 +36,7 @@ func is_player() -> bool:
 	return base_weapon.is_player()
 
 func pp_name():
-	var character_name = "Pl" if is_player() else "E"
+	var character_name := "Pl" if is_player() else "E"
 	return pp.s(character_name, get_my_weapon_name(), "🔻 HurtBox")
 
 func _get_weapon_push_force() -> int:

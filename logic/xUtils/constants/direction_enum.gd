@@ -83,7 +83,7 @@ static func get_backward_group() -> Array[Dir]:
 
 
 static func get_simplified(include_neutral: bool = false) -> Array[Dir]:
-	var _r = [Dir.FORWARD, Dir.BACKWARD, Dir.LEFT, Dir.RIGHT]
+	var _r: Array[Dir] = [Dir.FORWARD, Dir.BACKWARD, Dir.LEFT, Dir.RIGHT]
 	if include_neutral:
 		_r.append(Dir.NEUTRAL)
 	return _r
@@ -93,7 +93,7 @@ static func get_diagonal() -> Array[Dir]:
 
 
 static func get_all_moving(include_neutral: bool = false) -> Array[Dir]:
-	var _r = [
+	var _r: Array[Dir] = [
 		Dir.FORWARD,
 		Dir.BACKWARD,
 		Dir.RIGHT,

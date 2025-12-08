@@ -22,7 +22,7 @@ func influence_value(value: float, timer: SimpleTimer, override_multiplier: floa
 	if not timer.is_in_progress():
 		return value
 
-	var timer_duration = timer.duration
+	var timer_duration := timer.duration
 	
 	## could be cache for calibrated current_blend {timer.duration: BlendConfig} if perf problems
 	current_blend = BlendConfig.new(default_blend.fade_in, default_blend.fade_out, default_blend.hold)
@@ -33,8 +33,8 @@ func influence_value(value: float, timer: SimpleTimer, override_multiplier: floa
 	if override_multiplier != -1.0:
 		multiplier = override_multiplier
 
-	var result_multiplier = _get_multiplier(timer, multiplier)
-	var result = value * result_multiplier
+	var result_multiplier := _get_multiplier(timer, multiplier)
+	var result := value * result_multiplier
 	
 	__log_("Val", value, "->", result, "| Mult", result_multiplier, "Elapsed", timer.get_elapsed(), "/", timer_duration)
 	
@@ -42,13 +42,13 @@ func influence_value(value: float, timer: SimpleTimer, override_multiplier: floa
 
 
 func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
-	var total_duration = timer.duration
-	var elapsed_time = timer.get_elapsed()
+	var total_duration := timer.duration
+	var elapsed_time := timer.get_elapsed()
 
 	if elapsed_time < current_blend.fade_in:
-		var t = elapsed_time / current_blend.fade_in
-		var eased_t = ease_in_out(t)
-		var result = lerp(1.0, target_mult, eased_t)
+		var t := elapsed_time / current_blend.fade_in
+		var eased_t := ease_in_out(t)
+		var result := lerpf(1.0, target_mult, eased_t)
 		__log_("Phase: FADE_IN", "t", t, "-> eased", eased_t, "-> mult", result)
 		return result
 
@@ -57,9 +57,9 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 		return target_mult
 		
 	elif elapsed_time < total_duration:
-		var t = (elapsed_time - current_blend.fade_in - current_blend.hold) / current_blend.fade_out
-		var eased_t = ease_in_out(t)
-		var result = lerp(target_mult, 1.0, eased_t)
+		var t := (elapsed_time - current_blend.fade_in - current_blend.hold) / current_blend.fade_out
+		var eased_t := ease_in_out(t)
+		var result := lerpf(target_mult, 1.0, eased_t)
 		__log_("Phase: FADE_OUT", "t", t, "-> eased", eased_t, "-> mult", result)
 		return result
 		

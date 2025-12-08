@@ -16,7 +16,7 @@ extends RayCast3D
 func _ready() -> void:
 	collision_mask = Collision.Layers.ENVIRONMENT_COL
 
-func _process(delta):
+func _process(delta: float) -> void:
 	global_position = attachment.global_position
 	
 	if __csg_visuals:

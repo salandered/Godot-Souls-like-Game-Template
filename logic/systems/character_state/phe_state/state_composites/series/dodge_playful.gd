@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges := [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
+var all_the_dodges: Array[String] = [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
 
 func initialise() -> void:
 	SWITCH_ANIM_BEFORE = 0.2
@@ -18,7 +18,7 @@ func get_attack_series_list() -> Array:
 
 
 func pick_series_idx() -> int:
-	var idx_2_chance = 0.0 if distance_to_player() < config.DODGE_RAD() else 0.2
+	var idx_2_chance := 0.0 if distance_to_player() < config.DODGE_RAD() else 0.2
 	var _idx := ra.ipick_weighted({
 		0: 0.4,
 		1: 0.4,

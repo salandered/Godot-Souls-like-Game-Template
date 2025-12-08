@@ -57,7 +57,7 @@ func _locked_and_not_sprint() -> bool:
 func _decide_on_mode_on_enter():
 	var _reason: String = ""
 	curr_throw = right_throw_pack
-	var hit = player_sm.combat.get_last_processed_hit()
+	var hit := player_sm.combat.get_last_processed_hit()
 	if not hit:
 		_reason = "no hit data found => default"
 		__log_decide_on_mode(_reason)
@@ -95,7 +95,7 @@ func _decide_on_mode_on_enter():
 func _calculate_interpolator_duration(actual_anim: AnimationData) -> float:
 	var _start := actual_anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0)
 	var _end := actual_anim.get_marker_time_by_name(MarkerName.JUMP.LAND_START, 1.0)
-	var _dur = (_end - _start) / anim.speed_scale + 0.1 # + 0.1 to be safe
+	var _dur := (_end - _start) / anim.speed_scale + 0.1 # + 0.1 to be safe
 	__log_ent("calculated _interpolator_dur", _dur, "using markers with time", _start, _end)
 	return _dur
 

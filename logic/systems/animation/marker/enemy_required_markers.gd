@@ -2,7 +2,7 @@ extends RefCounted
 class_name ERequiredMarkers
 
 
-static var anim_to_required_marker = {
+static var anim_to_required_marker: Dictionary[String, Array] = {
 	## loco 
 	PHEA.loco.walk_forward: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],
 	PHEA.loco.combat_walk_forward: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],

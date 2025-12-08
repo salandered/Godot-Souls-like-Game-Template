@@ -85,7 +85,7 @@ func on_exit_action():
 
 func update(input_: InputPackage, delta: float):
 	var SPEED_MULT := 1.0 # default multiplier
-	var CURR_SPEED = speed_from_inherited.update(delta)
+	var CURR_SPEED := speed_from_inherited.update(delta)
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var TURN_SPEED := default_sp.TURN_SPEED
 	match PREV_ACTION:
@@ -148,7 +148,7 @@ func animate(): # ▶️
 
 var _dev_add_blend := 0.0
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 	# __start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)

@@ -78,7 +78,7 @@ func initialise() -> void:
 
 func _initialise_coll_collder():
 	assert(coll_collider)
-	var original_shape = coll_collider.shape
+	var original_shape := coll_collider.shape
 	assert(original_shape != null, "CollisionShape3D has no shape!")
 	assert(original_shape is CapsuleShape3D, "shape is not CapsuleShape3D. Not supported")
 	
@@ -134,13 +134,13 @@ func get_curr_leaf_state() -> BasePHELeaf:
 	return _curr_leaf
 
 
-func update_state_history(state_name_):
+func update_state_history(state_name_: String):
 	_state_history.append(state_name_)
 	if _state_history.size() > BREADCRUMB_SIZE:
 		_state_history.pop_front()
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	state_machine._update(delta)
 	move_and_slide()
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
@@ -152,7 +152,7 @@ func _process(delta):
 
 
 func react_on_hit(hit_data: HitData) -> void:
-	var _curr_state = get_current_state()
+	var _curr_state := get_current_state()
 	if not _curr_state:
 		print_.warn(false, "no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
@@ -192,15 +192,18 @@ func on_death_raised() -> void:
 
 	
 func shrink_coll_capsule():
-	var capsule_shape = coll_collider.shape as CapsuleShape3D
-	var _orig_height = capsule_shape.height
-	var _height_mult = 0.1
-	var _desired_height = _orig_height * _height_mult
+	if not coll_collider.shape is CapsuleShape3D:
+		__log_warn(true, "if not coll_collider.shape is CapsuleShape3D", "", "return")
+		return
+	var capsule_shape: CapsuleShape3D = coll_collider.shape
+	var _orig_height := capsule_shape.height
+	var _height_mult := 0.1
+	var _desired_height := _orig_height * _height_mult
 
 	# Calculate offset to keep bottom at same Y
 	# Bottom moves up by half the height reduction, so compensate
-	var height_reduction = _orig_height - _desired_height
-	var offset_down = height_reduction / 2.0
+	var height_reduction := _orig_height - _desired_height
+	var offset_down := height_reduction / 2.0
 
 	coll_collider.position.y -= offset_down # Move DOWN (negative Y)
 	CollShapeTranform.shrink_coll_shape_capsule_size(coll_collider, 1.0, _height_mult)
@@ -208,7 +211,7 @@ func shrink_coll_capsule():
 
 func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	print_.prefix_s("glob position of an enemy", self.global_position)
-	var rigids_container = Node3D.new()
+	var rigids_container := Node3D.new()
 	rigids_container.name = "EnemyDebrisContainer"
 	get_tree().current_scene.add_child(rigids_container)
 
@@ -217,16 +220,16 @@ func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	for visual_mesh: MeshInstance3D in mesh_list:
 		if not visual_mesh.mesh: continue
 		await FrameUtils.wait_one_physics_frame()
-		var physics_config = RigidBodyCreator.PhysicsConfig.new(5.0, 1.5, 0.0, 2.5)
+		var physics_config := RigidBodyCreator.PhysicsConfig.new(5.0, 1.5, 0.0, 2.5)
 		var rigid_body := RigidBodyCreator.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)
 		
 		if rigid_body:
 			rigids_container.add_child(rigid_body)
 			rigid_body.global_transform = visual_mesh.global_transform
 			
-			var backward = - self.transform.basis.z
-			var direction = (Vector3.UP * 0.94 + backward * 0.44).normalized()
-			var impulse_strength = randf_range(2.0, 7.0)
+			var backward := -self.transform.basis.z
+			var direction := (Vector3.UP * 0.94 + backward * 0.44).normalized()
+			var impulse_strength := randf_range(2.0, 7.0)
 			rigid_body.apply_central_impulse(direction * impulse_strength)
 	
 	for visual_mesh: MeshInstance3D in mesh_list:
@@ -242,7 +245,7 @@ func __pp_state_history():
 
 
 func _input(event: InputEvent) -> void:
-	var bone_mask = BoneMask.get_upper_body()
+	var bone_mask := BoneMask.get_upper_body()
 	if event.is_action_pressed(RawAction.DEV_8):
 		animator_manager.set_overlay_anim(PHEA.react.react_from_R,
 		OverlayConfig.new(

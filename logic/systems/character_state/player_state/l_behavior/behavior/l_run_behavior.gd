@@ -37,7 +37,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	return LNextActionVerdict.new(next_action_name)
 
 
-func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -> String:
+func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
 	var curr_action := get_curr_action()
 	var angle_deg := rad_to_deg(pm().get_abs_angle_pl_input(input_, delta))
 
@@ -54,7 +54,7 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name) -
 	return next_action_name
 
 
-func _from_START_decision(input_: InputPackage, delta: float, next_action_name) -> String:
+func _from_START_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
 	var curr_action := get_curr_action()
 	if is_moving(input_):
 		match curr_action.action_name:
@@ -70,7 +70,7 @@ func _from_START_decision(input_: InputPackage, delta: float, next_action_name) 
 	return next_action_name
 
 
-func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name) -> String:
+func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
 	if is_pure_reverse_moving(input_): # and abs_angle_pl_input_greater_than(input_, delta, ANGLE_FOR_U_TURN_MIN):
 		next_action_name = supported_actions.by_name(Leg.Act.turn_180)
 		__log_decision_data(input_, next_action_name, "")

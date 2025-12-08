@@ -10,7 +10,7 @@ func get_player() -> Princess:
 	return _player
 
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if not fly_mode_enabled:
 		return
 	

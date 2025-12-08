@@ -45,7 +45,7 @@ func is_about_to_die() -> bool:
 		prints("EnemyCameraTarget is_queued_for_deletion => true", self)
 		return true
 	
-	var parent = get_parent()
+	var parent := get_parent()
 	if not is_instance_valid(parent):
 		prints("EnemyCameraTarget parent is not valid => true", self)
 		return true
@@ -53,7 +53,7 @@ func is_about_to_die() -> bool:
 		prints("EnemyCameraTarget parent is_queued_for_deletion => true", self)
 		return true
 
-	var assigned_parent = get_assigned_parent()
+	var assigned_parent := get_assigned_parent()
 	if not is_instance_valid(assigned_parent):
 		prints("EnemyCameraTarget assigned_parent is not valid => true", self)
 		return true
@@ -71,5 +71,5 @@ func dev_initialise():
 	csg_marker.visible = __csg_visual
 
 
-func _input(event):
-	look_at_point.global_position.y = u._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)
+# func _input(event: InputEvent):
+# 	look_at_point.global_position.y = u._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)

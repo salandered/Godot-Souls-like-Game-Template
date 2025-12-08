@@ -53,7 +53,7 @@ class _PlActionData extends _BaseActionData:
 		self.state_name = state_name_
 
 
-var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
+var node_to_pl_state_data: Dictionary[String, _StateData] = { # { Node name : _StateData }
 	## loco
 	# TODO: seems like depends_on_legs_ true equals to having not legs_double_beh default
 	"Idle": _StateData.new(PS.idle, 1, Leg.Beh.idle, true),
@@ -94,7 +94,7 @@ var node_to_pl_state_data: Dictionary = { # { Node name : _StateData }
 
 ## PLAYER ACTIONS
 
-var node_to_pl_action: Dictionary = { # { Node name : _PlActionData }
+var node_to_pl_action: Dictionary[String, _PlActionData] = { # { Node name : _PlActionData }
 	"_DoubleAction": _PlActionData.new(PS.for_double, PS.Act.double, A.air.midair, MotionType.IDLE),
 	
 

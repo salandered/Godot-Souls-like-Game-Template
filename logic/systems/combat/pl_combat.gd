@@ -29,7 +29,7 @@ func pp_name() -> String:
 ## PLAYER SPECIFIC: WORK WITH INPUTS
 # region
 
-func contextualize(new_input: InputPackage, delta) -> InputPackage:
+func contextualize(new_input: InputPackage, delta: float) -> InputPackage:
 	# actualise_shieldshot(new_input)
 	_translate_combat_actions(new_input, delta)
 	# filter_with_resources(new_input)
@@ -37,9 +37,9 @@ func contextualize(new_input: InputPackage, delta) -> InputPackage:
 
 
 ## translates the input to basic states with the help of the current weapon
-func _translate_combat_actions(new_input: InputPackage, delta):
+func _translate_combat_actions(new_input: InputPackage, delta: float):
 	# todo: hard coded weapon!
-	var weapon = get_weapon(WeaponNames.smith_sword)
+	var weapon := get_weapon(WeaponNames.smith_sword)
 	var _translated: Array = weapon.translate_combat_input_to_state(new_input.combat_actions)
 	new_input.actions.append_array(_translated)
 

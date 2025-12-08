@@ -3,7 +3,7 @@ class_name ActionData
 
 
 class _DataByPrevAction:
-	var by_prev_action: Dictionary = {}
+	var by_prev_action: Dictionary[String, Variant] = {}
 	var DEFAULT: float
 	var action_specific: float = -999.0
 
@@ -22,7 +22,7 @@ class _DataByPrevAction:
 			return action_specific
 		return DEFAULT
 	
-	func set_by_prev_action(by_prev_action_: Dictionary):
+	func set_by_prev_action(by_prev_action_: Dictionary[String, Variant]):
 		by_prev_action = by_prev_action_
 
 

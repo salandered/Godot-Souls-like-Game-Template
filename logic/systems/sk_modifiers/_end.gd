@@ -8,14 +8,14 @@ class_name EndModifier
 var __initialised: bool = false
 
 var last_pose: Vector3
-var cache: Dictionary
+var cache: Dictionary[int, Transform3D]
 
 func initialise() -> void:
 	__initialised = true
 
 func bake_pose():
-	for bone in get_skeleton().get_bone_count():
-		cache[bone] = get_skeleton().get_bone_pose(bone)
+	for bone_idx in get_skeleton().get_bone_count():
+		cache[bone_idx] = get_skeleton().get_bone_pose(bone_idx)
 
 func _process_modification():
 	if __initialised and get_skeleton():

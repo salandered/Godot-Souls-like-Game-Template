@@ -9,13 +9,13 @@ var SPRINT_FOOTSTEP_VOL_INCREASE: float = 12.0
 var SPRINT_FOOTSTEP_PITCH_INCREASE: float = 0.25
 
 
-func _custom_logic(signal_data: Dictionary) -> void:
-	var pitch = 1.0
-	var vol_db = FOOTSTEP_BASE_VOL
+func _custom_logic(signal_data: Dictionary[String, Variant]) -> void:
+	var pitch := 1.0
+	var vol_db := FOOTSTEP_BASE_VOL
 	
 	if signal_data.has(SfxType.modifier_key):
-		var modifier: String = signal_data[SfxType.modifier_key]
-		if modifier == SfxType.Modifier.light:
+		var modifier: Variant = signal_data[SfxType.modifier_key]
+		if modifier is String and modifier == SfxType.Modifier.light:
 			vol_db -= LIGHT_FOOTSTEP_VOL_DECREASE
 	var _curr_state := _character_audio_system().get_character().get_current_state()
 	if _curr_state == null:

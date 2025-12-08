@@ -8,9 +8,9 @@ static func shrink_coll_shape_capsule_size(coll_shape: CollisionShape3D, radius_
 	if not coll_shape.shape is CapsuleShape3D:
 		__log_warn(false, "coll_shape.shape is not CapsuleShape3D; not supported", "shrink_coll_shape_capsule_size", "return")
 		return
-	var shape = coll_shape.shape as CapsuleShape3D
-	var _orig_radius = shape.radius
-	var _orig_height = shape.height
+	var shape: CapsuleShape3D = coll_shape.shape
+	var _orig_radius := shape.radius
+	var _orig_height := shape.height
 	shape.radius = _orig_radius * radius_mult
 	shape.height = _orig_height * height_mult
 
@@ -25,7 +25,7 @@ static func set_coll_shape_capsule_size(coll_shape: CollisionShape3D, rad: float
 	if not coll_shape.shape is CapsuleShape3D:
 		__log_warn(false, "coll_shape.shape is not CapsuleShape3D; not supported", "set_coll_shape_capsule_size", "return")
 		return
-	var shape = coll_shape.shape as CapsuleShape3D
+	var shape: CapsuleShape3D = coll_shape.shape
 
 	__log_("set coll caps shape to values",
 		pp.array_([rad, height]),

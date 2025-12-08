@@ -10,7 +10,7 @@ const AURA_HURTS := "aura_hurts"
 
 
 # if no track
-const DEFAULT_PARAMS := {
+const DEFAULT_PARAMS: Dictionary[String, bool] = {
 	VULNERABLE: true,
 	WEAPON_HURTS: false,
 	AURA_HURTS: false
@@ -41,7 +41,7 @@ func is_aura_hurts(anim: Animation, timestamp: float) -> bool:
 
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:
-	var _default = u.safe_get_dict_key(DEFAULT_PARAMS, param, false)
+	var _default: bool = u.safe_get_dict_key(DEFAULT_PARAMS, param, false)
 	var _track_exists: bool = false
 	for prefix in TRACK_PREFIXES:
 		_track_exists = AnimUtils.is_track_exists(anim, prefix, param)

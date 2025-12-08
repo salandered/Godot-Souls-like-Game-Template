@@ -4,7 +4,7 @@ class_name TranferData
 
 
 var action_name: String
-var _transfer: Dictionary
+var _transfer: Dictionary[String, Variant]
 
 
 func _get_by_key(key: String) -> Variant:
@@ -27,7 +27,7 @@ func get_by_action(action_name_: String) -> Variant:
 	return null
 
 
-func fill(action_name_: String, data_: Dictionary):
+func fill(action_name_: String, data_: Dictionary[String, Variant]):
 	var _msg := pp.s(pp.dict_(data_) if data_ is Dictionary else "| data is not a Dict ⚠️⚠️")
 	# print_.psm("TransferData💼", "fill for " + pp.in_q(action_name_) + ":\t" + _msg)
 	action_name = action_name_
@@ -39,7 +39,7 @@ func _reset():
 	_transfer = {}
 
 
-func __log_value(action_name_, key, value):
+func __log_value(action_name_: String, key: String, value: Variant):
 	var _v_msg := ""
 	if value is Dictionary:
 		_v_msg = pp.dict_(value)

@@ -61,7 +61,7 @@ class _LStData extends BaseStData:
 		self.anim_data = anim_data_
 
 
-var node_to_composite_state_data: Dictionary = {
+var node_to_composite_state_data: Dictionary[String, _CSData] = {
 	"_Top": _CSData.new(PHES._TOP, _CommitData.new(-1, -1)),
 	"Life": _CSData.new(PHES.life, _CommitData.new(-1, -1)),
 
@@ -82,7 +82,7 @@ var node_to_composite_state_data: Dictionary = {
 }
 
 
-var node_to_leaf_state_data: Dictionary = {
+var node_to_leaf_state_data: Dictionary[String, _LStData] = {
 	## one time
 	"Sleep": _LStData.new(PHES.Leaf.sleep, _AData.new(PHEA.sleep, -0.15), _CommitData.new(-1, -1), ),
 	"Awaken": _LStData.new(PHES.Leaf.awaken, _AData.new(PHEA.awaken, -0.15), ),
@@ -117,7 +117,7 @@ var node_to_leaf_state_data: Dictionary = {
 	"Pushback": _LStData.new(PHES.Leaf.pushback, _AData.new(PHEA.react.react_dodge_B, -0.1), _CommitData.new(-1, -1)),
 }
 
-var _states: Dictionary # { String : BasePHEState }
+var _states: Dictionary[String, BasePHEState]
 
 
 ## returns null if no state found

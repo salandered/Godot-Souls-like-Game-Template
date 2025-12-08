@@ -8,7 +8,7 @@ class_name OverlayModifier
 var default_bone_mask: Array[int]
 
 
-var _bone_idx_to_track: Dictionary = {}
+var _bone_idx_to_track: Dictionary[int, String] = {}
 
 var __custom_delta: CustomDelta = CustomDelta.new()
 
@@ -138,9 +138,9 @@ func _update_blend_values():
 			prev_overlay = null
 
 
-func _apply_overlay():
+func _apply_overlay() -> void:
 	# Find all bones we need to modify from both overlays
-	var bones_to_modify_set: Dictionary = {}
+	var bones_to_modify_set: Dictionary[int, bool] = {}
 	if prev_overlay and prev_overlay.curr_weight > 0.0:
 		var mask = prev_overlay.bone_mask if not prev_overlay.bone_mask.is_empty() else default_bone_mask
 		for bone_idx in mask:
@@ -160,8 +160,8 @@ func _apply_overlay():
 
 	# Loop through the combined set of bones
 	for bone_idx in bones_to_modify_set.keys():
-		var base_pose = skeleton.get_bone_pose(bone_idx)
-		var final_pose = base_pose # Start with the base pose
+		var base_pose := skeleton.get_bone_pose(bone_idx)
+		var final_pose := base_pose # Start with the base pose
 
 		# apply prev overlay (if active and affects this bone)
 		if prev_overlay and prev_overlay.curr_weight > 0.0 and prev_overlay.affects_bone(bone_idx, default_bone_mask):
@@ -210,14 +210,14 @@ var __LOG_OVERLAY_START_B: bool = false
 var __LOG_PROCESS_START_B: bool = false
 
 
-func __log_overlay_start(bone_idx, base_pose, overlay_pose, final_pose):
+func __log_overlay_start(bone_idx: int, base_pose: Transform3D, overlay_pose: Transform3D, final_pose: Transform3D):
 	if curr_overlay and bone_idx < 3 and curr_overlay.playback.time_spent < 0.1 and __LOG_OVERLAY_START_B:
 		__log_("Bone", bone_idx, skeleton.get_bone_name(bone_idx))
 		__log_("  Base pos:", base_pose.origin, "Overlay pos:", overlay_pose.origin)
 		__log_("  Weight:", curr_overlay.curr_weight, "Final:", final_pose.origin)
 
 
-func __log_applying(bones_to_modify):
+func __log_applying(bones_to_modify: Array[int]):
 	if u.ifr() % 60 == 0:
 		var weight = curr_overlay.curr_weight if curr_overlay else (prev_overlay.curr_weight if prev_overlay else 0.0)
 		__log_("Applying overlay. Weight:", weight, "Bones:", bones_to_modify.slice(0, 5), "...")

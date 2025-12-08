@@ -79,7 +79,7 @@ func detect_strafe_dir() -> Direction.Dir:
 # 
 
 func _to_string() -> String:
-	var parts := []
+	var parts: Array[String] = []
 	parts.append("input_dir: %s" % input_direction)
 	if not actions.is_empty():
 		parts.append("actions: %s" % ", ".join(actions))

@@ -45,13 +45,13 @@ func on_signal(signal_data: Dictionary[String, Variant]) -> void:
 
 
 ## to override
-@abstract func _custom_logic(signal_data: Dictionary) -> void
+@abstract func _custom_logic(signal_data: Dictionary[String, Variant]) -> void
 
 
 ## COMMON UTILS
 # region
 
-func _logic_random_pitch(player: AudioStreamPlayer3D, signal_data: Dictionary) -> void:
+func _logic_random_pitch(player: AudioStreamPlayer3D, signal_data: Dictionary[String, Variant]) -> void:
 	player.pitch_scale = player.pitch_scale + randf_range(-0.02, 0.02)
 
 # endregion

@@ -1,7 +1,10 @@
+@abstract
+class_name PlActionTimeManagement
 extends TimeManagement
+
+
 # TODO: merge with AnimTimeManagement
 #       this also means validating that PlayerAnimatorManager aligns with BaseAnimatorManager
-class_name PlActionTimeManagement
 
 var animator_manager: PlAnimatorManager
 var anim_container: BaseAnimationContainer

@@ -6,7 +6,7 @@ class_name BaseWeaponAudioSystem
 @onready var hit_weapon_player_3d: AudioStreamPlayer3D = %HitWeaponPlayer3D
 
 
-func initialise_implementation(character) -> void:
+func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void:
 	pass
 
 

@@ -10,7 +10,7 @@ class _DirData:
 
 
 var _curr_dir: Direction.Dir = Direction.Dir.NEUTRAL
-var _dir_data: Dictionary = {}
+var _dir_data: Dictionary[Direction.Dir, _DirData] = {}
 
 
 func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String, anim_idle: String):

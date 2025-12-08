@@ -66,8 +66,11 @@ func _on_exit_state() -> void:
 	on_exit_state()
 
 
-func _update(delta: float) -> void:
+func call_accumulate_time_spent(delta: float) -> void:
 	accumulate_time_spent(delta)
+
+func _update(delta: float) -> void:
+	call_accumulate_time_spent(delta)
 
 	if works_longer_than_fatigue():
 		me.fatigue_raised = true
@@ -101,19 +104,19 @@ func react_on_hit(hit: HitData):
 	# animator_manager.set_overlay_anim()
 	phe_feelings.lose_health(hit.damage)
 
-	var react_cfg = ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
+	var react_cfg := ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
 	if not react_cfg:
 		__log_upd("state mutes react_on_hit, ignoring")
 		return
 	else:
 		__log_upd("Calculated react_cfg", react_cfg)
 	
-	var actual_overlay_weight = react_cfg.overlay_weight
-	var actual_bone_mask = react_cfg.bone_mask
+	var actual_overlay_weight := react_cfg.overlay_weight
+	var actual_bone_mask := react_cfg.bone_mask
 
 	phe_feelings.get_curr_health()
 
-	var overlay_config = OverlayConfig.new(
+	var overlay_config := OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
 		BlendConfig.new(),
 		1.0,
@@ -133,10 +136,10 @@ func animate() -> void: # ▶️
 
 
 func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_offset: float = -1.0) -> void:
-	var _actual_blend_time = blend_time.calculate_actual(PREV_LEAF)
+	var _actual_blend_time := blend_time.calculate_actual(PREV_LEAF)
 	if override_blend_time != -1.0:
 		_actual_blend_time = override_blend_time
-	var _actual_start_time_offset = start_time_offset.calculate_actual(PREV_LEAF)
+	var _actual_start_time_offset := start_time_offset.calculate_actual(PREV_LEAF)
 	if override_start_time_offset != -1.0:
 		_actual_start_time_offset = override_start_time_offset
 		
@@ -270,10 +273,10 @@ func __log_timings() -> String:
 
 	return _time_msg
 
-func __log_anim(_actual_blend_time, _actual_start_time_offset):
+func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
 	if __LOG_ANIM: print_.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
 
-func __log_overlay_anim(overlay_anim_id: String, overlay_config):
+func __log_overlay_anim(overlay_anim_id: String, overlay_config: OverlayConfig):
 	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(state_name, overlay_anim_id, overlay_config)
 
 

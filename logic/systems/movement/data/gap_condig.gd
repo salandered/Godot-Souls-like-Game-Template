@@ -27,7 +27,7 @@ func set_coef(distance_to_player: float, is_angry: bool = false) -> float:
 	return _curr_coef
 
 
-func __log_(distance_to_player, is_angry: bool):
+func __log_(distance_to_player: float, is_angry: bool):
 	var strength_ := _strength_mult
 	if is_angry:
 		strength_ += 0.4

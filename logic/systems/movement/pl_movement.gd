@@ -24,11 +24,11 @@ func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	return __velocity_by_input(input_, delta)
 
 
-func get_signed_angle_pl_input(input_, delta, __log) -> float:
+func get_signed_angle_pl_input(input_: InputPackage, delta: float, __log: bool) -> float:
 	var angle := __angle_between_player_and_input(input_, delta, __log)
 	return angle
 
-func get_abs_angle_pl_input(input_, delta) -> float:
+func get_abs_angle_pl_input(input_: InputPackage, delta: float) -> float:
 	var angle := __angle_between_player_and_input(input_, delta)
 	return abs(angle)
 
@@ -173,7 +173,7 @@ func move_with_root(delta: float, extra_vel: Vector3 = Vector3.ZERO, y_zeroed: b
 	apply_local_velocity_as_global(final_local_vel)
 
 
-func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary:
+func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary[String, Variant]:
 	var remaining_angle := target_angle_ - accum_rot_
 	var _log_msg: String = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rot_delta)
 
@@ -199,7 +199,7 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 func calculate_extra_root_speed_Z(anim: AnimationData, _start_time_offset: float, extra_speed_z: float, __log: bool = false) -> float:
 	var _inherited_speed := get_curr_velocity_len()
 	var root_start_speed := animator_manager.calculate_animation_start_root_velocity(anim, _start_time_offset, true)
-	var _r = max(0.0, _inherited_speed - root_start_speed + extra_speed_z)
+	var _r: float = max(0.0, _inherited_speed - root_start_speed + extra_speed_z)
 	if __log: __log_("", "inheritedSp", _inherited_speed, " rootStartSp", root_start_speed, " extraSp Z", _r)
 	return _r
 

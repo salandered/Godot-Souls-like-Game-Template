@@ -10,7 +10,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 		__log_time_spent()
 		if area_awareness.is_almost_on_floor():
 			__log_psm_check("passed RUN_AGAIN and is_on_floor => best_next_state")
-			var _verdict = best_next_state_from_input(input_)
+			var _verdict := best_next_state_from_input(input_)
 			if _verdict.next_state in [PS.run, PS.idle]:
 				return PLVerdict.new(PS.sprint)
 			else:

@@ -66,13 +66,13 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 # }
 
 
-const TO_STRAFE_MAP = {
+const TO_STRAFE_MAP: Dictionary[String, String] = {
 	PS.run: PS.strafe,
 	PS.jump_sprint: PS.dodge,
 }
 
 
-func _apply_translation(new_input: InputPackage, translation_map: Dictionary):
+func _apply_translation(new_input: InputPackage, translation_map: Dictionary[String, String]):
 	for i in range(new_input.actions.size()):
 		var current_action := new_input.actions[i]
 		
@@ -141,7 +141,7 @@ func get_floor_distance() -> float:
 
 
 func find_target() -> EnemyCameraTarget:
-	var _all_targets = get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
+	var _all_targets := get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
 	for t in _all_targets:
 		if not t is EnemyCameraTarget:
 			print_.warn(true, "TARGETABLE group for not EnemyCameraTarget node is not supported!", "find_target", "return null", t)
@@ -218,7 +218,7 @@ func __LOG_B() -> bool:
 	return LogToggler.AWARENESS_B
 
 
-func __log_candidate(target, reason):
+func __log_candidate(target: EnemyCameraTarget, reason: String):
 	__log_("🎯", "candidate ✖️", "target.lbl:", target.label, "Reason:", reason)
 
 

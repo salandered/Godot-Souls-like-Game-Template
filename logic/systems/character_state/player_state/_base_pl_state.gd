@@ -140,9 +140,12 @@ func _check_combos(input_: InputPackage):
 
 # endregion
 
+func call_accumulate_time_spent(delta: float) -> void:
+	accumulate_time_spent(delta)
+
 
 func _update(input_: InputPackage, delta: float):
-	accumulate_time_spent(delta)
+	call_accumulate_time_spent(delta)
 
 	_update_feelings(delta)
 	legs_sm.current_behavior.update(input_, delta)
@@ -161,7 +164,7 @@ func _update(input_: InputPackage, delta: float):
 			forced_state.try_set(PS.midair, 50)
 
 
-func _update_feelings(delta):
+func _update_feelings(delta: float):
 	feelings._update(delta, stamina_drain)
 
 
@@ -255,7 +258,7 @@ func react_on_hit(hit: HitData):
 	var react_state_name := ReactionOnHit.calculate_reaction_for_pl_state(hit)
 	if react_state_name:
 		__log_state_upd("hit leaded to react state", react_state_name)
-		var state = container.state_by_name(react_state_name)
+		var state := container.state_by_name(react_state_name)
 		forced_state.try_set(react_state_name, state.priority)
 	else:
 		curr_global_action()._react_on_hit(hit)

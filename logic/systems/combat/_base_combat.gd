@@ -7,13 +7,13 @@ extends BaseNodeCharacterSystem
 
 
 const HIT_BUFFER_DURATION: float = 4.0
-var _processed_hits_buffer: Dictionary = {}
+var _processed_hits_buffer: Dictionary[int, float] = {}
 var _character_is_attacking: bool = false
 
 var _last_processed_hit: HitData
 
 
-var _weapons: Dictionary = {} # weapon_name <String> to weapon <BaseWeapon>
+var _weapons: Dictionary[String, BaseWeapon] = {} # weapon_name <String> to weapon <BaseWeapon>
 
 
 func initialise():
@@ -69,8 +69,8 @@ func _mark_hit_processed(hit_id: int) -> void:
 
 
 func _cleanup_old_hits() -> void:
-	var current_time = Time.get_ticks_msec() / 1000.0
-	var to_remove: Array = []
+	var current_time: float = Time.get_ticks_msec() / 1000.0
+	var to_remove: Array[int] = []
 	
 	for hit_id in _processed_hits_buffer:
 		if current_time - _processed_hits_buffer[hit_id] > HIT_BUFFER_DURATION:
@@ -82,7 +82,7 @@ func _cleanup_old_hits() -> void:
 
 
 func apply_hit(hit_data: HitData) -> void:
-	var hit_id = hit_data.get_instance_id()
+	var hit_id := hit_data.get_instance_id()
 	
 	if _is_hit_processed(hit_id):
 		__log_(hit_id, "is already processed")

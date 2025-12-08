@@ -14,7 +14,7 @@ class _LActionData extends StatesContainer._BaseActionData:
 	pass
 
 
-var node_to_l_behavior_data: Dictionary = {
+var node_to_l_behavior_data: Dictionary[String, _BehaviorData] = {
 	"IdleLegs": _BehaviorData.new(Leg.Beh.idle,
 		SupportedActions.new({
 			MotionType.IDLE: Leg.Act.idle,
@@ -67,7 +67,7 @@ var node_to_l_behavior_data: Dictionary = {
 }
 
 
-var node_to_l_action_data: Dictionary = {
+var node_to_l_action_data: Dictionary[String, _LActionData] = {
 	"IdleToSprint": _LActionData.new(Leg.Act.idle_to_sprint, A.loco.idle_to_sprint, MotionType.START),
 
 	"Idle": _LActionData.new(Leg.Act.idle, A.loco.idle, MotionType.IDLE),

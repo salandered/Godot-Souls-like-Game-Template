@@ -83,7 +83,7 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 	if not __log_false_decision and not decision:
 		return
 
-	var _prefix = "triggered 🖲️"
+	var _prefix := "triggered 🖲️"
 	
 	var _msg := "NEEDS/GOT"
 	_msg += pp.s("St", needs_curr_state, "/", curr_state_name)

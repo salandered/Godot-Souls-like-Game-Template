@@ -1,5 +1,6 @@
-extends BaseAction
+@abstract
 class_name PlayerAction
+extends BaseAction
 
 var state_name: String
 

@@ -36,13 +36,17 @@ func on_enter_action(input_: InputPackage):
 	
 	match PREV_ACTION:
 		Leg.Act.idle_to_sprint:
-			var _root_vel_speed = player_sm.get_tranfer_data_by_key("root_vel_speed")
-			
-			__log_action("_root_vel_speed / _inherited_speed", _root_vel_speed, _inherited_speed)
-			if _root_vel_speed:
+			var _root_vel_speed: Variant = player_sm.get_tranfer_data_by_key("root_vel_speed")
+			if _root_vel_speed == null:
+				__log_warn(true, "_root_vel_speed is null", "", "")
+				speed_from_inherited.initialise(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
+			elif _root_vel_speed is float:
+				__log_action("_root_vel_speed / _inherited_speed", _root_vel_speed, _inherited_speed)
 				speed_from_inherited.initialise(_root_vel_speed + 0.4, default_sp.SPEED, 0.4)
 			else:
+				__log_warn(true, "_root_vel_speed is not float", "", "")
 				speed_from_inherited.initialise(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
+				
 		Leg.Act.run:
 			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.4)
 		Leg.Act.fast_turn_180:
@@ -67,7 +71,7 @@ func on_exit_action():
 func update(input_: InputPackage, delta: float):
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 
-	var CURR_SPEED = speed_from_inherited.update(delta)
+	var CURR_SPEED := speed_from_inherited.update(delta)
 	match PREV_ACTION:
 		Leg.Act.idle_to_sprint:
 			CURR_SPEED = speed_from_inherited.update(delta)
@@ -93,7 +97,7 @@ func update(input_: InputPackage, delta: float):
 var __start_time_offset_dev := 0.0
 
 func animate(): # ▶️
-	var _custom_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	var _custom_start_time_offset := start_time_offset.calculate_actual(PREV_ACTION)
 
 	match PREV_ACTION:
 		Leg.Act.idle_to_sprint:
@@ -114,7 +118,7 @@ var _dev_add_blend := 0.0
 var _next_anim_correction := 0.12
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 3, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 

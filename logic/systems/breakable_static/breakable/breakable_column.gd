@@ -15,8 +15,8 @@ func initialise() -> void:
 		__log_warn(false, "no shattered_column_scene", "init", "wont be breakable")
 
 	
-	var _mesh_instances = get_descendants.mesh_instances_visible(self)
-	var _areas = get_descendants.breakable_areas(self)
+	var _mesh_instances := get_descendants.mesh_instances_visible(self)
+	var _areas := get_descendants.breakable_areas(self)
 
 	if len(_mesh_instances) == 0:
 		__log_warn(false, "zero _mesh_instances", "init", "it's just strange to have breakable invisible object")
@@ -49,7 +49,7 @@ func break_myself() -> void:
 
 	__is_broke = true
 	__log_(em.mark_alt, "Gonna break myself")
-	var shattered_column = shattered_column_scene.instantiate()
+	var shattered_column := shattered_column_scene.instantiate()
 	get_parent().add_child(shattered_column)
 	shattered_column.global_transform = global_transform
 	queue_free()

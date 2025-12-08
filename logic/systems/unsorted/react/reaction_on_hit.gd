@@ -22,7 +22,7 @@ class ReactionConfig:
 ## from the character point of view. Examples:
 ## slash from right to left - Dir is LEFT
 ## slash up - Dir is UP
-static var enemy_attack_to_direction = {
+static var enemy_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
 	PHEA.attack.attack_360_high: AttackDirection.Dir.RIGHT,
 	PHEA.attack.attack_360_low: AttackDirection.Dir.RIGHT,
 	PHEA.attack.attack_down: AttackDirection.Dir.DOWN,
@@ -38,7 +38,7 @@ static var enemy_attack_to_direction = {
 	PHEA.phase_switch: AttackDirection.Dir.STAB,
 	}
 
-static var pl_attack_to_direction = {
+static var pl_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
 	A.attack.axe_slice_1: AttackDirection.Dir.LEFT,
 	A.attack.axe_slice_2: AttackDirection.Dir.UP, # technically should be RIGHT
 	A.attack.attack_from_run: AttackDirection.Dir.STAB,
@@ -49,7 +49,7 @@ static var pl_attack_to_direction = {
 	}
 
 
-static var attack_dir_to_enemy_overlay_anim = {
+static var attack_dir_to_enemy_overlay_anim: Dictionary[AttackDirection.Dir, String] = {
 	AttackDirection.Dir.LEFT: PHEA.react.react_from_L,
 	AttackDirection.Dir.RIGHT: PHEA.react.react_from_R,
 	AttackDirection.Dir.UP: PHEA.react.body_impact,
@@ -57,7 +57,7 @@ static var attack_dir_to_enemy_overlay_anim = {
 	AttackDirection.Dir.STAB: PHEA.react.react_gut,
 	}
 
-static var attack_dir_to_pl_overlay_anim = {
+static var attack_dir_to_pl_overlay_anim: Dictionary[AttackDirection.Dir, String] = {
 	AttackDirection.Dir.LEFT: A.react.react_from_L,
 	AttackDirection.Dir.RIGHT: A.react.react_from_R,
 	AttackDirection.Dir.UP: A.react.head_B_large,
@@ -68,7 +68,7 @@ static var attack_dir_to_pl_overlay_anim = {
 
 # todo: probably states as keys, not raw animations
 ## here listed only attacks which causes interrupt states
-static var enemy_attack_to_pl_state_interruption = {
+static var enemy_attack_to_pl_state_interruption: Dictionary[String, String] = {
 	PHEA.attack.attack_360_low: PS.thrown,
 	PHEA.attack.attack_up: PS.pushback,
 	PHEA.attack.power_gap_closer: PS.thrown,
@@ -80,16 +80,16 @@ static var enemy_attack_to_pl_state_interruption = {
 
 
 ## here listed only attacks which causes interrupt states
-static var pl_attack_to_enemy_state_interruption = {
+static var pl_attack_to_enemy_state_interruption: Dictionary[String, String] = {
 	A.attack.sword_slash_3: PHES.Leaf.pushback,
 	}
 
 
 ## only actions. If not mentioned - will be default values
-static var player_muted_action = [PS.Act.death, PS.Act.double, Leg.Act.double]
+static var player_muted_action: Array[String] = [PS.Act.death, PS.Act.double, Leg.Act.double]
 
 ## only leafes. If not mentioned - will be default values
-static var enemy_muted_states = [PHES.Leaf.death, PHES.Leaf.phase_switch] # PHES.Leaf.sleep] dev
+static var enemy_muted_states: Array[String] = [PHES.Leaf.death, PHES.Leaf.phase_switch] # PHES.Leaf.sleep] dev
 
 
 static func get_attack_dir_by_enemy_attack(anim_id: String) -> AttackDirection.Dir:
@@ -110,9 +110,9 @@ static func calculate_reaction_for_pl_action(hit: HitData, curr_action: String) 
 	var anim_id_: String
 	anim_id_ = _pick_react_anim_for_player(hit)
 
-	var bone_mask = _pick_bone_mask_for_player(hit, curr_action)
+	var bone_mask := _pick_bone_mask_for_player(hit, curr_action)
 	
-	var react_cfg = ReactionConfig.new(anim_id_, overlay_weight, bone_mask)
+	var react_cfg := ReactionConfig.new(anim_id_, overlay_weight, bone_mask)
 	__log_("Player Reaction CFG:", react_cfg)
 	return react_cfg
 
@@ -131,9 +131,9 @@ static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: String) 
 	var anim_id_: String
 	anim_id_ = _pick_react_anim_for_enemy(hit)
 
-	var bone_mask = _pick_bone_mask_for_enemy(hit, curr_leaf_state)
+	var bone_mask := _pick_bone_mask_for_enemy(hit, curr_leaf_state)
 	
-	var react_cfg = ReactionConfig.new(anim_id_, overlay_weight, bone_mask)
+	var react_cfg := ReactionConfig.new(anim_id_, overlay_weight, bone_mask)
 	__log_("Enemy Reaction CFG:", react_cfg)
 	return react_cfg
 
@@ -158,8 +158,8 @@ static func _pick_react_anim_for_player(hit_from_enemy: HitData) -> String:
 
 
 static func _pick_overlay_weight(hit: HitData, max_damage: float) -> float:
-	var linear_value = hit.damage / max_damage
-	var clamped_linear = clampf(linear_value, 0.0, 1.0)
+	var linear_value := hit.damage / max_damage
+	var clamped_linear := clampf(linear_value, 0.0, 1.0)
 
 	
 	# 0.3: low hits - more weight
@@ -167,7 +167,7 @@ static func _pick_overlay_weight(hit: HitData, max_damage: float) -> float:
 	# if 0.5:
 	# [10, 35] (max 35) -> [0.54, 1.0]
 	# [10, 15] (max 15) -> [0.82, 1.0]
-	var eased_value = ease(clamped_linear, 0.3) # ease out
+	var eased_value := ease(clamped_linear, 0.3) # ease out
 	__log_("Dmg/Max", hit.damage, max_damage, "-> Linear", clamped_linear, "-> Eased", eased_value)
 	return eased_value
 

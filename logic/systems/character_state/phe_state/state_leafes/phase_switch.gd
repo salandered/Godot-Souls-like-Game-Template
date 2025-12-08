@@ -20,7 +20,7 @@ func on_exit_state() -> void:
 	_pushed_rigid_bodies = false
 
 
-func update(delta):
+func update(delta: float):
 	e_movement.rotate_towards_player(delta, SpeedConfig.new(default_sp))
 	e_movement.smooth_xz_stop(delta, DECEL_SPEED)
 	

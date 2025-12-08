@@ -52,7 +52,7 @@ static func any_action_anim(
 	add_prefix_: String, anim_name: String,
 	blend_time, start_time_offset, prev_act_name,
 	info_indents: int = 0, level: String = LogL.NOTSET):
-	var msg = pp.s(
+	var msg := pp.s(
 		"anim", pp.in_q(anim_name),
 		"blend t", blend_time,
 		"start off", start_time_offset,
@@ -136,7 +136,7 @@ static var PHE_SM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_B, "🗿",
 static func phe_anim(add_prefix_: String, anim_name: String,
 	blend_time, start_time_offset, sp_scale, prev_leaf_state,
 	info_indents: int = 0, level: String = LogL.NOTSET):
-	var msg = pp.s(
+	var msg := pp.s(
 		"anim", pp.in_q(anim_name),
 		"blend-t", blend_time,
 		"start-off", start_time_offset,
@@ -150,7 +150,7 @@ static func phe_overlay_anim(add_prefix_: String, anim_name: String,
 	overlay_config: OverlayConfig,
 	start_time_offset = 0.0, sp_scale: float = 1.0,
 	info_indents: int = 0, level: String = LogL.NOTSET):
-	var msg = pp.s(
+	var msg := pp.s(
 		"anim", pp.in_q(anim_name),
 		"", overlay_config,
 		"start-off", start_time_offset,

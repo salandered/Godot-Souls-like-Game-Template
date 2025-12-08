@@ -50,7 +50,7 @@ static func create_rigid_body_from_mesh_instance(
 	__log_("Creating rigid body from:", mesh_instance.name, "| use_geometry_center:", use_geometry_center, "| config:", physics_config)
 	__log_("Original mesh global_position:", mesh_instance.global_position)
 	
-	var rigid_body = RigidBody3D.new()
+	var rigid_body := RigidBody3D.new()
 	rigid_body.global_transform = mesh_instance.global_transform
 	
 	_setup_mesh(rigid_body, mesh_instance, use_geometry_center)
@@ -78,7 +78,7 @@ static func _setup_mesh(
 	new_mesh.skeleton = NodePath("")
 	new_mesh.extra_cull_margin = max(mesh_instance.extra_cull_margin, 16.0)
 	new_mesh.cast_shadow = mesh_instance.cast_shadow
-	var geometry_center = Vector3.ZERO
+	var geometry_center := Vector3.ZERO
 	if use_geometry_center:
 		var mesh_aabb = mesh_instance.mesh.get_aabb()
 		geometry_center = mesh_aabb.get_center()
@@ -96,12 +96,12 @@ static func _create_collision_shape(
 	rigid_body: RigidBody3D,
 	mesh_instance: MeshInstance3D,
 ) -> bool:
-	var convex_shape = mesh_instance.mesh.create_convex_shape(false)
+	var convex_shape := mesh_instance.mesh.create_convex_shape(false)
 	if not convex_shape:
 		__log_warn(true, "Failed to create convex shape from mesh", "", "return null", mesh_instance)
 		return false
 	
-	var collision_shape = CollisionShape3D.new()
+	var collision_shape := CollisionShape3D.new()
 	collision_shape.shape = convex_shape
 	# No offset - collision at origin where mesh is
 	rigid_body.add_child(collision_shape)

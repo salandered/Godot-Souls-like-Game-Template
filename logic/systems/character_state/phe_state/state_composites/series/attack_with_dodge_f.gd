@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges := [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
+var all_the_dodges: Array[String] = [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
 
 
 func initialise() -> void:
@@ -18,8 +18,8 @@ func get_attack_series_list() -> Array:
 
 
 func pick_series_idx() -> int:
-	var dist = distance_to_player()
-	var _idx = 0
+	var dist := distance_to_player()
+	var _idx := 0
 	if dist > config.CLOSE_TO_ORBIT() and not me.angry_raised:
 		_idx = 2
 	if dist < config.COMBAT_RAD():

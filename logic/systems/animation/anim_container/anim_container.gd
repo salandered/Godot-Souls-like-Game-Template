@@ -7,7 +7,7 @@ extends BaseAnimationContainer
 class_name AnimationContainer
 
 
-var _anim_by_id := {}
+var _anim_by_id: Dictionary[String, AnimationData] = {}
 
 
 ## MAIN INTERFACE
@@ -16,7 +16,7 @@ func get_by_anim_id(anim_id: String) -> AnimationData:
 
 
 ## native_player - player's player, se's player, etc
-func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary) -> void:
+func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary[String, Array]) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
 		if not AnimUtils.assert_has_animation(native_player, anim.anim_id, false):
@@ -54,8 +54,8 @@ func _accept_animations(_animations: Array[AnimationData], native_player: Animat
 
 
 	# VALIDATION
-	var invalid_animations := []
-	for anim in _anim_by_id.values():
+	var invalid_animations: Array[String] = []
+	for anim: AnimationData in _anim_by_id.values():
 		if not AnimationData.__validate_anim(anim, param_prefixes, param_tracks, required_markers):
 			invalid_animations.append(anim.anim_name)
 		else:
@@ -66,8 +66,8 @@ func _accept_animations(_animations: Array[AnimationData], native_player: Animat
 
 
 ## Returns dict { timestamp <float>: Array[AudioTrackData] }
-func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionary:
-	var result_dict: Dictionary = {}
+func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionary[float, Array]:
+	var result_dict: Dictionary[float, Array] = {}
 	
 	var track_count: int = animation.get_track_count()
 	var audio_track_count := 0
@@ -96,7 +96,7 @@ func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionar
 			
 			var start_offset: float = animation.audio_track_get_key_start_offset(track_idx, key_idx)
 			var end_offset: float = animation.audio_track_get_key_end_offset(track_idx, key_idx)
-			var _stream_name = stream.resource_path.get_file().get_basename()
+			var _stream_name := stream.resource_path.get_file().get_basename()
 			var audio_data := AudioTrackData.new(timestamp, track_name, _stream_name, start_offset, end_offset)
 			
 			if not result_dict.has(timestamp):
@@ -114,8 +114,8 @@ func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionar
 	return result_dict
 
 
-static func __build_transform_track_cache(native_anim: Animation) -> Dictionary:
-	var cache := {"pos": {}, "rot": {}}
+static func __build_transform_track_cache(native_anim: Animation) -> Dictionary[String, Dictionary]:
+	var cache: Dictionary[String, Dictionary] = {"pos": {}, "rot": {}}
 	for i in range(native_anim.get_track_count()):
 		var path: String = native_anim.track_get_path(i)
 		var type: int = native_anim.track_get_type(i)
@@ -127,9 +127,9 @@ static func __build_transform_track_cache(native_anim: Animation) -> Dictionary:
 	return cache
 
 
-static func __get_animation_markers(animation: Animation) -> Dictionary:
+static func __get_animation_markers(animation: Animation) -> Dictionary[String, AnimMarker]:
 	## Returns dict {marker_name: AnimMarker instance}
-	var markers_dict: Dictionary = {}
+	var markers_dict: Dictionary[String, AnimMarker] = {}
 	
 	var marker_names: PackedStringArray = animation.get_marker_names()
 	

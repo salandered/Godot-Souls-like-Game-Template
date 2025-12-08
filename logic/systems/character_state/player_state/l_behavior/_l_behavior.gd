@@ -54,7 +54,7 @@ func _on_enter_behavior(input_: InputPackage):
 
 ## usualy is overriden
 ## behaviors with one supported action should not override 
-func choose_action(input_, delta) -> LNextActionVerdict:
+func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	if len(supported_actions.action_names) > 1:
 		print_.warn_raw(false, "default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
 	return LNextActionVerdict.new(supported_actions.action_names[0])
@@ -101,11 +101,11 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 
 # region: shortcuts for decision checks
 
-func is_moving(input_) -> bool:
+func is_moving(input_: InputPackage) -> bool:
 	## note that on a keyboard it's either 0 or 1 
 	return input_.input_direction.length() > 0.1
 
-func is_reverse_moving(input_) -> bool:
+func is_reverse_moving(input_: InputPackage) -> bool:
 	## is_moving can show zero while two keys pressed at once.
 	## input_.reverse_data captures such case.
 	## but it also captures very fast sequential presses 
@@ -113,7 +113,7 @@ func is_reverse_moving(input_) -> bool:
 	##    => WARNING: their order is important
 	return input_.reverse_data.is_reversed()
 
-func is_pure_reverse_moving(input_) -> bool:
+func is_pure_reverse_moving(input_: InputPackage) -> bool:
 	return input_.reverse_data.is_pure_reversed()
 
 func is_switch_from_unsupported_action() -> bool:
@@ -121,7 +121,7 @@ func is_switch_from_unsupported_action() -> bool:
 
 # endregion
 
-func __log_decision_data(input_, next_action_name: String, ...additional_checks: Array):
+func __log_decision_data(input_: InputPackage, next_action_name: String, ...additional_checks: Array):
 	var _curr_motion_type := get_curr_action().motion_type
 	print_.lsm_beh_ch(behavior_name,
 		_curr_motion_type,

@@ -1,4 +1,4 @@
-## are instantiated once and live in a shared pool instead of being a copy per behavior. 
+@abstract
 class_name LegsAction
 extends BaseAction
 

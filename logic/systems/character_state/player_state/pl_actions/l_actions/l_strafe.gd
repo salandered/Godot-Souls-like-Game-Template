@@ -39,7 +39,7 @@ var TURN_THRESHOLD_DEG: float = 15
 var DECELERATION_FRICTION: float = 8.0
 
 
-var _resettable = [
+var _resettable := [
 	speed_from_inherited,
 	speed_mult_from_idle,
 	angular_sp_from_idle,
@@ -48,7 +48,7 @@ var _resettable = [
 	# slightest_dir_change,
 ]
 
-var _changers_cooldown = [
+var _changers_cooldown := [
 	opposite_dir_change.cooldown,
 	slight_dir_change.cooldown,
 	# slightest_dir_change.cooldown
@@ -75,7 +75,7 @@ func _inherit_dodge_speed_if_same_direction():
 	# todo: should not use animations but dodge dir
 	var _inherited_speed := pm().get_curr_velocity_len()
 	## animator manager treats prev anim as curr because we are in on_enter_action
-	var prev_anim_id = get_animator_manager().get_curr_anim().anim_id
+	var prev_anim_id := get_animator_manager().get_curr_anim().anim_id
 	var curr_dir := curr_direction.get_curr_dir()
 	var _inherit_speed: bool = false
 	if prev_anim_id == A.dodge.dodge_R and curr_dir in Direction.get_right_group():
@@ -132,7 +132,7 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	var CURR_SPEED = curr_direction.get_curr_speed()
+	var CURR_SPEED := curr_direction.get_curr_speed()
 	var CURR_ANGULAR_SPEED := default_sp.ANGULAR_SPEED
 	var SPEED_MULT := 1.0
 
@@ -147,7 +147,7 @@ func update(input_: InputPackage, delta: float) -> void:
 			CURR_SPEED = speed_from_inherited.update(delta)
 			
 
-	var _prev_sp_mult = SPEED_MULT
+	var _prev_sp_mult := SPEED_MULT
 	SPEED_MULT *= opposite_dir_change.speed_dip_update(delta)
 	SPEED_MULT *= slight_dir_change.speed_dip_update(delta)
 	# SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
@@ -222,7 +222,7 @@ func _change_dir(is_opposite_change: bool, new_dir: Direction.Dir, from_callback
 
 
 func animate(): # ▶️
-	var custom_blend_time = blend_time.calculate_actual(PREV_ACTION)
+	var custom_blend_time := blend_time.calculate_actual(PREV_ACTION)
 	match PREV_ACTION:
 		Leg.Act.sprint:
 			if curr_direction.get_curr_dir() in Direction.get_right_group():
@@ -239,8 +239,8 @@ func _switch_animation(is_opposite_change: bool):
 	var next_anim := anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
 	var curr_anim := anim
 
-	var _custom_blend_time = blend_time.calculate_actual(PREV_ACTION)
-	var _custom_start_time_offset = start_time_offset.calculate_actual(PREV_ACTION)
+	var _custom_blend_time := blend_time.calculate_actual(PREV_ACTION)
+	var _custom_start_time_offset := start_time_offset.calculate_actual(PREV_ACTION)
 
 	
 	if next_anim.anim_id == curr_anim.anim_id:

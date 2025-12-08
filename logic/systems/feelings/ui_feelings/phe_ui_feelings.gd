@@ -26,7 +26,7 @@ var _pulse_tween: Tween
 
 var _prev_health: float
 
-var _is_fading_out = false
+var _is_fading_out := false
 
 func _ready() -> void:
 	## HEALTH BAR
@@ -44,7 +44,7 @@ func _ready() -> void:
 	_prev_health = e_feelings.get_curr_health()
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	# polling on every frame - may be switch to signals
 	_update_health_bar()
 
@@ -81,7 +81,7 @@ func _fade_out_and_hide():
 	if _is_pulsing:
 		_stop_low_health_pulse()
 	
-	var panels = [health_bar, back_health_bar, ghost_bar]
+	var panels := [health_bar, back_health_bar, ghost_bar]
 	UIUtils.fade_out_and_hide(self, panels, FADEOUT_DURATION)
 
 
@@ -102,7 +102,7 @@ func _animate_ghost_bar_change(from_value: float, to_value: float) -> void:
 	
 	ghost_bar.value = from_value
 	
-	var config = TweenConfig.new(Tween.TRANS_QUAD, Tween.EASE_IN)
+	var config := TweenConfig.new(Tween.TRANS_QUAD, Tween.EASE_IN)
 	_ghost_tween = UIUtils.animate_property(
 		self,
 		ghost_bar,

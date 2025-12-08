@@ -22,19 +22,19 @@ func on_enter_action(input_: InputPackage) -> void:
 	var _speed_extra_X := DEFAULT_GLOBAL_EXTRA_SPEED_X
 	match PREV_ACTION:
 		PS.Act.dodge:
-			var result = _adjust_extra_speed_to_dodge_direction()
+			var result := _adjust_extra_speed_to_dodge_direction()
 			_speed_extra_Z = result["Z"]
 			_speed_extra_X = result["X"]
 	
-	var r = calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
+	var r := calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
 	_final_extra_speed_Z = r.z
 	_final_extra_speed_X = r.x
 	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
 
 
-func _adjust_extra_speed_to_dodge_direction() -> Dictionary:
+func _adjust_extra_speed_to_dodge_direction() -> Dictionary[String, float]:
 	## animator manager treats prev anim as curr because we are in on_enter_action
-	var prev_anim_id = get_animator_manager().get_curr_anim().anim_id
+	var prev_anim_id := get_animator_manager().get_curr_anim().anim_id
 	# todo: should not use animations but strafe dir
 	var speed_x: float
 	var speed_z: float

@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		_label_inputs()
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_released(RawAction.DEV_KP7):
 		_visible = not _visible
 		for l: Label in all_labels:
@@ -141,7 +141,7 @@ func _label_modifier_animator_info():
 	# modifier_ar_2.text = __one_animator_data(l_ar)
 
 
-func __l_action(act_name) -> LegsAction:
+func __l_action(act_name: String) -> LegsAction:
 	if __pl().legs_sm:
 		if __pl().legs_sm._current_action:
 			if __pl().legs_sm._current_action.action_name == act_name:

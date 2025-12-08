@@ -57,7 +57,7 @@ func on_exit_state() -> void:
 var _pushed_rigid_bodies: bool = false
 
 
-func update(delta):
+func update(delta: float):
 	e_movement.rotate_towards_player(delta, sp_config, deg_to_rad(angle_adjustment_deg))
 
 	if before_marker(MarkerName.JUMP.LAUNCH):

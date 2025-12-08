@@ -9,7 +9,7 @@ enum ChangeType {
 	SAME
 }
 
-static var all_dir_pairs: Dictionary = {
+static var all_dir_pairs: Dictionary[Vector2i, ChangeType] = {
 	# 180 OPPOSITE (most frequent)
 	Vector2i(Direction.Dir.FORWARD, Direction.Dir.BACKWARD): ChangeType.OPPOSITE,
 	Vector2i(Direction.Dir.RIGHT, Direction.Dir.LEFT): ChangeType.OPPOSITE,
@@ -56,5 +56,5 @@ static var all_dir_pairs: Dictionary = {
 
 ## -1 if not found
 static func get_change_type(from_dir: int, to_dir: int) -> ChangeType:
-	var key = Vector2i(from_dir, to_dir)
+	var key := Vector2i(from_dir, to_dir)
 	return all_dir_pairs.get(key, -1)

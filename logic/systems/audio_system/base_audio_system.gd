@@ -35,7 +35,7 @@ func _validate(root_of_all_stream_players: Node):
 	if _players_total == 0:
 		__log_warn(true, "initialised with zero on_signal_players", "", "")
 	else:
-		var _all_descriptions = []
+		var _all_descriptions: Array[String] = []
 		for item: OnSFXSignalPlayer in _on_signal_players:
 			_all_descriptions.append(item._description)
 		__log_("validation", "we have", _players_total, "on_signal_players:", pp.list_(_all_descriptions))
@@ -44,7 +44,7 @@ func _validate(root_of_all_stream_players: Node):
 	## all_stream_players
 	__log_("validation", "using root for all stream players", root_of_all_stream_players, root_of_all_stream_players.name)
 	
-	var skip_subscenes = false # not sure
+	var skip_subscenes := false # not sure
 	var all_stream_players := get_descendants.audio_stream_players_3D(root_of_all_stream_players, skip_subscenes)
 	if len(all_stream_players) == 0:
 		__log_warn(true, "no all_stream_players. That is odd", "validation", "")

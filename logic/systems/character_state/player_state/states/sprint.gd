@@ -6,7 +6,7 @@ func _ready() -> void:
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	var _verdict = best_next_state_from_input(input_)
+	var _verdict := best_next_state_from_input(input_)
 	if _verdict.next_state == PS.jump_sprint and get_actual_time_spent() < 0.2:
 		return PLVerdict.new("")
 	## reads as: we want to stop sprinting, but we sprint a little time right after the landing. 

@@ -10,7 +10,7 @@ extends BaseWeapon
 ## 	CombatAction.light_attack_pressed: PS.longsword_1
 ## }
 ## NOTE: specific to player only. Is here for now for simplicity.
-var _input_action_to_state: Dictionary = {} # input actions to states
+var _input_action_to_state: Dictionary[String, String] = {} # input actions to states
 
 
 func is_player() -> bool:
@@ -18,7 +18,7 @@ func is_player() -> bool:
 
 
 func translate_combat_input_to_state(combat_actions: Array) -> Array:
-	var _translated := []
+	var _translated: Array[String] = []
 	
 	for input_action in combat_actions:
 		if u.safe_has_key(_input_action_to_state, input_action, Fallback.SOFT):

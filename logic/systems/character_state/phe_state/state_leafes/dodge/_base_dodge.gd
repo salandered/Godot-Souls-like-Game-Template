@@ -34,6 +34,6 @@ func initialise_implementation():
 	pass
 
 
-func update(delta):
+func update(delta: float):
 	e_movement.rotate_towards_player(delta, sp_config)
 	e_movement.move_with_root(delta, SCALE_LENGTH)

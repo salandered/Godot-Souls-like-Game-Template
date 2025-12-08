@@ -28,13 +28,13 @@ func _get_actions_by_state(state: String, states_container: StatesContainer) -> 
 	return result
 
 
-var _states: Dictionary # { string : BasePlayerState }
+var _states: Dictionary[String, BasePlayerState]
 
-var _player_actions: Dictionary # { string : PlayerAction }
+var _player_actions: Dictionary[String, PlayerAction]
 
-var _legs_behaviors: Dictionary # { string : LegsBehavior }
+var _legs_behaviors: Dictionary[String, LegsBehavior]
 
-var _leg_actions: Dictionary # { Node name : LegsAction }
+var _leg_actions: Dictionary[String, LegsAction]
 
 
 ## not nullable

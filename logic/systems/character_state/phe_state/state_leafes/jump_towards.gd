@@ -11,7 +11,7 @@ func initialise() -> void:
 	sp_config = SpeedConfig.new(default_sp)
 
 
-func update(delta):
+func update(delta: float):
 	e_movement.rotate_towards_player(delta, sp_config)
 
 	if before_marker(MarkerName.JUMP.LAUNCH):

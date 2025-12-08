@@ -20,12 +20,12 @@ func on_enter_action(input_: InputPackage):
 	__log_ent("picked random anim", pp.anim_n(anim.anim_id))
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0))
 	
-	var r = calculate_extra_root_speed(DEFAULT_GLOBAL_EXTRA_SPEED_Z)
+	var r := calculate_extra_root_speed(DEFAULT_GLOBAL_EXTRA_SPEED_Z)
 	_final_extra_speed_Z = r.z
 	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
 	
 
-func update(input_: InputPackage, delta):
+func update(input_: InputPackage, delta: float):
 	var fade_factor := fade_interpolator.get_current_value()
 	var extra_vel_local := Vector3(_final_extra_speed_X * fade_factor, 0, _final_extra_speed_Z * fade_factor) # Animation +Z
 	

@@ -14,7 +14,7 @@ func _ready() -> void:
 	position.y = target_y
 
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var current_state := me.get_curr_leaf_state()
 	if current_state:
 		target_y = current_state.y_offset_adjustment

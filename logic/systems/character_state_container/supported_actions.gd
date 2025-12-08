@@ -2,11 +2,11 @@ extends RefCounted
 class_name SupportedActions
 
 
-var _motion_type_to_default_action := {}
-var action_names := []
+var _motion_type_to_default_action: Dictionary[String, String] = {}
+var action_names: Array[String] = []
 
 
-func _init(motion_to_action_: Dictionary, additional_actions: Array):
+func _init(motion_to_action_: Dictionary[String, String], additional_actions: Array[String]):
 	_motion_type_to_default_action = motion_to_action_
 	
 	for name_ in _motion_type_to_default_action.values():
@@ -47,8 +47,9 @@ func by_name(requested_name: String) -> String:
 	return requested_name
 
 
-func default_by_motion(motion) -> String:
-	return _motion_type_to_default_action[motion]
+func default_by_motion(motion: String) -> String:
+	var _r: String = u.safe_get_dict_key(_motion_type_to_default_action, motion, "")
+	return _r
 
 
 func _to_string() -> String:

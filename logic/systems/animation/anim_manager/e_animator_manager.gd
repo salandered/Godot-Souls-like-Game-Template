@@ -19,7 +19,7 @@ var _curr_anim: AnimationData
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 
 func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float = 0):
-	var anim = anim_container.get_by_anim_id(anim_id)
+	var anim := anim_container.get_by_anim_id(anim_id)
 	if anim == null:
 		__log_warn(true, "Overlay anim not found: " + anim_id, "set_overlay_anim", "")
 		return

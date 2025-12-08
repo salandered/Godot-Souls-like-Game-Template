@@ -46,7 +46,7 @@ func on_enter_action(input_: InputPackage) -> void:
 
 	
 func on_exit_action() -> void:
-	var tranfer_turn_data := {}
+	var tranfer_turn_data: Dictionary[String, Variant] = {}
 	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	
 	player_sm.fill_tranfer_data(tranfer_turn_data)

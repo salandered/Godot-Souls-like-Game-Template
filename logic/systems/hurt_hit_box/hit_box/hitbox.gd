@@ -72,14 +72,15 @@ func _ready() -> void:
 	__log_("--- CharacterHitbox ready ---")
 
 
-func _physics_process(delta):
+
+func _physics_process(delta: float) -> void:
 	if has_overlapping_areas():
 		for area in get_overlapping_areas():
 			on_area_contact(area)
 
 
 func pp_name():
-	var character_name = "Pl" if is_player() else "E"
+	var character_name := "Pl" if is_player() else "E"
 	return pp.s(character_name, "💢 HitBox")
 
 # region: shape logic

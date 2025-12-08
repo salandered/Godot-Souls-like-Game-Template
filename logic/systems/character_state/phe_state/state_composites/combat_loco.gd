@@ -219,7 +219,7 @@ func _all_will_do_is_done() -> bool:
 	return true
 
 
-func _distance_to_pursue_sbs(_next_state, _reason) -> VerdictPH:
+func _distance_to_pursue_sbs(_next_state: String, _reason: String) -> VerdictPH:
 	var dist := distance_to_player()
 	if dist > config.REAL_FAR():
 		_reason += "dist > REAL_FAR"
