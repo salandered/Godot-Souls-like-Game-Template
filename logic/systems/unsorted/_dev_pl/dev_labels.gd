@@ -1,0 +1,178 @@
+extends Node
+
+
+@onready var label_inputs: Label = %label_inputs
+@onready var label_cam: Label = %label_cam
+@onready var label_state_info: Label = %LabelStateInfo
+@onready var modifier_ar: Label = %modifier_ar
+@onready var label_enemy: Label = %label_enemy
+
+@onready var player: Princess = $"../.."
+
+var _visible: bool = true
+
+var all_labels = []
+
+
+func _ready() -> void:
+	all_labels = [
+		label_inputs,
+		# label_cam,
+		label_state_info,
+		modifier_ar,
+		label_enemy
+	]
+
+
+func _process(delta: float) -> void:
+	if u.fr(false) % 2 == 0:
+		# _label_camera_info()
+		# _label_modifier_animator_info()
+		_label_state_info()
+
+	if u.fr(false) % 1 == 0:
+		_label_inputs()
+
+
+func _input(event):
+	if event.is_action_released(RawAction.DEV_KP7):
+		_visible = not _visible
+		for l: Label in all_labels:
+			l.visible = _visible
+
+
+func _label_inputs():
+	var input_: InputPackage = InputManager.get_current_input()
+	var vel_by_input_ = __pl().player_movement.__velocity_by_input(input_, Constants.ONE_FRAME)
+	var t := ""
+	t += "input_dir " + pp.vec2(input_.input_direction)
+	t += "  len %5.2f" % [input_.input_direction.length()]
+	t += "  forward strength %5.2f" % [input_.forward_input]
+	t += "  orbit (hor) strength %5.2f" % [input_.orbit_input]
+	t += "\nactions: " + pp.array_(input_.actions)
+	t += "\ncombat: " + pp.array_(input_.combat_actions)
+	t += "\ntarget lock " + str(input_.target_lock)
+	t += "\ncam forward %5.2f  orbit %5.2f" % [input_.forward_input, input_.orbit_input]
+	t += "\n vel_by_input_" + pp.s(pp.vec3(vel_by_input_), vel_by_input_.length())
+	t += "\n vel_by_input_ norm" + pp.s(pp.vec3(vel_by_input_.normalized()), vel_by_input_.normalized().length())
+	
+	var curr_dir = "-none-"
+	t += "\n 8-dir-strafe   " + Direction.name_(input_.detect_strafe_dir())
+	var relative_dir = __pl().player_movement.detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
+	t += "\n 8-dir-new   " + Direction.name_(relative_dir)
+		
+	t += "\nhealth/stamina %5.2f/%5.2f" % [
+		 __pl().feelings._current_health,
+		 __pl().feelings._current_stamina
+		]
+	# t += "\n\n"
+	# t += "\nhealth/stamina %5.2f/%5.2f" % [
+	# 	 __pl().feelings._current_health,
+	# 	 __pl().feelings._current_stamina
+	# 	]
+	label_inputs.text = t
+
+
+func _label_camera_info():
+	var p_pos = player.global_position
+	var nest_pos := __cam().nest.global_position
+	var camera_pos := __cam().camera.global_position
+	
+	label_cam.text = "player to nest " + "%8.2f" % p_pos.distance_to(nest_pos)
+	label_cam.text += "\n player to cam " + "%8.2f" % p_pos.distance_to(camera_pos)
+
+	var free_off = __cam().free_state.free_offset.length() if __cam().free_state.free_offset else 0.0
+	var lock_off := __cam().locked_state.lock_offset.length() if __cam().locked_state.lock_offset else 0.0
+	label_cam.text += "\nfree off " + "%8.2f" % free_off
+	label_cam.text += "\n lock off " + "%8.2f" % lock_off
+	
+
+func _label_state_info():
+	var c_s := __c_s()
+
+	var t := ""
+	var error: bool = false
+	if not c_s:
+		t += em.warn + "NO current state"
+		error = true
+	if not c_s.legs_sm.current_behavior:
+		t += em.warn + "\nNO legs behavior"
+		error = true
+	if not c_s.legs_sm.get_curr_action():
+		t += em.warn + "\nNO legs behavior action"
+		error = true
+	if not __pl_sm().get_curr_action():
+		t += em.warn + "\n"
+		error = true
+	if not __pl_sm().get_prev_action():
+		t += em.warn + "\n"
+		error = true
+	if error:
+		label_state_info.text = t
+		return
+
+
+	var curr_st = c_s.state_name
+	var curr_st_act = "NONE"
+	var curr_st_act_time_spent = 0.0
+	if c_s.curr_state_action:
+		curr_st_act = c_s.curr_state_action.action_name
+		curr_st_act_time_spent = c_s.curr_state_action.time_spent()
+	
+	var curr_l_b = c_s.legs_sm.current_behavior.behavior_name
+	var curr_l_act = c_s.legs_sm.get_curr_action().action_name
+	var curr_l_act_time_spent = c_s.legs_sm.get_curr_action().time_spent()
+	var curr_gl_act = __pl_sm().get_curr_action().action_name
+	var prev_gl_act = __pl_sm().get_prev_action().action_name
+	
+	t += "state/st act  %20s %20s " % [curr_st, curr_st_act]
+	t += "\nl_beh / l_act  %20s %20s " % [curr_l_b, curr_l_act]
+	t += "\nAct: gl/st/legs   %20s %20s %20s " % [curr_gl_act, curr_st_act, curr_l_act]
+	t += "\nAct: gl from prev  %20s (%16s)" % [curr_gl_act, prev_gl_act]
+	t += "\nprogress pl action %6.2f  l action  %6.2f " % [curr_st_act_time_spent, curr_l_act_time_spent]
+
+	label_state_info.text = t
+
+
+func _label_modifier_animator_info():
+	var animator := player.animator_manager.full_body
+
+	modifier_ar.text = animator.__log_state()
+	# modifier_ar_2.text = __one_animator_data(l_ar)
+
+
+func __l_action(act_name) -> LegsAction:
+	if __pl().legs_sm:
+		if __pl().legs_sm._current_action:
+			if __pl().legs_sm._current_action.action_name == act_name:
+				return __pl().legs_sm._current_action
+	return null
+
+
+func __pl():
+	return player
+
+func __c_s() -> BasePlayerState:
+	return __pl().player_sm.current_state
+
+func __pl_sm() -> PlayerSM:
+	return __pl().player_sm
+
+func __cam() -> FancyCamera:
+	return __pl().fancy_camera
+
+# FROM OUTSIDE THE PLAYER
+
+func _label_phe_enemy_info(enemy: PHCharacter):
+	var pl_e_dist := pp.round_01(enemy.enemy_movement.distance_to_player())
+	var pl_e_angle: String = pp.rad2deg(enemy.enemy_movement.signed_angle_to_player(), true)
+	var c_l_s := enemy.get_curr_leaf_state()
+	var _cls_name := '- no curr state - '
+	var _cls_ts := -1.0
+	if c_l_s:
+		_cls_name = c_l_s.state_name
+		_cls_ts = c_l_s.get_actual_time_spent()
+		
+
+	label_enemy.text = "PL->E   %s  %s " % [pl_e_dist, pl_e_angle]
+	label_enemy.text += "\n ST/ts  %s  %5.1f" % [_cls_name, _cls_ts]

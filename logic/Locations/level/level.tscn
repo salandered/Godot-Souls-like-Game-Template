@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/materials-shared/_images/legacy/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="1_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://dlw2fiyg325uk" path="res://logic/Locations/lights/FlickerOmni.tscn" id="2_dnvo4"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="2_ifnij"]
-[ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/Locations/level/level.gd" id="5_j4sqn"]
+[ext_resource type="Script" uid="uid://buyrooc70y16c" path="res://logic/systems/level/level.gd" id="5_j4sqn"]
 [ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/materials-shared/simple/texture_08.png" id="5_ol10w"]
 [ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/materials-shared/_images/legacy/GroundDirtRocky_COL_1K.jpg" id="6_x4oov"]
 [ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/materials-shared/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="8_rhpv6"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood.tres" id="1_7ynfd"]
 [ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/minimal-arena/island/ISLAND_WRAPPER.tscn" id="2_ffjij"]
-[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/Player/Princess_2.tscn" id="3_ffjij"]
+[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="3_ffjij"]
 
 [node name="Node3D" type="Node3D"]
 
