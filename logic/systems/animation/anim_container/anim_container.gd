@@ -12,7 +12,7 @@ var _anim_by_id: Dictionary[String, AnimationData] = {}
 
 ## MAIN INTERFACE
 func get_by_anim_id(anim_id: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_id, anim_id, null, Fallback.WARN, pp.s(pp_name(), "get_by_anim_id"))
+	return u.safe_get_dict_key(_anim_by_id, anim_id, null, WarnLevel.WARN, pp.s(pp_name(), "get_by_anim_id"))
 
 
 ## native_player - player's player, se's player, etc
@@ -56,13 +56,13 @@ func _accept_animations(_animations: Array[AnimationData], native_player: Animat
 	# VALIDATION
 	var invalid_animations: Array[String] = []
 	for anim: AnimationData in _anim_by_id.values():
-		if not AnimationData.__validate_anim(anim, param_prefixes, param_tracks, required_markers):
+		if not AnimDataValidator.validate_anim(anim, param_prefixes, param_tracks, required_markers):
 			invalid_animations.append(anim.anim_name)
 		else:
 			__log_("", anim.anim_name, "is valid")
 
 	if invalid_animations.size() > 0:
-		__log_warn(false, "Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)], "", "")
+		__log_error("Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)], "", "")
 
 
 ## Returns dict { timestamp <float>: Array[AudioTrackData] }
@@ -85,13 +85,13 @@ func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionar
 		var track_name: String = track_path.get_concatenated_names()
 		var key_count: int = animation.track_get_key_count(track_idx)
 
-		__log_("[AudioEvents]", "track_idx", track_idx, "name", track_name, "keys", key_count)
+		# __log_("[AudioEvents]", "track_idx", track_idx, "name", track_name, "keys", key_count)
 		
 		for key_idx in key_count:
 			var timestamp: float = animation.track_get_key_time(track_idx, key_idx)
 			var stream: AudioStream = animation.audio_track_get_key_stream(track_idx, key_idx)
 			if not stream:
-				__log_warn(true, "[AudioEvents] stream is null", "", "continue", "key_idx/timestamp", key_idx, timestamp)
+				__log_error("[AudioEvents] stream is null", "", "continue", "key_idx/timestamp", key_idx, timestamp)
 				continue
 			
 			var start_offset: float = animation.audio_track_get_key_start_offset(track_idx, key_idx)
@@ -105,7 +105,7 @@ func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionar
 			result_dict[timestamp].append(audio_data)
 			audio_stream_total += 1
 			
-			prints("[AudioEvents]", "added:", audio_data)
+			# prints("[AudioEvents]", "added:", audio_data)
 	
 	if audio_track_count > 0:
 		__log_("[AudioEvents]", pp.anim_n(anim_id),

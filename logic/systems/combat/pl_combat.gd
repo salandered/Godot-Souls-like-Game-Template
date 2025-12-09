@@ -7,7 +7,7 @@ class_name PlayerCombat
 
 func initialise_implementation():
 	if len(get_all_weapons()) > 1:
-		__log_warn(true, "only 1 weapon is supported for PlayerCombat", "", "unpredictable. Amount:", len(get_all_weapons()))
+		__log_error("only 1 weapon is supported for PlayerCombat", "", "unpredictable. Amount:", len(get_all_weapons()))
 
 
 func get_parent_node_of_weapons() -> Node3D:

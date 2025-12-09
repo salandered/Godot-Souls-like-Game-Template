@@ -38,7 +38,7 @@ func _on_option_values_changed() -> void:
 
 func _on_setting_changed(value: Variant) -> void:
 	if value == null:
-		print_.warn(true, "value is null", "_on_setting_changed", "return null")
+		__log_ui.warn_("value is null", "_on_setting_changed", "return null")
 		return
 	if value < custom_option_values.size() and value >= 0:
 		super._on_setting_changed(custom_option_values[value])

@@ -211,9 +211,9 @@ func _setup_background() -> void:
 			background_texture_rect.texture = random_image
 			__log_ui.info_("LoadingScreen: Set random background -> ", random_image.resource_path.get_file())
 		else:
-			__log_ui.warn_(false, "LoadingScreen: BackgroundTextureRect is null", "", "")
+			__log_ui.warn_("LoadingScreen: BackgroundTextureRect is null", "", "")
 	else:
-		__log_ui.warn_(false, "LoadingScreen: no background_images", "", "")
+		__log_ui.warn_("LoadingScreen: no background_images", "", "")
 
 func _apply_vignette_effect() -> void:
 	if not background_texture_rect:

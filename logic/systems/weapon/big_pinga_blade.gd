@@ -24,18 +24,19 @@ func get_weapon_visuals() -> MeshInstance3D:
 	return _visuals_
 
 
-
 ## SFX
-
-func get_weapon_audio_system() -> BaseWeaponAudioSystem:
-	return weapon_sfx.get_audio_system()
 
 
 const WEAPON_WHOOSH = preload("uid://qufmydm4eeq4")
 const SWORD_HIT_BONES = preload("uid://g4dtkcleinh8")
 
-func set_whoosh_weapon_stream():
-	weapon_sfx.set_whoosh_weapon_stream(WEAPON_WHOOSH)
 
-func set_hit_weapon_stream():
-	weapon_sfx.set_hit_weapon_stream(SWORD_HIT_BONES)
+func _get_weapon_sfx_() -> WeaponSFX:
+	return weapon_sfx
+
+
+func _get_weapon_whoosh_stream() -> AudioStream:
+	return WEAPON_WHOOSH
+
+func _get_hit_weapon_stream() -> AudioStream:
+	return SWORD_HIT_BONES

@@ -39,7 +39,7 @@ func _on_key_assignment_dialog_confirmed() -> void:
 
 func _open_key_assignment_dialog(action_name: String, readable_input_name: String = assignment_placeholder_text) -> void:
 	if not has_node("KeyAssignmentDialog"):
-		__log_ui.warn_(true, "Node not found", "_open_key_assignment_dialog", "Check scene tree", "%KeyAssignmentDialog missing")
+		__log_ui.warn_("Node not found", "_open_key_assignment_dialog", "Check scene tree", "%KeyAssignmentDialog missing")
 		return
 
 	__log_ui.info_("InputMenu", "Opening Popup...")

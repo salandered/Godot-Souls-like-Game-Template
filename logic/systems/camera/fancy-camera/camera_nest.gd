@@ -13,3 +13,15 @@ func make_active() -> void:
 
 func pp_name() -> String:
 	return pp.s("Nest")
+
+
+# ## __LOGS
+# # region
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# # endregion

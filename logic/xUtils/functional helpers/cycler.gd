@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedLogger
 ## to cycle through an array of values endlessly
 class_name Cycler
 
@@ -32,10 +32,16 @@ func get_current() -> Variant:
 	return _values[_pointer]
 
 
-## __LOGS 
+## __LOGS
+# region
 
-func __log_(...parts: Array):
-	print_.prefix("Cycler", pp.list_(parts))
+func pp_name() -> String:
+	return "Cycler"
 
-func __log_warn(what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(false, what, where, fallback, pp.list_(context))
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

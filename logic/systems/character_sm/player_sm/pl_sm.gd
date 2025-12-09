@@ -1,4 +1,4 @@
-extends Node
+extends BaseNodeCharacterSystem
 class_name PlayerSM
 
 @onready var area_awareness: AreaAwareness = %AreaAwareness
@@ -24,6 +24,11 @@ var _prev_action: BaseAction
 
 var hit_timer: SimpleTimer = SimpleTimer.new()
 var hit_value_influencer: ValueInfluencer = ValueInfluencer.new(0.8, "hit_value_influencer")
+
+
+func is_player() -> bool:
+	return true
+
 
 func initialise(player: Princess) -> void:
 	_player = player
@@ -114,7 +119,7 @@ func update_current_action(next_action: BaseAction) -> String:
 
 func react_on_hit(hit_data: HitData) -> void:
 	if not current_state:
-		print_.warn(false, "no _curr_state", "player sm", "no hit applied, it's lost", hit_data)
+		__log_warn("no _curr_state", "player sm", "no hit applied, it's lost", hit_data)
 		return
 	hit_timer.initialise(0.4)
 	current_state.react_on_hit(hit_data)
@@ -141,3 +146,18 @@ func update(input_: InputPackage, delta: float) -> void:
 
 
 	current_state._update(input_, delta)
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "PlayerSM"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

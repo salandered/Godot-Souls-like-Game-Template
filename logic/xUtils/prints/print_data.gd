@@ -6,13 +6,11 @@ class LogData:
 	var add_prefix_: String
 	var text: String
 	var info_indents: int
-	var level: String
 
-	func _init(add_prefix__: String, text_: String, info_indents_: int, level_: String):
+	func _init(add_prefix__: String, text_: String, info_indents_: int):
 		self.add_prefix_ = add_prefix__
 		self.text = text_
 		self.info_indents = info_indents_
-		self.level = level_
 
 
 class PrintInstance:
@@ -28,4 +26,4 @@ class PrintInstance:
 		self.log_func = log_func_
 
 	func call_log_func(log_data: LogData) -> void:
-		log_func.call(log_data.add_prefix_, log_data.text, log_data.info_indents, log_data.level)
+		log_func.call(log_data.add_prefix_, log_data.text, log_data.info_indents)

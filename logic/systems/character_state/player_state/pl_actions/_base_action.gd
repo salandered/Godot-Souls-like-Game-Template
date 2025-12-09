@@ -191,7 +191,7 @@ const LOOP_LIKE_ACTIONS = [
 ## TODO: oh, can be done with usual functions 
 func time_remaining_for_smooth_switch(next_action_name: String) -> float:
 	if anim.is_looping:
-		print_.warn_raw(false, "Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
+		__log_warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
 		return Constants.BIG_MEANINGLESS_NUMBER
 	var action := container.l_action_by_name(next_action_name)
 	var _blend_time: float = action.blend_time.calculate_actual(action_name)
@@ -230,7 +230,7 @@ func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 		WeaponNames.smith_sword:
 			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
 		_:
-			__log_warn(true, "unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
+			__log_error("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
 	if _r and __log:
 		print_.prefix("// HURT")
 	return _r
@@ -264,9 +264,9 @@ var __LOG_OVERLAY_ANIM: bool = true
 
 @abstract func __log_function(prefix: String, ...parts: Array) -> void
 
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...parts: Array):
+func __log_error(what: String, where: String = "", fallback: String = "", ...parts: Array):
 	var _parts := pp.list_(parts)
-	print_.warn(crucial, what, where, fallback, _parts, "\n\t\t", action_name)
+	print_.warn(what, where, fallback, WarnLevel.PUSH_ERROR, _parts, "\n\t\t", action_name)
 
 
 func __log_ent(...parts: Array):

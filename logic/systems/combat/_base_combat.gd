@@ -41,7 +41,7 @@ func get_all_weapons() -> Array[BaseWeapon]:
 
 ## nullable
 func get_weapon(weapon_name: String) -> BaseWeapon:
-	return u.safe_get_dict_key(_weapons, weapon_name, null, Fallback.WARN_CRUCIAL)
+	return u.safe_get_dict_key(_weapons, weapon_name, null, WarnLevel.WARN_CRUCIAL)
 
 
 ## non nullable
@@ -111,7 +111,7 @@ func apply_hit(hit_data: HitData) -> void:
 func set_hit_data_to_all_weapons(hit_damage: float, anim_id: String) -> void:
 	var weapons := get_all_weapons()
 	if weapons.is_empty():
-		__log_warn(true, "no weapons", "set_hit_data_to_all_weapons", "return")
+		__log_error("no weapons", "set_hit_data_to_all_weapons", "return")
 		return
 	for weapon in weapons:
 		var hit_data := HitData.new(hit_damage, weapon.get_weapon_pp_name(), anim_id)
@@ -122,7 +122,7 @@ func set_hit_data_to_all_weapons(hit_damage: float, anim_id: String) -> void:
 func update_weapon_is_attacking(weapon_name: String, is_attacking: bool) -> void:
 	var weapon := get_weapon(weapon_name)
 	if not weapon:
-		__log_warn(true, "no weapon", "update_weapon_is_attacking", "return")
+		__log_error("no weapon", "update_weapon_is_attacking", "return")
 		return
 
 	_update_is_attacking(weapon, is_attacking)
@@ -138,7 +138,7 @@ func _update_is_attacking(weapon: BaseWeapon, is_attacking: bool):
 func reset_all_weapons() -> void:
 	var weapons := get_all_weapons()
 	if weapons.is_empty():
-		__log_warn(true, "no weapons", "reset_all_weapons", "return")
+		__log_error("no weapons", "reset_all_weapons", "return")
 		return
 	for weapon in weapons:
 		weapon.reset_hit_data()

@@ -300,8 +300,8 @@ func react_on_parry(_hit: HitData):
 
 # region: LOGS
 
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
-	print_.warn(crucial, what, where + "| in state " + pp.in_q(state_name), fallback, pp.list_(details))
+func __log_error(what: String, where: String = "", fallback: String = "", ...details: Array):
+	print_.warn(what, where + "| in state " + pp.in_q(state_name), fallback, WarnLevel.PUSH_ERROR, pp.list_(details))
 
 
 func __log_state_ent(...parts: Array):

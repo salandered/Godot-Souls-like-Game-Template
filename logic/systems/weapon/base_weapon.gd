@@ -36,7 +36,7 @@ var _is_attacking: bool = false
 var _hit_data: HitData = null
 
 
-var _signals: BaseWeaponSignals
+var _signal_container: BaseWeaponSignalContainer
 
 func _ready() -> void:
 	_weapon_hurt_box = get_weapon_hurt_box()
@@ -50,14 +50,17 @@ func _ready() -> void:
 		pass
 		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_pp_name()), "has no visuals")
 	
-	_signals = BaseWeaponSignals.new()
+	## each weapon has its own signals
+	_signal_container = BaseWeaponSignalContainer.new()
 
 
 	## SFX
-	set_whoosh_weapon_stream()
-	set_hit_weapon_stream()
-	var _audio_system := get_weapon_audio_system()
-	_audio_system.initialise(_signals, self, {})
+	var _weapon_sfx := _get_weapon_sfx()
+	if _weapon_sfx:
+		_set_whoosh_weapon_stream(_weapon_sfx)
+		_set_hit_weapon_stream(_weapon_sfx)
+		var _sfx_system := _get_weapon_sfx_system(_weapon_sfx)
+		_sfx_system.initialise(_signal_container, self, {})
 
 	_weapon_hurt_box.initialise()
 	initialise_implementation()
@@ -119,7 +122,7 @@ func is_in_contact_hitbox_list(hitbox: CharacterHitbox) -> bool:
 
 func add_hitbox_to_contact_list(hitbox: CharacterHitbox) -> void:
 	if is_in_contact_hitbox_list(hitbox):
-		print_.warn(false, "wanted to add hitbox to contact list. but its there already", "add_hitbox_to_contact_list", "not add", str(hitbox))
+		__log_error("wanted to add hitbox to contact list. but its there already", "add_hitbox_to_contact_list", "not add", str(hitbox))
 		return
 	__log_("Added", pp.in_q(hitbox), "to contact list", pp.in_q(_contact_hitbox_list))
 	_contact_hitbox_list.append(hitbox)
@@ -134,21 +137,34 @@ func reset_contact_hitbox_list() -> void:
 
 ## SFX
 
-@abstract func get_weapon_audio_system() -> BaseWeaponAudioSystem
+func _get_weapon_sfx() -> WeaponSFX:
+	if not _get_weapon_sfx_():
+		__log_error("no _get_weapon_sfx_", "", "all sfx set up is skipped for weapon")
+	return _get_weapon_sfx_()
 
 
-func get_sfx_whoosh_weapon_signal() -> Signal:
-	return _signals.get_SFX_whoosh_weapon()
+@abstract func _get_weapon_sfx_() -> WeaponSFX
 
 
-func get_sfx_hit_weapon_signal() -> Signal:
-	return _signals.get_SFX_hit_weapon()
+@abstract func _get_weapon_whoosh_stream() -> AudioStream
+
+@abstract func _get_hit_weapon_stream() -> AudioStream
 
 
-@abstract func set_whoosh_weapon_stream() -> void
+## public
+func get_signal_container() -> BaseWeaponSignalContainer:
+	return _signal_container
 
-@abstract func set_hit_weapon_stream() -> void
 
+func _get_weapon_sfx_system(weapon_sfx: WeaponSFX) -> BaseWeaponSFXSystem:
+	return weapon_sfx.get_sfx_system()
+
+
+func _set_whoosh_weapon_stream(weapon_sfx: WeaponSFX):
+	weapon_sfx.set_whoosh_weapon_stream(_get_weapon_whoosh_stream())
+
+func _set_hit_weapon_stream(weapon_sfx: WeaponSFX):
+	weapon_sfx.set_hit_weapon_stream(_get_hit_weapon_stream())
 
 ## in theory could be nullable
 # # @abstract func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream

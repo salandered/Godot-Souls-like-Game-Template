@@ -25,8 +25,8 @@ func _init(
 	end_offset = end_offset_
 
 
-## '../SFX/AnimFS' -> 'AnimFS'
-func get_audio_stream_player_name() -> String:
+## '../SFX/AAnimFS' -> 'AAnimFS'
+func get_anim_asp_name() -> String:
 	var _r := u.get_last_slash_part(track_name)
 	_r = _r.replace("$", "").replace("%", "")
 	return _r

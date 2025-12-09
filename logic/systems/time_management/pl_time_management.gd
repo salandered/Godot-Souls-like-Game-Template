@@ -74,7 +74,7 @@ func works_between(start: float, finish: float) -> bool:
 func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
-		print_.warn_raw(true, "passed_marker - no time - will return false")
+		__log_warn("passed_marker - no time - will return false")
 		return __reject()
 
 	if effective_time_spent() >= marker_time + add_time:
@@ -85,7 +85,7 @@ func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 func before_marker(marker_name: String) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
-		print_.warn_raw(true, "before_marker - no time - will return false", )
+		__log_warn("before_marker - no time - will return false", )
 		return __reject()
 
 	if effective_time_spent() < marker_time:
@@ -94,5 +94,12 @@ func before_marker(marker_name: String) -> bool:
 
 
 func __reject() -> bool:
-	print_.warn_raw(false, "TM rejected -1!")
+	__log_warn("TM rejected -1!")
 	return false
+
+
+func pp_name() -> String:
+	return "PlActionTimeManagement"
+
+func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
+	print_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))

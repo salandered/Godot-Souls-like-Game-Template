@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedLogger
 class_name SupportedActions
 
 
@@ -43,7 +43,7 @@ func by_name(requested_name: String) -> String:
 	## (because of convert_to_supported mechanic) 
 	## But we may prevent this in the future: we ll return default action by the same type. 
 	if not is_action_supported(requested_name):
-		print_.warn_raw(false, requested_name + " cant be find in supported actions: " + str(action_names))
+		__log_warn(requested_name + " cant be find in supported actions: " + str(action_names))
 	return requested_name
 
 
@@ -63,3 +63,18 @@ func __validation():
 		var value: Variant = _motion_type_to_default_action[type_]
 		assert(value is String and value != "")
 	assert(len(action_names) > 0, "action_names len empty")
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "SupportedActions"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

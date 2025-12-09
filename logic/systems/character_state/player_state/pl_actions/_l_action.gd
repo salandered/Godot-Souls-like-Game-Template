@@ -50,7 +50,7 @@ func turn_direction_by_target_angle(target_angle: float) -> String:
 	var turn_direction: String
 	if signf(target_angle) <= 0:
 		turn_direction = TurnData.TURN_DIR_RIGHT
-		if signf(target_angle) == 0: print_.warn_raw(false, "Turn angle is zero; defaulting to a 'right' turn.")
+		if signf(target_angle) == 0: __log_warn("Turn angle is zero; defaulting to a 'right' turn.")
 	else:
 		turn_direction = TurnData.TURN_DIR_LEFT
 	# prints("\t turn decision:", turn_direction)
@@ -85,11 +85,11 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_nam
 		_anim = container.l_action_by_name(action_name_).anim
 
 	if not _anim:
-		print_.warn_raw(false, "blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
+		__log_warn("blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
 	var _marker_time := _anim.get_marker_time_by_name(marker_name_)
 	if _marker_time == -1:
-		print_.warn_raw(false, "blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
+		__log_warn("blend_time_ == -1 inside calculate_blend_time_from_prev_anim_marker")
 		return default_value
 	blend_time_ = _anim.duration - _marker_time
 	return blend_time_

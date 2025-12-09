@@ -119,7 +119,7 @@ func _rotate_offset_locked(delta: float) -> void:
 	# var nest_mount_vec_len := (fc.nest.global_position - fc.mount.global_position).length()
 	# var delta_off_angle: float = pp.pp_v3_angle_deg(_off_before, lock_offset, false)
 	# var arc_len := snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
-	# __log_("[~~LOCK UPD rot ", u.fr(), "]",
+	# __log_("[~~LOCK UPD rot ", u.sfr(), "]",
 	# 	" angle_delta_deg=", str(delta_off_angle),
 	# 	" arc_len=", str(arc_len),
 	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", pp.round_01(lock_offset.length()),

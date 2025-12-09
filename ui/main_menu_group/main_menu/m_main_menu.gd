@@ -108,7 +108,7 @@ func _grab_initial_focus() -> void:
 
 func _load_specific_level(path: String) -> void:
 	if path.is_empty():
-		__log_ui.warn_(true, "path is empty", "_load_specific_level", "return", path)
+		__log_ui.warn_("path is empty", "_load_specific_level", "return", path)
 		return
 
 	# Ensure we aren't carrying over old state when jumping to a specific level

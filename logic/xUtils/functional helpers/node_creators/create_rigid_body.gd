@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedStaticLogger
 class_name RigidBodyCreator
 
 class PhysicsConfig:
@@ -41,7 +41,7 @@ static func create_rigid_body_from_mesh_instance(
 	use_geometry_center: bool = true
 ) -> RigidBody3D:
 	if not mesh_instance or not mesh_instance.mesh:
-		__log_warn(false, "Invalid MeshInstance3D or missing mesh", "", "return null", mesh_instance)
+		__log_error("Invalid MeshInstance3D or missing mesh", "", "return null", mesh_instance)
 		return null
 
 	if not physics_config:
@@ -98,7 +98,7 @@ static func _create_collision_shape(
 ) -> bool:
 	var convex_shape := mesh_instance.mesh.create_convex_shape(false)
 	if not convex_shape:
-		__log_warn(true, "Failed to create convex shape from mesh", "", "return null", mesh_instance)
+		__log_error("Failed to create convex shape from mesh", "", "return null", mesh_instance)
 		return false
 	
 	var collision_shape := CollisionShape3D.new()
@@ -129,14 +129,16 @@ static func _setup_collision_layers(rigid_body: RigidBody3D) -> void:
 	__log_("Collision layers set | layer:", Collision.Layers.ITEM_COL, "| mask:", Collision.Masks.ITEM_COL_MASK)
 
 
-# region __LOGS
+## __LOGS
+# region
 
+static func pp_name() -> String:
+	return "RigidBodyCreator"
 
-static func __log_(...parts: Array):
-	print_.prefix("RigidBodyCreator", pp.list_(parts))
+static func __LOG_B() -> bool:
+	return false
 
-static func __log_warn(cruical: bool, what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(cruical, what, pp.s(where, "RigidBodyCreator"), fallback, pp.list_(context))
-
+static func __LOG_INDENT() -> int:
+	return 0
 
 # endregion

@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedLogger
 class_name ActionModeSwitcher
 
 class Preset extends RefCounted:
@@ -71,7 +71,7 @@ func set_mode(custom_name: String):
 	elif _preset_two.mode_name == custom_name:
 		_curr_mode = MODE_NAME.TWO
 	else:
-		print_.warn_raw(false, "ActionModeSwitcher: No mode found with name", custom_name)
+		__log_warn("ActionModeSwitcher: No mode found with name " + custom_name)
 
 
 ## Sets the active mode using the internal enum
@@ -81,3 +81,18 @@ func set_mode_raw(mode: MODE_NAME):
 
 func get_all_anim_ids() -> Array[String]:
 	return [_preset_one.anim_id, _preset_two.anim_id]
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "ActionModeSwitcher"
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

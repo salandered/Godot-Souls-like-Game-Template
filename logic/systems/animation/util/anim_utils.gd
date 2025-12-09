@@ -1,11 +1,11 @@
-extends RefCounted
+extends RefCountedStaticLogger
 class_name AnimUtils
 
 
 static func is_track_exists(native_anim: Animation, track_prefix: String, param_name: String) -> bool:
 	var _track_name := track_prefix + param_name
 	if not native_anim:
-		print_.warn_raw(false, "")
+		__log_warn("")
 		return false
 	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
@@ -19,7 +19,7 @@ static func is_track_exists(native_anim: Animation, track_prefix: String, param_
 static func get_bool_value_from_track(native_anim: Animation, track_prefix: String, param_name: String, timestamp: float, default_value: bool = false) -> bool:
 	var _track_name := track_prefix + param_name
 	if not native_anim:
-		print_.warn_raw(false, "")
+		__log_warn("")
 		return default_value
 	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
@@ -35,11 +35,11 @@ static func get_bool_value_from_track(native_anim: Animation, track_prefix: Stri
 
 	# WARNING: Normally return value should be bool already. But there was a bug when it was not
 	if native_anim.track_get_key_count(_track) == 0: # no keys
-		print_.warn_raw(false, "Track '%s' has no keys, using default" % _track_name)
+		__log_warn("Track '%s' has no keys, using default" % _track_name)
 		return default_value
 
 	# try nearest key
-	print_.warn_raw(false, "Interpolation failed for '%s' at %.3f, trying nearest key lookup" % [_track_name, timestamp])
+	__log_warn("Interpolation failed for '%s' at %.3f, trying nearest key lookup" % [_track_name, timestamp])
 	var key_index := native_anim.track_find_key(_track, timestamp, Animation.FIND_MODE_NEAREST)
 	if key_index != -1:
 		var key_value: Variant = native_anim.track_get_key_value(_track, key_index)
@@ -58,6 +58,6 @@ static func assert_has_animation(animator: AnimationPlayer, anim_id: String, fat
 		assert(animator.has_animation(anim_id), pp.s("Animator", animator.name, "has no anim_id", pp.in_q(anim_id)))
 		return true
 	if not animator.has_animation(anim_id):
-		print_.warn(true, pp.s("Animator" + animator.name + "has no animation" + pp.in_q(anim_id)), "assert_has_animation", "skip")
+		__log_warn(pp.s("Animator" + animator.name + "has no animation" + pp.in_q(anim_id)), "assert_has_animation", "skip")
 		return false
 	return true

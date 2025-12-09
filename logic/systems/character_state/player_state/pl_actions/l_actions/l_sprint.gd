@@ -38,13 +38,13 @@ func on_enter_action(input_: InputPackage):
 		Leg.Act.idle_to_sprint:
 			var _root_vel_speed: Variant = player_sm.get_tranfer_data_by_key("root_vel_speed")
 			if _root_vel_speed == null:
-				__log_warn(true, "_root_vel_speed is null", "", "")
+				__log_error("_root_vel_speed is null", "", "")
 				speed_from_inherited.initialise(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
 			elif _root_vel_speed is float:
 				__log_action("_root_vel_speed / _inherited_speed", _root_vel_speed, _inherited_speed)
 				speed_from_inherited.initialise(_root_vel_speed + 0.4, default_sp.SPEED, 0.4)
 			else:
-				__log_warn(true, "_root_vel_speed is not float", "", "")
+				__log_error("_root_vel_speed is not float", "", "")
 				speed_from_inherited.initialise(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
 				
 		Leg.Act.run:

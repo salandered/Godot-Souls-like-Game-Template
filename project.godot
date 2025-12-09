@@ -38,7 +38,6 @@ M_AppConfig="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/app
 M_SceneLoader="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/scene_loader.tscn"
 M_ProjectMusicController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_music_controller.tscn"
 M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_ui_sound_controller.tscn"
-SfxType="*res://logic/systems/audio_system/sfx/sfx_main_types.gd"
 
 [debug]
 
@@ -110,7 +109,6 @@ folder_colors={
 "res://logic/entities/Enemies/phe_enemy/": "blue",
 "res://logic/systems/animation/": "orange",
 "res://logic/systems/animation/anim_manager/": "purple",
-"res://logic/systems/audio_system/": "yellow",
 "res://logic/systems/awareness/": "yellow",
 "res://logic/systems/camera/fancy-camera/": "teal",
 "res://logic/systems/character_state/phe_state/state_composites/": "blue",
@@ -122,6 +120,9 @@ folder_colors={
 "res://logic/systems/hurt_hit_box/": "red",
 "res://logic/systems/input/": "green",
 "res://logic/systems/input/pl_input/": "green",
+"res://logic/systems/sfx_anim_data_container/": "yellow",
+"res://logic/systems/sfx_anim_sig_emitter/": "orange",
+"res://logic/systems/sfx_audio_system/": "yellow",
 "res://logic/systems/sk_modifiers/": "red",
 "res://logic/systems/unsorted/": "purple",
 "res://logic/xUtils/": "green",

@@ -95,8 +95,8 @@ func lerp_position_(from: Variant, to: Variant, weight: float) -> Vector3:
 func __log_(...parts: Array):
 	fc.__log_(state_name, pp.list_(parts))
 
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
-	fc.__log_warn(crucial, what, where + " " + state_name, fallback, pp.list_(context))
+func __log_error(what: String, where: String = "", fallback: String = "", ...context: Array):
+	fc.__log_warn(what, where + " " + state_name, fallback, pp.list_(context))
 
 
 # endregion

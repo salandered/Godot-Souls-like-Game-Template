@@ -39,6 +39,8 @@ var _prev_leaf: BasePHELeaf
 
 var push_rigid_bodies_force: float = 8.0
 
+
+var __initialised: bool = false
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
 ##    => check root_motion_track of NativePlayer!
@@ -63,6 +65,14 @@ func initialise() -> void:
 		EAnimParamsContainer.get_all_params(),
 		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
 	
+
+	## only 1 weapon is supported for player
+	var e_weapons := combat.get_all_weapons()
+	# var _weapon_whoosh_signal := player_weapon.get_sfx_whoosh_weapon_signal()
+	# print("///////", player_weapon, _weapon_whoosh_signal)
+	# sfx_system.initialise(signals, self, {sfx_system.character_additional_data_key: self})
+	# anim_sfx_signal_emitter.initialise(signals, _weapon_whoosh_signal)
+
 	config.me = self
 	enemy_movement.me = self
 	container.me = self
@@ -70,11 +80,12 @@ func initialise() -> void:
 	container.accept_states()
 
 	visuals = get_descendants.mesh_instances(visuals_root, true)
-	for v: MeshInstance3D in visuals:
-		__log_(v.name)
+	# for v: MeshInstance3D in visuals:
+		# __log_(v.name)
 
 	_initialise_sm()
 
+	__initialised = true
 
 func _initialise_coll_collder():
 	assert(coll_collider)
@@ -141,6 +152,9 @@ func update_state_history(state_name_: String):
 
 
 func _process(delta: float) -> void:
+	if not __initialised:
+		return
+
 	state_machine._update(delta)
 	move_and_slide()
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
@@ -154,7 +168,7 @@ func _process(delta: float) -> void:
 func react_on_hit(hit_data: HitData) -> void:
 	var _curr_state := get_current_state()
 	if not _curr_state:
-		print_.warn(false, "no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
+		__log_error("no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
 	_curr_state.react_on_hit(hit_data)
 
@@ -193,7 +207,7 @@ func on_death_raised() -> void:
 	
 func shrink_coll_capsule():
 	if not coll_collider.shape is CapsuleShape3D:
-		__log_warn(true, "if not coll_collider.shape is CapsuleShape3D", "", "return")
+		__log_error("if not coll_collider.shape is CapsuleShape3D", "", "return")
 		return
 	var capsule_shape: CapsuleShape3D = coll_collider.shape
 	var _orig_height := capsule_shape.height
@@ -218,7 +232,8 @@ func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	rigids_container.global_position = self.global_position
 	
 	for visual_mesh: MeshInstance3D in mesh_list:
-		if not visual_mesh.mesh: continue
+		if not visual_mesh.mesh:
+			continue
 		await FrameUtils.wait_one_physics_frame()
 		var physics_config := RigidBodyCreator.PhysicsConfig.new(5.0, 1.5, 0.0, 2.5)
 		var rigid_body := RigidBodyCreator.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)

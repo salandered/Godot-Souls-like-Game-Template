@@ -155,7 +155,7 @@ func _switch_animation():
 		_custom_blend_time = 0.2
 	else:
 		_custom_blend_time = 0.3
-		print_.warn_raw(false, state_name + " _switch_animation but not from strafe anim O_o")
+		__log_warn(state_name + " _switch_animation but not from strafe anim O_o")
 	
 	anim = next_anim # only after sync_with_curr_loco_anim!
 	

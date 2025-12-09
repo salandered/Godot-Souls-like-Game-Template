@@ -154,12 +154,12 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		else:
 			# NOTE: we don't change current_attack_number here. is_ended should be true
 			if not _series_forgotten.is_initialised():
-				# __log_warn(false, "_series_forgotten init!")
+				# __log_error( "_series_forgotten init!")
 				_series_forgotten.initialise(0.1)
 				_reason += pp.s(em.warn, "series ended! parent not switches us! wait 0.1 sec and return one more move with idx 0")
 				return VerdictPH.new(_next_state, _reason)
 			elif _series_forgotten.update(delta):
-				__log_warn(false, "_series_forgotten update!")
+				__log_error("_series_forgotten update!")
 				_reason += pp.s("0.1 passed, one more move")
 				_series_forgotten.turn_off()
 				_next_state = _chosen_attack_series[0]
@@ -171,12 +171,12 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 func pick_attack_series() -> Array[String]:
 	if get_attack_series_list().is_empty():
-		__log_warn(true, "pick_attack_series: 'attack_series_list' list is empty!", "Fallback: return []")
+		__log_error("pick_attack_series: 'attack_series_list' list is empty!", "WarnLevel: return []")
 		return []
 	var picked_idx := pick_series_idx()
 	
 	if picked_idx < 0 or picked_idx >= get_attack_series_list().size():
-		__log_warn(false, "picked_idx", picked_idx, "is outside the", get_attack_series_list(), "Fallback: will pick 0 index")
+		__log_error("picked_idx", picked_idx, "is outside the", get_attack_series_list(), "WarnLevel: will pick 0 index")
 		picked_idx = 0
 		
 	var picked_series: Array = get_attack_series_list()[picked_idx]

@@ -72,7 +72,6 @@ func _ready() -> void:
 	__log_("--- CharacterHitbox ready ---")
 
 
-
 func _physics_process(delta: float) -> void:
 	if has_overlapping_areas():
 		for area in get_overlapping_areas():
@@ -115,7 +114,7 @@ func on_area_contact(incoming_area: Node3D):
 	var _weapon_area := incoming_area as WeaponHurtBox
 	var weapon: BaseWeapon = _weapon_area.base_weapon
 	if not weapon:
-		__log_warn(false, "weapon is null", "on_area_contact", "return")
+		__log_error("weapon is null", "on_area_contact", "return")
 		return
 
 	if _is_weapon_mine(weapon):
@@ -141,7 +140,7 @@ func on_area_contact(incoming_area: Node3D):
 
 	var hit_data := weapon.get_hit_data()
 	if not hit_data:
-		__log_warn(false, "weapon hit data is null", "on_area_contact", "return")
+		__log_error("weapon hit data is null", "on_area_contact", "return")
 		return
 
 	# if combat is PlayerCombat:

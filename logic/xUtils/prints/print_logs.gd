@@ -8,8 +8,8 @@ const _FRAME_PRINT := true
 
 static var DEV_PRINT := PrintData.PrintInstance.new(LogToggler.DEV_B, "dev", 0, prefix)
 
-static func dev(add_prefix_: String, text: Variant = "", info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(DEV_PRINT, add_prefix_, text, info_indents, level)
+static func dev(add_prefix_: String, text: Variant = "", info_indents: int = 0):
+	_generic(DEV_PRINT, add_prefix_, text, info_indents)
 
 # region: CONTAINER
 
@@ -17,11 +17,11 @@ static var CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.CONTAINER_B
 static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.E_CONTAINER_B, "Container", 0, prefix)
 
 
-static func container(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(CONTAINER_PRINT, add_prefix_, text, info_indents, level)
+static func container(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(CONTAINER_PRINT, add_prefix_, text, info_indents)
 
-static func e_container(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(E_CONTAINER_PRINT, add_prefix_, text, info_indents, level)
+static func e_container(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(E_CONTAINER_PRINT, add_prefix_, text, info_indents)
 
 
 # endregion
@@ -32,12 +32,12 @@ static var COMBO_PRINT := PrintData.PrintInstance.new(LogToggler.COMBO_B, "Combo
 static var FIGHT_PRINT := PrintData.PrintInstance.new(LogToggler.FIGHT_B, "⚔️", 0, prefix)
 
 
-static func combo(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(COMBO_PRINT, add_prefix_, text, info_indents, level)
+static func combo(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(COMBO_PRINT, add_prefix_, text, info_indents)
 
 
-static func fight(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(FIGHT_PRINT, add_prefix_, text, info_indents, level)
+static func fight(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(FIGHT_PRINT, add_prefix_, text, info_indents)
 
 # endregion
 
@@ -51,23 +51,23 @@ static var PSM_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "PSM", 0, 
 static func any_action_anim(
 	add_prefix_: String, anim_name: String,
 	blend_time, start_time_offset, prev_act_name,
-	info_indents: int = 0, level: String = LogL.NOTSET):
+	info_indents: int = 0):
 	var msg := pp.s(
 		"anim", pp.in_q(anim_name),
 		"blend t", blend_time,
 		"start off", start_time_offset,
 		"prev", pp.in_q(prev_act_name)
 		)
-	_generic(ACTION_ANIM, add_prefix_, msg, info_indents, level)
+	_generic(ACTION_ANIM, add_prefix_, msg, info_indents)
 
-static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(PSM_CHECK_TRANS_PRINT, add_prefix_, text, info_indents, level)
+static func psm_check_trans(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(PSM_CHECK_TRANS_PRINT, add_prefix_, text, info_indents)
 
-static func psm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(PSM_ACTION, add_prefix_, text, info_indents, level)
+static func psm_action(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(PSM_ACTION, add_prefix_, text, info_indents)
 
-static func psm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(PSM_PRINT, add_prefix_, text, info_indents, level)
+static func psm(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(PSM_PRINT, add_prefix_, text, info_indents)
 
 
 # endregion
@@ -82,7 +82,7 @@ static var LSM_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "LSM",
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 	is_moving, is_reverse_moving, is_pure_reverse_moving, text, decision,
-	info_indents: int = 0, level: String = LogL.NOTSET):
+	info_indents: int = 0):
 	# Build custom message first
 	if is_reverse_moving == true:
 		is_reverse_moving = str(is_reverse_moving) + em.pin
@@ -95,19 +95,19 @@ static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 		"pure_reverse", str(is_pure_reverse_moving) + ",",
 		text, "=>", decision)
 	
-	_generic(LSM_BEH_CH, add_prefix_, msg, info_indents, level)
+	_generic(LSM_BEH_CH, add_prefix_, msg, info_indents)
 
-static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(LSM_BEH_PRINT, add_prefix_, text, info_indents, level)
+static func lsm_beh(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(LSM_BEH_PRINT, add_prefix_, text, info_indents)
 
-static func lsm_action_strafe(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(LSM_ACTION_STRAFE, add_prefix_, text, info_indents, level)
+static func lsm_action_strafe(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(LSM_ACTION_STRAFE, add_prefix_, text, info_indents)
 
-static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(LSM_ACTION, add_prefix_, text, info_indents, level)
+static func lsm_action(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(LSM_ACTION, add_prefix_, text, info_indents)
 
-static func lsm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(LSM_PRINT, add_prefix_, text, info_indents, level)
+static func lsm(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(LSM_PRINT, add_prefix_, text, info_indents)
 
 
 # endregion
@@ -117,11 +117,11 @@ static func lsm(add_prefix_: String, text: String, info_indents: int = 0, level:
 static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(LogToggler.input_gathering_B, "Input", 0, prefix)
 static var FANCY_CAM_PRINT := PrintData.PrintInstance.new(LogToggler.FANCY_CAM_B, "🎥 Cam", 0, prefix)
 
-static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(INPUT_GATHERING_PRINT, add_prefix_, text, info_indents, level)
+static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0):
+	_generic(INPUT_GATHERING_PRINT, add_prefix_, text, info_indents)
 
-static func fancy_cam(add_prefix_: String, text: Variant, info_indents: int = 0, level: String = LogL.NOTSET):
-	_generic(FANCY_CAM_PRINT, add_prefix_, text, info_indents, level)
+static func fancy_cam(add_prefix_: String, text: Variant, info_indents: int = 0):
+	_generic(FANCY_CAM_PRINT, add_prefix_, text, info_indents)
 
 
 # endregion
@@ -135,7 +135,7 @@ static var PHE_SM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_B, "🗿",
 
 static func phe_anim(add_prefix_: String, anim_name: String,
 	blend_time, start_time_offset, sp_scale, prev_leaf_state,
-	info_indents: int = 0, level: String = LogL.NOTSET):
+	info_indents: int = 0):
 	var msg := pp.s(
 		"anim", pp.in_q(anim_name),
 		"blend-t", blend_time,
@@ -143,27 +143,27 @@ static func phe_anim(add_prefix_: String, anim_name: String,
 		"sp-scale", sp_scale,
 		" (prev", pp.in_q(prev_leaf_state), ")"
 		)
-	_generic(PHE_ANIM_PRINT, add_prefix_, msg, info_indents, level)
+	_generic(PHE_ANIM_PRINT, add_prefix_, msg, info_indents)
 	
 
 static func phe_overlay_anim(add_prefix_: String, anim_name: String,
 	overlay_config: OverlayConfig,
 	start_time_offset = 0.0, sp_scale: float = 1.0,
-	info_indents: int = 0, level: String = LogL.NOTSET):
+	info_indents: int = 0):
 	var msg := pp.s(
 		"anim", pp.in_q(anim_name),
 		"", overlay_config,
 		"start-off", start_time_offset,
 		"sp-scale", sp_scale,
 		)
-	_generic(PHE_ANIM_PRINT, add_prefix_, msg, info_indents, level)
+	_generic(PHE_ANIM_PRINT, add_prefix_, msg, info_indents)
 	
 	
-static func phe_check(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
-	_generic(PHE_CHECK_PRINT, add_prefix_, text, info_indents, level, freq)
+static func phe_check(add_prefix_: String, text: String, info_indents: int = 0, freq: int = 1):
+	_generic(PHE_CHECK_PRINT, add_prefix_, text, info_indents, freq)
 
-static func phe_sm(add_prefix_: String, text: String, info_indents: int = 0, level: String = LogL.NOTSET, freq: int = 1):
-	_generic(PHE_SM_PRINT, add_prefix_, text, info_indents, level, freq)
+static func phe_sm(add_prefix_: String, text: String, info_indents: int = 0, freq: int = 1):
+	_generic(PHE_SM_PRINT, add_prefix_, text, info_indents, freq)
 
 
 # endregion
@@ -178,16 +178,15 @@ static func _generic(
 		add_prefix_: String,
 		text: Variant,
 		info_indents: int,
-		level: String,
 		freq: int = 1
 	) -> void:
 	if print_data == null or print_data.print_bool == null:
 		# prevents problems on project start up. 
 		return
-	if not print_data.print_bool and level != LogL.FORCE_PRINT: return
+	if not print_data.print_bool: return
 	if not _is_freq_satisfied(1, freq): return
 
-	var log_data := PrintData.LogData.new(add_prefix_, str(text), info_indents, level)
+	var log_data := PrintData.LogData.new(add_prefix_, str(text), info_indents)
 	log_data.add_prefix_ = print_data.const_prefix + " " + log_data.add_prefix_
 	if log_data.info_indents == 0: log_data.info_indents = print_data.const_indent
 	print_data.call_log_func(log_data)
@@ -196,7 +195,7 @@ static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	var result_freq := maxi(global_freq, arg_freq)
 	assert(result_freq > 0)
 
-	if result_freq == 1 or u.fr(false) % result_freq == 0:
+	if result_freq == 1 or u.ifr() % result_freq == 0:
 		return true
 	return false
 
@@ -209,30 +208,20 @@ static func prefix_s(...parts: Array[Variant]):
 	var _msg = pp.list_(parts.slice(1))
 	prefix(_prefix, _msg)
 
-static func prefix(prefix_: String, text: String = "", info_indents: int = 0, level: String = LogL.NOTSET):
+static func prefix(prefix_: String, text: String = "", info_indents: int = 0):
 	var tabs_prefix := __calculate_tab_prefix(info_indents)
+	
 	prefix_ = prefix_.strip_edges()
 	prefix_ = pp.in_sq(prefix_)
-	match level:
-		LogL.DEBUG:
-			prefix_ = LogL.DEBUG + " " + prefix_
-		LogL.INFO:
-			prefix_ = LogL.INFO + " " + prefix_
-		LogL.WARN:
-			prefix_ = LogL.WARN + " " + prefix_
-		LogL.ERROR:
-			prefix_ = LogL.ERROR + " " + prefix_
-
-	prefix_ = prefix_.strip_edges()
 	
 	var fr_ := ""
 	if _FRAME_PRINT:
 		var _metka := " "
-		if u.fr(false) % 15 == 0 and u.fr(false) != 0:
+		if u.ifr() % 15 == 0 and u.ifr() != 0:
 			_metka = "-"
-		if u.fr(false) % 60 == 0 and u.fr(false) != 0:
+		if u.ifr() % 60 == 0 and u.ifr() != 0:
 			_metka = "x"
-		fr_ = "%6s" % [u.fr() + "|" + _metka + " "]
+		fr_ = "%6s" % [u.sfr() + "|" + _metka + " "]
 	
 	var result_msg = tabs_prefix + "  " + prefix_ + "  " + text
 	
@@ -306,8 +295,8 @@ static func node_info(node: Node, prefix_: String = "", info_indents: int = 0):
 	# print("Groups:", ", ".join(groups) if groups.size() > 0 else "(none)")
 
 
-static func collisions(node: Node, info_indents: int = 0, layer_: bool = true, level: String = LogL.NOTSET):
-	if not LogToggler.COLLISION_B and level != LogL.FORCE_PRINT: return
+static func collisions(node: Node, info_indents: int = 0, layer_: bool = true):
+	if not LogToggler.COLLISION_B: return
 	print("COLLISION LAYER AND MASK")
 	var layer = "none"
 	if layer_: layer = node.collision_layer
@@ -335,17 +324,40 @@ static func __get_bit_position(value: int) -> int:
 			return i
 	return -1
 
-static func warn_raw(crucial: bool = false, ...parts: Array):
-	var _msg = em.warn + "warning " + pp.list_(parts)
-	if crucial: _msg = em.crucial_x2 + _msg
-	print("\t", _msg)
+
+static func _warn(_msg: String, warn_level: String = WarnLevel.PUSH_ERROR):
+	_msg = pp.s(em.warn, "WARNING |", _msg)
+	var _msg_crucial = pp.s(em.crucial_x2, _msg)
+	match warn_level:
+		## soft equals warn here
+		WarnLevel.SILENT:
+			pass
+		WarnLevel.WARN:
+			print("\t", _msg)
+		WarnLevel.WARN_CRUCIAL:
+			print("\t", _msg_crucial)
+		WarnLevel.ASSERT:
+			push_error(_msg_crucial)
+			assert(false, _msg_crucial)
+		WarnLevel.PUSH_ERROR:
+			push_error(_msg_crucial)
+		WarnLevel.PUSH_WARNING:
+			push_warning(_msg)
+		_:
+			prints("\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
+			push_error(_msg_crucial)
 
 
-static func warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
-	var _msg = "Problem: %s. Where: '%s'. Fallback: %s" % [what, where, fallback]
+static func warn(
+		what: String,
+		where: String,
+		fallback: String,
+		warn_level: String = WarnLevel.PUSH_ERROR,
+		...details: Array):
+	var _msg = "Problem: %s. Where: '%s'. Fallback '%s'. [%s]" % [what, where, fallback, warn_level]
 	if not details.is_empty():
-		_msg += " Details: " + pp.list_(details)
-	warn_raw(crucial, _msg)
+		_msg += "| Details: " + pp.list_(details)
+	_warn(_msg, warn_level)
 	
 
 static func note(bright: bool, ...parts: Array):

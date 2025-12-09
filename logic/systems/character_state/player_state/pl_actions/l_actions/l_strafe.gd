@@ -260,7 +260,7 @@ func _switch_animation(is_opposite_change: bool):
 		_custom_blend_time = 0.24 if is_opposite_change else 0.3
 	else:
 		_custom_blend_time = 0.3
-		print_.warn_raw(false, action_name + "_switch_animation but not from strafe anim O_o")
+		__log_warn(action_name + "_switch_animation but not from strafe anim O_o")
 	
 	anim = next_anim # only after sync_with_curr_loco_anim!
 

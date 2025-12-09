@@ -41,15 +41,17 @@ func get_weapon_visuals() -> MeshInstance3D:
 
 ## SFX
 
-func get_weapon_audio_system() -> BaseWeaponAudioSystem:
-	return weapon_sfx.get_audio_system()
+
+func _get_weapon_sfx_() -> WeaponSFX:
+	return weapon_sfx
 
 
-func set_whoosh_weapon_stream():
-	weapon_sfx.set_whoosh_weapon_stream(WEAPON_WHOOSH)
+func _get_weapon_whoosh_stream() -> AudioStream:
+	return WEAPON_WHOOSH
 
-func set_hit_weapon_stream():
-	weapon_sfx.set_hit_weapon_stream(SWORD_HIT_BONES)
+func _get_hit_weapon_stream() -> AudioStream:
+	return SWORD_HIT_BONES
+
 
 # func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream:
 # 	for material in hit_sounds.keys():

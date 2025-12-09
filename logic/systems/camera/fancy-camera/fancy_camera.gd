@@ -85,6 +85,7 @@ var accumulated_mouse_delta := Vector2.ZERO
 var FREE_STATE_NAME := "free_state"
 var LOCKED_STATE_NAME := "locked_state"
 
+var __initialised: bool = false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -134,6 +135,7 @@ func initialise() -> void:
 	
 	__dev_initialise()
 	
+	__initialised = true
 	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
 
 
@@ -150,6 +152,8 @@ func is_free_state():
 
 
 func _process(delta: float) -> void:
+	if not __initialised:
+		return
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
 	# NOTE: this is second place when we gather input (main being in pl model for pl SM)
 	#   And i currently think it's ok for different systems to listen to input. 
@@ -188,7 +192,7 @@ func _consider_switching_state(input_: InputPackage):
 			if input_.target_lock.tap:
 				_switch_free_from_locked("input_.target_lock.tap")
 		_:
-			__log_warn(true, "unknown current state!", "", "", current_state.state_name)
+			__log_error("unknown current state!", "", "", current_state.state_name)
 
 
 func _switch_free_from_locked(reason: String = ""):
@@ -226,9 +230,11 @@ func _input(event: InputEvent) -> void:
 func __log_(_prefix: String, ...parts: Array):
 	print_.fancy_cam(_prefix, pp.list_(parts))
 
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...context: Array):
-	print_.warn(crucial, what, where + " FancyCam", fallback, pp.list_(context))
+func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
+	print_.warn(what, where + " FancyCam", fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
 
+func __log_error(what: String, where: String = "", fallback: String = "", ...context: Array):
+	print_.warn(what, where + " FancyCam", fallback, WarnLevel.PUSH_ERROR, pp.list_(context))
 
 # endregion
 

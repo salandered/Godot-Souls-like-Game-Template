@@ -13,7 +13,6 @@ var filter_enemy_body: bool = false
 
 func on_area_entered(incoming_area: Area3D):
 	# __log_("area entered with", incoming_area)
-
 	if incoming_area is WeaponHurtBox:
 		# __log_("area entered with WeaponHurtBox", incoming_area)
 		var _weapon_area := incoming_area as WeaponHurtBox
@@ -77,10 +76,16 @@ func apply_state_filters_for_character(body_area: CharacterHitbox) -> bool:
 	return true
 
 
-## __LOG
+# ## __LOGS
+# # region
 
-func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
-	print_.warn(crucial, what, name + " " + where, fallback, pp.list_(details))
+func pp_name() -> String:
+	return "BreakableColumnArea"
 
-func __log_(...parts: Array):
-	print_.prefix(name, pp.list_(parts))
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# # endregion

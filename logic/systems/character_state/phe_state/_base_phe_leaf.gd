@@ -48,7 +48,7 @@ func _on_enter_state() -> void:
 
 
 	if __is_entered:
-		__log_warn(true, "Already entered")
+		__log_error("Already entered")
 	__is_entered = true
 
 	on_enter_state()
@@ -60,7 +60,7 @@ func _on_enter_state() -> void:
 func _on_exit_state() -> void:
 	__log_ext("")
 	if not __is_entered:
-		__log_warn(true, "Calling exit while not entered")
+		__log_error("Calling exit while not entered")
 	__is_entered = false
 
 	on_exit_state()
@@ -215,7 +215,7 @@ func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 		WeaponNames.bg_aura_weapon:
 			_r = anim_params_container.is_aura_hurts(anim.native_anim, effective_time_spent_unscaled())
 		_:
-			__log_warn_v2(false, "unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
+			__log_warn_v2("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
 	if _r and __log:
 		print_.prefix("// HURT")
 	return _r

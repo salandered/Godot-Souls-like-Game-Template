@@ -1,4 +1,4 @@
-extends Node
+extends BaseNodeSystem
 class_name LegsBehavior
 ## Legs SM consists of states called LegsBehavior. LegsBehavior is also a SM.
 ## `LegsBehavior` manages `LegsActions`, and legs actions live in a shared pool 
@@ -56,7 +56,7 @@ func _on_enter_behavior(input_: InputPackage):
 ## behaviors with one supported action should not override 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	if len(supported_actions.action_names) > 1:
-		print_.warn_raw(false, "default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
+		__log_warn("default choose_action called when supported_actions.action_names > 1 for " + behavior_name)
 	return LNextActionVerdict.new(supported_actions.action_names[0])
 
 
@@ -75,7 +75,7 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 	
 	# VALIDATE THE SWITCH
 	if next_action_name == "":
-		print_.warn_raw(false, "Next action is empty str. This is normally should not happen ❌. Not switching from" + curr_action_name)
+		__log_warn("Next action is empty str. This is normally should not happen ❌. Not switching from" + curr_action_name)
 		return
 
 	if curr_action_name == next_action_name:
@@ -130,3 +130,18 @@ func __log_decision_data(input_: InputPackage, next_action_name: String, ...addi
 		is_pure_reverse_moving(input_),
 		pp.array_(additional_checks),
 		next_action_name)
+
+
+# ## __LOGS
+# # region
+
+func pp_name() -> String:
+	return behavior_name
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# # endregion

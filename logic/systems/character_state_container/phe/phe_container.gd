@@ -1,6 +1,6 @@
 @tool
 @icon("res://-assets-/x_icons/white/icon_grid.png")
-extends Node
+extends BaseNodeSystem
 class_name PHContainer
 
 @onready var leaf_state_pool: Node = %LeafStatePool
@@ -123,7 +123,7 @@ var _states: Dictionary[String, BasePHEState]
 ## returns null if no state found
 func get_state_by_name(state_name: String) -> BasePHEState:
 	if not _states.has(state_name):
-		print_.warn_raw(true, pp.s("_states dict doesn't have ", pp.in_q(state_name)))
+		__log_warn(pp.s("_states dict doesn't have ", pp.in_q(state_name)))
 		return null
 	return _states[state_name]
 
@@ -176,7 +176,7 @@ func _accept_states():
 
 		var state_data: _CSData = node_to_composite_state_data.get(node.get_name())
 		if not state_data:
-			print_.warn_raw(false, pp.s("_CSData for", node.get_name(), "not found, skipping"))
+			__log_warn(pp.s("_CSData for", node.get_name(), "not found, skipping"))
 			continue
 
 		__accept_base_state(node, state_data)
@@ -187,7 +187,7 @@ func _accept_states():
 
 		var lst_data: _LStData = node_to_leaf_state_data.get(node.get_name())
 		if not lst_data:
-			print_.warn_raw(false, "_LStData for", node.get_name(), "not found, skipping")
+			__log_warn("_LStData for", node.get_name(), "not found, skipping")
 			continue
 
 		var _anim := me.anim_container.get_by_anim_id(lst_data.anim_data.anim_id)
@@ -197,3 +197,18 @@ func _accept_states():
 		assert(node.anim and node.anim.anim_id, "node anim problem")
 
 		__accept_base_state(node, lst_data)
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "PHContainer"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

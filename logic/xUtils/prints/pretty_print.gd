@@ -89,16 +89,16 @@ static func vec2(v: Vector2) -> String:
 	return "(%4.2f %4.2f)" % [v.x, v.y]
 
 
-static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = false) -> String:
+static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = false, one_level: bool = false) -> String:
 	if json:
 		return JSON.stringify(_dict_, "\t")
 	if _dict_.is_empty():
 		return "{}"
-	var r = __recursive_dict(_dict_, "", one_string)
+	var r = __recursive_dict(_dict_, "", one_string, one_level)
 	return u.cut_string(r)
 
 
-static func list_(parts: Array, json: bool = false, max_length = 500) -> String:
+static func list_(parts: Array, json: bool = false, max_length = 800) -> String:
 	if json:
 		return JSON.stringify(parts, "\t")
 	if parts.size() == 0:
@@ -148,7 +148,7 @@ static func anim_n(anim_id: String) -> String:
 
 # region: inner helpers
 
-static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string: bool = false) -> String:
+static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string: bool = false, one_level: bool = false) -> String:
 	var r := "" if one_string else "\n"
 	var next_indent := "" if one_string else indent + "\t"
 	
@@ -159,7 +159,10 @@ static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string
 		if value_ is float:
 			value_str = str(round_001(value_))
 		elif value_ is Dictionary:
-			value_str = __recursive_dict(value_, next_indent)
+			if one_level:
+				value_str = "<Dict>"
+			else:
+				value_str = __recursive_dict(value_, next_indent)
 		else:
 			value_str = in_q(str(value_)) # str() for safety
 		

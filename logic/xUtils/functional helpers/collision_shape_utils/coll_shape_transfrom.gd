@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedStaticLogger
 class_name CollShapeTranform
 
 
@@ -6,7 +6,7 @@ class_name CollShapeTranform
 ## provide capsule size mult values
 static func shrink_coll_shape_capsule_size(coll_shape: CollisionShape3D, radius_mult: float = 0.7, height_mult: float = 0.6) -> void:
 	if not coll_shape.shape is CapsuleShape3D:
-		__log_warn(false, "coll_shape.shape is not CapsuleShape3D; not supported", "shrink_coll_shape_capsule_size", "return")
+		__log_error("coll_shape.shape is not CapsuleShape3D; not supported", "shrink_coll_shape_capsule_size", "return")
 		return
 	var shape: CapsuleShape3D = coll_shape.shape
 	var _orig_radius := shape.radius
@@ -23,7 +23,7 @@ static func shrink_coll_shape_capsule_size(coll_shape: CollisionShape3D, radius_
 ## NOTE: consider duplication shape before calling 
 static func set_coll_shape_capsule_size(coll_shape: CollisionShape3D, rad: float, height: float) -> void:
 	if not coll_shape.shape is CapsuleShape3D:
-		__log_warn(false, "coll_shape.shape is not CapsuleShape3D; not supported", "set_coll_shape_capsule_size", "return")
+		__log_error("coll_shape.shape is not CapsuleShape3D; not supported", "set_coll_shape_capsule_size", "return")
 		return
 	var shape: CapsuleShape3D = coll_shape.shape
 
@@ -35,15 +35,16 @@ static func set_coll_shape_capsule_size(coll_shape: CollisionShape3D, rad: float
 	shape.radius = rad
 	shape.height = height
 
+
 # region: __LOGS
 
+static func pp_name() -> String:
+	return "CollShapeTranform"
 
-static var LOG_B: bool = false
+static func __LOG_B() -> bool:
+	return false
 
-static func __log_(...parts: Array):
-	if LOG_B: print_.prefix("CollShapeTranform", pp.list_(parts))
-
-static func __log_warn(crucial: bool, what: String, where: String, fallback: String, ...details: Array):
-	print_.warn(crucial, what, pp.s(where, "CollShapeTranform"), fallback, pp.list_(details))
+static func __LOG_INDENT() -> int:
+	return 0
 
 # endregion

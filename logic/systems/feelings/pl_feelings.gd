@@ -27,6 +27,8 @@ func initialise() -> void:
 		FATIGUE_STATUS: false
 	}
 
+	__initialised = true
+
 
 func is_player() -> bool:
 	return true

@@ -88,13 +88,13 @@ func _ready() -> void:
 			TYPE_COLOR: default_value = Color.WHITE
 			TYPE_VECTOR2I: default_value = Vector2i(1152, 648) # resolution
 			TYPE_VECTOR2: default_value = Vector2(1152, 648)
-			_: __log_ui.warn_(true, "non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
+			_: __log_ui.warn_("non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
 		
 		if default_value != null:
-			__log_ui.warn_(false, "Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
+			__log_ui.warn_("Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
 
 	if default_value == null:
-		__log_ui.warn_(true, "Option Control has NULL default_value", "M_OptionControl", "", "Option Name/Section/Key", [option_name, section, key])
+		__log_ui.warn_("Option Control has NULL default_value", "M_OptionControl", "", "Option Name/Section/Key", [option_name, section, key])
 
 	_set_value(_get_setting(default_value))
 	for child in get_children():

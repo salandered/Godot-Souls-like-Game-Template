@@ -50,7 +50,7 @@ func _on_enter_state() -> void:
 	me.update_state_history(state_name)
 
 	if __is_entered:
-		__log_warn(true, "Already entered")
+		__log_error("Already entered")
 	__is_entered = true
 
 	
@@ -69,7 +69,7 @@ func _on_enter_state() -> void:
 func _on_exit_state() -> void:
 	__log_ext("")
 	if not __is_entered:
-		__log_warn(true, "Calling exit while not entered")
+		__log_error("Calling exit while not entered")
 	__is_entered = false
 
 	if get_current_substate() != null:
@@ -115,7 +115,7 @@ func _update(delta: float) -> void:
 	if get_current_substate() != null:
 		get_current_substate()._update(delta)
 	else:
-		__log_warn(true, "_update: __current_substate is null, cannot update.")
+		__log_error("_update: __current_substate is null, cannot update.")
 
 
 func works_longer_than_fatigue() -> bool:
@@ -138,15 +138,15 @@ func get_safe_curr_sbs_name() -> String:
 func set_current_substate(next_state_name: String) -> void:
 	var _next_substate := container.get_state_by_name(next_state_name)
 	if not _next_substate:
-		__log_warn(true, "set_current_substate: state not found", next_state_name, "Fallback: return, not set")
+		__log_error("set_current_substate: state not found", next_state_name, "WarnLevel: return, not set")
 		return
 
 	if not _next_substate.validate_substate_depth(state_depth):
-		__log_warn(true, "set_current_substate: depth issue. Curr depth", state_depth, "next_state_name", next_state_name, "Fallback: return, not set")
+		__log_error("set_current_substate: depth issue. Curr depth", state_depth, "next_state_name", next_state_name, "WarnLevel: return, not set")
 		return
 	
 	if not supported_substates.is_state_supported(next_state_name):
-		__log_warn(true, "set_current_substate: not supported. ", supported_substates.__pp_state_not_supported(next_state_name), state_depth, "Fallback: return, not set")
+		__log_error("set_current_substate: not supported. ", supported_substates.__pp_state_not_supported(next_state_name), state_depth, "WarnLevel: return, not set")
 		return
 
 	__current_substate = _next_substate
@@ -163,7 +163,7 @@ func _check_substate_transition(delta: float) -> VerdictPH:
 	var _reason := ""
 	var current_substate_ := get_current_substate()
 	if not current_substate_: # DANGER: should not happen! very crucial
-		print_.warn_raw(false, "no current_substate_ in _check_substate_transition. returning empty verdict")
+		__log_error("no current_substate_ in _check_substate_transition. returning empty verdict")
 		return VerdictPH.new()
 	var _sbs_verdict := check_substate_transition(delta, current_substate_, "", "")
 	
@@ -183,7 +183,7 @@ func _check_substate_transition(delta: float) -> VerdictPH:
 func _choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	var _initial_sbs_verdict := choose_initial_substate(_next_state, _reason)
 	if not _initial_sbs_verdict.needs_switch():
-		__log_warn_v2(true, "returned empty verdict!", "choose_initial_substate", "return first supported sbs")
+		__log_warn_v2("returned empty verdict!", "choose_initial_substate", "return first supported sbs")
 		_initial_sbs_verdict.next_state = supported_substates.get_first_one()
 	return _initial_sbs_verdict
 
@@ -235,7 +235,7 @@ func works_less_than(time: float) -> bool:
 func react_on_hit(hit_data: HitData) -> void:
 	var _curr_sbs := get_current_substate()
 	if not _curr_sbs:
-		__log_warn_v2(false, "no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
+		__log_warn_v2("no _curr_sbs", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
 	_curr_sbs.react_on_hit(hit_data)
 

@@ -73,3 +73,15 @@ func dev_initialise():
 
 # func _input(event: InputEvent):
 # 	look_at_point.global_position.y = u._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)
+
+
+# ## __LOGS
+# # region
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# # endregion

@@ -1,2 +1,0 @@
-extends RefCounted
-class_name BaseSignals

@@ -161,11 +161,11 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 # from on enter match turn
 	# var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
 	# if raw_turn_data == null:
-		# prints(u.fr(), "no 'turn_data' data. assuming turn completed")
+		# prints(u.sfr(), "no 'turn_data' data. assuming turn completed")
 		# curr_turn.hard_complete()
 	# else:
 		# curr_turn.initialise_from_dict(raw_turn_data)
-		# prints(u.fr(), " Inherited turn:", str(curr_turn))
+		# prints(u.sfr(), " Inherited turn:", str(curr_turn))
 
 # from update
 	# if COMPLETE_ROOT_TURN_FEATURE and not curr_turn.turn_completed:

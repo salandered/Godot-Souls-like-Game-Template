@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3bogm2cs375"]
+[gd_scene load_steps=5 format=3 uid="uid://d02imm333vy7t"]
 
 [ext_resource type="Script" uid="uid://ceqyauwxu5frm" path="res://logic/systems/combat/weapon_sfx/weapon_sfx.gd" id="1_2xckb"]
-[ext_resource type="Script" uid="uid://dmu0q0hdwihch" path="res://logic/systems/audio_system/base_weapon_audio_system.gd" id="1_l2k4k"]
+[ext_resource type="Script" uid="uid://dmu0q0hdwihch" path="res://logic/systems/sfx_audio_system/base_weapon_sfx_system.gd" id="1_l2k4k"]
 [ext_resource type="AudioStream" uid="uid://qufmydm4eeq4" path="res://-assets-/SFX/audio_streams/whoosh/weapon_whoosh.tres" id="3_r1lvy"]
 [ext_resource type="AudioStream" uid="uid://g4dtkcleinh8" path="res://-assets-/SFX/audio_streams/sword_hit/sword_hit_bones.tres" id="4_hur80"]
 

@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedLogger
 class_name TurnData
 
 var target_angle: float
@@ -54,5 +54,15 @@ func to_dict() -> Dictionary[String, Variant]:
 
 func __validate():
 	if not turn_direction in [TURN_DIR_RIGHT, TURN_DIR_LEFT]:
-		print_.warn_raw(false, "Will be set to TURN_DIR_RIGHT. Not turn_direction in [TURN_DIR_RIGHT, TURN_DIR_LEFT]: " + turn_direction)
+		__log_warn("Will be set to TURN_DIR_RIGHT. Not turn_direction in [TURN_DIR_RIGHT, TURN_DIR_LEFT]: " + turn_direction)
 		turn_direction = TURN_DIR_RIGHT
+
+
+func pp_name() -> String:
+	return "TurnData"
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0

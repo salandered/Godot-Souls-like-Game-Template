@@ -1,7 +1,7 @@
 extends RefCounted
 class_name PHEHelpers
 
-class MonitorFor:
+class MonitorFor extends RefCountedLogger:
 	## STATIC
 	# will monitor state for random '_duration' set between _min and _max
 	# these are static defaults, but set_random() supports overriding
@@ -14,8 +14,6 @@ class MonitorFor:
 	var _duration: float = -1.0
 	## NOTE: should be updated in _process using accumulate_time()
 	var _timer: float = -1.0
-
-	var __LOG_B: bool = false
 
 	func _init(min_: float, max_: float, state_name_: String) -> void:
 		self._min = min_
@@ -120,21 +118,30 @@ class MonitorFor:
 	func __pp_is_done() -> String:
 		return pp.s(_our_state, "is done. worked >", _duration)
 
-	func __log_(...parts: Array):
-		if __LOG_B: print_.dev(__pp_my_name(), pp.list_(parts), 17)
 
-	func __pp_my_name() -> String:
+	## __LOGS
+	# region
+
+	func pp_name() -> String:
 		return "MonitorFor"
+
+	func __LOG_B() -> bool:
+		return false
+
+	func __LOG_INDENT() -> int:
+		return 17
 
 	static func pair_log(a, b) -> String:
 		return "(%s, %s)" % [a, b]
+
+	# endregion
 
 
 class WillDoFor extends MonitorFor:
 	## alternative way to check result, without using is_done() (ignoring accumulate_time as well)
 	func is_done_using_substate(curr_sub: BasePHEState) -> bool:
 		if curr_sub.state_name != _our_state:
-			print_.warn_raw(false, pp.s("WillDoFor.is_done state name mismatch. Init with", _our_state, "Got", curr_sub.state_name, "Will return true"))
+			__log_warn(pp.s("WillDoFor.is_done state name mismatch. Init with", _our_state, "Got", curr_sub.state_name, "Will return true"))
 			return true
 		if curr_sub.get_actual_time_spent() > _duration:
 			return true
@@ -160,7 +167,7 @@ class WillDoFor extends MonitorFor:
 		_auto_set_on_switch_to(curr_substate, next_substate, min_, max_, __log)
 		_auto_reset_on_switch_from(curr_substate, next_substate, __log)
 
-	func __pp_my_name() -> String:
+	func pp_name() -> String:
 		return "⏲️WillDoFor"
 
 
@@ -183,5 +190,5 @@ class WillNotDoFor extends MonitorFor:
 		_auto_reset_on_switch_to(curr_substate, next_substate, __log)
 
 
-	func __pp_my_name() -> String:
+	func pp_name() -> String:
 		return "⏰WillNotDoFor"

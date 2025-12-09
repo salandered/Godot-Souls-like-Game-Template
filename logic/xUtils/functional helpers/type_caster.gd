@@ -1,4 +1,4 @@
-extends RefCounted
+extends RefCountedStaticLogger
 # here are all utils which dont have their separate more focused module
 class_name TypeCast
 
@@ -7,8 +7,7 @@ class_name TypeCast
 # region
 
 static func __print_err_msg(item: Variant, array: Array, pp_type_name: String) -> Array:
-	print_.warn(true,
-				pp.s("Array contains non", pp.in_q(pp_type_name), " value:", pp.in_q(item)),
+	__log_warn(pp.s("Array contains non", pp.in_q(pp_type_name), " value:", pp.in_q(item)),
 				"TypeCast",
 				"return empty array",
 				"Input array", pp.array_(array))
@@ -113,3 +112,13 @@ static func array_of_pause_menu_controller(array: Array) -> Array[M_PauseMenuCon
 	var list_casted: Array[M_PauseMenuController] = []
 	list_casted.assign(_safe_validate_class(array, M_PauseMenuController, "M_PauseMenuController"))
 	return list_casted
+
+
+static func pp_name() -> String:
+	return "TypeCaster"
+
+static func __LOG_B() -> bool:
+	return false
+
+static func __LOG_INDENT() -> int:
+	return 0

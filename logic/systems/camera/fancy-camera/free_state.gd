@@ -30,7 +30,7 @@ func update(delta: float) -> void:
 
 	fc.camera_movement.move_camera(delta)
 
-	# __log_("[~~FREE UPD post", u.fr(), "]", fc.__dbg_main_info())
+	# __log_("[~~FREE UPD post", u.sfr(), "]", fc.__dbg_main_info())
 
 
 func _move_focus_point() -> void:

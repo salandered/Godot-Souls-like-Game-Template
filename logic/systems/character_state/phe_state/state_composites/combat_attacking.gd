@@ -29,7 +29,7 @@ func _attack_ended() -> bool:
 		var _current_substate_is_ended := current_substate_.is_ended()
 		return _current_substate_is_ended
 	else:
-		__log_warn_v2(true, "no current_substate_", "_attack_ended", "return true")
+		__log_warn_v2("no current_substate_", "_attack_ended", "return true")
 		return true
 
 

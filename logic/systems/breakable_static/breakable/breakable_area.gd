@@ -1,6 +1,6 @@
 @abstract
 class_name BreakableArea
-extends Area3D
+extends BaseArea3DSystem
 
 
 ## external event

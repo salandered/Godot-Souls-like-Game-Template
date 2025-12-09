@@ -16,13 +16,13 @@ class_name M_PauseMenuController
 
 func _ready() -> void:
 	if not pause_menu_packed:
-		__log_ui.warn_(true, "no pause_menu_packed", "M_PauseMenuController", "")
+		__log_ui.warn_("no pause_menu_packed", "M_PauseMenuController", "")
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if not pause_menu_packed:
-			__log_ui.warn_(true, "no pause_menu_packed", "M_PauseMenuController", "")
+			__log_ui.warn_("no pause_menu_packed", "M_PauseMenuController", "")
 			return
 			
 		if not focused_viewport:

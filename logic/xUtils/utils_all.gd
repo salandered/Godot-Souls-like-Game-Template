@@ -5,13 +5,10 @@ class_name u
 static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
-static func fr(to_str_: bool = true, str_prefix: bool = false) -> Variant:
-	if to_str_:
-		if not str_prefix:
-			return str(Engine.get_process_frames())
-		return "fr_n-" + str(Engine.get_process_frames())
-	else:
-		return Engine.get_process_frames()
+static func sfr(str_prefix: bool = false) -> Variant:
+	if not str_prefix:
+		return str(Engine.get_process_frames())
+	return pp.s("fr_n-", Engine.get_process_frames())
 
 static func ifr() -> int:
 	return Engine.get_process_frames()
@@ -25,33 +22,38 @@ static func ease_in_out(x: float) -> float:
 
 
 ## returns null if key does not exist
-static func safe_get_dict_key(dict: Dictionary, key: Variant, default: Variant = null, fallback: String = Fallback.WARN_CRUCIAL, context: String = "") -> Variant:
+static func safe_get_dict_key(dict: Dictionary, key: Variant, default: Variant = null, fallback: String = WarnLevel.WARN_CRUCIAL, context: String = "") -> Variant:
 	if safe_has_key(dict, key, fallback):
 		return dict[key]
 	else:
 		return default
 
 
-static func safe_has_key(dict: Dictionary, key: Variant, fallback: String = Fallback.WARN_CRUCIAL) -> bool:
+static func _msg_key_problem(key: Variant, dict: Dictionary, found_is_problem: bool = false) -> String:
+	var _found_msg := "found in dictionary" if found_is_problem else "not found in dictionary:"
+	var _msg := pp.s("Key", pp.in_q(key), _found_msg, pp.dict_(dict, false, false, true))
+	return _msg
+
+
+static func safe_has_key(dict: Dictionary, key: Variant, warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
 	var exists: bool = key in dict
 	if not exists:
-		match fallback:
-			Fallback.FAIL:
-				assert(false, "Key '" + str(key) + "' not found in dictionary")
-			Fallback.WARN, Fallback.WARN_CRUCIAL:
-				print_.warn(fallback == Fallback.WARN_CRUCIAL, pp.s("Key", pp.in_q(key), "not found in dictionary"), "safe_has_key", "return false")
-			Fallback.SOFT:
-				pass
-			_:
-				print_.warn(true, pp.s("Key", pp.in_q(key), "not found in dictionary"), "safe_has_key", "return false",
-					"NOTE: Additional problem - unknown fallback value in safe_has_key", pp.in_q(fallback))
+		print_.warn(_msg_key_problem(key, dict), "", "", warn_level)
 	return exists
+
+
+static func safe_has_no_key(dict: Dictionary, key: Variant, warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
+	var exists: bool = key in dict
+	if exists:
+		print_.warn(_msg_key_problem(key, dict, true), "", "", warn_level)
+	return not exists
+
 
 static func safe_look_at(
 		from_who: Node3D,
 		target: Vector3,
 		up: Vector3 = Vector3.UP,
-		# by default -Z is pointed to target. built in use_model_front solves that
+		# by default -Z is pointed to target. built-in use_model_front solves that
 		use_model_front: bool = false,
 		eps: float = 0.001
 ) -> bool:
@@ -85,7 +87,7 @@ static func _dev_change_param(
 		param += step
 
 	if prev_param != param:
-		print_.dev("~~ ", pp.s(param_name, prev_param, pp.arr, param), 0, LogL.FORCE_PRINT)
+		print_.dev("~~ ", pp.s(param_name, prev_param, pp.arr, param), 0)
 	return param
 
 
@@ -115,51 +117,7 @@ static func ipow2(number: int) -> int:
 	return number * number
 
 
-static func safe_cast_array_of_strings(array: Array[Variant]) -> Array[String]:
-	var list_casted: Array[String] = []
-	for item in array:
-		if item is not String:
-			print_.warn_raw(false,
-				"Array contains non-string value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
-			return []
-	list_casted.assign(array)
-	return list_casted
-
-
-static func safe_cast_array_of_int(array: Array[Variant]) -> Array[int]:
-	var list_casted: Array[int] = []
-	for item in array:
-		if item is not int:
-			print_.warn_raw(false,
-				"Array contains non-int value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
-			return []
-	list_casted.assign(array)
-	return list_casted
-
-
-static func safe_cast_array_of_float(array: Array[Variant]) -> Array[float]:
-	var list_casted: Array[float] = []
-	for item in array:
-		if item is not float:
-			print_.warn_raw(false,
-				"Array contains non-float value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
-			return []
-	list_casted.assign(array)
-	return list_casted
-
-
-static func safe_cast_array_of_base_weapon(array: Array[Variant]) -> Array[BaseWeapon]:
-	var list_casted: Array[BaseWeapon] = []
-	for item in array:
-		if item is not BaseWeapon:
-			print_.warn_raw(false,
-				"Array contains non BaseWeapon value: ", item, " | Array:", pp.list_(array), "Fallback: will return empty array.")
-			return []
-	list_casted.assign(array)
-	return list_casted
-
-
-static func cut_string(text: String, limit: int = 400) -> String:
+static func cut_string(text: String, limit: int = 600) -> String:
 	if text.length() <= limit:
 		return text
 	return text.left(limit) + " ... <too long to print>"

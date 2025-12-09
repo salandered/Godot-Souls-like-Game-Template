@@ -23,8 +23,9 @@ class_name Princess
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
-@onready var audio_system: PrincessAudioSystem = %AudioSystem
-@onready var anim_sfx_signal_emitter: AnimSFXSignalEmitter = %AnimSFXSignalEmitter
+@onready var sfx_system: PrincessSFXSystem = %AudioSystem
+@onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
+@onready var pl_weapon_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %WeaponAnimSFXSigEmitter
 
 # anim
 @onready var anim_container: AnimationContainer = %AnimContainer
@@ -41,15 +42,17 @@ class_name Princess
 
 
 @onready var _start_position := global_transform.origin
-var push_rigid_bodies_force : float= 4.0
+var push_rigid_bodies_force: float = 4.0
 
+
+var __initialised: bool = false
 
 func initialise() -> void:
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Masks.PLAYER_COL_MASK
 
 
-	var signals := PlayerSignals.new()
+	var pl_sig_container := PlayerSignalContainer.new()
 
 	visuals.accept_model_data(self)
 	
@@ -68,18 +71,27 @@ func initialise() -> void:
 	player_sm.initialise(self)
 
 	combat.initialise()
-
-	## only 1 weapon is supported for player
-	var player_weapon := combat.get_all_weapons()[0]
-	var _weapon_whoosh_signal := player_weapon.get_sfx_whoosh_weapon_signal()
-	print("///////", player_weapon, _weapon_whoosh_signal)
-	audio_system.initialise(signals, self, {audio_system.character_additional_data_key: self})
-	anim_sfx_signal_emitter.initialise(signals, _weapon_whoosh_signal)
-	
 	animator_manager.initialise()
+
+	sfx_system.initialise(pl_sig_container, self, {sfx_system.character_additional_data_key: self})
+	
+	var _pl_sad_container := PlayerSADContainer.new()
+	pl_anim_sfx_sig_emitter.initialise(_pl_sad_container, pl_sig_container)
+	
+	## NOTE: unlike character sfx, where sfx_system is tied to pl_anim_sfx_sig_emitter,
+	##       for weapon we manage emitter here on character side, while its sfx system 
+	##       is managed by weapon itself. This is done because anim knowledge is on player side. 
+	##       Weapon wouldn't know when to play anim based sounds.
+	## NOTE: when character will be able to switch weapons, this part should be re-called on switch
+	var _weapon_sad_container := WeaponSADContainer.new()
+	var _player_weapon := combat.get_all_weapons()[0] ## only 1 weapon is supported for player
+	var _weapon_sig_container := _player_weapon.get_signal_container()
+	pl_weapon_anim_sfx_sig_emitter.initialise(_weapon_sad_container, _weapon_sig_container)
+	
 
 	__dev_initialise()
 
+	__initialised = true
 
 func is_player() -> bool:
 	return true
@@ -106,6 +118,8 @@ func reset_position() -> void:
 
 # TODO: _process or _physics_process? changed to _process: frame issues
 func _process(delta: float) -> void:
+	if not __initialised:
+		return
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
 	# seems like every frame is ok. may be try to make it once per N frames for safety
@@ -115,6 +129,7 @@ func _process(delta: float) -> void:
 func update(input_: InputPackage, delta: float):
 	if __fly_mode.fly_mode_enabled:
 		return
+
 
 	player_sm.update(input_, delta)
 	move_and_slide()
@@ -156,7 +171,7 @@ func is_attacking() -> bool:
 	var _state_is_att: bool = curr_state is AttackState
 	var _action_is_att: bool = curr_action is BaseAttackAction
 	if _state_is_att != _action_is_att:
-		print_.warn(false, "no sync between currState/currAct being attacking", "is_attacking", "return true", _state_is_att, _action_is_att)
+		__log_warn("no sync between currState/currAct being attacking", "is_attacking", "return true", _state_is_att, _action_is_att)
 	return _state_is_att or _action_is_att
 
 
@@ -169,7 +184,7 @@ func is_dodging() -> bool:
 
 func _get_curr_state_with_warn(caller_log: String = "") -> BasePlayerState:
 	if not get_current_state():
-		print_.warn(false, "get_current_state() is null", caller_log, "return null")
+		__log_warn("get_current_state() is null", caller_log, "return null")
 		return null
 	return get_current_state()
 
@@ -177,7 +192,7 @@ func _get_curr_state_with_warn(caller_log: String = "") -> BasePlayerState:
 func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 	var action := player_sm.get_curr_action()
 	if not action:
-		print_.warn(false, "player_sm.get_curr_action() is null", caller_log, "return null")
+		__log_warn("player_sm.get_curr_action() is null", caller_log, "return null")
 		return null
 	return action
 

@@ -144,7 +144,7 @@ func find_target() -> EnemyCameraTarget:
 	var _all_targets := get_tree().get_nodes_in_group(Groups.Environment_.TARGETABLE)
 	for t in _all_targets:
 		if not t is EnemyCameraTarget:
-			print_.warn(true, "TARGETABLE group for not EnemyCameraTarget node is not supported!", "find_target", "return null", t)
+			__log_error("TARGETABLE group for not EnemyCameraTarget node is not supported!", "find_target", "return null", t)
 			return null
 
 	var all_targets := TypeCast.array_of_enemy_camera_target(_all_targets)

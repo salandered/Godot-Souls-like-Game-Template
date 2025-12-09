@@ -1,7 +1,7 @@
 @tool
 @icon("res://-assets-/x_icons/white/icon_grid.png")
 
-extends Node
+extends BaseNodeCharacterSystem
 class_name PlayerStatesContainer
 
 var _player: Princess
@@ -14,6 +14,10 @@ var _player: Princess
 @onready var anim_container: AnimationContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
+
+
+func is_player() -> bool:
+	return true
 
 
 func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer._PlActionData]:
@@ -220,7 +224,7 @@ func _accept_legs_actions():
 		print_.container("", "node.get_name() " + child.get_name())
 		var action_data: LegBehaviorContainer._LActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
 		if not action_data:
-			print_.warn_raw(false, "No action data found for: " + child.get_name() + " Will be skipped")
+			__log_warn("No action data found for: " + child.get_name() + " Will be skipped")
 			continue
 		print_.container("", "action_data.action_name " + action_data.action_name)
 		_leg_actions[action_data.action_name] = child
@@ -235,7 +239,7 @@ func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	# 0 means lowest
 	var _safe_sorted: Array[String]
 	for item in state_names:
-		if u.safe_has_key(_states, item, Fallback.WARN_CRUCIAL):
+		if u.safe_has_key(_states, item, WarnLevel.WARN_CRUCIAL):
 			_safe_sorted.append(item)
 	_safe_sorted.sort_custom(_states_priority_sort)
 	return _safe_sorted
@@ -246,3 +250,18 @@ func _states_priority_sort(a: String, b: String) -> bool:
 		return true
 	else:
 		return false
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "PlayerStatesContainer"
+
+func __LOG_B() -> bool:
+	return LogToggler.CONTAINER_B
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

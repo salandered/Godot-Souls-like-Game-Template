@@ -83,7 +83,7 @@ static func works_between(start: float, finish: float, animator_manager: BaseAni
 static func passed_marker(marker_name: String, animator_manager: BaseAnimatorManager, anim: AnimationData, self_, add_time: float = 0.0) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
-		print_.warn_raw(false, "passed_marker - no time - will return false")
+		__log_warn("passed_marker - no time - will return false")
 		return __reject()
 	if effective_time_spent_unscaled(animator_manager, self_) >= marker_time + add_time:
 	# if effective_time_spent(animator_manager, self_) >= marker_time + add_time:
@@ -94,7 +94,7 @@ static func passed_marker(marker_name: String, animator_manager: BaseAnimatorMan
 static func before_marker(marker_name: String, animator_manager: BaseAnimatorManager, anim: AnimationData, self_) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
-		print_.warn_raw(false, "before_marker - no time - will return false")
+		__log_warn("before_marker - no time - will return false")
 		return __reject()
 
 	if effective_time_spent_unscaled(animator_manager, self_) < marker_time:
@@ -103,7 +103,7 @@ static func before_marker(marker_name: String, animator_manager: BaseAnimatorMan
 
 
 static func __reject() -> bool:
-	print_.warn_raw(false, "TM rejected -1!")
+	__log_warn("TM rejected -1!")
 	return false
 
 
@@ -114,3 +114,10 @@ static func __log_dev(_curr_anim, animator_manager, self_):
 	# 	pp.s(_effective_duration(animator_manager),
 	# 		time_spent(animator_manager, self_),
 	# 		_effective_duration(animator_manager) - time_spent(animator_manager, self_)))
+
+
+static func pp_name() -> String:
+	return "ActionTimeManagement"
+
+static func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
+	print_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))

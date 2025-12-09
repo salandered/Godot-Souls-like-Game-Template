@@ -21,7 +21,7 @@ var _curr_anim: AnimationData
 func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float = 0):
 	var anim := anim_container.get_by_anim_id(anim_id)
 	if anim == null:
-		__log_warn(true, "Overlay anim not found: " + anim_id, "set_overlay_anim", "")
+		__log_error("Overlay anim not found: " + anim_id, "set_overlay_anim", "")
 		return
 	
 	overlay_modifier.set_overlay_anim(anim, overlay_config)
@@ -29,24 +29,24 @@ func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if anim_id == "":
-		__log_warn(false, "anim_id is empty string", "set_anim_to_play", "will not play anything")
+		__log_error("anim_id is empty string", "set_anim_to_play", "will not play anything")
 		return
 	if blend_for < 0:
-		__log_warn(false, "blend_for < 0 is not supported, 0 will be used:" + str(blend_for), "", "")
+		__log_error("blend_for < 0 is not supported, 0 will be used:" + str(blend_for), "", "")
 		blend_for = 0
 	
 	if start_time_offset < 0:
-		__log_warn(false, "start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset), "", "")
+		__log_error("start time shift < 0 is not supported, 0 will be used: " + str(start_time_offset), "", "")
 		start_time_offset = 0
 	
 	var anim: AnimationData = anim_container.get_by_anim_id(anim_id)
 
 	if anim == null:
-		__log_warn(true, "set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
+		__log_error("set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 
 	if not native_player.has_animation(anim_id):
-		__log_warn(true, "set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
+		__log_error("set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 	
 	# NOTE: playing anim and setting _curr_anim is atomic
@@ -136,7 +136,7 @@ func _get_effective_speed() -> float:
 		return 1.0
 	var _r := _curr_anim.speed_scale * native_player.speed_scale
 	if _r == 0.0:
-		print_.warn(false, "effective_speed 0", "enemy animator", "return 1.0")
+		__log_warn("effective_speed 0", "enemy animator", "return 1.0")
 		return 1.0
 	return _r
 

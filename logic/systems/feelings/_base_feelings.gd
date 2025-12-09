@@ -67,7 +67,7 @@ func check_status(status_name: String) -> bool:
 	if status_name in statuses:
 		return statuses[status_name]
 	else:
-		__log_warn(false, "no status in statuses", "check_status", "return false", pp.in_q(status_name), pp.in_q(statuses))
+		__log_error("no status in statuses", "check_status", "return false", pp.in_q(status_name), pp.in_q(statuses))
 		return false
 
 

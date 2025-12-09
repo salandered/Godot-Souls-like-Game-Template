@@ -1,4 +1,4 @@
-extends Node3D
+extends BaseNode3DSystem
 
 @onready var camera_3d: Camera3D = %Camera3D
 
@@ -37,14 +37,13 @@ func _handle_parallax(delta: float) -> void:
 	var center_offset_y = (mouse_pos.y / screen_size.y) - 0.5
 
 	# Smoothly interpolate current rotation towards target rotation
-	var target_rot_y = -center_offset_x * parallax_strength
+	var target_rot_y = - center_offset_x * parallax_strength
 	
 	# We convert the base pitch from degrees to radians and add the mouse offset
 	var target_rot_x = deg_to_rad(camera_base_pitch) + (-center_offset_y * parallax_strength)
 
 	camera_3d.rotation.y = lerp(camera_3d.rotation.y, target_rot_y, delta * parallax_lerp_speed)
 	camera_3d.rotation.x = lerp(camera_3d.rotation.x, target_rot_x, delta * parallax_lerp_speed)
-
 
 
 func _start_camera_sway() -> void:
@@ -64,34 +63,48 @@ func _start_camera_sway() -> void:
 
 func _sit_skeleton():
 	if not skeleton_scene:
-		print_.warn(false, "no scene skeleton_scene provided", "menu3dScene", "will do nothing")
-		return 
+		__log_warn("no scene skeleton_scene provided", "menu3dScene", "will do nothing")
+		return
 	if not sitting_scene:
-		print_.warn(false, "no scene sitting_scene provided", "menu3dScene", "will do nothing")
-		return 
+		__log_warn("no scene sitting_scene provided", "menu3dScene", "will do nothing")
+		return
 		
 	var skeleton_mesh := skeleton_scene.get_skeleton_mesh()
 	var general_skeleton := sitting_scene.get_general_skeleton()
 	var anim_player := sitting_scene.get_animation_player()
 	if not general_skeleton:
-		print_.warn(false, "no general_skeleton", "menu3dScene", "will do nothing")
-		return 
+		__log_warn("no general_skeleton", "menu3dScene", "will do nothing")
+		return
 	if not skeleton_mesh:
-		print_.warn(false, "no skeleton_mesh", "menu3dScene", "will do nothing")
+		__log_warn("no skeleton_mesh", "menu3dScene", "will do nothing")
 		return
 	if not anim_player:
-		print_.warn(false, "no anim_player", "menu3dScene", "will do nothing")
-		return  
+		__log_warn("no anim_player", "menu3dScene", "will do nothing")
+		return
 
 	skeleton_mesh.skeleton = general_skeleton.get_path()
 	var available_anims := anim_player.get_animation_list()
 	
 	if len(available_anims) == 0:
-		print_.warn(false, "no available_anims", "menu3dScene", "will do nothing")
-		return  
+		__log_warn("no available_anims", "menu3dScene", "will do nothing")
+		return
 	
 	for anim_id: String in available_anims:
-		print_.prefix("menu3dScene", pp.s("available anim for sitting skeleton:", anim_id))
+		__log_("menu3dScene", pp.s("available anim for sitting skeleton:", anim_id))
 	
 	anim_player.play(available_anims[0])
-	
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "menu3DScene"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

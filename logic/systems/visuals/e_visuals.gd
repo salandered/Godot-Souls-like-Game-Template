@@ -18,7 +18,5 @@ func __LOG_INDENT() -> int:
 	
 
 func accept_model_data(_model: PHCharacter):
-	var a: String = "a"
-	a.contains("a")
 	for child: MeshInstance3D in get_descendants.mesh_instances_visible(self, true):
 		child.skeleton = _model.skeleton.get_path()

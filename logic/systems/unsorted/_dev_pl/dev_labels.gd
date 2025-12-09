@@ -25,12 +25,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if u.fr(false) % 2 == 0:
+	if u.ifr() % 2 == 0:
 		# _label_camera_info()
 		# _label_modifier_animator_info()
 		_label_state_info()
 
-	if u.fr(false) % 1 == 0:
+	if u.ifr() % 1 == 0:
 		_label_inputs()
 
 

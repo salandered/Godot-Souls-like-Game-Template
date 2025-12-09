@@ -1,6 +1,6 @@
 @abstract
 class_name BreakableStatic
-extends StaticBody3D
+extends BaseStaticBody3DSystem
 
 ## use initialise instead of _ready for heirs
 
@@ -15,3 +15,18 @@ func _ready() -> void:
 
 
 @abstract func break_myself() -> void
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "BreakableStatic"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

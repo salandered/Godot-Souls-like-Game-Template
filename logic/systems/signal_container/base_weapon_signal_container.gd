@@ -1,0 +1,37 @@
+extends BaseSignalContainer
+class_name BaseWeaponSignalContainer
+
+
+## NOTE: treated as not an abstract class for simplicity 
+## consider it weapons will need many specific signals
+
+
+## DANGER: private, use BaseSignalContainer api
+signal SFX_whoosh_weapon(data: Dictionary[String, Variant])
+signal SFX_hit_weapon(data: Dictionary[String, Variant])
+
+
+func _get_signal_data_list() -> Array[SignalData]:
+	var signal_data_list: Array[SignalData] = [
+		## fs
+		SignalData.new(SignalName.sfx_whoosh_weapon, SFX_whoosh_weapon),
+		SignalData.new(SignalName.sfx_hit_weapon, SFX_hit_weapon),
+	]
+	
+	signal_data_list.append_array(_get_all_weapon_specific_signals())
+	
+	return signal_data_list
+
+
+func _get_all_weapon_specific_signals() -> Array[SignalData]:
+	return []
+
+
+func pp_name() -> String:
+	return "🗡️SignalContainer"
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0

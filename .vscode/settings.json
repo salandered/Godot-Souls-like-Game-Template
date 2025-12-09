@@ -443,6 +443,17 @@
 				}
 			]
 		},
+		"(SignalName\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5ea6f8"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
 		"(traits)(\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
