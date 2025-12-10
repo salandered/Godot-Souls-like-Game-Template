@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bc030ubgkaf18"]
 
 [ext_resource type="Script" uid="uid://sra67e40jd6f" path="res://logic/systems/camera/fancy-camera/camera_target/enemy_camera_target.gd" id="1_mxpn8"]
-[ext_resource type="PackedScene" uid="uid://by0bjgl0wv4ry" path="res://logic/Locations/_dev/primitives/CSGStarLike.tscn" id="2_tkwcu"]
+[ext_resource type="PackedScene" uid="uid://by0bjgl0wv4ry" path="res://logic/entities/Locations/_dev/primitives/CSGStarLike.tscn" id="2_tkwcu"]
 
 [node name="Target" type="Node3D"]
 script = ExtResource("1_mxpn8")

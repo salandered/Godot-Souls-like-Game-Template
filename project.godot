@@ -30,7 +30,7 @@ buses/default_bus_layout="uid://h34rd3knc6l3"
 
 [autoload]
 
-CameraMode="*res://logic/Locations/_dev/dev_free_cam/FreeCamMode.tscn"
+CameraMode="*res://logic/entities/Locations/_dev/dev_free_cam/FreeCamMode.tscn"
 FullscreenHandler="*res://ui/fullscreen_handler.gd"
 InputManager="*res://logic/systems/input/pl_input/input_manager.gd"
 FrameUtils="*res://logic/_project_data/autoload/frame_utils.gd"
@@ -104,9 +104,9 @@ folder_colors={
 "res://addons/pixpal_tools_edited/": "pink",
 "res://ideas/": "gray",
 "res://ideas/enemy/SimpleEnemy/": "pink",
-"res://logic/Locations/demo_arena/": "yellow",
-"res://logic/Locations/lights/": "red",
 "res://logic/entities/Enemies/phe_enemy/": "blue",
+"res://logic/entities/Locations/demo_arena/": "yellow",
+"res://logic/entities/Locations/lights/": "red",
 "res://logic/systems/animation/": "orange",
 "res://logic/systems/animation/anim_manager/": "purple",
 "res://logic/systems/awareness/": "yellow",
@@ -120,13 +120,13 @@ folder_colors={
 "res://logic/systems/hurt_hit_box/": "red",
 "res://logic/systems/input/": "green",
 "res://logic/systems/input/pl_input/": "green",
+"res://logic/systems/sfx/on_sfx_sig_asp/": "blue",
+"res://logic/systems/sfx/sfx_anim_sig_emitter/": "orange",
+"res://logic/systems/sfx/sfx_audio_system/": "yellow",
 "res://logic/systems/sfx_anim_data_container/": "yellow",
-"res://logic/systems/sfx_anim_sig_emitter/": "orange",
-"res://logic/systems/sfx_audio_system/": "yellow",
-"res://logic/systems/sfx_audio_system/on_sfx_sig_asp/": "blue",
 "res://logic/systems/sk_modifiers/": "red",
 "res://logic/systems/unsorted/": "purple",
-"res://logic/xUtils/": "green",
+"res://logic/x_utils/": "green",
 "res://misc/": "gray",
 "res://misc/cats-souls/": "purple",
 "res://misc/trash_bin/": "red",

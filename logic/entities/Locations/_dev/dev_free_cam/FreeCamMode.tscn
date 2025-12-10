@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://q3osrwkgcbi0"]
+
+[ext_resource type="Script" uid="uid://clchluho2atww" path="res://logic/entities/Locations/_dev/dev_free_cam/free_cam_mode.gd" id="1_too2x"]
+
+[node name="FreeCam" type="Node3D"]
+process_mode = 3
+visible = false
+script = ExtResource("1_too2x")
+mouse_sensitivity = 0.001
+
+[node name="ControlsInfo" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(80, 80)
+offset_right = 758.0
+offset_bottom = 450.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsInfo"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]WASD[/b] - Move
+[b]Q/E[/b] - Down/Up
+[b]Shift[/b] - Speed boost
+[b]Wheel up/down[/b] - Change speed"

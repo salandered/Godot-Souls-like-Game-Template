@@ -124,6 +124,10 @@
 	// src/**/test - Matches any "test" folder inside the "src" directory at any depth
 	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	"folder-path-color.folders": [
+		{
+			"path": "*sad*",
+			"color": "blue_shade_3"
+		},
 		// INPUT
 		{
 			"path": "*input*",
@@ -234,6 +238,10 @@
 			"color": "green_shade_3"
 		},
 		{
+			"path": "*state_leafes*",
+			"color": "green_shade_3"
+		},
+		{
 			"path": "logic/systems/character_state/phe_state/state_composites",
 			"color": "states_blue"
 		},
@@ -249,7 +257,7 @@
 		},
 		// UTILS
 		{
-			"path": "logic/xUtils",
+			"path": "logic/x_utils",
 			"color": "utils"
 		},
 		// ANIM
@@ -266,7 +274,7 @@
 			"color": "animation"
 		},
 		{
-			"path": "logic/systems/sfx_audio_system/on_sfx_sig_asp",
+			"path": "logic/systems/sfx/on_sfx_sig_asp",
 			"color": "states_blue"
 		},
 		{

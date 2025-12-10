@@ -1,0 +1,640 @@
+[gd_scene load_steps=33 format=3 uid="uid://mdwtc0gt416o"]
+
+[ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/entities/Locations/demo_arena/arena_1.gd" id="1_sr72e"]
+[ext_resource type="Texture2D" uid="uid://c6e6h7kjc7oaa" path="res://-assets-/materials-shared/simple/texture_08.png" id="1_tv3r5"]
+[ext_resource type="PackedScene" uid="uid://dwwngduom3lf" path="res://logic/entities/Locations/environments/blue_skies.tscn" id="2_d2h10"]
+[ext_resource type="Texture2D" uid="uid://dl5jjiun3k281" path="res://-assets-/ui_assets/themes/buttons/g5lIOlQpYb.png" id="2_sr72e"]
+[ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/shaders/gdquest-like/sky/blue_sky.tres" id="3_gjxs0"]
+[ext_resource type="Texture2D" uid="uid://c217dqp8fo4t8" path="res://-assets-/materials-shared/smith_sword/smith_sword_MetalCorrodedHeavy001_COL_2K_METALNESS.jpg" id="3_pdbkk"]
+[ext_resource type="Texture2D" uid="uid://h2818w6ou6nb" path="res://-assets-/materials-shared/_images/legacy/Stone Dirt Wall 02_diffuse.png" id="4_l1fmd"]
+[ext_resource type="Texture2D" uid="uid://cxs6a2fbn3283" path="res://-assets-/materials-shared/_images/legacy/GroundGrassPatchy/GroundGrass_1_COL.jpg" id="5_ccwh7"]
+[ext_resource type="Texture2D" uid="uid://c554bbffdf6f1" path="res://-assets-/materials-shared/_images/legacy/GroundDirtRocky_COL_1K.jpg" id="6_6cxb7"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Locations/_dev/simple_target/SimpleTarget.tscn" id="7_hnne2"]
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/demo_arena/dark_crate.tscn" id="11_hnne2"]
+[ext_resource type="PackedScene" uid="uid://sq53nltxquwd" path="res://-assets-/GLB-level/minimal-arena/linkoln/LINCOLN_WRAPPER.tscn" id="13_agoul"]
+[ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://-assets-/GLB-level/minimal-arena/lady/LADY_WRAPPER.tscn" id="14_f5x12"]
+[ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/minimal-arena/island/ISLAND_WRAPPER.tscn" id="15_f83oq"]
+[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="16_0nq4r"]
+[ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/minimal-arena/tower/TOWER_WRAPPER.tscn" id="16_7rx1e"]
+[ext_resource type="PackedScene" uid="uid://cu57s1oigqvy1" path="res://-assets-/GLB-level/minimal-arena/column/JustColumns.tscn" id="17_f83oq"]
+[ext_resource type="PackedScene" uid="uid://ca0xblntrwuvx" path="res://-assets-/GLB-level/minimal-arena/exit_2/EXIT_WRAPPER.tscn" id="17_tudsi"]
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/PHEnemy_2.tscn" id="18_f83oq"]
+[ext_resource type="PackedScene" uid="uid://fbyv2s2mo6cx" path="res://logic/entities/Locations/lights/FlickerFire.tscn" id="22_ee878"]
+[ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="22_inlug"]
+[ext_resource type="PackedScene" uid="uid://dlw2fiyg325uk" path="res://logic/entities/Locations/lights/FlickerOmni.tscn" id="25_efgc1"]
+
+[sub_resource type="Environment" id="Environment_efgc1"]
+background_mode = 2
+background_color = Color(0.8, 0.913725, 1, 1)
+sky = ExtResource("3_gjxs0")
+ambient_light_source = 3
+ambient_light_color = Color(0.15, 0.12, 0.1, 1)
+ambient_light_sky_contribution = 0.05
+ambient_light_energy = 0.4
+reflected_light_source = 2
+tonemap_mode = 4
+tonemap_exposure = 1.6
+tonemap_white = 1.2
+ssao_enabled = true
+sdfgi_use_occlusion = true
+fog_light_color = Color(0.70566064, 0.8111349, 0.9752062, 1)
+fog_height = -10.14
+fog_height_density = 1.2674
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr72e"]
+albedo_texture = ExtResource("2_sr72e")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agoul"]
+albedo_texture = ExtResource("3_pdbkk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfni3"]
+albedo_texture = ExtResource("4_l1fmd")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yddn0"]
+albedo_color = Color(0.23, 0.1242, 0.1242, 1)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nq4r"]
+albedo_texture = ExtResource("5_ccwh7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5x12"]
+albedo_texture = ExtResource("6_6cxb7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ic6w"]
+albedo_color = Color(0.32294998, 0.1319595, 0, 1)
+albedo_texture = ExtResource("1_tv3r5")
+uv1_scale = Vector3(20, 20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqn15"]
+albedo_color = Color(0.948957, 0.0198181, 1.15514e-06, 1)
+emission_enabled = true
+emission = Color(0.743186, 3.83843e-06, 3.85046e-07, 1)
+emission_energy_multiplier = 1.43
+
+[sub_resource type="FogMaterial" id="FogMaterial_ee878"]
+density = 0.1
+albedo = Color(0.90774393, 0.94392484, 1, 1)
+edge_fade = 1.13137
+
+[node name="Arena_1" type="Node3D"]
+script = ExtResource("1_sr72e")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_d2h10")]
+environment = SubResource("Environment_efgc1")
+
+[node name="🟦 _CUBIC_ARENA" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.425705, 11.734985, -192.41678)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(3.56934, 0, -0.143784, 0, 8.06603, 0, 0.254477, 0, 2.01674, 235.524, 24.3919, -244.31699)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_sr72e")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(-0.8323285, 7.83155, 0.021961648, -3.376165, -1.93072, 0.089083, 0.24791126, 7.45599e-09, 1.2869062, 152.13867, -1.2305536, -235.57718)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_sr72e")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(3.96593, 0, -0.143535, 0, 22.5991, 0, 0.282751, 0, 2.01325, 266.027, 24.3919, -244.31699)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_sr72e")
+
+[node name="Box1" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(2.2416434, 0, 0, 0, 2.6184406, 0, 0, 0, 1, 297.8461, 3.2967343, -192.02)
+material_override = SubResource("StandardMaterial3D_agoul")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box6" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(2.7929432, 0, -0.104503624, 0, 2.7141519, 0, 0.39823943, 0, 0.7329076, 312.1068, 4.0357375, -207.24602)
+material_override = SubResource("StandardMaterial3D_agoul")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 2, 2)
+
+[node name="Box3" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(-0.46784985, -1.2488307, 0, 1.8146603, -0.3219695, 0, 0, 0, 1.8425363, 282.31094, 0.167776, -191.619)
+material_override = SubResource("StandardMaterial3D_dfni3")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 10, 2)
+
+[node name="Floor3" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(1.53575, 0, 0, 0, 1.53575, 0, 0, 0, 1.53575, 232.37001, 0.862021, -210.598)
+material_override = SubResource("StandardMaterial3D_yddn0")
+use_collision = true
+collision_layer = 3
+size = Vector3(117.309, 1, 66.0449)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(1.01154, 0, 0, 0, 0.987698, 0, 0, 0, 1.01154, 356.94598, -14.046663, -224.06004)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_sr72e")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(1.46112, 0, -1.54358, 0, 2.07535, 0, 1.54358, 0, 1.46112, 424.99298, -11.679014, -224.06004)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_sr72e")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(1.46112, 0, -1.54358, 0, 2.07535, 0, 1.54358, 0, 1.46112, 418.698, -12.199135, -175.62831)
+use_collision = true
+size = Vector3(7.86353, 6.77539, 10.8867)
+material = SubResource("StandardMaterial3D_sr72e")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(25.9493, 0, 0, 0, 1.8915, 0, 0, 0, 1.8915, 443.8424, -9.659727, -208.37102)
+material = SubResource("StandardMaterial3D_0nq4r")
+
+[node name="CSGBox3D_prop" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(4.62672, 0, 0, 0, 3.47004, 0, 0, 0, 4.2075, 407.95398, -7.659727, -212.37102)
+use_collision = true
+material = SubResource("StandardMaterial3D_f5x12")
+
+[node name="Target" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
+transform = Transform3D(-0.878834, 0, -0.507395, 0, 2.47654, 0, 0.507395, 0, -0.878834, 410.885, -17.223618, -205.20702)
+label = "yellow"
+
+[node name="Target4" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
+transform = Transform3D(0.33271, 0, 0.958699, 0, 2.47654, 0, -0.958699, 0, 0.33271, 403.216, -17.223618, -218.04442)
+label = "blue"
+
+[node name="Target7" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
+transform = Transform3D(0.310874, 0, 0.966, 0, 2.47654, 0, -0.966, 0, 0.310874, 394.224, -16.456387, -212.38301)
+label = "group_4"
+
+[node name="Target8" parent="🟦 _CUBIC_ARENA" instance=ExtResource("7_hnne2")]
+transform = Transform3D(-0.463827, 0, 0.902587, 0, 2.47654, 0, -0.902587, 0, -0.463827, 396.102, -16.553547, -203.546)
+label = "group_5"
+
+[node name="Box4" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(0.65250516, 0.7544465, 0.071050115, 0.756532, -0.653946, -0.00384691, 0.04356067, 0.056261744, -0.9974658, 333.40372, -8.66271, -222.94856)
+material_override = SubResource("StandardMaterial3D_dfni3")
+use_collision = true
+collision_layer = 3
+size = Vector3(2, 29.3169, 2)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(2.68324, 0, 0, 0, 1.5876, 0, 0, 0, 3.76916, 410.11914, -17.49131, -224.60011)
+use_collision = true
+size = Vector3(50, 0.0856934, 36)
+material = SubResource("StandardMaterial3D_1ic6w")
+
+[node name="TestCamera2" type="Camera3D" parent="🟦 _CUBIC_ARENA"]
+transform = Transform3D(1, 0, 0, 0, 0.033922516, 0.99942446, 0, -0.99942446, 0.033922516, 402.85303, 32.377388, -209.47502)
+fov = 29.0
+near = 0.023
+
+[node name="DeathPlane" parent="🟦 _CUBIC_ARENA" instance=ExtResource("22_inlug")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -48.353935, -48.14917, 162.2964)
+
+[node name="LINCOLN" parent="." instance=ExtResource("13_agoul")]
+
+[node name="AROUND" type="Node3D" parent="."]
+
+[node name="LADY2" parent="AROUND" instance=ExtResource("14_f5x12")]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="EXIT2" parent="AROUND" instance=ExtResource("17_tudsi")]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="TOWER" type="Node3D" parent="AROUND"]
+
+[node name="TOWER_WRAPPER" parent="AROUND/TOWER" instance=ExtResource("16_7rx1e")]
+
+[node name="FireFlicker2" parent="AROUND/TOWER/TOWER_WRAPPER" instance=ExtResource("22_ee878")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -4.236248, 6.411559, -5.2932158)
+__csg = false
+
+[node name="OmniLight3D" parent="AROUND/TOWER/TOWER_WRAPPER/FireFlicker2" index="0"]
+omni_range = 16.185
+
+[node name="CSGSphere3D" parent="AROUND/TOWER/TOWER_WRAPPER/FireFlicker2/OmniLight3D" index="1"]
+material_override = SubResource("StandardMaterial3D_yqn15")
+
+[node name="FireFlicker3" parent="AROUND/TOWER/TOWER_WRAPPER" instance=ExtResource("22_ee878")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -7.895584, 6.460438, 12.421363)
+__csg = false
+
+[node name="OmniLight3D" parent="AROUND/TOWER/TOWER_WRAPPER/FireFlicker3" index="0"]
+omni_range = 4.547
+
+[node name="CSGSphere3D" parent="AROUND/TOWER/TOWER_WRAPPER/FireFlicker3/OmniLight3D" index="1"]
+material_override = SubResource("StandardMaterial3D_yqn15")
+
+[node name="SignHelper" type="SpotLight3D" parent="AROUND/TOWER"]
+transform = Transform3D(0.07695929, 0.15565658, -0.9848088, 0.049029056, 0.9859523, 0.15966879, 0.99582803, -0.060572237, 0.068246506, -7.580869, 3.1749878, 13.038068)
+light_color = Color(0.98199487, 0.78115344, 0.5943271, 1)
+light_energy = 8.326
+light_volumetric_fog_energy = 1.961
+shadow_enabled = true
+spot_range = 4.58
+
+[node name="SignHelper2" type="SpotLight3D" parent="AROUND/TOWER"]
+transform = Transform3D(-0.9586063, 0.09134314, -0.26968583, -0.020113513, 0.9230576, 0.38413557, 0.2840237, 0.3736591, -0.8830116, -8.602671, 6.8806305, -11.339194)
+light_color = Color(0.98199487, 0.78115344, 0.5943271, 1)
+light_energy = 11.189
+light_volumetric_fog_energy = 8.747
+shadow_enabled = true
+spot_range = 21.2
+spot_angle = 19.42
+
+[node name="SpotlightCrackTower" type="SpotLight3D" parent="AROUND/TOWER"]
+transform = Transform3D(-0.3896453, -0.8632576, 0.3208785, -0.3296895, 0.45607153, 0.82662195, -0.859931, 0.21629903, -0.46231303, 1.8631976, 38.584465, -4.5500164)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 4.874
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_opacity = 0.94
+spot_range = 75.464
+spot_angle = 62.47
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="AROUND/TOWER/SpotlightCrackTower"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightCrackTower2" type="SpotLight3D" parent="AROUND/TOWER"]
+transform = Transform3D(-0.73948574, -0.6644138, 0.1082366, -0.48622477, 0.63837105, 0.5967142, -0.46556026, 0.3886343, -0.79512084, -1.3844583, 19.86186, -13.767799)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 8.0
+shadow_enabled = true
+shadow_opacity = 0.84
+spot_range = 77.463
+spot_angle = 18.11
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="AROUND/TOWER/SpotlightCrackTower2"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="ISLAND" parent="." instance=ExtResource("15_f83oq")]
+
+[node name="Columns" parent="." instance=ExtResource("17_f83oq")]
+metadata/_edit_lock_ = true
+
+[node name="Princess" parent="." instance=ExtResource("16_0nq4r")]
+transform = Transform3D(0.68591994, 0, -0.727677, 0, 1, 0, 0.727677, 0, 0.68591994, -46.476433, 1.7311289, 22.475784)
+
+[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_f83oq")]
+transform = Transform3D(0.009599137, 0, -0.9999539, 0, 1, 0, 0.9999539, 0, 0.009599137, -47.180607, 1.6483574, 25.064037)
+player = NodePath("../Princess")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="DirectionalSun" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
+light_color = Color(1, 0.9929813, 0.96693254, 1)
+shadow_enabled = true
+shadow_blur = 2.97
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/DirectionalSun"]
+transform = Transform3D(37.001667, -1.4305115e-06, 0, -1.66893e-06, 37.00167, -1.5497208e-06, -1.9073486e-06, 9.536743e-07, 37.001667, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="LincolnLights" type="Node" parent="Lights"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/LincolnLights"]
+transform = Transform3D(-0.16875227, 0.9838872, -0.05906501, -0.87366045, -0.17705193, -0.45317778, -0.45633337, -0.024872016, 0.8894613, -43.514027, -6.6024475, 65.281685)
+light_color = Color(0.90774393, 0.95721763, 1, 1)
+light_energy = 7.0
+shadow_enabled = true
+spot_range = 235.539
+spot_angle = 54.47
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/SpotLight3D"]
+transform = Transform3D(15.651709, -9.685755e-07, 4.7683716e-07, 1.3411045e-07, 15.651708, -3.5762787e-07, 4.7683716e-07, 4.172325e-07, 15.651707, -1.3420715, -0.07314682, 2.6158943)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="DirectionalSun2" type="DirectionalLight3D" parent="Lights/LincolnLights"]
+transform = Transform3D(-0.1609067, 0.98416895, -0.07430018, -0.87366045, -0.17705192, -0.45317778, -0.45915848, -0.008006216, 0.88831836, -25.683239, -6.6024475, 65.281685)
+visible = false
+light_color = Color(0.84855527, 0.89219815, 1, 1)
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="SpotlightWindowFromLady" type="SpotLight3D" parent="Lights/LincolnLights"]
+transform = Transform3D(0.67721, -0.44609457, 0.5851379, 1.396566e-08, 0.79525137, 0.60627985, -0.7357899, -0.41057876, 0.5385521, -4.6997223, 6.0470457, 34.512825)
+light_color = Color(0.72360146, 0.8014959, 1, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 3.442
+shadow_enabled = true
+shadow_opacity = 0.54
+shadow_blur = 2.845
+spot_range = 43.343
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/SpotlightWindowFromLady"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="FlickerOmni" parent="Lights/LincolnLights" instance=ExtResource("25_efgc1")]
+transform = Transform3D(0.833033, 0.0726466, -0.548432, 0, 0.991341, 0.131315, 0.553223, -0.10939, 0.82582, -21.44143, 6.1281586, 30.736893)
+visible = false
+
+[node name="FlickerOmni2" parent="Lights/LincolnLights" instance=ExtResource("25_efgc1")]
+transform = Transform3D(0.833033, 0.0726466, -0.548432, 0, 0.991341, 0.131315, 0.553223, -0.10939, 0.82582, -21.44143, 6.1281586, -1.2386701)
+visible = false
+
+[node name="FlickerOmni3" parent="Lights/LincolnLights" instance=ExtResource("25_efgc1")]
+transform = Transform3D(0.833033, 0.0726466, -0.548432, 0, 0.991341, 0.131315, 0.553223, -0.10939, 0.82582, -16.511848, 7.0352936, 3.51563)
+visible = false
+
+[node name="FlickerOmni4" parent="Lights/LincolnLights" instance=ExtResource("25_efgc1")]
+transform = Transform3D(0.833033, 0.0726466, -0.548432, 0, 0.991341, 0.131315, 0.553223, -0.10939, 0.82582, -16.511848, 7.0352936, 3.51563)
+visible = false
+
+[node name="FlickerOmni5" parent="Lights/LincolnLights" instance=ExtResource("25_efgc1")]
+transform = Transform3D(0.833033, 0.0726466, -0.548432, 0, 0.991341, 0.131315, 0.553223, -0.10939, 0.82582, -1.6712823, 4.77954, 0.926682)
+visible = false
+
+[node name="windows" type="Node3D" parent="Lights/LincolnLights"]
+
+[node name="SpotlightWindow1" type="SpotLight3D" parent="Lights/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.9969118, 0.07852864, 0, -0.07852864, 0.9969118, -44.903446, 6.0470457, 53.79666)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 40.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/windows/SpotlightWindow1"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow2" type="SpotLight3D" parent="Lights/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.79525137, 0.60627997, 0, -0.60627997, 0.79525137, -35.32964, 6.0470457, 51.766598)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 80.0
+spot_angle = 40.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/windows/SpotlightWindow2"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow3" type="SpotLight3D" parent="Lights/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.66523045, 0.7466382, 0, -0.7466382, 0.66523045, -25.093466, 6.0470457, 51.766598)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 80.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/windows/SpotlightWindow3"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow4" type="SpotLight3D" parent="Lights/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.79525137, 0.60627997, 0, -0.60627997, 0.79525137, -54.889965, 6.0470457, 51.781868)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 80.0
+spot_angle = 40.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/windows/SpotlightWindow4"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow6" type="SpotLight3D" parent="Lights/LincolnLights/windows"]
+transform = Transform3D(-0.99959093, 0.017340796, -0.022745734, -0.010845788, 0.50605255, 0.8624345, 0.026465839, 0.8623283, -0.50565743, -44.762062, 9.89364, 5.558416)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 40.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/windows/SpotlightWindow6"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow7" type="SpotLight3D" parent="Lights/LincolnLights/windows"]
+transform = Transform3D(-0.9995909, 0.021355316, -0.01902689, -0.001280515, 0.63114995, 0.7756598, 0.02857328, 0.77536684, -0.6308644, -54.99405, 8.558432, 5.803667)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 40.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lights/LincolnLights/windows/SpotlightWindow7"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yqn15")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="Fires" type="Node3D" parent="Lights/LincolnLights"]
+
+[node name="FireFlicker" parent="Lights/LincolnLights/Fires" instance=ExtResource("22_ee878")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -22.414608, 6.638407, -1.3316934)
+__csg = false
+
+[node name="OmniLight3D" parent="Lights/LincolnLights/Fires/FireFlicker" index="0"]
+omni_range = 16.383
+
+[node name="CSGSphere3D" parent="Lights/LincolnLights/Fires/FireFlicker/OmniLight3D" index="1"]
+material_override = SubResource("StandardMaterial3D_yqn15")
+
+[node name="FireFlicker2" parent="Lights/LincolnLights/Fires" instance=ExtResource("22_ee878")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -16.1885, 5.7008977, 6.7012644)
+__csg = false
+
+[node name="OmniLight3D" parent="Lights/LincolnLights/Fires/FireFlicker2" index="0"]
+omni_range = 21.047
+
+[node name="CSGSphere3D" parent="Lights/LincolnLights/Fires/FireFlicker2/OmniLight3D" index="1"]
+material_override = SubResource("StandardMaterial3D_yqn15")
+
+[node name="FireFlicker3" parent="Lights/LincolnLights/Fires" instance=ExtResource("22_ee878")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -20.880241, 5.8644376, 19.057056)
+__csg = false
+
+[node name="OmniLight3D" parent="Lights/LincolnLights/Fires/FireFlicker3" index="0"]
+omni_range = 9.0
+
+[node name="CSGSphere3D" parent="Lights/LincolnLights/Fires/FireFlicker3/OmniLight3D" index="1"]
+material_override = SubResource("StandardMaterial3D_yqn15")
+
+[node name="FireFlicker4" parent="Lights/LincolnLights/Fires" instance=ExtResource("22_ee878")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -21.166058, 5.8644376, 31.193642)
+__csg = false
+
+[node name="OmniLight3D" parent="Lights/LincolnLights/Fires/FireFlicker4" index="0"]
+omni_range = 9.0
+
+[node name="CSGSphere3D" parent="Lights/LincolnLights/Fires/FireFlicker4/OmniLight3D" index="1"]
+material_override = SubResource("StandardMaterial3D_yqn15")
+
+[node name="FlickerOmni6" parent="Lights/LincolnLights" instance=ExtResource("25_efgc1")]
+transform = Transform3D(0.9996748, 0.025496507, 0, -0.025496494, 0.9996753, 0, 0, 0, 1, -7.424736, 2.581398, 12.15792)
+visible = false
+
+[node name="CSGSphere3D" parent="Lights/LincolnLights/FlickerOmni6/OmniLight3D" index="1"]
+visible = false
+
+[node name="Fog" type="Node" parent="."]
+
+[node name="FogVolume" type="FogVolume" parent="Fog"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.382797, 7.001569, 31.500858)
+size = Vector3(11.464355, 13.36908, 14.250458)
+shape = 0
+material = SubResource("FogMaterial_ee878")
+
+[node name="FogVolume2" type="FogVolume" parent="Fog"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.463089, 46.537, 5.035817)
+size = Vector3(25.563477, 38.715324, 20.300652)
+shape = 0
+material = SubResource("FogMaterial_ee878")
+
+[node name="crates" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 145.6312, 7.493117, -169.38483)
+
+[node name="DarkCrate" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.20079, -4.0666165, 117.69539)
+
+[node name="DarkCrate5" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.20079, -3.2274098, 117.69539)
+
+[node name="DarkCrate6" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.20079, -2.4083753, 117.69539)
+
+[node name="DarkCrate2" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.98627, -4.0666165, 116.41147)
+
+[node name="DarkCrate7" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.98627, -3.29221, 116.41147)
+
+[node name="DarkCrate8" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.98627, -2.5386739, 116.41147)
+
+[node name="DarkCrate9" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.07173, -4.0666165, 116.41147)
+
+[node name="DarkCrate10" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.07173, -3.29221, 116.41147)
+
+[node name="DarkCrate11" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.07173, -2.5386739, 116.41147)
+
+[node name="DarkCrate12" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.44475, -4.0666165, 116.41147)
+
+[node name="DarkCrate13" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.44475, -3.29221, 116.41147)
+
+[node name="DarkCrate14" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.44475, -2.5386739, 116.41147)
+
+[node name="DarkCrate15" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199.78632, -4.0666165, 116.41147)
+
+[node name="DarkCrate16" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199.78632, -3.29221, 116.41147)
+
+[node name="DarkCrate17" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199.78632, -2.5386739, 116.41147)
+
+[node name="DarkCrate18" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -201.28911, -4.0666165, 116.41147)
+mass = 4.578
+
+[node name="DarkCrate19" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -201.28911, -3.29221, 116.41147)
+mass = 4.578
+
+[node name="DarkCrate20" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -201.28911, -2.5386739, 116.41147)
+mass = 4.578
+
+[node name="DarkCrate21" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -4.0666165, 116.41147)
+mass = 4.578
+
+[node name="DarkCrate22" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -3.29221, 116.41147)
+mass = 4.578
+
+[node name="DarkCrate23" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -2.5386739, 116.41147)
+
+[node name="DarkCrate24" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -4.0666165, 116.41147)
+
+[node name="DarkCrate25" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -3.29221, 116.41147)
+
+[node name="DarkCrate26" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -2.5386739, 116.41147)
+mass = 4.578
+
+[node name="DarkCrate27" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -4.0666165, 116.41147)
+
+[node name="DarkCrate28" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -3.29221, 116.41147)
+
+[node name="DarkCrate29" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -2.5386739, 116.41147)
+
+[node name="DarkCrate30" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -4.0666165, 116.41147)
+
+[node name="DarkCrate31" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -3.29221, 116.41147)
+
+[node name="DarkCrate32" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -2.5386739, 116.41147)
+
+[node name="DarkCrate3" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.09477, -4.0666165, 110.70691)
+
+[node name="DarkCrate4" parent="crates" instance=ExtResource("11_hnne2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.77643, -3.727738, 120.02602)
+
+[editable path="AROUND/TOWER/TOWER_WRAPPER/FireFlicker2"]
+[editable path="AROUND/TOWER/TOWER_WRAPPER/FireFlicker3"]
+[editable path="Columns"]
+[editable path="Lights/LincolnLights/Fires/FireFlicker"]
+[editable path="Lights/LincolnLights/Fires/FireFlicker2"]
+[editable path="Lights/LincolnLights/Fires/FireFlicker3"]
+[editable path="Lights/LincolnLights/Fires/FireFlicker4"]
+[editable path="Lights/LincolnLights/FlickerOmni6"]
