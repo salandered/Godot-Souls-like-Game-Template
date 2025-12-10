@@ -17,6 +17,9 @@ class Type_:
 	const land := "land"
 	const whoosh := "whoosh"
 
+	##
+	const move_noise := "move_noise"
+
 	## weapon
 	const hit_weapon := "hit_weapon"
 	const whoosh_weapon := "whoosh_weapon"

@@ -39,7 +39,7 @@ func contextualize(new_input: InputPackage, delta: float) -> InputPackage:
 ## translates the input to basic states with the help of the current weapon
 func _translate_combat_actions(new_input: InputPackage, delta: float):
 	# todo: hard coded weapon!
-	var weapon := get_weapon(WeaponNames.smith_sword)
+	var weapon := get_weapon_by_id(WeaponID.smith_sword)
 	var _translated: Array = weapon.translate_combat_input_to_state(new_input.combat_actions)
 	new_input.actions.append_array(_translated)
 

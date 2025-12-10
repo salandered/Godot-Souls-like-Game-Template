@@ -129,8 +129,8 @@ static func _setup_collision_layers(rigid_body: RigidBody3D) -> void:
 	__log_("Collision layers set | layer:", Collision.Layers.ITEM_COL, "| mask:", Collision.Masks.ITEM_COL_MASK)
 
 
-## __LOGS
-# region
+# region: __LOGS
+
 
 static func pp_name() -> String:
 	return "RigidBodyCreator"
@@ -139,6 +139,10 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __LOG_INDENT() -> int:
-	return 0
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
 
 # endregion

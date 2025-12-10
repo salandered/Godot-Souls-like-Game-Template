@@ -7,7 +7,7 @@ var anim_speed_bump := EaseCurveSampler.new()
 
 
 func get_active_weapon_name() -> String:
-	return WeaponNames.bg_aura_weapon
+	return WeaponID.bg_aura_weapon
 
 
 func initialise_implementation() -> void:
@@ -19,7 +19,7 @@ func initialise_implementation() -> void:
 	hit_damage = 25
 
 func get_active_weapon_names() -> Array[String]:
-	return [WeaponNames.bg_aura_weapon]
+	return [WeaponID.bg_aura_weapon]
 
 func on_exit_state() -> void:
 	get_animator_manager().reset_global_speed_scale()

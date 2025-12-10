@@ -62,3 +62,23 @@ func _to_string() -> String:
 	if _angular_sp != -1.0: parts.append("ang sp %.1f" % _angular_sp)
 	if _turn_speed != -1.0: parts.append("turn sp %.1f" % _turn_speed)
 	return "Sp Conf:(%s)" % ", ".join(parts)
+
+
+
+# region: __LOGS
+
+
+static func pp_name() -> String:
+	return "SpeedConfig"
+
+static func __LOG_B() -> bool:
+	return false
+
+static func __LOG_INDENT() -> int:
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
+
+# endregion

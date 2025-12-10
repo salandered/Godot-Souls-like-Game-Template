@@ -95,6 +95,8 @@ func _is_short_run() -> bool:
 
 var _dev_test := 0.05
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	if event.is_action_pressed(RawAction.t1):
 		_dev_test -= 0.05
 

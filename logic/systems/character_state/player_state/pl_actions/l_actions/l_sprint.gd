@@ -119,6 +119,8 @@ var _next_anim_correction := 0.12
 
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 3, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 

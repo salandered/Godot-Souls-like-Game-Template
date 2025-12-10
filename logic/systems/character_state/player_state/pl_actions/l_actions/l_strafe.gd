@@ -88,7 +88,7 @@ func _inherit_dodge_speed_if_same_direction():
 		_inherit_speed = true
 
 	if _inherit_speed:
-		print("_inherit_speed //////////")
+		# print("_inherit_speed //////////")
 		speed_from_inherited.initialise(_inherited_speed, curr_direction.get_curr_speed(), 0.3)
 		speed_mult_from_idle.initialise(accel_from_idle_curve, 0.0)
 

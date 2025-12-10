@@ -10,7 +10,7 @@ static func is_track_exists(native_anim: Animation, track_prefix: String, param_
 	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
 	if _track == -1:
-		# print_.warn("Track not found: " + _track_name + " in animation " + anim_name)
+		# error_.warn("Track not found: " + _track_name + " in animation " + anim_name)
 		return false
 	return true
 
@@ -24,7 +24,7 @@ static func get_bool_value_from_track(native_anim: Animation, track_prefix: Stri
 	var _track := native_anim.find_track(_track_name, Animation.TYPE_VALUE)
 	
 	if _track == -1:
-		# print_.warn("Track not found: " + _track_name + " in animation " + anim_name)
+		# error_.warn("Track not found: " + _track_name + " in animation " + anim_name)
 		return default_value
 
 	var value: Variant = native_anim.value_track_interpolate(_track, timestamp)
@@ -53,11 +53,33 @@ static func get_bool_value_from_track(native_anim: Animation, track_prefix: Stri
 	return default_value # Last resort
 
 
-static func assert_has_animation(animator: AnimationPlayer, anim_id: String, fatal: bool = true) -> bool:
-	if fatal:
-		assert(animator.has_animation(anim_id), pp.s("Animator", animator.name, "has no anim_id", pp.in_q(anim_id)))
-		return true
-	if not animator.has_animation(anim_id):
-		__log_warn(pp.s("Animator" + animator.name + "has no animation" + pp.in_q(anim_id)), "assert_has_animation", "skip")
-		return false
-	return true
+static func _msg_key_problem(animator: AnimationPlayer, anim_id: String, found_is_problem: bool = false) -> String:
+	var _found_msg := "found in AnimPlayer" if found_is_problem else "not found in AnimPlayer:"
+	var _msg := pp.s("Anim", pp.in_q(anim_id), _found_msg, animator)
+	return _msg
+
+
+static func safe_has_animation(animator: AnimationPlayer, anim_id: String, warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
+	var exists: bool = animator.has_animation(anim_id)
+	if not exists:
+		error_.warn(_msg_key_problem(animator, anim_id), "", "", warn_level)
+	return exists
+
+
+# region: __LOGS
+
+
+static func pp_name() -> String:
+	return "AnimUtils"
+
+static func __LOG_B() -> bool:
+	return false
+
+static func __LOG_INDENT() -> int:
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
+
+# endregion

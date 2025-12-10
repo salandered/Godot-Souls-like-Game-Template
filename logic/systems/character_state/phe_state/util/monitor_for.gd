@@ -1,7 +1,7 @@
 extends RefCounted
 class_name PHEHelpers
 
-class MonitorFor extends RefCountedLogger:
+class MonitorFor extends BaseRefCountedSystem:
 	## STATIC
 	# will monitor state for random '_duration' set between _min and _max
 	# these are static defaults, but set_random() supports overriding

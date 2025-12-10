@@ -1,4 +1,4 @@
-extends Node
+extends BaseNodeSystem
 class_name FancyCamera
 
 @export_group("Following Weights")
@@ -85,7 +85,21 @@ var accumulated_mouse_delta := Vector2.ZERO
 var FREE_STATE_NAME := "free_state"
 var LOCKED_STATE_NAME := "locked_state"
 
-var __initialised: bool = false
+
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		player,
+		focus,
+		mount,
+		nest,
+		camera,
+		free_state,
+		locked_state,
+		camera_movement,
+		locked_target,
+		current_state,
+	]
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -130,13 +144,11 @@ func initialise() -> void:
 	camera_movement._current_len = initial_offset.length()
 
 	
-	assert(current_state)
-	assert(locked_target)
-	
 	__dev_initialise()
 	
-	__initialised = true
 	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
+	if not __validate_deps_set_init():
+		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can't be done")
 
 
 func is_locked_state():
@@ -152,7 +164,7 @@ func is_free_state():
 
 
 func _process(delta: float) -> void:
-	if not __initialised:
+	if __could_not_initialised():
 		return
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
 	# NOTE: this is second place when we gather input (main being in pl model for pl SM)
@@ -222,19 +234,17 @@ func _input(event: InputEvent) -> void:
 	_dev_input(event)
 
 
-## LOGS
+## __LOGS
+# region
 
+func pp_name() -> String:
+	return "🎥 Cam"
 
-# region __LOGS
+func __LOG_B() -> bool:
+	return LogToggler.FANCY_CAM_B
 
-func __log_(_prefix: String, ...parts: Array):
-	print_.fancy_cam(_prefix, pp.list_(parts))
-
-func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
-	print_.warn(what, where + " FancyCam", fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
-
-func __log_error(what: String, where: String = "", fallback: String = "", ...context: Array):
-	print_.warn(what, where + " FancyCam", fallback, WarnLevel.PUSH_ERROR, pp.list_(context))
+func __LOG_INDENT() -> int:
+	return 0
 
 # endregion
 
@@ -250,6 +260,8 @@ var fov_cycler: Cycler
 
 
 func __dev_initialise() -> void:
+	if not OS.is_debug_build():
+		return
 	__csg_objects = get_descendants.csg_primitives(self)
 	__toggle_camera_visuals()
 
@@ -268,6 +280,9 @@ func __toggle_camera_visuals():
 	
 
 func _dev_input(event: InputEvent):
+	if not OS.is_debug_build():
+		return
+
 	if event.is_action_released(RawAction.DEV_CAM_fov):
 		__change_fov()
 	

@@ -10,6 +10,7 @@ extends BaseCharacter
 
 #
 var camera_target: EnemyCameraTarget
+@onready var coll_collider: CollisionShape3D = %CollCollider
 
 
 func initialise() -> void:
@@ -17,9 +18,33 @@ func initialise() -> void:
 	for t: EnemyCameraTarget in targets:
 		t.initialise(self)
 		t.make_active()
-	assert(len(targets) == 1, pp.s("support exactly one cam target for an enemy, got", len(targets)))
+
+	_initialise_cam_targets(targets)
+	_initialise_coll_collder()
+
+
+func _initialise_cam_targets(targets: Array[EnemyCameraTarget]) -> void:
+	if len(targets) == 0:
+		__log_error("len(targets) == 0", "", "camera_target = null")
+		camera_target = null
+		return
+
+	if len(targets) > 1:
+		__log_warn("len(targets) > 0; suport only one", "", "first will be used")
+
 	camera_target = targets[0]
 
 
+func _initialise_coll_collder():
+	if coll_collider:
+		var original_shape := coll_collider.shape
+		if not error_.null_object(original_shape, "CollisionShape3D has no shape!"):
+			if original_shape is not CapsuleShape3D:
+				__log_warn("shape is not CapsuleShape3D. Not supported")
+			else:
+				# Duplicate to avoid shared resource issues
+				coll_collider.shape = original_shape.duplicate()
+
+	
 func is_player() -> bool:
 	return false

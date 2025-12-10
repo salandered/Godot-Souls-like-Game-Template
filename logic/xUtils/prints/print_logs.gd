@@ -115,13 +115,9 @@ static func lsm(add_prefix_: String, text: String, info_indents: int = 0):
 # region: PLAYER SYSTEMS
 
 static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(LogToggler.input_gathering_B, "Input", 0, prefix)
-static var FANCY_CAM_PRINT := PrintData.PrintInstance.new(LogToggler.FANCY_CAM_B, "🎥 Cam", 0, prefix)
 
 static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0):
 	_generic(INPUT_GATHERING_PRINT, add_prefix_, text, info_indents)
-
-static func fancy_cam(add_prefix_: String, text: Variant, info_indents: int = 0):
-	_generic(FANCY_CAM_PRINT, add_prefix_, text, info_indents)
 
 
 # endregion
@@ -324,41 +320,6 @@ static func __get_bit_position(value: int) -> int:
 			return i
 	return -1
 
-
-static func _warn(_msg: String, warn_level: String = WarnLevel.PUSH_ERROR):
-	_msg = pp.s(em.warn, "WARNING |", _msg)
-	var _msg_crucial = pp.s(em.crucial_x2, _msg)
-	match warn_level:
-		## soft equals warn here
-		WarnLevel.SILENT:
-			pass
-		WarnLevel.WARN:
-			print("\t", _msg)
-		WarnLevel.WARN_CRUCIAL:
-			print("\t", _msg_crucial)
-		WarnLevel.ASSERT:
-			push_error(_msg_crucial)
-			assert(false, _msg_crucial)
-		WarnLevel.PUSH_ERROR:
-			push_error(_msg_crucial)
-		WarnLevel.PUSH_WARNING:
-			push_warning(_msg)
-		_:
-			prints("\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
-			push_error(_msg_crucial)
-
-
-static func warn(
-		what: String,
-		where: String,
-		fallback: String,
-		warn_level: String = WarnLevel.PUSH_ERROR,
-		...details: Array):
-	var _msg = "Problem: %s. Where: '%s'. Fallback '%s'. [%s]" % [what, where, fallback, warn_level]
-	if not details.is_empty():
-		_msg += "| Details: " + pp.list_(details)
-	_warn(_msg, warn_level)
-	
 
 static func note(bright: bool, ...parts: Array):
 	var _msg = em.pin_alt + "NOTE (not warn) " + pp.list_(parts)

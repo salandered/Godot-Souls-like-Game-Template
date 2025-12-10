@@ -80,7 +80,7 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 		_next_state = ra.spick_weighted({
 			state_angry(PHES.attack_club_series, PHES.attack_360_series): 0.7,
 			PHES.attack_pick_single: fvalue_angry(0.4, 0.5),
-			PHES.Leaf.scare_off: fvalue_angry(0.2, 0.1),
+			PHES.Leaf.scare_off: fvalue_angry(10, 10), # fvalue_angry(0.2, 0.1),
 			PHES.attack_from_dodge_b: fvalue_angry(0.0, 0.4)})
 	else:
 		_reason = "dist < SUPER_CLOSE"

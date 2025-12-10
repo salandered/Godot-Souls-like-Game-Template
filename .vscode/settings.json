@@ -111,7 +111,7 @@
 		"folderPathColor.states_blue": "#6692d4", // state blue 
 		"folderPathColor.custom11": "#f0c078d5", // orange
 		"folderPathColor.custom12": "#caeed5", // container
-		"folderPathColor.custom14": "#92b9e4",
+		"folderPathColor.custom14": "#e49292", // red ish
 		"folderPathColor.orange_shade_2": "#92b9e4",
 		"folderPathColor.gray_ignore": "#9ea4ac",
 		"folderPathColor.green_shade_3": "#a4cfa3f5", // leafes
@@ -128,6 +128,19 @@
 		{
 			"path": "*input*",
 			"color": "green_shade_3",
+		},
+		{
+			"path": "logic/systems/input",
+			"color": "green_shade_3",
+		},
+		// combat
+		{
+			"path": "logic/systems/hurt_hit_box",
+			"color": "custom14",
+		},
+		{
+			"path": "*combat*",
+			"color": "custom14",
 		},
 		// FEELINGS
 		{
@@ -185,20 +198,20 @@
 		},
 		// PLAYER STATE
 		{
-			"path": "logic/Player/pl_states/player_sm/states",
+			"path": "logic/systems/character_state/player_state/pl_states",
 			"color": "states_blue"
 		},
 		{
-			"path": "logic/Player/pl_states/legs_sm/actions",
+			"path": "l_*",
 			"color": "custom11"
 		},
 		// PLAYER SM
 		{
-			"path": "logic/Player/pl_states/legs_sm",
+			"path": "*legs_sm*",
 			"color": "awareness"
 		},
 		{
-			"path": "logic/Player/pl_states/player_sm",
+			"path": "*player_sm*",
 			"color": "blue_shade_3"
 		},
 		// MODEL
@@ -212,36 +225,24 @@
 			"color": "dark_misc"
 		},
 		// ENEMY STATES
+		// {
+		// 	"path": "logic/Enemies/SimpleEnemy/se_states",
+		// 	"color": "custom10"
+		// },
 		{
-			"path": "logic/Enemies/SimpleEnemy/se_states",
-			"color": "custom10"
-		},
-		{
-			"path": "logic/Enemies/phe_enemy/phe_states/leafes",
+			"path": "logic/systems/character_state/phe_state/state_leafes",
 			"color": "green_shade_3"
 		},
 		{
-			"path": "logic/Enemies/phe_enemy/phe_states/phases",
+			"path": "logic/systems/character_state/phe_state/state_composites",
 			"color": "states_blue"
-		},
-		{
-			"path": "logic/Enemies/phe_enemy/phe_states",
-			"color": "custom13"
 		},
 		// ENEMY
 		{
-			"path": "logic/Enemies/SimpleEnemy",
-			"color": "custom1"
-		},
-		{
-			"path": "logic/Enemies/phe_enemy",
+			"path": "logic/entities/Enemy",
 			"color": "custom10"
 		},
 		// CAMERA
-		{
-			"path": "logic/Player/fancy-camera",
-			"color": "camera_green"
-		},
 		{
 			"path": "*camera*",
 			"color": "camera_green"
@@ -253,7 +254,7 @@
 		},
 		// ANIM
 		{
-			"path": "logic/Player/pl_anim/sk-m",
+			"path": "logic/systems/sk_modifiers",
 			"color": "animation"
 		},
 		// {
@@ -263,6 +264,18 @@
 		{
 			"path": "*_animator*",
 			"color": "animation"
+		},
+		{
+			"path": "logic/systems/sfx_audio_system/on_sfx_sig_asp",
+			"color": "states_blue"
+		},
+		{
+			"path": "*sfx_system*",
+			"color": "awareness"
+		},
+		{
+			"path": "*sfx_audio*",
+			"color": "awareness"
 		},
 		//
 		//
@@ -336,6 +349,68 @@
 				},
 				{
 					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(get_hard_dependencies)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(get_soft_dependencies)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(__validate_dependencies\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		"\\b(__validate_deps_set_init\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		"\\b(__could_not_initialised\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		"(if not OS.is_debug_build\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#caa495d7",
+					// "backgroundColor": "#aff3ff",
+					"borderRadius": "2px", // Give the box rounded corners
+					"border": "1px solid #caa495d7" // A solid border
 				}
 			]
 		},
@@ -538,11 +613,12 @@
 				}
 			]
 		},
-		"\\b(__log_[a-zA-Z0-9_]*)(?=\\s*\\.)": {
+		"\\b(error_\\.[a-zA-Z0-9_()]*)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#77b2dade",
+					"color": "#e9a686d2",
+					"fontStyle": "italic"
 				}
 			]
 		},

@@ -13,6 +13,8 @@ var previous_position: Vector3 = Vector3.INF
 var time_elapsed: float = 0.0
 
 func _process(delta: float) -> void:
+	if not OS.is_debug_build():
+		return
 	if not turned_on:
 		return
 	time_elapsed += delta
@@ -35,6 +37,8 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	if event.is_action_pressed(RawAction.t5):
 		print_.dev("Debug path cleared.")
 		path_points.clear()

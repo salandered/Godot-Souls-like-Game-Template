@@ -11,9 +11,14 @@ class_name PHCharacter
 @onready var anim_params_container: EAnimParamsContainer = %AnimParamsContainer
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var combat: PHECombat = %Combat
-@onready var coll_collider: CollisionShape3D = %CollCollider
 @onready var _top: BasePHEState = %_Top
 @onready var visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
+
+## sfx
+@onready var sfx_system: EnemySFXSystem = %AudioSystem
+@onready var e_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %EAnimSFXSigEmitter
+@onready var pinga_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %PingaAnimSFXSigEmitter
+@onready var aura_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %AuraAnimSFXSigEmitter
 
 
 @onready var _start_position := global_transform.origin
@@ -40,20 +45,48 @@ var _prev_leaf: BasePHELeaf
 var push_rigid_bodies_force: float = 8.0
 
 
-var __initialised: bool = false
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
 ##    => check root_motion_track of NativePlayer!
 ##       it's very fragile, any change of node tree and it's gone
 
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		player,
+		config,
+		container,
+		enemy_movement,
+		native_player,
+		anim_container,
+		animator_manager,
+		combat,
+		phe_feelings,
+		_top,
+		visuals_root,
+	]
+
+func get_soft_dependencies() -> Array[Object]:
+	return [
+		coll_collider,
+		camera_target,
+		sfx_system,
+		e_anim_sfx_sig_emitter,
+		pinga_anim_sfx_sig_emitter,
+		aura_anim_sfx_sig_emitter
+		]
+
+
 func initialise() -> void:
 	super.initialise()
-
-	_initialise_coll_collder()
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	
+	if not __validate_dependencies():
+		return
+
+	var e_sig_container := EnemySignalContainer.new()
+
 	combat.initialise()
 	animator_manager.initialise()
 
@@ -65,14 +98,31 @@ func initialise() -> void:
 		EAnimParamsContainer.get_all_params(),
 		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
 	
+	## SFX. See Princess for referense
+	sfx_system.initialise(
+		e_sig_container,
+		_initialise_sfx_configs(),
+		self,
+		{sfx_system.character_additional_data_key: self}
+		)
+	
+	var _e_sad_container := EnemySADContainer.new()
+	e_anim_sfx_sig_emitter.initialise(_e_sad_container, e_sig_container)
+	
 
-	## only 1 weapon is supported for player
+	var _link: Dictionary[String, EnemyAnimSFXSignalEmitter] = {
+		WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
+		WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
+	}
+		
+	var _weapon_sad_container := WeaponSADContainer.new()
 	var e_weapons := combat.get_all_weapons()
-	# var _weapon_whoosh_signal := player_weapon.get_sfx_whoosh_weapon_signal()
-	# print("///////", player_weapon, _weapon_whoosh_signal)
-	# sfx_system.initialise(signals, self, {sfx_system.character_additional_data_key: self})
-	# anim_sfx_signal_emitter.initialise(signals, _weapon_whoosh_signal)
+	for weapon in e_weapons:
+		var _emitter: EnemyAnimSFXSignalEmitter = _link.get(weapon.get_weapon_id())
+		if _emitter:
+			_emitter.initialise(_weapon_sad_container, weapon.get_signal_container())
 
+	
 	config.me = self
 	enemy_movement.me = self
 	container.me = self
@@ -83,21 +133,15 @@ func initialise() -> void:
 	# for v: MeshInstance3D in visuals:
 		# __log_(v.name)
 
+	__validate_deps_set_init()
+
 	_initialise_sm()
-
-	__initialised = true
-
-func _initialise_coll_collder():
-	assert(coll_collider)
-	var original_shape := coll_collider.shape
-	assert(original_shape != null, "CollisionShape3D has no shape!")
-	assert(original_shape is CapsuleShape3D, "shape is not CapsuleShape3D. Not supported")
-	
-	# Duplicate to avoid shared resource issues
-	coll_collider.shape = original_shape.duplicate()
 
 
 func _initialise_sm():
+	if __could_not_initialised():
+		return
+
 	state_machine = _top
 
 	var _sleep_state := container.get_state_by_name(PHES.Leaf.sleep)
@@ -109,7 +153,7 @@ func _initialise_sm():
 	state_machine._on_enter_state()
 
 
-func pp_character_name() -> String:
+func pp_name() -> String:
 	return "Enemy"
 
 func get_current_state() -> BasePHEState:
@@ -152,7 +196,7 @@ func update_state_history(state_name_: String):
 
 
 func _process(delta: float) -> void:
-	if not __initialised:
+	if __could_not_initialised():
 		return
 
 	state_machine._update(delta)
@@ -162,10 +206,12 @@ func _process(delta: float) -> void:
 	player.__dev_labels._label_phe_enemy_info(self)
 
 	if death_raised:
-		on_death_raised()
+		_on_death_raised()
 
 
 func react_on_hit(hit_data: HitData) -> void:
+	if __could_not_initialised():
+		return
 	var _curr_state := get_current_state()
 	if not _curr_state:
 		__log_error("no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
@@ -177,7 +223,7 @@ func reset_position() -> void:
 	transform.origin = _start_position
 
 
-func on_death_raised() -> void:
+func _on_death_raised() -> void:
 	if death_raised_processed:
 		return
 	
@@ -187,14 +233,14 @@ func on_death_raised() -> void:
 	camera_target.make_inactive()
 	await FrameUtils.wait_process_frames(2)
 	
-	print_.prefix("trigger_death_scatter()")
-	await trigger_death_scatter(visuals)
+	print_.prefix("_trigger_death_scatter()")
+	await _trigger_death_scatter(visuals)
 
 	await FrameUtils.wait_process_frames(5)
 	print_.prefix("coll_collider.disabled = true")
 
 
-	shrink_coll_capsule()
+	_shrink_coll_capsule()
 
 	self.collision_layer = Collision.Layers.DEBRIS_COL
 	self.collision_mask = Collision.Masks.DEBRIS_COL_MASK
@@ -205,7 +251,7 @@ func on_death_raised() -> void:
 	# self.queue_free()
 
 	
-func shrink_coll_capsule():
+func _shrink_coll_capsule():
 	if not coll_collider.shape is CapsuleShape3D:
 		__log_error("if not coll_collider.shape is CapsuleShape3D", "", "return")
 		return
@@ -223,7 +269,7 @@ func shrink_coll_capsule():
 	CollShapeTranform.shrink_coll_shape_capsule_size(coll_collider, 1.0, _height_mult)
 
 
-func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
+func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	print_.prefix_s("glob position of an enemy", self.global_position)
 	var rigids_container := Node3D.new()
 	rigids_container.name = "EnemyDebrisContainer"
@@ -249,17 +295,41 @@ func trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	
 	for visual_mesh: MeshInstance3D in mesh_list:
 		visual_mesh.visible = false
-	print_.prefix("end of trigger_death_scatter")
+	print_.prefix("end of _trigger_death_scatter")
 
 
 func __pp_state_history():
 	return "state history" + pp.array_(_state_history)
 
 
+##
+
+func get_run_state_names() -> Array[String]:
+	return [PHES.Leaf.orbit]
+
+func get_dodge_state_names() -> Array[String]:
+	return [PHES.Leaf.dodge_F, PHES.Leaf.dodge_B, PHES.Leaf.dodge_L, PHES.Leaf.dodge_R]
+
+func get_sprint_state_names() -> Array[String]:
+	return [PHES.Leaf.pursue]
+
+func get_power_attacks_state_names() -> Array[String]:
+	return [
+		PHES.Leaf.scare_off,
+		PHES.Leaf.gap_closer,
+		PHES.Leaf.sword_slide,
+		PHES.Leaf.power_up,
+		PHES.Leaf.attack_360_low,
+		PHES.Leaf.phase_switch,
+	   ]
+
+
 ## DEV
 
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	var bone_mask := BoneMask.get_upper_body()
 	if event.is_action_pressed(RawAction.DEV_8):
 		animator_manager.set_overlay_anim(PHEA.react.react_from_R,

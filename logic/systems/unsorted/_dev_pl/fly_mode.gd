@@ -73,6 +73,8 @@ func _handle_free_fly_movement(delta: float) -> Vector3:
 
 
 func _input(event: InputEvent) -> void:
+	# if not OS.is_debug_build(): ## ??
+	# 	return
 	if Input.is_action_just_pressed(RawAction.DEV_fly_mode):
 		_toggle_fly_mode()
 

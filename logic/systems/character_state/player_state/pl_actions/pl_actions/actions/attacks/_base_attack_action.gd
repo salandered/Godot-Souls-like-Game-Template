@@ -38,7 +38,7 @@ func initialise() -> void:
 
 ## most states can use this in their get_active_weapon_names
 func default_get_active_weapon_names() -> Array[String]:
-	return [WeaponNames.smith_sword]
+	return [WeaponID.smith_sword]
 	
 
 ## Combat methods to use in case of overriding on_enter_state/on_exit_state/update

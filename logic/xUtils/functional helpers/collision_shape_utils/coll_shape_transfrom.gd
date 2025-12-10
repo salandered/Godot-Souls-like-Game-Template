@@ -1,7 +1,6 @@
 extends RefCountedStaticLogger
 class_name CollShapeTranform
 
-
 ## NOTE: consider duplication shape before calling 
 ## provide capsule size mult values
 static func shrink_coll_shape_capsule_size(coll_shape: CollisionShape3D, radius_mult: float = 0.7, height_mult: float = 0.6) -> void:
@@ -38,6 +37,7 @@ static func set_coll_shape_capsule_size(coll_shape: CollisionShape3D, rad: float
 
 # region: __LOGS
 
+
 static func pp_name() -> String:
 	return "CollShapeTranform"
 
@@ -45,6 +45,10 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __LOG_INDENT() -> int:
-	return 0
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
 
 # endregion

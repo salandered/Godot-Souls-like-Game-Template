@@ -1,6 +1,15 @@
-[gd_resource type="AnimationLibrary" load_steps=13 format=3 uid="uid://b50j54elpaqgn"]
+[gd_resource type="AnimationLibrary" load_steps=22 format=3 uid="uid://b50j54elpaqgn"]
 
 [ext_resource type="Animation" uid="uid://ykqiayb1we4j" path="res://-assets-/animations/standard-skeleton/-Enemy/BigGuy/ADD One Hand Club Combo ALL.res" id="1_3k7pj"]
+[ext_resource type="AudioStream" uid="uid://dnqvc318bissn" path="res://-assets-/SFX/audio_streams/whoosh/heavy_whoosh.tres" id="2_f0jd2"]
+[ext_resource type="AudioStream" uid="uid://d0p7wlbl03i5r" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_launch.tres" id="2_fjns0"]
+[ext_resource type="AudioStream" uid="uid://781p7bt34n6c" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_1.tres" id="3_632eh"]
+[ext_resource type="AudioStream" uid="uid://u8t4csh0n5r3" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_2.tres" id="3_sdnui"]
+[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/bg_move_noise.tres" id="4_puitj"]
+[ext_resource type="AudioStream" uid="uid://qufmydm4eeq4" path="res://-assets-/SFX/audio_streams/whoosh/weapon_whoosh.tres" id="5_62eor"]
+[ext_resource type="AudioStream" uid="uid://b8yu5uqttajay" path="res://-assets-/SFX/audio_streams/footsteps/concrete/fs_scrape_concr.tres" id="6_afsni"]
+[ext_resource type="AudioStream" uid="uid://d3ahq7du2874o" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_land.tres" id="7_mxxt2"]
+[ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="10_3yo77"]
 
 [sub_resource type="Animation" id="Animation_amx1m"]
 resource_name = "ADD One Hand Club Combo part 1B"
@@ -428,6 +437,70 @@ tracks/58/keys = {
 "update": 1,
 "values": [false, true, false, false]
 }
+tracks/59/type = "audio"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("SFX/AAnimASPs/AAnimWHWeapon")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_f0jd2")
+}],
+"times": PackedFloat32Array(0.46666667)
+}
+tracks/59/use_blend = true
+tracks/60/type = "audio"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("SFX/AAnimASPs/AAnimFS")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}],
+"times": PackedFloat32Array(0.8333333)
+}
+tracks/60/use_blend = true
+tracks/61/type = "audio"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("SFX/AAnimASPs/AAnimFSLight")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}],
+"times": PackedFloat32Array(0.33333334)
+}
+tracks/61/use_blend = true
+tracks/62/type = "audio"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}],
+"times": PackedFloat32Array(0.4, 1.2165465)
+}
+tracks/62/use_blend = true
 
 [sub_resource type="Animation" id="Animation_jc7n3"]
 resource_name = "ADD One Hand Club Combo part2"
@@ -855,6 +928,66 @@ tracks/58/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/59/type = "audio"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("SFX/AAnimASPs/AAnimFSLight")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}],
+"times": PackedFloat32Array(0.06666667, 0.5)
+}
+tracks/59/use_blend = true
+tracks/60/type = "audio"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("SFX/AAnimASPs/AAnimWHWeapon")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_62eor")
+}],
+"times": PackedFloat32Array(0.2)
+}
+tracks/60/use_blend = true
+tracks/61/type = "audio"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("SFX/AAnimASPs/AAnimFS")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/61/use_blend = true
+tracks/62/type = "audio"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}],
+"times": PackedFloat32Array(0.033333335)
+}
+tracks/62/use_blend = true
 
 [sub_resource type="Animation" id="Animation_th8q6"]
 resource_name = "ADD One Hand Club Combo part3"
@@ -1282,6 +1415,78 @@ tracks/58/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/59/type = "audio"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("SFX/AAnimASPs/AAnimWHWeapon")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_62eor")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_62eor")
+}],
+"times": PackedFloat32Array(0.6333333, 1.3)
+}
+tracks/59/use_blend = true
+tracks/60/type = "audio"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("SFX/AAnimASPs/AAnimFSLight")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}],
+"times": PackedFloat32Array(0.1, 1.7666667)
+}
+tracks/60/use_blend = true
+tracks/61/type = "audio"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("SFX/AAnimASPs/AAnimFS")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}],
+"times": PackedFloat32Array(0.8333333)
+}
+tracks/61/use_blend = true
+tracks/62/type = "audio"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}],
+"times": PackedFloat32Array(0.16666667, 1.1666666)
+}
+tracks/62/use_blend = true
 
 [sub_resource type="Animation" id="Animation_l8o8r"]
 resource_name = "ADD great sword slide attack"
@@ -1709,6 +1914,74 @@ tracks/58/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/59/type = "audio"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("SFX/AAnimASPs/AAnimFS")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_632eh")
+}],
+"times": PackedFloat32Array(0, 1.314659, 1.9333333)
+}
+tracks/59/use_blend = true
+tracks/60/type = "audio"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("SFX/AAnimASPs/AAnimWHWeapon")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_62eor")
+}],
+"times": PackedFloat32Array(1.1666666)
+}
+tracks/60/use_blend = true
+tracks/61/type = "audio"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("SFX/AAnimASPs/AAnimFSScrape")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_afsni")
+}],
+"times": PackedFloat32Array(0.46666667)
+}
+tracks/61/use_blend = true
+tracks/62/type = "audio"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("SFX/AAnimASPs/AAnimLand")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_mxxt2")
+}],
+"times": PackedFloat32Array(0.53333336)
+}
+tracks/62/use_blend = true
 
 [sub_resource type="Animation" id="Animation_coh5p"]
 resource_name = "Falling B Death"
@@ -3293,6 +3566,51 @@ tracks/55/path = NodePath("%GeneralSkeleton:LeftToes")
 tracks/55/interp = 1
 tracks/55/loop_wrap = true
 tracks/55/keys = PackedFloat32Array(0, 1, -6.295589e-08, 0.9999999, -5.9604645e-08, 4.3112696e-08, 0.033333335, 1, -2.0720188e-08, 0.9999999, 5.9604645e-08, -5.1238e-09, 0.06666667, 1, -5.531997e-10, 0.9999998, 1.1920929e-07, -9.098633e-09, 0.1, 1, -1.1144477e-08, 0.9999999, 0, -6.454595e-09, 0.13333334, 1, 2.0565203e-09, 0.9999999, -5.9604645e-08, 2.8681974e-08, 0.16666667, 1, -9.1855785e-09, 0.9999999, -5.9604645e-08, -5.0954192e-08, 0.2, 1, 2.1908809e-08, 0.9999999, 1.4901161e-07, 1.8944563e-08, 0.23333333, 1, 3.0455392e-09, 0.9999999, 1.4901161e-07, -4.1579833e-09, 0.26666668, 1, 5.385354e-08, 0.9999999, -2.9802322e-08, -7.504832e-09, 0.3, 1, 1.3413024e-08, 0.9999999, -5.9604645e-08, 6.450962e-08, 0.33333334, 1, 2.4358458e-08, 0.9999999, -5.9604645e-08, 1.9523183e-08, 0.36666667, 1, 7.772929e-09, 0.9999999, -5.9604645e-08, -2.3532012e-09, 0.4, 1, -2.7910508e-08, 0.9999999, -2.9802322e-08, -2.2710308e-08, 0.43333334, 1, -2.4028584e-08, 0.9999999, -2.9802322e-08, -6.8666246e-09, 0.46666667, 1, 1.6568023e-08, 0.9999999, 5.9604645e-08, 1.4269369e-08, 0.5, 1, 2.2351788e-08, 0.9999999, 0, 2.0938213e-08, 0.53333336, 1, 2.4236037e-08, 0.9999999, 0, 5.4405627e-09, 0.56666666, 1, 4.3104272e-08, 0.9999999, -5.9604645e-08, 1.965553e-08, 0.6, 1, -3.3052117e-08, 0.99999976, 0.00041782856, -1.9243696e-08, 0.6333333, 1, 4.7686026e-08, 0.9999994, 0.0010358095, 9.0571817e-10, 0.6666667, 1, 1.8814852e-08, 0.99999917, 0.0012925565, 3.610265e-09, 0.7, 1, 4.5642494e-08, 0.9999992, 0.0012310147, 1.9496689e-09, 0.73333335, 1, 3.995853e-08, 0.9999995, 0.0009595454, -3.0421482e-08, 0.76666665, 1, -2.8327545e-09, 0.99999964, 0.00059583783, 3.2106783e-08, 0.8, 1, 2.7925044e-08, 0.9999999, 0.00023421645, -1.4025087e-08, 0.8333333, 1, -3.6431986e-09, 1, 1.3202429e-05, 7.934625e-09, 0.8666667, 1, 2.1472983e-08, 0.99999994, 3.993511e-06, 1.5873402e-08, 0.9, 1, -2.325312e-09, 0.9999999, 4.053116e-06, 1.5979206e-08, 0.93333334, 1, -8.76774e-09, 0.9999999, 3.0994415e-06, 1.7685508e-08, 0.96666664, 1, -5.0809246e-10, 0.9999999, 1.5199184e-06, -7.754148e-09, 1, 1, 1.1472113e-08, 0.9999999, 6.854534e-07, -1.0981187e-08, 1.0333333, 1, 2.4722203e-08, 0.9999999, 6.854534e-07, 2.768496e-08, 1.0666667, 1, 3.2226266e-10, 0.9999999, 6.854534e-07, -6.0602194e-09, 1.1, 1, 3.3862453e-09, 0.9999999, 8.34465e-07, 4.9546105e-09, 1.1333333, 1, 1.3028939e-08, 0.9999999, 1.1920929e-06, -1.6184632e-08, 1.1666666, 1, 4.631538e-09, 0.9999999, 9.536743e-07, 3.516857e-08, 1.2, 1, -2.7767366e-09, 0.9999999, 9.536743e-07, 8.638304e-09, 1.2333333, 1, -5.020196e-09, 0.99999994, 5.364418e-07, -2.2087e-08, 1.2666667, 1, -1.153435e-08, 0.9999999, 1.4901161e-07, -1.5663861e-08, 1.3, 1, 1.3289808e-08, 0.9999999, -5.9604645e-08, 3.7132423e-08, 1.3333334, 1, 4.143417e-09, 0.9999999, -1.4901161e-07, 9.4963974e-09, 1.3666667, 1, 3.9031343e-09, 0.9999999, 5.9604645e-08, -1.3164989e-08, 1.4, 1, 2.7765395e-08, 0.9999998, 1.1920929e-07, -4.019406e-09, 1.4333333, 1, -9.258103e-09, 0.9999999, -2.9802322e-08, 4.1312687e-09, 1.4666667, 1, 5.1587636e-09, 0.9999999, -5.9604645e-08, -9.7792885e-11, 1.5, 1, -1.4013252e-08, 0.9999999, 5.9604645e-08, 1.2304313e-08, 1.5333333, 1, 2.7940814e-09, 0.9999999, -2.9802322e-08, -1.8505864e-08, 1.5666667, 1, -1.041172e-08, 0.9999999, -1.4901161e-07, -1.2712222e-09, 1.6, 1, -1.6066974e-08, 0.9999999, 0, -5.751679e-09, 1.6333333, 1, -3.1247943e-08, 0.9999999, 0, -9.141843e-11, 1.6666666, 1, 1.4205361e-08, 0.9999999, -2.9802322e-08, 1.6947968e-08, 1.7, 1, -2.1308612e-08, 0.9999999, -5.9604645e-08, -1.2805352e-08, 1.7333333, 1, 9.835425e-09, 0.9999999, 0, 2.2331424e-08, 1.7666667, 1, -3.827704e-08, 0.9999999, 0, 9.458866e-09, 1.8, 1, -1.0142594e-08, 0.9999999, -2.9802322e-08, -5.7752683e-09, 1.8333334, 1, 2.4731439e-11, 0.9999999, 0, 1.8640822e-09, 1.8666667, 1, -1.2780421e-09, 0.9999999, -2.9802322e-08, -1.4626753e-08, 1.9, 1, 1.5817827e-09, 0.9999999, 0, 1.6534763e-08, 1.9333333, 1, -4.920981e-09, 0.9999999, 5.9604645e-08, 8.654272e-09, 1.9666667, 1, -4.098924e-08, 0.9999999, -2.9802322e-08, -1.2973223e-08, 2, 1, 1.8246341e-08, 0.9999999, 0, 1.7395934e-09, 2.0333333, 1, 2.7494195e-08, 0.9999999, -5.9604645e-08, -1.6836115e-08, 2.0666666, 1, -1.7143607e-08, 0.9999999, 5.9604645e-08, 1.6594903e-10, 2.1, 1, -6.0137593e-09, 0.9999999, -2.9802322e-08, 3.5305892e-09, 2.1333334, 1, -1.8190944e-08, 0.9999999, 5.9604645e-08, 1.883208e-08, 2.1666667, 1, -7.1084756e-09, 0.9999999, 5.9604645e-08, 4.2552237e-09, 2.2, 1, 5.0065786e-08, 0.9999999, -5.9604645e-08, 1.8091306e-10, 2.2333333, 1, 1.0469163e-08, 0.9999999, 5.9604645e-08, 1.1972668e-08, 2.2666667, 1, 6.993004e-09, 0.9999999, -5.9604645e-08, -8.010308e-09, 2.3, 1, -4.6508517e-09, 0.9999999, -2.9802322e-08, -1.2135727e-08, 2.3333333, 1, 1.2101793e-08, 0.9999999, 0, 6.93698e-10, 2.3666666, 1, 1.4035901e-09, 0.9999999, -2.9802322e-08, 6.952967e-09, 2.4, 1, -3.4484202e-08, 0.9999998, 1.1920929e-07, 3.1602294e-09, 2.4333334, 1, -2.3429298e-08, 0.99999994, 5.364418e-07, 2.568508e-09, 2.4666667, 1, -1.3623796e-08, 0.99999994, 1.2516975e-06, 1.44852015e-08, 2.5, 1, -1.0777264e-08, 0.9999999, 1.8775463e-06, 5.286556e-09, 2.5333333, 1, -2.9392604e-09, 0.9999999, 2.2649765e-06, -9.898238e-09, 2.5666666, 1, -1.6577848e-08, 0.99999994, 2.4437904e-06, 1.6356507e-08, 2.6, 1, 1.5958278e-08, 0.9999999, 2.4735928e-06, -1.7700685e-09, 2.6333334, 1, 1.1406971e-08, 0.9999999, 2.2649765e-06, -2.6207756e-09, 2.6666667, 1, -9.333037e-09, 1, 2.0563602e-06, -2.8428747e-08, 2.7, 1, 4.0425086e-09, 1, 1.5795231e-06, -3.0103504e-08, 2.7333333, 1, 1.8087182e-08, 1, 1.4603138e-06, -3.7516967e-09, 2.7666667, 1, -1.0531526e-08, 0.99999994, 1.1324883e-06, 2.2179535e-08, 2.8, 1, 1.26675594e-08, 0.9999999, 1.1920929e-06, 7.792115e-09, 2.8333333, 1, 1.1739629e-08, 0.9999999, 1.1920929e-06, -1.4372335e-08, 2.8666666, 1, -5.6549958e-08, 0.99999994, 1.2516975e-06, -1.2883499e-08, 2.9, 1, -8.063776e-09, 0.99999994, 1.2516975e-06, -2.0339161e-08)
+tracks/56/type = "audio"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("SFX/AAnimASPs/AAnimLaunch")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_fjns0")
+}],
+"times": PackedFloat32Array(0.8333333)
+}
+tracks/56/use_blend = true
+tracks/57/type = "audio"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("SFX/AAnimASPs/AAnimFSLight")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_sdnui")
+}],
+"times": PackedFloat32Array(1.4666667)
+}
+tracks/57/use_blend = true
+tracks/58/type = "audio"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/58/interp = 1
+tracks/58/loop_wrap = true
+tracks/58/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}],
+"times": PackedFloat32Array(0.7)
+}
+tracks/58/use_blend = true
 
 [sub_resource type="Animation" id="Animation_2g7yd"]
 resource_name = "scare-off"
@@ -3301,6 +3619,10 @@ markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"push_items_around",
 "time": 2.6190424
+}, {
+"color": Color(1, 1, 1, 1),
+"name": &"allows_switch",
+"time": 3.8021207
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -3517,6 +3839,93 @@ tracks/29/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/30/type = "audio"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("SFX/AAnimASPs/AAnimLand")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_mxxt2")
+}],
+"times": PackedFloat32Array(2.6)
+}
+tracks/30/use_blend = true
+tracks/31/type = "audio"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("SFX/AAnimASPs/AAnimLaunch")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_fjns0")
+}],
+"times": PackedFloat32Array(1.6)
+}
+tracks/31/use_blend = true
+tracks/32/type = "audio"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("SFX/AAnimASPs/AAnimWHWeapon")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_62eor")
+}],
+"times": PackedFloat32Array(2.5333333)
+}
+tracks/32/use_blend = true
+tracks/33/type = "audio"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("SFX/AAnimASPs/AAnimWH")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_3yo77")
+}],
+"times": PackedFloat32Array(1.9333333)
+}
+tracks/33/use_blend = true
+tracks/34/type = "audio"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"clips": [{
+"end_offset": 0.01882238,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.01882238,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.01882238,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.01882238,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}],
+"times": PackedFloat32Array(0.76666665, 1.9333334, 2.6333334, 3.419399)
+}
+tracks/34/use_blend = true
 
 [sub_resource type="Animation" id="Animation_c7ctj"]
 resource_name = "sleep"
@@ -4125,6 +4534,44 @@ tracks/55/path = NodePath("%GeneralSkeleton:LeftToes")
 tracks/55/interp = 1
 tracks/55/loop_wrap = true
 tracks/55/keys = PackedFloat32Array(0, 1, 0.031936042, 0.9985558, 0.023180008, -0.036456063, 0.033333335, 1, 0.030626716, 0.99859333, 0.026333958, -0.034349024, 0.06666667, 1, 0.028967816, 0.99852765, 0.033828616, -0.030965876, 0.1, 1, 0.028262524, 0.99858856, 0.033401936, -0.030103112, 0.13333334, 1, 0.02464628, 0.99895364, 0.028186977, -0.026255185, 0.16666667, 1, 0.019582195, 0.99932647, 0.023279399, -0.020522894, 0.2, 1, 0.011479685, 0.9997346, 0.016484678, -0.011280287, 0.23333333, 1, 0.0010839724, 0.99993604, 0.011207759, 0.0010621683, 0.26666668, 1, -0.00659408, 0.99989593, 0.010725886, 0.0070306496, 0.3, 1, -0.012865618, 0.9997915, 0.01305452, 0.009001203, 0.33333334, 1, -0.015434512, 0.99970543, 0.015217394, 0.010910357, 0.36666667, 1, -0.017680012, 0.99959695, 0.017244905, 0.013992663, 0.4, 1, -0.019415578, 0.99947524, 0.015372425, 0.020880854, 0.43333334, 1, -0.013971889, 0.9996794, 0.009720981, 0.018740868, 0.46666667, 1, -0.012506968, 0.99973035, 0.008405715, 0.017663717, 0.5, 1, -0.012054205, 0.9997642, 0.0067346394, 0.016756382, 0.53333336, 1, -0.013239741, 0.9997271, 0.006287992, 0.018186878, 0.56666666, 1, -0.011962518, 0.9997791, 0.005468011, 0.016390791, 0.6, 1, -0.0106839975, 0.99981594, 0.005823016, 0.014822955, 0.6333333, 1, -0.010857321, 0.99980986, 0.005931169, 0.015066357, 0.6666667, 1, -0.0110381935, 0.9998119, 0.005040616, 0.015122835, 0.7, 1, -0.011371642, 0.99981403, 0.0033117533, 0.015211225, 0.73333335, 1, -0.011662149, 0.9998082, 0.0027935505, 0.015481531, 0.76666665, 1, -0.011834524, 0.9998069, 0.0020207167, 0.015550618, 0.8, 1, -0.011619121, 0.99981713, 0.0012751818, 0.015128888, 0.8333333, 1, -0.010855228, 0.9998412, 0.00096198916, 0.014089432, 0.8666667, 1, -0.01036093, 0.9998516, 0.001863122, 0.013633098, 0.9, 1, -0.009920008, 0.9998553, 0.0034449399, 0.01337856, 0.93333334, 1, -0.00843496, 0.9998827, 0.0049767196, 0.011776888, 0.96666664, 1, -0.007610314, 0.9998927, 0.0060805976, 0.010937421, 1, 1, -0.00750936, 0.99989283, 0.006329775, 0.010857016, 1.0333333, 1, -0.00933862, 0.9998627, 0.007928014, 0.01116006, 1.0666667, 1, -0.011434534, 0.9997909, 0.0061557293, 0.015792675, 1.1, 1, -0.0145245455, 0.99969196, 0.005083531, 0.019468147, 1.1333333, 1, -0.017971411, 0.9995451, 0.004791707, 0.023734082, 1.1666666, 1, -0.021630455, 0.9993454, 0.005531043, 0.02846187, 1.2, 1, -0.020900091, 0.9994277, 0.0011484325, 0.026566343, 1.2333333, 1, -0.02163118, 0.99939954, -0.0006227493, 0.0270575, 1.2666667, 1, -0.023290912, 0.99929905, 0.00042450428, 0.029300759, 1.3, 1, -0.024391534, 0.999228, 0.0011881292, 0.030771172, 1.3333334, 1, -0.02500606, 0.9991807, 0.0025055707, 0.031720843, 1.3666667, 1, -0.025102274, 0.9991652, 0.0038173199, 0.03200437, 1.4, 1, -0.02800606, 0.99896616, 0.0037546754, 0.035610892, 1.4333333, 1, -0.03319703, 0.9984739, 0.0026984513, 0.04405152, 1.4666667, 1, -0.03180799, 0.9983251, 0.0032833815, 0.048211, 1.5, 1, -0.025862478, 0.998502, 0.00591743, 0.0478506, 1.5333333, 1, -0.024931729, 0.99826205, 0.0051572323, 0.05314547, 1.5666667, 1, -0.021550765, 0.99841774, 0.003232509, 0.051836036, 1.6, 1, -0.018177096, 0.9984274, -0.00087302923, 0.053024564, 1.6333333, 1, -0.010770144, 0.9983716, -0.0060472786, 0.055691384, 1.6666666, 1, -0.00196773, 0.99818313, -0.011709064, 0.05907119, 1.7, 1, 0.0058082715, 0.9978982, -0.017013997, 0.062254377, 1.7333333, 1, 0.010164512, 0.99765843, -0.021065652, 0.06426928, 1.7666667, 1, 0.008725526, 0.9976404, -0.022951841, 0.064114146, 1.8, 1, -0.0006352551, 0.9978826, -0.02163884, 0.061330225, 1.8333334, 1, -0.017577397, 0.99807703, -0.01678124, 0.057023287, 1.8666667, 1, -0.039830174, 0.9978398, -0.010018498, 0.051272925, 1.9, 1, -0.06502746, 0.9969137, -0.003216505, 0.043862544, 1.9333333, 1, -0.09076595, 0.9952761, 0.0017574131, 0.034406815, 1.9666667, 1, -0.11496385, 0.9931176, 0.0030728877, 0.022162877, 2, 1, -0.14351417, 0.9896433, -0.0011330247, 0.0029068887, 2.0333333, 1, -0.16702254, 0.9857247, -0.009088486, -0.019176036, 2.0666666, 1, -0.1642941, 0.98562837, -0.01649785, -0.035664, 2.1, 1, -0.13674623, 0.98915064, -0.02317831, -0.048415687, 2.1333334, 1, -0.10836052, 0.99238455, -0.02663204, -0.05216693, 2.1666667, 1, -0.088761106, 0.9946728, -0.026673764, -0.04512012, 2.2, 1, -0.07110091, 0.9966589, -0.025154859, -0.031351373, 2.2333333, 1, -0.054493368, 0.99815166, -0.023109168, -0.01376353, 2.2666667, 1, -0.03808834, 0.9990338, -0.021399736, 0.0047634654, 2.3, 1, -0.021094829, 0.9993335, -0.020753741, 0.02137702)
+tracks/56/type = "audio"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_puitj")
+}],
+"times": PackedFloat32Array(0.23333333, 1.2226127, 1.2333333)
+}
+tracks/56/use_blend = true
+tracks/57/type = "audio"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("SFX/AAnimASPs/AAnimLand")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_mxxt2")
+}],
+"times": PackedFloat32Array(1.6666666)
+}
+tracks/57/use_blend = true
 
 [resource]
 _data = {

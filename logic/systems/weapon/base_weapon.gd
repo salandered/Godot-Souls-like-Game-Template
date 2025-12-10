@@ -26,7 +26,7 @@ var _weapon_hurt_box: WeaponHurtBox
 ##    - if A not on the list, writes itself to the list
 ##    - Further contacts of A with this weapon will be ignored
 ## Usually is cleared by attack states on_exit()
-var _contact_hitbox_list: Array[CharacterHitbox]
+var _contact_hitbox_list: Array[CharacterHitbox] = []
 
 ## does it hurt right now, usually is managed by state
 var _is_attacking: bool = false
@@ -35,35 +35,64 @@ var _is_attacking: bool = false
 ## manipulated by combat 
 var _hit_data: HitData = null
 
+var _sfx_system: BaseWeaponSFXSystem
 
 var _signal_container: BaseWeaponSignalContainer
 
+
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		_weapon_hurt_box,
+		_weapon_hurt_box.get_child(0), # The _weapon_hurt_box must have a CollisionShape3D
+		holder
+	]
+
+func get_soft_dependencies() -> Array[Object]:
+	return [
+		_signal_container,
+		_get_weapon_sfx_parent(),
+		_sfx_system
+	]
+
+
 func _ready() -> void:
 	_weapon_hurt_box = get_weapon_hurt_box()
-	assert(_weapon_hurt_box, "No _weapon_hurt_box provided for " + get_weapon_pp_name())
-	assert(_weapon_hurt_box.get_child(0), "The _weapon_hurt_box must have a CollisionShape3D. " + get_weapon_pp_name())
-	assert(holder, "Set holder! for " + get_weapon_pp_name())
-	
-	_weapon_hurt_box.base_weapon = self
-
-	if not get_weapon_visuals():
+	if _weapon_hurt_box:
+		_weapon_hurt_box.base_weapon = self
+		_weapon_hurt_box.initialise()
+	if not get_weapon_visuals(): # its ok while aura is in wip
 		pass
-		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_pp_name()), "has no visuals")
+		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_id()), "has no visuals")
 	
 	## each weapon has its own signals
 	_signal_container = BaseWeaponSignalContainer.new()
 
 
-	## SFX
-	var _weapon_sfx := _get_weapon_sfx()
-	if _weapon_sfx:
+	## SFX. Here we r not logging any problems, all be logged using get_soft_dependencies etc
+	var _weapon_sfx := _get_weapon_sfx_parent()
+	if _weapon_sfx and holder: # NOTE: without holder no SFX
 		_set_whoosh_weapon_stream(_weapon_sfx)
 		_set_hit_weapon_stream(_weapon_sfx)
-		var _sfx_system := _get_weapon_sfx_system(_weapon_sfx)
-		_sfx_system.initialise(_signal_container, self, {})
+		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)
+		if _sfx_system:
+			## methods in list can be overidden by specific weapons
+			var list_: Array[SFXStreamConfig] = [
+				_get_whoosh_weapon_config(),
+				_get_hit_weapon_config(),
+			]
+			var _sfx_configs: Dictionary[String, SFXStreamConfig] = {}
+			for item in list_:
+				_sfx_configs[item.sfx_type] = item
+				
+			_sfx_system.initialise(_signal_container, _sfx_configs, self, {_sfx_system.weapon_additional_data_key: self})
 
-	_weapon_hurt_box.initialise()
 	initialise_implementation()
+	__validate_dependencies()
+
+
+## nullable but hard checked
+func get_holder() -> BaseCharacter:
+	return holder
 
 
 ## additional init or validation if needed
@@ -74,10 +103,11 @@ func _ready() -> void:
 
 
 func pp_name() -> String:
-	return pp.s("🗡️ Weapon", get_weapon_pp_name())
+	return pp.s("🗡️ Weapon", get_weapon_id())
 
 
-@abstract func get_weapon_pp_name() -> String
+@abstract func get_weapon_id() -> String
+
 
 ## could be nullable (aura weapon)
 @abstract func get_weapon_visuals() -> MeshInstance3D
@@ -137,13 +167,9 @@ func reset_contact_hitbox_list() -> void:
 
 ## SFX
 
-func _get_weapon_sfx() -> WeaponSFX:
-	if not _get_weapon_sfx_():
-		__log_error("no _get_weapon_sfx_", "", "all sfx set up is skipped for weapon")
-	return _get_weapon_sfx_()
 
-
-@abstract func _get_weapon_sfx_() -> WeaponSFX
+## nullable
+@abstract func _get_weapon_sfx_parent() -> WeaponSFX
 
 
 @abstract func _get_weapon_whoosh_stream() -> AudioStream
@@ -156,6 +182,7 @@ func get_signal_container() -> BaseWeaponSignalContainer:
 	return _signal_container
 
 
+## nullable in theory
 func _get_weapon_sfx_system(weapon_sfx: WeaponSFX) -> BaseWeaponSFXSystem:
 	return weapon_sfx.get_sfx_system()
 
@@ -165,6 +192,14 @@ func _set_whoosh_weapon_stream(weapon_sfx: WeaponSFX):
 
 func _set_hit_weapon_stream(weapon_sfx: WeaponSFX):
 	weapon_sfx.set_hit_weapon_stream(_get_hit_weapon_stream())
+
+
+func _get_whoosh_weapon_config() -> SFXStreamConfig:
+	return SFXStreamConfig.new(SFXConstants.Type_.whoosh_weapon, -3.0, 0.0, 0.0)
+
+func _get_hit_weapon_config() -> SFXStreamConfig:
+	return SFXStreamConfig.new(SFXConstants.Type_.hit_weapon, -2.0, 0.0, 0.0)
+
 
 ## in theory could be nullable
 # # @abstract func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream
@@ -204,6 +239,6 @@ func __LOG_INDENT() -> int:
 
 func _to_string() -> String:
 	return "ID '%s' wepName '%s' Holder '%s' Len of ContactHiBList '%d' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), get_weapon_pp_name(), holder.name, len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
+		% [str(get_instance_id()), pp_name(), holder.pp_name(), len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
 
 # endregion

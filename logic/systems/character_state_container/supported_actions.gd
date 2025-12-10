@@ -1,4 +1,4 @@
-extends RefCountedLogger
+extends BaseRefCountedSystem
 class_name SupportedActions
 
 

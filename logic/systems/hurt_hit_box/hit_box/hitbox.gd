@@ -46,39 +46,77 @@ var _original_capsule_shape_radius: float
 var _original_capsule_shape_height: float
 
 
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		combat
+	]
+
+
 func _ready() -> void:
 	collision_layer = Collision.Layers.HITBOX_AREA
 	collision_mask = Collision.Masks.HITBOX_AREA_MASK
 	
-	assert(combat, "Set combat system!")
-
 	_my_coll_shapes = get_descendants.collision_shapes(self)
-	if len(_my_coll_shapes) != 1:
-		var msg = pp.s("len of _my_coll_shapes != 1", "Not supported!!", "len:", len(_my_coll_shapes))
-		assert(false, msg)
+
+	if len(_my_coll_shapes) > 1:
+		__log_warn_soft(pp.s("len of _my_coll_shapes > 1", "Not supported! will be working only with the first one"))
+
+	var hard_validate_is_ok := _hard_validate()
+	if hard_validate_is_ok:
+		# Duplicate to avoid shared resource issues
+		var original_shape = _my_coll_shapes[0].shape
+		_my_coll_shapes[0].shape = original_shape.duplicate()
+
+		var shape := _my_coll_shapes[0].shape as CapsuleShape3D # hard validated
+		__log_("Duplicated capsule shape used in CollisionShape " + shape.resource_name)
+
+		_original_capsule_shape_radius = shape.radius
+		_original_capsule_shape_height = shape.height
+
+	if __validate_dependencies() and hard_validate_is_ok:
+		__log_("--- CharacterHitbox ready ---")
+		__just_set_init_true()
+	else:
+		__log_warn_soft("CharacterHitbox init problems, not going to work")
+		__just_set_init_false()
+
+
+func _hard_validate() -> bool:
+	var _r := true
+	var _msg := ""
+
+	if len(_my_coll_shapes) == 0:
+		_msg = pp.s("len of _my_coll_shapes is Zero", "Not supported!")
+		_r = false
 
 	var original_shape = _my_coll_shapes[0].shape
-	assert(original_shape != null, "CollisionShape3D has no shape!")
-	assert(original_shape is CapsuleShape3D, "shape is not CapsuleShape3D. Not supported")
-	
-	# Duplicate to avoid shared resource issues
-	_my_coll_shapes[0].shape = original_shape.duplicate()
-	var shape := _my_coll_shapes[0].shape as CapsuleShape3D
-	__log_("Duplicated capsule shape used in CollisionShape " + shape.resource_name)
+	if original_shape == null:
+		_msg = pp.s("CollisionShape3D has no shape")
+		_r = false
 
-	_original_capsule_shape_radius = shape.radius
-	_original_capsule_shape_height = shape.height
+	if not original_shape is CapsuleShape3D:
+		_msg = pp.s("shape is not CapsuleShape3D. Not supported")
+		_r = false
 
-	__log_("--- CharacterHitbox ready ---")
+	if not _r:
+		__log_error(_msg)
+
+	return _r
 
 
 func _physics_process(delta: float) -> void:
+	if __could_not_initialised():
+		return
+		
 	if has_overlapping_areas():
 		for area in get_overlapping_areas():
 			on_area_contact(area)
 
 
 func pp_name():
+	if __could_not_initialised():
+		return pp.s("miserable not initted, please help", "💢 HitBox")
+
 	var character_name := "Pl" if is_player() else "E"
 	return pp.s(character_name, "💢 HitBox")
 
@@ -86,23 +124,32 @@ func pp_name():
 
 
 ## not nullable
-func get_collision_shape() -> CollisionShape3D:
+func _get_collision_shape() -> CollisionShape3D:
 	return _my_coll_shapes[0]
 
 
 ## provide capsule size mult values
 func shrink_hitbox(radius_mult: float = 0.7, height_mult: float = 0.6):
-	var coll_shape := get_collision_shape()
+	if __could_not_initialised():
+		return
+
+	var coll_shape := _get_collision_shape()
 	CollShapeTranform.shrink_coll_shape_capsule_size(coll_shape, radius_mult, height_mult)
 
 
 func restore_hitbox():
-	var coll_shape := get_collision_shape()
+	if __could_not_initialised():
+		return
+
+	var coll_shape := _get_collision_shape()
 	CollShapeTranform.set_coll_shape_capsule_size(coll_shape, _original_capsule_shape_radius, _original_capsule_shape_height)
 
 # endregion
 
+
 func is_player() -> bool:
+	if __could_not_initialised():
+		return false
 	return combat.is_player()
 
 
@@ -136,7 +183,7 @@ func on_area_contact(incoming_area: Node3D):
 		return
 	weapon.add_hitbox_to_contact_list(self)
 
-	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_pp_name()), "by", pp.in_q(weapon.holder.name)))
+	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_id()), "by", pp.in_q(weapon.get_holder().pp_name())))
 
 	var hit_data := weapon.get_hit_data()
 	if not hit_data:
@@ -151,21 +198,21 @@ func on_area_contact(incoming_area: Node3D):
 
 
 func _is_weapon_mine(weapon: BaseWeapon) -> bool:
-	if weapon.holder == combat.get_character():
+	if weapon.get_holder() == combat.get_character():
 		return true
 	return false
 	# note: comparing holders is enough for now but we want also to control
 	# certain groups of weapons in the future. See Groups.Weapons 
 
+
 func _to_string() -> String:
-	return "name '%s' of Combat '%s'" % [pp_name(), combat.pp_name()]
+	return pp.s(pp_name(), get_instance_id())
 
 
 var __EXTRA_LOG_B: bool = false
 
 
 func __log_extra(...parts: Array):
-	# if not combat.is_player():
 	if __EXTRA_LOG_B:
 		__log_(pp.list_(parts))
 

@@ -41,25 +41,24 @@ var _legs_behaviors: Dictionary[String, LegsBehavior]
 var _leg_actions: Dictionary[String, LegsAction]
 
 
-## not nullable
+## nullable
 func state_by_name(state_name: String) -> BasePlayerState:
-	assert(_states.has(state_name), "_states dict doesn't have " + pp.in_q(state_name) + " " + pp.dict_(_states))
-	return _states[state_name]
+	var _r: BasePlayerState = u.safe_get_dict_key(_states, state_name, null)
+	return _r
 
 
 func pl_action_by_name(action_name: String) -> PlayerAction:
-	assert(_player_actions.has(action_name), "_player_actions dict doesn't have " + action_name)
-	return _player_actions[action_name]
+	var _r: PlayerAction = u.safe_get_dict_key(_player_actions, action_name, null)
+	return _r
 
 
 func l_behavior_by_name(behavior_name: String) -> LegsBehavior:
-	assert(_legs_behaviors.has(behavior_name), "_legs_behaviors dict doesn't have " + behavior_name)
-	return _legs_behaviors[behavior_name]
-	
+	var _r: LegsBehavior = u.safe_get_dict_key(_legs_behaviors, behavior_name, null)
+	return _r
 
 func l_action_by_name(action_name: String) -> LegsAction:
-	assert(_leg_actions.has(action_name), "_leg_actions dict doesn't have " + action_name)
-	return _leg_actions[action_name]
+	var _r: LegsAction = u.safe_get_dict_key(_leg_actions, action_name, null)
+	return _r
 
 
 func accept_all_states(player_: Princess):
@@ -94,9 +93,8 @@ func _accept_player_states() -> void:
 	for child: BasePlayerState in get_descendants.player_states(player_sm):
 		print_.container("", "child.get_name() " + child.get_name())
 		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.get_name())
-		# assert(state_data, "StateData for " + child.get_name() + " not found")
 		if not state_data:
-			push_error("No state data found for: " + child.get_name())
+			__log_warn("No state data found for: " + child.get_name(), "_accept_player_states", "Will be skipped")
 			continue
 
 		print_.container("", "state_data.state_name " + state_data.state_name)
@@ -106,19 +104,23 @@ func _accept_player_states() -> void:
 		# specific
 		child.state_name = state_data.state_name
 		child.priority = state_data.priority
-		# legs behaviors should be already accepted (covered by assert)
+		# legs behaviors should be already accepted
 		child.legs_behavior = l_behavior_by_name(state_data.legs_behavior_name)
 		child.depends_on_legs = state_data.depends_on_legs
 		child.stamina_cost = state_data.stamina_cost
 		
 		var actions := _get_actions_by_state(state_data.state_name, states_container)
 		if state_data.depends_on_legs:
-			assert(actions.size() == 0, "Actions found for dependent state: " + child.state_name + ". Actions:" + str(actions))
+			if actions.size() != 0:
+				__log_error(pp.s("Actions found for dependent state. Expected zero", child.state_name, "Actions:", actions))
 			# TODO: not default but supported? then array which is more universal. default will be choosen later
 			child.default_action_name = ""
 		else:
-			assert(actions.size() > 0, "No actions found for state: " + child.state_name)
-			child.default_action_name = actions[0].action_name
+			if actions.size() == 0:
+				__log_error("No actions found for state: " + child.state_name)
+				child.default_action_name = ""
+			else:
+				child.default_action_name = actions[0].action_name
 
 		var combos := get_descendants.combos_one_level(child)
 		for combo: Combo_ in combos:
@@ -139,10 +141,12 @@ func _accept_player_states() -> void:
 		child.anim_container = anim_container
 		child.animator_manager = animator_manager
 
-
-		assert(child.legs_behavior, " legs_behavior problem for state: " + child.state_name)
-		assert(child.state_name and not child.state_name.is_empty(), " state_name problem for state ")
-		assert(child.priority and child.priority >= 0, " priority problem for state: " + child.state_name)
+		if not child.legs_behavior:
+			__log_error("No legs_behavior assigned for state: " + child.state_name)
+		if not child.state_name or child.state_name.is_empty():
+			__log_error("No state_name assigned for state node: " + child.get_name())
+		if child.priority == null or child.priority < 0:
+			__log_error(pp.s("Invalid priority for state:", child.state_name, child.priority))
 
 	print_.container("", "===========  Accepted states ===========")
 	print_.container("", str(_states))
@@ -184,14 +188,15 @@ func __apply_base_action_data(action_data: StatesContainer._BaseActionData, chil
 	
 	# anim data
 	var anim := anim_container.get_by_anim_id(action_data.anim_id)
-	assert(anim, "no anim with " + action_data.anim_id)
+	if not anim:
+		__log_error("No animation found for action: " + child.action_name + " with anim_id: " + action_data.anim_id)
 	child.anim = anim
 	child.animator_manager = animator_manager
 	child.anim_container = anim_container
 	child.anim_params_container = anim_params_container
 	
-	assert(child.action_name and not child.action_name.is_empty(), "action_name problem")
-	assert(child.anim, "action_name problem")
+	if not child.action_name or child.action_name.is_empty():
+		__log_error("No action_name assigned for action: " + child.get_name())
 
 
 func _accept_legs_behaviors():
@@ -200,7 +205,7 @@ func _accept_legs_behaviors():
 		print_.container("", "node.get_name() " + child.get_name())
 		var behavior_data: LegBehaviorContainer._BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
 		if not behavior_data:
-			push_error("No behavior data found for: " + child.get_name())
+			__log_warn("No behavior data found for: " + child.get_name() + " Will be skipped")
 			continue
 		print_.container("", "behavior_data.behavior_name " + behavior_data.behavior_name)
 		_legs_behaviors[behavior_data.behavior_name] = child
@@ -215,7 +220,8 @@ func _accept_legs_behaviors():
 		child.container = self
 		child.area_awareness = area_awareness
 
-		assert(child.behavior_name and not child.behavior_name.is_empty(), " behavior_name problem for behavior")
+		if not child.behavior_name or child.behavior_name.is_empty():
+			__log_error("No behavior_name assigned for behavior node: " + child.get_name())
 
 
 func _accept_legs_actions():
@@ -233,7 +239,9 @@ func _accept_legs_actions():
 		child.legs_sm = legs_sm
 		__apply_base_action_data(action_data, child)
 
-		assert(child.action_name and not child.action_name.is_empty(), "action_name problem for")
+		if not child.action_name or child.action_name.is_empty():
+			__log_error("No action_name assigned for legs action: " + child.get_name())
+
 
 func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	# 0 means lowest

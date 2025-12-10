@@ -18,10 +18,10 @@ func __log_(_prefix: Variant, ...parts: Array):
 		print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), 10)
 
 func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
-	print_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
+	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
 
 func __log_error(what: String, where: String = "", fallback: String = "", ...context: Array):
-	print_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_ERROR, pp.list_(context))
+	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_ERROR, pp.list_(context))
 
 # endregion
 

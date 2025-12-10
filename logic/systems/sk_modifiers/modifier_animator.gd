@@ -1,4 +1,4 @@
-extends SkeletonModifier3D
+extends BaseSkModifier3DSystem
 ## WARNING: should not be called directly!
 ## 			PlAnimatorManager manages all modifier animators
 class_name PlayerModifierAnimator
@@ -12,7 +12,6 @@ class_name PlayerModifierAnimator
 
 var bone_mask: Array
 
-var __initialised: bool = false
 
 ## for animation non related effects like slow mo
 ## note that animation may have it's own speed scale. They will be multiplied.
@@ -56,10 +55,18 @@ var _bone_idx_to_track: Dictionary[int, String] = {}
 var __custom_delta: CustomDelta = CustomDelta.new()
 
 
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		skeleton,
+		root_animator
+	]
+
+
 func initialise() -> void:
 	BoneTools.validate_skeleton(skeleton)
 
-	assert(animator_name == "full_body", "no animator_name or its unknown. Only 'full_body' is supported")
+	if animator_name != "full_body":
+		__log_error("no animator_name or its unknown. Only 'full_body' is supported")
 	
 	## NOTE: root is not animated here. See PlayerRootAnimator
 	bone_mask = BoneMask.get_full_body_no_root()
@@ -69,7 +76,8 @@ func initialise() -> void:
 
 
 	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT])
-	__initialised = true
+
+	__validate_deps_set_init()
 
 
 func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):
@@ -93,13 +101,15 @@ func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offs
 
 
 func _process_modification():
-	if __initialised:
-		# calculate custom_delta between now and the last call.
-		__custom_delta.update()
-		# add custom_delta to curr anim's time_spent.
-		_update_time(__custom_delta.delta)
-		_update_blend_values(__custom_delta.delta)
-		_update_skeleton(__custom_delta.delta)
+	if __could_not_initialised():
+		return
+		
+	# calculate custom_delta between now and the last call.
+	__custom_delta.update()
+	# add custom_delta to curr anim's time_spent.
+	_update_time(__custom_delta.delta)
+	_update_blend_values(__custom_delta.delta)
+	_update_skeleton(__custom_delta.delta)
 
 
 func _update_time(custom_delta: float):
@@ -247,3 +257,18 @@ func __log_blend_state() -> String:
 		+"| blend times " + pp.array_(blend_times) \
 		+"| times left " + pp.array_(times_left) \
 		+"| overlap (may be) " + str(overlap_duration)
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "💀Animator"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 0
+
+# endregion

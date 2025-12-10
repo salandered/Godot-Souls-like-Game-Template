@@ -1,6 +1,6 @@
 @abstract
 class_name BaseSignalContainer
-extends RefCountedLogger
+extends BaseRefCountedSystem
 
 
 var sig_id_to_signal_data: Dictionary[String, SignalData]

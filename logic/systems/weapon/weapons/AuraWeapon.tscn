@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dks6m6de557j0" path="res://logic/systems/weapon/aura_weapon.gd" id="1_5akps"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_finp0"]
-[ext_resource type="PackedScene" uid="uid://c3bogm2cs375" path="res://logic/systems/combat/weapon_sfx/WeaponSfx.tscn" id="3_5yo8c"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/systems/combat/weapon_sfx/WeaponSfx.tscn" id="3_5yo8c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_finp0"]
 radius = 2.2089844
@@ -13,6 +13,8 @@ script = ExtResource("1_5akps")
 
 [node name="WeaponHurtBox" parent="." instance=ExtResource("2_finp0")]
 unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 104
 
 [node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3062575, 0)
@@ -21,3 +23,11 @@ debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 debug_fill = false
 
 [node name="WeaponSFX" parent="." instance=ExtResource("3_5yo8c")]
+
+[node name="WhooshWeaponPlayer3D" parent="WeaponSFX" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27381927, 0)
+
+[node name="HitWeaponPlayer3D" parent="WeaponSFX" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29910707, 0)
+
+[editable path="WeaponSFX"]

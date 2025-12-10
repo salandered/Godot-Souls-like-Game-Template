@@ -34,7 +34,7 @@ const LSM_ACTION_B := false
 
 # PL SYSTEMS
 const input_gathering_B := false
-const FANCY_CAM_B := true
+const FANCY_CAM_B := false
 const AWARENESS_B := true
 
 # ENEMY

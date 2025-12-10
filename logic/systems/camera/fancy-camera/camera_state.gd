@@ -71,8 +71,12 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 
 
 func lerp_position_(from: Variant, to: Variant, weight: float) -> Vector3:
-	assert(from is Node3D or from is Vector3, "lerp_position_ type error")
-	assert(to is Node3D or to is Vector3, "lerp_position_ type error")
+	if from is not Node3D and from is not Vector3:
+		__log_error("lerp_position_ 'from' type error", from)
+		return Vector3.ZERO
+	if to is not Node3D and to is not Vector3:
+		__log_error("lerp_position_ 'to' type error", to)
+		return Vector3.ZERO
 
 	var from_pos: Vector3
 	var to_pos: Vector3

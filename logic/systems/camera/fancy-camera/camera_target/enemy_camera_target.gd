@@ -7,13 +7,18 @@ var _assigned_parent: Node3D
 @onready var look_at_point: Node3D = $LookAt
 
 
+func get_soft_dependencies() -> Array[Object]:
+	return [
+		_assigned_parent
+	]
+
+
 func initialise(assigned_parent: Node3D) -> void:
 	_assigned_parent = assigned_parent
 	add_to_group(Groups.Environment_.TARGETABLE) # only for EnemyCameraTarget
 	
-	assert(_assigned_parent, "_assigned_parent should be set for EnemyCameraTarget")
-
 	dev_initialise()
+	__validate_deps_set_init()
 	
 
 # func _process(delta: float) -> void:
@@ -22,11 +27,6 @@ func initialise(assigned_parent: Node3D) -> void:
 
 func pp_name() -> String:
 	return pp.s("EnemyCamTarget", _assigned_parent.name)
-
-
-## non nullable
-func get_assigned_parent() -> Node3D:
-	return _assigned_parent
 
 
 func make_inactive() -> void:
@@ -40,38 +40,44 @@ func make_active() -> void:
 
 
 # NOTE: experimental. probably not the best way to do this. Not used
-func is_about_to_die() -> bool:
-	if self.is_queued_for_deletion():
-		prints("EnemyCameraTarget is_queued_for_deletion => true", self)
-		return true
+# func is_about_to_die() -> bool:
+# 	if self.is_queued_for_deletion():
+# 		prints("EnemyCameraTarget is_queued_for_deletion => true", self)
+# 		return true
 	
-	var parent := get_parent()
-	if not is_instance_valid(parent):
-		prints("EnemyCameraTarget parent is not valid => true", self)
-		return true
-	if parent.is_queued_for_deletion():
-		prints("EnemyCameraTarget parent is_queued_for_deletion => true", self)
-		return true
+# 	var parent := get_parent()
+# 	if not is_instance_valid(parent):
+# 		prints("EnemyCameraTarget parent is not valid => true", self)
+# 		return true
+# 	if parent.is_queued_for_deletion():
+# 		prints("EnemyCameraTarget parent is_queued_for_deletion => true", self)
+# 		return true
 
-	var assigned_parent := get_assigned_parent()
-	if not is_instance_valid(assigned_parent):
-		prints("EnemyCameraTarget assigned_parent is not valid => true", self)
-		return true
-	if assigned_parent.is_queued_for_deletion():
-		prints("EnemyCameraTarget assigned_parent is_queued_for_deletion => true", self)
-		return true
+# 	var assigned_parent := get_assigned_parent()
+# 	if not is_instance_valid(assigned_parent):
+# 		prints("EnemyCameraTarget assigned_parent is not valid => true", self)
+# 		return true
+# 	if assigned_parent.is_queued_for_deletion():
+# 		prints("EnemyCameraTarget assigned_parent is_queued_for_deletion => true", self)
+# 		return true
 	
-	return false
+# 	return false
 
 
 @export var __csg_visual: bool = true
 @onready var csg_marker: CSGSphere3D = $LookAt/CSGMarker
 
 func dev_initialise():
+	if not OS.is_debug_build():
+		if csg_marker:
+			csg_marker.visible = false
+		return
 	csg_marker.visible = __csg_visual
 
 
 # func _input(event: InputEvent):
+	# if not OS.is_debug_build():
+	# 	return
 # 	look_at_point.global_position.y = u._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)
 
 

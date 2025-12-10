@@ -210,9 +210,9 @@ func is_vulnerable() -> bool:
 func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 	var _r: bool = false
 	match weapon_name:
-		WeaponNames.big_pinga_blade:
+		WeaponID.big_pinga_blade:
 			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent_unscaled())
-		WeaponNames.bg_aura_weapon:
+		WeaponID.bg_aura_weapon:
 			_r = anim_params_container.is_aura_hurts(anim.native_anim, effective_time_spent_unscaled())
 		_:
 			__log_warn_v2("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")

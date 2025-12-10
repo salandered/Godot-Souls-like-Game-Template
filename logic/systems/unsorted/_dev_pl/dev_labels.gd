@@ -15,6 +15,8 @@ var all_labels = []
 
 
 func _ready() -> void:
+	if not OS.is_debug_build():
+		return
 	all_labels = [
 		label_inputs,
 		# label_cam,
@@ -25,6 +27,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not OS.is_debug_build():
+		return
 	if u.ifr() % 2 == 0:
 		# _label_camera_info()
 		# _label_modifier_animator_info()
@@ -35,6 +39,8 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	if event.is_action_released(RawAction.DEV_KP7):
 		_visible = not _visible
 		for l: Label in all_labels:
@@ -164,6 +170,9 @@ func __cam() -> FancyCamera:
 # FROM OUTSIDE THE PLAYER
 
 func _label_phe_enemy_info(enemy: PHCharacter):
+	if not OS.is_debug_build():
+		return
+		
 	var pl_e_dist := pp.round_01(enemy.enemy_movement.distance_to_player())
 	var pl_e_angle: String = pp.rad2deg(enemy.enemy_movement.signed_angle_to_player(), true)
 	var c_l_s := enemy.get_curr_leaf_state()

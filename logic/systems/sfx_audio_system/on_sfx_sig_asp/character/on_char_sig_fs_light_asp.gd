@@ -1,8 +1,8 @@
-class_name OnCharacterSFXFSLightSigASP
-extends BaseOnCharacterSFXFootStepSigASP
+class_name OnCharSigFSLightASP
+extends OnCharFootStepSigASP
 
 
-func _change_vol(curr_vol_db: float) -> float:
+func _change_fs_vol(curr_vol_db: float) -> float:
 	return _change_vol_on_light_footstep(curr_vol_db)
 
 
@@ -10,7 +10,7 @@ func _change_vol(curr_vol_db: float) -> float:
 # region
 
 func pp_name() -> String:
-	return "OnCharacterSFXFSLightSigASP"
+	return "OnCharSigFSLightASP"
 
 func __LOG_B() -> bool:
 	return false

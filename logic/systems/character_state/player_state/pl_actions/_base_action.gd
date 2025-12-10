@@ -227,7 +227,7 @@ func is_interruptable() -> bool:
 func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 	var _r: bool = false
 	match weapon_name:
-		WeaponNames.smith_sword:
+		WeaponID.smith_sword:
 			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
 		_:
 			__log_error("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
@@ -266,7 +266,7 @@ var __LOG_OVERLAY_ANIM: bool = true
 
 func __log_error(what: String, where: String = "", fallback: String = "", ...parts: Array):
 	var _parts := pp.list_(parts)
-	print_.warn(what, where, fallback, WarnLevel.PUSH_ERROR, _parts, "\n\t\t", action_name)
+	error_.warn(what, where, fallback, WarnLevel.PUSH_ERROR, _parts, "\n\t\t", action_name)
 
 
 func __log_ent(...parts: Array):

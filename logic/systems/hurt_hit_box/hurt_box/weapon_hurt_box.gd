@@ -15,6 +15,12 @@ var base_weapon: BaseWeapon
 var _previous_position: Vector3
 var _velocity: Vector3
 
+
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		base_weapon
+	]
+
 ## used instead of _ready. Called from base weapon. 
 ## So base_weapon is guaranteed to be non nullable
 func initialise() -> void:
@@ -22,23 +28,34 @@ func initialise() -> void:
 	collision_mask = Collision.Masks.WEAPON_AREA_MASK
 	
 	_previous_position = global_position
-	body_entered.connect(_on_body_entered)
-	assert(base_weapon)
+
+	if __validate_deps_set_init():
+		body_entered.connect(_on_body_entered)
+	else:
+		__log_("init problems, body_entered sig not connected")
 
 
 func _physics_process(delta: float) -> void:
+	if __could_not_initialised():
+		return
 	# racks weapon _velocity
 	_velocity = (global_position - _previous_position) / delta
 	_previous_position = global_position
 
 
 func is_player() -> bool:
+	if __could_not_initialised():
+		return false
 	return base_weapon.is_player()
 
 func pp_name():
+	if __could_not_initialised():
+		return pp.s("miserable not initted hurtbox, please help", "🔻 HurtBox")
 	var character_name := "Pl" if is_player() else "E"
-	return pp.s(character_name, get_my_weapon_name(), "🔻 HurtBox")
+	return pp.s(character_name, base_weapon.pp_name(), "🔻 HurtBox")
 
+
+# todo: what is this magic ...
 func _get_weapon_push_force() -> int:
 	if base_weapon.is_player():
 		return 6
@@ -56,15 +73,10 @@ func _on_body_entered(body: Node3D) -> void:
 	if not body is RigidBody3D:
 		return
 
-
 	__log_(em.mark_x2, "detected rigid body and we r attacking", body, body.name)
 	# push in direction weapon is moving
 	var push_direction = _velocity.normalized()
 	body.apply_central_impulse(push_direction * _get_weapon_push_force())
-
-
-func get_my_weapon_name() -> String:
-	return base_weapon.get_weapon_pp_name()
 
 
 # alternative

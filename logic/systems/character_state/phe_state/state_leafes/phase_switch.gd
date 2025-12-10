@@ -11,7 +11,7 @@ func initialise_implementation() -> void:
 
 
 func get_active_weapon_names() -> Array[String]:
-	return [WeaponNames.bg_aura_weapon]
+	return [WeaponID.bg_aura_weapon]
 
 
 var _pushed_rigid_bodies: bool = false

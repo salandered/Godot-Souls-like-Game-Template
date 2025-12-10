@@ -16,8 +16,8 @@ func initialise_implementation() -> void:
 func get_weapon_hurt_box() -> WeaponHurtBox:
 	return _weapon_hurt_box_
 
-func get_weapon_pp_name() -> String:
-	return WeaponNames.big_pinga_blade
+func get_weapon_id() -> String:
+	return WeaponID.big_pinga_blade
 
 
 func get_weapon_visuals() -> MeshInstance3D:
@@ -31,7 +31,7 @@ const WEAPON_WHOOSH = preload("uid://qufmydm4eeq4")
 const SWORD_HIT_BONES = preload("uid://g4dtkcleinh8")
 
 
-func _get_weapon_sfx_() -> WeaponSFX:
+func _get_weapon_sfx_parent() -> WeaponSFX:
 	return weapon_sfx
 
 

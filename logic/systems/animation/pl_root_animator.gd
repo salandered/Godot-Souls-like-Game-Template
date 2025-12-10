@@ -7,12 +7,21 @@ class_name PlayerRootAnimator
 var _root_track: String
 
 
+func get_hard_dependencies() -> Array[Object]:
+	return [full_body]
+
+func get_soft_dependencies() -> Array[Object]:
+	return []
+
+
 func is_player() -> bool:
 	return true
 
 
 func initialise(root_track: String) -> void:
 	_root_track = root_track
+	error_.empty_string(_root_track)
+	__validate_dependencies()
 
 
 func get_global_speed_scale() -> float:

@@ -20,34 +20,37 @@ var _on_signal_asps: Array[OnSFXSigASP]
 
 
 ## on init only
-@abstract func _get_on_signal_asps(signals: BaseSignalContainer) -> Array[OnSFXSigASP]
+@abstract func _get_on_signal_asps(signals: BaseSignalContainer, sfx_configs: Dictionary[String, SFXStreamConfig]) -> Array[OnSFXSigASP]
 
 
 @abstract func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void
 
 
 ## should be called for any sfx system
-func initialise(signal_container_: BaseSignalContainer, root_of_all_stream_players: Node, additional_data: Dictionary[String, Variant]):
-	var _list := _get_on_signal_asps(signal_container_)
+func initialise(signal_container_: BaseSignalContainer, sfx_configs: Dictionary[String, SFXStreamConfig], root_of_all_stream_players: Node, additional_data: Dictionary[String, Variant]):
+	var _list := _get_on_signal_asps(signal_container_, sfx_configs)
 	
 	_on_signal_asps.assign(_list)
 	signal_container = signal_container_
 	
 	initialise_implementation(additional_data)
 	
-	_validate(root_of_all_stream_players)
+	_soft_validate(root_of_all_stream_players)
+	if not __validate_deps_set_init():
+		__log_("__validate_deps_set_init failed, sytem won't work", "_on_signal_asps = []")
+		_on_signal_asps = []
 
 
-func _validate(root_of_all_stream_players: Node):
+func _soft_validate(root_of_all_stream_players: Node):
 	## _on_signal_asps
 	var _players_total := len(_on_signal_asps)
 	if _players_total == 0:
 		__log_error("initialised with zero on_signal_players", "", "")
 	else:
-		var _all_descriptions: Array[String] = []
+		var _all_sfx_types: Array[String] = []
 		for item: OnSFXSigASP in _on_signal_asps:
-			_all_descriptions.append(item._description)
-		__log_("validation", "we have", _players_total, "on_signal_players:", pp.list_(_all_descriptions))
+			_all_sfx_types.append(item.sfx_type)
+		__log_("validation", "we have", _players_total, "on_signal_players:", pp.list_(_all_sfx_types))
 
 
 	## all_stream_players

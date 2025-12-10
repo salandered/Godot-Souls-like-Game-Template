@@ -38,6 +38,8 @@ func lose_health(amount: float):
 
 ## dev usage only
 func _set_specific_health(amount: float):
+	if not OS.is_debug_build():
+		return
 	_current_health = amount
 
 

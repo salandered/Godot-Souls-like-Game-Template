@@ -45,9 +45,38 @@ class_name Princess
 var push_rigid_bodies_force: float = 4.0
 
 
-var __initialised: bool = false
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		fancy_camera,
+		camera_focus,
+		visuals,
+		skeleton,
+		container,
+		bones,
+		player_movement,
+		combat,
+		feelings,
+		area_awareness,
+		player_sm,
+		anim_container,
+		animator_manager,
+		native_player,
+	]
+
+## for Princess all the soft are kind of hard, but ok
+func get_soft_dependencies() -> Array[Object]:
+	return [
+		sfx_system,
+		pl_anim_sfx_sig_emitter,
+		pl_weapon_anim_sfx_sig_emitter,
+		hit_box_torso,
+		__fly_mode,
+	]
+
 
 func initialise() -> void:
+	__validate_dependencies()
+
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Masks.PLAYER_COL_MASK
 
@@ -73,7 +102,13 @@ func initialise() -> void:
 	combat.initialise()
 	animator_manager.initialise()
 
-	sfx_system.initialise(pl_sig_container, self, {sfx_system.character_additional_data_key: self})
+	
+	sfx_system.initialise(
+		pl_sig_container,
+		_initialise_sfx_configs(),
+		self,
+		{sfx_system.character_additional_data_key: self}
+		)
 	
 	var _pl_sad_container := PlayerSADContainer.new()
 	pl_anim_sfx_sig_emitter.initialise(_pl_sad_container, pl_sig_container)
@@ -91,13 +126,15 @@ func initialise() -> void:
 
 	__dev_initialise()
 
-	__initialised = true
+	if not __validate_deps_set_init():
+		__log_warn_soft("well game is not ready")
+
 
 func is_player() -> bool:
 	return true
 
 
-func pp_character_name() -> String:
+func pp_name() -> String:
 	return "Player"
 
 ## not nullable in theory
@@ -118,8 +155,9 @@ func reset_position() -> void:
 
 # TODO: _process or _physics_process? changed to _process: frame issues
 func _process(delta: float) -> void:
-	if not __initialised:
+	if __could_not_initialised():
 		return
+
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
 	# seems like every frame is ok. may be try to make it once per N frames for safety
@@ -135,6 +173,20 @@ func update(input_: InputPackage, delta: float):
 	move_and_slide()
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
+
+##
+
+func get_run_state_names() -> Array[String]:
+	return [PS.run]
+
+func get_dodge_state_names() -> Array[String]:
+	return [PS.dodge]
+
+func get_sprint_state_names() -> Array[String]:
+	return [PS.sprint]
+
+func get_power_attacks_state_names() -> Array[String]:
+	return [PS.sword_slash_3]
 
 ## USED FOR ENEMY PROJECTS
 # region
@@ -202,6 +254,8 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 # region: DEV
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	if Input.is_action_just_pressed(RawAction.DEV_H):
 		var hit := HitData.new(10, "from god", PHEA.attack.scare_off)
 		combat._last_processed_hit = hit
@@ -249,6 +303,8 @@ var cam_i := 0
 var __collisions_enabled: bool = true
 
 func __dev_initialise():
+	if not OS.is_debug_build():
+		return
 	debug_cams = get_tree().get_nodes_in_group(Groups.Dev.DEBUG_CAMERAS)
 	# print_.dev("dbg", str(debug_cams))
 	debug_cams.append(fancy_camera.camera)
@@ -265,6 +321,14 @@ func __dev_initialise():
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(RawAction.Unstuck):
+		global_position.y += 1.5
+		print_.dev("dbg", "Unstuck: moved player up by 1.5 units")
+
+	if not OS.is_debug_build():
+		return
+
+		
 	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
 		cam_i = (cam_i + 1) % debug_cams.size()
 		print_.dev("dbg", "cam_i: " + str(cam_i))
@@ -277,9 +341,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if debug_cams[cam_i].has_method("make_current"):
 			debug_cams[cam_i].make_current()
 
-	if event.is_action_pressed(RawAction.Unstuck):
-		global_position.y += 1.5
-		print_.dev("dbg", "Unstuck: moved player up by 1.5 units")
 
 	if event.is_action_pressed(RawAction.DEV_cols):
 		__collisions_enabled = not __collisions_enabled

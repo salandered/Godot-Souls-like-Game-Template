@@ -102,4 +102,4 @@ func pp_name() -> String:
 	return "PlActionTimeManagement"
 
 func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
-	print_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
+	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))

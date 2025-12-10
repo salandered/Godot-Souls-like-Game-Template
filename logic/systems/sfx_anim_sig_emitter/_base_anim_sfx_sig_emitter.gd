@@ -13,12 +13,13 @@ var sad_container: BaseSADContainer
 
 var signal_container: BaseSignalContainer
 
-
 var ENABLED: bool = true
 
 
-@abstract func get_anim_manager() -> BaseAnimatorManager
+var _audio_track_throttler: EventThrottler
 
+
+@abstract func get_anim_manager() -> BaseAnimatorManager
 
 func disable():
 	ENABLED = false
@@ -27,45 +28,56 @@ func enable():
 	ENABLED = true
 
 
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		sad_container,
+		signal_container
+	]
+
+
 func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalContainer):
-	assert(sad_container_)
-	assert(signal_container_)
 	self.sad_container = sad_container_
 	self.signal_container = signal_container_
-	__initialised = true
+
+	self._audio_track_throttler = EventThrottler.new(0.2)
+
+	__validate_deps_set_init()
 
 
-func emit_sfx_signal(sfx_signal: Signal, data: Dictionary[String, Variant]) -> void:
-	sfx_signal.emit(data)
+func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Variant]) -> void:
+	u.safe_emit(signal_data, payload)
 	
-	# __log_("EMIT", sfx_signal.get_name(), "with data", pp.dict_(data, false, true))
+	if payload.get("anim_id") in [PHEA.attack.scare_off, A.attack.sword_slash_1]:
+		__log_("EMIT", signal_data, "with data", pp.dict_(payload, false, true))
 
 
-func _emit_signal_based_on_track_data(audio_track_data: AudioTrackData) -> void:
-	var _asp_name := audio_track_data.get_anim_asp_name()
+func _emit_signal_based_on_track_data(audio_track_data: AudioTrackData, anim: AnimationData) -> void:
+	var asp_name := audio_track_data.get_anim_asp_name()
 
-	var r_signal: Signal = Signal()
-	var r_signal_data: Dictionary[String, Variant] = {}
+	var r_signal_payload: Dictionary[String, Variant] = {}
 
-	var sfx_anim_data := sad_container.get_by_anim_sfx_asp_name(_asp_name)
+	var sfx_anim_data := sad_container.get_by_anim_sfx_asp_name(asp_name)
 	if not sfx_anim_data:
 		return
 	var signal_data := signal_container.get_by_sig_id(sfx_anim_data.signal_id)
 	if not signal_data:
 		return
 		
-	r_signal = signal_data.signal_obj
-
-	r_signal_data["_asp_name"] = _asp_name
-	r_signal_data["stream_name"] = audio_track_data.stream_name
+	r_signal_payload["asp_name"] = asp_name
+	r_signal_payload["stream_name"] = audio_track_data.stream_name
+	r_signal_payload["timestamp"] = audio_track_data.timestamp
+	r_signal_payload["anim_id"] = anim.anim_id
 	
-	emit_sfx_signal(r_signal, r_signal_data)
+	emit_sfx_signal(signal_data, r_signal_payload)
 
 
 func _process(delta: float) -> void:
-	if not ENABLED or not __initialised:
+	if not ENABLED or __could_not_initialised():
 		return
-		
+	
+	var current_time := u.get_curr_time_ticks_sec()
+	_audio_track_throttler.cleanup(current_time)
+
 	var curr_anim := get_anim_manager().get_curr_anim()
 	if curr_anim == null:
 		return
@@ -99,6 +111,8 @@ func _process(delta: float) -> void:
 
 
 func _check_audio_tracks(anim: AnimationData, from_time: float, to_time: float) -> void:
+	var current_time := u.get_curr_time_ticks_sec()
+
 	var timestamps: Array[float] = anim.get_audio_tracks_timestamps_sorted()
 	
 	for timestamp in timestamps:
@@ -106,23 +120,26 @@ func _check_audio_tracks(anim: AnimationData, from_time: float, to_time: float) 
 			break # future events, stop iterating
 			
 		if _is_time_in_window(timestamp, from_time, to_time):
-			# TODO: need it or not; probably not
-			# var MIN_WEIGHT := 0.0
-			# if get_anim_manager().is_blending():
-			# 	var weight := get_anim_manager().get_curr_blend_percentage()
-			# 	if weight < MIN_WEIGHT:
-			# 		__log_("Audio Event skipped✖️", timestamp, "weight", weight, "<", MIN_WEIGHT)
-			# 		continue
 			var audio_track_data_list := anim.get_audio_tracks_data_by_timestamp(timestamp)
 			
 			if not audio_track_data_list or audio_track_data_list.is_empty():
-				__log_error("not audio_track_data_list or audio_track_data_list.is_empty()", "", "", "audio_track_data_list", audio_track_data_list, "timestamp", timestamp)
+				__log_warn_soft(pp.s("not audio_tr_data_list or its empty:", audio_track_data_list, "tmstmp", timestamp))
 				continue
 
 			# __log_("Audio Track Data(s) crossed🎵", timestamp, "| window:", pp.in_sq(pp.s(from_time, "->", to_time)))
 			
 			for data: AudioTrackData in audio_track_data_list:
-				_emit_signal_based_on_track_data(data)
+				var unique_id = data.get_instance_id()
+
+				if _audio_track_throttler.is_throttled(unique_id, current_time):
+					__log_extra("THROTTLED", "Skipping", data.get_anim_asp_name())
+					continue
+				
+				_emit_signal_based_on_track_data(data, anim)
+				_audio_track_throttler.record_event(unique_id, current_time)
+
+
+# endregion
 
 
 # ensure 0.0 start times are caught
@@ -150,6 +167,18 @@ func __log_extra(prefix: String, ...parts):
 
 # endregion
 
+
+# region # idea for weight
+# if _is_time_in_window(timestamp, from_time, to_time):
+		# TODO: need it or not; probably not
+		# var MIN_WEIGHT := 0.0
+		# if get_anim_manager().is_blending():
+		# 	var weight := get_anim_manager().get_curr_blend_percentage()
+		# 	if weight < MIN_WEIGHT:
+		# 		__log_("Audio Event skipped✖️", timestamp, "weight", weight, "<", MIN_WEIGHT)
+		# 		continue
+
+# endregion
 
 # region: first implementation with markers
 

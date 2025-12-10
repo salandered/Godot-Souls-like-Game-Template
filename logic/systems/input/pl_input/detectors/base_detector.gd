@@ -11,7 +11,7 @@ class_name BaseDetector
 
 
 static func _current_time() -> float:
-	return Time.get_ticks_msec() / 1000.0
+	return u.get_curr_time_ticks_sec()
 
 
 static func _just_pressed_and_pressed(key_1: KeyPress, key_2: KeyPress) -> bool:

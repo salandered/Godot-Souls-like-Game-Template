@@ -21,7 +21,7 @@ var _target_lock_detector: TapDetector = TapDetector.new(DOUBLE_TAP_THRESHOLD)
 
 
 func _current_time() -> float:
-	return Time.get_ticks_msec() / 1000.0
+	return u.get_curr_time_ticks_sec()
 
 func _update_key_press_timestamps() -> void:
 	var _curr_time := _current_time()

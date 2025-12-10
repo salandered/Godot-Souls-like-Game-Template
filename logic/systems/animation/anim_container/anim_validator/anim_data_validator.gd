@@ -71,3 +71,22 @@ static func _validate_track_values(anim: AnimationData, param_prefixes: Array[St
 				__log_warn("Track '%s' first key is not boolean: %s (%s)" % [param_name, str(first_value), type_string(typeof(first_value))])
 		
 	return all_valid
+
+
+# region: __LOGS
+
+
+static func pp_name() -> String:
+	return "AnimDataValidator"
+
+static func __LOG_B() -> bool:
+	return false
+
+static func __LOG_INDENT() -> int:
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
+
+# endregion

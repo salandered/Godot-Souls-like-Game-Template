@@ -131,7 +131,7 @@ func __LOG_INDENT() -> int:
 ## just indent:
 
 func pp_name() -> String:
-	return pp.s(get_character().pp_character_name(), " Movement")
+	return pp.s(get_character().pp_name(), " Movement")
 
 
 func __pp_vel_y() -> String:

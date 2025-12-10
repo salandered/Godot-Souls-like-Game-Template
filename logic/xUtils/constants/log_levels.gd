@@ -1,15 +1,21 @@
 extends RefCounted
 class_name WarnLevel
 
-## custom level
-const SILENT := "SILENT" ## only when u know what u r doing
+
+## In the order of severity, low -> high
+
+## CUSTOM LEVEL
+## only when u know what u r doing
+const SILENT := "SILENT"
+## print with icon
 const WARN := "WARN"
+## print with prominent icon! what do u want
 const WARN_CRUCIAL := "WARN_CRUCIAL"
 
-## only while developing
+## works only in developer build
 ## not advised to use at all
 const ASSERT := "ASSERT"
 
-## engine level
+## ENGINE LEVEL
 const PUSH_WARNING := "PUSH_WARNING"
 const PUSH_ERROR := "PUSH_ERROR"

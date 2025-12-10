@@ -43,8 +43,8 @@ func get_rot_track_idx(track_path: String) -> int:
 
 
 ## Client code may get some specific marker directly.
-func get_marker_by_name(marker_name: String, fallback: String = WarnLevel.WARN) -> AnimMarker:
-	return u.safe_get_dict_key(_markers, marker_name, null, fallback, "get marker from anim " + anim_id)
+func get_marker_by_name(marker_name: String, warn_level: String = WarnLevel.WARN) -> AnimMarker:
+	return u.safe_get_dict_key(_markers, marker_name, null, warn_level)
 
 func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
 	var result: Array[AnimMarker] = []

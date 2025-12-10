@@ -1,7 +1,9 @@
-extends RefCountedLogger
+extends BaseRefCountedSystem
 class_name SFXAnimData
 
 ## or simply SAD
+## should not contain any objects and links.
+## just ID/String glue
 
 ## sfx type from SFXConstants 
 var sad_id: String

@@ -21,6 +21,7 @@ func _ready() -> void:
 	set_process_input(_enabled)
 	set_process_unhandled_input(_enabled)
 
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_free_cam):
 		_toggle_camera_mode()
@@ -72,7 +73,7 @@ func _process(delta: float) -> void:
 
 
 func _toggle_camera_mode() -> void:
-	print_.fancy_cam("Toggling camera mode. Current speed: ", camera_speed)
+	print_.prefix_s("Toggling camera mode. Current speed: ", camera_speed)
 	if visible:
 		get_tree().paused = false
 		Input.mouse_mode = _previous_mouse_mode

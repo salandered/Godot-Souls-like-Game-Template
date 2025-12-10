@@ -12,4 +12,7 @@ func _init(signal_id_: String, signal_obj_: Signal):
 
 
 func _to_string() -> String:
-	return pp.s("sigId:", signal_id, "sigObjname/id:", signal_obj.get_name(), signal_obj.get_object_id())
+	var _msg_sig := pp.s("sigObjname/id:", signal_obj.get_name(), signal_obj.get_object_id()) \
+		if not signal_obj.is_null() \
+		else "[invalid sig]"
+	return pp.s("sigId:", signal_id, _msg_sig)

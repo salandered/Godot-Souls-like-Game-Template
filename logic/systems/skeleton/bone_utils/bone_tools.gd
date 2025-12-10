@@ -4,6 +4,8 @@ class_name BoneTools
 
 ## soft 
 static func validate_skeleton(skeleton: Skeleton3D) -> bool: # {int: String}
+	if not skeleton:
+		return false
 	var bone_count = skeleton.get_bone_count()
 	if bone_count != Constants.BONE_COUNT:
 		# soft warn

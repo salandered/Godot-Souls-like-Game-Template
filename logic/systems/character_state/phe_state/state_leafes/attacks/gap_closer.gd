@@ -24,7 +24,7 @@ func initialise_implementation():
 
 
 func get_active_weapon_names() -> Array[String]:
-	return [WeaponNames.big_pinga_blade, WeaponNames.bg_aura_weapon]
+	return [WeaponID.big_pinga_blade, WeaponID.bg_aura_weapon]
 
 
 func _decide_mode_on_enter():

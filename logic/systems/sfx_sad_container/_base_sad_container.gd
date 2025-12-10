@@ -1,6 +1,6 @@
 @abstract
 class_name BaseSADContainer
-extends RefCountedLogger
+extends BaseRefCountedSystem
 
 
 var sad_id_to_sad: Dictionary[String, SFXAnimData]

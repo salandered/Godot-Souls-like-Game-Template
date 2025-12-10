@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://ope03u0gwdw4"]
+[gd_scene load_steps=18 format=4 uid="uid://ope03u0gwdw4"]
 
 [ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/systems/weapon/big_pinga_blade.gd" id="1_hj5gq"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b4wn10ena052b" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_Roughness.png" id="7_jhutn"]
 [ext_resource type="Texture2D" uid="uid://vtrrpfkytq08" path="res://-assets-/GLB-items/pinga/pinga_Fabric029_2d1K-JPG_NormalGL.jpg" id="8_mpgtj"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="9_h8ebr"]
-[ext_resource type="PackedScene" uid="uid://c3bogm2cs375" path="res://logic/systems/combat/weapon_sfx/WeaponSfx.tscn" id="10_kngnu"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/systems/combat/weapon_sfx/WeaponSfx.tscn" id="10_kngnu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
 radius = 0.7368164
@@ -125,18 +125,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kngnu")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ods2k"]
-radius = 0.07519531
-height = 0.359573
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
-radius = 0.040039063
-height = 0.18536234
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u228v"]
-radius = 0.072265625
-height = 0.31422788
-
 [node name="BigPingaBlade" type="Node3D"]
 script = ExtResource("1_hj5gq")
 
@@ -144,7 +132,7 @@ script = ExtResource("1_hj5gq")
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, -7.450581e-09, 0, 1, 0, 3.3527613e-08, -1.4901161e-08, 1, 0, 0, 0)
 collision_layer = 16
-collision_mask = 8
+collision_mask = 104
 
 [node name="HurtBoxCol4" type="CollisionShape3D" parent="WeaponHurtBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05667996, 1.1863165, 0.07279478)
@@ -179,26 +167,7 @@ gi_mode = 0
 mesh = SubResource("ArrayMesh_2q8s2")
 skeleton = NodePath("")
 
-[node name="hb_collisions_v1" type="Node" parent="."]
-
-[node name="HurtBoxCol" type="CollisionShape3D" parent="hb_collisions_v1"]
-transform = Transform3D(4.208098, -0.62464863, 0.9078718, -0.7110185, -4.2769575, 0.35295862, 0.8419417, -0.48983812, -4.2395387, 0.1263331, 1.6404425, -0.9612248)
-visible = false
-shape = SubResource("CapsuleShape3D_ods2k")
-debug_color = Color(0.84, 0.06719998, 0.28616, 1)
-
-[node name="HurtBoxCol3" type="CollisionShape3D" parent="hb_collisions_v1"]
-transform = Transform3D(4.2962227, -0.70749366, 0.0891186, -0.5149221, -2.7014878, 3.3768115, -0.4932989, -3.341773, -2.7486796, 0.075651854, 1.1459115, -0.744044)
-visible = false
-shape = SubResource("CapsuleShape3D_6hf6c")
-debug_color = Color(0.84, 0.06719998, 0.28616, 1)
-
-[node name="HurtBoxCol2" type="CollisionShape3D" parent="hb_collisions_v1"]
-transform = Transform3D(4.1779947, -0.33017457, 1.1652693, 1.0886619, -0.81024253, -4.132896, 0.5307368, 4.261103, -0.6955724, 0.18509431, 2.0829234, -1.3690958)
-visible = false
-shape = SubResource("CapsuleShape3D_u228v")
-debug_color = Color(0.84, 0.06719998, 0.28616, 1)
-
 [node name="WeaponSFX" parent="." instance=ExtResource("10_kngnu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6699998, 0)
 
 [editable path="WeaponHurtBox"]

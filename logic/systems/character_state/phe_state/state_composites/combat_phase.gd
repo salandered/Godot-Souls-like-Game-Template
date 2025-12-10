@@ -158,6 +158,9 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
+		
 	if event.is_action_pressed(RawAction.t2):
 		if not me.angry_raised:
 			# me.angry_raised = true will be raised by state flow

@@ -31,8 +31,8 @@ func initialise_implementation() -> void:
 func get_weapon_hurt_box() -> WeaponHurtBox:
 	return _weapon_hurt_box_
 
-func get_weapon_pp_name() -> String:
-	return WeaponNames.smith_sword
+func get_weapon_id() -> String:
+	return WeaponID.smith_sword
 
 
 func get_weapon_visuals() -> MeshInstance3D:
@@ -42,7 +42,7 @@ func get_weapon_visuals() -> MeshInstance3D:
 ## SFX
 
 
-func _get_weapon_sfx_() -> WeaponSFX:
+func _get_weapon_sfx_parent() -> WeaponSFX:
 	return weapon_sfx
 
 
@@ -51,6 +51,10 @@ func _get_weapon_whoosh_stream() -> AudioStream:
 
 func _get_hit_weapon_stream() -> AudioStream:
 	return SWORD_HIT_BONES
+
+
+func _get_whoosh_weapon_config() -> SFXStreamConfig:
+	return SFXStreamConfig.new(SFXConstants.Type_.whoosh_weapon, -3.0, 0.0, -0.15)
 
 
 # func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream:

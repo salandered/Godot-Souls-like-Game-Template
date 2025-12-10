@@ -1,8 +1,7 @@
-extends SkeletonModifier3D
+extends BaseSkModifier3DSystem
 class_name OverlayModifier
 
 @onready var skeleton := get_skeleton()
-@onready var anim_container: AnimationContainer = %AnimContainer
 
 
 var default_bone_mask: Array[int]
@@ -11,8 +10,6 @@ var default_bone_mask: Array[int]
 var _bone_idx_to_track: Dictionary[int, String] = {}
 
 var __custom_delta: CustomDelta = CustomDelta.new()
-
-var __initialised: bool = false
 
 
 class OverlayInstance extends RefCounted:
@@ -39,6 +36,11 @@ var curr_overlay: OverlayInstance
 var prev_overlay: OverlayInstance
 
 
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		skeleton
+	]
+
 func initialise():
 	BoneTools.validate_skeleton(skeleton)
 	
@@ -47,7 +49,7 @@ func initialise():
 	# Cache bone track paths
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
-	__initialised = true
+	__validate_deps_set_init()
 
 
 func _create_overlay_timing(anim: AnimationData, overlay_config: OverlayConfig) -> OverlayTiming:
@@ -89,7 +91,7 @@ func get_time_left() -> float:
 
 	
 func _process_modification():
-	if not __initialised:
+	if __could_not_initialised():
 		return
 
 	if not curr_overlay and not prev_overlay:
@@ -199,11 +201,8 @@ func _blend_pose(base_pose: Transform3D, overlay_pose: Transform3D, weight: floa
 	return final_pose
 
 	
-## __LOGS
+## addition logs
 # region
-
-func __log_(...parts: Array):
-	print_.prefix("Overlay", pp.list_(parts), 2)
 
 
 var __LOG_OVERLAY_START_B: bool = false
@@ -231,5 +230,20 @@ func __log_process_start(custom_delta: float):
 		__log_("Bone mask:", curr_overlay.bone_mask)
 		__log_("Skeleton bone count:", skeleton.get_bone_count())
 
+
+# endregion
+
+
+## __LOGS
+# region
+
+func pp_name() -> String:
+	return "Overlay"
+
+func __LOG_B() -> bool:
+	return false
+
+func __LOG_INDENT() -> int:
+	return 2
 
 # endregion

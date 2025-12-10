@@ -5,13 +5,13 @@ extends BaseSignalContainer
 
 ## DANGER: private, use BaseSignalContainer api
 ## fs
-signal SFX_footstep(data: Dictionary[String, Variant])
-signal SFX_footstep_light(data: Dictionary[String, Variant])
-signal SFX_footstep_scrape(data: Dictionary[String, Variant])
+signal SFX_footstep(payload: Dictionary[String, Variant])
+signal SFX_footstep_light(payload: Dictionary[String, Variant])
+signal SFX_footstep_scrape(payload: Dictionary[String, Variant])
 ##
-signal SFX_launch(data: Dictionary[String, Variant])
-signal SFX_land(data: Dictionary[String, Variant])
-signal SFX_whoosh(data: Dictionary[String, Variant])
+signal SFX_launch(payload: Dictionary[String, Variant])
+signal SFX_land(payload: Dictionary[String, Variant])
+signal SFX_whoosh(payload: Dictionary[String, Variant])
 # signal SFX_react_on_hit
 
 

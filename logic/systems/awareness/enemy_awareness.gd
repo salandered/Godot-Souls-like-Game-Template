@@ -19,8 +19,7 @@ func is_player() -> bool:
 
 
 func initialise() -> void:
-	if debug_sight_cone:
-		__create_sight_cone_visual()
+	dev_initialise()
 
 
 func detect_player() -> Detection:
@@ -91,15 +90,22 @@ var sight_cone_visual: MeshInstance3D
 var conus_color := Color(1, 0.5, 1, 0.25)
 
 
-func __create_sight_cone_visual():
+func dev_initialise() -> void:
+	if not OS.is_debug_build():
+		return
+	if debug_sight_cone:
+		_create_sight_cone_visual()
+
+
+func _create_sight_cone_visual():
 	sight_cone_visual = MeshInstance3D.new()
 	add_child(sight_cone_visual)
 	sight_cone_visual.position = Vector3.UP * 1.5
-	sight_cone_visual.material_override = __make_sight_material()
-	__update_sight_cone_mesh()
+	sight_cone_visual.material_override = _make_sight_material()
+	_update_sight_cone_mesh()
 
 
-func __make_sight_material() -> StandardMaterial3D:
+func _make_sight_material() -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = conus_color
 	mat.flags_transparent = true
@@ -107,7 +113,7 @@ func __make_sight_material() -> StandardMaterial3D:
 	return mat
 
 
-func __update_sight_cone_mesh():
+func _update_sight_cone_mesh():
 	var mesh := ImmediateMesh.new()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	var half_angle := deg_to_rad(me.sight_angle_degrees * 0.5)
@@ -129,7 +135,7 @@ func __update_sight_cone_mesh():
 ## LOG
 
 func pp_name() -> String:
-	return pp.s(me.pp_character_name(), "👀")
+	return pp.s(me.pp_name(), "👀")
 
 func __LOG_INDENT() -> int:
 	return 0

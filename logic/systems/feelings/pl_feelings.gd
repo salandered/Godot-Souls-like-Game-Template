@@ -186,6 +186,8 @@ func __log_feel_check_stamina(prefix: String, amount: float, decision: bool, ...
 # region: DEV
 
 func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	if event.is_action_pressed(RawAction.t1):
 		add_health(10)
 		add_stamina(15)

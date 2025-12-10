@@ -1,4 +1,4 @@
-extends RefCountedLogger
+extends BaseRefCountedSystem
 ## to cycle through an array of values endlessly
 class_name Cycler
 

@@ -24,8 +24,10 @@ static func _safe_validate_primitive(array: Array, type_enum: int, type_log_name
 
 
 ## based on is_instance_of. It also handles inheritance correctly (e.g. subclasses of Area3D)
-static func _safe_validate_class(array: Array, type_class: Variant, type_log_name: String) -> Array:
+static func _safe_validate_class(array: Array, type_class: Variant, type_log_name: String, ignore_null: bool = false) -> Array:
 	for item in array:
+		if item == null and ignore_null:
+			continue
 		if not is_instance_of(item, type_class):
 			__print_err_msg(item, array, type_log_name)
 			return []
@@ -60,10 +62,17 @@ static func array_of_float(array: Array[Variant]) -> Array[float]:
 
 # region: built in classes
 
+static func array_of_objects(array: Array, ignore_null: bool = false) -> Array[Object]:
+	var list_casted: Array[Object] = []
+	list_casted.assign(_safe_validate_class(array, Object, "Object", ignore_null))
+	return list_casted
+
+
 static func array_of_collision_shape(array: Array) -> Array[CollisionShape3D]:
 	var list_casted: Array[CollisionShape3D] = []
 	list_casted.assign(_safe_validate_class(array, CollisionShape3D, "CollisionShape3D"))
 	return list_casted
+
 
 static func array_of_mesh_instances(array: Array) -> Array[MeshInstance3D]:
 	var list_casted: Array[MeshInstance3D] = []
@@ -114,6 +123,9 @@ static func array_of_pause_menu_controller(array: Array) -> Array[M_PauseMenuCon
 	return list_casted
 
 
+# region: __LOGS
+
+
 static func pp_name() -> String:
 	return "TypeCaster"
 
@@ -121,4 +133,10 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __LOG_INDENT() -> int:
-	return 0
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
+
+# endregion
