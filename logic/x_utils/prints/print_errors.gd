@@ -3,6 +3,8 @@ class_name error_
 
 
 static func _warn(_msg: String, warn_level: String = WL.PUSH_ERROR):
+	if warn_level == WL.SILENT: return
+	
 	_msg = pp.s(em.warn, "WARNING |", _msg)
 	var _msg_crucial = pp.s(em.crucial_x2, _msg)
 	match warn_level:
@@ -35,9 +37,20 @@ static func warn(
 		fallback: String,
 		warn_level: String = WL.PUSH_ERROR,
 		...details: Array):
-	var _msg = "Problem: %s. Where: '%s'. Fallback '%s'. [%s]" % [what, where, fallback, warn_level]
+	if warn_level == WL.SILENT: return
+
+	var _msg = pp.s("Problem:", what)
+
+	where = where.strip_edges()
+	fallback = fallback.strip_edges()
+	if not where.is_empty():
+		_msg += pp.s(". Where:", where)
+	if not fallback.is_empty():
+		_msg += pp.s(". Fallback:", fallback)
 	if not details.is_empty():
-		_msg += "| Details: " + pp.list_(details)
+		_msg += " | Details: " + pp.list_(details)
+	_msg += pp.in_sq(warn_level)
+
 	_warn(_msg, warn_level)
 
 
@@ -118,5 +131,5 @@ static func null_signal(
 
 
 static func _err_msg(problem: String, context: String = "", ...parts: Array) -> String:
-	var context_msg := "" if context.is_empty() else pp.s("Context:", context)
-	return pp.s("Problem:", problem, context_msg, pp.list_(parts))
+	var context_msg := "" if context.is_empty() else pp.s("| Context:", context)
+	return pp.s("Problem:", problem, context_msg, "|", pp.list_(parts))

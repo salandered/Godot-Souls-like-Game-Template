@@ -23,6 +23,7 @@ class ID_:
 	## weapon
 	const whoosh_weapon := "whoosh_weapon"
 	const hit_weapon := "hit_weapon"
+	const hit_target := "hit_target"
 
 
 class Modifier:

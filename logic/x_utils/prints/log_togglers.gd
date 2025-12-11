@@ -41,6 +41,6 @@ const AWARENESS_B := true
 
 # ENEMY
 const PHE_CHECK_B := false
-const PHE_B := true
+const PHE_B := false
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false

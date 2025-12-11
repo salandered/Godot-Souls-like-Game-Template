@@ -29,6 +29,7 @@ static func s(...parts: Array) -> String:
 	return r
 
 
+
 # region: in 
 
 static func in_q(something: Variant, spaces: bool = false) -> String:

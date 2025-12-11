@@ -56,25 +56,23 @@ func get_soft_dependencies() -> Array[Object]:
 
 
 func _ready() -> void:
+	## each weapon has its own signals
+	_signal_container = BaseWeaponSignalContainer.new()
+
+
 	_weapon_hurt_box = get_weapon_hurt_box()
 	if _weapon_hurt_box:
-		_weapon_hurt_box.base_weapon = self
-		_weapon_hurt_box.initialise()
+		_weapon_hurt_box.initialise(self, _signal_container)
 	if not get_weapon_visuals(): # its ok while aura is in wip
 		pass
 		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_id()), "has no visuals")
 	
-	## each weapon has its own signals
-	_signal_container = BaseWeaponSignalContainer.new()
-
 
 	## SFX. Here we r not logging any problems, all be logged using get_soft_dependencies etc
 	var _weapon_sfx := _get_weapon_sfx_parent()
 	if _weapon_sfx and holder: # NOTE: without holder no SFX
 		var asp_config_container := SmithSwordASPConfigContainer.new()
 		var e_sig_container := EnemySignalContainer.new()
-		_set_whoosh_weapon_stream(_weapon_sfx)
-		_set_hit_weapon_stream(_weapon_sfx)
 		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)
 		if _sfx_system:
 			_sfx_system.initialise(
@@ -171,11 +169,6 @@ func reset_contact_hitbox_list() -> void:
 @abstract func _get_weapon_sfx_parent() -> WeaponSFXParent
 
 
-@abstract func _get_weapon_whoosh_stream() -> AudioStream
-
-@abstract func _get_hit_weapon_stream() -> AudioStream
-
-
 ## public
 func get_signal_container() -> BaseWeaponSignalContainer:
 	return _signal_container
@@ -186,38 +179,10 @@ func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
 	return weapon_sfx.get_sfx_system()
 
 
-func _set_whoosh_weapon_stream(weapon_sfx: WeaponSFXParent):
-	weapon_sfx.set_whoosh_weapon_stream(_get_weapon_whoosh_stream())
-
-func _set_hit_weapon_stream(weapon_sfx: WeaponSFXParent):
-	weapon_sfx.set_hit_weapon_stream(_get_hit_weapon_stream())
-
-
 ## in theory could be nullable
 # # @abstract func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream
 # func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream:
 # 	return null
-
-
-# func play_swing_sfx() -> void:
-# 	var player = get_sfx_swing_player()
-# 	if player:
-# 		# Randomize pitch for realism
-# 		player.pitch_scale = randf_range(0.9, 1.1)
-# 		player.play()
-
-# func resolve_hit(target: Node3D) -> void:
-# 	# SFX
-# 	var player = get_sfx_hit_player()
-# 	if player:
-# 		var stream = get_sfx_hit_stream_for_target(target)
-# 		if stream:
-# 			player.stream = stream
-# 			player.pitch_scale = randf_range(0.9, 1.1)
-# 			player.play()
-	
-# 	# Apply Damage / Physics (Existing logic can go here later)
-# 	__log_("Resolved hit on", target.name)
 
 
 ## __LOGS

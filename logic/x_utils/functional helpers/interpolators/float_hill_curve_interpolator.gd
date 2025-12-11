@@ -11,13 +11,13 @@ var current_value: float
 ## idempotent
 func initialise(start: float, end: float, peak: float, curve_: Curve, duration_: float) -> void:
 	assert(curve_)
-	start_value = start
-	end_value = end
-	peak_value = peak
-	curve = curve_
-	duration = duration_
-	timer = 0.0
-	current_value = start_value
+	self.start_value = start
+	self.end_value = end
+	self.peak_value = peak
+	self.curve = curve_
+	self.duration = duration_
+	self.timer = 0.0
+	self.current_value = start_value
 	# print_.dev("HillInterpolator",
 		# pp.s("Init: start", start_value, "end", end_value, "peak", peak_value, "dur", duration), 7)
 

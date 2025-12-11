@@ -1,5 +1,5 @@
 @abstract
-class_name BaseAnimationContainer
+class_name BaseAnimContainer
 extends BaseNodeCharacterSystem
 
 

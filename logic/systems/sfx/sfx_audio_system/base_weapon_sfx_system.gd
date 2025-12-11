@@ -6,6 +6,7 @@ const weapon_additional_data_key := "weapon"
 
 @onready var whoosh_weapon_player_3d: AudioStreamPlayer3D = %WhooshWeaponPlayer3D
 @onready var hit_weapon_player_3d: AudioStreamPlayer3D = %HitWeaponPlayer3D
+@onready var hit_target_weapon_player_3d: AudioStreamPlayer3D = %HitTargetWeaponPlayer3D
 
 
 var _weapon: BaseWeapon
@@ -32,30 +33,27 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 	var _list: Array[OnSFXSigASP] = [
 		OnWeaponSFXSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_whoosh_weapon),
+			sig_container.get_by_sig_id(SignalID.sfx_whoosh_weapon),
 			whoosh_weapon_player_3d,
-			SFXConstants.ID_.whoosh_weapon,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh_weapon)
 		),
 		OnWeaponSFXSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_hit_weapon),
+			sig_container.get_by_sig_id(SignalID.sfx_hit_weapon),
 			hit_weapon_player_3d,
-			SFXConstants.ID_.hit_weapon,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_weapon)
+		),
+		OnWeaponSFXSigASP.new(
+			self,
+			sig_container.get_by_sig_id(SignalID.sfx_hit_target),
+			hit_target_weapon_player_3d,
+			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_target)
 		),
 	]
 	return _list
 
 
-func set_whoosh_weapon_stream(stream: AudioStream):
-	whoosh_weapon_player_3d.stream = stream
-
-func set_hit_weapon_stream(stream: AudioStream):
-	hit_weapon_player_3d.stream = stream
-
 ## __LOG
-
 
 
 func __LOG_B() -> bool:

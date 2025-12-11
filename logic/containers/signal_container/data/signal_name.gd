@@ -1,8 +1,7 @@
 extends RefCounted
-class_name SignalName
+class_name SignalID
 
-## todo: not checked, but there r uses as IDs
-##   so make sure all unique
+## todo: not checked, so make sure all unique
 
 ## fs
 const sfx_footstep := "SFX_footstep"
@@ -17,3 +16,5 @@ const sfx_whoosh := "SFX_whoosh"
 ## weapon
 const sfx_whoosh_weapon := "SFX_whoosh_weapon"
 const sfx_hit_weapon := "SFX_hit_weapon"
+# weapon may fake 'receiver' impact sound
+const sfx_hit_target := "SFX_hit_target"

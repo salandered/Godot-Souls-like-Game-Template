@@ -7,10 +7,10 @@ var _has_triggered: bool = false # Prevent multiple calls to callback
 
 ## idempotent
 func initialise(duration_: float, callback: Callable = Callable()) -> void:
-	duration = duration_
-	timer = 0.0
-	on_complete = callback
-	_has_triggered = false
+	self.duration = duration_
+	self.timer = 0.0
+	self.on_complete = callback
+	self._has_triggered = false
 
 
 ## Returns true when timer expires

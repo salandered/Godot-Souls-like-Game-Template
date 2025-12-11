@@ -4,7 +4,7 @@ var curve: Curve
 
 func initialise(curve_: Curve) -> void:
 	assert(curve_)
-	curve = curve_
+	self.curve = curve_
 
 
 ## Sample curve at specific progress (0.0 to 1.0)

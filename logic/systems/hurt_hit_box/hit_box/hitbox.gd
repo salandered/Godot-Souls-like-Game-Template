@@ -159,7 +159,7 @@ func on_area_contact(incoming_area: Node3D):
 
 	# prints("contact", incoming_area, incoming_area.name, incoming_area.get_class())
 	var _weapon_area := incoming_area as WeaponHurtBox
-	var weapon: BaseWeapon = _weapon_area.base_weapon
+	var weapon: BaseWeapon = _weapon_area.my_weapon
 	if not weapon:
 		__log_error("weapon is null", "on_area_contact", "return")
 		return

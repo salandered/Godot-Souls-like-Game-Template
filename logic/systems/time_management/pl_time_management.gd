@@ -7,7 +7,7 @@ extends TimeManagement
 #       this also means validating that PlayerAnimatorManager aligns with BaseAnimatorManager
 
 var animator_manager: PlAnimatorManager
-var anim_container: BaseAnimationContainer
+var anim_container: BaseAnimContainer
 
 ## not nulllable
 var anim: AnimationData

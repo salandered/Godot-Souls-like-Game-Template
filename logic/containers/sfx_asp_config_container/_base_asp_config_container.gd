@@ -40,6 +40,7 @@ func _get_dict_data() -> Dictionary[String, ASPConfig]:
 		## weapon
 		SFXConstants.ID_.whoosh_weapon: _get_whoosh_weapon_config(),
 		SFXConstants.ID_.hit_weapon: _get_hit_weapon_config(),
+		SFXConstants.ID_.hit_target: _get_hit_target_config(),
 	}
 
 	for key: String in dict_.keys():
@@ -74,12 +75,14 @@ func _get_dict_data() -> Dictionary[String, ASPConfig]:
 
 @abstract func _get_hit_weapon_config() -> ASPConfig
 
+@abstract func _get_hit_target_config() -> ASPConfig
+
 
 ## __LOGS
 # region
 
 func pp_name() -> String:
-	return u.object_pp_name(self)
+	return u.construct_obj_pp_name(self)
 
 func __LOG_B() -> bool:
 	return true

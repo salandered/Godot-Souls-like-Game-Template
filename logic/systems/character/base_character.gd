@@ -91,7 +91,7 @@ func _ready() -> void:
 ## Basic use case: prefix for logging. 
 ## Should not be treated as ID in any sense! It's just cosmetics.
 func pp_name() -> String:
-	return u.object_pp_name(self)
+	return u.construct_obj_pp_name(self)
 
 
 ## are logs turned on. warn logs are always turned on.
@@ -105,7 +105,7 @@ func __LOG_INDENT() -> int:
 
 func __log_(_prefix: Variant, ...parts: Array):
 	if __LOG_B():
-		print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), 10)
+		print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 func __log_warn_soft(what: String, where: String = "", fallback: String = "", ...context: Array):
 	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WL.WARN, pp.list_(context))

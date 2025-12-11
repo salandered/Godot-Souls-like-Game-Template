@@ -31,7 +31,7 @@ func is_player() -> bool:
 
 
 func initialise(player: Princess) -> void:
-	_player = player
+	self._player = player
 	var empty_input := InputPackage.new()
 
 	var _idle_action := container.l_action_by_name(Leg.Act.idle)

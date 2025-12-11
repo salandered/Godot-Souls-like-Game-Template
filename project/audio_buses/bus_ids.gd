@@ -16,3 +16,4 @@ const GAME_SFX := "game_SFX"
 
 ## dev
 const TEST_SFX := "test_SFX"
+const AA_MUTED := "AA_muted"

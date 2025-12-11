@@ -16,7 +16,7 @@ func on_area_entered(incoming_area: Area3D):
 	if incoming_area is WeaponHurtBox:
 		# __log_("area entered with WeaponHurtBox", incoming_area)
 		var _weapon_area := incoming_area as WeaponHurtBox
-		var weapon: BaseWeapon = _weapon_area.base_weapon
+		var weapon: BaseWeapon = _weapon_area.my_weapon
 		if not apply_weapon_filters(weapon):
 			return
 		__log_("survived apply_weapon_filter", incoming_area)
@@ -40,6 +40,7 @@ func apply_weapon_filters(weapon: BaseWeapon) -> bool:
 		return false
 
 	if weapon.is_player() and filter_player_weapon:
+		__log_("filtered player")
 		return true
 	if not weapon.is_player() and filter_enemy_weapon:
 		return true
@@ -81,7 +82,7 @@ func apply_state_filters_for_character(body_area: CharacterHitbox) -> bool:
 
 
 func __LOG_B() -> bool:
-	return false
+	return true
 
 func __LOG_INDENT() -> int:
 	return 0

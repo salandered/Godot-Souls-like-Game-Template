@@ -18,13 +18,13 @@ signal SFX_whoosh(payload: Dictionary[String, Variant])
 func _get_signal_data_list() -> Array[SignalData]:
 	var signal_data_list: Array[SignalData] = [
 		## fs
-		SignalData.new(SignalName.sfx_footstep, SFX_footstep),
-		SignalData.new(SignalName.sfx_footstep_light, SFX_footstep_light),
-		SignalData.new(SignalName.sfx_footstep_scrape, SFX_footstep_scrape),
+		SignalData.new(SignalID.sfx_footstep, SFX_footstep),
+		SignalData.new(SignalID.sfx_footstep_light, SFX_footstep_light),
+		SignalData.new(SignalID.sfx_footstep_scrape, SFX_footstep_scrape),
 		##
-		SignalData.new(SignalName.sfx_launch, SFX_launch),
-		SignalData.new(SignalName.sfx_land, SFX_land),
-		SignalData.new(SignalName.sfx_whoosh, SFX_whoosh),
+		SignalData.new(SignalID.sfx_launch, SFX_launch),
+		SignalData.new(SignalID.sfx_land, SFX_land),
+		SignalData.new(SignalID.sfx_whoosh, SFX_whoosh),
 	]
 	
 	signal_data_list.append_array(_get_character_specific_signal_data_list())

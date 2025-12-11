@@ -20,6 +20,20 @@ var _on_signal_asps: Array[OnSFXSigASP]
 
 
 ## on init only
+## may return any number of objects. Stores as is. No property ID needed.
+# region: DOCS
+##
+## Example with basic character footstep handler.
+# OnCharFSSigASP.new(
+# 	self,
+# 	sig_container.get_by_sig_id(SignalID.sfx_footstep),
+# 	get_fs_asp_3d(),
+# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep)
+# ),
+## Example of changes:
+## 	    - change asp_3d, then on fs signal another ASP will be playing with its own streams. 
+##        so one signal -> two sounds
+## 
 @abstract func _get_on_signal_asps(signals: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]
 
 
@@ -36,8 +50,8 @@ func initialise(
 	) -> void:
 	var _list := _get_on_signal_asps(signal_container_, asp_config_container)
 	
-	_on_signal_asps.assign(_list)
-	signal_container = signal_container_
+	self._on_signal_asps.assign(_list)
+	self.signal_container = signal_container_
 	
 	initialise_implementation(additional_data)
 	
@@ -58,7 +72,7 @@ func _soft_validate_on_signal_asps():
 	if not error_.empty_list(_on_signal_asps, "_on_signal_asps", WL.WARN):
 		var _all_sfx_types: Array[String] = []
 		for item: OnSFXSigASP in _on_signal_asps:
-			_all_sfx_types.append(item.sfx_type)
+			_all_sfx_types.append(item.asp.name)
 		__log_("validation", "we have", len(_on_signal_asps), "on_signal_players:", pp.list_(_all_sfx_types))
 
 

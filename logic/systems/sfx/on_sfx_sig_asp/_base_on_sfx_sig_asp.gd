@@ -9,7 +9,6 @@ var _sfx_system: BaseSFXSystem
 var signal_data: SignalData
 ## not nullable
 var asp: AudioStreamPlayer3D
-var sfx_type: String
 ## not nullable
 var asp_config: ASPConfig
 
@@ -42,24 +41,29 @@ func _init(
 		sfx_system_: BaseSFXSystem,
 		signal_data_: SignalData,
 		asp_: AudioStreamPlayer3D,
-		sfx_type_: String,
 		asp_config_: ASPConfig
 	) -> void:
 	self._sfx_system = sfx_system_
 	self.signal_data = signal_data_
 	self.asp = asp_
-	self.sfx_type = sfx_type_
 	self.asp_config = asp_config_
 
 	if self.asp_config == null:
 		__log_("no asp_config provided, using default one")
 		self.asp_config = ASPConfig.new()
 
+
+	## all asp has some default stream attached.
+	## its ok if config does not provide it
+	if self.asp_config.stream:
+		self.asp.stream = self.asp_config.stream
+
+
 	var validate_ok := _hard_validate_implementation()
 	var deps_ok := __validate_dependencies()
 
 	if validate_ok and deps_ok and not error_.null_signal(self.signal_data):
-		__log_("connecting", self.sfx_type, "signal to callable")
+		__log_("connecting", "signal to callable")
 		self.signal_data.signal_obj.connect(on_signal)
 	else:
 		__log_warn_soft("not connecting. Something wrong", "", "it is signal so gonna be fine", "")
@@ -68,6 +72,7 @@ func _init(
 ## NOTE: args should align with signal data. In our case its payload: Dictionary
 func on_signal(payload: Dictionary[String, Variant]) -> void:
 	# __log_(self.sfx_type, "on_signal", "triggered")
+	## dynamic values are reset on every on_signal
 	var base_vol_db := -3.0
 	var base_pitch := 1.0
 
@@ -80,16 +85,21 @@ func on_signal(payload: Dictionary[String, Variant]) -> void:
 	asp.pitch_scale = vol_pitch.pitch + randf_range(-0.02, 0.02)
 	_asp_play()
 
+
 func _asp_play():
 	asp.play()
-	__log_(pp.s(asp.name, "🎵"), "bus", pp.in_q(asp.bus), "vol/pitch", asp.volume_db, "/", asp.pitch_scale, "stream", asp.stream.resource_name)
+	# __log_(pp.s(asp.name, "🎵"),
+	# 	"bus", pp.in_q(asp.bus),
+	# 	"vol/pitch", pp.round_01(asp.volume_db), "/", pp.round_01(asp.pitch_scale),
+	# 	"stream", pp.in_q(asp.`stream.resource_name))
 
 
 ## to override for additional logic
 @abstract func _hard_validate_implementation() -> bool
 
 
-## to override
+## 
+## given base_vol_db and base_pitch, aligned with the asp_config
 @abstract func _custom_logic(
 	base_vol_db: float,
 	base_pitch: float,

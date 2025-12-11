@@ -10,33 +10,33 @@ func _get_sad_list() -> Array[SFXAnimData]:
 		SFXAnimData.new(
 			SFXConstants.ID_.footstep,
 			"FS",
-			SignalName.sfx_footstep
+			SignalID.sfx_footstep
 			),
 		SFXAnimData.new(
 			SFXConstants.ID_.footstep_light,
 			"FSLight",
-			SignalName.sfx_footstep_light
+			SignalID.sfx_footstep_light
 			),
 		SFXAnimData.new(
 			SFXConstants.ID_.footstep_scrape,
 			"FSScrape",
-			SignalName.sfx_footstep_scrape
+			SignalID.sfx_footstep_scrape
 			),
 		## 
 		SFXAnimData.new(
 			SFXConstants.ID_.launch,
 			"Launch",
-			SignalName.sfx_launch
+			SignalID.sfx_launch
 			),
 		SFXAnimData.new(
 			SFXConstants.ID_.land,
 			"Land",
-			SignalName.sfx_land
+			SignalID.sfx_land
 			),
 		SFXAnimData.new(
 			SFXConstants.ID_.whoosh,
 			"WH",
-			SignalName.sfx_whoosh
+			SignalID.sfx_whoosh
 			),
 		## weapon
 		

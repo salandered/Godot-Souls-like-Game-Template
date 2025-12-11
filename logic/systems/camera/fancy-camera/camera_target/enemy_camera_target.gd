@@ -14,7 +14,7 @@ func get_soft_dependencies() -> Array[Object]:
 
 
 func initialise(assigned_parent: Node3D) -> void:
-	_assigned_parent = assigned_parent
+	self._assigned_parent = assigned_parent
 	add_to_group(Groups.Environment_.TARGETABLE) # only for EnemyCameraTarget
 	
 	dev_initialise()

@@ -11,7 +11,7 @@ var _player: Princess
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var combat: PlayerCombat = %Combat
 @onready var area_awareness: AreaAwareness = %AreaAwareness
-@onready var anim_container: AnimationContainer = %AnimContainer
+@onready var anim_container: AnimContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
 
@@ -61,7 +61,9 @@ func l_action_by_name(action_name: String) -> LegsAction:
 	return _r
 
 
-func accept_all_states(player_: Princess):
+func accept_all_states(player_: Princess, anim_container_: AnimContainer):
+	anim_container = anim_container_
+	
 	_player = player_
 	_accept_legs_behaviors()
 	_accept_player_states()

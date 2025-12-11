@@ -18,18 +18,6 @@ func get_sfx_system() -> BaseWeaponSFXSystem:
 	return sfx_system
 
 
-func set_whoosh_weapon_stream(stream: AudioStream) -> void:
-	if __could_not_initialised():
-		return
-	sfx_system.set_whoosh_weapon_stream(stream)
-
-
-func set_hit_weapon_stream(stream: AudioStream) -> void:
-	if __could_not_initialised():
-		return
-	sfx_system.set_hit_weapon_stream(stream)
-
-
 ## __LOGS
 # region
 

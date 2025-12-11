@@ -5,10 +5,9 @@ extends BaseCharacterState
 
 var me: PHCharacter
 var container: PHContainer
-var anim_container: BaseAnimationContainer
+var anim_container: BaseAnimContainer
 var phe_feelings: PHEFeelings
 var combat: PHECombat
-var native_player: AnimationPlayer
 var animator_manager: EnemyAnimatorManager
 var e_movement: EnemyMovement
 var anim_params_container: EAnimParamsContainer

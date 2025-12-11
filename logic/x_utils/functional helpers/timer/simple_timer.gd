@@ -4,8 +4,8 @@ class_name SimpleTimer
 
 ## idempotent
 func initialise(duration_: float) -> void:
-	duration = duration_
-	timer = 0.0
+	self.duration = duration_
+	self.timer = 0.0
 
 	
 ## Returns true when timer expires

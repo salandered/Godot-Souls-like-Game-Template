@@ -24,7 +24,7 @@ func initialise():
 	for weapon in _weapons_list:
 		_weapons[weapon.get_weapon_id()] = weapon
 
-	_hit_tracker = EventThrottler.new(HIT_BUFFER_DURATION)
+	_hit_tracker = EventThrottler.new(HIT_BUFFER_DURATION, 2.0, 3.0, "HitTracker")
 
 	__log_("initialised _weapons", pp.dict_(_weapons))
 
@@ -65,17 +65,15 @@ func is_character_attacking() -> bool:
 
 func apply_hit(hit_data: HitData) -> void:
 	var hit_id := hit_data.get_instance_id()
-	var current_time := u.get_curr_time_ticks_sec()
 	
-	_hit_tracker.cleanup(current_time)
 
-	if _hit_tracker.is_throttled(hit_id, current_time):
+	if _hit_tracker.is_throttled(hit_id):
 		__log_(hit_id, "is already processed (throttled)")
 		return
 	else:
 		__log_(hit_id, "not processed, will be")
 	
-	_hit_tracker.record_event(hit_id, current_time)
+	_hit_tracker.record_event(hit_id)
 	
 	_last_processed_hit = hit_data
 	get_character().react_on_hit(hit_data)

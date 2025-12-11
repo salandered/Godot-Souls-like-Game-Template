@@ -8,11 +8,12 @@ var anim_sfx_asp_name_to_sad: Dictionary[String, SFXAnimData]
 
 
 ## DOCS
+##  - NOTE: Used ONLY for animation based sfx signals.
 ##  - container is not really sad, it manages SFXAnimData which stands for 'SAD'
-##  - SFXAnimData should be created for any asp_name which could come from AudioTrackData
-##    E.g: for character it will be chracter SFX types which are animation based
-## NOTE: we list only those sfx types, which can be emitted from animation!
-##       So not necessarily all sfx signals of the entity
+##  - SFXAnimData should be created for any asp_name which could come from AudioTrackKey
+##    E.g: for character it will be character SFX types which are animation based
+##    Another ex: if character hit is tied to react anim, it will be here. 
+## 			If not (emitted on hitbox body entered), no need to define here
 
 
 func _init():

@@ -22,7 +22,6 @@ func get_character() -> BaseCharacter:
 	return _player
 
 
-
 ## PLAYER SPECIFIC: WORK WITH INPUTS
 # region
 

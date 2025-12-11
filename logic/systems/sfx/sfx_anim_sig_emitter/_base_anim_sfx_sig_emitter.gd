@@ -2,7 +2,7 @@
 class_name BaseAnimSFXSignalEmitter
 extends BaseNodeCharacterSystem
 
-## Monitors animation playback and emits SFX signal_container when AudioTrackData keys are crossed
+## Monitors animation playback and emits SFX signal_container when AudioTrackKey keys are crossed
 
 
 var _last_checked_time: float = 0.0
@@ -39,7 +39,7 @@ func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalC
 	self.sad_container = sad_container_
 	self.signal_container = signal_container_
 
-	self._audio_track_throttler = EventThrottler.new(0.2)
+	self._audio_track_throttler = EventThrottler.new(0.4, 2.0, 3.0, "AudioTrackKey")
 
 	__validate_deps_set_init()
 
@@ -47,11 +47,11 @@ func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalC
 func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Variant]) -> void:
 	u.safe_emit(signal_data, payload)
 	
-	if payload.get("anim_id") in [PHEA.attack.scare_off, A.attack.sword_slash_1]:
-		__log_("EMIT", signal_data, "with data", pp.dict_(payload, false, true))
+	# if payload.get("anim_id") in [PHEA.attack.scare_off, A.attack.sword_slash_1]:
+		# __log_("EMIT", signal_data, "with data", pp.dict_(payload, false, true))
 
 
-func _emit_signal_based_on_track_data(audio_track_data: AudioTrackData, anim: AnimationData) -> void:
+func _emit_signal_based_on_track_data(audio_track_data: AudioTrackKey, anim: AnimationData) -> void:
 	var asp_name := audio_track_data.get_anim_asp_name()
 
 	var r_signal_payload: Dictionary[String, Variant] = {}
@@ -75,9 +75,6 @@ func _process(delta: float) -> void:
 	if not ENABLED or __could_not_initialised():
 		return
 	
-	var current_time := u.get_curr_time_ticks_sec()
-	_audio_track_throttler.cleanup(current_time)
-
 	var curr_anim := get_anim_manager().get_curr_anim()
 	if curr_anim == null:
 		return
@@ -111,8 +108,6 @@ func _process(delta: float) -> void:
 
 
 func _check_audio_tracks(anim: AnimationData, from_time: float, to_time: float) -> void:
-	var current_time := u.get_curr_time_ticks_sec()
-
 	var timestamps: Array[float] = anim.get_audio_tracks_timestamps_sorted()
 	
 	for timestamp in timestamps:
@@ -128,15 +123,17 @@ func _check_audio_tracks(anim: AnimationData, from_time: float, to_time: float) 
 
 			# __log_("Audio Track Data(s) crossed🎵", timestamp, "| window:", pp.in_sq(pp.s(from_time, "->", to_time)))
 			
-			for data: AudioTrackData in audio_track_data_list:
-				var unique_id = data.get_instance_id()
+			for item: AudioTrackKey in audio_track_data_list:
+				var unique_id = item.get_instance_id()
+				if not item.track_enabled:
+					continue
 
-				if _audio_track_throttler.is_throttled(unique_id, current_time):
-					__log_extra("THROTTLED", "Skipping", data.get_anim_asp_name())
+				if _audio_track_throttler.is_throttled(unique_id):
+					__log_extra("THROTTLED", "Skipping", item.get_anim_asp_name())
 					continue
 				
-				_emit_signal_based_on_track_data(data, anim)
-				_audio_track_throttler.record_event(unique_id, current_time)
+				_emit_signal_based_on_track_data(item, anim)
+				_audio_track_throttler.record_event(unique_id)
 
 
 # endregion

@@ -5,14 +5,19 @@ class_name PHCharacter
 @onready var config: PHEConfig = %Config
 @onready var container: PHContainer = %StatesContainer
 @onready var enemy_movement: EnemyMovement = %EnemyMovement
-@onready var native_player: AnimationPlayer = %NativePlayer
-@onready var anim_container: AnimationContainer = %AnimContainer
-@onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
-@onready var anim_params_container: EAnimParamsContainer = %AnimParamsContainer
+
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var combat: PHECombat = %Combat
 @onready var _top: BasePHEState = %_Top
 @onready var visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
+
+
+## anim
+@onready var native_player: AnimationPlayer = %NativePlayer
+@onready var anim_container: AnimContainer = %AnimContainer
+@onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
+@onready var anim_params_container: EAnimParamsContainer = %AnimParamsContainer
+
 
 ## sfx
 @onready var sfx_system: EnemySFXSystem = %AudioSystem
@@ -56,7 +61,6 @@ func get_hard_dependencies() -> Array[Object]:
 		config,
 		container,
 		enemy_movement,
-		native_player,
 		anim_container,
 		animator_manager,
 		combat,
@@ -85,11 +89,6 @@ func initialise() -> void:
 	if not __validate_dependencies():
 		return
 
-	var e_sig_container := EnemySignalContainer.new()
-
-	combat.initialise()
-	animator_manager.initialise()
-
 	var _anim_list := PHEA.new()
 	anim_container._accept_animations(
 		_anim_list.list_of_animations,
@@ -97,8 +96,14 @@ func initialise() -> void:
 		EAnimParamsContainer.TRACK_PREFIXES,
 		EAnimParamsContainer.get_all_params(),
 		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
+
 	
-	
+	animator_manager.initialise(native_player, anim_container)
+
+	combat.initialise()
+
+	var e_sig_container := EnemySignalContainer.new()
+
 	## SFX. See Princess for referense
 
 	if sfx_system:

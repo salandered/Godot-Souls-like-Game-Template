@@ -5,16 +5,31 @@ extends BaseAnimatorManager
 class_name EnemyAnimatorManager
 
 
-@onready var anim_container: AnimationContainer = %AnimContainer
-@onready var native_player: AnimationPlayer = %NativePlayer
+@onready var _native_player: AnimationPlayer = %NativePlayer
 @onready var general_skeleton: Skeleton3D = %GeneralSkeleton
 @onready var overlay_modifier: OverlayModifier = %OverlayModifier
+
+## _native_player will be duplicated to this
+var _anim_player: AnimationPlayer
 
 
 # Track the starting position to calculate time_spent
 var _curr_anim_start_offset: float = 0.0
 var _curr_anim: AnimationData
 
+
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		_native_player,
+		_anim_player,
+		general_skeleton,
+		anim_container
+	]
+
+func get_soft_dependencies() -> Array[Object]:
+	return [
+		overlay_modifier
+	]
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 
@@ -45,18 +60,18 @@ func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset
 		__log_error("set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 
-	if not native_player.has_animation(anim_id):
+	if not get_anim_player().has_animation(anim_id):
 		__log_error("set_anim_to_play fail: animation not found: " + anim_id, "set_anim_to_play", "")
 		return
 	
 	# NOTE: playing anim and setting _curr_anim is atomic
-	native_player.play(anim.anim_id, blend_for, anim.speed_scale)
+	get_anim_player().play(anim.anim_id, blend_for, anim.speed_scale)
 	__log_new_anim(_curr_anim, anim)
 	_curr_anim = anim
 	#
 	
 	if start_time_offset > 0:
-		native_player.seek(start_time_offset, true)
+		get_anim_player().seek(start_time_offset, true)
 
 	_curr_anim_start_offset = start_time_offset
 
@@ -70,14 +85,14 @@ func set_global_speed_scale(new_scale: float) -> void:
 		__log_("new_scale will be clamped. min/max/curr scale", new_scale, min_speed_scale, max_speed_scale)
 		new_scale = clampf(new_scale, min_speed_scale, max_speed_scale)
 	
-	if absf(native_player.speed_scale - new_scale) > 0.005:
-		# __log_("set_global_speed_scale to", new_scale, "  (from", native_player.speed_scale, ")")
-		native_player.speed_scale = new_scale
+	if absf(get_anim_player().speed_scale - new_scale) > 0.005:
+		# __log_("set_global_speed_scale to", new_scale, "  (from", get_anim_player().speed_scale, ")")
+		get_anim_player().speed_scale = new_scale
 
 
 func reset_global_speed_scale() -> void:
 	# __log_("reset_global_speed_scale to 1.0")
-	native_player.speed_scale = 1.0
+	get_anim_player().speed_scale = 1.0
 
 
 ## guarantees not 0.0
@@ -88,20 +103,20 @@ func get_global_speed_scale() -> float:
 ## READ INFO ABOUT WHAT'S PLAYING
 
 func get_curr_anim_effective_time_spent() -> float:
-	var raw_time_spent := native_player.current_animation_position
+	var raw_time_spent := get_anim_player().current_animation_position
 	var effective_speed := _get_effective_speed()
 	return raw_time_spent / absf(effective_speed)
 
 
 func get_curr_anim_time_spent() -> float:
-	var raw_time_spent := native_player.current_animation_position - _curr_anim_start_offset
+	var raw_time_spent := get_anim_player().current_animation_position - _curr_anim_start_offset
 	var effective_speed := _get_effective_speed()
 	return raw_time_spent / absf(effective_speed)
 
 
 ## Returns the raw, unscaled playhead position. (Animation Time)
 func get_curr_anim_position_unscaled() -> float:
-	return native_player.current_animation_position
+	return get_anim_player().current_animation_position
 
 
 ## Returns the raw, unscaled duration. (Animation Time)
@@ -130,11 +145,11 @@ func get_curr_anim_effective_duration() -> float:
 ## guarantees not 0.0
 ## returns 1.0 if no curr anim
 func _get_effective_speed() -> float:
-	# NOTE: we could use native_player.get_playing_speed(), 
+	# NOTE: we could use get_anim_player().get_playing_speed(), 
 	# 		but then if animation ends playing, it drops to 0.0.
 	if not _curr_anim:
 		return 1.0
-	var _r := _curr_anim.speed_scale * native_player.speed_scale
+	var _r := _curr_anim.speed_scale * get_anim_player().speed_scale
 	if _r == 0.0:
 		__log_warn("effective_speed 0", "enemy animator", "return 1.0")
 		return 1.0
@@ -149,7 +164,7 @@ func get_curr_anim_id() -> String:
 
 
 func is_playing() -> bool:
-	return native_player.is_playing()
+	return get_anim_player().is_playing()
 
 
 ## may be null
@@ -164,12 +179,12 @@ func get_overlay_time_left() -> float:
 ## ROOT MOTION
 
 func get_root_motion_position(y_zeroed: bool = true, __log: bool = false) -> Vector3:
-	var delta_pos := native_player.get_root_motion_position()
+	var delta_pos := get_anim_player().get_root_motion_position()
 	if __log:
 		__log_(">> Native root motion RAW: ", delta_pos)
-		__log_(">> Animation playing: ", native_player.is_playing())
-		__log_(">> Current animation: ", native_player.current_animation)
-		__log_(">> Animation position: ", native_player.current_animation_position)
+		__log_(">> Animation playing: ", get_anim_player().is_playing())
+		__log_(">> Current animation: ", get_anim_player().current_animation)
+		__log_(">> Animation position: ", get_anim_player().current_animation_position)
 		
 	if y_zeroed:
 		delta_pos.y = 0
@@ -179,16 +194,24 @@ func get_root_motion_position(y_zeroed: bool = true, __log: bool = false) -> Vec
 
 ## SYSTEM
 
+func get_anim_player() -> AnimationPlayer:
+	return _anim_player
 
-func initialise() -> void:
+
+func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer) -> void:
+	self.anim_container = anim_container_
+
 	# dont rely on UI setting, it will be lost on almost any change, super fragile.
-	native_player.root_motion_track = NodePath(Constants.ROOT_TRACK_PATH)
-	
+	native_player_.root_motion_track = NodePath(Constants.ROOT_TRACK_PATH)
+	self._anim_player = native_player_
+
 	_reset_root_motion()
 	
-	native_player.play(PHEA.sleep)
+	_anim_player.play(PHEA.sleep)
 
 	overlay_modifier.initialise()
+
+	__validate_deps_set_init()
 
 
 func _reset_root_motion() -> void:
@@ -200,6 +223,9 @@ func _reset_root_motion() -> void:
 
 func is_player() -> bool:
 	return false
+
+
+##
 
 
 ## __LOG

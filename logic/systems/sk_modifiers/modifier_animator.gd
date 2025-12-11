@@ -3,11 +3,12 @@ extends BaseSkModifier3DSystem
 ## 			PlAnimatorManager manages all modifier animators
 class_name PlayerModifierAnimator
 
-@export var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
 @onready var skeleton := get_skeleton()
 @onready var root_animator: PlayerRootAnimator = %RootAnimator
 
-@export var animator_name: String ## name of animator
+var animator_name: String = "full_body"
+
+var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
 
 
 var bone_mask: Array
@@ -58,16 +59,16 @@ var __custom_delta: CustomDelta = CustomDelta.new()
 func get_hard_dependencies() -> Array[Object]:
 	return [
 		skeleton,
-		root_animator
+		root_animator,
+		native_animator
 	]
 
 
-func initialise() -> void:
+func initialise(native_animator_: AnimationPlayer) -> void:
+	self.native_animator = native_animator_
+	
 	BoneTools.validate_skeleton(skeleton)
 
-	if animator_name != "full_body":
-		__log_error("no animator_name or its unknown. Only 'full_body' is supported")
-	
 	## NOTE: root is not animated here. See PlayerRootAnimator
 	bone_mask = BoneMask.get_full_body_no_root()
 

@@ -19,7 +19,7 @@ func is_player() -> bool:
 
 
 func initialise(root_track: String) -> void:
-	_root_track = root_track
+	self._root_track = root_track
 	error_.empty_string(_root_track)
 	__validate_dependencies()
 

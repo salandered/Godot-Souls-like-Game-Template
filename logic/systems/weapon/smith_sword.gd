@@ -7,20 +7,18 @@ class_name SmithSword
 
 @onready var weapon_sfx: WeaponSFXParent = $WeaponSFXParent
 
-const WEAPON_WHOOSH = preload("uid://qufmydm4eeq4")
-const SWORD_HIT_BONES = preload("uid://g4dtkcleinh8")
-
 
 var hit_sounds: Dictionary = {
-	# "Material:Wood": preload("res://your_path/hit_wood.wav"),
-	# "Material:Stone": preload("res://your_path/hit_stone.wav"),
-	# "Material:Flesh": preload("res://your_path/hit_flesh.wav"),
-	# "Default": preload("res://your_path/hit_metal_default.wav")
+	# "Material:Wood": preload("res://.../hit_wood.wav"),
+	# "Material:Stone": preload("res://.../hit_stone.wav"),
+	# "Material:Flesh": preload("res://.../hit_flesh.wav"),
+	# "Default": preload("res://.../hit_metal_default.wav")
 }
 
 func initialise_implementation() -> void:
 	var mesh: MeshInstance3D = _visuals_.get_child(0)
-	assert(mesh and mesh is MeshInstance3D)
+	if not mesh or mesh is not MeshInstance3D:
+		__log_error("if not mesh or mesh is not MeshInstance3D")
 	
 	_input_action_to_state = {
 		# CombatAction.light_attack_pressed: PS.axe_slice_1,
@@ -44,13 +42,6 @@ func get_weapon_visuals() -> MeshInstance3D:
 
 func _get_weapon_sfx_parent() -> WeaponSFXParent:
 	return weapon_sfx
-
-
-func _get_weapon_whoosh_stream() -> AudioStream:
-	return WEAPON_WHOOSH
-
-func _get_hit_weapon_stream() -> AudioStream:
-	return SWORD_HIT_BONES
 
 
 # func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream:

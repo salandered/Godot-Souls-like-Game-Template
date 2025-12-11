@@ -5,8 +5,10 @@ class_name BaseAnimatorManager
 extends BaseNodeCharacterSystem
 
 
+var anim_container: AnimContainer
+
 ## E.g: accept modifers, play initial anim, etc
-@abstract func initialise()
+@abstract func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer) -> void
 
 
 @abstract func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float) -> void

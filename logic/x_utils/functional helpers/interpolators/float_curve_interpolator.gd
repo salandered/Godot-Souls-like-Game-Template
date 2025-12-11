@@ -15,12 +15,12 @@ var curve: Curve
 ## idempotent
 func initialise(start: float, target: float, curve_: Curve, duration_: float) -> void:
 	assert(curve_)
-	start_value = start
-	target_value = target
-	current_value = start
-	curve = curve_
-	duration = duration_
-	timer = 0.0
+	self.start_value = start
+	self.target_value = target
+	self.current_value = start
+	self.curve = curve_
+	self.duration = duration_
+	self.timer = 0.0
 
 
 ## Returns target_value when done

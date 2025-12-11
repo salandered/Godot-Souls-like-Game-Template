@@ -23,12 +23,12 @@ class_name Princess
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
-@onready var sfx_system: PrincessSFXSystem = %AudioSystem
+@onready var sfx_system: PlayerSFXSystem = %AudioSystem
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
 @onready var pl_weapon_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %WeaponAnimSFXSigEmitter
 
 # anim
-@onready var anim_container: AnimationContainer = %AnimContainer
+@onready var anim_container: AnimContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var native_player: AnimationPlayer = %NativeAnimator
 
@@ -86,21 +86,21 @@ func initialise() -> void:
 	visuals.accept_model_data(self)
 	
 
-	var _pl_anim_container := PlAnimList.new()
-	# NOTE: should be before accepting states!
+	var _pl_anim_data := PlAnimList.new()
+
 	anim_container._accept_animations(
-		_pl_anim_container.list_of_animations,
+		_pl_anim_data.list_of_animations,
 		native_player,
 		AnimParamsContainer.TRACK_PREFIXES,
 		AnimParamsContainer.get_all_params(),
 		PlRequiredMarkers.anim_to_required_marker)
 		 
 	bones.accept_bones()
-	container.accept_all_states(self)
+	container.accept_all_states(self, anim_container)
 	player_sm.initialise(self)
 
 	combat.initialise()
-	animator_manager.initialise()
+	animator_manager.initialise(native_player, anim_container)
 
 	var asp_config_container := PlayerASPConfigContainer.new()
 	
@@ -136,7 +136,6 @@ func is_player() -> bool:
 	return true
 
 
-
 ## not nullable in theory
 func get_current_state() -> BasePlayerState:
 	return player_sm.current_state
@@ -164,6 +163,9 @@ func _process(delta: float) -> void:
 	basis = basis.orthonormalized()
 	
 
+		# Monitor during playback
+
+
 func update(input_: InputPackage, delta: float):
 	if __fly_mode.fly_mode_enabled:
 		return
@@ -175,6 +177,13 @@ func update(input_: InputPackage, delta: float):
 
 
 ##
+
+func get_curr_action_name() -> String:
+	var action := player_sm.get_curr_action()
+	if not action:
+		return ""
+	return action.action_name
+
 
 func get_run_state_names() -> Array[String]:
 	return [PS.run]

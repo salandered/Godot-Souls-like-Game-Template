@@ -14,6 +14,8 @@ var max_distance: float
 var max_polyphony: int
 ##
 var panning_strength: float
+##
+var stream: AudioStream
 
 
 var _min_max_vol_db_change: FMinMax = FMinMax.new(-10.0, 15.0)
@@ -30,7 +32,8 @@ func _init(
 	unit_size_: float = 1.0,
 	max_distance_: float = 30.0,
 	max_polyphony_: int = 5,
-	panning_strength_: float = 0.5
+	panning_strength_: float = 0.5,
+	stream_: AudioStream = null,
 ):
 	self.vol_db_change = vol_db_change_
 	self.pitch_change = pitch_change_
@@ -38,6 +41,7 @@ func _init(
 	self.max_distance = max_distance_
 	self.max_polyphony = max_polyphony_
 	self.panning_strength = panning_strength_
+	self.stream = stream_
 
 	_validate()
 

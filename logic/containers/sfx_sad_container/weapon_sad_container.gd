@@ -7,7 +7,7 @@ func _get_sad_list() -> Array[SFXAnimData]:
 		SFXAnimData.new(
 			SFXConstants.ID_.whoosh_weapon,
 			"WHWeapon",
-			SignalName.sfx_whoosh_weapon
+			SignalID.sfx_whoosh_weapon
 			),
 	]
 

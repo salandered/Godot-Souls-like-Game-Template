@@ -7,9 +7,9 @@ var curve: Curve
 ## idempotent
 func initialise(curve_: Curve, duration_: float) -> void:
 	assert(curve_)
-	curve = curve_
-	duration = duration_
-	timer = 0.0
+	self.curve = curve_
+	self.duration = duration_
+	self.timer = 0.0
 
 
 ## Returns final curve value when done

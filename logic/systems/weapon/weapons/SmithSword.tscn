@@ -32,7 +32,7 @@ visible = false
 material_override = SubResource("StandardMaterial3D_lfwdn")
 
 [node name="WeaponSFXParent" parent="." instance=ExtResource("4_oli0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31301957, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58605146, 0)
 
 [editable path="WeaponHurtBox"]
 [editable path="WeaponSFXParent"]

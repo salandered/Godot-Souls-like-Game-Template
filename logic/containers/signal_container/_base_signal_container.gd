@@ -10,7 +10,7 @@ func _init():
 	var _signal_data_list: Array[SignalData] = _get_signal_data_list()
 
 	if len(_signal_data_list) == 0:
-		__log_error("no _signal_data_list created; that is odd", "", "")
+		__log_warn("no _signal_data_list created; that is odd", "", "")
 	else:
 		__log_("init", "_signal_data_list created")
 		for _signal_data: SignalData in _signal_data_list:
@@ -29,7 +29,7 @@ func _init():
 func get_by_sig_id(sig_id: String) -> SignalData:
 	var _r: SignalData = u.safe_get_dict_key(sig_id_to_signal_data, sig_id, null)
 	if not _r:
-		__log_error("no SignalData found for sig_id", "", "", pp.in_q(sig_id))
+		__log_warn_soft("no SignalData found for sig_id", "", "", pp.in_q(sig_id))
 	return _r
 
 

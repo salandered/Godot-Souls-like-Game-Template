@@ -1,10 +1,12 @@
 @tool
 @icon("res://-assets-/x_icons/white/icon_grid.png")
 
-extends BaseAnimationContainer
+class_name AnimContainer
+extends BaseAnimContainer
+
+
 ## for simplicity this container is used for all characters for now.
 ## if native_player dont have animation name from _animations, it will simply skip it
-class_name AnimationContainer
 
 
 var _anim_by_id: Dictionary[String, AnimationData] = {}
@@ -16,25 +18,31 @@ func get_by_anim_id(anim_id: String) -> AnimationData:
 
 
 ## native_player - player's player, se's player, etc
-func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary[String, Array]) -> void:
+func _accept_animations(
+		_animations: Array[AnimationData],
+		native_player: AnimationPlayer,
+		param_prefixes: Array[String],
+		param_tracks: Array[String],
+		required_markers: Dictionary[String, Array],
+	) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
 		if not AnimUtils.safe_has_animation(native_player, anim.anim_id, WL.SILENT):
 			continue
 
-		var native_anim: Animation = native_player.get_animation(anim.anim_id)
+		var raw_native_anim: Animation = native_player.get_animation(anim.anim_id)
 
-		# NOTE: i think it's safer to duplicate, since different characters may rely on the same resource
-		anim.native_anim = native_anim.duplicate()
+		# WARNING: Important! should be as higher as possible. Also consider deep flag if inner data like streams matter
+		anim.native_anim = raw_native_anim.duplicate()
 		
 		# name
-		anim.anim_name = native_anim.resource_name
+		anim.anim_name = raw_native_anim.resource_name
 
 		# is looping
-		anim.is_looping = (native_anim.loop_mode == Animation.LOOP_LINEAR)
+		anim.is_looping = (anim.native_anim.loop_mode == Animation.LOOP_LINEAR)
 
 		# timings
-		anim.duration = native_anim.length
+		anim.duration = anim.native_anim.length
 		
 		# all markers
 		var markers := __get_animation_markers(anim.native_anim)
@@ -65,41 +73,53 @@ func _accept_animations(_animations: Array[AnimationData], native_player: Animat
 		__log_error("Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)], "", "")
 
 
-## Returns dict { timestamp <float>: Array[AudioTrackData] }
-func __get_audio_tracks_data(animation: Animation, anim_id: String) -> Dictionary[float, Array]:
+## Returns dict { timestamp <float>: Array[AudioTrackKey] }
+## NOTE: Disables all audio tracks. We dont need them to play directly. 
+func __get_audio_tracks_data(native_anim: Animation, anim_id: String) -> Dictionary[float, Array]:
 	var result_dict: Dictionary[float, Array] = {}
 	
-	var track_count: int = animation.get_track_count()
+	var track_count: int = native_anim.get_track_count()
 	var audio_track_count := 0
 	var audio_stream_total := 0
 	
-	for track_idx in track_count:
-		var track_type: int = animation.track_get_type(track_idx)
-		
+	for track_idx: int in track_count:
+		var track_type: int = native_anim.track_get_type(track_idx)
+
 		if track_type != Animation.TYPE_AUDIO:
 			continue
-		if not animation.track_is_enabled(track_idx):
-			__log_("[AudioEvents]", "Skipping disabled track", track_idx)
-			continue
+
+		var track_enabled := native_anim.track_is_enabled(track_idx)
+		if track_enabled:
+			# prints("disabled", track_idx)
+			native_anim.track_set_enabled(track_idx, false)
+		# var track_enabled_2 := native_anim.track_is_enabled(track_idx)
+		# prints("disabled ////////////", track_enabled, track_enabled_2)
 		audio_track_count += 1
 		
-		var track_path: NodePath = animation.track_get_path(track_idx)
+		var track_path: NodePath = native_anim.track_get_path(track_idx)
 		var track_name: String = track_path.get_concatenated_names()
-		var key_count: int = animation.track_get_key_count(track_idx)
+		var key_count: int = native_anim.track_get_key_count(track_idx)
 
 		# __log_("[AudioEvents]", "track_idx", track_idx, "name", track_name, "keys", key_count)
 		
 		for key_idx in key_count:
-			var timestamp: float = animation.track_get_key_time(track_idx, key_idx)
-			var stream: AudioStream = animation.audio_track_get_key_stream(track_idx, key_idx)
+			var timestamp: float = native_anim.track_get_key_time(track_idx, key_idx)
+			var stream: AudioStream = native_anim.audio_track_get_key_stream(track_idx, key_idx)
 			if not stream:
 				__log_error("[AudioEvents] stream is null", "", "continue", "key_idx/timestamp", key_idx, timestamp)
 				continue
 			
-			var start_offset: float = animation.audio_track_get_key_start_offset(track_idx, key_idx)
-			var end_offset: float = animation.audio_track_get_key_end_offset(track_idx, key_idx)
-			var _stream_name := stream.resource_path.get_file().get_basename()
-			var audio_data := AudioTrackData.new(timestamp, track_name, _stream_name, start_offset, end_offset)
+			var start_offset: float = native_anim.audio_track_get_key_start_offset(track_idx, key_idx)
+			var end_offset: float = native_anim.audio_track_get_key_end_offset(track_idx, key_idx)
+			var _stream_name := stream.resource_name
+			var audio_data := AudioTrackKey.new(
+				timestamp,
+				track_idx,
+				track_enabled,
+				track_name,
+				_stream_name,
+				start_offset,
+				end_offset)
 			
 			if not result_dict.has(timestamp):
 				result_dict[timestamp] = []

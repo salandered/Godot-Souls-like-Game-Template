@@ -5,16 +5,27 @@ extends BaseAnimatorManager
 ## NOTE: CLIENT CODE COMMUNICATES WITH ANIMATORS ONLY VIA THIS FACADE
 class_name PlAnimatorManager
 
-@onready var root_animator: PlayerRootAnimator = %RootAnimator
 @onready var full_body: PlayerModifierAnimator = %FullBody
+@onready var root_animator: PlayerRootAnimator = %RootAnimator
 @onready var overlay_modifer: OverlayModifier = %OverlayModifer
 
 @onready var _begin: BeginModifier = %_Begin
 @onready var _end: EndModifier = %_End
 
-@onready var anim_container: AnimationContainer = %AnimContainer
-@onready var native_animator: AnimationPlayer = %NativeAnimator
 
+func get_hard_dependencies() -> Array[Object]:
+	return [
+		root_animator,
+		full_body
+	]
+
+func get_soft_dependencies() -> Array[Object]:
+	return [
+		overlay_modifer,
+		_begin,
+		_end
+
+	]
 
 ## SET ANIMATIONS TO PLAY AND CONFIGURE ▶️
 # region 
@@ -120,18 +131,23 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 
 ## INTERNAL
 
-func initialise():
+func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer) -> void:
+	self.anim_container = anim_container_
+
 	var initial_anim := anim_container.get_by_anim_id(A.loco.idle)
 
-	native_animator.play(A.loco.idle)
+	## todo: whole system depends on this, wtf
+	native_player_.play(A.loco.idle)
 
 	full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 	full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
-	full_body.initialise()
+	full_body.initialise(native_player_)
 	overlay_modifer.initialise()
 	
 	_begin.initialise()
 	_end.initialise()
+
+	__validate_deps_set_init()
 
 
 func is_player() -> bool:

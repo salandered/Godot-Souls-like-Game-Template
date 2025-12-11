@@ -14,8 +14,8 @@ var is_looping: bool
 var native_anim: Animation
 ## markers have unique names by Godot design. So we can use marker_name as a dictionary key
 var _markers: Dictionary[String, AnimMarker] # {marker_name <String>: <AnimMarker>}
-var _audio_tracks: Dictionary[float, Array] # { timestamp <float>: Array[AudioTrackData] }
-## caches timestamps sorted ASC, built using _audio_tracks
+var _audio_tracks: Dictionary[float, Array] # { timestamp <float>: Array[AudioTrackKey] }
+## caches timestamps sorted ASC, was built using _audio_tracks
 var _audio_tracks_timestamps_sorted: Array[float]
 var uses_root_rotation: bool
 # { "pos": {track_path: track_idx, ...}, "rot": {track_path: track_idx, ...} }
@@ -61,10 +61,10 @@ func does_marker_exist(marker_name: String) -> bool:
 func get_audio_tracks_timestamps_sorted() -> Array[float]:
 	return _audio_tracks_timestamps_sorted
 
-func get_audio_tracks_data_by_timestamp(timestamp: float) -> Array[AudioTrackData]:
+func get_audio_tracks_data_by_timestamp(timestamp: float) -> Array[AudioTrackKey]:
 	var r: Array = u.safe_get_dict_key(_audio_tracks, timestamp, null)
 	return TypeCast.array_of_audio_track_data(r)
-
+# native_anim.track_is_enabled(track_idx)
 
 ## returns time withing anim.duration
 ## returns -1 or default_value (if set) in case of problems

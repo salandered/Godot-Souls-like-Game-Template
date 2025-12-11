@@ -1,11 +1,14 @@
 extends RefCounted
-class_name AudioTrackData
+class_name AudioTrackKey
 
 
 var timestamp: float
+## not unique! Unique to each track.
+var track_idx: int
+var track_enabled: bool
 ## example: ../SFX/AnimFS
 var track_name: String
-## example: concr_footsteps_pack_1
+## stream.resource_name
 var stream_name: String
 var start_offset: float
 var end_offset: float
@@ -13,16 +16,20 @@ var end_offset: float
 
 func _init(
 	timestamp_: float,
+	track_idx_: int,
+	track_enabled_: bool,
 	track_name_: String,
 	stream_name_: String,
 	start_offset_: float = 0.0,
 	end_offset_: float = 0.0
 ):
-	timestamp = timestamp_
-	track_name = track_name_
-	stream_name = stream_name_
-	start_offset = start_offset_
-	end_offset = end_offset_
+	self.timestamp = timestamp_
+	self.track_idx = track_idx_
+	self.track_enabled = track_enabled_
+	self.track_name = track_name_
+	self.stream_name = stream_name_
+	self.start_offset = start_offset_
+	self.end_offset = end_offset_
 
 
 ## '../SFX/AAnimFS' -> 'AAnimFS'

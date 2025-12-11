@@ -55,52 +55,52 @@ static func safe_has_no_key(dict: Dictionary, key: Variant, warn_level: String =
 
 
 static func safe_has_method(
-		object: Object,
+		object_: Object,
 		method_: String,
 		warn_level: String = WL.PUSH_ERROR,
 ) -> bool:
-	if not object or not is_instance_valid(object):
-		error_.warn("no object at all or it is invalid", "", "", warn_level)
+	if not object_ or not is_instance_valid(object_):
+		error_.warn("no object_ at all or it is invalid", "", "", warn_level)
 		return false
 
-	var exists: bool = object.has_method(method_)
+	var exists: bool = object_.has_method(method_)
 	if not exists:
-		var _msg := pp.s("method_", pp.in_q(method_), "not found in object", safe_object_pp_name(object))
+		var _msg := pp.s("method_", pp.in_q(method_), "not found in object_", safe_object_pp_name(object_))
 		error_.warn(_msg, "", "", warn_level)
 		
 	return exists
 
 
 static func safe_has_property(
-		object: Object,
+		object_: Object,
 		property_name: String,
 		warn_level: String = WL.PUSH_ERROR,
 ) -> bool:
-	if not object or not is_instance_valid(object):
-		error_.warn("no object at all or it is invalid", "", "", warn_level)
+	if not object_ or not is_instance_valid(object_):
+		error_.warn("no object_ at all or it is invalid", "", "", warn_level)
 		return false
 	
-	var exists: bool = property_name in object
+	var exists: bool = property_name in object_
 	if not exists:
-		var _msg := pp.s("property", pp.in_q(property_name), "not found in object", safe_object_pp_name(object))
+		var _msg := pp.s("property", pp.in_q(property_name), "not found in object_", safe_object_pp_name(object_))
 		error_.warn(_msg, "", "", warn_level)
 		
 	return exists
 
 
-static func safe_has_pp_name(object: Object) -> bool:
-	if not object or not is_instance_valid(object):
-		error_.warn("no object at all or it is invalid", "", "return false", WL.WARN)
+static func safe_has_pp_name(object_: Object) -> bool:
+	if not object_ or not is_instance_valid(object_):
+		error_.warn("no object_ at all or it is invalid", "", "return false", WL.WARN)
 		return false
-	var exists: bool = object.has_method("pp_name")
+	var exists: bool = object_.has_method("pp_name")
 	return exists
 
 
-static func safe_object_pp_name(object: Object) -> String:
-	if not object or not is_instance_valid(object):
-		error_.warn("no object at all or it is invalid", "", "return empty string", WL.WARN)
+static func safe_object_pp_name(object_: Object) -> String:
+	if not object_ or not is_instance_valid(object_):
+		error_.warn("no object_ at all or it is invalid", "", "return empty string", WL.WARN)
 		return ""
-	return str(object.pp_name()) if safe_has_pp_name(object) else str(object)
+	return str(object_.pp_name()) if safe_has_pp_name(object_) else str(object_)
 
 
 static func is_object_ok(object_: Object, description: String = "", warn_level: String = WL.PUSH_WARN) -> bool:
@@ -117,7 +117,7 @@ static func safe_emit(
 	if not signal_data:
 		error_.warn("no signal data", "", "", warn_level)
 		return
-	if not error_.null_signal(signal_data):
+	if not error_.null_signal(signal_data, "", warn_level):
 		signal_data.signal_obj.emit(signal_payload)
 
 
@@ -195,9 +195,9 @@ static func cut_string(text: String, limit: int = 600) -> String:
 	return text.left(limit) + " ... <too long to print>"
 
 
-static func object_pp_name(_self: Object) -> String:
-	if not error_.null_variant(_self.get_script(), "object_pp_name", WL.SILENT):
-		var _r = _self.get_script().get_global_name()
+static func construct_obj_pp_name(object_: Object) -> String:
+	if not error_.null_variant(object_.get_script(), "construct_obj_pp_name", WL.SILENT):
+		var _r = object_.get_script().get_global_name()
 		_r = pp_name_replacers(_r)
 		return _r
 	return "undefined"

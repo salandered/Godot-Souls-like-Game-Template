@@ -52,7 +52,9 @@ const play_sfx = "🎵"
 const play_music = "🎶"
 const play_alt = "🔊"
 const mute = "🔇"
-const disc = "📀"
+const auido = "🎧"
+const disc = "💿"
+const disc_alt = "📀"
 
 
 # elements

@@ -2,17 +2,14 @@ class_name OnCharFSSigASP
 extends OnCharacterSigASP
 
 
-var RUN_START_FOOTSTEP_VOL_DECREASE: float = 5.0
 var SPRINT_FOOTSTEP_VOL_INCREASE: float = 12.0
 var SPRINT_FOOTSTEP_PITCH_INCREASE: float = 0.25
 
+var RUN_START_FOOTSTEP_VOL_DECREASE: float = 4.0
 var RUN_TIME_TO_LOWER_FOOTSTEP_VOL: float = 0.5
 
 
 func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
-	if get_modifier_from_payload(payload) == SFXConstants.Modifier.light:
-		base_vol_db -= RUN_START_FOOTSTEP_VOL_DECREASE
-
 	var _curr_state := get_curr_state()
 	if _curr_state == null:
 		pass
@@ -27,7 +24,7 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 			 not _prev_state_name in get_character().get_sprint_state_names():
 				if _curr_state.get_actual_time_spent() < RUN_TIME_TO_LOWER_FOOTSTEP_VOL:
 					# prints(em.mark_x2)
-					base_pitch -= 0.05
+					# base_pitch -= 0.05
 					base_vol_db -= RUN_START_FOOTSTEP_VOL_DECREASE
 
 	return VolPitch.new(base_vol_db, base_pitch)

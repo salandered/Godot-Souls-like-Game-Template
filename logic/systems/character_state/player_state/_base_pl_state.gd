@@ -18,7 +18,7 @@ var legs_sm: LegsSM
 var _player: Princess
 var combat: PlayerCombat
 var area_awareness: AreaAwareness
-var anim_container: BaseAnimationContainer
+var anim_container: BaseAnimContainer
 var animator_manager: PlAnimatorManager
 var feelings: PlayerFeelings
 var container: PlayerStatesContainer

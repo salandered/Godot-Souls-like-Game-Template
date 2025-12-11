@@ -47,45 +47,39 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 		## fs
 		OnCharFSSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_footstep),
+			sig_container.get_by_sig_id(SignalID.sfx_footstep),
 			get_fs_asp_3d(),
-			SFXConstants.ID_.footstep,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep)
 		),
 		OnCharFSSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_footstep_light),
+			sig_container.get_by_sig_id(SignalID.sfx_footstep_light),
 			get_fs_asp_3d(), ## same asp as fs
-			SFXConstants.ID_.footstep_light,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep_light)
 		),
 		OnCharacterSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_footstep_scrape),
+			sig_container.get_by_sig_id(SignalID.sfx_footstep_scrape),
 			get_fs_scrape_asp_3d(),
-			SFXConstants.ID_.footstep_scrape,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep_scrape)
 		),
 		##
 		OnCharacterSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_launch),
+			sig_container.get_by_sig_id(SignalID.sfx_launch),
 			get_launch_asp_3d(),
-			SFXConstants.ID_.launch,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.launch)
 		),
 		OnCharSigLandASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_land),
+			sig_container.get_by_sig_id(SignalID.sfx_land),
 			get_land_asp_3d(),
-			SFXConstants.ID_.land,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.land)
 		),
 		OnCharacterSigASP.new(
 			self,
-			sig_container.get_by_sig_id(SignalName.sfx_whoosh),
+			sig_container.get_by_sig_id(SignalID.sfx_whoosh),
 			get_whoosh_asp_3d(),
-			SFXConstants.ID_.whoosh,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh)
 		),
 	]

@@ -96,9 +96,9 @@ static func array_of_anim_marker(array: Array) -> Array[AnimMarker]:
 	list_casted.assign(_safe_validate_class(array, AnimMarker, "AnimMarker"))
 	return list_casted
 
-static func array_of_audio_track_data(array: Array) -> Array[AudioTrackData]:
-	var list_casted: Array[AudioTrackData] = []
-	list_casted.assign(_safe_validate_class(array, AudioTrackData, "AudioTrackData"))
+static func array_of_audio_track_data(array: Array) -> Array[AudioTrackKey]:
+	var list_casted: Array[AudioTrackKey] = []
+	list_casted.assign(_safe_validate_class(array, AudioTrackKey, "AudioTrackKey"))
 	return list_casted
 
 static func array_of_base_weapon(array: Array) -> Array[BaseWeapon]:
