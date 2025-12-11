@@ -53,18 +53,17 @@ func get_by_sad_id(sad_id: String) -> SFXAnimData:
 
 func get_by_anim_sfx_asp_name(sfx_asp_name: String) -> SFXAnimData:
 	## it's ok that anim ASP is not found in specific SAD container
-	var _r: SFXAnimData = u.safe_get_dict_key(anim_sfx_asp_name_to_sad, sfx_asp_name, null, WarnLevel.SILENT)
+	var _r: SFXAnimData = u.safe_get_dict_key(anim_sfx_asp_name_to_sad, sfx_asp_name, null, WL.SILENT)
 	return _r
 
 
 ## __LOGS
 # region
 
-
 func __LOG_B() -> bool:
 	return true
 
 func __LOG_INDENT() -> int:
-	return 10
+	return LogToggler.DEFAULT_REF_C_CONT_INDENT
 
 # endregion

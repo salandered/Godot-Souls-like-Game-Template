@@ -8,8 +8,6 @@ func _get_character_specific_signal_data_list() -> Array[SignalData]:
 
 ## __LOG
 
-func pp_name() -> String:
-	return "EnemySignalContainer"
 
 func __LOG_B() -> bool:
 	return true

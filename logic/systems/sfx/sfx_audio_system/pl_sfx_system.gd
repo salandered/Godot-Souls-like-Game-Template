@@ -32,8 +32,6 @@ func get_whoosh_asp_3d() -> AudioStreamPlayer3D:
 ## __LOG
 
 
-func pp_name() -> String:
-	return "PrincessSFXSystem"
 
 func __LOG_B() -> bool:
 	return true

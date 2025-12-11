@@ -22,9 +22,6 @@ func get_character() -> BaseCharacter:
 	return _player
 
 
-func pp_name() -> String:
-	return "Player Combat"
-
 
 ## PLAYER SPECIFIC: WORK WITH INPUTS
 # region

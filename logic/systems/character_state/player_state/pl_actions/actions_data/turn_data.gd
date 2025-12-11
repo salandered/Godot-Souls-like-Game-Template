@@ -58,8 +58,6 @@ func __validate():
 		turn_direction = TURN_DIR_RIGHT
 
 
-func pp_name() -> String:
-	return "TurnData"
 
 func __LOG_B() -> bool:
 	return true

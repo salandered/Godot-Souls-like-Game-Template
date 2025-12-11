@@ -58,18 +58,17 @@ func _to_string() -> String:
 
 func __validation():
 	for type_ in MotionType.get_all_types():
-		assert(_motion_type_to_default_action.has(type_),
-			pp.s("SupportedActions must contain all motion types:", type_, "is missing"))
-		var value: Variant = _motion_type_to_default_action[type_]
-		assert(value is String and value != "")
-	assert(len(action_names) > 0, "action_names len empty")
+		if not u.safe_has_key(_motion_type_to_default_action, type_):
+			__log_error(pp.s("must contain all motion types:", type_, "is missing"))
+		else:
+			var value: Variant = _motion_type_to_default_action[type_]
+			error_.empty_string(value)
+	error_.empty_list(action_names, "action_names len empty")
 
 
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "SupportedActions"
 
 func __LOG_B() -> bool:
 	return false

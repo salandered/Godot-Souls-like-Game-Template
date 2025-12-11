@@ -7,9 +7,6 @@ func is_player() -> bool:
 	return true
 
 
-func pp_name() -> String:
-	return "Player Visuals"
-
 func __LOG_B() -> bool:
 	return true
 	

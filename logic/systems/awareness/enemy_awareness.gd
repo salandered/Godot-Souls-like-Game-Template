@@ -134,8 +134,6 @@ func _update_sight_cone_mesh():
 
 ## LOG
 
-func pp_name() -> String:
-	return pp.s(me.pp_name(), "👀")
 
 func __LOG_INDENT() -> int:
 	return 0

@@ -77,7 +77,7 @@ func set_velocity(velocity: Vector3):
 ## - returns true if was applied
 func apply_gravity(delta: float, multiplier: float = 1.0, gravity: float = u.gravity) -> bool:
 	if not get_character().is_on_floor():
-		get_character().velocity.y -= gravity * delta
+		get_character().velocity.y -= gravity * delta * multiplier
 		return true
 	return false
 
@@ -130,8 +130,6 @@ func __LOG_INDENT() -> int:
 
 ## just indent:
 
-func pp_name() -> String:
-	return pp.s(get_character().pp_name(), " Movement")
 
 
 func __pp_vel_y() -> String:

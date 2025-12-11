@@ -54,14 +54,9 @@ func get_holder_prev_state_name() -> String:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "OnWeaponSFXSigASP"
 
 func __LOG_B() -> bool:
 	return true
 
-
-func __LOG_INDENT() -> int:
-	return 6
 
 # endregion

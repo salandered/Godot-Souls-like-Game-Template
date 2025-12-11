@@ -27,7 +27,7 @@ static func ease_in_out(x: float) -> float:
 
 
 ## returns null if key does not exist
-static func safe_get_dict_key(dict: Dictionary, key: Variant, default: Variant = null, warn_level: String = WarnLevel.WARN_CRUCIAL) -> Variant:
+static func safe_get_dict_key(dict: Dictionary, key: Variant, default: Variant = null, warn_level: String = WL.WARN_CRUCIAL) -> Variant:
 	if safe_has_key(dict, key, warn_level):
 		return dict[key]
 	else:
@@ -40,14 +40,14 @@ static func _msg_key_problem(key: Variant, dict: Dictionary, found_is_problem: b
 	return _msg
 
 
-static func safe_has_key(dict: Dictionary, key: Variant, warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
+static func safe_has_key(dict: Dictionary, key: Variant, warn_level: String = WL.PUSH_WARN) -> bool:
 	var exists: bool = key in dict
 	if not exists:
 		error_.warn(_msg_key_problem(key, dict), "", "", warn_level)
 	return exists
 
 
-static func safe_has_no_key(dict: Dictionary, key: Variant, warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
+static func safe_has_no_key(dict: Dictionary, key: Variant, warn_level: String = WL.PUSH_WARN) -> bool:
 	var exists: bool = key in dict
 	if exists:
 		error_.warn(_msg_key_problem(key, dict, true), "", "", warn_level)
@@ -57,7 +57,7 @@ static func safe_has_no_key(dict: Dictionary, key: Variant, warn_level: String =
 static func safe_has_method(
 		object: Object,
 		method_: String,
-		warn_level: String = WarnLevel.PUSH_ERROR,
+		warn_level: String = WL.PUSH_ERROR,
 ) -> bool:
 	if not object or not is_instance_valid(object):
 		error_.warn("no object at all or it is invalid", "", "", warn_level)
@@ -74,7 +74,7 @@ static func safe_has_method(
 static func safe_has_property(
 		object: Object,
 		property_name: String,
-		warn_level: String = WarnLevel.PUSH_ERROR,
+		warn_level: String = WL.PUSH_ERROR,
 ) -> bool:
 	if not object or not is_instance_valid(object):
 		error_.warn("no object at all or it is invalid", "", "", warn_level)
@@ -90,7 +90,7 @@ static func safe_has_property(
 
 static func safe_has_pp_name(object: Object) -> bool:
 	if not object or not is_instance_valid(object):
-		error_.warn("no object at all or it is invalid", "", "return false", WarnLevel.WARN)
+		error_.warn("no object at all or it is invalid", "", "return false", WL.WARN)
 		return false
 	var exists: bool = object.has_method("pp_name")
 	return exists
@@ -98,12 +98,12 @@ static func safe_has_pp_name(object: Object) -> bool:
 
 static func safe_object_pp_name(object: Object) -> String:
 	if not object or not is_instance_valid(object):
-		error_.warn("no object at all or it is invalid", "", "return empty string", WarnLevel.WARN)
+		error_.warn("no object at all or it is invalid", "", "return empty string", WL.WARN)
 		return ""
 	return str(object.pp_name()) if safe_has_pp_name(object) else str(object)
 
 
-static func is_object_ok(object_: Object, description: String = "", warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
+static func is_object_ok(object_: Object, description: String = "", warn_level: String = WL.PUSH_WARN) -> bool:
 	if not object_ or not is_instance_valid(object_):
 		error_.warn("object is null or not valid", description, "", warn_level)
 		return false
@@ -113,7 +113,7 @@ static func is_object_ok(object_: Object, description: String = "", warn_level: 
 static func safe_emit(
 	signal_data: SignalData,
 	signal_payload: Dictionary[String, Variant],
-	warn_level: String = WarnLevel.WARN):
+	warn_level: String = WL.WARN):
 	if not signal_data:
 		error_.warn("no signal data", "", "", warn_level)
 		return
@@ -195,6 +195,13 @@ static func cut_string(text: String, limit: int = 600) -> String:
 	return text.left(limit) + " ... <too long to print>"
 
 
+static func object_pp_name(_self: Object) -> String:
+	if not error_.null_variant(_self.get_script(), "object_pp_name", WL.SILENT):
+		var _r = _self.get_script().get_global_name()
+		_r = pp_name_replacers(_r)
+		return _r
+	return "undefined"
+
 ## awed/name -> name; 
 ## awd/awdaw/name -> name; 
 ## ../awd/name -> name; 
@@ -207,3 +214,21 @@ static func get_last_slash_part(raw_string: String) -> String:
 	## var _r = raw_string.substr(pos + 1) if pos != -1 else raw_string
 	var _r = raw_string.get_file()
 	return _r
+
+
+static func pp_name_replacers(_r: String) -> String:
+	for key_word: String in _pp_replacers:
+		_r = _r.replace(key_word, _pp_replacers[key_word])
+	return _r
+
+
+static var _pp_replacers: Dictionary[String, String] = {
+		"Container": em.box,
+		"Player": "Pl",
+		"Character": "Char",
+		"Enemy": "🗿",
+		"Feelings": em.h_white,
+		"Weapon": em.dagger,
+		"Awareness": "👀",
+		"ModifierAnimator": "💀Animator"
+	}

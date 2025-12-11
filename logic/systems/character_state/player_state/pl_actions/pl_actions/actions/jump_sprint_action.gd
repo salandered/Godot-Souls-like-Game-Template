@@ -3,7 +3,7 @@ extends PlayerAction
 
 var VERT_SPEED_BUMP: float = 3
 var FORWARD_SPEED_BUMP: float = 2
-var GRAVITY_DURING_JUMP: float = 7 # Adjust to match your game feel
+var GRAVITY_DURING_JUMP: float = 9 # Adjust to match your game feel
 
 var is_jumped: bool = false
 
@@ -33,7 +33,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	# Apply gravity throughout the jump (creates the arc)
 	if is_jumped:
-		pm().apply_gravity(delta, GRAVITY_DURING_JUMP)
+		pm().apply_gravity(delta, 1.0, GRAVITY_DURING_JUMP)
 	
 	if passed_marker(MarkerName.JUMP.PEAK):
 		if pm().get_curr_y_velocity() > 0:

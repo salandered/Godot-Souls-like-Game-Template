@@ -59,7 +59,7 @@ static func _msg_key_problem(animator: AnimationPlayer, anim_id: String, found_i
 	return _msg
 
 
-static func safe_has_animation(animator: AnimationPlayer, anim_id: String, warn_level: String = WarnLevel.PUSH_WARNING) -> bool:
+static func safe_has_animation(animator: AnimationPlayer, anim_id: String, warn_level: String = WL.PUSH_WARN) -> bool:
 	var exists: bool = animator.has_animation(anim_id)
 	if not exists:
 		error_.warn(_msg_key_problem(animator, anim_id), "", "", warn_level)
@@ -74,9 +74,6 @@ static func pp_name() -> String:
 
 static func __LOG_B() -> bool:
 	return false
-
-static func __LOG_INDENT() -> int:
-	return 10
 
 static func __log_(_prefix: Variant, ...parts: Array):
 	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())

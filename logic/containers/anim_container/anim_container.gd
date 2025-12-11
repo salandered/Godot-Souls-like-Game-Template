@@ -12,14 +12,14 @@ var _anim_by_id: Dictionary[String, AnimationData] = {}
 
 ## MAIN INTERFACE
 func get_by_anim_id(anim_id: String) -> AnimationData:
-	return u.safe_get_dict_key(_anim_by_id, anim_id, null, WarnLevel.WARN)
+	return u.safe_get_dict_key(_anim_by_id, anim_id, null, WL.WARN)
 
 
 ## native_player - player's player, se's player, etc
 func _accept_animations(_animations: Array[AnimationData], native_player: AnimationPlayer, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary[String, Array]) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
-		if not AnimUtils.safe_has_animation(native_player, anim.anim_id, WarnLevel.SILENT):
+		if not AnimUtils.safe_has_animation(native_player, anim.anim_id, WL.SILENT):
 			continue
 
 		var native_anim: Animation = native_player.get_animation(anim.anim_id)
@@ -148,9 +148,6 @@ static func __get_animation_markers(animation: Animation) -> Dictionary[String, 
 ## WARNING: used for all characters actually
 func is_player() -> bool:
 	return true
-
-func pp_name() -> String:
-	return "Anim Container"
 
 func __LOG_B() -> bool:
 	return LogToggler.CONTAINER_B

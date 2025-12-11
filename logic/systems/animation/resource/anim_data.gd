@@ -43,7 +43,7 @@ func get_rot_track_idx(track_path: String) -> int:
 
 
 ## Client code may get some specific marker directly.
-func get_marker_by_name(marker_name: String, warn_level: String = WarnLevel.WARN) -> AnimMarker:
+func get_marker_by_name(marker_name: String, warn_level: String = WL.WARN) -> AnimMarker:
 	return u.safe_get_dict_key(_markers, marker_name, null, warn_level)
 
 func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
@@ -54,7 +54,7 @@ func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
 	return TypeCast.array_of_anim_marker(result)
 
 func does_marker_exist(marker_name: String) -> bool:
-	var marker := get_marker_by_name(marker_name, WarnLevel.SILENT)
+	var marker := get_marker_by_name(marker_name, WL.SILENT)
 	return marker != null
 
 

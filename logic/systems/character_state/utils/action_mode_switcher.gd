@@ -86,8 +86,6 @@ func get_all_anim_ids() -> Array[String]:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "ActionModeSwitcher"
 
 func __LOG_B() -> bool:
 	return true

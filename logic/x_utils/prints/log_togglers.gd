@@ -3,6 +3,8 @@ class_name LogToggler
 
 ## indents are also stored here
 const DEFAULT_INDENT := 0
+const DEFAULT_STATIC_REF_C_INDENT := 8
+const DEFAULT_REF_C_CONT_INDENT := 4
 
 
 # COMMON
@@ -39,6 +41,6 @@ const AWARENESS_B := true
 
 # ENEMY
 const PHE_CHECK_B := false
-const PHE_B := false
+const PHE_B := true
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false

@@ -1,5 +1,5 @@
 extends BaseNode3DSystem
-class_name WeaponSFX
+class_name WeaponSFXParent
 
 
 @onready var sfx_system: BaseWeaponSFXSystem = %AudioSystem
@@ -32,9 +32,6 @@ func set_hit_weapon_stream(stream: AudioStream) -> void:
 
 ## __LOGS
 # region
-
-func pp_name() -> String:
-	return "WeaponSFXParent"
 
 func __LOG_B() -> bool:
 	return true

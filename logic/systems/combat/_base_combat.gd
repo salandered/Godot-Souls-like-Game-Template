@@ -43,7 +43,7 @@ func get_all_weapons() -> Array[BaseWeapon]:
 
 ## nullable
 func get_weapon_by_id(weapon_id: String) -> BaseWeapon:
-	return u.safe_get_dict_key(_weapons, weapon_id, null, WarnLevel.WARN_CRUCIAL)
+	return u.safe_get_dict_key(_weapons, weapon_id, null, WL.WARN_CRUCIAL)
 
 
 ## non nullable

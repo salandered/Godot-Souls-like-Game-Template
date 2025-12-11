@@ -10,7 +10,7 @@ extends BaseNode3DCharacterSystem
 #     - collision of area3D IS NOT in packed scene
 #     - note that godot wants u to change its shape via Shape, not Scale 
 # - Weapon visual mesh - optional (e.g. not visuals for leg kick)
-# - WeaponSFX packed scene
+# - WeaponSFXParent packed scene
 
 ## Also
 # - see SmithSword implementation for basic approach to all this
@@ -71,20 +71,19 @@ func _ready() -> void:
 	## SFX. Here we r not logging any problems, all be logged using get_soft_dependencies etc
 	var _weapon_sfx := _get_weapon_sfx_parent()
 	if _weapon_sfx and holder: # NOTE: without holder no SFX
+		var asp_config_container := SmithSwordASPConfigContainer.new()
+		var e_sig_container := EnemySignalContainer.new()
 		_set_whoosh_weapon_stream(_weapon_sfx)
 		_set_hit_weapon_stream(_weapon_sfx)
 		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)
 		if _sfx_system:
-			## methods in list can be overidden by specific weapons
-			var list_: Array[SFXStreamConfig] = [
-				_get_whoosh_weapon_config(),
-				_get_hit_weapon_config(),
-			]
-			var _sfx_configs: Dictionary[String, SFXStreamConfig] = {}
-			for item in list_:
-				_sfx_configs[item.sfx_type] = item
-				
-			_sfx_system.initialise(_signal_container, _sfx_configs, self, {_sfx_system.weapon_additional_data_key: self})
+			_sfx_system.initialise(
+				_signal_container,
+				asp_config_container,
+				self,
+				BusID.GAME_SFX,
+				{_sfx_system.weapon_additional_data_key: self}
+			)
 
 	initialise_implementation()
 	__validate_dependencies()
@@ -169,7 +168,7 @@ func reset_contact_hitbox_list() -> void:
 
 
 ## nullable
-@abstract func _get_weapon_sfx_parent() -> WeaponSFX
+@abstract func _get_weapon_sfx_parent() -> WeaponSFXParent
 
 
 @abstract func _get_weapon_whoosh_stream() -> AudioStream
@@ -183,22 +182,15 @@ func get_signal_container() -> BaseWeaponSignalContainer:
 
 
 ## nullable in theory
-func _get_weapon_sfx_system(weapon_sfx: WeaponSFX) -> BaseWeaponSFXSystem:
+func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
 	return weapon_sfx.get_sfx_system()
 
 
-func _set_whoosh_weapon_stream(weapon_sfx: WeaponSFX):
+func _set_whoosh_weapon_stream(weapon_sfx: WeaponSFXParent):
 	weapon_sfx.set_whoosh_weapon_stream(_get_weapon_whoosh_stream())
 
-func _set_hit_weapon_stream(weapon_sfx: WeaponSFX):
+func _set_hit_weapon_stream(weapon_sfx: WeaponSFXParent):
 	weapon_sfx.set_hit_weapon_stream(_get_hit_weapon_stream())
-
-
-func _get_whoosh_weapon_config() -> SFXStreamConfig:
-	return SFXStreamConfig.new(SFXConstants.Type_.whoosh_weapon, -3.0, 0.0, 0.0)
-
-func _get_hit_weapon_config() -> SFXStreamConfig:
-	return SFXStreamConfig.new(SFXConstants.Type_.hit_weapon, -2.0, 0.0, 0.0)
 
 
 ## in theory could be nullable

@@ -102,11 +102,13 @@ func initialise() -> void:
 	combat.initialise()
 	animator_manager.initialise()
 
+	var asp_config_container := PlayerASPConfigContainer.new()
 	
 	sfx_system.initialise(
 		pl_sig_container,
-		_initialise_sfx_configs(),
+		asp_config_container,
 		self,
+		BusID.GAME_SFX,
 		{sfx_system.character_additional_data_key: self}
 		)
 	
@@ -134,8 +136,6 @@ func is_player() -> bool:
 	return true
 
 
-func pp_name() -> String:
-	return "Player"
 
 ## not nullable in theory
 func get_current_state() -> BasePlayerState:

@@ -1,7 +1,6 @@
 @abstract
 class_name RefCountedStaticLogger
 extends RefCounted
-const a = ""
 
 
 ## __LOGS [Common for static extenders]
@@ -41,7 +40,7 @@ static func __LOG_B() -> bool:
 	return true
 
 static func __LOG_INDENT() -> int:
-	return 10
+	return LogToggler.DEFAULT_STATIC_REF_C_INDENT
 	
 # --------------------------------------
 
@@ -49,15 +48,15 @@ static func __LOG_INDENT() -> int:
 #  (can be used without template)
 
 static func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
+	error_.warn(what, pp.s(where), fallback, WL.PUSH_WARN, pp.list_(context))
 
 static func __log_warn_soft(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(where), fallback, WarnLevel.WARN, pp.list_(context))
+	error_.warn(what, pp.s(where), fallback, WL.WARN, pp.list_(context))
 
 static func __log_warn_assert(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(where), fallback, WarnLevel.ASSERT, pp.list_(context))
+	error_.warn(what, pp.s(where), fallback, WL.ASSERT, pp.list_(context))
 
 static func __log_error(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(where), fallback, WarnLevel.PUSH_ERROR, pp.list_(context))
+	error_.warn(what, pp.s(where), fallback, WL.PUSH_ERROR, pp.list_(context))
 
 # endregion

@@ -11,7 +11,7 @@ var signal_data: SignalData
 var asp: AudioStreamPlayer3D
 var sfx_type: String
 ## not nullable
-var sfx_stream_config: SFXStreamConfig
+var asp_config: ASPConfig
 
 
 class VolPitch:
@@ -35,7 +35,7 @@ func get_hard_dependencies() -> Array[Object]:
 
 func get_soft_dependencies() -> Array[Object]:
 	return [
-		sfx_stream_config,
+		asp_config,
 	]
 
 func _init(
@@ -43,17 +43,17 @@ func _init(
 		signal_data_: SignalData,
 		asp_: AudioStreamPlayer3D,
 		sfx_type_: String,
-		sfx_stream_config_: SFXStreamConfig
+		asp_config_: ASPConfig
 	) -> void:
 	self._sfx_system = sfx_system_
 	self.signal_data = signal_data_
 	self.asp = asp_
 	self.sfx_type = sfx_type_
-	self.sfx_stream_config = sfx_stream_config_
+	self.asp_config = asp_config_
 
-	if self.sfx_stream_config == null:
-		__log_("no sfx_stream_config provided, using default one")
-		self.sfx_stream_config = SFXStreamConfig.new(self.sfx_type)
+	if self.asp_config == null:
+		__log_("no asp_config provided, using default one")
+		self.asp_config = ASPConfig.new()
 
 	var validate_ok := _hard_validate_implementation()
 	var deps_ok := __validate_dependencies()
@@ -68,19 +68,21 @@ func _init(
 ## NOTE: args should align with signal data. In our case its payload: Dictionary
 func on_signal(payload: Dictionary[String, Variant]) -> void:
 	# __log_(self.sfx_type, "on_signal", "triggered")
-	var base_vol_db := sfx_stream_config.base_vol_db
+	var base_vol_db := -3.0
 	var base_pitch := 1.0
 
-	base_vol_db += sfx_stream_config.vol_db_change
-	base_pitch += sfx_stream_config.pitch_change
+	base_vol_db += asp_config.vol_db_change
+	base_pitch += asp_config.pitch_change
 	
 	var vol_pitch := _custom_logic(base_vol_db, base_pitch, payload)
 	
-	__log_("result", vol_pitch)
-
 	asp.volume_db = vol_pitch.vol_db + randf_range(-0.2, 0.2)
 	asp.pitch_scale = vol_pitch.pitch + randf_range(-0.02, 0.02)
+	_asp_play()
+
+func _asp_play():
 	asp.play()
+	__log_(pp.s(asp.name, "🎵"), "bus", pp.in_q(asp.bus), "vol/pitch", asp.volume_db, "/", asp.pitch_scale, "stream", asp.stream.resource_name)
 
 
 ## to override for additional logic
@@ -123,6 +125,6 @@ func __LOG_B() -> bool:
 
 
 func __LOG_INDENT() -> int:
-	return 6
+	return 4
 
 # endregion

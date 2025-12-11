@@ -212,9 +212,6 @@ func _sort_targets_by_player_distance(targets: Array[EnemyCameraTarget]) -> void
 # region: LOG
 
 
-func pp_name() -> String:
-	return pp.s(player.pp_character_name(), "👀")
-
 func __LOG_INDENT() -> int:
 	return 0
 

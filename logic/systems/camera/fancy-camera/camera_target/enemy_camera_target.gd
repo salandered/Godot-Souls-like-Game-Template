@@ -26,7 +26,7 @@ func initialise(assigned_parent: Node3D) -> void:
 
 
 func pp_name() -> String:
-	return pp.s("EnemyCamTarget", _assigned_parent.name)
+	return pp.s("EnemyCamTarget", str(_assigned_parent.name) if _assigned_parent else "")
 
 
 func make_inactive() -> void:

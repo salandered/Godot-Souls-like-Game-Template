@@ -229,6 +229,20 @@ static func prefix(prefix_: String, text: String = "", info_indents: int = 0):
 	print(fr_, result_msg)
 
 static func __calculate_tab_prefix(info_indents: int) -> String:
+	var cache: Dictionary[int, String] = {
+		0: "",
+		1: "    ",
+		2: "        ",
+		3: "            ",
+		4: "                ",
+		6: "                        ",
+		8: "                                ",
+		10: "                                        ",
+		16: "                                                                ",
+	}
+	if cache.has(info_indents):
+		return cache[info_indents]
+
 	var tabs_prefix = ""
 	if info_indents:
 		for i in range(info_indents):

@@ -97,6 +97,7 @@
 		"bookmarks.lineBackground": "#6c6aff22", // Background color for a bookmarked line.
 		"bookmarks.lineBorder": "#ffffff00", // Border color for a bookmarked line.
 		"bookmarks.overviewRuler": "#157EFB88", // Marker color for the overview ruler.
+		//
 		// COLORFUL FOLDERS
 		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
 		"folderPathColor.utils": "#92b69fe5", // utils
@@ -126,7 +127,15 @@
 	"folder-path-color.folders": [
 		{
 			"path": "*sad*",
-			"color": "blue_shade_3"
+			"color": "custom11"
+		},
+		{
+			"path": "*asp_config*",
+			"color": "awareness"
+		},
+		{
+			"path": "*sfx_system*",
+			"color": "awareness"
 		},
 		// INPUT
 		{
@@ -821,6 +830,18 @@
 			"decorations": [
 				{
 					"color": "#ebc47c"
+				}
+			]
+		},
+		"\\b(WL\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#f5a382",
+					"fontStyle": "italic"
+				},
+				{
+					// "color": "#FFEEA1E5",
 				}
 			]
 		},

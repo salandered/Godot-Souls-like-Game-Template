@@ -167,7 +167,7 @@ gi_mode = 0
 mesh = SubResource("ArrayMesh_2q8s2")
 skeleton = NodePath("")
 
-[node name="WeaponSFX" parent="." instance=ExtResource("10_kngnu")]
+[node name="WeaponSFXParent" parent="." instance=ExtResource("10_kngnu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6699998, 0)
 
 [editable path="WeaponHurtBox"]

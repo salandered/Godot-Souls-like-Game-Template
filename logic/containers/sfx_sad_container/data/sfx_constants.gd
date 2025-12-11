@@ -5,8 +5,8 @@ extends RefCounted
 const anim_asp_prefix = "AAnim"
 const modifier_key = "modifier"
 
-## todo: used as ID, not checked, but ensure uniqueness
-class Type_:
+## todo: used as but not checked
+class ID_:
 	## fs
 	const footstep := "footstep"
 	const footstep_light := "footstep_light"
@@ -21,8 +21,8 @@ class Type_:
 	const move_noise := "move_noise"
 
 	## weapon
-	const hit_weapon := "hit_weapon"
 	const whoosh_weapon := "whoosh_weapon"
+	const hit_weapon := "hit_weapon"
 
 
 class Modifier:

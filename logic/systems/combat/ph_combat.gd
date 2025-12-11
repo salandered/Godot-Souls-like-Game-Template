@@ -23,5 +23,3 @@ func get_character() -> BaseCharacter:
 	return me
 
 
-func pp_name() -> String:
-	return "⚔️Enemy Combat"

@@ -4,7 +4,7 @@ class_name __log_ui
 
 static func warn_(what: String, where: String = "", fallback: String = "", ...context: Array):
 	where = pp.s("UI", where)
-	error_.warn(what, where, fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
+	error_.warn(what, where, fallback, WL.PUSH_WARN, pp.list_(context))
 
 
 static func info_(prefix: String, ...parts: Array):

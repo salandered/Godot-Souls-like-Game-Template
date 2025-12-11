@@ -1,11 +1,7 @@
 extends RefCounted
-class_name SFXStreamConfig
+class_name ASPConfig
 
 
-## SFXConstants.Type_
-var sfx_type: String
-## usually like -6, -3, 0
-var base_vol_db: float
 ## increase or decrease of vol db. usually like -3 or +3
 var vol_db_change: float
 ## increase or decrease of pitch (base pitch is always 1.0). usually like -0.2 or +0.2
@@ -16,13 +12,12 @@ var unit_size: float
 var max_distance: float
 ##
 var max_polyphony: int
+##
 var panning_strength: float
 
 
-var _min_max_vol_db: FMinMax = FMinMax.new(-80.0, 12.0)
 var _min_max_vol_db_change: FMinMax = FMinMax.new(-10.0, 15.0)
 var _min_max_pitch_change: FMinMax = FMinMax.new(-0.7, 0.7)
-
 var _min_max_unit_size: FMinMax = FMinMax.new(0.1, 100.0)
 var _min_max_max_distance: FMinMax = FMinMax.new(0.0, 4096.0 / 4.0)
 var _min_max_max_polyphony: FMinMax = FMinMax.new(1, 16)
@@ -30,8 +25,6 @@ var _min_max_panning_strength: FMinMax = FMinMax.new(0.0, 3.0)
 
 
 func _init(
-	sfx_type_: String,
-	base_vol_db_: float = -3.0,
 	vol_db_change_: float = 0.0,
 	pitch_change_: float = 0.0,
 	unit_size_: float = 1.0,
@@ -39,8 +32,6 @@ func _init(
 	max_polyphony_: int = 5,
 	panning_strength_: float = 0.5
 ):
-	self.sfx_type = sfx_type_
-	self.base_vol_db = base_vol_db_
 	self.vol_db_change = vol_db_change_
 	self.pitch_change = pitch_change_
 	self.unit_size = unit_size_
@@ -52,8 +43,6 @@ func _init(
 
 
 func _validate() -> void:
-	error_.empty_string(sfx_type)
-	_min_max_vol_db.clamp(base_vol_db, true, "base_vol_db")
 	_min_max_vol_db_change.clamp(vol_db_change, true, "vol_db_change")
 	_min_max_pitch_change.clamp(pitch_change, true, "pitch_change")
 	_min_max_unit_size.clamp(unit_size, true, "unit_size")
@@ -62,7 +51,7 @@ func _validate() -> void:
 
 
 func _to_string() -> String:
-	return pp.s("Type/BaseVolDB/VolDbCh/WHPitchCh", sfx_type, base_vol_db, vol_db_change, pitch_change,
+	return pp.s("VolDbCh/WHPitchCh", vol_db_change, pitch_change,
 		"UnitSz/MaxDist/MaxPolyph/PanningStr", unit_size, max_distance, max_polyphony, panning_strength)
 
 

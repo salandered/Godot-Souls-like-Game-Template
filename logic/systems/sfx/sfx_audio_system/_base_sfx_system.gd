@@ -20,51 +20,58 @@ var _on_signal_asps: Array[OnSFXSigASP]
 
 
 ## on init only
-@abstract func _get_on_signal_asps(signals: BaseSignalContainer, sfx_configs: Dictionary[String, SFXStreamConfig]) -> Array[OnSFXSigASP]
+@abstract func _get_on_signal_asps(signals: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]
 
 
 @abstract func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void
 
 
 ## should be called for any sfx system
-func initialise(signal_container_: BaseSignalContainer, sfx_configs: Dictionary[String, SFXStreamConfig], root_of_all_stream_players: Node, additional_data: Dictionary[String, Variant]):
-	var _list := _get_on_signal_asps(signal_container_, sfx_configs)
+func initialise(
+		signal_container_: BaseSignalContainer,
+		asp_config_container: BaseSFXASPConfigContainer,
+		root_of_asps: Node,
+		audio_bus_id: String,
+		additional_data: Dictionary[String, Variant]
+	) -> void:
+	var _list := _get_on_signal_asps(signal_container_, asp_config_container)
 	
 	_on_signal_asps.assign(_list)
 	signal_container = signal_container_
 	
 	initialise_implementation(additional_data)
 	
-	_soft_validate(root_of_all_stream_players)
+	_set_audio_bus_id(root_of_asps, audio_bus_id)
+
+	_soft_validate_on_signal_asps()
+
+
 	if not __validate_deps_set_init():
-		__log_("__validate_deps_set_init failed, sytem won't work", "_on_signal_asps = []")
+		__log_warn_soft("__validate_deps_set_init failed, sytem won't work", "_on_signal_asps = []")
 		_on_signal_asps = []
-
-
-func _soft_validate(root_of_all_stream_players: Node):
-	## _on_signal_asps
-	var _players_total := len(_on_signal_asps)
-	if _players_total == 0:
-		__log_error("initialised with zero on_signal_players", "", "")
 	else:
+		__log_("", "initialised. auido bus id:", audio_bus_id)
+
+
+func _soft_validate_on_signal_asps():
+	var _players_total := len(_on_signal_asps)
+	if not error_.empty_list(_on_signal_asps, "_on_signal_asps", WL.WARN):
 		var _all_sfx_types: Array[String] = []
 		for item: OnSFXSigASP in _on_signal_asps:
 			_all_sfx_types.append(item.sfx_type)
-		__log_("validation", "we have", _players_total, "on_signal_players:", pp.list_(_all_sfx_types))
+		__log_("validation", "we have", len(_on_signal_asps), "on_signal_players:", pp.list_(_all_sfx_types))
 
 
-	## all_stream_players
-	__log_("validation", "using root for all stream players", root_of_all_stream_players, root_of_all_stream_players.name)
+func _set_audio_bus_id(root_of_asps: Node, audio_bus_id: String):
+	__log_("validation", "using root_of_asps", root_of_asps.name)
 	
 	var skip_subscenes := false # not sure
-	var all_stream_players := get_descendants.audio_stream_players_3D(root_of_all_stream_players, skip_subscenes)
-	if len(all_stream_players) == 0:
-		__log_error("no all_stream_players. That is odd", "validation", "")
-	else:
-		for _asp: AudioStreamPlayer3D in all_stream_players:
-			if not _asp.name.begins_with(SFXConstants.anim_asp_prefix) \
-				and _asp.stream == null:
-				__log_error("no stream for AudioStreamPlayer3D", "validation", "", _asp, _asp.name)
+	var asps := get_descendants.audio_stream_players_3D(root_of_asps, skip_subscenes)
+	if not error_.empty_list(asps, "asps"):
+		for _asp: AudioStreamPlayer3D in asps:
+			if not _asp.name.begins_with(SFXConstants.anim_asp_prefix):
+				if not error_.null_object(_asp.stream, pp.s("no stream for AudioStreamPlayer3D", _asp.name)):
+					_asp.bus = audio_bus_id
 
 
 ## __LOG

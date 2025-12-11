@@ -237,9 +237,6 @@ func __log_process_start(custom_delta: float):
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "Overlay"
-
 func __LOG_B() -> bool:
 	return false
 

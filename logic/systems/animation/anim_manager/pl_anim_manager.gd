@@ -137,9 +137,6 @@ func initialise():
 func is_player() -> bool:
 	return true
 
-func pp_name() -> String:
-	return "player animator"
-
 func __LOG_INDENT() -> int:
 	return 0
 

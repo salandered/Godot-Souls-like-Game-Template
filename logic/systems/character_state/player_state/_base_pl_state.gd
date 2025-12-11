@@ -118,7 +118,7 @@ func _check_feelings_can_be_paid(input_action: String) -> bool:
 		
 	if feelings.can_be_paid(_stamina_cost) and feelings.can_allow_stamina_drain(_stamina_drain):
 		return true
-	__log_psm_check(em.black_h, "can't pay for state", input_action, "cost", _stamina_cost, "drain", _stamina_drain)
+	__log_psm_check(em.h_black, "can't pay for state", input_action, "cost", _stamina_cost, "drain", _stamina_drain)
 	return false
 
 
@@ -157,7 +157,7 @@ func _update(input_: InputPackage, delta: float):
 			pass
 		## apply gravity if we close to the floor without changing state
 		elif area_awareness.is_almost_on_floor():
-			var _applied := pm().apply_gravity(delta, 2.0)
+			var _applied := pm().apply_gravity(delta)
 			if _applied:
 				__log_state_upd("applied gravity ☄️")
 		else:
@@ -301,7 +301,7 @@ func react_on_parry(_hit: HitData):
 # region: LOGS
 
 func __log_error(what: String, where: String = "", fallback: String = "", ...details: Array):
-	error_.warn(what, where + "| in state " + pp.in_q(state_name), fallback, WarnLevel.PUSH_ERROR, pp.list_(details))
+	error_.warn(what, where + "| in state " + pp.in_q(state_name), fallback, WL.PUSH_ERROR, pp.list_(details))
 
 
 func __log_state_ent(...parts: Array):

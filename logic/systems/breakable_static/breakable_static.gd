@@ -20,9 +20,6 @@ func _ready() -> void:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "BreakableStatic"
-
 func __LOG_B() -> bool:
 	return false
 

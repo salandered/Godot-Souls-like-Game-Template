@@ -28,12 +28,59 @@ func get_whoosh_asp_3d() -> AudioStreamPlayer3D:
 # func get_react_on_hit_asp_3d() -> AudioStreamPlayer3D:
 # 	return react_on_hit_player_3d
 
+func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]:
+	var _list: Array[OnSFXSigASP] = [
+		## fs
+		# OnCharFSSigASP.new(
+		# 	self,
+		# 	sig_container.get_by_sig_id(SignalName.sfx_footstep),
+		# 	get_fs_asp_3d(),
+		# 	SFXConstants.ID_.footstep,
+		# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep)
+		# ),
+		# OnCharFSSigASP.new(
+		# 	self,
+		# 	sig_container.get_by_sig_id(SignalName.sfx_footstep_light),
+		# 	get_fs_asp_3d(), ## same asp as fs
+		# 	SFXConstants.ID_.footstep_light,
+		# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep_light)
+		# ),
+		# OnCharacterSigASP.new(
+		# 	self,
+		# 	sig_container.get_by_sig_id(SignalName.sfx_footstep_scrape),
+		# 	get_fs_scrape_asp_3d(),
+		# 	SFXConstants.ID_.footstep_scrape,
+		# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep_scrape)
+		# ),
+		# ##
+		# OnCharacterSigASP.new(
+		# 	self,
+		# 	sig_container.get_by_sig_id(SignalName.sfx_launch),
+		# 	get_launch_asp_3d(),
+		# 	SFXConstants.ID_.launch,
+		# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.launch)
+		# ),
+		# OnCharSigLandASP.new(
+		# 	self,
+		# 	sig_container.get_by_sig_id(SignalName.sfx_land),
+		# 	get_land_asp_3d(),
+		# 	SFXConstants.ID_.land,
+		# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.land)
+		# ),
+		# OnCharacterSigASP.new(
+		# 	self,
+		# 	sig_container.get_by_sig_id(SignalName.sfx_whoosh),
+		# 	get_whoosh_asp_3d(),
+		# 	SFXConstants.ID_.whoosh,
+		# 	asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh)
+		# ),
+	]
+	return _list
+
 
 ## __LOG
 
 
-func pp_name() -> String:
-	return "EnemySFXSystem"
 
 func __LOG_B() -> bool:
 	return true

@@ -35,8 +35,6 @@ func get_current() -> Variant:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "Cycler"
 
 func __LOG_B() -> bool:
 	return false

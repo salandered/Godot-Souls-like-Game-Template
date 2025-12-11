@@ -3,7 +3,7 @@
 extends PHEWeapon
 class_name AuraWeapon
 
-@onready var weapon_sfx: WeaponSFX = $WeaponSFX
+@onready var weapon_sfx: WeaponSFXParent = $WeaponSFXParent
 
 @onready var _weapon_hurt_box_: WeaponHurtBox = %WeaponHurtBox
 
@@ -28,7 +28,7 @@ const WEAPON_WHOOSH = preload("uid://qufmydm4eeq4")
 const SWORD_HIT_BONES = preload("uid://g4dtkcleinh8")
 
 
-func _get_weapon_sfx_parent() -> WeaponSFX:
+func _get_weapon_sfx_parent() -> WeaponSFXParent:
 	return weapon_sfx
 
 

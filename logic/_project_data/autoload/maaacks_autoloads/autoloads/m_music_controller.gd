@@ -12,7 +12,7 @@ const MAX_DEPTH = 16
 const MINIMUM_VOLUME_DB = -80
 
 ## Detect stream players with matching audio bus.
-@export var audio_bus: StringName = &"Music"
+@export var audio_bus: StringName = BusID.MENU_MUSIC
 
 @export_group("Blending")
 @export var fade_out_duration: float = 0.0:

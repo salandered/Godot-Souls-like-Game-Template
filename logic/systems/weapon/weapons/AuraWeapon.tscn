@@ -22,12 +22,12 @@ shape = SubResource("CapsuleShape3D_finp0")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 debug_fill = false
 
-[node name="WeaponSFX" parent="." instance=ExtResource("3_5yo8c")]
+[node name="WeaponSFXParent" parent="." instance=ExtResource("3_5yo8c")]
 
-[node name="WhooshWeaponPlayer3D" parent="WeaponSFX" index="1"]
+[node name="WhooshWeaponPlayer3D" parent="WeaponSFXParent" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27381927, 0)
 
-[node name="HitWeaponPlayer3D" parent="WeaponSFX" index="2"]
+[node name="HitWeaponPlayer3D" parent="WeaponSFXParent" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29910707, 0)
 
-[editable path="WeaponSFX"]
+[editable path="WeaponSFXParent"]

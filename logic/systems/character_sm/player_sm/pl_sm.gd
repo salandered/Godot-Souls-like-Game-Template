@@ -151,9 +151,6 @@ func update(input_: InputPackage, delta: float) -> void:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "PlayerSM"
-
 func __LOG_B() -> bool:
 	return false
 

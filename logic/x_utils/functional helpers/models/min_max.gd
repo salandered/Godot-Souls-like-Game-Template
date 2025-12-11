@@ -31,8 +31,6 @@ func pp_min_max() -> String:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "FMinMax"
 
 func __LOG_B() -> bool:
 	return true

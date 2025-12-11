@@ -8,33 +8,33 @@ func _get_sad_list() -> Array[SFXAnimData]:
 	var _list: Array[SFXAnimData] = [
 		## fs
 		SFXAnimData.new(
-			SFXConstants.Type_.footstep,
+			SFXConstants.ID_.footstep,
 			"FS",
 			SignalName.sfx_footstep
 			),
 		SFXAnimData.new(
-			SFXConstants.Type_.footstep_light,
+			SFXConstants.ID_.footstep_light,
 			"FSLight",
 			SignalName.sfx_footstep_light
 			),
 		SFXAnimData.new(
-			SFXConstants.Type_.footstep_scrape,
+			SFXConstants.ID_.footstep_scrape,
 			"FSScrape",
 			SignalName.sfx_footstep_scrape
 			),
 		## 
 		SFXAnimData.new(
-			SFXConstants.Type_.launch,
+			SFXConstants.ID_.launch,
 			"Launch",
 			SignalName.sfx_launch
 			),
 		SFXAnimData.new(
-			SFXConstants.Type_.land,
+			SFXConstants.ID_.land,
 			"Land",
 			SignalName.sfx_land
 			),
 		SFXAnimData.new(
-			SFXConstants.Type_.whoosh,
+			SFXConstants.ID_.whoosh,
 			"WH",
 			SignalName.sfx_whoosh
 			),

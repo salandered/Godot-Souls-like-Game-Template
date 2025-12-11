@@ -116,8 +116,7 @@ func _accept_player_states() -> void:
 			# TODO: not default but supported? then array which is more universal. default will be choosen later
 			child.default_action_name = ""
 		else:
-			if actions.size() == 0:
-				__log_error("No actions found for state: " + child.state_name)
+			if error_.empty_list(actions, pp.s("No actions found for state:", child.state_name)):
 				child.default_action_name = ""
 			else:
 				child.default_action_name = actions[0].action_name
@@ -247,7 +246,7 @@ func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	# 0 means lowest
 	var _safe_sorted: Array[String]
 	for item in state_names:
-		if u.safe_has_key(_states, item, WarnLevel.WARN_CRUCIAL):
+		if u.safe_has_key(_states, item, WL.WARN_CRUCIAL):
 			_safe_sorted.append(item)
 	_safe_sorted.sort_custom(_states_priority_sort)
 	return _safe_sorted
@@ -263,8 +262,6 @@ func _states_priority_sort(a: String, b: String) -> bool:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "PlayerStatesContainer"
 
 func __LOG_B() -> bool:
 	return LogToggler.CONTAINER_B

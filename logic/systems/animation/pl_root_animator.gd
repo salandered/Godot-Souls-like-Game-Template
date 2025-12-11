@@ -156,9 +156,6 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 
 # region __LOGS
 
-func pp_name() -> String:
-	return "SKM 💀 PlayerRootAnimator"
-
 
 func __LOG_B() -> bool:
 	return LogToggler.SKM_B

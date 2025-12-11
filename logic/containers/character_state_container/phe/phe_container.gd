@@ -202,8 +202,6 @@ func _accept_states():
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "PHContainer"
 
 func __LOG_B() -> bool:
 	return false

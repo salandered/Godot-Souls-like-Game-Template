@@ -1,6 +1,6 @@
-extends OnSFXSigASP
 ## can be used as is if no logic needed
 class_name OnCharacterSigASP
+extends OnSFXSigASP
 
 
 ## CHARACTER SPECIFIC
@@ -47,14 +47,9 @@ func get_prev_state_name() -> String:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "OnCharacterSigASP"
 
 func __LOG_B() -> bool:
 	return false
 
-
-func __LOG_INDENT() -> int:
-	return 6
 
 # endregion

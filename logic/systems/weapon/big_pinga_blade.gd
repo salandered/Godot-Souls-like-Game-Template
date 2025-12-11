@@ -5,7 +5,7 @@ class_name PingaBlade
 
 @onready var _weapon_hurt_box_: WeaponHurtBox = %WeaponHurtBox
 @onready var _visuals_: Node3D = %Visuals
-@onready var weapon_sfx: WeaponSFX = $WeaponSFX
+@onready var weapon_sfx: WeaponSFXParent = $WeaponSFXParent
 
 
 func initialise_implementation() -> void:
@@ -31,7 +31,7 @@ const WEAPON_WHOOSH = preload("uid://qufmydm4eeq4")
 const SWORD_HIT_BONES = preload("uid://g4dtkcleinh8")
 
 
-func _get_weapon_sfx_parent() -> WeaponSFX:
+func _get_weapon_sfx_parent() -> WeaponSFXParent:
 	return weapon_sfx
 
 

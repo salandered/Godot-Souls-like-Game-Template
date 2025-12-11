@@ -11,7 +11,7 @@ class_name M_UISoundController
 const MAX_DEPTH = 16
 
 @export var root_path: NodePath = ^".."
-@export var audio_bus: StringName = &"SFX"
+@export var audio_bus: StringName = BusID.UI_SFX
 ## Continually check any new nodes added to the scene tree.
 @export var persistent: bool = true:
 	set(value):

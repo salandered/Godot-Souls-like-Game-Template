@@ -266,7 +266,10 @@ var __LOG_OVERLAY_ANIM: bool = true
 
 func __log_error(what: String, where: String = "", fallback: String = "", ...parts: Array):
 	var _parts := pp.list_(parts)
-	error_.warn(what, where, fallback, WarnLevel.PUSH_ERROR, _parts, "\n\t\t", action_name)
+	error_.warn(what, where, fallback, WL.PUSH_ERROR, _parts, "\n\t\t", action_name)
+
+func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
+	error_.warn(what, pp.s(action_name, "|", where), fallback, WL.WARN_CRUCIAL, pp.list_(context))
 
 
 func __log_ent(...parts: Array):

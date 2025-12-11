@@ -33,9 +33,6 @@ func initialise() -> void:
 func is_player() -> bool:
 	return true
 
-func pp_name() -> String:
-	return "feel🤍"
-
 
 func get_max_health() -> float:
 	return 120

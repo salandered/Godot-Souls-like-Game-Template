@@ -32,7 +32,7 @@ func vertical_mouse_movement(d_x: float, d_y: float, offset: Vector3) -> Vector3
 	var axis_len := vertical_axis.length()
 	
 	if axis_len < Constants.EPSILON_5: # axis degenerate near straight-up/down — ignoring this frame
-		__log_(em.mb_warn, "vert mouse move skip frame")
+		__log_(em.warn_mb, "vert mouse move skip frame")
 		return offset
 
 	vertical_axis = vertical_axis / axis_len

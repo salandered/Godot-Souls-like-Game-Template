@@ -98,29 +98,35 @@ func initialise() -> void:
 		EAnimParamsContainer.get_all_params(),
 		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
 	
+	
 	## SFX. See Princess for referense
-	sfx_system.initialise(
-		e_sig_container,
-		_initialise_sfx_configs(),
-		self,
-		{sfx_system.character_additional_data_key: self}
-		)
-	
-	var _e_sad_container := EnemySADContainer.new()
-	e_anim_sfx_sig_emitter.initialise(_e_sad_container, e_sig_container)
-	
 
-	var _link: Dictionary[String, EnemyAnimSFXSignalEmitter] = {
-		WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
-		WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
-	}
+	if sfx_system:
+		var asp_config_container := EnemyASPConfigContainer.new()
+
+		sfx_system.initialise(
+			e_sig_container,
+			asp_config_container,
+			self,
+			BusID.TEST_SFX,
+			{sfx_system.character_additional_data_key: self}
+			)
+	
+		var _e_sad_container := EnemySADContainer.new()
+		e_anim_sfx_sig_emitter.initialise(_e_sad_container, e_sig_container)
 		
-	var _weapon_sad_container := WeaponSADContainer.new()
-	var e_weapons := combat.get_all_weapons()
-	for weapon in e_weapons:
-		var _emitter: EnemyAnimSFXSignalEmitter = _link.get(weapon.get_weapon_id())
-		if _emitter:
-			_emitter.initialise(_weapon_sad_container, weapon.get_signal_container())
+
+		var _link: Dictionary[String, EnemyAnimSFXSignalEmitter] = {
+			WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
+			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
+		}
+		
+		var _weapon_sad_container := WeaponSADContainer.new()
+		var e_weapons := combat.get_all_weapons()
+		for weapon in e_weapons:
+			var _emitter: EnemyAnimSFXSignalEmitter = _link.get(weapon.get_weapon_id())
+			if _emitter:
+				_emitter.initialise(_weapon_sad_container, weapon.get_signal_container())
 
 	
 	config.me = self
@@ -130,8 +136,6 @@ func initialise() -> void:
 	container.accept_states()
 
 	visuals = get_descendants.mesh_instances(visuals_root, true)
-	# for v: MeshInstance3D in visuals:
-		# __log_(v.name)
 
 	__validate_deps_set_init()
 
@@ -152,9 +156,6 @@ func _initialise_sm():
 	angry_raised = false
 	state_machine._on_enter_state()
 
-
-func pp_name() -> String:
-	return "Enemy"
 
 func get_current_state() -> BasePHEState:
 	## todo: shoud we just return _curr_leaf?

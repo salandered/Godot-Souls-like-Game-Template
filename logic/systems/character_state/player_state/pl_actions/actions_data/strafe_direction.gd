@@ -81,7 +81,7 @@ func would_be_change_of_type(new_dir: Direction.Dir) -> DirPairs.ChangeType:
 	if r != -1:
 		return r
 	else: # should be unreachable
-		error_.warn("not found dirs in DirPairs!", "", "return SAME", WarnLevel.PUSH_WARNING, _curr_dir, new_dir)
+		error_.warn("not found dirs in DirPairs!", "", "return SAME", WL.PUSH_WARN, _curr_dir, new_dir)
 		return DirPairs.ChangeType.SAME
 
 

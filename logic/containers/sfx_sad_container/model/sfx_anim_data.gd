@@ -37,9 +37,6 @@ func _to_string() -> String:
 ## __LOG
 
 
-func pp_name() -> String:
-	return "SFXAnimData"
-
 func __LOG_B() -> bool:
 	return true
 

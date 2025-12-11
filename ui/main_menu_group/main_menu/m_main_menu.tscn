@@ -64,6 +64,7 @@ script = ExtResource("5_2e4m0")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("6_2e4m0")]
 stream = ExtResource("8_y57hi")
+bus = &"menu_Music"
 
 [node name="MenuContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true

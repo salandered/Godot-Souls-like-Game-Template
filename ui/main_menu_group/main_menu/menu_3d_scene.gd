@@ -85,8 +85,7 @@ func _sit_skeleton():
 	skeleton_mesh.skeleton = general_skeleton.get_path()
 	var available_anims := anim_player.get_animation_list()
 	
-	if len(available_anims) == 0:
-		__log_warn("no available_anims", "menu3dScene", "will do nothing")
+	if error_.empty_list(available_anims, pp.s("no available_anims", "menu3dScene", "will do nothing")):
 		return
 	
 	for anim_id: String in available_anims:

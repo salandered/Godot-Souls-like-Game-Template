@@ -15,8 +15,5 @@ var label: String = "not assigned"
 @abstract func make_active() -> void
 
 
-@abstract func pp_name() -> String
-
-
 func is_active() -> bool:
 	return _is_active

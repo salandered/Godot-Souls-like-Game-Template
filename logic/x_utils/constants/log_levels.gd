@@ -1,6 +1,5 @@
 extends RefCounted
-class_name WarnLevel
-
+class_name WL ## stands for Warn Level
 
 ## In the order of severity, low -> high
 
@@ -17,5 +16,5 @@ const WARN_CRUCIAL := "WARN_CRUCIAL"
 const ASSERT := "ASSERT"
 
 ## ENGINE LEVEL
-const PUSH_WARNING := "PUSH_WARNING"
+const PUSH_WARN := "PUSH_WARN"
 const PUSH_ERROR := "PUSH_ERROR"

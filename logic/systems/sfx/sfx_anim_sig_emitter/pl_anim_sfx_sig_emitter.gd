@@ -15,8 +15,6 @@ func get_anim_manager() -> BaseAnimatorManager:
 func is_player() -> bool:
 	return true
 
-func pp_name() -> String:
-	return "PlayerAnimSFXSignalEmitter"
 
 func __LOG_B() -> bool:
 	return true

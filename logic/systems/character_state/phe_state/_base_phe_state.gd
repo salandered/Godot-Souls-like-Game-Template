@@ -226,10 +226,10 @@ func __log_error(...parts: Array):
 
 func __log_warn_v2(what: String, where: String = "", fallback: String = "", ...parts: Array):
 	var _parts := pp.list_(parts)
-	error_.warn(what, where, fallback, WarnLevel.PUSH_ERROR, _parts, "\n\t\t", __log_state(), me.__pp_state_history())
+	error_.warn(what, where, fallback, WL.PUSH_ERROR, _parts, "\n\t\t", __log_state(), me.__pp_state_history())
 
 func __log_forgot_implement(sbs_name: String, function_name: String, fallback: String, ...parts: Array):
-	var _msg := "forgot to implement '%s' logic in '%s()'. WarnLevel: %s" % [sbs_name, function_name, fallback]
+	var _msg := "forgot to implement '%s' logic in '%s()'. WL: %s" % [sbs_name, function_name, fallback]
 	__log_warn_v2(_msg)
 
 # endregion

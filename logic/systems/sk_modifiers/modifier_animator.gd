@@ -262,8 +262,6 @@ func __log_blend_state() -> String:
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "💀Animator"
 
 func __LOG_B() -> bool:
 	return false

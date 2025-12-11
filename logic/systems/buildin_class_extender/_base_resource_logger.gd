@@ -6,7 +6,8 @@ extends Resource
 ## __LOGS [same for all similar extenders]
 # region
 
-@abstract func pp_name() -> String
+func pp_name() -> String:
+	return u.object_pp_name(self)
 
 @abstract func __LOG_B() -> bool
 
@@ -18,10 +19,10 @@ func __log_(_prefix: Variant, ...parts: Array):
 		print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), 10)
 
 func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_WARNING, pp.list_(context))
+	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WL.PUSH_WARN, pp.list_(context))
 
 func __log_error(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WarnLevel.PUSH_ERROR, pp.list_(context))
+	error_.warn(what, pp.s(pp_name(), "|", where), fallback, WL.PUSH_ERROR, pp.list_(context))
 
 # endregion
 

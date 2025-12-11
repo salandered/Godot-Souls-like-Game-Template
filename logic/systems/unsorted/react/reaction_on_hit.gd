@@ -184,7 +184,7 @@ static var enemy_state_to_bone_mask = {
 
 static func _pick_bone_mask_for_enemy(hit: HitData, state_name: String) -> Array[int]:
 	var _bone_mask: Array[int]
-	_bone_mask = u.safe_get_dict_key(enemy_state_to_bone_mask, state_name, BoneMask.get_upper_body(), WarnLevel.SILENT)
+	_bone_mask = u.safe_get_dict_key(enemy_state_to_bone_mask, state_name, BoneMask.get_upper_body(), WL.SILENT)
 	__log_("EState", pp.in_q(state_name), "->", pp.bone_mask_(_bone_mask))
 	return _bone_mask
 
@@ -197,7 +197,7 @@ static var player_action_to_bone_mask = {
 
 static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Array[int]:
 	var _bone_mask: Array[int]
-	_bone_mask = u.safe_get_dict_key(player_action_to_bone_mask, action_name, BoneMask.get_upper_body_with_hips(), WarnLevel.SILENT)
+	_bone_mask = u.safe_get_dict_key(player_action_to_bone_mask, action_name, BoneMask.get_upper_body_with_hips(), WL.SILENT)
 	__log_("PLAction", pp.in_q(action_name), "->", pp.bone_mask_(_bone_mask))
 	return _bone_mask
 
@@ -211,14 +211,14 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Arr
 ## may return ""
 static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 	var _pl_state: String
-	_pl_state = u.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WarnLevel.SILENT)
+	_pl_state = u.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
 	return _pl_state
 
 ## may return ""
 static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
 	var _e_state: String
-	_e_state = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, "", WarnLevel.SILENT)
+	_e_state = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, "", WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption", pp.in_q(_e_state))
 	return _e_state
 

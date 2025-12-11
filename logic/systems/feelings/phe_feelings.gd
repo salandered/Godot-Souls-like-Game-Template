@@ -8,9 +8,6 @@ const MAX_HEALTH = 100
 func is_player() -> bool:
 	return false
 
-func pp_name() -> String:
-	return "🗿feel🖤"
-
 
 func initialise():
 	pass

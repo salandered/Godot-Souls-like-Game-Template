@@ -27,9 +27,6 @@ func _get_all_weapon_specific_signals() -> Array[SignalData]:
 	return []
 
 
-func pp_name() -> String:
-	return "🗡️SignalContainer"
-
 func __LOG_B() -> bool:
 	return true
 

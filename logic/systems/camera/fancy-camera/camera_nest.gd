@@ -11,10 +11,6 @@ func make_active() -> void:
 	_is_active = true
 
 
-func pp_name() -> String:
-	return pp.s("Nest")
-
-
 # ## __LOGS
 # # region
 

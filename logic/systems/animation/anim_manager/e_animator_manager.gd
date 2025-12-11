@@ -201,9 +201,6 @@ func _reset_root_motion() -> void:
 func is_player() -> bool:
 	return false
 
-func pp_name() -> String:
-	return "E▷"
-
 
 ## __LOG
 

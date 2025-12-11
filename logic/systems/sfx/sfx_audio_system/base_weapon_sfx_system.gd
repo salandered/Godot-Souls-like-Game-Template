@@ -28,21 +28,21 @@ func get_weapon() -> BaseWeapon:
 	return _weapon
 
 
-func _get_on_signal_asps(sig_container: BaseSignalContainer, sfx_configs: Dictionary[String, SFXStreamConfig]) -> Array[OnSFXSigASP]:
+func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]:
 	var _list: Array[OnSFXSigASP] = [
 		OnWeaponSFXSigASP.new(
 			self,
 			sig_container.get_by_sig_id(SignalName.sfx_whoosh_weapon),
 			whoosh_weapon_player_3d,
-			SFXConstants.Type_.whoosh_weapon,
-			sfx_configs.get(SFXConstants.Type_.whoosh_weapon)
+			SFXConstants.ID_.whoosh_weapon,
+			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh_weapon)
 		),
 		OnWeaponSFXSigASP.new(
 			self,
 			sig_container.get_by_sig_id(SignalName.sfx_hit_weapon),
 			hit_weapon_player_3d,
-			SFXConstants.Type_.hit_weapon,
-			sfx_configs.get(SFXConstants.Type_.hit_weapon)
+			SFXConstants.ID_.hit_weapon,
+			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_weapon)
 		),
 	]
 	return _list
@@ -57,8 +57,6 @@ func set_hit_weapon_stream(stream: AudioStream):
 ## __LOG
 
 
-func pp_name() -> String:
-	return "BaseWeaponSFXSystem"
 
 func __LOG_B() -> bool:
 	return true

@@ -79,8 +79,6 @@ func apply_state_filters_for_character(body_area: CharacterHitbox) -> bool:
 # ## __LOGS
 # # region
 
-func pp_name() -> String:
-	return "BreakableColumnArea"
 
 func __LOG_B() -> bool:
 	return false

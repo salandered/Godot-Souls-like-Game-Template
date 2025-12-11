@@ -25,15 +25,9 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 ## __LOGS
 # region
 
-func pp_name() -> String:
-	return "OnCharSigLandASP"
-
 
 func __LOG_B() -> bool:
 	return true
 
-
-func __LOG_INDENT() -> int:
-	return 6
 
 # endregion
