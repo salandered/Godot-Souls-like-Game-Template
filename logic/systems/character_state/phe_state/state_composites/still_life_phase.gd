@@ -40,4 +40,5 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 
 
 func _player_is_close() -> bool:
+	# return false
 	return distance_to_player() < config.DODGE_RAD()

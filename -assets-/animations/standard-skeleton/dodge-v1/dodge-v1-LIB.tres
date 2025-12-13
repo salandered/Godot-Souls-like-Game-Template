@@ -1740,26 +1740,11 @@ tracks/58/keys = {
 }
 tracks/59/type = "audio"
 tracks/59/imported = false
-tracks/59/enabled = false
-tracks/59/path = NodePath("../SFX/AAnimASPs/AAnimFSLight")
+tracks/59/enabled = true
+tracks/59/path = NodePath("../SFX/AAnimASPs/AAnimWH")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("1_gtnam")
-}],
-"times": PackedFloat32Array(0.7)
-}
-tracks/59/use_blend = true
-tracks/60/type = "audio"
-tracks/60/imported = false
-tracks/60/enabled = true
-tracks/60/path = NodePath("../SFX/AAnimASPs/AAnimWH")
-tracks/60/interp = 1
-tracks/60/loop_wrap = true
-tracks/60/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -1767,14 +1752,14 @@ tracks/60/keys = {
 }],
 "times": PackedFloat32Array(0.3)
 }
-tracks/60/use_blend = true
-tracks/61/type = "audio"
-tracks/61/imported = false
-tracks/61/enabled = true
-tracks/61/path = NodePath("../SFX/AAnimASPs/AAnimLand")
-tracks/61/interp = 1
-tracks/61/loop_wrap = true
-tracks/61/keys = {
+tracks/59/use_blend = true
+tracks/60/type = "audio"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("../SFX/AAnimASPs/AAnimLand")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -1782,14 +1767,14 @@ tracks/61/keys = {
 }],
 "times": PackedFloat32Array(0.56666666)
 }
-tracks/61/use_blend = true
-tracks/62/type = "audio"
-tracks/62/imported = false
-tracks/62/enabled = true
-tracks/62/path = NodePath("../SFX/AAnimASPs/AAnimLaunch")
-tracks/62/interp = 1
-tracks/62/loop_wrap = true
-tracks/62/keys = {
+tracks/60/use_blend = true
+tracks/61/type = "audio"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("../SFX/AAnimASPs/AAnimLaunch")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -1797,7 +1782,7 @@ tracks/62/keys = {
 }],
 "times": PackedFloat32Array(0.26666668)
 }
-tracks/62/use_blend = true
+tracks/61/use_blend = true
 
 [sub_resource type="Animation" id="Animation_ttuo4"]
 resource_name = "A Standing Dodge L"
@@ -2270,26 +2255,11 @@ tracks/60/keys = {
 tracks/60/use_blend = true
 tracks/61/type = "audio"
 tracks/61/imported = false
-tracks/61/enabled = false
-tracks/61/path = NodePath("../SFX/AAnimASPs/AAnimFSLight")
+tracks/61/enabled = true
+tracks/61/path = NodePath("../SFX/AAnimASPs/AAnimWH")
 tracks/61/interp = 1
 tracks/61/loop_wrap = true
 tracks/61/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("1_gtnam")
-}],
-"times": PackedFloat32Array(0.73333335)
-}
-tracks/61/use_blend = true
-tracks/62/type = "audio"
-tracks/62/imported = false
-tracks/62/enabled = true
-tracks/62/path = NodePath("../SFX/AAnimASPs/AAnimWH")
-tracks/62/interp = 1
-tracks/62/loop_wrap = true
-tracks/62/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -2297,7 +2267,7 @@ tracks/62/keys = {
 }],
 "times": PackedFloat32Array(0.26666668)
 }
-tracks/62/use_blend = true
+tracks/61/use_blend = true
 
 [sub_resource type="Animation" id="Animation_jwhgb"]
 resource_name = "A Standing Dodge R"
@@ -2783,21 +2753,6 @@ tracks/61/keys = {
 "times": PackedFloat32Array(0.2)
 }
 tracks/61/use_blend = true
-tracks/62/type = "audio"
-tracks/62/imported = false
-tracks/62/enabled = false
-tracks/62/path = NodePath("../SFX/AAnimASPs/AAnimFSLight")
-tracks/62/interp = 1
-tracks/62/loop_wrap = true
-tracks/62/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("1_gtnam")
-}],
-"times": PackedFloat32Array(0.7)
-}
-tracks/62/use_blend = true
 
 [sub_resource type="Animation" id="Animation_es2aj"]
 resource_name = "A-standing-dodge-F"
@@ -3295,21 +3250,6 @@ tracks/62/keys = {
 "times": PackedFloat32Array(0.3)
 }
 tracks/62/use_blend = true
-tracks/63/type = "audio"
-tracks/63/imported = false
-tracks/63/enabled = false
-tracks/63/path = NodePath("../SFX/AAnimASPs/AAnimFSLight")
-tracks/63/interp = 1
-tracks/63/loop_wrap = true
-tracks/63/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("1_gtnam")
-}],
-"times": PackedFloat32Array(0.8666667)
-}
-tracks/63/use_blend = true
 
 [sub_resource type="Animation" id="Animation_3cmpo"]
 resource_name = "C Standing Dodge L RFF"

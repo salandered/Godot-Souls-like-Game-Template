@@ -22,6 +22,11 @@ func _get_sad_list() -> Array[SFXAnimData]:
 			"FSScrape",
 			SignalID.sfx_footstep_scrape
 			),
+		SFXAnimData.new(
+			SFXConstants.ID_.move_noise,
+			"Move",
+			SignalID.sfx_move_noise
+			),
 		## 
 		SFXAnimData.new(
 			SFXConstants.ID_.launch,
@@ -34,7 +39,7 @@ func _get_sad_list() -> Array[SFXAnimData]:
 			SignalID.sfx_land
 			),
 		SFXAnimData.new(
-			SFXConstants.ID_.whoosh,
+			SFXConstants.ID_.whoosh_char,
 			"WH",
 			SignalID.sfx_whoosh
 			),

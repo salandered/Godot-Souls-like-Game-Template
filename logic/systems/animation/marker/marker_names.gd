@@ -1,5 +1,5 @@
-extends RefCounted
 class_name MarkerName
+extends RefCounted
 
 
 class JUMP:

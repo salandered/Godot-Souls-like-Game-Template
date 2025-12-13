@@ -49,7 +49,7 @@ func get_prev_state_name() -> String:
 
 
 func __LOG_B() -> bool:
-	return false
+	return true
 
 
 # endregion

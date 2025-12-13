@@ -11,6 +11,8 @@ extends BaseNodeCharacterSystem
 # endregion
 
 
+var _character: BaseCharacter
+
 class AllowedAngle:
 	var value: float
 	var cut: float
@@ -20,8 +22,12 @@ class AllowedAngle:
 		self.cut = _cut
 
 
-## non nullable
-@abstract func get_character() -> BaseCharacter
+func initialise(character: BaseCharacter):
+	self._character = character
+
+
+func get_character() -> BaseCharacter:
+	return _character
 
 
 ## GETTERS
@@ -32,7 +38,7 @@ func get_curr_velocity_len() -> float:
 	return get_character().velocity.length()
 
 func get_curr_xz_velocity_len() -> float:
-	return Vector3(get_character().velocity.x,0, get_character().velocity.z).length()
+	return Vector3(get_character().velocity.x, 0, get_character().velocity.z).length()
 
 func get_curr_y_velocity() -> float:
 	return get_character().velocity.y
@@ -129,7 +135,6 @@ func __LOG_INDENT() -> int:
 	return 0
 
 ## just indent:
-
 
 
 func __pp_vel_y() -> String:

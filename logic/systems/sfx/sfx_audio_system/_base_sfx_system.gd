@@ -45,17 +45,18 @@ func initialise(
 		signal_container_: BaseSignalContainer,
 		asp_config_container: BaseSFXASPConfigContainer,
 		root_of_asps: Node,
-		audio_bus_id: String,
 		additional_data: Dictionary[String, Variant]
 	) -> void:
+	
+	initialise_implementation(additional_data)
+	
 	var _list := _get_on_signal_asps(signal_container_, asp_config_container)
 	
 	self._on_signal_asps.assign(_list)
 	self.signal_container = signal_container_
 	
-	initialise_implementation(additional_data)
 	
-	_set_audio_bus_id(root_of_asps, audio_bus_id)
+	_soft_validate_asps(root_of_asps)
 
 	_soft_validate_on_signal_asps()
 
@@ -64,7 +65,7 @@ func initialise(
 		__log_warn_soft("__validate_deps_set_init failed, sytem won't work", "_on_signal_asps = []")
 		_on_signal_asps = []
 	else:
-		__log_("", "initialised. auido bus id:", audio_bus_id)
+		__log_("", "initialised")
 
 
 func _soft_validate_on_signal_asps():
@@ -76,7 +77,7 @@ func _soft_validate_on_signal_asps():
 		__log_("validation", "we have", len(_on_signal_asps), "on_signal_players:", pp.list_(_all_sfx_types))
 
 
-func _set_audio_bus_id(root_of_asps: Node, audio_bus_id: String):
+func _soft_validate_asps(root_of_asps: Node):
 	__log_("validation", "using root_of_asps", root_of_asps.name)
 	
 	var skip_subscenes := false # not sure
@@ -84,8 +85,7 @@ func _set_audio_bus_id(root_of_asps: Node, audio_bus_id: String):
 	if not error_.empty_list(asps, "asps"):
 		for _asp: AudioStreamPlayer3D in asps:
 			if not _asp.name.begins_with(SFXConstants.anim_asp_prefix):
-				if not error_.null_object(_asp.stream, pp.s("no stream for AudioStreamPlayer3D", _asp.name)):
-					_asp.bus = audio_bus_id
+				error_.null_object(_asp.stream, pp.s("no stream for AudioStreamPlayer3D", _asp.name))
 
 
 ## __LOG

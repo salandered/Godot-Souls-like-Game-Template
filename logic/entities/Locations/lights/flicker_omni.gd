@@ -12,6 +12,7 @@ extends Node3D
 @onready var omni_light_3d: OmniLight3D = %OmniLight3D
 @onready var animation_player: AnimationPlayer = $OmniLight3D/AnimationPlayer
 @onready var csg_sphere_3d: CSGSphere3D = $OmniLight3D/CSGSphere3D
+@onready var fire: AudioStreamPlayer3D = %Fire
 
 
 func _ready():
@@ -22,7 +23,7 @@ func _ready():
 	
 	animation_player.play("flicker", -1, speed_scale)
 	animation_player.seek(randf_range(0.0, 3.0), true)
-	
+	#fire.play()
 	csg_sphere_3d.visible = __csg
 	
 		

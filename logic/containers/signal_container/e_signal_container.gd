@@ -2,15 +2,17 @@ extends BaseCharacterSignalContainer
 class_name EnemySignalContainer
 
 
+signal SFX_jingles(payload: Dictionary[String, Variant])
+
+
 func _get_character_specific_signal_data_list() -> Array[SignalData]:
-	return []
+	return [
+		SignalData.new(SignalID.sfx_jingles, SFX_jingles)
+		]
 
 
 ## __LOG
 
-
-func __LOG_B() -> bool:
-	return true
 
 func __LOG_INDENT() -> int:
 	return 0

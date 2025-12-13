@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://d0p7wlbl03i5r" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_launch.tres" id="2_fjns0"]
 [ext_resource type="AudioStream" uid="uid://781p7bt34n6c" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_1.tres" id="3_632eh"]
 [ext_resource type="AudioStream" uid="uid://u8t4csh0n5r3" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_2.tres" id="3_sdnui"]
-[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/bg_move_noise.tres" id="4_puitj"]
+[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/footsteps/bg_move_noise.tres" id="4_puitj"]
 [ext_resource type="AudioStream" uid="uid://qufmydm4eeq4" path="res://-assets-/SFX/audio_streams/whoosh/weapon_whoosh.tres" id="5_62eor"]
 [ext_resource type="AudioStream" uid="uid://b8yu5uqttajay" path="res://-assets-/SFX/audio_streams/footsteps/concrete/fs_scrape_concr.tres" id="6_afsni"]
 [ext_resource type="AudioStream" uid="uid://d3ahq7du2874o" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_land.tres" id="7_mxxt2"]
@@ -3872,7 +3872,7 @@ tracks/31/use_blend = true
 tracks/32/type = "audio"
 tracks/32/imported = false
 tracks/32/enabled = true
-tracks/32/path = NodePath("SFX/AAnimASPs/AAnimWHWeapon")
+tracks/32/path = NodePath("SFX/AAnimASPs/AAnimWHAuraWp")
 tracks/32/interp = 1
 tracks/32/loop_wrap = true
 tracks/32/keys = {
@@ -3881,7 +3881,7 @@ tracks/32/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("5_62eor")
 }],
-"times": PackedFloat32Array(2.5333333)
+"times": PackedFloat32Array(2.4333334)
 }
 tracks/32/use_blend = true
 tracks/33/type = "audio"

@@ -19,7 +19,6 @@ class_name Princess
 
 # essential systems
 @onready var player_movement: PlayerMovement = %PlayerMovement
-@onready var combat: PlayerCombat = $Combat
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
@@ -31,6 +30,7 @@ class_name Princess
 @onready var anim_container: AnimContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var native_player: AnimationPlayer = %NativeAnimator
+@onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
 
 # 
 @onready var hit_box_torso: CharacterHitbox = %HitBoxTorso
@@ -45,6 +45,9 @@ class_name Princess
 var push_rigid_bodies_force: float = 4.0
 
 
+var default_weapon_id := WeaponID.smith_sword
+# var default_weapon_id := WeaponID.pl_pinga_blade
+
 func get_hard_dependencies() -> Array[Object]:
 	return [
 		fancy_camera,
@@ -54,7 +57,8 @@ func get_hard_dependencies() -> Array[Object]:
 		container,
 		bones,
 		player_movement,
-		combat,
+		get_sig_container(),
+		get_combat(),
 		feelings,
 		area_awareness,
 		player_sm,
@@ -75,56 +79,13 @@ func get_soft_dependencies() -> Array[Object]:
 
 
 func initialise() -> void:
-	__validate_dependencies()
-
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Masks.PLAYER_COL_MASK
 
-
-	var pl_sig_container := PlayerSignalContainer.new()
-
-	visuals.accept_model_data(self)
-	
-
-	var _pl_anim_data := PlAnimList.new()
-
-	anim_container._accept_animations(
-		_pl_anim_data.list_of_animations,
-		native_player,
-		AnimParamsContainer.TRACK_PREFIXES,
-		AnimParamsContainer.get_all_params(),
-		PlRequiredMarkers.anim_to_required_marker)
-		 
-	bones.accept_bones()
-	container.accept_all_states(self, anim_container)
-	player_sm.initialise(self)
-
-	combat.initialise()
-	animator_manager.initialise(native_player, anim_container)
-
-	var asp_config_container := PlayerASPConfigContainer.new()
-	
-	sfx_system.initialise(
-		pl_sig_container,
-		asp_config_container,
-		self,
-		BusID.GAME_SFX,
-		{sfx_system.character_additional_data_key: self}
-		)
-	
-	var _pl_sad_container := PlayerSADContainer.new()
-	pl_anim_sfx_sig_emitter.initialise(_pl_sad_container, pl_sig_container)
-	
-	## NOTE: unlike character sfx, where sfx_system is tied to pl_anim_sfx_sig_emitter,
-	##       for weapon we manage emitter here on character side, while its sfx system 
-	##       is managed by weapon itself. This is done because anim knowledge is on player side. 
-	##       Weapon wouldn't know when to play anim based sounds.
-	## NOTE: when character will be able to switch weapons, this part should be re-called on switch
-	var _weapon_sad_container := WeaponSADContainer.new()
-	var _player_weapon := combat.get_all_weapons()[0] ## only 1 weapon is supported for player
-	var _weapon_sig_container := _player_weapon.get_signal_container()
-	pl_weapon_anim_sfx_sig_emitter.initialise(_weapon_sad_container, _weapon_sig_container)
-	
+	if anim_container:
+		container.accept_all_states(self, anim_container)
+	if get_combat():
+		player_sm.initialise(self)
 
 	__dev_initialise()
 
@@ -132,9 +93,48 @@ func initialise() -> void:
 		__log_warn_soft("well game is not ready")
 
 
+## cont
+func _for_init_sig_container() -> BaseCharacterSignalContainer:
+	return PlayerSignalContainer.new()
+func _for_init_sad_container() -> BaseCharacterSADContainer:
+	return PlayerSADContainer.new()
+## anim cont
+func _for_init_anim_container() -> AnimContainer:
+	return anim_container
+func _for_init_anim_params_container() -> BaseAnimParamsContainer:
+	return anim_params_container
+func _for_init_anim_list() -> BaseCharAnimList:
+	return PlAnimList.new()
+
+func _for_init_required_markers() -> Dictionary[String, Array]:
+	return PlRequiredMarkers.anim_to_required_marker
+## anim
+func _for_init_native_player() -> AnimationPlayer:
+	return native_player
+func _for_init_anim_manager() -> BaseAnimatorManager:
+	return animator_manager
+##
+func _for_init_visuals() -> BaseVisuals:
+	return visuals
+func _for_init_bones() -> BaseCharBones:
+	return bones
+func _for_init_movement() -> BaseCharacterMovement:
+	return player_movement
+## sfx
+func _for_init_sfx_system() -> CharacterSFXSystem:
+	return sfx_system
+func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
+	return PlayerASPConfigContainer.new()
+func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
+	return pl_anim_sfx_sig_emitter
+func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
+	return {default_weapon_id: pl_weapon_anim_sfx_sig_emitter}
+
 func is_player() -> bool:
 	return true
 
+func get_player() -> Princess:
+	return self
 
 ## not nullable in theory
 func get_current_state() -> BasePlayerState:
@@ -267,19 +267,19 @@ func _input(event: InputEvent) -> void:
 		return
 	if Input.is_action_just_pressed(RawAction.DEV_H):
 		var hit := HitData.new(10, "from god", PHEA.attack.scare_off)
-		combat._last_processed_hit = hit
+		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_J):
 		var hit := HitData.new(30, "from god", PHEA.attack.sword_slide)
-		combat._last_processed_hit = hit
+		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_K):
 		var hit := HitData.new(10, "from god", PHEA.attack.attack_360_low)
-		combat._last_processed_hit = hit
+		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_L):
 		var hit := HitData.new(30, "from god", PHEA.attack.power_gap_closer)
-		combat._last_processed_hit = hit
+		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
 
 	if event.is_action_released(RawAction.t8):

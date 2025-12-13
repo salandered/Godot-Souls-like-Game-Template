@@ -142,9 +142,13 @@ func _phase_switch_check() -> bool:
 	if animator_manager.get_overlay_time_left() >= 0.1:
 		return false
 
+	if distance_to_player() > config.DODGE_RAD():
+		return false
 	# already switched
 	if me.angry_raised == true:
 		return false
+
+
 	return phe_feelings.is_lower_to_switch_phase()
 
 

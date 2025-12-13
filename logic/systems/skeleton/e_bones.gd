@@ -1,6 +1,5 @@
 @tool
-@icon("uid://b5xt1a7igr101")
-extends Node3D
+extends BaseCharBones
 class_name EnemyBones
 
 @onready var general_skeleton: Skeleton3D = %GeneralSkeleton

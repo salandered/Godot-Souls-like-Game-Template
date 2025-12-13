@@ -35,3 +35,9 @@ func get_by_sig_id(sig_id: String) -> SignalData:
 
 func has_signal_id(sig_id: String) -> bool:
 	return sig_id_to_signal_data.has(sig_id)
+
+
+## __LOG
+
+func __LOG_B() -> bool:
+	return LogToggler.SIG_C_B

@@ -29,7 +29,6 @@ static func s(...parts: Array) -> String:
 	return r
 
 
-
 # region: in 
 
 static func in_q(something: Variant, spaces: bool = false) -> String:
@@ -144,6 +143,19 @@ static func bone_mask_(_bone_mask_: Array[int]) -> String:
 ## returns name from id (no lib)
 static func anim_n(anim_id: String) -> String:
 	return pp.in_q(u.get_last_slash_part(anim_id))
+
+
+static func sig(signal_data: SignalData, signal_payload: Dictionary[String, Variant], ) -> String:
+	if not signal_data: return ""
+	return pp.s(signal_data, "with payload", pp.dict_(signal_payload, false, false, true))
+
+static func bus_id(bus_id_: String) -> String:
+	return pp.s("bus🎧", pp.in_q(bus_id_))
+
+static func asp_play(asp: AudioStreamPlayer3D) -> String:
+	if not asp: return ""
+	return pp.s("vol/pitch", pp.round_01(asp.volume_db), "/", pp.round_01(asp.pitch_scale),
+		"stream", pp.in_q(asp.stream.resource_name) if asp.stream else "[-]")
 
 # endregion
 

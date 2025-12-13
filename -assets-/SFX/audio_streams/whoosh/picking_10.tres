@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://cado7y53rmhqs"]
+
+[ext_resource type="AudioStream" uid="uid://dgbi1n4i2uco7" path="res://-adopting/sfx_sounds/Swords & Blades SFX Pack/Sword Whoosh/Sword Whoosh 08_big_weapon_whoosh.wav" id="1_f6i4u"]
+[ext_resource type="AudioStream" uid="uid://blkj8xan3dpe8" path="res://-adopting/sfx_sounds/Swords & Blades SFX Pack/Sword Whoosh/Sword Whoosh 03_big_weapon_whoosh.wav" id="2_1fxap"]
+[ext_resource type="AudioStream" uid="uid://dgbkavrqbe3h8" path="res://-adopting/sfx_sounds/Swords & Blades SFX Pack/Sword Whoosh/Sword Whoosh 04_big_weapon_whoosh.wav" id="3_0uqgn"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_f6i4u")
+stream_1/stream = ExtResource("2_1fxap")
+stream_2/stream = ExtResource("3_0uqgn")

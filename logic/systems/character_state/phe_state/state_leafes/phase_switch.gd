@@ -16,6 +16,12 @@ func get_active_weapon_names() -> Array[String]:
 
 var _pushed_rigid_bodies: bool = false
 
+func on_enter_state() -> void:
+	_combat_set_hit_data_to_all_weapons()
+	
+	u.safe_emit(me.get_sig_container().get_by_sig_id(SignalID.sfx_unique), {"unique": "phase_switch"}, true)
+
+
 func on_exit_state() -> void:
 	_pushed_rigid_bodies = false
 
@@ -26,7 +32,7 @@ func update(delta: float):
 	
 	
 	if not _pushed_rigid_bodies and passed_marker(MarkerName.PUSH_ITEMS_AROUND):
-		PushRigidBodies.push_nearby_rigid_bodies(me, 8, 140)
+		PushRigidBodies.push_nearby_rigid_bodies(me, 9, 140)
 		_pushed_rigid_bodies = true
 	
 	_combat_update_is_attacking()

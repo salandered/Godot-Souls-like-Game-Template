@@ -110,16 +110,20 @@ static func is_object_ok(object_: Object, description: String = "", warn_level: 
 	else:
 		return true
 
+## return true if emitted
 static func safe_emit(
 	signal_data: SignalData,
 	signal_payload: Dictionary[String, Variant],
-	warn_level: String = WL.WARN):
-	if not signal_data:
-		error_.warn("no signal data", "", "", warn_level)
-		return
-	if not error_.null_signal(signal_data, "", warn_level):
-		signal_data.signal_obj.emit(signal_payload)
-
+	__log: bool = false,
+	warn_level: String = WL.WARN) -> bool:
+	if error_.null_object(signal_data, "no signal data", warn_level):
+		return false
+	if error_.null_signal(signal_data, "", warn_level):
+		return false
+	signal_data.signal_obj.emit(signal_payload)
+	if __log:
+		print_.prefix("<emit>", pp.sig(signal_data, signal_payload))
+	return true
 
 static func safe_look_at(
 		from_who: Node3D,

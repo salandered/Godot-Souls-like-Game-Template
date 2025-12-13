@@ -1,7 +1,7 @@
 [gd_resource type="AnimationLibrary" load_steps=17 format=3 uid="uid://dq7y5hsywmr87"]
 
 [ext_resource type="AudioStream" uid="uid://781p7bt34n6c" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_1.tres" id="1_oe6tg"]
-[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/bg_move_noise.tres" id="2_rfcqh"]
+[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/footsteps/bg_move_noise.tres" id="2_rfcqh"]
 
 [sub_resource type="Animation" id="Animation_ddgyy"]
 resource_name = "L combat idle"
@@ -2456,6 +2456,25 @@ tracks/56/keys = {
 "times": PackedFloat32Array(0.26666668, 0.8837989)
 }
 tracks/56/use_blend = true
+tracks/57/type = "audio"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("SFX/AAnimASPs/AAnimMove")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_rfcqh")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_rfcqh")
+}],
+"times": PackedFloat32Array(0.2, 0.8666667)
+}
+tracks/57/use_blend = true
 
 [sub_resource type="Animation" id="Animation_cvmtf"]
 resource_name = "L-combat-walk-R"

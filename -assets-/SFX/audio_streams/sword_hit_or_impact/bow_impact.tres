@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://bsaxp48f20puq"]
+
+[ext_resource type="AudioStream" uid="uid://41b5kid26a4w" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Attacks/Bow Attacks Hits and Blocks/Bow Impact Hit 1_player_hit_impact_hurt.wav" id="1_pr3ni"]
+[ext_resource type="AudioStream" uid="uid://dleksdicc8jid" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Attacks/Bow Attacks Hits and Blocks/Bow Impact Hit 2_player_hit_impact_hurt.wav" id="2_udr67"]
+
+[resource]
+random_pitch = 1.1
+random_volume_offset_db = 0.3
+streams_count = 2
+stream_0/stream = ExtResource("2_udr67")
+stream_1/stream = ExtResource("1_pr3ni")

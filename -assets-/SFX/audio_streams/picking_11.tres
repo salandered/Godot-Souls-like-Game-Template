@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://cr8j3lhst35ui"]
+
+[ext_resource type="AudioStream" uid="uid://c0jteefpqriq6" path="res://-adopting/sfx_sounds/WAV ROUND Packs 1-4/WAV- SFX PACK VOL 4 - HZSMITH/WAV/Collect_Dirt_2_thrown_impact_whoosh.wav" id="1_7arkp"]
+[ext_resource type="AudioStream" uid="uid://cpwr70hfgrwdx" path="res://-adopting/sfx_sounds/WAV ROUND Packs 1-4/WAV- SFX PACK VOL 4 - HZSMITH/WAV/Collect_Dirt_3_thrown_impact_whoosh.wav" id="2_0ww47"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("1_7arkp")
+stream_1/stream = ExtResource("2_0ww47")

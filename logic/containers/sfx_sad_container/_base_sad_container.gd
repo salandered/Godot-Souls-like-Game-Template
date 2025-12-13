@@ -62,7 +62,7 @@ func get_by_anim_sfx_asp_name(sfx_asp_name: String) -> SFXAnimData:
 # region
 
 func __LOG_B() -> bool:
-	return true
+	return LogToggler.SAD_C_B
 
 func __LOG_INDENT() -> int:
 	return LogToggler.DEFAULT_REF_C_CONT_INDENT

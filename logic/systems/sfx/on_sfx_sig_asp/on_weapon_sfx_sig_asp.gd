@@ -12,6 +12,10 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 		base_vol_db += 4
 		base_pitch -= 0.2
 	
+
+	# var combat = get_holder().get_combat()
+	
+	
 	return VolPitch.new(base_vol_db, base_pitch)
 
 

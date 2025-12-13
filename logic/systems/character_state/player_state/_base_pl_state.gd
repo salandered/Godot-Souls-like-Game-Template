@@ -253,9 +253,13 @@ func on_exit_state() -> void:
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "we received a hit " + str(hit))
 
+	
+	var _sig_data := get_player().get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
+	u.safe_emit(_sig_data, {}, true)
 	## 1 - check if we need to change state
 	## 2 - if not, we delegate reaction behavior to curr action
 	var react_state_name := ReactionOnHit.calculate_reaction_for_pl_state(hit)
+	
 	if react_state_name:
 		__log_state_upd("hit leaded to react state", react_state_name)
 		var state := container.state_by_name(react_state_name)

@@ -1,5 +1,5 @@
-extends RefCountedStaticLogger
 class_name AnimDataValidator
+extends RefCountedStaticLogger
 
 
 static func validate_anim(anim_data: AnimationData, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary[String, Array]) -> bool:

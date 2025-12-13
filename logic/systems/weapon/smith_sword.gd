@@ -40,9 +40,14 @@ func get_weapon_visuals() -> MeshInstance3D:
 ## SFX
 
 
-func _get_weapon_sfx_parent() -> WeaponSFXParent:
+func _for_init_weapon_sfx_parent() -> WeaponSFXParent:
 	return weapon_sfx
 
+func _for_init_asp_container() -> BaseWeaponASPConfigContainer:
+	return SmithSwordASPConfigContainer.new()
+
+func get_sad_container() -> WeaponSADContainer:
+	return WeaponSADContainer.new()
 
 # func get_sfx_hit_stream_for_target(target: Node3D) -> AudioStream:
 # 	for material in hit_sounds.keys():

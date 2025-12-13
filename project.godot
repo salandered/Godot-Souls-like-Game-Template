@@ -80,6 +80,8 @@ folder_colors={
 "res://-assets-/GLB-level/tower map/": "gray",
 "res://-assets-/SFX/": "pink",
 "res://-assets-/SFX/audio_streams/": "yellow",
+"res://-assets-/SFX/audio_streams/footsteps/": "blue",
+"res://-assets-/SFX/audio_streams/sword_hit_or_impact/": "red",
 "res://-assets-/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/": "blue",
 "res://-assets-/SFX/sources/_dev/": "gray",
 "res://-assets-/SFX/sources/fantasy_pack_by_tom_music/": "green",

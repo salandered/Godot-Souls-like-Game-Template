@@ -7,11 +7,14 @@ const DEFAULT_STATIC_REF_C_INDENT := 8
 const DEFAULT_REF_C_CONT_INDENT := 4
 
 
+## Containers
+const SAD_C_B := false
+const SIG_C_B := true_b
+
 # COMMON
-const DEV_B := true
-const COLLISION_B := true
+const DEV_B := true_b
+const COLLISION_B := false
 const FEEL_B := false
-const FEEL_INDENT := 10
 const REACT_UTILS_B := false
 
 # CONTAINER
@@ -44,3 +47,11 @@ const PHE_CHECK_B := false
 const PHE_B := false
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false
+
+
+const FEEL_INDENT := 10
+
+## -- system ##
+
+## for bright colors (using extenstion)
+const true_b := true

@@ -1,5 +1,5 @@
-extends BaseRefCountedSystem
 class_name SFXAnimData
+extends BaseRefCountedSystem
 
 ## or simply SAD
 ## should not contain any objects and links.

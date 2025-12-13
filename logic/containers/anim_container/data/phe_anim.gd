@@ -1,5 +1,5 @@
-extends RefCounted
 class_name PHEA
+extends BaseCharAnimList
 
 
 class _lib:
@@ -82,8 +82,11 @@ class react:
 # 	const thrown_l_rm := _lib._fall_stand_up + "thrown L RM"
 # 	const thrown_r_rm := _lib._fall_stand_up + "thrown R RM"
 
+func get_list_of_animations() -> Array[AnimationData]:
+	return _list_of_animations
 
-var list_of_animations: Array[AnimationData] = [
+
+var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(sleep),
 	AnimationData.new(phase_switch, 0.7),
 	AnimationData.new(phase_switch_loop),

@@ -13,17 +13,11 @@ var camera_target: EnemyCameraTarget
 @onready var coll_collider: CollisionShape3D = %CollCollider
 
 
-func initialise() -> void:
+func _initialise_cam_targets() -> void:
 	var targets := get_descendants.enemy_camera_targets(self)
 	for t: EnemyCameraTarget in targets:
 		t.initialise(self)
 		t.make_active()
-
-	_initialise_cam_targets(targets)
-	_initialise_coll_collder()
-
-
-func _initialise_cam_targets(targets: Array[EnemyCameraTarget]) -> void:
 	if len(targets) == 0:
 		__log_error("len(targets) == 0", "", "camera_target = null")
 		camera_target = null

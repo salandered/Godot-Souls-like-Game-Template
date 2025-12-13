@@ -72,11 +72,12 @@ static func validate_soft_deps(for_whom: Object) -> bool:
 static func _validate_hard_deps(for_whom: Object, list_: Array[Object]) -> bool:
 	var _r: bool = true
 	var _missing_count := 0
-	
+	var counter := 0
 	for item in list_:
-		if not u.is_object_ok(item, "item in hard deps list"):
+		if not u.is_object_ok(item, pp.s("item", pp.in_sq(counter), "in hard deps list")):
 			_missing_count += 1
 			_r = false
+		counter += 1
 	
 	if not _r:
 		__log_error(pp.s(_pp_for_whom(for_whom), "Missing", _missing_count, "Hard Deps"))
@@ -87,11 +88,13 @@ static func _validate_hard_deps(for_whom: Object, list_: Array[Object]) -> bool:
 static func _validate_soft_deps(for_whom: Object, list_: Array[Object]) -> bool:
 	var _r: bool = true
 	var _missing_count := 0
+	var counter := 0
 	
 	for item in list_:
-		if not u.is_object_ok(item, "item in soft deps list"):
+		if not u.is_object_ok(item, pp.s("item", pp.in_sq(counter), "in soft deps list")):
 			_missing_count += 1
 			_r = false
+		counter += 1
 
 	if not _r:
 		__log_warn(pp.s(_pp_for_whom(for_whom), "Missing", _missing_count, "Soft Deps"))

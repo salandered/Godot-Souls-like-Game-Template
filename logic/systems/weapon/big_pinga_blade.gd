@@ -27,16 +27,13 @@ func get_weapon_visuals() -> MeshInstance3D:
 ## SFX
 
 
-const WEAPON_WHOOSH = preload("uid://qufmydm4eeq4")
-const SWORD_HIT_BONES = preload("uid://g4dtkcleinh8")
-
-
-func _get_weapon_sfx_parent() -> WeaponSFXParent:
+func _for_init_weapon_sfx_parent() -> WeaponSFXParent:
 	return weapon_sfx
 
 
-func _get_weapon_whoosh_stream() -> AudioStream:
-	return WEAPON_WHOOSH
+func _for_init_asp_container() -> BaseWeaponASPConfigContainer:
+	return PingaASPConfigContainer.new()
+	
 
-func _get_hit_weapon_stream() -> AudioStream:
-	return SWORD_HIT_BONES
+func get_sad_container() -> WeaponSADContainer:
+	return WeaponSADContainer.new()

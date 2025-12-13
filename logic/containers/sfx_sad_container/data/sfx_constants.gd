@@ -4,21 +4,25 @@ extends RefCounted
 
 const anim_asp_prefix = "AAnim"
 const modifier_key = "modifier"
+const unique_key = "phase_switch"
 
 ## todo: used as but not checked
 class ID_:
-	## fs
+	## fs like
 	const footstep := "footstep"
+	const footstep_bass := "footstep_bass"
 	const footstep_light := "footstep_light"
 	const footstep_scrape := "footstep_scrape"
+	const move_noise := "move_noise"
+	const jingles := "jingles"
 	
 	##
 	const launch := "launch"
 	const land := "land"
-	const whoosh := "whoosh"
+	const whoosh_char := "whoosh_char"
 
 	##
-	const move_noise := "move_noise"
+	const react_on_hit := "react_on_hit"
 
 	## weapon
 	const whoosh_weapon := "whoosh_weapon"
@@ -26,5 +30,12 @@ class ID_:
 	const hit_target := "hit_target"
 
 
+	## unique
+	const unique := "unique"
+
 class Modifier:
 	const light := "light"
+
+class Unique:
+	const phase_switch := "phase_switch"
+	const accomplish := "accomplish"

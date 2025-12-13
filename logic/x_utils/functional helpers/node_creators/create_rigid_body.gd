@@ -83,7 +83,6 @@ static func _setup_mesh(
 		var mesh_aabb = mesh_instance.mesh.get_aabb()
 		geometry_center = mesh_aabb.get_center()
 		
-		# Just set center of mass - don't offset mesh!
 		rigid_body.center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 		rigid_body.center_of_mass = geometry_center
 		

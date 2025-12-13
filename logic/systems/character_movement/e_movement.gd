@@ -2,18 +2,12 @@ extends BaseCharacterMovement
 class_name EnemyMovement
 
 
-var me: BaseEnemyCharacter
-
 @onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
 @onready var enemy_awareness: EnemyAwareness = %EnemyAwareness
 
 
-func get_character() -> BaseEnemyCharacter:
-	return me
-
-
 func get_player() -> Princess:
-	return get_character().player
+	return get_character().get_player()
 
 
 func is_player() -> bool:
@@ -68,7 +62,7 @@ func look_at_player(grounded: bool = false):
 	var target := get_player().global_position
 	if grounded:
 		target = get_player_position_grounded()
-	u.safe_look_at(me, target, Vector3.UP, true)
+	u.safe_look_at(get_character(), target, Vector3.UP, true)
 
 
 func move_rotate_towards_player(delta: float, speed_config: SpeedConfig = null):

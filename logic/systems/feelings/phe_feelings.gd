@@ -3,7 +3,7 @@ extends BaseFeelings
 class_name PHEFeelings
 
 
-const MAX_HEALTH = 100
+const MAX_HEALTH = 200
 
 func is_player() -> bool:
 	return false

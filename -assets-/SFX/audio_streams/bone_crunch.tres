@@ -1,7 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://ct8xhr3e4gglp"]
-
-[ext_resource type="AudioStream" uid="uid://cm7dfndxy7hy6" path="res://-assets-/SFX/sources/400/crunch_quick__400.wav" id="1_b1h03"]
-
-[resource]
-streams_count = 1
-stream_0/stream = ExtResource("1_b1h03")

@@ -1,5 +1,5 @@
-extends Node
 class_name PlAnimParameters
+extends Node
 
 
 # ANIMATED PARAMS ## VARS HERE CORRESPONDS AS IS TO TRACK IN ANIMATION PLAYER 

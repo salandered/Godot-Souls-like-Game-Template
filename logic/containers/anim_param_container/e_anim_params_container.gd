@@ -1,7 +1,6 @@
-extends Node
-
 ## Reference: Player's version
 class_name EAnimParamsContainer
+extends BaseAnimParamsContainer
 
 
 const VULNERABLE := "vulnerable"
@@ -17,15 +16,20 @@ const DEFAULT_PARAMS: Dictionary[String, bool] = {
 }
 
 
-static func get_all_params() -> Array[String]:
-	print_.note(false, "get_all_params", DEFAULT_PARAMS.keys())
+func get_all_params() -> Array[String]:
+	# print_.note(false, "get_all_params", DEFAULT_PARAMS.keys())
 	return TypeCast.array_of_string(DEFAULT_PARAMS.keys())
+
+func get_track_prefixes() -> Array[String]:
+	return TRACK_PREFIXES
 
 
 const TRACK_PREFIXES: Array[String] = [
 	"%AnimParameters:",
 	"AnimatorManager/NativePlayer/AnimParameters:"]
 
+
+#####################
 
 func is_vulnerable(anim: Animation, timestamp: float) -> bool:
 	# return _get_value_from_track(anim, VULNERABLE, timestamp)

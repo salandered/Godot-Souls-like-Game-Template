@@ -24,6 +24,7 @@ const mark_alt = "✴️"
 
 # important
 const pin = "📌"
+const note = pin
 const pin_alt = "📍"
 const warn = "⚠️"
 const warn_x2 = "⚠️⚠️"
@@ -52,16 +53,19 @@ const play_sfx = "🎵"
 const play_music = "🎶"
 const play_alt = "🔊"
 const mute = "🔇"
-const auido = "🎧"
+const auido_bus = "🎧"
 const disc = "💿"
 const disc_alt = "📀"
 
+# signal
+const signal_ = "🌠"
 
 # elements
 const fire = "🔥"
 const ice = "🧊"
 const lightning = "⚡"
 const water = "💧"
+
 
 # magic
 const magic_orb = "🔮"

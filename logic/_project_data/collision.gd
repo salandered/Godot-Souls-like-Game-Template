@@ -1,5 +1,5 @@
-extends RefCounted
 class_name Collision
+extends RefCounted
 
 ## DOCS
 ## im not really sure about correct separation. Testing this:

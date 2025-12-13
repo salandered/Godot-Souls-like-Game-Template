@@ -5,7 +5,7 @@ extends BaseArea3DCharacterSystem
 class_name CharacterHitbox
 
 ## Docs
-##  - MUST have 'combat' assigned
+##  - MUST have '_combat' assigned
 ## 
 ##  - Character can have any number of hitboxes. 
 ##    Hitbox takes HitData from incoming weapon and passes to BaseCombat
@@ -37,8 +37,7 @@ class_name CharacterHitbox
 # endregion
 
 
-@export var combat: BaseCombat
-
+var _combat: BaseCombat
 
 ## guaranteed one in shape of CapsuleShape3D. can't be zero and not supported several. 
 var _my_coll_shapes: Array[CollisionShape3D]
@@ -48,11 +47,12 @@ var _original_capsule_shape_height: float
 
 func get_hard_dependencies() -> Array[Object]:
 	return [
-		combat
+		_combat
 	]
 
 
-func _ready() -> void:
+func initialise(combat_: BaseCombat) -> void:
+	self._combat = combat_
 	collision_layer = Collision.Layers.HITBOX_AREA
 	collision_mask = Collision.Masks.HITBOX_AREA_MASK
 	
@@ -104,6 +104,11 @@ func _hard_validate() -> bool:
 	return _r
 
 
+## not nullable
+func get_combat() -> BaseCombat:
+	return _combat
+
+
 func _physics_process(delta: float) -> void:
 	if __could_not_initialised():
 		return
@@ -112,13 +117,16 @@ func _physics_process(delta: float) -> void:
 		for area in get_overlapping_areas():
 			on_area_contact(area)
 
+	# if has_overlapping_bodies():
+	# 	pass
+
 
 func pp_name():
 	if __could_not_initialised():
-		return pp.s("miserable not initted, please help", "💢 HitBox")
+		return pp.s("miserable not initted, please help", "💢HitBox")
 
 	var character_name := "Pl" if is_player() else "E"
-	return pp.s(character_name, "💢 HitBox")
+	return pp.s(character_name, "💢HitBox")
 
 # region: shape logic
 
@@ -150,7 +158,7 @@ func restore_hitbox():
 func is_player() -> bool:
 	if __could_not_initialised():
 		return false
-	return combat.is_player()
+	return _combat.is_player()
 
 
 func on_area_contact(incoming_area: Node3D):
@@ -170,7 +178,7 @@ func on_area_contact(incoming_area: Node3D):
 	
 	__log_extra("contact after _is_weapon_mine", incoming_area, weapon)
 	if not weapon.is_attacking():
-		# if combat is PlayerCombat:
+		# if _combat is PlayerCombat:
 		# 	print_.prefix_s("contact", incoming_area, incoming_area.name, incoming_area.get_class())
 		# __log_extra("Not attacking")
 		return
@@ -190,19 +198,17 @@ func on_area_contact(incoming_area: Node3D):
 		__log_error("weapon hit data is null", "on_area_contact", "return")
 		return
 
-	# if combat is PlayerCombat:
+	# if _combat is PlayerCombat:
 		# prints("contact", em.crucial_x2, "/n", em.crucial_x2)
 		
 	# __log_("Calling apply_hit with hit data", hit_data)
-	combat.apply_hit(hit_data)
+	_combat.apply_hit(hit_data)
 
 
 func _is_weapon_mine(weapon: BaseWeapon) -> bool:
-	if weapon.get_holder() == combat.get_character():
+	if weapon.get_holder() == _combat.get_character():
 		return true
 	return false
-	# note: comparing holders is enough for now but we want also to control
-	# certain groups of weapons in the future. See Groups.Weapons 
 
 
 func _to_string() -> String:

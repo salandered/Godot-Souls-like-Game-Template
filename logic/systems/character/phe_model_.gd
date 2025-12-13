@@ -7,7 +7,6 @@ class_name PHCharacter
 @onready var enemy_movement: EnemyMovement = %EnemyMovement
 
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
-@onready var combat: PHECombat = %Combat
 @onready var _top: BasePHEState = %_Top
 @onready var visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
 
@@ -63,7 +62,8 @@ func get_hard_dependencies() -> Array[Object]:
 		enemy_movement,
 		anim_container,
 		animator_manager,
-		combat,
+		get_sig_container(),
+		get_combat(),
 		phe_feelings,
 		_top,
 		visuals_root,
@@ -72,7 +72,7 @@ func get_hard_dependencies() -> Array[Object]:
 func get_soft_dependencies() -> Array[Object]:
 	return [
 		coll_collider,
-		camera_target,
+		# camera_target,
 		sfx_system,
 		e_anim_sfx_sig_emitter,
 		pinga_anim_sfx_sig_emitter,
@@ -81,7 +81,8 @@ func get_soft_dependencies() -> Array[Object]:
 
 
 func initialise() -> void:
-	super.initialise()
+	_initialise_cam_targets()
+	_initialise_coll_collder()
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
@@ -89,53 +90,7 @@ func initialise() -> void:
 	if not __validate_dependencies():
 		return
 
-	var _anim_list := PHEA.new()
-	anim_container._accept_animations(
-		_anim_list.list_of_animations,
-		native_player,
-		EAnimParamsContainer.TRACK_PREFIXES,
-		EAnimParamsContainer.get_all_params(),
-		ERequiredMarkers.anim_to_required_marker) # NOTE: should be before accepting states!
-
-	
-	animator_manager.initialise(native_player, anim_container)
-
-	combat.initialise()
-
-	var e_sig_container := EnemySignalContainer.new()
-
-	## SFX. See Princess for referense
-
-	if sfx_system:
-		var asp_config_container := EnemyASPConfigContainer.new()
-
-		sfx_system.initialise(
-			e_sig_container,
-			asp_config_container,
-			self,
-			BusID.TEST_SFX,
-			{sfx_system.character_additional_data_key: self}
-			)
-	
-		var _e_sad_container := EnemySADContainer.new()
-		e_anim_sfx_sig_emitter.initialise(_e_sad_container, e_sig_container)
-		
-
-		var _link: Dictionary[String, EnemyAnimSFXSignalEmitter] = {
-			WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
-			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
-		}
-		
-		var _weapon_sad_container := WeaponSADContainer.new()
-		var e_weapons := combat.get_all_weapons()
-		for weapon in e_weapons:
-			var _emitter: EnemyAnimSFXSignalEmitter = _link.get(weapon.get_weapon_id())
-			if _emitter:
-				_emitter.initialise(_weapon_sad_container, weapon.get_signal_container())
-
-	
 	config.me = self
-	enemy_movement.me = self
 	container.me = self
 	
 	container.accept_states()
@@ -145,6 +100,46 @@ func initialise() -> void:
 	__validate_deps_set_init()
 
 	_initialise_sm()
+
+
+## cont
+func _for_init_sig_container() -> BaseCharacterSignalContainer:
+	return EnemySignalContainer.new()
+func _for_init_sad_container() -> BaseCharacterSADContainer:
+	return EnemySADContainer.new()
+## anim cont
+func _for_init_anim_container() -> AnimContainer:
+	return anim_container
+func _for_init_anim_params_container() -> BaseAnimParamsContainer:
+	return anim_params_container
+func _for_init_anim_list() -> BaseCharAnimList:
+	return PHEA.new()
+func _for_init_required_markers() -> Dictionary[String, Array]:
+	return ERequiredMarkers.anim_to_required_marker
+## anim
+func _for_init_native_player() -> AnimationPlayer:
+	return native_player
+func _for_init_anim_manager() -> BaseAnimatorManager:
+	return animator_manager
+##
+func _for_init_visuals() -> BaseVisuals:
+	return null ## todo: use in enemy
+func _for_init_bones() -> BaseCharBones:
+	return null ## todo: use in enemy
+func _for_init_movement() -> BaseCharacterMovement:
+	return enemy_movement
+## sfx
+func _for_init_sfx_system() -> CharacterSFXSystem:
+	return sfx_system
+func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
+	return EnemyASPConfigContainer.new()
+func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
+	return e_anim_sfx_sig_emitter
+func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
+	return {
+			WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
+			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
+		}
 
 
 func _initialise_sm():
@@ -241,6 +236,9 @@ func _on_death_raised() -> void:
 	
 	print_.prefix("_trigger_death_scatter()")
 	await _trigger_death_scatter(visuals)
+
+	var sig_data := get_sig_container().get_by_sig_id(SignalID.sfx_unique)
+	u.safe_emit(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
 
 	await FrameUtils.wait_process_frames(5)
 	print_.prefix("coll_collider.disabled = true")

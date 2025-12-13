@@ -15,8 +15,8 @@ extends BaseNode3DCharacterSystem
 ## Also
 # - see SmithSword implementation for basic approach to all this
 
-## assigned by the holder (owner)
-@export var holder: BaseCharacter
+## assigned by the _holder (owner)
+@export var _holder: BaseCharacter
 
 ## managed by implementation
 var _weapon_hurt_box: WeaponHurtBox
@@ -44,13 +44,13 @@ func get_hard_dependencies() -> Array[Object]:
 	return [
 		_weapon_hurt_box,
 		_weapon_hurt_box.get_child(0), # The _weapon_hurt_box must have a CollisionShape3D
-		holder
+		_holder
 	]
 
 func get_soft_dependencies() -> Array[Object]:
 	return [
 		_signal_container,
-		_get_weapon_sfx_parent(),
+		_for_init_weapon_sfx_parent(),
 		_sfx_system
 	]
 
@@ -69,27 +69,30 @@ func _ready() -> void:
 	
 
 	## SFX. Here we r not logging any problems, all be logged using get_soft_dependencies etc
-	var _weapon_sfx := _get_weapon_sfx_parent()
-	if _weapon_sfx and holder: # NOTE: without holder no SFX
-		var asp_config_container := SmithSwordASPConfigContainer.new()
-		var e_sig_container := EnemySignalContainer.new()
+	var _weapon_sfx := _for_init_weapon_sfx_parent()
+	if _weapon_sfx and _holder: # NOTE: without _holder no SFX
 		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)
 		if _sfx_system:
 			_sfx_system.initialise(
 				_signal_container,
-				asp_config_container,
+				_for_init_asp_container(),
 				self,
-				BusID.GAME_SFX,
 				{_sfx_system.weapon_additional_data_key: self}
 			)
 
 	initialise_implementation()
 	__validate_dependencies()
 
+## nullable in theory
+func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
+	return weapon_sfx.get_sfx_system()
+
+@abstract func _for_init_weapon_sfx_parent() -> WeaponSFXParent
+@abstract func _for_init_asp_container() -> BaseWeaponASPConfigContainer
 
 ## nullable but hard checked
 func get_holder() -> BaseCharacter:
-	return holder
+	return _holder
 
 
 ## additional init or validation if needed
@@ -162,21 +165,12 @@ func reset_contact_hitbox_list() -> void:
 # endregion
 
 
-## SFX
-
-
-## nullable
-@abstract func _get_weapon_sfx_parent() -> WeaponSFXParent
-
-
 ## public
 func get_signal_container() -> BaseWeaponSignalContainer:
 	return _signal_container
-
-
-## nullable in theory
-func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
-	return weapon_sfx.get_sfx_system()
+	
+## public
+@abstract func get_sad_container() -> WeaponSADContainer
 
 
 ## in theory could be nullable
@@ -196,6 +190,6 @@ func __LOG_INDENT() -> int:
 
 func _to_string() -> String:
 	return "ID '%s' wepName '%s' Holder '%s' Len of ContactHiBList '%d' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), pp_name(), holder.pp_name(), len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
+		% [str(get_instance_id()), pp_name(), _holder.pp_name(), len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
 
 # endregion

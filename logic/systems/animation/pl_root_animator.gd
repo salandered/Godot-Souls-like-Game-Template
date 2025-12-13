@@ -1,6 +1,6 @@
-extends BaseNodeCharacterSystem
 ## Sub part of PlayerModifierAnimator which calculates root related data
 class_name PlayerRootAnimator
+extends BaseNodeCharacterSystem
 
 @onready var full_body: PlayerModifierAnimator = %FullBody
 

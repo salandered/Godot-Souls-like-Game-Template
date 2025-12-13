@@ -1,5 +1,5 @@
-extends RefCounted
 class_name Leg
+extends RefCounted
 
 # 🦜
 # LEGS BEHAVIOR

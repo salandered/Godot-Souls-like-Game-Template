@@ -226,8 +226,9 @@ func is_interruptable() -> bool:
 
 func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 	var _r: bool = false
+	var _weapon_id := get_player().default_weapon_id
 	match weapon_name:
-		WeaponID.smith_sword:
+		_weapon_id:
 			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
 		_:
 			__log_error("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")

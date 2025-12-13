@@ -61,7 +61,7 @@ func apply_state_filters_for_character(body_area: CharacterHitbox) -> bool:
 		return false
 
 	# non nullable
-	var player := body_area.combat.get_character()
+	var player := body_area.get_combat().get_character()
 	
 	# nullable 
 	var _curr_state := player.get_current_state()

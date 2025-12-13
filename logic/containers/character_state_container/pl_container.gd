@@ -1,19 +1,14 @@
 @tool
 @icon("res://-assets-/x_icons/white/icon_grid.png")
 
-extends BaseNodeCharacterSystem
 class_name PlayerStatesContainer
+extends BaseNodeCharacterSystem
 
 var _player: Princess
+var anim_container: AnimContainer
 
-@onready var legs_sm: LegsSM = %LegsSM
-@onready var player_sm: PlayerSM = %PlayerSM
-@onready var feelings: PlayerFeelings = %Feelings
-@onready var combat: PlayerCombat = %Combat
-@onready var area_awareness: AreaAwareness = %AreaAwareness
-@onready var anim_container: AnimContainer = %AnimContainer
-@onready var animator_manager: PlAnimatorManager = %AnimatorManager
-@onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
+func get_leg_sm() -> LegsSM:
+	return _player.player_sm.legs_sm
 
 
 func is_player() -> bool:
@@ -61,10 +56,10 @@ func l_action_by_name(action_name: String) -> LegsAction:
 	return _r
 
 
-func accept_all_states(player_: Princess, anim_container_: AnimContainer):
-	anim_container = anim_container_
-	
-	_player = player_
+func accept_all_states(character_: Princess, anim_container_: AnimContainer):
+	self.anim_container = anim_container_
+	self._player = character_
+
 	_accept_legs_behaviors()
 	_accept_player_states()
 	_accept_player_actions()
@@ -92,7 +87,7 @@ func _initialise_legs_actions():
 func _accept_player_states() -> void:
 	var states_container := StatesContainer.new()
 
-	for child: BasePlayerState in get_descendants.player_states(player_sm):
+	for child: BasePlayerState in get_descendants.player_states(_player.player_sm):
 		print_.container("", "child.get_name() " + child.get_name())
 		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.get_name())
 		if not state_data:
@@ -133,14 +128,14 @@ func _accept_player_states() -> void:
 
 		# common
 		child._player = _player
-		child.feelings = feelings
-		child.combat = combat
+		child.feelings = _player.feelings
+		child.combat = _player.get_combat()
 		child.container = self
-		child.area_awareness = area_awareness
-		child.player_sm = player_sm
-		child.legs_sm = legs_sm
+		child.area_awareness = _player.area_awareness
+		child.player_sm = _player.player_sm
+		child.legs_sm = get_leg_sm()
 		child.anim_container = anim_container
-		child.animator_manager = animator_manager
+		child.animator_manager = _player.animator_manager
 
 		if not child.legs_behavior:
 			__log_error("No legs_behavior assigned for state: " + child.state_name)
@@ -164,7 +159,7 @@ func _sort_combos_by_priority(combos: Array) -> Array:
 func _accept_player_actions():
 	var states_container := StatesContainer.new()
 	
-	for child: PlayerAction in get_descendants.player_actions(player_sm):
+	for child: PlayerAction in get_descendants.player_actions(_player.player_sm):
 		print_.container("pl_act", "child.get_name() " + child.get_name())
 		var action_data: StatesContainer._PlActionData = states_container.node_to_pl_action.get(child.get_name())
 		
@@ -183,18 +178,18 @@ func _accept_player_actions():
 func __apply_base_action_data(action_data: StatesContainer._BaseActionData, child: BaseAction):
 	child.action_name = action_data.action_name
 	child.motion_type = action_data.motion_type
-	child.player_sm = player_sm
+	child.player_sm = _player.player_sm
 	child.container = self
-	child.feelings = feelings
+	child.feelings = _player.feelings
 	
 	# anim data
 	var anim := anim_container.get_by_anim_id(action_data.anim_id)
 	if not anim:
 		__log_error("No animation found for action: " + child.action_name + " with anim_id: " + action_data.anim_id)
 	child.anim = anim
-	child.animator_manager = animator_manager
+	child.animator_manager = _player.animator_manager
 	child.anim_container = anim_container
-	child.anim_params_container = anim_params_container
+	child.anim_params_container = _player.anim_params_container
 	
 	if not child.action_name or child.action_name.is_empty():
 		__log_error("No action_name assigned for action: " + child.get_name())
@@ -202,7 +197,7 @@ func __apply_base_action_data(action_data: StatesContainer._BaseActionData, chil
 
 func _accept_legs_behaviors():
 	var leg_beh_container := LegBehaviorContainer.new()
-	for child: LegsBehavior in get_descendants.legs_behaviors(legs_sm):
+	for child: LegsBehavior in get_descendants.legs_behaviors(get_leg_sm()):
 		print_.container("", "node.get_name() " + child.get_name())
 		var behavior_data: LegBehaviorContainer._BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
 		if not behavior_data:
@@ -216,10 +211,10 @@ func _accept_legs_behaviors():
 		child.supported_actions = behavior_data.supported_actions
 		
 		# common
-		child.combat = combat
-		child.legs_sm = legs_sm
+		child.combat = _player.get_combat()
+		child.legs_sm = get_leg_sm()
 		child.container = self
-		child.area_awareness = area_awareness
+		child.area_awareness = _player.area_awareness
 
 		if not child.behavior_name or child.behavior_name.is_empty():
 			__log_error("No behavior_name assigned for behavior node: " + child.get_name())
@@ -227,7 +222,7 @@ func _accept_legs_behaviors():
 
 func _accept_legs_actions():
 	var leg_beh_container := LegBehaviorContainer.new()
-	for child: LegsAction in get_descendants.legs_actions(legs_sm):
+	for child: LegsAction in get_descendants.legs_actions(get_leg_sm()):
 		print_.container("", "node.get_name() " + child.get_name())
 		var action_data: LegBehaviorContainer._LActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
 		if not action_data:
@@ -237,7 +232,7 @@ func _accept_legs_actions():
 		_leg_actions[action_data.action_name] = child
 		
 		# base action
-		child.legs_sm = legs_sm
+		child.legs_sm = get_leg_sm()
 		__apply_base_action_data(action_data, child)
 
 		if not child.action_name or child.action_name.is_empty():

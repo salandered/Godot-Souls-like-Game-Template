@@ -29,8 +29,5 @@ func _get_all_weapon_specific_signals() -> Array[SignalData]:
 	return []
 
 
-func __LOG_B() -> bool:
-	return true
-
 func __LOG_INDENT() -> int:
 	return 0

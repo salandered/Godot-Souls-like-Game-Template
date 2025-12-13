@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://ci7nas70yobvm"]
+
+[ext_resource type="AudioStream" uid="uid://dduofhwdrjub8" path="res://-adopting/sfx_sounds/WAV ROUND Packs 1-4/WAV (2)/WAV/Drop_Wood_1_fall_LOWER.wav" id="1_ubrff"]
+[ext_resource type="AudioStream" uid="uid://bdwovjrtb7l4g" path="res://-adopting/sfx_sounds/WAV ROUND Packs 1-4/WAV (2)/WAV/Drop_Wood_2_fall_LOWER.wav" id="2_u2afl"]
+[ext_resource type="AudioStream" uid="uid://cgg6eed4cp7xo" path="res://-adopting/sfx_sounds/WAV ROUND Packs 1-4/WAV (2)/WAV/Drop_Wood_3_fall_LOWER.wav" id="3_nf760"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_ubrff")
+stream_1/stream = ExtResource("2_u2afl")
+stream_2/stream = ExtResource("3_nf760")

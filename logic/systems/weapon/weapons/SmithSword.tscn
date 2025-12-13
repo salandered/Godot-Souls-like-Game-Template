@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://jtkogl4lhvf3"]
+[gd_scene load_steps=8 format=3 uid="uid://jtkogl4lhvf3"]
 
 [ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/systems/weapon/smith_sword.gd" id="1_q502g"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_lfwdn"]
 [ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword/smith_sword_2.glb" id="2_sk2nb"]
 [ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/systems/combat/weapon_sfx/WeaponSfx.tscn" id="4_oli0r"]
+[ext_resource type="AudioStream" uid="uid://dbswu1dm262sj" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/hit_sword.tres" id="5_uo4b3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6hf6c"]
 radius = 0.13134766
@@ -33,6 +34,12 @@ material_override = SubResource("StandardMaterial3D_lfwdn")
 
 [node name="WeaponSFXParent" parent="." instance=ExtResource("4_oli0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58605146, 0)
+
+[node name="HitWeaponPlayer3D2" type="AudioStreamPlayer3D" parent="WeaponSFXParent"]
+unique_name_in_owner = true
+stream = ExtResource("5_uo4b3")
+max_polyphony = 4
+bus = &"game_SFX"
 
 [editable path="WeaponHurtBox"]
 [editable path="WeaponSFXParent"]

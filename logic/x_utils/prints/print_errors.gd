@@ -4,7 +4,7 @@ class_name error_
 
 static func _warn(_msg: String, warn_level: String = WL.PUSH_ERROR):
 	if warn_level == WL.SILENT: return
-	
+
 	_msg = pp.s(em.warn, "WARNING |", _msg)
 	var _msg_crucial = pp.s(em.crucial_x2, _msg)
 	match warn_level:
@@ -126,6 +126,22 @@ static func null_signal(
 		return true
 	if signal_data.signal_obj.is_null():
 		_warn(_err_msg("signal_obj.is_null true", context, signal_data), warn_level)
+		return true
+	return false
+
+
+static func len_one(
+		list_: Variant,
+		context: String = "",
+		warn_level: String = WL.PUSH_ERROR,
+) -> bool:
+	if null_variant(list_, context, warn_level):
+		return true
+	if list_ is not Array:
+		_warn(_err_msg("not Array", context), warn_level)
+		return true
+	if len(list_) != 1:
+		_warn(_err_msg(pp.s("Len is not 1:", len(list_)), context), warn_level)
 		return true
 	return false
 

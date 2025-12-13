@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c37c50ip2o8ol"]
+
+[ext_resource type="AudioStream" uid="uid://bsaxp48f20puq" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/bow_impact.tres" id="4_cfdmv"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.2
+random_volume_offset_db = 0.6
+streams_count = 1
+stream_0/stream = ExtResource("4_cfdmv")

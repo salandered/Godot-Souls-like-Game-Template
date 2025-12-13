@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://cvjhtro1wxx26" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump10_land.wav" id="1_yn6qt"]
 [ext_resource type="AudioStream" uid="uid://bvbdhsw7ruyxg" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump14_land.wav" id="2_5o68b"]
-[ext_resource type="AudioStream" uid="uid://cl6tvs7h5ifg1" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump19_land.wav" id="3_pbv16"]
+[ext_resource type="AudioStream" uid="uid://cl6tvs7h5ifg1" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump19_land_wood_crate.wav" id="3_pbv16"]
 
 [resource]
 streams_count = 3

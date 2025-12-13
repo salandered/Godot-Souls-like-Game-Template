@@ -22,7 +22,14 @@ static func _get_descendants_filtered_with_depth(node: Node, filter: Callable, _
 		descendants.append_array(_get_descendants_filtered_with_depth(child, filter, _depth + 1))
 	return descendants
 
-static func _get_descendants_filtered(node: Node, filter: Callable, one_level: bool = false, skip_subscenes: bool = false) -> Array:
+## only_one - true means return first node that fits the filter
+static func _get_descendants_filtered(
+		node: Node,
+		filter: Callable,
+		one_level: bool = false,
+		skip_subscenes: bool = false,
+		only_one: bool = false
+	) -> Array:
 	var descendants := []
 	for child in node.get_children():
 		var is_scene_root := not child.scene_file_path.is_empty()
@@ -30,6 +37,8 @@ static func _get_descendants_filtered(node: Node, filter: Callable, one_level: b
 			continue
 
 		if filter.call(child):
+			if only_one:
+				return [child]
 			descendants.append(child)
 		if not one_level:
 			descendants.append_array(_get_descendants_filtered(child, filter, one_level))
@@ -93,6 +102,17 @@ static func audio_stream_players_3D(node: Node, skip_subscenes: bool = false) ->
 
 static func breakable_areas(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BreakableArea)
+
+
+static func char_hit_boxes(node: Node) -> Array[CharacterHitbox]:
+	var r = _get_descendants_filtered(node, func(n): return n is CharacterHitbox)
+	r = TypeCast.array_of_char_hit_box(r)
+	return r
+
+
+static func base_combat(node: Node, only_one: bool = false) -> Array[BaseCombat]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseCombat, false, false, only_one)
+	return TypeCast.array_of_base_combat(r)
 
 
 static func base_weapons(node: Node) -> Array[BaseWeapon]:

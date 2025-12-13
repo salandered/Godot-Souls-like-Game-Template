@@ -1,6 +1,6 @@
 [gd_resource type="AnimationLibrary" load_steps=18 format=3 uid="uid://day6xfo1cwebm"]
 
-[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/bg_move_noise.tres" id="1_ppt3q"]
+[ext_resource type="AudioStream" uid="uid://cga1kwd4shtmo" path="res://-assets-/SFX/audio_streams/footsteps/bg_move_noise.tres" id="1_ppt3q"]
 [ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="1_wu5ij"]
 [ext_resource type="AudioStream" uid="uid://qufmydm4eeq4" path="res://-assets-/SFX/audio_streams/whoosh/weapon_whoosh.tres" id="2_qgcir"]
 [ext_resource type="AudioStream" uid="uid://d0p7wlbl03i5r" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_launch.tres" id="2_uuail"]

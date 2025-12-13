@@ -1,8 +1,7 @@
-extends Node
-
 ## TODO: may be switching to anim_id and getting it using AnimContainer
 ## to make this feel more like repository, and not a util getter (right now it could be been static class)
 class_name AnimParamsContainer
+extends BaseAnimParamsContainer
 
 
 # Track names
@@ -25,11 +24,6 @@ const DEFAULT_PARAMS: Dictionary[String, bool] = {
 }
 
 
-static func get_all_params() -> Array[String]:
-	print_.note(false, "get_all_params", DEFAULT_PARAMS.keys())
-	return TypeCast.array_of_string(DEFAULT_PARAMS.keys())
-
-
 ## track's exact path is very fragile. see docs of PlAnimParameters
 static var TRACK_PREFIXES: Array[String] = [
 	"%AnimParameters:",
@@ -37,6 +31,15 @@ static var TRACK_PREFIXES: Array[String] = [
 	"NativeAnimator/AnimParameters:"
 ]
 
+func get_all_params() -> Array[String]:
+	# print_.note(false, "get_all_params", DEFAULT_PARAMS.keys())
+	return TypeCast.array_of_string(DEFAULT_PARAMS.keys())
+
+func get_track_prefixes() -> Array[String]:
+	return TRACK_PREFIXES
+
+
+#################
 
 func is_switches_to_queue(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, SWITCHES_TO_QUEUE, timestamp)

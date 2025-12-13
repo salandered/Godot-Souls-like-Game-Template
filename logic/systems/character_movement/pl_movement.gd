@@ -1,13 +1,8 @@
 extends BaseCharacterMovement
 class_name PlayerMovement
 
-@onready var _player: Princess = $".."
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
-
-
-func get_character() -> Princess:
-	return _player
 
 
 func is_player() -> bool:
@@ -15,9 +10,6 @@ func is_player() -> bool:
 
 ## GETTERS
 # region
-
-func get_player() -> Princess:
-	return _player
 
 
 func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:

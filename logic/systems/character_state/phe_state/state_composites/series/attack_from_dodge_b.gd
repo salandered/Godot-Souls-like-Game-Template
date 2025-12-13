@@ -14,14 +14,21 @@ func get_attack_series_list() -> Array:
 		[PHES.Leaf.dodge_B, PHES.Leaf.attack_360_low],
 		[PHES.Leaf.dodge_B, PHES.Leaf.sword_slide],
 		[PHES.Leaf.dodge_B, PHES.Leaf.gap_closer],
+		[PHES.Leaf.dodge_B, PHES.Leaf.phase_switch],
+		[PHES.Leaf.phase_switch], # funny thing
 	]
 
-
+	
 func pick_series_idx() -> int:
+	var dist := distance_to_player()
+	var switch_boost := 0.2 if dist < config.COMBAT_RAD() else 0.0
+
 	var _idx := ra.ipick_weighted({
 		0: fvalue_angry(0.9, 0.2),
 		1: fvalue_angry(0.05, 0.4),
 		2: fvalue_angry(0.1, 0.6),
+		3: fvalue_angry(0.0, 0.1),
+		4: fvalue_angry(0.0, 0.2 + switch_boost),
 	})
 	return _idx
 

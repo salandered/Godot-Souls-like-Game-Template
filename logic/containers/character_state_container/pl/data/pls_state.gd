@@ -1,5 +1,5 @@
-extends RefCounted
 class_name PS # player states and actions
+extends RefCounted
 
 # STATES
 # fight 

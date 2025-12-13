@@ -31,25 +31,25 @@ func get_weapon() -> BaseWeapon:
 
 func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]:
 	var _list: Array[OnSFXSigASP] = [
-		OnWeaponSFXSigASP.new(
-			self,
+		OnWeaponSFXSigASP.new(self,
 			sig_container.get_by_sig_id(SignalID.sfx_whoosh_weapon),
 			whoosh_weapon_player_3d,
-			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh_weapon)
+			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh_weapon),
 		),
-		OnWeaponSFXSigASP.new(
-			self,
+		OnWeaponSFXSigASP.new(self,
 			sig_container.get_by_sig_id(SignalID.sfx_hit_weapon),
 			hit_weapon_player_3d,
-			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_weapon)
+			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_weapon),
 		),
-		OnWeaponSFXSigASP.new(
-			self,
+		OnWeaponSFXSigASP.new(self,
 			sig_container.get_by_sig_id(SignalID.sfx_hit_target),
 			hit_target_weapon_player_3d,
-			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_target)
+			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_target),
 		),
 	]
+
+	for item: OnSFXSigASP in _list:
+		item._log_tag = get_weapon().get_weapon_id()
 	return _list
 
 

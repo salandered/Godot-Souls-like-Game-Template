@@ -1,6 +1,5 @@
 @tool
-@icon("uid://b5xt1a7igr101")
-extends Node3D
+extends BaseCharBones
 class_name PlayerBones
 
 @onready var right_wrist_marker: Marker3D = $RightWrist/Marker3D

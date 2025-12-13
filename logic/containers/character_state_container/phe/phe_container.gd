@@ -149,7 +149,7 @@ func __accept_base_state(node: BasePHEState, state_data: BaseStData):
 	node.container = self
 	node.anim_container = me.anim_container
 	node.phe_feelings = me.phe_feelings
-	node.combat = me.combat
+	node.combat = me.get_combat()
 	node.animator_manager = me.animator_manager
 	node.e_movement = me.enemy_movement
 	node.anim_params_container = me.anim_params_container

@@ -369,6 +369,24 @@
 				}
 			]
 		},
+		"\\b(true_b)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5afd5ad7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"\\b(false_b)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#569294d7",
+					"fontWeight": "bold",
+				},
+			]
+		},
 		"(get_hard_dependencies)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -436,6 +454,17 @@
 			"decorations": [
 				{
 					"color": "#5da9ff"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(BusID\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#fff784"
 				},
 				{
 					// "color": "#FFEEA1E5",

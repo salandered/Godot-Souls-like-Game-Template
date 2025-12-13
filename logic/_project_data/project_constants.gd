@@ -1,5 +1,5 @@
-extends RefCounted
 class_name Constants
+extends RefCounted
 
 const BIG_MEANINGLESS_NUMBER: float = 99999
 
@@ -28,3 +28,10 @@ const ROOT_TRACK_PATH: String = BONE_TRACK_PREFIX + Constants.ROOT_BONE
 
 const PLAYER_MAX_HIT_DAMAGE: float = 15
 const ENEMY_MAX_HIT_DAMAGE: float = 35
+
+
+## recommended to use everywhere, while make changes via ASPConfig
+const SFX_ASP_BASE_VOL_DB := -1.0
+const SFX_ASP_MAX_VOL_DB := 3.0
+##
+const SFX_ASP_BASE_BUS_ID := BusID.GAME_SFX

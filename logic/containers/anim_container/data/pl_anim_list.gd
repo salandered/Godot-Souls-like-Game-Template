@@ -1,8 +1,8 @@
-extends RefCounted
 class_name PlAnimList
+extends BaseCharAnimList
 
 
-var list_of_animations: Array[AnimationData] = [
+var _list_of_animations: Array[AnimationData] = [
 	## loco
 	AnimationData.new(A.loco.idle),
 	AnimationData.new(A.loco.idle_to_sprint, 1.3),
@@ -62,3 +62,7 @@ var list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.fall_stand_up.thrown_l_small_rm, 1.0),
 
 ]
+
+
+func get_list_of_animations() -> Array[AnimationData]:
+	return _list_of_animations

@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://de0vjaija8veh"]
+
+[ext_resource type="AudioStream" uid="uid://0gkdtskf0qea" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump1_wood_crate.wav" id="1_126as"]
+[ext_resource type="AudioStream" uid="uid://8onyjbfyf13k" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump5_wood_crate.wav" id="2_cmiff"]
+[ext_resource type="AudioStream" uid="uid://cl6tvs7h5ifg1" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump19_land_wood_crate.wav" id="3_ijyf7"]
+
+[resource]
+random_pitch = 1.2
+random_volume_offset_db = 0.5
+streams_count = 3
+stream_0/stream = ExtResource("1_126as")
+stream_1/stream = ExtResource("2_cmiff")
+stream_2/stream = ExtResource("3_ijyf7")

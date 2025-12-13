@@ -2,7 +2,7 @@ extends BaseNode3DSystem
 class_name AAnimParent
 
 var AA_BUS_ID := BusID.AA_MUTED
-var mute_bus: bool = false
+var mute_bus: bool = true # NOTE
 
 
 func _ready():

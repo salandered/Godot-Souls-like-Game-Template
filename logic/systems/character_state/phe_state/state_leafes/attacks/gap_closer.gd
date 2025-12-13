@@ -69,6 +69,8 @@ func update(delta: float):
 			y_root_scale = false
 		e_movement.move_with_root(delta, gap_calculator.get_curr_coef(), true, y_root_scale)
 	else:
+		var sig_data := me.get_sig_container().get_by_sig_id(SignalID.sfx_hit_weapon)
+		u.safe_emit(sig_data, {})
 		APPLY_GRAVITY = true
 		e_movement.move_with_root(delta)
 

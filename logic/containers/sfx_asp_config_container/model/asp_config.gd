@@ -1,4 +1,4 @@
-extends RefCounted
+extends BaseRefCountedLogger
 class_name ASPConfig
 
 
@@ -14,33 +14,65 @@ var max_distance: float
 var max_polyphony: int
 ##
 var panning_strength: float
+var max_db: float
 ##
+var bus_id: String
+## may be null. client code should handle nulls
 var stream: AudioStream
 
 
-var _min_max_vol_db_change: FMinMax = FMinMax.new(-10.0, 15.0)
+var _min_max_vol_db_change: FMinMax = FMinMax.new(-80.0, 15.0)
 var _min_max_pitch_change: FMinMax = FMinMax.new(-0.7, 0.7)
 var _min_max_unit_size: FMinMax = FMinMax.new(0.1, 100.0)
 var _min_max_max_distance: FMinMax = FMinMax.new(0.0, 4096.0 / 4.0)
 var _min_max_max_polyphony: FMinMax = FMinMax.new(1, 16)
 var _min_max_panning_strength: FMinMax = FMinMax.new(0.0, 3.0)
+var _min_max_max_db: FMinMax = FMinMax.new(-1.0, 4.0)
 
 
+var DEF_VOL_DB_CHANGE: float = 0.0
+var DEF_PITCH_CHANGE: float = 0.0
+var DEF_UNIT_SIZE: float = 5.0
+var DEF_MAX_DISTANCE: float = 20.0
+var DEF_MAX_POLYPHONY: int = 4
+var DEF_PANNING_STRENGTH: float = 0.5
+var DEF_BUS_ID: String = Constants.SFX_ASP_BASE_BUS_ID
+
+
+## use INF to apply defaults
 func _init(
-	vol_db_change_: float = 0.0,
-	pitch_change_: float = 0.0,
-	unit_size_: float = 1.0,
-	max_distance_: float = 30.0,
-	max_polyphony_: int = 5,
-	panning_strength_: float = 0.5,
+	vol_db_change_: float = INF,
+	pitch_change_: float = INF,
+	unit_size_: float = INF,
+	max_distance_: float = INF,
+	max_polyphony_: int = -1,
+	panning_strength_: float = INF,
+	bus_id_: String = "",
 	stream_: AudioStream = null,
 ):
+	if vol_db_change_ == INF:
+		vol_db_change_ = DEF_VOL_DB_CHANGE
+	if pitch_change_ == INF:
+		pitch_change_ = DEF_PITCH_CHANGE
+	if unit_size_ == INF:
+		unit_size_ = DEF_UNIT_SIZE
+	if max_distance_ == INF:
+		max_distance_ = DEF_MAX_DISTANCE
+	if max_polyphony_ == -1:
+		max_polyphony_ = DEF_MAX_POLYPHONY
+	if panning_strength_ == INF:
+		panning_strength_ = DEF_PANNING_STRENGTH
+	if bus_id_ == "":
+		bus_id_ = DEF_BUS_ID
+
 	self.vol_db_change = vol_db_change_
 	self.pitch_change = pitch_change_
 	self.unit_size = unit_size_
 	self.max_distance = max_distance_
 	self.max_polyphony = max_polyphony_
 	self.panning_strength = panning_strength_
+	self.bus_id = bus_id_
+	
 	self.stream = stream_
 
 	_validate()
@@ -52,11 +84,40 @@ func _validate() -> void:
 	_min_max_unit_size.clamp(unit_size, true, "unit_size")
 	_min_max_max_distance.clamp(max_distance, true, "max_distance")
 	_min_max_max_polyphony.clamp(max_polyphony, true, "max_polyphony")
+	_min_max_panning_strength.clamp(panning_strength, true, "panning_strength")
 
+	if bus_id == "":
+		bus_id = DEF_BUS_ID
+	if not AudioBusUtil.bus_exists(bus_id):
+		__log_warn_soft(pp.s("bus_id is unknown, using default", "provided/default", bus_id, DEF_BUS_ID))
+		bus_id = DEF_BUS_ID
 
 func _to_string() -> String:
-	return pp.s("VolDbCh/WHPitchCh", vol_db_change, pitch_change,
-		"UnitSz/MaxDist/MaxPolyph/PanningStr", unit_size, max_distance, max_polyphony, panning_strength)
+	return pp.s("Vol/Pitch changes", vol_db_change, pitch_change,
+		"UnitSz/MaxDist/MaxPolyph/PanningStr", unit_size, max_distance, max_polyphony, panning_strength,
+		pp.bus_id(bus_id), "Stream", str(stream) if stream else "[-]")
+
+
+func set_up_asp(some_asp: AudioStreamPlayer3D) -> AudioStreamPlayer3D:
+	some_asp.volume_db = Constants.SFX_ASP_BASE_VOL_DB
+	some_asp.volume_db += vol_db_change
+
+	some_asp.pitch_scale = 1.0
+	some_asp.pitch_scale += pitch_change
+
+	some_asp.unit_size = unit_size
+	some_asp.max_distance = max_distance
+	some_asp.max_polyphony = max_polyphony
+	some_asp.panning_strength = panning_strength
+
+	some_asp.bus = bus_id
+
+	## prevents erasing stream if config's stream is null and some_asp's already has its own
+	if stream:
+		some_asp.stream = stream
+	
+
+	return some_asp
 
 
 ## A BIT OF TRIVIA
@@ -145,3 +206,10 @@ func _to_string() -> String:
 # Characteristics: Requires the most variety/randomness to avoid the "same puddle" effect.
 
 # endregion
+
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0

@@ -101,8 +101,11 @@ func works_less_than_commitment() -> bool:
 
 func react_on_hit(hit: HitData):
 	__log_phe("react_on_hit, will lose health", pp.in_q(hit))
-	# animator_manager.set_overlay_anim()
+	
 	phe_feelings.lose_health(hit.damage)
+
+	var _sig_data := me.get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
+	u.safe_emit(_sig_data, {}, true)
 
 	var react_cfg := ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
 	if not react_cfg:
@@ -114,7 +117,6 @@ func react_on_hit(hit: HitData):
 	var actual_overlay_weight := react_cfg.overlay_weight
 	var actual_bone_mask := react_cfg.bone_mask
 
-	phe_feelings.get_curr_health()
 
 	var overlay_config := OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
