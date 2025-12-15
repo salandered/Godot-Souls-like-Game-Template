@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b6tpdgol8yavy"]
 
-[ext_resource type="Texture2D" uid="uid://diibq45ofm173" path="res://-assets-/materials-shared/_images/tower-map_Wood.jpg" id="1_4eosh"]
+[ext_resource type="Texture2D" uid="uid://l8nkm5rrxd0m" path="res://-assets-/materials-shared/_images/tower-map_Wood.jpg" id="1_4eosh"]
 
 [resource]
 resource_name = "Wood"

@@ -1,6 +1,6 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://cntg7xya48dal"]
 
-[ext_resource type="AudioStream" uid="uid://bqj7ucl8o864x" path="res://-adopting/sfx_sounds/Swords & Blades SFX Pack/Sword Impact/Sword Impact 02_phase_switch.wav" id="1_eca05"]
+[ext_resource type="AudioStream" uid="uid://bqj7ucl8o864x" path="res://-assets-/SFX/sources/sword and blade/Sword Impact 02_phase_switch.wav" id="1_eca05"]
 
 [resource]
 streams_count = 1

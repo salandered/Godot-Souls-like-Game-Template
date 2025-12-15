@@ -1,6 +1,7 @@
 extends RefCounted
 class_name BusID
 
+## WARNING: should be aligned with actual buses!
 
 ## master
 const MASTER_ := "Master"
@@ -15,8 +16,8 @@ const GAME_SFX := "game_SFX"
 
 
 ## dev
-const TEST_SFX := "test_SFX"
-const AA_MUTED := "AA_muted"
+const TEST_SFX := "_t_SFX"
+const AA_MUTED := "_t_AA_muted"
 
 
 # todo: try later

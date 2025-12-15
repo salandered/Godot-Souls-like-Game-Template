@@ -1,8 +1,8 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bn5qnh0d7vy7d"]
 
-[ext_resource type="Texture2D" uid="uid://0e33kdr6s0bh" path="res://-assets-/materials-shared/_images/tower-map_rusty_metal_04_diff_1k.jpg" id="1_120hk"]
-[ext_resource type="Texture2D" uid="uid://beorrt7etb8wc" path="res://-assets-/materials-shared/_images/tower-map_rusty_metal_04_metal-rusty_metal_04_rough.png" id="2_lh3q8"]
-[ext_resource type="Texture2D" uid="uid://dbcdic7yvpg1x" path="res://-assets-/materials-shared/_images/tower-map_rusty_metal_04_nor_gl.png" id="3_7drpd"]
+[ext_resource type="Texture2D" uid="uid://cb7am4w0sg2kd" path="res://-assets-/materials-shared/_images/tower-map_rusty_metal_04_diff_1k.jpg" id="1_120hk"]
+[ext_resource type="Texture2D" uid="uid://d2op5cqr42dql" path="res://-assets-/materials-shared/_images/tower-map_rusty_metal_04_metal-rusty_metal_04_rough.png" id="2_lh3q8"]
+[ext_resource type="Texture2D" uid="uid://cwxfue38w0l2k" path="res://-assets-/materials-shared/_images/tower-map_rusty_metal_04_nor_gl.png" id="3_7drpd"]
 
 [resource]
 resource_name = "rusty_metal_04"

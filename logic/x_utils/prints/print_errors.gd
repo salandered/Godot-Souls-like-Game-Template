@@ -2,33 +2,41 @@ extends RefCounted
 class_name error_
 
 
-static func _warn(_msg: String, warn_level: String = WL.PUSH_ERROR):
+static var _last_warn_msg = ""
+
+static func _warn(warn_msg: String, warn_level: String = WL.PUSH_ERROR):
 	if warn_level == WL.SILENT: return
 
-	_msg = pp.s(em.warn, "WARNING |", _msg)
-	var _msg_crucial = pp.s(em.crucial_x2, _msg)
+	warn_msg = pp.s(em.warn, "WARNING |", warn_msg)
+
+
+	if warn_msg == _last_warn_msg:
+		log.prefix_s(false, "\t\t |", warn_msg, "same message again")
+		return
+	_last_warn_msg = warn_msg
+
 	match warn_level:
 		## soft equals warn here
 		WL.SILENT:
 			pass
 		WL.WARN:
-			print("\t", _msg)
+			log.prefix_s(true, "\t", warn_msg)
 		WL.WARN_CRUCIAL:
-			print("\t", _msg_crucial)
+			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
 		WL.ASSERT:
-			print("\t", _msg_crucial)
-			push_error(_msg_crucial) # important!
-			assert(false, _msg_crucial)
+			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			push_error(pp.s(em.crucial_x2, warn_msg)) # important!
+			assert(false, pp.s(em.crucial_x2, warn_msg))
 		WL.PUSH_ERROR:
-			print("\t", _msg_crucial)
-			push_error(_msg_crucial)
+			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			push_error(pp.s(em.crucial_x2, warn_msg))
 		WL.PUSH_WARN:
-			print("\t", _msg_crucial)
-			push_warning(_msg)
+			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			push_warning(warn_msg)
 		_:
-			prints("\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
-			print("\t", _msg_crucial)
-			push_error(_msg_crucial)
+			log.prefix_s(true, "\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
+			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			push_error(pp.s(em.crucial_x2, warn_msg))
 
 
 static func warn(
@@ -84,7 +92,7 @@ static func empty_list(
 ) -> bool:
 	if null_variant(list_, context, warn_level):
 		return true
-	if list_ is not Array:
+	if list_ is not Array and list_ is not PackedStringArray:
 		_warn(_err_msg("not Array", context), warn_level)
 		return true
 	if list_.is_empty():

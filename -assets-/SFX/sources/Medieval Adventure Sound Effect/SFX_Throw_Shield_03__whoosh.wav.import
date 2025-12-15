@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cm0kd2ik3gnjx"
+path="res://.godot/imported/SFX_Throw_Shield_03__whoosh.wav-64201d47b550650dca4b8a4aa1250f33.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Throw_Shield_03__whoosh.wav"
+dest_files=["res://.godot/imported/SFX_Throw_Shield_03__whoosh.wav-64201d47b550650dca4b8a4aa1250f33.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

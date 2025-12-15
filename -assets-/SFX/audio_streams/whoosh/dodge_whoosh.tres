@@ -1,8 +1,8 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://dfn8yjds0ntkf"]
 
-[ext_resource type="AudioStream" uid="uid://uh7rnqjucgup" path="res://-adopting/sfx_sounds/Minifantasy_Dungeon_SFX/jump/12_human_jump_1_whoosh.wav" id="1_xvnb4"]
-[ext_resource type="AudioStream" uid="uid://m57qi3rs2kkp" path="res://-adopting/sfx_sounds/Minifantasy_Dungeon_SFX/jump/12_human_jump_2_whoosh.wav" id="2_m33ll"]
-[ext_resource type="AudioStream" uid="uid://2us2w8kbrxwp" path="res://-adopting/sfx_sounds/Minifantasy_Dungeon_SFX/jump/12_human_jump_3_whoosh.wav" id="3_jxjqh"]
+[ext_resource type="AudioStream" uid="uid://uh7rnqjucgup" path="res://-assets-/SFX/sources/mini fantasy/12_human_jump_1_whoosh.wav" id="1_xvnb4"]
+[ext_resource type="AudioStream" uid="uid://m57qi3rs2kkp" path="res://-assets-/SFX/sources/mini fantasy/12_human_jump_2_whoosh.wav" id="2_m33ll"]
+[ext_resource type="AudioStream" uid="uid://2us2w8kbrxwp" path="res://-assets-/SFX/sources/mini fantasy/12_human_jump_3_whoosh.wav" id="3_jxjqh"]
 
 [resource]
 playback_mode = 1

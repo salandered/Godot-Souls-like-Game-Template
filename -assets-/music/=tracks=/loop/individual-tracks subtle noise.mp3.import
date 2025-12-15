@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dh4jetn5i8x0q"
+path="res://.godot/imported/individual-tracks subtle noise.mp3-a832eb8b7f7a006f02f4ce34a1591645.mp3str"
+
+[deps]
+
+source_file="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise.mp3"
+dest_files=["res://.godot/imported/individual-tracks subtle noise.mp3-a832eb8b7f7a006f02f4ce34a1591645.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

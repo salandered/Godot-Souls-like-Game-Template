@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b23hx3uab42sh"
+uid="uid://bpsl3cn4hq15m"
 path.s3tc="res://.godot/imported/tower-map_roots_nor_gl_8k.png-30ab073ca4cc5afab24ae4f70717061d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -30,7 +30,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://-assets-/GLB-level/tower map/tower-map_roots_nor_gl_8k.png"
+roughness/src_normal="res://-assets-/GLB-level/minimal-arena/tower/tower-map_roots_nor_gl_8k.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

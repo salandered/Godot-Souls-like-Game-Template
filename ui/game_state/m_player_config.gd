@@ -1,5 +1,5 @@
 class_name M_PlayerConfig
-extends Object
+extends ObjectStaticLogger
 
 ## Interface for a single configuration file [ConfigFile].
 
@@ -38,12 +38,12 @@ static func set_config(section: String, key: String, value) -> void:
 static func get_config(section: String, key: String, default = null) -> Variant:
 	load_config_file()
 	if section == "" or key == "":
-		__log_ui.warn_("empty section or key was asked", "get_config", "return null", "section/key/default", [section, key, default])
+		__log_warn("empty section or key was asked", "get_config", "return null", "section/key/default", [section, key, default])
 		return null
 
 	if not config_file.has_section_key(section, key):
 		if default == null:
-			__log_ui.warn_("Config key missing and NO default provided", "get_config", "return null", "section/key/default", [section, key, default])
+			__log_warn("Config key missing and NO default provided", "get_config", "return null", "section/key/default", [section, key, default])
 			return null
 		return default # if no key but default => return immediately
 	
@@ -72,3 +72,16 @@ static func get_section_keys(section: String) -> PackedStringArray:
 	if config_file.has_section(section):
 		return config_file.get_section_keys(section)
 	return PackedStringArray()
+
+
+# region: __LOGS
+static func pp_name() -> String:
+	return "M_PlayerConfig"
+
+static func __LOG_B() -> bool:
+	return true
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+
+# endregion

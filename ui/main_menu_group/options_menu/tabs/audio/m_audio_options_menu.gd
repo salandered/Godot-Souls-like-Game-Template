@@ -10,7 +10,11 @@ func _on_bus_changed(bus_value: float, bus_iter: int) -> void:
 	M_AppSettings.set_bus_volume(bus_iter, bus_value)
 
 func _add_audio_control(bus_name: String, bus_value: float, bus_iter: int) -> void:
-	if audio_control_scene == null or bus_name in hide_busses or bus_name.begins_with(M_AppSettings.SYSTEM_BUS_NAME_PREFIX):
+	if audio_control_scene == null \
+		or bus_name in hide_busses \
+		or bus_name.begins_with(M_AppSettings.SYSTEM_BUS_NAME_PREFIX) \
+		or bus_name.begins_with(AudioServerUtil.DEV_BUS_PREFIX) \
+		or bus_name.begins_with(AudioServerUtil.TEST_BUS_PREFIX):
 		return
 	var audio_control = audio_control_scene.instantiate()
 	%AudioControlContainer.call_deferred("add_child", audio_control)

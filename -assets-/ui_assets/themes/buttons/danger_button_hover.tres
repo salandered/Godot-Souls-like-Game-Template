@@ -1,9 +1,8 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dwiur47lj262s"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1j0yl"]
-load_path = "res://.godot/imported/wZZNl7ooWl.png-89aee342f0b8c84824800b901ab32938.ctex"
+[ext_resource type="Texture2D" uid="uid://b4qf0w7eu1ajq" path="res://-assets-/ui_assets/themes/buttons/wZZNl7ooWl.png" id="1_pb1cd"]
 
 [resource]
-texture = SubResource("CompressedTexture2D_1j0yl")
+texture = ExtResource("1_pb1cd")
 region_rect = Rect2(5.5, 36.71791, 647, 77.78209)
 modulate_color = Color(0.9999996, 0.7756998, 0.76168317, 1)

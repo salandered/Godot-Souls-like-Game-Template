@@ -1,8 +1,8 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://duynryxm8g4wc"]
 
-[ext_resource type="Texture2D" uid="uid://ccbmgflf4kfet" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_metal_8_basecolor-1K.png" id="1_uvje6"]
-[ext_resource type="Texture2D" uid="uid://4gq543injky3" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_metal_8_metallic-1K.png" id="2_snl8f"]
-[ext_resource type="Texture2D" uid="uid://dw630bqekfpdc" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_metal_8_normal-1K.png" id="3_ftjbj"]
+[ext_resource type="Texture2D" uid="uid://ccbmgflf4kfet" path="res://-assets-/materials-shared/_images/tower-map_metal_8_basecolor-1K.png" id="1_uvje6"]
+[ext_resource type="Texture2D" uid="uid://4gq543injky3" path="res://-assets-/materials-shared/_images/tower-map_metal_8_metallic-1K.png" id="2_snl8f"]
+[ext_resource type="Texture2D" uid="uid://dw630bqekfpdc" path="res://-assets-/materials-shared/_images/tower-map_metal_8_normal-1K.png" id="3_ftjbj"]
 
 [resource]
 resource_name = "I_metal_8-ZpW-1K"

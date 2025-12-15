@@ -1,4 +1,4 @@
-extends BaseRefCountedSystem
+extends RefCountedSystem
 class_name FMinMax
 
 

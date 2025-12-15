@@ -50,7 +50,7 @@ static func _process_single_surface(mesh: Mesh, idx: int, mat: Material, node_na
 			return
 
 	var save_path = _get_mat_save_path(mat_resource_name)
-	__log_script.info_("PATH_CALC", "EnemyCameraTarget Path Calculated for mat", pp.in_q(mat_resource_name), ": ", pp.in_q(save_path))
+	__log_script.info_("PATH_CALC", "Path Calculated for mat", pp.in_q(mat_resource_name), ": ", pp.in_q(save_path))
 
 
 	if FileAccess.file_exists(save_path):

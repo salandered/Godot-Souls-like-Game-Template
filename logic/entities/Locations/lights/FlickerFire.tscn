@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://fbyv2s2mo6cx"]
 
 [ext_resource type="Script" uid="uid://bayep8qmvo0vg" path="res://logic/entities/Locations/lights/flicker_omni.gd" id="1_udkd7"]
-[ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://-adopting/crystal_light_3d/stylized_fire.gdshader" id="2_3rxf7"]
+[ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://-assets-/shaders/gdquest-like/stylized_fire.gdshader" id="2_3rxf7"]
 [ext_resource type="AudioStream" uid="uid://84u5xg7sdbmx" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Torch/Torch Loop.wav" id="3_l6wkp"]
 
 [sub_resource type="Animation" id="Animation_xbmjo"]
@@ -156,5 +156,10 @@ draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_twjvv")
 draw_pass_1 = SubResource("QuadMesh_oyfpb")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("3_l6wkp")
+unit_size = 8.0
+pitch_scale = 0.6
+max_distance = 20.0
+bus = &"game_SFX"

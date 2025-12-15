@@ -1,9 +1,9 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://d3ahq7du2874o"]
 
-[ext_resource type="AudioStream" uid="uid://bwji21tnbun7y" path="res://-adopting/sfx_sounds/Footstep N Packs/Concrete/land/ConcreteJump7_land.wav" id="3_e152u"]
-[ext_resource type="AudioStream" uid="uid://b3nfc2bn2sofu" path="res://-adopting/sfx_sounds/Footstep N Packs/Concrete/land/ConcreteSteps 46-Audio_land_clean.wav" id="4_4o8v8"]
-[ext_resource type="AudioStream" uid="uid://b2yjajddnay8q" path="res://-adopting/sfx_sounds/Footstep N Packs/Concrete/land/ConcreteJump13_land.wav" id="4_bxmel"]
-[ext_resource type="AudioStream" uid="uid://ckjc7ihj6mqqv" path="res://-adopting/sfx_sounds/Footstep N Packs/Concrete/land/ConcreteJump15_land.wav" id="5_aovrj"]
+[ext_resource type="AudioStream" uid="uid://bwji21tnbun7y" path="res://-assets-/SFX/sources/pack_N2/ConcreteJump7_land.wav" id="3_e152u"]
+[ext_resource type="AudioStream" uid="uid://b3nfc2bn2sofu" path="res://-assets-/SFX/sources/pack_N2/ConcreteSteps 46-Audio_land_clean.wav" id="4_4o8v8"]
+[ext_resource type="AudioStream" uid="uid://b2yjajddnay8q" path="res://-assets-/SFX/sources/pack_N2/ConcreteJump13_land.wav" id="4_bxmel"]
+[ext_resource type="AudioStream" uid="uid://ckjc7ihj6mqqv" path="res://-assets-/SFX/sources/pack_N2/land/ConcreteJump15_land.wav" id="5_aovrj"]
 
 [resource]
 streams_count = 4

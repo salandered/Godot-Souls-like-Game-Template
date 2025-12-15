@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=4 uid="uid://djsyfeinr8lew"]
+[gd_scene load_steps=139 format=4 uid="uid://djsyfeinr8lew"]
 
 [ext_resource type="Script" uid="uid://bbu6a8vu2wl7k" path="res://ui/main_menu_group/main_menu/menu_3d_scene.gd" id="1_m6ugi"]
 [ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/shaders/gdquest-like/sky/blue_sky.tres" id="1_tyxoo"]
@@ -15,15 +15,14 @@
 [ext_resource type="Material" uid="uid://bs5u4ivfkqnoq" path="res://-assets-/materials-shared/mines/MinesTrim.011.tres" id="9_ae31p"]
 [ext_resource type="Material" uid="uid://cl8xvgflj5omt" path="res://-assets-/materials-shared/baked/engel/Engel_C.002_Baked.tres" id="10_wlu0h"]
 [ext_resource type="Material" uid="uid://cij8qltchxrj" path="res://-assets-/materials-shared/concrete/damaged_dark_concrete/damaged_concrete_columns_lighter_cleaner.tres" id="11_p5g02"]
-[ext_resource type="Material" uid="uid://d33tt3x8yfdmu" path="res://-assets-/materials-shared/unsorted/concrete_floor_damaged_01.001.tres" id="13_bdepm"]
-[ext_resource type="PackedScene" uid="uid://ta367bodbhjs" path="res://-assets-/animations/GLB-packed/basic_packs/single/sitting_WRAPPER.tscn" id="16_ae31p"]
+[ext_resource type="PackedScene" uid="uid://ta367bodbhjs" path="res://-assets-/animations/GLB-packed/single_/sitting_WRAPPER.tscn" id="16_ae31p"]
 [ext_resource type="PackedScene" uid="uid://dgkn42tpvmre7" path="res://-assets-/GLB-char/skeleton-16-07/skeleton_16_07_WRAPPER.tscn" id="16_bdepm"]
 [ext_resource type="Material" uid="uid://c714v1c087ob5" path="res://-assets-/materials-shared/MinesTrim.001.tres" id="17_wsm5k"]
-[ext_resource type="Texture2D" uid="uid://brvvc7u5hgfon" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_plaster_grey_04_diff_1k.jpg" id="18_ur5qw"]
-[ext_resource type="Texture2D" uid="uid://jxyyvy63hcoh" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_plaster_grey_04_rough_1k.png" id="19_0yewr"]
+[ext_resource type="Texture2D" uid="uid://brvvc7u5hgfon" path="res://-assets-/materials-shared/_images/tower-map_plaster_grey_04_diff_1k.jpg" id="18_ur5qw"]
+[ext_resource type="Texture2D" uid="uid://jxyyvy63hcoh" path="res://-assets-/materials-shared/_images/tower-map_plaster_grey_04_rough_1k.png" id="19_0yewr"]
 [ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood.tres" id="19_ur5qw"]
-[ext_resource type="Texture2D" uid="uid://cr0a33mwhw10j" path="res://-assets-/GLB-level/minimal-arena/tower/tower-map_plaster_grey_04_nor_4k.png" id="20_mxlls"]
-[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/demo_arena/dark_crate.tscn" id="21_mxlls"]
+[ext_resource type="Texture2D" uid="uid://cr0a33mwhw10j" path="res://-assets-/materials-shared/_images/tower-map_plaster_grey_04_nor_4k.png" id="20_mxlls"]
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/props/dark_crate.tscn" id="21_mxlls"]
 [ext_resource type="Material" uid="uid://bn5qnh0d7vy7d" path="res://-assets-/materials-shared/metal/rusty_metal_04.tres" id="22_5sy76"]
 [ext_resource type="Material" uid="uid://b6tpdgol8yavy" path="res://-assets-/materials-shared/wood/Wood.tres" id="23_stc1j"]
 [ext_resource type="Material" uid="uid://b26g51liid0ew" path="res://-assets-/materials-shared/rocks-stone/B Stone Dirt Wall 02.tres" id="24_gde5t"]
@@ -486,9 +485,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_v631w")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhbry"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 0.24
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_en0ik"]
+albedo_color = Color(0.12662369, 0.12662369, 0.12662369, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_iu3qf"]
 _surfaces = [{
@@ -512,7 +510,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 1746,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUABAAIAAcABwAIAAkACgALAAwACgANAAsADgAPABAADgARAA8AEgATABQAEgAVABMAFgAXABgAFgAZABcAFgAaABkAGQAaABsAHAAdAB4AHwAdABwAHQAfACAAHQAgACEAIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsAKgAuAC0ALQAuAC8AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEAQABEAEMAQwBEAEUARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAZgBqAGkAaQBqAGsAbABtAG4AbABvAG0AcABxAHIAcwBxAHAAcQBzAHQAcQB0AHUAdgB3AHgAdgB5AHcAegB7AHwAfQB7AHoAewB9AH4AewB+AH8AgACBAIIAgACDAIEAhACFAIYAhQCEAIcAhwCEAIgAhQCHAIkAigCLAIwAigCNAIsAjgCPAJAAjgCRAI8AkgCTAJQAlQCTAJIAkwCVAJYAkwCWAJcAmACZAJoAmACbAJkAmACcAJsAmwCcAJ0AngCfAKAAoQCfAJ4AoQCiAJ8AogChAKMAogCjAKQAogCkAKUApgCnAKgApgCpAKcAqgCrAKwAqgCtAKsArgCvALAArgCxAK8ArgCyALEAsQCyALMAtAC1ALYAtAC3ALUAuAC5ALoAuAC7ALkAvAC9AL4AvAC/AL0AwADBAMIAwADDAMEAxADFAMYAxADHAMUAxADIAMcAxwDIAMkAygDLAMwAzQDLAMoAywDNAM4AywDOAM8A0ADRANIA0ADTANEA1ADVANYA1ADXANUA2ADZANoA2ADbANkA3ADdAN4A3ADfAN0A4ADhAOIA4QDgAOMA4wDgAOQA4QDjAOUA5gDnAOgA5wDmAOkA6QDmAOoA5wDpAOsA7ADtAO4A7ADvAO0A7QDvAPAA7wDsAPEA8gDzAPQA8gD1APMA9gD3APgA9wD2APkA9wD5APoA+wD8AP0A/AD7AP4A/AD+AP8AAAEBAQIBAAEDAQEBBAEFAQYBBAEHAQUBBQEHAQgBBwEEAQkBCgELAQwBCgENAQsBCwENAQ4BDQEKAQ8BEAERARIBEQEQARMBEQETARQBFQEWARcBGAEWARUBFgEYARkBGQEYARoBFgEZARsBHAEdAR4BHQEcAR8BHwEcASABHQEfASEBIgEjASQBIwEiASUBJQEiASYBIwElAScBKAEpASoBKQEoASsBKQErASwBLQEuAS8BLQEwAS4BLQExATABMAExATIBMwE0ATUBMwE2ATQBNAE2ATcBNgEzATgBOQE6ATsBOgE5ATwBOgE8AT0BPgE/AUABPgFBAT8BQgFDAUQBQgFFAUMBRgFHAUgBRwFGAUkBRwFJAUoBSwFMAU0BSwFOAUwBTwFQAVEBTwFSAVABUAFSAVMBUgFPAVQBVQFWAVcBVQFYAVYBWQFaAVsBWQFcAVoBXQFeAV8BXgFdAWABYAFdAWEBXgFgAWIBYwFkAWUBYwFmAWQBZwFoAWkBZwFqAWgBawFsAW0BbAFrAW4BbgFrAW8BcAFxAXIBcAFzAXEBcQFzAXQBcwFwAXUBdgF3AXgBdgF5AXcBdwF5AXoBeQF2AXsBfAF9AX4BfAF/AX0BgAGBAYIBgAGDAYEBhAGFAYYBhQGEAYcBhwGEAYgBhQGHAYkBigGLAYwBiwGKAY0BiwGNAY4BjwGQAZEBkAGPAZIBkgGPAZMBkAGSAZQBlQGWAZcBlQGYAZYBlgGYAZkBmAGVAZoBmwGcAZ0BmwGeAZwBnwGgAaEBnwGiAaABowGkAaUBowGmAaQBpgGjAacBpgGnAagBqQGqAasBqgGpAawBrAGpAa0BqgGsAa4BrwGwAbEBrwGyAbABsgGvAbMBsgGzAbQBtQG2AbcBtQG4AbYBuQG6AbsBuQG8AboBvQG+Ab8BvgG9AcABvgHAAcEBwgHDAcQBwgHFAcMBxgHHAcgBxgHJAccBygHLAcwBygHNAcsBzgHPAdABzgHRAc8B0gHTAdQB0gHVAdMB1gHXAdgB1gHZAdcB2gHbAdwB2wHaAd0B3QHaAd4B2wHdAd8B4AHhAeIB4QHgAeMB4wHgAeQB4QHjAeUB5gHnAegB5gHpAecB6gHrAewB6gHtAesB7gHvAfAB7gHxAe8B8gHzAfQB8wHyAfUB9QHyAfYB8wH1AfcB+AH5AfoB+AH7AfkB/AH9Af4B/AH/Af0BAAIBAgICAAIDAgECBAIFAgYCBAIHAgUCCAIJAgoCCQIIAgsCCQILAgwCDQIOAg8CDQIQAg4CEQISAhMCEQIUAhICFQIWAhcCFgIVAhgCGAIVAhkCFgIYAhoCGwIcAh0CGwIeAhwCHwIgAiECHwIiAiACIwIkAiUCIwImAiQCJwIoAikCJwIqAigCKwIsAi0CKwIuAiwCLwIwAjECMAIvAjICMgIvAjMCMAIyAjQCNQI2AjcCNgI1AjgCNgI4AjkCOgI7AjwCOgI9AjsCPgI/AkACPgJBAj8CQgJDAkQCQgJFAkMCRgJHAkgCRgJJAkcCSgJLAkwCSgJNAksCTgJPAlACTgJRAk8CUgJTAlQCUgJVAlMCVgJXAlgCVgJZAlcCVwJZAloCWQJWAlsCXAJdAl4CXAJfAl0CYAJhAmICYAJjAmECZAJlAmYCZAJnAmUCaAJpAmoCaAJrAmkCbAJtAm4CbwJtAmwCbQJvAnACbQJwAnECcgJzAnQCcgJ1AnMCdgJ3AngCdgJ5AncCegJ7AnwCegJ9AnsCfgJ/AoACfwJ+AoECgQJ+AoICfwKBAoMChAKFAoYChQKEAocChwKEAogChQKHAokCigKLAowCigKNAosCiwKNAo4CjQKKAo8CkAKRApICkAKTApEClAKVApYClAKXApUCmAKZApoCmAKbApkCnAKdAp4CnAKfAp0CoAKhAqICoAKjAqECpAKlAqYCpAKnAqUCqAKpAqoCqAKrAqkCrAKtAq4CrAKvAq0CsAKxArICsQKwArMCswKwArQCsQKzArUCtgK3ArgCtgK5ArcCugK7ArwCvQK+Ar8CwALBAsICwALDAsECxALFAsYCxwLIAskCygLLAswCzQLLAsoCzgLLAs0CywLOAs8CywLPAtAC0ALPAtEC0ALRAtIC0wLUAtUC1gLTAtcC2ALTAtYC1ALTAtgC1ALYAtkC1ALZAtoC1ALaAtsC3ALdAt4C3ALfAt0C4ALhAuIC4ALjAuEC5ALlAuYC5ALnAuUC6ALpAuoC6ALrAukC7ALtAu4C7ALvAu0C8ALxAvIC8ALzAvEC9AL1AvYC9AL3AvUC+AL5AvoC+AL7AvkC/AL9Av4C/AL/Av0CAAMBAwIDAAMDAwEDBAMFAwYDBAMHAwUDCAMJAwoDCAMLAwkDDAMNAw4DDAMPAw0DEAMRAxIDEAMTAxEDFAMVAxYDFAMXAxUDGAMZAxoDGAMbAxkDHAMdAx4DHAMfAx0DIAMhAyIDIAMjAyEDJAMlAyYDJAMnAyUDKAMpAyoDKAMrAykDLAMtAy4DLwMtAywDLwMwAy0DLQMwAzEDMAMvAzIDMAMyAzMDMAMzAzQDNQM2AzcDOAM2AzUDOQM2AzgDNgM5AzoDNgM6AzsDOwM6AzwDOwM8Az0DPgM/A0ADPgNBAz8DQgNDA0QDQgNFA0MDQwNFA0YDRQNCA0cDRwNCA0gDRwNIA0kDSgNLA0wDSgNNA0sDTgNPA1ADTgNRA08DUgNTA1QDUgNVA1MDVgNXA1gDVgNZA1cDWgNbA1wDWgNdA1sDXgNfA2ADXgNhA18DXwNhA2IDYQNeA2MDYwNeA2QDYwNkA2UDZgNnA2gDZgNpA2cDagNrA2wDagNtA2sDbgNvA3ADbgNxA28DcgNzA3QDcgN1A3MDdgN3A3gDdwN2A3kDeQN2A3oDdwN5A3sDfAN9A34DfAN/A30DgAOBA4IDgwOBA4ADgQODA4QDgQOEA4UDhgOHA4gDhgOJA4cDhwOJA4oDiwOJA4YDiQOLA4wDiQOMA40DjgOPA5ADjgORA48DjwORA5IDkQOOA5MDkwOOA5QDkQOTA5UDlgOXA5gDlgOZA5cDmgObA5wDmgOdA5sDngOfA6ADngOhA58DogOjA6QDogOlA6MDpgOnA6gDpgOpA6cDqgOrA6wDqgOtA6sDrgOvA7ADrgOxA68DsgOzA7QDsgO1A7MDtgO3A7gDtgO5A7cDugO7A7wDugO9A7sDvgO/A8ADvgPBA78DwgPDA8QDwgPFA8MDxgPHA8gDxgPJA8cDygPLA8wDywPKA80DzQPKA84DywPNA88D0APRA9ID0QPQA9MD0wPQA9QD0QPTA9UD1gPXA9gD1gPZA9cD2gPbA9wD2gPdA9sD3gPfA+AD3gPhA98D4gPjA+QD4wPiA+UD4wPlA+YD5wPoA+kD5wPqA+gD6wPsA+0D6wPuA+wD7wPwA/ED7wPyA/AD8wP0A/UD9APzA/YD9AP2A/cD"),
-"material": SubResource("StandardMaterial3D_uxwf2"),
+"material": SubResource("StandardMaterial3D_en0ik"),
 "name": "I_metal_8-ZpW-1K",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -521,9 +519,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_iu3qf")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6qas"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_x22yf"]
 _surfaces = [{
@@ -2211,7 +2206,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20794296, 0, 0.080841064)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_gvyar")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("6_m6ugi")
 
 [node name="cross column" type="MeshInstance3D" parent="Visuals/LINCOLN_MOVING/lincoln__visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8146973e-06, 0, -3.8146973e-06)
@@ -2224,47 +2218,39 @@ transform = Transform3D(0.35382202, -0.08465077, -0.9314742, -0.00050006434, 0.9
 gi_mode = 0
 mesh = SubResource("ArrayMesh_pxrmk")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_xhbry")
 
 [node name="FireFlicker" parent="Visuals/LINCOLN_MOVING/lincoln__visuals/Torch_Metal_004" instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.99999934, -1.8626451e-09, 1.4901161e-08, -3.7252903e-09, 0.9999993, 3.678724e-08, -2.9802322e-08, -2.7008355e-08, 0.99999946, -0.04214859, 0.61118865, 0.6103897)
 speed_scale = 0.2
-__csg = false
 
 [node name="Torch_Metal_005" type="MeshInstance3D" parent="Visuals/LINCOLN_MOVING/lincoln__visuals"]
 transform = Transform3D(0.011615306, -0.10862328, -0.9940153, 0.0007529184, 0.99408287, -0.10862188, 0.9999323, 0.0005132705, 0.01162836, 10.991764, -2.9057493, 3.802168)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_ujwo4")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_n6qas")
 
 [node name="FireFlicker2" parent="Visuals/LINCOLN_MOVING/lincoln__visuals/Torch_Metal_005" instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.9999991, 9.313226e-10, -7.450581e-09, 4.656613e-09, 0.999999, 8.614734e-09, 0, -3.7136488e-08, 0.99999875, 0.06554794, 0.689145, 0.50798607)
 speed_scale = 0.15
-__csg = false
 
 [node name="Torch_Metal_006" type="MeshInstance3D" parent="Visuals/LINCOLN_MOVING/lincoln__visuals"]
 transform = Transform3D(-0.99652267, 0.0097963335, 0.082746446, 0.00075291854, 0.99408287, -0.10862188, -0.08332092, -0.10818189, -0.99063337, -8.748521, -3.6043751, 17.245438)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_ujwo4")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_n6qas")
 
 [node name="FireFlicker2" parent="Visuals/LINCOLN_MOVING/lincoln__visuals/Torch_Metal_006" instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.9999991, 9.313226e-10, -7.450581e-09, 4.656613e-09, 0.999999, 8.614734e-09, 0, -3.7136488e-08, 0.99999875, 0.06554794, 0.689145, 0.50798607)
-__csg = false
 
 [node name="Torch_Metal_007" type="MeshInstance3D" parent="Visuals/LINCOLN_MOVING/lincoln__visuals"]
 transform = Transform3D(-0.99652267, 0.009796331, 0.082746446, 0.00075291854, 0.99408287, -0.10862188, -0.08332092, -0.10818191, -0.99063337, -18.645481, -3.6043751, 17.29095)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_ujwo4")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_n6qas")
 
 [node name="FireFlicker2" parent="Visuals/LINCOLN_MOVING/lincoln__visuals/Torch_Metal_007" instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.9999991, 9.313226e-10, -7.450581e-09, 4.656613e-09, 0.999999, 8.614734e-09, 0, -3.7136488e-08, 0.99999875, 0.06554794, 0.689145, 0.50798607)
 speed_scale = 0.17
-__csg = false
 
 [node name="beams etc" type="Node3D" parent="Visuals/LINCOLN_MOVING/lincoln__visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.505049, -8.056721, -27.383673)
@@ -2470,7 +2456,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20794296, 0, 0.080841064)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_gvyar")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("6_m6ugi")
 
 [node name="cross column" type="MeshInstance3D" parent="Visuals/LINCOLN_FAR/lincoln__visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8146973e-06, 0, -3.8146973e-06)
@@ -2533,14 +2518,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20794296, 0, 0.080841064)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_gvyar")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("6_m6ugi")
 
 [node name="cross column" type="MeshInstance3D" parent="Visuals/LINCOLN_FAR2/lincoln__visuals"]
 transform = Transform3D(-0.9213345, -0.21875584, 0.32138586, -0.28036314, 0.94655925, -0.15944329, -0.26933175, -0.23700532, -0.93342876, -15.711641, -10.834532, 1.442482)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_elvei")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("13_bdepm")
 
 [node name="cross column2" type="MeshInstance3D" parent="Visuals/LINCOLN_FAR2/lincoln__visuals"]
 transform = Transform3D(0.65433, 0.9086215, 2.1777506, -0.5598159, -2.1356318, 1.0592521, 2.292334, -0.7809068, -0.3629402, 45.000908, -6.499341, 16.064594)
@@ -2621,7 +2604,6 @@ cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_84m81")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("13_bdepm")
 
 [node name="Plane_011" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(0.2033942, 0.08798461, 0.15969202, -0.051308468, 0.25719517, -0.076355465, -0.1749579, 0.026859408, 0.20803925, -81.106636, -1.8877449, -5.8394623)
@@ -2629,7 +2611,6 @@ cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_84m81")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("13_bdepm")
 
 [node name="Plane_012" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(-0.06730897, 0.041000515, -0.2615349, -0.023209866, 0.26790306, 0.047972143, 0.26370972, 0.034043867, -0.06253165, 117.34024, -18.415226, -14.426559)
@@ -2637,10 +2618,9 @@ cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_84m81")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("13_bdepm")
 
 [node name="skeleton" type="Node3D" parent="."]
-transform = Transform3D(-0.49730462, 0, 1.1096594, 0, 1.2159998, 0, -1.1096594, 0, -0.49730462, -2.7468114, -0.35721165, 7.821806)
+transform = Transform3D(-0.39223677, 0, 1.1510025, 0, 1.216, 0, -1.1510025, 0, -0.39223677, -2.5261335, -0.35721165, 7.821806)
 
 [node name="skeleton-16-07" parent="skeleton" instance=ExtResource("16_bdepm")]
 

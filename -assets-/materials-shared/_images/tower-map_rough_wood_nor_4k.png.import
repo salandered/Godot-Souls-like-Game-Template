@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bchowxxvv5uth"
+uid="uid://5t8fe5ga8une"
 path.s3tc="res://.godot/imported/tower-map_rough_wood_nor_4k.png-336dc7e02fc4e1c9e20af1cce8d06479.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -30,7 +30,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://-assets-/GLB-level/tower map/tower-map_rough_wood_nor_4k.png"
+roughness/src_normal="res://-assets-/GLB-level/minimal-arena/tower/tower-map_rough_wood_nor_4k.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

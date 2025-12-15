@@ -1,8 +1,6 @@
 extends RefCounted
 class_name print_
 
-const _FRAME_PRINT := true
-
 
 ## COMMON
 
@@ -189,65 +187,23 @@ static func _generic(
 
 static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	var result_freq := maxi(global_freq, arg_freq)
-	assert(result_freq > 0)
 
 	if result_freq == 1 or u.ifr() % result_freq == 0:
 		return true
 	return false
 
-static var _last_prefix_msg = ""
+static func note(bright: bool, ...parts: Array):
+	var _msg = em.pin_alt + "NOTE (not warn) " + pp.list_(parts)
+	if bright: _msg = em.mark_x2 + _msg
+	print("\t", _msg)
 
-static func prefix_s(...parts: Array[Variant]):
-	if parts.is_empty():
-		parts = ["empty prefix", "empty text"]
-	var _prefix = str(parts[0])
-	var _msg = pp.list_(parts.slice(1))
-	prefix(_prefix, _msg)
 
 static func prefix(prefix_: String, text: String = "", info_indents: int = 0):
-	var tabs_prefix := __calculate_tab_prefix(info_indents)
-	
-	prefix_ = prefix_.strip_edges()
-	prefix_ = pp.in_sq(prefix_)
-	
-	var fr_ := ""
-	if _FRAME_PRINT:
-		var _metka := " "
-		if u.ifr() % 15 == 0 and u.ifr() != 0:
-			_metka = "-"
-		if u.ifr() % 60 == 0 and u.ifr() != 0:
-			_metka = "x"
-		fr_ = "%6s" % [u.sfr() + "|" + _metka + " "]
-	
-	var result_msg = tabs_prefix + "  " + prefix_ + "  " + text
-	
-	if result_msg == _last_prefix_msg:
-		print("%4s" % ["| "], result_msg)
-		return
+	log.prefix(false, prefix_, text, info_indents)
 
-	_last_prefix_msg = result_msg
-	print(fr_, result_msg)
 
-static func __calculate_tab_prefix(info_indents: int) -> String:
-	var cache: Dictionary[int, String] = {
-		0: "",
-		1: "    ",
-		2: "        ",
-		3: "            ",
-		4: "                ",
-		6: "                        ",
-		8: "                                ",
-		10: "                                        ",
-		16: "                                                                ",
-	}
-	if cache.has(info_indents):
-		return cache[info_indents]
-
-	var tabs_prefix = ""
-	if info_indents:
-		for i in range(info_indents):
-			tabs_prefix += "    "
-	return tabs_prefix
+static func prefix_s(...parts: Array):
+	log.prefix_s(false, pp.list_(parts))
 
 
 class ParsedPrefix:
@@ -258,6 +214,13 @@ class ParsedPrefix:
 		prefix = prefix_
 		index = index_
 
+
+## "Tree" -> ("Tree", 0)
+## "LOD 1" -> ("LOD", 1)
+## "Wall Brick 05" -> ("Wall Brick", 5)  # <-- check
+## "Level 2 Boss" -> ("Level 2 Boss", 0)
+## "" -> ("", 0)
+## "2" -> ("2", 0)
 static func parse_prefix(encoded_prefix_: String) -> ParsedPrefix:
 	var parts := encoded_prefix_.split(" ", false)
 
@@ -288,21 +251,20 @@ static func parse_prefix(encoded_prefix_: String) -> ParsedPrefix:
 # region: UNSORTED
 
 
-static func node_info(node: Node, prefix_: String = "", info_indents: int = 0):
-	## detailed information about the given node
-	if prefix_:
-		print(prefix_)
-
-	var tabs_prefix := __calculate_tab_prefix(info_indents)
-
-	print(tabs_prefix, "Node name: ", node.name)
-	print(tabs_prefix, "Node type: ", node.get_class())
-	print(tabs_prefix, "Node path: ", node.get_path())
-	# print("Is inside tree:", node.is_inside_tree())
-	# print("Parent:", node.get_parent())
-	# print("Children count:", node.get_child_count())
-	# var groups = node.get_groups()
-	# print("Groups:", ", ".join(groups) if groups.size() > 0 else "(none)")
+## detailed info about the given node
+static func node_info(node: Node):
+	if not node:
+		return "no node"
+	
+	prefix_s("", "Node name: ", node.name)
+	prefix_s("", "Node name: ", node.name)
+	prefix_s("", "Node type: ", node.get_class())
+	prefix_s("", "Node path: ", node.get_path())
+	prefix_s("", "Is inside tree:", node.is_inside_tree())
+	prefix_s("", "Parent:", node.get_parent())
+	prefix_s("", "Children count:", node.get_child_count())
+	var groups = node.get_groups()
+	prefix_s("Groups:", ", ".join(groups) if groups.size() > 0 else "(none)")
 
 
 static func collisions(node: Node, info_indents: int = 0, layer_: bool = true):
@@ -333,12 +295,6 @@ static func __get_bit_position(value: int) -> int:
 		if value & (1 << i):
 			return i
 	return -1
-
-
-static func note(bright: bool, ...parts: Array):
-	var _msg = em.pin_alt + "NOTE (not warn) " + pp.list_(parts)
-	if bright: _msg = em.mark_x2 + _msg
-	print("\t", _msg)
 
 
 # endregion

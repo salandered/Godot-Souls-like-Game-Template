@@ -2,6 +2,10 @@
 class_name M_ListOptionControl
 extends M_OptionControl
 
+
+## for Display Mode: something like: 0 2 3 4
+
+
 ## Locks Option Titles from auto-updating when editing Option Values.
 ## Intentionally put first for initialization.
 @export var lock_titles: bool = false
@@ -38,7 +42,7 @@ func _on_option_values_changed() -> void:
 
 func _on_setting_changed(value: Variant) -> void:
 	if value == null:
-		__log_ui.warn_("value is null", "_on_setting_changed", "return null")
+		__log_warn("value is null", "_on_setting_changed", "return null")
 		return
 	if value < custom_option_values.size() and value >= 0:
 		super._on_setting_changed(custom_option_values[value])
@@ -61,21 +65,54 @@ func _match_value_to_other(value: Variant, other: Variant) -> Variant:
 		return int(round(value))
 	return value
 
-func _set_value(value: Variant) -> Variant:
-	if option_values.is_empty(): return
+
+## overrides
+func _set_value(value: Variant, on_init: bool = false) -> Variant:
+	__log_(name, "_set_value starts", "Incoming value", pp.in_q(value), "| On initialisation 🦕." if on_init else "")
+	__log_(name, "Current option_values", option_values)
+	if option_values.is_empty():
+		__log_warn_soft("option_values.is_empty()", "_set_value", "Returning early", name)
+		return
+		
 	if value == null:
+		__log_(name, "Value is null", "Selecting -1")
 		return super._set_value(-1)
+
 	custom_option_values = option_values.duplicate()
 	value = _match_value_to_other(value, custom_option_values.front())
+	
+	# Check if we are adding a new custom value
 	if value not in custom_option_values and typeof(value) == property_type:
+		__log_(name, "Value not found in list", "Adding custom value", value)
 		custom_option_values.append(value)
 		custom_option_values.sort()
+	
+	__log_(name, "lock_titles status", lock_titles)
 	_set_titles_from_values()
-	if value not in option_values:
-		disable_option(custom_option_values.find(value))
-	value = custom_option_values.find(value)
-	return super._set_value(value)
+	
+	# Check for mismatch between data and UI
+	var ui_count = %OptionButton.item_count
+	var data_count = custom_option_values.size()
+	__log_(name, "Counts", "UI Button Items", ui_count, "Data List Items", data_count)
+	
+	if ui_count != data_count:
+		__log_error("ui_count != data_count", "_set_value", "", "UI Count vs Data Count", ui_count, data_count)
 
+	# Check the value we are about to set
+	if value not in option_values:
+		var disable_idx = custom_option_values.find(value)
+		__log_(name, "Disabling option index", disable_idx)
+		disable_option(disable_idx)
+	
+	var final_index = custom_option_values.find(value)
+	__log_(name, "Final calculated index", final_index)
+	
+	if final_index >= ui_count:
+		__log_error("final_index >= ui_count", "_set_value", "", "Index vs Max UI Index:", final_index, ui_count - 1)
+
+	return super._set_value(final_index)
+	
+	
 func _set_option_list(option_titles_list: Array) -> void:
 	%OptionButton.clear()
 	for option_title in option_titles_list:

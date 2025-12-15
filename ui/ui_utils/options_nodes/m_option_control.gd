@@ -1,6 +1,6 @@
 @tool
 class_name M_OptionControl
-extends Control
+extends ControlLogger
 
 signal setting_changed(value)
 
@@ -88,17 +88,29 @@ func _ready() -> void:
 			TYPE_COLOR: default_value = Color.WHITE
 			TYPE_VECTOR2I: default_value = Vector2i(1152, 648) # resolution
 			TYPE_VECTOR2: default_value = Vector2(1152, 648)
-			_: __log_ui.warn_("non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
+			_: __log_warn("non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
 		
 		if default_value != null:
-			__log_ui.warn_("Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
+			__log_warn("Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
 
 	if default_value == null:
-		__log_ui.warn_("Option Control has NULL default_value", "M_OptionControl", "", "Option Name/Section/Key", [option_name, section, key])
+		__log_warn("Option Control has NULL default_value", "M_OptionControl", "", "Option Name/Section/Key", [option_name, section, key])
 
-	_set_value(_get_setting(default_value))
+	var value_from_settings: Variant = _get_setting(default_value)
+	
+	__log_(name + "_ready🦕", pp.s_in_q(
+		"Option Name (User side)", option_name,
+		"Section/Key in config file", [section, key],
+		"Option section", option_section,
+		"propery type", property_type,
+		"lock_config_names", lock_config_names))
+	
+	__log_(name + "_ready🦕", pp.s_in_q("def val", default_value, "returned val from settings", value_from_settings))
+	_set_value(value_from_settings, true)
+
 	for child in get_children():
 		_connect_option_inputs(child)
+
 	child_entered_tree.connect(_connect_option_inputs)
 
 
@@ -127,7 +139,7 @@ func _connect_option_inputs(node) -> void:
 		node.text_changed.connect(_on_setting_changed)
 		_connected_nodes.append(node)
 
-func _set_value(value: Variant) -> Variant:
+func _set_value(value: Variant, on_init: bool = false) -> Variant:
 	if value == null:
 		return
 	for node in get_children():

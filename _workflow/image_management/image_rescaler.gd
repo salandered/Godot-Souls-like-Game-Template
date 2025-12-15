@@ -1,15 +1,17 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/GLB-char/player/pl-skeleton-ranger/"
+const TARGET_FOLDER = "res://-assets-/materials-shared/_images/"
 ## WARNING: only jpg and png supported. And use lower case
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 ## will be ignored of contains
 const IGNORE_WORDS = ["pixel", "pixpal"]
-const TARGET_SCALE_STR = "05k" # Options: "1k", "05k" etc
+const TARGET_SCALE_STR = "1k" # Options: "1k", "05k" etc
 
 
 const OVERWRITE_ORIGINALS = true # true = replace originals, false = create _d1k versions
+# if was processed wo overwrite, image has postfix. Whether to skip such files when overwriting
+const SKIP_ALREADY_PROCESSED_WHEN_OVERWRITE = true
 const FORCE_8BIT_NORMALS = true # Convert normal maps to 8-bit per channel
 const NORMAL_MAP_KEYWORDS = ["norm", "normal", "nrm", "nor_gl"]
 
@@ -95,40 +97,32 @@ func _process_file(dir: DirAccess, source_file_name: String, target_image_size: 
 	
 	for ignore_word in IGNORE_WORDS:
 		if source_base_name.to_lower().contains(ignore_word.to_lower()):
-			__log_script.info_("⏭️", "Skipping file with ignored word", source_file_name, ignore_word)
+			__log_script.info_("⏭️", "Skipping file with ignored word", pp.in_q(source_file_name), pp.in_q(ignore_word))
 			return
 
-	if not extension_ in IMAGE_EXTENSIONS:
-		return
+	__log_script.info_("🖼️", "Processing file", pp.in_q(source_file_name)) ## main log
 
-	__log_script.info_("🖼️", "Processing file", source_file_name)
-
-	# if source_base_name.ends_with(_get_target_file_suffix()):
-	# 	__log_script.info_("⏭️", "Skipping already processed file", source_file_name)
-	# 	return
-	
 	# Only check for suffix if not overwriting originals
-	if not OVERWRITE_ORIGINALS:
+	if not OVERWRITE_ORIGINALS or (OVERWRITE_ORIGINALS and SKIP_ALREADY_PROCESSED_WHEN_OVERWRITE):
 		if source_base_name.ends_with(_get_target_file_suffix()):
-			__log_script.info_("⏭️", "Skipping already processed file", source_file_name)
+			__log_script.info_("⏭️ 2", "Skipping already processed file", pp.in_q(source_file_name))
 			return
 
 	var full_path = TARGET_FOLDER + "/" + source_file_name
 
 	var texture = load(full_path) as Texture2D
 	if not texture:
-		__log_script.error_("", "Failed to load texture", source_file_name, "Skipping")
+		__log_script.error_("- 2", "Failed to load texture", pp.in_q(source_file_name), "Skipping")
 		return
 
 	var img := texture.get_image()
 
 	if not img:
-		__log_script.error_("", "Failed to get image from texture", source_file_name, "Skipping")
+		__log_script.error_("- 2", "Failed to get image from texture", pp.in_q(source_file_name), "Skipping")
 		return
 	
 	var is_normal_map = _is_normal_map(source_file_name)
-	if is_normal_map:
-		__log_script.info_("🗺️", "Detected normal map")
+	# if is_normal_map: __log_script.info_("🗺️ 2", "Detected normal map")
 	
 	var r = _resize_image(img, target_image_size, is_normal_map)
 	if not r:
@@ -153,12 +147,12 @@ func _process_file(dir: DirAccess, source_file_name: String, target_image_size: 
 
 	if err == OK:
 		var save_type = "Overwritten" if OVERWRITE_ORIGINALS else "Saved as"
-		__log_script.info_("🖼️✅",
+		__log_script.info_("🖼️✅ 2",
 			"All good for", pp.in_q(source_file_name),
 			save_type + ":", pp.in_q(target_base_name)
 		)
 	else:
-		__log_script.error_("", "Failed to save file", target_base_name, "move to next", "Error Code:", err)
+		__log_script.error_("- 2", "Failed to save file", target_base_name, "move to next", "Error Code:", err)
 
 
 func _is_normal_map(filename: String) -> bool:
@@ -178,9 +172,9 @@ func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> b
 	# Decompress first (needed for both resizing and bit depth conversion)
 	if img.is_compressed():
 		var err = img.decompress()
-		__log_script.info_("Image was compressed, going to decompress.")
+		# __log_script.info_("Image was compressed, going to decompress.")
 		if err != OK:
-			__log_script.error_("", "Failed to decompress image", "Error:", err)
+			__log_script.error_("- 2", "Failed to decompress image", "Error:", err)
 			return false
 	
 	# Convert normal maps to 8-bit (even if not resizing)
@@ -189,7 +183,7 @@ func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> b
 	
 	# Check if resize needed
 	if max_dim <= target_image_size:
-		__log_script.info_("⏭️", "Skipping resize, already smaller than target", target_image_size, "Current size:", _get_size_with_x(width, height))
+		__log_script.info_("⏭️ 2", "Skipping resize, already <= than target. Size:", _get_size_with_x(width, height), "Target:", pp.in_q(target_image_size))
 		# Still return true if we converted bit depth
 		return is_normal_map and FORCE_8BIT_NORMALS
 
@@ -199,17 +193,17 @@ func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> b
 	
 
 	img.resize(new_width, new_height, Image.INTERPOLATE_LANCZOS)
-	__log_script.info_("🖼️✅",
+	__log_script.info_("🖼️✅ 2",
 			"Resized to", _get_size_with_x(new_width, new_height),
 			"From:", _get_size_with_x(width, height)
 		)
 	return true
 
-
+# 🎨
 func _convert_to_8bit(img: Image):
 	var original_format = img.get_format()
 	img.convert(Image.FORMAT_RGB8)
-	__log_script.info_("🎨", "Converted to 8-bit RGB", "From format:", original_format)
+	__log_script.info_("🗺️ 2", "Converted to 8-bit RGB", "From format:", original_format)
 
 
 func _get_size_with_x(width: int, height: int) -> String:

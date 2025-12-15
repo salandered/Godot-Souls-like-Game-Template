@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://dl7w5h28u6d36"]
+
+[ext_resource type="Script" uid="uid://cpfh86vdgd0ep" path="res://logic/c_systems/camera/fancy-camera/fancy_camera.gd" id="1_16fd4"]
+[ext_resource type="Script" uid="uid://bib68l3buxn3j" path="res://logic/c_systems/camera/fancy-camera/camera_movement.gd" id="2_bu8o1"]
+[ext_resource type="Script" uid="uid://cdvueio120xey" path="res://logic/c_systems/camera/fancy-camera/locked_state.gd" id="2_cq342"]
+[ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/c_systems/camera/fancy-camera/free_state.gd" id="3_wpkwu"]
+[ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/c_systems/camera/fancy-camera/camera_nest.gd" id="5_sttfw"]
+[ext_resource type="PackedScene" uid="uid://carduerw3k1il" path="res://-assets-/ui_assets/target_circle.tscn" id="6_tlnea"]
+[ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/shaders/target_dot.gdshader" id="7_r7icc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lfwa"]
+albedo_color = Color(1, 0.991667, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lptl"]
+albedo_color = Color(1, 0.16, 0.174, 1)
+metallic = 0.4
+
+[sub_resource type="PlaceholderMaterial" id="PlaceholderMaterial_k82lp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5k2h"]
+next_pass = SubResource("PlaceholderMaterial_k82lp")
+albedo_color = Color(0.5425946, 0.46944708, 0.06763061, 1)
+
+[sub_resource type="PlaceholderMaterial" id="PlaceholderMaterial_bi67l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6recs"]
+next_pass = SubResource("PlaceholderMaterial_bi67l")
+albedo_color = Color(0.552941, 0.180392, 0.180392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e4lf"]
+albedo_color = Color(0.0884501, 0.61, 0.061, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k82lp"]
+albedo_color = Color(0.140835, 0.982483, 0.0937185, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7x54"]
+render_priority = 0
+shader = ExtResource("7_r7icc")
+shader_parameter/color = Color(1, 0.75, 0.97916675, 0.44313726)
+shader_parameter/ring_radius = 0.05
+shader_parameter/ring_thickness = 0.02
+
+[node name="FancyCamera" type="Node"]
+script = ExtResource("1_16fd4")
+
+[node name="CameraMovement" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_bu8o1")
+
+[node name="CameraMount" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CameraMount"]
+transform = Transform3D(0.973625, 0, 0, 0, 0.795634, 0, 0, 0, 0.415539, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6lfwa")
+size = Vector3(0.289307, 0.341797, 0.743164)
+
+[node name="FocusPoint" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="FocusPoint"]
+material_override = SubResource("StandardMaterial3D_7lptl")
+radius = 0.2
+
+[node name="LockedCamera" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_cq342")
+
+[node name="FreeCamera" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_wpkwu")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 8.986408e-09, -8.695968e-08, 0, 0.9947028, 0.10279253, 8.742278e-08, 0.10279253, -0.9947028, 0, 1.62121, -3.1620932)
+current = true
+fov = 62.0
+far = 1000.0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="PlayerCamera"]
+transform = Transform3D(0.64345056, 8.881784e-16, 1.4210855e-13, 7.5495166e-15, 0.61953735, 1.4901161e-08, -6.750156e-14, -7.450581e-09, 0.76491296, 0, 0, 0.017)
+visible = false
+material_override = SubResource("StandardMaterial3D_c5k2h")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="PlayerCamera/CSGBox3D2"]
+transform = Transform3D(0.238554, 0, 0, 0, 0.231617, 1.937151e-07, 0, -4.8428774e-08, 0.910368, 0, 0.04557979, -0.44181585)
+material_override = SubResource("StandardMaterial3D_6recs")
+
+[node name="CameraNest" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3441956, -2.6694846)
+visible = false
+script = ExtResource("5_sttfw")
+
+[node name="CSGSphereNest2" type="CSGSphere3D" parent="CameraNest"]
+unique_name_in_owner = true
+transform = Transform3D(0.49291146, 0, 3.5527137e-15, 0, 0.58407485, 0, 0, 0, 0.5692398, -1.9487203e-08, 0, 0.22290754)
+material_override = SubResource("StandardMaterial3D_3e4lf")
+radius = 0.7
+
+[node name="CSGSphereNest3" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+unique_name_in_owner = true
+transform = Transform3D(0.20524, 0, 0, 0, 0.330627, 0, 0, 0, 0.23652, 0.0364853, -0.737425, 0)
+material_override = SubResource("StandardMaterial3D_k82lp")
+radius = 0.7
+
+[node name="CSGSphereNest6" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+unique_name_in_owner = true
+transform = Transform3D(0.20524, 0, 0, 0, 0.330627, 0, 0, 0, 0.23652, 0.0364853, 0.74965703, 0)
+material_override = SubResource("StandardMaterial3D_k82lp")
+radius = 0.7
+
+[node name="CSGSphereNest4" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0017194, -0.330616, 0, 0.205233, -0.00276983, 0, 0, 0, 0.23652, 0.771236, 0.015276194, 0)
+material_override = SubResource("StandardMaterial3D_k82lp")
+radius = 0.7
+
+[node name="CSGSphereNest5" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0017194, -0.330616, 0, 0.205233, -0.00276983, 0, 0, 0, 0.23652, -0.755577, 0.015276194, 0)
+material_override = SubResource("StandardMaterial3D_k82lp")
+radius = 0.7
+
+[node name="test" type="Camera3D" parent="CameraNest" groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
+
+[node name="CircleTarget" parent="." instance=ExtResource("6_tlnea")]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_u7x54")

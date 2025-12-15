@@ -1,7 +1,7 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://b5fdpyqtk8gtm"]
 
-[ext_resource type="AudioStream" uid="uid://dec8nsool144m" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodOneShots/WoodSteps 89-Audio_hit_impact.wav" id="1_he8h1"]
-[ext_resource type="AudioStream" uid="uid://xexqcox8txwj" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodOneShots/WoodSteps 37-Audio_sword_wood_impact.wav" id="3_kqxjc"]
+[ext_resource type="AudioStream" uid="uid://dec8nsool144m" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 89-Audio_hit_impact.wav" id="1_he8h1"]
+[ext_resource type="AudioStream" uid="uid://xexqcox8txwj" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 37-Audio_sword_wood_impact.wav" id="3_kqxjc"]
 
 [resource]
 streams_count = 2

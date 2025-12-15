@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dsiirkuy2swh0"
+path="res://.godot/imported/SFX_Throw_01_whoosh.wav-09f8ca4a6856a697c8190179767c7d2f.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Throw_01_whoosh.wav"
+dest_files=["res://.godot/imported/SFX_Throw_01_whoosh.wav-09f8ca4a6856a697c8190179767c7d2f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

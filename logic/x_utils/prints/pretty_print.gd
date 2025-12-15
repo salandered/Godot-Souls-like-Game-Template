@@ -28,6 +28,17 @@ static func s(...parts: Array) -> String:
 		r += " "
 	return r
 
+static func s_in_q(...parts: Array) -> String:
+	var edited_parts: Array = []
+	var even: bool = true
+	for part in parts:
+		if even:
+			edited_parts.append(part)
+		else:
+			edited_parts.append(pp.in_q(part))
+		even = not even
+	return list_(edited_parts)
+
 
 # region: in 
 

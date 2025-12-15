@@ -1,5 +1,5 @@
 class_name M_AppSettings
-extends Node
+extends NodeStaticLogger
 ## Interface to read/write general application settings through [M_PlayerConfig].
 
 const INPUT_SECTION = &'InputSettings'
@@ -234,10 +234,23 @@ static func remove_developer_actions() -> void:
 	if OS.is_debug_build():
 		return
 
-	__log_ui.info_("M_AppSettings", "Release Build detected: Purging developer actions...")
+	__log_("M_AppSettings", "Release Build detected: Purging developer actions...")
 
 	var actions = InputMap.get_actions()
 	for action in actions:
 		if not action in white_list:
 			if action.begins_with("dev_"):
 				InputMap.erase_action(action)
+
+
+static func pp_name() -> String:
+	return "M_AppSettings"
+
+static func __LOG_B() -> bool:
+	return true
+
+static func __LOG_INDENT() -> int:
+	return 10
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())

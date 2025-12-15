@@ -1,7 +1,7 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://vadklygsmkv6"]
 
-[ext_resource type="AudioStream" uid="uid://b1fyerdc7ryp1" path="res://-adopting/sfx_sounds/small packs/Impact Gore Sfx 4 tracks/Impact Gore Sfx/Impact 3_rock_fall.wav" id="1_cffcp"]
-[ext_resource type="AudioStream" uid="uid://daettk0ke4tci" path="res://-adopting/sfx_sounds/small packs/Impact Gore Sfx 4 tracks/Impact Gore Sfx/Impact 2_rock_fall.wav" id="2_nk4ro"]
+[ext_resource type="AudioStream" uid="uid://b1fyerdc7ryp1" path="res://-assets-/SFX/sources/small_packs/Impact Gore Sfx/Impact 3_rock_fall.wav" id="1_cffcp"]
+[ext_resource type="AudioStream" uid="uid://daettk0ke4tci" path="res://-assets-/SFX/sources/small_packs/Impact Gore Sfx/Impact 2_rock_fall.wav" id="2_nk4ro"]
 
 [resource]
 playback_mode = 1

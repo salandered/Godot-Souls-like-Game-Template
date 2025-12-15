@@ -1,5 +1,5 @@
 class_name EventThrottler
-extends BaseRefCountedLogger
+extends RefCountedLogger
 
 var _THROTTLE_WINDOW: float
 var _HISTORY_WINDOW: float

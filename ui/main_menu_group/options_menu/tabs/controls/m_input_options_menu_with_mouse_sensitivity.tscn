@@ -31,7 +31,6 @@ option_name = "Mouse Sensitivity"
 option_section = 1
 key = "MouseSensitivity"
 section = "InputSettings"
-default_value = false
 
 [node name="OptionLabel" parent="VBoxContainer/MarginContainerMouse/MouseSensitivityControl" index="0"]
 text = "Mouse Sensitivity :"

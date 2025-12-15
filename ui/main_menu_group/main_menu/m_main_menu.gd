@@ -1,5 +1,5 @@
 class_name M_MainMenu
-extends Control
+extends ControlLogger
 
 signal sub_menu_opened
 signal sub_menu_closed
@@ -79,6 +79,9 @@ func _ready() -> void:
 	back_button.visible = false
 	
 	menu_3d_scene.initialise()
+	
+	_cutoff_fade_in()
+
 
 func _play_fade_in() -> void:
 	if not fade_overlay:
@@ -92,9 +95,18 @@ func _play_fade_in() -> void:
 	tween.tween_callback(fade_overlay.hide)
 
 
+func _cutoff_fade_in() -> void:
+	var effect := AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
+	if effect:
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(effect, "cutoff_hz", 800.0, 40.0).from(200.0)
+		__log_(effect, tween)
+
 func _grab_initial_focus() -> void:
 	if not initial_focus_target: # I dont think I need initial focus
-		__log_ui.info_("Main menu", "no initial_focus_target")
+		__log_("Main menu", "no initial_focus_target")
 		return
 	if initial_focus_target and initial_focus_target.is_visible_in_tree():
 		initial_focus_target.grab_focus()
@@ -108,7 +120,7 @@ func _grab_initial_focus() -> void:
 
 func _load_specific_level(path: String) -> void:
 	if path.is_empty():
-		__log_ui.warn_("path is empty", "_load_specific_level", "return", path)
+		__log_warn("path is empty", "_load_specific_level", "return", path)
 		return
 
 	# Ensure we aren't carrying over old state when jumping to a specific level
@@ -118,6 +130,8 @@ func _load_specific_level(path: String) -> void:
 	M_SceneLoader.load_scene(path)
 		
 func load_game_scene() -> void:
+	_reset_audio_state()
+	
 	M_GameState.start_game()
 	if signal_game_start:
 		M_SceneLoader.load_scene(game_scene_path, true)
@@ -138,6 +152,11 @@ func exit_game() -> void:
 	else:
 		get_tree().quit()
 
+
+func _reset_audio_state() -> void:
+	var effect := AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
+	if effect:
+		effect.cutoff_hz = 1000.0
 
 ## SHOW/HIDE menu
 # region

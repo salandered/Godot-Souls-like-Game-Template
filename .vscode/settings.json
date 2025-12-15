@@ -1,6 +1,6 @@
 {
 	// DYNAMIC
-	"editor.hover.enabled": false,
+	"editor.hover.enabled": "off",
 	// "editor.hover.delay": 400,
 	//
 	//
@@ -143,12 +143,12 @@
 			"color": "green_shade_3",
 		},
 		{
-			"path": "logic/systems/input",
+			"path": "logic/c_systems/input",
 			"color": "green_shade_3",
 		},
 		// combat
 		{
-			"path": "logic/systems/hurt_hit_box",
+			"path": "logic/c_systems/hurt_hit_box",
 			"color": "custom14",
 		},
 		{
@@ -211,7 +211,7 @@
 		},
 		// PLAYER STATE
 		{
-			"path": "logic/systems/character_state/player_state/pl_states",
+			"path": "logic/c_systems/character_state/player_state/pl_states",
 			"color": "states_blue"
 		},
 		{
@@ -243,7 +243,7 @@
 		// 	"color": "custom10"
 		// },
 		{
-			"path": "logic/systems/character_state/phe_state/state_leafes",
+			"path": "logic/c_systems/character_state/phe_state/state_leafes",
 			"color": "green_shade_3"
 		},
 		{
@@ -251,7 +251,7 @@
 			"color": "green_shade_3"
 		},
 		{
-			"path": "logic/systems/character_state/phe_state/state_composites",
+			"path": "logic/c_systems/character_state/phe_state/state_composites",
 			"color": "states_blue"
 		},
 		// ENEMY
@@ -271,7 +271,7 @@
 		},
 		// ANIM
 		{
-			"path": "logic/systems/sk_modifiers",
+			"path": "logic/c_systems/sk_modifiers",
 			"color": "animation"
 		},
 		// {
@@ -283,7 +283,7 @@
 			"color": "animation"
 		},
 		{
-			"path": "logic/systems/sfx/on_sfx_sig_asp",
+			"path": "logic/c_systems/sfx/on_sfx_sig_asp",
 			"color": "states_blue"
 		},
 		{

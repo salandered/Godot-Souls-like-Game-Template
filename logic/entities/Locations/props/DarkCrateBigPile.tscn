@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/entities/Locations/props/DarkCrateColumn.tscn" id="1_4a3x4"]
 [ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Locations/props/DarkCratePile.tscn" id="2_0635w"]
-[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/demo_arena/dark_crate.tscn" id="3_0635w"]
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/props/dark_crate.tscn" id="3_0635w"]
 
 [node name="DarkCrateBigPile" type="Node3D"]
 

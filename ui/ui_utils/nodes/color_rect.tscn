@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://em4bj1qbl826"]
 
-[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://ui/menu.gdshader" id="1_qrv4o"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/shaders/distort_menu.gdshader" id="1_qrv4o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
 

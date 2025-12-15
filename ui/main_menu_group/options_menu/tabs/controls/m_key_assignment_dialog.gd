@@ -1,4 +1,4 @@
-extends ConfirmationDialog
+extends ConfirmationDialogLogger
 
 const LISTENING_TEXT: String = "Listening for input..."
 const FOCUS_HERE_TEXT: String = "Focus here to assign inputs."
@@ -28,7 +28,7 @@ func _ready() -> void:
 func _record_input_event(event: InputEvent) -> void:
 	last_input_text = InputEventHelper.get_text(event)
 	
-	__log_ui.info_("KeyAssignDialog", "Recorded Input Text:", last_input_text)
+	__log_("KeyAssignDialog", "Recorded Input Text:", last_input_text)
 	
 	if last_input_text.is_empty():
 		return
@@ -90,7 +90,7 @@ func _should_confirm_input_event(event: InputEvent) -> bool:
 
 
 func _confirm_choice() -> void:
-	__log_ui.info_("KeyAssignDialog", "Confirming choice and emitting signal.")
+	__log_("KeyAssignDialog", "Confirming choice and emitting signal.")
 	confirmed.emit()
 	hide()
 
@@ -99,7 +99,7 @@ func _process_input_event(event: InputEvent) -> void:
 	if not _should_process_input_event(event):
 		return
 		
-	__log_ui.info_("KeyAssignDialog", "Processing valid input:", event.as_text())	
+	__log_("KeyAssignDialog", "Processing valid input:", event.as_text())
 	
 	if _input_confirms_choice(event):
 		confirming = false

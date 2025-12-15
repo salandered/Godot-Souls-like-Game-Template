@@ -1,6 +1,6 @@
 @tool
 class_name M_InputActionsList
-extends Container
+extends ContainerLogger
 
 const EMPTY_INPUT_ACTION_STRING = " "
 
@@ -300,21 +300,20 @@ func _build_ui_list() -> void:
 		_add_action_options(action_name, readable_name, input_events)
 
 func _assign_input_event(input_event: InputEvent, action_name: String) -> void:
-	# __log_ui.info_("ActionList", "------- Action Name:", action_name)
-	# __log_ui.info_("ActionList", "Raw Event Object:", input_event)
-	# __log_ui.info_("ActionList", "Godot .as_text():", input_event.as_text())
+	# __log_("ActionList", "------- Action Name:", action_name)
+	# __log_("ActionList", "Raw Event Object:", input_event)
+	# __log_("ActionList", "Godot .as_text():", input_event.as_text())
 	# if input_event is InputEventKey:
-		# __log_ui.info_("ActionList", "Keycode:", input_event.keycode, "Physical:", input_event.physical_keycode, "Key Label:", input_event.key_label)
+		# __log_("ActionList", "Keycode:", input_event.keycode, "Physical:", input_event.physical_keycode, "Key Label:", input_event.key_label)
 	var raw_text = InputEventHelper.get_text(input_event)
-	# __log_ui.info_("ActionList", "InputEventHelper.get_text() result:", raw_text)
+	# __log_("ActionList", "InputEventHelper.get_text() result:", raw_text)
 
 	var text = _get_customized_key_name(raw_text)
-	# __log_ui.info_("ActionList", "Assigning event to dictionary. Key:", text, "Action:", action_name)
+	# __log_("ActionList", "Assigning event to dictionary. Key:", text, "Action:", action_name)
 	assigned_input_events[text] = action_name
 	
 func _assign_input_event_to_action_group(input_event: InputEvent, action_name: String, action_group: int) -> void:
-	# __log_ui.info_("ActionList", "Starting assignment for:", action_name, "Group:", action_group)
-
+	# __log_("ActionList", "Starting assignment for:", action_name, "Group:", action_group)
 	var action_events := InputMap.action_get_events(action_name)
 	action_events.resize(action_events.size() + 1)
 	action_events[action_group] = input_event
@@ -343,19 +342,19 @@ func _get_action_for_input_event(input_event: InputEvent) -> String:
 	var raw_text = InputEventHelper.get_text(input_event)
 	var text = _get_customized_key_name(raw_text)
 	
-	__log_ui.info_("ActionList", "Checking for duplicate. Raw:", raw_text, "Custom:", text)
+	__log_("ActionList", "Checking for duplicate. Raw:", raw_text, "Custom:", text)
 	
 	if text in assigned_input_events:
 		var found_action = assigned_input_events[text]
-		__log_ui.info_("ActionList", "Found duplicate in action:", found_action)
+		__log_("ActionList", "Found duplicate in action:", found_action)
 		return found_action
 		
 	return ""
 
 func add_action_event(last_input_text: String, last_input_event: InputEvent) -> void:
-	__log_ui.info_("InputActionList", "Received add request:", last_input_text)
+	__log_("InputActionList", "Received add request:", last_input_text)
 	if last_input_event == null:
-		__log_ui.info_("InputActionsList", "last_input_event is null, means unbind", last_input_text, last_input_text)
+		__log_("InputActionsList", "last_input_event is null, means unbind", last_input_text, last_input_text)
 		_assign_input_event_to_action_group(null, editing_action_name, editing_action_group)
 		editing_action_name = ""
 		return
@@ -401,7 +400,7 @@ func reset() -> void:
 
 
 func _refresh_action_row(action_name: String) -> void:
-	__log_ui.info_("ActionList", "Refreshing UI row for action:", action_name)
+	__log_("ActionList", "Refreshing UI row for action:", action_name)
 	var input_events := InputMap.action_get_events(action_name)
 	
 	# Loop through every possible slot (column) for this action
@@ -409,11 +408,11 @@ func _refresh_action_row(action_name: String) -> void:
 		if i < input_events.size():
 			# If Godot has an event at this index, show it
 			var event = input_events[i]
-			__log_ui.info_("ActionList", "Slot", i, "set to", InputEventHelper.get_text(event))
+			__log_("ActionList", "Slot", i, "set to", InputEventHelper.get_text(event))
 			_update_assigned_inputs_and_button(action_name, i, event)
 		else:
 			# If Godot has no event here (it shifted left), clear this button
-			__log_ui.info_("ActionList", "Slot", i, "cleared (empty)")
+			__log_("ActionList", "Slot", i, "cleared (empty)")
 			_clear_button(action_name, i)
 			
 	# Re-enable buttons that might have been disabled if the row was full previously

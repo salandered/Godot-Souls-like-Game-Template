@@ -1,7 +1,7 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://dbswu1dm262sj"]
 
-[ext_resource type="AudioStream" uid="uid://cfdnn32bebdjk" path="res://-adopting/sfx_sounds/rubberduck/sfx_breaking_and_falling/bfh1_hit_06_wood.ogg" id="1_o3ppn"]
-[ext_resource type="AudioStream" uid="uid://c51tf0wt418ud" path="res://-adopting/sfx_sounds/rubberduck/sfx_breaking_and_falling/bfh1_hit_07.ogg" id="2_0kgv1"]
+[ext_resource type="AudioStream" uid="uid://cfdnn32bebdjk" path="res://-assets-/SFX/sources/rubberduck/bfh1_hit_06_wood.ogg" id="1_o3ppn"]
+[ext_resource type="AudioStream" uid="uid://c51tf0wt418ud" path="res://-assets-/SFX/sources/rubberduck/bfh1_hit_07.ogg" id="2_0kgv1"]
 
 [resource]
 playback_mode = 1

@@ -1,6 +1,6 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c8ihx4xkkeqr2"]
 
-[ext_resource type="AudioStream" uid="uid://bvdjlu8ba6ks5" path="res://-adopting/sfx_sounds/fantasy_pack_by_tom_music_NU/WAV Files/SFX/Footsteps/Wood/Wood Land.wav" id="1_3o1nw"]
+[ext_resource type="AudioStream" uid="uid://bvdjlu8ba6ks5" path="res://-assets-/SFX/sources/tom/Wood Land.wav" id="1_3o1nw"]
 
 [resource]
 streams_count = 1

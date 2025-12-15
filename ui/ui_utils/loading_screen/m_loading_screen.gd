@@ -1,5 +1,5 @@
 class_name M_LoadingScreen
-extends CanvasLayer
+extends CanvasLayerLogger
 
 enum StallStage {STARTED, WAITING, STILL_WAITING, GIVE_UP}
 
@@ -43,7 +43,6 @@ var _loading_start_time: int
 
 func _ready() -> void:
 	_setup_background()
-	_apply_vignette_effect()
 
 
 func update_total_loading_progress() -> void:
@@ -187,7 +186,7 @@ func _on_confirmation_dialog_confirmed() -> void:
 
 func reset() -> void:
 	show()
-	__log_ui.info_("LoadingScreen: reset func started")
+	__log_("LoadingScreen: reset func started")
 	
 	_reset_loading_stage()
 	_reset_scene_loading_progress()
@@ -209,36 +208,20 @@ func _setup_background() -> void:
 		var random_image = background_images.pick_random()
 		if background_texture_rect:
 			background_texture_rect.texture = random_image
-			__log_ui.info_("LoadingScreen: Set random background -> ", random_image.resource_path.get_file())
+			__log_("LoadingScreen: Set random background -> ", random_image.resource_path.get_file())
 		else:
-			__log_ui.warn_("LoadingScreen: BackgroundTextureRect is null", "", "")
+			__log_warn("LoadingScreen: BackgroundTextureRect is null", "", "")
 	else:
-		__log_ui.warn_("LoadingScreen: no background_images", "", "")
+		__log_warn("LoadingScreen: no background_images", "", "")
 
-func _apply_vignette_effect() -> void:
-	if not background_texture_rect:
-		return
-#
-	## simple vignette shader logic
-	#var code: String = """
-		#shader_type canvas_item;
-		#
-		#uniform float softness : hint_range(0.0, 1.0) = 0.5;
-		#
-		#void fragment() {
-			#vec4 tex_color = texture(TEXTURE, UV);
-			#float dist = distance(UV, vec2(0.5));
-			#// darken edges based on distance from center
-			#float vignette = 1.0 - smoothstep(0.5, 1.5 - softness, dist);
-			#COLOR = vec4(tex_color.rgb * vignette, tex_color.a);
-		#}
-	#"""
-	#
-	#var shader := Shader.new()
-	#shader.code = code
-	#
-	#var mat := ShaderMaterial.new()
-	#mat.shader = shader
-	#background_texture_rect.material = mat
+
+ # __LOGS
+# region
+
+func __LOG_B() -> bool:
+	return true
+
+func __LOG_INDENT() -> int:
+	return 0
 
 # endregion

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbcdic7yvpg1x"
+uid="uid://cwxfue38w0l2k"
 path.s3tc="res://.godot/imported/tower-map_rusty_metal_04_nor_gl.png-95fab2647c20a4c86169515dd4ceff90.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -29,8 +29,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://-assets-/GLB-level/minimal-arena/tower/tower-map_rusty_metal_04_nor_gl.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

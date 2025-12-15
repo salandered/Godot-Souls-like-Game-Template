@@ -49,11 +49,9 @@ option_name = "Mute"
 option_section = 2
 key = "Mute"
 section = "AudioSettings"
-default_value = false
 
 [node name="AudioInputOptionControl" parent="VBoxContainer" instance=ExtResource("3_bgi0i")]
 layout_mode = 2
-default_value = "DEFAULT"
 
 [node name="HSeparator2" parent="VBoxContainer" instance=ExtResource("4_7lrho")]
 layout_mode = 2

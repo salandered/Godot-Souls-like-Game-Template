@@ -1,8 +1,8 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://de0vjaija8veh"]
 
-[ext_resource type="AudioStream" uid="uid://0gkdtskf0qea" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump1_wood_crate.wav" id="1_126as"]
-[ext_resource type="AudioStream" uid="uid://8onyjbfyf13k" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump5_wood_crate.wav" id="2_cmiff"]
-[ext_resource type="AudioStream" uid="uid://cl6tvs7h5ifg1" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodJump/WoodJump19_land_wood_crate.wav" id="3_ijyf7"]
+[ext_resource type="AudioStream" uid="uid://0gkdtskf0qea" path="res://-assets-/SFX/sources/pack_N2/WoodJump1_wood_crate.wav" id="1_126as"]
+[ext_resource type="AudioStream" uid="uid://8onyjbfyf13k" path="res://-assets-/SFX/sources/pack_N2/WoodJump5_wood_crate.wav" id="2_cmiff"]
+[ext_resource type="AudioStream" uid="uid://cl6tvs7h5ifg1" path="res://-assets-/SFX/sources/pack_N2/WoodJump19_land_wood_crate.wav" id="3_ijyf7"]
 
 [resource]
 random_pitch = 1.2

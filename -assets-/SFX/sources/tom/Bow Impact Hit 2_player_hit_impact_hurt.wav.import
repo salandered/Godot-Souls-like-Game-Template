@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dleksdicc8jid"
+path="res://.godot/imported/Bow Impact Hit 2_player_hit_impact_hurt.wav-8283561b69649e062a5bd8fed28c0937.sample"
+
+[deps]
+
+source_file="res://-assets-/SFX/sources/tom/Bow Impact Hit 2_player_hit_impact_hurt.wav"
+dest_files=["res://.godot/imported/Bow Impact Hit 2_player_hit_impact_hurt.wav-8283561b69649e062a5bd8fed28c0937.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

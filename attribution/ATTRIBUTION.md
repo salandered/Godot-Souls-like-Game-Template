@@ -1,8 +1,10 @@
 # Attribution
 
 
+
 ### game demo
 Author: me myself and I
+
 
 
 ### Assets & Art
@@ -53,6 +55,10 @@ License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.
 Author: me and noisedeception
 
 
+#### Environmental tracks (noise, bits)
+Author: me 
+
+
 #### Symphony For A Broken Orchestra Sample Pack
 Author: Found Sound Nation
 Source: [brokenorchestra.foundsoundnation.org](https://brokenorchestra.foundsoundnation.org/#about)
@@ -85,7 +91,7 @@ License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
 
 #### Olya Vasileva
-Instagram: @lo.w.l
+Note: Painting fragments were used for UI elements.
 
 
 

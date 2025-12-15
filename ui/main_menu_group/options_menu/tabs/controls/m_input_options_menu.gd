@@ -1,6 +1,6 @@
 @tool
 class_name M_InputOptionsMenu
-extends Control
+extends ControlLogger
 
 const ALREADY_ASSIGNED_TEXT: String = "{key} already assigned to {action}."
 const ONE_INPUT_MINIMUM_TEXT: String = "%s must have at least one key or button assigned."
@@ -25,7 +25,7 @@ func _add_action_event() -> void:
 	var last_input_event = %KeyAssignmentDialog.last_input_event
 	
 	last_input_readable_name = %KeyAssignmentDialog.last_input_text
-	__log_ui.info_("InputMenu", "Sending to list -> Name:", last_input_readable_name, "Event:", last_input_event)
+	__log_("InputMenu", "Sending to list -> Name:", last_input_readable_name, "Event:", last_input_event)
 	
 	%InputActionsList.add_action_event(last_input_readable_name, last_input_event)
 	
@@ -34,15 +34,15 @@ func _on_reset_button_pressed() -> void:
 	$ResetConfirmationDialog.popup_centered()
 
 func _on_key_assignment_dialog_confirmed() -> void:
-	__log_ui.info_("InputMenu", "Dialog confirmed signal received.")
+	__log_("InputMenu", "Dialog confirmed signal received.")
 	_add_action_event()
 
 func _open_key_assignment_dialog(action_name: String, readable_input_name: String = assignment_placeholder_text) -> void:
 	if not has_node("KeyAssignmentDialog"):
-		__log_ui.warn_("Node not found", "_open_key_assignment_dialog", "Check scene tree", "%KeyAssignmentDialog missing")
+		__log_warn("Node not found", "_open_key_assignment_dialog", "Check scene tree", "%KeyAssignmentDialog missing")
 		return
 
-	__log_ui.info_("InputMenu", "Opening Popup...")
+	__log_("InputMenu", "Opening Popup...")
 	
 	%KeyAssignmentDialog.title = tr("Assign Key for {action}").format({action = action_name})
 	%KeyAssignmentDialog.dialog_text = readable_input_name
@@ -66,7 +66,7 @@ func _on_input_actions_list_minimum_reached(action_name) -> void:
 	_popup_minimum_reached(action_name)
 
 func _on_input_actions_list_button_clicked(action_name, readable_input_name) -> void:
-	__log_ui.info_("InputMenu", "Button clicked for:", action_name, "Current Key:", readable_input_name)
+	__log_("InputMenu", "Button clicked for:", action_name, "Current Key:", readable_input_name)
 	
 	_open_key_assignment_dialog(action_name, readable_input_name)
 

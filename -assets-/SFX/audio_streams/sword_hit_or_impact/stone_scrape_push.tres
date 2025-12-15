@@ -1,8 +1,8 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://swnorq5glqy3"]
 
-[ext_resource type="AudioStream" uid="uid://67hdp3cxpghj" path="res://-adopting/sfx_sounds/400 Sounds Pack/Materials/stone_push_long.wav" id="1_0ljal"]
-[ext_resource type="AudioStream" uid="uid://xnugux0jw08e" path="res://-adopting/sfx_sounds/400 Sounds Pack/Materials/stone_push_medium.wav" id="2_xvnr8"]
-[ext_resource type="AudioStream" uid="uid://dxt7u38cqdfx0" path="res://-adopting/sfx_sounds/400 Sounds Pack/Materials/stone_push_short.wav" id="3_rgrax"]
+[ext_resource type="AudioStream" uid="uid://67hdp3cxpghj" path="res://-assets-/SFX/sources/400/stone_push_long.wav" id="1_0ljal"]
+[ext_resource type="AudioStream" uid="uid://xnugux0jw08e" path="res://-assets-/SFX/sources/400/stone_push_medium.wav" id="2_xvnr8"]
+[ext_resource type="AudioStream" uid="uid://dxt7u38cqdfx0" path="res://-assets-/SFX/sources/400/stone_push_short.wav" id="3_rgrax"]
 
 [resource]
 streams_count = 3

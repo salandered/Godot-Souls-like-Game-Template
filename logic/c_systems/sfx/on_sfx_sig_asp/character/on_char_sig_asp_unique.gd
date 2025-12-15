@@ -1,0 +1,73 @@
+class_name OnCharacterSigASPUnique
+extends OnCharacterSigASP
+
+const PICKING_9 = preload("uid://cntg7xya48dal")
+const ACCOMPLISH = preload("uid://b51cbgqh3orc7")
+
+
+var unique_asp_configs: Dictionary[String, ASPConfig] = {
+	SFXConstants.Unique.phase_switch: ASPConfig.new(1.0, -0.3, 5.0, 50.0, 4, 0.5, BusID.GAME_SFX, PICKING_9),
+	SFXConstants.Unique.accomplish: ASPConfig.new(1.0, -0.3, 3.0, 20.0, 4, 0.2, BusID.GAME_SFX, ACCOMPLISH),
+	SFXConstants.Unique.player_dead: ASPConfig.new(2.0, -0.2, 2.0, 20.0, 4, 0.9, BusID.GAME_SFX, PICKING_9)
+}
+
+
+func _hard_validate_implementation() -> bool:
+	return self._sfx_system and self._sfx_system is CharacterSFXSystem
+
+
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+	var mute: bool = false
+	var unique_value := get_unique_from_payload(payload)
+
+	var _asp_config: ASPConfig = u.safe_get_dict_key(unique_asp_configs, unique_value, null, WL.SILENT)
+	if not _asp_config:
+		mute = true
+	else:
+		if unique_value == "player_dead":
+			__log_("play dead! play")
+		_asp_config.set_up_asp(self.asp)
+		base_vol_db += _asp_config.vol_db_change
+		base_pitch += _asp_config.pitch_change
+	return VolPitch.new(base_vol_db, base_pitch, mute)
+
+
+## Character Helpers
+
+## not nullable
+func get_character_sfx_system() -> CharacterSFXSystem:
+	return self._sfx_system as CharacterSFXSystem
+
+
+## not nullable
+func get_character() -> BaseCharacter:
+	var _char := get_character_sfx_system().get_character()
+	return _char
+
+
+## nullable
+func get_curr_state() -> BaseCharacterState:
+	var _curr_state := get_character_sfx_system().get_character().get_current_state()
+	return _curr_state
+
+
+func get_curr_state_name() -> String:
+	var _curr_state := get_character_sfx_system().get_character().get_current_state()
+	if _curr_state == null:
+		return ""
+	else:
+		return _curr_state.state_name
+
+func get_prev_state_name() -> String:
+	return get_character_sfx_system().get_character().get_prev_state_name()
+
+
+## __LOGS
+# region
+
+
+func __LOG_B() -> bool:
+	return true
+
+
+# endregion

@@ -1,9 +1,9 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://e3xo2e43ejcr"]
 
-[ext_resource type="AudioStream" uid="uid://dvrwchlrfktvo" path="res://-adopting/sfx_sounds/400 Sounds Pack/Footsteps/foley_footstep_concrete_1.wav" id="1_rtmhp"]
-[ext_resource type="AudioStream" uid="uid://4ihdobhm2n6g" path="res://-adopting/sfx_sounds/400 Sounds Pack/Footsteps/foley_footstep_concrete_2.wav" id="2_552yx"]
-[ext_resource type="AudioStream" uid="uid://cyq0lm7ieqieo" path="res://-adopting/sfx_sounds/400 Sounds Pack/Footsteps/foley_footstep_concrete_3.wav" id="3_4772a"]
-[ext_resource type="AudioStream" uid="uid://cmjr3onho5sa8" path="res://-adopting/sfx_sounds/400 Sounds Pack/Footsteps/foley_footstep_concrete_4.wav" id="4_wo4pr"]
+[ext_resource type="AudioStream" uid="uid://dvrwchlrfktvo" path="res://-assets-/SFX/sources/400/foley_footstep_concrete_1.wav" id="1_rtmhp"]
+[ext_resource type="AudioStream" uid="uid://4ihdobhm2n6g" path="res://-assets-/SFX/sources/400/foley_footstep_concrete_2.wav" id="2_552yx"]
+[ext_resource type="AudioStream" uid="uid://cyq0lm7ieqieo" path="res://-assets-/SFX/sources/400/foley_footstep_concrete_3.wav" id="3_4772a"]
+[ext_resource type="AudioStream" uid="uid://cmjr3onho5sa8" path="res://-assets-/SFX/sources/400/foley_footstep_concrete_4.wav" id="4_wo4pr"]
 
 [resource]
 random_pitch = 1.05
