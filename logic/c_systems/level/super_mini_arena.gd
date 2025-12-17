@@ -12,6 +12,8 @@ const AIR_WAVE_2 = preload("uid://cxfgvp3futm7q")
 
 
 func _ready():
+	base_asp.bus = BusID._TRACK_BASE
+	vibe_asp.bus = BusID._TRACK_VIBE
 	base_asp.play()
 	enemies = [ph_enemy, ph_enemy_2, ph_enemy_3]
 

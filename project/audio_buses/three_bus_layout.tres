@@ -9,6 +9,7 @@ threshold = -0.5
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_87o32"]
 resource_name = "LowPassFilter"
+cutoff_hz = 1100.0
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_87o32"]
 resource_name = "Chorus"
@@ -28,7 +29,7 @@ wet = 0.26
 
 [sub_resource type="AudioEffectFilter" id="AudioEffectFilter_87o32"]
 resource_name = "Filter"
-cutoff_hz = 4548.0
+cutoff_hz = 1000.0
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_h4dk8"]
 resource_name = "Compressor"

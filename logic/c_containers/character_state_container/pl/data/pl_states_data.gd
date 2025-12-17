@@ -59,11 +59,11 @@ var node_to_pl_state_data: Dictionary[String, _StateData] = { # { Node name : _S
 	"Idle": _StateData.new(PS.idle, 1, Leg.Beh.idle, true),
 	"Run": _StateData.new(PS.run, 2, Leg.Beh.run, true),
 	"Strafe": _StateData.new(PS.strafe, 2, Leg.Beh.strafe, true),
-	# Sprint drains stamina, but costs just a bit as well
-	"Sprint": _StateData.new(PS.sprint, 3, Leg.Beh.sprint, true, 0.5),
+	# Sprint drains stamina, but costs just a bit as well # UPD: may be not
+	"Sprint": _StateData.new(PS.sprint, 3, Leg.Beh.sprint, true, 0.0),
 	
 	## air
-	"Dodge": _StateData.new(PS.dodge, 10, Leg.Beh.double, false, 5.0),
+	"Dodge": _StateData.new(PS.dodge, 10, Leg.Beh.double, false, 8.0),
 	"JumpSprint": _StateData.new(PS.jump_sprint, 10, Leg.Beh.double, false, 10.0),
 	"Midair": _StateData.new(PS.midair, 10, Leg.Beh.double, false, 0.0),
 	"LandingSprint": _StateData.new(PS.landing_sprint, 10, Leg.Beh.double, false, 0.0),
@@ -77,7 +77,9 @@ var node_to_pl_state_data: Dictionary[String, _StateData] = { # { Node name : _S
 	"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 10.0),
 	"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 12.0),
 	# priority a bit higher
+	# smaller because it reqiuires being in a draining sprint
 	"AttackFromRun": _StateData.new(PS.attack_from_run, 16, Leg.Beh.double, false, 8.0),
+	# small because it requires a dodge
 	"AttackFromDodge": _StateData.new(PS.attack_from_dodge, 16, Leg.Beh.double, false, 6.0),
 
 	"SwordSlash1": _StateData.new(PS.sword_slash_1, 15, Leg.Beh.double, false, 10.0),

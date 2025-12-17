@@ -36,7 +36,11 @@ func initialise(show_ui_feelings: bool) -> void:
 		bars.visible = false
 		__log_("shZow_ui_feelings", show_ui_feelings, "__initialised = false")
 		return
-
+	## BACK
+	back_health_bar.max_value =  e_feelings.get_max_health()
+	# should not be changing
+	back_health_bar.value = e_feelings.get_max_health()
+	
 	## HEALTH BAR
 	var max_health := e_feelings.get_max_health()
 	health_bar.max_value = max_health

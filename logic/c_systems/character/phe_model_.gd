@@ -60,7 +60,6 @@ signal SIG_angry_raised
 signal SIG_death_raised
 
 
-
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
 ##    => check root_motion_track of NativePlayer!
@@ -218,7 +217,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
-	player.__dev_labels._label_phe_enemy_info(self)
+	# player.__dev_labels._label_phe_enemy_info(self)
 
 	if death_raised:
 		_on_death_raised()

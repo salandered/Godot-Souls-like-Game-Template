@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://xulm40fx2823"]
+
+[resource]
+resource_name = "Mines_Walls.003"
+cull_mode = 2
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+normal_enabled = true

@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ce5g7cy3yfalw"]
 
-[ext_resource type="Texture2D" uid="uid://djruiqr1qppwm" path="res://-assets-/materials-shared/_images/collages/exit_2_menlogate D 2kD.png" id="1_8beug"]
-[ext_resource type="Texture2D" uid="uid://b8h3ysgurorkb" path="res://-assets-/materials-shared/_images/collages/exit_2_menlogate N.png" id="2_742lk"]
+[ext_resource type="Texture2D" uid="uid://djruiqr1qppwm" path="res://-assets-/materials-shared/_images/baked/exit_2_menlogate D 2kD.png" id="1_8beug"]
+[ext_resource type="Texture2D" uid="uid://b8h3ysgurorkb" path="res://-assets-/materials-shared/_images/baked/exit_2_menlogate N.png" id="2_742lk"]
 
 [resource]
 resource_name = "U Menlogate.001"

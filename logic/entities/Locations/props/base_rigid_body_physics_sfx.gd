@@ -64,7 +64,7 @@ func _initialise_asp():
 	var asp_config = get_asp_config()
 	if asp_config == null:
 		__log_("no asp_config provided, using default one")
-		asp_config = ASPConfig.new()
+		asp_config = ASP3DConfig.new()
 	
 	asp_config.set_up_asp(_sfx_asp)
 	if _sfx_asp.stream == null:
@@ -81,7 +81,7 @@ func _initialise_coll_layer():
 	collision_mask = Collision.Masks.ITEM_COL_MASK
 
 
-@abstract func get_asp_config() -> ASPConfig
+@abstract func get_asp_config() -> ASP3DConfig
 
 @abstract func initialise_implementation() -> void
 
@@ -106,7 +106,7 @@ func _on_body_entered(_body):
 		
 		__log_("impact sound", "force", impact_force, "final_vol_db", _sfx_asp.volume_db, "adjustment", impact_db_adjustment)
 		_sfx_asp.play()
-		__log_(pp.s(_sfx_asp.name, "🎵"), pp.asp_play(_sfx_asp))
+		__log_(pp.s(_sfx_asp.name, "🎵"), pp.asp_play_3d(_sfx_asp))
 		_last_sound_time = current_time
 
 

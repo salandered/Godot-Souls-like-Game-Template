@@ -71,7 +71,7 @@ func _set_value(value: Variant, on_init: bool = false) -> Variant:
 	__log_(name, "_set_value starts", "Incoming value", pp.in_q(value), "| On initialisation 🦕." if on_init else "")
 	__log_(name, "Current option_values", option_values)
 	if option_values.is_empty():
-		__log_warn_soft("option_values.is_empty()", "_set_value", "Returning early", name)
+		__log_("option_values.is_empty(). should be a warning but ok", "_set_value", "Returning early", name)
 		return
 		
 	if value == null:

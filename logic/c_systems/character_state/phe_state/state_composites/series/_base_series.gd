@@ -159,7 +159,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 				_reason += pp.s(em.warn, "series ended! parent not switches us! wait 0.1 sec and return one more move with idx 0")
 				return VerdictPH.new(_next_state, _reason)
 			elif _series_forgotten.update(delta):
-				__log_error("_series_forgotten update!")
+				# __log_error("_series_forgotten update!")
 				_reason += pp.s("0.1 passed, one more move")
 				_series_forgotten.turn_off()
 				_next_state = _chosen_attack_series[0]

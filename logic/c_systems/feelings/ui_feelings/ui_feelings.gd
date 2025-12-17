@@ -1,8 +1,11 @@
 extends Node
+
+
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var stamina_bar: ProgressBar = %StaminaBar
 
 @onready var pl_feelings: PlayerFeelings = %Feelings
+
 
 ## How long the change animation should take, in seconds
 var ANIM_DURATION_HEALTH: float = 0.2
@@ -31,7 +34,7 @@ func _ready() -> void:
 	stamina_bar.value = pl_feelings.get_curr_stamina()
 	_prev_stamina = pl_feelings.get_curr_stamina()
 
-	pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
+	# pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
 
 func _process(delta: float) -> void:

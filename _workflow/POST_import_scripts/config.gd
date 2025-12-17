@@ -16,18 +16,23 @@ const BASE_MAT_PATH = "res://-assets-/materials-shared/"
 
 const SUBFOLDER_RULES = {
 	# specific
-	"mines": ["minestrim"],
-	"different": ["gold"],
-	"collage": ["baked"],
+	"mines": ["minestrim", "mine_carts", "mines"],
+	"baked": [
+		"baked",
+		"08___Default.001", # Pinga
+		"Engel_C" # angels
+		],
+	"solid": ["P orange", "P white", "P sand", "P blue", "P green", "P dark_grey"],
+	"different": ["gold", "glass"],
 
 	# usual
-	"metal": ["metal", "steel", "iron", "copper"],
-	"concrete": ["concrete", "cement", "asphalt"],
-	"ground": ["ground", "dirt", "grass", "mud", "sand", "soil"],
+	"metal": ["metal", "steel", "iron", "copper", "bronze"],
+	"concrete": ["concrete", "cement", "asphalt", "plaster"],
 	"rocks-stone": ["rock", "stone"],
+	"ground": ["ground", "dirt", "grass", "mud", "sand", "soil", "roots"],
 	"wood": ["wood"],
 	"fabric": ["fabric", "cloth", "silk", "wool", "leather"],
-
+	
 	# no found means would be 'unsorted'
 }
 

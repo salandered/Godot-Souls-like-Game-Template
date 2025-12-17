@@ -100,6 +100,7 @@ func reload_current_scene() -> void:
 	get_tree().reload_current_scene()
 
 func load_scene(scene_path: String, in_background: bool = false) -> void:
+	M_ProjectMusicController.fade_out(2.5)
 	if scene_path == null or scene_path.is_empty():
 		push_error("no path given to load")
 		return

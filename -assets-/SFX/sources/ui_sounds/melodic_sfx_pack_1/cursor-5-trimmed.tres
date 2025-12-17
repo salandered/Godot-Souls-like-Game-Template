@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://bh1xnmgblu2wk"]
+
+[ext_resource type="AudioStream" uid="uid://ddxh6lf6328dt" path="res://-assets-/SFX/sources/ui_sounds/melodic_sfx_pack_1/cursor_style_5-trimmed.wav" id="1_3p6m1"]
+
+[resource]
+random_pitch = 1.01
+random_volume_offset_db = 0.1
+streams_count = 1
+stream_0/stream = ExtResource("1_3p6m1")

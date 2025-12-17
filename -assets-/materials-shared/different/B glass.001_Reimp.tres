@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d2ifs5mckxgxv"]
+
+[resource]
+resource_name = "B glass.001"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.7897951, 0.7839298, 0.8053097, 0.25)
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+ao_enabled = true

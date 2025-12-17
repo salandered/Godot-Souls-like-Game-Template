@@ -14,8 +14,11 @@ const UI_SFX := "UI_SFX"
 const GAME_MUSIC := "game_Music"
 const GAME_SFX := "game_SFX"
 
-
 ## dev
+const _TRACK_VIBE := "_d_track_vibe"
+const _TRACK_BASE := "_d_track_base"
+
+## test
 const TEST_SFX := "_t_SFX"
 const AA_MUTED := "_t_AA_muted"
 

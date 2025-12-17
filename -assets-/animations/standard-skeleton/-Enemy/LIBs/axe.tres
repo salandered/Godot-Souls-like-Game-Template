@@ -436,7 +436,7 @@ tracks/58/path = NodePath("AnimatorManager/NativePlayer/AnimParameters:weapon_hu
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/keys = {
-"times": PackedFloat32Array(0, 1.3333334, 2.1),
+"times": PackedFloat32Array(0, 1.3333334, 1.9333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]

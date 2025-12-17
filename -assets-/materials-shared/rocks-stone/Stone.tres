@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b2ctajchfxaqs"]
 
-[ext_resource type="Texture2D" uid="uid://canxtcmwmruhc" path="res://-assets-/materials-shared/_images/tower-map_Stone.jpg" id="1_bu172"]
+[ext_resource type="Texture2D" uid="uid://canxtcmwmruhc" path="res://-assets-/materials-shared/_images/stone-rock/tower-map_Stone.jpg" id="1_bu172"]
 
 [resource]
 resource_name = "Stone"

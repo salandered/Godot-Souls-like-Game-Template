@@ -45,6 +45,11 @@ var sub_menu
 
 @onready var menu_3d_scene: Node3D = %Menu3DScene
 
+
+var MAX_MAIN_MENU_TRACK_CUTOFF := 950
+var START_MAIN_MENU_TRACK_CUTOFF := 200
+
+
 # A versatile base class for a main menu UI.
 # - Handles 'Continue Game' and 'New Game' button presses.
 #     Displays a confirmation pop-up before starting a new game if there's saved data.
@@ -94,15 +99,19 @@ func _play_fade_in() -> void:
 	tween.tween_property(fade_overlay, "modulate:a", 0.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(fade_overlay.hide)
 
-
+var effect: AudioEffectLowPassFilter
 func _cutoff_fade_in() -> void:
-	var effect := AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
+	effect = AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
 	if effect:
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(effect, "cutoff_hz", 800.0, 40.0).from(200.0)
+		tween.tween_property(effect, "cutoff_hz", MAX_MAIN_MENU_TRACK_CUTOFF, 43.0).from(200.0)
 		__log_(effect, tween)
+
+
+# func _process(delta: float) -> void:
+	# prints(effect.cutoff_hz)
 
 func _grab_initial_focus() -> void:
 	if not initial_focus_target: # I dont think I need initial focus
@@ -119,6 +128,7 @@ func _grab_initial_focus() -> void:
 
 
 func _load_specific_level(path: String) -> void:
+	_reset_audio_state()
 	if path.is_empty():
 		__log_warn("path is empty", "_load_specific_level", "return", path)
 		return
@@ -154,9 +164,8 @@ func exit_game() -> void:
 
 
 func _reset_audio_state() -> void:
-	var effect := AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
 	if effect:
-		effect.cutoff_hz = 1000.0
+		effect.cutoff_hz = START_MAIN_MENU_TRACK_CUTOFF
 
 ## SHOW/HIDE menu
 # region

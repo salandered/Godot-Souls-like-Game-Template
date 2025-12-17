@@ -23,8 +23,8 @@ func initialise_implementation() -> void:
 	pass
 
 
-func get_asp_config() -> ASPConfig:
-	return ASPConfig.new(-1.0, -0.3, 1.1, 40.0, 5, 0.5, "", ROCK_IMPACT_PICKING_8)
+func get_asp_config() -> ASP3DConfig:
+	return ASP3DConfig.new(-1.0, -0.3, 1.1, 40.0, 5, 0.5, "", ROCK_IMPACT_PICKING_8)
 
 
 ## __LOGS

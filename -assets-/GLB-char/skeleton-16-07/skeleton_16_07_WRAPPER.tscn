@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cq5cohe44whos" path="res://-assets-/GLB-char/skeleton-16-07/skeleton-16-07.glb" id="1_f6gpe"]
 [ext_resource type="Script" uid="uid://bn41wjbnkk4o8" path="res://-assets-/GLB-char/skeleton-16-07/skeleton_16_07_wrapper.gd" id="2_df77m"]
-[ext_resource type="Material" uid="uid://ijjpo7bw8mgt" path="res://-assets-/materials-shared/concrete/concrete_variant/concrete_panels_replacer.tres" id="3_acojj"]
+[ext_resource type="Material" uid="uid://ijjpo7bw8mgt" path="res://-assets-/materials-shared/concrete/concrete_panels_replacer.tres" id="3_acojj"]
 
 [node name="skeleton-16-07" instance=ExtResource("1_f6gpe")]
 script = ExtResource("2_df77m")

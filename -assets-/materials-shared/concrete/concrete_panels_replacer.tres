@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ijjpo7bw8mgt"]
+
+[ext_resource type="Texture2D" uid="uid://5esc5e5uadne" path="res://-assets-/materials-shared/_images/concrete/BigGuy_Concrete005_4d1K_Color.jpg" id="1_scobl"]
+[ext_resource type="Texture2D" uid="uid://bfr2x6kb4xgmn" path="res://-assets-/materials-shared/_images/concrete/BigGuy_Concrete005_4d1K_Roughness.png" id="2_gl85x"]
+[ext_resource type="Texture2D" uid="uid://d26s43r0igrpa" path="res://-assets-/materials-shared/_images/concrete/BigGuy_Concrete005_4d1K_NormalGL.jpg" id="3_ifbyt"]
+
+[resource]
+resource_name = "I_Concrete005_4d1K-JPG"
+cull_mode = 2
+albedo_color = Color(0.7094549, 0.7094549, 0.7094549, 1)
+albedo_texture = ExtResource("1_scobl")
+metallic_specular = 0.0
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_gl85x")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("3_ifbyt")

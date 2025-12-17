@@ -38,7 +38,7 @@ static func _process_single_surface(mesh: Mesh, idx: int, mat: Material, node_na
 	# If the material already has a file path starting with "res://", 
 	# it means the user manually assigned "Use External" in the Import Settings.
 	if mat.resource_path.begins_with("res://"):
-		__log_script.info_("SKIP❎ 1", "User assigned external material (Use External)", mat.resource_path)
+		__log_script.info_("SKIP↪️ 1", "User assigned external material (Use External)", mat.resource_path)
 		return
 	# ----------------------------------------------------
 
@@ -52,18 +52,22 @@ static func _process_single_surface(mesh: Mesh, idx: int, mat: Material, node_na
 	var save_path = _get_mat_save_path(mat_resource_name)
 	__log_script.info_("PATH_CALC", "Path Calculated for mat", pp.in_q(mat_resource_name), ": ", pp.in_q(save_path))
 
-
+	var force_recreation = false
 	if FileAccess.file_exists(save_path):
 		var loaded_mat = load(save_path)
-		mesh.surface_set_material(idx, loaded_mat)
 		
-		__log_script.info_("📁 1", "✅️ File with this material already exists in shared-mats. It's assigned to mat", pp.in_q(mat_resource_name))
-		return
-
+		if loaded_mat is BaseMaterial3D and loaded_mat.albedo_texture == null:
+			__log_script.info_("📁 1", "⚠️ Existing file found but MISSING ALBEDO. Re-creating...", pp.in_q(mat_resource_name))
+			force_recreation = true
+		else:
+			mesh.surface_set_material(idx, loaded_mat)
+			__log_script.info_("📁 1", "💼 File with this material already exists in shared-mats. It's assigned to mat", pp.in_q(mat_resource_name))
+			return
+	# --- MODIFIED LOGIC END ---
 	# If we are here, it's a new material
 	_fix_rough_and_metallic(mat)
 
-	__log_script.info_("SAVE_NEW", "Saving new material...", save_path)
+	# __log_script.info_("SAVE_NEW", "Saving new material...", save_path)
 	
 	# Set the path on the resource itself so Godot knows where it lives
 	mat.resource_path = save_path

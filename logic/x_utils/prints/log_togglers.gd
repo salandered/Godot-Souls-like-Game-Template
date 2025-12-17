@@ -14,7 +14,7 @@ const SIG_C_B := false
 # COMMON
 const DEV_B := true_b
 const COLLISION_B := false
-const FEEL_B := false
+const FEEL_B := true_b
 const REACT_UTILS_B := false
 
 # CONTAINER
@@ -22,7 +22,7 @@ const CONTAINER_B := false
 const E_CONTAINER_B := false
 
 # FIGHT
-const FIGHT_B := false
+const FIGHT_B := true_b
 const COMBO_B := false
 const HIT_HURT_BOX_B := false
 const WEAPON_B := false
@@ -43,7 +43,7 @@ const FANCY_CAM_B := false
 const AWARENESS_B := true
 
 # ENEMY
-const PHE_CHECK_B := true_b
+const PHE_CHECK_B := false
 const PHE_B := false
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false

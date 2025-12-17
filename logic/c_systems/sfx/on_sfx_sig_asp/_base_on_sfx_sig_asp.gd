@@ -10,7 +10,7 @@ var signal_data: SignalData
 ## not nullable
 var asp: AudioStreamPlayer3D
 ## not nullable
-var asp_config: ASPConfig
+var asp_config: ASP3DConfig
 
 
 var _log_tag: String = ""
@@ -45,7 +45,7 @@ func _init(
 		sfx_system_: BaseSFXSystem,
 		signal_data_: SignalData,
 		asp_: AudioStreamPlayer3D,
-		asp_config_: ASPConfig,
+		asp_config_: ASP3DConfig,
 		log_tag_: String = ""
 	) -> void:
 	self._log_tag = log_tag_
@@ -59,7 +59,7 @@ func _init(
 
 	if self.asp_config == null:
 		__log_("no asp_config provided, using default one")
-		self.asp_config = ASPConfig.new()
+		self.asp_config = ASP3DConfig.new()
 
 	self.asp = self.asp_config.set_up_asp(self.asp)
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://logic/entities/Locations/_dev/simple_target/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="1_vud1n"]
-[ext_resource type="Material" uid="uid://c0tnkt7regotu" path="res://-assets-/materials-shared/rocks-stone/lichen_rock.tres" id="2_woau2"]
+[ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://-assets-/materials-shared/rocks-stone/lichen_rock_Reimp.tres" id="2_woau2"]
 
 [node name="SimpleTarget" type="Node3D"]
 script = ExtResource("1_g7ncb")

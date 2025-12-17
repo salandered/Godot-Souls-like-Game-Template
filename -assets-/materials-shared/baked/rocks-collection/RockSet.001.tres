@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bwdudpj3nv7ae"]
+
+[ext_resource type="Texture2D" uid="uid://w4r10drmts1i" path="res://-assets-/materials-shared/_images/baked/exit_2_BASE COLOR_RockSet_2k.png" id="1_rh5q7"]
+[ext_resource type="Texture2D" uid="uid://bm0425fvaa6jq" path="res://-assets-/materials-shared/_images/baked/exit_2_ROUGHNESS_RockSet.png" id="2_npxn3"]
+[ext_resource type="Texture2D" uid="uid://vksuiiq5s3um" path="res://-assets-/materials-shared/_images/baked/exit_2_NORMAL_RockSet_2k.png" id="3_npxn3"]
+
+[resource]
+resource_name = "RockSet.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_rh5q7")
+metallic_texture = ExtResource("2_npxn3")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_npxn3")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_npxn3")

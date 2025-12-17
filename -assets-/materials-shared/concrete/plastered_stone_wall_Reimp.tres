@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dnun78a7s1k0u"]
+
+[ext_resource type="Texture2D" uid="uid://ct824b8y0ikw5" path="res://-assets-/materials-shared/_images/stone-rock/jaw_plastered_stone_wall_diff_2k.jpg" id="1_4cjwf"]
+[ext_resource type="Texture2D" uid="uid://c77ea8u06xb58" path="res://-assets-/materials-shared/_images/stone-rock/jaw_plastered_stone_wall_nor_gl_2k.png" id="2_cxfkb"]
+[ext_resource type="Texture2D" uid="uid://bkmfrlreohiww" path="res://-assets-/materials-shared/_images/stone-rock/jaw_plastered_stone_wall_rough_2k.png" id="3_cf62i"]
+
+[resource]
+resource_name = "plastered_stone_wall"
+cull_mode = 2
+albedo_texture = ExtResource("1_4cjwf")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_cf62i")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("2_cxfkb")

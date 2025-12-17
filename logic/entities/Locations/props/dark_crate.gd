@@ -13,8 +13,8 @@ func initialise_implementation() -> void:
 	pass
 
 
-func get_asp_config() -> ASPConfig:
-	return ASPConfig.new(0.0, 0.0, 4.0, 15.0, 3, 0.5, "", WOOD_IMPACT)
+func get_asp_config() -> ASP3DConfig:
+	return ASP3DConfig.new(0.0, 0.0, 4.0, 15.0, 3, 0.5, "", WOOD_IMPACT)
 
 
 ## __LOGS

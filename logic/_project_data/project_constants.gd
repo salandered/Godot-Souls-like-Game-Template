@@ -30,7 +30,7 @@ const PLAYER_MAX_HIT_DAMAGE: float = 15
 const ENEMY_MAX_HIT_DAMAGE: float = 35
 
 
-## recommended to use everywhere, while make changes via ASPConfig
+## recommended to use everywhere, while make changes via ASP3DConfig
 const SFX_ASP_BASE_VOL_DB := -1.0
 const SFX_ASP_MAX_VOL_DB := 3.0
 ##

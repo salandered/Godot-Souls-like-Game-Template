@@ -8,7 +8,7 @@ extends Node3DSystem
 const BIG_CRASH_ROCK = preload("uid://cre4k58suo6da")
 const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
 
-var asp_config := ASPConfig.new(0.4, -0.3, 6.0, 50, 2, 0.8, "", BIG_CRASH_ROCK)
+var asp_config := ASP3DConfig.new(0.4, -0.3, 6.0, 50, 2, 0.8, "", BIG_CRASH_ROCK)
 
 
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 	asp_config.set_up_asp(on_shatter_aps_3d_2)
 	
 	on_shatter_aps_3d.play()
-	__log_("first play", pp.asp_play(on_shatter_aps_3d))
+	__log_("first play", pp.asp_play_3d(on_shatter_aps_3d))
 	
 	for shatter: RigidBody3D in get_descendants.rigid_bodies(self):
 		__log_("setting script", RIGID_SHATTER_SCRIPT)
@@ -33,7 +33,7 @@ func _ready() -> void:
 	__log_("~~", "ready of shattered column", count, "were initialised")
 	await FrameUtils.wait_process_frames(30)
 	on_shatter_aps_3d_2.play()
-	__log_("second play", pp.asp_play(on_shatter_aps_3d_2))
+	__log_("second play", pp.asp_play_3d(on_shatter_aps_3d_2))
 
 
 ## __LOGS

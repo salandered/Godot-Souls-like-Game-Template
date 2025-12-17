@@ -5,19 +5,23 @@ class_name PlayerFeelings
 
 var FATIGUE_STATUS := "FATIGUE〰️"
 
-const FATIGUE_THRESHOLD = 5.0
+const FATIGUE_THRESHOLD = 8.0
 const max_stamina: float = 80.0
 
 var stamina_regen_rate: float = 12.0 # per sec
 
 var _current_stamina: float
 
-signal SIG_cant_be_paid
+# signal SIG_cant_be_paid
 
 var ZERO_DRAIN_TIME := 0.8
 var zero_drain_timer := DelayCallbackTimer.new()
 ## blocks any stamina changes
 var IN_ZERO_DRAIN: bool = false
+
+
+var regen_delay_timer := DelayCallbackTimer.new()
+var REGEN_DELAY_TIME := 0.3
 
 
 func initialise() -> void:
@@ -37,14 +41,13 @@ func is_player() -> bool:
 func get_max_health() -> float:
 	return 120
 
-func pay_state_cost(amount: float):
+func lose_stamina(amount: float):
 	_change_stamina(-amount)
+	if amount != 0.0:
+		regen_delay_timer.initialise(REGEN_DELAY_TIME, _on_regen_delay_ended)
 
 func add_stamina(amount: float):
 	_change_stamina(amount)
-
-func lose_stamina(amount: float):
-	_change_stamina(-amount)
 
 func can_allow_stamina_drain(amount: float) -> bool:
 	return can_allow_stamina_rate(-amount)
@@ -60,13 +63,19 @@ func get_curr_stamina() -> float:
 
 
 func _process(delta: float) -> void:
+	if __could_not_initialised():
+		return
+		
 	if zero_drain_timer.is_in_progress():
 		zero_drain_timer.update(delta)
+	if regen_delay_timer.is_in_progress():
+		regen_delay_timer.update(delta)
 
 
-## called from Player SM
+## being called from character SM _process
 func _update(delta: float, stamina_drain: float = 0.0):
 	update(delta, -stamina_drain)
+
 
 ## requested_stamina_rate is negative if it's a drain
 ## (positive for gain)
@@ -74,12 +83,17 @@ func update(delta: float, requested_stamina_rate: float = 0.0):
 	## requested_stamina_rate overrides stamina_regen_rate
 	if not IN_ZERO_DRAIN:
 		var result_rate := stamina_regen_rate
+
+		if regen_delay_timer.is_in_progress():
+				result_rate = 0.0
+
 		if requested_stamina_rate != 0.0:
 			result_rate = requested_stamina_rate
-		_change_stamina(result_rate * delta)
+
+		_change_stamina(result_rate * delta, true)
 
 
-func _change_stamina(amount: float) -> void:
+func _change_stamina(amount: float, is_rate: bool = false) -> void:
 	if amount == 0.0: return
 	if __god_mode:
 		if abs(amount) > 1: __log_("stamina", pp.s("not changed: god mode"))
@@ -110,7 +124,7 @@ func is_in_fatigue() -> bool:
 	return check_status(FATIGUE_STATUS)
 
 
-func can_be_paid(amount: float) -> bool:
+func stamina_can_be_paid(amount: float) -> bool:
 	var decision: bool = false
 	var _reason: String = ""
 	if amount < 0:
@@ -127,10 +141,10 @@ func can_be_paid(amount: float) -> bool:
 	elif _current_stamina > 0:
 		decision = true
 	
-	if decision == false:
-		SIG_cant_be_paid.emit()
+	# if decision == false:
+		# SIG_cant_be_paid.emit()
 	
-	__log_feel_check_stamina("can_be_paid", amount, decision, _reason)
+	__log_feel_check_stamina("stamina_can_be_paid", amount, decision, _reason)
 	return decision
 
 
@@ -138,15 +152,15 @@ func can_allow_stamina_rate(stamina_rate: float = 0.0) -> bool:
 	var decision: bool = false
 	var _reason: String = ""
 	
-	if stamina_rate >= 0.0: ## gain is always allowed
+	if stamina_rate >= 0.0: ## zero and gain is always allowed
 		decision = true
 	elif is_in_fatigue():
 		decision = false
 	else: ## no statuses and stamina_rate is drain. that's ok
 		decision = true
 		
-	if decision == false:
-		SIG_cant_be_paid.emit()
+	# if decision == false:
+		# SIG_cant_be_paid.emit()
 	
 	__log_feel_check_stamina("can_allow_stamina_rate", stamina_rate, decision, _reason)
 	return decision
@@ -161,7 +175,7 @@ func _on_zero_drain_ended() -> void:
 	__log_("stamina", "zero_drain ended, stamina bumped to" + str(_current_stamina))
 
 
-## if zero reached, we spent some time ignoring changes
+## if zero reached, we spent some time ignoring changes.
 ## zero timer and setting fatigue should be atomic operation.
 func _trigger_reach_zero() -> void:
 	if IN_ZERO_DRAIN: return # already was triggered
@@ -173,6 +187,11 @@ func _trigger_reach_zero() -> void:
 
 # endregion
 
+func _on_regen_delay_ended() -> void:
+	pass
+
+
+##
 
 func __log_feel_check_stamina(prefix: String, amount: float, decision: bool, ...context: Array):
 	if decision == true: return

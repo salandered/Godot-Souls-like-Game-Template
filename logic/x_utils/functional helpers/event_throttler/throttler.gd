@@ -9,7 +9,7 @@ var _last_cleanup_time: float
 var _auto_cleanup_interval: float
 
 var _pp_name: String
-
+var __log: bool
 ## NOTE: Dict key is untyped.
 ## expected that will be int if using built Godot instand_id
 ## strings r also fine
@@ -18,7 +18,8 @@ func _init(
 		window_seconds_: float,
 		history_window_mult_: float = 2.0,
 		auto_cleanup_interval_: float = 3.0,
-		pp_name_: String = ""
+		pp_name_: String = "",
+		__log__: bool = false
 	):
 	self._THROTTLE_WINDOW = window_seconds_
 	self._HISTORY_WINDOW = window_seconds_ * history_window_mult_
@@ -27,7 +28,7 @@ func _init(
 	self._last_cleanup_time = 0.0
 
 	self._pp_name = pp_name_
-
+	self.__log = __log__
 
 ## Returns 'true' if the event is "too soon" and should be skipped
 func is_throttled(key: Variant) -> bool:
@@ -78,7 +79,7 @@ func pp_name() -> String:
 
 
 func __LOG_B() -> bool:
-	return false
+	return __log
 
 func __LOG_INDENT() -> int:
 	return 0

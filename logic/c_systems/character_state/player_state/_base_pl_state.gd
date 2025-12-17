@@ -49,6 +49,8 @@ var forced_state: MetaState.Forced = MetaState.Forced.new()
 var curr_state_action: PlayerAction
 
 
+var sig_throttle := EventThrottler.new(0.3, 2, 3, "sigt", false)
+
 func get_player() -> Princess:
 	return _player
 
@@ -119,9 +121,15 @@ func _check_feelings_can_be_paid(input_action: String) -> bool:
 	var _stamina_cost := container.state_by_name(input_action).stamina_cost
 	var _stamina_drain := container.state_by_name(input_action).stamina_drain
 		
-	if feelings.can_be_paid(_stamina_cost) and feelings.can_allow_stamina_drain(_stamina_drain):
+	if feelings.stamina_can_be_paid(_stamina_cost) and feelings.can_allow_stamina_drain(_stamina_drain):
 		return true
 	__log_psm_check(em.h_black, "can't pay for state", input_action, "cost", _stamina_cost, "drain", _stamina_drain)
+	var sig_data := get_player().stamina_cant_be_paid
+	## sig not fired on stamina rate logic
+	if not feelings.stamina_can_be_paid(_stamina_cost):
+		if not sig_throttle.is_throttled(sig_data.signal_id):
+			u.safe_emit(sig_data, {}, false)
+			sig_throttle.record_event(sig_data.signal_id)
 	return false
 
 
@@ -134,7 +142,7 @@ func _check_combos(input_: InputPackage):
 		# __log_psm_check("checking combo", combo.name, "with state_to_trigger", next_state_candidate)
 		var _state := container.state_by_name(next_state_candidate)
 		if combo.is_triggered(input_, state_name, curr_global_action()):
-			if feelings.can_be_paid(_state.stamina_cost):
+			if feelings.stamina_can_be_paid(_state.stamina_cost):
 				queued_state.set_state(next_state_candidate, _state.priority) # todo: try_set_queued_state
 				__log_psm_check("Queued 👥 next state: ", queued_state)
 				return # prioritised combo finishes checks
@@ -188,7 +196,7 @@ func _on_enter_state(input_: InputPackage):
 	## - single legs beh attached to _player state => 
 	##    => all is needed is to call the legs SM to switch into this defined state.
 	initial_position = _player.global_position
-	feelings.pay_state_cost(stamina_cost)
+	feelings.lose_stamina(stamina_cost)
 	
 	legs_behavior.player_state = self
 
@@ -257,7 +265,6 @@ func on_exit_state() -> void:
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "we received a hit " + str(hit))
 
-	
 	var _sig_data := get_player().get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
 	u.safe_emit(_sig_data, {}, true)
 	## 1 - check if we need to change state
@@ -268,6 +275,7 @@ func react_on_hit(hit: HitData):
 		__log_state_upd("hit leaded to react state", react_state_name)
 		var state := container.state_by_name(react_state_name)
 		forced_state.try_set(react_state_name, state.priority)
+		feelings.lose_health(hit.damage)
 	else:
 		curr_global_action()._react_on_hit(hit)
 

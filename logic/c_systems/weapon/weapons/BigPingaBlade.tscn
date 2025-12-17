@@ -1,13 +1,11 @@
-[gd_scene load_steps=18 format=4 uid="uid://ope03u0gwdw4"]
+[gd_scene load_steps=15 format=4 uid="uid://ope03u0gwdw4"]
 
 [ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/c_systems/weapon/big_pinga_blade.gd" id="1_hj5gq"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
-[ext_resource type="Texture2D" uid="uid://c5p030jupnpbn" path="res://-assets-/materials-shared/_images/unsorted/pinga_Image_3.jpg" id="3_32qab"]
-[ext_resource type="Texture2D" uid="uid://h71q26ebbndv" path="res://-assets-/materials-shared/_images/unsorted/pinga_Image_4.png" id="4_uqsym"]
-[ext_resource type="Texture2D" uid="uid://d2prooq5ihrq7" path="res://-assets-/materials-shared/_images/unsorted/pinga_Image_5.jpg" id="5_sq0ua"]
-[ext_resource type="Texture2D" uid="uid://b2a3ekgqqpyue" path="res://-assets-/materials-shared/_images/unsorted/pinga_Fabric029_2d1K-JPG_Color.jpg" id="6_po85w"]
-[ext_resource type="Texture2D" uid="uid://b4wn10ena052b" path="res://-assets-/materials-shared/_images/unsorted/pinga_Fabric029_2d1K-JPG_Roughness.png" id="7_jhutn"]
-[ext_resource type="Texture2D" uid="uid://vtrrpfkytq08" path="res://-assets-/materials-shared/_images/unsorted/pinga_Fabric029_2d1K-JPG_NormalGL.jpg" id="8_mpgtj"]
+[ext_resource type="Texture2D" uid="uid://c5p030jupnpbn" path="res://-assets-/materials-shared/_images/baked/pinga_Image_3.jpg" id="3_32qab"]
+[ext_resource type="Texture2D" uid="uid://h71q26ebbndv" path="res://-assets-/materials-shared/_images/baked/pinga_Image_4.png" id="4_uqsym"]
+[ext_resource type="Texture2D" uid="uid://d2prooq5ihrq7" path="res://-assets-/materials-shared/_images/baked/pinga_Image_5.jpg" id="5_sq0ua"]
+[ext_resource type="Material" uid="uid://7f6457emxdkf" path="res://-assets-/materials-shared/fabric/I_Fabric029_2d1K-JPG.001_Reimp.tres" id="6_l3px6"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="9_h8ebr"]
 [ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/combat/weapon_sfx/WeaponSfx.tscn" id="10_kngnu"]
 
@@ -27,17 +25,6 @@ roughness_texture_channel = 1
 normal_enabled = true
 normal_scale = 2.6999998
 normal_texture = ExtResource("5_sq0ua")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5yas"]
-resource_name = "I_Fabric029_2d1K-JPG"
-cull_mode = 2
-albedo_texture = ExtResource("6_po85w")
-metallic_texture = ExtResource("7_jhutn")
-metallic_texture_channel = 2
-roughness_texture = ExtResource("7_jhutn")
-roughness_texture_channel = 1
-normal_enabled = true
-normal_texture = ExtResource("8_mpgtj")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hj5gq"]
 _surfaces = [{
@@ -83,7 +70,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 930,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8AMAAxADIAMwA0ADUANgA3ADgAOQA6ADsAPAA9AD4APwBAAEEAQgBDAEQARQBGAEcASABJAEoASwBMAE0ATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgBbAFwAXQBeAF8AYABhAGIAYwBkAGUAZgBnAGgAaQBqAGsAbABtAG4AbwBwAHEAcgBzAHQAdQB2AHcAeAB5AHoAewB8AH0AfgB/AIAAgQCCAIMAhACFAIYAhwCIAIkAigCLAIwAjQCOAI8AkACRAJIAkwCUAJUAlgCXAJgAmQCaAJsAnACdAJ4AnwCgAKEAogCjAKQApQCmAKcAqACpAKoAqwCsAK0ArgCvALAAsQCyALMAtAC1ALYAtwC4ALkAugC7ALwAvQC+AL8AwADBAMIAwwDEAMUAxgDHAMgAyQDKAMsAzADNAM4AzwDQANEA0gDTANQA1QDWANcA2ADZANoA2wDcAN0A3gDfAOAA4QDiAOMA5ADlAOYA5wDoAOkA6gDrAOwA7QDuAO8A8ADxAPIA8wD0APUA9gD3APgA+QD6APsA/AD9AP4A/wAAAQEBAgEDAQQBBQEGAQcBCAEJAQoBCwEMAQ0BDgEPARABEQESARMBFAEVARYBFwEYARkBGgEbARwBHQEeAR8BIAEhASIBIwEkASUBJgEnASgBKQEqASsBLAEtAS4BLwEwATEBMgEzATQBNQE2ATcBOAE5AToBOwE8AT0BPgE/AUABQQFCAUMBRAFFAUYBRwFIAUkBSgFLAUwBTQFOAU8BUAFRAVIBUwFUAVUBVgFXAVgBWQFaAVsBXAFdAV4BXwFgAWEBYgFjAWQBZQFmAWcBaAFpAWoBawFsAW0BbgFvAXABcQFyAXMBdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEBkgGTAZQBlQGWAZcBmAGZAZoBmwGcAZ0BngGfAaABoQGiAaMBpAGlAaYBpwGoAakBqgGrAawBrQGuAa8BsAGxAbIBswG0AbUBtgG3AbgBuQG6AbsBvAG9Ab4BvwHAAcEBwgHDAcQBxQHGAccByAHJAcoBywHMAc0BzgHPAdAB0QHSAdMB1AHVAdYB1wHYAdkB2gHbAdwB3QHeAd8B4AHhAeIB4wHkAeUB5gHnAegB6QHqAesB7AHtAe4B7wHwAfEB8gHzAfQB9QH2AfcB+AH5AfoB+wH8Af0B/gH/AQACAQICAgMCBAIFAgYCBwIIAgkCCgILAgwCDQIOAg8CEAIRAhICEwIUAhUCFgIXAhgCGQIaAhsCHAIdAh4CHwIgAiECIgIjAiQCJQImAicCKAIpAioCKwIsAi0CLgIvAjACMQIyAjMCNAI1AjYCNwI4AjkCOgI7AjwCPQI+Aj8CQAJBAkICQwJEAkUCRgJHAkgCSQJKAksCTAJNAk4CTwJQAlECUgJTAlQCVQJWAlcCWAJZAloCWwJcAl0CXgJfAmACYQJiAmMCZAJlAmYCZwJoAmkCagJrAmwCbQJuAm8CcAJxAnICcwJ0AnUCdgJ3AngCeQJ6AnsCfAJ9An4CfwKAAoECggKDAoQChQKGAocCiAKJAooCiwKMAo0CjgKPApACkQKSApMClAKVApYClwKYApkCmgKbApwCnQKeAp8CoAKhAqICowKkAqUCpgKnAqgCqQKqAqsCrAKtAq4CrwKwArECsgKzArQCtQK2ArcCuAK5AroCuwK8Ar0CvgK/AsACwQLCAsMCxALFAsYCxwLIAskCygLLAswCzQLOAs8C0ALRAtIC0wLUAtUC1gLXAtgC2QLaAtsC3ALdAt4C3wLgAuEC4gLjAuQC5QLmAucC6ALpAuoC6wLsAu0C7gLvAvAC8QLyAvMC9AL1AvYC9wL4AvkC+gL7AvwC/QL+Av8CAAMBAwIDAwMEAwUDBgMHAwgDCQMKAwsDDAMNAw4DDwMQAxEDEgMTAxQDFQMWAxcDGAMZAxoDGwMcAx0DHgMfAyADIQMiAyMDJAMlAyYDJwMoAykDKgMrAywDLQMuAy8DMAMxAzIDMwM0AzUDNgM3AzgDOQM6AzsDPAM9Az4DPwNAA0EDQgNDA0QDRQNGA0cDSANJA0oDSwNMA00DTgNPA1ADUQNSA1MDVANVA1YDVwNYA1kDWgNbA1wDXQNeA18DYANhA2IDYwNkA2UDZgNnA2gDaQNqA2sDbANtA24DbwNwA3EDcgNzA3QDdQN2A3cDeAN5A3oDewN8A30DfgN/A4ADgQOCA4MDhAOFA4YDhwOIA4kDigOLA4wDjQOOA48DkAORA5IDkwOUA5UDlgOXA5gDmQOaA5sDnAOdA54DnwOgA6ED"),
-"material": SubResource("StandardMaterial3D_l5yas"),
+"material": ExtResource("6_l3px6"),
 "name": "I_Fabric029_2d1K-JPG",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

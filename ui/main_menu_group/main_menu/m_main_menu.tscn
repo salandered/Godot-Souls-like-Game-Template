@@ -57,9 +57,7 @@ unique_name_in_owner = true
 cam_z_min = 46.0
 cam_z_max = 5.0
 cam_duration = 90.0
-parallax_strength = null
 parallax_lerp_speed = 1.0
-camera_base_pitch = null
 
 [node name="UISoundController" type="Node" parent="."]
 script = ExtResource("5_2e4m0")

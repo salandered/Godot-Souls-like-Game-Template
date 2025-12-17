@@ -1,18 +1,19 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/materials-shared/_images/"
+const TARGET_FOLDER = "res://-assets-/materials-shared/_images/metal"
+#const TARGET_FOLDER = "res://-assets-/materials-shared/_images/"
 ## WARNING: only jpg and png supported. And use lower case
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 ## will be ignored of contains
 const IGNORE_WORDS = ["pixel", "pixpal"]
-const TARGET_SCALE_STR = "1k" # Options: "1k", "05k" etc
+const TARGET_SCALE_STR = "05k" # Options: "1k", "05k" etc
 
 
 const OVERWRITE_ORIGINALS = true # true = replace originals, false = create _d1k versions
 # if was processed wo overwrite, image has postfix. Whether to skip such files when overwriting
 const SKIP_ALREADY_PROCESSED_WHEN_OVERWRITE = true
-const FORCE_8BIT_NORMALS = true # Convert normal maps to 8-bit per channel
+const FORCE_8BIT_NORMALS = false # Convert normal maps to 8-bit per channel
 const NORMAL_MAP_KEYWORDS = ["norm", "normal", "nrm", "nor_gl"]
 
 

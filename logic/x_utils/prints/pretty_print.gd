@@ -163,7 +163,12 @@ static func sig(signal_data: SignalData, signal_payload: Dictionary[String, Vari
 static func bus_id(bus_id_: String) -> String:
 	return pp.s("bus🎧", pp.in_q(bus_id_))
 
-static func asp_play(asp: AudioStreamPlayer3D) -> String:
+static func asp_play_3d(asp: AudioStreamPlayer3D) -> String:
+	if not asp: return ""
+	return pp.s("vol/pitch", pp.round_01(asp.volume_db), "/", pp.round_01(asp.pitch_scale),
+		"stream", pp.in_q(asp.stream.resource_name) if asp.stream else "[-]")
+
+static func asp_play(asp: AudioStreamPlayer) -> String:
 	if not asp: return ""
 	return pp.s("vol/pitch", pp.round_01(asp.volume_db), "/", pp.round_01(asp.pitch_scale),
 		"stream", pp.in_q(asp.stream.resource_name) if asp.stream else "[-]")

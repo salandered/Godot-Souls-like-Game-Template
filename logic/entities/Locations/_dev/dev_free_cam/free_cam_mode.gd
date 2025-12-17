@@ -1,8 +1,11 @@
 extends Node3D
 
+## Autoload
+
+
 @export var camera_speed := 10.0
 @export var mouse_sensitivity := 0.003
-@export var speed_multiplier := 1.1 # How much each scroll step multiplies speed
+@export var speed_multiplier := 1.1 # how much each scroll step multiplies speed
 
 @onready var camera: Camera3D
 @onready var _cached_camera: Camera3D
@@ -13,6 +16,10 @@ var _previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
 var _mouse_motion := Vector2.ZERO
 
 @onready var controls_info: MarginContainer = %ControlsInfo
+
+
+## NOTE: deliberately using raw buttons, not RawAction (except for toggling)
+
 
 func _ready() -> void:
 	if OS.is_debug_build():
@@ -26,9 +33,8 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_free_cam):
 		_toggle_camera_mode()
 	
-	# Handle mouse wheel for speed adjustment
+	# mouse wheel for speed adjustment
 	if event is InputEventMouseButton and visible:
-		# NOTE: deliberately raw buttons, not RawAction
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_speed *= speed_multiplier
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
@@ -36,7 +42,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Capture mouse motion only when the debug camera is active
+	# capture mouse motion only when the debug camera is active
 	if visible and event is InputEventMouseMotion:
 		_mouse_motion = event.relative
 
@@ -54,26 +60,29 @@ func _process(delta: float) -> void:
 	movement += Vector3.DOWN if Input.is_key_pressed(KEY_Q) else Vector3.ZERO
 	movement += Vector3.UP if Input.is_key_pressed(KEY_E) else Vector3.ZERO
 	
-	# Apply rotation based on mouse movement
+	# rotation based on mouse movement
 	if _mouse_motion != Vector2.ZERO:
 		var rotation_input := -_mouse_motion.x * mouse_sensitivity
 		var tilt_input := -_mouse_motion.y * mouse_sensitivity
 		
 		var euler_rotation := camera.global_transform.basis.get_euler()
 		euler_rotation.x += tilt_input
-		euler_rotation.x = clamp(euler_rotation.x, -PI / 2 + 0.01, PI / 2 - 0.01) # Limit vertical rotation
+		# limit vertical rotation
+		euler_rotation.x = clamp(euler_rotation.x, -PI / 2 + 0.01, PI / 2 - 0.01)
 		euler_rotation.y += rotation_input
 		camera.global_transform.basis = Basis.from_euler(euler_rotation)
 		
 		# Reset mouse motion for next frame
 		_mouse_motion = Vector2.ZERO
 	
-	# Apply movement
+	# movement
 	camera.global_position += camera.global_transform.basis * movement * delta * camera_speed
 
 
 func _toggle_camera_mode() -> void:
 	print_.prefix_s("Toggling camera mode. Current speed: ", camera_speed)
+	
+	## going back to main cam
 	if visible:
 		get_tree().paused = false
 		Input.mouse_mode = _previous_mouse_mode
@@ -81,6 +90,7 @@ func _toggle_camera_mode() -> void:
 		camera.queue_free()
 		hide()
 		controls_info.visible = false
+	## turn on free cam
 	else:
 		_previous_mouse_mode = Input.mouse_mode
 		get_tree().paused = true

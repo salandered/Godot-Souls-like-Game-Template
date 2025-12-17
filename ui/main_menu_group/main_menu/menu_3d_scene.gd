@@ -58,7 +58,9 @@ func _start_camera_sway() -> void:
 	# Move to Max
 	tween.tween_property(camera_3d, "position:z", cam_z_max, cam_duration)
 	# Move back to Min
-	tween.tween_property(camera_3d, "position:z", cam_z_min, cam_duration)
+	tween.tween_property(camera_3d, "position:z", cam_z_min + 15, cam_duration)
+	tween.tween_property(camera_3d, "position:z", cam_z_max, cam_duration)
+	tween.tween_property(camera_3d, "position:z", cam_z_min + 15, cam_duration)
 
 
 func _sit_skeleton():

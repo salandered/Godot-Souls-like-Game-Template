@@ -21,3 +21,9 @@ Solution: Make history tab visible in godot editor and be carefult with ctrl Z
 
 ## Misc
 this is like tenth readme i wrote, need to merge it all together
+
+
+ERROR: Unable to open file: res://.godot/imported/wZZNl7ooWl.png-89aee342f0b8c84824800b901ab32938.ctex.
+   at: (scene/resources/compressed_texture.cpp:41)
+ERROR: Unable to open file: res://.godot/imported/wZZNl7ooWl.png-89aee342f0b8c84824800b901ab32938.ctex.
+   at: (scene/resources/compressed_texture.cpp:41)

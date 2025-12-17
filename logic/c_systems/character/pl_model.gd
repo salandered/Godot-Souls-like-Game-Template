@@ -48,6 +48,13 @@ var push_rigid_bodies_force: float = 4.0
 var default_weapon_id := WeaponID.smith_sword
 # var default_weapon_id := WeaponID.pl_pinga_blade
 
+@onready var meta_sfxasp: AudioStreamPlayer = %MetaSFXASP
+
+
+signal SIG_stamina_cant_be_paid
+var stamina_cant_be_paid := SignalData.new("SIG_stamina_cant_be_paid", SIG_stamina_cant_be_paid)
+
+
 func get_hard_dependencies() -> Array[Object]:
 	return [
 		fancy_camera,
@@ -69,6 +76,7 @@ func get_hard_dependencies() -> Array[Object]:
 
 ## for Princess all the soft are kind of hard, but ok
 func get_soft_dependencies() -> Array[Object]:
+	SIG_stamina_cant_be_paid.get_object_id()
 	return [
 		sfx_system,
 		pl_anim_sfx_sig_emitter,
@@ -86,6 +94,9 @@ func initialise() -> void:
 		container.accept_all_states(self, anim_container)
 	if get_combat():
 		player_sm.initialise(self)
+
+	
+	# meta_sfxasp
 
 	__dev_initialise()
 

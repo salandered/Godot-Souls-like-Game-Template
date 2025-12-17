@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c60y5x0tauvh8"]
+
+[resource]
+resource_name = "P Dark_Grey"
+cull_mode = 2
+albedo_color = Color(0.12138162, 0.12138162, 0.12138162, 1)

@@ -28,7 +28,7 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 		OnCharacterSigASP.new(self,
 			sig_container.get_by_sig_id(SignalID.sfx_footstep),
 			fs_bass_player_3d,
-			ASPConfig.new(2.0, -0.2, 4.0, 60.0, 3, 0.1)
+			ASP3DConfig.new(2.0, -0.2, 4.0, 60.0, 3, 0.1)
 		),
 		OnCharFSSigASP.new(self,
 			sig_container.get_by_sig_id(SignalID.sfx_footstep_light),

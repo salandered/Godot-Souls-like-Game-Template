@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bsyqk5a8jul5u"]
+
+[ext_resource type="Texture2D" uid="uid://c7p2sce6rbkxc" path="res://-assets-/materials-shared/_images/baked/gold-cave_Image_0.png" id="1_8l88i"]
+[ext_resource type="Texture2D" uid="uid://cxxo7d5gb6lhn" path="res://-assets-/materials-shared/_images/baked/gold-cave_Image_1_5.png" id="2_h2o1m"]
+
+[resource]
+resource_name = "B glass.001"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.7897951, 0.7839298, 0.8053097, 0.25)
+albedo_texture = ExtResource("1_8l88i")
+metallic_texture = ExtResource("2_h2o1m")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_h2o1m")
+roughness_texture_channel = 1
+ao_enabled = true
+ao_texture = ExtResource("2_h2o1m")

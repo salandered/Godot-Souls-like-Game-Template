@@ -1,8 +1,8 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://co0ofau0x50r3"]
 
-[ext_resource type="Texture2D" uid="uid://cvu7qlrclb02v" path="res://-assets-/materials-shared/_images/ph_debris_root_bark/island_root_cluster_02_diff_1k.jpg" id="1_qgesf"]
-[ext_resource type="Texture2D" uid="uid://cng4763am6wyi" path="res://-assets-/materials-shared/_images/ph_debris_root_bark/island_root_cluster_02_rough.png" id="2_jsn75"]
-[ext_resource type="Texture2D" uid="uid://d1e8vk6bjf671" path="res://-assets-/materials-shared/_images/ph_debris_root_bark/island_root_cluster_02_nor_gl.png" id="3_afawg"]
+[ext_resource type="Texture2D" uid="uid://cvu7qlrclb02v" path="res://-assets-/materials-shared/_images/baked/island_root_cluster_02_diff_1k.jpg" id="1_qgesf"]
+[ext_resource type="Texture2D" uid="uid://cng4763am6wyi" path="res://-assets-/materials-shared/_images/baked/island_root_cluster_02_rough.png" id="2_jsn75"]
+[ext_resource type="Texture2D" uid="uid://d1e8vk6bjf671" path="res://-assets-/materials-shared/_images/baked/island_root_cluster_02_nor_gl.png" id="3_afawg"]
 
 [resource]
 resource_name = "root_cluster_02"

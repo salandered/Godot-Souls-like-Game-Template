@@ -3,7 +3,7 @@ class_name BaseSFXASPConfigContainer
 extends RefCountedSystem
 
 
-var _sfx_asp_configs: Dictionary[String, ASPConfig] = {}
+var _sfx_asp_configs: Dictionary[String, ASP3DConfig] = {}
 
 
 func _init():
@@ -13,8 +13,8 @@ func _init():
 		__log_("Container data created")
 
 
-func get_by_sfx_type_id(sfx_type_id: String) -> ASPConfig:
-	var _r: ASPConfig = u.safe_get_dict_key(_sfx_asp_configs, sfx_type_id, null, WL.SILENT)
+func get_by_sfx_type_id(sfx_type_id: String) -> ASP3DConfig:
+	var _r: ASP3DConfig = u.safe_get_dict_key(_sfx_asp_configs, sfx_type_id, null, WL.SILENT)
 	return _r
 
 
@@ -24,8 +24,8 @@ func get_by_sfx_type_id(sfx_type_id: String) -> ASPConfig:
 ## implementation can skip unneeded ones, 
 ## there will be deleted from the result dict with which container is initialised
 ## and if for example weapon accidently left footstep entry, its won't affect anything as long as other systems dont wanna walking sword ...
-func _get_dict_data() -> Dictionary[String, ASPConfig]:
-	var dict_: Dictionary[String, ASPConfig] = {
+func _get_dict_data() -> Dictionary[String, ASP3DConfig]:
+	var dict_: Dictionary[String, ASP3DConfig] = {
 		## fs like
 		SFXConstants.ID_.footstep: _get_footstep_config(),
 		SFXConstants.ID_.footstep_light: _get_footstep_light_config(),
@@ -50,7 +50,7 @@ func _get_dict_data() -> Dictionary[String, ASPConfig]:
 	}
 
 	for key: String in dict_.keys():
-		var item: ASPConfig = dict_[key]
+		var item: ASP3DConfig = dict_[key]
 		if item == null:
 			dict_.erase(key)
 			__log_("item == null for key", key, "erased from SFXASPConfigContainer")
@@ -60,35 +60,35 @@ func _get_dict_data() -> Dictionary[String, ASPConfig]:
 ## Override this values in implementation
 
 ## fs like 
-@abstract func _get_footstep_config() -> ASPConfig
+@abstract func _get_footstep_config() -> ASP3DConfig
 
-@abstract func _get_footstep_light_config() -> ASPConfig
+@abstract func _get_footstep_light_config() -> ASP3DConfig
 
-@abstract func _get_footstep_scrape_config() -> ASPConfig
+@abstract func _get_footstep_scrape_config() -> ASP3DConfig
 
-@abstract func _get_move_noise_config() -> ASPConfig
+@abstract func _get_move_noise_config() -> ASP3DConfig
 
-@abstract func _get_jingle_config() -> ASPConfig
+@abstract func _get_jingle_config() -> ASP3DConfig
 ##
-@abstract func _get_launch_config() -> ASPConfig
+@abstract func _get_launch_config() -> ASP3DConfig
 
-@abstract func _get_land_config() -> ASPConfig
+@abstract func _get_land_config() -> ASP3DConfig
 
-@abstract func _get_whoosh_config() -> ASPConfig
+@abstract func _get_whoosh_config() -> ASP3DConfig
 
 
-@abstract func _get_react_on_hit_config() -> ASPConfig
+@abstract func _get_react_on_hit_config() -> ASP3DConfig
 
 
 ## weapon
-@abstract func _get_whoosh_weapon_config() -> ASPConfig
+@abstract func _get_whoosh_weapon_config() -> ASP3DConfig
 
-@abstract func _get_hit_weapon_config() -> ASPConfig
+@abstract func _get_hit_weapon_config() -> ASP3DConfig
 
-@abstract func _get_hit_target_config() -> ASPConfig
+@abstract func _get_hit_target_config() -> ASP3DConfig
 
 ##
-@abstract func _get_unique_config() -> ASPConfig
+@abstract func _get_unique_config() -> ASP3DConfig
 
 
 ## __LOGS

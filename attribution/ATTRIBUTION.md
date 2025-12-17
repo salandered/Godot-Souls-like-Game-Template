@@ -64,10 +64,10 @@ Author: Found Sound Nation
 Source: [brokenorchestra.foundsoundnation.org](https://brokenorchestra.foundsoundnation.org/#about)
 License: [Custom / Royaltee free / mandatory attribution](attribution/music/broken_orchestra/sample-pack-terms.pdf)
 Attribution: 
->                                                                                                                              *Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.* 
->                                                                                                                              *Symphony for a Broken Orchestra was commissioned by Temple Contemporary* 
->                                                                                                                              *at The Tyler School of Art. Major support is provided by The Pew Center* 
->                                                                                                                              *for Arts & Heritage, with additional support from the Barra Foundation.*
+>                                                                                                                       *Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.* 
+>                                                                                                                       *Symphony for a Broken Orchestra was commissioned by Temple Contemporary* 
+>                                                                                                                       *at The Tyler School of Art. Major support is provided by The Pew Center* 
+>                                                                                                                       *for Arts & Heritage, with additional support from the Barra Foundation.*
 Notes: Used in tracks: Siren Tarot.
 
 
@@ -87,7 +87,18 @@ Assets: Pinga Throwing Knife;
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
 
-#### Imphenzia PixPal Palette
+#### Världskulturmuseerna (National Museums of World Culture)
+Source: [Sketchfab](https://sketchfab.com/varldskulturmuseerna)
+Assets: Mask;
+License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+
+
+#### Imphenzia, Quaternius, FairFight, GDQuest
+Links 
+* https://imphenzia.com/
+* https://quaternius.com/
+* https://www.youtube.com/@PointDown
+* https://www.gdquest.com/
 
 
 #### Olya Vasileva
@@ -96,6 +107,7 @@ Note: Painting fragments were used for UI elements.
 
 
 ### Other Legal Notices
+
 
 #### Yrsa font
 Source: [github.com/rosettatype/yrsa-rasa/](https://github.com/rosettatype/yrsa-rasa/)

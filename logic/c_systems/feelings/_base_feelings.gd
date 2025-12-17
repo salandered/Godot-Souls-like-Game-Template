@@ -17,6 +17,8 @@ var _current_health: float
 ##  
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	_current_health = get_max_health()
 	__log_("health", "curr health initted with max health", _current_health, get_max_health())
 	statuses = {}
