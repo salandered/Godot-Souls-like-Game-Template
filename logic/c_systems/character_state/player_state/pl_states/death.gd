@@ -2,7 +2,7 @@ extends BasePlayerState
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:
-	if get_actual_time_spent() > 5:
+	if get_actual_time_spent() > 3:
 		feelings.add_health(feelings.get_max_health())
 		return best_next_state_from_input(input_)
 	return PLVerdict.new()

@@ -8,8 +8,6 @@ extends BaseLevel
 
 var enemies: Array[PHCharacter]
 
-const AIR_WAVE_2 = preload("uid://cxfgvp3futm7q")
-
 
 func _ready():
 	base_asp.bus = BusID._TRACK_BASE
@@ -29,22 +27,3 @@ func _on_ph_enemy_sig_death_raised() -> void:
 			all_quiet = false
 	if all_quiet:
 		vibe_asp.stop()
-	
-
-
-func _on_ph_enemy_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
-	spawn_shockwave(char_glob_position, anim)
-
-
-func _on_princess_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
-	spawn_shockwave(char_glob_position, anim)
-	
-	
-func spawn_shockwave(char_glob_position: Vector3, anim: String):
-	if AIR_WAVE_2:
-		var effect :AirWave2= AIR_WAVE_2.instantiate()
-		effect.animation_name = anim
-		get_parent().add_child(effect)
-		
-		effect.global_position = char_glob_position
-		effect.global_position.y -= 0.2

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bayep8qmvo0vg" path="res://logic/entities/Locations/lights/flicker_omni.gd" id="1_udkd7"]
 [ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://-assets-/shaders/gdquest-like/stylized_fire.gdshader" id="2_3rxf7"]
-[ext_resource type="AudioStream" uid="uid://84u5xg7sdbmx" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Torch/Torch Loop.wav" id="3_l6wkp"]
+[ext_resource type="AudioStream" uid="uid://dpua25xqxwtyn" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Torch/Torch Loop_reimp.wav" id="3_l6wkp"]
 
 [sub_resource type="Animation" id="Animation_xbmjo"]
 length = 4.0

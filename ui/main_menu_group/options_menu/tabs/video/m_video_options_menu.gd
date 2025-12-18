@@ -23,6 +23,8 @@ func _update_ui(window: Window) -> void:
 	%VSyncControl.value = M_AppSettings.get_vsync(window)
 	_update_resolution_options_enabled(window)
 	%FPSLimitControl.value = Engine.max_fps
+	%UIScaleControl.value = M_AppSettings.get_ui_scale(window)
+	%AntiAliasingControl.value = M_AppSettings.get_msaa_3d(window)
 
 func _ready() -> void:
 	var window: Window = get_window()
@@ -43,3 +45,11 @@ func _on_v_sync_control_setting_changed(value) -> void:
 
 func _on_fps_limit_control_setting_changed(value: Variant) -> void:
 	M_AppSettings.set_fps_limit(value)
+
+
+func _on_anti_aliasing_control_setting_changed(value: Variant) -> void:
+	M_AppSettings.set_msaa_3d(value, get_window())
+
+
+func _on_ui_scale_setting_changed(value: Variant) -> void:
+	M_AppSettings.set_ui_scale(value, get_window())

@@ -25,8 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://mbm8mvh4lwqb" path="res://-assets-/materials-shared/pix-pal/another/rings_ImphenziaPixel-Attributes.png" id="16_iofgr"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/m_pause_menu_controller.gd" id="17_qsf1c"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="18_6r41u"]
-[ext_resource type="AudioStream" uid="uid://dh4jetn5i8x0q" path="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise.mp3" id="26_8kq8l"]
-[ext_resource type="AudioStream" uid="uid://d4napo1kaqw6o" path="res://-assets-/music/=tracks=/loop/individual-tracks bit 3.mp3" id="27_2kwl4"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise (2).mp3" id="26_8kq8l"]
+[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/=tracks=/loop/individual-tracks bit 3 (2).mp3" id="27_2kwl4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q0bx5"]
 panorama = ExtResource("4_ak6i7")
@@ -1170,10 +1170,14 @@ player = NodePath("../Princess")
 
 [node name="PHEnemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_q0bx5")]
 transform = Transform3D(0.6596869, 0, -0.75154054, 0, 1, 0, 0.75154054, 0, 0.6596869, 20.08444, 5.406539, -12.333949)
+show_ui_feelings = true
+float_ui_feelings = true
 player = NodePath("../Princess")
 
 [node name="PHEnemy3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_q0bx5")]
 transform = Transform3D(-0.19303563, 0, 0.98119175, 0, 1, 0, -0.98119175, 0, -0.19303563, -19.780949, 5.664034, -11.9335)
+show_ui_feelings = true
+float_ui_feelings = true
 player = NodePath("../Princess")
 
 [node name="DeathPlane" parent="." instance=ExtResource("14_8dr5r")]
@@ -1201,7 +1205,6 @@ bus = &"_d_track_vibe"
 [connection signal="SIG_land_wave" from="Princess" to="." method="_on_princess_sig_land_wave"]
 [connection signal="SIG_angry_raised" from="PHEnemy" to="." method="_on_ph_enemy_sig_angry_raised"]
 [connection signal="SIG_death_raised" from="PHEnemy" to="." method="_on_ph_enemy_sig_death_raised"]
-[connection signal="SIG_land_wave" from="PHEnemy" to="." method="_on_ph_enemy_sig_land_wave"]
 [connection signal="SIG_angry_raised" from="PHEnemy2" to="." method="_on_ph_enemy_sig_angry_raised"]
 [connection signal="SIG_death_raised" from="PHEnemy2" to="." method="_on_ph_enemy_sig_death_raised"]
 [connection signal="SIG_angry_raised" from="PHEnemy3" to="." method="_on_ph_enemy_sig_angry_raised"]

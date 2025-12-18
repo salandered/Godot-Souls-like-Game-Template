@@ -17,7 +17,7 @@ class_name PlayerSFXSystem
 func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]:
 	var _list: Array[OnSFXSigASP] = [
 		## fs
-		OnCharFSSigASP.new(self,
+		OnPlayerSigASPFS.new(self,
 			sig_container.get_by_sig_id(SignalID.sfx_footstep),
 			fs_player_3d,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.footstep)

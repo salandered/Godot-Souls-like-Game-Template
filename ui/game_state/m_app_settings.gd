@@ -14,6 +14,8 @@ const FPS_LIMIT = &'FpsLimit'
 const DISPLAY_MODE = &'DisplayMode'
 const SCREEN_RESOLUTION = &'ScreenResolution'
 const V_SYNC = &'V-Sync'
+const UI_SCALE = &'UIScale'
+const MSAA_3D = &'AntiAliasing'
 const MUTE_SETTING = &'Mute'
 const MASTER_BUS_INDEX = 0
 const SYSTEM_BUS_NAME_PREFIX = "_"
@@ -187,6 +189,33 @@ static func _set_fps_limit_from_config() -> void:
 static func set_fps_limit(limit: int) -> void:
 	Engine.max_fps = limit
 
+static func set_ui_scale(scale: float, window: Window) -> void:
+	window.get_tree().root.content_scale_factor = scale
+
+static func get_ui_scale(window: Window) -> float:
+	return window.get_tree().root.content_scale_factor
+
+static func _set_ui_scale_from_config(window: Window) -> void:
+	var default_scale: float = 1.0
+	# var dpi_scale = DisplayServer.screen_get_scale()
+	# if dpi_scale > 1.0:
+		# default_scale = dpi_scale
+	
+	var saved_scale: float = M_PlayerConfig.get_config(VIDEO_SECTION, UI_SCALE, default_scale)
+	set_ui_scale(saved_scale, window)
+
+
+static func set_msaa_3d(msaa_mode: Viewport.MSAA, window: Window) -> void:
+	window.get_viewport().msaa_3d = msaa_mode
+
+static func get_msaa_3d(window: Window) -> Viewport.MSAA:
+	return window.get_viewport().msaa_3d
+
+
+static func _set_msaa_from_config(window: Window) -> void:
+	var default_msaa: Viewport.MSAA = get_msaa_3d(window)
+	var saved_msaa: Viewport.MSAA = M_PlayerConfig.get_config(VIDEO_SECTION, MSAA_3D, default_msaa)
+	set_msaa_3d(saved_msaa, window)
 
 static func set_video_from_config(window: Window) -> void:
 	window.size_changed.connect(_on_window_size_changed.bind(window))
@@ -196,7 +225,8 @@ static func set_video_from_config(window: Window) -> void:
 		set_resolution(current_resolution, window)
 	_set_v_sync_from_config(window)
 	_set_fps_limit_from_config()
-
+	_set_ui_scale_from_config(window)
+	_set_msaa_from_config(window)
 
 # All
 

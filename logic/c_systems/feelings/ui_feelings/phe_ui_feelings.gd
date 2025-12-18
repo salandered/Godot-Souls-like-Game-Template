@@ -2,8 +2,6 @@ class_name EnemyUIFeelings
 extends NodeSystem
 
 
-@onready var e_feelings: PHEFeelings = %PHEFeelings
-
 @onready var back_health_bar: TextureProgressBar = %BackHealthBar
 @onready var health_bar: TextureProgressBar = %HealthBar
 
@@ -12,6 +10,8 @@ extends NodeSystem
 @onready var ghost_bar: TextureProgressBar = %GhostBar
 @onready var bars: MarginContainer = $Bars
 
+
+var e_feelings: PHEFeelings
 
 ## how long the change animation should take
 var ANIM_HEALTH_DUR: float = 0.2
@@ -31,13 +31,36 @@ var _prev_health: float
 var _is_fading_out := false
 
 
-func initialise(show_ui_feelings: bool) -> void:
-	if not show_ui_feelings:
-		bars.visible = false
-		__log_("shZow_ui_feelings", show_ui_feelings, "__initialised = false")
+var _anchor_3d: Node3D
+var _camera: Camera3D
+
+var UI_ENABLE: bool = false
+var ui_can_be_shown: bool = false
+
+func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D = null) -> void:
+	self.e_feelings = e_feelings_
+	self._anchor_3d = anchor_node_
+	self.UI_ENABLE = enable_ui
+
+	if not UI_ENABLE:
+		hide_ui()
+		__log_("UI_ENABLE", UI_ENABLE, "__initialised = false")
+		__initialised = false
 		return
+
+	if _anchor_3d:
+		_camera = get_viewport().get_camera_3d()
+		# We modulate the CONTAINER, not self
+		bars.modulate.a = 0.0
+		var tw = create_tween()
+		tw.tween_property(bars, "modulate:a", 1.0, 0.3)
+		bars.scale.x /= 2.0
+		bars.scale.y /= 2.0
+
+	hide_ui()
+
 	## BACK
-	back_health_bar.max_value =  e_feelings.get_max_health()
+	back_health_bar.max_value = e_feelings.get_max_health()
 	# should not be changing
 	back_health_bar.value = e_feelings.get_max_health()
 	
@@ -60,9 +83,10 @@ func initialise(show_ui_feelings: bool) -> void:
 
 func _process(delta: float) -> void:
 	if __could_not_initialised():
-		# here its not like we had problem initialising, but show_ui_feelings could be false)
+		# here its not like we had problem initialising, but UI_ENABLE may be false
 		return
-		
+	if _anchor_3d:
+		_update_floating_position()
 	# polling on every frame - may be switch to signals
 	_update_health_bar()
 
@@ -93,6 +117,39 @@ func _update_health_bar():
 		_fade_out_and_hide()
 
 	_prev_health = curr_health
+
+
+func _update_floating_position() -> void:
+	if not is_instance_valid(_anchor_3d):
+		return
+	
+	if not is_instance_valid(_camera):
+		_camera = get_viewport().get_camera_3d()
+		return
+
+	var anchor_pos = _anchor_3d.global_position
+	
+	# Hide if behind camera
+	if _camera.is_position_behind(anchor_pos):
+		hide_ui()
+		return
+	
+	# Ensure visible if previously hidden by camera check
+	# (Note: Logic in _fade_out_and_hide might conflict if we aren't careful, 
+	# but strictly for camera checks this is fine)
+	if not _is_fading_out:
+		show_ui()
+
+	var screen_pos = _camera.unproject_position(anchor_pos)
+	
+	# Center the bar using the container size
+	# Assuming Pivot is Top-Left (default)
+	var centered_pos = screen_pos
+
+	centered_pos.x -= bars.size.x * bars.scale.x / 2.0
+	
+	# Apply to the container, or self if this script is on the root Control
+	bars.position = centered_pos
 
 
 func _fade_out_and_hide():
@@ -145,3 +202,17 @@ func _start_low_health_pulse() -> void:
 func _stop_low_health_pulse() -> void:
 	_is_pulsing = false
 	UIUtils.stop_pulse(health_bar, _pulse_tween)
+
+
+func _on_ph_enemy_sig_awaken() -> void:
+	if UI_ENABLE and _prev_health > 0.0:
+		ui_can_be_shown = true
+		bars.visible = true
+
+
+func show_ui():
+	if UI_ENABLE and ui_can_be_shown:
+		bars.visible = true
+
+func hide_ui():
+	bars.visible = false

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b3mvk1hw0imcv"
+path="res://.godot/imported/individual-tracks melody 2 (2).mp3-b671f7104237cda9558e84a922483d8a.mp3str"
+
+[deps]
+
+source_file="res://-assets-/music/=tracks=/loop/individual-tracks melody 2 (2).mp3"
+dest_files=["res://.godot/imported/individual-tracks melody 2 (2).mp3-b671f7104237cda9558e84a922483d8a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

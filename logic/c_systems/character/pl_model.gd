@@ -205,6 +205,10 @@ func get_dodge_state_names() -> Array[String]:
 func get_sprint_state_names() -> Array[String]:
 	return [PS.sprint]
 
+func get_idle_state_names() -> Array[String]:
+	return [PS.idle]
+
+
 func get_power_attacks_state_names() -> Array[String]:
 	return [PS.sword_slash_3]
 

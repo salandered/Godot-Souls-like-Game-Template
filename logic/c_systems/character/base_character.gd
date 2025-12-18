@@ -146,6 +146,8 @@ func _initialise_common_char() -> void:
 
 @abstract func get_sprint_state_names() -> Array[String]
 
+@abstract func get_idle_state_names() -> Array[String]
+
 @abstract func get_power_attacks_state_names() -> Array[String]
 #
 

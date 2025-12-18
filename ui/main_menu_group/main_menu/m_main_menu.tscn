@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
 [ext_resource type="AudioStream" uid="uid://bjxibnwwxy37t" path="res://-assets-/music/=tracks=/tarot_siren 09 14 5.mp3" id="8_y57hi"]
 [ext_resource type="Script" uid="uid://dp2exxwlj6afr" path="res://ui/main_menu_group/main_menu/m_config_version_label.gd" id="9_nlybk"]
-[ext_resource type="AudioStream" uid="uid://dh4jetn5i8x0q" path="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise.mp3" id="9_wkb1a"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise (2).mp3" id="9_wkb1a"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://ui/ui_utils/nodes/color_rect.tscn" id="12_uw7yc"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/shaders/distort_menu.gdshader" id="13_rjjho"]
 

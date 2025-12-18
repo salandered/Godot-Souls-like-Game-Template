@@ -3,6 +3,7 @@ class_name PHCharacter
 
 
 @export var show_ui_feelings: bool = false
+@export var float_ui_feelings: bool = false
 
 @onready var config: PHEConfig = %Config
 @onready var container: PHContainer = %StatesContainer
@@ -30,9 +31,9 @@ class_name PHCharacter
 
 @onready var fire_marker: Marker3D = %fire_marker
 
+@onready var ui_marker: Marker3D = %UIMarker
 
 @onready var _start_position := global_transform.origin
-
 const FLICKER_FIRE = preload("uid://fbyv2s2mo6cx")
 
 ## It's all: SM, Base state, Root state
@@ -58,7 +59,9 @@ var push_rigid_bodies_force: float = 8.0
 
 signal SIG_angry_raised
 signal SIG_death_raised
+signal SIG_awaken
 
+@onready var air_wave: AirWave2 = %AirWave
 
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
@@ -107,8 +110,7 @@ func initialise() -> void:
 	container.accept_states()
 
 	visuals = get_descendants.mesh_instances(visuals_root, true)
-	
-	ui_feelings.initialise(show_ui_feelings)
+	ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
 	__validate_deps_set_init()
 
@@ -354,6 +356,10 @@ func get_dodge_state_names() -> Array[String]:
 func get_sprint_state_names() -> Array[String]:
 	return [PHES.Leaf.pursue]
 
+func get_idle_state_names() -> Array[String]:
+	return [PHES.Leaf.combat_idle]
+
+
 func get_power_attacks_state_names() -> Array[String]:
 	return [
 		PHES.Leaf.scare_off,
@@ -388,3 +394,7 @@ func _input(event: InputEvent) -> void:
 			1.0,
 			bone_mask
 		))
+
+
+func _on_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
+	air_wave.spawn_shockwave(anim)

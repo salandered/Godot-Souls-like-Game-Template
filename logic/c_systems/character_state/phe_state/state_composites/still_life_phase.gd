@@ -26,6 +26,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			if current_substate.time_remaining() <= 0.3:
 				__log_phe_check("finished awaken anim")
 				_is_awaken = true
+				me.SIG_awaken.emit()
 
 		_:
 			__log_forgot_implement(current_substate.state_name, "check_substate_transition", "will be in current sbs + _is_awaken true")
