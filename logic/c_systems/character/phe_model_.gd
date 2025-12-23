@@ -101,20 +101,22 @@ func initialise() -> void:
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	
-	if not __validate_dependencies():
-		return
+	if config:
+		config.me = self
 
-	config.me = self
-	container.me = self
-	
-	container.accept_states()
+	if container:
+		container.me = self
+		container.accept_states()
 
 	visuals = get_descendants.mesh_instances(visuals_root, true)
-	ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
+	if ui_feelings:
+		ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
-	__validate_deps_set_init()
-
-	_initialise_sm()
+	if not __validate_deps_set_init():
+		__log_warn_soft("PHCharacter failed initalisation")
+		process_mode = PROCESS_MODE_DISABLED
+	else:
+		_initialise_sm()
 
 
 ## cont
@@ -143,6 +145,8 @@ func _for_init_bones() -> BaseCharBones:
 	return null ## todo: use in enemy
 func _for_init_movement() -> BaseCharacterMovement:
 	return enemy_movement
+func _for_init_active_weapon_id_list() -> Array[String]:
+	return [WeaponID.big_pinga_blade, WeaponID.bg_aura_weapon]
 ## sfx
 func _for_init_sfx_system() -> CharacterSFXSystem:
 	return sfx_system
@@ -158,9 +162,6 @@ func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmi
 
 
 func _initialise_sm():
-	if __could_not_initialised():
-		return
-
 	state_machine = _top
 
 	var _sleep_state := container.get_state_by_name(PHES.Leaf.sleep)
@@ -212,8 +213,9 @@ func update_state_history(state_name_: String):
 
 
 func _process(delta: float) -> void:
-	if __could_not_initialised():
-		return
+	if u.is_nth_frame(10):
+		basis = basis.orthonormalized()
+
 
 	state_machine._update(delta)
 	move_and_slide()

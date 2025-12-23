@@ -6,6 +6,7 @@ var container: PlayerStatesContainer
 var feelings: PlayerFeelings
 
 var player_sm: PlayerSM
+var combat: PlayerCombat
 var anim_params_container: AnimParamsContainer
 
 var action_name: String
@@ -224,14 +225,12 @@ func is_interruptable() -> bool:
 	return anim_params_container.is_interruptable(anim.native_anim, effective_time_spent())
 
 
-func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
+func is_weapon_hurts(weapon_id: String, __log: bool = false) -> bool:
 	var _r: bool = false
-	var _weapon_id := get_player().default_weapon_id
-	match weapon_name:
-		_weapon_id:
-			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
-		_:
-			__log_error("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
+	if weapon_id in combat.get_active_weapon_ids():
+		_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
+	else:
+		__log_error("unknown weapon name " + pp.in_q(weapon_id), "is_weapon_hurts", "return false", WL.WARN_CRUCIAL)
 	if _r and __log:
 		print_.prefix("// HURT")
 	return _r

@@ -209,6 +209,7 @@ _data = {
 albedo_texture = ExtResource("2_0pem4")
 
 [node name="AirWave" type="Node3D"]
+visible = false
 script = ExtResource("1_dbngs")
 
 [node name="AirWaveMesh" type="MeshInstance3D" parent="."]

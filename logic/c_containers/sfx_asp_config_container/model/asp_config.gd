@@ -20,17 +20,13 @@ func _init(
 	max_polyphony_: int = DEF_MAX_POLYPHONY,
 	bus_id_: String = DEF_BUS_ID,
 	stream_: AudioStream = null,
+	from_position_: float = 0.0
 ):
-	super._init(vol_db_change_, pitch_change_, max_polyphony_, bus_id_, stream_)
+	super._init(vol_db_change_, pitch_change_, max_polyphony_, bus_id_, stream_, from_position_)
 
 
 func _validate_implementation() -> void:
 	pass
-
-
-func _to_string() -> String:
-	return pp.s("Vol/Pitch changes/MaxPolyph", vol_db_change, pitch_change, max_polyphony,
-		pp.bus_id(bus_id), "Stream", str(stream) if stream else "[-]")
 
 
 func set_up_asp(some_asp: AudioStreamPlayer) -> AudioStreamPlayer:
@@ -49,3 +45,8 @@ func set_up_asp(some_asp: AudioStreamPlayer) -> AudioStreamPlayer:
 		some_asp.stream = stream
 	
 	return some_asp
+
+
+func _to_string() -> String:
+	return pp.s("Vol/Pitch changes/MaxPolyph", vol_db_change, pitch_change, max_polyphony,
+		pp.bus_id(bus_id), "Stream", str(stream) if stream else "[-]", "from_pos", from_position)

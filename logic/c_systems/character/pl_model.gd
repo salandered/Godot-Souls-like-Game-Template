@@ -1,10 +1,9 @@
-extends BaseCharacter
-
 ## i m not sure are we the princess or not, but the name stuck.
 ## sometimes when 'player' sounds too abstract 
 ## (is it main player? animation player? or audio stream player?)
 ## and 'main character' is too verbose, use 'princess'
 class_name Princess
+extends BaseCharacter
 
 
 # camera
@@ -24,7 +23,8 @@ class_name Princess
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var sfx_system: PlayerSFXSystem = %AudioSystem
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
-@onready var pl_weapon_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %WeaponAnimSFXSigEmitter
+@onready var smith_sword_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmithSwordAnimSFXSigEmitter
+@onready var small_pinga_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmallPingaAnimSFXSigEmitter
 
 # anim
 @onready var anim_container: AnimContainer = %AnimContainer
@@ -45,14 +45,18 @@ class_name Princess
 var push_rigid_bodies_force: float = 4.0
 
 
-var default_weapon_id := WeaponID.smith_sword
-# var default_weapon_id := WeaponID.pl_pinga_blade
+var active_weapon_id := WeaponID.smith_sword
+# var active_weapon_id := WeaponID.pl_pinga_blade
 
 @onready var meta_sfxasp: AudioStreamPlayer = %MetaSFXASP
 
 
+var acquired_second_weapon: bool = true ## DANGER DEV
+
 signal SIG_stamina_cant_be_paid
+signal SIG_switch_weapon_cant_be_done
 var stamina_cant_be_paid := SignalData.new("SIG_stamina_cant_be_paid", SIG_stamina_cant_be_paid)
+var switch_weapon_cant_be_done := SignalData.new("SIG_switch_weapon_cant_be_done", SIG_switch_weapon_cant_be_done)
 
 
 func get_hard_dependencies() -> Array[Object]:
@@ -80,7 +84,8 @@ func get_soft_dependencies() -> Array[Object]:
 	return [
 		sfx_system,
 		pl_anim_sfx_sig_emitter,
-		pl_weapon_anim_sfx_sig_emitter,
+		smith_sword_anim_sfx_sig_emitter,
+		small_pinga_anim_sfx_sig_emitter,
 		hit_box_torso,
 		__fly_mode,
 	]
@@ -95,14 +100,16 @@ func initialise() -> void:
 	if get_combat():
 		player_sm.initialise(self)
 
-	
-	# meta_sfxasp
-
 	__dev_initialise()
 
+	
 	if not __validate_deps_set_init():
 		__log_warn_soft("well game is not ready")
+		process_mode = PROCESS_MODE_DISABLED
 
+
+## FOR INIT 
+# region 
 
 ## cont
 func _for_init_sig_container() -> BaseCharacterSignalContainer:
@@ -116,7 +123,6 @@ func _for_init_anim_params_container() -> BaseAnimParamsContainer:
 	return anim_params_container
 func _for_init_anim_list() -> BaseCharAnimList:
 	return PlAnimList.new()
-
 func _for_init_required_markers() -> Dictionary[String, Array]:
 	return PlRequiredMarkers.anim_to_required_marker
 ## anim
@@ -131,6 +137,8 @@ func _for_init_bones() -> BaseCharBones:
 	return bones
 func _for_init_movement() -> BaseCharacterMovement:
 	return player_movement
+func _for_init_active_weapon_id_list() -> Array[String]:
+	return [WeaponID.smith_sword]
 ## sfx
 func _for_init_sfx_system() -> CharacterSFXSystem:
 	return sfx_system
@@ -139,7 +147,15 @@ func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
 	return pl_anim_sfx_sig_emitter
 func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
-	return {default_weapon_id: pl_weapon_anim_sfx_sig_emitter}
+	return {
+		WeaponID.smith_sword: smith_sword_anim_sfx_sig_emitter,
+		WeaponID.small_pinga_blade: small_pinga_anim_sfx_sig_emitter,
+	}
+
+# endregion 
+
+
+## BASIC GETTERS
 
 func is_player() -> bool:
 	return true
@@ -154,6 +170,13 @@ func get_current_state() -> BasePlayerState:
 func get_prev_state_name() -> String:
 	return player_sm.prev_state_name
 
+func get_curr_action_name() -> String:
+	var action := player_sm.get_curr_action()
+	if not action:
+		return ""
+	return action.action_name
+
+##
 
 func react_on_hit(hit_data: HitData) -> void:
 	player_sm.react_on_hit(hit_data)
@@ -165,36 +188,24 @@ func reset_position() -> void:
 
 # TODO: _process or _physics_process? changed to _process: frame issues
 func _process(delta: float) -> void:
-	if __could_not_initialised():
-		return
-
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
-	# seems like every frame is ok. may be try to make it once per N frames for safety
-	basis = basis.orthonormalized()
 	
-
-		# Monitor during playback
-
+	if u.is_nth_frame(10):
+		basis = basis.orthonormalized()
+	
 
 func update(input_: InputPackage, delta: float):
 	if __fly_mode.fly_mode_enabled:
 		return
-
 
 	player_sm.update(input_, delta)
 	move_and_slide()
 	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
 
 
-##
-
-func get_curr_action_name() -> String:
-	var action := player_sm.get_curr_action()
-	if not action:
-		return ""
-	return action.action_name
-
+## USED FOR SFX SYSTEM
+# region
 
 func get_run_state_names() -> Array[String]:
 	return [PS.run]
@@ -208,9 +219,11 @@ func get_sprint_state_names() -> Array[String]:
 func get_idle_state_names() -> Array[String]:
 	return [PS.idle]
 
-
 func get_power_attacks_state_names() -> Array[String]:
-	return [PS.sword_slash_3]
+	return [PS.sword_slash_3, PS.axe_slice_3]
+
+# endregion
+
 
 ## USED FOR ENEMY PROJECTS
 # region
@@ -221,7 +234,7 @@ func hp_percentage() -> float:
 
 ## returns -1.0 or default in case of problems
 func current_attack_radius(default_return: float = -1.0) -> float:
-	if not is_attacking():
+	if not is_in_attack_state():
 		return default_return
 	var curr_action := _get_curr_action_with_warn("current_attack_radius")
 	if not curr_action:
@@ -238,8 +251,7 @@ func current_state_initial_position() -> Vector3:
 	return curr_state.initial_position
 
 
-## means in attack state (don't confuse with weapon's 'is_attacking')
-func is_attacking() -> bool:
+func is_in_attack_state() -> bool:
 	var curr_state := _get_curr_state_with_warn("is_attacking")
 	var curr_action := _get_curr_action_with_warn("is_attacking")
 	if curr_state == null or curr_action == null:
@@ -277,6 +289,7 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 
 # region: DEV
 
+
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
@@ -300,22 +313,22 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released(RawAction.t8):
 		visuals.visible = not visuals.visible
 	
-	if event.is_action_pressed(RawAction.DEV_8):
-		animator_manager.set_overlay_anim(A.react.react_from_L,
-		OverlayConfig.new(
-			OverlayConfig.Weight.new(0.8, 0.4),
-			BlendConfig.new(),
-			1.0,
-			BoneMask.get_upper_body_with_hips()
-			))
-	if event.is_action_pressed(RawAction.DEV_9):
-		animator_manager.set_overlay_anim(A.react.react_from_R,
-				OverlayConfig.new(
-			OverlayConfig.Weight.new(1.0, 0.4),
-			BlendConfig.new(),
-			1.0,
-			BoneMask.get_upper_body_with_hips()
-		))
+	# if event.is_action_pressed(RawAction.DEV_8):
+	# 	animator_manager.set_overlay_anim(A.react.react_from_L,
+	# 	OverlayConfig.new(
+	# 		OverlayConfig.Weight.new(0.8, 0.4),
+	# 		BlendConfig.new(),
+	# 		1.0,
+	# 		BoneMask.get_upper_body_with_hips()
+	# 		))
+	# if event.is_action_pressed(RawAction.DEV_9):
+	# 	animator_manager.set_overlay_anim(A.react.react_from_R,
+	# 			OverlayConfig.new(
+	# 		OverlayConfig.Weight.new(1.0, 0.4),
+	# 		BlendConfig.new(),
+	# 		1.0,
+	# 		BoneMask.get_upper_body_with_hips()
+	# 	))
 
 
 var debug_cams: Array[Node]

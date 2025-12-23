@@ -36,7 +36,7 @@ mono_crash.*.json
 misc/
 ideas/
 -adopting/
--adopt_demo_level/demo-level/
+-adopt_demo_level/
 
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons

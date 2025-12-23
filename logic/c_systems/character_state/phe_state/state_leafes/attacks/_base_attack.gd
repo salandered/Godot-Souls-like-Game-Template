@@ -27,38 +27,35 @@ func initialise() -> void:
 
 @abstract func initialise_implementation() -> void
 
-## what weapons should be attacking in this state (depends on animation ofc)
-@abstract func get_active_weapon_names() -> Array[String]
+## what weapons should be attacking in this state (depends on animation)
+@abstract func get_anim_active_weapon_ids() -> Array[String]
 
-
-## most states can use this in theirs get_active_weapon_names
-func default_get_active_weapon_names() -> Array[String]:
-	return [WeaponID.big_pinga_blade]
-	
 
 ## Combat methods to use in case of overriding on_enter_state/on_exit_state/update
 # region
 
-func _combat_set_hit_data_to_all_weapons():
-	combat.set_hit_data_to_all_weapons(hit_damage, anim.anim_id)
+func _combat_set_hit_data():
+	for weapon_id in get_anim_active_weapon_ids():
+		combat.set_hit_data(weapon_id, hit_damage, anim.anim_id)
 
 func _combat_update_is_attacking():
-	var _weapon_names := get_active_weapon_names()
-	for weapon_name_ in _weapon_names:
-		combat.update_weapon_is_attacking(weapon_name_, is_weapon_hurts(weapon_name_, false))
+	var _weapon_ids := get_anim_active_weapon_ids()
+	for _id in _weapon_ids:
+		combat.update_weapon_is_attacking(_id, is_weapon_hurts(_id, false))
 
-func _combat_reset_all_weapons():
-	combat.reset_all_weapons()
+func _combat_reset():
+	for weapon_id in get_anim_active_weapon_ids():
+		combat.reset_weapon_by_id(weapon_id)
 
 # endregion
 
 
 func on_enter_state() -> void:
-	_combat_set_hit_data_to_all_weapons()
+	_combat_set_hit_data()
 
 
 func on_exit_state() -> void:
-	_combat_reset_all_weapons()
+	_combat_reset()
 
 
 func update(delta: float):

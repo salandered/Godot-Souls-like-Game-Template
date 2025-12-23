@@ -26,6 +26,7 @@ const light_attack = "light_attack"
 
 # interact
 const lock_target = "lock_target"
+const switch_weapon = "switch_weapon"
 # const interact = "interact"
 
 # UI

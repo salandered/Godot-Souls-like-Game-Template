@@ -55,9 +55,10 @@ static var anim_to_required_marker: Dictionary[String, Array] = {
 	PHEA.react.react_from_R: [],
 	PHEA.react.react_gut: [],
 	PHEA.react.body_impact: [],
-	PHEA.react.react_dodge_B: [],
 
-	## fall stand up
+	## pushback
+	PHEA.react.react_dodge_B: [MarkerName.ALLOWS_SWITCH],
+	PHEA.react.pushback_2: [MarkerName.ALLOWS_SWITCH],
 
 
 }

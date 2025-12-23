@@ -3,20 +3,22 @@
 
 @abstract
 class_name BaseWeapon
+## TODO: probably weapon should not be character system.
+## 	character system is BaseCombat. Weapons exists as it is. 
+##  It can have _holder being assigned or not.
 extends Node3DCharacterSystem
 
 ## Weapon consists of
 # - WeaponHurtBox (area3D) - PACKED SCENE
 #     - collision of area3D IS NOT in packed scene
 #     - note that godot wants u to change its shape via Shape, not Scale 
-# - Weapon visual mesh - optional (e.g. not visuals for leg kick)
+# - Weapon visual mesh - optional (e.g. no visuals for leg kick)
 # - WeaponSFXParent packed scene
 
 ## Also
 # - see SmithSword implementation for basic approach to all this
 
-## assigned by the _holder (owner)
-@export var _holder: BaseCharacter
+var _holder: BaseCharacter
 
 ## managed by implementation
 var _weapon_hurt_box: WeaponHurtBox
@@ -40,11 +42,13 @@ var _sfx_system: BaseWeaponSFXSystem
 var _signal_container: BaseWeaponSignalContainer
 
 
+## nullable
+var spark_marker: Marker3D
+
 func get_hard_dependencies() -> Array[Object]:
 	return [
 		_weapon_hurt_box,
-		_weapon_hurt_box.get_child(0), # The _weapon_hurt_box must have a CollisionShape3D
-		_holder
+		_holder ## in the future weapon may exist without holder i suppose
 	]
 
 func get_soft_dependencies() -> Array[Object]:
@@ -55,9 +59,8 @@ func get_soft_dependencies() -> Array[Object]:
 	]
 
 
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
+func initialise(holder: BaseCharacter) -> void:
+	self._holder = holder
 	## each weapon has its own signals
 	_signal_container = BaseWeaponSignalContainer.new()
 
@@ -65,9 +68,6 @@ func _ready() -> void:
 	_weapon_hurt_box = get_weapon_hurt_box()
 	if _weapon_hurt_box:
 		_weapon_hurt_box.initialise(self, _signal_container)
-	if not get_weapon_visuals(): # its ok while aura is in wip
-		pass
-		# print_.note(false, "Note: Weapon", pp.in_q(get_weapon_id()), "has no visuals")
 	
 
 	## SFX. Here we r not logging any problems, all be logged using get_soft_dependencies etc
@@ -82,8 +82,16 @@ func _ready() -> void:
 				{_sfx_system.weapon_additional_data_key: self}
 			)
 
+
+	spark_marker = _find_spark_marker()
 	initialise_implementation()
-	__validate_dependencies()
+	validate_visuals()
+
+
+	if not __validate_dependencies():
+		__log_warn_soft("not __validate_dependencies() => deactivate()")
+		deactivate()
+
 
 ## nullable in theory
 func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
@@ -92,7 +100,7 @@ func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
 @abstract func _for_init_weapon_sfx_parent() -> WeaponSFXParent
 @abstract func _for_init_asp_container() -> BaseWeaponASPConfigContainer
 
-## nullable but hard checked
+## currently not nullable but it's better to treat is as nullable
 func get_holder() -> BaseCharacter:
 	return _holder
 
@@ -111,9 +119,7 @@ func pp_name() -> String:
 @abstract func get_weapon_id() -> String
 
 
-## could be nullable (aura weapon)
-@abstract func get_weapon_visuals() -> MeshInstance3D
-
+@abstract func validate_visuals() -> void
 
 func is_attacking() -> bool:
 	return _is_attacking
@@ -121,6 +127,25 @@ func is_attacking() -> bool:
 
 func set_is_attacking(is_attacking_: bool) -> void:
 	_is_attacking = is_attacking_
+
+
+## 
+
+func activate():
+	self.visible = true
+	process_mode = PROCESS_MODE_INHERIT
+	if get_weapon_hurt_box():
+		get_weapon_hurt_box().process_mode = PROCESS_MODE_INHERIT
+	if _sfx_system:
+		_sfx_system.enable()
+
+func deactivate():
+	self.visible = false
+	process_mode = PROCESS_MODE_DISABLED
+	if get_weapon_hurt_box():
+		get_weapon_hurt_box().process_mode = PROCESS_MODE_DISABLED
+	if _sfx_system:
+		_sfx_system.disable()
 
 
 ## HIT DATA
@@ -181,6 +206,16 @@ func get_signal_container() -> BaseWeaponSignalContainer:
 # 	return null
 
 
+const _SPARK_MARKER_NAME = "SparkMarker"
+
+func _find_spark_marker() -> Marker3D:
+	var markers := get_descendants.markers_3d(self)
+	for item: Marker3D in markers:
+		if item.name == _SPARK_MARKER_NAME:
+			return item
+	return null
+
+
 ## __LOGS
 # region
 
@@ -191,7 +226,8 @@ func __LOG_INDENT() -> int:
 	return 0
 
 func _to_string() -> String:
+	var _pp_holder := _holder.pp_name() if _holder else ""
 	return "ID '%s' wepName '%s' Holder '%s' Len of ContactHiBList '%d' isAttack '%s' HitData '%s'" \
-		% [str(get_instance_id()), pp_name(), _holder.pp_name(), len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
+		% [str(get_instance_id()), pp_name(), pp.in_q(_pp_holder), len(get_contact_hitbox_list()), str(_is_attacking), str(_hit_data)]
 
 # endregion

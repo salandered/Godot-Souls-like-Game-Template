@@ -87,6 +87,8 @@ func _check_transition(input_: InputPackage) -> PLVerdict:
 		__log_psm_check("queued 👥 exists, trying it as a force state")
 		forced_state.try_set_from_another(queued_state, true)
 		queued_state.reset() # important!
+	elif queued_state.is_set() and not curr_global_action().switches_to_queue():
+		__log_psm_check("queued 👥 exists, but switches_to_queue is false. Will be ignored!", em.mark_alt)
 	if forced_state.is_set():
 		__log_psm_check(forced_state, "prevailed", " (specific state checks skipped)")
 		var verdict := PLVerdict.new(forced_state.get_state_name())

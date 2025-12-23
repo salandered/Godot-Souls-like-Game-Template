@@ -3,6 +3,9 @@ extends RefCounted
 class_name PIMaterialReimport
 
 
+static var force_recreation = false
+
+
 static func material_reimport(node: Node):
 	_iterate_mesh_instances(node)
 
@@ -52,18 +55,17 @@ static func _process_single_surface(mesh: Mesh, idx: int, mat: Material, node_na
 	var save_path = _get_mat_save_path(mat_resource_name)
 	__log_script.info_("PATH_CALC", "Path Calculated for mat", pp.in_q(mat_resource_name), ": ", pp.in_q(save_path))
 
-	var force_recreation = false
+	
 	if FileAccess.file_exists(save_path):
 		var loaded_mat = load(save_path)
 		
-		if loaded_mat is BaseMaterial3D and loaded_mat.albedo_texture == null:
+		if loaded_mat is BaseMaterial3D and loaded_mat.albedo_texture == null and force_recreation:
 			__log_script.info_("📁 1", "⚠️ Existing file found but MISSING ALBEDO. Re-creating...", pp.in_q(mat_resource_name))
-			force_recreation = true
 		else:
 			mesh.surface_set_material(idx, loaded_mat)
 			__log_script.info_("📁 1", "💼 File with this material already exists in shared-mats. It's assigned to mat", pp.in_q(mat_resource_name))
 			return
-	# --- MODIFIED LOGIC END ---
+
 	# If we are here, it's a new material
 	_fix_rough_and_metallic(mat)
 
@@ -89,7 +91,7 @@ static func _get_mat_save_path(mat_name: String) -> String:
 	
 	for target_folder in PIConfig.SUBFOLDER_RULES:
 		for keyword in PIConfig.SUBFOLDER_RULES[target_folder]:
-			if keyword in lower_name:
+			if keyword.to_lower() in lower_name:
 				folder = target_folder
 				break
 		# If we found a match, stop checking other folders

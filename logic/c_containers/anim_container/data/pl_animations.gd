@@ -84,8 +84,9 @@ class air:
 	# const hard_fall := # _jump_up_land_HPG + "C-fall-HW-hard-land-idle-trim-pin"
 
 class attack:
-	const axe_slice_1 := _lib.all_axe + "AA-aIP-attack-slice-RL" # _ff + "axe_slice_1" # _SWS_combo + "SWSc-O-combo-1-all" #
-	const axe_slice_2 := _lib.all_axe + "AA-aIP-attack-slice-LR-cut" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "axe_slice_2"
+	const axe_slice_1 := _lib.all_axe + "AA-aIP-attack-slice-RL-1" # _ff + "axe_slice_1" # _SWS_combo + "SWSc-O-combo-1-all" #
+	const axe_slice_2 := _lib.all_axe + "AA-aIP-attack-slice-LR-cut-2" # "Ex-attack-second-slice-cut" # _SWS_combo + "SWSc-O-combo-2-slash-2" # _ff + "axe_slice_2"
+	const axe_slice_3 := _lib.all_axe + "AA-aRM-attack-roll-low-3"
 	
 	const sword_slash_1 := _lib._ss_attack + "AA-B-slash-R-L-RM-1"
 	const sword_slash_2 := _lib._ss_attack + "AA-B-slash-L-R-RM-2"
@@ -123,6 +124,9 @@ class fall_stand_up:
 	const thrown_r_small_rm := _lib._fall_stand_up + "AA-soccer fall R small"
 	const thrown_l_small_rm := _lib._fall_stand_up + "AA-soccer fall L small"
 
+
+class equip:
+	const equip := _lib.testing + "EP-p1-O-idle-equip"
 
 # later
 # const roll := _lib.jump_v4 + "RM-Sprint-to-Roll" # _OS_fight + "OS-evade-forward" # todo

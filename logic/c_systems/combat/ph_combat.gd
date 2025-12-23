@@ -21,5 +21,3 @@ func is_player() -> bool:
 
 func get_character() -> BaseCharacter:
 	return me
-
-

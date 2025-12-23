@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bu1hg3ulbeitd"]
+
+[ext_resource type="Texture2D" uid="uid://yo1vnmlk5p2f" path="res://-adopt_demo_level/demo-level_/jaw/jaw_T_Trim_Furniture_BaseColor.png" id="1_2cfof"]
+[ext_resource type="Texture2D" uid="uid://2oxx1ccoehpt" path="res://-adopt_demo_level/demo-level_/jaw/jaw_T_Trim_Furniture_ORM.png" id="2_6f00k"]
+[ext_resource type="Texture2D" uid="uid://ccbp75bqmnlna" path="res://-adopt_demo_level/demo-level_/jaw/jaw_T_Trim_Furniture_Normal.png" id="3_l43vn"]
+
+[resource]
+resource_name = "MI_Trim_Furniture.024"
+cull_mode = 2
+albedo_texture = ExtResource("1_2cfof")
+metallic = 1.0
+metallic_texture = ExtResource("2_6f00k")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_6f00k")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_l43vn")

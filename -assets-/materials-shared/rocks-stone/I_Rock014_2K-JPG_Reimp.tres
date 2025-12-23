@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cdxyjrj53fa7o"]
+
+[ext_resource type="Texture2D" uid="uid://dqjcqjusb6cca" path="res://-adopt_demo_level/demo-level_/linkoln/lincoln_Rock014_2K-JPG_Color.jpg" id="1_4gsf1"]
+[ext_resource type="Texture2D" uid="uid://bkhb35ybqxwxs" path="res://-adopt_demo_level/demo-level_/linkoln/lincoln_Rock014_2K-JPG_NormalGL.jpg" id="2_l1qta"]
+[ext_resource type="Texture2D" uid="uid://c586t5pch8t7v" path="res://-adopt_demo_level/demo-level_/linkoln/lincoln_Rock014_2K-JPG_Roughness.jpg" id="3_vuumw"]
+
+[resource]
+resource_name = "I_Rock014_2K-JPG"
+cull_mode = 2
+albedo_texture = ExtResource("1_4gsf1")
+metallic = 1.0
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_vuumw")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_l1qta")

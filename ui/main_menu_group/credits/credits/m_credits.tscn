@@ -26,8 +26,10 @@ theme = ExtResource("2_2vggx")
 bbcode_enabled = true
 text = "[center]
 
+
 [b][font_size=32]game demo[/font_size][/b]
 Author: me myself and I
+
 
 
 [b][font_size=32]Assets & Art[/font_size][/b]
@@ -87,10 +89,10 @@ Author: Found Sound Nation
 Source: [url=https://brokenorchestra.foundsoundnation.org/#about]brokenorchestra.foundsoundnation.org[/url]
 License: [url=attribution/music/broken_orchestra/sample-pack-terms.pdf]Custom / Royaltee free / mandatory attribution[/url]
 Attribution: 
-[indent][left][color=#dddddd]                                                                                                                             [i]Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.[/i] [/color][/left][/indent]
-[indent][left][color=#dddddd]                                                                                                                             [i]Symphony for a Broken Orchestra was commissioned by Temple Contemporary[/i] [/color][/left][/indent]
-[indent][left][color=#dddddd]                                                                                                                             [i]at The Tyler School of Art. Major support is provided by The Pew Center[/i] [/color][/left][/indent]
-[indent][left][color=#dddddd]                                                                                                                             [i]for Arts & Heritage, with additional support from the Barra Foundation.[/i][/color][/left][/indent]
+[indent][left][color=#dddddd]                                                                                                                      [i]Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.[/i] [/color][/left][/indent]
+[indent][left][color=#dddddd]                                                                                                                      [i]Symphony for a Broken Orchestra was commissioned by Temple Contemporary[/i] [/color][/left][/indent]
+[indent][left][color=#dddddd]                                                                                                                      [i]at The Tyler School of Art. Major support is provided by The Pew Center[/i] [/color][/left][/indent]
+[indent][left][color=#dddddd]                                                                                                                      [i]for Arts & Heritage, with additional support from the Barra Foundation.[/i][/color][/left][/indent]
 Notes: Used in tracks: Siren Tarot.
 
 
@@ -110,13 +112,27 @@ Assets: Pinga Throwing Knife;
 License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 Universal[/url]
 
 
-[b][font_size=24]Imphenzia PixPal Palette[/font_size][/b]
+[b][font_size=24]Världskulturmuseerna (National Museums of World Culture)[/font_size][/b]
+Source: [url=https://sketchfab.com/varldskulturmuseerna]Sketchfab[/url]
+Assets: Mask;
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 Universal[/url]
+
+
+[b][font_size=24]Imphenzia, Quaternius, FairFight, GDQuest[/font_size][/b]
+Links 
+* https://imphenzia.com/
+* https://quaternius.com/
+* https://www.youtube.com/@PointDown
+* https://www.gdquest.com/
 
 
 [b][font_size=24]Olya Vasileva[/font_size][/b]
 Note: Painting fragments were used for UI elements.
 
+
+
 [b][font_size=32]Other Legal Notices[/font_size][/b]
+
 
 [b][font_size=24]Yrsa font[/font_size][/b]
 Source: [url=https://github.com/rosettatype/yrsa-rasa/]github.com/rosettatype/yrsa-rasa/[/url]

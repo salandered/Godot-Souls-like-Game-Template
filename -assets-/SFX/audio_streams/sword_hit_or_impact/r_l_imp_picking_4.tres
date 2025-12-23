@@ -1,7 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c2ir778b2raa6"]
-
-[ext_resource type="AudioStream" uid="uid://8s7lj0cwmn20" path="res://-assets-/SFX/sources/_nu/crack09.mp3_sword_bone_power_hit.wav" id="1_fovm7"]
-
-[resource]
-streams_count = 1
-stream_0/stream = ExtResource("1_fovm7")

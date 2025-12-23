@@ -73,6 +73,11 @@ static func array_of_collision_shape(array: Array) -> Array[CollisionShape3D]:
 	list_casted.assign(_safe_validate_class(array, CollisionShape3D, "CollisionShape3D"))
 	return list_casted
 
+static func array_of_marker_3d(array: Array) -> Array[Marker3D]:
+	var list_casted: Array[Marker3D] = []
+	list_casted.assign(_safe_validate_class(array, Marker3D, "Marker3D"))
+	return list_casted
+
 
 static func array_of_mesh_instances(array: Array) -> Array[MeshInstance3D]:
 	var list_casted: Array[MeshInstance3D] = []

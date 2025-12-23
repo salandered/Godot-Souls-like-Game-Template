@@ -61,6 +61,7 @@ window/stretch/aspect="expand"
 [editor]
 
 movie_writer/movie_file="C:/safe/godot/==recordings/rec.avi"
+movie_writer/disable_vsync=true
 
 [editor_plugins]
 
@@ -69,14 +70,13 @@ enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/
 [file_customization]
 
 folder_colors={
-"res://-adopt_demo_level/demo-level/": "yellow",
-"res://-adopt_demo_level/demo-level/demo-level/": "yellow",
-"res://-adopt_demo_level/demo-level/demo-level/exit_2/": "blue",
-"res://-adopt_demo_level/demo-level/demo-level/island/": "red",
-"res://-adopt_demo_level/demo-level/demo-level/jaw/": "gray",
-"res://-adopt_demo_level/demo-level/demo-level/lady/": "blue",
-"res://-adopt_demo_level/demo-level/demo-level/linkoln/wooden_balcony/": "blue",
-"res://-adopt_demo_level/demo-level/demo-level/tree_far/": "gray",
+"res://-adopt_demo_level/demo-level_/": "yellow",
+"res://-adopt_demo_level/demo-level_/exit_2/": "blue",
+"res://-adopt_demo_level/demo-level_/island/": "red",
+"res://-adopt_demo_level/demo-level_/jaw/": "gray",
+"res://-adopt_demo_level/demo-level_/lady/": "blue",
+"res://-adopt_demo_level/demo-level_/linkoln/wooden_balcony/": "blue",
+"res://-adopt_demo_level/demo-level_/tree_far/": "gray",
 "res://-adopting/": "gray",
 "res://-adopting/misc/": "gray",
 "res://-adopting/sfx_sounds/freesound_cc0/": "blue",
@@ -217,6 +217,11 @@ lock_target={
 light_attack={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(95, 9),"global_position":Vector2(102, 52),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+switch_weapon={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
 ]
 }
 UI_escape={

@@ -12,10 +12,6 @@ var unique_asp_configs: Dictionary[String, ASP3DConfig] = {
 }
 
 
-func _hard_validate_implementation() -> bool:
-	return self._sfx_system and self._sfx_system is CharacterSFXSystem
-
-
 func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
 	var mute: bool = false
 	var unique_value := get_unique_from_payload(payload)
@@ -30,36 +26,6 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 		base_vol_db += _asp_config.vol_db_change
 		base_pitch += _asp_config.pitch_change
 	return VolPitch.new(base_vol_db, base_pitch, mute)
-
-
-## Character Helpers
-
-## not nullable
-func get_character_sfx_system() -> CharacterSFXSystem:
-	return self._sfx_system as CharacterSFXSystem
-
-
-## not nullable
-func get_character() -> BaseCharacter:
-	var _char := get_character_sfx_system().get_character()
-	return _char
-
-
-## nullable
-func get_curr_state() -> BaseCharacterState:
-	var _curr_state := get_character_sfx_system().get_character().get_current_state()
-	return _curr_state
-
-
-func get_curr_state_name() -> String:
-	var _curr_state := get_character_sfx_system().get_character().get_current_state()
-	if _curr_state == null:
-		return ""
-	else:
-		return _curr_state.state_name
-
-func get_prev_state_name() -> String:
-	return get_character_sfx_system().get_character().get_prev_state_name()
 
 
 ## __LOGS

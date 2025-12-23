@@ -18,12 +18,12 @@ func initialise_implementation() -> void:
 
 	hit_damage = 25
 
-func get_active_weapon_names() -> Array[String]:
+func get_anim_active_weapon_ids() -> Array[String]:
 	return [WeaponID.bg_aura_weapon]
 
 func on_exit_state() -> void:
 	get_animator_manager().reset_global_speed_scale()
-	_combat_reset_all_weapons()
+	_combat_reset()
 	_pushed_rigid_bodies = false
 	
 

@@ -1,4 +1,3 @@
-# landing_run.gd - running landing
 extends BasePlayerState
 
 

@@ -10,14 +10,14 @@ func initialise_implementation() -> void:
 	default_sp.ANGULAR_SPEED = 0.1
 
 
-func get_active_weapon_names() -> Array[String]:
+func get_anim_active_weapon_ids() -> Array[String]:
 	return [WeaponID.bg_aura_weapon]
 
 
 var _pushed_rigid_bodies: bool = false
 
 func on_enter_state() -> void:
-	_combat_set_hit_data_to_all_weapons()
+	_combat_set_hit_data()
 	
 	u.safe_emit(
 		me.get_sig_container().get_by_sig_id(SignalID.sfx_unique),

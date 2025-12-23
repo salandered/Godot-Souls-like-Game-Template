@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bxq173lqc25wh"]
+
+[resource]
+resource_name = "PT_Blue_chess_big"
+cull_mode = 2
+roughness = 0.5

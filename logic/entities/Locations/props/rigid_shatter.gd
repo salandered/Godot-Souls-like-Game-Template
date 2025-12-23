@@ -1,5 +1,5 @@
-extends BaseRigidBodyPhysicsSFX
 class_name RigidShatter
+extends BaseRigidBodyPhysicsSFX
 
 
 const WOOD_IMPACT: AudioStream = preload("uid://de0vjaija8veh")

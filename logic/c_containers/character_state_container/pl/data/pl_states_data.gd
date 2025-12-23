@@ -74,8 +74,9 @@ var node_to_pl_state_data: Dictionary[String, _StateData] = { # { Node name : _S
 	"Thrown": _StateData.new(PS.thrown, 110, Leg.Beh.double, false, 0.0),
 
 	## Attacks
-	"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 10.0),
-	"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 12.0),
+	"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 12.0),
+	"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 15.0),
+	"AxeSlice3": _StateData.new(PS.axe_slice_3, 15, Leg.Beh.double, false, 20.0),
 	# priority a bit higher
 	# smaller because it reqiuires being in a draining sprint
 	"AttackFromRun": _StateData.new(PS.attack_from_run, 16, Leg.Beh.double, false, 8.0),
@@ -109,6 +110,7 @@ var node_to_pl_action: Dictionary[String, _PlActionData] = { # { Node name : _Pl
 	## attacks
 	"AxeSlice1Action": _PlActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1, MotionType.IDLE),
 	"AxeSlice2Action": _PlActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2, MotionType.IDLE),
+	"AxeSlice3Action": _PlActionData.new(PS.axe_slice_3, PS.Act.axe_slice_3, A.attack.axe_slice_3, MotionType.IDLE),
 	"AttackFromRunAction": _PlActionData.new(PS.attack_from_run, PS.Act.attack_from_run, A.attack.attack_from_run, MotionType.IDLE),
 	"AttackFromDodgeAction": _PlActionData.new(PS.attack_from_dodge, PS.Act.attack_from_dodge, A.attack.attack_from_dodge, MotionType.IDLE),
 	

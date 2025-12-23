@@ -1,14 +1,18 @@
-extends RefCountedSystem
 ## to cycle through an array of values endlessly
+## make sure to initialise it as global var
 class_name Cycler
+extends RefCountedSystem
+
 
 var _values: Array = []
 var _pointer: int = -1
+
 
 func _init(values: Array):
 	if values.is_empty():
 		__log_warn("values is an empty array", "_init", "initialised with []")
 	_values = values
+
 
 ## Returns the next value in the array, looping back to the start.
 func get_next() -> Variant:
@@ -30,6 +34,10 @@ func get_current() -> Variant:
 		return _values[0]
 	
 	return _values[_pointer]
+
+
+func get_current_pointer() -> Variant:
+	return _pointer
 
 
 ## __LOGS

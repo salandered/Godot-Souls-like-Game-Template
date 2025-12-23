@@ -25,6 +25,7 @@ const TURN_180_APEX = "APEX"
 const ALLOWS_SWITCH = "allows_switch"
 # currently used in basic pl attack
 const ALLOWS_SWITCH_TO_ITSELF = "allows_switch_to_itself"
+const ALLOWS_SWITCH_TO_FIRST = "allows_switch_to_first"
 #
 const ALLOWS_SWITCH_TO_ATTACK = "allows_switch_to_attack"
 # in enemy for specific series logic

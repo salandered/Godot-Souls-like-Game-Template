@@ -18,7 +18,7 @@ func _ready() -> void:
 	asp_config.set_up_asp(on_shatter_aps_3d_2)
 	
 	on_shatter_aps_3d.play()
-	__log_("first play", pp.asp_play_3d(on_shatter_aps_3d))
+	__log_("first play", pp.asp_3d_play(on_shatter_aps_3d))
 	
 	for shatter: RigidBody3D in get_descendants.rigid_bodies(self):
 		__log_("setting script", RIGID_SHATTER_SCRIPT)
@@ -33,7 +33,7 @@ func _ready() -> void:
 	__log_("~~", "ready of shattered column", count, "were initialised")
 	await FrameUtils.wait_process_frames(30)
 	on_shatter_aps_3d_2.play()
-	__log_("second play", pp.asp_play_3d(on_shatter_aps_3d_2))
+	__log_("second play", pp.asp_3d_play(on_shatter_aps_3d_2))
 
 
 ## __LOGS

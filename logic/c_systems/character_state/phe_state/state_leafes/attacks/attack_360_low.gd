@@ -7,5 +7,5 @@ func initialise_implementation() -> void:
 	})
 	hit_damage = 25
 
-func get_active_weapon_names() -> Array[String]:
-	return default_get_active_weapon_names()
+func get_anim_active_weapon_ids() -> Array[String]:
+	return  [WeaponID.big_pinga_blade]

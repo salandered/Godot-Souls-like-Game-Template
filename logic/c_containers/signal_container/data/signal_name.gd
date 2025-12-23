@@ -26,3 +26,6 @@ const sfx_hit_target := "SFX_hit_target"
 
 ##
 const sfx_unique := "SFX_unique"
+
+## 
+const sfx_switch_weapon := "SFX_switch_weapon"

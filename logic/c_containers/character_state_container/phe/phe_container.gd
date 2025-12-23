@@ -115,6 +115,7 @@ var node_to_leaf_state_data: Dictionary[String, _LStData] = {
 	
 	## react
 	"Pushback": _LStData.new(PHES.Leaf.pushback, _AData.new(PHEA.react.react_dodge_B, -0.1), _CommitData.new(-1, -1)),
+	"Pushback2": _LStData.new(PHES.Leaf.pushback_2, _AData.new(PHEA.react.pushback_2, -0.1), _CommitData.new(-1, -1)),
 }
 
 var _states: Dictionary[String, BasePHEState]

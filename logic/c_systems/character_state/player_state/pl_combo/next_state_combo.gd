@@ -85,7 +85,7 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 
 	var _prefix := "triggered 🖲️"
 	
-	var _msg := "NEEDS/GOT"
+	var _msg := "NEEDS/GOT "
 	_msg += pp.s("St", needs_curr_state, "/", curr_state_name)
 
 	if _needs_curr_action_is_set():
@@ -112,7 +112,7 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 	# always log
 	_msg += pp.s("| timeSpent", curr_action.time_spent())
 	
-	print_.combo(name + _prefix,
+	__log_(name + _prefix,
 			pp.s(
 			"st2trigger", state_to_trigger,
 			_msg,

@@ -14,9 +14,6 @@ func initialise_implementation() -> void:
 	})
 
 
-func get_active_weapon_names() -> Array[String]:
-	return default_get_active_weapon_names()
-
 func update(input_: InputPackage, delta: float):
 	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
 		pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))

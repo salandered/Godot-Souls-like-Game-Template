@@ -15,12 +15,9 @@ func initialise_implementation() -> void:
 	})
 	extra_root_speed_Z.set_specific(DEFAULT_GLOBAL_EXTRA_SPEED_Z)
 
-func get_active_weapon_names() -> Array[String]:
-	return default_get_active_weapon_names()
-
 
 func on_enter_action(input_: InputPackage) -> void:
-	_combat_set_hit_data_to_all_weapons()
+	_combat_set_hit_data()
 
 	var _speed_extra_Z := extra_root_speed_Z.calculate_actual(PREV_ACTION)
 	

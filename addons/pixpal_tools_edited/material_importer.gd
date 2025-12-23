@@ -19,8 +19,8 @@ func iterate(node: Node) -> void:
 			# Material found. Replace with our version
 			# - edited: was .endswith
 			# - edited: skip feature
-			if material_name.contains('PixPal') and not material_name.contains('-skipreimp'):
-				print("PixPal mat found. replacing with godot version")
+			if "pixpal" in material_name.to_lower() and "-skipreimp" not in material_name:
+				print("\n🎨 PixPal mat found. replacing with godot version 🎨\n")
 				mesh.set_surface_material(index, get_pixpal_material())
 
 	for child in node.get_children():

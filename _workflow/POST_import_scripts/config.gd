@@ -14,6 +14,7 @@ const REIMP_SUFFIX = "_Reimp"
 const BASE_MAT_PATH = "res://-assets-/materials-shared/"
 
 
+## case insensitive
 const SUBFOLDER_RULES = {
 	# specific
 	"mines": ["minestrim", "mine_carts", "mines"],
@@ -22,7 +23,7 @@ const SUBFOLDER_RULES = {
 		"08___Default.001", # Pinga
 		"Engel_C" # angels
 		],
-	"solid": ["P orange", "P white", "P sand", "P blue", "P green", "P dark_grey"],
+	"solid": ["_P col", "P orange", "P white", "P sand", "P blue", "P green", "P dark_grey"],
 	"different": ["gold", "glass"],
 
 	# usual

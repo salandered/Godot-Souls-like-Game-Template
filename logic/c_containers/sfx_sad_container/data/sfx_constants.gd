@@ -31,11 +31,14 @@ class ID_:
 
 	## unique
 	const unique := "unique"
+	##
+	const switch_weapon := "switch_weapon"
 
 
 ## 
 const modifier_key = "modifier"
 const unique_key = "unique"
+const weapon_id_key = "weapon_id"
 
 
 class Modifier:

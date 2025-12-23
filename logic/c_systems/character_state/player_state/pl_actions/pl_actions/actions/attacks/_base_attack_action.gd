@@ -33,33 +33,39 @@ func initialise() -> void:
 # to override instead of initialise
 @abstract func initialise_implementation() -> void
 
-## what weapons should be attacking in this state (depends on animation ofc)
-@abstract func get_active_weapon_names() -> Array[String]
 
-## most states can use this in their get_active_weapon_names
-func default_get_active_weapon_names() -> Array[String]:
-	return [get_player().default_weapon_id]
+## what weapon could be attacking in this action.
+## 	- currently player may have only one weapon
+## 	- switch of weapons is perfomed on the combat level
+## => we rely on combat and return only one id. 
+func get_active_weapon_id() -> String:
+	var _ids := combat.get_active_weapon_ids()
+	if len(_ids) != 1:
+		__log_warn(pp.s("currently 1 active weapon is expected for player, got", len(_ids)))
+		return ""
+	return _ids[0]
+
 	
-
 ## Combat methods to use in case of overriding on_enter_state/on_exit_state/update
 # region
 
-func _combat_set_hit_data_to_all_weapons():
-	player_sm.combat.set_hit_data_to_all_weapons(hit_damage, anim.anim_id)
+func _combat_set_hit_data():
+	player_sm.combat.set_hit_data(get_active_weapon_id(), hit_damage, anim.anim_id)
 
 func _combat_update_is_attacking(__log: bool = false):
-	var _weapon_names := get_active_weapon_names()
-	for weapon_name_ in _weapon_names:
-		player_sm.combat.update_weapon_is_attacking(weapon_name_, is_weapon_hurts(weapon_name_, __log))
+	var _weapon_id := get_active_weapon_id()
+	if _weapon_id != "":
+		player_sm.combat.update_weapon_is_attacking(_weapon_id, is_weapon_hurts(_weapon_id, __log))
 
-func _combat_reset_all_weapons():
-	player_sm.combat.reset_all_weapons()
+func _combat_reset():
+	player_sm.combat.reset_weapon_by_id(get_active_weapon_id())
 
 # endregion
 
 
 func on_enter_action(input_: InputPackage):
-	_combat_set_hit_data_to_all_weapons()
+	get_animator_manager().force_stop_overlay()
+	_combat_set_hit_data()
 
 	if player_sm.area_awareness.is_camera_locked():
 		default_sp.ANGULAR_SPEED = 2
@@ -81,7 +87,7 @@ func on_enter_action(input_: InputPackage):
 	
 
 func on_exit_action():
-	_combat_reset_all_weapons()
+	_combat_reset()
 
 
 func update(input_: InputPackage, delta: float):

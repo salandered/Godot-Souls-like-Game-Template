@@ -1,7 +1,7 @@
 @tool
-@icon("res://-assets-/x_icons/red/icon_sword.png")
-extends PHEWeapon
 class_name PingaBlade
+extends PHEWeapon
+
 
 @onready var _weapon_hurt_box_: WeaponHurtBox = %WeaponHurtBox
 @onready var _visuals_: Node3D = %Visuals
@@ -9,8 +9,11 @@ class_name PingaBlade
 
 
 func initialise_implementation() -> void:
-	var mesh: MeshInstance3D = _visuals_.get_child(0)
-	assert(mesh and mesh is MeshInstance3D)
+	return
+
+
+func validate_visuals() -> void:
+	return # todo
 
 
 func get_weapon_hurt_box() -> WeaponHurtBox:
@@ -18,10 +21,6 @@ func get_weapon_hurt_box() -> WeaponHurtBox:
 
 func get_weapon_id() -> String:
 	return WeaponID.big_pinga_blade
-
-
-func get_weapon_visuals() -> MeshInstance3D:
-	return _visuals_
 
 
 ## SFX

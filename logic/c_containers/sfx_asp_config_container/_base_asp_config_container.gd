@@ -13,6 +13,7 @@ func _init():
 		__log_("Container data created")
 
 
+## nullable
 func get_by_sfx_type_id(sfx_type_id: String) -> ASP3DConfig:
 	var _r: ASP3DConfig = u.safe_get_dict_key(_sfx_asp_configs, sfx_type_id, null, WL.SILENT)
 	return _r

@@ -40,7 +40,8 @@ static var enemy_attack_to_direction: Dictionary[String, AttackDirection.Dir] = 
 
 static var pl_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
 	A.attack.axe_slice_1: AttackDirection.Dir.LEFT,
-	A.attack.axe_slice_2: AttackDirection.Dir.UP, # technically should be RIGHT
+	A.attack.axe_slice_2: AttackDirection.Dir.RIGHT,
+	A.attack.axe_slice_3: AttackDirection.Dir.LEFT,
 	A.attack.attack_from_run: AttackDirection.Dir.STAB,
 	A.attack.attack_from_dodge: AttackDirection.Dir.STAB,
 	A.attack.sword_slash_1: AttackDirection.Dir.LEFT,
@@ -80,8 +81,11 @@ static var enemy_attack_to_pl_state_interruption: Dictionary[String, String] = {
 
 
 ## here listed only attacks which causes interrupt states
-static var pl_attack_to_enemy_state_interruption: Dictionary[String, String] = {
-	A.attack.sword_slash_3: PHES.Leaf.pushback,
+static var pl_attack_to_enemy_state_interruption: Dictionary[String, Array] = {
+	A.attack.sword_slash_3: [PHES.Leaf.pushback, 1.0],
+	A.attack.axe_slice_1: [PHES.Leaf.pushback, 0.3],
+	A.attack.axe_slice_2: [PHES.Leaf.pushback_2, 0.4],
+	A.attack.axe_slice_3: [PHES.Leaf.pushback_2, 1.0],
 	}
 
 
@@ -217,9 +221,12 @@ static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 
 ## may return ""
 static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
-	var _e_state: String
-	_e_state = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, "", WL.SILENT)
-	__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption", pp.in_q(_e_state))
+	var _e_state = ""
+	var _e_state_and_probability: Array
+	_e_state_and_probability = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)
+	_e_state = _e_state_and_probability[0] if ra.chance(_e_state_and_probability[1]) else ""
+	__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
+		pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))
 	return _e_state
 
 # endregion

@@ -63,6 +63,7 @@ class react:
 	const react_gut := _lib._axe_pl + "react large gut"
 	const body_impact := _lib._some_from_pl + "C-body-impact"
 	const react_dodge_B := _lib._testing + "Standing React Large From Front"
+	const pushback_2 := _lib._testing + "hit push B rm"
 
 
 # class fall_stand_up:
@@ -132,4 +133,5 @@ var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(react.react_gut),
 	AnimationData.new(react.body_impact),
 	AnimationData.new(react.react_dodge_B),
+	AnimationData.new(react.pushback_2),
 ]

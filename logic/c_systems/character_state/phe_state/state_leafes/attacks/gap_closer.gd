@@ -25,7 +25,7 @@ func initialise_implementation():
 	hit_damage = 35
 
 
-func get_active_weapon_names() -> Array[String]:
+func get_anim_active_weapon_ids() -> Array[String]:
 	return [WeaponID.big_pinga_blade]
 
 
@@ -40,7 +40,7 @@ func _decide_mode_on_enter():
 
 func on_enter_state() -> void:
 	_sfx_weapon_hit_emitted = false
-	_combat_set_hit_data_to_all_weapons()
+	_combat_set_hit_data()
 
 	_decide_mode_on_enter()
 	gap_calculator = GapJumpCalculator.new(mode_switcher.get_curr_speed())
@@ -54,7 +54,7 @@ func on_enter_state() -> void:
 func on_exit_state() -> void:
 	APPLY_GRAVITY = true
 	_pushed_rigid_bodies = false
-	_combat_reset_all_weapons()
+	_combat_reset()
 
 
 var _pushed_rigid_bodies: bool = false
@@ -89,8 +89,8 @@ func update(delta: float):
 func _sfx_weapon_hit():
 	if _sfx_weapon_hit_emitted:
 		return
-	if combat and len(get_active_weapon_names()) > 0:
-		var curr_weapon := combat.get_weapon_by_id(get_active_weapon_names()[0])
+	if combat and len(get_anim_active_weapon_ids()) > 0:
+		var curr_weapon := combat.get_registered_weapon_by_id(get_anim_active_weapon_ids()[0])
 		if curr_weapon:
 			u.safe_emit(
 				curr_weapon.get_signal_container().get_by_sig_id(SignalID.sfx_hit_weapon),

@@ -50,7 +50,7 @@ game_scene_path = "uid://m2o3tdaa66rk"
 options_packed_scene = ExtResource("2_hvsaw")
 credits_packed_scene = ExtResource("3_nlybk")
 level_1_scene_path = "uid://m2o3tdaa66rk"
-level_2_scene_path = "uid://m2o3tdaa66rk"
+level_2_scene_path = "uid://mdwtc0gt416o"
 
 [node name="Menu3DScene" parent="." instance=ExtResource("5_hvsaw")]
 unique_name_in_owner = true

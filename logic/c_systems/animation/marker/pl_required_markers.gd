@@ -46,8 +46,9 @@ static var anim_to_required_marker: Dictionary[String, Array] = {
 
 
 	## attack
-	A.attack.axe_slice_1: [MarkerName.ALLOWS_SWITCH],
+	A.attack.axe_slice_1: [MarkerName.ALLOWS_SWITCH, MarkerName.ALLOWS_SWITCH_TO_ITSELF],
 	A.attack.axe_slice_2: [MarkerName.ALLOWS_SWITCH],
+	A.attack.axe_slice_3: [MarkerName.ALLOWS_SWITCH],
 	A.attack.sword_slash_1: [MarkerName.ALLOWS_SWITCH, MarkerName.ALLOWS_SWITCH_TO_ITSELF],
 	A.attack.sword_slash_2: [MarkerName.ALLOWS_SWITCH],
 	A.attack.sword_slash_3: [MarkerName.ALLOWS_SWITCH],

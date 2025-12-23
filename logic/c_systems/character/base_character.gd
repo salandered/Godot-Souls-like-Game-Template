@@ -62,7 +62,7 @@ func _initialise_common_char() -> void:
 	var _r := get_descendants.base_combat(self)
 	if not error_.len_one(_r):
 		_combat = _r[0]
-		_combat.initialise()
+		_combat.initialise(self, _for_init_active_weapon_id_list())
 
 		var hit_boxes := get_descendants.char_hit_boxes(self)
 		for item: CharacterHitbox in hit_boxes:
@@ -84,19 +84,23 @@ func _initialise_common_char() -> void:
 	
 		_for_init_anim_sfx_sig_emitter().initialise(sad_container, _sig_container)
 	
-		## NOTE: unlike character sfx, where sfx_system is tied to pl_anim_sfx_sig_emitter,
-		##       for weapon we manage emitter here on character side, while its sfx system 
-		##       is managed by weapon itself. This is done because anim knowledge is on player side. 
-		##       Weapon wouldn't know when to play anim based sounds.
-		## NOTE: when character will be able to switch weapons, this part should be re-called on switch
 		if _combat:
-			var _weapon_id_to_emitter := _for_init_weapon_id_to_emitter()
-			var _weapons := _combat.get_all_weapons()
-			for weapon: BaseWeapon in _weapons:
-				var _emitter: BaseAnimSFXSignalEmitter = _weapon_id_to_emitter.get(weapon.get_weapon_id())
-				if not error_.null_object(_emitter):
-					_emitter.initialise(weapon.get_sad_container(), weapon.get_signal_container())
-					
+			_initialise_weapons_sfx()
+
+
+func _initialise_weapons_sfx():
+	## NOTE: unlike character sfx, where sfx_system is tied to pl_anim_sfx_sig_emitter,
+	##       for weapon we manage emitter here on character side, while its sfx system 
+	##       is managed by weapon itself. This is done because anim knowledge is on player side. 
+	##       Weapon wouldn't know when to play anim based sounds.
+	## NOTE: when character will be able to switch weapons, this part should be re-called on switch
+	var _weapon_id_to_emitter := _for_init_weapon_id_to_emitter()
+	var _weapons := _combat._get_all_registered_weapons()
+	for weapon: BaseWeapon in _weapons:
+		var _emitter: BaseAnimSFXSignalEmitter = _weapon_id_to_emitter.get(weapon.get_weapon_id())
+		if not error_.null_object(_emitter):
+			_emitter.initialise(weapon.get_sad_container(), weapon.get_signal_container())
+
 
 ## abstract so u dont forget to use it instead of _ready()
 @abstract func initialise() -> void
@@ -117,6 +121,7 @@ func _initialise_common_char() -> void:
 @abstract func _for_init_visuals() -> BaseVisuals
 @abstract func _for_init_bones() -> BaseCharBones
 @abstract func _for_init_movement() -> BaseCharacterMovement
+@abstract func _for_init_active_weapon_id_list() -> Array[String]
 ## sfx
 @abstract func _for_init_sfx_system() -> CharacterSFXSystem
 @abstract func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer

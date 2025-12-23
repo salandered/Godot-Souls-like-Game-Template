@@ -20,6 +20,8 @@ class OverlayInstance extends RefCounted:
 	var curr_weight: float = 0.0
 	var curr_hips_weight: float = 0.0
 
+	var forced_fade: Dictionary = {}
+
 	func _init(playback_: AnimPlayback, timing_: OverlayTiming, bone_mask_: Array[int], speed_: float):
 		self.playback = playback_
 		self.timing = timing_
@@ -30,6 +32,16 @@ class OverlayInstance extends RefCounted:
 	func affects_bone(bone_idx: int, default_mask: Array[int]) -> bool:
 		var mask = bone_mask if not bone_mask.is_empty() else default_mask
 		return mask.has(bone_idx)
+
+	func start_forced_fade(fade_duration: float, current_w: float, current_hips_w: float):
+		forced_fade = {
+			"duration": max(fade_duration, 0.01), # Prevent divide by zero
+			"elapsed": 0.0,
+			"start_w": current_w,
+			"start_hips_w": current_hips_w
+		}
+	func is_forced_fade_finished() -> bool:
+		return not forced_fade.is_empty() and forced_fade.elapsed >= forced_fade.duration
 
 
 var curr_overlay: OverlayInstance
@@ -78,6 +90,16 @@ func set_overlay_anim(anim: AnimationData, overlay_config: OverlayConfig, start_
 	__log_(new_timing)
 
 
+func force_stop_overlay(fade_out_duration: float = 0.2) -> void:
+	if curr_overlay:
+		# capture the exact weight RIGHT NOW to prevent snapping
+		curr_overlay.start_forced_fade(
+			fade_out_duration,
+			curr_overlay.curr_weight,
+			curr_overlay.curr_hips_weight
+		)
+		__log_("Overlay force stopped. Duration:", fade_out_duration)
+
 ## returns 0.0 if no overlay
 func get_time_left() -> float:
 	if not curr_overlay:
@@ -111,33 +133,57 @@ func _process_modification():
 func _update_time(custom_delta: float):
 	if curr_overlay:
 		curr_overlay.playback.time_spent += custom_delta * curr_overlay.speed
-
+		if not curr_overlay.forced_fade.is_empty():
+			# i think speed scale may be ignored for UI/Logic fades, but u can multiply by speed as well
+			curr_overlay.forced_fade.elapsed += custom_delta
+	
 	if prev_overlay:
 		prev_overlay.playback.time_spent += custom_delta * prev_overlay.speed
+		if not prev_overlay.forced_fade.is_empty():
+			prev_overlay.forced_fade.elapsed += custom_delta
 
 
 func _update_blend_values():
 	if curr_overlay:
-		var time_spent = curr_overlay.playback.time_spent
-		if time_spent < curr_overlay.timing.get_total_duration():
-			curr_overlay.curr_weight = curr_overlay.timing.get_weight_at_time(time_spent)
-			curr_overlay.curr_hips_weight = curr_overlay.timing.get_hips_weight_at_time(time_spent)
-		else:
-			curr_overlay.curr_weight = 0.0
-			curr_overlay.curr_hips_weight = 0.0
-			# NOTE: We don't null curr_overlay here,
-			# it only gets nulled when a new anim shifts it to prev_overlay
+		_calculate_overlay_weight(curr_overlay)
+		# Note: curr_overlay is never nulled here, only by set_overlay_anim
 
 	if prev_overlay:
-		var time_spent = prev_overlay.playback.time_spent
-		if time_spent < prev_overlay.timing.get_total_duration():
-			prev_overlay.curr_weight = prev_overlay.timing.get_weight_at_time(time_spent)
-			prev_overlay.curr_hips_weight = prev_overlay.timing.get_hips_weight_at_time(time_spent)
-		else:
-			# Fade-out is complete, remove it
+		_calculate_overlay_weight(prev_overlay)
+		
+		# Check if we should kill prev_overlay
+		var natural_end = prev_overlay.playback.time_spent >= prev_overlay.timing.get_total_duration()
+		var forced_end = prev_overlay.is_forced_fade_finished()
+		
+		if natural_end or forced_end:
 			prev_overlay.curr_weight = 0.0
 			prev_overlay.curr_hips_weight = 0.0
 			prev_overlay = null
+
+
+func _calculate_overlay_weight(instance: OverlayInstance) -> void:
+	# PRIORITY 1: Forced Fade Out
+	if not instance.forced_fade.is_empty():
+		var t = instance.forced_fade.elapsed
+		var d = instance.forced_fade.duration
+		
+		d = max(instance.forced_fade.duration, 0.001) # Extra safety
+		# Linear fade from captured start weight down to 0
+		var progress = clamp(t / d, 0.0, 1.0)
+		var factor = 1.0 - progress
+		
+		instance.curr_weight = instance.forced_fade.start_w * factor
+		instance.curr_hips_weight = instance.forced_fade.start_hips_w * factor
+		return
+
+	# PRIORITY 2: Natural OverlayTiming
+	var time_spent = instance.playback.time_spent
+	if time_spent < instance.timing.get_total_duration():
+		instance.curr_weight = instance.timing.get_weight_at_time(time_spent)
+		instance.curr_hips_weight = instance.timing.get_hips_weight_at_time(time_spent)
+	else:
+		instance.curr_weight = 0.0
+		instance.curr_hips_weight = 0.0
 
 
 func _apply_overlay() -> void:

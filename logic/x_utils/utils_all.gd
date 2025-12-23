@@ -19,6 +19,16 @@ static func ifr() -> int:
 	return Engine.get_process_frames()
 
 
+static func is_nth_frame(interval: int) -> bool:
+	if interval <= 0: return true
+	return ifr() % interval == 0
+
+
+static func is_nth_physics_frame(interval: int) -> bool:
+	if interval <= 0: return true
+	return Engine.get_physics_frames() % interval == 0
+
+
 # ease-in-out S-curve
 # takes a linear progress value (0 to 1) and returns a smoothed value (0 to 1)
 static func ease_in_out(x: float) -> float:

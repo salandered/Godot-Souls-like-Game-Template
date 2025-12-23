@@ -7,43 +7,128 @@ extends NodeCharacterSystem
 
 
 const HIT_BUFFER_DURATION: float = 4.0
-# var _processed_hits_buffer: Dictionary[int, float] = {}
-var _character_is_attacking: bool = false
 
 var _last_processed_hit: HitData
 var _hit_tracker: EventThrottler
 
-var _weapons: Dictionary[String, BaseWeapon] = {} # weaponID <String> to weapon <BaseWeapon>
+## While currently it's probably always has at least one weapon, 
+##	system should be designed around the fact that it could be an empty dict.
+## Domain wise this looks valid, e.g: character in the middle of the switching weapons, character lost its weapons etc.
+var _registered_weapons: Dictionary[String, BaseWeapon] = {} # weaponID <String> to weapon <BaseWeapon>
+
+## must be changed via activate_weapon only.
+## can be empty.
+## if not empty, all entries are guaranteed to be:
+##  - unique
+## 	- present in _registered_weapons
+var _active_weapon_ids: Array[String]
 
 
-func initialise():
-	## currently _weapons are all under %bones
-	var _weapons_list := get_descendants.base_weapons(get_parent_node_of_weapons())
-	error_.empty_list(_weapons_list, "_weapons_list in combat")
+func initialise(character: BaseCharacter, active_weapon_id_list_to_set: Array[String]):
+	## currently _registered_weapons are all under %bones
+	_register_weapons()
 
-	for weapon in _weapons_list:
-		_weapons[weapon.get_weapon_id()] = weapon
+	for weapon: BaseWeapon in _registered_weapons.values():
+		weapon.initialise(character)
+
+	_active_weapon_ids.clear() # just in case
+	for _id in _registered_weapons.keys():
+		if _id in active_weapon_id_list_to_set: # after _register_weapons
+			activate_weapon(_id, false)
+		else:
+			__log_("deactivate", "", pp.in_q(_id), __pp_weapons_info())
+			_registered_weapons[_id].deactivate()
 
 	_hit_tracker = EventThrottler.new(HIT_BUFFER_DURATION, 2.0, 3.0, "HitTracker")
 
-	__log_("initialised _weapons", pp.dict_(_weapons))
+	initialise_implementation()
+	
+	__log_("initialised combat", __pp_weapons_info())
+
+
+## scans all the weapons under get_parent_node_of_weapons()
+func _register_weapons():
+	_registered_weapons = {}
+
+	var _weapons_list := get_descendants.base_weapons(get_parent_node_of_weapons())
+	error_.empty_list(_weapons_list, "_weapons_list in combat", WL.WARN_CRUCIAL)
+
+	for weapon in _weapons_list:
+		_registered_weapons[weapon.get_weapon_id()] = weapon
 
 
 @abstract func initialise_implementation() -> void
-
 
 ## nullable
 @abstract func get_parent_node_of_weapons() -> Node3D
 
 
-## guaranteed to be not empty
-func get_all_weapons() -> Array[BaseWeapon]:
-	return TypeCast.array_of_base_weapon(_weapons.values())
+## ACTIVE WEAPON ID
+# region
+
+
+func get_active_weapon_ids() -> Array[String]:
+	return _active_weapon_ids
+
+
+func activate_weapon(weapon_id: String, deactivate_others: bool) -> void:
+	if not _registered_weapons.has(weapon_id):
+		__log_warn("trying to set active weapon which is not in registered weapons", "", "active weapons won't be changed",
+			"incoming weapon:", weapon_id, __pp_weapons_info())
+		return
+	if deactivate_others:
+		var active_weapon_ids := get_active_weapon_ids().duplicate()
+		for _id in active_weapon_ids:
+			deactivate_weapon(_id)
+	if weapon_id in _active_weapon_ids:
+		__log_("activate_weapon", "already set", "incoming weapon:", weapon_id, __pp_weapons_info())
+		return
+	var w := _registered_weapons[weapon_id] # safe
+	w.activate()
+	_active_weapon_ids.append(weapon_id)
+	__log_("activate_weapon", "set (and activated)", pp.in_q(weapon_id), __pp_weapons_info())
+
+
+func deactivate_weapon(weapon_id: String) -> void:
+	if not _registered_weapons.has(weapon_id):
+		__log_warn("trying to deactivate weapon which is not in registered weapons", "", "active weapons won't be changed",
+			"incoming weapon:", weapon_id, __pp_weapons_info())
+		return
+	if weapon_id not in _active_weapon_ids:
+		__log_("activate_weapon", "already not active", "incoming weapon:", weapon_id, __pp_weapons_info())
+		return
+	var w := _registered_weapons[weapon_id] # safe
+	w.deactivate()
+	_active_weapon_ids.erase(weapon_id)
+	__log_("activate_weapon", "deactivated and erased from list", pp.in_q(weapon_id), __pp_weapons_info())
+
+
+func _get_active_weapon_by_id(weapon_id: String) -> BaseWeapon:
+	if not weapon_id in get_active_weapon_ids():
+		return
+	if not _registered_weapons.has(weapon_id): # should not happen
+		return
+	return _registered_weapons.get(weapon_id)
+
+# endregion
+
+
+## private
+func _get_all_registered_weapons() -> Array[BaseWeapon]:
+	return TypeCast.array_of_base_weapon(_registered_weapons.values())
+
+## public
+func get_all_active_weapons() -> Array[BaseWeapon]:
+	var _r: Array = []
+	for weapon in _get_all_registered_weapons():
+		if weapon.get_weapon_id() in get_active_weapon_ids():
+			_r.append(weapon)
+	return TypeCast.array_of_base_weapon(_r)
 
 
 ## nullable
-func get_weapon_by_id(weapon_id: String) -> BaseWeapon:
-	return u.safe_get_dict_key(_weapons, weapon_id, null, WL.WARN_CRUCIAL)
+func get_registered_weapon_by_id(weapon_id: String) -> BaseWeapon:
+	return u.safe_get_dict_key(_registered_weapons, weapon_id, null, WL.WARN_CRUCIAL)
 
 
 ## non nullable
@@ -55,13 +140,8 @@ func get_last_processed_hit() -> HitData:
 	return _last_processed_hit
 
 
-func is_character_attacking() -> bool:
-	return _character_is_attacking
-
-
-## PROCESS HIT FROM MY ENEMY
+## PROCESS HIT FROM THE OTHER CHARACTER
 # region
-
 
 func apply_hit(hit_data: HitData) -> void:
 	var hit_id := hit_data.get_instance_id()
@@ -81,52 +161,46 @@ func apply_hit(hit_data: HitData) -> void:
 # endregion
 
 
-## PREPARE MY WEAPONS
+## ATTACK WITH ACTIVE WEAPONS
 # region
 
-## DOCS: For simplicity set_hit_data_to_all_weapons and reset_all_weapons work with all weapons,
-##   while usually we work with one specic weapon.
-##   They won't do damage or leave any trace, because most important 
-##   function update_weapon_is_attacking works with specific weapon name.
-##   Still looks akward, switch to using all functions by weapon_name later
-
-func set_hit_data_to_all_weapons(hit_damage: float, anim_id: String) -> void:
-	var weapons := get_all_weapons()
-	if weapons.is_empty():
-		__log_error("no weapons", "set_hit_data_to_all_weapons", "return")
-		return
-	for weapon in weapons:
-		var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id)
-		weapon.set_hit_data(hit_data)
-		__log_("set hit data to weapons", weapon, hit_data)
-
-
-func update_weapon_is_attacking(weapon_name: String, is_attacking: bool) -> void:
-	var weapon := get_weapon_by_id(weapon_name)
+func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String) -> void:
+	var weapon := _get_active_weapon_by_id(weapon_id)
 	if not weapon:
-		__log_error("no weapon", "update_weapon_is_attacking", "return")
 		return
+	var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id)
+	weapon.set_hit_data(hit_data)
+	# __log_("set hit data to weapon", pp.in_q(weapon_id), hit_data)
 
+
+func update_weapon_is_attacking(weapon_id: String, is_attacking: bool) -> void:
+	var weapon := _get_active_weapon_by_id(weapon_id)
+	if not weapon:
+		return
 	_update_is_attacking(weapon, is_attacking)
 
 
 func _update_is_attacking(weapon: BaseWeapon, is_attacking: bool):
-	## important these two to be atomic
 	weapon.set_is_attacking(is_attacking)
-	_character_is_attacking = is_attacking
 	# __log_("_update_is_attacking. is_attacking/weapon", is_attacking, weapon)
 
 
-func reset_all_weapons() -> void:
-	var weapons := get_all_weapons()
-
-	for weapon in weapons:
-		weapon.reset_hit_data()
-		weapon.reset_contact_hitbox_list()
-		_update_is_attacking(weapon, false)
-		# __log_("reset active weapon")
+func reset_weapon_by_id(weapon_id: String) -> void:
+	var weapon := _get_active_weapon_by_id(weapon_id)
+	if not weapon:
+		return
+	weapon.reset_hit_data()
+	weapon.reset_contact_hitbox_list()
+	_update_is_attacking(weapon, false)
+	# __log_("reset active weapon")
 
 # endregion
+
+
+## __LOGS
+
+func __pp_weapons_info() -> String:
+	return pp.s("curr active/registered:", get_active_weapon_ids(), _registered_weapons.keys())
 
 
 func __LOG_B() -> bool:

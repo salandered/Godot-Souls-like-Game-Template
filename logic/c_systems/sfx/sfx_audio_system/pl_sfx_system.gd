@@ -5,13 +5,14 @@ class_name PlayerSFXSystem
 ## fs
 @onready var fs_player_3d: AudioStreamPlayer3D = %FSASP3D
 @onready var fs_scrape_player_3d: AudioStreamPlayer3D = %FSScrapeASP3D
-
 ##
 @onready var launch_player_3d: AudioStreamPlayer3D = %LaunchASP3D
 @onready var land_player_3d: AudioStreamPlayer3D = %LandASP3D
 @onready var whoosh_player_3d: AudioStreamPlayer3D = %WhooshASP3D
 @onready var react_on_hit_asp_3d: AudioStreamPlayer3D = %ReactOnHitASP3D
 @onready var unique_asp_3d: AudioStreamPlayer3D = %UniqueASP3D
+##
+@onready var switch_weapon_asp_3d: AudioStreamPlayer3D = %SwitchWeaponASP3D
 
 
 func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]:
@@ -58,7 +59,12 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 			unique_asp_3d,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.unique)
 		),
-		
+		##
+		OnPlayerSigASPSwitchWeapon.new(self,
+			sig_container.get_by_sig_id(SignalID.sfx_switch_weapon),
+			switch_weapon_asp_3d,
+			null
+		),
 	]
 	for item: OnSFXSigASP in _list:
 		item._log_tag = get_character().pp_name()

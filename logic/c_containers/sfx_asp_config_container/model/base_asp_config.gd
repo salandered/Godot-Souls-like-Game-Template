@@ -13,6 +13,7 @@ var max_polyphony: int
 var bus_id: String
 ## may be null. client code should handle nulls
 var stream: AudioStream
+var from_position: float
 
 
 var _min_max_vol_db_change: FMinMax = FMinMax.new(-80.0, 15.0)
@@ -32,6 +33,7 @@ func _init(
 	max_polyphony_: int = DEF_MAX_POLYPHONY,
 	bus_id_: String = DEF_BUS_ID,
 	stream_: AudioStream = null,
+	from_position_: float = 0.0
 ):
 	self.vol_db_change = vol_db_change_
 	self.pitch_change = pitch_change_
@@ -39,6 +41,7 @@ func _init(
 	self.bus_id = bus_id_
 	
 	self.stream = stream_
+	self.from_position = from_position_
 
 	_validate()
 
@@ -63,6 +66,16 @@ func _validate() -> void:
 # @abstract func set_up_asp(some_asp: AudioStreamPlayer3D or AudioStreamPlayer) \
 #	 -> AudioStreamPlayer3D or AudioStreamPlayer
 
+
+func get_result_vol() -> float:
+	return Constants.SFX_ASP_BASE_VOL_DB + vol_db_change
+
+
+func get_result_pitch() -> float:
+	return 1.0 + pitch_change
+
+
+##
 
 func __LOG_B() -> bool:
 	return true

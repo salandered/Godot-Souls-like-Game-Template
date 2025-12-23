@@ -2,6 +2,11 @@ extends Node
 
 
 ## autoload FrameUtils
+
+
+## ASYNC WAIT
+# region
+
 ## ❌ Unsafe: in _init() or before adding node to tree
 
 func wait_physics_frames(count: int) -> void:
@@ -23,3 +28,5 @@ func wait_one_physics_frame() -> void:
 
 func wait_seconds(duration: float) -> void:
 	await get_tree().create_timer(duration).timeout
+
+# endregion

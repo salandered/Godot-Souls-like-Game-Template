@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b53dx6p4chek4"]
+
+[ext_resource type="Texture2D" uid="uid://db0avk74mffw6" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_menlogate D.png" id="1_i55h8"]
+[ext_resource type="Texture2D" uid="uid://c07ejy3rwwteq" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_menlogate N.png" id="2_m6dls"]
+
+[resource]
+resource_name = "U Menlogate.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_i55h8")
+roughness = 0.79253113
+normal_enabled = true
+normal_texture = ExtResource("2_m6dls")

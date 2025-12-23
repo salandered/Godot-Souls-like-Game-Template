@@ -16,7 +16,8 @@ func get_supported_substates() -> Array[String]:
 			PHES.combat_loco,
 			PHES.combat_attacking,
 			PHES.Leaf.phase_switch,
-			PHES.Leaf.pushback
+			PHES.Leaf.pushback,
+			PHES.Leaf.pushback_2
 		]
 
 
@@ -30,6 +31,7 @@ func on_exit_state() -> void:
 
 # todo: swith from this primitive implementation to meta states (see player)
 var major_hit_just_received: bool = false
+var major_hit_react_state: String = ""
 
 func react_on_hit(hit_data: HitData) -> void:
 	var _curr_sbs := get_current_substate()
@@ -41,6 +43,7 @@ func react_on_hit(hit_data: HitData) -> void:
 	if result != "": # result actually have leaf name! but we have only one pushback as an experiment
 		__log_phe("react_on_hit", "major hit! pushback✋")
 		major_hit_just_received = true
+		major_hit_react_state = result
 		phe_feelings.lose_health(hit_data.damage)
 	else:
 		_curr_sbs.react_on_hit(hit_data)
@@ -58,11 +61,16 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			if current_substate.is_ended():
 				_reason += "pushback✋ ended"
 				_next_state = PHES.combat_loco
+		PHES.Leaf.pushback_2:
+			if current_substate.is_ended():
+				_reason += "pushback_2✋ ended"
+				_next_state = PHES.combat_loco
 		PHES.combat_loco:
-			if major_hit_just_received:
+			if major_hit_just_received and major_hit_react_state != "":
 				_reason += "major_hit_just_received | "
-				_next_state = PHES.Leaf.pushback
+				_next_state = major_hit_react_state
 				major_hit_just_received = false
+				major_hit_react_state = ""
 			# _next_state = PHES.combat_attacking ## DANGER DEV
 			if _phase_switch_check():
 				_reason += " loco to phase_switch 🕹️"
@@ -97,8 +105,9 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		PHES.combat_attacking:
 			if major_hit_just_received:
 				_reason += "major_hit_just_received | "
-				_next_state = PHES.Leaf.pushback
+				_next_state = major_hit_react_state
 				major_hit_just_received = false
+				major_hit_react_state = ""
 			if current_substate.is_ended() and attacking_for.is_done():
 				_reason += "curr sbs is ended and attackingFor done | "
 				if _phase_switch_check():

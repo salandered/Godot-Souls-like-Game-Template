@@ -43,12 +43,14 @@ func _init(
 	panning_strength_: float = DEF_PANNING_STRENGTH,
 	bus_id_: String = DEF_BUS_ID,
 	stream_: AudioStream = null,
+	from_position_: float = 0.0
+
 ):
 	self.unit_size = unit_size_
 	self.max_distance = max_distance_
 	self.panning_strength = panning_strength_
 
-	super._init(vol_db_change_, pitch_change_, max_polyphony_, bus_id_, stream_)
+	super._init(vol_db_change_, pitch_change_, max_polyphony_, bus_id_, stream_, from_position_)
 
 
 func _validate_implementation() -> void:
@@ -60,7 +62,7 @@ func _validate_implementation() -> void:
 func _to_string() -> String:
 	return pp.s("Vol/Pitch changes", vol_db_change, pitch_change,
 		"UnitSz/MaxDist/MaxPolyph/PanningStr", unit_size, max_distance, max_polyphony, panning_strength,
-		pp.bus_id(bus_id), "Stream", str(stream) if stream else "[-]")
+		pp.bus_id(bus_id), "Stream", str(stream) if stream else "[-]", "from_pos", from_position)
 
 
 func set_up_asp(some_asp: AudioStreamPlayer3D) -> AudioStreamPlayer3D:

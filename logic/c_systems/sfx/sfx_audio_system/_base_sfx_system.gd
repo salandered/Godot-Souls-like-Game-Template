@@ -86,6 +86,22 @@ func _soft_validate_asps(root_of_asps: Node):
 			if not _asp.name.begins_with(SFXConstants.anim_asp_prefix):
 				error_.null_object(_asp.stream, pp.s("no stream for AudioStreamPlayer3D", _asp.name))
 
+##
+
+
+func disable():
+	var count := 0
+	for item in _on_signal_asps:
+		count += 1
+		item.disable()
+	__log_(em.pin, "disabled all", count, "_on_signal_asps")
+
+func enable():
+	var count := 0
+	for item in _on_signal_asps:
+		count += 1
+		item.enable()
+	__log_(em.pin, "enabled all", count, "_on_signal_asps")
 
 ## __LOG
 

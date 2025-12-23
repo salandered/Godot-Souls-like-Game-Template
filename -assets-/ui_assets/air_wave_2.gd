@@ -11,6 +11,7 @@ class_name AirWave2
 var anim_name: String = "explode"
 
 func _ready() -> void:
+	self.visible = true
 	csg_box_3d.visible = false
 	prints("~~~_ready", anim_name)
 	if spawn_on_ready:

@@ -13,20 +13,24 @@ var asp: AudioStreamPlayer3D
 var asp_config: ASP3DConfig
 
 
+var __disabled: bool = false
+
 var _log_tag: String = ""
 
 class VolPitch:
 	var vol_db: float
 	var pitch: float
 	var mute: bool = false
+	var from_position: float = 0.0
 
-	func _init(vol_db_: float, pitch_: float, mute_: bool = false) -> void:
+	func _init(vol_db_: float, pitch_: float, mute_: bool = false, from_position_: float = 0.0) -> void:
 		self.vol_db = vol_db_
 		self.pitch = pitch_
 		self.mute = mute_
+		self.from_position = from_position_
 
 	func _to_string() -> String:
-		return pp.s("vol/pitch", vol_db, pitch)
+		return pp.s("vol/pitch/mute/from_pos", vol_db, pitch, mute, from_position)
 	
 
 func get_hard_dependencies() -> Array[Object]:
@@ -75,6 +79,8 @@ func _init(
 
 ## NOTE: args should align with signal data. In our case its payload: Dictionary
 func on_signal(payload: Dictionary[String, Variant]) -> void:
+	if __disabled:
+		return
 	# __log_(self.sfx_type, "on_signal", "triggered")
 	## dynamic values are reset on every on_signal
 	var base_vol_db := Constants.SFX_ASP_BASE_VOL_DB
@@ -89,12 +95,13 @@ func on_signal(payload: Dictionary[String, Variant]) -> void:
 	asp.pitch_scale = vol_pitch.pitch + randf_range(-0.02, 0.02)
 	
 	if not vol_pitch.mute:
-		_asp_play()
+		_asp_play(vol_pitch)
 
 
-func _asp_play():
-	asp.play()
-	# __log_(pp.s(asp.name, "🎵"), pp.asp_play(asp))
+func _asp_play(vol_pitch: VolPitch):
+	var r_from_pos := asp_config.from_position if vol_pitch.from_position == 0.0 else vol_pitch.from_position
+	asp.play(r_from_pos)
+	__log_(pp.s(asp.name, "🎵"), pp.asp_3d_play(asp), "from_pos", r_from_pos)
 
 
 ## to override for additional logic
@@ -122,22 +129,34 @@ func _logic_random_pitch(player: AudioStreamPlayer3D, payload: Dictionary[String
 
 ## returns "" is case of problems
 func get_modifier_from_payload(payload: Dictionary[String, Variant]) -> String:
-	if payload.has(SFXConstants.modifier_key):
-		var modifier: Variant = payload[SFXConstants.modifier_key]
-		if modifier is String:
-			return modifier
-	return ""
+	return _get_key_from_payload(SFXConstants.modifier_key, payload)
 
 ## returns "" is case of problems
 func get_unique_from_payload(payload: Dictionary[String, Variant]) -> String:
-	if payload.has(SFXConstants.unique_key):
-		var modifier: Variant = payload[SFXConstants.unique_key]
+	return _get_key_from_payload(SFXConstants.unique_key, payload)
+
+## returns "" is case of problems
+func get_weapon_id_from_payload(payload: Dictionary[String, Variant]) -> String:
+	return _get_key_from_payload(SFXConstants.weapon_id_key, payload)
+
+func _get_key_from_payload(key: String, payload: Dictionary[String, Variant]):
+	if payload.has(key):
+		var modifier: Variant = payload[key]
 		if modifier is String:
 			return modifier
 	return ""
 
 
 # endregion
+
+##
+
+func enable():
+	__disabled = false
+
+
+func disable():
+	__disabled = true
 
 
 ## __LOGS

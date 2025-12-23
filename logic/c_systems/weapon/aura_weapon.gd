@@ -12,15 +12,15 @@ func initialise_implementation() -> void:
 	pass
 
 
+func validate_visuals():
+	return
+
 func get_weapon_hurt_box() -> WeaponHurtBox:
 	return _weapon_hurt_box_
 
 func get_weapon_id() -> String:
 	return WeaponID.bg_aura_weapon
 
-
-func get_weapon_visuals() -> MeshInstance3D:
-	return null
 
 ## SFX
 

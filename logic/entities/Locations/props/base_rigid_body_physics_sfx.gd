@@ -106,7 +106,7 @@ func _on_body_entered(_body):
 		
 		__log_("impact sound", "force", impact_force, "final_vol_db", _sfx_asp.volume_db, "adjustment", impact_db_adjustment)
 		_sfx_asp.play()
-		__log_(pp.s(_sfx_asp.name, "🎵"), pp.asp_play_3d(_sfx_asp))
+		__log_(pp.s(_sfx_asp.name, "🎵"), pp.asp_3d_play(_sfx_asp))
 		_last_sound_time = current_time
 
 

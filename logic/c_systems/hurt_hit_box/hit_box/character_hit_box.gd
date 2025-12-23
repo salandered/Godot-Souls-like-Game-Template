@@ -79,6 +79,7 @@ func initialise(combat_: BaseCombat) -> void:
 	else:
 		__log_warn_soft("CharacterHitbox init problems, not going to work")
 		__just_set_init_false()
+		set_physics_process(false)
 
 
 func _hard_validate() -> bool:
@@ -110,9 +111,6 @@ func get_combat() -> BaseCombat:
 
 
 func _physics_process(delta: float) -> void:
-	if __could_not_initialised():
-		return
-		
 	if has_overlapping_areas():
 		for area in get_overlapping_areas():
 			on_area_contact(area)
@@ -121,10 +119,13 @@ func _physics_process(delta: float) -> void:
 	# 	pass
 
 
-func pp_name():
-	if __could_not_initialised():
-		return pp.s("miserable not initted, please help", "💢HitBox")
+func is_player() -> bool:
+	if get_combat():
+		return get_combat().is_player()
+	else:
+		return false
 
+func pp_name():
 	var character_name := "Pl" if is_player() else "E"
 	return pp.s(character_name, "💢HitBox")
 
@@ -153,12 +154,6 @@ func restore_hitbox():
 	CollShapeTranform.set_coll_shape_capsule_size(coll_shape, _original_capsule_shape_radius, _original_capsule_shape_height)
 
 # endregion
-
-
-func is_player() -> bool:
-	if __could_not_initialised():
-		return false
-	return _combat.is_player()
 
 
 func on_area_contact(incoming_area: Node3D):

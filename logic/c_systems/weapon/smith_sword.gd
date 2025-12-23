@@ -16,12 +16,7 @@ var hit_sounds: Dictionary = {
 }
 
 func initialise_implementation() -> void:
-	var mesh: MeshInstance3D = _visuals_.get_child(0)
-	if not mesh or mesh is not MeshInstance3D:
-		__log_error("if not mesh or mesh is not MeshInstance3D")
-	
 	_input_action_to_state = {
-		# CombatAction.light_attack_pressed: PS.axe_slice_1,
 		CombatAction.light_attack_pressed: PS.sword_slash_1,
 		# CombatAction.light_attack_pressed_when_move: PS.attack_from_run
 	}
@@ -33,9 +28,10 @@ func get_weapon_id() -> String:
 	return WeaponID.smith_sword
 
 
-func get_weapon_visuals() -> MeshInstance3D:
-	return _visuals_
-
+func validate_visuals():
+	var mesh: MeshInstance3D = _visuals_.get_child(0)
+	if not mesh or mesh is not MeshInstance3D:
+		__log_error("if not mesh or mesh is not MeshInstance3D")
 
 ## SFX
 

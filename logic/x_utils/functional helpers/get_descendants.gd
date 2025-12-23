@@ -49,6 +49,12 @@ static func _get_descendants_filtered(
 
 # region: built in nodes
 
+
+static func markers_3d(node: Node) -> Array:
+	var r = _get_descendants_filtered(node, func(n): return n is Marker3D)
+	return TypeCast.array_of_marker_3d(r)
+
+
 static func rigid_bodies(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is RigidBody3D)
 

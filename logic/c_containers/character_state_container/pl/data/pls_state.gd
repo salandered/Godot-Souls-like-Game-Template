@@ -8,6 +8,8 @@ extends RefCounted
 ## attacks
 const axe_slice_1 := "axe_slice_1"
 const axe_slice_2 := "axe_slice_2"
+const axe_slice_3 := "axe_slice_3"
+
 const attack_from_run := "attack_from_run"
 const attack_from_dodge := "attack_from_dodge"
 
@@ -50,6 +52,8 @@ class Act:
 	## attacks
 	const axe_slice_1 := "pla_axe_slice_1🗡"
 	const axe_slice_2 := "pla_axe_slice_2🗡"
+	const axe_slice_3 := "pla_axe_slice_3🗡"
+
 	const attack_from_run := "pla_attack_from_run🗡"
 	const attack_from_dodge := "pla_attack_from_dodge🗡"
 	

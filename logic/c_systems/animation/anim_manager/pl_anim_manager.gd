@@ -37,6 +37,9 @@ func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time
 		return
 	overlay_modifer.set_overlay_anim(anim, overlay_config, start_time_offset)
 
+func force_stop_overlay(fade_out_duration: float = 0.2) -> void:
+	overlay_modifer.force_stop_overlay()
+
 
 func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if blend_for < 0:

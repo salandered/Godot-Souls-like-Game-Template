@@ -129,3 +129,53 @@ static func _range(start: int, end_exclusive: int) -> Array[int]:
 	for i in range(start, end_exclusive):
 		arr.append(i)
 	return arr
+
+
+##
+
+# region Right Arm + Torso Variants (No Hips)
+
+## Best for: Shooting/Aiming while running.
+## Includes Right Arm + Spine, Chest, UpperChest (2, 3, 4).
+## Allows the character to twist their back to aim, but keeps hips/legs for running.
+static func get_right_arm_with_spine() -> Array[int]:
+	var arm := get_right_arm_full()
+	# Reuse existing spine logic (2-5 excludes hips 1 and neck 5)
+	var spine := get_spine_chain_no_head_neck()
+	
+	spine.append_array(arm)
+	return spine
+
+
+## Best for: Isolated actions like waving, holding a torch, or carrying an object.
+## Includes Right Arm + UpperChest (4) only.
+## Stabilizes the shoulder but leaves the lower spine stiff/independent.
+static func get_right_arm_with_upper_chest() -> Array[int]:
+	var arm := get_right_arm_full()
+	# Assuming 4 is UpperChest based on your _range logic (2,5)
+	var upper_chest: Array[int] = [4]
+	
+	upper_chest.append_array(arm)
+	return upper_chest
+
+
+## Best for: Looking and pointing/shooting.
+## Includes Right Arm + Spine chain + Head (2-6).
+## The character looks where they are aiming.
+static func get_right_arm_with_spine_and_head() -> Array[int]:
+	var arm := get_right_arm_full()
+	var spine_head := get_spine_chain() # 2 to 6
+	
+	spine_head.append_array(arm)
+	return spine_head
+
+
+## Best for: complex upper body actions involving the left shoulder stability
+## Includes Right Arm + Spine (2-4) + Left Shoulder (26)
+## Prevents the left shoulder from looking broken if the spine twists significantly.
+static func get_right_arm_with_spine_and_left_shoulder() -> Array[int]:
+	var mask := get_right_arm_with_spine()
+	mask.append(26) # LeftShoulder
+	return mask
+
+# endregion

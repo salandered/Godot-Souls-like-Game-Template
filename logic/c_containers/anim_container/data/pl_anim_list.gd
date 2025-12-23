@@ -42,8 +42,10 @@ var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.react.react_dodge_B, 0.85),
 
 	## attacks
-	AnimationData.new(A.attack.axe_slice_1),
-	AnimationData.new(A.attack.axe_slice_2, 0.85),
+	AnimationData.new(A.attack.axe_slice_1, 1.15),
+	AnimationData.new(A.attack.axe_slice_2, 0.9),
+	AnimationData.new(A.attack.axe_slice_3, 1.1),
+
 	AnimationData.new(A.attack.attack_from_run, 1.2),
 	AnimationData.new(A.attack.attack_from_dodge, 1.2),
 	
@@ -57,9 +59,13 @@ var _list_of_animations: Array[AnimationData] = [
 	## fall/stand up
 	AnimationData.new(A.fall_stand_up.thrown_l_rm, 1.0),
 	AnimationData.new(A.fall_stand_up.thrown_r_rm, 1.0),
-	AnimationData.new(A.fall_stand_up.thrown_r_rm, 1.0),
 	AnimationData.new(A.fall_stand_up.thrown_r_small_rm, 1.0),
 	AnimationData.new(A.fall_stand_up.thrown_l_small_rm, 1.0),
+
+
+	## equip
+	AnimationData.new(A.equip.equip, 1.0),
+	
 
 ]
 

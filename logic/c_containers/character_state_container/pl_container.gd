@@ -179,6 +179,7 @@ func __apply_base_action_data(action_data: StatesContainer._BaseActionData, chil
 	child.action_name = action_data.action_name
 	child.motion_type = action_data.motion_type
 	child.player_sm = _player.player_sm
+	child.combat = _player.get_combat()
 	child.container = self
 	child.feelings = _player.feelings
 	

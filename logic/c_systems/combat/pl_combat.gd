@@ -3,12 +3,16 @@ extends BaseCombat
 class_name PlayerCombat
 @onready var _player: Princess = $".."
 @onready var bones: PlayerBones = %bones
+@onready var weapon_switcher: WeaponSwitcher = %WeaponSwitcher
 
 
 func initialise_implementation():
-	if len(get_all_weapons()) > 1:
-		__log_error("only 1 weapon is supported for PlayerCombat", "", "unpredictable. Amount:", len(get_all_weapons()))
-
+	if len(_get_all_registered_weapons()) == 0:
+		__log_error("currently at least one weapon is expected for player", "", "")
+	if len(get_active_weapon_ids()) != 1:
+		__log_error("currently 1 active weapon is expected for player", "", "", len(get_active_weapon_ids()))
+	
+	weapon_switcher.initialise(_player, self)
 
 func get_parent_node_of_weapons() -> Node3D:
 	return bones
@@ -32,10 +36,12 @@ func contextualize(new_input: InputPackage, delta: float) -> InputPackage:
 	return new_input
 
 
-## translates the input to basic states with the help of the current weapon
+## translates the input to basic states with the help of the active weapon
 func _translate_combat_actions(new_input: InputPackage, delta: float):
-	# todo: hard coded weapon!
-	var weapon := get_weapon_by_id(_player.default_weapon_id)
+	var weapons := get_all_active_weapons()
+	if len(weapons) == 0:
+		return
+	var weapon := weapons[0]
 	var _translated: Array = weapon.translate_combat_input_to_state(new_input.combat_actions)
 	new_input.actions.append_array(_translated)
 
