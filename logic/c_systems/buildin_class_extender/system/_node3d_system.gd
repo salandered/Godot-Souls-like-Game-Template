@@ -30,9 +30,13 @@ func __set_initialised_true() -> bool:
 
 
 func get_hard_dependencies() -> Array[Object]:
-	return []
+	return [
+
+	]
 
 func get_soft_dependencies() -> Array[Object]:
-	return []
+	return [
+
+	]
 
 # endregion

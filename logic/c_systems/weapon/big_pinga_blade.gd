@@ -23,6 +23,12 @@ func get_weapon_id() -> String:
 	return WeaponID.big_pinga_blade
 
 
+##
+
+func get_spark_config() -> ParticlesConfig:
+	return ParticlesConfig.new(15, 0.4)
+
+
 ## SFX
 
 

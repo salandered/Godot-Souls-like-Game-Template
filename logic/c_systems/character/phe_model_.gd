@@ -34,7 +34,7 @@ class_name PHCharacter
 @onready var ui_marker: Marker3D = %UIMarker
 
 @onready var _start_position := global_transform.origin
-const FLICKER_FIRE = preload("uid://fbyv2s2mo6cx")
+const FLICKER_FIRE = preload("uid://bnf3bmp3nq5nq")
 
 ## It's all: SM, Base state, Root state
 var state_machine: BasePHEState
@@ -60,8 +60,6 @@ var push_rigid_bodies_force: float = 8.0
 signal SIG_angry_raised
 signal SIG_death_raised
 signal SIG_awaken
-
-@onready var air_wave: AirWave2 = %AirWave
 
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
@@ -398,5 +396,16 @@ func _input(event: InputEvent) -> void:
 		))
 
 
+# Drag your AirWave.tscn here in the Inspector
+const AIR_WAVE_2 = preload("uid://cxfgvp3futm7q")
+
+
 func _on_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
-	air_wave.spawn_shockwave(anim)
+	if not AIR_WAVE_2:
+		return
+
+	var wave = AIR_WAVE_2.instantiate()
+
+	get_tree().current_scene.add_child(wave)
+
+	wave.spawn_shockwave_at_position(char_glob_position, anim)

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/c_systems/camera/fancy-camera/free_state.gd" id="3_wpkwu"]
 [ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/c_systems/camera/fancy-camera/camera_nest.gd" id="5_sttfw"]
 [ext_resource type="PackedScene" uid="uid://carduerw3k1il" path="res://-assets-/ui_assets/target_circle.tscn" id="6_tlnea"]
-[ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/shaders/target_dot.gdshader" id="7_r7icc"]
+[ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/VFX/shaders/target_dot.gdshader" id="7_r7icc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lfwa"]
 albedo_color = Color(1, 0.991667, 0.5, 1)

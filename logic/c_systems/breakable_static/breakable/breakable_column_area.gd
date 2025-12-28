@@ -6,6 +6,11 @@ var filter_weapon_attacking: bool = true
 
 var filter_player_weapon: bool = false
 var filter_enemy_weapon: bool = true
+var filter_weapon_ids: Array[String] = [
+	WeaponID.bg_aura_weapon,
+	WeaponID.big_pinga_blade,
+	WeaponID.small_pinga_blade
+	]
 
 var filter_player_body: bool = true
 var filter_enemy_body: bool = false
@@ -17,11 +22,12 @@ func on_area_entered(incoming_area: Area3D):
 		# __log_("area entered with WeaponHurtBox", incoming_area)
 		var _weapon_area := incoming_area as WeaponHurtBox
 		var weapon: BaseWeapon = _weapon_area.my_weapon
+		if not weapon: return # should not happen
 		if not apply_weapon_filters(weapon):
 			return
 		__log_("survived apply_weapon_filter", incoming_area)
 		
-		SIG_breaking_area_entered.emit()
+		get_SIG_breaking_area_entered().emit()
 
 	elif incoming_area is CharacterHitbox:
 		# __log_("area entered with CharacterHitbox", incoming_area)
@@ -32,13 +38,14 @@ func on_area_entered(incoming_area: Area3D):
 			return
 		__log_("survived apply_body_filters", incoming_area)
 		
-		SIG_breaking_area_entered.emit()
+		get_SIG_breaking_area_entered().emit()
 
 
 func apply_weapon_filters(weapon: BaseWeapon) -> bool:
 	if not weapon.is_attacking() and filter_weapon_attacking:
 		return false
-
+	if weapon.get_weapon_id() in filter_weapon_ids:
+		return true
 	if weapon.is_player() and filter_player_weapon:
 		__log_("filtered player")
 		return true

@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ca2l8bfpn08pp"]
+
+[ext_resource type="Texture2D" uid="uid://bdj5hkqgfcn5d" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_6.png" id="1_11m1l"]
+[ext_resource type="Texture2D" uid="uid://b7nb7qksvvme4" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_7.png" id="2_xf1ms"]
+[ext_resource type="Texture2D" uid="uid://cll7fn51v1gpw" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_8.png" id="3_wfa0j"]
+
+[resource]
+resource_name = "Belt.002"
+cull_mode = 2
+albedo_texture = ExtResource("1_11m1l")
+metallic = 1.0
+metallic_texture = ExtResource("2_xf1ms")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_xf1ms")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_wfa0j")
+ao_enabled = true
+ao_texture = ExtResource("2_xf1ms")

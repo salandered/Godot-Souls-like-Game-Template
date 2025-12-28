@@ -22,8 +22,8 @@ const CONTAINER_B := false
 const E_CONTAINER_B := false
 
 # FIGHT
-const FIGHT_B := true_b
-const COMBO_B := true_b
+const FIGHT_B := false
+const COMBO_B := false
 const HIT_HURT_BOX_B := false
 const WEAPON_B := false
 
@@ -43,8 +43,9 @@ const FANCY_CAM_B := false
 const AWARENESS_B := true
 
 # ENEMY
-const PHE_CHECK_B := true_b
-const PHE_B := true_b
+const PHE_INTERNAL_FILTER_B := false
+const PHE_CHECK_B := false
+const PHE_B := false
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false
 

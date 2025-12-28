@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bmqf0utujittt"]
+
+[ext_resource type="Texture2D" uid="uid://dfaxg3junq7by" path="res://-assets-/materials-shared/_images/concrete/mask_cracked_concrete_wall_diff_1k.jpg" id="1_lwqme"]
+[ext_resource type="Texture2D" uid="uid://bb13h1jykfiku" path="res://-assets-/materials-shared/_images/concrete/mask_cracked_concrete_wall_nor_gl_8k.png" id="2_7adak"]
+[ext_resource type="Texture2D" uid="uid://clqooafob0vd6" path="res://-assets-/materials-shared/_images/concrete/mask_cracked_concrete_wall_rough_8k.png" id="3_26mrx"]
+
+[resource]
+resource_name = "cracked_concrete_wall"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.51357734, 0.51357734, 0.51357734, 1)
+albedo_texture = ExtResource("1_lwqme")
+roughness_texture = ExtResource("3_26mrx")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("2_7adak")
+uv1_scale = Vector3(6, 6, 6)

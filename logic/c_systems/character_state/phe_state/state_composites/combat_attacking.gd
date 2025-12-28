@@ -42,19 +42,19 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	var _override_commit := false
 	
 	if not _attack_ended():
-		_reason = "in the middle of attack, not doing anything"
+		if __ELA(): _reason += "in the middle of attack, not doing anything"
 		return VerdictPH.new(_next_state, _reason)
 	else:
-		_reason += pp.s("attack is ended. we wait several frames and launch next iteration |")
+		if __ELA(): _reason += pp.s("attack is ended. we wait several frames and launch next iteration |")
 		if not to_next_iteration.is_initialised():
-			_reason += pp.s("we set a timer, while return empty verdict | ")
+			if __ELA(): _reason += pp.s("we set a timer, while return empty verdict | ")
 			to_next_iteration.initialise(0.05)
 			return VerdictPH.new(_next_state, _reason)
 		elif to_next_iteration.update(delta):
 			to_next_iteration.turn_off()
 			var _verdict := choose_initial_substate(_next_state, _reason)
 			_next_state = _verdict.next_state
-			_reason += pp.s("timer completed, we launch next iteration!", _verdict.get_reason())
+			if __ELA(): _reason += pp.s("timer completed, we launch next iteration!", _verdict.get_reason())
 			_switch_on_same = true
 			_override_commit = true
 
@@ -66,7 +66,7 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	var dist := distance_to_player()
 	# prints("\\\\\\\\\\\\", dist)
 	if dist > config.GAP_CLOSER_RAD():
-		_reason = "pl_dist_greater_than GAP_CLOSER_RAD"
+		if __ELA(): _reason += "pl_dist_greater_than GAP_CLOSER_RAD"
 		_next_state = ra.spick_weighted({
 			PHES.Leaf.gap_closer: fvalue_angry(0.4, 0.9),
 			PHES.attack_with_dodge_f: fvalue_angry(0.01, 0.15)})
@@ -77,14 +77,14 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 			PHES.attack_360_series: 0.4,
 			PHES.attack_pick_single: 0.5})
 	elif dist > config.TOO_CLOSE():
-		_reason = "SUPER_CLOSE < dist < GAP_CLOSER_RAD"
+		if __ELA(): _reason += "SUPER_CLOSE < dist < GAP_CLOSER_RAD"
 		_next_state = ra.spick_weighted({
 			state_angry(PHES.attack_club_series, PHES.attack_360_series): 0.7,
 			PHES.attack_pick_single: fvalue_angry(0.4, 0.5),
 			PHES.Leaf.scare_off: fvalue_angry(0.2, 0.1), # fvalue_angry(10, 10), # fvalue_angry(0.2, 0.2), #
 			PHES.attack_from_dodge_b: fvalue_angry(0.0, 0.4)})
 	else:
-		_reason = "dist < SUPER_CLOSE"
+		if __ELA(): _reason += "dist < SUPER_CLOSE"
 		_next_state = ra.spick_weighted({
 			PHES.attack_from_dodge_b: fvalue_angry(0.1, 0.5),
 			PHES.Leaf.scare_off: fvalue_angry(0.6, 0.1),

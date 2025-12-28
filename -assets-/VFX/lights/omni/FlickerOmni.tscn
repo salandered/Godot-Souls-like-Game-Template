@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkav81mtgsiib"]
+
+[ext_resource type="PackedScene" uid="uid://d3tc5aaqi8k6q" path="res://-assets-/VFX/lights/_base_omni/BaseOmni.tscn" id="1_jro0j"]
+[ext_resource type="Script" uid="uid://dg2vjew5w2ih8" path="res://-assets-/VFX/lights/omni/flicker_omni.gd" id="2_auf42"]
+
+[sub_resource type="Animation" id="Animation_auf42"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_jro0j"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlickerOmni/OmniLight3D:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.76667, 3.26667),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [2.387, 3.692, 2.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlickerOmni/OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 1, 1.8, 2.1, 2.5, 2.7, 2.9, 3.26667, 3.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [6.0, 3.0, 5.0, 3.5, 5.0, 3.0, 6.0, 2.0, 4.0, 5.0, 3.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_auf42"]
+_data = {
+&"RESET": SubResource("Animation_auf42"),
+&"flicker": SubResource("Animation_jro0j")
+}
+
+[node name="FlickerOmni" instance=ExtResource("1_jro0j")]
+script = ExtResource("2_auf42")
+
+[node name="OmniLight3D" parent="." index="0"]
+light_color = Color(1, 0.61960787, 0.28627452, 1)
+
+[node name="PuffFog" parent="." index="1"]
+process_mode = 4
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_auf42")
+}

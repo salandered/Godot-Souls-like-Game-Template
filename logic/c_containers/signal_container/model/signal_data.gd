@@ -5,6 +5,9 @@ extends RefCounted
 var signal_id: String
 var signal_obj: Signal
 
+
+## payload: Dictionary[String, Variant]
+
 ## signal_id_ is the signal name from SignalID
 func _init(signal_id_: String, signal_obj_: Signal):
 	self.signal_id = signal_id_
@@ -16,3 +19,7 @@ func _to_string() -> String:
 		if not signal_obj.is_null() \
 		else "[invalid sig]"
 	return pp.s("🌠sigId:", pp.in_q(signal_id), _msg_sig)
+
+
+func connect_(callable: Callable):
+	signal_obj.connect(callable)

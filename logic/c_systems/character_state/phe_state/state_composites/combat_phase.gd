@@ -55,78 +55,78 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	match current_substate.state_name:
 		PHES.Leaf.phase_switch:
 			if current_substate.is_ended():
-				_reason += "phase_switch🕹️ ended"
+				if __ELA(): _reason += "phase_switch🕹️ ended"
 				_next_state = PHES.combat_loco
 		PHES.Leaf.pushback:
 			if current_substate.is_ended():
-				_reason += "pushback✋ ended"
+				if __ELA(): _reason += "pushback✋ ended"
 				_next_state = PHES.combat_loco
 		PHES.Leaf.pushback_2:
 			if current_substate.is_ended():
-				_reason += "pushback_2✋ ended"
+				if __ELA(): _reason += "pushback_2✋ ended"
 				_next_state = PHES.combat_loco
 		PHES.combat_loco:
 			if major_hit_just_received and major_hit_react_state != "":
-				_reason += "major_hit_just_received | "
+				if __ELA(): _reason += "major_hit_just_received | "
 				_next_state = major_hit_react_state
 				major_hit_just_received = false
 				major_hit_react_state = ""
 			# _next_state = PHES.combat_attacking ## DANGER DEV
 			if _phase_switch_check():
-				_reason += " loco to phase_switch 🕹️"
+				if __ELA(): _reason += " loco to phase_switch 🕹️"
 				me.set_angry_raised()
 				_next_state = PHES.Leaf.phase_switch
 			elif loco_for.is_done(): # and current_substate.is_ended():
-				_reason += "loco_for is done | "
+				if __ELA(): _reason += "loco_for is done | "
 				if ra.chance(0.8):
-					_reason += "loco_for reset, let's loco again | "
+					if __ELA(): _reason += "loco_for reset, let's loco again | "
 					loco_for.reset()
 					_next_state = PHES.combat_loco # gap closer
 				elif dist > config.GAP_CLOSER_RAD() + 0.4 \
 					and chance_angry(0.01, 0.6):
-					_reason = "loco_for is done and dist > GAP_CLOSER_RAD+eps and flipped"
+					if __ELA(): _reason += "loco_for is done and dist > GAP_CLOSER_RAD+eps and flipped"
 					_next_state = PHES.combat_attacking # gap closer
 				elif dist < config.COMBAT_RAD():
-					_reason = "dist < COMBAT_RAD"
+					if __ELA(): _reason += "dist < COMBAT_RAD"
 					_next_state = PHES.combat_attacking
 				else:
-					_reason = "COMBAT_RAD < dist < GAP_CLOSER_RAD+eps - keep loco"
+					if __ELA(): _reason += "COMBAT_RAD < dist < GAP_CLOSER_RAD+eps - keep loco"
 			else:
-				_reason += "loco_for not done | "
+				if __ELA(): _reason += "loco_for not done | "
 				if dist < config.COMBAT_RAD():
-					_reason += "dist < COMBAT_RAD | "
+					if __ELA(): _reason += "dist < COMBAT_RAD | "
 					if me.angry_raised:
-						_reason += " attack"
+						if __ELA(): _reason += " attack"
 						_next_state = PHES.combat_attacking
 					elif ra.chance(0.01): # 0.25 chance/sec
-						_reason += "small chance we attack"
+						if __ELA(): _reason += "small chance we attack"
 						_next_state = PHES.combat_attacking
 
 		PHES.combat_attacking:
 			if major_hit_just_received:
-				_reason += "major_hit_just_received | "
+				if __ELA(): _reason += "major_hit_just_received | "
 				_next_state = major_hit_react_state
 				major_hit_just_received = false
 				major_hit_react_state = ""
 			if current_substate.is_ended() and attacking_for.is_done():
-				_reason += "curr sbs is ended and attackingFor done | "
+				if __ELA(): _reason += "curr sbs is ended and attackingFor done | "
 				if _phase_switch_check():
-					_reason += " attack to phase_switch 🕹️"
+					if __ELA(): _reason += " attack to phase_switch 🕹️"
 					me.set_angry_raised()
 					_next_state = PHES.Leaf.phase_switch
 				elif dist > config.TOO_FAR():
-					_reason += "dist > TOO_FAR"
+					if __ELA(): _reason += "dist > TOO_FAR"
 					_next_state = PHES.combat_loco
 				elif dist > config.COMBAT_RAD():
-					_reason += "dist > COMBAT_RAD"
+					if __ELA(): _reason += "dist > COMBAT_RAD"
 					_next_state = PHES.combat_loco
 				else:
-					_reason = "dist < COMBAT_RAD"
+					if __ELA(): _reason += "dist < COMBAT_RAD"
 					_next_state = ra.spick_weighted({
 						PHES.combat_loco: fvalue_angry(0.4, 0.2),
 						PHES.combat_attacking: fvalue_angry(0.6, 0.8)})
 			else:
-				_reason += pp.s("attacking while we can. Context: currSbs isEnded / attackFor is done", current_substate.is_ended(), attacking_for.is_done())
+				if __ELA(): _reason += pp.s("attacking while we can. Context: currSbs isEnded / attackFor is done", current_substate.is_ended(), attacking_for.is_done())
 
 		_:
 			__log_forgot_implement(current_substate.state_name, "check_substate_transition", "combat_loco")
@@ -163,7 +163,7 @@ func _phase_switch_check() -> bool:
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	_next_state = PHES.combat_loco
-	_reason = "initial is combat_loco"
+	if __ELA(): _reason += "initial is combat_loco"
 
 	# we set "x" as 'unknown' state. it doesnt really matter, it's not a real name
 	_auto_update_monitors(__monitors, 0.0, "x", _next_state, "choose_initial_substate")

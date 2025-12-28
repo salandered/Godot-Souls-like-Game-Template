@@ -33,6 +33,8 @@ func initialise() -> void:
 
 	__initialised = true
 
+	GlobalSignal.player_change_health.connect_(_on_player_change_health)
+
 
 func is_player() -> bool:
 	return true
@@ -51,12 +53,6 @@ func add_stamina(amount: float):
 
 func can_allow_stamina_drain(amount: float) -> bool:
 	return can_allow_stamina_rate(-amount)
-
-func is_zero_health() -> bool:
-	return _current_health <= 0
-
-func get_curr_health() -> float:
-	return _current_health
 
 func get_curr_stamina() -> float:
 	return _current_stamina
@@ -193,10 +189,23 @@ func _on_regen_delay_ended() -> void:
 
 ##
 
+
+func _on_player_change_health(payload: Dictionary[String, Variant]) -> void:
+	__log_("_on_player_change_health", "triggered")
+	if payload.has(GlobalSignal.payload_amount_field):
+		_change_health(payload[GlobalSignal.payload_amount_field])
+	
+
+##
+
+
 func __log_feel_check_stamina(prefix: String, amount: float, decision: bool, ...context: Array):
 	if decision == true: return
 	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp.dict_(statuses, false, true))
 	__log_(prefix, _msg, " ", pp.list_(context) + "=>", decision)
+
+func __LOG_B() -> bool:
+	return LogToggler.FEEL_B
 
 
 # region: DEV
@@ -211,12 +220,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.t2):
 		lose_health(10)
 		lose_stamina(15)
-
-# endregion:
-
-
-func __LOG_B() -> bool:
-	return LogToggler.FEEL_B
 
 
 # LATER

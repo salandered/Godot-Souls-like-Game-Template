@@ -1,21 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bs1rf0cb545oq"]
+[gd_scene load_steps=10 format=3 uid="uid://bs1rf0cb545oq"]
 
 [ext_resource type="Script" uid="uid://dotahls6vtroe" path="res://ui/ui_utils/loading_screen/m_loading_screen.gd" id="1_j1vc5"]
-[ext_resource type="Texture2D" uid="uid://xagpcipjba24" path="res://-assets-/ui_assets/loader_backgrounds/collage (2)-ds.jpg" id="3_lioqs"]
-[ext_resource type="Texture2D" uid="uid://ch6w3soy4ufym" path="res://-assets-/ui_assets/loader_backgrounds/collage (3)ds.jpg" id="4_deyge"]
-[ext_resource type="Texture2D" uid="uid://dud5ta817vs5c" path="res://-assets-/ui_assets/loader_backgrounds/collage (4)ds.jpg" id="5_167l7"]
-[ext_resource type="Texture2D" uid="uid://cw6efvrq14ird" path="res://-assets-/ui_assets/loader_backgrounds/collage (5)ds.jpg" id="6_lpyag"]
-[ext_resource type="Texture2D" uid="uid://b5tjneo4waokv" path="res://-assets-/ui_assets/loader_backgrounds/collage (6)ds.jpg" id="7_0ew36"]
-[ext_resource type="Texture2D" uid="uid://cyau4gssrsjjm" path="res://-assets-/ui_assets/loader_backgrounds/collage (7)ds.jpg" id="8_r2ati"]
-[ext_resource type="Texture2D" uid="uid://5ofu2y0m6qn8" path="res://-assets-/ui_assets/loader_backgrounds/collage (8)ds.jpg" id="9_euco8"]
 [ext_resource type="Texture2D" uid="uid://ccs2ft5ib4rhu" path="res://-assets-/ui_assets/loader_backgrounds/collage (9)ds.jpg" id="10_kipgw"]
-[ext_resource type="Texture2D" uid="uid://dv4p73ce0g7nu" path="res://-assets-/ui_assets/loader_backgrounds/collage (10)ds.jpg" id="11_ny3fu"]
-[ext_resource type="Texture2D" uid="uid://b1j40vhpw5hgg" path="res://-assets-/ui_assets/loader_backgrounds/collage ds.jpg" id="11_r2ati"]
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="12_167l7"]
-[ext_resource type="Texture2D" uid="uid://u18e8ohwjwv2" path="res://-assets-/ui_assets/loader_backgrounds/collage (12).jpg" id="12_euco8"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://ui/ui_utils/nodes/color_rect.tscn" id="12_lioqs"]
-[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/shaders/distort_menu.gdshader" id="13_deyge"]
-[ext_resource type="Texture2D" uid="uid://dd63an1eukdom" path="res://-assets-/ui_assets/loader_backgrounds/collage (11).jpg" id="13_kipgw"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/VFX/shaders/distort_menu.gdshader" id="13_deyge"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="15_lpyag"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
@@ -43,7 +32,8 @@ shader_parameter/vignette_softness = 0.1970000093575
 process_mode = 3
 layer = 20
 script = ExtResource("1_j1vc5")
-background_images = Array[Texture2D]([ExtResource("3_lioqs"), ExtResource("4_deyge"), ExtResource("5_167l7"), ExtResource("6_lpyag"), ExtResource("7_0ew36"), ExtResource("8_r2ati"), ExtResource("9_euco8"), ExtResource("10_kipgw"), ExtResource("11_ny3fu"), ExtResource("11_r2ati"), ExtResource("12_euco8"), ExtResource("13_kipgw")])
+_complete = ""
+background_image_paths = Array[String](["uid://xagpcipjba24", "uid://ch6w3soy4ufym", "uid://dud5ta817vs5c", "uid://cw6efvrq14ird", "uid://b5tjneo4waokv", "uid://cyau4gssrsjjm", "uid://5ofu2y0m6qn8", "uid://ccs2ft5ib4rhu", "uid://dv4p73ce0g7nu", "uid://dd63an1eukdom", "uid://u18e8ohwjwv2", "uid://b1j40vhpw5hgg"])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

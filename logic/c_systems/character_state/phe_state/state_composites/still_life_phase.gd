@@ -19,7 +19,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	match current_substate.state_name:
 		PHES.Leaf.sleep:
 			if _player_is_close():
-				_reason = "_player_is_close"
+				if __ELA(): _reason += "_player_is_close"
 				_next_state = PHES.Leaf.awaken
 		# todo: its more like in update() should be now
 		PHES.Leaf.awaken:
@@ -36,7 +36,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	_next_state = PHES.Leaf.sleep
-	_reason = "initial still_life state"
+	if __ELA(): _reason += "initial still_life state"
 	return VerdictPH.new(_next_state, _reason)
 
 

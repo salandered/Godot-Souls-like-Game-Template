@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwwngduom3lf"]
 
-[ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/shaders/gdquest-like/sky/blue_sky.tres" id="1_qxid1"]
+[ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/VFX/shaders/gdquest-like/sky/blue_sky.tres" id="1_qxid1"]
 
 [sub_resource type="Environment" id="Environment_allox"]
 background_mode = 2

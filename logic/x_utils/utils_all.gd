@@ -246,3 +246,10 @@ static var _pp_replacers: Dictionary[String, String] = {
 		"Awareness": "👀",
 		"ModifierAnimator": "💀Animator"
 	}
+
+##
+
+static func set_all_descendant_asp_3d_default_bus(for_whom: Node3D):
+	var asps := get_descendants.audio_stream_players_3D(for_whom)
+	for asp: AudioStreamPlayer3D in asps:
+		asp.bus = Constants.SFX_ASP_BASE_BUS_ID

@@ -35,7 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7548888, 0)
 
 [node name="SparkMarker" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70697033, -0.1282587)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015023589, 0.6584185, 0.0020401925)
 
 [editable path="WeaponHurtBox"]
 [editable path="WeaponSFXParent"]

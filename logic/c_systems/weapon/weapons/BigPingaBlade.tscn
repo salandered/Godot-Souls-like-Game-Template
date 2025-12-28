@@ -41,5 +41,9 @@ hide_rings = true
 [node name="WeaponSFXParent" parent="." instance=ExtResource("10_kngnu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6699998, 0)
 
+[node name="SparkMarker" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015023589, 1.9600377, 0.059757516)
+
 [editable path="WeaponHurtBox"]
 [editable path="WeaponSFXParent"]

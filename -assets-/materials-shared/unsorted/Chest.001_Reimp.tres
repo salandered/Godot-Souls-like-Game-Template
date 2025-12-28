@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://yf3fwmhpkxfb"]
+
+[ext_resource type="Texture2D" uid="uid://dj471kfijdgrw" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_12.png" id="1_j2r4w"]
+[ext_resource type="Texture2D" uid="uid://ca8yc3xwm03uo" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_13.png" id="2_5u60d"]
+[ext_resource type="Texture2D" uid="uid://3yclu56qhlrm" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_14.png" id="3_e62co"]
+
+[resource]
+resource_name = "Chest.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_j2r4w")
+metallic = 1.0
+metallic_texture = ExtResource("2_5u60d")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_5u60d")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_e62co")
+ao_enabled = true
+ao_texture = ExtResource("2_5u60d")

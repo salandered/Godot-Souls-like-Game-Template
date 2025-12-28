@@ -54,7 +54,7 @@ func _get_dict_data() -> Dictionary[String, ASP3DConfig]:
 		var item: ASP3DConfig = dict_[key]
 		if item == null:
 			dict_.erase(key)
-			__log_("item == null for key", key, "erased from SFXASPConfigContainer")
+			# __log_("item == null for key", key, "erased from SFXASPConfigContainer")
 	return dict_
 
 

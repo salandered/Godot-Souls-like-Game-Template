@@ -38,3 +38,7 @@ extends NodeLogger
 # 		(idea: combo priority system being powered nodes order)
 #
 # endregion
+
+
+func __LOG_B() -> bool:
+	return false

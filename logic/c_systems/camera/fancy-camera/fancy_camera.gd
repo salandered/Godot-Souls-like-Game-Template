@@ -127,6 +127,7 @@ func initialise() -> void:
 	nest.global_position = mount.global_position + initial_offset # nest relative to mount using the free_offset
 	
 	camera.global_position = nest.global_position # may be position closer in case of wall
+	camera.current = true
 	
 	# FREE STATE INIT
 	free_state.fc = self

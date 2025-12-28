@@ -66,6 +66,8 @@ func _to_string() -> String:
 
 
 func set_up_asp(some_asp: AudioStreamPlayer3D) -> AudioStreamPlayer3D:
+	if not some_asp: return null
+	
 	some_asp.volume_db = Constants.SFX_ASP_BASE_VOL_DB
 	some_asp.volume_db += vol_db_change
 

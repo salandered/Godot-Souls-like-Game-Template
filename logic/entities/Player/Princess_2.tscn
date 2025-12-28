@@ -7836,7 +7836,6 @@ needs_input = "axe_slice_1"
 needs_combat_input = "light_attack_pressed"
 needs_allows_queue = false
 needs_passed_marker = "allows_switch_to_itself"
-__log_false_decision = true
 needs_curr_state = "axe_slice_1"
 state_to_trigger = "axe_slice_1"
 

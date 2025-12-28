@@ -3,3 +3,48 @@
 [ext_resource type="PackedScene" uid="uid://dli33k4rnw14" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger.glb" id="1_r4jo3"]
 
 [node name="RIG" instance=ExtResource("1_r4jo3")]
+
+[node name="_mask" parent="Armature/GeneralSkeleton" index="0"]
+gi_mode = 2
+
+[node name="brows" parent="Armature/GeneralSkeleton" index="1"]
+cast_shadow = 0
+
+[node name="ears" parent="Armature/GeneralSkeleton" index="2"]
+cast_shadow = 0
+
+[node name="eye lashes" parent="Armature/GeneralSkeleton" index="3"]
+cast_shadow = 0
+
+[node name="long hair" parent="Armature/GeneralSkeleton" index="4"]
+gi_mode = 2
+
+[node name="body head" parent="Armature/GeneralSkeleton" index="5"]
+gi_mode = 2
+
+[node name="gold ring_001" parent="Armature/GeneralSkeleton" index="6"]
+cast_shadow = 0
+
+[node name="gold ring_004" parent="Armature/GeneralSkeleton" index="7"]
+cast_shadow = 0
+
+[node name="gold ring_022" parent="Armature/GeneralSkeleton" index="8"]
+cast_shadow = 0
+
+[node name="gold ring_023" parent="Armature/GeneralSkeleton" index="9"]
+cast_shadow = 0
+
+[node name="gold ring_024" parent="Armature/GeneralSkeleton" index="10"]
+cast_shadow = 0
+
+[node name="ranger boots" parent="Armature/GeneralSkeleton" index="11"]
+gi_mode = 2
+
+[node name="ranger pants" parent="Armature/GeneralSkeleton" index="12"]
+gi_mode = 2
+
+[node name="ranger top" parent="Armature/GeneralSkeleton" index="13"]
+gi_mode = 2
+
+[node name="ranger torso" parent="Armature/GeneralSkeleton" index="14"]
+gi_mode = 2

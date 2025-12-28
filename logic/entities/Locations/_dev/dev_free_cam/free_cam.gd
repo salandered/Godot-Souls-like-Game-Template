@@ -1,0 +1,2 @@
+extends Camera3D
+class_name FreeCamera

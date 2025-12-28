@@ -121,9 +121,10 @@ func _apply_sparks_to_my_weapon(body: Node3D):
 	var hit_position := my_weapon.spark_marker.global_position
 	var hit_normal := -_velocity.normalized()
 	
-	var sparks = SPARK_HIT.instantiate()
+	var sparks: SparksHit = SPARK_HIT.instantiate()
 	get_tree().root.add_child(sparks)
 	sparks.set_direction(hit_normal)
+	sparks.set_from_config(my_weapon.get_spark_config())
 	sparks.global_position = hit_position
 	
 

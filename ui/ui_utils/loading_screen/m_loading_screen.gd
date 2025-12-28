@@ -30,7 +30,7 @@ var _total_loading_progress: float = 0.0:
 var _loading_start_time: int
 
 @export_group("Visuals")
-@export var background_images: Array[Texture2D]
+@export_file("*.png", "*.jpg", "*.webp") var background_image_paths: Array[String]
 @onready var background_texture_rect: TextureRect = %BackgroundTextureRect
 
 
@@ -42,14 +42,34 @@ var _loading_start_time: int
 
 
 func _ready() -> void:
-	_setup_background()
+	reset()
 
+
+var _progress_tween: Tween
 
 func update_total_loading_progress() -> void:
-	# 
-	#var inverted_progress = 1.0 - _scene_loading_progress
-	#_total_loading_progress = 1.0 - (inverted_progress * inverted_progress)
-	_total_loading_progress = sqrt(_scene_loading_progress)
+	var diff = abs(_scene_loading_progress - _total_loading_progress)
+	
+	# prevents micro-stuttering
+	if diff < 0.01:
+		_total_loading_progress = _scene_loading_progress
+		return
+
+	# Kill previous animation
+	if _progress_tween:
+		_progress_tween.kill()
+	
+	_progress_tween = create_tween()
+	
+	# DYNAMIC DURATION:
+	# If jumping 100% (1.0), take 0.5s.
+	# If jumping 10% (0.1), take 0.05s.
+	# We clamp it to a minimum of 0.1s so it doesn't look too instant.
+	var duration = max(diff * 0.3, 0.1)
+	# print_.prefix_s("~~~~", duration)
+	_progress_tween.tween_property(self, "_total_loading_progress", _scene_loading_progress, duration) \
+		.set_trans(Tween.TRANS_SINE) \
+		.set_ease(Tween.EASE_OUT)
 
 
 func _reset_loading_stage() -> void:
@@ -187,7 +207,11 @@ func _on_confirmation_dialog_confirmed() -> void:
 func reset() -> void:
 	show()
 	__log_("LoadingScreen: reset func started")
-	
+	if _progress_tween:
+		_progress_tween.kill()
+
+	_setup_background()
+
 	_reset_loading_stage()
 	_reset_scene_loading_progress()
 	_reset_loading_start_time()
@@ -204,24 +228,16 @@ func close() -> void:
 # region
 
 func _setup_background() -> void:
-	if background_images.size() > 0:
-		var random_image = background_images.pick_random()
-		if background_texture_rect:
-			background_texture_rect.texture = random_image
-			__log_("LoadingScreen: Set random background -> ", random_image.resource_path.get_file())
+	if background_image_paths.size() > 0:
+		var random_path = background_image_paths.pick_random()
+		
+		# Load the texture on demand
+		var texture = load(random_path)
+		
+		if background_texture_rect and texture:
+			background_texture_rect.texture = texture
+			__log_("LoadingScreen: Set random background -> ", random_path.get_file())
 		else:
-			__log_warn("LoadingScreen: BackgroundTextureRect is null", "", "")
+			__log_warn("LoadingScreen: BackgroundTextureRect is null or load failed", "", "")
 	else:
-		__log_warn("LoadingScreen: no background_images", "", "")
-
-
- # __LOGS
-# region
-
-func __LOG_B() -> bool:
-	return true
-
-func __LOG_INDENT() -> int:
-	return 0
-
-# endregion
+		__log_warn("LoadingScreen: no background_image_paths", "", "")

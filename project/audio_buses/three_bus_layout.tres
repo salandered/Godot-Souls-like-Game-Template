@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=13 format=3 uid="uid://h34rd3knc6l3"]
+[gd_resource type="AudioBusLayout" load_steps=17 format=3 uid="uid://h34rd3knc6l3"]
 
 [sub_resource type="AudioEffectHardLimiter" id="AudioEffectHardLimiter_87o32"]
 resource_name = "HardLimiter"
@@ -50,6 +50,53 @@ pan = 0.38
 [sub_resource type="AudioEffectPanner" id="AudioEffectPanner_q0pyh"]
 resource_name = "Panner"
 pan = -0.46
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_q0pyh"]
+resource_name = "Chorus"
+voice_count = 4
+wet = 1.0
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_87o32"]
+resource_name = "Distortion"
+pre_gain = -5.67
+keep_hf_hz = 12745.0
+drive = 0.29
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_q0pyh"]
+resource_name = "Reverb"
+room_size = 0.1
+damping = 0.02
+spread = 0.0
+hipass = 1.0
+dry = 0.3
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_h4dk8"]
+resource_name = "Chorus"
+voice_count = 4
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectHardLimiter_87o32")
@@ -134,3 +181,17 @@ bus/8/volume_db = 0.0
 bus/8/send = &"game_Music"
 bus/8/effect/0/effect = SubResource("AudioEffectPanner_q0pyh")
 bus/8/effect/0/enabled = true
+bus/9/name = &"_d_health_item"
+bus/9/solo = false
+bus/9/mute = false
+bus/9/bypass_fx = false
+bus/9/volume_db = 0.0
+bus/9/send = &"Master"
+bus/9/effect/0/effect = SubResource("AudioEffectChorus_q0pyh")
+bus/9/effect/0/enabled = false
+bus/9/effect/1/effect = SubResource("AudioEffectDistortion_87o32")
+bus/9/effect/1/enabled = false
+bus/9/effect/2/effect = SubResource("AudioEffectReverb_q0pyh")
+bus/9/effect/2/enabled = false
+bus/9/effect/3/effect = SubResource("AudioEffectChorus_h4dk8")
+bus/9/effect/3/enabled = false

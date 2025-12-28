@@ -101,7 +101,7 @@ func on_signal(payload: Dictionary[String, Variant]) -> void:
 func _asp_play(vol_pitch: VolPitch):
 	var r_from_pos := asp_config.from_position if vol_pitch.from_position == 0.0 else vol_pitch.from_position
 	asp.play(r_from_pos)
-	__log_(pp.s(asp.name, "🎵"), pp.asp_3d_play(asp), "from_pos", r_from_pos)
+	# __log_(pp.s(asp.name, "🎵"), pp.asp_3d_play(asp), "from_pos", r_from_pos)
 
 
 ## to override for additional logic

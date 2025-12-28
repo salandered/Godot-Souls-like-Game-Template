@@ -1,18 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjbmkc53iwu64"]
+[gd_scene load_steps=10 format=4 uid="uid://cjbmkc53iwu64"]
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://logic/entities/Locations/_dev/simple_target/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="1_vud1n"]
 [ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://-assets-/materials-shared/rocks-stone/lichen_rock_Reimp.tres" id="2_woau2"]
+[ext_resource type="Texture2D" uid="uid://s2jxmgd6x4y2" path="res://-assets-/materials-shared/_images/stone-rock/tree_group_lichen_rock_diff_1k.jpg" id="3_tkgjx"]
+[ext_resource type="Texture2D" uid="uid://b6g6w2rtu7ty3" path="res://-assets-/materials-shared/_images/stone-rock/tree_group_lichen_rock_nor_gl.png" id="4_wnrsi"]
+[ext_resource type="Texture2D" uid="uid://b8mx4athk20rv" path="res://-assets-/materials-shared/_images/stone-rock/tree_group_lichen_rock_rough.png" id="5_ramhp"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hiuge"]
+data = PackedVector3Array(-0.209, -1.3, 0.1355, -0.209, -1.3, -0.1355, -0.209, 1.3, -0.1355, 0.209, -1.3, -0.1355, -0.209, -1.3, -0.1355, -0.209, -1.3, 0.1355, -0.209, 1.3, -0.1355, -0.209, -1.3, -0.1355, 0.209, -1.3, -0.1355, -0.209, 1.3, -0.1355, -0.209, 1.3, 0.1355, -0.209, -1.3, 0.1355, -0.209, -1.3, 0.1355, -0.209, 1.3, 0.1355, 0.209, 1.3, 0.1355, 0.209, 1.3, 0.1355, -0.209, 1.3, 0.1355, -0.209, 1.3, -0.1355, -0.209, -1.3, 0.1355, 0.209, -1.3, 0.1355, 0.209, -1.3, -0.1355, 0.209, 1.3, 0.1355, 0.209, -1.3, 0.1355, -0.209, -1.3, 0.1355, 0.209, -1.3, -0.1355, 0.209, -1.3, 0.1355, 0.209, 1.3, 0.1355, 0.209, -1.3, -0.1355, 0.209, 1.3, -0.1355, -0.209, 1.3, -0.1355, -0.209, 1.3, -0.1355, 0.209, 1.3, -0.1355, 0.209, 1.3, 0.1355, 0.209, 1.3, 0.1355, 0.209, 1.3, -0.1355, 0.209, -1.3, -0.1355)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lub8o"]
+resource_name = "lichen_rock"
+cull_mode = 2
+albedo_texture = ExtResource("3_tkgjx")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("5_ramhp")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("4_wnrsi")
+uv1_triplanar = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tkgjx"]
+lightmap_size_hint = Vector2i(54, 58)
+_surfaces = [{
+"aabb": AABB(-0.209, -1.3, -0.1355, 0.418, 2.6, 0.271),
+"attribute_data": PackedByteArray("AACAPwAAgD8voX0/3dNIPwAAgD8AAAAAL6F9P3waIT8AAAAAAAAAACa0Fzx8GiE/AACAPwAAgD97CW0+qBFWPwAAgD8AAAAAE9rLPqgRVj8AAAAAAAAAABPayz4Jy30/AACAPwAAgD8voX0/sdwTPwAAgD8AAAAAJrQXPLHcEz8AAAAAAAAAACa0FzyfRtg+AAAAAAAAgD8mtBc83dNIPwAAgD8AAIA/JrQXPAnLvT4AAIA/AAAAAC+hfT8Jy70+AAAAAAAAAAAvoX0/jbBcPgAAAAAAAAAA7SU0PgnLfT8AAAAAAACAPya0FzwJy30/AACAPwAAgD8mtBc8qBFWPwAAAAAAAIA/ewltPgnLfT8AAAAAAACAPya0FzyNsFw+AACAPwAAgD8voX0/yz0NPAAAgD8AAAAAL6F9P2G5Jz4AAAAAAAAAACa0FzxhuSc+AAAAAAAAgD8voX0/n0bYPgAAgD8AAAAA7SU0PqgRVj8AAAAAAACAPya0FzzLPQ08"),
+"format": 34359742519,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgAAgAJAAAACgALAAwADQAOAA8ABQAQAAMADAARAAoAEgATABQACAAVAAYADwAWAA0AFAAXABIA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("GQRWvmZmpr+DwAo+GQRWvmZmpr+DwAq+GQRWvmZmpj+DwAq+GQRWPmZmpr+DwAq+GQRWvmZmpr+DwAq+GQRWvmZmpr+DwAo+GQRWvmZmpj+DwAq+GQRWvmZmpr+DwAq+GQRWPmZmpr+DwAq+GQRWvmZmpj+DwAo+GQRWvmZmpr+DwAo+GQRWvmZmpj+DwAo+GQRWPmZmpj+DwAo+GQRWPmZmpj+DwAo+GQRWvmZmpj+DwAo+GQRWvmZmpj+DwAq+GQRWPmZmpr+DwAo+GQRWPmZmpr+DwAo+GQRWPmZmpr+DwAq+GQRWPmZmpr+DwAo+GQRWPmZmpj+DwAo+GQRWPmZmpj+DwAq+GQRWPmZmpj+DwAq+GQRWPmZmpj+DwAq+AAAAgP9//n8AAACA/3/+fwAAAID/f/5/AIAAAP//AAAAgAAA//8AAACAAAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAAAgP9//n//f/9/AAD/P/9//38AAP8//3//fwAA/z8AgP////8AAACA/////wAAAID/////AAAAgAAA//8AAP9//38AAP8///8AgP9//n///wCA/3/+f///AID/f/5//////wAA/z8AgP////8AAP//AID/f/5/")
+}]
 
 [node name="SimpleTarget" type="Node3D"]
 script = ExtResource("1_g7ncb")
 
-[node name="Block" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-use_collision = true
-size = Vector3(0.418, 2.6, 0.271)
-material = ExtResource("2_woau2")
-
 [node name="CameraTarget" parent="." instance=ExtResource("1_vud1n")]
 unique_name_in_owner = true
 transform = Transform3D(1.01479, 0, 0, 0, 1.119941, 0, 0, 0, 0.81012094, 0, 1.6411285, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConcavePolygonShape3D_hiuge")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_lub8o")
+mesh = SubResource("ArrayMesh_tkgjx")
+skeleton = NodePath("../..")
+
+[node name="BlockOff" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+material_override = ExtResource("2_woau2")
+use_collision = true
+size = Vector3(0.418, 2.6, 0.271)

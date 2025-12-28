@@ -25,14 +25,14 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 		PHES.still_life_phase:
 			if current_substate.is_ended():
-				_reason = "still_life_phase is ended"
+				if __ELA(): _reason += "still_life_phase is ended"
 				_next_state = PHES.combat_phase
 			else:
-				_reason = "still_life_phase not ended"
+				if __ELA(): _reason += "still_life_phase not ended"
 
 		PHES.combat_phase:
 			if phe_feelings.is_zero_health():
-				_reason = "health < 1"
+				if __ELA(): _reason += "health < 1"
 				_next_state = PHES.death_phase
 		
 		PHES.death_phase:
@@ -57,5 +57,5 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	_next_state = PHES.still_life_phase
-	_reason = "initial life_ state"
+	if __ELA(): _reason += "initial life_ state"
 	return VerdictPH.new(_next_state, _reason)

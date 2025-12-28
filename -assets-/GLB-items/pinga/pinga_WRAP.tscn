@@ -5,3 +5,9 @@
 
 [node name="pinga" instance=ExtResource("1_ymeom")]
 script = ExtResource("2_84yaq")
+
+[node name="Pinga_002" parent="." index="0"]
+gi_mode = 2
+
+[node name="chain HP_003" parent="Pinga_002" index="0"]
+gi_mode = 2

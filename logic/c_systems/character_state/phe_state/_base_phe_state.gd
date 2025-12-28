@@ -178,35 +178,47 @@ func __get_common_context() -> String:
 	return _msg
 
 
+func __ELA() -> bool:
+	## "extra logs allowed"
+	return LogToggler.PHE_INTERNAL_FILTER_B
+
 @abstract func __log_state() -> String
 
 @abstract func __log_indent() -> int
 
 func __log_phe(...parts: Array):
-	print_.phe_sm(__log_state(), pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_sm(__log_state(), pp.list_(parts), __log_indent())
 
 func __log_phe_choose(chose_state_: String, ...parts: Array):
-	print_.phe_check(__log_state(), "Chose " + chose_state_ + " " + pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_check(__log_state(), "Chose " + chose_state_ + " " + pp.list_(parts), __log_indent())
 
 func __log_phe_check(...parts: Array):
-	print_.phe_check(__log_state(), pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_check(__log_state(), pp.list_(parts), __log_indent())
 
 func __log_phe_decision(...parts: Array):
-	print_.phe_sm(__log_state() + em.verdict, pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_sm(__log_state() + em.verdict, pp.list_(parts), __log_indent())
 
 func __log_ent(...parts: Array):
-	print_.phe_sm(__log_state() + pp.on_ent, pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_sm(__log_state() + pp.on_ent, pp.list_(parts), __log_indent())
 
 @abstract func __log_timings() -> String
 
 func __log_ext(...parts: Array):
-	if __LOG_EXIT: print_.phe_sm(pp.s(__log_state(), pp.on_ext, __log_timings()), pp.list_(parts), __log_indent())
+	if __ELA():
+		if __LOG_EXIT: print_.phe_sm(pp.s(__log_state(), pp.on_ext, __log_timings()), pp.list_(parts), __log_indent())
 
 func __log_phe__upd(...parts: Array):
-	print_.phe_sm(__log_state() + pp.on_internal_upd, pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_sm(__log_state() + pp.on_internal_upd, pp.list_(parts), __log_indent())
 
 func __log_upd(...parts: Array):
-	print_.phe_sm(__log_state() + pp.on_upd, pp.list_(parts), __log_indent())
+	if __ELA():
+		print_.phe_sm(__log_state() + pp.on_upd, pp.list_(parts), __log_indent())
 
 ## legacy
 func __log_warn(...parts: Array):

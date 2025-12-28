@@ -24,6 +24,11 @@ func get_weapon_hurt_box() -> WeaponHurtBox:
 func get_weapon_id() -> String:
 	return WeaponID.small_pinga_blade
 
+##
+
+func get_spark_config() -> ParticlesConfig:
+	return ParticlesConfig.new(20, 1.0)
+
 
 ## SFX
 

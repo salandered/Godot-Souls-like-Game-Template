@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://dys5hgxxjp1fk"]
+
+[ext_resource type="Script" uid="uid://ho1kjt4aujxq" path="res://logic/x_utils/profiler_info.gd" id="1_is1cb"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_is1cb"]
+color = Color(0.58825254, 0.58825254, 0.58825254, 1)
+thickness = 4
+
+[node name="ProfilerInfo" type="Node3D"]
+script = ExtResource("1_is1cb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -311.0
+offset_bottom = 493.0
+grow_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="LabelContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="ControlInfo" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/LabelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Controls Info text
+...
+...
+..."
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MarginContainer/PanelContainer/LabelContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_is1cb")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/PanelContainer/LabelContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ProfilerInfo" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/LabelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Profiler Info text
+...
+...
+..."

@@ -5,7 +5,7 @@ extends Area3DSystem
 
 ## external event
 ## should be emitted in on_area_entered
-signal SIG_breaking_area_entered
+signal _SIG_breaking_area_entered
 
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 
 
 func get_SIG_breaking_area_entered() -> Signal:
-	return SIG_breaking_area_entered
+	return _SIG_breaking_area_entered
 
 
 @abstract func on_area_entered(incoming_area: Area3D) -> void

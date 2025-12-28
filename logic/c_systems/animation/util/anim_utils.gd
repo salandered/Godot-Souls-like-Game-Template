@@ -60,6 +60,8 @@ static func _msg_key_problem(animator: AnimationPlayer, anim_id: String, found_i
 
 
 static func safe_has_animation(animator: AnimationPlayer, anim_id: String, warn_level: String = WL.PUSH_WARN) -> bool:
+	if error_.null_object(animator):
+		return false
 	var exists: bool = animator.has_animation(anim_id)
 	if not exists:
 		error_.warn(_msg_key_problem(animator, anim_id), "", "", warn_level)

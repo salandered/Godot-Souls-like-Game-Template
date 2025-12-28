@@ -50,7 +50,7 @@ func update(delta: float):
 
 	if not _pushed_rigid_bodies and passed_marker(MarkerName.PUSH_ITEMS_AROUND):
 		PushRigidBodies.push_nearby_rigid_bodies(me, fvalue_angry(2.5, 6.5), fvalue_angry(15, 90))
-		me.SIG_land_wave.emit(me.global_position, "explode")
+		me.SIG_land_wave.emit(me.global_position, AirWave2.AnimID.explode)
 		_pushed_rigid_bodies = true
 
 	_combat_update_is_attacking()

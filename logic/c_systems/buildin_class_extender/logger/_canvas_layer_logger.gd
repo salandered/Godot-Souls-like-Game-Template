@@ -6,7 +6,7 @@ extends CanvasLayer
 # region
 
 func pp_name() -> String:
-	return u.construct_obj_pp_name(self)
+	return pp.s("UI", u.construct_obj_pp_name(self))
 
 ## to override
 func __LOG_B() -> bool:

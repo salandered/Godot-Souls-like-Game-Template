@@ -23,6 +23,7 @@ func get_next() -> Variant:
 	_pointer = (_pointer + 1) % _values.size()
 	return _values[_pointer]
 
+
 ## Returns the current value without advancing the pointer.
 ## Returns the first value if get_next() has not been called.
 func get_current() -> Variant:

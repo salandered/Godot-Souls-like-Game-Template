@@ -118,6 +118,7 @@ License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 - Leohpaz. https://leohpaz.itch.io/ (Pack: https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
 - Nvthic Sounds. https://nvthicprod.itch.io/impact-sfx
 - ObsydianX. https://obsydianx.itch.io/interface-sfx-pack-1
+- Chequered Ink. https://ci.itch.io/400-sounds-pack
 - and others
 
 

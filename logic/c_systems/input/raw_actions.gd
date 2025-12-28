@@ -26,8 +26,8 @@ const light_attack = "light_attack"
 
 # interact
 const lock_target = "lock_target"
+const interact = "interact"
 const switch_weapon = "switch_weapon"
-# const interact = "interact"
 
 # UI
 
@@ -59,8 +59,8 @@ const DEV_9 = "DEV_9"
 const DEV_mouse_mode_switch = "DEV_mouse_mode_switch"
 
 # F 
-const DEV_F2 = "DEV_F2"
-const DEV_CAM_cols = "DEV_CAM_cols"
+const DEV_CAM_cols = "DEV_CAM_cols" # F2
+const DEV_profiler = "DEV_profiler" # F3
 const DEV_cols = "DEV_cols"
 const DEV_force_quit = "DEV_force_quit"
 const DEV_toggle_fullscreen_1 = "DEV_toggle_fullscreen_1"

@@ -1,6 +1,6 @@
 @tool
-extends Label
 class_name M_ConfigVersionLabel
+extends Label
 ## Displays the value of `application/config/version`, set in project settings.
 
 const NO_VERSION_STRING : String = "0.0.0"

@@ -36,9 +36,11 @@ var blend_audio_bus_idx: int
 
 func fade_out(duration: float = 0.0) -> Tween:
 	if is_zero_approx(duration): return
-	music_stream_player.bus = audio_bus
+	if music_stream_player:
+		music_stream_player.bus = audio_bus
 	var tween := create_tween()
-	tween.tween_property(music_stream_player, "volume_db", MINIMUM_VOLUME_DB, duration)
+	if music_stream_player:
+		tween.tween_property(music_stream_player, "volume_db", MINIMUM_VOLUME_DB, duration)
 	return tween
 
 func _set_sub_audio_volume_db(sub_volume_db: float) -> void:
@@ -46,7 +48,8 @@ func _set_sub_audio_volume_db(sub_volume_db: float) -> void:
 
 func fade_in(duration: float = 0.0) -> Tween:
 	if is_zero_approx(duration): return
-	music_stream_player.bus = blend_audio_bus
+	if music_stream_player:
+		music_stream_player.bus = blend_audio_bus
 	AudioServer.set_bus_volume_db(blend_audio_bus_idx, MINIMUM_VOLUME_DB)
 	var tween := create_tween()
 	tween.tween_method(_set_sub_audio_volume_db, MINIMUM_VOLUME_DB, 0, duration)

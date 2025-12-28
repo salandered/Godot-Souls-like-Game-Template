@@ -79,7 +79,8 @@ func pp_name() -> String:
 
 
 func __LOG_B() -> bool:
-	return __log
+	# return __log
+	return false
 
 func __LOG_INDENT() -> int:
 	return 0

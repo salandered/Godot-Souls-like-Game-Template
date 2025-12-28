@@ -13,8 +13,8 @@ var can_switch: bool = true
 var switch_dur := 0.5
 var switch_overlay_weight := 0.4
 var switch_bone_mask := BoneMask.get_right_arm_with_spine_and_head()
-var fade_in := 0.15
-var fade_out := 0.15
+var fade_in := 0.1
+var fade_out := 0.20
 var speed_scale := 1.8
 
 

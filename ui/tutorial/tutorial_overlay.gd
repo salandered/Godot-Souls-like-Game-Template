@@ -26,7 +26,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key_code = event.keycode
 
-	
 		var number: int = -1
 		
 		# Main keyboard number keys

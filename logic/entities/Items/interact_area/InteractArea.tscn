@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvqw0ufia7yrx"]
+
+[ext_resource type="Script" uid="uid://dw25fqj5fbht4" path="res://logic/entities/Items/interact_area/interact_area_.gd" id="1_ekt48"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ekt48"]
+radius = 2.0
+
+[node name="InteractArea" type="Area3D"]
+script = ExtResource("1_ekt48")
+
+[node name="InteractLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40956515, 0)
+transparency = 0.16
+billboard = 1
+modulate = Color(0.62219584, 0.62219584, 0.62219584, 1)
+text = "Press E to interact"
+font_size = 28
+outline_size = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ekt48")
+debug_color = Color(0, 0.7, 0.33833334, 0.7529412)
+debug_fill = false

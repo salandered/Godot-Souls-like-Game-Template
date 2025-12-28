@@ -58,7 +58,7 @@ debug_color = Color(0.8352941, 0.0627451, 0.28235295, 0.32941177)
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="LP smith sword" type="MeshInstance3D" parent="Visuals"]
-gi_mode = 0
+gi_mode = 2
 mesh = SubResource("ArrayMesh_ugvpj")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_kydaq")

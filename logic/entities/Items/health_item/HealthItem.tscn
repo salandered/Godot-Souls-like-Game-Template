@@ -1,0 +1,476 @@
+[gd_scene load_steps=17 format=3 uid="uid://d1v01uwy3yx0"]
+
+[ext_resource type="Material" uid="uid://i0yd71ruqvup" path="res://logic/entities/Items/health_item/HealthItemShaderMat.tres" id="2_et513"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="2_h1ih8"]
+[ext_resource type="Script" uid="uid://c7eeni577qmxv" path="res://logic/entities/Items/health_item/health_item.gd" id="2_yqq3b"]
+[ext_resource type="AudioStream" uid="uid://biequjbtcusgf" path="res://-adopting/sfx_sounds/400 Sounds Pack/Environment/water_boiling_loop_for_health_item.wav" id="3_h1ih8"]
+[ext_resource type="AudioStream" uid="uid://ddwk042630d60" path="res://-assets-/SFX/sources/WAV round/Collect_Small_Jewel_1.wav" id="5_wbokw"]
+[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="5_wrivv"]
+[ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/light_match.wav" id="6_csw4q"]
+[ext_resource type="AudioStream" uid="uid://dffde4yp0h8uv" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/whoosh_1.wav" id="7_et513"]
+[ext_resource type="ArrayMesh" uid="uid://by3rdfdkynn6m" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_042.res" id="9_et513"]
+[ext_resource type="ArrayMesh" uid="uid://blcv133ieg7t" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_049.res" id="10_c56ck"]
+
+[sub_resource type="Animation" id="Animation_umuyv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.5006006]
+}
+
+[sub_resource type="Animation" id="Animation_qmrhd"]
+length = 16.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9666667, 4.1666665, 5.633333, 7.866667),
+"transitions": PackedFloat32Array(-2, -0.5, -2, -2, 1),
+"update": 0,
+"values": [2.387, 2.0, 3.692, 2.5, 3.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.1, 1.5666667, 2.4333334, 3.2, 4.133333, 5.0666666, 6.0666666, 6.9333334, 7.966666),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, 1),
+"update": 0,
+"values": [0.4, 3.0, 0.5, 1.0, 5.0, 0.9, 4.0, 0.2, 4.0, 1.0, 2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i6xqy"]
+_data = {
+&"RESET": SubResource("Animation_umuyv"),
+&"flicker": SubResource("Animation_qmrhd")
+}
+
+[sub_resource type="Animation" id="Animation_87eva"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Visuals:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Visuals/RedSphere:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PickMatchASP:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../PickWhooshASP:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Visuals:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../PickMatchASP:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../PickMatchASP:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:volume_db")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%BackASP:volume_db")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-31.719]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%BackASP:pitch_scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.15]
+}
+
+[sub_resource type="Animation" id="Animation_wrivv"]
+resource_name = "pick"
+length = 0.6
+markers = [{
+"color": Color(0.64256185, 0.24944204, 0.24944204, 1),
+"name": &"goes-up-start",
+"time": 0.16401866
+}, {
+"color": Color(0.64256185, 0.24944204, 0.24944204, 1),
+"name": &"goes-up-end",
+"time": 0.2689315
+}]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.3, 0.5),
+"transitions": PackedFloat32Array(6.062863, 7.4642572, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1.05, 1), Vector3(1, 1, 1), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Visuals:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(4.924576, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0.14, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Visuals/RedSphere:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26666668, 0.5),
+"transitions": PackedFloat32Array(2.5491228, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.13333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../PickMatchASP:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../PickWhooshASP:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../PickMatchASP:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.23333333, 0.5, 0.56666666),
+"transitions": PackedFloat32Array(1, 5.0982404, 1, 1.9318721, 1),
+"update": 0,
+"values": [-80.0, -80.0, -25.0, -25.0, -80.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../PickMatchASP:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 1.5]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:volume_db")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [-25.0, -25.0, -80.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%BackASP:volume_db")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.6),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [-31.719, -31.719, -80.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%BackASP:pitch_scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.6),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [0.15, 0.15, 0.6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87eva"]
+_data = {
+&"RESET": SubResource("Animation_87eva"),
+&"pick": SubResource("Animation_wrivv")
+}
+
+[node name="HealthItem" type="Node3D"]
+script = ExtResource("2_yqq3b")
+
+[node name="Visuals" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="RedSphere" type="CSGSphere3D" parent="Visuals"]
+layers = 4096
+gi_mode = 0
+radius = 0.1
+radial_segments = 8
+material = ExtResource("2_et513")
+
+[node name="PuffFog" parent="Visuals/RedSphere" instance=ExtResource("2_h1ih8")]
+unique_name_in_owner = true
+particles_amount = 6
+lifetime = 16.0
+particle_scale = 0.1
+emission_box_extents = Vector3(0.05, 0.05, 0.05)
+color_multiplier = Color(0.45247936, 0, 0.063293755, 1)
+normal_strength = 30.0
+initial_angle_min = -30.0
+initial_angle_max = 30.0
+angular_velocity = 9.0
+
+[node name="GlowLight" type="OmniLight3D" parent="Visuals/RedSphere"]
+unique_name_in_owner = true
+light_color = Color(0.3981701, 0, 0, 1)
+light_energy = 0.4
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_opacity = 0.6
+omni_range = 2.5006006
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/RedSphere/GlowLight"]
+libraries = {
+&"": SubResource("AnimationLibrary_i6xqy")
+}
+autoplay = "flicker"
+
+[node name="InnerSecondaryOmni" type="OmniLight3D" parent="Visuals/RedSphere"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12500912, 0, 0)
+light_color = Color(0.7443918, 0, 0.05068845, 1)
+light_energy = 2.0
+light_specular = 1.0
+light_cull_mask = 4293922816
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_opacity = 0.6
+omni_range = 1.0
+
+[node name="PickSFX" type="Node3D" parent="Visuals/RedSphere"]
+transform = Transform3D(1.4285716, 0, 0, 0, 1.4285716, 0, 0, 0, 1.4285716, 0, 0.0035427213, 0)
+
+[node name="PickJewelASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
+unique_name_in_owner = true
+transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0, -0.06115779, -0.05089996)
+stream = ExtResource("5_wbokw")
+unit_size = 5.6
+pitch_scale = 1.51
+max_distance = 12.0
+max_polyphony = 2
+bus = &"game_SFX"
+attenuation_filter_cutoff_hz = 942.0
+
+[node name="PickMatchASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
+unique_name_in_owner = true
+transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0.045602918, 0, 0)
+stream = ExtResource("6_csw4q")
+unit_size = 5.6
+max_distance = 12.0
+max_polyphony = 2
+bus = &"game_SFX"
+attenuation_filter_cutoff_hz = 942.0
+
+[node name="PickWhooshASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
+unique_name_in_owner = true
+transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, -0.013224141, -0.07411059, 0)
+stream = ExtResource("7_et513")
+volume_db = -20.0
+unit_size = 5.6
+pitch_scale = 0.71
+max_distance = 12.0
+max_polyphony = 2
+bus = &"game_SFX"
+attenuation_filter_cutoff_hz = 942.0
+
+[node name="BackASP" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_h1ih8")
+volume_db = -31.719
+unit_size = 5.6
+pitch_scale = 0.15
+autoplay = true
+max_distance = 12.0
+max_polyphony = 2
+bus = &"game_SFX"
+attenuation_filter_cutoff_hz = 942.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Visuals/RedSphere/PickSFX/PickJewelASP")
+libraries = {
+&"": SubResource("AnimationLibrary_87eva")
+}
+
+[node name="InteractArea" parent="." instance=ExtResource("5_wrivv")]
+unique_name_in_owner = true
+visible = false
+collision_mask = 2
+area_radius = 1.0
+
+[node name="dev-visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2595799, 0)
+visible = false
+
+[node name="chest fasteners" type="MeshInstance3D" parent="dev-visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007918432, 0.3004973, 0.17708457)
+gi_mode = 0
+mesh = ExtResource("9_et513")
+skeleton = NodePath("")
+
+[node name="chest main" type="MeshInstance3D" parent="dev-visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015866419, 0.14737865, 0.025680456)
+gi_mode = 0
+mesh = ExtResource("10_c56ck")
+skeleton = NodePath("")

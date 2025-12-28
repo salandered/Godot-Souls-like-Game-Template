@@ -82,7 +82,7 @@ script = ExtResource("1_l7xcd")
 shape = SubResource("2")
 
 [node name="painted crate" type="MeshInstance3D" parent="."]
-gi_mode = 0
+gi_mode = 2
 mesh = SubResource("ArrayMesh_6aq6d")
 skeleton = NodePath("")
 

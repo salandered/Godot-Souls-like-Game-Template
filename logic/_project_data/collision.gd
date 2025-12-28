@@ -71,5 +71,7 @@ enum Masks {
 	
 	ALL_CHARACTERS = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL,
 
+	ONLY_PLAYER = Layers.PLAYER_COL,
+
 	_ZERO_MASK = 0
 }

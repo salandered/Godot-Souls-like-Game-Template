@@ -216,9 +216,13 @@ func _find_spark_marker() -> Marker3D:
 	return null
 
 
+## can be overriden
+func get_spark_config() -> ParticlesConfig:
+	return ParticlesConfig.new(8, 0.3)
+
+
 ## __LOGS
 # region
-
 func __LOG_B():
 	return LogToggler.WEAPON_B
 

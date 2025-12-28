@@ -18,5 +18,5 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	_next_state = PHES.Leaf.death
-	_reason = "only death"
+	if __ELA(): _reason += "only death"
 	return VerdictPH.new(_next_state, _reason)

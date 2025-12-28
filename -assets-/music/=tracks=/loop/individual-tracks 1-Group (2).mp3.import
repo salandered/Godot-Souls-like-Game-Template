@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/individual-tracks 1-Group (2).mp3-21554dd469c
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
