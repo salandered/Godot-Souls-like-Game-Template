@@ -11,12 +11,8 @@ static func dev(add_prefix_: String, text: Variant = "", info_indents: int = 0):
 
 # region: CONTAINER
 
-static var CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.CONTAINER_B, "Container", 0, prefix)
 static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.E_CONTAINER_B, "Container", 0, prefix)
 
-
-static func container(add_prefix_: String, text: String, info_indents: int = 0):
-	_generic(CONTAINER_PRINT, add_prefix_, text, info_indents)
 
 static func e_container(add_prefix_: String, text: String, info_indents: int = 0):
 	_generic(E_CONTAINER_PRINT, add_prefix_, text, info_indents)

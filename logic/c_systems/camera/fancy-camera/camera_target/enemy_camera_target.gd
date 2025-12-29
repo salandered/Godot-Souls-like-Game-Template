@@ -9,7 +9,7 @@ var _assigned_parent: Node3D
 @onready var ui_marker_visual: CSGSphere3D = $UIMarker/ui_marker_visual
 
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 		_assigned_parent
 	]
@@ -24,7 +24,7 @@ func initialise(assigned_parent: Node3D) -> void:
 	#ui_marker_visual.visible = false
 	
 	dev_initialise()
-	__validate_deps_set_init()
+	__validate_dependencies()
 	
 
 # func _process(delta: float) -> void:

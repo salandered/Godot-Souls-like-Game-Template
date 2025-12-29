@@ -5,12 +5,12 @@ class_name WeaponSFXParent
 @onready var sfx_system: BaseWeaponSFXSystem = %AudioSystem
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [sfx_system]
 
 
 func _ready() -> void:
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 ## nullable but hard checked

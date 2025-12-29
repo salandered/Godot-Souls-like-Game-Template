@@ -45,7 +45,7 @@ var _original_capsule_shape_radius: float
 var _original_capsule_shape_height: float
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		_combat
 	]
@@ -61,8 +61,7 @@ func initialise(combat_: BaseCombat) -> void:
 	if len(_my_coll_shapes) > 1:
 		__log_warn_soft(pp.s("len of _my_coll_shapes > 1", "Not supported! will be working only with the first one"))
 
-	var hard_validate_is_ok := _hard_validate()
-	if hard_validate_is_ok:
+	if __validate_dependencies():
 		# Duplicate to avoid shared resource issues
 		var original_shape = _my_coll_shapes[0].shape
 		_my_coll_shapes[0].shape = original_shape.duplicate()
@@ -72,17 +71,13 @@ func initialise(combat_: BaseCombat) -> void:
 
 		_original_capsule_shape_radius = shape.radius
 		_original_capsule_shape_height = shape.height
-
-	if __validate_dependencies() and hard_validate_is_ok:
 		__log_("--- CharacterHitbox ready ---")
-		__just_set_init_true()
 	else:
 		__log_warn_soft("CharacterHitbox init problems, not going to work")
-		__just_set_init_false()
 		set_physics_process(false)
 
 
-func _hard_validate() -> bool:
+func __hard_validate() -> bool:
 	var _r := true
 	var _msg := ""
 

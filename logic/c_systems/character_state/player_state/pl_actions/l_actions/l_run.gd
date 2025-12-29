@@ -28,6 +28,8 @@ var _resettable := [
 ]
 
 
+var SPEED_BOOST: float = 0.0
+
 func initialise() -> void:
 	default_sp.SPEED = 3.0
 	default_sp.TURN_SPEED = 2.6
@@ -40,10 +42,15 @@ func initialise() -> void:
 		Leg.Act.idle: 0.3, # 0.3 works good
 		Leg.Act.sprint: 0.3,
 		Leg.Act.turn_180: turn_180_blend_time,
+		Leg.Act.idle_to_sprint: 0.3,
+		Leg.Act.fast_turn_180: 0.3,
 		PS.Act.landing_sprint: 0.4,
 		PS.Act.dodge: 0.3,
 		PS.Act.thrown: thrown_blend_time
 	})
+
+	GlobalSignal.player_speed_increase.connect_(_on_speed_increase)
+
 
 func on_enter_action(input_: InputPackage):
 	u.reset_all(_resettable)
@@ -65,7 +72,7 @@ func on_enter_action(input_: InputPackage):
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
-		PS.Act.dodge:
+		PS.Act.dodge, Leg.Act.idle_to_sprint, Leg.Act.fast_turn_180:
 			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
 			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
 			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
@@ -104,7 +111,7 @@ func update(input_: InputPackage, delta: float):
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
 			TURN_SPEED = turn_sp_from_idle.update(delta)
-		PS.Act.dodge:
+		PS.Act.dodge, Leg.Act.idle_to_sprint, Leg.Act.fast_turn_180:
 			CURR_SPEED = default_sp.SPEED
 			SPEED_MULT = speed_mult_from_idle.update(delta)
 			CURR_ANGULAR_SPEED = angular_sp_from_idle.update(delta)
@@ -119,7 +126,7 @@ func update(input_: InputPackage, delta: float):
 			CURR_ANGULAR_SPEED = angular_sp.update(delta)
 
 	CURR_SPEED = player_sm.apply_hit_influence(CURR_SPEED)
-	var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED, CURR_ANGULAR_SPEED, TURN_SPEED)
+	var speed_config := SpeedConfig.new(default_sp, SPEED_MULT, CURR_SPEED + SPEED_BOOST, CURR_ANGULAR_SPEED, TURN_SPEED)
 	speed_config.tie_turn_sp_to_speed(0.6)
 	pm().move_rotate_with_input_vector(input_, delta, speed_config)
 
@@ -142,6 +149,8 @@ func animate(): # ▶️
 			var r := sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
 				custom_start_time_offset = r
+		Leg.Act.idle_to_sprint:
+			custom_start_time_offset = 0.25
 			
 	set_anim_to_play(-1, custom_start_time_offset)
 
@@ -149,9 +158,18 @@ func animate(): # ▶️
 var _dev_add_blend := 0.0
 
 func _input(event: InputEvent) -> void:
-	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 6, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
+	if not OS.is_debug_build():
+		return
+	SPEED_BOOST = u._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 2, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 	# __start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)
+
+
+func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
+	# prints("_on_speed_increase", "triggered")
+	var value = payload.get(GlobalSignal.payload_amount_field)
+	if value and (value is float or value is int):
+		SPEED_BOOST += value
 
 
 ## NOTE: currently adjusting SpeedConfig solves non completed root turn better than this.

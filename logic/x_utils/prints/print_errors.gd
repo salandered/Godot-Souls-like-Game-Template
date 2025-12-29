@@ -11,7 +11,7 @@ static func _warn(warn_msg: String, warn_level: String = WL.PUSH_ERROR):
 
 
 	if warn_msg == _last_warn_msg:
-		log.prefix_s(false, "\t\t |", warn_msg, "same message again")
+		log.prefix_s(false, "\t\t |", "<same message again>")
 		return
 	_last_warn_msg = warn_msg
 

@@ -34,3 +34,6 @@ const sfx_switch_weapon := "SFX_switch_weapon"
 ## GLOBAL
 
 const player_change_health := "GLOBAL_player_change_health"
+const player_stamina_increase := "GLOBAL_player_stamina_increase"
+const player_speed_increase := "GLOBAL_player_speed_increase"
+const player_dodge_increase := "GLOBAL_player_dodge_increase"

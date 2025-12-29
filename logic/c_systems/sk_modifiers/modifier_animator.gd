@@ -56,7 +56,7 @@ var _bone_idx_to_track: Dictionary[int, String] = {}
 var __custom_delta: CustomDelta = CustomDelta.new()
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		skeleton,
 		root_animator,
@@ -78,7 +78,7 @@ func initialise(native_animator_: AnimationPlayer) -> void:
 
 	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT])
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):

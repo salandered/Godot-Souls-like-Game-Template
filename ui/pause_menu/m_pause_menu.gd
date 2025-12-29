@@ -24,6 +24,7 @@ func _enable_focus() -> void:
 
 func _load_scene(scene_path: String) -> void:
 	_scene_tree.paused = false
+	GlobalSignal._SIG_hid_tut.emit()
 	M_SceneLoader.load_scene(scene_path)
 
 func open_options_menu() -> void:

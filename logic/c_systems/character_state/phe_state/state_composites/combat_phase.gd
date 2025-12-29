@@ -177,7 +177,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.t2):
 		if not me.angry_raised:
 			# me.angry_raised = true will be raised by state flow
-			phe_feelings._set_specific_health(phe_feelings.get_max_health() * PHEStaticConfig.PHASE_SWITCH_HP_TRESHOLD - 1)
+			phe_feelings._set_specific_health(phe_feelings.get_max_health() * phe_feelings.PHASE_SWITCH_HP_TRESHOLD - 1)
 			print_.dev("~~~~~ dev PHASE SWITCH to ANGRY")
 
 		else:

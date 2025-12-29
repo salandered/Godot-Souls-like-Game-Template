@@ -1,14 +1,11 @@
-[gd_scene load_steps=25 format=4 uid="uid://cawy367n2w511"]
+[gd_scene load_steps=22 format=4 uid="uid://bd67vd6q3hn0s"]
 
-[ext_resource type="Script" uid="uid://beoeecjbggacu" path="res://logic/entities/Items/chest_health/chest_health.gd" id="2_kwqth"]
-[ext_resource type="Material" uid="uid://bo27ogctrfe32" path="res://-assets-/materials-shared/wood/rough_wood_Reimp_red.tres" id="3_i6xqy"]
 [ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodOneShots/WoodSteps 119-Audio.wav" id="4_m0yqf"]
 [ext_resource type="AudioStream" uid="uid://4k1rr3gewovf" path="res://-adopting/sfx_sounds/CatSoundFX/creak/creak_5.wav" id="5_r6xty"]
 [ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://-adopting/sfx_sounds/400 Sounds Pack/Environment/creaky_door_short_for_chest.wav" id="7_m0yqf"]
 [ext_resource type="AudioStream" uid="uid://bp2h06bfionbs" path="res://-adopting/sfx_sounds/rubberduck/sfx_breaking_and_falling/bfh1_wood_hit_02.ogg" id="7_r6xty"]
 [ext_resource type="Texture2D" uid="uid://d31hmdbngp1gm" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_diff_1k.jpg" id="8_sdskp"]
 [ext_resource type="Texture2D" uid="uid://cv6kvx0r8j6fi" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_metal-wooden_crate_01_rough.png" id="9_grnxn"]
-[ext_resource type="PackedScene" uid="uid://d1v01uwy3yx0" path="res://logic/entities/Items/health_item/HealthItem.tscn" id="9_upgqo"]
 [ext_resource type="Texture2D" uid="uid://b55ox7hi3cclc" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_nor_gl.png" id="10_4p2nb"]
 [ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="10_qmrhd"]
 
@@ -101,7 +98,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ehuw4")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4uo65"]
-size = Vector3(0.6963501, 0.3330078, 0.38891602)
+size = Vector3(0.8123932, 0.3330078, 0.489563)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grnxn"]
 resource_name = "wooden_crate_01"
@@ -320,7 +317,6 @@ _data = {
 }
 
 [node name="BaseChest" type="Node3D"]
-script = ExtResource("2_kwqth")
 
 [node name="Visuals" type="Node3D" parent="."]
 
@@ -331,7 +327,6 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.298952
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0025598686, 0.028499305, 0.20049907)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_i6xqy")
-surface_material_override/0 = ExtResource("3_i6xqy")
 
 [node name="WoodASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/ChestLid"]
 transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, -0.0025598686, 0.06798403, -0.123037875)
@@ -359,13 +354,11 @@ stream = ExtResource("7_m0yqf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14647147, 0.028909326)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/ChessMain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013183594, -0.02355957)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023880005, 0.013183594, -0.014312744)
 shape = SubResource("BoxShape3D_4uo65")
 
 [node name="ChestMain" type="MeshInstance3D" parent="Visuals/ChessMain"]
 mesh = SubResource("ArrayMesh_j065c")
-surface_material_override/0 = ExtResource("3_i6xqy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -380,10 +373,7 @@ current = true
 [node name="ItemPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11955696, 0)
 
-[node name="HealthItem" parent="ItemPivot" instance=ExtResource("9_upgqo")]
-unique_name_in_owner = true
-
 [node name="InteractArea" parent="." instance=ExtResource("10_qmrhd")]
 unique_name_in_owner = true
-collision_mask = 2
 area_radius = 1.0
+label_y_offset = 0.7

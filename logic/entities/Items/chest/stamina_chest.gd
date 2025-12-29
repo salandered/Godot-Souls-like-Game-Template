@@ -1,0 +1,2 @@
+extends BaseChest
+class_name StaminaChest

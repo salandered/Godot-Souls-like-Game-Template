@@ -4,7 +4,7 @@ extends BaseAnimatorManager
 
 class_name EnemyAnimatorManager
 
-
+@onready var config: PHEConfig = %Config
 @onready var _native_player: AnimationPlayer = %NativePlayer
 @onready var general_skeleton: Skeleton3D = %GeneralSkeleton
 @onready var overlay_modifier: OverlayModifier = %OverlayModifier
@@ -18,7 +18,7 @@ var _curr_anim_start_offset: float = 0.0
 var _curr_anim: AnimationData
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		_native_player,
 		_anim_player,
@@ -26,7 +26,7 @@ func get_hard_dependencies() -> Array[Object]:
 		anim_container
 	]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 		overlay_modifier
 	]
@@ -65,7 +65,7 @@ func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset
 		return
 	
 	# NOTE: playing anim and setting _curr_anim is atomic
-	get_anim_player().play(anim.anim_id, blend_for, anim.speed_scale)
+	get_anim_player().play(anim.anim_id, blend_for, anim.speed_scale * config.SPEED_SCALE_COEF)
 	__log_new_anim(_curr_anim, anim)
 	_curr_anim = anim
 	#
@@ -78,7 +78,7 @@ func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset
 
 func set_global_speed_scale(new_scale: float) -> void:
 	var max_speed_scale := 2.0
-	var min_speed_scale := 0.1
+	var min_speed_scale := 0.2
 	new_scale = snappedf(new_scale, 0.01)
 	
 	if new_scale < min_speed_scale or new_scale > max_speed_scale:
@@ -87,12 +87,13 @@ func set_global_speed_scale(new_scale: float) -> void:
 	
 	if absf(get_anim_player().speed_scale - new_scale) > 0.005:
 		# __log_("set_global_speed_scale to", new_scale, "  (from", get_anim_player().speed_scale, ")")
-		get_anim_player().speed_scale = new_scale
+		## TODO: i think it should use anim.speed_scale * new_scale
+		get_anim_player().speed_scale = new_scale * config.SPEED_SCALE_COEF
 
 
 func reset_global_speed_scale() -> void:
 	# __log_("reset_global_speed_scale to 1.0")
-	get_anim_player().speed_scale = 1.0
+	get_anim_player().speed_scale = 1.0 * config.SPEED_SCALE_COEF
 
 
 ## guarantees not 0.0
@@ -211,7 +212,7 @@ func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer)
 
 	overlay_modifier.initialise()
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func _reset_root_motion() -> void:

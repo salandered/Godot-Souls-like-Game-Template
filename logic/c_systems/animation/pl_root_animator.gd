@@ -7,10 +7,10 @@ extends NodeCharacterSystem
 var _root_track: String
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [full_body]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return []
 
 

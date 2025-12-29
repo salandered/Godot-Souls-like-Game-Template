@@ -1,4 +1,4 @@
-extends Node
+extends NodeLogger
 
 
 @onready var health_bar: ProgressBar = %HealthBar
@@ -25,6 +25,9 @@ var _prev_health: float
 var _prev_stamina: float
 
 
+var _pixels_per_stamina: float
+var _size_tween: Tween
+
 func _ready() -> void:
 	health_bar.max_value = pl_feelings.get_max_health()
 	health_bar.value = pl_feelings.get_curr_health()
@@ -34,6 +37,18 @@ func _ready() -> void:
 	stamina_bar.value = pl_feelings.get_curr_stamina()
 	_prev_stamina = pl_feelings.get_curr_stamina()
 
+	var current_visual_width = stamina_bar.custom_minimum_size.x
+	if current_visual_width == 0:
+		current_visual_width = stamina_bar.size.x
+	
+	if pl_feelings.max_stamina > 0:
+		_pixels_per_stamina = current_visual_width / pl_feelings.max_stamina
+	else:
+		_pixels_per_stamina = 3.0 # Fallback
+	
+	stamina_bar.custom_minimum_size.x = current_visual_width
+
+	GlobalSignal.player_stamina_increase.connect_(_on_player_increase_stamina)
 	# pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
 
@@ -103,3 +118,23 @@ func _animate_stamina_change(target_value: float) -> void:
 		target_value,
 		ANIM_DURATION_STAMINA_HIT
 	)
+
+
+func _on_player_increase_stamina(payload: Dictionary) -> void:
+	var value = payload.get(GlobalSignal.payload_amount_field)
+	if value and (value is float or value is int):
+		var new_max_stamina = stamina_bar.max_value + value
+		var new_width = new_max_stamina * _pixels_per_stamina
+		var current_height = stamina_bar.custom_minimum_size.y
+		
+		stamina_bar.max_value = new_max_stamina
+		
+		UIUtils.kill_tween_if_exists(_size_tween)
+		
+		_size_tween = create_tween()
+		_size_tween.tween_property(
+			stamina_bar,
+			"custom_minimum_size",
+			Vector2(new_width, current_height),
+			0.3
+		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)

@@ -28,7 +28,7 @@ func enable():
 	ENABLED = true
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		sad_container,
 		signal_container
@@ -41,7 +41,7 @@ func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalC
 
 	self._audio_track_throttler = EventThrottler.new(0.4, 2.0, 3.0, "AudioTrackKey")
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Variant]) -> void:

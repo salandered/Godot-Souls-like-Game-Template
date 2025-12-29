@@ -387,7 +387,7 @@
 				},
 			]
 		},
-		"(get_hard_dependencies)": {
+		"(__hard_dependencies)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -399,7 +399,31 @@
 				}
 			]
 		},
-		"(get_soft_dependencies)": {
+		"(__soft_dependencies)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(__hard_validate)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(__soft_validate)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -420,7 +444,7 @@
 				}
 			]
 		},
-		"\\b(__validate_deps_set_init\\(\\))": {
+		"\\b(__validate_dependencies\\(\\))": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{

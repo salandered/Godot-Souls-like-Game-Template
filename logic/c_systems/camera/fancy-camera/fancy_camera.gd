@@ -87,7 +87,7 @@ var FREE_STATE_NAME := "free_state"
 var LOCKED_STATE_NAME := "locked_state"
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		player,
 		focus,
@@ -149,7 +149,7 @@ func initialise() -> void:
 	__dev_initialise()
 	
 	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
-	if not __validate_deps_set_init():
+	if not __validate_dependencies():
 		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can't be done")
 
 

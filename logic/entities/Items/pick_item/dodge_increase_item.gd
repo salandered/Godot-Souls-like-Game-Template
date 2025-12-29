@@ -1,0 +1,7 @@
+class_name DodgeIncreaseItem
+extends BasePickItem
+
+
+func _on_my_area_interacted_implementation():
+	var signal_data := GlobalSignal.player_dodge_increase
+	u.safe_emit(signal_data, {GlobalSignal.payload_amount_field: + 4}, false)

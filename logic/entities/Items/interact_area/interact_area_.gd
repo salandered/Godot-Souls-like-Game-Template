@@ -2,7 +2,7 @@
 class_name InteractArea
 extends Area3DSystem
 
-@onready var label: Label3D = $InteractLabel
+@onready var label: Label3D = %InteractLabel
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 
@@ -16,19 +16,24 @@ extends Area3DSystem
 		area_radius = value
 		if is_node_ready(): _set_area_radius()
 
+@export var label_y_offset: float = 0.7:
+	set(value):
+		label_y_offset = value
+		if is_node_ready(): _set_label_y_offset()
+
 @export var ENABLED: bool = true
 
 
 signal SIG_interacted
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		collision_shape_3d,
 		collision_shape_3d.shape
 	]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 	]
 
@@ -48,13 +53,13 @@ func _ready() -> void:
 		visible = false
 		set_process_unhandled_input(false)
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func set_all_properties():
 	_set_label_text()
 	_set_area_radius()
-
+	_set_label_y_offset()
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -110,6 +115,9 @@ func _set_area_radius() -> void:
 		return
 	collision_shape_3d.shape.radius = area_radius
 
+func _set_label_y_offset() -> void:
+	if label:
+		label.global_position.y = label_y_offset
 # endregion
 
 

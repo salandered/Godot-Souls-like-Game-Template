@@ -7,8 +7,6 @@ extends NodeLogger
 
 @onready var player: Princess
 
-## NOTE: state_name, not node name
-@export var needs_curr_state: String
 @export var needs_curr_action: String = "not"
 
 

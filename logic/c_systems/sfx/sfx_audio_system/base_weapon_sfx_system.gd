@@ -12,7 +12,7 @@ const weapon_additional_data_key := "weapon"
 var _weapon: BaseWeapon
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		whoosh_weapon_player_3d,
 		hit_weapon_player_3d,
@@ -59,9 +59,3 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 func pp_name() -> String:
 	var prefix = get_weapon().get_weapon_id() if get_weapon() else ""
 	return pp.s(prefix, u.construct_obj_pp_name(self))
-
-func __LOG_B() -> bool:
-	return true
-
-func __LOG_INDENT() -> int:
-	return 0

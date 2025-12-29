@@ -48,7 +48,7 @@ var curr_overlay: OverlayInstance
 var prev_overlay: OverlayInstance
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		skeleton
 	]
@@ -61,7 +61,7 @@ func initialise():
 	# Cache bone track paths
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func _create_overlay_timing(anim: AnimationData, overlay_config: OverlayConfig) -> OverlayTiming:

@@ -42,8 +42,9 @@ func initialise(character: BaseCharacter, active_weapon_id_list_to_set: Array[St
 	_hit_tracker = EventThrottler.new(HIT_BUFFER_DURATION, 2.0, 3.0, "HitTracker")
 
 	initialise_implementation()
-	
-	__log_("initialised combat", __pp_weapons_info())
+
+	if __validate_dependencies():
+		__log_("initialised combat", __pp_weapons_info())
 
 
 ## scans all the weapons under get_parent_node_of_weapons()
@@ -58,6 +59,7 @@ func _register_weapons():
 
 
 @abstract func initialise_implementation() -> void
+
 
 ## nullable
 @abstract func get_parent_node_of_weapons() -> Node3D

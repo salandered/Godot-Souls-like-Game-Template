@@ -9,8 +9,6 @@ extends Node
 @onready var additional_movement_tips: MarginContainer = %AdditionalMovementTips
 
 func _ready():
-	if legend:
-		tutorial_manager.register_panel(0, legend)
 	if controls:
 		tutorial_manager.register_panel(1, controls)
 	if high_lights:

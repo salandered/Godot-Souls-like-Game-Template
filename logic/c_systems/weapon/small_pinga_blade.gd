@@ -11,6 +11,7 @@ extends BasePlayerWeapon
 func initialise_implementation() -> void:
 	_input_action_to_state = {
 		CombatAction.light_attack_pressed: PS.axe_slice_1,
+		CombatAction.heavy_attack_pressed: PS.axe_slice_3,
 		# CombatAction.light_attack_pressed_when_move: PS.attack_from_run
 	}
 

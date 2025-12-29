@@ -8,7 +8,8 @@ func initialise() -> void:
 		Leg.Act.sprint_to_idle: 0.3,
 		Leg.Act.turn_180: 0.3,
 		PS.Act.attack_from_dodge: 0.35,
-		PS.Act.thrown: 0.35
+		PS.Act.thrown: 0.35,
+		PS.Act.axe_slice_3: 0.35
 	})
 
 

@@ -1,6 +1,23 @@
 extends BaseAttackAction
 
 
+func get_global_speed_scale() -> float:
+	# shortcutting
+	match get_active_weapon_id():
+		WeaponID.small_pinga_blade:
+			return 0.6
+		_:
+			return 1.0
+
+
+func get_hit_damage() -> float:
+	match get_active_weapon_id():
+		WeaponID.small_pinga_blade:
+			return hit_damage + 10
+		_:
+			return hit_damage
+
+
 func initialise_implementation() -> void:
 	hit_damage = 12
 
@@ -17,7 +34,9 @@ func initialise_implementation() -> void:
 
 
 func on_enter_action(input_: InputPackage) -> void:
+	get_animator_manager().force_stop_overlay()
 	_combat_set_hit_data()
+	get_animator_manager().set_global_speed_scale(get_global_speed_scale())
 
 	var _speed_extra_Z := extra_root_speed_Z.calculate_actual(PREV_ACTION)
 	

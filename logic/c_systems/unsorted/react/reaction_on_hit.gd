@@ -221,6 +221,13 @@ static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 
 ## may return ""
 static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
+	if hit_from_pl.anim_id in [A.attack.attack_from_run, A.attack.attack_from_dodge]:
+		if hit_from_pl.weapon_name == WeaponID.smith_sword:
+			return ""
+		else: # if small pinga, we push
+			return PHES.Leaf.pushback_2 if ra.chance(0.6) else ""
+	
+	## usual logic
 	var _e_state = ""
 	var _e_state_and_probability: Array
 	_e_state_and_probability = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)

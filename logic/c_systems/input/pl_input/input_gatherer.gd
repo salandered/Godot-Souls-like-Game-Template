@@ -15,6 +15,7 @@ var _right_key: KeyPress = KeyPress.new(RawAction.move_right)
 var _left_key: KeyPress = KeyPress.new(RawAction.move_left)
 var _target_lock_key: KeyPress = KeyPress.new(RawAction.lock_target)
 var _light_attack_key: KeyPress = KeyPress.new(RawAction.light_attack)
+var _heavy_attack_key: KeyPress = KeyPress.new(RawAction.heavy_attack)
 var _sprint_key: KeyPress = KeyPress.new(RawAction.sprint)
 
 var _target_lock_detector: TapDetector = TapDetector.new(DOUBLE_TAP_THRESHOLD)
@@ -33,6 +34,7 @@ func _update_key_press_timestamps() -> void:
 	_left_key.update(_curr_time)
 	_target_lock_key.update(_curr_time)
 	_light_attack_key.update(_curr_time)
+	_heavy_attack_key.update(_curr_time)
 	_sprint_key.update(_curr_time)
 
 func _detect_double_tap(key: KeyPress) -> bool:
@@ -113,12 +115,13 @@ func gather_input(delta: float) -> InputPackage:
 	if _light_attack_key.is_just_pressed:
 		new_input.combat_actions.append(CombatAction.light_attack_pressed)
 
+	if _heavy_attack_key.is_just_pressed:
+		new_input.combat_actions.append(CombatAction.heavy_attack_pressed)
+
 	if _light_attack_key.is_just_pressed:
 		new_input.combat_actions.append(CombatAction.light_attack_pressed)
 		if new_input.actions.has(PS.run) or new_input.actions.has(PS.sprint):
 			new_input.combat_actions.append(CombatAction.light_attack_pressed_when_move)
 	
-	#if Input.is_action_just_pressed("heavy_attack"):
-		#new_input.combat_actions.append("heavy_attack_pressed")
 
 	return new_input

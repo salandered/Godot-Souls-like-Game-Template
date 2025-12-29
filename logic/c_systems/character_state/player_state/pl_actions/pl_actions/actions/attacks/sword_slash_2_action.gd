@@ -12,3 +12,8 @@ func initialise_implementation() -> void:
 	start_time_offset.set_by_prev_action({
 		PS.Act.sword_slash_1: 0.3,
 	})
+
+
+	extra_root_speed_Z.set_by_prev_action({
+		PS.Act.sword_slash_1: - 1.0
+		})

@@ -88,13 +88,13 @@ func _accept_player_states() -> void:
 	var states_container := StatesContainer.new()
 
 	for child: BasePlayerState in get_descendants.player_states(_player.player_sm):
-		print_.container("", "child.get_name() " + child.get_name())
+		__log_("", "child.get_name() " + child.get_name())
 		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.get_name())
 		if not state_data:
 			__log_warn("No state data found for: " + child.get_name(), "_accept_player_states", "Will be skipped")
 			continue
 
-		print_.container("", "state_data.state_name " + state_data.state_name)
+		__log_("", "state_data.state_name " + state_data.state_name)
 
 		_states[state_data.state_name] = child
 
@@ -120,7 +120,7 @@ func _accept_player_states() -> void:
 
 		var combos := get_descendants.combos_one_level(child)
 		for combo: Combo_ in combos:
-			print_.container("", pp.s("For state", child.state_name, "assigned combo", combo.name, "priority", combo.priority))
+			__log_("", pp.s("For state", child.state_name, "assigned combo", combo.name, "priority", combo.priority))
 			combo.player = _player
 		
 		child.state_combos_sorted = _sort_combos_by_priority(combos)
@@ -144,9 +144,9 @@ func _accept_player_states() -> void:
 		if child.priority == null or child.priority < 0:
 			__log_error(pp.s("Invalid priority for state:", child.state_name, child.priority))
 
-	print_.container("", "===========  Accepted states ===========")
-	print_.container("", str(_states))
-	print_.container("", "")
+	__log_("", "===========  Accepted states ===========")
+	__log_("", str(_states))
+	__log_("", "")
 
 
 func _sort_combos_by_priority(combos: Array) -> Array:
@@ -160,7 +160,7 @@ func _accept_player_actions():
 	var states_container := StatesContainer.new()
 	
 	for child: PlayerAction in get_descendants.player_actions(_player.player_sm):
-		print_.container("pl_act", "child.get_name() " + child.get_name())
+		__log_("pl_act", "child.get_name() " + child.get_name())
 		var action_data: StatesContainer._PlActionData = states_container.node_to_pl_action.get(child.get_name())
 		
 		_player_actions[action_data.action_name] = child
@@ -170,9 +170,9 @@ func _accept_player_actions():
 		__apply_base_action_data(action_data, child)
 		
 		
-	print_.container("pl_act", "===========  Accepted actions ===========")
-	print_.container("pl_act", str(_player_actions))
-	print_.container("", "")
+	__log_("pl_act", "===========  Accepted actions ===========")
+	__log_("pl_act", str(_player_actions))
+	__log_("", "")
 
 
 func __apply_base_action_data(action_data: StatesContainer._BaseActionData, child: BaseAction):
@@ -199,12 +199,12 @@ func __apply_base_action_data(action_data: StatesContainer._BaseActionData, chil
 func _accept_legs_behaviors():
 	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsBehavior in get_descendants.legs_behaviors(get_leg_sm()):
-		print_.container("", "node.get_name() " + child.get_name())
+		__log_("", "node.get_name() " + child.get_name())
 		var behavior_data: LegBehaviorContainer._BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
 		if not behavior_data:
 			__log_warn("No behavior data found for: " + child.get_name() + " Will be skipped")
 			continue
-		print_.container("", "behavior_data.behavior_name " + behavior_data.behavior_name)
+		__log_("", "behavior_data.behavior_name " + behavior_data.behavior_name)
 		_legs_behaviors[behavior_data.behavior_name] = child
 
 		# specific
@@ -224,12 +224,12 @@ func _accept_legs_behaviors():
 func _accept_legs_actions():
 	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsAction in get_descendants.legs_actions(get_leg_sm()):
-		print_.container("", "node.get_name() " + child.get_name())
+		__log_("", "node.get_name() " + child.get_name())
 		var action_data: LegBehaviorContainer._LActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
 		if not action_data:
 			__log_warn("No action data found for: " + child.get_name() + " Will be skipped")
 			continue
-		print_.container("", "action_data.action_name " + action_data.action_name)
+		__log_("", "action_data.action_name " + action_data.action_name)
 		_leg_actions[action_data.action_name] = child
 		
 		# base action
@@ -262,7 +262,7 @@ func _states_priority_sort(a: String, b: String) -> bool:
 
 
 func __LOG_B() -> bool:
-	return LogToggler.CONTAINER_B
+	return LogToggler.PL_STATES_CONTAINER_B
 
 func __LOG_INDENT() -> int:
 	return 0

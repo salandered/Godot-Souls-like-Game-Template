@@ -38,6 +38,7 @@ var slight_dir_change := StrafeDirChange.new()
 var TURN_THRESHOLD_DEG: float = 15
 var DECELERATION_FRICTION: float = 8.0
 
+var SPEED_BOOST: float = 0.0
 
 var _resettable := [
 	speed_from_inherited,
@@ -70,6 +71,7 @@ func initialise() -> void:
 			PS.Act.dodge: 0.3
 	})
 
+	GlobalSignal.player_speed_increase.connect_(_on_speed_increase)
 	
 func _inherit_dodge_speed_if_same_direction():
 	# todo: should not use animations but dodge dir
@@ -96,7 +98,7 @@ func _inherit_dodge_speed_if_same_direction():
 		speed_from_inherited.initialise(curr_direction.get_curr_speed(), curr_direction.get_curr_speed(), 0.0)
 		speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
-
+	
 func on_enter_action(input_: InputPackage) -> void:
 	u.reset_all(_resettable)
 
@@ -153,10 +155,11 @@ func update(input_: InputPackage, delta: float) -> void:
 	# SPEED_MULT *= slightest_dir_change.speed_dip_update(delta)
 	
 
+	CURR_SPEED = player_sm.apply_hit_influence(CURR_SPEED)
 	var _sp_config := SpeedConfig.new(
 		default_sp,
 		SPEED_MULT,
-		player_sm.apply_hit_influence(CURR_SPEED),
+		CURR_SPEED + SPEED_BOOST,
 		CURR_ANGULAR_SPEED
 		)
 
@@ -206,8 +209,8 @@ func update(input_: InputPackage, delta: float) -> void:
 		DirPairs.ChangeType.SAME:
 			u.reset_all(_changers_cooldown)
 
-
-	get_animator_manager().set_global_speed_scale(SPEED_MULT)
+	get_animator_manager().set_global_speed_scale(pm().get_curr_velocity_len() / CURR_SPEED)
+	# get_animator_manager().set_global_speed_scale(SPEED_MULT)
 
 func _change_dir(is_opposite_change: bool, new_dir: Direction.Dir, from_callback: bool = false):
 	# ?? question: is it ok that we re evalutaing dir. bake into callback?
@@ -270,6 +273,12 @@ func _switch_animation(is_opposite_change: bool):
 func _one_anim_is_idle(curr_anim: AnimationData, next_anim: AnimationData) -> bool:
 	return curr_anim.anim_id == ANIM_IDLE or next_anim.anim_id == ANIM_IDLE
 
+
+func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
+	# prints("_on_speed_increase", "triggered")
+	var value = payload.get(GlobalSignal.payload_amount_field)
+	if value and (value is float or value is int):
+		SPEED_BOOST += value
 
 # func _input(event):
 # 	TURN_THRESHOLD_DEG = u._dev_change_t34_param(event, TURN_THRESHOLD_DEG, "TURN_THRESHOLD_DEG", 15)

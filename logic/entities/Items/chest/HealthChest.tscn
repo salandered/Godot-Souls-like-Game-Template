@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvorqwtm6njov"]
+
+[ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_BaseChest.tscn" id="1_04di6"]
+[ext_resource type="Script" uid="uid://beoeecjbggacu" path="res://logic/entities/Items/chest/health_chest.gd" id="2_yc3t5"]
+[ext_resource type="Material" uid="uid://bo27ogctrfe32" path="res://-assets-/materials-shared/wood/rough_wood_Reimp_red.tres" id="2_yjo78"]
+[ext_resource type="PackedScene" uid="uid://ctsqu10igrfjw" path="res://logic/entities/Items/pick_item/health_item/HealthItem.tscn" id="3_c5gqd"]
+
+[node name="HealtChest" instance=ExtResource("1_04di6")]
+script = ExtResource("2_yc3t5")
+item_scene = ExtResource("3_c5gqd")
+
+[node name="ChestLid" parent="Visuals/LidPivot" index="0"]
+material_override = ExtResource("2_yjo78")
+
+[node name="ChestMain" parent="Visuals/ChessMain" index="1"]
+material_override = ExtResource("2_yjo78")
+
+[node name="dev_cam" parent="." index="2"]
+visible = false

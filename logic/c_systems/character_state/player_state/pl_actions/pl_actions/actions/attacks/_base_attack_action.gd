@@ -13,6 +13,12 @@ var attack_radius: float = 1.0
 
 var hit_damage: float = 10
 
+func get_hit_damage() -> float:
+	return hit_damage
+
+func get_global_speed_scale() -> float:
+	return 1.0
+
 
 var fade_interpolator := FloatLinearInterpolator.new()
 var DEFAULT_FADE_TIME: float = 0.4 # how long to fade extra velocity
@@ -50,7 +56,7 @@ func get_active_weapon_id() -> String:
 # region
 
 func _combat_set_hit_data():
-	player_sm.combat.set_hit_data(get_active_weapon_id(), hit_damage, anim.anim_id)
+	player_sm.combat.set_hit_data(get_active_weapon_id(), get_hit_damage(), anim.anim_id)
 
 func _combat_update_is_attacking(__log: bool = false):
 	var _weapon_id := get_active_weapon_id()
@@ -66,6 +72,7 @@ func _combat_reset():
 func on_enter_action(input_: InputPackage):
 	get_animator_manager().force_stop_overlay()
 	_combat_set_hit_data()
+	get_animator_manager().set_global_speed_scale(get_global_speed_scale())
 
 	if player_sm.area_awareness.is_camera_locked():
 		default_sp.ANGULAR_SPEED = 2
@@ -88,6 +95,7 @@ func on_enter_action(input_: InputPackage):
 
 func on_exit_action():
 	_combat_reset()
+	get_animator_manager().reset_global_speed_scale()
 
 
 func update(input_: InputPackage, delta: float):

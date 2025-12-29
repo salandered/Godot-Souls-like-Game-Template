@@ -7,12 +7,23 @@ class_name PlayerCombat
 
 
 func initialise_implementation():
+	weapon_switcher.initialise(_player, self)
+
+
+func __hard_validate() -> bool:
+	var _r: bool = true
 	if len(_get_all_registered_weapons()) == 0:
 		__log_error("currently at least one weapon is expected for player", "", "")
+		_r = false
+	for weapon in _get_all_registered_weapons():
+		if weapon is not BasePlayerWeapon:
+			__log_error("weapon is not BasePlayerWeapon", "", "", weapon)
+			_r = false
 	if len(get_active_weapon_ids()) != 1:
 		__log_error("currently 1 active weapon is expected for player", "", "", len(get_active_weapon_ids()))
-	
-	weapon_switcher.initialise(_player, self)
+		_r = false
+	return _r
+
 
 func get_parent_node_of_weapons() -> Node3D:
 	return bones
@@ -41,8 +52,9 @@ func _translate_combat_actions(new_input: InputPackage, delta: float):
 	var weapons := get_all_active_weapons()
 	if len(weapons) == 0:
 		return
-	var weapon := weapons[0]
-	var _translated: Array = weapon.translate_combat_input_to_state(new_input.combat_actions)
+	# we take first one because for player only one can be active currently
+	var weapon: BasePlayerWeapon = weapons[0]
+	var _translated := weapon.translate_combat_input_to_state(new_input.combat_actions)
 	new_input.actions.append_array(_translated)
 
 # endregion

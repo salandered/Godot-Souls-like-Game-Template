@@ -22,7 +22,7 @@ var current_lock_state: LockState = LockState.ALL_UNLOCKED
 @onready var downcast := $Downcast as RayCast3D
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [player, downcast]
 
 

@@ -8,17 +8,36 @@ process_mode = 3
 script = ExtResource("1_too2x")
 mouse_sensitivity = 0.001
 
-[node name="ControlsInfo" type="MarginContainer" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
-offset_right = 586.0
-offset_bottom = 411.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
+script = ExtResource("2_44hky")
 
-[node name="Controls" type="RichTextLabel" parent="ControlsInfo"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13507092)
+light_energy = 4.0
+spot_range = 15.0
+spot_angle = 55.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -259.0
+offset_right = 225.0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ControlsInfo" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+
+[node name="Controls" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ControlsInfo"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -34,19 +53,12 @@ text = "[b]WASD[/b] - Move
 [b]L[/b] - Light on/off
 etc ...."
 
-[node name="HUDInfo" type="MarginContainer" parent="."]
+[node name="HUDInfo" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -526.0
-offset_bottom = 450.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
+layout_mode = 2
 
-[node name="HUD" type="RichTextLabel" parent="HUDInfo"]
+[node name="HUD" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HUDInfo"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -57,14 +69,3 @@ theme_override_font_sizes/normal_font_size = 22
 theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "HUD info will be updated"
-
-[node name="Camera3D" type="Camera3D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_44hky")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13507092)
-light_energy = 4.0
-spot_range = 15.0
-spot_angle = 55.0

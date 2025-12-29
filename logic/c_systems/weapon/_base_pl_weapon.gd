@@ -9,7 +9,6 @@ extends BaseWeapon
 ## _input_action_to_state = {
 ## 	CombatAction.light_attack_pressed: PS.longsword_1
 ## }
-## NOTE: specific to player only. Is here for now for simplicity.
 var _input_action_to_state: Dictionary[String, String] = {} # input actions to states
 
 
@@ -17,7 +16,7 @@ func is_player() -> bool:
 	return true
 
 
-func translate_combat_input_to_state(combat_actions: Array) -> Array:
+func translate_combat_input_to_state(combat_actions: Array[String]) -> Array[String]:
 	var _translated: Array[String] = []
 	
 	for input_action in combat_actions:

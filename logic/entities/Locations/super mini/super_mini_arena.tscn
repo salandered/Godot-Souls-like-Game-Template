@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://m2o3tdaa66rk"]
+[gd_scene load_steps=66 format=4 uid="uid://m2o3tdaa66rk"]
 
 [ext_resource type="Script" uid="uid://b0skg43os71r" path="res://logic/c_systems/level/super_mini_arena.gd" id="1_m00bc"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="2_ak6i7"]
@@ -9,18 +9,25 @@
 [ext_resource type="LightmapGIData" uid="uid://dbfaebfms25wy" path="res://logic/entities/Locations/super mini/super_mini_arena.lmbake" id="5_gvxvv"]
 [ext_resource type="Script" uid="uid://betjr4mpbcy4a" path="res://logic/c_systems/breakable_static/breakable/breakable_column.gd" id="5_o6e0x"]
 [ext_resource type="PackedScene" uid="uid://br1lrshc0roe4" path="res://-assets-/GLB-level/column/ShatteredColumn.tscn" id="6_vcwok"]
+[ext_resource type="Texture2D" uid="uid://d05tesaesmiwo" path="res://-assets-/materials-shared/_images/concrete/lincoln_damaged_concrete_floor_diff_1k.jpg" id="7_2kwl4"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete_columns_Reimp.tres" id="7_od67a"]
 [ext_resource type="PackedScene" uid="uid://cdb3sou4ywvy" path="res://-assets-/GLB-level/column/BreakableColumnArea.tscn" id="8_fah5c"]
+[ext_resource type="Texture2D" uid="uid://bn6e0scp5v7qs" path="res://-assets-/materials-shared/_images/concrete/lincoln_damaged_concrete_floor_rough.png" id="8_qvk6o"]
+[ext_resource type="Texture2D" uid="uid://by8gar0amnwi1" path="res://-assets-/materials-shared/_images/concrete/lincoln_damaged_concrete_floor_nor_gl.png" id="9_jjryu"]
 [ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Locations/props/DarkCratePile.tscn" id="9_od67a"]
 [ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/entities/Locations/props/DarkCrateColumn.tscn" id="10_od67a"]
 [ext_resource type="PackedScene" uid="uid://d1glwn1vbeqan" path="res://logic/entities/Locations/props/DarkCrateBigPile.tscn" id="11_qvfb2"]
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Locations/_dev/simple_target/SimpleTarget.tscn" id="12_a8lkk"]
 [ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/props/dark_crate.tscn" id="12_irqbk"]
+[ext_resource type="PackedScene" uid="uid://bydwaf8keh4gq" path="res://logic/entities/Items/chest/DodgeIncreaseChest.tscn" id="13_jjryu"]
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="13_s1sjw"]
 [ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="14_8dr5r"]
+[ext_resource type="PackedScene" uid="uid://b5tsnu0lrbyel" path="res://logic/entities/Items/chest/SpeedIncreaseChest.tscn" id="14_g5cgt"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/m_pause_menu_controller.gd" id="17_qsf1c"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="18_6r41u"]
-[ext_resource type="PackedScene" uid="uid://bxclrxp38afb8" path="res://logic/entities/Items/chest_health/BaseChest.tscn" id="25_e42g3"]
+[ext_resource type="PackedScene" uid="uid://cvorqwtm6njov" path="res://logic/entities/Items/chest/HealthChest.tscn" id="22_gvxvv"]
+[ext_resource type="PackedScene" uid="uid://n6043w8w5sgo" path="res://logic/entities/Items/chest/StaminaChest.tscn" id="23_s1sjw"]
+[ext_resource type="PackedScene" uid="uid://bjw0lhombik4c" path="res://logic/entities/Enemies/phe_enemy/SecretEnemy.tscn" id="25_e42g3"]
 [ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise (2).mp3" id="26_8kq8l"]
 [ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/=tracks=/loop/individual-tracks bit 3 (2).mp3" id="27_2kwl4"]
 
@@ -136,6 +143,22 @@ _surfaces = [{
 "vertex_count": 24,
 "vertex_data": PackedByteArray("ADSWwAAQhb4AaqxBADSWwAAQhb4AaqzBADSWwAAQhT4AaqzBADSWQAAQhb4AaqzBADSWwAAQhb4AaqzBADSWwAAQhb4AaqxBADSWwAAQhT4AaqzBADSWwAAQhb4AaqzBADSWQAAQhb4AaqzBADSWwAAQhT4AaqxBADSWwAAQhb4AaqxBADSWwAAQhT4AaqxBADSWQAAQhT4AaqxBADSWQAAQhT4AaqxBADSWwAAQhT4AaqxBADSWwAAQhT4AaqzBADSWQAAQhb4AaqxBADSWQAAQhb4AaqxBADSWQAAQhb4AaqzBADSWQAAQhb4AaqxBADSWQAAQhT4AaqxBADSWQAAQhT4AaqzBADSWQAAQhT4AaqzBADSWQAAQhT4AaqzBAAAAgP9//n8AAACA/3/+fwAAAID/f/5/AIAAAP//AAAAgAAA//8AAACAAAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAAAgP9//n//f/9/AAD/P/9//38AAP8//3//fwAA/z8AgP////8AAACA/////wAAAID/////AAAAgAAA//8AAP9//38AAP8///8AgP9//n///wCA/3/+f///AID/f/5//////wAA/z8AgP////8AAP//AID/f/5/")
 }]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s1sjw"]
+data = PackedVector3Array(-4.6938, -0.2599, 7.4512, -4.6938, -0.2599, -7.4512, -4.6938, 0.2599, -7.4512, 4.6938, -0.2599, -7.4512, -4.6938, -0.2599, -7.4512, -4.6938, -0.2599, 7.4512, -4.6938, 0.2599, -7.4512, -4.6938, -0.2599, -7.4512, 4.6938, -0.2599, -7.4512, -4.6938, 0.2599, -7.4512, -4.6938, 0.2599, 7.4512, -4.6938, -0.2599, 7.4512, -4.6938, -0.2599, 7.4512, -4.6938, 0.2599, 7.4512, 4.6938, 0.2599, 7.4512, 4.6938, 0.2599, 7.4512, -4.6938, 0.2599, 7.4512, -4.6938, 0.2599, -7.4512, -4.6938, -0.2599, 7.4512, 4.6938, -0.2599, 7.4512, 4.6938, -0.2599, -7.4512, 4.6938, 0.2599, 7.4512, 4.6938, -0.2599, 7.4512, -4.6938, -0.2599, 7.4512, 4.6938, -0.2599, -7.4512, 4.6938, -0.2599, 7.4512, 4.6938, 0.2599, 7.4512, 4.6938, -0.2599, -7.4512, 4.6938, 0.2599, -7.4512, -4.6938, 0.2599, -7.4512, -4.6938, 0.2599, -7.4512, 4.6938, 0.2599, -7.4512, 4.6938, 0.2599, 7.4512, 4.6938, 0.2599, 7.4512, 4.6938, 0.2599, -7.4512, 4.6938, -0.2599, -7.4512)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5cgt"]
+resource_name = "damaged_concrete_columns"
+cull_mode = 2
+albedo_color = Color(0.7104485, 0.7104485, 0.7104485, 1)
+albedo_texture = ExtResource("7_2kwl4")
+metallic_texture = ExtResource("8_qvk6o")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("8_qvk6o")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("9_jjryu")
+uv1_scale = Vector3(4, 4, 4)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8frg4"]
 data = PackedVector3Array(1.1393077, -2.4890525, 2.2488225, 0.2664328, -2.06216, 1.4582741, 1.2233143, -2.1757061, 1.1174831, 1.1311368, -0.15411347, 0.73354924, 0.19813485, -0.75667244, 1.1310966, 0.21445367, 0.70352244, 1.155564, 1.2056141, 2.0251627, 1.0481377, 1.0827985, 2.847358, 1.9844388, 1.7857345, 2.847685, 0.8721219, 1.1311368, -0.15411347, 0.73354924, 1.2056141, 2.0251627, 1.0481377, 1.4086822, 1.8669823, -0.039519913, 1.2205505, -2.1202743, -1.1948137, 1.0287303, -2.4888299, -2.3628378, 1.8057138, -2.4888058, -1.2542554, 0.47971725, 0.63909584, -1.1034899, -0.19116211, 0.64669603, -1.112776, 0.10564121, -0.7778669, -1.209385, -0.9524789, -2.0212693, 1.1037726, -1.5341159, -2.4879186, 2.199994, -1.6062894, -2.4889753, -0.006687706, -1.201103, 2.2584753, 0.8978034, -0.8802767, 0.7827693, 0.7651224, -1.0840579, 1.3332013, -0.040807985, -0.8245376, 2.844537, 1.9232953, -0.74401736, 2.0355494, 1.3319839, -1.201103, 2.2584753, 0.8978034, -1.201103, 2.2584753, 0.8978034, -1.0840579, 1.3332013, -0.040807985, -1.4348187, 2.4358997, -0.44374347, -0.74401736, 2.0355494, 1.3319839, -0.8802767, 0.7827693, 0.7651224, -1.201103, 2.2584753, 0.8978034, 0.21445367, 0.70352244, 1.155564, -0.8802767, 0.7827693, 0.7651224, -0.74401736, 2.0355494, 1.3319839, 0.10564121, -0.7778669, -1.209385, -0.19116211, 0.64669603, -1.112776, -0.82461244, 0.033075158, -0.75432676, 1.4342502, -2.015339, -0.06936446, 1.4086822, 1.8669823, -0.039519913, 1.0993793, -0.43521056, -0.8179538, -1.0840579, 1.3332013, -0.040807985, -0.8900099, 1.9609883, -1.0054011, -1.4348187, 2.4358997, -0.44374347, -0.82461244, 0.033075158, -0.75432676, -0.8900099, 1.9609883, -1.0054011, -1.0840579, 1.3332013, -0.040807985, 1.4342502, -2.015339, -0.06936446, 1.2233143, -2.1757061, 1.1174831, 1.1311368, -0.15411347, 0.73354924, -1.0667417, 2.8454123, -1.6804545, -1.4348187, 2.4358997, -0.44374347, -0.8900099, 1.9609883, -1.0054011, 0.06644958, 2.1702065, -1.5065535, -1.0667417, 2.8454123, -1.6804545, -0.8900099, 1.9609883, -1.0054011, -1.0667417, 2.8454123, -1.6804545, -0.25738198, 2.8470693, -1.9604673, 1.7053628, 2.8473084, -0.82834905, 1.7053628, 2.8473084, -0.82834905, -0.25738198, 2.8470693, -1.9604673, 1.312329, 2.847974, -1.7735176, -1.6746826, 2.847333, 1.0410234, -1.0667417, 2.8454123, -1.6804545, 1.7053628, 2.8473084, -0.82834905, -0.8245376, 2.844537, 1.9232953, -1.6746826, 2.847333, 1.0410234, 1.0827985, 2.847358, 1.9844388, -0.9377675, -2.0439727, -1.1940422, -1.6062894, -2.4889753, -0.006687706, -1.503044, -2.4827032, -2.2367, -1.503044, -2.4827032, -2.2367, -1.6062894, -2.4889753, -0.006687706, 1.8057138, -2.4888058, -1.2542554, 1.0287303, -2.4888299, -2.3628378, -1.503044, -2.4827032, -2.2367, 1.8057138, -2.4888058, -1.2542554, -1.5341159, -2.4879186, 2.199994, 1.826325, -2.4885368, 1.0349357, -1.6062894, -2.4889753, -0.006687706, 1.4342502, -2.015339, -0.06936446, 1.826325, -2.4885368, 1.0349357, 1.2233143, -2.1757061, 1.1174831, 0.2664328, -2.06216, 1.4582741, 1.1393077, -2.4890525, 2.2488225, -1.5341159, -2.4879186, 2.199994, 1.4342502, -2.015339, -0.06936446, 1.1311368, -0.15411347, 0.73354924, 1.4086822, 1.8669823, -0.039519913, 1.2056141, 2.0251627, 1.0481377, 1.7857345, 2.847685, 0.8721219, 1.4086822, 1.8669823, -0.039519913, 0.5003786, 1.9259154, 1.4056768, 1.1311368, -0.15411347, 0.73354924, 0.21445367, 0.70352244, 1.155564, 0.5003786, 1.9259154, 1.4056768, 1.2056141, 2.0251627, 1.0481377, 1.1311368, -0.15411347, 0.73354924, 0.5003786, 1.9259154, 1.4056768, 0.21445367, 0.70352244, 1.155564, -0.74401736, 2.0355494, 1.3319839, 0.47971725, 0.63909584, -1.1034899, 1.1895409, 2.0802805, -1.0235589, 0.06644958, 2.1702065, -1.5065535, 0.47971725, 0.63909584, -1.1034899, 1.0993793, -0.43521056, -0.8179538, 1.1895409, 2.0802805, -1.0235589, 1.2056141, 2.0251627, 1.0481377, 0.5003786, 1.9259154, 1.4056768, 1.0827985, 2.847358, 1.9844388, 0.21216135, -1.936057, -1.5720006, 1.0287303, -2.4888299, -2.3628378, 1.2205505, -2.1202743, -1.1948137, 1.312329, 2.847974, -1.7735176, -0.25738198, 2.8470693, -1.9604673, 0.06644958, 2.1702065, -1.5065535, 1.0993793, -0.43521056, -0.8179538, 0.47971725, 0.63909584, -1.1034899, 0.10564121, -0.7778669, -1.209385, 1.1895409, 2.0802805, -1.0235589, 1.312329, 2.847974, -1.7735176, 0.06644958, 2.1702065, -1.5065535, 0.47971725, 0.63909584, -1.1034899, 0.06644958, 2.1702065, -1.5065535, -0.19116211, 0.64669603, -1.112776, -1.4348187, 2.4358997, -0.44374347, -1.6746826, 2.847333, 1.0410234, -1.201103, 2.2584753, 0.8978034, -1.4348187, 2.4358997, -0.44374347, -1.7130096, 2.845521, -0.896159, -1.6746826, 2.847333, 1.0410234, -0.9524789, -2.0212693, 1.1037726, -1.6062894, -2.4889753, -0.006687706, -1.2116985, -1.7076079, 0.03632593, -0.87889576, -0.80987996, 0.80109835, -1.0840579, 1.3332013, -0.040807985, -0.8802767, 0.7827693, 0.7651224, -0.87889576, -0.80987996, 0.80109835, 0.21445367, 0.70352244, 1.155564, 0.19813485, -0.75667244, 1.1310966, -0.87889576, -0.80987996, 0.80109835, -0.8802767, 0.7827693, 0.7651224, 0.21445367, 0.70352244, 1.155564, -1.201103, 2.2584753, 0.8978034, -1.6746826, 2.847333, 1.0410234, -0.8245376, 2.844537, 1.9232953, -0.9524789, -2.0212693, 1.1037726, 0.2664328, -2.06216, 1.4582741, -1.5341159, -2.4879186, 2.199994, -1.503044, -2.4827032, -2.2367, 0.21216135, -1.936057, -1.5720006, -0.9377675, -2.0439727, -1.1940422, -1.503044, -2.4827032, -2.2367, 1.0287303, -2.4888299, -2.3628378, 0.21216135, -1.936057, -1.5720006, -0.8900099, 1.9609883, -1.0054011, -0.19116211, 0.64669603, -1.112776, 0.06644958, 2.1702065, -1.5065535, -0.8900099, 1.9609883, -1.0054011, -0.82461244, 0.033075158, -0.75432676, -0.19116211, 0.64669603, -1.112776, 0.06644958, 2.1702065, -1.5065535, -0.25738198, 2.8470693, -1.9604673, -1.0667417, 2.8454123, -1.6804545, 1.4342502, -2.015339, -0.06936446, 1.8057138, -2.4888058, -1.2542554, 1.826325, -2.4885368, 1.0349357, 1.4342502, -2.015339, -0.06936446, 1.2205505, -2.1202743, -1.1948137, 1.8057138, -2.4888058, -1.2542554, 1.4086822, 1.8669823, -0.039519913, 1.7053628, 2.8473084, -0.82834905, 1.1895409, 2.0802805, -1.0235589, 1.4086822, 1.8669823, -0.039519913, 1.7857345, 2.847685, 0.8721219, 1.7053628, 2.8473084, -0.82834905, -0.8245376, 2.844537, 1.9232953, 0.5003786, 1.9259154, 1.4056768, -0.74401736, 2.0355494, 1.3319839, -0.8245376, 2.844537, 1.9232953, 1.0827985, 2.847358, 1.9844388, 0.5003786, 1.9259154, 1.4056768, -1.2116985, -1.7076079, 0.03632593, -1.6062894, -2.4889753, -0.006687706, -0.9377675, -2.0439727, -1.1940422, 0.2664328, -2.06216, 1.4582741, 1.1311368, -0.15411347, 0.73354924, 1.2233143, -2.1757061, 1.1174831, 0.2664328, -2.06216, 1.4582741, 0.19813485, -0.75667244, 1.1310966, 1.1311368, -0.15411347, 0.73354924, 1.0993793, -0.43521056, -0.8179538, 1.4086822, 1.8669823, -0.039519913, 1.1895409, 2.0802805, -1.0235589, 0.21216135, -1.936057, -1.5720006, 1.0993793, -0.43521056, -0.8179538, 0.10564121, -0.7778669, -1.209385, 0.21216135, -1.936057, -1.5720006, 1.2205505, -2.1202743, -1.1948137, 1.0993793, -0.43521056, -0.8179538, -0.87889576, -0.80987996, 0.80109835, -1.2116985, -1.7076079, 0.03632593, -1.0840579, 1.3332013, -0.040807985, -0.87889576, -0.80987996, 0.80109835, -0.9524789, -2.0212693, 1.1037726, -1.2116985, -1.7076079, 0.03632593, -0.82461244, 0.033075158, -0.75432676, -1.2116985, -1.7076079, 0.03632593, -0.9377675, -2.0439727, -1.1940422, -0.82461244, 0.033075158, -0.75432676, -1.0840579, 1.3332013, -0.040807985, -1.2116985, -1.7076079, 0.03632593, 1.4342502, -2.015339, -0.06936446, 1.0993793, -0.43521056, -0.8179538, 1.2205505, -2.1202743, -1.1948137, -0.9524789, -2.0212693, 1.1037726, 0.19813485, -0.75667244, 1.1310966, 0.2664328, -2.06216, 1.4582741, -0.9524789, -2.0212693, 1.1037726, -0.87889576, -0.80987996, 0.80109835, 0.19813485, -0.75667244, 1.1310966, -0.9377675, -2.0439727, -1.1940422, 0.10564121, -0.7778669, -1.209385, -0.82461244, 0.033075158, -0.75432676, -0.9377675, -2.0439727, -1.1940422, 0.21216135, -1.936057, -1.5720006, 0.10564121, -0.7778669, -1.209385, 1.1895409, 2.0802805, -1.0235589, 1.7053628, 2.8473084, -0.82834905, 1.312329, 2.847974, -1.7735176, -1.4348187, 2.4358997, -0.44374347, -1.0667417, 2.8454123, -1.6804545, -1.7130096, 2.845521, -0.896159, 1.2233143, -2.1757061, 1.1174831, 1.826325, -2.4885368, 1.0349357, 1.1393077, -2.4890525, 2.2488225, 1.1393077, -2.4890525, 2.2488225, 1.826325, -2.4885368, 1.0349357, -1.5341159, -2.4879186, 2.199994, -1.6746826, 2.847333, 1.0410234, -1.7130096, 2.845521, -0.896159, -1.0667417, 2.8454123, -1.6804545, 1.7053628, 2.8473084, -0.82834905, 1.7857345, 2.847685, 0.8721219, 1.0827985, 2.847358, 1.9844388, 1.7053628, 2.8473084, -0.82834905, 1.0827985, 2.847358, 1.9844388, -1.6746826, 2.847333, 1.0410234, 1.826325, -2.4885368, 1.0349357, 1.8057138, -2.4888058, -1.2542554, -1.6062894, -2.4889753, -0.006687706)
@@ -354,104 +377,159 @@ light_data = ExtResource("5_gvxvv")
 
 [node name="FloorWalls" type="Node3D" parent="."]
 
-[node name="WoodenFloorBaked" type="StaticBody3D" parent="FloorWalls"]
+[node name="MainFloor" type="Node3D" parent="FloorWalls"]
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/WoodenFloorBaked"]
+[node name="WoodenFloorBaked" type="StaticBody3D" parent="FloorWalls/MainFloor"]
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/MainFloor/WoodenFloorBaked"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011385918, -0.05751705, 0.3205111)
 shape = SubResource("ConcavePolygonShape3D_4u6es")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/WoodenFloorBaked"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/MainFloor/WoodenFloorBaked"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011385918, -0.05751705, 0.3205111)
 material_overlay = ExtResource("3_mdliy")
-cast_shadow = 0
 mesh = SubResource("ArrayMesh_4u6es")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="WoodenFloorOff" type="CSGBox3D" parent="FloorWalls/WoodenFloorBaked"]
+[node name="WoodenFloorOff" type="CSGBox3D" parent="FloorWalls/MainFloor/WoodenFloorBaked"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011385918, -0.05751705, 0.3205111)
 visible = false
 material_override = ExtResource("3_mdliy")
 use_collision = true
 size = Vector3(37.611084, 0.5197754, 43.103516)
 
-[node name="WallSmallBaked1" type="StaticBody3D" parent="FloorWalls"]
+[node name="WallSmallBaked1" type="StaticBody3D" parent="FloorWalls/MainFloor"]
 transform = Transform3D(3.019777e-08, 0.6908444, 0.72300315, 1, -4.3711385e-08, 4.2351645e-22, 3.1603477e-08, 0.72300315, -0.6908444, -14.801014, -2.5128803, -17.954262)
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/WallSmallBaked1"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/MainFloor/WallSmallBaked1"]
 transform = Transform3D(1, 3.5527137e-15, 1.7763568e-15, 1.7763568e-15, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_gvxvv")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/WallSmallBaked1"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/MainFloor/WallSmallBaked1"]
 transform = Transform3D(1, 3.5527137e-15, 1.7763568e-15, 1.7763568e-15, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 material_overlay = ExtResource("5_4u6es")
 mesh = SubResource("ArrayMesh_s1sjw")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="WoodenWallSmall1Off" type="CSGBox3D" parent="FloorWalls/WallSmallBaked1"]
+[node name="WoodenWallSmall1Off" type="CSGBox3D" parent="FloorWalls/MainFloor/WallSmallBaked1"]
 transform = Transform3D(1, 3.5527137e-15, 1.7763568e-15, 1.7763568e-15, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 visible = false
 material_override = ExtResource("5_4u6es")
 use_collision = true
 size = Vector3(9.387695, 0.5197754, 14.902344)
 
-[node name="WallSmallBaked2" type="StaticBody3D" parent="FloorWalls"]
+[node name="WallSmallBaked2" type="StaticBody3D" parent="FloorWalls/MainFloor"]
 transform = Transform3D(-3.0475693e-08, -0.69720244, 0.71687394, 1, -4.3711385e-08, 8.470329e-22, 3.1335556e-08, 0.71687394, 0.69720244, 14.445235, -2.5128803, -18.113209)
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/WallSmallBaked2"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/MainFloor/WallSmallBaked2"]
 transform = Transform3D(1, 3.5527137e-15, 1.7763568e-15, 1.7763568e-15, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_gvxvv")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/WallSmallBaked2"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/MainFloor/WallSmallBaked2"]
 transform = Transform3D(1, 3.5527137e-15, 1.7763568e-15, 1.7763568e-15, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 material_overlay = ExtResource("5_4u6es")
 mesh = SubResource("ArrayMesh_e42g3")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="WallBaked3" type="StaticBody3D" parent="FloorWalls"]
+[node name="WallBaked3" type="StaticBody3D" parent="FloorWalls/MainFloor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0320816, -21.439472)
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/WallBaked3"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/MainFloor/WallBaked3"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_akjwb")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("5_4u6es")
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/WallBaked3"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/MainFloor/WallBaked3"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_akjwb")
 
-[node name="WoodenWall3" type="CSGBox3D" parent="FloorWalls/WallBaked3"]
+[node name="WoodenWall3" type="CSGBox3D" parent="FloorWalls/MainFloor/WallBaked3"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 visible = false
 material_override = ExtResource("5_4u6es")
 use_collision = true
 size = Vector3(9.387695, 0.5197754, 43.103516)
 
-[node name="WallBaked4" type="StaticBody3D" parent="FloorWalls"]
+[node name="WallBaked4" type="StaticBody3D" parent="FloorWalls/MainFloor"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.029633, -2.0320816, 0.2932334)
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/WallBaked4"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/MainFloor/WallBaked4"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 material_overlay = ExtResource("5_4u6es")
 mesh = SubResource("ArrayMesh_gvxvv")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/WallBaked4"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/MainFloor/WallBaked4"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_akjwb")
 
-[node name="WallBaked5" type="StaticBody3D" parent="FloorWalls"]
+[node name="WallBaked5" type="StaticBody3D" parent="FloorWalls/MainFloor"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.804733, -2.0320816, 0.2932334)
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/WallBaked5"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/MainFloor/WallBaked5"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_8kq8l")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("5_4u6es")
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/WallBaked5"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/MainFloor/WallBaked5"]
 transform = Transform3D(1.9106855e-15, 4.3711385e-08, 0.99999994, 1, -4.3711385e-08, 0, 4.371139e-08, 0.99999994, -4.3711385e-08, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_akjwb")
+
+[node name="SecretLevel" type="Node3D" parent="FloorWalls"]
+
+[node name="WallSmallBaked3" type="StaticBody3D" parent="FloorWalls/SecretLevel"]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.7576084, -4.2735963, 27.259445)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/SecretLevel/WallSmallBaked3"]
+transform = Transform3D(0.482, 1.712408e-15, 8.56204e-16, 8.56204e-16, 0.482, 1.4364719e-08, 0, -1.4364719e-08, 0.482, -15.895233, 0.14987588, -5.5953693)
+material_overlay = ExtResource("5_4u6es")
+mesh = SubResource("ArrayMesh_s1sjw")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorWalls/SecretLevel/WallSmallBaked3"]
+transform = Transform3D(0.482, 1.712408e-15, 8.56204e-16, 8.56204e-16, 0.482, 1.4364719e-08, 0, -1.4364719e-08, 0.482, -15.895233, 0.14987588, -5.5953693)
+shape = SubResource("ConcavePolygonShape3D_s1sjw")
+
+[node name="WoodenFloorBaked2" type="StaticBody3D" parent="FloorWalls/SecretLevel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8112197, 0)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="FloorWalls/SecretLevel/WoodenFloorBaked2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011385918, -0.43403912, 0.20522475)
+shape = SubResource("ConcavePolygonShape3D_4u6es")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="FloorWalls/SecretLevel/WoodenFloorBaked2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011385918, -0.43403912, 0.20522475)
+material_override = SubResource("StandardMaterial3D_g5cgt")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_4u6es")
+skeleton = NodePath("../../../..")
+
+[node name="SecretEnemy" parent="FloorWalls/SecretLevel" node_paths=PackedStringArray("player") instance=ExtResource("25_e42g3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.984698, 0)
+player = NodePath("../../../Princess")
+
+[node name="StaminaChest" parent="FloorWalls/SecretLevel" instance=ExtResource("23_s1sjw")]
+transform = Transform3D(0.093373865, 0, 1.5301538, 0, 1.533, 0, -1.5301538, 0, 0.093373865, -17.765604, -3.999017, 18.425503)
+
+[node name="StaminaChest2" parent="FloorWalls/SecretLevel" instance=ExtResource("23_s1sjw")]
+transform = Transform3D(-0.085200265, 0, 1.5306306, 0, 1.533, 0, -1.5306306, 0, -0.085200265, -17.709654, -3.9990168, 16.161625)
+
+[node name="DodgeIncreaseChest" parent="FloorWalls/SecretLevel" instance=ExtResource("13_jjryu")]
+transform = Transform3D(-0.07966314, 0, 1.8873194, 0, 1.889, 0, -1.8873194, 0, -0.07966314, -17.832048, -3.9954827, 13.567009)
+
+[node name="SpeedIncreaseChest" parent="FloorWalls/SecretLevel" instance=ExtResource("14_g5cgt")]
+transform = Transform3D(-0.15977886, 0, 2.012668, 0, 2.019, 0, -2.012668, 0, -0.15977886, -17.754984, -3.9784288, 10.182556)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FloorWalls/SecretLevel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.976254, -1.5876893, 14.056089)
+visible = false
+light_energy = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = -1.392
 
 [node name="lights" type="Node3D" parent="."]
 
@@ -470,6 +548,7 @@ spot_attenuation = 0.0
 
 [node name="SpotSupportiveStaticShOff_2" type="SpotLight3D" parent="lights"]
 transform = Transform3D(0.34331053, -0.6975942, 0.62888813, -0.9355211, -0.1946019, 0.29483962, -0.083295576, -0.6895597, -0.719423, 15.910036, 10.41787, -29.223503)
+visible = false
 light_energy = 0.3
 light_bake_mode = 1
 spot_range = 62.630527
@@ -795,7 +874,7 @@ mesh = SubResource("ArrayMesh_wacwu")
 skeleton = NodePath("")
 
 [node name="column_008" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1.779, 0, 0, 0, 1.779, 0, 0, 0, 1.779, -40.787315, 4.054894, 30.743242)
+transform = Transform3D(1.875066, 0, 0, 0, 1.875066, 0, 0, 0, 1.875066, -40.787315, 2.0760374, 30.743242)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_008"]
 shape = SubResource("ConcavePolygonShape3D_pu2kj")
@@ -916,23 +995,26 @@ bus = &"_d_track_vibe"
 [node name="chests" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.533286)
 
-[node name="ChestHealth" parent="chests" instance=ExtResource("25_e42g3")]
-transform = Transform3D(-1.5585557, 0, -0.32460576, 0, 1.5920002, 0, 0.32460576, 0, -1.5585557, 4.2186565, 0.22420245, 22.500607)
+[node name="HealtChest5" parent="chests" instance=ExtResource("22_gvxvv")]
+transform = Transform3D(1.5870991, 0, -0.12482408, 0, 1.5920002, 0, 0.12482408, 0, 1.5870991, -2.7791378, 0.22420269, -17.62498)
 
-[node name="ChestHealth3" parent="chests" instance=ExtResource("25_e42g3")]
-transform = Transform3D(-1.5585557, 0, -0.32460576, 0, 1.5920002, 0, 0.32460576, 0, -1.5585557, 7.466445, 0.22420245, 22.068085)
+[node name="HealtChest6" parent="chests" instance=ExtResource("22_gvxvv")]
+transform = Transform3D(1.5919858, 0, 0.0067793876, 0, 1.5920002, 0, -0.0067793876, 0, 1.5919858, 4.119784, 0.22420269, -17.429626)
 
-[node name="ChestHealth4" parent="chests" instance=ExtResource("25_e42g3")]
-transform = Transform3D(0.033618122, 0, -1.5916452, 0, 1.5920001, 0, 1.5916452, 0, 0.033618122, 17.610373, 0.22420245, 19.505974)
+[node name="HealtChest4" parent="chests" instance=ExtResource("22_gvxvv")]
+transform = Transform3D(0.062806934, 0, -1.5907607, 0, 1.5920002, 0, 1.5907607, 0, 0.062806934, 17.604525, 0.22420245, 19.502686)
 
-[node name="ChestHealth2" parent="chests" instance=ExtResource("25_e42g3")]
-transform = Transform3D(-1.5691793, 0, -0.26859117, 0, 1.5920002, 0, 0.26859117, 0, -1.5691793, -8.391945, 0.22420245, 22.500607)
+[node name="HealtChest3" parent="chests" instance=ExtResource("22_gvxvv")]
+transform = Transform3D(-1.5916207, 0, -0.034757018, 0, 1.5920002, 0, 0.034757018, 0, -1.5916207, -8.393163, 0.22420233, 22.52713)
 
-[node name="ChestHealth5" parent="chests" instance=ExtResource("25_e42g3")]
-transform = Transform3D(1.5916389, 0, -0.033923626, 0, 1.5920005, 0, 0.033923626, 0, 1.5916389, -2.7896643, 0.22420245, -17.624813)
+[node name="HealtChest2" parent="chests" instance=ExtResource("22_gvxvv")]
+transform = Transform3D(-1.5523331, 0, -0.35316575, 0, 1.5920002, 0, 0.35316575, 0, -1.5523331, 7.450633, 0.22420245, 22.119427)
 
-[node name="ChestHealth6" parent="chests" instance=ExtResource("25_e42g3")]
-transform = Transform3D(1.5916389, 0, -0.033923626, 0, 1.5920005, 0, 0.033923626, 0, 1.5916389, 4.107359, 0.22420245, -17.432415)
+[node name="StaminaChest" parent="chests" instance=ExtResource("23_s1sjw")]
+transform = Transform3D(-1.5580382, 0, -0.3640291, 0, 1.6, 0, 0.3640291, 0, -1.5580382, 3.9269083, 0.22777355, 22.427166)
+
+[node name="StaminaChest2" parent="chests" instance=ExtResource("23_s1sjw")]
+transform = Transform3D(0.13580467, 0, -1.594226, 0, 1.5999999, 0, 1.594226, 0, 0.13580467, 18.022448, 0.22777355, 23.273548)
 
 [node name="Node3D" type="Node3D" parent="."]
 

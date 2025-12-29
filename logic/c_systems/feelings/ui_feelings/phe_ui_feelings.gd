@@ -78,7 +78,7 @@ func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D 
 	## 
 	_prev_health = e_feelings.get_curr_health()
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func _process(delta: float) -> void:

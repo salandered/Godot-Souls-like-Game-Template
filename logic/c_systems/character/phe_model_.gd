@@ -66,7 +66,7 @@ signal SIG_awaken
 ##    => check root_motion_track of NativePlayer!
 ##       it's very fragile, any change of node tree and it's gone
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		player,
 		config,
@@ -81,7 +81,7 @@ func get_hard_dependencies() -> Array[Object]:
 		visuals_root,
 	]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 		coll_collider,
 		# camera_target,
@@ -110,7 +110,7 @@ func initialise() -> void:
 	if ui_feelings:
 		ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
-	if not __validate_deps_set_init():
+	if not __validate_dependencies():
 		__log_warn_soft("PHCharacter failed initalisation")
 		process_mode = PROCESS_MODE_DISABLED
 	else:

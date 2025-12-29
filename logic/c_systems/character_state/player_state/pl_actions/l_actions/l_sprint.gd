@@ -11,7 +11,9 @@ var speed_from_turn := FloatCurveInterpolator.new()
 var angular_sp := FloatLinearInterpolator.new()
 
 
-func _ready() -> void:
+var SPEED_BOOST: float = 0.0
+
+func initialise() -> void:
 	default_sp.SPEED = 5.0
 	default_sp.TURN_SPEED = 3.2
 	default_sp.ANGULAR_SPEED = 10
@@ -24,6 +26,8 @@ func _ready() -> void:
 
 	})
 	# NOTE: start_time_offset is handled in animate()
+
+	GlobalSignal.player_speed_increase.connect_(_on_speed_increase)
 
 
 func on_enter_action(input_: InputPackage):
@@ -63,7 +67,7 @@ func on_enter_action(input_: InputPackage):
 
 	print_.lsm_action(action_name + pp.on_ent, "")
 
-
+	
 func on_exit_action():
 	get_animator_manager().reset_global_speed_scale()
 
@@ -87,7 +91,7 @@ func update(input_: InputPackage, delta: float):
 			CURR_ANGULAR_SPEED = angular_sp.update(delta)
 	
 	CURR_SPEED = player_sm.apply_hit_influence(CURR_SPEED)
-	var speed_config := SpeedConfig.new(default_sp, 1.0, CURR_SPEED, CURR_ANGULAR_SPEED)
+	var speed_config := SpeedConfig.new(default_sp, 1.0, CURR_SPEED + SPEED_BOOST, CURR_ANGULAR_SPEED)
 	speed_config.tie_turn_sp_to_speed(0.6)
 	# __log_action(speed_config)
 	pm().move_rotate_with_input_vector(input_, delta, speed_config)
@@ -114,6 +118,13 @@ func animate(): # ▶️
 	set_anim_to_play(-1, _custom_start_time_offset)
 
 
+func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
+	# prints("_on_speed_increase", "triggered")
+	var value = payload.get(GlobalSignal.payload_amount_field)
+	if value and (value is float or value is int):
+		SPEED_BOOST += value
+
+
 var _dev_add_blend := 0.0
 var _next_anim_correction := 0.12
 
@@ -121,7 +132,7 @@ var _next_anim_correction := 0.12
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
-	default_sp.SPEED = u._dev_change_param(event, default_sp.SPEED, "SPEED", 3, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
+	SPEED_BOOST = u._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 3, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
 	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
 
 	# __start_time_offset_dev = u._dev_change_t67_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.04)

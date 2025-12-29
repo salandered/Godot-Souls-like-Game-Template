@@ -55,16 +55,16 @@ extends Node3DSystem
 @onready var __csg: CSGSphere3D = %__csg
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [omni_light_3d]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [puff_fog, __csg]
 
 # endregion
 
 func _ready() -> void:
-	if not __validate_deps_set_init():
+	if not __validate_dependencies():
 		return
 		
 	_apply_all_properties()

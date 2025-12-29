@@ -45,13 +45,13 @@ var _signal_container: BaseWeaponSignalContainer
 ## nullable
 var spark_marker: Marker3D
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		_weapon_hurt_box,
 		_holder ## in the future weapon may exist without holder i suppose
 	]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 		_signal_container,
 		_for_init_weapon_sfx_parent(),
@@ -70,7 +70,7 @@ func initialise(holder: BaseCharacter) -> void:
 		_weapon_hurt_box.initialise(self, _signal_container)
 	
 
-	## SFX. Here we r not logging any problems, all be logged using get_soft_dependencies etc
+	## SFX. Here we r not logging any problems, all be logged using __soft_dependencies etc
 	var _weapon_sfx := _for_init_weapon_sfx_parent()
 	if _weapon_sfx and _holder: # NOTE: without _holder no SFX
 		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)

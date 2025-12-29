@@ -18,8 +18,8 @@ func is_ended() -> bool:
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
 	match current_substate.state_name:
 		PHES.Leaf.sleep:
-			if _player_is_close():
-				if __ELA(): _reason += "_player_is_close"
+			if _awake_condition():
+				if __ELA(): _reason += "_awake_condition"
 				_next_state = PHES.Leaf.awaken
 		# todo: its more like in update() should be now
 		PHES.Leaf.awaken:
@@ -40,6 +40,5 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 	return VerdictPH.new(_next_state, _reason)
 
 
-func _player_is_close() -> bool:
-	# return false
-	return distance_to_player() < config.DODGE_RAD()
+func _awake_condition() -> bool:
+	return distance_to_player() < config.DIST_TO_AWAKE

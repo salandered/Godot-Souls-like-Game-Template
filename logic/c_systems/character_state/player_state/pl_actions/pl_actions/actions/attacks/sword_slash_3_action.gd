@@ -1,8 +1,24 @@
 extends BaseAttackAction
 
 
+func get_hit_damage() -> float:
+	match PREV_ACTION:
+		PS.Act.sword_slash_2:
+			return hit_damage + 5
+		_:
+			return hit_damage
+
+
+func get_global_speed_scale() -> float:
+	match PREV_ACTION:
+		PS.Act.sword_slash_2:
+			return 1.1
+		_:
+			return 1.0
+
+
 func initialise_implementation() -> void:
-	hit_damage = 15
+	hit_damage = 10
 
 
 	blend_time.set_by_prev_action({
@@ -13,7 +29,15 @@ func initialise_implementation() -> void:
 		PS.Act.sword_slash_2: 0.4,
 	})
 
+	extra_root_speed_Z.set_by_prev_action({
+		PS.Act.sword_slash_2: 0.0,
+		Leg.Act.run: 1.0,
+		Leg.Act.sprint: 1.5,
+		})
+	extra_root_speed_Z.set_specific(-0.0)
 
+
+## TODO: dont use custom update
 func update(input_: InputPackage, delta: float):
 	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
 		pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))
@@ -27,6 +51,7 @@ func update(input_: InputPackage, delta: float):
 	__log_hurt()
 
 	_combat_update_is_attacking(false)
+
 
 # DEV
 

@@ -6,6 +6,11 @@ extends PlayerAction
 
 var SECOND_DODGE_FEATURE: bool = false
 
+
+var PEAK_SPEED_BOOST: float = 0.0
+var END_SPEED_BOOST: float = 0.0
+
+
 var PEAK_SPEED: float = 6.0
 var END_SPEED: float = 2.5
 var dodge_x_dur_correction: float = 0.0
@@ -36,6 +41,8 @@ func initialise() -> void:
 
 	default_sp.ANGULAR_SPEED = 1
 	upper_body_mask = BoneMask.get_upper_body(true)
+
+	GlobalSignal.player_dodge_increase.connect_(_on_dodge_increase)
 
 
 func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
@@ -83,7 +90,12 @@ func on_enter_action(input_: InputPackage) -> void:
 		PEAK_SPEED -= 2.0
 		END_SPEED -= 0.3
 
-	speed_x_interpolator.initialise(_inherited_speed, END_SPEED, PEAK_SPEED, dodge_x_curve, _anim_effective_dur + dodge_x_dur_correction)
+	speed_x_interpolator.initialise(
+		_inherited_speed + END_SPEED_BOOST,
+		END_SPEED + END_SPEED_BOOST,
+		PEAK_SPEED + PEAK_SPEED_BOOST,
+		dodge_x_curve,
+		_anim_effective_dur + dodge_x_dur_correction)
 	
 	__log_ent("curr_dodge_dir", curr_dodge_dir.pp_curr_dir(),
 		"from strafe", Direction.name_(_original_dir),
@@ -147,3 +159,11 @@ var __sp_scale := 1.2
 # 	# __weight = u._dev_change_t12_param(event, __weight, "__weight", 0.1)
 # 	__sp_scale = u._dev_change_t34_param(event, __sp_scale, "__sp_scale", 0.1)
 # # 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
+
+
+func _on_dodge_increase(payload: Dictionary[String, Variant]) -> void:
+	# prints("_on_speed_increase", "triggered")
+	var value = payload.get(GlobalSignal.payload_amount_field)
+	if value and (value is float or value is int):
+		PEAK_SPEED_BOOST += value
+		END_SPEED_BOOST += float(value) / 2.0

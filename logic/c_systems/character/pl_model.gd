@@ -59,7 +59,7 @@ var stamina_cant_be_paid := SignalData.new("SIG_stamina_cant_be_paid", SIG_stami
 var switch_weapon_cant_be_done := SignalData.new("SIG_switch_weapon_cant_be_done", SIG_switch_weapon_cant_be_done)
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		fancy_camera,
 		camera_focus,
@@ -79,7 +79,7 @@ func get_hard_dependencies() -> Array[Object]:
 	]
 
 ## for Princess all the soft are kind of hard, but ok
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	SIG_stamina_cant_be_paid.get_object_id()
 	return [
 		sfx_system,
@@ -103,7 +103,7 @@ func initialise() -> void:
 	__dev_initialise()
 
 	
-	if not __validate_deps_set_init():
+	if not __validate_dependencies():
 		__log_warn_soft("well game is not ready")
 		process_mode = PROCESS_MODE_DISABLED
 

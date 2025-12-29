@@ -173,12 +173,12 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 		var is_counter_rotating := (rot_delta < 0 and remaining_angle > 0) or \
 								  (rot_delta > 0 and remaining_angle < 0)
 		if is_counter_rotating:
-			print_.dev("", em.pin + "counter rotation, ending turn " + _log_msg)
+			__log_("", em.pin + "counter rotation, ending turn " + _log_msg)
 			return {"completed": true, "accum_rot": accum_rot_}
 
 	if abs(rot_delta) >= abs(remaining_angle):
 		get_character().rotate_y(remaining_angle)
-		print_.dev("", "Turn complete. " + _log_msg)
+		__log_("", "Turn complete. " + _log_msg)
 		return {"completed": true, "accum_rot": target_angle_}
 	else:
 		get_character().rotate_y(rot_delta)

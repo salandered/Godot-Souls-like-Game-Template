@@ -1,4 +1,5 @@
-class_name HealthItem
+@abstract
+class_name BasePickItem
 extends Node3DSystem
 
 
@@ -6,12 +7,15 @@ extends Node3DSystem
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
-func get_hard_dependencies() -> Array[Object]:
+## DOCS: frees itself on 'pick' animation finished
+
+
+func __hard_dependencies() -> Array[Object]:
 	return [
 		interact_area
 	]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 		animation_player
 	]
@@ -24,7 +28,7 @@ class AnimID:
 func _ready() -> void:
 	u.set_all_descendant_asp_3d_default_bus(self)
 	
-	if __validate_deps_set_init():
+	if __validate_dependencies():
 		interact_area.SIG_interacted.connect(_on_my_area_interacted)
 		animation_player.animation_finished.connect(_on_animation_finished)
 
@@ -40,13 +44,15 @@ func _on_my_area_interacted():
 		__log_("_on_my_area_interacted", "not interact_area.enabled")
 		return
 	interact_area.ENABLED = false
-	
 	__log_("_on_my_area_interacted", "triggered")
-
-	var signal_data := GlobalSignal.player_change_health
-	u.safe_emit(signal_data, {GlobalSignal.payload_amount_field: + 30}, false)
 	
+	_on_my_area_interacted_implementation()
+	
+	## shoudld be in the end
 	animation_player.play(AnimID.pick)
+
+	
+@abstract func _on_my_area_interacted_implementation()
 
 
 func _on_animation_finished(anim_name: String) -> void:
@@ -54,3 +60,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		AnimID.pick:
 			__log_("_on_animation_finished", "pick, will queue free")
 			queue_free()
+
+
+func __LOG_INDENT() -> int:
+	return LogToggler.ITEM.BASE_PICK

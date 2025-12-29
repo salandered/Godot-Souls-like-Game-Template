@@ -60,8 +60,8 @@ func initialise(
 	_soft_validate_on_signal_asps()
 
 
-	if not __validate_deps_set_init():
-		__log_warn_soft("__validate_deps_set_init failed, sytem won't work", "_on_signal_asps = []")
+	if not __validate_dependencies():
+		__log_warn_soft("__validate_dependencies failed, sytem won't work", "_on_signal_asps = []")
 		_on_signal_asps = []
 	else:
 		__log_("", "initialised")
@@ -107,7 +107,7 @@ func enable():
 
 
 func __LOG_B() -> bool:
-	return true
+	return false
 
 func __LOG_INDENT() -> int:
 	return 0

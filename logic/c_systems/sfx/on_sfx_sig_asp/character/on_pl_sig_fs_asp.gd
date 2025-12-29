@@ -34,14 +34,3 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 					base_vol_db -= 80
 
 	return VolPitch.new(base_vol_db, base_pitch)
-
-
-## __LOGS
-# region
-
-
-func __LOG_B() -> bool:
-	return true
-
-
-# endregion

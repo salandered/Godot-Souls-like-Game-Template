@@ -18,7 +18,8 @@ const FEEL_B := false
 const REACT_UTILS_B := false
 
 # CONTAINER
-const CONTAINER_B := false
+const PL_STATES_CONTAINER_B := true_b
+const ANIM_CONTAINER_B := false
 const E_CONTAINER_B := false
 
 # FIGHT
@@ -49,6 +50,20 @@ const PHE_B := false
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false
 
+
+class ITEM:
+	const BASE_PICK := false
+
+class SFX:
+	const META_ASP := false
+
+
+class UI:
+	const M_OPTION_CONTROL := false
+	const MAIN_MENU := false
+
+
+##
 
 const FEEL_INDENT := 10
 

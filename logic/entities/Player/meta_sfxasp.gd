@@ -1,5 +1,5 @@
-extends AudioStreamPlayerLogger
 class_name MetaASP
+extends AudioStreamPlayerLogger
 
 const CURSOR_STYLE_5_TRIMMED = preload("uid://ddxh6lf6328dt")
 const IMPACT_SOFT_MEDIUM_003 = preload("uid://com27t7o3xhsm")
@@ -64,3 +64,7 @@ func _play_both_asp(change_pitch: float, change_vol: float = 0.0):
 	_can_play = false
 	await get_tree().create_timer(THROTTLE_TIME).timeout
 	_can_play = true
+
+
+func __LOG_B() -> bool:
+	return LogToggler.SFX.META_ASP

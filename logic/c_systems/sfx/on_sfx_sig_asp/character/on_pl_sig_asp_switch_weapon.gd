@@ -25,14 +25,3 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 		base_pitch += _asp_config.pitch_change
 
 	return VolPitch.new(base_vol_db, base_pitch, mute, _asp_config.from_position)
-
-
-## __LOGS
-# region
-
-
-func __LOG_B() -> bool:
-	return true
-
-
-# endregion

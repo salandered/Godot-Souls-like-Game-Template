@@ -80,12 +80,3 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 	for item: OnSFXSigASP in _list:
 		item._log_tag = get_character().pp_name()
 	return _list
-
-## __LOG
-
-
-func __LOG_B() -> bool:
-	return true
-
-func __LOG_INDENT() -> int:
-	return 0

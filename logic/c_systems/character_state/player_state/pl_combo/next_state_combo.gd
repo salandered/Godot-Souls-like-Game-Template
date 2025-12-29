@@ -7,7 +7,7 @@ class_name NextStateCombo
 ## NOTE: field could be not equal to state_to_trigger.
 ##       Input is a state names, but not all states can be described as input
 ##       (hence all the contextualizers and combos)
-## NOTE: for attacks setting needs_combat_input might be enough.
+## NOTE: for attacks setting needs_combat_input might be enough
 @export var needs_input: String = "not"
 @export var needs_combat_input: String = "not"
 
@@ -47,9 +47,6 @@ func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: Ba
 	var decision: bool = true
 	
 	## state
-	if curr_state_name != needs_curr_state:
-		decision = false
-	
 	if _needs_curr_action_is_set() and curr_action.action_name != needs_curr_action:
 		decision = false
 	
@@ -86,7 +83,7 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 	var _prefix := "triggered 🖲️"
 	
 	var _msg := "NEEDS/GOT "
-	_msg += pp.s("St", needs_curr_state, "/", curr_state_name)
+	_msg += pp.s("St", curr_state_name)
 
 	if _needs_curr_action_is_set():
 		_msg += pp.s("Act", needs_curr_action, "/", curr_action.action_name)

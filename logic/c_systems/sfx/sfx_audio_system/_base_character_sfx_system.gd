@@ -9,7 +9,7 @@ const character_additional_data_key := "character"
 var _character: BaseCharacter
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		_character
 	]

@@ -1,15 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://d1v01uwy3yx0"]
+[gd_scene load_steps=15 format=3 uid="uid://dbcvsan1ldffm"]
 
-[ext_resource type="Material" uid="uid://i0yd71ruqvup" path="res://logic/entities/Items/health_item/HealthItemShaderMat.tres" id="2_et513"]
-[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="2_h1ih8"]
-[ext_resource type="Script" uid="uid://c7eeni577qmxv" path="res://logic/entities/Items/health_item/health_item.gd" id="2_yqq3b"]
-[ext_resource type="AudioStream" uid="uid://biequjbtcusgf" path="res://-adopting/sfx_sounds/400 Sounds Pack/Environment/water_boiling_loop_for_health_item.wav" id="3_h1ih8"]
-[ext_resource type="AudioStream" uid="uid://ddwk042630d60" path="res://-assets-/SFX/sources/WAV round/Collect_Small_Jewel_1.wav" id="5_wbokw"]
-[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="5_wrivv"]
-[ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/light_match.wav" id="6_csw4q"]
-[ext_resource type="AudioStream" uid="uid://dffde4yp0h8uv" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/whoosh_1.wav" id="7_et513"]
-[ext_resource type="ArrayMesh" uid="uid://by3rdfdkynn6m" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_042.res" id="9_et513"]
-[ext_resource type="ArrayMesh" uid="uid://blcv133ieg7t" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_049.res" id="10_c56ck"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="1_c8rud"]
+[ext_resource type="AudioStream" uid="uid://ddwk042630d60" path="res://-assets-/SFX/sources/WAV round/Collect_Small_Jewel_1.wav" id="2_lbk6k"]
+[ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/light_match.wav" id="3_6ute5"]
+[ext_resource type="AudioStream" uid="uid://dffde4yp0h8uv" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/whoosh_1.wav" id="4_10lsv"]
+[ext_resource type="AudioStream" uid="uid://biequjbtcusgf" path="res://-adopting/sfx_sounds/400 Sounds Pack/Environment/water_boiling_loop_for_health_item.wav" id="5_tbi52"]
+[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="6_vaksa"]
+[ext_resource type="ArrayMesh" uid="uid://by3rdfdkynn6m" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_042.res" id="7_tdm52"]
+[ext_resource type="ArrayMesh" uid="uid://blcv133ieg7t" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_049.res" id="8_jv5db"]
 
 [sub_resource type="Animation" id="Animation_umuyv"]
 length = 0.001
@@ -65,7 +63,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Visuals:position")
+tracks/0/path = NodePath("../../..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -77,7 +75,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Visuals/RedSphere:transparency")
+tracks/1/path = NodePath("../..:transparency")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -125,7 +123,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("%Visuals:scale")
+tracks/5/path = NodePath("../../..:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -173,7 +171,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("%BackASP:volume_db")
+tracks/9/path = NodePath("../../../../BackASP:volume_db")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -185,7 +183,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%BackASP:pitch_scale")
+tracks/10/path = NodePath("../../../../BackASP:pitch_scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -210,7 +208,7 @@ markers = [{
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Visuals:scale")
+tracks/0/path = NodePath("../../..:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -222,7 +220,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Visuals:position")
+tracks/1/path = NodePath("../../..:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -234,7 +232,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("%Visuals/RedSphere:transparency")
+tracks/2/path = NodePath("../..:transparency")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -318,7 +316,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("%BackASP:volume_db")
+tracks/9/path = NodePath("../../../../BackASP:volume_db")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -330,7 +328,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("%BackASP:pitch_scale")
+tracks/10/path = NodePath("../../../../BackASP:pitch_scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -346,8 +344,7 @@ _data = {
 &"pick": SubResource("Animation_wrivv")
 }
 
-[node name="HealthItem" type="Node3D"]
-script = ExtResource("2_yqq3b")
+[node name="BasePickItem" type="Node3D"]
 
 [node name="Visuals" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -357,9 +354,8 @@ layers = 4096
 gi_mode = 0
 radius = 0.1
 radial_segments = 8
-material = ExtResource("2_et513")
 
-[node name="PuffFog" parent="Visuals/RedSphere" instance=ExtResource("2_h1ih8")]
+[node name="PuffFog" parent="Visuals/RedSphere" instance=ExtResource("1_c8rud")]
 unique_name_in_owner = true
 particles_amount = 6
 lifetime = 16.0
@@ -405,7 +401,7 @@ transform = Transform3D(1.4285716, 0, 0, 0, 1.4285716, 0, 0, 0, 1.4285716, 0, 0.
 [node name="PickJewelASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0, -0.06115779, -0.05089996)
-stream = ExtResource("5_wbokw")
+stream = ExtResource("2_lbk6k")
 unit_size = 5.6
 pitch_scale = 1.51
 max_distance = 12.0
@@ -416,7 +412,7 @@ attenuation_filter_cutoff_hz = 942.0
 [node name="PickMatchASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0.045602918, 0, 0)
-stream = ExtResource("6_csw4q")
+stream = ExtResource("3_6ute5")
 unit_size = 5.6
 max_distance = 12.0
 max_polyphony = 2
@@ -426,7 +422,7 @@ attenuation_filter_cutoff_hz = 942.0
 [node name="PickWhooshASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, -0.013224141, -0.07411059, 0)
-stream = ExtResource("7_et513")
+stream = ExtResource("4_10lsv")
 volume_db = -20.0
 unit_size = 5.6
 pitch_scale = 0.71
@@ -437,7 +433,7 @@ attenuation_filter_cutoff_hz = 942.0
 
 [node name="BackASP" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_h1ih8")
+stream = ExtResource("5_tbi52")
 volume_db = -31.719
 unit_size = 5.6
 pitch_scale = 0.15
@@ -453,11 +449,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_87eva")
 }
 
-[node name="InteractArea" parent="." instance=ExtResource("5_wrivv")]
+[node name="InteractArea" parent="." instance=ExtResource("6_vaksa")]
 unique_name_in_owner = true
-visible = false
-collision_mask = 2
 area_radius = 1.0
+label_y_offset = 0.7
 
 [node name="dev-visuals" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2595799, 0)
@@ -466,11 +461,11 @@ visible = false
 [node name="chest fasteners" type="MeshInstance3D" parent="dev-visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007918432, 0.3004973, 0.17708457)
 gi_mode = 0
-mesh = ExtResource("9_et513")
+mesh = ExtResource("7_tdm52")
 skeleton = NodePath("")
 
 [node name="chest main" type="MeshInstance3D" parent="dev-visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015866419, 0.14737865, 0.025680456)
 gi_mode = 0
-mesh = ExtResource("10_c56ck")
+mesh = ExtResource("8_jv5db")
 skeleton = NodePath("")

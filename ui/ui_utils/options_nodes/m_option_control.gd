@@ -180,3 +180,7 @@ func _get_property_list() -> Array[Dictionary]:
 		{"name": "value", "type": property_type, "usage": PROPERTY_USAGE_NONE},
 		{"name": "default_value", "type": property_type}
 	]
+
+
+func __LOG_B() -> bool:
+	return LogToggler.UI.M_OPTION_CONTROL

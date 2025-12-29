@@ -2,7 +2,7 @@
 extends M_ListOptionControl
 
 func _set_input_device() -> void:
-	var current_setting : Variant = _get_setting(default_value)
+	var current_setting: Variant = _get_setting(default_value)
 	if current_setting is bool:
 		current_setting = &"Default"
 	AudioServer.input_device = _get_setting(default_value)
@@ -26,12 +26,12 @@ func _ready() -> void:
 		hide()
 	super._ready()
 
-func _on_setting_changed(value : Variant) -> void:
+func _on_setting_changed(value: Variant) -> void:
 	if value >= option_values.size(): return
 	AudioServer.input_device = option_values[value]
 	super._on_setting_changed(value)
 
-func _value_title_map(value : Variant) -> String:
+func _value_title_map(value: Variant) -> String:
 	if value is String:
 		return value
 	else:

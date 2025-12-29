@@ -13,13 +13,13 @@ class_name PlAnimatorManager
 @onready var _end: EndModifier = %_End
 
 
-func get_hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array[Object]:
 	return [
 		root_animator,
 		full_body
 	]
 
-func get_soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array[Object]:
 	return [
 		overlay_modifer,
 		_begin,
@@ -150,7 +150,7 @@ func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer)
 	_begin.initialise()
 	_end.initialise()
 
-	__validate_deps_set_init()
+	__validate_dependencies()
 
 
 func is_player() -> bool:

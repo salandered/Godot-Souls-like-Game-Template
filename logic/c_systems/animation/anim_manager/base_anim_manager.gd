@@ -13,7 +13,7 @@ var anim_container: AnimContainer
 
 @abstract func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float) -> void
 
-
+## speed_scale_coef adds to any speed scale mechanic 
 @abstract func set_anim_to_play(anim_id: String, blend_for: float, start_time_offset: float) -> void
 
 

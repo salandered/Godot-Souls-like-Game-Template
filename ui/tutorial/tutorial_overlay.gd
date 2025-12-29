@@ -44,7 +44,11 @@ func _toggle_panel(key_number: int) -> void:
 	if _tutorial_panels.has(key_number):
 		var panel: Control = _tutorial_panels[key_number]
 		if panel:
-			panel.visible = not panel.visible
+			if not panel.visible:
+				hide_all() # hide all others
+				panel.show()
+			else:
+				panel.hide() # if it is already visible, hide it
 
 
 func hide_all() -> void:

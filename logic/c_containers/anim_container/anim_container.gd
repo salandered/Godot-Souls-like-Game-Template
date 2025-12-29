@@ -165,12 +165,8 @@ static func __get_animation_markers(animation: Animation) -> Dictionary[String, 
 	return markers_dict
 
 
-## WARNING: used for all characters actually
-func is_player() -> bool:
-	return true
-
 func __LOG_B() -> bool:
-	return LogToggler.CONTAINER_B
+	return LogToggler.ANIM_CONTAINER_B
 
 func __LOG_INDENT() -> int:
 	return 0

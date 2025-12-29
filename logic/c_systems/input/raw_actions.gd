@@ -22,6 +22,7 @@ const jump = "jump"
 
 # attack
 const light_attack = "light_attack"
+const heavy_attack = "heavy_attack"
 
 
 # interact

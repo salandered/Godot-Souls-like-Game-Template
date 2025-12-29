@@ -5,7 +5,7 @@ class_name WeaponSwitcher
 var _player: Princess
 var _combat: PlayerCombat
 
-
+# hard coded
 var weapon_cycle := Cycler.new([WeaponID.smith_sword, WeaponID.small_pinga_blade])
 
 
@@ -19,8 +19,9 @@ var speed_scale := 1.8
 
 
 func initialise(player_: Princess, combat_: PlayerCombat):
-	_player = player_
-	_combat = combat_
+	self._player = player_
+	self._combat = combat_
+	weapon_cycle.get_next()
 
 
 func switch_weapon() -> void:
