@@ -1,9 +1,9 @@
 [gd_scene load_steps=22 format=4 uid="uid://bd67vd6q3hn0s"]
 
-[ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-adopting/sfx_sounds/Footstep N Packs/Wood/WoodOneShots/WoodSteps 119-Audio.wav" id="4_m0yqf"]
-[ext_resource type="AudioStream" uid="uid://4k1rr3gewovf" path="res://-adopting/sfx_sounds/CatSoundFX/creak/creak_5.wav" id="5_r6xty"]
-[ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://-adopting/sfx_sounds/400 Sounds Pack/Environment/creaky_door_short_for_chest.wav" id="7_m0yqf"]
-[ext_resource type="AudioStream" uid="uid://bp2h06bfionbs" path="res://-adopting/sfx_sounds/rubberduck/sfx_breaking_and_falling/bfh1_wood_hit_02.ogg" id="7_r6xty"]
+[ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 119-Audio.wav" id="4_m0yqf"]
+[ext_resource type="AudioStream" uid="uid://4k1rr3gewovf" path="res://-assets-/SFX/sources/cat/creak_5.wav" id="5_r6xty"]
+[ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://-assets-/SFX/sources/400/creaky_door_short_for_chest.wav" id="7_m0yqf"]
+[ext_resource type="AudioStream" uid="uid://bp2h06bfionbs" path="res://-assets-/SFX/sources/rubberduck/bfh1_wood_hit_02.ogg" id="7_r6xty"]
 [ext_resource type="Texture2D" uid="uid://d31hmdbngp1gm" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_diff_1k.jpg" id="8_sdskp"]
 [ext_resource type="Texture2D" uid="uid://cv6kvx0r8j6fi" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_metal-wooden_crate_01_rough.png" id="9_grnxn"]
 [ext_resource type="Texture2D" uid="uid://b55ox7hi3cclc" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_nor_gl.png" id="10_4p2nb"]

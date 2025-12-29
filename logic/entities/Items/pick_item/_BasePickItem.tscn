@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="1_c8rud"]
 [ext_resource type="AudioStream" uid="uid://ddwk042630d60" path="res://-assets-/SFX/sources/WAV round/Collect_Small_Jewel_1.wav" id="2_lbk6k"]
-[ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/light_match.wav" id="3_6ute5"]
-[ext_resource type="AudioStream" uid="uid://dffde4yp0h8uv" path="res://-adopting/sfx_sounds/400 Sounds Pack/Other/whoosh_1.wav" id="4_10lsv"]
-[ext_resource type="AudioStream" uid="uid://biequjbtcusgf" path="res://-adopting/sfx_sounds/400 Sounds Pack/Environment/water_boiling_loop_for_health_item.wav" id="5_tbi52"]
+[ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-assets-/SFX/sources/400/light_match.wav" id="3_6ute5"]
+[ext_resource type="AudioStream" uid="uid://dffde4yp0h8uv" path="res://-assets-/SFX/sources/400/whoosh_1.wav" id="4_10lsv"]
+[ext_resource type="AudioStream" uid="uid://biequjbtcusgf" path="res://-assets-/SFX/sources/400/water_boiling_loop_for_health_item.wav" id="5_tbi52"]
 [ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="6_vaksa"]
 [ext_resource type="ArrayMesh" uid="uid://by3rdfdkynn6m" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_042.res" id="7_tdm52"]
 [ext_resource type="ArrayMesh" uid="uid://blcv133ieg7t" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_049.res" id="8_jv5db"]

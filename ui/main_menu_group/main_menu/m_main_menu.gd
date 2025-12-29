@@ -137,7 +137,7 @@ func _load_specific_level(path: String) -> void:
 	if M_GameState.has_game_state():
 		M_GameState.reset()
 
-	GlobalSignal._SIG_show_tut.emit()
+	GlobalSignal.SIG_show_tut.emit()
 	M_SceneLoader.load_scene(path)
 		
 func load_game_scene() -> void:

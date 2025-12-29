@@ -83,9 +83,9 @@ func _on_my_area_interacted():
 	open()
 
 
-func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
-		return
+# func _input(event: InputEvent) -> void:
+# 	if not OS.is_debug_build():
+# 		return
 		
-	if event.is_action_pressed(RawAction.DEV_H):
-		open()
+# 	if event.is_action_pressed(RawAction.DEV_H):
+# 		open()

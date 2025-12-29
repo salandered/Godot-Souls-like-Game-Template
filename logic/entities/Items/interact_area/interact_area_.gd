@@ -117,7 +117,7 @@ func _set_area_radius() -> void:
 
 func _set_label_y_offset() -> void:
 	if label:
-		label.global_position.y = label_y_offset
+		label.global_position.y = global_position.y + label_y_offset
 # endregion
 
 

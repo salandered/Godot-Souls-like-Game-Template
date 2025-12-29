@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://-assets-/VFX/lights/omni/FlickerOmni.tscn" id="1_gyo1q"]
 [ext_resource type="Script" uid="uid://di8a2ya3udmgp" path="res://-assets-/VFX/lights/fire/fire_static.gd" id="2_jqjo8"]
 [ext_resource type="AudioStream" uid="uid://cv6knp2vadwvf" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Torch/torch.tres" id="3_qdwx7"]
-[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-adopt_demo_level/demo-level_/columns/shattered/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="5_is5lk"]
-[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-adopt_demo_level/demo-level_/columns/shattered/shattered_column_damaged_concrete_floor_rough.png" id="6_w4q5a"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-adopt_demo_level/demo-level_/columns/shattered/shattered_column_damaged_concrete_floor_nor_gl.png" id="7_elwu4"]
+[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/_images/concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="5_is5lk"]
+[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/_images/concrete/shattered_column_damaged_concrete_floor_rough.png" id="6_w4q5a"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/_images/concrete/shattered_column_damaged_concrete_floor_nor_gl.png" id="7_elwu4"]
 [ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://-assets-/VFX/shaders/gdquest-like/stylized_fire.gdshader" id="8_3ygk2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yjxgb"]

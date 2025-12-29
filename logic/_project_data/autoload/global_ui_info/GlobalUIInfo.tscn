@@ -1,0 +1,503 @@
+[gd_scene load_steps=10 format=3 uid="uid://48tejneiwq5o"]
+
+[ext_resource type="Script" uid="uid://ho1kjt4aujxq" path="res://logic/_project_data/autoload/global_ui_info/global_ui_info.gd" id="1_ihl3n"]
+[ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/_project_data/autoload/global_ui_info/profiler.gd" id="2_65fx7"]
+[ext_resource type="Script" uid="uid://b21g8b5ep56o4" path="res://ui/tutorial/first_tutorial.gd" id="3_x47y3"]
+[ext_resource type="Script" uid="uid://dnhmrbrcgrrmj" path="res://ui/tutorial/tutorial_ui.gd" id="4_o4jv4"]
+[ext_resource type="PackedScene" uid="uid://cp4td8jhxhsj2" path="res://ui/ui_utils/rich_text_label/rich_text_label.tscn" id="5_0xnqb"]
+[ext_resource type="Script" uid="uid://dqvlv43ty5tmr" path="res://logic/_project_data/autoload/global_ui_info/free_cam_ui.gd" id="5_65fx7"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://ui/ui_utils/separator/h_separator.tscn" id="6_k5if8"]
+[ext_resource type="PackedScene" uid="uid://0orfaksbirk3" path="res://logic/_project_data/autoload/global_ui_info/minimal_h_separator.tscn" id="6_x47y3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgki4"]
+bg_color = Color(0.24, 0.07464001, 0.052800007, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.11, 0, 0.031166663, 0.49019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="GlobalUIInfo" type="Node3D"]
+script = ExtResource("1_ihl3n")
+
+[node name="Profiler" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_65fx7")
+
+[node name="FirstTutorial" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_x47y3")
+
+[node name="TutorialUI" type="Node" parent="FirstTutorial"]
+unique_name_in_owner = true
+script = ExtResource("4_o4jv4")
+
+[node name="FreeCamUI" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_65fx7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ProfilerAndTutorial" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -546.0
+offset_bottom = 3301.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial"]
+layout_mode = 2
+
+[node name="ProfilerPanel" type="PanelContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LabelContainer" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="ControlInfoBox" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ProfilerControlInfo" type="Label" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer/ControlInfoBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7036598, 0.7036598, 0.7036598, 1)
+theme_override_font_sizes/font_size = 16
+text = "Controls Info text"
+
+[node name="HSeparator" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer/ControlInfoBox" instance=ExtResource("6_x47y3")]
+layout_mode = 2
+
+[node name="space" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer/ControlInfoBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ProfilerInfo" type="Label" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Profiler Info text
+...
+...
+..."
+
+[node name="FirstTutorialPanel" type="PanelContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgki4")
+
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TutorialLabels" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Legend" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend"]
+layout_mode = 2
+
+[node name="LegendText" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 20
+text = "[b]press 1[/b] - to see [img=20x20]res://-assets-/x_icons/white/icon_lever.png[/img] controls.
+[b]press 2[/b] - to learn about [img=20x20]res://-assets-/x_icons/white/icon_parchment.png[/img] available mechanics.
+[b]press 3[/b] - to learn more about [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] combo attacks.
+[b]press 4[/b] - to learn more about [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target locking.
+[b]press 5[/b] - to learn more about [img=20x20]res://-assets-/x_icons/white/icon_heart.png[/img] health/stamina.
+[b]press 6[/b] - to see some [img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] additional info.
+[b]press 0[/b] - to hide/unhide all.
+
+[i]Pressing the same number hides the dedicated panel.[/i]"
+plain_text = "press 1 - to see controls.
+press 2 - to learn about available mechanics.
+press 3 - to learn more about combo attacks.
+press 4 - to learn more about target locking.
+press 5 - to learn more about health/stamina.
+press 6 - to see some additional info.
+press 0 - to hide/unhide all.
+
+Pressing the same number hides the dedicated panel."
+italic_phrases = Array[String](["Pressing the same number hides the dedicated panel."])
+phrase_icons = Dictionary[String, String]({
+"additional info": "res://-assets-/x_icons/white/icon_light_bulb.png",
+"available mechanics": "res://-assets-/x_icons/white/icon_parchment.png",
+"combo attacks": "res://-assets-/x_icons/white/icon_sword.png",
+"controls": "res://-assets-/x_icons/white/icon_lever.png",
+"health/stamina": "res://-assets-/x_icons/white/icon_heart.png",
+"target locking": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="1Controls" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/italics_font_size = 24
+text = "[b]WASD[/b] - [img=20x20]res://-assets-/x_icons/white/steps.png[/img] move
+[b]Space[/b] - dodge/jump
+[b]Shift[/b] - sprint
+[b]Q[/b] - [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target lock
+[b]LMB[/b] - [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] light attack
+[b]RMB[/b] - [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] heavy attack
+[b]E[/b] - interact
+[b]F[/b] - switch weapon
+[b]Esc[/b] -  pause
+[i]H to unstuck (just in case)[/i]
+[i]F3 to see profiler[/i]
+[i]F9 to toggle flying dev camera[/i]"
+plain_text = "WASD - move
+Space - dodge/jump
+Shift - sprint
+Q - target lock
+LMB - light attack
+RMB - heavy attack
+E - interact
+F - switch weapon
+Esc -  pause
+H to unstuck (just in case)
+F3 to see profiler
+F9 to toggle flying dev camera
+"
+italic_phrases = Array[String](["H to unstuck (just in case)", "F3 to see profiler", "F9 to toggle flying dev camera", ""])
+phrase_icons = Dictionary[String, String]({
+"heavy attack": "res://-assets-/x_icons/white/icon_sword.png",
+"light attack": "res://-assets-/x_icons/white/icon_sword.png",
+"move": "res://-assets-/x_icons/white/steps.png",
+"target lock": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="2MechanicsOverview" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+text = "[b]Attacks and combos[/b] - press light and heavy [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i]s adjusting timings to learn combos. Also see a tutorial panel about combos.
+
+[b]Switching weapons[/b] - Use the [i]switch weapon button[/i]. Note that you can't switch in the middle of the current attack (sound clue will help you notice that)
+
+[b]Target locking[/b] - see the dedicated tutorial panel.
+
+[b]Destructible columns[/b] - let the enemy hit the colum, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
+
+[b]Fighting several enemies at once[/b] - just find the way to reach additional enemies. It's a lot of fun and they could accidently hit each other as well.
+
+[b]Chests and items[/b] - open chests to find helpful items and improve your abilities (e.g. longer dodge).
+[b]Health/Stamina[/b] - see the dedicated tutorial."
+plain_text = "Attacks and combos - press light and heavy attack buttons adjusting timings to learn combos. Also see a tutorial panel about combos.
+
+Switching weapons - Use the switch weapon button. Note that you can't switch in the middle of the current attack (sound clue will help you notice that)
+
+Target locking - see the dedicated tutorial panel.
+
+Destructible columns - let the enemy hit the colum, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
+
+Fighting several enemies at once - just find the way to reach additional enemies. It's a lot of fun and they could accidently hit each other as well.
+
+Chests and items - open chests to find helpful items and improve your abilities (e.g. longer dodge).
+Health/Stamina - see the dedicated tutorial.
+"
+italic_phrases = Array[String](["attack button", "move button", "dodge button", "target lock button", "switch weapon button", "attack buttons", ""])
+phrase_icons = Dictionary[String, String]({
+"Tip": "res://-assets-/x_icons/white/icon_light_bulb.png",
+"attack buttons": "res://-assets-/x_icons/white/icon_sword.png",
+"move button": "res://-assets-/x_icons/white/steps.png",
+"target lock": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="3AttackMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+text = "[b]Heavy attack[/b] - just press heavy [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i].
+
+[b]Light combo[/b] - press light [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i] two times. 
+
+[b]Full combo[/b] - make light combo and then press heavy [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i]. Note that heavy attack is faster (and deadlier) if it comes at the end of the Full combo.
+[b]Running attack[/b] - press [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i] while sprinting.
+
+[b]Dodge attack[/b] - press [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i] right after dodging. Forward dodge results in stab almost immediately. 
+
+[img=20x20]res://-assets-/x_icons/white/icon_interrogation.png[/img] Help: If combo attack is not triggered, try to press [img=20x20]res://-assets-/x_icons/white/icon_sword.png[/img] [i]attack button[/i] closer to the end of the current attack (less spam the clicks).
+
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: you can change direction in the middle of some attacks if not [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target locked."
+plain_text = "Heavy attack - just press heavy attack button.
+
+Light combo - press light attack button two times. 
+
+Full combo - make light combo and then press heavy attack button. Note that heavy attack is faster (and deadlier) if it comes at the end of the Full combo.
+Running attack - press attack button while sprinting.
+
+Dodge attack - press attack button right after dodging. Forward dodge results in stab almost immediately. 
+
+Help: If combo attack is not triggered, try to press attack button closer to the end of the current attack (less spam the clicks).
+
+Tip: you can change direction in the middle of some attacks if not target locked."
+italic_phrases = Array[String](["attack button", "move button", "dodge button", "target lock button"])
+phrase_icons = Dictionary[String, String]({
+"Help:": "res://-assets-/x_icons/white/icon_interrogation.png",
+"Tip:": "res://-assets-/x_icons/white/icon_light_bulb.png",
+"attack button": "res://-assets-/x_icons/white/icon_sword.png",
+"move button": "res://-assets-/x_icons/white/steps.png",
+"target lock": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="4TargetLockMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+text = "[b]Target locking[/b] - find the suitable target and press [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] [i]target lock button[/i]. It will allow you to strafe around the target and make you hits more focused. Note that you may sprint freely while in target-lock mode.
+
+[b]Static targets[/b] - you can practice strafing while being in target-lock mode using static targets (golden posts). 
+
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: use vertical mouse movement to adjust the view. 
+
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Advanced tip: you can not only sprint, but also run freely while being in target-lock mode. In order to do so double-tap the [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] [i]target lock button[/i] while already being in [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target lock mode. Double tapping again will switch you back to strafing."
+plain_text = "Target locking - find the suitable target and press target lock button. It will allow you to strafe around the target and make you hits more focused. Note that you may sprint freely while in target-lock mode.
+
+Static targets - you can practice strafing while being in target-lock mode using static targets (golden posts). 
+
+Tip: use vertical mouse movement to adjust the view. 
+
+Advanced tip: you can not only sprint, but also run freely while being in target-lock mode. In order to do so double-tap the target lock button while already being in target lock mode. Double tapping again will switch you back to strafing."
+italic_phrases = Array[String](["attack button", "move button", "dodge button", "target lock button"])
+phrase_icons = Dictionary[String, String]({
+"Advanced tip:": "res://-assets-/x_icons/white/icon_light_bulb.png",
+"Help:": "res://-assets-/x_icons/white/icon_interrogation.png",
+"Tip:": "res://-assets-/x_icons/white/icon_light_bulb.png",
+"attack button": "res://-assets-/x_icons/white/icon_sword.png",
+"move button": "res://-assets-/x_icons/white/steps.png",
+"target lock": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="5HealthStaminaMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+text = "[b]Stamina management[/b] - some moves drains stamina, while standing idle or running will help replenish it.
+
+[b]Stamina fatigue[/b] - when stamina hits zero, you won't be able to make stamina draining moves for a little while. Stamina bar will be painted in yellow and you also will hear a sound clue if a move is not allowed.
+
+[b]Chest items[/b] - you will find pickable items which would help you to improve health and also increase the maximum health/stamina."
+plain_text = "Stamina management - some moves drains stamina, while standing idle or running will help replenish it.
+
+Stamina fatigue - when stamina hits zero, you won't be able to make stamina draining moves for a little while. Stamina bar will be painted in yellow and you also will hear a sound clue if a move is not allowed.
+
+Chest items - you will find pickable items which would help you to improve health and also increase the maximum health/stamina."
+italic_phrases = Array[String](["attack button", "move button", "dodge button", "target lock button"])
+phrase_icons = Dictionary[String, String]({
+"Help:": "res://-assets-/x_icons/white/icon_interrogation.png",
+"Tip": "res://-assets-/x_icons/white/icon_light_bulb.png",
+"attack button": "res://-assets-/x_icons/white/icon_sword.png",
+"move button": "res://-assets-/x_icons/white/steps.png",
+"target lock": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="6AdditionalMovementTips" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("5_0xnqb")]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+text = "[b]Advanced dodge[/b] - press both the [img=20x20]res://-assets-/x_icons/white/steps.png[/img] [i]move button[/i] and [i]dodge button[/i] simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
+
+[b]Sprint jump[/b] - just jump while sprinting!
+
+[b]U-turn[/b] - press the opposite [img=20x20]res://-assets-/x_icons/white/steps.png[/img] [i]move button[/i] while sprinting. Helps for quick retreats.
+
+[b]Sprint start[/b] - press shift while idle and start moving. It looks cool but not really helpful."
+plain_text = "Advanced dodge - press both the move button and dodge button simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
+
+Sprint jump - just jump while sprinting!
+
+U-turn - press the opposite move button while sprinting. Helps for quick retreats.
+
+Sprint start - press shift while idle and start moving. It looks cool but not really helpful.
+
+"
+italic_phrases = Array[String](["attack button", "move button", "dodge button", "target lock button"])
+phrase_icons = Dictionary[String, String]({
+"attack button": "res://-assets-/x_icons/white/icon_sword.png",
+"move button": "res://-assets-/x_icons/white/steps.png",
+"target lock": "res://-assets-/x_icons/white/icon_target_2.png"
+})
+
+[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("6_k5if8")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="FreeCam" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -359.0
+offset_right = 440.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/FreeCam"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ControlsInfo" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+
+[node name="Controls" type="RichTextLabel" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer/ControlsInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "[b]WASD[/b] - Move
+[b]Q/E[/b] - Down/Up
+[b]Shift[/b] - Speed boost
+[b]L[/b] - Light on/off
+etc ...."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer" instance=ExtResource("6_x47y3")]
+layout_mode = 2
+
+[node name="space" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HUDInfo" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="HUD" type="RichTextLabel" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer/HUDInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "HUD info will be updated"
+fit_content = true
+scroll_active = false

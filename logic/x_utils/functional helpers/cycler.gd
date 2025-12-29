@@ -5,12 +5,18 @@ extends RefCountedSystem
 
 
 var _values: Array = []
-var _pointer: int = -1
+var _pointer: int
 
 
-func _init(values: Array):
+# todo: consider duplicating values
+func _init(values: Array, initial_pointer: int = 0):
 	if values.is_empty():
 		__log_warn("values is an empty array", "_init", "initialised with []")
+	if initial_pointer >= 0 and initial_pointer <= len(values) - 1:
+		_pointer = initial_pointer
+	else:
+		__log_warn("incorrect initial_pointer", "_init", "will be 0", initial_pointer)
+		_pointer = 0
 	_values = values
 
 
@@ -20,26 +26,31 @@ func get_next() -> Variant:
 		__log_warn("Cycler has no values to get", "", "return null")
 		return null
 	
-	_pointer = (_pointer + 1) % _values.size()
-	return _values[_pointer]
-
+	_pointer = (_pointer + 1) % len(_values)
+	return _pick_value()
 
 ## Returns the current value without advancing the pointer.
-## Returns the first value if get_next() has not been called.
 func get_current() -> Variant:
 	if _values.is_empty():
 		__log_warn("Cycler has no values to get", "", "return null")
 		return null
-		
-	if _pointer == -1:
-		return _values[0]
 	
-	return _values[_pointer]
+	return _pick_value()
 
 
-func get_current_pointer() -> Variant:
+func get_current_pointer() -> int:
 	return _pointer
 
+
+func _is_pointer_within() -> bool:
+	return _pointer >= 0 and _pointer <= len(_values) - 1
+
+func _pick_value() -> Variant:
+	if _is_pointer_within():
+		return _values[_pointer]
+	else:
+		__log_error("critical cycler error. Probably array were changed externally", "", "return null", "Pointer/array size", _pointer, len(_values))
+		return null
 
 ## __LOGS
 # region

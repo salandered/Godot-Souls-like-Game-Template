@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://i0yd71ruqvup"]
 
 [ext_resource type="Shader" uid="uid://dva33q3vefr3d" path="res://logic/entities/Items/pick_item/health_item/HealthItem.gdshader" id="1_nrpc1"]
-[ext_resource type="Texture2D" uid="uid://cwq86lu2pf12x" path="res://-adopting/textures/Luos_Noise_V2/images/paired/T_Lu_Noise_21.png" id="2_8e6pn"]
-[ext_resource type="Texture2D" uid="uid://dxsl5k4jgky1h" path="res://-adopting/textures/Luos_Noise_V2/images/T_NoiseNormal_80.png" id="3_of5fj"]
+[ext_resource type="Texture2D" uid="uid://cwq86lu2pf12x" path="res://-assets-/materials-shared/lu_noise/paired/T_Lu_Noise_21.png" id="2_8e6pn"]
+[ext_resource type="Texture2D" uid="uid://dxsl5k4jgky1h" path="res://-assets-/materials-shared/lu_noise/T_NoiseNormal_80.png" id="3_of5fj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n22u3"]
 frequency = 0.0013

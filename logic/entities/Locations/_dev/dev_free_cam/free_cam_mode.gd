@@ -17,9 +17,6 @@ var _previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
 var ACTIVE: bool = false
 
 
-## NOTE: deliberately using raw buttons, not RawAction (except for toggling)
-
-
 func _ready() -> void:
 	if OS.is_debug_build():
 		_enabled = true
@@ -33,11 +30,8 @@ func _ready() -> void:
 	set_process_unhandled_input(_enabled)
 
 	hide()
-	_cycle_labels_visible(true) # iterate to first element
-	_set_labels_visible([false, false]) # not visible untill becomes active
+	GlobalSignal.SIG_hide_free_cam_ui.emit()
 	light.visible = false # by default false
-	controls.text = controls_text
-
 
 func _process(delta: float) -> void:
 	if not ACTIVE:
@@ -59,7 +53,7 @@ func _toggle_camera_mode() -> void:
 		_cached_camera.current = true
 		hide()
 		set_process(false)
-		_set_labels_visible([false, false])
+		GlobalSignal.SIG_hide_free_cam_ui.emit()
 		ACTIVE = false
 		InputManager.set_process(true)
 
@@ -72,7 +66,7 @@ func _toggle_camera_mode() -> void:
 		_turn_on_free_cam()
 		show()
 		set_process(true)
-		_cycle_labels_visible(false)
+		GlobalSignal.SIG_show_free_cam_ui.emit()
 		ACTIVE = true
 		InputManager.set_process(false)
 
@@ -176,60 +170,11 @@ func _remove_camera_body() -> void:
 ## INFO LABELS
 # region
 
-@onready var controls_info: MarginContainer = %ControlsInfo
-@onready var controls: RichTextLabel = %Controls
-@onready var hud_info: MarginContainer = %HUDInfo
-@onready var hud: RichTextLabel = %HUD
-
-const controls_text := "[b]WASD[/b] - Move
-[b]Q/E[/b] - Down/Up
-[b]Shift[/b] - Speed boost
-[b]L[/b] - Light on/off
-[b]P[/b] - Unpause/pause scene
-[b]Wheel up/down[/b] - Change speed
-[b]Wheel up/down with RMB[/b] - Change FOV
-[b]Wheel up/down with LMB[/b] - Change Light energy
-"
-
-var label_visibility_cycler = Cycler.new([
-	[true, true],
-	[false, true],
-	[false, false],
-	[true, false],
-]
-)
-
-func _cycle_labels_visible(next: bool):
-	if not label_visibility_cycler:
-		return
-	
-	var value
-	
-	if next:
-		value = label_visibility_cycler.get_next()
-	else:
-		value = label_visibility_cycler.get_current()
-
-	_set_labels_visible(value)
-
-
-func _set_labels_visible(value: Array):
-	if not value or value is not Array or len(value) != 2:
-		return
-
-	if controls_info:
-		controls_info.visible = value[0]
-	if hud_info:
-		hud_info.visible = value[1]
-
 
 func _update_hud() -> void:
-	if not hud or not hud.visible:
-		return
-
 	var pos := camera.global_position
 	var rot := camera.rotation_degrees
-	var status_text := "POS:  %.1f, %.1f, %.1f\nROT:  %.1f, %.1f\nSPD:  %.1f\nFOV:  %.0f" % [
+	var hud_text := "POS:  %.1f, %.1f, %.1f\nROT:  %.1f, %.1f\nSPD:  %.1f\nFOV:  %.0f" % [
 		pos.x, pos.y, pos.z,
 		rot.x, rot.y,
 		camera_speed,
@@ -237,14 +182,14 @@ func _update_hud() -> void:
 	]
 
 	if light:
-		status_text += pp.s("\nLIGHT: ", light.visible, pp.s(" | ENERGY: ", light.light_energy))
+		hud_text += pp.s("\nLight: ", light.visible, pp.s(" | Energy: ", light.light_energy))
 
 	if get_tree().paused:
-		status_text += "\n\n[SCENE PAUSED]"
+		hud_text += "\n\n[i]SCENE PAUSED ⏸️[/i]"
 	else:
-		status_text += "\n\n[SCENE CONTINUES]"
+		hud_text += "\n\n[i]SCENE PLAYS ⏩[/i]"
 
-	hud.text = status_text
+	GlobalUIInfo.update_free_cam_hud(hud_text)
 
 # endregion
 
@@ -260,7 +205,6 @@ func _input(event: InputEvent) -> void:
 		_handle_pause_toggle(event)
 		_handle_mouse_wheel(event)
 		_handle_fov_input(event)
-		_handle_label_visibility(event)
 		_handle_light_toggle(event)
 		_handle_light_energy_input(event)
 
@@ -277,6 +221,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _handle_pause_toggle(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
 		get_tree().paused = not get_tree().paused
+		get_viewport().set_input_as_handled()
 
 
 func _handle_mouse_wheel(event: InputEvent) -> void:
@@ -312,19 +257,15 @@ func _handle_light_energy_input(event: InputEvent) -> void:
 	# Hold LMB + Scroll to change FOV
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			light.light_energy = max(light.light_energy - 0.2, 0.2)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			light.light_energy = min(light.light_energy + 0.2, 10.0)
-
-
-func _handle_label_visibility(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_KP_0:
-		_cycle_labels_visible(true)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			light.light_energy = max(light.light_energy - 0.2, 0.2)
 
 
 func _handle_light_toggle(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_L:
 		light.visible = not light.visible
+		get_viewport().set_input_as_handled()
 
 
 # endregion

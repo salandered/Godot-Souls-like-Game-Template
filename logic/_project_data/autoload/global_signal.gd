@@ -11,8 +11,10 @@ signal _SIG_player_speed_increase(payload: Dictionary[String, Variant])
 signal _SIG_player_dodge_increase(payload: Dictionary[String, Variant])
 
 
-signal _SIG_show_tut()
-signal _SIG_hid_tut()
+signal SIG_show_tut()
+signal SIG_hid_tut()
+signal SIG_show_free_cam_ui()
+signal SIG_hide_free_cam_ui()
 
 
 var player_change_health := SignalData.new(

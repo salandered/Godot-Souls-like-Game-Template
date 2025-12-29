@@ -1,5 +1,8 @@
-class_name TutorialOverlay
+class_name TutorialUI
 extends Node
+
+## assign it to node somewhere close the FirstTutorial or similar
+
 
 # Maps number keys (1-9) to tutorial panel nodes
 var _tutorial_panels: Dictionary[int, Control] = {}
@@ -7,7 +10,7 @@ var _tutorial_panels: Dictionary[int, Control] = {}
 
 # Call this during _ready() to register a panel with its key
 func register_panel(key_number: int, panel: Control) -> void:
-	if key_number < 0 or key_number > 9:
+	if key_number < 1 or key_number > 9:
 		push_error("TutorialOverlay: key_number must be between 1 and 9")
 		return
 	
@@ -29,11 +32,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		var number: int = -1
 		
 		# Main keyboard number keys
-		if key_code >= KEY_0 and key_code <= KEY_9:
+		if key_code > KEY_0 and key_code <= KEY_9:
 			number = key_code - KEY_0
 		# Numpad keys
-		# elif key_code >= KEY_KP_0 and key_code <= KEY_KP_9:
-			# number = key_code - KEY_KP_0
+		elif key_code > KEY_KP_0 and key_code <= KEY_KP_9:
+			number = key_code - KEY_KP_0
 		
 		if number >= 0 and _tutorial_panels.has(number):
 			_toggle_panel(number)

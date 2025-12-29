@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=4 uid="uid://ba71cpxy8vbng"]
 
 [ext_resource type="Script" uid="uid://b1hatdvwv0m3" path="res://-assets-/VFX/puff/puff_fog.gd" id="1_gsaac"]
-[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-adopt_demo_level/demo-level_/columns/shattered/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="2_w2q06"]
-[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-adopt_demo_level/demo-level_/columns/shattered/shattered_column_damaged_concrete_floor_rough.png" id="3_s18qp"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-adopt_demo_level/demo-level_/columns/shattered/shattered_column_damaged_concrete_floor_nor_gl.png" id="4_wcto4"]
+[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/_images/concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="2_w2q06"]
+[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/_images/concrete/shattered_column_damaged_concrete_floor_rough.png" id="3_s18qp"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/_images/concrete/shattered_column_damaged_concrete_floor_nor_gl.png" id="4_wcto4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_odwyp"]
 load_path = "res://.godot/imported/SmokePuff.png-0ac41e9468529948f3647a5a86fed728.s3tc.ctex"
