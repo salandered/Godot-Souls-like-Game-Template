@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c66xg4go6ct4v"]
+[gd_scene load_steps=19 format=3 uid="uid://c66xg4go6ct4v"]
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://ui/main_menu_group/main_menu/m_main_menu.gd" id="1_2e4m0"]
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://ui/main_menu_group/options_menu/m_options_menu.tscn" id="2_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://ui/main_menu_group/credits/credits/m_credits.tscn" id="3_nlybk"]
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
+[ext_resource type="Texture2D" uid="uid://c21h0ecvyglu" path="res://-assets-/ui_assets/images/floor.png" id="5_2sdq7"]
 [ext_resource type="PackedScene" uid="uid://djsyfeinr8lew" path="res://ui/main_menu_group/main_menu/Menu3dScene.tscn" id="5_hvsaw"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="6_2e4m0"]
 [ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://ui/main_menu_group/main_menu/m_config_name_label.gd" id="7_nt2e5"]
@@ -49,8 +50,14 @@ script = ExtResource("1_2e4m0")
 game_scene_path = "uid://m2o3tdaa66rk"
 options_packed_scene = ExtResource("2_hvsaw")
 credits_packed_scene = ExtResource("3_nlybk")
-level_1_scene_path = "uid://m2o3tdaa66rk"
+level_1_scene_path = "uid://dmkxcwge6jddy"
 level_2_scene_path = "uid://mdwtc0gt416o"
+
+[node name="Floor" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(925, 511.00006)
+scale = Vector2(3.2636716, 2.0898438)
+texture = ExtResource("5_2sdq7")
 
 [node name="Menu3DScene" parent="." instance=ExtResource("5_hvsaw")]
 unique_name_in_owner = true
@@ -58,6 +65,7 @@ cam_z_min = 46.0
 cam_z_max = 5.0
 cam_duration = 90.0
 parallax_lerp_speed = 1.0
+is_pause_menu_controller = false
 
 [node name="UISoundController" type="Node" parent="."]
 script = ExtResource("5_2e4m0")
@@ -100,7 +108,7 @@ anchor_right = 1.0
 offset_bottom = 67.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
-text = "Game Demo"
+text = "Hard Tissue Demo"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_nt2e5")
@@ -168,7 +176,7 @@ text = "Fight Arena"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.47369397, 0.5188981, 1, 1)
+theme_override_colors/font_color = Color(0.5591886, 0.5953748, 1, 1)
 theme_override_colors/font_focus_color = Color(0.36078432, 0.41568628, 1, 1)
 theme_override_colors/font_hover_color = Color(0.36078432, 0.41568628, 1, 1)
 text = "Demo Level"
@@ -234,7 +242,7 @@ offset_left = -88.0
 offset_top = -26.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "v0.0.1"
+text = "v0.0.2"
 horizontal_alignment = 2
 script = ExtResource("9_nlybk")
 

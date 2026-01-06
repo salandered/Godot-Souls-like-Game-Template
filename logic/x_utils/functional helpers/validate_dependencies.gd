@@ -3,39 +3,39 @@ class_name ValidateDependencies
 
 ## as much logic as possible move here, so all the extenders (like NodeSystem) don't have duplicated logic.
 
-const __initialised_NAME = "__initialised"
+const __validated_NAME = "__validated"
 const __hard_dependencies_NAME = "__hard_dependencies"
 const __soft_dependencies_NAME = "__soft_dependencies"
-const __hard_validate_NAME = "__hard_validate"
-const __soft_validate_NAME = "__soft_validate"
+const __hard_validation_NAME = "__hard_validation"
+const __soft_validation_NAME = "__soft_validation"
 
 
-## returns True if __initialised was set to True
+## returns True if __validated was set to True
 ## returns False if was not set or in case of any other problem
 ## NOTE: returns True if only soft validation failed
-static func validate_and_set_init_flag(for_whom: Object) -> bool:
+static func validate_and_set_flag(for_whom: Object) -> bool:
 	if not u.is_object_ok(for_whom, "for_whom"): return false
 
 	var _r: bool = false
 	var hard_validation_is_ok := _perform_hard_validation(for_whom)
 	_perform_soft_validation(for_whom)
-	_r = _set_initialised_flag(for_whom, hard_validation_is_ok)
+	_r = _set_validated_flag(for_whom, hard_validation_is_ok)
 	return _r
 
 
-static func _set_initialised_flag(for_whom: Object, hard_deps_are_ok: bool) -> bool:
+static func _set_validated_flag(for_whom: Object, hard_deps_are_ok: bool) -> bool:
 	if not u.is_object_ok(for_whom, "for_whom"): return false
 	
-	if u.safe_has_property(for_whom, __initialised_NAME):
-		for_whom.set(__initialised_NAME, hard_deps_are_ok)
+	if u.safe_has_property(for_whom, __validated_NAME):
+		for_whom.set(__validated_NAME, hard_deps_are_ok)
 		return hard_deps_are_ok
 	
-	## no __initialised_NAME flag, which should not happen
+	## no __validated_NAME flag, which should not happen
 	if hard_deps_are_ok:
-		__log_(pp.s(_pp_for_whom(for_whom), "Validation succeeded but missing flag", pp.in_q(__initialised_NAME)))
+		__log_(pp.s(_pp_for_whom(for_whom), "Validation succeeded but missing flag", pp.in_q(__validated_NAME)))
 		return false
 	else:
-		__log_(pp.s(_pp_for_whom(for_whom), "Validation failed and also missing flag", pp.in_q(__initialised_NAME)))
+		__log_(pp.s(_pp_for_whom(for_whom), "Validation failed and also missing flag", pp.in_q(__validated_NAME)))
 		return false
 
 
@@ -49,8 +49,8 @@ static func _perform_hard_validation(for_whom: Object) -> bool:
 	var hard_list_is_ok := _validate_deps_list(for_whom, _hard_list, "hard")
 
 	var _hard_valid_is_ok: bool = true
-	if u.safe_has_method(for_whom, __hard_validate_NAME):
-		var raw_result = for_whom.__hard_validate()
+	if u.safe_has_method(for_whom, __hard_validation_NAME):
+		var raw_result = for_whom.__hard_validation()
 		if raw_result and raw_result is bool:
 			_hard_valid_is_ok = raw_result
 
@@ -67,8 +67,8 @@ static func _perform_soft_validation(for_whom: Object) -> bool:
 	var soft_list_is_ok := _validate_deps_list(for_whom, _soft_list, "soft")
 
 	var _soft_valid_is_ok: bool = true
-	if u.safe_has_method(for_whom, __soft_validate_NAME):
-		var raw_result = for_whom.__soft_validate()
+	if u.safe_has_method(for_whom, __soft_validation_NAME):
+		var raw_result = for_whom.__soft_validation()
 		if raw_result and raw_result is bool:
 			_soft_valid_is_ok = raw_result
 			

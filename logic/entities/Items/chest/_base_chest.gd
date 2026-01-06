@@ -1,3 +1,6 @@
+@tool
+@icon("res://-assets-/x_icons/chest/icon_chest_3.png")
+
 @abstract
 class_name BaseChest
 extends Node3DSystem
@@ -14,7 +17,10 @@ extends Node3DSystem
 
 
 @export var item_scene: PackedScene
-
+@export var override_label_y_offset: float = 1.0:
+	set(value):
+		override_label_y_offset = value
+		if is_node_ready(): _set_label_y_offset()
 
 var item: BasePickItem
 
@@ -35,31 +41,33 @@ class AnimID:
 
 
 func _ready() -> void:
-	if item_scene:
-		var _item = item_scene.instantiate()
-		if _item is not BasePickItem:
-			__log_warn("_item is not BasePickItem")
-			item = null
-		else:
-			item = _item
-			add_child(item)
-			item.global_position = item_pivot.global_position
-			_item.set_interact_area_enable(false)
+	_set_label_y_offset()
 	
-	var valid_ok := _validation()
-	if valid_ok:
-		__validate_dependencies()
-		animation_player.animation_finished.connect(_on_animation_finished)
-		interact_area.SIG_interacted.connect(_on_my_area_interacted)
+	
+	if not Engine.is_editor_hint():
+		if item_scene:
+			var _item = item_scene.instantiate()
+			if _item is not BasePickItem:
+				__log_warn("_item is not BasePickItem")
+				item = null
+			else:
+				item = _item
+				add_child(item)
+				item.global_position = item_pivot.global_position
+				_item.set_interact_area_enable(false)
+	
+		if __perform_validation():
+			animation_player.animation_finished.connect(_on_animation_finished)
+			interact_area.SIG_interacted.connect(_on_my_area_interacted)
 
 
-func _validation() -> bool:
+func __hard_validation() -> bool:
 	var r = AnimUtils.safe_has_animation(animation_player, AnimID.open)
 	return r
 
 
 func open():
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 	__log_("open", "opening")
 	
@@ -83,6 +91,9 @@ func _on_my_area_interacted():
 	open()
 
 
+func _set_label_y_offset() -> void:
+	if interact_area:
+		interact_area.label_y_offset = override_label_y_offset
 # func _input(event: InputEvent) -> void:
 # 	if not OS.is_debug_build():
 # 		return

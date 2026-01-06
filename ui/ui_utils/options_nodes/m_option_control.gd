@@ -50,7 +50,7 @@ const OptionSectionNames: Dictionary = {
 ## Defines the section for this option variable in the config file.
 @export var section: String
 @export_group("Format")
-@export var label_suffix: String = " :"
+@export var label_suffix: String = " "
 @export_group("Properties")
 ## Defines whether the option is editable, or only visible by the user.
 @export var editable: bool = true: set = set_editable
@@ -77,6 +77,7 @@ func _ready() -> void:
 	option_name = option_name
 	property_type = property_type
 	
+	# TODO: just hard code defaults for all settings, no @export
 	# Can be lost somehow. (See default_value description)
 	# And indeed it was lost. So this tries to make a safe default automatically.
 	if default_value == null:
@@ -90,6 +91,9 @@ func _ready() -> void:
 			TYPE_VECTOR2: default_value = Vector2(1152, 648)
 			_: __log_warn("non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
 		
+		if key == "Brightness":
+			default_value = 1.0
+			
 		if default_value != null:
 			__log_warn("Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
 

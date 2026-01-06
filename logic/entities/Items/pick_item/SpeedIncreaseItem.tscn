@@ -11,15 +11,17 @@ script = ExtResource("2_hmr3n")
 material_override = ExtResource("2_nlu3s")
 
 [node name="PuffFog" parent="Visuals/RedSphere" index="0"]
-color_multiplier = Color(0, 0.4456907, 0.018069461, 1)
+color_multiplier = Color(0.14705494, 0.3438608, 0.15568678, 1)
 
 [node name="GlowLight" parent="Visuals/RedSphere" index="1"]
-light_color = Color(0.069421455, 0.40495878, 0, 1)
+light_color = Color(0.11877642, 0.35743815, 0.068236314, 1)
+shadow_opacity = 0.8
 
 [node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
-visible = false
-light_color = Color(0.12084189, 0.30312884, 0, 1)
+light_color = Color(0.1743907, 0.29634023, 0.089703545, 1)
 light_energy = 1.0
+shadow_enabled = false
+shadow_opacity = 0.8
 
 [node name="InteractArea" parent="." index="3"]
 label_text = "Permanently increases running speed"

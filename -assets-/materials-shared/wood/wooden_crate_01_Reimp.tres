@@ -1,15 +1,9 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dvtrqwgu2yogt"]
-
-[ext_resource type="Texture2D" uid="uid://d31hmdbngp1gm" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_diff_1k.jpg" id="1_opjkw"]
-[ext_resource type="Texture2D" uid="uid://b55ox7hi3cclc" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_nor_gl.png" id="2_c626h"]
-[ext_resource type="Texture2D" uid="uid://cv6kvx0r8j6fi" path="res://-assets-/GLB-items/chest health/chest_health__wooden_crate_01_metal-wooden_crate_01_rough.png" id="3_ifslv"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bmkkkveswx6gg"]
 
 [resource]
 resource_name = "wooden_crate_01"
 cull_mode = 2
-albedo_texture = ExtResource("1_opjkw")
+metallic = 1.0
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_ifslv")
-roughness_texture_channel = 4
+roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("2_c626h")

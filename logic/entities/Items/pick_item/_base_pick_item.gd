@@ -27,8 +27,9 @@ class AnimID:
 
 func _ready() -> void:
 	u.set_all_descendant_asp_3d_default_bus(self)
+	u.hide_dev_visuals(self)
 	
-	if __validate_dependencies():
+	if __perform_validation():
 		interact_area.SIG_interacted.connect(_on_my_area_interacted)
 		animation_player.animation_finished.connect(_on_animation_finished)
 
@@ -62,5 +63,5 @@ func _on_animation_finished(anim_name: String) -> void:
 			queue_free()
 
 
-func __LOG_INDENT() -> int:
+func __LOG_B() -> bool:
 	return LogToggler.ITEM.BASE_PICK

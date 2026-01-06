@@ -41,7 +41,7 @@ func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalC
 
 	self._audio_track_throttler = EventThrottler.new(0.4, 2.0, 3.0, "AudioTrackKey")
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Variant]) -> void:
@@ -72,7 +72,7 @@ func _emit_signal_based_on_track_data(audio_track_data: AudioTrackKey, anim: Ani
 
 
 func _process(delta: float) -> void:
-	if not ENABLED or __could_not_initialised():
+	if not ENABLED or not __validation_ok():
 		return
 	
 	var curr_anim := get_anim_manager().get_curr_anim()

@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/Collect_Small_Jewel_1.wav-06244131825883352b1
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
+force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false

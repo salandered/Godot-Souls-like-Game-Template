@@ -42,7 +42,7 @@ func initialise(my_weapon_: BaseWeapon, sig_container_: BaseWeaponSignalContaine
 	_overlapping_obj_throttler = EventThrottler.new(0.4, 2.0, 3.0, "OverlapObjThrottler" + em.dagger + "HurtB")
 
 	# todo: add validation: must have a CollisionShape3D
-	if __validate_dependencies():
+	if __perform_validation():
 		pass
 	else:
 		__log_warn_soft("init problems, body_entered wont be triggered, all disabled")

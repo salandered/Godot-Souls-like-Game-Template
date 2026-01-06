@@ -67,7 +67,7 @@ func _initialise_common_char() -> void:
 		var hit_boxes := get_descendants.char_hit_boxes(self)
 		for item: CharacterHitbox in hit_boxes:
 			item.initialise(_combat)
-		prints(em.pin, "initted", len(hit_boxes), "hitboxes for", pp_name())
+		__log_(em.pin, "initted", len(hit_boxes), "hitboxes for", pp_name())
 	
 
 	_for_init_movement().initialise(self)
@@ -171,7 +171,7 @@ func pp_name() -> String:
 
 ## are logs turned on. warn logs are always turned on.
 func __LOG_B() -> bool:
-	return true
+	return false
 
 ## just indent 
 func __LOG_INDENT() -> int:

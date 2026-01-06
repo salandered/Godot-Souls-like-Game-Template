@@ -50,7 +50,29 @@ static func _get_descendants_filtered(
 # region: built in nodes
 
 
-static func markers_3d(node: Node) -> Array:
+static func world_environments(node: Node) -> Array[WorldEnvironment]:
+	var r = _get_descendants_filtered(node, func(n): return n is WorldEnvironment)
+	return TypeCast.array_of_world_environment(r)
+
+
+static func fog_volumes(node: Node, visible_only: bool = false) -> Array[FogVolume]:
+	var r = _get_descendants_filtered(node,
+		func(n): \
+			return n is FogVolume \
+				and (not visible_only or n.visible == true)
+		)
+	return TypeCast.array_of_fog_volume(r)
+
+
+static func directional_lights_3d(node: Node, visible_only: bool = false) -> Array[DirectionalLight3D]:
+	var r = _get_descendants_filtered(node,
+		func(n): \
+			return n is DirectionalLight3D \
+				and (not visible_only or n.visible == true)
+		)
+	return TypeCast.array_of_directional_light_3d(r)
+
+static func markers_3d(node: Node) -> Array[Marker3D]:
 	var r = _get_descendants_filtered(node, func(n): return n is Marker3D)
 	return TypeCast.array_of_marker_3d(r)
 
@@ -166,6 +188,8 @@ static func enemy_camera_targets(node: Node) -> Array[EnemyCameraTarget]:
 static func pause_menu_controller(node: Node) -> Array[M_PauseMenuController]:
 	var r = _get_descendants_filtered(node, func(n): return n is M_PauseMenuController)
 	return TypeCast.array_of_pause_menu_controller(r)
+
+
 # 
 
 # endregion

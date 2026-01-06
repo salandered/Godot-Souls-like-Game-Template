@@ -1,4 +1,8 @@
-extends Node3DSystem
+@tool
+@icon("res://-assets-/x_icons/level/icon_level_purple.png")
+
+class_name Menu3DLevel
+extends BaseLevel
 
 @onready var camera_3d: Camera3D = %Camera3D
 
@@ -13,17 +17,40 @@ extends Node3DSystem
 @export_range(-90.0, 90.0) var camera_base_pitch: float = 10.0 # Adjust this to look up/down
 
 ## sitting skeleton
-@onready var skeleton_scene: Skeleton1607Wrapper = $"skeleton/skeleton-16-07"
-@onready var sitting_scene: SittingSceneWrapper = $skeleton/sitting2
+@onready var skeleton_scene: Skeleton1607Wrapper = %"skeleton-16-07"
+@onready var sitting_scene: SittingSceneWrapper = %sitting2
 
+
+func __hard_dependencies() -> Array[Object]:
+	return [
+		camera_3d
+	]
+
+func __soft_dependencies() -> Array[Object]:
+	return [
+		skeleton_scene,
+		sitting_scene
+	]
+
+func basic_tonemap_exposure() -> float:
+	return 1.05
+
+func tonemap_exposure_no_vol_fog_compensation() -> float:
+	return 0.3
 
 func initialise():
 	camera_3d.current = true
-	_start_camera_sway()
 	_sit_skeleton()
-	
+
+	if __perform_validation():
+		_start_camera_sway()
+
+
 func _process(delta: float) -> void:
+	if not __validation_ok():
+		return
 	_handle_parallax(delta)
+
 
 func _handle_parallax(delta: float) -> void:
 	if not camera_3d:
@@ -58,9 +85,9 @@ func _start_camera_sway() -> void:
 	# Move to Max
 	tween.tween_property(camera_3d, "position:z", cam_z_max, cam_duration)
 	# Move back to Min
-	tween.tween_property(camera_3d, "position:z", cam_z_min + 15, cam_duration)
+	tween.tween_property(camera_3d, "position:z", cam_z_min + 23, cam_duration)
 	tween.tween_property(camera_3d, "position:z", cam_z_max, cam_duration)
-	tween.tween_property(camera_3d, "position:z", cam_z_min + 15, cam_duration)
+	tween.tween_property(camera_3d, "position:z", cam_z_min + 23, cam_duration)
 
 
 func _sit_skeleton():
@@ -108,4 +135,5 @@ func __LOG_B() -> bool:
 func __LOG_INDENT() -> int:
 	return 0
 
+# endregion
 # endregion

@@ -4,18 +4,18 @@ class_name PIConfig
 
 
 # collision reparent
-const COLLISION_COLLECTION_PREFIXES = ["--col", "-- col", "-col", "- col"]
+const COLLISION_COLLECTION_PREFIXES: Array[String] = ["--col", "-- col", "-col", "- col"]
 
 
 # material reimport
 
-const REIMP_SUFFIX = "_Reimp"
+const REIMP_SUFFIX: String = "_Reimp"
 
-const BASE_MAT_PATH = "res://-assets-/materials-shared/"
+const BASE_MAT_PATH: String = "res://-assets-/materials-shared/"
 
 
 ## case insensitive
-const SUBFOLDER_RULES = {
+const SUBFOLDER_RULES: Dictionary[String, Array] = {
 	# specific
 	"mines": ["minestrim", "mine_carts", "mines"],
 	"baked": [
@@ -37,10 +37,10 @@ const SUBFOLDER_RULES = {
 	# no found means would be 'unsorted'
 }
 
-const MAT_IGNORE_LIST = ["pixpal", "-skipreimp"]
+const MAT_IGNORE_LIST: Array[String] = ["pixpal", "-skipreimp"]
 
-const ROUGH_SUFFIXES = ["_rough", "_roughness"]
+const ROUGH_SUFFIXES: Array[String] = ["_rough", "_roughness"]
 
-const DIFF_SUFFIXES = ["_diff", "_diffuse", "_albedo", "_col", "_color"]
+const DIFF_SUFFIXES: Array[String] = ["_diff", "_diffuse", "_albedo", "_col", "_color"]
 	
-const METAL_SUFFIXES = ["_metal", "_metallic"]
+const METAL_SUFFIXES: Array[String] = ["_metal", "_metallic"]

@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d2ps7t077xfk8"]
+
+[ext_resource type="Texture2D" uid="uid://bflvnh0qrq2k" path="res://-assets-/materials-shared/wood/bark_willow/bark_willow_diff_1k.jpg" id="1_fxor0"]
+
+[resource]
+resource_name = "bark_willow"
+cull_mode = 2
+albedo_texture = ExtResource("1_fxor0")
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+normal_enabled = true

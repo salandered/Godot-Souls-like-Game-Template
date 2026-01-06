@@ -88,8 +88,8 @@ func initialise(holder: BaseCharacter) -> void:
 	validate_visuals()
 
 
-	if not __validate_dependencies():
-		__log_warn_soft("not __validate_dependencies() => deactivate()")
+	if not __perform_validation():
+		__log_warn_soft("not __perform_validation() => deactivate()")
 		deactivate()
 
 

@@ -56,3 +56,7 @@ const PUSH_ITEMS_AROUND = "push_items_around"
 class OVERLAY:
 	const START = "overlay_start"
 	const END = "overlay_end"
+
+
+class SFX:
+	const HIT = "SFX_hit_weapon_ground"

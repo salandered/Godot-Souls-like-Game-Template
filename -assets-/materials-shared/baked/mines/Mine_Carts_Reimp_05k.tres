@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dpu5xo3l668xm"]
+
+[ext_resource type="Texture2D" uid="uid://dn0uxeas0msl3" path="res://-assets-/materials-shared/baked/mines/exit_2_Mine_Carts_1k_Diffuse.png" id="1_3e02n"]
+[ext_resource type="Texture2D" uid="uid://ci31twx3hcf58" path="res://-assets-/materials-shared/baked/mines/exit_2_Mine_Carts_1k_Metalness-Mine_Carts_1k_Roughness.png" id="2_ds481"]
+
+[resource]
+resource_name = "Mine_Carts"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_3e02n")
+metallic = 1.0
+metallic_texture = ExtResource("2_ds481")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_ds481")
+roughness_texture_channel = 1

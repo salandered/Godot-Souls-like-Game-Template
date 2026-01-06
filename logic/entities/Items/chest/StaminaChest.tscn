@@ -2,15 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_BaseChest.tscn" id="1_n25o4"]
 [ext_resource type="Script" uid="uid://8dsl6f16eeb1" path="res://logic/entities/Items/chest/stamina_chest.gd" id="2_yu8oe"]
-[ext_resource type="Material" uid="uid://cdskth7nhqc5n" path="res://logic/entities/Items/chest/stamina_chest_mat.tres" id="3_3xjvw"]
+[ext_resource type="Material" uid="uid://cdskth7nhqc5n" path="res://-assets-/materials-shared/wood/rough_wood/stamina_chest_mat.tres" id="3_3xjvw"]
 [ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/Items/pick_item/StaminaIncreaseItem.tscn" id="3_ypuni"]
 
 [node name="StaminaChest" instance=ExtResource("1_n25o4")]
 script = ExtResource("2_yu8oe")
 item_scene = ExtResource("3_ypuni")
+override_label_y_offset = 1.0
 
-[node name="ChestLid" parent="Visuals/LidPivot" index="0"]
+[node name="ChestLid" parent="Visuals/LidPivot" index="1"]
 material_override = ExtResource("3_3xjvw")
 
 [node name="ChestMain" parent="Visuals/ChessMain" index="1"]
 material_override = ExtResource("3_3xjvw")
+
+[node name="InteractArea" parent="." index="4"]
+label_y_offset = 1.0

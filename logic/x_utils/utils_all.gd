@@ -253,3 +253,26 @@ static func set_all_descendant_asp_3d_default_bus(for_whom: Node3D):
 	var asps := get_descendants.audio_stream_players_3D(for_whom)
 	for asp: AudioStreamPlayer3D in asps:
 		asp.bus = Constants.SFX_ASP_BASE_BUS_ID
+
+##
+
+
+static func _recursive_hide(
+		node: Node,
+		filter: Callable,
+		__log: bool = false
+	):
+	for child in node.get_children():
+		if filter.call(child) and child is Node3D:
+			if __log and child.visible:
+				prints("~~//", child.name, "is hidden")
+			child.visible = false
+		_recursive_hide(child, filter, __log)
+
+
+static func hide_dev_visuals(node: Node, __log: bool = false):
+	_recursive_hide(
+		node,
+		func(n): return n.name.begins_with("__dev") or n.name.begins_with("__test"),
+		__log
+	)

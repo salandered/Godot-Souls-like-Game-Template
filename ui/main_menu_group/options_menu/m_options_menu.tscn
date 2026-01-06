@@ -34,16 +34,16 @@ layout_mode = 2
 tab_alignment = 1
 current_tab = 0
 
-[node name="Controls" parent="MarginContainer/TabContainer" instance=ExtResource("2_3x8ag")]
+[node name="Audio" parent="MarginContainer/TabContainer" instance=ExtResource("5_43u58")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Audio" parent="MarginContainer/TabContainer" instance=ExtResource("5_43u58")]
+[node name="Video" parent="MarginContainer/TabContainer" instance=ExtResource("6_mtlev")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Video" parent="MarginContainer/TabContainer" instance=ExtResource("6_mtlev")]
+[node name="Controls" parent="MarginContainer/TabContainer" instance=ExtResource("2_3x8ag")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2

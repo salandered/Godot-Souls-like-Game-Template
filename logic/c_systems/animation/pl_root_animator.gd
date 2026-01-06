@@ -21,7 +21,7 @@ func is_player() -> bool:
 func initialise(root_track: String) -> void:
 	self._root_track = root_track
 	error_.empty_string(_root_track)
-	__validate_dependencies()
+	__perform_validation()
 
 
 func get_global_speed_scale() -> float:

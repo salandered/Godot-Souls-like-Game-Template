@@ -1,13 +1,13 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/materials-shared/_images/metal"
+const TARGET_FOLDER = "res://-assets-/materials-shared/wood/rough_wood/"
 #const TARGET_FOLDER = "res://-assets-/materials-shared/_images/"
 ## WARNING: only jpg and png supported. And use lower case
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 ## will be ignored of contains
 const IGNORE_WORDS = ["pixel", "pixpal"]
-const TARGET_SCALE_STR = "05k" # Options: "1k", "05k" etc
+const TARGET_SCALE_STR = "512" # Options: "256",  "1k", "05k" etc
 
 
 const OVERWRITE_ORIGINALS = true # true = replace originals, false = create _d1k versions
@@ -219,4 +219,8 @@ func _parse_scale_to_pixels(scale_str: String) -> int:
 		"1k": return 1024
 		"2k": return 2048
 		"05k": return 512
+		"512": return 512
+		"256": return 256
+		"128": return 128
+		"64": return 64
 		_: return -1

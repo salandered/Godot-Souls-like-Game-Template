@@ -8,10 +8,10 @@ radius = 2.0
 [node name="InteractArea" type="Area3D"]
 collision_mask = 2
 script = ExtResource("1_ekt48")
-label_y_offset = 0.0
 
 [node name="InteractLabel" type="Label3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 transparency = 0.16
 billboard = 1
 modulate = Color(0.62219584, 0.62219584, 0.62219584, 1)

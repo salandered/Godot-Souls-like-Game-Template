@@ -61,7 +61,7 @@ func initialise():
 	# Cache bone track paths
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func _create_overlay_timing(anim: AnimationData, overlay_config: OverlayConfig) -> OverlayTiming:
@@ -113,7 +113,7 @@ func get_time_left() -> float:
 
 	
 func _process_modification():
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 
 	if not curr_overlay and not prev_overlay:

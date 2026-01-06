@@ -1,11 +1,18 @@
-[gd_resource type="AudioBusLayout" load_steps=17 format=3 uid="uid://h34rd3knc6l3"]
+[gd_resource type="AudioBusLayout" load_steps=18 format=3 uid="uid://h34rd3knc6l3"]
 
-[sub_resource type="AudioEffectHardLimiter" id="AudioEffectHardLimiter_87o32"]
-resource_name = "HardLimiter"
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_nvu84"]
+resource_name = "Compressor"
+threshold = -2.0
+ratio = 1.5
+attack_us = 2000.0
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_87o32"]
+resource_name = "Limiter"
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_87o32"]
 resource_name = "Compressor"
 threshold = -0.5
+ratio = 2.0
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_87o32"]
 resource_name = "LowPassFilter"
@@ -16,7 +23,9 @@ resource_name = "Chorus"
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_q0pyh"]
 resource_name = "Compressor"
-threshold = -3.6
+threshold = -3.0
+ratio = 2.0
+attack_us = 200.0
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_87o32"]
 resource_name = "Reverb"
@@ -34,7 +43,8 @@ cutoff_hz = 1000.0
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_h4dk8"]
 resource_name = "Compressor"
 threshold = -0.5
-ratio = 3.0
+ratio = 2.0
+attack_us = 200.0
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_87o32"]
 resource_name = "Delay"
@@ -99,8 +109,10 @@ voice/4/cutoff_hz = 16000.0
 voice/4/pan = 0.0
 
 [resource]
-bus/0/effect/0/effect = SubResource("AudioEffectHardLimiter_87o32")
+bus/0/effect/0/effect = SubResource("AudioEffectCompressor_nvu84")
 bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectLimiter_87o32")
+bus/0/effect/1/enabled = true
 bus/1/name = &"menu_Music"
 bus/1/solo = false
 bus/1/mute = false

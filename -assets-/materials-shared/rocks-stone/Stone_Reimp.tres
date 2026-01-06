@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dv26mbymfgwhk"]
+
+[resource]
+resource_name = "Stone"
+cull_mode = 2
+roughness = 0.5

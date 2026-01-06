@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://wh1pc0mmrw53"]
-
-[resource]
-resource_name = "Material.005_NONE"
-cull_mode = 2
-roughness = 0.2

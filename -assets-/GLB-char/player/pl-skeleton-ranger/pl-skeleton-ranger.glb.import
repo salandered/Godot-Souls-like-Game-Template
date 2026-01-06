@@ -40,34 +40,34 @@ materials/extract_path=""
 _subresources={
 "materials": {
 "I_Fabric029_2d1K-JPG": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Fabric029_2d1K-JPG.tres",
-"use_external/path": "uid://bgykevsrd53pr"
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric029/I_Fabric029_2d1K-JPG_Reimp.tres",
+"use_external/path": "uid://ps48evx4iprl"
 },
 "I_Fabric029_2d1K-JPG.001": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Fabric029_2d1K-JPG.001.tres",
-"use_external/path": "uid://dvk2h01vqaoe2"
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric029/I_Fabric029_2d1K-JPG_Reimp.tres",
+"use_external/path": "uid://ps48evx4iprl"
 },
 "I_Leather033A_4d1K-JPG": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Leather033A_4d1K-JPG.tres",
-"use_external/path": "uid://ucaq20d1whqv"
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_Leather033/I_Leather033A_4d1K-JPG_Reimp.tres",
+"use_external/path": "uid://b3epmp7ar0m7j"
 },
 "I_Metal026_4d1K-JPG": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_Metal026_4d1K-JPG.tres",
-"use_external/path": "uid://ti0jmjn3ms05"
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/metal/I_metal_026/I_Metal026_4d1K-JPG_Reimp.tres",
+"use_external/path": "uid://bhr45qjda5agp"
 },
 "I_fabric_13-4d1K": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_fabric_13-4d1K.tres",
-"use_external/path": "uid://djr1wvdsadmsn"
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric_13/I_fabric_13-4d1K_Reimp.tres",
+"use_external/path": "uid://c07vm1se3c7kk"
 },
 "I_fabric_177-1K": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/I_fabric_177-1K.tres",
-"use_external/path": "uid://mxrexby8nwye"
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric_177/I_fabric_177-1K_Reimp.tres",
+"use_external/path": "uid://cw7kd7pvhxw1c"
 },
 "MI_Peasant": {
 "use_external/enabled": true,
@@ -85,7 +85,7 @@ _subresources={
 },
 "cracked_concrete_wall": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/concrete/cracked_concrete_wall_Reimp_mask.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/cracked_concrete_mask/cracked_concrete_wall_Reimp_mask.tres",
 "use_external/path": "uid://d0abr6rmlkowr"
 },
 "lipstick.001": {
@@ -95,7 +95,7 @@ _subresources={
 },
 "material_0.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/unsorted/material_0.001.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_unsorted/material_0.001.tres",
 "use_external/path": "uid://b24hnq4jdggra"
 },
 "skin.001": {

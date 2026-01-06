@@ -43,7 +43,7 @@ func initialise(character: BaseCharacter, active_weapon_id_list_to_set: Array[St
 
 	initialise_implementation()
 
-	if __validate_dependencies():
+	if __perform_validation():
 		__log_("initialised combat", __pp_weapons_info())
 
 

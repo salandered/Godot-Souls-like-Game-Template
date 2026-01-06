@@ -103,7 +103,7 @@ func initialise() -> void:
 	__dev_initialise()
 
 	
-	if not __validate_dependencies():
+	if not __perform_validation():
 		__log_warn_soft("well game is not ready")
 		process_mode = PROCESS_MODE_DISABLED
 
@@ -293,10 +293,10 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
-	if Input.is_action_just_pressed(RawAction.DEV_H):
-		var hit := HitData.new(10, "from god", PHEA.attack.scare_off)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
+	# if Input.is_action_just_pressed(RawAction.DEV_K):
+	# 	var hit := HitData.new(10, "from god", PHEA.attack.scare_off)
+	# 	get_combat()._last_processed_hit = hit
+	# 	self.react_on_hit(hit)
 	if Input.is_action_just_pressed(RawAction.DEV_J):
 		var hit := HitData.new(30, "from god", PHEA.attack.sword_slide)
 		get_combat()._last_processed_hit = hit
@@ -394,4 +394,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			csg.visible = _next_booleans[1]
 
 
+
 # endregion
+
+@onready var rig: RangerWrapper = %RIG
+
+func _on_secret_enemy_sig_death_raised() -> void:
+	if rig:
+		rig.super_mats()

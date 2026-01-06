@@ -14,11 +14,12 @@ const SIG_C_B := false
 # COMMON
 const DEV_B := true_b
 const COLLISION_B := false
-const FEEL_B := false
+
+
 const REACT_UTILS_B := false
 
 # CONTAINER
-const PL_STATES_CONTAINER_B := true_b
+const PL_STATES_CONTAINER_B := false
 const ANIM_CONTAINER_B := false
 const E_CONTAINER_B := false
 
@@ -30,7 +31,7 @@ const WEAPON_B := false
 
 # PLAYER PSM
 const PSM_B := false
-const SKM_B := false
+const BEHAVIOR_INTERNAL_FILTER := false
 const ACTION_ANIM_B := false
 const META_STATES_B := false
 
@@ -39,6 +40,7 @@ const LSM_BEH_B := false
 const LSM_ACTION_B := false
 
 # PL SYSTEMS
+const SKM_B := false
 const input_gathering_B := false
 const FANCY_CAM_B := false
 const AWARENESS_B := true
@@ -49,6 +51,14 @@ const PHE_CHECK_B := false
 const PHE_B := false
 const PHE_ANIM_B := false
 const E_ANIM_MANAGER_B := false
+
+
+class FEEL:
+	const ENEMY := false
+	const ENEMY_UI := false
+	const PL := false
+	const PL_UI := false
+	const BAR := false
 
 
 class ITEM:

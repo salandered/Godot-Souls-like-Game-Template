@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://d2ps7t077xfk8"]
-
-[resource]
-resource_name = "bark_willow"
-cull_mode = 2
-metallic_texture_channel = 2
-roughness_texture_channel = 1
-normal_enabled = true

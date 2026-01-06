@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/hit_3_concrete_bone_rock_fall.wav-94509cf5e6a
 
 force/8_bit=false
 force/mono=true
-force/max_rate=false
+force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=true

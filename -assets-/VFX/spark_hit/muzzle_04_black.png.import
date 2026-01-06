@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbgbyy3hqvx01"
-path.s3tc="res://.godot/imported/muzzle_04_black.png-2726b42c692b85af0856b81e501b4f3b.s3tc.ctex"
+path="res://.godot/imported/muzzle_04_black.png-2726b42c692b85af0856b81e501b4f3b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://-assets-/VFX/spark_hit/muzzle_04_black.png"
-dest_files=["res://.godot/imported/muzzle_04_black.png-2726b42c692b85af0856b81e501b4f3b.s3tc.ctex"]
+dest_files=["res://.godot/imported/muzzle_04_black.png-2726b42c692b85af0856b81e501b4f3b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

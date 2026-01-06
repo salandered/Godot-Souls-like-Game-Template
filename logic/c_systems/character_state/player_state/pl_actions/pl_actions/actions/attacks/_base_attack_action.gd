@@ -91,7 +91,12 @@ func on_enter_action(input_: InputPackage):
 	_final_extra_speed_Z = r.z
 	_final_extra_speed_X = r.x
 	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
+	on_enter_attack_implementation(input_)
 	
+	
+func on_enter_attack_implementation(input_: InputPackage):
+	pass
+
 
 func on_exit_action():
 	_combat_reset()

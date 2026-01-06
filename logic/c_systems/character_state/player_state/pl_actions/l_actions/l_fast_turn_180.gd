@@ -13,6 +13,9 @@ func initialise() -> void:
 	# APEX
 	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
 
+	blend_time.set_by_prev_action({
+		Leg.Act.sprint_to_idle: 0.4,
+	})
 
 func on_enter_action(input_: InputPackage) -> void:
 	initial_rotation = get_player().quaternion

@@ -10,7 +10,7 @@ func __hard_dependencies() -> Array[Object]:
 
 
 func _ready() -> void:
-	__validate_dependencies()
+	__perform_validation()
 
 
 ## nullable but hard checked

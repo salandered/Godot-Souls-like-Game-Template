@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://i0yd71ruqvup"]
 
 [ext_resource type="Shader" uid="uid://dva33q3vefr3d" path="res://logic/entities/Items/pick_item/health_item/HealthItem.gdshader" id="1_nrpc1"]
-[ext_resource type="Texture2D" uid="uid://cwq86lu2pf12x" path="res://-assets-/materials-shared/lu_noise/paired/T_Lu_Noise_21.png" id="2_8e6pn"]
+[ext_resource type="Texture2D" uid="uid://fof3mmu1cm6" path="res://-assets-/ui_assets/images/big/IMG_3441_cropped.JPG" id="2_0q3sm"]
 [ext_resource type="Texture2D" uid="uid://dxsl5k4jgky1h" path="res://-assets-/materials-shared/lu_noise/T_NoiseNormal_80.png" id="3_of5fj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n22u3"]
@@ -14,14 +14,14 @@ seamless = true
 [resource]
 render_priority = 0
 shader = ExtResource("1_nrpc1")
-shader_parameter/albedo_texture = ExtResource("2_8e6pn")
+shader_parameter/albedo_texture = ExtResource("2_0q3sm")
 shader_parameter/normal_texture = ExtResource("3_of5fj")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_4txb4")
 shader_parameter/normal_strength = 5.0
-shader_parameter/rim_color = Color(1, 0, 0, 1)
-shader_parameter/rim_power = 3.206000128535
+shader_parameter/rim_color = Color(0.48642266, 0, 0, 1)
+shader_parameter/rim_power = 6.54800028728
 shader_parameter/scroll_speed = Vector2(0.04, 0.04)
 shader_parameter/noise_scroll_speed = Vector2(0.1, 0.1)
 shader_parameter/displacement_amount = 0.02000000095
 shader_parameter/erosion_level = 0.3410000161975
-shader_parameter/edge_glow_intensity = 3.6670001266825
+shader_parameter/edge_glow_intensity = 1.0

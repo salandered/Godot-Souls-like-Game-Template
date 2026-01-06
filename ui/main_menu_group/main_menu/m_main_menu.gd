@@ -43,7 +43,7 @@ var sub_menu
 
 @export var confirm_new_game: bool = true
 
-@onready var menu_3d_scene: Node3D = %Menu3DScene
+@onready var menu_3d_scene: Menu3DLevel = %Menu3DScene
 
 
 var MAX_MAIN_MENU_TRACK_CUTOFF := 950
@@ -65,7 +65,7 @@ func _ready() -> void:
 	if __dev_bypass_menu_and_start_game:
 		# If a saved game exists, continue it. Otherwise, start a new one.
 		# load_game_scene()
-		_on_level_1_button_pressed()
+		_on_level_2_button_pressed()
 		return # Stop here to prevent loading the menu UI
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

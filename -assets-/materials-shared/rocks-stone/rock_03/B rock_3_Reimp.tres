@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://c68lbpe8s2h2w"]
+
+[ext_resource type="Texture2D" uid="uid://ckfor32a42irb" path="res://-assets-/materials-shared/rocks-stone/rock_03/tower-map_rock_3_diff_8k.jpg" id="1_1x1n3"]
+[ext_resource type="Texture2D" uid="uid://lx61qvim5ifk" path="res://-assets-/materials-shared/rocks-stone/rock_03/exit_2_rock_3_nor_4k_d05k.png" id="2_b7vhy"]
+[ext_resource type="Texture2D" uid="uid://h7583u5sxqd1" path="res://-assets-/materials-shared/rocks-stone/rock_03/exit_2_rock_3_rough_8k_d05k.png" id="3_qmgdl"]
+
+[resource]
+resource_name = "B rock_3"
+cull_mode = 2
+albedo_texture = ExtResource("1_1x1n3")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_qmgdl")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_b7vhy")

@@ -61,7 +61,7 @@ func initialise(combat_: BaseCombat) -> void:
 	if len(_my_coll_shapes) > 1:
 		__log_warn_soft(pp.s("len of _my_coll_shapes > 1", "Not supported! will be working only with the first one"))
 
-	if __validate_dependencies():
+	if __perform_validation():
 		# Duplicate to avoid shared resource issues
 		var original_shape = _my_coll_shapes[0].shape
 		_my_coll_shapes[0].shape = original_shape.duplicate()
@@ -77,7 +77,7 @@ func initialise(combat_: BaseCombat) -> void:
 		set_physics_process(false)
 
 
-func __hard_validate() -> bool:
+func __hard_validation() -> bool:
 	var _r := true
 	var _msg := ""
 
@@ -134,7 +134,7 @@ func _get_collision_shape() -> CollisionShape3D:
 
 ## provide capsule size mult values
 func shrink_hitbox(radius_mult: float = 0.7, height_mult: float = 0.6):
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 
 	var coll_shape := _get_collision_shape()
@@ -142,7 +142,7 @@ func shrink_hitbox(radius_mult: float = 0.7, height_mult: float = 0.6):
 
 
 func restore_hitbox():
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 
 	var coll_shape := _get_collision_shape()

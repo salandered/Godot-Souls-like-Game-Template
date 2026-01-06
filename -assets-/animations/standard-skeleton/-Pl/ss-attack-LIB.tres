@@ -1773,7 +1773,7 @@ markers = [{
 }, {
 "color": Color(1, 1, 1, 1),
 "name": &"SFX_hit_weapon_ground",
-"time": 1.5190259
+"time": 1.3666667
 }]
 tracks/0/type = "position_3d"
 tracks/0/imported = true

@@ -3,7 +3,7 @@ extends RefCounted
 class_name PIMaterialReimport
 
 
-static var force_recreation = false
+static var force_recreation := false
 
 
 static func material_reimport(node: Node):
@@ -21,38 +21,39 @@ static func _iterate_mesh_instances(node: Node):
 
 
 static func _process_materials(mesh_instance: MeshInstance3D):
-	var mesh = mesh_instance.mesh
+	var mesh := mesh_instance.mesh
 	
 	for i in range(mesh.get_surface_count()):
-		var mat = mesh.surface_get_material(i)
+		var mat := mesh.surface_get_material(i)
 		_process_single_surface(mesh, i, mat, mesh_instance.name)
 
 
-static func _process_single_surface(mesh: Mesh, idx: int, mat: Material, node_name: String):
-	if mat == null:
+static func _process_single_surface(mesh: Mesh, idx: int, _mat: Material, node_name: String):
+	if _mat == null:
 		__log_script.info_("VALIDATION", "No material on Surface %d" % idx, node_name)
 		return
 
-	if not (mat is BaseMaterial3D):
-		__log_script.info_("VALIDATION", "Not StandardMaterial3D (Surface %d)" % idx, pp.in_q(mat.resource_name))
+	if not (_mat is BaseMaterial3D):
+		__log_script.info_("VALIDATION", "Not StandardMaterial3D (Surface %d)" % idx, pp.in_q(_mat.resource_name))
 		return
 
+	var standard_mat: BaseMaterial3D = _mat
 
 	# If the material already has a file path starting with "res://", 
 	# it means the user manually assigned "Use External" in the Import Settings.
-	if mat.resource_path.begins_with("res://"):
-		__log_script.info_("SKIP↪️ 1", "User assigned external material (Use External)", mat.resource_path)
+	if standard_mat.resource_path.begins_with("res://"):
+		__log_script.info_("SKIP↪️ 1", "User assigned external material (Use External)", standard_mat.resource_path)
 		return
 	# ----------------------------------------------------
 
-	var mat_resource_name = mat.resource_name
+	var mat_resource_name = standard_mat.resource_name
 	
-	for ignore_str in PIConfig.MAT_IGNORE_LIST:
+	for ignore_str: String in PIConfig.MAT_IGNORE_LIST:
 		if ignore_str in mat_resource_name.to_lower():
 			__log_script.info_("SKIP❎ 1", "Ignored by Config", mat_resource_name)
 			return
 
-	var save_path = _get_mat_save_path(mat_resource_name)
+	var save_path := _get_mat_save_path(mat_resource_name)
 	__log_script.info_("PATH_CALC", "Path Calculated for mat", pp.in_q(mat_resource_name), ": ", pp.in_q(save_path))
 
 	
@@ -66,14 +67,19 @@ static func _process_single_surface(mesh: Mesh, idx: int, mat: Material, node_na
 			__log_script.info_("📁 1", "💼 File with this material already exists in shared-mats. It's assigned to mat", pp.in_q(mat_resource_name))
 			return
 
-	# If we are here, it's a new material
-	_fix_rough_and_metallic(mat)
+	
+	## If we are here, it's a new material
+	
+	if not standard_mat.albedo_texture:
+		__log_script.info_("- 1", "⚠️🍊⚪ No albedo texture. Will no be saved.", pp.in_q(mat_resource_name))
+	
+	_fix_rough_and_metallic(standard_mat)
 
 	# __log_script.info_("SAVE_NEW", "Saving new material...", save_path)
 	
 	# Set the path on the resource itself so Godot knows where it lives
-	mat.resource_path = save_path
-	var err = ResourceSaver.save(mat, save_path)
+	standard_mat.resource_path = save_path
+	var err := ResourceSaver.save(standard_mat, save_path)
 	
 	if err == OK:
 		__log_script.info_("SAVE_NEW", "✅️ Saved Successfully to", pp.in_q(save_path))
@@ -94,26 +100,66 @@ static func _get_mat_save_path(mat_name: String) -> String:
 			if keyword.to_lower() in lower_name:
 				folder = target_folder
 				break
-		# If we found a match, stop checking other folders
 		if folder != "unsorted":
 			break
 	
-	# Construct: res://path/folder/name_Reimp.tres
-	return "%s%s/%s%s.tres" % [PIConfig.BASE_MAT_PATH, folder, mat_name, PIConfig.REIMP_SUFFIX]
+	var base_folder_path = PIConfig.BASE_MAT_PATH + folder
+	
+	# TARGET PREFIX: "Name_Reimp"
+	# This will match "Name_Reimp.tres", "Name_Reimp_Lighter.tres", "Name_Reimp_v2.tres"
+	var search_prefix = mat_name + PIConfig.REIMP_SUFFIX
+	
+	# Try to find ANY file that starts with this prefix
+	var existing_path = _find_recursive(base_folder_path, search_prefix)
+	
+	if existing_path != "":
+		# Return the path of the variant found (e.g., .../Metal_Reimp_Lighter.tres)
+		return existing_path
+	
+	# If nothing found, return the standard default path for creation
+	return "%s/%s.tres" % [base_folder_path, search_prefix]
+
+
+static func _find_recursive(dir_path: String, search_prefix: String) -> String:
+	var dir = DirAccess.open(dir_path)
+	if not dir:
+		return ""
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+
+	while file_name != "":
+		if dir.current_is_dir():
+			if file_name != "." and file_name != "..":
+				# Recurse
+				var found = _find_recursive(dir_path + "/" + file_name, search_prefix)
+				if found != "":
+					return found
+		else:
+			# MATCHING LOGIC:
+			# Check if file starts with the prefix (e.g., "Metal_Reimp") 
+			# AND is a resource file (.tres)
+			if file_name.begins_with(search_prefix) and file_name.ends_with(".tres"):
+				return dir_path + "/" + file_name
+		
+		file_name = dir.get_next()
+	
+	return ""
+
 
 static func _fix_rough_and_metallic(mat: BaseMaterial3D):
-	var __prefix = "⛰️/🔩 4"
+	var __prefix := "⛰️/🔩 4"
 	__log_script.info_("⛰️/🔩", "Applying fixes to new material", mat.resource_name)
 
 	if mat.roughness_texture:
-		var path = mat.roughness_texture.resource_path
+		var path := mat.roughness_texture.resource_path
 		if "_rough" in path:
 			if mat.roughness_texture_channel != BaseMaterial3D.TEXTURE_CHANNEL_GRAYSCALE:
 				__log_script.info_(__prefix, "Roughness: Channel %s -> GRAYSCALE (4)" % mat.roughness_texture_channel)
 				mat.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_GRAYSCALE
 
 	if mat.metallic_texture:
-		var path = mat.metallic_texture.resource_path
+		var path := mat.metallic_texture.resource_path
 		if "_rough" in path:
 			__log_script.info_(__prefix, "✳️✳️ Roughness map in Metallic slot", mat.resource_name, "Removing Texture", path)
 			mat.metallic_texture = null
@@ -125,9 +171,9 @@ static func _fix_rough_and_metallic(mat: BaseMaterial3D):
 
 
 static func _try_find_metallic_texture(mat: BaseMaterial3D):
-	var __prefix = "🔎🔩 6"
-	var ref_path = ""
-	var suffixes_to_replace = []
+	var __prefix := "🔎🔩 6"
+	var ref_path := ""
+	var suffixes_to_replace: Array[String] = []
 	
 	# Determine where to look based on existing textures
 	if mat.roughness_texture:
@@ -143,14 +189,14 @@ static func _try_find_metallic_texture(mat: BaseMaterial3D):
 		__log_script.info_(__prefix, "No reference texture found (Roughness/Albedo). Finding metallic stopped", "✖️")
 		return
 
-	var dir = ref_path.get_base_dir()
-	var filename = ref_path.get_file()
-	var targets = PIConfig.METAL_SUFFIXES
-	var found_match = false
+	var dir := ref_path.get_base_dir()
+	var filename := ref_path.get_file()
+	var targets := PIConfig.METAL_SUFFIXES
+	var found_match := false
 	
-	for suffix_src in suffixes_to_replace:
+	for suffix_src: String in suffixes_to_replace:
 		if suffix_src in filename:
-			for suffix_dst in targets:
+			for suffix_dst: String in targets:
 				var new_name = filename.replace(suffix_src, suffix_dst)
 				var guess_path = dir + "/" + new_name
 				

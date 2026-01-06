@@ -6,9 +6,9 @@ class_name PlayerFeelings
 var FATIGUE_STATUS := "FATIGUE〰️"
 
 const FATIGUE_THRESHOLD = 8.0
-var max_stamina: float = 600.0
+var max_stamina: float = 70.0
 
-var stamina_regen_rate: float = 12.0 # per sec
+var stamina_regen_rate: float = 10.0 # per sec
 
 var _current_stamina: float
 
@@ -21,7 +21,7 @@ var IN_ZERO_DRAIN: bool = false
 
 
 var regen_delay_timer := DelayCallbackTimer.new()
-var REGEN_DELAY_TIME := 0.3
+var REGEN_DELAY_TIME := 0.5
 
 
 func initialise() -> void:
@@ -31,9 +31,9 @@ func initialise() -> void:
 		FATIGUE_STATUS: false
 	}
 
-	__initialised = true
+	__validated = true
 
-	prints("connected player_change_health")
+	__log_("connected player_change_health")
 	GlobalSignal.player_change_health.connect_(_on_player_change_health)
 	GlobalSignal.player_stamina_increase.connect_(_on_player_increase_stamina)
 
@@ -43,7 +43,7 @@ func is_player() -> bool:
 
 
 func get_max_health() -> float:
-	return 180
+	return 240
 
 func lose_stamina(amount: float):
 	_change_stamina(-amount)
@@ -61,7 +61,7 @@ func get_curr_stamina() -> float:
 
 
 func _process(delta: float) -> void:
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 		
 	if zero_drain_timer.is_in_progress():
@@ -193,16 +193,18 @@ func _on_regen_delay_ended() -> void:
 
 
 func _on_player_change_health(payload: Dictionary[String, Variant]) -> void:
-	prints("_on_player_change_health", "triggered")
-	var value = payload.get(GlobalSignal.payload_amount_field)
-	if value and (value is float or value is int):
-		_change_health(value)
+	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
+	if _r.err:
+		return
+	__log_("_on_player_change_health", "triggered with value", _r.value)
+	_change_health(_r.value)
 	
 func _on_player_increase_stamina(payload: Dictionary[String, Variant]) -> void:
-	__log_("_on_player_increase_stamina", "triggered")
-	var value = payload.get(GlobalSignal.payload_amount_field)
-	if value and (value is float or value is int):
-		max_stamina += value
+	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
+	if _r.err:
+		return
+	__log_("_on_player_increase_stamina", "triggered with value", _r.value)
+	max_stamina += _r.value
 	
 
 ##
@@ -213,8 +215,9 @@ func __log_feel_check_stamina(prefix: String, amount: float, decision: bool, ...
 	var _msg := pp.s("currStamina", _current_stamina, "requested", amount, "statuses", pp.dict_(statuses, false, true))
 	__log_(prefix, _msg, " ", pp.list_(context) + "=>", decision)
 
+
 func __LOG_B() -> bool:
-	return LogToggler.FEEL_B
+	return LogToggler.FEEL.PL
 
 
 # region: DEV

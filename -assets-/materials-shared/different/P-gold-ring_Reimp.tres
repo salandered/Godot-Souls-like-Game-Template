@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c4ejvjuf4552i"]
 
-[ext_resource type="Texture2D" uid="uid://c1wvbjx47fdmm" path="res://-assets-/materials-shared/_images/baked/jaw_Image_9.jpg" id="1_i2oc3"]
-[ext_resource type="Texture2D" uid="uid://dmcniksj12gmh" path="res://-assets-/materials-shared/_images/baked/jaw_Image_1_9.png" id="2_v2e7g"]
+[ext_resource type="Texture2D" uid="uid://c1wvbjx47fdmm" path="res://-assets-/materials-shared/different/gold_ring/jaw_Image_9.jpg" id="1_i2oc3"]
+[ext_resource type="Texture2D" uid="uid://dmcniksj12gmh" path="res://-assets-/materials-shared/different/gold_ring/jaw_Image_1_9.png" id="2_v2e7g"]
 
 [resource]
 resource_name = "P-gold-ring"

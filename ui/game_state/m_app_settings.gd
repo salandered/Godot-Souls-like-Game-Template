@@ -1,5 +1,14 @@
 class_name M_AppSettings
 extends NodeStaticLogger
+
+
+const shadow_mode_number_to_val: Dictionary[int, DirectionalLight3D.ShadowMode] = {
+	0: DirectionalLight3D.ShadowMode.SHADOW_PARALLEL_4_SPLITS,
+	1: DirectionalLight3D.ShadowMode.SHADOW_PARALLEL_2_SPLITS,
+	2: DirectionalLight3D.ShadowMode.SHADOW_ORTHOGONAL,
+	3: DirectionalLight3D.ShadowMode.SHADOW_PARALLEL_4_SPLITS,
+}
+
 ## Interface to read/write general application settings through [M_PlayerConfig].
 
 const INPUT_SECTION = &'InputSettings'
@@ -10,6 +19,9 @@ const APPLICATION_SECTION = &'ApplicationSettings'
 const CUSTOM_SECTION = &'CustomSettings'
 
 
+const BRIGHTNESS = &'Brightness'
+const VOLUMETRIC_FOG = &'VolumetricFog'
+const SHADOW_MODE = &'Shadows'
 const FPS_LIMIT = &'FpsLimit'
 const DISPLAY_MODE = &'DisplayMode'
 const SCREEN_RESOLUTION = &'ScreenResolution'
@@ -30,7 +42,8 @@ const SYSTEM_BUS_NAME_PREFIX = "_"
 ## - Handling video settings like fullscreen, resolution, and V-Sync.
 ## - Applying all saved settings when the game starts.
 
-# Input
+# region: Input
+
 static var default_action_events: Dictionary
 static var initial_bus_volumes: Array
 
@@ -95,7 +108,9 @@ static func set_inputs_from_config() -> void:
 	for action_name in action_list:
 		set_input_from_config(action_name)
 
-# Audio
+# endregion
+
+# region: Audio
 
 static func get_bus_volume(bus_index: int) -> float:
 	var initial_linear = 1.0
@@ -135,7 +150,9 @@ static func set_audio_from_config() -> void:
 	mute_audio_flag = M_PlayerConfig.get_config(AUDIO_SECTION, MUTE_SETTING, mute_audio_flag)
 	set_mute(mute_audio_flag)
 
-# Video
+# endregion
+
+# region: Video
 
 static func set_display_mode(mode: int, window: Window) -> void:
 	window.mode = mode as Window.Mode
@@ -163,6 +180,7 @@ static func _set_display_mode_from_config(window: Window) -> void:
 	set_display_mode(saved_mode, window)
 
 static func set_vsync(vsync_mode: DisplayServer.VSyncMode, window: Window = null) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, V_SYNC, vsync_mode)
 	var window_id: int = 0
 	if window:
 		window_id = window.get_window_id()
@@ -187,9 +205,11 @@ static func _set_fps_limit_from_config() -> void:
 	set_fps_limit(saved_limit)
 
 static func set_fps_limit(limit: int) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, FPS_LIMIT, limit)
 	Engine.max_fps = limit
 
 static func set_ui_scale(scale: float, window: Window) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, UI_SCALE, scale)
 	window.get_tree().root.content_scale_factor = scale
 
 static func get_ui_scale(window: Window) -> float:
@@ -206,6 +226,7 @@ static func _set_ui_scale_from_config(window: Window) -> void:
 
 
 static func set_msaa_3d(msaa_mode: Viewport.MSAA, window: Window) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, MSAA_3D, msaa_mode)
 	window.get_viewport().msaa_3d = msaa_mode
 
 static func get_msaa_3d(window: Window) -> Viewport.MSAA:
@@ -227,8 +248,64 @@ static func set_video_from_config(window: Window) -> void:
 	_set_fps_limit_from_config()
 	_set_ui_scale_from_config(window)
 	_set_msaa_from_config(window)
+	_set_brightness_from_config(window)
+	_set_volumetric_fog_from_config()
+	_set_shadow_mode_from_config()
 
-# All
+# endregion
+
+
+# region --- BRIGHTNESS / EXPOSURE ---
+
+
+static func set_brightness(value: float, window: Window) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, BRIGHTNESS, value)
+	GlobalSignal.SIG_update_video_settings_for_level.emit()
+
+
+static func get_brightness() -> float:
+	return M_PlayerConfig.get_config(VIDEO_SECTION, BRIGHTNESS, 1.0)
+
+
+static func _set_brightness_from_config(window: Window) -> void:
+	var default_val: float = 1.0
+	var saved_val: float = M_PlayerConfig.get_config(VIDEO_SECTION, BRIGHTNESS, default_val)
+	set_brightness(saved_val, window)
+
+
+# endregion
+
+##
+
+static func set_volumetric_fog(value: bool) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, VOLUMETRIC_FOG, value)
+	GlobalSignal.SIG_update_video_settings_for_level.emit()
+
+
+static func get_volumetric_fog() -> bool:
+	return M_PlayerConfig.get_config(VIDEO_SECTION, VOLUMETRIC_FOG, true)
+
+static func _set_volumetric_fog_from_config() -> void:
+	var default_val: bool = true
+	var saved_val: bool = M_PlayerConfig.get_config(VIDEO_SECTION, VOLUMETRIC_FOG, default_val)
+	set_volumetric_fog(saved_val)
+
+
+static func set_shadow_mode(value: int) -> void:
+	M_PlayerConfig.set_config(VIDEO_SECTION, SHADOW_MODE, value)
+	GlobalSignal.SIG_update_video_settings_for_level.emit()
+
+
+static func get_shadow_mode() -> int:
+	return M_PlayerConfig.get_config(VIDEO_SECTION, SHADOW_MODE, true)
+
+static func _set_shadow_mode_from_config() -> void:
+	var default_val: int = 0
+	var saved_val: int = M_PlayerConfig.get_config(VIDEO_SECTION, SHADOW_MODE, default_val)
+	set_shadow_mode(saved_val)
+
+
+# region: All
 
 static func set_from_config() -> void:
 	set_default_inputs()
@@ -247,7 +324,7 @@ static var white_list = [
 	RawAction.DEV_free_cam,
 	RawAction.DEV_fly_mode,
 	RawAction.DEV_force_quit,
-	RawAction.DEV_CAM_fov
+	# RawAction.DEV_CAM_fov
 	]
 
 # OS.is_debug_build() 

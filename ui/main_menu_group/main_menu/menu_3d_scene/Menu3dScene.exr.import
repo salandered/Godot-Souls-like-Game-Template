@@ -1,0 +1,29 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://cjntq87d8s1ws"
+path.bptc="res://.godot/imported/Menu3dScene.exr-2b2dc4efec55a2c9e592aac7d699d429.bptc.ctexarray"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://ui/main_menu_group/main_menu/menu_3d_scene/Menu3dScene.exr"
+dest_files=["res://.godot/imported/Menu3dScene.exr-2b2dc4efec55a2c9e592aac7d699d429.bptc.ctexarray"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=1

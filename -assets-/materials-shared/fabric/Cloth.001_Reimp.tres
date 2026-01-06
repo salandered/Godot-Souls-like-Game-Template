@@ -1,19 +1,10 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cmdpgvrti8xj3"]
-
-[ext_resource type="Texture2D" uid="uid://cytmq6kgindhf" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_9.png" id="1_xowss"]
-[ext_resource type="Texture2D" uid="uid://w7hmkgr71t5t" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_10.png" id="2_42y00"]
-[ext_resource type="Texture2D" uid="uid://dy8x3170ap3nf" path="res://-adopt_demo_level/demo-level_/exit_2/exit_2_Image_11.png" id="3_lh8ra"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://crki0nkxqaoph"]
 
 [resource]
 resource_name = "Cloth.001"
 cull_mode = 2
-albedo_texture = ExtResource("1_xowss")
 metallic = 1.0
-metallic_texture = ExtResource("2_42y00")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_42y00")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_lh8ra")
 ao_enabled = true
-ao_texture = ExtResource("2_42y00")

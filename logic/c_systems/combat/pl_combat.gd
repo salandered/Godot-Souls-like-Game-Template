@@ -10,7 +10,7 @@ func initialise_implementation():
 	weapon_switcher.initialise(_player, self)
 
 
-func __hard_validate() -> bool:
+func __hard_validation() -> bool:
 	var _r: bool = true
 	if len(_get_all_registered_weapons()) == 0:
 		__log_error("currently at least one weapon is expected for player", "", "")

@@ -3,11 +3,6 @@ extends RefCounted
 ## Has nothing to do with SM's actions which this project uses.
 class_name RawAction
 
-## slots
-
-const key_1 = "key_1"
-const key_2 = "key_2"
-
 
 ## loco
 # wasd
@@ -54,10 +49,6 @@ const t8 = "dev_t8"
 const DEV_speed_down = "DEV_speed_down"
 const DEV_speed_up = "DEV_speed_up"
 
-# numbers
-const DEV_8 = "DEV_8"
-const DEV_9 = "DEV_9"
-const DEV_mouse_mode_switch = "DEV_mouse_mode_switch"
 
 # F 
 const DEV_CAM_cols = "DEV_CAM_cols" # F2
@@ -74,15 +65,15 @@ const DEV_toggle_fullscreen_2 = "DEV_toggle_fullscreen_2"
 const DEV_KP1 = "DEV_KP1"
 const DEV_KP2 = "DEV_KP2"
 const DEV_KP3 = "DEV_KP3"
-const DEV_toggle_nest = "DEV_toggle_nest"
+const DEV_KP4 = "DEV_KP4" # ex toggle_nest
 const DEV_KP7 = "DEV_KP7"
 const DEV_CAM_fov = "DEV_CAM_fov"
 const DEV_CAM_cycle = "DEV_CAM_cycle"
 const DEV_CAM_cycle_prev = "DEV_CAM_cycle_prev"
+const DEV_mouse_mode_switch = "DEV_mouse_mode_switch"
 
 
 # usual keys temporarily as dev
-const DEV_H = "DEV_H"
 const DEV_J = "DEV_J"
 const DEV_K = "DEV_K"
 const DEV_L = "DEV_L"

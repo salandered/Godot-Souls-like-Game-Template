@@ -24,7 +24,7 @@ func initialise(assigned_parent: Node3D) -> void:
 	#ui_marker_visual.visible = false
 	
 	dev_initialise()
-	__validate_dependencies()
+	__perform_validation()
 	
 
 # func _process(delta: float) -> void:

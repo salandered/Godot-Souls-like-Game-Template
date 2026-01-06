@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://logic/entities/Locations/_dev/simple_target/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="1_vud1n"]
-[ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://-assets-/materials-shared/rocks-stone/lichen_rock_Reimp.tres" id="2_woau2"]
-[ext_resource type="Texture2D" uid="uid://s2jxmgd6x4y2" path="res://-assets-/materials-shared/_images/stone-rock/tree_group_lichen_rock_diff_1k.jpg" id="3_tkgjx"]
-[ext_resource type="Texture2D" uid="uid://b6g6w2rtu7ty3" path="res://-assets-/materials-shared/_images/stone-rock/tree_group_lichen_rock_nor_gl.png" id="4_wnrsi"]
-[ext_resource type="Texture2D" uid="uid://b8mx4athk20rv" path="res://-assets-/materials-shared/_images/stone-rock/tree_group_lichen_rock_rough.png" id="5_ramhp"]
+[ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres" id="2_woau2"]
+[ext_resource type="Texture2D" uid="uid://s2jxmgd6x4y2" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/tree_group_lichen_rock_diff_1k.jpg" id="3_tkgjx"]
+[ext_resource type="Texture2D" uid="uid://b6g6w2rtu7ty3" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/tree_group_lichen_rock_nor_gl.png" id="4_wnrsi"]
+[ext_resource type="Texture2D" uid="uid://b8mx4athk20rv" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/tree_group_lichen_rock_rough.png" id="5_ramhp"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hiuge"]
 data = PackedVector3Array(-0.209, -1.3, 0.1355, -0.209, -1.3, -0.1355, -0.209, 1.3, -0.1355, 0.209, -1.3, -0.1355, -0.209, -1.3, -0.1355, -0.209, -1.3, 0.1355, -0.209, 1.3, -0.1355, -0.209, -1.3, -0.1355, 0.209, -1.3, -0.1355, -0.209, 1.3, -0.1355, -0.209, 1.3, 0.1355, -0.209, -1.3, 0.1355, -0.209, -1.3, 0.1355, -0.209, 1.3, 0.1355, 0.209, 1.3, 0.1355, 0.209, 1.3, 0.1355, -0.209, 1.3, 0.1355, -0.209, 1.3, -0.1355, -0.209, -1.3, 0.1355, 0.209, -1.3, 0.1355, 0.209, -1.3, -0.1355, 0.209, 1.3, 0.1355, 0.209, -1.3, 0.1355, -0.209, -1.3, 0.1355, 0.209, -1.3, -0.1355, 0.209, -1.3, 0.1355, 0.209, 1.3, 0.1355, 0.209, -1.3, -0.1355, 0.209, 1.3, -0.1355, -0.209, 1.3, -0.1355, -0.209, 1.3, -0.1355, 0.209, 1.3, -0.1355, 0.209, 1.3, 0.1355, 0.209, 1.3, 0.1355, 0.209, 1.3, -0.1355, 0.209, -1.3, -0.1355)
@@ -19,6 +19,7 @@ roughness_texture = ExtResource("5_ramhp")
 roughness_texture_channel = 4
 normal_enabled = true
 normal_texture = ExtResource("4_wnrsi")
+uv1_scale = Vector3(0.4, 0.4, 0.4)
 uv1_triplanar = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tkgjx"]

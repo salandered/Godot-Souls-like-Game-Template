@@ -24,6 +24,10 @@ const BUTTON_NAME_GROUP_STRING: String = "%s:%d"
 ##    This script acts as an interface and does not write to files directly.
 
 
+const INPUT_BUTTON_TYPE := "InputButton"
+const INPUT_BUTTON_FONT_SIZE := 28
+
+
 @export var vertical: bool = true:
 	set(value):
 		vertical = value
@@ -216,9 +220,10 @@ func _add_new_button(content: Variant, container: Control, disabled: bool = fals
 	else:
 		new_button.size_flags_vertical = SIZE_EXPAND_FILL
 		
-	new_button.add_theme_font_size_override("font_size", 28)
+	new_button.add_theme_font_size_override("font_size", INPUT_BUTTON_FONT_SIZE)
 	#new_button.set_size( Vector2(30,10))
-	new_button.theme_type_variation = "InputButton"
+
+	new_button.theme_type_variation = INPUT_BUTTON_TYPE
 	new_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	new_button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	new_button.expand_icon = expand_icon

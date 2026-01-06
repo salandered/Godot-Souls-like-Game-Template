@@ -6,7 +6,7 @@ var _player: Princess
 var _combat: PlayerCombat
 
 # hard coded
-var weapon_cycle := Cycler.new([WeaponID.smith_sword, WeaponID.small_pinga_blade])
+var weapon_cycle := Cycler.new([WeaponID.smith_sword, WeaponID.small_pinga_blade], 0)
 
 
 var can_switch: bool = true
@@ -21,7 +21,6 @@ var speed_scale := 1.8
 func initialise(player_: Princess, combat_: PlayerCombat):
 	self._player = player_
 	self._combat = combat_
-	weapon_cycle.get_next()
 
 
 func switch_weapon() -> void:

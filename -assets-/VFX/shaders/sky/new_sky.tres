@@ -1,76 +1,70 @@
 [gd_resource type="Sky" load_steps=5 format=3 uid="uid://bjxpm7vkr1f54"]
 
-[sub_resource type="Shader" id="Shader_dekl1"]
+[sub_resource type="Shader" id="Shader_p2dh0"]
 code = "shader_type sky;
 
 uniform sampler2D clouds_sampler : filter_linear_mipmap;
-uniform vec3 top_color : source_color = vec3(1.0);
-uniform vec3 bottom_color : source_color = vec3(1.0);
+uniform vec3 top_color : source_color = vec3(0.2, 0.4, 0.8);
+uniform vec3 bottom_color : source_color = vec3(0.6, 0.8, 1.0);
+uniform vec3 sun_scatter : source_color = vec3(1.0, 0.6, 0.3);
+
 const float sun_radius = 0.08;
-uniform vec3 sun_scatter : source_color = vec3(1.0);
-uniform float star_stength : hint_range(0.0, 5.0, 0.1) = 0.0;
 
-// Voronoi method credit:
-// The MIT License
-// Copyright © 2013 Inigo Quilez
-// https://www.shadertoy.com/view/ldl3Dl
+// --- PARAMETERS ---
+uniform float star_strength : hint_range(0.0, 5.0, 0.1) = 0.0;
+uniform float star_density : hint_range(0.001, 0.02, 0.001) = 0.002; 
+uniform float cloud_speed : hint_range(0.0, 0.1, 0.001) = 0.005;
 
-vec3 hash( vec3 x ){
-	x = vec3( dot(x,vec3(127.1,311.7, 74.7)),
-			  dot(x,vec3(269.5,183.3,246.1)),
-			  dot(x,vec3(113.5,271.9,124.6)));
-	return fract(sin(x)*43758.5453123);
-}
+// NEW: Controls how much of the sky is covered by clouds.
+// 0.3 = Very dense/overcast
+// 0.8 = Very few clouds (Sunny)
+uniform float cloud_coverage : hint_range(0.0, 1.0, 0.01) = 0.75; 
+// ------------------
 
-vec3 voronoi( in vec3 x ){
-	vec3 p = floor( x );
-	vec3 f = fract( x );
-	
-	float id = 0.0;
-	vec2 res = vec2( 100.0 );
-	for( int k=-1; k<=1; k++ )
-	for( int j=-1; j<=1; j++ )
-	for( int i=-1; i<=1; i++ ) {
-		vec3 b = vec3( float(i), float(j), float(k) );
-		vec3 r = vec3( b ) - f + hash( p + b );
-		float d = dot( r, r );
-		if( d < res.x ) {
-			id = dot( p+b, vec3(1.0,57.0,113.0 ) );
-			res = vec2( d, res.x );
-		} else if( d < res.y ) {
-			res.y = d;
-		}
-    }
-    return vec3( sqrt( res ), abs(id) );
+float random(vec2 uv) {
+	return fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
 
 void sky() {
-	float clamped_light_y = clamp(LIGHT0_DIRECTION.y, 0.0, 1.0);
 	vec3 sky_gradient = mix(bottom_color.rgb, top_color.rgb, clamp(EYEDIR.y, 0.0, 1.0));
+	
 	float sun_position = distance(EYEDIR.xyz, LIGHT0_DIRECTION);
 	float sun_mask_edge = smoothstep(sun_radius, sun_radius * 0.9, sun_position) * 0.2;
 	float sun_mask = smoothstep(sun_radius * 0.7, sun_radius * 0.65, sun_position) * 0.8;
-	float sun_color = (sun_mask_edge + sun_mask) * LIGHT0_ENERGY;
-	float horizon_mask = abs(EYEDIR.y * 1.0);
-	vec3 sunset_color = sun_scatter * (1.0 - horizon_mask);
-	COLOR = sky_gradient + sunset_color + (sun_color * clamp(EYEDIR.y * 4.0, 0.0, 1.0));
-	// Stars
-	if(star_stength > 0.0){
-		vec2 stars = voronoi(EYEDIR * 25.0).xz;
-		COLOR.rgb += smoothstep(0.025 + ((1.0 + sin(TIME + stars.y)) / 2.0) * 0.05, 0.0, stars.x) * star_stength;
-	}
-	// Clouds
-	vec2 cloud_uv = EYEDIR.xz / EYEDIR.y;
-	float cloud_mask = texture(clouds_sampler, cloud_uv * 0.05 + TIME * 0.001).x;
-	cloud_mask *= step(SKY_COORDS.y, 0.5);
+	float sun_intensity = (sun_mask_edge + sun_mask) * LIGHT0_ENERGY;
+	
+	float horizon_mask = 1.0 - abs(EYEDIR.y);
+	vec3 sunset_color = sun_scatter * pow(horizon_mask, 5.0);
+	
+	vec3 final_color = sky_gradient + sunset_color; // + (sun_intensity * vec3(1.0));
 
-	COLOR.rgb = mix(
-		COLOR.rgb,
-		vec3(1.0),
-		smoothstep(0.75, 0.85, cloud_mask)
-	);
-}
-"
+	// --- STARS ---
+	if(star_strength > 0.0 && EYEDIR.y > 0.0) {
+		vec2 star_uv = vec2(atan(EYEDIR.z, EYEDIR.x), asin(EYEDIR.y));
+		float noise_val = random(floor(star_uv * 400.0));
+		
+		float star_cutoff = 1.0 - star_density;
+		float star_visibility = step(star_cutoff, noise_val); 
+		
+		float twinkle = sin(TIME * 2.0 + noise_val * 10.0);
+		final_color += vec3(star_visibility * star_strength * (0.85 + 0.15 * twinkle));
+	}
+
+	// --- CLOUDS ---
+	if (EYEDIR.y > 0.0) {
+		vec2 cloud_uv = EYEDIR.xz / (EYEDIR.y + 0.1);
+		float cloud_val = texture(clouds_sampler, cloud_uv * 0.1 + TIME * cloud_speed).r;
+		
+		// USE THE NEW PARAMETER HERE
+		// We smoothstep from \"coverage\" to \"coverage + 0.1\" for a soft edge.
+		float cloud_alpha = smoothstep(cloud_coverage, cloud_coverage + 0.1, cloud_val);
+		
+		float horizon_fade = smoothstep(0.0, 0.2, EYEDIR.y); 
+		final_color = mix(final_color, vec3(1.0), cloud_alpha * horizon_fade);
+	}
+
+	COLOR = final_color;
+}"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nsfb1"]
 
@@ -79,12 +73,15 @@ noise = SubResource("FastNoiseLite_nsfb1")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q54nx"]
-shader = SubResource("Shader_dekl1")
+shader = SubResource("Shader_p2dh0")
 shader_parameter/clouds_sampler = SubResource("NoiseTexture2D_n4a6e")
 shader_parameter/top_color = Color(0.37711102, 0.20843562, 0.47284538, 1)
 shader_parameter/bottom_color = Color(0.022194194, 0, 0.17414433, 1)
 shader_parameter/sun_scatter = Color(0.3529412, 0.58431375, 0.6509804, 1)
-shader_parameter/star_stength = 5.0
+shader_parameter/star_strength = 0.60000000894072
+shader_parameter/star_density = 0.0010000000475
+shader_parameter/cloud_speed = 0.0010000000475
+shader_parameter/cloud_coverage = 0.66999998502416
 
 [resource]
 sky_material = SubResource("ShaderMaterial_q54nx")

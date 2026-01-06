@@ -6,14 +6,14 @@
 [ext_resource type="Script" uid="uid://dcvvfybefeuwd" path="res://logic/c_systems/feelings/phe_feelings.gd" id="3_yfa0f"]
 [ext_resource type="Script" uid="uid://com5hws210fhf" path="res://logic/c_systems/unsorted/phe_other/visual_offset.gd" id="4_eesbj"]
 [ext_resource type="Script" uid="uid://w18g1qw71l62" path="res://logic/c_systems/sk_modifiers/overlay_modifier.gd" id="5_yfhfq"]
-[ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold-4d1K.tres" id="7_2upk4"]
+[ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="7_2upk4"]
 [ext_resource type="Script" uid="uid://c4od17y7o5d67" path="res://logic/c_systems/visuals/e_visuals.gd" id="7_c7ctj"]
-[ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/I_old_bronze-4d1K.tres" id="8_35x0d"]
+[ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres" id="8_35x0d"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="9_0mldj"]
-[ext_resource type="Material" uid="uid://d1q5vhtpj00ri" path="res://-assets-/materials-shared/concrete/I_Concrete005_4d1K-JPG.tres" id="10_h05d5"]
-[ext_resource type="Material" uid="uid://ijjpo7bw8mgt" path="res://-assets-/materials-shared/concrete/concrete_panels_replacer.tres" id="11_oyx2w"]
+[ext_resource type="Material" uid="uid://d1q5vhtpj00ri" path="res://-assets-/materials-shared/concrete/I_concrete005/I_Concrete005_4d1K-JPG.tres" id="10_h05d5"]
+[ext_resource type="Material" uid="uid://ijjpo7bw8mgt" path="res://-assets-/materials-shared/concrete/I_concrete005/I_Concrete005_darker_05k.tres" id="11_oyx2w"]
 [ext_resource type="Script" uid="uid://bayd06cgciqld" path="res://logic/c_systems/skeleton/e_bones.gd" id="12_67ucr"]
-[ext_resource type="Texture2D" uid="uid://coqvd8l6k4088" path="res://-assets-/ui_assets/themes/buttons/emFQZmfAoG.png" id="13_cty4c"]
+[ext_resource type="Texture2D" uid="uid://coqvd8l6k4088" path="res://-assets-/ui_assets/images/emFQZmfAoG.png" id="13_cty4c"]
 [ext_resource type="PackedScene" uid="uid://cngt87lk8mdi" path="res://logic/c_systems/hurt_hit_box/hit_box/ph_hitbox.tscn" id="14_qs7xi"]
 [ext_resource type="PackedScene" uid="uid://unjjnf0oxr50" path="res://logic/c_systems/weapon/weapons/AuraWeapon.tscn" id="15_4485l"]
 [ext_resource type="AudioStream" uid="uid://b8yu5uqttajay" path="res://-assets-/SFX/audio_streams/footsteps/concrete/fs_scrape_concr.tres" id="15_mrfjr"]
@@ -1603,12 +1603,11 @@ tint_progress = Color(0.25560826, 0.12948515, 0.12948515, 1)
 
 [node name="GhostBar" type="TextureProgressBar" parent="UI/UIFeelings/Bars"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.5176471)
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 value = 77.0
 texture_progress = ExtResource("101_sg6yy")
-tint_progress = Color(0, 1, 0.8761432, 1)
+tint_progress = Color(0.17922069, 1.289845, 0, 0.8235294)
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/UIFeelings/Bars"]
 unique_name_in_owner = true

@@ -99,7 +99,7 @@ func pp_name() -> String:
 	return u.construct_obj_pp_name(self)
 
 func __LOG_B() -> bool:
-	return true
+	return false
 
 func __LOG_INDENT() -> int:
 	return LogToggler.DEFAULT_REF_C_CONT_INDENT

@@ -68,7 +68,7 @@ func _init(
 	self.asp = self.asp_config.set_up_asp(self.asp)
 
 	var validate_ok := _hard_validate_implementation()
-	var deps_ok := __validate_dependencies()
+	var deps_ok := __perform_validation()
 
 	if validate_ok and deps_ok and not error_.null_signal(self.signal_data):
 		__log_("init ok", "connecting signal", "stream", asp.stream)

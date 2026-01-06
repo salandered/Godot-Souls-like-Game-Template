@@ -129,7 +129,7 @@ func apply_local_velocity_as_global(local_velocity: Vector3):
 # region
 
 func __LOG_B() -> bool:
-	return true
+	return false
 
 func __LOG_INDENT() -> int:
 	return 0

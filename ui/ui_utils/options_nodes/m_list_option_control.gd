@@ -96,7 +96,7 @@ func _set_value(value: Variant, on_init: bool = false) -> Variant:
 	__log_(name, "Counts", "UI Button Items", ui_count, "Data List Items", data_count)
 	
 	if ui_count != data_count:
-		__log_error("ui_count != data_count", "_set_value", "", "UI Count vs Data Count", ui_count, data_count)
+		__log_error("ui_count != data_count", "_set_value", "", "UI Count vs Data Count", ui_count, data_count, name)
 
 	# Check the value we are about to set
 	if value not in option_values:
@@ -108,7 +108,7 @@ func _set_value(value: Variant, on_init: bool = false) -> Variant:
 	__log_(name, "Final calculated index", final_index)
 	
 	if final_index >= ui_count:
-		__log_error("final_index >= ui_count", "_set_value", "", "Index vs Max UI Index:", final_index, ui_count - 1)
+		__log_error("final_index >= ui_count", "_set_value", "", "Index vs Max UI Index:", final_index, ui_count - 1, name)
 
 	return super._set_value(final_index)
 	

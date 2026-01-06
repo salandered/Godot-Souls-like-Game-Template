@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dia2sl1ocslqq"]
-
-[resource]
-resource_name = "Dirt.057"
-cull_mode = 2
-albedo_color = Color(0.33998945, 0.30152208, 0.18611772, 1)
-roughness = 0.5

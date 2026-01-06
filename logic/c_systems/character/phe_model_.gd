@@ -110,7 +110,7 @@ func initialise() -> void:
 	if ui_feelings:
 		ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
-	if not __validate_dependencies():
+	if not __perform_validation():
 		__log_warn_soft("PHCharacter failed initalisation")
 		process_mode = PROCESS_MODE_DISABLED
 	else:
@@ -226,7 +226,7 @@ func _process(delta: float) -> void:
 
 
 func react_on_hit(hit_data: HitData) -> void:
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 	var _curr_state := get_current_state()
 	if not _curr_state:
@@ -378,22 +378,22 @@ func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
 	var bone_mask := BoneMask.get_upper_body()
-	if event.is_action_pressed(RawAction.DEV_8):
-		animator_manager.set_overlay_anim(PHEA.react.react_from_R,
-		OverlayConfig.new(
-			OverlayConfig.Weight.new(0.5),
-			BlendConfig.new(0.12, 0.18),
-			1.0,
-			bone_mask
-			))
-	if event.is_action_pressed(RawAction.DEV_9):
-		animator_manager.set_overlay_anim(PHEA.react.react_from_R,
-		OverlayConfig.new(
-			OverlayConfig.Weight.new(1.0),
-			BlendConfig.new(0.2, 0.2),
-			1.0,
-			bone_mask
-		))
+	# if event.is_action_pressed(RawAction.DEV_8):
+	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
+	# 	OverlayConfig.new(
+	# 		OverlayConfig.Weight.new(0.5),
+	# 		BlendConfig.new(0.12, 0.18),
+	# 		1.0,
+	# 		bone_mask
+	# 		))
+	# if event.is_action_pressed(RawAction.DEV_9):
+	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
+	# 	OverlayConfig.new(
+	# 		OverlayConfig.Weight.new(1.0),
+	# 		BlendConfig.new(0.2, 0.2),
+	# 		1.0,
+	# 		bone_mask
+	# 	))
 
 
 # Drag your AirWave.tscn here in the Inspector

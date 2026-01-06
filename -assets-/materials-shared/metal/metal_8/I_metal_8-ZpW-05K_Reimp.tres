@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://duynryxm8g4wc"]
+
+[ext_resource type="Texture2D" uid="uid://ccbmgflf4kfet" path="res://-assets-/materials-shared/metal/metal_8/tower-map_metal_8_basecolor.png" id="1_uvje6"]
+[ext_resource type="Texture2D" uid="uid://4gq543injky3" path="res://-assets-/materials-shared/metal/metal_8/tower-map_metal_8_metallic.png" id="2_snl8f"]
+[ext_resource type="Texture2D" uid="uid://dw630bqekfpdc" path="res://-assets-/materials-shared/metal/metal_8/tower-map_metal_8_normal.png" id="3_ftjbj"]
+
+[resource]
+resource_name = "I_metal_8-ZpW-1K"
+cull_mode = 2
+albedo_texture = ExtResource("1_uvje6")
+metallic = 1.0
+metallic_texture = ExtResource("2_snl8f")
+metallic_texture_channel = 4
+roughness = 0.7697096
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 0.49999997
+normal_texture = ExtResource("3_ftjbj")

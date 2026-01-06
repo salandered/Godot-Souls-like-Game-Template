@@ -212,7 +212,7 @@ func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer)
 
 	overlay_modifier.initialise()
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func _reset_root_motion() -> void:

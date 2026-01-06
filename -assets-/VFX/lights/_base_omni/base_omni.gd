@@ -7,9 +7,18 @@ extends Node3DSystem
 
 
 # region Exports
-
 @export_group("Light Settings")
-@export var attenuation: float = 2.5:
+@export var radius: float = 3.6:
+	set(value):
+		radius = value
+		if is_node_ready(): _apply_light_settings()
+
+@export var energy: float = 3.8:
+	set(value):
+		energy = value
+		if is_node_ready(): _apply_light_settings()
+
+@export var attenuation: float = 1.5:
 	set(value):
 		attenuation = value
 		if is_node_ready(): _apply_light_settings()
@@ -22,6 +31,11 @@ extends Node3DSystem
 @export var cast_shadows: bool = true:
 	set(value):
 		cast_shadows = value
+		if is_node_ready(): _apply_light_settings()
+
+@export var bake_mode: Light3D.BakeMode = Light3D.BAKE_DYNAMIC:
+	set(value):
+		bake_mode = value
 		if is_node_ready(): _apply_light_settings()
 
 @export_group("Effects")
@@ -64,11 +78,14 @@ func __soft_dependencies() -> Array[Object]:
 # endregion
 
 func _ready() -> void:
-	if not __validate_dependencies():
+	if not __perform_validation():
 		return
 		
 	_apply_all_properties()
 	_ready_implementation()
+
+	if not Engine.is_editor_hint():
+		u.hide_dev_visuals(self)
 
 
 @abstract func _ready_implementation()
@@ -84,10 +101,13 @@ func _apply_all_properties() -> void:
 
 func _apply_light_settings() -> void:
 	if omni_light_3d:
+		omni_light_3d.omni_range = radius
+		omni_light_3d.light_energy = energy
 		omni_light_3d.light_color = color
 		omni_light_3d.omni_attenuation = attenuation
 		omni_light_3d.light_volumetric_fog_energy = volumetric_fog_energy
 		omni_light_3d.shadow_enabled = cast_shadows
+		omni_light_3d.light_bake_mode = bake_mode
 
 
 func _apply_mist() -> void:

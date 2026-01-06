@@ -60,8 +60,8 @@ func initialise(
 	_soft_validate_on_signal_asps()
 
 
-	if not __validate_dependencies():
-		__log_warn_soft("__validate_dependencies failed, sytem won't work", "_on_signal_asps = []")
+	if not __perform_validation():
+		__log_warn_soft("__perform_validation failed, sytem won't work", "_on_signal_asps = []")
 		_on_signal_asps = []
 	else:
 		__log_("", "initialised")

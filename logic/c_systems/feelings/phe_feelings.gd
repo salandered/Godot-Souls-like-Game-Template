@@ -28,4 +28,4 @@ func is_lower_just_before_switch_phase() -> bool:
 
 
 func __LOG_B() -> bool:
-	return LogToggler.FEEL_B
+	return LogToggler.FEEL.ENEMY

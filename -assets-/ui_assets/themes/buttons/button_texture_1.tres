@@ -1,11 +1,9 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://d5grt08wa8so"]
 
-[ext_resource type="Texture2D" uid="uid://ctq82ehf3hxqt" path="res://ui/main_menu_group/main_menu/tuXPs3MNSi.png" id="1_wohlu"]
+[ext_resource type="Texture2D" uid="uid://b5hf4ahal11h8" path="res://-assets-/ui_assets/images/image_2026-01-04_00-24-46.png" id="1_mqpib"]
 
 [resource]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-texture = ExtResource("1_wohlu")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-region_rect = Rect2(33, 78, 705, 400)
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource("1_mqpib")
+region_rect = Rect2(296.3721, 197.66632, 857.4358, 239.69229)

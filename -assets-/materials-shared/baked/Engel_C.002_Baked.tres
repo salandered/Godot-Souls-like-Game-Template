@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cl8xvgflj5omt"]
-
-[ext_resource type="Texture2D" uid="uid://okl0ndmkad3e" path="res://-assets-/materials-shared/_images/baked/lincoln_Engel_C.png" id="1_7571w"]
-
-[resource]
-resource_name = "Engel_C.002_Baked"
-cull_mode = 2
-albedo_texture = ExtResource("1_7571w")
-roughness = 0.5

@@ -53,7 +53,7 @@ func _ready() -> void:
 		visible = false
 		set_process_unhandled_input(false)
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func set_all_properties():
@@ -64,7 +64,7 @@ func set_all_properties():
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 
 
@@ -127,3 +127,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			SIG_interacted.emit()
 			# stops the event here so it doesn't trigger the floor/item below
 			get_viewport().set_input_as_handled()
+
+
+func __LOG_B() -> bool:
+	return false

@@ -78,7 +78,7 @@ func initialise(native_animator_: AnimationPlayer) -> void:
 
 	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT])
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):
@@ -102,7 +102,7 @@ func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offs
 
 
 func _process_modification():
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 		
 	# calculate custom_delta between now and the last call.

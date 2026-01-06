@@ -37,12 +37,12 @@ func initialise(player: Princess) -> void:
 
 	var _idle_action := container.l_action_by_name(Leg.Act.idle)
 	var _double_st_action := container.pl_action_by_name(PS.Act.double)
-	var _run_state := container.state_by_name(PS.run)
-	var _run_beh := container.l_behavior_by_name(Leg.Beh.run)
+	var _first_state := container.state_by_name(PS.idle)
+	var _first_beh := container.l_behavior_by_name(Leg.Beh.idle)
 	
 	# global level
-	current_state = _run_state
-	prev_state_name = _run_state.state_name
+	current_state = _first_state
+	prev_state_name = _first_state.state_name
 	_current_action = _idle_action
 	_prev_action = _idle_action
 
@@ -50,7 +50,7 @@ func initialise(player: Princess) -> void:
 	current_state.curr_state_action = _double_st_action
 
 	# legs sm level
-	legs_sm.current_behavior = _run_beh
+	legs_sm.current_behavior = _first_beh
 	legs_sm._current_action = _idle_action
 	legs_sm._prev_action = _idle_action
 

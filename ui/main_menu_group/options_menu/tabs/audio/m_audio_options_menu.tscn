@@ -21,7 +21,7 @@ script = ExtResource("2_13yae")
 audio_control_scene = ExtResource("2_bgi0i")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -52,6 +52,7 @@ section = "AudioSettings"
 
 [node name="AudioInputOptionControl" parent="VBoxContainer" instance=ExtResource("3_bgi0i")]
 layout_mode = 2
+label_suffix = " :"
 
 [node name="HSeparator2" parent="VBoxContainer" instance=ExtResource("4_7lrho")]
 layout_mode = 2

@@ -37,6 +37,10 @@ func initialise_implementation() -> void:
 	extra_root_speed_Z.set_specific(-0.0)
 
 
+func on_enter_attack_implementation(input_: InputPackage):
+	hit_sig_emitted = false
+
+
 ## TODO: dont use custom update
 func update(input_: InputPackage, delta: float):
 	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
@@ -52,7 +56,23 @@ func update(input_: InputPackage, delta: float):
 
 	_combat_update_is_attacking(false)
 
+	if passed_marker(MarkerName.SFX.HIT):
+		if not hit_sig_emitted:
+			hit_sig_emitted = true
+			var sig_data := get_signal_from_active_weapon(SignalID.sfx_hit_weapon)
+			u.safe_emit(sig_data, {})
 
+
+var hit_sig_emitted: bool = false
+
+func get_signal_from_active_weapon(sig_id: String) -> SignalData:
+	var weapons := combat.get_all_active_weapons()
+	if len(weapons) > 0 and weapons[0]:
+		var sig_container := weapons[0].get_signal_container()
+		if sig_container:
+			var sig_data := sig_container.get_by_sig_id(sig_id)
+			return sig_data
+	return null
 # DEV
 
 # var _blend_time: float = 0.2
@@ -68,4 +88,5 @@ func update(input_: InputPackage, delta: float):
 
 # 	start_time_offset.set_by_prev_action({
 # 		PS.Act.sword_slash_2: _start_time_offset,
+# 	})
 # 	})

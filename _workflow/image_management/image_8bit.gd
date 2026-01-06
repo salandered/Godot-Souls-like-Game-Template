@@ -1,13 +1,13 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/materials-shared/_images/wood"
+const TARGET_FOLDER = "res://-assets-/ui_assets/loader_backgrounds/"
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 const IGNORE_WORDS = ["pixel", "pixpal"]
 
 ## If true, actually performs the conversion. 
 ## If false, just logs what it WOULD do.
-const PERFORM_CONVERSION = true
+const PERFORM_CONVERSION = false
 
 var non_8_count: int = 0
 var already_8_count: int = 0
@@ -40,26 +40,36 @@ func _scan_and_process():
 
 func _analyze_file(folder: String, file_name: String):
 	# 1. Filter extensions and ignore words
-	var ext = file_name.get_extension().to_lower()
-	if not ext in IMAGE_EXTENSIONS: return
+	var ext: String = file_name.get_extension().to_lower()
+	
+	if not ext in IMAGE_EXTENSIONS: 
+		#__log_script.info_("extension is not supported", ext)
+		return
 	
 	for word in IGNORE_WORDS:
-		if word in file_name.to_lower(): return
+		if word in file_name.to_lower(): 
+			__log_script.info_("ignored", word, file_name.to_lower())
+			return
 
 	var full_path = folder + "/" + file_name
 	
 	# 2. Load Image
 	var texture = load(full_path) as Texture2D
-	if not texture: return
+	if not texture: 
+		__log_script.info_("if not texture")
+		return
 	var img = texture.get_image()
-	if not img: return
+	if not img: 
+		__log_script.info_("if not img")
+		return
 	
 	# Decompress if needed to read format/pixels
 	if img.is_compressed():
+		__log_script.info_("decompress")
 		img.decompress()
 
 	var fmt = img.get_format()
-
+	__log_script.info_("fmt", fmt)
 	# --- LOGIC START ---
 	
 	# CASE: RGBA (Format 5)

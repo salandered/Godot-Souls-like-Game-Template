@@ -149,7 +149,7 @@ func initialise() -> void:
 	__dev_initialise()
 	
 	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
-	if not __validate_dependencies():
+	if not __perform_validation():
 		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can't be done")
 
 
@@ -166,7 +166,7 @@ func is_free_state():
 
 
 func _process(delta: float) -> void:
-	if __could_not_initialised():
+	if not __validation_ok():
 		return
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
 	# NOTE: this is second place when we gather input (main being in pl model for pl SM)
@@ -295,10 +295,10 @@ func _dev_input(event: InputEvent):
 	if event.is_action_released(RawAction.DEV_CAM_fov):
 		__change_fov()
 	
-	if event.is_action_pressed(RawAction.DEV_toggle_nest):
-		__log_("", "Toggling visibility of CSG objects for", len(__csg_objects), "objects")
-		__dev_camera_visuals = not __dev_camera_visuals
-		__toggle_camera_visuals()
+	# if event.is_action_pressed(RawAction.DEV_toggle_nest):
+	# 	__log_("", "Toggling visibility of CSG objects for", len(__csg_objects), "objects")
+	# 	__dev_camera_visuals = not __dev_camera_visuals
+	# 	__toggle_camera_visuals()
 
 	if event.is_action_pressed(RawAction.DEV_CAM_cols):
 		__dev_camera_cols = not __dev_camera_cols

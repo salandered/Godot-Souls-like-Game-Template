@@ -135,6 +135,12 @@ func __log_decision_data(input_: InputPackage, next_action_name: String, ...addi
 # ## __LOGS
 # # region
 
+
+func __ELA() -> bool:
+	## "extra logs allowed"
+	return LogToggler.BEHAVIOR_INTERNAL_FILTER
+
+
 func pp_name() -> String:
 	return behavior_name
 

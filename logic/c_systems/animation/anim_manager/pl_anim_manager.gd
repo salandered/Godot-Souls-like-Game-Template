@@ -150,7 +150,7 @@ func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer)
 	_begin.initialise()
 	_end.initialise()
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func is_player() -> bool:

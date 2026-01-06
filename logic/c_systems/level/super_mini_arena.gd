@@ -1,3 +1,7 @@
+@tool
+@icon("res://-assets-/x_icons/level/icon_level_yellow.png")
+
+class_name MiniArena
 extends BaseLevel
 
 @onready var base_asp: AudioStreamPlayer = %base_asp
@@ -9,10 +13,31 @@ extends BaseLevel
 var enemies: Array[PHCharacter]
 
 
-func _ready():
-	base_asp.bus = BusID._TRACK_BASE
-	vibe_asp.bus = BusID._TRACK_VIBE
-	base_asp.play()
+func __soft_dependencies() -> Array[Object]:
+	return [
+		base_asp,
+		vibe_asp,
+		ph_enemy,
+		ph_enemy_2,
+		ph_enemy_3
+	]
+
+
+func basic_tonemap_exposure() -> float:
+	return 1.1
+
+func tonemap_exposure_no_vol_fog_compensation() -> float:
+	return 0.0
+
+
+func initialise():
+	if base_asp:
+		base_asp.bus = BusID._TRACK_BASE
+		base_asp.play()
+	if vibe_asp:
+		vibe_asp.bus = BusID._TRACK_VIBE
+
+	__perform_validation()
 	enemies = [ph_enemy, ph_enemy_2, ph_enemy_3]
 
 
@@ -27,3 +52,7 @@ func _on_ph_enemy_sig_death_raised() -> void:
 			all_quiet = false
 	if all_quiet:
 		vibe_asp.stop()
+
+
+func __LOG_B() -> bool:
+	return false

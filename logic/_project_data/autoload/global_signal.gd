@@ -16,7 +16,6 @@ signal SIG_hid_tut()
 signal SIG_show_free_cam_ui()
 signal SIG_hide_free_cam_ui()
 
-
 var player_change_health := SignalData.new(
 	SignalID.player_change_health,
 	_SIG_player_change_health
@@ -39,3 +38,8 @@ var player_dodge_increase := SignalData.new(
 
 
 const payload_amount_field := "amount"
+
+
+## between options menu and 3d menu level
+
+signal SIG_update_video_settings_for_level()

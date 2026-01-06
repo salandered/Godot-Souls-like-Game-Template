@@ -411,7 +411,7 @@
 				}
 			]
 		},
-		"(__hard_validate)": {
+		"(__hard_validation)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -423,7 +423,7 @@
 				}
 			]
 		},
-		"(__soft_validate)": {
+		"(__soft_validation)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -435,7 +435,19 @@
 				}
 			]
 		},
-		"\\b(__validate_dependencies\\(\\))": {
+		"(__validated)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(__perform_validation\\(\\))": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -444,16 +456,7 @@
 				}
 			]
 		},
-		"\\b(__validate_dependencies\\(\\))": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#78e2a1d7",
-					"fontWeight": "bold",
-				}
-			]
-		},
-		"\\b(__could_not_initialised\\(\\))": {
+		"\\b(__validation_ok\\(\\))": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{

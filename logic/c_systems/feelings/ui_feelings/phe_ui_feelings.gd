@@ -2,88 +2,84 @@ class_name EnemyUIFeelings
 extends NodeSystem
 
 
-@onready var back_health_bar: TextureProgressBar = %BackHealthBar
-@onready var health_bar: TextureProgressBar = %HealthBar
-
-## Delayed damage indicator
-## shows where health was before damage
-@onready var ghost_bar: TextureProgressBar = %GhostBar
-@onready var bars: MarginContainer = $Bars
+@onready var _health_bar: TextureProgressBar = %HealthBar
+@onready var _ghost_bar: TextureProgressBar = %GhostBar
+@onready var _back_health_bar: TextureProgressBar = %BackHealthBar
+@onready var _bars_container: MarginContainer = $Bars
 
 
 var e_feelings: PHEFeelings
-
-## how long the change animation should take
-var ANIM_HEALTH_DUR: float = 0.2
-var GHOST_HEALTH_DUR: float = 0.8
-var GHOST_DELAY: float = 0.5
-var PULSE_DURATION: float = 1.0
-var FADEOUT_DURATION: float = 1.0
-
-var _is_pulsing: bool = false
-
-var _health_tween: Tween
-var _ghost_tween: Tween
-var _pulse_tween: Tween
-
-var _prev_health: float
-
-var _is_fading_out := false
-
-
 var _anchor_3d: Node3D
 var _camera: Camera3D
 
-var UI_ENABLE: bool = false
+var PULSE_DURATION := 1.0
+var _pulse_tween: Tween
+
+var _is_pulsing: bool = false
+var _is_fading_out := false
+
+
+var _prev_health: float
+
+var __UI_HARD_ENABLE: bool = false
 var ui_can_be_shown: bool = false
+
+var health_bar: FeelingBar
+
+
+func __hard_dependencies() -> Array[Object]:
+	return [
+		_bars_container,
+		_health_bar
+	]
+
+func __soft_dependencies() -> Array[Object]:
+	return [
+		_ghost_bar,
+		_back_health_bar
+	]
 
 func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D = null) -> void:
 	self.e_feelings = e_feelings_
 	self._anchor_3d = anchor_node_
-	self.UI_ENABLE = enable_ui
+	self.__UI_HARD_ENABLE = enable_ui
 
-	if not UI_ENABLE:
+
+	health_bar = FeelingBar.new(
+		_health_bar,
+		_ghost_bar,
+		_back_health_bar,
+		_bars_container,
+		e_feelings.get_curr_health(),
+		e_feelings.get_max_health(),
+		FeelingBarConfig.new(),
+		"EHealth"
+	)
+	if not __UI_HARD_ENABLE:
 		hide_ui()
-		__log_("UI_ENABLE", UI_ENABLE, "__initialised = false")
-		__initialised = false
+		__log_("__UI_HARD_ENABLE", __UI_HARD_ENABLE, "__validated = false")
+		__validated = false
 		return
 
 	if _anchor_3d:
 		_camera = get_viewport().get_camera_3d()
-		# We modulate the CONTAINER, not self
-		bars.modulate.a = 0.0
-		var tw = create_tween()
-		tw.tween_property(bars, "modulate:a", 1.0, 0.3)
-		bars.scale.x /= 2.0
-		bars.scale.y /= 2.0
+		
+		health_bar.modulate_a(0.0)
+		var _tw = create_tween()
+		_tw.tween_property(health_bar.container, "modulate:a", 1.0, 0.3)
+		health_bar.scale_xy(0.5)
 
 	hide_ui()
 
-	## BACK
-	back_health_bar.max_value = e_feelings.get_max_health()
-	# should not be changing
-	back_health_bar.value = e_feelings.get_max_health()
-	
-	## HEALTH BAR
-	var max_health := e_feelings.get_max_health()
-	health_bar.max_value = max_health
-	health_bar.value = e_feelings.get_curr_health()
-	
-	## GHOST BAR
-	ghost_bar.texture_progress = health_bar.texture_progress # Reuse same texture
-	ghost_bar.max_value = max_health
-	ghost_bar.value = e_feelings.get_curr_health()
-	# ghost_bar.modulate = Color(1, 1, 1, 0.4) # Better in UI
-	
 	## 
 	_prev_health = e_feelings.get_curr_health()
 
-	__validate_dependencies()
+	__perform_validation()
 
 
 func _process(delta: float) -> void:
-	if __could_not_initialised():
-		# here its not like we had problem initialising, but UI_ENABLE may be false
+	if not __validation_ok():
+		# __UI_HARD_ENABLE may be false
 		return
 	if _anchor_3d:
 		_update_floating_position()
@@ -96,15 +92,15 @@ func _update_health_bar():
 	if curr_health == _prev_health:
 		return
 
-	_animate_health_change(curr_health)
+	health_bar.animate_main_bar_value_change(self, curr_health)
 	
 	var is_damage := curr_health < _prev_health
 		
 	if is_damage:
-		_animate_ghost_bar_change(_prev_health, curr_health)
+		health_bar.animate_ghost_bar_value_change(self, _prev_health, curr_health)
 	else:
 		# instant ghost bar update on heal
-		ghost_bar.value = curr_health
+		health_bar.set_ghost_bar_value(curr_health)
 	
 	if e_feelings.is_lower_to_switch_phase() and not _is_pulsing:
 		_start_low_health_pulse()
@@ -146,48 +142,20 @@ func _update_floating_position() -> void:
 	# Assuming Pivot is Top-Left (default)
 	var centered_pos = screen_pos
 
-	centered_pos.x -= bars.size.x * bars.scale.x / 2.0
+	centered_pos.x -= health_bar.container.size.x * health_bar.container.scale.x / 2.0
 	
 	# Apply to the container, or self if this script is on the root Control
-	bars.position = centered_pos
+	health_bar.container.position = centered_pos
 
 
 func _fade_out_and_hide():
 	if _is_pulsing:
 		_stop_low_health_pulse()
 	
-	var panels := [health_bar, back_health_bar, ghost_bar]
-	UIUtils.fade_out_and_hide(self, panels, FADEOUT_DURATION)
-
-
-func _animate_health_change(target_value: float) -> void:
-	UIUtils.kill_tween_if_exists(_health_tween)
-
-	_health_tween = UIUtils.animate_property(
-		self,
-		health_bar,
-		"value",
-		target_value,
-		ANIM_HEALTH_DUR,
-	)
-
-
-func _animate_ghost_bar_change(from_value: float, to_value: float) -> void:
-	UIUtils.kill_tween_if_exists(_ghost_tween)
+	health_bar.fade_out_and_hide(self)
 	
-	ghost_bar.value = from_value
-	
-	var config := TweenConfig.new(Tween.TRANS_QUAD, Tween.EASE_IN)
-	_ghost_tween = UIUtils.animate_property(
-		self,
-		ghost_bar,
-		"value",
-		to_value,
-		GHOST_HEALTH_DUR,
-		GHOST_DELAY,
-		config
-	)
 
+# region: PULSE
 
 func _start_low_health_pulse() -> void:
 	if _is_pulsing:
@@ -196,23 +164,30 @@ func _start_low_health_pulse() -> void:
 	
 	UIUtils.kill_tween_if_exists(_pulse_tween)
 	
-	_pulse_tween = UIUtils.start_pulse(health_bar, 0.5, PULSE_DURATION)
+	_pulse_tween = UIUtils.start_pulse(health_bar.main_bar, 0.5, PULSE_DURATION)
 
 
 func _stop_low_health_pulse() -> void:
 	_is_pulsing = false
-	UIUtils.stop_pulse(health_bar, _pulse_tween)
+	UIUtils.stop_pulse(health_bar.main_bar, _pulse_tween)
 
-
-func _on_ph_enemy_sig_awaken() -> void:
-	if UI_ENABLE and _prev_health > 0.0:
-		ui_can_be_shown = true
-		bars.visible = true
+# endregion
 
 
 func show_ui():
-	if UI_ENABLE and ui_can_be_shown:
-		bars.visible = true
+	if __UI_HARD_ENABLE and ui_can_be_shown:
+		health_bar.set_visible(true)
 
 func hide_ui():
-	bars.visible = false
+	health_bar.set_visible(false)
+
+
+func _on_ph_enemy_sig_awaken() -> void:
+	if __UI_HARD_ENABLE and _prev_health > 0.0:
+		ui_can_be_shown = true
+		health_bar.set_visible(true)
+
+
+## to override
+func __LOG_B() -> bool:
+	return LogToggler.FEEL.ENEMY_UI

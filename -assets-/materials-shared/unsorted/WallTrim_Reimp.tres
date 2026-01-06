@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://b60oyrj0k44hb"]
-
-[resource]
-resource_name = "WallTrim"
-cull_mode = 2
-metallic_texture_channel = 2
-roughness_texture_channel = 1
-normal_enabled = true

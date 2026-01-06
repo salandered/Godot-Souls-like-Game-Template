@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://8mwpcnwpicyn"]
 
-[ext_resource type="PackedScene" path="res://logic/entities/Items/pick_item/_BasePickItem.tscn" id="1_te6xc"]
+[ext_resource type="PackedScene" uid="uid://dbcvsan1ldffm" path="res://logic/entities/Items/pick_item/_BasePickItem.tscn" id="1_te6xc"]
 [ext_resource type="Script" uid="uid://iyj2uqlcx57q" path="res://logic/entities/Items/pick_item/dodge_increase_item.gd" id="2_s30od"]
 [ext_resource type="Shader" uid="uid://dva33q3vefr3d" path="res://logic/entities/Items/pick_item/health_item/HealthItem.gdshader" id="3_qqyv8"]
-[ext_resource type="Texture2D" uid="uid://c3ky7145k6w2c" path="res://-assets-/materials-shared/_images/metal/pl-skeleton-ranger_Metal026_4d1K_Color.jpg" id="4_88xtq"]
-[ext_resource type="Texture2D" uid="uid://b5gxgbr3xofjf" path="res://-assets-/materials-shared/_images/metal/pl-skeleton-ranger_Metal026_4d1K_NormalGL.jpg" id="5_c1y55"]
+[ext_resource type="Texture2D" uid="uid://c3ky7145k6w2c" path="res://-assets-/materials-shared/metal/I_metal_026/pl-skeleton-ranger_Metal026_4d1K_Color.jpg" id="4_88xtq"]
+[ext_resource type="Texture2D" uid="uid://biegeos2k2qbx" path="res://-adopting/T1Fog/T_Lu_Noise_05.png" id="5_qqyv8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n22u3"]
 frequency = 0.0013
@@ -17,16 +17,16 @@ seamless = true
 render_priority = 0
 shader = ExtResource("3_qqyv8")
 shader_parameter/albedo_texture = ExtResource("4_88xtq")
-shader_parameter/normal_texture = ExtResource("5_c1y55")
+shader_parameter/normal_texture = ExtResource("5_qqyv8")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_4txb4")
-shader_parameter/normal_strength = 5.0
-shader_parameter/rim_color = Color(0.17414433, 0, 0.14478001, 1)
-shader_parameter/rim_power = 3.206000128535
+shader_parameter/normal_strength = 1.5130000718674999
+shader_parameter/rim_color = Color(0.26918554, 0.015982503, 0.22890322, 1)
+shader_parameter/rim_power = 7.486000331835
 shader_parameter/scroll_speed = Vector2(0.06, 0.05)
-shader_parameter/noise_scroll_speed = Vector2(0.2, 0.2)
+shader_parameter/noise_scroll_speed = Vector2(0.4, 0.2)
 shader_parameter/displacement_amount = 0.0400000019
-shader_parameter/erosion_level = 0.4410000209475
-shader_parameter/edge_glow_intensity = 3.6670001266825
+shader_parameter/erosion_level = 0.48400002299
+shader_parameter/edge_glow_intensity = 1.0
 
 [node name="DodgeIncreaseItem" instance=ExtResource("1_te6xc")]
 script = ExtResource("2_s30od")
@@ -35,14 +35,16 @@ script = ExtResource("2_s30od")
 material_override = SubResource("ShaderMaterial_yyd0q")
 
 [node name="PuffFog" parent="Visuals/RedSphere" index="0"]
-color_multiplier = Color(0.17254902, 0, 0.14509805, 1)
+color_multiplier = Color(0.3438608, 0.03172327, 0.29420254, 1)
 
 [node name="GlowLight" parent="Visuals/RedSphere" index="1"]
 light_color = Color(0.17254902, 0, 0.14509805, 1)
+light_energy = 0.8
+shadow_opacity = 0.8
 
 [node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
 light_color = Color(0.17254902, 0, 0.14509805, 1)
+shadow_enabled = false
 
 [node name="InteractArea" parent="." index="3"]
-visible = true
 label_text = "Permanently increase dodge strength"

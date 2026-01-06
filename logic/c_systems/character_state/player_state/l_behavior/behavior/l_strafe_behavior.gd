@@ -47,11 +47,11 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: S
 	if is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
 		if angle_deg > ANGLE_FOR_U_TURN_MIN:
 			next_action_name = supported_actions.by_name(Leg.Act.turn_180)
-			__log_decision_data(input_, next_action_name, "angle_deg", angle_deg, ">", "", ANGLE_FOR_U_TURN_MIN)
+			if __ELA(): __log_decision_data(input_, next_action_name, "angle_deg", angle_deg, ">", "", ANGLE_FOR_U_TURN_MIN)
 	
 		elif is_moving(input_) and curr_action.works_longer_than(IDLE_COMMIT):
 			next_action_name = supported_actions.by_name(Leg.Act.strafe)
-			__log_decision_data(input_, next_action_name, "All movement -> strafe (8-dir)")
+			if __ELA(): __log_decision_data(input_, next_action_name, "All movement -> strafe (8-dir)")
 
 
 	return next_action_name
@@ -63,11 +63,11 @@ func _from_START_decision(input_: InputPackage, delta: float, next_action_name: 
 			Leg.Act.turn_180:
 				if curr_action.time_remaining_for_smooth_switch(supported_actions.default_by_motion(MotionType.LOOP)) <= 0.0:
 					next_action_name = supported_actions.default_by_motion(MotionType.LOOP)
-					__log_decision_data(input_, next_action_name, "time for smooth sw < ")
+					if __ELA(): __log_decision_data(input_, next_action_name, "time for smooth sw < ")
 	elif not is_moving(input_):
 		if _non_moving_timer.update(delta):
 			next_action_name = supported_actions.default_by_motion(MotionType.STOP)
-			__log_decision_data(input_, next_action_name, "")
+			if __ELA(): __log_decision_data(input_, next_action_name, "")
 
 	return next_action_name
 
@@ -76,12 +76,12 @@ func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name: S
 	if is_moving(input_) or is_reverse_moving(input_):
 		next_action_name = supported_actions.by_name(Leg.Act.strafe)
 		if next_action_name != get_curr_action().action_name:
-			__log_decision_data(input_, next_action_name, "All movement -> strafe (8-dir)")
+			if __ELA(): __log_decision_data(input_, next_action_name, "All movement -> strafe (8-dir)")
 		_non_moving_timer.reset()
 	
 	elif not is_moving(input_):
 		if _non_moving_timer.update(delta):
 			next_action_name = supported_actions.default_by_motion(MotionType.STOP)
-			__log_decision_data(input_, next_action_name, "")
+			if __ELA(): __log_decision_data(input_, next_action_name, "")
 
 	return next_action_name

@@ -14,10 +14,12 @@ material_override = ExtResource("3_i54qu")
 color_multiplier = Color(0, 0.056467276, 0.4509804, 1)
 
 [node name="GlowLight" parent="Visuals/RedSphere" index="1"]
-light_color = Color(0, 0.05457096, 0.4, 1)
+light_color = Color(0.11827157, 0.21181767, 0.3099175, 1)
+light_energy = 1.5
+shadow_opacity = 0.8
 
 [node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
-light_color = Color(0.090206824, 0, 0.74509805, 1)
+light_color = Color(0.13938022, 0.39992434, 0.58825254, 1)
 
 [node name="InteractArea" parent="." index="3"]
 label_text = "Permanently increases max stamina"

@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://tnrrgpchppy6"
+path.s3tc="res://.godot/imported/tower-map_Image_17.png-d8e104c7dfa5028b9220385cea13bc65.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "87fb703ed3741f66ad83bb5f488ceb7e"
+}
+
+[deps]
+
+source_file="res://-assets-/materials-shared/baked/leg_arm_kaan/tower-map_Image_17.png"
+dest_files=["res://.godot/imported/tower-map_Image_17.png-d8e104c7dfa5028b9220385cea13bc65.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=8
+roughness/src_normal="res://-assets-/GLB-level/minimal-arena/tower/tower-map_Image_18.png"
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

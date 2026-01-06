@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cijp7que1div6"]
+
+[ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://ui/ui_utils/options_nodes/m_list_option_control.tscn" id="1_71hfd"]
+
+[node name="ShadowControl" instance=ExtResource("1_71hfd")]
+option_titles = Array[String](["<null>"])
+property_type = 0
+
+[node name="OptionButton" parent="." index="1"]
+theme_override_font_sizes/font_size = 26
+selected = 0
+item_count = 1
+popup/item_0/text = "<null>"
+popup/item_0/id = 0

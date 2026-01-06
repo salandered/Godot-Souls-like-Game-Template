@@ -14,9 +14,9 @@ dest_files=["res://.godot/imported/Sword Impact 02_phase_switch.wav-681d43597dfd
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
+force/max_rate=true
 force/max_rate_hz=44100
-edit/trim=false
+edit/trim=true
 edit/normalize=false
 edit/loop_mode=0
 edit/loop_begin=0

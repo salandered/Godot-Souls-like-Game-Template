@@ -2,22 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_BaseChest.tscn" id="1_2sh8b"]
 [ext_resource type="Script" uid="uid://d24u4ptnmll7f" path="res://logic/entities/Items/chest/speed_increase_chest.gd" id="2_lsi57"]
-[ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/I_old_bronze-4d1K.tres" id="2_phh2b"]
 [ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/Items/pick_item/SpeedIncreaseItem.tscn" id="3_dv0l8"]
 [ext_resource type="Material" uid="uid://c4ejvjuf4552i" path="res://-assets-/materials-shared/different/P-gold-ring_Reimp.tres" id="3_lsi57"]
+[ext_resource type="Material" uid="uid://ltpytacp62hy" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K_for_chest.tres" id="5_lsi57"]
 
 [node name="SpeedIncreaseChest" instance=ExtResource("1_2sh8b")]
 script = ExtResource("2_lsi57")
 item_scene = ExtResource("3_dv0l8")
-
-[node name="ChestLid" parent="Visuals/LidPivot" index="0"]
-material_override = ExtResource("2_phh2b")
+override_label_y_offset = 1.1
 
 [node name="ChestFasteners" parent="Visuals/LidPivot/FastenersPivot" index="0"]
 material_override = ExtResource("3_lsi57")
 
+[node name="ChestLid" parent="Visuals/LidPivot" index="1"]
+material_override = ExtResource("5_lsi57")
+
 [node name="ChestMain" parent="Visuals/ChessMain" index="1"]
-material_override = ExtResource("2_phh2b")
+material_override = ExtResource("5_lsi57")
 
 [node name="InteractArea" parent="." index="4"]
 label_text = "Open"
+label_y_offset = 1.1

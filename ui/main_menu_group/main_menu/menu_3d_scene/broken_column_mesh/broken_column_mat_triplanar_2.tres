@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ph1sclyavjd"]
+
+[ext_resource type="Texture2D" uid="uid://d05tesaesmiwo" path="res://-assets-/materials-shared/concrete/damaged_concrete/lincoln_damaged_concrete_floor_diff.jpg" id="1_k5glr"]
+[ext_resource type="Texture2D" uid="uid://bn6e0scp5v7qs" path="res://-assets-/materials-shared/concrete/damaged_concrete/lincoln_damaged_concrete_floor_rough.png" id="2_rb3qq"]
+[ext_resource type="Texture2D" uid="uid://by8gar0amnwi1" path="res://-assets-/materials-shared/concrete/damaged_concrete/lincoln_damaged_concrete_floor_nor_gl.png" id="3_lsuem"]
+
+[resource]
+resource_name = "damaged_concrete_columns_lighter_cleaner"
+cull_mode = 2
+albedo_color = Color(1.262, 1.262, 1.262, 1)
+albedo_texture = ExtResource("1_k5glr")
+metallic_texture = ExtResource("2_rb3qq")
+metallic_texture_channel = 2
+roughness = 0.75
+roughness_texture = ExtResource("2_rb3qq")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_lsuem")
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true

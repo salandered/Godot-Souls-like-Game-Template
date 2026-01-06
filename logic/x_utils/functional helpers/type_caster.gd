@@ -78,6 +78,22 @@ static func array_of_marker_3d(array: Array) -> Array[Marker3D]:
 	list_casted.assign(_safe_validate_class(array, Marker3D, "Marker3D"))
 	return list_casted
 
+static func array_of_world_environment(array: Array) -> Array[WorldEnvironment]:
+	var list_casted: Array[WorldEnvironment] = []
+	list_casted.assign(_safe_validate_class(array, WorldEnvironment, "WorldEnvironment"))
+	return list_casted
+	
+static func array_of_fog_volume(array: Array) -> Array[FogVolume]:
+	var list_casted: Array[FogVolume] = []
+	list_casted.assign(_safe_validate_class(array, FogVolume, "FogVolume"))
+	return list_casted
+
+
+static func array_of_directional_light_3d(array: Array) -> Array[DirectionalLight3D]:
+	var list_casted: Array[DirectionalLight3D] = []
+	list_casted.assign(_safe_validate_class(array, DirectionalLight3D, "DirectionalLight3D"))
+	return list_casted
+
 
 static func array_of_mesh_instances(array: Array) -> Array[MeshInstance3D]:
 	var list_casted: Array[MeshInstance3D] = []
