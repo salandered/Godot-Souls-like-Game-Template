@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://c74kjiqwgk4s4"]
+
+[ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://logic/ui/ui_utils/options_nodes/m_toggle_option_control.tscn" id="1_w0n1a"]
+
+[node name="OptionControl" instance=ExtResource("1_w0n1a")]
+custom_minimum_size = Vector2(600, 40)
+
+[node name="OptionLabel" parent="." index="0"]
+theme_override_font_sizes/font_size = 28
+text = ""
+
+[node name="PanelContainer" type="PanelContainer" parent="." index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Comment" type="RichTextLabel" parent="PanelContainer" index="0"]
+unique_name_in_owner = true
+modulate = Color(0.64256185, 0.64256185, 0.64256185, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "[i]Recommended to enable (if there are no performance issues)[/i]"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CheckButton" parent="." index="2"]
+theme_type_variation = &""

@@ -32,7 +32,7 @@ buses/default_bus_layout="uid://h34rd3knc6l3"
 [autoload]
 
 FreeCameraMode="*res://logic/entities/Locations/_dev/dev_free_cam/FreeCamMode.tscn"
-FullscreenHandler="*res://ui/fullscreen_handler.gd"
+FullscreenHandler="*res://logic/ui/fullscreen_handler.gd"
 InputManager="*res://logic/c_systems/input/pl_input/input_manager.gd"
 FrameUtils="*res://logic/_project_data/autoload/frame_utils.gd"
 M_AppConfig="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/app_config.tscn"
@@ -74,13 +74,6 @@ enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/
 [file_customization]
 
 folder_colors={
-"res://-adopt_demo_level/demo-level_/": "yellow",
-"res://-adopt_demo_level/demo-level_/exit_2/": "blue",
-"res://-adopt_demo_level/demo-level_/island/": "red",
-"res://-adopt_demo_level/demo-level_/jaw/": "gray",
-"res://-adopt_demo_level/demo-level_/lady/": "blue",
-"res://-adopt_demo_level/demo-level_/linkoln/wooden_balcony/": "blue",
-"res://-adopt_demo_level/demo-level_/tree_far/": "gray",
 "res://-adopting/": "gray",
 "res://-adopting/misc/": "gray",
 "res://-adopting/sfx_sounds/freesound_cc0/": "blue",
@@ -89,8 +82,16 @@ folder_colors={
 "res://-adopting/ui_maaack__later/fancy_loading_screen/": "yellow",
 "res://-adopting/x_icons/blue/": "blue",
 "res://-adopting/x_icons/purple/": "purple",
+"res://-assets-/GLB-items/temp/": "teal",
 "res://-assets-/GLB-level/": "green",
 "res://-assets-/GLB-level/column/": "pink",
+"res://-assets-/GLB-level/demo-level_/": "yellow",
+"res://-assets-/GLB-level/demo-level_/exit_2/": "blue",
+"res://-assets-/GLB-level/demo-level_/island/": "red",
+"res://-assets-/GLB-level/demo-level_/jaw/": "gray",
+"res://-assets-/GLB-level/demo-level_/lady/": "blue",
+"res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/": "blue",
+"res://-assets-/GLB-level/demo-level_/tree_far/": "gray",
 "res://-assets-/SFX/": "pink",
 "res://-assets-/SFX/audio_streams/": "yellow",
 "res://-assets-/SFX/audio_streams/footsteps/": "blue",
@@ -139,18 +140,19 @@ folder_colors={
 "res://logic/entities/Enemies/phe_enemy/": "blue",
 "res://logic/entities/Locations/demo_arena/": "yellow",
 "res://logic/systems/sfx_anim_data_container/": "yellow",
+"res://logic/ui/": "pink",
+"res://logic/ui/game_state/": "red",
+"res://logic/ui/main_menu_group/": "pink",
+"res://logic/ui/main_menu_group/credits/": "purple",
+"res://logic/ui/main_menu_group/main_menu/": "pink",
+"res://logic/ui/main_menu_group/options_menu/": "pink",
+"res://logic/ui/overlaid_menu/": "pink",
+"res://logic/ui/pause_menu/": "pink",
+"res://logic/ui/ui_utils/": "purple",
 "res://logic/x_utils/": "green",
 "res://misc/cats-souls/": "purple",
 "res://misc/trash_bin/": "red",
-"res://ui/_later/maacks_example_game_scene/": "teal",
-"res://ui/game_state/": "red",
-"res://ui/main_menu_group/": "pink",
-"res://ui/main_menu_group/credits/": "purple",
-"res://ui/main_menu_group/main_menu/": "pink",
-"res://ui/main_menu_group/options_menu/": "pink",
-"res://ui/overlaid_menu/": "pink",
-"res://ui/pause_menu/": "pink",
-"res://ui/ui_utils/": "purple"
+"res://ui/_later/maacks_example_game_scene/": "teal"
 }
 
 [global_group]

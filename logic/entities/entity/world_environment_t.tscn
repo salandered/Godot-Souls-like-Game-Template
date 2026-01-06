@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://duxk51w370csl"]
+
+[ext_resource type="Sky" uid="uid://bjxpm7vkr1f54" path="res://-assets-/VFX/shaders/sky/new_sky.tres" id="1_nde1k"]
+
+[sub_resource type="Environment" id="Environment_efgc1"]
+background_mode = 2
+background_color = Color(0.8, 0.913725, 1, 1)
+sky = ExtResource("1_nde1k")
+ambient_light_source = 3
+ambient_light_color = Color(0.29634023, 0.24328671, 0.23002332, 1)
+ambient_light_sky_contribution = 0.07
+ambient_light_energy = 0.7
+reflected_light_source = 2
+tonemap_mode = 4
+tonemap_exposure = 1.69
+tonemap_white = 1.2
+ssao_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+fog_light_color = Color(0.70566064, 0.8111349, 0.9752062, 1)
+fog_height = -10.14
+fog_height_density = 1.2674
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.009
+volumetric_fog_albedo = Color(0.77621365, 0.9508305, 1, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_efgc1")

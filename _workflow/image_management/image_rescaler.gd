@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/materials-shared/wood/rough_wood/"
+const TARGET_FOLDER = "res://-assets-/materials-shared/baked/wall_trim_column/ceiling/"
 #const TARGET_FOLDER = "res://-assets-/materials-shared/_images/"
 ## WARNING: only jpg and png supported. And use lower case
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]

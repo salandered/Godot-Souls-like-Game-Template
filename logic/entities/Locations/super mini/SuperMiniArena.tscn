@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b0skg43os71r" path="res://logic/c_systems/level/super_mini_arena.gd" id="1_im38e"]
 [ext_resource type="Texture2D" uid="uid://fpblynq7d0vp" path="res://-assets-/materials-shared/x_hdri/Panorama_Mars_02-2048x1024.png" id="2_chotk"]
-[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://ui/pause_menu/m_pause_menu_controller.gd" id="3_ltlhp"]
-[ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://ui/pause_menu/m_pause_menu.tscn" id="4_20buc"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="3_ltlhp"]
+[ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://logic/ui/pause_menu/m_pause_menu.tscn" id="4_20buc"]
 [ext_resource type="LightmapGIData" uid="uid://dbfaebfms25wy" path="res://logic/entities/Locations/super mini/super_mini_arena.lmbake" id="5_w008p"]
 [ext_resource type="Material" uid="uid://bmqf0utujittt" path="res://logic/entities/Locations/super mini/floor_mat.tres" id="6_83xnr"]
 [ext_resource type="Material" uid="uid://dj3pghu6jgb8" path="res://logic/entities/Locations/super mini/wall_mat.tres" id="7_dhryy"]

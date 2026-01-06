@@ -102,7 +102,9 @@ static func _get_mat_save_path(mat_name: String) -> String:
 				break
 		if folder != "unsorted":
 			break
-	
+	if folder == "unsorted":
+		folder = "baked"
+		
 	var base_folder_path = PIConfig.BASE_MAT_PATH + folder
 	
 	# TARGET PREFIX: "Name_Reimp"

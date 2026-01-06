@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqmk5mrsxsygy"]
+
+[ext_resource type="Script" uid="uid://dg4c3yd7pouf4" path="res://logic/ui/main_menu_group/options_menu/tabs/game/m_reset_game_control.gd" id="1_rnua4"]
+
+[node name="M_ResetGameControl" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+offset_top = 210.0
+offset_right = 305.0
+offset_bottom = 242.0
+script = ExtResource("1_rnua4")
+
+[node name="ResetLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset Game :"
+
+[node name="ResetButton" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+text = "Reset"
+
+[node name="ConfirmResetDialog" type="ConfirmationDialog" parent="."]
+dialog_text = "Do you want to reset your game data?"
+
+[connection signal="pressed" from="ResetButton" to="." method="_on_ResetButton_pressed"]
+[connection signal="canceled" from="ConfirmResetDialog" to="." method="_on_confirm_reset_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmResetDialog" to="." method="_on_ConfirmResetDialog_confirmed"]

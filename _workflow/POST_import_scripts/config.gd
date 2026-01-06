@@ -21,7 +21,10 @@ const SUBFOLDER_RULES: Dictionary[String, Array] = {
 	"baked": [
 		"baked",
 		"08___Default.001", # Pinga
-		"Engel_C" # angels
+		"Engel_C", # angels,
+		"Wall_Trim",
+		"WallTrim",
+		"ChurchCeiling",
 		],
 	"solid": ["_P col", "P orange", "P white", "P sand", "P blue", "P green", "P dark_grey"],
 	"different": ["gold", "glass"],
@@ -34,7 +37,7 @@ const SUBFOLDER_RULES: Dictionary[String, Array] = {
 	"wood": ["wood"],
 	"fabric": ["fabric", "cloth", "silk", "wool", "leather"],
 	
-	# no found means would be 'unsorted'
+	# no found means would be 'unsorted' or 'baked'
 }
 
 const MAT_IGNORE_LIST: Array[String] = ["pixpal", "-skipreimp"]

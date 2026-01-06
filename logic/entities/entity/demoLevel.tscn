@@ -1,0 +1,928 @@
+[gd_scene load_steps=41 format=4 uid="uid://mdwtc0gt416o"]
+
+[ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/entities/Locations/demo_arena/demo_level.gd" id="1_skc02"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="3_3yhff"]
+[ext_resource type="Sky" uid="uid://bjxpm7vkr1f54" path="res://-assets-/VFX/shaders/sky/new_sky.tres" id="3_58tqt"]
+[ext_resource type="PackedScene" uid="uid://sq53nltxquwd" path="res://-assets-/GLB-level/demo-level_/linkoln/LINCOLN_WRAPPER.tscn" id="4_3yhff"]
+[ext_resource type="Script" uid="uid://c1n8jqoagewpu" path="res://logic/entities/Locations/weather_system/weather_system.gd" id="4_58tqt"]
+[ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://logic/ui/pause_menu/m_pause_menu.tscn" id="4_cxdwc"]
+[ext_resource type="PackedScene" uid="uid://b7mftvb3txlfn" path="res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/wooden_balcony_WRAPPED.tscn" id="5_cxdwc"]
+[ext_resource type="Script" uid="uid://blo5xcfvelvlt" path="res://logic/entities/Locations/weather_system/weather_change_area.gd" id="6_cxdwc"]
+[ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://-assets-/GLB-level/demo-level_/lady/LADY_WRAPPER.tscn" id="6_dpd55"]
+[ext_resource type="Shader" uid="uid://bk6avam5bgjd7" path="res://logic/entities/entity/sun_shader.gdshader" id="7_ic71h"]
+[ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/demo-level_/tower/TOWER_WRAPPER.tscn" id="8_50a4s"]
+[ext_resource type="Material" uid="uid://71xnlajvntek" path="res://-assets-/materials-shared/solid/base_light_test_visuals_2.tres" id="8_p1nq7"]
+[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://-assets-/VFX/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
+[ext_resource type="PackedScene" uid="uid://bbwrpoygqteb0" path="res://-assets-/GLB-level/demo-level_/golden/gold_cave_WRAPPED.tscn" id="10_ic71h"]
+[ext_resource type="PackedScene" uid="uid://clc3tlv23rgge" path="res://-assets-/GLB-level/demo-level_/jaw/jaw_WRAPPED.tscn" id="11_p1nq7"]
+[ext_resource type="PackedScene" uid="uid://8kw40wxpqewf" path="res://-assets-/GLB-level/demo-level_/columns/columns_WRAPPER.tscn" id="12_g0qcj"]
+[ext_resource type="PackedScene" uid="uid://dj7eifk52p3xo" path="res://-assets-/GLB-level/demo-level_/tree_far/tree_group_far_WRAPPER.tscn" id="12_skc02"]
+[ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/demo-level_/island/ISLAND_WRAPPER.tscn" id="12_x0u1k"]
+[ext_resource type="LightmapGIData" uid="uid://dbdhpwhbfrq4x" path="res://logic/entities/entity/demoLevel_aaa.lmbake" id="13_i3y2i"]
+[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="14_4oive"]
+[ext_resource type="PackedScene" uid="uid://dentl7bp7qpyv" path="res://-assets-/GLB-level/demo-level_/exit_2/exit_2_WRAPPER.tscn" id="14_xv3l7"]
+[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://-assets-/VFX/lights/omni/FlickerOmni.tscn" id="16_0j5u0"]
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/props/dark_crate.tscn" id="17_rgki6"]
+[ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="18_ib1an"]
+[ext_resource type="PackedScene" uid="uid://cb8440hmbojbd" path="res://-assets-/VFX/lights/omni/lamp_omni.tscn" id="19_ic71h"]
+[ext_resource type="LightmapGIData" uid="uid://x1xyb6rp1mdt" path="res://logic/entities/entity/demoLevel_jaw.lmbake" id="20_p1nq7"]
+[ext_resource type="LightmapGIData" uid="uid://bi11e3855emth" path="res://logic/entities/entity/demoLevel_exit2.lmbake" id="20_x0u1k"]
+[ext_resource type="PackedScene" uid="uid://b5tsnu0lrbyel" path="res://logic/entities/Items/chest/SpeedIncreaseChest.tscn" id="21_i3y2i"]
+[ext_resource type="LightmapGIData" uid="uid://bg4jgbkgmc2vr" path="res://logic/entities/entity/demoLevel_tree_group.lmbake" id="23_x0u1k"]
+
+[sub_resource type="Environment" id="Environment_efgc1"]
+background_mode = 2
+background_color = Color(0.8, 0.913725, 1, 1)
+sky = ExtResource("3_58tqt")
+ambient_light_source = 3
+ambient_light_color = Color(0.48642266, 0.39150864, 0.37116995, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.1
+reflected_light_source = 2
+tonemap_mode = 4
+tonemap_exposure = 1.6
+tonemap_white = 1.2
+sdfgi_use_occlusion = true
+glow_enabled = true
+fog_light_color = Color(0.70566064, 0.8111349, 0.9752062, 1)
+fog_height = -10.14
+fog_height_density = 1.2674
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.009
+volumetric_fog_albedo = Color(0.77621365, 0.9508305, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skc02"]
+size = Vector3(15.666992, 6.004822, 1.3508301)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3y2i"]
+size = Vector3(15.666992, 6.004822, 1.3508301)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x0u1k"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xedyx"]
+noise = SubResource("FastNoiseLite_x0u1k")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p1nq7"]
+render_priority = 0
+shader = ExtResource("7_ic71h")
+shader_parameter/core_color = Color(0.60861856, 0.013303134, 0, 1)
+shader_parameter/rim_color = Color(1, 0.022099435, 0, 1)
+shader_parameter/emission_strength = 1.314000062415
+shader_parameter/rim_power = 8.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_xedyx")
+shader_parameter/noise_scale = 1.63900007459262
+shader_parameter/speed = 0.30000001425
+shader_parameter/noise_contrast = 1.87700008589762
+shader_parameter/noise_strength = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p1nq7"]
+_surfaces = [{
+"aabb": AABB(-15, -15, -15, 30, 30, 30),
+"attribute_data": PackedByteArray("AAAgPwAAQD8AAEA/AABAPwAAQD8AAGA/AABAPwAAQD8AACA/AABAPwAAID8AACA/AABAPwAAID8AACA/AAAgPwAAID8AAAA/AAAgPwAAID8AAEA/AAAgPwAAQD8AAEA/AAAgPwAAAD8AAEA/AAAAPwAAQD8AACA/AAAgPwAAQD8AAAA/AABAPwAAAD8AACA/AABAPwAAYD8AACA/AABgPwAAID8AAEA/AAAAPwAAQD8AACA/AABAPwAAID8AAGA/AAAgPwAAYD8AAAA/AABgPwAAAD8AAEA/AAAgPwAAYD8AAEA/AABgPwAAQD8AAIA/AAAAPwAAYD8AACA/AABgPwAAID8AAIA/AAAAPwAAID8AACA/AAAgPwAAID8AAEA/AAAAPwAAAD8AACA/AAAAPwAAID8AACA/AAAgPwAAID8AAAA/AAAgPwAAAD8AAAA/AABgPwAAQD8AAEA/AABAPwAAQD8AACA/AABgPwAAID8AAEA/AAAgPwAAQD8AAAA/AABAPwAAAD8AAGA/AAAAPwAAYD8AACA/AABAPwAAID8AAGA/AAAgPwAAYD8AAEA/AABgPwAAYD8AAEA/AABgPwAAQD8AAEA/AABAPwAAQD8AAGA/AABAPwAAYD8AAGA/AACAPwAAYD8AAGA/AABgPwAAYD8AAEA/AABAPwAAYD8AAGA/AABgPwAAYD8AAIA/AABgPwAAYD8AAIA/AABgPwAAgD8AAIA/AACAPwAAQD8AAGA/AABAPwAAYD8AACA/AABgPwAAQD8AAIA/AABAPwAAgD8AAGA/AACAPwAAID8AAGA/AAAgPwAAYD8AAAA/AABgPwAAID8AAIA/AAAgPwAAgD8AAEA/AABgPwAAAD8AAIA/AAAAPwAAgD8AACA/AABAPwAAAD8AACA/AAAAPwAAID8AAMA+AAAgPwAAwD4AAEA/AADAPgAAQD8AAAA/AABAPwAAwD4AACA/AADAPgAAID8AAIA+AAAgPwAAgD4AAEA/AACAPgAAQD8AAMA+AAAAPwAAwD4AACA/AADAPgAAID8AAAA/AAAgPwAAAD8AAAA/AAAAPwAAAD8AAMA+AAAgPwAAwD4AAAA/AADAPgAAAD8AAIA+AAAAPwAAgD4AACA/AACAPgAAID8AAMA+AAAgPwAAgD4AAAA/AACAPgAAAD8AAAA+AABAPwAAgD4AACA/AACAPgAAID8AAAA+AAAAPwAAAD4AACA/AAAAPgAAID8AAIA+AAAgPwAAAD4AAEA/AAAAPgAAQD8AAIA+AABAPwAAAD4AACA/AAAAPgAAID8AAAAAAAAgPwAAAD4AAAA/AAAAPgAAAD8AAAAAAABgPwAAAD8AAEA/AAAAPwAAQD8AAMA+AABgPwAAwD4AAEA/AADAPgAAQD8AAIA+AABAPwAAwD4AAGA/AADAPgAAYD8AAAA/AABAPwAAgD4AAGA/AACAPgAAYD8AAMA+AABgPwAAgD4AAEA/AACAPgAAQD8AAAA+AACAPwAAAD8AAGA/AAAAPwAAYD8AAMA+AACAPwAAwD4AAGA/AADAPgAAYD8AAIA+AABgPwAAwD4AAIA/AADAPgAAgD8AAAA/AABAPwAAAD4AAGA/AAAAPgAAYD8AAIA+AACAPwAAgD4AAGA/AACAPgAAYD8AAAA+AABgPwAAAD4AAEA/AAAAPgAAQD8AAAAAAACAPwAAAD4AAGA/AAAAPgAAYD8AAAAAAABgPwAAAD4AAIA/AAAAPgAAgD8AAIA+AABgPwAAgD4AAIA/AACAPgAAgD8AAMA+AADAPgAAQD8AAAA/AABAPwAAAD8AAGA/AAAAPwAAQD8AAMA+AABAPwAAwD4AACA/AADAPgAAYD8AAAA/AABgPwAAAD8AAIA/AACAPgAAYD8AAMA+AABgPwAAwD4AAIA/AAAAPwAAYD8AAMA+AABgPwAAwD4AAEA/AACAPgAAQD8AAMA+AABAPwAAwD4AAGA/AADAPgAAYD8AAIA+AABgPwAAgD4AAEA/AADAPgAAID8AAAA/AAAgPwAAAD8AAEA/AADAPgAAAD8AAAA/AAAAPwAAAD8AACA/AAAAPwAAID8AAMA+AAAgPwAAwD4AAAA/AADAPgAAQD8AAIA+AABAPwAAgD4AACA/AACAPgAAID8AAMA+AAAgPwAAwD4AAEA/AADAPgAAID8AAIA+AAAgPwAAgD4AAAA/AACAPgAAAD8AAMA+AAAAPwAAwD4AACA/AAAAAAAAYD8AAAA+AABgPwAAAD4AAIA/AAAAPgAAYD8AAIA+AABgPwAAgD4AAIA/AAAAPgAAYD8AAAAAAABgPwAAAAAAAEA/AAAAAAAAQD8AAAA+AABAPwAAAD4AAGA/AACAPgAAYD8AAAA+AABgPwAAAD4AAEA/AAAAPgAAQD8AAAAAAABAPwAAAAAAACA/AAAAPgAAID8AAAAAAAAgPwAAAAAAAAA/AAAAAAAAID8AAAA+AAAgPwAAAD4AAEA/AAAAAAAAAD8AAAA+AAAAPwAAAD4AACA/AAAAPgAAQD8AAIA+AABAPwAAgD4AAGA/AACAPgAAQD8AAAA+AABAPwAAAD4AACA/AAAAPgAAID8AAIA+AAAgPwAAgD4AAEA/AACAPgAAID8AAAA+AAAgPwAAAD4AAAA/AAAAPgAAAD8AAIA+AAAAPwAAgD4AACA/AADAPgAAwD4AAAA/AADAPgAAAD8AAAA/AAAAPwAAAD8AAMA+AAAAPwAAwD4AAMA+AAAAPwAAwD4AAMA+AADAPgAAwD4AAIA+AADAPgAAgD4AAAA/AACAPgAAAD8AAMA+AADAPgAAAD4AAAA/AAAAPgAAAD8AAIA+AAAAPwAAAD4AAMA+AAAAPgAAwD4AAAAAAADAPgAAAD4AAIA+AAAAPgAAgD4AAAAAAAAAPwAAgD4AAMA+AACAPgAAwD4AAAA+AACAPgAAAD4AAMA+AAAAPgAAwD4AAIA+AADAPgAAAD8AAIA+AAAAPwAAgD4AAMA+AACAPgAAwD4AAMA+AADAPgAAwD4AAAA/AADAPgAAwD4AAIA+AADAPgAAgD4AAIA+AACAPgAAgD4AAMA+AACAPgAAwD4AAMA+AADAPgAAgD4AAIA+AACAPgAAgD4AAAA+AAAAPgAAAD8AAAAAAAAAPwAAAAAAAMA+AAAAPgAAwD4AAAAAAADAPgAAAAAAAIA+AAAAAAAAwD4AAAA+AADAPgAAAD4AAAA/AAAAPgAAAD4AAAAAAAAAPgAAAAAAAAAAAACAPgAAAD4AAAA+AAAAPgAAAD4AAAAAAAAAPgAAAD4AAIA+AAAAPgAAgD4AAIA+AAAAAAAAAD4AAAA+AAAAPgAAAD4AAIA+AACAPgAAgD4AAAA+AACAPgAAAD4AAAA+AAAAPgAAgD4AAAAAAACAPgAAAAAAAAA+AAAAAAAAgD4AAAA+AACAPgAAAD4AAMA+AACAPgAAwD4AAAA+AADAPgAAAD4AAIA+AACAPgAAAD8AAAA+AAAAPwAAAD4AAMA+AAAAPgAAwD4AAIA+AADAPgAAgD4AAAA/AAAAPgAAgD4AAIA+AACAPgAAgD4AAMA+"),
+"format": 34359738391,
+"material": SubResource("ShaderMaterial_p1nq7"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 336,
+"vertex_data": PackedByteArray("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7NZ1GQAAvdLs1nUZAAC90uzWdRkAAL3SGZw7CAAAvdIZnDsIAAC90hmcOwgAAL3SGZzeEwAAQO0ZnN4TAABA7Rmc3hMAAEDtL742EgAAvdIvvjYSAAC90i++NhIAAL3SL775KwAAvpIvvvkrAAC+ki+++SsAAL6SL775KwAAQO0vvvkrAABA7S+++SsAAEDt7NZ1GQAAQK3s1nUZAABArezWdRkAAECtNvDdIAAAvdI28N0gAAC90jbw3SAAAL3SNvDdIAAAQK028N0gAABArTbw3SAAAECt7NZ3PQAAQO3s1nc9AABA7ezWdz0AAEDt7NZ3PQAAQO3s1nc9AABA7ezWdz0AAEDtNvBZTwAAQO028FlPAABA7TbwWU8AAEDtNvBZTwAAvpI28FlPAAC+kjbwWU8AAL6SOogZHP//vdI6iBkc//+90jqIGRz//73S3pMZHP//QO3ekxkc//9A7d6TGRz//0DtNpIvPv//vdI2ki8+//+90jaSLz7//73SNpIvPv//QK02ki8+//9ArTaSLz7//0Ct+KsvPv//QO34qy8+//9A7firLz7//0DtdZntVv//vdJ1me1W//+90nWZ7Vb//73S3aA2cP//vdLdoDZw//+90t2gNnD//73SdZntVv//vdJ1me1W//+90nWZ7Vb//73S3aA2cP//QK3doDZw//9Ard2gNnD//0Ct+KsvPv//QO34qy8+//9A7firLz7//0Dtd73tVv//QO13ve1W//9A7Xe97Vb//0Dtd73tVv//vpJ3ve1W//++kne97Vb//76SWM82cP//vpJYzzZw//++kljPNnD//76SWM82cP//QO1YzzZw//9A7VjPNnD//0DtNvAh3wAAvdI28CHfAAC90jbwId8AAL3SNvAh3wAAQK028CHfAABArTbwId8AAECt7NaJ5gAAvdLs1onmAAC90uzWieYAAL3S7NaJ5gAAvdLs1onmAAC90uzWieYAAL3SL77I7QAAvdIvvsjtAAC90i++yO0AAL3SGZzD9wAAvdIZnMP3AAC90hmcw/cAAL3SGZwg7AAAQO0ZnCDsAABA7RmcIOwAAEDtL77I7QAAQK0vvsjtAABArS++yO0AAECtL74F1AAAQO0vvgXUAABA7S++BdQAAEDtNvClsAAAQO028KWwAABA7TbwpbAAAEDtNvClsAAAvpI28KWwAAC+kjbwpbAAAL6S7NaHwgAAvpLs1ofCAAC+kuzWh8IAAL6S7NaHwgAAQO3s1ofCAABA7ezWh8IAAEDtL74F1AAAQO0vvgXUAABA7S++BdQAAEDt3aDIj///vdLdoMiP//+90t2gyI///73SdZkRqf//QK11mRGp//9ArXWZEan//0Ct3aDIj///QK3doMiP//9Ard2gyI///0CtOojl4///vdI6iOXj//+90jqI5eP//73S3pPl4///QO3ek+Xj//9A7d6T5eP//0Dt+KvPwf//QO34q8/B//9A7firz8H//0DtNpLPwf//vdI2ks/B//+90jaSz8H//73S+KvPwf//vpL4q8/B//++kvirz8H//76SNpLPwf//vdI2ks/B//+90jaSz8H//73SdZkRqf//vdJ1mRGp//+90nWZEan//73Sd70Rqf//QO13vRGp//9A7Xe9Ean//0DtWM/Ij///vpJYz8iP//++kljPyI///76SWM/Ij///QO1Yz8iP//9A7VjPyI///0Dtd70Rqf//QO13vRGp//9A7Xe9Ean//0Dt")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic71h"]
+albedo_color = Color(0.948957, 0.0198181, 1.15514e-06, 1)
+emission_enabled = true
+emission = Color(0.743186, 3.83843e-06, 3.85046e-07, 1)
+emission_energy_multiplier = 1.43
+
+[sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
+density = 0.2
+albedo = Color(1, 0.79680705, 0.5986477, 1)
+edge_fade = 0.33635888
+
+[sub_resource type="FogMaterial" id="FogMaterial_ic71h"]
+density = 0.25
+albedo = Color(1, 0.79680705, 0.5986477, 1)
+edge_fade = 0.33635888
+
+[sub_resource type="FogMaterial" id="FogMaterial_ee878"]
+density = 0.1
+albedo = Color(0.90774393, 0.94392484, 1, 1)
+edge_fade = 1.13137
+
+[node name="DemoLevel" type="Node3D"]
+script = ExtResource("1_skc02")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_efgc1")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="PauseMenuController" type="Node" parent="UI"]
+script = ExtResource("3_3yhff")
+pause_menu_packed = ExtResource("4_cxdwc")
+
+[node name="WeatherSystem" type="Node3D" parent="." node_paths=PackedStringArray("sun_light")]
+script = ExtResource("4_58tqt")
+sun_light = NodePath("../Lights/DirectionalSun")
+
+[node name="JawExit" type="Area3D" parent="WeatherSystem"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.81286, 0.7723322, 32.769096)
+script = ExtResource("6_cxdwc")
+restore_to_defaults = true
+
+[node name="Coll" type="CollisionShape3D" parent="WeatherSystem/JawExit"]
+transform = Transform3D(-0.02638635, 0, -0.9996518, 0, 1, 0, 0.9996518, 0, -0.02638635, 0, 0, 0)
+shape = SubResource("BoxShape3D_skc02")
+debug_color = Color(0.7, 0.525, 0, 1)
+
+[node name="JawEntry" type="Area3D" parent="WeatherSystem"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.786446, 0.95843124, 34.82211)
+script = ExtResource("6_cxdwc")
+change_sky_scatter_color = true
+target_sky_scatter_color = Color(0.6832938, 0.2429056, 0.21132983, 1)
+change_direct_light = true
+target_direct_light = 0.3
+
+[node name="Coll" type="CollisionShape3D" parent="WeatherSystem/JawEntry"]
+transform = Transform3D(0.37887472, 0, -0.925448, 0, 1, 0, 0.925448, 0, 0.37887472, 0, 0, 0)
+shape = SubResource("BoxShape3D_i3y2i")
+debug_color = Color(0.7, 0.525, 0, 1)
+
+[node name="Exit2Entry" type="Area3D" parent="WeatherSystem"]
+unique_name_in_owner = true
+transform = Transform3D(0.8094374, 0, -0.5872061, 0, 1, 0, 0.5872061, 0, 0.8094374, -31.332626, 1.620214, -16.413052)
+script = ExtResource("6_cxdwc")
+change_sky_scatter_color = true
+target_sky_scatter_color = Color(0.39215687, 0.11372549, 0.03529412, 1)
+change_amb_energy = true
+target_amb_energy = 0.1
+
+[node name="Coll" type="CollisionShape3D" parent="WeatherSystem/Exit2Entry"]
+shape = SubResource("BoxShape3D_i3y2i")
+debug_color = Color(0.7, 0.525, 0, 1)
+
+[node name="Exit2Exit" type="Area3D" parent="WeatherSystem"]
+unique_name_in_owner = true
+transform = Transform3D(0.8094374, 0, -0.5872061, 0, 1, 0, 0.5872061, 0, 0.8094374, -33.046158, 1.9935355, -13.075327)
+script = ExtResource("6_cxdwc")
+restore_to_defaults = true
+
+[node name="Coll" type="CollisionShape3D" parent="WeatherSystem/Exit2Exit"]
+shape = SubResource("BoxShape3D_i3y2i")
+debug_color = Color(0.7, 0.525, 0, 1)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalSun" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
+light_color = Color(1, 0.9929813, 0.96693254, 1)
+light_volumetric_fog_energy = 1.2
+light_cull_mask = 4294967293
+shadow_enabled = true
+shadow_opacity = 0.92
+shadow_caster_mask = 4294967293
+directional_shadow_max_distance = 150.0
+
+[node name="debug_fill_light" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -0.12671839, 0.99193877, 0, -0.99193877, -0.12671839, -116.14281, 76.54146, 0)
+visible = false
+editor_only = true
+
+[node name="SunVisuals" type="Node3D" parent="Lights"]
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Lights/SunVisuals"]
+transform = Transform3D(0.06426203, 0.97554994, -0.21017273, 0.51510996, 0.1479554, 0.8442571, 0.8547119, -0.16251603, -0.4930073, -115.25337, 83.58415, -297.97992)
+mesh = SubResource("ArrayMesh_p1nq7")
+
+[node name="__csg_original" type="CSGSphere3D" parent="Lights/SunVisuals"]
+transform = Transform3D(-0.16090691, 0.98416895, -0.074300125, 0.51510996, 0.14795548, 0.8442571, 0.84188527, 0.09757391, -0.5307619, -115.25337, 83.58415, -297.97992)
+visible = false
+cast_shadow = 0
+gi_mode = 0
+radius = 15.0
+radial_segments = 8
+rings = 8
+smooth_faces = false
+material = SubResource("ShaderMaterial_p1nq7")
+
+[node name="TEMP" type="Node3D" parent="."]
+
+[node name="SpotlightWindow6" type="SpotLight3D" parent="TEMP"]
+transform = Transform3D(-0.99959093, 0.017340796, -0.022745734, -0.010845788, 0.50605255, 0.8624345, 0.026465839, 0.8623283, -0.50565743, -44.762062, 9.89364, 5.558416)
+visible = false
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 40.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TEMP/SpotlightWindow6"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="TREE GROUP ALL" type="Node3D" parent="."]
+
+[node name="tree group far WRAPPER" parent="TREE GROUP ALL" instance=ExtResource("12_skc02")]
+
+[node name="LightmapGI_TREE_GROUP" type="LightmapGI" parent="TREE GROUP ALL"]
+quality = 0
+bounces = 0
+use_denoiser = false
+max_texture_size = 4096
+light_data = ExtResource("23_x0u1k")
+
+[node name="SunMimicksMainForBake" type="DirectionalLight3D" parent="TREE GROUP ALL"]
+transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
+light_color = Color(1, 0.9929813, 0.96693254, 1)
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 1
+light_cull_mask = 4294966274
+shadow_enabled = true
+shadow_opacity = 0.92
+shadow_caster_mask = 4294966274
+directional_shadow_max_distance = 150.0
+
+[node name="Lincoln_ALL" type="Node3D" parent="."]
+
+[node name="LincolnLights" type="Node" parent="Lincoln_ALL"]
+
+[node name="windows" type="Node3D" parent="Lincoln_ALL/LincolnLights"]
+
+[node name="Supportive2" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.79525137, 0.60627997, 0, -0.60627997, 0.79525137, -35.32964, 6.0470457, 51.766598)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+light_indirect_energy = 2.0
+light_bake_mode = 1
+shadow_enabled = true
+shadow_opacity = 0.8
+spot_range = 80.0
+spot_attenuation = 1.2
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive2"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="Supportive3" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.66523045, 0.7466382, 0, -0.7466382, 0.66523045, -25.093466, 6.0470457, 51.766598)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 12.0
+shadow_enabled = true
+shadow_opacity = 0.8
+spot_range = 80.0
+spot_attenuation = 1.2
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive3"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="Supportive4" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.79525137, 0.60627997, 0, -0.60627997, 0.79525137, -54.889965, 6.0470457, 51.781868)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+light_indirect_energy = 2.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 80.0
+spot_attenuation = 1.2
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive4"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = ExtResource("8_p1nq7")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="DynamicMain" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+transform = Transform3D(1, 0, 0, 0, 0.9969119, 0.07852865, 0, -0.07852865, 0.9969119, -43.985786, 6.9874277, 56.196415)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 16.0
+light_indirect_energy = 2.0
+shadow_enabled = true
+spot_range = 80.0
+spot_angle = 55.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/DynamicMain"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = ExtResource("8_p1nq7")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow7" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -37.408367, 6.8591237, 9.72727)
+light_color = Color(0.9011674, 0.9749417, 1, 1)
+light_energy = 7.0
+light_indirect_energy = 12.743
+light_bake_mode = 1
+spot_range = 28.0
+spot_attenuation = 1.3
+spot_angle = 21.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow7"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow8" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -51.57448, 6.932094, 9.72727)
+light_color = Color(0.8156727, 0.9897438, 1, 1)
+light_energy = 7.0
+light_indirect_energy = 12.743
+light_bake_mode = 1
+spot_range = 28.0
+spot_attenuation = 1.3
+spot_angle = 21.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow8"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow10" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -44.667824, 6.932094, 9.72727)
+light_color = Color(0.8156727, 0.9897438, 1, 1)
+light_energy = 7.0
+light_indirect_energy = 12.743
+light_bake_mode = 1
+spot_range = 28.0
+spot_attenuation = 1.3
+spot_angle = 21.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow10"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindow9" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+transform = Transform3D(-0.9995909, 0.021355312, -0.019026896, 0.028315207, 0.6448885, -0.763752, -0.004039935, -0.7639782, -0.6452294, -42.429733, 1.9296541, 28.27422)
+light_color = Color(1, 0.92979705, 0.8156863, 1)
+light_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 70.29
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow9"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ic71h")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightWindowFromLady" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+transform = Transform3D(0.67721, -0.44609457, 0.5851379, 1.396566e-08, 0.79525137, 0.60627985, -0.7357899, -0.41057876, 0.5385521, -4.6997223, 6.0470457, 34.512825)
+light_color = Color(0.72360146, 0.8014959, 1, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 3.442
+shadow_enabled = true
+shadow_opacity = 0.54
+shadow_blur = 2.845
+spot_range = 43.343
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindowFromLady"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+visible = false
+material_override = ExtResource("8_p1nq7")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="LINCOLN" parent="Lincoln_ALL" instance=ExtResource("4_3yhff")]
+
+[node name="columns_WRAPPER" parent="Lincoln_ALL/LINCOLN" instance=ExtResource("12_g0qcj")]
+
+[node name="Wooden balcony2" parent="Lincoln_ALL" instance=ExtResource("5_cxdwc")]
+
+[node name="ISLAND" parent="Lincoln_ALL" instance=ExtResource("12_x0u1k")]
+
+[node name="LightmapGI" type="LightmapGI" parent="Lincoln_ALL"]
+bounces = 0
+light_data = ExtResource("13_i3y2i")
+
+[node name="TORCHES" type="Node3D" parent="Lincoln_ALL"]
+
+[node name="FireFlicker" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999993, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -20.499212, 3.9543571, 8.57229)
+particles_amount = 20
+speed_scale = 0.2
+move_speed_scale = 0.1
+play_move_animation = true
+energy = 1.4
+__csg_editor_view = false
+
+[node name="FireFlicker2" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999993, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -24.49221, 3.9816046, 28.382576)
+particles_amount = 20
+speed_scale = 0.2
+move_speed_scale = 0.1
+play_move_animation = true
+radius = 1.8
+energy = 1.6
+attenuation = 1.7
+__csg_editor_view = false
+
+[node name="FireFlicker4" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999998, 0, 0, 0, 1.0000002, 0, 0, 0, 1, -21.046223, 9.303626, 13.704816)
+particles_amount = 10
+speed_scale = 0.2
+radius = 1.0
+energy = 3.0
+__csg_editor_view = false
+
+[node name="FireFlicker3" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999993, 0, 0, 0, 1.0000005, 0, 0, 0, 0.99999994, -25.523222, 4.658056, 1.9900227)
+particles_amount = 20
+speed_scale = 0.2
+move_speed_scale = 0.1
+play_move_animation = true
+radius = 3.0
+energy = 1.2
+__csg_editor_view = false
+
+[node name="FireFlicker5" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999998, 0, 0, 0, 1.0000015, 0, 0, 0, 1.0000013, -20.011612, 8.983869, 42.806377)
+particles_amount = 10
+speed_scale = 0.2
+play_animation = false
+move_speed_scale = 0.1
+radius = 1.0
+energy = 2.0
+__csg_editor_view = false
+
+[node name="FireFlicker6" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.99999976, 0, 0, 0, 1.0000006, 0, 0, 0, 0.99999994, -24.315683, 3.984488, 18.617966)
+particles_amount = 20
+speed_scale = 0.2
+move_speed_scale = 0.1
+play_move_animation = true
+radius = 1.2
+energy = 1.8
+__csg_editor_view = false
+
+[node name="Exit_2_ALL" type="Node3D" parent="."]
+
+[node name="Exit 2" parent="Exit_2_ALL" instance=ExtResource("14_xv3l7")]
+
+[node name="exit2_outer_lights" type="Node" parent="Exit_2_ALL"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+transform = Transform3D(0.92234164, 0.12699483, 0.3649086, -0.38589445, 0.34988967, 0.8536175, -0.019272733, -0.9281431, 0.37172443, -26.797007, 8.633946, -12.383551)
+light_color = Color(1, 0.9542139, 0.87486136, 1)
+light_energy = 10.0
+shadow_enabled = true
+shadow_opacity = 0.62
+spot_range = 20.0
+spot_angle = 24.49
+
+[node name="FogVolume" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D"]
+transform = Transform3D(-0.7042374, -0.21740063, 1.0587188, 1.0319965, 0.24020302, 0.73578715, -0.321139, 1.2486548, 0.042788297, 0.3996048, -0.82188034, -6.101433)
+size = Vector3(3.2089844, 5.5202637, 5.604492)
+shape = 1
+material = SubResource("FogMaterial_dpd55")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+transform = Transform3D(-0.25051382, -0.85274744, -0.45832807, 0.024880776, -0.4789388, 0.87749565, -0.9677932, 0.20842122, 0.14119782, -29.591148, 8.8179455, -19.058554)
+light_color = Color(1, 0.9529412, 0.8745098, 1)
+light_energy = 10.0
+shadow_enabled = true
+shadow_opacity = 0.62
+spot_range = 20.0
+spot_angle = 31.08
+
+[node name="FogVolume2" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D2"]
+transform = Transform3D(1.1710497, 0.43670613, 0.31942123, 0.48716438, -0.51971054, -1.0754849, -0.23539971, 1.0969455, -0.63670814, 0.1900711, 0.87464905, -6.0294333)
+size = Vector3(2.7607422, 5.5202637, 5.604492)
+shape = 1
+material = SubResource("FogMaterial_dpd55")
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+transform = Transform3D(-0.20055673, -0.9660446, 0.16289507, 0.3866993, 0.07471069, 0.9191747, -0.9001337, 0.24733804, 0.35858506, -22.096582, 10.38834, -31.420443)
+light_color = Color(1, 0.9529412, 0.8745098, 1)
+light_energy = 10.0
+shadow_enabled = true
+shadow_opacity = 0.62
+spot_range = 20.0
+spot_angle = 31.08
+
+[node name="FogVolume3" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D3"]
+transform = Transform3D(1.3185321, 0.21402234, -0.94454384, -0.9589679, 0.065345556, -1.3238606, -0.13546127, 1.6206235, 0.17811787, -0.5457573, -1.0562105, -6.9358053)
+size = Vector3(2.7607422, 5.5202637, 5.604492)
+shape = 1
+material = SubResource("FogMaterial_dpd55")
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+transform = Transform3D(-0.6128224, 0.35593227, 0.7055218, 0.77363294, 0.088261485, 0.62745684, 0.16106173, 0.93033445, -0.32944953, -19.152622, 7.7138033, -51.147045)
+light_color = Color(1, 0.9529412, 0.8745098, 1)
+light_energy = 10.0
+shadow_enabled = true
+shadow_opacity = 0.62
+spot_range = 20.0
+spot_angle = 31.08
+
+[node name="FogVolume3" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D4"]
+transform = Transform3D(1.3670951, 0.21698442, -0.87204623, -0.87050104, -0.07438764, -1.3831822, -0.22310473, 1.6198405, 0.053294748, -0.7358208, 0.07740021, -6.8609324)
+size = Vector3(2.7607422, 5.5202637, 5.604492)
+shape = 1
+material = SubResource("FogMaterial_ic71h")
+
+[node name="Spot_supportive" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+transform = Transform3D(-0.8659352, 0.46146393, 0.19289207, 0.19194606, -0.04951928, 0.9801554, 0.46185824, 0.88577586, -0.045695692, -21.092619, 6.285802, -50.179768)
+light_color = Color(1, 0.9529412, 0.8745098, 1)
+light_energy = 4.0
+light_indirect_energy = 6.0
+light_bake_mode = 1
+shadow_enabled = true
+shadow_opacity = 0.62
+spot_range = 6.0
+spot_attenuation = 1.8
+spot_angle = 31.08
+
+[node name="Spot_supportive_turtle" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+transform = Transform3D(-0.8661647, 0.29193747, 0.40562454, 0.0021228455, -0.80948424, 0.58713776, 0.49975425, 0.5094191, 0.7005269, -22.600508, 5.453927, -49.42244)
+light_energy = 2.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+shadow_opacity = 0.62
+spot_range = 20.0
+spot_attenuation = 1.4
+
+[node name="TurtleOmni" parent="Exit_2_ALL/exit2_outer_lights" instance=ExtResource("16_0j5u0")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -29.30958, -1.3114233, -67.30221)
+speed_scale = 0.2
+radius = 8.0
+energy = 2.0
+bake_mode = 0
+color = Color(1, 0.4616555, 0.28627455, 1)
+
+[node name="SpeedIncreaseChest" parent="Exit_2_ALL" instance=ExtResource("21_i3y2i")]
+transform = Transform3D(-0.5058079, 0, 0.86264616, 0.15499847, 0.9837255, 0.09088251, -0.848607, 0.17967792, -0.4975761, -28.20957, 0.3915105, -51.93731)
+
+[node name="LightmapGI_EXIT" type="LightmapGI" parent="Exit_2_ALL"]
+interior = true
+light_data = ExtResource("20_x0u1k")
+
+[node name="JAW_ALL" type="Node3D" parent="."]
+visible = false
+
+[node name="LightmapGI_JAW" type="LightmapGI" parent="JAW_ALL"]
+interior = true
+use_denoiser = false
+environment_mode = 0
+light_data = ExtResource("20_p1nq7")
+
+[node name="jaw2" parent="JAW_ALL" instance=ExtResource("11_p1nq7")]
+
+[node name="JawLights" type="Node3D" parent="JAW_ALL"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="JAW_ALL/JawLights"]
+transform = Transform3D(-0.7809561, -0.33977824, 0.52407855, -0.05745014, 0.8746021, 0.48142546, -0.62193817, 0.34586376, -0.7025461, -76.104454, 12.186879, 33.845142)
+light_color = Color(1, 0.84458846, 0.7696371, 1)
+light_energy = 50.0
+light_bake_mode = 1
+spot_range = 30.10001
+spot_angle = 29.23
+spot_angle_attenuation = 3.605001
+
+[node name="omni" type="Node3D" parent="JAW_ALL/JawLights"]
+
+[node name="OmniLight3D2" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(-0.3181918, 0.10589319, 0.9420938, 0.072103545, 0.993567, -0.08732593, -0.9452804, 0.040141907, -0.32378015, -70.74787, 2.5878692, 31.975096)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 2.9
+
+[node name="OmniLight3D5" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(-0.36499876, -0.12922972, 0.92199546, 0.12080244, 0.9753737, 0.18453453, -0.9231374, 0.17873417, -0.3403989, -71.934784, 2.3680193, 32.271687)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 2.9
+
+[node name="OmniLight3D4" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(0.07292244, -0.024578013, 0.9970347, -0.0027570142, 0.9996875, 0.024845054, -0.9973338, -0.004560601, 0.072831884, -73.22049, 2.512988, 32.68703)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 2.9
+
+[node name="OmniLight3D7" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(0.07292244, -0.024578013, 0.9970347, -0.0027570142, 0.9996875, 0.024845054, -0.9973338, -0.004560601, 0.072831884, -70.23709, 0.82865906, 30.92828)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 2.9
+
+[node name="OmniLight3D8mini" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(0.07292244, -0.024578013, 0.9970347, -0.0027570142, 0.9996875, 0.024845054, -0.9973338, -0.004560601, 0.072831884, -69.84593, 1.0507659, 31.527935)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 1.4
+omni_range = 2.0
+omni_attenuation = 1.6
+
+[node name="OmniLight3D8mini2" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(0.9547872, -0.058274988, 0.29152265, 0, 0.9805998, 0.19602059, -0.29729015, -0.18715794, 0.9362641, -82.371765, 0.2923077, 38.149445)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 1.4
+omni_range = 3.0
+
+[node name="OmniLight3D3" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(0.4799255, 0.047554582, 0.8760195, -0.039463554, 0.9986893, -0.03259367, -0.8764212, -0.018928306, 0.48117316, -62.575977, 1.8005366, 31.190947)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 2.9
+
+[node name="OmniLight3D6" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+transform = Transform3D(-0.31819165, 0.10589313, 0.9420938, 0.0721035, 0.99356693, -0.08732589, -0.9452805, 0.040141895, -0.32378, -78.146034, 1.1871401, 34.584488)
+light_color = Color(1, 0.5601858, 0.47450984, 1)
+light_energy = 2.9
+
+[node name="LADY_ALL" type="Node3D" parent="."]
+
+[node name="LADY2" parent="LADY_ALL" instance=ExtResource("6_dpd55")]
+visible = false
+
+[node name="TOWER_ALL" type="Node3D" parent="."]
+
+[node name="TOWER" type="Node3D" parent="TOWER_ALL"]
+
+[node name="TOWER_WRAPPER" parent="TOWER_ALL/TOWER" instance=ExtResource("8_50a4s")]
+
+[node name="FireFlicker2" parent="TOWER_ALL/TOWER/TOWER_WRAPPER" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -4.236248, 6.411559, -5.2932158)
+play_animation = false
+
+[node name="FireFlicker3" parent="TOWER_ALL/TOWER/TOWER_WRAPPER" instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -7.895584, 6.460438, 12.421363)
+play_animation = false
+
+[node name="SignHelper" type="SpotLight3D" parent="TOWER_ALL/TOWER"]
+transform = Transform3D(0.07695929, 0.15565658, -0.9848088, 0.049029056, 0.9859523, 0.15966879, 0.99582803, -0.060572237, 0.068246506, -7.580869, 3.1749878, 13.038068)
+light_color = Color(0.98199487, 0.78115344, 0.5943271, 1)
+light_energy = 8.326
+light_volumetric_fog_energy = 1.961
+shadow_enabled = true
+spot_range = 4.58
+
+[node name="SignHelper2" type="SpotLight3D" parent="TOWER_ALL/TOWER"]
+transform = Transform3D(-0.9586063, 0.09134314, -0.26968583, -0.020113513, 0.9230576, 0.38413557, 0.2840237, 0.3736591, -0.8830116, -8.602671, 6.8806305, -11.339194)
+light_color = Color(0.98199487, 0.78115344, 0.5943271, 1)
+light_energy = 11.189
+light_volumetric_fog_energy = 8.747
+shadow_enabled = true
+spot_range = 21.2
+spot_angle = 19.42
+
+[node name="SpotlightCrackTower" type="SpotLight3D" parent="TOWER_ALL/TOWER"]
+transform = Transform3D(-0.3896453, -0.8632576, 0.3208785, -0.3296895, 0.45607153, 0.82662195, -0.859931, 0.21629903, -0.46231303, 1.8631976, 38.584465, -4.5500164)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 4.874
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_opacity = 0.94
+spot_range = 75.464
+spot_angle = 62.47
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TOWER_ALL/TOWER/SpotlightCrackTower"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = ExtResource("8_p1nq7")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="SpotlightCrackTower2" type="SpotLight3D" parent="TOWER_ALL/TOWER"]
+transform = Transform3D(-0.73948574, -0.6644138, 0.1082366, -0.48622477, 0.63837105, 0.5967142, -0.46556026, 0.3886343, -0.79512084, -1.3844583, 19.86186, -13.767799)
+light_color = Color(1, 0.98844486, 0.9537795, 1)
+light_energy = 8.0
+shadow_enabled = true
+shadow_opacity = 0.84
+spot_range = 77.463
+spot_angle = 18.11
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TOWER_ALL/TOWER/SpotlightCrackTower2"]
+transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
+material_override = ExtResource("8_p1nq7")
+cast_shadow = 0
+gi_mode = 0
+radius = 0.1
+
+[node name="GOLD_ALL" type="Node3D" parent="."]
+
+[node name="GOLDC" parent="GOLD_ALL" instance=ExtResource("10_ic71h")]
+visible = false
+
+[node name="Princess" parent="." instance=ExtResource("14_4oive")]
+transform = Transform3D(0.68591994, 0, -0.727677, 0, 1, 0, 0.727677, 0, 0.68591994, -46.476433, 0.62289643, -4.560726)
+
+[node name="Fog" type="Node" parent="."]
+
+[node name="FogVolume" type="FogVolume" parent="Fog"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.382797, 7.001569, 31.500858)
+size = Vector3(11.464355, 13.36908, 14.250458)
+shape = 0
+material = SubResource("FogMaterial_ee878")
+
+[node name="FogVolume2" type="FogVolume" parent="Fog"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.463089, 46.537, 5.035817)
+size = Vector3(25.563477, 38.715324, 20.300652)
+shape = 0
+material = SubResource("FogMaterial_ee878")
+
+[node name="crates" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 145.6312, 7.493117, -169.38483)
+visible = false
+
+[node name="DarkCrate" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.20079, -4.0666165, 117.69539)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate5" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.20079, -3.2274098, 117.69539)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate6" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.20079, -2.4083753, 117.69539)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate2" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.98627, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate7" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.98627, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate8" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -195.98627, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate9" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.07173, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate10" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.07173, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate11" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.07173, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate12" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.44475, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate13" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.44475, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate14" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.44475, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate15" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199.78632, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate16" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199.78632, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate17" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199.78632, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate18" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -201.28911, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+mass = 4.578
+
+[node name="DarkCrate19" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -201.28911, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+mass = 4.578
+
+[node name="DarkCrate20" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -201.28911, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+mass = 4.578
+
+[node name="DarkCrate21" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+mass = 4.578
+
+[node name="DarkCrate22" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+mass = 4.578
+
+[node name="DarkCrate23" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate24" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate25" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate26" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -202.88133, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+mass = 4.578
+
+[node name="DarkCrate27" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate28" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate29" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate30" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -4.0666165, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate31" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -3.29221, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate32" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204.52214, -2.5386739, 116.41147)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate3" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -198.09477, -4.0666165, 110.70691)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DarkCrate4" parent="crates" instance=ExtResource("17_rgki6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.77643, -3.727738, 120.02602)
+collision_layer = 32
+collision_mask = 39
+
+[node name="DeathPlane" parent="." instance=ExtResource("18_ib1an")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -26.92823, -36.414185, -30.120377)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[editable path="TOWER_ALL/TOWER/TOWER_WRAPPER/FireFlicker2"]
+[editable path="TOWER_ALL/TOWER/TOWER_WRAPPER/FireFlicker3"]

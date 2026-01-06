@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp4td8jhxhsj2"]
+
+[ext_resource type="Script" uid="uid://cey7k0oqnexwi" path="res://logic/ui/ui_utils/rich_text_label_auto_bold.gd" id="1_oo5wa"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]WASD[/b] - move
+[b]Space[/b] - Dodge/Jump
+[b]Shift[/b] - Sprint
+[b]Q[/b] - lock to target
+[b]LMB[/b] - attack
+[b]Esc[/b] -  pause
+[b]5[/b] - unstuck"
+fit_content = true
+script = ExtResource("1_oo5wa")
+plain_text = "WASD - move
+Space - Dodge/Jump
+Shift - Sprint
+Q - lock to target
+LMB - attack
+Esc -  pause
+5 - unstuck
+"

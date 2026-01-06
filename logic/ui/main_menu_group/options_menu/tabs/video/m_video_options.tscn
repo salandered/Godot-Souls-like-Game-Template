@@ -1,0 +1,173 @@
+[gd_scene load_steps=11 format=3 uid="uid://bue7jd1r7ju2f"]
+
+[ext_resource type="Script" uid="uid://b1rhrrbwl6mk2" path="res://logic/ui/main_menu_group/options_menu/tabs/video/m_video_options_menu.gd" id="1_4vjx0"]
+[ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/m_capture_focus.gd" id="2_gcs5t"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/separator/h_separator.tscn" id="3_4vjx0"]
+[ext_resource type="PackedScene" uid="uid://b4gwx10tcba27" path="res://logic/ui/ui_utils/nodes/vertical_margin.tscn" id="3_grqrj"]
+[ext_resource type="PackedScene" uid="uid://c01ayjblhcg1t" path="res://logic/ui/ui_utils/options_nodes/m_vector_2_list_option_control.tscn" id="4_chxej"]
+[ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.tscn" id="5_kvajm"]
+[ext_resource type="PackedScene" uid="uid://cfue6eeje626w" path="res://logic/ui/main_menu_group/options_menu/tabs/video/brightness_option_control.tscn" id="7_5161n"]
+[ext_resource type="PackedScene" uid="uid://0e65ib3cy6mf" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/reset_button.tscn" id="8_5161n"]
+[ext_resource type="PackedScene" uid="uid://c74kjiqwgk4s4" path="res://logic/ui/ui_utils/options_nodes/volumetric_fog_control.tscn" id="8_u8uj1"]
+[ext_resource type="PackedScene" uid="uid://cijp7que1div6" path="res://logic/ui/ui_utils/options_nodes/shadows_control.tscn" id="9_xruvw"]
+
+[node name="Video" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 24
+script = ExtResource("1_4vjx0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+script = ExtResource("2_gcs5t")
+search_depth = 2
+
+[node name="MarginContainer" parent="VBoxContainer" instance=ExtResource("3_grqrj")]
+layout_mode = 2
+
+[node name="__h_sep" parent="VBoxContainer" instance=ExtResource("3_4vjx0")]
+layout_mode = 2
+
+[node name="DisplayModeControl" parent="VBoxContainer" instance=ExtResource("5_kvajm")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [0, 2, 3, 4]
+option_titles = Array[String](["Windowed", "Maximized", "Fullscreen", "Exclusive Fullscreen"])
+option_name = "Display Mode"
+option_section = 3
+key = "DisplayMode"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 2
+default_value = 3
+
+[node name="BrightnessControl" parent="VBoxContainer" instance=ExtResource("7_5161n")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "Brightness"
+option_section = 3
+key = "Brightness"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 3
+default_value = 1.0
+
+[node name="UIScaleControl" parent="VBoxContainer" instance=ExtResource("5_kvajm")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [0.75, 1.0, 1.25, 1.5, 1.75]
+option_titles = Array[String](["75%", "100%", "125%", "150%", "175%"])
+option_name = "UI Scale"
+option_section = 3
+key = "UIScale"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 3
+default_value = 1.0
+
+[node name="FPSLimitControl" parent="VBoxContainer" instance=ExtResource("5_kvajm")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [30, 60, 90, 120, 0]
+option_titles = Array[String](["30", "60 (recommended)", "90", "120", "Unlimited"])
+option_name = "FPS Limit"
+option_section = 3
+key = "FpsLimit"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 2
+default_value = 60
+
+[node name="ResolutionControl" parent="VBoxContainer" instance=ExtResource("4_chxej")]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Select a screen size"
+option_values = [Vector2i(640, 360), Vector2i(960, 540), Vector2i(1024, 576), Vector2i(1280, 720), Vector2i(1600, 900), Vector2i(1920, 1080), Vector2i(2048, 1152), Vector2i(2560, 1440), Vector2i(3200, 1800), Vector2i(3840, 2160)]
+option_titles = Array[String](["640 x 360", "960 x 540", "1024 x 576", "1280 x 720", "1600 x 900", "1920 x 1080", "2048 x 1152", "2560 x 1440", "3200 x 1800", "3840 x 2160"])
+option_name = "Resolution"
+option_section = 3
+key = "ScreenResolution"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 6
+default_value = Vector2i(0, 0)
+
+[node name="VSyncControl" parent="VBoxContainer" instance=ExtResource("5_kvajm")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [0, 1, 2, 3]
+option_titles = Array[String](["Disabled", "Enabled (recommended)", "Adaptive", "Mailbox"])
+option_name = "V-Sync"
+option_section = 3
+key = "V-Sync"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 2
+default_value = 1
+
+[node name="AntiAliasingControl" parent="VBoxContainer" instance=ExtResource("5_kvajm")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [0, 1, 2, 3]
+option_titles = Array[String](["Disabled (Fastest)", "2x", "4x", "8x (Slowest)"])
+option_name = "Anti-Aliasing"
+option_section = 3
+key = "AntiAliasing"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 2
+default_value = 1
+
+[node name="VolumetricFogControl" parent="VBoxContainer" instance=ExtResource("8_u8uj1")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "Volumetric Fog"
+option_section = 3
+key = "VolumetricFog"
+section = "VideoSettings"
+label_suffix = ""
+default_value = true
+
+[node name="ShadowControl" parent="VBoxContainer" instance=ExtResource("9_xruvw")]
+unique_name_in_owner = true
+layout_mode = 2
+lock_titles = true
+option_values = [0, 1, 2, 3]
+option_titles = Array[String](["Good", "Medium", "Low", "Disabled (not recommended)"])
+option_name = "Shadows"
+option_section = 3
+key = "Shadows"
+section = "VideoSettings"
+label_suffix = ""
+property_type = 2
+default_value = "default"
+
+[node name="__h_sep_2" parent="VBoxContainer" instance=ExtResource("3_4vjx0")]
+layout_mode = 2
+
+[node name="ResetButton" parent="VBoxContainer" instance=ExtResource("8_5161n")]
+layout_mode = 2
+
+[connection signal="setting_changed" from="VBoxContainer/DisplayModeControl" to="." method="_on_display_mode_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/BrightnessControl" to="." method="_on_brightness_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/UIScaleControl" to="." method="_on_ui_scale_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/FPSLimitControl" to="." method="_on_fps_limit_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ResolutionControl" to="." method="_on_resolution_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/VSyncControl" to="." method="_on_v_sync_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/AntiAliasingControl" to="." method="_on_anti_aliasing_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/VolumetricFogControl" to="." method="_on_volumetric_fog_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ShadowControl" to="." method="_on_shadow_control_setting_changed"]
+[connection signal="pressed" from="VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
