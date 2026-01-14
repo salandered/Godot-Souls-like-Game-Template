@@ -17,7 +17,6 @@ const BASE_MAT_PATH: String = "res://-assets-/materials-shared/"
 ## case insensitive
 const SUBFOLDER_RULES: Dictionary[String, Array] = {
 	# specific
-	"mines": ["minestrim", "mine_carts", "mines"],
 	"baked": [
 		"baked",
 		"08___Default.001", # Pinga
@@ -25,13 +24,17 @@ const SUBFOLDER_RULES: Dictionary[String, Array] = {
 		"Wall_Trim",
 		"WallTrim",
 		"ChurchCeiling",
+		"minestrim",
+		"minetrim",
+		"mine_carts"
 		],
-	"solid": ["_P col", "P orange", "P white", "P sand", "P blue", "P green", "P dark_grey"],
+	"solid": ["_P col", "P orange", "P white", "P sand", "P blue", "P green", "P dark_grey", "P gray", "P dark", "P light", "P l", "P purple"],
 	"different": ["gold", "glass"],
 
 	# usual
 	"metal": ["metal", "steel", "iron", "copper", "bronze"],
 	"concrete": ["concrete", "cement", "asphalt", "plaster"],
+	"marble": ["marble", "_ice", "ice_"],
 	"rocks-stone": ["rock", "stone"],
 	"ground": ["ground", "dirt", "grass", "mud", "sand", "soil", "roots"],
 	"wood": ["wood"],

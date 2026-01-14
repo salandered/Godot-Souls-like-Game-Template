@@ -12,7 +12,7 @@ class AnimID:
 	const big_explode := "explode_big"
 
 
-var default_anim_id = AnimID.explode
+var default_anim_id := AnimID.explode
 
 
 func _ready() -> void:

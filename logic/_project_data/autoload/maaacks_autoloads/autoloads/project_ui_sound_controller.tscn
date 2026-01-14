@@ -27,4 +27,3 @@ slider_drag_ended = ExtResource("6_m8i65")
 [node name="testMusicPlayer" parent="." instance=ExtResource("7_m8i65")]
 stream = SubResource("AudioStreamWAV_qynsr")
 volume_db = -80.0
-bus = &"Master"

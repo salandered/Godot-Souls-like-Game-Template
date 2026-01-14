@@ -7,5 +7,7 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is BaseCharacter:
+	if body is SecretEnemy:
+		body.reset_position(20.0)
+	elif body is BaseCharacter:
 		body.reset_position()

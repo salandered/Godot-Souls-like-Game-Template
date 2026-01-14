@@ -34,7 +34,7 @@ extends FlickerOmni
 
 const TORCH = preload("uid://cv6knp2vadwvf")
 
-var asp_config = ASP3DConfig.new(-0.5, -0.37, 3.0, 12, 2, 0.5, BusID.GAME_SFX, TORCH)
+var asp_config := ASP3DConfig.new(-0.5, -0.37, 3.0, 12, 2, 0.5, BusID.GAME_SFX, TORCH)
 
 
 func _ready_implementation() -> void:
@@ -51,10 +51,11 @@ func _ready_implementation() -> void:
 func get_particles() -> GPUParticles3D:
 	return flame_gpu_particles_3d
 
+
 func _apply_sound_settings():
 	var asps := get_descendants.audio_stream_players_3D(self)
 	if len(asps) >= 1:
-		var _asp = asps[0]
+		var _asp := asps[0]
 		if play_sound:
 			asp_config.set_up_asp(_asp)
 			_asp.play()

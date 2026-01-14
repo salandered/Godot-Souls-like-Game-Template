@@ -17,7 +17,6 @@ extends BaseCharacter
 @onready var bones: PlayerBones = %bones
 
 # essential systems
-@onready var player_movement: PlayerMovement = %PlayerMovement
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
@@ -59,6 +58,11 @@ var stamina_cant_be_paid := SignalData.new("SIG_stamina_cant_be_paid", SIG_stami
 var switch_weapon_cant_be_done := SignalData.new("SIG_switch_weapon_cant_be_done", SIG_switch_weapon_cant_be_done)
 
 
+func get_pl_movement() -> PlayerMovement:
+	var casted: PlayerMovement = get_movement()
+	return casted
+
+
 func __hard_dependencies() -> Array[Object]:
 	return [
 		fancy_camera,
@@ -67,7 +71,7 @@ func __hard_dependencies() -> Array[Object]:
 		skeleton,
 		container,
 		bones,
-		player_movement,
+		get_pl_movement(),
 		get_sig_container(),
 		get_combat(),
 		feelings,
@@ -135,8 +139,6 @@ func _for_init_visuals() -> BaseVisuals:
 	return visuals
 func _for_init_bones() -> BaseCharBones:
 	return bones
-func _for_init_movement() -> BaseCharacterMovement:
-	return player_movement
 func _for_init_active_weapon_id_list() -> Array[String]:
 	return [WeaponID.smith_sword]
 ## sfx
@@ -182,8 +184,9 @@ func react_on_hit(hit_data: HitData) -> void:
 	player_sm.react_on_hit(hit_data)
 
 
-func reset_position() -> void:
+func reset_position(y_offset: float = 0.0) -> void:
 	transform.origin = _start_position
+	transform.origin.y += y_offset
 
 
 # TODO: _process or _physics_process? changed to _process: frame issues
@@ -347,7 +350,7 @@ func __dev_initialise():
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
 	# print_.dev("dbg", "cam_i: " + str(cam_i))
-	var _csg_visuals = get_descendants.csg_primitives(self)
+	var _csg_visuals := get_descendants.csg_primitives(self)
 	for _csg: CSGPrimitive3D in _csg_visuals:
 		if _csg.visible:
 			csg_visible_initially.append(_csg)
@@ -394,11 +397,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			csg.visible = _next_booleans[1]
 
 
-
 # endregion
 
 @onready var rig: RangerWrapper = %RIG
+@onready var fancy_hat: MeshInstance3D = %"fancy hat"
+
 
 func _on_secret_enemy_sig_death_raised() -> void:
 	if rig:
 		rig.super_mats()
+	if fancy_hat:
+		fancy_hat.visible = true

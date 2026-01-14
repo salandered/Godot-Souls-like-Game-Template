@@ -2,7 +2,7 @@ extends BaseAttackAction
 
 
 func initialise_implementation() -> void:
-	hit_damage = 15
+	hit_damage = 12
 
 
 	blend_time.set_by_prev_action({

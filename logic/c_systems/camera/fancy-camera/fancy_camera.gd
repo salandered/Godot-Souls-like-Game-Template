@@ -153,7 +153,7 @@ func initialise() -> void:
 		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can't be done")
 
 
-func is_locked_state():
+func is_locked_state() -> bool:
 	return current_state.state_name == LOCKED_STATE_NAME
 
 
@@ -161,7 +161,7 @@ func is_camera_locked_to_target() -> bool:
 	return is_locked_state()
 
 
-func is_free_state():
+func is_free_state() -> bool:
 	return current_state.state_name == FREE_STATE_NAME
 
 
@@ -308,15 +308,15 @@ func _dev_input(event: InputEvent):
 # region: dev LOGS
 
 func __dbg_main_info() -> String:
-	var r = pp.s(__Cvec(), __Mvec(), __Nvec(), __Fvec(), __free_off(), __lock_off())
+	var r := pp.s(__Cvec(), __Mvec(), __Nvec(), __Fvec(), __free_off(), __lock_off())
 	return r
 
 func __free_off() -> String:
-	var r = pp.s("free off=", free_state.free_offset, "len=", free_state.free_offset.length())
+	var r := pp.s("free off=", free_state.free_offset, "len=", free_state.free_offset.length())
 	return r
 
 func __lock_off() -> String:
-	var r = pp.s("lock off=", locked_state.lock_offset, "len=", locked_state.lock_offset.length())
+	var r := pp.s("lock off=", locked_state.lock_offset, "len=", locked_state.lock_offset.length())
 	return r
 
 func __Cvec() -> String:

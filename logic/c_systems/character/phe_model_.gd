@@ -7,7 +7,6 @@ class_name PHCharacter
 
 @onready var config: PHEConfig = %Config
 @onready var container: PHContainer = %StatesContainer
-@onready var enemy_movement: EnemyMovement = %EnemyMovement
 
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var _top: BasePHEState = %_Top
@@ -66,12 +65,18 @@ signal SIG_awaken
 ##    => check root_motion_track of NativePlayer!
 ##       it's very fragile, any change of node tree and it's gone
 
+
+func get_e_movement() -> EnemyMovement:
+	var casted: EnemyMovement = get_movement()
+	return casted
+
+
 func __hard_dependencies() -> Array[Object]:
 	return [
 		player,
 		config,
 		container,
-		enemy_movement,
+		get_e_movement(),
 		anim_container,
 		animator_manager,
 		get_sig_container(),
@@ -141,8 +146,6 @@ func _for_init_visuals() -> BaseVisuals:
 	return null ## todo: use in enemy
 func _for_init_bones() -> BaseCharBones:
 	return null ## todo: use in enemy
-func _for_init_movement() -> BaseCharacterMovement:
-	return enemy_movement
 func _for_init_active_weapon_id_list() -> Array[String]:
 	return [WeaponID.big_pinga_blade, WeaponID.bg_aura_weapon]
 ## sfx
@@ -235,14 +238,20 @@ func react_on_hit(hit_data: HitData) -> void:
 	_curr_state.react_on_hit(hit_data)
 
 
-func reset_position() -> void:
+func reset_position(y_offset: float = 0.0) -> void:
 	transform.origin = _start_position
+	transform.origin.y += y_offset
+	# prints("reset_position", y_offset)
+
 
 func apply_fire_to_head():
 	if not FLICKER_FIRE or not fire_marker:
 		return
-	var fire_scene = FLICKER_FIRE.instantiate()
+	var fire_scene := FLICKER_FIRE.instantiate()
+	var casted: FireStatic = fire_scene
 	fire_marker.add_child(fire_scene)
+	casted.play_animation = false
+	casted.play_move_animation = false
 	# fire.position = Vector3.ZERO  # Centered on marker
 
 func remove_fire_effect():
@@ -324,8 +333,8 @@ func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 		if not visual_mesh.mesh:
 			continue
 		await FrameUtils.wait_one_physics_frame()
-		var physics_config := RigidBodyCreator.PhysicsConfig.new(3.0, 1.5, 0.0, 2.5)
-		var rigid_body := RigidBodyCreator.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)
+		var physics_config := RigidPhysicsConfig.new(3.0, 1.5, 0.0, 2.5)
+		var rigid_body := RigidBodyUtils.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)
 		if rigid_body:
 			rigids_container.add_child(rigid_body)
 			rigid_body.global_transform = visual_mesh.global_transform
@@ -404,8 +413,13 @@ func _on_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
 	if not AIR_WAVE_2:
 		return
 
-	var wave = AIR_WAVE_2.instantiate()
+	var wave := AIR_WAVE_2.instantiate()
 
 	get_tree().current_scene.add_child(wave)
 
 	wave.spawn_shockwave_at_position(char_glob_position, anim)
+
+
+# func _hard_death():
+# 	await FrameUtils.wait_process_frames(5)
+# 	self.queue_free()

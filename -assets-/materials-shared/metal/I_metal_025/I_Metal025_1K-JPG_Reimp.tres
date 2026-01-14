@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://corbh7usys0xj"]
+
+[ext_resource type="Texture2D" uid="uid://ctxfh0dj5ytox" path="res://-assets-/materials-shared/metal/I_metal_025/base_chest_Metal025_1K-JPG_Color.jpg" id="1_63lg1"]
+[ext_resource type="Texture2D" uid="uid://cpegfvftndb82" path="res://-assets-/materials-shared/metal/I_metal_025/base_chest_Metal025_1K-JPG_Metalness-Metal025_1K-JPG_Roughness.png" id="2_d1g24"]
+[ext_resource type="Texture2D" uid="uid://yfhonivgyoxt" path="res://-assets-/materials-shared/metal/I_metal_025/base_chest_Metal025_1K-JPG_NormalGL.jpg" id="3_digty"]
+
+[resource]
+resource_name = "I_Metal025_1K-JPG"
+cull_mode = 2
+albedo_texture = ExtResource("1_63lg1")
+metallic = 1.0
+metallic_texture = ExtResource("2_d1g24")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_d1g24")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_digty")

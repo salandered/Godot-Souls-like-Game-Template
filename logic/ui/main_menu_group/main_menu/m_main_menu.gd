@@ -96,7 +96,7 @@ func _play_fade_in() -> void:
 	fade_overlay.modulate.a = 1.0
 	
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, "modulate:a", 0.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(fade_overlay, Constants.Prop.CONTROL_MODULATE_A, 0.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(fade_overlay.hide)
 
 var effect: AudioEffectLowPassFilter

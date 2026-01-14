@@ -45,14 +45,14 @@ Notes: Shaders were used: fire shader; sky shader. Modifications were made.
 
  
 #### Godot Game Template
-![Maaack Plugin Icon](/attribution/maaacks_game_template/logo/logo.png)  
+![Maaack Plugin Icon](/_attribution/maaacks_game_template/logo/logo.png)  
 Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)
 Link: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)
-License: [MIT License](/attribution/maaacks_game_template/LICENSE.txt)
+License: [MIT License](/_attribution/maaacks_game_template/LICENSE.txt)
 
 
 #### Godot Engine
-![Godot Engine Logo](/attribution/godot/logo/logo_vertical_color_dark.png) 
+![Godot Engine Logo](/_attribution/godot/logo/logo_vertical_color_dark.png) 
 Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)
 Link: [godotengine.org](https://godotengine.org/)
 License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.txt)

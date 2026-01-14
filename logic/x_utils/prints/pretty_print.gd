@@ -105,7 +105,7 @@ static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = fal
 		return JSON.stringify(_dict_, "\t")
 	if _dict_.is_empty():
 		return "{}"
-	var r = __recursive_dict(_dict_, "", one_string, one_level)
+	var r := __recursive_dict(_dict_, "", one_string, one_level)
 	return u.cut_string(r)
 
 
@@ -160,6 +160,9 @@ static func sig(signal_data: SignalData, signal_payload: Dictionary[String, Vari
 	if not signal_data: return ""
 	return pp.s(signal_data, "with payload", pp.dict_(signal_payload, false, false, true))
 
+static func sig_raw(signal_: Signal, signal_payload: Dictionary[String, Variant], ) -> String:
+	return pp.s(signal_, "with payload", pp.dict_(signal_payload, false, false, true))
+
 static func bus_id(bus_id_: String) -> String:
 	return pp.s("bus🎧", pp.in_q(bus_id_))
 
@@ -182,7 +185,7 @@ static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string
 	var next_indent := "" if one_string else indent + "\t"
 	
 	for key_ in _dict_.keys():
-		var value_ = _dict_[key_]
+		var value_: Variant = _dict_[key_]
 		var value_str: String
 		
 		if value_ is float:

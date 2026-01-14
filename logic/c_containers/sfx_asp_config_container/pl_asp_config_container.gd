@@ -1,13 +1,13 @@
 class_name PlayerASPConfigContainer
 extends BaseCharacterASPConfigContainer
 
-var fs_unite_size = 3.9
-var fs_base = -2.4
+var fs_unite_size := 3.9
+var fs_base := -2.4 - 4.0
 
 ## fs
 ## Preset: MAIN PLAYER (-4dB, Pan 0.3)
 func _get_footstep_config() -> ASP3DConfig:
-	return ASP3DConfig.new(fs_base, -0.0, fs_unite_size, 20.0, 3, 0.3)
+	return ASP3DConfig.new(fs_base, 0.0, fs_unite_size, 20.0, 3, 0.3)
 
 ## Quieter and tighter distance
 func _get_footstep_light_config() -> ASP3DConfig:
@@ -30,7 +30,7 @@ func _get_launch_config() -> ASP3DConfig:
 
 ## Heavier: lower pitch (-0.1) and louder (-1.0) than footsteps
 func _get_land_config() -> ASP3DConfig:
-	return ASP3DConfig.new(fs_base - 0.5, -0.1, fs_unite_size, 30.0, 2, 0.3)
+	return ASP3DConfig.new(fs_base + 2.0, -0.1, fs_unite_size, 30.0, 2, 0.3)
 
 
 func _get_whoosh_config() -> ASP3DConfig:

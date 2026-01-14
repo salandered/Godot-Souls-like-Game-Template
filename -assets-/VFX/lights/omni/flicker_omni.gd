@@ -78,7 +78,7 @@ func _play_anim(animator: AnimationPlayer, anim_id: String, speed_scale_: float)
 	if play_animation and animator.has_animation(anim_id):
 		if not animator.is_playing() or animator.current_animation != anim_id:
 			animator.play(anim_id)
-			var anim_length = animator.get_animation(anim_id).length
+			var anim_length := animator.get_animation(anim_id).length
 			animator.seek(randf_range(0.0, anim_length))
 		animator.speed_scale = speed_scale_
 	else:

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dufftsci5dxgx"
+uid="uid://dwr21g11h1ram"
 path.s3tc="res://.godot/imported/jaw_mug2_norm.png-d780d695f21f2122993e65e38ed0e22a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -29,8 +29,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://-adopt_demo_level/demo-level_/jaw/jaw_mug2_norm.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

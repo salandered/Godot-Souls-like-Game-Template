@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 		return
 
 	# interpolate pos for smoothness
-	var target_pos = _current_target.global_position
+	var target_pos := _current_target.global_position
 	target_pos.y += get_y_shift()
 	global_position = global_position.lerp(target_pos, smooth_speed * delta)
 

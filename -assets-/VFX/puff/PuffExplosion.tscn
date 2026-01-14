@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu78ylp2jroiw"]
+[gd_scene load_steps=11 format=3 uid="uid://bu78ylp2jroiw"]
 
 [ext_resource type="Script" uid="uid://2p87053gvdyt" path="res://-assets-/VFX/puff/puff_explosion.gd" id="1_spofe"]
-[ext_resource type="Material" uid="uid://dkfh1d3e0jcin" path="res://-assets-/materials-shared/different/puff/puff.tres" id="2_bf0jt"]
+[ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/shaders/puff/SmokePuff.png" id="2_4x8tm"]
+[ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://-assets-/materials-shared/shaders/puff/SmokePuffNormals.png" id="3_2a6te"]
 
 [sub_resource type="Animation" id="Animation_odwyp"]
 length = 0.001
@@ -42,6 +43,22 @@ _data = {
 &"explosion": SubResource("Animation_sfsol")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wluwg"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_4x8tm")
+normal_enabled = true
+normal_scale = 12.0
+normal_texture = ExtResource("3_2a6te")
+refraction_scale = 0.31
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 1.027
+proximity_fade_enabled = true
+
 [sub_resource type="QuadMesh" id="QuadMesh_y004h"]
 size = Vector2(4, 4)
 
@@ -63,7 +80,7 @@ libraries = {
 
 [node name="PuffExplosionParticles" type="CPUParticles3D" parent="."]
 unique_name_in_owner = true
-material_override = ExtResource("2_bf0jt")
+material_override = SubResource("StandardMaterial3D_wluwg")
 cast_shadow = 0
 amount = 10
 lifetime = 9.0

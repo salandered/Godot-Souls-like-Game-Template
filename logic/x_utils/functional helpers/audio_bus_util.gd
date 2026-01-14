@@ -50,13 +50,13 @@ static func mute_test_buses() -> void:
 
 
 static func get_lowpass_filter(bus_name: String) -> AudioEffectLowPassFilter:
-	var bus_idx = _get_bus_idx(bus_name)
+	var bus_idx := _get_bus_idx(bus_name)
 	if bus_idx == -1:
 		return null
 	
-	var effect_count = AudioServer.get_bus_effect_count(bus_idx)
+	var effect_count := AudioServer.get_bus_effect_count(bus_idx)
 	for effect_idx in range(effect_count):
-		var effect = AudioServer.get_bus_effect(bus_idx, effect_idx)
+		var effect := AudioServer.get_bus_effect(bus_idx, effect_idx)
 		if effect is AudioEffectLowPassFilter:
 			return effect
 	return null
@@ -70,9 +70,9 @@ static func log_buses():
 	print("Time to next mix: ", AudioServer.get_time_to_next_mix())
 	
 	for bus_idx in AudioServer.bus_count:
-		var bus_name = AudioServer.get_bus_name(bus_idx)
-		var peak_l = AudioServer.get_bus_peak_volume_left_db(bus_idx, 0)
-		var peak_r = AudioServer.get_bus_peak_volume_right_db(bus_idx, 0)
+		var bus_name := AudioServer.get_bus_name(bus_idx)
+		var peak_l := AudioServer.get_bus_peak_volume_left_db(bus_idx, 0)
+		var peak_r := AudioServer.get_bus_peak_volume_right_db(bus_idx, 0)
 		print("Bus %s: L=%.2f R=%.2f" % [bus_name, peak_l, peak_r])
 
 

@@ -27,7 +27,7 @@ func _ready() -> void:
 		controls.text = controls_text
 	disable_free_cam()
 
-var free_cam_label_visibility_cycler = Cycler.new([
+var free_cam_label_visibility_cycler := Cycler.new([
 		[true, true],
 		[false, true],
 		[false, false],

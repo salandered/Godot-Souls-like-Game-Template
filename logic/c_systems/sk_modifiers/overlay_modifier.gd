@@ -20,7 +20,7 @@ class OverlayInstance extends RefCounted:
 	var curr_weight: float = 0.0
 	var curr_hips_weight: float = 0.0
 
-	var forced_fade: Dictionary = {}
+	var forced_fade: Dictionary[String, Variant] = {}
 
 	func _init(playback_: AnimPlayback, timing_: OverlayTiming, bone_mask_: Array[int], speed_: float):
 		self.playback = playback_
@@ -30,7 +30,7 @@ class OverlayInstance extends RefCounted:
 
 	# checks if a bone is part of this overlay's mask
 	func affects_bone(bone_idx: int, default_mask: Array[int]) -> bool:
-		var mask = bone_mask if not bone_mask.is_empty() else default_mask
+		var mask := bone_mask if not bone_mask.is_empty() else default_mask
 		return mask.has(bone_idx)
 
 	func start_forced_fade(fade_duration: float, current_w: float, current_hips_w: float):
@@ -105,9 +105,9 @@ func get_time_left() -> float:
 	if not curr_overlay:
 		return 0.0
 
-	var total_duration = curr_overlay.timing.get_total_duration()
-	var time_spent = curr_overlay.playback.time_spent
-	var remaining = total_duration - time_spent
+	var total_duration := curr_overlay.timing.get_total_duration()
+	var time_spent := curr_overlay.playback.time_spent
+	var remaining := total_duration - time_spent
 
 	return max(0.0, remaining)
 
@@ -152,8 +152,8 @@ func _update_blend_values():
 		_calculate_overlay_weight(prev_overlay)
 		
 		# Check if we should kill prev_overlay
-		var natural_end = prev_overlay.playback.time_spent >= prev_overlay.timing.get_total_duration()
-		var forced_end = prev_overlay.is_forced_fade_finished()
+		var natural_end := prev_overlay.playback.time_spent >= prev_overlay.timing.get_total_duration()
+		var forced_end := prev_overlay.is_forced_fade_finished()
 		
 		if natural_end or forced_end:
 			prev_overlay.curr_weight = 0.0

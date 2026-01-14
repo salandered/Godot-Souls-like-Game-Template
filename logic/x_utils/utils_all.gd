@@ -128,12 +128,56 @@ static func safe_emit(
 	warn_level: String = WL.WARN) -> bool:
 	if error_.null_object(signal_data, "no signal data", warn_level):
 		return false
-	if error_.null_signal(signal_data, "", warn_level):
+	if error_.null_signal(signal_data.signal_obj, "", warn_level):
 		return false
 	signal_data.signal_obj.emit(signal_payload)
 	if __log:
 		print_.prefix("<emit>", pp.sig(signal_data, signal_payload))
 	return true
+
+static func safe_emit_raw(
+	signal_: Signal,
+	signal_payload: Dictionary[String, Variant],
+	__log: bool = false,
+	warn_level: String = WL.WARN) -> bool:
+	if error_.null_signal(signal_, "", warn_level):
+		return false
+	signal_.emit(signal_payload)
+	if __log:
+		print_.prefix("<emit>", pp.sig_raw(signal_, signal_payload))
+	return true
+
+static func safe_emit_raw_no_payload(
+	signal_: Signal,
+	__log: bool = false,
+	warn_level: String = WL.WARN) -> bool:
+	if error_.null_signal(signal_, "", warn_level):
+		return false
+	signal_.emit()
+	if __log:
+		print_.prefix("<emit>", pp.sig_raw(signal_, {}))
+	return true
+
+
+static func safe_connect(
+	signal_: Signal,
+	callable: Callable,
+	__log: bool = false,
+	warn_level: String = WL.WARN) -> bool:
+	if error_.null_signal(signal_, "", warn_level):
+		return false
+	if not callable.is_valid():
+		error_.warn("callable is not valid", "", "", warn_level)
+		return false
+	if signal_.is_connected(callable):
+		return false
+
+	signal_.connect(callable)
+	
+	if __log:
+		print_.prefix("<connected>", pp.sig_raw(signal_, {}))
+	return true
+
 
 static func safe_look_at(
 		from_who: Node3D,

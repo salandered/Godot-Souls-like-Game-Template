@@ -195,7 +195,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id="Animation_wrivv"]
 resource_name = "pick"
-length = 0.6
+length = 0.9
 markers = [{
 "color": Color(0.64256185, 0.24944204, 0.24944204, 1),
 "name": &"goes-up-start",
@@ -287,7 +287,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.16666667, 0.23333333, 0.5, 0.56666666),
 "transitions": PackedFloat32Array(1, 5.0982404, 1, 1.9318721, 1),
 "update": 0,
-"values": [-80.0, -80.0, -10.0, -10.0, -80.0]
+"values": [-80.0, -80.0, -5.0, -5.0, -80.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -308,10 +308,10 @@ tracks/8/path = NodePath(".:volume_db")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.46666667, 0.8333333),
 "transitions": PackedFloat32Array(1, -2, 1),
 "update": 0,
-"values": [-10.0, -10.0, -80.0]
+"values": [-8.0, -8.0, -80.0]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -358,7 +358,7 @@ radial_segments = 8
 
 [node name="PuffFog" parent="Visuals/RedSphere" instance=ExtResource("1_c8rud")]
 unique_name_in_owner = true
-particles_amount = 6
+particles_amount = 4
 lifetime = 16.0
 particle_scale = 0.25
 emission_box_extents = Vector3(0.05, 0.05, 0.05)
@@ -403,9 +403,10 @@ transform = Transform3D(1.4285716, 0, 0, 0, 1.4285716, 0, 0, 0, 1.4285716, 0, 0.
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0, -0.06115779, -0.05089996)
 stream = ExtResource("2_lbk6k")
-pitch_scale = 1.51
-max_distance = 12.0
-max_polyphony = 2
+unit_size = 4.35
+max_db = -3.0
+pitch_scale = 0.5
+max_distance = 9.0
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
@@ -413,8 +414,9 @@ attenuation_filter_cutoff_hz = 942.0
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0.045602918, 0, 0)
 stream = ExtResource("3_6ute5")
-max_distance = 12.0
-max_polyphony = 2
+unit_size = 6.0
+max_db = -1.15
+max_distance = 9.0
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
@@ -422,10 +424,9 @@ attenuation_filter_cutoff_hz = 942.0
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, -0.013224141, -0.07411059, 0)
 stream = ExtResource("4_10lsv")
-volume_db = -5.0
-pitch_scale = 0.71
-max_distance = 12.0
-max_polyphony = 2
+unit_size = 6.0
+max_db = -1.339
+max_distance = 9.0
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
@@ -434,7 +435,7 @@ unique_name_in_owner = true
 stream = ExtResource("5_tbi52")
 volume_db = -10.0
 unit_size = 5.0
-max_db = 1.0
+max_db = -1.0
 pitch_scale = 0.15
 autoplay = true
 max_distance = 12.0
@@ -450,7 +451,6 @@ libraries = {
 
 [node name="InteractArea" parent="." instance=ExtResource("6_vaksa")]
 unique_name_in_owner = true
-area_radius = 1.0
 
 [node name="__dev_visuals" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24576539, 0)
@@ -460,3 +460,7 @@ visible = false
 gi_mode = 0
 mesh = ExtResource("8_jv5db")
 skeleton = NodePath("")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../InteractArea")
+update_scale = false

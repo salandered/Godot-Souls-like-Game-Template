@@ -5,6 +5,7 @@
 [resource]
 resource_name = "baked_barrel_temp"
 cull_mode = 2
+albedo_color = Color(1.2105311, 1.2105311, 1.2105311, 1)
 albedo_texture = ExtResource("1_jmr5v")
-metallic = 1.0
+metallic = 0.32
 roughness = 0.8585786

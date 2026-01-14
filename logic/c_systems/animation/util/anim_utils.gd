@@ -72,7 +72,7 @@ static func duplicate_native_player_mute_audio(source_player: AnimationPlayer) -
 	var new_player := AnimationPlayer.new()
 	
 	# copy all libs
-	var lib_names = source_player.get_animation_library_list()
+	var lib_names := source_player.get_animation_library_list()
 	for lib_name: StringName in lib_names:
 		var _source_lib: AnimationLibrary = source_player.get_animation_library(lib_name)
 

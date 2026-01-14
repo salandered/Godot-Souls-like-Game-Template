@@ -96,3 +96,7 @@ func _input(event: InputEvent) -> void:
 
 func pp_name() -> String:
 	return "⚔️⇆"
+
+
+func __LOG_B() -> bool:
+	return false

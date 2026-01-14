@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cj60o8d1x11in"]
+
+[ext_resource type="Texture2D" uid="uid://bbeyi3pq56oya" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_diffuse.png" id="1_ql6p7"]
+[ext_resource type="Texture2D" uid="uid://ds4u4j6oupcfo" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_normal.png" id="2_3467k"]
+[ext_resource type="Texture2D" uid="uid://ct6ipgspwswc7" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_roughness.png" id="3_e5q5p"]
+
+[resource]
+resource_name = "I_Concrete Old"
+cull_mode = 2
+albedo_texture = ExtResource("1_ql6p7")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_e5q5p")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_3467k")

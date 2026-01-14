@@ -130,7 +130,8 @@ func update(input_: InputPackage, delta: float):
 	speed_config.tie_turn_sp_to_speed(0.6)
 	pm().move_rotate_with_input_vector(input_, delta, speed_config)
 
-	get_animator_manager().set_global_speed_scale(pm().get_curr_velocity_len() / CURR_SPEED)
+	if CURR_SPEED + SPEED_BOOST != 0.0:
+		get_animator_manager().set_global_speed_scale(pm().get_curr_velocity_len() / (CURR_SPEED + SPEED_BOOST))
 
 
 var _next_anim_correction := 0.08

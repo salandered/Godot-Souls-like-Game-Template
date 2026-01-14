@@ -72,6 +72,7 @@ static func _process_single_surface(mesh: Mesh, idx: int, _mat: Material, node_n
 	
 	if not standard_mat.albedo_texture:
 		__log_script.info_("- 1", "⚠️🍊⚪ No albedo texture. Will no be saved.", pp.in_q(mat_resource_name))
+		return
 	
 	_fix_rough_and_metallic(standard_mat)
 
@@ -85,34 +86,35 @@ static func _process_single_surface(mesh: Mesh, idx: int, _mat: Material, node_n
 		__log_script.info_("SAVE_NEW", "✅️ Saved Successfully to", pp.in_q(save_path))
 		# Re-assign the saved material to the mesh to ensure the link is firm
 		# (Reloading from disk confirms the file is valid)
-		var reloaded_mat = load(save_path)
+		var reloaded_mat := load(save_path)
 		mesh.surface_set_material(idx, reloaded_mat)
 	else:
 		__log_script.error_("SAVE_NEW", "Failed to save material", save_path, "Keeping temporary version", "Error Code: %s" % err)
 
 
 static func _get_mat_save_path(mat_name: String) -> String:
-	var lower_name = mat_name.to_lower()
-	var folder = "unsorted"
+	var lower_name := mat_name.to_lower()
+	var folder := "unsorted"
 	
 	for target_folder in PIConfig.SUBFOLDER_RULES:
 		for keyword in PIConfig.SUBFOLDER_RULES[target_folder]:
 			if keyword.to_lower() in lower_name:
 				folder = target_folder
+				__log_script.info_("📁 4", "Found folder", folder, "using keyword", keyword)
 				break
 		if folder != "unsorted":
 			break
 	if folder == "unsorted":
 		folder = "baked"
-		
-	var base_folder_path = PIConfig.BASE_MAT_PATH + folder
+
+	var base_folder_path := PIConfig.BASE_MAT_PATH + folder
 	
 	# TARGET PREFIX: "Name_Reimp"
 	# This will match "Name_Reimp.tres", "Name_Reimp_Lighter.tres", "Name_Reimp_v2.tres"
-	var search_prefix = mat_name + PIConfig.REIMP_SUFFIX
+	var search_prefix := mat_name + PIConfig.REIMP_SUFFIX
 	
 	# Try to find ANY file that starts with this prefix
-	var existing_path = _find_recursive(base_folder_path, search_prefix)
+	var existing_path := _find_recursive(base_folder_path, search_prefix)
 	
 	if existing_path != "":
 		# Return the path of the variant found (e.g., .../Metal_Reimp_Lighter.tres)
@@ -128,13 +130,13 @@ static func _find_recursive(dir_path: String, search_prefix: String) -> String:
 		return ""
 
 	dir.list_dir_begin()
-	var file_name = dir.get_next()
+	var file_name := dir.get_next()
 
 	while file_name != "":
 		if dir.current_is_dir():
 			if file_name != "." and file_name != "..":
 				# Recurse
-				var found = _find_recursive(dir_path + "/" + file_name, search_prefix)
+				var found := _find_recursive(dir_path + "/" + file_name, search_prefix)
 				if found != "":
 					return found
 		else:
@@ -199,8 +201,8 @@ static func _try_find_metallic_texture(mat: BaseMaterial3D):
 	for suffix_src: String in suffixes_to_replace:
 		if suffix_src in filename:
 			for suffix_dst: String in targets:
-				var new_name = filename.replace(suffix_src, suffix_dst)
-				var guess_path = dir + "/" + new_name
+				var new_name := filename.replace(suffix_src, suffix_dst)
+				var guess_path := dir + "/" + new_name
 				
 				if FileAccess.file_exists(guess_path):
 					__log_script.info_(__prefix, "FOUND MATCH! Auto-assigning metallic", new_name)

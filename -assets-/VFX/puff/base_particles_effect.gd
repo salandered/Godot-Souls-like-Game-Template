@@ -49,6 +49,11 @@ extends Node3DLogger
 		normal_strength = value
 		if is_node_ready(): _apply_normal_strength()
 
+@export var billboard_mode: BaseMaterial3D.BillboardMode = BaseMaterial3D.BillboardMode.BILLBOARD_PARTICLES:
+	set(value):
+		billboard_mode = value
+		if is_node_ready(): _apply_billboard_mode()
+
 @export_group("Rotation Settings")
 ## Minimum initial rotation in degrees (e.g., -180 for full random)
 @export var initial_angle_min: float = 0.0:
@@ -96,6 +101,7 @@ func _apply_all_properties() -> void:
 	_apply_emission_extents()
 	_apply_color()
 	_apply_normal_strength()
+	_apply_billboard_mode()
 	_apply_rotation_settings()
 
 
@@ -128,6 +134,12 @@ func _apply_normal_strength() -> void:
 	var mat := get_particles().material_override if get_particles() else null
 	if mat and mat is BaseMaterial3D:
 		mat.normal_scale = normal_strength
+
+func _apply_billboard_mode() -> void:
+	var mat := get_particles().material_override if get_particles() else null
+	if mat and mat is StandardMaterial3D:
+		var mat_casted: StandardMaterial3D = mat
+		mat_casted.billboard_mode = billboard_mode
 
 func _apply_rotation_settings() -> void:
 	if get_particles():

@@ -61,8 +61,9 @@ enum Masks {
 	PLAYER_COL_MASK = Layers.ENVIRONMENT_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
 	OTHER_CHAR_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL, # | Layers.ITEM_COL,
 	HITBOX_AREA_MASK = Layers.WEAPON_AREA,
-	# may be without PROP_COL; ITEM_COL used to push rigid bodies on hit
-	WEAPON_AREA_MASK = Layers.HITBOX_AREA | Layers.PROP_COL | Layers.ITEM_COL,
+	# ITEM_COL used to push rigid bodies on hit
+	# PROP_COL and ENVIRONMENT_COL for SFX hit
+	WEAPON_AREA_MASK = Layers.HITBOX_AREA | Layers.PROP_COL | Layers.ITEM_COL | Layers.ENVIRONMENT_COL,
 	# Layers.ITEM_COL so items (rigid bodies) not fall through each other
 	ITEM_COL_MASK = Layers.ENVIRONMENT_COL | Layers.PLAYER_COL | Layers.OTHER_CHAR_COL | Layers.ITEM_COL,
 	# currently checks for weapon or body hit
@@ -72,6 +73,7 @@ enum Masks {
 	ALL_CHARACTERS = Layers.PLAYER_COL | Layers.OTHER_CHAR_COL,
 
 	ONLY_PLAYER = Layers.PLAYER_COL,
+	ONLY_WEAPON_AREA = Layers.WEAPON_AREA,
 
 	_ZERO_MASK = 0
 }

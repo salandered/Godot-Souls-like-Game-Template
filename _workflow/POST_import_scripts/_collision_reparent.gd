@@ -43,7 +43,7 @@ static func reparent_collisions(scene):
 	for item in col_collection.get_children():
 		if item is StaticBody3D:
 			var static_body := item as StaticBody3D
-			var has_collision = false
+			var has_collision := false
 			for child in static_body.get_children():
 				if child is CollisionShape3D:
 					has_collision = true
@@ -51,7 +51,7 @@ static func reparent_collisions(scene):
 			if not has_collision:
 				__log_script.error_("POPULATE_BODIES", "static_body has no CollisionShape3D", "validating bodies", "script hard stop", "body:" + static_body.name)
 				return
-			var normalized_name = ___normalise_node_name(static_body.name)
+			var normalized_name := ___normalise_node_name(static_body.name)
 			name_to_static_object[normalized_name] = static_body
 			__log_script.info_("POPULATE_BODIES", "> Found static body:", static_body.name, pp.in_sq("normalized:" + normalized_name), "at position:", static_body.position)
 	
@@ -68,9 +68,9 @@ static func reparent_collisions(scene):
 	else:
 		__log_script.info_("MATCH_MESHES", "\n  > Found", meshes_to_reparent.size(), "matches. Starting reparent...")
 		
-	var meshes_with_static_match_found = {}
+	var meshes_with_static_match_found := {}
 	for dict_item: Dictionary in meshes_to_reparent:
-		var normalized_name = ___normalise_node_name(dict_item["body"].name)
+		var normalized_name := ___normalise_node_name(dict_item["body"].name)
 		meshes_with_static_match_found[normalized_name] = true
 		perform_combined_reparent(dict_item["mesh"], dict_item["body"], col_collection)
 	
@@ -91,7 +91,7 @@ static func __find_node_by_prefix(node: Node, prefix: String) -> Node:
 	if node.name.begins_with(prefix):
 		return node
 	for child in node.get_children():
-		var found = __find_node_by_prefix(child, prefix)
+		var found := __find_node_by_prefix(child, prefix)
 		if found:
 			return found
 			
@@ -112,12 +112,12 @@ static func __find_matching_meshes(node: Node, name_to_static_object: Dictionary
 
 
 static func perform_combined_reparent(visual_mesh: MeshInstance3D, static_body: StaticBody3D, col_collection: Node) -> void:
-	var __prefix = "👪 3"
+	var __prefix := "👪 3"
 	__log_script.info_(__prefix, "\n=== REPARENTING:", visual_mesh.name, "===")
 	
-	var body_local_pos = static_body.position
-	var mesh_local_pos = visual_mesh.position
-	var mesh_parent = visual_mesh.get_parent()
+	var body_local_pos := static_body.position
+	var mesh_local_pos := visual_mesh.position
+	var mesh_parent := visual_mesh.get_parent()
 	
 	__log_script.info_(__prefix, "[BEFORE] Static body local pos:", body_local_pos)
 	__log_script.info_(__prefix, "[BEFORE] Visual mesh local pos:", mesh_local_pos)
@@ -126,20 +126,20 @@ static func perform_combined_reparent(visual_mesh: MeshInstance3D, static_body: 
 	__log_script.info_(__prefix, "[BEFORE] Mesh name:", pp.in_q(visual_mesh.name))
 	
 	# Calculate the offset between visual mesh and static body
-	var offset = mesh_local_pos - body_local_pos
+	var offset := mesh_local_pos - body_local_pos
 	__log_script.info_(__prefix, "[OFFSET] Calculated offset:", offset)
 	
 	if visual_mesh.mesh == null:
 		__log_script.error_(__prefix, "mesh instance has no mesh resource", "perform_combined_reparent", "script hard stop", "mesh name:", visual_mesh.name)
 		return
 	
-	var target_owner = static_body.owner
+	var target_owner := static_body.owner
 	if target_owner == null:
 		__log_script.error_(__prefix, "static body has no owner", "perform_combined_reparent", "script hard stop", "body:", static_body.name)
 		return
 	
 	# STEP 1: Rename mesh first to avoid name conflict when body is added
-	var original_mesh_name = visual_mesh.name
+	var original_mesh_name := visual_mesh.name
 	visual_mesh.name = visual_mesh.name + "_visuals"
 	__log_script.info_(__prefix, "[STEP 1] Renamed mesh:", original_mesh_name, "->", visual_mesh.name)
 	

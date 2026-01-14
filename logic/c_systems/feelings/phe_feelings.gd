@@ -3,7 +3,7 @@ extends BaseFeelings
 class_name PHEFeelings
 
 
-@export var MAX_HEALTH = 200
+@export var MAX_HEALTH: float = 200
 @export var PHASE_SWITCH_HP_TRESHOLD: float = 0.6
 
 func is_player() -> bool:

@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://c83n02wohi7f"]
-
-[resource]
-resource_name = "WoodTrim"
-cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
-metallic = 1.0

@@ -1,5 +1,5 @@
-extends Node3D
 class_name SparksHit
+extends Node3DLogger
 
 
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
@@ -28,8 +28,11 @@ func _apply_all_properties() -> void:
 
 
 func set_direction(normal: Vector3):
-	var mat = gpu_particles_3d.process_material as ParticleProcessMaterial
-	mat.direction = normal
+	var mat := gpu_particles_3d.process_material
+	if mat is ParticleProcessMaterial:
+		mat.direction = normal
+	else:
+		__log_warn_soft("mat is not ParticleProcessMaterial", "", "return", mat)
 
 
 func set_from_config(config: ParticlesConfig):

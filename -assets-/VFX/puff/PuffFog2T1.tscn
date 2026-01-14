@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://pf14lhmc8e23"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_jlahg"]
+
+[node name="PuffFogT1" type="Node3D"]
+
+[node name="PuffFogParticles" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
+cast_shadow = 0
+gi_mode = 0
+amount = 1
+lifetime = 20.0
+lifetime_randomness = 0.2
+mesh = SubResource("QuadMesh_jlahg")
+scale_amount_min = 0.95
+scale_amount_max = 1.05

@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://c68lbpe8s2h2w"]
+
+[ext_resource type="Texture2D" uid="uid://dpeqn1o8o23lp" path="res://-assets-/materials-shared/rocks-stone/rock_03/exit_2_rock_3_diff_1k.jpg" id="1_b7vhy"]
+[ext_resource type="Texture2D" uid="uid://c563bvildcprg" path="res://-assets-/materials-shared/rocks-stone/rock_03/exit_2_rock_3_norm_1k.png" id="2_qmgdl"]
+[ext_resource type="Texture2D" uid="uid://dh02fil781woq" path="res://-assets-/materials-shared/rocks-stone/rock_03/exit_2_rock_3_rough_1k.png" id="3_uy7vh"]
+
+[resource]
+resource_name = "B rock_3"
+cull_mode = 2
+albedo_texture = ExtResource("1_b7vhy")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_uy7vh")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_qmgdl")

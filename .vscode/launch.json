@@ -17,7 +17,7 @@
 			// "profiling": false,
 			// "single_threaded_scene": false,
 			//
-			"debug_collisions": true,
+			// "debug_collisions": true,
 			// "debug_paths": true,
 			// "debug_navigation": true,
 			//

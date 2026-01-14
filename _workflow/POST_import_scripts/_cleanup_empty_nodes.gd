@@ -5,7 +5,7 @@ class_name PICleanupEmptyNodes
 
 ## recursive
 static func cleanup_empty_nodes(node: Node) -> void:
-	var children_to_check = node.get_children().duplicate()
+	var children_to_check := node.get_children().duplicate()
 	
 	for child in children_to_check:
 		cleanup_empty_nodes(child)

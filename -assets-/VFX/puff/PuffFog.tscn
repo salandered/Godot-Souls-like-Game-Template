@@ -1,11 +1,13 @@
 [gd_scene load_steps=15 format=4 uid="uid://ba71cpxy8vbng"]
 
 [ext_resource type="Script" uid="uid://b1hatdvwv0m3" path="res://-assets-/VFX/puff/puff_fog.gd" id="1_gsaac"]
-[ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/different/puff/SmokePuff.png" id="2_tiixx"]
+[ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/shaders/puff/SmokePuff.png" id="2_tiixx"]
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="2_w2q06"]
-[ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://-assets-/materials-shared/different/puff/SmokePuffNormals.png" id="3_bx3y5"]
+[ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://-assets-/materials-shared/shaders/puff/SmokePuffNormals.png" id="3_bx3y5"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="3_s18qp"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_nor_gl_1k.png" id="4_wcto4"]
+[ext_resource type="Curve" uid="uid://d4lspe1f15lx3" path="res://-assets-/VFX/puff/scale_curve_puff_fog.tres" id="4_ako0d"]
+[ext_resource type="Gradient" uid="uid://cmx4ke4lo4gko" path="res://-assets-/VFX/puff/color_ramp_fog_puff.tres" id="4_bx3y5"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="4_wcto4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ako0d"]
 transparency = 1
@@ -25,14 +27,6 @@ proximity_fade_enabled = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_y004h"]
 size = Vector2(4, 4)
-
-[sub_resource type="Curve" id="Curve_omnbd"]
-_data = [Vector2(0, 0), 0.0, 3.25161, 0, 0, Vector2(1, 1), 0.0363636, 0.0363636, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_3b8ax"]
-offsets = PackedFloat32Array(0, 0.033591732, 0.503876, 0.95090437, 1)
-colors = PackedColorArray(0.47963405, 0.47963405, 0.47963405, 0, 0.49, 0.48118, 0.4704, 0, 0.57, 0.449445, 0.30209997, 0.1882353, 0.51, 0.48705, 0.459, 0, 0.5019608, 0.5019608, 0.5019608, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0lsj"]
 resource_name = "damaged_concrete_columns"
@@ -112,13 +106,14 @@ shadow_mesh = SubResource("ArrayMesh_s18qp")
 
 [node name="PuffFog" type="Node3D"]
 script = ExtResource("1_gsaac")
+particles_amount = 6
 
 [node name="PuffFogParticles" type="CPUParticles3D" parent="."]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_ako0d")
 cast_shadow = 0
 gi_mode = 0
-amount = 10
+amount = 6
 lifetime = 9.0
 lifetime_randomness = 0.2
 mesh = SubResource("QuadMesh_y004h")
@@ -129,8 +124,8 @@ spread = 90.0
 gravity = Vector3(0, 0, 0)
 scale_amount_min = 0.95
 scale_amount_max = 1.05
-scale_amount_curve = SubResource("Curve_omnbd")
-color_ramp = SubResource("Gradient_3b8ax")
+scale_amount_curve = ExtResource("4_ako0d")
+color_ramp = ExtResource("4_bx3y5")
 
 [node name="test_visuals" type="Node3D" parent="."]
 unique_name_in_owner = true

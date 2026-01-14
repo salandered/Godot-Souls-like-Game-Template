@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "Pinga_baked": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/Pinga_baked_Reimp.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/baked/pinga/Pinga_baked_Reimp.tres",
 "use_external/path": "uid://bj1nt2phlwt7s"
 }
 }

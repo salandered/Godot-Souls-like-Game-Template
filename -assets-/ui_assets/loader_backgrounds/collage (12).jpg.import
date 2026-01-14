@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://u18e8ohwjwv2"
-path.s3tc="res://.godot/imported/collage (12).jpg-c250cc18b2a9e58c01d0a77962ac7292.s3tc.ctex"
+path="res://.godot/imported/collage (12).jpg-c250cc18b2a9e58c01d0a77962ac7292.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://-assets-/ui_assets/loader_backgrounds/collage (12).jpg"
-dest_files=["res://.godot/imported/collage (12).jpg-c250cc18b2a9e58c01d0a77962ac7292.s3tc.ctex"]
+dest_files=["res://.godot/imported/collage (12).jpg-c250cc18b2a9e58c01d0a77962ac7292.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

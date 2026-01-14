@@ -9,7 +9,7 @@ extends Node3DLogger
 
 
 # 0 = Show, 1 = Minimal, 2 = Off
-var profiler_mode_cycler = Cycler.new([0, 1, 2], 2)
+var profiler_mode_cycler := Cycler.new([0, 1, 2], 2)
 
 func _ready() -> void:
 	GlobalSignal.SIG_show_tut.connect(_on_show_tutorial)
@@ -42,6 +42,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_profiler):
 		profiler_mode_cycler.get_next()
 		update_profiler_mode()
+
+
+	if event.is_action_pressed(RawAction.DEV_show_col):
+		var tree := get_tree()
+		tree.debug_collisions_hint = not tree.debug_collisions_hint
 
 # endregion
 

@@ -9,7 +9,6 @@
 [node name="SpeedIncreaseChest" instance=ExtResource("1_2sh8b")]
 script = ExtResource("2_lsi57")
 item_scene = ExtResource("3_dv0l8")
-override_label_y_offset = 1.1
 
 [node name="ChestFasteners" parent="Visuals/LidPivot/FastenersPivot" index="0"]
 material_override = ExtResource("3_lsi57")

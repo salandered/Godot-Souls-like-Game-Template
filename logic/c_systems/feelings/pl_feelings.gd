@@ -6,7 +6,8 @@ class_name PlayerFeelings
 var FATIGUE_STATUS := "FATIGUE〰️"
 
 const FATIGUE_THRESHOLD = 8.0
-var max_stamina: float = 70.0
+var max_stamina: float = 170.0
+var max_health: float = 240.0
 
 var stamina_regen_rate: float = 10.0 # per sec
 
@@ -33,9 +34,9 @@ func initialise() -> void:
 
 	__validated = true
 
-	__log_("connected player_change_health")
 	GlobalSignal.player_change_health.connect_(_on_player_change_health)
-	GlobalSignal.player_stamina_increase.connect_(_on_player_increase_stamina)
+	GlobalSignal.player_max_health_increase.connect_(_on_player_max_health_increase)
+	GlobalSignal.player_max_stamina_increase.connect_(_on_player_max_stamina_increase)
 
 
 func is_player() -> bool:
@@ -43,7 +44,7 @@ func is_player() -> bool:
 
 
 func get_max_health() -> float:
-	return 240
+	return max_health
 
 func lose_stamina(amount: float):
 	_change_stamina(-amount)
@@ -199,11 +200,18 @@ func _on_player_change_health(payload: Dictionary[String, Variant]) -> void:
 	__log_("_on_player_change_health", "triggered with value", _r.value)
 	_change_health(_r.value)
 	
-func _on_player_increase_stamina(payload: Dictionary[String, Variant]) -> void:
+func _on_player_max_health_increase(payload: Dictionary[String, Variant]) -> void:
 	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
 	if _r.err:
 		return
-	__log_("_on_player_increase_stamina", "triggered with value", _r.value)
+	__log_("_on_player_max_health_increase", "triggered with value", _r.value)
+	max_health += _r.value
+
+func _on_player_max_stamina_increase(payload: Dictionary[String, Variant]) -> void:
+	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
+	if _r.err:
+		return
+	__log_("_on_player_max_stamina_increase", "triggered with value", _r.value)
 	max_stamina += _r.value
 	
 

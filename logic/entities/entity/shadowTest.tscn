@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccnbqrdhcqay6"]
 
-[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp_1k.tres" id="1_7ynfd"]
+[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="1_7ynfd"]
 [ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/demo-level_/island/ISLAND_WRAPPER.tscn" id="2_ffjij"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="3_ffjij"]
 

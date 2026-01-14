@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://fktjtkvfiwx6" path="res://-assets-/VFX/lights/_base_omni/base_spot.gd" id="1_i8ip5"]
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="2_g8fxq"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="3_i8ip5"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_nor_gl_1k.png" id="4_q7c00"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="4_q7c00"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0lsj"]
 resource_name = "damaged_concrete_columns"
@@ -123,6 +123,7 @@ smooth_faces = false
 
 [node name="PuffFog" parent="." instance=ExtResource("1_2ye51")]
 unique_name_in_owner = true
+process_mode = 4
 visible = false
 
 [node name="__test" type="Node3D" parent="."]

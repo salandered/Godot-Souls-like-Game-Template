@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxfgvp3futm7q"]
+[gd_scene load_steps=9 format=3 uid="uid://cxfgvp3futm7q"]
 
 [ext_resource type="Material" uid="uid://cjybi26n5lih0" path="res://-assets-/VFX/shaders/air-wave-2.tres" id="1_0pem4"]
 [ext_resource type="Script" uid="uid://bnmpiwotm6xje" path="res://-assets-/ui_assets/air_wave_2.gd" id="1_dbngs"]
-[ext_resource type="Texture2D" uid="uid://i2yhk38a85xl" path="res://-assets-/ui_assets/images/5kRy2xFB8C.png" id="2_0pem4"]
+[ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="3_fkr04"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dbngs"]
 radius = 1.0
@@ -205,9 +205,6 @@ _data = {
 &"explode_big": SubResource("Animation_dprvv")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxtw1"]
-albedo_texture = ExtResource("2_0pem4")
-
 [node name="AirWave" type="Node3D"]
 script = ExtResource("1_dbngs")
 
@@ -224,4 +221,4 @@ libraries = {
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-10.165007, 0, 0, 0, -10.165007, 0, 0, 0, 1.7280512, 0, 0, -3.6539855)
-material = SubResource("StandardMaterial3D_yxtw1")
+material = ExtResource("3_fkr04")

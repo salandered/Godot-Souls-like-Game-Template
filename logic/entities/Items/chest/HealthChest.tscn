@@ -8,7 +8,6 @@
 [node name="HealtChest" instance=ExtResource("1_04di6")]
 script = ExtResource("2_yc3t5")
 item_scene = ExtResource("3_c5gqd")
-override_label_y_offset = 1.0
 
 [node name="ChestLid" parent="Visuals/LidPivot" index="1"]
 material_override = ExtResource("2_yjo78")

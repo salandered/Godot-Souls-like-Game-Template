@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bpbujrrytkdj8"]
 
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="1_5pvkx"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_nor_gl_1k.png" id="2_kksrv"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="2_kksrv"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="3_tgvbb"]
 
 [resource]

@@ -1,7 +1,7 @@
 extends RayCast3D
 
 @export var attachment: Node3D
-@onready var csg_sphere_3d := $CSGSphere3D
+@onready var csg_sphere_3d: CSGSphere3D = $CSGSphere3D
 @onready var csg_sphere_3d_2: CSGSphere3D = $CSGSphere3D2
 @export var __csg_visuals: bool = false
 @export var __log_dist: bool = false
@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 			csg_sphere_3d.visible = true
 			csg_sphere_3d_2.visible = true
 			csg_sphere_3d.global_position = get_collision_point()
-			var _pos = csg_sphere_3d.global_position
+			var _pos := csg_sphere_3d.global_position
 			csg_sphere_3d_2.global_position = Vector3(_pos.x - 0.5, _pos.y, _pos.z)
 	else:
 		if csg_sphere_3d:

@@ -6,7 +6,7 @@ class_name BoneTools
 static func validate_skeleton(skeleton: Skeleton3D) -> bool: # {int: String}
 	if not skeleton:
 		return false
-	var bone_count = skeleton.get_bone_count()
+	var bone_count := skeleton.get_bone_count()
 	if bone_count != Constants.BONE_COUNT:
 		# soft warn
 		# print_.note(false, "bone_count != Constants.BONE_COUNT", "PlayerModifierAnimator", pp.s("we always use", Constants.BONE_COUNT, ", regardless."), bone_count)

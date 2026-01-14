@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://btndis7shrb28"]
+
+[ext_resource type="Texture2D" uid="uid://dhg5fx7g7xn6i" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Base Color.jpg" id="1_lmmeg"]
+[ext_resource type="Texture2D" uid="uid://cbvppwracogs7" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Normal.jpg" id="2_xre0q"]
+[ext_resource type="Texture2D" uid="uid://fbuekhrl3hcj" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Roughness.png" id="3_j7eku"]
+
+[resource]
+resource_name = "UA water-rocks"
+cull_mode = 2
+albedo_texture = ExtResource("1_lmmeg")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_j7eku")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_xre0q")

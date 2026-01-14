@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://0isjovhfn8l7"]
+
+[ext_resource type="PackedScene" path="res://-assets-/GLB-char/godot_plush/MiniPlush.tscn" id="1_n5vye"]
+[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://-assets-/VFX/lights/omni/FlickerOmni.tscn" id="2_akcn2"]
+
+[node name="BiggestPlush" instance=ExtResource("1_n5vye")]
+
+[node name="lp" parent="." index="0"]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
+
+[node name="FlickerOmni" parent="." index="1" instance=ExtResource("2_akcn2")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 0, 23.050455, 0)
+speed_scale = 0.1
+play_animation = false
+move_speed_scale = 2.0
+radius = 45.0
+energy = 18.0
+attenuation = 1.2
+volumetric_fog_energy = 4.0

@@ -22,13 +22,13 @@ func _format_text():
 		text = ""
 		return
 	
-	var formatted = ""
-	var lines = plain_text.split("\n")
+	var formatted := ""
+	var lines := plain_text.split("\n")
 	
 	# Step 1: Make text before " - " bold
 	for line in lines:
 		if " - " in line:
-			var parts = line.split(" - ", false, 1)
+			var parts := line.split(" - ", false, 1)
 			if parts.size() >= 2:
 				formatted += "[b]" + parts[0] + "[/b] - " + parts[1] + "\n"
 			else:
@@ -42,10 +42,10 @@ func _format_text():
 	for phrase in phrase_icons.keys():
 		if phrase.is_empty():
 			continue
-		var icon_path = phrase_icons[phrase]
+		var icon_path := phrase_icons[phrase]
 		if ResourceLoader.exists(icon_path):
 			# Icon + italic phrase
-			var replacement = "[img=%dx%d]%s[/img] %s" % [icon_size, icon_size, icon_path, phrase]
+			var replacement := "[img=%dx%d]%s[/img] %s" % [icon_size, icon_size, icon_path, phrase]
 			formatted = formatted.replace(phrase, replacement)
 	
 	# Step 2b: Make remaining phrases italic (ones without icons or not in phrase_icons)

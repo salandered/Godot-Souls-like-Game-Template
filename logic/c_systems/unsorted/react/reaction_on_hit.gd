@@ -181,7 +181,7 @@ static func _pick_overlay_weight(hit: HitData, max_damage: float) -> float:
 
 
 ## if not mentioned - will be default
-static var enemy_state_to_bone_mask = {
+static var enemy_state_to_bone_mask: Dictionary[String, Array] = {
 	PHES.Leaf.combat_idle: BoneMask.get_full_body_no_root()
 	}
 

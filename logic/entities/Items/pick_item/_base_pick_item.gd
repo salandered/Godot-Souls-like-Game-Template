@@ -35,16 +35,16 @@ func _ready() -> void:
 
 
 ## public
-func set_interact_area_enable(value: bool):
-	__log_("set_interact_area_enable", value)
-	interact_area.ENABLED = value
+func set_interact_area_monitor_enable(value: bool):
+	__log_("set_interact_area_monitor_enable", value)
+	interact_area.set_monitor_enable(value)
 
 
 func _on_my_area_interacted():
-	if not interact_area.ENABLED:
+	if not interact_area.MONITOR_ENABLED:
 		__log_("_on_my_area_interacted", "not interact_area.enabled")
 		return
-	interact_area.ENABLED = false
+	interact_area.set_monitor_enable(false)
 	__log_("_on_my_area_interacted", "triggered")
 	
 	_on_my_area_interacted_implementation()

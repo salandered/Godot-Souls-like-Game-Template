@@ -50,7 +50,8 @@ func _toggle_camera_mode() -> void:
 		# get_tree().paused = false
 		Input.mouse_mode = _previous_mouse_mode
 		_turn_off_free_cam()
-		_cached_camera.current = true
+		if _cached_camera and not _cached_camera.is_queued_for_deletion():
+			_cached_camera.current = true
 		hide()
 		set_process(false)
 		GlobalSignal.SIG_hide_free_cam_ui.emit()
@@ -140,15 +141,15 @@ func _create_camera_body() -> void:
 		__log_("_create_camera_body", "already created")
 		return
 	
-	var body = FreeCameraBody.new()
+	var body := FreeCameraBody.new()
 	body.name = "DebugCamBody"
 	
 	body.collision_layer = Collision.Layers.PLAYER_COL
 	
 	body.collision_mask = 0 # camera not pushing things
 	
-	var shape_node = CollisionShape3D.new()
-	var sphere = SphereShape3D.new()
+	var shape_node := CollisionShape3D.new()
+	var sphere := SphereShape3D.new()
 	sphere.radius = 0.5
 	shape_node.shape = sphere
 	

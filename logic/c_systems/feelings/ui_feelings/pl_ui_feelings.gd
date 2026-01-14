@@ -14,8 +14,8 @@ extends NodeSystem
 @onready var pl_feelings: PlayerFeelings = %Feelings
 
 
-var STAMINA_BIG_CHANGE_THRESHOLD = 3.0
-var STAMINA_LERP_SPEED = 10.0
+var STAMINA_BIG_CHANGE_THRESHOLD := 3.0
+var STAMINA_LERP_SPEED := 10.0
 
 var health_bar: FeelingBar
 var stamina_bar: FeelingBar
@@ -48,7 +48,8 @@ func __soft_dependencies() -> Array[Object]:
 func _ready() -> void:
 	_setup_feeling_bars()
 
-	GlobalSignal.player_stamina_increase.connect_(_on_player_increase_stamina)
+	GlobalSignal.player_max_health_increase.connect_(_on_player_increase_max_health)
+	GlobalSignal.player_max_stamina_increase.connect_(_on_player_increase_max_stamina)
 	# pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
 	__perform_validation()
@@ -62,7 +63,7 @@ func _ready() -> void:
 
 func _setup_feeling_bars() -> void:
 	if pl_feelings:
-		var health_conf = FeelingBarConfig.new(
+		var health_conf := FeelingBarConfig.new(
 			0.2, 0.8, 0.5, 1.0,
 			Tween.TRANS_QUAD,
 			Tween.EASE_OUT
@@ -80,7 +81,7 @@ func _setup_feeling_bars() -> void:
 		_prev_health = pl_feelings.get_curr_health()
 
 
-		var stamina_conf = FeelingBarConfig.new(
+		var stamina_conf := FeelingBarConfig.new(
 					0.2, 0.8, 0.5, 1.0,
 					Tween.TRANS_EXPO,
 					Tween.EASE_OUT
@@ -113,7 +114,7 @@ func _update_health_bar() -> void:
 	health_bar.animate_main_bar_value_change(self, curr_health)
 	
 	# Ghost bar logic
-	var is_damage = curr_health < _prev_health
+	var is_damage := curr_health < _prev_health
 	if is_damage:
 		health_bar.animate_ghost_bar_value_change(self, _prev_health, curr_health)
 	else:
@@ -160,7 +161,7 @@ func _update_stamina_bar(delta: float) -> void:
 			# We update _prev_stamina so we don't trigger "Big Hit" again next frame
 			_prev_stamina = curr_stamina
 			return
-		var new_val = lerp(ui_val, curr_stamina, STAMINA_LERP_SPEED * delta)
+		var new_val := lerpf(ui_val, curr_stamina, STAMINA_LERP_SPEED * delta)
 		
 		# Snap to target if very close to avoid infinite visual lag
 		if abs(new_val - curr_stamina) < 0.1:
@@ -177,18 +178,26 @@ func _update_stamina_bar(delta: float) -> void:
 
 
 func _handle_stamina_color() -> void:
-	# Accessing main_bar directly since FeelingBar doesn't expose color helpers
 	if pl_feelings.is_in_fatigue():
 		stamina_bar.main_bar_modulate(Color(1.077, 0.711, 0.412, 1.0))
 	else:
 		stamina_bar.main_bar_modulate_reset()
 
 
-func _on_player_increase_stamina(payload: Dictionary) -> void:
+func _on_player_increase_max_health(payload: Dictionary) -> void:
 	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
 	if _r.err:
 		return
-	__log_("_on_player_increase_stamina", "triggered with value", _r.value)
+	__log_("_on_player_increase_max_health", "triggered with value", _r.value)
+	
+	health_bar.animate_bar_size_increase(_r.value)
+
+
+func _on_player_increase_max_stamina(payload: Dictionary) -> void:
+	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
+	if _r.err:
+		return
+	__log_("_on_player_increase_max_stamina", "triggered with value", _r.value)
 	
 	stamina_bar.animate_bar_size_increase(_r.value)
 	

@@ -124,7 +124,7 @@ func _check_audio_tracks(anim: AnimationData, from_time: float, to_time: float) 
 			# __log_("Audio Track Data(s) crossed🎵", timestamp, "| window:", pp.in_sq(pp.s(from_time, "->", to_time)))
 			
 			for item: AudioTrackKey in audio_track_data_list:
-				var unique_id = item.get_instance_id()
+				var unique_id := item.get_instance_id()
 				if not item.track_enabled:
 					continue
 

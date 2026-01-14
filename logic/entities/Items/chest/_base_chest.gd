@@ -6,7 +6,7 @@ class_name BaseChest
 extends Node3DSystem
 
 
-## things like mateterial can be changed using scene inheritance
+## things like material can be changed using scene inheritance
 
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -17,23 +17,20 @@ extends Node3DSystem
 
 
 @export var item_scene: PackedScene
-@export var override_label_y_offset: float = 1.0:
-	set(value):
-		override_label_y_offset = value
-		if is_node_ready(): _set_label_y_offset()
 
+## nullable after validation
 var item: BasePickItem
 
 
 func __hard_dependencies() -> Array[Object]:
 	return [
-		animation_player
+		animation_player,
+		item_scene
 	]
 
 func __soft_dependencies() -> Array[Object]:
 	return [
 		interact_area,
-		item
 	]
 
 class AnimID:
@@ -41,12 +38,9 @@ class AnimID:
 
 
 func _ready() -> void:
-	_set_label_y_offset()
-	
-	
 	if not Engine.is_editor_hint():
-		if item_scene:
-			var _item = item_scene.instantiate()
+		if __perform_validation():
+			var _item := item_scene.instantiate()
 			if _item is not BasePickItem:
 				__log_warn("_item is not BasePickItem")
 				item = null
@@ -54,21 +48,18 @@ func _ready() -> void:
 				item = _item
 				add_child(item)
 				item.global_position = item_pivot.global_position
-				_item.set_interact_area_enable(false)
-	
-		if __perform_validation():
+				item.set_interact_area_monitor_enable(false)
+
 			animation_player.animation_finished.connect(_on_animation_finished)
 			interact_area.SIG_interacted.connect(_on_my_area_interacted)
 
 
 func __hard_validation() -> bool:
-	var r = AnimUtils.safe_has_animation(animation_player, AnimID.open)
+	var r := AnimUtils.safe_has_animation(animation_player, AnimID.open)
 	return r
 
 
 func open():
-	if not __validation_ok():
-		return
 	__log_("open", "opening")
 	
 	animation_player.play(AnimID.open)
@@ -79,21 +70,18 @@ func _on_animation_finished(anim_name: String) -> void:
 		AnimID.open:
 			__log_("_on_animation_finished", "open")
 			if item:
-				item.set_interact_area_enable(true)
+				item.set_interact_area_monitor_enable(true)
 
 
 func _on_my_area_interacted():
-	if not interact_area.ENABLED:
-		__log_("_on_my_area_interacted", "not interact_area.enabled")
+	if not interact_area.MONITOR_ENABLED:
+		__log_("_on_my_area_interacted", "not interact_area.MONITOR_ENABLED")
 		return
-	interact_area.ENABLED = false
+	interact_area.set_monitor_enable(false)
 	__log_("_on_my_area_interacted", "triggered")
 	open()
 
 
-func _set_label_y_offset() -> void:
-	if interact_area:
-		interact_area.label_y_offset = override_label_y_offset
 # func _input(event: InputEvent) -> void:
 # 	if not OS.is_debug_build():
 # 		return

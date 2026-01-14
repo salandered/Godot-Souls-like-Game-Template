@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dftuwv5xo7lmd"]
-
-[ext_resource type="Texture2D" uid="uid://3m0qfnyt5n7u" path="res://-assets-/materials-shared/baked/door_type/tower-map_DoorType1_2.jpg" id="1_osd8y"]
-
-[resource]
-resource_name = "DoorType1_2"
-cull_mode = 2
-albedo_texture = ExtResource("1_osd8y")
-roughness = 0.5

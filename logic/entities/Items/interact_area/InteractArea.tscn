@@ -6,6 +6,7 @@
 radius = 2.0
 
 [node name="InteractArea" type="Area3D"]
+top_level = true
 collision_mask = 2
 script = ExtResource("1_ekt48")
 
@@ -13,10 +14,13 @@ script = ExtResource("1_ekt48")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 transparency = 0.16
+visibility_range_end = 6.0
+visibility_range_end_margin = 1.0
 billboard = 1
+no_depth_test = true
 modulate = Color(0.62219584, 0.62219584, 0.62219584, 1)
 text = "Press E to interact"
-font_size = 20
+font_size = 24
 outline_size = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

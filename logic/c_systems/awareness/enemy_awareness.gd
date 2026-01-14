@@ -11,7 +11,7 @@ var me: BaseEnemyCharacter
 ## expects downcast as a child
 @onready var downcast = $Downcast as RayCast3D
 
-@export var debug_sight_cone: bool = true
+@export var debug_sight_cone: bool = false
 
 
 func is_player() -> bool:
@@ -19,6 +19,8 @@ func is_player() -> bool:
 
 
 func initialise() -> void:
+	## WARNING: turned off. code should be revisited
+	debug_sight_cone = false
 	dev_initialise()
 
 
@@ -121,7 +123,7 @@ func _update_sight_cone_mesh():
 	for i in range(segments):
 		var a1 := lerpf(-half_angle, half_angle, float(i) / segments)
 		var a2 := lerpf(-half_angle, half_angle, float(i + 1) / segments)
-		var p1 = Vector3(sin(a1), 0, cos(a1)) * me.sight_distance # interface violation ....
+		var p1 = Vector3(sin(a1), 0, cos(a1)) * me.sight_distance # WARNING interface violation ....
 		var p2 = Vector3(sin(a2), 0, cos(a2)) * me.sight_distance
 		mesh.surface_add_vertex(Vector3.ZERO)
 		mesh.surface_add_vertex(p1)

@@ -1,15 +1,15 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://o0bn285hpysy"]
 
-[ext_resource type="Texture2D" uid="uid://s2jxmgd6x4y2" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/tree_group_lichen_rock_diff_1k.jpg" id="1_w70ux"]
-[ext_resource type="Texture2D" uid="uid://b6g6w2rtu7ty3" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/tree_group_lichen_rock_nor_gl.png" id="2_knn3w"]
-[ext_resource type="Texture2D" uid="uid://b8mx4athk20rv" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/tree_group_lichen_rock_rough.png" id="3_24d64"]
+[ext_resource type="Texture2D" uid="uid://dwsi1sk7r8xwr" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/exit_2_lichen_rock_diff_1k.jpg" id="1_vws2r"]
+[ext_resource type="Texture2D" uid="uid://bu02xg7wumoyn" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/exit_2_lichen_rock_norm_gl.png" id="2_lqesb"]
+[ext_resource type="Texture2D" uid="uid://b87n6fgrpvy4s" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/exit_2_lichen_rock_rough.png" id="3_4ay7g"]
 
 [resource]
 resource_name = "lichen_rock"
 cull_mode = 2
-albedo_texture = ExtResource("1_w70ux")
+albedo_texture = ExtResource("1_vws2r")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_24d64")
+roughness_texture = ExtResource("3_4ay7g")
 roughness_texture_channel = 4
 normal_enabled = true
-normal_texture = ExtResource("2_knn3w")
+normal_texture = ExtResource("2_lqesb")

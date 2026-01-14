@@ -51,12 +51,12 @@ static func _get_descendants_filtered(
 
 
 static func world_environments(node: Node) -> Array[WorldEnvironment]:
-	var r = _get_descendants_filtered(node, func(n): return n is WorldEnvironment)
+	var r := _get_descendants_filtered(node, func(n): return n is WorldEnvironment)
 	return TypeCast.array_of_world_environment(r)
 
 
 static func fog_volumes(node: Node, visible_only: bool = false) -> Array[FogVolume]:
-	var r = _get_descendants_filtered(node,
+	var r := _get_descendants_filtered(node,
 		func(n): \
 			return n is FogVolume \
 				and (not visible_only or n.visible == true)
@@ -65,7 +65,7 @@ static func fog_volumes(node: Node, visible_only: bool = false) -> Array[FogVolu
 
 
 static func directional_lights_3d(node: Node, visible_only: bool = false) -> Array[DirectionalLight3D]:
-	var r = _get_descendants_filtered(node,
+	var r := _get_descendants_filtered(node,
 		func(n): \
 			return n is DirectionalLight3D \
 				and (not visible_only or n.visible == true)
@@ -73,7 +73,7 @@ static func directional_lights_3d(node: Node, visible_only: bool = false) -> Arr
 	return TypeCast.array_of_directional_light_3d(r)
 
 static func markers_3d(node: Node) -> Array[Marker3D]:
-	var r = _get_descendants_filtered(node, func(n): return n is Marker3D)
+	var r := _get_descendants_filtered(node, func(n): return n is Marker3D)
 	return TypeCast.array_of_marker_3d(r)
 
 
@@ -85,7 +85,7 @@ static func areas(node: Node) -> Array:
 
 
 static func collision_shapes(node: Node) -> Array[CollisionShape3D]:
-	var r = _get_descendants_filtered(node, func(n): return n is CollisionShape3D)
+	var r := _get_descendants_filtered(node, func(n): return n is CollisionShape3D)
 	r = TypeCast.array_of_collision_shape(r)
 	return r
 
@@ -95,7 +95,7 @@ static func static_bodies(node: Node) -> Array:
 
 
 static func mesh_instances(node: Node, visible_only: bool = false) -> Array[MeshInstance3D]:
-	var r = _get_descendants_filtered(
+	var r := _get_descendants_filtered(
 		node,
 		func(n): \
 			return n is MeshInstance3D \
@@ -119,7 +119,7 @@ static func bone_attachments(node: Node) -> Array:
 
 
 static func audio_stream_players_3D(node: Node, skip_subscenes: bool = false) -> Array[AudioStreamPlayer3D]:
-	var r = _get_descendants_filtered(node, func(n): return n is AudioStreamPlayer3D, false, skip_subscenes)
+	var r := _get_descendants_filtered(node, func(n): return n is AudioStreamPlayer3D, false, skip_subscenes)
 	r = TypeCast.array_of_audio_stream_player_3d(r)
 	return r
 
@@ -133,10 +133,15 @@ static func breakable_areas(node: Node) -> Array:
 
 
 static func char_hit_boxes(node: Node) -> Array[CharacterHitbox]:
-	var r = _get_descendants_filtered(node, func(n): return n is CharacterHitbox)
+	var r := _get_descendants_filtered(node, func(n): return n is CharacterHitbox)
 	r = TypeCast.array_of_char_hit_box(r)
 	return r
 
+
+static func base_character_movement(node: Node, only_one: bool = false) -> Array[BaseCharacterMovement]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseCharacterMovement, false, false, only_one)
+	return TypeCast.array_of_base_character_movement(r)
+	
 
 static func base_combat(node: Node, only_one: bool = false) -> Array[BaseCombat]:
 	var r := _get_descendants_filtered(node, func(n): return n is BaseCombat, false, false, only_one)
@@ -179,14 +184,19 @@ static func base_ph_leaf_states(node: Node) -> Array:
 
 
 static func enemy_camera_targets(node: Node) -> Array[EnemyCameraTarget]:
-	var r = _get_descendants_filtered(node, func(n): return n is EnemyCameraTarget)
+	var r := _get_descendants_filtered(node, func(n): return n is EnemyCameraTarget)
 	return TypeCast.array_of_enemy_camera_target(r)
+
+
+static func enemy_characters(node: Node) -> Array[PHCharacter]:
+	var r := _get_descendants_filtered(node, func(n): return n is PHCharacter)
+	return TypeCast.array_of_enemy_character(r)
 
 
 # UI
 
 static func pause_menu_controller(node: Node) -> Array[M_PauseMenuController]:
-	var r = _get_descendants_filtered(node, func(n): return n is M_PauseMenuController)
+	var r := _get_descendants_filtered(node, func(n): return n is M_PauseMenuController)
 	return TypeCast.array_of_pause_menu_controller(r)
 
 

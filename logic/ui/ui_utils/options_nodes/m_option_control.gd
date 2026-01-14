@@ -87,13 +87,29 @@ func _ready() -> void:
 			TYPE_FLOAT: default_value = 0.0
 			TYPE_STRING: default_value = ""
 			TYPE_COLOR: default_value = Color.WHITE
-			TYPE_VECTOR2I: default_value = Vector2i(1152, 648) # resolution
-			TYPE_VECTOR2: default_value = Vector2(1152, 648)
+			TYPE_VECTOR2I: default_value = Vector2i(0, 0) # resolution
+			TYPE_VECTOR2: default_value = Vector2(0, 0)
 			_: __log_warn("non primitive type. Cannot assign safe default_value", "M_OptionControl", "", "Using safe default", "property type/Option name", property_type, option_name)
 		
-		if key == "Brightness":
+		if key == M_AppSettings.BRIGHTNESS:
 			default_value = 1.0
-			
+		elif key == M_AppSettings.SHADOW_MODE:
+			default_value = 1
+		elif key == M_AppSettings.VOLUMETRIC_FOG:
+			default_value = true
+		elif key == M_AppSettings.FPS_LIMIT:
+			default_value = 60
+		elif key == M_AppSettings.DISPLAY_MODE:
+			default_value = 2
+		elif key == M_AppSettings.SCREEN_RESOLUTION:
+			default_value = Vector2i(0, 0)
+		elif key == M_AppSettings.V_SYNC:
+			default_value = 1
+		elif key == M_AppSettings.UI_SCALE:
+			default_value = 1.0
+		elif key == M_AppSettings.MSAA_3D:
+			default_value = 1
+	
 		if default_value != null:
 			__log_warn("Auto-fixed NULL default_value", "M_OptionControl", "Using safe default", "Safe Default/property type/Option name", default_value, property_type, option_name)
 

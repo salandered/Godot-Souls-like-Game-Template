@@ -32,7 +32,7 @@ func _focus_first_search(control_node : Control, levels : int = 1) -> bool:
 		return true
 	if levels < 1:
 		return false
-	var children = control_node.get_children()
+	var children := control_node.get_children()
 	for child in children:
 		if _focus_first_search(child, levels - 1):
 			return true

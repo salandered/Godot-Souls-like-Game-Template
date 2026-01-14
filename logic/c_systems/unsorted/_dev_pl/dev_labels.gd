@@ -49,7 +49,7 @@ func _input(event: InputEvent) -> void:
 
 func _label_inputs():
 	var input_: InputPackage = InputManager.get_current_input()
-	var vel_by_input_ = __pl().player_movement.__velocity_by_input(input_, Constants.ONE_FRAME)
+	var vel_by_input_ = __pl().get_pl_movement().__velocity_by_input(input_, Constants.ONE_FRAME)
 	var t := ""
 	t += "input_dir " + pp.vec2(input_.input_direction)
 	t += "  len %5.2f" % [input_.input_direction.length()]
@@ -64,7 +64,7 @@ func _label_inputs():
 	
 	var curr_dir = "-none-"
 	t += "\n 8-dir-strafe   " + Direction.name_(input_.detect_strafe_dir())
-	var relative_dir = __pl().player_movement.detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
+	var relative_dir = __pl().get_pl_movement().detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
 	t += "\n 8-dir-new   " + Direction.name_(relative_dir)
 		
 	t += "\nhealth/stamina %5.2f/%5.2f" % [
@@ -155,7 +155,7 @@ func __l_action(act_name: String) -> LegsAction:
 	return null
 
 
-func __pl():
+func __pl() -> Princess:
 	return player
 
 func __c_s() -> BasePlayerState:
@@ -173,8 +173,8 @@ func _label_phe_enemy_info(enemy: PHCharacter):
 	if not OS.is_debug_build():
 		return
 		
-	var pl_e_dist := pp.round_01(enemy.enemy_movement.distance_to_player())
-	var pl_e_angle: String = pp.rad2deg(enemy.enemy_movement.signed_angle_to_player(), true)
+	var pl_e_dist := pp.round_01(enemy.get_e_movement().distance_to_player())
+	var pl_e_angle: String = pp.rad2deg(enemy.get_e_movement().signed_angle_to_player(), true)
 	var c_l_s := enemy.get_curr_leaf_state()
 	var _cls_name := '- no curr state - '
 	var _cls_ts := -1.0

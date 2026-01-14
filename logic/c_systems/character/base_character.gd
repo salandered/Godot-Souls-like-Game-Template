@@ -5,6 +5,7 @@ extends CharacterBody3DCharacterSystem
 
 var _sig_container: BaseCharacterSignalContainer
 var _combat: BaseCombat
+var _movement: BaseCharacterMovement
 
 ## not nullable after init
 func get_sig_container() -> BaseCharacterSignalContainer:
@@ -13,6 +14,10 @@ func get_sig_container() -> BaseCharacterSignalContainer:
 ## not nullable after init
 func get_combat() -> BaseCombat:
 	return _combat
+
+## not nullable after init
+func get_movement() -> BaseCharacterMovement:
+	return _movement
 
 
 signal SIG_land_wave(char_glob_position: Vector3, anim: String)
@@ -59,9 +64,9 @@ func _initialise_common_char() -> void:
 	if bones:
 		bones.accept_bones()
 	
-	var _r := get_descendants.base_combat(self)
-	if not error_.len_one(_r):
-		_combat = _r[0]
+	var base_combat_r := get_descendants.base_combat(self)
+	if not error_.len_one(base_combat_r):
+		_combat = base_combat_r[0]
 		_combat.initialise(self, _for_init_active_weapon_id_list())
 
 		var hit_boxes := get_descendants.char_hit_boxes(self)
@@ -70,7 +75,10 @@ func _initialise_common_char() -> void:
 		__log_(em.pin, "initted", len(hit_boxes), "hitboxes for", pp_name())
 	
 
-	_for_init_movement().initialise(self)
+	var base_movement_r := get_descendants.base_character_movement(self)
+	if not error_.len_one(base_movement_r):
+		_movement = base_movement_r[0]
+		_movement.initialise(self)
 
 	
 	var sfx_system := _for_init_sfx_system()
@@ -120,7 +128,6 @@ func _initialise_weapons_sfx():
 ##
 @abstract func _for_init_visuals() -> BaseVisuals
 @abstract func _for_init_bones() -> BaseCharBones
-@abstract func _for_init_movement() -> BaseCharacterMovement
 @abstract func _for_init_active_weapon_id_list() -> Array[String]
 ## sfx
 @abstract func _for_init_sfx_system() -> CharacterSFXSystem
@@ -139,7 +146,7 @@ func _initialise_weapons_sfx():
 @abstract func react_on_hit(hit_data: HitData) -> void
 
 
-@abstract func reset_position() -> void
+@abstract func reset_position(y_offset: float = 0.0) -> void
 
 
 ## Character states. 

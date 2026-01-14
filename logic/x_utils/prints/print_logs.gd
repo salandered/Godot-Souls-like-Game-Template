@@ -189,7 +189,7 @@ static func _is_freq_satisfied(global_freq: int = 1, arg_freq: int = 1) -> bool:
 	return false
 
 static func note(bright: bool, ...parts: Array):
-	var _msg = em.pin_alt + "NOTE (not warn) " + pp.list_(parts)
+	var _msg := em.pin_alt + "NOTE (not warn) " + pp.list_(parts)
 	if bright: _msg = em.mark_x2 + _msg
 	print("\t", _msg)
 
@@ -259,7 +259,7 @@ static func node_info(node: Node):
 	prefix_s("", "Is inside tree:", node.is_inside_tree())
 	prefix_s("", "Parent:", node.get_parent())
 	prefix_s("", "Children count:", node.get_child_count())
-	var groups = node.get_groups()
+	var groups := node.get_groups()
 	prefix_s("Groups:", ", ".join(groups) if groups.size() > 0 else "(none)")
 
 

@@ -70,7 +70,7 @@ func _init(
 	var validate_ok := _hard_validate_implementation()
 	var deps_ok := __perform_validation()
 
-	if validate_ok and deps_ok and not error_.null_signal(self.signal_data):
+	if validate_ok and deps_ok and not error_.null_signal(self.signal_data.signal_obj):
 		__log_("init ok", "connecting signal", "stream", asp.stream)
 		self.signal_data.signal_obj.connect(on_signal)
 	else:

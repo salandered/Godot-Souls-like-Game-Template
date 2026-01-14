@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dg2vjew5w2ih8" path="res://-assets-/VFX/lights/omni/flicker_omni.gd" id="2_auf42"]
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="3_ij60g"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="4_dephg"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_nor_gl_1k.png" id="5_6uios"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="5_6uios"]
 
 [sub_resource type="Animation" id="Animation_auf42"]
 length = 0.001
@@ -225,6 +225,7 @@ omni_range = 8.5932
 [node name="PuffFog" parent="." index="1"]
 process_mode = 4
 visible = false
+particles_amount = 10
 
 [node name="FlickerAnimator" type="AnimationPlayer" parent="." index="2"]
 unique_name_in_owner = true

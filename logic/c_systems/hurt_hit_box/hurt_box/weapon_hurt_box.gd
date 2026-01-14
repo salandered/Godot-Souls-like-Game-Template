@@ -133,6 +133,9 @@ func _apply_sfx_hit_target(body: Node3D):
 	if body is BreakableArea:
 		_emit_sig(SignalID.sfx_hit_target, {}, body)
 		return
+	if body is SimpleTargetHitArea:
+		_emit_sig(SignalID.sfx_hit_target, {}, body)
+		return
 	if body is Area3D: # including CharacterHitbox (will manage on its own)
 		return
 
@@ -150,7 +153,10 @@ func _apply_sfx_hit_target(body: Node3D):
 	## STATIC
 	if body is StaticBody3D:
 		__log_(em.mark_x2, "Static", body, body.name, u.safe_object_pp_name(body))
-		return
+		if body.collision_layer == Collision.Layers.ENVIRONMENT_COL:
+			_emit_sig(SignalID.sfx_hit_target, {}, body)
+			__log_(em.mark_x2, "Static", body, body.name, u.safe_object_pp_name(body))
+			return
 
 
 func _apply_push(body: Node3D):
@@ -159,7 +165,7 @@ func _apply_push(body: Node3D):
 
 	# __log_(em.mark_x2, "detected rigid body and we r attacking", body, body.name)
 	# push in direction weapon is moving
-	var push_direction = _velocity.normalized()
+	var push_direction := _velocity.normalized()
 
 	body.apply_central_impulse(push_direction * _get_weapon_push_force())
 
@@ -189,7 +195,7 @@ func _is_mine_hit_box(body: Node3D) -> bool:
 
 
 func __LOG_B():
-	return true
+	return false
 
 func __LOG_INDENT() -> int:
 	return 10

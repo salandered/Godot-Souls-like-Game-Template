@@ -78,6 +78,9 @@ func set_up_asp(some_asp: AudioStreamPlayer3D) -> AudioStreamPlayer3D:
 	some_asp.max_distance = max_distance
 	some_asp.max_polyphony = max_polyphony
 	some_asp.panning_strength = panning_strength
+	
+	## NOTE
+	some_asp.max_db = -2.0
 
 	some_asp.bus = bus_id
 

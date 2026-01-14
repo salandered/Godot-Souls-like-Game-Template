@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="2_cwyt1"]
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="2_jdvpr"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="3_78siu"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_nor_gl_1k.png" id="4_ror74"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="4_ror74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqn15"]
 albedo_color = Color(0.948957, 0.0198181, 1.15514e-06, 1)
@@ -94,8 +94,7 @@ transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 0, 0, 0)
 unique_name_in_owner = true
 transform = Transform3D(1.0000001, 0, 0, 0, 0.99999964, 0, 0, 0, 1, 0, 0, 0)
 light_color = Color(1, 0.684833, 0.39, 1)
-light_energy = 6.0
-light_indirect_energy = 20.0
+light_energy = 4.0
 light_specular = 1.0
 shadow_enabled = true
 shadow_opacity = 0.6
@@ -111,6 +110,7 @@ radius = 0.1
 
 [node name="PuffFog" parent="." instance=ExtResource("2_cwyt1")]
 unique_name_in_owner = true
+emission_box_extents = Vector3(0.2, 0.2, 0.2)
 
 [node name="test_visual_base" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.44367436, 0, -1.1358384, 0, 1.219416, 0, 1.1358382, 0, -0.44367436, -0.11369126, 0.007882406, -1.5951779)

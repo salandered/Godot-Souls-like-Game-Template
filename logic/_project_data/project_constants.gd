@@ -35,3 +35,10 @@ const SFX_ASP_BASE_VOL_DB := -1.0
 const SFX_ASP_MAX_VOL_DB := 3.0
 ##
 const SFX_ASP_BASE_BUS_ID := BusID.GAME_SFX
+
+
+## Properties for tweens
+
+class Prop:
+	const ASP_VOLUME_DB = "volume_db"
+	const CONTROL_MODULATE_A = "modulate:a"

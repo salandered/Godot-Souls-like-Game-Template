@@ -2,8 +2,8 @@ class_name EnemyASPConfigContainer
 extends BaseCharacterASPConfigContainer
 
 
-var fs_unite_size = 3.9
-var fs_base = -2.0
+var fs_unite_size := 3.9
+var fs_base := -2.0
 
 ## fs like
 func _get_footstep_config() -> ASP3DConfig:

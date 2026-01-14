@@ -3,12 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_BaseChest.tscn" id="1_cn6fl"]
 [ext_resource type="Script" uid="uid://dxdde5pnmu255" path="res://logic/entities/Items/chest/dodge_increase_chest.gd" id="2_bpwhl"]
 [ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/Items/pick_item/DodgeIncreaseItem.tscn" id="3_520wc"]
-[ext_resource type="Material" uid="uid://duynryxm8g4wc" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW-05K_Reimp.tres" id="3_bkf8g"]
+[ext_resource type="Material" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="3_bkf8g"]
 
 [node name="DodgeIncreaseChest" instance=ExtResource("1_cn6fl")]
 script = ExtResource("2_bpwhl")
 item_scene = ExtResource("3_520wc")
-override_label_y_offset = 1.1
 
 [node name="ChestLid" parent="Visuals/LidPivot" index="1"]
 material_override = ExtResource("3_bkf8g")

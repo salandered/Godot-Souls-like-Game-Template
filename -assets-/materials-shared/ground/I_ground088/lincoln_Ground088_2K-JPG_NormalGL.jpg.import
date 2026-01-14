@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c35jm8358byhc"
+uid="uid://cse07e6hekthq"
 path.s3tc="res://.godot/imported/lincoln_Ground088_2K-JPG_NormalGL.jpg-3a9854d274dcd3316b0cf13f0ed72a61.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -29,8 +29,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://-assets-/GLB-level/minimal-arena/linkoln/lincoln_Ground088_2K-JPG_NormalGL.jpg"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

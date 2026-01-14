@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn0uxeas0msl3"
+uid="uid://dmsl8h4hncrg4"
 path.s3tc="res://.godot/imported/exit_2_Mine_Carts_1k_Diffuse.png-0220cb094ae4117e943548fd50bc8a03.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "e1e98dfa1687f74618c34018b5496c07"
 }
 
 [deps]

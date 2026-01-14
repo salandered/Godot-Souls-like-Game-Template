@@ -1,0 +1,411 @@
+[gd_scene load_steps=19 format=3 uid="uid://p44femc1tyl6"]
+
+[ext_resource type="ArrayMesh" uid="uid://c0e1vegkm7gp" path="res://-assets-/GLB-items/lever/mesh/lever_Cube_121.res" id="1_h423s"]
+[ext_resource type="Script" uid="uid://768gg74byybm" path="res://logic/entities/Items/lever/_generic_lever.gd" id="1_m0bf1"]
+[ext_resource type="ArrayMesh" uid="uid://u4ogo27uaq7s" path="res://-assets-/GLB-items/lever/mesh/lever_Cube_128.res" id="2_sobr5"]
+[ext_resource type="Material" uid="uid://c4vlerv4i007h" path="res://-assets-/materials-shared/wood/wood067/I_Wood067_2K-JPG_Reimp_green.tres" id="2_wu3r8"]
+[ext_resource type="ArrayMesh" uid="uid://c64i6tyuniq2q" path="res://-assets-/GLB-items/lever/mesh/lever_object1_331.res" id="3_wu3r8"]
+[ext_resource type="Material" uid="uid://bqnu3j8ckt1kh" path="res://-assets-/materials-shared/marble/marble017/I_Marble017_2K-JPG_Reimp_green.tres" id="4_sobr5"]
+[ext_resource type="AudioStream" uid="uid://dfd3c0jmfbxqo" path="res://-assets-/SFX/sources/freesound_cc0/krok_lever.wav" id="7_1hu8f"]
+[ext_resource type="Material" uid="uid://bgbfw10o7g3ys" path="res://-assets-/materials-shared/metal/metal047/I_Metal047B_2K-JPG_Reimp.tres" id="7_bvq45"]
+[ext_resource type="AudioStream" uid="uid://ducp3pinuk7el" path="res://-assets-/SFX/sources/cat/clack_2.wav" id="8_bvq45"]
+[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="8_d8td6"]
+[ext_resource type="AudioStream" uid="uid://xnugux0jw08e" path="res://-assets-/SFX/sources/400/stone_push_medium.wav" id="10_hfepl"]
+[ext_resource type="AudioStream" uid="uid://bkt3dm21uaro7" path="res://-assets-/SFX/sources/cat/hit_3_concrete_bone_rock_fall.wav" id="10_o85y6"]
+[ext_resource type="AudioStream" uid="uid://cl1jjdek2ps10" path="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Drop_Object_02_accomplish.wav" id="11_dow2q"]
+[ext_resource type="AudioStream" uid="uid://dxt7u38cqdfx0" path="res://-assets-/SFX/sources/400/stone_push_short.wav" id="11_o85y6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_njx0t"]
+radius = 0.37451172
+height = 1.4814453
+
+[sub_resource type="Animation" id="Animation_85x1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/HandlePivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ASPS/LeverRotASP:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ASPS/StonePushASP:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ASPS/SwitchASP:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ASPS/StonePushBackASP:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ASPS/HitBackASP:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.65]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ASPS/LeverRotASP:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:volume_db")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m0bf1"]
+resource_name = "lever_switch"
+length = 2.1
+markers = [{
+"color": Color(0.6697165, 0.22474824, 0.22474824, 1),
+"name": &"switch_s",
+"time": 0.84134185
+}, {
+"color": Color(0.7172371, 0, 0, 1),
+"name": &"switch_e",
+"time": 1.002599
+}]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/HandlePivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1, 1.1, 1.5, 1.6, 1.6666666),
+"transitions": PackedFloat32Array(-2, 2, 1, 4.5947905, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.9198622, 0, 0), Vector3(2.0943952, 0, 0), Vector3(2.0943952, 0, 0), Vector3(0, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ASPS/LeverRotASP:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 1.2666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ASPS/StonePushASP:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ASPS/SwitchASP:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ASPS/StonePushBackASP:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.1333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ASPS/HitBackASP:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.96666664, 1.5666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.73333335, 1.4666667, 1.5333333, 2.0921896),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.65, 0.65, 0.9, 0.9]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ASPS/LeverRotASP:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.033333335, 0.6, 1.1333333, 1.8333334, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.6, 0.6, 0.8, 0.8, 0.6]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:volume_db")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.4666667, 1.5333333, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-18.0, -18.0, -25.0, -25.0]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.8333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_switch_inside_anim"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d8td6"]
+_data = {
+&"RESET": SubResource("Animation_85x1g"),
+&"lever_switch": SubResource("Animation_m0bf1")
+}
+
+[node name="BaseLever" type="Node3D"]
+script = ExtResource("1_m0bf1")
+
+[node name="Visuals" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+
+[node name="lever_base" type="MeshInstance3D" parent="Visuals"]
+material_override = ExtResource("2_wu3r8")
+mesh = ExtResource("1_h423s")
+skeleton = NodePath("")
+
+[node name="lever_platform" type="MeshInstance3D" parent="Visuals"]
+material_override = ExtResource("4_sobr5")
+mesh = ExtResource("3_wu3r8")
+skeleton = NodePath("")
+
+[node name="HandlePivot" type="Marker3D" parent="Visuals"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17440508, 0)
+
+[node name="lever_handle" type="MeshInstance3D" parent="Visuals/HandlePivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17440508, 0)
+material_override = ExtResource("7_bvq45")
+mesh = ExtResource("2_sobr5")
+skeleton = NodePath("")
+
+[node name="AccomplishASP" type="AudioStreamPlayer3D" parent="Visuals/HandlePivot/lever_handle"]
+unique_name_in_owner = true
+stream = ExtResource("11_dow2q")
+max_db = -2.66
+pitch_scale = 0.65
+max_polyphony = 2
+bus = &"game_SFX"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0.103268325, -0.005098344)
+shape = SubResource("CapsuleShape3D_njx0t")
+
+[node name="ASPS" type="Node" parent="."]
+
+[node name="LeverRotASP" type="AudioStreamPlayer3D" parent="ASPS"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2782256, 0)
+stream = ExtResource("7_1hu8f")
+volume_db = -5.0
+max_db = -5.0
+pitch_scale = 0.6
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="SwitchASP" type="AudioStreamPlayer3D" parent="ASPS"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31002283, 0.22258048, 0)
+stream = ExtResource("8_bvq45")
+volume_db = -4.0
+unit_size = 5.0
+max_db = 1.0
+pitch_scale = 0.55
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="HitBackASP" type="AudioStreamPlayer3D" parent="ASPS"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20668197, 0.23317954, 0)
+stream = ExtResource("10_o85y6")
+volume_db = -10.0
+unit_size = 6.0
+max_db = 0.0
+pitch_scale = 0.6
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="StonePushASP" type="AudioStreamPlayer3D" parent="ASPS"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20138237, 0)
+stream = ExtResource("10_hfepl")
+volume_db = -10.0
+unit_size = 6.0
+max_db = -1.0
+pitch_scale = 1.4
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="StonePushBackASP" type="AudioStreamPlayer3D" parent="ASPS"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16163582, 0)
+stream = ExtResource("11_o85y6")
+volume_db = -12.0
+unit_size = 6.0
+max_db = -10.0
+pitch_scale = 1.2
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_d8td6")
+}
+
+[node name="InteractArea" parent="." instance=ExtResource("8_d8td6")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24636853, 0)
+label_text = "Pull"
+label_y_offset = 1.0
+area_sphere_radius = 1.25
+
+[node name="__remote_interact_area" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24636853, 0)
+remote_path = NodePath("../InteractArea")
+update_scale = false

@@ -6,6 +6,7 @@
 
 [node name="OptionLabel" parent="." index="0"]
 theme_override_font_sizes/font_size = 28
+text = " "
 
 [node name="HSlider" parent="." index="1"]
 min_value = 0.3

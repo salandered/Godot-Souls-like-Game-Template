@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://v8wb46q68q4" path="res://logic/entities/Locations/props/dark_crate.gd" id="1_l7xcd"]
 [ext_resource type="PhysicsMaterial" uid="uid://6doppmi3hm3d" path="res://logic/entities/Locations/props/dark_crate_ph_mat.tres" id="1_qsoln"]
 [ext_resource type="Texture2D" uid="uid://bktnoy7cqnpfh" path="res://-assets-/materials-shared/baked/dark_crate/barrel-box_v2_cargo_wooden_decor.jpg" id="1_ryvau"]
-[ext_resource type="Material" uid="uid://dq1jnowy0hm6a" path="res://-assets-/materials-shared/wood/wood_peeling_paint/wood_peeling_paint_weathered.001.tres" id="2_ierka"]
+[ext_resource type="Material" uid="uid://dq1jnowy0hm6a" path="res://-assets-/materials-shared/wood/wood_peeling_paint/wood_peeling_paint_weathered.tres" id="2_ierka"]
 [ext_resource type="PackedScene" uid="uid://co5cmuoyyn0ey" path="res://logic/entities/Locations/props/rigid_body_asp_3d.tscn" id="5_7chfk"]
 
 [sub_resource type="BoxShape3D" id="2"]

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b38vfgjwpinft" path="res://-assets-/VFX/lights/fire/flame_gpu_particles_3d.tscn" id="4_qdwx7"]
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="5_is5lk"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="6_w4q5a"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_nor_gl_1k.png" id="7_elwu4"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="7_elwu4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqn15"]
 albedo_color = Color(0.948957, 0.0198181, 1.15514e-06, 1)
@@ -110,6 +110,7 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.99999964, 0, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("3_qdwx7")
 volume_db = -1.5
 unit_size = 3.0
+max_db = -2.0
 pitch_scale = 0.63
 max_distance = 12.0
 max_polyphony = 2
@@ -122,7 +123,7 @@ bus = &"game_SFX"
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.014128417, 0)
 gi_mode = 0
-amount = 40
+amount = 10
 
 [node name="test_visual_fire" type="MeshInstance3D" parent="Effect" index="1"]
 transform = Transform3D(2.046, 0, 0, 0, 2.046, 0, 0, 0, 2.046, -2.2136915, -0.45511734, 0.34782207)

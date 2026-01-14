@@ -71,14 +71,14 @@ func make_active() -> void:
 
 
 @export var __csg_visual: bool = true
-@onready var csg_marker: CSGSphere3D = $LookAt/CSGMarker
+@onready var look_at_visual: MeshInstance3D = %LookAtVisual
 
 func dev_initialise():
 	if not OS.is_debug_build():
-		if csg_marker:
-			csg_marker.visible = false
+		if look_at_visual:
+			look_at_visual.visible = false
 		return
-	csg_marker.visible = __csg_visual
+	look_at_visual.visible = __csg_visual
 
 
 # func _input(event: InputEvent):

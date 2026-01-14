@@ -16,17 +16,17 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var fps = Engine.get_frames_per_second()
+	var fps := Engine.get_frames_per_second()
 	
-	var vsync_mode = DisplayServer.window_get_vsync_mode()
-	var mode_name = "Unknown"
+	var vsync_mode := DisplayServer.window_get_vsync_mode()
+	var mode_name := "Unknown"
 	match vsync_mode:
 		DisplayServer.VSYNC_DISABLED: mode_name = "Disabled"
 		DisplayServer.VSYNC_ENABLED: mode_name = "Enabled (Std)"
 		DisplayServer.VSYNC_ADAPTIVE: mode_name = "Adaptive"
 		DisplayServer.VSYNC_MAILBOX: mode_name = "Mailbox"
 	
-	var mem = OS.get_static_memory_usage() / 1048576.0
+	var mem := OS.get_static_memory_usage() / 1048576.0
 	
 	if profiler_info:
 		profiler_info.text = "FPS: %d\nVSync: %s\nMemory: %3.0f MiB" % [fps, mode_name, mem]

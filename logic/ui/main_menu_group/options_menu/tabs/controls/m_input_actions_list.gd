@@ -38,7 +38,7 @@ const INPUT_BUTTON_FONT_SIZE := 28
 @export var action_group_names: Array[String]
 @export var input_action_names: Array[StringName]:
 	set(value):
-		var _value_changed = input_action_names != value
+		var _value_changed := input_action_names != value
 		input_action_names = value
 		if _value_changed:
 			var _new_readable_action_names: Array[String]
@@ -48,7 +48,7 @@ const INPUT_BUTTON_FONT_SIZE := 28
 
 @export var readable_action_names: Array[String]:
 	set(value):
-		var _value_changed = readable_action_names != value
+		var _value_changed := readable_action_names != value
 		readable_action_names = value
 		if _value_changed:
 			var _new_action_name_map: Dictionary
@@ -197,7 +197,7 @@ func _update_assigned_inputs_and_button(action_name: String, action_group: int, 
 	assigned_input_events[new_readable_input_name] = action_name
 
 func _clear_button(action_name: String, action_group: int) -> void:
-	var button = _get_button_by_action(action_name, action_group)
+	var button := _get_button_by_action(action_name, action_group)
 	if not button: return
 	button.icon = null
 	button.text = EMPTY_INPUT_ACTION_STRING
@@ -267,7 +267,7 @@ func _add_action_options(action_name: String, readable_action_name: String, inpu
 
 func _get_all_action_names(include_built_in: bool = false) -> Array[StringName]:
 	var action_names: Array[StringName] = input_action_names.duplicate()
-	var full_action_name_map = action_name_map.duplicate()
+	var full_action_name_map := action_name_map.duplicate()
 	if include_built_in:
 		for action_name in built_in_action_name_map:
 			if action_name is String:

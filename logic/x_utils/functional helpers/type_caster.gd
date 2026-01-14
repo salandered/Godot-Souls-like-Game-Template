@@ -132,6 +132,11 @@ static func array_of_base_combat(array: Array) -> Array[BaseCombat]:
 	list_casted.assign(_safe_validate_class(array, BaseCombat, "BaseCombat"))
 	return list_casted
 
+static func array_of_base_character_movement(array: Array) -> Array[BaseCharacterMovement]:
+	var list_casted: Array[BaseCharacterMovement] = []
+	list_casted.assign(_safe_validate_class(array, BaseCharacterMovement, "BaseCharacterMovement"))
+	return list_casted
+
 static func array_of_char_hit_box(array: Array) -> Array[CharacterHitbox]:
 	var list_casted: Array[CharacterHitbox] = []
 	list_casted.assign(_safe_validate_class(array, CharacterHitbox, "CharacterHitbox"))
@@ -140,6 +145,11 @@ static func array_of_char_hit_box(array: Array) -> Array[CharacterHitbox]:
 static func array_of_enemy_camera_target(array: Array) -> Array[EnemyCameraTarget]:
 	var list_casted: Array[EnemyCameraTarget] = []
 	list_casted.assign(_safe_validate_class(array, EnemyCameraTarget, "EnemyCameraTarget"))
+	return list_casted
+
+static func array_of_enemy_character(array: Array) -> Array[PHCharacter]:
+	var list_casted: Array[PHCharacter] = []
+	list_casted.assign(_safe_validate_class(array, PHCharacter, "PHCharacter"))
 	return list_casted
 
 

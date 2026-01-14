@@ -3,7 +3,7 @@ extends PlayerAction
 
 var VERT_SPEED_BUMP: float = 3
 var FORWARD_SPEED_BUMP: float = 2
-var GRAVITY_DURING_JUMP: float = 9 # Adjust to match your game feel
+var GRAVITY_DURING_JUMP: float = 9
 
 var is_jumped: bool = false
 

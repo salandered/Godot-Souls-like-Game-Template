@@ -14,3 +14,4 @@ omni_range = 3.6
 [node name="PuffFog" parent="." index="1"]
 process_mode = 4
 visible = false
+particles_amount = 10

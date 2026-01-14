@@ -3,8 +3,8 @@ extends RefCounted
 class_name __log_script
 
 
-static func error_(prefix: String, what: String, where: String, fallback: String, ...context: Array):
-	var _msg = "Problem: %s. Where: '%s'. WarnLevel: %s" % [what, where, fallback]
+static func error_(prefix: String, what: String = "", where: String = "", fallback: String = "", ...context: Array):
+	var _msg := "Problem: %s. Where: '%s'. WarnLevel: %s" % [what, where, fallback]
 	if not context.is_empty():
 		_msg += " | Details: " + pp.list_(context)
 	var _r := print_.parse_prefix(prefix)

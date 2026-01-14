@@ -84,7 +84,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.21
 fixed_fps = 60
-trail_lifetime = 3.4899999999999998
+trail_lifetime = 3.49
 process_material = SubResource("ParticleProcessMaterial_qgt82")
 draw_pass_1 = SubResource("QuadMesh_s4i8o")
 

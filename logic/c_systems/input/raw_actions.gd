@@ -51,14 +51,14 @@ const DEV_speed_up = "DEV_speed_up"
 
 
 # F 
+const DEV_cols = "DEV_cols" # F1
 const DEV_CAM_cols = "DEV_CAM_cols" # F2
 const DEV_profiler = "DEV_profiler" # F3
-const DEV_cols = "DEV_cols"
+const DEV_show_col = "DEV_show_col" # F6
 const DEV_force_quit = "DEV_force_quit"
-const DEV_toggle_fullscreen_1 = "DEV_toggle_fullscreen_1"
+const DEV_fly_mode = "DEV_fly_mode" # F9
 const DEV_free_cam = "DEV_free_cam"
-const DEV_fly_mode = "DEV_fly_mode"
-const DEV_toggle_fullscreen_2 = "DEV_toggle_fullscreen_2"
+const DEV_toggle_fullscreen_1 = "DEV_toggle_fullscreen_1"
 
 
 # Numpad (KP)

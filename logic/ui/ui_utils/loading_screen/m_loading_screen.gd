@@ -18,7 +18,7 @@ var _stall_stage: StallStage = StallStage.STARTED
 var _scene_loading_complete: bool = false
 var _scene_loading_progress: float = 0.0:
 	set(value):
-		var _value_changed = _scene_loading_progress != value
+		var _value_changed := _scene_loading_progress != value
 		_scene_loading_progress = value
 		if _value_changed:
 			update_total_loading_progress()
@@ -48,7 +48,7 @@ func _ready() -> void:
 var _progress_tween: Tween
 
 func update_total_loading_progress() -> void:
-	var diff = abs(_scene_loading_progress - _total_loading_progress)
+	var diff := absf(_scene_loading_progress - _total_loading_progress)
 	
 	# prevents micro-stuttering
 	if diff < 0.01:
@@ -65,7 +65,7 @@ func update_total_loading_progress() -> void:
 	# If jumping 100% (1.0), take 0.5s.
 	# If jumping 10% (0.1), take 0.05s.
 	# We clamp it to a minimum of 0.1s so it doesn't look too instant.
-	var duration = max(diff * 0.3, 0.1)
+	var duration := maxf(diff * 0.3, 0.1)
 	# print_.prefix_s("~~~~", duration)
 	_progress_tween.tween_property(self, "_total_loading_progress", _scene_loading_progress, duration) \
 		.set_trans(Tween.TRANS_SINE) \
@@ -232,7 +232,7 @@ func _setup_background() -> void:
 		var random_path = background_image_paths.pick_random()
 		
 		# Load the texture on demand
-		var texture = load(random_path)
+		var texture := load(random_path)
 		
 		if background_texture_rect and texture:
 			background_texture_rect.texture = texture

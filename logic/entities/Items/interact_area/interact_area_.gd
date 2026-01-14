@@ -1,6 +1,6 @@
 @tool
 class_name InteractArea
-extends Area3DSystem
+extends CommonArea
 
 @onready var label: Label3D = %InteractLabel
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
@@ -11,96 +11,96 @@ extends Area3DSystem
 		label_text = value
 		if is_node_ready(): _set_label_text()
 
-@export var area_radius: float = 2.0:
-	set(value):
-		area_radius = value
-		if is_node_ready(): _set_area_radius()
 
 @export var label_y_offset: float = 0.7:
 	set(value):
 		label_y_offset = value
 		if is_node_ready(): _set_label_y_offset()
 
-@export var ENABLED: bool = true
-
 
 signal SIG_interacted
 
 
-func __hard_dependencies() -> Array[Object]:
-	return [
-		collision_shape_3d,
-		collision_shape_3d.shape
-	]
-
-func __soft_dependencies() -> Array[Object]:
-	return [
-	]
+var _is_player_inside := false
 
 
-var player_found = false
+var cooldown_sig_emit := Cooldown.new(0.4)
+
+func _get_common_area_config() -> CommonAreaConfig:
+	return CommonAreaConfig.new(
+		MonitorType.PROCESS_LIST,
+		false,
+		true,
+		Collision.Masks.ONLY_PLAYER,
+		true
+	)
 
 
-func _ready() -> void:
-	collision_mask = Collision.Masks.ONLY_PLAYER
-	if collision_shape_3d and collision_shape_3d.shape:
-		collision_shape_3d.shape = collision_shape_3d.shape.duplicate()
-
-	set_all_properties()
-	
-	if not Engine.is_editor_hint():
-		label.visible = false
-		visible = false
-		set_process_unhandled_input(false)
-
-	__perform_validation()
+func _get_coll_shape() -> CollisionShape3D:
+	return collision_shape_3d
 
 
-func set_all_properties():
+## _READY
+# region
+
+func _ready_implementation() -> void:
 	_set_label_text()
-	_set_area_radius()
 	_set_label_y_offset()
 
-func _physics_process(_delta: float) -> void:
-	if Engine.is_editor_hint():
-		return
-	if not __validation_ok():
-		return
+
+func _ready_implementation_non_editor() -> void:
+	_set_label_visible(false)
+	set_process_unhandled_input(false)
+
+# endregion
 
 
-	var bodies := get_overlapping_bodies()
-	find_player(bodies)
+# MONITOR HANDLERS
+# region 
 
-	
-	set_label_visible(player_found and ENABLED)
-	
-	set_process_unhandled_input_(player_found)
+var _player_found_this_frame := false
 
-
-func find_player(bodies: Array[Node3D]):
-	for body in bodies:
+func on_overlapping_bodies(incoming_bodies: Array[Node3D]) -> void:
+	_player_found_this_frame = false
+	for body in incoming_bodies:
 		if body is Princess or body is FreeCameraBody:
-			set_player_found(true)
+			_player_found_this_frame = true
 			return
-	set_player_found(false)
+	_player_found_this_frame = false
 
 
-func set_player_found(value: bool):
-	if player_found != value:
-		__log_("set_player_found", "changed to", pp.in_q(value))
-		player_found = value
+# endregion
+
+func _physics_process_implementation(delta: float) -> void:
+	_set_is_player_inside(_player_found_this_frame)
+
+	_set_label_visible(_is_player_inside and MONITOR_ENABLED)
+	
+	_set_process_unhandled_input(_is_player_inside and MONITOR_ENABLED)
+
+func _set_monitor_enable_implementation(value: bool):
+	_set_label_visible(value)
+	_set_process_unhandled_input(value)
 
 
-func set_label_visible(value: bool):
+func _set_is_player_inside(value: bool):
+	if _is_player_inside != value:
+		__log_("_set_is_player_inside", "changed to", pp.in_q(value))
+		_is_player_inside = value
+
+
+func _set_label_visible(value: bool):
 	if label.visible != value:
-		__log_("set_label_visible", "changed to", pp.in_q(value))
+		__log_("_set_label_visible", "changed to", pp.in_q(value))
+
+		## -- all sets are atomic --
 		label.visible = value
-		visible = value
+		visible = value # for safety explicit set
 
 
-func set_process_unhandled_input_(value: bool):
+func _set_process_unhandled_input(value: bool):
 	if is_processing_unhandled_input() != value:
-		__log_("set_process_unhandled_input_", "changed to", pp.in_q(value))
+		__log_("_set_process_unhandled_input", "changed to", pp.in_q(value))
 		set_process_unhandled_input(value)
 
 
@@ -110,23 +110,34 @@ func _set_label_text() -> void:
 	if label:
 		label.text = label_text
 
-func _set_area_radius() -> void:
-	if not collision_shape_3d or not collision_shape_3d.shape or not collision_shape_3d.shape is SphereShape3D:
-		return
-	collision_shape_3d.shape.radius = area_radius
-
 func _set_label_y_offset() -> void:
 	if label:
 		label.global_position.y = global_position.y + label_y_offset
+		
 # endregion
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.interact):
-		if ENABLED:
+		if _can_interact():
 			SIG_interacted.emit()
-			# stops the event here so it doesn't trigger the floor/item below
+			
+			cooldown_sig_emit.mark_time()
+			# stops the event so it doesn't trigger other interact area, like an item inside the chest
 			get_viewport().set_input_as_handled()
+
+
+func _can_interact() -> bool:
+	if not MONITOR_ENABLED:
+		return false
+	if not _is_player_inside: # probably redundant at this point
+		return false
+
+	var current_time := u.get_curr_time_ticks_sec()
+	if not cooldown_sig_emit.is_cooldown_passed(true, pp_name()):
+		return false
+	
+	return true
 
 
 func __LOG_B() -> bool:

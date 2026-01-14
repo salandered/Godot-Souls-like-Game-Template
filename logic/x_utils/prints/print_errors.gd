@@ -2,7 +2,7 @@ extends RefCounted
 class_name error_
 
 
-static var _last_warn_msg = ""
+static var _last_warn_msg := ""
 
 static func _warn(warn_msg: String, warn_level: String = WL.PUSH_ERROR):
 	if warn_level == WL.SILENT: return
@@ -47,7 +47,7 @@ static func warn(
 		...details: Array):
 	if warn_level == WL.SILENT: return
 
-	var _msg = pp.s("Problem:", what)
+	var _msg := pp.s("Problem:", what)
 
 	where = where.strip_edges()
 	fallback = fallback.strip_edges()
@@ -124,16 +124,14 @@ static func null_variant(
 
 
 static func null_signal(
-		signal_data: SignalData,
+		signal_: Signal,
 		context: String = "",
 		## i think null signal is less important
 		## if its null, it won't be emitted, that's all
 		warn_level: String = WL.WARN_CRUCIAL,
 ) -> bool:
-	if null_object(signal_data, context, warn_level):
-		return true
-	if signal_data.signal_obj.is_null():
-		_warn(_err_msg("signal_obj.is_null true", context, signal_data), warn_level)
+	if signal_.is_null():
+		_warn(_err_msg("signal_.is_null true", context), warn_level)
 		return true
 	return false
 

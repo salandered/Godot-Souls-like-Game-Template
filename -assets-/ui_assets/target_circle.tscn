@@ -9,7 +9,6 @@ shader = ExtResource("1_waik0")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/ring_radius = 0.2
 shader_parameter/ring_thickness = 0.04
-shader_parameter/dot_size = 0.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uskse"]
 size = Vector2(256, 256)

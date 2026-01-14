@@ -8,7 +8,9 @@ class_name PlayerSM
 var _player: Princess
 
 @onready var container: PlayerStatesContainer = %StatesContainer
-@onready var player_movement: PlayerMovement = %PlayerMovement
+
+
+var player_movement: PlayerMovement
 
 var combat: PlayerCombat
 
@@ -33,6 +35,7 @@ func is_player() -> bool:
 func initialise(player: Princess) -> void:
 	self._player = player
 	self.combat = player.get_combat()
+	self.player_movement = player.get_pl_movement()
 	var empty_input := InputPackage.new()
 
 	var _idle_action := container.l_action_by_name(Leg.Act.idle)

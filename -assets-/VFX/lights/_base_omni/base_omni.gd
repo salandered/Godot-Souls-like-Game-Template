@@ -18,6 +18,11 @@ extends Node3DSystem
 		energy = value
 		if is_node_ready(): _apply_light_settings()
 
+@export var indirect_energy: float = 1.0:
+	set(value):
+		indirect_energy = value
+		if is_node_ready(): _apply_light_settings()
+
 @export var attenuation: float = 1.5:
 	set(value):
 		attenuation = value
@@ -43,6 +48,17 @@ extends Node3DSystem
 	set(value):
 		add_mist = value
 		if is_node_ready(): _apply_mist()
+
+@export var mist_particles_amount: int = 10:
+	set(value):
+		mist_particles_amount = value
+		if is_node_ready(): _apply_mist()
+
+@export var mist_particle_scale: float = 1.0:
+	set(value):
+		mist_particle_scale = value
+		if is_node_ready(): _apply_mist()
+
 
 @export_group("Material")
 @export var color: Color = Color("ff9e49"): # Default orange-ish fire color
@@ -103,6 +119,7 @@ func _apply_light_settings() -> void:
 	if omni_light_3d:
 		omni_light_3d.omni_range = radius
 		omni_light_3d.light_energy = energy
+		omni_light_3d.light_indirect_energy = indirect_energy
 		omni_light_3d.light_color = color
 		omni_light_3d.omni_attenuation = attenuation
 		omni_light_3d.light_volumetric_fog_energy = volumetric_fog_energy
@@ -111,7 +128,10 @@ func _apply_light_settings() -> void:
 
 
 func _apply_mist() -> void:
-	if puff_fog: puff_fog.set_effect_enabled(add_mist)
+	if puff_fog:
+		puff_fog.set_effect_enabled(add_mist)
+		puff_fog.particles_amount = mist_particles_amount
+		puff_fog.particle_scale = mist_particle_scale
 
 
 func _apply_debug_visuals() -> void:

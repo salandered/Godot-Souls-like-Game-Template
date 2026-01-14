@@ -8,8 +8,6 @@ visible = false
 [node name="FireFlicker" parent="." instance=ExtResource("1_1lqxx")]
 transform = Transform3D(0.9999993, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -20.499212, 3.9543571, 8.57229)
 particles_amount = 20
-lifetime = 1.0
-particles_speed_scale = 0.5
 speed_scale = 0.2
 play_animation = false
 move_speed_scale = 0.1
@@ -19,8 +17,6 @@ __csg_editor_view = false
 [node name="FireFlicker2" parent="." instance=ExtResource("1_1lqxx")]
 transform = Transform3D(0.9999993, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -24.49221, 3.9816046, 28.382576)
 particles_amount = 20
-lifetime = 1.0
-particles_speed_scale = 0.5
 speed_scale = 0.2
 play_animation = false
 move_speed_scale = 0.1
@@ -32,8 +28,6 @@ __csg_editor_view = false
 [node name="FireFlicker4" parent="." instance=ExtResource("1_1lqxx")]
 transform = Transform3D(0.9999998, 0, 0, 0, 1.0000002, 0, 0, 0, 1, -21.046223, 9.303626, 13.704816)
 particles_amount = 10
-lifetime = 1.0
-particles_speed_scale = 0.5
 speed_scale = 0.2
 play_animation = false
 radius = 1.0
@@ -43,8 +37,6 @@ __csg_editor_view = false
 [node name="FireFlicker3" parent="." instance=ExtResource("1_1lqxx")]
 transform = Transform3D(0.9999993, 0, 0, 0, 1.0000005, 0, 0, 0, 0.99999994, -25.523222, 4.658056, 1.9900227)
 particles_amount = 20
-lifetime = 1.0
-particles_speed_scale = 0.5
 speed_scale = 0.2
 play_animation = false
 move_speed_scale = 0.1
@@ -55,8 +47,6 @@ __csg_editor_view = false
 [node name="FireFlicker5" parent="." instance=ExtResource("1_1lqxx")]
 transform = Transform3D(0.9999998, 0, 0, 0, 1.0000015, 0, 0, 0, 1.0000013, -19.991081, 8.939299, 42.693676)
 particles_amount = 10
-lifetime = 1.0
-particles_speed_scale = 0.5
 speed_scale = 0.2
 play_animation = false
 move_speed_scale = 0.1
@@ -67,8 +57,6 @@ __csg_editor_view = false
 [node name="FireFlicker6" parent="." instance=ExtResource("1_1lqxx")]
 transform = Transform3D(0.99999976, 0, 0, 0, 1.0000006, 0, 0, 0, 0.99999994, -24.315683, 3.984488, 18.617966)
 particles_amount = 20
-lifetime = 1.0
-particles_speed_scale = 0.5
 speed_scale = 0.2
 play_animation = false
 move_speed_scale = 0.1

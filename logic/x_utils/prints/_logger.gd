@@ -4,7 +4,7 @@ class_name log
 
 const _FRAME_PRINT := true
 
-static var _last_prefix_msg = ""
+static var _last_prefix_msg := ""
 
 
 static func prefix(is_warning: bool, prefix_: String, text: String = "", info_indents: int = 0, ):
@@ -24,7 +24,7 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 			_metka = "x"
 		fr_ = "%6s" % [u.sfr() + "|" + _metka + " "]
 	
-	var result_msg = tabs_prefix + "  " + prefix_ + "  " + text
+	var result_msg := tabs_prefix + "  " + prefix_ + "  " + text
 	
 	if result_msg == _last_prefix_msg:
 		print("%4s" % ["| "], result_msg)
@@ -37,8 +37,8 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 static func prefix_s(is_warning: bool = false, ...parts: Array):
 	if not OS.is_debug_build():
 		return
-	var _prefix = ""
-	var _msg = ""
+	var _prefix := ""
+	var _msg := ""
 	if parts.is_empty():
 		_prefix = ""
 		_msg = "no text provided"
@@ -66,7 +66,7 @@ static func __calculate_tab_prefix(info_indents: int) -> String:
 	if cache.has(info_indents):
 		return cache[info_indents]
 
-	var tabs_prefix = ""
+	var tabs_prefix := ""
 	if info_indents:
 		for i in range(info_indents):
 			tabs_prefix += "    "

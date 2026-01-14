@@ -40,7 +40,7 @@ func fade_out(duration: float = 0.0) -> Tween:
 		music_stream_player.bus = audio_bus
 	var tween := create_tween()
 	if music_stream_player:
-		tween.tween_property(music_stream_player, "volume_db", MINIMUM_VOLUME_DB, duration)
+		tween.tween_property(music_stream_player, Constants.Prop.ASP_VOLUME_DB, MINIMUM_VOLUME_DB, duration)
 	return tween
 
 func _set_sub_audio_volume_db(sub_volume_db: float) -> void:
@@ -58,7 +58,7 @@ func fade_in(duration: float = 0.0) -> Tween:
 func blend_to(target_volume_db: float, duration: float = 0.0) -> Tween:
 	if not is_zero_approx(duration):
 		var tween := create_tween()
-		tween.tween_property(music_stream_player, "volume_db", target_volume_db, duration)
+		tween.tween_property(music_stream_player, Constants.Prop.ASP_VOLUME_DB, target_volume_db, duration)
 		return tween
 	music_stream_player.volume_db = target_volume_db
 	return
@@ -177,11 +177,11 @@ func _enter_tree() -> void:
 	blend_audio_bus = M_AppSettings.SYSTEM_BUS_NAME_PREFIX + BLEND_BUS_PREFIX + audio_bus
 	AudioServer.set_bus_send(blend_audio_bus_idx, audio_bus)
 	AudioServer.set_bus_name(blend_audio_bus_idx, blend_audio_bus)
-	var tree_node = get_tree()
+	var tree_node := get_tree()
 	if not tree_node.node_added.is_connected(_on_added_music_player):
 		tree_node.node_added.connect(_on_added_music_player)
 
 func _exit_tree() -> void:
-	var tree_node = get_tree()
+	var tree_node := get_tree()
 	if tree_node.node_added.is_connected(_on_added_music_player):
 		tree_node.node_added.disconnect(_on_added_music_player)

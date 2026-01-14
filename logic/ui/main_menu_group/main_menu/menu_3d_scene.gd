@@ -56,18 +56,18 @@ func _handle_parallax(delta: float) -> void:
 	if not camera_3d:
 		return
 
-	var mouse_pos = get_viewport().get_mouse_position()
-	var screen_size = get_viewport().get_visible_rect().size
+	var mouse_pos := get_viewport().get_mouse_position()
+	var screen_size := get_viewport().get_visible_rect().size
 
 	# Calculate center offset (-0.5 to 0.5)
-	var center_offset_x = (mouse_pos.x / screen_size.x) - 0.5
-	var center_offset_y = (mouse_pos.y / screen_size.y) - 0.5
+	var center_offset_x := (mouse_pos.x / screen_size.x) - 0.5
+	var center_offset_y := (mouse_pos.y / screen_size.y) - 0.5
 
 	# Smoothly interpolate current rotation towards target rotation
-	var target_rot_y = - center_offset_x * parallax_strength
+	var target_rot_y := - center_offset_x * parallax_strength
 	
 	# We convert the base pitch from degrees to radians and add the mouse offset
-	var target_rot_x = deg_to_rad(camera_base_pitch) + (-center_offset_y * parallax_strength)
+	var target_rot_x := deg_to_rad(camera_base_pitch) + (-center_offset_y * parallax_strength)
 
 	camera_3d.rotation.y = lerp(camera_3d.rotation.y, target_rot_y, delta * parallax_lerp_speed)
 	camera_3d.rotation.x = lerp(camera_3d.rotation.x, target_rot_x, delta * parallax_lerp_speed)
@@ -79,7 +79,7 @@ func _start_camera_sway() -> void:
 	
 	camera_3d.position.z = cam_z_min
 	
-	var tween = create_tween().set_loops()
+	var tween := create_tween().set_loops()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	# Move to Max

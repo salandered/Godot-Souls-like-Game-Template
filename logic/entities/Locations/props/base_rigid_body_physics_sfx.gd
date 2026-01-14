@@ -61,7 +61,7 @@ func _find_asp():
 
 
 func _initialise_asp():
-	var asp_config = get_asp_config()
+	var asp_config := get_asp_config()
 	if asp_config == null:
 		__log_("no asp_config provided, using default one")
 		asp_config = ASP3DConfig.new()
@@ -93,38 +93,18 @@ func _physics_process(_delta):
 
 
 func _on_body_entered(_body):
-	var velocity_change = _previous_velocity - linear_velocity
-	var impact_force = velocity_change.length()
+	var velocity_change := _previous_velocity - linear_velocity
+	var impact_force := velocity_change.length()
 	__log_("", "impact_force vel_change/prev_vel/linear_vel", impact_force, velocity_change, _previous_velocity, linear_velocity)
 	
-	var current_time = u.get_curr_time_ticks_sec()
+	var current_time := u.get_curr_time_ticks_sec()
 	if impact_force > get_impact_threshold() and (current_time -_last_sound_time) > get_sound_cooldown():
 		# scale volume by impact force
-		var volume = remap(impact_force, get_impact_threshold(), get_impact_threshold() * 3, 0.5, 1.0)
-		var impact_db_adjustment = linear_to_db(clamp(volume, 0.0, 1.0))
+		var volume := remap(impact_force, get_impact_threshold(), get_impact_threshold() * 3, 0.5, 1.0)
+		var impact_db_adjustment := linear_to_db(clamp(volume, 0.0, 1.0))
 		_sfx_asp.volume_db = _base_volume_db + impact_db_adjustment
 		
 		__log_("impact sound", "force", impact_force, "final_vol_db", _sfx_asp.volume_db, "adjustment", impact_db_adjustment)
 		_sfx_asp.play()
 		__log_(pp.s(_sfx_asp.name, "🎵"), pp.asp_3d_play(_sfx_asp))
 		_last_sound_time = current_time
-
-
-# # Linear (what we think)    →    dB (what Godot uses)
-# 1.0  (100% volume)          →     0 dB
-# 0.5  (50% volume)           →    -6 dB
-# 0.25 (25% volume)           →   -12 dB
-# 0.1  (10% volume)           →   -20 dB
-# 0.01 (1% volume)            →   -40 dB
-# 0.0  (silent)               →   -80 dB (or -inf)
-# Formula: dB = 20 * log10(linear_value)
-
-
-## __LOGS
-# region
-
-
-func __LOG_INDENT() -> int:
-	return 0
-
-# endregion

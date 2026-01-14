@@ -1,8 +1,6 @@
 extends RefCountedStaticLogger
 class_name UIUtils
 
-const ALPHA_CHANNEL = "modulate:a"
-
 
 static func fade_out_and_hide(for_whom: Node, ui_panels: Array, duration: float) -> Tween:
 	if not for_whom:
@@ -15,7 +13,7 @@ static func fade_out_and_hide(for_whom: Node, ui_panels: Array, duration: float)
 		if panel:
 			tween.tween_property(
 				panel,
-				ALPHA_CHANNEL,
+				Constants.Prop.CONTROL_MODULATE_A,
 				0.0,
 				duration
 			).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -36,13 +34,13 @@ static func start_pulse(for_whom: Control, min_alpha: float, duration: float) ->
 	var tween := for_whom.create_tween().set_loops()
 	tween.tween_property(
 		for_whom,
-		ALPHA_CHANNEL,
+		Constants.Prop.CONTROL_MODULATE_A,
 		min_alpha,
 		duration * 0.5
 	).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(
 		for_whom,
-		ALPHA_CHANNEL,
+		Constants.Prop.CONTROL_MODULATE_A,
 		1.0,
 		duration * 0.5
 	).set_trans(Tween.TRANS_SINE)

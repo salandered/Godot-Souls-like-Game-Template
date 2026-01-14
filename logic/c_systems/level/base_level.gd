@@ -6,20 +6,35 @@ class_name BaseLevel
 extends Node3DSystem
 
 
+@export_group("Level Music")
+@export var level_music_tracks: Array[AudioStream]
+@export var first_track_to_play_idx: int = -1
+@export var music_volume_db: float = -10.0
+
+
 @export_category("Nodes to validate")
 @export var is_pause_menu_controller: bool = true
 @export var is_world_environment: bool = true
+@export var is_base_asp: bool = true
+@export var is_vibe_asp: bool = true
+@export var is_background_music: bool = false
 
+
+var _bg_music_system: BackgroundMusicSystem
+var base_asp: AudioStreamPlayer
+var vibe_asp: AudioStreamPlayer
 
 var _world_env: WorldEnvironment
-
-var tone_map_exposure := FMinMax.new(0.2, 2.0)
 
 
 var fog_volumes_in_scene: Array[FogVolume] = []
 var direct_lights_in_scene: Array[DirectionalLight3D] = []
 
+var enemies: Array[PHCharacter]
+
+
 @abstract func basic_tonemap_exposure() -> float
+
 
 @abstract func tonemap_exposure_no_vol_fog_compensation() -> float
 
@@ -27,14 +42,27 @@ var direct_lights_in_scene: Array[DirectionalLight3D] = []
 @abstract func initialise() -> void
 
 
+func __soft_validation() -> bool:
+	var _r := true
+
+	if is_base_asp:
+		_r = _r and base_asp
+	if is_vibe_asp:
+		_r = _r and vibe_asp
+	if is_background_music:
+		_r = _r and _bg_music_system
+
+	return _r
+
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if is_pause_menu_controller:
+	if is_pause_menu_controller: ## easier here than in __soft_validation
 		_validate_pause_menu_controller_on_init()
-	if is_world_environment:
-		_validate_world_env_on_init()
+	if is_world_environment: ## easier here than in __soft_validation
+		_setup_world_env()
 
 		## WARNING: currently use only visible objects
 		## E.g.: If game logic would make volume visible later, this would bypass the setting
@@ -43,26 +71,59 @@ func _ready() -> void:
 
 		update_video_settings()
 
-	if not GlobalSignal.SIG_update_video_settings_for_level.is_connected(_on_update_video_settings):
-		GlobalSignal.SIG_update_video_settings_for_level.connect(_on_update_video_settings)
+	u.safe_connect(GlobalSignal.SIG_update_video_settings_for_level, _on_update_video_settings)
 	
+
+	if is_base_asp:
+		base_asp = %base_asp
+		if base_asp:
+			base_asp.bus = BusID._TRACK_BASE
+			base_asp.play()
+
+	if is_vibe_asp:
+		_setup_vibe_asp()
+
+	if is_background_music:
+		_setup_bg_music()
+
 	initialise()
 
+	__perform_validation()
 
-func update_video_settings():
-	set_world_env_volumetric_fog_from_settings()
-	set_world_env_tonemap_exposure_from_settings()
-	set_shadow_mode_from_settings()
+
+func _setup_vibe_asp():
+	enemies = get_descendants.enemy_characters(self)
+	for e in enemies:
+		u.safe_connect(e.SIG_angry_raised, _on_ph_enemy_sig_angry_raised)
+		u.safe_connect(e.SIG_death_raised, _on_ph_enemy_sig_death_raised)
+	vibe_asp = %vibe_asp
+	if vibe_asp:
+		vibe_asp.bus = BusID._TRACK_VIBE
+
+
+func _setup_bg_music() -> void:
+	if level_music_tracks.is_empty():
+		return
+
+	_bg_music_system = BackgroundMusicSystem.new()
+	_bg_music_system.name = "BackgroundMusicSystem"
+	
+	# pass configuration before adding to tree 
+	_bg_music_system.music_tracks = level_music_tracks
+	_bg_music_system.first_track_to_play_idx = first_track_to_play_idx
+	_bg_music_system.base_volume_db = music_volume_db
+	
+	add_child(_bg_music_system) # triggers _ready
 
 
 func _validate_pause_menu_controller_on_init():
-		var nodes := get_descendants.pause_menu_controller(self)
-		error_.empty_list(nodes, "no pause_menu_controller found in the level scene")
-		if len(nodes) > 1:
-			error_.warn("several pause_menu_controller found in the level scene. It's weird", "", "")
+	var nodes := get_descendants.pause_menu_controller(self)
+	error_.empty_list(nodes, "no pause_menu_controller found in the level scene")
+	if len(nodes) > 1:
+		error_.warn("several pause_menu_controller found in the level scene. It's weird", "", "")
 
 
-func _validate_world_env_on_init():
+func _setup_world_env():
 	var nodes := get_descendants.world_environments(self)
 	if error_.empty_list(nodes, "no world_environment found in the level scene"):
 		_world_env = null
@@ -73,62 +134,44 @@ func _validate_world_env_on_init():
 	error_.null_object(_world_env.environment)
 
 
-func set_world_env_tonemap_exposure_from_settings():
-	var value_from_settings := M_AppSettings.get_brightness()
-	var value_from_settings_vol_fog := M_AppSettings.get_volumetric_fog()
-	if _validate_world_env(pp.s("set_world_env_tonemap_exposure_from_settings🎨", value_from_settings)):
-		var curr_exposure := _world_env.environment.tonemap_exposure
-		var new_exposure := basic_tonemap_exposure() + value_from_settings - 1.0
-		if not value_from_settings_vol_fog:
-			new_exposure += tonemap_exposure_no_vol_fog_compensation()
-		__log_("set_world_env_tonemap_exposure_from_settings🎨",
-			"value_from_settings", pp.in_q(value_from_settings),
-			"curr_exposure", pp.in_q(curr_exposure),
-			"value_from_settings_vol_fog", pp.in_q(value_from_settings_vol_fog),
-			"base_env_exposure", pp.in_q(basic_tonemap_exposure()),
-			"tonemap_exposure_no_vol_fog_compensation", pp.in_q(tonemap_exposure_no_vol_fog_compensation()),
-			"=> new_exposure will be", pp.in_q(new_exposure))
-
-		new_exposure = tone_map_exposure.clamp(new_exposure)
-		_world_env.environment.tonemap_exposure = new_exposure
+func update_video_settings():
+	WorldVideoSettingSetup.set_world_env_volumetric_fog_from_settings(
+		_world_env,
+		fog_volumes_in_scene,
+		basic_tonemap_exposure(),
+		tonemap_exposure_no_vol_fog_compensation())
+	WorldVideoSettingSetup.set_world_env_tonemap_exposure_from_settings(
+		_world_env,
+		basic_tonemap_exposure(),
+		tonemap_exposure_no_vol_fog_compensation()
+		)
+	WorldVideoSettingSetup.set_shadow_mode_from_settings(direct_lights_in_scene)
 
 
-func set_world_env_volumetric_fog_from_settings():
-	var value_from_settings := M_AppSettings.get_volumetric_fog()
-
-	if _validate_world_env(pp.s("set_world_env_volumetric_fog", value_from_settings)):
-		__log_("set_world_env_volumetric_fog", "value_from_settings will be set:", pp.in_q(value_from_settings))
-		_world_env.environment.volumetric_fog_enabled = value_from_settings
-		for item: FogVolume in fog_volumes_in_scene:
-			item.visible = value_from_settings
-
-		## recalculate exposure
-		set_world_env_tonemap_exposure_from_settings()
-
-func set_shadow_mode_from_settings():
-	var value_from_settings := M_AppSettings.get_shadow_mode()
-	var mode: DirectionalLight3D.ShadowMode = M_AppSettings.shadow_mode_number_to_val.get(value_from_settings)
-	for item: DirectionalLight3D in direct_lights_in_scene:
-			item.shadow_enabled = true
-			item.directional_shadow_mode = mode
-			if value_from_settings == 3:
-				item.shadow_enabled = false
-
-
-func _validate_world_env(context: String = "") -> bool:
-	if _world_env and _world_env.environment:
-		return true
-	else:
-		__log_warn_soft(
-			"no world env or _world_env.environment",
-			"_validate_world_env",
-			"",
-			context)
-		return false
+## On
 
 
 func _on_update_video_settings() -> void:
 	update_video_settings()
+
+
+func _on_ph_enemy_sig_angry_raised() -> void:
+	if vibe_asp:
+		vibe_asp.play()
+
+
+func _on_ph_enemy_sig_death_raised() -> void:
+	var all_quiet: bool = true
+	for e in enemies:
+		if e.angry_raised:
+			all_quiet = false
+			break
+	if all_quiet:
+		if vibe_asp:
+			vibe_asp.stop()
+
+
+##
 
 
 func __LOG_B() -> bool:

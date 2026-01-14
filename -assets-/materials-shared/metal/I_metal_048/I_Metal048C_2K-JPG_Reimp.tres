@@ -1,17 +1,17 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://eu8dehglyfef"]
 
-[ext_resource type="Texture2D" uid="uid://bfikc0glsenou" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C-JPG_Color.jpg" id="1_bhkhx"]
-[ext_resource type="Texture2D" uid="uid://dpdctrvxdf2ng" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C-JPG_Metalness-Metal048C-JPG_Roughness.png" id="2_it8rv"]
-[ext_resource type="Texture2D" uid="uid://cjfkvrnkny663" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C-JPG_NormalGL.jpg" id="3_64mmy"]
+[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="1_mteu8"]
+[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="2_htqhl"]
+[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="3_drjxf"]
 
 [resource]
 resource_name = "I_Metal048C_2K-JPG"
 cull_mode = 2
-albedo_texture = ExtResource("1_bhkhx")
+albedo_texture = ExtResource("1_mteu8")
 metallic = 1.0
-metallic_texture = ExtResource("2_it8rv")
+metallic_texture = ExtResource("2_htqhl")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_it8rv")
+roughness_texture = ExtResource("2_htqhl")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_64mmy")
+normal_texture = ExtResource("3_drjxf")

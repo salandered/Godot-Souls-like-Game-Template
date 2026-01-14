@@ -112,7 +112,7 @@ func _init(
 
 func _calculate_pixels_per_bar() -> void:
 	# get the width u set in the Editor (e.g., 300)
-	var current_container_width = get_custom_min_size_x()
+	var current_container_width := get_custom_min_size_x()
 	
 	# safety check / fallback / ui fix
 	if current_container_width <= 0:
@@ -305,7 +305,7 @@ func animate_bar_size_increase(increase_delta_: float) -> void:
 			"custom_minimum_size:x",
 			new_width,
 			0.3
-		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 		_size_tween.tween_callback(func():
 				if is_equal_approx(get_custom_min_size_x(), new_width):
@@ -337,7 +337,7 @@ func _get_bar_val(bar: TextureProgressBar) -> float:
 
 func _set_bar_value(bar: TextureProgressBar, value_: float, context: String = ""):
 	if bar:
-		var prev_value = bar.value
+		var prev_value := bar.value
 		bar.value = value_
 		if abs(prev_value - value_) > 2.0:
 			__log_("_set_bar_value", value_, pp.in_br(pp.s("from", prev_value)), "for", pp.in_q(context))

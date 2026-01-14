@@ -81,7 +81,7 @@ func initialise() -> void:
 func _check_transition(input_: InputPackage) -> PLVerdict:
 	_check_combos(input_)
 	if feelings.is_zero_health() and state_name != PS.death:
-		var state = container.state_by_name(PS.death)
+		var state := container.state_by_name(PS.death)
 		forced_state.try_set(state.state_name, state.priority)
 	if queued_state.is_set() and curr_global_action().switches_to_queue():
 		__log_psm_check("queued 👥 exists, trying it as a force state")

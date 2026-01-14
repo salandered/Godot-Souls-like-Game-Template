@@ -1,0 +1,311 @@
+[gd_scene load_steps=15 format=3 uid="uid://cder7q45c0ofb"]
+
+[ext_resource type="Script" uid="uid://djgaqmwqf0dts" path="res://logic/entities/Items/door/_generic_door.gd" id="1_g0uxx"]
+[ext_resource type="ArrayMesh" uid="uid://dnr3m1uwiainl" path="res://-assets-/GLB-items/door/meshes/door_Cube_034.res" id="2_gx7ph"]
+[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="3_igwfv"]
+[ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="4_hbl3s"]
+[ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://-assets-/SFX/sources/400/creaky_door_short_for_chest.wav" id="5_c3tjs"]
+[ext_resource type="AudioStream" uid="uid://bscq7k6x1b2hu" path="res://-assets-/SFX/sources/400/lock_quick.wav" id="6_446hs"]
+[ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 119-Audio.wav" id="7_xvi0d"]
+[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="8_fc0ar"]
+[ext_resource type="Material" uid="uid://c8d72o45y8lge" path="res://-assets-/materials-shared/solid/_P col connections_Reimp.tres" id="8_gx7ph"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_10s4t"]
+size = Vector3(1.4769135, 2.7642212, 0.123046875)
+
+[sub_resource type="Animation" id="Animation_10s4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/DoorPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g0uxx"]
+resource_name = "cant_open_locked"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.46666667),
+"transitions": PackedFloat32Array(1, 2.6390154, 1),
+"update": 0,
+"values": [-20.0, -15.0, -80.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7]
+}
+
+[sub_resource type="Animation" id="Animation_qy21r"]
+resource_name = "open_push"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/DoorPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.7, 0.8, 0.93333334),
+"transitions": PackedFloat32Array(1, 2, 0.5, 0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 1.5707964, 0), Vector3(0, 1.4835298, 0), Vector3(0, 1.5707964, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/DoorPivot/DoorStatic/CreakASP:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.23333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/DoorPivot/DoorStatic/CreakASP:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.40000004, 1.2666667),
+"transitions": PackedFloat32Array(1, -2, -2, 1),
+"update": 0,
+"values": [-80.0, -80.0, -25.0, -80.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/DoorPivot/DoorStatic/WoodASP1:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.6333333),
+"transitions": PackedFloat32Array(1, 2.6390154, 1),
+"update": 0,
+"values": [-20.0, -15.0, -80.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/DoorPivot/DoorStatic/WoodASP2:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/DoorPivot/DoorStatic/MetalASP:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xlf0u"]
+_data = {
+&"RESET": SubResource("Animation_10s4t"),
+&"cant_open_locked": SubResource("Animation_g0uxx"),
+&"open_push": SubResource("Animation_qy21r")
+}
+
+[node name="BaseDoor" type="Node3D"]
+script = ExtResource("1_g0uxx")
+
+[node name="Visuals" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="DoorPivot" type="Marker3D" parent="Visuals"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79238665, 1.8613347, -0.040587902)
+
+[node name="DoorStatic" type="StaticBody3D" parent="Visuals/DoorPivot"]
+unique_name_in_owner = true
+
+[node name="DoorMesh" type="MeshInstance3D" parent="Visuals/DoorPivot/DoorStatic"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.79238665, -1.8613347, 0.040587902)
+gi_mode = 2
+mesh = ExtResource("2_gx7ph")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("3_igwfv")
+surface_material_override/1 = ExtResource("4_hbl3s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/DoorPivot/DoorStatic"]
+transform = Transform3D(-0.99993426, 0, 0.011466474, 0, 1, 0, -0.011466474, 0, -0.99993426, 0.8162807, -0.21886885, 0.040592633)
+shape = SubResource("BoxShape3D_10s4t")
+debug_color = Color(0.55, 0.33, 0, 0.7921569)
+
+[node name="CreakASP" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041616917, 0, 0.008323461)
+stream = ExtResource("5_c3tjs")
+volume_db = -80.0
+unit_size = 6.0
+max_db = -1.0
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="MetalASP" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5053538, -0.5177069, 0.1835797)
+stream = ExtResource("6_446hs")
+unit_size = 6.0
+max_db = -1.0
+max_distance = 10.0
+bus = &"game_SFX"
+
+[node name="WoodASP1" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, 1.3192141, 0.067983985, 0.039561287)
+stream = ExtResource("7_xvi0d")
+volume_db = -10.0
+unit_size = 6.0
+pitch_scale = 1.05
+max_distance = 10.0
+max_polyphony = 2
+bus = &"game_SFX"
+
+[node name="WoodASP2" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, 1.3192141, 0.067983985, 0.039561287)
+stream = ExtResource("7_xvi0d")
+volume_db = -18.0
+unit_size = 6.0
+pitch_scale = 0.9
+max_distance = 10.0
+max_polyphony = 2
+bus = &"game_SFX"
+
+[node name="__dev_remote_csg" type="RemoteTransform3D" parent="Visuals/DoorPivot"]
+remote_path = NodePath("../../../__csg_pivot")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xlf0u")
+}
+
+[node name="dev_cam" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.94336176, 0.33176595, 0, -0.33176595, 0.94336176, 0, 2.733789, 2.5522053)
+current = true
+
+[node name="InteractArea" parent="." instance=ExtResource("8_fc0ar")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3363092, 0)
+label_text = "Press E to open"
+label_y_offset = 0.6
+
+[node name="__csg_pivot" type="CSGCylinder3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79238665, 1.8613347, -0.040587902)
+material_override = ExtResource("8_gx7ph")
+radius = 0.07080078
+height = 0.7890625
+sides = 6
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3363092, 0)
+remote_path = NodePath("../InteractArea")
+update_scale = false

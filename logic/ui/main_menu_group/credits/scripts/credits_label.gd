@@ -106,7 +106,7 @@ func regex_replace_formatting(credits: String) -> String:
 	regex.compile("\\*\\*(.*?)\\*\\*")
 	credits = regex.sub(credits, "[b]$1[/b]", true)
 	
-	# 2. Italics: *text* -> [i]text[/i]
+	# Italics: *text* -> [i]text[/i]
 	regex.compile("\\*(.*?)\\*")
 	credits = regex.sub(credits, "[i]$1[/i]", true)
 	

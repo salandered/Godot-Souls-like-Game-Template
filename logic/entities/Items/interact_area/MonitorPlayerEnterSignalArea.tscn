@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://br0ld6w6es8le"]
+
+[ext_resource type="Script" uid="uid://dfwekl6bythib" path="res://logic/entities/Items/interact_area/monitor_pl_sig_area.gd" id="1_ij7fp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ij7fp"]
+radius = 1.0
+height = 2.2
+
+[node name="MonitorPlayerEnterSignalArea" type="Area3D"]
+script = ExtResource("1_ij7fp")
+area_capsule_radius = 1.0
+area_capsule_height = 2.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.076660156, 0)
+shape = SubResource("CapsuleShape3D_ij7fp")
+debug_color = Color(1, 1, 1, 0.7254902)

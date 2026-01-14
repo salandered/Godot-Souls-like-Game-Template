@@ -65,8 +65,8 @@ func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D 
 		_camera = get_viewport().get_camera_3d()
 		
 		health_bar.modulate_a(0.0)
-		var _tw = create_tween()
-		_tw.tween_property(health_bar.container, "modulate:a", 1.0, 0.3)
+		var _tw := create_tween()
+		_tw.tween_property(health_bar.container, Constants.Prop.CONTROL_MODULATE_A, 1.0, 0.3)
 		health_bar.scale_xy(0.5)
 
 	hide_ui()
@@ -123,7 +123,7 @@ func _update_floating_position() -> void:
 		_camera = get_viewport().get_camera_3d()
 		return
 
-	var anchor_pos = _anchor_3d.global_position
+	var anchor_pos := _anchor_3d.global_position
 	
 	# Hide if behind camera
 	if _camera.is_position_behind(anchor_pos):
@@ -136,11 +136,11 @@ func _update_floating_position() -> void:
 	if not _is_fading_out:
 		show_ui()
 
-	var screen_pos = _camera.unproject_position(anchor_pos)
+	var screen_pos := _camera.unproject_position(anchor_pos)
 	
 	# Center the bar using the container size
 	# Assuming Pivot is Top-Left (default)
-	var centered_pos = screen_pos
+	var centered_pos := screen_pos
 
 	centered_pos.x -= health_bar.container.size.x * health_bar.container.scale.x / 2.0
 	

@@ -1,0 +1,2 @@
+extends PHCharacter
+class_name SecretEnemy

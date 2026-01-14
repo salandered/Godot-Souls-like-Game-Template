@@ -7,6 +7,7 @@
 [resource]
 resource_name = "ChurchCeiling"
 cull_mode = 2
+albedo_color = Color(0.89374226, 0.89374226, 0.89374226, 1)
 albedo_texture = ExtResource("1_hsut8")
 metallic_texture = ExtResource("2_e63s7")
 metallic_texture_channel = 2

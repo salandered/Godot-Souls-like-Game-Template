@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="6_2e4m0"]
 [ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://logic/ui/main_menu_group/main_menu/m_config_name_label.gd" id="7_nt2e5"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
-[ext_resource type="AudioStream" uid="uid://bjxibnwwxy37t" path="res://-assets-/music/=tracks=/tarot_siren 09 14 5.mp3" id="8_y57hi"]
+[ext_resource type="AudioStream" uid="uid://c7pyskbvkkr0x" path="res://-assets-/music/tarot_siren+09+14+5+(2).wav" id="9_a5cmw"]
 [ext_resource type="Script" uid="uid://dp2exxwlj6afr" path="res://logic/ui/main_menu_group/main_menu/m_config_version_label.gd" id="9_nlybk"]
-[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/individual-tracks subtle noise (2).mp3" id="9_wkb1a"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/back_noise.mp3" id="9_wkb1a"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/nodes/color_rect.tscn" id="12_uw7yc"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/VFX/shaders/distort_menu.gdshader" id="13_rjjho"]
 
@@ -66,12 +66,14 @@ cam_z_max = 5.0
 cam_duration = 90.0
 parallax_lerp_speed = 1.0
 is_pause_menu_controller = false
+is_base_asp = false
+is_vibe_asp = false
 
 [node name="UISoundController" type="Node" parent="."]
 script = ExtResource("5_2e4m0")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("6_2e4m0")]
-stream = ExtResource("8_y57hi")
+stream = ExtResource("9_a5cmw")
 volume_db = -2.0
 bus = &"menu_Music"
 

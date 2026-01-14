@@ -125,6 +125,21 @@ func apply_local_velocity_as_global(local_velocity: Vector3):
 # endregion
 
 
+## Applies an immediate vertical upward force.
+## - force: The vertical velocity to apply.
+## - reset_y_velocity: If true, ignores current falling speed (guarantees consistent jump height).
+func apply_spring_force(force: float, reset_y_velocity: bool = true) -> void:
+	var current_vel := get_character().velocity
+	
+	__log_("current_vel", current_vel)
+	if reset_y_velocity:
+		current_vel.y = force
+	else:
+		current_vel.y += force
+		
+	set_velocity(current_vel)
+	__log_("current_vel", current_vel)
+
 ## __LOGGING
 # region
 

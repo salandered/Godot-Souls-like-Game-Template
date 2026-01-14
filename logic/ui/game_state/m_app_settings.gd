@@ -175,7 +175,8 @@ static func _on_window_size_changed(window: Window) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, SCREEN_RESOLUTION, window.size)
 
 static func _set_display_mode_from_config(window: Window) -> void:
-	var current_mode: int = window.mode
+	var current_mode: int = 3
+	# var current_mode: int = window.mode
 	var saved_mode: int = M_PlayerConfig.get_config(VIDEO_SECTION, DISPLAY_MODE, current_mode)
 	set_display_mode(saved_mode, window)
 
@@ -194,7 +195,7 @@ static func get_vsync(window: Window = null) -> DisplayServer.VSyncMode:
 	return vsync_mode
 
 static func _set_v_sync_from_config(window: Window) -> DisplayServer.VSyncMode:
-	var vsync := get_vsync(window)
+	var vsync := DisplayServer.VSyncMode.VSYNC_ENABLED
 	vsync = M_PlayerConfig.get_config(VIDEO_SECTION, V_SYNC, vsync)
 	set_vsync(vsync)
 	return vsync
@@ -234,7 +235,7 @@ static func get_msaa_3d(window: Window) -> Viewport.MSAA:
 
 
 static func _set_msaa_from_config(window: Window) -> void:
-	var default_msaa: Viewport.MSAA = get_msaa_3d(window)
+	var default_msaa: Viewport.MSAA = Viewport.MSAA.MSAA_2X
 	var saved_msaa: Viewport.MSAA = M_PlayerConfig.get_config(VIDEO_SECTION, MSAA_3D, default_msaa)
 	set_msaa_3d(saved_msaa, window)
 

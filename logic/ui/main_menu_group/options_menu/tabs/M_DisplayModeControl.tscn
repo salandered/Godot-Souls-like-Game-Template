@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.tscn" id="1_hecen"]
 
 [node name="OptionControl" instance=ExtResource("1_hecen")]
+
+[node name="OptionLabel" parent="." index="0"]
+text = " "
