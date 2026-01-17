@@ -5,8 +5,9 @@ extends FlickerOmni
 @onready var test_visual_fire: MeshInstance3D = $Effect/test_visual_fire
 
 
+
 @export_group("Particle Settings")
-@export var particles_amount: int = 40:
+@export var particles_amount: int = 10:
 	set(value):
 		particles_amount = value
 		if is_node_ready(): _apply_amount()

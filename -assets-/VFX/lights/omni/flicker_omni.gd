@@ -26,23 +26,48 @@ extends BaseOmni
 		play_move_animation = value
 		if is_node_ready(): _apply_playing_anim_settings()
 
+
+@export_group("VOSE3D")
+@export var vose_enabled: bool = true:
+	set(value):
+		vose_enabled = value
+		if is_node_ready(): _update_vose_state()
+@export var vose_whd: Vector3 = Vector3(2.0, 2.0, 2.0):
+	set(value):
+		vose_whd = value
+		if is_node_ready(): _set_vose_aabb_whd()
+## if true, vose_whd is ignored
+@export var auto_vose_abb: bool = true:
+	set(value):
+		auto_vose_abb = value
+@export var sway_padding: Vector3 = Vector3(1.0, 1.0, 1.0):
+	set(value):
+		sway_padding = value
+## click to apply
+@export var apply_auto_vose_abb_now: bool = false:
+	set(value):
+		apply_auto_vose_abb_now = false
+		if value and is_node_ready(): _apply_auto_vose_abb()
+
+
 @export_group("Animated params. DO NOT EDIT")
 @export var _animated_energy_strength: float = 1.0:
 	set(value):
 		_animated_energy_strength = value
 		if is_node_ready():
-			_apply_light_settings()
+			_update_animated_values()
 
 @export var _animated_range_strength: float = 1.0:
 	set(value):
 		_animated_range_strength = value
 		if is_node_ready():
-			_apply_light_settings()
+			_update_animated_values()
 
 # endregion
 
 @onready var flicker_animator: AnimationPlayer = %FlickerAnimator
 @onready var move_animator: AnimationPlayer = %MoveAnimator
+@onready var vose3d: VisibleOnScreenEnabler3D = %VOSE3D
 
 
 class AnimID:
@@ -53,16 +78,40 @@ class AnimID:
 func _ready_implementation() -> void:
 	_apply_playing_anim_settings()
 
+	_update_vose_state()
+	if auto_vose_abb:
+		_apply_auto_vose_abb()
+	else:
+		_set_vose_aabb_whd()
+
+
+func _ready_implementation_non_editor():
+	pass
+# 	if vose3d:
+# 		u.safe_connect(vose3d.screen_entered, _on_sceen_entered)
+# 		u.safe_connect(vose3d.screen_exited, _on_sceen_exited)
+
+
+# func _on_sceen_entered():
+# 	__log_("visible_on_screen_enabler_3d", "screen entered✴️")
+
+# func _on_sceen_exited():
+# 	__log_("visible_on_screen_enabler_3d", "screen exited 🚪")
+
+
+func _update_animated_values() -> void:
+	if omni_light_3d:
+		omni_light_3d.light_energy = energy * _animated_energy_strength
+		omni_light_3d.omni_range = radius * _animated_range_strength
+
 
 # region Apply Functions
 
 
 func _apply_light_settings() -> void:
 	super._apply_light_settings()
-	
-	if omni_light_3d:
-		omni_light_3d.light_energy = energy * _animated_energy_strength
-		omni_light_3d.omni_range = radius * _animated_range_strength
+	_apply_auto_vose_abb()
+	_update_animated_values()
 
 
 func _apply_playing_anim_settings() -> void:
@@ -75,7 +124,7 @@ func _apply_playing_anim_settings() -> void:
 func _play_anim(animator: AnimationPlayer, anim_id: String, speed_scale_: float) -> void:
 	if not animator: return
 	
-	if play_animation and animator.has_animation(anim_id):
+	if animator.has_animation(anim_id):
 		if not animator.is_playing() or animator.current_animation != anim_id:
 			animator.play(anim_id)
 			var anim_length := animator.get_animation(anim_id).length
@@ -84,5 +133,36 @@ func _play_anim(animator: AnimationPlayer, anim_id: String, speed_scale_: float)
 	else:
 		animator.stop()
 
+
+func _update_vose_state() -> void:
+	if not vose3d: return
+
+	if vose_enabled:
+		vose3d.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		vose3d.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		# CRITICAL:
+		# If we don't do this, and the light was off-screen when we clicked the checkbox,
+		# it would stay frozen forever.
+		process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func _set_vose_aabb_whd() -> void:
+	if not vose_enabled: return
+	if not vose3d: return
+	if auto_vose_abb: return
+
+	var centered_pos = - vose_whd / 2.0
+	vose3d.aabb = AABB(centered_pos, vose_whd)
+
+
+func _apply_auto_vose_abb() -> void:
+	if not vose_enabled: return
+	if not vose3d: return
+	if not auto_vose_abb: return
+
+	var r := radius
+	vose3d.aabb = AABB(Vector3(-r, -r, -r) - sway_padding, Vector3(r * 2, r * 2, r * 2) + sway_padding * 2)
 
 # endregion

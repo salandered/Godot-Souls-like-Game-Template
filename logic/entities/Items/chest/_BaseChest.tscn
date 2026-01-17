@@ -233,6 +233,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.091192424, 0.5714147)
 
 [node name="ChestFasteners" type="MeshInstance3D" parent="Visuals/LidPivot/FastenersPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6853455, -0.17027166)
+layers = 128
 gi_mode = 2
 mesh = ExtResource("4_aiw8g")
 
@@ -253,6 +254,7 @@ bus = &"game_SFX"
 
 [node name="ChestLid" type="MeshInstance3D" parent="Visuals/LidPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59415305, 0.40114304)
+layers = 128
 gi_mode = 2
 mesh = SubResource("ArrayMesh_41nsj")
 
@@ -271,6 +273,7 @@ max_db = -2.0
 bus = &"game_SFX"
 
 [node name="metal things" type="MeshInstance3D" parent="Visuals/LidPivot/ChestLid"]
+layers = 256
 cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("7_41nsj")
@@ -288,6 +291,7 @@ gi_mode = 2
 mesh = ExtResource("6_fu8jp")
 
 [node name="metal things" type="MeshInstance3D" parent="Visuals/ChessMain/ChestMain"]
+layers = 256
 cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("8_aiw8g")

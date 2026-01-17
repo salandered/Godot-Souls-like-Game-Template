@@ -52,9 +52,9 @@ func _decide_on_mode_on_enter():
 	if not me.angry_raised:
 		if dist >= config.REAL_FAR():
 			curr_mode.set_mode(FAST)
-			_reason += "dist > REAL_FAR"
+			if __ELA(): _reason += "dist > REAL_FAR"
 		else:
-			_reason += "dist < REAL_FAR"
+			if __ELA(): _reason += "dist < REAL_FAR"
 			curr_mode.set_mode(SLOW)
 	else:
 		if dist >= config.COMBAT_RAD() - 0.2:
@@ -62,7 +62,7 @@ func _decide_on_mode_on_enter():
 		else:
 			curr_mode.set_mode(SLOW)
 
-	__log_decide_on_mode(true, "-x-", _reason)
+	if __ELA(): __log_decide_on_mode(true, "-x-", _reason)
 
 
 func _update_mode() -> bool:
@@ -71,16 +71,16 @@ func _update_mode() -> bool:
 	var _old_mode_name := curr_mode.get_curr_mode_name()
 	match _old_mode_name:
 		FAST:
-			if distance_to_player() < config.CLOSE_TO_ORBIT() - fvalue_angry(0.0, 3.0):
-				_reason += "dist < CLOSE_TO_ORBIT"
+			if dist < config.CLOSE_TO_ORBIT() - fvalue_angry(0.0, 3.0):
+				if __ELA(): _reason += "dist < CLOSE_TO_ORBIT"
 				curr_mode.set_mode(svalue_angry(SLOW, FAST))
 		SLOW:
-			if distance_to_player() >= config.REAL_FAR() - fvalue_angry(0.0, 3.0):
-				_reason += "dist > REAL_FAR"
+			if dist >= config.REAL_FAR() - fvalue_angry(0.0, 3.0):
+				if __ELA(): _reason += "dist > REAL_FAR"
 				curr_mode.set_mode(FAST)
 
 	if _old_mode_name != curr_mode.get_curr_mode_name():
-		__log_decide_on_mode(false, _old_mode_name, _reason)
+		if __ELA(): __log_decide_on_mode(false, _old_mode_name, _reason)
 		return true
 	else:
 		return false
@@ -94,7 +94,7 @@ func on_enter_state() -> void:
 	anim = anim_container.get_by_anim_id(curr_mode.get_curr_anim_id())
 	
 	var _inherited_speed := e_movement.get_curr_velocity_len()
-	__log_ent("_inherited_speed, speed will be ", _inherited_speed, "->", curr_mode.get_curr_speed())
+	if __ELA(): __log_ent("_inherited_speed, speed will be ", _inherited_speed, "->", curr_mode.get_curr_speed())
 
 	speed_from_inherited.initialise(_inherited_speed, curr_mode.get_curr_speed(), 0.4)
 	angular_sp.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
@@ -130,7 +130,7 @@ func update(delta: float) -> void:
 
 
 func _on_mode_switch():
-	__log_upd("Switching pursue curr_mode to", curr_mode.get_curr_mode_name(), "speed from", e_movement.get_curr_velocity_len(), "to", curr_mode.get_curr_speed(), "over 0.3")
+	if __ELA(): __log_upd("Switching pursue curr_mode to", curr_mode.get_curr_mode_name(), "speed from", e_movement.get_curr_velocity_len(), "to", curr_mode.get_curr_speed(), "over 0.3")
 	_switch_animation()
 	# to smooth the speed change
 	speed_from_mode_change.initialise(e_movement.get_curr_velocity_len(), curr_mode.get_curr_speed(), 0.3)
@@ -141,7 +141,7 @@ func _switch_animation():
 	var curr_anim := anim
 
 	if next_anim.anim_id == curr_anim.anim_id:
-		print_.dev("", "_switch_animation same anim, won't switch")
+		if __ELA(): print_.dev("", "_switch_animation same anim, won't switch")
 		return
 
 	var _custom_blend_time := blend_time.calculate_actual(PREV_LEAF)
@@ -165,6 +165,6 @@ func _switch_animation():
 func __log_decide_on_mode(on_enter: bool, _old_mode_name: String, _reason: String):
 	var _curr_mode_name := curr_mode.get_curr_mode_name()
 	if on_enter:
-		__log_ent(_reason, "-> Initial curr_mode:", _curr_mode_name)
+		if __ELA(): __log_ent(_reason, "-> Initial curr_mode:", _curr_mode_name)
 	else:
-		__log_upd(_old_mode_name, "-> Change to", _curr_mode_name, "Reason:", _reason)
+		if __ELA(): __log_upd(_old_mode_name, "-> Change to", _curr_mode_name, "Reason:", _reason)

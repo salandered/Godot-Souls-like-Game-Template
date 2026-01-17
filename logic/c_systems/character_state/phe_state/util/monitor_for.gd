@@ -37,10 +37,10 @@ class MonitorFor extends RefCountedSystem:
 		var _r: bool = false
 		var _reason: String = ""
 		if not is_set():
-			_reason += "not set = done (we r not in waiting period)"
+			if __LOG_B(): _reason += "not set = done (we r not in waiting period)"
 			_r = true
 		else:
-			_reason += "compare _timer and _duration" + pp.s(_timer, _duration)
+			if __LOG_B(): _reason += "compare _timer and _duration" + pp.s(_timer, _duration)
 			_r = _timer >= _duration
 		return _r
 
@@ -65,7 +65,7 @@ class MonitorFor extends RefCountedSystem:
 		if is_set():
 			_duration = -1.0
 			_timer = -1.0
-			__log_(__pp_reset(), "   |", __log)
+			if __LOG_B(): __log_(__pp_reset(), "   |", __log)
 	
 
 	func is_set() -> bool:
@@ -82,8 +82,10 @@ class MonitorFor extends RefCountedSystem:
 		else:
 			_duration = randf_range(_min, _max)
 		_timer = 0.0
-		var _msg := "{set again} for " + _our_state if _already_set else "{set} " + __pp_set_random()
-		__log_(_msg, "   |", __log)
+
+		if __LOG_B():
+			var _msg := "{set again} for " + _our_state if _already_set else "{set} " + __pp_set_random()
+			__log_(_msg, "   |", __log)
 
 
 	# in case u want it the old deterministic way
@@ -153,15 +155,15 @@ class WillDoFor extends MonitorFor:
 	## "", A - behaviour is the same as B, A
 	func _auto_set_on_switch_to(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		if _is_switch_to_our(curr_substate, next_substate):
-			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate))
+			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 		elif _is_both_are_ours(curr_substate, next_substate) and not is_set():
-			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate))
+			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
 
 	func _auto_reset_on_switch_from(curr_substate: String, next_substate: String, __log: String = ""):
 		if _is_switch_from_our(curr_substate, next_substate) \
 			or _is_switch_not_related(curr_substate, next_substate):
-			reset(__log + " " + pair_log(curr_substate, next_substate))
+			reset(__log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
 	func _auto_update(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		_auto_set_on_switch_to(curr_substate, next_substate, min_, max_, __log)
@@ -178,12 +180,12 @@ class WillNotDoFor extends MonitorFor:
 	## "", A - behaviour is the same as B, A
 	func _auto_set_on_switch_from(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		if _is_switch_from_our(curr_substate, next_substate):
-			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate))
+			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
 	func _auto_reset_on_switch_to(curr_substate: String, next_substate: String, __log: String = ""):
 		if _is_switch_to_our(curr_substate, next_substate) or \
 			_is_both_are_ours(curr_substate, next_substate):
-			reset(__log + " " + pair_log(curr_substate, next_substate))
+			reset(__log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
 	func _auto_update(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		_auto_set_on_switch_from(curr_substate, next_substate, min_, max_, __log)

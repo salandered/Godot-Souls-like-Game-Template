@@ -11,14 +11,16 @@ signal SIG_hit(payload: Dictionary[String, Variant])
 var cooldown_sig_emit := Cooldown.new(0.2)
 
 
-func _get_common_area_config() -> CommonAreaConfig:
-	return CommonAreaConfig.new(
+var common_area_config := CommonAreaConfig.new(
 		MonitorType.SIGNAL,
 		true,
 		false,
 		Collision.Masks.ONLY_WEAPON_AREA,
 		false
 	)
+
+func _get_common_area_config() -> CommonAreaConfig:
+	return common_area_config
 
 
 func _get_coll_shape() -> CollisionShape3D:

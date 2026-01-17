@@ -1,0 +1,209 @@
+[gd_scene load_steps=5 format=3 uid="uid://b46dekni8c4fb"]
+
+[ext_resource type="Script" uid="uid://cyp4vbx5quudp" path="res://logic/ui/image_gallery/_generic_image_gallery.gd" id="1_ssf3r"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/separator/h_separator.tscn" id="2_ywow2"]
+[ext_resource type="AudioStream" uid="uid://bqy71tbdxrovo" path="res://-assets-/SFX/sources/rubberduck/book_page_flip.tres" id="3_ywow2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssf3r"]
+bg_color = Color(0.28, 0.08400001, 0.11013331, 0.89411765)
+
+[node name="BaseImageGallery" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ssf3r")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ssf3r")
+
+[node name="GlobalContainer" type="MarginContainer" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 60
+
+[node name="Display" type="TextureRect" parent="PanelContainer/GlobalContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SystemInfoContainer" type="PanelContainer" parent="PanelContainer/GlobalContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/SystemInfoContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SystemInfoLabel" type="Label" parent="PanelContainer/GlobalContainer/SystemInfoContainer/__margin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 44
+text = "Loading image gallery ..."
+
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="InfoContainer" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="TitleContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TitleLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer/TitleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "Title would be here"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="h__sep" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer" instance=ExtResource("2_ywow2")]
+layout_mode = 2
+
+[node name="DescriptionContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer/DescriptionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
+bbcode_enabled = true
+text = "Description is here
+
+Line 
+Long live the [b]line[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="__margin2" type="MarginContainer" parent="PanelContainer/GlobalContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="AdditionalInfoContainer" type="HBoxContainer" parent="PanelContainer/GlobalContainer/__margin2"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="CounterContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="__panel" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer/__panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="CounterLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer/__panel/__margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 44
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+bbcode_enabled = true
+text = "7/15"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LegendContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="__panel" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer/__panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="LegendLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer/__panel/__margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "[b]Arrows or A/D[/b] - Next/Prev
+[b]0 or NumPad 0[/b] - Toggle UI
+[i]Esc - Back to main menu[/i]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="asp" type="Node" parent="."]
+
+[node name="BookFlip" type="AudioStreamPlayer" parent="asp"]
+stream = ExtResource("3_ywow2")
+volume_db = -4.0
+pitch_scale = 0.9
+bus = &"game_SFX"

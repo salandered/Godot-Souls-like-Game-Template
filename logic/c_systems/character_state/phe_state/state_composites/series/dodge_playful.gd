@@ -8,17 +8,19 @@ func initialise() -> void:
 	PL_DIST_TO_END = 16 # practically don't end
 
 
-func get_attack_series_list() -> Array:
-	return [
+var attack_series_list: Array[Array] = [
 		[PHES.Leaf.dodge_L],
 		[PHES.Leaf.dodge_R],
 		[PHES.Leaf.dodge_F, PHES.Leaf.dodge_B],
 		[PHES.Leaf.dodge_B],
 	]
 
+func get_attack_series_list() -> Array[Array]:
+	return attack_series_list
+
 
 func pick_series_idx() -> int:
-	var idx_2_chance := 0.0 if distance_to_player() < config.DODGE_RAD() else 0.2
+	var idx_2_chance := 0.0 if dist_to_player_less(config.DODGE_RAD()) else 0.2
 	var _idx := ra.ipick_weighted({
 		0: 0.4,
 		1: 0.4,

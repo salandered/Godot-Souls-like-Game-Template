@@ -20,7 +20,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="Hard Tissue Demo"
-config/version="0.0.2"
+config/version="0.0.3"
 run/main_scene="uid://c66xg4go6ct4v"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://dj75kmn2opgg4"
@@ -109,7 +109,9 @@ folder_colors={
 "res://-assets-/animations/standard-skeleton/": "blue",
 "res://-assets-/materials-shared/": "red",
 "res://-assets-/materials-shared/_unsorted/": "gray",
+"res://-assets-/materials-shared/baked/": "blue",
 "res://-assets-/materials-shared/baked/quad_outfits/": "yellow",
+"res://-assets-/materials-shared/textures/": "gray",
 "res://-assets-/music/": "pink",
 "res://-assets-/ui_assets/": "pink",
 "res://-assets-/ui_assets/maaacks_assets/": "orange",
@@ -138,7 +140,12 @@ folder_colors={
 "res://logic/c_systems/sk_modifiers/": "red",
 "res://logic/c_systems/unsorted/": "purple",
 "res://logic/entities/Enemies/phe_enemy/": "blue",
-"res://logic/entities/Locations/demo_arena/": "yellow",
+"res://logic/entities/Locations/": "yellow",
+"res://logic/entities/Locations/_dev/": "gray",
+"res://logic/entities/Locations/demo_level/": "blue",
+"res://logic/entities/Locations/environments/": "gray",
+"res://logic/entities/Locations/props/": "gray",
+"res://logic/entities/Locations/spring_up/": "gray",
 "res://logic/systems/sfx_anim_data_container/": "yellow",
 "res://logic/ui/": "pink",
 "res://logic/ui/game_state/": "red",
@@ -408,6 +415,9 @@ DEV_KP7={
 
 [layer_names]
 
+3d_render/layer_7="Characters"
+3d_render/layer_8="Dynamic"
+3d_render/layer_9="StaticSmall"
 3d_physics/layer_1="Env-col"
 3d_physics/layer_2="Player-col"
 3d_physics/layer_3="OtherChar-col"
@@ -420,4 +430,5 @@ DEV_KP7={
 
 lights_and_shadows/tighter_shadow_caster_culling=false
 environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)
+occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=10.0

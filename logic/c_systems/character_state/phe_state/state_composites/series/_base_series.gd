@@ -68,7 +68,7 @@ func attack_in_series_passed_marker(curr_series_number_: int, curr_sbs: BasePHEL
 		return false
 
 	if curr_sbs.passed_marker(marker_name):
-		__log_upd("captured attack_in_series_passed_marker", curr_series_number_, curr_sbs.state_name, target_sbs_name_, marker_name)
+		if __ELA(): __log_upd("captured attack_in_series_passed_marker", curr_series_number_, curr_sbs.state_name, target_sbs_name_, marker_name)
 		return true
 
 	return false
@@ -102,7 +102,7 @@ func _is_ended() -> bool:
 	var _current_substate := get_current_substate()
 	
 	if _current_substate == null:
-		__log_upd('_is_ended', "_current_substate is null", 'curr attack idx', current_attack_number, _chosen_attack_series)
+		if __ELA(): __log_upd('_is_ended', "_current_substate is null", 'curr attack idx', current_attack_number, _chosen_attack_series)
 		return true
 
 	if dist_to_player_greater(PL_DIST_TO_END) and condition_to_end(_current_substate):
@@ -142,7 +142,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	
 	if condition_to_next_switch(current_substate_casted):
 		var _next_index := current_attack_number + 1
-		__log_upd("attack index + 1. curr/next", current_attack_number, _next_index)
+		if __ELA(): __log_upd("attack index + 1. curr/next", current_attack_number, _next_index)
 		if _next_index < _chosen_attack_series.size(): # next attack exists
 			# __log_upd("gonna switch to next attack curr/next", current_attack_number, _next_index)
 			current_attack_number = _next_index
@@ -194,5 +194,5 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 		_next_state = _chosen_attack_series[current_attack_number]
 		if __ELA(): _reason += "picked combo, starting with first attack"
 	
-	__log_ent("Chosen combo:", _chosen_attack_series, "| Total attacks:", _chosen_attack_series.size())
+	if __ELA(): __log_ent("Chosen combo:", _chosen_attack_series, "| Total attacks:", _chosen_attack_series.size())
 	return VerdictPH.new(_next_state, _reason)

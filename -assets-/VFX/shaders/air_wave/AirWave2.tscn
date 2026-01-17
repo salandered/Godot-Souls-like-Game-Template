@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cxfgvp3futm7q"]
 
 [ext_resource type="Material" uid="uid://cjybi26n5lih0" path="res://-assets-/VFX/shaders/air-wave-2.tres" id="1_0pem4"]
-[ext_resource type="Script" uid="uid://bnmpiwotm6xje" path="res://-assets-/ui_assets/air_wave_2.gd" id="1_dbngs"]
+[ext_resource type="Script" uid="uid://bnmpiwotm6xje" path="res://logic/c_systems/unsorted/air_wave_2.gd" id="1_dbngs"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="3_fkr04"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dbngs"]

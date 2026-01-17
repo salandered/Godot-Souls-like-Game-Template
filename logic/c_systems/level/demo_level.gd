@@ -33,5 +33,10 @@ func initialise() -> void:
 func _on_play_secret_e_fight_sig_player_entered(incoming_body: Node3D) -> void:
 	if WAVE_PAINT_3 and WAVE_PAINT_3 is AudioStream:
 		if not fight_song_triggered:
-			_bg_music_system.play_priority_track(WAVE_PAINT_3, -8.0, 22.0, 5.0)
+			_bg_music_system.play_priority_track(WAVE_PAINT_3, -12.0, 22.0, 5.0)
 			fight_song_triggered = true
+
+const BACK_MELODY = preload("uid://b3mvk1hw0imcv")
+
+func _on_secret_enemy_sig_death_raised() -> void:
+	_bg_music_system.play_priority_track(BACK_MELODY, -12.0, 60, 15.0)

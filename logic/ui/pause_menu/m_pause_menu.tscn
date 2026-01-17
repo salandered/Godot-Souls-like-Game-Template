@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_8s11q"]
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://logic/ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
-[ext_resource type="PackedScene" uid="uid://cikf3o5omnunl" path="res://logic/ui/pause_menu/m_mini_options_overlaid_menu.tscn" id="2_8s11q"]
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://logic/ui/ui_utils/legacy_capture_focus.gd" id="3_j5dnp"]
+[ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="3_l2gh6"]
 [ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/container-background.tres" id="4_kheb5"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/separator/h_separator.tscn" id="4_w5m25"]
 
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8s11q")
 script = ExtResource("1_qfpun")
-options_packed_scene = ExtResource("2_8s11q")
+options_packed_scene = ExtResource("3_l2gh6")
 main_menu_scene = "uid://c66xg4go6ct4v"
 pauses_game = true
 
@@ -74,6 +74,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="DescriptionMargin" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -91,8 +92,7 @@ fit_content = true
 
 [node name="MenuButtonsMargin" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 20
 
 [node name="MenuButtons" type="BoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin"]
 unique_name_in_owner = true
@@ -117,14 +117,13 @@ text = "Restart"
 
 [node name="OptionsButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "Options"
 
 [node name="MainMenuButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Main Menu"
 
@@ -138,19 +137,32 @@ text = "Exit Game"
 unique_name_in_owner = true
 auto_translate_mode = 1
 oversampling_override = 1.0
-size = Vector2i(226, 102)
-dialog_text = "Restart the game?"
+size = Vector2i(235, 100)
+borderless = true
+theme = ExtResource("1_8s11q")
+ok_button_text = "  OK  "
+dialog_text = "   Restart the game?  "
+cancel_button_text = "  Cancel  "
 
 [node name="ConfirmMainMenu" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 auto_translate_mode = 1
-dialog_text = "Go back to main menu?"
+oversampling_override = 1.0
+size = Vector2i(261, 100)
+borderless = true
+ok_button_text = "  OK  "
+dialog_text = "   Go back to main menu?  "
+cancel_button_text = "  Cancel  "
 
 [node name="ConfirmExit" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 auto_translate_mode = 1
-size = Vector2i(200, 102)
-dialog_text = "Quit the game?"
+oversampling_override = 1.0
+size = Vector2i(215, 102)
+borderless = true
+ok_button_text = "  OK  "
+dialog_text = "   Quit the game?  "
+cancel_button_text = "  Cancel  "
 
 [connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]

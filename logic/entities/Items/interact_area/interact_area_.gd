@@ -26,14 +26,16 @@ var _is_player_inside := false
 
 var cooldown_sig_emit := Cooldown.new(0.4)
 
-func _get_common_area_config() -> CommonAreaConfig:
-	return CommonAreaConfig.new(
+var common_area_config := CommonAreaConfig.new(
 		MonitorType.PROCESS_LIST,
 		false,
 		true,
 		Collision.Masks.ONLY_PLAYER,
 		true
 	)
+
+func _get_common_area_config() -> CommonAreaConfig:
+	return common_area_config
 
 
 func _get_coll_shape() -> CollisionShape3D:

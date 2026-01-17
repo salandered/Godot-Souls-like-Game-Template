@@ -2,7 +2,7 @@
 extends EditorScript
 
 # --- CONFIGURATION ---
-const ROOT_DIR = "res://" # or specific folder like "res://assets/"
+const ROOT_DIR = "res://-assets-/materials-shared/" # or specific folder like "res://assets/"
 const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "tga", "bmp", "webp"]
 const IGNORE_WORDS = ["pixel", "pixpal", "lut"]
 

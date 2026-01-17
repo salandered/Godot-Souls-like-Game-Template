@@ -6,8 +6,17 @@
 
 [node name="DarkCrateBigPile" type="Node3D"]
 
-[node name="DarkCrateColumn5" parent="." instance=ExtResource("1_4a3x4")]
+[node name="DarkCrateColumn5" type="Node3D" parent="."]
 transform = Transform3D(0.0340274, 0, 0.9994209, 0, 1, 0, -0.9994209, 0, 0.0340274, -0.2864493, 0, -0.9536453)
+
+[node name="DarkCrate" parent="DarkCrateColumn5" instance=ExtResource("3_0635w")]
+transform = Transform3D(-0.036155373, 0, -0.9993462, 0, 1, 0, 0.9993462, 0, -0.036155373, 0, 0.33438396, -0.08092737)
+
+[node name="DarkCrate2" parent="DarkCrateColumn5" instance=ExtResource("3_0635w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95145655, -0.08092737)
+
+[node name="DarkCrate3" parent="DarkCrateColumn5" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.9861412, 0, 0.16590825, 0, 1, 0, -0.16590825, 0, 0.9861412, 0, 1.6013209, -0.08092737)
 
 [node name="DarkCrateColumn6" parent="." instance=ExtResource("1_4a3x4")]
 transform = Transform3D(0.0340274, 0, 0.9994209, 0, 1, 0, -0.9994209, 0, 0.0340274, 0.46361887, 0, -0.92810756)

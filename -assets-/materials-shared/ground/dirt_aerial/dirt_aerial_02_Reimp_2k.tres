@@ -7,6 +7,7 @@
 [resource]
 resource_name = "dirt_aerial_02"
 cull_mode = 2
+albedo_color = Color(0.71178013, 0.70621544, 0.8258557, 1)
 albedo_texture = ExtResource("1_vvesx")
 metallic_texture_channel = 2
 roughness_texture = ExtResource("3_c7te7")

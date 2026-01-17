@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjg2if4ywp6j8"]
 
-[ext_resource type="Script" uid="uid://cu3g36kl67vg7" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/m_input_options_menu.gd" id="2_ckbx2"]
+[ext_resource type="Script" uid="uid://cu3g36kl67vg7" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/m_controls_options_menu.gd" id="2_ckbx2"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://logic/ui/ui_utils/options_nodes/m_slider_option_control.tscn" id="3_3kptd"]
 [ext_resource type="Script" uid="uid://cgvwv8js7s1jd" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/m_input_actions_list.gd" id="4_l83qi"]
 [ext_resource type="Script" uid="uid://custha7r0uoic" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/m_key_assignment_dialog.gd" id="6_a807y"]

@@ -32,7 +32,7 @@ process_mode = 3
 layer = 20
 script = ExtResource("1_j1vc5")
 _complete = ""
-background_image_paths = Array[String](["uid://xagpcipjba24", "uid://ch6w3soy4ufym", "uid://dud5ta817vs5c", "uid://cw6efvrq14ird", "uid://b5tjneo4waokv", "uid://cyau4gssrsjjm", "uid://5ofu2y0m6qn8", "uid://dv4p73ce0g7nu", "uid://dd63an1eukdom", "uid://u18e8ohwjwv2", "uid://dj3pfweqjrhkr", "uid://ced7tqym3wk01", "uid://dq8bsncuqqm1g"])
+background_image_paths = Array[String](["uid://bao877phccl35", "uid://bou43m0wm6j1", "uid://c6r4ede1h35cv", "uid://dgfi5rtft6keb", "uid://vgchkkdiaajj", "uid://qsinqvca4f1k", "uid://btyqnorug4vwe", "uid://m6vx76vru4v1", "uid://t8n42w7bayi0", "uid://cuykqyvmucksm", "uid://cmcl2jmhalgi0", "uid://b6aeflinp8x0g", "uid://ccjx416rmarik", "uid://cbg0jt7cpk4c5", "uid://bssyesge7alyg", "uid://ghcgnjcay8ek", "uid://dq8bsncuqqm1g"])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

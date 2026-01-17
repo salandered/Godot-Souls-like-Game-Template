@@ -214,6 +214,7 @@ shadow_mesh = SubResource("ArrayMesh_s18qp")
 
 [node name="FlickerOmni" instance=ExtResource("1_jro0j")]
 script = ExtResource("2_auf42")
+auto_vose_abb = true
 _animated_energy_strength = 6.0
 _animated_range_strength = 2.387
 
@@ -249,3 +250,8 @@ transform = Transform3D(2.0089822, 0, 0, 0, 2.0089822, 0, 0, 0, 2.0089822, 1.407
 gi_mode = 0
 mesh = SubResource("ArrayMesh_bcn8a")
 skeleton = NodePath("")
+
+[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="." index="7"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030094266, 0, 0)
+aabb = AABB(-4.6, -4.6, -4.6, 9.2, 9.2, 9.2)

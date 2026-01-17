@@ -10,8 +10,9 @@ func initialise_implementation() -> void:
 	default_sp.ANGULAR_SPEED = 0.1
 
 
+var attack_weapons: Array[String] = [WeaponID.bg_aura_weapon]
 func get_anim_active_weapon_ids() -> Array[String]:
-	return [WeaponID.bg_aura_weapon]
+	return attack_weapons
 
 
 var _pushed_rigid_bodies: bool = false

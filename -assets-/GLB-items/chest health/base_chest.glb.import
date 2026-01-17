@@ -96,6 +96,20 @@ _subresources={
 "save_to_file/fallback_path": "res://-assets-/GLB-items/chest health/meshes/health chest_Cube_049.res",
 "save_to_file/path": "uid://blcv133ieg7t"
 }
+},
+"nodes": {
+"PATH:chest fasteners": {
+"mesh_instance/layers": 128
+},
+"PATH:chest lid": {
+"mesh_instance/layers": 128
+},
+"PATH:chest lid/chest lid metal things": {
+"mesh_instance/layers": 256
+},
+"PATH:chest main/chest main metal things": {
+"mesh_instance/layers": 256
+}
 }
 }
 gltf/naming_version=2

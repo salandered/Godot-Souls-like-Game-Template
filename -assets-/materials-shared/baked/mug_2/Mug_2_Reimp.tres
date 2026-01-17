@@ -1,13 +1,13 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://biyh4e5a5g431"]
 
-[ext_resource type="Texture2D" uid="uid://bqsbf83faq1cw" path="res://-assets-/materials-shared/baked/mug_2/jaw_mug2_diff.png" id="1_sisfd"]
+[ext_resource type="Texture2D" uid="uid://cgtjyyd5uyfbg" path="res://-assets-/materials-shared/baked/mug_2/jaw_mug2_diff.jpg" id="1_x3sn4"]
 [ext_resource type="Texture2D" uid="uid://dwr21g11h1ram" path="res://-assets-/materials-shared/baked/mug_2/jaw_mug2_norm.png" id="2_mbxng"]
 
 [resource]
 resource_name = "Mug_2"
 cull_mode = 2
 albedo_color = Color(0.58825254, 0.47884077, 0.38310525, 1)
-albedo_texture = ExtResource("1_sisfd")
+albedo_texture = ExtResource("1_x3sn4")
 metallic_specular = 0.27
 normal_enabled = true
 normal_texture = ExtResource("2_mbxng")

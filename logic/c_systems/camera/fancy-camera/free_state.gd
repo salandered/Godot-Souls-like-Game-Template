@@ -83,7 +83,7 @@ func _move_camera_nest() -> void:
 	#    - One of such vectors is the vertical axis, and the other one is our free_offset.
 func input_mouse_movement(d_x: float, d_y: float) -> void:
 	# HORIZONTAL
-	free_offset = free_offset.rotated(Vector3.UP, -d_x * fc.HOR_SENSE * 0.001)
+	free_offset = free_offset.rotated(Vector3.UP, -d_x * fc.mouse_sense.x_sense * 0.001)
 
 	# VERTICAL 
 	free_offset = vertical_mouse_movement(d_x, d_y, free_offset)

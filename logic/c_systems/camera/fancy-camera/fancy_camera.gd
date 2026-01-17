@@ -25,11 +25,12 @@ class_name FancyCamera
 @export var COLLISION_CAM_RADIUS: float = 0.15 # try 0.25–0.35
 
 @export_group("CAM_MOVEMENT")
-@export var HOR_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
-## by default 0.8 of HOR_SENSE
-@export var VER_SENSE: float = HOR_SENSE * 0.8 # 70–90% of horizontal
+@export var DEF_X_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
+## by default 0.8 of DEF_X_SENSE
+@export var DEF_Y_SENSE: float = 0.8 # 70–90% of horizontal
 ## Used only when locked to target
-@export var LOCKED_VER_SENSE: float = 0.7
+## applies to y sense
+@export var DEF_LOCKED_Y_SENSE_MULT: float = 0.9
 	# angle = 0° → camera straight above the mount (offset pointing straight up)
 	# angle = 90° → camera level with the mount (offset perfectly horizontal)
 	# angle = 180° → camera straight below the mount
@@ -71,6 +72,9 @@ class_name FancyCamera
 @onready var camera_movement: CameraMovement = %CameraMovement
 @onready var circle_target: TargetMarker = %CircleTarget
 
+
+var mouse_sense: MouseSense
+
 ## not nullable
 var current_state: CameraState
 
@@ -99,15 +103,21 @@ func __hard_dependencies() -> Array[Object]:
 		camera_movement,
 		locked_target,
 		current_state,
+		mouse_sense
 	]
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	u.safe_connect(GlobalSignal.SIG_update_mouse_settings_for_camera, _on_update_sense_settings)
 	initialise()
 
 
 func initialise() -> void:
+	# SENSE
+	calculate_mouse_sense()
+
+
 	# POSITIONS INIT
 	# 1. look_at_ is always Player's chest (CameraFocus) in the Free State
 	# 2. Free State is always first state to enter 
@@ -151,6 +161,15 @@ func initialise() -> void:
 	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
 	if not __perform_validation():
 		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can't be done")
+
+
+func calculate_mouse_sense():
+	if not mouse_sense:
+		mouse_sense = MouseSense.new()
+	var x_sense_settings := M_AppSettings.get_x_sense()
+	var y_sense_settings := M_AppSettings.get_y_sense()
+	prints("calculate_mouse_sense", x_sense_settings, y_sense_settings)
+	mouse_sense.calculate(DEF_X_SENSE, DEF_Y_SENSE, DEF_LOCKED_Y_SENSE_MULT, x_sense_settings, y_sense_settings)
 
 
 func is_locked_state() -> bool:
@@ -241,6 +260,11 @@ func _input(event: InputEvent) -> void:
 		accumulated_mouse_delta += event.relative
 
 	_dev_input(event)
+
+
+func _on_update_sense_settings() -> void:
+	# recalculating
+	calculate_mouse_sense()
 
 
 ## __LOGS

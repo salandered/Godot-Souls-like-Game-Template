@@ -44,6 +44,14 @@ _subresources={
 "use_external/fallback_path": "res://-assets-/materials-shared/baked/pinga/Pinga_baked_Reimp.tres",
 "use_external/path": "uid://bj1nt2phlwt7s"
 }
+},
+"nodes": {
+"PATH:Pinga_002": {
+"mesh_instance/layers": 128
+},
+"PATH:Pinga_002/chain HP_003": {
+"mesh_instance/layers": 128
+}
 }
 }
 gltf/naming_version=2

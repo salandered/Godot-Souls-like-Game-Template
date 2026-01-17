@@ -3,6 +3,6 @@
 [node name="h__sep" type="HSeparator"]
 modulate = Color(0.6561392, 0.6561392, 0.6561392, 1)
 texture_filter = 1
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 40)
 offset_right = 86.0
 offset_bottom = 20.0

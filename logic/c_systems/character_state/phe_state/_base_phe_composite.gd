@@ -58,7 +58,7 @@ func _on_enter_state() -> void:
 	var _reason := ""
 	var initial_state_verdict := _choose_initial_substate(_next_state, _reason)
 
-	__log_phe_decision("Initial choice |", initial_state_verdict.get_reason(), " |", __get_common_context(), " => ", initial_state_verdict.next_state)
+	if __ELA(): __log_phe_decision("Initial choice |", initial_state_verdict.get_reason(), " |", __get_common_context(), " => ", initial_state_verdict.next_state)
 	_switch_substate(initial_state_verdict.next_state)
 
 	# after choose_initial_substate! or not.. But order is important
@@ -67,7 +67,7 @@ func _on_enter_state() -> void:
 
 ## internal
 func _on_exit_state() -> void:
-	__log_ext("")
+	if __ELA(): __log_ext("")
 	if not __is_entered:
 		__log_error("Calling exit while not entered")
 	__is_entered = false
@@ -89,6 +89,7 @@ func _update(delta: float) -> void:
 	if works_longer_than_fatigue():
 		me.fatigue_raised = true
 
+
 	# do ur stuff
 	update(delta)
 
@@ -96,19 +97,19 @@ func _update(delta: float) -> void:
 
 	# todo one big mess here
 	if verdict.needs_switch():
-		if __state_declined != verdict.next_state:
-			__log_phe_decision(verdict.get_reason(), " |", __get_common_context(), " => ", verdict.next_state)
+		# if __state_declined != verdict.next_state:
+		# 	if __ELA(): __log_phe_decision(verdict.get_reason(), " |", __get_common_context(), " => ", verdict.next_state)
 		var _current_sbs := get_current_substate()
 		if not verdict.override_commit_raised() and (_current_sbs != null and _current_sbs.works_less_than_commitment()):
-			if __state_declined != verdict.next_state:
-				__log_phe_decision(em.pin, "curr sbs '%s' worked < %.2f commit, switch to '%s' declined ✖️. Curr sbs timings: %s" \
-					% [_current_sbs.state_name, _current_sbs.commitment, verdict.next_state, _current_sbs.__log_timings()])
+			# if __state_declined != verdict.next_state:
+			# 	if __ELA(): __log_phe_decision(em.pin, "curr sbs '%s' worked < %.2f commit, switch to '%s' declined ✖️. Curr sbs timings: %s" \
+			# 		% [_current_sbs.state_name, _current_sbs.commitment, verdict.next_state, _current_sbs.__log_timings()])
 			__state_declined = verdict.next_state
 		else:
 			__state_declined = "x"
 			_switch_substate(verdict.next_state)
 	elif state_name != PHES._TOP and not self is BasePHEAttackSeries and __prev_now_switch_msg != verdict.get_reason():
-		__log_phe_decision("NO SWITCH for", pp.in_q(get_safe_curr_sbs_name()), verdict.get_reason(), "Verdict data:", verdict)
+		if __ELA(): __log_phe_decision("NO SWITCH for", pp.in_q(get_safe_curr_sbs_name()), verdict.get_reason(), "Verdict data:", verdict)
 		__prev_now_switch_msg = verdict.get_reason()
 		
 	# call ur children to do stuff
@@ -173,7 +174,7 @@ func _check_substate_transition(delta: float) -> VerdictPH:
 	if _sbs_verdict.next_state == current_substate_.state_name and not _sbs_verdict.switch_on_same_raised():
 		_sbs_verdict.reset_next_state()
 	elif _sbs_verdict.next_state == "" and _sbs_verdict.switch_on_same_raised():
-		__log_phe_check("Next state '' but needs switch. We explicitly assign curr subs", current_substate_.state_name)
+		if __ELA(): __log_phe_check("Next state '' but needs switch. We explicitly assign curr subs", current_substate_.state_name)
 		_sbs_verdict.next_state = current_substate_.state_name
 	
 	return _sbs_verdict
@@ -196,7 +197,7 @@ func _choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH
 ## but this way all function implementations are more uniformed and less verbose and prone to error
 ## NOTE: for simplicity, last line should be always 'return VerdictPH.new(_next_state, _reason)'
 func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
-	_reason = "default implementation"
+	if __ELA(): _reason = "default implementation"
 	return VerdictPH.new(_next_state, _reason)
 
 
@@ -204,15 +205,15 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 ## '_reason' - is empty string on function entry. State should fill it and add to verdict reason
 ## NOTE: for simplicity, last line should be always 'return VerdictPH.new(_next_state, _reason)'
 func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
-	_reason = em.crucial_x2 + "state must implement choose_initial_substate!"
+	if __ELA(): _reason = em.crucial_x2 + "state must implement choose_initial_substate!"
 	return VerdictPH.new(_next_state, _reason)
 
 
 func _switch_substate(next_state_name: String):
 	if get_current_substate() == null:
-		__log_phe("↪️", "-  x  -" + " -> " + next_state_name)
+		if __ELA(): __log_phe("↪️", "-  x  -" + " -> " + next_state_name)
 	else:
-		__log_phe("↪️", get_current_substate().state_name + " -> " + next_state_name)
+		if __ELA(): __log_phe("↪️", get_current_substate().state_name + " -> " + next_state_name)
 
 	if get_current_substate() != null:
 		get_current_substate()._on_exit_state()

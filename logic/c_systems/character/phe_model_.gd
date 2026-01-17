@@ -4,6 +4,8 @@ class_name PHCharacter
 
 @export var show_ui_feelings: bool = false
 @export var float_ui_feelings: bool = false
+@export var fire_up: bool = false
+
 
 @onready var config: PHEConfig = %Config
 @onready var container: PHContainer = %StatesContainer
@@ -73,7 +75,7 @@ func get_e_movement() -> EnemyMovement:
 
 func __hard_dependencies() -> Array[Object]:
 	return [
-		player,
+		# player,
 		config,
 		container,
 		get_e_movement(),
@@ -172,6 +174,7 @@ func _initialise_sm():
 	fatigue_raised = false
 	angry_raised = false
 	state_machine._on_enter_state()
+	set_process(false)
 
 
 func get_current_state() -> BasePHEState:
@@ -249,9 +252,11 @@ func apply_fire_to_head():
 		return
 	var fire_scene := FLICKER_FIRE.instantiate()
 	var casted: FireStatic = fire_scene
-	fire_marker.add_child(fire_scene)
+	fire_marker.add_child(casted)
 	casted.play_animation = false
 	casted.play_move_animation = false
+	casted.energy = 2.8
+	casted.add_mist = false
 	# fire.position = Vector3.ZERO  # Centered on marker
 
 func remove_fire_effect():
@@ -263,10 +268,12 @@ func remove_fire_effect():
 func set_angry_raised():
 	angry_raised = true
 	SIG_angry_raised.emit()
-	apply_fire_to_head()
+	if fire_up:
+		apply_fire_to_head()
 	
 
 func _on_death_raised() -> void:
+	death_raised = false
 	angry_raised = false
 	SIG_death_raised.emit()
 	if death_raised_processed:
@@ -281,8 +288,8 @@ func _on_death_raised() -> void:
 	print_.prefix("_trigger_death_scatter()")
 	await _trigger_death_scatter(visuals)
 
-
-	remove_fire_effect()
+	if fire_up:
+		remove_fire_effect()
 	var sig_data := get_sig_container().get_by_sig_id(SignalID.sfx_unique)
 	u.safe_emit(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
 
@@ -296,7 +303,8 @@ func _on_death_raised() -> void:
 	self.collision_mask = Collision.Masks.DEBRIS_COL_MASK
 	
 	await FrameUtils.wait_process_frames(2)
-	
+	self.set_process(false)
+	self.set_physics_process(false)
 	# todo: it works but we need proper checks for external systems to be ready for this; also visuals
 	# self.queue_free()
 
@@ -383,10 +391,10 @@ func get_power_attacks_state_names() -> Array[String]:
 ## DEV
 
 
-func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
-		return
-	var bone_mask := BoneMask.get_upper_body()
+# func _input(event: InputEvent) -> void:
+# 	if not OS.is_debug_build():
+# 		return
+# 	var bone_mask := BoneMask.get_upper_body()
 	# if event.is_action_pressed(RawAction.DEV_8):
 	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
 	# 	OverlayConfig.new(
@@ -423,3 +431,7 @@ func _on_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
 # func _hard_death():
 # 	await FrameUtils.wait_process_frames(5)
 # 	self.queue_free()
+
+
+func _on_monitor_player_enter_signal_area_sig_player_entered(incoming_body: Node3D) -> void:
+	set_process(true)

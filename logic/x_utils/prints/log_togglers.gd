@@ -43,7 +43,7 @@ const LSM_ACTION_B := false
 const SKM_B := false
 const input_gathering_B := false
 const FANCY_CAM_B := false
-const AWARENESS_B := true
+const AWARENESS_B := false
 
 # ENEMY
 const PHE_INTERNAL_FILTER_B := false

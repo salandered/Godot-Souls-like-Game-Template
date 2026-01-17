@@ -102,9 +102,13 @@ func _ready() -> void:
 
 	if not Engine.is_editor_hint():
 		u.hide_dev_visuals(self)
+		_ready_implementation_non_editor()
 
 
 @abstract func _ready_implementation()
+
+
+@abstract func _ready_implementation_non_editor()
 
 
 func _apply_all_properties() -> void:

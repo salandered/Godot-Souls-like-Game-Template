@@ -137,7 +137,7 @@ func set_visible(is_visible: bool) -> void:
 
 
 func fade_out_and_hide(for_whom: Node) -> void:
-	UIUtils.fade_out_and_hide(for_whom, _get_existing_bars(), config.fadeout_duration)
+	UIUtils.fade_out_and_hide_for_panels(for_whom, _get_existing_bars(), config.fadeout_duration)
 
 
 func modulate_a(value_: float) -> void:

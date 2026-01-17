@@ -2,7 +2,7 @@ extends RefCountedStaticLogger
 class_name UIUtils
 
 
-static func fade_out_and_hide(for_whom: Node, ui_panels: Array, duration: float) -> Tween:
+static func fade_out_and_hide_for_panels(for_whom: Node, ui_panels: Array, duration: float) -> Tween:
 	if not for_whom:
 		return
 
@@ -90,6 +90,52 @@ static func animate_property(
 static func kill_tween_if_exists(tween: Tween):
 	if tween:
 		tween.kill()
+
+
+## Fades a list of targets out, executes callback, then fades them back in.
+static func animate_content_change(
+	for_whom: Node,
+	targets: Array[Control],
+	change_callback: Callable,
+	duration: float,
+	tween_config: TweenConfig = null
+) -> Tween:
+	if not for_whom or targets.is_empty():
+		return null
+		
+	if not tween_config:
+		tween_config = TweenConfig.new()
+
+	var tween := for_whom.create_tween()
+	tween.set_parallel(true) # Animate all targets together
+	
+	# fade out all
+	for target in targets:
+		if target:
+			tween.tween_property(target, "modulate:a", 0.0, duration) \
+				.set_trans(tween_config.trans_type) \
+				.set_ease(tween_config.ease_type)
+		
+	# Change Content (Chain ensures this happens after fades finish)
+	tween.chain().tween_callback(change_callback)
+	
+	# fade in all
+	for target in targets:
+		if target:
+			tween.tween_property(target, "modulate:a", 1.0, duration) \
+				.set_trans(tween_config.trans_type) \
+				.set_ease(tween_config.ease_type)
+		
+	return tween
+
+
+##
+
+static func margin_container_set_margins(margin_cont: MarginContainer, left: int = 0, right: int = 0, top: int = 0, bottom: int = 0):
+	margin_cont.add_theme_constant_override("margin_left", left)
+	margin_cont.add_theme_constant_override("margin_right", right)
+	margin_cont.add_theme_constant_override("margin_top", top)
+	margin_cont.add_theme_constant_override("margin_bottom", bottom)
 
 
 # region: __LOGS

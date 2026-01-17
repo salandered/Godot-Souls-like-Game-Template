@@ -38,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif key_code > KEY_KP_0 and key_code <= KEY_KP_9:
 			number = key_code - KEY_KP_0
 		
-		if number >= 0 and _tutorial_panels.has(number):
+		if number > 0 and _tutorial_panels.has(number):
 			_toggle_panel(number)
 			get_viewport().set_input_as_handled()
 

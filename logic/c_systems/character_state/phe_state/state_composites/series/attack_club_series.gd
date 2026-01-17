@@ -5,8 +5,8 @@ func initialise() -> void:
 	SWITCH_ANIM_BEFORE = 0.2
 	PL_DIST_TO_END = 7
 
-func get_attack_series_list() -> Array:
-	return [
+
+var attack_series_list :Array[Array]= [
 		[PHES.Leaf.club_part_1],
 		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2],
 		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2, PHES.Leaf.club_part_3_4],
@@ -14,15 +14,20 @@ func get_attack_series_list() -> Array:
 		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2, PHES.Leaf.club_part_3_4, PHES.Leaf.attack_360_high]
 	]
 
+func get_attack_series_list() -> Array[Array]:
+	return attack_series_list
 
-func pick_series_idx() -> int:
-	var _idx := ra.ipick_weighted({
+
+var pick_weight: Dictionary[int, float] = {
 		0: 0.2,
 		1: 0.4,
 		2: 0.4,
 		3: 0.2,
 		4: 0.05
-	})
+	}
+
+func pick_series_idx() -> int:
+	var _idx := ra.ipick_weighted(pick_weight)
 	return _idx
 
 

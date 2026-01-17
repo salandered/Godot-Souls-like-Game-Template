@@ -5,7 +5,7 @@ extends NodeSystem
 @onready var _health_bar: TextureProgressBar = %HealthBar
 @onready var _ghost_bar: TextureProgressBar = %GhostBar
 @onready var _back_health_bar: TextureProgressBar = %BackHealthBar
-@onready var _bars_container: MarginContainer = $Bars
+@onready var _bars_container: MarginContainer = %Bars
 
 
 var e_feelings: PHEFeelings

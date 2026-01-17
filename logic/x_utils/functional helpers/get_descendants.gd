@@ -192,6 +192,12 @@ static func enemy_characters(node: Node) -> Array[PHCharacter]:
 	var r := _get_descendants_filtered(node, func(n): return n is PHCharacter)
 	return TypeCast.array_of_enemy_character(r)
 
+static func one_princess(node: Node) -> Princess:
+	var r := _get_descendants_filtered(node, func(n): return n is Princess, false, false, true)
+	if r and len(r) > 0 and r[0] is Princess:
+		return r[0]
+	return null
+
 
 # UI
 

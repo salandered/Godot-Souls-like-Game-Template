@@ -27,8 +27,13 @@ func initialise() -> void:
 
 @abstract func initialise_implementation() -> void
 
+
+var default_attack_weapons :Array[String]= [WeaponID.big_pinga_blade]
+
 ## what weapons should be attacking in this state (depends on animation)
-@abstract func get_anim_active_weapon_ids() -> Array[String]
+## to override
+func get_anim_active_weapon_ids() -> Array[String]:
+	return default_attack_weapons
 
 
 ## Combat methods to use in case of overriding on_enter_state/on_exit_state/update
@@ -64,7 +69,8 @@ func update(delta: float):
 	e_movement.move_with_root(delta, SCALE_ROOT_FACTOR)
 	_combat_update_is_attacking()
 
-var LOG_HURT_B: bool = true
+
+var LOG_HURT_B: bool = false
 
 
 func __log_hurt():

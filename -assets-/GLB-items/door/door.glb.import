@@ -48,6 +48,11 @@ _subresources={
 "save_to_file/fallback_path": "res://-assets-/GLB-items/door/meshes/door_Cube_034.res",
 "save_to_file/path": "uid://bddnksl7drf47"
 }
+},
+"nodes": {
+"PATH:door/Door_004": {
+"mesh_instance/layers": 128
+}
 }
 }
 gltf/naming_version=2

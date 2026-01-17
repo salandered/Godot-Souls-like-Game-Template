@@ -9,20 +9,21 @@ func initialise() -> void:
 	PL_DIST_TO_END = 12
 
 
-func get_attack_series_list() -> Array:
-	return [
+var attack_series_list :Array[Array]= [
 		[PHES.Leaf.dodge_F, PHES.Leaf.sword_slide],
 		[PHES.Leaf.dodge_R, PHES.Leaf.sword_slide],
 		[PHES.Leaf.dodge_F, PHES.Leaf.stab_low],
 	]
 
+func get_attack_series_list() -> Array[Array]:
+	return attack_series_list
+
 
 func pick_series_idx() -> int:
-	var dist := distance_to_player()
 	var _idx := 0
-	if dist > config.CLOSE_TO_ORBIT() and not me.angry_raised:
+	if dist_to_player_greater(config.CLOSE_TO_ORBIT()) and not me.angry_raised:
 		_idx = 2
-	if dist < config.COMBAT_RAD():
+	if dist_to_player_less(config.COMBAT_RAD()):
 		_idx = 1
 	return _idx
 

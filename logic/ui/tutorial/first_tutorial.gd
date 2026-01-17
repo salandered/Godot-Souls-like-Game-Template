@@ -45,4 +45,7 @@ func enable_tutorial():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_0:
-		tutorial_labels.visible = not tutorial_labels.visible
+		if first_tutorial_panel.visible:
+			disable_tutorial()
+		else:
+			enable_tutorial()

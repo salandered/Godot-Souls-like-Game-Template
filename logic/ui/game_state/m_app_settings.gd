@@ -28,6 +28,8 @@ const SCREEN_RESOLUTION = &'ScreenResolution'
 const V_SYNC = &'V-Sync'
 const UI_SCALE = &'UIScale'
 const MSAA_3D = &'AntiAliasing'
+const X_MOUSE_SENSE = &'XMouseSense'
+const Y_MOUSE_SENSE = &'YMouseSense'
 const MUTE_SETTING = &'Mute'
 const MASTER_BUS_INDEX = 0
 const SYSTEM_BUS_NAME_PREFIX = "_"
@@ -306,11 +308,53 @@ static func _set_shadow_mode_from_config() -> void:
 	set_shadow_mode(saved_val)
 
 
+## controls sense
+
+const DEF_X_SENSE := 1.0
+const DEF_Y_SENSE := 1.0
+
+static func set_x_sense(value: float) -> void:
+	M_PlayerConfig.set_config(INPUT_SECTION, X_MOUSE_SENSE, value)
+	# prints("set_x_sense", value)
+	GlobalSignal.SIG_update_mouse_settings_for_camera.emit()
+
+static func get_x_sense() -> float:
+	return M_PlayerConfig.get_config(INPUT_SECTION, X_MOUSE_SENSE, DEF_X_SENSE)
+
+
+static func _set_x_sense_from_config() -> void:
+	var default_val: float = DEF_X_SENSE
+	var saved_val: float = M_PlayerConfig.get_config(INPUT_SECTION, X_MOUSE_SENSE, default_val)
+	set_x_sense(saved_val)
+
+
+static func set_y_sense(value: float) -> void:
+	M_PlayerConfig.set_config(INPUT_SECTION, Y_MOUSE_SENSE, value)
+	# prints("set_y_sense", value)
+	GlobalSignal.SIG_update_mouse_settings_for_camera.emit()
+
+
+static func get_y_sense() -> float:
+	return M_PlayerConfig.get_config(INPUT_SECTION, Y_MOUSE_SENSE, DEF_Y_SENSE)
+
+
+static func _set_y_sense_from_config() -> void:
+	var default_val: float = DEF_Y_SENSE
+	var saved_val: float = M_PlayerConfig.get_config(INPUT_SECTION, Y_MOUSE_SENSE, default_val)
+	set_y_sense(saved_val)
+
+
+static func set_controls_from_config() -> void:
+	_set_x_sense_from_config()
+	_set_y_sense_from_config()
+
+
 # region: All
 
 static func set_from_config() -> void:
 	set_default_inputs()
 	set_inputs_from_config()
+	set_controls_from_config()
 	set_audio_from_config()
 
 static func set_from_config_and_window(window: Window) -> void:

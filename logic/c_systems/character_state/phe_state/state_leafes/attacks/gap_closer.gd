@@ -25,10 +25,6 @@ func initialise_implementation():
 	hit_damage = 35
 
 
-func get_anim_active_weapon_ids() -> Array[String]:
-	return [WeaponID.big_pinga_blade]
-
-
 func _decide_mode_on_enter():
 	if not me.angry_raised:
 		mode_switcher.set_mode(USUAL)

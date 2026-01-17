@@ -18,8 +18,8 @@ var ACTIVE: bool = false
 
 
 func _ready() -> void:
-	if OS.is_debug_build():
-		_enabled = true
+	# if OS.is_debug_build():
+	_enabled = true
 
 	if not camera:
 		__log_warn_soft("Free camera is no available, no cam node found")

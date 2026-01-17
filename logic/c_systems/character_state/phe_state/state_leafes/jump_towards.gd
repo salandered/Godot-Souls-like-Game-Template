@@ -23,5 +23,6 @@ func update(delta: float):
 	
 
 func on_enter_state() -> void:
-	gap_config.set_coef(distance_to_player(), me.angry_raised)
-	__log_ent(gap_config.__log_(distance_to_player(), me.angry_raised))
+	var dist := distance_to_player()
+	gap_config.set_coef(dist, me.angry_raised)
+	__log_ent(gap_config.__log_(dist, me.angry_raised))

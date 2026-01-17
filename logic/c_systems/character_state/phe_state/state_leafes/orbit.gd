@@ -54,9 +54,9 @@ func on_enter_state() -> void:
 	_choose_initial_direction()
 
 	var _inherited_speed := e_movement.get_curr_velocity_len()
-	__log_ent("_inherited_speed", _inherited_speed, "would be _inherited_speed -> ", _get_curr_direction_speed())
+	if __ELA(): __log_ent("_inherited_speed", _inherited_speed, "would be _inherited_speed -> ", _get_curr_direction_speed())
 	_inherited_speed = clampf(_inherited_speed, _inherited_speed, 2.0)
-	__log_ent("_inherited_speed clamped", _inherited_speed)
+	if __ELA(): __log_ent("_inherited_speed clamped", _inherited_speed)
 	speed_from_inherited.initialise(_inherited_speed, _get_curr_direction_speed(), accel_from_inherited + 1.0)
 	angular_accel.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
 	match PREV_LEAF:
@@ -94,11 +94,11 @@ func update(delta: float) -> void:
 	opposite_dir_change.async_change_update(delta)
 
 	if _one_dir_timer.update(delta) and opposite_dir_change.cooldown.update(delta):
-		__log_upd("wanna change strafe dir, one dir timer time", _one_dir_timer.get_elapsed())
+		if __ELA(): __log_upd("wanna change strafe dir, one dir timer time", _one_dir_timer.get_elapsed())
 		opposite_dir_change.speed_dip_init()
 		opposite_dir_change.async_change_init(_change_dir.bind())
 		opposite_dir_change.cooldown.reset()
-		__log_upd("OPPOSITE dir change and dip triggered")
+		if __ELA(): __log_upd("OPPOSITE dir change and dip triggered")
 
 	get_animator_manager().set_global_speed_scale(maxf(SPEED_MULT + fvalue_angry(0.0, 0.3), 0.5))
 
@@ -120,12 +120,12 @@ func _choose_initial_direction(to_opposite: bool = false):
 
 	anim = me.anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
 	_set_up_commit_timer()
-	__log_ent("chosen initial direction", curr_direction)
+	if __ELA(): __log_ent("chosen initial direction", curr_direction)
 
 
 func _change_dir() -> void:
 	curr_direction.flip_direction()
-	__log_upd("_change_dir to", curr_direction.get_curr_dir())
+	if __ELA(): __log_upd("_change_dir to", curr_direction.get_curr_dir())
 	_set_up_commit_timer()
 	_switch_animation()
 
@@ -139,7 +139,7 @@ func _switch_animation() -> void:
 	var curr_anim := anim
 
 	if next_anim.anim_id == curr_anim.anim_id:
-		print_.dev("", "_switch_animation same anim, won't switch")
+		if __ELA(): print_.dev("", "_switch_animation same anim, won't switch")
 		return
 		
 

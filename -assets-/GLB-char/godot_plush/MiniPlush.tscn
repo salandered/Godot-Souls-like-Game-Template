@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://cv71ukd6t8q6r"]
+[gd_scene load_steps=6 format=4 uid="uid://c5ck7rl8v5gfr"]
 
 [ext_resource type="Material" uid="uid://cawlo7vs3drdk" path="res://-assets-/GLB-char/godot_plush/plush.tres" id="1_ef27k"]
 [ext_resource type="Script" uid="uid://turp7ssb5gr7" path="res://-assets-/GLB-char/godot_plush/plush.gd" id="1_hpj26"]
@@ -47,6 +47,7 @@ script = ExtResource("1_hpj26")
 transform = Transform3D(2.361, 0, 0, 0, 2.361, 0, 0, 0, 2.361, 0, 0, 0)
 
 [node name="godot_plush_01" type="MeshInstance3D" parent="lp"]
+layers = 64
 material_override = ExtResource("1_ef27k")
 gi_mode = 0
 mesh = SubResource("ArrayMesh_48g67")

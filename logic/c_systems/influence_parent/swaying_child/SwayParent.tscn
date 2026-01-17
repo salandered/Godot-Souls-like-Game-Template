@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c871jlhb5ea5t"]
+
+[ext_resource type="Script" uid="uid://feu5um0hu73j" path="res://logic/c_systems/influence_parent/swaying_child/sway_parent.gd" id="1_enycs"]
+
+[node name="SwayParent" type="Node3D"]
+script = ExtResource("1_enycs")
+
+[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030094266, 0, 0)

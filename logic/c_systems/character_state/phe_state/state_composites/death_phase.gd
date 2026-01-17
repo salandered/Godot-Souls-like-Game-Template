@@ -11,7 +11,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	match current_substate.state_name:
 		PHES.Leaf.death:
 			if current_substate.is_ended():
-				__log_upd("death animation at its end")
+				if __ELA(): __log_upd("death animation at its end")
 
 	return VerdictPH.new(_next_state, _reason)
 

@@ -25,7 +25,7 @@ content_margin_top = 11.0
 texture = ExtResource("7_xf8j2")
 
 [sub_resource type="Gradient" id="Gradient_bo7n0"]
-colors = PackedColorArray(0.3778041, 0.3778041, 0.3778041, 1, 0.28994352, 0.41434216, 0.4321134, 1)
+colors = PackedColorArray(0.38, 0.38, 0.38, 0.6745098, 0.28809997, 0.41108003, 0.43, 0.6745098)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6m5w1"]
 gradient = SubResource("Gradient_bo7n0")
@@ -36,7 +36,7 @@ content_margin_bottom = 4.0
 texture = SubResource("GradientTexture1D_6m5w1")
 
 [sub_resource type="Gradient" id="Gradient_puxc5"]
-colors = PackedColorArray(0.57467526, 0.54055476, 0.54055476, 1, 0.18431373, 0.21176471, 0.21568628, 1)
+colors = PackedColorArray(0.57, 0.5358, 0.5358, 0.6745098, 0.187, 0.2156, 0.22, 0.6745098)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_puxc5"]
 gradient = SubResource("Gradient_puxc5")
@@ -47,7 +47,7 @@ content_margin_bottom = 4.0
 texture = SubResource("GradientTexture1D_puxc5")
 
 [sub_resource type="Gradient" id="Gradient_6m5w1"]
-colors = PackedColorArray(0.39138144, 0.39138144, 0.39138144, 1, 0.018476354, 0.41010916, 0.4660567, 1)
+colors = PackedColorArray(0.39, 0.39, 0.39, 0.6745098, 0.01880001, 0.40984005, 0.47, 0.6745098)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bo7n0"]
 gradient = SubResource("Gradient_6m5w1")

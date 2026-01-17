@@ -6,28 +6,33 @@ func initialise() -> void:
 	PL_DIST_TO_END = 7
 
 
-func get_attack_series_list() -> Array:
-	return [
+var attack_series_list: Array[Array] = [
 		[PHES.Leaf.attack_360_high],
 		[PHES.Leaf.attack_360_low],
 		[PHES.Leaf.attack_360_high, PHES.Leaf.attack_360_low],
 	]
 
+func get_attack_series_list() -> Array[Array]:
+	return attack_series_list
+
+
+var pick_weight: Dictionary[int, float] = {
+		0: 0.8,
+		1: 0.01,
+		2: 0.0,
+}
+var angry_pick_weight: Dictionary[int, float] = {
+		0: 0.1,
+		1: 0.3,
+		2: 0.7,
+}
 
 func pick_series_idx() -> int:
 	var _idx := 0
 	if not me.angry_raised:
-		_idx = ra.ipick_weighted({
-			0: 0.8,
-			1: 0.01,
-			2: 0.0,
-		})
+		_idx = ra.ipick_weighted(pick_weight)
 	else:
-		_idx = ra.ipick_weighted({
-			0: 0.1,
-			1: 0.3,
-			2: 0.7,
-	})
+		_idx = ra.ipick_weighted(angry_pick_weight)
 	return _idx
 
 

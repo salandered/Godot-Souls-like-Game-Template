@@ -3,7 +3,7 @@
 
 
 ### this game demo
-Author: me myself and I
+Author: me
 License: All Rights Reserved
 
 
@@ -11,51 +11,52 @@ License: All Rights Reserved
 ### Assets & Art
 
 
-#### Models by Virtual Museums of Małopolska
-License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-Assets: 
-* Military hatchet model M1889 - https://sketchfab.com/3d-models/military-hatchet-model-m1889-1a1dd0efe1cc4a5384f50351b9af5b16
-* Monstrance - https://sketchfab.com/3d-models/monstrance-2d3bde6afd274276904b2e6a9032d740
-Note: Modified from the original (retopology; UV wrapping; new materials)
+#### Models by Virtual Museums of Małopolska, used under CC-BY 4.0
+Link: https://sketchfab.com/WirtualneMuzeaMalopolski
+Assets: Military hatchet model M1889;
+Note: Modified from the original: retopology; UV wrapping; new materials
+
+
+#### Models by ModeMorbase | Museu Virtual, used under CC-BY 4.0
+Link: https://sketchfab.com/carpetudo
+Assets: Torre da Má Hora;
+Note: Modified from the original: retopology; UV wrapping; new materials
+
+
+#### Models by artfletch, used under CC-BY 4.0
+Assets: Lincoln's Inn Chapel Undercroft;
+Link: https://sketchfab.com/artfletch
+Note: Modified from the original: retopology; UV wrapping; new materials
 
 
 #### Different material packs by Julio Sillet, used under CC-BY
 Link: https://juliosillet.gumroad.com/
-Note: Used for various surface materials (e.g. Rocks, Concrete) with slight modifications.
+Note: Slight modifications were made.
 
 
 #### Asset pack "RTS medieval props" by Lamoot, used under CC BY 3.0
 Link: https://opengameart.org/content/rts-medieval-props
-Note: Modified from the original (retopology; UV wrapping; new materials)
+Note: Modified from the original: retopology; UV wrapping; new materials
 
 
 #### Asset pack "Mega Lights Pack" by burnedhrum, used under CC BY 4.0
 Link: https://sketchfab.com/3d-models/mega-lights-pack-64f05bccecee49ebb7f26c5b949c92e3
-Note: Modified from the original (retopology; UV wrapping; new materials)
+Note: Modified from the original: retopology; UV wrapping; new materials
+
+
+#### Asset pack "LeversandSwitches" by loafbrr, used under CC BY 4.0
+Link: https://loafbrr.itch.io/leversandswitches
+Note: Modified from the original: retopology; UV wrapping; new materials
 
 
 #### Additional assets CC-By 4.0 GDQuest
 Link: https://www.gdquest.com
-License: [CC BY 4.0](attribution/gd_quest/node_essentials/LICENSE)
-Notes: Shaders were used: fire shader; sky shader. Modifications were made.
+Notes: Shader materials were used: fire shader; sky shader. Modifications were made.
 
 
-
-### Core Systems & Templates
-
- 
-#### Godot Game Template
-![Maaack Plugin Icon](/_attribution/maaacks_game_template/logo/logo.png)  
-Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)
-Link: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)
-License: [MIT License](/_attribution/maaacks_game_template/LICENSE.txt)
-
-
-#### Godot Engine
-![Godot Engine Logo](/_attribution/godot/logo/logo_vertical_color_dark.png) 
-Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)
-Link: [godotengine.org](https://godotengine.org/)
-License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.txt)
+#### Assets from tps-demo, used under CC-BY 3.0
+Link: https://github.com/godotengine/tps-demo
+Notes: Shader materials were used: smoke. Modifications were made.
 
 
 
@@ -66,11 +67,15 @@ License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.
 Author: me and noisedeception
 
 
-#### Environmental tracks (noise, bits)
+#### Track: Wave Paint 3
+Author: me
+
+
+#### Several environmental tracks (noise, bits, synths, melody)
 Author: me 
 
 
-#### Swords & Blades Sound Pack
+#### Swords & Blades Sound Pack, used under CC-BY 4.0
 Author: Leonardo Calvo
 Link: https://thesoundrack.itch.io/swords-blades-sound-pack
 
@@ -79,31 +84,27 @@ Link: https://thesoundrack.itch.io/swords-blades-sound-pack
 ### Special thanks
 
 
-#### The Smithsonian Institution
+#### The Smithsonian Institution (CC0)
 Link: https://sketchfab.com/smithsonian
 Assets: Isthminia panamensis Pyenson et al., 2015: Jaw; Figure of a Dancer; Geochelone carbonaria;
-License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 
-#### Världskulturmuseerna (National Museums of World Culture)
+#### Världskulturmuseerna (National Museums of World Culture) (CC0)
 Link: https://sketchfab.com/varldskulturmuseerna
 Assets: Mask;
-License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 
-#### Tula State Arms Museum
+#### Tula State Arms Museum (CC0)
 Link: https://sketchfab.com/ArmsMuseum
 Assets: Pinga Throwing Knife;
-License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 
-#### galway3d (Digital Museum for Co. Galway, Ireland)
+#### Galway3D (Co. Galway working with Galway Museum and Heritage Officers) (CC0)
 Link: https://sketchfab.com/galway3d
 Assets: Entrance Gates to Menlo Castle;
-License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 
-#### CC0 assets were used from the following artists
+#### Following artists for providing CC0 3D assets
 - FREEPOLY The Public 3D Asset Library - freepoly.org
 - Quaternius - https://quaternius.com/
 - loafbrr_1 - https://opengameart.org/users/loafbrr1
@@ -111,7 +112,7 @@ License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 - and others
 
 
-#### CC0 SFX were used from the following artists
+#### Following artists for providing CC0 SFX assets
 - TomMusic. https://tommusic.itch.io/
 - Aurelien Montero. https://punkzen.itch.io/
 - Cat Prisbrey. https://felesmachina.itch.io/ (Project: Cat's Souls-like-Template)
@@ -129,8 +130,37 @@ License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 * Kenney https://kenney.nl/
 
 
-#### Olya Vasileva
+#### lo.w.l
 Note: Painting fragments were used for UI elements.
+
+
+#### Playtesters
+- i
+- akzar
+- lo.w.l
+
+
+#### FR3NKD for making Godot Plush
+Link: https://fr3nkd.gumroad.com/l/vhfvy
+
+
+
+### Core Systems & Templates
+
+ 
+#### Godot Game Template, used under MIT License
+![Maaack Plugin Icon](/_attribution/maaacks_game_template/logo/logo.png)  
+Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)
+Link: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)
+
+
+#### Godot Engine
+![Godot Engine Logo](/_attribution/godot/logo/logo_vertical_color_dark.png) 
+Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)
+Link: [godotengine.org](https://godotengine.org/)
+License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.txt)
+
+
 
 
 ### Other Legal Notices

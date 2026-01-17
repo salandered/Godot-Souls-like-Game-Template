@@ -4,7 +4,7 @@ extends Control
 # This script enables keyboard navigation for a tabbed options menu.
 # It allows the player to cycle through the tabs of a TabContainer using 
 # the ui_page_up and ui_page_down input actions (PageUp/PageDown on a keyboard). 
-# Ppressing next on the last tab goes to the first, and vice-versa.
+# Pressing next on the last tab goes to the first, and vice-versa.
 # This logic is only active when the menu is visible.
 
 func _unhandled_input(event : InputEvent) -> void:

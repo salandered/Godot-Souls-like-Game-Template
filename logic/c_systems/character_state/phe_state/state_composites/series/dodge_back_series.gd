@@ -9,11 +9,13 @@ func initialise() -> void:
 	PL_DIST_TO_END = 16 # practically don't end
 
 
-func get_attack_series_list() -> Array:
-	return [
+var attack_series_list :Array[Array]= [
 		[PHES.Leaf.dodge_B],
 		[PHES.Leaf.dodge_B, PHES.Leaf.dodge_B],
 	]
+
+func get_attack_series_list() -> Array[Array]:
+	return attack_series_list
 
 
 func pick_series_idx() -> int:

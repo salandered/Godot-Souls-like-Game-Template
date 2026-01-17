@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4jwul58f72dg"]
+
+[ext_resource type="PackedScene" uid="uid://b46dekni8c4fb" path="res://logic/ui/image_gallery/BaseImageGallery.tscn" id="1_xwg6o"]
+[ext_resource type="Script" uid="uid://b6xohp3u1exat" path="res://logic/ui/image_gallery/museum_gallery.gd" id="2_qmuaa"]
+
+[node name="MuseumGallery" instance=ExtResource("1_xwg6o")]
+script = ExtResource("2_qmuaa")

@@ -102,6 +102,7 @@ func _ready_non_editor():
 				area_entered.connect(__on_area_entered)
 			if _get_common_area_config().interact_with_bodies:
 				body_entered.connect(__on_body_entered)
+			set_physics_process(false)
 		MonitorType.PROCESS, MonitorType.PROCESS_LIST:
 			set_physics_process(true)
 		_:

@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://b73sj7vrj0xxb"]
 
 [ext_resource type="Shader" uid="uid://qwtk2c42j62s" path="res://-assets-/materials-shared/shaders/bullet_shader.gdshader" id="1_bv4mt"]
-[ext_resource type="Texture2D" uid="uid://c6aotd57ycjnm" path="res://-assets-/materials-shared/noise_normals/lu_noise/T_Lu_NoiseNorm_09.png" id="2_d7808"]
+[ext_resource type="Texture2D" uid="uid://c6aotd57ycjnm" path="res://-assets-/materials-shared/textures/lu_noise/T_Lu_NoiseNorm_09.png" id="2_d7808"]
 
 [sub_resource type="Gradient" id="Gradient_nmj62"]
 offsets = PackedFloat32Array(0, 0.51111114, 0.9222222)

@@ -47,6 +47,8 @@ var player_dodge_increase := SignalData.new(
 const payload_amount_field := "amount"
 const payload_damage_field := "damage"
 
-## between options menu and 3d menu level
-
+## between options menu and levels
 signal SIG_update_video_settings_for_level()
+
+##
+signal SIG_update_mouse_settings_for_camera()

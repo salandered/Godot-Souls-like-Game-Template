@@ -93,7 +93,10 @@ func _ready() -> void:
 
 func _setup_vibe_asp():
 	enemies = get_descendants.enemy_characters(self)
+	var player := get_descendants.one_princess(self)
 	for e in enemies:
+		if player:
+			e.player = player
 		u.safe_connect(e.SIG_angry_raised, _on_ph_enemy_sig_angry_raised)
 		u.safe_connect(e.SIG_death_raised, _on_ph_enemy_sig_death_raised)
 	vibe_asp = %vibe_asp

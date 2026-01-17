@@ -6,10 +6,6 @@ extends BasePHEAttack
 var anim_speed_bump := EaseCurveSampler.new()
 
 
-func get_active_weapon_name() -> String:
-	return WeaponID.bg_aura_weapon
-
-
 func initialise_implementation() -> void:
 	blend_time.set_specific(0.35)
 	anim_speed_bump.initialise(scare_off_anim_speed_curve)
@@ -18,9 +14,11 @@ func initialise_implementation() -> void:
 
 	hit_damage = 25
 
+var attack_weapons: Array[String] = [WeaponID.bg_aura_weapon]
 func get_anim_active_weapon_ids() -> Array[String]:
-	return [WeaponID.bg_aura_weapon]
+	return attack_weapons
 
+	
 func on_exit_state() -> void:
 	get_animator_manager().reset_global_speed_scale()
 	_combat_reset()

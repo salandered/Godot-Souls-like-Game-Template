@@ -1,0 +1,29 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://cdf8ew53elk4h"
+path.bptc="res://.godot/imported/demoLevel_tower.exr-c01f83a3bf84007076f44c04ec0b2046.bptc.ctexarray"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://logic/entities/Locations/demo_level/demoLevel_tower.exr"
+dest_files=["res://.godot/imported/demoLevel_tower.exr-c01f83a3bf84007076f44c04ec0b2046.bptc.ctexarray"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=2

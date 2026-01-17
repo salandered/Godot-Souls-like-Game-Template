@@ -10,6 +10,7 @@ signal game_exited
 @export_file("*.tscn") var game_scene_path: String
 @export var options_packed_scene: PackedScene
 @export var credits_packed_scene: PackedScene
+@export var gallery_packed_scene: PackedScene
 
 
 @export_group("Level Selection") # added
@@ -22,12 +23,20 @@ signal game_exited
 @export var signal_game_exit: bool = false
 @export var __dev_bypass_menu_and_start_game: bool = false # added
 @export var initial_focus_target: Control # added
+@export var confirm_new_game: bool = true
+
+
+@export_group("Cursor")
+@export var custom_cursor_texture: Texture2D
+@export var cursor_hotspot: Vector2 = Vector2(0, 0) # Top-left by default
+
 
 var options_scene
 var credits_scene
 var sub_menu
 
-@onready var menu_container = %MenuContainer
+
+@onready var menu_container: MarginContainer = %MenuContainer
 @onready var menu_buttons_box_container = %MenuButtonsBoxContainer
 @onready var new_game_button = %NewGameButton
 @onready var options_button = %OptionsButton
@@ -35,13 +44,13 @@ var sub_menu
 @onready var exit_button = %ExitButton
 @onready var options_container = %OptionsContainer
 @onready var credits_container = %CreditsContainer
+@onready var gallery_container: MarginContainer = %GalleryContainer
 @onready var flow_control_container = %FlowControlContainer
 @onready var back_button: Button = %BackButton
 @onready var continue_game_button = %ContinueGameButton
 @onready var fade_overlay: ColorRect = %FadeOverlay
+@onready var hide_label_container: MarginContainer = %HideLabelContainer
 
-
-@export var confirm_new_game: bool = true
 
 @onready var menu_3d_scene: Menu3DLevel = %Menu3DScene
 
@@ -85,6 +94,8 @@ func _ready() -> void:
 	
 	menu_3d_scene.initialise()
 	
+	_update_cursor()
+
 	_cutoff_fade_in()
 
 
@@ -96,22 +107,27 @@ func _play_fade_in() -> void:
 	fade_overlay.modulate.a = 1.0
 	
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, Constants.Prop.CONTROL_MODULATE_A, 0.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(fade_overlay, Constants.Prop.CONTROL_MODULATE_A, 0.0, 1.5) \
+		.set_trans(Tween.TRANS_SINE) \
+		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(fade_overlay.hide)
 
-var effect: AudioEffectLowPassFilter
+
+var audio_effect: AudioEffectLowPassFilter
+
 func _cutoff_fade_in() -> void:
-	effect = AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
-	if effect:
+	audio_effect = AudioServerUtil.get_lowpass_filter(BusID.MENU_MUSIC)
+	if audio_effect:
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(effect, "cutoff_hz", MAX_MAIN_MENU_TRACK_CUTOFF, 43.0).from(200.0)
-		__log_(effect, tween)
+		tween.tween_property(audio_effect, "cutoff_hz", MAX_MAIN_MENU_TRACK_CUTOFF, 43.0).from(200.0)
+		__log_(audio_effect, tween)
 
 
 # func _process(delta: float) -> void:
-	# prints(effect.cutoff_hz)
+	# prints(audio_effect.cutoff_hz)
+
 
 func _grab_initial_focus() -> void:
 	if not initial_focus_target: # I dont think I need initial focus
@@ -127,6 +143,9 @@ func _grab_initial_focus() -> void:
 		new_game_button.grab_focus()
 
 
+## LOAD
+# region
+
 func _load_specific_level(path: String) -> void:
 	_reset_audio_state()
 	if path.is_empty():
@@ -140,6 +159,7 @@ func _load_specific_level(path: String) -> void:
 	GlobalSignal.SIG_show_tut.emit()
 	M_SceneLoader.load_scene(path)
 		
+
 func load_game_scene() -> void:
 	_reset_audio_state()
 	
@@ -157,6 +177,21 @@ func new_game() -> void:
 		M_GameState.reset()
 		load_game_scene()
 
+# endregion 
+
+
+func _toggle_debug_view() -> void:
+	# Toggle menu container visibility
+	var is_menu_visible = menu_container.visible
+	menu_container.visible = not is_menu_visible
+	
+
+func _update_cursor() -> void:
+	if custom_cursor_texture:
+		# Input.CURSOR_ARROW is the default pointer shape
+		Input.set_custom_mouse_cursor(custom_cursor_texture, Input.CURSOR_ARROW, cursor_hotspot)
+
+
 func exit_game() -> void:
 	if signal_game_exit:
 		game_exited.emit()
@@ -165,8 +200,8 @@ func exit_game() -> void:
 
 
 func _reset_audio_state() -> void:
-	if effect:
-		effect.cutoff_hz = START_MAIN_MENU_TRACK_CUTOFF
+	if audio_effect:
+		audio_effect.cutoff_hz = START_MAIN_MENU_TRACK_CUTOFF
 
 ## SHOW/HIDE menu
 # region
@@ -184,28 +219,24 @@ func _open_sub_menu(menu: Control) -> void:
 	sub_menu.show()
 	_hide_menu()
 	sub_menu_opened.emit()
+	hide_label_container.hide()
 
 func _close_sub_menu() -> void:
 	if sub_menu == null:
 		return
+
+	var closing_menu = sub_menu
+
 	sub_menu.hide()
 	sub_menu = null
 	_show_menu()
 	sub_menu_closed.emit()
+	hide_label_container.show()
 
-# endregion
-
-
-func _event_is_mouse_button_released(event: InputEvent) -> bool:
-	return event is InputEventMouseButton and not event.is_pressed()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("ui_cancel"):
-		if sub_menu:
-			_close_sub_menu()
-	if event.is_action_released("ui_accept") and get_viewport().gui_get_focus_owner() == null:
-		menu_buttons_box_container.focus_first()
+	if closing_menu.get_parent() == gallery_container:
+		flow_control_container.visible = true
+		closing_menu.queue_free()
+		__log_("Main Menu", "Gallery freed")
 
 
 func _add_or_hide_options() -> void:
@@ -228,6 +259,33 @@ func _add_or_hide_credits() -> void:
 			credits_scene.connect("end_reached", _on_credits_end_reached)
 		credits_container.show()
 		credits_container.call_deferred("add_child", credits_scene)
+
+
+# endregion
+
+
+## INPUT
+# region
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("ui_cancel"):
+		if sub_menu:
+			_close_sub_menu()
+	if event.is_action_released("ui_accept") and get_viewport().gui_get_focus_owner() == null:
+		menu_buttons_box_container.focus_first()
+
+	__hide_menu_input(event)
+
+
+func __hide_menu_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_0 or event.keycode == KEY_KP_0:
+			if hide_label_container.visible == false:
+				return
+			_toggle_debug_view()
+			get_viewport().set_input_as_handled() # Stop propagation
+
+# endregion
 
 
 ## ON BUTTON PRESSED
@@ -260,6 +318,23 @@ func _on_options_button_pressed() -> void:
 func _on_credits_button_pressed() -> void:
 	_open_sub_menu(credits_scene)
 
+
+func _on_gallery_button_pressed() -> void:
+	if not gallery_packed_scene:
+		__log_warn("Gallery scene not assigned in Main Menu")
+		return
+
+	var gallery_instance = gallery_packed_scene.instantiate()
+	if not gallery_instance or gallery_instance is not BaseImageGallery:
+		__log_warn("Some problem with gallery")
+		return
+	
+	gallery_container.add_child(gallery_instance)
+	
+	flow_control_container.visible = false
+	_open_sub_menu(gallery_instance)
+
+
 func _on_exit_button_pressed() -> void:
 	exit_game()
 
@@ -273,6 +348,8 @@ func _on_back_button_pressed() -> void:
 # endregion
 
 
-## to override
+##
+
+
 func __LOG_B() -> bool:
 	return LogToggler.UI.MAIN_MENU

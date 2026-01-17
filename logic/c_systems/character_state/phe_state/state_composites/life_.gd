@@ -46,7 +46,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	# NOTE: unique to life. Would be here for now
 	#       WL is force switch to combat_phase
 	if me.fatigue_raised:
-		_reason += em.pin + "Declined: Some state raised 'fatigue_raised', we switch to " + _next_state
+		if __ELA(): _reason += em.pin + "Declined: Some state raised 'fatigue_raised', we switch to " + _next_state
 		_next_state = PHES.combat_phase
 		_switch_on_same = true
 		_override_commit = true

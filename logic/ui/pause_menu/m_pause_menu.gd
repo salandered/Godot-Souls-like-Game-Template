@@ -27,12 +27,27 @@ func _load_scene(scene_path: String) -> void:
 	GlobalSignal.SIG_hid_tut.emit()
 	M_SceneLoader.load_scene(scene_path)
 
+
 func open_options_menu() -> void:
 	var options_scene := options_packed_scene.instantiate()
 	add_child(options_scene)
+	
+	# Hide existing pause menu elements, excluding the new options scene
+	_toggle_content_visibility(false, options_scene)
+	
 	_disable_focus.call_deferred()
 	await options_scene.tree_exiting
 	_enable_focus.call_deferred()
+	
+	# Restore visibility of pause menu elements
+	_toggle_content_visibility(true)
+
+# New helper function to hide/show siblings without affecting the active options menu
+func _toggle_content_visibility(is_visible_: bool, exclude: Node = null) -> void:
+	for child in get_children():
+		if child is Control and child != exclude:
+			child.visible = is_visible_
+
 
 func _handle_cancel_input() -> void:
 	if popup_open != null:

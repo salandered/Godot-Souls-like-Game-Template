@@ -228,7 +228,7 @@ tracks/5/keys = {
 }
 tracks/6/type = "value"
 tracks/6/imported = false
-tracks/6/enabled = true
+tracks/6/enabled = false
 tracks/6/path = NodePath("Visuals/HandlePivot/lever_handle/AccomplishASP:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
@@ -336,7 +336,7 @@ bus = &"game_SFX"
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0.103268325, -0.005098344)
 shape = SubResource("CapsuleShape3D_njx0t")
 
-[node name="ASPS" type="Node" parent="."]
+[node name="ASPS" type="Node3D" parent="."]
 
 [node name="LeverRotASP" type="AudioStreamPlayer3D" parent="ASPS"]
 unique_name_in_owner = true
@@ -363,7 +363,6 @@ bus = &"game_SFX"
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20668197, 0.23317954, 0)
 stream = ExtResource("10_o85y6")
-volume_db = -10.0
 unit_size = 6.0
 max_db = 0.0
 pitch_scale = 0.6

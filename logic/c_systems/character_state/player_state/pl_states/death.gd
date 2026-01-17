@@ -14,8 +14,9 @@ func on_enter_state(input) -> void:
 		{SFXConstants.unique_key: SFXConstants.Unique.player_dead},
 		false
 	)
-	prints("DEAD START")
+	# prints("DEAD START")
 
 
 func on_exit_state() -> void:
-	prints("dead END")
+	pass
+	# prints("dead END")

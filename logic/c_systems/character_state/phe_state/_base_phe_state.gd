@@ -169,7 +169,7 @@ func flip_chance(chance: float, state_a: String, state_b: String) -> String:
 
 var __LOG_EXIT: bool = false
 var __LOG_ANIM: bool = false
-var __LOG_OVERLAY_ANIM: bool = true
+var __LOG_OVERLAY_ANIM: bool = false
 
 func __get_common_context() -> String:
 	var _msg := ""

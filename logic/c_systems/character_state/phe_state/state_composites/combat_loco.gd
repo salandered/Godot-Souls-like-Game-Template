@@ -47,7 +47,7 @@ func is_ended() -> bool:
 	var _reason: String = ""
 	var _current_substate := get_current_substate()
 	if _current_substate == null:
-		__log_upd('is_ended', "_current_substate is null. Will hard return true")
+		if __ELA(): __log_upd('is_ended', "_current_substate is null. Will hard return true")
 		return true
 
 	if not _all_will_do_is_done():

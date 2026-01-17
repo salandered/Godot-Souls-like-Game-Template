@@ -1,0 +1,145 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2s7qbumrkq80"]
+
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/PHEnemy_2.tscn" id="1_0gmpp"]
+[ext_resource type="Material" uid="uid://c7677w3d6vvpk" path="res://-assets-/materials-shared/concrete/plastered_stone_wall/plastered_stone_wall_Reimp.tres" id="2_h6l5q"]
+[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="3_orrtt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dj0ag"]
+radius = 0.36376953
+height = 1.9741211
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w6shk"]
+radius = 2.0
+height = 4.0
+
+[node name="MiniPHEnemy" instance=ExtResource("1_0gmpp")]
+show_ui_feelings = true
+float_ui_feelings = true
+
+[node name="CollCollider" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.024563, 0)
+shape = SubResource("CapsuleShape3D_dj0ag")
+
+[node name="Bars" parent="UI/UIFeelings" index="0"]
+scale = Vector2(0.7, 0.5)
+
+[node name="GhostBar" parent="UI/UIFeelings/Bars" index="1"]
+tint_progress = Color(1.4648298, 1.4408199, 0, 1)
+
+[node name="HealthBar" parent="UI/UIFeelings/Bars" index="2"]
+modulate = Color(0.83264434, 0, 0.0927547, 1)
+
+[node name="PHEFeelings" parent="." index="3"]
+MAX_HEALTH = 80.0
+PHASE_SWITCH_HP_TRESHOLD = 0.0
+
+[node name="VisualOffset" parent="." index="4"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.07167423, 0)
+
+[node name="UIMarker" parent="VisualOffset" index="0"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 3.8146966, 0)
+
+[node name="skull" parent="VisualOffset/Visuals/gold parts v2" index="0"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="chain HP_002" parent="VisualOffset/Visuals/gold parts v2" index="1"]
+visible = false
+
+[node name="golden bolt_002" parent="VisualOffset/Visuals/gold parts v2" index="2"]
+visible = false
+
+[node name="golden bolt" parent="VisualOffset/Visuals/gold parts v2" index="3"]
+visible = false
+
+[node name="round-thing_002" parent="VisualOffset/Visuals/Node3D" index="1"]
+visible = false
+
+[node name="chain HP_001" parent="VisualOffset/Visuals/Node3D" index="2"]
+visible = false
+
+[node name="teeth_011" parent="VisualOffset/Visuals/Node3D" index="3"]
+visible = false
+
+[node name="arm" parent="VisualOffset/Visuals/Node3D" index="4"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="leg_003" parent="VisualOffset/Visuals/Node3D" index="5"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="feet_009" parent="VisualOffset/Visuals/Node3D" index="6"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="pelivs-shoulders" parent="VisualOffset/Visuals/Node3D" index="7"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="cage_013" parent="VisualOffset/Visuals/Node3D" index="8"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="spine_014" parent="VisualOffset/Visuals/Node3D" index="9"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="jaw" parent="VisualOffset/Visuals/Node3D" index="10"]
+material_override = ExtResource("2_h6l5q")
+
+[node name="pelvis-front" parent="VisualOffset/Visuals/Node3D" index="11"]
+visible = false
+material_override = ExtResource("2_h6l5q")
+
+[node name="Root" parent="bones" index="0"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="Hips" parent="bones" index="1"]
+transform = Transform3D(0.3820427, -0.077893645, -0.4560438, 0.02621235, 0.5941292, -0.0795201, 0.46190506, 0.030710155, 0.38170752, -0.007891986, 1.0772558, 0.02592807)
+
+[node name="HurtBoxCol" parent="bones/Hips/Lower/AuraWeapon/WeaponHurtBox" index="0"]
+shape = SubResource("CapsuleShape3D_w6shk")
+
+[node name="RightWrist" parent="bones" index="2"]
+transform = Transform3D(-0.06399932, -0.38926786, 0.45207807, 0.46497637, -0.31740794, -0.20748296, 0.373766, 0.32821143, 0.33552375, -0.52231336, 0.9945733, -0.1267601)
+
+[node name="BigPingaBlade" parent="bones/RightWrist/WeaponSocket" index="0"]
+transform = Transform3D(0.026703363, 0.5484208, -0.031961475, 0.30941555, -0.041455653, -0.45281723, -0.45392615, 0.004004307, -0.3105399, 0.065443516, -0.009905815, 0.052691236)
+
+[node name="Pinga_002" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga" index="0"]
+material_override = ExtResource("3_orrtt")
+
+[node name="pinga2" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals" index="1"]
+visible = false
+
+[node name="Pinga_002" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga2" index="0"]
+material_override = ExtResource("3_orrtt")
+
+[node name="chain HP_003" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga2/Pinga_002" index="0"]
+visible = false
+
+[node name="pinga3" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals" index="2"]
+visible = false
+
+[node name="Pinga_002" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga3" index="0"]
+material_override = ExtResource("3_orrtt")
+
+[node name="chain HP_003" parent="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga3/Pinga_002" index="0"]
+visible = false
+
+[node name="LegL" parent="bones" index="3"]
+transform = Transform3D(0.55544007, 0.050590042, 0.22119457, 0.06353915, -0.596175, -0.023199696, 0.21782826, 0.044901002, -0.5572564, 0.14311434, 0.720075, 0.5175387)
+
+[node name="LegR" parent="bones" index="4"]
+transform = Transform3D(0.28820035, 0.11879856, 0.512667, -0.23100723, -0.4966266, 0.2449444, 0.4728385, -0.31503806, -0.19280767, -0.36699492, 0.6085017, -0.13051517)
+
+[node name="--test" parent="bones" index="5"]
+transform = Transform3D(0.52730435, -0.28502965, -0.02663201, -0.015879314, 0.026611162, -0.59919316, 0.28582874, 0.5273112, 0.015843645, 0.18006885, 0.13183531, 0.65952116)
+
+[node name="BoneAttachment3D" parent="bones" index="6"]
+transform = Transform3D(0.5979421, -0.049648236, -0.00058935286, 0.047978204, 0.57958066, -0.14759552, 0.0127823, 0.14704214, 0.58156276, -0.11578006, 1.7090975, 0.15552695)
+
+[node name="CameraTarget" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048906326, 0.7169033, 0.0908134)
+
+[editable path="bones/Hips/Lower/AuraWeapon"]
+[editable path="bones/RightWrist/WeaponSocket/BigPingaBlade"]
+[editable path="bones/RightWrist/WeaponSocket/BigPingaBlade/WeaponHurtBox"]
+[editable path="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga"]
+[editable path="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga2"]
+[editable path="bones/RightWrist/WeaponSocket/BigPingaBlade/Visuals/pinga3"]
+[editable path="bones/RightWrist/WeaponSocket/BigPingaBlade/WeaponSFXParent"]

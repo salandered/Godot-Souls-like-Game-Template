@@ -6,8 +6,8 @@
 [ext_resource type="Material" uid="uid://dq1jnowy0hm6a" path="res://-assets-/materials-shared/wood/wood_peeling_paint/wood_peeling_paint_weathered.tres" id="2_ierka"]
 [ext_resource type="PackedScene" uid="uid://co5cmuoyyn0ey" path="res://logic/entities/Locations/props/rigid_body_asp_3d.tscn" id="5_7chfk"]
 
-[sub_resource type="BoxShape3D" id="2"]
-size = Vector3(0.601, 0.601, 0.601)
+[sub_resource type="BoxShape3D" id="BoxShape3D_e5nct"]
+size = Vector3(0.6015625, 0.6015625, 0.6064453)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8355d"]
 resource_name = "Material #66"
@@ -79,9 +79,10 @@ center_of_mass = Vector3(0, -0.5, 0)
 script = ExtResource("1_l7xcd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("2")
+shape = SubResource("BoxShape3D_e5nct")
 
 [node name="painted crate" type="MeshInstance3D" parent="."]
+layers = 128
 gi_mode = 2
 mesh = SubResource("ArrayMesh_6aq6d")
 skeleton = NodePath("")

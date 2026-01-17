@@ -108,6 +108,7 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_fgki4")
 
 [node name="margin10" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -159,11 +160,11 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="1Controls" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls"]
@@ -208,7 +209,6 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="2MechanicsOverview" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
@@ -257,7 +257,6 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="3AttackMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
@@ -306,7 +305,6 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="4TargetLockMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
@@ -346,7 +344,6 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="5HealthStaminaMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
@@ -381,7 +378,6 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="6AdditionalMovementTips" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
@@ -420,7 +416,6 @@ phrase_icons = Dictionary[String, String]({
 })
 
 [node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("6_k5if8")]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="FreeCam" type="MarginContainer" parent="CanvasLayer"]
@@ -429,7 +424,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -359.0
-offset_right = 440.0
+offset_right = 370.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -438,6 +433,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/FreeCam"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="margin10" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer"]
@@ -464,9 +460,9 @@ layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_font_sizes/italics_font_size = 16
 bbcode_enabled = true
 text = "[b]WASD[/b] - Move
 [b]Q/E[/b] - Down/Up
@@ -475,12 +471,10 @@ text = "[b]WASD[/b] - Move
 etc ...."
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 
 [node name="HSeparator" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer" instance=ExtResource("6_x47y3")]
-layout_mode = 2
-
-[node name="space" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="HUDInfo" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
@@ -495,9 +489,11 @@ layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 16
 bbcode_enabled = true
 text = "HUD info will be updated"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0

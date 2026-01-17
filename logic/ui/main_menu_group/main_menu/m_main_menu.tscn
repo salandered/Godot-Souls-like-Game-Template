@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c66xg4go6ct4v"]
+[gd_scene load_steps=22 format=3 uid="uid://c66xg4go6ct4v"]
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://logic/ui/main_menu_group/main_menu/m_main_menu.gd" id="1_2e4m0"]
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_hvsaw"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
 [ext_resource type="Texture2D" uid="uid://c21h0ecvyglu" path="res://-assets-/ui_assets/images/floor.png" id="5_2sdq7"]
 [ext_resource type="PackedScene" uid="uid://djsyfeinr8lew" path="res://logic/ui/main_menu_group/main_menu/Menu3dScene.tscn" id="5_hvsaw"]
+[ext_resource type="Texture2D" uid="uid://c5m7vv6a7kgdd" path="res://-assets-/ui_assets/pixil-frame-0.png" id="5_ugg5x"]
+[ext_resource type="PackedScene" uid="uid://ben53482wtfq8" path="res://logic/ui/image_gallery/dev_log_gallery.tscn" id="5_x83h1"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="6_2e4m0"]
 [ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://logic/ui/main_menu_group/main_menu/m_config_name_label.gd" id="7_nt2e5"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
@@ -15,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/back_noise.mp3" id="9_wkb1a"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/nodes/color_rect.tscn" id="12_uw7yc"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/VFX/shaders/distort_menu.gdshader" id="13_rjjho"]
+[ext_resource type="PackedScene" uid="uid://cp4td8jhxhsj2" path="res://logic/ui/ui_utils/rich_text_label/rich_text_label.tscn" id="14_d1ref"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
 frequency = 0.0037
@@ -47,11 +50,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hvsaw")
 script = ExtResource("1_2e4m0")
-game_scene_path = "uid://m2o3tdaa66rk"
+game_scene_path = "uid://bm5vqmonl5jl4"
 options_packed_scene = ExtResource("2_hvsaw")
 credits_packed_scene = ExtResource("3_nlybk")
+gallery_packed_scene = ExtResource("5_x83h1")
 level_1_scene_path = "uid://dmkxcwge6jddy"
-level_2_scene_path = "uid://mdwtc0gt416o"
+level_2_scene_path = "uid://bm5vqmonl5jl4"
+custom_cursor_texture = ExtResource("5_ugg5x")
 
 [node name="Floor" type="Sprite2D" parent="."]
 visible = false
@@ -183,6 +188,15 @@ theme_override_colors/font_focus_color = Color(0.36078432, 0.41568628, 1, 1)
 theme_override_colors/font_hover_color = Color(0.36078432, 0.41568628, 1, 1)
 text = "Demo Level"
 
+[node name="GalleryButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50654936, 0.92768556, 0.7033999, 1)
+theme_override_colors/font_focus_color = Color(0.5058824, 0.92941177, 0.7019608, 1)
+theme_override_colors/font_hover_color = Color(0.27663526, 0.73760307, 0.5318355, 1)
+text = "Gallery"
+
 [node name="NewGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
 unique_name_in_owner = true
 visible = false
@@ -229,22 +243,34 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VersionContainer" type="Control" parent="VersionMargin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VersionMargin"]
 layout_mode = 2
-mouse_filter = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
-[node name="VersionLabel" type="Label" parent="VersionMargin/VersionContainer"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -26.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "v0.0.2"
+[node name="HideLabelContainer" type="MarginContainer" parent="VersionMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 20
+
+[node name="HideLabel" parent="VersionMargin/HBoxContainer/HideLabelContainer" instance=ExtResource("14_d1ref")]
+modulate = Color(0.5, 0.5, 0.5, 0.8509804)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+text = "[i]press 0 to toggle ui[/i]"
+autowrap_mode = 0
+plain_text = "[i]press 0 to toggle ui[/i]"
+italic_phrases = Array[String](["Press 0 to enjoy the scenery"])
+
+[node name="VersionLabel" type="Label" parent="VersionMargin/HBoxContainer"]
+layout_mode = 2
+text = "v0.0.3"
 horizontal_alignment = 2
 script = ExtResource("9_nlybk")
 
@@ -270,6 +296,16 @@ theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 64
+
+[node name="GalleryContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="FlowControlContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -308,10 +344,10 @@ unique_name_in_owner = true
 auto_translate_mode = 1
 oversampling_override = 1.0
 title = "Start a New Game?"
-size = Vector2i(533, 172)
-dialog_text = "Are you sure you want to start a new game?
-
-All progress in the current game will be lost."
+size = Vector2i(444, 126)
+borderless = true
+dialog_text = "  Start a new game?
+  All progress in the current game will be lost."
 
 [node name="FadeOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -331,6 +367,7 @@ layout_mode = 1
 
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ArenaButton" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/LevelButton" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/GalleryButton" to="." method="_on_gallery_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

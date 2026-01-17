@@ -73,6 +73,11 @@ _subresources={
 "save_to_file/fallback_path": "res://-assets-/GLB-items/lever/mesh/lever_object1_331.res",
 "save_to_file/path": "uid://c64i6tyuniq2q"
 }
+},
+"nodes": {
+"PATH:lever/lever_handle": {
+"mesh_instance/layers": 128
+}
 }
 }
 gltf/naming_version=2

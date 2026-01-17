@@ -9,8 +9,7 @@ func initialise() -> void:
 	PL_DIST_TO_END = 10
 
 
-func get_attack_series_list() -> Array:
-	return [
+var attack_series_list :Array[Array]= [
 		[PHES.Leaf.dodge_B, PHES.Leaf.attack_360_low],
 		[PHES.Leaf.dodge_B, PHES.Leaf.sword_slide],
 		[PHES.Leaf.dodge_B, PHES.Leaf.dodge_B, PHES.Leaf.gap_closer],
@@ -18,10 +17,12 @@ func get_attack_series_list() -> Array:
 		[PHES.Leaf.phase_switch], # funny thing
 	]
 
-	
+func get_attack_series_list() -> Array[Array]:
+	return attack_series_list
+
+
 func pick_series_idx() -> int:
-	var dist := distance_to_player()
-	var switch_boost := 0.03 if dist < config.COMBAT_RAD() else 0.01
+	var switch_boost := 0.03 if dist_to_player_less(config.COMBAT_RAD()) else 0.01
 
 	var _idx := ra.ipick_weighted({
 		0: fvalue_angry(0.9, 0.2),

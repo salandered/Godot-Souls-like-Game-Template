@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0jvin82yypck"]
+[gd_scene load_steps=5 format=3 uid="uid://d0jvin82yypck"]
 
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="2_2vggx"]
 [ext_resource type="Script" uid="uid://dwa0f2vkbmcfk" path="res://logic/ui/main_menu_group/credits/credits/m_credits.gd" id="2_w4uay"]
 [ext_resource type="Script" uid="uid://cc2wtqasev7le" path="res://logic/ui/main_menu_group/credits/scripts/credits_label.gd" id="2_xn4wy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_73oxe"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -23,12 +25,13 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
 theme = ExtResource("2_2vggx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_73oxe")
 bbcode_enabled = true
 text = "[center]
 
 
 [b][font_size=32]this game demo[/font_size][/b]
-Author: me myself and I
+Author: me
 License: All Rights Reserved
 
 
@@ -36,51 +39,52 @@ License: All Rights Reserved
 [b][font_size=32]Assets & Art[/font_size][/b]
 
 
-[b][font_size=24]Models by Virtual Museums of Małopolska[/font_size][/b]
-License: [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]
-Assets: 
-* Military hatchet model M1889 - https://sketchfab.com/3d-models/military-hatchet-model-m1889-1a1dd0efe1cc4a5384f50351b9af5b16
-* Monstrance - https://sketchfab.com/3d-models/monstrance-2d3bde6afd274276904b2e6a9032d740
-Note: Modified from the original (retopology; UV wrapping; new materials)
+[b][font_size=24]Models by Virtual Museums of Małopolska, used under CC-BY 4.0[/font_size][/b]
+Link: https://sketchfab.com/WirtualneMuzeaMalopolski
+Assets: Military hatchet model M1889; Monstrance;
+Note: Modified from the original: retopology; UV wrapping; new materials
+
+
+[b][font_size=24]Models by ModeMorbase | Museu Virtual, used under CC-BY 4.0[/font_size][/b]
+Link: https://sketchfab.com/carpetudo
+Assets: Torre da Má Hora;
+Note: Modified from the original: retopology; UV wrapping; new materials
+
+
+[b][font_size=24]Models by artfletch, used under CC-BY 4.0[/font_size][/b]
+Assets: Lincoln's Inn Chapel Undercroft;
+Link: https://sketchfab.com/artfletch
+Note: Modified from the original: retopology; UV wrapping; new materials
 
 
 [b][font_size=24]Different material packs by Julio Sillet, used under CC-BY[/font_size][/b]
 Link: https://juliosillet.gumroad.com/
-Note: Used for various surface materials (e.g. Rocks, Concrete) with slight modifications.
+Note: Slight modifications were made.
 
 
 [b][font_size=24]Asset pack \"RTS medieval props\" by Lamoot, used under CC BY 3.0[/font_size][/b]
 Link: https://opengameart.org/content/rts-medieval-props
-Note: Modified from the original (retopology; UV wrapping; new materials)
+Note: Modified from the original: retopology; UV wrapping; new materials
 
 
 [b][font_size=24]Asset pack \"Mega Lights Pack\" by burnedhrum, used under CC BY 4.0[/font_size][/b]
 Link: https://sketchfab.com/3d-models/mega-lights-pack-64f05bccecee49ebb7f26c5b949c92e3
-Note: Modified from the original (retopology; UV wrapping; new materials)
+Note: Modified from the original: retopology; UV wrapping; new materials
+
+
+[b][font_size=24]Asset pack \"LeversandSwitches\" by loafbrr, used under CC BY 4.0[/font_size][/b]
+Link: https://loafbrr.itch.io/leversandswitches
+Note: Modified from the original: retopology; UV wrapping; new materials
 
 
 [b][font_size=24]Additional assets CC-By 4.0 GDQuest[/font_size][/b]
 Link: https://www.gdquest.com
-License: [url=attribution/gd_quest/node_essentials/LICENSE]CC BY 4.0[/url]
-Notes: Shaders were used: fire shader; sky shader. Modifications were made.
+Notes: Shader materials were used: fire shader; sky shader. Modifications were made.
 
 
-
-[b][font_size=32]Core Systems & Templates[/font_size][/b]
-
- 
-[b][font_size=24]Godot Game Template[/font_size][/b]
-[img=140x140]res:///_attribution/maaacks_game_template/logo/logo.png[/img]  
-Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]
-Link: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]
-License: [url=/_attribution/maaacks_game_template/LICENSE.txt]MIT License[/url]
-
-
-[b][font_size=24]Godot Engine[/font_size][/b]
-[img=140x140]res:///_attribution/godot/logo/logo_vertical_color_dark.png[/img] 
-Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]
-Link: [url=https://godotengine.org/]godotengine.org[/url]
-License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]
+[b][font_size=24]Assets from tps-demo, used under CC-BY 3.0[/font_size][/b]
+Link: https://github.com/godotengine/tps-demo
+Notes: Shader materials were used: smoke. Modifications were made.
 
 
 
@@ -91,11 +95,15 @@ License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT L
 Author: me and noisedeception
 
 
-[b][font_size=24]Environmental tracks (noise, bits)[/font_size][/b]
+[b][font_size=24]Track: Wave Paint 3[/font_size][/b]
+Author: me
+
+
+[b][font_size=24]Several environmental tracks (noise, bits, synths, melody)[/font_size][/b]
 Author: me 
 
 
-[b][font_size=24]Swords & Blades Sound Pack[/font_size][/b]
+[b][font_size=24]Swords & Blades Sound Pack, used under CC-BY 4.0[/font_size][/b]
 Author: Leonardo Calvo
 Link: https://thesoundrack.itch.io/swords-blades-sound-pack
 
@@ -104,28 +112,24 @@ Link: https://thesoundrack.itch.io/swords-blades-sound-pack
 [b][font_size=32]Special thanks[/font_size][/b]
 
 
-[b][font_size=24]The Smithsonian Institution[/font_size][/b]
+[b][font_size=24]The Smithsonian Institution (CC0)[/font_size][/b]
 Link: https://sketchfab.com/smithsonian
 Assets: Isthminia panamensis Pyenson et al., 2015: Jaw; Figure of a Dancer; Geochelone carbonaria;
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0[/url]
 
 
-[b][font_size=24]Världskulturmuseerna (National Museums of World Culture)[/font_size][/b]
+[b][font_size=24]Världskulturmuseerna (National Museums of World Culture) (CC0)[/font_size][/b]
 Link: https://sketchfab.com/varldskulturmuseerna
 Assets: Mask;
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0[/url]
 
 
-[b][font_size=24]Tula State Arms Museum[/font_size][/b]
+[b][font_size=24]Tula State Arms Museum (CC0)[/font_size][/b]
 Link: https://sketchfab.com/ArmsMuseum
 Assets: Pinga Throwing Knife;
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0[/url]
 
 
-[b][font_size=24]galway3d (Digital Museum for Co. Galway, Ireland)[/font_size][/b]
+[b][font_size=24]Galway3D (Co. Galway working with Galway Museum and Heritage Officers) (CC0)[/font_size][/b]
 Link: https://sketchfab.com/galway3d
 Assets: Entrance Gates to Menlo Castle;
-License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0[/url]
 
 
 [b][font_size=24]CC0 assets were used from the following artists[/font_size][/b]
@@ -154,8 +158,33 @@ License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0[/url]
 * Kenney https://kenney.nl/
 
 
-[b][font_size=24]Olya Vasileva[/font_size][/b]
+[b][font_size=24]lo.w.l[/font_size][/b]
 Note: Painting fragments were used for UI elements.
+
+
+[b][font_size=24]Playtesters[/font_size][/b]
+* i
+* akzar
+* lo.w.l
+
+
+
+[b][font_size=32]Core Systems & Templates[/font_size][/b]
+
+ 
+[b][font_size=24]Godot Game Template, used under MIT License[/font_size][/b]
+[img=140x140]res:///_attribution/maaacks_game_template/logo/logo.png[/img]  
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]
+Link: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]
+
+
+[b][font_size=24]Godot Engine[/font_size][/b]
+[img=140x140]res:///_attribution/godot/logo/logo_vertical_color_dark.png[/img] 
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]
+Link: [url=https://godotengine.org/]godotengine.org[/url]
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]
+
+
 
 
 [b][font_size=32]Other Legal Notices[/font_size][/b]
