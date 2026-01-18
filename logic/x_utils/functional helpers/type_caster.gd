@@ -78,6 +78,11 @@ static func array_of_marker_3d(array: Array) -> Array[Marker3D]:
 	list_casted.assign(_safe_validate_class(array, Marker3D, "Marker3D"))
 	return list_casted
 
+static func array_of_rigid_body_3d(array: Array) -> Array[RigidBody3D]:
+	var list_casted: Array[RigidBody3D] = []
+	list_casted.assign(_safe_validate_class(array, RigidBody3D, "RigidBody3D"))
+	return list_casted
+
 static func array_of_world_environment(array: Array) -> Array[WorldEnvironment]:
 	var list_casted: Array[WorldEnvironment] = []
 	list_casted.assign(_safe_validate_class(array, WorldEnvironment, "WorldEnvironment"))
@@ -130,6 +135,21 @@ static func array_of_base_weapon(array: Array) -> Array[BaseWeapon]:
 static func array_of_base_combat(array: Array) -> Array[BaseCombat]:
 	var list_casted: Array[BaseCombat] = []
 	list_casted.assign(_safe_validate_class(array, BaseCombat, "BaseCombat"))
+	return list_casted
+
+static func array_of_base_sfx_system(array: Array) -> Array[BaseSFXSystem]:
+	var list_casted: Array[BaseSFXSystem] = []
+	list_casted.assign(_safe_validate_class(array, BaseSFXSystem, "BaseSFXSystem"))
+	return list_casted
+
+static func array_of_character_sfx_system(array: Array) -> Array[CharacterSFXSystem]:
+	var list_casted: Array[CharacterSFXSystem] = []
+	list_casted.assign(_safe_validate_class(array, CharacterSFXSystem, "CharacterSFXSystem"))
+	return list_casted
+
+static func array_of_base_anim_params_container(array: Array) -> Array[BaseAnimParamsContainer]:
+	var list_casted: Array[BaseAnimParamsContainer] = []
+	list_casted.assign(_safe_validate_class(array, BaseAnimParamsContainer, "BaseAnimParamsContainer"))
 	return list_casted
 
 static func array_of_base_character_movement(array: Array) -> Array[BaseCharacterMovement]:

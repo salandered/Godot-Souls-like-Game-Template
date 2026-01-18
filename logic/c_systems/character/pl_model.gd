@@ -20,7 +20,6 @@ extends BaseCharacter
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
-@onready var sfx_system: PlayerSFXSystem = %AudioSystem
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
 @onready var smith_sword_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmithSwordAnimSFXSigEmitter
 @onready var small_pinga_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmallPingaAnimSFXSigEmitter
@@ -29,7 +28,6 @@ extends BaseCharacter
 @onready var anim_container: AnimContainer = %AnimContainer
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var native_player: AnimationPlayer = %NativeAnimator
-@onready var anim_params_container: AnimParamsContainer = %AnimParamsContainer
 
 # 
 @onready var hit_box_torso: CharacterHitbox = %HitBoxTorso
@@ -86,7 +84,7 @@ func __hard_dependencies() -> Array[Object]:
 func __soft_dependencies() -> Array[Object]:
 	SIG_stamina_cant_be_paid.get_object_id()
 	return [
-		sfx_system,
+		get_sfx_system(),
 		pl_anim_sfx_sig_emitter,
 		smith_sword_anim_sfx_sig_emitter,
 		small_pinga_anim_sfx_sig_emitter,
@@ -123,8 +121,6 @@ func _for_init_sad_container() -> BaseCharacterSADContainer:
 ## anim cont
 func _for_init_anim_container() -> AnimContainer:
 	return anim_container
-func _for_init_anim_params_container() -> BaseAnimParamsContainer:
-	return anim_params_container
 func _for_init_anim_list() -> BaseCharAnimList:
 	return PlAnimList.new()
 func _for_init_required_markers() -> Dictionary[String, Array]:
@@ -142,8 +138,6 @@ func _for_init_bones() -> BaseCharBones:
 func _for_init_active_weapon_id_list() -> Array[String]:
 	return [WeaponID.smith_sword]
 ## sfx
-func _for_init_sfx_system() -> CharacterSFXSystem:
-	return sfx_system
 func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 	return PlayerASPConfigContainer.new()
 func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
@@ -204,7 +198,7 @@ func update(input_: InputPackage, delta: float):
 
 	player_sm.update(input_, delta)
 	move_and_slide()
-	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
+	PushRigidBodies.push_rigid_bodies_by_char(self, push_rigid_bodies_force)
 
 
 ## USED FOR SFX SYSTEM

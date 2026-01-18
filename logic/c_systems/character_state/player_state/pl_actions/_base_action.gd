@@ -7,7 +7,7 @@ var feelings: PlayerFeelings
 
 var player_sm: PlayerSM
 var combat: PlayerCombat
-var anim_params_container: AnimParamsContainer
+var anim_params_container: PlAnimParamsContainer
 
 var action_name: String
 
@@ -70,6 +70,7 @@ func _on_enter_action(input_: InputPackage) -> void:
 	elif self is PlayerAction:
 		player_sm.current_state.curr_state_action = self
 	
+
 	on_enter_action(input_)
 	animate()
 
@@ -240,7 +241,7 @@ func is_interruptable() -> bool:
 func is_weapon_hurts(weapon_id: String, __log: bool = false) -> bool:
 	var _r: bool = false
 	if weapon_id in combat.get_active_weapon_ids():
-		_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent())
+		_r = anim_params_container.is_weapon_hurts(weapon_id, anim.native_anim, effective_time_spent())
 	else:
 		__log_error("unknown weapon name " + pp.in_q(weapon_id), "is_weapon_hurts", "return false", WL.WARN_CRUCIAL)
 	if _r and __log:

@@ -12,9 +12,11 @@ func get_hit_damage() -> float:
 func get_global_speed_scale() -> float:
 	match PREV_ACTION:
 		PS.Act.axe_slice_2:
+			PlayerStats.set_power_combo()
 			return 1.2
 		_:
 			return 1.0
+
 
 func initialise_implementation() -> void:
 	hit_damage = 24

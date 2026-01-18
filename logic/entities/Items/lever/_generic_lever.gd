@@ -1,4 +1,3 @@
 @tool
-
-class_name GenericLever
+class_name PlushLever
 extends BaseLever

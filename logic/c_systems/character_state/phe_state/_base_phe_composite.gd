@@ -47,7 +47,8 @@ func is_ended() -> bool:
 func _on_enter_state() -> void:
 	mark_enter_state()
 
-	me.update_state_history(state_name)
+	if me.record_state_history:
+		me.update_state_history(state_name)
 
 	if __is_entered:
 		__log_error("Already entered")

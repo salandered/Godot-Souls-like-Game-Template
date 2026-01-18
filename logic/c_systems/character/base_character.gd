@@ -6,6 +6,9 @@ extends CharacterBody3DCharacterSystem
 var _sig_container: BaseCharacterSignalContainer
 var _combat: BaseCombat
 var _movement: BaseCharacterMovement
+var _anim_params_container: BaseAnimParamsContainer
+var _sfx_system: CharacterSFXSystem
+
 
 ## not nullable after init
 func get_sig_container() -> BaseCharacterSignalContainer:
@@ -19,6 +22,14 @@ func get_combat() -> BaseCombat:
 func get_movement() -> BaseCharacterMovement:
 	return _movement
 
+func get_anim_params_container() -> BaseAnimParamsContainer:
+	return _anim_params_container
+
+func get_sfx_system() -> CharacterSFXSystem:
+	return _sfx_system
+
+
+##
 
 signal SIG_land_wave(char_glob_position: Vector3, anim: String)
 
@@ -42,16 +53,19 @@ func _initialise_common_char() -> void:
 	var asp_config_container := _for_init_asp_config_container()
 
 	var anim_container := _for_init_anim_container()
-	var anim_params_container := _for_init_anim_params_container()
+
+	var base_anim_params_container_r := get_descendants.base_anim_params_container(self)
+	if not error_.len_one(base_anim_params_container_r):
+		_anim_params_container = base_anim_params_container_r[0]
 
 	var native_player := _for_init_native_player()
 
-	if native_player:
+	if native_player and _anim_params_container:
 		anim_container._accept_animations(
 			_for_init_anim_list().get_list_of_animations(),
 			native_player,
-			anim_params_container.get_track_prefixes(),
-			anim_params_container.get_all_params(),
+			_anim_params_container.get_track_prefixes(),
+			_anim_params_container.get_all_params(),
 			_for_init_required_markers())
 
 		_for_init_anim_manager().initialise(native_player, anim_container)
@@ -81,13 +95,15 @@ func _initialise_common_char() -> void:
 		_movement.initialise(self)
 
 	
-	var sfx_system := _for_init_sfx_system()
-	if sfx_system:
-		sfx_system.initialise(
+	var sfx_system_r := get_descendants.character_sfx_system(self)
+	if not error_.len_one(sfx_system_r):
+		_sfx_system = sfx_system_r[0]
+	if _sfx_system:
+		_sfx_system.initialise(
 			_sig_container,
 			asp_config_container,
 			self,
-			{sfx_system.character_additional_data_key: self}
+			{_sfx_system.character_additional_data_key: self}
 			)
 	
 		_for_init_anim_sfx_sig_emitter().initialise(sad_container, _sig_container)
@@ -120,7 +136,6 @@ func _initialise_weapons_sfx():
 ## anim cont
 @abstract func _for_init_anim_container() -> AnimContainer
 @abstract func _for_init_anim_list() -> BaseCharAnimList
-@abstract func _for_init_anim_params_container() -> BaseAnimParamsContainer
 @abstract func _for_init_required_markers() -> Dictionary[String, Array]
 ## anim
 @abstract func _for_init_native_player() -> AnimationPlayer
@@ -130,7 +145,6 @@ func _initialise_weapons_sfx():
 @abstract func _for_init_bones() -> BaseCharBones
 @abstract func _for_init_active_weapon_id_list() -> Array[String]
 ## sfx
-@abstract func _for_init_sfx_system() -> CharacterSFXSystem
 @abstract func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer
 @abstract func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter
 @abstract func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]
@@ -149,8 +163,9 @@ func _initialise_weapons_sfx():
 @abstract func reset_position(y_offset: float = 0.0) -> void
 
 
-## Character states. 
+## Character states.
 ## TODO: was a quick way to make SFX system work. I dont like this API here
+##     - > delete
 
 @abstract func get_run_state_names() -> Array[String]
 

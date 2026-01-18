@@ -36,6 +36,7 @@ static var enemy_attack_to_direction: Dictionary[String, AttackDirection.Dir] = 
 	PHEA.attack.power_up: AttackDirection.Dir.UP,
 	PHEA.attack.stab_low: AttackDirection.Dir.STAB,
 	PHEA.phase_switch: AttackDirection.Dir.STAB,
+	SITSKA.sit_attack: AttackDirection.Dir.STAB
 	}
 
 static var pl_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
@@ -76,7 +77,8 @@ static var enemy_attack_to_pl_state_interruption: Dictionary[String, String] = {
 	PHEA.attack.sword_slide: PS.thrown,
 	PHEA.attack.scare_off: PS.pushback,
 	PHEA.attack.power_up: PS.thrown,
-	PHEA.phase_switch: PS.thrown
+	PHEA.phase_switch: PS.thrown,
+	SITSKA.sit_attack: PS.thrown
 	}
 
 

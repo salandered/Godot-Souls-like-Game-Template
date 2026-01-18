@@ -12,6 +12,7 @@ func get_hit_damage() -> float:
 func get_global_speed_scale() -> float:
 	match PREV_ACTION:
 		PS.Act.sword_slash_2:
+			PlayerStats.set_power_combo()
 			return 1.1
 		_:
 			return 1.0

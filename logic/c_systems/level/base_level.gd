@@ -93,6 +93,7 @@ func _ready() -> void:
 
 func _setup_vibe_asp():
 	enemies = get_descendants.enemy_characters(self)
+	__log_("found", len(enemies), "enemies on level")
 	var player := get_descendants.one_princess(self)
 	for e in enemies:
 		if player:
@@ -159,11 +160,14 @@ func _on_update_video_settings() -> void:
 
 
 func _on_ph_enemy_sig_angry_raised() -> void:
+	__log_("_on_ph_enemy_sig_angry_raised")
+
 	if vibe_asp:
 		vibe_asp.play()
 
 
 func _on_ph_enemy_sig_death_raised() -> void:
+	__log_("_on_ph_enemy_sig_death_raised")
 	var all_quiet: bool = true
 	for e in enemies:
 		if e.angry_raised:

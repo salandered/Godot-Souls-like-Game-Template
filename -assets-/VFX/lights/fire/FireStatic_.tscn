@@ -95,6 +95,7 @@ script = ExtResource("2_jqjo8")
 particles_amount = 10
 lifetime = 1.0
 particles_speed_scale = 0.5
+audio_stream = ExtResource("3_qdwx7")
 play_sound = true
 radius = 2.0
 
@@ -132,8 +133,8 @@ gi_mode = 0
 mesh = SubResource("ArrayMesh_lyuy6")
 skeleton = NodePath("")
 
-[node name="test_visual" parent="test_visuals" index="0"]
-visible = false
+[node name="test_visual_base" parent="test_visuals_base" index="0"]
+transform = Transform3D(-0.4436743, 0, -1.1358384, 0, 1.219416, 0, 1.1358383, 0, -0.44367436, -0.11369126, 0.007882406, -1.5951779)
 
-[node name="VOSE3D" parent="." index="9"]
+[node name="VOSE3D" parent="." index="7"]
 aabb = AABB(-3, -3, -3, 6, 6, 6)

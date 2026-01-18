@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://logic/ui/main_menu_group/main_menu/m_main_menu.gd" id="1_2e4m0"]
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_hvsaw"]
-[ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="2_hvsaw"]
-[ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://logic/ui/main_menu_group/credits/credits/m_credits.tscn" id="3_nlybk"]
+[ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="3_x83h1"]
+[ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://logic/ui/main_menu_group/credits/credits/m_credits.tscn" id="4_iuok3"]
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
 [ext_resource type="Texture2D" uid="uid://c21h0ecvyglu" path="res://-assets-/ui_assets/images/floor.png" id="5_2sdq7"]
+[ext_resource type="PackedScene" uid="uid://ben53482wtfq8" path="res://logic/ui/image_gallery/dev_log_gallery.tscn" id="5_8iie0"]
 [ext_resource type="PackedScene" uid="uid://djsyfeinr8lew" path="res://logic/ui/main_menu_group/main_menu/Menu3dScene.tscn" id="5_hvsaw"]
 [ext_resource type="Texture2D" uid="uid://c5m7vv6a7kgdd" path="res://-assets-/ui_assets/pixil-frame-0.png" id="5_ugg5x"]
-[ext_resource type="PackedScene" uid="uid://ben53482wtfq8" path="res://logic/ui/image_gallery/dev_log_gallery.tscn" id="5_x83h1"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/main_menu_group/sound/background_music_player/m_background_music_player.tscn" id="6_2e4m0"]
 [ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://logic/ui/main_menu_group/main_menu/m_config_name_label.gd" id="7_nt2e5"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/m_capture_focus.gd" id="8_hvsaw"]
@@ -51,9 +51,9 @@ grow_vertical = 2
 theme = ExtResource("1_hvsaw")
 script = ExtResource("1_2e4m0")
 game_scene_path = "uid://bm5vqmonl5jl4"
-options_packed_scene = ExtResource("2_hvsaw")
-credits_packed_scene = ExtResource("3_nlybk")
-gallery_packed_scene = ExtResource("5_x83h1")
+options_packed_scene = ExtResource("3_x83h1")
+credits_packed_scene = ExtResource("4_iuok3")
+gallery_packed_scene = ExtResource("5_8iie0")
 level_1_scene_path = "uid://dmkxcwge6jddy"
 level_2_scene_path = "uid://bm5vqmonl5jl4"
 custom_cursor_texture = ExtResource("5_ugg5x")
@@ -174,18 +174,18 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("1_hvsaw")
-theme_override_colors/font_color = Color(1, 0.32941175, 0.94692534, 1)
-theme_override_colors/font_focus_color = Color(1, 0.32941177, 0.94509804, 1)
-theme_override_colors/font_hover_color = Color(1, 0.32941177, 0.94509804, 1)
+theme_override_colors/font_color = Color(0.43586704, 0.6266395, 0.98878354, 1)
+theme_override_colors/font_focus_color = Color(0.27011874, 0.4782603, 0.8733763, 1)
+theme_override_colors/font_hover_color = Color(0.22024938, 0.41280535, 0.7783351, 1)
 text = "Fight Arena"
 
 [node name="LevelButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5591886, 0.5953748, 1, 1)
-theme_override_colors/font_focus_color = Color(0.36078432, 0.41568628, 1, 1)
-theme_override_colors/font_hover_color = Color(0.36078432, 0.41568628, 1, 1)
+theme_override_colors/font_color = Color(1, 0.37504625, 0.9788869, 1)
+theme_override_colors/font_focus_color = Color(0.8258557, 0.27714655, 0.7848491, 1)
+theme_override_colors/font_hover_color = Color(0.8054897, 0.21733885, 0.68869096, 1)
 text = "Demo Level"
 
 [node name="GalleryButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]

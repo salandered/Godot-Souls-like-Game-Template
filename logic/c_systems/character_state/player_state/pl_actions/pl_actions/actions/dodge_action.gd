@@ -31,6 +31,7 @@ var curr_dodge_dir: DodgeDirection
 # todo: trace several dodges in a row
 var second_dodge: bool = false
 
+
 var upper_body_mask: Array[int]
 
 func initialise() -> void:
@@ -83,8 +84,12 @@ func on_enter_action(input_: InputPackage) -> void:
 			PEAK_SPEED += 1.0
 			END_SPEED = 3.5
 		PS.Act.dodge:
+			PlayerStats.increase_count_dodge()
 			second_dodge = true
 			__log_ent(em.pin, "second_dodge raised!")
+		_:
+			PlayerStats.reset_count_dodge()
+
 
 	if second_dodge:
 		PEAK_SPEED -= 2.0

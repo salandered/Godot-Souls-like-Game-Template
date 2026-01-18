@@ -86,17 +86,25 @@ func _ready_implementation() -> void:
 
 
 func _ready_implementation_non_editor():
-	pass
-# 	if vose3d:
-# 		u.safe_connect(vose3d.screen_entered, _on_sceen_entered)
-# 		u.safe_connect(vose3d.screen_exited, _on_sceen_exited)
+	__log_("_ready_implementation_non_editor")
+	_assign_vose_path.call_deferred()
+	if vose3d:
+		u.safe_connect(vose3d.screen_entered, _on_sceen_entered)
+		u.safe_connect(vose3d.screen_exited, _on_sceen_exited)
+		
+func _on_sceen_entered():
+	__log_("visible_on_screen_enabler_3d", "screen entered✴️")
+
+func _on_sceen_exited():
+	__log_("visible_on_screen_enabler_3d", "screen exited 🚪")
 
 
-# func _on_sceen_entered():
-# 	__log_("visible_on_screen_enabler_3d", "screen entered✴️")
-
-# func _on_sceen_exited():
-# 	__log_("visible_on_screen_enabler_3d", "screen exited 🚪")
+func _assign_vose_path() -> void:
+	__log_("_assign_vose_path")
+	if vose3d:
+		# Assigns the current node (self) as the target to disable
+		vose3d.enable_node_path = get_path()
+		__log_("_assign_vose_path", get_path(), vose3d.enable_node_path)
 
 
 func _update_animated_values() -> void:
@@ -135,6 +143,7 @@ func _play_anim(animator: AnimationPlayer, anim_id: String, speed_scale_: float)
 
 
 func _update_vose_state() -> void:
+	if not is_inside_tree(): return
 	if not vose3d: return
 
 	if vose_enabled:
@@ -152,7 +161,7 @@ func _set_vose_aabb_whd() -> void:
 	if not vose_enabled: return
 	if not vose3d: return
 	if auto_vose_abb: return
-
+	__log_("_set_vose_aabb_whd", vose_whd)
 	var centered_pos = - vose_whd / 2.0
 	vose3d.aabb = AABB(centered_pos, vose_whd)
 
@@ -163,6 +172,13 @@ func _apply_auto_vose_abb() -> void:
 	if not auto_vose_abb: return
 
 	var r := radius
+	__log_("_apply_auto_vose_abb", radius)
 	vose3d.aabb = AABB(Vector3(-r, -r, -r) - sway_padding, Vector3(r * 2, r * 2, r * 2) + sway_padding * 2)
 
 # endregion
+
+
+## 
+
+func __LOG_B() -> bool:
+	return false

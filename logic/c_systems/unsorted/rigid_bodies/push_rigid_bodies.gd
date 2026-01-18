@@ -9,11 +9,21 @@ class_name PushRigidBodies
 
 
 ## meant to be called nearby the move_and_slide (each frame).
-static func push_rigid_bodies(character: BaseCharacter, push_force: float = 4.0):
+static func push_rigid_bodies_by_char(character: BaseCharacter, push_force: float = 4.0):
 	for _number_of_items_body_collided_with in character.get_slide_collision_count():
 		var collision := character.get_slide_collision(_number_of_items_body_collided_with)
 		if collision.get_collider() is RigidBody3D:
 			collision.get_collider().apply_central_impulse(-collision.get_normal() * push_force)
+
+
+static func push_rigid_bodies(bodies: Array[RigidBody3D], vector: Vector3, push_force: float = 4.0):
+	for body: RigidBody3D in bodies:
+		if body:
+			body.apply_central_impulse(vector * push_force)
+
+static func push_rigid_body(body: RigidBody3D, vector: Vector3, push_force: float = 4.0):
+	if body:
+		body.apply_central_impulse(vector * push_force)
 
 
 static func push_nearby_rigid_bodies(character: BaseCharacter, radius: float = 3.0, push_force: float = 200.0):

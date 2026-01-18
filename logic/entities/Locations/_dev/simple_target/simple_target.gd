@@ -22,6 +22,7 @@ func __hard_validation() -> bool:
 
 class AnimID:
 	const rotate_on_hit = "rotate_on_hit"
+	const rotate_on_hit_super = "rotate_on_hit_super"
 
 
 func _ready() -> void:
@@ -41,9 +42,13 @@ func _on_my_area_hit(payload: Dictionary[String, Variant]):
 	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_damage_field)
 	if not _r.err:
 		damage = _r.value
-	var _speed_scale := damage / 12.0
+	var _speed_scale := damage / 16.0
 	animation_player.stop()
-	animation_player.play(AnimID.rotate_on_hit, 0.2, _speed_scale)
+	if _speed_scale > 2.0:
+		PlayerStats.set_simple_target_super_rotate()
+		animation_player.play(AnimID.rotate_on_hit_super, 0.2, _speed_scale / 1.5)
+	else:
+		animation_player.play(AnimID.rotate_on_hit, 0.2, _speed_scale)
 	__log_("playing", AnimID.rotate_on_hit, "_speed_scale", _speed_scale, "based on damage", damage)
 
 

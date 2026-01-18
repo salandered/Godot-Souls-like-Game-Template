@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cjbmkc53iwu64"]
+[gd_scene load_steps=20 format=4 uid="uid://cjbmkc53iwu64"]
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://logic/entities/Locations/_dev/simple_target/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="1_vud1n"]
@@ -56,7 +56,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraTarget/Whoosh:playing")
+tracks/0/path = NodePath("Visuals/RotatingTarget/Whoosh:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -68,7 +68,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CameraTarget/Friction:playing")
+tracks/1/path = NodePath("Visuals/RotatingTarget/Friction:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -80,7 +80,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CameraTarget/Hit:playing")
+tracks/2/path = NodePath("Visuals/RotatingTarget/Hit:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -107,7 +107,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CameraTarget/Whoosh:playing")
+tracks/1/path = NodePath("Visuals/RotatingTarget/Whoosh:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -119,7 +119,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CameraTarget/Friction:playing")
+tracks/2/path = NodePath("Visuals/RotatingTarget/Friction:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -131,7 +131,59 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CameraTarget/Hit:playing")
+tracks/3/path = NodePath("Visuals/RotatingTarget/Hit:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hrpcc"]
+resource_name = "rotate_on_hit_super"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/RotatingTarget:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9, 2),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 15.358897, 0), Vector3(0, 15.53343, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/RotatingTarget/Whoosh:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.099999994, 0.4666667, 0.8, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/RotatingTarget/Friction:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.23333333, 0.46666667, 0.8, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/RotatingTarget/Hit:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -144,7 +196,8 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ramhp"]
 _data = {
 &"RESET": SubResource("Animation_wnrsi"),
-&"rotate_on_hit": SubResource("Animation_tkgjx")
+&"rotate_on_hit": SubResource("Animation_tkgjx"),
+&"rotate_on_hit_super": SubResource("Animation_hrpcc")
 }
 
 [node name="SimpleTarget" type="Node3D"]
@@ -155,8 +208,18 @@ unique_name_in_owner = true
 transform = Transform3D(0.66925603, 0, 0, 0, 0.66925603, 0, 0, 0, 0.66925603, 0, 1.2639782, 0)
 __csg_visual = false
 
-[node name="Whoosh" type="AudioStreamPlayer3D" parent="CameraTarget"]
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="RotatingTarget" type="MeshInstance3D" parent="Visuals"]
 unique_name_in_owner = true
+transform = Transform3D(-0.37619692, 0, 0.06633376, 0, 0.3820004, 0, -0.06633376, 0, -0.37619692, 0, 1.2790871, 0)
+layers = 128
+material_override = ExtResource("6_lub8o")
+mesh = SubResource("ArrayMesh_lub8o")
+
+[node name="Whoosh" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget"]
+unique_name_in_owner = true
+transform = Transform3D(-1.351951, 0, -2.241673, 0, 2.6177983, 0, 2.241673, 0, -1.351951, 0.25813103, -0.039551973, -0.42800766)
 stream = ExtResource("3_lub8o")
 volume_db = -4.0
 unit_size = 6.0
@@ -164,8 +227,9 @@ max_db = -2.0
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="Hit" type="AudioStreamPlayer3D" parent="CameraTarget"]
+[node name="Hit" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget"]
 unique_name_in_owner = true
+transform = Transform3D(-1.351951, 0, -2.241673, 0, 2.6177983, 0, 2.241673, 0, -1.351951, -0.22780553, -0.039551973, -0.1373893)
 stream = ExtResource("4_hrpcc")
 volume_db = -7.0
 unit_size = 6.0
@@ -174,23 +238,15 @@ pitch_scale = 0.77
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="Friction" type="AudioStreamPlayer3D" parent="CameraTarget"]
+[node name="Friction" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget"]
 unique_name_in_owner = true
+transform = Transform3D(-1.351951, 0, -2.241673, 0, 2.6177983, 0, 2.241673, 0, -1.351951, -0.17163245, -0.039551973, 0.2845842)
 stream = ExtResource("5_lub8o")
 volume_db = -4.0
 unit_size = 6.0
 max_db = -2.0
 max_distance = 10.0
 bus = &"game_SFX"
-
-[node name="Visuals" type="Node3D" parent="."]
-
-[node name="RotatingTarget" type="MeshInstance3D" parent="Visuals"]
-unique_name_in_owner = true
-transform = Transform3D(-0.3697427, 0, -0.09599285, 0, 0.3820004, 0, 0.09599285, 0, -0.3697427, 0, 1.2790871, 0)
-layers = 128
-material_override = ExtResource("6_lub8o")
-mesh = SubResource("ArrayMesh_lub8o")
 
 [node name="StolbStatic" type="StaticBody3D" parent="Visuals"]
 

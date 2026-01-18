@@ -46,11 +46,11 @@ const FANCY_CAM_B := false
 const AWARENESS_B := false
 
 # ENEMY
-const PHE_INTERNAL_FILTER_B := false
-const PHE_CHECK_B := false
-const PHE_B := false
-const PHE_ANIM_B := false
-const E_ANIM_MANAGER_B := false
+const PHE_INTERNAL_FILTER_B := true_b
+const PHE_CHECK_B := true_b
+const PHE_B := true_b
+const PHE_ANIM_B := true_b
+const E_ANIM_MANAGER_B := true_b
 
 
 class FEEL:

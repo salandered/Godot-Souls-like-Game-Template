@@ -16,7 +16,7 @@ func tonemap_exposure_no_vol_fog_compensation() -> float:
 
 
 func initialise() -> void:
-	for item in get_descendants.rigid_bodies(self):
+	for item: RigidBody3D in get_descendants.rigid_bodies(self):
 		# print_.prefix_s("~~~~~~~~~", item, item.name)
 		item.collision_layer = Collision.Layers.ITEM_COL
 		item.collision_mask = Collision.Masks.ITEM_COL_MASK

@@ -91,3 +91,10 @@ More info can be found in Credits and Museum Gallery",
 		),
 	]
 	return list_
+
+
+##
+
+
+func __LOG_B() -> bool:
+	return false

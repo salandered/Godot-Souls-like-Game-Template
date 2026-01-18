@@ -196,6 +196,11 @@ func reset_weapon_by_id(weapon_id: String) -> void:
 	_update_is_attacking(weapon, false)
 	# __log_("reset active weapon")
 
+
+func reset_all_weapons() -> void:
+	for weapon_id in _active_weapon_ids:
+		reset_weapon_by_id(weapon_id)
+
 # endregion
 
 

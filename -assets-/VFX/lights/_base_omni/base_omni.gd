@@ -83,6 +83,7 @@ extends Node3DSystem
 @onready var omni_light_3d: OmniLight3D = %OmniLight3D
 @onready var puff_fog: PuffFog = %PuffFog
 @onready var __csg: CSGSphere3D = %__csg
+@onready var test_visuals_base: Node3D = %test_visuals_base
 
 
 func __hard_dependencies() -> Array[Object]:
@@ -101,6 +102,7 @@ func _ready() -> void:
 	_ready_implementation()
 
 	if not Engine.is_editor_hint():
+		#test_visuals_base.visible = false
 		u.hide_dev_visuals(self)
 		_ready_implementation_non_editor()
 

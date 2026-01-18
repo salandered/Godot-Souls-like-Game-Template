@@ -41,6 +41,7 @@ M_ProjectMusicController="*res://logic/_project_data/autoload/maaacks_autoloads/
 M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_ui_sound_controller.tscn"
 GlobalSignal="*res://logic/_project_data/autoload/global_signal.gd"
 GlobalUIInfo="*res://logic/_project_data/autoload/global_ui_info/GlobalUIInfo.tscn"
+PlayerStats="*res://logic/_project_data/autoload/player_statistic/player_stats.gd"
 
 [debug]
 
@@ -76,6 +77,7 @@ enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/
 folder_colors={
 "res://-adopting/": "gray",
 "res://-adopting/misc/": "gray",
+"res://-adopting/sfx_sounds/Footstep N Packs/wood (2)/walk_or_jog/": "gray",
 "res://-adopting/sfx_sounds/freesound_cc0/": "blue",
 "res://-adopting/sfx_sounds/kenney/_dev/": "gray",
 "res://-adopting/ui_maaack__later/": "yellow",
@@ -99,7 +101,6 @@ folder_colors={
 "res://-assets-/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/": "blue",
 "res://-assets-/SFX/sources/fantasy_pack_by_tom_music/": "green",
 "res://-assets-/SFX/sources/freesound_cc0/": "blue",
-"res://-assets-/SFX/sources/pack_N2/wood/walk_or_jog/": "gray",
 "res://-assets-/SFX/sources/ui_sounds/melodic_sfx_pack_1/": "purple",
 "res://-assets-/VFX/": "orange",
 "res://-assets-/VFX/lights/": "red",

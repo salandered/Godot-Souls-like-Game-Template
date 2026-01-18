@@ -14,6 +14,7 @@ func initialise_implementation() -> void:
 
 	hit_damage = 25
 
+
 var attack_weapons: Array[String] = [WeaponID.bg_aura_weapon]
 func get_anim_active_weapon_ids() -> Array[String]:
 	return attack_weapons

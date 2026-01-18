@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://p5bh3r7ium2p" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Footsteps/Dirt/Dirt Walk 4.wav" id="4_8tjf0"]
 
 [resource]
+random_pitch = 1.1
 streams_count = 4
 stream_0/stream = ExtResource("1_o460o")
 stream_1/stream = ExtResource("2_4nkc4")

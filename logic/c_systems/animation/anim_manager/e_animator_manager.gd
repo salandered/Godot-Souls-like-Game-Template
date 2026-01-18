@@ -5,9 +5,10 @@ extends BaseAnimatorManager
 class_name EnemyAnimatorManager
 
 @onready var config: PHEConfig = %Config
-@onready var _native_player: AnimationPlayer = %NativePlayer
-@onready var general_skeleton: Skeleton3D = %GeneralSkeleton
-@onready var overlay_modifier: OverlayModifier = %OverlayModifier
+@export var _native_player: AnimationPlayer
+@export var general_skeleton: Skeleton3D
+@export var overlay_modifier: OverlayModifier
+@export var initial_anim_id: String
 
 ## _native_player will be duplicated to this
 var _anim_player: AnimationPlayer
@@ -208,7 +209,7 @@ func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer)
 
 	_reset_root_motion()
 	
-	_anim_player.play(PHEA.sleep)
+	# _anim_player.play(initial_anim_id)
 
 	overlay_modifier.initialise()
 

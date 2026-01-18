@@ -190,7 +190,7 @@ func __apply_base_action_data(action_data: StatesContainer._BaseActionData, chil
 	child.anim = anim
 	child.animator_manager = _player.animator_manager
 	child.anim_container = anim_container
-	child.anim_params_container = _player.anim_params_container
+	child.anim_params_container = _player.get_anim_params_container() as PlAnimParamsContainer
 	
 	if not child.action_name or child.action_name.is_empty():
 		__log_error("No action_name assigned for action: " + child.get_name())

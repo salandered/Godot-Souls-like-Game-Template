@@ -59,6 +59,11 @@ Link: https://github.com/godotengine/tps-demo
 Notes: Shader materials were used: smoke. Modifications were made.
 
 
+#### Assets made by Blender Studio, used under CC-BY 4.0
+Link: https://studio.blender.org/welcome/
+Notes: Materials from Charge Asset Library were used. Modifications were made.
+
+
 
 ### Music & SFX
 
@@ -113,21 +118,23 @@ Assets: Entrance Gates to Menlo Castle;
 
 
 #### Following artists for providing CC0 SFX assets
-- TomMusic. https://tommusic.itch.io/
-- Aurelien Montero. https://punkzen.itch.io/
-- Cat Prisbrey. https://felesmachina.itch.io/ (Project: Cat's Souls-like-Template)
-- Leohpaz. https://leohpaz.itch.io/ (Pack: https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
-- Nvthic Sounds. https://nvthicprod.itch.io/impact-sfx
-- ObsydianX. https://obsydianx.itch.io/interface-sfx-pack-1
-- Chequered Ink. https://ci.itch.io/400-sounds-pack
+- TomMusic - https://tommusic.itch.io/
+- Aurelien Montero - https://punkzen.itch.io/
+- Cat Prisbrey - https://felesmachina.itch.io/ (Project: Cat's Souls-like-Template)
+- Leohpaz - https://leohpaz.itch.io/ (Pack: https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
+- Nvthic Sounds - https://nvthicprod.itch.io/impact-sfx
+- ObsydianX - https://obsydianx.itch.io/interface-sfx-pack-1
+- Chequered Ink - https://ci.itch.io/400-sounds-pack
 - and others
 
 
-#### Also
-* Imphenzia https://imphenzia.com/
-* FairFight https://www.youtube.com/@PointDown
-* GDQuest https://www.gdquest.com/
-* Kenney https://kenney.nl/
+#### Also the following artists or content creators
+* Imphenzia - https://imphenzia.com/
+* FairFight - https://www.youtube.com/@PointDown
+* GDQuest - https://www.gdquest.com/
+* Gord Goodwin - https://gord-goodwin.blogspot.com/
+* FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
+* Kenney - https://kenney.nl/
 
 
 #### lo.w.l
@@ -138,11 +145,6 @@ Note: Painting fragments were used for UI elements.
 - i
 - akzar
 - lo.w.l
-
-
-#### FR3NKD for making Godot Plush
-Link: https://fr3nkd.gumroad.com/l/vhfvy
-
 
 
 ### Core Systems & Templates

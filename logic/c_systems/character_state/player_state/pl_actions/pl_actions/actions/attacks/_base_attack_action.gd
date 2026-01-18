@@ -101,6 +101,11 @@ func on_enter_attack_implementation(input_: InputPackage):
 func on_exit_action():
 	_combat_reset()
 	get_animator_manager().reset_global_speed_scale()
+	on_exit_action_implementation()
+
+
+func on_exit_action_implementation():
+	pass
 
 
 func update(input_: InputPackage, delta: float):

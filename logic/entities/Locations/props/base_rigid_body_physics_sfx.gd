@@ -88,7 +88,7 @@ func _initialise_coll_layer():
 
 func _physics_process(_delta):
 	_previous_velocity = linear_velocity
-	if global_position.y < -50:
+	if global_position.y < -150:
 		self.queue_free()
 
 

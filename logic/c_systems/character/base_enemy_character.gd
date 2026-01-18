@@ -29,7 +29,7 @@ func _initialise_cam_targets() -> void:
 	camera_target = targets[0]
 
 
-func _initialise_coll_collder():
+func _initialise_coll_collider():
 	if coll_collider:
 		var original_shape := coll_collider.shape
 		if not error_.null_object(original_shape, "CollisionShape3D has no shape!"):

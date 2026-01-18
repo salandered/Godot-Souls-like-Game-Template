@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cder7q45c0ofb"]
 
 [ext_resource type="Script" uid="uid://djgaqmwqf0dts" path="res://logic/entities/Items/door/_generic_door.gd" id="1_g0uxx"]
-[ext_resource type="ArrayMesh" uid="uid://dnr3m1uwiainl" path="res://-assets-/GLB-items/door/meshes/door_Cube_034.res" id="2_gx7ph"]
+[ext_resource type="ArrayMesh" uid="uid://bddnksl7drf47" path="res://-assets-/GLB-items/door/meshes/door_Cube_034.res" id="2_gx7ph"]
 [ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="3_igwfv"]
 [ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="4_hbl3s"]
 [ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://-assets-/SFX/sources/400/creaky_door_short_for_chest.wav" id="5_c3tjs"]
@@ -226,6 +226,7 @@ unique_name_in_owner = true
 
 [node name="DoorMesh" type="MeshInstance3D" parent="Visuals/DoorPivot/DoorStatic"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.79238665, -1.8613347, 0.040587902)
+layers = 128
 gi_mode = 2
 mesh = ExtResource("2_gx7ph")
 skeleton = NodePath("../../../..")

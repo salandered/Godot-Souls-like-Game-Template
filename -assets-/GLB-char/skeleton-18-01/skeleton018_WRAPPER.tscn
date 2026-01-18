@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://ei5yc3pkg0kp"]
+
+[ext_resource type="PackedScene" uid="uid://ct6yfqbamx6dq" path="res://-assets-/GLB-char/skeleton-18-01/skeleton1801.glb" id="1_w8c3g"]
+[ext_resource type="Material" uid="uid://bfg1q2ls5d5f4" path="res://-assets-/materials-shared/concrete/just_concrete/concrete_Reimp_tripl_sk.tres" id="2_2l1ue"]
+
+[node name="FCS_Skeleton_working2" instance=ExtResource("1_w8c3g")]
+
+[node name="Arm" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="0"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="cage" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="1"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="Leg" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="2"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="pelvis" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="3"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="shoulder" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="4"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="SkeletonMesh_050" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="5"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="SkeletonMesh_067" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="6"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="SkeletonMesh_183" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="7"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="SkeletonMesh_184" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="8"]
+material_override = ExtResource("2_2l1ue")
+
+[node name="SkeletonMesh_202" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="9"]
+material_override = ExtResource("2_2l1ue")

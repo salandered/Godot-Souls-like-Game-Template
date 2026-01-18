@@ -1,2 +1,2 @@
-extends PHCharacter
+extends BigGuyCharacter
 class_name SecretEnemy

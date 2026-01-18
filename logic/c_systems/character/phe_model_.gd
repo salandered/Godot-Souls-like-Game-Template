@@ -1,10 +1,13 @@
-extends BaseEnemyCharacter
+@abstract
 class_name PHCharacter
+extends BaseEnemyCharacter
 
 
 @export var show_ui_feelings: bool = false
 @export var float_ui_feelings: bool = false
-@export var fire_up: bool = false
+@export var record_state_history: bool = false
+@export var process_disabled_on_init: bool = true
+@export var head_off: bool = true
 
 
 @onready var config: PHEConfig = %Config
@@ -12,30 +15,22 @@ class_name PHCharacter
 
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var _top: BasePHEState = %_Top
-@onready var visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
 
 
 ## anim
 @onready var native_player: AnimationPlayer = %NativePlayer
 @onready var anim_container: AnimContainer = %AnimContainer
 @onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
-@onready var anim_params_container: EAnimParamsContainer = %AnimParamsContainer
 
 
 ## sfx
-@onready var sfx_system: EnemySFXSystem = %AudioSystem
 @onready var e_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %EAnimSFXSigEmitter
-@onready var pinga_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %PingaAnimSFXSigEmitter
-@onready var aura_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %AuraAnimSFXSigEmitter
 
 @onready var ui_feelings: EnemyUIFeelings = %UIFeelings
-
-@onready var fire_marker: Marker3D = %fire_marker
-
 @onready var ui_marker: Marker3D = %UIMarker
 
 @onready var _start_position := global_transform.origin
-const FLICKER_FIRE = preload("uid://bnf3bmp3nq5nq")
+
 
 ## It's all: SM, Base state, Root state
 var state_machine: BasePHEState
@@ -58,9 +53,11 @@ var _prev_leaf: BasePHELeaf
 
 var push_rigid_bodies_force: float = 8.0
 
+
 signal SIG_angry_raised
 signal SIG_death_raised
 signal SIG_awaken
+
 
 ## TROUBLESHOOTING
 ## - Root animation are not quite right, visual and enemy node are not synced:
@@ -85,23 +82,30 @@ func __hard_dependencies() -> Array[Object]:
 		get_combat(),
 		phe_feelings,
 		_top,
-		visuals_root,
+		get_visuals_root(),
 	]
 
 func __soft_dependencies() -> Array[Object]:
 	return [
 		coll_collider,
 		# camera_target,
-		sfx_system,
+		get_sfx_system(),
 		e_anim_sfx_sig_emitter,
-		pinga_anim_sfx_sig_emitter,
-		aura_anim_sfx_sig_emitter
 		]
+
+
+@abstract func initialise_implementation() -> void
+
+@abstract func get_initial_leaf_state_name() -> String
+
+@abstract func get_visuals_root() -> Node3D
+
+@abstract func get_node_state_container() -> BaseNodeStateDataContainer
 
 
 func initialise() -> void:
 	_initialise_cam_targets()
-	_initialise_coll_collder()
+	_initialise_coll_collider()
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
@@ -111,12 +115,15 @@ func initialise() -> void:
 
 	if container:
 		container.me = self
-		container.accept_states()
+		container.accept_states(get_node_state_container())
 
-	visuals = get_descendants.mesh_instances(visuals_root, true)
+	visuals = get_descendants.mesh_instances(get_visuals_root(), true)
 	if ui_feelings:
 		ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
+
+	initialise_implementation()
+
 	if not __perform_validation():
 		__log_warn_soft("PHCharacter failed initalisation")
 		process_mode = PROCESS_MODE_DISABLED
@@ -132,12 +139,7 @@ func _for_init_sad_container() -> BaseCharacterSADContainer:
 ## anim cont
 func _for_init_anim_container() -> AnimContainer:
 	return anim_container
-func _for_init_anim_params_container() -> BaseAnimParamsContainer:
-	return anim_params_container
-func _for_init_anim_list() -> BaseCharAnimList:
-	return PHEA.new()
-func _for_init_required_markers() -> Dictionary[String, Array]:
-	return ERequiredMarkers.anim_to_required_marker
+
 ## anim
 func _for_init_native_player() -> AnimationPlayer:
 	return native_player
@@ -148,33 +150,26 @@ func _for_init_visuals() -> BaseVisuals:
 	return null ## todo: use in enemy
 func _for_init_bones() -> BaseCharBones:
 	return null ## todo: use in enemy
-func _for_init_active_weapon_id_list() -> Array[String]:
-	return [WeaponID.big_pinga_blade, WeaponID.bg_aura_weapon]
+
 ## sfx
-func _for_init_sfx_system() -> CharacterSFXSystem:
-	return sfx_system
 func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 	return EnemyASPConfigContainer.new()
 func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
 	return e_anim_sfx_sig_emitter
-func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
-	return {
-			WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
-			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
-		}
 
 
 func _initialise_sm():
+	angry_raised = false
 	state_machine = _top
 
-	var _sleep_state := container.get_state_by_name(PHES.Leaf.sleep)
-	_curr_leaf = _sleep_state
-	_prev_leaf = _sleep_state
+	var _initial_leaf := container.get_state_by_name(get_initial_leaf_state_name())
+	_curr_leaf = _initial_leaf
+	_prev_leaf = _initial_leaf
 
 	fatigue_raised = false
-	angry_raised = false
 	state_machine._on_enter_state()
-	set_process(false)
+	if process_disabled_on_init:
+		set_process(false)
 
 
 func get_current_state() -> BasePHEState:
@@ -220,10 +215,9 @@ func _process(delta: float) -> void:
 	if u.is_nth_frame(10):
 		basis = basis.orthonormalized()
 
-
 	state_machine._update(delta)
 	move_and_slide()
-	PushRigidBodies.push_rigid_bodies(self, push_rigid_bodies_force)
+	PushRigidBodies.push_rigid_bodies_by_char(self, push_rigid_bodies_force)
 
 	# player.__dev_labels._label_phe_enemy_info(self)
 
@@ -247,68 +241,41 @@ func reset_position(y_offset: float = 0.0) -> void:
 	# prints("reset_position", y_offset)
 
 
-func apply_fire_to_head():
-	if not FLICKER_FIRE or not fire_marker:
-		return
-	var fire_scene := FLICKER_FIRE.instantiate()
-	var casted: FireStatic = fire_scene
-	fire_marker.add_child(casted)
-	casted.play_animation = false
-	casted.play_move_animation = false
-	casted.energy = 2.8
-	casted.add_mist = false
-	# fire.position = Vector3.ZERO  # Centered on marker
-
-func remove_fire_effect():
-	if not fire_marker:
-		return
-	for child in fire_marker.get_children():
-		child.queue_free()
-
-func set_angry_raised():
-	angry_raised = true
-	SIG_angry_raised.emit()
-	if fire_up:
-		apply_fire_to_head()
-	
-
 func _on_death_raised() -> void:
-	death_raised = false
-	angry_raised = false
-	SIG_death_raised.emit()
 	if death_raised_processed:
 		return
 	
 	death_raised_processed = true
+	angry_raised = false
+	death_raised = false
 	
+	SIG_death_raised.emit()
+
 	print_.prefix("camera_target.make_inactive()")
 	camera_target.make_inactive()
-	await FrameUtils.wait_process_frames(2)
+
+
+	_on_death_raised_implementation()
 	
-	print_.prefix("_trigger_death_scatter()")
-	await _trigger_death_scatter(visuals)
-
-	if fire_up:
-		remove_fire_effect()
-	var sig_data := get_sig_container().get_by_sig_id(SignalID.sfx_unique)
-	u.safe_emit(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
-
 	await FrameUtils.wait_process_frames(5)
 	print_.prefix("coll_collider.disabled = true")
-
 
 	_shrink_coll_capsule()
 
 	self.collision_layer = Collision.Layers.DEBRIS_COL
 	self.collision_mask = Collision.Masks.DEBRIS_COL_MASK
-	
+		
 	await FrameUtils.wait_process_frames(2)
 	self.set_process(false)
 	self.set_physics_process(false)
 	# todo: it works but we need proper checks for external systems to be ready for this; also visuals
 	# self.queue_free()
 
+
+func _on_death_raised_implementation():
+	pass
 	
+
 func _shrink_coll_capsule():
 	if not coll_collider.shape is CapsuleShape3D:
 		__log_error("if not coll_collider.shape is CapsuleShape3D", "", "return")
@@ -327,93 +294,32 @@ func _shrink_coll_capsule():
 	CollShapeTranform.shrink_coll_shape_capsule_size(coll_collider, 1.0, _height_mult)
 
 
-const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
-
-func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
-	print_.prefix_s("glob position of an enemy", self.global_position)
-	var rigids_container := Node3D.new()
-	rigids_container.name = "EnemyDebrisContainer"
-	get_tree().current_scene.add_child(rigids_container)
-
-	rigids_container.global_position = self.global_position
-	
-	for visual_mesh: MeshInstance3D in mesh_list:
-		if not visual_mesh.mesh:
-			continue
-		await FrameUtils.wait_one_physics_frame()
-		var physics_config := RigidPhysicsConfig.new(3.0, 1.5, 0.0, 2.5)
-		var rigid_body := RigidBodyUtils.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)
-		if rigid_body:
-			rigids_container.add_child(rigid_body)
-			rigid_body.global_transform = visual_mesh.global_transform
-			rigid_body.set_script(RIGID_SHATTER_SCRIPT)
-			rigid_body._ready()
-			var backward := -self.transform.basis.z
-			var direction := (Vector3.UP * 0.94 + backward * 0.44).normalized()
-			var impulse_strength := randf_range(8.0, 9.0)
-			rigid_body.apply_central_impulse(direction * impulse_strength)
-	
-	for visual_mesh: MeshInstance3D in mesh_list:
-		visual_mesh.visible = false
-	print_.prefix("end of _trigger_death_scatter")
-
-
 func __pp_state_history():
-	return "state history" + pp.array_(_state_history)
+	return "state history " + pp.array_(_state_history) if record_state_history else "[state history was not recorded]"
 
 
 ##
 
 func get_run_state_names() -> Array[String]:
-	return [PHES.Leaf.orbit]
+	return []
 
 func get_dodge_state_names() -> Array[String]:
-	return [PHES.Leaf.dodge_F, PHES.Leaf.dodge_B, PHES.Leaf.dodge_L, PHES.Leaf.dodge_R]
+	return []
 
 func get_sprint_state_names() -> Array[String]:
-	return [PHES.Leaf.pursue]
+	return []
 
 func get_idle_state_names() -> Array[String]:
-	return [PHES.Leaf.combat_idle]
+	return []
 
 
 func get_power_attacks_state_names() -> Array[String]:
 	return [
-		PHES.Leaf.scare_off,
-		PHES.Leaf.gap_closer,
-		PHES.Leaf.sword_slide,
-		PHES.Leaf.power_up,
-		PHES.Leaf.attack_360_low,
-		PHES.Leaf.phase_switch,
 	   ]
 
-
-## DEV
-
-
-# func _input(event: InputEvent) -> void:
-# 	if not OS.is_debug_build():
-# 		return
-# 	var bone_mask := BoneMask.get_upper_body()
-	# if event.is_action_pressed(RawAction.DEV_8):
-	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
-	# 	OverlayConfig.new(
-	# 		OverlayConfig.Weight.new(0.5),
-	# 		BlendConfig.new(0.12, 0.18),
-	# 		1.0,
-	# 		bone_mask
-	# 		))
-	# if event.is_action_pressed(RawAction.DEV_9):
-	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
-	# 	OverlayConfig.new(
-	# 		OverlayConfig.Weight.new(1.0),
-	# 		BlendConfig.new(0.2, 0.2),
-	# 		1.0,
-	# 		bone_mask
-	# 	))
+##
 
 
-# Drag your AirWave.tscn here in the Inspector
 const AIR_WAVE_2 = preload("uid://cxfgvp3futm7q")
 
 
@@ -426,12 +332,3 @@ func _on_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
 	get_tree().current_scene.add_child(wave)
 
 	wave.spawn_shockwave_at_position(char_glob_position, anim)
-
-
-# func _hard_death():
-# 	await FrameUtils.wait_process_frames(5)
-# 	self.queue_free()
-
-
-func _on_monitor_player_enter_signal_area_sig_player_entered(incoming_body: Node3D) -> void:
-	set_process(true)

@@ -136,7 +136,7 @@ _data = {
 &"omni_move": SubResource("Animation_6uios")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0lsj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdwx7"]
 resource_name = "damaged_concrete_columns"
 cull_mode = 2
 albedo_texture = ExtResource("3_ij60g")
@@ -147,7 +147,7 @@ roughness_texture_channel = 1
 normal_enabled = true
 normal_texture = ExtResource("5_6uios")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eneqh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqjo8"]
 resource_name = "damaged_concrete_columns_lighter_cleaner"
 cull_mode = 2
 albedo_texture = ExtResource("3_ij60g")
@@ -158,7 +158,7 @@ roughness_texture_channel = 1
 normal_enabled = true
 normal_texture = ExtResource("5_6uios")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_s18qp"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_gxo4b"]
 _surfaces = [{
 "aabb": AABB(-0.48115116, -1.1935166, -1.1994382, 1.1840627, 2.1270478, 2.1703131),
 "format": 34896613377,
@@ -182,7 +182,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_bcn8a"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_818gi"]
 resource_name = "column shattered_Object_0_081"
 _surfaces = [{
 "aabb": AABB(-0.48115116, -1.1935166, -1.1994382, 1.1840627, 2.1270478, 2.1703131),
@@ -190,7 +190,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 69,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABwAIAAkABwAKAAgACwAMAA0ADAALAA4ADAAOAA8AEAARABIAEAATABEAFAAVABYAFwAYABkAGgAbABwAGgAdABsAHgAfACAAHgAhAB8AIgAjACQAJQAmACcAJgAlACgAJgAoACkAKgArACwAKwAqAC0AKwAtAC4A"),
-"material": SubResource("StandardMaterial3D_e0lsj"),
+"material": SubResource("StandardMaterial3D_qdwx7"),
 "name": "damaged_concrete_columns",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -202,7 +202,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 39,
 "index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQAGAAcABQAIAAYACQAKAAsACgAMAAsADQAMAAoADQAOAAwADwAOAA0AEAARABIAEAATABEAFAAVABYA"),
-"material": SubResource("StandardMaterial3D_eneqh"),
+"material": SubResource("StandardMaterial3D_jqjo8"),
 "name": "damaged_concrete_columns_lighter_cleaner",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -210,23 +210,25 @@ _surfaces = [{
 "vertex_data": PackedByteArray("gDMd9ZrSpPoAAP//PXOk+g6gLd6X56T6BjaU9JAapPr8mwnfwgek+hjixEva6uDhDqAt3pfn4eH8mwnfwgfg4XCxo7fE6+nhcLEAAP//wNT//3kJ7PvA1EUtxAZp38DUEAGvQR1ywNScsoGTAADA1PELxEtSYsDUqzjEeDcbwNQjs9+zHQF33f//eQns+/LfGOLES9rqVeCcsoGTAAD53PybCd/CB0LjI7Pfsx0BQuMY4sRL2upC4yuYObErmDmxK5g5sSuYObErmDmx5ycCKOYnAijnJwIo3ycHKJkYOmqZGDpqmRg6apkYOmqZGDpqmRg6apkYOmpTKkcpuCfTKlInDyvcKvcogif/JoIn/yaCJ/8m")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_s18qp")
+shadow_mesh = SubResource("ArrayMesh_gxo4b")
 
 [node name="FlickerOmni" instance=ExtResource("1_jro0j")]
 script = ExtResource("2_auf42")
+speed_scale = 1.0
+play_animation = true
+move_speed_scale = 1.0
+play_move_animation = false
+vose_enabled = true
+vose_whd = Vector3(1, 1, 1)
 auto_vose_abb = true
+sway_padding = Vector3(1, 1, 1)
+apply_auto_vose_abb_now = false
 _animated_energy_strength = 6.0
 _animated_range_strength = 2.387
 
 [node name="OmniLight3D" parent="." index="0"]
-light_color = Color(1, 0.61960787, 0.28627452, 1)
 light_energy = 22.8
 omni_range = 8.5932
-
-[node name="PuffFog" parent="." index="1"]
-process_mode = 4
-visible = false
-particles_amount = 10
 
 [node name="FlickerAnimator" type="AnimationPlayer" parent="." index="2"]
 unique_name_in_owner = true
@@ -240,18 +242,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_04rcq")
 }
 
-[node name="test_visuals" type="Node3D" parent="." index="4"]
-unique_name_in_owner = true
-transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, 0, 0, 0)
-visible = false
+[node name="test_visual_base" parent="test_visuals_base" index="0"]
+mesh = SubResource("ArrayMesh_818gi")
 
-[node name="test_visual" type="MeshInstance3D" parent="test_visuals" index="0"]
-transform = Transform3D(2.0089822, 0, 0, 0, 2.0089822, 0, 0, 0, 2.0089822, 1.4071951, -0.45511734, 1.7227342)
-gi_mode = 0
-mesh = SubResource("ArrayMesh_bcn8a")
-skeleton = NodePath("")
+[node name="test_visual_base2" parent="test_visuals_base" index="1"]
+mesh = SubResource("ArrayMesh_818gi")
 
-[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="." index="7"]
+[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="." index="5"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030094266, 0, 0)
 aabb = AABB(-4.6, -4.6, -4.6, 9.2, 9.2, 9.2)
+enable_node_path = NodePath("")

@@ -2,7 +2,7 @@
 extends BaseCharBones
 class_name EnemyBones
 
-@onready var general_skeleton: Skeleton3D = %GeneralSkeleton
+@export var general_skeleton: Skeleton3D
 
 
 func accept_bones():

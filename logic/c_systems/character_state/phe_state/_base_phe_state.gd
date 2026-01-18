@@ -10,7 +10,7 @@ var phe_feelings: PHEFeelings
 var combat: PHECombat
 var animator_manager: EnemyAnimatorManager
 var e_movement: EnemyMovement
-var anim_params_container: EAnimParamsContainer
+var anim_params_container: BaseAnimParamsContainer
 var config: PHEConfig
 
 

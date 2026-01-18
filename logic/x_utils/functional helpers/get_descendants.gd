@@ -77,8 +77,9 @@ static func markers_3d(node: Node) -> Array[Marker3D]:
 	return TypeCast.array_of_marker_3d(r)
 
 
-static func rigid_bodies(node: Node) -> Array:
-	return _get_descendants_filtered(node, func(n): return n is RigidBody3D)
+static func rigid_bodies(node: Node) -> Array[RigidBody3D]:
+	var r := _get_descendants_filtered(node, func(n): return n is RigidBody3D)
+	return TypeCast.array_of_rigid_body_3d(r)
 
 static func areas(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is Area3D)
@@ -128,6 +129,12 @@ static func audio_stream_players_3D(node: Node, skip_subscenes: bool = false) ->
 
 # region: custom nodes
 
+
+static func break_static_parents(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is BreakStaticParent)
+	return r
+
+
 static func breakable_areas(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BreakableArea)
 
@@ -146,6 +153,19 @@ static func base_character_movement(node: Node, only_one: bool = false) -> Array
 static func base_combat(node: Node, only_one: bool = false) -> Array[BaseCombat]:
 	var r := _get_descendants_filtered(node, func(n): return n is BaseCombat, false, false, only_one)
 	return TypeCast.array_of_base_combat(r)
+
+static func base_sfx_system(node: Node) -> Array[BaseSFXSystem]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseSFXSystem)
+	return TypeCast.array_of_base_sfx_system(r)
+
+static func character_sfx_system(node: Node) -> Array[CharacterSFXSystem]:
+	var r := _get_descendants_filtered(node, func(n): return n is CharacterSFXSystem)
+	return TypeCast.array_of_character_sfx_system(r)
+
+
+static func base_anim_params_container(node: Node, only_one: bool = false) -> Array[BaseAnimParamsContainer]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseAnimParamsContainer, false, false, only_one)
+	return TypeCast.array_of_base_anim_params_container(r)
 
 
 static func base_weapons(node: Node) -> Array[BaseWeapon]:

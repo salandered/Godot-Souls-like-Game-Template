@@ -26,7 +26,7 @@ class ThrowPack:
 		self.direction = direction_
 	func _to_string() -> String:
 		return "ThrowPack(dir %s, anim %s, peak/end/extra %.1f/%.1f/%.1f)" % [direction, pp.anim_n(anim_id), peak_speed, end_speed, extra_start_speed]
-
+		
 
 var DEF_PEAK_SP: float = 8.5
 var DEF_END_SP: float = 0.0
@@ -43,6 +43,8 @@ var curr_throw: ThrowPack
 
 var speed_x_interpolator := HillInterpolator.new()
 
+
+var _boost_value := 0.0
 
 func initialise() -> void:
 	default_sp.ANGULAR_SPEED = 0.1
@@ -62,7 +64,12 @@ func _decide_on_mode_on_enter():
 		_reason = "no hit data found => default"
 		__log_decide_on_mode(_reason)
 		return
-		
+	if hit.anim_id == SITSKA.sit_attack:
+		_boost_value = 6.0
+	else:
+		_boost_value = 0.0
+		 
+
 	var _attack_dir := ReactionOnHit.get_attack_dir_by_enemy_attack(hit.anim_id)
 	match _attack_dir:
 		AttackDirection.Dir.LEFT:
@@ -110,9 +117,9 @@ func on_enter_action(input_: InputPackage):
 	var _interpolator_dur := _calculate_interpolator_duration(anim)
 	
 	speed_x_interpolator.initialise(
-		_inherited_speed + curr_throw.extra_start_speed,
-		curr_throw.end_speed,
-		curr_throw.peak_speed,
+		_inherited_speed + curr_throw.extra_start_speed + _boost_value / 2,
+		curr_throw.end_speed + _boost_value / 2,
+		curr_throw.peak_speed + _boost_value * 2,
 		flying_x_curve,
 		_interpolator_dur)
 

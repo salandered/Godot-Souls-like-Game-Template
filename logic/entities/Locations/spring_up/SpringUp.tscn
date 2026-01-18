@@ -22,6 +22,7 @@ area_capsule_height = 1.4
 unique_name_in_owner = true
 label_text = "Here would be the stairs ..."
 label_y_offset = 1.0
+area_sphere_radius = 2.5
 
 [node name="__RemoteInteractArea" type="RemoteTransform3D" parent="."]
 remote_path = NodePath("../InteractArea")

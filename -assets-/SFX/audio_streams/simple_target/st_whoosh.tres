@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://k0x8g4x3meou" path="res://-assets-/SFX/sources/400/swipe_whoosh.wav" id="1_0hvpb"]
 
 [resource]
-random_pitch = 1.05
+random_pitch = 1.2
 random_volume_offset_db = 0.2
 streams_count = 1
 stream_0/stream = ExtResource("1_0hvpb")

@@ -113,6 +113,7 @@ static func ipick_weighted(weighted_values: Dictionary[int, float]) -> int:
 	
 	return pick_weighted(keys, values)
 
+
 static func spick_weighted(weighted_values: Dictionary[String, float]) -> String:
 	if weighted_values.is_empty():
 		return ""

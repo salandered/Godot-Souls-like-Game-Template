@@ -255,6 +255,8 @@ func on_enter_state(input_: InputPackage):
 func _on_exit_state() -> void:
 	queued_state.reset()
 	forced_state.reset()
+	# just in case. there r issued when because of state interruption weapon is attacking after the attack state
+	player_sm.combat.reset_all_weapons()
 	on_exit_state()
 	
 func on_exit_state() -> void:

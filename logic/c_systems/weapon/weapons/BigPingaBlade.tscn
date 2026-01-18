@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://c3objh8m5a340" path="res://-assets-/GLB-items/pinga/pinga_WRAP.tscn" id="8_y2ow7"]
 [ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/combat/weapon_sfx/WeaponSfx.tscn" id="10_kngnu"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
-radius = 0.61865234
-height = 2.6
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jha5w"]
+radius = 0.5703125
+height = 2.1473145
 
 [node name="BigPingaBlade" type="Node3D"]
 script = ExtResource("1_hj5gq")
@@ -19,8 +19,8 @@ collision_layer = 16
 collision_mask = 104
 
 [node name="HurtBoxCol4" type="CollisionShape3D" parent="WeaponHurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.056679968, 1.1863165, 0.07279478)
-shape = SubResource("CapsuleShape3D_hj5gq")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05667999, 1.4126592, 0.07279478)
+shape = SubResource("CapsuleShape3D_jha5w")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
 [node name="Visuals" type="Node3D" parent="."]

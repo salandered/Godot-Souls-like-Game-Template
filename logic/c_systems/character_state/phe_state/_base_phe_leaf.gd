@@ -44,7 +44,9 @@ func is_ended() -> bool:
 func _on_enter_state() -> void:
 	mark_enter_state()
 	PREV_LEAF = me.update_curr_leaf_state(self)
-	me.update_state_history(state_name)
+
+	if me.record_state_history:
+		me.update_state_history(state_name)
 
 
 	if __is_entered:
@@ -212,13 +214,8 @@ func is_vulnerable() -> bool:
 
 func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
 	var _r: bool = false
-	match weapon_name:
-		WeaponID.big_pinga_blade:
-			_r = anim_params_container.is_weapon_hurts(anim.native_anim, effective_time_spent_unscaled())
-		WeaponID.bg_aura_weapon:
-			_r = anim_params_container.is_aura_hurts(anim.native_anim, effective_time_spent_unscaled())
-		_:
-			__log_warn_v2("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
+	_r = anim_params_container.is_weapon_hurts(weapon_name, anim.native_anim, effective_time_spent_unscaled())
+
 	if _r and __log:
 		print_.prefix("// HURT")
 	return _r

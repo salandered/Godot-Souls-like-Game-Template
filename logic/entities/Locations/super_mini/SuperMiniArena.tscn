@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=4 uid="uid://dmkxcwge6jddy"]
+[gd_scene load_steps=70 format=4 uid="uid://dmkxcwge6jddy"]
 
 [ext_resource type="Script" uid="uid://b0skg43os71r" path="res://logic/c_systems/level/super_mini_arena.gd" id="1_im38e"]
 [ext_resource type="Texture2D" uid="uid://fpblynq7d0vp" path="res://-assets-/materials-shared/x_hdri/Panorama_Mars_02-2048x1024.png" id="2_chotk"]
@@ -32,11 +32,12 @@
 [ext_resource type="PackedScene" uid="uid://cvorqwtm6njov" path="res://logic/entities/Items/chest/HealthChest.tscn" id="29_1aflu"]
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="30_h8i3b"]
 [ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/Items/lever/BaseLever.tscn" id="31_chotk"]
-[ext_resource type="Texture2D" uid="uid://bkgjcuak1rf2m" path="res://-assets-/GLB-char/godot_plush/godot_plush_standing_godot_plush_basecolor.jpg" id="33_1yct3"]
-[ext_resource type="Material" uid="uid://b68u2dl4qlooi" path="res://-assets-/materials-shared/solid/shell_mat.tres" id="34_uya8o"]
-[ext_resource type="Script" path="res://-assets-/GLB-char/godot_plush/plush_factory.gd" id="35_2avtx"]
+[ext_resource type="Material" uid="uid://corbh7usys0xj" path="res://-assets-/materials-shared/metal/I_metal_025/I_Metal025_1K-JPG_Reimp.tres" id="33_jio1o"]
+[ext_resource type="Material" uid="uid://bhr45qjda5agp" path="res://-assets-/materials-shared/metal/I_metal_026/I_Metal026_4d1K-JPG_Reimp.tres" id="34_btncm"]
+[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://-assets-/GLB-char/godot_plush/plush_factory.gd" id="35_2avtx"]
 [ext_resource type="PackedScene" uid="uid://dxy0cbviyqsdm" path="res://-assets-/GLB-char/godot_plush/BigPlush.tscn" id="36_1yct3"]
 [ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://-assets-/GLB-char/godot_plush/MiniPlush.tscn" id="37_o1g2b"]
+[ext_resource type="PackedScene" uid="uid://n6qn03bh8mk2" path="res://logic/entities/Items/lever/PlushLever.tscn" id="38_jio1o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q0bx5"]
 panorama = ExtResource("2_chotk")
@@ -168,7 +169,7 @@ normal_texture = ExtResource("9_ltlhp")
 uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ivdt"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_prisi"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8frg4"]
 data = PackedVector3Array(1.1393077, -2.4890525, 2.2488225, 0.2664328, -2.06216, 1.4582741, 1.2233143, -2.1757061, 1.1174831, 1.1311368, -0.15411347, 0.73354924, 0.19813485, -0.75667244, 1.1310966, 0.21445367, 0.70352244, 1.155564, 1.2056141, 2.0251627, 1.0481377, 1.0827985, 2.847358, 1.9844388, 1.7857345, 2.847685, 0.8721219, 1.1311368, -0.15411347, 0.73354924, 1.2056141, 2.0251627, 1.0481377, 1.4086822, 1.8669823, -0.039519913, 1.2205505, -2.1202743, -1.1948137, 1.0287303, -2.4888299, -2.3628378, 1.8057138, -2.4888058, -1.2542554, 0.47971725, 0.63909584, -1.1034899, -0.19116211, 0.64669603, -1.112776, 0.10564121, -0.7778669, -1.209385, -0.9524789, -2.0212693, 1.1037726, -1.5341159, -2.4879186, 2.199994, -1.6062894, -2.4889753, -0.006687706, -1.201103, 2.2584753, 0.8978034, -0.8802767, 0.7827693, 0.7651224, -1.0840579, 1.3332013, -0.040807985, -0.8245376, 2.844537, 1.9232953, -0.74401736, 2.0355494, 1.3319839, -1.201103, 2.2584753, 0.8978034, -1.201103, 2.2584753, 0.8978034, -1.0840579, 1.3332013, -0.040807985, -1.4348187, 2.4358997, -0.44374347, -0.74401736, 2.0355494, 1.3319839, -0.8802767, 0.7827693, 0.7651224, -1.201103, 2.2584753, 0.8978034, 0.21445367, 0.70352244, 1.155564, -0.8802767, 0.7827693, 0.7651224, -0.74401736, 2.0355494, 1.3319839, 0.10564121, -0.7778669, -1.209385, -0.19116211, 0.64669603, -1.112776, -0.82461244, 0.033075158, -0.75432676, 1.4342502, -2.015339, -0.06936446, 1.4086822, 1.8669823, -0.039519913, 1.0993793, -0.43521056, -0.8179538, -1.0840579, 1.3332013, -0.040807985, -0.8900099, 1.9609883, -1.0054011, -1.4348187, 2.4358997, -0.44374347, -0.82461244, 0.033075158, -0.75432676, -0.8900099, 1.9609883, -1.0054011, -1.0840579, 1.3332013, -0.040807985, 1.4342502, -2.015339, -0.06936446, 1.2233143, -2.1757061, 1.1174831, 1.1311368, -0.15411347, 0.73354924, -1.0667417, 2.8454123, -1.6804545, -1.4348187, 2.4358997, -0.44374347, -0.8900099, 1.9609883, -1.0054011, 0.06644958, 2.1702065, -1.5065535, -1.0667417, 2.8454123, -1.6804545, -0.8900099, 1.9609883, -1.0054011, -1.0667417, 2.8454123, -1.6804545, -0.25738198, 2.8470693, -1.9604673, 1.7053628, 2.8473084, -0.82834905, 1.7053628, 2.8473084, -0.82834905, -0.25738198, 2.8470693, -1.9604673, 1.312329, 2.847974, -1.7735176, -1.6746826, 2.847333, 1.0410234, -1.0667417, 2.8454123, -1.6804545, 1.7053628, 2.8473084, -0.82834905, -0.8245376, 2.844537, 1.9232953, -1.6746826, 2.847333, 1.0410234, 1.0827985, 2.847358, 1.9844388, -0.9377675, -2.0439727, -1.1940422, -1.6062894, -2.4889753, -0.006687706, -1.503044, -2.4827032, -2.2367, -1.503044, -2.4827032, -2.2367, -1.6062894, -2.4889753, -0.006687706, 1.8057138, -2.4888058, -1.2542554, 1.0287303, -2.4888299, -2.3628378, -1.503044, -2.4827032, -2.2367, 1.8057138, -2.4888058, -1.2542554, -1.5341159, -2.4879186, 2.199994, 1.826325, -2.4885368, 1.0349357, -1.6062894, -2.4889753, -0.006687706, 1.4342502, -2.015339, -0.06936446, 1.826325, -2.4885368, 1.0349357, 1.2233143, -2.1757061, 1.1174831, 0.2664328, -2.06216, 1.4582741, 1.1393077, -2.4890525, 2.2488225, -1.5341159, -2.4879186, 2.199994, 1.4342502, -2.015339, -0.06936446, 1.1311368, -0.15411347, 0.73354924, 1.4086822, 1.8669823, -0.039519913, 1.2056141, 2.0251627, 1.0481377, 1.7857345, 2.847685, 0.8721219, 1.4086822, 1.8669823, -0.039519913, 0.5003786, 1.9259154, 1.4056768, 1.1311368, -0.15411347, 0.73354924, 0.21445367, 0.70352244, 1.155564, 0.5003786, 1.9259154, 1.4056768, 1.2056141, 2.0251627, 1.0481377, 1.1311368, -0.15411347, 0.73354924, 0.5003786, 1.9259154, 1.4056768, 0.21445367, 0.70352244, 1.155564, -0.74401736, 2.0355494, 1.3319839, 0.47971725, 0.63909584, -1.1034899, 1.1895409, 2.0802805, -1.0235589, 0.06644958, 2.1702065, -1.5065535, 0.47971725, 0.63909584, -1.1034899, 1.0993793, -0.43521056, -0.8179538, 1.1895409, 2.0802805, -1.0235589, 1.2056141, 2.0251627, 1.0481377, 0.5003786, 1.9259154, 1.4056768, 1.0827985, 2.847358, 1.9844388, 0.21216135, -1.936057, -1.5720006, 1.0287303, -2.4888299, -2.3628378, 1.2205505, -2.1202743, -1.1948137, 1.312329, 2.847974, -1.7735176, -0.25738198, 2.8470693, -1.9604673, 0.06644958, 2.1702065, -1.5065535, 1.0993793, -0.43521056, -0.8179538, 0.47971725, 0.63909584, -1.1034899, 0.10564121, -0.7778669, -1.209385, 1.1895409, 2.0802805, -1.0235589, 1.312329, 2.847974, -1.7735176, 0.06644958, 2.1702065, -1.5065535, 0.47971725, 0.63909584, -1.1034899, 0.06644958, 2.1702065, -1.5065535, -0.19116211, 0.64669603, -1.112776, -1.4348187, 2.4358997, -0.44374347, -1.6746826, 2.847333, 1.0410234, -1.201103, 2.2584753, 0.8978034, -1.4348187, 2.4358997, -0.44374347, -1.7130096, 2.845521, -0.896159, -1.6746826, 2.847333, 1.0410234, -0.9524789, -2.0212693, 1.1037726, -1.6062894, -2.4889753, -0.006687706, -1.2116985, -1.7076079, 0.03632593, -0.87889576, -0.80987996, 0.80109835, -1.0840579, 1.3332013, -0.040807985, -0.8802767, 0.7827693, 0.7651224, -0.87889576, -0.80987996, 0.80109835, 0.21445367, 0.70352244, 1.155564, 0.19813485, -0.75667244, 1.1310966, -0.87889576, -0.80987996, 0.80109835, -0.8802767, 0.7827693, 0.7651224, 0.21445367, 0.70352244, 1.155564, -1.201103, 2.2584753, 0.8978034, -1.6746826, 2.847333, 1.0410234, -0.8245376, 2.844537, 1.9232953, -0.9524789, -2.0212693, 1.1037726, 0.2664328, -2.06216, 1.4582741, -1.5341159, -2.4879186, 2.199994, -1.503044, -2.4827032, -2.2367, 0.21216135, -1.936057, -1.5720006, -0.9377675, -2.0439727, -1.1940422, -1.503044, -2.4827032, -2.2367, 1.0287303, -2.4888299, -2.3628378, 0.21216135, -1.936057, -1.5720006, -0.8900099, 1.9609883, -1.0054011, -0.19116211, 0.64669603, -1.112776, 0.06644958, 2.1702065, -1.5065535, -0.8900099, 1.9609883, -1.0054011, -0.82461244, 0.033075158, -0.75432676, -0.19116211, 0.64669603, -1.112776, 0.06644958, 2.1702065, -1.5065535, -0.25738198, 2.8470693, -1.9604673, -1.0667417, 2.8454123, -1.6804545, 1.4342502, -2.015339, -0.06936446, 1.8057138, -2.4888058, -1.2542554, 1.826325, -2.4885368, 1.0349357, 1.4342502, -2.015339, -0.06936446, 1.2205505, -2.1202743, -1.1948137, 1.8057138, -2.4888058, -1.2542554, 1.4086822, 1.8669823, -0.039519913, 1.7053628, 2.8473084, -0.82834905, 1.1895409, 2.0802805, -1.0235589, 1.4086822, 1.8669823, -0.039519913, 1.7857345, 2.847685, 0.8721219, 1.7053628, 2.8473084, -0.82834905, -0.8245376, 2.844537, 1.9232953, 0.5003786, 1.9259154, 1.4056768, -0.74401736, 2.0355494, 1.3319839, -0.8245376, 2.844537, 1.9232953, 1.0827985, 2.847358, 1.9844388, 0.5003786, 1.9259154, 1.4056768, -1.2116985, -1.7076079, 0.03632593, -1.6062894, -2.4889753, -0.006687706, -0.9377675, -2.0439727, -1.1940422, 0.2664328, -2.06216, 1.4582741, 1.1311368, -0.15411347, 0.73354924, 1.2233143, -2.1757061, 1.1174831, 0.2664328, -2.06216, 1.4582741, 0.19813485, -0.75667244, 1.1310966, 1.1311368, -0.15411347, 0.73354924, 1.0993793, -0.43521056, -0.8179538, 1.4086822, 1.8669823, -0.039519913, 1.1895409, 2.0802805, -1.0235589, 0.21216135, -1.936057, -1.5720006, 1.0993793, -0.43521056, -0.8179538, 0.10564121, -0.7778669, -1.209385, 0.21216135, -1.936057, -1.5720006, 1.2205505, -2.1202743, -1.1948137, 1.0993793, -0.43521056, -0.8179538, -0.87889576, -0.80987996, 0.80109835, -1.2116985, -1.7076079, 0.03632593, -1.0840579, 1.3332013, -0.040807985, -0.87889576, -0.80987996, 0.80109835, -0.9524789, -2.0212693, 1.1037726, -1.2116985, -1.7076079, 0.03632593, -0.82461244, 0.033075158, -0.75432676, -1.2116985, -1.7076079, 0.03632593, -0.9377675, -2.0439727, -1.1940422, -0.82461244, 0.033075158, -0.75432676, -1.0840579, 1.3332013, -0.040807985, -1.2116985, -1.7076079, 0.03632593, 1.4342502, -2.015339, -0.06936446, 1.0993793, -0.43521056, -0.8179538, 1.2205505, -2.1202743, -1.1948137, -0.9524789, -2.0212693, 1.1037726, 0.19813485, -0.75667244, 1.1310966, 0.2664328, -2.06216, 1.4582741, -0.9524789, -2.0212693, 1.1037726, -0.87889576, -0.80987996, 0.80109835, 0.19813485, -0.75667244, 1.1310966, -0.9377675, -2.0439727, -1.1940422, 0.10564121, -0.7778669, -1.209385, -0.82461244, 0.033075158, -0.75432676, -0.9377675, -2.0439727, -1.1940422, 0.21216135, -1.936057, -1.5720006, 0.10564121, -0.7778669, -1.209385, 1.1895409, 2.0802805, -1.0235589, 1.7053628, 2.8473084, -0.82834905, 1.312329, 2.847974, -1.7735176, -1.4348187, 2.4358997, -0.44374347, -1.0667417, 2.8454123, -1.6804545, -1.7130096, 2.845521, -0.896159, 1.2233143, -2.1757061, 1.1174831, 1.826325, -2.4885368, 1.0349357, 1.1393077, -2.4890525, 2.2488225, 1.1393077, -2.4890525, 2.2488225, 1.826325, -2.4885368, 1.0349357, -1.5341159, -2.4879186, 2.199994, -1.6746826, 2.847333, 1.0410234, -1.7130096, 2.845521, -0.896159, -1.0667417, 2.8454123, -1.6804545, 1.7053628, 2.8473084, -0.82834905, 1.7857345, 2.847685, 0.8721219, 1.0827985, 2.847358, 1.9844388, 1.7053628, 2.8473084, -0.82834905, 1.0827985, 2.847358, 1.9844388, -1.6746826, 2.847333, 1.0410234, 1.826325, -2.4885368, 1.0349357, 1.8057138, -2.4888058, -1.2542554, -1.6062894, -2.4889753, -0.006687706)
@@ -350,21 +351,6 @@ density = 0.4
 albedo = Color(0.6900825, 0.52893853, 0.4131163, 1)
 edge_fade = 3.675831
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qih1a"]
-resource_name = "godot_plush"
-cull_mode = 2
-albedo_texture = ExtResource("33_1yct3")
-roughness_texture_channel = 1
-normal_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kb266"]
-resource_name = "godot_plush"
-cull_mode = 2
-albedo_texture = ExtResource("33_1yct3")
-roughness_texture_channel = 1
-normal_enabled = true
-uv1_triplanar = true
-
 [node name="super mini arena" type="Node3D"]
 script = ExtResource("1_im38e")
 
@@ -522,7 +508,7 @@ delete_mesh_instance = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.781342, -9.265577, -7.8624325)
 
 [node name="CollisionShape3D" parent="FloorWalls/SecretLevel/WoodenFloorBaked2/CSGBakedMeshInstance3D/CreateRigidParent/MonitorPlEnterSigArea" index="0"]
-shape = SubResource("CapsuleShape3D_3ivdt")
+shape = SubResource("CapsuleShape3D_prisi")
 
 [node name="SecretEnemy" parent="FloorWalls/SecretLevel" node_paths=PackedStringArray("player") instance=ExtResource("11_dljkj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.984698, 0)
@@ -566,6 +552,440 @@ transform = Transform3D(-0.09496515, 0, 1.1962365, 0, 1.2, 0, -1.1962365, 0, -0.
 
 [node name="SpeedIncreaseChest" parent="FloorWalls/SecretLevel/chests" instance=ExtResource("14_kb266")]
 transform = Transform3D(0.10798739, 0, 1.1951313, 0, 1.2000002, 0, -1.1951313, 0, 0.10798739, -17.754984, -3.9784288, 9.196397)
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="targets" type="Node3D" parent="Props"]
+
+[node name="Target" parent="Props/targets" instance=ExtResource("15_vhgou")]
+transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.42274475, 5.878498, 0.15576601, 19.896137)
+
+[node name="Target3" parent="Props/targets" instance=ExtResource("15_vhgou")]
+transform = Transform3D(-0.8328634, 0, -0.5534787, 0, 1, 0, 0.5534787, 0, -0.8328634, -10.238488, 0.1265161, 19.983622)
+
+[node name="Target2" parent="Props/targets" instance=ExtResource("15_vhgou")]
+transform = Transform3D(-0.16971064, 0, -0.9854939, 0, 1, 0, 0.9854939, 0, -0.16971064, 16.741852, 0.21691298, 8.755618)
+
+[node name="JustColumns" type="Node3D" parent="Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.53088, -1.703414, -51.601074)
+
+[node name="columns" type="Node3D" parent="Props/JustColumns"]
+
+[node name="column" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.15745, 4.1409965, 41.60286)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column"]
+shape = SubResource("ConcavePolygonShape3D_8frg4")
+
+[node name="column" type="MeshInstance3D" parent="Props/JustColumns/columns/column"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23940659, 1.9073486e-06)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_blvmn")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent" parent="Props/JustColumns/columns/column" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14511967, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column/BreakStaticParent" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column2" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.36395, 4.1409965, 41.75658)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column2"]
+shape = SubResource("ConcavePolygonShape3D_8frg4")
+
+[node name="column" type="MeshInstance3D" parent="Props/JustColumns/columns/column2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23940659, 1.9073486e-06)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_blvmn")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent3" parent="Props/JustColumns/columns/column2" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13345718, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column2/BreakStaticParent3" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column3" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.257252, 4.1409965, 40.98798)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column3"]
+shape = SubResource("ConcavePolygonShape3D_8frg4")
+
+[node name="column" type="MeshInstance3D" parent="Props/JustColumns/columns/column3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23940659, 1.9073486e-06)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_blvmn")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent9" parent="Props/JustColumns/columns/column3" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15120506, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column3/BreakStaticParent9" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_004" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.03503, 3.8370538, 37.51966)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15136766, 0)
+shape = SubResource("ConcavePolygonShape3D_0pmsy")
+
+[node name="column_004" type="MeshInstance3D" parent="Props/JustColumns/columns/column_004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8146973e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_6umhm")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent8" parent="Props/JustColumns/columns/column_004" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15736926, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_004/BreakStaticParent8" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_012" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.860638, 3.8370538, 65.0837)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_012"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15136766, 0)
+shape = SubResource("ConcavePolygonShape3D_0pmsy")
+
+[node name="column_004" type="MeshInstance3D" parent="Props/JustColumns/columns/column_012"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8146973e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_6umhm")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent6" parent="Props/JustColumns/columns/column_012" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13575268, 0, 0.018021584)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_012/BreakStaticParent6" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_002" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.558193, 4.0548906, 52.49839)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_002"]
+shape = SubResource("ConcavePolygonShape3D_qb6ni")
+
+[node name="column_002" type="MeshInstance3D" parent="Props/JustColumns/columns/column_002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_rc6u6")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent7" parent="Props/JustColumns/columns/column_002" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15185934, 0, -0.00020933151)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_002/BreakStaticParent7" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_003" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.48404, 4.0548925, 63.48151)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_003"]
+shape = SubResource("ConcavePolygonShape3D_7esj5")
+
+[node name="column_003" type="MeshInstance3D" parent="Props/JustColumns/columns/column_003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_bmf1p")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent5" parent="Props/JustColumns/columns/column_003" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11626744, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_003/BreakStaticParent5" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_010" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.435272, 4.0548925, 65.163376)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_010"]
+shape = SubResource("ConcavePolygonShape3D_7esj5")
+
+[node name="column_003" type="MeshInstance3D" parent="Props/JustColumns/columns/column_010"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_bmf1p")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent6" parent="Props/JustColumns/columns/column_010" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102752686, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_010/BreakStaticParent6" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_011" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.716076, 4.0548925, 64.70333)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_011"]
+shape = SubResource("ConcavePolygonShape3D_7esj5")
+
+[node name="column_003" type="MeshInstance3D" parent="Props/JustColumns/columns/column_011"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24863577, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_bmf1p")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent4" parent="Props/JustColumns/columns/column_011" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14417648, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_011/BreakStaticParent4" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_005" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.536251, 4.054894, 64.21397)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_005"]
+shape = SubResource("ConcavePolygonShape3D_pu2kj")
+
+[node name="column_005" type="MeshInstance3D" parent="Props/JustColumns/columns/column_005"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_wacwu")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent6" parent="Props/JustColumns/columns/column_005" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10677242, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_005/BreakStaticParent6" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_006" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.858135, 4.054894, 52.186348)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_006"]
+shape = SubResource("ConcavePolygonShape3D_pu2kj")
+
+[node name="column_005" type="MeshInstance3D" parent="Props/JustColumns/columns/column_006"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_wacwu")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent7" parent="Props/JustColumns/columns/column_006" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15643024, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_006/BreakStaticParent7" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_009" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.279743, 4.054894, 41.0334)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_009"]
+shape = SubResource("ConcavePolygonShape3D_pu2kj")
+
+[node name="column_005" type="MeshInstance3D" parent="Props/JustColumns/columns/column_009"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_wacwu")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent8" parent="Props/JustColumns/columns/column_009" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13361931, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_009/BreakStaticParent8" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_007" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.76295, 4.054894, 52.41763)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_007"]
+shape = SubResource("ConcavePolygonShape3D_pu2kj")
+
+[node name="column_005" type="MeshInstance3D" parent="Props/JustColumns/columns/column_007"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_wacwu")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent2" parent="Props/JustColumns/columns/column_007" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1624918, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_007/BreakStaticParent2" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="column_008" type="StaticBody3D" parent="Props/JustColumns/columns"]
+transform = Transform3D(1.875066, 0, 0, 0, 1.875066, 0, 0, 0, 1.875066, -40.787315, 2.0760374, 30.743242)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_008"]
+shape = SubResource("ConcavePolygonShape3D_pu2kj")
+
+[node name="column_005" type="MeshInstance3D" parent="Props/JustColumns/columns/column_008"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
+gi_mode = 2
+mesh = SubResource("ArrayMesh_wacwu")
+skeleton = NodePath("")
+
+[node name="BreakStaticParent5" parent="Props/JustColumns/columns/column_008" instance=ExtResource("18_ilsrh")]
+transform = Transform3D(0.5333145, 0, 0, 0, 0.5333145, 0, 0, 0, 0.5333145, 0, 0, 0)
+shattered_column_scene = ExtResource("17_8ckdw")
+
+[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_008/BreakStaticParent5" index="0"]
+area_capsule_radius = 1.34
+area_capsule_height = 6.0
+
+[node name="CrateProps" type="Node3D" parent="Props"]
+
+[node name="DarkCratePile3" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
+transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, -16.221338, 0.17873092, 0)
+
+[node name="DarkCratePile4" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
+transform = Transform3D(-0.3614781, 0, 0.9323807, 0, 1, 0, -0.9323807, 0, -0.3614781, 6.339593, 0.30274826, -4.110747)
+
+[node name="DarkCratePile5" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
+transform = Transform3D(0.752369, 0, 0.658742, 0, 1, 0, -0.658742, 0, 0.752369, -14.340294, 0.17873092, 10.844256)
+
+[node name="DarkCrateColumn2" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.909291, 0.31437767, -14.589818)
+
+[node name="DarkCrateBigPile" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5247266, 0.2899922, 5.9834566)
+
+[node name="DarkCrateBigPile3" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
+transform = Transform3D(-0.40378484, 0, -0.914854, 0, 1, 0, 0.914854, 0, -0.40378484, 7.7452984, 0.2899922, 2.458075)
+
+[node name="DarkCrateBigPile4" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
+transform = Transform3D(-0.40378484, 0, -0.914854, 0, 1, 0, 0.914854, 0, -0.40378484, -2.145647, 0.2899922, -5.231207)
+
+[node name="DarkCrateBigPile2" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.435251, 0.1734268, -5.1467543)
+
+[node name="DarkCrateColumn4" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5731354, 0.31437767, 16.722336)
+
+[node name="DarkCrateColumn7" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.91271096, 0.31437767, 20.458838)
+
+[node name="DarkCrateColumn8" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20472962, 0.31437767, 19.387754)
+
+[node name="DarkCrateColumn6" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2609978, 0.31437767, -9.124448)
+
+[node name="DarkCrateColumn5" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.649536, 5.550741, 13.262056)
+
+[node name="DarkCratePile" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
+transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, 3.7142782, 0.23003387, -7.970696)
+
+[node name="DarkCratePile2" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
+transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, 11.246589, 5.620642, -10.779883)
+
+[node name="DarkCrate" parent="Props/CrateProps" instance=ExtResource("23_5rawr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.358156, 1.757438, -0.3584324)
+
+[node name="DarkCrate2" parent="Props/CrateProps" instance=ExtResource("23_5rawr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.666918, 0.8294419, -9.635433)
+
+[node name="DarkCrate4" parent="Props/CrateProps" instance=ExtResource("23_5rawr")]
+transform = Transform3D(0.5997082, 0, -0.80021876, 0, 1, 0, 0.80021876, 0, 0.5997082, -14.097704, 0.8294419, -7.9714293)
+
+[node name="DarkCrate8" parent="Props/CrateProps" instance=ExtResource("23_5rawr")]
+transform = Transform3D(-0.31303114, 0, -0.9497428, 0, 1, 0, 0.9497428, 0, -0.31303114, -13.541292, 0.8294419, -7.323659)
+
+[node name="DarkCrate5" parent="Props/CrateProps" instance=ExtResource("23_5rawr")]
+transform = Transform3D(0.5997082, 0, -0.80021876, 0, 1, 0, 0.80021876, 0, 0.5997082, -12.309492, 5.8688245, 1.3225968)
+
+[node name="DarkCrate6" parent="Props/CrateProps" instance=ExtResource("23_5rawr")]
+transform = Transform3D(0.5997082, 0, -0.80021876, 0, 1, 0, 0.80021876, 0, 0.5997082, -9.738072, 5.7253637, 13.685379)
+
+[node name="Levers" type="Node3D" parent="Props"]
+
+[node name="BaseLever" parent="Props/Levers" instance=ExtResource("31_chotk")]
+transform = Transform3D(1.83, 0, 0, 0, 1.83, 0, 0, 0, 1.83, 13.295738, -4.0366945, 15.826452)
+
+[node name="InteractArea" parent="Props/Levers/BaseLever" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.295738, -3.5858402, 15.826452)
+label_text = "Are you sure?"
+label_y_offset = 1.2
+
+[node name="CleanUpLever" parent="Props/Levers" instance=ExtResource("31_chotk")]
+transform = Transform3D(0.9999965, 0, -0.0026878472, 0, 1, 0, 0.0026878472, 0, 0.9999965, -16.958176, 0.13732302, 18.304913)
+
+[node name="lever_base" parent="Props/Levers/CleanUpLever/Visuals" index="0"]
+material_override = ExtResource("33_jio1o")
+
+[node name="lever_platform" parent="Props/Levers/CleanUpLever/Visuals" index="1"]
+material_override = ExtResource("33_jio1o")
+
+[node name="lever_handle" parent="Props/Levers/CleanUpLever/Visuals/HandlePivot" index="0"]
+material_override = ExtResource("34_btncm")
+
+[node name="InteractArea" parent="Props/Levers/CleanUpLever" index="4"]
+transform = Transform3D(0.9999918, 0, -0.0026878347, 0, 1, 0, 0.0026878347, 0, 0.9999918, -16.958176, 0.38369155, 18.304913)
+label_text = "Clean up a little"
+
+[node name="BlowUpLever" parent="Props/Levers" instance=ExtResource("31_chotk")]
+transform = Transform3D(0.99265844, 0, 0.120951235, 0, 1, 0, -0.120951235, 0, 0.99265844, -14.894202, 0.13732302, 18.340843)
+
+[node name="lever_base" parent="Props/Levers/BlowUpLever/Visuals" index="0"]
+material_override = ExtResource("33_jio1o")
+
+[node name="lever_platform" parent="Props/Levers/BlowUpLever/Visuals" index="1"]
+material_override = ExtResource("33_jio1o")
+
+[node name="lever_handle" parent="Props/Levers/BlowUpLever/Visuals/HandlePivot" index="0"]
+material_override = ExtResource("34_btncm")
+
+[node name="InteractArea" parent="Props/Levers/BlowUpLever" index="4"]
+transform = Transform3D(0.9926585, 0, 0.12095124, 0, 1, 0, -0.12095124, 0, 0.9926585, -14.894202, 0.38369155, 18.340843)
+label_text = "Destroy a little"
+
+[node name="chests" type="Node3D" parent="Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.533286)
+
+[node name="HealtChest6" parent="Props/chests" instance=ExtResource("29_1aflu")]
+transform = Transform3D(0.99999094, 0, 0.0042584087, 0, 1, 0, -0.0042584087, 0, 0.99999094, 4.119784, 0.22420269, -17.429626)
+
+[node name="HealtChest4" parent="Props/chests" instance=ExtResource("29_1aflu")]
+transform = Transform3D(0.039451566, 0, -0.9992215, 0, 1, 0, 0.9992215, 0, 0.039451566, 17.442327, 0.22420245, 19.524189)
+
+[node name="HealtChest3" parent="Props/chests" instance=ExtResource("29_1aflu")]
+transform = Transform3D(-0.99976164, 0, -0.021832313, 0, 1, 0, 0.021832313, 0, -0.99976164, -8.393163, 0.22420233, 22.52713)
+
+[node name="MaxHealthChest" parent="Props/chests" instance=ExtResource("13_im38e")]
+transform = Transform3D(-0.98558855, 0, 0.1691603, 0, 1, 0, -0.1691603, 0, -0.98558855, -11.507548, 0.22420233, 22.52713)
+
+[node name="MaxHealthChest2" parent="Props/chests" instance=ExtResource("13_im38e")]
+transform = Transform3D(0.9827615, 0, -0.18487768, 0, 1, 0, 0.18487768, 0, 0.9827615, -3.0095582, 0.22420424, -17.663147)
+
+[node name="HealtChest2" parent="Props/chests" instance=ExtResource("29_1aflu")]
+transform = Transform3D(-0.9750836, 0, -0.22183774, 0, 1, 0, 0.22183774, 0, -0.9750836, 7.450633, 0.22420245, 22.119427)
+
+[node name="StaminaChest" parent="Props/chests" instance=ExtResource("12_o1g2b")]
+transform = Transform3D(-0.97377384, 0, -0.22751826, 0, 1, 0, 0.22751826, 0, -0.97377384, 3.9269083, 0.22777355, 22.427166)
+
+[node name="StaminaChest2" parent="Props/chests" instance=ExtResource("12_o1g2b")]
+transform = Transform3D(0.08487796, 0, -0.99639136, 0, 1, 0, 0.99639136, 0, 0.08487796, 17.65216, 0.22777355, 23.170956)
 
 [node name="lights" type="Node3D" parent="."]
 
@@ -641,391 +1061,30 @@ light_energy = 1.5
 light_bake_mode = 1
 shadow_enabled = true
 
-[node name="targets" type="Node3D" parent="."]
-
-[node name="Target" parent="targets" instance=ExtResource("15_vhgou")]
-transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.42274475, 5.878498, 0.15576601, 19.896137)
-
-[node name="Target3" parent="targets" instance=ExtResource("15_vhgou")]
-transform = Transform3D(-0.8328634, 0, -0.5534787, 0, 1, 0, 0.5534787, 0, -0.8328634, -10.238488, 0.1265161, 19.983622)
-
-[node name="Target2" parent="targets" instance=ExtResource("15_vhgou")]
-transform = Transform3D(-0.16971064, 0, -0.9854939, 0, 1, 0, 0.9854939, 0, -0.16971064, 16.741852, 0.21691298, 8.755618)
-
-[node name="JustColumns" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.53088, -1.703414, -51.601074)
-
-[node name="columns" type="Node3D" parent="JustColumns"]
-
-[node name="column" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.15745, 4.1409965, 41.60286)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column"]
-shape = SubResource("ConcavePolygonShape3D_8frg4")
-
-[node name="column" type="MeshInstance3D" parent="JustColumns/columns/column"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23940659, 1.9073486e-06)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_blvmn")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent" parent="JustColumns/columns/column" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14511967, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column/BreakStaticParent" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column2" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.36395, 4.1409965, 41.75658)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column2"]
-shape = SubResource("ConcavePolygonShape3D_8frg4")
-
-[node name="column" type="MeshInstance3D" parent="JustColumns/columns/column2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23940659, 1.9073486e-06)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_blvmn")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent3" parent="JustColumns/columns/column2" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13345718, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column2/BreakStaticParent3" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column3" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.257252, 4.1409965, 40.98798)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column3"]
-shape = SubResource("ConcavePolygonShape3D_8frg4")
-
-[node name="column" type="MeshInstance3D" parent="JustColumns/columns/column3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23940659, 1.9073486e-06)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_blvmn")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent9" parent="JustColumns/columns/column3" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15120506, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column3/BreakStaticParent9" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_004" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.03503, 3.8370538, 37.51966)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15136766, 0)
-shape = SubResource("ConcavePolygonShape3D_0pmsy")
-
-[node name="column_004" type="MeshInstance3D" parent="JustColumns/columns/column_004"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8146973e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_6umhm")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent8" parent="JustColumns/columns/column_004" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15736926, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_004/BreakStaticParent8" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_012" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.860638, 3.8370538, 65.0837)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15136766, 0)
-shape = SubResource("ConcavePolygonShape3D_0pmsy")
-
-[node name="column_004" type="MeshInstance3D" parent="JustColumns/columns/column_012"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8146973e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_6umhm")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent6" parent="JustColumns/columns/column_012" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13575268, 0, 0.018021584)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_012/BreakStaticParent6" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_002" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.558193, 4.0548906, 52.49839)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_002"]
-shape = SubResource("ConcavePolygonShape3D_qb6ni")
-
-[node name="column_002" type="MeshInstance3D" parent="JustColumns/columns/column_002"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_rc6u6")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent7" parent="JustColumns/columns/column_002" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15185934, 0, -0.00020933151)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_002/BreakStaticParent7" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_003" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.48404, 4.0548925, 63.48151)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_003"]
-shape = SubResource("ConcavePolygonShape3D_7esj5")
-
-[node name="column_003" type="MeshInstance3D" parent="JustColumns/columns/column_003"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_bmf1p")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent5" parent="JustColumns/columns/column_003" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11626744, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_003/BreakStaticParent5" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_010" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.435272, 4.0548925, 65.163376)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_010"]
-shape = SubResource("ConcavePolygonShape3D_7esj5")
-
-[node name="column_003" type="MeshInstance3D" parent="JustColumns/columns/column_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_bmf1p")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent6" parent="JustColumns/columns/column_010" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102752686, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_010/BreakStaticParent6" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_011" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.716076, 4.0548925, 64.70333)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_011"]
-shape = SubResource("ConcavePolygonShape3D_7esj5")
-
-[node name="column_003" type="MeshInstance3D" parent="JustColumns/columns/column_011"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24863577, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_bmf1p")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent4" parent="JustColumns/columns/column_011" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14417648, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_011/BreakStaticParent4" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_005" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.536251, 4.054894, 64.21397)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_005"]
-shape = SubResource("ConcavePolygonShape3D_pu2kj")
-
-[node name="column_005" type="MeshInstance3D" parent="JustColumns/columns/column_005"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_wacwu")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent6" parent="JustColumns/columns/column_005" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10677242, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_005/BreakStaticParent6" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_006" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.858135, 4.054894, 52.186348)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_006"]
-shape = SubResource("ConcavePolygonShape3D_pu2kj")
-
-[node name="column_005" type="MeshInstance3D" parent="JustColumns/columns/column_006"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_wacwu")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent7" parent="JustColumns/columns/column_006" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15643024, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_006/BreakStaticParent7" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_009" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.279743, 4.054894, 41.0334)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_009"]
-shape = SubResource("ConcavePolygonShape3D_pu2kj")
-
-[node name="column_005" type="MeshInstance3D" parent="JustColumns/columns/column_009"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_wacwu")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent8" parent="JustColumns/columns/column_009" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13361931, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_009/BreakStaticParent8" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_007" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.76295, 4.054894, 52.41763)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_007"]
-shape = SubResource("ConcavePolygonShape3D_pu2kj")
-
-[node name="column_005" type="MeshInstance3D" parent="JustColumns/columns/column_007"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_wacwu")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent2" parent="JustColumns/columns/column_007" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1624918, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_007/BreakStaticParent2" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="column_008" type="StaticBody3D" parent="JustColumns/columns"]
-transform = Transform3D(1.875066, 0, 0, 0, 1.875066, 0, 0, 0, 1.875066, -40.787315, 2.0760374, 30.743242)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JustColumns/columns/column_008"]
-shape = SubResource("ConcavePolygonShape3D_pu2kj")
-
-[node name="column_005" type="MeshInstance3D" parent="JustColumns/columns/column_008"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.3255124, 0)
-gi_mode = 2
-mesh = SubResource("ArrayMesh_wacwu")
-skeleton = NodePath("")
-
-[node name="BreakStaticParent5" parent="JustColumns/columns/column_008" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(0.5333145, 0, 0, 0, 0.5333145, 0, 0, 0, 0.5333145, 0, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="JustColumns/columns/column_008/BreakStaticParent5" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
-[node name="CrateProps" type="Node3D" parent="."]
-
-[node name="DarkCratePile3" parent="CrateProps" instance=ExtResource("20_mb4ba")]
-transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, -16.221338, 0.17873092, 0)
-
-[node name="DarkCratePile4" parent="CrateProps" instance=ExtResource("20_mb4ba")]
-transform = Transform3D(-0.3614781, 0, 0.9323807, 0, 1, 0, -0.9323807, 0, -0.3614781, 6.339593, 0.30274826, -4.110747)
-
-[node name="DarkCratePile5" parent="CrateProps" instance=ExtResource("20_mb4ba")]
-transform = Transform3D(0.752369, 0, 0.658742, 0, 1, 0, -0.658742, 0, 0.752369, -14.340294, 0.17873092, 10.844256)
-
-[node name="DarkCrateColumn2" parent="CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.909291, 0.31437767, -14.589818)
-
-[node name="DarkCrateBigPile" parent="CrateProps" instance=ExtResource("22_j1hty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5247266, 0.2899922, 5.9834566)
-
-[node name="DarkCrateBigPile3" parent="CrateProps" instance=ExtResource("22_j1hty")]
-transform = Transform3D(-0.40378484, 0, -0.914854, 0, 1, 0, 0.914854, 0, -0.40378484, 7.7452984, 0.2899922, 2.458075)
-
-[node name="DarkCrateBigPile4" parent="CrateProps" instance=ExtResource("22_j1hty")]
-transform = Transform3D(-0.40378484, 0, -0.914854, 0, 1, 0, 0.914854, 0, -0.40378484, -2.145647, 0.2899922, -5.231207)
-
-[node name="DarkCrateBigPile2" parent="CrateProps" instance=ExtResource("22_j1hty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.435251, 0.1734268, -5.1467543)
-
-[node name="DarkCrateColumn4" parent="CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5731354, 0.31437767, 16.722336)
-
-[node name="DarkCrateColumn7" parent="CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.91271096, 0.31437767, 20.458838)
-
-[node name="DarkCrateColumn8" parent="CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14722127, 0.31437767, 20.580772)
-
-[node name="DarkCrateColumn6" parent="CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2609978, 0.31437767, -9.124448)
-
-[node name="DarkCrateColumn5" parent="CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.649536, 5.550741, 13.262056)
-
-[node name="DarkCratePile" parent="CrateProps" instance=ExtResource("20_mb4ba")]
-transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, 3.7142782, 0.23003387, -7.970696)
-
-[node name="DarkCratePile2" parent="CrateProps" instance=ExtResource("20_mb4ba")]
-transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, 11.246589, 5.620642, -10.779883)
-
-[node name="DarkCrate" parent="CrateProps" instance=ExtResource("23_5rawr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.358156, 1.757438, -0.3584324)
-
-[node name="DarkCrate2" parent="CrateProps" instance=ExtResource("23_5rawr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.666918, 0.8294419, -9.635433)
-
-[node name="DarkCrate4" parent="CrateProps" instance=ExtResource("23_5rawr")]
-transform = Transform3D(0.5997082, 0, -0.80021876, 0, 1, 0, 0.80021876, 0, 0.5997082, -14.097704, 0.8294419, -7.9714293)
-
-[node name="DarkCrate8" parent="CrateProps" instance=ExtResource("23_5rawr")]
-transform = Transform3D(-0.31303114, 0, -0.9497428, 0, 1, 0, 0.9497428, 0, -0.31303114, -13.541292, 0.8294419, -7.323659)
-
-[node name="DarkCrate5" parent="CrateProps" instance=ExtResource("23_5rawr")]
-transform = Transform3D(0.5997082, 0, -0.80021876, 0, 1, 0, 0.80021876, 0, 0.5997082, -12.309492, 5.8688245, 1.3225968)
-
-[node name="DarkCrate6" parent="CrateProps" instance=ExtResource("23_5rawr")]
-transform = Transform3D(0.5997082, 0, -0.80021876, 0, 1, 0, 0.80021876, 0, 0.5997082, -9.738072, 5.7253637, 13.685379)
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="PHEnemy" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93031573, 0.26552606, -8.374167)
+fire_up = true
+show_ui_feelings = true
+player = NodePath("../../Princess")
+
+[node name="PHEnemy2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
+transform = Transform3D(0.6596869, 0, -0.75154054, 0, 1, 0, 0.75154054, 0, 0.6596869, 16.87828, 5.406539, -11.033817)
+fire_up = true
+show_ui_feelings = true
+float_ui_feelings = true
+player = NodePath("../../Princess")
+
+[node name="PHEnemy3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
+transform = Transform3D(-0.19303563, 0, 0.98119175, 0, 1, 0, -0.98119175, 0, -0.19303563, -16.97281, 5.164928, -10.275095)
+fire_up = true
+show_ui_feelings = true
+float_ui_feelings = true
+player = NodePath("../../Princess")
 
 [node name="Princess" parent="." instance=ExtResource("24_4hdk1")]
 transform = Transform3D(-0.13725427, 0, -0.9905359, 0, 1, 0, 0.9905359, 0, -0.13725427, 4.6027308, 0.22582489, 11.525357)
-
-[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93031573, 0.26552606, -8.374167)
-show_ui_feelings = true
-fire_up = true
-player = NodePath("../Princess")
-
-[node name="PHEnemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
-transform = Transform3D(0.6596869, 0, -0.75154054, 0, 1, 0, 0.75154054, 0, 0.6596869, 16.87828, 5.406539, -11.033817)
-show_ui_feelings = true
-float_ui_feelings = true
-fire_up = true
-player = NodePath("../Princess")
-
-[node name="PHEnemy3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
-transform = Transform3D(-0.19303563, 0, 0.98119175, 0, 1, 0, -0.98119175, 0, -0.19303563, -16.97281, 5.164928, -10.275095)
-show_ui_feelings = true
-float_ui_feelings = true
-fire_up = true
-player = NodePath("../Princess")
 
 [node name="DeathPlane" parent="." instance=ExtResource("26_ok6xh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -48.237244, 0)
@@ -1043,36 +1102,9 @@ stream = ExtResource("28_wrnnw")
 volume_db = 3.0
 bus = &"_d_track_vibe"
 
-[node name="chests" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.533286)
+[node name="Fogs" type="Node3D" parent="."]
 
-[node name="HealtChest6" parent="chests" instance=ExtResource("29_1aflu")]
-transform = Transform3D(0.99999094, 0, 0.0042584087, 0, 1, 0, -0.0042584087, 0, 0.99999094, 4.119784, 0.22420269, -17.429626)
-
-[node name="HealtChest4" parent="chests" instance=ExtResource("29_1aflu")]
-transform = Transform3D(0.039451566, 0, -0.9992215, 0, 1, 0, 0.9992215, 0, 0.039451566, 17.442327, 0.22420245, 19.524189)
-
-[node name="HealtChest3" parent="chests" instance=ExtResource("29_1aflu")]
-transform = Transform3D(-0.99976164, 0, -0.021832313, 0, 1, 0, 0.021832313, 0, -0.99976164, -8.393163, 0.22420233, 22.52713)
-
-[node name="MaxHealthChest" parent="chests" instance=ExtResource("13_im38e")]
-transform = Transform3D(-0.98558855, 0, 0.1691603, 0, 1, 0, -0.1691603, 0, -0.98558855, -11.507548, 0.22420233, 22.52713)
-
-[node name="MaxHealthChest2" parent="chests" instance=ExtResource("13_im38e")]
-transform = Transform3D(0.9827615, 0, -0.18487768, 0, 1, 0, 0.18487768, 0, 0.9827615, -3.0095582, 0.22420424, -17.663147)
-
-[node name="HealtChest2" parent="chests" instance=ExtResource("29_1aflu")]
-transform = Transform3D(-0.9750836, 0, -0.22183774, 0, 1, 0, 0.22183774, 0, -0.9750836, 7.450633, 0.22420245, 22.119427)
-
-[node name="StaminaChest" parent="chests" instance=ExtResource("12_o1g2b")]
-transform = Transform3D(-0.97377384, 0, -0.22751826, 0, 1, 0, 0.22751826, 0, -0.97377384, 3.9269083, 0.22777355, 22.427166)
-
-[node name="StaminaChest2" parent="chests" instance=ExtResource("12_o1g2b")]
-transform = Transform3D(0.08487796, 0, -0.99639136, 0, 1, 0, 0.99639136, 0, 0.08487796, 17.65216, 0.22777355, 23.170956)
-
-[node name="Node3D" type="Node3D" parent="."]
-
-[node name="FogUnderLight" type="SpotLight3D" parent="Node3D"]
+[node name="FogUnderLight" type="SpotLight3D" parent="Fogs"]
 transform = Transform3D(0.87201047, -0.09268811, 0.48063156, 0.48948735, 0.16512159, -0.8562345, 9.90553e-08, 0.98190826, 0.1893574, 39.17663, -59.658512, 36.039425)
 light_energy = 60.0
 light_volumetric_fog_energy = 3.389
@@ -1080,13 +1112,13 @@ light_bake_mode = 0
 spot_range = 60.0
 spot_angle = 29.52
 
-[node name="FogVolume" type="FogVolume" parent="Node3D"]
+[node name="FogVolume" type="FogVolume" parent="Fogs"]
 transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 6, 0.20057297, -20.921207, 40.34253)
 size = Vector3(19.44, 8, 15.36)
 shape = 2
 material = SubResource("FogMaterial_e42g3")
 
-[node name="PuffFog" parent="Node3D" instance=ExtResource("30_h8i3b")]
+[node name="PuffFog" parent="Fogs" instance=ExtResource("30_h8i3b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.764505, 0)
 particles_amount = 14
 lifetime = 20.0
@@ -1099,7 +1131,7 @@ billboard_mode = 1
 initial_angle_max = 90.0
 angular_velocity = 1.0
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/PuffFog"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Fogs/PuffFog"]
 transform = Transform3D(-0.043663558, -0.9202857, 0.38880298, -0.037087925, 0.390399, 0.91989845, -0.99835765, 0.025746142, -0.051177695, 11.419291, 11.323172, -4.69133)
 light_color = Color(1, 0, 0.95610857, 1)
 light_energy = 100.0
@@ -1108,37 +1140,11 @@ spot_range = 34.702152
 spot_attenuation = 0.71
 spot_angle = 72.48881
 
-[node name="BaseLever" parent="." instance=ExtResource("31_chotk")]
-transform = Transform3D(1.83, 0, 0, 0, 1.83, 0, 0, 0, 1.83, 13.295738, -4.0366945, 15.826452)
-
-[node name="InteractArea" parent="BaseLever" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.295738, -3.5858402, 15.826452)
-label_text = "Are you sure?"
-label_y_offset = 1.2
-
 [node name="__plush__" type="Node" parent="."]
-
-[node name="PlushLever" parent="__plush__" instance=ExtResource("31_chotk")]
-unique_name_in_owner = true
-transform = Transform3D(0.00903914, 0, -0.7419449, 0, 0.742, 0, 0.7419449, 0, 0.00903914, -0.72051114, 0.16621768, 20.983982)
-
-[node name="lever_base" parent="__plush__/PlushLever/Visuals" index="0"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_qih1a")
-
-[node name="lever_platform" parent="__plush__/PlushLever/Visuals" index="1"]
-material_override = SubResource("StandardMaterial3D_kb266")
-
-[node name="lever_handle" parent="__plush__/PlushLever/Visuals/HandlePivot" index="0"]
-material_override = ExtResource("34_uya8o")
-
-[node name="InteractArea" parent="__plush__/PlushLever" index="4"]
-transform = Transform3D(0.012182127, 0, -0.9999255, 0, 1, 0, 0.9999255, 0, 0.012182127, -0.72051114, 0.34902313, 20.983982)
-label_text = ""
 
 [node name="PlushMarker3D" type="Marker3D" parent="__plush__"]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.317413, -82.685486, 57.39241)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 13.65353, -82.685486, 35.104717)
 
 [node name="plush_factory" type="Node" parent="__plush__/PlushMarker3D"]
 unique_name_in_owner = true
@@ -1148,43 +1154,46 @@ float_height = 400.0
 duration = 40.0
 horizontal_drift = 40.0
 
+[node name="DarkCrate7" parent="__plush__" instance=ExtResource("23_5rawr")]
+transform = Transform3D(0.35465986, -0.0016051455, -0.93499404, -0.0032937638, 0.9999902, -0.002966115, 0.93498963, 0.0041316245, 0.3546511, -18.88474, 2.9885685, 15.193066)
+
+[node name="DarkCrate8" parent="__plush__" instance=ExtResource("23_5rawr")]
+transform = Transform3D(-0.41431427, -0.0040642344, -0.91012484, -0.0032937638, 0.9999902, -0.002966115, 0.9101279, 0.0017688449, -0.4143236, -18.847752, 2.9885685, 14.042373)
+
 [node name="MiniPlush" parent="__plush__" instance=ExtResource("37_o1g2b")]
 unique_name_in_owner = true
-transform = Transform3D(0.99027795, -0.053803444, -0.12827674, 0.054336287, 0.9985226, 0.0006553403, 0.12805194, -0.0076190494, 0.9917383, -1.8101295, 0.16878927, 20.410152)
+transform = Transform3D(0.06264591, -0.0027539637, -0.99803215, 0.054336283, 0.9985226, 0.0006553416, 0.9965557, -0.054270394, 0.06270301, -19.029064, 2.6759596, 14.577893)
 float_height = 30.0
 duration = 25.0
 horizontal_drift = 10.0
 
-[node name="DarkCrate7" parent="__plush__" instance=ExtResource("23_5rawr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7864058, 0.5244565, 20.437017)
+[node name="PlushLever" parent="__plush__" instance=ExtResource("38_jio1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.097067, 0.1863006, 13.360861)
 
 [connection signal="SIG_death_raised" from="FloorWalls/SecretLevel/SecretEnemy" to="Princess" method="_on_secret_enemy_sig_death_raised"]
+[connection signal="SIG_lever_switched" from="Props/Levers/BaseLever" to="FloorWalls/SecretLevel/WoodenFloorBaked2/CSGBakedMeshInstance3D/CreateRigidParent" method="on_lever"]
+[connection signal="SIG_lever_switched" from="Props/Levers/CleanUpLever" to="." method="_on_clean_up_lever_sig_lever_switched"]
+[connection signal="SIG_lever_switched" from="Props/Levers/BlowUpLever" to="." method="_on_blow_up_lever_sig_lever_switched"]
 [connection signal="SIG_land_wave" from="Princess" to="." method="_on_princess_sig_land_wave"]
-[connection signal="SIG_angry_raised" from="PHEnemy" to="." method="_on_ph_enemy_sig_angry_raised"]
-[connection signal="SIG_death_raised" from="PHEnemy" to="." method="_on_ph_enemy_sig_death_raised"]
-[connection signal="SIG_angry_raised" from="PHEnemy2" to="." method="_on_ph_enemy_sig_angry_raised"]
-[connection signal="SIG_death_raised" from="PHEnemy2" to="." method="_on_ph_enemy_sig_death_raised"]
-[connection signal="SIG_angry_raised" from="PHEnemy3" to="." method="_on_ph_enemy_sig_angry_raised"]
-[connection signal="SIG_death_raised" from="PHEnemy3" to="." method="_on_ph_enemy_sig_death_raised"]
-[connection signal="SIG_lever_switched" from="BaseLever" to="FloorWalls/SecretLevel/WoodenFloorBaked2/CSGBakedMeshInstance3D/CreateRigidParent" method="on_lever"]
 [connection signal="SIG_lever_switched" from="__plush__/PlushLever" to="__plush__/PlushMarker3D/plush_factory" method="_on_plush_lever_sig_lever_switched"]
 [connection signal="SIG_lever_switched" from="__plush__/PlushLever" to="__plush__/MiniPlush" method="_on_plush_lever_sig_lever_switched"]
 
 [editable path="FloorWalls/SecretLevel/WoodenFloorBaked2/CSGBakedMeshInstance3D/CreateRigidParent"]
-[editable path="JustColumns/columns/column/BreakStaticParent"]
-[editable path="JustColumns/columns/column2/BreakStaticParent3"]
-[editable path="JustColumns/columns/column3/BreakStaticParent9"]
-[editable path="JustColumns/columns/column_004/BreakStaticParent8"]
-[editable path="JustColumns/columns/column_012/BreakStaticParent6"]
-[editable path="JustColumns/columns/column_002/BreakStaticParent7"]
-[editable path="JustColumns/columns/column_003/BreakStaticParent5"]
-[editable path="JustColumns/columns/column_010/BreakStaticParent6"]
-[editable path="JustColumns/columns/column_011/BreakStaticParent4"]
-[editable path="JustColumns/columns/column_005/BreakStaticParent6"]
-[editable path="JustColumns/columns/column_006/BreakStaticParent7"]
-[editable path="JustColumns/columns/column_009/BreakStaticParent8"]
-[editable path="JustColumns/columns/column_007/BreakStaticParent2"]
-[editable path="JustColumns/columns/column_008/BreakStaticParent5"]
+[editable path="Props/JustColumns/columns/column/BreakStaticParent"]
+[editable path="Props/JustColumns/columns/column2/BreakStaticParent3"]
+[editable path="Props/JustColumns/columns/column3/BreakStaticParent9"]
+[editable path="Props/JustColumns/columns/column_004/BreakStaticParent8"]
+[editable path="Props/JustColumns/columns/column_012/BreakStaticParent6"]
+[editable path="Props/JustColumns/columns/column_002/BreakStaticParent7"]
+[editable path="Props/JustColumns/columns/column_003/BreakStaticParent5"]
+[editable path="Props/JustColumns/columns/column_010/BreakStaticParent6"]
+[editable path="Props/JustColumns/columns/column_011/BreakStaticParent4"]
+[editable path="Props/JustColumns/columns/column_005/BreakStaticParent6"]
+[editable path="Props/JustColumns/columns/column_006/BreakStaticParent7"]
+[editable path="Props/JustColumns/columns/column_009/BreakStaticParent8"]
+[editable path="Props/JustColumns/columns/column_007/BreakStaticParent2"]
+[editable path="Props/JustColumns/columns/column_008/BreakStaticParent5"]
+[editable path="Props/Levers/BaseLever"]
+[editable path="Props/Levers/CleanUpLever"]
+[editable path="Props/Levers/BlowUpLever"]
 [editable path="DeathPlane"]
-[editable path="BaseLever"]
-[editable path="__plush__/PlushLever"]

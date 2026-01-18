@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://d3tc5aaqi8k6q"]
+[gd_scene load_steps=11 format=4 uid="uid://d3tc5aaqi8k6q"]
 
+[ext_resource type="Script" uid="uid://ttxin8mfnaxi" path="res://-assets-/VFX/lights/_base_omni/_generic_omni.gd" id="1_78siu"]
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="2_cwyt1"]
 [ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="2_jdvpr"]
 [ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="3_78siu"]
@@ -89,16 +90,17 @@ shadow_mesh = SubResource("ArrayMesh_sbcve")
 
 [node name="BaseOmni" type="Node3D"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_78siu")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1.0000001, 0, 0, 0, 0.99999964, 0, 0, 0, 1, 0, 0, 0)
-light_color = Color(1, 0.684833, 0.39, 1)
-light_energy = 4.0
+light_color = Color(1, 0.61960787, 0.28627452, 1)
+light_energy = 3.8
 light_specular = 1.0
 shadow_enabled = true
 shadow_opacity = 0.6
-omni_range = 2.387
+omni_range = 3.6
 omni_attenuation = 1.5
 
 [node name="__csg" type="CSGSphere3D" parent="OmniLight3D"]
@@ -110,18 +112,23 @@ radius = 0.1
 
 [node name="PuffFog" parent="." instance=ExtResource("2_cwyt1")]
 unique_name_in_owner = true
+process_mode = 4
+visible = false
+particles_amount = 10
 emission_box_extents = Vector3(0.2, 0.2, 0.2)
 
-[node name="test_visual_base" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.44367436, 0, -1.1358384, 0, 1.219416, 0, 1.1358382, 0, -0.44367436, -0.11369126, 0.007882406, -1.5951779)
+[node name="test_visuals_base" type="Node3D" parent="."]
+unique_name_in_owner = true
 visible = false
+
+[node name="test_visual_base" type="MeshInstance3D" parent="test_visuals_base"]
+transform = Transform3D(-0.44367436, 0, -1.1358384, 0, 1.219416, 0, 1.1358382, 0, -0.44367436, -0.11369126, 0.007882406, -1.5951779)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_818gi")
 skeleton = NodePath("")
 
-[node name="test_visual_base2" type="MeshInstance3D" parent="."]
+[node name="test_visual_base2" type="MeshInstance3D" parent="test_visuals_base"]
 transform = Transform3D(-0.13709536, 0, -0.35097405, 0, 0.37679952, 0, 0.35097396, 0, -0.13709538, 0.37530887, -0.07411756, -0.317178)
-visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_818gi")
 skeleton = NodePath("")
