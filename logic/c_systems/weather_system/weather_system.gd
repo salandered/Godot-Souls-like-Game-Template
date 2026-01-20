@@ -4,7 +4,7 @@ extends Node3DSystem
 
 
 @onready var world_env: WorldEnvironment = %WorldEnvironment
-## Assign your DirectionalLight3D in the Inspector
+
 @export var sun_light: DirectionalLight3D
 
 const ENV_PARAM_AMB_LIGHT_ENERGY := "ambient_light_energy"

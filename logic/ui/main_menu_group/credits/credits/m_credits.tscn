@@ -41,7 +41,7 @@ License: All Rights Reserved
 
 [b][font_size=24]Models by Virtual Museums of Małopolska, used under CC-BY 4.0[/font_size][/b]
 Link: https://sketchfab.com/WirtualneMuzeaMalopolski
-Assets: Military hatchet model M1889; Monstrance;
+Assets: Military hatchet model M1889;
 Note: Modified from the original: retopology; UV wrapping; new materials
 
 
@@ -85,6 +85,11 @@ Notes: Shader materials were used: fire shader; sky shader. Modifications were m
 [b][font_size=24]Assets from tps-demo, used under CC-BY 3.0[/font_size][/b]
 Link: https://github.com/godotengine/tps-demo
 Notes: Shader materials were used: smoke. Modifications were made.
+
+
+[b][font_size=24]Assets made by Blender Studio, used under CC-BY 4.0[/font_size][/b]
+Link: https://studio.blender.org/welcome/
+Notes: Materials from Charge Asset Library were used. Modifications were made.
 
 
 
@@ -132,7 +137,7 @@ Link: https://sketchfab.com/galway3d
 Assets: Entrance Gates to Menlo Castle;
 
 
-[b][font_size=24]CC0 assets were used from the following artists[/font_size][/b]
+[b][font_size=24]Following artists for providing CC0 3D assets[/font_size][/b]
 - FREEPOLY The Public 3D Asset Library - freepoly.org
 - Quaternius - https://quaternius.com/
 - loafbrr_1 - https://opengameart.org/users/loafbrr1
@@ -140,22 +145,24 @@ Assets: Entrance Gates to Menlo Castle;
 - and others
 
 
-[b][font_size=24]CC0 SFX were used from the following artists[/font_size][/b]
-- TomMusic. https://tommusic.itch.io/
-- Aurelien Montero. https://punkzen.itch.io/
-- Cat Prisbrey. https://felesmachina.itch.io/ (Project: Cat's Souls-like-Template)
-- Leohpaz. https://leohpaz.itch.io/ (Pack: https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
-- Nvthic Sounds. https://nvthicprod.itch.io/impact-sfx
-- ObsydianX. https://obsydianx.itch.io/interface-sfx-pack-1
-- Chequered Ink. https://ci.itch.io/400-sounds-pack
+[b][font_size=24]Following artists for providing CC0 SFX assets[/font_size][/b]
+- TomMusic - https://tommusic.itch.io/
+- Aurelien Montero - https://punkzen.itch.io/
+- Cat Prisbrey - https://felesmachina.itch.io/ (Project: Cat's Souls-like-Template)
+- Leohpaz - https://leohpaz.itch.io/ (Pack: https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
+- Nvthic Sounds - https://nvthicprod.itch.io/impact-sfx
+- ObsydianX - https://obsydianx.itch.io/interface-sfx-pack-1
+- Chequered Ink - https://ci.itch.io/400-sounds-pack
 - and others
 
 
-[b][font_size=24]Also[/font_size][/b]
-* Imphenzia https://imphenzia.com/
-* FairFight https://www.youtube.com/@PointDown
-* GDQuest https://www.gdquest.com/
-* Kenney https://kenney.nl/
+[b][font_size=24]Also the following artists or content creators[/font_size][/b]
+* Imphenzia - https://imphenzia.com/
+* FairFight - https://www.youtube.com/@PointDown
+* GDQuest - https://www.gdquest.com/
+* Gord Goodwin - https://gord-goodwin.blogspot.com/
+* FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
+* Kenney - https://kenney.nl/
 
 
 [b][font_size=24]lo.w.l[/font_size][/b]
@@ -163,10 +170,9 @@ Note: Painting fragments were used for UI elements.
 
 
 [b][font_size=24]Playtesters[/font_size][/b]
-* i
-* akzar
-* lo.w.l
-
+- i
+- akzar
+- lo.w.l
 
 
 [b][font_size=32]Core Systems & Templates[/font_size][/b]

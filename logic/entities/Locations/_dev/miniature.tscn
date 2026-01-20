@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bj31r46hbvq8r"]
+
+[ext_resource type="Material" uid="uid://xa4yqg750fv7" path="res://-assets-/materials-shared/solid/tile_silver_metal.tres" id="1_1dqmj"]
+[ext_resource type="Script" uid="uid://dqgdgq7qeq67w" path="res://logic/c_systems/level/miniature.gd" id="1_310jj"]
+[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="2_310jj"]
+[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/Enemies/sitting_sk/SitSkeleton.tscn" id="3_e8ywp"]
+[ext_resource type="PackedScene" path="res://-assets-/GLB-items/other/Chair.tscn" id="5_e8ywp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1dqmj"]
+sky_top_color = Color(0.58146393, 0.12024791, 0.09953167, 1)
+sky_horizon_color = Color(0.49321133, 0.48884565, 0.40229902, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_310jj"]
+sky_material = SubResource("ProceduralSkyMaterial_1dqmj")
+
+[sub_resource type="Environment" id="Environment_e8ywp"]
+background_mode = 2
+sky = SubResource("Sky_310jj")
+tonemap_mode = 2
+
+[node name="Miniature" type="Node3D"]
+script = ExtResource("1_310jj")
+is_pause_menu_controller = false
+is_world_environment = false
+is_base_asp = false
+is_vibe_asp = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.7212909, -0.61563355, 0.3173876, -0.28519595, 0.68156546, 0.673893, -0.63119155, 0.3955552, -0.66718316, 0.011999965, 6.0491714, -5.571)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e8ywp")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material_override = ExtResource("1_1dqmj")
+use_collision = true
+size = Vector3(27.375, 1, 26.635742)
+
+[node name="Princess" parent="." instance=ExtResource("2_310jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0476894, -2.970509)
+
+[node name="Chair_1_002" parent="." instance=ExtResource("5_e8ywp")]
+transform = Transform3D(-0.75246954, 0, 0.37334916, 0, 0.84, 0, -0.37334916, 0, -0.75246954, 0, 0.9367746, 3.0924163)
+
+[node name="SittingSkeleton" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_e8ywp")]
+transform = Transform3D(-0.99039876, 0, 0.13823982, 0, 1, 0, -0.13823982, 0, -0.99039876, 0.022913456, 0.50982714, 3.0520024)
+player = NodePath("../Princess")

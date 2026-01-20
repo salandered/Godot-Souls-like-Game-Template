@@ -107,10 +107,14 @@ func _process_modification():
 		
 	# calculate custom_delta between now and the last call.
 	__custom_delta.update()
+	var dt = __custom_delta.delta
 	# add custom_delta to curr anim's time_spent.
-	_update_time(__custom_delta.delta)
-	_update_blend_values(__custom_delta.delta)
-	_update_skeleton(__custom_delta.delta)
+
+	dt = get_process_delta_time()
+	
+	_update_time(dt)
+	_update_blend_values(dt)
+	_update_skeleton(dt)
 
 
 func _update_time(custom_delta: float):

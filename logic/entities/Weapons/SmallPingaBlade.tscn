@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnsqyg700uslx"]
+
+[ext_resource type="Script" uid="uid://oert1ycfce2e" path="res://logic/c_systems/weapon/small_pinga_blade.gd" id="1_4lwst"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_hp6fq"]
+[ext_resource type="PackedScene" uid="uid://c3objh8m5a340" path="res://-assets-/GLB-items/pinga/pinga_WRAP.tscn" id="3_4lwst"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/unsorted/weapon_sfx/WeaponSfx.tscn" id="8_lf1yp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
+radius = 0.13183594
+height = 0.7011444
+
+[node name="SmallPingaBlade" type="Node3D"]
+script = ExtResource("1_4lwst")
+
+[node name="WeaponHurtBox" parent="." instance=ExtResource("2_hp6fq")]
+unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, -7.450581e-09, 0, 1, 0, 3.3527613e-08, -1.4901161e-08, 1, 0, 0, 0)
+collision_layer = 16
+collision_mask = 104
+
+[node name="HurtBoxCol4" type="CollisionShape3D" parent="WeaponHurtBox"]
+transform = Transform3D(1, -4.3276422e-09, -1.3857027e-09, 4.327634e-09, 0.81401426, 0.5808451, -1.3857004e-09, -0.5808451, 0.81401426, 0.056680065, 0.5321052, -0.08228334)
+shape = SubResource("CapsuleShape3D_hj5gq")
+debug_color = Color(0.84, 0.06719998, 0.28616, 1)
+
+[node name="Visuals" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.9858583, 0.15841751, -0.054660767, 0.04585822, -0.05869904, -0.9972209, -0.16118513, -0.9856264, 0.05060391, -0.008474976, 0.94384664, -0.04381919)
+
+[node name="pinga" parent="Visuals" instance=ExtResource("3_4lwst")]
+transform = Transform3D(0.3378276, 0.107636906, -0.021659067, -0.106799394, 0.3384105, 0.015958529, 0.025469685, -0.008665182, 0.3542015, -0.035487555, 0.008225516, 0.66388947)
+
+[node name="Pinga_002" parent="Visuals/pinga" index="0"]
+transform = Transform3D(1.4716088, 0, -2.3283064e-10, -2.9802322e-08, 1.069838, -1.8626451e-09, 1.1641532e-09, -1.8626451e-09, 0.99393284, -0.02337616, -0.003706716, 0.0052189827)
+
+[node name="WeaponSFXParent" parent="." instance=ExtResource("8_lf1yp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7548888, 0)
+
+[node name="SparkMarker" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015023589, 0.6584185, 0.0020401925)
+
+[editable path="WeaponHurtBox"]
+[editable path="Visuals/pinga"]
+[editable path="WeaponSFXParent"]

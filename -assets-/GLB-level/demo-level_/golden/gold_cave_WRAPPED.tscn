@@ -1,0 +1,306 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbwrpoygqteb0"]
+
+[ext_resource type="PackedScene" uid="uid://druxsqnxe6376" path="res://-assets-/GLB-level/demo-level_/golden/gold-cave.glb" id="1_c0ayj"]
+[ext_resource type="Script" uid="uid://muqrixt1lnde" path="res://-assets-/GLB-level/demo-level_/golden/circling.gd" id="7_8gmoy"]
+[ext_resource type="AudioStream" uid="uid://dpef175e8dyx3" path="res://-assets-/SFX/sources/tom/Portcullis Gate.wav" id="8_jl87t"]
+[ext_resource type="AudioStream" uid="uid://4df7uhwavnkd" path="res://-assets-/SFX/sources/400/concrete_scrape.wav" id="9_p7r2u"]
+[ext_resource type="AudioStream" uid="uid://c2k7np4uf1726" path="res://-assets-/SFX/sources/cat/fire_loop_gold.tres" id="10_jl87t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3u0a6"]
+resource_name = "B glass.001"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.67, 0.40289333, 0.3618, 0.49411765)
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+normal_enabled = true
+ao_enabled = true
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+
+[sub_resource type="Animation" id="Animation_8gmoy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("circling/Monstrancja main LP1_round_:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.52346003, -0.7375836, -0.2749677)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("circling/Monstrancja rays LP 1_rays:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.50726223, -0.7577177, -0.5164755)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("circling/asps/rail:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("circling/asps/scrape:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("gold_sun_middle:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cl4uy"]
+resource_name = "circling"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gold_sun_outer:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.3, 2.9, 3.8333333, 7.5, 8),
+"transitions": PackedFloat32Array(1, 0.5, -2, -2, 1, 1),
+"update": 0,
+"values": [Vector3(0.52346003, -0.7375836, -0.2749677), Vector3(0.52352166, -0.7378905, 2.5165544), Vector3(0.5235988, -0.7382743, 2.7925267), Vector3(0.5235988, -0.7382743, 4.5772295), Vector3(0.5235988, -0.7382743, 4.167867), Vector3(0.5235988, -0.7382743, 6.0074234)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gold_sun_inner:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5999999, 3.5666666, 4.4333334, 8),
+"transitions": PackedFloat32Array(-2, 1, 1, -2, 1),
+"update": 0,
+"values": [Vector3(0.50726223, -0.7577177, -0.5164755), Vector3(0.5073877, -0.75766885, -1.7706664), Vector3(0.5078908, -0.7574729, -2.2794), Vector3(0.5078908, -0.7574729, -4.66315), Vector3(0.5078908, -0.7574729, -6.799803)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("circling/asps/rail:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2333333, 3.7568004, 6.5, 8),
+"transitions": PackedFloat32Array(2, 1, 1, -2, 1),
+"update": 0,
+"values": [-20.0, 0.0, 0.0, 0.0, -20.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("circling/asps/scrape:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.5266945, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("circling/asps/rail")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 2.6362336,
+"stream": ExtResource("8_jl87t")
+}],
+"times": PackedFloat32Array(0.46666667)
+}
+tracks/4/use_blend = true
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("gold_sun_middle:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.5999999, 3.5666661, 4.433333, 5.586455, 7.5),
+"transitions": PackedFloat32Array(-2, 1, 1, -2, 1, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.0384709, 0.16580628, -1.7715092), Vector3(1.1536627, -1.0279989, -2.2794), Vector3(0.5078908, -1.7784905, -4.66352), Vector3(1.0384709, 0.16580628, -1.7715092), Vector3(0.5235988, -0.10471976, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8gmoy"]
+_data = {
+&"RESET": SubResource("Animation_8gmoy"),
+&"circling": SubResource("Animation_cl4uy")
+}
+
+[node name="GOLDC" instance=ExtResource("1_c0ayj")]
+
+[node name="gold cave" parent="." index="0"]
+layers = 17
+
+[node name="gold cave_001" parent="." index="1"]
+layers = 17
+cast_shadow = 0
+
+[node name="gold cave_002" parent="." index="2"]
+layers = 17
+
+[node name="gold cave_003" parent="." index="3"]
+layers = 17
+
+[node name="gold cave_004" parent="." index="4"]
+layers = 17
+
+[node name="gold cave_005" parent="." index="5"]
+layers = 17
+
+[node name="gold cave_012" parent="." index="6"]
+layers = 17
+
+[node name="Plane_013" parent="." index="8"]
+layers = 17
+
+[node name="Tower middle_002" parent="." index="9"]
+layers = 17
+
+[node name="Cave_Rocks_C_008" parent="Tower middle_002" index="0"]
+cast_shadow = 0
+
+[node name="Tower lowest_001" parent="Tower middle_002" index="1"]
+layers = 17
+
+[node name="Tower middle_003" parent="." index="10"]
+layers = 17
+
+[node name="Tower lowest_002" parent="Tower middle_003" index="0"]
+layers = 17
+
+[node name="Tower lowest_003" parent="Tower middle_003" index="1"]
+layers = 17
+
+[node name="Cave_Rocks_C_001" parent="Tower middle_003/Tower lowest_003" index="0"]
+cast_shadow = 0
+
+[node name="Cave_Rocks_C_006" parent="." index="11"]
+cast_shadow = 0
+
+[node name="gold_sun_middle" parent="." index="12"]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_3u0a6")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="gold_sun_middle" index="0"]
+transform = Transform3D(0.8980712, 0.21063793, 0.38613462, -0.13693658, 0.9681427, -0.2096386, -0.41799128, 0.13539445, 0.89830506, 4.173168, 3.9758148, -3.836197)
+light_color = Color(1, 0.6427364, 0.23693943, 1)
+light_energy = 50.0
+light_indirect_energy = 1.825
+shadow_enabled = true
+distance_fade_begin = 76.25
+omni_range = 80.0
+omni_shadow_mode = 0
+
+[node name="gold_sun_outer" parent="." index="13"]
+unique_name_in_owner = true
+transform = Transform3D(0.06756199, 0.80976903, -0.58284575, -0.8153652, -0.29185498, -0.5, -0.57499105, 0.5090131, 0.64053935, -148.57257, -39.918842, 125.52903)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="gold_sun_outer" index="0"]
+transform = Transform3D(0.16176611, -0.9750335, 0.15212366, -0.9778821, -0.17909458, -0.10803742, 0.1325846, -0.13128227, -0.982439, 0.08622742, 0.6558914, 6.433075)
+light_color = Color(1, 0.6427364, 0.23693943, 1)
+light_energy = 50.0
+light_indirect_energy = 1.825
+shadow_enabled = true
+omni_range = 60.0
+omni_shadow_mode = 0
+
+[node name="gold_sun_inner" parent="." index="14"]
+unique_name_in_owner = true
+transform = Transform3D(0.03621304, -0.798911, -0.60035795, 0.7764963, 0.40066358, -0.4863354, 0.62908036, -0.44856396, 0.63486075, -148.01036, -40.52259, 125.6196)
+
+[node name="circling" type="Node3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -148.78662, -40.99609, 126.97217)
+script = ExtResource("7_8gmoy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="circling" index="0"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_8gmoy")
+}
+
+[node name="asps" type="Node3D" parent="circling" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5501556, -2.1849976, 1.6507416)
+
+[node name="rail" type="AudioStreamPlayer3D" parent="circling/asps" index="0"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.917007, -2.8479996, -0.085998535)
+max_db = -3.0
+pitch_scale = 0.65
+max_distance = 230.0
+panning_strength = 0.9
+bus = &"game_SFX"
+
+[node name="scrape" type="AudioStreamPlayer3D" parent="circling/asps" index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6470032, 0, -0.647995)
+stream = ExtResource("9_p7r2u")
+unit_size = 20.0
+max_db = 0.0
+pitch_scale = 0.45
+max_distance = 235.0
+panning_strength = 0.9
+bus = &"game_SFX"
+
+[node name="fire" type="AudioStreamPlayer3D" parent="circling/asps" index="2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.020996, 3.849001, -1.602005)
+stream = ExtResource("10_jl87t")
+unit_size = 40.0
+max_db = -2.0
+autoplay = true
+max_distance = 260.0
+panning_strength = 0.9
+bus = &"game_SFX"
+
+[node name="_Plane_016 bottom" parent="." index="20"]
+layers = 17
+cast_shadow = 0
+gi_mode = 1
+
+[node name="Mountain_Group_1_012" parent="." index="24"]
+cast_shadow = 0
+
+[node name="Mountain_Group_1_013" parent="." index="25"]
+cast_shadow = 0

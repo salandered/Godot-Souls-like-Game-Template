@@ -13,9 +13,8 @@ export_credentials.cfg
 # ================== Assistants
 # claude instructions and godot docs mcp config
 .claude/
-.mcp.json
 # copilot
-.github
+.github/
 
 # ================== MISC
 # Imported translations (automatically generated from CSV files)
@@ -36,7 +35,6 @@ mono_crash.*.json
 misc/
 ideas/
 -adopting/
--adopt_demo_level/
 
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons
@@ -45,4 +43,4 @@ addons/*
 
 
 # ================== BIG ASSETS
--assets-/GLB-level/
+# -assets-/GLB-level/

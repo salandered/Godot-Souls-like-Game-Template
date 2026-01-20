@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://ma6cywyneshm"]
+
+[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/Enemies/sitting_sk/SitSkeleton.tscn" id="1_b3xnv"]
+[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword/smith_sword_2.glb" id="2_bru3o"]
+[ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="3_pq6ti"]
+
+[node name="SittingSkeletonAlt" instance=ExtResource("1_b3xnv")]
+
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" index="3"]
+bones/1/position = Vector3(8.523741e-07, 0.61344856, 0.038631536)
+bones/1/rotation = Quaternion(0.0012724398, 0.001516921, 0.008307821, 0.9999636)
+bones/2/rotation = Quaternion(0.090888806, 0.0012778057, -0.013529199, 0.99576837)
+bones/3/rotation = Quaternion(-0.0017430747, 0.0018562062, -0.0031052972, 0.999992)
+bones/4/rotation = Quaternion(-0.0017458198, 0.0021642144, -0.002629519, 0.99999267)
+bones/5/rotation = Quaternion(-0.008787259, -0.011171428, 0.004194401, 0.99989027)
+bones/6/rotation = Quaternion(-0.07555959, -0.041190475, -0.043329734, 0.99534756)
+bones/7/rotation = Quaternion(0.54350775, -0.42788404, -0.527959, -0.49272087)
+bones/8/rotation = Quaternion(-0.28834274, 0.81012607, -0.49064568, 0.14078744)
+bones/9/rotation = Quaternion(0.3272619, 0.62681705, -0.32726195, 0.62681717)
+bones/10/rotation = Quaternion(-0.08657588, -0.8674265, -0.30134183, 0.38635337)
+bones/11/rotation = Quaternion(-0.31204447, -0.64882284, -0.07434191, 0.69002205)
+bones/12/rotation = Quaternion(0.21016, 0.19200253, -0.21300548, 0.93466383)
+bones/13/rotation = Quaternion(0.32467282, -0.023664411, 0.07343038, 0.94267464)
+bones/14/rotation = Quaternion(0.11798012, -0.026669163, -0.005733997, 0.99264127)
+bones/15/rotation = Quaternion(0.22489895, 5.9604645e-08, 0.01832068, 0.97420985)
+bones/16/rotation = Quaternion(0.08000066, -5.960465e-08, 0.006516994, 0.9967736)
+bones/17/rotation = Quaternion(0.021995485, -0.0002156496, 0.031990826, 0.9992461)
+bones/18/rotation = Quaternion(0.2502354, 0, 0.020384787, 0.9679704)
+bones/19/rotation = Quaternion(0.04681922, 7.45058e-08, 0.0038139815, 0.9988962)
+bones/20/rotation = Quaternion(0.03721817, -0.0014674067, 0.06676215, 0.9970735)
+bones/21/rotation = Quaternion(0.107284784, 4.470349e-08, 0.008739741, 0.99419)
+bones/22/rotation = Quaternion(0.08805727, -5.960465e-08, 0.0071733603, 0.9960896)
+bones/23/rotation = Quaternion(0.07063563, 0.10222609, 0.08248377, 0.9888159)
+bones/24/rotation = Quaternion(0.055846646, -2.9802322e-08, 0.004549414, 0.99842906)
+bones/25/rotation = Quaternion(0.05539526, 2.9802322e-08, 0.0045126975, 0.99845433)
+bones/26/rotation = Quaternion(0.45473433, 0.5177655, 0.60293925, -0.40199506)
+bones/27/rotation = Quaternion(0.14450258, 0.86813647, -0.45918494, -0.120860875)
+bones/28/rotation = Quaternion(0.3652334, -0.60547876, 0.36523333, 0.6054789)
+bones/29/rotation = Quaternion(-0.20587751, 0.81944954, 0.2928511, 0.44761068)
+bones/30/rotation = Quaternion(-0.31617603, 0.7414975, 0.09759621, 0.5836859)
+bones/31/rotation = Quaternion(0.17606029, -0.12926722, 0.15826143, 0.9629362)
+bones/32/rotation = Quaternion(0.2590628, -0.011305214, -0.045063023, 0.96474254)
+bones/33/rotation = Quaternion(0.23268695, -0.007678778, -0.023270162, 0.972243)
+bones/34/rotation = Quaternion(0.18376389, -1.3411046e-07, -0.018831732, 0.9827901)
+bones/35/rotation = Quaternion(0.08413064, 2.2351739e-07, -0.008621453, 0.9964175)
+bones/36/rotation = Quaternion(0.14256753, 0.0020133257, -0.0649178, 0.9876518)
+bones/37/rotation = Quaternion(0.16757566, 1.0430813e-07, -0.017172664, 0.98570967)
+bones/38/rotation = Quaternion(0.14086857, 2.9802322e-08, -0.014435858, 0.9899231)
+bones/39/rotation = Quaternion(0.12166248, 0.0049537127, -0.086752094, 0.9887608)
+bones/40/rotation = Quaternion(0.13239866, 0, -0.013567982, 0.99110365)
+bones/41/rotation = Quaternion(0.15027723, -8.940697e-08, -0.015399724, 0.98852396)
+bones/42/rotation = Quaternion(0.11892906, 0.006129995, -0.09613106, 0.98821926)
+bones/43/rotation = Quaternion(0.11977519, -5.960465e-08, -0.012274208, 0.99272525)
+bones/44/rotation = Quaternion(0.09551838, -2.9802322e-08, -0.009788483, 0.99537957)
+bones/45/rotation = Quaternion(-0.0053367508, 0.68489903, 0.7232355, 0.08840434)
+bones/46/rotation = Quaternion(0.046971668, 0.7514718, -0.657443, -0.029197631)
+bones/47/rotation = Quaternion(0.04193235, 0.7383407, -0.6715184, -0.046451967)
+bones/48/rotation = Quaternion(-1.19361205e-08, 0.9999987, 0.0016722681, -1.4076391e-08)
+bones/49/rotation = Quaternion(0.03645963, 0.6794391, 0.7256936, -0.10199025)
+bones/50/rotation = Quaternion(-0.03797805, 0.751369, -0.6575497, 0.040384565)
+bones/51/rotation = Quaternion(-0.08147856, 0.733408, -0.67488503, -0.0020471925)
+bones/52/rotation = Quaternion(-6.807705e-08, 0.99999964, 0.00089994085, -4.69213e-09)
+
+[node name="Hips" parent="bones" index="0"]
+transform = Transform3D(0.99985737, -0.016611174, 0.0030548733, 0.016618896, 0.99985874, -0.0025195822, -0.0030125885, 0.0025699914, 0.99999213, 8.523741e-07, 0.61344856, 0.038631536)
+
+[node name="Chest" type="BoneAttachment3D" parent="bones" index="2"]
+transform = Transform3D(0.9997969, 0.017576436, 0.009859617, -0.015514135, 0.9835235, -0.18011364, -0.012862919, 0.17992409, 0.9835964, -0.00064876955, 0.8152001, 0.043898486)
+bone_name = "Chest"
+bone_idx = 3
+use_external_skeleton = true
+external_skeleton = NodePath("../../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+
+[node name="smith_sword_2" parent="bones/Chest" index="0" instance=ExtResource("2_bru3o")]
+transform = Transform3D(-0.90358466, -0.16460502, -0.031649113, -0.10634719, 0.42884463, 0.8058191, -0.12956369, 0.7959639, -0.44069892, 0.016812224, -0.13595784, -0.337363)
+
+[node name="LP smith sword" parent="bones/Chest/smith_sword_2" index="0"]
+material_override = ExtResource("3_pq6ti")
+
+[node name="UpperChest" parent="bones" index="3"]
+transform = Transform3D(0.9996386, 0.022791922, 0.014257332, -0.019915607, 0.9840534, -0.17675526, -0.018058566, 0.17640743, 0.98415154, 0.00083676935, 0.908357, 0.047007263)
+
+[node name="Mug2" parent="bones/UpperChest" index="0"]
+visible = false
+
+[editable path="VisualOffset/FCS_Skeleton_working3"]
+[editable path="bones/Chest/smith_sword_2"]

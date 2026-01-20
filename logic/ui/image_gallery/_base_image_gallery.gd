@@ -3,12 +3,12 @@ class_name BaseImageGallery
 extends ControlSystem
 
 
-const BASE_PATH := "res://-assets-/ui_assets/loader_backgrounds/"
+const BASE_PATH := "res://-assets-/ui_assets/gallery/"
 const MISC_PATH := BASE_PATH + "misc/"
 
 
 ## will be used recursively
-@export_dir var IMAGES_PATH = "res://-assets-/ui_assets/loader_backgrounds/"
+@export_dir var IMAGES_PATH = BASE_PATH
 
 ## parent of all
 @onready var global_container: MarginContainer = %GlobalContainer
@@ -264,7 +264,7 @@ func _apply_ui_visibility():
 
 	var target_margin := DEFAULT_GLOBAL_MARGIN if _ui_layer_visible else 0
 	
-	# (assuming Left and Right are synced)
+	# (assuming L and R are synced)
 	var current_margin := global_container.get_theme_constant("margin_left")
 	
 	UIUtils.kill_tween_if_exists(ui_tween)

@@ -17,8 +17,8 @@ class Environment_:
 	const TARGETABLE = "TARGETABLE"
 
 
-class Player_:
-	const parried_humanoid = "parried_humanoid"
+class Chars:
+	const BASE_CHARACTER = "BASE_CHARACTER"
 
 
 class Weapons:

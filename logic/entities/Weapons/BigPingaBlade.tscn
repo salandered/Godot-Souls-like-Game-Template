@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://ope03u0gwdw4"]
+
+[ext_resource type="Script" uid="uid://ckv0h0t1f0jey" path="res://logic/c_systems/weapon/big_pinga_blade.gd" id="1_hj5gq"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_kngnu"]
+[ext_resource type="PackedScene" uid="uid://c3objh8m5a340" path="res://-assets-/GLB-items/pinga/pinga_WRAP.tscn" id="8_y2ow7"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/unsorted/weapon_sfx/WeaponSfx.tscn" id="10_kngnu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jha5w"]
+radius = 0.5703125
+height = 2.1473145
+
+[node name="BigPingaBlade" type="Node3D"]
+script = ExtResource("1_hj5gq")
+
+[node name="WeaponHurtBox" parent="." instance=ExtResource("2_kngnu")]
+unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, -7.450581e-09, 0, 1, 0, 3.3527613e-08, -1.4901161e-08, 1, 0, 0, 0)
+collision_layer = 16
+collision_mask = 104
+
+[node name="HurtBoxCol4" type="CollisionShape3D" parent="WeaponHurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05667999, 1.4126592, 0.07279478)
+shape = SubResource("CapsuleShape3D_jha5w")
+debug_color = Color(0.84, 0.06719998, 0.28616, 1)
+
+[node name="Visuals" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.9858583, 0.15841751, -0.054660767, 0.04585822, -0.05869904, -0.9972209, -0.16118513, -0.9856264, 0.05060391, -0.008474976, 0.94384664, -0.04381919)
+
+[node name="pinga" parent="Visuals" instance=ExtResource("8_y2ow7")]
+transform = Transform3D(0.9989493, 0.0009749383, -0.045825683, 0.003027469, 0.9961876, 0.087186515, 0.045735955, -0.08723357, 0.99513817, -0.02796932, -0.06706248, 0.17864126)
+
+[node name="pinga2" parent="Visuals" instance=ExtResource("8_y2ow7")]
+transform = Transform3D(-0.6190732, 0.7834842, -0.05386689, -0.7842301, -0.6131112, 0.09528375, 0.041626893, 0.10123157, 0.9939921, -0.017121125, -0.080314904, 0.17992002)
+hide_rings = true
+
+[node name="pinga3" parent="Visuals" instance=ExtResource("8_y2ow7")]
+transform = Transform3D(-0.3770007, -0.92429584, -0.059571996, 0.921542, -0.38077432, 0.0759801, -0.09291156, -0.026253503, 0.9953286, 1.3589859e-05, -0.057776134, 0.17938131)
+hide_rings = true
+
+[node name="WeaponSFXParent" parent="." instance=ExtResource("10_kngnu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6699998, 0)
+
+[node name="SparkMarker" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015023589, 1.9600377, 0.059757516)
+
+[editable path="WeaponHurtBox"]
+[editable path="WeaponSFXParent"]

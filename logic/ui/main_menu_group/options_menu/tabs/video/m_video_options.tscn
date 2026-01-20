@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b1rhrrbwl6mk2" path="res://logic/ui/main_menu_group/options_menu/tabs/video/m_video_options_menu.gd" id="1_4vjx0"]
 [ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/m_capture_focus.gd" id="2_gcs5t"]
-[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/separator/h_separator.tscn" id="3_4vjx0"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="3_4vjx0"]
 [ext_resource type="PackedScene" uid="uid://c01ayjblhcg1t" path="res://logic/ui/ui_utils/options_nodes/m_vector_2_list_option_control.tscn" id="4_chxej"]
 [ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.tscn" id="5_kvajm"]
 [ext_resource type="Script" uid="uid://badmldrkr7cy1" path="res://logic/ui/ui_utils/options_nodes/m_option_control.gd" id="6_pi0p3"]
 [ext_resource type="Script" uid="uid://b4ttk71l8wkrw" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.gd" id="7_pi0p3"]
 [ext_resource type="PackedScene" uid="uid://0e65ib3cy6mf" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/reset_button.tscn" id="8_5161n"]
-[ext_resource type="PackedScene" uid="uid://cijp7que1div6" path="res://logic/ui/ui_utils/options_nodes/shadows_control.tscn" id="9_xruvw"]
+[ext_resource type="PackedScene" path="res://logic/ui/main_menu_group/options_menu/tabs/video/shadows_control.tscn" id="9_xruvw"]
 
 [node name="Video" type="MarginContainer"]
 anchors_preset = 15

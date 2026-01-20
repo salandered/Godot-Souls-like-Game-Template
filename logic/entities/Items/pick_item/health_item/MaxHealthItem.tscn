@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctsqu10igrfjw" path="res://logic/entities/Items/pick_item/health_item/HealthItem.tscn" id="1_de005"]
 [ext_resource type="Script" uid="uid://qg1d74wckra1" path="res://logic/entities/Items/pick_item/health_item/max_health_item.gd" id="2_01wdv"]
-[ext_resource type="Material" uid="uid://c6w1lwl6iudrg" path="res://-assets-/materials-shared/shaders/pick_items/max_health_mat.tres" id="2_ec5mp"]
+[ext_resource type="Material" uid="uid://c6w1lwl6iudrg" path="res://-assets-/materials-shared/_shaders/pick_items/max_health_mat.tres" id="2_ec5mp"]
 
 [node name="MaxHealthItem" instance=ExtResource("1_de005")]
 script = ExtResource("2_01wdv")

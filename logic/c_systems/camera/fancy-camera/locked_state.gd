@@ -4,7 +4,6 @@ class_name LockedCameraState
 var target: Node3D
 var lock_offset: Vector3
 
-# todo - another contant
 var blend_timer := SimpleTimer.new()
 var BLEND_DURATION := 0.4 # 0.3-0.6 seconds (shorter = snappier lock, longer = smoother)
 
@@ -16,8 +15,7 @@ var blend_start_hor_len := 0.0
 func switch_from_free(found_target: Node):
 	target = found_target.look_at_point
 
-	# --- "Seed from reality, not state." ---
-	# capture the true offset at the moment of locking to prevent any jump
+	# capturing the true offset at the moment of locking to prevent any jump
 	lock_offset = fc.nest.global_position - fc.mount.global_position
 	# tried: lock_offset = fc.camera.global_position - fc.mount.global_position
 	
@@ -25,8 +23,7 @@ func switch_from_free(found_target: Node):
 	var err := (cam_minus_mount - lock_offset).length()
 	# __log_("[~~ lock: err_to_offset_on_entry=", err)
 	
-	# --- Anchor the blend ---
-	# Store the initial conditions. The blend will always be from this
+	# store the initial conditions. The blend will always be from this
 	# fixed start-point to the moving end-point.
 	var current_offset_xz := Vector2(lock_offset.x, lock_offset.z)
 	blend_start_yaw_rad = current_offset_xz.angle()

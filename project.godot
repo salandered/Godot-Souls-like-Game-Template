@@ -31,8 +31,8 @@ buses/default_bus_layout="uid://h34rd3knc6l3"
 
 [autoload]
 
-FreeCameraMode="*res://logic/entities/Locations/_dev/dev_free_cam/FreeCamMode.tscn"
-FullscreenHandler="*res://logic/ui/fullscreen_handler.gd"
+FreeCameraMode="*res://logic/_project_data/autoload/dev_free_cam/FreeCamMode.tscn"
+FullscreenHandler="*res://logic/ui/ui_utils/fullscreen_handler.gd"
 InputManager="*res://logic/c_systems/input/pl_input/input_manager.gd"
 FrameUtils="*res://logic/_project_data/autoload/frame_utils.gd"
 M_AppConfig="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/app_config.tscn"
@@ -65,8 +65,9 @@ window/vsync/vsync_mode=0
 
 [editor]
 
+movie_writer/mix_rate=44100
 movie_writer/movie_file="C:/safe/godot/==recordings/rec.avi"
-movie_writer/disable_vsync=true
+movie_writer/fps=30
 
 [editor_plugins]
 
@@ -93,7 +94,6 @@ folder_colors={
 "res://-assets-/GLB-level/demo-level_/linkoln/mountain_view/": "blue",
 "res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/": "blue",
 "res://-assets-/GLB-level/demo-level_/tree_far/": "gray",
-"res://-assets-/GLB-mat-temp/": "purple",
 "res://-assets-/SFX/": "pink",
 "res://-assets-/SFX/audio_streams/": "yellow",
 "res://-assets-/SFX/audio_streams/footsteps/": "blue",
@@ -102,26 +102,24 @@ folder_colors={
 "res://-assets-/SFX/sources/fantasy_pack_by_tom_music/": "green",
 "res://-assets-/SFX/sources/freesound_cc0/": "blue",
 "res://-assets-/SFX/sources/ui_sounds/melodic_sfx_pack_1/": "purple",
-"res://-assets-/VFX/": "orange",
-"res://-assets-/VFX/lights/": "red",
-"res://-assets-/VFX/shaders/": "red",
 "res://-assets-/animations/": "yellow",
 "res://-assets-/animations/GLB-packed/": "blue",
 "res://-assets-/animations/standard-skeleton/": "blue",
 "res://-assets-/materials-shared/": "red",
+"res://-assets-/materials-shared/_baked/": "blue",
+"res://-assets-/materials-shared/_baked/quad_outfits/": "yellow",
+"res://-assets-/materials-shared/_textures/": "gray",
 "res://-assets-/materials-shared/_unsorted/": "gray",
-"res://-assets-/materials-shared/baked/": "blue",
-"res://-assets-/materials-shared/baked/quad_outfits/": "yellow",
-"res://-assets-/materials-shared/textures/": "gray",
 "res://-assets-/music/": "pink",
 "res://-assets-/ui_assets/": "pink",
-"res://-assets-/ui_assets/maaacks_assets/": "orange",
+"res://-assets-/ui_assets/_maaacks_assets/": "orange",
 "res://-assets-/x_icons/red/": "red",
 "res://-assets-/x_icons/yellow/": "yellow",
 "res://addons/": "gray",
 "res://addons/pixpal_tools_edited/": "pink",
 "res://ideas/": "gray",
 "res://ideas/enemy/SimpleEnemy/": "pink",
+"res://logic/_project_data/game_state/": "red",
 "res://logic/c_systems/animation/": "orange",
 "res://logic/c_systems/animation/anim_manager/": "purple",
 "res://logic/c_systems/awareness/": "yellow",
@@ -144,12 +142,11 @@ folder_colors={
 "res://logic/entities/Locations/": "yellow",
 "res://logic/entities/Locations/_dev/": "gray",
 "res://logic/entities/Locations/demo_level/": "blue",
-"res://logic/entities/Locations/environments/": "gray",
-"res://logic/entities/Locations/props/": "gray",
 "res://logic/entities/Locations/spring_up/": "gray",
+"res://logic/entities/VFX/": "orange",
+"res://logic/entities/VFX/lights/": "red",
 "res://logic/systems/sfx_anim_data_container/": "yellow",
 "res://logic/ui/": "pink",
-"res://logic/ui/game_state/": "red",
 "res://logic/ui/main_menu_group/": "pink",
 "res://logic/ui/main_menu_group/credits/": "purple",
 "res://logic/ui/main_menu_group/main_menu/": "pink",
@@ -416,6 +413,7 @@ DEV_KP7={
 
 [layer_names]
 
+3d_render/layer_5="Occluders"
 3d_render/layer_7="Characters"
 3d_render/layer_8="Dynamic"
 3d_render/layer_9="StaticSmall"

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dbcvsan1ldffm" path="res://logic/entities/Items/pick_item/_BasePickItem.tscn" id="1_2hydb"]
 [ext_resource type="Script" uid="uid://bvm06ys8jnc87" path="res://logic/entities/Items/pick_item/stamina_item/max_stamina_item.gd" id="2_rayid"]
-[ext_resource type="Material" uid="uid://b45m67rpq6djp" path="res://-assets-/materials-shared/shaders/pick_items/max_stamina_increase_item.tres" id="3_iikkq"]
+[ext_resource type="Material" uid="uid://b45m67rpq6djp" path="res://-assets-/materials-shared/_shaders/pick_items/max_stamina_increase_item.tres" id="3_iikkq"]
 
 [node name="MaxStaminaItem" instance=ExtResource("1_2hydb")]
 script = ExtResource("2_rayid")

@@ -284,37 +284,6 @@ func react_on_hit(hit: HitData):
 		curr_global_action()._react_on_hit(hit)
 
 
-# TODO: ...
-# func react_on_spell(spell_hit: SpellHitData):
-# 	if curr_global_action().is_vulnerable():
-# 		feelings.lose_health(spell_hit.damage)
-# 	# if curr_global_action().is_interruptable():
-# 		# forced_state.try_set("staggered", 0)
-# 	#spell_hit.queue_free()
-# 	spell_hit.spell.target_contacted(_player)
-
-# TODO: ...
-# Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
-func react_on_parry(_hit: HitData):
-	pass
-	# try_set_force_state("parried")
-
-# endregion
-
-# region: SOME DOCS
-#   check_transition()
-# 	BasePlayerState's conditions for transition is generally a simple function based on timings or states of the _player.
-#	If check_transition is a complex method, another state or usage of Combo_
-#
-#   update() functions manages perframe behavior of your BasePlayerState.
-#	There are two update types: 
-#	    - constant change
-#       - single dynamic update on some timing.
-#	To implement simple constant changes, try to find physics abstraction for them to make
-#	engine work for you. If changes are too complex, try to avoid hardcoding the behavior into 
-#   a giant update, better delegate the changes to backend animation or some other system.
-
-#	To implement timed changes, use a flag and work with timings via get_progress() etc.
 # endregion
 
 
@@ -342,3 +311,22 @@ func __log_time_spent():
 
 
 # endregion
+
+
+## DEV
+
+
+# TODO: ...
+# func react_on_spell(spell_hit: SpellHitData):
+# 	if curr_global_action().is_vulnerable():
+# 		feelings.lose_health(spell_hit.damage)
+# 	# if curr_global_action().is_interruptable():
+# 		# forced_state.try_set("staggered", 0)
+# 	#spell_hit.queue_free()
+# 	spell_hit.spell.target_contacted(_player)
+
+# TODO: ...
+# Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
+func react_on_parry(_hit: HitData):
+	pass
+	# try_set_force_state("parried")

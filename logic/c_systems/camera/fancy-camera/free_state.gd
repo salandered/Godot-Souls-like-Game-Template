@@ -7,7 +7,8 @@ var free_offset: Vector3
 
 
 func switch_from_locked():
-	__log_("DROP started")
+
+	__log_("switch_from_locked started")
 	chest = fc.player.camera_focus
 	var restored_offset := fc.nest.global_position - fc.mount.global_position
 	free_offset = restored_offset.normalized() * free_offset.length()
@@ -15,32 +16,35 @@ func switch_from_locked():
 	# another option against snapping to try
 	# _current_len = (fc.nest.global_position - fc.mount.global_position).length()
 	
-	__log_("DROP ended")
+	__log_("switch_from_locked ended")
 
 
 func update(delta: float) -> void:
 	var prev_focus_pos := fc.focus.global_position
 
-	_move_focus_point() # Focus Point follows player's chest
+	_move_focus_point(delta) # Focus Point follows player's chest
 
 	_rotate_offset(prev_focus_pos, fc.focus.global_position)
 
-	_move_camera_mount()
-	_move_camera_nest()
+	_move_camera_mount(delta)
+	_move_camera_nest(delta)
 
 	fc.camera_movement.move_camera(delta)
 
-	# __log_("[~~FREE UPD post", u.sfr(), "]", fc.__dbg_main_info())
+	# __log_("[FREE UPD post", u.sfr(), "]", fc.__dbg_main_info())
 
 
-func _move_focus_point() -> void:
+func _move_focus_point(delta: float) -> void:
 	if not fc.focus.global_position.is_equal_approx(chest.global_position):
-		fc.focus.global_position = lerp_position_(fc.focus, chest, fc.FREE_FOCUS_CHEST_WEIGHT)
+		var adjusted_weight = fc.FREE_FOCUS_CHEST_WEIGHT * (delta * 60.0)
+		adjusted_weight = clamp(adjusted_weight, 0.0, 1.0)
+	
+		fc.focus.global_position = lerp_position_(fc.focus, chest, adjusted_weight)
 
 
 # region: old docs
 #  from one free_offset to another after Focus Point movement. 
-#  To do it we count this angle and rotate the free_offset by the vertical axis. 
+#  To do this we count this angle and rotate the free_offset by the vertical axis. 
 #  Additional vars with zero and Y coordinate is due to wanting only the angle of the projected horizontally picture 
 #  		and not the angle in 3D between these vectors. 
 #  Decider part is once again uses the cross product to decide if we want to rotate to the right or to the left.
@@ -64,15 +68,27 @@ func _rotate_offset(prev_focus_pos: Vector3, new_focus_pos: Vector3) -> void:
 	free_offset = free_offset.rotated(Vector3.UP, signed_alpha)
 
 
-func _move_camera_mount() -> void:
-	fc.mount.global_position = lerp_position_(fc.mount, fc.player.camera_focus, fc.FREE_MOUNT_CHEST_WEIGHT)
+func _move_camera_mount(delta: float) -> void:
+	var adjusted_weight = fc.FREE_MOUNT_CHEST_WEIGHT * (delta * 60.0)
+	adjusted_weight = clamp(adjusted_weight, 0.0, 1.0)
+	fc.mount.global_position = lerp_position_(
+		fc.mount,
+		fc.player.camera_focus,
+		adjusted_weight
+	)
 
-func _move_camera_nest() -> void:
-	fc.nest.global_position = lerp_position_(fc.nest, fc.mount.global_position + free_offset, fc.FREE_NEST_MOUNT_WEIGHT)
+func _move_camera_nest(delta: float) -> void:
+	var adjusted_weight = fc.FREE_NEST_MOUNT_WEIGHT * (delta * 60.0)
+	adjusted_weight = clamp(adjusted_weight, 0.0, 1.0)
+	fc.nest.global_position = lerp_position_(
+		fc.nest,
+		fc.mount.global_position + free_offset,
+		adjusted_weight
+	)
 
 
 # region: old docs
-	# take the Delta 🖱️ movement and somehow counts a Delta angle from that movement length.
+	# take the Delta 🖱️ movement and calculates a Delta angle from that movement length.
 	# then rotate free_offset vector by that angle using the correspondent axis.
 	# Delta movement is small => sin(Alpha) ~ Alpha. 
 	#    => divide by a thousand and multiply by a sensitivity number

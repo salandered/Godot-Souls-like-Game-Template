@@ -39,8 +39,8 @@ func on_player_entered(incoming_body: Node3D):
 	var incoming_y_velocity := _target_player.velocity.y
 	
 	# Calculate dynamic height: Base Height + (Velocity * Multiplier)
-	# We use max() to ensure we don't accidentally spring downwards if falling very fast
-	# We flip the sign if falling (negative velocity) to make it add to the bounce
+	# use max() to ensure we don't accidentally spring downwards if falling very fast
+	# flip the sign if falling (negative velocity) to make it add to the bounce
 	var bonus_height := absf(incoming_y_velocity) * velocity_influence
 	var final_height := lift_height + bonus_height
 	

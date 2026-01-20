@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c12h0eq5aqu80"]
+
+[ext_resource type="Script" uid="uid://xbe3ylvjbeic" path="res://logic/entities/Enemies/sitting_sk/look_at.gd" id="1_hp038"]
+
+[node name="LookAtCharacterMarker" type="Marker3D"]
+script = ExtResource("1_hp038")

@@ -3,8 +3,6 @@ extends Node
 
 ## AUTOLOAD
 
-## Here can be added signals which are consumed in one place only.
-
 signal _SIG_player_change_health(payload: Dictionary[String, Variant])
 signal _SIG_player_max_health_increase(payload: Dictionary[String, Variant])
 signal _SIG_player_max_stamina_increase(payload: Dictionary[String, Variant])

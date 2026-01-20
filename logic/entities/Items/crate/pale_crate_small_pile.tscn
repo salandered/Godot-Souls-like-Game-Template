@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://h2tu6aom7cty"]
+
+[ext_resource type="PackedScene" uid="uid://c3xoku2an7ywo" path="res://logic/entities/Items/crate/PaleCrate.tscn" id="1_4qaqu"]
+
+[node name="PlaceCrateSmallPile" type="Node3D"]
+
+[node name="PaleCrate" parent="." instance=ExtResource("1_4qaqu")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.27914175, 0.25812173, -0.3892721)
+
+[node name="PaleCrate2" parent="." instance=ExtResource("1_4qaqu")]
+transform = Transform3D(0.43276247, 0, -0.9015081, 0, 1, 0, 0.9015081, 0, 0.43276247, 0.33939233, 0.25556886, -0.29874927)
+
+[node name="PaleCrate3" parent="." instance=ExtResource("1_4qaqu")]
+transform = Transform3D(0.43276247, 0, -0.9015081, 0, 1, 0, 0.9015081, 0, 0.43276247, -0.053876255, 0.75735205, -0.2278417)

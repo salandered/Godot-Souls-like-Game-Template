@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://bu78ylp2jroiw"]
+
+[ext_resource type="Script" uid="uid://2p87053gvdyt" path="res://logic/entities/VFX/puff/puff_explosion.gd" id="1_spofe"]
+[ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/_shaders/puff/SmokePuff.png" id="2_4x8tm"]
+[ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://-assets-/materials-shared/_shaders/puff/SmokePuffNormals.png" id="3_2a6te"]
+
+[sub_resource type="Animation" id="Animation_odwyp"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PuffExplosionParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sfsol"]
+resource_name = "explosion"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("PuffExplosionParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0aew"]
+_data = {
+&"RESET": SubResource("Animation_odwyp"),
+&"explosion": SubResource("Animation_sfsol")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x8tm"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_4x8tm")
+normal_enabled = true
+normal_scale = 12.0
+normal_texture = ExtResource("3_2a6te")
+refraction_scale = 0.31
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 1.027
+proximity_fade_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_y004h"]
+size = Vector2(4, 4)
+
+[sub_resource type="Curve" id="Curve_omnbd"]
+_data = [Vector2(0, 0), 0.0, 3.25161, 0, 0, Vector2(1, 1), 0.0363636, 0.0363636, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_3b8ax"]
+offsets = PackedFloat32Array(0, 0.2562814, 0.46770027, 0.7512563, 1)
+colors = PackedColorArray(0.67650515, 0.67650515, 0.67650515, 0, 1, 0.6, 0, 0.7254902, 0.81, 0.42903, 0.13770002, 0.15294118, 0.55, 0.42221668, 0.32450002, 0.47843137, 0.105469, 0.105469, 0.105469, 0)
+
+[node name="PuffExplosion" type="Node3D"]
+script = ExtResource("1_spofe")
+
+[node name="devPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_y0aew")
+}
+
+[node name="PuffExplosionParticles" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_4x8tm")
+cast_shadow = 0
+amount = 10
+lifetime = 9.0
+one_shot = true
+explosiveness = 0.92
+lifetime_randomness = 0.2
+mesh = SubResource("QuadMesh_y004h")
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 0.95
+scale_amount_max = 1.05
+scale_amount_curve = SubResource("Curve_omnbd")
+color_ramp = SubResource("Gradient_3b8ax")

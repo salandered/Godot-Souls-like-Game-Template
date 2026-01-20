@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://bs1rf0cb545oq"]
+
+[ext_resource type="Script" uid="uid://dotahls6vtroe" path="res://logic/ui/loading_screen/m_loading_screen.gd" id="1_j1vc5"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="12_167l7"]
+[ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/prefab/color_rect.tscn" id="12_lioqs"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort_ui/distort_menu.gdshader" id="13_deyge"]
+[ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/ui_utils/prefab/background_music_player/m_background_music_player.tscn" id="15_lpyag"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8f36y"]
+noise = SubResource("FastNoiseLite_y57hi")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_167l7"]
+shader = ExtResource("13_deyge")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_8f36y")
+shader_parameter/distortion_strength = 0.0030000001425
+shader_parameter/speed = 0.1
+shader_parameter/red_amount = 0.9350000444125
+shader_parameter/green_amount = 1.0
+shader_parameter/blue_amount = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 1.0
+shader_parameter/pop_tint = Color(0, 0, 0, 0)
+shader_parameter/vignette_intensity = 1.4190000674025
+shader_parameter/vignette_softness = 0.1970000093575
+
+[node name="M_LoadingScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+script = ExtResource("1_j1vc5")
+_complete = ""
+background_image_paths = Array[String](["uid://bao877phccl35", "uid://bou43m0wm6j1", "uid://c6r4ede1h35cv", "uid://dgfi5rtft6keb", "uid://vgchkkdiaajj", "uid://qsinqvca4f1k", "uid://btyqnorug4vwe", "uid://m6vx76vru4v1", "uid://t8n42w7bayi0", "uid://cuykqyvmucksm", "uid://cmcl2jmhalgi0", "uid://b6aeflinp8x0g", "uid://ccjx416rmarik", "uid://cbg0jt7cpk4c5", "uid://bssyesge7alyg", "uid://ghcgnjcay8ek", "uid://dq8bsncuqqm1g"])
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundTextureRect" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.99814814
+anchor_right = 1.0
+anchor_bottom = 0.99814814
+offset_left = 9.0
+offset_top = -190.0
+offset_right = 9.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 140
+theme_override_constants/margin_right = 140
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ProgressLabel" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("12_167l7")
+theme_override_font_sizes/font_size = 34
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+max_value = 1.0
+value = 0.7
+
+[node name="ErrorMessage" type="AcceptDialog" parent="Control"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Loading Error"
+initial_position = 2
+size = Vector2i(360, 102)
+
+[node name="StalledMessage" type="ConfirmationDialog" parent="Control"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Loading Stalled"
+initial_position = 2
+size = Vector2i(360, 102)
+ok_button_text = "Try Waiting"
+cancel_button_text = "Reload"
+
+[node name="LoadingTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[node name="ColorRect" parent="." instance=ExtResource("12_lioqs")]
+material = SubResource("ShaderMaterial_167l7")
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("15_lpyag")]
+
+[connection signal="confirmed" from="Control/ErrorMessage" to="." method="_on_error_message_confirmed"]
+[connection signal="canceled" from="Control/StalledMessage" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="Control/StalledMessage" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="timeout" from="LoadingTimer" to="." method="_on_loading_timer_timeout"]

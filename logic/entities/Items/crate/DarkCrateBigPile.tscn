@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1glwn1vbeqan"]
+
+[ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/entities/Items/crate/DarkCrateColumn.tscn" id="1_4a3x4"]
+[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Items/crate/DarkCratePile.tscn" id="2_0635w"]
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/props/dark_crate.tscn" id="3_0635w"]
+
+[node name="DarkCrateBigPile" type="Node3D"]
+
+[node name="DarkCrateColumn5" type="Node3D" parent="."]
+transform = Transform3D(0.0340274, 0, 0.9994209, 0, 1, 0, -0.9994209, 0, 0.0340274, -0.2864493, 0, -0.9536453)
+
+[node name="DarkCrate" parent="DarkCrateColumn5" instance=ExtResource("3_0635w")]
+transform = Transform3D(-0.036155373, 0, -0.9993462, 0, 1, 0, 0.9993462, 0, -0.036155373, 0, 0.33438396, -0.08092737)
+
+[node name="DarkCrate2" parent="DarkCrateColumn5" instance=ExtResource("3_0635w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95145655, -0.08092737)
+
+[node name="DarkCrate3" parent="DarkCrateColumn5" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.9861412, 0, 0.16590825, 0, 1, 0, -0.16590825, 0, 0.9861412, 0, 1.6013209, -0.08092737)
+
+[node name="DarkCrateColumn6" parent="." instance=ExtResource("1_4a3x4")]
+transform = Transform3D(0.0340274, 0, 0.9994209, 0, 1, 0, -0.9994209, 0, 0.0340274, 0.46361887, 0, -0.92810756)
+
+[node name="DarkCratePile6" parent="." instance=ExtResource("2_0635w")]
+transform = Transform3D(-0.99699765, 0, 0.077432536, 0, 1, 0, -0.077432536, 0, -0.99699765, 3.515071, 0.010409713, -0.21464613)
+
+[node name="another pile" type="Node3D" parent="."]
+
+[node name="DarkCrate" parent="another pile" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.9970861, 0, 0.0762839, 0, 1, 0, -0.0762839, 0, 0.9970861, -0.010365009, 0.3297251, 0.66485894)
+
+[node name="DarkCrate2" parent="another pile" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.9999079, 0, -0.01357832, 0, 1, 0, 0.01357832, 0, 0.9999079, -0.6738211, 0.3297251, 0.6514617)
+
+[node name="DarkCrate3" parent="another pile" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.9970861, 0, 0.0762839, 0, 1, 0, -0.0762839, 0, 0.9970861, -0.6772597, 0.95353156, 0.6065167)
+
+[node name="DarkCrate4" parent="another pile" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.97994554, 0, 0.19926521, 0, 1, 0, -0.19926521, 0, 0.97994554, -0.03353858, 0.95353156, 0.60247576)
+
+[node name="DarkCrate5" parent="another pile" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.9970861, 0, 0.0762839, 0, 1, 0, -0.0762839, 0, 0.9970861, -0.30794525, 1.5773377, 0.6234696)
+
+[node name="DarkCrate6" parent="another pile" instance=ExtResource("3_0635w")]
+transform = Transform3D(0.7947431, 0, -0.60694593, 0, 1, 0, 0.60694593, 0, 0.7947431, -0.32014108, 2.2072597, 0.62440264)

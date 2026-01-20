@@ -1,0 +1,70 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://druxsqnxe6376"
+path="res://.godot/imported/gold-cave.glb-ca2da16dc21f3233b59bd9d34411d7d1.scn"
+
+[deps]
+
+source_file="res://-assets-/GLB-level/demo-level_/golden/gold-cave.glb"
+dest_files=["res://.godot/imported/gold-cave.glb-ca2da16dc21f3233b59bd9d34411d7d1.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=0
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"A brown_mud_darken": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/ground/brown_mud/A brown_mud_darken_Reimp_2k.tres",
+"use_external/path": "uid://dacrgdm6xn345"
+},
+"B Stone Dirt Wall 02": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/B Stone Dirt Wall 02_Reimp_2k.tres",
+"use_external/path": "uid://doed0kwtng7wd"
+},
+"B glass.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/different/B glass.001_Reimp.tres",
+"use_external/path": "uid://d2ifs5mckxgxv"
+},
+"I_Metal048C_2K-JPG": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_darker.tres",
+"use_external/path": "uid://bur1bh2j826ri"
+},
+"damaged_concrete_columns": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_Reimp_05k_.tres",
+"use_external/path": "uid://dm3e5rn6mj40r"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=0

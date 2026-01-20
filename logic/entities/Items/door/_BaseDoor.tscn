@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bscq7k6x1b2hu" path="res://-assets-/SFX/sources/400/lock_quick.wav" id="6_446hs"]
 [ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 119-Audio.wav" id="7_xvi0d"]
 [ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="8_fc0ar"]
-[ext_resource type="Material" uid="uid://c8d72o45y8lge" path="res://-assets-/materials-shared/solid/_P col connections_Reimp.tres" id="8_gx7ph"]
+[ext_resource type="Material" uid="uid://c8d72o45y8lge" path="res://-assets-/materials-shared/solid/P/_P col connections_Reimp.tres" id="8_gx7ph"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_10s4t"]
 size = Vector3(1.4769135, 2.7642212, 0.123046875)

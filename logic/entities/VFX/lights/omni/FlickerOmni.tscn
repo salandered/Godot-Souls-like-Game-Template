@@ -1,0 +1,255 @@
+[gd_scene load_steps=17 format=4 uid="uid://dkav81mtgsiib"]
+
+[ext_resource type="PackedScene" uid="uid://d3tc5aaqi8k6q" path="res://logic/entities/VFX/lights/_base_omni/BaseOmni.tscn" id="1_jro0j"]
+[ext_resource type="Script" uid="uid://dg2vjew5w2ih8" path="res://logic/entities/VFX/lights/omni/flicker_omni.gd" id="2_auf42"]
+[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="3_ij60g"]
+[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="4_dephg"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="5_6uios"]
+
+[sub_resource type="Animation" id="Animation_auf42"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:_animated_energy_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:_animated_range_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.387]
+}
+
+[sub_resource type="Animation" id="Animation_ij60g"]
+resource_name = "flicker"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:_animated_range_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8904017, 1.7333333),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [2.387, 3.692, 2.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:_animated_energy_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.252, 0.40320003, 0.504, 0.9072, 1.0583999, 1.26, 1.3608, 1.4616002, 1.6464018, 1.8333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [6.0, 3.0, 5.0, 3.5, 5.0, 3.0, 6.0, 2.0, 4.0, 5.0, 3.0]
+}
+
+[sub_resource type="Animation" id="Animation_dephg"]
+resource_name = "flicker_fuck"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:_animated_energy_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.56666666, 0.8333333, 1.1666666, 1.3666667, 1.6, 1.8333334),
+"transitions": PackedFloat32Array(1, 1, -2, 2, -2, -2, -2, -2),
+"update": 0,
+"values": [5.0, 4.0, 5.0, 3.0, 5.0, 3.5, 4.5, 3.8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:_animated_range_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.6666666),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [3.0, 2.7, 3.2, 2.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dephg"]
+_data = {
+&"RESET": SubResource("Animation_auf42"),
+&"flicker": SubResource("Animation_ij60g"),
+&"flicker_fuck": SubResource("Animation_dephg")
+}
+
+[sub_resource type="Animation" id="Animation_bcn8a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6uios"]
+resource_name = "omni_move"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8666667, 1.3333334, 1.8333334, 2.3, 2.7333333, 3.2, 3.6333334),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.025, 0.01), Vector3(0.02, 0, 0), Vector3(-0.01, -0.03, 0), Vector3(-0.03, 0, 0), Vector3(0, 0, 0.025), Vector3(-0.01, 0.02, 0), Vector3(0.01, 0.01, 0), Vector3(0, -0.025, -0.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_04rcq"]
+_data = {
+&"RESET": SubResource("Animation_bcn8a"),
+&"omni_move": SubResource("Animation_6uios")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdwx7"]
+resource_name = "damaged_concrete_columns"
+cull_mode = 2
+albedo_texture = ExtResource("3_ij60g")
+metallic_texture = ExtResource("4_dephg")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("4_dephg")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("5_6uios")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqjo8"]
+resource_name = "damaged_concrete_columns_lighter_cleaner"
+cull_mode = 2
+albedo_texture = ExtResource("3_ij60g")
+metallic_texture = ExtResource("4_dephg")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("4_dephg")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("5_6uios")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gxo4b"]
+_surfaces = [{
+"aabb": AABB(-0.48115116, -1.1935166, -1.1994382, 1.1840627, 2.1270478, 2.1703131),
+"format": 34896613377,
+"index_count": 69,
+"index_data": PackedByteArray("AAABAAIAAgADAAQAAgABAAMAAQAFAAMAAQAGAAUAAAAHAAEAAAAIAAcAAQAJAAYACQABAAcACQAKAAYACQALAAoABwAMAAkACQAMAAsABwAIAAwADQAMAAgADAAOAAsADAANAA8ADAAQAA4ADAAPABAADgAQABEADwARABAAEQAPABIAEQASABMA"),
+"name": "damaged_concrete_columns",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("uC3EBmnfAACbscRLQOwAAJuxAAD//wAAKOLES9rqAAD//3kJ7PsAAJuxo7fE6wAAQ6At3pfnAAD6N8RLp9AAAJsBr0EdcgAAgzbS3ZzOAADwMx31mtIAAIsA//89cwAAAAAG3UByAAB2DMRLUmIAAHQ2lPSQGgAAFznEeDcbAACwOFHeUB0AADOcCd/CBwAAxrKBkwAAAABNs9+zHQEAAA==")
+}, {
+"aabb": AABB(-0.4786329, -1.1935166, -1.1994382, 1.1815444, 2.1270478, 2.1703131),
+"format": 34896613377,
+"index_count": 39,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQACAAQABQAGAAIABAAHAAUABwAIAAUABwAJAAgACgALAAkACQALAAwACQAMAAgACAAMAA0ADgAIAA0A"),
+"name": "damaged_concrete_columns_lighter_cleaner",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("gDMd9ZrSAAAAAP//PXMAAA6gLd6X5wAABjaU9JAaAAD8mwnfwgcAABjixEva6gAAcLGjt8TrAAAjs9+zHQEAAP//eQns+wAAnLKBkwAAAACrOMR4NxsAAPELxEtSYgAAEAGvQR1yAABFLcQGad8AAHCxAAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_818gi"]
+resource_name = "column shattered_Object_0_081"
+_surfaces = [{
+"aabb": AABB(-0.48115116, -1.1935166, -1.1994382, 1.1840627, 2.1270478, 2.1703131),
+"attribute_data": PackedByteArray("QmMNP+FV2EdpVUk+mWLCR8PAa2ULzk9tj8Edbo/BHW5mzaKALcFMgAvOT20HY+9Z4VXYR5liwkf0VwxaElZEVWlVST4FUfdHm02sP+FV2EfhVdhHElZEVQVR90cHY+9ZQmPMXPRXDFotwUyAHM36hMPAKoNmzaKAZs2igCjUOIQczfqE3tNwgTHVWsrR1snJGtjp03jcssYa2OnT0dbJyXjc6tO72vPUMM+vbmbNooALzk9tiNTRdN7TcIE="),
+"format": 34896613399,
+"index_count": 69,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABwAIAAkABwAKAAgACwAMAA0ADAALAA4ADAAOAA8AEAARABIAEAATABEAFAAVABYAFwAYABkAGgAbABwAGgAdABsAHgAfACAAHgAhAB8AIgAjACQAJQAmACcAJgAlACgAJgAoACkAKgArACwAKwAqAC0AKwAtAC4A"),
+"material": SubResource("StandardMaterial3D_qdwx7"),
+"name": "damaged_concrete_columns",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 47,
+"vertex_data": PackedByteArray("uC3EBmnfvf2bscRLQOy8/ZuxAAD//7T9+jfES6fQxv24LcQGad/C/ZsBr0EdcsL9+jfES6fQwv36N8RLp9C+/gAABt1Acr/+gzbS3ZzOwP6bAa9BHXK9/oM20t2czpb/m7HES0Dskv/6N8RLp9CQ/0OgLd6X55j/m7Gjt8TrlP+bsQAA//++/ijixEva6s3+//95Cez7tf6bscRLQOzY/puxxEtA7In+m7Gjt8Trif4o4sRL2uqJ/oM20t2cztb+8DMd9ZrS1v5DoC3el+fW/oM20t2czrP9iwD//z1zxv3wMx31mtKs/QAABt1Acsv9AAAG3UBy1P10NpT0kBrO/YsA//89c9X9sDhR3lAdzP10NpT0kBrf8bA4Ud5QHd/xM5wJ38IH3/EXOcR4Nxu79jOcCd/CB7v2sDhR3lAduPbGsoGTAAC+9k2z37MdAb72dgzES1Jil/4AAAbdQHKX/psBr0EdcpX+FznEeDcbmP6wOFHeUB2X/qT0shOk9LMTpvS0E6L0sRMc+hA0HPoQNBz6EDRHStOAR0rTgEZK0oBIStSAsv+QFbP/kBW0/5AVsv+QFbP/kBW9Dh0CvA4fAr0OGwK8DiECWABGA1gARgNYAEYDrGvfdqxr33asa992x0lnf85JV3/FSWx/0ElTfwQ2X4EJNmeBAzZdgQs2aoHgPma24D5mtuA+ZrY1QSe0OEEqtENBOLQqQRq0KkEatBI2AIISNv+BEzYCghE2/oESNv+B")
+}, {
+"aabb": AABB(-0.4786329, -1.1935166, -1.1994382, 1.1815444, 2.1270478, 2.1703131),
+"attribute_data": PackedByteArray("5qHtcLmiYX1AmGNqkZn6hNGODoMfjuhlQJhjatGODoO7ldho5KrN2+2yANuWnnPihJ3q8e2yO/4Zn9rzzqWo/CiLb4I4iixiH47oZTiKMoLRjg6DKItvgh+O6GU="),
+"format": 34896613399,
+"index_count": 39,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQAGAAcABQAIAAYACQAKAAsACgAMAAsADQAMAAoADQAOAAwADwAOAA0AEAARABIAEAATABEAFAAVABYA"),
+"material": SubResource("StandardMaterial3D_jqjo8"),
+"name": "damaged_concrete_columns_lighter_cleaner",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 23,
+"vertex_data": PackedByteArray("gDMd9ZrSpPoAAP//PXOk+g6gLd6X56T6BjaU9JAapPr8mwnfwgek+hjixEva6uDhDqAt3pfn4eH8mwnfwgfg4XCxo7fE6+nhcLEAAP//wNT//3kJ7PvA1EUtxAZp38DUEAGvQR1ywNScsoGTAADA1PELxEtSYsDUqzjEeDcbwNQjs9+zHQF33f//eQns+/LfGOLES9rqVeCcsoGTAAD53PybCd/CB0LjI7Pfsx0BQuMY4sRL2upC4yuYObErmDmxK5g5sSuYObErmDmx5ycCKOYnAijnJwIo3ycHKJkYOmqZGDpqmRg6apkYOmqZGDpqmRg6apkYOmpTKkcpuCfTKlInDyvcKvcogif/JoIn/yaCJ/8m")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_gxo4b")
+
+[node name="FlickerOmni" instance=ExtResource("1_jro0j")]
+script = ExtResource("2_auf42")
+speed_scale = 1.0
+play_animation = true
+move_speed_scale = 1.0
+play_move_animation = false
+vose_enabled = true
+vose_whd = Vector3(1, 1, 1)
+auto_vose_abb = true
+sway_padding = Vector3(1, 1, 1)
+apply_auto_vose_abb_now = false
+_animated_energy_strength = 6.0
+_animated_range_strength = 2.387
+
+[node name="OmniLight3D" parent="." index="0"]
+light_energy = 22.8
+omni_range = 8.5932
+
+[node name="FlickerAnimator" type="AnimationPlayer" parent="." index="2"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_dephg")
+}
+
+[node name="MoveAnimator" type="AnimationPlayer" parent="." index="3"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_04rcq")
+}
+
+[node name="test_visual_base" parent="test_visuals_base" index="0"]
+mesh = SubResource("ArrayMesh_818gi")
+
+[node name="test_visual_base2" parent="test_visuals_base" index="1"]
+mesh = SubResource("ArrayMesh_818gi")
+
+[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="." index="5"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030094266, 0, 0)
+aabb = AABB(-4.6, -4.6, -4.6, 9.2, 9.2, 9.2)
+enable_node_path = NodePath("")

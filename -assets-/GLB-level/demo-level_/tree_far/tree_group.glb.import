@@ -1,0 +1,123 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://byib7n7e4xq1j"
+path="res://.godot/imported/tree_group.glb-ce05dd2b9f6df08f94d919847b64a544.scn"
+
+[deps]
+
+source_file="res://-assets-/GLB-level/demo-level_/tree_far/tree_group.glb"
+dest_files=["res://.godot/imported/tree_group.glb-ce05dd2b9f6df08f94d919847b64a544.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=2
+meshes/lightmap_texel_size=0.4
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"I_Concrete Old": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/I_concrete_old/I_Concrete Old_Reimp.tres",
+"use_external/path": "uid://cbwntc6i15rod"
+},
+"P Dark_Grey": {
+"use_external/enabled": true,
+"use_external/fallback_path": "",
+"use_external/path": "uid://b5rwp58jklpas"
+},
+"bark_debris_01": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/trunk_root_debris/bark_debris_01_Reimp.tres",
+"use_external/path": "uid://b5l4we8it0vyf"
+},
+"dirt_aerial_02": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/ground/dirt_aerial/dirt_aerial_02_Reimp_2k.tres",
+"use_external/path": "uid://r4bjtqqba0s8"
+},
+"lichen_rock": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres",
+"use_external/path": "uid://o0bn285hpysy"
+}
+},
+"nodes": {
+"PATH:tree group far/BirchTree_Dead_1_002": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/BirchTree_Dead_1_007": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/BirchTree_Dead_1_008": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/BirchTree_Dead_1_009": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/BirchTree_Dead_1_010": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/BirchTree_Dead_1_011": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/BirchTree_Dead_1_012": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_004": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_016": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_019": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_021": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_024": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_026": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_029": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_030": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_031": {
+"mesh_instance/layers": 256
+},
+"PATH:tree group far/dead tree/DeadTree_10_034": {
+"mesh_instance/layers": 256
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=0

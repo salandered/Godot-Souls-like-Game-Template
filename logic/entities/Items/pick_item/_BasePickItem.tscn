@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dbcvsan1ldffm"]
 
-[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="1_c8rud"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="1_c8rud"]
 [ext_resource type="Script" uid="uid://bwju7ueo1tpj6" path="res://logic/entities/Items/pick_item/_generic_pick_item.gd" id="1_xh13q"]
 [ext_resource type="AudioStream" uid="uid://ddwk042630d60" path="res://-assets-/SFX/sources/WAV round/Collect_Small_Jewel_1.wav" id="2_lbk6k"]
 [ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-assets-/SFX/sources/400/light_match.wav" id="3_6ute5"]

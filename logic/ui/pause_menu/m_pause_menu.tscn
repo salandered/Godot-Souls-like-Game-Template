@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://logic/ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://logic/ui/ui_utils/legacy_capture_focus.gd" id="3_j5dnp"]
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="3_l2gh6"]
-[ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/container-background.tres" id="4_kheb5"]
-[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/separator/h_separator.tscn" id="4_w5m25"]
+[ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/themes/panel/panel_back.tres" id="4_kheb5"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="4_w5m25"]
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3

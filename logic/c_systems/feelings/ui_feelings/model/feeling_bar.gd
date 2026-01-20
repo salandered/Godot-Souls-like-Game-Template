@@ -5,7 +5,7 @@ extends RefCountedLogger
 ## DOCS
 # public functions should be named as if it is jast one bar
 # e.g.: set_max_value, not update_max_size_all_bars
-# or get_custom_min_size_x, not get_container_custom_min_size
+# 	or get_custom_min_size_x, not get_container_custom_min_size
 # This will help to use an abstraction later
 
 ## ===========================================================================
@@ -34,7 +34,7 @@ extends RefCountedLogger
 ##    - Mouse > Filter:             Ignore
 ##
 ## ===========================================================================
-##    LOGIC SUMMARY
+##    TLDR
 ##    - Code reads Container Width (300) / Max Stat (e.g. 70) = Pixels Per Unit.
 ##    - To resize, code updates the Container's Custom Min Size.
 ##    - The Bars (set to Fill) automatically stretch to match.

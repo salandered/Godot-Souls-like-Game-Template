@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://hel0ts8yi8bf"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_is1cb"]
+color = Color(0.39138144, 0.39138144, 0.39138144, 1)
+thickness = 2
+
+[node name="HSeparator" type="HSeparator"]
+theme_override_styles/separator = SubResource("StyleBoxLine_is1cb")

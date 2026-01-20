@@ -1,0 +1,232 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://blomj0mki36oh"
+path="res://.godot/imported/exit_2.glb-4bff43e4c71057d13370b782f0e0f0e7.scn"
+
+[deps]
+
+source_file="res://-assets-/GLB-level/demo-level_/exit_2/exit_2.glb"
+dest_files=["res://.godot/imported/exit_2.glb-4bff43e4c71057d13370b782f0e0f0e7.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=2
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"I_Fabric029_2d1K-JPG": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric029/I_Fabric029_2d1K-JPG_Reimp.tres",
+"use_external/path": "uid://ps48evx4iprl"
+},
+"I_Metal025_1K-JPG": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/metal/I_metal_025/I_Metal025_1K-JPG_Reimp.tres",
+"use_external/path": "uid://corbh7usys0xj"
+},
+"I_fabric_177-1K": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric_177/I_fabric_177-1K_Reimp.tres",
+"use_external/path": "uid://cw7kd7pvhxw1c"
+},
+"MI_Trim_Metal_Vertex_sweet": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres",
+"use_external/path": "uid://da67u180dattb"
+},
+"Mine_Carts": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/baked/mines/Mine_Carts_Reimp.tres",
+"use_external/path": "uid://dpu5xo3l668xm"
+},
+"concrete": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/solid/flat_emitter_orange.tres",
+"use_external/path": "uid://dapcd01d70tew"
+},
+"dirt_aerial_02": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/ground/dirt_aerial/dirt_aerial_02_Reimp_2k.tres",
+"use_external/path": "uid://r4bjtqqba0s8"
+},
+"lichen_rock": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres",
+"use_external/path": "uid://o0bn285hpysy"
+},
+"rock_wall_08": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/solid/flat_emitter_orange.tres",
+"use_external/path": "uid://dapcd01d70tew"
+}
+},
+"meshes": {
+"Exit 2_Cylinder_004": {
+"generate/lightmap_uv": 2,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"Exit 2_Object_0_005": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"Exit 2_Object_0_007": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"Exit 2_Object_0_009": {
+"generate/lightmap_uv": 2,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"Exit 2_Plane_011": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"Exit 2_main one floor_001": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+}
+},
+"nodes": {
+"PATH:Exit 2/main 1 T_001": {
+"mesh_instance/layers": 16
+},
+"PATH:Exit 2/main 1 T_003": {
+"mesh_instance/layers": 16
+},
+"PATH:Exit 2/props_001/Coin_Pile_2": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Coin_Pile_2_001": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Coin_Pile_2_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Coin_Pile_2_003": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Coin_Pile_2_004": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Coin_Pile_2_006": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Ladder_Short_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Ladder_Short_003": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Ladder_Short_004": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/Ladder_Short_005": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_45deg_001": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_45deg_001/Rails_Corner_90Deg_B_001": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_A_001": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_A_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_A_004": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_A_004/Rail_Falloff_A_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_A_004/Rails_Corner_90Deg_A_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rail_A_005": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rails_Corner_22_5Deg_B_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/rails/Rails_Corner_22_5Deg_B_003": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/props_001/skeleton_005": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/skeletons/GEO-skeletion_ripcage_001": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/skeletons/GEO-skeletion_ripcage_002": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/skeletons/GEO-skeletion_ripcage_014": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/skeletons/sitting one ": {
+"mesh_instance/layers": 256
+},
+"PATH:Exit 2/skeletons/skeleton_hand": {
+"mesh_instance/layers": 256
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=0

@@ -1,0 +1,131 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cvb0oap25dedi"
+path="res://.godot/imported/island.glb-4423e16f16c85e1ad26ae7d2749a2809.scn"
+
+[deps]
+
+source_file="res://-assets-/GLB-level/demo-level_/island/island.glb"
+dest_files=["res://.godot/imported/island.glb-4423e16f16c85e1ad26ae7d2749a2809.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=0
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"I_Concrete Old": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/I_concrete_old/I_Concrete Old_Reimp.tres",
+"use_external/path": "uid://cbwntc6i15rod"
+},
+"MI_Trim_Furniture.036": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/wood/just_wood_dark_planks/Wood_Reimp.tres",
+"use_external/path": "uid://b6tpdgol8yavy"
+},
+"MinesTrim": {
+"use_external/enabled": false,
+"use_external/fallback_path": "",
+"use_external/path": ""
+},
+"bark_debris_01": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/baked/trunk_root_debris/bark_debris_01_Reimp.tres",
+"use_external/path": "uid://b5l4we8it0vyf"
+},
+"bark_willow": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/wood/bark_willow/bark_willow_Reimp.tres",
+"use_external/path": "uid://d2ps7t077xfk8"
+},
+"concrete": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/just_concrete/concrete_Reimp.tres",
+"use_external/path": "uid://bst7aa0eky020"
+},
+"damaged_concrete_columns": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres",
+"use_external/path": "uid://d167u66aqmq84"
+},
+"dead_tree_trunk": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/baked/trunk_root_debris/dead_tree_trunk.tres",
+"use_external/path": "uid://b4uk6eprnswjo"
+},
+"dirt_aerial_02": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/ground/coral_ground/coral_ground_02_Reimp.tres",
+"use_external/path": "uid://bbg08pft25h53"
+},
+"lichen_rock": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres",
+"use_external/path": "uid://o0bn285hpysy"
+},
+"plaster_grey_04": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/concrete/plaster_grey/plaster_grey_04_Reimp.tres",
+"use_external/path": "uid://bckdjikwxv1hs"
+},
+"root_cluster_02": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/baked/trunk_root_debris/root_cluster_02.tres",
+"use_external/path": "uid://0lbe2fwybk4c"
+}
+},
+"nodes": {
+"PATH:island2/debris/Chair_1": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/BirchTree_Dead_1_001": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/BirchTree_Dead_1_001/ropes_008": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/BirchTree_Dead_1_001/ropes_009": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/DeadTree_10_001": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/DeadTree_10_001/ropes_006": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/DeadTree_10_001/ropes_007": {
+"mesh_instance/layers": 256
+},
+"PATH:island2/debris/trees/DeadTree_10_001/ropes_010": {
+"mesh_instance/layers": 256
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=0

@@ -1,21 +1,21 @@
-[gd_scene load_steps=103 format=4 uid="uid://bm5vqmonl5jl4"]
+[gd_scene load_steps=109 format=4 uid="uid://bm5vqmonl5jl4"]
 
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/c_systems/level/demo_level.gd" id="1_skc02"]
 [ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/c_systems/weather_system/weather.gd" id="2_cfi4c"]
-[ext_resource type="AudioStream" uid="uid://bl571xwx3focd" path="res://-assets-/music/=tracks=/loop/back_synth.mp3" id="2_ufk5n"]
+[ext_resource type="AudioStream" uid="uid://bl571xwx3focd" path="res://-assets-/music/back/back_synth.mp3" id="2_ufk5n"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="3_3yhff"]
-[ext_resource type="AudioStream" uid="uid://b3mvk1hw0imcv" path="res://-assets-/music/=tracks=/loop/back_melody.mp3" id="3_5q2id"]
-[ext_resource type="Sky" uid="uid://bjxpm7vkr1f54" path="res://-assets-/VFX/shaders/sky/new_sky.tres" id="3_58tqt"]
+[ext_resource type="AudioStream" uid="uid://b3mvk1hw0imcv" path="res://-assets-/music/back/back_melody.mp3" id="3_5q2id"]
+[ext_resource type="Sky" uid="uid://cyfaw7ih7lbww" path="res://-assets-/materials-shared/_shaders/sky/level_sky.tres" id="3_58tqt"]
 [ext_resource type="PackedScene" uid="uid://sq53nltxquwd" path="res://-assets-/GLB-level/demo-level_/linkoln/LINCOLN_WRAPPER.tscn" id="4_3yhff"]
 [ext_resource type="Script" uid="uid://c1n8jqoagewpu" path="res://logic/c_systems/weather_system/weather_system.gd" id="4_58tqt"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://logic/ui/pause_menu/m_pause_menu.tscn" id="4_cxdwc"]
-[ext_resource type="AudioStream" uid="uid://ccekjehf2plqo" path="res://-assets-/music/=tracks=/loop/back_together.mp3" id="4_e70k6"]
+[ext_resource type="AudioStream" uid="uid://ccekjehf2plqo" path="res://-assets-/music/back/back_together.mp3" id="4_e70k6"]
 [ext_resource type="PackedScene" uid="uid://b7mftvb3txlfn" path="res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/wooden_balcony_WRAPPED.tscn" id="5_cxdwc"]
 [ext_resource type="Script" uid="uid://blo5xcfvelvlt" path="res://logic/c_systems/weather_system/weather_change_area.gd" id="6_cxdwc"]
 [ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://-assets-/GLB-level/demo-level_/lady/LADY_WRAPPER.tscn" id="6_dpd55"]
-[ext_resource type="Shader" uid="uid://bk6avam5bgjd7" path="res://-assets-/materials-shared/shaders/sun_shader.gdshader" id="7_ic71h"]
+[ext_resource type="Shader" uid="uid://bk6avam5bgjd7" path="res://-assets-/materials-shared/_shaders/sun/sun_shader.gdshader" id="7_ic71h"]
 [ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/demo-level_/tower/TOWER_WRAPPER.tscn" id="8_50a4s"]
-[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://-assets-/VFX/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
+[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/VFX/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
 [ext_resource type="PackedScene" uid="uid://bbwrpoygqteb0" path="res://-assets-/GLB-level/demo-level_/golden/gold_cave_WRAPPED.tscn" id="10_ic71h"]
 [ext_resource type="PackedScene" uid="uid://clc3tlv23rgge" path="res://-assets-/GLB-level/demo-level_/jaw/jaw_WRAPPED.tscn" id="11_p1nq7"]
 [ext_resource type="PackedScene" uid="uid://8kw40wxpqewf" path="res://-assets-/GLB-level/demo-level_/columns/columns_WRAPPER.tscn" id="12_g0qcj"]
@@ -25,29 +25,33 @@
 [ext_resource type="PackedScene" uid="uid://8r0kocxxiwnj" path="res://-assets-/GLB-level/demo-level_/exit_2/ghost_asp.tscn" id="14_f66pd"]
 [ext_resource type="PackedScene" uid="uid://dentl7bp7qpyv" path="res://-assets-/GLB-level/demo-level_/exit_2/exit_2_WRAPPER.tscn" id="14_xv3l7"]
 [ext_resource type="PackedScene" uid="uid://cvorqwtm6njov" path="res://logic/entities/Items/chest/HealthChest.tscn" id="15_acr6p"]
-[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://-assets-/VFX/lights/omni/FlickerOmni.tscn" id="16_0j5u0"]
+[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://logic/entities/VFX/lights/omni/FlickerOmni.tscn" id="16_0j5u0"]
 [ext_resource type="PackedScene" uid="uid://bbx2piiomfbdk" path="res://logic/entities/Items/chest/MaxStaminaChest.tscn" id="16_7tk7h"]
 [ext_resource type="PackedScene" uid="uid://bbjymfj8hwa46" path="res://-assets-/GLB-level/demo-level_/columns/single_break_column.tscn" id="16_enc12"]
-[ext_resource type="PackedScene" uid="uid://c3xoku2an7ywo" path="res://-assets-/GLB-char/godot_plush/PaleCrate.tscn" id="16_tpbca"]
+[ext_resource type="PackedScene" path="res://logic/entities/Items/crate/PaleCrate.tscn" id="16_tpbca"]
 [ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/Items/pick_item/stamina_item/MaxStaminaItem.tscn" id="17_r8gfm"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="17_vdq0p"]
-[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Locations/_dev/simple_target/SimpleTarget.tscn" id="18_2euvp"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Items/simple_target/SimpleTarget.tscn" id="18_2euvp"]
 [ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="18_ib1an"]
-[ext_resource type="PackedScene" uid="uid://h2tu6aom7cty" path="res://logic/entities/Locations/demo_level/place_crate_small_pile.tscn" id="18_ogmul"]
+[ext_resource type="PackedScene" uid="uid://h2tu6aom7cty" path="res://logic/entities/Items/crate/pale_crate_small_pile.tscn" id="18_ogmul"]
 [ext_resource type="PackedScene" uid="uid://c84cgpqlpdhfg" path="res://logic/c_systems/influence_parent/create_rigid_parent/CreateRigidParent.tscn" id="18_xm4a8"]
-[ext_resource type="PackedScene" uid="uid://cb8440hmbojbd" path="res://-assets-/VFX/lights/omni/lamp_omni.tscn" id="19_ic71h"]
-[ext_resource type="PackedScene" uid="uid://cxfre8b3ovypt" path="res://logic/entities/Enemies/sitting_sk/sitting_skeleton.tscn" id="20_il31f"]
+[ext_resource type="PackedScene" uid="uid://cb8440hmbojbd" path="res://logic/entities/VFX/lights/omni/lamp_omni.tscn" id="19_ic71h"]
+[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/Enemies/sitting_sk/SitSkeleton.tscn" id="20_il31f"]
 [ext_resource type="Material" uid="uid://db4r2nwkf8uiy" path="res://-assets-/materials-shared/marble/marble017/I_Marble017_blue_rough.tres" id="20_mq57q"]
-[ext_resource type="LightmapGIData" path="res://logic/entities/Locations/demo_level/demoLevel_jaw.lmbake" id="20_p1nq7"]
+[ext_resource type="LightmapGIData" uid="uid://dfmhg74arht76" path="res://logic/entities/Locations/demo_level/demoLevel_jaw.lmbake" id="20_p1nq7"]
 [ext_resource type="LightmapGIData" uid="uid://bkskkpav1e8r2" path="res://logic/entities/Locations/demo_level/demoLevel_exit2.lmbake" id="20_x0u1k"]
+[ext_resource type="PackedScene" path="res://-assets-/GLB-items/other/LanternLamp.tscn" id="21_0rwan"]
 [ext_resource type="Texture2D" uid="uid://dhejrjgt7g5bl" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_diff_1k.jpg" id="21_eqdq1"]
 [ext_resource type="PackedScene" uid="uid://b5tsnu0lrbyel" path="res://logic/entities/Items/chest/SpeedIncreaseChest.tscn" id="21_i3y2i"]
 [ext_resource type="Texture2D" uid="uid://c30jwj1amgb1r" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_diff_1k.jpg" id="21_s0ho0"]
 [ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/Items/lever/BaseLever.tscn" id="21_t7vhe"]
-[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="22_7tk7h"]
+[ext_resource type="PackedScene" uid="uid://dc6v8ymj7x6m8" path="res://-assets-/GLB-items/other/StaticBarrel.tscn" id="21_w0ai3"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="22_7tk7h"]
 [ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="22_b71br"]
+[ext_resource type="PackedScene" path="res://-assets-/GLB-items/other/Arcboutant.tscn" id="22_ramam"]
 [ext_resource type="Texture2D" uid="uid://upig8xl42awq" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_norm_gl.png" id="22_rvsi0"]
 [ext_resource type="Texture2D" uid="uid://dmf72m3hhbnyg" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_rough_1k.png" id="23_2urya"]
+[ext_resource type="PackedScene" uid="uid://cexdblmpe4p00" path="res://-assets-/GLB-items/other/SmallRockRigid.tscn" id="23_rqhon"]
 [ext_resource type="Texture2D" uid="uid://disfcn4k2nd2l" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_rough.png" id="23_s0ho0"]
 [ext_resource type="LightmapGIData" uid="uid://cp1oob1d7payd" path="res://logic/entities/Locations/demo_level/demoLevel_tree_group.lmbake" id="23_x0u1k"]
 [ext_resource type="Material" uid="uid://cxm12dtohd4dt" path="res://-assets-/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_rough.tres" id="24_b71br"]
@@ -55,14 +59,15 @@
 [ext_resource type="LightmapGIData" uid="uid://dngekh46ei6ch" path="res://logic/entities/Locations/demo_level/demoLevel_tower.lmbake" id="27_tc4ti"]
 [ext_resource type="Material" uid="uid://dpd6ypkn8dd5a" path="res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_lighter_cleaner_Trip.tres" id="28_b71br"]
 [ext_resource type="PackedScene" uid="uid://cder7q45c0ofb" path="res://logic/entities/Items/door/_BaseDoor.tscn" id="29_pulto"]
+[ext_resource type="PackedScene" uid="uid://ma6cywyneshm" path="res://logic/entities/Enemies/sitting_sk/SitSkeletonAlt.tscn" id="30_ktdwm"]
 [ext_resource type="PackedScene" uid="uid://cygpfuso63mm1" path="res://logic/entities/Locations/spring_up/SpringUp.tscn" id="31_2urya"]
 [ext_resource type="PackedScene" uid="uid://bydwaf8keh4gq" path="res://logic/entities/Items/chest/DodgeIncreaseChest.tscn" id="31_6pevu"]
 [ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/Items/pick_item/DodgeIncreaseItem.tscn" id="33_p81po"]
 [ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/Items/pick_item/health_item/MaxHealthItem.tscn" id="34_dffxn"]
-[ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://-assets-/GLB-char/godot_plush/MiniPlush.tscn" id="35_qa10r"]
+[ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://logic/c_systems/unsorted/plush/MiniPlush.tscn" id="35_qa10r"]
 [ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="36_g5qky"]
-[ext_resource type="PackedScene" uid="uid://0isjovhfn8l7" path="res://-assets-/GLB-char/godot_plush/BiggestPlush.tscn" id="36_lne8g"]
-[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://-assets-/GLB-char/godot_plush/plush_factory.gd" id="36_srek1"]
+[ext_resource type="PackedScene" uid="uid://0isjovhfn8l7" path="res://logic/c_systems/unsorted/plush/BiggestPlush.tscn" id="36_lne8g"]
+[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://logic/c_systems/unsorted/plush/plush_factory.gd" id="36_srek1"]
 [ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="37_y0kr0"]
 [ext_resource type="Texture2D" uid="uid://cyp17qtrm6vla" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_rough_2k.png" id="38_w0ai3"]
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="39_y0kr0"]
@@ -72,10 +77,11 @@
 [ext_resource type="Texture2D" uid="uid://dtc40sais1cn8" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Metalness-Metal047B_2K-JPG_Roughness.png" id="50_ramam"]
 [ext_resource type="PackedScene" uid="uid://bjw0lhombik4c" path="res://logic/entities/Enemies/phe_enemy/SecretEnemy.tscn" id="51_5q2id"]
 [ext_resource type="Texture2D" uid="uid://435ii5qoi0tx" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_NormalGL.jpg" id="51_rqhon"]
-[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/back_noise.mp3" id="52_bbtvy"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="52_bbtvy"]
 [ext_resource type="PackedScene" uid="uid://br0ld6w6es8le" path="res://logic/entities/Items/interact_area/MonitorPlayerEnterSignalArea.tscn" id="52_e70k6"]
-[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/=tracks=/loop/back_bits.mp3" id="53_o1prw"]
-[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/PHEnemy_2.tscn" id="56_ohlvg"]
+[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/back/back_bits.mp3" id="53_o1prw"]
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/phe_enemy/PHEnemy_2.tscn" id="56_ohlvg"]
+[ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/Items/pick_item/SpeedIncreaseItem.tscn" id="76_xu021"]
 [ext_resource type="ArrayOccluder3D" uid="uid://b4u3jdp2rv8f2" path="res://logic/entities/Locations/demo_level/demoLevel.occ" id="78_w0ai3"]
 
 [sub_resource type="Environment" id="Environment_efgc1"]
@@ -195,7 +201,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pijfo")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y0kr0"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xu021"]
 radius = 2.0
 height = 4.0
 
@@ -274,7 +280,7 @@ normal_enabled = true
 normal_texture = ExtResource("51_rqhon")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w0ai3"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_56lme"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
 density = 0.2
@@ -324,9 +330,9 @@ target_bottom_color = Color(0.31764707, 0.16470589, 0, 1)
 change_cloud_coverage = true
 target_cloud_coverage = 0.89
 change_amb_energy = true
-target_amb_energy = 1.0
+target_amb_energy = 1.4
 change_amb_sky_contribution = true
-target_amb_sky_contribution = 0.1
+target_amb_sky_contribution = 0.3
 change_fog_light_color = true
 target_fog_light_color = Color(0.23524225, 0.01825156, 0, 1)
 change_vol_fog_light_color = true
@@ -497,7 +503,7 @@ radius = 0.1
 
 [node name="LightmapGI_TREE_GROUP" type="LightmapGI" parent="TREE GROUP ALL"]
 quality = 0
-bounces = 1
+bounces = 0
 use_denoiser = false
 texel_scale = 0.5
 max_texture_size = 4096
@@ -515,15 +521,12 @@ shadow_caster_mask = 4294966274
 directional_shadow_max_distance = 150.0
 
 [node name="OccasionalASP" parent="TREE GROUP ALL" instance=ExtResource("14_f66pd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.28794, -0.84606934, 12.812022)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.31835, -0.84606934, 16.98917)
 max_distance = 15.0
 
 [node name="OccasionalASP2" parent="TREE GROUP ALL" instance=ExtResource("14_f66pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.881294, -0.84606934, -23.544422)
 max_distance = 20.0
-
-[node name="AudioStreamPlayer3D" parent="TREE GROUP ALL/OccasionalASP2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.540642, 0, 1.7987213)
 
 [node name="Lincoln_ALL" type="Node3D" parent="."]
 
@@ -696,8 +699,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.078808, 1.1620469, -8.116
 [node name="PlaceCrateSmallPile3" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
 transform = Transform3D(0.24623784, 0, -0.96920943, 0, 1, 0, 0.96920943, 0, 0.24623784, -43.637768, 0.80519056, 24.584248)
 
+[node name="PlaceCrateSmallPile6" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+transform = Transform3D(0.9972554, 0.058757074, 0.045048427, -0.07403887, 0.7914195, 0.60677296, 0, -0.6084429, 0.79359764, -19.272654, 3.2364779, 35.292492)
+
+[node name="PlaceCrateSmallPile5" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+transform = Transform3D(0.9761257, 0, 0.21720636, 0, 1, 0, -0.21720636, 0, 0.9761257, -54.499054, 12.809211, 33.959675)
+
 [node name="PaleCrate4" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.9091125, 0.4165505, 0, -0.41655052, 0.90911245, 0, 0, 0, 0.9999999, -54.437515, 14.077727, 37.090298)
+
+[node name="PaleCrate7" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -55.105515, 14.228368, 29.910297)
 
 [node name="PaleCrate5" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.9091125, 0.4165505, 0, -0.41655052, 0.90911245, 0, 0, 0, 0.9999999, -54.568424, 1.2169101, 37.16337)
@@ -705,11 +717,53 @@ transform = Transform3D(0.9091125, 0.4165505, 0, -0.41655052, 0.90911245, 0, 0, 
 [node name="PaleCrate6" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -54.227577, 2.8196163, 29.112911)
 
+[node name="Lantern_Lamp_Splitted_003" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_0rwan")]
+transform = Transform3D(0.5601909, 0, 0.8283635, 0, 1.0000002, 0, -0.8283635, 0, 0.5601909, -54.09066, 13.148162, 35.48949)
+
+[node name="OmniLight3D3" parent="Lincoln_ALL/LINCOLN_WRAPPER/Lantern_Lamp_Splitted_003" instance=ExtResource("19_ic71h")]
+transform = Transform3D(1.0000001, 3.7252925e-09, 5.9604645e-08, -3.7252903e-09, 0.9999998, -1.7695124e-08, -5.9604645e-08, 1.7695125e-08, 1.0000001, 0, -0.2940216, 0)
+light_color = Color(0.63529414, 0.34126207, 0.21568626, 1)
+light_energy = 1.0
+light_indirect_energy = 12.0
+
 [node name="SittingSkeleton" parent="Lincoln_ALL/LINCOLN_WRAPPER" node_paths=PackedStringArray("player") instance=ExtResource("20_il31f")]
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -54.036667, 12.842042, 34.617493)
-show_ui_feelings = true
-float_ui_feelings = true
 player = NodePath("../../../Princess")
+
+[node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_w0ai3")]
+transform = Transform3D(1, 0, 0, 0, 0.95444363, -0.2983912, 0, 0.2983912, 0.95444363, -19.973879, 0.91030014, 11.343478)
+
+[node name="Cylinder001_009" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_w0ai3")]
+transform = Transform3D(1, 0, 0, 0, 0.9992339, -0.039137736, 0, 0.039137736, 0.9992339, -19.715073, 0.91030014, 10.669773)
+
+[node name="Arcbutan" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("22_ramam")]
+transform = Transform3D(0.82387805, 0.16057931, -0.3018332, -0.11845195, 0.8727828, 0.14100802, 0.32071507, -0.09015771, 0.8274524, -20.645544, 2.1601148, 3.0348518)
+
+[node name="Rocks" type="Node3D" parent="Lincoln_ALL/LINCOLN_WRAPPER"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.076263, 1.0620633, 16.765265)
+
+[node name="SmallRockRigid" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+
+[node name="SmallRockRigid2" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(0.12121108, 0.8437631, 0.52284956, -0.5615302, 0.4926357, -0.6648263, -0.8185303, -0.21301147, 0.53351146, 0.062000275, 0.17999995, -0.44774818)
+
+[node name="SmallRockRigid3" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(0.5369195, 0.046557635, 0.84234786, -0.20426878, 0.9759398, 0.07626112, -0.8185302, -0.21301144, 0.5335114, -7.286003, -0.5185221, -16.565748)
+
+[node name="SmallRockRigid4" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(-0.691553, 0.062382203, -0.71962696, 0, 0.99626374, 0.08636299, 0.72232574, 0.059724577, -0.6889692, 19.337957, 2.4879322, 18.730757)
+
+[node name="SmallRockRigid5" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(-0.017544089, 0.3640796, -0.9312026, 0, 0.93134594, 0.36413565, 0.9998461, 0.0063884277, -0.016339615, 13.319046, -0.30615127, -9.9027195)
+
+[node name="SmallRockRigid6" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(0.7019915, 0, -0.7121853, 0, 1, 0, 0.7121853, 0, 0.7019915, -15.693451, 11.90957, 19.931738)
+
+[node name="SmallRockRigid7" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(0.7019915, 0, -0.7121853, 0.45741245, 0.7664818, 0.4508653, 0.5458771, -0.64226604, 0.5380637, -15.767452, 12.146421, 19.552736)
+
+[node name="SmallRockRigid8" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5538864, 12.057373, 19.552736)
 
 [node name="wooden_balcony_WRAPPER" parent="Lincoln_ALL" instance=ExtResource("5_cxdwc")]
 
@@ -763,7 +817,13 @@ area_capsule_radius = 4.0
 area_capsule_height = 4.0
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0"]
-shape = SubResource("CapsuleShape3D_y0kr0")
+shape = SubResource("CapsuleShape3D_xu021")
+
+[node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("21_w0ai3")]
+transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
+
+[node name="SittingSkeletonAlt" parent="Lincoln_ALL/ISLAND_WRAPPER/StaticBarrel" instance=ExtResource("30_ktdwm")]
+transform = Transform3D(-0.99718493, 0, -0.07497864, 0, 0.9999998, 0, 0.07497863, 0, -0.9971851, -0.018268585, -0.016711235, 0.08400059)
 
 [node name="Rock_1_004_visuals2" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER"]
 transform = Transform3D(0.43853706, 0.110105, -0.2097065, -0.22908448, 0.08507292, -0.43439338, -0.0601682, 0.47859606, 0.12546034, -53.68312, 12.605973, 34.763615)
@@ -982,7 +1042,7 @@ material_override = ExtResource("48_y0kr0")
 material_override = SubResource("StandardMaterial3D_ktdwm")
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" index="0"]
-shape = SubResource("CapsuleShape3D_w0ai3")
+shape = SubResource("CapsuleShape3D_56lme")
 
 [node name="SimpleTarget2" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.045063, 0.5982324, 36.92067)
@@ -1008,6 +1068,9 @@ transform = Transform3D(-0.9536644, 0, -0.30087233, 0, 1, 0, 0.30087233, 0, -0.9
 show_ui_feelings = true
 float_ui_feelings = true
 player = NodePath("../../Princess")
+
+[node name="SpeedIncreaseChest" parent="Lincoln_ALL" instance=ExtResource("21_i3y2i")]
+transform = Transform3D(1, 0, 0, 0, 0.9679945, 0.25097135, 0, -0.25097135, 0.9679945, -26.175722, 11.796641, 1.0264926)
 
 [node name="Exit_2_ALL" type="Node3D" parent="."]
 
@@ -1144,6 +1207,9 @@ emission_box_extents = Vector3(0.1, 0.1, 0.1)
 color_multiplier = Color(1, 0.9220992, 0.8551318, 1)
 normal_strength = 30.0
 billboard_mode = 0
+
+[node name="MaxHealthItem" parent="Exit_2_ALL" instance=ExtResource("34_dffxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.538815, 0.6746146, -49.33424)
 
 [node name="LADY_ALL" type="Node3D" parent="."]
 
@@ -1373,10 +1439,14 @@ show_door = false
 [node name="DodgeIncreaseChest" parent="TOWER_ALL" instance=ExtResource("31_6pevu")]
 transform = Transform3D(0.87579685, -0.037323922, 0.48123464, 0.032710966, 0.9993032, 0.017974088, -0.48157018, 0, 0.8764075, -16.511654, 0.49795341, 1.5938712)
 
+[node name="DodgeIncreaseChest2" parent="TOWER_ALL" instance=ExtResource("31_6pevu")]
+transform = Transform3D(-0.49854836, 0, 0.8668619, 0, 1, 0, -0.8668619, 0, -0.49854836, -17.45675, 0.4788915, 9.054614)
+
 [node name="JAW_ALL" type="Node3D" parent="."]
 
 [node name="LightmapGI_JAW" type="LightmapGI" parent="JAW_ALL"]
 quality = 0
+bounce_indirect_energy = 1.5
 use_denoiser = false
 environment_mode = 0
 light_data = ExtResource("20_p1nq7")
@@ -1389,6 +1459,7 @@ light_data = ExtResource("20_p1nq7")
 transform = Transform3D(-0.72641385, -0.3674173, 0.580799, -0.05745016, 0.8746022, 0.48142555, -0.6848521, 0.31634706, -0.6564313, -74.81946, 10.00488, 32.90414)
 light_color = Color(0.7715464, 0.62008715, 0.548144, 1)
 light_energy = 25.0
+light_indirect_energy = 5.0
 light_volumetric_fog_energy = 2.0
 shadow_enabled = true
 spot_range = 70.0
@@ -1452,6 +1523,12 @@ player = NodePath("../../Princess")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.422104, -1.1755047, 42.49759)
 fire_only_once = true
 
+[node name="DodgeIncreaseChest" parent="JAW_ALL" instance=ExtResource("31_6pevu")]
+transform = Transform3D(0.71406955, 0, 0.70007473, 0, 1, 0, -0.70007473, 0, 0.71406955, -111.18501, -0.9342834, 33.484577)
+
+[node name="SpeedIncreaseItem" parent="JAW_ALL" instance=ExtResource("76_xu021")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.079796, 0.6029885, 30.887306)
+
 [node name="GOLD_ALL" type="Node3D" parent="."]
 
 [node name="GOLDC" parent="GOLD_ALL" instance=ExtResource("10_ic71h")]
@@ -1482,7 +1559,7 @@ bus = &"_d_track_vibe"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
 occluder = ExtResource("78_w0ai3")
-bake_mask = 4294966847
+bake_mask = 4293918736
 
 [connection signal="SIG_lever_switched" from="Lincoln_ALL/LEVERS/LadyNightLever" to="Weather/WeatherSystem/LadyEntry" method="_on_lever_signal"]
 [connection signal="SIG_lever_switched" from="Lincoln_ALL/LEVERS/JawRedLever" to="Weather/WeatherSystem/JawEntry" method="_on_lever_signal"]
@@ -1494,7 +1571,6 @@ bake_mask = 4294966847
 [connection signal="SIG_death_raised" from="JAW_ALL/SecretEnemy" to="Princess" method="_on_secret_enemy_sig_death_raised"]
 [connection signal="SIG_player_entered" from="JAW_ALL/PlaySecretEFight" to="." method="_on_play_secret_e_fight_sig_player_entered"]
 
-[editable path="TREE GROUP ALL/OccasionalASP2"]
 [editable path="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild"]
 [editable path="Lincoln_ALL/LEVERS/LadyNightLever"]
 [editable path="Lincoln_ALL/LEVERS/JawRedLever"]

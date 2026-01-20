@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://sra67e40jd6f" path="res://logic/c_systems/camera/fancy-camera/camera_target/enemy_camera_target.gd" id="1_mxpn8"]
 [ext_resource type="PackedScene" uid="uid://by0bjgl0wv4ry" path="res://logic/entities/Locations/_dev/primitives/CSGStarLike.tscn" id="2_tkwcu"]
 [ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="3_suvte"]
-[ext_resource type="Material" uid="uid://bxam2vjcqcdil" path="res://-assets-/materials-shared/solid/P orange_Reimp.tres" id="4_m34dn"]
+[ext_resource type="Material" uid="uid://bxam2vjcqcdil" path="res://-assets-/materials-shared/solid/P/P orange_Reimp.tres" id="4_m34dn"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_suvte"]
 _surfaces = [{

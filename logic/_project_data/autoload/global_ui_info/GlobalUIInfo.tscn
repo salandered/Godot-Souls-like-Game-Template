@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/_project_data/autoload/global_ui_info/profiler.gd" id="2_65fx7"]
 [ext_resource type="Script" uid="uid://b21g8b5ep56o4" path="res://logic/ui/tutorial/first_tutorial.gd" id="3_x47y3"]
 [ext_resource type="Script" uid="uid://dnhmrbrcgrrmj" path="res://logic/ui/tutorial/tutorial_ui.gd" id="4_o4jv4"]
-[ext_resource type="PackedScene" uid="uid://cp4td8jhxhsj2" path="res://logic/ui/ui_utils/rich_text_label/rich_text_label.tscn" id="5_0xnqb"]
+[ext_resource type="PackedScene" uid="uid://cp4td8jhxhsj2" path="res://logic/ui/ui_utils/prefab/rich_text_label/rich_text_label.tscn" id="5_0xnqb"]
 [ext_resource type="Script" uid="uid://dqvlv43ty5tmr" path="res://logic/_project_data/autoload/global_ui_info/free_cam_ui.gd" id="5_65fx7"]
-[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/separator/h_separator.tscn" id="6_k5if8"]
-[ext_resource type="PackedScene" uid="uid://0orfaksbirk3" path="res://logic/_project_data/autoload/global_ui_info/minimal_h_separator.tscn" id="6_x47y3"]
+[ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="6_k5if8"]
+[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="6_x47y3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgki4"]
 bg_color = Color(0.24, 0.07464001, 0.052800007, 0.33333334)
@@ -241,7 +241,7 @@ Switching weapons - Use the switch weapon button. Note that you can't switch in 
 
 Target locking - see the dedicated tutorial panel.
 
-Destructible columns - let the enemy hit the colum, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
+Destructible columns - let the enemy hit the column, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
 
 Fighting several enemies at once - just find the way to reach additional enemies. It's a lot of fun and they could accidently hit each other as well.
 

@@ -63,7 +63,6 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	# Ensure 'Princess' is the correct class name for your player
 	if body is Princess or body is FreeCameraBody:
 		__log_("Player entered weather area. Fading settings over:", fade_time)
 
@@ -118,3 +117,9 @@ func _dev_apply_settings() -> void:
 
 	print_.dev("WeatherChangeArea", "🛠️ Applying settings preview...")
 	_apply_weather_changes(weather_system, 0.0)
+
+
+##
+
+func __LOG_B() -> bool:
+	return false

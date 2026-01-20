@@ -139,7 +139,7 @@ func _update_floating_position() -> void:
 	var screen_pos := _camera.unproject_position(anchor_pos)
 	
 	# Center the bar using the container size
-	# Assuming Pivot is Top-Left (default)
+	# Assuming Pivot is top-left (default)
 	var centered_pos := screen_pos
 
 	centered_pos.x -= health_bar.container.size.x * health_bar.container.scale.x / 2.0

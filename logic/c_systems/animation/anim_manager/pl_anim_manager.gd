@@ -1,5 +1,4 @@
 @tool
-@icon("res://-assets-/x_icons/node-colors/purple.png")
 extends BaseAnimatorManager
 
 ## NOTE: CLIENT CODE COMMUNICATES WITH ANIMATORS ONLY VIA THIS FACADE

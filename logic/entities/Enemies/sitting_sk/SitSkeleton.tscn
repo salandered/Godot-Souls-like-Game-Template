@@ -1,0 +1,555 @@
+[gd_scene load_steps=66 format=3 uid="uid://dbo7xvsas7guf"]
+
+[ext_resource type="Script" path="res://logic/c_systems/character/sitsk_char.gd" id="1_5orxr"]
+[ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/unsorted/coll_collider.gd" id="2_b1jdg"]
+[ext_resource type="Script" uid="uid://0c3j8t0i4rro" path="res://logic/c_systems/feelings/ui_feelings/phe_ui_feelings.gd" id="3_k5uww"]
+[ext_resource type="Script" uid="uid://fej6gy4eqqqs" path="res://logic/c_systems/combat/phe_combat.gd" id="4_b77gp"]
+[ext_resource type="Script" uid="uid://dcvvfybefeuwd" path="res://logic/c_systems/feelings/phe_feelings.gd" id="5_jf654"]
+[ext_resource type="Script" uid="uid://com5hws210fhf" path="res://logic/c_systems/unsorted/phe_other/visual_offset.gd" id="6_kxvbm"]
+[ext_resource type="PackedScene" uid="uid://c12h0eq5aqu80" path="res://logic/c_systems/sk_modifiers/look_at_modifier/model/look_at_character_marker.tscn" id="7_jb7lm"]
+[ext_resource type="PackedScene" uid="uid://ei5yc3pkg0kp" path="res://-assets-/GLB-char/skeleton-18-01/skeleton018_WRAPPER.tscn" id="8_0gb3n"]
+[ext_resource type="Script" uid="uid://w18g1qw71l62" path="res://logic/c_systems/sk_modifiers/overlay_modifier.gd" id="9_0xvj4"]
+[ext_resource type="PackedScene" uid="uid://cxqlawj5lv3o1" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_head_modifier_3d.tscn" id="10_0beb3"]
+[ext_resource type="Script" uid="uid://bfpfht03rnw05" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_manager.gd" id="11_06tte"]
+[ext_resource type="Material" uid="uid://bxam2vjcqcdil" path="res://-assets-/materials-shared/solid/P/P orange_Reimp.tres" id="12_rhvh1"]
+[ext_resource type="Script" uid="uid://uvb7l2le3sl7" path="res://logic/entities/Items/test_csg.gd" id="13_2r3bc"]
+[ext_resource type="Script" uid="uid://ddi55j380y14x" path="res://logic/c_systems/animation/anim_manager/e_animator_manager.gd" id="14_yivxy"]
+[ext_resource type="AnimationLibrary" uid="uid://cssw61fn2rvgb" path="res://-assets-/animations/standard-skeleton/Enemy/LIBs/other_sk_sit_Lib.res" id="15_6udd4"]
+[ext_resource type="AnimationLibrary" uid="uid://bio72216lo56h" path="res://-assets-/animations/GLB-packed/sitting/anims/libs/sitting p1 Lib.res" id="16_rnefd"]
+[ext_resource type="AnimationLibrary" uid="uid://lrr4jevalf4e" path="res://-assets-/animations/GLB-packed/sitting/anims/libs/sitting p2 Lib.res" id="17_c4r18"]
+[ext_resource type="Script" uid="uid://b7f5muacg77to" path="res://logic/c_containers/anim_param_container/data/e_anim_parameters.gd" id="18_whmcq"]
+[ext_resource type="Script" uid="uid://q0cn5jashp86" path="res://logic/c_systems/sfx/sfx_anim_sig_emitter/e_anim_sfx_sig_emitter.gd" id="19_ln6ww"]
+[ext_resource type="Script" uid="uid://c5olmybak1goj" path="res://logic/c_containers/anim_container/anim_container.gd" id="20_rpcss"]
+[ext_resource type="Script" path="res://logic/c_containers/anim_param_container/sitsk_e_anim_params_container.gd" id="21_q7m14"]
+[ext_resource type="Script" uid="uid://bayd06cgciqld" path="res://logic/c_systems/skeleton/e_bones.gd" id="22_iq0hr"]
+[ext_resource type="PackedScene" uid="uid://b6b3b6fvr3ljt" path="res://logic/c_systems/hurt_hit_box/hit_box/PHEHitbox.tscn" id="23_dvsem"]
+[ext_resource type="PackedScene" uid="uid://unjjnf0oxr50" path="res://logic/entities/Weapons/AuraWeapon.tscn" id="24_06rq4"]
+[ext_resource type="AudioStream" uid="uid://yqejdlrkriea" path="res://-assets-/SFX/audio_streams/bone_snap_trimmed.tres" id="25_rd37y"]
+[ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="26_irhhi"]
+[ext_resource type="AudioStream" uid="uid://bsaxp48f20puq" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/bow_impact.tres" id="27_ugy5p"]
+[ext_resource type="AudioStream" uid="uid://delv8fen25cn3" path="res://-assets-/SFX/audio_streams/imapct_randomiser_PHEnemy_2.tres" id="28_3uswq"]
+[ext_resource type="AudioStream" uid="uid://ct8xhr3e4gglp" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/bone_crunch.tres" id="29_3u7m5"]
+[ext_resource type="PackedScene" path="res://-assets-/GLB-items/other/RustyMug.tscn" id="30_jnl8g"]
+[ext_resource type="Script" path="res://logic/c_containers/character_state_container/phe_states_container.gd" id="31_jwf8u"]
+[ext_resource type="Script" uid="uid://cba1f26lgwlbp" path="res://logic/c_systems/character_state/phe_state/_top_phe_state.gd" id="32_2hrjx"]
+[ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_life.gd" id="33_ikpem"]
+[ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_still_life_phase.gd" id="34_u23m6"]
+[ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_combat_phase.gd" id="35_vwxen"]
+[ext_resource type="Script" uid="uid://ck6ogis7o01sk" path="res://logic/c_systems/character_state/phe_state/state_composites/death_phase.gd" id="36_c6nbc"]
+[ext_resource type="Script" uid="uid://b1bejx547jdgl" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_idle_v1.gd" id="37_pexs2"]
+[ext_resource type="Script" uid="uid://c0ggupmukeqmc" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_idle_v2.gd" id="38_rvjfl"]
+[ext_resource type="Script" uid="uid://cymv3d5kmp22d" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_talking.gd" id="39_oqdfc"]
+[ext_resource type="Script" uid="uid://ch6h1m6j7ts75" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_intimidate.gd" id="40_w1yq2"]
+[ext_resource type="Script" uid="uid://cf36mmvii8ofk" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_rubbing.gd" id="41_1p6kc"]
+[ext_resource type="Script" uid="uid://cp8oxokkggrse" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_point.gd" id="42_bmtls"]
+[ext_resource type="Script" uid="uid://bbt41mlu1u6s" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_clap.gd" id="43_wik2w"]
+[ext_resource type="Script" uid="uid://px2chvao08pg" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_laugh.gd" id="44_1jnu6"]
+[ext_resource type="Script" uid="uid://d4mdydt77220v" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_disbelief.gd" id="45_uj2w7"]
+[ext_resource type="Script" uid="uid://d260ihgni0me4" path="res://logic/c_systems/character_state/phe_state/state_leafes/death.gd" id="46_arxaf"]
+[ext_resource type="Script" uid="uid://be85gmi0np8ib" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/attacks/sit_attack.gd" id="47_5bx33"]
+[ext_resource type="Script" uid="uid://dgk6yfubccslp" path="res://logic/c_systems/character_movement/e_movement.gd" id="48_oqcpa"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="49_3w6ov"]
+[ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/c_systems/awareness/enemy_awareness.gd" id="50_r040y"]
+[ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/c_systems/awareness/downcast/downcast.tscn" id="51_l4htf"]
+[ext_resource type="Script" uid="uid://cm4xrpdhal6dc" path="res://logic/c_systems/unsorted/e_config/sitsk_config.gd" id="52_rtify"]
+[ext_resource type="Script" uid="uid://b5yo5yxoluykg" path="res://logic/c_systems/sfx/sfx_audio_system/sitsk_sfx_system.gd" id="53_e51vp"]
+[ext_resource type="Script" uid="uid://b2i35cgti1d4r" path="res://logic/c_systems/sfx/sfx_anim_sig_emitter/prefab/a_anim_audio_stream_players.gd" id="54_sfbua"]
+[ext_resource type="AudioStream" uid="uid://cgc4yvwa21hc4" path="res://-assets-/SFX/sources/tom/torch_attack.tres" id="55_nm2s0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0tisx"]
+radius = 0.3022461
+height = 0.8565936
+
+[sub_resource type="Gradient" id="Gradient_4q3e3"]
+colors = PackedColorArray(0, 0, 0, 1, 0.36422682, 0.36422682, 0.36422682, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_osixn"]
+gradient = SubResource("Gradient_4q3e3")
+
+[sub_resource type="Gradient" id="Gradient_fgdjd"]
+colors = PackedColorArray(0.5067887, 0.5067887, 0.5067887, 1, 0.6289846, 0.6289846, 0.6289846, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wuhxl"]
+gradient = SubResource("Gradient_fgdjd")
+
+[sub_resource type="Gradient" id="Gradient_54yi7"]
+colors = PackedColorArray(0.60861856, 0, 0, 1, 0.8122784, 0.4649008, 0.4649008, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0tisx"]
+gradient = SubResource("Gradient_54yi7")
+
+[sub_resource type="Animation" id="Animation_2p1kb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/../../../../AnimatorManager/NativePlayer/AnimParameters:aura_hurts")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ctl3n"]
+_data = {
+&"RESET": SubResource("Animation_2p1kb")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2p1kb"]
+radius = 0.24853516
+height = 1.4311157
+
+[node name="SittingSkeleton" type="CharacterBody3D"]
+script = ExtResource("1_5orxr")
+process_disabled_on_init = false
+head_off = false
+
+[node name="CollCollider" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85550225, 0)
+shape = SubResource("CapsuleShape3D_0tisx")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+debug_fill = false
+script = ExtResource("2_b1jdg")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="UIFeelings" type="Node" parent="UI"]
+unique_name_in_owner = true
+script = ExtResource("3_k5uww")
+
+[node name="Bars" type="MarginContainer" parent="UI/UIFeelings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -303.0
+offset_top = 30.0
+offset_right = 363.66675
+offset_bottom = 151.66666
+grow_horizontal = 2
+scale = Vector2(0.9, 0.6)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 80
+
+[node name="BackHealthBar" type="TextureProgressBar" parent="UI/UIFeelings/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_osixn")
+tint_progress = Color(0.25560826, 0.12948515, 0.12948515, 1)
+
+[node name="GhostBar" type="TextureProgressBar" parent="UI/UIFeelings/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+value = 77.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_wuhxl")
+tint_progress = Color(1.4649135, 1.4448602, 0.261715, 0.8235294)
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI/UIFeelings/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+value = 67.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_0tisx")
+tint_progress = Color(1, 0.90999997, 0.90999997, 1)
+
+[node name="Combat" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_b77gp")
+
+[node name="PHEFeelings" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_jf654")
+MAX_HEALTH = 1000.0
+PHASE_SWITCH_HP_TRESHOLD = 0.0
+
+[node name="VisualOffset" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_kxvbm")
+
+[node name="UIMarker" type="Marker3D" parent="VisualOffset"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.387253, 0)
+
+[node name="LookAtCharacterMarker" parent="VisualOffset" instance=ExtResource("7_jb7lm")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1968594, 0)
+
+[node name="FCS_Skeleton_working3" parent="VisualOffset" instance=ExtResource("8_0gb3n")]
+
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" index="3"]
+bones/0/position = Vector3(0.00044641504, 0, 0.0011638507)
+bones/1/position = Vector3(-0.0006257853, 0.5735415, -0.014100149)
+bones/1/rotation = Quaternion(5.969532e-05, 0.023314461, 0.0316115, 0.9992283)
+bones/2/rotation = Quaternion(0.053293727, -0.025396641, 0.003400593, 0.9982501)
+bones/3/rotation = Quaternion(0.106618084, -0.04348115, 0.01289311, 0.9932652)
+bones/4/rotation = Quaternion(0.106618084, -0.04348115, 0.012893104, 0.9932653)
+bones/5/rotation = Quaternion(0.093461975, 0.01448653, -0.03849334, 0.99477303)
+bones/6/rotation = Quaternion(-0.18832654, 0.042381626, 0.02806241, 0.98079026)
+bones/7/rotation = Quaternion(0.5386576, -0.45115772, -0.5509414, -0.45029804)
+bones/8/rotation = Quaternion(-0.3759987, 0.8889257, -0.2597495, 0.03108852)
+bones/9/rotation = Quaternion(0.37022677, 0.5656511, -0.39509296, 0.62199074)
+bones/10/rotation = Quaternion(-0.05609716, -0.8732912, -0.13649671, 0.46431044)
+bones/11/rotation = Quaternion(-0.3758503, -0.43933064, -0.21042277, 0.78831947)
+bones/12/rotation = Quaternion(0.21359752, -0.07217008, -0.063425176, 0.9721856)
+bones/13/rotation = Quaternion(-4.4703484e-08, 1.4901161e-08, 0, 1)
+bones/14/rotation = Quaternion(0.29682428, 0.0754162, -0.0323515, 0.9513996)
+bones/15/rotation = Quaternion(0.08679563, -0.009739777, 0.03629421, 0.99551725)
+bones/16/rotation = Quaternion(-2.9802322e-08, -2.9802322e-08, -7.4505806e-08, 1)
+bones/17/rotation = Quaternion(0.32190886, 0.07254382, 0.02116614, 0.94375)
+bones/18/rotation = Quaternion(0.20320292, -0.0018131053, -0.006112453, 0.9791159)
+bones/19/rotation = Quaternion(-2.9802322e-08, 1.4901161e-08, -7.4505806e-08, 1)
+bones/20/rotation = Quaternion(0.31905636, 0.045070674, -0.0165969, 0.94651794)
+bones/21/rotation = Quaternion(0.16852078, 0.0012343305, -0.0014125363, 0.9856963)
+bones/22/rotation = Quaternion(0, 0, -5.960465e-08, 1)
+bones/23/rotation = Quaternion(0.32990804, 0.0539786, -0.042024557, 0.9415312)
+bones/24/rotation = Quaternion(0.09341189, 7.9943275e-05, -0.009090738, 0.99558604)
+bones/25/rotation = Quaternion(1.4901161e-08, -1.4901161e-08, 1.4901161e-08, 1)
+bones/26/rotation = Quaternion(0.310795, 0.65181977, 0.4246241, -0.5461061)
+bones/27/rotation = Quaternion(0.32301965, 0.6750773, -0.38249388, 0.54187405)
+bones/28/rotation = Quaternion(0.2639884, -0.63527477, 0.27846387, 0.6702194)
+bones/29/rotation = Quaternion(-0.15658359, 0.6620747, 0.015217194, 0.73273945)
+bones/30/rotation = Quaternion(-0.3143345, 0.79499567, 0.3488398, 0.38403982)
+bones/31/rotation = Quaternion(0.27562955, 0.04649108, 0.084979236, 0.95637107)
+bones/32/rotation = Quaternion(-8.940698e-08, 2.9802326e-08, -5.960465e-08, 1)
+bones/33/rotation = Quaternion(0.13325888, -0.08656769, -0.03769186, 0.98657364)
+bones/34/rotation = Quaternion(0.4193777, -0.0030494474, -0.001849104, 0.90780497)
+bones/35/rotation = Quaternion(-2.9802315e-08, -2.9802315e-08, 2.9802315e-08, 1)
+bones/36/rotation = Quaternion(0.56522375, -0.04012278, -0.05253791, 0.8222847)
+bones/37/rotation = Quaternion(0.62296903, 0.0021442354, 0.032002103, 0.7815886)
+bones/38/rotation = Quaternion(-1.0430813e-07, 1.1920929e-07, 1.4901161e-08, 1)
+bones/39/rotation = Quaternion(0.64025563, -0.029879544, 0.0023906932, 0.76757693)
+bones/40/rotation = Quaternion(0.524822, -0.012528278, 0.04429138, 0.84996665)
+bones/41/rotation = Quaternion(5.9604645e-08, 1.4901161e-08, 2.9802322e-08, 1)
+bones/42/rotation = Quaternion(0.687232, -0.059300497, 0.020217337, 0.7237312)
+bones/43/rotation = Quaternion(0.4925361, 0.0028078416, 0.06525029, 0.86783797)
+bones/44/rotation = Quaternion(5.9604638e-08, -5.9604638e-08, -5.9604638e-08, 1)
+bones/45/rotation = Quaternion(-0.057331365, 0.7161493, 0.6750296, 0.16786459)
+bones/46/rotation = Quaternion(-0.0253885, 0.7003663, -0.7133173, -0.0045950613)
+bones/47/rotation = Quaternion(-0.06304895, 0.73104244, -0.67292565, -0.093664244)
+bones/48/rotation = Quaternion(-4.3971388e-05, 0.9996285, 0.027248327, 0.000762742)
+bones/49/rotation = Quaternion(0.0642211, 0.7361765, 0.6682012, -0.086179845)
+bones/50/rotation = Quaternion(0.011582631, 0.5971342, -0.8018969, 0.016063359)
+bones/51/rotation = Quaternion(0.07199055, 0.85514444, -0.50003994, 0.11621373)
+bones/52/rotation = Quaternion(0.014836522, 0.9518496, 0.30290276, 0.044858757)
+
+[node name="OverlayModifier" type="SkeletonModifier3D" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="10"]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("9_0xvj4")
+
+[node name="LookAtHeadModifier3D" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="11" instance=ExtResource("10_0beb3")]
+unique_name_in_owner = true
+bone_name = "Neck"
+bone = 5
+duration = 1.1
+max_influence = 0.8
+tag = "enemy"
+
+[node name="LookAtManager" type="Node" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton/LookAtHeadModifier3D" node_paths=PackedStringArray("modifiers")]
+script = ExtResource("11_06tte")
+modifiers = [NodePath("..")]
+min_duration = 2.0
+max_duration = 5.0
+boost_dur_for_not_looking = 30.0
+proximity_threshold = 1.7
+
+[node name="TestHeadLook" type="CSGSphere3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.39053, 0, 0, 0, 0.39053, 0, 0, 0, 0.39053, -0.08600195, 1.1779985, 1.0089998)
+material_override = ExtResource("12_rhvh1")
+smooth_faces = false
+script = ExtResource("13_2r3bc")
+
+[node name="AnimatorManager" type="Node" parent="." node_paths=PackedStringArray("_native_player", "general_skeleton", "overlay_modifier")]
+unique_name_in_owner = true
+script = ExtResource("14_yivxy")
+_native_player = NodePath("NativePlayer")
+general_skeleton = NodePath("../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+overlay_modifier = NodePath("../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton/OverlayModifier")
+initial_anim_id = "sit_idle"
+
+[node name="NativePlayer" type="AnimationPlayer" parent="AnimatorManager"]
+unique_name_in_owner = true
+root_node = NodePath("../../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+libraries = {
+&"": SubResource("AnimationLibrary_ctl3n"),
+&"other": ExtResource("15_6udd4"),
+&"sitting p1": ExtResource("16_rnefd"),
+&"sitting p2": ExtResource("17_c4r18")
+}
+
+[node name="AnimParameters" type="Node" parent="AnimatorManager/NativePlayer"]
+unique_name_in_owner = true
+script = ExtResource("18_whmcq")
+aura_hurts = true
+
+[node name="EAnimSFXSigEmitter" type="Node" parent="AnimatorManager/NativePlayer"]
+unique_name_in_owner = true
+script = ExtResource("19_ln6ww")
+
+[node name="AuraAnimSFXSigEmitter" type="Node" parent="AnimatorManager/NativePlayer"]
+unique_name_in_owner = true
+script = ExtResource("19_ln6ww")
+
+[node name="AnimContainer" type="Node" parent="AnimatorManager"]
+unique_name_in_owner = true
+script = ExtResource("20_rpcss")
+
+[node name="AnimParamsContainer" type="Node" parent="AnimatorManager"]
+unique_name_in_owner = true
+script = ExtResource("21_q7m14")
+
+[node name="bones" type="Node3D" parent="." node_paths=PackedStringArray("general_skeleton")]
+unique_name_in_owner = true
+script = ExtResource("22_iq0hr")
+general_skeleton = NodePath("../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+metadata/_custom_type_script = "uid://bayd06cgciqld"
+
+[node name="Hips" type="BoneAttachment3D" parent="bones"]
+unique_name_in_owner = true
+transform = Transform3D(0.9969143, -0.063171424, 0.046596713, 0.063177, 0.9980014, 0.0013547116, -0.046589166, 0.0015933085, 0.9989129, -0.00017937028, 0.5735415, -0.012936299)
+bone_name = "Hips"
+bone_idx = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+
+[node name="HitboxTorso" parent="bones/Hips" instance=ExtResource("23_dvsem")]
+transform = Transform3D(0.99999994, 9.313226e-10, 0, 9.313226e-10, 1, -1.4901161e-08, 0, 0, 1, 0.008670665, 0.07821095, 0.0108701065)
+
+[node name="Collider" type="CollisionShape3D" parent="bones/Hips/HitboxTorso"]
+transform = Transform3D(1, 7.7852746e-10, -1.2293458e-07, -5.4569682e-11, 1, 4.3655746e-09, 2.1234155e-07, 0, 1.0000012, -0.001560308, 0.12097561, 0.03314375)
+shape = SubResource("CapsuleShape3D_2p1kb")
+debug_color = Color(0.70196074, 0, 0.4837421, 1)
+
+[node name="Lower" type="Marker3D" parent="bones/Hips"]
+
+[node name="AuraWeapon" parent="bones/Hips/Lower" instance=ExtResource("24_06rq4")]
+transform = Transform3D(1, 1.8626451e-09, 1.8626451e-09, 2.3283064e-09, 1, 0, -1.8626451e-09, 0, 1.0000001, 0, 0, 0)
+
+[node name="asps" type="Node3D" parent="bones/Hips"]
+
+[node name="FSASP3D" type="AudioStreamPlayer3D" parent="bones/Hips/asps"]
+unique_name_in_owner = true
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.490933, -0.061486542)
+stream = ExtResource("25_rd37y")
+unit_size = 6.0
+max_db = -1.0
+pitch_scale = 0.9
+max_distance = 10.0
+max_polyphony = 3
+
+[node name="WhooshASP3D" type="AudioStreamPlayer3D" parent="bones/Hips/asps"]
+unique_name_in_owner = true
+transform = Transform3D(1, -7.450581e-09, -8.940697e-08, 0, 1.0000001, -2.9802322e-08, 0, 1.4901161e-08, 1, 0, 0, 0)
+stream = ExtResource("26_irhhi")
+unit_size = 20.8
+pitch_scale = 0.6
+max_distance = 25.0
+max_polyphony = 2
+
+[node name="MoveNoiseASP3D" type="AudioStreamPlayer3D" parent="bones/Hips/asps"]
+unique_name_in_owner = true
+transform = Transform3D(1, -7.450581e-09, -8.940697e-08, 0, 1.0000001, -4.4703484e-08, 0, 2.9802322e-08, 1, 0.13727593, 0.42204833, 0.12843394)
+stream = ExtResource("26_irhhi")
+unit_size = 20.8
+pitch_scale = 0.6
+max_distance = 25.0
+max_polyphony = 2
+
+[node name="ReactOnHitASP3D" type="AudioStreamPlayer3D" parent="bones/Hips/asps"]
+unique_name_in_owner = true
+transform = Transform3D(1, -2.2351742e-08, -8.940697e-08, 0, 1, -2.9802322e-08, 0, 1.4901161e-08, 1, -0.063877106, -0.26136684, 0.11822891)
+stream = ExtResource("27_ugy5p")
+unit_size = 20.8
+pitch_scale = 0.6
+max_distance = 25.0
+max_polyphony = 2
+
+[node name="BoneCrunchASP3D" type="AudioStreamPlayer3D" parent="bones/Hips/asps/ReactOnHitASP3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 1.4901161e-08, 0, 0, 1.0000001, -1.4901161e-08, 0, 0, 1, 0.18608546, -0.21020794, -0.091522455)
+stream = ExtResource("28_3uswq")
+unit_size = 20.8
+pitch_scale = 0.6
+max_distance = 25.0
+max_polyphony = 2
+
+[node name="UniqueASP3D" type="AudioStreamPlayer3D" parent="bones/Hips/asps"]
+unique_name_in_owner = true
+transform = Transform3D(1, -7.450581e-09, -8.940697e-08, 0, 1, -2.9802322e-08, 0, 1.4901161e-08, 1, -0.013821125, 0.21102333, -0.044065475)
+stream = ExtResource("29_3u7m5")
+unit_size = 20.8
+pitch_scale = 0.6
+max_distance = 25.0
+max_polyphony = 2
+
+[node name="Root" type="BoneAttachment3D" parent="bones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00044641504, 0, 0.0011638507)
+bone_name = "Root"
+bone_idx = 0
+use_external_skeleton = true
+external_skeleton = NodePath("../../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+
+[node name="BitHigher" type="Marker3D" parent="bones/Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13990396, 0)
+
+[node name="UpperChest" type="BoneAttachment3D" parent="bones"]
+transform = Transform3D(0.98114145, -0.14629263, -0.12633283, 0.059935242, 0.8516298, -0.5207057, 0.1837642, 0.50331414, 0.84433734, -0.021562826, 0.86632454, 0.0007132543)
+bone_name = "UpperChest"
+bone_idx = 4
+use_external_skeleton = true
+external_skeleton = NodePath("../../VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton")
+
+[node name="Mug2" parent="bones/UpperChest" instance=ExtResource("30_jnl8g")]
+transform = Transform3D(-0.70583457, 0.6572712, 0.26418188, 0.48039463, 0.7182151, -0.5033766, -0.52059436, -0.22838908, -0.82269067, 0.12727234, -0.02017349, 0.043985784)
+
+[node name="StatesContainer" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("31_jwf8u")
+
+[node name="_Top" type="Node" parent="StatesContainer"]
+unique_name_in_owner = true
+script = ExtResource("32_2hrjx")
+
+[node name="Life" type="Node" parent="StatesContainer/_Top"]
+script = ExtResource("33_ikpem")
+
+[node name="StillLifePhase" type="Node" parent="StatesContainer/_Top/Life"]
+script = ExtResource("34_u23m6")
+
+[node name="CombatPhase" type="Node" parent="StatesContainer/_Top/Life"]
+script = ExtResource("35_vwxen")
+
+[node name="DeathPhase" type="Node" parent="StatesContainer/_Top/Life"]
+script = ExtResource("36_c6nbc")
+
+[node name="LeafStatePool" type="Node" parent="StatesContainer"]
+unique_name_in_owner = true
+
+[node name="SitIdleV1" type="Node" parent="StatesContainer/LeafStatePool"]
+script = ExtResource("37_pexs2")
+
+[node name="SitIdleV2" type="Node" parent="StatesContainer/LeafStatePool"]
+script = ExtResource("38_rvjfl")
+
+[node name="SitTalking" type="Node" parent="StatesContainer/LeafStatePool"]
+script = ExtResource("39_oqdfc")
+
+[node name="SitIntimidate" type="Node" parent="StatesContainer/LeafStatePool"]
+script = ExtResource("40_w1yq2")
+
+[node name="SitRubbing" type="Node" parent="StatesContainer/LeafStatePool"]
+script = ExtResource("41_1p6kc")
+
+[node name="__one_time_leafes" type="Node" parent="StatesContainer/LeafStatePool"]
+
+[node name="SitPoint" type="Node" parent="StatesContainer/LeafStatePool/__one_time_leafes"]
+script = ExtResource("42_bmtls")
+
+[node name="SitClap" type="Node" parent="StatesContainer/LeafStatePool/__one_time_leafes"]
+script = ExtResource("43_wik2w")
+
+[node name="SitLaugh" type="Node" parent="StatesContainer/LeafStatePool/__one_time_leafes"]
+script = ExtResource("44_1jnu6")
+
+[node name="SitDisbelief" type="Node" parent="StatesContainer/LeafStatePool/__one_time_leafes"]
+script = ExtResource("45_uj2w7")
+
+[node name="__other" type="Node" parent="StatesContainer/LeafStatePool"]
+
+[node name="Death" type="Node" parent="StatesContainer/LeafStatePool/__other"]
+script = ExtResource("46_arxaf")
+
+[node name="SitAttack" type="Node" parent="StatesContainer/LeafStatePool/__other"]
+script = ExtResource("47_5bx33")
+
+[node name="EnemyMovement" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("48_oqcpa")
+
+[node name="CameraTarget" parent="." instance=ExtResource("49_3w6ov")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048906326, 0.85773087, 0.0908134)
+visible = false
+__csg_visual = false
+
+[node name="EnemyAwareness" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("50_r040y")
+metadata/_custom_type_script = "uid://dv0ekd71cst42"
+
+[node name="Downcast" parent="EnemyAwareness" node_paths=PackedStringArray("attachment") instance=ExtResource("51_l4htf")]
+visible = false
+attachment = NodePath("../../bones/Root/BitHigher")
+
+[node name="Config" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("52_rtify")
+
+[node name="SFX" type="Node3D" parent="."]
+
+[node name="AudioSystem" type="Node" parent="SFX"]
+unique_name_in_owner = true
+script = ExtResource("53_e51vp")
+
+[node name="AAnimASPs" type="Node3D" parent="SFX"]
+script = ExtResource("54_sfbua")
+
+[node name="AAnimFS" type="AudioStreamPlayer3D" parent="SFX/AAnimASPs"]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimFSLight" type="AudioStreamPlayer3D" parent="SFX/AAnimASPs"]
+unique_name_in_owner = true
+volume_db = -15.0
+max_polyphony = 2
+
+[node name="AAnimWH" type="AudioStreamPlayer3D" parent="SFX/AAnimASPs"]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimWHAuraWp" type="AudioStreamPlayer3D" parent="SFX/AAnimASPs"]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimMove" type="AudioStreamPlayer3D" parent="SFX/AAnimASPs"]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="_DevASP" type="AudioStreamPlayer3D" parent="SFX"]
+stream = ExtResource("55_nm2s0")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+transform = Transform3D(-0.06883364, 0, 0.99762815, 0, 1, 0, -0.99762815, 0, -0.06883364, 0, 1.0527928, 0)
+aabb = AABB(-2.1231837, -1.2403736, -2.2093534, 4.2463675, 2.4807472, 4.418707)
+
+[connection signal="SIG_land_wave" from="." to="." method="_on_sig_land_wave"]
+
+[editable path="VisualOffset/FCS_Skeleton_working3"]

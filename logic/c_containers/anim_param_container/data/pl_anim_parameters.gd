@@ -15,7 +15,8 @@ extends Node
 ##  to 'AnimatorManager/NativeAnimator/AnimParameters:switches_to_queue'
 ##
 ## What can be done in the future: not hard-coded track prefix (some auto search using parameter names)
-## or going through different "paths" of how track can be referenced (akward)
+## or going through different "paths" of how track can be referenced (awkward)
+## UPD: for now it is an awkward options..
 
 
 # region: switches_to_queue and allows_queue docs

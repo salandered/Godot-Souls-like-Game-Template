@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dwaunta3ort06" path="res://logic/c_systems/influence_parent/create_rigid_parent/create_rigid_parent.gd" id="1_mhlup"]
 [ext_resource type="Script" uid="uid://dfwekl6bythib" path="res://logic/entities/Items/interact_area/monitor_pl_sig_area.gd" id="2_qc3x1"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_owrli"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yxore"]
 
 [node name="CreateRigidParent" type="Node3D"]
 script = ExtResource("1_mhlup")
@@ -13,5 +13,5 @@ script = ExtResource("2_qc3x1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MonitorPlEnterSigArea"]
 unique_name_in_owner = true
-shape = SubResource("CapsuleShape3D_owrli")
+shape = SubResource("CapsuleShape3D_yxore")
 debug_color = Color(1, 1, 1, 0.7254902)

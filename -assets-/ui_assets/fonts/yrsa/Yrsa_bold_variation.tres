@@ -1,6 +1,0 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b3vlyvaja1nf6"]
-
-[ext_resource type="FontFile" uid="uid://2ig2181tsgrh" path="res://-assets-/ui_assets/fonts/yrsa/Yrsa-source/Yrsa-VariableFont_wght.ttf" id="1_6xjmc"]
-
-[resource]
-base_font = ExtResource("1_6xjmc")

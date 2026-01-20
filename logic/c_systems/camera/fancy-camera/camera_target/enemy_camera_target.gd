@@ -27,10 +27,6 @@ func initialise(assigned_parent: Node3D) -> void:
 	__perform_validation()
 	
 
-# func _process(delta: float) -> void:
-# 	prints(pp.s(self.global_position))
-
-
 func pp_name() -> String:
 	return pp.s("EnemyCamTarget", str(_assigned_parent.name) if _assigned_parent else "")
 
@@ -43,31 +39,6 @@ func make_active() -> void:
 
 
 ## DEV
-
-
-# NOTE: experimental. probably not the best way to do this. Not used
-# func is_about_to_die() -> bool:
-# 	if self.is_queued_for_deletion():
-# 		prints("EnemyCameraTarget is_queued_for_deletion => true", self)
-# 		return true
-	
-# 	var parent := get_parent()
-# 	if not is_instance_valid(parent):
-# 		prints("EnemyCameraTarget parent is not valid => true", self)
-# 		return true
-# 	if parent.is_queued_for_deletion():
-# 		prints("EnemyCameraTarget parent is_queued_for_deletion => true", self)
-# 		return true
-
-# 	var assigned_parent := get_assigned_parent()
-# 	if not is_instance_valid(assigned_parent):
-# 		prints("EnemyCameraTarget assigned_parent is not valid => true", self)
-# 		return true
-# 	if assigned_parent.is_queued_for_deletion():
-# 		prints("EnemyCameraTarget assigned_parent is_queued_for_deletion => true", self)
-# 		return true
-	
-# 	return false
 
 
 @export var __csg_visual: bool = true
@@ -85,15 +56,3 @@ func dev_initialise():
 	# if not OS.is_debug_build():
 	# 	return
 # 	look_at_point.global_position.y = u._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)
-
-
-# ## __LOGS
-# # region
-
-func __LOG_B() -> bool:
-	return true
-
-func __LOG_INDENT() -> int:
-	return 0
-
-# # endregion

@@ -1,0 +1,152 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj7eifk52p3xo"]
+
+[ext_resource type="PackedScene" uid="uid://byib7n7e4xq1j" path="res://-assets-/GLB-level/demo-level_/tree_far/tree_group.glb" id="1_ghkh7"]
+
+[node name="tree group far WRAPPER" instance=ExtResource("1_ghkh7")]
+
+[node name="BirchTree_Dead_1_007" parent="tree group far" index="0"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="bark_debris_01_d_LOD0_004" parent="tree group far" index="1"]
+layers = 18
+
+[node name="Resource_Gold_2" parent="tree group far" index="2"]
+layers = 18
+
+[node name="BirchTree_Dead_1_008" parent="tree group far" index="3"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="BirchTree_Dead_1_009" parent="tree group far" index="4"]
+layers = 2
+
+[node name="BirchTree_Dead_1_010" parent="tree group far" index="5"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="BirchTree_Dead_1_011" parent="tree group far" index="6"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="bark_debris_01_d_LOD0_005" parent="tree group far" index="7"]
+layers = 18
+
+[node name="BirchTree_Dead_1_012" parent="tree group far" index="8"]
+layers = 2
+
+[node name="Resource_Gold_2_004" parent="tree group far" index="9"]
+layers = 18
+
+[node name="BirchTree_Dead_1_002" parent="tree group far" index="10"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="Resource_Gold_2_001" parent="tree group far" index="11"]
+layers = 18
+cast_shadow = 0
+
+[node name="DeadTree_10_004" parent="tree group far/dead tree" index="0"]
+layers = 2
+
+[node name="DeadTree_10_016" parent="tree group far/dead tree" index="1"]
+layers = 2
+
+[node name="DeadTree_10_019" parent="tree group far/dead tree" index="2"]
+layers = 2
+
+[node name="DeadTree_10_021" parent="tree group far/dead tree" index="3"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="DeadTree_10_024" parent="tree group far/dead tree" index="4"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="DeadTree_10_026" parent="tree group far/dead tree" index="5"]
+layers = 2
+
+[node name="DeadTree_10_029" parent="tree group far/dead tree" index="6"]
+layers = 2
+cast_shadow = 0
+
+[node name="DeadTree_10_030" parent="tree group far/dead tree" index="7"]
+layers = 2
+
+[node name="DeadTree_10_031" parent="tree group far/dead tree" index="8"]
+layers = 2
+
+[node name="DeadTree_10_034" parent="tree group far/dead tree" index="9"]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="turtle sk_012" parent="tree group far/turtles" index="0"]
+layers = 2
+
+[node name="turtle sk_016" parent="tree group far/turtles" index="1"]
+layers = 18
+
+[node name="turtle sk_020" parent="tree group far/turtles/turtle sk_016" index="0"]
+layers = 2
+
+[node name="turtle sk_021" parent="tree group far/turtles/turtle sk_016" index="1"]
+layers = 2
+
+[node name="turtle sk_017" parent="tree group far/turtles" index="2"]
+layers = 2
+
+[node name="turtle sk_019" parent="tree group far/turtles" index="3"]
+layers = 18
+
+[node name="turtle sk_001" parent="tree group far/turtles" index="4"]
+layers = 18
+
+[node name="old plain big" parent="tree group far/all planes" index="0"]
+layers = 18
+cast_shadow = 0
+
+[node name="Plane_009" parent="tree group far/all planes" index="1"]
+layers = 18
+cast_shadow = 0
+
+[node name="Plane_008" parent="tree group far/all planes" index="2"]
+layers = 18
+cast_shadow = 0
+
+[node name="Plane_010" parent="tree group far/all planes" index="3"]
+layers = 18
+
+[node name="Mountain_Group_1_015" parent="tree group far/all planes" index="4"]
+layers = 18
+
+[node name="Plane_011" parent="tree group far/all planes" index="5"]
+layers = 18
+cast_shadow = 0
+
+[node name="Plane_014" parent="tree group far/all planes" index="6"]
+layers = 18
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.5
+
+[node name="Plane_015" parent="tree group far/all planes" index="7"]
+layers = 18
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.5
+
+[node name="Plane_016" parent="tree group far/all planes" index="8"]
+layers = 18
+cast_shadow = 0
+
+[node name="turtle sk cover outer" parent="tree group far/all planes" index="9"]
+layers = 18
+
+[node name="side cover" parent="tree group far/all planes" index="10"]
+layers = 18

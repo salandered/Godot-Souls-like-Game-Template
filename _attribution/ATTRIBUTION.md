@@ -134,6 +134,7 @@ Assets: Entrance Gates to Menlo Castle;
 * GDQuest - https://www.gdquest.com/
 * Gord Goodwin - https://gord-goodwin.blogspot.com/
 * FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
+* Luos - https://luos.itch.io/
 * Kenney - https://kenney.nl/
 
 

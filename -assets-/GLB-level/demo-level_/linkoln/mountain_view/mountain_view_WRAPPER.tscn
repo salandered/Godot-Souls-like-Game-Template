@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://p67hfjlxhimn"]
+
+[ext_resource type="PackedScene" uid="uid://d3omn7puwbqeg" path="res://-assets-/GLB-level/demo-level_/linkoln/mountain_view/mountain_view.glb" id="1_hqu7v"]
+[ext_resource type="Texture2D" uid="uid://lqbs41cppq84" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_diffuse.jpg" id="2_anoov"]
+[ext_resource type="Texture2D" uid="uid://dq7riu3q2gteb" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_normal.png" id="3_15uth"]
+[ext_resource type="Texture2D" uid="uid://c6vpppa7k0w6s" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_roughness.png" id="4_anha6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjvqw"]
+resource_name = "B Stone Dirt Wall 02"
+cull_mode = 2
+albedo_color = Color(0.7240258, 0.7240258, 0.7240258, 1)
+albedo_texture = ExtResource("2_anoov")
+metallic = 0.42
+metallic_texture_channel = 2
+roughness_texture = ExtResource("4_anha6")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_15uth")
+
+[node name="mountain_view_WRAPPER" instance=ExtResource("1_hqu7v")]
+
+[node name="Rock_007" parent="mountain view" index="0"]
+layers = 17
+
+[node name="Rock_006" parent="mountain view" index="1"]
+layers = 17
+
+[node name="_Plane_016" parent="mountain view" index="2"]
+layers = 17
+
+[node name="_Plane_003" parent="mountain view" index="3"]
+layers = 17
+cast_shadow = 0
+
+[node name="_Plane_004" parent="mountain view" index="4"]
+layers = 17
+cast_shadow = 0
+
+[node name="Mountain_Group_2_003" parent="mountain view" index="5"]
+layers = 17
+
+[node name="Mountain_Group_2_004" parent="mountain view" index="6"]
+layers = 17
+cast_shadow = 0
+
+[node name="Tower top_001" parent="mountain view" index="7"]
+layers = 17
+material_override = SubResource("StandardMaterial3D_tjvqw")
+
+[node name="Plane_007" parent="mountain view" index="8"]
+layers = 17
+cast_shadow = 0
+
+[node name="_Plane_006" parent="mountain view" index="9"]
+layers = 17
+
+[node name="Mountain_Group_2_005" parent="mountain view" index="10"]
+layers = 17
+cast_shadow = 0
+
+[node name="_Plane_011" parent="mountain view" index="11"]
+layers = 17
+cast_shadow = 0
+
+[node name="Mountain_Group_2_002" parent="mountain view" index="12"]
+layers = 17
+
+[node name="Rock_002" parent="mountain view" index="13"]
+layers = 17
+
+[node name="Mountain_Group_2_006" parent="mountain view" index="14"]
+layers = 17
+cast_shadow = 0
+
+[node name="Rock_012" parent="mountain view" index="15"]
+layers = 17
+
+[node name="Rock_003" parent="mountain view" index="16"]
+layers = 17

@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://ccqf55ca7dygf"]
+
+[ext_resource type="Shader" uid="uid://qwtk2c42j62s" path="res://-assets-/materials-shared/_shaders/bullet_trail/bullet_shader.gdshader" id="1_7dvpe"]
+[ext_resource type="Texture2D" uid="uid://dwsi1sk7r8xwr" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/exit_2_lichen_rock_diff_1k.jpg" id="2_4vbl3"]
+[ext_resource type="Texture2D" uid="uid://c6aotd57ycjnm" path="res://-assets-/materials-shared/_textures/lu_noise/T_Lu_NoiseNorm_09.png" id="3_gtk0h"]
+
+[sub_resource type="Gradient" id="Gradient_nmj62"]
+offsets = PackedFloat32Array(0, 0.51111114, 0.9222222)
+colors = PackedColorArray(0.5161452, 0, 0.5339433, 1, 0.7172371, 0.47182462, 0.71314687, 1, 0.18329607, 0.283668, 0.819067, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mfy1m"]
+gradient = SubResource("Gradient_nmj62")
+width = 512
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q7vao"]
+frequency = 0.0001
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6o2e"]
+noise = SubResource("FastNoiseLite_q7vao")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7dvpe")
+shader_parameter/noise_sampler = SubResource("NoiseTexture2D_s6o2e")
+shader_parameter/gradient_1D = SubResource("GradientTexture1D_mfy1m")
+shader_parameter/speed_scale = 0.05
+shader_parameter/albedo_texture = ExtResource("2_4vbl3")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/mix_strength = 0.83200003952
+shader_parameter/normal_map_texture = ExtResource("3_gtk0h")
+shader_parameter/normal_depth = 2.766000131385

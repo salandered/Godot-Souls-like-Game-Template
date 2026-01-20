@@ -16,27 +16,27 @@
 [ext_resource type="PackedScene" uid="uid://co3heqf28d52v" path="res://logic/entities/Items/chest/MaxHealthChest.tscn" id="13_im38e"]
 [ext_resource type="PackedScene" uid="uid://bydwaf8keh4gq" path="res://logic/entities/Items/chest/DodgeIncreaseChest.tscn" id="13_qih1a"]
 [ext_resource type="PackedScene" uid="uid://b5tsnu0lrbyel" path="res://logic/entities/Items/chest/SpeedIncreaseChest.tscn" id="14_kb266"]
-[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Locations/_dev/simple_target/SimpleTarget.tscn" id="15_vhgou"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Items/simple_target/SimpleTarget.tscn" id="15_vhgou"]
 [ext_resource type="PackedScene" uid="uid://br1lrshc0roe4" path="res://-assets-/GLB-level/demo-level_/columns/shattered/ShatteredColumn.tscn" id="17_8ckdw"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="18_a2pl4"]
 [ext_resource type="PackedScene" uid="uid://c7vyqnm6vpnbx" path="res://logic/c_systems/influence_parent/break_static_parent/BreakStaticParent.tscn" id="18_ilsrh"]
-[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Locations/props/DarkCratePile.tscn" id="20_mb4ba"]
-[ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/entities/Locations/props/DarkCrateColumn.tscn" id="21_5slx0"]
-[ext_resource type="PackedScene" uid="uid://d1glwn1vbeqan" path="res://logic/entities/Locations/props/DarkCrateBigPile.tscn" id="22_j1hty"]
-[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Locations/props/dark_crate.tscn" id="23_5rawr"]
+[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Items/crate/DarkCratePile.tscn" id="20_mb4ba"]
+[ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/entities/Items/crate/DarkCrateColumn.tscn" id="21_5slx0"]
+[ext_resource type="PackedScene" uid="uid://d1glwn1vbeqan" path="res://logic/entities/Items/crate/DarkCrateBigPile.tscn" id="22_j1hty"]
+[ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Items/crate/dark_crate/dark_crate.tscn" id="23_5rawr"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="24_4hdk1"]
-[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/PHEnemy_2.tscn" id="25_136hl"]
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/phe_enemy/PHEnemy_2.tscn" id="25_136hl"]
 [ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="26_ok6xh"]
-[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/=tracks=/loop/back_noise.mp3" id="27_fok5u"]
-[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/=tracks=/loop/back_bits.mp3" id="28_wrnnw"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="27_fok5u"]
+[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/back/back_bits.mp3" id="28_wrnnw"]
 [ext_resource type="PackedScene" uid="uid://cvorqwtm6njov" path="res://logic/entities/Items/chest/HealthChest.tscn" id="29_1aflu"]
-[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://-assets-/VFX/puff/PuffFog.tscn" id="30_h8i3b"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="30_h8i3b"]
 [ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/Items/lever/BaseLever.tscn" id="31_chotk"]
 [ext_resource type="Material" uid="uid://corbh7usys0xj" path="res://-assets-/materials-shared/metal/I_metal_025/I_Metal025_1K-JPG_Reimp.tres" id="33_jio1o"]
 [ext_resource type="Material" uid="uid://bhr45qjda5agp" path="res://-assets-/materials-shared/metal/I_metal_026/I_Metal026_4d1K-JPG_Reimp.tres" id="34_btncm"]
-[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://-assets-/GLB-char/godot_plush/plush_factory.gd" id="35_2avtx"]
-[ext_resource type="PackedScene" uid="uid://dxy0cbviyqsdm" path="res://-assets-/GLB-char/godot_plush/BigPlush.tscn" id="36_1yct3"]
-[ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://-assets-/GLB-char/godot_plush/MiniPlush.tscn" id="37_o1g2b"]
+[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://logic/c_systems/unsorted/plush/plush_factory.gd" id="35_2avtx"]
+[ext_resource type="PackedScene" uid="uid://dxy0cbviyqsdm" path="res://logic/c_systems/unsorted/plush/BigPlush.tscn" id="36_1yct3"]
+[ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://logic/c_systems/unsorted/plush/MiniPlush.tscn" id="37_o1g2b"]
 [ext_resource type="PackedScene" uid="uid://n6qn03bh8mk2" path="res://logic/entities/Items/lever/PlushLever.tscn" id="38_jio1o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q0bx5"]
@@ -941,7 +941,7 @@ material_override = ExtResource("33_jio1o")
 material_override = ExtResource("34_btncm")
 
 [node name="InteractArea" parent="Props/Levers/CleanUpLever" index="4"]
-transform = Transform3D(0.9999918, 0, -0.0026878347, 0, 1, 0, 0.0026878347, 0, 0.9999918, -16.958176, 0.38369155, 18.304913)
+transform = Transform3D(0.99999064, 0, -0.0026878316, 0, 1, 0, 0.0026878316, 0, 0.99999064, -16.958176, 0.38369155, 18.304913)
 label_text = "Clean up a little"
 
 [node name="BlowUpLever" parent="Props/Levers" instance=ExtResource("31_chotk")]

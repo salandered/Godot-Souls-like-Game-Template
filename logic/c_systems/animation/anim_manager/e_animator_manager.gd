@@ -1,5 +1,4 @@
 @tool
-@icon("res://-assets-/x_icons/node-colors/purple.png")
 extends BaseAnimatorManager
 
 class_name EnemyAnimatorManager
