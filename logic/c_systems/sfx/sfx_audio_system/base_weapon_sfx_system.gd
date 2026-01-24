@@ -21,7 +21,7 @@ func __hard_dependencies() -> Array[Object]:
 
 
 func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void:
-	_weapon = u.safe_get_dict_key(additional_data, weapon_additional_data_key, null)
+	_weapon = DictUtils.safe_get_dict_key(additional_data, weapon_additional_data_key, null)
 
 
 ## non nullable
@@ -58,4 +58,4 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 
 func pp_name() -> String:
 	var prefix = get_weapon().get_weapon_id() if get_weapon() else ""
-	return pp.s(prefix, u.construct_obj_pp_name(self))
+	return pp.s(prefix, ObjUtils.construct_obj_pp_name(self))

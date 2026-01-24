@@ -11,7 +11,7 @@ func get_raw_gallery_items() -> Array[GalleryItem]:
 		GalleryItem.new("collage research",
 		MISC_PATH,
 		"Research",
-		"A handful of useful links",
+		"...",
 		),
 		GalleryItem.new("collage cam",
 		BASE_PATH,
@@ -20,7 +20,6 @@ func get_raw_gallery_items() -> Array[GalleryItem]:
 		GalleryItem.new("collage rigs",
 		BASE_PATH,
 		"Rigging",
-		"The hardest thing"
 		),
 		GalleryItem.new("collage pl",
 		BASE_PATH,
@@ -51,7 +50,7 @@ func get_raw_gallery_items() -> Array[GalleryItem]:
 		GalleryItem.new("collage lady",
 		BASE_PATH,
 		"Water Lady in progress",
-		"Originally 'Figure of the dancer'. More on that in Museum Gallery"
+		"Originally 'Figure of the dancer'. See 3D museum models"
 		),
 		GalleryItem.new("collage mm3",
 		BASE_PATH,
@@ -61,7 +60,7 @@ func get_raw_gallery_items() -> Array[GalleryItem]:
 		BASE_PATH,
 		"3D museum models",
 "3D museum exhibits that formed the basis of some assets.
-More info can be found in Credits and Museum Gallery",
+More info can be found in Credits.",
 		),
 		GalleryItem.new("collage perf",
 		BASE_PATH,

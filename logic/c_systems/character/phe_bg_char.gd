@@ -30,7 +30,7 @@ func _for_init_active_weapon_id_list() -> Array[String]:
 ##
 
 func initialise_implementation():
-	u.safe_connect(SIG_land_wave, _on_sig_land_wave)
+	SigUtils.safe_connect(SIG_land_wave, _on_sig_land_wave)
 	
 
 func get_initial_leaf_state_name() -> String:
@@ -63,7 +63,7 @@ func _on_death_raised_implementation() -> void:
 		remove_fire_effect()
 
 	var sig_data := get_sig_container().get_by_sig_id(SignalID.sfx_unique)
-	u.safe_emit(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
+	SigUtils.safe_emit(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
 
 
 const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")

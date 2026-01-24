@@ -38,21 +38,21 @@ var _leg_actions: Dictionary[String, LegsAction]
 
 ## nullable
 func state_by_name(state_name: String) -> BasePlayerState:
-	var _r: BasePlayerState = u.safe_get_dict_key(_states, state_name, null)
+	var _r: BasePlayerState = DictUtils.safe_get_dict_key(_states, state_name, null)
 	return _r
 
 
 func pl_action_by_name(action_name: String) -> PlayerAction:
-	var _r: PlayerAction = u.safe_get_dict_key(_player_actions, action_name, null)
+	var _r: PlayerAction = DictUtils.safe_get_dict_key(_player_actions, action_name, null)
 	return _r
 
 
 func l_behavior_by_name(behavior_name: String) -> LegsBehavior:
-	var _r: LegsBehavior = u.safe_get_dict_key(_legs_behaviors, behavior_name, null)
+	var _r: LegsBehavior = DictUtils.safe_get_dict_key(_legs_behaviors, behavior_name, null)
 	return _r
 
 func l_action_by_name(action_name: String) -> LegsAction:
-	var _r: LegsAction = u.safe_get_dict_key(_leg_actions, action_name, null)
+	var _r: LegsAction = DictUtils.safe_get_dict_key(_leg_actions, action_name, null)
 	return _r
 
 
@@ -131,7 +131,7 @@ func _accept_player_states() -> void:
 		child.feelings = _player.feelings
 		child.combat = _player.get_combat()
 		child.container = self
-		child.area_awareness = _player.area_awareness
+		child.area_awareness = _player.get_area_awareness()
 		child.player_sm = _player.player_sm
 		child.legs_sm = get_leg_sm()
 		child.anim_container = anim_container
@@ -215,7 +215,6 @@ func _accept_legs_behaviors():
 		child.combat = _player.get_combat()
 		child.legs_sm = get_leg_sm()
 		child.container = self
-		child.area_awareness = _player.area_awareness
 
 		if not child.behavior_name or child.behavior_name.is_empty():
 			__log_error("No behavior_name assigned for behavior node: " + child.get_name())
@@ -244,7 +243,7 @@ func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	# 0 means lowest
 	var _safe_sorted: Array[String]
 	for item in state_names:
-		if u.safe_has_key(_states, item, WL.WARN_CRUCIAL):
+		if DictUtils.safe_has_key(_states, item, WL.WARN_CRUCIAL):
 			_safe_sorted.append(item)
 	_safe_sorted.sort_custom(_states_priority_sort)
 	return _safe_sorted

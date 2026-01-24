@@ -21,7 +21,7 @@ func _emit_SIG_breaking_area_entered() -> void:
 
 
 var common_area_config := CommonAreaConfig.new(
-		MonitorType.SIGNAL,
+		MonitorType.PROCESS,
 		true,
 		false,
 		Collision.Masks.PROP_COL_MASK,

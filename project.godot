@@ -42,6 +42,11 @@ M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoload
 GlobalSignal="*res://logic/_project_data/autoload/global_signal.gd"
 GlobalUIInfo="*res://logic/_project_data/autoload/global_ui_info/GlobalUIInfo.tscn"
 PlayerStats="*res://logic/_project_data/autoload/player_statistic/player_stats.gd"
+Console="*res://addons/console/console.gd"
+
+[console]
+
+theme="uid://dngnbhs1qjqyy"
 
 [debug]
 
@@ -71,7 +76,7 @@ movie_writer/fps=30
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
 
 [file_customization]
 
@@ -85,6 +90,7 @@ folder_colors={
 "res://-adopting/ui_maaack__later/fancy_loading_screen/": "yellow",
 "res://-adopting/x_icons/blue/": "blue",
 "res://-adopting/x_icons/purple/": "purple",
+"res://-adopting/x_icons/red/": "red",
 "res://-assets-/GLB-level/": "green",
 "res://-assets-/GLB-level/demo-level_/": "yellow",
 "res://-assets-/GLB-level/demo-level_/exit_2/": "orange",
@@ -120,8 +126,7 @@ folder_colors={
 "res://ideas/": "gray",
 "res://ideas/enemy/SimpleEnemy/": "pink",
 "res://logic/_project_data/game_state/": "red",
-"res://logic/c_systems/animation/": "orange",
-"res://logic/c_systems/animation/anim_manager/": "purple",
+"res://logic/c_systems/anim_manager/": "purple",
 "res://logic/c_systems/awareness/": "yellow",
 "res://logic/c_systems/camera/fancy-camera/": "teal",
 "res://logic/c_systems/character_state/phe_state/state_composites/": "blue",
@@ -428,6 +433,6 @@ DEV_KP7={
 [rendering]
 
 lights_and_shadows/tighter_shadow_caster_culling=false
-environment/defaults/default_clear_color=Color(0.22352941, 0.09411765, 0.11372549, 1)
+environment/defaults/default_clear_color=Color(0.47284538, 0.47284538, 0.47284538, 1)
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=10.0

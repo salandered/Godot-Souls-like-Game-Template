@@ -1,10 +1,10 @@
 extends Node
 # Solves collisions and adjusts camera movement.
 # Common idea: 
-# 	 - states do what they want with placing camera nodes (mound, nest, etc)
+# 	 - states do what they want with placing camera nodes (pivot, socket, etc)
 #    - here we take restrictions into account and place main camera.
 # Should change cam length, may be slide direction and where to look. 
-# Should not change angle of the camera stick (offset).
+# Should not change angle of the camera boom.
 class_name CameraMovement
 
 @onready var fc: FancyCamera = $".."
@@ -14,27 +14,27 @@ var _default_len: float
 
 
 func _exclude_colliders() -> Array:
-	return [fc.player, fc.mount, fc.nest, fc.camera]
+	return [fc.player, fc.pivot, fc.socket, fc.camera]
 
 
-func _just_follow_nest() -> void:
+func _just_follow_socket() -> void:
 	# Works really well, but in real world there are collisions ...
-	fc.camera.global_position = fc.nest.global_position
-	u.safe_look_at(fc.camera, fc.focus.global_position)
+	fc.camera.global_position = fc.socket.global_position
+	u.safe_look_at(fc.camera, fc.aim.global_position)
 
 	# was like that, but big snapping on unlocking:
 	# final_pos = from + arm_dir * _current_len
 	# fc.camera.global_position = final_pos
-	# u.safe_look_at(fc.camera, fc.focus.global_position)
+	# u.safe_look_at(fc.camera, fc.aim.global_position)
 	
 	
 func move_camera(delta: float) -> void:
-	if not fc.__dev_camera_cols:
-		_just_follow_nest()
+	if not fc.__dev_camera_coll:
+		_just_follow_socket()
 		return
 
-	var from := fc.mount.global_position
-	var to := fc.nest.global_position
+	var from := fc.pivot.global_position
+	var to := fc.socket.global_position
 	var arm_dir := (to - from).normalized()
 	var desired_len := (to - from).length()
 	var target_len: float = min(desired_len, _default_len)
@@ -65,12 +65,12 @@ func move_camera(delta: float) -> void:
 		final_pos = fc.camera_movement._resolve_penetration(from, final_pos, arm_dir)
 	
 	fc.camera.global_position = final_pos
-	u.safe_look_at(fc.camera, fc.focus.global_position)
+	u.safe_look_at(fc.camera, fc.aim.global_position)
 
 
 func _calc_min_hit_len_via_raycasts(arm_dir: Vector3, from: Vector3, to: Vector3, desired_len: float) -> float:
 	# Uses multiple raycasts with offsets perpendicular to arm direction
-	# Builds a local frame perpendicular to the arm (so offsets rotate with the arm)
+	# Builds a local frame perpendicular to the arm (so boom rotate with the arm)
 	var space_state := fc.camera.get_world_3d().direct_space_state
 	
 	var right_axis := arm_dir.cross(Vector3.UP)
@@ -136,7 +136,7 @@ func _resolve_penetration(from: Vector3, camera_pos: Vector3, direction: Vector3
 	
 	var result := space_state.intersect_ray(query)
 	if result:
-		# move camera to the collision point with a safe free_offset
+		# move camera to the collision point with a safe offset
 		return result.position + result.normal * 0.3 # todo - another constant
 	
 	return camera_pos # fallback to original position

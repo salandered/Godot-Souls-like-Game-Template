@@ -2,20 +2,20 @@ extends NodeSystem
 class_name FancyCamera
 
 @export_group("Following Weights")
-@export var FREE_MOUNT_CHEST_WEIGHT: float = 0.1 # tested with 0.1
-@export var FREE_FOCUS_CHEST_WEIGHT: float = 0.09 # tested with 0.1
-@export var FREE_NEST_MOUNT_WEIGHT: float = 0.7 # tested with 0.9
+@export var FREE_SOCKET_CHEST_WEIGHT: float = 0.1 # tested with 0.1
+@export var FREE_AIM_CHEST_WEIGHT: float = 0.09 # tested with 0.1
+@export var FREE_SOCKET_PIVOT_WEIGHT: float = 0.7 # tested with 0.9
 
-@export var LOCKED_FOCUS_TARGET_WEIGHT: float = 0.05 # Base 0.05. Range: 0.03 to 0.08
-@export var LOCKED_MOUNT_CHEST_WEIGHT: float = 0.11
+@export var LOCKED_AIM_TARGET_WEIGHT: float = 0.05 # Base 0.05. Range: 0.03 to 0.08
+@export var LOCKED_PIVOT_CHEST_WEIGHT: float = 0.11
 # WARNING: important to keep them equal for now
 #       If different, big camera snap on unlocking.  
 #       If both small, free cam super unresponsive 
-@export var LOCKED_NEST_MOUNT_WEIGHT: float = FREE_NEST_MOUNT_WEIGHT
+var LOCKED_SOCKET_PIVOT_WEIGHT: float = FREE_SOCKET_PIVOT_WEIGHT
 
 @export_group("Blend change state Settings")
-@export var OFFSET_BLEND_DURATION_ON_LOCK: float = 0.6
-@export var OFFSET_BLEND_DURATION_ON_UNLOCK: float = 0.6
+@export var BOOM_BLEND_DURATION_ON_LOCK: float = 0.6
+@export var BOOM_BLEND_DURATION_ON_UNLOCK: float = 0.6
 @export var FREEZE_FRAMES_ON_UNLOCK := 1
 
 @export_group("Collision Settings")
@@ -31,9 +31,9 @@ class_name FancyCamera
 ## Used only when locked to target
 ## applies to y sense
 @export var DEF_LOCKED_Y_SENSE_MULT: float = 0.9
-	# angle = 0° → camera straight above the mount (offset pointing straight up)
-	# angle = 90° → camera level with the mount (offset perfectly horizontal)
-	# angle = 180° → camera straight below the mount
+	# angle = 0° → camera straight above the pivot (boom pointing straight up)
+	# angle = 90° → camera level with the pivot (boom perfectly horizontal)
+	# angle = 180° → camera straight below the pivot
 # => min is kinda max (high cam angle), and max is lower camera guard
 # also todo keep them in degs, and rads are in math
 @export var MIN_VERTICAL_ANGLE: float = deg_to_rad(22.0) # ≈ 0.384 # 15 – 25
@@ -47,23 +47,29 @@ class_name FancyCamera
 @export var look_at_: Node3D # CameraFocus or target
 
 ## DOCS
-# - Camera looks constantly at Focus Point and tries to position itself on Camera Nest
-# - Focus Point follows target, either the player or the enemy.
-# - Offset - Vector from the pivot (mount/chest) to the cam. Defines the camera's arm length.
-# - Camera Focus - player's chest that is followed by a Focus Point while in free state. NOTE: Child of the Player
-# - Camera Mount - for now it follows player's chest and equal to FocusPoint in a free state.
-# - Camera Nest - where camera should be (pre-collision). Nest = Mount + offset
-# - Focus Point, Mount, Nest and PlayerCamera are children of Fancy Camera.
-#
+## Terminology
+# - [Pivot]: The anchor point attached to the Player's chest.
+# - [Boom]: The rigid vector from Pivot to Socket (ideal arm length/direction).
+# - [Socket]: The ideal position at the end of the Boom (pre-collision) for a cam.
+# - [Aim]: The point in space the Camera faces (rotates.
+## DESC
+# - Camera looks constantly at Aim and tries to position itself on Camera Socket
+# - Aim follows target, either the player or the enemy.
+# - Boom - Vector from the pivot (pivot/chest) to the cam. Defines the camera's arm length.
+# - Camera Focus - player's chest that is followed by an Aim while in free state. NOTE: Child of the Player
+# - Camera Pivot - for now it follows player's chest and is positioned similar to Aim in a free state.
+# - Camera Socket - where camera should be (pre-collision). Socket = Pivot + Boom
+# - Aim, Pivot, Socket and PlayerCamera are children of Fancy Camera.
+## 
 # - So it all follows each other:
-#	Focus Point -> LookAt (CameraFocus or target)
-#	Camera Mount -> Player
-#	Camera Nest -> Camera Mount + offset
-#	Camera -> Camera Nest
+#	Aim -> LookAt (CameraFocus or target)
+#	Camera Pivot -> Player
+#	Camera Socket -> Pivot + Boom
+#	Camera -> Camera Socket
 @onready var player: Princess = $".."
-@onready var focus: Node3D = %FocusPoint
-@onready var mount: Node3D = %CameraMount
-@onready var nest: Node3D = %CameraNest
+@onready var aim: Node3D = %Aim
+@onready var pivot: Node3D = %CameraPivot
+@onready var socket: Node3D = %CameraSocket
 @onready var camera: Camera3D = %PlayerCamera
 
 @onready var free_state: FreeCameraState = %FreeCamera
@@ -91,12 +97,17 @@ var FREE_STATE_NAME := "free_state"
 var LOCKED_STATE_NAME := "locked_state"
 
 
+var __fov_pointer := 0
+var __dev_camera_coll := true
+var __fov_cycler: Cycler
+
+
 func __hard_dependencies() -> Array[Object]:
 	return [
 		player,
-		focus,
-		mount,
-		nest,
+		aim,
+		pivot,
+		socket,
 		camera,
 		free_state,
 		locked_state,
@@ -109,7 +120,7 @@ func __hard_dependencies() -> Array[Object]:
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	u.safe_connect(GlobalSignal.SIG_update_mouse_settings_for_camera, _on_update_sense_settings)
+	
 	initialise()
 
 
@@ -124,25 +135,25 @@ func initialise() -> void:
 	# => we treat look_at_ as chest here in initialise() 
 	var chest := look_at_
 
-	focus.global_position = chest.global_position # Focus Point to player's chest
-	mount.global_position = chest.global_position # same
+	aim.global_position = chest.global_position # Aim to player's chest
+	pivot.global_position = chest.global_position # same
 	
-	# Calculate initial_offset based on player's forward direction
-	# was: initial_offset = fc.nest.global_position - fc.mount.global_position
+	# Calculate initial_boom based on player's forward direction
+	# was: initial_boom = fc.socket.global_position - fc.pivot.global_position
 	# TODO WARNING: HERE IS INITIAL LENGTH BETWEEN PLAYER AND CAMERA. NOT IN THE VIEWPORT
 	# 		make some configurable system!
 	var _player_forward := -player.global_transform.basis.z
-	var initial_offset := _player_forward * 2.0 + Vector3(0, 1.0, 0) # 5 units behind, 2 units up
+	var initial_boom := _player_forward * 1.6 + Vector3(0, 1.0, 0) # 5 units behind, 2 units up
 	
-	nest.global_position = mount.global_position + initial_offset # nest relative to mount using the free_offset
+	socket.global_position = pivot.global_position + initial_boom # socket relative to pivot using the free_boom
 	
-	camera.global_position = nest.global_position # may be position closer in case of wall
+	camera.global_position = socket.global_position # may be position closer in case of wall
 	camera.current = true
 	
 	# FREE STATE INIT
 	free_state.fc = self
 	free_state.chest = chest
-	free_state.free_offset = initial_offset
+	free_state.free_boom = initial_boom
 	free_state.state_name = FREE_STATE_NAME
 
 	# LOCKED STATE INIT
@@ -151,16 +162,27 @@ func initialise() -> void:
 
 	# CAMERA INIT
 	current_state = free_state
-	locked_target = nest
-	camera_movement._default_len = initial_offset.length()
-	camera_movement._current_len = initial_offset.length()
+	locked_target = socket
+	camera_movement._default_len = initial_boom.length()
+	camera_movement._current_len = initial_boom.length()
 
+	#
+	_toggle_cam_visuals(false)
+
+	## SIGNALS
+	SigUtils.safe_connect_pairs(
+		[
+			[GlobalSignal.SIG_update_mouse_settings_for_camera, _on_update_sense_settings],
+			[GlobalSignal.SIG_toggle_camera_visuals, _on_SIG_toggle_camera_visuals],
+			[GlobalSignal.SIG_toggle_camera_coll, _on_SIG_toggle_camera_coll]
+		]
+	)
+
+	__fov_cycler = Cycler.new([50, 60, 70, 80])
 	
-	__dev_initialise()
-	
-	__log_("", "Initialisation ended.", "Initial_offset is", __free_off())
-	if not __perform_validation():
-		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can't be done")
+	__log_("", "Initialisation ended.", "Initial_boom is", __free_boom())
+	if not __perform_validation(true):
+		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can be done")
 
 
 func calculate_mouse_sense():
@@ -185,8 +207,6 @@ func is_free_state() -> bool:
 
 
 func _process(delta: float) -> void:
-	if not __validation_ok():
-		return
 	# TODO: target switch on mouse move (or mouse scroll which is simplier)
 	# NOTE: this is second place when we gather input (main being in pl model for pl SM)
 	#   And i currently think it's ok for different systems to listen to input. 
@@ -212,7 +232,7 @@ func _consider_switching_state(input_: InputPackage):
 			if input_.target_lock.no_tap():
 				return
 			if input_.target_lock.tap_or_double_tap():
-				var found_target := player.area_awareness.find_target()
+				var found_target := player.get_area_awareness().find_target()
 				if found_target:
 					_switch_locked_from_free(found_target)
 				else:
@@ -230,7 +250,7 @@ func _consider_switching_state(input_: InputPackage):
 
 func _switch_free_from_locked(reason: String = ""):
 	__log_("LOCKED -> FREE", "reason", reason)
-	locked_target = nest
+	locked_target = socket
 	current_state = free_state
 
 	circle_target.reset_target()
@@ -240,7 +260,7 @@ func _switch_free_from_locked(reason: String = ""):
 
 
 func _switch_locked_from_free(found_target: EnemyCameraTarget):
-	__log_("FREE -> LOCKED", __Cvec(), __free_off(), "target=", found_target.pp_name())
+	__log_("FREE -> LOCKED", __Cvec(), __free_boom(), "target=", found_target.pp_name())
 				
 	locked_target = found_target
 	current_state = locked_state
@@ -267,6 +287,34 @@ func _on_update_sense_settings() -> void:
 	calculate_mouse_sense()
 
 
+func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	if _r.err: return
+	_toggle_cam_coll(_r.value)
+
+
+func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	if _r.err: return
+	_toggle_cam_visuals(_r.value)
+
+
+func _toggle_cam_coll(toggle: bool):
+	print_.dev("~~", pp.s("_toggle_cam_coll", toggle))
+	__dev_camera_coll = toggle
+
+
+func _toggle_cam_visuals(toggle: bool):
+	print_.dev("~~", pp.s("_toggle_cam_visuals", toggle))
+	if socket:
+		socket.visible = toggle
+	if pivot:
+		pivot.visible = toggle
+	if camera:
+		camera.visible = toggle
+	if aim:
+		aim.visible = toggle
+
 ## __LOGS
 # region
 
@@ -284,33 +332,12 @@ func __LOG_INDENT() -> int:
 
 # region: DEV
 
-var __fov_pointer := 0
-var __dev_camera_cols := true
-var __dev_camera_visuals := false
-var __csg_objects := []
-
-var fov_cycler: Cycler
-
-
-func __dev_initialise() -> void:
-	if not OS.is_debug_build():
-		return
-	__csg_objects = get_descendants.csg_primitives(self)
-	__toggle_camera_visuals()
-
-	fov_cycler = Cycler.new([50, 60, 70, 80])
-
 
 func __change_fov():
-	var fov = fov_cycler.get_next()
+	var fov = __fov_cycler.get_next()
 	print_.dev("", pp.s("changed fov to", fov))
 	camera.fov = fov
 
-
-func __toggle_camera_visuals():
-	for obj in __csg_objects:
-		obj.visible = __dev_camera_visuals
-	
 
 func _dev_input(event: InputEvent):
 	if not OS.is_debug_build():
@@ -318,54 +345,49 @@ func _dev_input(event: InputEvent):
 
 	if event.is_action_released(RawAction.DEV_CAM_fov):
 		__change_fov()
-	
-	# if event.is_action_pressed(RawAction.DEV_toggle_nest):
-	# 	__log_("", "Toggling visibility of CSG objects for", len(__csg_objects), "objects")
-	# 	__dev_camera_visuals = not __dev_camera_visuals
-	# 	__toggle_camera_visuals()
+
 
 	if event.is_action_pressed(RawAction.DEV_CAM_cols):
-		__dev_camera_cols = not __dev_camera_cols
-		__log_("", "dev_camera_cols")
+		_toggle_cam_coll(not __dev_camera_coll)
 
 
 # region: dev LOGS
 
 func __dbg_main_info() -> String:
-	var r := pp.s(__Cvec(), __Mvec(), __Nvec(), __Fvec(), __free_off(), __lock_off())
+	var r := pp.s(__Cvec(), __Pvec(), __Svec(), __Fvec(), __free_boom(), __lock_boom())
 	return r
 
-func __free_off() -> String:
-	var r := pp.s("free off=", free_state.free_offset, "len=", free_state.free_offset.length())
+func __free_boom() -> String:
+	var r := pp.s("free off=", free_state.free_boom, "len=", free_state.free_boom.length())
 	return r
 
-func __lock_off() -> String:
-	var r := pp.s("lock off=", locked_state.lock_offset, "len=", locked_state.lock_offset.length())
+func __lock_boom() -> String:
+	var r := pp.s("lock off=", locked_state.lock_boom, "len=", locked_state.lock_boom.length())
 	return r
 
 func __Cvec() -> String:
 	return pp.s("C=", pp.vec3(camera.global_position))
 
-func __Mvec() -> String:
-	return pp.s("M=", pp.vec3(mount.global_position))
+func __Pvec() -> String:
+	return pp.s("P=", pp.vec3(pivot.global_position))
 
-func __Nvec() -> String:
-	return pp.s("N=", pp.vec3(nest.global_position))
+func __Svec() -> String:
+	return pp.s("S=", pp.vec3(socket.global_position))
 
 func __Fvec() -> String:
-	return pp.s("F=", pp.vec3(focus.global_position))
+	return pp.s("F=", pp.vec3(aim.global_position))
 
-func __CP() -> String:
+func __CPl() -> String:
 	return pp.s("C->Pl=", (camera.global_position - player.camera_focus.global_position).length())
 
-func __CN() -> String:
-	return pp.s("C->N=", (camera.global_position - nest.global_position).length())
+func __CS() -> String:
+	return pp.s("C->S=", (camera.global_position - socket.global_position).length())
 
-func __CM() -> String:
-	return pp.s("C->M=", (camera.global_position - mount.global_position).length())
+func __CP() -> String:
+	return pp.s("C->P=", (camera.global_position - pivot.global_position).length())
 
 func __CF() -> String:
-	return pp.s("C->F=", (camera.global_position - focus.global_position).length())
+	return pp.s("C->F=", (camera.global_position - aim.global_position).length())
 
 func __angle_player_camera_target() -> String:
 	# Vectors from player and camera to the target, projected to XZ
@@ -384,8 +406,8 @@ func __angle_player_camera_target() -> String:
 # endregion
 
 # TODO: Probably real game dev terms:
-# Boom: vector from pivot (mount/chest) to the camera. Now is free_offset / lock_offset.
+# Boom: vector from pivot (pivot/chest) to the camera. Now is free_boom / lock_boom
 # Boom length: _default_len and _current_len.
-# Pivot: the anchor to orbit around (mount).
-# Desired/ideal camera: nest (pre-collision point).
+# Pivot: the anchor to orbit around (pivot).
+# Desired/ideal camera: socket (pre-collision point).
 # Resolved/actual camera: camera after collision solver.

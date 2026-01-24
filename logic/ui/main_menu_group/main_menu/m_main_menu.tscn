@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="3_x83h1"]
 [ext_resource type="PackedScene" uid="uid://d0jvin82yypck" path="res://logic/ui/main_menu_group/credits/credits/m_credits.tscn" id="4_iuok3"]
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="5_2e4m0"]
-[ext_resource type="Texture2D" uid="uid://c21h0ecvyglu" path="res://-assets-/ui_assets/images/floor.png" id="5_2sdq7"]
 [ext_resource type="PackedScene" uid="uid://ben53482wtfq8" path="res://logic/ui/image_gallery/dev_log_gallery.tscn" id="5_8iie0"]
 [ext_resource type="PackedScene" uid="uid://djsyfeinr8lew" path="res://logic/ui/main_menu_group/main_menu/Menu3dScene.tscn" id="5_hvsaw"]
 [ext_resource type="Texture2D" uid="uid://c5m7vv6a7kgdd" path="res://-assets-/ui_assets/cursor/pixil-frame-0.png" id="5_ugg5x"]
@@ -18,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/prefab/color_rect.tscn" id="12_uw7yc"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort_ui/distort_menu.gdshader" id="13_rjjho"]
 [ext_resource type="PackedScene" uid="uid://cp4td8jhxhsj2" path="res://logic/ui/ui_utils/prefab/rich_text_label/rich_text_label.tscn" id="14_d1ref"]
+[ext_resource type="PackedScene" uid="uid://3gdh2v44kxpi" path="res://-assets-/ui_assets/themes/MainMenuButton.tscn" id="14_x83h1"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
 frequency = 0.0037
@@ -57,12 +57,6 @@ gallery_packed_scene = ExtResource("5_8iie0")
 level_1_scene_path = "uid://dmkxcwge6jddy"
 level_2_scene_path = "uid://bm5vqmonl5jl4"
 custom_cursor_texture = ExtResource("5_ugg5x")
-
-[node name="Floor" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(925, 511.00006)
-scale = Vector2(3.2636716, 2.0898438)
-texture = ExtResource("5_2sdq7")
 
 [node name="Menu3DScene" parent="." instance=ExtResource("5_hvsaw")]
 unique_name_in_owner = true
@@ -125,6 +119,7 @@ layout_mode = 2
 theme_override_constants/margin_top = 92
 
 [node name="SubTitleContainer" type="Control" parent="MenuContainer/SubTitleMargin"]
+modulate = Color(0.67650515, 0.67650515, 0.67650515, 1)
 layout_mode = 2
 mouse_filter = 2
 
@@ -135,98 +130,85 @@ anchor_right = 1.0
 offset_bottom = 34.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
-text = "RetroRoom"
+text = "Souls-like game demo made with Godot"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuButtonsMargin" type="MarginContainer" parent="MenuContainer"]
+[node name="MenuButtonsContainer" type="MarginContainer" parent="MenuContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/margin_top = 46
 theme_override_constants/margin_bottom = 8
 
-[node name="MenuButtonsContainer" type="Control" parent="MenuContainer/MenuButtonsMargin"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuButtonsBoxContainer" type="BoxContainer" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer"]
+[node name="MenuButtonsBoxContainer" type="BoxContainer" parent="MenuContainer/MenuButtonsContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -200.0
-offset_right = 175.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(350, 60)
+layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 16
 alignment = 1
 vertical = true
 script = ExtResource("8_hvsaw")
 
-[node name="ArenaButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
+[node name="ArenaButton" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer" instance=ExtResource("14_x83h1")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme = ExtResource("1_hvsaw")
-theme_override_colors/font_color = Color(0.43586704, 0.6266395, 0.98878354, 1)
-theme_override_colors/font_focus_color = Color(0.27011874, 0.4782603, 0.8733763, 1)
-theme_override_colors/font_hover_color = Color(0.22024938, 0.41280535, 0.7783351, 1)
+theme_override_colors/font_color = Color(0.90465206, 0.60784316, 0.98039216, 1)
+theme_override_colors/font_focus_color = Color(0.90588236, 0.60784316, 0.98039216, 1)
 text = "Fight Arena"
 
-[node name="LevelButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
+[node name="LevelButton" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer" instance=ExtResource("14_x83h1")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.37504625, 0.9788869, 1)
-theme_override_colors/font_focus_color = Color(0.8258557, 0.27714655, 0.7848491, 1)
-theme_override_colors/font_hover_color = Color(0.8054897, 0.21733885, 0.68869096, 1)
-text = "Demo Level"
+theme_override_colors/font_color = Color(0.98039216, 0.8666667, 0.60784316, 1)
+theme_override_colors/font_focus_color = Color(0.98039216, 0.8666667, 0.60784316, 1)
+text = "Demo Level
+"
+enable_shine = true
 
-[node name="GalleryButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
+[node name="GalleryButton" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer" instance=ExtResource("14_x83h1")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.50654936, 0.92768556, 0.7033999, 1)
-theme_override_colors/font_focus_color = Color(0.5058824, 0.92941177, 0.7019608, 1)
-theme_override_colors/font_hover_color = Color(0.27663526, 0.73760307, 0.5318355, 1)
-text = "Gallery"
+theme_override_colors/font_color = Color(0.513153, 1, 0.83899546, 1)
+theme_override_colors/font_focus_color = Color(0.5137255, 1, 0.8392157, 1)
+text = "Gallery
+"
 
-[node name="NewGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
+[node name="OptionsButton" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer" instance=ExtResource("14_x83h1")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer" instance=ExtResource("14_x83h1")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Credits"
+
+[node name="ExitButton" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer" instance=ExtResource("14_x83h1")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Exit"
+
+[node name="NewGameButton" type="Button" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Arena"
 
-[node name="ContinueGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
+[node name="ContinueGameButton" type="Button" parent="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Continue"
-
-[node name="OptionsButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Options"
-
-[node name="CreditsButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Credits"
-
-[node name="ExitButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Exit"
 
 [node name="VersionMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -365,14 +347,14 @@ color = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_wkb1a")
 layout_mode = 1
 
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ArenaButton" to="." method="_on_level_1_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/LevelButton" to="." method="_on_level_2_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/GalleryButton" to="." method="_on_gallery_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/ArenaButton" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/LevelButton" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/GalleryButton" to="." method="_on_gallery_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsContainer/MenuButtonsBoxContainer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
 [connection signal="pressed" from="FlowControlContainer/FlowControl/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="confirmed" from="NewGameConfirmationDialog" to="." method="_on_new_game_confirmation_dialog_confirmed"]
 

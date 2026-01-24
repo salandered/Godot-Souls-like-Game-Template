@@ -17,7 +17,7 @@ var player_sm: PlayerSM
 var legs_sm: LegsSM
 var _player: Princess
 var combat: PlayerCombat
-var area_awareness: AreaAwareness
+var area_awareness: PlayerAreaAwareness
 var anim_container: BaseAnimContainer
 var animator_manager: PlAnimatorManager
 var feelings: PlayerFeelings
@@ -130,7 +130,7 @@ func _check_feelings_can_be_paid(input_action: String) -> bool:
 	## sig not fired on stamina rate logic
 	if not feelings.stamina_can_be_paid(_stamina_cost):
 		if not sig_throttle.is_throttled(sig_data.signal_id):
-			u.safe_emit(sig_data, {}, false)
+			SigUtils.safe_emit(sig_data, {}, false)
 			sig_throttle.record_event(sig_data.signal_id)
 	return false
 
@@ -270,7 +270,7 @@ func react_on_hit(hit: HitData):
 	print_.fight(state_name, "we received a hit " + str(hit))
 
 	var _sig_data := get_player().get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
-	u.safe_emit(_sig_data, {}, false)
+	SigUtils.safe_emit(_sig_data, {}, false)
 	## 1 - check if we need to change state
 	## 2 - if not, we delegate reaction behavior to curr action
 	var react_state_name := ReactionOnHit.calculate_reaction_for_pl_state(hit)

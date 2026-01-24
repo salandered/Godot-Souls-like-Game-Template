@@ -364,9 +364,6 @@
 					"color": "#84db6fd7",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
 			]
 		},
 		"\\b(true_b)": {
@@ -393,9 +390,6 @@
 				{
 					"color": "#78e2a1d7",
 					"fontWeight": "bold",
-				},
-				{
-					// "color": "#FFEEA1E5",
 				}
 			]
 		},
@@ -406,9 +400,6 @@
 					"color": "#78e2a1d7",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
 			]
 		},
 		"(__hard_validation)": {
@@ -418,9 +409,6 @@
 					"color": "#78e2a1d7",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
 			]
 		},
 		"(__soft_validation)": {
@@ -430,9 +418,6 @@
 					"color": "#78e2a1d7",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
 			]
 		},
 		"(__validated)": {
@@ -442,12 +427,9 @@
 					"color": "#78e2a1d7",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
 			]
 		},
-		"\\b(__perform_validation\\(\\))": {
+		"(__perform_validation)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{

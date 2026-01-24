@@ -25,7 +25,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	
 	# TURN DATA
 	var _target_angle
-	if not player_sm.area_awareness.is_camera_locked():
+	if not pm().get_area_awareness().is_camera_locked():
 		_target_angle = calculate_target_angle_by_input(input_)
 	else:
 		_target_angle = calculate_target_angle_by_target(input_)

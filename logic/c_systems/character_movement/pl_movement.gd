@@ -1,12 +1,16 @@
 extends BaseCharacterMovement
 class_name PlayerMovement
 
-@onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 
 
 func is_player() -> bool:
 	return true
+
+
+func get_area_awareness() -> PlayerAreaAwareness:
+	return super.get_area_awareness() as PlayerAreaAwareness
+
 
 ## GETTERS
 # region
@@ -61,8 +65,8 @@ func _angle_to_direction(angle_deg: float) -> Direction.Dir:
 
 ## returns 0.0 if no target
 func get_signed_angle_pl_target() -> float:
-	if area_awareness.is_camera_locked():
-		var target_pos := area_awareness.get_camera_locked_target().global_position
+	if get_area_awareness().is_camera_locked():
+		var target_pos := get_area_awareness().get_camera_locked_target().global_position
 		target_pos.y = get_character().global_position.y
 
 		var dir_to_target := get_character().global_position.direction_to(target_pos)
@@ -239,8 +243,8 @@ func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 		speed_config = SpeedConfig.new()
 	var _ang_speed := speed_config.get_angular_sp()
 	
-	if area_awareness.is_camera_locked():
-		var target_pos := area_awareness.get_camera_locked_target().global_position
+	if get_area_awareness().is_camera_locked():
+		var target_pos := get_area_awareness().get_camera_locked_target().global_position
 		target_pos.y = get_character().global_position.y
 
 		var dir_to_target := get_character().global_position.direction_to(target_pos)
@@ -278,15 +282,15 @@ func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	var forward_speed := input_.forward_input
 	var orbit_speed := input_.orbit_input
 
-	if area_awareness.is_camera_locked():
+	if get_area_awareness().is_camera_locked():
 		forward_speed *= -1
 		orbit_speed *= -1
 	
 	var grounded_target: Vector3
-	if area_awareness.is_camera_locked():
+	if get_area_awareness().is_camera_locked():
 		grounded_target = get_character().fancy_camera.locked_target.global_position
 	else:
-		grounded_target = get_character().fancy_camera.nest.global_position
+		grounded_target = get_character().fancy_camera.socket.global_position
 	grounded_target.y = get_character().global_position.y
 
 	if forward_speed != 0.0:

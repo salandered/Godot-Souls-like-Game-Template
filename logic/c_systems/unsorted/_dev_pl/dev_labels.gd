@@ -81,14 +81,14 @@ func _label_inputs():
 
 func _label_camera_info():
 	var p_pos = player.global_position
-	var nest_pos := __cam().nest.global_position
+	var socket_pos := __cam().socket.global_position
 	var camera_pos := __cam().camera.global_position
 	
-	label_cam.text = "player to nest " + "%8.2f" % p_pos.distance_to(nest_pos)
+	label_cam.text = "player to socket " + "%8.2f" % p_pos.distance_to(socket_pos)
 	label_cam.text += "\n player to cam " + "%8.2f" % p_pos.distance_to(camera_pos)
 
-	var free_off = __cam().free_state.free_offset.length() if __cam().free_state.free_offset else 0.0
-	var lock_off := __cam().locked_state.lock_offset.length() if __cam().locked_state.lock_offset else 0.0
+	var free_off = __cam().free_state.free_boom.length() if __cam().free_state.free_boom else 0.0
+	var lock_off := __cam().locked_state.lock_boom.length() if __cam().locked_state.lock_boom else 0.0
 	label_cam.text += "\nfree off " + "%8.2f" % free_off
 	label_cam.text += "\n lock off " + "%8.2f" % lock_off
 	

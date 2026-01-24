@@ -41,11 +41,11 @@ func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalC
 
 	self._audio_track_throttler = EventThrottler.new(0.4, 2.0, 3.0, "AudioTrackKey")
 
-	__perform_validation()
+	__perform_validation(true)
 
 
 func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Variant]) -> void:
-	u.safe_emit(signal_data, payload)
+	SigUtils.safe_emit(signal_data, payload)
 	
 	# if payload.get("anim_id") in [PHEA.attack.scare_off, A.attack.sword_slash_1]:
 		# __log_("EMIT", signal_data, "with data", pp.dict_(payload, false, true))
@@ -72,7 +72,7 @@ func _emit_signal_based_on_track_data(audio_track_data: AudioTrackKey, anim: Ani
 
 
 func _process(delta: float) -> void:
-	if not ENABLED or not __validation_ok():
+	if not ENABLED:
 		return
 	
 	var curr_anim := get_anim_manager().get_curr_anim()

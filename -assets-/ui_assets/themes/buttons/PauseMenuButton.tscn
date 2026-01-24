@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://by7xhc20gshgi"]
+
+[ext_resource type="PackedScene" uid="uid://ywnsfktql2ke" path="res://logic/ui/ui_utils/prefab/shake_button/ShakeButton.tscn" id="1_c83lr"]
+[ext_resource type="Script" uid="uid://dhiddqqvqhnhq" path="res://logic/ui/ui_utils/prefab/shake_button/pause_menu_button.gd" id="2_3gdqb"]
+[ext_resource type="Shader" uid="uid://vgqfmf8l63h3" path="res://-assets-/materials-shared/_shaders/ui/shake_button.gdshader" id="3_qxyou"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rb4xf"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxyou")
+shader_parameter/shake_power = 0.011
+shader_parameter/shake_speed = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/modulation_color = Color(0.819067, 0.819067, 0.819067, 1)
+shader_parameter/enable_shine = false
+shader_parameter/shine_speed = 1.00000004424012
+shader_parameter/shine_frequency = 5.00000019
+shader_parameter/shine_width = 0.15000000642648
+
+[node name="PauseMenuButton" instance=ExtResource("1_c83lr")]
+text = "Resume"
+script = ExtResource("2_3gdqb")
+def_modulation_color = Color(0.819067, 0.819067, 0.819067, 1)
+
+[node name="Panel" parent="." index="0"]
+material = SubResource("ShaderMaterial_rb4xf")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=66 format=3 uid="uid://dbo7xvsas7guf"]
 
-[ext_resource type="Script" path="res://logic/c_systems/character/sitsk_char.gd" id="1_5orxr"]
+[ext_resource type="Script" uid="uid://57vtgcu2lmtb" path="res://logic/c_systems/character/sitsk_char.gd" id="1_5orxr"]
 [ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/unsorted/coll_collider.gd" id="2_b1jdg"]
 [ext_resource type="Script" uid="uid://0c3j8t0i4rro" path="res://logic/c_systems/feelings/ui_feelings/phe_ui_feelings.gd" id="3_k5uww"]
 [ext_resource type="Script" uid="uid://fej6gy4eqqqs" path="res://logic/c_systems/combat/phe_combat.gd" id="4_b77gp"]
@@ -8,12 +8,12 @@
 [ext_resource type="Script" uid="uid://com5hws210fhf" path="res://logic/c_systems/unsorted/phe_other/visual_offset.gd" id="6_kxvbm"]
 [ext_resource type="PackedScene" uid="uid://c12h0eq5aqu80" path="res://logic/c_systems/sk_modifiers/look_at_modifier/model/look_at_character_marker.tscn" id="7_jb7lm"]
 [ext_resource type="PackedScene" uid="uid://ei5yc3pkg0kp" path="res://-assets-/GLB-char/skeleton-18-01/skeleton018_WRAPPER.tscn" id="8_0gb3n"]
-[ext_resource type="Script" uid="uid://w18g1qw71l62" path="res://logic/c_systems/sk_modifiers/overlay_modifier.gd" id="9_0xvj4"]
+[ext_resource type="Script" uid="uid://w18g1qw71l62" path="res://logic/c_systems/anim_manager/sk_modifier_animator/overlay_modifier.gd" id="9_0xvj4"]
 [ext_resource type="PackedScene" uid="uid://cxqlawj5lv3o1" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_head_modifier_3d.tscn" id="10_0beb3"]
 [ext_resource type="Script" uid="uid://bfpfht03rnw05" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_manager.gd" id="11_06tte"]
 [ext_resource type="Material" uid="uid://bxam2vjcqcdil" path="res://-assets-/materials-shared/solid/P/P orange_Reimp.tres" id="12_rhvh1"]
 [ext_resource type="Script" uid="uid://uvb7l2le3sl7" path="res://logic/entities/Items/test_csg.gd" id="13_2r3bc"]
-[ext_resource type="Script" uid="uid://ddi55j380y14x" path="res://logic/c_systems/animation/anim_manager/e_animator_manager.gd" id="14_yivxy"]
+[ext_resource type="Script" uid="uid://ddi55j380y14x" path="res://logic/c_systems/anim_manager/e_animator_manager.gd" id="14_yivxy"]
 [ext_resource type="AnimationLibrary" uid="uid://cssw61fn2rvgb" path="res://-assets-/animations/standard-skeleton/Enemy/LIBs/other_sk_sit_Lib.res" id="15_6udd4"]
 [ext_resource type="AnimationLibrary" uid="uid://bio72216lo56h" path="res://-assets-/animations/GLB-packed/sitting/anims/libs/sitting p1 Lib.res" id="16_rnefd"]
 [ext_resource type="AnimationLibrary" uid="uid://lrr4jevalf4e" path="res://-assets-/animations/GLB-packed/sitting/anims/libs/sitting p2 Lib.res" id="17_c4r18"]
@@ -30,10 +30,10 @@
 [ext_resource type="AudioStream" uid="uid://delv8fen25cn3" path="res://-assets-/SFX/audio_streams/imapct_randomiser_PHEnemy_2.tres" id="28_3uswq"]
 [ext_resource type="AudioStream" uid="uid://ct8xhr3e4gglp" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/bone_crunch.tres" id="29_3u7m5"]
 [ext_resource type="PackedScene" path="res://-assets-/GLB-items/other/RustyMug.tscn" id="30_jnl8g"]
-[ext_resource type="Script" path="res://logic/c_containers/character_state_container/phe_states_container.gd" id="31_jwf8u"]
+[ext_resource type="Script" uid="uid://c804wrbcqdvsc" path="res://logic/c_containers/character_state_container/phe_states_container.gd" id="31_jwf8u"]
 [ext_resource type="Script" uid="uid://cba1f26lgwlbp" path="res://logic/c_systems/character_state/phe_state/_top_phe_state.gd" id="32_2hrjx"]
 [ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_life.gd" id="33_ikpem"]
-[ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_still_life_phase.gd" id="34_u23m6"]
+[ext_resource type="Script" uid="uid://bkq2w1rao35u8" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_still_life_phase.gd" id="34_u23m6"]
 [ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_composites/sitsk/sitsk_combat_phase.gd" id="35_vwxen"]
 [ext_resource type="Script" uid="uid://ck6ogis7o01sk" path="res://logic/c_systems/character_state/phe_state/state_composites/death_phase.gd" id="36_c6nbc"]
 [ext_resource type="Script" uid="uid://b1bejx547jdgl" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_idle_v1.gd" id="37_pexs2"]
@@ -106,6 +106,8 @@ height = 1.4311157
 script = ExtResource("1_5orxr")
 process_disabled_on_init = false
 head_off = false
+push_rigid = false
+allow_move_and_slide = false
 
 [node name="CollCollider" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -170,6 +172,7 @@ script = ExtResource("4_b77gp")
 
 [node name="PHEFeelings" type="Node" parent="."]
 unique_name_in_owner = true
+process_mode = 4
 script = ExtResource("5_jf654")
 MAX_HEALTH = 1000.0
 PHASE_SWITCH_HP_TRESHOLD = 0.0
@@ -279,6 +282,11 @@ min_duration = 2.0
 max_duration = 5.0
 boost_dur_for_not_looking = 30.0
 proximity_threshold = 1.7
+
+[node name="VOSN" type="VisibleOnScreenNotifier3D" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton/LookAtHeadModifier3D/LookAtManager"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980343, 0)
+aabb = AABB(-0.5667796, -0.41363484, -0.43542248, 0.8718404, 0.8272697, 0.87084496)
 
 [node name="TestHeadLook" type="CSGSphere3D" parent="."]
 unique_name_in_owner = true
@@ -506,6 +514,7 @@ script = ExtResource("50_r040y")
 metadata/_custom_type_script = "uid://dv0ekd71cst42"
 
 [node name="Downcast" parent="EnemyAwareness" node_paths=PackedStringArray("attachment") instance=ExtResource("51_l4htf")]
+unique_name_in_owner = true
 visible = false
 attachment = NodePath("../../bones/Root/BitHigher")
 
@@ -548,7 +557,7 @@ stream = ExtResource("55_nm2s0")
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
 transform = Transform3D(-0.06883364, 0, 0.99762815, 0, 1, 0, -0.99762815, 0, -0.06883364, 0, 1.0527928, 0)
-aabb = AABB(-2.1231837, -1.2403736, -2.2093534, 4.2463675, 2.4807472, 4.418707)
+aabb = AABB(-1.5603008, -0.9500132, -1.39434, 3.1206017, 1.9000264, 2.78868)
 
 [connection signal="SIG_land_wave" from="." to="." method="_on_sig_land_wave"]
 

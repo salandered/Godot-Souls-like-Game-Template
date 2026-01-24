@@ -47,7 +47,7 @@ func _toggle_camera_mode() -> void:
 	
 	## going back to main cam
 	if ACTIVE:
-		# get_tree().paused = false
+		get_tree().paused = false
 		Input.mouse_mode = _previous_mouse_mode
 		_turn_off_free_cam()
 		if _cached_camera and not _cached_camera.is_queued_for_deletion():
@@ -60,7 +60,7 @@ func _toggle_camera_mode() -> void:
 
 	## turn on free cam
 	else:
-		# get_tree().paused = true
+		get_tree().paused = true
 		_previous_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		_cached_camera = get_viewport().get_camera_3d()

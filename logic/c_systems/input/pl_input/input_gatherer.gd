@@ -1,7 +1,7 @@
 extends RefCounted
 class_name InputGatherer
 
-# todo: i think it should be in state logic, while InputGatherer is more transparent
+# TODO: it should be in state logic, while InputGatherer is more transparent
 const SPRINT_TO_RUN_DELAY: float = 0.16
 
 var _to_run_after_sprint_timer: SimpleTimer = SimpleTimer.new()

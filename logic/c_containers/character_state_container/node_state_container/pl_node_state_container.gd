@@ -79,9 +79,9 @@ var node_to_pl_state_data: Dictionary[String, _StateData] = { # { Node name : _S
 	"AxeSlice3": _StateData.new(PS.axe_slice_3, 15, Leg.Beh.double, false, 20.0),
 	# priority a bit higher
 	# smaller because it reqiuires being in a draining sprint
-	"AttackFromRun": _StateData.new(PS.attack_from_run, 16, Leg.Beh.double, false, 8.0),
+	"StabAttack1": _StateData.new(PS.stab_attack_1, 16, Leg.Beh.double, false, 8.0),
 	# small because it requires a dodge
-	"AttackFromDodge": _StateData.new(PS.attack_from_dodge, 16, Leg.Beh.double, false, 6.0),
+	"StabAttack2": _StateData.new(PS.stab_attack_2, 16, Leg.Beh.double, false, 6.0),
 
 	"SwordSlash1": _StateData.new(PS.sword_slash_1, 15, Leg.Beh.double, false, 10.0),
 	"SwordSlash2": _StateData.new(PS.sword_slash_2, 15, Leg.Beh.double, false, 12.0),
@@ -111,8 +111,8 @@ var node_to_pl_action: Dictionary[String, _PlActionData] = { # { Node name : _Pl
 	"AxeSlice1Action": _PlActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1, MotionType.IDLE),
 	"AxeSlice2Action": _PlActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2, MotionType.IDLE),
 	"AxeSlice3Action": _PlActionData.new(PS.axe_slice_3, PS.Act.axe_slice_3, A.attack.axe_slice_3, MotionType.IDLE),
-	"AttackFromRunAction": _PlActionData.new(PS.attack_from_run, PS.Act.attack_from_run, A.attack.attack_from_run, MotionType.IDLE),
-	"AttackFromDodgeAction": _PlActionData.new(PS.attack_from_dodge, PS.Act.attack_from_dodge, A.attack.attack_from_dodge, MotionType.IDLE),
+	"StabAttack1Action": _PlActionData.new(PS.stab_attack_1, PS.Act.stab_attack_1, A.attack.stab_attack_1, MotionType.IDLE),
+	"StabAttack2Action": _PlActionData.new(PS.stab_attack_2, PS.Act.stab_attack_2, A.attack.stab_attack_2, MotionType.IDLE),
 	
 	"SwordSlash1Action": _PlActionData.new(PS.sword_slash_1, PS.Act.sword_slash_1, A.attack.sword_slash_1, MotionType.IDLE),
 	"SwordSlash2Action": _PlActionData.new(PS.sword_slash_2, PS.Act.sword_slash_2, A.attack.sword_slash_2, MotionType.IDLE),

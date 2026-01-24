@@ -96,3 +96,7 @@ const h_pink_alt = "💗"
 const h_red_alt = "♥️"
 const h_star = "💖"
 const h_gift = "💝"
+
+
+# sys
+const console = "📟"

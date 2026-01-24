@@ -31,7 +31,6 @@ var free_cam_label_visibility_cycler := Cycler.new([
 		[true, true],
 		[false, true],
 		[false, false],
-		[true, false],
 	],
 	0
 )
@@ -48,7 +47,7 @@ func _cycle_free_cam_labels_visible(next: bool):
 		value = free_cam_label_visibility_cycler.get_next()
 	else:
 		value = free_cam_label_visibility_cycler.get_current()
-
+	
 	_set_labels_visible(value)
 
 
@@ -56,6 +55,11 @@ func _set_labels_visible(value: Array):
 	if not value or value is not Array or len(value) != 2:
 		return
 
+	if not value[0] and not value[1]:
+		free_cam.visible = false
+	else:
+		free_cam.visible = true
+		
 	if controls_info:
 		controls_info.visible = value[0]
 	if hud_info:

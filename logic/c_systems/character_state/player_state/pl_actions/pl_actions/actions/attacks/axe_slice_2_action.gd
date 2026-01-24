@@ -1,6 +1,10 @@
 extends BaseAttackAction
 
 
+func get_global_speed_scale() -> float:
+	return 1.1
+
+
 func initialise_implementation() -> void:
 	hit_damage = 24
 

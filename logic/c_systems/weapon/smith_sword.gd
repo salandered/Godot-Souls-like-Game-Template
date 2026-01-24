@@ -19,7 +19,7 @@ func initialise_implementation() -> void:
 	_input_action_to_state = {
 		CombatAction.light_attack_pressed: PS.sword_slash_1,
 		CombatAction.heavy_attack_pressed: PS.sword_slash_3,
-		# CombatAction.light_attack_pressed_when_move: PS.attack_from_run
+		# CombatAction.light_attack_pressed_when_move: PS.stack_attack_1
 	}
 	
 func get_weapon_hurt_box() -> WeaponHurtBox:

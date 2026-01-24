@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://1y8q87d5o0mg"]
+
+[node name="3DOnTopLabel" type="Label3D"]
+transparency = 0.16
+visibility_range_end = 6.0
+visibility_range_end_margin = 1.0
+billboard = 1
+no_depth_test = true
+modulate = Color(0.62219584, 0.62219584, 0.62219584, 1)
+text = "Floating Label"
+font_size = 24
+outline_size = 5

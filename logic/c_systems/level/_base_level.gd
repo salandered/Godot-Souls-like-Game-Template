@@ -71,7 +71,7 @@ func _ready() -> void:
 
 		update_video_settings()
 
-	u.safe_connect(GlobalSignal.SIG_update_video_settings_for_level, _on_update_video_settings)
+	SigUtils.safe_connect(GlobalSignal.SIG_update_video_settings_for_level, _on_update_video_settings)
 	
 
 	if is_base_asp:
@@ -98,8 +98,8 @@ func _setup_vibe_asp():
 	for e in enemies:
 		if player:
 			e.player = player
-		u.safe_connect(e.SIG_angry_raised, _on_ph_enemy_sig_angry_raised)
-		u.safe_connect(e.SIG_death_raised, _on_ph_enemy_sig_death_raised)
+		SigUtils.safe_connect(e.SIG_angry_raised, _on_ph_enemy_sig_angry_raised)
+		SigUtils.safe_connect(e.SIG_death_raised, _on_ph_enemy_sig_death_raised)
 	vibe_asp = %vibe_asp
 	if vibe_asp:
 		vibe_asp.bus = BusID._TRACK_VIBE

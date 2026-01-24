@@ -87,6 +87,11 @@ static func array_of_world_environment(array: Array) -> Array[WorldEnvironment]:
 	var list_casted: Array[WorldEnvironment] = []
 	list_casted.assign(_safe_validate_class(array, WorldEnvironment, "WorldEnvironment"))
 	return list_casted
+
+static func array_of_button(array: Array) -> Array[Button]:
+	var list_casted: Array[Button] = []
+	list_casted.assign(_safe_validate_class(array, Button, "Button"))
+	return list_casted
 	
 static func array_of_fog_volume(array: Array) -> Array[FogVolume]:
 	var list_casted: Array[FogVolume] = []
@@ -117,6 +122,11 @@ static func array_of_audio_stream_player_3d(array: Array) -> Array[AudioStreamPl
 # region custom classes
 
 
+static func array_of_shake_button(array: Array) -> Array[ShakeButton]:
+	var list_casted: Array[ShakeButton] = []
+	list_casted.assign(_safe_validate_class(array, ShakeButton, "ShakeButton"))
+	return list_casted
+
 static func array_of_anim_marker(array: Array) -> Array[AnimMarker]:
 	var list_casted: Array[AnimMarker] = []
 	list_casted.assign(_safe_validate_class(array, AnimMarker, "AnimMarker"))
@@ -135,6 +145,11 @@ static func array_of_base_weapon(array: Array) -> Array[BaseWeapon]:
 static func array_of_base_combat(array: Array) -> Array[BaseCombat]:
 	var list_casted: Array[BaseCombat] = []
 	list_casted.assign(_safe_validate_class(array, BaseCombat, "BaseCombat"))
+	return list_casted
+
+static func array_of_base_area_awareness(array: Array) -> Array[BaseAreaAwareness]:
+	var list_casted: Array[BaseAreaAwareness] = []
+	list_casted.assign(_safe_validate_class(array, BaseAreaAwareness, "BaseAreaAwareness"))
 	return list_casted
 
 static func array_of_base_sfx_system(array: Array) -> Array[BaseSFXSystem]:

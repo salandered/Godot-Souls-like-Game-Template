@@ -20,7 +20,7 @@ func translate_combat_input_to_state(combat_actions: Array[String]) -> Array[Str
 	var _translated: Array[String] = []
 	
 	for input_action in combat_actions:
-		if u.safe_has_key(_input_action_to_state, input_action, WL.SILENT):
+		if DictUtils.safe_has_key(_input_action_to_state, input_action, WL.SILENT):
 			_translated.append(_input_action_to_state[input_action])
 
 	if not combat_actions.is_empty() and _translated.is_empty():

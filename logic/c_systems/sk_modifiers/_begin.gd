@@ -28,5 +28,5 @@ func restore_pose():
 	var cache: Dictionary[int, Transform3D] = end_modifier.cache
 	if not cache.is_empty():
 		for bone_idx: int in get_skeleton().get_bone_count():
-			if u.safe_has_key(cache, bone_idx):
+			if DictUtils.safe_has_key(cache, bone_idx):
 				get_skeleton().set_bone_pose(bone_idx, cache[bone_idx])

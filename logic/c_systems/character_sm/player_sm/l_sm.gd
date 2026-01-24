@@ -6,7 +6,6 @@ class_name LegsSM
 
 @export var container: PlayerStatesContainer
 @export var player_sm: PlayerSM
-@export var area_awareness: AreaAwareness
 
 @export var combat: PlayerCombat
 

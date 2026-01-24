@@ -46,8 +46,8 @@ var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.attack.axe_slice_2, 0.95),
 	AnimationData.new(A.attack.axe_slice_3, 1.15),
 
-	AnimationData.new(A.attack.attack_from_run, 1.2),
-	AnimationData.new(A.attack.attack_from_dodge, 1.2),
+	AnimationData.new(A.attack.stab_attack_1, 1.2),
+	AnimationData.new(A.attack.stab_attack_2, 1.2),
 	
 	AnimationData.new(A.attack.sword_slash_1, 1.35),
 	AnimationData.new(A.attack.sword_slash_2, 1.25),

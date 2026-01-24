@@ -1,11 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://dl7w5h28u6d36"]
+[gd_scene load_steps=16 format=3 uid="uid://dl7w5h28u6d36"]
 
 [ext_resource type="Script" uid="uid://cpfh86vdgd0ep" path="res://logic/c_systems/camera/fancy-camera/fancy_camera.gd" id="1_16fd4"]
 [ext_resource type="Script" uid="uid://bib68l3buxn3j" path="res://logic/c_systems/camera/fancy-camera/camera_movement.gd" id="2_bu8o1"]
 [ext_resource type="Script" uid="uid://cdvueio120xey" path="res://logic/c_systems/camera/fancy-camera/locked_state.gd" id="2_cq342"]
 [ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/c_systems/camera/fancy-camera/free_state.gd" id="3_wpkwu"]
-[ext_resource type="Script" path="res://logic/c_systems/camera/fancy-camera/camera_target/camera_nest.gd" id="5_sttfw"]
-[ext_resource type="PackedScene" path="res://logic/entities/VFX/target_circle/target_circle.tscn" id="6_tlnea"]
+[ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/c_systems/camera/fancy-camera/camera_target/camera_socket.gd" id="5_sttfw"]
+[ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/Items/interact_area/3DOnTopLabel.tscn" id="5_u7x54"]
+[ext_resource type="PackedScene" uid="uid://carduerw3k1il" path="res://logic/entities/VFX/target_circle/target_circle.tscn" id="6_tlnea"]
 [ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/materials-shared/_shaders/target_dot/target_dot.gdshader" id="7_r7icc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lfwa"]
@@ -15,20 +16,20 @@ albedo_color = Color(1, 0.991667, 0.5, 1)
 albedo_color = Color(1, 0.16, 0.174, 1)
 metallic = 0.4
 
-[sub_resource type="PlaceholderMaterial" id="PlaceholderMaterial_k82lp"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5k2h"]
-next_pass = SubResource("PlaceholderMaterial_k82lp")
-albedo_color = Color(0.5425946, 0.46944708, 0.06763061, 1)
-
-[sub_resource type="PlaceholderMaterial" id="PlaceholderMaterial_bi67l"]
+transparency = 1
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.3, 0.008999992, 0.09144999, 0.8235294)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6recs"]
-next_pass = SubResource("PlaceholderMaterial_bi67l")
-albedo_color = Color(0.552941, 0.180392, 0.180392, 1)
+albedo_color = Color(0.55, 0.18149999, 0.18149999, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e4lf"]
-albedo_color = Color(0.0884501, 0.61, 0.061, 1)
+transparency = 1
+depth_draw_mode = 1
+disable_fog = true
+albedo_color = Color(0.08845007, 0.61, 0.061000016, 0.75686276)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k82lp"]
 albedo_color = Color(0.140835, 0.982483, 0.0937185, 1)
@@ -43,34 +44,44 @@ shader_parameter/ring_thickness = 0.02
 [node name="FancyCamera" type="Node"]
 script = ExtResource("1_16fd4")
 
+[node name="States" type="Node" parent="."]
+
+[node name="LockedCamera" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("2_cq342")
+
+[node name="FreeCamera" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("3_wpkwu")
+
 [node name="CameraMovement" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_bu8o1")
 
-[node name="CameraMount" type="Node3D" parent="."]
+[node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
-visible = false
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CameraMount"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CameraPivot"]
 transform = Transform3D(0.973625, 0, 0, 0, 0.795634, 0, 0, 0, 0.415539, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_6lfwa")
 size = Vector3(0.289307, 0.341797, 0.743164)
 
-[node name="FocusPoint" type="Node3D" parent="."]
-unique_name_in_owner = true
-visible = false
+[node name="3DOnTopLabel" parent="CameraPivot/CSGBox3D2" instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0.37721774, 0)
+text = "Pivot"
+font_size = 30
 
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="FocusPoint"]
+[node name="Aim" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Aim"]
 material_override = SubResource("StandardMaterial3D_7lptl")
 radius = 0.2
 
-[node name="LockedCamera" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_cq342")
-
-[node name="FreeCamera" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_wpkwu")
+[node name="3DOnTopLabel" parent="Aim/CSGSphere3D3" instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20763499, 0)
+text = "Aim"
+font_size = 30
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 unique_name_in_owner = true
@@ -81,50 +92,63 @@ far = 1000.0
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="PlayerCamera"]
 transform = Transform3D(0.64345056, 8.881784e-16, 1.4210855e-13, 7.5495166e-15, 0.61953735, 1.4901161e-08, -6.750156e-14, -7.450581e-09, 0.76491296, 0, 0, 0.017)
-visible = false
 material_override = SubResource("StandardMaterial3D_c5k2h")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="PlayerCamera/CSGBox3D2"]
-transform = Transform3D(0.238554, 0, 0, 0, 0.231617, 1.937151e-07, 0, -4.8428774e-08, 0.910368, 0, 0.04557979, -0.44181585)
+[node name="3DOnTopLabel" parent="PlayerCamera/CSGBox3D2" instance=ExtResource("5_u7x54")]
+fixed_size = true
+text = "Camera
+"
+font_size = 44
+
+[node name="CSGrot" type="CSGBox3D" parent="PlayerCamera"]
+transform = Transform3D(0.15349771, 2.220446e-16, 1.4210855e-13, 2.1094237e-15, 0.14349538, 1.1175871e-07, -1.5987212e-14, -4.004687e-08, 0.69635254, 2.842171e-14, 0.028238297, -0.3209517)
 material_override = SubResource("StandardMaterial3D_6recs")
 
-[node name="CameraNest" type="Node3D" parent="."]
+[node name="CameraSocket" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3441956, -2.6694846)
-visible = false
 script = ExtResource("5_sttfw")
 
-[node name="CSGSphereNest2" type="CSGSphere3D" parent="CameraNest"]
+[node name="CSGSocket" type="CSGSphere3D" parent="CameraSocket"]
 unique_name_in_owner = true
-transform = Transform3D(0.49291146, 0, 3.5527137e-15, 0, 0.58407485, 0, 0, 0, 0.5692398, -1.9487203e-08, 0, 0.22290754)
+transform = Transform3D(0.555764, 0, -3.5527137e-15, 0, 0.555764, 0, 3.5527137e-15, 0, 0.555764, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3e4lf")
 radius = 0.7
+smooth_faces = false
 
-[node name="CSGSphereNest3" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+[node name="CSGSocket1" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
 unique_name_in_owner = true
 transform = Transform3D(0.20524, 0, 0, 0, 0.330627, 0, 0, 0, 0.23652, 0.0364853, -0.737425, 0)
 material_override = SubResource("StandardMaterial3D_k82lp")
 radius = 0.7
 
-[node name="CSGSphereNest6" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+[node name="CSGSocket2" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
 unique_name_in_owner = true
 transform = Transform3D(0.20524, 0, 0, 0, 0.330627, 0, 0, 0, 0.23652, 0.0364853, 0.74965703, 0)
 material_override = SubResource("StandardMaterial3D_k82lp")
 radius = 0.7
 
-[node name="CSGSphereNest4" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+[node name="CSGSocket3" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
 unique_name_in_owner = true
 transform = Transform3D(-0.0017194, -0.330616, 0, 0.205233, -0.00276983, 0, 0, 0, 0.23652, 0.771236, 0.015276194, 0)
 material_override = SubResource("StandardMaterial3D_k82lp")
 radius = 0.7
 
-[node name="CSGSphereNest5" type="CSGSphere3D" parent="CameraNest/CSGSphereNest2"]
+[node name="CSGSocket4" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
 unique_name_in_owner = true
 transform = Transform3D(-0.0017194, -0.330616, 0, 0.205233, -0.00276983, 0, 0, 0, 0.23652, -0.755577, 0.015276194, 0)
 material_override = SubResource("StandardMaterial3D_k82lp")
 radius = 0.7
 
-[node name="test" type="Camera3D" parent="CameraNest" groups=["debug_cameras"]]
+[node name="3DOnTopLabel2" parent="CameraSocket/CSGSocket" instance=ExtResource("5_u7x54")]
+transform = Transform3D(0.99999994, 0, 7.1054274e-15, 0, 0.99999994, 0, -7.1054274e-15, 0, 0.99999994, 0, 0.09500599, 0)
+fixed_size = true
+text = "Socket
+"
+font_size = 54
+outline_size = 10
+
+[node name="test" type="Camera3D" parent="CameraSocket" groups=["debug_cameras"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
 
 [node name="CircleTarget" parent="." instance=ExtResource("6_tlnea")]

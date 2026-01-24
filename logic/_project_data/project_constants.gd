@@ -3,8 +3,9 @@ extends RefCounted
 
 const BIG_MEANINGLESS_NUMBER: float = 99999
 
-# todo: store delta in InputPackage. and use it everywhere
-const ONE_FRAME: float = 0.016 # just for one tick its fine they say
+# todo: consider storing delta in InputPackage. and use it everywhere
+# frame dependednt and bad, but for approximate one tick here and there its fine they say
+const ONE_FRAME: float = 0.016
 const THREE_FRAMES: float = ONE_FRAME * 3
 
 const EPSILON_3: float = 0.001
@@ -26,19 +27,21 @@ const BONE_TRACK_PREFIX: String = "%" + Constants.GENERAL_SKELETON + ":"
 const ROOT_TRACK_PATH: String = BONE_TRACK_PREFIX + Constants.ROOT_BONE
 
 
+## TODO: used in react on hit. Not accurate values
 const PLAYER_MAX_HIT_DAMAGE: float = 15
 const ENEMY_MAX_HIT_DAMAGE: float = 35
 
 
 ## recommended to use everywhere, while make changes via ASP3DConfig
 const SFX_ASP_BASE_VOL_DB := -1.0
-const SFX_ASP_MAX_VOL_DB := 3.0
 ##
 const SFX_ASP_BASE_BUS_ID := BusID.GAME_SFX
 
 
-## Properties for tweens
+## Properties, example usage for tweens
 
 class Prop:
 	const ASP_VOLUME_DB = "volume_db"
-	const CONTROL_MODULATE_A = "modulate:a"
+	const MODULATE_A = "modulate:a"
+	const MODULATE = "modulate"
+	const GLOBAL_POSITION_Y = "global_position:y"

@@ -48,7 +48,7 @@ func by_name(requested_name: String) -> String:
 
 
 func default_by_motion(motion: String) -> String:
-	var _r: String = u.safe_get_dict_key(_motion_type_to_default_action, motion, "")
+	var _r: String = DictUtils.safe_get_dict_key(_motion_type_to_default_action, motion, "")
 	return _r
 
 
@@ -58,7 +58,7 @@ func _to_string() -> String:
 
 func __validation():
 	for type_ in MotionType.get_all_types():
-		if not u.safe_has_key(_motion_type_to_default_action, type_):
+		if not DictUtils.safe_has_key(_motion_type_to_default_action, type_):
 			__log_error(pp.s("must contain all motion types:", type_, "is missing"))
 		else:
 			var value: Variant = _motion_type_to_default_action[type_]

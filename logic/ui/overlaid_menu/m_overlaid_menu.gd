@@ -1,21 +1,21 @@
 @tool
 class_name M_OverlaidMenu
-extends Control
+extends ControlLogger
 
-@export var pauses_game : bool = false :
+@export var pauses_game: bool = false:
 	set(value):
 		pauses_game = value
 		if pauses_game:
 			process_mode = PROCESS_MODE_ALWAYS
 		else:
 			process_mode = PROCESS_MODE_INHERIT
-@export var makes_mouse_visible : bool = true
+@export var makes_mouse_visible: bool = true
 
-var _initial_pause_state : bool = false
-var _initial_focus_mode : FocusMode = FOCUS_ALL
-var _initial_mouse_mode : Input.MouseMode
+var _initial_pause_state: bool = false
+var _initial_focus_mode: FocusMode = FOCUS_ALL
+var _initial_mouse_mode: Input.MouseMode
 var _initial_focus_control
-var _scene_tree : SceneTree 
+var _scene_tree: SceneTree
 
 func close() -> void:
 	_scene_tree.paused = _initial_pause_state
@@ -28,7 +28,7 @@ func close() -> void:
 func _handle_cancel_input() -> void:
 	close()
 
-func _unhandled_input(event : InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		_handle_cancel_input()
 		get_viewport().set_input_as_handled()

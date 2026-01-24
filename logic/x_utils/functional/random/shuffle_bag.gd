@@ -81,4 +81,4 @@ func _refill_and_shuffle() -> void:
 
 
 func pp_name() -> String:
-	return pp.s("👜", u.construct_obj_pp_name(self))
+	return pp.s("👜", ObjUtils.construct_obj_pp_name(self))

@@ -16,7 +16,7 @@ func __hard_dependencies() -> Array[Object]:
 
 
 func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void:
-	_character = u.safe_get_dict_key(additional_data, character_additional_data_key, null)
+	_character = DictUtils.safe_get_dict_key(additional_data, character_additional_data_key, null)
 
 
 ## non nullable
@@ -31,7 +31,7 @@ func get_character() -> BaseCharacter:
 
 func pp_name() -> String:
 	var prefix = get_character().pp_name() if get_character() else ""
-	return pp.s(prefix, u.construct_obj_pp_name(self))
+	return pp.s(prefix, ObjUtils.construct_obj_pp_name(self))
 
 
 func __LOG_B() -> bool:

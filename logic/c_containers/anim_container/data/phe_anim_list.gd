@@ -26,6 +26,7 @@ class loco:
 	const run_forward := _lib._axe_pl + "L-run"
 	const combat_run_forward := _lib._axe_pl + "L-combat-run"
 	const jump_towards := _lib._some_from_pl + "LL-jump-running"
+	const midair := _lib._some_from_pl + "Midair-Hok"
 
 class dodge:
 	const dodge_B := _lib._some_from_pl + "A-Standing-Dodge-B"
@@ -109,6 +110,7 @@ var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(loco.run_forward),
 	AnimationData.new(loco.combat_run_forward),
 	AnimationData.new(loco.jump_towards),
+	AnimationData.new(loco.midair),
 
 	## attacks
 	AnimationData.new(attack.scare_off, 1.1),

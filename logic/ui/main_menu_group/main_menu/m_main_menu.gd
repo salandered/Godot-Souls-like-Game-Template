@@ -91,6 +91,9 @@ func _ready() -> void:
 	_play_fade_in()
 	
 	back_button.visible = false
+
+	TextureUtils.randomize_shake_button_panel_region(menu_buttons_box_container, 450)
+
 	
 	menu_3d_scene.initialise()
 	
@@ -107,7 +110,7 @@ func _play_fade_in() -> void:
 	fade_overlay.modulate.a = 1.0
 	
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, Constants.Prop.CONTROL_MODULATE_A, 0.0, 1.5) \
+	tween.tween_property(fade_overlay, Constants.Prop.MODULATE_A, 0.0, 1.5) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(fade_overlay.hide)
@@ -156,7 +159,7 @@ func _load_specific_level(path: String) -> void:
 	if M_GameState.has_game_state():
 		M_GameState.reset()
 
-	GlobalSignal.SIG_show_tut.emit()
+	SigUtils.safe_emit_raw(GlobalSignal.SIG_toggle_show_tut, {GlobalSignal.payload_toggle_field: true})
 	M_SceneLoader.load_scene(path)
 		
 

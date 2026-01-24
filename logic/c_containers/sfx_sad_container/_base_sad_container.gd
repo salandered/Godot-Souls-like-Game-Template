@@ -23,11 +23,11 @@ func _init():
 	anim_sfx_asp_name_to_sad = {}
 	for item in _sad_list:
 		## warning if sad_id is not unique (should not happen)
-		if u.safe_has_no_key(sad_id_to_sad, item.sad_id):
+		if DictUtils.safe_has_no_key(sad_id_to_sad, item.sad_id):
 			sad_id_to_sad[item.sad_id] = item
 
 		## warning if anim_sfx_asp_name is not unique (in theory may occur)
-		if u.safe_has_no_key(anim_sfx_asp_name_to_sad, item.anim_sfx_asp_name):
+		if DictUtils.safe_has_no_key(anim_sfx_asp_name_to_sad, item.anim_sfx_asp_name):
 			anim_sfx_asp_name_to_sad[item.anim_sfx_asp_name] = item
 	
 
@@ -49,12 +49,12 @@ func _init():
 
 
 func get_by_sad_id(sad_id: String) -> SFXAnimData:
-	var _r: SFXAnimData = u.safe_get_dict_key(sad_id_to_sad, sad_id, null)
+	var _r: SFXAnimData = DictUtils.safe_get_dict_key(sad_id_to_sad, sad_id, null)
 	return _r
 
 func get_by_anim_sfx_asp_name(sfx_asp_name: String) -> SFXAnimData:
 	## it's ok that anim ASP is not found in specific SAD container
-	var _r: SFXAnimData = u.safe_get_dict_key(anim_sfx_asp_name_to_sad, sfx_asp_name, null, WL.SILENT)
+	var _r: SFXAnimData = DictUtils.safe_get_dict_key(anim_sfx_asp_name_to_sad, sfx_asp_name, null, WL.SILENT)
 	return _r
 
 

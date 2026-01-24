@@ -3,9 +3,6 @@ extends BasePHEState
 class_name BasePHEComposite
 
 
-var state_depth: int
-
-
 ## DANGER: do not use directly!
 var __current_substate: BasePHEState = null
 
@@ -109,15 +106,15 @@ func _update(delta: float) -> void:
 		else:
 			__state_declined = "x"
 			_switch_substate(verdict.next_state)
-	elif state_name != PHES._TOP and not self is BasePHEAttackSeries and __prev_now_switch_msg != verdict.get_reason():
-		if __ELA(): __log_phe_decision("NO SWITCH for", pp.in_q(get_safe_curr_sbs_name()), verdict.get_reason(), "Verdict data:", verdict)
-		__prev_now_switch_msg = verdict.get_reason()
+	# elif state_name != PHES._TOP and not self is BasePHEAttackSeries and __prev_now_switch_msg != verdict.get_reason():
+		# if __ELA(): __log_phe_decision("NO SWITCH for", pp.in_q(get_safe_curr_sbs_name()), verdict.get_reason(), "Verdict data:", verdict)
+		# __prev_now_switch_msg = verdict.get_reason()
 		
 	# call ur children to do stuff
 	if get_current_substate() != null:
 		get_current_substate()._update(delta)
 	else:
-		__log_error("_update: __current_substate is null, cannot update.")
+		__log_error("_update: get_current_substate() is null, cannot update.")
 
 
 func works_longer_than_fatigue() -> bool:
@@ -152,9 +149,27 @@ func set_current_substate(next_state_name: String) -> void:
 		return
 
 	__current_substate = _next_substate
+	SigUtils.safe_emit_raw(
+		GlobalSignal.SIG_phe_state_changed,
+		{
+			## changed to 
+			GlobalSignal.payload_h_state_data_field: GlobalSignal.HStateData.new(
+					_next_substate.state_name,
+					_next_substate.state_depth)
+		}
+	)
 
 
 func reset_current_substate() -> void:
+	SigUtils.safe_emit_raw(
+		GlobalSignal.SIG_phe_state_reset,
+		{
+			## reset from
+			GlobalSignal.payload_h_state_data_field: GlobalSignal.HStateData.new(
+					__current_substate.state_name,
+					__current_substate.state_depth)
+		}
+	)
 	__current_substate = null
 
 
@@ -242,6 +257,14 @@ func react_on_hit(hit_data: HitData) -> void:
 	_curr_sbs.react_on_hit(hit_data)
 
 
+func is_apply_gravity() -> bool:
+	var _curr_sbs := get_current_substate()
+	if not _curr_sbs:
+		__log_warn_v2("no _curr_sbs", "is_apply_gravity", "return true")
+		return true
+	return _curr_sbs.is_apply_gravity()
+
+	
 # region: __LOGS
 
 func __log_indent() -> int:

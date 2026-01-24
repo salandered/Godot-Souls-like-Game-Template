@@ -1,15 +1,15 @@
 @tool
-extends BaseFeelings
 class_name PlayerFeelings
+extends BaseFeelings
 
 
 var FATIGUE_STATUS := "FATIGUE〰️"
 
 const FATIGUE_THRESHOLD = 8.0
 var max_stamina: float = 170.0
-var max_health: float = 240.0
+var max_health: float = 220.0
 
-var stamina_regen_rate: float = 10.0 # per sec
+var stamina_regen_rate: float = 12.0 # per sec
 
 var _current_stamina: float
 
@@ -32,11 +32,15 @@ func initialise() -> void:
 		FATIGUE_STATUS: false
 	}
 
-	__validated = true
+	if __perform_validation(true):
+		GlobalSignal.player_change_health.connect_(_on_player_change_health)
+		GlobalSignal.player_max_health_increase.connect_(_on_player_max_health_increase)
+		GlobalSignal.player_max_stamina_increase.connect_(_on_player_max_stamina_increase)
 
-	GlobalSignal.player_change_health.connect_(_on_player_change_health)
-	GlobalSignal.player_max_health_increase.connect_(_on_player_max_health_increase)
-	GlobalSignal.player_max_stamina_increase.connect_(_on_player_max_stamina_increase)
+		Console.add_command("god", _on_console_god, ["true_false"], 0, "by default is true")
+		Console.add_command("health_set", _on_console_set_health, ["amount"], 1)
+		Console.add_command("health_max_increase", _on_console_health_max_increase, ["amount"], 1, )
+		Console.add_command("stamina_max_increase", _on_console_stamina_max_increase, ["amount"], 1, )
 
 
 func is_player() -> bool:
@@ -46,25 +50,26 @@ func is_player() -> bool:
 func get_max_health() -> float:
 	return max_health
 
+
 func lose_stamina(amount: float):
 	_change_stamina(-amount)
 	if amount != 0.0:
 		regen_delay_timer.initialise(REGEN_DELAY_TIME, _on_regen_delay_ended)
 
+
 func add_stamina(amount: float):
 	_change_stamina(amount)
 
+
 func can_allow_stamina_drain(amount: float) -> bool:
 	return can_allow_stamina_rate(-amount)
+
 
 func get_curr_stamina() -> float:
 	return _current_stamina
 
 
 func _process(delta: float) -> void:
-	if not __validation_ok():
-		return
-		
 	if zero_drain_timer.is_in_progress():
 		zero_drain_timer.update(delta)
 	if regen_delay_timer.is_in_progress():
@@ -84,18 +89,17 @@ func update(delta: float, requested_stamina_rate: float = 0.0):
 		var result_rate := stamina_regen_rate
 
 		if regen_delay_timer.is_in_progress():
-				result_rate = 0.0
+			result_rate = 0.0
 
 		if requested_stamina_rate != 0.0:
 			result_rate = requested_stamina_rate
-
+		# __log_("update", "result/stamina_regen/requested rates", result_rate, stamina_regen_rate, requested_stamina_rate)
 		_change_stamina(result_rate * delta, true)
 
 
 func _change_stamina(amount: float, is_rate: bool = false) -> void:
 	if amount == 0.0: return
 	if __god_mode:
-		if abs(amount) > 1: __log_("stamina", pp.s("not changed: god mode"))
 		return
 	
 	if IN_ZERO_DRAIN: return
@@ -224,35 +228,44 @@ func __log_feel_check_stamina(prefix: String, amount: float, decision: bool, ...
 	__log_(prefix, _msg, " ", pp.list_(context) + "=>", decision)
 
 
+func _on_console_god(true_false_param: String):
+	print_.console("_on_console_god", "true_false_param", true_false_param)
+	match true_false_param:
+		"":
+			set_god_mode(true)
+		"true":
+			set_god_mode(true)
+		"false":
+			set_god_mode(false)
+		_:
+			print_.console("unknown console command")
+		
+
+func _on_console_set_health(amount: String):
+	print_.console("_on_console_set_health", "amount", amount)
+	__set_specific_health(amount.to_float())
+		
+func _on_console_health_max_increase(amount: String):
+	print_.console("_on_console_health_max_increase", "amount", amount)
+	var signal_data := GlobalSignal.player_max_health_increase
+	SigUtils.safe_emit(signal_data, {GlobalSignal.payload_amount_field: amount.to_float()}, false)
+
+
+func _on_console_stamina_max_increase(amount: String):
+	print_.console("_on_console_stamina_max_increase", "amount", amount)
+	var signal_data := GlobalSignal.player_max_stamina_increase
+	SigUtils.safe_emit(signal_data, {GlobalSignal.payload_amount_field: amount.to_float()}, false)
+		
+
+func set_god_mode(enable: bool):
+	__god_mode = enable
+	if enable:
+		_current_stamina = max_stamina
+		_current_health = max_health
+
+
+##
+
+
 func __LOG_B() -> bool:
-	return LogToggler.FEEL.PL
-
-
-# region: DEV
-
-func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
-		return
-	if event.is_action_pressed(RawAction.t1):
-		add_health(10)
-		add_stamina(15)
-
-	if event.is_action_pressed(RawAction.t2):
-		lose_health(10)
-		lose_stamina(15)
-
-
-# LATER
-
-# func pay_block_cost(damage: float, blocking_coefficient: float):
-# 	if damage * blocking_coefficient <= stamina:
-# 		lose_stamina(damage * blocking_coefficient)
-# 	else:
-# 		var unblocked_portion := damage - stamina / blocking_coefficient
-# 		lose_stamina(stamina)
-# 		lose_health(unblocked_portion)
-# 		# something punish like force guardbreak 
-# 		print("was guardbroken")
-
-
-# endregion
+	return false # LogToggler.FEEL.PL

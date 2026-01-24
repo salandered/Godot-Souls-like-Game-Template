@@ -43,8 +43,8 @@ static var pl_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
 	A.attack.axe_slice_1: AttackDirection.Dir.LEFT,
 	A.attack.axe_slice_2: AttackDirection.Dir.RIGHT,
 	A.attack.axe_slice_3: AttackDirection.Dir.LEFT,
-	A.attack.attack_from_run: AttackDirection.Dir.STAB,
-	A.attack.attack_from_dodge: AttackDirection.Dir.STAB,
+	A.attack.stab_attack_1: AttackDirection.Dir.STAB,
+	A.attack.stab_attack_2: AttackDirection.Dir.STAB,
 	A.attack.sword_slash_1: AttackDirection.Dir.LEFT,
 	A.attack.sword_slash_2: AttackDirection.Dir.UP, # technically should be RIGHT
 	A.attack.sword_slash_3: AttackDirection.Dir.DOWN
@@ -99,7 +99,7 @@ static var enemy_muted_states: Array[String] = [PHES.Leaf.death, PHES.Leaf.phase
 
 
 static func get_attack_dir_by_enemy_attack(anim_id: String) -> AttackDirection.Dir:
-	return u.safe_get_dict_key(enemy_attack_to_direction, anim_id, AttackDirection.Dir.RIGHT)
+	return DictUtils.safe_get_dict_key(enemy_attack_to_direction, anim_id, AttackDirection.Dir.RIGHT)
 
 
 ## nullable
@@ -148,15 +148,15 @@ static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: String) 
 # region
 
 static func _pick_react_anim_for_enemy(hit_from_player: HitData) -> String:
-	var _attack_dir = u.safe_get_dict_key(pl_attack_to_direction, hit_from_player.anim_id, AttackDirection.Dir.RIGHT)
-	var _anim_id = u.safe_get_dict_key(attack_dir_to_enemy_overlay_anim, _attack_dir, PHEA.react.react_from_R)
+	var _attack_dir = DictUtils.safe_get_dict_key(pl_attack_to_direction, hit_from_player.anim_id, AttackDirection.Dir.RIGHT, WL.SILENT)
+	var _anim_id = DictUtils.safe_get_dict_key(attack_dir_to_enemy_overlay_anim, _attack_dir, PHEA.react.react_from_R)
 	__log_("pl attack", pp.in_q(hit_from_player.anim_id), "-> Dir", AttackDirection.name_(_attack_dir), "-> Ovrl anim", _anim_id)
 	return _anim_id
 
 
 static func _pick_react_anim_for_player(hit_from_enemy: HitData) -> String:
-	var _attack_dir = u.safe_get_dict_key(enemy_attack_to_direction, hit_from_enemy.anim_id, AttackDirection.Dir.RIGHT)
-	var _anim_id = u.safe_get_dict_key(attack_dir_to_pl_overlay_anim, _attack_dir, A.react.react_from_R)
+	var _attack_dir = DictUtils.safe_get_dict_key(enemy_attack_to_direction, hit_from_enemy.anim_id, AttackDirection.Dir.RIGHT)
+	var _anim_id = DictUtils.safe_get_dict_key(attack_dir_to_pl_overlay_anim, _attack_dir, A.react.react_from_R)
 	__log_("e attack", pp.in_q(hit_from_enemy.anim_id), "-> Dir", AttackDirection.name_(_attack_dir), "-> Ovrl anim", _anim_id)
 	return _anim_id
 
@@ -190,7 +190,7 @@ static var enemy_state_to_bone_mask: Dictionary[String, Array] = {
 
 static func _pick_bone_mask_for_enemy(hit: HitData, state_name: String) -> Array[int]:
 	var _bone_mask: Array[int]
-	_bone_mask = u.safe_get_dict_key(enemy_state_to_bone_mask, state_name, BoneMask.get_upper_body(), WL.SILENT)
+	_bone_mask = DictUtils.safe_get_dict_key(enemy_state_to_bone_mask, state_name, BoneMask.get_upper_body(), WL.SILENT)
 	__log_("EState", pp.in_q(state_name), "->", pp.bone_mask_(_bone_mask))
 	return _bone_mask
 
@@ -203,7 +203,7 @@ static var player_action_to_bone_mask = {
 
 static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Array[int]:
 	var _bone_mask: Array[int]
-	_bone_mask = u.safe_get_dict_key(player_action_to_bone_mask, action_name, BoneMask.get_upper_body_with_hips(), WL.SILENT)
+	_bone_mask = DictUtils.safe_get_dict_key(player_action_to_bone_mask, action_name, BoneMask.get_upper_body_with_hips(), WL.SILENT)
 	__log_("PLAction", pp.in_q(action_name), "->", pp.bone_mask_(_bone_mask))
 	return _bone_mask
 
@@ -217,13 +217,13 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Arr
 ## may return ""
 static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 	var _pl_state: String
-	_pl_state = u.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
+	_pl_state = DictUtils.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
 	return _pl_state
 
 ## may return ""
 static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
-	if hit_from_pl.anim_id in [A.attack.attack_from_run, A.attack.attack_from_dodge]:
+	if hit_from_pl.anim_id in [A.attack.stab_attack_1, A.attack.stab_attack_2]:
 		if hit_from_pl.weapon_name == WeaponID.smith_sword:
 			return ""
 		else: # if small pinga, we push
@@ -232,7 +232,7 @@ static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
 	## usual logic
 	var _e_state = ""
 	var _e_state_and_probability: Array
-	_e_state_and_probability = u.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)
+	_e_state_and_probability = DictUtils.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)
 	_e_state = _e_state_and_probability[0] if ra.chance(_e_state_and_probability[1]) else ""
 	__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
 		pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))

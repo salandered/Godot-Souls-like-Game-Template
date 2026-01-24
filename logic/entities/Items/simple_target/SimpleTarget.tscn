@@ -46,10 +46,10 @@ _surfaces = [{
 }]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hrpcc"]
-radius = 0.21435547
+radius = 0.30664063
 height = 1.9443359
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lub8o"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_deekb"]
 
 [sub_resource type="Animation" id="Animation_wnrsi"]
 length = 0.001
@@ -212,7 +212,7 @@ __csg_visual = false
 
 [node name="RotatingTarget" type="MeshInstance3D" parent="Visuals"]
 unique_name_in_owner = true
-transform = Transform3D(-0.37619692, 0, 0.06633376, 0, 0.3820004, 0, -0.06633376, 0, -0.37619692, 0, 1.2790871, 0)
+transform = Transform3D(-0.37619692, 0, 0.0663338, 0, 0.3820004, 0, -0.0663338, 0, -0.37619692, 0, 1.2790871, 0)
 layers = 128
 material_override = ExtResource("6_lub8o")
 mesh = SubResource("ArrayMesh_lub8o")
@@ -273,8 +273,12 @@ script = ExtResource("7_wnrsi")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11282349, 0)
-shape = SubResource("CapsuleShape3D_lub8o")
+shape = SubResource("CapsuleShape3D_deekb")
 debug_color = Color(0.70196074, 0.11070298, 0, 0.41960785)
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25103688, 0)
+aabb = AABB(-1, -0.63136977, -1.0579317, 2, 1.2627395, 2.1158633)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

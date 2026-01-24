@@ -1,5 +1,5 @@
 extends RefCounted
-# here are all utils which dont have their separate more focused module
+# here are all utils which dont have their separate more focused module (yet)
 class_name u
 
 static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -36,149 +36,6 @@ static func ease_in_out(x: float) -> float:
 	return 0.5 * (1.0 - cos(x * PI))
 
 
-## returns null if key does not exist
-static func safe_get_dict_key(dict: Dictionary, key: Variant, default: Variant = null, warn_level: String = WL.WARN_CRUCIAL) -> Variant:
-	if safe_has_key(dict, key, warn_level):
-		return dict[key]
-	else:
-		return default
-
-
-static func _msg_key_problem(key: Variant, dict: Dictionary, found_is_problem: bool = false) -> String:
-	var _found_msg := "found in dictionary" if found_is_problem else "not found in dictionary:"
-	var _msg := pp.s("Key", pp.in_q(key), _found_msg, pp.dict_(dict, false, false, true))
-	return _msg
-
-
-static func safe_has_key(dict: Dictionary, key: Variant, warn_level: String = WL.PUSH_WARN) -> bool:
-	var exists: bool = key in dict
-	if not exists:
-		error_.warn(_msg_key_problem(key, dict), "", "", warn_level)
-	return exists
-
-
-static func safe_has_no_key(dict: Dictionary, key: Variant, warn_level: String = WL.PUSH_WARN) -> bool:
-	var exists: bool = key in dict
-	if exists:
-		error_.warn(_msg_key_problem(key, dict, true), "", "", warn_level)
-	return not exists
-
-
-static func safe_has_method(
-		object_: Object,
-		method_: String,
-		warn_level: String = WL.PUSH_ERROR,
-) -> bool:
-	if not object_ or not is_instance_valid(object_):
-		error_.warn("no object_ at all or it is invalid", "", "", warn_level)
-		return false
-
-	var exists: bool = object_.has_method(method_)
-	if not exists:
-		var _msg := pp.s("method_", pp.in_q(method_), "not found in object_", safe_object_pp_name(object_))
-		error_.warn(_msg, "", "", warn_level)
-		
-	return exists
-
-
-static func safe_has_property(
-		object_: Object,
-		property_name: String,
-		warn_level: String = WL.PUSH_ERROR,
-) -> bool:
-	if not object_ or not is_instance_valid(object_):
-		error_.warn("no object_ at all or it is invalid", "", "", warn_level)
-		return false
-	
-	var exists: bool = property_name in object_
-	if not exists:
-		var _msg := pp.s("property", pp.in_q(property_name), "not found in object_", safe_object_pp_name(object_))
-		error_.warn(_msg, "", "", warn_level)
-		
-	return exists
-
-
-static func safe_has_pp_name(object_: Object) -> bool:
-	if not object_ or not is_instance_valid(object_):
-		error_.warn("no object_ at all or it is invalid", "", "return false", WL.WARN)
-		return false
-	var exists: bool = object_.has_method("pp_name")
-	return exists
-
-
-static func safe_object_pp_name(object_: Object) -> String:
-	if not object_ or not is_instance_valid(object_):
-		error_.warn("no object_ at all or it is invalid", "", "return empty string", WL.WARN)
-		return ""
-	return str(object_.pp_name()) if safe_has_pp_name(object_) else str(object_)
-
-
-static func is_object_ok(object_: Object, description: String = "", warn_level: String = WL.PUSH_WARN) -> bool:
-	if not object_ or not is_instance_valid(object_):
-		error_.warn("object is null or not valid", description, "", warn_level)
-		return false
-	else:
-		return true
-
-## return true if emitted
-static func safe_emit(
-	signal_data: SignalData,
-	signal_payload: Dictionary[String, Variant],
-	__log: bool = false,
-	warn_level: String = WL.WARN) -> bool:
-	if error_.null_object(signal_data, "no signal data", warn_level):
-		return false
-	if error_.null_signal(signal_data.signal_obj, "", warn_level):
-		return false
-	signal_data.signal_obj.emit(signal_payload)
-	if __log:
-		print_.prefix("<emit>", pp.sig(signal_data, signal_payload))
-	return true
-
-static func safe_emit_raw(
-	signal_: Signal,
-	signal_payload: Dictionary[String, Variant],
-	__log: bool = false,
-	warn_level: String = WL.WARN) -> bool:
-	if error_.null_signal(signal_, "", warn_level):
-		return false
-	signal_.emit(signal_payload)
-	if __log:
-		print_.prefix("<emit>", pp.sig_raw(signal_, signal_payload))
-	return true
-
-static func safe_emit_raw_no_payload(
-	signal_: Signal,
-	__log: bool = false,
-	warn_level: String = WL.WARN) -> bool:
-	if error_.null_signal(signal_, "", warn_level):
-		return false
-	signal_.emit()
-	if __log:
-		print_.prefix("<emit>", pp.sig_raw(signal_, {}))
-	return true
-
-
-static func safe_connect(
-	signal_: Signal,
-	callable: Callable,
-	__log: bool = false,
-	warn_level: String = WL.WARN) -> bool:
-	if error_.null_signal(signal_, "", warn_level):
-		return false
-	if not callable.is_valid():
-		error_.warn("callable is not valid", "", "", warn_level)
-		return false
-	if signal_.is_connected(callable):
-		return false
-
-	signal_.connect(callable)
-	
-	if __log:
-		print_.prefix("<connected>", pp.sig_raw(signal_, {}))
-	return true
-
-
 static func safe_look_at(
 		from_who: Node3D,
 		target: Vector3,
@@ -196,40 +53,6 @@ static func safe_look_at(
 	return true
 
 
-static func _dev_change_t12_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t1, RawAction.t2)
-
-static func _dev_change_t34_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t3, RawAction.t4)
-
-static func _dev_change_t58_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t5, RawAction.t8)
-
-static func _dev_change_t67_param(event, param, param_name: String = "some param", step: float = 0.1) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t6, RawAction.t7)
-
-static func _dev_change_param(
-	event, param: Variant, param_name: String = "some param", step: float = 0.1, key_a: String = RawAction.t1, key_b: String = RawAction.t2) -> Variant:
-	var prev_param: Variant = param
-	if event.is_action_released(key_a):
-		param -= step
-	if event.is_action_released(key_b):
-		param += step
-
-	if prev_param != param:
-		print_.dev("~~ ", pp.s(param_name, prev_param, pp.arr, param), 0)
-	return param
-
-
-static func to_pascal_case(snake_case: String) -> String:
-	var words := snake_case.split("_")
-	var result := ""
-	for word in words:
-		if word.length() > 0:
-			result += word.capitalize()
-	return result
-
-
 ## point_index starts with zero!
 static func get_curve_point_x(curve: Curve, point_index: int) -> float:
 	return curve.get_point_position(point_index).x
@@ -240,56 +63,13 @@ static func reset_all(resettable: Array):
 		if item.has_method("reset"):
 			item.reset()
 
+
 static func fpow2(number: float) -> float:
 	return number * number
 
 static func ipow2(number: int) -> int:
 	return number * number
 
-
-static func cut_string(text: String, limit: int = 600) -> String:
-	if text.length() <= limit:
-		return text
-	return text.left(limit) + " ... <too long to print>"
-
-
-static func construct_obj_pp_name(object_: Object) -> String:
-	if not error_.null_variant(object_.get_script(), "construct_obj_pp_name", WL.SILENT):
-		var _r = object_.get_script().get_global_name()
-		_r = pp_name_replacers(_r)
-		return _r
-	return "undefined"
-
-## awed/name -> name; 
-## awd/awdaw/name -> name; 
-## ../awd/name -> name; 
-## name -> name; 
-## /name -> name; 
-## name/ -> ''; 
-static func get_last_slash_part(raw_string: String) -> String:
-	# NOTE: looks like built in get_file will do. But this is custom approach.
-	## var pos = raw_string.rfind("/")
-	## var _r = raw_string.substr(pos + 1) if pos != -1 else raw_string
-	var _r = raw_string.get_file()
-	return _r
-
-
-static func pp_name_replacers(_r: String) -> String:
-	for key_word: String in _pp_replacers:
-		_r = _r.replace(key_word, _pp_replacers[key_word])
-	return _r
-
-
-static var _pp_replacers: Dictionary[String, String] = {
-		"Container": em.box,
-		"Player": "Pl",
-		"Character": "Char",
-		"Enemy": "🗿",
-		"Feelings": em.h_white,
-		"Weapon": em.dagger,
-		"Awareness": "👀",
-		"ModifierAnimator": "💀Animator"
-	}
 
 ##
 
@@ -320,3 +100,48 @@ static func hide_dev_visuals(node: Node, __log: bool = false):
 		func(n): return n.name.begins_with("__dev") or n.name.begins_with("__test"),
 		__log
 	)
+
+
+## DEV
+# region
+
+static func _dev_change_t12_param(event, param, param_name: String = "some param", step: float = 0.1,
+	require_ctrl: bool = false) -> Variant:
+	return _dev_change_param(event, param, param_name, step, RawAction.t1, RawAction.t2, require_ctrl)
+
+static func _dev_change_t34_param(event, param, param_name: String = "some param", step: float = 0.1,
+	require_ctrl: bool = false) -> Variant:
+	return _dev_change_param(event, param, param_name, step, RawAction.t3, RawAction.t4, require_ctrl)
+
+static func _dev_change_t58_param(event, param, param_name: String = "some param", step: float = 0.1,
+	require_ctrl: bool = false) -> Variant:
+	return _dev_change_param(event, param, param_name, step, RawAction.t5, RawAction.t8, require_ctrl)
+
+static func _dev_change_t67_param(event, param, param_name: String = "some param", step: float = 0.1,
+	require_ctrl: bool = false) -> Variant:
+	return _dev_change_param(event, param, param_name, step, RawAction.t6, RawAction.t7, require_ctrl)
+
+static func _dev_change_param(
+	event: InputEvent,
+	param: Variant,
+	param_name: String = "some param",
+	step: float = 0.1,
+	key_a: String = RawAction.t1,
+	key_b: String = RawAction.t2,
+	require_ctrl: bool = false
+) -> Variant:
+	var prev_param: Variant = param
+
+	if require_ctrl and not event.is_ctrl_pressed():
+		return param
+
+	if event.is_action_released(key_a):
+		param -= step
+	if event.is_action_released(key_b):
+		param += step
+
+	if prev_param != param:
+		print_.dev("~~ ", pp.s(param_name, prev_param, pp.arr, param))
+	return param
+
+# endregion

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxqlawj5lv3o1"]
 
-[ext_resource type="Script" uid="uid://dn1j31a0lqg0y" path="res://logic/entities/Enemies/sitting_sk/look_at_head_modifier_3d.gd" id="1_71i0b"]
+[ext_resource type="Script" uid="uid://dn1j31a0lqg0y" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_head_modifier_3d.gd" id="1_71i0b"]
 
 [node name="LookAtHeadModifier3D" type="LookAtModifier3D"]
 bone_name = "Head"
@@ -15,3 +15,5 @@ primary_damp_threshold = 1.0
 secondary_limit_angle = 1.200612
 secondary_damp_threshold = 1.0
 script = ExtResource("1_71i0b")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]

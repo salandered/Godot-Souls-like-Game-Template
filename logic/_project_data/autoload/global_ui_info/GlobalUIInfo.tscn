@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://48tejneiwq5o"]
+[gd_scene load_steps=18 format=3 uid="uid://48tejneiwq5o"]
 
 [ext_resource type="Script" uid="uid://ho1kjt4aujxq" path="res://logic/_project_data/autoload/global_ui_info/global_ui_info.gd" id="1_ihl3n"]
 [ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/_project_data/autoload/global_ui_info/profiler.gd" id="2_65fx7"]
@@ -7,7 +7,31 @@
 [ext_resource type="PackedScene" uid="uid://cp4td8jhxhsj2" path="res://logic/ui/ui_utils/prefab/rich_text_label/rich_text_label.tscn" id="5_0xnqb"]
 [ext_resource type="Script" uid="uid://dqvlv43ty5tmr" path="res://logic/_project_data/autoload/global_ui_info/free_cam_ui.gd" id="5_65fx7"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="6_k5if8"]
+[ext_resource type="PackedScene" uid="uid://4kxcjrgkejpt" path="res://logic/ui/ui_utils/prefab/dynamic_info/DynamicInfoLabel.tscn" id="6_o4jv4"]
+[ext_resource type="Script" uid="uid://b0fkt1j154oup" path="res://logic/c_systems/dynamic_info_distributor/dynamic_info_distributor.gd" id="6_tym6s"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="6_x47y3"]
+[ext_resource type="PackedScene" uid="uid://d14fwto2r7lvj" path="res://logic/ui/ui_utils/prefab/dynamic_info/DynamicInfoLabelDouble.tscn" id="8_k5if8"]
+[ext_resource type="Script" uid="uid://47tqkmv85ovb" path="res://logic/c_systems/dynamic_info_distributor/phe_dynamic_info_distributor.gd" id="9_bnty7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x47y3"]
+bg_color = Color(0.055200003, 0.1476, 0.24, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0, 0.041266948, 0.10980393, 0.49019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="Gradient" id="Gradient_tym6s"]
+offsets = PackedFloat32Array(0, 0.6571429, 1)
+colors = PackedColorArray(0.055200003, 0.15068, 0.24, 0, 0.05490196, 0.14901961, 0.23921569, 0.1882353, 0.05490196, 0.14901961, 0.23921569, 0.1882353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnty7"]
+gradient = SubResource("Gradient_tym6s")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4jnj"]
+texture = SubResource("GradientTexture2D_bnty7")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgki4"]
 bg_color = Color(0.24, 0.07464001, 0.052800007, 0.33333334)
@@ -43,56 +67,249 @@ script = ExtResource("5_65fx7")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="ProfilerAndTutorial" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
+[node name="__global_margin" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -546.0
-offset_bottom = 3301.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial"]
+[node name="__global_hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin"]
 layout_mode = 2
 
-[node name="ProfilerPanel" type="PanelContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer"]
+[node name="__health_margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="DynamicInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="__blue_panel_borders" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x47y3")
+
+[node name="__blue_panel" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_f4jnj")
+
+[node name="__margin_in_blue_panel" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="__vbox" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel"]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel/__vbox"]
+layout_mode = 2
+
+[node name="DynamicInfoDistributor" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel/__vbox/__hbox"]
+unique_name_in_owner = true
+script = ExtResource("6_tym6s")
+
+[node name="StateInfo" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="ActionInfo" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+description_text = "SubState (Action)"
+
+[node name="AttackInfo" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("8_k5if8")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_top = 10
+gradient_color_modulate = Color(1.6240668, 1.6240668, 1.6240668, 1)
+drop_buffer = 6.0
+wait_duration = 2.5
+fade_duration = 1.0
+ghost_target_color = Color(0.7443918, 0.7443918, 0.7443918, 1)
+
+[node name="__space" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfo/__blue_panel/__margin_in_blue_panel/__vbox"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="DynamicInfoPhe" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="__blue_panel_borders" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x47y3")
+
+[node name="__blue_panel" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_f4jnj")
+
+[node name="__margin_in_blue_panel" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="__vbox" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel"]
+layout_mode = 2
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PheDynamicInfoDistributor" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox/__hbox"]
+unique_name_in_owner = true
+script = ExtResource("9_bnty7")
+
+[node name="StateInfoPheDepth2" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_constants/margin_right = 0
+description_text = "State Depth 1"
+font_size = 28
+margin_h = 10
+margin_v = 6
+drop_buffer = 8.0
+wait_duration = 3.0
+fade_duration = 0.6
+ghost_target_color = Color(0.7851237, 0.7851237, 0.7851237, 1)
+
+[node name="StateInfoPheDepth3" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+description_text = "Depth 2"
+font_size = 28
+margin_h = 10
+margin_v = 6
+drop_buffer = 8.0
+wait_duration = 3.0
+fade_duration = 0.6
+ghost_target_color = Color(0.7851237, 0.7851237, 0.7851237, 1)
+
+[node name="StateInfoPheDepth4" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+description_text = "Depth 3"
+font_size = 32
+margin_h = 10
+margin_v = 6
+drop_buffer = 8.0
+wait_duration = 3.0
+fade_duration = 0.6
+ghost_target_color = Color(0.7851237, 0.7851237, 0.7851237, 1)
+
+[node name="StateInfoPheLeaf" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 5
+description_text = "☘️ Leaf State (Action)"
+font_size = 32
+gradient_color_modulate = Color(0.6632467, 1.9182534, 0.6632467, 1)
+margin_h = 10
+margin_v = 6
+drop_buffer = 8.0
+wait_duration = 3.0
+fade_duration = 0.6
+ghost_target_color = Color(0.7851237, 0.7851237, 0.7851237, 1)
+
+[node name="AttackInfoPhe" parent="CanvasLayer/__global_margin/__global_hbox/DynamicInfoPhe/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" instance=ExtResource("8_k5if8")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 10
+description_text = "Attack Dmg & Spd"
+font_size = 30
+gradient_color_modulate = Color(2.1131916, 2.3590932, 4.2209163, 1)
+margin_h = 10
+margin_v = 6
+drop_buffer = 8.0
+drop_duration = 0.3
+wait_duration = 2.5
+fade_duration = 1.0
+ghost_target_color = Color(0.7851237, 0.7851237, 0.7851237, 1)
+
+[node name="__margin_expander" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="ProfilerAndTutorial" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox"]
+layout_mode = 2
+
+[node name="__vbox" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ProfilerPanel" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="margin10" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel"]
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="LabelContainer" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10"]
+[node name="LabelContainer" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel/margin10"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 
-[node name="ControlInfoBox" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer"]
+[node name="ControlInfoBox" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel/margin10/LabelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ProfilerControlInfo" type="Label" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer/ControlInfoBox"]
+[node name="ProfilerControlInfo" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel/margin10/LabelContainer/ControlInfoBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7036598, 0.7036598, 0.7036598, 1)
 theme_override_font_sizes/font_size = 16
 text = "Controls Info text"
 
-[node name="HSeparator" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer/ControlInfoBox" instance=ExtResource("6_x47y3")]
+[node name="HSeparator" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel/margin10/LabelContainer/ControlInfoBox" instance=ExtResource("6_x47y3")]
 layout_mode = 2
 
-[node name="space" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer/ControlInfoBox"]
+[node name="space" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel/margin10/LabelContainer/ControlInfoBox"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="ProfilerInfo" type="Label" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/ProfilerPanel/margin10/LabelContainer"]
+[node name="ProfilerInfo" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/ProfilerPanel/margin10/LabelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
@@ -101,13 +318,14 @@ text = "Profiler Info text
 ...
 ..."
 
-[node name="FirstTutorialPanel" type="PanelContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer"]
+[node name="FirstTutorialPanel" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox"]
 unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_fgki4")
 
-[node name="margin10" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel"]
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -115,18 +333,18 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="TutorialLabels" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10"]
+[node name="TutorialLabels" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Legend" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="Legend" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/Legend"]
 layout_mode = 2
 
-[node name="LegendText" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("5_0xnqb")]
+[node name="LegendText" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24
@@ -140,6 +358,8 @@ text = "[b]press 1[/b] - to see [img=20x20]res://-assets-/x_icons/white/icon_lev
 [b]press 0[/b] - to hide/unhide all.
 
 [i]Pressing the same number hides the dedicated panel.[/i]"
+scroll_active = false
+autowrap_mode = 0
 plain_text = "press 1 - to see controls.
 press 2 - to learn about available mechanics.
 press 3 - to learn more about combo attacks.
@@ -159,18 +379,17 @@ phrase_icons = Dictionary[String, String]({
 "target locking": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/Legend/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="1Controls" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="1Controls" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/1Controls"]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("5_0xnqb")]
+[node name="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 26
 theme_override_font_sizes/bold_font_size = 28
@@ -187,6 +406,7 @@ text = "[b]WASD[/b] - [img=20x20]res://-assets-/x_icons/white/steps.png[/img] mo
 [i]H to unstuck (just in case)[/i]
 [i]F3 to see profiler[/i]
 [i]F9 to toggle flying dev camera[/i]"
+autowrap_mode = 0
 plain_text = "WASD - move
 Space - dodge/jump
 Shift - sprint
@@ -208,18 +428,18 @@ phrase_icons = Dictionary[String, String]({
 "target lock": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/1Controls/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="2MechanicsOverview" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="2MechanicsOverview" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview"]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("5_0xnqb")]
+[node name="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 26
@@ -229,7 +449,7 @@ text = "[b]Attacks and combos[/b] - press light and heavy [img=20x20]res://-asse
 
 [b]Target locking[/b] - see the dedicated tutorial panel.
 
-[b]Destructible columns[/b] - let the enemy hit the colum, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
+[b]Destructible columns[/b] - let the enemy hit the column, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
 
 [b]Fighting several enemies at once[/b] - just find the way to reach additional enemies. It's a lot of fun and they could accidently hit each other as well.
 
@@ -256,18 +476,18 @@ phrase_icons = Dictionary[String, String]({
 "target lock": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/2MechanicsOverview/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="3AttackMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="3AttackMechanic" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic"]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("5_0xnqb")]
+[node name="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 26
@@ -304,18 +524,18 @@ phrase_icons = Dictionary[String, String]({
 "target lock": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/3AttackMechanic/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="4TargetLockMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="4TargetLockMechanic" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic"]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("5_0xnqb")]
+[node name="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 26
@@ -343,18 +563,18 @@ phrase_icons = Dictionary[String, String]({
 "target lock": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/4TargetLockMechanic/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="5HealthStaminaMechanic" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="5HealthStaminaMechanic" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic"]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("5_0xnqb")]
+[node name="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 26
@@ -377,18 +597,18 @@ phrase_icons = Dictionary[String, String]({
 "target lock": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/5HealthStaminaMechanic/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="6AdditionalMovementTips" type="MarginContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels"]
+[node name="6AdditionalMovementTips" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="vb" type="VBoxContainer" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips"]
+[node name="vb" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips"]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("5_0xnqb")]
+[node name="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("5_0xnqb")]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 26
@@ -415,28 +635,21 @@ phrase_icons = Dictionary[String, String]({
 "target lock": "res://-assets-/x_icons/white/icon_target_2.png"
 })
 
-[node name="h__sep" parent="CanvasLayer/ProfilerAndTutorial/VBoxContainer/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("6_k5if8")]
+[node name="h__sep" parent="CanvasLayer/__global_margin/__global_hbox/ProfilerAndTutorial/__vbox/FirstTutorialPanel/margin10/TutorialLabels/6AdditionalMovementTips/vb" instance=ExtResource("6_k5if8")]
 layout_mode = 2
 
-[node name="FreeCam" type="MarginContainer" parent="CanvasLayer"]
+[node name="FreeCam" type="MarginContainer" parent="CanvasLayer/__global_margin"]
 unique_name_in_owner = true
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -359.0
-offset_right = 370.0
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/FreeCam"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="margin10" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/FreeCam"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -444,16 +657,16 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer/margin10"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="ControlsInfo" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
+[node name="ControlsInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer/margin10/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="Controls" type="RichTextLabel" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer/ControlsInfo"]
+[node name="Controls" type="RichTextLabel" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer/margin10/VBoxContainer/ControlsInfo"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -473,16 +686,16 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="HSeparator" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer" instance=ExtResource("6_x47y3")]
+[node name="HSeparator" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer/margin10/VBoxContainer" instance=ExtResource("6_x47y3")]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="HUDInfo" type="MarginContainer" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer"]
+[node name="HUDInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer/margin10/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="HUD" type="RichTextLabel" parent="CanvasLayer/FreeCam/PanelContainer/margin10/VBoxContainer/HUDInfo"]
+[node name="HUD" type="RichTextLabel" parent="CanvasLayer/__global_margin/FreeCam/PanelContainer/margin10/VBoxContainer/HUDInfo"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2

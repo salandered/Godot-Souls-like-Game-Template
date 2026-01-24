@@ -66,7 +66,7 @@ func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D 
 		
 		health_bar.modulate_a(0.0)
 		var _tw := create_tween()
-		_tw.tween_property(health_bar.container, Constants.Prop.CONTROL_MODULATE_A, 1.0, 0.3)
+		_tw.tween_property(health_bar.container, Constants.Prop.MODULATE_A, 1.0, 0.3)
 		health_bar.scale_xy(0.5)
 
 	hide_ui()
@@ -74,13 +74,10 @@ func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D 
 	## 
 	_prev_health = e_feelings.get_curr_health()
 
-	__perform_validation()
+	__perform_validation(true)
 
 
 func _process(delta: float) -> void:
-	if not __validation_ok():
-		# __UI_HARD_ENABLE may be false
-		return
 	if _anchor_3d:
 		_update_floating_position()
 	# polling on every frame - may be switch to signals

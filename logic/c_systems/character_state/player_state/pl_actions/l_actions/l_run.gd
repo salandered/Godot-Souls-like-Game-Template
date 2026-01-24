@@ -135,7 +135,6 @@ func update(input_: InputPackage, delta: float):
 
 
 var _next_anim_correction := 0.08
-var __start_time_offset_dev := 0.0
 
 
 func animate(): # ▶️
@@ -145,7 +144,7 @@ func animate(): # ▶️
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 			custom_start_time_offset = 0.2667 # sync with idle where left leg forward (change to marker)
 		Leg.Act.turn_180:
-			custom_start_time_offset = __start_time_offset_dev # sync with idle where left leg forward
+			custom_start_time_offset = 0.0 # sync with idle where left leg forward
 		Leg.Act.sprint:
 			var r := sync_with_prev_loco_anim(_next_anim_correction)
 			if r != -1:
@@ -156,14 +155,10 @@ func animate(): # ▶️
 	set_anim_to_play(-1, custom_start_time_offset)
 
 
-var _dev_add_blend := 0.0
-
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
-	SPEED_BOOST = u._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 2, RawAction.DEV_speed_down, RawAction.DEV_speed_up)
-	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
-	# __start_time_offset_dev = u._dev_change_t34_param(event, __start_time_offset_dev, "__start_time_offset_dev", 0.05)
+	SPEED_BOOST = u._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 2, RawAction.DEV_speed_down, RawAction.DEV_speed_up, true)
 
 
 func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:

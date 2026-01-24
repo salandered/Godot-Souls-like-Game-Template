@@ -1771,7 +1771,7 @@ markers = [{
 "name": &"allows_switch",
 "time": 2.1333334
 }, {
-"color": Color(1, 1, 1, 1),
+"color": Color(0.9510445, 0.14486825, 1, 1),
 "name": &"SFX_hit_weapon_ground",
 "time": 1.3666667
 }]
@@ -2184,7 +2184,7 @@ tracks/56/path = NodePath("NativeAnimator/AnimParameters:allows_queue")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = {
-"times": PackedFloat32Array(0, 1.6, 2.4),
+"times": PackedFloat32Array(0, 1.3333334, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]

@@ -365,7 +365,7 @@ func __pp_curr_values() -> String:
 
 
 func pp_name() -> String:
-	return pp.s(tag, u.construct_obj_pp_name(self))
+	return pp.s(tag, ObjUtils.construct_obj_pp_name(self))
 
 
 func debug():

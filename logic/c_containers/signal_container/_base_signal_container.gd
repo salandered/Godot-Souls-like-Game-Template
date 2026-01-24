@@ -18,7 +18,7 @@ func _init():
 
 	sig_id_to_signal_data = {}
 	for item: SignalData in _signal_data_list:
-		if u.safe_has_no_key(sig_id_to_signal_data, item.signal_id):
+		if DictUtils.safe_has_no_key(sig_id_to_signal_data, item.signal_id):
 			sig_id_to_signal_data[item.signal_id] = item
 
 
@@ -27,7 +27,7 @@ func _init():
 
 
 func get_by_sig_id(sig_id: String) -> SignalData:
-	var _r: SignalData = u.safe_get_dict_key(sig_id_to_signal_data, sig_id, null)
+	var _r: SignalData = DictUtils.safe_get_dict_key(sig_id_to_signal_data, sig_id, null)
 	if not _r:
 		__log_warn_soft("no SignalData found for sig_id", "", "", pp.in_q(sig_id))
 	return _r

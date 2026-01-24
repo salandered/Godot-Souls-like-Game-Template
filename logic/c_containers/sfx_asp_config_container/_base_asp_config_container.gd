@@ -15,7 +15,7 @@ func _init():
 
 ## nullable
 func get_by_sfx_type_id(sfx_type_id: String) -> ASP3DConfig:
-	var _r: ASP3DConfig = u.safe_get_dict_key(_sfx_asp_configs, sfx_type_id, null, WL.SILENT)
+	var _r: ASP3DConfig = DictUtils.safe_get_dict_key(_sfx_asp_configs, sfx_type_id, null, WL.SILENT)
 	return _r
 
 
@@ -96,7 +96,7 @@ func _get_dict_data() -> Dictionary[String, ASP3DConfig]:
 # region
 
 func pp_name() -> String:
-	return u.construct_obj_pp_name(self)
+	return ObjUtils.construct_obj_pp_name(self)
 
 func __LOG_B() -> bool:
 	return false

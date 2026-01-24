@@ -42,6 +42,27 @@ func get_current_pointer() -> int:
 	return _pointer
 
 
+func get_values() -> Array:
+	return _values
+
+
+## Sets the pointer to the index of the given value.
+## Returns true if the value was found and pointer updated.
+func force_cycle_to(target_value: Variant) -> bool:
+	if _values.is_empty():
+		__log_warn("Cycler is empty", "force_cycle_to")
+		return false
+		
+	var index = _values.find(target_value)
+	
+	if index != -1:
+		_pointer = index
+		return true
+	else:
+		__log_warn("Value not found in cycler", "force_cycle_to", "pointer unchanged", "Requested value", target_value)
+		return false
+
+
 func _is_pointer_within() -> bool:
 	return _pointer >= 0 and _pointer <= len(_values) - 1
 

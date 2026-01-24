@@ -27,7 +27,7 @@ func is_vulnerable(anim: Animation, timestamp: float) -> bool:
 
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:
-	var _default: bool = u.safe_get_dict_key(get_default_params(), param, false)
+	var _default: bool = DictUtils.safe_get_dict_key(get_default_params(), param, false)
 	var _track_exists: bool = false
 	for prefix in get_track_prefixes():
 		_track_exists = AnimUtils.is_track_exists(anim, prefix, param)

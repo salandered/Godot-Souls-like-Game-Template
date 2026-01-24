@@ -3,7 +3,6 @@ class_name EnemyMovement
 
 
 @onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
-@onready var enemy_awareness: EnemyAwareness = %EnemyAwareness
 
 
 func get_player() -> Princess:

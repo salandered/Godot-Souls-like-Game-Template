@@ -81,10 +81,13 @@ func _update(delta: float) -> void:
 	update(delta)
 
 	if APPLY_GRAVITY:
-		var _applied := e_movement.apply_gravity(delta, 3.0)
-		# if _applied:
-			# __log_phe__upd("applied gravity ☄️")
-		
+		if me.get_area_awareness().is_on_floor():
+			pass
+		elif me.get_area_awareness().is_almost_on_floor():
+			var _applied := e_movement.apply_gravity(delta, 3.0)
+			# if _applied:
+				# __log_phe__upd("applied gravity ☄️")
+
 
 func works_longer_than_fatigue() -> bool:
 	return CommitCheck.works_longer_than_fatigue_leaf(self)
@@ -108,7 +111,7 @@ func react_on_hit(hit: HitData):
 	phe_feelings.lose_health(hit.damage)
 
 	var _sig_data := me.get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
-	u.safe_emit(_sig_data, {}, false)
+	SigUtils.safe_emit(_sig_data, {}, false)
 
 	var react_cfg := ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
 	if not react_cfg:
@@ -129,6 +132,9 @@ func react_on_hit(hit: HitData):
 
 	set_overlay_anim_to_play(react_cfg.anim_id, overlay_config)
 
+
+func is_apply_gravity() -> bool:
+	return APPLY_GRAVITY
 
 # endregion
 

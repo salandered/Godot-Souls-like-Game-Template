@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=40 format=3 uid="uid://dngnbhs1qjqyy"]
+[gd_resource type="Theme" load_steps=49 format=3 uid="uid://dngnbhs1qjqyy"]
 
-[ext_resource type="StyleBox" uid="uid://ctas7l1ddksp1" path="res://-assets-/ui_assets/themes/buttons/button_texture_1_hover.tres" id="1_86wfo"]
+[ext_resource type="Texture2D" uid="uid://l3mrt1t6jqos" path="res://-assets-/ui_assets/images/image_2026-01-04_00-25-05.png" id="1_6m5w1"]
 [ext_resource type="FontVariation" uid="uid://cyjb8qf6mhiej" path="res://-assets-/ui_assets/_font/yrsa/Yrsa_font_variation.tres" id="1_cpjrn"]
+[ext_resource type="Texture2D" uid="uid://csm1hvc0eio4d" path="res://-assets-/ui_assets/images/image_2026-01-04_00-34-56.png" id="1_t44it"]
 [ext_resource type="StyleBox" uid="uid://d5grt08wa8so" path="res://-assets-/ui_assets/themes/buttons/button_texture_1.tres" id="2_sx7a4"]
-[ext_resource type="StyleBox" uid="uid://bmubxvd4mup6c" path="res://-assets-/ui_assets/themes/buttons/button_texture_1_pressed.tres" id="4_bo7n0"]
+[ext_resource type="StyleBox" uid="uid://ckid71206e32a" path="res://-assets-/ui_assets/themes/buttons/button_flat_border.tres" id="4_bo7n0"]
 [ext_resource type="StyleBox" uid="uid://dwiur47lj262s" path="res://-assets-/ui_assets/themes/buttons/danger_button_hover.tres" id="4_cpjrn"]
 [ext_resource type="StyleBox" uid="uid://xfjyq8ix6pfu" path="res://-assets-/ui_assets/themes/panel/invisible_panel.tres" id="4_mrpaj"]
 [ext_resource type="StyleBox" uid="uid://id53tggtfn86" path="res://-assets-/ui_assets/themes/buttons/danger_button_normal.tres" id="5_8yyid"]
@@ -14,11 +15,50 @@
 [ext_resource type="Texture2D" uid="uid://blsm6k6ub1rve" path="res://-assets-/ui_assets/borders/Divider/divider-002.png" id="7_xf8j2"]
 [ext_resource type="StyleBox" uid="uid://dldgdt0apmr6" path="res://-assets-/ui_assets/themes/buttons/button_tab_hover.tres" id="8_15rup"]
 [ext_resource type="Texture2D" uid="uid://bo4rf82imabbg" path="res://-assets-/ui_assets/images/HmqC9geYY9.png" id="8_girjx"]
-[ext_resource type="Texture2D" uid="uid://b5hf4ahal11h8" path="res://-assets-/ui_assets/images/image_2026-01-04_00-24-46.png" id="10_bo7n0"]
+[ext_resource type="Texture2D" uid="uid://raf5ftj51egj" path="res://-assets-/ui_assets/images/image_2026-01-04_00-24-46.png" id="10_bo7n0"]
 [ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="14_n6q3d"]
 [ext_resource type="FontFile" uid="uid://c7vt0igfibv7k" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBoldItalic.ttf" id="15_n6q3d"]
 [ext_resource type="FontFile" uid="uid://dylt24uy0jhin" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-Italic.ttf" id="16_jb8hi"]
 [ext_resource type="FontVariation" uid="uid://cjegrskdlmtod" path="res://-assets-/ui_assets/_font/yrsa/yrsa_light_w_spacing.tres" id="17_ltwmq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k4fh3"]
+content_margin_left = 30.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+texture = ExtResource("1_t44it")
+region_rect = Rect2(345.84326, 79.797424, 625.9616, 343.804)
+modulate_color = Color(0.69005257, 0.6899549, 0.6900825, 1)
+
+[sub_resource type="DPITexture" id="DPITexture_puxc5"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"7\"/><circle cx=\"24\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\"/></svg>
+"
+base_scale = 1.3
+
+[sub_resource type="DPITexture" id="DPITexture_bo7n0"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\"><rect width=\"30\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".37\" rx=\"7\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"#1a1a1a\" fill-opacity=\".5\"/></svg>
+"
+base_scale = 1.3
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3kpra"]
+texture = ExtResource("1_6m5w1")
+region_rect = Rect2(7.1560364, 300.5872, 713.8154, 197.21027)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mlnkq"]
+texture = ExtResource("1_6m5w1")
+region_rect = Rect2(6.333191, 188.15894, 711.67175, 218.64612)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khdhv"]
+texture = ExtResource("1_6m5w1")
+region_rect = Rect2(148.03558, 115.62555, 773.9644, 216.37445)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t44it"]
+texture = ExtResource("6_cf62b")
+region_rect = Rect2(204.5, 0, 173, 116)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6m5w1"]
+texture = ExtResource("6_cf62b")
+region_rect = Rect2(252.5, 0, 150, 79)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n6q3d"]
 content_margin_top = 11.0
@@ -126,18 +166,39 @@ texture_margin_bottom = 4.0
 [resource]
 default_font = ExtResource("1_cpjrn")
 default_font_size = 24
+AcceptDialog/constants/buttons_min_width = 120
+AcceptDialog/constants/buttons_separation = 20
+AcceptDialog/styles/panel = SubResource("StyleBoxTexture_k4fh3")
 Button/colors/font_hover_color = Color(1, 0.4408114, 0.5113187, 1)
 Button/colors/font_pressed_color = Color(0.7579691, 0.31916702, 0.374401, 1)
 Button/constants/outline_size = 4
 Button/font_sizes/font_size = 34
 Button/fonts/font = ExtResource("1_cpjrn")
-Button/styles/hover = ExtResource("1_86wfo")
+Button/styles/hover = ExtResource("2_sx7a4")
 Button/styles/normal = ExtResource("2_sx7a4")
-Button/styles/pressed = ExtResource("4_bo7n0")
+Button/styles/pressed = ExtResource("2_sx7a4")
+ButtonFlat/base_type = &"Button"
+ButtonFlat/styles/hover = ExtResource("4_bo7n0")
+ButtonFlat/styles/normal = ExtResource("4_bo7n0")
+ButtonFlat/styles/pressed = ExtResource("4_bo7n0")
 CheckButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 CheckButton/colors/font_pressed_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 CheckButton/constants/align_to_largest_stylebox = 2
+CheckButton/icons/checked = SubResource("DPITexture_puxc5")
+CheckButton/icons/unchecked = SubResource("DPITexture_bo7n0")
 CheckButton/styles/hover_pressed = ExtResource("2_sx7a4")
+CheckButtonAlt/base_type = &"CheckButton"
+CheckButtonAlt/colors/font_pressed_color = Color(1, 0.38819927, 0.840095, 1)
+CheckButtonAlt/constants/outline_size = 5
+CheckButtonAlt/styles/hover = SubResource("StyleBoxTexture_3kpra")
+CheckButtonAlt/styles/hover_pressed = SubResource("StyleBoxTexture_mlnkq")
+CheckButtonAlt/styles/normal = SubResource("StyleBoxTexture_khdhv")
+CheckButtonAlt/styles/pressed = SubResource("StyleBoxTexture_3kpra")
+CheckButtonMini/base_type = &"CheckButton"
+CheckButtonMini/styles/hover = SubResource("StyleBoxTexture_t44it")
+CheckButtonMini/styles/hover_pressed = SubResource("StyleBoxTexture_t44it")
+CheckButtonMini/styles/normal = SubResource("StyleBoxTexture_6m5w1")
+CheckButtonMini/styles/pressed = SubResource("StyleBoxTexture_6m5w1")
 DangerButton/base_type = &"Button"
 DangerButton/styles/hover = ExtResource("4_cpjrn")
 DangerButton/styles/normal = ExtResource("5_8yyid")

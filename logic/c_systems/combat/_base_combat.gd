@@ -130,7 +130,7 @@ func get_all_active_weapons() -> Array[BaseWeapon]:
 
 ## nullable
 func get_registered_weapon_by_id(weapon_id: String) -> BaseWeapon:
-	return u.safe_get_dict_key(_registered_weapons, weapon_id, null, WL.WARN_CRUCIAL)
+	return DictUtils.safe_get_dict_key(_registered_weapons, weapon_id, null, WL.WARN_CRUCIAL)
 
 
 ## non nullable
@@ -166,12 +166,22 @@ func apply_hit(hit_data: HitData) -> void:
 ## ATTACK WITH ACTIVE WEAPONS
 # region
 
-func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String) -> void:
+func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_global_speed_scale: float, char_state_name: String) -> void:
 	var weapon := _get_active_weapon_by_id(weapon_id)
 	if not weapon:
 		return
-	var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id)
+	var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id, anim_global_speed_scale, char_state_name)
 	weapon.set_hit_data(hit_data)
+	if is_player():
+		SigUtils.safe_emit_raw(
+			GlobalSignal.SIG_player_weapon_hit_data_set,
+			{GlobalSignal.payload_hit_data_field: hit_data}
+		)
+	else:
+		SigUtils.safe_emit_raw(
+			GlobalSignal.SIG_phe_weapon_hit_data_set,
+			{GlobalSignal.payload_hit_data_field: hit_data}
+		)
 	# __log_("set hit data to weapon", pp.in_q(weapon_id), hit_data)
 
 

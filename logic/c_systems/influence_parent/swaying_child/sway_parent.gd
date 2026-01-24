@@ -88,8 +88,8 @@ func _ready() -> void:
 		_setup_audio()
 
 # 		if vose3d:
-# 			u.safe_connect(vose3d.screen_entered, _on_sceen_entered)
-# 			u.safe_connect(vose3d.screen_exited, _on_sceen_exited)
+# 			SigUtils.safe_connect(vose3d.screen_entered, _on_sceen_entered)
+# 			SigUtils.safe_connect(vose3d.screen_exited, _on_sceen_exited)
 
 # func _on_sceen_entered():
 # 	__log_("visible_on_screen_enabler_3d", "screen entered")

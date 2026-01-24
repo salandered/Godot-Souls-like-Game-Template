@@ -52,7 +52,7 @@ func _ready() -> void:
 	GlobalSignal.player_max_stamina_increase.connect_(_on_player_increase_max_stamina)
 	# pl_feelings.SIG_cant_be_paid.connect(_animate_stamina_flash)
 
-	__perform_validation()
+	__perform_validation(true)
 
 	# get_tree().create_timer(1.0).timeout.connect(func():
 	# 	__log_("\n========= DEBUG BAR STATE =========")
@@ -100,8 +100,6 @@ func _setup_feeling_bars() -> void:
 
 
 func _process(delta: float) -> void:
-	if not __validation_ok():
-		return
 	_update_health_bar()
 	_update_stamina_bar(delta)
 

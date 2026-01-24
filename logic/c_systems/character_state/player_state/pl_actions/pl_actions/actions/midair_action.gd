@@ -17,7 +17,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	jump_direction = Vector3(get_player().basis.z) * clamp(pm().get_curr_velocity_len(), 1.0, Constants.BIG_MEANINGLESS_NUMBER)
 	jump_direction.y = 0
 
-	if player_sm.area_awareness.get_floor_distance() > 12.0 and PREV_ACTION in LOOP_LIKE_ACTIONS:
+	if pm().get_area_awareness().get_floor_distance() > 12.0 and PREV_ACTION in LOOP_LIKE_ACTIONS:
 		blend_time.set_specific(0.6)
 	else:
 		blend_time.reset_to_default()

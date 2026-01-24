@@ -16,7 +16,7 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 	var mute: bool = false
 	var unique_value := get_unique_from_payload(payload)
 
-	var _asp_config: ASP3DConfig = u.safe_get_dict_key(unique_asp_configs, unique_value, null, WL.SILENT)
+	var _asp_config: ASP3DConfig = DictUtils.safe_get_dict_key(unique_asp_configs, unique_value, null, WL.SILENT)
 	if not _asp_config:
 		mute = true
 	else:

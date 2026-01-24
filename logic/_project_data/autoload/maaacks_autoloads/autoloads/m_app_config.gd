@@ -5,6 +5,7 @@ extends Node
 
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color("#481317"))
 	M_GlobalState.open()
 	M_AppSettings.set_from_config_and_window(get_window())
 	_apply_release_constraints()

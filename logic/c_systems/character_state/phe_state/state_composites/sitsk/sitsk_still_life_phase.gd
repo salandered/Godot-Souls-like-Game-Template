@@ -2,11 +2,11 @@ extends BasePHEComposite
 
 
 func initialise() -> void:
-	u.safe_connect(PlayerStats.SIG_dodge_combo_achieved, _on_SIG_dodge_combo_achieved)
-	u.safe_connect(PlayerStats.SIG_power_combo_achieved, _on_SIG_power_combo_achieved)
-	u.safe_connect(PlayerStats.SIG_plush_launched, _on_SIG_plush_launched)
-	u.safe_connect(PlayerStats.SIG_sitting_skeleton_is_not_happy, _on_SIG_sitting_skeleton_is_not_happy)
-	u.safe_connect(PlayerStats.SIG_simple_target_super_rotate, _on_SIG_simple_target_super_rotate)
+	SigUtils.safe_connect(PlayerStats.SIG_dodge_combo_achieved, _on_SIG_dodge_combo_achieved)
+	SigUtils.safe_connect(PlayerStats.SIG_power_combo_achieved, _on_SIG_power_combo_achieved)
+	SigUtils.safe_connect(PlayerStats.SIG_plush_launched, _on_SIG_plush_launched)
+	SigUtils.safe_connect(PlayerStats.SIG_sitting_skeleton_is_not_happy, _on_SIG_sitting_skeleton_is_not_happy)
+	SigUtils.safe_connect(PlayerStats.SIG_simple_target_super_rotate, _on_SIG_simple_target_super_rotate)
 
 
 var interrupted_state: String = ""

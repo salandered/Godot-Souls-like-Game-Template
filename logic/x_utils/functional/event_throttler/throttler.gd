@@ -75,7 +75,7 @@ func _get_curr_time() -> float:
 # region
 
 func pp_name() -> String:
-	return pp.s(_pp_name, "Throttler") if _pp_name else u.construct_obj_pp_name(self)
+	return pp.s(_pp_name, "Throttler") if _pp_name else ObjUtils.construct_obj_pp_name(self)
 
 
 func __LOG_B() -> bool:

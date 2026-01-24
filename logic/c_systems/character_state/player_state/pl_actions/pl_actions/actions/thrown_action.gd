@@ -52,7 +52,7 @@ func initialise() -> void:
 
 func _locked_and_not_sprint() -> bool:
 	# todoL use actual angle between pl and enemy
-	if player_sm.area_awareness.is_camera_locked(): # and not PREV_ACTION == Leg.Act.sprint:
+	if pm().get_area_awareness().is_camera_locked(): # and not PREV_ACTION == Leg.Act.sprint:
 		return true
 	return false
 
@@ -129,7 +129,7 @@ func on_exit_action():
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
+	if pm().get_area_awareness().is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
 		pm().look_at_target(delta)
 	if before_marker(MarkerName.JUMP.LAND_START):
 		var current_speed := speed_x_interpolator.update(delta)

@@ -25,7 +25,7 @@ func update(input_: InputPackage, delta: float) -> void:
 	# __log_land()
 	if not is_landed:
 		pm().apply_gravity(delta)
-		if player_sm.area_awareness.is_almost_on_floor():
+		if pm().get_area_awareness().is_almost_on_floor():
 			is_landed = true
 
 	if tracks_input_vector():

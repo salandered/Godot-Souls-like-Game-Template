@@ -49,6 +49,10 @@ static func _get_descendants_filtered(
 
 # region: built in nodes
 
+static func buttons(node: Node) -> Array[Button]:
+	var r := _get_descendants_filtered(node, func(n): return n is Button)
+	return TypeCast.array_of_button(r)
+
 
 static func world_environments(node: Node) -> Array[WorldEnvironment]:
 	var r := _get_descendants_filtered(node, func(n): return n is WorldEnvironment)
@@ -130,6 +134,11 @@ static func audio_stream_players_3D(node: Node, skip_subscenes: bool = false) ->
 # region: custom nodes
 
 
+static func shake_buttons(node: Node) -> Array[ShakeButton]:
+	var r := _get_descendants_filtered(node, func(n): return n is ShakeButton)
+	return TypeCast.array_of_shake_button(r)
+
+
 static func break_static_parents(node: Node) -> Array:
 	var r := _get_descendants_filtered(node, func(n): return n is BreakStaticParent)
 	return r
@@ -165,6 +174,11 @@ static func look_at_managers(node: Node) -> Array[LookAtManager]:
 static func base_combats(node: Node) -> Array[BaseCombat]:
 	var r := _get_descendants_filtered(node, func(n): return n is BaseCombat)
 	return TypeCast.array_of_base_combat(r)
+
+static func base_area_awareness(node: Node) -> Array[BaseAreaAwareness]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseAreaAwareness)
+	return TypeCast.array_of_base_area_awareness(r)
+
 
 static func base_sfx_systems(node: Node) -> Array[BaseSFXSystem]:
 	var r := _get_descendants_filtered(node, func(n): return n is BaseSFXSystem)

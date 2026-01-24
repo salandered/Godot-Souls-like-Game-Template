@@ -15,6 +15,7 @@ class_name FirstTutorial
 @onready var _5_health_stamina_mechanic: MarginContainer = %"5HealthStaminaMechanic"
 @onready var _6_additional_movement_tips: MarginContainer = %"6AdditionalMovementTips"
 
+
 func _ready():
 	if _1_controls:
 		tutorial_ui.register_panel(1, _1_controls)
@@ -31,21 +32,22 @@ func _ready():
 	if legend:
 		legend.show()
 
-	disable_tutorial()
+	set_tutorial_enable(false)
 	
-func disable_tutorial():
-	tutorial_ui.hide_all()
-	first_tutorial_panel.visible = false
+
+func set_tutorial_enable(value: bool):
+	if value:
+		first_tutorial_panel.visible = true
+		legend.visible = true
+	else:
+		tutorial_ui.hide_all()
+		first_tutorial_panel.visible = false
 
 
-func enable_tutorial():
-	first_tutorial_panel.visible = true
-	legend.visible = true
+func is_visible() -> bool:
+	return first_tutorial_panel.visible
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_0:
-		if first_tutorial_panel.visible:
-			disable_tutorial()
-		else:
-			enable_tutorial()
+		set_tutorial_enable(not first_tutorial_panel.visible)

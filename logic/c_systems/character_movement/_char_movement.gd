@@ -12,6 +12,8 @@ extends NodeCharacterSystem
 
 
 var _character: BaseCharacter
+var _area_awareness: BaseAreaAwareness
+
 
 class AllowedAngle:
 	var value: float
@@ -22,12 +24,16 @@ class AllowedAngle:
 		self.cut = _cut
 
 
-func initialise(character: BaseCharacter):
+func initialise(character: BaseCharacter, area_awareness: BaseAreaAwareness):
 	self._character = character
+	self._area_awareness = area_awareness
 
 
 func get_character() -> BaseCharacter:
 	return _character
+
+func get_area_awareness() -> BaseAreaAwareness:
+	return _area_awareness
 
 
 ## GETTERS

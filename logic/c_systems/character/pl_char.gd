@@ -18,7 +18,6 @@ extends BaseCharacter
 
 # essential systems
 @onready var feelings: PlayerFeelings = %Feelings
-@onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
 @onready var smith_sword_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmithSwordAnimSFXSigEmitter
@@ -62,6 +61,10 @@ func get_pl_movement() -> PlayerMovement:
 	return casted
 
 
+func get_area_awareness() -> PlayerAreaAwareness:
+	var casted: PlayerAreaAwareness = super.get_area_awareness()
+	return casted
+
 func __hard_dependencies() -> Array[Object]:
 	return [
 		fancy_camera,
@@ -74,7 +77,7 @@ func __hard_dependencies() -> Array[Object]:
 		get_sig_container(),
 		get_combat(),
 		feelings,
-		area_awareness,
+		get_area_awareness(),
 		player_sm,
 		anim_container,
 		animator_manager,
@@ -83,7 +86,6 @@ func __hard_dependencies() -> Array[Object]:
 
 ## for Princess all the soft are kind of hard, but ok
 func __soft_dependencies() -> Array[Object]:
-	SIG_stamina_cant_be_paid.get_object_id()
 	return [
 		get_sfx_system(),
 		pl_anim_sfx_sig_emitter,
@@ -105,7 +107,12 @@ func initialise() -> void:
 
 	__dev_initialise()
 
+	if camera_focus:
+		camera_focus.visible = false
+
+	SigUtils.safe_connect(GlobalSignal.SIG_toggle_camera_visuals, _on_SIG_toggle_camera_visuals)
 	
+
 	if not __perform_validation():
 		__log_warn_soft("well game is not ready")
 		process_mode = PROCESS_MODE_DISABLED
@@ -287,17 +294,22 @@ func _get_curr_action_with_warn(caller_log: String = "", ) -> BaseAction:
 # endregion
 
 
-## temporary
 @onready var rig: RangerWrapper = %RIG
 @onready var fancy_hat: MeshInstance3D = %"fancy hat"
 
-
+## temporary
 func _on_secret_enemy_sig_death_raised() -> void:
 	if rig:
 		rig.super_mats()
 	if fancy_hat:
 		fancy_hat.visible = true
 
+
+func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	if _r.err: return
+	if camera_focus:
+		camera_focus.visible = _r.value
 
 # region: DEV
 
@@ -309,21 +321,21 @@ func _input(event: InputEvent) -> void:
 	# 	var hit := HitData.new(10, "from god", PHEA.attack.scare_off)
 	# 	get_combat()._last_processed_hit = hit
 	# 	self.react_on_hit(hit)
-	if Input.is_action_just_pressed(RawAction.DEV_J):
-		var hit := HitData.new(30, "from god", PHEA.attack.sword_slide)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-	if Input.is_action_just_pressed(RawAction.DEV_K):
-		var hit := HitData.new(10, "from god", PHEA.attack.attack_360_low)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-	if Input.is_action_just_pressed(RawAction.DEV_L):
-		var hit := HitData.new(30, "from god", PHEA.attack.power_gap_closer)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
+	# if Input.is_action_just_pressed(RawAction.DEV_J):
+	# 	var hit := HitData.new(30, "from god", PHEA.attack.sword_slide)
+	# 	get_combat()._last_processed_hit = hit
+	# 	self.react_on_hit(hit)
+	# if Input.is_action_just_pressed(RawAction.DEV_K):
+	# 	var hit := HitData.new(10, "from god", PHEA.attack.attack_360_low)
+	# 	get_combat()._last_processed_hit = hit
+	# 	self.react_on_hit(hit)
+	# if Input.is_action_just_pressed(RawAction.DEV_L):
+	# 	var hit := HitData.new(30, "from god", PHEA.attack.power_gap_closer)
+	# 	get_combat()._last_processed_hit = hit
+	# 	self.react_on_hit(hit)
 
-	if event.is_action_released(RawAction.t8):
-		visuals.visible = not visuals.visible
+	# if event.is_action_released(RawAction.t8):
+	# 	visuals.visible = not visuals.visible
 	
 	# if event.is_action_pressed(RawAction.DEV_8):
 	# 	animator_manager.set_overlay_anim(A.react.react_from_L,

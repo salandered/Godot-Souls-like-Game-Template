@@ -16,7 +16,7 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 	var mute: bool = false
 	var weapon_id := get_weapon_id_from_payload(payload)
 
-	var _asp_config: ASP3DConfig = u.safe_get_dict_key(weapon_id_to_asp_config, weapon_id, null, WL.WARN)
+	var _asp_config: ASP3DConfig = DictUtils.safe_get_dict_key(weapon_id_to_asp_config, weapon_id, null, WL.WARN)
 	if not _asp_config:
 		mute = true
 	else:

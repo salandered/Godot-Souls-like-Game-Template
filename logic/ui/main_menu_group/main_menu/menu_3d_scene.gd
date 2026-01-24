@@ -42,13 +42,11 @@ func initialise():
 	camera_3d.current = true
 	_sit_skeleton()
 
-	if __perform_validation():
+	if __perform_validation(true):
 		_start_camera_sway()
 
 
 func _process(delta: float) -> void:
-	if not __validation_ok():
-		return
 	_handle_parallax(delta)
 
 

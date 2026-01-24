@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsawmyldebwkf"]
+[gd_scene load_steps=17 format=3 uid="uid://dsawmyldebwkf"]
 
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_8s11q"]
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://logic/ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
@@ -6,6 +6,42 @@
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="3_l2gh6"]
 [ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/themes/panel/panel_back.tres" id="4_kheb5"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="4_w5m25"]
+[ext_resource type="Texture2D" uid="uid://l3mrt1t6jqos" path="res://-assets-/ui_assets/images/image_2026-01-04_00-25-05.png" id="7_dvwdi"]
+[ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://-assets-/ui_assets/themes/buttons/PauseMenuButton.tscn" id="7_fb021"]
+[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_u7r1d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2gh6"]
+bg_color = Color(0.055200003, 0.13220002, 0.24, 0.40784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.11, 0, 0.031166663, 0.49019608)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tu0ee"]
+texture = ExtResource("7_dvwdi")
+region_rect = Rect2(148.03558, 115.62555, 773.9644, 216.37445)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpag"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcsih"]
+bg_color = Color(0.6, 0.6, 0.6, 0.28235295)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiit0"]
+bg_color = Color(0.48841512, 0.66292787, 0.63705385, 0.23137255)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvwdi"]
+bg_color = Color(0.48980695, 0.54752064, 0.5110488, 0.23137255)
+
+[sub_resource type="DPITexture" id="DPITexture_hiit0"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\"><path fill=\"none\" stroke=\"#b2b2b2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".85\" stroke-width=\"2\" d=\"m2 4 4 4 4-4\"/></svg>
+"
+base_scale = 2.0
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3
@@ -32,53 +68,87 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.12549)
 
-[node name="MenuPanelContainer" type="PanelContainer" parent="."]
+[node name="ConfirmRestart" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
-process_mode = 3
+auto_translate_mode = 1
+oversampling_override = 1.0
+size = Vector2i(316, 152)
+borderless = true
+theme = ExtResource("1_8s11q")
+ok_button_text = "  OK  "
+dialog_text = "   Restart the game?  "
+cancel_button_text = "  Cancel  "
+
+[node name="ConfirmMainMenu" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+oversampling_override = 1.0
+size = Vector2i(316, 152)
+borderless = true
+ok_button_text = "  OK  "
+dialog_text = "   Go back to main menu?  "
+cancel_button_text = "  Cancel  "
+
+[node name="ConfirmExit" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+oversampling_override = 1.0
+size = Vector2i(316, 152)
+borderless = true
+ok_button_text = "  OK  "
+dialog_text = "  Quit?"
+cancel_button_text = "  Cancel  "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -159.0
-offset_top = -213.0
-offset_right = 161.0
-offset_bottom = 205.0
+offset_left = -176.0
+offset_top = -219.0
+offset_right = 176.0
+offset_bottom = 219.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MenuPanelContainer" type="PanelContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
 theme = ExtResource("1_8s11q")
 theme_override_styles/panel = ExtResource("4_kheb5")
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuPanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MenuPanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 16
 
-[node name="BoxContainer" type="BoxContainer" parent="MenuPanelContainer/MarginContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/MenuPanelContainer/MarginContainer"]
 layout_mode = 2
 vertical = true
 
-[node name="TitleMargin" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer"]
+[node name="TitleMargin" type="MarginContainer" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin"]
+[node name="TitleLabel" type="Label" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="HSeparator" parent="MenuPanelContainer/MarginContainer/BoxContainer" instance=ExtResource("4_w5m25")]
+[node name="HSeparator" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer" instance=ExtResource("4_w5m25")]
 layout_mode = 2
 
-[node name="DescriptionMargin" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer"]
+[node name="DescriptionMargin" type="MarginContainer" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin"]
 modulate = Color(0.5950413, 0.5950413, 0.5950413, 1)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
@@ -90,85 +160,209 @@ bbcode_enabled = true
 text = "[i]Settings are available in main menu[/i]"
 fit_content = true
 
-[node name="MenuButtonsMargin" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer"]
+[node name="MenuButtonsMargin" type="MarginContainer" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="MenuButtons" type="BoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin"]
+[node name="MenuButtons" type="BoxContainer" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 10
 alignment = 1
 vertical = true
 script = ExtResource("3_j5dnp")
 
-[node name="CloseButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
-custom_minimum_size = Vector2(160, 0)
+[node name="CloseButton" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Resume"
 
-[node name="RestartButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
-custom_minimum_size = Vector2(160, 0)
+[node name="RestartButton" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"
 
-[node name="OptionsButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
+[node name="ShowUIOverlayControls" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6315303, 0.87781894, 1, 1)
+theme_override_colors/font_focus_color = Color(0.6313726, 0.8784314, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = " UI Overlay Controls "
+enable_shine = true
+
+[node name="OptionsButton" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Options"
 
-[node name="MainMenuButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
+[node name="MainMenuButton" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Main Menu"
 
-[node name="ExitButton" type="Button" parent="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons"]
+[node name="ExitButton" parent="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-text = "Exit Game"
+text = "Exit"
 
-[node name="ConfirmRestart" type="ConfirmationDialog" parent="."]
+[node name="UIOverlayControls" type="PanelContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
-auto_translate_mode = 1
-oversampling_override = 1.0
-size = Vector2i(235, 100)
-borderless = true
-theme = ExtResource("1_8s11q")
-ok_button_text = "  OK  "
-dialog_text = "   Restart the game?  "
-cancel_button_text = "  Cancel  "
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_l2gh6")
 
-[node name="ConfirmMainMenu" type="ConfirmationDialog" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/UIOverlayControls"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/UIOverlayControls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TutorialToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-auto_translate_mode = 1
-oversampling_override = 1.0
-size = Vector2i(261, 100)
-borderless = true
-ok_button_text = "  OK  "
-dialog_text = "   Go back to main menu?  "
-cancel_button_text = "  Cancel  "
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_type_variation = &"CheckButtonAlt"
+theme_override_font_sizes/font_size = 30
+text = " Tutorial"
 
-[node name="ConfirmExit" type="ConfirmationDialog" parent="."]
+[node name="Label2" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/TutorialToggler"]
+modulate = Color(0.7240258, 0.7240258, 0.7240258, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -12.5
+offset_right = 69.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/italics_font_size = 24
+bbcode_enabled = true
+text = "[i](also 0 hotkey)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="panel" type="PanelContainer" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_tu0ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel"]
+layout_mode = 2
+
+[node name="DynamicStateInfoLabel" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel/HBoxContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "  Dynamic State Info  "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="DynamicStateInfoOption" type="OptionButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel/HBoxContainer"]
 unique_name_in_owner = true
-auto_translate_mode = 1
-oversampling_override = 1.0
-size = Vector2i(215, 102)
-borderless = true
-ok_button_text = "  OK  "
-dialog_text = "   Quit the game?  "
-cancel_button_text = "  Cancel  "
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xcsih")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hiit0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dvwdi")
+theme_override_icons/arrow = SubResource("DPITexture_hiit0")
+alignment = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Off "
+popup/item_0/id = 0
+popup/item_1/text = "Player "
+popup/item_1/id = 1
+popup/item_2/text = "Enemy "
+popup/item_2/id = 2
 
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="CameraNodesToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_type_variation = &"CheckButtonAlt"
+theme_override_font_sizes/font_size = 30
+text = " Camera Nodes 3D Visualizer"
+
+[node name="ProfilerToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_type_variation = &"CheckButtonAlt"
+theme_override_font_sizes/font_size = 30
+text = " Profiler"
+
+[node name="Label" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/ProfilerToggler"]
+modulate = Color(0.7240258, 0.7240258, 0.7240258, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -12.5
+offset_right = 69.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/italics_font_size = 24
+bbcode_enabled = true
+text = "[i](also F3 hotkey)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HSeparator" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer" instance=ExtResource("7_u7r1d")]
+layout_mode = 2
+
+[node name="ProfilerToggler2" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.66292787, 0.66292787, 0.66292787, 1)
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+bbcode_enabled = true
+text = "[i]Flying dev cam - leave the menu and press F9"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
 [connection signal="confirmed" from="ConfirmRestart" to="." method="_on_confirm_restart_confirmed"]
 [connection signal="confirmed" from="ConfirmMainMenu" to="." method="_on_confirm_main_menu_confirmed"]
 [connection signal="confirmed" from="ConfirmExit" to="." method="_on_confirm_exit_confirmed"]
+[connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/ShowUIOverlayControls" to="." method="_on_show_ui_overlay_controls_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="toggled" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/TutorialToggler" to="." method="_on_tutorial_toggler_toggled"]
+[connection signal="item_selected" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel/HBoxContainer/DynamicStateInfoOption" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/CameraNodesToggler" to="." method="_on_camera_nodes_toggler_toggled"]
+[connection signal="toggled" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/ProfilerToggler" to="." method="_on_profiler_toggler_toggled"]

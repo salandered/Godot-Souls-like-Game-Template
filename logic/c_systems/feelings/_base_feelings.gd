@@ -12,16 +12,16 @@ var __god_mode: bool = false
 var _current_health: float
 
 
-## DOCS: 
-##  WARNING don't use _ready in implementations, use initialise()
-##  
-
 func _ready() -> void:
 	if Engine.is_editor_hint():
+		process_mode = Node.PROCESS_MODE_DISABLED
 		return
+	else:
+		process_mode = Node.PROCESS_MODE_INHERIT
 	_current_health = get_max_health()
 	__log_("health", "curr health initted with max health", _current_health, get_max_health())
 	statuses = {}
+
 	initialise()
 
 
@@ -36,13 +36,6 @@ func add_health(amount: float):
 
 func lose_health(amount: float):
 	_change_health(-amount)
-
-
-## dev usage only
-func _set_specific_health(amount: float):
-	if not OS.is_debug_build():
-		return
-	_current_health = amount
 
 
 func is_zero_health() -> bool:
@@ -73,6 +66,12 @@ func check_status(status_name: String) -> bool:
 	else:
 		__log_error("no status in statuses", "check_status", "return false", pp.in_q(status_name), pp.in_q(statuses))
 		return false
+
+
+func __set_specific_health(amount: float):
+	if not OS.is_debug_build():
+		return
+	_current_health = amount
 
 
 func __LOG_INDENT() -> int:

@@ -4,11 +4,11 @@ var emitted_wave: bool = false
 
 func check_transition(input_: InputPackage) -> PLVerdict:
 	if curr_state_action.passed_marker(MarkerName.ALLOWS_SWITCH_TO_ATTACK):
-		if queued_state.is_set_to(PS.attack_from_dodge):
-			__log_psm_check("passed_marker ALLOWS_SWITCH_TO_ATTACK and 'attack_from_dodge' queued
+		if queued_state.is_set_to(PS.stab_attack_2):
+			__log_psm_check("passed_marker ALLOWS_SWITCH_TO_ATTACK and 'stab_attack_2' queued
 				 => switch to it right now (will override switches_to_queue()")
 			# or may be try set force state to make this less raw
-			return PLVerdict.new(PS.attack_from_dodge)
+			return PLVerdict.new(PS.stab_attack_2)
 	
 	if curr_state_action.passed_marker(MarkerName.TO_RUN):
 		# if not emitted_wave:

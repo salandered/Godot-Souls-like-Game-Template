@@ -2,16 +2,41 @@ extends RefCounted
 class_name print_
 
 
+## 🚧
+## NOTE: preset method is being replaced by ExtenderLogger method (via class extenders)
+## 🚧
+
+## PRESETS
+static var DEV_PRINT := PrintData.PrintInstance.new(LogToggler.DEV_B, "dev", 0, prefix)
+static var COMBO_PRINT := PrintData.PrintInstance.new(LogToggler.COMBO_B, "Combo xx", 0, fight)
+static var FIGHT_PRINT := PrintData.PrintInstance.new(LogToggler.FIGHT_B, "⚔️", 0, prefix)
+static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.E_CONTAINER_B, "Container", 0, prefix)
+# player
+static var ACTION_ANIM := PrintData.PrintInstance.new(LogToggler.ACTION_ANIM_B, "▷", 16, psm)
+static var PSM_ACTION := PrintData.PrintInstance.new(LogToggler.PSM_B, "Action", 2, psm)
+static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "transition ❔", 1, psm)
+static var PSM_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "PSM", 0, prefix)
+# player lsm
+static var LSM_BEH_CH := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "choose act ❔", 4, lsm_beh)
+static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "Behavior", 4, lsm)
+static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LogToggler.LSM_ACTION_B, "Strafe", 6, lsm_action)
+static var LSM_ACTION := PrintData.PrintInstance.new(LogToggler.LSM_ACTION_B, "Action", 6, lsm)
+static var LSM_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "LSM", 3, prefix)
+#
+static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(LogToggler.input_gathering_B, "Input", 0, prefix)
+static var PHE_ANIM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_ANIM_B, "▷ anim", 16, phe_sm)
+static var PHE_CHECK_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_CHECK_B, "transition ❔", 0, phe_sm)
+static var PHE_SM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_B, "🗿", 1, prefix)
+
+
 ## COMMON
 
-static var DEV_PRINT := PrintData.PrintInstance.new(LogToggler.DEV_B, "dev", 0, prefix)
 
-static func dev(add_prefix_: String, text: Variant = "", info_indents: int = 0):
-	_generic(DEV_PRINT, add_prefix_, text, info_indents)
+static func dev(add_prefix_: String, text: Variant = ""):
+	_generic(DEV_PRINT, add_prefix_, text)
+
 
 # region: CONTAINER
-
-static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.E_CONTAINER_B, "Container", 0, prefix)
 
 
 static func e_container(add_prefix_: String, text: String, info_indents: int = 0):
@@ -21,9 +46,6 @@ static func e_container(add_prefix_: String, text: String, info_indents: int = 0
 # endregion
 
 # region: FIGHT logs
-
-static var COMBO_PRINT := PrintData.PrintInstance.new(LogToggler.COMBO_B, "Combo xx", 0, fight)
-static var FIGHT_PRINT := PrintData.PrintInstance.new(LogToggler.FIGHT_B, "⚔️", 0, prefix)
 
 
 static func combo(add_prefix_: String, text: String, info_indents: int = 0):
@@ -37,10 +59,6 @@ static func fight(add_prefix_: String, text: String, info_indents: int = 0):
 
 # region: PLAYER PSM
 
-static var ACTION_ANIM := PrintData.PrintInstance.new(LogToggler.ACTION_ANIM_B, "▷", 16, psm)
-static var PSM_ACTION := PrintData.PrintInstance.new(LogToggler.PSM_B, "Action", 2, psm)
-static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "transition ❔", 1, psm)
-static var PSM_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "PSM", 0, prefix)
 
 static func any_action_anim(
 	add_prefix_: String, anim_name: String,
@@ -68,11 +86,6 @@ static func psm(add_prefix_: String, text: String, info_indents: int = 0):
 
 # region: PLAYER LSM
 
-static var LSM_BEH_CH := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "choose act ❔", 4, lsm_beh)
-static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "Behavior", 4, lsm)
-static var LSM_ACTION_STRAFE := PrintData.PrintInstance.new(LogToggler.LSM_ACTION_B, "Strafe", 6, lsm_action)
-static var LSM_ACTION := PrintData.PrintInstance.new(LogToggler.LSM_ACTION_B, "Action", 6, lsm)
-static var LSM_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "LSM", 3, prefix)
 
 static func lsm_beh_ch(add_prefix_: String, motion_type: String,
 	is_moving, is_reverse_moving, is_pure_reverse_moving, text, decision,
@@ -108,7 +121,6 @@ static func lsm(add_prefix_: String, text: String, info_indents: int = 0):
 
 # region: PLAYER SYSTEMS
 
-static var INPUT_GATHERING_PRINT := PrintData.PrintInstance.new(LogToggler.input_gathering_B, "Input", 0, prefix)
 
 static func input_gathering(add_prefix_: String, text: String, info_indents: int = 0):
 	_generic(INPUT_GATHERING_PRINT, add_prefix_, text, info_indents)
@@ -117,10 +129,6 @@ static func input_gathering(add_prefix_: String, text: String, info_indents: int
 # endregion
 
 # region: ENEMY logs
-
-static var PHE_ANIM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_ANIM_B, "▷ anim", 16, phe_sm)
-static var PHE_CHECK_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_CHECK_B, "transition ❔", 0, phe_sm)
-static var PHE_SM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_B, "🗿", 1, prefix)
 
 
 static func phe_anim(add_prefix_: String, anim_name: String,
@@ -167,7 +175,7 @@ static func _generic(
 		print_data: PrintData.PrintInstance,
 		add_prefix_: String,
 		text: Variant,
-		info_indents: int,
+		info_indents: int = 0,
 		freq: int = 1
 	) -> void:
 	if print_data == null or print_data.print_bool == null:
@@ -194,12 +202,17 @@ static func note(bright: bool, ...parts: Array):
 	print("\t", _msg)
 
 
+# legacy
 static func prefix(prefix_: String, text: String = "", info_indents: int = 0):
-	log.prefix(false, prefix_, text, info_indents)
+	_log.prefix(false, prefix_, text, info_indents)
 
-
+# legacy
 static func prefix_s(...parts: Array):
-	log.prefix_s(false, pp.list_(parts))
+	_log.prefix_s(false, pp.list_(parts))
+
+
+static func console(...parts: Array):
+	prefix_s(pp.s(">>", em.console), pp.list_(parts))
 
 
 class ParsedPrefix:

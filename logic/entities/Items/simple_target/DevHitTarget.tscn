@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://c421xpr4qgnv8"]
+
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Items/simple_target/SimpleTarget.tscn" id="1_ijfwd"]
+[ext_resource type="Script" uid="uid://3bt2i5p64jqu" path="res://logic/entities/Items/simple_target/dev_hit_target.gd" id="2_njjy5"]
+[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="3_x0h45"]
+[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="4_7ijvu"]
+[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="5_ftfvr"]
+[ext_resource type="Texture2D" uid="uid://dhg5fx7g7xn6i" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Base Color.jpg" id="6_3opq4"]
+[ext_resource type="Texture2D" uid="uid://cbvppwracogs7" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Normal.jpg" id="7_a7mf4"]
+[ext_resource type="Texture2D" uid="uid://fbuekhrl3hcj" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Roughness.png" id="8_nwca0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ol3mo"]
+resource_name = "I_Metal048C_2K-JPG"
+cull_mode = 2
+albedo_color = Color(0.4872732, 0.37647063, 0.6431373, 1)
+albedo_texture = ExtResource("3_x0h45")
+metallic = 1.0
+metallic_texture = ExtResource("4_7ijvu")
+metallic_texture_channel = 2
+roughness = 0.88
+roughness_texture = ExtResource("4_7ijvu")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 7.13
+normal_texture = ExtResource("5_ftfvr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h16cj"]
+resource_name = "UA water-rocks"
+cull_mode = 2
+albedo_color = Color(0.76791626, 0.8122784, 0.7587086, 1)
+albedo_texture = ExtResource("6_3opq4")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("8_nwca0")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("7_a7mf4")
+uv1_triplanar = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ijfwd"]
+radius = 0.8
+
+[node name="DevHitTarget" instance=ExtResource("1_ijfwd")]
+script = ExtResource("2_njjy5")
+
+[node name="CameraTarget" parent="." index="0"]
+visible = false
+
+[node name="RotatingTarget" parent="Visuals" index="0"]
+material_override = SubResource("StandardMaterial3D_ol3mo")
+
+[node name="CSGBakedMeshInstance3D2" parent="Visuals/StolbStatic" index="1"]
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Visuals/StolbStatic" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89172566, 0)
+material_override = SubResource("StandardMaterial3D_h16cj")
+radius = 0.15
+height = 1.8
+sides = 6
+smooth_faces = false
+
+[node name="HitArea" parent="." index="2"]
+area_capsule_radius = 0.8
+
+[node name="CollisionShape3D" parent="HitArea" index="0"]
+shape = SubResource("CapsuleShape3D_ijfwd")
+
+[node name="VisibleOnScreenEnabler3D" parent="HitArea" index="1"]
+aabb = AABB(-1.7409418, -1.0006098, -1.5619044, 3.4818835, 2.0012195, 3.1238089)
+
+[node name="TextMarker" type="Marker3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4991872, -1.08298)

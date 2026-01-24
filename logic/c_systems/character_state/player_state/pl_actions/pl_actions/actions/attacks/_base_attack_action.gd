@@ -56,7 +56,13 @@ func get_active_weapon_id() -> String:
 # region
 
 func _combat_set_hit_data():
-	player_sm.combat.set_hit_data(get_active_weapon_id(), get_hit_damage(), anim.anim_id)
+	player_sm.combat.set_hit_data(
+		get_active_weapon_id(),
+		get_hit_damage(),
+		anim.anim_id,
+		get_global_speed_scale(),
+		state_name
+	)
 
 func _combat_update_is_attacking(__log: bool = false):
 	var _weapon_id := get_active_weapon_id()
@@ -74,7 +80,7 @@ func on_enter_action(input_: InputPackage):
 	_combat_set_hit_data()
 	get_animator_manager().set_global_speed_scale(get_global_speed_scale())
 
-	if player_sm.area_awareness.is_camera_locked():
+	if pm().get_area_awareness().is_camera_locked():
 		default_sp.ANGULAR_SPEED = 2
 	else:
 		default_sp.ANGULAR_SPEED = 4
@@ -109,9 +115,9 @@ func on_exit_action_implementation():
 
 
 func update(input_: InputPackage, delta: float):
-	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
+	if tracks_input_vector() and not pm().get_area_awareness().is_camera_locked():
 		pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))
-	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
+	if pm().get_area_awareness().is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
 		pm().look_at_target(delta)
 	
 	var fade_factor := fade_interpolator.update(delta)

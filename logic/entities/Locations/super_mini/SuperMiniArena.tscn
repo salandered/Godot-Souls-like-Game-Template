@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://dmkxcwge6jddy"]
+[gd_scene load_steps=72 format=4 uid="uid://dmkxcwge6jddy"]
 
 [ext_resource type="Script" uid="uid://b0skg43os71r" path="res://logic/c_systems/level/super_mini_arena.gd" id="1_im38e"]
 [ext_resource type="Texture2D" uid="uid://fpblynq7d0vp" path="res://-assets-/materials-shared/x_hdri/Panorama_Mars_02-2048x1024.png" id="2_chotk"]
@@ -20,8 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://br1lrshc0roe4" path="res://-assets-/GLB-level/demo-level_/columns/shattered/ShatteredColumn.tscn" id="17_8ckdw"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="18_a2pl4"]
 [ext_resource type="PackedScene" uid="uid://c7vyqnm6vpnbx" path="res://logic/c_systems/influence_parent/break_static_parent/BreakStaticParent.tscn" id="18_ilsrh"]
+[ext_resource type="PackedScene" uid="uid://c421xpr4qgnv8" path="res://logic/entities/Items/simple_target/DevHitTarget.tscn" id="18_jio1o"]
 [ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Items/crate/DarkCratePile.tscn" id="20_mb4ba"]
 [ext_resource type="PackedScene" uid="uid://b1htm7ggp351s" path="res://logic/entities/Items/crate/DarkCrateColumn.tscn" id="21_5slx0"]
+[ext_resource type="PackedScene" uid="uid://c16xwncxk3dlc" path="res://-assets-/GLB-level/demo-level_/columns/shattered/ShatteredColumnMini.tscn" id="22_btncm"]
 [ext_resource type="PackedScene" uid="uid://d1glwn1vbeqan" path="res://logic/entities/Items/crate/DarkCrateBigPile.tscn" id="22_j1hty"]
 [ext_resource type="PackedScene" uid="uid://btblvq8d2edyr" path="res://logic/entities/Items/crate/dark_crate/dark_crate.tscn" id="23_5rawr"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="24_4hdk1"]
@@ -169,7 +171,7 @@ normal_texture = ExtResource("9_ltlhp")
 uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_prisi"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_btncm"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8frg4"]
 data = PackedVector3Array(1.1393077, -2.4890525, 2.2488225, 0.2664328, -2.06216, 1.4582741, 1.2233143, -2.1757061, 1.1174831, 1.1311368, -0.15411347, 0.73354924, 0.19813485, -0.75667244, 1.1310966, 0.21445367, 0.70352244, 1.155564, 1.2056141, 2.0251627, 1.0481377, 1.0827985, 2.847358, 1.9844388, 1.7857345, 2.847685, 0.8721219, 1.1311368, -0.15411347, 0.73354924, 1.2056141, 2.0251627, 1.0481377, 1.4086822, 1.8669823, -0.039519913, 1.2205505, -2.1202743, -1.1948137, 1.0287303, -2.4888299, -2.3628378, 1.8057138, -2.4888058, -1.2542554, 0.47971725, 0.63909584, -1.1034899, -0.19116211, 0.64669603, -1.112776, 0.10564121, -0.7778669, -1.209385, -0.9524789, -2.0212693, 1.1037726, -1.5341159, -2.4879186, 2.199994, -1.6062894, -2.4889753, -0.006687706, -1.201103, 2.2584753, 0.8978034, -0.8802767, 0.7827693, 0.7651224, -1.0840579, 1.3332013, -0.040807985, -0.8245376, 2.844537, 1.9232953, -0.74401736, 2.0355494, 1.3319839, -1.201103, 2.2584753, 0.8978034, -1.201103, 2.2584753, 0.8978034, -1.0840579, 1.3332013, -0.040807985, -1.4348187, 2.4358997, -0.44374347, -0.74401736, 2.0355494, 1.3319839, -0.8802767, 0.7827693, 0.7651224, -1.201103, 2.2584753, 0.8978034, 0.21445367, 0.70352244, 1.155564, -0.8802767, 0.7827693, 0.7651224, -0.74401736, 2.0355494, 1.3319839, 0.10564121, -0.7778669, -1.209385, -0.19116211, 0.64669603, -1.112776, -0.82461244, 0.033075158, -0.75432676, 1.4342502, -2.015339, -0.06936446, 1.4086822, 1.8669823, -0.039519913, 1.0993793, -0.43521056, -0.8179538, -1.0840579, 1.3332013, -0.040807985, -0.8900099, 1.9609883, -1.0054011, -1.4348187, 2.4358997, -0.44374347, -0.82461244, 0.033075158, -0.75432676, -0.8900099, 1.9609883, -1.0054011, -1.0840579, 1.3332013, -0.040807985, 1.4342502, -2.015339, -0.06936446, 1.2233143, -2.1757061, 1.1174831, 1.1311368, -0.15411347, 0.73354924, -1.0667417, 2.8454123, -1.6804545, -1.4348187, 2.4358997, -0.44374347, -0.8900099, 1.9609883, -1.0054011, 0.06644958, 2.1702065, -1.5065535, -1.0667417, 2.8454123, -1.6804545, -0.8900099, 1.9609883, -1.0054011, -1.0667417, 2.8454123, -1.6804545, -0.25738198, 2.8470693, -1.9604673, 1.7053628, 2.8473084, -0.82834905, 1.7053628, 2.8473084, -0.82834905, -0.25738198, 2.8470693, -1.9604673, 1.312329, 2.847974, -1.7735176, -1.6746826, 2.847333, 1.0410234, -1.0667417, 2.8454123, -1.6804545, 1.7053628, 2.8473084, -0.82834905, -0.8245376, 2.844537, 1.9232953, -1.6746826, 2.847333, 1.0410234, 1.0827985, 2.847358, 1.9844388, -0.9377675, -2.0439727, -1.1940422, -1.6062894, -2.4889753, -0.006687706, -1.503044, -2.4827032, -2.2367, -1.503044, -2.4827032, -2.2367, -1.6062894, -2.4889753, -0.006687706, 1.8057138, -2.4888058, -1.2542554, 1.0287303, -2.4888299, -2.3628378, -1.503044, -2.4827032, -2.2367, 1.8057138, -2.4888058, -1.2542554, -1.5341159, -2.4879186, 2.199994, 1.826325, -2.4885368, 1.0349357, -1.6062894, -2.4889753, -0.006687706, 1.4342502, -2.015339, -0.06936446, 1.826325, -2.4885368, 1.0349357, 1.2233143, -2.1757061, 1.1174831, 0.2664328, -2.06216, 1.4582741, 1.1393077, -2.4890525, 2.2488225, -1.5341159, -2.4879186, 2.199994, 1.4342502, -2.015339, -0.06936446, 1.1311368, -0.15411347, 0.73354924, 1.4086822, 1.8669823, -0.039519913, 1.2056141, 2.0251627, 1.0481377, 1.7857345, 2.847685, 0.8721219, 1.4086822, 1.8669823, -0.039519913, 0.5003786, 1.9259154, 1.4056768, 1.1311368, -0.15411347, 0.73354924, 0.21445367, 0.70352244, 1.155564, 0.5003786, 1.9259154, 1.4056768, 1.2056141, 2.0251627, 1.0481377, 1.1311368, -0.15411347, 0.73354924, 0.5003786, 1.9259154, 1.4056768, 0.21445367, 0.70352244, 1.155564, -0.74401736, 2.0355494, 1.3319839, 0.47971725, 0.63909584, -1.1034899, 1.1895409, 2.0802805, -1.0235589, 0.06644958, 2.1702065, -1.5065535, 0.47971725, 0.63909584, -1.1034899, 1.0993793, -0.43521056, -0.8179538, 1.1895409, 2.0802805, -1.0235589, 1.2056141, 2.0251627, 1.0481377, 0.5003786, 1.9259154, 1.4056768, 1.0827985, 2.847358, 1.9844388, 0.21216135, -1.936057, -1.5720006, 1.0287303, -2.4888299, -2.3628378, 1.2205505, -2.1202743, -1.1948137, 1.312329, 2.847974, -1.7735176, -0.25738198, 2.8470693, -1.9604673, 0.06644958, 2.1702065, -1.5065535, 1.0993793, -0.43521056, -0.8179538, 0.47971725, 0.63909584, -1.1034899, 0.10564121, -0.7778669, -1.209385, 1.1895409, 2.0802805, -1.0235589, 1.312329, 2.847974, -1.7735176, 0.06644958, 2.1702065, -1.5065535, 0.47971725, 0.63909584, -1.1034899, 0.06644958, 2.1702065, -1.5065535, -0.19116211, 0.64669603, -1.112776, -1.4348187, 2.4358997, -0.44374347, -1.6746826, 2.847333, 1.0410234, -1.201103, 2.2584753, 0.8978034, -1.4348187, 2.4358997, -0.44374347, -1.7130096, 2.845521, -0.896159, -1.6746826, 2.847333, 1.0410234, -0.9524789, -2.0212693, 1.1037726, -1.6062894, -2.4889753, -0.006687706, -1.2116985, -1.7076079, 0.03632593, -0.87889576, -0.80987996, 0.80109835, -1.0840579, 1.3332013, -0.040807985, -0.8802767, 0.7827693, 0.7651224, -0.87889576, -0.80987996, 0.80109835, 0.21445367, 0.70352244, 1.155564, 0.19813485, -0.75667244, 1.1310966, -0.87889576, -0.80987996, 0.80109835, -0.8802767, 0.7827693, 0.7651224, 0.21445367, 0.70352244, 1.155564, -1.201103, 2.2584753, 0.8978034, -1.6746826, 2.847333, 1.0410234, -0.8245376, 2.844537, 1.9232953, -0.9524789, -2.0212693, 1.1037726, 0.2664328, -2.06216, 1.4582741, -1.5341159, -2.4879186, 2.199994, -1.503044, -2.4827032, -2.2367, 0.21216135, -1.936057, -1.5720006, -0.9377675, -2.0439727, -1.1940422, -1.503044, -2.4827032, -2.2367, 1.0287303, -2.4888299, -2.3628378, 0.21216135, -1.936057, -1.5720006, -0.8900099, 1.9609883, -1.0054011, -0.19116211, 0.64669603, -1.112776, 0.06644958, 2.1702065, -1.5065535, -0.8900099, 1.9609883, -1.0054011, -0.82461244, 0.033075158, -0.75432676, -0.19116211, 0.64669603, -1.112776, 0.06644958, 2.1702065, -1.5065535, -0.25738198, 2.8470693, -1.9604673, -1.0667417, 2.8454123, -1.6804545, 1.4342502, -2.015339, -0.06936446, 1.8057138, -2.4888058, -1.2542554, 1.826325, -2.4885368, 1.0349357, 1.4342502, -2.015339, -0.06936446, 1.2205505, -2.1202743, -1.1948137, 1.8057138, -2.4888058, -1.2542554, 1.4086822, 1.8669823, -0.039519913, 1.7053628, 2.8473084, -0.82834905, 1.1895409, 2.0802805, -1.0235589, 1.4086822, 1.8669823, -0.039519913, 1.7857345, 2.847685, 0.8721219, 1.7053628, 2.8473084, -0.82834905, -0.8245376, 2.844537, 1.9232953, 0.5003786, 1.9259154, 1.4056768, -0.74401736, 2.0355494, 1.3319839, -0.8245376, 2.844537, 1.9232953, 1.0827985, 2.847358, 1.9844388, 0.5003786, 1.9259154, 1.4056768, -1.2116985, -1.7076079, 0.03632593, -1.6062894, -2.4889753, -0.006687706, -0.9377675, -2.0439727, -1.1940422, 0.2664328, -2.06216, 1.4582741, 1.1311368, -0.15411347, 0.73354924, 1.2233143, -2.1757061, 1.1174831, 0.2664328, -2.06216, 1.4582741, 0.19813485, -0.75667244, 1.1310966, 1.1311368, -0.15411347, 0.73354924, 1.0993793, -0.43521056, -0.8179538, 1.4086822, 1.8669823, -0.039519913, 1.1895409, 2.0802805, -1.0235589, 0.21216135, -1.936057, -1.5720006, 1.0993793, -0.43521056, -0.8179538, 0.10564121, -0.7778669, -1.209385, 0.21216135, -1.936057, -1.5720006, 1.2205505, -2.1202743, -1.1948137, 1.0993793, -0.43521056, -0.8179538, -0.87889576, -0.80987996, 0.80109835, -1.2116985, -1.7076079, 0.03632593, -1.0840579, 1.3332013, -0.040807985, -0.87889576, -0.80987996, 0.80109835, -0.9524789, -2.0212693, 1.1037726, -1.2116985, -1.7076079, 0.03632593, -0.82461244, 0.033075158, -0.75432676, -1.2116985, -1.7076079, 0.03632593, -0.9377675, -2.0439727, -1.1940422, -0.82461244, 0.033075158, -0.75432676, -1.0840579, 1.3332013, -0.040807985, -1.2116985, -1.7076079, 0.03632593, 1.4342502, -2.015339, -0.06936446, 1.0993793, -0.43521056, -0.8179538, 1.2205505, -2.1202743, -1.1948137, -0.9524789, -2.0212693, 1.1037726, 0.19813485, -0.75667244, 1.1310966, 0.2664328, -2.06216, 1.4582741, -0.9524789, -2.0212693, 1.1037726, -0.87889576, -0.80987996, 0.80109835, 0.19813485, -0.75667244, 1.1310966, -0.9377675, -2.0439727, -1.1940422, 0.10564121, -0.7778669, -1.209385, -0.82461244, 0.033075158, -0.75432676, -0.9377675, -2.0439727, -1.1940422, 0.21216135, -1.936057, -1.5720006, 0.10564121, -0.7778669, -1.209385, 1.1895409, 2.0802805, -1.0235589, 1.7053628, 2.8473084, -0.82834905, 1.312329, 2.847974, -1.7735176, -1.4348187, 2.4358997, -0.44374347, -1.0667417, 2.8454123, -1.6804545, -1.7130096, 2.845521, -0.896159, 1.2233143, -2.1757061, 1.1174831, 1.826325, -2.4885368, 1.0349357, 1.1393077, -2.4890525, 2.2488225, 1.1393077, -2.4890525, 2.2488225, 1.826325, -2.4885368, 1.0349357, -1.5341159, -2.4879186, 2.199994, -1.6746826, 2.847333, 1.0410234, -1.7130096, 2.845521, -0.896159, -1.0667417, 2.8454123, -1.6804545, 1.7053628, 2.8473084, -0.82834905, 1.7857345, 2.847685, 0.8721219, 1.0827985, 2.847358, 1.9844388, 1.7053628, 2.8473084, -0.82834905, 1.0827985, 2.847358, 1.9844388, -1.6746826, 2.847333, 1.0410234, 1.826325, -2.4885368, 1.0349357, 1.8057138, -2.4888058, -1.2542554, -1.6062894, -2.4889753, -0.006687706)
@@ -508,7 +510,7 @@ delete_mesh_instance = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.781342, -9.265577, -7.8624325)
 
 [node name="CollisionShape3D" parent="FloorWalls/SecretLevel/WoodenFloorBaked2/CSGBakedMeshInstance3D/CreateRigidParent/MonitorPlEnterSigArea" index="0"]
-shape = SubResource("CapsuleShape3D_prisi")
+shape = SubResource("CapsuleShape3D_btncm")
 
 [node name="SecretEnemy" parent="FloorWalls/SecretLevel" node_paths=PackedStringArray("player") instance=ExtResource("11_dljkj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.984698, 0)
@@ -557,6 +559,9 @@ transform = Transform3D(0.10798739, 0, 1.1951313, 0, 1.2000002, 0, -1.1951313, 0
 
 [node name="targets" type="Node3D" parent="Props"]
 
+[node name="DevHitTarget" parent="Props/targets" instance=ExtResource("18_jio1o")]
+transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.42274475, 16.03035, 0.05664724, 16.895508)
+
 [node name="Target" parent="Props/targets" instance=ExtResource("15_vhgou")]
 transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.42274475, 5.878498, 0.15576601, 19.896137)
 
@@ -564,7 +569,7 @@ transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.4227
 transform = Transform3D(-0.8328634, 0, -0.5534787, 0, 1, 0, 0.5534787, 0, -0.8328634, -10.238488, 0.1265161, 19.983622)
 
 [node name="Target2" parent="Props/targets" instance=ExtResource("15_vhgou")]
-transform = Transform3D(-0.16971064, 0, -0.9854939, 0, 1, 0, 0.9854939, 0, -0.16971064, 16.741852, 0.21691298, 8.755618)
+transform = Transform3D(-0.16971064, 0, -0.9854939, 0, 1, 0, 0.9854939, 0, -0.16971064, 16.741852, 0.21691298, 6.807288)
 
 [node name="JustColumns" type="Node3D" parent="Props"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.53088, -1.703414, -51.601074)
@@ -585,14 +590,14 @@ skeleton = NodePath("")
 
 [node name="BreakStaticParent" parent="Props/JustColumns/columns/column" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14511967, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column/BreakStaticParent" index="0"]
 area_capsule_radius = 1.34
 area_capsule_height = 6.0
 
 [node name="column2" type="StaticBody3D" parent="Props/JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.36395, 4.1409965, 41.75658)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.36395, 3.459681, 41.75658)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column2"]
 shape = SubResource("ConcavePolygonShape3D_8frg4")
@@ -612,7 +617,7 @@ area_capsule_radius = 1.34
 area_capsule_height = 6.0
 
 [node name="column3" type="StaticBody3D" parent="Props/JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.257252, 4.1409965, 40.98798)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.257252, 3.5720181, 40.98798)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column3"]
 shape = SubResource("ConcavePolygonShape3D_8frg4")
@@ -646,7 +651,7 @@ skeleton = NodePath("")
 
 [node name="BreakStaticParent8" parent="Props/JustColumns/columns/column_004" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15736926, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_004/BreakStaticParent8" index="0"]
 area_capsule_radius = 1.34
@@ -667,7 +672,7 @@ skeleton = NodePath("")
 
 [node name="BreakStaticParent6" parent="Props/JustColumns/columns/column_012" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13575268, 0, 0.018021584)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_012/BreakStaticParent6" index="0"]
 area_capsule_radius = 1.34
@@ -707,7 +712,7 @@ skeleton = NodePath("")
 
 [node name="BreakStaticParent5" parent="Props/JustColumns/columns/column_003" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11626744, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_003/BreakStaticParent5" index="0"]
 area_capsule_radius = 1.34
@@ -717,24 +722,25 @@ area_capsule_height = 6.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.435272, 4.0548925, 65.163376)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_010"]
+transform = Transform3D(0.805, 0, 0, 0, 0.805, 0, 0, 0, 0.805, 0, -0.37661958, 0)
 shape = SubResource("ConcavePolygonShape3D_7esj5")
 
 [node name="column_003" type="MeshInstance3D" parent="Props/JustColumns/columns/column_010"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3255124, 0)
+transform = Transform3D(0.805, 0, 0, 0, 0.805, 0, 0, 0, 0.805, 0, -0.1145823, 0)
 gi_mode = 2
 mesh = SubResource("ArrayMesh_bmf1p")
 skeleton = NodePath("")
 
 [node name="BreakStaticParent6" parent="Props/JustColumns/columns/column_010" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102752686, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_010/BreakStaticParent6" index="0"]
 area_capsule_radius = 1.34
 area_capsule_height = 6.0
 
 [node name="column_011" type="StaticBody3D" parent="Props/JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.716076, 4.0548925, 64.70333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.716076, 4.0548925, 62.755)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_011"]
 shape = SubResource("ConcavePolygonShape3D_7esj5")
@@ -754,7 +760,7 @@ area_capsule_radius = 1.34
 area_capsule_height = 6.0
 
 [node name="column_005" type="StaticBody3D" parent="Props/JustColumns/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.536251, 4.054894, 64.21397)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.536251, 4.054894, 62.265636)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/JustColumns/columns/column_005"]
 shape = SubResource("ConcavePolygonShape3D_pu2kj")
@@ -767,7 +773,7 @@ skeleton = NodePath("")
 
 [node name="BreakStaticParent6" parent="Props/JustColumns/columns/column_005" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10677242, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_005/BreakStaticParent6" index="0"]
 area_capsule_radius = 1.34
@@ -807,7 +813,7 @@ skeleton = NodePath("")
 
 [node name="BreakStaticParent8" parent="Props/JustColumns/columns/column_009" instance=ExtResource("18_ilsrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13361931, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
+shattered_column_scene = ExtResource("22_btncm")
 
 [node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_009/BreakStaticParent8" index="0"]
 area_capsule_radius = 1.34
@@ -845,18 +851,13 @@ gi_mode = 2
 mesh = SubResource("ArrayMesh_wacwu")
 skeleton = NodePath("")
 
-[node name="BreakStaticParent5" parent="Props/JustColumns/columns/column_008" instance=ExtResource("18_ilsrh")]
-transform = Transform3D(0.5333145, 0, 0, 0, 0.5333145, 0, 0, 0, 0.5333145, 0, 0, 0)
-shattered_column_scene = ExtResource("17_8ckdw")
-
-[node name="BreakableColumnArea" parent="Props/JustColumns/columns/column_008/BreakStaticParent5" index="0"]
-area_capsule_radius = 1.34
-area_capsule_height = 6.0
-
 [node name="CrateProps" type="Node3D" parent="Props"]
 
 [node name="DarkCratePile3" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
 transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, -16.221338, 0.17873092, 0)
+
+[node name="DarkCratePile6" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
+transform = Transform3D(-0.78893405, 0, 0.61447805, 0, 1, 0, -0.61447805, 0, -0.78893405, -9.073014, 0.17873092, -5.113126)
 
 [node name="DarkCratePile4" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
 transform = Transform3D(-0.3614781, 0, 0.9323807, 0, 1, 0, -0.9323807, 0, -0.3614781, 6.339593, 0.30274826, -4.110747)
@@ -868,19 +869,13 @@ transform = Transform3D(0.752369, 0, 0.658742, 0, 1, 0, -0.658742, 0, 0.752369, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.909291, 0.31437767, -14.589818)
 
 [node name="DarkCrateBigPile" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5247266, 0.2899922, 5.9834566)
+transform = Transform3D(0.4718431, 0, -0.8816825, 0, 1, 0, 0.8816825, 0, 0.4718431, -3.5247266, 0.2899922, 5.9834566)
 
 [node name="DarkCrateBigPile3" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
 transform = Transform3D(-0.40378484, 0, -0.914854, 0, 1, 0, 0.914854, 0, -0.40378484, 7.7452984, 0.2899922, 2.458075)
 
 [node name="DarkCrateBigPile4" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
 transform = Transform3D(-0.40378484, 0, -0.914854, 0, 1, 0, 0.914854, 0, -0.40378484, -2.145647, 0.2899922, -5.231207)
-
-[node name="DarkCrateBigPile2" parent="Props/CrateProps" instance=ExtResource("22_j1hty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.435251, 0.1734268, -5.1467543)
-
-[node name="DarkCrateColumn4" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5731354, 0.31437767, 16.722336)
 
 [node name="DarkCrateColumn7" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.91271096, 0.31437767, 20.458838)
@@ -892,7 +887,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20472962, 0.31437767, 19.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2609978, 0.31437767, -9.124448)
 
 [node name="DarkCrateColumn5" parent="Props/CrateProps" instance=ExtResource("21_5slx0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.649536, 5.550741, 13.262056)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.649536, 5.550741, 11.313726)
 
 [node name="DarkCratePile" parent="Props/CrateProps" instance=ExtResource("20_mb4ba")]
 transform = Transform3D(0.10959556, 0, 0.99397624, 0, 1, 0, -0.99397624, 0, 0.10959556, 3.7142782, 0.23003387, -7.970696)
@@ -941,7 +936,7 @@ material_override = ExtResource("33_jio1o")
 material_override = ExtResource("34_btncm")
 
 [node name="InteractArea" parent="Props/Levers/CleanUpLever" index="4"]
-transform = Transform3D(0.99999064, 0, -0.0026878316, 0, 1, 0, 0.0026878316, 0, 0.99999064, -16.958176, 0.38369155, 18.304913)
+transform = Transform3D(0.9999889, 0, -0.002687827, 0, 1, 0, 0.002687827, 0, 0.9999889, -16.958176, 0.38369155, 18.304913)
 label_text = "Clean up a little"
 
 [node name="BlowUpLever" parent="Props/Levers" instance=ExtResource("31_chotk")]
@@ -966,9 +961,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.533286)
 [node name="HealtChest6" parent="Props/chests" instance=ExtResource("29_1aflu")]
 transform = Transform3D(0.99999094, 0, 0.0042584087, 0, 1, 0, -0.0042584087, 0, 0.99999094, 4.119784, 0.22420269, -17.429626)
 
-[node name="HealtChest4" parent="Props/chests" instance=ExtResource("29_1aflu")]
-transform = Transform3D(0.039451566, 0, -0.9992215, 0, 1, 0, 0.9992215, 0, 0.039451566, 17.442327, 0.22420245, 19.524189)
-
 [node name="HealtChest3" parent="Props/chests" instance=ExtResource("29_1aflu")]
 transform = Transform3D(-0.99976164, 0, -0.021832313, 0, 1, 0, 0.021832313, 0, -0.99976164, -8.393163, 0.22420233, 22.52713)
 
@@ -985,7 +977,7 @@ transform = Transform3D(-0.9750836, 0, -0.22183774, 0, 1, 0, 0.22183774, 0, -0.9
 transform = Transform3D(-0.97377384, 0, -0.22751826, 0, 1, 0, 0.22751826, 0, -0.97377384, 3.9269083, 0.22777355, 22.427166)
 
 [node name="StaminaChest2" parent="Props/chests" instance=ExtResource("12_o1g2b")]
-transform = Transform3D(0.08487796, 0, -0.99639136, 0, 1, 0, 0.99639136, 0, 0.08487796, 17.65216, 0.22777355, 23.170956)
+transform = Transform3D(0.060857043, 0, -0.9981464, 0, 1, 0, 0.9981464, 0, 0.060857043, 17.574373, 0.22777355, 22.929474)
 
 [node name="lights" type="Node3D" parent="."]
 
@@ -1067,17 +1059,18 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93031573, 0.26552606, -8.374167)
 fire_up = true
 show_ui_feelings = true
+float_ui_feelings = true
 player = NodePath("../../Princess")
 
 [node name="PHEnemy2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
-transform = Transform3D(0.6596869, 0, -0.75154054, 0, 1, 0, 0.75154054, 0, 0.6596869, 16.87828, 5.406539, -11.033817)
+transform = Transform3D(0.6596869, 0, -0.75154054, 0, 1, 0, 0.75154054, 0, 0.6596869, 16.87828, 4.375377, -11.033817)
 fire_up = true
 show_ui_feelings = true
 float_ui_feelings = true
 player = NodePath("../../Princess")
 
 [node name="PHEnemy3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("25_136hl")]
-transform = Transform3D(-0.19303563, 0, 0.98119175, 0, 1, 0, -0.98119175, 0, -0.19303563, -16.97281, 5.164928, -10.275095)
+transform = Transform3D(-0.19303563, 0, 0.98119175, 0, 1, 0, -0.98119175, 0, -0.19303563, -16.97281, 4.5170984, -10.275095)
 fire_up = true
 show_ui_feelings = true
 float_ui_feelings = true
@@ -1192,7 +1185,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.097067, 0.1863006, 13.360
 [editable path="Props/JustColumns/columns/column_006/BreakStaticParent7"]
 [editable path="Props/JustColumns/columns/column_009/BreakStaticParent8"]
 [editable path="Props/JustColumns/columns/column_007/BreakStaticParent2"]
-[editable path="Props/JustColumns/columns/column_008/BreakStaticParent5"]
 [editable path="Props/Levers/BaseLever"]
 [editable path="Props/Levers/CleanUpLever"]
 [editable path="Props/Levers/BlowUpLever"]

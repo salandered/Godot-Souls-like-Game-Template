@@ -11,7 +11,7 @@ static func _warn(warn_msg: String, warn_level: String = WL.PUSH_ERROR):
 
 
 	if warn_msg == _last_warn_msg:
-		log.prefix_s(false, "\t\t |", "<same message again>")
+		_log.prefix_s(false, "\t\t |", "<same message again>")
 		return
 	_last_warn_msg = warn_msg
 
@@ -20,22 +20,22 @@ static func _warn(warn_msg: String, warn_level: String = WL.PUSH_ERROR):
 		WL.SILENT:
 			pass
 		WL.WARN:
-			log.prefix_s(true, "\t", warn_msg)
+			_log.prefix_s(true, "\t", warn_msg)
 		WL.WARN_CRUCIAL:
-			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
 		WL.ASSERT:
-			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
 			push_error(pp.s(em.crucial_x2, warn_msg)) # important!
 			assert(false, pp.s(em.crucial_x2, warn_msg))
 		WL.PUSH_ERROR:
-			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
 			push_error(pp.s(em.crucial_x2, warn_msg))
 		WL.PUSH_WARN:
-			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
 			push_warning(warn_msg)
 		_:
-			log.prefix_s(true, "\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
-			log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
+			_log.prefix_s(true, "\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
+			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
 			push_error(pp.s(em.crucial_x2, warn_msg))
 
 

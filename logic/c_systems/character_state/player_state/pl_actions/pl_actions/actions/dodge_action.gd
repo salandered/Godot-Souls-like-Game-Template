@@ -54,9 +54,10 @@ func _calculate_anim_effective_duration(actual_anim: AnimationData) -> float:
 
 
 func on_enter_action(input_: InputPackage) -> void:
+	get_animator_manager().reset_global_speed_scale()
 	var _original_dir: Direction.Dir
 	# TODO: while sprinting or not is_camera_locked it almost like another dodge state/action 
-	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
+	if pm().get_area_awareness().is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
 		_original_dir = input_.detect_strafe_dir()
 	else:
 		_original_dir = pm().detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
@@ -116,7 +117,7 @@ func on_exit_action() -> void:
 
 
 func update(input_: InputPackage, delta: float) -> void:
-	if player_sm.area_awareness.is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
+	if pm().get_area_awareness().is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
 		pm().look_at_target(delta)
 
 	var current_speed := speed_x_interpolator.update(delta)

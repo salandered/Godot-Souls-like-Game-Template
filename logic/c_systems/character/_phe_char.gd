@@ -8,6 +8,8 @@ extends BaseEnemyCharacter
 @export var record_state_history: bool = false
 @export var process_disabled_on_init: bool = true
 @export var head_off: bool = true
+@export var push_rigid: bool = true
+@export var allow_move_and_slide: bool = true
 
 
 @onready var config: PHEConfig = %Config
@@ -210,14 +212,18 @@ func update_state_history(state_name_: String):
 		_state_history.pop_front()
 
 
-func _process(delta: float) -> void:
-	super._process(delta)
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	if u.is_nth_frame(10):
 		basis = basis.orthonormalized()
 
 	state_machine._update(delta)
-	move_and_slide()
-	PushRigidBodies.push_rigid_bodies_by_char(self, push_rigid_bodies_force)
+
+	if allow_move_and_slide:
+		move_and_slide()
+
+	if push_rigid:
+		PushRigidBodies.push_rigid_bodies_by_char(self, push_rigid_bodies_force)
 
 	# player.__dev_labels._label_phe_enemy_info(self)
 
@@ -268,6 +274,9 @@ func _on_death_raised() -> void:
 	await FrameUtils.wait_process_frames(2)
 	self.set_process(false)
 	self.set_physics_process(false)
+	var _look_at_manager_ := get_look_at_manager()
+	if _look_at_manager_:
+		_look_at_manager_.shut_down()
 	# todo: it works but we need proper checks for external systems to be ready for this; also visuals
 	# self.queue_free()
 

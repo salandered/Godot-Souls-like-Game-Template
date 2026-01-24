@@ -164,7 +164,7 @@ func disable():
 
 
 func pp_name() -> String:
-	return pp.s(u.construct_obj_pp_name(self), _get_log_tag(), pp.bus_id(asp.bus))
+	return pp.s(ObjUtils.construct_obj_pp_name(self), _get_log_tag(), pp.bus_id(asp.bus))
 
 
 func __LOG_INDENT() -> int:

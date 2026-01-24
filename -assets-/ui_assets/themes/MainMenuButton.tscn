@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://3gdh2v44kxpi"]
+
+[ext_resource type="PackedScene" uid="uid://ywnsfktql2ke" path="res://logic/ui/ui_utils/prefab/shake_button/ShakeButton.tscn" id="1_1tytv"]
+[ext_resource type="Script" uid="uid://byfhla5dtd1lq" path="res://logic/ui/ui_utils/prefab/shake_button/main_menu_button.gd" id="2_1e0v8"]
+[ext_resource type="Shader" uid="uid://vgqfmf8l63h3" path="res://-assets-/materials-shared/_shaders/ui/shake_button.gdshader" id="3_xwyhm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxwy2"]
+resource_local_to_scene = true
+shader = ExtResource("3_xwyhm")
+shader_parameter/shake_power = 0.011
+shader_parameter/shake_speed = 1.5
+shader_parameter/time_offset = 0.0
+shader_parameter/modulation_color = Color(0.81, 0.81, 0.81, 1)
+shader_parameter/enable_shine = false
+shader_parameter/shine_speed = 0.50000002049012
+shader_parameter/shine_frequency = 6.0000002375
+shader_parameter/shine_width = 0.12000000500148
+
+[node name="MainMenuButton" instance=ExtResource("1_1tytv")]
+custom_minimum_size = Vector2(0, 50)
+text = "Main Menu"
+script = ExtResource("2_1e0v8")
+def_modulation_color = Color(0.81, 0.81, 0.81, 1)
+
+[node name="Panel" parent="." index="0"]
+material = SubResource("ShaderMaterial_lxwy2")

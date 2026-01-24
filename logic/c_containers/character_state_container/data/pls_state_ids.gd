@@ -10,8 +10,8 @@ const axe_slice_1 := "axe_slice_1"
 const axe_slice_2 := "axe_slice_2"
 const axe_slice_3 := "axe_slice_3"
 
-const attack_from_run := "attack_from_run"
-const attack_from_dodge := "attack_from_dodge"
+const stab_attack_1 := "stab_attack_1"
+const stab_attack_2 := "stab_attack_2"
 
 const sword_slash_1 := "sword_slash_1"
 const sword_slash_2 := "sword_slash_2"
@@ -54,8 +54,8 @@ class Act:
 	const axe_slice_2 := "pla_axe_slice_2🗡"
 	const axe_slice_3 := "pla_axe_slice_3🗡"
 
-	const attack_from_run := "pla_attack_from_run🗡"
-	const attack_from_dodge := "pla_attack_from_dodge🗡"
+	const stab_attack_1 := "pla_stab_attack_1🗡"
+	const stab_attack_2 := "pla_stab_attack_2🗡"
 	
 	const sword_slash_1 := "pla_sword_slash_1🗡"
 	const sword_slash_2 := "pla_sword_slash_2🗡"

@@ -1,4 +1,5 @@
 extends RayCast3D
+class_name DownCast
 
 @export var attachment: Node3D
 @onready var csg_sphere_3d: CSGSphere3D = $CSGSphere3D

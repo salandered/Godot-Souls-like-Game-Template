@@ -1,9 +1,10 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://d5grt08wa8so"]
 
-[ext_resource type="Texture2D" uid="uid://b5hf4ahal11h8" path="res://-assets-/ui_assets/images/image_2026-01-04_00-24-46.png" id="1_mqpib"]
+[ext_resource type="Texture2D" uid="uid://dvsmd4jsqd4qm" path="res://-assets-/ui_assets/images/vtbU5gr2kg.png" id="1_mqpib"]
 
 [resource]
 content_margin_top = 6.0
 content_margin_bottom = 6.0
 texture = ExtResource("1_mqpib")
-region_rect = Rect2(296.3721, 197.66632, 857.4358, 239.69229)
+region_rect = Rect2(397.63043, 314.4923, 625.9282, 184.34872)
+modulate_color = Color(0.27242783, 0.6900825, 0.6039011, 1)

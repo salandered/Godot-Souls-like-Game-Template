@@ -7,7 +7,6 @@ var DECEL_SPEED: float = 10.0
 # 	blend_time.set_by_prev_action({
 # 		Leg.Act.sprint_to_idle: 0.3,
 # 		Leg.Act.turn_180: 0.3,
-# 		PS.Act.attack_from_dodge: 0.35,
 # 		PS.Act.thrown: 0.35
 # 	})
 

@@ -98,7 +98,7 @@ func _on_body_or_area_entered(body: Node3D) -> void:
 		return
 		
 	_overlapping_obj_throttler.record_event(body_id)
-	# __log_(em.mark_x2, "Hit | body", body.name, u.safe_object_pp_name(body))
+	__log_(em.mark_x2, "Hit | body", body.name, ObjUtils.safe_object_pp_name(body))
 
 	_apply_sfx_hit_to_my_weapon(body)
 	_apply_sparks_to_my_weapon(body)
@@ -152,10 +152,10 @@ func _apply_sfx_hit_target(body: Node3D):
 
 	## STATIC
 	if body is StaticBody3D:
-		__log_(em.mark_x2, "Static", body, body.name, u.safe_object_pp_name(body))
+		__log_(em.mark_x2, "Static", body, body.name, ObjUtils.safe_object_pp_name(body))
 		if body.collision_layer == Collision.Layers.ENVIRONMENT_COL:
 			_emit_sig(SignalID.sfx_hit_target, {}, body)
-			__log_(em.mark_x2, "Static", body, body.name, u.safe_object_pp_name(body))
+			__log_(em.mark_x2, "Static", body, body.name, ObjUtils.safe_object_pp_name(body))
 			return
 
 
@@ -174,7 +174,7 @@ func _emit_sig(sig_id: String, payload: Dictionary[String, Variant], body: Node3
 	var key := sig_id + "_" + str(body.get_instance_id())
 	if not _sig_throttler.is_throttled(key):
 		var _sig_data := sig_container.get_by_sig_id(sig_id)
-		u.safe_emit(_sig_data, payload, false)
+		SigUtils.safe_emit(_sig_data, payload, false)
 		_sig_throttler.record_event(key)
 
 

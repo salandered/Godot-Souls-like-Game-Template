@@ -93,6 +93,7 @@ func _ready_can_run_in_editor():
 
 			
 func _ready_non_editor():
+	collision_layer = Collision.Layers.DEBRIS_COL
 	collision_mask = _get_common_area_config().coll_mask
 
 	var _monitor_type := _get_common_area_config().monitor_type
@@ -152,7 +153,6 @@ func _physics_process(delta: float) -> void:
 
 	if _get_common_area_config().interact_with_areas:
 		var _overlapping_areas: Array[Area3D] = get_overlapping_areas()
-		
 		match _monitor_type:
 			MonitorType.PROCESS:
 				for area in _overlapping_areas:

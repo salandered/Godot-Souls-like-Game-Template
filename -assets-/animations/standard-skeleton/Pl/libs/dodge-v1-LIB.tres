@@ -1301,7 +1301,6 @@ tracks/59/use_blend = true
 [sub_resource type="Animation" id="Animation_40w0t"]
 resource_name = "A Standing Dodge B"
 length = 1.3000001
-loop_mode = 1
 markers = [{
 "color": Color(1, 1, 1, 1),
 "name": &"from_run",

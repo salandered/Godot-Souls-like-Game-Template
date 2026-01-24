@@ -88,15 +88,15 @@ func _ready_implementation() -> void:
 func _ready_implementation_non_editor():
 	__log_("_ready_implementation_non_editor")
 	_assign_vose_path.call_deferred()
-	if vose3d:
-		u.safe_connect(vose3d.screen_entered, _on_sceen_entered)
-		u.safe_connect(vose3d.screen_exited, _on_sceen_exited)
+# 	if vose3d:
+# 		SigUtils.safe_connect(vose3d.screen_entered, _on_sceen_entered)
+# 		SigUtils.safe_connect(vose3d.screen_exited, _on_sceen_exited)
 		
-func _on_sceen_entered():
-	__log_("visible_on_screen_enabler_3d", "screen entered✴️")
+# func _on_sceen_entered():
+# 	__log_("visible_on_screen_enabler_3d", "screen entered✴️")
 
-func _on_sceen_exited():
-	__log_("visible_on_screen_enabler_3d", "screen exited 🚪")
+# func _on_sceen_exited():
+# 	__log_("visible_on_screen_enabler_3d", "screen exited 🚪")
 
 
 func _assign_vose_path() -> void:
@@ -151,7 +151,6 @@ func _update_vose_state() -> void:
 	else:
 		vose3d.process_mode = Node.PROCESS_MODE_DISABLED
 		
-		# CRITICAL:
 		# If we don't do this, and the light was off-screen when we clicked the checkbox,
 		# it would stay frozen forever.
 		process_mode = Node.PROCESS_MODE_INHERIT

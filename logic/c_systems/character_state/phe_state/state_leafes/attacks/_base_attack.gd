@@ -41,7 +41,13 @@ func get_anim_active_weapon_ids() -> Array[String]:
 
 func _combat_set_hit_data():
 	for weapon_id in get_anim_active_weapon_ids():
-		combat.set_hit_data(weapon_id, hit_damage, anim.anim_id)
+		combat.set_hit_data(
+			weapon_id,
+			hit_damage,
+			anim.anim_id,
+			animator_manager.get_global_speed_scale(),
+			state_name,
+			)
 
 func _combat_update_is_attacking():
 	var _weapon_ids := get_anim_active_weapon_ids()

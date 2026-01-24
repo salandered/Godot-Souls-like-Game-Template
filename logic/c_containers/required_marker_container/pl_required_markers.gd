@@ -52,8 +52,8 @@ static var anim_to_required_marker: Dictionary[String, Array] = {
 	A.attack.sword_slash_1: [MarkerName.ALLOWS_SWITCH, MarkerName.ALLOWS_SWITCH_TO_ITSELF],
 	A.attack.sword_slash_2: [MarkerName.ALLOWS_SWITCH],
 	A.attack.sword_slash_3: [MarkerName.ALLOWS_SWITCH],
-	A.attack.attack_from_run: [MarkerName.FROM_RUN, MarkerName.ALLOWS_SWITCH, MarkerName.TO_IDLE],
-	A.attack.attack_from_dodge: [MarkerName.FROM_DODGE, MarkerName.ALLOWS_SWITCH, MarkerName.TO_IDLE],
+	A.attack.stab_attack_1: [MarkerName.FROM_RUN, MarkerName.ALLOWS_SWITCH, MarkerName.TO_IDLE],
+	A.attack.stab_attack_2: [MarkerName.FROM_DODGE, MarkerName.ALLOWS_SWITCH, MarkerName.TO_IDLE],
 
 
 	## react 

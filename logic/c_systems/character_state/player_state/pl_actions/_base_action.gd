@@ -128,8 +128,8 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 
 func _react_on_hit(hit: HitData):
 	var attacking: Array[String] = [
-		PS.Act.attack_from_run,
-		PS.Act.attack_from_dodge,
+		PS.Act.stab_attack_1,
+		PS.Act.stab_attack_2,
 		PS.Act.sword_slash_1,
 		PS.Act.sword_slash_2,
 		PS.Act.sword_slash_3,
@@ -180,8 +180,8 @@ const IDLE_LIKE_ACTIONS = [
 	PS.Act.sword_slash_1,
 	PS.Act.sword_slash_2,
 	PS.Act.sword_slash_3,
-	PS.Act.attack_from_run,
-	PS.Act.attack_from_dodge,
+	PS.Act.stab_attack_1,
+	PS.Act.stab_attack_2,
 	# PS.Act.dodge,
 	PS.Act.pushback,
 	PS.Act.thrown,

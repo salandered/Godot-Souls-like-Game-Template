@@ -17,6 +17,9 @@ class_name LookAtManager
 @export var proximity_threshold: float = 2.5
 
 
+@onready var vosn: VisibleOnScreenNotifier3D = %VOSN
+
+
 enum InitialMode {
 	RANDOM,
 	FORCE_OFF,
@@ -49,6 +52,11 @@ func __hard_dependencies() -> Array[Object]:
 	return [
 		_target_marker,
 		_my_marker
+	]
+
+func __soft_dependencies() -> Array[Object]:
+	return [
+		vosn,
 	]
 
 func __hard_validation() -> bool:
@@ -87,6 +95,24 @@ func initialise(target_marker_: LookAtCharacterMarker, me_: BaseCharacter) -> vo
 	if not __perform_validation():
 		__log_warn_soft("not working")
 		set_process(false)
+		shut_down()
+	else:
+		if vosn:
+			SigUtils.safe_connect(vosn.screen_entered, _on_sceen_entered)
+			SigUtils.safe_connect(vosn.screen_exited, _on_sceen_exited)
+			if not vosn.is_on_screen():
+				_on_sceen_exited()
+			
+
+func _on_sceen_entered():
+	__log_("vosn", "screen entered✴️")
+	if __validation_ok():
+		set_process(true)
+
+func _on_sceen_exited():
+	__log_("vosn", "screen exited 🚪")
+	set_process(false)
+	_apply_look_state(false)
 
 
 func _process(delta: float) -> void:
@@ -172,6 +198,15 @@ func set_distance_mode() -> void:
 	__log_("set_distance_mode")
 	_change_state(LookState.DISTANCE_ON if _is_too_close(1.0) else LookState.DISTANCE_OFF)
 
+
+func shut_down() -> void:
+	__log_("shut_down")
+	_apply_look_state(false)
+	set_process(false)
+	if vosn:
+		SigUtils.safe_disconnect(vosn.screen_entered, _on_sceen_entered)
+		SigUtils.safe_disconnect(vosn.screen_exited, _on_sceen_exited)
+			
 
 # --- Internal ---
 

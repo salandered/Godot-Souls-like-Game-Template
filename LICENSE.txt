@@ -1,8 +1,0 @@
-Hard Tissue (game demo)
-Copyright (c) 2025 ParticularBase
-All Rights Reserved.
-
-This software and all accompanying files are the property of ParticularBase. 
-You may play this game for personal, non-commercial use. 
-You may not decompile, reverse engineer, modify, or redistribute this software or its assets 
-	without explicit written permission from the author.

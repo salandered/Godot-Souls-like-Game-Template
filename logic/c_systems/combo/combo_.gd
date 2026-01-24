@@ -22,20 +22,15 @@ extends NodeLogger
 
 
 # region: DOCS: PHILOSOPY AND DETAILS BEHIND COMBO
-#
-# Basic combo has more or less only is_triggered(), which is always called in BasePlayerState's check_transition
-# We assign combos to state using get_children() in container. So node structure dictates their initialisation.
-# 
-# Purpose of Combos is to divide the BasePlayerState's transition logic.
-#   - Many different factors can regulate BasePlayerState's transition: adrenaline level,
-#   	fatigue level, stamina status, unique items in the inventory, enemies type, buffs, etc
-#   - Imagine modifying it all every time adding another elif into BasePlayerState's _check_transition.
-#   - The BasePlayerState code is a basic action logic with simple input actions interpretation.
-#   - The Combos code is a module for creating additional layers of conditional transitions that can be
-#     added, mixed, copied and deleted without any change in base check_transition function.
-# 		(idea: combo priority system being powered nodes order)
-#
-# endregion
+
+## Main goal - to decouple complex transition logic from the BasePlayerState
+## Triggering
+##		Combo relies on is_triggered(), which is called within BasePlayerState.check_transition.
+## Initialization: 
+##	 	Assigned via get_children() in the container, meaning the scene tree structure dictates their setup.
+## Priority: Combo has a priority property. Order of the combo nodes doesn't matter.
+##
+## endregion
 
 
 func __LOG_B() -> bool:

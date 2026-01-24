@@ -2,6 +2,7 @@
 class_name CharacterBody3DSystem
 extends CharacterBody3DLogger
 
+
 # --------------------------------------------------------------------------
 
 ## VALIDATION FRAMEWORK [same for other extender systems]
@@ -25,8 +26,8 @@ func __validation_ok() -> bool:
 ## Returns the result of validation (true/false).
 ## If true, sets __validated flag.
 ## NOTE: returns true if soft validation failed.
-func __perform_validation() -> bool:
-	var _r := ValidateDependencies.validate_and_set_flag(self)
+func __perform_validation(process_disable_on_fail: bool = false) -> bool:
+	var _r := ValidationFramework.validate_and_set_flag(self, process_disable_on_fail)
 	return _r
 
 
@@ -50,3 +51,4 @@ func __soft_validation() -> bool:
 # endregion
 
 # --------------------------------------------------------------------------
+

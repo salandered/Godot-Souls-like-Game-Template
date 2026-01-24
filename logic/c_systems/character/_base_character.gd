@@ -10,6 +10,7 @@ var _anim_params_container: BaseAnimParamsContainer
 var _sfx_system: CharacterSFXSystem
 var _look_at_char_marker: LookAtCharacterMarker
 var _look_at_manager: LookAtManager
+var _area_awareness: BaseAreaAwareness
 
 
 ## not nullable after init
@@ -35,6 +36,9 @@ func get_look_at_char_marker() -> LookAtCharacterMarker:
 
 func get_look_at_manager() -> LookAtManager:
 	return _look_at_manager
+
+func get_area_awareness() -> BaseAreaAwareness:
+	return _area_awareness
 
 
 ##
@@ -76,17 +80,28 @@ func _initialise_common_char() -> void:
 	_initialise_combat()
 
 	
-	var base_movement_r := get_descendants.base_character_movements(self)
-	if not error_.len_one(base_movement_r):
-		_movement = base_movement_r[0]
-		_movement.initialise(self)
+	_initialise_area_awareness()
+
+	if _area_awareness:
+		var base_movement_r := get_descendants.base_character_movements(self)
+		if not error_.len_one(base_movement_r):
+			_movement = base_movement_r[0]
+			_movement.initialise(self, _area_awareness)
+
 
 	_initialise_char_sfx_systems()
 	
 	if _combat:
 		_initialise_weapons_sfx()
 
-		
+
+func _initialise_area_awareness() -> void:
+	var base_area_awareness_r := get_descendants.base_area_awareness(self)
+	if not error_.len_one(base_area_awareness_r):
+		_area_awareness = base_area_awareness_r[0]
+		_area_awareness.initialise(self)
+
+
 func _initialise_anim_systems() -> void:
 	var anim_container := _for_init_anim_container()
 
@@ -131,7 +146,7 @@ func _initialise_char_sfx_systems() -> void:
 			asp_config_container,
 			self,
 			{_sfx_system.character_additional_data_key: self}
-			)
+		)
 	
 		var sad_container := _for_init_sad_container()
 		if sad_container:
@@ -217,7 +232,7 @@ func _initialise_weapons_sfx():
 ## Basic use case: prefix for logging. 
 ## Should not be treated as ID in any sense! It's just cosmetics.
 func pp_name() -> String:
-	return u.construct_obj_pp_name(self)
+	return ObjUtils.construct_obj_pp_name(self)
 
 
 ## are logs turned on. warn logs are always turned on.

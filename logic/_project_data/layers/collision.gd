@@ -41,7 +41,7 @@ extends RefCounted
 # endregion
 
 
-## WARNING: Don't change without checking project settings alisases for!
+## WARNING: Don't change without checking project settings alisases!
 enum Layers {
 	ENVIRONMENT_COL = 1 << 0, # bit 0
 	PLAYER_COL = 1 << 1, # bit 1

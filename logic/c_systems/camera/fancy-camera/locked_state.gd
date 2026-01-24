@@ -2,7 +2,7 @@ extends CameraState
 class_name LockedCameraState
 
 var target: Node3D
-var lock_offset: Vector3
+var lock_boom: Vector3
 
 var blend_timer := SimpleTimer.new()
 var BLEND_DURATION := 0.4 # 0.3-0.6 seconds (shorter = snappier lock, longer = smoother)
@@ -15,20 +15,20 @@ var blend_start_hor_len := 0.0
 func switch_from_free(found_target: Node):
 	target = found_target.look_at_point
 
-	# capturing the true offset at the moment of locking to prevent any jump
-	lock_offset = fc.nest.global_position - fc.mount.global_position
-	# tried: lock_offset = fc.camera.global_position - fc.mount.global_position
+	# capturing the true boom at the moment of locking to prevent any jump
+	lock_boom = fc.socket.global_position - fc.pivot.global_position
+	# tried: lock_boom = fc.camera.global_position - fc.pivot.global_position
 	
-	var cam_minus_mount := fc.camera.global_position - fc.mount.global_position
-	var err := (cam_minus_mount - lock_offset).length()
-	# __log_("[~~ lock: err_to_offset_on_entry=", err)
+	var cam_minus_pivot := fc.camera.global_position - fc.pivot.global_position
+	var err := (cam_minus_pivot - lock_boom).length()
+	# __log_("[~~ lock: err_to_boom_on_entry=", err)
 	
 	# store the initial conditions. The blend will always be from this
 	# fixed start-point to the moving end-point.
-	var current_offset_xz := Vector2(lock_offset.x, lock_offset.z)
-	blend_start_yaw_rad = current_offset_xz.angle()
+	var current_boom_xz := Vector2(lock_boom.x, lock_boom.z)
+	blend_start_yaw_rad = current_boom_xz.angle()
 
-	blend_start_hor_len = current_offset_xz.length()
+	blend_start_hor_len = current_boom_xz.length()
 	if blend_start_hor_len < 0.05: # optional to try
 		blend_start_hor_len = 0.05
 
@@ -40,14 +40,14 @@ func switch_from_free(found_target: Node):
 func update(delta: float) -> void:
 	# __log_("UPD", fc.__dbg_main_info())
 	# move the anchor points
-	_move_focus_point()
-	_move_camera_mount()
+	_move_aim()
+	_move_camera_pivot()
 	
 	# calculate the rotation based on their new positions
-	_rotate_offset_locked(delta)
+	_rotate_boom_locked(delta)
 	
 	# position the camera elements
-	_move_camera_nest()
+	_move_camera_socket()
 	fc.camera_movement.move_camera(delta)
 
 	# TODO TODO: return check_distance
@@ -57,27 +57,27 @@ func update(delta: float) -> void:
 	# __log_("UPD post", fc.__Cvec(), fc.__CM(), fc.__CF())
 
 
-func _move_focus_point() -> void:
-	fc.focus.global_position = lerp_position_(fc.focus, target, fc.LOCKED_FOCUS_TARGET_WEIGHT)
+func _move_aim() -> void:
+	fc.aim.global_position = lerp_position_(fc.aim, target, fc.LOCKED_AIM_TARGET_WEIGHT)
 
-func _move_camera_mount() -> void:
-	fc.mount.global_position = lerp_position_(fc.mount, fc.player.camera_focus, fc.LOCKED_MOUNT_CHEST_WEIGHT)
+func _move_camera_pivot() -> void:
+	fc.pivot.global_position = lerp_position_(fc.pivot, fc.player.camera_focus, fc.LOCKED_PIVOT_CHEST_WEIGHT)
 
-func _move_camera_nest() -> void:
-	fc.nest.global_position = lerp_position_(fc.nest, fc.mount.global_position + lock_offset, fc.LOCKED_NEST_MOUNT_WEIGHT)
+func _move_camera_socket() -> void:
+	fc.socket.global_position = lerp_position_(fc.socket, fc.pivot.global_position + lock_boom, fc.LOCKED_SOCKET_PIVOT_WEIGHT)
 
 
-func _rotate_offset_locked(delta: float) -> void:
-	var _off_before := lock_offset
+func _rotate_boom_locked(delta: float) -> void:
+	var _boom_before := lock_boom
 
-	# desired direction is from the target to the camera's direct anchor (the mount).
-	var desired_dir_xz := Vector2(fc.mount.global_position.x - target.global_position.x, fc.mount.global_position.z - target.global_position.z).normalized()
+	# desired direction is from the target to the camera's direct anchor (pivot).
+	var desired_dir_xz := Vector2(fc.pivot.global_position.x - target.global_position.x, fc.pivot.global_position.z - target.global_position.z).normalized()
 
 	# against zero radius (player is directly on top of the target or something)
 	if desired_dir_xz.length_squared() < Constants.EPSILON_5: return
 
 	var desired_yaw := desired_dir_xz.angle()
-	var current_yaw := Vector2(_off_before.x, _off_before.z).angle()
+	var current_yaw := Vector2(_boom_before.x, _boom_before.z).angle()
 	# __log_("yaw_cur", rad_to_deg(current_yaw), "yaw_des", rad_to_deg(desired_yaw), 
 		# "delta_wrapped", rad_to_deg(wrapf(desired_yaw - current_yaw, -PI, PI)), "len_h_start", blend_start_hor_len)
 
@@ -94,34 +94,34 @@ func _rotate_offset_locked(delta: float) -> void:
 		# lerp_angle correctly handles the shortest path (e.g. -170 to 170).
 		var blended_yaw_rad := lerp_angle(blend_start_yaw_rad, desired_yaw_rad, t_eased)
 		
-		# Reconstruct the offset vector from the blended angle and fixed radius
+		# Reconstruct the boom vector from the blended angle and fixed radius
 		var final_xz := Vector2.from_angle(blended_yaw_rad) * blend_start_hor_len
-		lock_offset.x = final_xz.x
-		lock_offset.z = final_xz.y
+		lock_boom.x = final_xz.x
+		lock_boom.z = final_xz.y
 		# __log_("~~ LOCK BLEND FINISHED")
 	else:
 		# --- RESPONSIVE LOCK (DIRECT ASSIGNMENT) ---
 		# After blending, snap directly to the desired orientation for control
-		var current_hor_len := Vector2(lock_offset.x, lock_offset.z).length()
+		var current_hor_len := Vector2(lock_boom.x, lock_boom.z).length()
 		
 		# against a zero length if camera is perfectly vertical
 		if current_hor_len < Constants.EPSILON_5:
 			current_hor_len = blend_start_hor_len
 
 		var final_xz := desired_dir_xz * current_hor_len
-		lock_offset.x = final_xz.x
-		lock_offset.z = final_xz.y
+		lock_boom.x = final_xz.x
+		lock_boom.z = final_xz.y
 
 	# LOGS
-	# var nest_mount_vec_len := (fc.nest.global_position - fc.mount.global_position).length()
-	# var delta_off_angle: float = pp.pp_v3_angle_deg(_off_before, lock_offset, false)
-	# var arc_len := snapped(deg_to_rad(delta_off_angle) * nest_mount_vec_len, 0.00001)
+	# var socket_pivot_vec_len := (fc.socket.global_position - fc.pivot.global_position).length()
+	# var delta_off_angle: float = pp.pp_v3_angle_deg(_off_before, lock_boom, false)
+	# var arc_len := snapped(deg_to_rad(delta_off_angle) * socket_pivot_vec_len, 0.00001)
 	# __log_("[~~LOCK UPD rot ", u.sfr(), "]",
 	# 	" angle_delta_deg=", str(delta_off_angle),
 	# 	" arc_len=", str(arc_len),
-	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", pp.round_01(lock_offset.length()),
-	# 	" off_after=", pp.pp_vec3(lock_offset), " |len=", pp.round_01(lock_offset.length()))
+	# 	" off_b4=", pp.pp_vec3(_off_before), " |len=", pp.round_01(lock_boom.length()),
+	# 	" off_after=", pp.pp_vec3(lock_boom), " |len=", pp.round_01(lock_boom.length()))
 
 
 func input_mouse_movement(d_x: float, d_y: float) -> void:
-	lock_offset = vertical_mouse_movement(d_x, d_y, lock_offset)
+	lock_boom = vertical_mouse_movement(d_x, d_y, lock_boom)

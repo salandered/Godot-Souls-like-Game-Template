@@ -80,6 +80,8 @@ func _accept_states():
 	for node: BasePHELeaf in get_descendants.base_ph_leaf_states(leaf_state_pool):
 		print_.e_container("", "node.get_name() " + node.get_name())
 
+		node.state_depth = -1
+		
 		var lst_data: EDC._LStData = _node_state_container.get_node_to_leaf_state_data().get(node.get_name())
 		if not lst_data:
 			__log_warn("EDC._LStData for", node.get_name(), "not found, skipping")

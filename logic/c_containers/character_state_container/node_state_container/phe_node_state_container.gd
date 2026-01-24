@@ -45,6 +45,7 @@ var node_to_leaf_state_data: Dictionary[String, EDC._LStData] = {
 	"DodgeL": EDC._LStData.new(PHES.Leaf.dodge_L, EDC._AData.new(PHEA.dodge.dodge_L, -0.05)),
 	"DodgeR": EDC._LStData.new(PHES.Leaf.dodge_R, EDC._AData.new(PHEA.dodge.dodge_R, -0.05)),
 	"JumpTowards": EDC._LStData.new(PHES.Leaf.jump_towards, EDC._AData.new(PHEA.loco.jump_towards, -0.1)),
+	"Midair": EDC._LStData.new(PHES.Leaf.midair, EDC._AData.new(PHEA.loco.midair, -0.0)),
 
 	## attack
 	"ScareOff": EDC._LStData.new(PHES.Leaf.scare_off, EDC._AData.new(PHEA.attack.scare_off, -0.25)),

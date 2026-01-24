@@ -7,6 +7,9 @@ extends Node3DSystem
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
+var last_hit: HitData = null
+
+
 func __hard_dependencies() -> Array[Object]:
 	return [
 		animation_player,
@@ -38,18 +41,28 @@ func _ready() -> void:
 
 
 func _on_my_area_hit(payload: Dictionary[String, Variant]):
-	var damage := 10.0
-	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_damage_field)
-	if not _r.err:
-		damage = _r.value
-	var _speed_scale := damage / 16.0
+	var hit_damage := 10.0
+	var _r := SigUtils.safe_get_variant_payload_value(payload, GlobalSignal.payload_hit_data_field, false)
+	if not _r.err and _r.value is HitData:
+		last_hit = _r.value
+		hit_damage = last_hit.damage
+	play_anim(hit_damage)
+	_on_my_area_hit_imp()
+
+
+func _on_my_area_hit_imp():
+	pass
+
+
+func play_anim(hit_damage: float):
+	var _speed_scale := hit_damage / 16.0
 	animation_player.stop()
 	if _speed_scale > 2.0:
 		PlayerStats.set_simple_target_super_rotate()
 		animation_player.play(AnimID.rotate_on_hit_super, 0.2, _speed_scale / 1.5)
 	else:
 		animation_player.play(AnimID.rotate_on_hit, 0.2, _speed_scale)
-	__log_("playing", AnimID.rotate_on_hit, "_speed_scale", _speed_scale, "based on damage", damage)
+	__log_("playing", AnimID.rotate_on_hit, "_speed_scale", _speed_scale, "based on damage", hit_damage)
 
 
 func __LOG_B() -> bool:

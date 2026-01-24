@@ -44,7 +44,7 @@ func on_enter_attack_implementation(input_: InputPackage):
 
 ## TODO: dont use custom update
 func update(input_: InputPackage, delta: float):
-	if tracks_input_vector() and not player_sm.area_awareness.is_camera_locked():
+	if tracks_input_vector() and not pm().get_area_awareness().is_camera_locked():
 		pm().rotate_with_input_vector(input_, delta, SpeedConfig.new(default_sp))
 	
 	
@@ -61,7 +61,7 @@ func update(input_: InputPackage, delta: float):
 		if not hit_sig_emitted:
 			hit_sig_emitted = true
 			var sig_data := get_signal_from_active_weapon(SignalID.sfx_hit_weapon)
-			u.safe_emit(sig_data, {})
+			SigUtils.safe_emit(sig_data, {})
 
 
 var hit_sig_emitted: bool = false

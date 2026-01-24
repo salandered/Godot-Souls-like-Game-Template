@@ -1,7 +1,6 @@
 extends NodeCharacterSystem
 class_name PlayerSM
 
-@onready var area_awareness: AreaAwareness = %AreaAwareness
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var legs_sm: LegsSM = %LegsSM
 
@@ -89,7 +88,7 @@ func get_prev_action() -> BaseAction:
 	return _prev_action
 
 
-## returns newly shifted previous action name
+## returns previous action name (which was replaced with next_action)
 func update_current_action(next_action: BaseAction) -> String:
 	# var curr_act_name = ""
 	# if not _current_action:
@@ -115,6 +114,10 @@ func update_current_action(next_action: BaseAction) -> String:
 	
 	_prev_action = _current_action
 	_current_action = next_action
+	SigUtils.safe_emit_raw(
+		GlobalSignal.SIG_player_action_changed,
+		{GlobalSignal.payload_state_name_field: next_action.action_name}
+	)
 	# if _prev_action and next_act_name == _prev_action.action_name:
 		# print_.dev(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
 	
@@ -131,7 +134,7 @@ func react_on_hit(hit_data: HitData) -> void:
 
 func update(input_: InputPackage, delta: float) -> void:
 	input_ = combat.contextualize(input_, delta)
-	input_ = area_awareness.contextualize(input_)
+	input_ = player_movement.get_area_awareness().contextualize(input_)
 
 	hit_timer.update(delta)
 
@@ -146,6 +149,10 @@ func update(input_: InputPackage, delta: float) -> void:
 		prev_state_name = current_state.state_name
 		# now current_state is next state
 		current_state = container.state_by_name(verdict.next_state)
+		SigUtils.safe_emit_raw(
+			GlobalSignal.SIG_player_state_changed,
+			{GlobalSignal.payload_state_name_field: current_state.state_name}
+		)
 		current_state._on_enter_state(input_)
 
 

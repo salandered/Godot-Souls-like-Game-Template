@@ -12,11 +12,11 @@ var cooldown_sig_emit := Cooldown.new(0.2)
 
 
 var common_area_config := CommonAreaConfig.new(
-		MonitorType.SIGNAL,
+		MonitorType.PROCESS,
 		true,
 		false,
 		Collision.Masks.ONLY_WEAPON_AREA,
-		false
+		true
 	)
 
 func _get_common_area_config() -> CommonAreaConfig:
@@ -46,6 +46,9 @@ func _ready_implementation_non_editor() -> void:
 var _player_found_this_frame := false
 
 
+var last_processed_hit_data_id: int
+
+
 func on_area_entered(incoming_area: Area3D) -> void:
 	if not incoming_area is WeaponHurtBox:
 		return
@@ -60,13 +63,20 @@ func on_area_entered(incoming_area: Area3D) -> void:
 	if not weapon.is_player():
 		return
 	var hit_data := weapon.get_hit_data()
-	_emit_signal(hit_data)
+	if not hit_data:
+		__log_error("weapon hit data is null", "on_area_contact", "return")
+		return
+	if last_processed_hit_data_id != hit_data.get_instance_id():
+		_emit_signal(hit_data)
 
 
 func _emit_signal(hit_data: HitData):
-	if cooldown_sig_emit.is_cooldown_passed(true, pp_name()):
+	if not hit_data:
+		return
+	if cooldown_sig_emit.is_cooldown_passed(false, pp_name()):
 		cooldown_sig_emit.mark_time()
-		u.safe_emit_raw(SIG_hit, {GlobalSignal.payload_damage_field: hit_data.damage if hit_data else 10.0})
+		last_processed_hit_data_id = hit_data.get_instance_id()
+		SigUtils.safe_emit_raw(SIG_hit, {GlobalSignal.payload_hit_data_field: hit_data})
 
 
 ##

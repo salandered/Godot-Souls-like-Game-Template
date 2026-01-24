@@ -14,6 +14,10 @@ var anim_params_container: BaseAnimParamsContainer
 var config: PHEConfig
 
 
+## -1 for leafs
+var state_depth: int
+
+
 # min time to stay in state. -1 means not applied (like for Top state or some idle state)
 var commitment: float = 0.4
 # max time to stay in state -1 means not applied (like for Top state or some idle state)
@@ -94,6 +98,10 @@ func get_player() -> Princess:
 
 
 @abstract func react_on_hit(hit_data: HitData) -> void
+
+
+@abstract func is_apply_gravity() -> bool
+
 
 ## MOVEMENT SHORTCUTS
 # region

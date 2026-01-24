@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://badmldrkr7cy1" path="res://logic/ui/ui_utils/options_nodes/m_option_control.gd" id="6_pi0p3"]
 [ext_resource type="Script" uid="uid://b4ttk71l8wkrw" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.gd" id="7_pi0p3"]
 [ext_resource type="PackedScene" uid="uid://0e65ib3cy6mf" path="res://logic/ui/main_menu_group/options_menu/tabs/controls/reset_button.tscn" id="8_5161n"]
-[ext_resource type="PackedScene" path="res://logic/ui/main_menu_group/options_menu/tabs/video/shadows_control.tscn" id="9_xruvw"]
+[ext_resource type="PackedScene" uid="uid://cijp7que1div6" path="res://logic/ui/main_menu_group/options_menu/tabs/video/shadows_control.tscn" id="9_xruvw"]
 
 [node name="Video" type="MarginContainer"]
 anchors_preset = 15
@@ -229,6 +229,7 @@ vertical_alignment = 1
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/VolumetricFogControl"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+theme_type_variation = &"CheckButtonMini"
 button_pressed = true
 icon_alignment = 1
 

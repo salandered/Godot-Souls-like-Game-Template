@@ -4,8 +4,8 @@ extends Combo_
 class_name NextStateCombo
 
 @export_group("Inputs")
-## NOTE: field could be not equal to state_to_trigger.
-##       Input is a state names, but not all states can be described as input
+## NOTE: can be not equal to state_to_trigger.
+##       Input is a state name, but not all states can be described as input
 ##       (hence all the contextualizers and combos)
 ## NOTE: for attacks setting needs_combat_input might be enough
 @export var needs_input: String = "not"

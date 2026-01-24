@@ -823,7 +823,7 @@ shape = SubResource("CapsuleShape3D_xu021")
 transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
 
 [node name="SittingSkeletonAlt" parent="Lincoln_ALL/ISLAND_WRAPPER/StaticBarrel" instance=ExtResource("30_ktdwm")]
-transform = Transform3D(-0.99718493, 0, -0.07497864, 0, 0.9999998, 0, 0.07497863, 0, -0.9971851, -0.018268585, -0.016711235, 0.08400059)
+transform = Transform3D(-0.9971849, 0, -0.074978635, 0, 0.9999998, 0, 0.07497863, 0, -0.99718505, -0.018268585, -0.016711235, 0.08400059)
 
 [node name="Rock_1_004_visuals2" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER"]
 transform = Transform3D(0.43853706, 0.110105, -0.2097065, -0.22908448, 0.08507292, -0.43439338, -0.0601682, 0.47859606, 0.12546034, -53.68312, 12.605973, 34.763615)
@@ -1035,7 +1035,6 @@ transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -53.12312, 12.662931, 37.38992)
 
 [node name="RotatingTarget" parent="Lincoln_ALL/SimpleTarget3/Visuals" index="0"]
-transform = Transform3D(-0.37619692, 0, 0.0663338, 0, 0.3820004, 0, -0.0663338, 0, -0.37619692, 0, 1.2790871, 0)
 material_override = ExtResource("48_y0kr0")
 
 [node name="CSGBakedMeshInstance3D2" parent="Lincoln_ALL/SimpleTarget3/Visuals/StolbStatic" index="1"]

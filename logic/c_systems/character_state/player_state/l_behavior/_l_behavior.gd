@@ -8,7 +8,6 @@ class_name LegsBehavior
 var container: PlayerStatesContainer
 var legs_sm: LegsSM # set by SM
 var combat: PlayerCombat
-var area_awareness: AreaAwareness # FILL ME if you use it
 var player_state: BasePlayerState # set by SM when switching
 
 var behavior_name: String

@@ -106,7 +106,7 @@ static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = fal
 	if _dict_.is_empty():
 		return "{}"
 	var r := __recursive_dict(_dict_, "", one_string, one_level)
-	return u.cut_string(r)
+	return StrUtils.cut_string(r)
 
 
 static func list_(parts: Array, json: bool = false, max_length = 800) -> String:
@@ -126,7 +126,7 @@ static func list_(parts: Array, json: bool = false, max_length = 800) -> String:
 			r += pp.array_(part) + " "
 		else:
 			r += str(part) + " "
-	r = u.cut_string(r, max_length)
+	r = StrUtils.cut_string(r, max_length)
 	return r
 
 
@@ -153,7 +153,7 @@ static func bone_mask_(_bone_mask_: Array[int]) -> String:
 
 ## returns name from id (no lib)
 static func anim_n(anim_id: String) -> String:
-	return pp.in_q(u.get_last_slash_part(anim_id))
+	return pp.in_q(StrUtils.get_last_slash_part(anim_id))
 
 
 static func sig(signal_data: SignalData, signal_payload: Dictionary[String, Variant], ) -> String:

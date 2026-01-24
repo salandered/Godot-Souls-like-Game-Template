@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ywnsfktql2ke"]
+
+[ext_resource type="Script" uid="uid://bdgsui4a376w1" path="res://logic/ui/ui_utils/prefab/shake_button/shake_button.gd" id="1_patol"]
+[ext_resource type="Material" uid="uid://v4tnxee3qucj" path="res://-assets-/materials-shared/_shaders/ui/shake_button_shader.tres" id="2_onsys"]
+[ext_resource type="StyleBox" uid="uid://djmsyd6dx03an" path="res://-assets-/ui_assets/themes/buttons/pause_menu_button_style.tres" id="3_patol"]
+
+[node name="ShakeButton" type="Button"]
+custom_minimum_size = Vector2(160, 50)
+theme_type_variation = &"ButtonFlat"
+text = "Shake"
+script = ExtResource("1_patol")
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+material = ExtResource("2_onsys")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_patol")

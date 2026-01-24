@@ -35,6 +35,7 @@ class Leaf:
 	const dodge_L := "dodge_L"
 	const dodge_R := "dodge_R"
 	const jump_towards := "jump_towards"
+	const midair := "midair"
 
 	## attack
 	const scare_off := "scare_off✷"
