@@ -13,13 +13,13 @@ extends Node3DSystem
 signal SIG_lever_switched
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		animation_player,
 		interact_area,
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 	]
 

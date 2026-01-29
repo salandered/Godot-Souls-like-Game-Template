@@ -11,7 +11,7 @@ extends Node3DSystem
 @onready var monitor_pl_enter_sig_area: MonitorPlayerEnterSignalArea = $MonitorPlEnterSigArea
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		monitor_pl_enter_sig_area
 	]

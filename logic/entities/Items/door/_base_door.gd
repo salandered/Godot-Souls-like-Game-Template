@@ -25,12 +25,12 @@ enum DoorState {
 var current_state: DoorState = DoorState.CLOSED_UNLOCKED
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		animation_player
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		interact_area,
 		visuals

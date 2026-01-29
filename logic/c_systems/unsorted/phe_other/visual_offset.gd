@@ -10,7 +10,7 @@ var LERP_SPEED: float = 8.0
 var target_y: float
 
 func _ready() -> void:
-	target_y = PHEStaticConfig.DEFAULT_Y_OFFSET
+	target_y = BGConfig.DEFAULT_Y_OFFSET
 	position.y = target_y
 
 
@@ -19,6 +19,6 @@ func _physics_process(delta: float) -> void:
 	if current_state:
 		target_y = current_state.y_offset_adjustment
 	else:
-		target_y = PHEStaticConfig.DEFAULT_Y_OFFSET
+		target_y = BGConfig.DEFAULT_Y_OFFSET
 		
 	position.y = lerp(position.y, target_y, delta * LERP_SPEED)

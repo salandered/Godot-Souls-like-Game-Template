@@ -42,12 +42,12 @@ enum MonitorType {
 }
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		_get_coll_shape(),
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 	]
 

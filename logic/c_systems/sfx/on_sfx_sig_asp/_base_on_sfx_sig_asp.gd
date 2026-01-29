@@ -33,14 +33,14 @@ class VolPitch:
 		return pp.s("vol/pitch/mute/from_pos", vol_db, pitch, mute, from_position)
 	
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		_sfx_system,
 		signal_data,
 		asp
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		asp_config,
 	]

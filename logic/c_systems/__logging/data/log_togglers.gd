@@ -33,7 +33,6 @@ const WEAPON_B := false
 const PSM_B := false
 const BEHAVIOR_INTERNAL_FILTER := false
 const ACTION_ANIM_B := false
-const META_STATES_B := false
 
 # PLAYER LSM
 const LSM_BEH_B := false
@@ -50,7 +49,10 @@ const PHE_INTERNAL_FILTER_B := false
 const PHE_CHECK_B := false
 const PHE_B := false
 const PHE_ANIM_B := false
-const E_ANIM_MANAGER_B := false
+
+
+class ANIM:
+	const E_MANAGER := false
 
 
 class FEEL:

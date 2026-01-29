@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dl7w5h28u6d36"]
+[gd_scene load_steps=15 format=3 uid="uid://dl7w5h28u6d36"]
 
 [ext_resource type="Script" uid="uid://cpfh86vdgd0ep" path="res://logic/c_systems/camera/fancy-camera/fancy_camera.gd" id="1_16fd4"]
 [ext_resource type="Script" uid="uid://bib68l3buxn3j" path="res://logic/c_systems/camera/fancy-camera/camera_movement.gd" id="2_bu8o1"]
@@ -6,21 +6,19 @@
 [ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/c_systems/camera/fancy-camera/free_state.gd" id="3_wpkwu"]
 [ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/c_systems/camera/fancy-camera/camera_target/camera_socket.gd" id="5_sttfw"]
 [ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/Items/interact_area/3DOnTopLabel.tscn" id="5_u7x54"]
+[ext_resource type="Material" uid="uid://def5pgnboedqm" path="res://-assets-/materials-shared/solid/banana.tres" id="5_v1xt6"]
 [ext_resource type="PackedScene" uid="uid://carduerw3k1il" path="res://logic/entities/VFX/target_circle/target_circle.tscn" id="6_tlnea"]
 [ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/materials-shared/_shaders/target_dot/target_dot.gdshader" id="7_r7icc"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lfwa"]
-albedo_color = Color(1, 0.991667, 0.5, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lptl"]
 albedo_color = Color(1, 0.16, 0.174, 1)
 metallic = 0.4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5k2h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1xt6"]
 transparency = 1
 disable_ambient_light = true
 disable_fog = true
-albedo_color = Color(0.3, 0.008999992, 0.09144999, 0.8235294)
+albedo_color = Color(0.18223934, 0.30370012, 0.6154072, 0.8235294)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6recs"]
 albedo_color = Color(0.55, 0.18149999, 0.18149999, 1)
@@ -29,10 +27,7 @@ albedo_color = Color(0.55, 0.18149999, 0.18149999, 1)
 transparency = 1
 depth_draw_mode = 1
 disable_fog = true
-albedo_color = Color(0.08845007, 0.61, 0.061000016, 0.75686276)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k82lp"]
-albedo_color = Color(0.140835, 0.982483, 0.0937185, 1)
+albedo_color = Color(0.08845007, 0.61, 0.061000016, 0.3137255)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7x54"]
 render_priority = 0
@@ -62,26 +57,29 @@ script = ExtResource("2_bu8o1")
 unique_name_in_owner = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CameraPivot"]
-transform = Transform3D(0.973625, 0, 0, 0, 0.795634, 0, 0, 0, 0.415539, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_6lfwa")
+transform = Transform3D(0.5715179, 0, 0, 0, 0.46703714, 0, 0, 0, 0.2439214, 0, 0, 0)
+material_override = ExtResource("5_v1xt6")
 size = Vector3(0.289307, 0.341797, 0.743164)
 
-[node name="3DOnTopLabel" parent="CameraPivot/CSGBox3D2" instance=ExtResource("5_u7x54")]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0.37721774, 0)
+[node name="3DOnTopLabel" parent="CameraPivot" instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17024942, 0.020204216, 0)
+modulate = Color(0.6900825, 0.6570229, 0.46303803, 1)
 text = "Pivot"
-font_size = 30
+font_size = 24
 
 [node name="Aim" type="Node3D" parent="."]
 unique_name_in_owner = true
 
 [node name="CSGSphere3D3" type="CSGSphere3D" parent="Aim"]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_7lptl")
 radius = 0.2
 
-[node name="3DOnTopLabel" parent="Aim/CSGSphere3D3" instance=ExtResource("5_u7x54")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20763499, 0)
+[node name="3DOnTopLabel" parent="Aim" instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15981427, 0.02343452, 0)
+modulate = Color(0.6018299, 0.39194763, 0.39194763, 1)
 text = "Aim"
-font_size = 30
+font_size = 20
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 unique_name_in_owner = true
@@ -91,18 +89,19 @@ fov = 62.0
 far = 1000.0
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="PlayerCamera"]
-transform = Transform3D(0.64345056, 8.881784e-16, 1.4210855e-13, 7.5495166e-15, 0.61953735, 1.4901161e-08, -6.750156e-14, -7.450581e-09, 0.76491296, 0, 0, 0.017)
-material_override = SubResource("StandardMaterial3D_c5k2h")
-
-[node name="3DOnTopLabel" parent="PlayerCamera/CSGBox3D2" instance=ExtResource("5_u7x54")]
-fixed_size = true
-text = "Camera
-"
-font_size = 44
+transform = Transform3D(0.546933, 8.881784e-16, 1.2079227e-13, 6.217249e-15, 0.5266067, 7.450581e-09, -4.973799e-14, -7.450581e-09, 0.65017617, 5.684342e-14, 0.002117753, -0.008346796)
+material_override = SubResource("StandardMaterial3D_v1xt6")
 
 [node name="CSGrot" type="CSGBox3D" parent="PlayerCamera"]
-transform = Transform3D(0.15349771, 2.220446e-16, 1.4210855e-13, 2.1094237e-15, 0.14349538, 1.1175871e-07, -1.5987212e-14, -4.004687e-08, 0.69635254, 2.842171e-14, 0.028238297, -0.3209517)
+transform = Transform3D(0.13047306, 1.110223e-16, 1.314504e-13, 1.8873791e-15, 0.12197108, 9.313226e-08, -1.4210855e-14, -3.4458935e-08, 0.5918997, 8.526513e-14, 0.026120424, -0.2956059)
 material_override = SubResource("StandardMaterial3D_6recs")
+
+[node name="3DOnTopLabel" parent="PlayerCamera" instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, -1.1732862e-14, 8.834155e-14, 1.17328615e-14, 1, 1.20260415e-08, -8.834155e-14, -1.20260415e-08, 1, 2.842171e-14, 0, 0.016999722)
+modulate = Color(0.6493505, 0.48695287, 0.48695287, 1)
+text = "Camera
+"
+font_size = 25
 
 [node name="CameraSocket" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -111,46 +110,61 @@ script = ExtResource("5_sttfw")
 
 [node name="CSGSocket" type="CSGSphere3D" parent="CameraSocket"]
 unique_name_in_owner = true
-transform = Transform3D(0.555764, 0, -3.5527137e-15, 0, 0.555764, 0, 3.5527137e-15, 0, 0.555764, 0, 0, 0)
+transform = Transform3D(0.281739, 0, -1.7763568e-15, 0, 0.281739, 0, 1.7763568e-15, 0, 0.281739, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3e4lf")
 radius = 0.7
 smooth_faces = false
 
-[node name="CSGSocket1" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
-unique_name_in_owner = true
-transform = Transform3D(0.20524, 0, 0, 0, 0.330627, 0, 0, 0, 0.23652, 0.0364853, -0.737425, 0)
-material_override = SubResource("StandardMaterial3D_k82lp")
-radius = 0.7
+[node name="CSGMetki" type="Node3D" parent="CameraSocket"]
+transform = Transform3D(0.39459243, 0, -3.5527137e-15, 0, 0.39459243, 0, 3.5527137e-15, 0, 0.39459243, 0, 0, 0)
 
-[node name="CSGSocket2" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
+[node name="CSGSocket1" type="CSGSphere3D" parent="CameraSocket/CSGMetki"]
 unique_name_in_owner = true
-transform = Transform3D(0.20524, 0, 0, 0, 0.330627, 0, 0, 0, 0.23652, 0.0364853, 0.74965703, 0)
-material_override = SubResource("StandardMaterial3D_k82lp")
+transform = Transform3D(0.20524, 0, 0, 0, 0.33062696, 0, -1.7763568e-15, 0, 0.23652, 0.0364853, -0.73742497, 0)
 radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
 
-[node name="CSGSocket3" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
+[node name="CSGSocket2" type="CSGSphere3D" parent="CameraSocket/CSGMetki"]
 unique_name_in_owner = true
-transform = Transform3D(-0.0017194, -0.330616, 0, 0.205233, -0.00276983, 0, 0, 0, 0.23652, 0.771236, 0.015276194, 0)
-material_override = SubResource("StandardMaterial3D_k82lp")
+transform = Transform3D(0.20524, 0, 0, 0, 0.33062696, 0, -1.7763568e-15, 0, 0.23652, 0.0364853, 0.7496569, 0)
 radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
 
-[node name="CSGSocket4" type="CSGSphere3D" parent="CameraSocket/CSGSocket"]
+[node name="CSGSocket3" type="CSGSphere3D" parent="CameraSocket/CSGMetki"]
 unique_name_in_owner = true
-transform = Transform3D(-0.0017194, -0.330616, 0, 0.205233, -0.00276983, 0, 0, 0, 0.23652, -0.755577, 0.015276194, 0)
-material_override = SubResource("StandardMaterial3D_k82lp")
+transform = Transform3D(-0.0017193999, -0.33061597, 0, 0.20523298, -0.0027698297, 0, 1.3877788e-17, 1.7763568e-15, 0.23652, 0.771236, 0.015276194, 0)
 radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
 
-[node name="3DOnTopLabel2" parent="CameraSocket/CSGSocket" instance=ExtResource("5_u7x54")]
-transform = Transform3D(0.99999994, 0, 7.1054274e-15, 0, 0.99999994, 0, -7.1054274e-15, 0, 0.99999994, 0, 0.09500599, 0)
-fixed_size = true
-text = "Socket
-"
-font_size = 54
-outline_size = 10
+[node name="CSGSocket4" type="CSGSphere3D" parent="CameraSocket/CSGMetki"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0017193999, -0.33061597, 0, 0.20523298, -0.0027698297, 0, 1.3877788e-17, 1.7763568e-15, 0.23652, -0.755577, 0.015276194, 0)
+radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
 
 [node name="test" type="Camera3D" parent="CameraSocket" groups=["debug_cameras"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
 
+[node name="3DOnTopLabel2" parent="CameraSocket" instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 8.953061e-15, 0, 1, 0, -8.953061e-15, 0, 1, 0, 0.052800894, 0)
+modulate = Color(0.56576514, 1, 0.6630156, 1)
+text = "Socket"
+font_size = 30
+outline_size = 10
+
 [node name="CircleTarget" parent="." instance=ExtResource("6_tlnea")]
 unique_name_in_owner = true
+visible = false
 material_override = SubResource("ShaderMaterial_u7x54")

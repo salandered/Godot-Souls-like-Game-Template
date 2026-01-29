@@ -1,6 +1,6 @@
 @abstract
 class_name TimeManagement
-extends Node
+extends NodeLogger
 
 ## suits for any node with life cycle like this:
 ##	on_enter - update - on_exit

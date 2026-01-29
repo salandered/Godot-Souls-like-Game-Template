@@ -48,7 +48,7 @@ var ui_tween: Tween
 const DEFAULT_GLOBAL_MARGIN: int = 60
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		global_container,
 		image_display,
@@ -63,7 +63,7 @@ func __hard_dependencies() -> Array[Object]:
 		legend_label
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		book_flip_asp,
 	]

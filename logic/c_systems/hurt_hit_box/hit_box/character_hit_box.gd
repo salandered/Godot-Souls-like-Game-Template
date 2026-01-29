@@ -45,7 +45,7 @@ var _original_capsule_shape_radius: float
 var _original_capsule_shape_height: float
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		_combat
 	]
@@ -191,7 +191,7 @@ func on_area_contact(incoming_area: Node3D):
 	# if _combat is PlayerCombat:
 		# prints("contact", em.crucial_x2, "/n", em.crucial_x2)
 		
-	# __log_("Calling apply_hit with hit data", hit_data)
+	__log_("Calling apply_hit with hit data", hit_data)
 	_combat.apply_hit(hit_data)
 
 

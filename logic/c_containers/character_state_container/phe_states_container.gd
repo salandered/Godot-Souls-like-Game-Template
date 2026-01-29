@@ -1,12 +1,11 @@
 @tool
-@icon("res://-assets-/x_icons/white/icon_grid.png")
-extends NodeSystem
-class_name PHContainer
+class_name PHEContainer
+extends BaseStatesContainer
 
 
 @onready var leaf_state_pool: Node = %LeafStatePool
 
-var _node_state_container: BaseNodeStateDataContainer
+var _node_state_container: PHEBaseNodeStateDataContainer
 
 
 var me: PHCharacter
@@ -23,7 +22,7 @@ func get_state_by_name(state_name: String) -> BasePHEState:
 	return _states[state_name]
 
 
-func accept_states(node_state_container_: BaseNodeStateDataContainer):
+func accept_states(node_state_container_: PHEBaseNodeStateDataContainer):
 	self._node_state_container = node_state_container_
 	_accept_states()
 	_initialise_states()
@@ -43,10 +42,10 @@ func __accept_base_state(node: BasePHEState, state_data: EDC.BaseStData):
 	# common
 	node.me = me
 	node.container = self
-	node.anim_container = me.anim_container
+	node.anim_container = me._anim_container
 	node.phe_feelings = me.phe_feelings
 	node.combat = me.get_combat()
-	node.animator_manager = me.animator_manager
+	node.animator_manager = me.get_animator_manager()
 	node.e_movement = me.get_e_movement()
 	node.anim_params_container = me.get_anim_params_container()
 	node.config = me.config
@@ -67,7 +66,7 @@ func _accept_states():
 
 		node.state_depth = depth
 
-		assert(node.state_depth <= PHEStaticConfig.MAX_DEPTH, "too much")
+		assert(node.state_depth <= PHEConfig.MAX_DEPTH, "too much")
 
 		var state_data: EDC._CSData = _node_state_container.get_node_to_composite_state_data().get(node.get_name())
 		if not state_data:
@@ -87,7 +86,7 @@ func _accept_states():
 			__log_warn("EDC._LStData for", node.get_name(), "not found, skipping")
 			continue
 
-		var _anim := me.anim_container.get_by_anim_id(lst_data.anim_data.anim_id)
+		var _anim := me._anim_container.get_by_anim_id(lst_data.anim_data.anim_id)
 		node.anim = _anim
 		node.y_offset_adjustment = lst_data.anim_data.y_offset_adjustment
 

@@ -21,7 +21,7 @@ var sig_container: BaseWeaponSignalContainer
 var _sig_throttler: EventThrottler
 var _overlapping_obj_throttler: EventThrottler
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		my_weapon
 	]
@@ -133,7 +133,7 @@ func _apply_sfx_hit_target(body: Node3D):
 	if body is BreakableArea:
 		_emit_sig(SignalID.sfx_hit_target, {}, body)
 		return
-	if body is SimpleTargetHitArea:
+	if body is MonitorPlHitSigArea:
 		_emit_sig(SignalID.sfx_hit_target, {}, body)
 		return
 	if body is Area3D: # including CharacterHitbox (will manage on its own)

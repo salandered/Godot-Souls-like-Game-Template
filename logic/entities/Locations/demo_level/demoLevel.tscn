@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=4 uid="uid://bm5vqmonl5jl4"]
+[gd_scene load_steps=112 format=4 uid="uid://bm5vqmonl5jl4"]
 
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/c_systems/level/demo_level.gd" id="1_skc02"]
 [ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/c_systems/weather_system/weather.gd" id="2_cfi4c"]
@@ -56,6 +56,7 @@
 [ext_resource type="LightmapGIData" uid="uid://cp1oob1d7payd" path="res://logic/entities/Locations/demo_level/demoLevel_tree_group.lmbake" id="23_x0u1k"]
 [ext_resource type="Material" uid="uid://cxm12dtohd4dt" path="res://-assets-/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_rough.tres" id="24_b71br"]
 [ext_resource type="PackedScene" uid="uid://p67hfjlxhimn" path="res://-assets-/GLB-level/demo-level_/linkoln/mountain_view/mountain_view_WRAPPER.tscn" id="26_pulto"]
+[ext_resource type="PackedScene" uid="uid://c421xpr4qgnv8" path="res://logic/entities/Items/simple_target/DevHitTarget.tscn" id="27_ivsur"]
 [ext_resource type="LightmapGIData" uid="uid://dngekh46ei6ch" path="res://logic/entities/Locations/demo_level/demoLevel_tower.lmbake" id="27_tc4ti"]
 [ext_resource type="Material" uid="uid://dpd6ypkn8dd5a" path="res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_lighter_cleaner_Trip.tres" id="28_b71br"]
 [ext_resource type="PackedScene" uid="uid://cder7q45c0ofb" path="res://logic/entities/Items/door/_BaseDoor.tscn" id="29_pulto"]
@@ -64,6 +65,7 @@
 [ext_resource type="PackedScene" uid="uid://bydwaf8keh4gq" path="res://logic/entities/Items/chest/DodgeIncreaseChest.tscn" id="31_6pevu"]
 [ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/Items/pick_item/DodgeIncreaseItem.tscn" id="33_p81po"]
 [ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/Items/pick_item/health_item/MaxHealthItem.tscn" id="34_dffxn"]
+[ext_resource type="PackedScene" uid="uid://b0eq3ihtn4wf" path="res://logic/entities/Items/fighter/MechFighter.tscn" id="34_skk2x"]
 [ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://logic/c_systems/unsorted/plush/MiniPlush.tscn" id="35_qa10r"]
 [ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="36_g5qky"]
 [ext_resource type="PackedScene" uid="uid://0isjovhfn8l7" path="res://logic/c_systems/unsorted/plush/BiggestPlush.tscn" id="36_lne8g"]
@@ -81,6 +83,7 @@
 [ext_resource type="PackedScene" uid="uid://br0ld6w6es8le" path="res://logic/entities/Items/interact_area/MonitorPlayerEnterSignalArea.tscn" id="52_e70k6"]
 [ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/back/back_bits.mp3" id="53_o1prw"]
 [ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/phe_enemy/PHEnemy_2.tscn" id="56_ohlvg"]
+[ext_resource type="PackedScene" uid="uid://53le0wkw6bvm" path="res://logic/entities/VFX/lights/omni/StaticOmni.tscn" id="76_56lme"]
 [ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/Items/pick_item/SpeedIncreaseItem.tscn" id="76_xu021"]
 [ext_resource type="ArrayOccluder3D" uid="uid://b4u3jdp2rv8f2" path="res://logic/entities/Locations/demo_level/demoLevel.occ" id="78_w0ai3"]
 
@@ -90,7 +93,7 @@ background_color = Color(0.8, 0.913725, 1, 1)
 sky = ExtResource("3_58tqt")
 ambient_light_source = 3
 ambient_light_color = Color(0.20129895, 0.20129895, 0.20129895, 1)
-ambient_light_sky_contribution = 0.2
+ambient_light_sky_contribution = 0.3
 ambient_light_energy = 2.0
 reflected_light_source = 2
 tonemap_mode = 4
@@ -99,7 +102,7 @@ tonemap_white = 1.2
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.25490198, 0.37254903, 0.5019608, 1)
+fog_light_color = Color(0.23524225, 0.01825156, 0, 1)
 fog_light_energy = 0.91
 fog_density = 0.0
 fog_sky_affect = 0.0
@@ -107,7 +110,7 @@ fog_height = -31.04
 fog_height_density = 0.007
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.009
-volumetric_fog_albedo = Color(0.7764706, 0.9490196, 1, 1)
+volumetric_fog_albedo = Color(0.7511804, 0.7425674, 0.7411612, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3y2i"]
 size = Vector3(15.666992, 6.004822, 1.3508301)
@@ -201,7 +204,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pijfo")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xu021"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_skk2x"]
 radius = 2.0
 height = 4.0
 
@@ -280,7 +283,7 @@ normal_enabled = true
 normal_texture = ExtResource("51_rqhon")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_56lme"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8cuj"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
 density = 0.2
@@ -330,7 +333,6 @@ target_bottom_color = Color(0.31764707, 0.16470589, 0, 1)
 change_cloud_coverage = true
 target_cloud_coverage = 0.89
 change_amb_energy = true
-target_amb_energy = 1.4
 change_amb_sky_contribution = true
 target_amb_sky_contribution = 0.3
 change_fog_light_color = true
@@ -339,7 +341,7 @@ change_vol_fog_light_color = true
 target_vol_fog_light_color = Color(0.7511804, 0.7425674, 0.7411612, 1)
 change_vol_fog_density = true
 change_direct_light = true
-target_direct_light = 0.3
+target_direct_light = 0.4
 
 [node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/JawEntry"]
 transform = Transform3D(0.37887472, 0, -0.925448, 0, 1, 0, 0.925448, 0, 0.37887472, 0, 0, 0)
@@ -443,6 +445,7 @@ debug_color = Color(0.70196074, 0.43017352, 0, 1)
 [node name="DirectionalSun" type="DirectionalLight3D" parent="Weather/Sun"]
 transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
 light_color = Color(1, 0.9929813, 0.96693254, 1)
+light_energy = 0.4
 light_volumetric_fog_energy = 1.2
 light_cull_mask = 4294967293
 shadow_enabled = true
@@ -730,6 +733,9 @@ light_indirect_energy = 12.0
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -54.036667, 12.842042, 34.617493)
 player = NodePath("../../../Princess")
 
+[node name="MechFighter" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("34_skk2x")]
+transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -46.728897, 12.989326, 38.806297)
+
 [node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_w0ai3")]
 transform = Transform3D(1, 0, 0, 0, 0.95444363, -0.2983912, 0, 0.2983912, 0.95444363, -19.973879, 0.91030014, 11.343478)
 
@@ -793,13 +799,16 @@ size = Vector3(13.467041, 13.36908, 14.250458)
 shape = 0
 material = SubResource("FogMaterial_ee878")
 
+[node name="DevHitTarget" parent="Lincoln_ALL/wooden_balcony_WRAPPER" instance=ExtResource("27_ivsur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.431895, 0.41162515, 32.01375)
+
 [node name="ISLAND_WRAPPER" parent="Lincoln_ALL" instance=ExtResource("12_x0u1k")]
 
 [node name="HealtChest" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("15_acr6p")]
 transform = Transform3D(0.9793293, -0.07336004, 0.18850046, 0.07203774, 0.9973055, 0.013865763, -0.18900976, 0, 0.9819752, -52.03086, 0.4940672, -13.1470995)
 
 [node name="SimpleTarget3" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("18_2euvp")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -46.879158, 0.35142517, -14.125581)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -48.023872, 0.35142517, -13.994987)
 
 [node name="Rock_1_004_visuals" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.71704, 3.0786085, -2.9971385)
@@ -817,19 +826,23 @@ area_capsule_radius = 4.0
 area_capsule_height = 4.0
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0"]
-shape = SubResource("CapsuleShape3D_xu021")
+shape = SubResource("CapsuleShape3D_skk2x")
 
 [node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("21_w0ai3")]
 transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
 
-[node name="SittingSkeletonAlt" parent="Lincoln_ALL/ISLAND_WRAPPER/StaticBarrel" instance=ExtResource("30_ktdwm")]
+[node name="SittingSkeletonAlt" parent="Lincoln_ALL/ISLAND_WRAPPER/StaticBarrel" node_paths=PackedStringArray("player") instance=ExtResource("30_ktdwm")]
 transform = Transform3D(-0.9971849, 0, -0.074978635, 0, 0.9999998, 0, 0.07497863, 0, -0.99718505, -0.018268585, -0.016711235, 0.08400059)
+player = NodePath("../../../../Princess")
 
 [node name="Rock_1_004_visuals2" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER"]
 transform = Transform3D(0.43853706, 0.110105, -0.2097065, -0.22908448, 0.08507292, -0.43439338, -0.0601682, 0.47859606, 0.12546034, -53.68312, 12.605973, 34.763615)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_xm4a8")
 skeleton = NodePath("")
+
+[node name="MechFighter" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("34_skk2x")]
+transform = Transform3D(-0.1917169, 0, -0.98145026, 0, 1, 0, 0.98145026, 0, -0.1917169, -45.907993, 0.5208559, -13.289304)
 
 [node name="LightmapGI_LINC" type="LightmapGI" parent="Lincoln_ALL"]
 visible = false
@@ -1041,7 +1054,7 @@ material_override = ExtResource("48_y0kr0")
 material_override = SubResource("StandardMaterial3D_ktdwm")
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" index="0"]
-shape = SubResource("CapsuleShape3D_56lme")
+shape = SubResource("CapsuleShape3D_o8cuj")
 
 [node name="SimpleTarget2" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.045063, 0.5982324, 36.92067)
@@ -1423,7 +1436,7 @@ material = SubResource("FogMaterial_ee878")
 [node name="doors" type="Node" parent="TOWER_ALL"]
 
 [node name="BaseDoor" parent="TOWER_ALL/doors" instance=ExtResource("29_pulto")]
-transform = Transform3D(-0.03819278, 0, -0.81915194, 0, 0.6478, 0, 0.83913124, 0, -0.037283428, -20.07559, 0.6490598, 5.872923)
+transform = Transform3D(-0.032184597, 0, -0.7071259, 0, 0.7078579, 0, 0.7071259, 0, -0.032184597, -20.07559, 0.5171592, 5.7800407)
 
 [node name="LockedDoor1" parent="TOWER_ALL/doors" instance=ExtResource("29_pulto")]
 transform = Transform3D(-0.97317886, 0, -0.23004974, 0, 1.0000001, 0, 0.23004971, 0, -0.973179, -13.190179, 0.23764694, -1.684826)
@@ -1445,7 +1458,7 @@ transform = Transform3D(-0.49854836, 0, 0.8668619, 0, 1, 0, -0.8668619, 0, -0.49
 
 [node name="LightmapGI_JAW" type="LightmapGI" parent="JAW_ALL"]
 quality = 0
-bounce_indirect_energy = 1.5
+bounce_indirect_energy = 2.0
 use_denoiser = false
 environment_mode = 0
 light_data = ExtResource("20_p1nq7")
@@ -1458,11 +1471,11 @@ light_data = ExtResource("20_p1nq7")
 transform = Transform3D(-0.72641385, -0.3674173, 0.580799, -0.05745016, 0.8746022, 0.48142555, -0.6848521, 0.31634706, -0.6564313, -74.81946, 10.00488, 32.90414)
 light_color = Color(0.7715464, 0.62008715, 0.548144, 1)
 light_energy = 25.0
-light_indirect_energy = 5.0
+light_indirect_energy = 7.573
 light_volumetric_fog_energy = 2.0
 shadow_enabled = true
 spot_range = 70.0
-spot_angle = 24.15
+spot_angle = 33.2
 spot_angle_attenuation = 1.8660665
 
 [node name="omni" type="Node3D" parent="JAW_ALL/JawLights"]
@@ -1477,7 +1490,7 @@ light_indirect_energy = 12.0
 transform = Transform3D(-0.36499876, -0.12922972, 0.92199546, 0.12080244, 0.9753737, 0.18453455, -0.9231374, 0.17873417, -0.3403989, -71.91378, 2.3680193, 32.212463)
 light_color = Color(0.7240258, 0.3313485, 0.25725845, 1)
 light_energy = 2.9
-light_indirect_energy = 12.0
+light_indirect_energy = 13.93
 light_bake_mode = 2
 
 [node name="OmniLight3D4" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
@@ -1512,6 +1525,16 @@ transform = Transform3D(0.9547872, -0.058274988, 0.29152265, 0, 0.9805998, 0.196
 light_color = Color(1, 0.5601858, 0.47450984, 1)
 light_energy = 0.677
 omni_range = 3.0
+
+[node name="StaticOmni" parent="JAW_ALL" instance=ExtResource("76_56lme")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -107.56591, -0.9904119, 36.582054)
+visible = false
+radius = 4.0
+energy = 1.0
+indirect_energy = 2.0
+attenuation = 1.2
+cast_shadows = false
+bake_mode = 1
 
 [node name="SecretEnemy" parent="JAW_ALL" node_paths=PackedStringArray("player") instance=ExtResource("51_5q2id")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.45591, -0.9653901, 36.479053)

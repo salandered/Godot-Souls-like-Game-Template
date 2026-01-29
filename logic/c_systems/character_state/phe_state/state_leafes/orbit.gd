@@ -118,7 +118,7 @@ func _choose_initial_direction(to_opposite: bool = false):
 		_:
 			curr_direction.set_direction(DualDirection.Dir.PRIMARY if ra.coinflip() else DualDirection.Dir.SECONDARY)
 
-	anim = me.anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
+	anim = anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
 	_set_up_commit_timer()
 	if __ELA(): __log_ent("chosen initial direction", curr_direction)
 

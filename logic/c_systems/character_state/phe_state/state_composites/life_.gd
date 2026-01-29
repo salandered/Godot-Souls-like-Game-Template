@@ -46,7 +46,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 
 	# Would be here for now
-	#       WL is force switch to combat_phase
+	#       Fallback is force switch to combat_phase
 	elif me.fatigue_raised:
 		if __ELA(): _reason += em.pin + "Declined: Some state raised 'fatigue_raised', we switch to " + _next_state
 		_next_state = PHES.combat_phase

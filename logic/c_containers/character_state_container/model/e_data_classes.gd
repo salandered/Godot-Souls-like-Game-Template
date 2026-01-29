@@ -1,12 +1,13 @@
 extends RefCounted
 class_name EDC
 
+
 class _CommitData:
 	var commitment: float
 	var fatigue: float
 	func _init(
-			commitment_: float = PHEStaticConfig.DEF_COMMITMENT,
-			fatigue_: float = PHEStaticConfig.DEF_FATIGUE,
+			commitment_: float = BGConfig.DEF_COMMITMENT,
+			fatigue_: float = BGConfig.DEF_FATIGUE,
 		) -> void:
 		self.commitment = commitment_
 		self.fatigue = fatigue_
@@ -17,7 +18,7 @@ class _AData:
 	var y_offset_adjustment: float
 	func _init(
 			anim_id_: String,
-			y_offset_adjustment_: float = PHEStaticConfig.DEFAULT_Y_OFFSET
+			y_offset_adjustment_: float = BGConfig.DEFAULT_Y_OFFSET
 		) -> void:
 		self.anim_id = anim_id_
 		self.y_offset_adjustment = y_offset_adjustment_

@@ -139,11 +139,10 @@ func update(input_: InputPackage, delta: float) -> void:
 	hit_timer.update(delta)
 
 	var verdict := current_state._check_transition(input_)
-	verdict._speak_freely()
 
 	if verdict.needs_switch():
-		print_.psm("", "")
-		print_.psm("↪️", current_state.state_name + " => " + verdict.next_state)
+		__log_("", "")
+		__log_("↪️", current_state.state_name + " => " + verdict.next_state)
 		
 		current_state._on_exit_state()
 		prev_state_name = current_state.state_name
@@ -163,9 +162,6 @@ func update(input_: InputPackage, delta: float) -> void:
 # region
 
 func __LOG_B() -> bool:
-	return false
-
-func __LOG_INDENT() -> int:
-	return 0
+	return LogToggler.PSM_B
 
 # endregion

@@ -2,6 +2,7 @@
 class_name BaseAction
 extends PlActionTimeManagement
 
+
 var container: PlayerStatesContainer
 var feelings: PlayerFeelings
 
@@ -276,13 +277,6 @@ var __LOG_OVERLAY_ANIM: bool = true
 
 
 @abstract func __log_function(prefix: String, ...parts: Array) -> void
-
-func __log_error(what: String, where: String = "", fallback: String = "", ...parts: Array):
-	var _parts := pp.list_(parts)
-	error_.warn(what, where, fallback, WL.PUSH_ERROR, _parts, "\n\t\t", action_name)
-
-func __log_warn(what: String, where: String = "", fallback: String = "", ...context: Array):
-	error_.warn(what, pp.s(action_name, "|", where), fallback, WL.WARN_CRUCIAL, pp.list_(context))
 
 
 func __log_ent(...parts: Array):

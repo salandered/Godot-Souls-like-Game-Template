@@ -1,6 +1,7 @@
-extends RefCounted
 ## Legs Action Motion Type
 class_name MotionType
+extends RefCounted
+
 
 const IDLE := 'IDLE'
 const START := 'START'

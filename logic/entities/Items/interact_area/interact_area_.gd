@@ -6,6 +6,7 @@ extends CommonArea
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 
+@export_group("Label")
 @export var label_text: String = "Press E to interact":
 	set(value):
 		label_text = value
@@ -74,11 +75,13 @@ func on_overlapping_bodies(incoming_bodies: Array[Node3D]) -> void:
 # endregion
 
 func _physics_process_implementation(delta: float) -> void:
+	# __log_("_physics_process_implementation")
 	_set_is_player_inside(_player_found_this_frame)
 
 	_set_label_visible(_is_player_inside and MONITOR_ENABLED)
 	
 	_set_process_unhandled_input(_is_player_inside and MONITOR_ENABLED)
+
 
 func _set_monitor_enable_implementation(value: bool):
 	_set_label_visible(value)
@@ -140,6 +143,9 @@ func _can_interact() -> bool:
 		return false
 	
 	return true
+
+
+##
 
 
 func __LOG_B() -> bool:

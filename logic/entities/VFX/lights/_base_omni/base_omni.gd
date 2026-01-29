@@ -86,10 +86,10 @@ extends Node3DSystem
 @onready var test_visuals_base: Node3D = %test_visuals_base
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [omni_light_3d]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [puff_fog, __csg]
 
 # endregion

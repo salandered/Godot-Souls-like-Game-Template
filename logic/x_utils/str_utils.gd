@@ -9,7 +9,7 @@ static func snake_to_sentence(text: String) -> String:
 		return ""
 		
 	# substr(1) is ok if len is 1.
-	return clean[0].to_upper() + clean.substr(1).to_lower()
+	return clean[0].to_upper() + clean.substr(1)
 
 
 static func to_pascal_case(snake_case: String) -> String:
@@ -53,6 +53,7 @@ static func calculate_tab_prefix(indents: int) -> String:
 		7: "                            ",
 		8: "                                ",
 		10: "                                        ",
+		12: "                                                ",
 		16: "                                                                ",
 	}
 	if cache.has(indents):

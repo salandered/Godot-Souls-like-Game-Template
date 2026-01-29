@@ -21,12 +21,12 @@ extends BaseLevel
 @onready var sitting_scene: SittingSceneWrapper = %sitting2
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		camera_3d
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		skeleton_scene,
 		sitting_scene
@@ -62,7 +62,7 @@ func _handle_parallax(delta: float) -> void:
 	var center_offset_y := (mouse_pos.y / screen_size.y) - 0.5
 
 	# Smoothly interpolate current rotation towards target rotation
-	var target_rot_y := - center_offset_x * parallax_strength
+	var target_rot_y := -center_offset_x * parallax_strength
 	
 	# We convert the base pitch from degrees to radians and add the mouse offset
 	var target_rot_x := deg_to_rad(camera_base_pitch) + (-center_offset_y * parallax_strength)

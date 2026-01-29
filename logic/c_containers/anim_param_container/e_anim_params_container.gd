@@ -25,9 +25,10 @@ func get_track_prefixes() -> Array[String]:
 
 
 const TRACK_PREFIXES: Array[String] = [
-	"%AnimParameters:",
+	"AnimatorManager/AnimationPlayer/AnimParameters:",
 	"AnimatorManager/NativePlayer/AnimParameters:",
-	"AnimatorManager/AnimationPlayer/AnimParameters:"]
+	"%AnimParameters:",
+]
 # AnimatorManager/AnimationPlayer/AnimParameters:weapon_hurts
 
 #####################

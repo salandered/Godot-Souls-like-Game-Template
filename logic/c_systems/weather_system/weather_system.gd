@@ -47,10 +47,10 @@ var _tween_sun_scatter: Tween
 var _tween_direct_light: Tween
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [world_env]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [sun_light]
 
 

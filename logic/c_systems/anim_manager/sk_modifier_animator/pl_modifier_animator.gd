@@ -56,7 +56,7 @@ var _bone_idx_to_track: Dictionary[int, String] = {}
 var __custom_delta: CustomDelta = CustomDelta.new()
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		skeleton,
 		root_animator,
@@ -101,20 +101,22 @@ func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offs
 	# print_.skm(animator_name, __log_state())
 
 
+var delta_: float
+
 func _process_modification():
 	if not __validation_ok():
 		return
 		
 	# calculate custom_delta between now and the last call.
-	__custom_delta.update()
-	var dt = __custom_delta.delta
+	# __custom_delta.update()
+	# var dt = __custom_delta.delta
 	# add custom_delta to curr anim's time_spent.
 
-	dt = get_process_delta_time()
+	delta_ = get_process_delta_time()
 	
-	_update_time(dt)
-	_update_blend_values(dt)
-	_update_skeleton(dt)
+	_update_time(delta_)
+	_update_blend_values(delta_)
+	_update_skeleton(delta_)
 
 
 func _update_time(custom_delta: float):

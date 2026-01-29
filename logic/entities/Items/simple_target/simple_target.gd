@@ -3,14 +3,14 @@ extends Node3DSystem
 
 @export var label: String
 @onready var camera_target: EnemyCameraTarget = %CameraTarget
-@onready var hit_area: SimpleTargetHitArea = %HitArea
+@onready var hit_area: MonitorPlHitSigArea = %HitArea
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
 var last_hit: HitData = null
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		animation_player,
 		hit_area,

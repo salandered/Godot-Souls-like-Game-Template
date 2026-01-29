@@ -1,52 +1,52 @@
 ## Sub part of PlayerModifierAnimator which calculates root related data
 class_name PlayerRootAnimator
-extends NodeCharacterSystem
+extends NodeSystem
+
 
 @onready var full_body: PlayerModifierAnimator = %FullBody
 
 var _root_track: String
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [full_body]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return []
 
 
-func is_player() -> bool:
-	return true
+func __hard_validation() -> bool:
+	return _root_track != ""
 
 
 func initialise(root_track: String) -> void:
 	self._root_track = root_track
-	error_.empty_string(_root_track)
 	__perform_validation()
 
 
-func get_global_speed_scale() -> float:
+func _get_global_speed_scale() -> float:
 	return full_body.global_speed_scale
 
-func get_curr_playback() -> AnimPlayback:
+func _get_curr_playback() -> AnimPlayback:
 	return full_body.curr_playback
 
-func get_prev_playback() -> AnimPlayback:
+func _get_prev_playback() -> AnimPlayback:
 	return full_body.prev_playback
 
-func get_blend_playback() -> BlendPlayback:
+func _get_blend_playback() -> BlendPlayback:
 	return full_body.curr_blend_playback
 
-func get_custom_delta() -> float:
-	return full_body.__custom_delta.delta
+func _get_custom_delta() -> float:
+	return full_body.delta_
 
 
 func get_prev_root_rotation() -> float:
-	if get_prev_playback().get_effective_time_spent() >= get_prev_playback().anim.duration:
-		__log_("", "Will return 0.0. effective_prog >= anim.duration. Details:", get_prev_playback()._to_string_short())
+	if _get_prev_playback().get_effective_time_spent() >= _get_prev_playback().anim.duration:
+		__log_("", "Will return 0.0. effective_prog >= anim.duration. Details:", _get_prev_playback()._to_string_short())
 		return 0.0
-	var prev_rotation_delta := _calculate_rotation_delta(get_prev_playback(), BoneIdx.ROOT)
+	var prev_rotation_delta := _calculate_rotation_delta(_get_prev_playback(), BoneIdx.ROOT)
 	# var rotation_ := prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
-	var rotation_ := prev_rotation_delta * get_global_speed_scale()
+	var rotation_ := prev_rotation_delta * _get_global_speed_scale()
 	# if abs(rotation_) > 0.0001:
 	#  	print_.skm("", "get_prev_root_rotation(): delta=%.4f | result=%.4f" % [prev_rotation_delta, residual_rotation])
 
@@ -54,7 +54,7 @@ func get_prev_root_rotation() -> float:
 
 
 func get_root_velocity(y_zeroed: bool = true, use_blending: bool = false, backwards: bool = false) -> Vector3:
-	var curr_playback := get_curr_playback()
+	var curr_playback := _get_curr_playback()
 	var curr_eff_progress := curr_playback.get_effective_time_spent()
 	if curr_eff_progress < Constants.ONE_FRAME:
 		# print_.dev("✔", "curr_eff_progress", curr_eff_progress, "< Constants.ONE_FRAME -> we at the beginning of the anim. backwards to true")
@@ -64,25 +64,25 @@ func get_root_velocity(y_zeroed: bool = true, use_blending: bool = false, backwa
 			# "< Constants.ONE_FRAME -> we at the end f the anim. backwards to false")
 		backwards = false
 
-	var curr_velocity := _calculate_velocity_delta(get_curr_playback(), BoneIdx.ROOT, backwards)
+	var curr_velocity := _calculate_velocity_delta(_get_curr_playback(), BoneIdx.ROOT, backwards)
 	
-	if use_blending and get_blend_playback().is_blending:
-		var prev_velocity := _calculate_velocity_delta(get_prev_playback(), BoneIdx.ROOT, backwards)
-		curr_velocity = prev_velocity.lerp(curr_velocity, get_blend_playback().percentage)
+	if use_blending and _get_blend_playback().is_blending:
+		var prev_velocity := _calculate_velocity_delta(_get_prev_playback(), BoneIdx.ROOT, backwards)
+		curr_velocity = prev_velocity.lerp(curr_velocity, _get_blend_playback().percentage)
 	
 	if y_zeroed:
 		curr_velocity.y = 0
 	
-	return curr_velocity * get_global_speed_scale()
+	return curr_velocity * _get_global_speed_scale()
 
 
 func get_root_rotation(y_only: bool = true) -> float:
-	var curr_rotation_delta := _calculate_rotation_delta(get_curr_playback(), BoneIdx.ROOT)
+	var curr_rotation_delta := _calculate_rotation_delta(_get_curr_playback(), BoneIdx.ROOT)
 	
 	# NOTE: Not supporing two animations in a row with root rotation. 
 	#       For one root rot and other w/o it, this should be checked for sanity
 	
-	return curr_rotation_delta * get_global_speed_scale()
+	return curr_rotation_delta * _get_global_speed_scale()
 
 
 func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int, backwards: bool = false) -> Vector3:
@@ -91,7 +91,7 @@ func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int, backwards:
 	if pos_track == -1 or playback.anim.native_anim.track_get_key_count(pos_track) <= 1:
 		return Vector3.ZERO
 	
-	var scaled_delta := get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
+	var scaled_delta := _get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
 	var curr_progress := playback.get_effective_time_spent()
 	var prev_progress := curr_progress - scaled_delta
 	if backwards:
@@ -111,7 +111,7 @@ func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
 	if rot_track == -1:
 		return 0.0
 	
-	var scaled_delta := get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
+	var scaled_delta := _get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
 	var curr_progress := playback.get_effective_time_spent()
 	var prev_progress: float = max(0.0, curr_progress - scaled_delta)
 	

@@ -1,3 +1,5 @@
+@tool
+@icon("res://-assets-/x_icons/char/image (23).png")
 extends PHCharacter
 class_name BigGuyCharacter
 
@@ -41,8 +43,8 @@ func get_visuals_root() -> Node3D:
 	return _visuals_root
 
 
-func get_node_state_container() -> BaseNodeStateDataContainer:
-	return PHNodeStateDataContainer.new()
+func get_node_state_container() -> PHEBaseNodeStateDataContainer:
+	return PHENodeStateDataContainer.new()
 
 
 func set_angry_raised():

@@ -182,9 +182,14 @@ static func array_of_look_at_head_modifier(array: Array) -> Array[LookAtHeadModi
 	list_casted.assign(_safe_validate_class(array, LookAtHeadModifier3D, "LookAtHeadModifier3D"))
 	return list_casted
 
-static func array_of_look_at_mangers(array: Array) -> Array[LookAtManager]:
-	var list_casted: Array[LookAtManager] = []
-	list_casted.assign(_safe_validate_class(array, LookAtManager, "LookAtManager"))
+static func array_of_look_at_mangers(array: Array) -> Array[ELookAtManager]:
+	var list_casted: Array[ELookAtManager] = []
+	list_casted.assign(_safe_validate_class(array, ELookAtManager, "ELookAtManager"))
+	return list_casted
+
+static func array_of_base_animator_manager(array: Array) -> Array[BaseAnimatorManager]:
+	var list_casted: Array[BaseAnimatorManager] = []
+	list_casted.assign(_safe_validate_class(array, BaseAnimatorManager, "BaseAnimatorManager"))
 	return list_casted
 
 static func array_of_char_hit_box(array: Array) -> Array[CharacterHitbox]:

@@ -166,9 +166,17 @@ static func look_at_head_modifiers(node: Node) -> Array[LookAtHeadModifier3D]:
 	var r := _get_descendants_filtered(node, func(n): return n is LookAtHeadModifier3D)
 	return TypeCast.array_of_look_at_head_modifier(r)
 	
-static func look_at_managers(node: Node) -> Array[LookAtManager]:
-	var r := _get_descendants_filtered(node, func(n): return n is LookAtManager)
+static func look_at_managers(node: Node) -> Array[ELookAtManager]:
+	var r := _get_descendants_filtered(node, func(n): return n is ELookAtManager)
 	return TypeCast.array_of_look_at_mangers(r)
+
+static func pl_look_at_managers(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is PlayerLookAtManager)
+	return r
+
+static func base_anim_managers(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseAnimatorManager)
+	return TypeCast.array_of_base_animator_manager(r)
 	
 
 static func base_combats(node: Node) -> Array[BaseCombat]:
@@ -192,6 +200,10 @@ static func character_sfx_systems(node: Node) -> Array[CharacterSFXSystem]:
 static func base_anim_params_containers(node: Node) -> Array[BaseAnimParamsContainer]:
 	var r := _get_descendants_filtered(node, func(n): return n is BaseAnimParamsContainer)
 	return TypeCast.array_of_base_anim_params_container(r)
+
+static func anim_containers(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is AnimContainer)
+	return r
 
 
 static func base_weapons(node: Node) -> Array[BaseWeapon]:
@@ -227,6 +239,9 @@ static func base_ph_composite_states_with_depth(node: Node) -> Array[Descendant]
 
 static func base_ph_leaf_states(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is BasePHELeaf)
+
+static func base_m_f_states(node: Node) -> Array:
+	return _get_descendants_filtered(node, func(n): return n is BaseMechFighterState)
 
 
 static func enemy_camera_targets(node: Node) -> Array[EnemyCameraTarget]:

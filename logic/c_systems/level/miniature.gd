@@ -5,6 +5,8 @@ class_name Miniature
 extends BaseLevel
 
 
+
+
 func basic_tonemap_exposure() -> float:
 	return 1.0
 

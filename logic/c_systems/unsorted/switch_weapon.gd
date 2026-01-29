@@ -60,7 +60,7 @@ func _start_switch_overlay():
 		switch_bone_mask
 		)
 
-	get_player().animator_manager.set_overlay_anim(A.equip.equip, overlay_config)
+	get_player().get_animator_manager().set_overlay_anim(A.equip.equip, overlay_config)
 
 
 func get_player() -> Princess:

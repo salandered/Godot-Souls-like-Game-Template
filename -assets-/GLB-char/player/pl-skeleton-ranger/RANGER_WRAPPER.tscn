@@ -6,47 +6,47 @@
 [node name="RIG" instance=ExtResource("1_r4jo3")]
 script = ExtResource("2_gsyfp")
 
-[node name="_mask" parent="Armature/GeneralSkeleton" index="0"]
+[node name="_mask" parent="Armature/GeneralSkeleton" index="1"]
 gi_mode = 2
 
-[node name="brows" parent="Armature/GeneralSkeleton" index="1"]
+[node name="brows" parent="Armature/GeneralSkeleton" index="2"]
 cast_shadow = 0
 
-[node name="ears" parent="Armature/GeneralSkeleton" index="2"]
+[node name="ears" parent="Armature/GeneralSkeleton" index="3"]
 cast_shadow = 0
 
-[node name="eye lashes" parent="Armature/GeneralSkeleton" index="3"]
+[node name="eye lashes" parent="Armature/GeneralSkeleton" index="4"]
 cast_shadow = 0
 
-[node name="long hair" parent="Armature/GeneralSkeleton" index="4"]
+[node name="long hair" parent="Armature/GeneralSkeleton" index="5"]
 gi_mode = 2
 
-[node name="body head" parent="Armature/GeneralSkeleton" index="5"]
+[node name="body head" parent="Armature/GeneralSkeleton" index="6"]
 gi_mode = 2
 
-[node name="gold ring_001" parent="Armature/GeneralSkeleton" index="6"]
+[node name="gold ring_001" parent="Armature/GeneralSkeleton" index="7"]
 cast_shadow = 0
 
-[node name="gold ring_004" parent="Armature/GeneralSkeleton" index="7"]
+[node name="gold ring_004" parent="Armature/GeneralSkeleton" index="8"]
 cast_shadow = 0
 
-[node name="gold ring_022" parent="Armature/GeneralSkeleton" index="8"]
-cast_shadow = 0
-
-[node name="gold ring_023" parent="Armature/GeneralSkeleton" index="9"]
+[node name="gold ring_022" parent="Armature/GeneralSkeleton" index="9"]
 cast_shadow = 0
 
 [node name="gold ring_024" parent="Armature/GeneralSkeleton" index="10"]
 cast_shadow = 0
 
-[node name="ranger boots" parent="Armature/GeneralSkeleton" index="11"]
+[node name="k1_Bottom_0" parent="Armature/GeneralSkeleton" index="11"]
+layers = 65
+
+[node name="ranger boots" parent="Armature/GeneralSkeleton" index="12"]
 gi_mode = 2
 
-[node name="ranger pants" parent="Armature/GeneralSkeleton" index="12"]
+[node name="ranger pants" parent="Armature/GeneralSkeleton" index="13"]
 gi_mode = 2
 
-[node name="ranger top" parent="Armature/GeneralSkeleton" index="13"]
+[node name="ranger top" parent="Armature/GeneralSkeleton" index="14"]
 gi_mode = 2
 
-[node name="ranger torso" parent="Armature/GeneralSkeleton" index="14"]
+[node name="ranger torso" parent="Armature/GeneralSkeleton" index="15"]
 gi_mode = 2

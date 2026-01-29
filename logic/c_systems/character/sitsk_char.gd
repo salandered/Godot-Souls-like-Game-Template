@@ -1,3 +1,5 @@
+@tool
+@icon("res://-assets-/x_icons/char/image (22).png")
 extends PHCharacter
 class_name SittingSkCharacter
 
@@ -33,7 +35,7 @@ func get_visuals_root() -> Node3D:
 	return _visual_offset
 
 
-func get_node_state_container() -> BaseNodeStateDataContainer:
+func get_node_state_container() -> PHEBaseNodeStateDataContainer:
 	return SitSKNodeStateDataContainer.new()
 
 

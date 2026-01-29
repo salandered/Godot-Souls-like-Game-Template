@@ -1,5 +1,6 @@
-extends NodeSystem
-class_name LookAtManager
+## currently used for enemies only
+class_name ELookAtManager
+extends BaseLookAtManager
 
 
 @export_group("Modifiers")
@@ -40,21 +41,17 @@ enum LookState {
 }
 
 
-var _target_marker: LookAtCharacterMarker
-var _my_marker: LookAtCharacterMarker
-
 var curr_state: LookState
 var _random_look_timer: float = 0.0
 var _temp_look_timer: float = 0.0
 
 
-func __hard_dependencies() -> Array[Object]:
-	return [
-		_target_marker,
-		_my_marker
+func __hard_dependencies() -> Array:
+	return super.__hard_dependencies() + [
+		_target_marker
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		vosn,
 	]
@@ -66,9 +63,8 @@ func __hard_validation() -> bool:
 	return _r
 
 
-func initialise(target_marker_: LookAtCharacterMarker, me_: BaseCharacter) -> void:
-	if me_:
-		_my_marker = me_.get_look_at_char_marker()
+func initialise(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void:
+	_my_marker = my_marker_
 
 	if target_marker_:
 		__log_("initialise", target_marker_)
@@ -76,7 +72,7 @@ func initialise(target_marker_: LookAtCharacterMarker, me_: BaseCharacter) -> vo
 
 		for modifier: LookAtHeadModifier3D in modifiers:
 			if modifier:
-				modifier.initialise(_target_marker)
+				modifier.set_marker(_target_marker)
 
 		match initial_mode:
 			InitialMode.RANDOM:
@@ -160,7 +156,12 @@ func _process(delta: float) -> void:
 	_apply_look_state(should_look)
 
 
+var last_applied_value: bool = false
+
 func _apply_look_state(should_look: bool) -> void:
+	if should_look == last_applied_value:
+		return
+	last_applied_value = should_look
 	for m in modifiers:
 		if m:
 			m.set_to_work(should_look)

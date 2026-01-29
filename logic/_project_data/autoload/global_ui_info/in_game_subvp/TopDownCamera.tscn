@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjbvdf08tmrpa"]
+
+[ext_resource type="Script" uid="uid://cu0cuc673iac6" path="res://logic/_project_data/autoload/global_ui_info/in_game_subvp/top_down_camera.gd" id="1_n15ks"]
+
+[node name="TopDownCamera" type="Camera3D"]
+current = true
+fov = 42.0
+script = ExtResource("1_n15ks")

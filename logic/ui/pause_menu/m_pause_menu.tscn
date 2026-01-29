@@ -9,22 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://l3mrt1t6jqos" path="res://-assets-/ui_assets/images/image_2026-01-04_00-25-05.png" id="7_dvwdi"]
 [ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://-assets-/ui_assets/themes/buttons/PauseMenuButton.tscn" id="7_fb021"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_u7r1d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2gh6"]
-bg_color = Color(0.055200003, 0.13220002, 0.24, 0.40784314)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.11, 0, 0.031166663, 0.49019608)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="8_fb021"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tu0ee"]
 texture = ExtResource("7_dvwdi")
-region_rect = Rect2(148.03558, 115.62555, 773.9644, 216.37445)
+region_rect = Rect2(4.2011566, 83.27785, 499.25812, 128.8408)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpag"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -213,7 +202,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_l2gh6")
+theme_override_styles/panel = ExtResource("8_fb021")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/UIOverlayControls"]
 layout_mode = 2
@@ -290,13 +279,15 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_dvwdi")
 theme_override_icons/arrow = SubResource("DPITexture_hiit0")
 alignment = 2
 selected = 0
-item_count = 3
+item_count = 4
 popup/item_0/text = "Off "
 popup/item_0/id = 0
 popup/item_1/text = "Player "
 popup/item_1/id = 1
-popup/item_2/text = "Enemy "
+popup/item_2/text = "HSM Enemy"
 popup/item_2/id = 2
+popup/item_3/text = "Simple Enemy"
+popup/item_3/id = 3
 
 [node name="CameraNodesToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

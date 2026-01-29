@@ -40,6 +40,7 @@ const death_b := _lib.deaths + "Falling B Death" # "Standing Death F"
 # NOTE: usual loco and combat loco are mixed for now
 class loco:
 	const idle := _lib.all_axe + "AA-L-combat-idle" # _EP_p1 + "EP-p1-O-idle-combat" # _ss_loco + "B-idle"
+	# const idle := _lib.testing + "Idle"
 	# const combat_walk_start := _lib._SWS_loco_p2 + "SWSlp2-O-walk-start" # _ss_loco + "C-walk"
 	const idle_to_sprint := _lib.start_end_v2 + "AA-L RM Idle To Sprint" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #
 	const sprint_to_idle := _lib.start_end_v2 + "AA-L RM run to stop" # :=_SWS_loco_p2 + "SWSlp2-O-sprint-start" #

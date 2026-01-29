@@ -1,8 +1,7 @@
 @tool
-@icon("res://-assets-/x_icons/white/icon_grid.png")
-
 class_name PlayerStatesContainer
-extends NodeCharacterSystem
+extends BaseStatesContainer
+
 
 var _player: Princess
 var anim_container: AnimContainer
@@ -135,7 +134,7 @@ func _accept_player_states() -> void:
 		child.player_sm = _player.player_sm
 		child.legs_sm = get_leg_sm()
 		child.anim_container = anim_container
-		child.animator_manager = _player.animator_manager
+		child.animator_manager = _player.get_animator_manager()
 
 		if not child.legs_behavior:
 			__log_error("No legs_behavior assigned for state: " + child.state_name)
@@ -188,7 +187,7 @@ func __apply_base_action_data(action_data: StatesContainer._BaseActionData, chil
 	if not anim:
 		__log_error("No animation found for action: " + child.action_name + " with anim_id: " + action_data.anim_id)
 	child.anim = anim
-	child.animator_manager = _player.animator_manager
+	child.animator_manager = _player.get_animator_manager()
 	child.anim_container = anim_container
 	child.anim_params_container = _player.get_anim_params_container() as PlAnimParamsContainer
 	

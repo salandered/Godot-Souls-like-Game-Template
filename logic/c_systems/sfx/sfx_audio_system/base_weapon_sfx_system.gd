@@ -12,7 +12,7 @@ const weapon_additional_data_key := "weapon"
 var _weapon: BaseWeapon
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		whoosh_weapon_player_3d,
 		hit_weapon_player_3d,

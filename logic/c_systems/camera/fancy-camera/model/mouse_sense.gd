@@ -32,3 +32,7 @@ func calculate(
 
 func _to_string() -> String:
 	return pp.s("x_sense/y_sense/locked_y_sense", x_sense, y_sense, locked_y_sense)
+
+
+func __LOG_B() -> bool:
+	return false

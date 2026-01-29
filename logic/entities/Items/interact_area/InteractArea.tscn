@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dw25fqj5fbht4" path="res://logic/entities/Items/interact_area/interact_area_.gd" id="1_ekt48"]
 [ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/Items/interact_area/3DOnTopLabel.tscn" id="2_obo7c"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_fv2in"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_obo7c"]
 radius = 2.0
 
 [node name="InteractArea" type="Area3D"]
@@ -17,6 +17,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 text = "Press E to interact"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_fv2in")
+shape = SubResource("SphereShape3D_obo7c")
 debug_color = Color(0, 0.7, 0.33833334, 0.7529412)
 debug_fill = false

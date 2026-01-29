@@ -5,7 +5,7 @@ class_name WeaponSFXParent
 @onready var sfx_system: BaseWeaponSFXSystem = %AudioSystem
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [sfx_system]
 
 

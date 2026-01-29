@@ -9,11 +9,14 @@ var _pointer: int
 
 
 # todo: consider duplicating values
+## if initial_pointer -1, it will be pointed at the last element
 func _init(values: Array, initial_pointer: int = 0):
 	if values.is_empty():
 		__log_warn("values is an empty array", "_init", "initialised with []")
 	if initial_pointer >= 0 and initial_pointer <= len(values) - 1:
 		_pointer = initial_pointer
+	elif initial_pointer == -1:
+		_pointer = len(values) - 1
 	else:
 		__log_warn("incorrect initial_pointer", "_init", "will be 0", initial_pointer)
 		_pointer = 0

@@ -1,0 +1,16 @@
+class_name FighterArmASPConfigContainer
+extends BaseWeaponASPConfigContainer
+
+
+## weapon
+
+func _get_whoosh_weapon_config() -> ASP3DConfig:
+	return ASP3DConfig.new(-1.0 - 2.0, -0.15, 4.5, 25.0, 4, 0.5, BusID.GAME_SFX, WEAPON_WHOOSH)
+
+
+func _get_hit_weapon_config() -> ASP3DConfig:
+	return ASP3DConfig.new(-1.5 - 2.0, -0.0, 3.5, 30.0, 4, 0.5, BusID.GAME_SFX, HIT_SWORD)
+
+
+func _get_hit_target_config() -> ASP3DConfig:
+	return ASP3DConfig.new(-1.1 - 2.0, -0.0, 4.1, 30.0, 4, 0.5, BusID.GAME_SFX, HIT_BONE_ROCK_FALL_CAT)

@@ -2,6 +2,7 @@ extends Node3DLogger
 
 ## Autoload ##
 
+@export var in_game_vp_scene: PackedScene
 
 @onready var profiler: Profiler = %Profiler
 @onready var first_tutorial: FirstTutorial = %FirstTutorial
@@ -9,25 +10,81 @@ extends Node3DLogger
 
 @onready var dynamic_info_distributor: PlayerDynamicInfoDistributor = %DynamicInfoDistributor
 @onready var phe_dynamic_info_distributor: PheDynamicInfoDistributor = %PheDynamicInfoDistributor
+@onready var se_dynamic_info_distributor: SEDynamicInfoDistributor = %SEDynamicInfoDistributor
 
+
+var _active_subvp: InGameSubViewport
 
 # 0 = Show, 1 = Minimal, 2 = Off
 var profiler_mode_cycler := Cycler.new([0, 1, 2], 2)
 
+
 func _ready() -> void:
 	GlobalSignal.SIG_toggle_show_tut.connect(_on_SIG_toggle_show_tutorial)
 	GlobalSignal.SIG_toggle_show_profiler.connect(_on_SIG_toggle_show_profiler)
-	GlobalSignal.SIG_show_free_cam_ui.connect(_on_show_free_cam)
-	GlobalSignal.SIG_hide_free_cam_ui.connect(_on_hide_free_cam)
+	GlobalSignal.SIG_free_cam_mode_toggled.connect(_on_SIG_toggle_free_cam)
 	GlobalSignal.SIG_toggle_dynamic_state_info.connect(_on_SIG_toggle_dynamic_state_info)
 	GlobalSignal.SIG_toggle_phe_dynamic_state_info.connect(_on_SIG_toggle_phe_dynamic_state_info)
+	GlobalSignal.SIG_toggle_se_dynamic_state_info.connect(_on_SIG_toggle_se_dynamic_state_info)
+	GlobalSignal.SIG_toggle_camera_visuals.connect(_on_SIG_toggle_camera_visuals)
+
 
 	if dynamic_info_distributor:
 		dynamic_info_distributor.set_enable(false)
 	if phe_dynamic_info_distributor:
 		phe_dynamic_info_distributor.set_enable(false)
+	if se_dynamic_info_distributor:
+		se_dynamic_info_distributor.set_enable(false)
 
 	update_profiler_mode()
+
+
+## SUB VIEWPORT
+# region
+
+func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]) -> void:
+	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	if _r.err: return
+	_toggle_in_game_subvp(_r.value)
+
+
+func _toggle_in_game_subvp(value: bool) -> void:
+	var level = Groups.get_level_by_group(self)
+	var player := Groups.get_player_by_group(self)
+	if not level or not player:
+		__log_warn_soft("level or player is invalid")
+		return
+
+	if value:
+		if not in_game_vp_scene:
+			__log_warn("not in_game_vp_scene")
+			return
+		if _active_subvp:
+			__log_("_toggle_in_game_subvp", "_active_subvp is already active")
+			return
+
+		var _scene = in_game_vp_scene.instantiate()
+		if not _scene is InGameSubViewport:
+			__log_warn("not _scene is InGameSubViewport", "_toggle_in_game_subvp")
+			return
+		_active_subvp = _scene
+		
+		level.add_child(_active_subvp)
+		_active_subvp.set_cam_target(player) # after add_child (so after _ready)
+		
+	else:
+		if not _active_subvp:
+			return
+		
+		_active_subvp.queue_free()
+		_active_subvp = null
+
+
+func is_in_game_subvp_active() -> bool:
+	return true if _active_subvp else false
+
+
+# endregion
 
 
 ## PROFILER UI
@@ -72,13 +129,12 @@ func update_free_cam_hud(text: String):
 	if free_cam_ui:
 		free_cam_ui.update_free_cam_hud(text)
 
-func _on_show_free_cam():
-	if free_cam_ui:
-		free_cam_ui.enable_free_cam()
 
-func _on_hide_free_cam():
+func _on_SIG_toggle_free_cam(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	if _r.err: return
 	if free_cam_ui:
-		free_cam_ui.disable_free_cam()
+		free_cam_ui.set_free_cam_enable(_r.value)
 
 # endregion
 
@@ -92,16 +148,18 @@ func _on_SIG_toggle_dynamic_state_info(payload: Dictionary[String, Variant]):
 	if _r.err: return
 	if dynamic_info_distributor:
 		dynamic_info_distributor.set_enable(_r.value)
-		if _r.value and phe_dynamic_info_distributor:
-			phe_dynamic_info_distributor.set_enable(false)
 
 func _on_SIG_toggle_phe_dynamic_state_info(payload: Dictionary[String, Variant]):
 	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
 	if _r.err: return
 	if phe_dynamic_info_distributor:
 		phe_dynamic_info_distributor.set_enable(_r.value)
-		if _r.value and dynamic_info_distributor:
-			dynamic_info_distributor.set_enable(false)
+
+func _on_SIG_toggle_se_dynamic_state_info(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	if _r.err: return
+	if se_dynamic_info_distributor:
+		se_dynamic_info_distributor.set_enable(_r.value)
 
 
 func is_dynamic_state_info_visible() -> bool:
@@ -109,6 +167,9 @@ func is_dynamic_state_info_visible() -> bool:
 
 func is_phe_dynamic_state_info_visible() -> bool:
 	return phe_dynamic_info_distributor.is_visible()
+
+func is_se_dynamic_state_info_visible() -> bool:
+	return se_dynamic_info_distributor.is_visible()
 # endregion
 
 
@@ -148,12 +209,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(RawAction.DEV_profiler):
 		profiler_mode_cycler.get_next()
 		update_profiler_mode()
-
+		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed(RawAction.DEV_show_col):
 		var tree := get_tree()
 		tree.debug_collisions_hint = not tree.debug_collisions_hint
 
+		get_viewport().set_input_as_handled()
 
 ## 
 

@@ -30,6 +30,13 @@ static func safe_emit_raw(
 		print_.prefix("<emit>", pp.sig_raw(signal_, signal_payload))
 	return true
 
+static func safe_emit_raw_toggle(
+	signal_: Signal,
+	toggle: bool,
+	__log: bool = false,
+	warn_level: String = WL.WARN) -> bool:
+	return safe_emit_raw(signal_, {GlobalSignal.payload_toggle_field: toggle})
+
 
 static func safe_emit_raw_no_payload(
 	signal_: Signal,
@@ -144,6 +151,10 @@ static func safe_get_bool_payload_value(payload: Dictionary[String, Variant], pa
 		return ReturnObject.BoolReturn.new(true)
 
 	return ReturnObject.BoolReturn.new(false, payload_value)
+
+static func safe_get_toggle_payload_value(payload: Dictionary[String, Variant]) -> ReturnObject.BoolReturn:
+	var r := safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	return r
 
 
 static func safe_get_string_payload_value(payload: Dictionary[String, Variant], payload_key: String) -> ReturnObject.StringReturn:

@@ -1,3 +1,5 @@
+@tool
+@icon("res://-assets-/x_icons/char/image (15).png")
 ## i m not sure are we the princess or not, but the name stuck.
 ## sometimes when 'player' sounds too abstract 
 ## (is it main player? animation player? or audio stream player?)
@@ -16,35 +18,30 @@ extends BaseCharacter
 @onready var container: PlayerStatesContainer = %StatesContainer
 @onready var bones: PlayerBones = %bones
 
-# essential systems
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
 @onready var smith_sword_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmithSwordAnimSFXSigEmitter
 @onready var small_pinga_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmallPingaAnimSFXSigEmitter
 
-# anim
-@onready var anim_container: AnimContainer = %AnimContainer
-@onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var native_player: AnimationPlayer = %NativeAnimator
 
 # 
 @onready var hit_box_torso: CharacterHitbox = %HitBoxTorso
 
+@onready var _start_position := global_transform.origin
+@onready var meta_sfxasp: AudioStreamPlayer = %MetaSFXASP
 
 # dev
 @onready var __fly_mode: Node3D = $__dev/FlyMode
 @onready var __dev_labels: Node = %_dev_labels
 
 
-@onready var _start_position := global_transform.origin
 var push_rigid_bodies_force: float = 4.0
 
 
 var active_weapon_id := WeaponID.smith_sword
 # var active_weapon_id := WeaponID.pl_pinga_blade
-
-@onready var meta_sfxasp: AudioStreamPlayer = %MetaSFXASP
 
 
 var acquired_second_weapon: bool = true ## DANGER DEV
@@ -65,27 +62,24 @@ func get_area_awareness() -> PlayerAreaAwareness:
 	var casted: PlayerAreaAwareness = super.get_area_awareness()
 	return casted
 
-func __hard_dependencies() -> Array[Object]:
-	return [
+
+func get_animator_manager() -> PlAnimatorManager:
+	var casted: PlAnimatorManager = super.get_animator_manager()
+	return casted
+
+
+func __hard_dependencies() -> Array:
+	var ds := super.__hard_dependencies()
+	ds.append_array([
 		fancy_camera,
 		camera_focus,
-		visuals,
 		skeleton,
-		container,
-		bones,
-		get_pl_movement(),
-		get_sig_container(),
-		get_combat(),
-		feelings,
-		get_area_awareness(),
-		player_sm,
-		anim_container,
-		animator_manager,
-		native_player,
-	]
+	])
+	return ds
 
-## for Princess all the soft are kind of hard, but ok
-func __soft_dependencies() -> Array[Object]:
+
+## for Princess all the soft are kind of hard
+func __soft_dependencies() -> Array:
 	return [
 		get_sfx_system(),
 		pl_anim_sfx_sig_emitter,
@@ -96,12 +90,16 @@ func __soft_dependencies() -> Array[Object]:
 	]
 
 
-func initialise() -> void:
+func initialise_base_char_implementation() -> void:
+	add_to_group(Groups.Chars.PLAYER)
+
 	collision_layer = Collision.Layers.PLAYER_COL
 	collision_mask = Collision.Masks.PLAYER_COL_MASK
+	
+	_initialise_look_at_systems()
 
-	if anim_container:
-		container.accept_all_states(self, anim_container)
+	if _anim_container:
+		container.accept_all_states(self, _anim_container)
 	if get_combat():
 		player_sm.initialise(self)
 
@@ -113,9 +111,14 @@ func initialise() -> void:
 	SigUtils.safe_connect(GlobalSignal.SIG_toggle_camera_visuals, _on_SIG_toggle_camera_visuals)
 	
 
-	if not __perform_validation():
+	if not __perform_validation(true):
 		__log_warn_soft("well game is not ready")
-		process_mode = PROCESS_MODE_DISABLED
+
+
+func _initialise_look_at_systems():
+	_look_at_manager = ArrayUtils.get_only_one_or_null(get_descendants.pl_look_at_managers(self))
+	if _look_at_manager:
+		_look_at_manager.initialise(null, get_look_at_char_marker())
 
 
 ## FOR INIT 
@@ -126,9 +129,6 @@ func _for_init_sig_container() -> BaseCharacterSignalContainer:
 	return PlayerSignalContainer.new()
 func _for_init_sad_container() -> BaseCharacterSADContainer:
 	return PlayerSADContainer.new()
-## anim cont
-func _for_init_anim_container() -> AnimContainer:
-	return anim_container
 func _for_init_anim_list() -> BaseCharAnimList:
 	return PlAnimList.new()
 func _for_init_required_markers() -> Dictionary[String, Array]:
@@ -136,8 +136,6 @@ func _for_init_required_markers() -> Dictionary[String, Array]:
 ## anim
 func _for_init_native_player() -> AnimationPlayer:
 	return native_player
-func _for_init_anim_manager() -> BaseAnimatorManager:
-	return animator_manager
 ##
 func _for_init_visuals() -> BaseVisuals:
 	return visuals
@@ -194,7 +192,10 @@ func reset_position(y_offset: float = 0.0) -> void:
 
 
 # TODO: _process or _physics_process? changed to _process: frame issues
+# TODO UPD: should be _physics_process if move_and_slide is called.
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
 	

@@ -14,7 +14,7 @@ extends Node3DSystem
 var __is_broke: bool = false
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		shattered_column_scene,
 		breakable_column_area

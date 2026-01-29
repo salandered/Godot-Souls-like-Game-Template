@@ -24,7 +24,7 @@ var _registered_weapons: Dictionary[String, BaseWeapon] = {} # weaponID <String>
 var _active_weapon_ids: Array[String]
 
 
-func initialise(character: BaseCharacter, active_weapon_id_list_to_set: Array[String]):
+func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[String]):
 	## currently _registered_weapons are all under %bones
 	_register_weapons()
 
@@ -56,6 +56,7 @@ func _register_weapons():
 
 	for weapon in _weapons_list:
 		_registered_weapons[weapon.get_weapon_id()] = weapon
+	__log_("_register_weapons", "registered", len(_weapons_list), "weapons", _registered_weapons)
 
 
 @abstract func initialise_implementation() -> void
@@ -134,7 +135,7 @@ func get_registered_weapon_by_id(weapon_id: String) -> BaseWeapon:
 
 
 ## non nullable
-@abstract func get_character() -> BaseCharacter
+@abstract func get_character() -> BaseStaticCharacter
 
 
 ## nullable
@@ -179,7 +180,7 @@ func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_gl
 		)
 	else:
 		SigUtils.safe_emit_raw(
-			GlobalSignal.SIG_phe_weapon_hit_data_set,
+			GlobalSignal.SIG_enemy_weapon_hit_data_set,
 			{GlobalSignal.payload_hit_data_field: hit_data}
 		)
 	# __log_("set hit data to weapon", pp.in_q(weapon_id), hit_data)

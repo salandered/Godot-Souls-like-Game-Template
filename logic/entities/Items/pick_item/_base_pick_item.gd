@@ -10,12 +10,12 @@ extends Node3DSystem
 ## DOCS: frees itself on 'pick' animation finished
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		interact_area
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		animation_player
 	]

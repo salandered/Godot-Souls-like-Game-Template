@@ -15,7 +15,7 @@ extends Node3DCharacterSystem
 var _character: BaseCharacter
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		downcast,
 		_character

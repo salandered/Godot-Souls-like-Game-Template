@@ -1,4 +1,4 @@
-extends BaseNodeStateDataContainer
+extends PHEBaseNodeStateDataContainer
 class_name SitSKNodeStateDataContainer
 
 

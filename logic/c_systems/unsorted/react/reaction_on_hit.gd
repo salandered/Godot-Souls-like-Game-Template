@@ -36,7 +36,15 @@ static var enemy_attack_to_direction: Dictionary[String, AttackDirection.Dir] = 
 	PHEA.attack.power_up: AttackDirection.Dir.UP,
 	PHEA.attack.stab_low: AttackDirection.Dir.STAB,
 	PHEA.phase_switch: AttackDirection.Dir.STAB,
-	SITSKA.sit_attack: AttackDirection.Dir.STAB
+	SITSKA.sit_attack: AttackDirection.Dir.STAB,
+	MFA.attack_lr: AttackDirection.Dir.RIGHT,
+	MFA.attack_rl: AttackDirection.Dir.LEFT,
+	MFA.attack_up: AttackDirection.Dir.UP,
+	MFA.attack_down: AttackDirection.Dir.DOWN,
+	MFA.attack_stab: AttackDirection.Dir.STAB,
+	MFA.attack_lr_power: AttackDirection.Dir.RIGHT,
+	MFA.attack_rl_power: AttackDirection.Dir.LEFT,
+	MFA.attack_stab_power: AttackDirection.Dir.STAB,
 	}
 
 static var pl_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
@@ -78,7 +86,10 @@ static var enemy_attack_to_pl_state_interruption: Dictionary[String, String] = {
 	PHEA.attack.scare_off: PS.pushback,
 	PHEA.attack.power_up: PS.thrown,
 	PHEA.phase_switch: PS.thrown,
-	SITSKA.sit_attack: PS.thrown
+	SITSKA.sit_attack: PS.thrown,
+	MFA.attack_lr_power: PS.thrown,
+	MFA.attack_rl_power: PS.thrown,
+	MFA.attack_stab_power: PS.pushback,
 	}
 
 
@@ -151,13 +162,25 @@ static func _pick_react_anim_for_enemy(hit_from_player: HitData) -> String:
 	var _attack_dir = DictUtils.safe_get_dict_key(pl_attack_to_direction, hit_from_player.anim_id, AttackDirection.Dir.RIGHT, WL.SILENT)
 	var _anim_id = DictUtils.safe_get_dict_key(attack_dir_to_enemy_overlay_anim, _attack_dir, PHEA.react.react_from_R)
 	__log_("pl attack", pp.in_q(hit_from_player.anim_id), "-> Dir", AttackDirection.name_(_attack_dir), "-> Ovrl anim", _anim_id)
+	SigUtils.safe_emit_raw(
+	GlobalSignal.SIG_enemy_react_on_hit, {
+		GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
+		GlobalSignal.payload_interruption_field: false,
+		GlobalSignal.payload_reaction: _anim_id,
+		})
 	return _anim_id
 
 
 static func _pick_react_anim_for_player(hit_from_enemy: HitData) -> String:
 	var _attack_dir = DictUtils.safe_get_dict_key(enemy_attack_to_direction, hit_from_enemy.anim_id, AttackDirection.Dir.RIGHT)
-	var _anim_id = DictUtils.safe_get_dict_key(attack_dir_to_pl_overlay_anim, _attack_dir, A.react.react_from_R)
+	var _anim_id: String = DictUtils.safe_get_dict_key(attack_dir_to_pl_overlay_anim, _attack_dir, A.react.react_from_R)
 	__log_("e attack", pp.in_q(hit_from_enemy.anim_id), "-> Dir", AttackDirection.name_(_attack_dir), "-> Ovrl anim", _anim_id)
+	SigUtils.safe_emit_raw(
+		GlobalSignal.SIG_player_react_on_hit, {
+			GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
+			GlobalSignal.payload_interruption_field: false,
+			GlobalSignal.payload_reaction: _anim_id,
+			})
 	return _anim_id
 
 # endregion
@@ -214,28 +237,47 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Arr
 # region
 
 
-## may return ""
+## return "" if no reaction calculated
 static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 	var _pl_state: String
 	_pl_state = DictUtils.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
+
+
+	if _pl_state != "":
+		var _attack_dir = DictUtils.safe_get_dict_key(enemy_attack_to_direction, hit_from_enemy.anim_id, AttackDirection.Dir.RIGHT)
+		SigUtils.safe_emit_raw(
+			GlobalSignal.SIG_player_react_on_hit, {
+				GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
+				GlobalSignal.payload_interruption_field: true,
+				GlobalSignal.payload_reaction: _pl_state,
+				})
+
 	return _pl_state
 
 ## may return ""
 static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
+	var _e_state = ""
 	if hit_from_pl.anim_id in [A.attack.stab_attack_1, A.attack.stab_attack_2]:
 		if hit_from_pl.weapon_name == WeaponID.smith_sword:
-			return ""
+			pass
 		else: # if small pinga, we push
-			return PHES.Leaf.pushback_2 if ra.chance(0.6) else ""
-	
+			_e_state = PHES.Leaf.pushback_2 if ra.chance(0.6) else ""
+	else:
 	## usual logic
-	var _e_state = ""
-	var _e_state_and_probability: Array
-	_e_state_and_probability = DictUtils.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)
-	_e_state = _e_state_and_probability[0] if ra.chance(_e_state_and_probability[1]) else ""
-	__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
-		pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))
+		var _e_state_and_probability: Array
+		_e_state_and_probability = DictUtils.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)
+		_e_state = _e_state_and_probability[0] if ra.chance(_e_state_and_probability[1]) else ""
+		__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
+			pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))
+	if _e_state != "":
+		var _attack_dir = DictUtils.safe_get_dict_key(pl_attack_to_direction, hit_from_pl.anim_id, AttackDirection.Dir.RIGHT, WL.SILENT)
+		SigUtils.safe_emit_raw(
+			GlobalSignal.SIG_enemy_react_on_hit, {
+				GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
+				GlobalSignal.payload_interruption_field: true,
+				GlobalSignal.payload_reaction: _e_state,
+				})
 	return _e_state
 
 # endregion

@@ -9,7 +9,7 @@ var _assigned_parent: Node3D
 @onready var ui_marker_visual: CSGSphere3D = $UIMarker/ui_marker_visual
 
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		_assigned_parent
 	]

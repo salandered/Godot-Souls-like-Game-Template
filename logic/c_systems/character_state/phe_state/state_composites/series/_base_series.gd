@@ -171,12 +171,12 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 
 func pick_attack_series() -> Array[String]:
 	if get_attack_series_list().is_empty():
-		__log_error("pick_attack_series: 'attack_series_list' list is empty!", "WL: return []")
+		__log_error("pick_attack_series: 'attack_series_list' list is empty!", "", "return []")
 		return []
 	var picked_idx := pick_series_idx()
 	
 	if picked_idx < 0 or picked_idx >= get_attack_series_list().size():
-		__log_error("picked_idx", picked_idx, "is outside the", get_attack_series_list(), "WL: will pick 0 index")
+		__log_error(pp.s("picked_idx", picked_idx, "is outside the", get_attack_series_list()), "", "will pick 0 index")
 		picked_idx = 0
 		
 	var picked_series: Array = get_attack_series_list()[picked_idx]

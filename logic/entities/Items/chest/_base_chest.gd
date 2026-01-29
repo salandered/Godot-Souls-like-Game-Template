@@ -22,13 +22,13 @@ extends Node3DSystem
 var item: BasePickItem
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		animation_player,
 		item_scene
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		interact_area,
 	]

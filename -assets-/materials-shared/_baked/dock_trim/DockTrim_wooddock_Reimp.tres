@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://x2fm5k6b66w1"]
+
+[ext_resource type="Texture2D" uid="uid://mu4ci614jbk4" path="res://-assets-/materials-shared/_baked/dock_trim/DockTrim_Diffuse.jpg" id="1_nyogn"]
+[ext_resource type="Texture2D" uid="uid://cimxnictv7rx0" path="res://-assets-/materials-shared/_baked/dock_trim/fighter_DockTrim_Metalness-DockTrim_Roughness.png" id="2_babaw"]
+[ext_resource type="Texture2D" uid="uid://b1imt7i2f5gt7" path="res://-assets-/materials-shared/_baked/dock_trim/fighter_DockTrim_Normal.png" id="3_qtv5w"]
+
+[resource]
+resource_name = "DockTrim_wooddock"
+cull_mode = 2
+albedo_texture = ExtResource("1_nyogn")
+metallic = 1.0
+metallic_texture = ExtResource("2_babaw")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_babaw")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_qtv5w")

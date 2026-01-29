@@ -12,18 +12,20 @@ var _target: LookAtCharacterMarker
 var GLOBAL_ACTIVE_FLAG: bool = false
 
 
-func initialise(marker: LookAtCharacterMarker, working: bool = true):
+func _ready() -> void:
+	active = false
+
+
+func set_marker(marker: LookAtCharacterMarker):
 	if marker:
-		__log_("initialise", marker)
+		__log_("set_marker", "marker", marker)
 		_target = marker
 		target_node = get_path_to(marker)
 	else:
 		__log_warn("null marker provided")
-		active = false
-		GLOBAL_ACTIVE_FLAG = false
 
 
-func set_to_work(working: bool, time_dur: float = 0.5) -> void:
+func set_to_work(toggle: bool, time_dur: float = 0.5) -> void:
 	if not target_node:
 		__log_("set_to_work", "not target_node")
 		return
@@ -31,17 +33,17 @@ func set_to_work(working: bool, time_dur: float = 0.5) -> void:
 		__log_("set_to_work", "not is_instance_valid(_target)")
 		return
 
-	if GLOBAL_ACTIVE_FLAG == working:
-		__log_("set_to_work", "GLOBAL_ACTIVE_FLAG == working:")
+	if GLOBAL_ACTIVE_FLAG == toggle:
+		__log_("set_to_work", "GLOBAL_ACTIVE_FLAG == toggle", "return")
 		return
-	__log_("set_to_work", working)
+	__log_("set_to_work", "going to apply toggle", toggle)
 
 	if _tween_influence:
 		_tween_influence.kill()
 	
 	_tween_influence = create_tween()
 	var target_val = 0.0
-	if working:
+	if toggle:
 		active = true
 		GLOBAL_ACTIVE_FLAG = true
 		target_val = max_influence

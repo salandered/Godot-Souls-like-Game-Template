@@ -5,7 +5,7 @@ class_name PlayerAnimSFXSignalEmitter
 @onready var anim_manager: PlAnimatorManager = %AnimatorManager
 
 
-func get_anim_manager() -> BaseAnimatorManager:
+func get_animator_manager() -> BaseAnimatorManager:
 	return anim_manager
 
 

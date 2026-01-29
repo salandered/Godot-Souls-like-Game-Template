@@ -1,7 +1,8 @@
-extends RefCounted
 ## Stands for Phase Enemy State
 ## 'Phase' means HSM state (that happened)
 class_name PHES
+extends RefCounted
+
 
 const _TOP = "_TOP"
 const life := "life"

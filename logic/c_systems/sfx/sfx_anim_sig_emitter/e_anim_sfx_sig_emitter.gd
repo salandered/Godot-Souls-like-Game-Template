@@ -5,7 +5,7 @@ class_name EnemyAnimSFXSignalEmitter
 @onready var anim_manager: EnemyAnimatorManager = %AnimatorManager
 
 
-func get_anim_manager() -> BaseAnimatorManager:
+func get_animator_manager() -> BaseAnimatorManager:
 	return anim_manager
 
 

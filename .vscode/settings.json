@@ -397,7 +397,7 @@
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#78e2a1d7",
+					"color": "#b4e278d7",
 					"fontWeight": "bold",
 				},
 			]
@@ -415,7 +415,7 @@
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#78e2a1d7",
+					"color": "#b4e278d7",
 					"fontWeight": "bold",
 				},
 			]

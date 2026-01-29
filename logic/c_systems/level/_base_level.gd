@@ -59,6 +59,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
+	add_to_group(Groups.Environment_.LEVEL)
+
 	if is_pause_menu_controller: ## easier here than in __soft_validation
 		_validate_pause_menu_controller_on_init()
 	if is_world_environment: ## easier here than in __soft_validation

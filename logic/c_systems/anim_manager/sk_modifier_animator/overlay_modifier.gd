@@ -35,7 +35,7 @@ class OverlayInstance extends RefCounted:
 
 	func start_forced_fade(fade_duration: float, current_w: float, current_hips_w: float):
 		forced_fade = {
-			"duration": max(fade_duration, 0.01), # Prevent divide by zero
+			"duration": max(fade_duration, 0.01), # prevents / 0
 			"elapsed": 0.0,
 			"start_w": current_w,
 			"start_hips_w": current_hips_w
@@ -48,7 +48,7 @@ var curr_overlay: OverlayInstance
 var prev_overlay: OverlayInstance
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		skeleton
 	]
@@ -130,7 +130,6 @@ func _process_modification():
 	_apply_overlay()
 
 
-# REPLACE _update_time
 func _update_time(custom_delta: float):
 	if curr_overlay:
 		curr_overlay.playback.time_spent += custom_delta * curr_overlay.speed

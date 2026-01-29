@@ -1,6 +1,6 @@
 @abstract
-extends BasePHEState
 class_name BasePHEComposite
+extends BasePHEState
 
 
 ## DANGER: do not use directly!
@@ -137,15 +137,15 @@ func get_safe_curr_sbs_name() -> String:
 func set_current_substate(next_state_name: String) -> void:
 	var _next_substate := container.get_state_by_name(next_state_name)
 	if not _next_substate:
-		__log_error("set_current_substate: state not found", next_state_name, "WL: return, not set")
+		__log_error(pp.s("set_current_substate: state not found", next_state_name), "", "return, not set")
 		return
 
 	if not _next_substate.validate_substate_depth(state_depth):
-		__log_error("set_current_substate: depth issue. Curr depth", state_depth, "next_state_name", next_state_name, "WL: return, not set")
+		__log_error(pp.s("set_current_substate: depth issue. Curr depth", state_depth, "next_state_name", next_state_name), "", "return, not set")
 		return
 	
 	if not supported_substates.is_state_supported(next_state_name):
-		__log_error("set_current_substate: not supported. ", supported_substates.__pp_state_not_supported(next_state_name), state_depth, "WL: return, not set")
+		__log_error(pp.s("set_current_substate: not supported. ", supported_substates.__pp_state_not_supported(next_state_name), state_depth), "", "return, not set")
 		return
 
 	__current_substate = _next_substate

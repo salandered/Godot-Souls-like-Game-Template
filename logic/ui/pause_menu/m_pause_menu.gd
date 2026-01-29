@@ -22,7 +22,8 @@ var popup_open: Node
 enum DynamicStateInfoOption {
 	OFF, # 0
 	PLAYER, # 1
-	ENEMY # 2
+	HSM_ENEMY, # 2
+	SIMPLE_ENEMY # 3
 	}
 
 
@@ -37,16 +38,18 @@ func _ready() -> void:
 		if GlobalUIInfo.is_dynamic_state_info_visible():
 			dynamic_state_info_option.select(DynamicStateInfoOption.PLAYER)
 		elif GlobalUIInfo.is_phe_dynamic_state_info_visible():
-			dynamic_state_info_option.select(DynamicStateInfoOption.ENEMY)
+			dynamic_state_info_option.select(DynamicStateInfoOption.HSM_ENEMY)
+		elif GlobalUIInfo.is_se_dynamic_state_info_visible():
+			dynamic_state_info_option.select(DynamicStateInfoOption.SIMPLE_ENEMY)
 		else:
 			dynamic_state_info_option.select(DynamicStateInfoOption.OFF)
 
-	# if camera_nodes_toggle:
-	# 	camera_nodes_toggle.set_pressed_no_signal(GlobalUIInfo.camera_nodes_toggled)
 	if tutorial_toggler:
 		tutorial_toggler.set_pressed_no_signal(GlobalUIInfo.is_tut_visible())
 	if profiler_toggler:
 		profiler_toggler.set_pressed_no_signal(GlobalUIInfo.is_profiler_visible())
+	if camera_nodes_toggle:
+		camera_nodes_toggle.set_pressed_no_signal(GlobalUIInfo.is_in_game_subvp_active())
 	
 	TextureUtils.randomize_shake_button_panel_region(menu_buttons, 350)
 	TextureUtils.randomize_button_normal_region(ui_overlay_controls, 120, false)
@@ -135,6 +138,11 @@ func _on_confirm_restart_confirmed() -> void:
 	close()
 
 func _on_confirm_main_menu_confirmed() -> void:
+	## turn off some ui overlay controls
+	_emit_SIG_toggle_dynamic_state_info(false, false, false)
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_show_tut, false)
+	
+	##
 	_load_scene(main_menu_scene)
 
 func _on_confirm_exit_confirmed() -> void:
@@ -150,45 +158,41 @@ func _on_show_ui_overlay_controls_pressed() -> void:
 
 
 func _on_profiler_toggler_toggled(toggled_on: bool) -> void:
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_toggle_show_profiler,
-		{GlobalSignal.payload_toggle_field: toggled_on})
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_show_profiler, toggled_on)
 
 
 func _on_tutorial_toggler_toggled(toggled_on: bool) -> void:
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_toggle_show_tut,
-		{GlobalSignal.payload_toggle_field: toggled_on})
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_show_tut, toggled_on)
 
-
-	if toggled_on and dynamic_state_info_option.selected == DynamicStateInfoOption.ENEMY:
+	if toggled_on and dynamic_state_info_option.selected == DynamicStateInfoOption.HSM_ENEMY:
 		dynamic_state_info_option.select(DynamicStateInfoOption.OFF)
-		_emit_SIG_toggle_dynamic_state_info(false, false)
+		_emit_SIG_toggle_dynamic_state_info(false, false, false)
 
 
 func _on_option_button_item_selected(index: int) -> void:
 	match index:
 		DynamicStateInfoOption.OFF:
-			_emit_SIG_toggle_dynamic_state_info(false, false)
+			_emit_SIG_toggle_dynamic_state_info(false, false, false)
 		DynamicStateInfoOption.PLAYER:
-			_emit_SIG_toggle_dynamic_state_info(true, false)
-		DynamicStateInfoOption.ENEMY:
-			_emit_SIG_toggle_dynamic_state_info(false, true)
+			_emit_SIG_toggle_dynamic_state_info(true, false, false)
+		DynamicStateInfoOption.HSM_ENEMY:
+			_emit_SIG_toggle_dynamic_state_info(false, true, false)
 			if tutorial_toggler:
 				tutorial_toggler.button_pressed = false ## will emit signal
-			
+		DynamicStateInfoOption.SIMPLE_ENEMY:
+			_emit_SIG_toggle_dynamic_state_info(false, false, true)
 		_:
 			__log_warn_soft("unknown index", "", "all off", index)
-			_emit_SIG_toggle_dynamic_state_info(false, false)
+			_emit_SIG_toggle_dynamic_state_info(false, false, false)
 
 	pass # Replace with function body.
 
 
-func _emit_SIG_toggle_dynamic_state_info(player: bool, enemy: bool):
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_toggle_dynamic_state_info,
-		{GlobalSignal.payload_toggle_field: player})
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_toggle_phe_dynamic_state_info,
-		{GlobalSignal.payload_toggle_field: enemy})
+func _emit_SIG_toggle_dynamic_state_info(player: bool, enemy: bool, se: bool):
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_dynamic_state_info, player)
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_phe_dynamic_state_info, enemy)
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_se_dynamic_state_info, se)
 
 
 func _on_camera_nodes_toggler_toggled(toggled_on: bool) -> void:
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_toggle_camera_visuals,
-		{GlobalSignal.payload_toggle_field: toggled_on})
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_toggle_camera_visuals, toggled_on)

@@ -1,6 +1,6 @@
 @tool
-extends BasePlayerWeapon
 class_name SmithSword
+extends BasePlayerWeapon
 
 @onready var _weapon_hurt_box_: WeaponHurtBox = $WeaponHurtBox
 @onready var _visuals_: Node3D = $Visuals

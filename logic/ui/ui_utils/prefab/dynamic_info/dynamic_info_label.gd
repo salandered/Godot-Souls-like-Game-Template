@@ -4,10 +4,22 @@ class_name DynamicInfoLabel
 
 
 @export_group("Text Config")
-@export var description_text: String = "State":
+@export var title_text: String = "State":
 	set(value):
-		description_text = value
-		_update_desc()
+		title_text = value
+		_update_title()
+
+@export var additional_title_text: String = "":
+	set(value):
+		additional_title_text = value
+		_update_title()
+
+
+@export var title_font_size: int = 24:
+	set(value):
+		title_font_size = value
+		_update_font_size()
+
 
 @export var font_size: int = 30:
 	set(value):
@@ -46,7 +58,8 @@ class_name DynamicInfoLabel
 
 
 @onready var margin_inside_panel: MarginContainer = %MarginInsidePanel
-@onready var _desc_label: RichTextLabel = %Desc
+@onready var _title_label: RichTextLabel = %Title
+@onready var _title_additional_label: RichTextLabel = %TitleAdditional
 @onready var _text_label: RichTextLabel = %Text
 @onready var panel_gradient: PanelContainer = %PanelGradient
 
@@ -57,7 +70,7 @@ var initial_font_size: int
 
 func _ready() -> void:
 	initial_font_size = font_size
-	_update_desc()
+	_update_title()
 	_update_font_size()
 	_update_gradient_color_modulate()
 	_update_margins()
@@ -102,6 +115,10 @@ func _set_label_text(
 
 	if dynamic_label_config.in_bold:
 		new_text = "[b]" + new_text + "[/b]"
+
+	if dynamic_label_config.in_italics:
+		new_text = "[i]" + new_text + "[/i]"
+	
 
 	label.text = new_text
 
@@ -186,10 +203,12 @@ func _spawn_ghost_text(
 
 ## Set export vars
 
-func _update_desc() -> void:
-	if _desc_label:
-		_desc_label.text = "[b]" + description_text + "[/b]"
-
+func _update_title() -> void:
+	if _title_label:
+		_title_label.text = "[b]" + title_text + "[/b]"
+	if _title_additional_label:
+		_title_additional_label.text = "[b]" + additional_title_text + "[/b]"
+		
 func _update_gradient_color_modulate() -> void:
 	if panel_gradient:
 		panel_gradient.self_modulate = gradient_color_modulate
@@ -197,7 +216,11 @@ func _update_gradient_color_modulate() -> void:
 func _update_font_size() -> void:
 	if _text_label:
 		UIUtils.rr_label_set_font_size(_text_label, font_size)
-
+	if _title_label:
+		UIUtils.rr_label_set_font_size(_title_label, title_font_size)
+	if _title_additional_label:
+		UIUtils.rr_label_set_font_size(_title_additional_label, title_font_size - 1)
+		
 
 func _update_margins() -> void:
 	if margin_inside_panel:

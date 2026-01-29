@@ -13,14 +13,14 @@ class_name MetaState
 		_state_name = ""
 		_state_priority = -1
 
-	func set_from_other(new_state: String, new_priority: int):
-		__log_(__pp_state(new_state, new_priority), " ", pp.in_br("from " + __pp_curr_state()))
+	func set_from_other(new_state: String, new_priority: int, __log: bool = false):
+		if __log: __log_(__pp_state(new_state, new_priority), " ", pp.in_br("from " + __pp_curr_state()))
 		_state_name = new_state
 		_state_priority = new_priority
 
-	func reset() -> void:
+	func reset(__log: bool = false) -> void:
 		if _state_name != "" or _state_priority != -1:
-			__log_(pp.in_q(_state_name), pp.in_curl(_state_priority), "will be resetted")
+			if __log: __log_(pp.in_q(_state_name), pp.in_curl(_state_priority), "will be resetted")
 		_state_name = ""
 		_state_priority = -1
 
@@ -36,7 +36,7 @@ class_name MetaState
 	func is_set() -> bool:
 		return _state_name != ""
 
-	func try_set(new_state: String, new_priority: int, equal_wins: bool = true) -> void:
+	func try_set(new_state: String, new_priority: int, equal_wins: bool = true, __log: bool = false) -> void:
 		if not is_set():
 			set_state(new_state, new_priority)
 			return
@@ -48,10 +48,10 @@ class_name MetaState
 			set_state(new_state, new_priority)
 			return
 
-		__log_("couldn't set", __pp_state(new_state, new_priority), "equal_wins", equal_wins)
+		if __log: __log_("couldn't set", __pp_state(new_state, new_priority), "equal_wins", equal_wins)
 
-	func set_state(new_state: String, new_priority: int):
-		__log_(__pp_state(new_state, new_priority), " ", pp.in_br("from " + __pp_curr_state()))
+	func set_state(new_state: String, new_priority: int, __log: bool = false):
+		if __log: __log_(__pp_state(new_state, new_priority), " ", pp.in_br("from " + __pp_curr_state()))
 		_state_name = new_state
 		_state_priority = new_priority
 	
@@ -74,8 +74,7 @@ class_name MetaState
 
 	## like Queued or Forced
 	func __log_(...parts: Array) -> void:
-		if LogToggler.META_STATES_B:
-			print_.prefix_s(pp.s(__pp_type(), get_instance_id()), pp.list_(parts))
+		print_.prefix_s(pp.s(__pp_type(), get_instance_id()), pp.list_(parts))
 
 	func _to_string() -> String:
 		return __pp_curr_state()

@@ -182,10 +182,10 @@ play_chance = 0.4
 gi_mode = 0
 
 [node name="PropSet_5_WallChain_1_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang" index="0"]
-transform = Transform3D(0.99929035, -0.037667483, 7.0905803e-10, 0.037636265, 0.99846214, -0.040705346, 0.0015332672, 0.04067646, 0.9991712, -0.0061841607, -0.04221773, -0.028017849)
+transform = Transform3D(0.99929035, -0.037667483, 8.253907e-10, 0.037636265, 0.99846214, -0.040705346, 0.0015332671, 0.04067646, 0.9991712, -0.0061841607, -0.04221773, -0.028017849)
 
 [node name="Lantern_Lamp_Splitted_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001" index="0"]
-transform = Transform3D(0.3542317, 0.12297763, 0.92703605, -0.26602796, 0.9636095, -0.026176862, -0.89652026, -0.23734489, 0.3740566, -0.0072043985, -0.9510093, 0.06953961)
+transform = Transform3D(0.3542317, 0.12297763, 0.92703605, -0.26602796, 0.9636095, -0.02617686, -0.89652026, -0.23734489, 0.3740566, -0.0072043985, -0.9510093, 0.06953961)
 
 [node name="Lantern_Lamp_glass_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001/Lantern_Lamp_Splitted_001" index="0"]
 gi_mode = 0

@@ -17,7 +17,7 @@ func get_by_action_and_key(action_name_: String, key: String) -> Variant:
 		var value: Variant = _get_by_key(key)
 		# __log_value(action_name_, key, value)
 		return value
-	# print_.psm("TransferData💼", pp.s("⚠️⚠️: action mismatch, will return null. Set/requested:", action_name, action_name_))
+	# print_.prefix_s("TransferData💼", pp.s("⚠️⚠️: action mismatch, will return null. Set/requested:", action_name, action_name_))
 	return null
 
 
@@ -29,7 +29,7 @@ func get_by_action(action_name_: String) -> Variant:
 
 func fill(action_name_: String, data_: Dictionary[String, Variant]):
 	var _msg := pp.s(pp.dict_(data_) if data_ is Dictionary else "| data is not a Dict ⚠️⚠️")
-	# print_.psm("TransferData💼", "fill for " + pp.in_q(action_name_) + ":\t" + _msg)
+	# print_.prefix_s("TransferData💼", "fill for " + pp.in_q(action_name_) + ":\t" + _msg)
 	action_name = action_name_
 	_transfer = data_.duplicate_deep()
 
@@ -48,4 +48,4 @@ func __log_value(action_name_: String, key: String, value: Variant):
 	else:
 		_v_msg = str(value)
 	var _msg := pp.s("get_by_action_and_key", pp.in_q(action_name_), pp.in_q(key), _v_msg)
-	print_.psm("TransferData💼", _msg)
+	print_.prefix_s("TransferData💼", _msg)

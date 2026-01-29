@@ -12,12 +12,12 @@ const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
 var asp_config := ASP3DConfig.new(0.4, -0.3, 6.0, 50, 2, 0.8, "", BIG_CRASH_ROCK)
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		RIGID_SHATTER_SCRIPT
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		BIG_CRASH_ROCK,
 		on_shatter_aps_3d,

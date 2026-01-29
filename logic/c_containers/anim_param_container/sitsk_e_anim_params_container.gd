@@ -23,13 +23,13 @@ func get_track_prefixes() -> Array[String]:
 
 
 const TRACK_PREFIXES: Array[String] = [
+	"../../../../../AnimatorManager/NativePlayer/AnimParameters",
 	"%AnimParameters:",
-	"AnimatorManager/NativePlayer/AnimParameters:",
 	"%GeneralSkeleton/../../../../AnimatorManager/NativePlayer/AnimParameters:",
 	"%GeneralSkeleton/../../../../../AnimatorManager/NativePlayer/AnimParameters:",
 	"%GeneralSkeleton/../../../AnimatorManager/NativePlayer/AnimParameters:",
-	"",
-	"../../../../../AnimatorManager/NativePlayer/AnimParameters:"
+	"../../../../../AnimatorManager/NativePlayer/AnimParameters:",
+	"AnimatorManager/NativePlayer/AnimParameters:",
 	]
 
 #####################

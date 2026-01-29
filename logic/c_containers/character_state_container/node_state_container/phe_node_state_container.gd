@@ -1,5 +1,5 @@
-extends BaseNodeStateDataContainer
-class_name PHNodeStateDataContainer
+extends PHEBaseNodeStateDataContainer
+class_name PHENodeStateDataContainer
 
 
 func get_node_to_composite_state_data() -> Dictionary[String, EDC._CSData]:

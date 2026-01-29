@@ -46,6 +46,7 @@ var LOCKED_SOCKET_PIVOT_WEIGHT: float = FREE_SOCKET_PIVOT_WEIGHT
 @export var TARGET_DROP_DISTANCE_SQUARED: float = 400.0
 @export var look_at_: Node3D # CameraFocus or target
 
+
 ## DOCS
 ## Terminology
 # - [Pivot]: The anchor point attached to the Player's chest.
@@ -102,7 +103,7 @@ var __dev_camera_coll := true
 var __fov_cycler: Cycler
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		player,
 		aim,
@@ -149,6 +150,7 @@ func initialise() -> void:
 	
 	camera.global_position = socket.global_position # may be position closer in case of wall
 	camera.current = true
+	set_h_offset_camera(0.0)
 	
 	# FREE STATE INIT
 	free_state.fc = self
@@ -190,7 +192,7 @@ func calculate_mouse_sense():
 		mouse_sense = MouseSense.new()
 	var x_sense_settings := M_AppSettings.get_x_sense()
 	var y_sense_settings := M_AppSettings.get_y_sense()
-	prints("calculate_mouse_sense", x_sense_settings, y_sense_settings)
+	# prints("calculate_mouse_sense", x_sense_settings, y_sense_settings)
 	mouse_sense.calculate(DEF_X_SENSE, DEF_Y_SENSE, DEF_LOCKED_Y_SENSE_MULT, x_sense_settings, y_sense_settings)
 
 
@@ -204,6 +206,10 @@ func is_camera_locked_to_target() -> bool:
 
 func is_free_state() -> bool:
 	return current_state.state_name == FREE_STATE_NAME
+
+
+func set_h_offset_camera(h_offset: float) -> void:
+	camera.h_offset = h_offset
 
 
 func _process(delta: float) -> void:
@@ -296,7 +302,9 @@ func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
 func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]):
 	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
 	if _r.err: return
-	_toggle_cam_visuals(_r.value)
+	var toggle := _r.value
+	_toggle_cam_visuals(toggle)
+	set_h_offset_camera(+1.0 if toggle else 0.0)
 
 
 func _toggle_cam_coll(toggle: bool):

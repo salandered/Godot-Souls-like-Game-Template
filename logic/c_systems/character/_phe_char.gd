@@ -13,7 +13,7 @@ extends BaseEnemyCharacter
 
 
 @onready var config: PHEConfig = %Config
-@onready var container: PHContainer = %StatesContainer
+@onready var container: PHEContainer = %StatesContainer
 
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var _top: BasePHEState = %_Top
@@ -21,8 +21,6 @@ extends BaseEnemyCharacter
 
 ## anim
 @onready var native_player: AnimationPlayer = %NativePlayer
-@onready var anim_container: AnimContainer = %AnimContainer
-@onready var animator_manager: EnemyAnimatorManager = %AnimatorManager
 
 
 ## sfx
@@ -71,29 +69,29 @@ func get_e_movement() -> EnemyMovement:
 	var casted: EnemyMovement = get_movement()
 	return casted
 
+func get_animator_manager() -> EnemyAnimatorManager:
+	var casted: EnemyAnimatorManager = super.get_animator_manager()
+	return casted
 
-func __hard_dependencies() -> Array[Object]:
-	return [
+
+func __hard_dependencies() -> Array:
+	var ds: Array[Object] = [
 		# player,
 		config,
 		container,
-		get_e_movement(),
-		anim_container,
-		animator_manager,
-		get_sig_container(),
-		get_combat(),
 		phe_feelings,
 		_top,
 		get_visuals_root(),
 	]
+	return super.__hard_dependencies() + ds
 
-func __soft_dependencies() -> Array[Object]:
-	return [
+func __soft_dependencies() -> Array:
+	var ds: Array[Object] = [
 		coll_collider,
 		# camera_target,
-		get_sfx_system(),
 		e_anim_sfx_sig_emitter,
 		]
+	return super.__soft_dependencies() + ds
 
 
 @abstract func initialise_implementation() -> void
@@ -102,18 +100,15 @@ func __soft_dependencies() -> Array[Object]:
 
 @abstract func get_visuals_root() -> Node3D
 
-@abstract func get_node_state_container() -> BaseNodeStateDataContainer
+@abstract func get_node_state_container() -> PHEBaseNodeStateDataContainer
 
 
-func initialise() -> void:
-	super.initialise()
+func initialise_base_char_implementation() -> void:
+	super.initialise_base_char_implementation()
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	
-	if config:
-		config.me = self
-
 	if container:
 		container.me = self
 		container.accept_states(get_node_state_container())
@@ -137,15 +132,10 @@ func _for_init_sig_container() -> BaseCharacterSignalContainer:
 	return EnemySignalContainer.new()
 func _for_init_sad_container() -> BaseCharacterSADContainer:
 	return EnemySADContainer.new()
-## anim cont
-func _for_init_anim_container() -> AnimContainer:
-	return anim_container
 
 ## anim
 func _for_init_native_player() -> AnimationPlayer:
 	return native_player
-func _for_init_anim_manager() -> BaseAnimatorManager:
-	return animator_manager
 ##
 func _for_init_visuals() -> BaseVisuals:
 	return null ## todo: use in enemy
@@ -213,6 +203,7 @@ func update_state_history(state_name_: String):
 
 
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint(): return
 	super._physics_process(delta)
 	if u.is_nth_frame(10):
 		basis = basis.orthonormalized()
@@ -274,9 +265,12 @@ func _on_death_raised() -> void:
 	await FrameUtils.wait_process_frames(2)
 	self.set_process(false)
 	self.set_physics_process(false)
-	var _look_at_manager_ := get_look_at_manager()
+	var _look_at_manager_: ELookAtManager = get_look_at_manager()
 	if _look_at_manager_:
 		_look_at_manager_.shut_down()
+	var _look_at_marker := get_look_at_char_marker()
+	if _look_at_marker:
+		_look_at_marker.active = false
 	# todo: it works but we need proper checks for external systems to be ready for this; also visuals
 	# self.queue_free()
 

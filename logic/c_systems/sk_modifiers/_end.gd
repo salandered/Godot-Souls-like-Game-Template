@@ -3,8 +3,6 @@ class_name EndModifier
 
 @onready var full_body: PlayerModifierAnimator = %FullBody
 
-@export var provides_root_velocity: bool
-
 var __initialised: bool = false
 
 var last_pose: Vector3

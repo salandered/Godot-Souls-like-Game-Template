@@ -51,7 +51,7 @@ extends Area3DSystem
 			_dev_apply_settings.call_deferred()
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [weather_system]
 
 	

@@ -21,7 +21,7 @@ warnings/check_invalid_track_paths=false
 
 config/name="Hard Tissue Demo"
 config/version="0.0.3"
-run/main_scene="uid://c66xg4go6ct4v"
+run/main_scene="uid://bj31r46hbvq8r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://dj75kmn2opgg4"
 
@@ -429,6 +429,10 @@ DEV_KP7={
 3d_physics/layer_5="Weapon-area"
 3d_physics/layer_6="Item-col"
 3d_physics/layer_7="Prop-col"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

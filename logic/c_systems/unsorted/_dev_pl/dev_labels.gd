@@ -141,7 +141,7 @@ func _label_state_info():
 
 
 func _label_modifier_animator_info():
-	var animator := player.animator_manager.full_body
+	var animator := player.get_animator_manager().full_body
 
 	modifier_ar.text = animator.__log_state()
 	# modifier_ar_2.text = __one_animator_data(l_ar)

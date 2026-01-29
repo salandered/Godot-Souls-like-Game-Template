@@ -18,7 +18,7 @@ extends Node3DCharacterSystem
 ## Also
 # - see SmithSword implementation for basic approach to all this
 
-var _holder: BaseCharacter
+var _holder: BaseStaticCharacter
 
 ## managed by implementation
 var _weapon_hurt_box: WeaponHurtBox
@@ -45,13 +45,14 @@ var _signal_container: BaseWeaponSignalContainer
 ## nullable
 var spark_marker: Marker3D
 
-func __hard_dependencies() -> Array[Object]:
+
+func __hard_dependencies() -> Array:
 	return [
 		_weapon_hurt_box,
 		_holder ## in the future weapon may exist without holder i suppose
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		_signal_container,
 		_for_init_weapon_sfx_parent(),
@@ -59,7 +60,7 @@ func __soft_dependencies() -> Array[Object]:
 	]
 
 
-func initialise(holder: BaseCharacter) -> void:
+func initialise(holder: BaseStaticCharacter) -> void:
 	self._holder = holder
 	## each weapon has its own signals
 	_signal_container = BaseWeaponSignalContainer.new()
@@ -100,8 +101,9 @@ func _get_weapon_sfx_system(weapon_sfx: WeaponSFXParent) -> BaseWeaponSFXSystem:
 @abstract func _for_init_weapon_sfx_parent() -> WeaponSFXParent
 @abstract func _for_init_asp_container() -> BaseWeaponASPConfigContainer
 
+
 ## currently not nullable but it's better to treat is as nullable
-func get_holder() -> BaseCharacter:
+func get_holder() -> BaseStaticCharacter:
 	return _holder
 
 

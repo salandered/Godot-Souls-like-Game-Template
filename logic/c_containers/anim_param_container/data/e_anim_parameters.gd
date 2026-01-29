@@ -1,10 +1,4 @@
-extends Node
-
-# ANIMATED PARAMS ## VARS HERE CORRESPONDS AS IS TO TRACK IN ANIMATION PLAYER 
-
-
-## DOCS
-## For reference see Player's AnimParameters
+extends BaseAnimParameters
 
 
 ## Able to lose health.
@@ -20,6 +14,3 @@ extends Node
 
 ## future use
 # @export var interruptable: bool
-
-## probably not using for enemy
-# @export var tracks_input_vector: bool

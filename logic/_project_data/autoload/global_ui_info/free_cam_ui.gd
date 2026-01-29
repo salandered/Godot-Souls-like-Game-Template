@@ -25,7 +25,8 @@ const controls_text := "[b]WASD[/b] - Move
 func _ready() -> void:
 	if controls:
 		controls.text = controls_text
-	disable_free_cam()
+	set_free_cam_enable(false)
+
 
 var free_cam_label_visibility_cycler := Cycler.new([
 		[true, true],
@@ -66,14 +67,9 @@ func _set_labels_visible(value: Array):
 		hud_info.visible = value[1]
 
 
-func disable_free_cam() -> void:
-	ENABLED = false
-	free_cam.visible = false
-
-func enable_free_cam() -> void:
-	ENABLED = true
-	free_cam.visible = true
-	# _cycle_free_cam_labels_visible(false)
+func set_free_cam_enable(toggle: bool) -> void:
+	ENABLED = toggle
+	free_cam.visible = toggle
 
 
 func _input(event: InputEvent) -> void:

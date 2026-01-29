@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bwihqll2ru8vl" path="res://-assets-/SFX/audio_streams/simple_target/st_friction.tres" id="5_lub8o"]
 [ext_resource type="Texture2D" uid="uid://b87n6fgrpvy4s" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/exit_2_lichen_rock_rough.png" id="5_ramhp"]
 [ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="6_lub8o"]
-[ext_resource type="Script" uid="uid://bk85ak1v8fygj" path="res://logic/entities/Items/simple_target/simple_target_hit_area.gd" id="7_wnrsi"]
+[ext_resource type="Script" uid="uid://bk85ak1v8fygj" path="res://logic/entities/Items/simple_target/monitor_pl_hit_sig_area.gd" id="7_wnrsi"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lub8o"]
 _surfaces = [{
@@ -202,6 +202,7 @@ _data = {
 
 [node name="SimpleTarget" type="Node3D"]
 script = ExtResource("1_g7ncb")
+label = null
 
 [node name="CameraTarget" parent="." instance=ExtResource("1_vud1n")]
 unique_name_in_owner = true
@@ -212,7 +213,7 @@ __csg_visual = false
 
 [node name="RotatingTarget" type="MeshInstance3D" parent="Visuals"]
 unique_name_in_owner = true
-transform = Transform3D(-0.37619692, 0, 0.0663338, 0, 0.3820004, 0, -0.0663338, 0, -0.37619692, 0, 1.2790871, 0)
+transform = Transform3D(0.3819422, 0, -0.0066669034, 0, 0.3820004, 0, 0.0066669034, 0, 0.3819422, 0, 1.2790871, 0)
 layers = 128
 material_override = ExtResource("6_lub8o")
 mesh = SubResource("ArrayMesh_lub8o")

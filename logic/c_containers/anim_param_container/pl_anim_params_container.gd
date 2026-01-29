@@ -22,9 +22,9 @@ const DEFAULT_PARAMS: Dictionary[String, bool] = {
 
 ## track's exact path is very fragile. see docs of PlAnimParameters
 static var TRACK_PREFIXES: Array[String] = [
+	"NativeAnimator/AnimParameters:",
 	"%AnimParameters:",
 	"../AnimatorManager/NativeAnimator/AnimParameters:",
-	"NativeAnimator/AnimParameters:",
 ]
 
 func get_all_params() -> Array[String]:

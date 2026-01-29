@@ -17,10 +17,10 @@ var _target_player: Princess
 var _time_elapsed: float = 0.0
 var _start_y: float = 0.0
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [monitor_player_enter_signal_area]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [interact_area, whoosh_1, whoosh_2]
 
 func _ready() -> void:
@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	_time_elapsed += delta
 	var progress := clampf(_time_elapsed / lift_duration, 0.0, 1.0)
 	
-	var ease_progress := - progress * (progress - 2.0)
+	var ease_progress := -progress * (progress - 2.0)
 	
 	var new_y := _start_y + (_current_target_height * ease_progress)
 	_target_player.global_position.y = new_y

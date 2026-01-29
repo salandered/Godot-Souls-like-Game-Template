@@ -1,4 +1,3 @@
-extends BaseCharacterState
 ## Base class for State Player
 ## Does many things:
 	## manages basic state and action switches.
@@ -6,11 +5,8 @@ extends BaseCharacterState
 	## check transitions, i.e checks when and how to switch itself
 	##    includes managing combos and queued/forced states.
 	## reacts on external events, like react on hit
-## TODO: state became 'too' smart. File is bloated with tons of logic. 
-##       think of separating some parts.
-##       main idea for now: do checking transitions (combos, etc) on a Player SM level
-##       (state is too self aware now)
 class_name BasePlayerState
+extends BaseCharacterState
 
 # common
 var player_sm: PlayerSM
@@ -172,7 +168,7 @@ func _update(input_: InputPackage, delta: float):
 		elif area_awareness.is_almost_on_floor():
 			var _applied := pm().apply_gravity(delta)
 			if _applied:
-				__log_state_upd("applied gravity ☄️")
+				__log_upd("applied gravity ☄️")
 		else:
 			## todo: check what happens if midair already. may be unnecessory transitions
 			forced_state.try_set(PS.midair, 50)
@@ -204,19 +200,19 @@ func _on_enter_state(input_: InputPackage):
 
 	## For now depends_on_legs means legs_behavior is not double. E.g Run or Sprint beh.
 	if depends_on_legs:
-		__log_state_ent("Dependent state. Actions delegated to legs, no state action switch✖️ - double")
+		__log_ent("Dependent state. Actions delegated to legs, no state action switch✖️ - double")
 		on_enter_state(input_)
 		switch_action_to(PS.Act.double, input_)
 		## WARNING testing idle
 		if state_name == PS.idle \
 			and legs_sm.current_behavior.behavior_name in [Leg.Beh.sprint, Leg.Beh.run, Leg.Beh.strafe]:
-			__log_state_ent("No switching legs behavior", em.gray_x)
+			__log_ent("No switching legs behavior", em.gray_x)
 		else:
 			legs_sm.switch_to(legs_behavior, input_)
 	else: ## state leads legs.  like Attack or Jump or Midair
 		default_action_name = choose_default_action() # NOTE: safe. Container checked that non dependent state has an action.
 
-		__log_state_ent("Switch to default action", pp.in_q(default_action_name))
+		__log_ent("Switch to default action", pp.in_q(default_action_name))
 		
 		
 		switch_action_to(default_action_name, input_)
@@ -237,13 +233,13 @@ func switch_action_to(next_action_name: String, input_: InputPackage):
 	# 	=> leg_behavior don't carry its curr action with it.
 	# endregion
 	if curr_state_action and curr_state_action.action_name == PS.Act.double and next_action_name == PS.Act.double:
-		# print_.psm("Action ↪️", "Double to double => no switch.")
+		# __log_("Action ↪️", "Double to double => no switch.")
 		return
 	if curr_state_action:
-		print_.psm("Action ↪️", pp.s("switch action", curr_state_action.action_name, "=>", next_action_name))
+		__log_("Action ↪️", pp.s("switch action", curr_state_action.action_name, "=>", next_action_name))
 		curr_state_action._on_exit_action()
 	else:
-		print_.psm("Action ↪️", "No current action => " + next_action_name)
+		__log_("Action ↪️", "No current action => " + next_action_name)
 
 	var next_action := container.pl_action_by_name(next_action_name)
 	next_action._on_enter_action(input_)
@@ -275,8 +271,8 @@ func react_on_hit(hit: HitData):
 	## 2 - if not, we delegate reaction behavior to curr action
 	var react_state_name := ReactionOnHit.calculate_reaction_for_pl_state(hit)
 	
-	if react_state_name:
-		__log_state_upd("hit leaded to react state", react_state_name)
+	if react_state_name != "":
+		__log_upd("hit leaded to react state", react_state_name)
 		var state := container.state_by_name(react_state_name)
 		forced_state.try_set(react_state_name, state.priority)
 		feelings.lose_health(hit.damage)
@@ -289,25 +285,19 @@ func react_on_hit(hit: HitData):
 
 # region: LOGS
 
-func __log_error(what: String, where: String = "", fallback: String = "", ...details: Array):
-	error_.warn(what, where + "| in state " + pp.in_q(state_name), fallback, WL.PUSH_ERROR, pp.list_(details))
 
+func __ELA():
+	return LogToggler.PSM_B
 
-func __log_state_ent(...parts: Array):
-	print_.psm(state_name + pp.on_ent, pp.list_(parts))
-
-func __log_state_exit(...parts: Array):
-	print_.psm(state_name + pp.on_ext, pp.list_(parts))
-
-func __log_state_upd(...parts: Array):
-	print_.psm(state_name + pp.on_upd, pp.list_(parts))
+func __LOG_B() -> bool:
+	return LogToggler.PSM_B
 
 
 func __log_psm_check(...parts: Array):
 	print_.psm_check_trans(state_name, pp.list_(parts))
 
 func __log_time_spent():
-	print_.psm(state_name, pp.s("Time spent: state -", get_actual_time_spent(), "action - ", curr_state_action.time_spent()))
+	__log_(state_name, pp.s("Time spent: state -", get_actual_time_spent(), "action - ", curr_state_action.time_spent()))
 
 
 # endregion

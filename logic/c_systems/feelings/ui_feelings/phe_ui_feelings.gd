@@ -27,13 +27,13 @@ var ui_can_be_shown: bool = false
 var health_bar: FeelingBar
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		_bars_container,
 		_health_bar
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		_ghost_bar,
 		_back_health_bar

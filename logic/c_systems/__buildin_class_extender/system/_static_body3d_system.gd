@@ -32,11 +32,11 @@ func __perform_validation(process_disable_on_fail: bool = false) -> bool:
 
 
 ## override for object null checks
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return []
 
 ## override for object null checks
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return []
 
 

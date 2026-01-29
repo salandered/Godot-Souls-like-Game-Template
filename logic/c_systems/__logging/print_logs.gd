@@ -12,10 +12,9 @@ static var COMBO_PRINT := PrintData.PrintInstance.new(LogToggler.COMBO_B, "Combo
 static var FIGHT_PRINT := PrintData.PrintInstance.new(LogToggler.FIGHT_B, "⚔️", 0, prefix)
 static var E_CONTAINER_PRINT := PrintData.PrintInstance.new(LogToggler.E_CONTAINER_B, "Container", 0, prefix)
 # player
-static var ACTION_ANIM := PrintData.PrintInstance.new(LogToggler.ACTION_ANIM_B, "▷", 16, psm)
-static var PSM_ACTION := PrintData.PrintInstance.new(LogToggler.PSM_B, "Action", 2, psm)
-static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "transition ❔", 1, psm)
-static var PSM_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "PSM", 0, prefix)
+static var ACTION_ANIM := PrintData.PrintInstance.new(LogToggler.ACTION_ANIM_B, "▷", 16, prefix)
+static var PSM_ACTION := PrintData.PrintInstance.new(LogToggler.PSM_B, "Action", 2, prefix)
+static var PSM_CHECK_TRANS_PRINT := PrintData.PrintInstance.new(LogToggler.PSM_B, "transition ❔", 1, prefix)
 # player lsm
 static var LSM_BEH_CH := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "choose act ❔", 4, lsm_beh)
 static var LSM_BEH_PRINT := PrintData.PrintInstance.new(LogToggler.LSM_BEH_B, "Behavior", 4, lsm)
@@ -77,9 +76,6 @@ static func psm_check_trans(add_prefix_: String, text: String, info_indents: int
 
 static func psm_action(add_prefix_: String, text: String, info_indents: int = 0):
 	_generic(PSM_ACTION, add_prefix_, text, info_indents)
-
-static func psm(add_prefix_: String, text: String, info_indents: int = 0):
-	_generic(PSM_PRINT, add_prefix_, text, info_indents)
 
 
 # endregion

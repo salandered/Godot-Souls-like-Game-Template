@@ -22,15 +22,14 @@ extends SpotLight3DSystem
 		if is_node_ready(): _apply_debug_visuals()
 
 
-
 @onready var puff_fog: PuffFog = %PuffFog
 @onready var __csg: CSGSphere3D = %__csg
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return []
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [puff_fog, __csg]
 
 # endregion
@@ -45,16 +44,12 @@ func _ready() -> void:
 		u.hide_dev_visuals(self)
 
 
-
-
 func _apply_all_properties() -> void:
 	_apply_mist()
 	_apply_debug_visuals()
 
 
 # region Apply Functions
-
-
 
 
 func _apply_mist() -> void:

@@ -1,6 +1,7 @@
 extends RefCounted
 class_name LegBehaviorContainer
 
+
 class _BehaviorData:
 	var behavior_name: String
 	var supported_actions: SupportedActions

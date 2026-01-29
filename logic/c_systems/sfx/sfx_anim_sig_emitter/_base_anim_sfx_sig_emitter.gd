@@ -19,7 +19,7 @@ var ENABLED: bool = true ## DEV DANGER
 var _audio_track_throttler: EventThrottler
 
 
-@abstract func get_anim_manager() -> BaseAnimatorManager
+@abstract func get_animator_manager() -> BaseAnimatorManager
 
 func disable():
 	ENABLED = false
@@ -28,7 +28,7 @@ func enable():
 	ENABLED = true
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		sad_container,
 		signal_container
@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 	if not ENABLED:
 		return
 	
-	var curr_anim := get_anim_manager().get_curr_anim()
+	var curr_anim := get_animator_manager().get_curr_anim()
 	if curr_anim == null:
 		return
 		
@@ -89,7 +89,7 @@ func _process(delta: float) -> void:
 		_last_anim = curr_anim
 		return
 	
-	var curr_time := get_anim_manager().get_curr_anim_effective_time_spent()
+	var curr_time := get_animator_manager().get_curr_anim_effective_time_spent()
 
 	# handle loop wrap - reset tracking
 	if curr_time < _last_checked_time:
@@ -169,8 +169,8 @@ func __log_extra(prefix: String, ...parts):
 # if _is_time_in_window(timestamp, from_time, to_time):
 		# TODO: need it or not; probably not
 		# var MIN_WEIGHT := 0.0
-		# if get_anim_manager().is_blending():
-		# 	var weight := get_anim_manager().get_curr_blend_percentage()
+		# if get_animator_manager().is_blending():
+		# 	var weight := get_animator_manager().get_curr_blend_percentage()
 		# 	if weight < MIN_WEIGHT:
 		# 		__log_("Audio Event skipped✖️", timestamp, "weight", weight, "<", MIN_WEIGHT)
 		# 		continue

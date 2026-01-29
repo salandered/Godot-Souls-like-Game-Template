@@ -1,40 +1,47 @@
-extends Node3DLogger
+extends Node3DSystem
 
 ## Autoload ##
 
+@export var camera_packed_scene: PackedScene
 @export var camera_speed := 10.0
 @export var mouse_sensitivity := 0.003
 @export var speed_multiplier := 1.1 # how much each scroll step multiplies speed
+@export var pause_on_enter: bool = true
+@export var light_on_on_enter: bool = false
 
-@onready var camera: FreeCamera = %Camera3D
-@onready var light: SpotLight3D = %SpotLight3D
-@onready var _cached_camera: Camera3D
-@onready var _enabled := false
 
+var _camera: FreeCamera
+var _light: SpotLight3D
+
+var _cached_camera: Camera3D
 var _previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
 
 
-var ACTIVE: bool = false
+var _enabled := true
+var is_active: bool = false
+
+
+func __hard_dependencies() -> Array:
+	return [
+		camera_packed_scene
+	]
 
 
 func _ready() -> void:
-	# if OS.is_debug_build():
-	_enabled = true
-
-	if not camera:
-		__log_warn_soft("Free camera is no available, no cam node found")
+	if not __perform_validation():
+		__log_warn_soft("not gonna work")
 		_enabled = false
 
-	set_process(_enabled)
-	set_process_input(_enabled)
-	set_process_unhandled_input(_enabled)
+	# free cam mode can pause tree, but it itself should still be working
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	set_process(false)
 
 	hide()
-	GlobalSignal.SIG_hide_free_cam_ui.emit()
-	light.visible = false # by default false
+
 
 func _process(delta: float) -> void:
-	if not ACTIVE:
+	if not is_active or not _enabled:
 		return
 	
 	move_camera(delta)
@@ -42,46 +49,58 @@ func _process(delta: float) -> void:
 	_update_hud()
 
 
-func _toggle_camera_mode() -> void:
-	__log_("~~~ Toggling camera mode")
+func _toggle_camera_mode(toggle: bool) -> void:
+	if not _enabled:
+		return
+	__log_("~~~ Toggling _camera mode", toggle)
 	
-	## going back to main cam
-	if ACTIVE:
-		get_tree().paused = false
-		Input.mouse_mode = _previous_mouse_mode
-		_turn_off_free_cam()
-		if _cached_camera and not _cached_camera.is_queued_for_deletion():
-			_cached_camera.current = true
-		hide()
-		set_process(false)
-		GlobalSignal.SIG_hide_free_cam_ui.emit()
-		ACTIVE = false
-		InputManager.set_process(true)
-
+	is_active = toggle
+	set_process(toggle)
+	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_free_cam_mode_toggled, toggle)
+	InputManager.set_input_enabled(not toggle)
+	
 	## turn on free cam
-	else:
-		get_tree().paused = true
+	if toggle:
+		if pause_on_enter:
+			get_tree().paused = true
 		_previous_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		_cached_camera = get_viewport().get_camera_3d()
+		if not _cached_camera:
+			__log_warn_soft("can t acquired the cam to return to after toggling free cam mode off")
 		_turn_on_free_cam()
 		show()
-		set_process(true)
-		GlobalSignal.SIG_show_free_cam_ui.emit()
-		ACTIVE = true
-		InputManager.set_process(false)
+	## going back to main cam
+	else:
+		get_tree().paused = false
+		Input.mouse_mode = _previous_mouse_mode
+		if _cached_camera and not _cached_camera.is_queued_for_deletion():
+			_cached_camera.current = true
+		_turn_off_free_cam()
+		hide()
 
 
 func _turn_on_free_cam():
-	camera.current = true
-	camera.fov = _cached_camera.fov
-	camera.global_transform = _cached_camera.global_transform
-	_create_camera_body()
+	var cam = camera_packed_scene.instantiate()
+	if cam is not FreeCamera:
+		__log_error("packed scene contains not FreeCamera")
+		return
+	add_child(cam)
+
+	_camera = cam
+	_light = _camera.get_light()
+	_light.visible = light_on_on_enter
+
+
+	_camera.current = true
+	if _cached_camera:
+		_camera.fov = _cached_camera.fov
+		_camera.global_transform = _cached_camera.global_transform
 
 
 func _turn_off_free_cam():
-	camera.current = false
-	_remove_camera_body() # important: remove it completely
+	_camera.queue_free()
+	_camera = null
 
 
 ## CAMERA MOVEMENT
@@ -97,29 +116,18 @@ func move_camera(delta: float):
 		var rotation_input := -_mouse_motion.x * mouse_sensitivity
 		var tilt_input := -_mouse_motion.y * mouse_sensitivity
 		
-		var euler_rotation := camera.global_transform.basis.get_euler()
+		var euler_rotation := _camera.global_transform.basis.get_euler()
 		euler_rotation.x += tilt_input
 		# limit vertical rotation
 		euler_rotation.x = clamp(euler_rotation.x, -PI / 2 + 0.01, PI / 2 - 0.01)
 		euler_rotation.y += rotation_input
-		camera.global_transform.basis = Basis.from_euler(euler_rotation)
+		_camera.global_transform.basis = Basis.from_euler(euler_rotation)
 		
-		# Reset mouse motion for next frame
+		# reset mouse motion for next frame
 		_mouse_motion = Vector2.ZERO
 	
 	# movement
-	camera.global_position += camera.global_transform.basis * movement * delta * _get_current_movement_speed()
-
-
-func _get_keyboard_movement_vector() -> Vector3:
-	var movement := Vector3.ZERO
-	movement += Vector3.FORWARD if Input.is_key_pressed(KEY_W) else Vector3.ZERO
-	movement += Vector3.LEFT if Input.is_key_pressed(KEY_A) else Vector3.ZERO
-	movement += Vector3.BACK if Input.is_key_pressed(KEY_S) else Vector3.ZERO
-	movement += Vector3.RIGHT if Input.is_key_pressed(KEY_D) else Vector3.ZERO
-	movement += Vector3.DOWN if Input.is_key_pressed(KEY_Q) else Vector3.ZERO
-	movement += Vector3.UP if Input.is_key_pressed(KEY_E) else Vector3.ZERO
-	return movement
+	_camera.global_position += _camera.global_transform.basis * movement * delta * _get_current_movement_speed()
 
 
 func _get_current_movement_speed() -> float:
@@ -131,59 +139,22 @@ func _get_current_movement_speed() -> float:
 # endregion
 
 
-## CAMERA BODY
-# region
-
-var _camera_body: PhysicsBody3D
-
-func _create_camera_body() -> void:
-	if _camera_body:
-		__log_("_create_camera_body", "already created")
-		return
-	
-	var body := FreeCameraBody.new()
-	body.name = "DebugCamBody"
-	
-	body.collision_layer = Collision.Layers.PLAYER_COL
-	
-	body.collision_mask = 0 # camera not pushing things
-	
-	var shape_node := CollisionShape3D.new()
-	var sphere := SphereShape3D.new()
-	sphere.radius = 0.5
-	shape_node.shape = sphere
-	
-	body.add_child(shape_node)
-	camera.add_child(body)
-	body.collision_layer = Collision.Layers.PLAYER_COL
-	_camera_body = body
-
-
-func _remove_camera_body() -> void:
-	if _camera_body:
-		camera.remove_child(_camera_body)
-		_camera_body.queue_free()
-		_camera_body = null
-
-# endregion
-
-
 ## INFO LABELS
 # region
 
 
 func _update_hud() -> void:
-	var pos := camera.global_position
-	var rot := camera.rotation_degrees
+	var pos := _camera.global_position
+	var rot := _camera.rotation_degrees
 	var hud_text := "POS:  %.1f, %.1f, %.1f\nROT:  %.1f, %.1f\nSPD:  %.1f\nFOV:  %.0f" % [
 		pos.x, pos.y, pos.z,
 		rot.x, rot.y,
 		camera_speed,
-		camera.fov
+		_camera.fov
 	]
 
-	if light:
-		hud_text += pp.s("\nLight: ", light.visible, pp.s(" | Energy: ", light.light_energy))
+	if _light:
+		hud_text += pp.s("\nLight: ", _light.visible, pp.s(" | Energy: ", _light.light_energy))
 
 	if get_tree().paused:
 		hud_text += "\n\n[i]SCENE PAUSED ⏸️[/i]"
@@ -198,31 +169,45 @@ func _update_hud() -> void:
 ## INPUT
 # region
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed(RawAction.DEV_free_cam):
-		_toggle_camera_mode()
+func _get_keyboard_movement_vector() -> Vector3:
+	var movement := Vector3.ZERO
+	movement += Vector3.FORWARD if Input.is_key_pressed(KEY_W) else Vector3.ZERO
+	movement += Vector3.LEFT if Input.is_key_pressed(KEY_A) else Vector3.ZERO
+	movement += Vector3.BACK if Input.is_key_pressed(KEY_S) else Vector3.ZERO
+	movement += Vector3.RIGHT if Input.is_key_pressed(KEY_D) else Vector3.ZERO
+	movement += Vector3.DOWN if Input.is_key_pressed(KEY_Q) else Vector3.ZERO
+	movement += Vector3.UP if Input.is_key_pressed(KEY_E) else Vector3.ZERO
+	return movement
 
-	if ACTIVE:
-		_handle_pause_toggle(event)
-		_handle_mouse_wheel(event)
+
+func _input(event: InputEvent) -> void:
+	if not _enabled:
+		return
+	if event.is_action_pressed(RawAction.DEV_free_cam):
+		_toggle_camera_mode(not is_active)
+		get_viewport().set_input_as_handled()
+		return
+
+	if not is_active:
+		return
+
+	_handle_pause_toggle(event)
+	_handle_mouse_wheel(event)
+	if _camera:
 		_handle_fov_input(event)
+	if _light:
 		_handle_light_toggle(event)
 		_handle_light_energy_input(event)
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	# capture mouse motion only when the debug camera is active
-	if not ACTIVE:
-		return
- 
 	if event is InputEventMouseMotion:
 		_mouse_motion = event.relative
+
+	get_viewport().set_input_as_handled()
 
 
 func _handle_pause_toggle(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
 		get_tree().paused = not get_tree().paused
-		get_viewport().set_input_as_handled()
 
 
 func _handle_mouse_wheel(event: InputEvent) -> void:
@@ -247,9 +232,10 @@ func _handle_fov_input(event: InputEvent) -> void:
 	# Hold Right Mouse Button + Scroll to change FOV
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera.fov = max(camera.fov - 2, 10)
+			_camera.fov = max(_camera.fov - 2, 10)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera.fov = min(camera.fov + 2, 170)
+			_camera.fov = min(_camera.fov + 2, 170)
+
 
 func _handle_light_energy_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
@@ -258,15 +244,14 @@ func _handle_light_energy_input(event: InputEvent) -> void:
 	# Hold LMB + Scroll to change FOV
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			light.light_energy = min(light.light_energy + 0.2, 10.0)
+			_light.light_energy = min(_light.light_energy + 0.2, 10.0)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			light.light_energy = max(light.light_energy - 0.2, 0.2)
+			_light.light_energy = max(_light.light_energy - 0.2, 0.2)
 
 
 func _handle_light_toggle(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_L:
-		light.visible = not light.visible
-		get_viewport().set_input_as_handled()
+		_light.visible = not _light.visible
 
 
 # endregion
@@ -276,6 +261,6 @@ func _handle_light_toggle(event: InputEvent) -> void:
 # region
 
 func pp_name():
-	return "~~~FreeCam" + em.pin
+	return "FreeCam📷"
 
 # endregion

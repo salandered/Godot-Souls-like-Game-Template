@@ -8,3 +8,6 @@ const bg_aura_weapon = "bg_aura_weapon"
 
 
 const smith_sword = "smith_sword"
+
+const fighter_h_arm = "fighter_h_arm"
+const fighter_v_arm = "fighter_v_arm"

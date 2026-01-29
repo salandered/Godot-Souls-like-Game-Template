@@ -26,7 +26,7 @@ var _pixels_per_stamina: float
 var _size_tween: Tween
 
 
-func __hard_dependencies() -> Array[Object]:
+func __hard_dependencies() -> Array:
 	return [
 		_health_bar,
 		_health_container,
@@ -36,7 +36,7 @@ func __hard_dependencies() -> Array[Object]:
 
 	]
 
-func __soft_dependencies() -> Array[Object]:
+func __soft_dependencies() -> Array:
 	return [
 		_health_ghost,
 		_health_back,

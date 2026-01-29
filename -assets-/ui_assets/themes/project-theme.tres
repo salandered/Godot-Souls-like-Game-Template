@@ -42,15 +42,15 @@ base_scale = 1.3
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3kpra"]
 texture = ExtResource("1_6m5w1")
-region_rect = Rect2(7.1560364, 300.5872, 713.8154, 197.21027)
+region_rect = Rect2(22.27829, 44.656525, 415.80444, 133.2331)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mlnkq"]
 texture = ExtResource("1_6m5w1")
-region_rect = Rect2(6.333191, 188.15894, 711.67175, 218.64612)
+region_rect = Rect2(28.115784, 100.18345, 412.87622, 102.48702)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khdhv"]
 texture = ExtResource("1_6m5w1")
-region_rect = Rect2(148.03558, 115.62555, 773.9644, 216.37445)
+region_rect = Rect2(34.947266, 10.07283, 458.2633, 128.8408)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t44it"]
 texture = ExtResource("6_cf62b")
@@ -102,20 +102,20 @@ content_margin_top = 4.0
 content_margin_bottom = 4.0
 texture = ExtResource("10_bo7n0")
 texture_margin_right = 20.0
-region_rect = Rect2(444.66846, 185.87663, 591.6306, 297.95886)
+region_rect = Rect2(71.59888, 36.21144, 437.76596, 159.5869)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_15rup"]
 content_margin_top = 4.0
 content_margin_bottom = 4.0
 texture = ExtResource("10_bo7n0")
-region_rect = Rect2(444.66846, 185.87663, 591.6306, 297.95886)
+region_rect = Rect2(162.37308, 42.067833, 352.8481, 147.87411)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cf62b"]
 content_margin_top = 4.0
 content_margin_bottom = 4.0
 texture = ExtResource("10_bo7n0")
 texture_margin_right = 20.0
-region_rect = Rect2(444.66846, 185.87663, 591.6306, 297.95886)
+region_rect = Rect2(100.88089, 28.890938, 395.307, 166.90741)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cpjrn"]
 texture = ExtResource("6_cf62b")

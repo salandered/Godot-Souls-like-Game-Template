@@ -1,6 +1,6 @@
 @abstract
-class_name BaseNodeStateDataContainer
-extends Resource
+class_name PHEBaseNodeStateDataContainer
+extends RefCounted
 
 
 @abstract func get_node_to_composite_state_data() -> Dictionary[String, EDC._CSData]
