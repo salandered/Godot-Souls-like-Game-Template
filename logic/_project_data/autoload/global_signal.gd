@@ -1,7 +1,15 @@
 extends Node
 
-
 ## AUTOLOAD ##
+
+## DOCS
+## * NOTE: all signals have the same payload structure Dictionary[String, Variant]
+##   or don't have the payload at all. 
+##   While cumbersome, it unifies all the signal handlers 
+##	 and mitigates an error when handler signature does not match the signal
+## * Use const fields for the payload keys
+## * Use SigUtils for both, emitting signals and parsing their payload
+##   (also for connecting/disconnecting signals)
 
 ## -------------------------------------------------------------------
 
@@ -9,9 +17,10 @@ extends Node
 ## PLAYER EVENTS
 
 signal SIG_player_state_changed(payload: Dictionary[String, Variant])
+signal SIG_player_leg_beh_changed(payload: Dictionary[String, Variant])
 signal SIG_player_action_changed(payload: Dictionary[String, Variant])
 signal SIG_player_weapon_hit_data_set(payload: Dictionary[String, Variant])
-signal SIG_player_react_on_hit(payload: Dictionary[String, Variant])
+signal SIG_player_reacted_on_hit(payload: Dictionary[String, Variant])
 
 ## PHE EVENTS
 signal SIG_phe_state_changed(payload: Dictionary[String, Variant])
@@ -20,7 +29,7 @@ signal SIG_phe_state_reset(payload: Dictionary[String, Variant])
 # E EVENTS
 signal SIG_enemy_weapon_hit_data_set(payload: Dictionary[String, Variant])
 signal SIG_enemy_state_changed(payload: Dictionary[String, Variant])
-signal SIG_enemy_react_on_hit(payload: Dictionary[String, Variant])
+signal SIG_enemy_reacted_on_hit(payload: Dictionary[String, Variant])
 
 
 ## PLAYER FEELINGS
@@ -35,17 +44,14 @@ signal _SIG_player_speed_increase(payload: Dictionary[String, Variant])
 signal _SIG_player_dodge_increase(payload: Dictionary[String, Variant])
 
 ## SYSTEM GLOBAL UI
+signal SIG_ui_overlay_check_button_toggled(payload: Dictionary[String, Variant])
+signal SIG_ui_overlay_spin_box_value_changed(payload: Dictionary[String, Variant])
 
-signal SIG_toggle_show_tut(payload: Dictionary[String, Variant])
-signal SIG_toggle_show_profiler(payload: Dictionary[String, Variant])
 signal SIG_free_cam_mode_toggled(payload: Dictionary[String, Variant])
-signal SIG_toggle_dynamic_state_info(payload: Dictionary[String, Variant])
-signal SIG_toggle_phe_dynamic_state_info(payload: Dictionary[String, Variant])
-signal SIG_toggle_se_dynamic_state_info(payload: Dictionary[String, Variant])
 signal SIG_toggle_camera_visuals(payload: Dictionary[String, Variant])
 signal SIG_toggle_camera_coll(payload: Dictionary[String, Variant])
 # signal SIG_toggle_split_screen(payload: Dictionary[String, Variant])
-
+signal SIG_tut_panel_switched(payload: Dictionary[String, Variant])
 
 ## SYSTEM SETTINGS
 
@@ -64,17 +70,6 @@ class HStateData:
 	func _init(state_name_: String, state_depth_: int) -> void:
 		self.state_name = state_name_
 		self.state_depth = state_depth_
-
-
-const payload_h_state_data_field := "h_state_data"
-const payload_state_name_field := "state_name"
-const payload_amount_field := "amount"
-const payload_damage_field := "damage"
-const payload_hit_data_field := "hit_data"
-const payload_toggle_field := "toggle"
-const payload_attack_dir_field := "attack_dir"
-const payload_interruption_field := "interruption"
-const payload_reaction := "react_anim"
 
 
 ## WRAPPERS

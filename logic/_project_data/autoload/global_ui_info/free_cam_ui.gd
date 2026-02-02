@@ -75,5 +75,5 @@ func set_free_cam_enable(toggle: bool) -> void:
 func _input(event: InputEvent) -> void:
 	if not ENABLED:
 		return
-	if event is InputEventKey and event.pressed and event.keycode == KEY_KP_0:
+	if event is InputEventKey and event.pressed and (event.keycode == KEY_KP_0 or event.keycode == KEY_0):
 		_cycle_free_cam_labels_visible(true)

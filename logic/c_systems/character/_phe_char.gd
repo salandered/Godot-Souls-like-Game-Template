@@ -106,6 +106,8 @@ func __soft_dependencies() -> Array:
 func initialise_base_char_implementation() -> void:
 	super.initialise_base_char_implementation()
 
+	char_type = DevVisualsConfig.CharacterType.HSM_ENEMY
+
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
 	
@@ -204,6 +206,7 @@ func update_state_history(state_name_: String):
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
+	
 	super._physics_process(delta)
 	if u.is_nth_frame(10):
 		basis = basis.orthonormalized()
@@ -214,7 +217,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 	if push_rigid:
-		PushRigidBodies.push_rigid_bodies_by_char(self, push_rigid_bodies_force)
+		PushRigidBodies.push_rigid_bodies_by_char(self , push_rigid_bodies_force)
 
 	# player.__dev_labels._label_phe_enemy_info(self)
 
@@ -230,6 +233,10 @@ func react_on_hit(hit_data: HitData) -> void:
 		__log_error("no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
 	_curr_state.react_on_hit(hit_data)
+
+
+func is_invincible() -> bool:
+	return false
 
 
 func reset_position(y_offset: float = 0.0) -> void:

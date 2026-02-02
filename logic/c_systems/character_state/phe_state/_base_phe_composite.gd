@@ -118,10 +118,10 @@ func _update(delta: float) -> void:
 
 
 func works_longer_than_fatigue() -> bool:
-	return CommitCheck.works_longer_than_fatigue(self)
+	return CommitCheck.works_longer_than_fatigue(self )
 
 func works_less_than_commitment() -> bool:
-	return CommitCheck.works_less_than_commitment(self)
+	return CommitCheck.works_less_than_commitment(self )
 
 
 ## nullable
@@ -153,7 +153,7 @@ func set_current_substate(next_state_name: String) -> void:
 		GlobalSignal.SIG_phe_state_changed,
 		{
 			## changed to 
-			GlobalSignal.payload_h_state_data_field: GlobalSignal.HStateData.new(
+			SPS.h_state_data_field: GlobalSignal.HStateData.new(
 					_next_substate.state_name,
 					_next_substate.state_depth)
 		}
@@ -165,7 +165,7 @@ func reset_current_substate() -> void:
 		GlobalSignal.SIG_phe_state_reset,
 		{
 			## reset from
-			GlobalSignal.payload_h_state_data_field: GlobalSignal.HStateData.new(
+			SPS.h_state_data_field: GlobalSignal.HStateData.new(
 					__current_substate.state_name,
 					__current_substate.state_depth)
 		}

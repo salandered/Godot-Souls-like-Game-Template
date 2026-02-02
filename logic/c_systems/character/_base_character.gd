@@ -77,7 +77,7 @@ func _initialise_common_char() -> void:
 
 	_visuals = _for_init_visuals()
 	if _visuals:
-		_visuals.accept_model_data(self)
+		_visuals.accept_model_data(self )
 
 
 	_bones = _for_init_bones()
@@ -88,9 +88,9 @@ func _initialise_common_char() -> void:
 	_initialise_area_awareness()
 
 	if _area_awareness:
-		_movement = ArrayUtils.get_only_one_or_null(get_descendants.base_character_movements(self))
+		_movement = ArrayUtils.get_only_one_or_null(get_descendants.base_character_movements(self ))
 		if _movement:
-			_movement.initialise(self, _area_awareness)
+			_movement.initialise(self , _area_awareness)
 
 
 	_initialise_char_sfx_systems()
@@ -100,22 +100,22 @@ func _initialise_common_char() -> void:
 
 
 func _initialise_area_awareness() -> void:
-	_area_awareness = ArrayUtils.get_only_one_or_null(get_descendants.base_area_awareness(self))
+	_area_awareness = ArrayUtils.get_only_one_or_null(get_descendants.base_area_awareness(self ))
 	if _area_awareness:
-		_area_awareness.initialise(self)
+		_area_awareness.initialise(self )
 
 
 func _initialise_char_sfx_systems() -> void:
 	var asp_config_container := _for_init_asp_config_container()
 
-	_sfx_system = ArrayUtils.get_only_one_or_null(get_descendants.character_sfx_systems(self))
+	_sfx_system = ArrayUtils.get_only_one_or_null(get_descendants.character_sfx_systems(self ))
 
 	if _sfx_system:
 		_sfx_system.initialise(
 			_sig_container,
 			asp_config_container,
-			self,
-			{_sfx_system.character_additional_data_key: self}
+			self ,
+			{_sfx_system.character_additional_data_key: self }
 		)
 	
 		var sad_container := _for_init_sad_container()
@@ -157,6 +157,7 @@ func _initialise_weapons_sfx():
 
 
 @abstract func reset_position(y_offset: float = 0.0) -> void
+
 
 
 # region __LOGS

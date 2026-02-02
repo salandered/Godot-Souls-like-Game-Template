@@ -109,12 +109,12 @@ func _update_health_bar() -> void:
 	if curr_health == _prev_health:
 		return
 
-	health_bar.animate_main_bar_value_change(self, curr_health)
+	health_bar.animate_main_bar_value_change(self , curr_health)
 	
 	# Ghost bar logic
 	var is_damage := curr_health < _prev_health
 	if is_damage:
-		health_bar.animate_ghost_bar_value_change(self, _prev_health, curr_health)
+		health_bar.animate_ghost_bar_value_change(self , _prev_health, curr_health)
 	else:
 		health_bar.set_ghost_bar_value(curr_health)
 		
@@ -144,11 +144,11 @@ func _update_stamina_bar(delta: float) -> void:
 		__log_("_update_stamina_bar", "big hit. change_amount/STAMINA_BIG_CHANGE_THRESHOLD",
 			str(change_amount), STAMINA_BIG_CHANGE_THRESHOLD)
 
-		stamina_bar.animate_main_bar_value_change(self, curr_stamina)
+		stamina_bar.animate_main_bar_value_change(self , curr_stamina)
 		
 		# only animate ghost on drop, snap on regen
 		if curr_stamina < _prev_stamina:
-			stamina_bar.animate_ghost_bar_value_change(self, _prev_stamina, curr_stamina)
+			stamina_bar.animate_ghost_bar_value_change(self , _prev_stamina, curr_stamina)
 		else:
 			stamina_bar.set_ghost_bar_value(curr_stamina)
 	# small change
@@ -183,7 +183,7 @@ func _handle_stamina_color() -> void:
 
 
 func _on_player_increase_max_health(payload: Dictionary) -> void:
-	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
+	var _r := SigUtils.safe_get_int_float_payload_value(payload, SPS.amount_field)
 	if _r.err:
 		return
 	__log_("_on_player_increase_max_health", "triggered with value", _r.value)
@@ -192,7 +192,7 @@ func _on_player_increase_max_health(payload: Dictionary) -> void:
 
 
 func _on_player_increase_max_stamina(payload: Dictionary) -> void:
-	var _r := SigUtils.safe_get_int_float_payload_value(payload, GlobalSignal.payload_amount_field)
+	var _r := SigUtils.safe_get_int_float_payload_value(payload, SPS.amount_field)
 	if _r.err:
 		return
 	__log_("_on_player_increase_max_stamina", "triggered with value", _r.value)

@@ -1,3 +1,3 @@
 @tool
-@icon("res://-assets-/x_icons/white/icon_sword.png")
+@icon("uid://dhhcof4kym2tu") ## icon sword
 extends Node

@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/white/icon_sword.png")
+@icon("uid://dhhcof4kym2tu") ## icon sword
 
 @abstract
 class_name BaseCombat
@@ -24,8 +24,11 @@ var _registered_weapons: Dictionary[String, BaseWeapon] = {} # weaponID <String>
 var _active_weapon_ids: Array[String]
 
 
+var _hit_boxes: Array[CharacterHitbox]
+
 func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[String]):
-	## currently _registered_weapons are all under %bones
+	_register_hit_boxes(character)
+
 	_register_weapons()
 
 	for weapon: BaseWeapon in _registered_weapons.values():
@@ -47,7 +50,21 @@ func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Ar
 		__log_("initialised combat", __pp_weapons_info())
 
 
+		SigUtils.safe_connect_pairs([
+			[GlobalUIInfo.SIG_dvc_matrix_cdv_toggled, _on_dvc_SIG_matrix_cdv_toggled]
+		])
+
+
+func _register_hit_boxes(character: BaseStaticCharacter):
+	_hit_boxes = get_descendants.char_hit_boxes(character)
+	error_.empty_list(_hit_boxes, "usually character has at least one hit box", WL.WARN)
+	for item: CharacterHitbox in _hit_boxes:
+		item.initialise(self )
+	__log_("initted", len(_hit_boxes))
+
+
 ## scans all the weapons under get_parent_node_of_weapons()
+##     do we need get_parent_node_of_weapons?
 func _register_weapons():
 	_registered_weapons = {}
 
@@ -171,17 +188,19 @@ func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_gl
 	var weapon := _get_active_weapon_by_id(weapon_id)
 	if not weapon:
 		return
-	var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id, anim_global_speed_scale, char_state_name)
+
+	var _attack_dir := AnimAttackDirection.get_direction_from_anim(anim_id)
+	var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id, anim_global_speed_scale, char_state_name, _attack_dir)
 	weapon.set_hit_data(hit_data)
 	if is_player():
 		SigUtils.safe_emit_raw(
 			GlobalSignal.SIG_player_weapon_hit_data_set,
-			{GlobalSignal.payload_hit_data_field: hit_data}
+			{SPS.hit_data_field: hit_data}
 		)
 	else:
 		SigUtils.safe_emit_raw(
 			GlobalSignal.SIG_enemy_weapon_hit_data_set,
-			{GlobalSignal.payload_hit_data_field: hit_data}
+			{SPS.hit_data_field: hit_data}
 		)
 	# __log_("set hit data to weapon", pp.in_q(weapon_id), hit_data)
 
@@ -215,8 +234,23 @@ func reset_all_weapons() -> void:
 # endregion
 
 
-## __LOGS
+## DEV
 
+func _on_dvc_SIG_matrix_cdv_toggled(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_SIG_matrix_cdv_toggled_payload(payload)
+	if not _r:
+		return
+
+	if _r.char_type != get_character().char_type:
+		return
+	
+	if _r.dv_type == DevVisualsConfig.DevVisualsType.WEAPON_TRAIL:
+		for item in get_all_active_weapons():
+			var dv := get_descendants.dev_visualise_trail_weapon_one_or_null(item)
+			dv.set_enabled(_r.toggle)
+			
+
+## __LOGS
 func __pp_weapons_info() -> String:
 	return pp.s("curr active/registered:", get_active_weapon_ids(), _registered_weapons.keys())
 

@@ -1,39 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://dsawmyldebwkf"]
+[gd_scene load_steps=9 format=3 uid="uid://dsawmyldebwkf"]
 
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_8s11q"]
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://logic/ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://logic/ui/ui_utils/legacy_capture_focus.gd" id="3_j5dnp"]
-[ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/main_menu_group/options_menu/m_options_menu.tscn" id="3_l2gh6"]
+[ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/options_menu/m_options_menu.tscn" id="3_l2gh6"]
 [ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/themes/panel/panel_back.tres" id="4_kheb5"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="4_w5m25"]
-[ext_resource type="Texture2D" uid="uid://l3mrt1t6jqos" path="res://-assets-/ui_assets/images/image_2026-01-04_00-25-05.png" id="7_dvwdi"]
 [ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://-assets-/ui_assets/themes/buttons/PauseMenuButton.tscn" id="7_fb021"]
-[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_u7r1d"]
-[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="8_fb021"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tu0ee"]
-texture = ExtResource("7_dvwdi")
-region_rect = Rect2(4.2011566, 83.27785, 499.25812, 128.8408)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpag"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcsih"]
-bg_color = Color(0.6, 0.6, 0.6, 0.28235295)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiit0"]
-bg_color = Color(0.48841512, 0.66292787, 0.63705385, 0.23137255)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvwdi"]
-bg_color = Color(0.48980695, 0.54752064, 0.5110488, 0.23137255)
-
-[sub_resource type="DPITexture" id="DPITexture_hiit0"]
-_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\"><path fill=\"none\" stroke=\"#b2b2b2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".85\" stroke-width=\"2\" d=\"m2 4 4 4 4-4\"/></svg>
-"
-base_scale = 2.0
+[ext_resource type="PackedScene" uid="uid://bed3gcu0mg3wp" path="res://logic/ui/ui_overlay_controls_menu/UIOverlayControls.tscn" id="8_hiit0"]
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3
+z_index = 10
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +21,7 @@ grow_vertical = 2
 theme = ExtResource("1_8s11q")
 script = ExtResource("1_qfpun")
 options_packed_scene = ExtResource("3_l2gh6")
+ui_overlay_controls_packed_scene = ExtResource("8_hiit0")
 main_menu_scene = "uid://c66xg4go6ct4v"
 pauses_game = true
 
@@ -89,16 +68,17 @@ dialog_text = "  Quit?"
 cancel_button_text = "  Cancel  "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -176.0
-offset_top = -219.0
-offset_right = 176.0
-offset_bottom = 219.0
+offset_left = -197.0
+offset_top = -244.5
+offset_right = 197.0
+offset_bottom = 244.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -112,9 +92,9 @@ theme_override_styles/panel = ExtResource("4_kheb5")
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MenuPanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 20
 
 [node name="BoxContainer" type="BoxContainer" parent="HBoxContainer/MenuPanelContainer/MarginContainer"]
 layout_mode = 2
@@ -197,153 +177,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
 
-[node name="UIOverlayControls" type="PanelContainer" parent="HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("8_fb021")
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/UIOverlayControls"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/UIOverlayControls/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TutorialToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_type_variation = &"CheckButtonAlt"
-theme_override_font_sizes/font_size = 30
-text = " Tutorial"
-
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/TutorialToggler"]
-modulate = Color(0.7240258, 0.7240258, 0.7240258, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -69.0
-offset_top = -12.5
-offset_right = 69.0
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/italics_font_size = 24
-bbcode_enabled = true
-text = "[i](also 0 hotkey)"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="panel" type="PanelContainer" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxTexture_tu0ee")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel"]
-layout_mode = 2
-
-[node name="DynamicStateInfoLabel" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel/HBoxContainer"]
-modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 28
-theme_override_font_sizes/bold_font_size = 24
-theme_override_font_sizes/italics_font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
-bbcode_enabled = true
-text = "  Dynamic State Info  "
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-vertical_alignment = 1
-
-[node name="DynamicStateInfoOption" type="OptionButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_xcsih")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_hiit0")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dvwdi")
-theme_override_icons/arrow = SubResource("DPITexture_hiit0")
-alignment = 2
-selected = 0
-item_count = 4
-popup/item_0/text = "Off "
-popup/item_0/id = 0
-popup/item_1/text = "Player "
-popup/item_1/id = 1
-popup/item_2/text = "HSM Enemy"
-popup/item_2/id = 2
-popup/item_3/text = "Simple Enemy"
-popup/item_3/id = 3
-
-[node name="CameraNodesToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_type_variation = &"CheckButtonAlt"
-theme_override_font_sizes/font_size = 30
-text = " Camera Nodes 3D Visualizer"
-
-[node name="ProfilerToggler" type="CheckButton" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_type_variation = &"CheckButtonAlt"
-theme_override_font_sizes/font_size = 30
-text = " Profiler"
-
-[node name="Label" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/ProfilerToggler"]
-modulate = Color(0.7240258, 0.7240258, 0.7240258, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -69.0
-offset_top = -12.5
-offset_right = 69.0
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/italics_font_size = 24
-bbcode_enabled = true
-text = "[i](also F3 hotkey)"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="HSeparator" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer" instance=ExtResource("7_u7r1d")]
-layout_mode = 2
-
-[node name="ProfilerToggler2" type="RichTextLabel" parent="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-modulate = Color(0.66292787, 0.66292787, 0.66292787, 1)
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/italics_font_size = 24
-bbcode_enabled = true
-text = "[i]Flying dev cam - leave the menu and press F9"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-vertical_alignment = 1
-
 [connection signal="confirmed" from="ConfirmRestart" to="." method="_on_confirm_restart_confirmed"]
 [connection signal="confirmed" from="ConfirmMainMenu" to="." method="_on_confirm_main_menu_confirmed"]
 [connection signal="confirmed" from="ConfirmExit" to="." method="_on_confirm_exit_confirmed"]
@@ -353,7 +186,3 @@ vertical_alignment = 1
 [connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="toggled" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/TutorialToggler" to="." method="_on_tutorial_toggler_toggled"]
-[connection signal="item_selected" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/panel/HBoxContainer/DynamicStateInfoOption" to="." method="_on_option_button_item_selected"]
-[connection signal="toggled" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/CameraNodesToggler" to="." method="_on_camera_nodes_toggler_toggled"]
-[connection signal="toggled" from="HBoxContainer/UIOverlayControls/MarginContainer/VBoxContainer/ProfilerToggler" to="." method="_on_profiler_toggler_toggled"]

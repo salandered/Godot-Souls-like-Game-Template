@@ -1,0 +1,220 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv2pn65sfspf4"]
+
+[ext_resource type="Script" uid="uid://b21g8b5ep56o4" path="res://logic/ui/tutorial/first_tutorial.gd" id="1_7jgb5"]
+[ext_resource type="Script" uid="uid://b14yx8dxfwjqv" path="res://logic/ui/tutorial/first_tutorial_content.gd" id="1_fek1h"]
+[ext_resource type="Script" uid="uid://dnhmrbrcgrrmj" path="res://logic/ui/tutorial/tutorial_ui.gd" id="4_7jgb5"]
+
+[node name="FirstTutorial" type="MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -468.0
+offset_bottom = 1031.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_top = 15
+script = ExtResource("1_7jgb5")
+
+[node name="__vbox" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="LegendPanel" type="PanelContainer" parent="__vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="__margin" type="MarginContainer" parent="__vbox/LegendPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Legend" type="RichTextLabel" parent="__vbox/LegendPanel/__margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 26
+bbcode_enabled = true
+text = "[b]Available tutorials[/b]
+[hr color=web_gray]
+[color=#ffffff]    [img=20x20]uid://ciggpdm7q6lei[/img] Controls[/color]
+[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_parchment.png[/img] Mechanics overview[/color]
+[color=#ffffff]    [img=20x20]uid://dhhcof4kym2tu[/img] Combo attacks[/color]
+[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] Target locking[/color]
+[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_heart.png[/img] Health/stamina[/color]
+[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Additional info[/color]
+[color=#ffffff]    [img=20x20]uid://faceud5if8lb[/img] UI Overlay controls[/color]
+[hr color=web_gray]
+[i]Use [b]Up/Down[/b] arrows to scroll the tutorials[/i]
+[i]Press [b]T[/b] to toggle this panel[/i]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TutorialPanel" type="PanelContainer" parent="__vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="__margin" type="MarginContainer" parent="__vbox/TutorialPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Controls" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[ul]
+[b]WASD[/b] - [img=20x20]uid://bmwjt7mmr0hy8[/img] move
+[b]Space[/b] - [img=20x20]uid://covd6kks862ko[/img] dodge/jump
+[b]Shift[/b] - sprint
+[b]Q[/b] - [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target lock
+[b]LMB[/b] - [img=20x20]uid://dhhcof4kym2tu[/img] light attack
+[b]RMB[/b] - [img=20x20]uid://dhhcof4kym2tu[/img] heavy attack
+[b]E[/b] - [img=20x20]uid://dp87v6bn53hy5[/img] interact
+[b]F[/b] - switch weapon
+[b]Esc[/b] - pause
+[/ul]
+[hr color=web_gray]
+[ul]
+[i]H to unstuck (just in case)[/i]
+[i]F3 to see profiler[/i]
+[i]F9 to toggle flying dev camera[/i]
+[/ul]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MechanicsOverview" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/bold_font_size = 23
+theme_override_font_sizes/italics_font_size = 23
+bbcode_enabled = true
+text = "[b]Attacks and combos[/b] - press light and heavy [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i]s in different order to learn combos. 
+Use the [i][i]switch weapon button[/i][/i] to try different weapons. Note that you can't switch in the middle of the attack (sound clue will help you notice that) 
+
+[b]Dodging[/b] - dodge to evade the enemy attack.
+
+[b]Target locking[/b] and [b]Health/Stamina[/b] - see the dedicated tutorial.
+
+[b]Destructible columns[/b] - let the enemy hit the column, or use more powerful weapon. If you are lucky enough, you will break a column while being thrown away at it by the enemy...
+
+[b]Fighting several enemies at once[/b] - just find the way to reach additional enemies. It's a lot of fun and they could accidently hit each other as well.
+
+[b]Chests and items[/b] - open chests to find helpful items and improve your abilities (e.g. longer dodge).
+
+[hr color=web_gray width=90% align=l]
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: on any level you can find mechanical combat dummy. It will help you to learn how to fight, move, and dodge different attack types."
+fit_content = true
+scroll_active = false
+
+[node name="AttackMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Heavy attack[/b] - just press heavy [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i].
+
+[b]Light combo[/b] - press light [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i] two times. 
+
+[b]Full combo[/b] - make light combo and then press heavy [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i]. Note that heavy attack is faster (and deadlier) if it comes at the end of the Full combo.
+
+[b]Running attack[/b] - press [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i] while sprinting.
+
+[b]Dodge attack[/b] - press [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i] right after dodging. Forward dodge results in stab almost immediately. 
+
+[b]And more[/b] - combine light and heavy attack sequence to find new combos.
+
+[hr color=web_gray width=90% align=l]
+[img=20x20]uid://califiygvfo0n[/img] Help: If combo attack is not triggered, try to press [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i] closer to the end of the current attack (less spam the clicks).
+
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: you can change direction in the middle of some attacks if not [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target locked."
+fit_content = true
+scroll_active = false
+
+[node name="TargetLockMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Target locking[/b] - find the suitable target and press [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] [i]target lock button[/i]. It will allow you to strafe around the target and make you hits more focused. Note that you may sprint freely while in target-lock mode.
+
+[b]Static targets[/b] - you can practice strafing while being in target-lock mode using static targets (golden posts, for example). 
+
+[hr color=web_gray width=90% align=l]
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: use vertical mouse movement to adjust the view. 
+
+[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Advanced tip: you can not only sprint, but also run freely while being in target-lock mode. 
+In order to do so double-tap the [i][img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] [i]target lock button[/i][/i] while already being in [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target lock mode. Double tapping again will switch you back to strafing."
+fit_content = true
+scroll_active = false
+
+[node name="HealthStaminaMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Stamina management[/b] - some moves drain stamina, while others like idle or running will help replenish it.
+
+[b]Stamina fatigue[/b] - when stamina hits zero, you won't be able to make stamina draining moves for a little while. Stamina bar will be painted in yellow and you also will hear a sound clue if a move is not allowed.
+
+[b]Chest items[/b] - you will find pickable items which would help you to improve health and also increase the maximum health/stamina."
+fit_content = true
+scroll_active = false
+
+[node name="AdditionalMovementTips" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Advanced dodge[/b] - press both the [img=20x20]uid://bmwjt7mmr0hy8[/img] [i]move button[/i] and [i][img=20x20][img=20x20]uid://covd6kks862ko[/img][/img] [i]dodge button[/i][/i] simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
+
+[b]Sprint jump[/b] - just jump while sprinting!
+
+[b]U-turn[/b] - press the opposite [img=20x20]uid://bmwjt7mmr0hy8[/img] [i]move button[/i] while sprinting. Helps for quick retreats.
+
+[b]Sprint start[/b] - press shift while idle and only then start moving. It looks cool but is not really helpful."
+fit_content = true
+scroll_active = false
+
+[node name="UIOverlayControls" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Advanced dodge[/b] - press both the [img=20x20]res://-assets-/x_icons/white/steps.png[/img] [i]move button[/i] and [i][i]dodge button[/i][/i] simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
+
+[b]Sprint jump[/b] - just jump while sprinting!
+
+[b]U-turn[/b] - press the opposite [img=20x20]res://-assets-/x_icons/white/steps.png[/img] [i]move button[/i] while sprinting. Helps for quick retreats.
+
+[b]Sprint start[/b] - press shift while idle and only then start moving. It looks cool but is not really helpful."
+fit_content = true
+scroll_active = false
+
+[node name="TutorialUI" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_7jgb5")
+
+[node name="Content" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_fek1h")

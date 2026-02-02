@@ -57,9 +57,11 @@ func __soft_dependencies() -> Array:
 
 
 func initialise_static_char_implementation() -> void:
+	char_type = DevVisualsConfig.CharacterType.SIMPLE_ENEMY
+
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
-	camera_target = CamTargetUtils.initialise_cam_target(self)
+	camera_target = CamTargetUtils.initialise_cam_target(self )
 	if not error_.null_object(coll_collider, "no coll_collider"):
 		var original_shape := coll_collider.shape
 		if not error_.null_object(original_shape, "Coll collder CollisionShape3D has no shape"):
@@ -74,7 +76,7 @@ func initialise_static_char_implementation() -> void:
 		return
 	
 
-	container.accept_states(MechFighterNodeStateContainer.new(), _anim_container, self)
+	container.accept_states(MechFighterNodeStateContainer.new(), _anim_container, self )
 	var _idle_state := container.get_state_by_name(MFS.idle)
 	
 	_curr_state = _idle_state
@@ -166,7 +168,7 @@ func _update_curr_state(next_state_id: String):
 	_curr_state = _next_state
 	SigUtils.safe_emit_raw(
 		GlobalSignal.SIG_enemy_state_changed,
-		{GlobalSignal.payload_state_name_field: _curr_state.state_name}
+		{SPS.state_name_field: _curr_state.state_name}
 	)
 
 
@@ -196,6 +198,10 @@ func react_on_hit(hit_data: HitData) -> void:
 	ReactionOnHit.calculate_reaction_for_enemy(hit_data, _safe_curr_state_name())
 	# ReactionOnHit.calculate_reaction_for_enemy_state(hit_data)
 	_queue_next_state()
+
+
+func is_invincible() -> bool:
+	return true
 
 
 var attack_chain: Dictionary[String, String] = {

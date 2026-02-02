@@ -51,32 +51,6 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise(combat_: BaseCombat) -> void:
-	self._combat = combat_
-	collision_layer = Collision.Layers.HITBOX_AREA
-	collision_mask = Collision.Masks.HITBOX_AREA_MASK
-	
-	_my_coll_shapes = get_descendants.collision_shapes(self)
-
-	if len(_my_coll_shapes) > 1:
-		__log_warn_soft(pp.s("len of _my_coll_shapes > 1", "Not supported! will be working only with the first one"))
-
-	if __perform_validation():
-		# Duplicate to avoid shared resource issues
-		var original_shape = _my_coll_shapes[0].shape
-		_my_coll_shapes[0].shape = original_shape.duplicate()
-
-		var shape := _my_coll_shapes[0].shape as CapsuleShape3D # hard validated
-		__log_("Duplicated capsule shape used in CollisionShape " + shape.resource_name)
-
-		_original_capsule_shape_radius = shape.radius
-		_original_capsule_shape_height = shape.height
-		__log_("--- CharacterHitbox ready ---")
-	else:
-		__log_warn_soft("CharacterHitbox init problems, not going to work")
-		set_physics_process(false)
-
-
 func __hard_validation() -> bool:
 	var _r := true
 	var _msg := ""
@@ -85,7 +59,7 @@ func __hard_validation() -> bool:
 		_msg = pp.s("len of _my_coll_shapes is Zero", "Not supported!")
 		_r = false
 
-	var original_shape = _my_coll_shapes[0].shape
+	var original_shape := _my_coll_shapes[0].shape
 	if original_shape == null:
 		_msg = pp.s("CollisionShape3D has no shape")
 		_r = false
@@ -98,6 +72,32 @@ func __hard_validation() -> bool:
 		__log_error(_msg)
 
 	return _r
+
+
+func initialise(combat_: BaseCombat) -> void:
+	self._combat = combat_
+	collision_layer = Collision.Layers.HITBOX_AREA
+	collision_mask = Collision.Masks.HITBOX_AREA_MASK
+	
+	_my_coll_shapes = get_descendants.collision_shapes(self )
+
+	if len(_my_coll_shapes) > 1:
+		__log_warn_soft(pp.s("len of _my_coll_shapes > 1", "Not supported! will be working only with the first one"))
+
+	if __perform_validation():
+		# Duplicate to avoid shared resource issues
+		var original_shape := _my_coll_shapes[0].shape
+		_my_coll_shapes[0].shape = original_shape.duplicate()
+
+		var shape := _my_coll_shapes[0].shape as CapsuleShape3D # hard validated
+		__log_("Duplicated capsule shape used in CollisionShape " + shape.resource_name)
+
+		_original_capsule_shape_radius = shape.radius
+		_original_capsule_shape_height = shape.height
+		__log_("--- CharacterHitbox ready ---")
+	else:
+		__log_warn_soft("CharacterHitbox init problems, not going to work")
+		set_physics_process(false)
 
 
 ## not nullable
@@ -157,7 +157,7 @@ func on_area_contact(incoming_area: Node3D):
 
 	# prints("contact", incoming_area, incoming_area.name, incoming_area.get_class())
 	var _weapon_area := incoming_area as WeaponHurtBox
-	var weapon: BaseWeapon = _weapon_area.my_weapon
+	var weapon: BaseWeapon = _weapon_area._my_weapon
 	if not weapon:
 		__log_error("weapon is null", "on_area_contact", "return")
 		return
@@ -173,13 +173,21 @@ func on_area_contact(incoming_area: Node3D):
 		# __log_extra("Not attacking")
 		return
 
+
+	# var hit_pos = DebugDrawUtils.get_area_contact_point(self , incoming_area)
+	
+	# if hit_pos != Vector3.INF:
+	# 	# Visualise
+	# 	DebugDraw3D.draw_sphere(hit_pos, 0.1, Color.GOLD, 1.0)
+	# 	DebugDraw3D.draw_line(global_position, hit_pos, Color.RED, 0.5)
+
 	__log_extra("contact after weapon.is_attacking():", incoming_area, weapon)
 
 	## NOTE: adding to contact list only after other checks
-	if weapon.is_in_contact_hitbox_list(self):
+	if weapon.is_in_contact_hitbox_list(self ):
 		# __log_("is_in_contact_hitbox_list true", "len of contact hitb list", len(weapon.get_contact_hitbox_list()))
 		return
-	weapon.add_hitbox_to_contact_list(self)
+	weapon.add_hitbox_to_contact_list(self )
 
 	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_id()), "by", pp.in_q(weapon.get_holder().pp_name())))
 

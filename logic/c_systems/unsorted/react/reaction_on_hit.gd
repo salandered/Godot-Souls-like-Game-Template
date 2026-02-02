@@ -1,5 +1,5 @@
-extends RefCounted
 class_name ReactionOnHit
+extends RefCounted
 
 
 class ReactionConfig:
@@ -14,49 +14,6 @@ class ReactionConfig:
 	
 	func _to_string() -> String:
 		return "anim_id: %s, wght: %.2f, %s" % [anim_id, overlay_weight, pp.bone_mask_(bone_mask)]
-
-
-## todo: some smart system which detects, where we collided ...
-## todo: its better to rely on state, not anim as a key
-## 
-## from the character point of view. Examples:
-## slash from right to left - Dir is LEFT
-## slash up - Dir is UP
-static var enemy_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
-	PHEA.attack.attack_360_high: AttackDirection.Dir.RIGHT,
-	PHEA.attack.attack_360_low: AttackDirection.Dir.RIGHT,
-	PHEA.attack.attack_down: AttackDirection.Dir.DOWN,
-	PHEA.attack.attack_up: AttackDirection.Dir.UP,
-	PHEA.attack.club_part_1: AttackDirection.Dir.LEFT,
-	PHEA.attack.club_part_2: AttackDirection.Dir.RIGHT,
-	PHEA.attack.club_part_3_4: AttackDirection.Dir.LEFT,
-	PHEA.attack.power_gap_closer: AttackDirection.Dir.DOWN,
-	PHEA.attack.sword_slide: AttackDirection.Dir.LEFT,
-	PHEA.attack.scare_off: AttackDirection.Dir.STAB,
-	PHEA.attack.power_up: AttackDirection.Dir.UP,
-	PHEA.attack.stab_low: AttackDirection.Dir.STAB,
-	PHEA.phase_switch: AttackDirection.Dir.STAB,
-	SITSKA.sit_attack: AttackDirection.Dir.STAB,
-	MFA.attack_lr: AttackDirection.Dir.RIGHT,
-	MFA.attack_rl: AttackDirection.Dir.LEFT,
-	MFA.attack_up: AttackDirection.Dir.UP,
-	MFA.attack_down: AttackDirection.Dir.DOWN,
-	MFA.attack_stab: AttackDirection.Dir.STAB,
-	MFA.attack_lr_power: AttackDirection.Dir.RIGHT,
-	MFA.attack_rl_power: AttackDirection.Dir.LEFT,
-	MFA.attack_stab_power: AttackDirection.Dir.STAB,
-	}
-
-static var pl_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
-	A.attack.axe_slice_1: AttackDirection.Dir.LEFT,
-	A.attack.axe_slice_2: AttackDirection.Dir.RIGHT,
-	A.attack.axe_slice_3: AttackDirection.Dir.LEFT,
-	A.attack.stab_attack_1: AttackDirection.Dir.STAB,
-	A.attack.stab_attack_2: AttackDirection.Dir.STAB,
-	A.attack.sword_slash_1: AttackDirection.Dir.LEFT,
-	A.attack.sword_slash_2: AttackDirection.Dir.UP, # technically should be RIGHT
-	A.attack.sword_slash_3: AttackDirection.Dir.DOWN
-	}
 
 
 static var attack_dir_to_enemy_overlay_anim: Dictionary[AttackDirection.Dir, String] = {
@@ -109,10 +66,6 @@ static var player_muted_action: Array[String] = [PS.Act.death, PS.Act.double, Le
 static var enemy_muted_states: Array[String] = [PHES.Leaf.death, PHES.Leaf.phase_switch] # PHES.Leaf.sleep] dev
 
 
-static func get_attack_dir_by_enemy_attack(anim_id: String) -> AttackDirection.Dir:
-	return DictUtils.safe_get_dict_key(enemy_attack_to_direction, anim_id, AttackDirection.Dir.RIGHT)
-
-
 ## nullable
 static func calculate_reaction_for_pl_action(hit: HitData, curr_action: String) -> ReactionConfig:
 	if curr_action in player_muted_action:
@@ -158,28 +111,33 @@ static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: String) 
 ## PICK REACT ANIM
 # region
 
+
 static func _pick_react_anim_for_enemy(hit_from_player: HitData) -> String:
-	var _attack_dir = DictUtils.safe_get_dict_key(pl_attack_to_direction, hit_from_player.anim_id, AttackDirection.Dir.RIGHT, WL.SILENT)
-	var _anim_id = DictUtils.safe_get_dict_key(attack_dir_to_enemy_overlay_anim, _attack_dir, PHEA.react.react_from_R)
-	__log_("pl attack", pp.in_q(hit_from_player.anim_id), "-> Dir", AttackDirection.name_(_attack_dir), "-> Ovrl anim", _anim_id)
+	var _anim_id = DictUtils.safe_get_dict_key(
+		attack_dir_to_enemy_overlay_anim,
+		hit_from_player.attack_dir,
+		PHEA.react.react_from_R)
+	__log_("pl attack Dir", AttackDirection.name_(hit_from_player.attack_dir), "-> Ovrl anim", _anim_id)
 	SigUtils.safe_emit_raw(
-	GlobalSignal.SIG_enemy_react_on_hit, {
-		GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
-		GlobalSignal.payload_interruption_field: false,
-		GlobalSignal.payload_reaction: _anim_id,
+	GlobalSignal.SIG_enemy_reacted_on_hit, {
+		SPS.attack_dir_field: AttackDirection.name_(hit_from_player.attack_dir),
+		SPS.interruption_field: false,
+		SPS.reaction_anim_or_state_field: _anim_id,
 		})
 	return _anim_id
 
 
 static func _pick_react_anim_for_player(hit_from_enemy: HitData) -> String:
-	var _attack_dir = DictUtils.safe_get_dict_key(enemy_attack_to_direction, hit_from_enemy.anim_id, AttackDirection.Dir.RIGHT)
-	var _anim_id: String = DictUtils.safe_get_dict_key(attack_dir_to_pl_overlay_anim, _attack_dir, A.react.react_from_R)
-	__log_("e attack", pp.in_q(hit_from_enemy.anim_id), "-> Dir", AttackDirection.name_(_attack_dir), "-> Ovrl anim", _anim_id)
+	var _anim_id: String = DictUtils.safe_get_dict_key(
+		attack_dir_to_pl_overlay_anim,
+		hit_from_enemy.attack_dir,
+		A.react.react_from_R)
+	__log_("e attack Dir", AttackDirection.name_(hit_from_enemy.attack_dir), "-> Ovrl anim", _anim_id)
 	SigUtils.safe_emit_raw(
-		GlobalSignal.SIG_player_react_on_hit, {
-			GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
-			GlobalSignal.payload_interruption_field: false,
-			GlobalSignal.payload_reaction: _anim_id,
+		GlobalSignal.SIG_player_reacted_on_hit, {
+			SPS.attack_dir_field: AttackDirection.name_(hit_from_enemy.attack_dir),
+			SPS.interruption_field: false,
+			SPS.reaction_anim_or_state_field: _anim_id,
 			})
 	return _anim_id
 
@@ -243,14 +201,12 @@ static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 	_pl_state = DictUtils.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
 
-
 	if _pl_state != "":
-		var _attack_dir = DictUtils.safe_get_dict_key(enemy_attack_to_direction, hit_from_enemy.anim_id, AttackDirection.Dir.RIGHT)
 		SigUtils.safe_emit_raw(
-			GlobalSignal.SIG_player_react_on_hit, {
-				GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
-				GlobalSignal.payload_interruption_field: true,
-				GlobalSignal.payload_reaction: _pl_state,
+			GlobalSignal.SIG_player_reacted_on_hit, {
+				SPS.attack_dir_field: AttackDirection.name_(hit_from_enemy.attack_dir),
+				SPS.interruption_field: true,
+				SPS.reaction_anim_or_state_field: _pl_state,
 				})
 
 	return _pl_state
@@ -271,12 +227,11 @@ static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
 		__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
 			pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))
 	if _e_state != "":
-		var _attack_dir = DictUtils.safe_get_dict_key(pl_attack_to_direction, hit_from_pl.anim_id, AttackDirection.Dir.RIGHT, WL.SILENT)
 		SigUtils.safe_emit_raw(
-			GlobalSignal.SIG_enemy_react_on_hit, {
-				GlobalSignal.payload_attack_dir_field: AttackDirection.name_(_attack_dir),
-				GlobalSignal.payload_interruption_field: true,
-				GlobalSignal.payload_reaction: _e_state,
+			GlobalSignal.SIG_enemy_reacted_on_hit, {
+				SPS.attack_dir_field: AttackDirection.name_(hit_from_pl.attack_dir),
+				SPS.interruption_field: true,
+				SPS.reaction_anim_or_state_field: _e_state,
 				})
 	return _e_state
 

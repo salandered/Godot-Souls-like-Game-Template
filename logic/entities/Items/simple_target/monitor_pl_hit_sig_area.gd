@@ -54,7 +54,7 @@ func on_area_entered(incoming_area: Area3D) -> void:
 		return
 
 	var _weapon_area := incoming_area as WeaponHurtBox
-	var weapon: BaseWeapon = _weapon_area.my_weapon
+	var weapon: BaseWeapon = _weapon_area._my_weapon
 	if not weapon:
 		__log_error("weapon is null", "on_area_contact", "return")
 		return
@@ -76,7 +76,7 @@ func _emit_signal(hit_data: HitData):
 	if cooldown_sig_emit.is_cooldown_passed(false, pp_name()):
 		cooldown_sig_emit.mark_time()
 		last_processed_hit_data_id = hit_data.get_instance_id()
-		SigUtils.safe_emit_raw(SIG_hit, {GlobalSignal.payload_hit_data_field: hit_data})
+		SigUtils.safe_emit_raw(SIG_hit, {SPS.hit_data_field: hit_data})
 
 
 ##

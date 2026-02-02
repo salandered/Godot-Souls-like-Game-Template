@@ -23,12 +23,3 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 			
 
 	return PLVerdict.new("")
-
-
-func on_enter_state(input_: InputPackage) -> void:
-	get_player().hit_box_torso.shrink_hitbox(0.8, 0.4)
-	emitted_wave = false
-
-
-func on_exit_state() -> void:
-	get_player().hit_box_torso.restore_hitbox()

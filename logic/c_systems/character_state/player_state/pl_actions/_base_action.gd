@@ -65,9 +65,9 @@ func _update(input_: InputPackage, delta: float):
 
 func _on_enter_action(input_: InputPackage) -> void:
 	mark_enter_state() # NOTE: used word 'state', its ok
-	PREV_ACTION = player_sm.update_current_action(self) # NOTE: very first line of curr action
+	PREV_ACTION = player_sm.update_current_action(self ) # NOTE: very first line of curr action
 	if self is LegsAction:
-		player_sm.legs_sm.set_current_action(self) # very second line
+		player_sm.legs_sm.set_current_action(self ) # very second line
 	elif self is PlayerAction:
 		player_sm.current_state.curr_state_action = self
 	
@@ -128,19 +128,8 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 
 
 func _react_on_hit(hit: HitData):
-	var attacking: Array[String] = [
-		PS.Act.stab_attack_1,
-		PS.Act.stab_attack_2,
-		PS.Act.sword_slash_1,
-		PS.Act.sword_slash_2,
-		PS.Act.sword_slash_3,
-		PS.Act.axe_slice_1,
-		PS.Act.axe_slice_2,
-		PS.Act.axe_slice_3,
-
-		]
 	print_.fight(action_name, "react_on_hit called")
-	if is_vulnerable():
+	if not is_invincible():
 		feelings.lose_health(hit.damage)
 	
 	var react_cfg := ReactionOnHit.calculate_reaction_for_pl_action(hit, action_name)
@@ -152,7 +141,7 @@ func _react_on_hit(hit: HitData):
 	
 	var actual_overlay_weight := react_cfg.overlay_weight
 	var actual_bone_mask := react_cfg.bone_mask
-	actual_overlay_weight /= 2.0 if action_name in attacking else 1.0
+	actual_overlay_weight /= 2.0 if self is BaseAttackAction else 1.0
 
 	var overlay_config := OverlayConfig.new(
 		OverlayConfig.Weight.new(actual_overlay_weight, actual_overlay_weight / 2),
@@ -232,11 +221,16 @@ func switches_to_queue() -> bool:
 func allows_queue() -> bool:
 	return anim_params_container.is_allows_queue(anim.native_anim, effective_time_spent())
 
-func is_vulnerable() -> bool:
-	return anim_params_container.is_vulnerable(anim.native_anim, effective_time_spent())
+func is_invincible() -> bool:
+	## use container only in several states.
+	## good optimisation, but akward implementation
+	var _r: bool = false
+	if player_sm.current_state and player_sm.current_state.state_name in PlayerConfig.invincible_states:
+		_r = anim_params_container.is_invincible(anim.native_anim, effective_time_spent())
+		# prints("anim_params_container~~~~~", _r)
 
-func is_interruptable() -> bool:
-	return anim_params_container.is_interruptable(anim.native_anim, effective_time_spent())
+	# prints("~~~~~", _r)
+	return _r
 
 
 func is_weapon_hurts(weapon_id: String, __log: bool = false) -> bool:

@@ -31,8 +31,8 @@ static var anim_to_required_marker: Dictionary[String, Array] = {
 	A.strafe.strafe_R: [MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT],
 
 	## dodge
-	A.dodge.dodge_R: [MarkerName.FROM_RUN, MarkerName.TO_RUN, MarkerName.ALLOWS_SWITCH_TO_ATTACK],
 	A.dodge.dodge_L: [MarkerName.FROM_RUN, MarkerName.TO_RUN, MarkerName.ALLOWS_SWITCH_TO_ATTACK],
+	A.dodge.dodge_R: [MarkerName.FROM_RUN, MarkerName.TO_RUN, MarkerName.ALLOWS_SWITCH_TO_ATTACK],
 	A.dodge.dodge_F: [MarkerName.FROM_RUN, MarkerName.TO_RUN, MarkerName.ALLOWS_SWITCH_TO_ATTACK],
 	A.dodge.dodge_B: [MarkerName.FROM_RUN, MarkerName.TO_RUN, MarkerName.ALLOWS_SWITCH_TO_ATTACK],
 	A.dodge.dodge_R_head: [MarkerName.OVERLAY.START, MarkerName.OVERLAY.END],
@@ -69,5 +69,7 @@ static var anim_to_required_marker: Dictionary[String, Array] = {
 	A.fall_stand_up.thrown_l_rm: [MarkerName.FROM_RUN, MarkerName.JUMP.LAND_START, MarkerName.TO_RUN],
 	A.fall_stand_up.thrown_r_small_rm: [MarkerName.FROM_RUN, MarkerName.JUMP.LAND_START, MarkerName.TO_RUN],
 	A.fall_stand_up.thrown_l_small_rm: [MarkerName.FROM_RUN, MarkerName.JUMP.LAND_START, MarkerName.TO_RUN],
+	A.fall_stand_up.cool_thrown_r_rm: [MarkerName.FROM_RUN, MarkerName.JUMP.LAND_START, MarkerName.TO_RUN],
+	A.fall_stand_up.cool_thrown_l_rm: [MarkerName.FROM_RUN, MarkerName.JUMP.LAND_START, MarkerName.TO_RUN],
 
 }

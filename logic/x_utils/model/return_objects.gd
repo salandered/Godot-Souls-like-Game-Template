@@ -17,6 +17,14 @@ class BoolReturn extends _BaseReturn:
 		self.value = value_
 
 
+class IntReturn extends _BaseReturn:
+	var value: int
+
+	func _init(err_: bool, value_: int = Constants.BIG_MEANINGLESS_NUMBER_INT):
+		super._init(err_)
+		self.value = value_
+
+
 class FloatReturn extends _BaseReturn:
 	var value: float
 

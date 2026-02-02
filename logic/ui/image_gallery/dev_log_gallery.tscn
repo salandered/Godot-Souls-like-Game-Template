@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://ben53482wtfq8"]
+[gd_scene load_steps=4 format=3 uid="uid://ben53482wtfq8"]
 
 [ext_resource type="PackedScene" uid="uid://b46dekni8c4fb" path="res://logic/ui/image_gallery/BaseImageGallery.tscn" id="1_sxyxt"]
 [ext_resource type="Script" uid="uid://chj6xs53uu5uj" path="res://logic/ui/image_gallery/dev_log_gallery.gd" id="2_rfy2i"]
+[ext_resource type="Texture2D" uid="uid://dq8bsncuqqm1g" path="res://-assets-/ui_assets/gallery/collage_15.jpg" id="3_6pipr"]
 
 [node name="DevLogGallery" instance=ExtResource("1_sxyxt")]
 script = ExtResource("2_rfy2i")
+
+[node name="BookFlip" parent="asp" index="0"]
+max_polyphony = 2
+
+[node name="TextureRect" type="TextureRect" parent="." index="2"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_6pipr")

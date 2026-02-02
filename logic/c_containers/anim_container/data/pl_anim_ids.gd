@@ -47,14 +47,14 @@ class loco:
 	const run := _lib._run + "AA-B-Jog-Forward-v2" # "SWSl-O-run-F" # _run + "B-Jog-Forward-v2"
 	const sprint := _lib._run + "AA-B-Fast-Run-v2" # _SWS_loco + "SWSl-O-sptrint-F" # _run + "B-Fast-Run-v2"
 
-	const turn_180_R := _lib._ss_loco + "AA-RMR ss 180 turn R"
 	const turn_180_L := _lib._ss_loco + "AA-RMR ss 180 turn L"
+	const turn_180_R := _lib._ss_loco + "AA-RMR ss 180 turn R"
 
-	# const turn_90_to_run_R := _lib._ss_loco + "RMR Turn 90 To Run R"
 	# const turn_90_to_run_L := _lib._ss_loco + "RMR Turn 90 To Run L"
+	# const turn_90_to_run_R := _lib._ss_loco + "RMR Turn 90 To Run R"
 
-	const fast_turn_180_R := _lib._ss_loco + "AA-RMR ss 180 fast turn R"
 	const fast_turn_180_L := _lib._ss_loco + "AA-RMR ss 180 fast turn L"
+	const fast_turn_180_R := _lib._ss_loco + "AA-RMR ss 180 fast turn R"
 
 class strafe:
 	# const combat_walk_f := _lib._strafe + "walk f2" # _EP_p1 + "EP-p1-O-Walk-Combat-B" #
@@ -63,17 +63,17 @@ class strafe:
 	const combat_run_b := _lib.all_axe + "AA-L-combat-run-B" # "C-run-back"
 
 	## NOTE: use commented anims for slow strafing 
-	const strafe_L := _lib._strafe + "AA-B-strafe-run-L" # "A-strafe-L" # "SWSl-O-run-L-blended"
 	const strafe_R := _lib._strafe + "AA-B-strafe-run-R-strange" # "A-strafe-R" # "SWSl-O-run-R-blended"
+	const strafe_L := _lib._strafe + "AA-B-strafe-run-L" # "A-strafe-L" # "SWSl-O-run-L-blended"
 
 class dodge:
-	const dodge_R := _lib._dodge + "AA-Standing-Dodge-R"
 	const dodge_L := _lib._dodge + "AA-Standing-Dodge-L"
+	const dodge_R := _lib._dodge + "AA-Standing-Dodge-R"
 	const dodge_F := _lib._dodge + "AA-standing-dodge-F"
 	const dodge_B := _lib._dodge + "AA-Standing-Dodge-B"
 
-	const dodge_R_head := _lib._dodge + "AA-B-Dodging-head-R"
 	const dodge_L_head := _lib._dodge + "AA-B-Dodging-head-L"
+	const dodge_R_head := _lib._dodge + "AA-B-Dodging-head-R"
 
 class air:
 	# todo jump-roll A-Quick-Roll-To-Run
@@ -100,8 +100,8 @@ class attack:
 class react:
 	# const hit_reaction := _lib._ss_attack + "AA-C-body-impact" # _ss_attack + "C-leg-kick" # shield_throw # _ss_attack + "C-body-impact"
 	const head_B_large = _lib._ss_attack + "AA-B-head-impact"
-	const react_from_R = _lib.all_axe + "AA-react large from right"
 	const react_from_L = _lib.all_axe + "AA-react large from left"
+	const react_from_R = _lib.all_axe + "AA-react large from right"
 	const react_gut = _lib.all_axe + "AA-react large gut"
 	# const dodge_F_hit = _lib.testing + "AA-OS-hit-react-forward"
 	# const hit_pushback_rm = _lib.testing + "AA-OS-hit-react-back"
@@ -120,10 +120,12 @@ class fall_stand_up:
 	# const stand_up_vertical_adj := _lib._fall_stand_up + "stand up (vertical adj)"
 	# const stand_up_hstrange := _lib._fall_stand_up + "stand up Hstrange"
 	# const stand_up_simple := _lib._fall_stand_up + "stand up simple"
-	const thrown_r_rm := _lib._fall_stand_up + "AA-soccer throw R RM"
 	const thrown_l_rm := _lib._fall_stand_up + "AA-soccer throw L RM"
-	const thrown_r_small_rm := _lib._fall_stand_up + "AA-soccer fall R small"
+	const thrown_r_rm := _lib._fall_stand_up + "AA-soccer throw R RM"
 	const thrown_l_small_rm := _lib._fall_stand_up + "AA-soccer fall L small"
+	const thrown_r_small_rm := _lib._fall_stand_up + "AA-soccer fall R small"
+	const cool_thrown_l_rm := _lib._fall_stand_up + "Corkscrew Evade L"
+	const cool_thrown_r_rm := _lib._fall_stand_up + "Corkscrew Evade R"
 
 
 class equip:

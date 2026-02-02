@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqq0d6ohueuo5"]
+
+[ext_resource type="Texture2D" uid="uid://d3g0sgo7lx37i" path="res://logic/ui/ui_overlay_controls_menu/button/flair_small_info.png" id="1_vb4ov"]
+
+[node name="ToolTip" type="MarginContainer"]
+custom_minimum_size = Vector2(40, 40)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.78, 0.78, 0.78, 0.70980394)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_vb4ov")
+stretch_mode = 3

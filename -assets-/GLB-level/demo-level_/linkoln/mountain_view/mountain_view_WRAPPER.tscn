@@ -56,6 +56,7 @@ cast_shadow = 0
 layers = 17
 
 [node name="Mountain_Group_2_005" parent="mountain view" index="10"]
+transform = Transform3D(0.9328289, 0, -0.3603196, 0, 1, 0, 0.3603196, 0, 0.9328289, 470.9384, -201.9656, 773.97504)
 layers = 17
 cast_shadow = 0
 

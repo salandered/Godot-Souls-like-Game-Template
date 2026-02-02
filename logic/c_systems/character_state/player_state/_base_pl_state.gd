@@ -42,6 +42,9 @@ var initial_position: Vector3
 var queued_state: MetaState.Queued = MetaState.Queued.new()
 var forced_state: MetaState.Forced = MetaState.Forced.new()
 
+
+## does not cover leg actions.
+## TODO: action separation creates porblems. like having curr_global_action here
 var curr_state_action: PlayerAction
 
 
@@ -264,6 +267,10 @@ func on_exit_state() -> void:
 
 func react_on_hit(hit: HitData):
 	print_.fight(state_name, "we received a hit " + str(hit))
+	
+	if curr_global_action().is_invincible():
+		print_.fight(state_name, "we are invincible, no reaction")
+		return
 
 	var _sig_data := get_player().get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
 	SigUtils.safe_emit(_sig_data, {}, false)
@@ -301,22 +308,3 @@ func __log_time_spent():
 
 
 # endregion
-
-
-## DEV
-
-
-# TODO: ...
-# func react_on_spell(spell_hit: SpellHitData):
-# 	if curr_global_action().is_vulnerable():
-# 		feelings.lose_health(spell_hit.damage)
-# 	# if curr_global_action().is_interruptable():
-# 		# forced_state.try_set("staggered", 0)
-# 	#spell_hit.queue_free()
-# 	spell_hit.spell.target_contacted(_player)
-
-# TODO: ...
-# Eg: every parriable weapon strike transitions into a single "parry" state on successful parry
-func react_on_parry(_hit: HitData):
-	pass
-	# try_set_force_state("parried")

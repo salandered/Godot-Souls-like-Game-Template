@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/white/icon_grid.png")
+@icon("uid://de45upgkelpba") ## icon grid
 
 class_name AnimContainer
 extends BaseAnimContainer

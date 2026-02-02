@@ -34,7 +34,7 @@ func _ready() -> void:
 
 	if camera_target:
 		camera_target.label = label
-		camera_target.initialise(self)
+		camera_target.initialise(self )
 
 	if __perform_validation():
 		hit_area.SIG_hit.connect(_on_my_area_hit)
@@ -42,7 +42,7 @@ func _ready() -> void:
 
 func _on_my_area_hit(payload: Dictionary[String, Variant]):
 	var hit_damage := 10.0
-	var _r := SigUtils.safe_get_variant_payload_value(payload, GlobalSignal.payload_hit_data_field, false)
+	var _r := SigUtils.safe_get_variant_payload_value(payload, SPS.hit_data_field, false)
 	if not _r.err and _r.value is HitData:
 		last_hit = _r.value
 		hit_damage = last_hit.damage

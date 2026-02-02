@@ -15,7 +15,8 @@ const check = "❔"
 const gray_x = "✖️"
 const declined = gray_x
 const exit = "🚪"
-const camera = "📷"
+const camera = "🎥"
+const photo = "📷"
 
 
 # temp

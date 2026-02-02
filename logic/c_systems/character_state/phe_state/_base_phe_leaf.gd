@@ -43,7 +43,7 @@ func is_ended() -> bool:
 ## internal
 func _on_enter_state() -> void:
 	mark_enter_state()
-	PREV_LEAF = me.update_curr_leaf_state(self)
+	PREV_LEAF = me.update_curr_leaf_state(self )
 
 	if me.record_state_history:
 		me.update_state_history(state_name)
@@ -90,10 +90,10 @@ func _update(delta: float) -> void:
 
 
 func works_longer_than_fatigue() -> bool:
-	return CommitCheck.works_longer_than_fatigue_leaf(self)
+	return CommitCheck.works_longer_than_fatigue_leaf(self )
 
 func works_less_than_commitment() -> bool:
-	return CommitCheck.works_less_than_commitment_leaf(self)
+	return CommitCheck.works_less_than_commitment_leaf(self )
 
 
 ## REACTIONS TO EXTERNAL EVENTS
@@ -167,11 +167,11 @@ func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayCo
 # region
 
 func effective_time_spent() -> float:
-	return ActionTimeManagement.effective_time_spent(get_animator_manager(), self)
+	return ActionTimeManagement.effective_time_spent(get_animator_manager(), self )
 
 
 func effective_time_spent_unscaled() -> float:
-	return ActionTimeManagement.effective_time_spent_unscaled(get_animator_manager(), self)
+	return ActionTimeManagement.effective_time_spent_unscaled(get_animator_manager(), self )
 
 
 func effective_duration() -> float:
@@ -179,11 +179,11 @@ func effective_duration() -> float:
 
 
 func time_spent() -> float:
-	return ActionTimeManagement.time_spent(get_animator_manager(), self)
+	return ActionTimeManagement.time_spent(get_animator_manager(), self )
 
 
 func time_remaining() -> float:
-	return ActionTimeManagement.time_remaining(get_animator_manager(), self)
+	return ActionTimeManagement.time_remaining(get_animator_manager(), self )
 
 
 func direct_time_remaining() -> float:
@@ -191,31 +191,31 @@ func direct_time_remaining() -> float:
 
 
 func works_longer_than(time: float) -> bool:
-	return ActionTimeManagement.works_longer_than(time, get_animator_manager(), self)
+	return ActionTimeManagement.works_longer_than(time, get_animator_manager(), self )
 
 
 func works_less_than(time: float) -> bool:
-	return ActionTimeManagement.works_less_than(time, get_animator_manager(), self)
+	return ActionTimeManagement.works_less_than(time, get_animator_manager(), self )
 
 
 func works_between(start: float, finish: float) -> bool:
-	return ActionTimeManagement.works_between(start, finish, get_animator_manager(), self)
+	return ActionTimeManagement.works_between(start, finish, get_animator_manager(), self )
 
 
 func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
-	return ActionTimeManagement.passed_marker(marker_name, get_animator_manager(), anim, self, add_time)
+	return ActionTimeManagement.passed_marker(marker_name, get_animator_manager(), anim, self , add_time)
 
 
 func before_marker(marker_name: String) -> bool:
-	return ActionTimeManagement.before_marker(marker_name, get_animator_manager(), anim, self)
+	return ActionTimeManagement.before_marker(marker_name, get_animator_manager(), anim, self )
 
 # endregion
 
 
 # region: GET ANIMATION PARAMETERS
 
-func is_vulnerable() -> bool:
-	return anim_params_container.is_vulnerable(anim.native_anim, effective_time_spent_unscaled())
+# func is_invincible() -> bool:
+# 	return anim_params_container.is_invincible(anim.native_anim, effective_time_spent_unscaled())
 	
 
 func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:

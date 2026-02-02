@@ -14,6 +14,7 @@ script = ExtResource("1_ekt48")
 [node name="InteractLabel" parent="." instance=ExtResource("2_obo7c")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+fixed_size = false
 text = "Press E to interact"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -68,7 +68,7 @@ func initialise(holder: BaseStaticCharacter) -> void:
 
 	_weapon_hurt_box = get_weapon_hurt_box()
 	if _weapon_hurt_box:
-		_weapon_hurt_box.initialise(self, _signal_container)
+		_weapon_hurt_box.initialise(self , _signal_container)
 	
 
 	## SFX. Here we r not logging any problems, all be logged using __soft_dependencies etc
@@ -79,8 +79,8 @@ func initialise(holder: BaseStaticCharacter) -> void:
 			_sfx_system.initialise(
 				_signal_container,
 				_for_init_asp_container(),
-				self,
-				{_sfx_system.weapon_additional_data_key: self}
+				self ,
+				{_sfx_system.weapon_additional_data_key: self }
 			)
 
 
@@ -134,7 +134,7 @@ func set_is_attacking(is_attacking_: bool) -> void:
 ## 
 
 func activate():
-	self.visible = true
+	self .visible = true
 	process_mode = PROCESS_MODE_INHERIT
 	if get_weapon_hurt_box():
 		get_weapon_hurt_box().process_mode = PROCESS_MODE_INHERIT
@@ -142,7 +142,7 @@ func activate():
 		_sfx_system.enable()
 
 func deactivate():
-	self.visible = false
+	self .visible = false
 	process_mode = PROCESS_MODE_DISABLED
 	if get_weapon_hurt_box():
 		get_weapon_hurt_box().process_mode = PROCESS_MODE_DISABLED
@@ -211,7 +211,7 @@ func get_signal_container() -> BaseWeaponSignalContainer:
 const _SPARK_MARKER_NAME = "SparkMarker"
 
 func _find_spark_marker() -> Marker3D:
-	var markers := get_descendants.markers_3d(self)
+	var markers := get_descendants.markers_3d(self )
 	for item: Marker3D in markers:
 		if item.name == _SPARK_MARKER_NAME:
 			return item

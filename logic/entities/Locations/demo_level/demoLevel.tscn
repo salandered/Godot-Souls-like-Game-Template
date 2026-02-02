@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=4 uid="uid://bm5vqmonl5jl4"]
+[gd_scene load_steps=115 format=4 uid="uid://bm5vqmonl5jl4"]
 
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/c_systems/level/demo_level.gd" id="1_skc02"]
 [ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/c_systems/weather_system/weather.gd" id="2_cfi4c"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/demo-level_/tower/TOWER_WRAPPER.tscn" id="8_50a4s"]
 [ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/VFX/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
 [ext_resource type="PackedScene" uid="uid://bbwrpoygqteb0" path="res://-assets-/GLB-level/demo-level_/golden/gold_cave_WRAPPED.tscn" id="10_ic71h"]
+[ext_resource type="Shader" uid="uid://b78scouypslqj" path="res://logic/entities/Locations/demo_level/34001_t2.gdshader" id="10_o8cuj"]
 [ext_resource type="PackedScene" uid="uid://clc3tlv23rgge" path="res://-assets-/GLB-level/demo-level_/jaw/jaw_WRAPPED.tscn" id="11_p1nq7"]
 [ext_resource type="PackedScene" uid="uid://8kw40wxpqewf" path="res://-assets-/GLB-level/demo-level_/columns/columns_WRAPPER.tscn" id="12_g0qcj"]
 [ext_resource type="PackedScene" uid="uid://dj7eifk52p3xo" path="res://-assets-/GLB-level/demo-level_/tree_far/tree_group_far_WRAPPER.tscn" id="12_skc02"]
@@ -93,7 +94,7 @@ background_color = Color(0.8, 0.913725, 1, 1)
 sky = ExtResource("3_58tqt")
 ambient_light_source = 3
 ambient_light_color = Color(0.20129895, 0.20129895, 0.20129895, 1)
-ambient_light_sky_contribution = 0.3
+ambient_light_sky_contribution = 0.2
 ambient_light_energy = 2.0
 reflected_light_source = 2
 tonemap_mode = 4
@@ -102,7 +103,7 @@ tonemap_white = 1.2
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.23524225, 0.01825156, 0, 1)
+fog_light_color = Color(0.25490198, 0.37254903, 0.5019608, 1)
 fog_light_energy = 0.91
 fog_density = 0.0
 fog_sky_affect = 0.0
@@ -110,7 +111,7 @@ fog_height = -31.04
 fog_height_density = 0.007
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.009
-volumetric_fog_albedo = Color(0.7511804, 0.7425674, 0.7411612, 1)
+volumetric_fog_albedo = Color(0.7764706, 0.9490196, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3y2i"]
 size = Vector3(15.666992, 6.004822, 1.3508301)
@@ -167,6 +168,21 @@ emission_enabled = true
 emission = Color(0.743186, 3.83843e-06, 3.85046e-07, 1)
 emission_energy_multiplier = 1.43
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37dxq"]
+render_priority = 0
+shader = ExtResource("10_o8cuj")
+shader_parameter/black_hole_radius = 0.2800000133
+shader_parameter/distortion_strength = 5.0
+shader_parameter/ring_color = Color(1, 0.8, 0.5, 1)
+shader_parameter/ring_width = 0.0
+shader_parameter/inner_color = Color(0, 0, 0.05, 1)
+shader_parameter/edge_softness = 0.2510000119225
+shader_parameter/outer_fade_dist = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_ncli4"]
+material = SubResource("ShaderMaterial_37dxq")
+size = Vector2(0.5, 0.5)
+
 [sub_resource type="FogMaterial" id="FogMaterial_ee878"]
 density = 0.1
 albedo = Color(0.90774393, 0.94392484, 1, 1)
@@ -204,7 +220,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pijfo")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_skk2x"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8cuj"]
 radius = 2.0
 height = 4.0
 
@@ -283,7 +299,7 @@ normal_enabled = true
 normal_texture = ExtResource("51_rqhon")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8cuj"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ncli4"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
 density = 0.2
@@ -445,7 +461,6 @@ debug_color = Color(0.70196074, 0.43017352, 0, 1)
 [node name="DirectionalSun" type="DirectionalLight3D" parent="Weather/Sun"]
 transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
 light_color = Color(1, 0.9929813, 0.96693254, 1)
-light_energy = 0.4
 light_volumetric_fog_energy = 1.2
 light_cull_mask = 4294967293
 shadow_enabled = true
@@ -729,6 +744,11 @@ light_color = Color(0.63529414, 0.34126207, 0.21568626, 1)
 light_energy = 1.0
 light_indirect_energy = 12.0
 
+[node name="BlackHole" type="MeshInstance3D" parent="Lincoln_ALL/LINCOLN_WRAPPER/Lantern_Lamp_Splitted_003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04292679, -0.19709873, 0.063482285)
+mesh = SubResource("QuadMesh_ncli4")
+skeleton = NodePath("../../SittingSkeleton")
+
 [node name="SittingSkeleton" parent="Lincoln_ALL/LINCOLN_WRAPPER" node_paths=PackedStringArray("player") instance=ExtResource("20_il31f")]
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -54.036667, 12.842042, 34.617493)
 player = NodePath("../../../Princess")
@@ -826,7 +846,7 @@ area_capsule_radius = 4.0
 area_capsule_height = 4.0
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0"]
-shape = SubResource("CapsuleShape3D_skk2x")
+shape = SubResource("CapsuleShape3D_o8cuj")
 
 [node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("21_w0ai3")]
 transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
@@ -1054,7 +1074,7 @@ material_override = ExtResource("48_y0kr0")
 material_override = SubResource("StandardMaterial3D_ktdwm")
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" index="0"]
-shape = SubResource("CapsuleShape3D_o8cuj")
+shape = SubResource("CapsuleShape3D_ncli4")
 
 [node name="SimpleTarget2" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.045063, 0.5982324, 36.92067)

@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c0ppm6u2ki7fp"]
+
+[ext_resource type="Shader" uid="uid://cmpsaievjrnaj" path="res://logic/entities/Locations/_dev/wireframe.gdshader" id="1_jvdp2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jvdp2")
+shader_parameter/albedo = Color(0, 1, 0, 1)
+shader_parameter/transparency = 0.0
+shader_parameter/line_transparency = 0.3830000181925
+shader_parameter/wire_width = 2.4480001162800002
+shader_parameter/use_barycentric = true
+shader_parameter/use_perspective = false
+shader_parameter/grid_density = Vector2(10, 5)

@@ -13,8 +13,8 @@ const TRACKS_INPUT_VECTOR := "tracks_input_vector"
 const DEFAULT_PARAMS: Dictionary[String, bool] = {
 	SWITCHES_TO_QUEUE: false,
 	ALLOWS_QUEUE: false,
-	VULNERABLE: true,
-	INTERRUPTABLE: true,
+	INVINCIBLE: false,
+	# INTERRUPTABLE: true,
 	WEAPON_HURTS: false,
 	TRACKS_INPUT_VECTOR: true,
 }
@@ -42,6 +42,9 @@ func get_track_prefixes() -> Array[String]:
 
 #################
 
+func is_invincible(anim: Animation, timestamp: float) -> bool:
+	return _get_value_from_track(anim, INVINCIBLE, timestamp)
+
 
 func is_weapon_hurts(weapon_name: String, anim: Animation, timestamp: float) -> bool:
 	# for any weapon_name in player
@@ -56,14 +59,15 @@ func is_allows_queue(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, ALLOWS_QUEUE, timestamp)
 
 	
-func is_interruptable(anim: Animation, timestamp: float) -> bool:
-	# return _get_value_from_track(anim, INTERRUPTABLE, timestamp)
-	return true
+# func is_interruptable(anim: Animation, timestamp: float) -> bool:
+# 	# return _get_value_from_track(anim, INTERRUPTABLE, timestamp)
+# 	return true
 	
-
-func _is_weapon_hurts(anim: Animation, timestamp: float) -> bool:
-	return _get_value_from_track(anim, WEAPON_HURTS, timestamp)
-
 
 func is_tracks_input_vector(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, TRACKS_INPUT_VECTOR, timestamp)
+
+##
+
+func _is_weapon_hurts(anim: Animation, timestamp: float) -> bool:
+	return _get_value_from_track(anim, WEAPON_HURTS, timestamp)

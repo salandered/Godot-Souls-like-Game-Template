@@ -116,7 +116,7 @@ func update_current_action(next_action: BaseAction) -> String:
 	_current_action = next_action
 	SigUtils.safe_emit_raw(
 		GlobalSignal.SIG_player_action_changed,
-		{GlobalSignal.payload_state_name_field: next_action.action_name}
+		{SPS.state_name_field: next_action.action_name}
 	)
 	# if _prev_action and next_act_name == _prev_action.action_name:
 		# print_.dev(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
@@ -130,6 +130,13 @@ func react_on_hit(hit_data: HitData) -> void:
 		return
 	hit_timer.initialise(0.4)
 	current_state.react_on_hit(hit_data)
+
+
+func is_invincible() -> bool:
+	if not get_curr_action():
+		__log_warn("no get_curr_action", "player sm")
+		return false
+	return get_curr_action().is_invincible()
 
 
 func update(input_: InputPackage, delta: float) -> void:
@@ -150,7 +157,7 @@ func update(input_: InputPackage, delta: float) -> void:
 		current_state = container.state_by_name(verdict.next_state)
 		SigUtils.safe_emit_raw(
 			GlobalSignal.SIG_player_state_changed,
-			{GlobalSignal.payload_state_name_field: current_state.state_name}
+			{SPS.state_name_field: current_state.state_name}
 		)
 		current_state._on_enter_state(input_)
 

@@ -1,8 +1,7 @@
 extends BaseAnimParameters
 
 
-## Able to lose health.
-@export var vulnerable: bool
+@export var invincible: bool
 
 ## Is weapon "attacking".
 

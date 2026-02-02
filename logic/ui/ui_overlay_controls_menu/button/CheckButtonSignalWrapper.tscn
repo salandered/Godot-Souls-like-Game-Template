@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://u0yafii5i6uy"]
+
+[ext_resource type="Script" uid="uid://dmtv2f1qsy2vx" path="res://logic/ui/ui_overlay_controls_menu/button/ui_overlay_check_button_sig_wrapper.gd" id="1_nyije"]
+
+[node name="CheckButtonSignalWrapper" type="Node"]
+script = ExtResource("1_nyije")

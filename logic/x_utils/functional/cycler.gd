@@ -32,12 +32,22 @@ func get_next() -> Variant:
 	_pointer = (_pointer + 1) % len(_values)
 	return _pick_value()
 
+
 ## Returns the current value without advancing the pointer.
 func get_current() -> Variant:
 	if _values.is_empty():
 		__log_warn("Cycler has no values to get", "", "return null")
 		return null
 	
+	return _pick_value()
+
+
+func get_previous() -> Variant:
+	if _values.is_empty():
+		__log_warn("Cycler has no values to get", "", "return null")
+		return null
+	
+	_pointer = (_pointer - 1 + len(_values)) % len(_values)
 	return _pick_value()
 
 
@@ -69,6 +79,7 @@ func force_cycle_to(target_value: Variant) -> bool:
 func _is_pointer_within() -> bool:
 	return _pointer >= 0 and _pointer <= len(_values) - 1
 
+
 func _pick_value() -> Variant:
 	if _is_pointer_within():
 		return _values[_pointer]
@@ -76,9 +87,9 @@ func _pick_value() -> Variant:
 		__log_error("critical cycler error. Probably array were changed externally", "", "return null", "Pointer/array size", _pointer, len(_values))
 		return null
 
+
 ## __LOGS
 # region
-
 
 func __LOG_B() -> bool:
 	return false

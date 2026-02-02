@@ -156,6 +156,25 @@ static func get_theme_font_size(rr_label: RichTextLabel) -> int:
 	return current_size
 
 
+static func flow_container_set_v_separation(flow_container: FlowContainer, value: int) -> void:
+	if flow_container:
+		flow_container.add_theme_constant_override("v_separation", value)
+
+
+static func flow_container_add_v_separation(flow_container: FlowContainer, value: int) -> void:
+	if not flow_container:
+		return
+	var curr_value := flow_container_get_v_separation(flow_container)
+	flow_container_set_v_separation(flow_container, curr_value + value)
+
+
+## returns -1 if error
+static func flow_container_get_v_separation(flow_container: FlowContainer) -> int:
+	if not flow_container:
+		return -1
+	return flow_container.get_theme_constant("v_separation")
+
+
 # region: __LOGS
 static func pp_name() -> String:
 	return ">> UIUtils"

@@ -3,66 +3,33 @@ extends PlayerAction
 
 @export var flying_x_curve: Curve # bell-curve which ends a little earlier
 
-var ANIM_L := A.fall_stand_up.thrown_l_rm
-var ANIM_R := A.fall_stand_up.thrown_r_rm
-var ANIM_L_LOW := A.fall_stand_up.thrown_l_small_rm
-var ANIM_R_LOW := A.fall_stand_up.thrown_r_small_rm
 
-const LEFT = "LEFT"
-const RIGHT = "RIGHT"
-const BACK = "BACK"
-
-class ThrowPack:
-	var anim_id: String
-	var peak_speed: float
-	var end_speed: float
-	var extra_start_speed: float
-	var direction: String
-	func _init(anim_id_: String, peak_speed_: float, end_speed_: float, extra_start_speed_: float, direction_: String) -> void:
-		self.anim_id = anim_id_
-		self.peak_speed = peak_speed_
-		self.end_speed = end_speed_
-		self.extra_start_speed = extra_start_speed_
-		self.direction = direction_
-	func _to_string() -> String:
-		return "ThrowPack(dir %s, anim %s, peak/end/extra %.1f/%.1f/%.1f)" % [direction, pp.anim_n(anim_id), peak_speed, end_speed, extra_start_speed]
-		
-
-var DEF_PEAK_SP: float = 8.5
-var DEF_END_SP: float = 0.0
-var DEF_EXTRA_START_SP: float = 0.0
-
-var left_throw_pack := ThrowPack.new(ANIM_L, DEF_PEAK_SP + 2.0, DEF_END_SP, DEF_EXTRA_START_SP + 2.0, LEFT)
-var right_throw_pack := ThrowPack.new(ANIM_R, DEF_PEAK_SP + 2.0, DEF_END_SP, DEF_EXTRA_START_SP + 2.0, RIGHT)
-var back_throw_pack := ThrowPack.new(ANIM_R, DEF_PEAK_SP + 2.0, DEF_END_SP, DEF_EXTRA_START_SP + 2.0, BACK) # uses right anim
-var left_low_throw_pack := ThrowPack.new(ANIM_L_LOW, DEF_PEAK_SP, DEF_END_SP + 0.2, DEF_EXTRA_START_SP + 0.5, LEFT)
-var right_low_throw_pack := ThrowPack.new(ANIM_R_LOW, DEF_PEAK_SP, DEF_END_SP + 0.2, DEF_EXTRA_START_SP + 0.5, RIGHT)
-var back_low_throw_pack := ThrowPack.new(ANIM_R_LOW, DEF_PEAK_SP, DEF_END_SP + 0.2, DEF_EXTRA_START_SP + 0.5, BACK)
-
-var curr_throw: ThrowPack
+var curr_throw_pack: ThrowData.Pack
 
 var speed_x_interpolator := HillInterpolator.new()
 
-
 var _boost_value := 0.0
+
 
 func initialise() -> void:
 	default_sp.ANGULAR_SPEED = 0.1
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0))
 
+
 func _locked_and_not_sprint() -> bool:
-	# todoL use actual angle between pl and enemy
+	# TODO: use actual angle between pl and enemy
 	if pm().get_area_awareness().is_camera_locked(): # and not PREV_ACTION == Leg.Act.sprint:
 		return true
 	return false
 
-func _decide_on_mode_on_enter():
+
+func _decide_on_pack_on_enter():
 	var _reason: String = ""
-	curr_throw = right_throw_pack
+	curr_throw_pack = ThrowData.default_pack
 	var hit := player_sm.combat.get_last_processed_hit()
 	if not hit:
 		_reason = "no hit data found => default"
-		__log_decide_on_mode(_reason)
+		__log_decide_on_pack(_reason)
 		return
 	if hit.anim_id == SITSKA.sit_attack:
 		_boost_value = 6.0
@@ -70,33 +37,26 @@ func _decide_on_mode_on_enter():
 		_boost_value = 0.0
 		 
 
-	var _attack_dir := ReactionOnHit.get_attack_dir_by_enemy_attack(hit.anim_id)
-	match _attack_dir:
-		AttackDirection.Dir.LEFT:
-			_reason = "_attack_dir L"
-			curr_throw = right_throw_pack if _locked_and_not_sprint() else left_throw_pack
-		AttackDirection.Dir.RIGHT:
-			_reason = "_attack_dir R"
-			curr_throw = left_throw_pack if _locked_and_not_sprint() else right_throw_pack
-		AttackDirection.Dir.DOWN:
-			_reason = "_attack_dir DOwn"
-			curr_throw = back_throw_pack if _locked_and_not_sprint() else right_throw_pack
-		_:
-			_reason = "_attack_dir is not L/R"
-			curr_throw = back_throw_pack if _locked_and_not_sprint() else right_throw_pack
+	var r_throw_dir := ThrowData.attack_dir_to_throw_dir(hit.attack_dir)
+	if not _locked_and_not_sprint():
+		r_throw_dir = ThrowData.throw_dir_mirror(r_throw_dir)
+
+	var r_collection: ThrowData.DirCollection = ThrowData.usual_dir_col
+
+	if hit.damage < 25:
+		_reason += "hit.damage < 25"
+		r_collection = ThrowData.low_dir_col
 	
-	if hit.damage <= 25:
-		_reason += " | hit.damage <= 20 => low version"
-		match curr_throw.direction:
-			LEFT:
-				curr_throw = left_low_throw_pack
-			RIGHT:
-				curr_throw = right_low_throw_pack
-			BACK:
-				curr_throw = back_low_throw_pack
+	if PREV_ACTION in [PS.Act.dodge, PS.Act.jump_sprint, PS.Act.landing_sprint, PS.Act.midair]:
+		_reason += "PREV_ACTION is air action"
+		r_collection = ThrowData.cool_dir_col
 
+	_reason += "r_throw_dir is " + str(r_throw_dir)
+	var pack := r_collection.get_pack_by_throw_dir(r_throw_dir)
 
-	__log_decide_on_mode(_reason)
+	curr_throw_pack = pack
+
+	__log_decide_on_pack(_reason)
 
 
 func _calculate_interpolator_duration(actual_anim: AnimationData) -> float:
@@ -108,18 +68,18 @@ func _calculate_interpolator_duration(actual_anim: AnimationData) -> float:
 
 
 func on_enter_action(input_: InputPackage):
-	_decide_on_mode_on_enter()
-	# curr_throw = back_low_throw_pack # DEV WARNING
-	anim = anim_container.get_by_anim_id(curr_throw.anim_id)
+	_decide_on_pack_on_enter()
+	# curr_throw_pack = back_low_throw_pack # DEV WARNING
+	anim = anim_container.get_by_anim_id(curr_throw_pack.anim_id)
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0))
 
 	var _inherited_speed := pm().get_curr_velocity_len()
 	var _interpolator_dur := _calculate_interpolator_duration(anim)
 	
 	speed_x_interpolator.initialise(
-		_inherited_speed + curr_throw.extra_start_speed + _boost_value / 2,
-		curr_throw.end_speed + _boost_value / 2,
-		curr_throw.peak_speed + _boost_value * 2,
+		_inherited_speed + curr_throw_pack.extra_start_speed + _boost_value / 2,
+		curr_throw_pack.end_speed + _boost_value / 2,
+		curr_throw_pack.peak_speed + _boost_value * 2,
 		flying_x_curve,
 		_interpolator_dur)
 
@@ -148,15 +108,15 @@ func update(input_: InputPackage, delta: float) -> void:
 
 
 func _get_current_world_vector(player_basis: Basis) -> Vector3:
-	match curr_throw.direction:
-		RIGHT:
+	match curr_throw_pack.direction:
+		ThrowData.ThrowDir.RIGHT:
 			return -player_basis.x
-		LEFT:
+		ThrowData.ThrowDir.LEFT:
 			return player_basis.x
-		BACK:
+		ThrowData.ThrowDir.BACK:
 			return -player_basis.z
 	return Vector3.ZERO
 
 
-func __log_decide_on_mode(_reason: String):
-	__log_ent(_reason, "-> set curr mode", curr_throw)
+func __log_decide_on_pack(_reason: String):
+	__log_ent(_reason, "-> set curr pack", curr_throw_pack)

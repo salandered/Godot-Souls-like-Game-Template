@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ceq6kw701fxl4" path="res://-assets-/ui_assets/images/big/red_danger_image.png" id="1_yi03a"]
 
 [resource]
+content_margin_left = 10.0
+content_margin_right = 10.0
 texture = ExtResource("1_yi03a")
 region_rect = Rect2(5.5, 36.71791, 747, 69.78209)
 modulate_color = Color(0.9999996, 0.7756998, 0.76168317, 1)

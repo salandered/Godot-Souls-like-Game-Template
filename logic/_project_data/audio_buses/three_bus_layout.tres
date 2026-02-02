@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=18 format=3 uid="uid://h34rd3knc6l3"]
+[gd_resource type="AudioBusLayout" load_steps=19 format=3 uid="uid://h34rd3knc6l3"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_nvu84"]
 resource_name = "Compressor"
@@ -48,6 +48,10 @@ attack_us = 200.0
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_87o32"]
 resource_name = "Delay"
+
+[sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_sb0cj"]
+resource_name = "SpectrumAnalyzer"
+fft_size = 4
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_87o32"]
 resource_name = "Amplify"
@@ -155,11 +159,13 @@ bus/4/effect/0/effect = SubResource("AudioEffectCompressor_h4dk8")
 bus/4/effect/0/enabled = true
 bus/4/effect/1/effect = SubResource("AudioEffectDelay_87o32")
 bus/4/effect/1/enabled = false
+bus/4/effect/2/effect = SubResource("AudioEffectSpectrumAnalyzer_sb0cj")
+bus/4/effect/2/enabled = true
 bus/5/name = &"_t_SFX"
 bus/5/solo = false
 bus/5/mute = true
 bus/5/bypass_fx = false
-bus/5/volume_db = 0.0
+bus/5/volume_db = 0.0006008148
 bus/5/send = &"Master"
 bus/5/effect/0/effect = SubResource("AudioEffectCompressor_h4dk8")
 bus/5/effect/0/enabled = true

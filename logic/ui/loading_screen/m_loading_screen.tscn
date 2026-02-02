@@ -1,10 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://bs1rf0cb545oq"]
+[gd_scene load_steps=10 format=3 uid="uid://bs1rf0cb545oq"]
 
 [ext_resource type="Script" uid="uid://dotahls6vtroe" path="res://logic/ui/loading_screen/m_loading_screen.gd" id="1_j1vc5"]
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="12_167l7"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/prefab/color_rect.tscn" id="12_lioqs"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort_ui/distort_menu.gdshader" id="13_deyge"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/ui_utils/prefab/background_music_player/m_background_music_player.tscn" id="15_lpyag"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lldwd"]
+bg_color = Color(0.24203092, 0.07533141, 0.054163232, 0.47843137)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
 
@@ -74,9 +82,11 @@ layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(0.839433, 0.839433, 0.839433, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_lldwd")
 
 [node name="__margin" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -88,6 +98,7 @@ theme_override_constants/margin_bottom = 10
 [node name="ProgressLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/PanelContainer/__margin"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("12_167l7")
 theme_override_font_sizes/font_size = 34
 text = "Loading..."
@@ -95,13 +106,14 @@ horizontal_alignment = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="__margin" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer/PanelContainer2/__margin"]
 unique_name_in_owner = true

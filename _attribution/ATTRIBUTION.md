@@ -129,11 +129,12 @@ Assets: Entrance Gates to Menlo Castle;
 
 
 #### Also the following artists or content creators
-* Imphenzia - https://imphenzia.com/
 * FairFight - https://www.youtube.com/@PointDown
 * GDQuest - https://www.gdquest.com/
+* Imphenzia - https://imphenzia.com/
 * Gord Goodwin - https://gord-goodwin.blogspot.com/
 * FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
+* pixel-boy - https://pixel-boy.itch.io/
 * Luos - https://luos.itch.io/
 * Kenney - https://kenney.nl/
 

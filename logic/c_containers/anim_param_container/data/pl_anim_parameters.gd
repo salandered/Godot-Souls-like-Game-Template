@@ -16,8 +16,8 @@ extends BaseAnimParameters
 # endregion
 @export var switches_to_queue: bool
 @export var allows_queue: bool
-## Able to lose health. By default everything is is_vulnerable I guess.
-@export var vulnerable: bool
+## Usually means that hitbox does not register
+@export var invincible: bool
 ## Basic usage: u ve been hit:
 ## 		If is_interruptable OFF, nothing changes. E.g:  u dying.
 ##      If it's ON, logic changes. E.g: force switching to Stagger state.

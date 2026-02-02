@@ -24,12 +24,12 @@ fill_from = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_tg2sl")
 
 [node name="DynamicInfoLabel" type="MarginContainer"]
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+custom_minimum_size = Vector2(180, 0)
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_mvehj")
-font_size = 34
 
 [node name="PanelBordersOnly" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -43,13 +43,13 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_5uj7u")
 [node name="MarginInsidePanel" type="MarginContainer" parent="PanelGradient"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelGradient/MarginInsidePanel"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="Title" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
 unique_name_in_owner = true
@@ -64,8 +64,11 @@ text = "[b]State[/b]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="__margin2" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_top = -12
 theme_override_constants/margin_bottom = -6
@@ -80,7 +83,7 @@ theme_override_font_sizes/normal_font_size = 23
 theme_override_font_sizes/bold_font_size = 23
 theme_override_font_sizes/italics_font_size = 23
 bbcode_enabled = true
-text = "[b]% Action[/b]"
+text = "[b][/b]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -88,26 +91,33 @@ horizontal_alignment = 2
 
 [node name="HSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer" instance=ExtResource("2_8drye")]
 layout_mode = 2
+theme_override_constants/separation = 2
 
-[node name="__margin" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_bottom = 4
 
-[node name="Text" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin"]
+[node name="__margin" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 2
+
+[node name="Text" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 34
-theme_override_font_sizes/bold_font_size = 34
-theme_override_font_sizes/italics_font_size = 34
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
 bbcode_enabled = true
-text = "pla_dodge🤸"
+text = "something"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="__bottom_space" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 45
+theme_override_constants/margin_top = 44

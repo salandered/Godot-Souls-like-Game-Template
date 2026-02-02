@@ -20,7 +20,7 @@
 [ext_resource type="Material" uid="uid://corbh7usys0xj" path="res://-assets-/materials-shared/metal/I_metal_025/I_Metal025_1K-JPG_Reimp.tres" id="9_h5g1m"]
 [ext_resource type="ArrayMesh" uid="uid://dt6bn4oe5n2oq" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_010.res" id="9_rn2eh"]
 [ext_resource type="Script" uid="uid://oc24hyyjbm2u" path="res://logic/entities/Items/fighter/h_arm_weapon.gd" id="11_p3xh5"]
-[ext_resource type="ArrayMesh" uid="uid://ccnwq7birvj7i" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_002.res" id="12_e3krr"]
+[ext_resource type="ArrayMesh" uid="uid://b7e3u0niafaq0" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_002.res" id="12_e3krr"]
 [ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="14_ulmwa"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="16_tu6ua"]
 [ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/unsorted/weapon_sfx/WeaponSfx.tscn" id="17_lcx2h"]

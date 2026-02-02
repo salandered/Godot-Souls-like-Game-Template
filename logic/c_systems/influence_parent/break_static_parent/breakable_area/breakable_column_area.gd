@@ -29,7 +29,7 @@ func on_area_entered(incoming_area: Area3D):
 	if incoming_area is WeaponHurtBox:
 		# __log_("area entered with WeaponHurtBox", incoming_area)
 		var _weapon_area := incoming_area as WeaponHurtBox
-		var weapon: BaseWeapon = _weapon_area.my_weapon
+		var weapon: BaseWeapon = _weapon_area._my_weapon
 		if not weapon: return # should not happen
 		if not _apply_weapon_filters(weapon):
 			return

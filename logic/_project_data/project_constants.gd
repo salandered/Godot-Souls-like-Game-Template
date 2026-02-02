@@ -1,7 +1,8 @@
 class_name Constants
 extends RefCounted
 
-const BIG_MEANINGLESS_NUMBER: float = 99999
+const BIG_MEANINGLESS_NUMBER: float = 99999.8
+const BIG_MEANINGLESS_NUMBER_INT: int = 99998
 
 # todo: consider storing delta in InputPackage. and use it everywhere
 # frame dependednt and bad, but for approximate one tick here and there its fine they say

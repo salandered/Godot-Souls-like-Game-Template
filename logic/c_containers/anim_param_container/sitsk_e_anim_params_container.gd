@@ -4,7 +4,7 @@ extends BaseAnimParamsContainer
 
 # if no track
 const DEFAULT_PARAMS: Dictionary[String, bool] = {
-	VULNERABLE: true,
+	INVINCIBLE: false,
 	AURA_HURTS: false
 }
 

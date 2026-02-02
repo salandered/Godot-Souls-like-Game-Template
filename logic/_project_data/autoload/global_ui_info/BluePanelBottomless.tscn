@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://i3a03hqn3yig"]
+
+[ext_resource type="Script" uid="uid://i8trfm86bri3" path="res://logic/_project_data/autoload/global_ui_info/blue_panel_bottomless.gd" id="1_75oje"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x47y3"]
+bg_color = Color(0.055200003, 0.1476, 0.24, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0, 0.041266948, 0.10980393, 0.49019608)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="Gradient" id="Gradient_tym6s"]
+offsets = PackedFloat32Array(0, 0.6571429, 1)
+colors = PackedColorArray(0.055200003, 0.15068, 0.24, 0, 0.05490196, 0.14901961, 0.23921569, 0.1882353, 0.05490196, 0.14901961, 0.23921569, 0.1882353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnty7"]
+gradient = SubResource("Gradient_tym6s")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4jnj"]
+texture = SubResource("GradientTexture2D_bnty7")
+
+[node name="BluePanelBottomless" type="MarginContainer"]
+script = ExtResource("1_75oje")
+
+[node name="__blue_panel_borders" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x47y3")
+
+[node name="__blue_panel" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_f4jnj")
+
+[node name="__margin_in_blue_panel" type="MarginContainer" parent="__blue_panel"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="__vbox" type="VBoxContainer" parent="__blue_panel/__margin_in_blue_panel"]
+layout_mode = 2
+
+[node name="__margin" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_bottom = -10
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin"]
+unique_name_in_owner = true
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "[b][i]no title[/i][/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="__hbox" type="HBoxContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+layout_mode = 2
+
+[node name="__space" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+layout_mode = 2
+theme_override_constants/margin_top = 50

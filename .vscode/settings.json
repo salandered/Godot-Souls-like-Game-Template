@@ -357,6 +357,24 @@
 				}
 			]
 		},
+		"\\b(SIG)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5c9dff",
+					// "fontWeight": "bold"
+				}
+			]
+		},
+		"\\b(SigUtils)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5c9dff",
+					// "fontWeight": "bold"
+				}
+			]
+		},
 		"(RawAction)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

@@ -202,19 +202,18 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_mouse_motion = event.relative
 
-	get_viewport().set_input_as_handled()
-
 
 func _handle_pause_toggle(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
 		get_tree().paused = not get_tree().paused
+		get_viewport().set_input_as_handled()
 
 
 func _handle_mouse_wheel(event: InputEvent) -> void:
 	# Don't change speed if we are changing FOV (RMB is held)
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		return
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		return
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return
 
 	# mouse wheel for speed adjustment
@@ -252,6 +251,7 @@ func _handle_light_energy_input(event: InputEvent) -> void:
 func _handle_light_toggle(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_L:
 		_light.visible = not _light.visible
+		get_viewport().set_input_as_handled()
 
 
 # endregion

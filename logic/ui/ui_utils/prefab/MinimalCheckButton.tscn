@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://dlfv7h67kfr7f"]
+
+[ext_resource type="Texture2D" uid="uid://ovi2aqoj0bxu" path="res://-adopting/vector_ui_adv/image (25).png" id="1_jbj5k"]
+[ext_resource type="Texture2D" uid="uid://b3n2d7eqw32t6" path="res://-adopting/vector_ui_adv/image (27).png" id="2_jbj5k"]
+[ext_resource type="Texture2D" uid="uid://d0o265dhve8kq" path="res://-assets-/x_icons/white/icon_face.png" id="3_wy4m7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8ro"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.29110003, 0.41, 0.39414668, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.238, 0.34, 0.3264, 0.8666667)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0, 0, 0, 0.49803922)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ib10h"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.51101995, 0.28923362, 0.6561392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjrwk"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.37995976, 0.52036595, 0.50224906, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w13wr"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.5583066, 0.33186287, 0.7104485, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kn7pl"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.61565834, 0.6357732, 0.00011758829, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gvgfj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b7gm3"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_upv4f"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nbae8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6pm6x"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rbjfo"]
+
+[node name="MinimalCheckButton" type="CheckButton"]
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/icon_normal_color = Color(0.79870105, 0.79870105, 0.79870105, 1)
+theme_override_colors/icon_focus_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_hover_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_disabled_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_constants/h_separation = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_4m8ro")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ib10h")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qjrwk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_w13wr")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_kn7pl")
+theme_override_icons/checked = ExtResource("1_jbj5k")
+theme_override_icons/unchecked = ExtResource("2_jbj5k")
+theme_override_icons/checked_disabled = SubResource("PlaceholderTexture2D_gvgfj")
+theme_override_icons/unchecked_disabled = SubResource("PlaceholderTexture2D_b7gm3")
+theme_override_icons/checked_mirrored = SubResource("PlaceholderTexture2D_upv4f")
+theme_override_icons/unchecked_mirrored = SubResource("PlaceholderTexture2D_nbae8")
+theme_override_icons/checked_disabled_mirrored = SubResource("PlaceholderTexture2D_6pm6x")
+theme_override_icons/unchecked_disabled_mirrored = SubResource("PlaceholderTexture2D_rbjfo")
+text = "Player"
+icon = ExtResource("3_wy4m7")

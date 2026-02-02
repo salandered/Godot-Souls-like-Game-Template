@@ -97,11 +97,11 @@ transform = Transform3D(0.13047306, 1.110223e-16, 1.314504e-13, 1.8873791e-15, 0
 material_override = SubResource("StandardMaterial3D_6recs")
 
 [node name="3DOnTopLabel" parent="PlayerCamera" instance=ExtResource("5_u7x54")]
-transform = Transform3D(1, -1.1732862e-14, 8.834155e-14, 1.17328615e-14, 1, 1.20260415e-08, -8.834155e-14, -1.20260415e-08, 1, 2.842171e-14, 0, 0.016999722)
-modulate = Color(0.6493505, 0.48695287, 0.48695287, 1)
+transform = Transform3D(1, -1.15463195e-14, 9.2370556e-14, 1.15463195e-14, 1, 1.4901161e-08, -8.526513e-14, -1.4901161e-08, 1, 0.33571008, 0, 0.016999483)
+modulate = Color(0.4862745, 0.51987696, 0.6509804, 1)
 text = "Camera
 "
-font_size = 25
+font_size = 21
 
 [node name="CameraSocket" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -154,15 +154,15 @@ rings = 5
 smooth_faces = false
 material = SubResource("StandardMaterial3D_3e4lf")
 
-[node name="test" type="Camera3D" parent="CameraSocket" groups=["debug_cameras"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
-
 [node name="3DOnTopLabel2" parent="CameraSocket" instance=ExtResource("5_u7x54")]
-transform = Transform3D(1, 0, 8.953061e-15, 0, 1, 0, -8.953061e-15, 0, 1, 0, 0.052800894, 0)
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, -0.29007176, 0.052800894, 0)
 modulate = Color(0.56576514, 1, 0.6630156, 1)
 text = "Socket"
 font_size = 30
 outline_size = 10
+
+[node name="test" type="Camera3D" parent="CameraSocket" groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
 
 [node name="CircleTarget" parent="." instance=ExtResource("6_tlnea")]
 unique_name_in_owner = true

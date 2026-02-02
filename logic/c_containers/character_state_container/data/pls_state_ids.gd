@@ -32,7 +32,7 @@ const landing_sprint := "landing_sprint"
 
 ##
 const death := "death"
-const for_double := "for_double"
+const for_double := "for_double" ## WARNING: not used as an ordinary state
 const pushback := "pushback"
 const thrown := "thrown"
 # const stand_up := "stand_up"

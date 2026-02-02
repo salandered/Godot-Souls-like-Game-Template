@@ -9,24 +9,24 @@ var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.loco.sprint_to_idle, 0.85),
 	AnimationData.new(A.loco.run, 1.1),
 	AnimationData.new(A.loco.sprint, 1.05),
-	AnimationData.new(A.loco.turn_180_R, 1.2, true),
 	AnimationData.new(A.loco.turn_180_L, 1.2, true),
-	AnimationData.new(A.loco.fast_turn_180_R, 1.0, true),
+	AnimationData.new(A.loco.turn_180_R, 1.2, true),
 	AnimationData.new(A.loco.fast_turn_180_L, 1.0, true),
+	AnimationData.new(A.loco.fast_turn_180_R, 1.0, true),
 
 	## strafe
 	AnimationData.new(A.strafe.combat_run_f, 1.0),
 	AnimationData.new(A.strafe.combat_run_b, 1.0),
-	AnimationData.new(A.strafe.strafe_R, 0.8),
 	AnimationData.new(A.strafe.strafe_L, 0.8),
+	AnimationData.new(A.strafe.strafe_R, 0.8),
 
 	## dodge
-	AnimationData.new(A.dodge.dodge_R),
 	AnimationData.new(A.dodge.dodge_L),
+	AnimationData.new(A.dodge.dodge_R),
 	AnimationData.new(A.dodge.dodge_F),
 	AnimationData.new(A.dodge.dodge_B),
-	AnimationData.new(A.dodge.dodge_R_head),
-	AnimationData.new(A.dodge.dodge_L_head),
+	# AnimationData.new(A.dodge.dodge_L_head),
+	# AnimationData.new(A.dodge.dodge_R_head),
 
 	## air
 	AnimationData.new(A.air.midair),
@@ -35,8 +35,8 @@ var _list_of_animations: Array[AnimationData] = [
 
 	## react
 	AnimationData.new(A.react.head_B_large),
-	AnimationData.new(A.react.react_from_R),
 	AnimationData.new(A.react.react_from_L),
+	AnimationData.new(A.react.react_from_R),
 	AnimationData.new(A.react.react_gut),
 	AnimationData.new(A.react.hit_push_b_rm, 0.9),
 	AnimationData.new(A.react.react_dodge_B, 0.85),
@@ -61,6 +61,8 @@ var _list_of_animations: Array[AnimationData] = [
 	AnimationData.new(A.fall_stand_up.thrown_r_rm, 1.0),
 	AnimationData.new(A.fall_stand_up.thrown_r_small_rm, 1.0),
 	AnimationData.new(A.fall_stand_up.thrown_l_small_rm, 1.0),
+	AnimationData.new(A.fall_stand_up.cool_thrown_r_rm, 1.0),
+	AnimationData.new(A.fall_stand_up.cool_thrown_l_rm, 1.0),
 
 
 	## equip

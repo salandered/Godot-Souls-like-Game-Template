@@ -56,10 +56,6 @@ gdscript/warnings/unused_private_class_variable=0
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
-[debug_draw_3d]
-
-settings/addon_root_folder="res://addons/debug_draw_3d"
-
 [display]
 
 window/size/viewport_width=1920
@@ -119,6 +115,7 @@ folder_colors={
 "res://-assets-/music/": "pink",
 "res://-assets-/ui_assets/": "pink",
 "res://-assets-/ui_assets/_maaacks_assets/": "orange",
+"res://-assets-/x_icons/blue/": "blue",
 "res://-assets-/x_icons/red/": "red",
 "res://-assets-/x_icons/yellow/": "yellow",
 "res://addons/": "gray",
@@ -152,14 +149,14 @@ folder_colors={
 "res://logic/entities/VFX/lights/": "red",
 "res://logic/systems/sfx_anim_data_container/": "yellow",
 "res://logic/ui/": "pink",
-"res://logic/ui/main_menu_group/": "pink",
-"res://logic/ui/main_menu_group/credits/": "purple",
-"res://logic/ui/main_menu_group/main_menu/": "pink",
-"res://logic/ui/main_menu_group/options_menu/": "pink",
-"res://logic/ui/overlaid_menu/": "pink",
+"res://logic/ui/credits/": "purple",
+"res://logic/ui/main_menu/": "pink",
+"res://logic/ui/options_menu/": "pink",
 "res://logic/ui/pause_menu/": "pink",
+"res://logic/ui/ui_overlay_controls_menu/": "teal",
 "res://logic/ui/ui_utils/": "purple",
 "res://logic/x_utils/": "green",
+"res://logic/x_utils/dev_3d_visuals/": "yellow",
 "res://misc/cats-souls/": "purple",
 "res://misc/trash_bin/": "red",
 "res://ui/_later/maacks_example_game_scene/": "teal"

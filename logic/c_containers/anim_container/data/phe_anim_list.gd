@@ -99,8 +99,8 @@ var _list_of_animations: Array[AnimationData] = [
 	## loco
 	AnimationData.new(dodge.dodge_B),
 	AnimationData.new(dodge.dodge_F),
-	AnimationData.new(dodge.dodge_R),
 	AnimationData.new(dodge.dodge_L),
+	AnimationData.new(dodge.dodge_R),
 	AnimationData.new(loco.combat_idle),
 	AnimationData.new(loco.combat_idle_stupid),
 	AnimationData.new(loco.walk_forward),

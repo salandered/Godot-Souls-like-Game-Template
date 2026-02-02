@@ -3,6 +3,8 @@ class_name BaseStaticCharacter
 extends CharacterBody3DSystem
 
 
+var char_type: DevVisualsConfig.CharacterType = DevVisualsConfig.CharacterType.UNKNOWN
+
 var _anim_params_container: BaseAnimParamsContainer
 var _anim_container: AnimContainer
 var _native_player: AnimationPlayer
@@ -52,7 +54,7 @@ func _ready() -> void:
 
 
 func _initialise_static_char() -> void:
-	_look_at_char_marker = ArrayUtils.get_only_one_or_null(get_descendants.look_at_character_markers(self))
+	_look_at_char_marker = ArrayUtils.get_only_one_or_null(get_descendants.look_at_character_markers(self ))
 
 	_initialise_anim_systems()
 
@@ -60,11 +62,11 @@ func _initialise_static_char() -> void:
 
 
 func _initialise_anim_systems() -> void:
-	_anim_params_container = ArrayUtils.get_only_one_or_null(get_descendants.base_anim_params_containers(self))
+	_anim_params_container = ArrayUtils.get_only_one_or_null(get_descendants.base_anim_params_containers(self ))
 
 	_native_player = _for_init_native_player()
 
-	_anim_container = ArrayUtils.get_only_one_or_null(get_descendants.anim_containers((self)))
+	_anim_container = ArrayUtils.get_only_one_or_null(get_descendants.anim_containers((self )))
 
 	if _native_player and _anim_params_container:
 		_anim_container._accept_animations(
@@ -75,21 +77,15 @@ func _initialise_anim_systems() -> void:
 			_for_init_required_markers())
 
 	if _native_player and _anim_container:
-		_anim_manager = ArrayUtils.get_only_one_or_null(get_descendants.base_anim_managers(self))
+		_anim_manager = ArrayUtils.get_only_one_or_null(get_descendants.base_anim_managers(self ))
 		if _anim_manager:
 			_anim_manager.initialise(_native_player, _anim_container)
 
 
 func _initialise_combat() -> void:
-	_combat = ArrayUtils.get_only_one_or_null(get_descendants.base_combats(self))
+	_combat = ArrayUtils.get_only_one_or_null(get_descendants.base_combats(self ))
 	if _combat:
-		_combat.initialise(self, _for_init_active_weapon_id_list())
-
-		var hit_boxes := get_descendants.char_hit_boxes(self)
-		error_.empty_list(hit_boxes, "usually character has at least one hit box", WL.WARN)
-		for item: CharacterHitbox in hit_boxes:
-			item.initialise(_combat)
-		__log_(em.pin, "initted", len(hit_boxes), "hitboxes for", pp_name())
+		_combat.initialise(self , _for_init_active_weapon_id_list())
 
 
 ##
@@ -106,6 +102,7 @@ func _initialise_combat() -> void:
 ##
 @abstract func react_on_hit(hit_data: HitData) -> void
 
+@abstract func is_invincible() -> bool
 
 ##
 @abstract func get_player() -> Princess
@@ -116,6 +113,7 @@ func _initialise_combat() -> void:
 @abstract func get_prev_state_name() -> String
 
 @abstract func is_player() -> bool
+
 
 ##
 

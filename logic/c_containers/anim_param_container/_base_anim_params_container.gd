@@ -3,7 +3,7 @@ class_name BaseAnimParamsContainer
 extends NodeLogger
 
 
-const VULNERABLE := "vulnerable"
+const INVINCIBLE := "invincible"
 const WEAPON_HURTS := "weapon_hurts"
 const AURA_HURTS := "aura_hurts"
 const INTERRUPTABLE := "interruptable"
@@ -22,8 +22,8 @@ const INTERRUPTABLE := "interruptable"
 
 
 ## default
-func is_vulnerable(anim: Animation, timestamp: float) -> bool:
-	return true
+func is_invincible(anim: Animation, timestamp: float) -> bool:
+	return false
 
 
 func _get_value_from_track(anim: Animation, param: String, timestamp: float) -> bool:

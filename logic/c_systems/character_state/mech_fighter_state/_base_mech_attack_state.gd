@@ -39,7 +39,7 @@ func _combat_set_hit_data():
 func _combat_update_is_attacking():
 	var _weapon_ids := get_anim_active_weapon_ids()
 	for _id in _weapon_ids:
-		me.get_combat().update_weapon_is_attacking(_id, is_weapon_hurts(_id, true))
+		me.get_combat().update_weapon_is_attacking(_id, is_weapon_hurts(_id, false))
 
 func _combat_reset():
 	for weapon_id in get_anim_active_weapon_ids():

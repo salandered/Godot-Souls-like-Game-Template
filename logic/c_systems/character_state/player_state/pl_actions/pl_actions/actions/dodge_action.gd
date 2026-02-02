@@ -1,5 +1,5 @@
 extends PlayerAction
-
+class_name DodgeAction
 
 @export var dodge_x_curve: Curve # bell-curve
 
@@ -137,23 +137,23 @@ func animate(): # ▶️
 	
 	set_anim_to_play()
 
-	if SECOND_DODGE_FEATURE:
-		if second_dodge and curr_dodge_dir.is_horizontal():
-			var anim_id_to_overlay: String
-			if curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.RIGHT:
-				anim_id_to_overlay = A.dodge.dodge_R_head
-			elif curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.LEFT:
-				anim_id_to_overlay = A.dodge.dodge_L_head
-			else:
-				__log_upd("Unexpected direction:", curr_dodge_dir.pp_curr_dir())
-				anim_id_to_overlay = A.dodge.dodge_R_head # fallback
-			# experimental but cool
-			var _overlay_config := OverlayConfig.new(
-				OverlayConfig.Weight.new(__weight),
-				BlendConfig.new(0.1, 0.15, 0.2),
-				__sp_scale,
-				upper_body_mask)
-			get_animator_manager().set_overlay_anim(anim_id_to_overlay, _overlay_config)
+	# if SECOND_DODGE_FEATURE:
+	# 	if second_dodge and curr_dodge_dir.is_horizontal():
+	# 		var anim_id_to_overlay: String
+	# 		if curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.RIGHT:
+	# 			anim_id_to_overlay = A.dodge.dodge_R_head
+	# 		elif curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.LEFT:
+	# 			anim_id_to_overlay = A.dodge.dodge_L_head
+	# 		else:
+	# 			__log_upd("Unexpected direction:", curr_dodge_dir.pp_curr_dir())
+	# 			anim_id_to_overlay = A.dodge.dodge_R_head # fallback
+	# 		# experimental but cool
+	# 		var _overlay_config := OverlayConfig.new(
+	# 			OverlayConfig.Weight.new(__weight),
+	# 			BlendConfig.new(0.1, 0.15, 0.2),
+	# 			__sp_scale,
+	# 			upper_body_mask)
+	# 		get_animator_manager().set_overlay_anim(anim_id_to_overlay, _overlay_config)
 
 
 var __weight := 0.8
@@ -169,7 +169,7 @@ var __sp_scale := 1.2
 
 func _on_dodge_increase(payload: Dictionary[String, Variant]) -> void:
 	# prints("_on_speed_increase", "triggered")
-	var value = payload.get(GlobalSignal.payload_amount_field)
+	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):
 		PEAK_SPEED_BOOST += value
 		END_SPEED_BOOST += float(value) / 2.0

@@ -61,6 +61,24 @@ static func get_lowpass_filter(bus_name: String) -> AudioEffectLowPassFilter:
 			return effect
 	return null
 
+
+## Returns the SpectrumAnalyzerInstance from a bus, or null if not found.
+static func get_spectrum_analyzer(bus_name: String) -> AudioEffectSpectrumAnalyzerInstance:
+	var bus_idx := _get_bus_idx(bus_name)
+	if bus_idx == -1:
+		error_.warn(pp.s("Bus not found", bus_name), "", "", WL.PUSH_WARN)
+		return null
+	
+	var effect_count := AudioServer.get_bus_effect_count(bus_idx)
+	for effect_idx in range(effect_count):
+		var effect := AudioServer.get_bus_effect(bus_idx, effect_idx)
+		if effect is AudioEffectSpectrumAnalyzer:
+			# We found the resource, now request the active instance from the server
+			return AudioServer.get_bus_effect_instance(bus_idx, effect_idx)
+			
+	error_.warn(pp.s("SpectrumAnalyzer not found on bus", bus_name), "", "", WL.PUSH_WARN)
+	return null
+
 # 
 
 

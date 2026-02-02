@@ -294,13 +294,13 @@ func _on_update_sense_settings() -> void:
 
 
 func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
-	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	var _r := SigUtils.safe_get_bool_payload_value(payload, SPS.toggle_field)
 	if _r.err: return
 	_toggle_cam_coll(_r.value)
 
 
 func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]):
-	var _r := SigUtils.safe_get_bool_payload_value(payload, GlobalSignal.payload_toggle_field)
+	var _r := SigUtils.safe_get_bool_payload_value(payload, SPS.toggle_field)
 	if _r.err: return
 	var toggle := _r.value
 	_toggle_cam_visuals(toggle)

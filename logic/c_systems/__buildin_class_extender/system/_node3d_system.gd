@@ -27,7 +27,7 @@ func __validation_ok() -> bool:
 ## If true, sets __validated flag.
 ## NOTE: returns true if soft validation failed.
 func __perform_validation(process_disable_on_fail: bool = false) -> bool:
-	var _r := ValidationFramework.validate_and_set_flag(self, process_disable_on_fail)
+	var _r := ValidationFramework.validate_and_set_flag(self , process_disable_on_fail)
 	return _r
 
 

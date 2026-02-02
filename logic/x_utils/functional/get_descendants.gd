@@ -49,6 +49,12 @@ static func _get_descendants_filtered(
 
 # region: built in nodes
 
+
+static func rich_text_labels(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is RichTextLabel)
+	return r
+
+
 static func buttons(node: Node) -> Array[Button]:
 	var r := _get_descendants_filtered(node, func(n): return n is Button)
 	return TypeCast.array_of_button(r)
@@ -204,6 +210,16 @@ static func base_anim_params_containers(node: Node) -> Array[BaseAnimParamsConta
 static func anim_containers(node: Node) -> Array:
 	var r := _get_descendants_filtered(node, func(n): return n is AnimContainer)
 	return r
+
+static func dev_visualise_trail_weapon(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is DevVisualiseTrailWeapon)
+	return r
+
+static func dev_visualise_trail_weapon_one_or_null(node: Node) -> DevVisualiseTrailWeapon:
+	var r := dev_visualise_trail_weapon(node)
+	if len(r) > 0 and r[0] is DevVisualiseTrailWeapon:
+		return r[0]
+	return null
 
 
 static func base_weapons(node: Node) -> Array[BaseWeapon]:

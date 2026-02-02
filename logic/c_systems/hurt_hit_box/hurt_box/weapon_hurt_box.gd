@@ -3,14 +3,14 @@
 extends Area3DSystem
 
 ## Weapon area which DAMAGES.
-## HitBox registers collision with it and uses my_weapon for calculations
+## HitBox registers collision with it and uses _my_weapon for calculations
 class_name WeaponHurtBox
 
 
 ## not nullable
-## my_weapon is assigned in BaseWeapon with itself
+## _my_weapon is assigned in BaseWeapon with itself
 ## => on contact with other area it can provide all weapon info
-var my_weapon: BaseWeapon
+var _my_weapon: BaseWeapon
 
 var _previous_position: Vector3
 var _velocity: Vector3 = Vector3.ZERO
@@ -23,14 +23,14 @@ var _overlapping_obj_throttler: EventThrottler
 
 func __hard_dependencies() -> Array:
 	return [
-		my_weapon
+		_my_weapon
 	]
 
 
 ## used instead of _ready. Called from base weapon. 
-## So my_weapon is guaranteed to be non nullable
+## So _my_weapon is guaranteed to be non nullable
 func initialise(my_weapon_: BaseWeapon, sig_container_: BaseWeaponSignalContainer) -> void:
-	self.my_weapon = my_weapon_
+	self._my_weapon = my_weapon_
 	self.sig_container = sig_container_
 
 	collision_layer = Collision.Layers.WEAPON_AREA
@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 
 ## not nullable
 func _get_my_weapon() -> BaseWeapon:
-	return my_weapon
+	return _my_weapon
 
 
 func pp_name():
@@ -115,16 +115,16 @@ const SPARK_HIT = preload("uid://fohkachkfkuq")
 
 
 func _apply_sparks_to_my_weapon(body: Node3D):
-	if not my_weapon.spark_marker or not SPARK_HIT:
+	if not _my_weapon.spark_marker or not SPARK_HIT:
 		return
 	
-	var hit_position := my_weapon.spark_marker.global_position
+	var hit_position := _my_weapon.spark_marker.global_position
 	var hit_normal := -_velocity.normalized()
 	
 	var sparks: SparksHit = SPARK_HIT.instantiate()
 	get_tree().root.add_child(sparks)
 	sparks.set_direction(hit_normal)
-	sparks.set_from_config(my_weapon.get_spark_config())
+	sparks.set_from_config(_my_weapon.get_spark_config())
 	sparks.global_position = hit_position
 	
 

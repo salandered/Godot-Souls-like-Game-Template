@@ -1,13 +1,21 @@
 @tool
-extends Control
 class_name DynamicInfoLabel
+extends ControlSystem
 
+
+const DEF_WAIT_SEC := 4.5
 
 @export_group("Text Config")
 @export var title_text: String = "State":
 	set(value):
 		title_text = value
 		_update_title()
+		
+## NOTE: used in editor for preview only
+@export var in_editor_label_text: String = "something":
+	set(value):
+		in_editor_label_text = value
+		_update_in_editor_label_text()
 
 @export var additional_title_text: String = "":
 	set(value):
@@ -21,29 +29,29 @@ class_name DynamicInfoLabel
 		_update_font_size()
 
 
-@export var font_size: int = 30:
+@export var font_size: int = 28:
 	set(value):
 		font_size = value
 		_update_font_size()
 
 
-@export_group("Color")
+@export_group("Color Settings")
 @export var gradient_color_modulate: Color = Color.WHITE:
 	set(value):
 		gradient_color_modulate = value
 		_update_gradient_color_modulate()
 # 481317
 
-@export_group("Margins inside the panel")
-@export var margin_h: int = 15:
-	set(value):
-		margin_h = value
-		_update_margins()
-
-@export var margin_v: int = 10:
-	set(value):
-		margin_v = value
-		_update_margins()
+#@export_group("Margins inside the panel")
+#@export var margin_h: int = 15:
+	#set(value):
+		#margin_h = value
+		#_update_margins()
+#
+#@export var margin_v: int = 10:
+	#set(value):
+		#margin_v = value
+		#_update_margins()
 
 
 @export_group("Prev text animation")
@@ -52,8 +60,8 @@ class_name DynamicInfoLabel
 @export var drop_distance: float = 20.0
 @export var drop_buffer: float = 2.0
 @export var drop_duration: float = 0.3
-@export var wait_duration: float = 0.5
-@export var fade_duration: float = 0.3
+var wait_duration: float = DEF_WAIT_SEC
+@export var fade_duration: float = 0.5
 @export var ghost_target_color: Color = Color(0.6, 0.6, 0.6, 1.0) # Dim gray
 
 
@@ -62,6 +70,7 @@ class_name DynamicInfoLabel
 @onready var _title_additional_label: RichTextLabel = %TitleAdditional
 @onready var _text_label: RichTextLabel = %Text
 @onready var panel_gradient: PanelContainer = %PanelGradient
+@onready var __margin_2: MarginContainer = %__margin2
 
 
 var _active_ghosts: Array[RichTextLabel] = []
@@ -71,12 +80,34 @@ var initial_font_size: int
 func _ready() -> void:
 	initial_font_size = font_size
 	_update_title()
+	_update_in_editor_label_text()
 	_update_font_size()
 	_update_gradient_color_modulate()
-	_update_margins()
-
+	#_update_margins()
+	
+	if additional_title_text == "":
+		__margin_2.visible = false
+	else:
+		__margin_2.visible = true
+		
 	if not Engine.is_editor_hint():
 		reset_text()
+
+		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_value_changed, _on_SIG_dvc_value_changed)
+
+
+func _on_SIG_dvc_value_changed(payload: Dictionary[String, Variant]):
+	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.value_type_field)
+	if _r_type.err: return
+
+	if _r_type.value != DevVisualsConfig.ValueType.GHOST_DUR_SEC:
+		return
+
+	var _r_value := SigUtils.safe_get_int_float_payload_value(payload, SPS.value_field)
+	if _r_value.err: return
+	
+	__log_("wait_duration updated with", _r_value.value, "from", wait_duration)
+	wait_duration = _r_value.value
 
 
 func reset_text() -> void:
@@ -123,16 +154,41 @@ func _set_label_text(
 	label.text = new_text
 
 
+## calculates font size to fit text within a specific width
+func _get_shrunk_font_size(text: String, max_width: float, base_size: int) -> int:
+	var font: Font = get_theme_font("normal_font")
+	
+	# width of text at the base font size
+	var text_size: Vector2 = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, base_size)
+	
+	# scale down if text is wider than the container
+	if text_size.x > max_width:
+		var ratio: float = max_width / text_size.x
+		return int(base_size * ratio)
+	
+	return base_size
+
+
 func _adjust_font_size(label: RichTextLabel, new_text: String):
-	var _size := initial_font_size
-	if len(new_text) > 18:
-		_size = int(0.75 * _size)
-	elif len(new_text) > 14:
-		_size = int(0.85 * _size)
-	elif len(new_text) > 12:
-		_size = int(0.9 * _size)
+	# Use label.size.x or a fixed constant if your label expands due to fit_content
+	var target_width: float = label.size.x
+	
+	# Optional: reduce width slightly to account for padding/margins
+	# target_width -= 10.0 
+	
+	var new_size: int = _get_shrunk_font_size(new_text, target_width, initial_font_size)
+	
 	if label:
-		UIUtils.rr_label_set_font_size(label, _size)
+		UIUtils.rr_label_set_font_size(label, new_size)
+	# var _size := initial_font_size
+	# if len(new_text) > 18:
+	# 	_size = int(0.75 * _size)
+	# elif len(new_text) > 14:
+	# 	_size = int(0.85 * _size)
+	# elif len(new_text) > 12:
+	# 	_size = int(0.9 * _size)
+	# if label:
+	# 	UIUtils.rr_label_set_font_size(label, _size)
 
 
 func _spawn_ghost_text(
@@ -145,6 +201,8 @@ func _spawn_ghost_text(
 	ghost.text = text_content
 	add_child(ghost)
 	ghost.top_level = true # break canvas item relationship
+	ghost.size = label.size
+	ghost.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER
 	ghost.global_position = label.global_position
 
 
@@ -208,6 +266,12 @@ func _update_title() -> void:
 		_title_label.text = "[b]" + title_text + "[/b]"
 	if _title_additional_label:
 		_title_additional_label.text = "[b]" + additional_title_text + "[/b]"
+	
+
+func _update_in_editor_label_text() -> void:
+	if Engine.is_editor_hint():
+		set_label_text(in_editor_label_text)
+
 		
 func _update_gradient_color_modulate() -> void:
 	if panel_gradient:
@@ -222,6 +286,6 @@ func _update_font_size() -> void:
 		UIUtils.rr_label_set_font_size(_title_additional_label, title_font_size - 1)
 		
 
-func _update_margins() -> void:
-	if margin_inside_panel:
-		UIUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)
+#func _update_margins() -> void:
+	#if margin_inside_panel:
+		#UIUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)

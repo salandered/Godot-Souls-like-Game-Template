@@ -39,9 +39,9 @@ func _input(event: InputEvent) -> void:
 
 	
 func _handle_mouse_wheel(event: InputEvent) -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		return
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		return
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return
 
 	if event is InputEventMouseButton:
