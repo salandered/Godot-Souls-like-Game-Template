@@ -6,6 +6,9 @@ class_name BaseDevVisualise
 extends Node3DSystem
 
 
+@export var _character: BaseStaticCharacter
+@export var _char_type: DevVisualsConfig.CharacterType = DevVisualsConfig.CharacterType.UNKNOWN
+
 @export_group("Working Settings")
 @export var preview_in_editor := false
 
@@ -20,14 +23,21 @@ var _time_elapsed := 0.0
 ## INITIALISATION
 # region
 
+
+func get_character_type() -> DevVisualsConfig.CharacterType:
+	if _character:
+		return _character.char_type
+	else:
+		return _char_type
+	
+
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		if not _enabled:
-			## hard stop in game if not enabled
 			set_enabled(false)
 			return
 		## wait a little before kicking in 
-		await FrameUtils.wait_process_frames(20)
+		await FrameUtils.wait_process_frames(4)
 
 	initialise_implementation_both_editor_and_game()
 
@@ -36,12 +46,19 @@ func _ready() -> void:
 
 		if not __perform_validation(true):
 			__log_warn_soft("won't be working")
+		else:
+			# SigUtils.safe_connect_pairs([
+					# [visibility_changed, _on_visibility_changed],
+				# ])
+			if get_character_type() != DevVisualsConfig.CharacterType.UNKNOWN:
+				SigUtils.safe_connect_pairs([
+					[GlobalUIInfo.SIG_dvc_matrix_cdv_toggled, _on_dvc_SIG_matrix_cdv_toggled]
+				])
+		
+		set_enabled(false) # WARNING: temporary disable on start always
 
-		SigUtils.safe_connect(visibility_changed, _on_visibility_changed)
-
-
-func _on_visibility_changed():
-	set_enabled(visible)
+# func _on_visibility_changed():
+	# set_enabled(visible)
 
 
 func set_enabled(value: bool):
@@ -50,6 +67,7 @@ func set_enabled(value: bool):
 		reset_visuals()
 	else:
 		process_mode = Node.PROCESS_MODE_INHERIT
+	visible = value
 
 
 @abstract func reset_visuals() -> void
@@ -110,10 +128,27 @@ func _process(delta: float) -> void:
 	_time_elapsed += delta
 
 
-## HELPERS
+## SIG
+
+func _on_dvc_SIG_matrix_cdv_toggled(payload: Dictionary[String, Variant]):
+	var _r := SigUtils.safe_get_SIG_matrix_cdv_toggled_payload(payload)
+	if not _r:
+		return
+
+	if _r.char_type != get_character_type():
+		return
+	__log_("_on_dvc_SIG_matrix_cdv_toggled", _r.dv_type)
+	_on_dvc_toggled_implementation(_r)
+
+
+@abstract func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void
 
 
 ## LOGS
 
 func pp_name() -> String:
-	return "🖌️" + ObjUtils.construct_obj_pp_name(self )
+	return "🖌️" + str(_char_type) + ObjUtils.construct_obj_pp_name(self )
+
+
+func __LOG_B() -> bool:
+	return false

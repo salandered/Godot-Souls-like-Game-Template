@@ -115,11 +115,11 @@ func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_off
 # region
 
 func effective_time_spent() -> float:
-	return ActionTimeManagement.effective_time_spent(me.get_animator_manager(), self)
+	return ActionTimeManagement.effective_time_spent(me.get_animator_manager(), self )
 
 
 func effective_time_spent_unscaled() -> float:
-	return ActionTimeManagement.effective_time_spent_unscaled(me.get_animator_manager(), self)
+	return ActionTimeManagement.effective_time_spent_unscaled(me.get_animator_manager(), self )
 
 
 func effective_duration() -> float:
@@ -127,11 +127,11 @@ func effective_duration() -> float:
 
 
 func time_spent() -> float:
-	return ActionTimeManagement.time_spent(me.get_animator_manager(), self)
+	return ActionTimeManagement.time_spent(me.get_animator_manager(), self )
 
 
 func time_remaining() -> float:
-	return ActionTimeManagement.time_remaining(me.get_animator_manager(), self)
+	return ActionTimeManagement.time_remaining(me.get_animator_manager(), self )
 
 
 func direct_time_remaining() -> float:
@@ -139,23 +139,23 @@ func direct_time_remaining() -> float:
 
 
 func works_longer_than(time: float) -> bool:
-	return ActionTimeManagement.works_longer_than(time, me.get_animator_manager(), self)
+	return ActionTimeManagement.works_longer_than(time, me.get_animator_manager(), self )
 
 
 func works_less_than(time: float) -> bool:
-	return ActionTimeManagement.works_less_than(time, me.get_animator_manager(), self)
+	return ActionTimeManagement.works_less_than(time, me.get_animator_manager(), self )
 
 
 func works_between(start: float, finish: float) -> bool:
-	return ActionTimeManagement.works_between(start, finish, me.get_animator_manager(), self)
+	return ActionTimeManagement.works_between(start, finish, me.get_animator_manager(), self )
 
 
 func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
-	return ActionTimeManagement.passed_marker(marker_name, me.get_animator_manager(), anim, self, add_time)
+	return ActionTimeManagement.passed_marker(marker_name, me.get_animator_manager(), anim, self , add_time)
 
 
 func before_marker(marker_name: String) -> bool:
-	return ActionTimeManagement.before_marker(marker_name, me.get_animator_manager(), anim, self)
+	return ActionTimeManagement.before_marker(marker_name, me.get_animator_manager(), anim, self )
 
 # endregion
 
@@ -180,3 +180,7 @@ func __ELA():
 
 func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
 	print_.any_action_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_STATE)
+
+
+func __LOG_B() -> bool:
+	return false

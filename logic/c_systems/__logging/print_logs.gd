@@ -3,7 +3,7 @@ class_name print_
 
 
 ## 🚧
-## NOTE: preset method is being replaced by ExtenderLogger method (via class extenders)
+## NOTE: preset approach is being replaced by ExtenderLogger method (via class extenders)
 ## 🚧
 
 ## PRESETS
@@ -198,13 +198,13 @@ static func note(bright: bool, ...parts: Array):
 	print("\t", _msg)
 
 
-# legacy
+# legacy name
 static func prefix(prefix_: String, text: String = "", info_indents: int = 0):
-	_log.prefix(false, prefix_, text, info_indents)
+	_low_level_printer.prefix(false, prefix_, text, info_indents)
 
-# legacy
+# legacy name
 static func prefix_s(...parts: Array):
-	_log.prefix_s(false, pp.list_(parts))
+	_low_level_printer.prefix_s(false, pp.list_(parts))
 
 
 static func console(...parts: Array):

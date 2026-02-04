@@ -15,7 +15,7 @@ func is_player() -> bool:
 
 ## PLAYER UTILS
 # region
-
+# #ffbea0
 func distance_to_player() -> float:
 	return get_character().global_position.distance_to(get_player().global_position)
 

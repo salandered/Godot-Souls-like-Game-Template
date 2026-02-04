@@ -366,6 +366,15 @@
 				}
 			]
 		},
+		"\\b(PropC)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+					"fontWeight": "bold"
+				}
+			]
+		},
 		"\\b(SigUtils)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [

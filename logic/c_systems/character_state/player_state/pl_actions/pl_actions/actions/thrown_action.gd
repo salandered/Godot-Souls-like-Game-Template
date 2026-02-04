@@ -47,7 +47,7 @@ func _decide_on_pack_on_enter():
 		_reason += "hit.damage < 25"
 		r_collection = ThrowData.low_dir_col
 	
-	if PREV_ACTION in [PS.Act.dodge, PS.Act.jump_sprint, PS.Act.landing_sprint, PS.Act.midair]:
+	if PREV_ACTION in [PS.Act.dodge, PS.Act.jump_sprint, PS.Act.landing_sprint, PS.Act.midair] or ra.chance(0.2):
 		_reason += "PREV_ACTION is air action"
 		r_collection = ThrowData.cool_dir_col
 

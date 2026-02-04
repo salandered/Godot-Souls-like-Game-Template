@@ -125,7 +125,7 @@ func _set_label_y_offset() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.interact):
 		if _can_interact():
-			SIG_interacted.emit()
+			SigUtils.safe_emit_raw_no_payload(SIG_interacted)
 			
 			cooldown_sig_emit.mark_time()
 			# stops the event so it doesn't trigger other interact area, like an item inside the chest

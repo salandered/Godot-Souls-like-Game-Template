@@ -7,12 +7,19 @@ extends Node3DLogger
 @onready var profiler: Profiler = %Profiler
 @onready var first_tutorial: Control = %FirstTutorial
 @onready var free_cam_ui: FreeCamUI = %FreeCamUI
+@onready var sig_info_manager: SigInfoManager = %SigInfoManager
+@onready var error_log_panel_manager: ErrorLogPanelManager = %ErrorLogPanelManager
 
 @onready var dynamic_info_presenters: Node = %DynamicInfoPresenters
 @onready var dynamic_info_grid: FlowContainer = %DynamicInfoGrid
 
 
-const DEF_DYNAMIC_GRID_V_SEP: int = 4
+const DEF_DYNAMIC_GRID_V_SEP: int = 10
+const DEF_SIG_DEBUG: bool = false
+const DEF_ERROR_LOG: bool = false
+var __SIG_DEBUG: bool = DEF_SIG_DEBUG
+var __ERROR_LOG: bool = DEF_ERROR_LOG
+
 
 var _active_subvp: InGameSubViewport
 
@@ -49,7 +56,10 @@ func _ready() -> void:
 
 	update_profiler_mode(2)
 
-	UIUtils.flow_container_set_v_separation(dynamic_info_grid, DEF_DYNAMIC_GRID_V_SEP)
+	sig_info_manager.set_enable(DEF_SIG_DEBUG)
+	error_log_panel_manager.set_enable(DEF_ERROR_LOG)
+
+	ControlUtils.flow_container_set_v_separation(dynamic_info_grid, DEF_DYNAMIC_GRID_V_SEP)
 
 	SigUtils.safe_connect_pairs([
 		[GlobalSignal.SIG_free_cam_mode_toggled, _on_SIG_toggle_free_cam],
@@ -60,18 +70,13 @@ func _ready() -> void:
 
 
 func _on_SIG_dvc_value_changed(payload: Dictionary[String, Variant]):
-	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.value_type_field)
-	if _r_type.err: return
-
-	if _r_type.value != DevVisualsConfig.ValueType.GRID_V_SEP:
+	var parsed_payload := SigUtils.safe_get_SIG_dvc_value_changed_payload(payload)
+	if not parsed_payload:
 		return
-
-	var _r_value := SigUtils.safe_get_int_payload_value(payload, SPS.value_field)
-	if _r_value.err: return
-	var new_value := _r_value.value
-
-	UIUtils.flow_container_set_v_separation(dynamic_info_grid, new_value)
-	__log_("dynamic_info_grid updated with v_separation", new_value)
+	if parsed_payload.value_type == DevVisualsConfig.ValueType.GRID_V_SEP and (parsed_payload.value is int or parsed_payload.value is float):
+		var new_value: int = int(parsed_payload.value)
+		ControlUtils.flow_container_set_v_separation(dynamic_info_grid, new_value)
+		__log_("dynamic_info_grid updated with v_separation", new_value)
 
 
 func _on_dvc_SIG_overlay_ui_panel_toggled(payload: Dictionary[String, Variant]):
@@ -80,7 +85,7 @@ func _on_dvc_SIG_overlay_ui_panel_toggled(payload: Dictionary[String, Variant]):
 	if _r_toggle.err:
 		return
 	
-	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.global_ui_panel_type_field)
+	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_overlay_panel_type_field)
 	if _r_type.err:
 		return
 	
@@ -93,6 +98,12 @@ func _on_dvc_SIG_overlay_ui_panel_toggled(payload: Dictionary[String, Variant]):
 			update_profiler_mode(0 if toggle else 2)
 		DevVisualsConfig.OverlayPanelType.CAM_NODES:
 			_toggle_in_game_subvp_from_dvc(toggle)
+		DevVisualsConfig.OverlayPanelType.SIG_DEBUG:
+			__SIG_DEBUG = toggle
+			sig_info_manager.set_enable(toggle)
+		DevVisualsConfig.OverlayPanelType.ERROR_LOG:
+			__ERROR_LOG = toggle
+			error_log_panel_manager.set_enable(toggle)
 
 
 func _on_dvc_SIG_matrix_cdv_toggled(payload: Dictionary[String, Variant]):

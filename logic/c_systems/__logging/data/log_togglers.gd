@@ -1,7 +1,7 @@
 extends RefCounted
 class_name LogToggler
 
-## indents are also stored here
+## some indents are also stored here
 const DEFAULT_INDENT := 0
 const DEFAULT_STATIC_INDENT := 8
 const DEFAULT_REF_C_CONT_INDENT := 4

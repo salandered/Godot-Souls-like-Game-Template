@@ -271,3 +271,7 @@ func get_player() -> Princess:
 ## __LOGS
 
 var __QUEUED_B: bool = false
+
+
+func __LOG_B() -> bool:
+	return false

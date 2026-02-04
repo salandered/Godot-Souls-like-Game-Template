@@ -39,10 +39,4 @@ const SFX_ASP_BASE_VOL_DB := -1.0
 const SFX_ASP_BASE_BUS_ID := BusID.GAME_SFX
 
 
-## Properties, example usage for tweens
 
-class Prop:
-	const ASP_VOLUME_DB = "volume_db"
-	const MODULATE_A = "modulate:a"
-	const MODULATE = "modulate"
-	const GLOBAL_POSITION_Y = "global_position:y"

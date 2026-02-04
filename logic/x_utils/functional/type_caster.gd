@@ -6,12 +6,17 @@ class_name TypeCast
 ## INTERNAL
 # region
 
-static func __print_err_msg(item: Variant, array: Array, pp_type_name: String) -> Array:
+static func __print_err_msg(item: Variant, array: Array, pp_type_name: String):
 	__log_warn(pp.s("Array contains non", pp.in_q(pp_type_name), " value:", pp.in_q(item)),
 				"TypeCast",
 				"return empty array",
 				"Input array", pp.array_(array))
-	return array
+
+static func __print_err_msg_dict(item: Variant, dict_: Dictionary, pp_type_name: String):
+	__log_warn(pp.s("Dictionary contains non", pp.in_q(pp_type_name), " value", pp.in_q(item)), "as a key.",
+				"TypeCast",
+				"return empty dict",
+				"Input dict", pp.dict_(dict_))
 
 
 ## based on typeof. Needs TYPE enum as type_enum
@@ -23,15 +28,24 @@ static func _safe_validate_primitive(array: Array, type_enum: int, type_log_name
 	return array
 
 
-## based on is_instance_of. It also handles inheritance correctly (e.g. subclasses of Area3D)
-static func _safe_validate_class(array: Array, type_class: Variant, type_log_name: String, ignore_null: bool = false) -> Array:
+## based on is_instance_of. also handles inheritance correctly (e.g. subclasses of Area3D)
+static func _safe_validate_class(array: Array, type_class: Variant, __type_log_name: String, ignore_null: bool = false) -> Array:
 	for item in array:
 		if item == null and ignore_null:
 			continue
 		if not is_instance_of(item, type_class):
-			__print_err_msg(item, array, type_log_name)
+			__print_err_msg(item, array, __type_log_name)
 			return []
 	return array
+
+## Validates that all KEYS in the dictionary match the type_enum
+static func _safe_validate_dict_keys(dict: Dictionary, type_enum: int, __type_log_name: String) -> Dictionary:
+	for key in dict:
+		if typeof(key) != type_enum:
+			# Assumes __print_err_msg can handle dictionary context
+			__print_err_msg_dict(key, dict, __type_log_name)
+			return {}
+	return dict
 
 #endregion
 
@@ -217,6 +231,20 @@ static func array_of_pause_menu_controller(array: Array) -> Array[M_PauseMenuCon
 	var list_casted: Array[M_PauseMenuController] = []
 	list_casted.assign(_safe_validate_class(array, M_PauseMenuController, "M_PauseMenuController"))
 	return list_casted
+
+
+## DICT
+
+static func dict_string_variant(dict: Dictionary) -> Dictionary[String, Variant]:
+	var casted: Dictionary[String, Variant] = {}
+	var validated := _safe_validate_dict_keys(dict, TYPE_STRING, "String")
+	
+	# validation returned empty but original wasn't.
+	if validated.is_empty() and not dict.is_empty():
+		return casted
+		
+	casted.assign(validated)
+	return casted
 
 
 # region: __LOGS

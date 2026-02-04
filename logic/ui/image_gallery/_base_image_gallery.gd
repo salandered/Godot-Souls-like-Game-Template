@@ -101,7 +101,7 @@ func _ready():
 	set_legend_container_visible(false)
 	set_legend_text(get_legend_text())
 	image_display.visible = false
-	UIUtils.margin_container_set_margins(global_container, DEFAULT_GLOBAL_MARGIN, DEFAULT_GLOBAL_MARGIN)
+	ControlUtils.margin_container_set_margins(global_container, DEFAULT_GLOBAL_MARGIN, DEFAULT_GLOBAL_MARGIN)
 
 	curr_item_idx = 0
 	populated_gallery_items.clear()
@@ -180,7 +180,7 @@ func update_display():
 	UIUtils.kill_tween_if_exists(transition_tween)
 	
 	transition_tween = UIUtils.animate_content_change(
-		self,
+		self ,
 		targets_to_animate,
 		func(): _switch_ui_to_gallery_item(item),
 		0.15
@@ -265,7 +265,7 @@ func _apply_ui_visibility():
 	var target_margin := DEFAULT_GLOBAL_MARGIN if _ui_layer_visible else 0
 	
 	# (assuming L and R are synced)
-	var current_margin := global_container.get_theme_constant("margin_left")
+	var current_margin := global_container.get_theme_constant(PropC.MARGIN_LEFT)
 	
 	UIUtils.kill_tween_if_exists(ui_tween)
 	ui_tween = create_tween()
@@ -273,14 +273,14 @@ func _apply_ui_visibility():
 	
 	ui_tween.tween_method(_update_global_margins, current_margin, target_margin, 0.2)
 	# if _ui_layer_visible:
-	# 	UIUtils.margin_container_set_margins(global_container, DEFAULT_GLOBAL_MARGIN, DEFAULT_GLOBAL_MARGIN)
+	# 	ControlUtils.margin_container_set_margins(global_container, DEFAULT_GLOBAL_MARGIN, DEFAULT_GLOBAL_MARGIN)
 	# else:
-	# 	UIUtils.margin_container_set_margins(global_container, 0, 0)
+	# 	ControlUtils.margin_container_set_margins(global_container, 0, 0)
 
 
 func _update_global_margins(value: int) -> void:
 	# This function will be called every frame by the tween
-	UIUtils.margin_container_set_margins(global_container, value, value)
+	ControlUtils.margin_container_set_margins(global_container, value, value)
 
 ## Input
 

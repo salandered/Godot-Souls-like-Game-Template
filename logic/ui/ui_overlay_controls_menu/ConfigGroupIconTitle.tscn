@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd2dti02yphn1"]
+
+[ext_resource type="Script" uid="uid://cqtyggy4gcrd0" path="res://logic/ui/ui_overlay_controls_menu/config_group_icon_title.gd" id="1_n68eu"]
+[ext_resource type="Texture2D" uid="uid://bovchw35k1ski" path="res://-assets-/x_icons/white/interface/icon_circle.png" id="2_lbgiq"]
+[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="2_n68eu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhxsi"]
+bg_color = Color(0.25626737, 0.31555387, 0.37101543, 0.7411765)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.159377, 0.18183963, 0.26918554, 0.49019608)
+border_blend = true
+
+[node name="ConfigGroupIconTitle" type="PanelContainer"]
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_bhxsi")
+script = ExtResource("1_n68eu")
+icon_texture = ExtResource("2_lbgiq")
+
+[node name="__margin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 2
+
+[node name="__v" type="VBoxContainer" parent="__margin"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="__h" type="HBoxContainer" parent="__margin/__v"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="__margin/__v/__h"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_lbgiq")
+stretch_mode = 2
+
+[node name="CGTitle" type="Label" parent="__margin/__v/__h"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_n68eu")
+theme_override_font_sizes/font_size = 20
+text = "Some title"
+vertical_alignment = 1

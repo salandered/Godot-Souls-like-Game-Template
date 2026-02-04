@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://l735d28gbqr1"]
+
+[ext_resource type="PackedScene" uid="uid://cc5ln800iorgc" path="res://logic/ui/ui_utils/prefab/dynamic_info/DoubleDynamicInfoLabel.tscn" id="1_q1wp5"]
+
+[node name="ReactionDoubleDynamicInfoLabel" instance=ExtResource("1_q1wp5")]
+in_editor_second_label_text = "Yes"
+title_text = "Reaction to Attack"
+in_editor_label_text = "react L head"
+additional_title_text = "& Is interrupted"
+title_font_size = 23
+font_size = 26
+gradient_color_modulate = Color(0.708, 0.708, 4.482, 1)
+
+[node name="PanelGradient" parent="." index="1"]
+self_modulate = Color(0.708, 0.708, 4.482, 1)
+
+[node name="Title" parent="PanelGradient/MarginInsidePanel/VBoxContainer" index="0"]
+theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/bold_font_size = 23
+theme_override_font_sizes/italics_font_size = 23
+text = "[b]Reaction to Attack[/b]"
+
+[node name="TitleAdditional" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0"]
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+text = "[b]& Is interrupted[/b]"
+
+[node name="__margin" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(100, 0)
+
+[node name="Text" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0"]
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
+text = "react L head"
+
+[node name="__margin_text_2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
+size_flags_horizontal = 6
+
+[node name="Text2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
+size_flags_horizontal = 1
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
+text = "Yes"

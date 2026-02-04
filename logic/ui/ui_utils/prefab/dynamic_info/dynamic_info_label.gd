@@ -97,7 +97,7 @@ func _ready() -> void:
 
 
 func _on_SIG_dvc_value_changed(payload: Dictionary[String, Variant]):
-	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.value_type_field)
+	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_value_type_field)
 	if _r_type.err: return
 
 	if _r_type.value != DevVisualsConfig.ValueType.GHOST_DUR_SEC:
@@ -123,7 +123,8 @@ func _set_label_text(
 	ghosts_list: Array[RichTextLabel],
 	label: RichTextLabel,
 	new_text: String,
-	dynamic_label_config: DynamicLabelConfig
+	dynamic_label_config: DynamicLabelConfig,
+	ignore_font_size_adjustment: bool = false
 ) -> void:
 	if not label:
 		return
@@ -142,7 +143,8 @@ func _set_label_text(
 	if dynamic_label_config.from_snake_case:
 		new_text = StrUtils.snake_to_sentence(new_text)
 
-	_adjust_font_size(label, new_text)
+	if not ignore_font_size_adjustment:
+		_adjust_font_size(label, new_text)
 
 	if dynamic_label_config.in_bold:
 		new_text = "[b]" + new_text + "[/b]"
@@ -179,7 +181,7 @@ func _adjust_font_size(label: RichTextLabel, new_text: String):
 	var new_size: int = _get_shrunk_font_size(new_text, target_width, initial_font_size)
 	
 	if label:
-		UIUtils.rr_label_set_font_size(label, new_size)
+		ControlUtils.rr_label_set_font_size(label, new_size)
 	# var _size := initial_font_size
 	# if len(new_text) > 18:
 	# 	_size = int(0.75 * _size)
@@ -188,7 +190,7 @@ func _adjust_font_size(label: RichTextLabel, new_text: String):
 	# elif len(new_text) > 12:
 	# 	_size = int(0.9 * _size)
 	# if label:
-	# 	UIUtils.rr_label_set_font_size(label, _size)
+	# 	ControlUtils.rr_label_set_font_size(label, _size)
 
 
 func _spawn_ghost_text(
@@ -207,7 +209,7 @@ func _spawn_ghost_text(
 
 
 	if dynamic_label_config.adjust_prev_font_size:
-		UIUtils.rr_label_mult_font_size(ghost, 0.9)
+		ControlUtils.rr_label_mult_font_size(ghost, 0.9)
 
 	var shift_amount: float = drop_distance
 	if auto_drop_height:
@@ -226,7 +228,7 @@ func _spawn_ghost_text(
 		# NOTE: overrides any existing Y-movement on the ghost
 		push_tween.tween_property(
 			active_ghost,
-			Constants.Prop.GLOBAL_POSITION_Y,
+			PropC.GLOBAL_POSITION_Y,
 			current_y + shift_amount, drop_duration) \
 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
@@ -238,20 +240,20 @@ func _spawn_ghost_text(
 	tween.set_parallel(true)
 	tween.tween_property(
 		ghost,
-		Constants.Prop.GLOBAL_POSITION_Y,
+		PropC.GLOBAL_POSITION_Y,
 		ghost.global_position.y + shift_amount,
 		drop_duration) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(
 		ghost,
-		Constants.Prop.MODULATE,
+		PropC.MODULATE,
 		ghost_target_color,
 	drop_duration)
 	
 	tween.set_parallel(false)
 	tween.tween_interval(wait_duration)
 	
-	tween.tween_property(ghost, Constants.Prop.MODULATE_A, 0.0, fade_duration)
+	tween.tween_property(ghost, PropC.MODULATE_A, 0.0, fade_duration)
 	
 	# Cleanup
 	tween.chain().tween_callback(func():
@@ -279,13 +281,13 @@ func _update_gradient_color_modulate() -> void:
 
 func _update_font_size() -> void:
 	if _text_label:
-		UIUtils.rr_label_set_font_size(_text_label, font_size)
+		ControlUtils.rr_label_set_font_size(_text_label, font_size)
 	if _title_label:
-		UIUtils.rr_label_set_font_size(_title_label, title_font_size)
+		ControlUtils.rr_label_set_font_size(_title_label, title_font_size)
 	if _title_additional_label:
-		UIUtils.rr_label_set_font_size(_title_additional_label, title_font_size - 1)
+		ControlUtils.rr_label_set_font_size(_title_additional_label, title_font_size - 1)
 		
 
 #func _update_margins() -> void:
 	#if margin_inside_panel:
-		#UIUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)
+		#ControlUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)

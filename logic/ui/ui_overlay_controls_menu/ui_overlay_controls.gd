@@ -1,5 +1,5 @@
 class_name UIOverlayControls
-extends PanelContainer
+extends PanelContainerSystem
 
 
 ## check buttons
@@ -7,6 +7,9 @@ extends PanelContainer
 @onready var tutorial_toggler: CheckButton = %TutorialToggler
 @onready var profiler_toggler: CheckButton = %ProfilerToggler
 @onready var camera_nodes_toggler: CheckButton = %CameraNodesToggler
+@onready var dynamic_signal_panel_toggler: CheckButton = %DynamicSignalInfo
+@onready var error_logs_panel_toggler: CheckButton = %ErrorLogsPanelToggler
+
 
 @onready var check_button_1: CheckButton = %CheckButton1
 @onready var check_button_2: CheckButton = %CheckButton2
@@ -20,12 +23,20 @@ extends PanelContainer
 @onready var check_button_10: CheckButton = %CheckButton10
 @onready var check_button_11: CheckButton = %CheckButton11
 @onready var check_button_12: CheckButton = %CheckButton12
+@onready var check_button_13: CheckButton = %CheckButton13
+@onready var check_button_14: CheckButton = %CheckButton14
+@onready var check_button_15: CheckButton = %CheckButton15
+
+## 
+@onready var all_on: UIOverlayControlCheckButton = %AllOn
+@onready var all_off: UIOverlayControlCheckButton = %AllOff
 
 ## spin buttons
 @onready var spin_ghost_sec: UIOverlaySpinBox = %SpinGhostSec
 @onready var spin_grid_v_separation: UIOverlaySpinBox = %SpinGridVSeparation
 
 ##
+@onready var sig_filter: UIOverlayLineEdit = %SigFilter
 
 
 var ui_check_button_array: Array[CheckButton]
@@ -33,15 +44,22 @@ var ui_check_button_array: Array[CheckButton]
 var button_name_to_overlay_panel_type: Dictionary[String, DevVisualsConfig.OverlayPanelType] = {}
 
 var button_name_to_matrix_cdv_type: Dictionary[String, Array] = {}
+var preset_dict: Dictionary[String, Array] = {}
 
-var ui_spin_boxes_array: Array[SpinBox]
+var ui_spin_boxes_array: Array[UIOverlaySpinBox]
+
+var ui_line_edit_array: Array[UIOverlayLineEdit]
+
+
+var preset_buttons_names: Array[String]
 
 
 func _ready() -> void:
-	## every check button can emit this signal 
+	## every check button can emit this signal  
+	## TODO: merge this with SIG_ui_overlay_control_value_changed
 	SigUtils.safe_connect(GlobalSignal.SIG_ui_overlay_check_button_toggled, _on_SIG_ui_overlay_check_button_toggled)
-	## every spin box can emit this
-	SigUtils.safe_connect(GlobalSignal.SIG_ui_overlay_spin_box_value_changed, _on_SIG_ui_overlay_spin_box_value_changed)
+	## every spin box or line edit can emit this
+	SigUtils.safe_connect(GlobalSignal.SIG_ui_overlay_control_value_changed, _on_SIG_ui_overlay_control_value_changed)
 
 	## checkboxes
 	_init_check_buttons_dicts()
@@ -52,6 +70,10 @@ func _ready() -> void:
 	_init_spin_boxes_array()
 	_set_spin_boxes_from_dvc()
 
+	## line edits
+	_init_line_edit_array()
+	_set_line_edit_from_dvc()
+
 
 func _init_spin_boxes_array() -> void:
 	# can be automated via get descendants
@@ -61,14 +83,24 @@ func _init_spin_boxes_array() -> void:
 ]
 
 
+func _init_line_edit_array() -> void:
+	# can be automated via get descendants
+	ui_line_edit_array = [
+		sig_filter,
+]
+
+
 func _init_check_buttons_dicts() -> void:
+	## TODO: panel type should be property like with UIOverlaySpinBox
 	button_name_to_overlay_panel_type = {
 		tutorial_toggler.name: DevVisualsConfig.OverlayPanelType.TUT,
 		profiler_toggler.name: DevVisualsConfig.OverlayPanelType.PROFILER,
 		camera_nodes_toggler.name: DevVisualsConfig.OverlayPanelType.CAM_NODES,
+		dynamic_signal_panel_toggler.name: DevVisualsConfig.OverlayPanelType.SIG_DEBUG,
+		error_logs_panel_toggler.name: DevVisualsConfig.OverlayPanelType.ERROR_LOG,
 	}
 
-	## can be automated using 
+	## should be automated using 
 	##    - button names (e g button name has index ij)
 	##    - or adding special type for button and making export fields with types (see UIOverlaySpinBox)
 	button_name_to_matrix_cdv_type = {
@@ -84,15 +116,20 @@ func _init_check_buttons_dicts() -> void:
 		check_button_10.name: [DevVisualsConfig.CharacterType.PLAYER, DevVisualsConfig.DevVisualsType.HITBOX],
 		check_button_11.name: [DevVisualsConfig.CharacterType.HSM_ENEMY, DevVisualsConfig.DevVisualsType.HITBOX],
 		check_button_12.name: [DevVisualsConfig.CharacterType.SIMPLE_ENEMY, DevVisualsConfig.DevVisualsType.HITBOX],
+		check_button_13.name: [DevVisualsConfig.CharacterType.PLAYER, DevVisualsConfig.DevVisualsType.WEAPON_HITBOX],
+		check_button_14.name: [DevVisualsConfig.CharacterType.HSM_ENEMY, DevVisualsConfig.DevVisualsType.WEAPON_HITBOX],
+		check_button_15.name: [DevVisualsConfig.CharacterType.SIMPLE_ENEMY, DevVisualsConfig.DevVisualsType.WEAPON_HITBOX],
 	}
 
 
 func _init_check_buttons_array() -> void:
-	# can be automated via get descendants
+	# should be automated via get descendants
 	ui_check_button_array = [
 		tutorial_toggler,
 		profiler_toggler,
 		camera_nodes_toggler,
+		dynamic_signal_panel_toggler,
+		error_logs_panel_toggler,
 		check_button_1,
 		check_button_2,
 		check_button_3,
@@ -105,7 +142,15 @@ func _init_check_buttons_array() -> void:
 		check_button_10,
 		check_button_11,
 		check_button_12,
-]
+		check_button_13,
+		check_button_14,
+		check_button_15,
+	]
+
+	preset_buttons_names = [
+		str(all_on.name),
+		str(all_off.name)
+	]
 
 
 func _set_check_buttons_from_dvc():
@@ -133,7 +178,17 @@ func _set_spin_boxes_from_dvc():
 		if not spin_box:
 			error_.warn("null spin_box in ui_spin_boxes_array", "_set_spin_boxes_from_dvc", "", WL.WARN)
 			continue
-		spin_box.set_value_no_signal(dvc.get_value(spin_box.overlay_value_type))
+		spin_box.set_value_no_signal(dvc.fget_value(spin_box.overlay_value_type))
+		
+
+func _set_line_edit_from_dvc():
+	var dvc := GlobalUIInfo.get_dev_visuals_config()
+	for item: UIOverlayLineEdit in ui_line_edit_array:
+		if not item:
+			error_.warn("null item in ui_line_edit_array", "_set_line_edit_from_dvc", "", WL.WARN)
+			continue
+		## NOTE: "changing text using this property won't emit the text_changed signal"
+		item.text = dvc.sget_value(item.overlay_value_type)
 		
 
 func _update_dvc_from_check_button(button_name: String, toggle: bool):
@@ -152,7 +207,7 @@ func _update_dvc_from_check_button(button_name: String, toggle: bool):
 	error_.warn("button name was't found in any dict", "_update_dvc_from_check_button", "", WL.WARN, button_name)
 
 
-func _update_dvc_from_spin_box(type_: DevVisualsConfig.ValueType, value: float):
+func _update_dvc_from_control(type_: DevVisualsConfig.ValueType, value: Variant):
 	var dev_visuals_config := GlobalUIInfo.get_dev_visuals_config()
 	dev_visuals_config.set_value(type_, value)
 	
@@ -163,18 +218,23 @@ func _on_SIG_ui_overlay_check_button_toggled(payload: Dictionary[String, Variant
 
 	var _r_button_name := SigUtils.safe_get_string_payload_value(payload, SPS.button_name_field)
 	if _r_button_name.err: return
+	__log_("_r_button_name", _r_button_name.value)
+	if _r_button_name.value in preset_buttons_names:
+		__log_("preset button toggled", "_r_button_name", _r_button_name.value)
+		pass
+	else:
+		_update_dvc_from_check_button(_r_button_name.value, _r_toggle.value)
 
-	_update_dvc_from_check_button(_r_button_name.value, _r_toggle.value)
 
-
-func _on_SIG_ui_overlay_spin_box_value_changed(payload: Dictionary[String, Variant]):
-	var _r_value := SigUtils.safe_get_int_float_payload_value(payload, SPS.value_field)
+func _on_SIG_ui_overlay_control_value_changed(payload: Dictionary[String, Variant]):
+	var _r_value := SigUtils.safe_get_variant_payload_value(payload, SPS.value_field, false)
 	if _r_value.err: return
 
-	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.type_field)
+	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_value_type_field)
 	if _r_type.err: return
 
-	_update_dvc_from_spin_box(_r_type.value, _r_value.value)
+
+	_update_dvc_from_control(_r_type.value, _r_value.value)
 
 
 ## HELPERS

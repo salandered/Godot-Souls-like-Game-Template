@@ -182,3 +182,7 @@ func _update_segment_opacity() -> void:
 				var col := mat.albedo_color
 				col.a = 1.0 - fade_progress
 				mat.albedo_color = col
+
+
+func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void:
+	pass

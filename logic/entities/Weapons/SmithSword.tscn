@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://jtkogl4lhvf3"]
+[gd_scene load_steps=12 format=4 uid="uid://jtkogl4lhvf3"]
 
 [ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/c_systems/weapon/smith_sword.gd" id="1_q502g"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_lfwdn"]
+[ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/Weapons/DVWeaponHurtBox.tscn" id="3_f2jwg"]
 [ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_utils/dev_3d_visuals/visualise_trail_parent/DevVisualiseTrailWeapon.tscn" id="3_hddrn"]
 [ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="3_kydaq"]
 [ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/unsorted/weapon_sfx/WeaponSfx.tscn" id="4_oli0r"]
@@ -56,10 +57,15 @@ transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0, 0.26156545, 0)
 shape = SubResource("CapsuleShape3D_6hf6c")
 debug_color = Color(0.8352941, 0.0627451, 0.28235295, 0.32941177)
 
+[node name="DVWeaponHurtBox" parent="WeaponHurtBox/HurtBoxCol" node_paths=PackedStringArray("weapon") instance=ExtResource("3_f2jwg")]
+weapon = NodePath("../../..")
+_char_type = 1
+
 [node name="dv" type="Marker3D" parent="WeaponHurtBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14368467, 0)
 
 [node name="DevVisualiseTrailWeapon" parent="WeaponHurtBox/dv" instance=ExtResource("3_hddrn")]
+_char_type = 1
 
 [node name="Visuals" type="Node3D" parent="."]
 

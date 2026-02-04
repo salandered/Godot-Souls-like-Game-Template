@@ -86,14 +86,14 @@ func _start_loop_sequence() -> void:
 	_loop_tween = create_tween()
 	
 	# fade in
-	_loop_tween.tween_property(_asp, Constants.Prop.ASP_VOLUME_DB, volume_db, effective_fade_in)
+	_loop_tween.tween_property(_asp, PropC.ASP_VOLUME_DB, volume_db, effective_fade_in)
 	
 	# middle
 	if sustain_time > 0:
 		_loop_tween.tween_interval(sustain_time)
 		
 	# fade out
-	_loop_tween.tween_property(_asp, Constants.Prop.ASP_VOLUME_DB, -80.0, effective_fade_out)
+	_loop_tween.tween_property(_asp, PropC.ASP_VOLUME_DB, -80.0, effective_fade_out)
 	
 	# restart Loop
 	_loop_tween.tween_callback(_start_loop_sequence)

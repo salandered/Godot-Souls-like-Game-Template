@@ -110,7 +110,7 @@ func _play_fade_in() -> void:
 	fade_overlay.modulate.a = 1.0
 	
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, Constants.Prop.MODULATE_A, 0.0, 1.5) \
+	tween.tween_property(fade_overlay, PropC.MODULATE_A, 0.0, 1.5) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(fade_overlay.hide)
@@ -170,7 +170,7 @@ func load_game_scene() -> void:
 	M_GameState.start_game()
 	if signal_game_start:
 		M_SceneLoader.load_scene(game_scene_path, true)
-		SIG_game_started.emit()
+		SigUtils.safe_emit_raw_no_payload(SIG_game_started)
 	else:
 		M_SceneLoader.load_scene(game_scene_path)
 
@@ -198,7 +198,7 @@ func _update_cursor() -> void:
 
 func exit_game() -> void:
 	if signal_game_exit:
-		game_exited.emit()
+		SigUtils.safe_emit_raw_no_payload(game_exited)
 	else:
 		get_tree().quit()
 
@@ -223,6 +223,7 @@ func _open_sub_menu(menu: Control) -> void:
 	sub_menu.show()
 	_hide_menu()
 	sub_menu_opened.emit()
+	
 	hide_label_container.hide()
 
 func _close_sub_menu() -> void:

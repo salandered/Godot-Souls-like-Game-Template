@@ -221,6 +221,12 @@ static func dev_visualise_trail_weapon_one_or_null(node: Node) -> DevVisualiseTr
 		return r[0]
 	return null
 
+static func dev_visualise_char_hit_boxes_one_or_null(node: Node) -> DevVisualiseCharHitBoxes:
+	var r := _get_descendants_filtered(node, func(n): return n is DevVisualiseCharHitBoxes)
+	if len(r) > 0 and r[0] is DevVisualiseCharHitBoxes:
+		return r[0]
+	return null
+
 
 static func base_weapons(node: Node) -> Array[BaseWeapon]:
 	var r := _get_descendants_filtered(node, func(n): return n is BaseWeapon)

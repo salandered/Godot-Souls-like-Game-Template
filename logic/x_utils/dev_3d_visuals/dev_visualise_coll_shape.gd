@@ -25,23 +25,13 @@ var _shared_material: Material
 
 const WIRE_FRAME_MAT = preload("uid://c0ppm6u2ki7fp")
 
+
 func initialise_implementation_in_game() -> void:
+	# __log_("initialise_implementation_in_game", "START")
 	if use_default_wireframe_mat and WIRE_FRAME_MAT is ShaderMaterial:
-		_shared_material = WIRE_FRAME_MAT.duplicate()
-		_shared_material.set_shader_parameter("albedo", shader_color)
-		_shared_material.set_shader_parameter("transparency", shader_transparency)
-		_shared_material.set_shader_parameter("line_transparency", shader_line_transparency)
-		_shared_material.set_shader_parameter("use_perspective", shader_use_perspective)
-		_shared_material.set_shader_parameter("wire_width", shader_wire_width)
-		_shared_material.set_shader_parameter("grid_density", shader_grid_density)
-		_shared_material.set_shader_parameter("use_barycentric", use_barycentric)
-		__log_("initted shader with params", use_barycentric, shader_line_transparency)
+		_shared_material_as_default_mat()
 	else:
-		_shared_material = StandardMaterial3D.new()
-		_shared_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		_shared_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		_shared_material.cull_mode = BaseMaterial3D.CULL_DISABLED
-		_shared_material.albedo_color = shader_color
+		_shared_material_as_standard()
 
 		
 	_initialise_visuals_for_shapes()
@@ -49,6 +39,8 @@ func initialise_implementation_in_game() -> void:
 	if _generated_nodes.is_empty():
 		__log_warn_soft("initialised, but no shapes to manage. Shutting down")
 		set_enabled(false)
+	# else:
+		# __log_("initialise_implementation_in_game", "END")
 
 
 @abstract func get_shapes() -> Array[CollisionShape3D]
@@ -91,11 +83,33 @@ func reset_visuals() -> void:
 
 
 func set_enabled(value: bool) -> void:
+	__log_("set_enabled", value)
 	super.set_enabled(value)
 	_set_nodes_visibility(value)
 
 
-func _set_nodes_visibility(visible_state: bool) -> void:
+func _set_nodes_visibility(value: bool) -> void:
+	__log_("_set_nodes_visibility", value)
 	for node in _generated_nodes:
 		if is_instance_valid(node):
-			node.visible = visible_state
+			node.visible = value
+
+
+func _shared_material_as_default_mat():
+	_shared_material = WIRE_FRAME_MAT.duplicate()
+	_shared_material.set_shader_parameter("albedo", shader_color)
+	_shared_material.set_shader_parameter("transparency", shader_transparency)
+	_shared_material.set_shader_parameter("line_transparency", shader_line_transparency)
+	_shared_material.set_shader_parameter("use_perspective", shader_use_perspective)
+	_shared_material.set_shader_parameter("wire_width", shader_wire_width)
+	_shared_material.set_shader_parameter("grid_density", shader_grid_density)
+	_shared_material.set_shader_parameter("use_barycentric", use_barycentric)
+	__log_("initted shader with params", use_barycentric, shader_line_transparency)
+
+	
+func _shared_material_as_standard():
+	_shared_material = StandardMaterial3D.new()
+	_shared_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_shared_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_shared_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_shared_material.albedo_color = shader_color

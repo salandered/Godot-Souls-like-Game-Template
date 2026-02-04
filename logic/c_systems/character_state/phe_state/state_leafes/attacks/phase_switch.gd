@@ -37,6 +37,7 @@ func update(delta: float):
 	
 	if not _pushed_rigid_bodies and passed_marker(MarkerName.PUSH_ITEMS_AROUND):
 		PushRigidBodies.push_nearby_rigid_bodies(me, 9, 140)
+		## todo: switch to SigUtils
 		me.SIG_land_wave.emit(me.global_position, AirWave2.AnimID.big_explode)
 		_pushed_rigid_bodies = true
 	

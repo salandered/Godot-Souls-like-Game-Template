@@ -68,8 +68,8 @@ func _ready() -> void:
 
 		## WARNING: currently use only visible objects
 		## E.g.: If game logic would make volume visible later, this would bypass the setting
-		fog_volumes_in_scene = get_descendants.fog_volumes(self, true)
-		direct_lights_in_scene = get_descendants.directional_lights_3d(self, true)
+		fog_volumes_in_scene = get_descendants.fog_volumes(self , true)
+		direct_lights_in_scene = get_descendants.directional_lights_3d(self , true)
 
 		update_video_settings()
 
@@ -94,9 +94,9 @@ func _ready() -> void:
 
 
 func _setup_vibe_asp():
-	enemies = get_descendants.enemy_characters(self)
+	enemies = get_descendants.enemy_characters(self )
 	__log_("found", len(enemies), "enemies on level")
-	var player := get_descendants.one_princess(self)
+	var player := get_descendants.one_princess(self )
 	for e in enemies:
 		if player:
 			e.player = player
@@ -123,14 +123,14 @@ func _setup_bg_music() -> void:
 
 
 func _validate_pause_menu_controller_on_init():
-	var nodes := get_descendants.pause_menu_controller(self)
+	var nodes := get_descendants.pause_menu_controller(self )
 	error_.empty_list(nodes, "no pause_menu_controller found in the level scene")
 	if len(nodes) > 1:
 		error_.warn("several pause_menu_controller found in the level scene. It's weird", "", "")
 
 
 func _setup_world_env():
-	var nodes := get_descendants.world_environments(self)
+	var nodes := get_descendants.world_environments(self )
 	if error_.empty_list(nodes, "no world_environment found in the level scene"):
 		_world_env = null
 		return

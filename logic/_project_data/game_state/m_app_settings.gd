@@ -263,7 +263,7 @@ static func set_video_from_config(window: Window) -> void:
 
 static func set_brightness(value: float, window: Window) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, BRIGHTNESS, value)
-	GlobalSignal.SIG_update_video_settings_for_level.emit()
+	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
 
 
 static func get_brightness() -> float:
@@ -282,7 +282,7 @@ static func _set_brightness_from_config(window: Window) -> void:
 
 static func set_volumetric_fog(value: bool) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, VOLUMETRIC_FOG, value)
-	GlobalSignal.SIG_update_video_settings_for_level.emit()
+	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
 
 
 static func get_volumetric_fog() -> bool:
@@ -296,7 +296,7 @@ static func _set_volumetric_fog_from_config() -> void:
 
 static func set_shadow_mode(value: int) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, SHADOW_MODE, value)
-	GlobalSignal.SIG_update_video_settings_for_level.emit()
+	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
 
 
 static func get_shadow_mode() -> int:
@@ -316,7 +316,8 @@ const DEF_Y_SENSE := 1.0
 static func set_x_sense(value: float) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, X_MOUSE_SENSE, value)
 	# prints("set_x_sense", value)
-	GlobalSignal.SIG_update_mouse_settings_for_camera.emit()
+	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
+
 
 static func get_x_sense() -> float:
 	return M_PlayerConfig.get_config(INPUT_SECTION, X_MOUSE_SENSE, DEF_X_SENSE)
@@ -331,7 +332,7 @@ static func _set_x_sense_from_config() -> void:
 static func set_y_sense(value: float) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, Y_MOUSE_SENSE, value)
 	# prints("set_y_sense", value)
-	GlobalSignal.SIG_update_mouse_settings_for_camera.emit()
+	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
 
 
 static func get_y_sense() -> float:

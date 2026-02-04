@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://byjv3t8r0rvg2"]
 
-[ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-adopting/vector_ui_adv/image (28)_or.png" id="1_5f4jo"]
-[ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://-adopting/vector_ui_adv/image (28).png" id="2_qj8tp"]
+[ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-assets-/ui_assets/icons/green_checkbox/image (28)_or.png" id="1_5f4jo"]
+[ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://-assets-/ui_assets/icons/green_checkbox/image (28).png" id="2_qj8tp"]
 [ext_resource type="Texture2D" uid="uid://d0o265dhve8kq" path="res://-assets-/x_icons/white/icon_face.png" id="3_l75ii"]
 [ext_resource type="Script" uid="uid://bwdmlbies7461" path="res://logic/ui/ui_overlay_controls_menu/button/ui_overlay_control_check_button.gd" id="4_qj8tp"]
 [ext_resource type="PackedScene" uid="uid://u0yafii5i6uy" path="res://logic/ui/ui_overlay_controls_menu/button/CheckButtonSignalWrapper.tscn" id="4_qkhan"]
@@ -70,7 +70,7 @@ content_margin_left = 10.0
 content_margin_top = 6.0
 content_margin_right = 10.0
 content_margin_bottom = 6.0
-bg_color = Color(0.85979897, 0.596767, 0.435554, 1)
+bg_color = Color(0.7443918, 0.51956654, 0.3819869, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3

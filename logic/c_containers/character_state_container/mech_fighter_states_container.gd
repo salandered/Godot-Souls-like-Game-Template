@@ -37,7 +37,7 @@ func _initialise_states():
 
 
 func _accept_states():
-	for node: BaseMechFighterState in get_descendants.base_m_f_states(self):
+	for node: BaseMechFighterState in get_descendants.base_m_f_states(self ):
 		__log_("_accept_states", "node.get_name()", node.get_name())
 
 		var st_data: MechFighterNodeStateContainer._StateData = _node_state_container.get_node_to_state_data().get(node.get_name())
@@ -59,6 +59,6 @@ func _accept_states():
 
 
 func __LOG_B() -> bool:
-	return true
+	return false
 
 # endregion

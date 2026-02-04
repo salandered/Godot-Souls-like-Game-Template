@@ -26,6 +26,7 @@ var _active_weapon_ids: Array[String]
 
 var _hit_boxes: Array[CharacterHitbox]
 
+
 func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[String]):
 	_register_hit_boxes(character)
 
@@ -48,11 +49,6 @@ func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Ar
 
 	if __perform_validation():
 		__log_("initialised combat", __pp_weapons_info())
-
-
-		SigUtils.safe_connect_pairs([
-			[GlobalUIInfo.SIG_dvc_matrix_cdv_toggled, _on_dvc_SIG_matrix_cdv_toggled]
-		])
 
 
 func _register_hit_boxes(character: BaseStaticCharacter):
@@ -233,22 +229,6 @@ func reset_all_weapons() -> void:
 
 # endregion
 
-
-## DEV
-
-func _on_dvc_SIG_matrix_cdv_toggled(payload: Dictionary[String, Variant]):
-	var _r := SigUtils.safe_get_SIG_matrix_cdv_toggled_payload(payload)
-	if not _r:
-		return
-
-	if _r.char_type != get_character().char_type:
-		return
-	
-	if _r.dv_type == DevVisualsConfig.DevVisualsType.WEAPON_TRAIL:
-		for item in get_all_active_weapons():
-			var dv := get_descendants.dev_visualise_trail_weapon_one_or_null(item)
-			dv.set_enabled(_r.toggle)
-			
 
 ## __LOGS
 func __pp_weapons_info() -> String:

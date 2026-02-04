@@ -40,7 +40,7 @@ func __soft_dependencies() -> Array:
 	]
 
 func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D = null) -> void:
-	self.e_feelings = e_feelings_
+	self .e_feelings = e_feelings_
 	self._anchor_3d = anchor_node_
 	self.__UI_HARD_ENABLE = enable_ui
 
@@ -66,7 +66,7 @@ func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D 
 		
 		health_bar.modulate_a(0.0)
 		var _tw := create_tween()
-		_tw.tween_property(health_bar.container, Constants.Prop.MODULATE_A, 1.0, 0.3)
+		_tw.tween_property(health_bar.container, PropC.MODULATE_A, 1.0, 0.3)
 		health_bar.scale_xy(0.5)
 
 	hide_ui()
@@ -89,12 +89,12 @@ func _update_health_bar():
 	if curr_health == _prev_health:
 		return
 
-	health_bar.animate_main_bar_value_change(self, curr_health)
+	health_bar.animate_main_bar_value_change(self , curr_health)
 	
 	var is_damage := curr_health < _prev_health
 		
 	if is_damage:
-		health_bar.animate_ghost_bar_value_change(self, _prev_health, curr_health)
+		health_bar.animate_ghost_bar_value_change(self , _prev_health, curr_health)
 	else:
 		# instant ghost bar update on heal
 		health_bar.set_ghost_bar_value(curr_health)
@@ -149,7 +149,7 @@ func _fade_out_and_hide():
 	if _is_pulsing:
 		_stop_low_health_pulse()
 	
-	health_bar.fade_out_and_hide(self)
+	health_bar.fade_out_and_hide(self )
 	
 
 # region: PULSE

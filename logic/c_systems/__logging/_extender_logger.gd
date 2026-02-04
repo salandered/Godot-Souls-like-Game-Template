@@ -1,5 +1,6 @@
 class_name ExtenderLogger
-extends RefCounted  ## dont use Extender here lol
+extends RefCounted  ## dont use Extender here :)
+
 
 const PP_NAME_NAME = "pp_name"
 const LOG_B_NAME = "__LOG_B"

@@ -6,13 +6,16 @@ enum ValueType {
 	UNKNOWN, # 0
 	GHOST_DUR_SEC, # 1
 	GRID_V_SEP, # 2
+	SIG_FILTER # 3
 	}
 
 
 enum OverlayPanelType {
 	TUT, # 0
 	PROFILER, # 1
-	CAM_NODES # 2
+	CAM_NODES, # 2
+	SIG_DEBUG, # 3
+	ERROR_LOG, # 4
 	}
 
 enum CharacterType {
@@ -26,7 +29,8 @@ enum DevVisualsType {
 	STATE_INFO, # 0
 	ATTACK_INFO, # 1
 	WEAPON_TRAIL, # 2
-	HITBOX # 3
+	HITBOX, # 3
+	WEAPON_HITBOX # 4
 	}
 
 
@@ -39,7 +43,7 @@ var _matrix_cdv_toggled: Signal
 
 ## DATA
 
-var _value_data: Dictionary[ValueType, float] = {}
+var _value_data: Dictionary[ValueType, Variant] = {}
 # can be reduced to _value_data using 0.0/1.0
 var _panel_data: Dictionary[OverlayPanelType, bool] = {}
 # CDV matrix. type: Dictionary[CharacterType, Dictionary[DevVisualsType, bool]]
@@ -63,7 +67,8 @@ func _init(value_changed_: Signal, global_ui_panel_toggled_: Signal, matrix_cdv_
 
 	_value_data = {
 		ValueType.GHOST_DUR_SEC: DynamicInfoLabel.DEF_WAIT_SEC,
-		ValueType.GRID_V_SEP: GlobalUIInfo.DEF_DYNAMIC_GRID_V_SEP
+		ValueType.GRID_V_SEP: GlobalUIInfo.DEF_DYNAMIC_GRID_V_SEP,
+		ValueType.SIG_FILTER: ""
 	}
 	
 	for item in OverlayPanelType.values():
@@ -90,8 +95,8 @@ func set_active_cdv(char_type: CharacterType, dv_type: DevVisualsType, toggle_va
 			_matrix_data[char_type][dv_type] = toggle_value
 
 			SigUtils.safe_emit_raw(_matrix_cdv_toggled, {
-				SPS.char_type_field: char_type,
-				SPS.dv_type_field: dv_type,
+				SPS.dvc_char_type_field: char_type,
+				SPS.dvc_dv_type_field: dv_type,
 				SPS.toggle_field: toggle_value
 			})
 
@@ -131,7 +136,7 @@ func set_active_global_ui_panel(
 
 		if emit_signal_:
 			SigUtils.safe_emit_raw(_global_ui_panel_toggled, {
-				SPS.global_ui_panel_type_field: type_,
+				SPS.dvc_overlay_panel_type_field: type_,
 				SPS.toggle_field: toggle_value}
 			)
 
@@ -151,7 +156,7 @@ func is_global_ui_panel_active(type_: OverlayPanelType) -> bool:
 
 func set_value(
 		type_: ValueType,
-		value_: float,
+		value_: Variant,
 		emit_signal_: bool = true
 	) -> void:
 	if not __validation_ok():
@@ -162,13 +167,13 @@ func set_value(
 
 		if emit_signal_:
 			SigUtils.safe_emit_raw(_value_changed, {
-				SPS.value_type_field: type_,
+				SPS.dvc_value_type_field: type_,
 				SPS.value_field: value_}
 			)
 
 
 ## returns INF in case of problem
-func get_value(type_: ValueType) -> float:
+func fget_value(type_: ValueType) -> float:
 	if not __validation_ok():
 		__log_warn_soft("can't process request")
 		return false
@@ -177,3 +182,25 @@ func get_value(type_: ValueType) -> float:
 		return _r
 	else:
 		return INF
+
+## returns "" in case of problem
+func sget_value(type_: ValueType) -> String:
+	if not __validation_ok():
+		__log_warn_soft("can't process request")
+		return ""
+	var _r = DictUtils.safe_get_dict_key(_value_data, type_, null)
+	if _r is String:
+		return _r
+	else:
+		return ""
+
+## returns false in case of problem
+func bget_value(type_: ValueType) -> bool:
+	if not __validation_ok():
+		__log_warn_soft("can't process request")
+		return false
+	var _r = DictUtils.safe_get_dict_key(_value_data, type_, null)
+	if _r is bool:
+		return _r
+	else:
+		return false

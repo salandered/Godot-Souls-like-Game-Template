@@ -41,6 +41,7 @@ func _ready_implementation_non_editor() -> void:
 func on_body_entered(incoming_body: Node3D) -> void:
 	if incoming_body is Princess or incoming_body is FreeCameraBody:
 		if cooldown_sig_emit.is_cooldown_passed():
+			## todo: switch to sigUtils
 			SIG_player_entered.emit(incoming_body)
 			cooldown_sig_emit.mark_time()
 

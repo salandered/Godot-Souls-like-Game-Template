@@ -2,43 +2,6 @@ extends RefCounted
 class_name error_
 
 
-static var _last_warn_msg := ""
-
-static func _warn(warn_msg: String, warn_level: String = WL.PUSH_ERROR):
-	if warn_level == WL.SILENT: return
-
-	warn_msg = pp.s(em.warn, "WARNING |", warn_msg)
-
-
-	if warn_msg == _last_warn_msg:
-		_log.prefix_s(false, "\t\t |", "<same message again>")
-		return
-	_last_warn_msg = warn_msg
-
-	match warn_level:
-		## soft equals warn here
-		WL.SILENT:
-			pass
-		WL.WARN:
-			_log.prefix_s(true, "\t", warn_msg)
-		WL.WARN_CRUCIAL:
-			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
-		WL.ASSERT:
-			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
-			push_error(pp.s(em.crucial_x2, warn_msg)) # important!
-			assert(false, pp.s(em.crucial_x2, warn_msg))
-		WL.PUSH_ERROR:
-			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
-			push_error(pp.s(em.crucial_x2, warn_msg))
-		WL.PUSH_WARN:
-			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
-			push_warning(warn_msg)
-		_:
-			_log.prefix_s(true, "\t", em.crucial_x2, "Unknown warn level!", pp.in_q(warn_level), "Will be treated as PUSH_ERROR")
-			_log.prefix_s(true, "\t", pp.s(em.crucial_x2, warn_msg))
-			push_error(pp.s(em.crucial_x2, warn_msg))
-
-
 static func warn(
 		what: String,
 		where: String,
@@ -59,7 +22,7 @@ static func warn(
 		_msg += " | Details: " + pp.list_(details)
 	_msg += pp.in_sq(warn_level)
 
-	_warn(_msg, warn_level)
+	_low_level_printer._warn(_msg, warn_level)
 
 
 ## ERROR HELPERS
@@ -77,10 +40,10 @@ static func empty_string(
 	if null_variant(string_, context, warn_level):
 		return true
 	if string_ is not String:
-		_warn(_err_msg("not String", context), warn_level)
+		_low_level_printer._warn(_err_msg("not String", context), warn_level)
 		return true
 	if string_.is_empty():
-		_warn(_err_msg("String is empty", context), warn_level)
+		_low_level_printer._warn(_err_msg("String is empty", context), warn_level)
 		return true
 	return false
 
@@ -93,10 +56,10 @@ static func empty_list(
 	if null_variant(list_, context, warn_level):
 		return true
 	if list_ is not Array and list_ is not PackedStringArray:
-		_warn(_err_msg("not Array", context), warn_level)
+		_low_level_printer._warn(_err_msg("not Array", context), warn_level)
 		return true
 	if list_.is_empty():
-		_warn(_err_msg("Array is empty", context), warn_level)
+		_low_level_printer._warn(_err_msg("Array is empty", context), warn_level)
 		return true
 	return false
 
@@ -107,7 +70,7 @@ static func null_object(
 		warn_level: String = WL.PUSH_ERROR,
 ) -> bool:
 	if object_ == null:
-		_warn(_err_msg("object is null", context), warn_level)
+		_low_level_printer._warn(_err_msg("object is null", context), warn_level)
 		return true
 	return false
 
@@ -118,7 +81,7 @@ static func null_variant(
 		warn_level: String = WL.PUSH_ERROR,
 ) -> bool:
 	if variant_ == null:
-		_warn(_err_msg("variant_ is null", context), warn_level)
+		_low_level_printer._warn(_err_msg("variant_ is null", context), warn_level)
 		return true
 	return false
 
@@ -131,7 +94,7 @@ static func null_signal(
 		warn_level: String = WL.WARN_CRUCIAL,
 ) -> bool:
 	if signal_.is_null():
-		_warn(_err_msg("signal_.is_null true", context), warn_level)
+		_low_level_printer._warn(_err_msg("signal_.is_null true", context), warn_level)
 		return true
 	return false
 
@@ -144,10 +107,10 @@ static func len_one(
 	if null_variant(list_, context, warn_level):
 		return true
 	if list_ is not Array:
-		_warn(_err_msg("not Array", context), warn_level)
+		_low_level_printer._warn(_err_msg("not Array", context), warn_level)
 		return true
 	if len(list_) != 1:
-		_warn(_err_msg(pp.s("Len is not 1:", len(list_)), context), warn_level)
+		_low_level_printer._warn(_err_msg(pp.s("Len is not 1:", len(list_)), context), warn_level)
 		return true
 	return false
 

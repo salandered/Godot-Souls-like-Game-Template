@@ -100,13 +100,38 @@ static func vec2(v: Vector2) -> String:
 	return "(%4.2f %4.2f)" % [v.x, v.y]
 
 
-static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = false, one_level: bool = false) -> String:
+static func dict_flat_perfomant(_dict_: Dictionary, max_length: int = 600) -> String:
+	if _dict_.is_empty():
+		return "{}"
+
+	var parts := PackedStringArray()
+	parts.resize(_dict_.size())
+	var idx := 0
+
+	for key in _dict_:
+		var value = _dict_[key]
+		var value_str: String
+		
+		if value is float:
+			value_str = str(round_001(value))
+		elif value is Dictionary:
+			value_str = "<Dict>"
+		else:
+			value_str = in_q(str(value))
+		
+		parts[idx] = key + " : " + value_str
+		idx += 1
+	
+	return StrUtils.cut_string(" ".join(parts), max_length)
+
+
+static func dict_(_dict_: Dictionary, json: bool = false, one_string: bool = false, one_level: bool = false, max_length = 600) -> String:
 	if json:
 		return JSON.stringify(_dict_, "\t")
 	if _dict_.is_empty():
 		return "{}"
 	var r := __recursive_dict(_dict_, "", one_string, one_level)
-	return StrUtils.cut_string(r)
+	return StrUtils.cut_string(r, max_length)
 
 
 static func list_(parts: Array, json: bool = false, max_length = 800) -> String:

@@ -20,8 +20,10 @@ func __hard_validation() -> bool:
 
 func _ready():
 	var group_panel := _get_group_panel()
-	if group_panel:
-		group_panel.title_text = _get_title()
+
+	## some errors because of initialisation order or because of group_panel i used as LocalEdit (bad)
+	# if group_panel:
+		# group_panel.title_text = _get_title()
 
 	
 	if Engine.is_editor_hint():
@@ -187,7 +189,7 @@ func _on_SIG_react_on_hit(
 
 	if reaction_info:
 		reaction_info.set_label_text(reaction_pp_string, dlc_all_features_preset)
-		reaction_info.set_second_text_label(interruption_pp_string, dlc_all_features_preset)
+		reaction_info.set_second_text_label(interruption_pp_string, dlc_all_features_preset, true)
 
 
 func _get_damage_color(dmg: float, min_dmg: float, max_dmg: float) -> Color:

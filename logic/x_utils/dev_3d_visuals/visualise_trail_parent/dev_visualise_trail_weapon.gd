@@ -43,3 +43,8 @@ func _conditions_to_visualise() -> bool:
 		return false
 
 	return true
+
+
+func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void:
+	if payload.dv_type == DevVisualsConfig.DevVisualsType.WEAPON_TRAIL:
+		set_enabled(payload.toggle)

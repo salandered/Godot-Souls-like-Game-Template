@@ -40,7 +40,7 @@ func fade_out(duration: float = 0.0) -> Tween:
 		music_stream_player.bus = audio_bus
 	var tween := create_tween()
 	if music_stream_player:
-		tween.tween_property(music_stream_player, Constants.Prop.ASP_VOLUME_DB, MINIMUM_VOLUME_DB, duration)
+		tween.tween_property(music_stream_player, PropC.ASP_VOLUME_DB, MINIMUM_VOLUME_DB, duration)
 	return tween
 
 func _set_sub_audio_volume_db(sub_volume_db: float) -> void:
@@ -58,7 +58,7 @@ func fade_in(duration: float = 0.0) -> Tween:
 func blend_to(target_volume_db: float, duration: float = 0.0) -> Tween:
 	if not is_zero_approx(duration):
 		var tween := create_tween()
-		tween.tween_property(music_stream_player, Constants.Prop.ASP_VOLUME_DB, target_volume_db, duration)
+		tween.tween_property(music_stream_player, PropC.ASP_VOLUME_DB, target_volume_db, duration)
 		return tween
 	music_stream_player.volume_db = target_volume_db
 	return
@@ -151,7 +151,7 @@ func _clone_music_player(stream_player: AudioStreamPlayer) -> void:
 func _reparent_music_player(stream_player: AudioStreamPlayer) -> void:
 	var playback_position := stream_player.get_playback_position() + AudioServer.get_time_since_last_mix()
 	stream_player.owner = null
-	stream_player.reparent.call_deferred(self)
+	stream_player.reparent.call_deferred(self )
 	stream_player.play.call_deferred(playback_position)
 
 func _node_matches_checks(node: Node) -> bool:

@@ -13,9 +13,8 @@ func _ready() -> void:
 
 func _on_parent_value_changed(value: float):
 	if _parent:
-		SigUtils.safe_emit_raw(GlobalSignal.SIG_ui_overlay_spin_box_value_changed, {
+		SigUtils.safe_emit_raw(GlobalSignal.SIG_ui_overlay_control_value_changed, {
 			SPS.value_field: value,
 			SPS.button_name_field: str(_parent.name),
-			SPS.type_field: _parent.overlay_value_type,
-
+			SPS.dvc_value_type_field: _parent.overlay_value_type,
 			})

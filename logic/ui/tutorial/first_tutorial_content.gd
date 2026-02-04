@@ -96,11 +96,12 @@ func _format_text(raw_text: String, add_before_: Dictionary[String, String]) -> 
 	var _icon_replacers: Dictionary[String, String] = {}
 	for key in add_before_.keys():
 		var icon_path = add_before_[key]
-		_icon_replacers[key] = "[img=20x20]" + icon_path + "[/img]" + " " + key
+		# __log_("icon_path", icon_path)
+		_icon_replacers[key] = BB.image_20_wrap(icon_path) + " " + key
 	_r = StrUtils.replace_text_fragments(raw_text, _icon_replacers)
 	var _italics_replacers: Dictionary[String, String] = {}
 	for phrase in italics_phrases:
-		_italics_replacers[phrase] = "[i]" + phrase + "[/i]"
+		_italics_replacers[phrase] = BB.i_wrap(phrase)
 	_r = StrUtils.replace_text_fragments(_r, _italics_replacers)
 	return _r
 
@@ -133,11 +134,11 @@ func _on_SIG_tut_panel_switched(payload: Dictionary[String, Variant]):
 
 ##
 
-const LEGEND_ITEMS: Array[String] = [
-	"[img=20x20]uid://ciggpdm7q6lei[/img] Controls",
+var LEGEND_ITEMS: Array[String] = [
+	BB.image_20_wrap(icon_lever) + " Controls",
 	"Mechanics overview",
 	"Combo attacks",
-	"[img=20x20]uid://dp2m7ljkctl4[/img] Target locking",
+	BB.image_20_wrap(icon_target_2) + " Target locking",
 	"Health/stamina",
 	"Additional info",
 	"UI Overlay controls",
@@ -156,15 +157,15 @@ const LEGEND_FOOTER = "
 "
 
 
-const _1_controls_text = "
+var _1_controls_text = "
 [ul]
-[b]WASD[/b] - [img=20x20]uid://bmwjt7mmr0hy8[/img] move
-[b]Space[/b] - [img=20x20]uid://covd6kks862ko[/img] dodge/jump
+[b]WASD[/b] - " + BB.image_20_wrap(icon_steps) + " move
+[b]Space[/b] - " + BB.image_20_wrap(icon_dodge) + " dodge/jump
 [b]Shift[/b] - sprint
 [b]Q[/b] - target lock
-[b]LMB[/b] - [img=20x20]uid://dhhcof4kym2tu[/img] light attack
-[b]RMB[/b] - [img=20x20]uid://dhhcof4kym2tu[/img] heavy attack
-[b]E[/b] - [img=20x20]uid://dp87v6bn53hy5[/img] interact
+[b]LMB[/b] - " + BB.image_20_wrap(icon_sword) + " light attack
+[b]RMB[/b] - " + BB.image_20_wrap(icon_sword) + " heavy attack
+[b]E[/b] - " + BB.image_20_wrap(icon_hand) + " interact
 [b]F[/b] - switch weapon
 [b]Esc[/b] - pause
 [/ul]

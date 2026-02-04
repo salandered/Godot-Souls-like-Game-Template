@@ -253,7 +253,7 @@ func _on_death_raised() -> void:
 	angry_raised = false
 	death_raised = false
 	
-	SIG_death_raised.emit()
+	SigUtils.safe_emit_raw_no_payload(SIG_death_raised)
 
 	print_.prefix("camera_target.make_inactive()")
 	camera_target.make_inactive()

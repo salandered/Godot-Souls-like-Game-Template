@@ -49,7 +49,7 @@ func get_node_state_container() -> PHEBaseNodeStateDataContainer:
 
 func set_angry_raised():
 	angry_raised = true
-	SIG_angry_raised.emit()
+	SigUtils.safe_emit_raw_no_payload(SIG_angry_raised)
 	if fire_up:
 		apply_fire_to_head()
 

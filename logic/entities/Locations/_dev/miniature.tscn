@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bj31r46hbvq8r"]
+[gd_scene load_steps=32 format=4 uid="uid://bj31r46hbvq8r"]
 
 [ext_resource type="Script" uid="uid://dqgdgq7qeq67w" path="res://logic/c_systems/level/miniature.gd" id="1_310jj"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="2_7kfaw"]
@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="9_gx7tx"]
 [ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="9_hijkx"]
 [ext_resource type="Material" uid="uid://bs2jei6uvq271" path="res://-assets-/materials-shared/solid/red_matte.tres" id="11_2edth"]
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/phe_enemy/PHEnemy_2.tscn" id="16_2edth"]
 [ext_resource type="PackedScene" uid="uid://53le0wkw6bvm" path="res://logic/entities/VFX/lights/omni/StaticOmni.tscn" id="19_w4aug"]
 [ext_resource type="Shader" uid="uid://7vvgrjyi5te6" path="res://logic/entities/Locations/_dev/miniature_t1.gdshader" id="20_74okv"]
 [ext_resource type="Material" uid="uid://bqgcrkjo4wtj4" path="res://-assets-/materials-shared/ground/forest_ground/forest_ground_04_Reimp.tres" id="20_qq1u0"]
 [ext_resource type="Material" uid="uid://c0ppm6u2ki7fp" path="res://logic/entities/Locations/_dev/wire_frame_mat.tres" id="21_mo835"]
-[ext_resource type="Shader" uid="uid://c3c0cq3u5pfpy" path="res://30224.gdshader" id="24_mo835"]
+[ext_resource type="Shader" path="res://-assets-/materials-shared/_shaders/unsorted/30224.gdshader" id="24_mo835"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1dqmj"]
 sky_top_color = Color(0.58146393, 0.12024791, 0.09953167, 1)
@@ -275,5 +276,9 @@ __csg_game_view = true
 transform = Transform3D(-0.29812467, 0, -0.9545269, 0, 1, 0, 0.9545269, 0, -0.29812467, -16.34649, 10.591952, 32.30147)
 mesh = SubResource("QuadMesh_dke4c")
 skeleton = NodePath("")
+
+[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_2edth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.271471, 0, -0.46069384)
+player = NodePath("../Princess")
 
 [editable path="DeathPlane"]

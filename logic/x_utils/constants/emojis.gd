@@ -27,6 +27,7 @@ const mark_alt = "✴️"
 # important
 const pin = "📌"
 const note = pin
+const note_alt = "✒️"
 const pin_alt = "📍"
 const warn = "⚠️"
 const warn_x2 = "⚠️⚠️"

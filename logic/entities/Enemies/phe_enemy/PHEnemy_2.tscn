@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=4 uid="uid://bqpo1nisx0ycs"]
+[gd_scene load_steps=132 format=4 uid="uid://bqpo1nisx0ycs"]
 
 [ext_resource type="Script" uid="uid://cwaf8axg7j74x" path="res://logic/c_systems/character/phe_bg_char.gd" id="1_sdoum"]
 [ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/unsorted/coll_collider.gd" id="2_0v2eu"]
@@ -90,6 +90,7 @@
 [ext_resource type="Script" uid="uid://2dau6l3aklq7" path="res://logic/c_systems/character_state/phe_state/state_leafes/sleep.gd" id="91_t2b01"]
 [ext_resource type="Script" uid="uid://b5c01rsxuvn3" path="res://logic/c_systems/character_state/phe_state/state_leafes/awaken.gd" id="92_1b7wx"]
 [ext_resource type="Script" uid="uid://lfard6gh3uff" path="res://logic/c_systems/unsorted/e_config/bg_config_.gd" id="93_6vhpn"]
+[ext_resource type="PackedScene" uid="uid://cy4uw7foh8qlh" path="res://logic/entities/Player/DVHitBoxFrame.tscn" id="93_gmv0p"]
 [ext_resource type="Script" uid="uid://dq03h0yh6ikyv" path="res://logic/c_systems/character_state/phe_state/state_leafes/attacks/phase_switch.gd" id="93_rk1k2"]
 [ext_resource type="Script" uid="uid://dgk6yfubccslp" path="res://logic/c_systems/character_movement/e_movement.gd" id="94_e6is3"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="95_8u138"]
@@ -2241,9 +2242,11 @@ visible = false
 attachment = NodePath("../../bones/Root/BitHigher")
 
 [node name="__dev" type="Node3D" parent="."]
+
+[node name="csg" type="Node3D" parent="__dev"]
 visible = false
 
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="__dev"]
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="__dev/csg"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 1.3621997, 0.44031078, 0)
 radius = 0.174
 height = 1.102
@@ -2252,7 +2255,7 @@ cone = true
 smooth_faces = false
 material = SubResource("StandardMaterial3D_n11a4")
 
-[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="__dev"]
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="__dev/csg"]
 transform = Transform3D(1, 0, 0, 0, 0.23995012, 0, 0, 0, 1.0000001, 0, 0.0529315, 0)
 radius = 0.174
 height = 1.5431875
@@ -2260,7 +2263,7 @@ sides = 6
 smooth_faces = false
 material = SubResource("StandardMaterial3D_04mvw")
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="__dev"]
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="__dev/csg"]
 transform = Transform3D(0.9999971, -0.0017749744, -0.0016726702, -0.0017747905, -0.05918358, -0.99824554, 0.001672866, 0.9982456, -0.059186544, 1.3149309, 0.20000002, 0.73042476)
 radius = 0.091
 height = 0.644
@@ -2269,10 +2272,15 @@ cone = true
 smooth_faces = false
 material = SubResource("StandardMaterial3D_85tkq")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="__dev"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="__dev/csg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9873852, 0, 0)
 material_override = SubResource("StandardMaterial3D_fra4q")
 size = Vector3(1, 0.062072754, 1)
+
+[node name="VisualiseHitBoxFrame2" parent="__dev" node_paths=PackedStringArray("combat", "_character") instance=ExtResource("93_gmv0p")]
+combat = NodePath("../../Combat")
+_character = NodePath("../..")
+_char_type = 2
 
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("me")]
 unique_name_in_owner = true

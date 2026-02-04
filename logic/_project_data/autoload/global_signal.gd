@@ -45,7 +45,7 @@ signal _SIG_player_dodge_increase(payload: Dictionary[String, Variant])
 
 ## SYSTEM GLOBAL UI
 signal SIG_ui_overlay_check_button_toggled(payload: Dictionary[String, Variant])
-signal SIG_ui_overlay_spin_box_value_changed(payload: Dictionary[String, Variant])
+signal SIG_ui_overlay_control_value_changed(payload: Dictionary[String, Variant])
 
 signal SIG_free_cam_mode_toggled(payload: Dictionary[String, Variant])
 signal SIG_toggle_camera_visuals(payload: Dictionary[String, Variant])
@@ -60,6 +60,10 @@ signal SIG_update_video_settings_for_level()
 ##
 signal SIG_update_mouse_settings_for_camera()
 
+## meta signal
+signal __SIG_sig_emitted(payload: Dictionary[String, Variant])
+## 
+signal __SIG_error_log_printed(payload: Dictionary[String, Variant])
 
 ## PAYLOAD SCHEMAS
 
