@@ -31,7 +31,7 @@ func get_character() -> BaseCharacter:
 
 func pp_name() -> String:
 	var prefix = get_character().pp_name() if get_character() else ""
-	return pp.s(prefix, ObjUtils.construct_obj_pp_name(self))
+	return pp.s(prefix, ObjUtils.construct_obj_pp_name(self ))
 
 
 func __LOG_B() -> bool:

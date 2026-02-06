@@ -1,0 +1,1270 @@
+[gd_scene load_steps=38 format=3 uid="uid://bed3gcu0mg3wp"]
+
+[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="1_a7ham"]
+[ext_resource type="Script" uid="uid://gbfl15nd5vml" path="res://logic/ui/ui_dev_visuals_menu/ui_dv_menu.gd" id="2_l7gs3"]
+[ext_resource type="Texture2D" uid="uid://qg53gkfhnevx" path="res://-assets-/x_icons/white/icon_parchment.png" id="3_rl0i7"]
+[ext_resource type="FontFile" uid="uid://c7vt0igfibv7k" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBoldItalic.ttf" id="4_l7gs3"]
+[ext_resource type="PackedScene" uid="uid://b1vjcin7c3dbx" path="res://logic/ui/ui_dev_visuals_menu/button/check_button/DVOverlayPanelToggleButton.tscn" id="4_rl0i7"]
+[ext_resource type="Texture2D" uid="uid://biw6rxdtr1881" path="res://-assets-/x_icons/white/icon_graph.png" id="5_r2qmd"]
+[ext_resource type="Texture2D" uid="uid://dpucsssusg1kn" path="res://-assets-/x_icons/white/icon_camera_grid_.png" id="6_sb2c6"]
+[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_5uhh2"]
+[ext_resource type="Texture2D" uid="uid://iprqlm02pcaa" path="res://-assets-/materials-shared/rocks-stone/rock_wall_08/exit_2_rock_wall_08_diff_1k.jpg" id="8_bhxsi"]
+[ext_resource type="Texture2D" uid="uid://75mpmg2nulxi" path="res://-assets-/x_icons/white/interface/icon_area_meteo.png" id="9_bnb2f"]
+[ext_resource type="PackedScene" uid="uid://byjv3t8r0rvg2" path="res://logic/ui/ui_dev_visuals_menu/button/check_button/DVCharDVToggleButton.tscn" id="9_pbvab"]
+[ext_resource type="Texture2D" uid="uid://c1tvqbar8uvun" path="res://-assets-/x_icons/white/icon_projectile.png" id="9_sb2c6"]
+[ext_resource type="Texture2D" uid="uid://b3qeeox4k0112" path="res://-assets-/x_icons/white/interface/icon_emote.png" id="10_6ty8s"]
+[ext_resource type="Texture2D" uid="uid://cjvaj4svcvxfq" path="res://-assets-/ui_assets/ui_icons/info_icon/icon_event(2).png" id="10_l5o0i"]
+[ext_resource type="Texture2D" uid="uid://buk382v8mex53" path="res://-assets-/x_icons/white/icon_skull.png" id="10_tgwv8"]
+[ext_resource type="Texture2D" uid="uid://c3cbjoscf6l34" path="res://-assets-/x_icons/white/robot.png" id="11_l3dsc"]
+[ext_resource type="Texture2D" uid="uid://blsm6k6ub1rve" path="res://-assets-/ui_assets/borders/Divider/divider-002.png" id="13_r2qmd"]
+[ext_resource type="PackedScene" uid="uid://dqq0d6ohueuo5" path="res://logic/ui/ui_utils/prefab/ToolTip.tscn" id="13_rl0i7"]
+[ext_resource type="PackedScene" uid="uid://cwoeey5b1u4dm" path="res://logic/ui/ui_dev_visuals_menu/button/DVValueChangerSpinBox.tscn" id="15_r2qmd"]
+[ext_resource type="Texture2D" uid="uid://dd1vbhhnxpc15" path="res://-assets-/x_icons/white/icon_grid.png" id="16_bhxsi"]
+[ext_resource type="PackedScene" uid="uid://bd2dti02yphn1" path="res://logic/ui/ui_dev_visuals_menu/ConfigGroupIconTitle.tscn" id="17_6y0fn"]
+[ext_resource type="Texture2D" uid="uid://cr3wd35634env" path="res://-assets-/x_icons/white/interface/icon_mirror.png" id="18_idssk"]
+[ext_resource type="PackedScene" uid="uid://da2gp8o4yvtc1" path="res://logic/ui/ui_dev_visuals_menu/button/DVCharDVPresetButton.tscn" id="19_mfntv"]
+[ext_resource type="Script" uid="uid://c21gauv8gam5n" path="res://logic/ui/ui_dev_visuals_menu/button/dv_line_edit.gd" id="19_pbvab"]
+[ext_resource type="Script" uid="uid://u41td3kkqub4" path="res://logic/ui/ui_utils/prefab/check_regex_line_edit_parent.gd" id="21_l3dsc"]
+[ext_resource type="Texture2D" uid="uid://b46vgkwptglln" path="res://-adopting/x_icons/16x/3d/cylinder-gray.png" id="25_mfntv"]
+[ext_resource type="PackedScene" uid="uid://on53sh8aiutr" path="res://logic/ui/ui_dev_visuals_menu/button/check_button/DVValueChangerToggleButton.tscn" id="26_natrh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tu0ee"]
+texture = ExtResource("8_bhxsi")
+region_rect = Rect2(4.2011566, 83.27785, 499.25812, 373.22217)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7gs3"]
+bg_color = Color(0.21, 0.10604999, 0.0945, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.18, 0.18, 0.18, 0.8235294)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rl0i7"]
+bg_color = Color(0.2225, 0.2445, 0.25, 0.63529414)
+border_color = Color(0.11, 0, 0.031166663, 0.49019608)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2qmd"]
+bg_color = Color(0.2745, 0.37102503, 0.45, 0.6)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.08479999, 0.12991999, 0.16, 0.27058825)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpag"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im4gc"]
+content_margin_left = 4.0
+content_margin_right = 10.0
+bg_color = Color(0.055200003, 0.24, 0.20919998, 0.3647059)
+border_color = Color(0, 0.11, 0.069666654, 0.54901963)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_im4gc"]
+color = Color(0.39138144, 0.39138144, 0.39138144, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bnb2f"]
+texture = ExtResource("8_bhxsi")
+region_rect = Rect2(4.2011566, 36.5, 464.79883, 428)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb2c6"]
+content_margin_top = 11.0
+texture = ExtResource("13_r2qmd")
+modulate_color = Color(0.3959847, 0.5678866, 0.5641565, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mfntv"]
+texture = ExtResource("8_bhxsi")
+region_rect = Rect2(45, 39.5, 435, 425)
+
+[node name="UIOverlayControls" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -403.0
+offset_right = 508.0
+offset_bottom = 403.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_a7ham")
+script = ExtResource("2_l7gs3")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RockPanelOverlay Menus" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_tu0ee")
+
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
+
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus"]
+layout_mode = 2
+
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__title_panel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("4_l7gs3")
+text = "Overlay Panels"
+vertical_alignment = 1
+
+[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TutorialToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/HBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.92089695, 0.87253195, 0.6360809, 1)
+theme_override_colors/icon_focus_color = Color(0.92156863, 0.87058824, 0.63529414, 1)
+theme_override_colors/icon_pressed_color = Color(0.92156863, 0.87058824, 0.63529414, 1)
+theme_override_colors/icon_hover_color = Color(0.92156863, 0.87058824, 0.63529414, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.92156863, 0.87058824, 0.63529414, 1)
+text = " Tutorial (T)"
+icon = ExtResource("3_rl0i7")
+key_panel = 1
+
+[node name="ProfilerToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/HBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/icon_normal_color = Color(0.92768556, 0.92768556, 0.92768556, 1)
+text = " Profiler (F3)"
+icon = ExtResource("5_r2qmd")
+key_panel = 2
+
+[node name="CameraNodesToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/icon_normal_color = Color(0.66485375, 0.93447423, 0.5717121, 1)
+theme_override_colors/icon_focus_color = Color(0.6666667, 0.93333334, 0.57254905, 1)
+theme_override_colors/icon_pressed_color = Color(0.6666667, 0.93333334, 0.57254905, 1)
+theme_override_colors/icon_hover_color = Color(0.6666667, 0.93333334, 0.57254905, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.6666667, 0.93333334, 0.57254905, 1)
+text = " Camera Nodes 3D Visualizer"
+icon = ExtResource("6_sb2c6")
+key_panel = 3
+
+[node name="SubviewportToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/icon_normal_color = Color(1, 0.70387197, 0.9500787, 1)
+theme_override_colors/icon_focus_color = Color(1, 0.7019608, 0.9490196, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.7019608, 0.9490196, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.7019608, 0.9490196, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 0.7019608, 0.9490196, 1)
+text = "Additional cameras"
+icon = ExtResource("9_bnb2f")
+key_panel = 7
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="WeaponTrailRow" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = " [img=20x20]uid://covd6kks862ko[/img]  Flying dev cam - leave the menu and press F9"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="WeaponTrailRow2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = " [img=20x20]uid://ug4ildp26lx7[/img]  In game console - use tilde key (~)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="panel2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+modulate = Color(0.93447423, 0.93447423, 0.93447423, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_im4gc")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/panel2"]
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_im4gc")
+
+[node name="RockPanelMisc" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_tu0ee")
+
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
+
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc"]
+layout_mode = 2
+
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__title_panel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("4_l7gs3")
+text = "Log Panels"
+vertical_alignment = 1
+
+[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="panels_label_" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "Panel"
+vertical_alignment = 1
+
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
+theme_override_colors/icon_focus_color = Color(1, 0.7176471, 0.75686276, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.7176471, 0.75686276, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.7176471, 0.75686276, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 0.7176471, 0.75686276, 1)
+text = "Logs"
+icon = ExtResource("10_l5o0i")
+key_panel = 4
+
+[node name="DynamicSignalInfo" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+theme_override_colors/icon_normal_color = Color(0.7176471, 0.78663987, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.7176471, 0.7882353, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.7176471, 0.7882353, 1, 1)
+theme_override_colors/icon_hover_color = Color(0.7176471, 0.7882353, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.7176471, 0.7882353, 1, 1)
+text = "Signal Info"
+icon = ExtResource("9_sb2c6")
+key_panel = 5
+
+[node name="ErrorLogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer" instance=ExtResource("4_rl0i7")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+theme_override_colors/icon_normal_color = Color(1, 0.7176471, 0.75557226, 1)
+theme_override_colors/icon_focus_color = Color(1, 0.7176471, 0.75686276, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.7176471, 0.75686276, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.7176471, 0.75686276, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 0.7176471, 0.75686276, 1)
+text = "Error Logs"
+icon = ExtResource("10_6ty8s")
+key_panel = 6
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sig regex" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2/__h"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "Regex filter"
+vertical_alignment = 1
+
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2/__h" instance=ExtResource("13_rl0i7")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Filters text from the Dynamic Signal Panel.
+Filter applies to signal name and payload.
+NOTE: applies only to signals which come after editing the value.
+
+Use \"!\" no exclude a word.
+Basic example: 
+- \"footstep\" - only signals with the word 'footstep' in their name or payload will be shown. 
+- \"!footstep\" - show all but with the word 'footstep'.
+
+"
+
+[node name="LogsFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. abc, !exclude"
+script = ExtResource("19_pbvab")
+dv_section = 2
+key_value_changer = 4
+
+[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2/LogsFilter"]
+script = ExtResource("21_l3dsc")
+
+[node name="SigFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. abc, !exclude"
+script = ExtResource("19_pbvab")
+dv_section = 2
+key_value_changer = 3
+
+[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2/SigFilter"]
+script = ExtResource("21_l3dsc")
+
+[node name="ErrorLogsFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. abc, !exclude"
+script = ExtResource("19_pbvab")
+dv_section = 2
+key_value_changer = 5
+
+[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/RockPanelMisc/__v/__rock_margin/__h/VBoxContainer2/ErrorLogsFilter"]
+script = ExtResource("21_l3dsc")
+
+[node name="HSeparator" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_5uhh2")]
+layout_mode = 2
+
+[node name="RockPanelMisc3" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_tu0ee")
+
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/RockPanelMisc3"]
+layout_mode = 2
+
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/RockPanelMisc3/__v"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/RockPanelMisc3/__v/__title_panel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("4_l7gs3")
+text = "Also"
+vertical_alignment = 1
+
+[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/RockPanelMisc3/__v"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/RockPanelMisc3/__v/__rock_margin"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/RockPanelMisc3/__v/__rock_margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/RockPanelMisc3"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RockPanelCharSpecificInfo" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_bnb2f")
+
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
+
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo"]
+layout_mode = 2
+
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__title_panel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("4_l7gs3")
+text = "Character specific info and visuals"
+vertical_alignment = 1
+
+[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin"]
+layout_mode = 2
+
+[node name="__m_l" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="__legend" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Player" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4862745)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 21
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img] - Player "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="HSM" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Enemy powered by Hierarchical State Machine (HSM)"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 21
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=16x16]uid://buk382v8mex53[/img] - HSM Enemy [img=22x22]uid://dw4msevhidx06[/img]  "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="SE" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Enemy powered by simple state machine (HSM)"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 21
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=16x16]uid://c3cbjoscf6l34[/img] - Simple Enemy  "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+columns = 4
+
+[node name="StateInfoRow" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=20x20]uid://clt5kjwtjhyhx[/img] Dynamic State Panel"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CheckButton1" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+key_char_t = 1
+key_char_dvt = 1
+
+[node name="CheckButton2" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("10_tgwv8")
+key_char_t = 2
+key_char_dvt = 1
+
+[node name="CheckButton3" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("11_l3dsc")
+key_char_t = 3
+key_char_dvt = 1
+
+[node name="AttackInfoRow" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=20x20]uid://dhhcof4kym2tu[/img] Dynamic Attack Panel"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CheckButton4" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+key_char_t = 1
+key_char_dvt = 2
+
+[node name="CheckButton5" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("10_tgwv8")
+key_char_t = 2
+key_char_dvt = 2
+
+[node name="CheckButton6" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("11_l3dsc")
+key_char_t = 3
+key_char_dvt = 2
+
+[node name="WeaponTrailRow" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+modulate = Color(0.92156863, 0.92156863, 0.92156863, 1)
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=20x20 color=#fce89f]uid://5lgh70t21mri[/img] Weapon Trail"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CheckButton7" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+key_char_t = 1
+key_char_dvt = 3
+
+[node name="CheckButton8" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("10_tgwv8")
+key_char_t = 2
+key_char_dvt = 3
+tied_toggle_buttons = [NodePath("../CheckButton9")]
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton8"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(12, 2)
+theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
+
+[node name="CheckButton9" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("11_l3dsc")
+key_char_t = 3
+key_char_dvt = 3
+tied_toggle_buttons = [NodePath("../CheckButton8")]
+
+[node name="CharacterHitBoxRow" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=24x24 color=#ffbea0]uid://b46vgkwptglln[/img] Character hurtboxes "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CheckButton10" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+key_char_t = 1
+key_char_dvt = 4
+
+[node name="CheckButton11" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("10_tgwv8")
+key_char_t = 2
+key_char_dvt = 4
+tied_toggle_buttons = [NodePath("../CheckButton12")]
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton11"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(12, 2)
+theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
+
+[node name="CheckButton12" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("11_l3dsc")
+key_char_t = 3
+key_char_dvt = 4
+tied_toggle_buttons = [NodePath("../CheckButton11")]
+
+[node name="CharacterHitBoxRow2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_afpag")
+bbcode_enabled = true
+text = "[img=24x24 color=#ffa3a0]uid://b46vgkwptglln[/img] Weapon hitboxes "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CheckButton13" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+key_char_t = 1
+key_char_dvt = 5
+tied_toggle_buttons = [NodePath("../CheckButton14"), NodePath("../CheckButton15")]
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton13"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(12, 2)
+theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
+
+[node name="CheckButton14" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("10_tgwv8")
+key_char_t = 2
+key_char_dvt = 5
+tied_toggle_buttons = [NodePath("../CheckButton13"), NodePath("../CheckButton15")]
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton14"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(12, 2)
+theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
+
+[node name="CheckButton15" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 4
+text = ""
+icon = ExtResource("11_l3dsc")
+key_char_t = 3
+key_char_dvt = 5
+tied_toggle_buttons = [NodePath("../CheckButton13"), NodePath("../CheckButton14")]
+
+[node name="__m_ToolTip" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = -6
+theme_override_constants/margin_right = -6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer2" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+tooltip_text = "Shows info about characters State Machine. 
+E.g.: current state name.
+Visualizes updates by animating the previous value
+dropping down and fading out as a \"ghost\". 
+This behaviour can be configured."
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+
+[node name="ToolTip2" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer3" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+tooltip_text = "Shows info about character attacks. 
+E.g.: amount of damage
+Visualizes updates by animating the previous value
+dropping down and fading out as a \"ghost\". 
+This behaviour can be configured."
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+
+[node name="ToolTip3" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer4" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+tooltip_text = "Visualises trail of the character weapon. 
+Trail shows only if weapon is attacking.
+Trail color depends on the attack velocity 
+(not the in game property 'attack speed')"
+
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer5" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+tooltip_text = "Visualises character hitboxes.
+Changes color while showing i-frames 
+(frames when character is invincible to attacks)"
+
+[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer6" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+tooltip_text = "Visualises weapon hitboxes"
+
+[node name="ConfigGroupIconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v" instance=ExtResource("17_6y0fn")]
+layout_mode = 2
+title_text = "Presets"
+icon_texture = ExtResource("18_idssk")
+
+[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AllOn" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin2/HBoxContainer" instance=ExtResource("19_mfntv")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "All On"
+icon = null
+
+[node name="AllOff" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelCharSpecificInfo/__v/__rock_margin2/HBoxContainer" instance=ExtResource("19_mfntv")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "All Off"
+icon = null
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_im4gc")
+
+[node name="RockPanelValueChangers" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_mfntv")
+
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
+
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__title_panel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("4_l7gs3")
+text = "Configuration"
+vertical_alignment = 1
+
+[node name="__space" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="DSACG" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v" instance=ExtResource("17_6y0fn")]
+layout_mode = 2
+title_text = "Dynamic State/Attack Panels"
+icon_texture = ExtResource("16_bhxsi")
+
+[node name="__rock_margin_cg" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "Fade out time"
+vertical_alignment = 1
+
+[node name="SpinGhostSec" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg/VBoxContainer/GridContainer" instance=ExtResource("15_r2qmd")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+max_value = 8.0
+step = 0.5
+value = 5.0
+suffix = "sec"
+dv_section = 2
+key_value_changer = 1
+
+[node name="Title2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "Vertical separation"
+vertical_alignment = 1
+
+[node name="SpinGridVSeparation" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg/VBoxContainer/GridContainer" instance=ExtResource("15_r2qmd")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+min_value = -40.0
+max_value = 60.0
+step = 10.0
+value = 20.0
+rounded = true
+suffix = "px"
+dv_section = 2
+key_value_changer = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg/VBoxContainer"]
+layout_mode = 2
+
+[node name="SignalCG" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v" instance=ExtResource("17_6y0fn")]
+visible = false
+layout_mode = 2
+title_text = "Signal Panel"
+icon_texture = ExtResource("9_sb2c6")
+icon_color = Color(0.70980394, 0.7764706, 1, 1)
+
+[node name="__rock_margin_cg2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg2"]
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg2/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="SignalCG2" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v" instance=ExtResource("17_6y0fn")]
+layout_mode = 2
+title_text = "Hitboxes"
+icon_texture = ExtResource("25_mfntv")
+icon_color = Color(1, 0.70980394, 0.78522015, 1)
+
+[node name="__rock_margin_cg3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3"]
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sig regex" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2/__h"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "Show weapon hit"
+vertical_alignment = 1
+
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2/__h" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Filters text from the Dynamic Signal Panel.
+Filter applies to signal name and payload.
+NOTE: applies only to signals which come after editing the value.
+
+Use \"!\" no exclude a word.
+Basic example: 
+- \"footstep\" - only signals with the word 'footstep' in their name or payload will be shown. 
+- \"!footstep\" - show all but with the word 'footstep'.
+
+"
+
+[node name="WeaponHitToggler" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2" instance=ExtResource("26_natrh")]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+key_value_changer = 6
+
+[node name="__h2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sig regex2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2/__h2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "Show weapon hit every frame"
+vertical_alignment = 1
+
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2/__h2" instance=ExtResource("13_rl0i7")]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Filters text from the Dynamic Signal Panel.
+Filter applies to signal name and payload.
+NOTE: applies only to signals which come after editing the value.
+
+Use \"!\" no exclude a word.
+Basic example: 
+- \"footstep\" - only signals with the word 'footstep' in their name or payload will be shown. 
+- \"!footstep\" - show all but with the word 'footstep'.
+
+"
+
+[node name="WeaponHitEveryFrameToggler" parent="MarginContainer/VBoxContainer/HBoxContainer2/RockPanelValueChangers/__v/__rock_margin_cg3/VBoxContainer/GridContainer2" instance=ExtResource("26_natrh")]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+key_value_changer = 7

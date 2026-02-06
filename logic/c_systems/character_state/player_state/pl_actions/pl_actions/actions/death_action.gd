@@ -12,7 +12,7 @@ var DECEL_SPEED: float = 10.0
 
 
 func on_enter_action(input_: InputPackage) -> void:
-	prints("dead action")
+	print_.dev("dead action")
 	match PREV_ACTION:
 		PS.Act.dodge:
 			DECEL_SPEED = 14.0

@@ -9,12 +9,12 @@ extends BaseInfoGroupPresenter
 @onready var phe_attack_direction: DynamicInfoLabel = %PHEAttackDirection
 
 
-func get_char_type() -> DevVisualsConfig.CharacterType:
-	return DevVisualsConfig.CharacterType.HSM_ENEMY
+func _get_char_type() -> DVS.CharacterType:
+	return DVS.CharacterType.HSM_ENEMY
 
 
-func get_dv_type() -> DevVisualsConfig.DevVisualsType:
-	return DevVisualsConfig.DevVisualsType.ATTACK_INFO
+func _get_dv_type() -> DVS.CharDVType:
+	return DVS.CharDVType.ATTACK_INFO
 
 
 func _supported_signal_pairs() -> Array[Array]:
@@ -26,7 +26,7 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 func _on_SIG_phe_weapon_hit_data_set(payload: Dictionary[String, Variant]):
-	__log_("_on_SIG_phe_weapon_hit_data_set", payload)
+	# __log_("_on_SIG_phe_weapon_hit_data_set", payload)
 	_on_SIG_hit_data_payload(
 		phe_attack_damage,
 		phe_attack_speed,

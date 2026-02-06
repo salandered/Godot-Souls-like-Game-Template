@@ -55,4 +55,4 @@ func dev_initialise():
 # func _input(event: InputEvent):
 	# if not OS.is_debug_build():
 	# 	return
-# 	look_at_point.global_position.y = u._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)
+# 	look_at_point.global_position.y = InputUtils._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)

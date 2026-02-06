@@ -15,7 +15,7 @@ func is_cooldown_passed(__log_remaining_time_on_false: bool = false, __log_conte
 		return true
 	else:
 		if __log_remaining_time_on_false:
-			__log_("cooldown not passed", "time remaining", pp.in_q(_remaining_time), "context:", pp.in_q(__log_context))
+			__log_("cooldown not passed", "time remaining", _remaining_time, "context:", pp.in_q(__log_context))
 		return false
 
 

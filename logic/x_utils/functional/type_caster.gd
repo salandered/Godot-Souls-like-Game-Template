@@ -1,5 +1,4 @@
 extends RefCountedStaticLogger
-# here are all utils which dont have their separate more focused module
 class_name TypeCast
 
 
@@ -110,6 +109,11 @@ static func array_of_button(array: Array) -> Array[Button]:
 static func array_of_fog_volume(array: Array) -> Array[FogVolume]:
 	var list_casted: Array[FogVolume] = []
 	list_casted.assign(_safe_validate_class(array, FogVolume, "FogVolume"))
+	return list_casted
+
+static func array_of_csg_primitive(array: Array) -> Array[CSGPrimitive3D]:
+	var list_casted: Array[CSGPrimitive3D] = []
+	list_casted.assign(_safe_validate_class(array, CSGPrimitive3D, "CSGPrimitive3D"))
 	return list_casted
 
 
@@ -230,6 +234,21 @@ static func array_of_enemy_character(array: Array) -> Array[PHCharacter]:
 static func array_of_pause_menu_controller(array: Array) -> Array[M_PauseMenuController]:
 	var list_casted: Array[M_PauseMenuController] = []
 	list_casted.assign(_safe_validate_class(array, M_PauseMenuController, "M_PauseMenuController"))
+	return list_casted
+
+static func array_of_base_dv_setting_check_button(array: Array) -> Array[BaseDVSettingCheckButton]:
+	var list_casted: Array[BaseDVSettingCheckButton] = []
+	list_casted.assign(_safe_validate_class(array, BaseDVSettingCheckButton, "BaseDVSettingCheckButton"))
+	return list_casted
+
+static func array_of_dv_vc_spinbox(array: Array) -> Array[DVValueChangerSpinBox]:
+	var list_casted: Array[DVValueChangerSpinBox] = []
+	list_casted.assign(_safe_validate_class(array, DVValueChangerSpinBox, "DVValueChangerSpinBox"))
+	return list_casted
+
+static func array_of_dv_line_edit(array: Array) -> Array[DVLineEdit]:
+	var list_casted: Array[DVLineEdit] = []
+	list_casted.assign(_safe_validate_class(array, DVLineEdit, "DVLineEdit"))
 	return list_casted
 
 

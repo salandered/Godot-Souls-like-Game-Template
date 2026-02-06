@@ -20,7 +20,7 @@ func __hard_dependencies() -> Array:
 		]
 
 
-func initialise_implementation_in_game() -> void:
+func _initialise_shapes() -> void:
 	if not weapon:
 		return
 
@@ -29,13 +29,12 @@ func initialise_implementation_in_game() -> void:
 		var col_shapes := get_descendants.collision_shapes(hb)
 		_shapes.assign(col_shapes)
 
-	# NOTE: should be called after self initalisation
-	super.initialise_implementation_in_game()
 
-	_update_color(true)
+func _get_initial_color() -> Color:
+	return color_passive
 
 
-func get_shapes() -> Array[CollisionShape3D]:
+func _get_shapes() -> Array[CollisionShape3D]:
 	return _shapes
 
 
@@ -44,10 +43,10 @@ func _process_visualisation(_delta: float) -> void:
 	_update_color()
 
 
-func _update_color(force: bool = false) -> void:
+func _update_color() -> void:
 	var current_attacking = _is_attacking()
 	
-	if force or current_attacking != _last_attacking_state:
+	if current_attacking != _last_attacking_state:
 		var target = color_attacking if current_attacking else color_passive
 		_set_visuals_color(target)
 		_last_attacking_state = current_attacking
@@ -62,6 +61,6 @@ func _conditions_to_visualise() -> bool:
 	return true
 
 
-func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void:
-	if payload.dv_type == DevVisualsConfig.DevVisualsType.WEAPON_HITBOX:
-		set_enabled(payload.toggle)
+func _on_SIG_dvc_value_changed_section_char_dv_imp(payload: SigPayloadParser.DVValueChangedSectionCharDVPayload) -> void:
+	if payload.char_dv_type == DVS.CharDVType.WEAPON_HITBOX:
+		set_enabled(payload.value)

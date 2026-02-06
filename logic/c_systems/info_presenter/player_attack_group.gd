@@ -9,12 +9,12 @@ extends BaseInfoGroupPresenter
 @onready var player_attack_direction: DynamicInfoLabel = %PlayerAttackDirection
 
 
-func get_char_type() -> DevVisualsConfig.CharacterType:
-	return DevVisualsConfig.CharacterType.PLAYER
+func _get_char_type() -> DVS.CharacterType:
+	return DVS.CharacterType.PLAYER
 
 
-func get_dv_type() -> DevVisualsConfig.DevVisualsType:
-	return DevVisualsConfig.DevVisualsType.ATTACK_INFO
+func _get_dv_type() -> DVS.CharDVType:
+	return DVS.CharDVType.ATTACK_INFO
 
 
 func _supported_signal_pairs() -> Array[Array]:

@@ -43,8 +43,8 @@ func update(input_: InputPackage, delta: float) -> void:
 	# __log_upd(pm().__pp_vel())
 
 
-# func _input(event):
-# 	# VERT_SPEED_BUMP = u._dev_change_param(event, VERT_SPEED_BUMP, "VERT_SPEED_BUMP",
+# func _in_unhandled_inputput(event):
+# 	# VERT_SPEED_BUMP = InputUtils._dev_change_param(event, VERT_SPEED_BUMP, "VERT_SPEED_BUMP",
 # 	# 	0.5, "dev_speed_down", RawAction.DEV_speed_up)
-# 	VERT_SPEED_BUMP = u._dev_change_t12_param(event, VERT_SPEED_BUMP, "VERT_SPEED_BUMP", 0.5)
-# 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
+# 	VERT_SPEED_BUMP = InputUtils._dev_change_t12_param(event, VERT_SPEED_BUMP, "VERT_SPEED_BUMP", 0.5)
+# 	GRAVITY_DURING_JUMP = InputUtils._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)

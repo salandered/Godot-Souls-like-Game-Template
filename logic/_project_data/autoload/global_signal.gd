@@ -44,11 +44,9 @@ signal _SIG_player_speed_increase(payload: Dictionary[String, Variant])
 signal _SIG_player_dodge_increase(payload: Dictionary[String, Variant])
 
 ## SYSTEM GLOBAL UI
-signal SIG_ui_overlay_check_button_toggled(payload: Dictionary[String, Variant])
-signal SIG_ui_overlay_control_value_changed(payload: Dictionary[String, Variant])
+signal SIG_dv_ui_control_value_changed(payload: Dictionary[String, Variant])
 
 signal SIG_free_cam_mode_toggled(payload: Dictionary[String, Variant])
-signal SIG_toggle_camera_visuals(payload: Dictionary[String, Variant])
 signal SIG_toggle_camera_coll(payload: Dictionary[String, Variant])
 # signal SIG_toggle_split_screen(payload: Dictionary[String, Variant])
 signal SIG_tut_panel_switched(payload: Dictionary[String, Variant])
@@ -64,6 +62,7 @@ signal SIG_update_mouse_settings_for_camera()
 signal __SIG_sig_emitted(payload: Dictionary[String, Variant])
 ## 
 signal __SIG_error_log_printed(payload: Dictionary[String, Variant])
+signal __SIG_all_log_printed(payload: Dictionary[String, Variant])
 
 ## PAYLOAD SCHEMAS
 

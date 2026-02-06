@@ -15,7 +15,7 @@ var popup_open: Node
 @onready var menu_buttons: BoxContainer = %MenuButtons
 @onready var show_ui_overlay_controls_button: Button = %ShowUIOverlayControls
 
-var ui_overlay_controls_panel: UIOverlayControls
+var ui_overlay_controls_panel: UIDVMenu
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
 	
 	if ui_overlay_controls_packed_scene and h_box_container:
 		var _ui_overlay_controls := ui_overlay_controls_packed_scene.instantiate()
-		if _ui_overlay_controls and _ui_overlay_controls is UIOverlayControls:
+		if _ui_overlay_controls and _ui_overlay_controls is UIDVMenu:
 			ui_overlay_controls_panel = _ui_overlay_controls
 			h_box_container.add_child(_ui_overlay_controls)
 

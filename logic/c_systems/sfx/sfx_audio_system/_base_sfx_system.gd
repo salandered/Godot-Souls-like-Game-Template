@@ -51,8 +51,8 @@ func initialise(
 	
 	var _list := _get_on_signal_asps(signal_container_, asp_config_container)
 	
-	self._on_signal_asps.assign(_list)
-	self.signal_container = signal_container_
+	self ._on_signal_asps.assign(_list)
+	self .signal_container = signal_container_
 	
 	
 	_soft_validate_asps(root_of_asps)

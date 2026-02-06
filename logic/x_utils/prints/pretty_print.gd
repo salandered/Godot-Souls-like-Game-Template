@@ -14,6 +14,7 @@ static var on_upd := " upd"
 static var on_internal_upd := " _upd"
 
 
+## research, if creating packed array and then joining it is faster
 static func s(...parts: Array) -> String:
 	var r := ""
 	for part in parts:
@@ -27,6 +28,7 @@ static func s(...parts: Array) -> String:
 			r += str(part)
 		r += " "
 	return r
+
 
 static func s_in_q(...parts: Array) -> String:
 	var edited_parts: Array = []

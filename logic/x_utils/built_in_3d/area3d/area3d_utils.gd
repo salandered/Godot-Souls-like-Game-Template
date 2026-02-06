@@ -29,6 +29,7 @@ static func get_area_contact_point(my_area: Area3D, target_area: Area3D) -> Vect
 		
 	return Vector3.INF
 
+
 ## Helper to find the first active collision shape
 static func _find_first_collision_shape(node: Node) -> CollisionShape3D:
 	for child in node.get_children():

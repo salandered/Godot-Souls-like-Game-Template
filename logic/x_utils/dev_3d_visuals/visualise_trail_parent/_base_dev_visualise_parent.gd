@@ -14,7 +14,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise_implementation_both_editor_and_game() -> void:
+func _initialise_implementation_both_editor_and_game() -> void:
 	if get_parent() is Node3D:
 		_parent_node = get_parent()
 		# if not Engine.is_editor_hint():

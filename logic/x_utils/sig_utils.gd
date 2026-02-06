@@ -11,6 +11,7 @@ static func __emit(signal_: Signal, with_payload: bool, payload: Dictionary):
 	if GlobalUIInfo.__SIG_DEBUG:
 		var __payload: Dictionary[String, Variant]
 		__payload = {
+			SPS.frame_field: u.sfr(),
 			SPS.sig_name_field: str(signal_.get_name()),
 			SPS.sig_with_payload_field: with_payload,
 			SPS.sig_payload_field: payload
@@ -148,18 +149,18 @@ static func safe_get_int_payload_value(
 		payload: Dictionary[String, Variant],
 		payload_key: String,
 		warn_level: String = WL.INFO
-) -> ReturnObject.IntReturn:
+) -> RO.IntReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
-		return ReturnObject.IntReturn.new(true)
+		return RO.IntReturn.new(true)
 		
 	var payload_value = payload_value_return.value
 
 	if not (payload_value is int):
-		error_.warn("not not (payload_value is int)", "", "", warn_level, payload, payload_key)
-		return ReturnObject.IntReturn.new(true)
+		error_.warn("not (payload_value is int)", "", "", warn_level, payload, payload_key)
+		return RO.IntReturn.new(true)
 
-	return ReturnObject.IntReturn.new(false, payload_value)
+	return RO.IntReturn.new(false, payload_value)
 
 
 ## returns value as a float
@@ -167,39 +168,39 @@ static func safe_get_int_float_payload_value(
 		payload: Dictionary[String, Variant],
 		payload_key: String,
 		warn_level: String = WL.INFO
-) -> ReturnObject.FloatReturn:
+) -> RO.FloatReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
-		return ReturnObject.FloatReturn.new(true)
+		return RO.FloatReturn.new(true)
 		
 	var payload_value = payload_value_return.value
 
 	if not (payload_value is float or payload_value is int):
-		error_.warn("not not (payload_value is float or payload_value is int)", "", "", warn_level, payload, payload_key)
-		return ReturnObject.FloatReturn.new(true)
+		error_.warn("not (payload_value is float or payload_value is int)", "", "", warn_level, payload, payload_key)
+		return RO.FloatReturn.new(true)
 
-	return ReturnObject.FloatReturn.new(false, float(payload_value))
+	return RO.FloatReturn.new(false, float(payload_value))
 
 
 static func safe_get_bool_payload_value(
 		payload: Dictionary[String, Variant],
 		payload_key: String,
 		warn_level: String = WL.INFO
-) -> ReturnObject.BoolReturn:
+) -> RO.BoolReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
-		return ReturnObject.BoolReturn.new(true)
+		return RO.BoolReturn.new(true)
 	var payload_value = payload_value_return.value
 	if not (payload_value is bool):
 		error_.warn("not (payload_value is bool)", "", "", warn_level, payload, payload_key)
-		return ReturnObject.BoolReturn.new(true)
+		return RO.BoolReturn.new(true)
 
-	return ReturnObject.BoolReturn.new(false, payload_value)
+	return RO.BoolReturn.new(false, payload_value)
 
 static func safe_get_toggle_payload_value(
 		payload: Dictionary[String, Variant],
 		warn_level: String = WL.INFO
-) -> ReturnObject.BoolReturn:
+) -> RO.BoolReturn:
 	var r := safe_get_bool_payload_value(payload, SPS.toggle_field)
 	return r
 
@@ -208,31 +209,31 @@ static func safe_get_string_payload_value(
 		payload: Dictionary[String, Variant],
 		payload_key: String,
 		warn_level: String = WL.INFO
-) -> ReturnObject.StringReturn:
+) -> RO.StringReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
-		return ReturnObject.StringReturn.new(true)
+		return RO.StringReturn.new(true)
 	var payload_value = payload_value_return.value
 	if not (payload_value is String):
 		error_.warn("not (payload_value is String)", "", "", warn_level, payload, payload_key)
-		return ReturnObject.StringReturn.new(true)
+		return RO.StringReturn.new(true)
 
-	return ReturnObject.StringReturn.new(false, payload_value)
+	return RO.StringReturn.new(false, payload_value)
 
 
 static func safe_get_dict_payload_value(payload: Dictionary[String, Variant],
 	payload_key: String,
 	warn_level: String = WL.INFO
-) -> ReturnObject.DictReturn:
+) -> RO.DictReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
-		return ReturnObject.DictReturn.new(true, {})
+		return RO.DictReturn.new(true, {})
 	var payload_value = payload_value_return.value
 	if not (payload_value is Dictionary):
 		error_.warn("not (payload_value is Dictionary)", "", "", warn_level, payload, payload_key)
-		return ReturnObject.DictReturn.new(true, {})
+		return RO.DictReturn.new(true, {})
 
-	return ReturnObject.DictReturn.new(false, payload_value)
+	return RO.DictReturn.new(false, payload_value)
 
 
 static func safe_get_variant_payload_value(
@@ -240,7 +241,7 @@ static func safe_get_variant_payload_value(
 		payload_key: String,
 		null_allowed: bool,
 		warn_level: String = WL.INFO
-) -> ReturnObject.VariantReturn:
+) -> RO.VariantReturn:
 	return _get_value_by_key(payload, payload_key, null_allowed, warn_level)
 
 
@@ -249,75 +250,14 @@ static func _get_value_by_key(
 		payload_key: String,
 		null_allowed: bool = true,
 		warn_level: String = WL.INFO
-) -> ReturnObject.VariantReturn:
+) -> RO.VariantReturn:
 	if not DictUtils.safe_has_key(payload, payload_key, warn_level):
-		return ReturnObject.VariantReturn.new(true)
+		return RO.VariantReturn.new(true)
 
 	var payload_value = payload[payload_key]
 
 	if not null_allowed and payload_value == null:
 		error_.warn("not null_allowed and payload_value == null", "", "", warn_level, payload, payload_key)
-		return ReturnObject.VariantReturn.new(true)
+		return RO.VariantReturn.new(true)
 
-	return ReturnObject.VariantReturn.new(false, payload_value)
-
-
-## more specific domain aware helpers. probably should not be here
-
-## should be part of the signal itself 
-## (some structure which knows signal, its payload and functions to write/read payload according to schema)
-## returns either succesfull MatrixCdvToggledPayload or null
-static func safe_get_SIG_matrix_cdv_toggled_payload(
-	payload: Dictionary[String, Variant]
-) -> MatrixCdvToggledPayload:
-	var _r_toggle := safe_get_toggle_payload_value(payload)
-	if _r_toggle.err:
-		return
-
-	var _r_char_type := safe_get_int_payload_value(payload, SPS.dvc_char_type_field)
-	if _r_char_type.err:
-		return
-	var _r_dv_type := safe_get_int_payload_value(payload, SPS.dvc_dv_type_field)
-	if _r_dv_type.err:
-		return
-	
-	if not EnumUtils.safe_has_value(DevVisualsConfig.CharacterType, _r_char_type.value):
-		return
-	if not EnumUtils.safe_has_value(DevVisualsConfig.DevVisualsType, _r_dv_type.value):
-		return
-	return MatrixCdvToggledPayload.new(_r_toggle.value, _r_char_type.value, _r_dv_type.value)
-
-	
-class MatrixCdvToggledPayload:
-	var toggle: bool
-	var char_type: DevVisualsConfig.CharacterType
-	var dv_type: DevVisualsConfig.DevVisualsType
-
-	func _init(t: bool, ct: DevVisualsConfig.CharacterType, dt: DevVisualsConfig.DevVisualsType):
-		toggle = t
-		char_type = ct
-		dv_type = dt
-
-
-static func safe_get_SIG_dvc_value_changed_payload(
-	payload: Dictionary[String, Variant],
-	allow_null_value: bool = false
-) -> DVCValueChangedPayload:
-	var _r_value := SigUtils.safe_get_variant_payload_value(payload, SPS.value_field, allow_null_value)
-	if _r_value.err: return
-
-	var _r_type := safe_get_int_payload_value(payload, SPS.dvc_value_type_field)
-	if _r_type.err: return
-
-	if not EnumUtils.safe_has_value(DevVisualsConfig.ValueType, _r_type.value):
-		return
-	return DVCValueChangedPayload.new(_r_value.value, _r_type.value)
-
-	
-class DVCValueChangedPayload:
-	var value: Variant
-	var value_type: DevVisualsConfig.ValueType
-
-	func _init(v: Variant, vt: DevVisualsConfig.ValueType):
-		value = v
-		value_type = vt
+	return RO.VariantReturn.new(false, payload_value)

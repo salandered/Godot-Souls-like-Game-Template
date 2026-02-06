@@ -153,7 +153,7 @@ folder_colors={
 "res://logic/ui/main_menu/": "pink",
 "res://logic/ui/options_menu/": "pink",
 "res://logic/ui/pause_menu/": "pink",
-"res://logic/ui/ui_overlay_controls_menu/": "teal",
+"res://logic/ui/ui_dev_visuals_menu/": "teal",
 "res://logic/ui/ui_utils/": "purple",
 "res://logic/x_utils/": "green",
 "res://logic/x_utils/dev_3d_visuals/": "yellow",
@@ -169,7 +169,6 @@ debug_cameras=""
 [gui]
 
 theme/custom="uid://dngnbhs1qjqyy"
-theme/custom_font="uid://cjegrskdlmtod"
 
 [importer_defaults]
 

@@ -7,7 +7,7 @@ extends Node3DSystem
 
 
 @export var _character: BaseStaticCharacter
-@export var _char_type: DevVisualsConfig.CharacterType = DevVisualsConfig.CharacterType.UNKNOWN
+@export var _char_type: DVS.CharacterType = DVS.CharacterType.UNKNOWN
 
 @export_group("Working Settings")
 @export var preview_in_editor := false
@@ -24,7 +24,7 @@ var _time_elapsed := 0.0
 # region
 
 
-func get_character_type() -> DevVisualsConfig.CharacterType:
+func _get_character_type() -> DVS.CharacterType:
 	if _character:
 		return _character.char_type
 	else:
@@ -39,10 +39,10 @@ func _ready() -> void:
 		## wait a little before kicking in 
 		await FrameUtils.wait_process_frames(4)
 
-	initialise_implementation_both_editor_and_game()
+	_initialise_implementation_both_editor_and_game()
 
 	if not Engine.is_editor_hint():
-		initialise_implementation_in_game()
+		_initialise_implementation_in_game()
 
 		if not __perform_validation(true):
 			__log_warn_soft("won't be working")
@@ -50,12 +50,15 @@ func _ready() -> void:
 			# SigUtils.safe_connect_pairs([
 					# [visibility_changed, _on_visibility_changed],
 				# ])
-			if get_character_type() != DevVisualsConfig.CharacterType.UNKNOWN:
+			if _get_character_type() != DVS.CharacterType.UNKNOWN:
 				SigUtils.safe_connect_pairs([
-					[GlobalUIInfo.SIG_dvc_matrix_cdv_toggled, _on_dvc_SIG_matrix_cdv_toggled]
+					[GlobalUIInfo.SIG_dvc_value_changed_section_char_dv, _on_SIG_dvc_value_changed_section_char_dv]
 				])
 		
 		set_enabled(false) # WARNING: temporary disable on start always
+
+# endregion
+
 
 # func _on_visibility_changed():
 	# set_enabled(visible)
@@ -72,24 +75,25 @@ func set_enabled(value: bool):
 
 @abstract func reset_visuals() -> void
 
+
 ## TEMPLATE
 # region
 #---------
-# func initialise_implementation_both_editor_and_game() -> void:
-# 	super.initialise_implementation_both_editor_and_game()
+# func _initialise_implementation_both_editor_and_game() -> void:
+# 	super._initialise_implementation_both_editor_and_game()
 
-# func initialise_implementation_in_game() -> void:
-# 	super.initialise_implementation_in_game()
+# func _initialise_implementation_in_game() -> void:
+# 	super._initialise_implementation_in_game()
 #---------
 # endregion
 
 
 ## called before the validation
-func initialise_implementation_both_editor_and_game() -> void:
+func _initialise_implementation_both_editor_and_game() -> void:
 	pass
 
 ## called before the validation
-func initialise_implementation_in_game() -> void:
+func _initialise_implementation_in_game() -> void:
 	pass
 
 
@@ -130,18 +134,19 @@ func _process(delta: float) -> void:
 
 ## SIG
 
-func _on_dvc_SIG_matrix_cdv_toggled(payload: Dictionary[String, Variant]):
-	var _r := SigUtils.safe_get_SIG_matrix_cdv_toggled_payload(payload)
-	if not _r:
+func _on_SIG_dvc_value_changed_section_char_dv(payload: Dictionary[String, Variant]):
+	var parsed_payload := SigPayloadParser.safe_get_SIG_dvc_value_changed_section_char_dv_payload(
+		payload,
+		)
+	if not parsed_payload:
 		return
-
-	if _r.char_type != get_character_type():
+	if parsed_payload.char_type != _get_character_type():
 		return
-	__log_("_on_dvc_SIG_matrix_cdv_toggled", _r.dv_type)
-	_on_dvc_toggled_implementation(_r)
+	__log_("_on_SIG_dvc_value_changed_section_char_dv", parsed_payload.char_dv_type)
+	_on_SIG_dvc_value_changed_section_char_dv_imp(parsed_payload)
 
 
-@abstract func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void
+@abstract func _on_SIG_dvc_value_changed_section_char_dv_imp(payload: SigPayloadParser.DVValueChangedSectionCharDVPayload) -> void
 
 
 ## LOGS

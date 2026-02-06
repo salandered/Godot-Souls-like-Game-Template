@@ -77,6 +77,11 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 			SPS.frame_field: fr_, # string
 			SPS.message_field: result_msg
 			})
+	if GlobalUIInfo.__ALL_LOG:
+		SigUtils.safe_emit_raw(GlobalSignal.__SIG_all_log_printed, {
+			SPS.frame_field: fr_,
+			SPS.message_field: result_msg
+			})
 
 
 static func prefix_s(is_warning: bool = false, ...parts: Array):

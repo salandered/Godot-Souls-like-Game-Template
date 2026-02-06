@@ -25,6 +25,7 @@ class Environment_:
 class Chars:
 	const PLAYER = "PLAYER"
 	const BASE_CHARACTER = "BASE_CHARACTER"
+	const BASE_ENEMY_CHARACTER = "BASE_ENEMY_CHARACTER"
 
 
 class Weapons:

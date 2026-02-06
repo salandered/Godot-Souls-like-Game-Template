@@ -168,15 +168,13 @@ func initialise() -> void:
 	camera_movement._default_len = initial_boom.length()
 	camera_movement._current_len = initial_boom.length()
 
-	#
-	_toggle_cam_visuals(false)
 
 	## SIGNALS
 	SigUtils.safe_connect_pairs(
 		[
 			[GlobalSignal.SIG_update_mouse_settings_for_camera, _on_update_sense_settings],
-			[GlobalSignal.SIG_toggle_camera_visuals, _on_SIG_toggle_camera_visuals],
-			[GlobalSignal.SIG_toggle_camera_coll, _on_SIG_toggle_camera_coll]
+			[GlobalSignal.SIG_toggle_camera_coll, _on_SIG_toggle_camera_coll],
+			[GlobalUIInfo.SIG_dvc_value_changed_section_op, _on_SIG_dvc_value_changed_section_op],
 		]
 	)
 
@@ -299,29 +297,21 @@ func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
 	_toggle_cam_coll(_r.value)
 
 
-func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]):
-	var _r := SigUtils.safe_get_bool_payload_value(payload, SPS.toggle_field)
+func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant]):
+	var _r := SigPayloadParser.safe_bget_value_by_key_from_SIG_dvc_value_changed_section_payload(
+		payload,
+		DVS.KeyOverlayPanel.SUBVIEWPORT
+	)
 	if _r.err: return
 	var toggle := _r.value
-	_toggle_cam_visuals(toggle)
-	set_h_offset_camera(+1.0 if toggle else 0.0)
+	
+	set_h_offset_camera(+0.7 if _r.value else 0.0)
 
-
+	
 func _toggle_cam_coll(toggle: bool):
 	print_.dev("~~", pp.s("_toggle_cam_coll", toggle))
 	__dev_camera_coll = toggle
 
-
-func _toggle_cam_visuals(toggle: bool):
-	print_.dev("~~", pp.s("_toggle_cam_visuals", toggle))
-	if socket:
-		socket.visible = toggle
-	if pivot:
-		pivot.visible = toggle
-	if camera:
-		camera.visible = toggle
-	if aim:
-		aim.visible = toggle
 
 ## __LOGS
 # region

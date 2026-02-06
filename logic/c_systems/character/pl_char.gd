@@ -91,7 +91,7 @@ func __soft_dependencies() -> Array:
 
 
 func initialise_base_char_implementation() -> void:
-	char_type = DevVisualsConfig.CharacterType.PLAYER
+	char_type = DVS.CharacterType.PLAYER
 	add_to_group(Groups.Chars.PLAYER)
 
 	collision_layer = Collision.Layers.PLAYER_COL
@@ -109,15 +109,15 @@ func initialise_base_char_implementation() -> void:
 	if camera_focus:
 		camera_focus.visible = false
 
-	SigUtils.safe_connect(GlobalSignal.SIG_toggle_camera_visuals, _on_SIG_toggle_camera_visuals)
-	
+	SigUtils.safe_connect_pairs([
+	])
 
 	if not __perform_validation(true):
 		__log_warn_soft("well game is not ready")
 
 
 func _initialise_look_at_systems():
-	_look_at_manager = ArrayUtils.get_only_one_or_null(get_descendants.pl_look_at_managers(self ))
+	_look_at_manager = ArrayUtils.get_only_one_or_null(get_descendants.pl_look_at_manager(self ))
 	if _look_at_manager:
 		_look_at_manager.initialise(null, get_look_at_char_marker())
 
@@ -284,13 +284,6 @@ func _on_secret_enemy_sig_death_raised() -> void:
 		fancy_hat.visible = true
 
 
-func _on_SIG_toggle_camera_visuals(payload: Dictionary[String, Variant]):
-	var _r := SigUtils.safe_get_bool_payload_value(payload, SPS.toggle_field)
-	if _r.err: return
-	if camera_focus:
-		camera_focus.visible = _r.value
-
-
 ## INPUT
 
 
@@ -307,12 +300,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
-
-	if Input.is_action_just_pressed(RawAction.DEV_J):
+	if event.is_action_pressed(RawAction.DEV_J):
 		var hit := HitData.new(25, "from god", PHEA.attack.sword_slide, 1.0, "test attack", AttackDirection.Dir.LEFT)
 		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
-	if Input.is_action_just_pressed(RawAction.DEV_K):
+	if event.is_action_pressed(RawAction.DEV_K):
 		var hit := HitData.new(25, "from god", PHEA.attack.attack_360_low, 1.0, "test attack", AttackDirection.Dir.RIGHT)
 		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)

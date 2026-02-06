@@ -281,4 +281,4 @@ func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
 		SPEED_BOOST += value
 
 # func _input(event):
-# 	TURN_THRESHOLD_DEG = u._dev_change_t34_param(event, TURN_THRESHOLD_DEG, "TURN_THRESHOLD_DEG", 15)
+# 	TURN_THRESHOLD_DEG = InputUtils._dev_change_t34_param(event, TURN_THRESHOLD_DEG, "TURN_THRESHOLD_DEG", 15)

@@ -10,7 +10,7 @@ extends NodeSystem
 @onready var target_lock_mechanic: RichTextLabel = %TargetLockMechanic
 @onready var health_stamina_mechanic: RichTextLabel = %HealthStaminaMechanic
 @onready var additional_movement_tips: RichTextLabel = %AdditionalMovementTips
-@onready var ui_overlay_controls: RichTextLabel = %UIOverlayControls
+@onready var ui_overlay_controls: RichTextLabel = %UIDVMenu
 
 
 @export var refill: bool = false:

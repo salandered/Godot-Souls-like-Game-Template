@@ -88,7 +88,7 @@ func _initialise_common_char() -> void:
 	_initialise_area_awareness()
 
 	if _area_awareness:
-		_movement = ArrayUtils.get_only_one_or_null(get_descendants.base_character_movements(self ))
+		_movement = ArrayUtils.get_only_one_or_null(get_descendants.base_character_movement(self ))
 		if _movement:
 			_movement.initialise(self , _area_awareness)
 
@@ -157,7 +157,6 @@ func _initialise_weapons_sfx():
 
 
 @abstract func reset_position(y_offset: float = 0.0) -> void
-
 
 
 # region __LOGS

@@ -26,7 +26,9 @@ var _shared_material: Material
 const WIRE_FRAME_MAT = preload("uid://c0ppm6u2ki7fp")
 
 
-func initialise_implementation_in_game() -> void:
+func _initialise_implementation_in_game() -> void:
+	_initialise_shapes()
+
 	# __log_("initialise_implementation_in_game", "START")
 	if use_default_wireframe_mat and WIRE_FRAME_MAT is ShaderMaterial:
 		_shared_material_as_default_mat()
@@ -43,13 +45,17 @@ func initialise_implementation_in_game() -> void:
 		# __log_("initialise_implementation_in_game", "END")
 
 
-@abstract func get_shapes() -> Array[CollisionShape3D]
+## called before _get_shapes()
+@abstract func _initialise_shapes() -> void
+
+
+@abstract func _get_shapes() -> Array[CollisionShape3D]
 
 
 func _initialise_visuals_for_shapes() -> void:
 	_delete_all_visuals()
 	
-	for col_shape in get_shapes():
+	for col_shape in _get_shapes():
 		if not is_instance_valid(col_shape) or not col_shape.shape:
 			continue
 
@@ -58,6 +64,12 @@ func _initialise_visuals_for_shapes() -> void:
 			mesh_instance.material_override = _shared_material
 			col_shape.add_child(mesh_instance)
 			_generated_nodes.append(mesh_instance)
+	_set_visuals_color(_get_initial_color())
+
+
+## can be overriden
+func _get_initial_color() -> Color:
+	return shader_color
 
 
 func _set_visuals_color(color: Color) -> void:
@@ -68,7 +80,6 @@ func _set_visuals_color(color: Color) -> void:
 		_shared_material.albedo_color = color
 	elif _shared_material is ShaderMaterial:
 		_shared_material.set_shader_parameter("albedo", color)
-		# _shared_material.set_shader_parameter("line_transparency", shader_line_transparency)
 
 
 func _delete_all_visuals() -> void:

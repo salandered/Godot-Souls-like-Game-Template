@@ -1,16 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://i3a03hqn3yig"]
+[gd_scene load_steps=7 format=3 uid="uid://i3a03hqn3yig"]
 
-[ext_resource type="Script" uid="uid://i8trfm86bri3" path="res://logic/_project_data/autoload/global_ui_info/blue_panel_bottomless.gd" id="1_75oje"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x47y3"]
-bg_color = Color(0.055200003, 0.1476, 0.24, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_color = Color(0, 0.041266948, 0.10980393, 0.49019608)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
+[ext_resource type="Script" uid="uid://i8trfm86bri3" path="res://logic/_project_data/autoload/global_ui_info/dynamic_info_grid/blue_panel_bottomless.gd" id="1_75oje"]
+[ext_resource type="FontFile" uid="uid://c7vt0igfibv7k" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBoldItalic.ttf" id="2_dl1e3"]
 
 [sub_resource type="Gradient" id="Gradient_tym6s"]
 offsets = PackedFloat32Array(0, 0.6571429, 1)
@@ -23,24 +14,36 @@ fill_from = Vector2(1, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4jnj"]
 texture = SubResource("GradientTexture2D_bnty7")
 
-[node name="BluePanelBottomless" type="MarginContainer"]
-script = ExtResource("1_75oje")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x47y3"]
+bg_color = Color(0.055200003, 0.1476, 0.24, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0, 0.042166654, 0.11, 0.14901961)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
 
-[node name="__blue_panel_borders" type="PanelContainer" parent="."]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_x47y3")
+[node name="BluePanelBottomless" type="MarginContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_75oje")
 
 [node name="__blue_panel" type="PanelContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_f4jnj")
+
+[node name="__blue_panel_borders" type="PanelContainer" parent="__blue_panel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x47y3")
 
 [node name="__margin_in_blue_panel" type="MarginContainer" parent="__blue_panel"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="__vbox" type="VBoxContainer" parent="__blue_panel/__margin_in_blue_panel"]
 layout_mode = 2
@@ -49,26 +52,26 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_top = -8
-theme_override_constants/margin_bottom = -10
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_bottom = -4
 
-[node name="BluePanelTitle" type="RichTextLabel" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin"]
+[node name="BluePanelTitle" type="Label" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin"]
 unique_name_in_owner = true
 modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
-clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
 theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
-theme_override_constants/outline_size = 4
-bbcode_enabled = true
-text = "[b][i]no title[/i][/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_dl1e3")
+theme_override_font_sizes/font_size = 16
+text = "no title"
 
 [node name="__hbox" type="HBoxContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="__space" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 50

@@ -70,6 +70,7 @@ func _on_death_raised_implementation() -> void:
 
 const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
 
+
 func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	print_.prefix_s("glob position of an enemy", self.global_position)
 	var rigids_container := Node3D.new()

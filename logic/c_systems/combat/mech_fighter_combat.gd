@@ -26,4 +26,4 @@ func get_character() -> BaseStaticCharacter:
 
 
 func __LOG_B() -> bool:
-	return true
+	return false

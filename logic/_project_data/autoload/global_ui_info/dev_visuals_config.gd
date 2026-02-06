@@ -2,205 +2,142 @@ class_name DevVisualsConfig
 extends RefCountedSystem
 
 
-enum ValueType {
-	UNKNOWN, # 0
-	GHOST_DUR_SEC, # 1
-	GRID_V_SEP, # 2
-	SIG_FILTER # 3
-	}
-
-
-enum OverlayPanelType {
-	TUT, # 0
-	PROFILER, # 1
-	CAM_NODES, # 2
-	SIG_DEBUG, # 3
-	ERROR_LOG, # 4
-	}
-
-enum CharacterType {
-	UNKNOWN, # 0
-	PLAYER, # 1
-	HSM_ENEMY, # 2
-	SIMPLE_ENEMY # 3
-	}
-
-enum DevVisualsType {
-	STATE_INFO, # 0
-	ATTACK_INFO, # 1
-	WEAPON_TRAIL, # 2
-	HITBOX, # 3
-	WEAPON_HITBOX # 4
-	}
-
-
 ## SIGNALS
 
 var _value_changed: Signal
-var _global_ui_panel_toggled: Signal
-var _matrix_cdv_toggled: Signal
 
 
 ## DATA
 
-var _value_data: Dictionary[ValueType, Variant] = {}
-# can be reduced to _value_data using 0.0/1.0
-var _panel_data: Dictionary[OverlayPanelType, bool] = {}
-# CDV matrix. type: Dictionary[CharacterType, Dictionary[DevVisualsType, bool]]
-var _matrix_data: Dictionary[CharacterType, Dictionary] = {}
+## Dictionary[DVS.DVSection, Dictionary[int <section key>, Variant <actual value>]]
+var _data: Dictionary[DVS.DVSection, Dictionary]
 
 
 func __hard_validation() -> bool:
-	if len(_matrix_data) == 0:
-		return false
-	if error_.null_signal(_global_ui_panel_toggled):
-		return false
-	if error_.null_signal(_matrix_cdv_toggled):
+	if error_.null_signal(_value_changed):
 		return false
 	return true
 
 
-func _init(value_changed_: Signal, global_ui_panel_toggled_: Signal, matrix_cdv_toggled_: Signal) -> void:
+func _init(value_changed_: Signal) -> void:
 	self._value_changed = value_changed_
-	self._global_ui_panel_toggled = global_ui_panel_toggled_
-	self._matrix_cdv_toggled = matrix_cdv_toggled_
 
+	## 
+	var _panel_data: Dictionary[DVS.KeyOverlayPanel, bool] = {}
+	for item in DVS.KeyOverlayPanel.values():
+		_panel_data[item] = false
+
+	_data[DVS.DVSection.OVERLAY_PANEL] = _panel_data
+
+
+	##
+	var _value_data: Dictionary[DVS.KeyValueChanger, Variant] = {}
 	_value_data = {
-		ValueType.GHOST_DUR_SEC: DynamicInfoLabel.DEF_WAIT_SEC,
-		ValueType.GRID_V_SEP: GlobalUIInfo.DEF_DYNAMIC_GRID_V_SEP,
-		ValueType.SIG_FILTER: ""
+		DVS.KeyValueChanger.GHOST_DUR_SEC: DynamicInfoLabel.DEF_WAIT_SEC,
+		DVS.KeyValueChanger.GRID_V_SEP: GlobalUIInfo.DEF_DYNAMIC_GRID_V_SEP,
+		DVS.KeyValueChanger.SIG_FILTER: "",
+		DVS.KeyValueChanger.ALL_LOG_FILTER: "",
+		DVS.KeyValueChanger.ERROR_LOG_FILTER: "",
+		DVS.KeyValueChanger.WEAPON_HIT: false,
+		DVS.KeyValueChanger.WEAPON_HIT_EVERY_FRAME: false,
 	}
 	
-	for item in OverlayPanelType.values():
-		_panel_data[item] = false
+	_data[DVS.DVSection.VALUE_CHANGER] = _value_data
+
+	## 
+	var _matrix_data: Dictionary[int, bool] = {}
+
+	for char_type in DVS.CharacterType.values():
+		for dv_type in DVS.CharDVType.values():
+			var _r_composite_key := DVS.key_char_dv(char_type, dv_type)
+			if not _r_composite_key.err:
+				_matrix_data[_r_composite_key.value] = false
+
+	_data[DVS.DVSection.CHAR_DV] = _matrix_data
 	
-	## create matrix data
-	for char_type in CharacterType.values():
-		_matrix_data[char_type] = {}
-		for dv_type in DevVisualsType.values():
-			_matrix_data[char_type][dv_type] = false
-	
-	__perform_validation(
-)
-
-## CDV MATRIX
-# region
-
-func set_active_cdv(char_type: CharacterType, dv_type: DevVisualsType, toggle_value: bool) -> void:
-	if not __validation_ok():
-		__log_warn_soft("can't process request")
-		return
-	if DictUtils.safe_has_key(_matrix_data, char_type):
-		if DictUtils.safe_has_key(_matrix_data[char_type], dv_type):
-			_matrix_data[char_type][dv_type] = toggle_value
-
-			SigUtils.safe_emit_raw(_matrix_cdv_toggled, {
-				SPS.dvc_char_type_field: char_type,
-				SPS.dvc_dv_type_field: dv_type,
-				SPS.toggle_field: toggle_value
-			})
+	__perform_validation()
 
 
-func is_active_cdv(char_type: CharacterType, dv_type: DevVisualsType) -> bool:
-	if not __validation_ok():
-		__log_warn_soft("can't process request")
-		return false
-	var _r_1 = DictUtils.safe_get_dict_key(_matrix_data, char_type, null)
-	if _r_1 is Dictionary:
-		var _r_2 = DictUtils.safe_get_dict_key(_r_1, dv_type, null)
-		if _r_2 is bool:
-			return _r_2
-		else:
-			return false
-	else:
-		return false
-
-# endregion
-
-
-#OverlayalUIPanel
-
-
-## GlobalUIPanel
-
-func set_active_global_ui_panel(
-		type_: OverlayPanelType,
-		toggle_value: bool,
-		emit_signal_: bool = true
-	) -> void:
-	if not __validation_ok():
-		__log_warn_soft("can't process request")
-		return
-	if DictUtils.safe_has_key(_panel_data, type_):
-		_panel_data[type_] = toggle_value
-
-		if emit_signal_:
-			SigUtils.safe_emit_raw(_global_ui_panel_toggled, {
-				SPS.dvc_overlay_panel_type_field: type_,
-				SPS.toggle_field: toggle_value}
-			)
-
-
-func is_global_ui_panel_active(type_: OverlayPanelType) -> bool:
-	if not __validation_ok():
-		__log_warn_soft("can't process request")
-		return false
-	var _r = DictUtils.safe_get_dict_key(_panel_data, type_, false)
-	if _r is bool:
-		return _r
-	else:
-		return false
-
-
-## Values
+## API
 
 func set_value(
-		type_: ValueType,
+		section: DVS.DVSection,
+		key_: int,
 		value_: Variant,
 		emit_signal_: bool = true
 	) -> void:
 	if not __validation_ok():
 		__log_warn_soft("can't process request")
 		return
-	if DictUtils.safe_has_key(_value_data, type_):
-		_value_data[type_] = value_
+	if not _check_path_exists(section, key_):
+		return
 
-		if emit_signal_:
-			SigUtils.safe_emit_raw(_value_changed, {
-				SPS.dvc_value_type_field: type_,
-				SPS.value_field: value_}
-			)
+	_data[section][key_] = value_
+
+	if emit_signal_:
+		SigUtils.safe_emit_raw(_value_changed, {
+			SPS.dvc_section_field: section,
+			SPS.dvc_key_field: key_,
+			SPS.dvc_value_field: value_}
+		)
 
 
 ## returns INF in case of problem
-func fget_value(type_: ValueType) -> float:
-	if not __validation_ok():
-		__log_warn_soft("can't process request")
-		return false
-	var _r = DictUtils.safe_get_dict_key(_value_data, type_, null)
-	if _r is float:
-		return _r
-	else:
-		return INF
+func fget_value(section: DVS.DVSection, key_: int) -> float:
+	var value: Variant = _get_typed_value(
+		section,
+		key_,
+		func(v): return v is float,
+		INF
+	)
+	return value as float
+
 
 ## returns "" in case of problem
-func sget_value(type_: ValueType) -> String:
-	if not __validation_ok():
-		__log_warn_soft("can't process request")
-		return ""
-	var _r = DictUtils.safe_get_dict_key(_value_data, type_, null)
-	if _r is String:
-		return _r
-	else:
-		return ""
+func sget_value(section: DVS.DVSection, key_: int) -> String:
+	var value: Variant = _get_typed_value(
+		section,
+		key_,
+		func(v): return v is String,
+		""
+	)
+	return value as String
+
 
 ## returns false in case of problem
-func bget_value(type_: ValueType) -> bool:
+func bget_value(section: DVS.DVSection, key_: int) -> bool:
+	var value: Variant = _get_typed_value(
+		section,
+		key_,
+		func(v): return v is bool,
+		false
+	)
+	return value as bool
+
+
+## INTERNAL
+
+func _get_by_section_and_key(section: DVS.DVSection, key_: int) -> RO.VariantReturn:
+	if not _check_path_exists(section, key_):
+		return RO.VariantReturn.new(true)
+	return RO.VariantReturn.new(false, _data[section][key_])
+
+
+func _check_path_exists(section: DVS.DVSection, key_: int) -> bool:
+	if not DictUtils.safe_has_key(_data, section):
+		__log_warn_soft("section does not exist", "", "", section, key_)
+		return false
+	if not DictUtils.safe_has_key(_data[section], key_):
+		__log_warn_soft("key- does not exist", "", "", section, key_)
+		return false
+	return true
+
+
+func _get_typed_value(section: DVS.DVSection, key_: int, type_filter: Callable, value_on_error: Variant) -> Variant:
 	if not __validation_ok():
 		__log_warn_soft("can't process request")
-		return false
-	var _r = DictUtils.safe_get_dict_key(_value_data, type_, null)
-	if _r is bool:
-		return _r
-	else:
-		return false
+		return value_on_error
+	var _r := _get_by_section_and_key(section, key_)
+	if _r.err or not type_filter.call(_r.value):
+		return value_on_error
+	return _r.value

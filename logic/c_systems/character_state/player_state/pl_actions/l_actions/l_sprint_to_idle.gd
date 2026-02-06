@@ -46,5 +46,5 @@ func _move_with_root(delta: float) -> void:
 
 # var _dev_add_blend := 0
 # func _input(event):
-	# _dev_add_blend = u._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
-	# _next_anim_correction = u._dev_change_t34_param(event, _next_anim_correction, "_next_anim_correction", 0.02)
+	# _dev_add_blend = InputUtils._dev_change_t12_param(event, _dev_add_blend, "_dev_add_blend", 0.05)
+	# _next_anim_correction = InputUtils._dev_change_t34_param(event, _next_anim_correction, "_next_anim_correction", 0.02)

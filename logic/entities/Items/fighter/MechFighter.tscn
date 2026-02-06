@@ -1392,6 +1392,7 @@ update_scale = false
 [node name="__dev" type="Node3D" parent="."]
 
 [node name="VisualiseHitBoxFrame2" parent="__dev" node_paths=PackedStringArray("combat", "_character") instance=ExtResource("49_6xoih")]
+color_invincible = Color(0.73760307, 0.08260098, 0.42440233, 0.2509804)
 combat = NodePath("../../Combat")
 _character = NodePath("../..")
 _char_type = 3

@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://82ivr255dcjx"]
 
-[ext_resource type="Script" path="res://logic/x_utils/dev_3d_visuals/hithurt_boxes/dev_visuals_weapon_hurtboxes.gd" id="1_8msms"]
+[ext_resource type="Script" uid="uid://unoqiilk88vp" path="res://logic/x_utils/dev_3d_visuals/hithurt_boxes/dev_visuals_weapon_hurtboxes.gd" id="1_8msms"]
 
 [node name="DVWeaponHurtBox" type="Node3D"]
 script = ExtResource("1_8msms")
 color_passive = Color(0.5, 0.121757954, 0.15884066, 1)
 color_attacking = Color(0.7851237, 0.07759587, 0.14696164, 1)
 shader_color = Color(1, 0, 0.099999905, 1)
-shader_transparency = 0.1
+shader_transparency = 0.4
 shader_line_transparency = 0.8
 shader_grid_density = Vector2(10, 4)

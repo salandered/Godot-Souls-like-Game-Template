@@ -71,10 +71,15 @@ func _reset_text(value: bool):
 			item.reset_text()
 
 
-@abstract func get_char_type() -> DevVisualsConfig.CharacterType
+@abstract func _get_char_type() -> DVS.CharacterType
 
 
-@abstract func get_dv_type() -> DevVisualsConfig.DevVisualsType
+@abstract func _get_dv_type() -> DVS.CharDVType
+
+
+func get_composite_dvc_key() -> int:
+	var composite_key := DVS.key_char_dv(_get_char_type(), _get_dv_type())
+	return composite_key.value if not composite_key.err else -1
 
 
 @abstract func _get_title() -> String

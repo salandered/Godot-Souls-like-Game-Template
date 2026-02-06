@@ -8,16 +8,21 @@ extends Node3DLogger
 @onready var first_tutorial: Control = %FirstTutorial
 @onready var free_cam_ui: FreeCamUI = %FreeCamUI
 @onready var sig_info_manager: SigInfoManager = %SigInfoManager
+@onready var all_log_panel_manager: AllLogPanelManager = %AllLogPanelManager
 @onready var error_log_panel_manager: ErrorLogPanelManager = %ErrorLogPanelManager
+
+@onready var debug_fancy_cam_panel_manager: DebugFancyCamManager = %DebugFancyCamPanelManager
 
 @onready var dynamic_info_presenters: Node = %DynamicInfoPresenters
 @onready var dynamic_info_grid: FlowContainer = %DynamicInfoGrid
 
 
-const DEF_DYNAMIC_GRID_V_SEP: int = 10
+const DEF_DYNAMIC_GRID_V_SEP: int = 20
 const DEF_SIG_DEBUG: bool = false
+const DEF_ALL_LOG: bool = false
 const DEF_ERROR_LOG: bool = false
 var __SIG_DEBUG: bool = DEF_SIG_DEBUG
+var __ALL_LOG: bool = DEF_ALL_LOG
 var __ERROR_LOG: bool = DEF_ERROR_LOG
 
 
@@ -37,12 +42,13 @@ func get_dev_visuals_config() -> DevVisualsConfig:
 
 
 signal SIG_dvc_value_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_overlay_ui_panel_toggled(payload: Dictionary[String, Variant])
-signal SIG_dvc_matrix_cdv_toggled(payload: Dictionary[String, Variant])
+signal SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant])
+signal SIG_dvc_value_changed_section_vc(payload: Dictionary[String, Variant])
+signal SIG_dvc_value_changed_section_char_dv(payload: Dictionary[String, Variant])
 
 
 func _ready() -> void:
-	_dev_visual_config = DevVisualsConfig.new(SIG_dvc_value_changed, SIG_dvc_overlay_ui_panel_toggled, SIG_dvc_matrix_cdv_toggled)
+	_dev_visual_config = DevVisualsConfig.new(SIG_dvc_value_changed)
 
 
 	_presenters.clear()
@@ -57,63 +63,83 @@ func _ready() -> void:
 	update_profiler_mode(2)
 
 	sig_info_manager.set_enable(DEF_SIG_DEBUG)
+	all_log_panel_manager.set_enable(DEF_ALL_LOG)
 	error_log_panel_manager.set_enable(DEF_ERROR_LOG)
 
 	ControlUtils.flow_container_set_v_separation(dynamic_info_grid, DEF_DYNAMIC_GRID_V_SEP)
 
 	SigUtils.safe_connect_pairs([
 		[GlobalSignal.SIG_free_cam_mode_toggled, _on_SIG_toggle_free_cam],
-		[SIG_dvc_value_changed, _on_SIG_dvc_value_changed],
-		[SIG_dvc_overlay_ui_panel_toggled, _on_dvc_SIG_overlay_ui_panel_toggled],
-		[SIG_dvc_matrix_cdv_toggled, _on_dvc_SIG_matrix_cdv_toggled]
+		[SIG_dvc_value_changed, _on_SIG_dvc_value_changed_distribute_signal],
+		[SIG_dvc_value_changed_section_op, _on_SIG_dvc_value_changed_section_op],
+		[SIG_dvc_value_changed_section_vc, _on_SIG_dvc_value_changed_section_vc],
+		[SIG_dvc_value_changed_section_char_dv, _on_SIG_dvc_value_changed_section_char_dv]
 	])
 
 
-func _on_SIG_dvc_value_changed(payload: Dictionary[String, Variant]):
-	var parsed_payload := SigUtils.safe_get_SIG_dvc_value_changed_payload(payload)
+## distribution sits here temporary. It should be separated class (it's not about the GlobalUIInfo)
+func _on_SIG_dvc_value_changed_distribute_signal(payload: Dictionary[String, Variant]):
+	var parsed_payload := SigPayloadParser.safe_get_SIG_dvc_value_changed_payload(payload)
 	if not parsed_payload:
 		return
-	if parsed_payload.value_type == DevVisualsConfig.ValueType.GRID_V_SEP and (parsed_payload.value is int or parsed_payload.value is float):
-		var new_value: int = int(parsed_payload.value)
-		ControlUtils.flow_container_set_v_separation(dynamic_info_grid, new_value)
-		__log_("dynamic_info_grid updated with v_separation", new_value)
+
+	var distributed_payload: Dictionary[String, Variant] = {
+		SPS.dvc_key_field: parsed_payload.key,
+		SPS.dvc_value_field: parsed_payload.value
+	}
+	match parsed_payload.section:
+		DVS.DVSection.OVERLAY_PANEL:
+			SigUtils.safe_emit_raw(SIG_dvc_value_changed_section_op, distributed_payload)
+		DVS.DVSection.VALUE_CHANGER:
+			SigUtils.safe_emit_raw(SIG_dvc_value_changed_section_vc, distributed_payload)
+		DVS.DVSection.CHAR_DV:
+			SigUtils.safe_emit_raw(SIG_dvc_value_changed_section_char_dv, distributed_payload)
 
 
-func _on_dvc_SIG_overlay_ui_panel_toggled(payload: Dictionary[String, Variant]):
-	__log_("_on_dvc_SIG_overlay_ui_panel_toggled", payload)
-	var _r_toggle := SigUtils.safe_get_toggle_payload_value(payload)
-	if _r_toggle.err:
-		return
+func _on_SIG_dvc_value_changed_section_vc(payload: Dictionary[String, Variant]):
+	var _r := SigPayloadParser.safe_get_value_by_key_from_SIG_dvc_value_changed_section_payload(
+		payload,
+		DVS.KeyValueChanger.GRID_V_SEP)
+	if _r.err or (_r.value is not float and _r.value is not int): return
+	var new_value: int = int(_r.value)
+	ControlUtils.flow_container_set_v_separation(dynamic_info_grid, new_value)
+	__log_("dynamic_info_grid updated with v_separation", new_value)
+
+
+func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant]):
+	var _r := SigPayloadParser.safe_get_SIG_dvc_value_changed_section_payload(payload)
+	if not _r or _r.value is not bool: return
+	var toggle := _r.value as bool
 	
-	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_overlay_panel_type_field)
-	if _r_type.err:
-		return
-	
-	var toggle := _r_toggle.value
-	
-	match _r_type.value:
-		DevVisualsConfig.OverlayPanelType.TUT:
+	match _r.key:
+		DVS.KeyOverlayPanel.TUT:
 			_toggle_tutorial_from_dvc(toggle)
-		DevVisualsConfig.OverlayPanelType.PROFILER:
+		DVS.KeyOverlayPanel.PROFILER:
 			update_profiler_mode(0 if toggle else 2)
-		DevVisualsConfig.OverlayPanelType.CAM_NODES:
-			_toggle_in_game_subvp_from_dvc(toggle)
-		DevVisualsConfig.OverlayPanelType.SIG_DEBUG:
+		DVS.KeyOverlayPanel.SIG_DEBUG:
 			__SIG_DEBUG = toggle
 			sig_info_manager.set_enable(toggle)
-		DevVisualsConfig.OverlayPanelType.ERROR_LOG:
+		DVS.KeyOverlayPanel.ALL_LOG:
+			__ALL_LOG = toggle
+			all_log_panel_manager.set_enable(toggle)
+		DVS.KeyOverlayPanel.ERROR_LOG:
 			__ERROR_LOG = toggle
 			error_log_panel_manager.set_enable(toggle)
+		DVS.KeyOverlayPanel.CAM_NODES:
+			pass
+		DVS.KeyOverlayPanel.SUBVIEWPORT:
+			_toggle_in_game_subvp_from_dvc(toggle)
 
 
-func _on_dvc_SIG_matrix_cdv_toggled(payload: Dictionary[String, Variant]):
-	__log_("_on_dvc_SIG_matrix_cdv_toggled", payload)
-	var _r := SigUtils.safe_get_SIG_matrix_cdv_toggled_payload(payload)
-	if not _r:
-		return
+func _on_SIG_dvc_value_changed_section_char_dv(payload: Dictionary[String, Variant]):
+	__log_("_on_SIG_dvc_value_changed_section_char_dv", payload)
+	var _r := SigPayloadParser.safe_get_SIG_dvc_value_changed_section_payload(payload)
+	if not _r or _r.value is not bool: return
+	var toggle := _r.value as bool
+
 	for item in _presenters:
-		if item.get_char_type() == _r.char_type and item.get_dv_type() == _r.dv_type:
-			item.set_enable(_r.toggle)
+		if item.get_composite_dvc_key() == _r.key:
+			item.set_enable(toggle)
 			return
 
 
@@ -216,7 +242,7 @@ func _toggle_tutorial_from_dvc(toggle: bool):
 
 
 func toggle_tutorial(toggle: bool):
-	_dev_visual_config.set_active_global_ui_panel(DevVisualsConfig.OverlayPanelType.TUT, toggle)
+	_dev_visual_config.set_value(DVS.DVSection.OVERLAY_PANEL, DVS.KeyOverlayPanel.TUT, toggle)
 	
 
 func is_tut_visible() -> bool:
@@ -239,27 +265,26 @@ var ui_overlay_controls_visible: bool = false
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed(RawAction.DEV_profiler):
+	if event.is_action_pressed(RawAction.DEV_profiler):
 		profiler_mode_cycler.get_next()
 
 		## currently we need to update config instead of changing config which would trigger the UI update.
 		## this is because config supports profiler as a bool value, while here we iterate through the different modes
-		## legacy issue, should be solved via supporting non binary values in config
-		_dev_visual_config.set_active_global_ui_panel(
-			DevVisualsConfig.OverlayPanelType.PROFILER,
+		## legacy issue, should be solved via saving not boolean profiler in config
+		_dev_visual_config.set_value(
+			DVS.DVSection.OVERLAY_PANEL,
+			DVS.KeyOverlayPanel.PROFILER,
 			true if profiler_mode_cycler.get_current() in [0, 1] else false,
 			false ## dont spawn signal
 			)
 		update_profiler_mode()
 		get_viewport().set_input_as_handled()
 
-	# if event.is_action_pressed(RawAction.DEV_show_col):
-	# 	var tree := get_tree()
-	# 	tree.debug_collisions_hint = not tree.debug_collisions_hint
-
-	# 	get_viewport().set_input_as_handled()
-
 ## 
 
 func pp_name() -> String:
 	return pp.s("~~~GlobalUI", ObjUtils.construct_obj_pp_name(self ))
+
+
+func __LOG_B() -> bool:
+	return false

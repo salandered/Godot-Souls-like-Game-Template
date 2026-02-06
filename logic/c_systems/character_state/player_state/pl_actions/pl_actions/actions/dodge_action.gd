@@ -159,12 +159,12 @@ func animate(): # ▶️
 var __weight := 0.8
 var __sp_scale := 1.2
 
-# func _input(event):
-# 	# END_SPEED = u._dev_change_param(event, END_SPEED, "END_SPEED", 0.5)
+# func _unhandled_input(event):
+# 	# END_SPEED = InputUtils._dev_change_param(event, END_SPEED, "END_SPEED", 0.5)
 # # 	# 	0.5, "dev_speed_down", RawAction.DEV_speed_up)
-# 	# __weight = u._dev_change_t12_param(event, __weight, "__weight", 0.1)
-# 	__sp_scale = u._dev_change_t34_param(event, __sp_scale, "__sp_scale", 0.1)
-# # 	GRAVITY_DURING_JUMP = u._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
+# 	# __weight = InputUtils._dev_change_t12_param(event, __weight, "__weight", 0.1)
+# 	__sp_scale = InputUtils._dev_change_t34_param(event, __sp_scale, "__sp_scale", 0.1)
+# # 	GRAVITY_DURING_JUMP = InputUtils._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
 
 
 func _on_dodge_increase(payload: Dictionary[String, Variant]) -> void:

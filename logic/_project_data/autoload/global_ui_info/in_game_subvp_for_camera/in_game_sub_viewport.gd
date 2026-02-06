@@ -1,49 +1,77 @@
-extends NodeSystem
 class_name InGameSubViewport
+extends NodeSystem
+
+@onready var small_cams_container: HBoxContainer = %SmallCamsContainer
+
+@onready var small_top_down_svp: SubViewport = %SmallTopDownSVP
+@onready var small_top_down_cam: DebugCoolCamera = %SmallTopDown
+@onready var small_left_svp: SubViewport = %SmallLeftSVP
+@onready var small_left_cam: DebugCoolCamera = %SmallLeft
 
 
 @onready var sub_view_container: MarginContainer = %SubViewContainer
 @onready var right_sub_viewport: SubViewport = %RightSubViewport
 @onready var info_container: MarginContainer = %InfoContainer
 
-@onready var top_down_camera: TopDownCamera = %TopDownCamera
+@onready var debug_cool_cam: DebugCoolCamera = %DebugCoolCam
 
 
-const controls_text := "[b]Wheel up/down[/b] - Change top view height
-[b]Wheel up/down + RMB[/b] - Change top view FOV
-[i]NumPad 0 - Toggle ui[/i]
-"
+@onready var cam_state_label: RichTextLabel = %CamStateLabel
+
+@onready var controls_info: RichTextLabel = %ControlsInfoLabel
 
 
 var DEF_H_SIZE: float = 800
 
+
 func __hard_dependencies() -> Array:
 	return [
 		right_sub_viewport,
-		top_down_camera
+		debug_cool_cam
 	]
 
+func __soft_dependencies() -> Array:
+	return [
+		small_top_down_svp,
+		small_left_svp,
+		small_top_down_cam,
+		small_left_cam,
+	]
+
+
 func _ready() -> void:
-	if not __perform_validation():
+	if not __perform_validation(true):
 		__log_warn_soft("won't be working")
 		return
 
 	set_visible(true)
-	top_down_camera.set_camera_enabled(true)
+	debug_cool_cam.set_camera_enabled(true, true)
+
+
+	if small_top_down_cam:
+		small_top_down_cam.set_camera_enabled(true, false)
+	if small_left_cam:
+		small_left_cam.set_camera_enabled(true, false)
+
 
 	right_sub_viewport.audio_listener_enable_3d = false
 	right_sub_viewport.audio_listener_enable_2d = false
 	
-	set_h_size(DEF_H_SIZE)
-	# SigUtils.safe_connect(GlobalSignal.SIG_free_cam_mode_toggled, _on_SIG_free_cam_mode_toggled)
-
+	if small_top_down_svp:
+		small_top_down_svp.audio_listener_enable_3d = false
+		small_top_down_svp.audio_listener_enable_2d = false
+	if small_left_svp:
+		small_left_svp.audio_listener_enable_3d = false
+		small_left_svp.audio_listener_enable_2d = false
 	
-# func _on_SIG_free_cam_mode_toggled(payload: Dictionary[String, Variant]):
-# 	var _r := SigUtils.safe_get_toggle_payload_value(payload)
-# 	if _r.err: return
 
-# 	var toggled: bool = _r.value
-# 	set_visible(not toggled)
+	if controls_info:
+		var _r_text := debug_cool_cam.CONTROLS_TEXT
+		_r_text += "\n[b]M[/b] - toggle small top views"
+		controls_info.text = debug_cool_cam.CONTROLS_TEXT
+
+
+	set_h_size(DEF_H_SIZE)
 
 
 func set_h_size(value: float):
@@ -56,9 +84,26 @@ func set_visible(value: bool):
 	sub_view_container.visible = value
 
 
+## TOP DOWN CAM
+
+func _process(delta: float) -> void:
+	cam_state_label.text = debug_cool_cam.get_status_text().strip_edges()
+
+
 func set_cam_target(target: Node3D):
 	if not __validation_ok(): return
 	if target and is_instance_valid(target) and not target.is_queued_for_deletion():
-		top_down_camera.target = target
+		debug_cool_cam.target = target
+		if small_top_down_cam:
+			small_top_down_cam.target = target
+		if small_left_cam:
+			small_left_cam.target = target
 	else:
 		__log_warn_soft("can't set cam target, target is invalid")
+
+
+func _input(event: InputEvent) -> void:
+	match InputUtils.get_keycode(event):
+		KEY_M:
+			small_cams_container.visible = not small_cams_container.visible
+			InputUtils.mark_input_handled(self )

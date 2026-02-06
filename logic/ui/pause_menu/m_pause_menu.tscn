@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/themes/panel/panel_back.tres" id="4_kheb5"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="4_w5m25"]
 [ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://-assets-/ui_assets/themes/buttons/PauseMenuButton.tscn" id="7_fb021"]
-[ext_resource type="PackedScene" uid="uid://bed3gcu0mg3wp" path="res://logic/ui/ui_overlay_controls_menu/UIOverlayControls.tscn" id="8_hiit0"]
+[ext_resource type="PackedScene" uid="uid://bed3gcu0mg3wp" path="res://logic/ui/ui_dev_visuals_menu/UIDVMenu.tscn" id="8_hiit0"]
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3

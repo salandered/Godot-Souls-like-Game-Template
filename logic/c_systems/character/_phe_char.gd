@@ -106,7 +106,7 @@ func __soft_dependencies() -> Array:
 func initialise_base_char_implementation() -> void:
 	super.initialise_base_char_implementation()
 
-	char_type = DevVisualsConfig.CharacterType.HSM_ENEMY
+	char_type = DVS.CharacterType.HSM_ENEMY
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
@@ -249,6 +249,9 @@ func _on_death_raised() -> void:
 	if death_raised_processed:
 		return
 	
+	if get_combat():
+		get_combat().reset_all_weapons()
+		
 	death_raised_processed = true
 	angry_raised = false
 	death_raised = false
@@ -301,7 +304,7 @@ func _shrink_coll_capsule():
 	var offset_down := height_reduction / 2.0
 
 	coll_collider.position.y -= offset_down # Move DOWN (negative Y)
-	CollShapeTranform.shrink_coll_shape_capsule_size(coll_collider, 1.0, _height_mult)
+	CollShapeUtils.shrink_coll_shape_capsule_size(coll_collider, 1.0, _height_mult)
 
 
 func __pp_state_history():

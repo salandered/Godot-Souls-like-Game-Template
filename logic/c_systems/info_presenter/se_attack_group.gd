@@ -9,12 +9,12 @@ extends BaseInfoGroupPresenter
 @onready var se_attack_direction: DynamicInfoLabel = %SEAttackDirection
 
 
-func get_char_type() -> DevVisualsConfig.CharacterType:
-	return DevVisualsConfig.CharacterType.SIMPLE_ENEMY
+func _get_char_type() -> DVS.CharacterType:
+	return DVS.CharacterType.SIMPLE_ENEMY
 
 
-func get_dv_type() -> DevVisualsConfig.DevVisualsType:
-	return DevVisualsConfig.DevVisualsType.ATTACK_INFO
+func _get_dv_type() -> DVS.CharDVType:
+	return DVS.CharDVType.ATTACK_INFO
 
 
 func _supported_signal_pairs() -> Array[Array]:

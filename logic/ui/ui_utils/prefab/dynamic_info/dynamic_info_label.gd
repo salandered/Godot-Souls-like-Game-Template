@@ -3,7 +3,7 @@ class_name DynamicInfoLabel
 extends ControlSystem
 
 
-const DEF_WAIT_SEC := 4.5
+const DEF_WAIT_SEC := 3.5
 
 @export_group("Text Config")
 @export var title_text: String = "State":
@@ -23,13 +23,13 @@ const DEF_WAIT_SEC := 4.5
 		_update_title()
 
 
-@export var title_font_size: int = 24:
+@export var title_font_size: int = 20:
 	set(value):
 		title_font_size = value
 		_update_font_size()
 
 
-@export var font_size: int = 28:
+@export var font_size: int = 24:
 	set(value):
 		font_size = value
 		_update_font_size()
@@ -93,21 +93,7 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		reset_text()
 
-		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_value_changed, _on_SIG_dvc_value_changed)
-
-
-func _on_SIG_dvc_value_changed(payload: Dictionary[String, Variant]):
-	var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_value_type_field)
-	if _r_type.err: return
-
-	if _r_type.value != DevVisualsConfig.ValueType.GHOST_DUR_SEC:
-		return
-
-	var _r_value := SigUtils.safe_get_int_float_payload_value(payload, SPS.value_field)
-	if _r_value.err: return
-	
-	__log_("wait_duration updated with", _r_value.value, "from", wait_duration)
-	wait_duration = _r_value.value
+		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_value_changed_section_vc, _on_SIG_dvc_value_changed_section_vc)
 
 
 func reset_text() -> void:
@@ -291,3 +277,14 @@ func _update_font_size() -> void:
 #func _update_margins() -> void:
 	#if margin_inside_panel:
 		#ControlUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)
+
+
+func _on_SIG_dvc_value_changed_section_vc(payload: Dictionary[String, Variant]):
+	var _r := SigPayloadParser.safe_fget_value_by_key_from_SIG_dvc_value_changed_section_payload(
+		payload,
+		DVS.KeyValueChanger.GHOST_DUR_SEC
+		)
+	if _r.err: return
+
+	__log_("wait_duration updated with", _r.value, "from", wait_duration)
+	wait_duration = _r.value

@@ -83,14 +83,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not _cycler:
 		return
 
-	if event is InputEventKey and event.pressed and not event.echo:
-		var new_key: Variant = null
-		
-		if event.keycode == KEY_DOWN:
+	var new_key: Variant
+	
+	match InputUtils.get_keycode(event):
+		KEY_DOWN:
 			new_key = _cycler.get_next()
-		elif event.keycode == KEY_UP:
+			_apply_state(new_key)
+			get_viewport().set_input_as_handled()
+		KEY_UP:
 			new_key = _cycler.get_previous()
-			
-		if new_key != null:
 			_apply_state(new_key)
 			get_viewport().set_input_as_handled()

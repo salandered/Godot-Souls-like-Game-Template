@@ -27,8 +27,7 @@ debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
 [node name="DevVisualisePathWeapon" parent="WeaponHurtBox" instance=ExtResource("3_sectu")]
 trail_radius = 0.02
-update_interval_seconds = 0.05
-max_segment_length = 2.0
+update_interval_seconds = 0.0
 min_velocity = 6.0
 max_velocity = 15.0
 _char_type = 1

@@ -79,9 +79,9 @@ func _input(event: InputEvent) -> void:
 			SigUtils.safe_emit(get_player().switch_weapon_cant_be_done, {})
 
 	## DEV			
-	# switch_overlay_weight = u._dev_change_t12_param(event, switch_overlay_weight, "switch_overlay_weight", 0.05)
-	# fade_in = u._dev_change_t34_param(event, fade_in, "fade_in", 0.05)
-	# fade_out = u._dev_change_t67_param(event, fade_out, "fade_out", 0.05)
+	# switch_overlay_weight = InputUtils._dev_change_t12_param(event, switch_overlay_weight, "switch_overlay_weight", 0.05)
+	# fade_in = InputUtils._dev_change_t34_param(event, fade_in, "fade_in", 0.05)
+	# fade_out = InputUtils._dev_change_t67_param(event, fade_out, "fade_out", 0.05)
 
 
 ## DEV

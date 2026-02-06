@@ -283,8 +283,8 @@ func _input(event: InputEvent) -> void:
 
 
 func __hide_menu_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_0 or event.keycode == KEY_KP_0:
+	match InputUtils.get_keycode(event):
+		KEY_0, KEY_KP_0:
 			if hide_label_container.visible == false:
 				return
 			_toggle_debug_view()

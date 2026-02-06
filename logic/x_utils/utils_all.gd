@@ -16,7 +16,7 @@ static func get_time_string_from_system_mm_ss() -> String:
 	return mm_ss
 
 
-static func sfr(str_prefix: bool = false) -> Variant:
+static func sfr(str_prefix: bool = false) -> String:
 	if not str_prefix:
 		return str(Engine.get_process_frames())
 	return pp.s("fr_n-", Engine.get_process_frames())
@@ -106,48 +106,3 @@ static func hide_dev_visuals(node: Node, __log: bool = false):
 		func(n): return n.name.begins_with("__dev") or n.name.begins_with("__test"),
 		__log
 	)
-
-
-## DEV
-# region
-
-static func _dev_change_t12_param(event, param, param_name: String = "some param", step: float = 0.1,
-	require_ctrl: bool = false) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t1, RawAction.t2, require_ctrl)
-
-static func _dev_change_t34_param(event, param, param_name: String = "some param", step: float = 0.1,
-	require_ctrl: bool = false) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t3, RawAction.t4, require_ctrl)
-
-static func _dev_change_t58_param(event, param, param_name: String = "some param", step: float = 0.1,
-	require_ctrl: bool = false) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t5, RawAction.t8, require_ctrl)
-
-static func _dev_change_t67_param(event, param, param_name: String = "some param", step: float = 0.1,
-	require_ctrl: bool = false) -> Variant:
-	return _dev_change_param(event, param, param_name, step, RawAction.t6, RawAction.t7, require_ctrl)
-
-static func _dev_change_param(
-	event: InputEvent,
-	param: Variant,
-	param_name: String = "some param",
-	step: float = 0.1,
-	key_a: String = RawAction.t1,
-	key_b: String = RawAction.t2,
-	require_ctrl: bool = false
-) -> Variant:
-	var prev_param: Variant = param
-
-	if require_ctrl and not event.is_ctrl_pressed():
-		return param
-
-	if event.is_action_released(key_a):
-		param -= step
-	if event.is_action_released(key_b):
-		param += step
-
-	if prev_param != param:
-		print_.dev("~~ ", pp.s(param_name, prev_param, pp.arr, param))
-	return param
-
-# endregion

@@ -3,7 +3,7 @@ class_name BaseStaticCharacter
 extends CharacterBody3DSystem
 
 
-var char_type: DevVisualsConfig.CharacterType = DevVisualsConfig.CharacterType.UNKNOWN
+var char_type: DVS.CharacterType = DVS.CharacterType.UNKNOWN
 
 var _anim_params_container: BaseAnimParamsContainer
 var _anim_container: AnimContainer
@@ -66,7 +66,7 @@ func _initialise_anim_systems() -> void:
 
 	_native_player = _for_init_native_player()
 
-	_anim_container = ArrayUtils.get_only_one_or_null(get_descendants.anim_containers((self )))
+	_anim_container = ArrayUtils.get_only_one_or_null(get_descendants.anim_container((self )))
 
 	if _native_player and _anim_params_container:
 		_anim_container._accept_animations(
@@ -83,7 +83,7 @@ func _initialise_anim_systems() -> void:
 
 
 func _initialise_combat() -> void:
-	_combat = ArrayUtils.get_only_one_or_null(get_descendants.base_combats(self ))
+	_combat = ArrayUtils.get_only_one_or_null(get_descendants.base_combat(self ))
 	if _combat:
 		_combat.initialise(self , _for_init_active_weapon_id_list())
 

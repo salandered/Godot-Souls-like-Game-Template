@@ -2,16 +2,16 @@ class_name BB
 extends RefCounted
 
 
-static func color_wrap(text: String, color_hex: String) -> String:
-	return "[color=%s]%s[/color]" % [color_hex, text]
+static func color_wrap(text: Variant, color_hex: String) -> String:
+	return "[color=%s]%s[/color]" % [color_hex, str(text)]
 
 
-static func i_wrap(text: String) -> String:
-	return "[i]%s[/i]" % text
+static func i_wrap(text: Variant) -> String:
+	return "[i]%s[/i]" % str(text)
 
 
-static func b_wrap(text: String) -> String:
-	return "[b]%s[/b]" % text
+static func b_wrap(text: Variant) -> String:
+	return "[b]%s[/b]" % str(text)
 
 
 static func image_20_wrap(text: String) -> String:

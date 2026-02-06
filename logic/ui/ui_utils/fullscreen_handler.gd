@@ -16,12 +16,12 @@ func _input(event):
 func _toggle_fullscreen_initial_method(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
-	if event is InputEventKey \
-	and event.is_pressed() \
-	and event.keycode == KEY_F11:
-		get_tree().root.mode = Window.MODE_WINDOWED \
-			if get_tree().root.mode == Window.MODE_FULLSCREEN \
-			else Window.MODE_FULLSCREEN
+
+	match InputUtils.get_keycode(event):
+		KEY_F11:
+			get_tree().root.mode = Window.MODE_WINDOWED \
+				if get_tree().root.mode == Window.MODE_FULLSCREEN \
+				else Window.MODE_FULLSCREEN
 
 
 func _toggle_mouse_capture() -> void:

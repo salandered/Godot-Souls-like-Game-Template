@@ -20,6 +20,21 @@ static func safe_has_key(enum_dict: Dictionary, key: String, warn_level: String 
 	return exists
 
 
+## Cycles to the next enum value (0 -> 1 -> ... -> N -> 0).
+## Assumes standard zero-based sequential enum.
+static func cycle_sequential(enum_dict: Dictionary, current_value: int) -> int:
+	return (current_value + 1) % enum_dict.size()
+
+
+## Safely gets the string key name. Returns "UNKNOWN" if not found.
+static func get_name_safe(enum_dict: Dictionary, value: int) -> String:
+	var keys = enum_dict.keys()
+	if value >= 0 and value < keys.size():
+		return keys[value]
+	# Fallback to avoid crash
+	return "UNKNOWN"
+
+
 ## Helpers
 
 static func _msg_enum_value_problem(value: int, enum_dict: Dictionary) -> String:

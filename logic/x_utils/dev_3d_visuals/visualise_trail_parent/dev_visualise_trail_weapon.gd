@@ -15,8 +15,8 @@ func __hard_validation() -> bool:
 	return is_instance_valid(_cached_hurtbox)
 
 
-func initialise_implementation_both_editor_and_game() -> void:
-	super.initialise_implementation_both_editor_and_game()
+func _initialise_implementation_both_editor_and_game() -> void:
+	super._initialise_implementation_both_editor_and_game()
 	
 	if _parent_node is WeaponHurtBox:
 		_cached_hurtbox = _parent_node as WeaponHurtBox
@@ -45,6 +45,6 @@ func _conditions_to_visualise() -> bool:
 	return true
 
 
-func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void:
-	if payload.dv_type == DevVisualsConfig.DevVisualsType.WEAPON_TRAIL:
-		set_enabled(payload.toggle)
+func _on_SIG_dvc_value_changed_section_char_dv_imp(payload: SigPayloadParser.DVValueChangedSectionCharDVPayload) -> void:
+	if payload.char_dv_type == DVS.CharDVType.WEAPON_TRAIL:
+		set_enabled(payload.value)

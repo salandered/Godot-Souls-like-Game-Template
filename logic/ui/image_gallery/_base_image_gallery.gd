@@ -288,16 +288,16 @@ func _input(event):
 	if not is_visible_in_tree() or not _is_gallery_initialised:
 		return
 
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_D or event.keycode == KEY_RIGHT:
+	match InputUtils.get_keycode(event):
+		KEY_D, KEY_RIGHT:
 			change_item(1)
 			_play_book_flip()
 			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_A or event.keycode == KEY_LEFT:
+		KEY_A, KEY_LEFT:
 			change_item(-1)
 			_play_book_flip()
 			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_0 or event.keycode == KEY_KP_0:
+		KEY_0, KEY_KP_0:
 			_ui_layer_visible = not _ui_layer_visible
 			_apply_ui_visibility()
 			get_viewport().set_input_as_handled()

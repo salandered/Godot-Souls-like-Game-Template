@@ -11,7 +11,7 @@ class_name FirstTutorial
 @onready var _4_target_lock_mechanic: RichTextLabel = %"TargetLockMechanic"
 @onready var _5_health_stamina_mechanic: RichTextLabel = %"HealthStaminaMechanic"
 @onready var _6_additional_movement_tips: RichTextLabel = %"AdditionalMovementTips"
-@onready var ui_overlay_controls: RichTextLabel = %UIOverlayControls
+@onready var ui_overlay_controls: RichTextLabel = %UIDVMenu
 
 
 func __hard_dependencies() -> Array:
@@ -55,6 +55,9 @@ func set_tutorial_enable(value: bool):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_T:
-		set_tutorial_enable(not visible)
-		get_viewport().set_input_as_handled()
+	match InputUtils.get_keycode(event):
+		KEY_T:
+			if GlobalUIInfo.debug_fancy_cam_panel_manager and GlobalUIInfo.debug_fancy_cam_panel_manager.is_panel_visible():
+				return
+			set_tutorial_enable(not visible)
+			get_viewport().set_input_as_handled()

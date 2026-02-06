@@ -30,20 +30,25 @@ func _on___SIG_error_log_printed(payload: Dictionary[String, Variant]) -> void:
 	var _r_msg := SigUtils.safe_get_string_payload_value(payload, SPS.message_field)
 	if _r_msg.err: return
 	
-	var final_msg := _build_msg(_r_frame.value, _r_msg.value)
+
+	var regex_result := _apply_regex_filter(
+		[_r_msg.value],
+		DVS.DVSection.VALUE_CHANGER,
+		DVS.KeyValueChanger.ERROR_LOG_FILTER
+	)
+
+	if regex_result == RegexFilter.Result.PASS:
+		var final_msg := _build_msg(_r_frame.value, _r_msg.value)
+		_append_text_to_label(final_msg)
 	
-	_append_text_to_label(final_msg)
+	elif regex_result == RegexFilter.Result.ERROR:
+		_append_invalid_regex_text_to_label()
+	
+	
+var col_msg := "#f59c9f"
 
 
 func _build_msg(frame: String, message: String) -> String:
-	var col_time := "#888888"
-	var col_frame := "#ffbd2e"
-	var col_msg := "#ff868b"
-
-	var time_bb := BB.color_wrap(u.get_time_string_from_system_mm_ss(), col_time)
-	var frame_bb := BB.color_wrap(frame, col_frame)
 	var msg_bb := BB.color_wrap(message, col_msg)
 
-	return pp.s(
-		time_bb, " ", "[", frame_bb, "] ", msg_bb, "\n"
-	)
+	return pp.s(_log_prefix(frame), msg_bb)

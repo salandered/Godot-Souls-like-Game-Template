@@ -1,4 +1,4 @@
-class_name ReturnObject
+class_name RO ## Return Object
 extends RefCounted
 
 
@@ -45,6 +45,13 @@ class DictReturn extends _BaseReturn:
 	var value: Dictionary
 
 	func _init(err_: bool, value_: Dictionary):
+		super._init(err_)
+		self.value = value_
+
+class Vector2iReturn extends _BaseReturn:
+	var value: Vector2i
+
+	func _init(err_: bool, value_: Vector2i = Vector2i.ZERO):
 		super._init(err_)
 		self.value = value_
 

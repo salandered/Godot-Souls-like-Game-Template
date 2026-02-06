@@ -13,6 +13,7 @@ func get_max_lines() -> int:
 func get_ui_panel() -> Container:
 	return signal_info_panel
 
+
 func get_text_label() -> RichTextLabel:
 	return sig_info_label
 
@@ -27,15 +28,10 @@ func _supported_signal_pairs() -> Array[Array]:
 
 ## filter signals which are used for SigInfoManager to work 
 func _filter_self_signals(sig_name: String, payload: Dictionary[String, Variant]) -> bool:
-	if sig_name == GlobalSignal.SIG_ui_overlay_control_value_changed.get_name():
-		var _r_type := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_value_type_field)
-		if _r_type.err: return false
-		if _r_type.value == DevVisualsConfig.ValueType.SIG_FILTER:
-			return true
-	elif sig_name == GlobalUIInfo.SIG_dvc_value_changed.get_name():
-		var parsed_payload := SigUtils.safe_get_SIG_dvc_value_changed_payload(payload)
+	if sig_name == GlobalUIInfo.SIG_dvc_value_changed_section_vc.get_name():
+		var parsed_payload := SigPayloadParser.safe_get_SIG_dvc_value_changed_section_payload(payload)
 		if not parsed_payload: return false
-		if parsed_payload.value_type == DevVisualsConfig.ValueType.SIG_FILTER:
+		if parsed_payload.key == DVS.KeyValueChanger.SIG_FILTER:
 			return true
 	return false
 
@@ -53,42 +49,39 @@ func _on___SIG_emitted(__payload: Dictionary[String, Variant]):
 		if _r_p.err: return
 		payload = TypeCast.dict_string_variant(_r_p.value)
 
+	var _r_frame := SigUtils.safe_get_string_payload_value(__payload, SPS.frame_field)
+	if _r_frame.err: return
+
 	if _filter_self_signals(_r_name.value, payload):
 		return
 
 	var sig_name_str: String = _r_name.value
 	var payload_str: String = pp.dict_flat_perfomant(payload)
 	
-	var raw_content_for_filter := sig_name_str + " " + payload_str
+	var regex_result := _apply_regex_filter(
+		[sig_name_str, payload_str],
+		DVS.DVSection.VALUE_CHANGER,
+		DVS.KeyValueChanger.SIG_FILTER
+	)
 
-	var filter_text := ""
-	var dvc = GlobalUIInfo.get_dev_visuals_config()
-	if dvc:
-		filter_text = dvc.sget_value(DevVisualsConfig.ValueType.SIG_FILTER)
-
-	var regex_r := _regex_filter.apply_filter(raw_content_for_filter, filter_text)
-
-	if regex_r == RegexFilter.Result.PASS:
-		# fancy BBCode message if it survived the filter
-		var final_msg := _build_msg(sig_name_str, payload_str)
+	if regex_result == RegexFilter.Result.PASS:
+		# BBCode message if it survived the filter
+		var final_msg := _build_msg(_r_frame.value, sig_name_str, payload_str)
 		_append_text_to_label(final_msg)
-		
-	elif regex_r == RegexFilter.Result.ERROR:
-		var err_msg := BB.color_wrap(BB.i_wrap("invalid regex"), "#ff868bff")
-		_append_text_to_label(err_msg)
-
-
-func _build_msg(sig_name: String, payload_str: String) -> String:
-	var col_time := "#888888"
-	var col_sig := "#8b93ffff"
-	var col_payload := "#d3d3d3ff"
-
-	var time_bb := BB.color_wrap(u.get_time_string_from_system_mm_ss(), col_time)
-	var name_bb := BB.color_wrap(sig_name, col_sig)
 	
+	elif regex_result == RegexFilter.Result.ERROR:
+		_append_invalid_regex_text_to_label()
+
+
+var col_sig := "#8b93ffff"
+var col_payload := "#d3d3d3ff"
+
+
+func _build_msg(frame: String, sig_name: String, payload_str: String) -> String:
+	var name_bb := BB.color_wrap(sig_name, col_sig)
 	var load_bb := BB.color_wrap(BB.i_wrap("\t" + payload_str), col_payload)
 
-	return pp.s(
-		time_bb, " ", name_bb, "\n",
-		load_bb, "\n"
+	return pp.s(_log_prefix(frame),
+		name_bb, "\n",
+		load_bb
 	)

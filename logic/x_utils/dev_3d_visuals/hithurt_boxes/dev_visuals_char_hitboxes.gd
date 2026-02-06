@@ -20,7 +20,7 @@ func __hard_dependencies() -> Array:
 		]
 
 
-func initialise_implementation_in_game() -> void:
+func _initialise_shapes() -> void:
 	if not combat:
 		return
 
@@ -28,14 +28,15 @@ func initialise_implementation_in_game() -> void:
 		if item is CharacterHitbox:
 			_shapes.append(item._get_collision_shape())
 			
-
 	# NOTE: should be called after self initalisation
-	super.initialise_implementation_in_game()
-
-	_update_color(true)
+	# _update_color(true)
 
 
-func get_shapes() -> Array[CollisionShape3D]:
+func _get_initial_color() -> Color:
+	return color_vulnerable
+
+
+func _get_shapes() -> Array[CollisionShape3D]:
 	return _shapes
 
 
@@ -44,10 +45,10 @@ func _process_visualisation(_delta: float) -> void:
 	_update_color()
 
 
-func _update_color(force: bool = false) -> void:
+func _update_color() -> void:
 	var current_invincible = _is_invincible()
 	
-	if force or current_invincible != _last_invincible_state:
+	if current_invincible != _last_invincible_state:
 		var target = color_invincible if current_invincible else color_vulnerable
 		_set_visuals_color(target)
 		_last_invincible_state = current_invincible
@@ -63,8 +64,8 @@ func _conditions_to_visualise() -> bool:
 	return true
 
 
-func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void:
-	__log_("_on_dvc_toggled_implementation", payload.toggle)
-	if payload.dv_type == DevVisualsConfig.DevVisualsType.HITBOX:
-		__log_("_on_dvc_toggled_implementation", payload.toggle)
-		set_enabled(payload.toggle)
+func _on_SIG_dvc_value_changed_section_char_dv_imp(payload: SigPayloadParser.DVValueChangedSectionCharDVPayload) -> void:
+	__log_("_on_SIG_dvc_value_changed_section_char_dv_imp", payload)
+	if payload.char_dv_type == DVS.CharDVType.HITBOX:
+		__log_("_on_SIG_dvc_value_changed_section_char_dv_imp", payload)
+		set_enabled(payload.value)

@@ -80,8 +80,8 @@ func get_signal_from_active_weapon(sig_id: String) -> SignalData:
 # var _start_time_offset: float = 0.0
 
 # func _input(event):
-# 	_blend_time = u._dev_change_t12_param(event, _blend_time, "_blend_time", 0.1)
-# 	_start_time_offset = u._dev_change_t34_param(event, _start_time_offset, "_start_time_offset", 0.1)
+# 	_blend_time = InputUtils._dev_change_t12_param(event, _blend_time, "_blend_time", 0.1)
+# 	_start_time_offset = InputUtils._dev_change_t34_param(event, _start_time_offset, "_start_time_offset", 0.1)
 
 # 	blend_time.set_by_prev_action({
 # 		PS.Act.sword_slash_2: _blend_time,

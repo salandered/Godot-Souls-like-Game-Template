@@ -4,7 +4,10 @@ extends Area3DCharacterSystem
 ## Area which CAN BE damaged. Opposed to an area which DAMAGES.
 class_name CharacterHitbox
 
+## TODO: use CommonArea framework
+
 ## Docs
+# region
 ##  - MUST have '_combat' assigned
 ## 
 ##  - Character can have any number of hitboxes. 
@@ -19,6 +22,7 @@ class_name CharacterHitbox
 ##    But the weapon knowing what it hits and other character's BaseCombat knowing what hits were applied 
 ##    are two separate bounded contexts (like, player and an enemy)
 ##    So it cleaner this way. Also faster.
+# endregion
 ##
 ## Hitbox shape conventions (NOTE)
 # region:
@@ -43,6 +47,14 @@ var _combat: BaseCombat
 var _my_coll_shapes: Array[CollisionShape3D]
 var _original_capsule_shape_radius: float
 var _original_capsule_shape_height: float
+
+
+## Weapon contact signal settings
+const my_area_field = "my_area_field"
+const incoming_area_field = "incoming_area_field"
+var emit_on_attacking_wp: bool = false
+var emit_on_attacking_wp_every_frame: bool = false
+signal SIG_incoming_area_contacted(payload: Dictionary[String, Variant])
 
 
 func __hard_dependencies() -> Array:
@@ -85,7 +97,7 @@ func initialise(combat_: BaseCombat) -> void:
 		__log_warn_soft(pp.s("len of _my_coll_shapes > 1", "Not supported! will be working only with the first one"))
 
 	if __perform_validation():
-		# Duplicate to avoid shared resource issues
+		# duplicate to avoid shared resource issues
 		var original_shape := _my_coll_shapes[0].shape
 		_my_coll_shapes[0].shape = original_shape.duplicate()
 
@@ -110,9 +122,6 @@ func _physics_process(delta: float) -> void:
 		for area in get_overlapping_areas():
 			on_area_contact(area)
 
-	# if has_overlapping_bodies():
-	# 	pass
-
 
 func is_player() -> bool:
 	if get_combat():
@@ -120,12 +129,8 @@ func is_player() -> bool:
 	else:
 		return false
 
-func pp_name():
-	var character_name := "Pl" if is_player() else "E"
-	return pp.s(character_name, "💢HitBox")
 
-# region: shape logic
-
+# region: SHAPE LOGIC
 
 ## not nullable
 func _get_collision_shape() -> CollisionShape3D:
@@ -134,19 +139,15 @@ func _get_collision_shape() -> CollisionShape3D:
 
 ## provide capsule size mult values
 func shrink_hitbox(radius_mult: float = 0.7, height_mult: float = 0.6):
-	if not __validation_ok():
-		return
-
+	if not __validation_ok(): return
 	var coll_shape := _get_collision_shape()
-	CollShapeTranform.shrink_coll_shape_capsule_size(coll_shape, radius_mult, height_mult)
+	CollShapeUtils.shrink_coll_shape_capsule_size(coll_shape, radius_mult, height_mult)
 
 
 func restore_hitbox():
-	if not __validation_ok():
-		return
-
+	if not __validation_ok(): return
 	var coll_shape := _get_collision_shape()
-	CollShapeTranform.set_coll_shape_capsule_size(coll_shape, _original_capsule_shape_radius, _original_capsule_shape_height)
+	CollShapeUtils.set_coll_shape_capsule_size(coll_shape, _original_capsule_shape_radius, _original_capsule_shape_height)
 
 # endregion
 
@@ -155,7 +156,6 @@ func on_area_contact(incoming_area: Node3D):
 	if not incoming_area is WeaponHurtBox:
 		return
 
-	# prints("contact", incoming_area, incoming_area.name, incoming_area.get_class())
 	var _weapon_area := incoming_area as WeaponHurtBox
 	var weapon: BaseWeapon = _weapon_area._my_weapon
 	if not weapon:
@@ -164,42 +164,34 @@ func on_area_contact(incoming_area: Node3D):
 
 	if _is_weapon_mine(weapon):
 		return
-
 	
-	__log_extra("contact after _is_weapon_mine", incoming_area, weapon)
+	if __LOG_B(): __log_extra("contact after _is_weapon_mine", incoming_area, weapon)
 	if not weapon.is_attacking():
-		# if _combat is PlayerCombat:
-		# 	print_.prefix_s("contact", incoming_area, incoming_area.name, incoming_area.get_class())
-		# __log_extra("Not attacking")
 		return
 
 
-	# var hit_pos = DebugDrawUtils.get_area_contact_point(self , incoming_area)
-	
-	# if hit_pos != Vector3.INF:
-	# 	# Visualise
-	# 	DebugDraw3D.draw_sphere(hit_pos, 0.1, Color.GOLD, 1.0)
-	# 	DebugDraw3D.draw_line(global_position, hit_pos, Color.RED, 0.5)
+	if __LOG_B(): __log_extra("contact after weapon.is_attacking():", incoming_area, weapon)
 
-	__log_extra("contact after weapon.is_attacking():", incoming_area, weapon)
+	if emit_on_attacking_wp and emit_on_attacking_wp_every_frame:
+		_emit_SIG_incoming_area_contacted(_weapon_area)
 
 	## NOTE: adding to contact list only after other checks
 	if weapon.is_in_contact_hitbox_list(self ):
-		# __log_("is_in_contact_hitbox_list true", "len of contact hitb list", len(weapon.get_contact_hitbox_list()))
 		return
 	weapon.add_hitbox_to_contact_list(self )
 
-	__log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_id()), "by", pp.in_q(weapon.get_holder().pp_name())))
+	if emit_on_attacking_wp and not emit_on_attacking_wp_every_frame:
+		_emit_SIG_incoming_area_contacted(_weapon_area)
+
+
+	if __LOG_B(): __log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_id()), "by", pp.in_q(weapon.get_holder().pp_name())))
 
 	var hit_data := weapon.get_hit_data()
 	if not hit_data:
 		__log_error("weapon hit data is null", "on_area_contact", "return")
 		return
 
-	# if _combat is PlayerCombat:
-		# prints("contact", em.crucial_x2, "/n", em.crucial_x2)
-		
-	__log_("Calling apply_hit with hit data", hit_data)
+	if __LOG_B(): __log_("Calling apply_hit with hit data", hit_data)
 	_combat.apply_hit(hit_data)
 
 
@@ -208,11 +200,28 @@ func _is_weapon_mine(weapon: BaseWeapon) -> bool:
 		return true
 	return false
 
+##
+
+func _emit_SIG_incoming_area_contacted(incoming_area: Area3D):
+	SigUtils.safe_emit_raw(SIG_incoming_area_contacted, {
+		my_area_field: self ,
+		incoming_area_field: incoming_area
+		})
+
+
+## LOGS
+# region
+
+
+func pp_name():
+	var character_name := "Pl" if is_player() else "E"
+	return pp.s(character_name, "💢HitBox")
+
 
 func _to_string() -> String:
 	return pp.s(pp_name(), get_instance_id())
 
-
+	
 var __EXTRA_LOG_B: bool = false
 
 
@@ -226,3 +235,5 @@ func __LOG_B():
 
 func __LOG_INDENT() -> int:
 	return 10
+
+# endregion

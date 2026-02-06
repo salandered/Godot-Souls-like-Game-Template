@@ -7,7 +7,7 @@ extends BaseDevVisualiseParent
 @export var color_mode: ColorMode = ColorMode.SINE_WAVE
 @export var path_color_a := Color.ORANGE
 @export var path_color_b := Color.RED
-@export var trail_radius := 0.05
+@export var trail_radius := 0.03
 @export var trail_duration := 2.0
 @export var fade_duration := 0.25
 @export var cast_shadow: GeometryInstance3D.ShadowCastingSetting = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -46,8 +46,8 @@ var _cylinder_creation_times: Array[float] = []
 var _cylinder_head_idx := 0
 
 
-func initialise_implementation_both_editor_and_game() -> void:
-	super.initialise_implementation_both_editor_and_game()
+func _initialise_implementation_both_editor_and_game() -> void:
+	super._initialise_implementation_both_editor_and_game()
 	_init_cylinder_pool()
 
 
@@ -184,5 +184,5 @@ func _update_segment_opacity() -> void:
 				mat.albedo_color = col
 
 
-func _on_dvc_toggled_implementation(payload: SigUtils.MatrixCdvToggledPayload) -> void:
+func _on_SIG_dvc_value_changed_section_char_dv_imp(payload: SigPayloadParser.DVValueChangedSectionCharDVPayload) -> void:
 	pass

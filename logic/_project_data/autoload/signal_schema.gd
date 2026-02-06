@@ -12,7 +12,7 @@ const hit_data_field := "hit_data"
 const attack_dir_field := "attack_dir"
 const interruption_field := "interruption"
 const reaction_anim_or_state_field := "react_anim"
-const frame_field := "frame_"
+const frame_field := "frame_field"
 
 # name
 
@@ -30,8 +30,10 @@ const message_field := "message_"
 
 
 # dvc
+const dvc_section_field = "dvc_section_field"
+const dvc_key_field = "dvc_key_field"
+const dvc_value_field = "dvc_value_field"
 const dvc_overlay_panel_type_field = "overlay_panel_type"
-const dvc_value_type_field = "dvc_value_type_field"
 const dvc_char_type_field = "dvc_char_type"
 const dvc_dv_type_field = "dvc_dv_type"
 

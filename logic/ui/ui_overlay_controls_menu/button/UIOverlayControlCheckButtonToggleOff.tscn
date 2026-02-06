@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://da2gp8o4yvtc1"]
-
-[ext_resource type="PackedScene" uid="uid://byjv3t8r0rvg2" path="res://logic/ui/ui_overlay_controls_menu/button/UIOverlayControlCheckButton.tscn" id="1_qwcv5"]
-[ext_resource type="Texture2D" uid="uid://bp35jdlpomkfa" path="res://-assets-/x_icons/white/interface/icon_disable.png" id="2_2m0xk"]
-
-[node name="UIOverlayControlCheckButtonToggleOff" instance=ExtResource("1_qwcv5")]
-toggle_mode = false
-text = "Oh"
-icon = ExtResource("2_2m0xk")

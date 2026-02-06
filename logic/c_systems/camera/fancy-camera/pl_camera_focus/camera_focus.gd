@@ -20,4 +20,4 @@ func _process(delta: float) -> void:
 # func _input(event):
 	# if not OS.is_debug_build():
 	# 	return
-# 	self.global_position.y = u._dev_change_t34_param(event, self.global_position.y, "self.global_position.y", 0.2)
+# 	self.global_position.y = InputUtils._dev_change_t34_param(event, self.global_position.y, "self.global_position.y", 0.2)

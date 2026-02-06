@@ -204,7 +204,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _handle_pause_toggle(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
+	if InputUtils.is_keycode(event, KEY_P):
 		get_tree().paused = not get_tree().paused
 		get_viewport().set_input_as_handled()
 

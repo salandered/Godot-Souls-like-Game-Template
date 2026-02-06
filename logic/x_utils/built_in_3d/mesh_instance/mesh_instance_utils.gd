@@ -92,6 +92,67 @@ static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
 	return null
 
 
+# Add to MeshInstanceUtils.gd
+
+## Creates a temporary sphere at 'pos' that deletes itself after 'duration'
+static func debug_draw_sphere(
+	parent: Node,
+	pos: Vector3,
+	radius: float,
+	color: Color,
+	duration: float = 1.0
+) -> void:
+	# 1. Create Mesh
+	var mesh := SphereMesh.new()
+	mesh.radius = radius
+	mesh.height = radius * 2.0
+	
+	# 2. Setup Node & Material
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.position = pos
+	
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mi.material_override = mat
+	
+	# 3. Add to scene
+	parent.add_child(mi)
+	
+	# 4. Auto-delete logic
+	var tween := mi.create_tween()
+	tween.tween_interval(duration)
+	tween.tween_callback(mi.queue_free)
+
+
+## Creates a temporary line between points that deletes itself after 'duration'
+static func debug_draw_line(
+	parent: Node,
+	pos_a: Vector3,
+	pos_b: Vector3,
+	thickness: float,
+	color: Color,
+	duration: float = 1.0
+) -> void:
+	# 1. Create Cylinder (reusing your existing helper if you like, or manually)
+	# We use a small radius for the "line" thickness
+	var mi := create_generic_cylinder(thickness, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
+	
+	# 2. Add to scene FIRST (needed for global position calculations in place_cylinder)
+	parent.add_child(mi)
+	
+	# 3. Position it
+	place_cylinder_between(mi, pos_a, pos_b, color)
+	
+	# 4. Auto-delete logic
+	var tween := mi.create_tween()
+	tween.tween_interval(duration)
+	tween.tween_callback(mi.queue_free)
+
+
 # region: __LOGS
 
 static func pp_name() -> String:
