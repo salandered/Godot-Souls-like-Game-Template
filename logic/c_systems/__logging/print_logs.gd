@@ -303,3 +303,42 @@ static func __get_bit_position(value: int) -> int:
 
 
 # endregion
+
+
+static func debug_compare_attachments(
+	skeleton: Skeleton3D,
+	working_node: BoneAttachment3D,
+	broken_node: BoneAttachment3D
+) -> void:
+	print("\n--- BONE ATTACHMENT DEBUG COMPARISON ---")
+	
+	var nodes = [working_node, broken_node]
+	var labels = ["REFERENCE (Working)", "GENERATED (Broken)"]
+	
+	for i in range(2):
+		var node = nodes[i]
+		if not node:
+			print(labels[i] + ": IS NULL")
+			continue
+			
+		print("\n[%s]: %s" % [labels[i], node.name])
+		print("  - Parent:             ", node.get_parent().name if node.get_parent() else "NULL")
+		print("  - Global Position:    ", node.global_position)
+		print("  - Bone Name:          ", node.bone_name)
+		
+		# Validate Bone Index
+		var bone_idx = skeleton.find_bone(node.bone_name)
+		print("  - Bone Index (Calc):  ", bone_idx)
+		
+		# External Skeleton Logic
+		print("  - Use External Skel:  ", node.use_external_skeleton)
+		print("  - Ext Skel Path:      ", node.external_skeleton)
+		
+		# specific check: does the path actually resolve?
+		if node.use_external_skeleton:
+			var target = node.get_node_or_null(node.external_skeleton)
+			print("  - Path Resolves To:   ", target.name if target else "!!! FAILED TO RESOLVE !!!")
+		else:
+			print("  - (Using Parent Hierarchy)")
+
+	print("\n----------------------------------------\n")

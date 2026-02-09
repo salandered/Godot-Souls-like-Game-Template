@@ -106,3 +106,27 @@ static func get_all_moving(include_neutral: bool = false) -> Array[Dir]:
 	if include_neutral:
 		_r.append(Dir.NEUTRAL)
 	return _r
+
+
+static func angle_to_direction(angle_deg: float) -> Dir:
+	# Normalize angle to -180 to 180 range
+	angle_deg = wrapf(angle_deg, -180.0, 180.0)
+	
+	angle_deg = - angle_deg
+	# 8-directional mapping (45° sectors)
+	if angle_deg >= -22.5 and angle_deg < 22.5:
+		return Direction.Dir.FORWARD
+	elif angle_deg >= 22.5 and angle_deg < 67.5:
+		return Direction.Dir.RIGHT_F
+	elif angle_deg >= 67.5 and angle_deg < 112.5:
+		return Direction.Dir.RIGHT
+	elif angle_deg >= 112.5 and angle_deg < 157.5:
+		return Direction.Dir.RIGHT_B
+	elif angle_deg >= 157.5 or angle_deg < -157.5:
+		return Direction.Dir.BACKWARD
+	elif angle_deg >= -157.5 and angle_deg < -112.5:
+		return Direction.Dir.LEFT_B
+	elif angle_deg >= -112.5 and angle_deg < -67.5:
+		return Direction.Dir.LEFT
+	else: # -67.5 to -22.5
+		return Direction.Dir.LEFT_F

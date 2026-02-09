@@ -11,7 +11,7 @@ extends Node3DLogger
 @onready var all_log_panel_manager: AllLogPanelManager = %AllLogPanelManager
 @onready var error_log_panel_manager: ErrorLogPanelManager = %ErrorLogPanelManager
 
-@onready var debug_fancy_cam_panel_manager: DebugFancyCamManager = %DebugFancyCamPanelManager
+@onready var debug_fancy_cam_panel: GlobalUIFancyCamPanel = %DebugFancyCamPanel
 
 @onready var dynamic_info_presenters: Node = %DynamicInfoPresenters
 @onready var dynamic_info_grid: FlowContainer = %DynamicInfoGrid
@@ -41,14 +41,19 @@ func get_dev_visuals_config() -> DevVisualsConfig:
 	return _dev_visual_config
 
 
-signal SIG_dvc_value_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant])
-signal SIG_dvc_value_changed_section_vc(payload: Dictionary[String, Variant])
-signal SIG_dvc_value_changed_section_char_dv(payload: Dictionary[String, Variant])
+## not used by client code
+signal _SIG_dvc_value_changed(payload: Dictionary[String, Variant])
+## for each section, used by client code. _SIG_dvc_value_changed is distributed into this
+signal SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[String, Variant])
+signal SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant])
+signal SIG_dvc_svalue_changed(payload: Dictionary[String, Variant])
+signal SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant])
+signal SIG_dvc_color_value_changed(payload: Dictionary[String, Variant])
+signal SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant])
 
 
 func _ready() -> void:
-	_dev_visual_config = DevVisualsConfig.new(SIG_dvc_value_changed)
+	_dev_visual_config = DevVisualsConfig.new(_SIG_dvc_value_changed)
 
 
 	_presenters.clear()
@@ -58,28 +63,24 @@ func _ready() -> void:
 
 	for item in _presenters:
 		if item:
-			item.set_enable(false)
+			item.set_enabled(false)
 
 	update_profiler_mode(2)
-
-	sig_info_manager.set_enable(DEF_SIG_DEBUG)
-	all_log_panel_manager.set_enable(DEF_ALL_LOG)
-	error_log_panel_manager.set_enable(DEF_ERROR_LOG)
 
 	ControlUtils.flow_container_set_v_separation(dynamic_info_grid, DEF_DYNAMIC_GRID_V_SEP)
 
 	SigUtils.safe_connect_pairs([
 		[GlobalSignal.SIG_free_cam_mode_toggled, _on_SIG_toggle_free_cam],
-		[SIG_dvc_value_changed, _on_SIG_dvc_value_changed_distribute_signal],
-		[SIG_dvc_value_changed_section_op, _on_SIG_dvc_value_changed_section_op],
-		[SIG_dvc_value_changed_section_vc, _on_SIG_dvc_value_changed_section_vc],
-		[SIG_dvc_value_changed_section_char_dv, _on_SIG_dvc_value_changed_section_char_dv]
+		[_SIG_dvc_value_changed, _on_SIG_dvc_value_changed_distribute_signal],
+		[SIG_dvc_b_overlay_panel_value_changed, _on_SIG_dvc_op_value_changed],
+		[SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed],
+		[SIG_dvc_b_char_dv_value_changed, _on_SIG_dvc_b_char_dv_value_changed],
 	])
 
 
 ## distribution sits here temporary. It should be separated class (it's not about the GlobalUIInfo)
 func _on_SIG_dvc_value_changed_distribute_signal(payload: Dictionary[String, Variant]):
-	var parsed_payload := SigPayloadParser.safe_get_SIG_dvc_value_changed_payload(payload)
+	var parsed_payload := DVCSIGPayloadParser.parse_internal_SIG_dvc_value_changed(payload)
 	if not parsed_payload:
 		return
 
@@ -88,58 +89,59 @@ func _on_SIG_dvc_value_changed_distribute_signal(payload: Dictionary[String, Var
 		SPS.dvc_value_field: parsed_payload.value
 	}
 	match parsed_payload.section:
-		DVS.DVSection.OVERLAY_PANEL:
-			SigUtils.safe_emit_raw(SIG_dvc_value_changed_section_op, distributed_payload)
-		DVS.DVSection.VALUE_CHANGER:
-			SigUtils.safe_emit_raw(SIG_dvc_value_changed_section_vc, distributed_payload)
-		DVS.DVSection.CHAR_DV:
-			SigUtils.safe_emit_raw(SIG_dvc_value_changed_section_char_dv, distributed_payload)
+		DVS.DVSection.B_OVERLAY_PANEL:
+			SigUtils.safe_emit_raw(SIG_dvc_b_overlay_panel_value_changed, distributed_payload)
+		DVS.DVSection.B_CHANGER:
+			SigUtils.safe_emit_raw(SIG_dvc_bvalue_changed, distributed_payload)
+		DVS.DVSection.S_CHANGER:
+			SigUtils.safe_emit_raw(SIG_dvc_svalue_changed, distributed_payload)
+		DVS.DVSection.F_CHANGER:
+			SigUtils.safe_emit_raw(SIG_dvc_fvalue_changed, distributed_payload)
+		DVS.DVSection.COLOR_CHANGER:
+			SigUtils.safe_emit_raw(SIG_dvc_color_value_changed, distributed_payload)
+		DVS.DVSection.B_CHAR_DV:
+			SigUtils.safe_emit_raw(SIG_dvc_b_char_dv_value_changed, distributed_payload)
 
 
-func _on_SIG_dvc_value_changed_section_vc(payload: Dictionary[String, Variant]):
-	var _r := SigPayloadParser.safe_get_value_by_key_from_SIG_dvc_value_changed_section_payload(
+func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
+	var _r := DVCSIGPayloadParser.safe_fget_value_by_dvc_key(
 		payload,
-		DVS.KeyValueChanger.GRID_V_SEP)
-	if _r.err or (_r.value is not float and _r.value is not int): return
+		DVS.KeyFValueChanger.GRID_V_SEP)
+	if _r.err: return
 	var new_value: int = int(_r.value)
 	ControlUtils.flow_container_set_v_separation(dynamic_info_grid, new_value)
 	__log_("dynamic_info_grid updated with v_separation", new_value)
 
 
-func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant]):
-	var _r := SigPayloadParser.safe_get_SIG_dvc_value_changed_section_payload(payload)
+func _on_SIG_dvc_op_value_changed(payload: Dictionary[String, Variant]):
+	var _r := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
 	if not _r or _r.value is not bool: return
 	var toggle := _r.value as bool
 	
 	match _r.key:
-		DVS.KeyOverlayPanel.TUT:
+		DVS.KeyBOverlayPanel.TUT:
 			_toggle_tutorial_from_dvc(toggle)
-		DVS.KeyOverlayPanel.PROFILER:
+		DVS.KeyBOverlayPanel.PROFILER:
 			update_profiler_mode(0 if toggle else 2)
-		DVS.KeyOverlayPanel.SIG_DEBUG:
-			__SIG_DEBUG = toggle
-			sig_info_manager.set_enable(toggle)
-		DVS.KeyOverlayPanel.ALL_LOG:
-			__ALL_LOG = toggle
-			all_log_panel_manager.set_enable(toggle)
-		DVS.KeyOverlayPanel.ERROR_LOG:
-			__ERROR_LOG = toggle
-			error_log_panel_manager.set_enable(toggle)
-		DVS.KeyOverlayPanel.CAM_NODES:
-			pass
-		DVS.KeyOverlayPanel.SUBVIEWPORT:
+		DVS.KeyBOverlayPanel.SUBVIEWPORT:
 			_toggle_in_game_subvp_from_dvc(toggle)
+		DVS.KeyBOverlayPanel.SIG_LOG:
+			__SIG_DEBUG = toggle
+		DVS.KeyBOverlayPanel.ALL_LOG:
+			__ALL_LOG = toggle
+		DVS.KeyBOverlayPanel.ERROR_LOG:
+			__ERROR_LOG = toggle
 
 
-func _on_SIG_dvc_value_changed_section_char_dv(payload: Dictionary[String, Variant]):
-	__log_("_on_SIG_dvc_value_changed_section_char_dv", payload)
-	var _r := SigPayloadParser.safe_get_SIG_dvc_value_changed_section_payload(payload)
-	if not _r or _r.value is not bool: return
-	var toggle := _r.value as bool
+func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant]):
+	__log_("_on_SIG_dvc_b_char_dv_value_changed", payload)
+	var _r := DVCSIGPayloadParser.parse_dvc_b_char_dv_value_changed(payload)
+	if not _r: return
+	var toggle := _r.value_as_bool
 
 	for item in _presenters:
 		if item.get_composite_dvc_key() == _r.key:
-			item.set_enable(toggle)
+			item.set_enabled(toggle)
 			return
 
 
@@ -242,7 +244,7 @@ func _toggle_tutorial_from_dvc(toggle: bool):
 
 
 func toggle_tutorial(toggle: bool):
-	_dev_visual_config.set_value(DVS.DVSection.OVERLAY_PANEL, DVS.KeyOverlayPanel.TUT, toggle)
+	_dev_visual_config.set_value(DVS.DVSection.B_OVERLAY_PANEL, DVS.KeyBOverlayPanel.TUT, toggle)
 	
 
 func is_tut_visible() -> bool:
@@ -268,18 +270,75 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.DEV_profiler):
 		profiler_mode_cycler.get_next()
 
-		## currently we need to update config instead of changing config which would trigger the UI update.
+		## currently we need to update config instead of changing it which triggers the UI update.
 		## this is because config supports profiler as a bool value, while here we iterate through the different modes
 		## legacy issue, should be solved via saving not boolean profiler in config
 		_dev_visual_config.set_value(
-			DVS.DVSection.OVERLAY_PANEL,
-			DVS.KeyOverlayPanel.PROFILER,
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.PROFILER,
 			true if profiler_mode_cycler.get_current() in [0, 1] else false,
 			false ## dont spawn signal
 			)
 		update_profiler_mode()
-		get_viewport().set_input_as_handled()
-
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_I):
+		_dev_visual_config.toggle_bvalue_array(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			[
+				DVS.KeyBOverlayPanel.RAW_INPUT,
+				DVS.KeyBOverlayPanel.ACTION_INPUT,
+				DVS.KeyBOverlayPanel.PLAYER_INPUT_INFO
+			]
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_E):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.ERROR_LOG,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_T):
+		_dev_visual_config.toggle_all_char_dv_options(
+			DVS.CharDVType.WEAPON_TRAIL,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_L):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.ALL_LOG,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_V):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.SUBVIEWPORT,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl(event, KEY_H):
+		_dev_visual_config.toggle_bvalue_array(
+			DVS.DVSection.B_CHANGER,
+			[
+				DVS.KeyBValueChanger.WEAPON_HIT,
+				DVS.KeyBValueChanger.WEAPON_HIT_EVERY_FRAME
+			],
+		)
+		_dev_visual_config.toggle_bvalue_composite_key(
+			DVS.DVSection.B_CHAR_DV,
+			DVS.CharacterType.PLAYER,
+			DVS.CharDVType.HITBOX,
+		)
+		_dev_visual_config.toggle_bvalue_composite_key(
+			DVS.DVSection.B_CHAR_DV,
+			DVS.CharacterType.PLAYER,
+			DVS.CharDVType.WEAPON_HITBOX,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl(event, KEY_I):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.RAW_INPUT,
+		)
+		InputUtils.mark_input_handled(self )
 ## 
 
 func pp_name() -> String:

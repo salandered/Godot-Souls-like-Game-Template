@@ -126,6 +126,8 @@ func _ready() -> void:
 
 
 func initialise() -> void:
+	add_to_group(Groups.Dev.FANCY_CAM)
+
 	# SENSE
 	calculate_mouse_sense()
 
@@ -174,7 +176,7 @@ func initialise() -> void:
 		[
 			[GlobalSignal.SIG_update_mouse_settings_for_camera, _on_update_sense_settings],
 			[GlobalSignal.SIG_toggle_camera_coll, _on_SIG_toggle_camera_coll],
-			[GlobalUIInfo.SIG_dvc_value_changed_section_op, _on_SIG_dvc_value_changed_section_op],
+			[GlobalUIInfo.SIG_dvc_b_overlay_panel_value_changed, _on_SIG_dvc_value_changed_section_op],
 		]
 	)
 
@@ -298,9 +300,9 @@ func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
 
 
 func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant]):
-	var _r := SigPayloadParser.safe_bget_value_by_key_from_SIG_dvc_value_changed_section_payload(
+	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
 		payload,
-		DVS.KeyOverlayPanel.SUBVIEWPORT
+		DVS.KeyBOverlayPanel.SUBVIEWPORT
 	)
 	if _r.err: return
 	var toggle := _r.value

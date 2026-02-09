@@ -1,0 +1,10 @@
+## Contains static data classes for differen configs 
+
+There are here if they are simple models and dont have complex logic
+
+### Some wrap basic built in nodes properties
+	E.g.: rigid physics, standard mat emisson.
+
+## Other cover basic reusable things 
+
+	E.g.: blend config (fade in/hold/fade out)

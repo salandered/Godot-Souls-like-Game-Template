@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://b4gwx10tcba27"]
-
-[node name="MarginContainer" type="MarginContainer"]
-custom_minimum_size = Vector2(0, 60)

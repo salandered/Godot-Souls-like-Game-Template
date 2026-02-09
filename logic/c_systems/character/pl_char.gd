@@ -109,8 +109,6 @@ func initialise_base_char_implementation() -> void:
 	if camera_focus:
 		camera_focus.visible = false
 
-	SigUtils.safe_connect_pairs([
-	])
 
 	if not __perform_validation(true):
 		__log_warn_soft("well game is not ready")
@@ -283,6 +281,8 @@ func _on_secret_enemy_sig_death_raised() -> void:
 	if fancy_hat:
 		fancy_hat.visible = true
 
+##
+
 
 ## INPUT
 
@@ -305,7 +305,7 @@ func _input(event: InputEvent) -> void:
 		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
 	if event.is_action_pressed(RawAction.DEV_K):
-		var hit := HitData.new(25, "from god", PHEA.attack.attack_360_low, 1.0, "test attack", AttackDirection.Dir.RIGHT)
+		var hit := HitData.new(24, "from god", PHEA.attack.attack_360_low, 1.0, "test attack", AttackDirection.Dir.RIGHT)
 		get_combat()._last_processed_hit = hit
 		self.react_on_hit(hit)
 

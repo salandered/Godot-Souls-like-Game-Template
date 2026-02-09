@@ -1,7 +1,7 @@
 extends RefCounted
 class_name pp
 
-static var __ := " " # todo: is it a safe name :D
+
 static var cln := ": "
 static var s_cln := "; "
 static var arr := " -> "
@@ -235,3 +235,24 @@ static func __recursive_dict(_dict_: Dictionary, indent: String = "", one_string
 	return r
 
 # endregion
+
+
+## fmt for metrics labels
+static func metric_fmt(v: Variant, fmt_show_vector_len: bool = true) -> String:
+	match typeof(v):
+		TYPE_VECTOR2:
+			# format: (x, y) [len]
+			var _r := "(%5.2f, %5.2f)" % [v.x, v.y]
+			_r += "[%.2f]" % v.length() if fmt_show_vector_len else ""
+			return _r
+		TYPE_VECTOR3:
+			var _r := "(%5.2f, %5.2f, %5.2f)" % [v.x, v.y, v.z]
+			_r += "[%.2f]" % v.length() if fmt_show_vector_len else ""
+			return _r
+		TYPE_FLOAT:
+			return "%5.2f" % v
+		TYPE_ARRAY, TYPE_PACKED_STRING_ARRAY:
+			if v.is_empty(): return "[]"
+			return str(v)
+		_:
+			return str(v)

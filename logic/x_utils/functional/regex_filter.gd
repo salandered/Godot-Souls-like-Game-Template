@@ -3,7 +3,7 @@ extends RefCountedLogger
 
 var _regex := RegEx.new()
 var _cached_query: String = ""
-# Initialize with a default clean state
+
 var _info := ReUtils.RegexCompileInfo.new()
 
 enum Result {

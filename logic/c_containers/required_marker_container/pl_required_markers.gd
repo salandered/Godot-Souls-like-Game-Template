@@ -1,10 +1,10 @@
 extends RefCounted
 class_name PlRequiredMarkers
+
 ## DOCS
 
 ## Several time i noticed that markers dissapear form the animation. 
-## I can't trace down what goes wrong. 
-## This is unacceptable for this project
+## I can't trace down what goes wrong. This is unacceptable for this project
 ## Using this at least we know on start up if something. it's a temporary measure.
 ## 'Required' means that SM won't work properly without anim having this marker.
 

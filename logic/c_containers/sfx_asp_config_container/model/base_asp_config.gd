@@ -2,14 +2,6 @@
 class_name BaseASPConfig
 extends RefCountedLogger
 
-# # Linear (what we think)    →    dB (what Godot uses)
-# 1.0  (100% volume)          →     0 dB
-# 0.5  (50% volume)           →    -6 dB
-# 0.25 (25% volume)           →   -12 dB
-# 0.1  (10% volume)           →   -20 dB
-# 0.01 (1% volume)            →   -40 dB
-# 0.0  (silent)               →   -80 dB (or -inf)
-# Formula: dB = 20 * log10(linear_value)
 
 ## increase or decrease of vol db. usually like -3 or +3
 var vol_db_change: float
@@ -90,3 +82,16 @@ func __LOG_B() -> bool:
 
 func __LOG_INDENT() -> int:
 	return 0
+
+
+
+## bit of trivia
+
+# # Linear (what we think)    →    dB (what Godot uses)
+# 1.0  (100% volume)          →     0 dB
+# 0.5  (50% volume)           →    -6 dB
+# 0.25 (25% volume)           →   -12 dB
+# 0.1  (10% volume)           →   -20 dB
+# 0.01 (1% volume)            →   -40 dB
+# 0.0  (silent)               →   -80 dB (or -inf)
+# Formula: dB = 20 * log10(linear_value)

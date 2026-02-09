@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://oert1ycfce2e" path="res://logic/c_systems/weapon/small_pinga_blade.gd" id="1_4lwst"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_hp6fq"]
 [ext_resource type="PackedScene" uid="uid://c3objh8m5a340" path="res://-assets-/GLB-items/pinga/pinga_WRAP.tscn" id="3_4lwst"]
-[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_utils/dev_3d_visuals/visualise_trail_parent/DevVisualiseTrailWeapon.tscn" id="3_sectu"]
+[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualiseTrailWeapon.tscn" id="3_sectu"]
 [ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/Weapons/DVWeaponHurtBox.tscn" id="4_v83gh"]
-[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/unsorted/weapon_sfx/WeaponSfx.tscn" id="8_lf1yp"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/sfx/misc/weapon_sfx/WeaponSfx.tscn" id="8_lf1yp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
 radius = 0.13183594
@@ -27,11 +27,10 @@ debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
 [node name="DevVisualisePathWeapon" parent="WeaponHurtBox" instance=ExtResource("3_sectu")]
 trail_radius = 0.02
-update_interval_seconds = 0.0
 min_velocity = 6.0
 max_velocity = 15.0
-_char_type = 1
 preview_in_editor = true
+_char_type = 1
 
 [node name="DVWeaponHurtBox" parent="WeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("4_v83gh")]
 weapon = NodePath("../..")

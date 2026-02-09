@@ -21,17 +21,18 @@ static func sfr(str_prefix: bool = false) -> String:
 		return str(Engine.get_process_frames())
 	return pp.s("fr_n-", Engine.get_process_frames())
 
+
 static func ifr() -> int:
 	return Engine.get_process_frames()
 
 
 static func is_nth_frame(interval: int) -> bool:
-	if interval <= 0: return true
+	if interval <= 1: return true
 	return ifr() % interval == 0
 
 
 static func is_nth_physics_frame(interval: int) -> bool:
-	if interval <= 0: return true
+	if interval <= 1: return true
 	return Engine.get_physics_frames() % interval == 0
 
 

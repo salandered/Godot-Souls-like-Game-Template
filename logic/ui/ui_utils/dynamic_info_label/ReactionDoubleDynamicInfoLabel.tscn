@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy3lvvelbsbtd"]
+
+[ext_resource type="PackedScene" uid="uid://cc5ln800iorgc" path="res://logic/ui/ui_utils/dynamic_info_label/DoubleDynamicInfoLabel.tscn" id="1_q1wp5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iueb4"]
+content_margin_bottom = 100.0
+bg_color = Color(0.24, 0.07464001, 0.052800007, 0)
+border_width_top = 1
+border_color = Color(0.11, 0, 0.031166663, 0.2901961)
+border_blend = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_iueb4"]
+color = Color(0.39138144, 0.39138144, 0.39138144, 1)
+thickness = 2
+vertical = true
+
+[node name="ReactionDoubleDynamicInfoLabel" instance=ExtResource("1_q1wp5")]
+offset_right = 183.0
+offset_bottom = 101.0
+in_editor_second_label_text = "Yes"
+title_text = "Reaction to Attack"
+in_editor_label_text = "react L head"
+additional_title_text = "& Is interrupted"
+
+[node name="PanelGradient" parent="." index="0"]
+size_flags_horizontal = 0
+
+[node name="PanelBordersOnly" parent="PanelGradient" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_iueb4")
+
+[node name="MarginInsidePanel" parent="PanelGradient" index="1"]
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 6
+
+[node name="Title" parent="PanelGradient/MarginInsidePanel/VBoxContainer" index="0"]
+text = "[b]Reaction to Attack[/b]"
+
+[node name="TitleAdditional" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0"]
+text = "[b]& Is interrupted[/b]"
+
+[node name="HBoxContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer" index="3"]
+theme_override_constants/separation = 6
+
+[node name="__margin" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(90, 0)
+theme_override_constants/margin_top = 6
+
+[node name="Text" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0"]
+text = "react L head"
+
+[node name="VSeparator" type="VSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_iueb4")
+
+[node name="__margin_text_2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="2"]
+custom_minimum_size = Vector2(30, 0)
+
+[node name="Text2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
+text = "Yes"

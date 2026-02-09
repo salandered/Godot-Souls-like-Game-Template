@@ -1,6 +1,7 @@
 extends Node3D
 class_name RangerWrapper
 
+
 @onready var long_hair: MeshInstance3D = $"Armature/GeneralSkeleton/long hair"
 @onready var ranger_torso: MeshInstance3D = $"Armature/GeneralSkeleton/ranger torso"
 @onready var ranger_pants: MeshInstance3D = $"Armature/GeneralSkeleton/ranger pants"
@@ -18,6 +19,13 @@ const FLAT_EMITTER_RED = preload("uid://dauxox1fd0gtl")
 # const HEALTH_ITEM_MAT = preload("uid://yv1wf8fj6a2k")
 # const CYCLES_GLOW_ORANGE = preload("uid://chilr0f8o2xm5")
 
+
+func _ready() -> void:
+		SigUtils.safe_connect_pairs([
+		[GlobalUIInfo.SIG_dvc_color_value_changed, _on_SIG_dvc_color_value_changed],
+	])
+
+
 func super_mats():
 	# _super_mat(long_hair, TRIM_RAIL_PIPE, 0)
 	# _super_mat(ranger_torso, HEALTH_ITEM_MAT, 0)
@@ -30,6 +38,17 @@ func super_mats():
 
 
 func _super_mat(mesh: MeshInstance3D, mat, index: int):
-	if mesh and mat:
+	if mesh and mat is Material:
 		if mesh.get_surface_override_material_count() > index:
 			mesh.set_surface_override_material(index, mat)
+
+
+func _on_SIG_dvc_color_value_changed(payload: Dictionary[String, Variant]):
+	var _r := DVCSIGPayloadParser.safe_color_get_value_by_dvc_key(
+		payload,
+		DVS.KeyColorChanger.HAIR_COLOR
+	)
+	if _r.err: return
+
+	var new_mat := MatUtils.create_standard_3d(_r.value)
+	_super_mat(long_hair, new_mat, 0)

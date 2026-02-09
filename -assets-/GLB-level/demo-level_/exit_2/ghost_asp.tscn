@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://8r0kocxxiwnj"]
 
-[ext_resource type="Script" uid="uid://hx5bseu7cfdg" path="res://logic/x_utils/audio/later/occasional_asp.gd" id="1_xng6s"]
+[ext_resource type="Script" uid="uid://hx5bseu7cfdg" path="res://logic/x_utils/audio/experimental/occasional_asp.gd" id="1_xng6s"]
 [ext_resource type="AudioStream" uid="uid://b1arigjfkoy0m" path="res://-assets-/SFX/sources/400/ghost_long.wav" id="2_uhq4k"]
 
 [node name="OccasionalASP" type="Node3D"]

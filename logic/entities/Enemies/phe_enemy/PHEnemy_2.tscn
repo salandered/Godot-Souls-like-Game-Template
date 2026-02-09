@@ -1,16 +1,16 @@
-[gd_scene load_steps=132 format=4 uid="uid://bqpo1nisx0ycs"]
+[gd_scene load_steps=134 format=4 uid="uid://bqpo1nisx0ycs"]
 
 [ext_resource type="Script" uid="uid://cwaf8axg7j74x" path="res://logic/c_systems/character/phe_bg_char.gd" id="1_sdoum"]
-[ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/unsorted/coll_collider.gd" id="2_0v2eu"]
+[ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/x_unsorted/coll_collider.gd" id="2_0v2eu"]
 [ext_resource type="Script" uid="uid://fej6gy4eqqqs" path="res://logic/c_systems/combat/phe_combat.gd" id="2_e1y0y"]
 [ext_resource type="Script" uid="uid://dcvvfybefeuwd" path="res://logic/c_systems/feelings/phe_feelings.gd" id="3_yfa0f"]
-[ext_resource type="Script" uid="uid://com5hws210fhf" path="res://logic/c_systems/unsorted/phe_other/visual_offset.gd" id="4_eesbj"]
+[ext_resource type="Script" uid="uid://com5hws210fhf" path="res://logic/c_systems/x_unsorted/char_visual_offset/visual_offset.gd" id="4_eesbj"]
 [ext_resource type="Texture2D" uid="uid://b6il3lbovqc8m" path="res://-assets-/ui_assets/in_game_ui/feelings/enemy/e_health_atlas_3.tres" id="5_sdoum"]
 [ext_resource type="Script" uid="uid://w18g1qw71l62" path="res://logic/c_systems/anim_manager/sk_modifier_animator/overlay_modifier.gd" id="5_yfhfq"]
 [ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="7_2upk4"]
-[ext_resource type="Script" uid="uid://c4od17y7o5d67" path="res://logic/c_systems/visuals/e_visuals.gd" id="7_c7ctj"]
+[ext_resource type="Script" uid="uid://c4od17y7o5d67" path="res://logic/c_systems/char_visuals/e_visuals.gd" id="7_c7ctj"]
 [ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres" id="8_35x0d"]
-[ext_resource type="PackedScene" uid="uid://c12h0eq5aqu80" path="res://logic/c_systems/sk_modifiers/look_at_modifier/model/look_at_character_marker.tscn" id="8_yy3ga"]
+[ext_resource type="PackedScene" uid="uid://c12h0eq5aqu80" path="res://logic/c_systems/sk_modifiers/look_at_modifier/prefab/look_at_character_marker.tscn" id="8_yy3ga"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="9_0mldj"]
 [ext_resource type="PackedScene" uid="uid://cxqlawj5lv3o1" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_head_modifier_3d.tscn" id="9_64pjv"]
 [ext_resource type="Material" uid="uid://d1q5vhtpj00ri" path="res://-assets-/materials-shared/concrete/I_concrete005/I_Concrete005_4d1K-JPG.tres" id="10_h05d5"]
@@ -29,7 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://d3ahq7du2874o" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_land.tres" id="17_bwq0l"]
 [ext_resource type="Material" uid="uid://bxam2vjcqcdil" path="res://-assets-/materials-shared/solid/P/P orange_Reimp.tres" id="18_2l40h"]
 [ext_resource type="AnimationLibrary" uid="uid://b50j54elpaqgn" path="res://-assets-/animations/standard-skeleton/Enemy/LIBs/BG-not-axe.tres" id="19_c7ctj"]
-[ext_resource type="Script" uid="uid://uvb7l2le3sl7" path="res://logic/entities/Items/test_csg.gd" id="19_g14yk"]
+[ext_resource type="Script" path="res://logic/x_utils/built_in_3d/csg/csg_auto_hide.gd" id="19_g14yk"]
 [ext_resource type="AnimationLibrary" uid="uid://dp5v81jmjawev" path="res://-assets-/animations/standard-skeleton/Enemy/LIBs/axe.tres" id="20_0v2eu"]
 [ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="21_jabo0"]
 [ext_resource type="AnimationLibrary" uid="uid://dq7y5hsywmr87" path="res://-assets-/animations/standard-skeleton/Enemy/LIBs/axe-from-player.tres" id="21_m858i"]
@@ -89,10 +89,12 @@
 [ext_resource type="Script" uid="uid://d260ihgni0me4" path="res://logic/c_systems/character_state/phe_state/state_leafes/death.gd" id="90_88vwn"]
 [ext_resource type="Script" uid="uid://2dau6l3aklq7" path="res://logic/c_systems/character_state/phe_state/state_leafes/sleep.gd" id="91_t2b01"]
 [ext_resource type="Script" uid="uid://b5c01rsxuvn3" path="res://logic/c_systems/character_state/phe_state/state_leafes/awaken.gd" id="92_1b7wx"]
-[ext_resource type="Script" uid="uid://lfard6gh3uff" path="res://logic/c_systems/unsorted/e_config/bg_config_.gd" id="93_6vhpn"]
-[ext_resource type="PackedScene" uid="uid://cy4uw7foh8qlh" path="res://logic/entities/Player/DVHitBoxFrame.tscn" id="93_gmv0p"]
+[ext_resource type="Script" uid="uid://lfard6gh3uff" path="res://logic/c_containers/anim_entity_config/bg_config_.gd" id="93_6vhpn"]
+[ext_resource type="PackedScene" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/DVHitBox.tscn" id="93_gmv0p"]
 [ext_resource type="Script" uid="uid://dq03h0yh6ikyv" path="res://logic/c_systems/character_state/phe_state/state_leafes/attacks/phase_switch.gd" id="93_rk1k2"]
 [ext_resource type="Script" uid="uid://dgk6yfubccslp" path="res://logic/c_systems/character_movement/e_movement.gd" id="94_e6is3"]
+[ext_resource type="PackedScene" uid="uid://cwr8dav8jomc3" path="res://logic/x_dev_systems/dev_visuals_3d/dv_skeleton/DVSkeleton.tscn" id="94_l3uka"]
+[ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/x_dev_systems/dev_visuals_3d/dv_area_contact.gd" id="95_0bllo"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="95_8u138"]
 [ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/c_systems/awareness/enemy_awareness.gd" id="96_asrhk"]
 [ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/c_systems/awareness/downcast/downcast.tscn" id="97_nv3pf"]
@@ -1648,6 +1650,7 @@ script = ExtResource("5_yfhfq")
 [node name="Visuals" type="Node3D" parent="VisualOffset"]
 unique_name_in_owner = true
 script = ExtResource("7_c7ctj")
+_char_type = 2
 
 [node name="gold parts v2" type="Node3D" parent="VisualOffset/Visuals"]
 
@@ -2277,10 +2280,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9873852, 0, 0)
 material_override = SubResource("StandardMaterial3D_fra4q")
 size = Vector3(1, 0.062072754, 1)
 
-[node name="VisualiseHitBoxFrame2" parent="__dev" node_paths=PackedStringArray("combat", "_character") instance=ExtResource("93_gmv0p")]
+[node name="DVHitBoxFrame2" parent="__dev" node_paths=PackedStringArray("combat") instance=ExtResource("93_gmv0p")]
 combat = NodePath("../../Combat")
-_character = NodePath("../..")
 _char_type = 2
+
+[node name="DVSkeleton" parent="__dev" node_paths=PackedStringArray("_skeleton") instance=ExtResource("94_l3uka")]
+_skeleton = NodePath("../../VisualOffset/GeneralSkeleton")
+_char_type = 2
+
+[node name="DVAreaContact" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+script = ExtResource("95_0bllo")
+char_hit_box = NodePath("../../bones/Hips/HitboxTorso")
+character = NodePath("../..")
+
+[node name="DVAreaContact2" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+script = ExtResource("95_0bllo")
+char_hit_box = NodePath("../../bones/LegL/HitboxLegL")
+character = NodePath("../..")
+
+[node name="DVAreaContact3" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+script = ExtResource("95_0bllo")
+char_hit_box = NodePath("../../bones/LegR/HitboxLegR")
+character = NodePath("../..")
 
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("me")]
 unique_name_in_owner = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://1wkmqiqm0s6h"]
 
 [ext_resource type="PackedScene" uid="uid://cvb0oap25dedi" path="res://-assets-/GLB-level/demo-level_/island/island.glb" id="1_8iv8n"]
-[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/swaying_child/SwayParent.tscn" id="2_5reim"]
+[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="2_5reim"]
 [ext_resource type="Material" uid="uid://r4bjtqqba0s8" path="res://-assets-/materials-shared/ground/dirt_aerial/dirt_aerial_02_Reimp_2k.tres" id="2_78gke"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rx8fw"]

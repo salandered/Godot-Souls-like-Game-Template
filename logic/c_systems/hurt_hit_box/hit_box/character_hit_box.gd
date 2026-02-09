@@ -52,9 +52,10 @@ var _original_capsule_shape_height: float
 ## Weapon contact signal settings
 const my_area_field = "my_area_field"
 const incoming_area_field = "incoming_area_field"
+const in_contact_list_field = "in_contact_list_field"
 var emit_on_attacking_wp: bool = false
 var emit_on_attacking_wp_every_frame: bool = false
-signal SIG_incoming_area_contacted(payload: Dictionary[String, Variant])
+signal SIG_incoming_weapon_contacted(payload: Dictionary[String, Variant])
 
 
 func __hard_dependencies() -> Array:
@@ -172,16 +173,16 @@ func on_area_contact(incoming_area: Node3D):
 
 	if __LOG_B(): __log_extra("contact after weapon.is_attacking():", incoming_area, weapon)
 
-	if emit_on_attacking_wp and emit_on_attacking_wp_every_frame:
-		_emit_SIG_incoming_area_contacted(_weapon_area)
 
 	## NOTE: adding to contact list only after other checks
 	if weapon.is_in_contact_hitbox_list(self ):
+		if emit_on_attacking_wp and emit_on_attacking_wp_every_frame:
+			_emit_SIG_incoming_area_contacted(_weapon_area, true)
 		return
 	weapon.add_hitbox_to_contact_list(self )
 
-	if emit_on_attacking_wp and not emit_on_attacking_wp_every_frame:
-		_emit_SIG_incoming_area_contacted(_weapon_area)
+	if emit_on_attacking_wp:
+		_emit_SIG_incoming_area_contacted(_weapon_area, false)
 
 
 	if __LOG_B(): __log_("on_area_contact", pp.s("Contact with weapon", pp.in_q(weapon.get_weapon_id()), "by", pp.in_q(weapon.get_holder().pp_name())))
@@ -202,10 +203,11 @@ func _is_weapon_mine(weapon: BaseWeapon) -> bool:
 
 ##
 
-func _emit_SIG_incoming_area_contacted(incoming_area: Area3D):
-	SigUtils.safe_emit_raw(SIG_incoming_area_contacted, {
+func _emit_SIG_incoming_area_contacted(incoming_area: Area3D, in_contact_list: bool):
+	SigUtils.safe_emit_raw(SIG_incoming_weapon_contacted, {
 		my_area_field: self ,
-		incoming_area_field: incoming_area
+		incoming_area_field: incoming_area,
+		in_contact_list_field: in_contact_list
 		})
 
 

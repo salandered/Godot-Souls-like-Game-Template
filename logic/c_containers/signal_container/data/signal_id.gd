@@ -1,6 +1,8 @@
 extends RefCounted
 class_name SignalID
 
+## TODO UPD: bad idea, could be deleted. not maintanable at all
+##      should be auto created using signal object name, at least
 ## todo: not checked, so make sure all unique
 
 ## fs like

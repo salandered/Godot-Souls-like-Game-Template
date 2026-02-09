@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://blomj0mki36oh" path="res://-assets-/GLB-level/demo-level_/exit_2/exit_2.glb" id="1_1yag1"]
 [ext_resource type="PackedScene" uid="uid://c84cgpqlpdhfg" path="res://logic/c_systems/influence_parent/create_rigid_parent/CreateRigidParent.tscn" id="2_3n3pu"]
 [ext_resource type="PackedScene" uid="uid://8r0kocxxiwnj" path="res://-assets-/GLB-level/demo-level_/exit_2/ghost_asp.tscn" id="2_awn3o"]
-[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/swaying_child/SwayParent.tscn" id="3_0t4us"]
+[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="3_0t4us"]
 [ext_resource type="AudioStream" uid="uid://b2u610r7q83nm" path="res://-assets-/SFX/sources/rubberduck/sfx100v2_loop_ambient_04.ogg" id="4_kohdx"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2s1n0"]

@@ -148,8 +148,9 @@ static func csg_primitives(node: Node) -> Array:
 	return TypeCast.array_of_csg_primitive(_r)
 
 
-static func bone_attachments(node: Node) -> Array:
-	return _get_descendants_filtered(node, func(n): return n is BoneAttachment3D)
+static func bone_attachments(node: Node) -> Array[BoneAttachment3D]:
+	var _r := _get_descendants_filtered(node, func(n): return n is BoneAttachment3D)
+	return TypeCast.array_of_bone_attachments(_r)
 
 
 static func audio_stream_players_3D(node: Node, skip_subscenes: bool = false) -> Array[AudioStreamPlayer3D]:

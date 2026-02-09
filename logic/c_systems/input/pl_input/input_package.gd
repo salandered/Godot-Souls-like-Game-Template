@@ -41,7 +41,6 @@ func is_running() -> bool:
 	var r := PS.run in actions or PS.sprint in actions
 	return r
 	
-var jump_key: KeyPress = null
 
 #
 func detect_strafe_dir() -> Direction.Dir:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvqw0ufia7yrx"]
 
 [ext_resource type="Script" uid="uid://dw25fqj5fbht4" path="res://logic/entities/Items/interact_area/interact_area_.gd" id="1_ekt48"]
-[ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/Items/interact_area/3DOnTopLabel.tscn" id="2_obo7c"]
+[ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/VFX/label/3DOnTopLabel.tscn" id="2_obo7c"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_obo7c"]
 radius = 2.0

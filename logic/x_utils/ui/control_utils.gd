@@ -48,3 +48,12 @@ static func flow_container_get_v_separation(flow_container: FlowContainer) -> in
 	if not flow_container:
 		return -1
 	return flow_container.get_theme_constant(PropC.V_SEPARATION)
+
+
+static func label_set_font(label: Label, font: Font) -> void:
+	if label and font:
+		label.add_theme_font_override("font", font)
+
+
+static func label_set_font_size(label: Label, font_size: int):
+	label.add_theme_font_size_override(PropC.FONT_SIZE, font_size)

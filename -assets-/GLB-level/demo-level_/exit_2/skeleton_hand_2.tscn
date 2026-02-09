@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://fw2tqpveasi2" path="res://-assets-/materials-shared/concrete/just_concrete/concrete_Reimp.tres" id="1_rrivn"]
 [ext_resource type="PackedScene" uid="uid://c84cgpqlpdhfg" path="res://logic/c_systems/influence_parent/create_rigid_parent/CreateRigidParent.tscn" id="2_sttqd"]
-[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/swaying_child/SwayParent.tscn" id="3_bhs1x"]
+[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="3_bhs1x"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l6j1r"]
 _surfaces = [{

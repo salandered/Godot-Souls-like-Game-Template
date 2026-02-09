@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://d2ps7t077xfk8" path="res://-assets-/materials-shared/wood/bark_willow/bark_willow_Reimp.tres" id="1_vb1s7"]
 [ext_resource type="Material" uid="uid://cw7kd7pvhxw1c" path="res://-assets-/materials-shared/fabric/I_fabric_177/I_fabric_177-1K_Reimp.tres" id="2_tjmpu"]
-[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/swaying_child/SwayParent.tscn" id="3_smsn4"]
+[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="3_smsn4"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ihkcq"]
 _surfaces = [{

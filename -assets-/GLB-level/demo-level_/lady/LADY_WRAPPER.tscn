@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://5t1oe2bcflkr" path="res://-assets-/GLB-level/demo-level_/lady/Lady.glb" id="1_y01nv"]
 [ext_resource type="AudioStream" uid="uid://bi651hoe1ib6p" path="res://-assets-/SFX/sources/400/ambient_wind_for_health_item.wav" id="2_5u74r"]
-[ext_resource type="Shader" uid="uid://7vvgrjyi5te6" path="res://logic/entities/Locations/_dev/miniature_t1.gdshader" id="3_njer6"]
+[ext_resource type="Shader" uid="uid://7vvgrjyi5te6" path="res://-assets-/materials-shared/_shaders/unsorted/miniature_t1.gdshader" id="3_njer6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnnsh"]
 render_priority = 0

@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://2us2w8kbrxwp" path="res://-assets-/SFX/sources/mini fantasy/12_human_jump_3_whoosh.wav" id="4_rgtg1"]
 [ext_resource type="PackedScene" uid="uid://br0ld6w6es8le" path="res://logic/entities/Items/interact_area/MonitorPlayerEnterSignalArea.tscn" id="4_yqar2"]
 [ext_resource type="AudioStream" uid="uid://cpwr70hfgrwdx" path="res://-assets-/SFX/sources/WAV round/Collect_Dirt_3_thrown_impact_whoosh.wav" id="5_rccyt"]
-[ext_resource type="PackedScene" path="res://-assets-/GLB-items/other/flower_003.tscn" id="6_rccyt"]
+[ext_resource type="PackedScene" uid="uid://byh642slhv4dq" path="res://-assets-/GLB-items/prefabs/flower_003.tscn" id="6_rccyt"]
 [ext_resource type="AudioStream" uid="uid://qsj5r28g8ggt" path="res://-assets-/SFX/sources/rubberduck/sfx100v2_loop_ambient_03.ogg" id="6_uvdya"]
 [ext_resource type="Material" uid="uid://ccqf55ca7dygf" path="res://-assets-/materials-shared/_shaders/bullet_trail/bullet_trail_mat_t1.tres" id="8_rgtg1"]
 

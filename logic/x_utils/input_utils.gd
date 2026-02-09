@@ -15,6 +15,34 @@ static func is_in_keycodes(event: InputEvent, keycodes: Array[Key], filter_echo:
 	return false
 
 
+static func is_keycode_w_ctrl(event: InputEvent, keycode: Key, filter_echo: bool = false) -> bool:
+	return is_keycode_with_modifiers(event, keycode, true, false, false, filter_echo)
+
+
+static func is_keycode_w_alt(event: InputEvent, keycode: Key, filter_echo: bool = false) -> bool:
+	return is_keycode_with_modifiers(event, keycode, false, true, false, filter_echo)
+
+
+static func is_keycode_w_shift(event: InputEvent, keycode: Key, filter_echo: bool = false) -> bool:
+	return is_keycode_with_modifiers(event, keycode, false, false, true, filter_echo)
+
+
+static func is_keycode_w_ctrl_shift(event: InputEvent, keycode: Key, filter_echo: bool = false) -> bool:
+	return is_keycode_with_modifiers(event, keycode, true, false, true, filter_echo)
+
+
+static func is_keycode_with_modifiers(event: InputEvent, keycode: Key, ctrl: bool = false, alt: bool = false, shift: bool = false, filter_echo: bool = false) -> bool:
+	if not is_keycode(event, keycode, filter_echo):
+		return false
+	
+	var casted := event as InputEventWithModifiers
+	if ctrl and not casted.ctrl_pressed: return false
+	if alt and not casted.alt_pressed: return false
+	if shift and not casted.shift_pressed: return false
+	
+	return true
+
+
 static func get_keycode(event: InputEvent, filter_echo: bool = false) -> Key:
 	if _is_event_pressed(event, filter_echo):
 		return event.keycode

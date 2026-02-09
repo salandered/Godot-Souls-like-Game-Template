@@ -1,6 +1,8 @@
 extends Node
 
+
 var mouse_is_captured: bool = true
+
 
 func _input(event):
 	if not OS.is_debug_build():
@@ -33,6 +35,7 @@ func _toggle_mouse_capture() -> void:
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	mouse_is_captured = not mouse_is_captured
+
 
 func _toggle_fullscreen_second_method():
 	if not OS.is_debug_build():

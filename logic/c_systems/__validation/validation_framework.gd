@@ -4,7 +4,7 @@ class_name ValidationFramework
 ## DOCS
 # region
 ## As much logic as possible moved here, so all the extenders (like NodeSystem) don't have duplicated code.
-## NOTE: using highlight extension for colorizing validation methold in recommended. 
+## NOTE: using highlight extension for colorizing validation methods in recommended. 
 ## 	  See .vscode/settings.json
 ##    Example:
 		# "(__hard_validation)": {

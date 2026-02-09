@@ -1,6 +1,9 @@
 class_name SignalData
 extends RefCounted
 
+## experimental wrapper. Not sure, most of the recent code works without it
+
+
 ## signal name from SignalID
 var signal_id: String
 var signal_obj: Signal

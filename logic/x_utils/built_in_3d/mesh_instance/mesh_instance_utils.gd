@@ -19,22 +19,21 @@ static func create_generic_cylinder(
 	mi.cast_shadow = cast_shadow
 	
 	if create_material:
-		var mat := StandardMaterial3D.new()
-		mat.shading_mode = shading_mode
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mi.material_override = mat
-	
+		mi.material_override = MatUtils.create_standard_3d(
+			Color.WHITE,
+			shading_mode,
+			BaseMaterial3D.TRANSPARENCY_ALPHA
+		)
 	return mi
 
 
-## Positions a cylinder mesh between two points
-## Assumes the mesh is Y-aligned (default Godot Cylinder)
+## cylinder mesh between two points
 static func place_cylinder_between(mi: MeshInstance3D, pos_a: Vector3, pos_b: Vector3, color: Color) -> void:
 	if pos_a.is_equal_approx(pos_b):
 		mi.visible = false
 		return
 
-	# resets scale to 1: ensures xz (thickness) return to the original mesh radius
+	# resets scale: ensures xz (thickness) return to the original mesh radius
 	mi.scale = Vector3.ONE
 
 	# position at midpoint
@@ -92,66 +91,133 @@ static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
 	return null
 
 
-# Add to MeshInstanceUtils.gd
-
-## Creates a temporary sphere at 'pos' that deletes itself after 'duration'
-static func debug_draw_sphere(
-	parent: Node,
-	pos: Vector3,
-	radius: float,
-	color: Color,
-	duration: float = 1.0
-) -> void:
-	# 1. Create Mesh
+static func create_simple_sphere(
+	radius: float = 0.5,
+	color: Color = Color.ORANGE_RED,
+	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_UNSHADED,
+	no_depth_test: bool = false
+) -> MeshInstance3D:
 	var mesh := SphereMesh.new()
 	mesh.radius = radius
 	mesh.height = radius * 2.0
 	
-	# 2. Setup Node & Material
 	var mi := MeshInstance3D.new()
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	mi.position = pos
 	
-	var mat := StandardMaterial3D.new()
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.albedo_color = color
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mi.material_override = mat
+	mi.material_override = MatUtils.create_standard_3d(
+		color,
+		shading_mode,
+		BaseMaterial3D.TRANSPARENCY_DISABLED,
+		no_depth_test,
+	)
 	
-	# 3. Add to scene
-	parent.add_child(mi)
-	
-	# 4. Auto-delete logic
-	var tween := mi.create_tween()
-	tween.tween_interval(duration)
-	tween.tween_callback(mi.queue_free)
+	return mi
 
 
-## Creates a temporary line between points that deletes itself after 'duration'
-static func debug_draw_line(
+static func create_simple_box(
+	size: Vector3,
+	color: Color = Color.ORANGE_RED,
+	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_UNSHADED,
+	no_depth_test: bool = false
+) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	
+	mi.material_override = MatUtils.create_standard_3d(
+		color,
+		shading_mode,
+		BaseMaterial3D.TRANSPARENCY_DISABLED,
+		no_depth_test
+	)
+	
+	return mi
+
+
+static func draw_temporary_sphere(
 	parent: Node,
-	pos_a: Vector3,
-	pos_b: Vector3,
-	thickness: float,
-	color: Color,
-	duration: float = 1.0
+	pos: Vector3,
+	radius: float = 0.1,
+	color: Color = Color.GOLD,
+	duration: float = 1.0,
+	top_level: bool = true,
+	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_UNSHADED,
+	no_depth_test: bool = true,
 ) -> void:
-	# 1. Create Cylinder (reusing your existing helper if you like, or manually)
-	# We use a small radius for the "line" thickness
-	var mi := create_generic_cylinder(thickness, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
+	var mesh := SphereMesh.new()
+	mesh.radius = radius
+	mesh.height = radius * 2.0
 	
-	# 2. Add to scene FIRST (needed for global position calculations in place_cylinder)
-	parent.add_child(mi)
-	
-	# 3. Position it
-	place_cylinder_between(mi, pos_a, pos_b, color)
-	
-	# 4. Auto-delete logic
-	var tween := mi.create_tween()
-	tween.tween_interval(duration)
-	tween.tween_callback(mi.queue_free)
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
+	mi.material_override = MatUtils.create_standard_3d(
+		color,
+		shading_mode,
+		BaseMaterial3D.TRANSPARENCY_ALPHA,
+		no_depth_test,
+		MatUtils.EmissionConfig.new() \
+			if shading_mode == BaseMaterial3D.SHADING_MODE_PER_PIXEL \
+			else null,
+	)
+
+	mi.top_level = top_level
+	
+	if parent:
+		parent.add_child(mi)
+		mi.global_position = pos
+		
+		var tween := mi.create_tween()
+		tween.tween_interval(duration)
+		tween.tween_callback(mi.queue_free)
+
+
+## cylinder connecting 'from' to 'to' (Local Space).
+static func create_bone_like_connector(
+	from: Vector3,
+	to: Vector3,
+	color: Color,
+	width: float = 0.05
+) -> MeshInstance3D:
+	var v := to - from
+	if v.length_squared() < 0.001: return null
+
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = width * 0.7
+	mesh.bottom_radius = width
+	mesh.height = v.length()
+	
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	
+	mi.material_override = MatUtils.create_standard_3d(
+		color,
+		BaseMaterial3D.SHADING_MODE_PER_PIXEL,
+	)
+
+	mi.position = (from + to) / 2.0
+	
+	var up := Vector3.UP
+	# handle vertical bones (prevent gimbal lock)
+	if abs(v.normalized().dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	
+	# transform that looks at 'to' from 'mi.position'
+	# looking_at aligns -z to the target
+	mi.transform = mi.transform.looking_at(to, up)
+	
+	# cylinder is y-aligned
+	# rotate -90 on x to bring y (cylinder) to -z (bone dir).
+	mi.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
+		
+	return mi
+		
 
 # region: __LOGS
 

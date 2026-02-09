@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://co3heqf28d52v"]
 
-[ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_BaseChest.tscn" id="1_1qxja"]
+[ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_1qxja"]
 [ext_resource type="Material" uid="uid://cgor81cloawxg" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp_red_triplanar_t1.tres" id="2_8mpq0"]
 [ext_resource type="Material" uid="uid://ryl6bwhqsews" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp_red_triplanar.tres" id="2_8qfhm"]
 [ext_resource type="Script" uid="uid://cjtmeesll4ykm" path="res://logic/entities/Items/chest/max_health_chest.gd" id="2_qim7j"]

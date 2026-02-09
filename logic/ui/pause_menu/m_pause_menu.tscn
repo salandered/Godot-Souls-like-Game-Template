@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://dsawmyldebwkf"]
 
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="1_8s11q"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="1_8s11q"]
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://logic/ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
-[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://logic/ui/ui_utils/legacy_capture_focus.gd" id="3_j5dnp"]
+[ext_resource type="Script" path="res://logic/ui/ui_utils/template_scripts/legacy_capture_focus.gd" id="3_j5dnp"]
 [ext_resource type="PackedScene" uid="uid://bxj0ijmfsrojl" path="res://logic/ui/options_menu/m_options_menu.tscn" id="3_l2gh6"]
 [ext_resource type="StyleBox" uid="uid://dofeon6as5ty8" path="res://-assets-/ui_assets/themes/panel/panel_back.tres" id="4_kheb5"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="4_w5m25"]
-[ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://-assets-/ui_assets/themes/buttons/PauseMenuButton.tscn" id="7_fb021"]
-[ext_resource type="PackedScene" uid="uid://bed3gcu0mg3wp" path="res://logic/ui/ui_dev_visuals_menu/UIDVMenu.tscn" id="8_hiit0"]
+[ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://logic/ui/ui_utils/prefab/PauseMenuButton.tscn" id="7_fb021"]
+[ext_resource type="PackedScene" uid="uid://bed3gcu0mg3wp" path="res://logic/ui/dev_visuals_menu/UIDVMenu.tscn" id="8_hiit0"]
 
 [node name="M_PauseMenu" type="Control"]
 process_mode = 3

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwoeey5b1u4dm"]
+
+[ext_resource type="PackedScene" uid="uid://beqkj7gmf5s5d" path="res://logic/ui/ui_utils/prefab/SpinBoxBigger.tscn" id="1_cij0c"]
+[ext_resource type="Script" uid="uid://dsllnmgb8n35q" path="res://logic/ui/dev_visuals_menu/button/dv_value_changer_spin_box.gd" id="2_ol2wd"]
+
+[node name="DVValueChangerSpinBox" instance=ExtResource("1_cij0c")]
+script = ExtResource("2_ol2wd")
+
+[node name="PanelContainer" parent="." index="2"]
+anchors_preset = -1
+anchor_left = 0.721
+offset_left = 0.037994385
+mouse_filter = 2

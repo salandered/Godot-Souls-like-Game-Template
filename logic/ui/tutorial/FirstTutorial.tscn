@@ -43,11 +43,11 @@ bbcode_enabled = true
 text = "[b]Available tutorials[/b]
 [hr color=web_gray]
 [color=#ffffff]    [img=20x20]uid://ciggpdm7q6lei[/img] Controls[/color]
-[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_parchment.png[/img] Mechanics overview[/color]
+[color=#ffffff]    [img=20x20]uid://qg53gkfhnevx[/img] Mechanics overview[/color]
 [color=#ffffff]    [img=20x20]uid://dhhcof4kym2tu[/img] Combo attacks[/color]
-[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] Target locking[/color]
-[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_heart.png[/img] Health/stamina[/color]
-[color=#ffffff]    [img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Additional info[/color]
+[color=#ffffff]    [img=20x20]uid://dp2m7ljkctl4[/img] Target locking[/color]
+[color=#ffffff]    [img=20x20]uid://b6duqo7n72nd[/img] Health/stamina[/color]
+[color=#ffffff]    [img=20x20]uid://cidp1ip2hiw1f[/img] Additional info[/color]
 [color=#ffffff]    [img=20x20]uid://faceud5if8lb[/img] UI Overlay controls[/color]
 [hr color=web_gray]
 [i]Use [b]Up/Down[/b] arrows to scroll the tutorials[/i]
@@ -78,7 +78,7 @@ text = "[ul]
 [b]WASD[/b] - [img=20x20]uid://bmwjt7mmr0hy8[/img] move
 [b]Space[/b] - [img=20x20]uid://covd6kks862ko[/img] dodge/jump
 [b]Shift[/b] - sprint
-[b]Q[/b] - [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target lock
+[b]Q[/b] - [img=20x20]uid://dp2m7ljkctl4[/img] target lock
 [b]LMB[/b] - [img=20x20]uid://dhhcof4kym2tu[/img] light attack
 [b]RMB[/b] - [img=20x20]uid://dhhcof4kym2tu[/img] heavy attack
 [b]E[/b] - [img=20x20]uid://dp87v6bn53hy5[/img] interact
@@ -118,7 +118,7 @@ Use the [i][i]switch weapon button[/i][/i] to try different weapons. Note that y
 [b]Chests and items[/b] - open chests to find helpful items and improve your abilities (e.g. longer dodge).
 
 [hr color=web_gray width=90% align=l]
-[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: on any level you can find mechanical combat dummy. It will help you to learn how to fight, move, and dodge different attack types."
+[img=20x20]uid://cidp1ip2hiw1f[/img] Tip: on any level you can find mechanical combat dummy. It will help you to learn how to fight, move, and dodge different attack types."
 fit_content = true
 scroll_active = false
 
@@ -143,7 +143,7 @@ text = "[b]Heavy attack[/b] - just press heavy [img=20x20]uid://dhhcof4kym2tu[/i
 [hr color=web_gray width=90% align=l]
 [img=20x20]uid://califiygvfo0n[/img] Help: If combo attack is not triggered, try to press [img=20x20]uid://dhhcof4kym2tu[/img] [i]attack button[/i] closer to the end of the current attack (less spam the clicks).
 
-[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: you can change direction in the middle of some attacks if not [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target locked."
+[img=20x20]uid://cidp1ip2hiw1f[/img] Tip: you can change direction in the middle of some attacks if not [img=20x20]uid://dp2m7ljkctl4[/img] target locked."
 fit_content = true
 scroll_active = false
 
@@ -153,15 +153,15 @@ visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[b]Target locking[/b] - find the suitable target and press [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] [i]target lock button[/i]. It will allow you to strafe around the target and make you hits more focused. Note that you may sprint freely while in target-lock mode.
+text = "[b]Target locking[/b] - find the suitable target and press [img=20x20]uid://dp2m7ljkctl4[/img] [i]target lock button[/i]. It will allow you to strafe around the target and make you hits more focused. Note that you may sprint freely while in target-lock mode.
 
 [b]Static targets[/b] - you can practice strafing while being in target-lock mode using static targets (golden posts, for example). 
 
 [hr color=web_gray width=90% align=l]
-[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Tip: use vertical mouse movement to adjust the view. 
+[img=20x20]uid://cidp1ip2hiw1f[/img] Tip: use vertical mouse movement to adjust the view. 
 
-[img=20x20]res://-assets-/x_icons/white/icon_light_bulb.png[/img] Advanced tip: you can not only sprint, but also run freely while being in target-lock mode. 
-In order to do so double-tap the [i][img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] [i]target lock button[/i][/i] while already being in [img=20x20]res://-assets-/x_icons/white/icon_target_2.png[/img] target lock mode. Double tapping again will switch you back to strafing."
+[img=20x20]uid://cidp1ip2hiw1f[/img] Advanced tip: you can not only sprint, but also run freely while being in target-lock mode. 
+In order to do so double-tap the [i][img=20x20]uid://dp2m7ljkctl4[/img] [i]target lock button[/i][/i] while already being in [img=20x20]uid://dp2m7ljkctl4[/img] target lock mode. Double tapping again will switch you back to strafing."
 fit_content = true
 scroll_active = false
 
@@ -185,7 +185,7 @@ visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[b]Advanced dodge[/b] - press both the [img=20x20]uid://bmwjt7mmr0hy8[/img] [i]move button[/i] and [i][img=20x20][img=20x20]uid://covd6kks862ko[/img][/img] [i]dodge button[/i][/i] simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
+text = "[b]Advanced dodge[/b] - press both the [img=20x20]uid://bmwjt7mmr0hy8[/img] [i]move button[/i] and [i][img=20x20]uid://covd6kks862ko[/img] [i]dodge button[/i][/i] simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
 
 [b]Sprint jump[/b] - just jump while sprinting!
 
@@ -195,7 +195,7 @@ text = "[b]Advanced dodge[/b] - press both the [img=20x20]uid://bmwjt7mmr0hy8[/i
 fit_content = true
 scroll_active = false
 
-[node name="UIOverlayControls" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="UIDVMenu" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b46dekni8c4fb"]
 
-[ext_resource type="Script" uid="uid://cyp4vbx5quudp" path="res://logic/ui/image_gallery/_generic_image_gallery.gd" id="1_ssf3r"]
+[ext_resource type="Script" path="res://logic/ui/image_gallery/_base_class/_generic_image_gallery.gd" id="1_ssf3r"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="2_ywow2"]
 [ext_resource type="AudioStream" uid="uid://bqy71tbdxrovo" path="res://-assets-/SFX/sources/rubberduck/book_page_flip.tres" id="3_ywow2"]
 

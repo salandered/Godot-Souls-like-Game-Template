@@ -10,7 +10,7 @@ extends NodeSystem
 @onready var target_lock_mechanic: RichTextLabel = %TargetLockMechanic
 @onready var health_stamina_mechanic: RichTextLabel = %HealthStaminaMechanic
 @onready var additional_movement_tips: RichTextLabel = %AdditionalMovementTips
-@onready var ui_overlay_controls: RichTextLabel = %UIDVMenu
+@onready var ui_dv_menu_info: RichTextLabel = %UIDVMenu
 
 
 @export var refill: bool = false:
@@ -81,10 +81,12 @@ func set_all_texts():
 	_set_text_for_panel(_4_target_lock_mechanic_text, target_lock_mechanic)
 	_set_text_for_panel(_5_health_stamina_mechanic_text, health_stamina_mechanic)
 	_set_text_for_panel(_6_additional_movement_tips_text, additional_movement_tips)
-	_set_text_for_panel(_ui_overlay_controls_text, ui_overlay_controls)
+	_set_text_for_panel(_ui_overlay_controls_text, ui_dv_menu_info)
 
 
 func _set_text_for_panel(raw_text: String, label: RichTextLabel):
+	if not label:
+		return
 	var r_text = raw_text
 	r_text = _format_text(r_text, add_before)
 

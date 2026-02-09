@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dks6m6de557j0" path="res://logic/c_systems/weapon/aura_weapon.gd" id="1_5akps"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_finp0"]
 [ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/Weapons/DVWeaponHurtBox.tscn" id="3_iwwxc"]
-[ext_resource type="Script" uid="uid://ceqyauwxu5frm" path="res://logic/c_systems/unsorted/weapon_sfx/weapon_sfx_parent.gd" id="3_rkpt4"]
+[ext_resource type="Script" uid="uid://ceqyauwxu5frm" path="res://logic/c_systems/sfx/misc/weapon_sfx/weapon_sfx_parent.gd" id="3_rkpt4"]
 [ext_resource type="Script" uid="uid://dmu0q0hdwihch" path="res://logic/c_systems/sfx/sfx_audio_system/base_weapon_sfx_system.gd" id="4_567gp"]
 [ext_resource type="AudioStream" uid="uid://qufmydm4eeq4" path="res://-assets-/SFX/audio_streams/whoosh/weapon_whoosh.tres" id="5_cyyah"]
 [ext_resource type="AudioStream" uid="uid://g4dtkcleinh8" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/metal_sword_hit.tres" id="6_xb2pm"]

@@ -2,6 +2,9 @@ class_name _low_level_printer
 extends RefCounted
 
 
+## should be the only one who actually prints, and not used by client code
+
+
 const _FRAME_PRINT := true
 
 static var _last_prefix_msg := ""
@@ -64,23 +67,30 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 			_mark = "x"
 		fr_ = "%6s" % [u.sfr() + "|" + _mark + " "]
 	
-	var result_msg := tabs_prefix + "  " + prefix_ + "  " + text
-	
-	if result_msg == _last_prefix_msg:
-		print("%4s" % ["| "], result_msg)
-		return
 
-	_last_prefix_msg = result_msg
+	var prefix_text_msg := prefix_ + "  " + text
+	
+	if prefix_text_msg == _last_prefix_msg:
+		print("%4s" % ["| "], prefix_text_msg)
+		return
+	_last_prefix_msg = prefix_text_msg
+	
+	var result_msg := tabs_prefix + prefix_text_msg
+
+
 	print(fr_, result_msg)
+	
+	if Engine.is_editor_hint():
+		return
 	if GlobalUIInfo.__ERROR_LOG and is_warning:
 		SigUtils.safe_emit_raw(GlobalSignal.__SIG_error_log_printed, {
-			SPS.frame_field: fr_, # string
-			SPS.message_field: result_msg
+			SPS.frame_field: u.sfr(), # string
+			SPS.message_field: prefix_text_msg
 			})
 	if GlobalUIInfo.__ALL_LOG:
 		SigUtils.safe_emit_raw(GlobalSignal.__SIG_all_log_printed, {
-			SPS.frame_field: fr_,
-			SPS.message_field: result_msg
+			SPS.frame_field: u.sfr(),
+			SPS.message_field: prefix_text_msg
 			})
 
 

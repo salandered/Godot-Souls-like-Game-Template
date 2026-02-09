@@ -181,3 +181,9 @@ static func _pick_random(array: Array):
 	return array[randi_range(0, array.size() - 1)]
 
 # endregion
+
+
+##
+
+static func get_random_vibrant_color() -> Color:
+	return Color.from_hsv(randf(), 0.9, 0.9)

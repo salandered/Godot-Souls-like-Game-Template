@@ -20,7 +20,7 @@ func velocity_by_input(input_: InputPackage, delta: float) -> Vector3:
 	return __velocity_by_input(input_, delta)
 
 
-func get_signed_angle_pl_input(input_: InputPackage, delta: float, __log: bool) -> float:
+func get_signed_angle_pl_input(input_: InputPackage, delta: float, __log: bool = false) -> float:
 	var angle := __angle_between_player_and_input(input_, delta, __log)
 	return angle
 
@@ -36,31 +36,7 @@ func detect_dir_relative_to_facing(input_: InputPackage, delta: float) -> Direct
 	var angle_rad := __angle_between_player_and_input(input_, delta)
 	var angle_deg := rad_to_deg(angle_rad)
 	
-	return _angle_to_direction(angle_deg)
-
-
-func _angle_to_direction(angle_deg: float) -> Direction.Dir:
-	# Normalize angle to -180 to 180 range
-	angle_deg = wrapf(angle_deg, -180.0, 180.0)
-	
-	angle_deg = - angle_deg
-	# 8-directional mapping (45° sectors)
-	if angle_deg >= -22.5 and angle_deg < 22.5:
-		return Direction.Dir.FORWARD
-	elif angle_deg >= 22.5 and angle_deg < 67.5:
-		return Direction.Dir.RIGHT_F
-	elif angle_deg >= 67.5 and angle_deg < 112.5:
-		return Direction.Dir.RIGHT
-	elif angle_deg >= 112.5 and angle_deg < 157.5:
-		return Direction.Dir.RIGHT_B
-	elif angle_deg >= 157.5 or angle_deg < -157.5:
-		return Direction.Dir.BACKWARD
-	elif angle_deg >= -157.5 and angle_deg < -112.5:
-		return Direction.Dir.LEFT_B
-	elif angle_deg >= -112.5 and angle_deg < -67.5:
-		return Direction.Dir.LEFT
-	else: # -67.5 to -22.5
-		return Direction.Dir.LEFT_F
+	return Direction.angle_to_direction(angle_deg)
 
 
 ## returns 0.0 if no target
@@ -81,7 +57,6 @@ func get_signed_angle_pl_target() -> float:
 
 ## MOVING WITH INPUT VECTOR
 # region
-
 
 func move_rotate_with_input_vector(input_: InputPackage, delta: float, speed_config: SpeedConfig = null):
 	if speed_config == null:
@@ -274,7 +249,7 @@ func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 ## In order to understand why that happened and what to do we need to either rethink the PlayerPack.
 ## (like may be a new abstract 'input' layer which knows about both: input gathering and camera data)
 ## Or rewrite current logic. I suspect same can be done easier.
-## And it's much simplier to just leave this small ball of mud here.
+## And it's simplier to just leave this small ball of mud here.
 # endregion
 var __VEL_SPEED: float = 3.0
 func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:

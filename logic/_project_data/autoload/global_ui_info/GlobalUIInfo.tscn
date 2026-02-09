@@ -1,55 +1,47 @@
-[gd_scene load_steps=24 format=3 uid="uid://48tejneiwq5o"]
+[gd_scene load_steps=26 format=3 uid="uid://48tejneiwq5o"]
 
 [ext_resource type="Script" uid="uid://ho1kjt4aujxq" path="res://logic/_project_data/autoload/global_ui_info/global_ui_info.gd" id="1_ihl3n"]
-[ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/_project_data/autoload/global_ui_info/profiler.gd" id="2_65fx7"]
-[ext_resource type="PackedScene" uid="uid://b6qeel3fnf216" path="res://logic/_project_data/autoload/global_ui_info/in_game_subvp_for_camera/InGameSubViewport.tscn" id="2_f4jnj"]
-[ext_resource type="Script" uid="uid://dbcu5ygwnlk0" path="res://logic/_project_data/autoload/global_ui_info/overlay_panel_managers/sig_info_manager.gd" id="5_7uhmh"]
-[ext_resource type="Script" uid="uid://dqvlv43ty5tmr" path="res://logic/_project_data/autoload/global_ui_info/free_cam_ui.gd" id="5_65fx7"]
-[ext_resource type="PackedScene" uid="uid://i3a03hqn3yig" path="res://logic/_project_data/autoload/global_ui_info/dynamic_info_grid/BluePanelBottomless.tscn" id="5_tym6s"]
-[ext_resource type="Script" uid="uid://dyp8r3a4no3f6" path="res://logic/c_systems/info_presenter/phe_attack_group.gd" id="5_yk2yn"]
-[ext_resource type="Script" uid="uid://kmjdjc3yjn0q" path="res://logic/c_systems/info_presenter/phe_state_group.gd" id="6_7uhmh"]
-[ext_resource type="Script" uid="uid://bg5b754cxsa7m" path="res://logic/_project_data/autoload/global_ui_info/overlay_panel_managers/error_log_panel_manager.gd" id="6_mcb6c"]
-[ext_resource type="PackedScene" uid="uid://4kxcjrgkejpt" path="res://logic/ui/ui_utils/prefab/dynamic_info/DynamicInfoLabel.tscn" id="6_o4jv4"]
-[ext_resource type="Script" uid="uid://cdiq2icn5j50o" path="res://logic/_project_data/autoload/global_ui_info/overlay_panel_managers/all_log_panel_manager.gd" id="6_r0oph"]
+[ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/x_dev_systems/ui_overlay_panels/profiler/profiler.gd" id="2_65fx7"]
+[ext_resource type="PackedScene" uid="uid://b6qeel3fnf216" path="res://logic/x_dev_systems/in_game_subvp_with_cameras/InGameSubViewport.tscn" id="2_f4jnj"]
+[ext_resource type="Script" uid="uid://dbcu5ygwnlk0" path="res://logic/x_dev_systems/overlay_panel_manager/sig_info_manager.gd" id="5_7uhmh"]
+[ext_resource type="Script" path="res://logic/_project_data/autoload/free_cam_mode/free_cam_ui.gd" id="5_65fx7"]
+[ext_resource type="Script" uid="uid://dyp8r3a4no3f6" path="res://logic/x_dev_systems/info_presenter/phe_attack_group.gd" id="5_yk2yn"]
+[ext_resource type="Script" uid="uid://kmjdjc3yjn0q" path="res://logic/x_dev_systems/info_presenter/phe_state_group.gd" id="6_7uhmh"]
+[ext_resource type="Script" uid="uid://bg5b754cxsa7m" path="res://logic/x_dev_systems/overlay_panel_manager/error_log_panel_manager.gd" id="6_mcb6c"]
+[ext_resource type="PackedScene" uid="uid://4kxcjrgkejpt" path="res://logic/ui/ui_utils/dynamic_info_label/DynamicInfoLabel.tscn" id="6_o4jv4"]
+[ext_resource type="Script" uid="uid://cdiq2icn5j50o" path="res://logic/x_dev_systems/overlay_panel_manager/all_log_panel_manager.gd" id="6_r0oph"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="6_x47y3"]
-[ext_resource type="Script" uid="uid://cmgjifr71src5" path="res://logic/c_systems/info_presenter/player_attack_group.gd" id="7_mcb6c"]
-[ext_resource type="Script" uid="uid://cbvo5ekasv1w0" path="res://logic/_project_data/autoload/global_ui_info/debug_fancy_cam_panel_manager.gd" id="7_xmbhh"]
-[ext_resource type="Script" uid="uid://e0maggdhti0w" path="res://logic/c_systems/info_presenter/player_state_group.gd" id="8_xmbhh"]
-[ext_resource type="Script" uid="uid://uhe021kqbv4p" path="res://logic/c_systems/info_presenter/se_attack_group.gd" id="9_r0oph"]
-[ext_resource type="Script" uid="uid://bx4bderfjdieg" path="res://logic/c_systems/info_presenter/se_state_group.gd" id="10_6ybb6"]
+[ext_resource type="Script" uid="uid://cmgjifr71src5" path="res://logic/x_dev_systems/info_presenter/player_attack_group.gd" id="7_mcb6c"]
+[ext_resource type="Script" uid="uid://e0maggdhti0w" path="res://logic/x_dev_systems/info_presenter/player_state_group.gd" id="8_xmbhh"]
+[ext_resource type="Script" uid="uid://uhe021kqbv4p" path="res://logic/x_dev_systems/info_presenter/se_attack_group.gd" id="9_r0oph"]
+[ext_resource type="Script" uid="uid://bx4bderfjdieg" path="res://logic/x_dev_systems/info_presenter/se_state_group.gd" id="10_6ybb6"]
 [ext_resource type="PackedScene" uid="uid://cv2pn65sfspf4" path="res://logic/ui/tutorial/FirstTutorial.tscn" id="13_bnty7"]
-[ext_resource type="PackedScene" uid="uid://cy3lvvelbsbtd" path="res://logic/_project_data/autoload/global_ui_info/dynamic_info_grid/ReactionDoubleDynamicInfoLabel.tscn" id="13_yk2yn"]
-[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="16_yk2yn"]
+[ext_resource type="PackedScene" path="res://logic/ui/ui_utils/dynamic_info_label/ReactionDoubleDynamicInfoLabel.tscn" id="13_yk2yn"]
+[ext_resource type="FontFile" uid="uid://dmscohqfr4mi4" path="res://-assets-/ui_assets/_font/jb_mono/JetBrainsMono-Regular.ttf" id="15_5ru03"]
+[ext_resource type="Script" uid="uid://l7ebdamargl7" path="res://logic/x_dev_systems/metrics/time_spent_metric/pl_time_spent_metric.gd" id="15_16g7h"]
+[ext_resource type="PackedScene" uid="uid://d4mb7reu07in8" path="res://logic/x_dev_systems/ui_overlay_panels/logs_ui_panel/LogsUIPanel.tscn" id="17_r0oph"]
+[ext_resource type="PackedScene" uid="uid://yhhhch504iof" path="res://logic/x_dev_systems/ui_overlay_panels/InputGlobalUIPanels.tscn" id="20_6ybb6"]
+[ext_resource type="PackedScene" uid="uid://dn2fgny8wh1e" path="res://logic/x_dev_systems/ui_overlay_panels/fancy_cam_panel/GlobalUIFancyCamPanel.tscn" id="21_6ybb6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmbhh"]
 bg_color = Color(0.45, 0.45, 0.45, 0)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0oph"]
-bg_color = Color(0.180933, 0.180933, 0.180933, 0.43137255)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ybb6"]
+bg_color = Color(0.055200003, 0.13220002, 0.24, 0.24705882)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.07167115, 0.12394311, 0.19451028, 0.49019608)
+border_color = Color(0.0703, 0.12217, 0.19, 0.23921569)
 border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+corner_radius_top_left = 4
+corner_radius_top_right = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcb6c"]
-bg_color = Color(0.1882353, 0.10109806, 0.054901954, 0.43137255)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.07167115, 0.12394311, 0.19451028, 0.49019608)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_iueb4"]
+color = Color(0.39138144, 0.39138144, 0.39138144, 1)
+thickness = 2
+vertical = true
 
 [node name="GlobalUIInfo" type="Node3D"]
 script = ExtResource("1_ihl3n")
@@ -63,48 +55,52 @@ script = ExtResource("2_65fx7")
 unique_name_in_owner = true
 script = ExtResource("5_65fx7")
 
-[node name="SigInfoManager" type="Node" parent="."]
+[node name="LogsManagers" type="Node" parent="."]
+
+[node name="SigInfoManager" type="Node" parent="LogsManagers"]
 unique_name_in_owner = true
 script = ExtResource("5_7uhmh")
 
-[node name="AllLogPanelManager" type="Node" parent="."]
+[node name="AllLogPanelManager" type="Node" parent="LogsManagers"]
 unique_name_in_owner = true
 script = ExtResource("6_r0oph")
 
-[node name="ErrorLogPanelManager" type="Node" parent="."]
+[node name="ErrorLogPanelManager" type="Node" parent="LogsManagers"]
 unique_name_in_owner = true
 script = ExtResource("6_mcb6c")
-
-[node name="DebugFancyCamPanelManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("7_xmbhh")
 
 [node name="DynamicInfoPresenters" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Presenter1" type="Node" parent="DynamicInfoPresenters"]
+[node name="Presenter1" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("5_yk2yn")
+ui_container = NodePath("../../CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack")
 
-[node name="Presenter2" type="Node" parent="DynamicInfoPresenters"]
+[node name="Presenter2" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("6_7uhmh")
+ui_container = NodePath("../../CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState")
 
-[node name="Presenter3" type="Node" parent="DynamicInfoPresenters"]
+[node name="Presenter3" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("7_mcb6c")
+ui_container = NodePath("../../CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack")
 
-[node name="Presenter4" type="Node" parent="DynamicInfoPresenters"]
+[node name="Presenter4" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("8_xmbhh")
+ui_container = NodePath("../../CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState")
 
-[node name="Presenter5" type="Node" parent="DynamicInfoPresenters"]
+[node name="Presenter5" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("9_r0oph")
+ui_container = NodePath("../../CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack")
 
-[node name="Presenter6" type="Node" parent="DynamicInfoPresenters"]
+[node name="Presenter6" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("10_6ybb6")
+ui_container = NodePath("../../CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 100
@@ -147,113 +143,265 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PlayerStateGroup" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid" instance=ExtResource("5_tym6s")]
+[node name="PlState" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-mouse_filter = 2
+theme_override_constants/separation = 0
 
-[node name="BluePanelTitle" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__margin" index="0"]
-text = "Player State Info"
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__hbox" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="1"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer"]
+layout_mode = 2
 size_flags_vertical = 4
 
-[node name="PlayerStateInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="0" instance=ExtResource("6_o4jv4")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(190, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin"]
 layout_mode = 2
-in_editor_label_text = "Attack from dodge"
 
-[node name="PlayerLegsState" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="1" instance=ExtResource("6_o4jv4")]
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("15_5ru03")
+theme_override_font_sizes/font_size = 18
+text = "23.41"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer/TimeSpentLabel" node_paths=PackedStringArray("metric_label")]
+script = ExtResource("15_16g7h")
+metric_label = NodePath("..")
+dvc_section = 30
+_char_type = 1
+_dv_type = 1
+
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
+theme_override_constants/shadow_outline_size = 2
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img]"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="PlayerStateInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("6_o4jv4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+in_editor_label_text = "Attack run 1"
+
+[node name="PlayerLegsState" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 title_text = "Legs State"
 in_editor_label_text = "sprint"
-font_size = 22
 
-[node name="PlayerActionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="2" instance=ExtResource("6_o4jv4")]
+[node name="PlayerActionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(190, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 title_text = "SubState (Action)"
 in_editor_label_text = "Fast turn 180 💨"
 
-[node name="PlayerReactionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="3" instance=ExtResource("13_yk2yn")]
+[node name="PlayerReactionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("13_yk2yn")]
 unique_name_in_owner = true
 layout_mode = 2
+title_font_size = 20
+font_size = 24
+gradient_color_modulate = Color(1.02, 0.836, 1.317, 1)
 
-[node name="__space" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="2"]
-theme_override_constants/margin_top = 30
-
-[node name="PlayerAttackGroup" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid" instance=ExtResource("5_tym6s")]
+[node name="PlAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
+
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin"]
 layout_mode = 2
 
-[node name="BluePanelTitle" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__margin" index="0"]
-text = "Player Attack Info"
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="PlayerAttackDamage" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="0" instance=ExtResource("6_o4jv4")]
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("15_5ru03")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer/TimeSpentLabel" node_paths=PackedStringArray("metric_label")]
+script = ExtResource("15_16g7h")
+metric_label = NodePath("..")
+dvc_section = 30
+_char_type = 1
+_dv_type = 1
+
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
+theme_override_constants/shadow_outline_size = 2
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img]"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerAttackDamage" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 title_text = "Damage"
 in_editor_label_text = "34"
 font_size = 28
-gradient_color_modulate = Color(1.6659546, 1.7018456, 3.900389, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="PlayerAttackSpeed" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="1" instance=ExtResource("6_o4jv4")]
+[node name="PlayerAttackSpeed" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 title_text = "Speed"
 in_editor_label_text = "1.2"
 font_size = 28
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="PlayerAttackDirection" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="2" instance=ExtResource("6_o4jv4")]
+[node name="PlayerAttackDirection" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 title_text = "Direction"
 in_editor_label_text = "RIGHT"
-font_size = 26
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="__space" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="2"]
-theme_override_constants/margin_top = 30
-
-[node name="HSMGroup" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid" instance=ExtResource("5_tym6s")]
+[node name="HSMState" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
+
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin"]
 layout_mode = 2
 
-[node name="BluePanelTitle" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox/__margin" index="0"]
-text = "Enemy Hierarchical State Machine Info"
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="StateInfoPheDepth2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="0" instance=ExtResource("6_o4jv4")]
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("15_5ru03")
+theme_override_font_sizes/font_size = 18
+text = "23.41"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer/TimeSpentLabel" node_paths=PackedStringArray("metric_label")]
+script = ExtResource("15_16g7h")
+metric_label = NodePath("..")
+dvc_section = 30
+_char_type = 1
+_dv_type = 1
+
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
+theme_override_constants/shadow_outline_size = 2
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img]"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StateInfoPheDepth2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_constants/margin_right = 0
 title_text = "State Depth 1"
 in_editor_label_text = "Still Life"
-font_size = 25
 drop_buffer = 8.0
 
-[node name="StateInfoPheDepth3" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="1" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheDepth3" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(130, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 title_text = "Depth 2"
-font_size = 25
 drop_buffer = 8.0
 
-[node name="StateInfoPheDepth4" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="2" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheDepth4" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -261,134 +409,303 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 title_text = "Depth 3"
 
-[node name="StateInfoPheLeaf" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="3" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheLeaf" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 title_text = "☘️ Leaf State"
 in_editor_label_text = "Attack 360 Low"
-gradient_color_modulate = Color(0.6632467, 1.9182534, 0.6632467, 1)
+gradient_color_modulate = Color(0.6578363, 1, 0.6578363, 1)
 
-[node name="PHEReactionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="4" instance=ExtResource("13_yk2yn")]
+[node name="PHEReactionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("13_yk2yn")]
 unique_name_in_owner = true
 layout_mode = 2
+title_font_size = 20
+font_size = 24
+gradient_color_modulate = Color(1.02, 0.836, 1.317, 1)
 
-[node name="__space" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="2"]
-theme_override_constants/margin_top = 30
-
-[node name="PHEAttackGroup" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid" instance=ExtResource("5_tym6s")]
+[node name="PHEAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
+
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin"]
 layout_mode = 2
 
-[node name="BluePanelTitle" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__margin" index="0"]
-text = "HSM Enemy Attack Info"
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="PHEAttackDamage" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="0" instance=ExtResource("6_o4jv4")]
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("15_5ru03")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer/TimeSpentLabel" node_paths=PackedStringArray("metric_label")]
+script = ExtResource("15_16g7h")
+metric_label = NodePath("..")
+dvc_section = 30
+_char_type = 1
+_dv_type = 1
+
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
+theme_override_constants/shadow_outline_size = 2
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img]"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PHEAttackDamage" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 title_text = "Damage"
 in_editor_label_text = "34"
 font_size = 28
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="PHEAttackSpeed" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="1" instance=ExtResource("6_o4jv4")]
+[node name="PHEAttackSpeed" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 title_text = "Speed"
 in_editor_label_text = "1.2"
 font_size = 28
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="PHEAttackDirection" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="2" instance=ExtResource("6_o4jv4")]
+[node name="PHEAttackDirection" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 title_text = "Direction"
 in_editor_label_text = "RIGHT"
-font_size = 26
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="__space" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="2"]
-theme_override_constants/margin_top = 30
-
-[node name="SEStateGroup" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid" instance=ExtResource("5_tym6s")]
+[node name="SEState" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
+
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin"]
 layout_mode = 2
 
-[node name="BluePanelTitle" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__margin" index="0"]
-text = "Simple Enemy State Info"
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="SEStateInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="0" instance=ExtResource("6_o4jv4")]
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("15_5ru03")
+theme_override_font_sizes/font_size = 18
+text = "23.41"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer/TimeSpentLabel" node_paths=PackedStringArray("metric_label")]
+script = ExtResource("15_16g7h")
+metric_label = NodePath("..")
+dvc_section = 30
+_char_type = 1
+_dv_type = 1
+
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
+theme_override_constants/shadow_outline_size = 2
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img]"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SEStateInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(190, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 in_editor_label_text = "Attack Left Right"
 
-[node name="SEReactionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="1" instance=ExtResource("13_yk2yn")]
+[node name="SEReactionInfo" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox" instance=ExtResource("13_yk2yn")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 in_editor_second_label_text = ""
 additional_title_text = ""
+title_font_size = 20
+font_size = 24
+gradient_color_modulate = Color(1.02, 0.836, 1.317, 1)
 
-[node name="__margin2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" index="1"]
+[node name="PanelGradient" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo" index="0"]
+self_modulate = Color(1.02, 0.836, 1.317, 1)
+
+[node name="Title" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" index="0"]
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+
+[node name="__margin2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" index="1"]
 visible = false
 
-[node name="TitleAdditional" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0"]
+[node name="TitleAdditional" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0"]
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
 text = "[b][/b]"
 
-[node name="VSeparator" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
-visible = false
+[node name="Text" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0"]
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
 
-[node name="__margin_text_2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="2"]
-visible = false
+[node name="VSeparator" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
+theme_override_styles/separator = SubResource("StyleBoxLine_iueb4")
 
-[node name="Text2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
+[node name="Text2" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
 text = ""
 
-[node name="__space" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="2"]
-theme_override_constants/margin_top = 30
-
-[node name="SEAttackGroup" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid" instance=ExtResource("5_tym6s")]
+[node name="SEAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
+
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin"]
 layout_mode = 2
 
-[node name="BluePanelTitle" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__margin" index="0"]
-text = "Simple Enemy Attack Info"
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="SEAttackDamage" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="0" instance=ExtResource("6_o4jv4")]
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("15_5ru03")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer/TimeSpentLabel" node_paths=PackedStringArray("metric_label")]
+script = ExtResource("15_16g7h")
+metric_label = NodePath("..")
+dvc_section = 30
+_char_type = 1
+_dv_type = 1
+
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer"]
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer"]
+modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_outline_color = Color(0.26239687, 0.26239687, 0.26239687, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.13333334)
+theme_override_constants/shadow_outline_size = 2
+bbcode_enabled = true
+text = "[img=16x16]uid://d0o265dhve8kq[/img]"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SEAttackDamage" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 title_text = "Damage"
 in_editor_label_text = "34"
 font_size = 28
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="SEAttackSpeed" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="1" instance=ExtResource("6_o4jv4")]
+[node name="SEAttackSpeed" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 title_text = "Speed"
 in_editor_label_text = "1.2"
 font_size = 28
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
-[node name="SEAttackDirection" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox" index="2" instance=ExtResource("6_o4jv4")]
+[node name="SEAttackDirection" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 title_text = "Direction"
 in_editor_label_text = "RIGHT"
-font_size = 26
-gradient_color_modulate = Color(1.666, 1.702, 3.9, 1)
-
-[node name="__space" parent="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttackGroup/__blue_panel/__margin_in_blue_panel/__vbox" index="2"]
-theme_override_constants/margin_top = 30
+gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 
 [node name="RightSide" type="MarginContainer" parent="CanvasLayer/__global_margin/__global_hbox"]
 layout_mode = 2
@@ -441,7 +758,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Profiler Info text
 ...
-...
 ..."
 
 [node name="FirstTutorial" parent="CanvasLayer/__global_margin/__global_hbox/RightSide/__vbox" instance=ExtResource("13_bnty7")]
@@ -454,191 +770,16 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="SignalInfoPanel" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(600, 340)
+[node name="InputGlobalUIPanels" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("20_6ybb6")]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/LeftSide/SignalInfoPanel"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("16_yk2yn")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/SignalInfoPanel/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 6
-
-[node name="SigInfoLabel" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/SignalInfoPanel/PanelContainer/MarginContainer"]
+[node name="LogsPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("17_r0oph")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/paragraph_separation = -2
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 16
-theme_override_font_sizes/italics_font_size = 16
-bbcode_enabled = true
-text = "  05:25:21   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:21   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.667 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:22   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:22   [color=#8b93ffff] SIG_player_state_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'idle'  
- 
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  "
-scroll_active = false
-scroll_following = true
-autowrap_mode = 0
-vertical_alignment = 2
 
-[node name="AllLogsPanel" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(600, 340)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/LeftSide/AllLogsPanel"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_r0oph")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/AllLogsPanel/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 6
-
-[node name="AllLogsLabel" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/AllLogsPanel/PanelContainer/MarginContainer"]
+[node name="DebugFancyCamPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("21_6ybb6")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/paragraph_separation = -2
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 16
-theme_override_font_sizes/italics_font_size = 16
-bbcode_enabled = true
-text = "  05:25:21   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:21   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.667 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:22   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:22   [color=#8b93ffff] SIG_player_state_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'idle'  
- 
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  "
-scroll_active = false
-scroll_following = true
-vertical_alignment = 2
-
-[node name="ErrorLogsPanel" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(600, 220)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/LeftSide/ErrorLogsPanel"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mcb6c")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/ErrorLogsPanel/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 6
-
-[node name="ErrorLogsLabel" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/ErrorLogsPanel/PanelContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/paragraph_separation = -2
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 16
-theme_override_font_sizes/italics_font_size = 16
-bbcode_enabled = true
-text = "  05:25:21   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:21   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.667 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:22   [color=#8b93ffff] SFX_footstep  
- [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
- 
- 05:25:22   [color=#8b93ffff] SIG_player_state_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'idle'  
- 
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
- 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
- [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  "
-scroll_active = false
-scroll_following = true
-vertical_alignment = 2
-
-[node name="DebugFancyCamPanel" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/LeftSide/DebugFancyCamPanel"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/DebugFancyCamPanel/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="DebugFancyCamInfoPanel" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/DebugFancyCamPanel/PanelContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 22
-theme_override_font_sizes/bold_font_size = 22
-theme_override_font_sizes/italics_font_size = 22
-bbcode_enabled = true
-text = "[i]Camera nodes[/i]
-[b]L[/b] - show labels
-[b]T[/b] - show trails"
-fit_content = true
-scroll_active = false
-scroll_following = true
-autowrap_mode = 0
-vertical_alignment = 1
 
 [node name="FreeCam" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide"]
 unique_name_in_owner = true
@@ -714,10 +855,4 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerStateGroup"]
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PlayerAttackGroup"]
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/HSMGroup"]
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/PHEAttackGroup"]
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup"]
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEStateGroup/__blue_panel/__margin_in_blue_panel/__vbox/__hbox/SEReactionInfo"]
-[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEAttackGroup"]
+[editable path="CanvasLayer/__global_margin/__global_hbox/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo"]

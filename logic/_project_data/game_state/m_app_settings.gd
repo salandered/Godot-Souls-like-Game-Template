@@ -366,13 +366,6 @@ static func set_from_config_and_window(window: Window) -> void:
 ## 
 
 
-static var white_list = [
-	RawAction.DEV_free_cam,
-	RawAction.DEV_fly_mode,
-	RawAction.DEV_force_quit,
-	# RawAction.DEV_CAM_fov
-	]
-
 # OS.is_debug_build() 
 # True: In Editor AND in "Debug" exports.
 # False: Only in final "Release" exports.
@@ -391,9 +384,8 @@ static func remove_developer_actions() -> void:
 
 	var actions = InputMap.get_actions()
 	for action in actions:
-		if not action in white_list:
-			if action.begins_with("dev_"):
-				InputMap.erase_action(action)
+		if action.begins_with("dev_") or action.begins_with("DEV_"):
+			InputMap.erase_action(action)
 
 
 static func pp_name() -> String:

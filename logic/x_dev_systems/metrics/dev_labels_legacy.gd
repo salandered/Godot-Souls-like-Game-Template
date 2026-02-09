@@ -1,0 +1,134 @@
+extends Node
+
+
+@onready var label_state_info: Label = %LabelStateInfo
+@onready var modifier_ar: Label = %modifier_ar
+@onready var label_enemy: Label = %label_enemy
+
+@onready var player: Princess = $"../.."
+
+var _visible: bool = true
+
+var all_labels = []
+
+
+func _ready() -> void:
+	if not OS.is_debug_build():
+		return
+	all_labels = [
+		label_state_info,
+		modifier_ar,
+		label_enemy
+	]
+
+
+func _process(delta: float) -> void:
+	if not OS.is_debug_build():
+		return
+	if u.ifr() % 2 == 0:
+		# _label_camera_info()
+		# _label_modifier_animator_info()
+		_label_state_info()
+
+
+func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
+	if event.is_action_released(RawAction.DEV_KP7):
+		_visible = not _visible
+		for l: Label in all_labels:
+			l.visible = _visible
+
+
+func _label_state_info():
+	var c_s := __c_s()
+
+	var t := ""
+	var error: bool = false
+	if not c_s:
+		t += em.warn + "NO current state"
+		error = true
+	if not c_s.legs_sm.current_behavior:
+		t += em.warn + "\nNO legs behavior"
+		error = true
+	if not c_s.legs_sm.get_curr_action():
+		t += em.warn + "\nNO legs behavior action"
+		error = true
+	if not __pl_sm().get_curr_action():
+		t += em.warn + "\n"
+		error = true
+	if not __pl_sm().get_prev_action():
+		t += em.warn + "\n"
+		error = true
+	if error:
+		label_state_info.text = t
+		return
+
+
+	var curr_st = c_s.state_name
+	var curr_st_act = "NONE"
+	var curr_st_act_time_spent = 0.0
+	if c_s.curr_state_action:
+		curr_st_act = c_s.curr_state_action.action_name
+		curr_st_act_time_spent = c_s.curr_state_action.time_spent()
+	
+	var curr_l_b = c_s.legs_sm.current_behavior.behavior_name
+	var curr_l_act = c_s.legs_sm.get_curr_action().action_name
+	var curr_l_act_time_spent = c_s.legs_sm.get_curr_action().time_spent()
+	var curr_gl_act = __pl_sm().get_curr_action().action_name
+	var prev_gl_act = __pl_sm().get_prev_action().action_name
+	
+	t += "state/st act  %20s %20s " % [curr_st, curr_st_act]
+	t += "\nl_beh / l_act  %20s %20s " % [curr_l_b, curr_l_act]
+	t += "\nAct: gl/st/legs   %20s %20s %20s " % [curr_gl_act, curr_st_act, curr_l_act]
+	t += "\nAct: gl from prev  %20s (%16s)" % [curr_gl_act, prev_gl_act]
+	t += "\nprogress pl action %6.2f  l action  %6.2f " % [curr_st_act_time_spent, curr_l_act_time_spent]
+
+	label_state_info.text = t
+
+
+func _label_modifier_animator_info():
+	var animator := player.get_animator_manager().full_body
+
+	modifier_ar.text = animator.__log_state()
+	# modifier_ar_2.text = __one_animator_data(l_ar)
+
+
+func __l_action(act_name: String) -> LegsAction:
+	if __pl().legs_sm:
+		if __pl().legs_sm._current_action:
+			if __pl().legs_sm._current_action.action_name == act_name:
+				return __pl().legs_sm._current_action
+	return null
+
+
+func __pl() -> Princess:
+	return player
+
+func __c_s() -> BasePlayerState:
+	return __pl().player_sm.current_state
+
+func __pl_sm() -> PlayerSM:
+	return __pl().player_sm
+
+func __cam() -> FancyCamera:
+	return __pl().fancy_camera
+
+# FROM OUTSIDE THE PLAYER
+
+func _label_phe_enemy_info(enemy: PHCharacter):
+	if not OS.is_debug_build():
+		return
+		
+	var pl_e_dist := pp.round_01(enemy.get_e_movement().distance_to_player())
+	var pl_e_angle: String = pp.rad2deg(enemy.get_e_movement().signed_angle_to_player(), true)
+	var c_l_s := enemy.get_curr_leaf_state()
+	var _cls_name := '- no curr state - '
+	var _cls_ts := -1.0
+	if c_l_s:
+		_cls_name = c_l_s.state_name
+		_cls_ts = c_l_s.get_actual_time_spent()
+		
+
+	label_enemy.text = "PL->E   %s  %s " % [pl_e_dist, pl_e_angle]
+	label_enemy.text += "\n ST/ts  %s  %5.1f" % [_cls_name, _cls_ts]

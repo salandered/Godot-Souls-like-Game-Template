@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bs1rf0cb545oq"]
 
 [ext_resource type="Script" uid="uid://dotahls6vtroe" path="res://logic/ui/loading_screen/m_loading_screen.gd" id="1_j1vc5"]
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/themes/project-theme.tres" id="12_167l7"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="12_167l7"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/prefab/color_rect.tscn" id="12_lioqs"]
-[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort_ui/distort_menu.gdshader" id="13_deyge"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort/distort_menu.gdshader" id="13_deyge"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/ui_utils/prefab/background_music_player/m_background_music_player.tscn" id="15_lpyag"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lldwd"]

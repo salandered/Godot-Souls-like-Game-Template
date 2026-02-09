@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b5tsnu0lrbyel"]
 
-[ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_BaseChest.tscn" id="1_2sh8b"]
+[ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_2sh8b"]
 [ext_resource type="Script" uid="uid://d24u4ptnmll7f" path="res://logic/entities/Items/chest/speed_increase_chest.gd" id="2_lsi57"]
 [ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/Items/pick_item/SpeedIncreaseItem.tscn" id="3_dv0l8"]
 [ext_resource type="Material" uid="uid://c4ejvjuf4552i" path="res://-assets-/materials-shared/different/P-gold-ring_Reimp.tres" id="3_lsi57"]

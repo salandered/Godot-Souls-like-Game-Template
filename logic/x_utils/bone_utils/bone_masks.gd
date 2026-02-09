@@ -12,7 +12,7 @@ class_name BoneMask
 # region Spine Head etc (Bones 1-6)
 
 static func get_head_and_neck() -> Array[int]:
-	return [5, 6]
+	return [BoneIdx.NECK, BoneIdx.HEAD]
 
 
 static func get_spine_chain() -> Array[int]:
@@ -20,11 +20,11 @@ static func get_spine_chain() -> Array[int]:
 
 
 static func get_spine_chain_no_head_neck() -> Array[int]:
-	return _range(2, 5) # Spine to 4
+	return _range(2, BoneIdx.NECK) # Spine to 4
 
 
 static func get_torso() -> Array[int]:
-	return _range(BoneIdx.HIPS, 5) # Hips to UpperChest 4
+	return _range(BoneIdx.HIPS, BoneIdx.NECK) # Hips to UpperChest 4
 
 
 static func get_hips() -> Array[int]:
@@ -179,3 +179,14 @@ static func get_right_arm_with_spine_and_left_shoulder() -> Array[int]:
 	return mask
 
 # endregion
+
+
+static func get_all_no_fingers() -> Array[int]:
+	var indices: Array[int] = []
+	# Root(0) to RightHand(10) inclusive
+	indices.append_array(_range(0, 11))
+	# LeftShoulder(26) to LeftHand(29) inclusive
+	indices.append_array(_range(26, 30))
+	# RightUpperLeg(45) to End
+	indices.append_array(_range(45, Constants.BONE_COUNT))
+	return indices

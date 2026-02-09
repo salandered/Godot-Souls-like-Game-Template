@@ -31,15 +31,15 @@ buses/default_bus_layout="uid://h34rd3knc6l3"
 
 [autoload]
 
-FreeCameraMode="*res://logic/_project_data/autoload/dev_free_cam/FreeCamMode.tscn"
+FreeCameraMode="*res://logic/_project_data/autoload/free_cam_mode/FreeCamMode.tscn"
 FullscreenHandler="*res://logic/ui/ui_utils/fullscreen_handler.gd"
-InputManager="*res://logic/c_systems/input/pl_input/input_manager.gd"
+InputManager="*res://logic/_project_data/autoload/input_manager.gd"
 FrameUtils="*res://logic/_project_data/autoload/frame_utils.gd"
 M_AppConfig="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/app_config.tscn"
 M_SceneLoader="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/scene_loader.tscn"
 M_ProjectMusicController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_music_controller.tscn"
 M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_ui_sound_controller.tscn"
-GlobalSignal="*res://logic/_project_data/autoload/global_signal.gd"
+GlobalSignal="*res://logic/_project_data/autoload/global_signal/global_signal.gd"
 GlobalUIInfo="*res://logic/_project_data/autoload/global_ui_info/GlobalUIInfo.tscn"
 PlayerStats="*res://logic/_project_data/autoload/player_statistic/player_stats.gd"
 Console="*res://addons/console/console.gd"
@@ -139,7 +139,7 @@ folder_colors={
 "res://logic/c_systems/sfx/sfx_anim_sig_emitter/": "orange",
 "res://logic/c_systems/sfx/sfx_audio_system/": "yellow",
 "res://logic/c_systems/sk_modifiers/": "red",
-"res://logic/c_systems/unsorted/": "purple",
+"res://logic/c_systems/x_unsorted/": "purple",
 "res://logic/entities/Enemies/phe_enemy/": "blue",
 "res://logic/entities/Locations/": "yellow",
 "res://logic/entities/Locations/_dev/": "gray",
@@ -150,13 +150,13 @@ folder_colors={
 "res://logic/systems/sfx_anim_data_container/": "yellow",
 "res://logic/ui/": "pink",
 "res://logic/ui/credits/": "purple",
+"res://logic/ui/dev_visuals_menu/": "teal",
 "res://logic/ui/main_menu/": "pink",
 "res://logic/ui/options_menu/": "pink",
 "res://logic/ui/pause_menu/": "pink",
-"res://logic/ui/ui_dev_visuals_menu/": "teal",
 "res://logic/ui/ui_utils/": "purple",
+"res://logic/x_dev_systems/dev_visuals_3d/": "yellow",
 "res://logic/x_utils/": "green",
-"res://logic/x_utils/dev_3d_visuals/": "yellow",
 "res://misc/cats-souls/": "purple",
 "res://misc/trash_bin/": "red",
 "res://ui/_later/maacks_example_game_scene/": "teal"
@@ -321,7 +321,7 @@ DEV_CAM_cols={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194333,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-DEV_profiler={
+wl_DEV_profiler={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194334,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
@@ -331,7 +331,7 @@ DEV_force_quit={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194339,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-DEV_free_cam={
+wl_DEV_free_cam={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194340,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]

@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/red/double_up.png")
+@icon("uid://dxsslmwb8skjn")
 class_name SpringUp
 extends Node3DSystem
 

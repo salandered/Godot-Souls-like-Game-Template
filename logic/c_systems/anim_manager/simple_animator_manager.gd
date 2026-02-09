@@ -85,3 +85,10 @@ func is_playing() -> bool:
 ## nullable
 func get_curr_anim() -> AnimationData:
 	return _curr_anim
+
+
+##
+
+
+func __LOG_B() -> bool:
+	return false

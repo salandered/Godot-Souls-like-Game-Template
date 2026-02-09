@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://8mwpcnwpicyn"]
 
-[ext_resource type="PackedScene" uid="uid://dbcvsan1ldffm" path="res://logic/entities/Items/pick_item/_BasePickItem.tscn" id="1_te6xc"]
+[ext_resource type="PackedScene" uid="uid://dbcvsan1ldffm" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_te6xc"]
 [ext_resource type="Script" uid="uid://iyj2uqlcx57q" path="res://logic/entities/Items/pick_item/dodge_increase_item.gd" id="2_s30od"]
 [ext_resource type="Shader" uid="uid://dva33q3vefr3d" path="res://-assets-/materials-shared/_shaders/pick_items/PickItem.gdshader" id="3_qqyv8"]
 [ext_resource type="Texture2D" uid="uid://c3ky7145k6w2c" path="res://-assets-/materials-shared/metal/I_metal_026/pl-skeleton-ranger_Metal026_4d1K_Color.jpg" id="4_88xtq"]

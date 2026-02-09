@@ -13,6 +13,8 @@ extends RefCounted
 class Dev:
 	const DEBUG_CAMERAS = "debug_cameras"
 	const camera_mode_toggle = "camera_mode_toggle"
+	const FANCY_CAM = "fancy_cam"
+
 
 class Marker:
 	const LOOK_AT = "LOOK_AT"
