@@ -129,6 +129,17 @@ func get_current_substate() -> BasePHEState:
 	return __current_substate
 
 
+func get_current_substate_by_depth(depth: int) -> BasePHEState:
+	if state_depth == depth:
+		return self
+		
+	var _curr_substate := get_current_substate()
+	if _curr_substate:
+		return _curr_substate.get_current_substate_by_depth(depth)
+	else:
+		return null
+
+
 func get_safe_curr_sbs_name() -> String:
 	if __current_substate: return __current_substate.state_name
 	return "-x-"

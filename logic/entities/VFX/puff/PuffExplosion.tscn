@@ -43,7 +43,7 @@ _data = {
 &"explosion": SubResource("Animation_sfsol")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x8tm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgvgc"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_4x8tm")
@@ -80,7 +80,7 @@ libraries = {
 
 [node name="PuffExplosionParticles" type="CPUParticles3D" parent="."]
 unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_4x8tm")
+material_override = SubResource("StandardMaterial3D_tgvgc")
 cast_shadow = 0
 amount = 10
 lifetime = 9.0

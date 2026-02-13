@@ -39,6 +39,11 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
+"DockTrim_wooddock": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/dock_trim/DockTrim_wooddock_Reimp.tres",
+"use_external/path": "uid://x2fm5k6b66w1"
+},
 "I_Concrete Old": {
 "use_external/enabled": false,
 "use_external/fallback_path": "res://-assets-/materials-shared/concrete/I_concrete_old/I_Concrete Old_Reimp.tres",
@@ -50,13 +55,18 @@ _subresources={
 "use_external/path": "uid://b6tpdgol8yavy"
 },
 "MinesTrim": {
-"use_external/enabled": false,
-"use_external/fallback_path": "",
-"use_external/path": ""
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres",
+"use_external/path": "uid://bb06udlb6phmw"
+},
+"baked_barrel_temp": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
 },
 "bark_debris_01": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/trunk_root_debris/bark_debris_01_Reimp.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/trunk_root_debris/bark_debris_01_Reimp.tres",
 "use_external/path": "uid://b5l4we8it0vyf"
 },
 "bark_willow": {
@@ -76,7 +86,7 @@ _subresources={
 },
 "dead_tree_trunk": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/trunk_root_debris/dead_tree_trunk.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/trunk_root_debris/dead_tree_trunk.tres",
 "use_external/path": "uid://b4uk6eprnswjo"
 },
 "dirt_aerial_02": {
@@ -96,7 +106,7 @@ _subresources={
 },
 "root_cluster_02": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/trunk_root_debris/root_cluster_02.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/trunk_root_debris/root_cluster_02.tres",
 "use_external/path": "uid://0lbe2fwybk4c"
 }
 },

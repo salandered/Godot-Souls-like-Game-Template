@@ -56,8 +56,13 @@ _subresources={
 },
 "Mug_2": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/mug_2/Mug_2_Reimp.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/mug_2/Mug_2_Reimp.tres",
 "use_external/path": "uid://biyh4e5a5g431"
+},
+"baked_barrel_temp": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
 },
 "concrete": {
 "use_external/enabled": true,

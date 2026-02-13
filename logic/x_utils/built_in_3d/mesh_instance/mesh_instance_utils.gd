@@ -19,7 +19,7 @@ static func create_generic_cylinder(
 	mi.cast_shadow = cast_shadow
 	
 	if create_material:
-		mi.material_override = MatUtils.create_standard_3d(
+		mi.material_override = MaterialUtils.create_standard_3d(
 			Color.WHITE,
 			shading_mode,
 			BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -28,37 +28,36 @@ static func create_generic_cylinder(
 
 
 ## cylinder mesh between two points
-static func place_cylinder_between(mi: MeshInstance3D, pos_a: Vector3, pos_b: Vector3, color: Color) -> void:
+static func place_cylinder_between(cylinder: MeshInstance3D, pos_a: Vector3, pos_b: Vector3, color: Color) -> void:
 	if pos_a.is_equal_approx(pos_b):
-		mi.visible = false
+		cylinder.visible = false
 		return
 
 	# resets scale: ensures xz (thickness) return to the original mesh radius
-	mi.scale = Vector3.ONE
+	cylinder.scale = Vector3.ONE
 
 	# position at midpoint
-	mi.global_position = (pos_a + pos_b) / 2.0
+	cylinder.global_position = (pos_a + pos_b) / 2.0
 	
 	# rotation
 	var up_vec := Vector3.UP
 	if abs(pos_a.direction_to(pos_b).dot(Vector3.UP)) > 0.99:
 		up_vec = Vector3.RIGHT
 	
-	u.safe_look_at(mi, pos_b, up_vec)
+	u.safe_look_at(cylinder, pos_b, up_vec)
 	
 	# correction for Y-up cylinder geometry to point along Z-forward vector
-	mi.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
+	cylinder.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
 
 	# scale: modify y (length). xz remain 1.0 (constant thickness)
-	mi.scale.y = pos_a.distance_to(pos_b)
+	cylinder.scale.y = pos_a.distance_to(pos_b)
 	
-	# color
-	var mat := mi.material_override as StandardMaterial3D
+	var mat := cylinder.material_override as StandardMaterial3D
 	if mat:
 		color.a = 1.0
 		mat.albedo_color = color
 
-	mi.visible = true
+	cylinder.visible = true
 
 
 static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
@@ -94,7 +93,7 @@ static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
 static func create_simple_sphere(
 	radius: float = 0.5,
 	color: Color = Color.ORANGE_RED,
-	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_UNSHADED,
+	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_PER_PIXEL,
 	no_depth_test: bool = false
 ) -> MeshInstance3D:
 	var mesh := SphereMesh.new()
@@ -105,7 +104,7 @@ static func create_simple_sphere(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
-	mi.material_override = MatUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_3d(
 		color,
 		shading_mode,
 		BaseMaterial3D.TRANSPARENCY_DISABLED,
@@ -118,7 +117,7 @@ static func create_simple_sphere(
 static func create_simple_box(
 	size: Vector3,
 	color: Color = Color.ORANGE_RED,
-	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_UNSHADED,
+	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_PER_PIXEL,
 	no_depth_test: bool = false
 ) -> MeshInstance3D:
 	var mesh := BoxMesh.new()
@@ -128,7 +127,7 @@ static func create_simple_box(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
-	mi.material_override = MatUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_3d(
 		color,
 		shading_mode,
 		BaseMaterial3D.TRANSPARENCY_DISABLED,
@@ -145,7 +144,7 @@ static func draw_temporary_sphere(
 	color: Color = Color.GOLD,
 	duration: float = 1.0,
 	top_level: bool = true,
-	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_UNSHADED,
+	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_PER_PIXEL,
 	no_depth_test: bool = true,
 ) -> void:
 	var mesh := SphereMesh.new()
@@ -156,12 +155,12 @@ static func draw_temporary_sphere(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-	mi.material_override = MatUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_3d(
 		color,
 		shading_mode,
 		BaseMaterial3D.TRANSPARENCY_ALPHA,
 		no_depth_test,
-		MatUtils.EmissionConfig.new() \
+		EmissionConfig.new() \
 			if shading_mode == BaseMaterial3D.SHADING_MODE_PER_PIXEL \
 			else null,
 	)
@@ -196,7 +195,7 @@ static func create_bone_like_connector(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
-	mi.material_override = MatUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_3d(
 		color,
 		BaseMaterial3D.SHADING_MODE_PER_PIXEL,
 	)

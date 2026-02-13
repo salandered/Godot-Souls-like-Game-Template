@@ -256,6 +256,11 @@ static func array_of_dv_line_edit(array: Array) -> Array[DVLineEdit]:
 	list_casted.assign(_safe_validate_class(array, DVLineEdit, "DVLineEdit"))
 	return list_casted
 
+static func array_of_dv_option_button(array: Array) -> Array[DVOptionButton]:
+	var list_casted: Array[DVOptionButton] = []
+	list_casted.assign(_safe_validate_class(array, DVOptionButton, "DVOptionButton"))
+	return list_casted
+
 
 ## DICT
 

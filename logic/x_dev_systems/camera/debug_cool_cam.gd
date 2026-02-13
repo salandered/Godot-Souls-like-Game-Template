@@ -97,7 +97,7 @@ func set_camera_enabled(value: bool, process_input: bool = false):
 
 func _cycle_mode() -> void:
 	position_mode = EnumUtils.cycle_sequential(CamPosMode, position_mode) as CamPosMode
-	_view_offset = Vector2.ZERO
+	# _view_offset = Vector2.ZERO
 
 
 func _toggle_projection() -> void:
@@ -158,12 +158,12 @@ func _handle_arrow_input(event: InputEventKey) -> void:
 		_mark_input_handled()
 			
 	else:
-		if event.keycode == KEY_UP:
+		if event.keycode == KEY_DOWN:
 			distance_to_target += dist_change_amount
 			if projection == PROJECTION_ORTHOGONAL: size = distance_to_target
 			_mark_input_handled()
 			
-		elif event.keycode == KEY_DOWN:
+		elif event.keycode == KEY_UP:
 			distance_to_target = max(distance_to_target - dist_change_amount, 2.0)
 			if projection == PROJECTION_ORTHOGONAL: size = distance_to_target
 			_mark_input_handled()
@@ -208,6 +208,8 @@ const CONTROLS_TEXT := """[b]Arrows Up/Down[/b] - distance to target
 [b]R[/b] - toggle Rotation Follow
 [b]V[/b] - toggle Smoothing
 [b]Arrows Left/Right[/b] - smooth speed
+[b]G[/b] - change target to enemy
+[b]M[/b] - toggle small top views
 """
 
 func get_status_text() -> String:
@@ -220,7 +222,8 @@ func get_status_text() -> String:
 	var projection_icon = BB.image_20_wrap(projection_to_icon.get(projection, ""))
 
 	return pp.s(
-		mode_name, mode_icon, "|", proj_name, projection_icon, "\n",
+		mode_name, mode_icon, "\n",
+		proj_name, projection_icon, "\n",
 		"Dist:", distance_to_target, "| FOV:", zoom_val, "\n",
 		"Smooth:", BB.b_wrap(enable_smoothing), "| speed:", smooth_speed, "\n",
 		"Follow Rot:", BB.b_wrap(follow_rotation), "\n",

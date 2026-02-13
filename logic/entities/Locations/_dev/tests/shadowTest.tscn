@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhdqwmb8cjasv"]
+[gd_scene load_steps=4 format=3 uid="uid://gvwcy8j050to"]
 
 [ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="1_7ynfd"]
 [ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/demo-level_/island/ISLAND_WRAPPER.tscn" id="2_ffjij"]

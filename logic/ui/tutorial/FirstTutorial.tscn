@@ -201,13 +201,18 @@ visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[b]Advanced dodge[/b] - press both the [img=20x20]res://-assets-/x_icons/white/steps.png[/img] [i]move button[/i] and [i][i]dodge button[/i][/i] simultaneously and then immediately release them. This will make you dodge as if you were being in a target-lock mode. Pretty handy against the projectiles. 
+text = "In Pause Menu you can find [img=20x20]uid://faceud5if8lb[/img] UI Overlay Controls submenu. 
+It can control all of the in-game UI panels, including this tutorial.
 
-[b]Sprint jump[/b] - just jump while sprinting!
-
-[b]U-turn[/b] - press the opposite [img=20x20]res://-assets-/x_icons/white/steps.png[/img] [i]move button[/i] while sprinting. Helps for quick retreats.
-
-[b]Sprint start[/b] - press shift while idle and only then start moving. It looks cool but is not really helpful."
+A lot of the game mechanics can be visualised using it! To name a few:
+[ul]
+	Current state of the player or any enemy/NPC in game. 
+	Information about attack type, damage or speed.
+	Trajectory of the weapon moves.
+	Character hit boxes and their i-frames (like during the dodge).
+	Camera setup with all it's nodes.
+	And more
+[/ul]"
 fit_content = true
 scroll_active = false
 

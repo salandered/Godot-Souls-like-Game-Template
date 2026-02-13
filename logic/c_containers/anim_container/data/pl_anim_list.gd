@@ -67,8 +67,7 @@ var _list_of_animations: Array[AnimationData] = [
 
 	## equip
 	AnimationData.new(A.equip.equip, 1.0),
-	
-
+	AnimationData.new(A.equip.wave, 1.0),
 ]
 
 

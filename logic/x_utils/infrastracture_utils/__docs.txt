@@ -1,0 +1,8 @@
+### Contains utils for working with outside world
+
+- like some utils that can be used in adapters
+
+
+E.g.: 
+	- Working with file system
+	- Working with Inputs

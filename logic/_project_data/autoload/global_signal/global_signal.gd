@@ -7,7 +7,7 @@ extends Node
 ##   or don't have the payload at all. 
 ##   While cumbersome, it unifies all the signal handlers 
 ##	 and mitigates an error when handler signature does not match the signal
-## * Use const fields for the payload keys
+## * Use const fields for the payload keys from SPS (Signal Payload Schema)
 ## * Use SigUtils for both, emitting signals and parsing their payload
 ##   (also for connecting/disconnecting signals)
 
@@ -21,6 +21,7 @@ signal SIG_player_leg_beh_changed(payload: Dictionary[String, Variant])
 signal SIG_player_action_changed(payload: Dictionary[String, Variant])
 signal SIG_player_weapon_hit_data_set(payload: Dictionary[String, Variant])
 signal SIG_player_reacted_on_hit(payload: Dictionary[String, Variant])
+signal SIG_player_combo_triggered(payload: Dictionary[String, Variant])
 
 ## PHE EVENTS
 signal SIG_phe_state_changed(payload: Dictionary[String, Variant])

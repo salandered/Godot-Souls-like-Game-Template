@@ -1,3 +1,4 @@
+@tool
 class_name RawInputsGridManager
 extends BaseMetricsGridManager
 
@@ -53,24 +54,22 @@ func _input(event: InputEvent) -> void:
 				_active_keys.erase(code)
 
 
-func _process(delta: float) -> void:
+func _process_implementation(delta: float) -> void:
 	_update_raw_input_metrics()
 
 
 func _update_raw_input_metrics() -> void:
-	if not _metrics_grid: return
-	
 	var key_names: Array = _active_keys.values()
 	key_names.sort()
-	_metrics_grid.update_metric("Raw Keys", " ".join(key_names))
+	_metrics_grid.update_metric("Keys", " ".join(key_names))
 
 	var mod_names: Array = _active_modifiers.values()
 	mod_names.sort()
-	_metrics_grid.update_metric("Raw Mods", " ".join(mod_names))
+	_metrics_grid.update_metric("Mods", " ".join(mod_names))
 	
 	var mouse_names: Array = _active_mouse_buttons.values()
 	mouse_names.sort()
-	_metrics_grid.update_metric("Raw Mouse", " ".join(mouse_names))
+	_metrics_grid.update_metric("Mouse", " ".join(mouse_names))
 
 
 ## HELPERS
@@ -84,6 +83,6 @@ func _get_mouse_button_name(idx: int) -> String:
 		MOUSE_BUTTON_LEFT: return "LMB"
 		MOUSE_BUTTON_RIGHT: return "RMB"
 		MOUSE_BUTTON_MIDDLE: return "MMB"
-		MOUSE_BUTTON_XBUTTON1: return "X1"
-		MOUSE_BUTTON_XBUTTON2: return "X2"
+		MOUSE_BUTTON_XBUTTON1: return "MB4"
+		MOUSE_BUTTON_XBUTTON2: return "MB5"
 		_: return "M%d" % idx

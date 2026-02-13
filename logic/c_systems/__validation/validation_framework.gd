@@ -105,7 +105,7 @@ static func _validate_deps_list(for_whom: Object, list_: Array[Object], context:
 		counter += 1
 	
 	if not _r:
-		__log_error(pp.s(_pp_for_whom(for_whom), "Missing amount of", _missing_count, context, "deps"))
+		__log_error(pp.s(_pp_for_whom(for_whom), "missing amount of", _missing_count, context, "deps"))
 		
 	return _r
 
@@ -121,7 +121,7 @@ static func _process_disable(for_whom: Object, process_disable_on_fail: bool, _i
 
 
 static func _pp_for_whom(for_whom: Object) -> String:
-	return ObjUtils.safe_object_pp_name(for_whom)
+	return pp.in_q(ObjUtils.safe_object_pp_name(for_whom))
 
 
 # region: __LOGS

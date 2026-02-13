@@ -7,9 +7,11 @@ const NO_VERSION_NAME = "0.0.0"
 static var current: M_GlobalStateData
 static var current_version: String
 
+
 static func _log_opened() -> void:
 	if current is M_GlobalStateData:
 		current.last_unix_time_opened = int(Time.get_unix_time_from_system())
+
 
 static func _log_version() -> void:
 	if current is M_GlobalStateData:

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2qjq1f0ubmt5"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_im4gc"]
+color = Color(0.39138144, 0.39138144, 0.39138144, 1)
+thickness = 2
+vertical = true
+
+[node name="VSeparator2" type="VSeparator"]
+theme_override_constants/separation = 14
+theme_override_styles/separator = SubResource("StyleBoxLine_im4gc")

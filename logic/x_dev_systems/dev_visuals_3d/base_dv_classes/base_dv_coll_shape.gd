@@ -121,7 +121,7 @@ func _shared_material_as_default_mat():
 
 	
 func _shared_material_as_standard():
-	_shared_material = MatUtils.create_standard_3d(
+	_shared_material = MaterialUtils.create_standard_3d(
 		shader_color,
 		BaseMaterial3D.SHADING_MODE_UNSHADED,
 		BaseMaterial3D.TRANSPARENCY_ALPHA,

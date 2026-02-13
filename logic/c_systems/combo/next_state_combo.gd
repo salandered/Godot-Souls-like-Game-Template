@@ -72,7 +72,14 @@ func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: Ba
 	if _needs_time_in_action_is_set() and curr_action.works_less_than(needs_time_in_action):
 		decision = false
 	
-	__log_next_state_combo_decision(decision, input_, curr_state_name, curr_action)
+	if decision:
+		SigUtils.safe_emit_raw(GlobalSignal.SIG_player_combo_triggered,
+			{
+				SPS.state_name_field: curr_state_name,
+				SPS.triggered_state_field: state_to_trigger
+			})
+
+	if __LOG_B(): __log_next_state_combo_decision(decision, input_, curr_state_name, curr_action)
 	return decision
 
 
@@ -90,6 +97,7 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 		
 	if _needs_input_is_set():
 		_msg += pp.s("Inp", needs_input, "/", pp.in_q(input_.actions))
+
 	if _needs_combat_input_is_set():
 		_msg += pp.s("CmbInp", needs_combat_input, "/", pp.in_q(input_.combat_actions))
 
@@ -102,6 +110,7 @@ func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_
 			_msg += pp.s("/MarkTime", curr_action.anim.get_marker_time_by_name(needs_passed_marker))
 		else:
 			_msg += "/No marker!"
+
 	if _needs_time_in_action_is_set():
 		_msg += pp.s("time", needs_time_in_action, "/", curr_action.time_spent())
 	

@@ -103,6 +103,9 @@ func get_player() -> Princess:
 @abstract func is_apply_gravity() -> bool
 
 
+@abstract func get_current_substate_by_depth(depth: int) -> BasePHEState
+
+
 ## MOVEMENT SHORTCUTS
 # region
 
@@ -110,10 +113,10 @@ func distance_to_player() -> float:
 	return e_movement.distance_to_player()
 
 func dist_to_player_less(number: float) -> bool:
-	return e_movement.square_distance_to_player() <= u.fpow2(number)
+	return e_movement.square_distance_to_player() <= MathUtil.fpow2(number)
 
 func dist_to_player_greater(number: float) -> bool:
-	return e_movement.square_distance_to_player() >= u.fpow2(number)
+	return e_movement.square_distance_to_player() >= MathUtil.fpow2(number)
 
 func distance_to_(target: Node3D) -> float:
 	return e_movement.distance_to_(target)

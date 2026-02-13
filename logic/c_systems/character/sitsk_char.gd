@@ -23,7 +23,7 @@ func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 ##
 
 
-func initialise_implementation() -> void:
+func initialise_phe_char_implementation() -> void:
 	pass
 ##
 

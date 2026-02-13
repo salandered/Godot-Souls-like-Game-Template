@@ -1,3 +1,4 @@
+@tool
 class_name CameraMetricsGridManager
 extends BaseMetricsGridManager
 
@@ -14,16 +15,19 @@ func get_dvc_op_key() -> DVS.KeyBOverlayPanel:
 	return DVS.KeyBOverlayPanel.CAM_NODES
 
 
-func _ready_imp() -> void:
-	super._ready_imp()
+func initialise_implementation() -> void:
+	super.initialise_implementation()
 	
 	var _cams := get_tree().get_nodes_in_group(Groups.Dev.FANCY_CAM)
 	if not _cams.is_empty() and _cams[0] is FancyCamera:
 		_camera = _cams[0]
 
 
-func _process(delta: float) -> void:
-	if not _metrics_grid: return
+func nth_frame() -> int:
+	return 4
+
+
+func _process_implementation(delta: float) -> void:
 	if not _camera: return
 	
 	_update_camera_metrics()
@@ -64,7 +68,7 @@ func _update_camera_metrics() -> void:
 
 	# misc
 	_metrics_grid.update_metric("FOV", _camera.camera.fov)
-	_metrics_grid.update_metric("Coll Enabled", _camera.__dev_camera_coll)
+	_metrics_grid.update_metric("Collision Enabled", _camera.__dev_camera_coll)
 
 
 	# Tactical Angle
@@ -86,12 +90,12 @@ func _update_camera_metrics() -> void:
 	_metrics_grid.update_metric("Player->Cam", dist_cam)
 
 	# State specific booms
-	var free_off := 0.0
+	var free_boom_len := 0.0
 	if _camera.free_state and _camera.free_state.free_boom:
-		free_off = _camera.free_state.free_boom.length()
-	_metrics_grid.update_metric("Free Off", free_off)
+		free_boom_len = _camera.free_state.free_boom.length()
+	_metrics_grid.update_metric("Boom length", free_boom_len)
 
-	var lock_off := 0.0
+	var lock_boom_len := 0.0
 	if _camera.locked_state and _camera.locked_state.lock_boom:
-		lock_off = _camera.locked_state.lock_boom.length()
-	_metrics_grid.update_metric("Lock Off", lock_off)
+		lock_boom_len = _camera.locked_state.lock_boom.length()
+	_metrics_grid.update_metric("Boom length (locked state)", lock_boom_len)

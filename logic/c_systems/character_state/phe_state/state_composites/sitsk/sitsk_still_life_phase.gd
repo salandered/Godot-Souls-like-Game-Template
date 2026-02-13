@@ -4,6 +4,8 @@ extends BasePHEComposite
 func initialise() -> void:
 	SigUtils.safe_connect(PlayerStats.SIG_dodge_combo_achieved, _on_SIG_dodge_combo_achieved)
 	SigUtils.safe_connect(PlayerStats.SIG_power_combo_achieved, _on_SIG_power_combo_achieved)
+	SigUtils.safe_connect(PlayerStats.SIG_thrown, _on_SIG_thrown)
+	SigUtils.safe_connect(PlayerStats.SIG_player_waved, _on_SIG_player_waved)
 	SigUtils.safe_connect(PlayerStats.SIG_plush_launched, _on_SIG_plush_launched)
 	SigUtils.safe_connect(PlayerStats.SIG_sitting_skeleton_is_not_happy, _on_SIG_sitting_skeleton_is_not_happy)
 	SigUtils.safe_connect(PlayerStats.SIG_simple_target_super_rotate, _on_SIG_simple_target_super_rotate)
@@ -21,19 +23,43 @@ func _interrup_with_personal_state(state_name_: String, n_frames_delay: int, loo
 
 
 func _on_SIG_dodge_combo_achieved():
-	_interrup_with_personal_state(SITSKS.Leaf.sit_laugh, 0, 8.0)
+	_interrup_with_personal_state(SITSKS.Leaf.sit_laugh_super_hard, 0, 14.0)
+
 
 func _on_SIG_power_combo_achieved():
-	_interrup_with_personal_state(SITSKS.Leaf.sit_point, 60, 5.0)
+	_interrup_with_personal_state(
+		ra.pick_random(SITSKS.Leaf.sit_point, SITSKS.Leaf.cheer, SITSKS.Leaf.thumb_up),
+		90, 9.0)
+
+func _on_SIG_thrown():
+	_interrup_with_personal_state(
+		ra.pick_random(SITSKS.Leaf.disapprove, SITSKS.Leaf.sit_laugh_super_hard),
+		60, 12.0)
+
+func _on_SIG_player_waved():
+	_interrup_with_personal_state(
+		ra.pick_random(SITSKS.Leaf.cheer, SITSKS.Leaf.thumb_up),
+		60,
+		14.0)
 
 func _on_SIG_plush_launched():
-	_interrup_with_personal_state(SITSKS.Leaf.sit_clap, 20, 4.0)
+	_interrup_with_personal_state(
+		ra.pick_random(SITSKS.Leaf.sit_clap,
+			SITSKS.Leaf.sit_point,
+			SITSKS.Leaf.cheer),
+		120, 8.0)
 
 func _on_SIG_sitting_skeleton_is_not_happy():
-	_interrup_with_personal_state(SITSKS.Leaf.sit_intimidate, 0, 0.0)
+	_interrup_with_personal_state(
+		ra.pick_random(SITSKS.Leaf.sit_intimidate, SITSKS.Leaf.disapprove),
+		60,
+		8.0)
 
 func _on_SIG_simple_target_super_rotate():
-	_interrup_with_personal_state(SITSKS.Leaf.sit_clap, 20, 3.0)
+	_interrup_with_personal_state(
+		ra.pick_random(SITSKS.Leaf.sit_clap),
+		90, 8.0
+		)
 
 
 func get_supported_substates() -> Array[String]:
@@ -49,6 +75,13 @@ func get_supported_substates() -> Array[String]:
 		SITSKS.Leaf.sit_clap,
 		SITSKS.Leaf.sit_disbelief,
 		SITSKS.Leaf.sit_laugh,
+		SITSKS.Leaf.sit_laugh_super_hard,
+		SITSKS.Leaf.cheer,
+		SITSKS.Leaf.disapprove,
+		SITSKS.Leaf.thumb_up,
+		## stand
+		# SITSKS.Leaf.cheer_stand,
+		# SITSKS.Leaf.clap_stand,
 	]
 
 
@@ -56,7 +89,7 @@ var initial_spick_weighted: Dictionary[String, float] = {
 	SITSKS.Leaf.sit_idle_v1: 0.4,
 	SITSKS.Leaf.sit_idle_v2: 0.1,
 	SITSKS.Leaf.sit_intimidate: 0.2,
-	SITSKS.Leaf.sit_talking: 0.2,
+	SITSKS.Leaf.sit_talking: 0.25,
 }
 
 
@@ -70,7 +103,7 @@ var basic_spick_weighted: Dictionary[String, float] = {
 	## one time
 	SITSKS.Leaf.sit_point: 0.1,
 	SITSKS.Leaf.sit_disbelief: 0.1,
-	SITSKS.Leaf.sit_laugh: 0.1
+	SITSKS.Leaf.sit_laugh: 0.05
 }
 
 # var not_happy_spick_weighted: Dictionary[String, float] = {
@@ -82,10 +115,6 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	if current_substate.is_ended():
 		match current_substate.state_name:
 			SITSKS.Leaf.sit_idle_v1, SITSKS.Leaf.sit_idle_v2:
-				_next_state = ra.spick_weighted(basic_spick_weighted)
-			SITSKS.Leaf.sit_rubbing, SITSKS.Leaf.sit_talking, SITSKS.Leaf.sit_intimidate:
-				_next_state = ra.spick_weighted(basic_spick_weighted)
-			SITSKS.Leaf.sit_point, SITSKS.Leaf.sit_disbelief, SITSKS.Leaf.sit_laugh:
 				_next_state = ra.spick_weighted(basic_spick_weighted)
 			_:
 				_next_state = ra.spick_weighted(basic_spick_weighted)

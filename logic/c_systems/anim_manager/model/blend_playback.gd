@@ -1,12 +1,14 @@
 extends RefCounted
 class_name BlendPlayback
 
+
 var is_blending: bool = false
 var duration: float = 0.0 # seconds
 var time_spent: float = 0.0 # seconds
 ## If zero, then it's full previous animation. If one, we play full current animation.
 var percentage: float = 0.0 # [0, 1]
-var prev_percentage: float = 0.0
+var prev_percentage: float = 0.0 # what and why?
+
 
 func _init(_is_blending: bool = false, _duration: float = 0.0, _time_spent: float = 0.0, _percentage: float = 0.0):
 	is_blending = _is_blending

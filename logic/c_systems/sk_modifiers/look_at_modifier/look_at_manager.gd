@@ -227,7 +227,7 @@ func _is_too_close(mult: float) -> bool:
 		return false
 	
 	var _dist_sq: float = _my_marker.global_position.distance_squared_to(_target_marker.global_position)
-	var is_close: bool = _dist_sq * mult < u.fpow2(proximity_threshold)
+	var is_close: bool = _dist_sq * mult < MathUtil.fpow2(proximity_threshold)
 	return is_close
 
 

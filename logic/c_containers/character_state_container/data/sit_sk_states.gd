@@ -15,6 +15,14 @@ class Leaf:
 	const sit_clap := "sit_clap"
 	const sit_disbelief := "sit_disbelief"
 	const sit_laugh := "sit_laugh"
+	const sit_laugh_super_hard := "sit_laugh_super_hard"
+	const cheer := "cheer"
+	const disapprove := "disapprove"
+	const thumb_up := "thumb_up"
+
+	## stand
+	const cheer_stand := "cheer_stand"
+	const clap_stand := "clap_stand"
 	
 	## other	
 	const sit_attack := "sit_attack"

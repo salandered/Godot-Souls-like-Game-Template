@@ -2,7 +2,7 @@
 @icon("uid://fg14dl1y5rwc")
 
 class_name DVHitBoxAreaContact
-extends Node3DSystem
+extends BaseDVCDependentNode3D
 
 
 @export var char_hit_box: CharacterHitbox
@@ -18,7 +18,7 @@ const DEF_SHADED := BaseMaterial3D.SHADING_MODE_PER_PIXEL
 const DEF_draw_snapped_hits := true
 
 
-func _ready() -> void:
+func initialise() -> void:
 	if Engine.is_editor_hint():
 		return
 	
@@ -35,7 +35,11 @@ func _ready() -> void:
 			[GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed],
 			[char_hit_box.SIG_incoming_weapon_contacted, _on_SIG_incoming_weapon_contacted]
 		])
-	
+
+
+func reset_visuals() -> void:
+	pass
+
 
 func _on_SIG_incoming_weapon_contacted(payload: Dictionary[String, Variant]):
 	__log_("_on_SIG", payload)
@@ -153,4 +157,4 @@ func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
 
 ##
 func __LOG_B() -> bool:
-	return true
+	return false

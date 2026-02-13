@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bue7jd1r7ju2f"]
 
 [ext_resource type="Script" uid="uid://b1rhrrbwl6mk2" path="res://logic/ui/options_menu/tabs/video/m_video_options_menu.gd" id="1_4vjx0"]
-[ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/template_scripts/m_capture_focus.gd" id="2_gcs5t"]
+[ext_resource type="Script" path="res://logic/ui/ui_utils/template_scripts/m_capture_focus.gd" id="2_gcs5t"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="3_4vjx0"]
 [ext_resource type="PackedScene" uid="uid://c01ayjblhcg1t" path="res://logic/ui/ui_utils/options_nodes/m_vector_2_list_option_control.tscn" id="4_chxej"]
 [ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.tscn" id="5_kvajm"]

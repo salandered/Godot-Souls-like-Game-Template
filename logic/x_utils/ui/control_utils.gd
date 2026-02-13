@@ -1,16 +1,18 @@
 class_name ControlUtils
 extends RefCounted
-##
 
 
 static func margin_container_set_margins(margin_cont: MarginContainer, left: int = 0, right: int = 0, top: int = 0, bottom: int = 0):
+	if not margin_cont: return
 	margin_cont.add_theme_constant_override(PropC.MARGIN_LEFT, left)
 	margin_cont.add_theme_constant_override(PropC.MARGIN_RIGHT, right)
 	margin_cont.add_theme_constant_override(PropC.MARGIN_TOP, top)
 	margin_cont.add_theme_constant_override(PropC.MARGIN_BOTTOM, bottom)
 
+
 ## sets all: normal, italics, bold
 static func rr_label_set_font_size(rr_label: RichTextLabel, font_size: int):
+	if not rr_label: return
 	rr_label.add_theme_font_size_override(PropC.NORMAL_FONT_SIZE, font_size)
 	rr_label.add_theme_font_size_override(PropC.BOLD_FONT_SIZE, font_size)
 	rr_label.add_theme_font_size_override(PropC.ITALICS_FONT_SIZE, font_size)
@@ -18,6 +20,7 @@ static func rr_label_set_font_size(rr_label: RichTextLabel, font_size: int):
 
 ## NOTE: uses normal as a base, mult all: normal, italics, bold. Result: all three have same value
 static func rr_label_mult_font_size(rr_label: RichTextLabel, mult: float):
+	if not rr_label: return
 	var cur_size := get_theme_normal_font_size(rr_label)
 	var new_size := int(cur_size * mult)
 	rr_label.add_theme_font_size_override(PropC.NORMAL_FONT_SIZE, new_size)
@@ -27,6 +30,7 @@ static func rr_label_mult_font_size(rr_label: RichTextLabel, mult: float):
 
 ## note that bold and italics sizes may be of different values
 static func get_theme_normal_font_size(rr_label: RichTextLabel) -> int:
+	if not rr_label: return -1
 	var current_size: int = rr_label.get_theme_font_size(PropC.NORMAL_FONT_SIZE)
 	return current_size
 
@@ -56,4 +60,5 @@ static func label_set_font(label: Label, font: Font) -> void:
 
 
 static func label_set_font_size(label: Label, font_size: int):
-	label.add_theme_font_size_override(PropC.FONT_SIZE, font_size)
+	if label:
+		label.add_theme_font_size_override(PropC.FONT_SIZE, font_size)

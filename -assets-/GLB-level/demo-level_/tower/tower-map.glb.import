@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "ArmA.004": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/leg_arm_kaan/ArmA.004.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/leg_arm_kaan/ArmA.004.tres",
 "use_external/path": "uid://lv3kael16gmw"
 },
 "B Stone Dirt Wall 02": {
@@ -51,13 +51,23 @@ _subresources={
 },
 "DoorType1_2": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/door_type/DoorType1_2_Reimp.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/door_type/DoorType1_2_Reimp.tres",
 "use_external/path": "uid://dftuwv5xo7lmd"
 },
 "Leg.004": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/baked/leg_arm_kaan/Leg.004.tres",
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/leg_arm_kaan/Leg.004.tres",
 "use_external/path": "uid://hljkkqxxfv41"
+},
+"MI_Trim_Props.003": {
+"use_external/enabled": true,
+"use_external/fallback_path": "",
+"use_external/path": ""
+},
+"MinesTrim": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres",
+"use_external/path": "uid://bb06udlb6phmw"
 },
 "PixPalMat": {
 "use_external/fallback_path": "res://-assets-/materials-shared/x_unsorted/PixPalMat.tres",

@@ -12,7 +12,6 @@ varying vec4 screen_position;
 
 void vertex() {
 	// Billboarding: Forces the mesh to always face the camera
-	// Remove this block if you want to place the black hole flat on the ground
 	mat4 modified_model_view = VIEW_MATRIX * mat4(
 		INV_VIEW_MATRIX[0],
 		INV_VIEW_MATRIX[1],

@@ -8,19 +8,19 @@
 [ext_resource type="Material" uid="uid://bbg08pft25h53" path="res://-assets-/materials-shared/ground/coral_ground/coral_ground_02_Reimp.tres" id="5_mukqq"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="6_m6ugi"]
 [ext_resource type="Material" uid="uid://b501ccskj67vi" path="res://-assets-/materials-shared/ground/I_ground088/I_Ground088_2K-JPG_Reimp_2k.tres" id="7_3pcna"]
-[ext_resource type="ArrayMesh" uid="uid://bkenbs0ugh6iy" path="res://logic/ui/main_menu/menu_3d_scene/mesh/linc_floor.tres" id="7_rqxxm"]
+[ext_resource type="ArrayMesh" uid="uid://bkenbs0ugh6iy" path="res://-assets-/GLB-items/prefabs/from_menu_3d/linc_floor.tres" id="7_rqxxm"]
 [ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/VFX/lights/fire/FireStatic_.tscn" id="8_bdepm"]
-[ext_resource type="ArrayMesh" uid="uid://2rhhk5wqopcp" path="res://logic/ui/main_menu/menu_3d_scene/mesh/broken_column_mesh.tres" id="9_84k2w"]
+[ext_resource type="ArrayMesh" uid="uid://2rhhk5wqopcp" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mesh.tres" id="9_84k2w"]
 [ext_resource type="Material" uid="uid://d1q5vhtpj00ri" path="res://-assets-/materials-shared/concrete/I_concrete005/I_Concrete005_4d1K-JPG.tres" id="10_fxvr7"]
-[ext_resource type="Material" uid="uid://bpbujrrytkdj8" path="res://logic/ui/main_menu/menu_3d_scene/mesh/broken_column_mat_triplanar.tres" id="10_v1m0i"]
-[ext_resource type="Material" uid="uid://ph1sclyavjd" path="res://logic/ui/main_menu/menu_3d_scene/mesh/broken_column_mat_triplanar_2.tres" id="11_cnb55"]
+[ext_resource type="Material" uid="uid://bpbujrrytkdj8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar.tres" id="10_v1m0i"]
+[ext_resource type="Material" uid="uid://ph1sclyavjd" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar_2.tres" id="11_cnb55"]
 [ext_resource type="Material" uid="uid://do7j5bx781tal" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/seaside_rock_Reimp.tres" id="11_v1m0i"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="12_cnb55"]
-[ext_resource type="ArrayMesh" uid="uid://sx0unsid5rov" path="res://logic/ui/main_menu/menu_3d_scene/mesh/torch.tres" id="13_rqxxm"]
+[ext_resource type="ArrayMesh" uid="uid://sx0unsid5rov" path="res://-assets-/GLB-items/prefabs/from_menu_3d/torch.tres" id="13_rqxxm"]
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="13_v1m0i"]
 [ext_resource type="PackedScene" uid="uid://ta367bodbhjs" path="res://-assets-/animations/GLB-packed/single_/sitting_WRAPPER.tscn" id="16_ae31p"]
 [ext_resource type="PackedScene" uid="uid://dgkn42tpvmre7" path="res://-assets-/GLB-char/skeleton-16-07/skeleton_16_07_WRAPPER.tscn" id="16_bdepm"]
-[ext_resource type="ArrayMesh" uid="uid://yr3g5wlrv7hd" path="res://logic/ui/main_menu/menu_3d_scene/mesh/engel_mesh.tres" id="17_rqxxm"]
+[ext_resource type="ArrayMesh" uid="uid://yr3g5wlrv7hd" path="res://-assets-/GLB-items/prefabs/from_menu_3d/engel_mesh.tres" id="17_rqxxm"]
 [ext_resource type="Texture2D" uid="uid://5esc5e5uadne" path="res://-assets-/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_Color.jpg" id="17_uvwvb"]
 [ext_resource type="Material" uid="uid://bb06udlb6phmw" path="res://-assets-/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres" id="17_wsm5k"]
 [ext_resource type="Texture2D" uid="uid://d26s43r0igrpa" path="res://-assets-/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_NormalGL.jpg" id="18_cl5kb"]
@@ -30,9 +30,9 @@
 [ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="19_ur5qw"]
 [ext_resource type="Texture2D" uid="uid://maqt7oy12atx" path="res://-assets-/materials-shared/different/I_gold/BigGuy_4d1K-Metallic_gold_Base Color.jpg" id="20_fxvr7"]
 [ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="20_mxlls"]
-[ext_resource type="ArrayMesh" uid="uid://vl5nmpou8kp8" path="res://logic/ui/main_menu/menu_3d_scene/mesh/rock_004.tres" id="20_q1c2c"]
-[ext_resource type="ArrayMesh" uid="uid://dndydw8damr8" path="res://logic/ui/main_menu/menu_3d_scene/mesh/big_plane.tres" id="20_rqxxm"]
-[ext_resource type="ArrayMesh" uid="uid://dhywsci8e3at8" path="res://logic/ui/main_menu/menu_3d_scene/mesh/rock_003.tres" id="20_vwaak"]
+[ext_resource type="ArrayMesh" uid="uid://vl5nmpou8kp8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/rock_004.tres" id="20_q1c2c"]
+[ext_resource type="ArrayMesh" uid="uid://dndydw8damr8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/big_plane.tres" id="20_rqxxm"]
+[ext_resource type="ArrayMesh" uid="uid://dhywsci8e3at8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/rock_003.tres" id="20_vwaak"]
 [ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/Items/crate/dark_crate/DarkCrate.tscn" id="21_mxlls"]
 [ext_resource type="Texture2D" uid="uid://dgibr3j3vvstd" path="res://-assets-/materials-shared/different/I_gold/BigGuy_4d1K-Metallic_gold_Metallic-4d1K-Metallic_gold_Roughness.png" id="21_v1m0i"]
 [ext_resource type="Material" uid="uid://doed0kwtng7wd" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/B Stone Dirt Wall 02_Reimp_2k.tres" id="24_gde5t"]
@@ -48,9 +48,9 @@
 [ext_resource type="Material" uid="uid://d2ps7t077xfk8" path="res://-assets-/materials-shared/wood/bark_willow/bark_willow_Reimp.tres" id="40_onri0"]
 [ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="41_7sgbf"]
 [ext_resource type="Material" uid="uid://fw2tqpveasi2" path="res://-assets-/materials-shared/concrete/just_concrete/concrete_Reimp.tres" id="41_d4t46"]
-[ext_resource type="ArrayMesh" uid="uid://i1rljxk8omlu" path="res://logic/ui/main_menu/menu_3d_scene/mesh/cross_column.tres" id="42_q1c2c"]
+[ext_resource type="ArrayMesh" uid="uid://i1rljxk8omlu" path="res://-assets-/GLB-items/prefabs/from_menu_3d/cross_column.tres" id="42_q1c2c"]
 [ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/back/back_bits.mp3" id="42_q26sa"]
-[ext_resource type="ArrayMesh" uid="uid://wm1ajr5gjyuk" path="res://logic/ui/main_menu/menu_3d_scene/mesh/rock_005.tres" id="44_dapr5"]
+[ext_resource type="ArrayMesh" uid="uid://wm1ajr5gjyuk" path="res://-assets-/GLB-items/prefabs/from_menu_3d/rock_005.tres" id="44_dapr5"]
 
 [sub_resource type="Environment" id="2"]
 background_mode = 2
@@ -1687,7 +1687,7 @@ editor_only = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.9991304, 0.007957559, 0.04092612, 0, 0.9816167, -0.19086277, -0.041692566, 0.19069682, 0.98076314, 0.07, 1.295, 74.16018)
+transform = Transform3D(0.9999066, 0.002418285, 0.013447601, 0, 0.9842124, -0.17699112, -0.0136633115, 0.1769746, 0.98412055, 0.07, 1.295, 74.16018)
 current = true
 
 [node name="PuffExplosion" parent="Camera3D" instance=ExtResource("3_84k2w")]
@@ -2302,7 +2302,7 @@ mesh = ExtResource("17_rqxxm")
 skeleton = NodePath("")
 
 [node name="ropes_009" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2"]
-transform = Transform3D(-0.112391725, -0.04396877, 1.1494545, -0.8221717, 0.81080633, -0.04937566, -0.8044957, -0.8224783, -0.110123515, -41.679935, 11.982513, -86.228355)
+transform = Transform3D(-0.11641316, -0.035299037, 1.1493531, -0.77104586, 0.85943377, -0.05170094, -0.8530814, -0.7719704, -0.1101138, -41.679935, 11.982513, -86.228355)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
 skeleton = NodePath("")
@@ -2313,7 +2313,7 @@ sway_speed = 1.2
 preview_in_editor = true
 
 [node name="skeleton_hand2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/ropes_009"]
-transform = Transform3D(1.2873343, -0.5595551, 0.99228317, 0.55278414, -1.0023999, -1.2824126, 0.9960706, 1.279473, -0.5707454, 0.35659122, -0.5122528, 0.1948626)
+transform = Transform3D(1.3104308, -0.5458582, 0.9694162, 0.5633292, -0.96609396, -1.3054811, 0.95936877, 1.3128823, -0.5575927, 0.35659122, -0.5122528, 0.1948626)
 cast_shadow = 0
 gi_mode = 2
 mesh = SubResource("ArrayMesh_1txad")

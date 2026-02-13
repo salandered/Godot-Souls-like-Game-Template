@@ -3,11 +3,12 @@ extends BaseCombat
 class_name PlayerCombat
 @onready var _player: Princess = $".."
 @onready var bones: PlayerBones = %bones
-@onready var weapon_switcher: WeaponSwitcher = %WeaponSwitcher
+@onready var weapon_switcher: GestureSpawner = %WeaponSwitcher
 
 
 func initialise_implementation():
-	weapon_switcher.initialise(_player, self)
+	if weapon_switcher:
+		weapon_switcher.initialise(_player, self )
 
 
 func __hard_validation() -> bool:

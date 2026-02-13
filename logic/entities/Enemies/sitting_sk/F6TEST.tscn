@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://de7q7oflaploe"]
+
+[ext_resource type="PackedScene" uid="uid://ctdp8t5nsqc8q" path="res://-assets-/GLB-items/prefabs/Chair.tscn" id="1_0itnl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ln6ww"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_rpcss"]
+sky_material = SubResource("ProceduralSkyMaterial_ln6ww")
+
+[sub_resource type="Environment" id="Environment_q7m14"]
+background_mode = 2
+sky = SubResource("Sky_rpcss")
+tonemap_mode = 2
+
+[node name="F6TEST" type="Node3D"]
+
+[node name="Chair_1_002" parent="." instance=ExtResource("1_0itnl")]
+transform = Transform3D(0.8619302, 0, -0.507027, 0, 1, 0, 0.507027, 0, 0.8619302, 0, 0.48870766, 0.08431691)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.55407465, 0, 0.832467, 0, 1, 0, -0.832467, 0, 0.55407465, 1.462717, 0.6991416, 1.0939426)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q7m14")

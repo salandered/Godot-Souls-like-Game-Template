@@ -36,13 +36,6 @@ static func is_nth_physics_frame(interval: int) -> bool:
 	return Engine.get_physics_frames() % interval == 0
 
 
-# ease-in-out S-curve
-# takes a linear progress value (0 to 1) and returns a smoothed value (0 to 1)
-static func ease_in_out(x: float) -> float:
-	x = clampf(x, 0.0, 1.0)
-	return 0.5 * (1.0 - cos(x * PI))
-
-
 static func safe_look_at(
 		from_who: Node3D,
 		target: Vector3,
@@ -69,13 +62,6 @@ static func reset_all(resettable: Array):
 	for item in resettable:
 		if item.has_method("reset"):
 			item.reset()
-
-
-static func fpow2(number: float) -> float:
-	return number * number
-
-static func ipow2(number: int) -> int:
-	return number * number
 
 
 ##

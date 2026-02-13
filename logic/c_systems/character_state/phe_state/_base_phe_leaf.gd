@@ -139,6 +139,14 @@ func is_apply_gravity() -> bool:
 # endregion
 
 
+func get_current_substate_by_depth(depth: int) -> BasePHEState:
+	if state_depth == depth:
+		return self
+	return null
+
+
+##
+
 ## default implementation. Called automatically.
 ## Example use cases to override: mute playing animation or overriden values for set_anim_to_play
 ## NOTE: called AFTER the on_enter_state()

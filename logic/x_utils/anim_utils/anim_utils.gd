@@ -78,36 +78,6 @@ static func safe_has_animations(animator: AnimationPlayer, anim_ids: Array[Strin
 	return true
 
 
-static func duplicate_native_player_mute_audio(source_player: AnimationPlayer) -> AnimationPlayer:
-	var new_player := AnimationPlayer.new()
-	
-	# copy all libs
-	var lib_names := source_player.get_animation_library_list()
-	for lib_name: StringName in lib_names:
-		var _source_lib: AnimationLibrary = source_player.get_animation_library(lib_name)
-
-		var new_lib := _source_lib.duplicate(true)
-		
-		# mute audio tracks
-		for anim_name: StringName in new_lib.get_animation_list():
-			var native_anim: Animation = new_lib.get_animation(anim_name)
-			_disable_audio_tracks(native_anim)
-		
-		new_player.add_animation_library(lib_name, new_lib)
-	
-	new_player.root_node = source_player.root_node
-	new_player.root_motion_track = source_player.root_motion_track
-	new_player.playback_default_blend_time = source_player.playback_default_blend_time
-	
-	return new_player
-
-
-static func _disable_audio_tracks(anim: Animation) -> void:
-	for track_idx: int in anim.get_track_count():
-		if anim.track_get_type(track_idx) == Animation.TYPE_AUDIO:
-			anim.track_set_enabled(track_idx, false)
-
-
 ####
 
 class AnimSetPlayingData:

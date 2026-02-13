@@ -1,6 +1,8 @@
+@tool
+
 @abstract
 class_name BasePanelManager
-extends NodeSystem
+extends BaseDVCDependentNode
 
 
 func __hard_validation() -> bool:
@@ -9,14 +11,14 @@ func __hard_validation() -> bool:
 	return true
 
 
-func _ready() -> void:
-	if get_ui_panel():
-		get_ui_panel().visible = false
+func initialise() -> void:
+	if Engine.is_editor_hint(): return
+
+	reset_visuals()
 
 		
 	await FrameUtils.wait_process_frames(4)
-	
-	_ready_imp()
+	initialise_implementation()
 	
 	
 	if not __perform_validation(true):
@@ -26,8 +28,15 @@ func _ready() -> void:
 		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_b_overlay_panel_value_changed, _enable_via_sig)
 
 
-func _ready_imp():
+## called before validation
+func initialise_implementation():
 	pass
+
+
+func reset_visuals() -> void:
+	if Engine.is_editor_hint(): return
+	if get_ui_panel():
+		get_ui_panel().visible = false
 
 
 @abstract func get_ui_panel() -> Container

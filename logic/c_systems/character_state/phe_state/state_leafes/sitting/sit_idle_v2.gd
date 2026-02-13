@@ -26,4 +26,4 @@ func on_enter_state() -> void:
 	if not anim:
 		anim = _anim_usual
 
-	_target_duration = ra.float_range(5.0, 14.0)
+	_target_duration = ra.float_range(4.0, 12.0)

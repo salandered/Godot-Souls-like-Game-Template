@@ -158,11 +158,9 @@ func _get_shrunk_font_size(text: String, max_width: float, base_size: int) -> in
 
 
 func _adjust_font_size(label: RichTextLabel, new_text: String):
-	# Use label.size.x or a fixed constant if your label expands due to fit_content
+	# kinda works
 	var target_width: float = label.size.x
 	
-	# Optional: reduce width slightly to account for padding/margins
-	# target_width -= 10.0 
 	
 	var new_size: int = _get_shrunk_font_size(new_text, target_width, initial_font_size)
 	

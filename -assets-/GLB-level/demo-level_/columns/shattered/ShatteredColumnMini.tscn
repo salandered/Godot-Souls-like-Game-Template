@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=4 uid="uid://c16xwncxk3dlc"]
 
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="2_mu454"]
-[ext_resource type="Script" uid="uid://bk2ii301ny31d" path="res://logic/entities/VFX/rigid_shatter/shattered_column.gd" id="2_xhxhx"]
+[ext_resource type="Script" path="res://logic/entities/VFX/rigid_shatter/shattered_column.gd" id="2_xhxhx"]
 [ext_resource type="Material" uid="uid://cij8qltchxrj" path="res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_lighter_cleaner_Reimp.tres" id="3_v11e0"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_rfsb2"]

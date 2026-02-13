@@ -328,6 +328,10 @@ static func dv_line_edit(node: Node) -> Array[DVLineEdit]:
 	var r := _get_descendants_filtered(node, func(n): return n is DVLineEdit)
 	return TypeCast.array_of_dv_line_edit(r)
 
+static func dv_option_button(node: Node) -> Array[DVOptionButton]:
+	var r := _get_descendants_filtered(node, func(n): return n is DVOptionButton)
+	return TypeCast.array_of_dv_option_button(r)
+
 # 
 
 # endregion

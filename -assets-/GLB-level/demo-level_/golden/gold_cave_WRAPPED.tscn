@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbwrpoygqteb0"]
+[gd_scene load_steps=11 format=3 uid="uid://bbwrpoygqteb0"]
 
 [ext_resource type="PackedScene" uid="uid://druxsqnxe6376" path="res://-assets-/GLB-level/demo-level_/golden/gold-cave.glb" id="1_c0ayj"]
+[ext_resource type="ArrayMesh" uid="uid://b0cl825bag5a2" path="res://-assets-/GLB-items/prefabs/peaky_rock.tres" id="6_ybqe6"]
 [ext_resource type="Script" uid="uid://muqrixt1lnde" path="res://-assets-/GLB-level/demo-level_/golden/circling.gd" id="7_8gmoy"]
 [ext_resource type="AudioStream" uid="uid://dpef175e8dyx3" path="res://-assets-/SFX/sources/tom/Portcullis Gate.wav" id="8_jl87t"]
 [ext_resource type="AudioStream" uid="uid://4df7uhwavnkd" path="res://-assets-/SFX/sources/400/concrete_scrape.wav" id="9_p7r2u"]
@@ -298,6 +299,9 @@ bus = &"game_SFX"
 layers = 17
 cast_shadow = 0
 gi_mode = 1
+
+[node name="Mountain_Group_1_010" parent="." index="22"]
+mesh = ExtResource("6_ybqe6")
 
 [node name="Mountain_Group_1_012" parent="." index="24"]
 cast_shadow = 0

@@ -6,7 +6,7 @@ class_name BaseLevel
 extends Node3DSystem
 
 
-@export_group("Level Music")
+@export_category("Level Music")
 @export var level_music_tracks: Array[AudioStream]
 @export var first_track_to_play_idx: int = -1
 @export var music_volume_db: float = -10.0
@@ -18,6 +18,10 @@ extends Node3DSystem
 @export var is_base_asp: bool = true
 @export var is_vibe_asp: bool = true
 @export var is_background_music: bool = false
+
+
+@export_category("Dev Visuals")
+@export var initialise_dv: bool = false
 
 
 var _bg_music_system: BackgroundMusicSystem
@@ -58,9 +62,11 @@ func __soft_validation() -> bool:
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-
+	_init_delay_logic()
 	add_to_group(Groups.Environment_.LEVEL)
 
+	if initialise_dv:
+		Groups.get_dv(self )
 	if is_pause_menu_controller: ## easier here than in __soft_validation
 		_validate_pause_menu_controller_on_init()
 	if is_world_environment: ## easier here than in __soft_validation
@@ -91,6 +97,22 @@ func _ready() -> void:
 	initialise()
 
 	__perform_validation()
+
+
+func _init_delay_logic():
+	if not initialise_dv:
+		return
+	if not OS.is_debug_build():
+		return
+
+	await FrameUtils.wait_process_frames(3)
+	
+	var dvs := Groups.get_dv(self )
+	__log_("goint to initalise", len(dvs), "DV nodes")
+	for dv in dvs:
+		if (dv is BaseDVCDependentNode or dv is BaseDVCDependentNode3D) \
+			and ObjUtils.safe_has_method(dv, "initialise"):
+			dv.initialise()
 
 
 func _setup_vibe_asp():

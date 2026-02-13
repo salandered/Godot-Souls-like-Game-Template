@@ -9,7 +9,6 @@ uniform float metallic = 0.6;
 uniform float specular = 0.5;
 uniform float roughness = 0.2;
 
-// Added Emission from the comment
 uniform vec3 emission: source_color = vec3(0.0, 0.0, 0.0);
 
 uniform sampler2D depth_texture : hint_depth_texture, filter_linear_mipmap;
@@ -40,13 +39,11 @@ void fragment() {
 	ROUGHNESS = roughness;
 	ALBEDO = out_color.rgb;
 	
-	// Apply the requested emission to brighten the water
 	EMISSION = emission;
 	
 	if (beer_factor != 0.0) {
 		float depth_tex = texture(depth_texture, SCREEN_UV).r;
 		
-		// Use the safe backend-agnostic method
 		vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth_tex);
 		vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 		view.xyz /= view.w;

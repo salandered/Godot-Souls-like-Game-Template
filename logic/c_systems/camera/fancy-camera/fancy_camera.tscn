@@ -99,7 +99,6 @@ trail_radius = 0.02
 trail_duration = 1.4
 fade_duration = 0.2
 update_interval_seconds = 0.1
-preview_in_editor = false
 react_to_dvc_signal = false
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
@@ -136,7 +135,6 @@ transform = Transform3D(1.0000007, 5.960466e-08, -7.450593e-08, 7.450579e-08, 1,
 path_color_a = Color(0, 0.099858284, 1, 1)
 path_color_b = Color(0, 0.49513865, 1, 1)
 update_interval_seconds = 0.1
-preview_in_editor = false
 react_to_dvc_signal = false
 
 [node name="CameraSocket" type="Node3D" parent="."]

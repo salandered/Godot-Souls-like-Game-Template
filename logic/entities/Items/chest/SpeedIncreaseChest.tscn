@@ -1,28 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5tsnu0lrbyel"]
+[gd_scene load_steps=7 format=3 uid="uid://b5tsnu0lrbyel"]
 
-[ext_resource type="PackedScene" uid="uid://bd67vd6q3hn0s" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_2sh8b"]
+[ext_resource type="PackedScene" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_2sh8b"]
 [ext_resource type="Script" uid="uid://d24u4ptnmll7f" path="res://logic/entities/Items/chest/speed_increase_chest.gd" id="2_lsi57"]
 [ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/Items/pick_item/SpeedIncreaseItem.tscn" id="3_dv0l8"]
 [ext_resource type="Material" uid="uid://c4ejvjuf4552i" path="res://-assets-/materials-shared/different/P-gold-ring_Reimp.tres" id="3_lsi57"]
-[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="5_4duus"]
-[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="6_2jfrd"]
-[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="7_5vdv7"]
-[ext_resource type="Material" uid="uid://bur1bh2j826ri" path="res://-assets-/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_darker.tres" id="8_h6p6h"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5d1rf"]
-resource_name = "I_Metal048C_2K-JPG"
-cull_mode = 2
-albedo_color = Color(0.64256185, 0.5070626, 0.37621656, 1)
-albedo_texture = ExtResource("5_4duus")
-metallic = 1.0
-metallic_texture = ExtResource("6_2jfrd")
-metallic_texture_channel = 2
-roughness_texture = ExtResource("6_2jfrd")
-roughness_texture_channel = 1
-normal_enabled = true
-normal_scale = 7.13
-normal_texture = ExtResource("7_5vdv7")
-uv1_triplanar = true
+[ext_resource type="Material" uid="uid://ltpytacp62hy" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K_for_chest.tres" id="5_dv0l8"]
+[ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres" id="6_dv0l8"]
 
 [node name="SpeedIncreaseChest" instance=ExtResource("1_2sh8b")]
 script = ExtResource("2_lsi57")
@@ -32,10 +15,10 @@ item_scene = ExtResource("3_dv0l8")
 material_override = ExtResource("3_lsi57")
 
 [node name="ChestLid" parent="Visuals/LidPivot" index="1"]
-material_override = SubResource("StandardMaterial3D_5d1rf")
+material_override = ExtResource("5_dv0l8")
 
 [node name="ChestMain" parent="Visuals/ChessMain" index="1"]
-material_override = ExtResource("8_h6p6h")
+material_override = ExtResource("6_dv0l8")
 
 [node name="InteractArea" parent="." index="4"]
 label_text = "Open"

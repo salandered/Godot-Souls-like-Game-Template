@@ -5,7 +5,8 @@ extends BaseSkeletonAnimatorManager
 
 
 @export var config: AnimatableEntityConfig
-
+@export var ignore_root_bone: bool = false
+@export var set_root_bone_postponed: bool = false
 
 # Track the starting position to calculate time_spent
 var _curr_anim_start_offset: float = 0.0
@@ -13,7 +14,11 @@ var _curr_anim: AnimationData
 
 
 func initialise_implementation():
-	if _native_player:
+	if _native_player and not ignore_root_bone:
+		if set_root_bone_postponed:
+			await FrameUtils.wait_process_frames(4)
+		print_.dev("", _native_player.root_motion_track)
+		print_.dev("", NodePath(Constants.ROOT_TRACK_PATH))
 		# dont rely on UI setting, it will be lost on almost any change, super fragile.
 		_native_player.root_motion_track = NodePath(Constants.ROOT_TRACK_PATH)
 

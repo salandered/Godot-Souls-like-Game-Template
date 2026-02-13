@@ -183,9 +183,19 @@ Notes: Used in tracks: Siren Tarot.
 
 
 #### Yrsa font
-Link: [github.com/rosettatype/yrsa-rasa/](https://github.com/rosettatype/yrsa-rasa/)
+Link: https://github.com/rosettatype/yrsa-rasa/
 License: SIL Open Font License 1.1
 Note: Used for the game UI
+
+#### Noto sans font font
+Link: https://github.com/notofonts/latin-greek-cyrillic
+License: SIL Open Font License 1.1
+Note: Used for debugging tools
+
+#### JetBrains Mono
+Link: https://github.com/JetBrains/JetBrainsMono
+License: SIL Open Font License 1.1
+Note: Used for debugging tools
 
 
 #### Godot Engine Logo

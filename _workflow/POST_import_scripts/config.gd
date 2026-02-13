@@ -26,7 +26,8 @@ const SUBFOLDER_RULES: Dictionary[String, Array] = {
 		"ChurchCeiling",
 		"minestrim",
 		"minetrim",
-		"mine_carts"
+		"mine_carts",
+		"MI_Trim_Furniture"
 		],
 	"solid": ["_P col", "P orange", "P white", "P sand", "P blue", "P green", "P dark_grey", "P gray", "P dark", "P light", "P l", "P purple"],
 	"different": ["gold", "glass"],

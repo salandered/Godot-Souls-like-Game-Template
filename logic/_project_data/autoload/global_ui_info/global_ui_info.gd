@@ -27,6 +27,8 @@ var __ERROR_LOG: bool = DEF_ERROR_LOG
 
 
 var _active_subvp: InGameSubViewport
+var _subvp_target: int = 1 # 1 - player, 2 - phe enemy
+
 
 var _presenters: Array[BaseInfoGroupPresenter]
 
@@ -114,11 +116,11 @@ func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
 
 
 func _on_SIG_dvc_op_value_changed(payload: Dictionary[String, Variant]):
-	var _r := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
-	if not _r or _r.value is not bool: return
-	var toggle := _r.value as bool
+	var _parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
+	if not _parsed_payload or _parsed_payload.value is not bool: return
+	var toggle := _parsed_payload.value as bool
 	
-	match _r.key:
+	match _parsed_payload.key:
 		DVS.KeyBOverlayPanel.TUT:
 			_toggle_tutorial_from_dvc(toggle)
 		DVS.KeyBOverlayPanel.PROFILER:
@@ -172,6 +174,7 @@ func _toggle_in_game_subvp_from_dvc(value: bool) -> void:
 		
 		level.add_child(_active_subvp)
 		_active_subvp.set_cam_target(player) # after add_child (so after _ready)
+		_subvp_target = 1
 		
 	else:
 		if not _active_subvp:
@@ -281,6 +284,7 @@ func _input(event: InputEvent) -> void:
 			)
 		update_profiler_mode()
 		InputUtils.mark_input_handled(self )
+	## CTRL SHIFT
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_I):
 		_dev_visual_config.toggle_bvalue_array(
 			DVS.DVSection.B_OVERLAY_PANEL,
@@ -308,36 +312,85 @@ func _input(event: InputEvent) -> void:
 			DVS.KeyBOverlayPanel.ALL_LOG,
 		)
 		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_N):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.CAM_NODES,
+		)
+		InputUtils.mark_input_handled(self )
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_V):
 		_dev_visual_config.toggle_bvalue(
 			DVS.DVSection.B_OVERLAY_PANEL,
 			DVS.KeyBOverlayPanel.SUBVIEWPORT,
 		)
 		InputUtils.mark_input_handled(self )
-	elif InputUtils.is_keycode_w_ctrl(event, KEY_H):
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_U):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.ENEMY_ANIMATOR,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_K):
+		_dev_visual_config.toggle_all_char_dv_options(
+			DVS.CharDVType.SKELETON_VISUALS
+		)
+		_dev_visual_config.toggle_all_char_dv_options(
+			DVS.CharDVType.HIDE_MESH_VISUALS
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_S):
+		_dev_visual_config.toggle_bvalue_composite_key(
+			DVS.DVSection.B_CHAR_DV,
+			DVS.CharacterType.PLAYER,
+			DVS.CharDVType.STATE_INFO
+		)
+		_dev_visual_config.toggle_bvalue_composite_key(
+			DVS.DVSection.B_CHAR_DV,
+			DVS.CharacterType.PLAYER,
+			DVS.CharDVType.ATTACK_INFO
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_H):
 		_dev_visual_config.toggle_bvalue_array(
 			DVS.DVSection.B_CHANGER,
 			[
 				DVS.KeyBValueChanger.WEAPON_HIT,
-				DVS.KeyBValueChanger.WEAPON_HIT_EVERY_FRAME
 			],
 		)
-		_dev_visual_config.toggle_bvalue_composite_key(
-			DVS.DVSection.B_CHAR_DV,
-			DVS.CharacterType.PLAYER,
+		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.HITBOX,
 		)
-		_dev_visual_config.toggle_bvalue_composite_key(
-			DVS.DVSection.B_CHAR_DV,
-			DVS.CharacterType.PLAYER,
+		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.WEAPON_HITBOX,
 		)
 		InputUtils.mark_input_handled(self )
+	## CTRL 
 	elif InputUtils.is_keycode_w_ctrl(event, KEY_I):
 		_dev_visual_config.toggle_bvalue(
 			DVS.DVSection.B_OVERLAY_PANEL,
 			DVS.KeyBOverlayPanel.RAW_INPUT,
 		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl(event, KEY_U):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.PLAYER_SK_ANIMATOR,
+		)
+		InputUtils.mark_input_handled(self )
+	## NO MOD
+	elif InputUtils.is_keycode(event, KEY_G):
+		if not _active_subvp:
+			return
+		if _subvp_target == 1:
+			var e := Groups.get_first_phe_bg_by_group_with_tag(self , "demo_enemy")
+			if not e: return
+			_active_subvp.set_cam_target(e)
+			_subvp_target = 2
+		else:
+			var pl := Groups.get_player_by_group(self )
+			if not pl: return
+			_active_subvp.set_cam_target(pl)
+			_subvp_target = 1
 		InputUtils.mark_input_handled(self )
 ## 
 

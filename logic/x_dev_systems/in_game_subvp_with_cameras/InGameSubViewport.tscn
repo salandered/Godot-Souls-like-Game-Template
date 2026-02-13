@@ -110,6 +110,7 @@ theme_override_constants/separation = 20
 [node name="__blue_panel" type="PanelContainer" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("3_a0v5g")
 
@@ -159,7 +160,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/paragraph_separation = -2
-theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 18
 theme_override_font_sizes/italics_font_size = 18
 bbcode_enabled = true
@@ -170,7 +171,8 @@ text = "[b]Arrows Up/Down[/b] - distance to target
 [b]C[/b] - toggle Projection
 [b]R[/b] - toggle Rotation Follow
 [b]V[/b] - toggle Smoothing
-[b]Arrows Left/Right[/b] - smooth speed"
+[b]Arrows Left/Right[/b] - smooth speed
+[b]G[/b] - change target to enemy"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

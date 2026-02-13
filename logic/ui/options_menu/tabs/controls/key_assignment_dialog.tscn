@@ -5,7 +5,7 @@
 [node name="KeyAssignmentDialog" type="ConfirmationDialog"]
 oversampling_override = 1.0
 title = "Assign Key"
-size = Vector2i(400, 213)
+size = Vector2i(400, 224)
 visible = true
 dialog_text = "
 
@@ -17,10 +17,10 @@ script = ExtResource("1_x1m6p")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -65.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 

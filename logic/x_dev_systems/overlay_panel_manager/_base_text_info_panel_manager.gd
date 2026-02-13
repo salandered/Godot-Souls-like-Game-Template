@@ -1,3 +1,5 @@
+@tool
+
 @abstract
 class_name BaseTextInfoPanelManager
 extends BasePanelManager
@@ -13,7 +15,7 @@ func __hard_validation() -> bool:
 	return _r
 
 
-func _ready_imp():
+func initialise_implementation():
 	if get_text_label():
 		get_text_label().text = ""
 

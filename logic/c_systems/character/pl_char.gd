@@ -34,7 +34,6 @@ extends BaseCharacter
 
 # dev
 @onready var __fly_mode: Node3D = $__dev/FlyMode
-@onready var __dev_labels: Node = %_dev_labels
 
 
 var push_rigid_bodies_force: float = 4.0
@@ -271,19 +270,6 @@ func is_in_attack_state() -> bool:
 # endregion
 
 
-@onready var rig: RangerWrapper = %RIG
-@onready var fancy_hat: MeshInstance3D = %"fancy hat"
-
-## temporary
-func _on_secret_enemy_sig_death_raised() -> void:
-	if rig:
-		rig.super_mats()
-	if fancy_hat:
-		fancy_hat.visible = true
-
-##
-
-
 ## INPUT
 
 
@@ -291,11 +277,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.Unstuck):
 		global_position.y += 1.2
 		print_.dev("dbg", "Unstuck: moved player up by 1.2 units")
+		InputUtils.mark_input_handled(self )
 
 	_dev_input(event)
 
-# region: DEV
 
+# region: DEV
 
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():

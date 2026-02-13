@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d0un7pn3o12lt"]
+
+[node name="UIMetricsGrid" type="GridContainer"]
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 2
+columns = 2

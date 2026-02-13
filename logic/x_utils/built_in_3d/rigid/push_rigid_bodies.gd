@@ -44,12 +44,12 @@ static func push_nearby_rigid_bodies(character: BaseCharacter, radius: float = 3
 		var body = item.collider
 		if body is RigidBody3D:
 			var direction = (body.global_position - character.global_position).normalized()
-			# Add upward component for more dramatic effect
+			# upward component for a dramatic effect
 			direction.y += 0.3
 			direction = direction.normalized()
 			
 			var distance = character.global_position.distance_to(body.global_position)
-			# Falloff: closer objects get pushed harder
+			# closer objects get pushed harder
 			var falloff = 1.0 - (distance / radius)
 			
 			body.apply_central_impulse(direction * push_force * falloff)

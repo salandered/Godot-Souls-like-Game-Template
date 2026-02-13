@@ -12,63 +12,75 @@ class_name BoneMask
 # region Spine Head etc (Bones 1-6)
 
 static func get_head_and_neck() -> Array[int]:
-	return [BoneIdx.NECK, BoneIdx.HEAD]
+	return [BoneIdx.NECK_5, BoneIdx.HEAD_6]
 
 
 static func get_spine_chain() -> Array[int]:
-	return _range(2, 7) # Spine to Head 6
+	return _range(BoneIdx.SPINE_2, BoneIdx.RIGHT_SHOULDER_7) # Spine to Head 6
 
 
 static func get_spine_chain_no_head_neck() -> Array[int]:
-	return _range(2, BoneIdx.NECK) # Spine to 4
+	return _range(BoneIdx.SPINE_2, BoneIdx.NECK_5) # Spine to 4
 
 
 static func get_torso() -> Array[int]:
-	return _range(BoneIdx.HIPS, BoneIdx.NECK) # Hips to UpperChest 4
+	return _range(BoneIdx.HIPS_1, BoneIdx.NECK_5) # Hips to UpperChest 4
 
 
 static func get_hips() -> Array[int]:
-	return [BoneIdx.HIPS]
+	return [BoneIdx.HIPS_1]
 
 # endregion
 
 
 # region Arms 
 
-static func get_right_arm_full() -> Array[int]:
-	return _range(7, 26) # RightShoulder(7) to RightLittleDistal(25)
+static func get_arm_full(side: String) -> Array[int]:
+	if side == Side.RIGHT:
+		return _range(BoneIdx.RIGHT_SHOULDER_7, BoneIdx.LEFT_SHOULDER_26) # to RightLittleDistal(25)
+	else:
+		return _range(BoneIdx.LEFT_SHOULDER_26, 45) # to LeftLittleDistal(44)
 
 
-static func get_right_arm_no_fingers() -> Array[int]:
-	return _range(7, 11) # RightShoulder(7) to RightHand(10)
+static func get_arm_no_fingers(side: String) -> Array[int]:
+	if side == Side.RIGHT:
+		return _range(BoneIdx.RIGHT_SHOULDER_7, 11) # to RightHand(10)
+	else:
+		return _range(BoneIdx.LEFT_SHOULDER_26, 30) # to LeftHand(29)
 
 
-static func get_right_fingers() -> Array[int]:
-	return _range(11, 26) # RightThumbMetacarpal(11) to RightLittleDistal(25)
+static func get_fingers(side: String) -> Array[int]:
+	if side == Side.RIGHT:
+		return _range(11, BoneIdx.LEFT_SHOULDER_26) # to RightLittleDistal(25)
+	else:
+		return _range(30, 45) # to LeftLittleDistal(44)
 
 
-static func get_left_arm_full() -> Array[int]:
-	return _range(26, 45) # LeftShoulder(26) to LeftLittleDistal(44)
-
-static func get_left_arm_no_fingers() -> Array[int]:
-	return _range(26, 30) # LeftShoulder(26) to LeftHand(29)
-
-static func get_left_fingers() -> Array[int]:
-	return _range(30, 45) # LeftThumbMetacarpal(30) to LeftLittleDistal(44)
+static func get_both_arms() -> Array[int]:
+	var r := get_arm_full(Side.RIGHT)
+	var l := get_arm_full(Side.LEFT)
+	
+	r.append_array(l)
+	return r
 
 # endregion
 
 
 # region Legs (Bones 45-52) 
 
-static func get_right_leg_full() -> Array[int]:
-	return _range(45, 49) # RightUpperLeg(45) to RightToes(48)
+static func get_leg_full(side: String) -> Array[int]:
+	if side == Side.RIGHT:
+		return _range(45, 49) # RightUpperLeg(45) to RightToes(48)
+	else:
+		return _range(49, Constants.BONE_COUNT_53) # LeftUpperLeg(49) to LeftToes(52)
 
-static func get_left_leg_full() -> Array[int]:
-	return _range(49, Constants.BONE_COUNT) # LeftUpperLeg(49) to LeftToes(52)
 
 static func get_both_legs() -> Array[int]:
-	return _range(45, Constants.BONE_COUNT) # Both legs, 45-52
+	var r := get_leg_full(Side.RIGHT)
+	var l := get_leg_full(Side.LEFT)
+	
+	r.append_array(l)
+	return r
 
 # endregion
 
@@ -83,11 +95,7 @@ static func get_upper_body(no_head_neck: bool = false) -> Array[int]:
 	else:
 		spine_chain = get_spine_chain()
 
-	var right_arm := get_right_arm_full()
-	var left_arm := get_left_arm_full()
-	
-	spine_chain.append_array(right_arm)
-	spine_chain.append_array(left_arm)
+	spine_chain.append_array(get_both_arms())
 	return spine_chain
 	
 
@@ -106,20 +114,13 @@ static func get_lower_body() -> Array[int]:
 	hips.append_array(legs)
 	return hips
 
-static func get_both_arms() -> Array[int]:
-	var right_arm := get_right_arm_full()
-	var left_arm := get_left_arm_full()
-	
-	right_arm.append_array(left_arm)
-	return right_arm
-
 
 static func get_full_body_with_root() -> Array[int]:
-	return _range(BoneIdx.ROOT, Constants.BONE_COUNT) # All 53 bones
+	return _range(BoneIdx.ROOT_0, Constants.BONE_COUNT_53) # All 53 bones
 
 
 static func get_full_body_no_root() -> Array[int]:
-	return _range(BoneIdx.HIPS, Constants.BONE_COUNT) # Bones 1-52
+	return _range(BoneIdx.HIPS_1, Constants.BONE_COUNT_53) # Bones 1-52
 
 
 # endregion
@@ -133,60 +134,57 @@ static func _range(start: int, end_exclusive: int) -> Array[int]:
 
 ##
 
-# region Right Arm + Torso Variants (No Hips)
+# region Arm + Torso Variants (No Hips)
 
-## Best for: Shooting/Aiming while running.
-## Includes Right Arm + Spine, Chest, UpperChest (2, 3, 4).
-## Allows the character to twist their back to aim, but keeps hips/legs for running.
-static func get_right_arm_with_spine() -> Array[int]:
-	var arm := get_right_arm_full()
-	# Reuse existing spine logic (2-5 excludes hips 1 and neck 5)
+## may be: Shooting/Aiming while running.
+## Right Arm + Spine, Chest, UpperChest (2, 3, 4).
+## allows the character to twist their back to aim
+static func get_arm_with_spine(side: String) -> Array[int]:
+	var arm := get_arm_full(side)
 	var spine := get_spine_chain_no_head_neck()
-	
 	spine.append_array(arm)
 	return spine
 
 
-## Best for: Isolated actions like waving, holding a torch, or carrying an object.
-## Includes Right Arm + UpperChest (4) only.
-## Stabilizes the shoulder but leaves the lower spine stiff/independent.
-static func get_right_arm_with_upper_chest() -> Array[int]:
-	var arm := get_right_arm_full()
-	# 4 is UpperChest
-	var upper_chest: Array[int] = [4]
-	
-	upper_chest.append_array(arm)
-	return upper_chest
+## isolated actions like waving, holding a torch, or carrying an object.
+## if RIGHT Includes Right Arm + UpperChest (4) only.
+## stabilizes the shoulder but leaves the lower spine stiff/independent.
+static func get_arm_with_upper_chest(side: String) -> Array[int]:
+	var arm := get_arm_full(side)
+	arm.append(BoneIdx.UPPER_CHEST_4)
+	return arm
 
 
-## Best for: Looking and pointing/shooting.
-## Includes Right Arm + Spine chain + Head (2-6).
+## Looking and pointing/shooting.
+## if RIGHT: Includes Right Arm + Spine chain + Head (2-6).
 ## The character looks where they are aiming.
-static func get_right_arm_with_spine_and_head() -> Array[int]:
-	var arm := get_right_arm_full()
+static func get_arm_with_spine_and_head(side: String) -> Array[int]:
+	var arm := get_arm_full(side)
 	var spine_head := get_spine_chain() # 2 to 6
 	
 	spine_head.append_array(arm)
 	return spine_head
 
 
-## Best for: complex upper body actions involving the left shoulder stability
-## Includes Right Arm + Spine (2-4) + Left Shoulder (26)
+## complex upper body actions involving the left shoulder stability
+## if RIGHT Includes Right Arm + Spine (2-4) + Left Shoulder (26)
 ## Prevents the left shoulder from looking broken if the spine twists significantly.
-static func get_right_arm_with_spine_and_left_shoulder() -> Array[int]:
-	var mask := get_right_arm_with_spine()
-	mask.append(26) # LeftShoulder
+static func get_arm_with_spine_and_opposite_shoulder(side: String) -> Array[int]:
+	var mask := get_arm_with_spine(side)
+	if side == Side.RIGHT:
+		mask.append(BoneIdx.LEFT_SHOULDER_26)
+	else:
+		mask.append(BoneIdx.RIGHT_SHOULDER_7)
 	return mask
+
 
 # endregion
 
 
 static func get_all_no_fingers() -> Array[int]:
 	var indices: Array[int] = []
-	# Root(0) to RightHand(10) inclusive
-	indices.append_array(_range(0, 11))
-	# LeftShoulder(26) to LeftHand(29) inclusive
-	indices.append_array(_range(26, 30))
+	indices.append_array(_range(BoneIdx.ROOT_0, 11)) # to RightHand(10)
+	indices.append_array(_range(BoneIdx.LEFT_SHOULDER_26, 30)) # to LeftHand(29)
 	# RightUpperLeg(45) to End
-	indices.append_array(_range(45, Constants.BONE_COUNT))
+	indices.append_array(_range(45, Constants.BONE_COUNT_53))
 	return indices

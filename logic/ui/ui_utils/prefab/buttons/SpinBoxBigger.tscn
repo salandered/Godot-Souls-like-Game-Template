@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://beqkj7gmf5s5d"]
+
+[sub_resource type="DPITexture" id="DPITexture_rl0i7"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m4 6 4-3.5L12 6\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_im4gc"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m4 6 4-3.5L12 6\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_r2qmd"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m4 6 4-3.5L12 6\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_sb2c6"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m4 6 4-3.5L12 6\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_5uhh2"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m12 2-4 3.5L4 2\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_bhxsi"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m12 2-4 3.5L4 2\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_pbvab"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m12 2-4 3.5L4 2\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="DPITexture" id="DPITexture_tgwv8"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m12 2-4 3.5L4 2\"/></svg>
+"
+base_scale = 1.8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3dsc"]
+bg_color = Color(0.055200003, 0.24, 0.22151996, 0.3019608)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.10980393, 0.06661403, 0.49019608)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="SpinBox" type="SpinBox"]
+custom_minimum_size = Vector2(0, 36)
+offset_right = 122.0
+offset_bottom = 36.0
+theme_override_icons/up = SubResource("DPITexture_rl0i7")
+theme_override_icons/up_hover = SubResource("DPITexture_im4gc")
+theme_override_icons/up_pressed = SubResource("DPITexture_r2qmd")
+theme_override_icons/up_disabled = SubResource("DPITexture_sb2c6")
+theme_override_icons/down = SubResource("DPITexture_5uhh2")
+theme_override_icons/down_hover = SubResource("DPITexture_bhxsi")
+theme_override_icons/down_pressed = SubResource("DPITexture_pbvab")
+theme_override_icons/down_disabled = SubResource("DPITexture_tgwv8")
+max_value = 20.0
+step = 0.1
+value = 16.1
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l3dsc")

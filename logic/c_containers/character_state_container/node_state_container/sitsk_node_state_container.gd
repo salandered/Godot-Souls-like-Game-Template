@@ -31,6 +31,12 @@ var node_to_leaf_state_data: Dictionary[String, EDC._LStData] = {
 	"SitClap": EDC._LStData.new(SITSKS.Leaf.sit_clap, EDC._AData.new(SITSKA.clap, -0.03), EDC._CommitData.new(-1, -1)),
 	"SitDisbelief": EDC._LStData.new(SITSKS.Leaf.sit_disbelief, EDC._AData.new(SITSKA.disbelief_light), EDC._CommitData.new(-1, -1)),
 	"SitLaugh": EDC._LStData.new(SITSKS.Leaf.sit_laugh, EDC._AData.new(SITSKA.laugh_light), EDC._CommitData.new(-1, -1)),
+	"SitLaughSuperHard": EDC._LStData.new(SITSKS.Leaf.sit_laugh_super_hard, EDC._AData.new(SITSKA.laugh_super_hard), EDC._CommitData.new(-1, -1)),
+	"SitThumbUp": EDC._LStData.new(SITSKS.Leaf.thumb_up, EDC._AData.new(SITSKA.thumb_up, -0.1), EDC._CommitData.new(-1, -1)),
+	"SitCheer": EDC._LStData.new(SITSKS.Leaf.cheer, EDC._AData.new(SITSKA.cheer), EDC._CommitData.new(-1, -1)),
+	"SitDisapprove": EDC._LStData.new(SITSKS.Leaf.disapprove, EDC._AData.new(SITSKA.disapprove), EDC._CommitData.new(-1, -1)),
+	"SitCheerStand": EDC._LStData.new(SITSKS.Leaf.cheer_stand, EDC._AData.new(SITSKA.cheer_stand, -0.35), EDC._CommitData.new(-1, -1)),
+	"SitClapStand": EDC._LStData.new(SITSKS.Leaf.clap_stand, EDC._AData.new(SITSKA.clap_stand, -0.35), EDC._CommitData.new(-1, -1)),
 	
 	## other
 	"SitAttack": EDC._LStData.new(SITSKS.Leaf.sit_attack, EDC._AData.new(SITSKA.sit_attack), EDC._CommitData.new(-1, -1)),

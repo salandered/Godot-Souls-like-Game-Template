@@ -47,7 +47,7 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 
 	if elapsed_time < current_blend.fade_in:
 		var t := elapsed_time / current_blend.fade_in
-		var eased_t := ease_in_out(t)
+		var eased_t := MathUtil.ease_in_out(t)
 		var result := lerpf(1.0, target_mult, eased_t)
 		__log_("Phase: FADE_IN", "t", t, "-> eased", eased_t, "-> mult", result)
 		return result
@@ -58,7 +58,7 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 		
 	elif elapsed_time < total_duration:
 		var t := (elapsed_time - current_blend.fade_in - current_blend.hold) / current_blend.fade_out
-		var eased_t := ease_in_out(t)
+		var eased_t := MathUtil.ease_in_out(t)
 		var result := lerpf(target_mult, 1.0, eased_t)
 		__log_("Phase: FADE_OUT", "t", t, "-> eased", eased_t, "-> mult", result)
 		return result
@@ -66,11 +66,6 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 	else:
 		__log_("Phase: EXPIRED", "mult 1.0")
 		return 1.0
-
-
-static func ease_in_out(x: float) -> float:
-	x = clampf(x, 0.0, 1.0)
-	return 0.5 * (1.0 - cos(x * PI))
 
 
 var LOG_B: bool = false

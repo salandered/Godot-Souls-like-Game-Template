@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://clc3tlv23rgge"]
+[gd_scene load_steps=22 format=4 uid="uid://clc3tlv23rgge"]
 
 [ext_resource type="PackedScene" uid="uid://qakd5u1rhraj" path="res://-assets-/GLB-level/demo-level_/jaw/jaw.glb" id="1_5oygl"]
 [ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="2_kk3nw"]
 [ext_resource type="AudioStream" uid="uid://b82qfn51mgckx" path="res://-assets-/SFX/sources/_mine/creak_metal_mine.tres" id="3_v5bby"]
+[ext_resource type="ArrayMesh" uid="uid://8qowxkw6vux" path="res://-assets-/GLB-items/prefabs/rocky_rock.tres" id="4_c2rp6"]
 [ext_resource type="Material" uid="uid://bnu11nvey1bcd" path="res://-assets-/materials-shared/concrete/plaster_grey/plaster_grey_04_Reimp_darker.tres" id="4_hc18n"]
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="4_v1rpm"]
 [ext_resource type="PackedScene" uid="uid://ypbtd7vtqh0r" path="res://-assets-/GLB-items/prefabs/LanternLamp.tscn" id="5_npnbk"]
@@ -239,6 +240,7 @@ layers = 17
 
 [node name="_Plane_008" parent="jaw/mountain outer" index="3"]
 layers = 17
+mesh = ExtResource("4_c2rp6")
 
 [node name="Mountain_Group_1_030" parent="jaw/mountain outer" index="4"]
 layers = 17

@@ -25,7 +25,7 @@ var LOCKED_SOCKET_PIVOT_WEIGHT: float = FREE_SOCKET_PIVOT_WEIGHT
 @export var COLLISION_CAM_RADIUS: float = 0.15 # try 0.25–0.35
 
 @export_group("CAM_MOVEMENT")
-@export var DEF_X_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if you have a huge mousepad / high DPI.
+@export var DEF_X_SENSE: float = 1 # 2.5 – 6.0 (0.14°–0.34°/px). Lower if huge mousepad / high DPI.
 ## by default 0.8 of DEF_X_SENSE
 @export var DEF_Y_SENSE: float = 0.8 # 70–90% of horizontal
 ## Used only when locked to target

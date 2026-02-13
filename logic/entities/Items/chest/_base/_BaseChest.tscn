@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=4 uid="uid://bd67vd6q3hn0s"]
+[gd_scene load_steps=18 format=4 uid="uid://ffqa0ik0plbe"]
 
-[ext_resource type="Script" uid="uid://um43hefsxggb" path="res://logic/entities/Items/chest/_base/_generic_chest.gd" id="1_fu8jp"]
+[ext_resource type="Script" path="res://logic/entities/Items/chest/_base/_generic_chest.gd" id="1_fu8jp"]
 [ext_resource type="ArrayMesh" uid="uid://by3rdfdkynn6m" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_042.res" id="4_aiw8g"]
 [ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="4_fu8jp"]
 [ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 119-Audio.wav" id="4_m0yqf"]

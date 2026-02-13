@@ -1,10 +1,11 @@
 @tool
 @icon("res://-assets-/x_icons/char/image (23).png")
-extends PHCharacter
 class_name BigGuyCharacter
+extends PHCharacter
 
 
 @export var fire_up: bool = false
+@export var dev_tag: String = ""
 
 @onready var _visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
 
@@ -31,7 +32,9 @@ func _for_init_active_weapon_id_list() -> Array[String]:
 
 ##
 
-func initialise_implementation():
+func initialise_phe_char_implementation():
+	add_to_group(Groups.Chars.BIG_GUY)
+
 	SigUtils.safe_connect(SIG_land_wave, _on_sig_land_wave)
 	
 
@@ -146,9 +149,7 @@ func get_power_attacks_state_names() -> Array[String]:
 		PHES.Leaf.phase_switch,
 	   ]
 
-
 ##
-
 
 # func _hard_death():
 # 	await FrameUtils.wait_process_frames(5)
@@ -156,7 +157,7 @@ func get_power_attacks_state_names() -> Array[String]:
 
 
 func _on_monitor_player_enter_signal_area_sig_player_entered(incoming_body: Node3D) -> void:
-	set_process(true)
+	set_physics_process(true)
 
 
 ## DEV

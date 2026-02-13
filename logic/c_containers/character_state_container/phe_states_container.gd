@@ -58,7 +58,7 @@ func __accept_base_state(node: BasePHEState, state_data: EDC.BaseStData):
 
 func _accept_states():
 	## COMPOSITE
-	for descendant: get_descendants.Descendant in get_descendants.base_ph_composite_states_with_depth(self):
+	for descendant: get_descendants.Descendant in get_descendants.base_ph_composite_states_with_depth(self ):
 		var node: BasePHEState = descendant.node_
 		print_.e_container("", "node.get_name() " + node.get_name())
 

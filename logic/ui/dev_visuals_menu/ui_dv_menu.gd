@@ -10,6 +10,7 @@ extends PanelContainerSystem
 var dv_setting_check_buttons: Array[BaseDVSettingCheckButton]
 var dv_vc_spinboxes: Array[DVValueChangerSpinBox]
 var dv_line_edit_array: Array[DVLineEdit]
+var dv_option_buttons: Array[DVOptionButton]
 
 
 func __soft_validation() -> bool:
@@ -39,6 +40,7 @@ func _ready() -> void:
 	dv_setting_check_buttons = get_descendants.base_dv_setting_check_button(self )
 	dv_vc_spinboxes = get_descendants.dv_vc_spinbox(self )
 	dv_line_edit_array = get_descendants.dv_line_edit(self )
+	dv_option_buttons = get_descendants.dv_option_button(self )
 
 	_set_controls_from_dvc()
 
@@ -66,6 +68,21 @@ func _set_controls_from_dvc():
 			continue
 		## NOTE: "changing text using this property won't emit the text_changed signal"
 		item.text = dvc.sget_value(item.dv_section, item.get_dvc_key())
+		
+	for item in dv_option_buttons:
+		if not item:
+			error_.warn("null item in dv_option_buttons", "", "", WL.WARN)
+			continue
+		## NOTE: "changing text using this property won't emit the text_changed signal"
+		var value := dvc.sget_value(item.dv_section, item.get_dvc_key())
+		_option_button_select_item_by_text(item, value)
+
+
+func _option_button_select_item_by_text(opt: OptionButton, text_value: String) -> void:
+	for i in opt.item_count:
+		if opt.get_item_text(i) == text_value:
+			opt.selected = i
+			return
 
 	
 func _on_SIG_dv_ui_control_value_changed(payload: Dictionary[String, Variant]):

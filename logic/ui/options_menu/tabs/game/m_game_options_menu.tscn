@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4r1plptelikw"]
 
 [ext_resource type="Script" uid="uid://cel3jt67kbkpj" path="res://logic/ui/options_menu/tabs/game/m_game_options_menu.gd" id="1_lpwby"]
-[ext_resource type="Script" uid="uid://dhh6hicqh44lj" path="res://logic/ui/ui_utils/template_scripts/m_capture_focus.gd" id="2_7bjas"]
+[ext_resource type="Script" path="res://logic/ui/ui_utils/template_scripts/m_capture_focus.gd" id="2_7bjas"]
 [ext_resource type="PackedScene" uid="uid://cqmk5mrsxsygy" path="res://logic/ui/options_menu/tabs/game/m_reset_game_control.tscn" id="3_ajr2t"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="3_bwa6b"]
 

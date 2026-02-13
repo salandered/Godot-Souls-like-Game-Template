@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://da2gp8o4yvtc1"]
+[gd_scene load_steps=16 format=3 uid="uid://da2gp8o4yvtc1"]
 
+[ext_resource type="FontFile" uid="uid://b3b45ricfqn2a" path="res://-assets-/ui_assets/_font/Noto_Sans/static/NotoSans-SemiBoldItalic.ttf" id="1_se45b"]
 [ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28)_or.png" id="1_yh4hi"]
 [ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28).png" id="2_wqc2f"]
 [ext_resource type="Texture2D" uid="uid://bp35jdlpomkfa" path="res://-assets-/x_icons/white/interface/icon_disable.png" id="3_eyds5"]
@@ -113,6 +114,8 @@ theme_override_colors/icon_hover_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/icon_disabled_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_constants/outline_size = 2
 theme_override_constants/h_separation = 8
+theme_override_fonts/font = ExtResource("1_se45b")
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_4m8ro")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ib10h")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j8xjt")

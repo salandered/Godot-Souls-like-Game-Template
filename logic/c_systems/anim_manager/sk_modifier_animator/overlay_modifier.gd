@@ -9,6 +9,7 @@ var default_bone_mask: Array[int]
 
 var _bone_idx_to_track: Dictionary[int, String] = {}
 
+## TODO: get rid of this CustomDelta! frame dependent
 var __custom_delta: CustomDelta = CustomDelta.new()
 
 
@@ -239,7 +240,7 @@ func _blend_pose(base_pose: Transform3D, overlay_pose: Transform3D, weight: floa
 	var final_pose := Transform3D()
 	
 	## Only blend rotation for Hips
-	if bone_idx == BoneIdx.HIPS:
+	if bone_idx == BoneIdx.HIPS_1:
 		final_pose.origin = base_pose.origin # keep base position
 		final_pose.basis = base_pose.basis.slerp(overlay_pose.basis, hips_weight)
 	else:

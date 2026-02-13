@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://b1vjcin7c3dbx"]
 
-[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="1_cq67c"]
+[ext_resource type="FontFile" uid="uid://kbtmts7xnunh" path="res://-assets-/ui_assets/_font/Noto_Sans/static/NotoSans-SemiBold.ttf" id="1_w03tr"]
 [ext_resource type="Script" uid="uid://cd5vdp2hax38d" path="res://logic/ui/dev_visuals_menu/button/check_button/dv_overlay_panel_toggle_button.gd" id="2_sx1bm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8ro"]
@@ -114,15 +114,16 @@ base_scale = 1.3
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.15377831, 0.15377831, 0.15377831, 1)
 theme_override_colors/icon_normal_color = Color(0.79870105, 0.79870105, 0.79870105, 1)
 theme_override_colors/icon_focus_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/icon_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/icon_hover_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/icon_hover_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/icon_disabled_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_constants/outline_size = 2
 theme_override_constants/h_separation = 8
-theme_override_fonts/font = ExtResource("1_cq67c")
+theme_override_fonts/font = ExtResource("1_w03tr")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_4m8ro")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ib10h")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j8xjt")

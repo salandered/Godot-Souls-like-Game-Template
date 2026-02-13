@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtqlxbsacnayv"]
 
-[ext_resource type="Script" path="res://logic/ui/ui_utils/prefab/container_icon_title/container_icon_title.gd" id="1_iaivs"]
+[ext_resource type="Script" uid="uid://cqtyggy4gcrd0" path="res://logic/ui/ui_utils/prefab/container_icon_title/container_icon_title.gd" id="1_iaivs"]
 [ext_resource type="Texture2D" uid="uid://bovchw35k1ski" path="res://-assets-/x_icons/white/interface/icon_circle.png" id="2_serox"]
 [ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="3_8p52h"]
 
@@ -52,6 +52,6 @@ theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1764706)
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("3_8p52h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 22
 text = "Some title"
 vertical_alignment = 1

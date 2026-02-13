@@ -1,7 +1,9 @@
 extends BasePHEComposite
 class_name SimpleLife
 
+
 var _was_just_hit: bool = false
+
 
 func get_supported_substates() -> Array[String]:
 	return [SITSKS.still_life_phase, SITSKS.combat_phase]
@@ -10,6 +12,7 @@ func get_supported_substates() -> Array[String]:
 # mutes propagation
 func react_on_hit(hit_data: HitData) -> void:
 	if get_safe_curr_sbs_name() == SITSKS.still_life_phase:
+		__log_("_was_just_hit", true)
 		_was_just_hit = true
 
 
@@ -17,6 +20,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	match current_substate.state_name:
 		SITSKS.still_life_phase:
 			if _was_just_hit:
+				__log_("_was_just_hit", false)
 				_next_state = SITSKS.combat_phase
 				_was_just_hit = false
 				

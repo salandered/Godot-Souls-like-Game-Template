@@ -44,7 +44,7 @@ func get_prev_root_rotation() -> float:
 	if _get_prev_playback().get_effective_time_spent() >= _get_prev_playback().anim.duration:
 		__log_("", "Will return 0.0. effective_prog >= anim.duration. Details:", _get_prev_playback()._to_string_short())
 		return 0.0
-	var prev_rotation_delta := _calculate_rotation_delta(_get_prev_playback(), BoneIdx.ROOT)
+	var prev_rotation_delta := _calculate_rotation_delta(_get_prev_playback(), BoneIdx.ROOT_0)
 	# var rotation_ := prev_rotation_delta * (1.0 - blend_playback.percentage) * global_speed_scale
 	var rotation_ := prev_rotation_delta * _get_global_speed_scale()
 	# if abs(rotation_) > 0.0001:
@@ -64,10 +64,10 @@ func get_root_velocity(y_zeroed: bool = true, use_blending: bool = false, backwa
 			# "< Constants.ONE_FRAME -> we at the end f the anim. backwards to false")
 		backwards = false
 
-	var curr_velocity := _calculate_velocity_delta(_get_curr_playback(), BoneIdx.ROOT, backwards)
+	var curr_velocity := _calculate_velocity_delta(_get_curr_playback(), BoneIdx.ROOT_0, backwards)
 	
 	if use_blending and _get_blend_playback().is_blending:
-		var prev_velocity := _calculate_velocity_delta(_get_prev_playback(), BoneIdx.ROOT, backwards)
+		var prev_velocity := _calculate_velocity_delta(_get_prev_playback(), BoneIdx.ROOT_0, backwards)
 		curr_velocity = prev_velocity.lerp(curr_velocity, _get_blend_playback().percentage)
 	
 	if y_zeroed:
@@ -77,7 +77,7 @@ func get_root_velocity(y_zeroed: bool = true, use_blending: bool = false, backwa
 
 
 func get_root_rotation(y_only: bool = true) -> float:
-	var curr_rotation_delta := _calculate_rotation_delta(_get_curr_playback(), BoneIdx.ROOT)
+	var curr_rotation_delta := _calculate_rotation_delta(_get_curr_playback(), BoneIdx.ROOT_0)
 	
 	# NOTE: Not supporing two animations in a row with root rotation. 
 	#       For one root rot and other w/o it, this should be checked for sanity

@@ -39,10 +39,30 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
+"Engel_C_Baked": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/engel/Engel_C_Baked_Reimp.tres",
+"use_external/path": "uid://cl8xvgflj5omt"
+},
 "I_Ground088_2K-JPG": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://-assets-/materials-shared/ground/I_ground088/I_Ground088_2K-JPG_Reimp_2k.tres",
 "use_external/path": "uid://b501ccskj67vi"
+},
+"MI_Trim_Props_sweet": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
+},
+"MinesTrim": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres",
+"use_external/path": "uid://bb06udlb6phmw"
+},
+"baked_barrel_temp": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
 },
 "damaged_concrete_columns": {
 "use_external/enabled": true,

@@ -94,7 +94,7 @@ func __soft_dependencies() -> Array:
 	return super.__soft_dependencies() + ds
 
 
-@abstract func initialise_implementation() -> void
+@abstract func initialise_phe_char_implementation() -> void
 
 @abstract func get_initial_leaf_state_name() -> String
 
@@ -120,7 +120,7 @@ func initialise_base_char_implementation() -> void:
 		ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
 
-	initialise_implementation()
+	initialise_phe_char_implementation()
 
 	if not __perform_validation():
 		__log_warn_soft("PHCharacter failed initalisation")
@@ -162,12 +162,19 @@ func _initialise_sm():
 	fatigue_raised = false
 	state_machine._on_enter_state()
 	if process_disabled_on_init:
-		set_process(false)
+		# await FrameUtils.wait_physics_frames(2)
+		set_physics_process(false)
 
 
-func get_current_state() -> BasePHEState:
-	## todo: shoud we just return _curr_leaf?
-	return state_machine.get_current_substate()
+## returns leaf
+func get_current_state() -> BasePHELeaf:
+	return get_curr_leaf_state()
+
+
+func get_current_substate_by_depth(depth: int) -> BasePHEState:
+	if not state_machine: return null
+	return state_machine.get_current_substate_by_depth(depth)
+
 
 func get_prev_state_name() -> String:
 	return _prev_leaf.state_name
@@ -219,8 +226,6 @@ func _physics_process(delta: float) -> void:
 	if push_rigid:
 		PushRigidBodies.push_rigid_bodies_by_char(self , push_rigid_bodies_force)
 
-	# player.__dev_labels._label_phe_enemy_info(self)
-
 	if death_raised:
 		_on_death_raised()
 
@@ -228,7 +233,7 @@ func _physics_process(delta: float) -> void:
 func react_on_hit(hit_data: HitData) -> void:
 	if not __validation_ok():
 		return
-	var _curr_state := get_current_state()
+	var _curr_state := get_current_substate_by_depth(1)
 	if not _curr_state:
 		__log_error("no _curr_state", "react_on_hit", "no hit applied, it's lost", hit_data)
 		return
@@ -281,7 +286,7 @@ func _on_death_raised() -> void:
 	var _look_at_marker := get_look_at_char_marker()
 	if _look_at_marker:
 		_look_at_marker.active = false
-	# todo: it works but we need proper checks for external systems to be ready for this; also visuals
+	# todo: it works but need proper checks for external systems to be ready for this; also visuals
 	# self.queue_free()
 
 

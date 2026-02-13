@@ -1,6 +1,6 @@
 [gd_scene load_steps=70 format=4 uid="uid://b0eq3ihtn4wf"]
 
-[ext_resource type="Script" path="res://logic/c_systems/character/mech_fighter.gd" id="1_rn2eh"]
+[ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/c_systems/character/mech_fighter.gd" id="1_rn2eh"]
 [ext_resource type="ArrayMesh" uid="uid://cejnfcdar41gc" path="res://-assets-/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_001.res" id="1_vvmdu"]
 [ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_hhdky"]
 [ext_resource type="ArrayMesh" uid="uid://1vgny2neg4o" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_003.res" id="2_j48cr"]
@@ -48,7 +48,7 @@
 [ext_resource type="Script" uid="uid://dirvb0rrpsrl6" path="res://logic/c_systems/character_state/mech_fighter_state/attack_lr_power.gd" id="41_24aju"]
 [ext_resource type="Script" uid="uid://ddqblhwmfi6tj" path="res://logic/c_systems/character_state/mech_fighter_state/attack_rl_power.gd" id="42_6xoih"]
 [ext_resource type="Script" uid="uid://b7lb3yvq3q4bg" path="res://logic/c_systems/character_state/mech_fighter_state/attack_stab_power.gd" id="43_tx1qf"]
-[ext_resource type="PackedScene" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/DVHitBox.tscn" id="49_6xoih"]
+[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/DVHitBox.tscn" id="49_6xoih"]
 [ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/x_dev_systems/dev_visuals_3d/dv_area_contact.gd" id="50_tx1qf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ulmwa"]
@@ -1210,6 +1210,7 @@ debug_color = Color(0.70196074, 0, 0.19234172, 0.41960785)
 
 [node name="DevVisualiseTrailWeapon" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" instance=ExtResource("22_gk5iv")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901152e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 0, 0, 0)
+visible = false
 path_color_a = Color(0.1843273, 0.62740636, 1, 1)
 path_color_b = Color(0.5959711, 0, 1, 1)
 trail_radius = 0.02
@@ -1217,6 +1218,7 @@ _char_type = 3
 
 [node name="DVWeaponHurtBox" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
+visible = false
 weapon = NodePath("../../..")
 _char_type = 3
 
@@ -1271,6 +1273,7 @@ debug_color = Color(0.70196074, 0, 0.19234172, 0.41960785)
 
 [node name="DevVisualiseTrailWeapon2" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" instance=ExtResource("22_gk5iv")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901152e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 0, 0, 0)
+visible = false
 path_color_a = Color(0.1843273, 0.62740636, 1, 1)
 path_color_b = Color(0.5959711, 0, 1, 1)
 trail_radius = 0.02
@@ -1278,6 +1281,7 @@ _char_type = 3
 
 [node name="DVWeaponHurtBox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
+visible = false
 weapon = NodePath("../../../../..")
 _char_type = 3
 
@@ -1379,7 +1383,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24676108, 0.55133295, 0)
 top_level = false
 label_text = "Interact"
 label_y_offset = 1.2
-area_sphere_radius = 1.6
 
 [node name="__interact_area" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24676108, 0.55133295, 0)
@@ -1389,17 +1392,20 @@ update_scale = false
 [node name="__dev" type="Node3D" parent="."]
 
 [node name="VisualiseHitBoxFrame2" parent="__dev" node_paths=PackedStringArray("combat") instance=ExtResource("49_6xoih")]
+visible = false
 color_invincible = Color(0.73760307, 0.08260098, 0.42440233, 0.2509804)
 combat = NodePath("../../Combat")
 _char_type = 3
 
 [node name="DVAreaContact" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+visible = false
 script = ExtResource("50_tx1qf")
 char_hit_box = NodePath("../../StaticVisuals/Hitbox")
 character = NodePath("../..")
 hard_off_snapped_hits = true
 
 [node name="DVAreaContact2" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+visible = false
 script = ExtResource("50_tx1qf")
 char_hit_box = NodePath("../../VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmHitbox")
 character = NodePath("../..")

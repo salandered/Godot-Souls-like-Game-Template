@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="1_dhy38"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="2_bjrr0"]
-[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/swaying_child/SwayParent.tscn" id="3_gdqb0"]
+[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="3_gdqb0"]
 [ext_resource type="AudioStream" uid="uid://b82qfn51mgckx" path="res://-assets-/SFX/sources/_mine/creak_metal_mine.tres" id="4_sm1j4"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8bdwl"]

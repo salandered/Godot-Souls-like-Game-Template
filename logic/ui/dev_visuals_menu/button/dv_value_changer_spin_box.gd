@@ -21,9 +21,3 @@ func _on_value_changed(value_: float):
 		SPS.dvc_section_field: dv_section,
 		SPS.dvc_key_field: key_value_changer
 		})
-
-
-## 
-
-func __LOG_B() -> bool:
-	return true

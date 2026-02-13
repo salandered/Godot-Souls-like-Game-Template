@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1errn8gj2ojs"]
 
-[ext_resource type="PackedScene" uid="uid://dbcvsan1ldffm" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_2hydb"]
+[ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_2hydb"]
 [ext_resource type="Script" uid="uid://bvm06ys8jnc87" path="res://logic/entities/Items/pick_item/stamina_item/max_stamina_item.gd" id="2_rayid"]
 [ext_resource type="Material" uid="uid://b45m67rpq6djp" path="res://-assets-/materials-shared/_shaders/pick_items/max_stamina_increase_item.tres" id="3_iikkq"]
 

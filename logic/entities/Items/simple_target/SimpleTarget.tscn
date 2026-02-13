@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bwihqll2ru8vl" path="res://-assets-/SFX/audio_streams/simple_target/st_friction.tres" id="5_lub8o"]
 [ext_resource type="Texture2D" uid="uid://b87n6fgrpvy4s" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/exit_2_lichen_rock_rough.png" id="5_ramhp"]
 [ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="6_lub8o"]
-[ext_resource type="Script" uid="uid://bk85ak1v8fygj" path="res://logic/entities/Items/interact_area/monitor_pl_hit_sig_area.gd" id="7_wnrsi"]
+[ext_resource type="Script" path="res://logic/entities/Items/interact_area/monitor_pl_hit_sig_area.gd" id="7_wnrsi"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lub8o"]
 _surfaces = [{

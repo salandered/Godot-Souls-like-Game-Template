@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://yhhhch504iof"]
+[gd_scene load_steps=9 format=3 uid="uid://yhhhch504iof"]
 
 [ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_cyk81"]
 [ext_resource type="Script" uid="uid://0kjhaxohe1pa" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/player_inputs_grid_manager.gd" id="2_ou6f6"]
@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="5_u56et"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="6_nn8n2"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_vsxyn"]
+[ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="8_k64li"]
 
 [node name="InputGlobalUIPanels" type="VBoxContainer"]
 
@@ -25,6 +26,8 @@ ui_container = NodePath("../../PlayerInputsPanel")
 [node name="RawInputsGridDistributor" parent="managers" node_paths=PackedStringArray("grid") instance=ExtResource("1_cyk81")]
 unique_name_in_owner = true
 grid = NodePath("../../RawInputsPanel/PanelContainer/MarginContainer/VBoxContainer/RawInputsGrid")
+value_label_font_size = 18
+name_label_font_size = 24
 
 [node name="RawInputsGridManager" type="Node" parent="managers" node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
@@ -47,6 +50,7 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="PlayerInputsPanel"]
 layout_mode = 2
@@ -66,22 +70,22 @@ layout_mode = 2
 modulate = Color(0.7579691, 0.7579691, 0.7579691, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_nn8n2")
+theme_override_font_sizes/font_size = 22
 text = "Input Info"
 
 [node name="HSeparator" parent="PlayerInputsPanel/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_vsxyn")]
 layout_mode = 2
 
-[node name="PlInputsGrid" type="GridContainer" parent="PlayerInputsPanel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PlInputsGrid" parent="PlayerInputsPanel/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("8_k64li")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 8
-columns = 2
 
 [node name="RawInputsPanel" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="RawInputsPanel"]
 layout_mode = 2
@@ -101,22 +105,22 @@ layout_mode = 2
 modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_nn8n2")
-text = "Input Raw"
+theme_override_font_sizes/font_size = 24
+text = "Inputs"
 
 [node name="HSeparator" parent="RawInputsPanel/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_vsxyn")]
 layout_mode = 2
 
-[node name="RawInputsGrid" type="GridContainer" parent="RawInputsPanel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="RawInputsGrid" parent="RawInputsPanel/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("8_k64li")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 8
-columns = 2
 
 [node name="ActionInputsPanel" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="ActionInputsPanel"]
 layout_mode = 2
@@ -136,13 +140,12 @@ layout_mode = 2
 modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_nn8n2")
+theme_override_font_sizes/font_size = 22
 text = "Action Inputs"
 
 [node name="HSeparator" parent="ActionInputsPanel/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_vsxyn")]
 layout_mode = 2
 
-[node name="ActionInputsGrid" type="GridContainer" parent="ActionInputsPanel/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ActionInputsGrid" parent="ActionInputsPanel/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("8_k64li")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 8
-columns = 2

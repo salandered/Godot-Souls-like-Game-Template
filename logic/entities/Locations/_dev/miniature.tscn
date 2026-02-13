@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=4 uid="uid://bj31r46hbvq8r"]
+[gd_scene load_steps=33 format=4 uid="uid://bj31r46hbvq8r"]
 
 [ext_resource type="Script" uid="uid://dqgdgq7qeq67w" path="res://logic/c_systems/level/miniature.gd" id="1_310jj"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="2_7kfaw"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://logic/ui/pause_menu/m_pause_menu.tscn" id="3_g81m6"]
 [ext_resource type="Texture2D" uid="uid://ck00d1poei7kl" path="res://-assets-/materials-shared/solid/prototype/chess_black.png" id="4_7kfaw"]
 [ext_resource type="PackedScene" uid="uid://ctdp8t5nsqc8q" path="res://-assets-/GLB-items/prefabs/Chair.tscn" id="5_e8ywp"]
+[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/Enemies/sitting_sk/SitSkeleton.tscn" id="6_2qp7a"]
 [ext_resource type="Texture2D" uid="uid://by0882vb5ns2j" path="res://-assets-/materials-shared/solid/prototype/chess_big_red.png" id="8_g81m6"]
 [ext_resource type="PackedScene" uid="uid://b0eq3ihtn4wf" path="res://logic/entities/Enemies/fighter/MechFighter.tscn" id="9_7sswa"]
 [ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="9_gx7tx"]
@@ -12,7 +13,7 @@
 [ext_resource type="Material" uid="uid://bs2jei6uvq271" path="res://-assets-/materials-shared/solid/red_matte.tres" id="11_2edth"]
 [ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/phe_enemy/PHEnemy_2.tscn" id="16_2edth"]
 [ext_resource type="PackedScene" uid="uid://53le0wkw6bvm" path="res://logic/entities/VFX/lights/omni/StaticOmni.tscn" id="19_w4aug"]
-[ext_resource type="Shader" path="res://-assets-/materials-shared/_shaders/unsorted/miniature_t1.gdshader" id="20_74okv"]
+[ext_resource type="Shader" uid="uid://7vvgrjyi5te6" path="res://-assets-/materials-shared/_shaders/unsorted/miniature_t1.gdshader" id="20_74okv"]
 [ext_resource type="Material" uid="uid://bqgcrkjo4wtj4" path="res://-assets-/materials-shared/ground/forest_ground/forest_ground_04_Reimp.tres" id="20_qq1u0"]
 [ext_resource type="Material" uid="uid://c0ppm6u2ki7fp" path="res://-assets-/materials-shared/_shaders/_dev/wire_frame_mat.tres" id="21_mo835"]
 [ext_resource type="Shader" uid="uid://c3c0cq3u5pfpy" path="res://-assets-/materials-shared/_shaders/unsorted/30224.gdshader" id="24_mo835"]
@@ -197,6 +198,10 @@ size = Vector3(27.375, 1, 26.635742)
 
 [node name="Chair_1_002" parent="." instance=ExtResource("5_e8ywp")]
 transform = Transform3D(-0.75246954, 0, 0.37334916, 0, 0.84, 0, -0.37334916, 0, -0.75246954, 0.034265995, 0.3017081, 7.852467)
+
+[node name="SittingSkeleton" parent="Chair_1_002" node_paths=PackedStringArray("player") instance=ExtResource("6_2qp7a")]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.9999999, 0, 2.9802322e-08, 0, 1, 0, -0.44787353, 0)
+player = NodePath("../../Princess")
 
 [node name="DeathPlane" parent="." instance=ExtResource("9_gx7tx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.98627, 0)

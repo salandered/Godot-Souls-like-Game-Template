@@ -50,7 +50,7 @@ func _scan_for_targets() -> void:
 			candidate_markers.append(item)
 
 	var closest_marker: LookAtCharacterMarker = null
-	var sq_closest_dist := u.fpow2(scan_radius)
+	var sq_closest_dist := MathUtil.fpow2(scan_radius)
 	var my_pos := _my_marker.global_position
 	
 	

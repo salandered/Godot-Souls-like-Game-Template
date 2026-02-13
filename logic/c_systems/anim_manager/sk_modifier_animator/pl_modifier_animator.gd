@@ -1,7 +1,8 @@
-extends SkeletonModifier3DSystem
 ## WARNING: should not be called directly!
 ## 			PlAnimatorManager manages all modifier animators
 class_name PlayerModifierAnimator
+extends SkeletonModifier3DSystem
+
 
 @onready var skeleton := get_skeleton()
 @onready var root_animator: PlayerRootAnimator = %RootAnimator
@@ -65,6 +66,8 @@ func __hard_dependencies() -> Array:
 
 
 func initialise(native_animator_: AnimationPlayer) -> void:
+	add_to_group(Groups.Dev.SK_ANIM_MANAGER)
+
 	self.native_animator = native_animator_
 	
 	BoneTools.validate_skeleton(skeleton)
@@ -76,7 +79,7 @@ func initialise(native_animator_: AnimationPlayer) -> void:
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
 
-	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT])
+	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT_0])
 
 	__perform_validation(true)
 
@@ -84,13 +87,13 @@ func initialise(native_animator_: AnimationPlayer) -> void:
 func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offset: float = 0):
 	__custom_delta.update_last_process_time()
 	
-	# shift anim playbacks down.
+	# shift anim playbacks down
 	prev_prev_prev_playback = prev_prev_playback
 	prev_prev_playback = prev_playback
 	prev_playback = curr_playback
 	curr_playback = AnimPlayback.new(anim, 0.0, start_time_offset)
 
-	# shift blend playbacks down.
+	# shift blend playbacks down
 	prev_prev_blend_playback = prev_blend_playback
 	prev_blend_playback = curr_blend_playback
 	curr_blend_playback = BlendPlayback.new()

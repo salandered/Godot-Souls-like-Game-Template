@@ -1,7 +1,6 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled;
 
-// --- COMMON SETTINGS ---
 uniform vec4 albedo : source_color = vec4(0.0, 1.0, 0.0, 1.0);
 uniform float transparency : hint_range(0.0, 1.0) = 0.0;     // Background Alpha
 uniform float line_transparency : hint_range(0.0, 1.0) = 1.0; // Line Alpha (New)
@@ -53,6 +52,5 @@ void fragment() {
 
 	ALBEDO = albedo.rgb;
 	
-	// UPDATED: Mix between line opacity and background opacity
 	ALPHA = mix(line_transparency, transparency, wires);
 }

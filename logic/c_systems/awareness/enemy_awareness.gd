@@ -53,7 +53,7 @@ func can_see_player() -> bool:
 
 func can_hear_player() -> bool:
 	# TODO: add calm attribute of player states
-	return _get_character().global_position.distance_squared_to(_get_character().player.global_position) <= u.fpow2(_get_character().hearing_distance)
+	return _get_character().global_position.distance_squared_to(_get_character().player.global_position) <= MathUtil.fpow2(_get_character().hearing_distance)
 
 
 func _is_in_sight_cone(target_position: Vector3) -> bool:

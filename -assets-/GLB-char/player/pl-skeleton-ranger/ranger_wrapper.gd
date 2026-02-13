@@ -8,6 +8,7 @@ class_name RangerWrapper
 @onready var ranger_boots: MeshInstance3D = $"Armature/GeneralSkeleton/ranger boots"
 @onready var ranger_top: MeshInstance3D = $"Armature/GeneralSkeleton/ranger top"
 @onready var _mask: MeshInstance3D = $Armature/GeneralSkeleton/_mask
+@onready var fancy_hat: MeshInstance3D = %"fancy hat"
 
 
 const TILE_BLACK_PLASTIC = preload("uid://lg6qj8wpa5va")
@@ -23,6 +24,7 @@ const FLAT_EMITTER_RED = preload("uid://dauxox1fd0gtl")
 func _ready() -> void:
 		SigUtils.safe_connect_pairs([
 		[GlobalUIInfo.SIG_dvc_color_value_changed, _on_SIG_dvc_color_value_changed],
+		[GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed],
 	])
 
 
@@ -50,5 +52,25 @@ func _on_SIG_dvc_color_value_changed(payload: Dictionary[String, Variant]):
 	)
 	if _r.err: return
 
-	var new_mat := MatUtils.create_standard_3d(_r.value)
+	var new_mat := MaterialUtils.create_standard_3d(_r.value)
 	_super_mat(long_hair, new_mat, 0)
+
+
+func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
+	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
+		payload,
+		DVS.KeyBValueChanger.WEAR_HAT
+	)
+	if _r.err: return
+
+	_toggle_hat(_r.value)
+
+
+## temporary
+func _toggle_hat(value) -> void:
+	# if rig:
+	# 	rig.super_mats()
+	if fancy_hat:
+		fancy_hat.visible = value
+
+##

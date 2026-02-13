@@ -1,6 +1,6 @@
 @tool
 class_name DVSkeleton
-extends BaseDVCDependentNode3D
+extends DVCSignalEnabledNode3D
 
 
 ## Generates a primitive representation of the skeleton.
@@ -73,7 +73,7 @@ func _create_bone_attachment(bone_idx: int) -> BoneAttachment3D:
 	# Visuals
 	var children_indices: PackedInt32Array = []
 	## dont need connections between the wrist and fingers
-	if bone_idx not in [BoneIdx.LEFT_HAND, BoneIdx.RIGHT_HAND]:
+	if bone_idx not in [BoneIdx.LEFT_HAND_29, BoneIdx.RIGHT_HAND_10]:
 		children_indices = _skeleton.get_bone_children(bone_idx)
 	_add_visuals_to_bone_attachement(bone_idx, attachment, children_indices)
 	
@@ -99,7 +99,7 @@ func _add_visuals_to_bone_attachement(bone_idx: int, attachment: BoneAttachment3
 		# leaf bone
 		var leaf_vector := Vector3.ZERO
 		
-		if bone_idx == BoneIdx.HEAD:
+		if bone_idx == BoneIdx.HEAD_6:
 			# head points UP relative to itself (local y)
 			# approximate len is ~25cm
 			leaf_vector = Vector3(0, 0.25, 0)

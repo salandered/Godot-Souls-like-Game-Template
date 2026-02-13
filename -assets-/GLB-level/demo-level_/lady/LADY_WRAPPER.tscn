@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcg4knuif15xl"]
+[gd_scene load_steps=9 format=3 uid="uid://dcg4knuif15xl"]
 
 [ext_resource type="PackedScene" uid="uid://5t1oe2bcflkr" path="res://-assets-/GLB-level/demo-level_/lady/Lady.glb" id="1_y01nv"]
 [ext_resource type="AudioStream" uid="uid://bi651hoe1ib6p" path="res://-assets-/SFX/sources/400/ambient_wind_for_health_item.wav" id="2_5u74r"]
 [ext_resource type="Shader" uid="uid://7vvgrjyi5te6" path="res://-assets-/materials-shared/_shaders/unsorted/miniature_t1.gdshader" id="3_njer6"]
+[ext_resource type="ArrayMesh" uid="uid://d1vmctg2riaj6" path="res://-assets-/GLB-items/prefabs/water.tres" id="4_mnnsh"]
+[ext_resource type="Material" uid="uid://o6yh6qubjfbx" path="res://-assets-/materials-shared/_baked/wall_trim_column/WallTrim_from_lady_columns_Reimp.tres" id="5_10spf"]
+[ext_resource type="ArrayMesh" uid="uid://wy11o6dy1iwp" path="res://-assets-/GLB-items/prefabs/porta.tres" id="5_bduqb"]
+[ext_resource type="ArrayMesh" uid="uid://b5q0ajt586vbk" path="res://-assets-/GLB-items/prefabs/brock.tres" id="6_xmewj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnnsh"]
 render_priority = 0
@@ -55,12 +59,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 205.85817, -118.33999, 300.27
 layers = 17
 material_override = SubResource("ShaderMaterial_mnnsh")
 cast_shadow = 0
+mesh = ExtResource("4_mnnsh")
+
+[node name="Post_C_3m_001" parent="LADY" index="4"]
+material_override = ExtResource("5_10spf")
+
+[node name="Post_B_Cap_004" parent="LADY/Post_C_3m_001" index="0"]
+material_override = ExtResource("5_10spf")
+
+[node name="Post_B_Cap_005" parent="LADY/Post_C_3m_001" index="1"]
+material_override = ExtResource("5_10spf")
+
+[node name="Post_C_3m" parent="LADY" index="5"]
+material_override = ExtResource("5_10spf")
+
+[node name="Post_B_Cap_007" parent="LADY/Post_C_3m" index="1"]
+material_override = ExtResource("5_10spf")
 
 [node name="Post_C_3m_002" parent="LADY" index="6"]
 layers = 17
+material_override = ExtResource("5_10spf")
+
+[node name="Post_B_Cap" parent="LADY/Post_C_3m_002" index="0"]
+material_override = ExtResource("5_10spf")
 
 [node name="Post_B_Cap_001" parent="LADY/Post_C_3m_002" index="1"]
 layers = 17
+material_override = ExtResource("5_10spf")
 
 [node name="Stair_Post_A" parent="LADY" index="7"]
 cast_shadow = 0
@@ -71,6 +96,10 @@ cast_shadow = 0
 
 [node name="Post_C_3m_003" parent="LADY" index="11"]
 layers = 17
+material_override = ExtResource("5_10spf")
+
+[node name="GuardRail_C_CornerPost_B_001" parent="LADY/lady postament" index="0"]
+material_override = ExtResource("5_10spf")
 
 [node name="Ceiling_Vaulted_B" parent="LADY/lady postament" index="1"]
 layers = 17
@@ -89,6 +118,12 @@ layers = 17
 layers = 17
 cast_shadow = 0
 
+[node name="GuardRail_C_CornerPost_B" parent="LADY/lady postament" index="6"]
+material_override = ExtResource("5_10spf")
+
+[node name="GuardRail_C_CornerPost_B_002" parent="LADY/lady postament" index="7"]
+material_override = ExtResource("5_10spf")
+
 [node name="Ceiling_Vaulted_B_007" parent="LADY/lady postament" index="8"]
 layers = 17
 
@@ -99,7 +134,14 @@ layers = 17
 layers = 17
 
 [node name="Ambulatory_Outer_Roof_A_Side_A_001" parent="LADY/lady postament" index="11"]
+visible = false
 cast_shadow = 0
+
+[node name="Ambulatory_Outer_Roof_A_Side_A_002" parent="LADY/lady postament" index="12"]
+visible = false
+
+[node name="Cube" parent="LADY/lady postament" index="13"]
+material_override = ExtResource("5_10spf")
 
 [node name="Cave_Platform_A" parent="LADY/below solid" index="0"]
 layers = 17
@@ -159,6 +201,7 @@ layers = 17
 [node name="Porta_MaHora_001_0_001" parent="LADY/city" index="5"]
 layers = 17
 cast_shadow = 0
+mesh = ExtResource("5_bduqb")
 
 [node name="Porta_MaHora_001_0_003" parent="LADY/city" index="6"]
 layers = 17
@@ -185,6 +228,7 @@ cast_shadow = 0
 
 [node name="Cylinder_003" parent="LADY/up solid" index="0"]
 layers = 17
+mesh = ExtResource("6_xmewj")
 
 [node name="_Plane_012" parent="LADY/up solid" index="1"]
 layers = 17

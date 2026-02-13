@@ -21,9 +21,3 @@ func _on_color_changed(color_: Color):
 		SPS.dvc_section_field: dv_section,
 		SPS.dvc_key_field: get_dvc_key()
 		})
-
-
-## 
-
-func __LOG_B() -> bool:
-	return true

@@ -106,11 +106,11 @@ func _ready() -> void:
 		input_icon_mapper.joypad_device_changed.connect(_refresh_ui_list_button_content)
 
 
-# This function checks your dictionary for a custom name
 func _get_customized_key_name(original_name: String) -> String:
 	if original_name in custom_key_name_map:
 		return custom_key_name_map[original_name]
 	return original_name
+
 
 func _clear_list() -> void:
 	for child in %ParentBoxContainer.get_children():

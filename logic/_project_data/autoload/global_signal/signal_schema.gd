@@ -38,6 +38,9 @@ const dvc_char_type_field = "dvc_char_type"
 const dvc_dv_type_field = "dvc_dv_type"
 
 
+# combo
+const triggered_state_field = "triggered_state_field"
+
 # meta
 const sig_name_field := "sig_name"
 const sig_with_payload_field := "sig_with_payload"

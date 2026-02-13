@@ -70,7 +70,7 @@ static func create_rigid_body_from_mesh_instance(
 	_apply_physics_config(rigid_body, physics_config)
 	_setup_collision_layers(rigid_body)
 
-	__log_("✓ Rigid body created successfully for:", mesh_instance.name)
+	__log_("Rigid body created successfully for:", mesh_instance.name)
 	return rigid_body
 
 
@@ -112,7 +112,6 @@ static func _create_collision_shape(
 	
 	var collision_shape := CollisionShape3D.new()
 	collision_shape.shape = convex_shape
-	# No offset - collision at origin where mesh is
 	rigid_body.add_child(collision_shape)
 	
 	__log_("  Collision shape created at origin")

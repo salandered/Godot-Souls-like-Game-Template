@@ -1,3 +1,4 @@
+@tool
 class_name InputsMetricGridManager
 extends BaseMetricsGridManager
 
@@ -15,25 +16,22 @@ func get_dvc_op_key() -> DVS.KeyBOverlayPanel:
 	return DVS.KeyBOverlayPanel.PLAYER_INPUT_INFO
 
 
-func _ready_imp() -> void:
-	super._ready_imp()
+func initialise_implementation() -> void:
+	super.initialise_implementation()
 
-	var _r_players := get_tree().get_nodes_in_group(Groups.Chars.PLAYER)
-	if len(_r_players) == 1 and _r_players[0] is Princess:
-		var _pl := _r_players[0] as Princess
+	var _pl := Groups.get_player_by_group(self )
+	if _pl:
 		_player_movement = _pl.get_pl_movement()
 
 
-func _process(delta: float) -> void:
+func _process_implementation(delta: float) -> void:
 	var input := InputManager.get_current_input()
 	
 	_update_input_package_metrics(input, delta)
 
 
 func _update_input_package_metrics(input: InputPackage, delta: float) -> void:
-	if not _metrics_grid: return
 	if not _player_movement: return
-
 
 	_metrics_grid.update_metric("Vector", input.input_direction)
 	_metrics_grid.update_metric("Ver/Hor Strength", Vector2(input.forward_input, input.orbit_input))
@@ -41,7 +39,7 @@ func _update_input_package_metrics(input: InputPackage, delta: float) -> void:
 	# _metrics_grid.update_metric("Vel by Input", vbyi)
 	
 	var apli := _player_movement.get_signed_angle_pl_input(input, delta)
-	_metrics_grid.update_metric("∠(Player,Input)", pp.rad2deg(apli))
+	_metrics_grid.update_metric("∠(Player,Input)", "%5.2f°" % [pp.frad2deg(apli)])
 
 	var strafe = input.detect_strafe_dir()
 	_metrics_grid.update_metric("Strafe Dir", Direction.name_(strafe))

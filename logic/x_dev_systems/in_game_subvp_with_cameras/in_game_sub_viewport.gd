@@ -110,7 +110,8 @@ func set_visible(value: bool):
 ## TOP DOWN CAM
 
 func _process(delta: float) -> void:
-	cam_state_label.text = debug_cool_cam.get_status_text().strip_edges()
+	if debug_cool_cam:
+		cam_state_label.text = debug_cool_cam.get_status_text().strip_edges()
 
 
 func set_cam_target(target: Node3D):

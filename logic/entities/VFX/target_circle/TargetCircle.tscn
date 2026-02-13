@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://carduerw3k1il"]
+[gd_scene load_steps=5 format=3 uid="uid://ocst26s6nlk0"]
 
 [ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/materials-shared/_shaders/target_dot/target_dot.gdshader" id="1_waik0"]
 [ext_resource type="Script" uid="uid://crodcsgmvhjye" path="res://logic/entities/VFX/target_circle/target_circle.gd" id="2_qat87"]

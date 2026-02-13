@@ -3,7 +3,7 @@
 
 @abstract
 class_name BaseDevVisualiseProcess
-extends BaseDVCDependentNode3D
+extends DVCSignalEnabledNode3D
 
 
 @export_group("Working Settings")

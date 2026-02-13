@@ -2,7 +2,7 @@
 @icon("uid://bw1sr77shmixu")
 
 class_name DVFancyCam
-extends Node3DSystem
+extends BaseDVCDependentNode3D
 
 
 var _flying_label: Label3D
@@ -21,7 +21,7 @@ func __soft_dependencies() -> Array:
 	]
 
 
-func _ready() -> void:
+func initialise() -> void:
 	if Engine.is_editor_hint():
 		return
 
@@ -77,7 +77,8 @@ func _on_SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[String, Varia
 	set_enabled(r_toggle.value)
 	
 
-## here not marking input as handled - (several instances)
+## TODO: should be redesigned, right now every camera node has this scrip attached and process inputs
+## -> here not marking input as handled - (several instances)
 func _input(event: InputEvent) -> void:
 	match InputUtils.get_keycode(event):
 		KEY_L:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=0 format=3 uid="uid://1y8q87d5o0mg"]
+[gd_scene format=3 uid="uid://1y8q87d5o0mg"]
 
 [node name="3DOnTopLabel" type="Label3D"]
 transparency = 0.14

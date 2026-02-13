@@ -57,7 +57,7 @@ func __soft_dependencies() -> Array:
 
 
 func initialise_static_char_implementation() -> void:
-	add_to_group(Groups.Chars.BASE_ENEMY_CHARACTER)
+	add_to_group(Groups.Chars.SIMPLE_ENEMY)
 	char_type = DVS.CharacterType.SIMPLE_ENEMY
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL

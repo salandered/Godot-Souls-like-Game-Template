@@ -1,3 +1,4 @@
+@tool
 class_name InputActionsGridManager
 extends BaseMetricsGridManager
 
@@ -11,8 +12,8 @@ func get_dvc_op_key() -> DVS.KeyBOverlayPanel:
 	return DVS.KeyBOverlayPanel.ACTION_INPUT
 
 
-func _ready_imp() -> void:
-	super._ready_imp()
+func initialise_implementation() -> void:
+	super.initialise_implementation()
 
 	var all_actions: Array[StringName] = InputMap.get_actions()
 	
@@ -39,16 +40,14 @@ func _ready_imp() -> void:
 			)
 	
 
-func _process(delta: float) -> void:
+func _process_implementation(delta: float) -> void:
 	_update_action_metrics()
 
 
 func _update_action_metrics() -> void:
-	if not _metrics_grid: return
-	
 	_update_category("Movement", _monitored_move_actions)
 	_update_category("Attack", _monitored_attack_actions)
-	_update_category("Other", _monitored_other_actions)
+	_update_category("All Other", _monitored_other_actions)
 
 
 func _update_category(metric_name: String, _monitored_actions: Array[StringName]):

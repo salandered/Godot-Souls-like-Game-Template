@@ -20,16 +20,14 @@ float noise(vec2 uv) {
 }
 
 void fragment() {
-	// 1. Pixelation
+	// Pixelation
 	// We snap the SCREEN_UV to a grid based on pixel_size
 	vec2 grid_uv = round(SCREEN_UV / SCREEN_PIXEL_SIZE / pixel_size) * SCREEN_PIXEL_SIZE * pixel_size;
 	vec4 col = texture(screen_texture, grid_uv);
 
-	// 2. Color Bit Depth Reduction
 	float max_val = pow(2.0, bits_per_channel) - 1.0;
 	col.rgb = floor(col.rgb * max_val) / max_val;
 
-	// 3. Dithering (Noise)
 	// We use the snapped UVs for noise so the noise looks "big" like the pixels
 	vec3 dither = vec3(
 		noise(grid_uv + TIME),
@@ -38,11 +36,9 @@ void fragment() {
 	);
 	col.rgb += (dither - 0.5) * dither_strength;
 
-	// 4. Color Relaxation (Tint)
+	// Color Relaxation (Tint)
 	col.rgb = mix(col.rgb, relaxation_color, color_relaxation);
 
-	// 5. Simple Bloom
-	// If the pixel is very bright, make it brighter
 	vec3 bloom_mask = step(vec3(bloom_threshold), col.rgb); // 1.0 if bright, 0.0 if not
 	col.rgb += (col.rgb - bloom_threshold) * bloom_intensity * bloom_mask;
 

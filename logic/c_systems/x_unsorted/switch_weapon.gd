@@ -1,5 +1,5 @@
 extends NodeLogger
-class_name WeaponSwitcher
+class_name GestureSpawner
 
 
 var _player: Princess
@@ -8,14 +8,27 @@ var _combat: PlayerCombat
 # hard coded
 var weapon_cycle := Cycler.new([WeaponID.smith_sword, WeaponID.small_pinga_blade], 0)
 
-
 var can_switch: bool = true
+var can_wave: bool = true
 var switch_dur := 0.5
+var wave_dur := 3.0
 var switch_overlay_weight := 0.4
-var switch_bone_mask := BoneMask.get_right_arm_with_spine_and_head()
-var fade_in := 0.1
-var fade_out := 0.20
-var speed_scale := 1.8
+var wave_overlay_weight := 0.9
+
+
+var switch_weapon_overlay_config = OverlayConfig.new(
+		OverlayConfig.Weight.new(switch_overlay_weight, switch_overlay_weight / 2),
+		BlendConfig.new(0.1, 0.20),
+		1.8,
+		BoneMask.get_arm_with_spine_and_head(Side.RIGHT)
+		)
+
+var wave_overlay_config = OverlayConfig.new(
+		OverlayConfig.Weight.new(wave_overlay_weight, wave_overlay_weight),
+		BlendConfig.new(0.6, 0.8),
+		1.2,
+		BoneMask.get_arm_with_upper_chest(Side.LEFT)
+		)
 
 
 func initialise(player_: Princess, combat_: PlayerCombat):
@@ -35,7 +48,7 @@ func switch_weapon() -> void:
 
 	__log_("switch_weapon", weapon_id)
 	can_switch = false
-	_start_switch_overlay()
+	_start_anim_overlay(A.equip.equip, switch_weapon_overlay_config)
 
 	SigUtils.safe_emit(get_player()._sig_container.get_by_sig_id(SignalID.sfx_switch_weapon), {SFXConstants.weapon_id_key: weapon_id})
 
@@ -45,22 +58,32 @@ func switch_weapon() -> void:
 	get_tree().create_timer(switch_dur).timeout.connect(func(): can_switch = true)
 
 
+func wave() -> void:
+	if get_player().is_in_attack_state():
+		return
+	if not can_wave:
+		__log_("wave", "not can_wave")
+		return
+
+	can_wave = false
+	_start_anim_overlay(A.equip.wave, wave_overlay_config)
+
+	get_tree().create_timer(wave_dur).timeout.connect(func(): can_wave = true)
+	SigUtils.safe_emit_raw_no_payload(PlayerStats.SIG_player_waved)
+
+
 func _on_middle_switch(weapon_id: String):
 	__log_("_on_middle_switch")
 	if get_combat():
 		get_combat().activate_weapon(weapon_id, true)
 
 
-func _start_switch_overlay():
-	__log_("_start_switch_overlay")
-	var overlay_config := OverlayConfig.new(
-		OverlayConfig.Weight.new(switch_overlay_weight, switch_overlay_weight / 2),
-		BlendConfig.new(fade_in, fade_out),
-		speed_scale,
-		switch_bone_mask
-		)
+func _start_anim_overlay(anim_id: String, overlay_config: OverlayConfig):
+	__log_("_start_anim_overlay", anim_id)
 
-	get_player().get_animator_manager().set_overlay_anim(A.equip.equip, overlay_config)
+	get_player().get_animator_manager().set_overlay_anim(
+		anim_id,
+		overlay_config)
 
 
 func get_player() -> Princess:
@@ -77,6 +100,10 @@ func _input(event: InputEvent) -> void:
 			switch_weapon()
 		else:
 			SigUtils.safe_emit(get_player().switch_weapon_cant_be_done, {})
+	if InputUtils.is_keycode_w_ctrl(event, KEY_G):
+		if get_player():
+			wave()
+			InputUtils.mark_input_handled(self )
 
 	## DEV			
 	# switch_overlay_weight = InputUtils._dev_change_t12_param(event, switch_overlay_weight, "switch_overlay_weight", 0.05)
@@ -92,10 +119,6 @@ func _input(event: InputEvent) -> void:
 # 	BoneMask.get_right_arm_with_spine_and_head(),
 # 	BoneMask.get_right_arm_with_spine_and_left_shoulder(),
 # 	])
-
-
-func pp_name() -> String:
-	return "⚔️⇆"
 
 
 func __LOG_B() -> bool:

@@ -1,6 +1,7 @@
 extends BasePHEComposite
 class_name SimpleCombat
 
+
 func get_supported_substates() -> Array[String]:
 	return [SITSKS.Leaf.sit_attack]
 

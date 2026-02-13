@@ -15,7 +15,7 @@ const EPSILON_7: float = 1e-7
 const EPSILON_9: float = 1e-9
 
 
-const BONE_COUNT = 53
+const BONE_COUNT_53 = 53
 
 ## always for any character
 const GENERAL_SKELETON: String = "GeneralSkeleton"

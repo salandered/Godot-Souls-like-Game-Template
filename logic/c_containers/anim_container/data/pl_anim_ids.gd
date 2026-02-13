@@ -130,6 +130,7 @@ class fall_stand_up:
 
 class equip:
 	const equip := _lib.testing + "EP-p1-O-idle-equip"
+	const wave := _lib.testing + "Waving_hands_ok"
 
 # later
 # const roll := _lib.jump_v4 + "RM-Sprint-to-Roll" # _OS_fight + "OS-evade-forward" # todo

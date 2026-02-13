@@ -6,7 +6,7 @@ extends NodeCharacterSystem
 ## DOCS
 # region
 # - what we call 'move' is officially called 'translate' i suppose
-#   'move' might be seen too abstract but it is used as well (like in Blender3D G key)
+#   'move' might be seen too abstract but it is used as well (like in Blender3D 'G' key)
 # - 'rotate' for rotating the character.
 # endregion
 
@@ -38,6 +38,10 @@ func get_area_awareness() -> BaseAreaAwareness:
 
 ## GETTERS
 # region
+
+
+func get_curr_velocity() -> Vector3:
+	return get_character().velocity
 
 
 func get_curr_velocity_len() -> float:

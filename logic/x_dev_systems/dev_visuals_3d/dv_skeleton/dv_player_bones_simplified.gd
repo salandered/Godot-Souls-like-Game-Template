@@ -1,4 +1,5 @@
-extends Node3D
+@tool
+extends Node3DSystem
 
 ## TODO: should be deleted in favor of DVSkeleton
 ## (DVSkeleton would need some new features)
@@ -6,7 +7,7 @@ extends Node3D
 var _bone_attachments: Array[BoneAttachment3D]
 
 
-func _ready() -> void:
+func initialise() -> void:
 	visible = false
 	await FrameUtils.wait_process_frames(4)
 

@@ -21,7 +21,6 @@ func switch_from_free(found_target: Node):
 	
 	var cam_minus_pivot := fc.camera.global_position - fc.pivot.global_position
 	var err := (cam_minus_pivot - lock_boom).length()
-	# __log_("[~~ lock: err_to_boom_on_entry=", err)
 	
 	# store the initial conditions. The blend will always be from this
 	# fixed start-point to the moving end-point.
@@ -34,11 +33,8 @@ func switch_from_free(found_target: Node):
 
 	blend_timer.initialise(BLEND_DURATION)
 	
-	# __log_("switch post", fc.__dbg_main_info(), "target=", target)
-
 
 func update(delta: float) -> void:
-	# __log_("UPD", fc.__dbg_main_info())
 	# move the anchor points
 	_move_aim()
 	_move_camera_pivot()
@@ -53,8 +49,6 @@ func update(delta: float) -> void:
 	# TODO TODO: return check_distance
 	# TODO: not only distance, but line of sight? 
 	# 		what if enemy falls, we are doomed to look at floor
-
-	# __log_("UPD post", fc.__Cvec(), fc.__CM(), fc.__CF())
 
 
 func _move_aim() -> void:
@@ -85,7 +79,7 @@ func _rotate_boom_locked(delta: float) -> void:
 		# --- SMOOTH BLEND (YAW INTERPOLATION) ---
 		blend_timer.update(delta)
 		var t_linear := clampf(blend_timer.get_elapsed() / blend_timer.duration, 0.0, 1.0)
-		var t_eased := u.ease_in_out(t_linear)
+		var t_eased := MathUtil.ease_in_out(t_linear)
 
 		# get the target angle
 		var desired_yaw_rad := desired_dir_xz.angle()
@@ -98,10 +92,9 @@ func _rotate_boom_locked(delta: float) -> void:
 		var final_xz := Vector2.from_angle(blended_yaw_rad) * blend_start_hor_len
 		lock_boom.x = final_xz.x
 		lock_boom.z = final_xz.y
-		# __log_("~~ LOCK BLEND FINISHED")
 	else:
 		# --- RESPONSIVE LOCK (DIRECT ASSIGNMENT) ---
-		# After blending, snap directly to the desired orientation for control
+		# after blending, snap to the desired orientation for control
 		var current_hor_len := Vector2(lock_boom.x, lock_boom.z).length()
 		
 		# against a zero length if camera is perfectly vertical

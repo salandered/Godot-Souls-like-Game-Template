@@ -56,14 +56,12 @@ void fragment() {
 
 	// --- COLOR COMPOSITION ---
 	
-	// 1. The Hole (Gradient instead of Hard Cut)
 	// Calculates how close we are to the "Event Horizon"
 	float hole_factor = smoothstep(black_hole_radius - edge_softness, black_hole_radius, dist);
 	
 	// Mix between the inner void color and the background
 	vec3 final_color = mix(inner_color, bg_color, hole_factor);
 	
-	// 2. The Accretion Ring (Glowing Edge)
 	// Creates a thin band of light exactly at the radius
 	float ring_dist = abs(dist - black_hole_radius);
 	float ring_glow = 1.0 - smoothstep(0.0, ring_width, ring_dist);

@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=4 uid="uid://2fkusxxaosoj"]
+[gd_scene load_steps=18 format=4 uid="uid://bpcjpa0k1hem2"]
 
-[ext_resource type="Script" uid="uid://cq82lrp4tvgpj" path="res://logic/entities/VFX/puff/_experimental/puff_fog_gpu.gd" id="1_u4dik"]
+[ext_resource type="Script" path="res://logic/entities/VFX/puff/_experimental/puff_fog_gpu.gd" id="1_u4dik"]
 [ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/_shaders/puff/SmokePuff.png" id="2_3e0mr"]
 [ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://-assets-/materials-shared/_shaders/puff/SmokePuffNormals.png" id="3_u4dik"]
 [ext_resource type="Gradient" uid="uid://cmx4ke4lo4gko" path="res://logic/entities/VFX/puff/color_ramp_fog_puff.tres" id="4_3e0mr"]
@@ -9,7 +9,7 @@
 [ext_resource type="Curve" uid="uid://d4lspe1f15lx3" path="res://logic/entities/VFX/puff/scale_curve_puff_fog.tres" id="5_u4dik"]
 [ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="6_kld3g"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4dik"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2867w"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_3e0mr")
@@ -131,7 +131,7 @@ shadow_enabled = true
 
 [node name="PuffFogParticles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_u4dik")
+material_override = SubResource("StandardMaterial3D_2867w")
 cast_shadow = 0
 gi_mode = 0
 amount = 10

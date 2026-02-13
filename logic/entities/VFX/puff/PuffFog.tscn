@@ -9,7 +9,7 @@
 [ext_resource type="Gradient" uid="uid://cmx4ke4lo4gko" path="res://logic/entities/VFX/puff/color_ramp_fog_puff.tres" id="4_bx3y5"]
 [ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="4_wcto4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ako0d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83p6s"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_tiixx")
@@ -110,7 +110,7 @@ particles_amount = 6
 
 [node name="PuffFogParticles" type="CPUParticles3D" parent="."]
 unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_ako0d")
+material_override = SubResource("StandardMaterial3D_83p6s")
 cast_shadow = 0
 gi_mode = 0
 amount = 6

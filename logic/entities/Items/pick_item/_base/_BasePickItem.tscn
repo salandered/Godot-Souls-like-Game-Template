@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbcvsan1ldffm"]
+[gd_scene load_steps=15 format=3 uid="uid://b3xuohw6w5pf"]
 
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="1_c8rud"]
-[ext_resource type="Script" uid="uid://bwju7ueo1tpj6" path="res://logic/entities/Items/pick_item/_base/_generic_pick_item.gd" id="1_xh13q"]
+[ext_resource type="Script" path="res://logic/entities/Items/pick_item/_base/_generic_pick_item.gd" id="1_xh13q"]
 [ext_resource type="AudioStream" uid="uid://ddwk042630d60" path="res://-assets-/SFX/sources/WAV round/Collect_Small_Jewel_1.wav" id="2_lbk6k"]
 [ext_resource type="AudioStream" uid="uid://2lshg3pvt5sy" path="res://-assets-/SFX/sources/400/light_match.wav" id="3_6ute5"]
 [ext_resource type="AudioStream" uid="uid://dffde4yp0h8uv" path="res://-assets-/SFX/sources/400/whoosh_1.wav" id="4_10lsv"]
@@ -227,7 +227,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.26666668, 0.5),
 "transitions": PackedFloat32Array(4.924576, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.24, 0), Vector3(0, 0.28, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0.4, 0), Vector3(0, 0.45, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false

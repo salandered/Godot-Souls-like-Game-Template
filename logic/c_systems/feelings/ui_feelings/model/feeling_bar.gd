@@ -22,7 +22,7 @@ extends RefCountedLogger
 ##    - Layout > Custom Min Size:   x: [INITIAL_WIDTH] (e.g., 300), y: 0
 ## 	 * NOTE: This sets the visual width in Editor. Code logic uses this to calculate ratio.
 ##    - Layout > Container Sizing:  Horizontal: Shrink Begin
-##    - Theme Overrides > Constants: 0 (unless you want padding)
+##    - Theme Overrides > Constants: 0 
 ##
 ## 3. THE BARS (Back, Ghost, Main - TextureProgressBar)
 ##    - Layout > Custom Min Size:   x: 0, y: [HEIGHT] (e.g., 25)

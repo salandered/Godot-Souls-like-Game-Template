@@ -18,17 +18,17 @@ void fragment() {
 	float node_alpha = COLOR.a;
 	float current_time = TIME + time_offset;
 
-	// 1. Calculate Shake / Distorted UV
+	// Calculate Shake / Distorted UV
 	float offset_x = sin(current_time * shake_speed + UV.y * 20.0) * shake_power;
 	vec2 distorted_uv = vec2(UV.x + offset_x, UV.y);
 	
-	// 2. Sample Texture
+	// Sample Texture
 	vec4 tex_color = texture(TEXTURE, distorted_uv);
 	
-	// 3. Apply Modulation
+	// Apply Modulation
 	vec4 final_color = tex_color * modulation_color;
 
-	// 4. Apply Shine (If enabled)
+	// Apply Shine (If enabled)
 	if (enable_shine) {
 		// Calculate the sweep position based on time
 		float shine_pos = mod(current_time * shine_speed, shine_frequency);
@@ -44,7 +44,7 @@ void fragment() {
 		final_color.rgb = mix(final_color.rgb, vec3(1.0), shine * 0.5 * final_color.a);
 	}
 	
-	// 5. Apply Node Transparency
+	// Transparency
 	final_color.a *= node_alpha;
 	
 	COLOR = final_color;

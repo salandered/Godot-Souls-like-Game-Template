@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy4uw7foh8qlh"]
+[gd_scene load_steps=2 format=3 uid="uid://bc4l4h2cvh2ws"]
 
 [ext_resource type="Script" uid="uid://tm07dvd0564d" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/dev_visuals_char_hitboxes.gd" id="1_aukyj"]
 

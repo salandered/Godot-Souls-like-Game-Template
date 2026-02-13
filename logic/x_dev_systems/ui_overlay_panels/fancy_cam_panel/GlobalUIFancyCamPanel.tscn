@@ -1,13 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn2fgny8wh1e"]
+[gd_scene load_steps=10 format=3 uid="uid://dn2fgny8wh1e"]
 
 [ext_resource type="Script" uid="uid://dl0gauwff0buf" path="res://logic/x_dev_systems/ui_overlay_panels/fancy_cam_panel/global_ui_fancy_cam_panel.gd" id="1_bhnft"]
-[ext_resource type="Script" uid="uid://cbvo5ekasv1w0" path="res://logic/x_dev_systems/ui_overlay_panels/fancy_cam_panel/fancy_cam_panel_manager.gd" id="1_t54kf"]
-[ext_resource type="StyleBox" uid="uid://fef8epnxc7lj" path="res://-assets-/ui_assets/themes/panel/less_blood_panel.tres" id="2_bhnft"]
-[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="3_kgmie"]
+[ext_resource type="Script" uid="uid://cbvo5ekasv1w0" path="res://logic/x_dev_systems/overlay_panel_manager/fancy_cam_panel_manager.gd" id="1_t54kf"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_qqiq0"]
 [ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="5_g1iam"]
 [ext_resource type="Script" uid="uid://cy3bheil2tslv" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/camera_metrics_grid_manager.gd" id="6_8rp1y"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="7_kgmie"]
+[ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="7_x2irt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifxon"]
+bg_color = Color(0.08100001, 0.27, 0.10620003, 0.2784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.072000004, 0.2, 0.14026666, 0.4509804)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2irt"]
+bg_color = Color(0.08325399, 0.26918554, 0.19623828, 0.40784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.072000004, 0.2, 0.14026666, 0.4509804)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="GlobalUIFancyCamPanel" type="MarginContainer"]
 size_flags_horizontal = 0
@@ -36,14 +61,15 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_bhnft")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifxon")
 
 [node name="__m" type="MarginContainer" parent="VBoxContainer/ControlsInfoPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
 [node name="DebugFancyCamInfoPanel" type="RichTextLabel" parent="VBoxContainer/ControlsInfoPanel/__m"]
@@ -70,7 +96,7 @@ layout_mode = 2
 
 [node name="__panel" type="PanelContainer" parent="VBoxContainer/CameraMetricsPanel"]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("3_kgmie")
+theme_override_styles/panel = SubResource("StyleBoxFlat_x2irt")
 
 [node name="__m" type="MarginContainer" parent="VBoxContainer/CameraMetricsPanel/__panel"]
 layout_mode = 2
@@ -86,13 +112,12 @@ layout_mode = 2
 modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_kgmie")
+theme_override_font_sizes/font_size = 22
 text = "Camera metrics"
 
 [node name="HSeparator" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" instance=ExtResource("4_qqiq0")]
 layout_mode = 2
 
-[node name="CameraMetricsGrid" type="GridContainer" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v"]
+[node name="CameraMetricsGrid" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" instance=ExtResource("7_x2irt")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 8
-columns = 2

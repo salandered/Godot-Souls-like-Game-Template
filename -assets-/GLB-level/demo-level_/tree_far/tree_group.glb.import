@@ -42,11 +42,11 @@ _subresources={
 "I_Concrete Old": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://-assets-/materials-shared/concrete/I_concrete_old/I_Concrete Old_Reimp.tres",
-"use_external/path": "uid://cbwntc6i15rod"
+"use_external/path": "uid://b6l2nmwnlvsor"
 },
 "P Dark_Grey": {
 "use_external/enabled": true,
-"use_external/fallback_path": "",
+"use_external/fallback_path": "res://-assets-/materials-shared/solid/P/P Dark_Grey_Reimp.tres",
 "use_external/path": "uid://b5rwp58jklpas"
 },
 "bark_debris_01": {
