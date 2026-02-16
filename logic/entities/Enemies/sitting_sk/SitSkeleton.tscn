@@ -1,7 +1,7 @@
 [gd_scene load_steps=85 format=3 uid="uid://dbo7xvsas7guf"]
 
 [ext_resource type="Script" uid="uid://57vtgcu2lmtb" path="res://logic/c_systems/character/sitsk_char.gd" id="1_5orxr"]
-[ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/x_unsorted/coll_collider.gd" id="2_b1jdg"]
+[ext_resource type="Script" uid="uid://u2ifm4auvm52" path="res://logic/c_systems/x_unsorted/char_coll_collider.gd" id="2_ln6ww"]
 [ext_resource type="Script" uid="uid://0c3j8t0i4rro" path="res://logic/c_systems/feelings/ui_feelings/phe_ui_feelings.gd" id="3_k5uww"]
 [ext_resource type="Script" uid="uid://fej6gy4eqqqs" path="res://logic/c_systems/combat/phe_combat.gd" id="4_b77gp"]
 [ext_resource type="Script" uid="uid://dcvvfybefeuwd" path="res://logic/c_systems/feelings/phe_feelings.gd" id="5_jf654"]
@@ -146,7 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85550225, 0)
 shape = SubResource("CapsuleShape3D_0tisx")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 debug_fill = false
-script = ExtResource("2_b1jdg")
+script = ExtResource("2_ln6ww")
 
 [node name="UI" type="Node" parent="."]
 
@@ -294,7 +294,7 @@ top_level = false
 visible = true
 visibility_parent = NodePath("")
 active = true
-influence = 1.0
+influence = 0.9
 script = ExtResource("9_0xvj4")
 
 [node name="LookAtHeadModifier3D" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton" index="11" instance=ExtResource("10_0beb3")]
@@ -312,10 +312,12 @@ min_duration = 8.0
 max_duration = 30.0
 proximity_threshold = 2.0
 
-[node name="VOSN" type="VisibleOnScreenNotifier3D" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013/GeneralSkeleton/LookAtHeadModifier3D/LookAtManager"]
+[node name="TestHeadLook" type="CSGSphere3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980343, 0)
-aabb = AABB(-0.5667796, -0.41363484, -0.43542248, 0.8718404, 0.8272697, 0.87084496)
+transform = Transform3D(0.39053, 0, 0, 0, 0.39053, 0, 0, 0, 0.39053, -0.3310008, 1.1839988, 1.338)
+material_override = ExtResource("12_rhvh1")
+smooth_faces = false
+script = ExtResource("13_2r3bc")
 
 [node name="AnimatorManager" type="Node" parent="." node_paths=PackedStringArray("config", "general_skeleton", "overlay_modifier")]
 unique_name_in_owner = true
@@ -624,13 +626,6 @@ visible = false
 color_invincible = Color(0.7751513, 0.19614956, 0.8054897, 0.2509804)
 combat = NodePath("../../Combat")
 _char_type = 2
-
-[node name="TestHeadLook" type="CSGSphere3D" parent="__dev"]
-unique_name_in_owner = true
-transform = Transform3D(0.39053, 0, 0, 0, 0.39053, 0, 0, 0, 0.39053, -1.0420012, 0.9849988, 0.4629999)
-material_override = ExtResource("12_rhvh1")
-smooth_faces = false
-script = ExtResource("13_2r3bc")
 
 [node name="DVSkeleton" parent="__dev" node_paths=PackedStringArray("_skeleton") instance=ExtResource("67_iq0hr")]
 visible = false

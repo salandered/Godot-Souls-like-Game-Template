@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=4 uid="uid://bm5vqmonl5jl4"]
+[gd_scene load_steps=118 format=4 uid="uid://bm5vqmonl5jl4"]
 
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/c_systems/level/demo_level.gd" id="1_skc02"]
 [ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/c_systems/weather_system/weather.gd" id="2_cfi4c"]
@@ -10,9 +10,11 @@
 [ext_resource type="Script" uid="uid://c1n8jqoagewpu" path="res://logic/c_systems/weather_system/weather_system.gd" id="4_58tqt"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://logic/ui/pause_menu/m_pause_menu.tscn" id="4_cxdwc"]
 [ext_resource type="AudioStream" uid="uid://ccekjehf2plqo" path="res://-assets-/music/back/back_together.mp3" id="4_e70k6"]
+[ext_resource type="PackedScene" uid="uid://rqlyc5qjitju" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/DVArea3DShapes.tscn" id="5_4ckfe"]
 [ext_resource type="PackedScene" uid="uid://b7mftvb3txlfn" path="res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/wooden_balcony_WRAPPED.tscn" id="5_cxdwc"]
 [ext_resource type="Script" uid="uid://blo5xcfvelvlt" path="res://logic/c_systems/weather_system/weather_change_area.gd" id="6_cxdwc"]
 [ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://-assets-/GLB-level/demo-level_/lady/LADY_WRAPPER.tscn" id="6_dpd55"]
+[ext_resource type="PackedScene" uid="uid://cl4hklj8yd2ns" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/DVCharColliders.tscn" id="6_n5anv"]
 [ext_resource type="Shader" uid="uid://bk6avam5bgjd7" path="res://-assets-/materials-shared/_shaders/sun/sun_shader.gdshader" id="7_ic71h"]
 [ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/demo-level_/tower/TOWER_WRAPPER.tscn" id="8_50a4s"]
 [ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/VFX/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
@@ -221,7 +223,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pijfo")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ncli4"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ckfe"]
 radius = 2.0
 height = 4.0
 
@@ -300,7 +302,7 @@ normal_enabled = true
 normal_texture = ExtResource("51_rqhon")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgsig"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n5anv"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
 density = 0.2
@@ -324,6 +326,14 @@ first_track_to_play_idx = 0
 music_volume_db = -3.0
 is_background_music = true
 initialise_dv = true
+
+[node name="__dev" type="Node3D" parent="."]
+
+[node name="DVArea3DShapes" parent="__dev" node_paths=PackedStringArray("level") instance=ExtResource("5_4ckfe")]
+level = NodePath("../..")
+
+[node name="DVCharColliders" parent="__dev" node_paths=PackedStringArray("level") instance=ExtResource("6_n5anv")]
+level = NodePath("../..")
 
 [node name="Weather" type="Node3D" parent="."]
 script = ExtResource("2_cfi4c")
@@ -756,7 +766,7 @@ transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56
 player = NodePath("../../../Princess")
 
 [node name="MechFighter" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("34_skk2x")]
-transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -46.728897, 12.989326, 38.806297)
+transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -46.728897, 13.04582, 38.806297)
 
 [node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_w0ai3")]
 transform = Transform3D(1, 0, 0, 0, 0.95444363, -0.2983912, 0, 0.2983912, 0.95444363, -19.973879, 0.91030014, 11.343478)
@@ -854,7 +864,7 @@ area_capsule_radius = 4.0
 area_capsule_height = 4.0
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0"]
-shape = SubResource("CapsuleShape3D_ncli4")
+shape = SubResource("CapsuleShape3D_4ckfe")
 
 [node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("21_w0ai3")]
 transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
@@ -1085,7 +1095,7 @@ material_override = ExtResource("48_y0kr0")
 material_override = SubResource("StandardMaterial3D_ktdwm")
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" index="0"]
-shape = SubResource("CapsuleShape3D_jgsig")
+shape = SubResource("CapsuleShape3D_n5anv")
 
 [node name="SimpleTarget2" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.045063, 0.5982324, 36.92067)
@@ -1108,10 +1118,10 @@ label_text = "developers only!"
 
 [node name="PHEnemy" parent="Lincoln_ALL" node_paths=PackedStringArray("player") instance=ExtResource("56_ohlvg")]
 transform = Transform3D(0.5499125, 0, -0.8352225, 0, 1, 0, 0.8352225, 0, 0.5499125, -32.080185, 0.7032569, 24.603071)
-dev_tag = "demo_enemy"
 show_ui_feelings = true
 float_ui_feelings = true
 player = NodePath("../../Princess")
+dev_tag = "demo_enemy"
 
 [node name="SpeedIncreaseChest" parent="Lincoln_ALL" instance=ExtResource("21_i3y2i")]
 transform = Transform3D(1, 0, 0, 0, 0.9679945, 0.25097135, 0, -0.25097135, 0.9679945, -26.175722, 11.796641, 1.0264926)

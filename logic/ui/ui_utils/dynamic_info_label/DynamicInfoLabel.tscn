@@ -5,7 +5,7 @@
 
 [sub_resource type="Gradient" id="Gradient_8drye"]
 offsets = PackedFloat32Array(0, 0.46349207, 1)
-colors = PackedColorArray(0.1469897, 0.1469897, 0.1469897, 0, 0.23760001, 0.24570002, 0.27, 0.49803922, 0.23046657, 0.24627614, 0.28955156, 0.56078434)
+colors = PackedColorArray(0.1469897, 0.1469897, 0.1469897, 0, 0.23760001, 0.24570002, 0.27, 0.5921569, 0.232, 0.24746665, 0.29, 0.6862745)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_tg2sl"]
 gradient = SubResource("Gradient_8drye")
@@ -28,8 +28,8 @@ offset_bottom = 89.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_mvehj")
-title_font_size = 22
-font_size = 26
+title_font_size = 24
+font_size = 28
 
 [node name="PanelGradient" type="PanelContainer" parent="."]
 unique_name_in_owner = true
@@ -60,9 +60,9 @@ unique_name_in_owner = true
 modulate = Color(0.67650515, 0.67650515, 0.67650515, 1)
 clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 22
-theme_override_font_sizes/bold_font_size = 22
-theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
 bbcode_enabled = true
 text = "[b]State[/b]"
 fit_content = true
@@ -83,9 +83,9 @@ modulate = Color(0.7715464, 0.7715464, 0.7715464, 1)
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/normal_font_size = 21
-theme_override_font_sizes/bold_font_size = 21
-theme_override_font_sizes/italics_font_size = 21
+theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/bold_font_size = 23
+theme_override_font_sizes/italics_font_size = 23
 bbcode_enabled = true
 text = "[b][/b]"
 fit_content = true
@@ -112,9 +112,9 @@ clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 26
-theme_override_font_sizes/bold_font_size = 26
-theme_override_font_sizes/italics_font_size = 26
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
 bbcode_enabled = true
 text = "something"
 fit_content = true

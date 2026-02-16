@@ -66,6 +66,7 @@ func initialise() -> void:
 
 
 func set_enabled(value: bool):
+	__log_("set_enabled", value)
 	visible = value
 
 

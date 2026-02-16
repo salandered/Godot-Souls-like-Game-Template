@@ -18,8 +18,8 @@ extends BaseLookAtManager
 @export var proximity_threshold: float = 2.5
 
 
-@onready var vosn: VisibleOnScreenNotifier3D = %VOSN
-
+# @onready var vosn: VisibleOnScreenNotifier3D = %VOSN
+var vosn = null # WARNING: temporary
 
 enum InitialMode {
 	RANDOM,
@@ -53,7 +53,7 @@ func __hard_dependencies() -> Array:
 
 func __soft_dependencies() -> Array:
 	return [
-		vosn,
+		# vosn,
 	]
 
 func __hard_validation() -> bool:

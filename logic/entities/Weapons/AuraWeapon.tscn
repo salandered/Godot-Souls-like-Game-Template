@@ -29,11 +29,12 @@ debug_fill = false
 
 [node name="DVWeaponHurtBox" parent="WeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("3_iwwxc")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
-color_passive = Color(0.57, 0.4218, 0.43661997, 0.4)
+visible = false
+color_passive = Color(0.57, 0.4218, 0.43661997, 0.11764706)
 color_attacking = Color(0.83, 0.21579999, 0.27721995, 0.8)
 weapon = NodePath("../..")
-shader_transparency = 0.05
-shader_line_transparency = 0.6
+shader_transparency = 0.02
+shader_line_transparency = 0.25
 _char_type = 2
 
 [node name="WeaponSFXParent" type="Node3D" parent="."]

@@ -1,25 +1,21 @@
 @tool
 extends EditorScript
 
-# --- CONFIGURATION ---
-const ROOT_DIR = "res://-assets-/materials-shared/" # or specific folder like "res://assets/"
+const ROOT_DIR = "res://-assets-/materials-shared/"
 const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "tga", "bmp", "webp"]
 const IGNORE_WORDS = ["pixel", "pixpal", "lut"]
 
-# Toggle the "Heavy" pixel analysis (loading actual images to check alpha usage)
-## WARNING: not sure this works
+## WARNING: not sure this works, also it's heavy
 const ENABLE_PIXEL_ANALYSIS = false
 
-# Godot Import Modes
 const IMPORT_MODE_LOSSLESS = 0
 
-# --- STATS ---
 var count_scanned := 0
 var count_import_issues := 0 # Lossless or No Mipmaps
 var count_pixel_issues := 0 # Unused Alpha (RGBA -> RGB opportunity)
 
+
 func _run() -> void:
-	# Reset stats
 	count_scanned = 0
 	count_import_issues = 0
 	count_pixel_issues = 0
@@ -53,10 +49,9 @@ func _scan_folder_recursive(path: String) -> void:
 		var full_path := path.path_join(file_name)
 
 		if dir.current_is_dir():
-			# RECURSION: Dive into subfolders
 			_scan_folder_recursive(full_path)
 		else:
-			# FILE CHECK
+			# file check
 			var ext := file_name.get_extension().to_lower()
 			if ext in IMAGE_EXTENSIONS:
 				if _should_ignore(file_name):
@@ -77,14 +72,12 @@ func _should_ignore(file_name: String) -> bool:
 func _analyze_texture(file_path: String, file_name: String) -> void:
 	count_scanned += 1
 	
-	# --- IMPORT SETTINGS AUDIT (Fast) ---
 	# Checks .import file for "Lossless" or "No Mipmaps"
 	var import_issue_found := _audit_import_settings(file_path, file_name)
 	if import_issue_found:
 		count_import_issues += 1
 		
-	# --- PIXEL ANALYSIS (Slower, Optional) ---
-	# Loads image to check if RGBA is actually using transparency
+	# Loads image to check if RGBA is using transparency
 	if ENABLE_PIXEL_ANALYSIS:
 		var pixel_issue_found := _audit_pixel_format(file_path, file_name)
 		if pixel_issue_found:
@@ -100,7 +93,6 @@ func _audit_import_settings(file_path: String, file_name: String) -> bool:
 	var err := config.load(import_path)
 	if err != OK: return false
 
-	# Ensure it's a Texture
 	var type = config.get_value("remap", "type", "")
 	if type != "Texture2D": return false
 
@@ -122,7 +114,6 @@ func _audit_import_settings(file_path: String, file_name: String) -> bool:
 
 
 func _audit_pixel_format(file_path: String, file_name: String) -> bool:
-	# Load actual texture data
 	var texture = load(file_path) as Texture2D
 	if not texture: return false
 	

@@ -27,69 +27,6 @@ static func create_generic_cylinder(
 	return mi
 
 
-## cylinder mesh between two points
-static func place_cylinder_between(cylinder: MeshInstance3D, pos_a: Vector3, pos_b: Vector3, color: Color) -> void:
-	if pos_a.is_equal_approx(pos_b):
-		cylinder.visible = false
-		return
-
-	# resets scale: ensures xz (thickness) return to the original mesh radius
-	cylinder.scale = Vector3.ONE
-
-	# position at midpoint
-	cylinder.global_position = (pos_a + pos_b) / 2.0
-	
-	# rotation
-	var up_vec := Vector3.UP
-	if abs(pos_a.direction_to(pos_b).dot(Vector3.UP)) > 0.99:
-		up_vec = Vector3.RIGHT
-	
-	u.safe_look_at(cylinder, pos_b, up_vec)
-	
-	# correction for Y-up cylinder geometry to point along Z-forward vector
-	cylinder.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
-
-	# scale: modify y (length). xz remain 1.0 (constant thickness)
-	cylinder.scale.y = pos_a.distance_to(pos_b)
-	
-	var mat := cylinder.material_override as StandardMaterial3D
-	if mat:
-		color.a = 1.0
-		mat.albedo_color = color
-
-	cylinder.visible = true
-
-
-static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
-	var mesh: PrimitiveMesh = null
-	
-	if shape is BoxShape3D:
-		mesh = BoxMesh.new()
-		mesh.size = shape.size
-	elif shape is SphereShape3D:
-		mesh = SphereMesh.new()
-		mesh.radius = shape.radius
-		mesh.height = shape.radius * 2
-	elif shape is CapsuleShape3D:
-		mesh = CapsuleMesh.new()
-		mesh.radius = shape.radius
-		mesh.height = shape.height
-	elif shape is CylinderShape3D:
-		mesh = CylinderMesh.new()
-		mesh.top_radius = shape.radius
-		mesh.bottom_radius = shape.radius
-		mesh.height = shape.height
-	else:
-		__log_warn("shape3d is not supported", "", "", shape)
-	
-	if mesh:
-		var node = MeshInstance3D.new()
-		node.mesh = mesh
-		return node
-		
-	return null
-
-
 static func create_simple_sphere(
 	radius: float = 0.5,
 	color: Color = Color.ORANGE_RED,
@@ -176,6 +113,39 @@ static func draw_temporary_sphere(
 		tween.tween_callback(mi.queue_free)
 
 
+## cylinder mesh between two points
+static func place_cylinder_between(cylinder: MeshInstance3D, pos_a: Vector3, pos_b: Vector3, color: Color) -> void:
+	if pos_a.is_equal_approx(pos_b):
+		cylinder.visible = false
+		return
+
+	# resets scale: ensures xz (thickness) return to the original mesh radius
+	cylinder.scale = Vector3.ONE
+
+	# position at midpoint
+	cylinder.global_position = (pos_a + pos_b) / 2.0
+	
+	# rotation
+	var up_vec := Vector3.UP
+	if abs(pos_a.direction_to(pos_b).dot(Vector3.UP)) > 0.99:
+		up_vec = Vector3.RIGHT
+	
+	u.safe_look_at(cylinder, pos_b, up_vec)
+	
+	# correction for Y-up cylinder geometry to point along Z-forward vector
+	cylinder.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
+
+	# scale: modify y (length). xz remain 1.0 (constant thickness)
+	cylinder.scale.y = pos_a.distance_to(pos_b)
+	
+	var mat := cylinder.material_override as StandardMaterial3D
+	if mat:
+		color.a = 1.0
+		mat.albedo_color = color
+
+	cylinder.visible = true
+
+
 ## cylinder connecting 'from' to 'to' (Local Space).
 static func create_bone_like_connector(
 	from: Vector3,
@@ -217,6 +187,36 @@ static func create_bone_like_connector(
 		
 	return mi
 		
+
+static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
+	var mesh: PrimitiveMesh = null
+	
+	if shape is BoxShape3D:
+		mesh = BoxMesh.new()
+		mesh.size = shape.size
+	elif shape is SphereShape3D:
+		mesh = SphereMesh.new()
+		mesh.radius = shape.radius
+		mesh.height = shape.radius * 2
+	elif shape is CapsuleShape3D:
+		mesh = CapsuleMesh.new()
+		mesh.radius = shape.radius
+		mesh.height = shape.height
+	elif shape is CylinderShape3D:
+		mesh = CylinderMesh.new()
+		mesh.top_radius = shape.radius
+		mesh.bottom_radius = shape.radius
+		mesh.height = shape.height
+	else:
+		__log_warn("shape3d is not supported", "", "", shape)
+	
+	if mesh:
+		var node = MeshInstance3D.new()
+		node.mesh = mesh
+		return node
+		
+	return null
+
 
 # region: __LOGS
 

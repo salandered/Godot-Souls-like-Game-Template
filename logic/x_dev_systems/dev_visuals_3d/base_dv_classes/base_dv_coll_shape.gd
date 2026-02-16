@@ -1,7 +1,7 @@
 @tool
 
 @abstract
-class_name VisualiseCollShapes
+class_name BaseDVCollShapesProcess
 extends BaseDevVisualiseProcess
 
 
@@ -23,28 +23,23 @@ extends BaseDevVisualiseProcess
 var _generated_nodes: Array[MeshInstance3D] = []
 var _shared_material: Material
 
-const WIRE_FRAME_MAT = preload("uid://c0ppm6u2ki7fp")
-
 
 func _initialise_implementation_in_game() -> void:
 	super._initialise_implementation_in_game()
 	
 	_initialise_shapes()
 
-	# __log_("initialise_implementation_in_game", "START")
-	if use_default_wireframe_mat and WIRE_FRAME_MAT is ShaderMaterial:
+	if use_default_wireframe_mat:
 		_shared_material_as_default_mat()
-	else:
-		_shared_material_as_standard()
 
+	if not _shared_material:
+		_shared_material_as_standard()
 		
 	_initialise_visuals_for_shapes()
-	# If no visuals were created, should not process
+	
 	if _generated_nodes.is_empty():
 		__log_warn_soft("initialised, but no shapes to manage. Shutting down")
 		set_enabled(false)
-	# else:
-		# __log_("initialise_implementation_in_game", "END")
 
 
 ## called before _get_shapes()
@@ -109,14 +104,15 @@ func _set_nodes_visibility(value: bool) -> void:
 
 
 func _shared_material_as_default_mat():
-	_shared_material = WIRE_FRAME_MAT.duplicate()
-	_shared_material.set_shader_parameter("albedo", shader_color)
-	_shared_material.set_shader_parameter("transparency", shader_transparency)
-	_shared_material.set_shader_parameter("line_transparency", shader_line_transparency)
-	_shared_material.set_shader_parameter("use_perspective", shader_use_perspective)
-	_shared_material.set_shader_parameter("wire_width", shader_wire_width)
-	_shared_material.set_shader_parameter("grid_density", shader_grid_density)
-	_shared_material.set_shader_parameter("use_barycentric", use_barycentric)
+	_shared_material = WireFrameMat.create_wireframe_shader(
+		shader_color,
+		shader_transparency,
+		shader_line_transparency,
+		shader_use_perspective,
+		shader_wire_width,
+		shader_grid_density,
+		use_barycentric
+	)
 	__log_("initted shader with params", use_barycentric, shader_line_transparency)
 
 	

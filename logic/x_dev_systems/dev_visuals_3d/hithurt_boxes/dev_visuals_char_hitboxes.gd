@@ -1,6 +1,6 @@
 @tool
 class_name DevVisualiseCharHitBoxes
-extends VisualiseCollShapes
+extends BaseDVCollShapesProcess
 
 
 @export_group("Visuals Colors")

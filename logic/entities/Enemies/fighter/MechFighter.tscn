@@ -1,7 +1,8 @@
-[gd_scene load_steps=70 format=4 uid="uid://b0eq3ihtn4wf"]
+[gd_scene load_steps=71 format=4 uid="uid://b0eq3ihtn4wf"]
 
 [ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/c_systems/character/mech_fighter.gd" id="1_rn2eh"]
 [ext_resource type="ArrayMesh" uid="uid://cejnfcdar41gc" path="res://-assets-/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_001.res" id="1_vvmdu"]
+[ext_resource type="Script" uid="uid://u2ifm4auvm52" path="res://logic/c_systems/x_unsorted/char_coll_collider.gd" id="2_2lrnj"]
 [ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_hhdky"]
 [ext_resource type="ArrayMesh" uid="uid://1vgny2neg4o" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_003.res" id="2_j48cr"]
 [ext_resource type="ArrayMesh" uid="uid://dyuidj0yy4qnp" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_007.res" id="3_5a6gk"]
@@ -1046,10 +1047,12 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_rn2eh")
 container = NodePath("StatesContainer")
+dev_tag = "mech"
 
 [node name="CollCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8638519, 0)
 shape = SubResource("CapsuleShape3D_ulmwa")
+script = ExtResource("2_2lrnj")
 
 [node name="StaticVisuals" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77774274, 0)
@@ -1383,6 +1386,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24676108, 0.55133295, 0)
 top_level = false
 label_text = "Interact"
 label_y_offset = 1.2
+area_sphere_radius = 1.8
 
 [node name="__interact_area" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24676108, 0.55133295, 0)

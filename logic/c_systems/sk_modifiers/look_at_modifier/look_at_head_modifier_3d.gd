@@ -47,11 +47,11 @@ func set_to_work(toggle: bool, time_dur: float = 0.5) -> void:
 		active = true
 		GLOBAL_ACTIVE_FLAG = true
 		target_val = max_influence
-		_tween_influence.tween_property(self, "influence", target_val, time_dur)
+		_tween_influence.tween_property(self , "influence", target_val, time_dur)
 	else:
 		GLOBAL_ACTIVE_FLAG = false
 		target_val = 0.0
-		_tween_influence.tween_property(self, "influence", target_val, time_dur)
+		_tween_influence.tween_property(self , "influence", target_val, time_dur)
 		_tween_influence.tween_callback(func(): active = false)
 
 

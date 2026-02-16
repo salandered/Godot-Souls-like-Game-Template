@@ -133,9 +133,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _handle_arrow_input(event: InputEventKey) -> void:
-	var off_change_amount = 0.5
-	var dist_change_amount = 2.0
-	
+	var off_change_amount = 0.25
+	var dist_change_amount = 1.0
 	if event.shift_pressed:
 		# Shift: Screen-Space offsets
 		if event.keycode == KEY_UP:

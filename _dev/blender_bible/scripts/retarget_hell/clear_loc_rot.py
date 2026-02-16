@@ -50,16 +50,7 @@ def clear_object_loc_rot(object_name: str, clear_rotation: bool = False) -> None
     bpy.ops.object.location_clear(clear_delta=False)
     print(f"Cleared location for: {obj.name}")
 
-    # Optionally, clear the object's rotation (Alt+R)
+    # Optionally clear the object's rotation (Alt+R)
     if clear_rotation:
         bpy.ops.object.rotation_clear(clear_delta=False)
         print(f"Cleared rotation for: {obj.name}")
-
-# --- EXAMPLE USAGE ---
-# Replace "YourArmatureName" with the actual name of your armature object.
-
-# To clear ONLY the location (Alt+G):
-# clear_object_transform("YourArmatureName")
-
-# To clear BOTH location (Alt+G) AND rotation (Alt+R):
-# clear_object_transform("YourArmatureName", clear_rotation=True)

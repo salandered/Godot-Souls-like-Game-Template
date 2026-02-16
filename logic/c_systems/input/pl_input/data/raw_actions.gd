@@ -71,11 +71,3 @@ const DEV_CAM_fov = "DEV_CAM_fov"
 const DEV_CAM_cycle = "DEV_CAM_cycle"
 const DEV_CAM_cycle_prev = "DEV_CAM_cycle_prev"
 const DEV_mouse_mode_switch = "DEV_mouse_mode_switch"
-
-
-# usual keys temporarily as dev
-const DEV_J = "DEV_J"
-const DEV_K = "DEV_K"
-const DEV_L = "DEV_L"
-const DEV_I = "DEV_I"
-const DEV_O = "DEV_O"

@@ -1,18 +1,26 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cgor81cloawxg"]
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://cgor81cloawxg"]
 
 [ext_resource type="Texture2D" uid="uid://byrcerl6y02tm" path="res://-assets-/materials-shared/wood/rough_wood/tower-map_rough_wood_diff_1k.jpg" id="1_jerc0"]
+[ext_resource type="Texture2D" uid="uid://bl4prc6uxg063" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k_darker.jpg" id="2_0yhiy"]
 [ext_resource type="Texture2D" uid="uid://5t8fe5ga8une" path="res://-assets-/materials-shared/wood/rough_wood/tower-map_rough_wood_norm_1k.png" id="2_dqgak"]
+[ext_resource type="Texture2D" uid="uid://iqdcj8v5od3h" path="res://-assets-/materials-shared/_textures/lu_noise/T_Random_45.png" id="3_462i8"]
 [ext_resource type="Texture2D" uid="uid://474sibhu0bgk" path="res://-assets-/materials-shared/wood/rough_wood/tower-map_rough_wood_rough_1k.png" id="3_j0uxk"]
+[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="4_nxqli"]
 
 [resource]
 resource_name = "rough_wood"
 cull_mode = 2
 albedo_color = Color(0.83264434, 0.6079786, 0.6079786, 1)
 albedo_texture = ExtResource("1_jerc0")
+metallic_specular = 0.3
 metallic_texture_channel = 2
 roughness_texture = ExtResource("3_j0uxk")
 roughness_texture_channel = 4
 normal_enabled = true
 normal_texture = ExtResource("2_dqgak")
+detail_enabled = true
+detail_mask = ExtResource("3_462i8")
+detail_albedo = ExtResource("2_0yhiy")
+detail_normal = ExtResource("4_nxqli")
 uv1_triplanar = true
 uv1_triplanar_sharpness = 0.329877

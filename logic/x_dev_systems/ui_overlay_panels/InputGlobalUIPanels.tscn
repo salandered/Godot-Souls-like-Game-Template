@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yhhhch504iof"]
+[gd_scene load_steps=10 format=3 uid="uid://yhhhch504iof"]
 
 [ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_cyk81"]
 [ext_resource type="Script" uid="uid://0kjhaxohe1pa" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/player_inputs_grid_manager.gd" id="2_ou6f6"]
@@ -8,6 +8,19 @@
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="6_nn8n2"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_vsxyn"]
 [ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="8_k64li"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k64li"]
+bg_color = Color(0.055200003, 0.13220002, 0.24, 0.5176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.07167115, 0.12394311, 0.19451028, 0.49019608)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="InputGlobalUIPanels" type="VBoxContainer"]
 
@@ -26,8 +39,8 @@ ui_container = NodePath("../../PlayerInputsPanel")
 [node name="RawInputsGridDistributor" parent="managers" node_paths=PackedStringArray("grid") instance=ExtResource("1_cyk81")]
 unique_name_in_owner = true
 grid = NodePath("../../RawInputsPanel/PanelContainer/MarginContainer/VBoxContainer/RawInputsGrid")
-value_label_font_size = 18
-name_label_font_size = 24
+value_label_font_size = 22
+name_label_font_size = 28
 
 [node name="RawInputsGridManager" type="Node" parent="managers" node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
@@ -38,6 +51,8 @@ ui_container = NodePath("../../RawInputsPanel")
 [node name="ActionInputsGridDistributor" parent="managers" node_paths=PackedStringArray("grid") instance=ExtResource("1_cyk81")]
 unique_name_in_owner = true
 grid = NodePath("../../ActionInputsPanel/PanelContainer/MarginContainer/VBoxContainer/ActionInputsGrid")
+value_label_font_size = 20
+name_label_font_size = 26
 
 [node name="ActionInputsGridManager" type="Node" parent="managers" node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
@@ -48,7 +63,7 @@ ui_container = NodePath("../../ActionInputsPanel")
 [node name="PlayerInputsPanel" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
@@ -83,13 +98,13 @@ layout_mode = 2
 [node name="RawInputsPanel" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(260, 0)
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="RawInputsPanel"]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("5_u56et")
+theme_override_styles/panel = SubResource("StyleBoxFlat_k64li")
 
 [node name="MarginContainer" type="MarginContainer" parent="RawInputsPanel/PanelContainer"]
 layout_mode = 2
@@ -118,7 +133,7 @@ layout_mode = 2
 [node name="ActionInputsPanel" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 

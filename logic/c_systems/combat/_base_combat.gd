@@ -196,7 +196,10 @@ func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_gl
 	else:
 		SigUtils.safe_emit_raw(
 			GlobalSignal.SIG_enemy_weapon_hit_data_set,
-			{SPS.hit_data_field: hit_data}
+			{
+				SPS.hit_data_field: hit_data,
+				SPS.tag_field: get_character().dev_tag
+			}
 		)
 	# __log_("set hit data to weapon", pp.in_q(weapon_id), hit_data)
 

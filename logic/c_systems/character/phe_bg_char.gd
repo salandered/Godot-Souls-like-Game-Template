@@ -5,7 +5,7 @@ extends PHCharacter
 
 
 @export var fire_up: bool = false
-@export var dev_tag: String = ""
+
 
 @onready var _visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
 

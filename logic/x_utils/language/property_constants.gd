@@ -13,6 +13,11 @@ const MODULATE_A = "modulate:a"
 const MODULATE = "modulate"
 const GLOBAL_POSITION_Y = "global_position:y"
 
+## mat
+
+const ALBEDO = "albedo"
+
+
 ## theme
 const FONT_SIZE := "font_size"
 const NORMAL_FONT_SIZE := "normal_font_size"

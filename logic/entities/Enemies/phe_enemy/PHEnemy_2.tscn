@@ -1,8 +1,8 @@
 [gd_scene load_steps=134 format=4 uid="uid://bqpo1nisx0ycs"]
 
 [ext_resource type="Script" uid="uid://cwaf8axg7j74x" path="res://logic/c_systems/character/phe_bg_char.gd" id="1_sdoum"]
-[ext_resource type="Script" uid="uid://rqyi1xplaa3g" path="res://logic/c_systems/x_unsorted/coll_collider.gd" id="2_0v2eu"]
 [ext_resource type="Script" uid="uid://fej6gy4eqqqs" path="res://logic/c_systems/combat/phe_combat.gd" id="2_e1y0y"]
+[ext_resource type="Script" uid="uid://u2ifm4auvm52" path="res://logic/c_systems/x_unsorted/char_coll_collider.gd" id="2_vb575"]
 [ext_resource type="Script" uid="uid://dcvvfybefeuwd" path="res://logic/c_systems/feelings/phe_feelings.gd" id="3_yfa0f"]
 [ext_resource type="Script" uid="uid://com5hws210fhf" path="res://logic/c_systems/x_unsorted/char_visual_offset/visual_offset.gd" id="4_eesbj"]
 [ext_resource type="Texture2D" uid="uid://b6il3lbovqc8m" path="res://-assets-/ui_assets/in_game_ui/feelings/enemy/e_health_atlas_3.tres" id="5_sdoum"]
@@ -1102,7 +1102,6 @@ collision_layer = 4
 collision_mask = 39
 platform_floor_layers = 4294967047
 script = ExtResource("1_sdoum")
-dev_tag = null
 
 [node name="CollCollider" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -1110,7 +1109,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3153428, 0)
 shape = SubResource("CapsuleShape3D_go5v8")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 debug_fill = false
-script = ExtResource("2_0v2eu")
+script = ExtResource("2_vb575")
 
 [node name="UI" type="Node" parent="."]
 
@@ -1169,7 +1168,7 @@ script = ExtResource("2_e1y0y")
 unique_name_in_owner = true
 process_mode = 4
 script = ExtResource("3_yfa0f")
-MAX_HEALTH = 160.0
+MAX_HEALTH = 100.0
 
 [node name="VisualOffset" type="Node3D" parent="."]
 script = ExtResource("4_eesbj")
@@ -1721,6 +1720,7 @@ material_override = SubResource("StandardMaterial3D_y8yir")
 size = Vector3(1, 0.062072754, 1)
 
 [node name="MonitorPlayerEnterSignalArea" parent="VisualOffset" instance=ExtResource("15_yy3ga")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5950427, 0)
 fire_only_once = true
 area_capsule_radius = 3.0

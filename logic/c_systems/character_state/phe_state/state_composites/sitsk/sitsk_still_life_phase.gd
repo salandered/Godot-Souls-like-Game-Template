@@ -15,6 +15,7 @@ var interrupted_state: String = ""
 
 
 func _interrup_with_personal_state(state_name_: String, n_frames_delay: int, look_at_time: float):
+	if interrupted_state != "": return
 	await FrameUtils.wait_process_frames(n_frames_delay)
 	interrupted_state = state_name_
 	var lam := me.get_look_at_manager()
@@ -27,9 +28,10 @@ func _on_SIG_dodge_combo_achieved():
 
 
 func _on_SIG_power_combo_achieved():
-	_interrup_with_personal_state(
-		ra.pick_random(SITSKS.Leaf.sit_point, SITSKS.Leaf.cheer, SITSKS.Leaf.thumb_up),
-		90, 9.0)
+	if ra.chance(0.3):
+		_interrup_with_personal_state(
+			ra.pick_random(SITSKS.Leaf.sit_point, SITSKS.Leaf.cheer, SITSKS.Leaf.thumb_up),
+			90, 9.0)
 
 func _on_SIG_thrown():
 	_interrup_with_personal_state(
@@ -47,7 +49,7 @@ func _on_SIG_plush_launched():
 		ra.pick_random(SITSKS.Leaf.sit_clap,
 			SITSKS.Leaf.sit_point,
 			SITSKS.Leaf.cheer),
-		120, 8.0)
+		180, 8.0)
 
 func _on_SIG_sitting_skeleton_is_not_happy():
 	_interrup_with_personal_state(

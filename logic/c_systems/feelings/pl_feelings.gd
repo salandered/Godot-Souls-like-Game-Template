@@ -9,7 +9,7 @@ const FATIGUE_THRESHOLD = 8.0
 var max_stamina: float = 170.0
 var max_health: float = 220.0
 
-var stamina_regen_rate: float = 12.0 # per sec
+var stamina_regen_rate: float = 16.0 # per sec
 
 var _current_stamina: float
 

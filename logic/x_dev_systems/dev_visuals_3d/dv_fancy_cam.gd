@@ -48,7 +48,7 @@ func initialise() -> void:
 
 
 func set_enabled(toggle: bool):
-	__log_("set_enabled", toggle)
+	__log_("set_enabled", toggle, name)
 	visible = toggle
 	set_process_input(toggle)
 
@@ -90,4 +90,4 @@ func _input(event: InputEvent) -> void:
 
 
 func __LOG_B() -> bool:
-	return false
+	return true

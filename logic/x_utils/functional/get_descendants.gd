@@ -111,7 +111,7 @@ static func rigid_bodies(node: Node) -> Array[RigidBody3D]:
 	var r := _get_descendants_filtered(node, func(n): return n is RigidBody3D)
 	return TypeCast.array_of_rigid_body_3d(r)
 
-static func areas(node: Node) -> Array:
+static func area_3d(node: Node) -> Array:
 	return _get_descendants_filtered(node, func(n): return n is Area3D)
 
 
@@ -300,6 +300,14 @@ static func enemy_camera_targets(node: Node) -> Array[EnemyCameraTarget]:
 static func enemy_characters(node: Node) -> Array[PHCharacter]:
 	var r := _get_descendants_filtered(node, func(n): return n is PHCharacter)
 	return TypeCast.array_of_enemy_character(r)
+
+static func base_characters(node: Node) -> Array[BaseCharacter]:
+	var r := _get_descendants_filtered(node, func(n): return n is BaseCharacter)
+	return TypeCast.array_of_base_character(r)
+
+static func char_coll_colliders(node: Node) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is CharCollCollider)
+	return r
 
 static func one_princess(node: Node) -> Princess:
 	var r := _get_descendants_filtered(node, func(n): return n is Princess, true)

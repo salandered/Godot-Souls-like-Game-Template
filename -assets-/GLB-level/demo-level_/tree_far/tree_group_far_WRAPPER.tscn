@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://dj7eifk52p3xo"]
+[gd_scene load_steps=11 format=4 uid="uid://dj7eifk52p3xo"]
 
 [ext_resource type="PackedScene" uid="uid://byib7n7e4xq1j" path="res://-assets-/GLB-level/demo-level_/tree_far/tree_group.glb" id="1_ghkh7"]
 [ext_resource type="Material" uid="uid://b5l4we8it0vyf" path="res://-assets-/materials-shared/_baked/trunk_root_debris/bark_debris_01_Reimp.tres" id="2_8l3ie"]
 [ext_resource type="Material" uid="uid://bbg08pft25h53" path="res://-assets-/materials-shared/ground/coral_ground/coral_ground_02_Reimp.tres" id="3_wbne8"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="4_3ifqb"]
 [ext_resource type="PackedScene" uid="uid://c4uc4yxf778i2" path="res://-assets-/GLB-level/demo-level_/tree_far/plane_012.tscn" id="5_3ifqb"]
+[ext_resource type="Material" uid="uid://cxwpbx7564760" path="res://-assets-/GLB-level/demo-level_/island/old_concrete_darker_plus_dirt_t2.tres" id="5_rxyr3"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5p8hd"]
 _surfaces = [{
@@ -256,6 +257,7 @@ layers = 18
 [node name="old plain big" parent="tree group far/all planes" index="0"]
 layers = 18
 cast_shadow = 0
+surface_material_override/0 = ExtResource("5_rxyr3")
 
 [node name="Plane_009" parent="tree group far/all planes" index="1"]
 layers = 18

@@ -17,8 +17,8 @@ func initialise_implementation():
 	if _native_player and not ignore_root_bone:
 		if set_root_bone_postponed:
 			await FrameUtils.wait_process_frames(4)
-		print_.dev("", _native_player.root_motion_track)
-		print_.dev("", NodePath(Constants.ROOT_TRACK_PATH))
+		# print_.dev("", _native_player.root_motion_track)
+		# print_.dev("", NodePath(Constants.ROOT_TRACK_PATH))
 		# dont rely on UI setting, it will be lost on almost any change, super fragile.
 		_native_player.root_motion_track = NodePath(Constants.ROOT_TRACK_PATH)
 

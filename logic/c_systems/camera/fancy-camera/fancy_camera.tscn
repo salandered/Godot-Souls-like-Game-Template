@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/c_systems/camera/fancy-camera/camera_target/camera_socket.gd" id="5_sttfw"]
 [ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/VFX/label/3DOnTopLabel.tscn" id="5_u7x54"]
 [ext_resource type="Material" uid="uid://def5pgnboedqm" path="res://-assets-/materials-shared/solid/banana.tres" id="5_v1xt6"]
-[ext_resource type="PackedScene" path="res://logic/entities/VFX/target_circle/TargetCircle.tscn" id="6_tlnea"]
+[ext_resource type="PackedScene" uid="uid://ocst26s6nlk0" path="res://logic/entities/VFX/target_circle/TargetCircle.tscn" id="6_tlnea"]
 [ext_resource type="Script" uid="uid://d2as471a20jkg" path="res://logic/x_dev_systems/dev_visuals_3d/dv_fancy_cam.gd" id="7_ncru2"]
 [ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/materials-shared/_shaders/target_dot/target_dot.gdshader" id="7_r7icc"]
 [ext_resource type="Material" uid="uid://c0ppm6u2ki7fp" path="res://-assets-/materials-shared/_shaders/_dev/wire_frame_mat.tres" id="8_euqfl"]
@@ -93,6 +93,7 @@ text = "Aim"
 font_size = 28
 
 [node name="DevVisualiseTrailParent" parent="Aim/DVFancyCam" instance=ExtResource("8_nf5rl")]
+visible = false
 path_color_a = Color(1, 0.28297502, 0.3235457, 1)
 path_color_b = Color(0.9529412, 0.43979633, 0.31372547, 1)
 trail_radius = 0.02
@@ -132,6 +133,7 @@ transform = Transform3D(1, -1.15463195e-14, 1.4921397e-13, 1.15463195e-14, 1, 1.
 
 [node name="DevVisualiseTrailParent" parent="PlayerCamera/DVFancyCam/Marker3D" instance=ExtResource("8_nf5rl")]
 transform = Transform3D(1.0000007, 5.960466e-08, -7.450593e-08, 7.450579e-08, 1, 1.4901161e-08, -1.4901076e-08, -4.4703484e-08, 1.0000004, -0.0030351565, -0.0011863708, -0.0055134296)
+visible = false
 path_color_a = Color(0, 0.099858284, 1, 1)
 path_color_b = Color(0, 0.49513865, 1, 1)
 update_interval_seconds = 0.1

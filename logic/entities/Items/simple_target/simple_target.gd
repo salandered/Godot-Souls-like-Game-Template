@@ -25,6 +25,7 @@ func __hard_validation() -> bool:
 
 class AnimID:
 	const rotate_on_hit = "rotate_on_hit"
+	const rotate_on_hit_clock = "rotate_on_hit_clock"
 	const rotate_on_hit_super = "rotate_on_hit_super"
 
 
@@ -46,7 +47,7 @@ func _on_my_area_hit(payload: Dictionary[String, Variant]):
 	if not _r.err and _r.value is HitData:
 		last_hit = _r.value
 		hit_damage = last_hit.damage
-	play_anim(hit_damage)
+	play_anim(hit_damage, last_hit.attack_dir)
 	_on_my_area_hit_imp()
 
 
@@ -54,15 +55,23 @@ func _on_my_area_hit_imp():
 	pass
 
 
-func play_anim(hit_damage: float):
+func play_anim(hit_damage: float, attack_dir: AttackDirection.Dir):
 	var _speed_scale := hit_damage / 16.0
-	animation_player.stop()
+	var _anim_id := AnimID.rotate_on_hit
+
 	if _speed_scale > 2.0:
+		_anim_id = AnimID.rotate_on_hit_super
 		PlayerStats.set_simple_target_super_rotate()
-		animation_player.play(AnimID.rotate_on_hit_super, 0.2, _speed_scale / 1.5)
-	else:
-		animation_player.play(AnimID.rotate_on_hit, 0.2, _speed_scale)
-	__log_("playing", AnimID.rotate_on_hit, "_speed_scale", _speed_scale, "based on damage", hit_damage)
+		_speed_scale /= 1.5
+
+	# reverse 
+	if attack_dir in [AttackDirection.Dir.LEFT, AttackDirection.Dir.STAB]:
+		_anim_id = AnimID.rotate_on_hit_clock
+
+
+	animation_player.stop()
+	animation_player.play(_anim_id, 0.2, _speed_scale)
+	__log_("playing", _anim_id, "_speed_scale", _speed_scale, "based on damage", hit_damage)
 
 
 func __LOG_B() -> bool:

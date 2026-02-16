@@ -32,7 +32,8 @@ func _on_SIG_player_state_changed(payload: Dictionary[String, Variant]):
 
 
 func _on_SIG_player_leg_beh_changed(payload: Dictionary[String, Variant]):
-	_on_SIG_string_payload(pl_legs_state, payload, SPS.state_name_field, _str_beh_replacers, dlc_all_features_preset)
+	pass
+	# _on_SIG_string_payload(pl_legs_state, payload, SPS.state_name_field, _str_beh_replacers, dlc_all_features_preset)
 
 
 func _on_SIG_player_action_changed(payload: Dictionary[String, Variant]):

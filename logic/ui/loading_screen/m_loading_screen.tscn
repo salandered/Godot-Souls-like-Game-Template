@@ -40,7 +40,7 @@ process_mode = 3
 layer = 20
 script = ExtResource("1_j1vc5")
 _complete = ""
-background_image_paths = Array[String](["uid://bao877phccl35", "uid://bou43m0wm6j1", "uid://c6r4ede1h35cv", "uid://dgfi5rtft6keb", "uid://vgchkkdiaajj", "uid://qsinqvca4f1k", "uid://btyqnorug4vwe", "uid://m6vx76vru4v1", "uid://t8n42w7bayi0", "uid://cuykqyvmucksm", "uid://cmcl2jmhalgi0", "uid://b6aeflinp8x0g", "uid://ccjx416rmarik", "uid://cbg0jt7cpk4c5", "uid://bssyesge7alyg", "uid://ghcgnjcay8ek", "uid://dq8bsncuqqm1g"])
+background_image_paths = Array[String](["uid://c6r4ede1h35cv", "uid://dgfi5rtft6keb", "uid://ccjx416rmarik", "uid://cbg0jt7cpk4c5", "uid://qsinqvca4f1k", "uid://btyqnorug4vwe", "uid://05ndr6fdde3r", "uid://dyfanr3d6nywj", "uid://hb25ta2mglgx", "uid://bvkyo4tn8mui2", "uid://b6aeflinp8x0g", "uid://bou43m0wm6j1", "uid://m6vx76vru4v1", "uid://cuykqyvmucksm", "uid://cmcl2jmhalgi0", "uid://bssyesge7alyg", "uid://ghcgnjcay8ek", "uid://vgchkkdiaajj", "uid://dq8bsncuqqm1g"])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

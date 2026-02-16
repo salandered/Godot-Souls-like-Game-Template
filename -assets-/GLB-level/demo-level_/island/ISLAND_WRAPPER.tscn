@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://1wkmqiqm0s6h"]
+[gd_scene load_steps=20 format=3 uid="uid://1wkmqiqm0s6h"]
 
 [ext_resource type="PackedScene" uid="uid://cvb0oap25dedi" path="res://-assets-/GLB-level/demo-level_/island/island.glb" id="1_8iv8n"]
 [ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="2_5reim"]
 [ext_resource type="Material" uid="uid://r4bjtqqba0s8" path="res://-assets-/materials-shared/ground/dirt_aerial/dirt_aerial_02_Reimp_2k.tres" id="2_78gke"]
+[ext_resource type="Material" uid="uid://cxwpbx7564760" path="res://-assets-/GLB-level/demo-level_/island/old_concrete_darker_plus_dirt_t2.tres" id="4_6mi7e"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rx8fw"]
 points = PackedVector3Array(2.4195502, 0.31481916, -1.8827921, 2.319729, 0.4826004, -1.7599016, 2.4582198, 0.53979856, -1.6576054, 2.4874465, 0.22865686, -1.6535541, 1.1978657, -0.00013574958, -0.9553741, 1.5508368, 0.16188511, -1.3041265, 1.4761958, 0.26070404, -1.2490959, 2.2725165, 0.54953444, -1.6170921, 1.5099192, 0.3977362, -1.2109458, 2.4735076, 0.4150985, -1.5958226, 2.2356455, 0.56843823, -1.4648294, 2.4384353, 0.52844006, -1.5549717, 2.4613674, 0.36349845, -1.5293132, 1.8768291, 0.13795114, -1.1434236, 0.12141657, -0.18909249, -0.012426019, -0.45547736, -0.19152644, 0.09290874, -1.5714953, -0.15136606, 0.860299, -1.7131333, -0.09149054, 0.9609071, -1.366907, 0.1269983, 0.9325477, 0.40918922, 0.17153984, -0.019178152, -2.0786943, 0.022500098, 1.5621928, 2.0413992, 0.2982682, -1.1927148, 0.7135985, 0.027530313, -0.19102228, -0.83452773, -0.22324911, 0.8366662, -1.5035989, -0.26040763, 0.9085773, -2.0202405, -0.13457169, 1.4244474, -2.1061227, -0.045164093, 1.566244, -1.2333626, -0.039971635, 1.119922, -1.7648425, -0.1959076, 1.4062163, -1.4091736, -0.18901135, 1.2559794, -1.7108852, -0.24069253, 1.2029744, -1.9734776, -0.18820003, 1.45517)
@@ -118,7 +119,7 @@ transform = Transform3D(0.32980442, 0.69646865, 0.6373072, -0.7716665, 0.5877754
 sway_speed = 1.5
 
 [node name="ropes_009" parent="island2/debris/trees/BirchTree_Dead_1_001" index="1"]
-transform = Transform3D(0.36393332, 0.6880425, 0.6278137, -0.7069749, 0.6428928, -0.2947464, -0.6064149, -0.33658046, 0.72039884, -0.08106995, -0.27941346, -0.21012211)
+transform = Transform3D(0.36393335, 0.6880425, 0.6278137, -0.70697486, 0.64289284, -0.2947464, -0.6064149, -0.33658043, 0.72039884, -0.08106995, -0.27941346, -0.21012211)
 
 [node name="SwayParent" parent="island2/debris/trees/BirchTree_Dead_1_001/ropes_009" index="0" instance=ExtResource("2_5reim")]
 max_sway_degrees = 9.0
@@ -130,21 +131,21 @@ sway_speed = 2.2
 shape = SubResource("ConcavePolygonShape3D_gffpp")
 
 [node name="ropes_006" parent="island2/debris/trees/DeadTree_10_001" index="0"]
-transform = Transform3D(-0.065013975, 0.3086853, 0.94893974, -0.5301206, 0.7949798, -0.29492262, -0.8454261, -0.5222266, 0.111955635, 0.5776291, -0.5236745, 0.29316807)
+transform = Transform3D(-0.06501399, 0.30868527, 0.9489397, -0.53012055, 0.7949797, -0.29492262, -0.845426, -0.52222663, 0.11195563, 0.5776291, -0.5236745, 0.29316807)
 
 [node name="SwayParent" parent="island2/debris/trees/DeadTree_10_001/ropes_006" index="0" instance=ExtResource("2_5reim")]
 max_sway_degrees = 6.0
 sway_speed = 1.2
 
 [node name="ropes_007" parent="island2/debris/trees/DeadTree_10_001" index="1"]
-transform = Transform3D(-0.103206635, 0.29664573, 0.9493944, -0.85990846, 0.45310706, -0.23505571, -0.49990562, -0.84065163, 0.20832458, -0.8343277, -0.6998396, 0.23341751)
+transform = Transform3D(-0.10320664, 0.29664573, 0.9493944, -0.8599084, 0.45310703, -0.23505573, -0.4999056, -0.8406516, 0.20832458, -0.8343277, -0.6998396, 0.23341751)
 
 [node name="SwayParent" parent="island2/debris/trees/DeadTree_10_001/ropes_007" index="0" instance=ExtResource("2_5reim")]
 max_sway_degrees = 4.0
 sway_speed = 1.5
 
 [node name="ropes_010" parent="island2/debris/trees/DeadTree_10_001" index="2"]
-transform = Transform3D(-0.032953303, 0.33491874, 0.94167066, -0.68382007, 0.67958033, -0.2656325, -0.72890615, -0.6526867, 0.20662977, -0.8343277, -0.6998396, 0.23341751)
+transform = Transform3D(-0.032953277, 0.33491874, 0.94167066, -0.68382007, 0.67958033, -0.2656325, -0.7289063, -0.65268666, 0.20662977, -0.8343277, -0.6998396, 0.23341751)
 
 [node name="SwayParent" parent="island2/debris/trees/DeadTree_10_001/ropes_010" index="0" instance=ExtResource("2_5reim")]
 max_sway_degrees = 7.0
@@ -157,6 +158,7 @@ shape = SubResource("ConcavePolygonShape3D_pysol")
 [node name="island" parent="island2/__solid" index="0"]
 layers = 17
 surface_material_override/0 = ExtResource("2_78gke")
+surface_material_override/2 = ExtResource("4_6mi7e")
 
 [node name="turtle sk_011" parent="island2/__solid" index="1"]
 layers = 17

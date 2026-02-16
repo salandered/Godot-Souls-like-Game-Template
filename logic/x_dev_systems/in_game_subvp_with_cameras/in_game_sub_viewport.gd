@@ -73,6 +73,7 @@ func _ready() -> void:
 	if controls_info:
 		var _r_text := debug_cool_cam.CONTROLS_TEXT
 		_r_text += "\n[b]M[/b] - toggle small top views"
+		_r_text += "\n[b]0/Numpad 0[/b] - toggle this panel"
 		controls_info.text = debug_cool_cam.CONTROLS_TEXT
 
 
@@ -130,4 +131,8 @@ func _input(event: InputEvent) -> void:
 	match InputUtils.get_keycode(event):
 		KEY_M:
 			small_cams_container.visible = not small_cams_container.visible
+			InputUtils.mark_input_handled(self )
+		KEY_0, KEY_KP_0:
+			if info_container:
+				info_container.visible = not info_container.visible
 			InputUtils.mark_input_handled(self )

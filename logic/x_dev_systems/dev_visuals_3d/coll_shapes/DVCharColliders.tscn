@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl4hklj8yd2ns"]
+
+[ext_resource type="Script" uid="uid://wkf62y565qvp" path="res://logic/x_dev_systems/dev_visuals_3d/base_dv_classes/dv_collider_shapes.gd" id="1_kktfi"]
+
+[node name="DVCharColliders" type="Node3D"]
+visible = false
+script = ExtResource("1_kktfi")
+collider_colors = Dictionary[String, Color]({
+"default": Color(0.17765835, 0.17765835, 0.5, 1)
+})
+shader_color = Color(0.041679263, 0.57467526, 0.041679263, 1)
+dvc_section = 10
+_key_b_value_changer = 81

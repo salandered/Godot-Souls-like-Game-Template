@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c66xg4go6ct4v"]
+[gd_scene load_steps=23 format=3 uid="uid://c66xg4go6ct4v"]
 
 [ext_resource type="Script" uid="uid://cavjlrqyvp37h" path="res://logic/ui/main_menu/m_main_menu.gd" id="1_2e4m0"]
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="1_hvsaw"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://c7pyskbvkkr0x" path="res://-assets-/music/=tracks=/tarot_siren.wav" id="9_a5cmw"]
 [ext_resource type="Script" uid="uid://dp2exxwlj6afr" path="res://logic/ui/main_menu/m_config_version_label.gd" id="9_nlybk"]
 [ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="9_wkb1a"]
+[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="12_6tohx"]
 [ext_resource type="PackedScene" uid="uid://em4bj1qbl826" path="res://logic/ui/ui_utils/prefab/color_rect.tscn" id="12_uw7yc"]
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort/distort_menu.gdshader" id="13_rjjho"]
 [ext_resource type="PackedScene" uid="uid://4lpu8dbtw3uv" path="res://logic/ui/ui_utils/prefab/_experimental/RichTextLabelAutoFormat.tscn" id="14_d1ref"]
@@ -96,41 +97,28 @@ theme_override_constants/margin_top = 20
 
 [node name="TitleMargin" type="MarginContainer" parent="MenuContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 24
+theme_override_constants/margin_top = 54
 
-[node name="TitleContainer" type="Control" parent="MenuContainer/TitleMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/TitleMargin"]
 layout_mode = 2
-mouse_filter = 2
+theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="MenuContainer/TitleMargin/TitleContainer"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 67.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
-text = "Hard Tissue Demo"
+[node name="TitleLabel" type="Label" parent="MenuContainer/TitleMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_6tohx")
+theme_override_font_sizes/font_size = 64
+text = "Third Person Souls-like Template"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_nt2e5")
 
-[node name="SubTitleMargin" type="MarginContainer" parent="MenuContainer"]
+[node name="SubTitleLabel" type="Label" parent="MenuContainer/TitleMargin/VBoxContainer"]
+modulate = Color(0.85979897, 0.85979897, 0.85979897, 1)
 layout_mode = 2
-theme_override_constants/margin_top = 92
-
-[node name="SubTitleContainer" type="Control" parent="MenuContainer/SubTitleMargin"]
-modulate = Color(0.67650515, 0.67650515, 0.67650515, 1)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="SubTitleLabel" type="Label" parent="MenuContainer/SubTitleMargin/SubTitleContainer"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 34.0
-grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
-text = "Souls-like game demo made with Godot"
+text = "Demo of main mechanics and developer tools. 
+Features custom made characters, levels and music. 
+Made with Godot"
 horizontal_alignment = 1
 vertical_alignment = 1
 

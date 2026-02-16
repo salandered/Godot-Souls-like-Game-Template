@@ -31,10 +31,6 @@ func _decide_on_pack_on_enter():
 		_reason = "no hit data found => default"
 		__log_decide_on_pack(_reason)
 		return
-	if hit.anim_id == SITSKA.sit_attack:
-		_boost_value = 6.0
-	else:
-		_boost_value = 0.0
 		 
 
 	var r_throw_dir := ThrowData.attack_dir_to_throw_dir(hit.attack_dir)
@@ -47,9 +43,16 @@ func _decide_on_pack_on_enter():
 		_reason += "hit.damage < 25"
 		r_collection = ThrowData.low_dir_col
 	
-	if PREV_ACTION in [PS.Act.dodge, PS.Act.jump_sprint, PS.Act.landing_sprint, PS.Act.midair] or ra.chance(0.2):
+	if PREV_ACTION in [PS.Act.dodge, PS.Act.jump_sprint, PS.Act.landing_sprint, PS.Act.midair] or ra.chance(0.15):
 		_reason += "PREV_ACTION is air action"
 		r_collection = ThrowData.cool_dir_col
+
+	if hit.anim_id == SITSKA.sit_attack:
+		_boost_value = 1.0
+		r_throw_dir = ThrowData.ThrowDir.BACK
+	else:
+		_boost_value = 0.0
+
 
 	_reason += "r_throw_dir is " + str(r_throw_dir)
 	var pack := r_collection.get_pack_by_throw_dir(r_throw_dir)

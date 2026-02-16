@@ -166,7 +166,8 @@ func set_current_substate(next_state_name: String) -> void:
 			## changed to 
 			SPS.h_state_data_field: GlobalSignal.HStateData.new(
 					_next_substate.state_name,
-					_next_substate.state_depth)
+					_next_substate.state_depth),
+			SPS.tag_field: me.dev_tag
 		}
 	)
 

@@ -2,7 +2,7 @@
 extends EditorScript
 
 const TARGET_FOLDER = "res://-assets-/GLB-char/godot_plush/"
-#const TARGET_FOLDER = "res://-assets-/materials-shared/_images/"
+
 ## WARNING: only jpg and png supported. And use lower case
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 ## will be ignored of contains
@@ -170,7 +170,7 @@ func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> b
 	var height := img.get_height()
 	var max_dim := maxi(width, height)
 	
-	# Decompress first (needed for both resizing and bit depth conversion)
+	# decompress (needed for both resizing and bit depth conversion)
 	if img.is_compressed():
 		var err := img.decompress()
 		# __log_script.info_("Image was compressed, going to decompress.")
@@ -178,14 +178,14 @@ func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> b
 			__log_script.error_("- 2", "Failed to decompress image", "Error:", str(err))
 			return false
 	
-	# Convert normal maps to 8-bit (even if not resizing)
+	# convert normal maps to 8-bit (even if not resizing)
 	if is_normal_map and FORCE_8BIT_NORMALS:
 		_convert_to_8bit(img)
 	
-	# Check if resize needed
+	# check if resize needed
 	if max_dim <= target_image_size:
 		__log_script.info_("⏭️ 2", "Skipping resize, already <= than target. Size:", _get_size_with_x(width, height), "Target:", pp.in_q(target_image_size))
-		# Still return true if we converted bit depth
+		# still returns true if we converted bit depth
 		return is_normal_map and FORCE_8BIT_NORMALS
 
 	var scale_ratio := float(target_image_size) / float(max_dim)
@@ -200,7 +200,7 @@ func _resize_image(img: Image, target_image_size: int, is_normal_map: bool) -> b
 		)
 	return true
 
-# 🎨
+
 func _convert_to_8bit(img: Image):
 	var original_format := img.get_format()
 	img.convert(Image.FORMAT_RGB8)
@@ -210,8 +210,10 @@ func _convert_to_8bit(img: Image):
 func _get_size_with_x(width: int, height: int) -> String:
 	return str(width) + "x" + str(height)
 
+
 func _get_target_file_suffix() -> String:
 	return "_d" + TARGET_SCALE_STR
+
 
 ## -1 if cannot parse
 func _parse_scale_to_pixels(scale_str: String) -> int:

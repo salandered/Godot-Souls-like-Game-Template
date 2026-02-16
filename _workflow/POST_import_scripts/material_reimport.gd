@@ -11,6 +11,7 @@ extends EditorScenePostImport
 ## Note: Material references exist in the imported mesh binary data, not in .import settings.
 ## NOTE: u cant see this links in UI of import settings (Use External looks looks like false)
 
+
 func _post_import(scene: Node) -> Node:
 	__log_script.start_()
 

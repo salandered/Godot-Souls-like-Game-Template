@@ -105,9 +105,6 @@ func initialise_base_char_implementation() -> void:
 
 	__dev_initialise()
 
-	if camera_focus:
-		camera_focus.visible = false
-
 
 	if not __perform_validation(true):
 		__log_warn_soft("well game is not ready")
@@ -284,32 +281,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # region: DEV
 
-func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
-		return
-	if event.is_action_pressed(RawAction.DEV_J):
-		var hit := HitData.new(25, "from god", PHEA.attack.sword_slide, 1.0, "test attack", AttackDirection.Dir.LEFT)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-	if event.is_action_pressed(RawAction.DEV_K):
-		var hit := HitData.new(24, "from god", PHEA.attack.attack_360_low, 1.0, "test attack", AttackDirection.Dir.RIGHT)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-
-	# if event.is_action_pressed(RawAction.DEV_8):
-	# 	animator_manager.set_overlay_anim(A.react.react_from_L,
-	# 	OverlayConfig.new(
-	# 		OverlayConfig.Weight.new(0.8, 0.4),
-	# 		BlendConfig.new(),
-	# 		1.0,
-	# 		BoneMask.get_upper_body_with_hips()
-	# 		))
-
 
 var debug_cams: Array[Node]
-var csg_visible_initially: Array
-var csg_non_visible_initially: Array
-var csg_visible_cycle: Cycler
 
 var cam_i := 0
 var __collisions_enabled: bool = true
@@ -322,20 +295,34 @@ func __dev_initialise():
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
 	# print_.dev("dbg", "cam_i: " + str(cam_i))
-	var _csg_visuals := get_descendants.csg_primitives(self )
-	for _csg: CSGPrimitive3D in _csg_visuals:
-		if _csg.visible:
-			csg_visible_initially.append(_csg)
-		else:
-			csg_non_visible_initially.append(_csg)
-
-	csg_visible_cycle = Cycler.new([[false, false], [true, false], [true, true], [false, true]])
 
 
 func _dev_input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
 		
+	if InputUtils.is_keycode_w_ctrl(event, KEY_J):
+		var hit := HitData.new(25, "from god", PHEA.attack.sword_slide, 1.0, "test attack", AttackDirection.Dir.LEFT)
+		get_combat()._last_processed_hit = hit
+		self.react_on_hit(hit)
+	if InputUtils.is_keycode_w_ctrl(event, KEY_K):
+		var hit := HitData.new(24, "from god", PHEA.attack.attack_360_low, 1.0, "test attack", AttackDirection.Dir.RIGHT)
+		get_combat()._last_processed_hit = hit
+		self.react_on_hit(hit)
+	if InputUtils.is_keycode_w_ctrl(event, KEY_L):
+		var hit := HitData.new(24, "from god", PHEA.attack.attack_up, 1.0, "test attack", AttackDirection.Dir.UP)
+		get_combat()._last_processed_hit = hit
+		self.react_on_hit(hit)
+
+	# if event.is_action_pressed(RawAction.DEV_8):
+	# 	animator_manager.set_overlay_anim(A.react.react_from_L,
+	# 	OverlayConfig.new(
+	# 		OverlayConfig.Weight.new(0.8, 0.4),
+	# 		BlendConfig.new(),
+	# 		1.0,
+	# 		BoneMask.get_upper_body_with_hips()
+	# 		))
+	
 	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
 		cam_i = (cam_i + 1) % debug_cams.size()
 		print_.dev("dbg", "cam_i: " + str(cam_i))
@@ -354,13 +341,5 @@ func _dev_input(event: InputEvent) -> void:
 			collision_mask = Collision.Masks.PLAYER_COL_MASK
 		else:
 			collision_mask = Collision.Masks._ZERO_MASK
-
-	if event.is_action_pressed(RawAction.DEV_O):
-		var _next_booleans = csg_visible_cycle.get_next()
-		for csg in csg_visible_initially:
-			csg.visible = _next_booleans[0]
-		for csg in csg_non_visible_initially:
-			csg.visible = _next_booleans[1]
-
 
 # endregion

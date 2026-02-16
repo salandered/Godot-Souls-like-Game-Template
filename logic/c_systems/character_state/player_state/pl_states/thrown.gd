@@ -3,7 +3,10 @@ extends BasePlayerState
 
 func on_enter_state(input_: InputPackage):
 	APPLY_GRAVITY = false
-	SigUtils.safe_emit_raw_no_payload(PlayerStats.SIG_thrown)
+
+	var hit := combat.get_last_processed_hit()
+	if hit.anim_id != SITSKA.sit_attack:
+		SigUtils.safe_emit_raw_no_payload(PlayerStats.SIG_thrown)
 
 
 func check_transition(input_: InputPackage) -> PLVerdict:

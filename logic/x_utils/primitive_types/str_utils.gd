@@ -68,7 +68,6 @@ static func calculate_tab_prefix(indents: int) -> String:
 
 ## WARNING: dict key are not ordered i suppose
 static func replace_text_fragments(text: String, replacers: Dictionary[String, String]):
-	## name_.strip_edges().
 	for key_word: String in replacers:
 		text = text.replace(key_word, replacers[key_word])
 	text = text.strip_edges()

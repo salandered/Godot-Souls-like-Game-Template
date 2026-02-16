@@ -36,7 +36,7 @@ static var any_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
 	## player
 	A.attack.axe_slice_1: AttackDirection.Dir.LEFT,
 	A.attack.axe_slice_2: AttackDirection.Dir.RIGHT,
-	A.attack.axe_slice_3: AttackDirection.Dir.LEFT,
+	A.attack.axe_slice_3: AttackDirection.Dir.RIGHT,
 	A.attack.stab_attack_1: AttackDirection.Dir.STAB,
 	A.attack.stab_attack_2: AttackDirection.Dir.STAB,
 	A.attack.sword_slash_1: AttackDirection.Dir.LEFT,

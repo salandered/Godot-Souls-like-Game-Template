@@ -31,6 +31,10 @@ static func is_keycode_w_ctrl_shift(event: InputEvent, keycode: Key, filter_echo
 	return is_keycode_with_modifiers(event, keycode, true, false, true, filter_echo)
 
 
+static func is_keycode_w_ctrl_alt(event: InputEvent, keycode: Key, filter_echo: bool = false) -> bool:
+	return is_keycode_with_modifiers(event, keycode, true, true, false, filter_echo)
+
+
 static func is_keycode_with_modifiers(event: InputEvent, keycode: Key, ctrl: bool = false, alt: bool = false, shift: bool = false, filter_echo: bool = false) -> bool:
 	if not is_keycode(event, keycode, filter_echo):
 		return false

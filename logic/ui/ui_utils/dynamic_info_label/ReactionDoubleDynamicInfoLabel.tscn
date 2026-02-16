@@ -16,15 +16,13 @@ thickness = 2
 vertical = true
 
 [node name="ReactionDoubleDynamicInfoLabel" instance=ExtResource("1_q1wp5")]
-offset_right = 183.0
+custom_minimum_size = Vector2(220, 0)
+offset_right = 220.0
 offset_bottom = 101.0
 in_editor_second_label_text = "Yes"
 title_text = "Reaction to Attack"
 in_editor_label_text = "react L head"
 additional_title_text = "& Is interrupted"
-
-[node name="PanelGradient" parent="." index="0"]
-size_flags_horizontal = 0
 
 [node name="PanelBordersOnly" parent="PanelGradient" index="0"]
 theme_override_styles/panel = SubResource("StyleBoxFlat_iueb4")
@@ -44,7 +42,7 @@ text = "[b]& Is interrupted[/b]"
 theme_override_constants/separation = 6
 
 [node name="__margin" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="0"]
-custom_minimum_size = Vector2(90, 0)
+custom_minimum_size = Vector2(150, 0)
 theme_override_constants/margin_top = 6
 
 [node name="Text" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0"]
@@ -52,11 +50,14 @@ text = "react L head"
 
 [node name="VSeparator" type="VSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 10
 theme_override_styles/separator = SubResource("StyleBoxLine_iueb4")
 
 [node name="__margin_text_2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="2"]
 custom_minimum_size = Vector2(30, 0)
 
 [node name="Text2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
 text = "Yes"

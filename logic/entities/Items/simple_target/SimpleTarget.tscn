@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cjbmkc53iwu64"]
+[gd_scene load_steps=21 format=4 uid="uid://cjbmkc53iwu64"]
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://logic/entities/Items/simple_target/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="1_vud1n"]
@@ -193,16 +193,67 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_deekb"]
+resource_name = "rotate_on_hit_clock"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/RotatingTarget:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -5.7595863, 0), Vector3(0, -6.265732, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/RotatingTarget/Whoosh:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.099999994),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/RotatingTarget/Friction:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26666668),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/RotatingTarget/Hit:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ramhp"]
 _data = {
 &"RESET": SubResource("Animation_wnrsi"),
 &"rotate_on_hit": SubResource("Animation_tkgjx"),
+&"rotate_on_hit_clock": SubResource("Animation_deekb"),
 &"rotate_on_hit_super": SubResource("Animation_hrpcc")
 }
 
 [node name="SimpleTarget" type="Node3D"]
 script = ExtResource("1_g7ncb")
-label = null
 
 [node name="CameraTarget" parent="." instance=ExtResource("1_vud1n")]
 unique_name_in_owner = true
@@ -213,7 +264,7 @@ __csg_visual = false
 
 [node name="RotatingTarget" type="MeshInstance3D" parent="Visuals"]
 unique_name_in_owner = true
-transform = Transform3D(0.3819422, 0, -0.0066669034, 0, 0.3820004, 0, 0.0066669034, 0, 0.3819422, 0, 1.2790871, 0)
+transform = Transform3D(0.3819422, 0, 0.0066669034, 0, 0.3820004, 0, -0.0066669034, 0, 0.3819422, 0, 1.2790871, 0)
 layers = 128
 material_override = ExtResource("6_lub8o")
 mesh = SubResource("ArrayMesh_lub8o")

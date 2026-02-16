@@ -43,6 +43,7 @@ enum KeyBOverlayPanel {
 
 enum KeyBValueChanger {
 	UNKNOWN = 0,
+	# OCCLUSION_CULLING = 6,
 	## weapon hit
 	WEAPON_HIT = 20,
 	WEAPON_HIT_EVERY_FRAME,
@@ -52,6 +53,11 @@ enum KeyBValueChanger {
 	SHOW_BONES_SIMPLIFIED = 41,
 	WEAR_HAT,
 	DOWNCAST,
+	ROOT_TRAIL,
+	PLAYER_LIGHTS,
+	## coll shapes
+	ALL_AREA3D = 80,
+	CHARACTER_COLLIDERS,
 }
 
 enum KeySValueChanger {

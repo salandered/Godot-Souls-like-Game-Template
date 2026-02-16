@@ -100,7 +100,7 @@ func _input(event: InputEvent) -> void:
 			switch_weapon()
 		else:
 			SigUtils.safe_emit(get_player().switch_weapon_cant_be_done, {})
-	if InputUtils.is_keycode_w_ctrl(event, KEY_G):
+	if InputUtils.is_keycode(event, KEY_Y):
 		if get_player():
 			wave()
 			InputUtils.mark_input_handled(self )

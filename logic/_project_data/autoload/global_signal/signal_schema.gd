@@ -27,6 +27,7 @@ const amount_field := "amount_"
 const damage_field := "damage_"
 const number_field := "number_"
 const message_field := "message_"
+const tag_field := "tag_field_"
 
 
 # dvc

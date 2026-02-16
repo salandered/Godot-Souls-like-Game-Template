@@ -39,11 +39,12 @@ static func _process_single_surface(mesh: Mesh, idx: int, _mat: Material, node_n
 
 	var standard_mat: BaseMaterial3D = _mat
 
-	# If the material already has a file path starting with "res://", 
-	# it means the user manually assigned "Use External" in the Import Settings.
+	# mat already has a file path starting with "res://"  => manually assigned "Use External" in the Import Settings
 	if standard_mat.resource_path.begins_with("res://"):
 		__log_script.info_("SKIP↪️ 1", "User assigned external material (Use External)", standard_mat.resource_path)
 		return
+
+
 	# ----------------------------------------------------
 
 	var mat_resource_name = standard_mat.resource_name
@@ -117,7 +118,7 @@ static func _get_mat_save_path(mat_name: String) -> String:
 	var existing_path := _find_recursive(base_folder_path, search_prefix)
 	
 	if existing_path != "":
-		# Return the path of the variant found (e.g., .../Metal_Reimp_Lighter.tres)
+		# Return the path of the variant found (e.g.: .../Metal_Reimp_Lighter.tres)
 		return existing_path
 	
 	# If nothing found, return the standard default path for creation

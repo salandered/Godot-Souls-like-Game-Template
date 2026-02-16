@@ -301,6 +301,12 @@ func _input(event: InputEvent) -> void:
 			DVS.KeyBOverlayPanel.ERROR_LOG,
 		)
 		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_C):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.PLAYER_COMBO,
+		)
+		InputUtils.mark_input_handled(self )
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_T):
 		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.WEAPON_TRAIL,
@@ -324,18 +330,29 @@ func _input(event: InputEvent) -> void:
 			DVS.KeyBOverlayPanel.SUBVIEWPORT,
 		)
 		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_M):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_OVERLAY_PANEL,
+			DVS.KeyBOverlayPanel.BUS_SPECTRUM,
+		)
+		InputUtils.mark_input_handled(self )
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_U):
 		_dev_visual_config.toggle_bvalue(
 			DVS.DVSection.B_OVERLAY_PANEL,
 			DVS.KeyBOverlayPanel.ENEMY_ANIMATOR,
 		)
 		InputUtils.mark_input_handled(self )
+
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_K):
 		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.SKELETON_VISUALS
 		)
 		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.HIDE_MESH_VISUALS
+		)
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_CHANGER,
+			DVS.KeyBValueChanger.SHOW_BONES_SIMPLIFIED
 		)
 		InputUtils.mark_input_handled(self )
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_S):
@@ -344,6 +361,8 @@ func _input(event: InputEvent) -> void:
 			DVS.CharacterType.PLAYER,
 			DVS.CharDVType.STATE_INFO
 		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_A):
 		_dev_visual_config.toggle_bvalue_composite_key(
 			DVS.DVSection.B_CHAR_DV,
 			DVS.CharacterType.PLAYER,
@@ -351,17 +370,48 @@ func _input(event: InputEvent) -> void:
 		)
 		InputUtils.mark_input_handled(self )
 	elif InputUtils.is_keycode_w_ctrl_shift(event, KEY_H):
-		_dev_visual_config.toggle_bvalue_array(
-			DVS.DVSection.B_CHANGER,
-			[
-				DVS.KeyBValueChanger.WEAPON_HIT,
-			],
-		)
+		# _dev_visual_config.toggle_bvalue_array(
+		# 	DVS.DVSection.B_CHANGER,
+		# 	[
+		# 		DVS.KeyBValueChanger.WEAPON_HIT,
+		# 	],
+		# )
 		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.HITBOX,
 		)
 		_dev_visual_config.toggle_all_char_dv_options(
 			DVS.CharDVType.WEAPON_HITBOX,
+		)
+		InputUtils.mark_input_handled(self )
+	## CTRL ALT
+	elif InputUtils.is_keycode_w_ctrl_alt(event, KEY_A):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_CHANGER,
+			DVS.KeyBValueChanger.ALL_AREA3D
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_alt(event, KEY_C):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_CHANGER,
+			DVS.KeyBValueChanger.CHARACTER_COLLIDERS
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_alt(event, KEY_H):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_CHANGER,
+			DVS.KeyBValueChanger.WEAR_HAT,
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_alt(event, KEY_T):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_CHANGER,
+			DVS.KeyBValueChanger.ROOT_TRAIL
+		)
+		InputUtils.mark_input_handled(self )
+	elif InputUtils.is_keycode_w_ctrl_alt(event, KEY_L):
+		_dev_visual_config.toggle_bvalue(
+			DVS.DVSection.B_CHANGER,
+			DVS.KeyBValueChanger.PLAYER_LIGHTS
 		)
 		InputUtils.mark_input_handled(self )
 	## CTRL 

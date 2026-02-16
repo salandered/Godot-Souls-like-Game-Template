@@ -13,6 +13,8 @@ var _combat: BaseCombat
 var _look_at_char_marker: LookAtCharacterMarker
 
 
+@export var dev_tag: String = ""
+
 ## not nullable after init
 func get_combat() -> BaseCombat:
 	return _combat

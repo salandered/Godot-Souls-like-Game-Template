@@ -56,6 +56,7 @@ func _on_switch_inside_anim():
 	SigUtils.safe_emit_raw_no_payload(SIG_lever_switched, false)
 	_on_switch_inside_anim_implementation()
 
+
 func _on_switch_inside_anim_implementation():
 	pass
 

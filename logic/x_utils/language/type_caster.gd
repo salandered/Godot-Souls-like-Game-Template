@@ -230,6 +230,11 @@ static func array_of_enemy_character(array: Array) -> Array[PHCharacter]:
 	list_casted.assign(_safe_validate_class(array, PHCharacter, "PHCharacter"))
 	return list_casted
 
+static func array_of_base_character(array: Array) -> Array[BaseCharacter]:
+	var list_casted: Array[BaseCharacter] = []
+	list_casted.assign(_safe_validate_class(array, BaseCharacter, "BaseCharacter"))
+	return list_casted
+
 
 # endregion
 

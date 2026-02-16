@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t8n42w7bayi0"
-path="res://.godot/imported/collage mm3.jpg-77d6d03b86a130f0093f3f1361337a22.ctex"
+uid="uid://bj52vao2cjw0p"
+path="res://.godot/imported/sphere-gray.png-f36e63cf3469f346176cd153846bc0f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://-assets-/ui_assets/gallery/collage mm3.jpg"
-dest_files=["res://.godot/imported/collage mm3.jpg-77d6d03b86a130f0093f3f1361337a22.ctex"]
+source_file="res://-assets-/x_icons/shape/sphere-gray.png"
+dest_files=["res://.godot/imported/sphere-gray.png-f36e63cf3469f346176cd153846bc0f4.ctex"]
 
 [params]
 

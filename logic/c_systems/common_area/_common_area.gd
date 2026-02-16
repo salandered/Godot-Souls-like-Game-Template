@@ -114,9 +114,13 @@ func _ready_non_editor():
 
 
 func _shut_down():
-	if area_entered.is_connected(__on_area_entered): area_entered.disconnect(__on_area_entered)
-	if body_entered.is_connected(__on_body_entered): body_entered.disconnect(__on_body_entered)
+	SigUtils.safe_disconnect_pairs([
+			[area_entered, __on_area_entered],
+			[body_entered, __on_body_entered]
+		]
+	)
 	set_physics_process(false)
+	visible = false
 	set_process_unhandled_input(false) # just in case, whether implementation used or not
 
 

@@ -3,7 +3,7 @@ class_name DynamicInfoLabel
 extends ControlSystem
 
 
-const DEF_WAIT_SEC := 2.5
+const DEF_WAIT_SEC := 1.5
 
 @export_group("Text Config")
 @export var title_text: String = "State":
@@ -58,10 +58,10 @@ const DEF_WAIT_SEC := 2.5
 @export var auto_drop_height: bool = true
 ## ignored if auto_drop_height true
 @export var drop_distance: float = 20.0
-@export var drop_buffer: float = 2.0
+@export var drop_buffer: float = 1.0
 @export var drop_duration: float = 0.3
 var wait_duration: float = DEF_WAIT_SEC
-@export var fade_duration: float = 0.5
+@export var fade_duration: float = 0.3
 @export var ghost_target_color: Color = Color(0.6, 0.6, 0.6, 1.0) # Dim gray
 
 

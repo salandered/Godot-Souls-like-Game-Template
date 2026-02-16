@@ -6,5 +6,4 @@
 [node name="MetricsGridDistributor" type="Node"]
 script = ExtResource("1_slf7m")
 value_label_mono_font = ExtResource("2_7cw5p")
-value_label_font_size = 16
-name_label_font_size = 22
+value_label_font_size = 18

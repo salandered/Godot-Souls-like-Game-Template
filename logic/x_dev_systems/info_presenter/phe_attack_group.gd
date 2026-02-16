@@ -24,6 +24,9 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 func _on_SIG_phe_weapon_hit_data_set(payload: Dictionary[String, Variant]):
+	var tag := _get_SIG_string_payload(payload, SPS.tag_field, {})
+	if tag != "demo_enemy":
+		return
 	# __log_("_on_SIG_phe_weapon_hit_data_set", payload)
 	_on_SIG_hit_data_payload(
 		phe_attack_damage,

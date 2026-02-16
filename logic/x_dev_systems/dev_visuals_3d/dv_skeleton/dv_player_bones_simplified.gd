@@ -1,5 +1,5 @@
 @tool
-extends Node3DSystem
+extends BaseDVCDependentNode3D
 
 ## TODO: should be deleted in favor of DVSkeleton
 ## (DVSkeleton would need some new features)

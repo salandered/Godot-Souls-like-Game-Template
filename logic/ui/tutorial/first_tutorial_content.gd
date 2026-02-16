@@ -253,16 +253,16 @@ const _6_additional_movement_tips_text = "
 
 const _ui_overlay_controls_text = "
 In Pause Menu you can find UI Overlay Controls submenu. 
-It can control all of the in-game UI panels, including this tutorial.
+It controls all of the in-game UI panels, including this tutorial.
 
-A lot of the game mechanics can be visualised using it! To name a few:
+Also a lot of the game mechanics can be visualised using it. To name a few:
 [ul]
-	Current state of the player or any enemy/NPC in game. 
-	Information about attack type, damage or speed.
-	Trajectory of the weapon moves.
-	Character hit boxes and their i-frames (like during the dodge).
-	Camera setup with all it's nodes.
-	And more
+Current state of the player or any enemy/NPC in game. 
+Information about attack type, damage or speed.
+Trajectory of the weapon hits.
+Character hit boxes and their i-frames (like during the dodge).
+Camera setup with all it's nodes.
+Additional camera to show character from different sides.
 [/ul]
 
 "

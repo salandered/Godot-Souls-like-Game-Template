@@ -1,0 +1,30 @@
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://cxwpbx7564760"]
+
+[ext_resource type="Texture2D" uid="uid://ckvbroetp76p6" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_diffuse.jpg" id="1_65o7m"]
+[ext_resource type="Texture2D" uid="uid://4y20ikq57u1q" path="res://-assets-/materials-shared/ground/I_ground088/lincoln_Ground088_2K-JPG_Color_darkest.jpg" id="2_cf4r5"]
+[ext_resource type="Texture2D" uid="uid://ds4u4j6oupcfo" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_normal.png" id="3_dsryj"]
+[ext_resource type="Texture2D" uid="uid://ct6ipgspwswc7" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_roughness.png" id="4_xyvcm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vu8dt"]
+frequency = 0.0029
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_njjha"]
+noise = SubResource("FastNoiseLite_vu8dt")
+seamless = true
+in_3d_space = true
+
+[resource]
+resource_name = "I_Concrete Old"
+cull_mode = 2
+albedo_color = Color(0.9412629, 0.9412629, 0.9412629, 1)
+albedo_texture = ExtResource("1_65o7m")
+metallic_specular = 0.4
+metallic_texture_channel = 2
+roughness_texture = ExtResource("4_xyvcm")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_dsryj")
+detail_enabled = true
+detail_mask = SubResource("NoiseTexture2D_njjha")
+detail_albedo = ExtResource("2_cf4r5")

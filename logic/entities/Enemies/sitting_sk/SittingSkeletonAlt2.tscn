@@ -118,9 +118,6 @@ bones/52/rotation = Quaternion(-9.112611e-08, 0.99999964, 0.00090006005, 2.23081
 [node name="Hips" parent="bones" index="0"]
 transform = Transform3D(0.9997984, -0.019910878, 0.0025907152, 0.019682283, 0.99737906, 0.06962442, -0.003970208, -0.06955939, 0.9975699, -7.84894e-05, 0.61467737, 0.033474334)
 
-[node name="HitboxTorso" parent="bones/Hips" index="0"]
-transform = Transform3D(0.99999994, 9.313226e-10, 0, 9.313226e-10, 1, -1.4901161e-08, 0, 0, 1, 0.008670665, 0.07821095, 0.0108701065)
-
 [node name="Root" parent="bones" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6473226e-05, 0, -0.0052452926)
 
@@ -151,9 +148,7 @@ mesh = SubResource("ArrayMesh_evbqx")
 transform = Transform3D(0.9977336, 0.06725236, -0.0021869917, -0.06381905, 0.93549705, -0.34752306, -0.021325823, 0.34687507, 0.93766886, 0.0033187289, 0.90893966, 0.03947961)
 
 [node name="Mug2" parent="bones/UpperChest" index="0"]
-unique_name_in_owner = false
 visible = true
-script = null
 
 [editable path="VisualOffset/FCS_Skeleton_working3"]
 [editable path="bones/Chest/smith_sword_2"]
