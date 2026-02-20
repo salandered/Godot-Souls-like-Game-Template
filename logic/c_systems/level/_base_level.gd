@@ -60,7 +60,7 @@ func __soft_validation() -> bool:
 
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	_init_delay_logic()
 	add_to_group(Groups.Environment_.LEVEL)
@@ -102,7 +102,7 @@ func _ready() -> void:
 func _init_delay_logic():
 	if not initialise_dv:
 		return
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 
 	await FrameUtils.wait_process_frames(3)

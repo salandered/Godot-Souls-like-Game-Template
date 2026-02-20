@@ -135,7 +135,7 @@ func _ready() -> void:
 
 
 func _on_setting_changed(value) -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	M_PlayerConfig.set_config(section, key, value)
 	setting_changed.emit(value)
 

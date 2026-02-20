@@ -11,8 +11,13 @@ func __hard_validation() -> bool:
 	return true
 
 
+## can be overriden
+func _enabled_on_init():
+	return false
+
+
 func initialise() -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 
 	reset_visuals()
 
@@ -24,7 +29,7 @@ func initialise() -> void:
 	if not __perform_validation(true):
 		__log_warn_soft("won't be working")
 	else:
-		set_enabled(false)
+		set_enabled(_enabled_on_init())
 		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_b_overlay_panel_value_changed, _enable_via_sig)
 
 
@@ -34,7 +39,7 @@ func initialise_implementation():
 
 
 func reset_visuals() -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	if get_ui_panel():
 		get_ui_panel().visible = false
 

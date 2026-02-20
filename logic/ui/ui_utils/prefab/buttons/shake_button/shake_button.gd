@@ -40,7 +40,7 @@ func _ready() -> void:
 	_update_visuals(def_shake_power, def_shake_speed, def_modulation_color)
 	_change_shader_param(SHADER_PARAM_ENABLE_SHINE, enable_shine)
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		# randomize phase
 		if _validate_panel():
 			panel.material.set_shader_parameter(SHADER_PARAM_TIME_OFFSET, randf_range(0.0, 100.0))

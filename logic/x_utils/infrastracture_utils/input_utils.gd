@@ -104,7 +104,7 @@ static func _dev_change_param(
 	key_b: String = RawAction.t2,
 	require_ctrl_alt: bool = false
 ) -> Variant:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return param
 	var prev_param: Variant = param
 

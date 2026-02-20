@@ -15,9 +15,8 @@ const WARN := "WARN"
 ## print with prominent icon! what do u want
 const WARN_CRUCIAL := "WARN_CRUCIAL"
 
-## works only in developer build
-## not advised to use at all
-## TODO: consider deleting
+## works only in dev builds. consider not using.
+## example: u want something to fast crash while prototyping
 const ASSERT := "ASSERT"
 
 ## ENGINE LEVEL

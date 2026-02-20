@@ -21,7 +21,7 @@ func _horizontally_align_popup_labels() -> void:
 	$ResetConfirmationDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	_update_ui()
 	_horizontally_align_popup_labels()
 

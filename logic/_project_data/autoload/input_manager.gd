@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 
 
 func _process_quit():
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 
 	if Input.is_action_just_pressed(RawAction.DEV_force_quit):

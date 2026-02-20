@@ -164,7 +164,7 @@ func set_current_substate(next_state_name: String) -> void:
 		GlobalSignal.SIG_phe_state_changed,
 		{
 			## changed to 
-			SPS.h_state_data_field: GlobalSignal.HStateData.new(
+			SPS.h_state_data_field: SPS.HStateData.new(
 					_next_substate.state_name,
 					_next_substate.state_depth),
 			SPS.tag_field: me.dev_tag
@@ -177,7 +177,7 @@ func reset_current_substate() -> void:
 		GlobalSignal.SIG_phe_state_reset,
 		{
 			## reset from
-			SPS.h_state_data_field: GlobalSignal.HStateData.new(
+			SPS.h_state_data_field: SPS.HStateData.new(
 					__current_substate.state_name,
 					__current_substate.state_depth)
 		}

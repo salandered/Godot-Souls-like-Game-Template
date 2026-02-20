@@ -19,7 +19,7 @@ static func create_generic_cylinder(
 	mi.cast_shadow = cast_shadow
 	
 	if create_material:
-		mi.material_override = MaterialUtils.create_standard_3d(
+		mi.material_override = MaterialUtils.create_standard_mat_3d(
 			Color.WHITE,
 			shading_mode,
 			BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -41,7 +41,7 @@ static func create_simple_sphere(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
-	mi.material_override = MaterialUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_mat_3d(
 		color,
 		shading_mode,
 		BaseMaterial3D.TRANSPARENCY_DISABLED,
@@ -64,7 +64,7 @@ static func create_simple_box(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
-	mi.material_override = MaterialUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_mat_3d(
 		color,
 		shading_mode,
 		BaseMaterial3D.TRANSPARENCY_DISABLED,
@@ -92,7 +92,7 @@ static func draw_temporary_sphere(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-	mi.material_override = MaterialUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_mat_3d(
 		color,
 		shading_mode,
 		BaseMaterial3D.TRANSPARENCY_ALPHA,
@@ -165,7 +165,7 @@ static func create_bone_like_connector(
 	mi.mesh = mesh
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
-	mi.material_override = MaterialUtils.create_standard_3d(
+	mi.material_override = MaterialUtils.create_standard_mat_3d(
 		color,
 		BaseMaterial3D.SHADING_MODE_PER_PIXEL,
 	)
@@ -216,6 +216,27 @@ static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
 		return node
 		
 	return null
+
+
+static func create_arrow_tip(
+	radius: float,
+	color: Color
+) -> MeshInstance3D:
+	var mesh := CylinderMesh.new()
+	mesh.bottom_radius = radius * 5.0
+	mesh.top_radius = 0.2
+	mesh.height = radius * 4.0
+	
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	
+	mi.material_override = MaterialUtils.create_standard_mat_3d(
+		color,
+		BaseMaterial3D.SHADING_MODE_UNSHADED
+	)
+	
+	return mi
 
 
 # region: __LOGS

@@ -38,7 +38,7 @@ class AnimID:
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		if __perform_validation():
 			var _item := item_scene.instantiate()
 			if _item is not BasePickItem:
@@ -83,7 +83,7 @@ func _on_my_area_interacted():
 
 
 # func _input(event: InputEvent) -> void:
-# 	if not OS.is_debug_build():
+# 	if u.is_release():
 # 		return
 		
 # 	if event.is_action_pressed(RawAction.DEV_H):

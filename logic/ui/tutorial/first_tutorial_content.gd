@@ -48,7 +48,7 @@ const add_before: Dictionary[String, String] = {
 	"Tip:": icon_light_bulb,
 	"Advanced tip:": icon_light_bulb,
 	"move button": icon_steps,
-	"UI Overlay": icon_ui_overlay,
+	"UI Dev Tools": icon_ui_overlay,
 	"dodge button": icon_dodge,
 }
 
@@ -65,7 +65,7 @@ func _ready() -> void:
 	set_all_texts()
 
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		SigUtils.safe_connect(GlobalSignal.SIG_tut_panel_switched, _on_SIG_tut_panel_switched)
 
 
@@ -143,7 +143,7 @@ var LEGEND_ITEMS: Array[String] = [
 	BB.image_20_wrap(icon_target_2) + " Target locking",
 	"Health/stamina",
 	"Additional info",
-	"UI Overlay controls",
+	"UI Dev Tools",
 	
 
 ]
@@ -252,7 +252,7 @@ const _6_additional_movement_tips_text = "
 "
 
 const _ui_overlay_controls_text = "
-In Pause Menu you can find UI Overlay Controls submenu. 
+In Pause Menu you can find UI Dev Tools submenu. 
 It controls all of the in-game UI panels, including this tutorial.
 
 Also a lot of the game mechanics can be visualised using it. To name a few:

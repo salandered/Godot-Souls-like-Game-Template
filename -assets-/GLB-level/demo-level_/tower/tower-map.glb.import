@@ -70,6 +70,7 @@ _subresources={
 "use_external/path": "uid://bb06udlb6phmw"
 },
 "PixPalMat": {
+"use_external/enabled": false,
 "use_external/fallback_path": "res://-assets-/materials-shared/x_unsorted/PixPalMat.tres",
 "use_external/path": "uid://kn3mf76stt08"
 },

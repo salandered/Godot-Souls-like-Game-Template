@@ -47,7 +47,7 @@ func _update_camera_metrics() -> void:
 	var cam_pos := _camera.camera.global_position
 	
 	# state
-	_metrics_grid.update_metric("State", _camera.current_state.state_name)
+	_metrics_grid.update_metric("State", _camera.current_state.state_name, true, +2)
 	
 	# target
 	var target_name := "-"
@@ -84,18 +84,18 @@ func _update_camera_metrics() -> void:
 
 	# Distances
 	var dist_sock := p_pos.distance_to(socket_pos)
-	_metrics_grid.update_metric("Player->Socket", dist_sock)
+	_metrics_grid.update_metric("Player->Socket", dist_sock, true, -2)
 	
 	var dist_cam := p_pos.distance_to(cam_pos)
-	_metrics_grid.update_metric("Player->Cam", dist_cam)
+	_metrics_grid.update_metric("Player->Cam", dist_cam, true, -2)
 
 	# State specific booms
 	var free_boom_len := 0.0
 	if _camera.free_state and _camera.free_state.free_boom:
 		free_boom_len = _camera.free_state.free_boom.length()
-	_metrics_grid.update_metric("Boom length", free_boom_len)
+	_metrics_grid.update_metric("Boom length", free_boom_len, true, -2)
 
 	var lock_boom_len := 0.0
 	if _camera.locked_state and _camera.locked_state.lock_boom:
 		lock_boom_len = _camera.locked_state.lock_boom.length()
-	_metrics_grid.update_metric("Boom length (locked state)", lock_boom_len)
+	_metrics_grid.update_metric("Boom length (locked state)", lock_boom_len, true, -2)

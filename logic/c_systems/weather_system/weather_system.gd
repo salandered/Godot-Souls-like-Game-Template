@@ -55,7 +55,7 @@ func __soft_dependencies() -> Array:
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		if not __perform_validation():
 			return
 		## initialise with defaults

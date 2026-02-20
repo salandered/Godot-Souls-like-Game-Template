@@ -18,7 +18,7 @@ var _active_ghosts_second: Array[RichTextLabel] = []
 
 func _ready() -> void:
 	super._ready()
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		set_second_text_label("")
 
 
@@ -43,5 +43,5 @@ func _update_font_size() -> void:
 
 func _update_in_editor_label_text() -> void:
 	super._update_in_editor_label_text()
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		set_second_text_label(in_editor_second_label_text)

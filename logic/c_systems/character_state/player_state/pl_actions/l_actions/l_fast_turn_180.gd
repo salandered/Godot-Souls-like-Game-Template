@@ -1,21 +1,17 @@
-extends LegsAction
-
-
-var initial_rotation: Quaternion
-
-var curr_turn: TurnData = TurnData.new()
-
-var INCREASE_ROTATION: float = 1.1
-var FAST_TURN_180_APEX_TIME: float
+extends BaseLegsTurn
 
 
 func initialise() -> void:
+	super.initialise()
+	INCREASE_ROTATION = 1.1
+
 	# APEX
-	FAST_TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
 
 	blend_time.set_by_prev_action({
 		Leg.Act.sprint_to_idle: 0.4,
 	})
+
 
 func on_enter_action(input_: InputPackage) -> void:
 	initial_rotation = get_player().quaternion
@@ -27,13 +23,6 @@ func on_enter_action(input_: InputPackage) -> void:
 	curr_turn.initialise(_target_angle, _turn_dir)
 
 
-func on_exit_action() -> void:
-	var tranfer_turn_data: Dictionary[String, Variant] = {}
-	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
-	
-	player_sm.fill_tranfer_data(tranfer_turn_data)
-
-	__log_ext(__log_turn_exit())
 	
 
 func update(input_: InputPackage, delta: float):
@@ -42,7 +31,7 @@ func update(input_: InputPackage, delta: float):
 		var result := pm().apply_root_rotation(rotation_delta * INCREASE_ROTATION, curr_turn.target_angle, curr_turn.accum_rotation)
 		curr_turn.update(result.completed, result.accum_rot)
 			
-	if time_spent() < FAST_TURN_180_APEX_TIME:
+	if time_spent() < TURN_180_APEX_TIME:
 		var root_vel := get_animator_manager().get_root_velocity()
 		pm().set_velocity(initial_rotation * root_vel)
 	else:
@@ -56,10 +45,3 @@ func animate(): # ▶️
 		anim = anim_container.get_by_anim_id(A.loco.fast_turn_180_L)
 
 	set_anim_to_play()
-
-
-func __log_turn_exit() -> String:
-	var _final_rotation := get_player().quaternion.angle_to(initial_rotation)
-	var _error_angle := curr_turn.accum_rotation - curr_turn.target_angle
-	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
-		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

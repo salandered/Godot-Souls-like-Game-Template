@@ -156,7 +156,7 @@ func animate(): # ▶️
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 	SPEED_BOOST = InputUtils._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 2, RawAction.DEV_speed_down, RawAction.DEV_speed_up, true)
 
@@ -169,9 +169,11 @@ func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
 
 
 ## NOTE: currently adjusting SpeedConfig solves non completed root turn better than this.
-## In the future this feature may be deleted or separated into something bigger.
+## In the future this feature may be deleted. 
+## If not, turn data may be acquired differently
 var COMPLETE_ROOT_TURN_FEATURE: bool = false
 # region: COMPLETE_ROOT_TURN_FEATURE
+#--------------------------------------------
 # from on enter match turn
 	# var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
 	# if raw_turn_data == null:
@@ -180,7 +182,7 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 	# else:
 		# curr_turn.initialise_from_dict(raw_turn_data)
 		# prints(u.sfr(), " Inherited turn:", str(curr_turn))
-
+#--------------------------------------------
 # from update
 	# if COMPLETE_ROOT_TURN_FEATURE and not curr_turn.turn_completed:
 	# 	_complete_root_turn(CURR_SPEED)
@@ -193,5 +195,12 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 
 # 	get_player().velocity = get_player().basis.z * CURR_SPEED
 # 	# OR move_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
-# endregione_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
+#   e_with_input_vector(input_, delta, CURVE_SPEED, RESULT_SPEED)
+
+#--------------------------------------------
+# how turn actions used to be:
+	# func on_exit_action() -> void:
+	# var tranfer_turn_data: Dictionary[String, Variant] = {}
+	# tranfer_turn_data["turn_data"] = curr_turn.to_dict()
+	# player_sm.fill_tranfer_data(tranfer_turn_data)
 # endregion

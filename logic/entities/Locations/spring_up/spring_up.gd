@@ -25,7 +25,7 @@ func __soft_dependencies() -> Array:
 
 func _ready() -> void:
 	set_physics_process(false)
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	if __perform_validation():
 		monitor_player_enter_signal_area.SIG_player_entered.connect(on_player_entered)
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cl4hklj8yd2ns"]
 
-[ext_resource type="Script" uid="uid://wkf62y565qvp" path="res://logic/x_dev_systems/dev_visuals_3d/base_dv_classes/dv_collider_shapes.gd" id="1_kktfi"]
+[ext_resource type="Script" uid="uid://wkf62y565qvp" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/dv_collider_shapes.gd" id="1_kktfi"]
 
 [node name="DVCharColliders" type="Node3D"]
 visible = false

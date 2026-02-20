@@ -57,6 +57,7 @@ credits_packed_scene = ExtResource("4_iuok3")
 gallery_packed_scene = ExtResource("5_8iie0")
 level_1_scene_path = "uid://dmkxcwge6jddy"
 level_2_scene_path = "uid://bm5vqmonl5jl4"
+__dev_bypass_menu_and_start_arena = true
 custom_cursor_texture = ExtResource("5_ugg5x")
 
 [node name="Menu3DScene" parent="." instance=ExtResource("5_hvsaw")]
@@ -107,7 +108,7 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_6tohx")
 theme_override_font_sizes/font_size = 64
-text = "Third Person Souls-like Template"
+text = "Third Person Souls-like Game Template"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_nt2e5")

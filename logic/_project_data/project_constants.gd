@@ -1,6 +1,9 @@
 class_name Constants
 extends RefCounted
 
+static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+
 const BIG_MEANINGLESS_NUMBER: float = 999999.8
 const BIG_MEANINGLESS_NUMBER_INT: int = 999998
 

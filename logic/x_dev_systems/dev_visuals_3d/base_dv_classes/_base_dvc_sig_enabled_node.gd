@@ -25,7 +25,7 @@ extends BaseDVCDependentNode
 
 
 func initialise() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 
 	await FrameUtils.wait_process_frames(10)

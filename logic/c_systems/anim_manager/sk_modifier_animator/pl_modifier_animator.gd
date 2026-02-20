@@ -4,6 +4,8 @@ class_name PlayerModifierAnimator
 extends SkeletonModifier3DSystem
 
 
+@export var config: PlayerConfig
+
 @onready var skeleton := get_skeleton()
 @onready var root_animator: PlayerRootAnimator = %RootAnimator
 
@@ -205,7 +207,10 @@ func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
 	
 
 func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
-	return global_speed_scale * playback.anim.speed_scale
+	var r := global_speed_scale * playback.anim.speed_scale
+	if config:
+		r *= config.SPEED_SCALE_COEF
+	return r
 
 
 func set_global_speed_scale(new_scale: float):

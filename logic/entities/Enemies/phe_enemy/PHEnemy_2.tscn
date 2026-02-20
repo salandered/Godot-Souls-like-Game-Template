@@ -93,7 +93,7 @@
 [ext_resource type="Script" uid="uid://2dau6l3aklq7" path="res://logic/c_systems/character_state/phe_state/state_leafes/sleep.gd" id="91_t2b01"]
 [ext_resource type="Script" uid="uid://b5c01rsxuvn3" path="res://logic/c_systems/character_state/phe_state/state_leafes/awaken.gd" id="92_1b7wx"]
 [ext_resource type="Script" uid="uid://lfard6gh3uff" path="res://logic/c_containers/anim_entity_config/bg_config_.gd" id="93_6vhpn"]
-[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/DVHitBox.tscn" id="93_gmv0p"]
+[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/DVHitBox.tscn" id="93_gmv0p"]
 [ext_resource type="Script" uid="uid://dq03h0yh6ikyv" path="res://logic/c_systems/character_state/phe_state/state_leafes/attacks/phase_switch.gd" id="93_rk1k2"]
 [ext_resource type="Script" uid="uid://dgk6yfubccslp" path="res://logic/c_systems/character_movement/e_movement.gd" id="94_e6is3"]
 [ext_resource type="PackedScene" uid="uid://cwr8dav8jomc3" path="res://logic/x_dev_systems/dev_visuals_3d/dv_skeleton/DVSkeleton.tscn" id="94_l3uka"]
@@ -1728,7 +1728,8 @@ area_capsule_height = 6.5
 
 [node name="TestHeadLook" type="CSGSphere3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.392, 0, 0, 0, 0.392, 0, 0, 0, 0.392, -1.0049994, 2.6779995, 2.6759994)
+transform = Transform3D(0.5840227, -0.11730921, -0.80321664, -0.018529046, 0.9873188, -0.15766963, 0.8115261, 0.1069654, 0.5744438, -0.020035535, 1.8981334, 1.4939415)
+visible = false
 material_override = ExtResource("18_2l40h")
 smooth_faces = false
 script = ExtResource("19_g14yk")
@@ -2241,6 +2242,7 @@ character = NodePath("../..")
 unique_name_in_owner = true
 script = ExtResource("93_6vhpn")
 me = NodePath("..")
+key_f_value = 81
 
 [node name="SFX" type="Node3D" parent="."]
 

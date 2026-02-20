@@ -19,7 +19,7 @@ const DEF_draw_snapped_hits := true
 
 
 func initialise() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	
 	await FrameUtils.wait_process_frames(4)
@@ -137,11 +137,11 @@ func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
 func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
 	if not char_hit_box:
 		return
-	var parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
-	if not parsed_payload or parsed_payload.value is not bool:
+	var parsed_payload := DVCSIGPayloadParser.parse_b_dvc_value_changed(payload)
+	if not parsed_payload:
 		return
 	var dvc_key := parsed_payload.key
-	var toggle := parsed_payload.value as bool
+	var toggle := parsed_payload.value_as_bool
 	match dvc_key:
 		DVS.KeyBValueChanger.WEAPON_HIT:
 			char_hit_box.emit_on_attacking_wp = toggle

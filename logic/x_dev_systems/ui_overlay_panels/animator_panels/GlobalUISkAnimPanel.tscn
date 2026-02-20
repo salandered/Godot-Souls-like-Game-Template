@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="8_27gpl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1r0w"]
-bg_color = Color(0.17531994, 0.055200003, 0.24, 0.3254902)
+bg_color = Color(0.17531994, 0.055200003, 0.24, 0.40392157)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -31,10 +31,14 @@ mouse_filter = 2
 [node name="MetricsGridDistributor" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("3_o558t")]
 unique_name_in_owner = true
 grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer/UIMetricsGrid")
+value_label_font_size = 22
+name_label_font_size = 28
 
 [node name="MetricsGridDistributorBlendChain" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("3_o558t")]
 unique_name_in_owner = true
 grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer/UIMetricsGridBlendChain")
+value_label_font_size = 20
+name_label_font_size = 26
 
 [node name="SkAnimMetricsGridManager" type="Node" parent="." node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
@@ -53,7 +57,7 @@ layout_mode = 2
 
 [node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 
 [node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel"]

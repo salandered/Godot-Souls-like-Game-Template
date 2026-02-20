@@ -49,7 +49,7 @@
 [ext_resource type="Script" uid="uid://dirvb0rrpsrl6" path="res://logic/c_systems/character_state/mech_fighter_state/attack_lr_power.gd" id="41_24aju"]
 [ext_resource type="Script" uid="uid://ddqblhwmfi6tj" path="res://logic/c_systems/character_state/mech_fighter_state/attack_rl_power.gd" id="42_6xoih"]
 [ext_resource type="Script" uid="uid://b7lb3yvq3q4bg" path="res://logic/c_systems/character_state/mech_fighter_state/attack_stab_power.gd" id="43_tx1qf"]
-[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/DVHitBox.tscn" id="49_6xoih"]
+[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/DVHitBox.tscn" id="49_6xoih"]
 [ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/x_dev_systems/dev_visuals_3d/dv_area_contact.gd" id="50_tx1qf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ulmwa"]
@@ -1374,9 +1374,6 @@ script = ExtResource("42_6xoih")
 [node name="AttackStabPower" type="Node" parent="StatesContainer"]
 script = ExtResource("43_tx1qf")
 
-[node name="Config" type="Node" parent="."]
-script = ExtResource("30_ydmfp")
-
 [node name="LookAtCharacterMarker" parent="." instance=ExtResource("36_4wtmj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2972008, 0)
 
@@ -1413,3 +1410,7 @@ visible = false
 script = ExtResource("50_tx1qf")
 char_hit_box = NodePath("../../VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmHitbox")
 character = NodePath("../..")
+
+[node name="Config" type="Node" parent="."]
+script = ExtResource("30_ydmfp")
+key_f_value = 82

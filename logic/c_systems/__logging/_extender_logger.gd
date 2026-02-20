@@ -1,5 +1,5 @@
 class_name ExtenderLogger
-extends RefCounted  ## dont use Extender here :)
+extends RefCounted ## dont use Extender here :)
 
 
 const PP_NAME_NAME = "pp_name"
@@ -8,7 +8,7 @@ const LOG_INDENT_NAME = "__LOG_INDENT"
 
 
 static func for_log_(object_: Object, prefix: Variant, ...parts: Array) -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 	if ObjUtils.safe_has_method(object_, LOG_B_NAME, WL.WARN) \
 		and ObjUtils.safe_has_method(object_, PP_NAME_NAME, WL.WARN) \

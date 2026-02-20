@@ -238,10 +238,6 @@
 			"color": "dark_misc"
 		},
 		// ENEMY STATES
-		// {
-		// 	"path": "logic/Enemies/SimpleEnemy/se_states",
-		// 	"color": "custom10"
-		// },
 		{
 			"path": "logic/c_systems/character_state/phe_state/state_leafes",
 			"color": "green_shade_3"
@@ -335,7 +331,6 @@
 			"decorations": [
 				{
 					"color": "#FFEEA1E5",
-					// "fontWeight": "bold"
 				}
 			]
 		},
@@ -344,7 +339,6 @@
 			"decorations": [
 				{
 					"color": "#FFEEA1E5",
-					// "fontWeight": "bold"
 				}
 			]
 		},
@@ -353,7 +347,6 @@
 			"decorations": [
 				{
 					"color": "#FFEEA1E5",
-					// "fontWeight": "bold"
 				}
 			]
 		},
@@ -362,7 +355,6 @@
 			"decorations": [
 				{
 					"color": "#5c9dff",
-					// "fontWeight": "bold"
 				}
 			]
 		},
@@ -380,7 +372,6 @@
 			"decorations": [
 				{
 					"color": "#5c9dff",
-					// "fontWeight": "bold"
 				}
 			]
 		},
@@ -474,14 +465,25 @@
 				}
 			]
 		},
-		"(if not OS.is_debug_build\\(\\))": {
+		"(is_release\\(\\))": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
-					"color": "#caa495d7",
-					// "backgroundColor": "#aff3ff",
-					"borderRadius": "2px", // Give the box rounded corners
-					"border": "1px solid #caa495d7" // A solid border
+					"color": "#ff5fca",
+					"backgroundColor": "#06423fa6",
+					"fontWeight": "bold",
+					// "borderRadius": "2px", // Give the box rounded corners
+					// "border": "1px solid #caa495d7" // A solid border
+				}
+			]
+		},
+		"(is_editor\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#dfd793",
+					"backgroundColor": "#58176b71",
+					"fontWeight": "bold",
 				}
 			]
 		},
@@ -513,9 +515,7 @@
 				{
 					"color": "#68c3f8"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"\\b(Leg\\.Beh\\.)": {
@@ -524,9 +524,7 @@
 				{
 					"color": "#c9ad79f3"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"\\b(Leg\\.Act\\.)": {
@@ -543,9 +541,7 @@
 				{
 					"color": "#5da9ff"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"(SEState\\.)(\\w+)": {
@@ -554,9 +550,7 @@
 				{
 					"color": "#5da9ff"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"(PHES\\.)(\\w+)": {
@@ -565,9 +559,7 @@
 				{
 					"color": "#5da9ff"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"\\b(PHES\\.Leaf\\.)": {
@@ -606,9 +598,7 @@
 				{
 					"color": "#5ea6f8"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"(traits)(\\.)(\\w+)": {
@@ -620,9 +610,7 @@
 					// invalid but works
 					"textDecoration": "underline"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"\\b(_:)(?=\\r?\\n)": {
@@ -861,9 +849,7 @@
 					"color": "#ecc893",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"\\b(curr_state_action)": {
@@ -873,9 +859,7 @@
 					"color": "#96c3eeec",
 					"fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"(combat)": {
@@ -885,9 +869,7 @@
 					"color": "#ff9b8ef8",
 					// "fontWeight": "bold",
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		"(?<!\\w)(@abstract)(?!\\w)": {
@@ -905,9 +887,7 @@
 					"color": "#f5a382",
 					"fontStyle": "italic"
 				},
-				{
-					// "color": "#FFEEA1E5",
-				}
+				{}
 			]
 		},
 		// EXAMPLES

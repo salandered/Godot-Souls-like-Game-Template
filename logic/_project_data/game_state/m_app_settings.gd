@@ -377,7 +377,7 @@ static func set_from_config_and_window(window: Window) -> void:
 # False: In ANY export (Debug or Release).
 # Benefit: keys are vanished the moment you leave the editor.
 static func remove_developer_actions() -> void:
-	if OS.is_debug_build():
+	if not u.is_release():
 		return
 
 	__log_("M_AppSettings", "Release Build detected: Purging developer actions...")

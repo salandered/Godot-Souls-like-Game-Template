@@ -21,7 +21,7 @@ func __hard_validation() -> bool:
 
 
 func _ready():
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 
 	if not __perform_validation():
@@ -156,15 +156,15 @@ func _on_SIG_hit_data_payload(
 	direction_label.set_label_text(pp_string_attack_dir, dynamic_label_config)
 
 
-func _get_SIG_h_state_data(payload: Dictionary[String, Variant]) -> GlobalSignal.HStateData:
+func _get_SIG_h_state_data(payload: Dictionary[String, Variant]) -> SPS.HStateData:
 	var _r := SigUtils.safe_get_variant_payload_value(payload, SPS.h_state_data_field, false)
 	if _r.err:
 		__log_warn("", "", "", payload)
 		return null
-	if not _r.value is GlobalSignal.HStateData:
+	if not _r.value is SPS.HStateData:
 		__log_warn("", "", "", payload)
 		return null
-	var h_state_data: GlobalSignal.HStateData = _r.value
+	var h_state_data: SPS.HStateData = _r.value
 	return h_state_data
 
 

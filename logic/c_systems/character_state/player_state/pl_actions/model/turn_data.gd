@@ -1,5 +1,9 @@
-extends RefCountedSystem
 class_name TurnData
+extends NodeLogger
+
+## Upgraded from static to Node. 
+## 	 - Experimental because all was designed with temporary data struct in mind
+
 
 var target_angle: float
 var turn_direction: String
@@ -14,6 +18,10 @@ const TURN_DIRECTION_DICT := "turn_direction"
 const ACCUM_ROTATION_DICT := "accum_rotation"
 const TURN_COMPLETED_DICT := "turn_completed"
 
+
+func _ready() -> void:
+	add_to_group(Groups.Dev.DV_LEG_TURN)
+
 ## idempotent
 func initialise(angle: float, turn_direction_: String):
 	target_angle = angle
@@ -21,6 +29,7 @@ func initialise(angle: float, turn_direction_: String):
 	accum_rotation = 0.0
 	turn_completed = false
 	__validate()
+
 
 func update(turn_completed_: bool, accum_rotation_: float, ):
 	turn_completed = turn_completed_
@@ -58,8 +67,8 @@ func __validate():
 		turn_direction = TURN_DIR_RIGHT
 
 
+##
+
+
 func __LOG_B() -> bool:
 	return true
-
-func __LOG_INDENT() -> int:
-	return 0

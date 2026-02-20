@@ -9,7 +9,7 @@ static func __emit(signal_: Signal, with_payload: bool, payload: Dictionary):
 		signal_.emit()
 
 
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	if GlobalUIInfo.__SIG_DEBUG:
 		var __payload: Dictionary[String, Variant]

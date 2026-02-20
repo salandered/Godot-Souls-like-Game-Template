@@ -100,7 +100,6 @@ var LOCKED_STATE_NAME := "locked_state"
 
 var __fov_pointer := 0
 var __dev_camera_coll := true
-var __fov_cycler: Cycler
 
 
 func __hard_dependencies() -> Array:
@@ -143,7 +142,7 @@ func initialise() -> void:
 	
 	# Calculate initial_boom based on player's forward direction
 	# was: initial_boom = fc.socket.global_position - fc.pivot.global_position
-	# TODO WARNING: HERE IS INITIAL LENGTH BETWEEN PLAYER AND CAMERA. NOT IN THE VIEWPORT
+	# TODO WARNING: HERE IS INITIAL LENGTH BETWEEN PLAYER AND CAMERA. NOT IN THE EDITOR
 	# 		make some configurable system!
 	var _player_forward := -player.global_transform.basis.z
 	var initial_boom := _player_forward * 1.6 + Vector3(0, 1.0, 0) # 5 units behind, 2 units up
@@ -180,8 +179,6 @@ func initialise() -> void:
 		]
 	)
 
-	__fov_cycler = Cycler.new([50, 60, 70, 80])
-	
 	__log_("", "Initialisation ended.", "Initial_boom is", __free_boom())
 	if not __perform_validation(true):
 		__log_error(pp.s("Failed to init"), "", "doesn't matter, without camera nothing can be done")
@@ -210,6 +207,14 @@ func is_free_state() -> bool:
 
 func set_h_offset_camera(h_offset: float) -> void:
 	camera.h_offset = h_offset
+
+func add_v_offset_camera(delta_v_offset: float) -> void:
+	camera.v_offset += delta_v_offset
+
+func add_fov(delta_fov: float) -> void:
+	var new_value := camera.fov + delta_fov
+	if new_value < 150 and new_value > 10:
+		camera.fov = new_value
 
 
 func _process(delta: float) -> void:
@@ -300,14 +305,16 @@ func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
 
 
 func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant]):
-	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
-		payload,
-		DVS.KeyBOverlayPanel.SUBVIEWPORT
-	)
-	if _r.err: return
-	var toggle := _r.value
-	
-	set_h_offset_camera(+0.7 if _r.value else 0.0)
+	var parsed_payload := DVCSIGPayloadParser.parse_b_dvc_value_changed(payload)
+	if not parsed_payload:
+		return
+	var dvc_key := parsed_payload.key
+	var toggle := parsed_payload.value_as_bool
+	match dvc_key:
+		DVS.KeyBOverlayPanel.SUBVIEWPORT:
+			set_h_offset_camera(+0.7 if toggle else 0.0)
+		DVS.KeyBOverlayPanel.PLAYER_SK_ANIMATOR:
+			add_v_offset_camera(-v_offset_step * 4 if toggle else v_offset_step * 4)
 
 	
 func _toggle_cam_coll(toggle: bool):
@@ -330,25 +337,47 @@ func __LOG_INDENT() -> int:
 # endregion
 
 
-# region: DEV
-
-
-func __change_fov():
-	var fov = __fov_cycler.get_next()
-	print_.dev("", pp.s("changed fov to", fov))
-	camera.fov = fov
+# region: DEV MANIPULATE CAM
 
 
 func _dev_input(event: InputEvent):
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
-
-	if event.is_action_released(RawAction.DEV_CAM_fov):
-		__change_fov()
-
 
 	if event.is_action_pressed(RawAction.DEV_CAM_cols):
 		_toggle_cam_coll(not __dev_camera_coll)
+
+	_handle_v_offset_scroll(event)
+	_handle_fov_scroll(event)
+
+
+var v_offset_step: float = 0.1
+var fov_step: float = 10
+
+
+func _handle_v_offset_scroll(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		var mb_event := event as InputEventMouseButton
+		
+		if mb_event.pressed and mb_event.ctrl_pressed:
+			if mb_event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				add_v_offset_camera(v_offset_step)
+			elif mb_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				add_v_offset_camera(-v_offset_step)
+
+
+func _handle_fov_scroll(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		var mb_event := event as InputEventMouseButton
+		
+		if mb_event.pressed and mb_event.shift_pressed:
+			if mb_event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				add_fov(-fov_step)
+			elif mb_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				add_fov(fov_step)
+
+
+# endregion
 
 
 # region: dev LOGS
@@ -403,7 +432,6 @@ func __angle_player_camera_target() -> String:
 
 # endregion
 
-# endregion
 
 # TODO: Probably real game dev terms:
 # Boom: vector from pivot (pivot/chest) to the camera. Now is free_boom / lock_boom

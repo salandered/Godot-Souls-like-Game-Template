@@ -1,8 +1,6 @@
 extends RefCounted
-# here are all utils which dont have their separate more focused module (yet)
+## All utils which don't have their separate more focused module yet
 class_name u
-
-static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 ## small division error, we dont care
@@ -40,7 +38,7 @@ static func safe_look_at(
 		from_who: Node3D,
 		target: Vector3,
 		up: Vector3 = Vector3.UP,
-		# by default -Z is pointed to target. built-in use_model_front solves that
+		# by default -Z is pointed to target. built-in 'use_model_front' solves that
 		use_model_front: bool = false,
 		eps: float = 0.001
 ) -> bool:
@@ -82,7 +80,7 @@ static func _recursive_hide(
 	for child in node.get_children():
 		if filter.call(child) and child is Node3D:
 			if __log and child.visible:
-				prints("~~//", child.name, "is hidden")
+				print_.dev("_recursive_hide", child.name, "is hidden")
 			child.visible = false
 		_recursive_hide(child, filter, __log)
 
@@ -93,3 +91,12 @@ static func hide_dev_visuals(node: Node, __log: bool = false):
 		func(n): return n.name.begins_with("__dev") or n.name.begins_with("__test"),
 		__log
 	)
+
+##
+
+static func is_editor() -> bool:
+	return Engine.is_editor_hint()
+
+
+static func is_release() -> bool:
+	return not OS.is_debug_build()

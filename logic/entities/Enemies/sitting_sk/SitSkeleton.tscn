@@ -71,7 +71,7 @@
 [ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/x_dev_systems/dev_visuals_3d/dv_area_contact.gd" id="56_b1jdg"]
 [ext_resource type="Script" uid="uid://bcee3q2bvqd57" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_clap_stand.gd" id="56_c4r18"]
 [ext_resource type="Script" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/sit_disapprove.gd" id="56_rpcss"]
-[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/DVHitBox.tscn" id="57_k5uww"]
+[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/DVHitBox.tscn" id="57_k5uww"]
 [ext_resource type="PackedScene" uid="uid://cwr8dav8jomc3" path="res://logic/x_dev_systems/dev_visuals_3d/dv_skeleton/DVSkeleton.tscn" id="67_iq0hr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0tisx"]

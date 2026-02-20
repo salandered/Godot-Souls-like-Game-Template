@@ -3,12 +3,12 @@ extends Node
 ## AUTOLOAD ##
 
 ## DOCS
-## * NOTE: all signals have the same payload structure Dictionary[String, Variant]
+## - NOTE: all signals have the same payload structure Dictionary[String, Variant]
 ##   or don't have the payload at all. 
 ##   While cumbersome, it unifies all the signal handlers 
 ##	 and mitigates an error when handler signature does not match the signal
-## * Use const fields for the payload keys from SPS (Signal Payload Schema)
-## * Use SigUtils for both, emitting signals and parsing their payload
+## - Use const fields for the payload keys from SPS (Signal Payload Schema)
+## - Use SigUtils for both, emitting signals and parsing their payload
 ##   (also for connecting/disconnecting signals)
 
 ## -------------------------------------------------------------------
@@ -49,7 +49,6 @@ signal SIG_dv_ui_control_value_changed(payload: Dictionary[String, Variant])
 
 signal SIG_free_cam_mode_toggled(payload: Dictionary[String, Variant])
 signal SIG_toggle_camera_coll(payload: Dictionary[String, Variant])
-# signal SIG_toggle_split_screen(payload: Dictionary[String, Variant])
 signal SIG_tut_panel_switched(payload: Dictionary[String, Variant])
 
 ## SYSTEM SETTINGS
@@ -61,19 +60,8 @@ signal SIG_update_mouse_settings_for_camera()
 
 ## meta signal
 signal __SIG_sig_emitted(payload: Dictionary[String, Variant])
-## 
 signal __SIG_error_log_printed(payload: Dictionary[String, Variant])
 signal __SIG_all_log_printed(payload: Dictionary[String, Variant])
-
-## PAYLOAD SCHEMAS
-
-
-class HStateData:
-	var state_name: String
-	var state_depth: int
-	func _init(state_name_: String, state_depth_: int) -> void:
-		self.state_name = state_name_
-		self.state_depth = state_depth_
 
 
 ## WRAPPERS

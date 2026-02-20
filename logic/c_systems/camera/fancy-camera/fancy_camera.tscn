@@ -60,6 +60,7 @@ script = ExtResource("2_bu8o1")
 unique_name_in_owner = true
 
 [node name="DVFancyCam" type="Node3D" parent="CameraPivot"]
+visible = false
 script = ExtResource("7_ncru2")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CameraPivot/DVFancyCam"]
@@ -110,6 +111,7 @@ fov = 62.0
 far = 2000.0
 
 [node name="DVFancyCam" type="Node3D" parent="PlayerCamera"]
+visible = false
 script = ExtResource("7_ncru2")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="PlayerCamera/DVFancyCam"]
@@ -148,6 +150,7 @@ script = ExtResource("5_sttfw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
 
 [node name="DVFancyCam" type="Node3D" parent="CameraSocket"]
+visible = false
 script = ExtResource("7_ncru2")
 
 [node name="CSGSocket" type="CSGSphere3D" parent="CameraSocket/DVFancyCam"]

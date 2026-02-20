@@ -129,6 +129,6 @@ func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 	SPEED_BOOST = InputUtils._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 3, RawAction.DEV_speed_down, RawAction.DEV_speed_up, true)

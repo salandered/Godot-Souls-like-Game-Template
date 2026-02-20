@@ -2,9 +2,9 @@
 class_name M_ScrollableCredits
 extends Credits
 
-@onready var credits_label : RichTextLabel = %CreditsLabel
+@onready var credits_label: RichTextLabel = %CreditsLabel
 
-@export var input_scroll_speed : float = 400.0
+@export var input_scroll_speed: float = 400.0
 
 
 ## Controller for a manually scrollable credits screen.
@@ -22,8 +22,8 @@ func _on_visibility_changed() -> void:
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 
-func _process(delta : float) -> void:
-	if Engine.is_editor_hint() or not visible:
+func _process(delta: float) -> void:
+	if u.is_editor() or not visible:
 		return
 	var input_axis = Input.get_axis("ui_up", "ui_down")
 	if input_axis != 0:

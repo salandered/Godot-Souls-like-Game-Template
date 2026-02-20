@@ -10,11 +10,15 @@ extends BaseDVCDependentNode3D
 
 
 @export_group("B_CHANGER S")
-## used if dvc_section B_CHANGER
+## ONLY used if dvc_section B_CHANGER
 @export var _key_b_value_changer: DVS.KeyBValueChanger = DVS.KeyBValueChanger.UNKNOWN
 
+@export_group("B_OVERLAY_PANEL_CHANGER S")
+## ONLY used if dvc_section B_OVERLAY_PANEL
+@export var _key_b_overlay_panel: DVS.KeyBOverlayPanel = DVS.KeyBOverlayPanel.UNKNOWN
+
 @export_group("B_CHAR_DV S")
-## used if dvc_section B_CHAR_DV
+## ONLY used if dvc_section B_CHAR_DV
 @export var _char_type: DVS.CharacterType = DVS.CharacterType.UNKNOWN
 @export var _dv_type: DVS.CharDVType = DVS.CharDVType.UNKNOWN
 
@@ -23,14 +27,18 @@ extends BaseDVCDependentNode3D
 # region
 
 
+func _enabled_on_init():
+	return false
+
+
 func initialise() -> void:
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		## wait a little before kicking in 
 		await FrameUtils.wait_process_frames(4)
 
 	_initialise_implementation_both_editor_and_game()
 
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 
 	## ALL FOLLOWING IS IN GAME
@@ -53,6 +61,10 @@ func initialise() -> void:
 				if _key_b_value_changer == DVS.KeyBValueChanger.UNKNOWN:
 					__log_warn_soft("looks like u forgot to specify _key_b_value_changer", "", "", _key_b_value_changer)
 				sig_pair_to_connect = [GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed]
+			DVS.DVSection.B_OVERLAY_PANEL:
+				if _key_b_overlay_panel == DVS.KeyBOverlayPanel.UNKNOWN:
+					__log_warn_soft("looks like u forgot to specify _key_b_overlay_panel", "", "", _key_b_overlay_panel)
+				sig_pair_to_connect = [GlobalUIInfo.SIG_dvc_b_overlay_panel_value_changed, _on_SIG_dvc_overlay_panel_changed]
 			_:
 				__log_warn_soft("looks like u forgot to specify dvc_section", "", "", dvc_section)
 
@@ -60,7 +72,7 @@ func initialise() -> void:
 			sig_pair_to_connect
 		])
 	
-	set_enabled(false) # disable on start
+	set_enabled(_enabled_on_init()) # disable on start
 
 # endregion
 
@@ -115,6 +127,14 @@ func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant]):
 
 func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
 	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(payload, _key_b_value_changer)
+	if _r.err:
+		return
+
+	set_enabled(_r.value)
+
+
+func _on_SIG_dvc_overlay_panel_changed(payload: Dictionary[String, Variant]):
+	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(payload, _key_b_overlay_panel)
 	if _r.err:
 		return
 

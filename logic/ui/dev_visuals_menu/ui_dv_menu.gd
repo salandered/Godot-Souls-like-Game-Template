@@ -90,7 +90,7 @@ func _on_SIG_dv_ui_control_value_changed(payload: Dictionary[String, Variant]):
 	if not parsed_payload: return
 
 	var dvc := GlobalUIInfo.get_dev_visuals_config()
-
+	__log_(parsed_payload.section, parsed_payload.key, parsed_payload.value)
 	dvc.set_value(parsed_payload.section, parsed_payload.key, parsed_payload.value)
 
 

@@ -55,6 +55,7 @@ enum KeyBValueChanger {
 	DOWNCAST,
 	ROOT_TRAIL,
 	PLAYER_LIGHTS,
+	PLAYER_ROOT_MOTION_VECTOR,
 	## coll shapes
 	ALL_AREA3D = 80,
 	CHARACTER_COLLIDERS,
@@ -77,6 +78,10 @@ enum KeyFValueChanger {
 	WEAPON_HIT_DUR,
 	## UI 
 	GRID_V_SEP = 30,
+	## Anim
+	PL_SPEED_SCALE = 80,
+	HSM_SPEED_SCALE,
+	SE_SPEED_SCALE,
 }
 
 enum KeyColorChanger {

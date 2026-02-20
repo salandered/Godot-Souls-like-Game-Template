@@ -16,12 +16,10 @@ extends Node3DLogger
 		if is_node_ready(): _apply_lifetime()
 
 
-
 @export var preprocess: float = 0.0:
 	set(value):
 		preprocess = value
 		if is_node_ready(): _apply_preprocess()
-
 
 
 ## takes effect only if particles use normal texture
@@ -34,7 +32,6 @@ extends Node3DLogger
 	set(value):
 		billboard_mode = value
 		if is_node_ready(): _apply_billboard_mode()
-
 
 
 @abstract func get_particles() -> GPUParticles3D
@@ -53,7 +50,7 @@ func _ready() -> void:
 	
 	_ready_implementation()
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		_ready_implementation_not_editor()
 
 

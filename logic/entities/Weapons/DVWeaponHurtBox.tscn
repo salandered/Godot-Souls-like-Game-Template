@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://82ivr255dcjx"]
 
-[ext_resource type="Script" uid="uid://unoqiilk88vp" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/dev_visuals_weapon_hurtboxes.gd" id="1_8msms"]
+[ext_resource type="Script" uid="uid://unoqiilk88vp" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/dev_visuals_weapon_hurtboxes.gd" id="1_8msms"]
 
 [node name="DVWeaponHurtBox" type="Node3D"]
 script = ExtResource("1_8msms")

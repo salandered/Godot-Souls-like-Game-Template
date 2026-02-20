@@ -46,3 +46,13 @@ const triggered_state_field = "triggered_state_field"
 const sig_name_field := "sig_name"
 const sig_with_payload_field := "sig_with_payload"
 const sig_payload_field := "sig_payload"
+
+
+## OBJECT SCHEMAS
+
+class HStateData:
+	var state_name: String
+	var state_depth: int
+	func _init(state_name_: String, state_depth_: int) -> void:
+		self.state_name = state_name_
+		self.state_depth = state_depth_

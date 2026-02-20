@@ -2,7 +2,7 @@ class_name MaterialUtils
 extends RefCountedStaticLogger
 
 
-static func create_standard_3d(
+static func create_standard_mat_3d(
 	color: Color = Color.ORANGE_RED,
 	shading_mode: BaseMaterial3D.ShadingMode = BaseMaterial3D.SHADING_MODE_PER_PIXEL,
 	transparency: BaseMaterial3D.Transparency = BaseMaterial3D.TRANSPARENCY_DISABLED,

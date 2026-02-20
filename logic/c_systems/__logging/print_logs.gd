@@ -31,8 +31,8 @@ static var PHE_SM_PRINT := PrintData.PrintInstance.new(LogToggler.PHE_B, "🗿",
 ## COMMON
 
 
-static func dev(add_prefix_: String, text: Variant = ""):
-	_generic(DEV_PRINT, add_prefix_, text)
+static func dev(add_prefix_: String, ...parts: Array):
+	_generic(DEV_PRINT, add_prefix_, pp.list_(parts))
 
 
 # region: CONTAINER

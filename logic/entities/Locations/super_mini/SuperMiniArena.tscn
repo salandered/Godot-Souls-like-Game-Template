@@ -687,10 +687,10 @@ pause_menu_packed = ExtResource("4_20buc")
 transform = Transform3D(0.7463843, 0.26150516, 1.5575589, 0.09791709, 1.711756, -0.33431605, -1.5763205, 0.23015217, 0.7167341, -24.872158, 5.9395423, 16.432268)
 
 [node name="PropSet_5_WallChain_1" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang2" index="0"]
-transform = Transform3D(0.99079365, 0.13533337, 0.0035210003, -0.13501735, 0.98591083, 0.098739624, 0.00989138, -0.09830602, 0.99510664, -0.013861522, -0.02845478, -0.015266545)
+transform = Transform3D(0.99297804, 0.11824482, 0.0035269104, -0.11814591, 0.9897568, 0.08013897, 0.0059852386, -0.07999296, 0.99677694, -0.013861522, -0.02845478, -0.015266545)
 
 [node name="Lantern_Lamp_Splitted_002" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang2/PropSet_5_WallChain_1" index="0"]
-transform = Transform3D(0.036871202, 0.38971895, 0.9201951, -0.20410755, 0.90434736, -0.37482822, -0.97825307, -0.17399865, 0.11288897, 0.051190376, -0.9800582, 0.0934515)
+transform = Transform3D(-0.018266678, 0.3453431, 0.9382983, -0.37912554, 0.8659785, -0.32610595, -0.9251641, -0.36169025, 0.11510986, 0.051190376, -0.9800582, 0.0934515)
 
 [node name="SwayParent" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang2/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="1"]
 transform = Transform3D(0.43654612, 0.0055689923, 0.15607107, 0.0008867942, 0.46324873, -0.019010201, -0.15616792, 0.01819785, 0.43616742, 1.4460735, 1.3251395, 3.8779736)
@@ -707,10 +707,10 @@ preview_in_editor = true
 transform = Transform3D(1.0057465, 0.12524946, -0.467721, -0.18489945, 1.0958766, -0.10413038, 0.44750696, 0.17129941, 1.0081524, -7.977156, 3.6842396, -0.07673445)
 
 [node name="PropSet_5_WallChain_1" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang5" index="0"]
-transform = Transform3D(0.9995842, -0.028603403, 0.0035202731, 0.028103378, 0.9945128, 0.100769095, -0.0063832966, -0.10062835, 0.9949031, -0.013861522, -0.02845478, -0.015266545)
+transform = Transform3D(0.9989431, -0.045819085, 0.003526318, 0.04537493, 0.99558467, 0.082171895, -0.0072757895, -0.08192512, 0.99661136, -0.013861522, -0.02845478, -0.015266545)
 
 [node name="Lantern_Lamp_Splitted_002" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang5/PropSet_5_WallChain_1" index="0"]
-transform = Transform3D(0.0414627, 0.3437655, 0.93813986, -0.22404182, 0.9182358, -0.3265702, -0.973697, -0.19664204, 0.11509042, 0.010772705, -0.9824009, 0.08148956)
+transform = Transform3D(0.005790084, 0.3119798, 0.9500712, -0.357113, 0.8880822, -0.2894479, -0.9340431, -0.33760682, 0.116554156, 0.010772705, -0.9824009, 0.08148956)
 
 [node name="SwayParent" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang5/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="1"]
 transform = Transform3D(0.43654612, 0.0055689923, 0.15607107, 0.0008867942, 0.46324873, -0.019010201, -0.15616792, 0.01819785, 0.43616742, 1.4460735, 1.3251395, 3.8779736)
@@ -1521,6 +1521,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93031573, 0.26552606, -8.37
 fire_up = true
 show_ui_feelings = true
 float_ui_feelings = true
+process_disabled_on_init = false
 player = NodePath("../../Princess")
 dev_tag = "demo_enemy"
 

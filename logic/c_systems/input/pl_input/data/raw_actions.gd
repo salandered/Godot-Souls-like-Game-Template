@@ -67,7 +67,5 @@ const DEV_KP2 = "DEV_KP2"
 const DEV_KP3 = "DEV_KP3"
 const DEV_KP4 = "DEV_KP4" # ex toggle_socket
 const DEV_KP7 = "DEV_KP7"
-const DEV_CAM_fov = "DEV_CAM_fov"
 const DEV_CAM_cycle = "DEV_CAM_cycle"
 const DEV_CAM_cycle_prev = "DEV_CAM_cycle_prev"
-const DEV_mouse_mode_switch = "DEV_mouse_mode_switch"

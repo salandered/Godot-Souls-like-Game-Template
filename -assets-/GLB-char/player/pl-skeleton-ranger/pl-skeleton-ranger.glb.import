@@ -80,6 +80,7 @@ _subresources={
 "use_external/path": "uid://urpr805hm5mt"
 },
 "PixPalMat": {
+"use_external/enabled": false,
 "use_external/fallback_path": "res://-assets-/materials-shared/pix-pal/PixPalMat.tres",
 "use_external/path": "uid://bfpcavnflxys1"
 },

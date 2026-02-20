@@ -8,7 +8,7 @@ class_name FreeCamUI
 @onready var free_cam: MarginContainer = %FreeCam
 
 
-var ENABLED: bool = false
+var _is_enabled: bool = false
 
 
 const controls_text := "[b]WASD[/b] - Move
@@ -53,7 +53,7 @@ func _cycle_free_cam_labels_visible(next: bool):
 
 
 func _set_labels_visible(value: Array):
-	if not value or value is not Array or len(value) != 2:
+	if len(value) != 2:
 		return
 
 	if not value[0] and not value[1]:
@@ -68,12 +68,12 @@ func _set_labels_visible(value: Array):
 
 
 func set_free_cam_enable(toggle: bool) -> void:
-	ENABLED = toggle
+	_is_enabled = toggle
 	free_cam.visible = toggle
 
 
 func _input(event: InputEvent) -> void:
-	if not ENABLED:
+	if not _is_enabled:
 		return
 	if InputUtils.is_in_keycodes(event, [KEY_KP_0, KEY_0]):
 		_cycle_free_cam_labels_visible(true)

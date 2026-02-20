@@ -91,7 +91,7 @@ func set_velocity(velocity: Vector3):
 ## - will be applied only if not is_on_floor() 
 ##       - consider making force apply flag if this will cause problems
 ## - returns true if was applied
-func apply_gravity(delta: float, multiplier: float = 1.0, gravity: float = u.gravity) -> bool:
+func apply_gravity(delta: float, multiplier: float = 1.0, gravity: float = Constants.gravity) -> bool:
 	if not get_character().is_on_floor():
 		get_character().velocity.y -= gravity * delta * multiplier
 		return true

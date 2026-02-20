@@ -45,7 +45,7 @@ func make_active() -> void:
 @onready var look_at_visual: MeshInstance3D = %LookAtVisual
 
 func dev_initialise():
-	if not OS.is_debug_build():
+	if u.is_release():
 		if look_at_visual:
 			look_at_visual.visible = false
 		return
@@ -53,6 +53,6 @@ func dev_initialise():
 
 
 # func _input(event: InputEvent):
-	# if not OS.is_debug_build():
+	# if u.is_release():
 	# 	return
 # 	look_at_point.global_position.y = InputUtils._dev_change_t67_param(event, look_at_point.global_position.y, "look_at_point.global_position.y", 0.2)

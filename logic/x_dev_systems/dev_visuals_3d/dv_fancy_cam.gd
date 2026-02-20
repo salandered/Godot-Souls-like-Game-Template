@@ -22,7 +22,7 @@ func __soft_dependencies() -> Array:
 
 
 func initialise() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 
 	_csg_nodes = get_descendants.csg_primitives(self )

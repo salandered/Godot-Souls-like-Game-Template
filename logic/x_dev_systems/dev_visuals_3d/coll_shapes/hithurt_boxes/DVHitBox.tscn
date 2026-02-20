@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bc4l4h2cvh2ws"]
 
-[ext_resource type="Script" uid="uid://tm07dvd0564d" path="res://logic/x_dev_systems/dev_visuals_3d/hithurt_boxes/dev_visuals_char_hitboxes.gd" id="1_aukyj"]
+[ext_resource type="Script" uid="uid://tm07dvd0564d" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/dev_visuals_char_hitboxes.gd" id="1_aukyj"]
 
 [node name="DVHitBoxFrame" type="Node3D"]
 script = ExtResource("1_aukyj")

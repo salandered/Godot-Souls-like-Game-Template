@@ -19,7 +19,7 @@ var ui_overlay_controls_panel: UIDVMenu
 
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	_hide_exit_for_web()
 	_hide_options_if_unset()
@@ -85,17 +85,31 @@ func _hide_global_ui_overlay_controls_if_unset() -> void:
 
 func _open_options_menu() -> void:
 	var options_scene := options_packed_scene.instantiate()
-	add_child(options_scene)
+	if not options_scene or options_scene is not M_MasterOptionsMenu:
+		return
+
+	var casted_option_scene := options_scene as M_MasterOptionsMenu
+
+	var cl := CanvasLayer.new()
+
+	if not cl:
+		return
+		
+	add_child(cl)
+	cl.layer = 90
+	cl.add_child(casted_option_scene)
+
+	# casted_option_scene.set_transparency(1.0)
 	
-	# Hide existing pause menu elements, excluding the new options scene
-	_toggle_content_visibility(false, options_scene)
+	if h_box_container:
+		h_box_container.visible = false
 	
 	_disable_focus.call_deferred()
-	await options_scene.tree_exiting
+	await casted_option_scene.tree_exiting
 	_enable_focus.call_deferred()
 	
-	# Restore visibility of pause menu elements
-	_toggle_content_visibility(true)
+	if h_box_container:
+		h_box_container.visible = true
 
 	
 func _disable_focus() -> void:
@@ -108,12 +122,6 @@ func _enable_focus() -> void:
 		if child is Control:
 			child.focus_mode = FOCUS_ALL
 
-
-# hide/show siblings without affecting the active options menu
-func _toggle_content_visibility(is_visible_: bool, exclude: Node = null) -> void:
-	for child in get_children():
-		if child is Control and child != exclude:
-			child.visible = is_visible_
 
 # endregion
 

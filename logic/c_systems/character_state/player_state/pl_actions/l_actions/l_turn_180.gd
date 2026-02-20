@@ -1,18 +1,12 @@
-extends LegsAction
+extends BaseLegsTurn
 
 @export var accel_from_apex_curve: Curve
 
-var initial_rotation: Quaternion
-
 var speed_curve_from_apex := EaseCurveInterpolator.new()
-
-var curr_turn: TurnData = TurnData.new()
-
-var INCREASE_ROTATION: float = 1.0
-var TURN_180_APEX_TIME: float
 
 
 func initialise() -> void:
+	super.initialise()
 	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
 
 
@@ -45,15 +39,6 @@ func on_enter_action(input_: InputPackage) -> void:
 			INCREASE_ROTATION = 1.0
 
 	
-func on_exit_action() -> void:
-	var tranfer_turn_data: Dictionary[String, Variant] = {}
-	tranfer_turn_data["turn_data"] = curr_turn.to_dict()
-	
-	player_sm.fill_tranfer_data(tranfer_turn_data)
-	
-	__log_ext(__log_turn_exit())
-
-
 func update(input_: InputPackage, delta: float):
 	var SPEED_MULT := 1.0
 	if not curr_turn.turn_completed:
@@ -79,10 +64,3 @@ func animate(): # ▶️
 	else:
 		anim = anim_container.get_by_anim_id(A.loco.turn_180_L)
 	set_anim_to_play()
-
-
-func __log_turn_exit() -> String:
-	var _final_rotation := get_player().quaternion.angle_to(initial_rotation)
-	var _error_angle := curr_turn.accum_rotation - curr_turn.target_angle
-	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
-		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))

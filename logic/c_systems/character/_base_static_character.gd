@@ -50,7 +50,7 @@ func __soft_dependencies() -> Array:
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		_initialise_static_char()
 		initialise_static_char_implementation()
 

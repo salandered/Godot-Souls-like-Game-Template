@@ -12,5 +12,5 @@ func _ready() -> void:
 
 
 func _apply_release_constraints() -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		AudioServerUtil.mute_test_buses()

@@ -21,7 +21,8 @@ signal game_exited
 @export_group("Extra Settings")
 @export var signal_game_start: bool = false
 @export var signal_game_exit: bool = false
-@export var __dev_bypass_menu_and_start_game: bool = false # added
+@export var __dev_bypass_menu_and_start_game: bool = false
+@export var __dev_bypass_menu_and_start_arena: bool = false
 @export var initial_focus_target: Control # added
 @export var confirm_new_game: bool = true
 
@@ -70,13 +71,6 @@ var START_MAIN_MENU_TRACK_CUTOFF := 200
 
 
 func _ready() -> void:
-	# Check if the bypass flag is enabled
-	if __dev_bypass_menu_and_start_game:
-		# If a saved game exists, continue it. Otherwise, start a new one.
-		# load_game_scene()
-		_on_level_2_button_pressed()
-		return # Stop here to prevent loading the menu UI
-
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	# Show the mouse cursor
 	flow_control_container.show()
@@ -102,6 +96,15 @@ func _ready() -> void:
 	_cutoff_fade_in()
 
 
+	await FrameUtils.wait_process_frames(2)
+	if __dev_bypass_menu_and_start_game:
+		_on_level_2_button_pressed()
+		return
+	if __dev_bypass_menu_and_start_arena:
+		_on_level_1_button_pressed()
+		return
+
+		
 func _play_fade_in() -> void:
 	if not fade_overlay:
 		return
@@ -159,7 +162,7 @@ func _load_specific_level(path: String) -> void:
 	if M_GameState.has_game_state():
 		M_GameState.reset()
 
-	GlobalUIInfo.toggle_tutorial(true)
+	# GlobalUIInfo.toggle_tutorial(true)
 	
 	M_SceneLoader.load_scene(path)
 		

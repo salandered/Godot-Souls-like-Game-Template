@@ -34,7 +34,7 @@ class AnimID:
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		if __perform_validation():
 			interact_area.SIG_interacted.connect(_on_my_area_interacted)
 			interact_area.set_monitor_enable(true)

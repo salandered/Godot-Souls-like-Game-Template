@@ -36,7 +36,7 @@ func nth_frame() -> int:
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	if not get_character(): return
 
 	if not u.is_nth_frame(nth_frame()):

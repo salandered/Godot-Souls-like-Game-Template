@@ -79,6 +79,9 @@ func _ready() -> void:
 
 	set_h_size(DEF_H_SIZE)
 
+	if small_cams_container:
+		small_cams_container.visible = false
+
 
 func _configure_low_graphics(vp: SubViewport, scaling_3d_scale_: bool = true) -> void:
 	if not vp: return

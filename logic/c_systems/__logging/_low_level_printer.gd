@@ -80,7 +80,7 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 
 	print(fr_, result_msg)
 	
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	if GlobalUIInfo.__ERROR_LOG and is_warning:
 		SigUtils.safe_emit_raw(GlobalSignal.__SIG_error_log_printed, {
@@ -95,7 +95,7 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 
 
 static func prefix_s(is_warning: bool = false, ...parts: Array):
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 	var _prefix := ""
 	var _msg := ""

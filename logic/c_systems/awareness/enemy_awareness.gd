@@ -88,7 +88,7 @@ var conus_color := Color(1, 0.5, 1, 0.25)
 
 
 func dev_initialise() -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 	if debug_sight_cone:
 		_create_sight_cone_visual()

@@ -45,7 +45,9 @@ func _update_animator_metrics() -> void:
 	if cp.anim:
 		_metrics_grid.update_metric(
 			"Animation",
-			cp.anim.anim_name
+			cp.anim.anim_name,
+			true,
+			2
 			)
 
 
@@ -65,8 +67,7 @@ func _update_animator_metrics() -> void:
 				anim_speed_scale,
 				_animator._EFFECTIVE_SPEED_SCALE(cp)],
 				true,
-				15,
-				18
+				-2,
 				)
 	
 	_metrics_grid.update_metric("Blending | Progress",
@@ -79,6 +80,7 @@ func _update_animator_metrics() -> void:
 		_metrics_grid.update_metric(
 		"Root Motion",
 		r_a.get_root_velocity(false))
+		
 		_metrics_grid.update_metric(
 		"Root Rotation",
-		r_a.get_root_rotation())
+		pp.frad2deg(r_a.get_root_rotation()))

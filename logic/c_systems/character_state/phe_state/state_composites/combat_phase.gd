@@ -171,7 +171,7 @@ func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
 
 
 func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 		
 	if event.is_action_pressed(RawAction.t2):

@@ -50,7 +50,7 @@ func _enter_tree() -> void:
 	_initial_focus_control = get_viewport().gui_get_focus_owner()
 	if _initial_focus_control:
 		_initial_focus_mode = _initial_focus_control.focus_mode
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	_scene_tree.paused = pauses_game or _initial_pause_state
 	if makes_mouse_visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

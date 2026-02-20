@@ -43,7 +43,7 @@ func _update_animator_metrics() -> void:
 	if anim_id.is_empty():
 		anim_id = " - "
 		
-	_metrics_grid.update_metric("Animation", pp.anim_n(anim_id, true))
+	_metrics_grid.update_metric("Animation", pp.anim_n(anim_id, true), true, 2)
 
 
 	var overlay_anim := ""
@@ -88,8 +88,7 @@ func _update_animator_metrics() -> void:
 			_animator.get_global_speed_scale(),
 			],
 			true,
-			15,
-			18)
+			-2, )
 
 
 	# root motion vector being applied this frame

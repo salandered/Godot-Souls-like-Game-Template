@@ -27,7 +27,7 @@ func __hard_validation() -> bool:
 ## INITIALISATION
 
 func _ready():
-	if Engine.is_editor_hint() and not preview_in_editor: return
+	if u.is_editor() and not preview_in_editor: return
 	if not __perform_validation(true):
 		return
 		
@@ -77,7 +77,7 @@ func set_audio_bus(new_bus_name: String) -> bool:
 ## PROCESS
 
 func _process(delta):
-	if Engine.is_editor_hint() and not preview_in_editor: return
+	if u.is_editor() and not preview_in_editor: return
 	if not __validation_ok(): return
 	if not spectrum: return
 	

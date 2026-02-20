@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://rqlyc5qjitju"]
 
-[ext_resource type="Script" uid="uid://b1e4mcxspiy2t" path="res://logic/x_dev_systems/dev_visuals_3d/base_dv_classes/dv_area3d_shapes.gd" id="1_4557r"]
+[ext_resource type="Script" uid="uid://b1e4mcxspiy2t" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/dv_area3d_shapes.gd" id="1_4557r"]
 
 [node name="DVArea3DShapes" type="Node3D" node_paths=PackedStringArray("level")]
 visible = false

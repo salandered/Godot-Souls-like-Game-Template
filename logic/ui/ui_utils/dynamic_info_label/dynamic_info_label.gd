@@ -90,7 +90,7 @@ func _ready() -> void:
 	else:
 		__margin_2.visible = true
 		
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		reset_text()
 
 		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed)
@@ -117,7 +117,7 @@ func _set_label_text(
 	if not dynamic_label_config:
 		dynamic_label_config = DynamicLabelConfig.new()
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		if dynamic_label_config.animate_prev:
 			_spawn_ghost_text(ghosts_list, label, label.text, dynamic_label_config)
 
@@ -246,7 +246,7 @@ func _update_title() -> void:
 	
 
 func _update_in_editor_label_text() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		set_label_text(in_editor_label_text)
 
 		

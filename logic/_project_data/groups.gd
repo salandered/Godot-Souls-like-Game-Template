@@ -16,6 +16,7 @@ class Dev:
 	const FANCY_CAM = "fancy_cam"
 	const SK_ANIM_MANAGER = "SK_ANIM_MANAGER"
 	const DEV_VISUALS = "DEV_VISUALS"
+	const DV_LEG_TURN = "DV_LEG_TURN"
 
 
 class Marker:
@@ -88,6 +89,12 @@ static func get_first_pl_mod_animator_by_group(for_whom: Node) -> PlayerModifier
 	if not _r or _r is not PlayerModifierAnimator:
 		return
 	return _r as PlayerModifierAnimator
+
+static func get_first_leg_turn_by_group(for_whom: Node) -> TurnData:
+	var _r := for_whom.get_tree().get_first_node_in_group(Groups.Dev.DV_LEG_TURN)
+	if not _r or _r is not TurnData:
+		return
+	return _r as TurnData
 
 
 static func get_dv(for_whom: Node) -> Array[Node]:

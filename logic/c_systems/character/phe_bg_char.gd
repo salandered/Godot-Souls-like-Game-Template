@@ -164,7 +164,7 @@ func _on_monitor_player_enter_signal_area_sig_player_entered(incoming_body: Node
 
 
 # func _input(event: InputEvent) -> void:
-# 	if not OS.is_debug_build():
+# 	if u.is_release():
 # 		return
 # 	var bone_mask := BoneMask.get_upper_body()
 	# if event.is_action_pressed(RawAction.DEV_8):

@@ -20,7 +20,7 @@ func _ready() -> void:
 			_add_microphone_audio_stream()
 		else:
 			_set_input_device()
-		if not Engine.is_editor_hint():
+		if not u.is_editor():
 			option_values = AudioServer.get_input_device_list()
 	else:
 		hide()

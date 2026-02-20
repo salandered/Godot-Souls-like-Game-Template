@@ -6,16 +6,14 @@ extends Node3DSystem
 @export var camera_speed := 10.0
 @export var mouse_sensitivity := 0.003
 @export var speed_multiplier := 1.1 # how much each scroll step multiplies speed
-@export var pause_on_enter: bool = true
+@export var pause_on_enter: bool = false
 @export var light_on_on_enter: bool = false
-
 
 var _camera: FreeCamera
 var _light: SpotLight3D
 
 var _cached_camera: Camera3D
 var _previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
-
 
 var _enabled := true
 var is_active: bool = false
@@ -34,18 +32,14 @@ func _ready() -> void:
 
 	# free cam mode can pause tree, but it itself should still be working
 	process_mode = Node.PROCESS_MODE_ALWAYS
-
 	set_process(false)
-
-	hide()
+	visible = false
 
 
 func _process(delta: float) -> void:
 	if not is_active or not _enabled:
 		return
-	
 	move_camera(delta)
-
 	_update_hud()
 
 
@@ -91,8 +85,8 @@ func _turn_on_free_cam():
 	_light = _camera.get_light()
 	_light.visible = light_on_on_enter
 
-
 	_camera.current = true
+
 	if _cached_camera:
 		_camera.fov = _cached_camera.fov
 		_camera.global_transform = _cached_camera.global_transform
@@ -142,7 +136,6 @@ func _get_current_movement_speed() -> float:
 ## INFO LABELS
 # region
 
-
 func _update_hud() -> void:
 	var pos := _camera.global_position
 	var rot := _camera.rotation_degrees
@@ -152,10 +145,8 @@ func _update_hud() -> void:
 		camera_speed,
 		_camera.fov
 	]
-
 	if _light:
 		hud_text += pp.s("\nLight: ", _light.visible, pp.s(" | Energy: ", _light.light_energy))
-
 	if get_tree().paused:
 		hud_text += "\n\n[i]SCENE PAUSED ⏸️[/i]"
 	else:

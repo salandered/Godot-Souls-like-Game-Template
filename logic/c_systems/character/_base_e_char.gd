@@ -54,7 +54,7 @@ var look_at_systems_initialised: bool = false
 
 ## used for delayed initialisation
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	if not look_at_systems_initialised:
 		_initialise_look_at_systems()
 		look_at_systems_initialised = true

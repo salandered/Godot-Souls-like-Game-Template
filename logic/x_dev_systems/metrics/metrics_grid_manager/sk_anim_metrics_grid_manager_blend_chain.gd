@@ -67,19 +67,19 @@ func _update_animator_metrics() -> void:
 		"Chain anim #1",
 		_blend_chain[1],
 		true,
-		15
+		-1
 		)
 	_metrics_grid.update_metric(
 		"Chain anim #2",
 		_blend_chain[2],
 		true,
-		15
+		-2
 		)
 	_metrics_grid.update_metric(
 		"Chain anim #3",
 		_blend_chain[3],
 		true,
-		15
+		-3
 		)
 
 

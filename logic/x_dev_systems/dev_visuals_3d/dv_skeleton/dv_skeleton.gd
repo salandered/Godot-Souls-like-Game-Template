@@ -84,6 +84,13 @@ func _create_bone_attachment(bone_idx: int) -> BoneAttachment3D:
 func _add_visuals_to_bone_attachement(bone_idx: int, attachment: BoneAttachment3D, children_indices: PackedInt32Array):
 	var color := ra.get_random_vibrant_color()
 	
+	var width := bone_width
+	
+	if bone_idx == BoneIdx.ROOT_0:
+		color = Color.RED
+		width = bone_width * 1.1
+
+
 	# JOINT (sphere)
 	var joint_mesh := MeshInstanceUtils.create_simple_sphere(
 		joint_radius,
@@ -107,7 +114,7 @@ func _add_visuals_to_bone_attachement(bone_idx: int, attachment: BoneAttachment3
 			leaf_vector = Vector3(0, 0.1, 0)
 
 		cylinder = MeshInstanceUtils.create_bone_like_connector(
-			Vector3.ZERO, leaf_vector, color, bone_width
+			Vector3.ZERO, leaf_vector, color, width
 		)
 		if cylinder: attachment.add_child(cylinder)
 		
@@ -119,6 +126,6 @@ func _add_visuals_to_bone_attachement(bone_idx: int, attachment: BoneAttachment3
 			var child_offset := child_rest.origin
 			
 			cylinder = MeshInstanceUtils.create_bone_like_connector(
-				Vector3.ZERO, child_offset, color, bone_width
+				Vector3.ZERO, child_offset, color, width
 			)
 			if cylinder: attachment.add_child(cylinder)

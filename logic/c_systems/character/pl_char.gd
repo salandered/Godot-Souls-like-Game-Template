@@ -196,7 +196,7 @@ func reset_position(y_offset: float = 0.0) -> void:
 # TODO: _process or _physics_process? changed to _process: frame issues
 # TODO UPD: should be _physics_process if move_and_slide is called.
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
@@ -288,17 +288,15 @@ var cam_i := 0
 var __collisions_enabled: bool = true
 
 func __dev_initialise():
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 	debug_cams = get_tree().get_nodes_in_group(Groups.Dev.DEBUG_CAMERAS)
-	# print_.dev("dbg", str(debug_cams))
 	debug_cams.append(fancy_camera.camera)
 	cam_i = len(debug_cams) - 1
-	# print_.dev("dbg", "cam_i: " + str(cam_i))
 
 
 func _dev_input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
+	if u.is_release():
 		return
 		
 	if InputUtils.is_keycode_w_ctrl(event, KEY_J):
@@ -323,17 +321,17 @@ func _dev_input(event: InputEvent) -> void:
 	# 		BoneMask.get_upper_body_with_hips()
 	# 		))
 	
-	if event.is_action_pressed(RawAction.DEV_CAM_cycle):
-		cam_i = (cam_i + 1) % debug_cams.size()
-		print_.dev("dbg", "cam_i: " + str(cam_i))
-		if debug_cams[cam_i].has_method("make_current"):
-			debug_cams[cam_i].make_current()
+	# if event.is_action_pressed(RawAction.DEV_CAM_cycle):
+	# 	cam_i = (cam_i + 1) % debug_cams.size()
+	# 	print_.dev("dbg", "cam_i: " + str(cam_i))
+	# 	if debug_cams[cam_i].has_method("make_current"):
+	# 		debug_cams[cam_i].make_current()
 
-	elif event.is_action_pressed(RawAction.DEV_CAM_cycle_prev):
-		cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
-		print_.dev("dbg", "cam_i: " + str(cam_i))
-		if debug_cams[cam_i].has_method("make_current"):
-			debug_cams[cam_i].make_current()
+	# elif event.is_action_pressed(RawAction.DEV_CAM_cycle_prev):
+	# 	cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
+	# 	print_.dev("dbg", "cam_i: " + str(cam_i))
+	# 	if debug_cams[cam_i].has_method("make_current"):
+	# 		debug_cams[cam_i].make_current()
 
 	if event.is_action_pressed(RawAction.DEV_cols):
 		__collisions_enabled = not __collisions_enabled

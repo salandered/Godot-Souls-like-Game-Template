@@ -12,7 +12,7 @@ extends Node3DCharacterSystem
 
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 	await FrameUtils.wait_process_frames(2)
 

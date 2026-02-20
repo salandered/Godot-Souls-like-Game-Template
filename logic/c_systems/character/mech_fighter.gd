@@ -129,7 +129,7 @@ func _check_transition(delta: float) -> BaseVerdict:
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 
 	var verdict := _check_transition(delta)
 

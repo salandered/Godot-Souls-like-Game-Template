@@ -130,7 +130,7 @@ func process_input_vector_air(input_: InputPackage, delta: float, jump_direction
 
 
 ## by default only Y is muted.
-## use_blending is not tested
+## use_blending is not properly tested
 func move_with_root(delta: float, extra_vel: Vector3 = Vector3.ZERO, y_zeroed: bool = true, x_zeroed: bool = false, z_zeroed: bool = false, use_blending: bool = false) -> void:
 	# animator already handles the 'y_zeroed' part
 	var root_vel := animator_manager.get_root_velocity(y_zeroed, use_blending)

@@ -81,7 +81,7 @@ func _ready() -> void:
 	else:
 		_set_vose_aabb_whd()
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		## randf_range randomise starting point
 		_time = randf_range(0.0, 100.0) + phase_offset
 
@@ -121,7 +121,7 @@ func _setup_audio() -> void:
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint() and not preview_in_editor:
+	if u.is_editor() and not preview_in_editor:
 		return
 	
 	if not ENABLED or not _parent_node or _parent_node.is_queued_for_deletion():
@@ -129,7 +129,7 @@ func _process(delta: float) -> void:
 
 	_apply_sway(delta)
 	
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		_handle_audio_logic(delta)
 	# if u.is_nth_frame(60):
 		# print_.dev("swaying")

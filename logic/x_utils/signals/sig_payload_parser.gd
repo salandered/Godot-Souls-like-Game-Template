@@ -28,7 +28,7 @@ static func parse_dvc_ui_control_value_changed(
 	return DVCUIControlValueChangedPayload.new(_r_skv.section, _r_skv.key, _r_skv.value, _r_button_name.value)
 
 
-## internal sig used for distrubution
+## internal sig used for distribution
 static func parse_internal_SIG_dvc_value_changed(
 	payload: Dictionary[String, Variant],
 	allow_null_value: bool = false
@@ -60,6 +60,17 @@ static func parse_dvc_b_char_dv_value_changed(
 
 
 ## enum_to_validate_key should be Dictionary
+static func parse_b_dvc_value_changed(
+	payload: Dictionary[String, Variant],
+	enum_to_validate_key: Variant = null,
+) -> DVCBValueChangedPayload:
+	var _parsed := parse_untyped_dvc_value_changed(payload, enum_to_validate_key, false)
+	if not _parsed or _parsed.value is not bool:
+		return
+	return DVCBValueChangedPayload.new(_parsed.key, _parsed.value as bool)
+
+
+## enum_to_validate_key should be Dictionary
 static func parse_untyped_dvc_value_changed(
 	payload: Dictionary[String, Variant],
 	enum_to_validate_key: Variant = null,
@@ -78,6 +89,7 @@ static func parse_untyped_dvc_value_changed(
 	if not _r_kv: return
 	return DVCUntypedValueChangedPayload.new(_r_kv.key, _r_kv.value)
 
+	
 # endregion
 
 
@@ -226,6 +238,14 @@ class DVCBValueChangedCharDVPayload extends DVCUntypedValueChangedPayload:
 		value_as_bool = v
 		char_type = ct as DVS.CharacterType
 		char_dv_type = dvt as DVS.CharDVType
+
+
+class DVCBValueChangedPayload extends DVCUntypedValueChangedPayload:
+	var value_as_bool: bool
+
+	func _init(k: int, v: bool):
+		super._init(k, v)
+		value_as_bool = v
 
 
 class DVCUntypedValueChangedPayload extends _DVCKeyValuePayload:

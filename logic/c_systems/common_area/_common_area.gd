@@ -72,12 +72,12 @@ func __hard_validation() -> bool:
 func _ready() -> void:
 	_ready_can_run_in_editor()
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		_ready_non_editor()
 	
 	
 	if not __perform_validation():
-		if not Engine.is_editor_hint(): # also muted in editor
+		if not u.is_editor(): # also muted in editor
 			__log_warn_soft("won't be working")
 			_shut_down()
 
@@ -147,7 +147,7 @@ func _is_duplicate_coll_shape() -> bool:
 
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint():
+	if u.is_editor():
 		return
 
 	if not MONITOR_ENABLED:

@@ -58,12 +58,11 @@ func update_metric(
 	metric_name: String,
 	metric_value: Variant,
 	fmt_show_vector_len: bool = true,
-	override_font_size: int = -1,
-	override_name_font_size: int = -1
+	delta_font_size: int = 0
 ) -> void:
 	if not _rows.has(metric_name):
 		__log_("update_metric", metric_name)
-		_rows[metric_name] = _create_new_row(metric_name, override_font_size, override_name_font_size)
+		_rows[metric_name] = _create_new_row(metric_name, delta_font_size)
 	
 	var metric_label: Label = _rows[metric_name]
 	var new_text := pp.metric_fmt(metric_value, fmt_show_vector_len)
@@ -81,7 +80,7 @@ func update_metric(
 			_fading_rows[metric_name] = true
 
 
-func _create_new_row(key: String, override_font_size: int, override_name_font_size: int) -> Label:
+func _create_new_row(key: String, delta_font_size: int = 0) -> Label:
 	var name_label := Label.new()
 	name_label.text = key
 	name_label.modulate = modulate_name_label if modulate_name_label else def_modulate_name_label
@@ -90,8 +89,8 @@ func _create_new_row(key: String, override_font_size: int, override_name_font_si
 	if use_value_label_mono_font and value_label_mono_font:
 		ControlUtils.label_set_font(value_label, value_label_mono_font)
 
-	ControlUtils.label_set_font_size(value_label, value_label_font_size if override_font_size == -1 else override_font_size)
-	ControlUtils.label_set_font_size(name_label, name_label_font_size if override_name_font_size == -1 else override_name_font_size)
+	ControlUtils.label_set_font_size(value_label, value_label_font_size + delta_font_size)
+	ControlUtils.label_set_font_size(name_label, name_label_font_size + delta_font_size)
 
 	grid.add_child(name_label)
 	grid.add_child(value_label)

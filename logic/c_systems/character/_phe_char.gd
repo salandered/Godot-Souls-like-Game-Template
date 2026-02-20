@@ -212,7 +212,7 @@ func update_state_history(state_name_: String):
 
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if u.is_editor(): return
 	
 	super._physics_process(delta)
 	if u.is_nth_frame(10):

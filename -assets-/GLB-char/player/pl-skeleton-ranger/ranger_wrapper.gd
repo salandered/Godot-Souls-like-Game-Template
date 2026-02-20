@@ -52,7 +52,7 @@ func _on_SIG_dvc_color_value_changed(payload: Dictionary[String, Variant]):
 	)
 	if _r.err: return
 
-	var new_mat := MaterialUtils.create_standard_3d(_r.value)
+	var new_mat := MaterialUtils.create_standard_mat_3d(_r.value)
 	_super_mat(long_hair, new_mat, 0)
 
 

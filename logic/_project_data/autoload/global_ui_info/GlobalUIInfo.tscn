@@ -1,10 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://48tejneiwq5o"]
+[gd_scene load_steps=36 format=3 uid="uid://48tejneiwq5o"]
 
 [ext_resource type="Script" uid="uid://ho1kjt4aujxq" path="res://logic/_project_data/autoload/global_ui_info/global_ui_info.gd" id="1_ihl3n"]
 [ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/x_dev_systems/ui_overlay_panels/profiler/profiler.gd" id="2_65fx7"]
 [ext_resource type="PackedScene" uid="uid://b6qeel3fnf216" path="res://logic/x_dev_systems/in_game_subvp_with_cameras/InGameSubViewport.tscn" id="2_f4jnj"]
+[ext_resource type="Script" uid="uid://cnqlg4ripk580" path="res://logic/_project_data/autoload/global_ui_info/global_ui_hotkeys.gd" id="3_p4imp"]
 [ext_resource type="Script" uid="uid://dbcu5ygwnlk0" path="res://logic/x_dev_systems/overlay_panel_manager/sig_info_manager.gd" id="5_7uhmh"]
-[ext_resource type="Script" path="res://logic/_project_data/autoload/free_cam_mode/free_cam_ui.gd" id="5_65fx7"]
+[ext_resource type="Script" uid="uid://dqvlv43ty5tmr" path="res://logic/_project_data/autoload/free_cam_mode/free_cam_ui.gd" id="5_65fx7"]
 [ext_resource type="Script" uid="uid://dyp8r3a4no3f6" path="res://logic/x_dev_systems/info_presenter/phe_attack_group.gd" id="5_yk2yn"]
 [ext_resource type="Script" uid="uid://kmjdjc3yjn0q" path="res://logic/x_dev_systems/info_presenter/phe_state_group.gd" id="6_7uhmh"]
 [ext_resource type="Script" uid="uid://bg5b754cxsa7m" path="res://logic/x_dev_systems/overlay_panel_manager/error_log_panel_manager.gd" id="6_mcb6c"]
@@ -29,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://bu21qjie1lsej" path="res://logic/x_dev_systems/ui_overlay_panels/animator_panels/GlobalUISkAnimPanel.tscn" id="25_mgimc"]
 [ext_resource type="PackedScene" uid="uid://dvbe6tl3nhj2m" path="res://logic/x_dev_systems/ui_overlay_panels/GlobalUIEnemyMovementPanel.tscn" id="25_xista"]
 [ext_resource type="PackedScene" uid="uid://b04cbf8ooig7d" path="res://logic/x_dev_systems/ui_overlay_panels/animator_panels/GlobalUIPHEAnimPanel.tscn" id="26_p8n4t"]
+[ext_resource type="Script" uid="uid://b0ngn7oyeg347" path="res://logic/x_utils/cursor_tools.gd" id="30_n600l"]
+[ext_resource type="Texture2D" uid="uid://c5m7vv6a7kgdd" path="res://-assets-/ui_assets/cursor/pixil-frame-0.png" id="31_p4imp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmbhh"]
 bg_color = Color(0.45, 0.45, 0.45, 0)
@@ -53,6 +56,9 @@ vertical = true
 [node name="GlobalUIInfo" type="Node3D"]
 script = ExtResource("1_ihl3n")
 in_game_vp_scene = ExtResource("2_f4jnj")
+
+[node name="GlobalUIHotkeys" type="Node" parent="."]
+script = ExtResource("3_p4imp")
 
 [node name="Profiler" type="Node" parent="."]
 unique_name_in_owner = true
@@ -110,7 +116,7 @@ script = ExtResource("10_6ybb6")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 100
+layer = 40
 
 [node name="__global_margin" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -938,5 +944,13 @@ text = "HUD info will be updated"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="CursorTools" type="Node" parent="CanvasLayer2"]
+script = ExtResource("30_n600l")
+cursor_texture = ExtResource("31_p4imp")
+toggle_trail_on_lanch = true
 
 [editable path="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo"]

@@ -88,7 +88,7 @@ func _ready() -> void:
 	
 	_ready_implementation()
 
-	if not Engine.is_editor_hint():
+	if not u.is_editor():
 		_ready_implementation_not_editor()
 
 
