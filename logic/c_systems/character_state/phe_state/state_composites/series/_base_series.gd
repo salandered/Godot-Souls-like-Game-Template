@@ -5,7 +5,7 @@ class_name BasePHEAttackSeries
 
 var PL_DIST_TO_END := 8
 
-var _chosen_attack_series: Array[String] = []
+var _chosen_attack_series: Array[StringName] = []
 
 ## starts with 0
 var current_attack_number: int = -1
@@ -22,7 +22,7 @@ var curr_series_number: int = -1
 ##            do just method and overrding it in heirs See how it goes. 
 ##            Idea is that u think of logic when creating new series, and u cant make a mistake in function name while overriding
 
-## returns Array[Array[String]]. 
+## returns Array[Array[StringName]]. 
 ## E.g  [ ["attack_a"], ["attack_a", "attack_b"] ]
 @abstract func get_attack_series_list() -> Array[Array]
 
@@ -57,7 +57,7 @@ func default_condition_to_end(current_substate: BasePHELeaf) -> bool:
 # helpers
 
 ## returns false on any problem occurred (and of not marker passed lol)
-func attack_in_series_passed_marker(curr_series_number_: int, curr_sbs: BasePHELeaf, target_sbs_name_: String, marker_name: String) -> bool:
+func attack_in_series_passed_marker(curr_series_number_: int, curr_sbs: BasePHELeaf, target_sbs_name_: StringName, marker_name: StringName) -> bool:
 	if curr_series_number != curr_series_number_:
 		return false
 	
@@ -74,15 +74,15 @@ func attack_in_series_passed_marker(curr_series_number_: int, curr_sbs: BasePHEL
 	return false
 
 
-func _flatten_attack_series_list() -> Array[String]:
-	var unique_dict: Dictionary[String, bool] = {}
+func _flatten_attack_series_list() -> Array[StringName]:
+	var unique_dict: Dictionary[StringName, bool] = {}
 	for series: Array in get_attack_series_list():
-		for attack: String in TypeCast.array_of_string(series):
+		for attack: StringName in TypeCast.array_of_string_name(series):
 			unique_dict[attack] = true
-	return TypeCast.array_of_string(unique_dict.keys())
+	return TypeCast.array_of_string_name(unique_dict.keys())
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	var state_list := _flatten_attack_series_list()
 	for state_name_ in state_list:
 		var state := container.get_state_by_name(state_name_)
@@ -134,7 +134,7 @@ func on_exit_state() -> void:
 
 var _series_forgotten := SimpleTimer.new()
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	var current_substate_casted: BasePHELeaf = current_substate # safe, see get_supported_substates
 	
 	var _switch_on_same := false
@@ -169,7 +169,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason, _switch_on_same, _override_commit)
 
 
-func pick_attack_series() -> Array[String]:
+func pick_attack_series() -> Array[StringName]:
 	if get_attack_series_list().is_empty():
 		__log_error("pick_attack_series: 'attack_series_list' list is empty!", "", "return []")
 		return []
@@ -181,10 +181,10 @@ func pick_attack_series() -> Array[String]:
 		
 	var picked_series: Array = get_attack_series_list()[picked_idx]
 	curr_series_number = picked_idx
-	return TypeCast.array_of_string(picked_series)
+	return TypeCast.array_of_string_name(picked_series)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	_chosen_attack_series = pick_attack_series()
 	
 	if _chosen_attack_series.is_empty():

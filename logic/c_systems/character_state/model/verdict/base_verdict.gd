@@ -2,11 +2,11 @@ extends RefCounted
 class_name BaseVerdict
 
 
-var next_state: String
+var next_state: StringName
 var _reason: String
 
 
-func _init(next_state_: String = "", reason_: String = ""):
+func _init(next_state_: StringName = "", reason_: String = ""):
 	self.next_state = next_state_
 	self._reason = reason_
 

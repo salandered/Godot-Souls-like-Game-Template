@@ -37,7 +37,7 @@ func _ready():
 	_init_spectrum_effect(audio_bus_name)
 
 
-func _init_spectrum_effect(bus_id: String):
+func _init_spectrum_effect(bus_id: StringName):
 	AudioServerUtil.ensure_spectrum_analyzer(bus_id)
 	spectrum = AudioServerUtil.get_spectrum_analyzer_instance(bus_id)
 	
@@ -58,7 +58,7 @@ func set_enabled(value: bool) -> void:
 
 
 ## returns false if failed
-func set_audio_bus(new_bus_name: String) -> bool:
+func set_audio_bus(new_bus_name: StringName) -> bool:
 	if not __validation_ok():
 		return false
 	if audio_bus_name == new_bus_name:

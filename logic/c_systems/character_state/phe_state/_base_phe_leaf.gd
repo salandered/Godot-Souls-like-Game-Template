@@ -9,7 +9,7 @@ var start_time_offset := ActionData.StartTimeOffset.new(0.0)
 var y_offset_adjustment: float
 
 # see player's PREV_ACTION for a reference
-var PREV_LEAF: String = ""
+var PREV_LEAF: StringName = ""
 
 ## non null
 var anim: AnimationData
@@ -166,7 +166,7 @@ func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_off
 	get_animator_manager().set_anim_to_play(anim.anim_id, _actual_blend_time, _actual_start_time_offset)
 
 
-func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayConfig) -> void:
+func set_overlay_anim_to_play(overlay_anim_id: StringName, overlay_config: OverlayConfig) -> void:
 	if __ELA(): __log_overlay_anim(overlay_anim_id, overlay_config)
 	get_animator_manager().set_overlay_anim(overlay_anim_id, overlay_config)
 
@@ -210,11 +210,11 @@ func works_between(start: float, finish: float) -> bool:
 	return ActionTimeManagement.works_between(start, finish, get_animator_manager(), self )
 
 
-func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
+func passed_marker(marker_name: StringName, add_time: float = 0.0) -> bool:
 	return ActionTimeManagement.passed_marker(marker_name, get_animator_manager(), anim, self , add_time)
 
 
-func before_marker(marker_name: String) -> bool:
+func before_marker(marker_name: StringName) -> bool:
 	return ActionTimeManagement.before_marker(marker_name, get_animator_manager(), anim, self )
 
 # endregion
@@ -226,9 +226,9 @@ func before_marker(marker_name: String) -> bool:
 # 	return anim_params_container.is_invincible(anim.native_anim, effective_time_spent_unscaled())
 	
 
-func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
+func is_weapon_hurts(weapon_id: StringName, __log: bool = false) -> bool:
 	var _r: bool = false
-	_r = anim_params_container.is_weapon_hurts(weapon_name, anim.native_anim, effective_time_spent_unscaled())
+	_r = anim_params_container.is_weapon_hurts(weapon_id, anim.native_anim, effective_time_spent_unscaled())
 
 	if _r and __log:
 		print_.prefix("// HURT")
@@ -291,7 +291,7 @@ func __log_timings() -> String:
 func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
 	if __LOG_ANIM: print_.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
 
-func __log_overlay_anim(overlay_anim_id: String, overlay_config: OverlayConfig):
+func __log_overlay_anim(overlay_anim_id: StringName, overlay_config: OverlayConfig):
 	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(state_name, overlay_anim_id, overlay_config)
 
 

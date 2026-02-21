@@ -18,7 +18,7 @@ func _init(
 	vol_db_change_: float = DEF_VOL_DB_CHANGE,
 	pitch_change_: float = DEF_PITCH_CHANGE,
 	max_polyphony_: int = DEF_MAX_POLYPHONY,
-	bus_id_: String = DEF_BUS_ID,
+	bus_id_: StringName = DEF_BUS_ID,
 	stream_: AudioStream = null,
 	from_position_: float = 0.0
 ):

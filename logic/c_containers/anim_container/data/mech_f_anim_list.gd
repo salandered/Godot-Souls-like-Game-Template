@@ -3,18 +3,18 @@ extends BaseCharAnimList
 
 
 ## idle
-const idle_l := "idle_l"
-const idle_r := "idle_r"
+const idle_l: StringName = "idle_l"
+const idle_r: StringName = "idle_r"
 
 ## attack
-const attack_lr := "attack_lr"
-const attack_rl := "attack_rl"
-const attack_up := "attack_up"
-const attack_down := "attack_down"
-const attack_stab := "attack_stab"
-const attack_lr_power := "attack_lr_power"
-const attack_rl_power := "attack_rl_power"
-const attack_stab_power := "attack_stab_power"
+const attack_lr: StringName = "attack_lr"
+const attack_rl: StringName = "attack_rl"
+const attack_up: StringName = "attack_up"
+const attack_down: StringName = "attack_down"
+const attack_stab: StringName = "attack_stab"
+const attack_lr_power: StringName = "attack_lr_power"
+const attack_rl_power: StringName = "attack_rl_power"
+const attack_stab_power: StringName = "attack_stab_power"
 
 ## other
 

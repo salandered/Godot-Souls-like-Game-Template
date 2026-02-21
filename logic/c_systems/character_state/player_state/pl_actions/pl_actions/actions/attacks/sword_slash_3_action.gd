@@ -66,7 +66,7 @@ func update(input_: InputPackage, delta: float):
 
 var hit_sig_emitted: bool = false
 
-func get_signal_from_active_weapon(sig_id: String) -> SignalData:
+func get_signal_from_active_weapon(sig_id: StringName) -> SignalData:
 	var weapons := combat.get_all_active_weapons()
 	if len(weapons) > 0 and weapons[0]:
 		var sig_container := weapons[0].get_signal_container()

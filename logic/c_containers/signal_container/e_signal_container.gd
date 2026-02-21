@@ -2,7 +2,7 @@ extends BaseCharacterSignalContainer
 class_name EnemySignalContainer
 
 
-signal SFX_jingles(payload: Dictionary[String, Variant])
+signal SFX_jingles(payload: Dictionary[StringName, Variant])
 
 
 func _get_character_specific_signal_data_list() -> Array[SignalData]:

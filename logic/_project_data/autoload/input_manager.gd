@@ -2,6 +2,9 @@ extends Node
 
 ## AutoLoad ##
 
+## Probably should be renamed to PlayerInputManager
+
+
 var _input_gatherer: InputGatherer
 var _current_input: InputPackage
 var _is_input_enabled: bool = true

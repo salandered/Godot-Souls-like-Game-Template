@@ -4,8 +4,8 @@ class_name DodgeDirection
 
 class _DirData:
 	var speed: float
-	var anim_id: String
-	func _init(_speed: float, _anim_id: String):
+	var anim_id: StringName
+	func _init(_speed: float, _anim_id: StringName):
 		speed = _speed
 		anim_id = _anim_id
 
@@ -23,7 +23,16 @@ var _curr_dir: Dir = Dir.NEUTRAL
 var _dir_data: Dictionary[Dir, _DirData] = {}
 
 
-func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String):
+func _init(
+	speed_r: float, 
+	anim_r: StringName, 
+	speed_l: float, 
+	anim_l: StringName, 
+	speed_f: float, 
+	anim_f: StringName, 
+	speed_b: float, 
+	anim_b: StringName
+):
 	_dir_data = {
 		Dir.NEUTRAL: _DirData.new(speed_f, anim_f), # NOTE: intentionally using forward dodge for now
 		Dir.FORWARD: _DirData.new(speed_f, anim_f),
@@ -71,7 +80,7 @@ func get_curr_dir() -> Dir:
 func is_horizontal() -> bool:
 	return _curr_dir == DodgeDirection.Dir.RIGHT or _curr_dir == DodgeDirection.Dir.LEFT
 
-func get_curr_anim_id() -> String:
+func get_curr_anim_id() -> StringName:
 	return _dir_data[_curr_dir].anim_id
 
 
@@ -79,8 +88,8 @@ func get_curr_speed() -> float:
 	return _dir_data[_curr_dir].speed
 
 
-func get_all_anims() -> Array[String]:
-	var anims: Array[String] = []
+func get_all_anims() -> Array[StringName]:
+	var anims: Array[StringName] = []
 	for data in _dir_data.values():
 		if not data.anim_id in anims:
 			anims.append(data.anim_id)

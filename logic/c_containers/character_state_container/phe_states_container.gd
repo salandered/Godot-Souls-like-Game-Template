@@ -11,11 +11,11 @@ var _node_state_container: PHEBaseNodeStateDataContainer
 var me: PHCharacter
 
 
-var _states: Dictionary[String, BasePHEState]
+var _states: Dictionary[StringName, BasePHEState]
 
 
 ## returns null if no state found
-func get_state_by_name(state_name: String) -> BasePHEState:
+func get_state_by_name(state_name: StringName) -> BasePHEState:
 	if not _states.has(state_name):
 		__log_warn(pp.s("_states dict doesn't have ", pp.in_q(state_name)))
 		return null

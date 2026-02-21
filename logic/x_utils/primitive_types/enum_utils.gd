@@ -5,7 +5,7 @@ extends RefCounted
 
 ## if int 'value' exists as a value in the 'enum_dict'.
 ## Usage: EnumUtils.safe_has_value(MyEnum, 5)
-static func safe_has_value(enum_dict: Dictionary, value: int, warn_level: String = WL.INFO) -> bool:
+static func safe_has_value(enum_dict: Dictionary, value: int, warn_level: StringName = WL.INFO) -> bool:
 	var exists: bool = enum_dict.values().has(value)
 	if not exists:
 		error_.warn(_msg_enum_value_problem(value, enum_dict), "", "", warn_level)
@@ -14,7 +14,7 @@ static func safe_has_value(enum_dict: Dictionary, value: int, warn_level: String
 
 ## if string 'key' exists as a key in the 'enum_dict'.
 ## Usage: EnumUtils.safe_has_key(MyEnum, "PLAYER")
-static func safe_has_key(enum_dict: Dictionary, key: String, warn_level: String = WL.INFO) -> bool:
+static func safe_has_key(enum_dict: Dictionary, key: String, warn_level: StringName = WL.INFO) -> bool:
 	var exists: bool = enum_dict.has(key)
 	if not exists:
 		error_.warn(_msg_enum_key_problem(key, enum_dict), "", "", warn_level)

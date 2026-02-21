@@ -10,40 +10,40 @@ class _lib:
 
 
 ## idle
-const idle_v1 := _lib._sitting_p2 + "Sit Idle v1"
-const idle_active_v1 := _lib._sitting_p2 + "Sit idle v1 active"
-const idle_freezed_v2 := _lib._sitting_p1 + "Sit Idle freezed v2"
-const idle_v2 := _lib._sitting_p2 + "Sit Idle v2"
-const rubbing := _lib._sitting_p1 + "Sit Rubbing Arm"
-const talking := _lib._sitting_p1 + "Sit Talking"
-const talking_w_leg := _lib._sitting_p3 + "Sitting Talking"
-const intimidate := _lib._sitting_p2 + "Sit Intimidate"
+const idle_v1: StringName = _lib._sitting_p2 + "Sit Idle v1"
+const idle_active_v1: StringName = _lib._sitting_p2 + "Sit idle v1 active"
+const idle_freezed_v2: StringName = _lib._sitting_p1 + "Sit Idle freezed v2"
+const idle_v2: StringName = _lib._sitting_p2 + "Sit Idle v2"
+const rubbing: StringName = _lib._sitting_p1 + "Sit Rubbing Arm"
+const talking: StringName = _lib._sitting_p1 + "Sit Talking"
+const talking_w_leg: StringName = _lib._sitting_p3 + "Sitting Talking"
+const intimidate: StringName = _lib._sitting_p2 + "Sit Intimidate"
 
 ## one time
-const point := _lib._sitting_p1 + "Sit And Pointing"
-const clap := _lib._sitting_p2 + "Sit Clap"
-const disbelief_light := _lib._sitting_p1 + "Sit Disbelief light"
-const disbelief_hard := _lib._sitting_p2 + "Sit Disbelief hard"
-const head_down := _lib._sitting_p3 + "Sitting head down"
-const laugh_light := _lib._sitting_p2 + "Sit Laughing light"
-const laugh_hard := _lib._sitting_p2 + "Sit Laughing hard"
-const laugh_super_hard := _lib._sitting_p3 + "Sitting Laughing super hard"
-const cheer := _lib._sitting_p3 + "Cheering While Sitting"
-const disapprove := _lib._sitting_p3 + "Sitting Disapproval"
-const thumb_up := _lib._sitting_p3 + "Sitting Thumbs Up"
+const point: StringName = _lib._sitting_p1 + "Sit And Pointing"
+const clap: StringName = _lib._sitting_p2 + "Sit Clap"
+const disbelief_light: StringName = _lib._sitting_p1 + "Sit Disbelief light"
+const disbelief_hard: StringName = _lib._sitting_p2 + "Sit Disbelief hard"
+const head_down: StringName = _lib._sitting_p3 + "Sitting head down"
+const laugh_light: StringName = _lib._sitting_p2 + "Sit Laughing light"
+const laugh_hard: StringName = _lib._sitting_p2 + "Sit Laughing hard"
+const laugh_super_hard: StringName = _lib._sitting_p3 + "Sitting Laughing super hard"
+const cheer: StringName = _lib._sitting_p3 + "Cheering While Sitting"
+const disapprove: StringName = _lib._sitting_p3 + "Sitting Disapproval"
+const thumb_up: StringName = _lib._sitting_p3 + "Sitting Thumbs Up"
 
 ## one time stand
-const cheer_stand := _lib._sitting_p3 + "Fist Pump"
-const clap_stand := _lib._sitting_p3 + "Standing Clap"
+const cheer_stand: StringName = _lib._sitting_p3 + "Fist Pump"
+const clap_stand: StringName = _lib._sitting_p3 + "Standing Clap"
 
 # other
-const sit_attack := _lib._sitting_p2 + "Sit Lower Pistol"
-const death := _lib._other + "Standing Death B"
+const sit_attack: StringName = _lib._sitting_p2 + "Sit Lower Pistol"
+const death: StringName = _lib._other + "Standing Death B"
 
 # class react:
-# 	const react_from_L := _lib._other + "react large from left"
-# 	const react_from_R := _lib._other + "react large from right"
-# 	const body_impact := _lib._other + "C-body-impact"
+# 	const react_from_L :StringName= _lib._other + "react large from left"
+# 	const react_from_R :StringName= _lib._other + "react large from right"
+# 	const body_impact :StringName= _lib._other + "C-body-impact"
 
 
 func get_list_of_animations() -> Array[AnimationData]:

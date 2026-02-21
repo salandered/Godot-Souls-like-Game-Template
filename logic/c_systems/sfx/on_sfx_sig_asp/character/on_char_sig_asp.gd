@@ -10,7 +10,7 @@ func _hard_validate_implementation() -> bool:
 	return self._sfx_system and self._sfx_system is CharacterSFXSystem
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	return VolPitch.new(base_vol_db, base_pitch)
 
 
@@ -33,14 +33,14 @@ func get_curr_state() -> BaseCharacterState:
 	return _curr_state
 
 
-func get_curr_state_name() -> String:
+func get_curr_state_name() -> StringName:
 	var _curr_state := get_character_sfx_system().get_character().get_current_state()
 	if _curr_state == null:
 		return ""
 	else:
 		return _curr_state.state_name
 
-func get_prev_state_name() -> String:
+func get_prev_state_name() -> StringName:
 	return get_character_sfx_system().get_character().get_prev_state_name()
 
 

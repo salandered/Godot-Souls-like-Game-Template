@@ -197,21 +197,21 @@ func _on_regen_delay_ended() -> void:
 ##
 
 
-func _on_player_change_health(payload: Dictionary[String, Variant]) -> void:
+func _on_player_change_health(payload: Dictionary[StringName, Variant]) -> void:
 	var _r := SigUtils.safe_get_int_float_payload_value(payload, SPS.amount_field)
 	if _r.err:
 		return
 	__log_("_on_player_change_health", "triggered with value", _r.value)
 	_change_health(_r.value)
 	
-func _on_player_max_health_increase(payload: Dictionary[String, Variant]) -> void:
+func _on_player_max_health_increase(payload: Dictionary[StringName, Variant]) -> void:
 	var _r := SigUtils.safe_get_int_float_payload_value(payload, SPS.amount_field)
 	if _r.err:
 		return
 	__log_("_on_player_max_health_increase", "triggered with value", _r.value)
 	max_health += _r.value
 
-func _on_player_max_stamina_increase(payload: Dictionary[String, Variant]) -> void:
+func _on_player_max_stamina_increase(payload: Dictionary[StringName, Variant]) -> void:
 	var _r := SigUtils.safe_get_int_float_payload_value(payload, SPS.amount_field)
 	if _r.err:
 		return

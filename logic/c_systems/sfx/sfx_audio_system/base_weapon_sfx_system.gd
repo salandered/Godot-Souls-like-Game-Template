@@ -20,7 +20,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void:
+func initialise_implementation(additional_data: Dictionary[StringName, Variant]) -> void:
 	_weapon = DictUtils.safe_get_dict_key(additional_data, weapon_additional_data_key, null)
 
 
@@ -31,17 +31,17 @@ func get_weapon() -> BaseWeapon:
 
 func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]:
 	var _list: Array[OnSFXSigASP] = [
-		OnWeaponSFXSigASP.new(self,
+		OnWeaponSFXSigASP.new(self ,
 			sig_container.get_by_sig_id(SignalID.sfx_whoosh_weapon),
 			whoosh_weapon_player_3d,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.whoosh_weapon),
 		),
-		OnWeaponSFXSigASP.new(self,
+		OnWeaponSFXSigASP.new(self ,
 			sig_container.get_by_sig_id(SignalID.sfx_hit_weapon),
 			hit_weapon_player_3d,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_weapon),
 		),
-		OnWeaponSFXSigASP.new(self,
+		OnWeaponSFXSigASP.new(self ,
 			sig_container.get_by_sig_id(SignalID.sfx_hit_target),
 			hit_target_weapon_player_3d,
 			asp_config_container.get_by_sfx_type_id(SFXConstants.ID_.hit_target),
@@ -57,5 +57,5 @@ func _get_on_signal_asps(sig_container: BaseSignalContainer, asp_config_containe
 
 
 func pp_name() -> String:
-	var prefix = get_weapon().get_weapon_id() if get_weapon() else ""
-	return pp.s(prefix, ObjUtils.construct_obj_pp_name(self))
+	var prefix := get_weapon().get_weapon_id() if get_weapon() else &""
+	return pp.s(prefix, ObjUtils.construct_obj_pp_name(self ))

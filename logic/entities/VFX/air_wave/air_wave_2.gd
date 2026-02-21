@@ -23,15 +23,15 @@ func _ready() -> void:
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 
-func spawn_shockwave(anim_id: String, y_shift: float = 0.0):
+func spawn_shockwave(anim_id: StringName, y_shift: float = 0.0):
 	_spawn_shockwave(self.global_position, anim_id, y_shift)
 
 
-func spawn_shockwave_at_position(glob_position: Vector3, anim_id: String, y_shift: float = 0.0):
+func spawn_shockwave_at_position(glob_position: Vector3, anim_id: StringName, y_shift: float = 0.0):
 	_spawn_shockwave(glob_position, anim_id, y_shift)
 
 
-func _spawn_shockwave(glob_position: Vector3, anim_id: String, y_shift: float = 0.0):
+func _spawn_shockwave(glob_position: Vector3, anim_id: StringName, y_shift: float = 0.0):
 	self.global_position = glob_position
 	self.global_position.y += y_shift
 	_play_anim(anim_id)

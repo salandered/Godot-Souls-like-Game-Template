@@ -268,7 +268,7 @@ func _update_font_size() -> void:
 		#ControlUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)
 
 
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_fget_value_by_dvc_key(
 		payload,
 		DVS.KeyFValueChanger.GHOST_DUR_SEC

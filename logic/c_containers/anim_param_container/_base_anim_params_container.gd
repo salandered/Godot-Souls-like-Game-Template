@@ -18,7 +18,7 @@ const INTERRUPTABLE := "interruptable"
 @abstract func get_track_prefixes() -> Array[String]
 
 
-@abstract func is_weapon_hurts(weapon_name: String, anim: Animation, timestamp: float) -> bool
+@abstract func is_weapon_hurts(weapon_id: StringName, anim: Animation, timestamp: float) -> bool
 
 
 ## default

@@ -18,10 +18,10 @@ var dodge_x_dur_correction: float = 0.0
 var speed_x_interpolator := HillInterpolator.new()
 
 
-const ANIM_F: String = A.dodge.dodge_F
-const ANIM_B: String = A.dodge.dodge_B
-const ANIM_R: String = A.dodge.dodge_R
-const ANIM_L: String = A.dodge.dodge_L
+const ANIM_F := A.dodge.dodge_F
+const ANIM_B := A.dodge.dodge_B
+const ANIM_R := A.dodge.dodge_R
+const ANIM_L := A.dodge.dodge_L
 
 const SPEED_R: float = 1.0
 const SPEED_L: float = 1.0
@@ -139,7 +139,7 @@ func animate(): # ▶️
 
 	# if SECOND_DODGE_FEATURE:
 	# 	if second_dodge and curr_dodge_dir.is_horizontal():
-	# 		var anim_id_to_overlay: String
+	# 		var anim_id_to_overlay: StringName
 	# 		if curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.RIGHT:
 	# 			anim_id_to_overlay = A.dodge.dodge_R_head
 	# 		elif curr_dodge_dir.get_curr_dir() == DodgeDirection.Dir.LEFT:
@@ -167,7 +167,7 @@ var __sp_scale := 1.2
 # # 	GRAVITY_DURING_JUMP = InputUtils._dev_change_t58_param(event, GRAVITY_DURING_JUMP, "GRAVITY_DURING_JUMP", 0.5)
 
 
-func _on_dodge_increase(payload: Dictionary[String, Variant]) -> void:
+func _on_dodge_increase(payload: Dictionary[StringName, Variant]) -> void:
 	# prints("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):

@@ -41,7 +41,7 @@ func reset_visuals() -> void:
 	pass
 
 
-func _on_SIG_incoming_weapon_contacted(payload: Dictionary[String, Variant]):
+func _on_SIG_incoming_weapon_contacted(payload: Dictionary[StringName, Variant]):
 	__log_("_on_SIG", payload)
 	if not char_hit_box:
 		return
@@ -118,7 +118,7 @@ func _draw_secondary_hit(my_area: Area3D, hit_pos: Vector3, draw_both_levels: bo
 	)
 
 
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 	if not char_hit_box:
 		return
 	var parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
@@ -134,7 +134,7 @@ func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
 			# __log_("duration", duration)
 
 			
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
 	if not char_hit_box:
 		return
 	var parsed_payload := DVCSIGPayloadParser.parse_b_dvc_value_changed(payload)

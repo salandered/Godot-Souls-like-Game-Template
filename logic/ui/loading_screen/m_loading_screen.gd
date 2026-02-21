@@ -3,6 +3,7 @@ extends CanvasLayerLogger
 
 enum StallStage {STARTED, WAITING, STILL_WAITING, GIVE_UP}
 
+
 @export_range(5, 60, 0.5, "or_greater") var state_change_delay: float = 15.0
 @export_group("State Messages")
 @export_subgroup("In Progress")
@@ -11,8 +12,9 @@ enum StallStage {STARTED, WAITING, STILL_WAITING, GIVE_UP}
 @export var _in_progress_still_waiting: String = "Still Loading... (%d seconds)"
 @export_subgroup("Completed")
 @export var _complete: String = "Loading Complete!"
-@export var _complete_waiting: String = "Any Moment Now..."
-@export var _complete_still_waiting: String = "Any Moment Now... (%d seconds)"
+@export var _complete_waiting: String = "Wait for it..."
+@export var _complete_still_waiting: String = "Wait for it... (%d seconds)"
+
 
 var _stall_stage: StallStage = StallStage.STARTED
 var _scene_loading_complete: bool = false
@@ -61,13 +63,13 @@ func update_total_loading_progress() -> void:
 	
 	_progress_tween = create_tween()
 	
-	# DYNAMIC DURATION:
+	# ADDED DYNAMIC DURATION
 	# If jumping 100% (1.0), take 0.5s.
 	# If jumping 10% (0.1), take 0.05s.
-	# We clamp it to a minimum of 0.1s so it doesn't look too instant.
+	# clamp it to a minimum of 0.1s so it doesn't look too instant
 	var duration := maxf(diff * 0.3, 0.1)
 	# print_.prefix_s("~~~~", duration)
-	_progress_tween.tween_property(self, "_total_loading_progress", _scene_loading_progress, duration) \
+	_progress_tween.tween_property(self , "_total_loading_progress", _scene_loading_progress, duration) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)
 
@@ -159,6 +161,7 @@ func _update_progress_messaging() -> void:
 	else:
 		_hide_popups()
 
+
 func _process(_delta: float) -> void:
 	var status = M_SceneLoader.get_status()
 	match (status):
@@ -176,6 +179,7 @@ func _process(_delta: float) -> void:
 			_hide_popups()
 			set_process(false)
 
+
 func _on_loading_timer_timeout() -> void:
 	var prev_stage: StallStage = _stall_stage
 	match prev_stage:
@@ -188,17 +192,23 @@ func _on_loading_timer_timeout() -> void:
 		StallStage.STILL_WAITING:
 			_stall_stage = StallStage.GIVE_UP
 
+
 func _reload_main_scene_or_quit() -> void:
-	var err = get_tree().change_scene_to_file(ProjectSettings.get_setting("application/run/main_scene"))
+	var err = get_tree().change_scene_to_file(
+		ProjectSettings.get_setting(PropC.APPLICATION_RUN_MAIN_SCENE)
+	)
 	if err:
 		push_error("failed to load main scene: %d" % err)
 		get_tree().quit()
 
+
 func _on_error_message_confirmed() -> void:
 	_reload_main_scene_or_quit()
 
+
 func _on_confirmation_dialog_canceled() -> void:
 	_reload_main_scene_or_quit()
+
 
 func _on_confirmation_dialog_confirmed() -> void:
 	_reset_loading_stage()
@@ -206,7 +216,8 @@ func _on_confirmation_dialog_confirmed() -> void:
 
 func reset() -> void:
 	show()
-	__log_("LoadingScreen: reset func started")
+	__log_("reset", "")
+
 	if _progress_tween:
 		_progress_tween.kill()
 
@@ -217,6 +228,7 @@ func reset() -> void:
 	_reset_loading_start_time()
 	_hide_popups()
 	set_process(true)
+
 
 func close() -> void:
 	set_process(false)
@@ -236,8 +248,8 @@ func _setup_background() -> void:
 		
 		if background_texture_rect and texture:
 			background_texture_rect.texture = texture
-			__log_("LoadingScreen: Set random background -> ", random_path.get_file())
+			__log_("Set random background -> ", random_path.get_file())
 		else:
-			__log_warn("LoadingScreen: BackgroundTextureRect is null or load failed", "", "")
+			__log_warn("BackgroundTextureRect is null or load failed", "", "")
 	else:
-		__log_warn("LoadingScreen: no background_image_paths", "", "")
+		__log_warn("no background_image_paths", "", "")

@@ -1,6 +1,8 @@
 extends Node
 
 
+## experimental
+
 func _input(event):
 	if u.is_release():
 		return
@@ -24,8 +26,9 @@ func _toggle_fullscreen_initial_method(event: InputEvent) -> void:
 func _toggle_fullscreen_second_method():
 	if u.is_release():
 		return
-	if get_window().mode != Window.MODE_EXCLUSIVE_FULLSCREEN and get_window().mode != Window.MODE_FULLSCREEN:
+	if get_window().mode != Window.MODE_EXCLUSIVE_FULLSCREEN \
+		and get_window().mode != Window.MODE_FULLSCREEN:
 		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 	else:
 		get_window().mode = Window.MODE_WINDOWED
-	get_viewport().set_input_as_handled()
+	InputUtils.mark_input_handled(self )

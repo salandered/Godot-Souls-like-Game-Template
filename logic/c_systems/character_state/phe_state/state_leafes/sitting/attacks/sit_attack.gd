@@ -4,8 +4,8 @@ extends BasePHEAttack
 var _pushed_rigid_bodies: bool = false
 
 
-var attack_weapons: Array[String] = [WeaponID.bg_aura_weapon]
-func get_anim_active_weapon_ids() -> Array[String]:
+var attack_weapons: Array[StringName] = [WeaponID.bg_aura_weapon]
+func get_anim_active_weapon_ids() -> Array[StringName]:
 	return attack_weapons
 
 

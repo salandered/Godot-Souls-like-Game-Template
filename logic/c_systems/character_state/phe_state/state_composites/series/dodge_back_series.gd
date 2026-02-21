@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges: Array[String] = [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
+var all_the_dodges: Array[StringName] = [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
 
 
 func initialise() -> void:
@@ -9,7 +9,7 @@ func initialise() -> void:
 	PL_DIST_TO_END = 16 # practically don't end
 
 
-var attack_series_list :Array[Array]= [
+var attack_series_list: Array[Array] = [
 		[PHES.Leaf.dodge_B],
 		[PHES.Leaf.dodge_B, PHES.Leaf.dodge_B],
 	]

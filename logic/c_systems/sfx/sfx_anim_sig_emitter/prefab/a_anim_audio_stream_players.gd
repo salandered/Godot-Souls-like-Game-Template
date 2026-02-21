@@ -7,7 +7,7 @@ var mute_bus: bool = true # NOTE
 
 func _ready():
 	var count: int = 0
-	var asps := get_descendants.audio_stream_players_3D(self)
+	var asps := get_descendants.audio_stream_players_3D(self )
 	if not error_.empty_list(asps, "asps", WL.WARN):
 		for _asp: AudioStreamPlayer3D in asps:
 			if not _asp.name.begins_with(SFXConstants.anim_asp_prefix):

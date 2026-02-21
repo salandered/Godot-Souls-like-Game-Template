@@ -2,10 +2,10 @@ extends RefCounted
 class_name SupportedSubstates
 
 
-var state_names: Array[String]
-var parent_state: String
+var state_names: Array[StringName]
+var parent_state: StringName
 
-func _init(states_: Array[String], parent_state_: String):
+func _init(states_: Array[StringName], parent_state_: StringName):
 	self.state_names = states_
 	self.parent_state = parent_state_
 
@@ -13,13 +13,13 @@ func _init(states_: Array[String], parent_state_: String):
 	__log_("_init()", _to_string())
 
 
-func is_state_supported(requested_name: String) -> bool:
+func is_state_supported(requested_name: StringName) -> bool:
 	var _r := requested_name in state_names
 
 	return _r
 
 
-func get_first_one() -> String:
+func get_first_one() -> StringName:
 	return state_names[0]
 
 

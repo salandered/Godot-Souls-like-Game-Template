@@ -53,7 +53,7 @@ func reset_visuals() -> void:
 @abstract func get_dvc_op_key() -> DVS.KeyBOverlayPanel
 
 
-func _enable_via_sig(payload: Dictionary[String, Variant]) -> void:
+func _enable_via_sig(payload: Dictionary[StringName, Variant]) -> void:
 	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
 		payload,
 		get_dvc_op_key()

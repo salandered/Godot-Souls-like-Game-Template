@@ -1,6 +1,13 @@
 class_name M_GameState
 extends Resource
 
+
+## == ✴️ from Maaacks template == 
+## TODO: Was produced as and example of a game state.
+## 	should be deleted or significantly adjusted
+## 
+
+
 const STATE_NAME: String = "M_GameState"
 const FILE_PATH = "res://ui/game_state/m_game_state.gd"
 
@@ -11,7 +18,7 @@ const FILE_PATH = "res://ui/game_state/m_game_state.gd"
 
 # A Resource that manages and persists the player's overall game progress.
 #
-# This class acts as a static manager for all game-related save data. It does not
+# Acts as a static manager for all game-related save data. It does not
 # handle the saving and loading to disk itself, but instead relies on M_GlobalState singleton 
 # to store its own state as a persistent resource.
 #

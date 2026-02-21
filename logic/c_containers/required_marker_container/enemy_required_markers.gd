@@ -2,7 +2,7 @@ extends RefCounted
 class_name ERequiredMarkers
 
 
-static var anim_to_required_marker: Dictionary[String, Array] = {
+static var anim_to_required_marker: Dictionary[StringName, Array] = {
 
 	## 
 	PHEA.sleep: [],

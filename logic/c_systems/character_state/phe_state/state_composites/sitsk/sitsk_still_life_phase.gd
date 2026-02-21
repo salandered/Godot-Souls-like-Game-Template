@@ -11,10 +11,10 @@ func initialise() -> void:
 	SigUtils.safe_connect(PlayerStats.SIG_simple_target_super_rotate, _on_SIG_simple_target_super_rotate)
 
 
-var interrupted_state: String = ""
+var interrupted_state: StringName = ""
 
 
-func _interrup_with_personal_state(state_name_: String, n_frames_delay: int, look_at_time: float):
+func _interrup_with_personal_state(state_name_: StringName, n_frames_delay: int, look_at_time: float):
 	if interrupted_state != "": return
 	await FrameUtils.wait_process_frames(n_frames_delay)
 	interrupted_state = state_name_
@@ -64,7 +64,7 @@ func _on_SIG_simple_target_super_rotate():
 		)
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [
 		## idle
 		SITSKS.Leaf.sit_idle_v1,
@@ -87,7 +87,7 @@ func get_supported_substates() -> Array[String]:
 	]
 
 
-var initial_spick_weighted: Dictionary[String, float] = {
+var initial_spick_weighted: Dictionary[StringName, float] = {
 	SITSKS.Leaf.sit_idle_v1: 0.4,
 	SITSKS.Leaf.sit_idle_v2: 0.1,
 	SITSKS.Leaf.sit_intimidate: 0.2,
@@ -95,7 +95,7 @@ var initial_spick_weighted: Dictionary[String, float] = {
 }
 
 
-var basic_spick_weighted: Dictionary[String, float] = {
+var basic_spick_weighted: Dictionary[StringName, float] = {
 	## idle
 	SITSKS.Leaf.sit_idle_v1: 0.5,
 	SITSKS.Leaf.sit_idle_v2: 0.1,
@@ -108,18 +108,18 @@ var basic_spick_weighted: Dictionary[String, float] = {
 	SITSKS.Leaf.sit_laugh: 0.05
 }
 
-# var not_happy_spick_weighted: Dictionary[String, float] = {
+# var not_happy_spick_weighted: Dictionary[StringName, float] = {
 # 	SITSKS.Leaf.sit_intimidate: 0.4,
 # }
 
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	if current_substate.is_ended():
 		match current_substate.state_name:
 			SITSKS.Leaf.sit_idle_v1, SITSKS.Leaf.sit_idle_v2:
-				_next_state = ra.spick_weighted(basic_spick_weighted)
+				_next_state = ra.snpick_weighted(basic_spick_weighted)
 			_:
-				_next_state = ra.spick_weighted(basic_spick_weighted)
+				_next_state = ra.snpick_weighted(basic_spick_weighted)
 
 	if interrupted_state != "":
 		if current_substate.state_name != interrupted_state:
@@ -130,6 +130,6 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
-	_next_state = ra.spick_weighted(initial_spick_weighted)
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
+	_next_state = ra.snpick_weighted(initial_spick_weighted)
 	return VerdictPH.new(SITSKS.Leaf.sit_idle_v1)

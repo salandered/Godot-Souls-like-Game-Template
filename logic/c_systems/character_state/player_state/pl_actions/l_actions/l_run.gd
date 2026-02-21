@@ -161,7 +161,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	SPEED_BOOST = InputUtils._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 2, RawAction.DEV_speed_down, RawAction.DEV_speed_up, true)
 
 
-func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
+func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
 	# prints("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):
@@ -200,7 +200,7 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 #--------------------------------------------
 # how turn actions used to be:
 	# func on_exit_action() -> void:
-	# var tranfer_turn_data: Dictionary[String, Variant] = {}
+	# var tranfer_turn_data: Dictionary[StringName, Variant] = {}
 	# tranfer_turn_data["turn_data"] = curr_turn.to_dict()
 	# player_sm.fill_tranfer_data(tranfer_turn_data)
 # endregion

@@ -26,11 +26,11 @@ func _supported_signal_pairs() -> Array[Array]:
 	return sig_to_handler
 
 
-func _on_SIG_enemy_state_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_enemy_state_changed(payload: Dictionary[StringName, Variant]):
 	_on_SIG_string_payload(se_state_info, payload, SPS.state_name_field, _str_replacers, dlc_all_features_preset)
 
 
-func _on_SIG_se_reacted_on_hit(payload: Dictionary[String, Variant]):
+func _on_SIG_se_reacted_on_hit(payload: Dictionary[StringName, Variant]):
 	se_reaction_info.set_label_text("next attack", dlc_all_features_and_italics_preset)
 	
 

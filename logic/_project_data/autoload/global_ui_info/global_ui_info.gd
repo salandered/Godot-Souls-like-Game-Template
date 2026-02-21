@@ -7,12 +7,8 @@ extends Node3DLogger
 @onready var profiler: Profiler = %Profiler
 @onready var first_tutorial: Control = %FirstTutorial
 @onready var free_cam_ui: FreeCamUI = %FreeCamUI
-@onready var sig_info_manager: SigInfoManager = %SigInfoManager
-@onready var all_log_panel_manager: AllLogPanelManager = %AllLogPanelManager
-@onready var error_log_panel_manager: ErrorLogPanelManager = %ErrorLogPanelManager
 
 @onready var debug_fancy_cam_panel: GlobalUIFancyCamPanel = %DebugFancyCamPanel
-
 @onready var dynamic_info_presenters: Node = %DynamicInfoPresenters
 @onready var dynamic_info_grid: FlowContainer = %DynamicInfoGrid
 
@@ -44,17 +40,20 @@ func get_dev_visuals_config() -> DevVisualsConfig:
 
 
 ## not used by client code
-signal _SIG_dvc_value_changed(payload: Dictionary[String, Variant])
+signal _SIG_dvc_value_changed(payload: Dictionary[StringName, Variant])
 ## for each section, used by client code. _SIG_dvc_value_changed is distributed into this
-signal SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_svalue_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_color_value_changed(payload: Dictionary[String, Variant])
-signal SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant])
+signal SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dvc_svalue_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dvc_color_value_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant])
 
 
 func _ready() -> void:
+	# can pause tree, but it itself should still be working
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	_dev_visual_config = DevVisualsConfig.new(_SIG_dvc_value_changed)
 
 
@@ -81,31 +80,32 @@ func _ready() -> void:
 
 
 ## distribution sits here temporary. It should be separated class (it's not about the GlobalUIInfo)
-func _on_SIG_dvc_value_changed_distribute_signal(payload: Dictionary[String, Variant]):
+## probably an autoload with BusFanOut name
+func _on_SIG_dvc_value_changed_distribute_signal(payload: Dictionary[StringName, Variant]):
 	var parsed_payload := DVCSIGPayloadParser.parse_internal_SIG_dvc_value_changed(payload)
 	if not parsed_payload:
 		return
 
-	var distributed_payload: Dictionary[String, Variant] = {
+	var distributed_payload: Dictionary[StringName, Variant] = {
 		SPS.dvc_key_field: parsed_payload.key,
 		SPS.dvc_value_field: parsed_payload.value
 	}
 	match parsed_payload.section:
 		DVS.DVSection.B_OVERLAY_PANEL:
-			SigUtils.safe_emit_raw(SIG_dvc_b_overlay_panel_value_changed, distributed_payload)
+			SigUtils.safe_emit(SIG_dvc_b_overlay_panel_value_changed, distributed_payload)
 		DVS.DVSection.B_CHANGER:
-			SigUtils.safe_emit_raw(SIG_dvc_bvalue_changed, distributed_payload)
+			SigUtils.safe_emit(SIG_dvc_bvalue_changed, distributed_payload)
 		DVS.DVSection.S_CHANGER:
-			SigUtils.safe_emit_raw(SIG_dvc_svalue_changed, distributed_payload)
+			SigUtils.safe_emit(SIG_dvc_svalue_changed, distributed_payload)
 		DVS.DVSection.F_CHANGER:
-			SigUtils.safe_emit_raw(SIG_dvc_fvalue_changed, distributed_payload)
+			SigUtils.safe_emit(SIG_dvc_fvalue_changed, distributed_payload)
 		DVS.DVSection.COLOR_CHANGER:
-			SigUtils.safe_emit_raw(SIG_dvc_color_value_changed, distributed_payload)
+			SigUtils.safe_emit(SIG_dvc_color_value_changed, distributed_payload)
 		DVS.DVSection.B_CHAR_DV:
-			SigUtils.safe_emit_raw(SIG_dvc_b_char_dv_value_changed, distributed_payload)
+			SigUtils.safe_emit(SIG_dvc_b_char_dv_value_changed, distributed_payload)
 
 
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_fget_value_by_dvc_key(
 		payload,
 		DVS.KeyFValueChanger.GRID_V_SEP)
@@ -115,7 +115,7 @@ func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
 	__log_("dynamic_info_grid updated with v_separation", new_value)
 
 
-func _on_SIG_dvc_op_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_op_value_changed(payload: Dictionary[StringName, Variant]):
 	var _parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
 	if not _parsed_payload or _parsed_payload.value is not bool: return
 	var toggle := _parsed_payload.value as bool
@@ -135,7 +135,7 @@ func _on_SIG_dvc_op_value_changed(payload: Dictionary[String, Variant]):
 			__ERROR_LOG = toggle
 
 
-func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
 	__log_("_on_SIG_dvc_b_char_dv_value_changed", payload)
 	var _r := DVCSIGPayloadParser.parse_dvc_b_char_dv_value_changed(payload)
 	if not _r: return
@@ -227,7 +227,7 @@ func update_free_cam_hud(text: String):
 		free_cam_ui.update_free_cam_hud(text)
 
 
-func _on_SIG_toggle_free_cam(payload: Dictionary[String, Variant]):
+func _on_SIG_toggle_free_cam(payload: Dictionary[StringName, Variant]):
 	var _r := SigUtils.safe_get_bool_payload_value(payload, SPS.toggle_field)
 	if _r.err: return
 	if free_cam_ui:
@@ -269,6 +269,10 @@ var ui_overlay_controls_visible: bool = false
 ## Input
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(RawAction.pause):
+		u.pause_tree_toggle(self )
+		InputUtils.mark_input_handled(self )
+	
 	if u.is_release(): return
 
 	if event.is_action_pressed(RawAction.DEV_profiler):
@@ -289,7 +293,7 @@ func _input(event: InputEvent) -> void:
 		if not _active_subvp:
 			return
 		if _subvp_target == 1:
-			var e := Groups.get_first_phe_bg_by_group_with_tag(self , "demo_enemy")
+			var e := Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
 			if not e: return
 			_active_subvp.set_cam_target(e)
 			_subvp_target = 2
@@ -299,6 +303,9 @@ func _input(event: InputEvent) -> void:
 			_active_subvp.set_cam_target(pl)
 			_subvp_target = 1
 		InputUtils.mark_input_handled(self )
+
+
+##
 
 
 func pp_name() -> String:

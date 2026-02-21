@@ -5,12 +5,12 @@ extends Node3DSystem
 @export var camera_packed_scene: PackedScene
 @export var camera_speed := 10.0
 @export var mouse_sensitivity := 0.003
-@export var speed_multiplier := 1.1 # how much each scroll step multiplies speed
 @export var pause_on_enter: bool = false
 @export var light_on_on_enter: bool = false
 
+@onready var hot_keys: BaseInputDevHotkeys = %HotKeys
+
 var _camera: FreeCamera
-var _light: SpotLight3D
 
 var _cached_camera: Camera3D
 var _previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
@@ -30,8 +30,7 @@ func _ready() -> void:
 		__log_warn_soft("not gonna work")
 		_enabled = false
 
-	# free cam mode can pause tree, but it itself should still be working
-	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	set_process(false)
 	visible = false
 
@@ -46,13 +45,14 @@ func _process(delta: float) -> void:
 func _toggle_camera_mode(toggle: bool) -> void:
 	if not _enabled:
 		return
-	__log_("~~~ Toggling _camera mode", toggle)
+	__log_("toggling camera mode:", toggle)
 	
 	is_active = toggle
 	set_process(toggle)
-	SigUtils.safe_emit_raw_toggle(GlobalSignal.SIG_free_cam_mode_toggled, toggle)
+	SigUtils.safe_emit_toggle(GlobalSignal.SIG_free_cam_mode_toggled, toggle)
 	InputManager.set_input_enabled(not toggle)
-	
+	hot_keys.set_enabled(toggle)
+	visible = toggle
 	## turn on free cam
 	if toggle:
 		if pause_on_enter:
@@ -63,7 +63,6 @@ func _toggle_camera_mode(toggle: bool) -> void:
 		if not _cached_camera:
 			__log_warn_soft("can t acquired the cam to return to after toggling free cam mode off")
 		_turn_on_free_cam()
-		show()
 	## going back to main cam
 	else:
 		get_tree().paused = false
@@ -71,7 +70,6 @@ func _toggle_camera_mode(toggle: bool) -> void:
 		if _cached_camera and not _cached_camera.is_queued_for_deletion():
 			_cached_camera.current = true
 		_turn_off_free_cam()
-		hide()
 
 
 func _turn_on_free_cam():
@@ -82,8 +80,7 @@ func _turn_on_free_cam():
 	add_child(cam)
 
 	_camera = cam
-	_light = _camera.get_light()
-	_light.visible = light_on_on_enter
+	_camera.toggle_light(light_on_on_enter)
 
 	_camera.current = true
 
@@ -101,6 +98,7 @@ func _turn_off_free_cam():
 # region
 
 var _mouse_motion := Vector2.ZERO
+
 
 func move_camera(delta: float):
 	var movement := _get_keyboard_movement_vector()
@@ -145,8 +143,9 @@ func _update_hud() -> void:
 		camera_speed,
 		_camera.fov
 	]
-	if _light:
-		hud_text += pp.s("\nLight: ", _light.visible, pp.s(" | Energy: ", _light.light_energy))
+	if _camera.get_light():
+		hud_text += pp.s("\nLight: ", _camera.get_light().visible,
+				pp.s(" | Energy: ", _camera.get_light().light_energy))
 	if get_tree().paused:
 		hud_text += "\n\n[i]SCENE PAUSED ⏸️[/i]"
 	else:
@@ -176,78 +175,19 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed(RawAction.DEV_free_cam):
 		_toggle_camera_mode(not is_active)
-		get_viewport().set_input_as_handled()
+		InputUtils.mark_input_handled(self )
 		return
 	if event.is_action_pressed(RawAction.UI_escape):
 		if is_active:
 			_toggle_camera_mode(not is_active)
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self )
 			return
 
 	if not is_active:
 		return
 
-	_handle_pause_toggle(event)
-	_handle_mouse_wheel(event)
-	if _camera:
-		_handle_fov_input(event)
-	if _light:
-		_handle_light_toggle(event)
-		_handle_light_energy_input(event)
-
 	if event is InputEventMouseMotion:
 		_mouse_motion = event.relative
-
-
-func _handle_pause_toggle(event: InputEvent) -> void:
-	if InputUtils.is_keycode(event, KEY_P):
-		get_tree().paused = not get_tree().paused
-		get_viewport().set_input_as_handled()
-
-
-func _handle_mouse_wheel(event: InputEvent) -> void:
-	# Don't change speed if we are changing FOV (RMB is held)
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		return
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		return
-
-	# mouse wheel for speed adjustment
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera_speed *= speed_multiplier
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera_speed /= speed_multiplier
-
-
-func _handle_fov_input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton:
-		return
-	
-	# Hold Right Mouse Button + Scroll to change FOV
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_camera.fov = max(_camera.fov - 2, 10)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_camera.fov = min(_camera.fov + 2, 170)
-
-
-func _handle_light_energy_input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton:
-		return
-	
-	# Hold LMB + Scroll to change FOV
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_light.light_energy = min(_light.light_energy + 0.2, 10.0)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_light.light_energy = max(_light.light_energy - 0.2, 0.2)
-
-
-func _handle_light_toggle(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_L:
-		_light.visible = not _light.visible
-		get_viewport().set_input_as_handled()
 
 
 # endregion

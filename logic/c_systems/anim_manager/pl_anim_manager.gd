@@ -52,7 +52,7 @@ func initialise_implementation() -> void:
 # region 
 
 
-func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
+func set_anim_to_play(anim_id: StringName, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	if blend_for < 0:
 		__log_error("blend_for < 0 is not supported", "set_anim_to_play", "0 will be used", blend_for)
 		blend_for = 0

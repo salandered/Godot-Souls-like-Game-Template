@@ -44,7 +44,7 @@ func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalC
 	__perform_validation(true)
 
 
-func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Variant]) -> void:
+func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[StringName, Variant]) -> void:
 	SigUtils.safe_emit_sig_data(signal_data, payload)
 	
 	# if payload.get("anim_id") in [PHEA.attack.scare_off, A.attack.sword_slash_1]:
@@ -54,7 +54,7 @@ func emit_sfx_signal(signal_data: SignalData, payload: Dictionary[String, Varian
 func _emit_signal_based_on_track_data(audio_track_data: AudioTrackKey, anim: AnimationData) -> void:
 	var asp_name := audio_track_data.get_anim_asp_name()
 
-	var r_signal_payload: Dictionary[String, Variant] = {}
+	var r_signal_payload: Dictionary[StringName, Variant] = {}
 
 	var sfx_anim_data := sad_container.get_by_anim_sfx_asp_name(asp_name)
 	if not sfx_anim_data:
@@ -205,7 +205,7 @@ func __log_extra(prefix: String, ...parts):
 
 # 	const HIT_WEAPON_GROUND_PREFIX := HIT_WEAPON_PREFIX + "_" + "ground"
 
-# func _emit_signal_based_on_marker(marker_name: String) -> void:
+# func _emit_signal_based_on_marker(marker_name: StringName) -> void:
 # 	var r_signal: Signal
 # 	var r_data: Dictionary = {}
 # 	if marker_name.begins_with(MarkerName.SFX.FOOTSTEP_PREFIX):

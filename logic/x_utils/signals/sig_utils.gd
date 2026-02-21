@@ -9,10 +9,10 @@ static func __emit(signal_: Signal, with_payload: bool, payload: Dictionary):
 		signal_.emit()
 
 
-	if u.is_editor():
+	if u.is_editor() or u.is_release():
 		return
 	if GlobalUIInfo.__SIG_DEBUG:
-		var __payload: Dictionary[String, Variant]
+		var __payload: Dictionary[StringName, Variant]
 		__payload = {
 			SPS.frame_field: u.sfr(),
 			SPS.sig_name_field: str(signal_.get_name()),
@@ -25,9 +25,9 @@ static func __emit(signal_: Signal, with_payload: bool, payload: Dictionary):
 ## returns true if emitted
 static func safe_emit_sig_data(
 	signal_data: SignalData,
-	signal_payload: Dictionary[String, Variant],
+	signal_payload: Dictionary[StringName, Variant],
 	__log: bool = false,
-	warn_level: String = WL.INFO) -> bool:
+	warn_level: StringName = WL.INFO) -> bool:
 	if error_.null_object(signal_data, "no signal data", warn_level):
 		return false
 	if error_.null_signal(signal_data.signal_obj, "", warn_level):
@@ -38,11 +38,11 @@ static func safe_emit_sig_data(
 	return true
 
 
-static func safe_emit_raw(
+static func safe_emit(
 	signal_: Signal,
-	signal_payload: Dictionary[String, Variant],
+	signal_payload: Dictionary[StringName, Variant],
 	__log: bool = false,
-	warn_level: String = WL.INFO) -> bool:
+	warn_level: StringName = WL.INFO) -> bool:
 	if error_.null_signal(signal_, "", warn_level):
 		return false
 	__emit(signal_, true, signal_payload)
@@ -50,18 +50,19 @@ static func safe_emit_raw(
 		print_.prefix("<emit>", pp.sig_raw(signal_, signal_payload))
 	return true
 
-static func safe_emit_raw_toggle(
+
+static func safe_emit_toggle(
 	signal_: Signal,
 	toggle: bool,
 	__log: bool = false,
-	warn_level: String = WL.INFO) -> bool:
-	return safe_emit_raw(signal_, {SPS.toggle_field: toggle})
+	warn_level: StringName = WL.INFO) -> bool:
+	return safe_emit(signal_, {SPS.toggle_field: toggle})
 
 
-static func safe_emit_raw_no_payload(
+static func safe_emit_no_payload(
 	signal_: Signal,
 	__log: bool = false,
-	warn_level: String = WL.INFO) -> bool:
+	warn_level: StringName = WL.INFO) -> bool:
 	if error_.null_signal(signal_, "", warn_level):
 		return false
 	__emit(signal_, false, {})
@@ -74,7 +75,7 @@ static func safe_connect(
 	signal_: Signal,
 	callable: Callable,
 	__log: bool = false,
-	warn_level: String = WL.INFO) -> bool:
+	warn_level: StringName = WL.INFO) -> bool:
 	if error_.null_signal(signal_, "", warn_level):
 		return false
 	if not callable.is_valid():
@@ -94,7 +95,7 @@ static func safe_disconnect(
 	signal_: Signal,
 	callable: Callable,
 	__log: bool = false,
-	warn_level: String = WL.INFO) -> bool:
+	warn_level: StringName = WL.INFO) -> bool:
 	if error_.null_signal(signal_, "", warn_level):
 		return false
 	if not callable.is_valid():
@@ -113,7 +114,7 @@ static func safe_disconnect(
 static func safe_connect_pairs(
 	pairs: Array[Array],
 	__log: bool = false,
-	warn_level: String = WL.INFO):
+	warn_level: StringName = WL.INFO):
 	for pair: Array in pairs:
 		if not _validate_signal_pair(pair, warn_level):
 			continue
@@ -123,14 +124,14 @@ static func safe_connect_pairs(
 static func safe_disconnect_pairs(
 	pairs: Array[Array],
 	__log: bool = false,
-	warn_level: String = WL.INFO):
+	warn_level: StringName = WL.INFO):
 	for pair in pairs:
 		if not _validate_signal_pair(pair, warn_level):
 			continue
 		safe_disconnect(pair[0], pair[1], __log, warn_level)
 
 
-static func _validate_signal_pair(pair: Array, warn_level: String) -> bool:
+static func _validate_signal_pair(pair: Array, warn_level: StringName) -> bool:
 	if len(pair) != 2:
 		error_.warn("signal pair should consist of two elements", "", "", warn_level)
 		return false
@@ -143,15 +144,15 @@ static func _validate_signal_pair(pair: Array, warn_level: String) -> bool:
 	return true
 		
 
-static func build_payload(key: String, value: Variant) -> Dictionary[String, Variant]:
-	var d: Dictionary[String, Variant] = {key: value}
+static func build_payload(key: StringName, value: Variant) -> Dictionary[StringName, Variant]:
+	var d: Dictionary[StringName, Variant] = {key: value}
 	return d
 
 
 static func safe_get_int_payload_value(
-		payload: Dictionary[String, Variant],
-		payload_key: String,
-		warn_level: String = WL.INFO
+		payload: Dictionary[StringName, Variant],
+		payload_key: StringName,
+		warn_level: StringName = WL.INFO
 ) -> RO.IntReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
@@ -168,9 +169,9 @@ static func safe_get_int_payload_value(
 
 ## returns value as a float
 static func safe_get_int_float_payload_value(
-		payload: Dictionary[String, Variant],
-		payload_key: String,
-		warn_level: String = WL.INFO
+		payload: Dictionary[StringName, Variant],
+		payload_key: StringName,
+		warn_level: StringName = WL.INFO
 ) -> RO.FloatReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
@@ -186,9 +187,9 @@ static func safe_get_int_float_payload_value(
 
 
 static func safe_get_bool_payload_value(
-		payload: Dictionary[String, Variant],
-		payload_key: String,
-		warn_level: String = WL.INFO
+		payload: Dictionary[StringName, Variant],
+		payload_key: StringName,
+		warn_level: StringName = WL.INFO
 ) -> RO.BoolReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
@@ -201,17 +202,17 @@ static func safe_get_bool_payload_value(
 	return RO.BoolReturn.new(false, payload_value)
 
 static func safe_get_toggle_payload_value(
-		payload: Dictionary[String, Variant],
-		warn_level: String = WL.INFO
+		payload: Dictionary[StringName, Variant],
+		warn_level: StringName = WL.INFO
 ) -> RO.BoolReturn:
 	var r := safe_get_bool_payload_value(payload, SPS.toggle_field)
 	return r
 
 
 static func safe_get_string_payload_value(
-		payload: Dictionary[String, Variant],
-		payload_key: String,
-		warn_level: String = WL.INFO
+		payload: Dictionary[StringName, Variant],
+		payload_key: StringName,
+		warn_level: StringName = WL.INFO
 ) -> RO.StringReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
@@ -224,9 +225,9 @@ static func safe_get_string_payload_value(
 	return RO.StringReturn.new(false, payload_value)
 
 
-static func safe_get_dict_payload_value(payload: Dictionary[String, Variant],
-	payload_key: String,
-	warn_level: String = WL.INFO
+static func safe_get_dict_payload_value(payload: Dictionary[StringName, Variant],
+	payload_key: StringName,
+	warn_level: StringName = WL.INFO
 ) -> RO.DictReturn:
 	var payload_value_return := _get_value_by_key(payload, payload_key, false, warn_level)
 	if payload_value_return.err:
@@ -240,19 +241,19 @@ static func safe_get_dict_payload_value(payload: Dictionary[String, Variant],
 
 
 static func safe_get_variant_payload_value(
-		payload: Dictionary[String, Variant],
-		payload_key: String,
+		payload: Dictionary[StringName, Variant],
+		payload_key: StringName,
 		null_allowed: bool,
-		warn_level: String = WL.INFO
+		warn_level: StringName = WL.INFO
 ) -> RO.VariantReturn:
 	return _get_value_by_key(payload, payload_key, null_allowed, warn_level)
 
 
 static func _get_value_by_key(
-		payload: Dictionary[String, Variant],
-		payload_key: String,
+		payload: Dictionary[StringName, Variant],
+		payload_key: StringName,
 		null_allowed: bool = true,
-		warn_level: String = WL.INFO
+		warn_level: StringName = WL.INFO
 ) -> RO.VariantReturn:
 	if not DictUtils.safe_has_key(payload, payload_key, warn_level):
 		return RO.VariantReturn.new(true)

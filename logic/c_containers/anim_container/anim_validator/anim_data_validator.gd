@@ -2,7 +2,12 @@ class_name AnimDataValidator
 extends RefCountedStaticLogger
 
 
-static func validate_anim(anim_data: AnimationData, param_prefixes: Array[String], param_tracks: Array[String], required_markers: Dictionary[String, Array]) -> bool:
+static func validate_anim(
+	anim_data: AnimationData, 
+	param_prefixes: Array[String], 
+	param_tracks: Array[String], 
+	required_markers: Dictionary[StringName, Array]
+) -> bool:
 	# base field validation (not null)
 	if anim_data.anim_id == null:
 		return false
@@ -20,7 +25,7 @@ static func validate_anim(anim_data: AnimationData, param_prefixes: Array[String
 		pass
 		# prints("_required_markers is null for", anim_data.anim_id)
 	else:
-		for marker_name: String in TypeCast.array_of_string(_required_markers):
+		for marker_name: StringName in TypeCast.array_of_string_name(_required_markers):
 			if not anim_data.does_marker_exist(marker_name):
 				__log_warn_assert(pp.s("required marker", pp.in_q(marker_name), "not found!"), anim_data.anim_id)
 	

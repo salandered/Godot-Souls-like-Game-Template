@@ -170,12 +170,9 @@ func _load_specific_level(path: String) -> void:
 	M_SceneLoader.load_scene(path)
 
 
-# endregion 
-
-
 func exit_game() -> void:
 	if signal_game_exit:
-		SigUtils.safe_emit_raw_no_payload(game_exited)
+		SigUtils.safe_emit_no_payload(game_exited)
 	else:
 		get_tree().quit()
 
@@ -183,6 +180,8 @@ func exit_game() -> void:
 func _reset_audio_state() -> void:
 	if _music_low_pass_filter:
 		_music_low_pass_filter.cutoff_hz = MAIN_MENU_TRACK_CUTOFF_HZ
+
+# endregion 
 
 
 ## SHOW/HIDE menu
@@ -200,7 +199,9 @@ func _toggle_scenery_view() -> void:
 func _open_sub_menu(menu: Control) -> void:
 	sub_menu = menu
 	sub_menu.show()
+
 	_toggle_menu_visible(false)
+	
 	sub_menu_opened.emit()
 	
 	if hide_label_container:
@@ -248,7 +249,7 @@ func _scenery_view_input(event: InputEvent) -> void:
 			if hide_label_container.visible == false:
 				return
 			_toggle_scenery_view()
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self)
 
 # endregion
 

@@ -16,5 +16,10 @@ func get_light() -> SpotLight3D:
 	return _spot_light_3d
 
 
+func toggle_light(toggle: bool) -> void:
+	if _spot_light_3d:
+		_spot_light_3d.visible = toggle
+
+
 func get_body() -> FreeCameraBody:
 	return _camera_body

@@ -3,16 +3,16 @@ class_name StatesContainer
 
 
 class _StateData:
-	var state_name: String
+	var state_name: StringName
 	var priority: int
-	var legs_behavior_name: String
+	var legs_behavior_name: StringName
 	var depends_on_legs: bool
 	var stamina_cost: float
 
 	func _init(
-			state_name_: String,
+			state_name_: StringName,
 			priority_: int,
-			legs_behavior_name_: String = Leg.Beh.double,
+			legs_behavior_name_: StringName = Leg.Beh.double,
 			depends_on_legs_: bool = false,
 			stamina_cost_: float = 0.0
 
@@ -24,14 +24,14 @@ class _StateData:
 		self.stamina_cost = stamina_cost_
 
 class _BaseActionData:
-	var action_name: String
-	var anim_id: String
-	var motion_type: String
+	var action_name: StringName
+	var anim_id: StringName
+	var motion_type: StringName
 
 	func _init(
-			action_name_: String,
-			anim_id_: String,
-			motion_type_: String,
+			action_name_: StringName,
+			anim_id_: StringName,
+			motion_type_: StringName,
 
 		) -> void:
 		self.action_name = action_name_
@@ -40,97 +40,97 @@ class _BaseActionData:
 
 
 class _PlActionData extends _BaseActionData:
-	var state_name: String
+	var state_name: StringName
 
 	func _init(
-			state_name_: String,
-			action_name_: String,
-			anim_id_: String,
-			motion_type_: String,
+			state_name_: StringName,
+			action_name_: StringName,
+			anim_id_: StringName,
+			motion_type_: StringName,
 
 		) -> void:
 		super._init(action_name_, anim_id_, motion_type_)
 		self.state_name = state_name_
 
 
-var node_to_pl_state_data: Dictionary[String, _StateData] = { # { Node name : _StateData }
+var node_to_pl_state_data: Dictionary[StringName, _StateData] = { # { Node name : _StateData }
 	## loco
 	# TODO: seems like depends_on_legs_ true equals to having not legs_double_beh default
-	"Idle": _StateData.new(PS.idle, 1, Leg.Beh.idle, true),
-	"Run": _StateData.new(PS.run, 2, Leg.Beh.run, true),
-	"Strafe": _StateData.new(PS.strafe, 2, Leg.Beh.strafe, true),
+	&"Idle": _StateData.new(PS.idle, 1, Leg.Beh.idle, true),
+	&"Run": _StateData.new(PS.run, 2, Leg.Beh.run, true),
+	&"Strafe": _StateData.new(PS.strafe, 2, Leg.Beh.strafe, true),
 	# Sprint drains stamina, but costs just a bit as well # UPD: may be not
-	"Sprint": _StateData.new(PS.sprint, 3, Leg.Beh.sprint, true, 0.0),
+	&"Sprint": _StateData.new(PS.sprint, 3, Leg.Beh.sprint, true, 0.0),
 	
 	## air
-	"Dodge": _StateData.new(PS.dodge, 10, Leg.Beh.double, false, 8.0),
-	"JumpSprint": _StateData.new(PS.jump_sprint, 10, Leg.Beh.double, false, 10.0),
-	"Midair": _StateData.new(PS.midair, 10, Leg.Beh.double, false, 0.0),
-	"LandingSprint": _StateData.new(PS.landing_sprint, 10, Leg.Beh.double, false, 0.0),
+	&"Dodge": _StateData.new(PS.dodge, 10, Leg.Beh.double, false, 8.0),
+	&"JumpSprint": _StateData.new(PS.jump_sprint, 10, Leg.Beh.double, false, 10.0),
+	&"Midair": _StateData.new(PS.midair, 10, Leg.Beh.double, false, 0.0),
+	&"LandingSprint": _StateData.new(PS.landing_sprint, 10, Leg.Beh.double, false, 0.0),
 	
 	## one time
-	"Death": _StateData.new(PS.death, 200, Leg.Beh.double, false, 0.0),
-	"Pushback": _StateData.new(PS.pushback, 100, Leg.Beh.double, false, 0.0),
-	"Thrown": _StateData.new(PS.thrown, 110, Leg.Beh.double, false, 0.0),
+	&"Death": _StateData.new(PS.death, 200, Leg.Beh.double, false, 0.0),
+	&"Pushback": _StateData.new(PS.pushback, 100, Leg.Beh.double, false, 0.0),
+	&"Thrown": _StateData.new(PS.thrown, 110, Leg.Beh.double, false, 0.0),
 
 	## Attacks
-	"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 12.0),
-	"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 15.0),
-	"AxeSlice3": _StateData.new(PS.axe_slice_3, 15, Leg.Beh.double, false, 20.0),
+	&"AxeSlice1": _StateData.new(PS.axe_slice_1, 15, Leg.Beh.double, false, 12.0),
+	&"AxeSlice2": _StateData.new(PS.axe_slice_2, 15, Leg.Beh.double, false, 15.0),
+	&"AxeSlice3": _StateData.new(PS.axe_slice_3, 15, Leg.Beh.double, false, 20.0),
 	# priority a bit higher
 	# smaller because it reqiuires being in a draining sprint
-	"StabAttack1": _StateData.new(PS.stab_attack_1, 16, Leg.Beh.double, false, 8.0),
+	&"StabAttack1": _StateData.new(PS.stab_attack_1, 16, Leg.Beh.double, false, 8.0),
 	# small because it requires a dodge
-	"StabAttack2": _StateData.new(PS.stab_attack_2, 16, Leg.Beh.double, false, 6.0),
+	&"StabAttack2": _StateData.new(PS.stab_attack_2, 16, Leg.Beh.double, false, 6.0),
 
-	"SwordSlash1": _StateData.new(PS.sword_slash_1, 15, Leg.Beh.double, false, 10.0),
-	"SwordSlash2": _StateData.new(PS.sword_slash_2, 15, Leg.Beh.double, false, 12.0),
-	"SwordSlash3": _StateData.new(PS.sword_slash_3, 15, Leg.Beh.double, false, 15.0),
+	&"SwordSlash1": _StateData.new(PS.sword_slash_1, 15, Leg.Beh.double, false, 10.0),
+	&"SwordSlash2": _StateData.new(PS.sword_slash_2, 15, Leg.Beh.double, false, 12.0),
+	&"SwordSlash3": _StateData.new(PS.sword_slash_3, 15, Leg.Beh.double, false, 15.0),
 
 	# 
-	# "Staggered": _StateData.new(PS.staggered, 100, Leg.Beh.double, false, 0.0),
-	# "Parry": _StateData.new(PS.parry, 20, Leg.Beh.double, false, 5.0),
-	# "Parried": _StateData.new(PS.parried, 100, Leg.Beh.double, false, 5.0),
-	# "Riposte": _StateData.new(PS.riposte, 25, Leg.Beh.double, false, 5.0),
+	# &"Staggered": _StateData.new(PS.staggered, 100, Leg.Beh.double, false, 0.0),
+	# &"Parry": _StateData.new(PS.parry, 20, Leg.Beh.double, false, 5.0),
+	# &"Parried": _StateData.new(PS.parried, 100, Leg.Beh.double, false, 5.0),
+	# &"Riposte": _StateData.new(PS.riposte, 25, Leg.Beh.double, false, 5.0),
 }
 
 
 ## PLAYER ACTIONS
 
-var node_to_pl_action: Dictionary[String, _PlActionData] = { # { Node name : _PlActionData }
-	"_DoubleAction": _PlActionData.new(PS.for_double, PS.Act.double, A.air.midair, MotionType.IDLE),
+var node_to_pl_action: Dictionary[StringName, _PlActionData] = { # { Node name : _PlActionData }
+	&"_DoubleAction": _PlActionData.new(PS.for_double, PS.Act.double, A.air.midair, MotionType.IDLE),
 	
 
 	## air
-	"DodgeAction": _PlActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R, MotionType.START),
-	"JumpSprintAction": _PlActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.air.jump_sprint, MotionType.START),
-	"MidairAction": _PlActionData.new(PS.midair, PS.Act.midair, A.air.midair, MotionType.LOOP),
-	"LandingSprintAction": _PlActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.air.landing_sprint, MotionType.LOOP),
+	&"DodgeAction": _PlActionData.new(PS.dodge, PS.Act.dodge, A.dodge.dodge_R, MotionType.START),
+	&"JumpSprintAction": _PlActionData.new(PS.jump_sprint, PS.Act.jump_sprint, A.air.jump_sprint, MotionType.START),
+	&"MidairAction": _PlActionData.new(PS.midair, PS.Act.midair, A.air.midair, MotionType.LOOP),
+	&"LandingSprintAction": _PlActionData.new(PS.landing_sprint, PS.Act.landing_sprint, A.air.landing_sprint, MotionType.LOOP),
 
 	## attacks
-	"AxeSlice1Action": _PlActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1, MotionType.IDLE),
-	"AxeSlice2Action": _PlActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2, MotionType.IDLE),
-	"AxeSlice3Action": _PlActionData.new(PS.axe_slice_3, PS.Act.axe_slice_3, A.attack.axe_slice_3, MotionType.IDLE),
-	"StabAttack1Action": _PlActionData.new(PS.stab_attack_1, PS.Act.stab_attack_1, A.attack.stab_attack_1, MotionType.IDLE),
-	"StabAttack2Action": _PlActionData.new(PS.stab_attack_2, PS.Act.stab_attack_2, A.attack.stab_attack_2, MotionType.IDLE),
+	&"AxeSlice1Action": _PlActionData.new(PS.axe_slice_1, PS.Act.axe_slice_1, A.attack.axe_slice_1, MotionType.IDLE),
+	&"AxeSlice2Action": _PlActionData.new(PS.axe_slice_2, PS.Act.axe_slice_2, A.attack.axe_slice_2, MotionType.IDLE),
+	&"AxeSlice3Action": _PlActionData.new(PS.axe_slice_3, PS.Act.axe_slice_3, A.attack.axe_slice_3, MotionType.IDLE),
+	&"StabAttack1Action": _PlActionData.new(PS.stab_attack_1, PS.Act.stab_attack_1, A.attack.stab_attack_1, MotionType.IDLE),
+	&"StabAttack2Action": _PlActionData.new(PS.stab_attack_2, PS.Act.stab_attack_2, A.attack.stab_attack_2, MotionType.IDLE),
 	
-	"SwordSlash1Action": _PlActionData.new(PS.sword_slash_1, PS.Act.sword_slash_1, A.attack.sword_slash_1, MotionType.IDLE),
-	"SwordSlash2Action": _PlActionData.new(PS.sword_slash_2, PS.Act.sword_slash_2, A.attack.sword_slash_2, MotionType.IDLE),
-	"SwordSlash3Action": _PlActionData.new(PS.sword_slash_3, PS.Act.sword_slash_3, A.attack.sword_slash_3, MotionType.IDLE),
+	&"SwordSlash1Action": _PlActionData.new(PS.sword_slash_1, PS.Act.sword_slash_1, A.attack.sword_slash_1, MotionType.IDLE),
+	&"SwordSlash2Action": _PlActionData.new(PS.sword_slash_2, PS.Act.sword_slash_2, A.attack.sword_slash_2, MotionType.IDLE),
+	&"SwordSlash3Action": _PlActionData.new(PS.sword_slash_3, PS.Act.sword_slash_3, A.attack.sword_slash_3, MotionType.IDLE),
 
 
 	## one time
-	"PushbackAction": _PlActionData.new(PS.pushback, PS.Act.pushback, A.react.hit_push_b_rm, MotionType.IDLE),
-	"ThrownAction": _PlActionData.new(PS.thrown, PS.Act.thrown, A.fall_stand_up.thrown_r_rm, MotionType.IDLE),
-	# "StandUpAction": _PlActionData.new(PS.stand_up, PS.Act.stand_up, A.fall_stand_up.stand_up_simple, MotionType.IDLE),
+	&"PushbackAction": _PlActionData.new(PS.pushback, PS.Act.pushback, A.react.hit_push_b_rm, MotionType.IDLE),
+	&"ThrownAction": _PlActionData.new(PS.thrown, PS.Act.thrown, A.fall_stand_up.thrown_r_rm, MotionType.IDLE),
+	# &"StandUpAction": _PlActionData.new(PS.stand_up, PS.Act.stand_up, A.fall_stand_up.stand_up_simple, MotionType.IDLE),
 
-	"DeathAction": _PlActionData.new(PS.death, PS.Act.death, A.death_b, MotionType.IDLE),
+	&"DeathAction": _PlActionData.new(PS.death, PS.Act.death, A.death_b, MotionType.IDLE),
 
 
-	# "RollAction": _PlActionData.new(PS.roll, PS.Act.roll, A.roll, MotionType.START),
-	# "ParryAction": _PlActionData.new(PS.parry, PS.Act.parry, A.combat.parry, MotionType.IDLE),
-	# "ParriedAction": _PlActionData.new(PS.parried, PS.Act.parried, A.combat.parried, MotionType.IDLE),
-	# "RiposteAction": _PlActionData.new(PS.riposte, PS.Act.riposte, A.combat.riposte_attack, MotionType.IDLE),
+	# &"RollAction": _PlActionData.new(PS.roll, PS.Act.roll, A.roll, MotionType.START),
+	# &"ParryAction": _PlActionData.new(PS.parry, PS.Act.parry, A.combat.parry, MotionType.IDLE),
+	# &"ParriedAction": _PlActionData.new(PS.parried, PS.Act.parried, A.combat.parried, MotionType.IDLE),
+	# &"RiposteAction": _PlActionData.new(PS.riposte, PS.Act.riposte, A.combat.riposte_attack, MotionType.IDLE),
 
 }
 

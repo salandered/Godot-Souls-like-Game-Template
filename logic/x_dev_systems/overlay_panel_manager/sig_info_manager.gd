@@ -30,7 +30,7 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 ## filter signals which are used for SigInfoManager to work 
-func _filter_self_signals(sig_name: String, payload: Dictionary[String, Variant]) -> bool:
+func _filter_self_signals(sig_name: String, payload: Dictionary[StringName, Variant]) -> bool:
 	if sig_name == GlobalUIInfo.SIG_dvc_svalue_changed.get_name():
 		var parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
 		if not parsed_payload: return false
@@ -39,18 +39,18 @@ func _filter_self_signals(sig_name: String, payload: Dictionary[String, Variant]
 	return false
 
 
-func _on___SIG_emitted(__payload: Dictionary[String, Variant]):
+func _on___SIG_emitted(__payload: Dictionary[StringName, Variant]):
 	var _r_name := SigUtils.safe_get_string_payload_value(__payload, SPS.sig_name_field)
 	if _r_name.err: return
 	var _r_w_p := SigUtils.safe_get_bool_payload_value(__payload, SPS.sig_with_payload_field)
 	if _r_w_p.err: return
 	var with_payload := _r_w_p.value
 
-	var payload: Dictionary[String, Variant] = {}
+	var payload: Dictionary[StringName, Variant] = {}
 	if with_payload:
 		var _r_p := SigUtils.safe_get_dict_payload_value(__payload, SPS.sig_payload_field)
 		if _r_p.err: return
-		payload = TypeCast.dict_string_variant(_r_p.value)
+		payload = TypeCast.dict_string_name_variant(_r_p.value)
 
 	var _r_frame := SigUtils.safe_get_string_payload_value(__payload, SPS.frame_field)
 	if _r_frame.err: return

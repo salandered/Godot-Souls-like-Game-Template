@@ -4,7 +4,7 @@ extends BaseMechAttackState
 func initialise_attack_state_implementation() -> void:
 	hit_damage = 25
 
-func get_anim_active_weapon_ids() -> Array[String]:
+func get_anim_active_weapon_ids() -> Array[StringName]:
 	return [WeaponID.fighter_h_arm]
 
 

@@ -3,7 +3,7 @@ class_name BaseSFXASPConfigContainer
 extends RefCountedSystem
 
 
-var _sfx_asp_configs: Dictionary[String, ASP3DConfig] = {}
+var _sfx_asp_configs: Dictionary[StringName, ASP3DConfig] = {}
 
 
 func _init():
@@ -14,7 +14,7 @@ func _init():
 
 
 ## nullable
-func get_by_sfx_type_id(sfx_type_id: String) -> ASP3DConfig:
+func get_by_sfx_type_id(sfx_type_id: StringName) -> ASP3DConfig:
 	var _r: ASP3DConfig = DictUtils.safe_get_dict_key(_sfx_asp_configs, sfx_type_id, null, WL.SILENT)
 	return _r
 
@@ -25,8 +25,8 @@ func get_by_sfx_type_id(sfx_type_id: String) -> ASP3DConfig:
 ## implementation can skip unneeded ones, 
 ## there will be deleted from the result dict with which container is initialised
 ## and if for example weapon accidently left footstep entry, its won't affect anything as long as other systems dont wanna walking sword ...
-func _get_dict_data() -> Dictionary[String, ASP3DConfig]:
-	var dict_: Dictionary[String, ASP3DConfig] = {
+func _get_dict_data() -> Dictionary[StringName, ASP3DConfig]:
+	var dict_: Dictionary[StringName, ASP3DConfig] = {
 		## fs like
 		SFXConstants.ID_.footstep: _get_footstep_config(),
 		SFXConstants.ID_.footstep_light: _get_footstep_light_config(),
@@ -50,7 +50,7 @@ func _get_dict_data() -> Dictionary[String, ASP3DConfig]:
 
 	}
 
-	for key: String in dict_.keys():
+	for key: StringName in dict_.keys():
 		var item: ASP3DConfig = dict_[key]
 		if item == null:
 			dict_.erase(key)

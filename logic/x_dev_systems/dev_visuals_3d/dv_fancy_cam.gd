@@ -67,7 +67,7 @@ func toggle_dv_trail_visible(toggle: bool):
 		_dv_trail.set_enabled(toggle)
 
 
-func _on_SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[StringName, Variant]):
 	__log_("_on_SIG_dvc_value_changed_section_char_dv", payload)
 	var r_toggle := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
 		payload,

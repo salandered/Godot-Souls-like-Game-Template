@@ -1,7 +1,7 @@
 extends ResourceLogger
 class_name AnimationData
 
-var anim_id: String ## lib + resource_name
+var anim_id: StringName ## lib + resource_name
 var anim_name: String ## resource_name
 # NOTE: there could be start_time here, but all animation systems already embraced the dynamic 'start_time_offset' feature.
 # 		it can do anything that hard 'start_time' can offer, while using 'start_time' on top of it would make animators logic even more complex
@@ -13,7 +13,7 @@ var speed_scale: float
 var is_looping: bool
 var native_anim: Animation
 ## markers have unique names by Godot design. So we can use marker_name as a dictionary key
-var _markers: Dictionary[String, AnimMarker] # {marker_name <String>: <AnimMarker>}
+var _markers: Dictionary[StringName, AnimMarker] # {marker_name <StringName>: <AnimMarker>}
 var _audio_tracks: Dictionary[float, Array] # { timestamp <float>: Array[AudioTrackKey] }
 ## caches timestamps sorted ASC, was built using _audio_tracks
 var _audio_tracks_timestamps_sorted: Array[float]
@@ -43,8 +43,8 @@ func get_rot_track_idx(track_path: String) -> int:
 
 
 ## Client code may get some specific marker directly.
-func get_marker_by_name(marker_name: String, warn_level: String = WL.WARN) -> AnimMarker:
-	return DictUtils.safe_get_dict_key(_markers, marker_name, null, warn_level)
+func get_marker_by_name(marker_name: StringName, wl: StringName = WL.WARN) -> AnimMarker:
+	return DictUtils.safe_get_dict_key(_markers, marker_name, null, wl)
 
 func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
 	var result: Array[AnimMarker] = []
@@ -53,7 +53,7 @@ func get_markers_by_prefix(prefix: String) -> Array[AnimMarker]:
 			result.append(_markers[marker_name])
 	return TypeCast.array_of_anim_marker(result)
 
-func does_marker_exist(marker_name: String) -> bool:
+func does_marker_exist(marker_name: StringName) -> bool:
 	var marker := get_marker_by_name(marker_name, WL.SILENT)
 	return marker != null
 
@@ -68,7 +68,7 @@ func get_audio_tracks_data_by_timestamp(timestamp: float) -> Array[AudioTrackKey
 
 ## returns time withing anim.duration
 ## returns -1 or default_value (if set) in case of problems
-func get_marker_time_by_name(marker_name: String, default_value: float = -1) -> float:
+func get_marker_time_by_name(marker_name: StringName, default_value: float = -1) -> float:
 	var marker := get_marker_by_name(marker_name)
 	if not marker:
 		__log_warn("marker not found " + pp.in_q(marker_name))

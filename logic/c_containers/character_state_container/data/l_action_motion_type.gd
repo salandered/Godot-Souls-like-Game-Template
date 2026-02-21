@@ -3,11 +3,11 @@ class_name MotionType
 extends RefCounted
 
 
-const IDLE := 'IDLE'
-const START := 'START'
-const LOOP := 'LOOP'
-const STOP := 'STOP'
+const IDLE := &'IDLE'
+const START := &'START'
+const LOOP := &'LOOP'
+const STOP := &'STOP'
 
 
-static func get_all_types() -> Array[String]:
+static func get_all_types() -> Array[StringName]:
 	return [IDLE, START, LOOP, STOP]

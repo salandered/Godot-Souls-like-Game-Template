@@ -44,7 +44,7 @@ func initialise() -> void:
 ## 	- currently player may have only one weapon
 ## 	- switch of weapons is perfomed on the combat level
 ## => we rely on combat and return only one id. 
-func get_active_weapon_id() -> String:
+func get_active_weapon_id() -> StringName:
 	var _ids := combat.get_active_weapon_ids()
 	if len(_ids) != 1:
 		__log_warn(pp.s("currently 1 active weapon is expected for player, got", len(_ids)))
@@ -90,8 +90,8 @@ func on_enter_action(input_: InputPackage):
 	match PREV_ACTION:
 		Leg.Act.strafe:
 			var result := _adjust_extra_speed_to_strafe_direction()
-			_speed_extra_Z = result["Z"]
-			_speed_extra_X = result["X"]
+			_speed_extra_Z = result.z
+			_speed_extra_X = result.x
 
 	var r := calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
 	_final_extra_speed_Z = r.z
@@ -130,7 +130,8 @@ func update(input_: InputPackage, delta: float):
 	_combat_update_is_attacking()
 
 
-func _adjust_extra_speed_to_strafe_direction() -> Dictionary[String, float]:
+## returns X and Z
+func _adjust_extra_speed_to_strafe_direction() -> Vector3:
 	## animator manager treats prev anim as curr because we are in on_enter_action
 	var prev_anim_id := get_animator_manager().get_curr_anim().anim_id
 	# todo: should not use animations but strafe dir
@@ -151,7 +152,7 @@ func _adjust_extra_speed_to_strafe_direction() -> Dictionary[String, float]:
 	else:
 		speed_z = -1.5
 		speed_x = 0.0
-	return {"X": speed_x, "Z": speed_z}
+	return Vector3(speed_x, 0.0, speed_z)
 	
 ## __LOG
 var LOG_HURT_B: bool = false

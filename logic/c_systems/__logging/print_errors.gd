@@ -6,7 +6,7 @@ static func warn(
 		what: String,
 		where: String,
 		fallback: String,
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 		...details: Array):
 	if warn_level == WL.SILENT: return
 
@@ -32,15 +32,16 @@ static func warn(
 # used when expected False in all sane scenarios
 
 
+## allows StringName
 static func empty_string(
 		string_: Variant,
 		context: String = "",
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if null_variant(string_, context, warn_level):
 		return true
-	if string_ is not String:
-		_low_level_printer._warn(_err_msg("not String", context), warn_level)
+	if string_ is not String and string_ is not StringName:
+		_low_level_printer._warn(_err_msg("not String/StringName", context), warn_level)
 		return true
 	if string_.is_empty():
 		_low_level_printer._warn(_err_msg("String is empty", context), warn_level)
@@ -51,7 +52,7 @@ static func empty_string(
 static func empty_list(
 		list_: Variant,
 		context: String = "",
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if null_variant(list_, context, warn_level):
 		return true
@@ -67,7 +68,7 @@ static func empty_list(
 static func null_object(
 		object_: Object,
 		context: String = "",
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if object_ == null:
 		_low_level_printer._warn(_err_msg("object is null", context), warn_level)
@@ -78,7 +79,7 @@ static func null_object(
 static func null_variant(
 		variant_: Variant,
 		context: String = "",
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if variant_ == null:
 		_low_level_printer._warn(_err_msg("variant_ is null", context), warn_level)
@@ -91,7 +92,7 @@ static func null_signal(
 		context: String = "",
 		## i think null signal is less important
 		## if its null, it won't be emitted, that's all
-		warn_level: String = WL.WARN_CRUCIAL,
+		warn_level: StringName = WL.WARN_CRUCIAL,
 ) -> bool:
 	if signal_.is_null():
 		_low_level_printer._warn(_err_msg("signal_.is_null true", context), warn_level)
@@ -102,7 +103,7 @@ static func null_signal(
 static func len_one(
 		list_: Variant,
 		context: String = "",
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if null_variant(list_, context, warn_level):
 		return true

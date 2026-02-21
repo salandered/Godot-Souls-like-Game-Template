@@ -21,7 +21,7 @@ func _ready() -> void:
 	])
 
 
-func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
 	var parsed_payload := DVCSIGPayloadParser.parse_dvc_b_char_dv_value_changed(payload)
 	if not parsed_payload:
 		return

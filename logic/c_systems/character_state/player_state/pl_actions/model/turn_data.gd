@@ -6,24 +6,24 @@ extends NodeLogger
 
 
 var target_angle: float
-var turn_direction: String
+var turn_direction: StringName
 var accum_rotation: float
 var turn_completed: bool
 
-const TURN_DIR_RIGHT := "right"
-const TURN_DIR_LEFT := "left"
+const TURN_DIR_RIGHT := &"right"
+const TURN_DIR_LEFT := &"left"
 
-const TARGET_ANGLE_DICT := "target_angle"
-const TURN_DIRECTION_DICT := "turn_direction"
-const ACCUM_ROTATION_DICT := "accum_rotation"
-const TURN_COMPLETED_DICT := "turn_completed"
+const TARGET_ANGLE_DICT := &"target_angle"
+const TURN_DIRECTION_DICT := &"turn_direction"
+const ACCUM_ROTATION_DICT := &"accum_rotation"
+const TURN_COMPLETED_DICT := &"turn_completed"
 
 
 func _ready() -> void:
 	add_to_group(Groups.Dev.DV_LEG_TURN)
 
 ## idempotent
-func initialise(angle: float, turn_direction_: String):
+func initialise(angle: float, turn_direction_: StringName):
 	target_angle = angle
 	turn_direction = turn_direction_
 	accum_rotation = 0.0
@@ -35,7 +35,7 @@ func update(turn_completed_: bool, accum_rotation_: float, ):
 	turn_completed = turn_completed_
 	accum_rotation = accum_rotation_
 
-func initialise_from_dict(data: Dictionary[String, Variant]):
+func initialise_from_dict(data: Dictionary[StringName, Variant]):
 	target_angle = data.get(TARGET_ANGLE_DICT, 0.0)
 	accum_rotation = data.get(ACCUM_ROTATION_DICT, 0.0)
 	turn_completed = data.get(TURN_COMPLETED_DICT, false)
@@ -53,7 +53,7 @@ func _to_string() -> String:
 	return "Target ∠ %s, AccRot %s, Completed %s, Dir %s" % \
 		[pp.rad2deg(target_angle), pp.rad2deg(accum_rotation), str(turn_completed), turn_direction]
 
-func to_dict() -> Dictionary[String, Variant]:
+func to_dict() -> Dictionary[StringName, Variant]:
 	return {
 		TARGET_ANGLE_DICT: target_angle,
 		ACCUM_ROTATION_DICT: accum_rotation,

@@ -8,7 +8,7 @@ extends Node3D
 @export var max_distance: float = 20.0
 @export var max_polyphony: int = 1
 @export var panning_strength: float = 0.5
-@export var bus: String = BusID.GAME_SFX
+@export var bus: = BusID.GAME_SFX
 
 @export_group("Timing Settings")
 ## Minimum time to wait between plays

@@ -10,7 +10,7 @@ var player_sm: PlayerSM
 var combat: PlayerCombat
 var anim_params_container: PlAnimParamsContainer
 
-var action_name: String
+var action_name: StringName
 
 ## auto used for all actions
 var blend_time := ActionData.BlendTime.new(0.2)
@@ -22,14 +22,14 @@ var extra_root_speed_fade_time := ActionData.ExtraRootSpeedFadeTime.new(0.4)
 
 # 
 var default_sp: DefaultSpeedConfig = DefaultSpeedConfig.new()
-var motion_type: String ## see MotionType
+var motion_type: StringName ## see MotionType
 
 
 ## assigned while updating current global action as the VERY FIRST operation of the action.
 ## excessive, but provides an extra gurantee that prev action would not change throughout 
 ## the current action (self) life cycle.
 ## => strongly recommended to use this instead of alternative ways like player_sm.get_prev_action
-var PREV_ACTION: String = ""
+var PREV_ACTION: StringName = ""
 
 
 func get_animator_manager() -> PlAnimatorManager:
@@ -116,7 +116,7 @@ func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_off
 	# _actual_start_time_offset = default_start_time_offset
 
 
-func set_overlay_anim_to_play(overlay_anim_id: String, overlay_config: OverlayConfig) -> void:
+func set_overlay_anim_to_play(overlay_anim_id: StringName, overlay_config: OverlayConfig) -> void:
 	__log_overlay_anim(overlay_anim_id, overlay_config)
 	get_animator_manager().set_overlay_anim(overlay_anim_id, overlay_config)
 
@@ -193,7 +193,7 @@ const LOOP_LIKE_ACTIONS = [
 ## NOTE: less important after modifier started to support multiple blends
 ## WARNING: does not account for speed scaling
 ## TODO: oh, can be done with usual functions 
-func time_remaining_for_smooth_switch(next_action_name: String) -> float:
+func time_remaining_for_smooth_switch(next_action_name: StringName) -> float:
 	if anim.is_looping:
 		__log_warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
 		return Constants.BIG_MEANINGLESS_NUMBER
@@ -233,7 +233,7 @@ func is_invincible() -> bool:
 	return _r
 
 
-func is_weapon_hurts(weapon_id: String, __log: bool = false) -> bool:
+func is_weapon_hurts(weapon_id: StringName, __log: bool = false) -> bool:
 	var _r: bool = false
 	if weapon_id in combat.get_active_weapon_ids():
 		_r = anim_params_container.is_weapon_hurts(weapon_id, anim.native_anim, effective_time_spent())
@@ -289,5 +289,5 @@ func __log_action(...parts: Array):
 func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
 	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)
 
-func __log_overlay_anim(overlay_anim_id: String, overlay_config: OverlayConfig):
+func __log_overlay_anim(overlay_anim_id: StringName, overlay_config: OverlayConfig):
 	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(action_name, overlay_anim_id, overlay_config)

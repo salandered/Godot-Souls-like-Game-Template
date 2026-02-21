@@ -12,7 +12,7 @@ static var _last_prefix_msg := ""
 static var _last_warn_msg := ""
 
 
-static func _warn(warn_msg_: String, warn_level: String = WL.PUSH_ERROR):
+static func _warn(warn_msg_: String, warn_level: StringName = WL.PUSH_ERROR):
 	if warn_level == WL.SILENT: return
 
 	var warn_msg := pp.s(em.warn, "WARNING |", warn_msg_)
@@ -83,12 +83,12 @@ static func prefix(is_warning: bool, prefix_: String, text: String = "", info_in
 	if u.is_editor():
 		return
 	if GlobalUIInfo.__ERROR_LOG and is_warning:
-		SigUtils.safe_emit_raw(GlobalSignal.__SIG_error_log_printed, {
+		SigUtils.safe_emit(GlobalSignal.__SIG_error_log_printed, {
 			SPS.frame_field: u.sfr(), # string
 			SPS.message_field: prefix_text_msg
 			})
 	if GlobalUIInfo.__ALL_LOG:
-		SigUtils.safe_emit_raw(GlobalSignal.__SIG_all_log_printed, {
+		SigUtils.safe_emit(GlobalSignal.__SIG_all_log_printed, {
 			SPS.frame_field: u.sfr(),
 			SPS.message_field: prefix_text_msg
 			})

@@ -126,7 +126,7 @@ func _update_legend_pointer(active_index: int):
 	_set_text_for_panel(final_raw_text, legend)
 
 
-func _on_SIG_tut_panel_switched(payload: Dictionary[String, Variant]):
+func _on_SIG_tut_panel_switched(payload: Dictionary[StringName, Variant]):
 	var _r_number := SigUtils.safe_get_int_payload_value(payload, SPS.number_field)
 	if _r_number.err:
 		return

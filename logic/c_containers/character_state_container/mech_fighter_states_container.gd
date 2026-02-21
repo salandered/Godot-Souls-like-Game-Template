@@ -8,11 +8,11 @@ var _anim_container: AnimContainer
 var _me: MechFighter
 
 
-var _states: Dictionary[String, BaseMechFighterState]
+var _states: Dictionary[StringName, BaseMechFighterState]
 
 
 ## returns null if no state found
-func get_state_by_name(state_name: String) -> BaseMechFighterState:
+func get_state_by_name(state_name: StringName) -> BaseMechFighterState:
 	if not _states.has(state_name):
 		__log_warn(pp.s("_states dict doesn't have ", pp.in_q(state_name)))
 		return null
@@ -40,7 +40,7 @@ func _accept_states():
 	for node: BaseMechFighterState in get_descendants.base_m_f_states(self ):
 		__log_("_accept_states", "node.get_name()", node.get_name())
 
-		var st_data: MechFighterNodeStateContainer._StateData = _node_state_container.get_node_to_state_data().get(node.get_name())
+		var st_data: MechFighterNodeStateContainer._StateData = _node_state_container.get_node_to_state_data().get(node.name)
 		if not st_data:
 			__log_warn(pp.s("no st_data for node", pp.in_q(node.get_name())), "", "skipping")
 			continue

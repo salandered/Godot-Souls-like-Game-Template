@@ -14,10 +14,10 @@ class _CommitData:
 
 
 class _AData:
-	var anim_id: String
+	var anim_id: StringName
 	var y_offset_adjustment: float
 	func _init(
-			anim_id_: String,
+			anim_id_: StringName,
 			y_offset_adjustment_: float = BGConfig.DEFAULT_Y_OFFSET
 		) -> void:
 		self.anim_id = anim_id_
@@ -25,11 +25,11 @@ class _AData:
 
 
 class BaseStData:
-	var state_name: String
+	var state_name: StringName
 	var commit_data: _CommitData
 
 	func _init(
-			state_name_: String,
+			state_name_: StringName,
 			commit_data_: _CommitData = null,
 		) -> void:
 		self.state_name = state_name_
@@ -47,7 +47,7 @@ class _LStData extends BaseStData:
 	var anim_data: _AData
 
 	func _init(
-			leaf_state_name_: String,
+			leaf_state_name_: StringName,
 			anim_data_: _AData,
 			dur_data_: _CommitData = null,
 		) -> void:

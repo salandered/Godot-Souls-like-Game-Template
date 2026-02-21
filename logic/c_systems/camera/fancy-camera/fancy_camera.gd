@@ -298,13 +298,13 @@ func _on_update_sense_settings() -> void:
 	calculate_mouse_sense()
 
 
-func _on_SIG_toggle_camera_coll(payload: Dictionary[String, Variant]):
+func _on_SIG_toggle_camera_coll(payload: Dictionary[StringName, Variant]):
 	var _r := SigUtils.safe_get_bool_payload_value(payload, SPS.toggle_field)
 	if _r.err: return
 	_toggle_cam_coll(_r.value)
 
 
-func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_value_changed_section_op(payload: Dictionary[StringName, Variant]):
 	var parsed_payload := DVCSIGPayloadParser.parse_b_dvc_value_changed(payload)
 	if not parsed_payload:
 		return

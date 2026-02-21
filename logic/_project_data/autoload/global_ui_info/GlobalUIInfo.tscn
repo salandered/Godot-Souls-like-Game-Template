@@ -59,6 +59,7 @@ in_game_vp_scene = ExtResource("2_f4jnj")
 
 [node name="GlobalUIHotkeys" type="Node" parent="." unique_id=1823686991]
 script = ExtResource("3_p4imp")
+enable_on_init = true
 
 [node name="Profiler" type="Node" parent="." unique_id=248341649]
 unique_name_in_owner = true
@@ -951,6 +952,7 @@ layer = 100
 [node name="CursorTools" type="Node" parent="CanvasLayer2" unique_id=1876213618]
 script = ExtResource("30_n600l")
 cursor_texture = ExtResource("31_p4imp")
-toggle_trail_on_lanch = true
+bigger_size_on_lanch = true
+trail_on_lanch = true
 
 [editable path="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo"]

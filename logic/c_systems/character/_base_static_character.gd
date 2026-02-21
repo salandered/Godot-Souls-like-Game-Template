@@ -13,7 +13,7 @@ var _combat: BaseCombat
 var _look_at_char_marker: LookAtCharacterMarker
 
 
-@export var dev_tag: String = ""
+@export var dev_tag: StringName = ""
 
 ## not nullable after init
 func get_combat() -> BaseCombat:
@@ -98,8 +98,8 @@ func _initialise_combat() -> void:
 ##
 @abstract func _for_init_native_player() -> AnimationPlayer
 @abstract func _for_init_anim_list() -> BaseCharAnimList
-@abstract func _for_init_required_markers() -> Dictionary[String, Array]
-@abstract func _for_init_active_weapon_id_list() -> Array[String]
+@abstract func _for_init_required_markers() -> Dictionary[StringName, Array]
+@abstract func _for_init_active_weapon_id_list() -> Array[StringName]
 
 ##
 @abstract func react_on_hit(hit_data: HitData) -> void
@@ -112,7 +112,7 @@ func _initialise_combat() -> void:
 ## should not be null but can't guarantee
 @abstract func get_current_state() -> BaseCharacterState
 
-@abstract func get_prev_state_name() -> String
+@abstract func get_prev_state_name() -> StringName
 
 @abstract func is_player() -> bool
 
@@ -123,13 +123,13 @@ func _initialise_combat() -> void:
 ## TODO: was a quick way to make SFX system work. I dont like this API here
 ##     - > delete
 
-@abstract func get_run_state_names() -> Array[String]
+@abstract func get_run_state_names() -> Array[StringName]
 
-@abstract func get_dodge_state_names() -> Array[String]
+@abstract func get_dodge_state_names() -> Array[StringName]
 
-@abstract func get_sprint_state_names() -> Array[String]
+@abstract func get_sprint_state_names() -> Array[StringName]
 
-@abstract func get_idle_state_names() -> Array[String]
+@abstract func get_idle_state_names() -> Array[StringName]
 
-@abstract func get_power_attacks_state_names() -> Array[String]
+@abstract func get_power_attacks_state_names() -> Array[StringName]
 #

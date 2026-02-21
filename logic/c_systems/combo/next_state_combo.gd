@@ -8,8 +8,8 @@ class_name NextStateCombo
 ##       Input is a state name, but not all states can be described as input
 ##       (hence all the contextualizers and combos)
 ## NOTE: for attacks setting needs_combat_input might be enough
-@export var needs_input: String = "not"
-@export var needs_combat_input: String = "not"
+@export var needs_input: StringName = "not"
+@export var needs_combat_input: StringName = "not"
 
 @export_group("Queue")
 @export var needs_allows_queue: bool = true
@@ -17,7 +17,7 @@ class_name NextStateCombo
 @export_group("Time Management")
 ## empty string means no marker needed
 ## if marker doens't exist, combo won't be triggered
-@export var needs_passed_marker: String = "not"
+@export var needs_passed_marker: StringName = "not"
 @export var needs_time_in_action: float = 0.0
 
 @export_group("__dev")
@@ -43,7 +43,7 @@ func _needs_time_in_action_is_set() -> bool:
 	return needs_time_in_action > 0.0
 
 
-func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: BaseAction) -> bool:
+func is_triggered(input_: InputPackage, curr_state_name: StringName, curr_action: BaseAction) -> bool:
 	var decision: bool = true
 	
 	## state
@@ -73,7 +73,7 @@ func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: Ba
 		decision = false
 	
 	if decision:
-		SigUtils.safe_emit_raw(GlobalSignal.SIG_player_combo_triggered,
+		SigUtils.safe_emit(GlobalSignal.SIG_player_combo_triggered,
 			{
 				SPS.state_name_field: curr_state_name,
 				SPS.triggered_state_field: state_to_trigger
@@ -83,7 +83,7 @@ func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: Ba
 	return decision
 
 
-func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_state_name: String, curr_action: BaseAction) -> void:
+func __log_next_state_combo_decision(decision: bool, input_: InputPackage, curr_state_name: StringName, curr_action: BaseAction) -> void:
 	if not __log_false_decision and not decision:
 		return
 

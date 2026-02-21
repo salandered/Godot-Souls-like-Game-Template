@@ -6,14 +6,14 @@ class_name MetaState
 ## (like preemption, interruption, ...)
 
 @abstract class _MetaState extends RefCounted:
-	var _state_name: String
+	var _state_name: StringName
 	var _state_priority: int
 
 	func _init() -> void:
 		_state_name = ""
 		_state_priority = -1
 
-	func set_from_other(new_state: String, new_priority: int, __log: bool = false):
+	func set_from_other(new_state: StringName, new_priority: int, __log: bool = false):
 		if __log: __log_(__pp_state(new_state, new_priority), " ", pp.in_br("from " + __pp_curr_state()))
 		_state_name = new_state
 		_state_priority = new_priority
@@ -30,13 +30,13 @@ class_name MetaState
 	func get_state_priority():
 		return _state_priority
 
-	func is_set_to(another_state_name_: String) -> bool:
+	func is_set_to(another_state_name_: StringName) -> bool:
 		return _state_name == another_state_name_
 
 	func is_set() -> bool:
 		return _state_name != ""
 
-	func try_set(new_state: String, new_priority: int, equal_wins: bool = true, __log: bool = false) -> void:
+	func try_set(new_state: StringName, new_priority: int, equal_wins: bool = true, __log: bool = false) -> void:
 		if not is_set():
 			set_state(new_state, new_priority)
 			return
@@ -50,7 +50,7 @@ class_name MetaState
 
 		if __log: __log_("couldn't set", __pp_state(new_state, new_priority), "equal_wins", equal_wins)
 
-	func set_state(new_state: String, new_priority: int, __log: bool = false):
+	func set_state(new_state: StringName, new_priority: int, __log: bool = false):
 		if __log: __log_(__pp_state(new_state, new_priority), " ", pp.in_br("from " + __pp_curr_state()))
 		_state_name = new_state
 		_state_priority = new_priority
@@ -62,7 +62,7 @@ class_name MetaState
 		try_set(new_state.get_state_name(), new_state.get_state_priority(), equal_wins)
 
 	# region __LOGS
-	func __pp_state(state_name_: String, _state_priority_: int) -> String:
+	func __pp_state(state_name_: StringName, _state_priority_: int) -> String:
 		if state_name_ == "" and _state_priority_ == -1:
 			return "- x -"
 		return __pp_type() + " '%s' {%d}" % [state_name_, _state_priority_]

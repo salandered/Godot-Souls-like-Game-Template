@@ -34,7 +34,7 @@ func get_native_player() -> AnimationPlayer:
 ## SET ANIMATIONS TO PLAY ▶️
 
 ## speed_scale_coef adds to any speed scale mechanic 
-@abstract func set_anim_to_play(anim_id: String, blend_for: float, start_time_offset: float) -> void
+@abstract func set_anim_to_play(anim_id: StringName, blend_for: float, start_time_offset: float) -> void
 
 
 ## GET DATA

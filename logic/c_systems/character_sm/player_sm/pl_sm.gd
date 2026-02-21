@@ -18,7 +18,7 @@ var _transfer_data: TranferData = TranferData.new()
 
 ## not nullable 
 var current_state: BasePlayerState
-var prev_state_name: String
+var prev_state_name: StringName
 
 var _current_action: BaseAction
 var _prev_action: BaseAction
@@ -68,13 +68,13 @@ func apply_hit_influence(value: float, target_multiplier: float = -1.0) -> float
 # TODO: fast solution. Design proper action (or states) ability to share data.
 ## for now its supposed to store only prev action data
 ## so actions can only use these methods for working with tranfer data
-func fill_tranfer_data(tranfer_data: Dictionary[String, Variant]):
+func fill_tranfer_data(tranfer_data: Dictionary[StringName, Variant]):
 	## auto setting current action
 	_transfer_data.fill(_current_action.action_name, tranfer_data)
 
 
 ## optional return
-func get_tranfer_data_by_key(key: String) -> Variant:
+func get_tranfer_data_by_key(key: StringName) -> Variant:
 	## auto getting prev one
 	var data: Variant = _transfer_data.get_by_action_and_key(_prev_action.action_name, key)
 	return data
@@ -89,7 +89,7 @@ func get_prev_action() -> BaseAction:
 
 
 ## returns previous action name (which was replaced with next_action)
-func update_current_action(next_action: BaseAction) -> String:
+func update_current_action(next_action: BaseAction) -> StringName:
 	# var curr_act_name = ""
 	# if not _current_action:
 		# curr_act_name = "-none-"
@@ -114,7 +114,7 @@ func update_current_action(next_action: BaseAction) -> String:
 	
 	_prev_action = _current_action
 	_current_action = next_action
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 		GlobalSignal.SIG_player_action_changed,
 		{SPS.state_name_field: next_action.action_name}
 	)
@@ -155,7 +155,7 @@ func update(input_: InputPackage, delta: float) -> void:
 		prev_state_name = current_state.state_name
 		# now current_state is next state
 		current_state = container.state_by_name(verdict.next_state)
-		SigUtils.safe_emit_raw(
+		SigUtils.safe_emit(
 			GlobalSignal.SIG_player_state_changed,
 			{SPS.state_name_field: current_state.state_name}
 		)

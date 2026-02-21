@@ -7,22 +7,22 @@ const TEST_BUS_PREFIX := "_t_"
 
 
 ## Check if a bus exists by name
-static func bus_exists(bus_name: String, warn_level: String = WL.SILENT) -> bool:
+static func bus_exists(bus_name: StringName, warn_level: StringName = WL.SILENT) -> bool:
 	var _r := _get_bus_idx(bus_name) != -1
 	if _r == false:
 		error_.warn(pp.s("Bus not found", bus_name), "", "", warn_level)
 	return _r
 
 
-static func mute_bus(bus_name: String) -> void:
+static func mute_bus(bus_name: StringName) -> void:
 	_set_bus_mute(bus_name, true)
 
 
-static func unmute_bus(bus_name: String) -> void:
+static func unmute_bus(bus_name: StringName) -> void:
 	_set_bus_mute(bus_name, false)
 
 
-static func is_bus_muted(bus_name: String) -> bool:
+static func is_bus_muted(bus_name: StringName) -> bool:
 	if bus_exists(bus_name, WL.PUSH_WARN):
 		var bus_idx := _get_bus_idx(bus_name)
 		return AudioServer.is_bus_mute(bus_idx)
@@ -31,19 +31,19 @@ static func is_bus_muted(bus_name: String) -> bool:
 
 
 ## Get all bus names. Can be filtered with prefix
-static func get_all_bus_names(prefix: String = "") -> Array[String]:
-	var names: Array[String] = []
+static func get_all_bus_names(prefix: String = "") -> Array[StringName]:
+	var names: Array[StringName] = []
 	for bus_idx: int in AudioServer.bus_count:
-		var bus_name := AudioServer.get_bus_name(bus_idx)
+		var bus_name: StringName = AudioServer.get_bus_name(bus_idx)
 		if prefix == "" or bus_name.begins_with(prefix):
 			names.append(bus_name)
 	return names
 
 
-static func get_dev_bus_names() -> Array[String]:
+static func get_dev_bus_names() -> Array[StringName]:
 	return get_all_bus_names(DEV_BUS_PREFIX)
 
-static func get_test_bus_names() -> Array[String]:
+static func get_test_bus_names() -> Array[StringName]:
 	return get_all_bus_names(TEST_BUS_PREFIX)
 
 static func mute_test_buses() -> void:
@@ -53,7 +53,7 @@ static func mute_test_buses() -> void:
 ## AUDIO EFFECTS
 # region
 
-static func get_lowpass_filter(bus_name: String) -> AudioEffectLowPassFilter:
+static func get_lowpass_filter(bus_name: StringName) -> AudioEffectLowPassFilter:
 	var bus_idx := _get_bus_idx(bus_name)
 	if bus_idx == -1:
 		return null
@@ -66,7 +66,7 @@ static func get_lowpass_filter(bus_name: String) -> AudioEffectLowPassFilter:
 	return null
 
 
-static func ensure_spectrum_analyzer(bus_name: String) -> void:
+static func ensure_spectrum_analyzer(bus_name: StringName) -> void:
 	var bus_idx := _get_bus_idx(bus_name)
 	if bus_idx == -1: return
 
@@ -82,7 +82,7 @@ static func ensure_spectrum_analyzer(bus_name: String) -> void:
 
 
 ## Returns the SpectrumAnalyzerInstance from a bus, or null if not found.
-static func get_spectrum_analyzer_instance(bus_name: String) -> AudioEffectSpectrumAnalyzerInstance:
+static func get_spectrum_analyzer_instance(bus_name: StringName) -> AudioEffectSpectrumAnalyzerInstance:
 	var bus_idx := _get_bus_idx(bus_name)
 	if bus_idx == -1:
 		error_.warn(pp.s("Bus not found", bus_name), "", "", WL.PUSH_WARN)
@@ -101,12 +101,12 @@ static func get_spectrum_analyzer_instance(bus_name: String) -> AudioEffectSpect
 # endregion
 
 
-static func _get_bus_idx(bus_name: String) -> int:
+static func _get_bus_idx(bus_name: StringName) -> int:
 	var _r := AudioServer.get_bus_index(bus_name)
 	return _r
 
 
-static func _set_bus_mute(bus_name: String, muted: bool) -> void:
+static func _set_bus_mute(bus_name: StringName, muted: bool) -> void:
 	if bus_exists(bus_name, WL.PUSH_WARN):
 		var bus_idx := AudioServer.get_bus_index(bus_name)
 		# "If true, the bus at index param bus_idx is muted."

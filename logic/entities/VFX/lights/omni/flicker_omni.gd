@@ -129,7 +129,7 @@ func _apply_playing_anim_settings() -> void:
 		_play_anim(move_animator, AnimID.omni_move, move_speed_scale)
 
 
-func _play_anim(animator: AnimationPlayer, anim_id: String, speed_scale_: float) -> void:
+func _play_anim(animator: AnimationPlayer, anim_id: StringName, speed_scale_: float) -> void:
 	if not animator: return
 	
 	if animator.has_animation(anim_id):

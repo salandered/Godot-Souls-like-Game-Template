@@ -121,7 +121,7 @@ func animate(): # ▶️
 	set_anim_to_play(-1, _custom_start_time_offset)
 
 
-func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
+func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
 	# prints("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):

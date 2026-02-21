@@ -44,7 +44,7 @@ func switch_weapon() -> void:
 		__log_("switch_weapon", "not can_switch")
 		return
 
-	var weapon_id: String = weapon_cycle.get_next()
+	var weapon_id: StringName = weapon_cycle.get_next()
 
 	__log_("switch_weapon", weapon_id)
 	can_switch = false
@@ -69,16 +69,16 @@ func wave() -> void:
 	_start_anim_overlay(A.equip.wave, wave_overlay_config)
 
 	get_tree().create_timer(wave_dur).timeout.connect(func(): can_wave = true)
-	SigUtils.safe_emit_raw_no_payload(PlayerStats.SIG_player_waved)
+	SigUtils.safe_emit_no_payload(PlayerStats.SIG_player_waved)
 
 
-func _on_middle_switch(weapon_id: String):
+func _on_middle_switch(weapon_id: StringName):
 	__log_("_on_middle_switch")
 	if get_combat():
 		get_combat().activate_weapon(weapon_id, true)
 
 
-func _start_anim_overlay(anim_id: String, overlay_config: OverlayConfig):
+func _start_anim_overlay(anim_id: StringName, overlay_config: OverlayConfig):
 	__log_("_start_anim_overlay", anim_id)
 
 	get_player().get_animator_manager().set_overlay_anim(

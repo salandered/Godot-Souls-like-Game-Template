@@ -5,14 +5,14 @@ const PICKING_9 = preload("uid://cntg7xya48dal")
 const ACCOMPLISH = preload("uid://b51cbgqh3orc7")
 
 
-var unique_asp_configs: Dictionary[String, ASP3DConfig] = {
+var unique_asp_configs: Dictionary[StringName, ASP3DConfig] = {
 	SFXConstants.Unique.phase_switch: ASP3DConfig.new(1.0, -0.3, 5.0, 50.0, 4, 0.5, BusID.GAME_SFX, PICKING_9),
 	SFXConstants.Unique.accomplish: ASP3DConfig.new(1.0, -0.3, 3.0, 20.0, 4, 0.2, BusID.GAME_SFX, ACCOMPLISH),
 	SFXConstants.Unique.player_dead: ASP3DConfig.new(2.0, -0.2, 2.0, 20.0, 4, 0.9, BusID.GAME_SFX, PICKING_9)
 }
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	var mute: bool = false
 	var unique_value := get_unique_from_payload(payload)
 

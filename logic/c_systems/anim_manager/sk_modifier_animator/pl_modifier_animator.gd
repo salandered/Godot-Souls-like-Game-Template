@@ -247,7 +247,7 @@ func __log_state() -> String:
 
 
 func __log_blend_state() -> String:
-	var anim_names: Array[String] = []
+	var anim_names: Array[StringName] = []
 	var blend_times: Array[float] = []
 	var times_left: Array[float] = []
 

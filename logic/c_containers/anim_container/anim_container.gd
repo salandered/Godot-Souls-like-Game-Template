@@ -9,11 +9,11 @@ extends BaseAnimContainer
 ## if native_player dont have animation name from _animations, it will simply skip it
 
 
-var _anim_by_id: Dictionary[String, AnimationData] = {}
+var _anim_by_id: Dictionary[StringName, AnimationData] = {}
 
 
 ## MAIN INTERFACE
-func get_by_anim_id(anim_id: String) -> AnimationData:
+func get_by_anim_id(anim_id: StringName) -> AnimationData:
 	return DictUtils.safe_get_dict_key(_anim_by_id, anim_id, null, WL.WARN)
 
 
@@ -23,7 +23,7 @@ func _accept_animations(
 		native_player: AnimationPlayer,
 		param_prefixes: Array[String],
 		param_tracks: Array[String],
-		required_markers: Dictionary[String, Array],
+		required_markers: Dictionary[StringName, Array],
 	) -> void:
 	for anim: AnimationData in _animations:
 		# get native anim
@@ -75,7 +75,7 @@ func _accept_animations(
 
 ## Returns dict { timestamp <float>: Array[AudioTrackKey] }
 ## NOTE: Disables all audio tracks. We dont need them to play directly. 
-func __get_audio_tracks_data(native_anim: Animation, anim_id: String) -> Dictionary[float, Array]:
+func __get_audio_tracks_data(native_anim: Animation, anim_id: StringName) -> Dictionary[float, Array]:
 	var result_dict: Dictionary[float, Array] = {}
 	
 	var track_count: int = native_anim.get_track_count()
@@ -149,9 +149,9 @@ static func __build_transform_track_cache(native_anim: Animation) -> Dictionary[
 	return cache
 
 
-static func __get_animation_markers(animation: Animation) -> Dictionary[String, AnimMarker]:
+static func __get_animation_markers(animation: Animation) -> Dictionary[StringName, AnimMarker]:
 	## Returns dict {marker_name: AnimMarker instance}
-	var markers_dict: Dictionary[String, AnimMarker] = {}
+	var markers_dict: Dictionary[StringName, AnimMarker] = {}
 	
 	var marker_names: PackedStringArray = animation.get_marker_names()
 	

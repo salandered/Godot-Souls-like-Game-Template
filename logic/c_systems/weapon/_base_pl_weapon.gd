@@ -9,15 +9,15 @@ extends BaseWeapon
 ## _input_action_to_state = {
 ## 	CombatAction.light_attack_pressed: PS.longsword_1
 ## }
-var _input_action_to_state: Dictionary[String, String] = {} # input actions to states
+var _input_action_to_state: Dictionary[StringName, StringName] = {} # input actions to states
 
 
 func is_player() -> bool:
 	return true
 
 
-func translate_combat_input_to_state(combat_actions: Array[String]) -> Array[String]:
-	var _translated: Array[String] = []
+func translate_combat_input_to_state(combat_actions: Array[StringName]) -> Array[StringName]:
+	var _translated: Array[StringName] = []
 	
 	for input_action in combat_actions:
 		if DictUtils.safe_has_key(_input_action_to_state, input_action, WL.SILENT):

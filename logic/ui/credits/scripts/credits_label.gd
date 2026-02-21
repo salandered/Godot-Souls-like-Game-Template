@@ -1,8 +1,10 @@
 @tool
 extends RichTextLabel
 
+
 const HEADING_STRING_REPLACEMENT = "$1[font_size=%d]$2[/font_size]"
 const BOLD_HEADING_STRING_REPLACEMENT = "$1[b][font_size=%d]$2[/font_size][/b]"
+
 
 @export_file("*.md") var attribution_file_path: String
 @export var auto_update: bool = true
@@ -25,9 +27,9 @@ const BOLD_HEADING_STRING_REPLACEMENT = "$1[b][font_size=%d]$2[/font_size][/b]"
 @export_enum("left", "center", "right", "fill") var text_alignment: String = "center"
 
 
-## A RichTextLabel that parses a Markdown file to display game credits.
+## parses a Markdown file to display game credits.
 ##
-## This script reads a local .md file and converts standard Markdown syntax 
+## reads a local .md file and converts standard Markdown syntax 
 ## (headers, links, images) into Godot's BBCode format. It includes configuration 
 ## for font sizing per header level and constraints for image dimensions.
 
@@ -55,7 +57,6 @@ func _update_text_from_file() -> void:
 	file_text = regex_replace_blockquotes(file_text)
 
 	text = "[%s]%s[/%s]" % [text_alignment, file_text, text_alignment]
-	# text = "[center]%s[/center]" % [file_text]
 
 
 func set_file_path(file_path: String) -> void:

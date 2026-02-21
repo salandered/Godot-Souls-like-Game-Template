@@ -184,19 +184,19 @@ static func bone_mask_(_bone_mask_: Array[int]) -> String:
 	return "boneMsk [%d-%d] (size %d)" % [first_b, last_b, _bone_mask_.size()]
 
 ## returns name from id (no lib)
-static func anim_n(anim_id: String, no_q: bool = false) -> String:
+static func anim_n(anim_id: StringName, no_q: bool = false) -> String:
 	var anim_name := StrUtils.get_last_slash_part(anim_id)
 	return anim_name if no_q else pp.in_q(anim_name)
 
 
-static func sig(signal_data: SignalData, signal_payload: Dictionary[String, Variant], ) -> String:
+static func sig(signal_data: SignalData, signal_payload: Dictionary[StringName, Variant], ) -> String:
 	if not signal_data: return ""
 	return pp.s(signal_data, "with payload", pp.dict_(signal_payload, false, false, true))
 
-static func sig_raw(signal_: Signal, signal_payload: Dictionary[String, Variant], ) -> String:
+static func sig_raw(signal_: Signal, signal_payload: Dictionary[StringName, Variant], ) -> String:
 	return pp.s(signal_, "with payload", pp.dict_(signal_payload, false, false, true))
 
-static func bus_id(bus_id_: String) -> String:
+static func bus_id(bus_id_: StringName) -> String:
 	return pp.s("bus🎧", pp.in_q(bus_id_))
 
 static func asp_3d_play(asp: AudioStreamPlayer3D) -> String:

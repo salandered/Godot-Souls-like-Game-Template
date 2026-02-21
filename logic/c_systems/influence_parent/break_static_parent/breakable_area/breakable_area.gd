@@ -14,7 +14,7 @@ func get_SIG_breaking_area_entered() -> Signal:
 
 ## to use in implementation
 func _emit_SIG_breaking_area_entered() -> void:
-	SigUtils.safe_emit_raw_no_payload(get_SIG_breaking_area_entered())
+	SigUtils.safe_emit_no_payload(get_SIG_breaking_area_entered())
 
 
 ## CONFIG

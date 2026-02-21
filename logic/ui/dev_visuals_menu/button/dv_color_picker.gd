@@ -15,7 +15,7 @@ func _ready():
 
 
 func _on_color_changed(color_: Color):
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_dv_ui_control_value_changed, {
+	SigUtils.safe_emit(GlobalSignal.SIG_dv_ui_control_value_changed, {
 		SPS.button_name_field: str(name),
 		SPS.dvc_value_field: color_,
 		SPS.dvc_section_field: dv_section,

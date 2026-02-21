@@ -71,7 +71,7 @@ func _apply_state(key_number: int) -> void:
 			hide_all()
 			panel.show()
 			
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_tut_panel_switched,
+	SigUtils.safe_emit(GlobalSignal.SIG_tut_panel_switched,
 		{
 			## 0 means not the first panel, but state when all panels are hidden
 			SPS.number_field: key_number,
@@ -89,8 +89,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		KEY_DOWN:
 			new_key = _cycler.get_next()
 			_apply_state(new_key)
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self)
 		KEY_UP:
 			new_key = _cycler.get_previous()
 			_apply_state(new_key)
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self)

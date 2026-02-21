@@ -10,7 +10,7 @@ var pitch_change: float
 ##
 var max_polyphony: int
 ##
-var bus_id: String
+var bus_id: StringName
 ## may be null. client code should handle nulls
 var stream: AudioStream
 var from_position: float
@@ -24,14 +24,14 @@ var _min_max_max_polyphony: FMinMax = FMinMax.new(1, 16)
 const DEF_VOL_DB_CHANGE: float = 0.0
 const DEF_PITCH_CHANGE: float = 0.0
 const DEF_MAX_POLYPHONY: int = 4
-const DEF_BUS_ID: String = Constants.SFX_ASP_BASE_BUS_ID
+const DEF_BUS_ID: StringName = Constants.SFX_ASP_BASE_BUS_ID
 
 
 func _init(
 	vol_db_change_: float = DEF_VOL_DB_CHANGE,
 	pitch_change_: float = DEF_PITCH_CHANGE,
 	max_polyphony_: int = DEF_MAX_POLYPHONY,
-	bus_id_: String = DEF_BUS_ID,
+	bus_id_: StringName = DEF_BUS_ID,
 	stream_: AudioStream = null,
 	from_position_: float = 0.0
 ):
@@ -82,7 +82,6 @@ func __LOG_B() -> bool:
 
 func __LOG_INDENT() -> int:
 	return 0
-
 
 
 ## bit of trivia

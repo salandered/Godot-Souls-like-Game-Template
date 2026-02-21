@@ -31,7 +31,7 @@ var APPLY_GRAVITY: bool = true
 ## Player states have a fixed legs_behavior attached to them. 
 var legs_behavior: LegsBehavior
 var depends_on_legs: bool = false
-var default_action_name: String # first child or dummy action node
+var default_action_name: StringName # first child or dummy action node
 
 var state_combos_sorted: Array # [Combo_]
 
@@ -108,7 +108,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 ## choosing the input with the highest priority that we can allow
 func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
 	var _input_actions_sorted := container.states_sort_by_priority(input_.actions)
-	for input_action: String in _input_actions_sorted:
+	for input_action: StringName in _input_actions_sorted:
 		if _check_feelings_can_be_paid(input_action):
 			if input_action == state_name: # we
 				return PLVerdict.new()
@@ -118,7 +118,7 @@ func best_next_state_from_input(input_: InputPackage) -> PLVerdict:
 	return PLVerdict.new("", "best-next-state-from-inp returned nothing! return empty verdict")
 
 
-func _check_feelings_can_be_paid(input_action: String) -> bool:
+func _check_feelings_can_be_paid(input_action: StringName) -> bool:
 	var _stamina_cost := container.state_by_name(input_action).stamina_cost
 	var _stamina_drain := container.state_by_name(input_action).stamina_drain
 		
@@ -187,7 +187,7 @@ func update(input_: InputPackage, delta: float):
 
 
 # looks like can be overriden. Test usage in Run
-func choose_default_action() -> String:
+func choose_default_action() -> StringName:
 	return default_action_name
 
 
@@ -223,7 +223,7 @@ func _on_enter_state(input_: InputPackage):
 		legs_sm.switch_to(legs_behavior, input_) # NOTE: for now, here is always double
 
 
-func switch_action_to(next_action_name: String, input_: InputPackage):
+func switch_action_to(next_action_name: StringName, input_: InputPackage):
 	# region: NOTE: we dont check if current action is the same as next_action_name
 	# When state was left, it preserved its curr_state_action attribute. On enter it would still have it. 
 	# So it is not like we compare here curr action of prev state with next_action_name of new one.

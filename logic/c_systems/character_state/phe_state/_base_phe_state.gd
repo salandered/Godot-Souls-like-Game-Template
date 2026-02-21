@@ -135,7 +135,7 @@ func direction_to_(target: Variant) -> Vector3:
 ## COMMON HELPERS
 # region
 
-func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: float, curr_sbs_name: String, next_sbs_name: String, __log_context: String = ""):
+func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: float, curr_sbs_name: StringName, next_sbs_name: StringName, __log_context: String = ""):
 	# NOTE: out states tend to return empty string, meaning that no switch needed. Monitors are not ready for this
 	if next_sbs_name == "":
 		next_sbs_name = curr_sbs_name
@@ -143,7 +143,7 @@ func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: floa
 		monitor.auto_update(delta, curr_sbs_name, next_sbs_name, -1, -1, __log_context)
 
 
-func state_angry(state_usual: String, state_angry_: String) -> String:
+func state_angry(state_usual: StringName, state_angry_: StringName) -> StringName:
 	return state_usual if not me.angry_raised else state_angry_
 
 
@@ -158,17 +158,17 @@ func chance_angry(chance_usual: float, chance_angry_: float) -> float:
 
 
 ## 50% chance or third if angry
-func flip_w_angry(state_a: String, state_b: String, state_angry_: String) -> String:
+func flip_w_angry(state_a: StringName, state_b: StringName, state_angry_: StringName) -> StringName:
 	if me.angry_raised: return state_angry_
 	return flip_state(state_a, state_b)
 
 
 ## 50% chance
-func flip_state(state_a: String, state_b: String) -> String:
+func flip_state(state_a: StringName, state_b: StringName) -> StringName:
 	return state_a if ra.coinflip() else state_b
 
 ## returns 'state_a' with chance 'chance' else 'state_b'
-func flip_chance(chance: float, state_a: String, state_b: String) -> String:
+func flip_chance(chance: float, state_a: StringName, state_b: StringName) -> StringName:
 	return state_a if ra.chance(chance) else state_b
 
 
@@ -248,7 +248,7 @@ func __log_warn_v2(what: String, where: String = "", fallback: String = "", ...p
 	var _parts := pp.list_(parts)
 	error_.warn(what, where, fallback, WL.PUSH_ERROR, _parts, "\n\t\t", __log_state(), me.__pp_state_history())
 
-func __log_forgot_implement(sbs_name: String, function_name: String, fallback: String, ...parts: Array):
+func __log_forgot_implement(sbs_name: StringName, function_name: String, fallback: String, ...parts: Array):
 	var _msg := "forgot to implement '%s' logic in '%s()'. Fallback: %s" % [sbs_name, function_name, fallback]
 	__log_warn_soft(_msg)
 

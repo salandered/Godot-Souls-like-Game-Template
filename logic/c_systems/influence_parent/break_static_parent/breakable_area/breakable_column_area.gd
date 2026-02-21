@@ -10,7 +10,7 @@ var filter_weapon_attacking: bool = true
 
 var filter_player_weapon: bool = false
 var filter_enemy_weapon: bool = true
-var filter_weapon_ids: Array[String] = [
+var filter_weapon_ids: Array[StringName] = [
 	WeaponID.bg_aura_weapon,
 	WeaponID.big_pinga_blade,
 	WeaponID.small_pinga_blade

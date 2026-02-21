@@ -12,12 +12,12 @@ enum ThrowDir {
 
 
 class Pack:
-	var anim_id: String
+	var anim_id: StringName
 	var peak_speed: float
 	var end_speed: float
 	var extra_start_speed: float
 	var direction: ThrowDir
-	func _init(anim_id_: String, peak_speed_: float, end_speed_: float, extra_start_speed_: float, direction_: ThrowDir) -> void:
+	func _init(anim_id_: StringName, peak_speed_: float, end_speed_: float, extra_start_speed_: float, direction_: ThrowDir) -> void:
 		self.anim_id = anim_id_
 		self.peak_speed = peak_speed_
 		self.end_speed = end_speed_

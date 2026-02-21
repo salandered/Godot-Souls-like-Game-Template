@@ -35,7 +35,7 @@ static func _check_overlap(
 		k_just_pressed: KeyPress,
 		k_pressed: KeyPress,
 		all_keys: DirectionalKeys,
-		action_to_vector: Dictionary[String, Vector2],
+		action_to_vector: Dictionary[StringName, Vector2],
 		reverse_data: ReverseData,
 		type: ReverseData.ReverseType
 	) -> bool:
@@ -77,7 +77,7 @@ static func _check_sequential(
 		k_just_pressed: KeyPress,
 		k_not_pressed: KeyPress,
 		all_keys: DirectionalKeys,
-		action_to_vector: Dictionary[String, Vector2],
+		action_to_vector: Dictionary[StringName, Vector2],
 		reverse_data: ReverseData,
 		type: ReverseData.ReverseType
 	) -> bool:
@@ -113,7 +113,7 @@ static func detect_reverse_data(new_input: InputPackage,
 
 	var all_keys := DirectionalKeys.new(forward_key, back_key, left_key, right_key)
 	
-	var action_to_vector: Dictionary[String, Vector2] = {
+	var action_to_vector: Dictionary[StringName, Vector2] = {
 		forward_key.raw_action: Vector2(0, -1),
 		back_key.raw_action: Vector2(0, 1),
 		left_key.raw_action: Vector2(-1, 0),

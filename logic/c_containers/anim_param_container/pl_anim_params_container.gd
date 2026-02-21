@@ -46,8 +46,8 @@ func is_invincible(anim: Animation, timestamp: float) -> bool:
 	return _get_value_from_track(anim, INVINCIBLE, timestamp)
 
 
-func is_weapon_hurts(weapon_name: String, anim: Animation, timestamp: float) -> bool:
-	# for any weapon_name in player
+func is_weapon_hurts(weapon_id: StringName, anim: Animation, timestamp: float) -> bool:
+	# for any weapon_id in player
 	return _is_weapon_hurts(anim, timestamp)
 
 

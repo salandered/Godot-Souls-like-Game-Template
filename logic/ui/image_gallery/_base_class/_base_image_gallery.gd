@@ -292,15 +292,15 @@ func _input(event):
 		KEY_D, KEY_RIGHT:
 			change_item(1)
 			_play_book_flip()
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self)
 		KEY_A, KEY_LEFT:
 			change_item(-1)
 			_play_book_flip()
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self)
 		KEY_0, KEY_KP_0:
 			_ui_layer_visible = not _ui_layer_visible
 			_apply_ui_visibility()
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self)
 
 
 func _play_book_flip() -> void:

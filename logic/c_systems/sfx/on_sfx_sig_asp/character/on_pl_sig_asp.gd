@@ -7,7 +7,7 @@ func _hard_validate_implementation() -> bool:
 	return self._sfx_system and self._sfx_system is PlayerSFXSystem
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	return VolPitch.new(base_vol_db, base_pitch)
 
 
@@ -17,7 +17,7 @@ func get_character_sfx_system() -> PlayerSFXSystem:
 
 
 ## not nullable
-func get_curr_action_name() -> String:
+func get_curr_action_name() -> StringName:
 	return get_character_sfx_system().get_character().get_curr_action_name()
 
 

@@ -28,11 +28,11 @@ func initialise() -> void:
 @abstract func initialise_implementation() -> void
 
 
-var default_attack_weapons: Array[String] = [WeaponID.big_pinga_blade]
+var default_attack_weapons: Array[StringName] = [WeaponID.big_pinga_blade]
 
 ## what weapons should be attacking in this state (depends on animation)
 ## to override
-func get_anim_active_weapon_ids() -> Array[String]:
+func get_anim_active_weapon_ids() -> Array[StringName]:
 	return default_attack_weapons
 
 

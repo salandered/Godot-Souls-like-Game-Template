@@ -14,15 +14,15 @@ const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.02
 
 ## TODO: this begs the question, do we need explicit idle action in strafe behavior at all?
 ## 		 since adding NEUTRAL direction, here in strafe there is lot of logic for idle.
-const ANIM_IDLE: String = A.loco.idle
+const ANIM_IDLE: = A.loco.idle
 
-const ANIM_L: String = A.strafe.strafe_L
-const ANIM_R: String = A.strafe.strafe_R
+const ANIM_L: = A.strafe.strafe_L
+const ANIM_R: = A.strafe.strafe_R
 const SPEED_R: float = 2.9 + 0.4
 const SPEED_L: float = 2.8 + 0.4
 
-const ANIM_F: String = A.strafe.combat_run_f
-const ANIM_B: String = A.strafe.combat_run_b
+const ANIM_F: = A.strafe.combat_run_f
+const ANIM_B: = A.strafe.combat_run_b
 const SPEED_F: float = 3.1 + 0.4
 const SPEED_B: float = 2.4 + 0.4
 
@@ -274,7 +274,7 @@ func _one_anim_is_idle(curr_anim: AnimationData, next_anim: AnimationData) -> bo
 	return curr_anim.anim_id == ANIM_IDLE or next_anim.anim_id == ANIM_IDLE
 
 
-func _on_speed_increase(payload: Dictionary[String, Variant]) -> void:
+func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
 	# prints("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):

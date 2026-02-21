@@ -46,7 +46,7 @@ func switch_to(next_behavior: LegsBehavior, input_: InputPackage):
 	print_.lsm_beh("↪️", pp.s(current_behavior.behavior_name, " => ", next_behavior.behavior_name))
 	current_behavior._on_exit_behavior()
 	current_behavior = next_behavior
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 		GlobalSignal.SIG_player_leg_beh_changed,
 		{SPS.state_name_field: current_behavior.behavior_name}
 	)

@@ -15,7 +15,7 @@ func get_dvc_key() -> int:
 
 
 func _on_text_changed(new_text: String):
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_dv_ui_control_value_changed, {
+	SigUtils.safe_emit(GlobalSignal.SIG_dv_ui_control_value_changed, {
 		SPS.button_name_field: str(name),
 		SPS.dvc_value_field: new_text,
 		SPS.dvc_section_field: dv_section,

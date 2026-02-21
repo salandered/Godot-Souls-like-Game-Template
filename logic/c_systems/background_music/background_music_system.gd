@@ -14,7 +14,7 @@ extends NodeLogger
 @export var quick_transition_chance: float = 0.3
 
 
-var bus_name: String = BusID.GAME_MUSIC
+var bus_name: = BusID.GAME_MUSIC
 
 var _music_asp: AudioStreamPlayer
 var _fade_tween: Tween
@@ -71,7 +71,7 @@ func play_priority_track(
 	# Fade Out Current (only if playing)
 	if _music_asp.playing:
 		# Fade to silence
-		_fade_tween.tween_property(_music_asp, PropC.ASP_VOLUME_DB, -80.0, transition_duration)
+		_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, -80.0, transition_duration)
 	
 	# Swap Stream & Start Playing (Silent)
 	_fade_tween.tween_callback(func():
@@ -82,7 +82,7 @@ func play_priority_track(
 	)
 	
 	# Fade In New Track
-	_fade_tween.tween_property(_music_asp, PropC.ASP_VOLUME_DB, volume_override, transition_duration)
+	_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, volume_override, transition_duration)
 	
 	# Schedule the "End of Track" Fade
 	# We run this in a callback because we need the track to be playing to get correct positions
@@ -105,7 +105,7 @@ func _schedule_end_of_track_fade(stream: AudioStream) -> void:
 	_fade_tween = create_tween()
 	
 	_fade_tween.tween_interval(time_until_fade)
-	_fade_tween.tween_property(_music_asp, PropC.ASP_VOLUME_DB, -80.0, fade_duration)
+	_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, -80.0, fade_duration)
 	_fade_tween.tween_callback(_on_track_fade_complete)
 
 # endregion
@@ -148,7 +148,7 @@ func _play_stream(track: AudioStream, vol_db: float, from_position: float = 0.0)
 	# setup fade sequence
 	_fade_tween = create_tween()
 	_fade_tween.tween_interval(time_until_fade)
-	_fade_tween.tween_property(_music_asp, PropC.ASP_VOLUME_DB, -80.0, fade_duration)
+	_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, -80.0, fade_duration)
 	_fade_tween.tween_callback(_on_track_fade_complete)
 
 

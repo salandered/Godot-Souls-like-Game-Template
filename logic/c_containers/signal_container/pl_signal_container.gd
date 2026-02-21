@@ -2,7 +2,7 @@ extends BaseCharacterSignalContainer
 class_name PlayerSignalContainer
 
 
-signal SFX_switch_weapon(payload: Dictionary[String, Variant])
+signal SFX_switch_weapon(payload: Dictionary[StringName, Variant])
 
 func _get_character_specific_signal_data_list() -> Array[SignalData]:
 	return [

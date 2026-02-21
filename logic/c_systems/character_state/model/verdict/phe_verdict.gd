@@ -6,7 +6,7 @@ var _switch_on_same: bool = false
 var _override_commit: bool = false
 
 
-func _init(next_state_: String = "", reason_: String = "", switch_on_same_: bool = false, override_commit_: bool = false):
+func _init(next_state_: StringName = "", reason_: String = "", switch_on_same_: bool = false, override_commit_: bool = false):
 	self.next_state = next_state_
 	self._reason = reason_
 	set_special_flags(switch_on_same_, override_commit_)

@@ -32,7 +32,7 @@ static func for_log_error(object_: Object, what: String, where: String, fallback
 
 
 static func _for_log_warn(
-		warn_level: String,
+		warn_level: StringName,
 		object_: Object,
 		what: String,
 		where: String,
@@ -61,7 +61,7 @@ static func for_static_log_error(what: String, where: String, fallback: String, 
 
 
 static func _for_static_log_warn(
-		warn_level: String,
+		warn_level: StringName,
 		what: String,
 		where: String,
 		fallback: String,

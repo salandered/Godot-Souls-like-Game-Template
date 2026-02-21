@@ -7,18 +7,18 @@ extends NodeLogger
 
 @onready var player: Princess
 
-@export var needs_curr_action: String = "not"
+@export var needs_curr_action: StringName = "not"
 
 
 ## next state this combo invokes (eg: next_attack)
 ## Will be added in check_combos to queued state 
 ## NOTE: state_name, not node name here
-@export var state_to_trigger: String
+@export var state_to_trigger: StringName
 
 @export var priority: int = 0 # 0 means lowest
 
 ## main method. decides if the combo is triggered
-@abstract func is_triggered(input_: InputPackage, curr_state_name: String, curr_action: BaseAction) -> bool
+@abstract func is_triggered(input_: InputPackage, curr_state_name: StringName, curr_action: BaseAction) -> bool
 
 
 # region: DOCS: PHILOSOPY AND DETAILS BEHIND COMBO

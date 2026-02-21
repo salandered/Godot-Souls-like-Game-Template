@@ -2,6 +2,11 @@ class_name M_AppSettings
 extends NodeStaticLogger
 
 
+## == ✴️ from Maaacks template == 
+## == How much changed: Added lots of options ==
+## TODO: Changed a lot, but original architecture does not fit the project, needs refactor
+## 
+
 const shadow_mode_number_to_val: Dictionary[int, DirectionalLight3D.ShadowMode] = {
 	0: DirectionalLight3D.ShadowMode.SHADOW_PARALLEL_4_SPLITS,
 	1: DirectionalLight3D.ShadowMode.SHADOW_PARALLEL_2_SPLITS,
@@ -49,14 +54,18 @@ const SYSTEM_BUS_NAME_PREFIX = "_"
 static var default_action_events: Dictionary
 static var initial_bus_volumes: Array
 
+
 static func get_config_input_events(action_name: String, default = null) -> Array:
 	return M_PlayerConfig.get_config(INPUT_SECTION, action_name, default)
+
 
 static func set_config_input_events(action_name: String, inputs: Array) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, action_name, inputs)
 
+
 static func _clear_config_input_events() -> void:
 	M_PlayerConfig.erase_section(INPUT_SECTION)
+
 
 static func remove_action_input_event(action_name: String, input_event: InputEvent) -> void:
 	InputMap.action_erase_event(action_name, input_event)
@@ -64,6 +73,7 @@ static func remove_action_input_event(action_name: String, input_event: InputEve
 	var config_events: Array = get_config_input_events(action_name, action_events)
 	config_events.erase(input_event)
 	set_config_input_events(action_name, config_events)
+
 
 static func set_input_from_config(action_name: String) -> void:
 	var action_events: Array[InputEvent] = InputMap.action_get_events(action_name)
@@ -129,14 +139,18 @@ static func set_bus_volume(bus_index: int, linear: float) -> void:
 	linear *= initial_linear
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(linear))
 
+
 static func is_muted() -> bool:
 	return AudioServer.is_bus_mute(MASTER_BUS_INDEX)
+
 
 static func set_mute(mute_flag: bool) -> void:
 	AudioServer.set_bus_mute(MASTER_BUS_INDEX, mute_flag)
 
+
 static func get_audio_bus_name(bus_iter: int) -> String:
 	return AudioServer.get_bus_name(bus_iter)
+
 
 static func set_audio_from_config() -> void:
 	for bus_iter in AudioServer.bus_count:
@@ -165,6 +179,7 @@ static func set_resolution(value: Vector2i, window: Window, update_config: bool 
 	window.size = value
 	if update_config:
 		M_PlayerConfig.set_config(VIDEO_SECTION, SCREEN_RESOLUTION, value)
+
 
 static func is_fullscreen(window: Window) -> bool:
 	return (window.mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (window.mode == Window.MODE_FULLSCREEN)
@@ -263,7 +278,7 @@ static func set_video_from_config(window: Window) -> void:
 
 static func set_brightness(value: float, window: Window) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, BRIGHTNESS, value)
-	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
+	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
 
 
 static func get_brightness() -> float:
@@ -282,7 +297,7 @@ static func _set_brightness_from_config(window: Window) -> void:
 
 static func set_volumetric_fog(value: bool) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, VOLUMETRIC_FOG, value)
-	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
+	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
 
 
 static func get_volumetric_fog() -> bool:
@@ -296,7 +311,7 @@ static func _set_volumetric_fog_from_config() -> void:
 
 static func set_shadow_mode(value: int) -> void:
 	M_PlayerConfig.set_config(VIDEO_SECTION, SHADOW_MODE, value)
-	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
+	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_video_settings_for_level)
 
 
 static func get_shadow_mode() -> int:
@@ -316,7 +331,7 @@ const DEF_Y_SENSE := 1.0
 static func set_x_sense(value: float) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, X_MOUSE_SENSE, value)
 	# prints("set_x_sense", value)
-	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
+	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
 
 
 static func get_x_sense() -> float:
@@ -332,7 +347,7 @@ static func _set_x_sense_from_config() -> void:
 static func set_y_sense(value: float) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, Y_MOUSE_SENSE, value)
 	# prints("set_y_sense", value)
-	SigUtils.safe_emit_raw_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
+	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
 
 
 static func get_y_sense() -> float:
@@ -366,16 +381,6 @@ static func set_from_config_and_window(window: Window) -> void:
 ## 
 
 
-# OS.is_debug_build() 
-# True: In Editor AND in "Debug" exports.
-# False: Only in final "Release" exports.
-# Benefit: use all keys in a standalone .exe if exported with "Debug" checked. 
-# 		If Release mode, they are gone.
-
-# OS.has_feature("editor"):
-# True: Only inside the Godot Editor.
-# False: In ANY export (Debug or Release).
-# Benefit: keys are vanished the moment you leave the editor.
 static func remove_developer_actions() -> void:
 	if not u.is_release():
 		return

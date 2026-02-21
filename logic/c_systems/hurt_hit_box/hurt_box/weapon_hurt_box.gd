@@ -170,7 +170,7 @@ func _apply_push(body: Node3D):
 	body.apply_central_impulse(push_direction * _get_weapon_push_force())
 
 
-func _emit_sig(sig_id: String, payload: Dictionary[String, Variant], body: Node3D) -> void:
+func _emit_sig(sig_id: StringName, payload: Dictionary[StringName, Variant], body: Node3D) -> void:
 	var key := sig_id + "_" + str(body.get_instance_id())
 	if not _sig_throttler.is_throttled(key):
 		var _sig_data := sig_container.get_by_sig_id(sig_id)

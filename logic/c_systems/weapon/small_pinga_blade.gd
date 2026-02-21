@@ -22,7 +22,7 @@ func validate_visuals() -> void:
 func get_weapon_hurt_box() -> WeaponHurtBox:
 	return _weapon_hurt_box_
 
-func get_weapon_id() -> String:
+func get_weapon_id() -> StringName:
 	return WeaponID.small_pinga_blade
 
 ##

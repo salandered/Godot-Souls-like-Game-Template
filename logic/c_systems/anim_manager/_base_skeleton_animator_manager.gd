@@ -19,7 +19,7 @@ func __hard_dependencies() -> Array:
 
 ## OVERLAY
 
-func set_overlay_anim(anim_id: String, overlay_config: OverlayConfig, start_time_offset: float = 0.0) -> void:
+func set_overlay_anim(anim_id: StringName, overlay_config: OverlayConfig, start_time_offset: float = 0.0) -> void:
 	if not __validation_ok(): return
 	var anim: AnimationData = _anim_container.get_by_anim_id(anim_id)
 	if anim == null:

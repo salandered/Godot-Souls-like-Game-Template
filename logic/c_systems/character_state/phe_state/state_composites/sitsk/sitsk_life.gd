@@ -5,7 +5,7 @@ class_name SimpleLife
 var _was_just_hit: bool = false
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [SITSKS.still_life_phase, SITSKS.combat_phase]
 
 
@@ -16,7 +16,7 @@ func react_on_hit(hit_data: HitData) -> void:
 		_was_just_hit = true
 
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	match current_substate.state_name:
 		SITSKS.still_life_phase:
 			if _was_just_hit:
@@ -33,5 +33,5 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	return VerdictPH.new(SITSKS.still_life_phase, "Start peaceful")

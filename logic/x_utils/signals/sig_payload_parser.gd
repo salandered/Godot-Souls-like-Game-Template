@@ -18,7 +18,7 @@ extends RefCounted
 
 ## dv control buttons emit this sig
 static func parse_dvc_ui_control_value_changed(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	allow_null_value: bool = false
 ) -> DVCUIControlValueChangedPayload:
 	var _r_skv := _parse_dvc_section_key_value(payload, allow_null_value)
@@ -30,7 +30,7 @@ static func parse_dvc_ui_control_value_changed(
 
 ## internal sig used for distribution
 static func parse_internal_SIG_dvc_value_changed(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	allow_null_value: bool = false
 ) -> DVValueChangedPayload:
 	var _r_skv := _parse_dvc_section_key_value(payload, allow_null_value)
@@ -41,7 +41,7 @@ static func parse_internal_SIG_dvc_value_changed(
 
 ## "boolean char dev visuals value changed"
 static func parse_dvc_b_char_dv_value_changed(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 ) -> DVCBValueChangedCharDVPayload:
 	var _r_kv := _parse_dvc_key_value_payload(
 		payload,
@@ -61,7 +61,7 @@ static func parse_dvc_b_char_dv_value_changed(
 
 ## enum_to_validate_key should be Dictionary
 static func parse_b_dvc_value_changed(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	enum_to_validate_key: Variant = null,
 ) -> DVCBValueChangedPayload:
 	var _parsed := parse_untyped_dvc_value_changed(payload, enum_to_validate_key, false)
@@ -72,7 +72,7 @@ static func parse_b_dvc_value_changed(
 
 ## enum_to_validate_key should be Dictionary
 static func parse_untyped_dvc_value_changed(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	enum_to_validate_key: Variant = null,
 	allow_null_value: bool = false
 ) -> DVCUntypedValueChangedPayload:
@@ -97,7 +97,7 @@ static func parse_untyped_dvc_value_changed(
 # region
 
 static func safe_bget_value_by_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	key: int,
 ) -> RO.BoolReturn:
 	var _r := safe_get_variant_value_by_dvc_key(payload, key)
@@ -106,7 +106,7 @@ static func safe_bget_value_by_dvc_key(
 
 
 static func safe_fget_value_by_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	key: int,
 ) -> RO.FloatReturn:
 	var _r := safe_get_variant_value_by_dvc_key(payload, key)
@@ -115,7 +115,7 @@ static func safe_fget_value_by_dvc_key(
 
 
 static func safe_sget_value_by_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	key: int,
 ) -> RO.StringReturn:
 	var _r := safe_get_variant_value_by_dvc_key(payload, key)
@@ -124,7 +124,7 @@ static func safe_sget_value_by_dvc_key(
 
 
 static func safe_color_get_value_by_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	key: int,
 ) -> RO.ColorReturn:
 	var _r := safe_get_variant_value_by_dvc_key(payload, key)
@@ -133,7 +133,7 @@ static func safe_color_get_value_by_dvc_key(
 
 
 static func safe_get_variant_value_by_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	key: int,
 	allow_null_value: bool = false
 ) -> RO.VariantReturn:
@@ -153,7 +153,7 @@ static func safe_get_variant_value_by_dvc_key(
 # region
 
 static func safe_bget_value_by_composite_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	ct: DVS.CharacterType,
 	cdv: DVS.CharDVType
 ) -> RO.BoolReturn:
@@ -167,7 +167,7 @@ static func safe_bget_value_by_composite_dvc_key(
 
 
 static func safe_get_variant_value_by_composite_dvc_key(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	ct: DVS.CharacterType,
 	cdv: DVS.CharDVType,
 	allow_null_value: bool = false
@@ -187,7 +187,7 @@ static func safe_get_variant_value_by_composite_dvc_key(
 ## INTERNAL
 
 static func _parse_dvc_section_key_value(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	allow_null_value: bool = false
 ) -> _DVCSectionKeyValuePayload:
 	var _r_section := SigUtils.safe_get_int_payload_value(payload, SPS.dvc_section_field)
@@ -201,7 +201,7 @@ static func _parse_dvc_section_key_value(
 
 
 static func _parse_dvc_key_value_payload(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	allow_null_value: bool = false,
 	filter_by_key: bool = false,
 	filter_key: int = -1,

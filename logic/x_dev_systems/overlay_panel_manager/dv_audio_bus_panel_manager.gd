@@ -39,7 +39,7 @@ func set_enabled(value: bool):
 		spectrum.set_enabled(value)
 
 
-func _on_SIG_dvc_svalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_svalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_sget_value_by_dvc_key(
 		payload,
 		DVS.KeySValueChanger.DV_SPECTRUM_AUDIO_BUS

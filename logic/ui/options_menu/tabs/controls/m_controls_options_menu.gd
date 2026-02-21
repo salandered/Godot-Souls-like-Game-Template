@@ -13,12 +13,14 @@ const KEY_DELETION_TEXT: String = "Are you sure you want to remove {key} from {a
 
 var last_input_readable_name
 
+
 func _horizontally_align_popup_labels() -> void:
 	%KeyAssignmentDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	$KeyDeletionDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	$OneInputMinimumDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	$AlreadyAssignedDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	$ResetConfirmationDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
 
 func _ready() -> void:
 	if u.is_editor(): return
@@ -42,6 +44,7 @@ func _add_action_event() -> void:
 
 func _on_reset_button_pressed() -> void:
 	$ResetConfirmationDialog.popup_centered()
+
 
 func _on_key_assignment_dialog_confirmed() -> void:
 	__log_("InputMenu", "Dialog confirmed signal received.")
@@ -72,13 +75,16 @@ func _popup_minimum_reached(action_name: String) -> void:
 func _on_input_actions_list_already_assigned(action_name, input_name) -> void:
 	_popup_already_assigned(action_name, input_name)
 
+
 func _on_input_actions_list_minimum_reached(action_name) -> void:
 	_popup_minimum_reached(action_name)
+
 
 func _on_input_actions_list_button_clicked(action_name, readable_input_name) -> void:
 	__log_("InputMenu", "Button clicked for:", action_name, "Current Key:", readable_input_name)
 	
 	_open_key_assignment_dialog(action_name, readable_input_name)
+
 
 func _on_reset_confirmation_dialog_confirmed() -> void:
 	%InputActionsList.reset()

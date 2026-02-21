@@ -37,7 +37,7 @@ var _on_signal_asps: Array[OnSFXSigASP]
 @abstract func _get_on_signal_asps(signals: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]
 
 
-@abstract func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void
+@abstract func initialise_implementation(additional_data: Dictionary[StringName, Variant]) -> void
 
 
 ## should be called for any sfx system
@@ -45,7 +45,7 @@ func initialise(
 		signal_container_: BaseSignalContainer,
 		asp_config_container: BaseSFXASPConfigContainer,
 		root_of_asps: Node,
-		additional_data: Dictionary[String, Variant]
+		additional_data: Dictionary[StringName, Variant]
 	) -> void:
 	initialise_implementation(additional_data)
 	
@@ -70,7 +70,7 @@ func initialise(
 func _soft_validate_on_signal_asps():
 	var _players_total := len(_on_signal_asps)
 	if not error_.empty_list(_on_signal_asps, "_on_signal_asps", WL.WARN):
-		var _all_sfx_types: Array[String] = []
+		var _all_sfx_types: Array[StringName] = []
 		for item: OnSFXSigASP in _on_signal_asps:
 			_all_sfx_types.append(item.asp.name)
 		__log_("validation", "we have", len(_on_signal_asps), "on_signal_players:", pp.list_(_all_sfx_types))

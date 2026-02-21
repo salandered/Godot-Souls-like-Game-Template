@@ -27,7 +27,7 @@ func _supported_signal_pairs() -> Array[Array]:
 	]
 
 
-func _on___SIG_all_log_printed(payload: Dictionary[String, Variant]) -> void:
+func _on___SIG_all_log_printed(payload: Dictionary[StringName, Variant]) -> void:
 	var _r_frame := SigUtils.safe_get_string_payload_value(payload, SPS.frame_field)
 	if _r_frame.err: return
 	var _r_msg := SigUtils.safe_get_string_payload_value(payload, SPS.message_field)

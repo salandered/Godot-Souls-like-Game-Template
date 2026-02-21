@@ -2,7 +2,7 @@ extends RefCounted
 class_name SitSkRequiredMarkers
 
 
-static var anim_to_required_marker: Dictionary[String, Array] = {
+static var anim_to_required_marker: Dictionary[StringName, Array] = {
 
 	## 
 	SITSKA.sit_attack: [MarkerName.PUSH_ITEMS_AROUND],

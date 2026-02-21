@@ -62,4 +62,4 @@ func _unhandled_input(event: InputEvent) -> void:
 				and GlobalUIInfo.debug_fancy_cam_panel.debug_fancy_cam_panel_manager.is_panel_visible():
 				return
 			set_tutorial_enable(not visible)
-			get_viewport().set_input_as_handled()
+			InputUtils.mark_input_handled(self )

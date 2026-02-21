@@ -3,7 +3,7 @@ class_name BaseCharacterState
 extends TimeManagement
 
 
-var state_name: String
+var state_name: StringName
 
 
 ## not real abstract functions because args varies

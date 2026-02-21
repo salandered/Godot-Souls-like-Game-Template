@@ -53,7 +53,7 @@ func _on_my_area_interacted():
 
 func _on_switch_inside_anim():
 	__log_("_on_switch_inside_anim", "triggered")
-	SigUtils.safe_emit_raw_no_payload(SIG_lever_switched, false)
+	SigUtils.safe_emit_no_payload(SIG_lever_switched, false)
 	_on_switch_inside_anim_implementation()
 
 

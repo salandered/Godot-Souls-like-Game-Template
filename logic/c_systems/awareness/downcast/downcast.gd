@@ -97,7 +97,7 @@ func set_visuals_enabled(value: bool):
 	if _shaft: _shaft.visible = value
 
 
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(payload, DVS.KeyBValueChanger.DOWNCAST)
 	if _r.err:
 		return

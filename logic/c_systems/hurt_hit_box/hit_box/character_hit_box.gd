@@ -55,7 +55,7 @@ const incoming_area_field = "incoming_area_field"
 const in_contact_list_field = "in_contact_list_field"
 var emit_on_attacking_wp: bool = false
 var emit_on_attacking_wp_every_frame: bool = false
-signal SIG_incoming_weapon_contacted(payload: Dictionary[String, Variant])
+signal SIG_incoming_weapon_contacted(payload: Dictionary[StringName, Variant])
 
 
 func __hard_dependencies() -> Array:
@@ -204,7 +204,7 @@ func _is_weapon_mine(weapon: BaseWeapon) -> bool:
 ##
 
 func _emit_SIG_incoming_area_contacted(incoming_area: Area3D, in_contact_list: bool):
-	SigUtils.safe_emit_raw(SIG_incoming_weapon_contacted, {
+	SigUtils.safe_emit(SIG_incoming_weapon_contacted, {
 		my_area_field: self ,
 		incoming_area_field: incoming_area,
 		in_contact_list_field: in_contact_list

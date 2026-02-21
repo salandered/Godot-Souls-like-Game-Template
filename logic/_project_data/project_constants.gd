@@ -1,7 +1,7 @@
 class_name Constants
 extends RefCounted
 
-static var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+static var gravity: float = ProjectSettings.get_setting(PropC.PHYSICS_3D_DEFAULT_GRAVITY)
 
 
 const BIG_MEANINGLESS_NUMBER: float = 999999.8
@@ -21,14 +21,14 @@ const EPSILON_9: float = 1e-9
 const BONE_COUNT_53 = 53
 
 ## always for any character
-const GENERAL_SKELETON: String = "GeneralSkeleton"
+const GENERAL_SKELETON := &"GeneralSkeleton"
 
 ## always for any skeleton
-const ROOT_BONE: String = "Root"
+const ROOT_BONE := &"Root"
 
-const BONE_TRACK_PREFIX: String = "%" + Constants.GENERAL_SKELETON + ":"
+const BONE_TRACK_PREFIX: StringName = "%" + Constants.GENERAL_SKELETON + ":"
 
-const ROOT_TRACK_PATH: String = BONE_TRACK_PREFIX + Constants.ROOT_BONE
+const ROOT_TRACK_PATH: StringName = BONE_TRACK_PREFIX + Constants.ROOT_BONE
 
 
 ## TODO: used in react on hit. Not accurate values
@@ -40,3 +40,8 @@ const ENEMY_MAX_HIT_DAMAGE: float = 35
 const SFX_ASP_BASE_VOL_DB := -1.0
 ##
 const SFX_ASP_BASE_BUS_ID := BusID.GAME_SFX
+
+
+## DEV
+
+const DEMO_ENEMY_TAG = &"demo_enemy"

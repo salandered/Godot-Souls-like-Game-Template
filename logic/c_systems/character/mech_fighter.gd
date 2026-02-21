@@ -88,11 +88,11 @@ func initialise_static_char_implementation() -> void:
 
 func _for_init_native_player() -> AnimationPlayer:
 	return __native_player
-func _for_init_active_weapon_id_list() -> Array[String]:
+func _for_init_active_weapon_id_list() -> Array[StringName]:
 	return [WeaponID.fighter_h_arm, WeaponID.fighter_v_arm]
 func _for_init_anim_list() -> BaseCharAnimList:
 	return MFA.new()
-func _for_init_required_markers() -> Dictionary[String, Array]:
+func _for_init_required_markers() -> Dictionary[StringName, Array]:
 	return {}
 
 
@@ -147,12 +147,12 @@ func _set_sleep(value: bool):
 	set_process(not value)
 
 
-func _switch_state(next_state_id: String) -> void:
+func _switch_state(next_state_id: StringName) -> void:
 	if next_state_id == _safe_curr_state_name():
 		__log_("↪️", "attempt to switch to the same state ", pp.in_q(_safe_curr_state_name()))
 		return
 
-	__log_("↪️", pp.in_q(_curr_state.state_name if _curr_state else "-x-"), "=>", pp.in_q(next_state_id))
+	__log_("↪️", pp.in_q(_curr_state.state_name if _curr_state else &"-x-"), "=>", pp.in_q(next_state_id))
 	
 	_curr_state._on_exit_state()
 	_update_curr_state(next_state_id)
@@ -160,14 +160,14 @@ func _switch_state(next_state_id: String) -> void:
 	_curr_state._on_enter_state()
 
 
-func _update_curr_state(next_state_id: String):
+func _update_curr_state(next_state_id: StringName):
 	var _next_state := container.get_state_by_name(next_state_id)
 	if not _next_state:
 		__log_error(pp.s("no _next_state got using id", next_state_id), "_update_curr_state", "curr state won't change")
 		return
 	_prev_state = _curr_state
 	_curr_state = _next_state
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 		GlobalSignal.SIG_enemy_state_changed,
 		{SPS.state_name_field: _curr_state.state_name}
 	)
@@ -178,20 +178,20 @@ func _update_curr_state(next_state_id: String):
 func get_current_state() -> BaseCharacterState:
 	return _curr_state
 
-func get_prev_state_name() -> String:
+func get_prev_state_name() -> StringName:
 	return _safe_prev_state_name()
 
 
-func _safe_prev_state_name() -> String:
+func _safe_prev_state_name() -> StringName:
 	if not _prev_state:
 		__log_warn_soft("no prev state")
-	return _prev_state.state_name if _prev_state else ""
+	return _prev_state.state_name if _prev_state else &""
 
 
-func _safe_curr_state_name() -> String:
+func _safe_curr_state_name() -> StringName:
 	if not _curr_state:
 		__log_warn_soft("no curr state")
-	return _curr_state.state_name if _curr_state else ""
+	return _curr_state.state_name if _curr_state else &""
 
 
 func react_on_hit(hit_data: HitData) -> void:
@@ -205,7 +205,7 @@ func is_invincible() -> bool:
 	return true
 
 
-var attack_chain: Dictionary[String, String] = {
+var attack_chain: Dictionary[StringName, StringName] = {
 	## idle to default
 	MFS.idle: MFS.attack_lr,
 	## attacks
@@ -244,19 +244,19 @@ func _on_my_area_interacted():
 
 ##
 
-func get_run_state_names() -> Array[String]:
+func get_run_state_names() -> Array[StringName]:
 	return []
 
-func get_dodge_state_names() -> Array[String]:
+func get_dodge_state_names() -> Array[StringName]:
 	return []
 
-func get_sprint_state_names() -> Array[String]:
+func get_sprint_state_names() -> Array[StringName]:
 	return []
 
-func get_idle_state_names() -> Array[String]:
+func get_idle_state_names() -> Array[StringName]:
 	return []
 
-func get_power_attacks_state_names() -> Array[String]:
+func get_power_attacks_state_names() -> Array[StringName]:
 	return []
 #
 

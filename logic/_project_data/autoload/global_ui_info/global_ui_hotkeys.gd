@@ -127,9 +127,7 @@ func _input_implementation(event: InputEvent) -> void:
 			DVS.KeyBOverlayPanel.PLAYER_SK_ANIMATOR,
 		)
 		InputUtils.mark_input_handled(self )
-	elif InputUtils.is_keycode_w_ctrl(event, KEY_P):
-		get_tree().paused = not get_tree().paused
-		get_viewport().set_input_as_handled()
+
 	## NO MOD
 	elif InputUtils.is_keycode(event, KEY_KP_3):
 		_toggle_mouse_capture()

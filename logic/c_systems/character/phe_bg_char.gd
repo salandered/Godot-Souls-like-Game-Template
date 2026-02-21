@@ -17,16 +17,16 @@ extends PHCharacter
 const FLICKER_FIRE = preload("uid://bnf3bmp3nq5nq")
 
 
-func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
+func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]:
 	return {
 			WeaponID.big_pinga_blade: pinga_anim_sfx_sig_emitter,
 			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
 		}
 func _for_init_anim_list() -> BaseCharAnimList:
 	return PHEA.new()
-func _for_init_required_markers() -> Dictionary[String, Array]:
+func _for_init_required_markers() -> Dictionary[StringName, Array]:
 	return ERequiredMarkers.anim_to_required_marker
-func _for_init_active_weapon_id_list() -> Array[String]:
+func _for_init_active_weapon_id_list() -> Array[StringName]:
 	return [WeaponID.big_pinga_blade, WeaponID.bg_aura_weapon]
 
 
@@ -38,7 +38,7 @@ func initialise_phe_char_implementation():
 	SigUtils.safe_connect(SIG_land_wave, _on_sig_land_wave)
 	
 
-func get_initial_leaf_state_name() -> String:
+func get_initial_leaf_state_name() -> StringName:
 	return PHES.Leaf.sleep
 
 
@@ -52,7 +52,7 @@ func get_node_state_container() -> PHEBaseNodeStateDataContainer:
 
 func set_angry_raised():
 	angry_raised = true
-	SigUtils.safe_emit_raw_no_payload(SIG_angry_raised)
+	SigUtils.safe_emit_no_payload(SIG_angry_raised)
 	if fire_up:
 		apply_fire_to_head()
 
@@ -126,20 +126,20 @@ func remove_fire_effect():
 
 ##
 
-func get_run_state_names() -> Array[String]:
+func get_run_state_names() -> Array[StringName]:
 	return [PHES.Leaf.orbit]
 
-func get_dodge_state_names() -> Array[String]:
+func get_dodge_state_names() -> Array[StringName]:
 	return [PHES.Leaf.dodge_F, PHES.Leaf.dodge_B, PHES.Leaf.dodge_L, PHES.Leaf.dodge_R]
 
-func get_sprint_state_names() -> Array[String]:
+func get_sprint_state_names() -> Array[StringName]:
 	return [PHES.Leaf.pursue]
 
-func get_idle_state_names() -> Array[String]:
+func get_idle_state_names() -> Array[StringName]:
 	return [PHES.Leaf.combat_idle]
 
 
-func get_power_attacks_state_names() -> Array[String]:
+func get_power_attacks_state_names() -> Array[StringName]:
 	return [
 		PHES.Leaf.scare_off,
 		PHES.Leaf.gap_closer,

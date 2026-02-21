@@ -106,7 +106,7 @@ func set_value(
 	_data[section][key_] = value_
 
 	if emit_signal_:
-		SigUtils.safe_emit_raw(_value_changed, {
+		SigUtils.safe_emit(_value_changed, {
 			SPS.dvc_section_field: section,
 			SPS.dvc_key_field: key_,
 			SPS.dvc_value_field: value_}

@@ -3,7 +3,7 @@ class_name ActionData
 
 
 class _DataByPrevAction:
-	var by_prev_action: Dictionary[String, Variant] = {}
+	var by_prev_action: Dictionary[StringName, Variant] = {}
 	var DEFAULT: float
 	var action_specific: float = -999.0
 
@@ -15,14 +15,14 @@ class _DataByPrevAction:
 	## - by prev action
 	## - specific
 	## - default
-	func calculate_actual(prev_action_name: String) -> float:
+	func calculate_actual(prev_action_name: StringName) -> float:
 		if by_prev_action.has(prev_action_name):
 			return by_prev_action[prev_action_name]
 		if action_specific != -999.0:
 			return action_specific
 		return DEFAULT
 	
-	func set_by_prev_action(by_prev_action_: Dictionary[String, Variant]):
+	func set_by_prev_action(by_prev_action_: Dictionary[StringName, Variant]):
 		by_prev_action = by_prev_action_
 
 

@@ -5,7 +5,6 @@ extends CheckButton
 
 @export var dv_section: DVS.DVSection = DVS.DVSection.B_CHANGER
 
-
 @export var tied_toggle_buttons: Array[BaseDVSettingCheckButton] = []
 
 
@@ -20,7 +19,7 @@ func _ready():
 
 
 func _on_toggled(toggle: bool):
-	SigUtils.safe_emit_raw(GlobalSignal.SIG_dv_ui_control_value_changed, {
+	SigUtils.safe_emit(GlobalSignal.SIG_dv_ui_control_value_changed, {
 		SPS.button_name_field: str(name),
 		## here deliberately using value_field (not toggle_field)
 		SPS.dvc_value_field: toggle,

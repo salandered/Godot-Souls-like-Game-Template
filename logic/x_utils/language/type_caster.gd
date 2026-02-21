@@ -57,6 +57,11 @@ static func array_of_string(array: Array[Variant]) -> Array[String]:
 	list_casted.assign(_safe_validate_primitive(array, TYPE_STRING, "String"))
 	return list_casted
 
+static func array_of_string_name(array: Array[Variant]) -> Array[StringName]:
+	var list_casted: Array[StringName] = []
+	list_casted.assign(_safe_validate_primitive(array, TYPE_STRING_NAME, "StringName"))
+	return list_casted
+
 
 static func array_of_int(array: Array[Variant]) -> Array[int]:
 	var list_casted: Array[int] = []
@@ -269,8 +274,8 @@ static func array_of_dv_option_button(array: Array) -> Array[DVOptionButton]:
 
 ## DICT
 
-static func dict_string_variant(dict: Dictionary) -> Dictionary[String, Variant]:
-	var casted: Dictionary[String, Variant] = {}
+static func dict_string_name_variant(dict: Dictionary) -> Dictionary[StringName, Variant]:
+	var casted: Dictionary[StringName, Variant] = {}
 	var validated := _safe_validate_dict_keys(dict, TYPE_STRING, "String")
 	
 	# validation returned empty but original wasn't.

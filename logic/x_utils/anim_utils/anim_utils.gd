@@ -53,13 +53,13 @@ static func get_bool_value_from_track(native_anim: Animation, track_prefix: Stri
 	return default_value # Last resort
 
 
-static func _msg_key_problem(animator: AnimationPlayer, anim_id: String, found_is_problem: bool = false) -> String:
+static func _msg_key_problem(animator: AnimationPlayer, anim_id: StringName, found_is_problem: bool = false) -> String:
 	var _found_msg := "found in AnimPlayer" if found_is_problem else "not found in AnimPlayer:"
 	var _msg := pp.s("Anim", pp.in_q(anim_id), _found_msg, animator)
 	return _msg
 
 
-static func safe_has_animation(animator: AnimationPlayer, anim_id: String, warn_level: String = WL.PUSH_WARN) -> bool:
+static func safe_has_animation(animator: AnimationPlayer, anim_id: StringName, warn_level: StringName = WL.PUSH_WARN) -> bool:
 	if error_.null_object(animator):
 		return false
 	var exists: bool = animator.has_animation(anim_id)
@@ -69,7 +69,7 @@ static func safe_has_animation(animator: AnimationPlayer, anim_id: String, warn_
 
 
 ## fast fail
-static func safe_has_animations(animator: AnimationPlayer, anim_ids: Array[String], warn_level: String = WL.PUSH_WARN) -> bool:
+static func safe_has_animations(animator: AnimationPlayer, anim_ids: Array[StringName], warn_level: StringName = WL.PUSH_WARN) -> bool:
 	if error_.null_object(animator):
 		return false
 	for item in anim_ids:
@@ -94,7 +94,7 @@ static func set_anim_to_play(
 	native_player: AnimationPlayer,
 	anim_container: BaseAnimContainer,
 	config: AnimatableEntityConfig,
-	anim_id: String,
+	anim_id: StringName,
 	blend_for: float = 0.0,
 	start_time_offset: float = 0.0,
 ) -> AnimSetPlayingData:

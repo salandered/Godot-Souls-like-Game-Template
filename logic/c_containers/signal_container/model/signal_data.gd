@@ -5,14 +5,14 @@ extends RefCounted
 
 
 ## signal name from SignalID
-var signal_id: String
+var signal_id: StringName
 var signal_obj: Signal
 
 
-## payload: Dictionary[String, Variant]
+## payload: Dictionary[StringName, Variant]
 
 ## signal_id_ is the signal name from SignalID
-func _init(signal_id_: String, signal_obj_: Signal):
+func _init(signal_id_: StringName, signal_obj_: Signal):
 	self.signal_id = signal_id_
 	self.signal_obj = signal_obj_
 

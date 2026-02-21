@@ -46,8 +46,8 @@ func calculate_target_angle_by_target(input_: InputPackage) -> float:
 	return target_angle
 
 
-func turn_direction_by_target_angle(target_angle: float) -> String:
-	var turn_direction: String
+func turn_direction_by_target_angle(target_angle: float) -> StringName:
+	var turn_direction: StringName
 	if signf(target_angle) <= 0:
 		turn_direction = TurnData.TURN_DIR_RIGHT
 		if signf(target_angle) == 0: __log_warn("Turn angle is zero; defaulting to a 'right' turn.")
@@ -76,7 +76,7 @@ func sync_with_curr_loco_anim(next_anim: AnimationData, next_anim_correction: fl
 
 
 ## return -1 in case of problems or default value
-func calculate_blend_time_from_prev_anim_marker(action_name_: String, marker_name_: String, default_value: float = -1, not_leg_action: bool = false) -> float:
+func calculate_blend_time_from_prev_anim_marker(action_name_: StringName, marker_name_: StringName, default_value: float = -1, not_leg_action: bool = false) -> float:
 	var blend_time_: float = -1
 	var _anim: AnimationData
 	if not_leg_action: # todo: oh

@@ -3,7 +3,7 @@ class_name CharacterSFXSystem
 extends BaseSFXSystem
 
 
-const character_additional_data_key := "character"
+const character_additional_data_key := &"character"
 
 
 var _character: BaseCharacter
@@ -15,7 +15,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise_implementation(additional_data: Dictionary[String, Variant]) -> void:
+func initialise_implementation(additional_data: Dictionary[StringName, Variant]) -> void:
 	_character = DictUtils.safe_get_dict_key(additional_data, character_additional_data_key, null)
 
 

@@ -113,7 +113,7 @@ func _initialise_implementation_in_game() -> void:
 
 ## SIG
 
-func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
 	var parsed_payload := DVCSIGPayloadParser.parse_dvc_b_char_dv_value_changed(payload)
 	if not parsed_payload:
 		return
@@ -125,7 +125,7 @@ func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[String, Variant]):
 	set_enabled(parsed_payload.value_as_bool)
 	
 
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(payload, _key_b_value_changer)
 	if _r.err:
 		return
@@ -133,7 +133,7 @@ func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
 	set_enabled(_r.value)
 
 
-func _on_SIG_dvc_overlay_panel_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_overlay_panel_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(payload, _key_b_overlay_panel)
 	if _r.err:
 		return

@@ -5,7 +5,7 @@ class_name PHEStillLifePhase
 var _is_awaken: bool = false
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [
 			PHES.Leaf.sleep,
 			PHES.Leaf.awaken,
@@ -15,7 +15,7 @@ func get_supported_substates() -> Array[String]:
 func is_ended() -> bool:
 	return _is_awaken
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	match current_substate.state_name:
 		PHES.Leaf.sleep:
 			if _awake_condition():
@@ -26,7 +26,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			if current_substate.time_remaining() <= 0.3:
 				if __ELA(): __log_phe_check("finished awaken anim")
 				_is_awaken = true
-				SigUtils.safe_emit_raw_no_payload(me.SIG_awaken)
+				SigUtils.safe_emit_no_payload(me.SIG_awaken)
 
 		_:
 			__log_forgot_implement(current_substate.state_name, "check_substate_transition", "will be in current sbs + _is_awaken true")
@@ -34,7 +34,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	_next_state = PHES.Leaf.sleep
 	if __ELA(): _reason += "initial still_life state"
 	return VerdictPH.new(_next_state, _reason)

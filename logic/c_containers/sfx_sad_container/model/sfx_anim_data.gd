@@ -6,17 +6,17 @@ extends RefCountedSystem
 ## just ID/String glue
 
 ## sfx type from SFXConstants 
-var sad_id: String
+var sad_id: StringName
 ## WARNING:
 ##   Adds SFXConstants.anim_asp_prefix to name. =>
 ##    - Node names should start with this prefix in the scene
 ##    - Dont use it while creating SFXAnimData
-var anim_sfx_asp_name: String
-var signal_id: String
+var anim_sfx_asp_name: String # not StringName
+var signal_id: StringName
 
 
 ## sad_id_ is the sfx type from SFXConstants
-func _init(sad_id_: String, anim_sfx_asp_name_: String, signal_id_: String) -> void:
+func _init(sad_id_: StringName, anim_sfx_asp_name_: String, signal_id_: StringName) -> void:
 	self.sad_id = sad_id_
 	self.anim_sfx_asp_name = SFXConstants.anim_asp_prefix + anim_sfx_asp_name_
 	self.signal_id = signal_id_

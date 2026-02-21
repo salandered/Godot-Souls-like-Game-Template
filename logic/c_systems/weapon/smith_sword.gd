@@ -25,7 +25,7 @@ func initialise_implementation() -> void:
 func get_weapon_hurt_box() -> WeaponHurtBox:
 	return _weapon_hurt_box_
 
-func get_weapon_id() -> String:
+func get_weapon_id() -> StringName:
 	return WeaponID.smith_sword
 
 

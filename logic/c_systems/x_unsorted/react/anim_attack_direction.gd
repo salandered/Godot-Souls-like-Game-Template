@@ -7,7 +7,7 @@ extends RefCounted
 ## from the character point of view. Examples:
 ## slash from right to left - Dir is LEFT
 ## slash up - Dir is UP
-static var any_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
+static var any_attack_to_direction: Dictionary[StringName, AttackDirection.Dir] = {
 	## phe
 	PHEA.attack.attack_360_high: AttackDirection.Dir.RIGHT,
 	PHEA.attack.attack_360_low: AttackDirection.Dir.RIGHT,
@@ -46,7 +46,7 @@ static var any_attack_to_direction: Dictionary[String, AttackDirection.Dir] = {
 
 
 static func get_direction_from_anim(
-	anim_id: String,
+	anim_id: StringName,
 	default_value: AttackDirection.Dir = AttackDirection.Dir.RIGHT
 ) -> AttackDirection.Dir:
 	var _r: AttackDirection.Dir = DictUtils.safe_get_dict_key(

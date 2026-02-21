@@ -13,7 +13,7 @@ var start_time_offset := ActionData.StartTimeOffset.new(0.0)
 var anim: AnimationData
 
 
-var PREV_STATE: String = ""
+var PREV_STATE: StringName = ""
 
 
 var TIME_REMAINING_TO_END := 0.0
@@ -150,11 +150,11 @@ func works_between(start: float, finish: float) -> bool:
 	return ActionTimeManagement.works_between(start, finish, me.get_animator_manager(), self )
 
 
-func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
+func passed_marker(marker_name: StringName, add_time: float = 0.0) -> bool:
 	return ActionTimeManagement.passed_marker(marker_name, me.get_animator_manager(), anim, self , add_time)
 
 
-func before_marker(marker_name: String) -> bool:
+func before_marker(marker_name: StringName) -> bool:
 	return ActionTimeManagement.before_marker(marker_name, me.get_animator_manager(), anim, self )
 
 # endregion
@@ -163,9 +163,9 @@ func before_marker(marker_name: String) -> bool:
 # region: GET ANIMATION PARAMETERS
 
 
-func is_weapon_hurts(weapon_name: String, __log: bool = false) -> bool:
+func is_weapon_hurts(weapon_id: StringName, __log: bool = false) -> bool:
 	var _r: bool = false
-	_r = me.get_anim_params_container().is_weapon_hurts(weapon_name, anim.native_anim, effective_time_spent_unscaled())
+	_r = me.get_anim_params_container().is_weapon_hurts(weapon_id, anim.native_anim, effective_time_spent_unscaled())
 
 	if _r and __log:
 		__log_("// HURT")

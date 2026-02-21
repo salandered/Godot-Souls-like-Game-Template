@@ -39,7 +39,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	return LNextActionVerdict.new(next_action_name)
 
 
-func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
+func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: StringName) -> StringName:
 	var curr_action := get_curr_action()
 	
 	var angle_deg := rad_to_deg(absf(pm().get_signed_angle_pl_target()))
@@ -56,7 +56,7 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: S
 
 	return next_action_name
 
-func _from_START_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
+func _from_START_decision(input_: InputPackage, delta: float, next_action_name: StringName) -> StringName:
 	var curr_action := get_curr_action()
 	if is_moving(input_):
 		match curr_action.action_name:
@@ -72,7 +72,7 @@ func _from_START_decision(input_: InputPackage, delta: float, next_action_name: 
 	return next_action_name
 
 
-func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
+func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name: StringName) -> StringName:
 	if is_moving(input_) or is_reverse_moving(input_):
 		next_action_name = supported_actions.by_name(Leg.Act.strafe)
 		if next_action_name != get_curr_action().action_name:

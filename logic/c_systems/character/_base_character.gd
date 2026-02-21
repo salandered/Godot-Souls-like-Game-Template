@@ -37,7 +37,7 @@ func get_area_awareness() -> BaseAreaAwareness:
 
 ##
 
-signal SIG_land_wave(char_glob_position: Vector3, anim: String)
+signal SIG_land_wave(char_glob_position: Vector3, anim: StringName)
 
 
 func __hard_dependencies() -> Array:
@@ -153,7 +153,7 @@ func _initialise_weapons_sfx():
 ## sfx
 @abstract func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer
 @abstract func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter
-@abstract func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]
+@abstract func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]
 
 
 @abstract func reset_position(y_offset: float = 0.0) -> void

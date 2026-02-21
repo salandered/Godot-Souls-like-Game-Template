@@ -126,7 +126,7 @@ func _for_init_sad_container() -> BaseCharacterSADContainer:
 	return PlayerSADContainer.new()
 func _for_init_anim_list() -> BaseCharAnimList:
 	return PlAnimList.new()
-func _for_init_required_markers() -> Dictionary[String, Array]:
+func _for_init_required_markers() -> Dictionary[StringName, Array]:
 	return PlRequiredMarkers.anim_to_required_marker
 ## anim
 func _for_init_native_player() -> AnimationPlayer:
@@ -136,14 +136,14 @@ func _for_init_visuals() -> BaseVisuals:
 	return visuals
 func _for_init_bones() -> BaseCharBones:
 	return bones
-func _for_init_active_weapon_id_list() -> Array[String]:
+func _for_init_active_weapon_id_list() -> Array[StringName]:
 	return [WeaponID.smith_sword]
 ## sfx
 func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 	return PlayerASPConfigContainer.new()
 func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
 	return pl_anim_sfx_sig_emitter
-func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
+func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]:
 	return {
 		WeaponID.smith_sword: smith_sword_anim_sfx_sig_emitter,
 		WeaponID.small_pinga_blade: small_pinga_anim_sfx_sig_emitter,
@@ -166,13 +166,13 @@ func get_player() -> Princess:
 func get_current_state() -> BasePlayerState:
 	return player_sm.current_state
 
-func get_curr_state_name() -> String:
-	return player_sm.current_state.state_name if player_sm.current_state else ""
+func get_curr_state_name() -> StringName:
+	return player_sm.current_state.state_name if player_sm.current_state else &""
 
-func get_prev_state_name() -> String:
+func get_prev_state_name() -> StringName:
 	return player_sm.prev_state_name
 
-func get_curr_action_name() -> String:
+func get_curr_action_name() -> StringName:
 	var action := player_sm.get_curr_action()
 	if not action:
 		return ""
@@ -217,19 +217,19 @@ func update(input_: InputPackage, delta: float):
 ## USED FOR SFX SYSTEM
 # region
 
-func get_run_state_names() -> Array[String]:
+func get_run_state_names() -> Array[StringName]:
 	return [PS.run]
 
-func get_dodge_state_names() -> Array[String]:
+func get_dodge_state_names() -> Array[StringName]:
 	return [PS.dodge]
 
-func get_sprint_state_names() -> Array[String]:
+func get_sprint_state_names() -> Array[StringName]:
 	return [PS.sprint]
 
-func get_idle_state_names() -> Array[String]:
+func get_idle_state_names() -> Array[StringName]:
 	return [PS.idle]
 
-func get_power_attacks_state_names() -> Array[String]:
+func get_power_attacks_state_names() -> Array[StringName]:
 	return [PS.sword_slash_3, PS.axe_slice_3]
 
 # endregion

@@ -144,7 +144,16 @@ func move_with_root(delta: float, extra_vel: Vector3 = Vector3.ZERO, y_zeroed: b
 	apply_local_velocity_as_global(final_local_vel)
 
 
-func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: float, check_counter_rot: bool = false) -> Dictionary[String, Variant]:
+const completed := &"completed"
+const accum_rot := &"accum_rot"
+
+## TODO: return data class
+func apply_root_rotation(
+	rot_delta: float,
+	target_angle_: float,
+	accum_rot_: float,
+	check_counter_rot: bool = false
+) -> Dictionary[StringName, Variant]:
 	var remaining_angle := target_angle_ - accum_rot_
 	var _log_msg: String = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rot_delta)
 
@@ -153,17 +162,17 @@ func apply_root_rotation(rot_delta: float, target_angle_: float, accum_rot_: flo
 								  (rot_delta > 0 and remaining_angle < 0)
 		if is_counter_rotating:
 			__log_("", em.pin + "counter rotation, ending turn " + _log_msg)
-			return {"completed": true, "accum_rot": accum_rot_}
+			return {completed: true, accum_rot: accum_rot_}
 
 	if abs(rot_delta) >= abs(remaining_angle):
 		get_character().rotate_y(remaining_angle)
 		__log_("", "Turn complete. " + _log_msg)
-		return {"completed": true, "accum_rot": target_angle_}
+		return {completed: true, accum_rot: target_angle_}
 	else:
 		get_character().rotate_y(rot_delta)
 		var new_rotation := accum_rot_ + rot_delta
 		# prints(u.sfr(), "applied", _log_msg)
-		return {"completed": false, "accum_rot": new_rotation}
+		return {completed: false, accum_rot: new_rotation}
 
 
 ## Z means forward

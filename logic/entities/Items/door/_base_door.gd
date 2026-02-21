@@ -69,7 +69,7 @@ func cant_open_locked():
 	_play_anim(AnimID.cant_open_locked)
 
 
-func _play_anim(anim_id: String):
+func _play_anim(anim_id: StringName):
 	if not __validation_ok():
 		return
 	__log_(anim_id, "opening")

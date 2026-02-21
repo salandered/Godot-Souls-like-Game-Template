@@ -35,21 +35,21 @@ static func get_hips() -> Array[int]:
 
 # region Arms 
 
-static func get_arm_full(side: String) -> Array[int]:
+static func get_arm_full(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
 		return _range(BoneIdx.RIGHT_SHOULDER_7, BoneIdx.LEFT_SHOULDER_26) # to RightLittleDistal(25)
 	else:
 		return _range(BoneIdx.LEFT_SHOULDER_26, 45) # to LeftLittleDistal(44)
 
 
-static func get_arm_no_fingers(side: String) -> Array[int]:
+static func get_arm_no_fingers(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
 		return _range(BoneIdx.RIGHT_SHOULDER_7, 11) # to RightHand(10)
 	else:
 		return _range(BoneIdx.LEFT_SHOULDER_26, 30) # to LeftHand(29)
 
 
-static func get_fingers(side: String) -> Array[int]:
+static func get_fingers(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
 		return _range(11, BoneIdx.LEFT_SHOULDER_26) # to RightLittleDistal(25)
 	else:
@@ -68,7 +68,7 @@ static func get_both_arms() -> Array[int]:
 
 # region Legs (Bones 45-52) 
 
-static func get_leg_full(side: String) -> Array[int]:
+static func get_leg_full(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
 		return _range(45, 49) # RightUpperLeg(45) to RightToes(48)
 	else:
@@ -139,7 +139,7 @@ static func _range(start: int, end_exclusive: int) -> Array[int]:
 ## may be: Shooting/Aiming while running.
 ## Right Arm + Spine, Chest, UpperChest (2, 3, 4).
 ## allows the character to twist their back to aim
-static func get_arm_with_spine(side: String) -> Array[int]:
+static func get_arm_with_spine(side: StringName) -> Array[int]:
 	var arm := get_arm_full(side)
 	var spine := get_spine_chain_no_head_neck()
 	spine.append_array(arm)
@@ -149,7 +149,7 @@ static func get_arm_with_spine(side: String) -> Array[int]:
 ## isolated actions like waving, holding a torch, or carrying an object.
 ## if RIGHT Includes Right Arm + UpperChest (4) only.
 ## stabilizes the shoulder but leaves the lower spine stiff/independent.
-static func get_arm_with_upper_chest(side: String) -> Array[int]:
+static func get_arm_with_upper_chest(side: StringName) -> Array[int]:
 	var arm := get_arm_full(side)
 	arm.append(BoneIdx.UPPER_CHEST_4)
 	return arm
@@ -158,7 +158,7 @@ static func get_arm_with_upper_chest(side: String) -> Array[int]:
 ## Looking and pointing/shooting.
 ## if RIGHT: Includes Right Arm + Spine chain + Head (2-6).
 ## The character looks where they are aiming.
-static func get_arm_with_spine_and_head(side: String) -> Array[int]:
+static func get_arm_with_spine_and_head(side: StringName) -> Array[int]:
 	var arm := get_arm_full(side)
 	var spine_head := get_spine_chain() # 2 to 6
 	
@@ -169,7 +169,7 @@ static func get_arm_with_spine_and_head(side: String) -> Array[int]:
 ## complex upper body actions involving the left shoulder stability
 ## if RIGHT Includes Right Arm + Spine (2-4) + Left Shoulder (26)
 ## Prevents the left shoulder from looking broken if the spine twists significantly.
-static func get_arm_with_spine_and_opposite_shoulder(side: String) -> Array[int]:
+static func get_arm_with_spine_and_opposite_shoulder(side: StringName) -> Array[int]:
 	var mask := get_arm_with_spine(side)
 	if side == Side.RIGHT:
 		mask.append(BoneIdx.LEFT_SHOULDER_26)

@@ -5,7 +5,7 @@ extends RefCounted
 static func safe_has_method(
 		object_: Object,
 		method_: String,
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if not object_ or not is_instance_valid(object_):
 		error_.warn("no object_ at all or it is invalid", "", "", warn_level)
@@ -22,7 +22,7 @@ static func safe_has_method(
 static func safe_has_property(
 		object_: Object,
 		property_name: String,
-		warn_level: String = WL.PUSH_ERROR,
+		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if not object_ or not is_instance_valid(object_):
 		error_.warn("no object_ at all or it is invalid", "", "", warn_level)
@@ -51,7 +51,7 @@ static func safe_object_pp_name(object_: Object) -> String:
 	return str(object_.pp_name()) if safe_has_pp_name(object_) else str(object_)
 
 
-static func is_object_ok(object_: Object, description: String = "", warn_level: String = WL.PUSH_WARN) -> bool:
+static func is_object_ok(object_: Object, description: String = "", warn_level: StringName = WL.PUSH_WARN) -> bool:
 	if not object_ or not is_instance_valid(object_):
 		error_.warn("object is null or not valid", description, "", warn_level)
 		return false

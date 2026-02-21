@@ -5,17 +5,17 @@ extends BaseSignalContainer
 
 ## DANGER: private, use BaseSignalContainer api
 ## fs like
-signal SFX_footstep(payload: Dictionary[String, Variant])
-signal SFX_footstep_light(payload: Dictionary[String, Variant])
-signal SFX_footstep_scrape(payload: Dictionary[String, Variant])
-signal SFX_move_noise(payload: Dictionary[String, Variant])
+signal SFX_footstep(payload: Dictionary[StringName, Variant])
+signal SFX_footstep_light(payload: Dictionary[StringName, Variant])
+signal SFX_footstep_scrape(payload: Dictionary[StringName, Variant])
+signal SFX_move_noise(payload: Dictionary[StringName, Variant])
 ##
-signal SFX_launch(payload: Dictionary[String, Variant])
-signal SFX_land(payload: Dictionary[String, Variant])
-signal SFX_whoosh(payload: Dictionary[String, Variant])
-signal SFX_react_on_hit(payload: Dictionary[String, Variant])
+signal SFX_launch(payload: Dictionary[StringName, Variant])
+signal SFX_land(payload: Dictionary[StringName, Variant])
+signal SFX_whoosh(payload: Dictionary[StringName, Variant])
+signal SFX_react_on_hit(payload: Dictionary[StringName, Variant])
 ##
-signal SFX_unique(payload: Dictionary[String, Variant])
+signal SFX_unique(payload: Dictionary[StringName, Variant])
 
 
 func _get_signal_data_list() -> Array[SignalData]:

@@ -5,7 +5,7 @@ extends CommonArea
 @onready var collision_shape_3d: CollisionShape3D = %CollisionShape3D
 
 
-signal SIG_hit(payload: Dictionary[String, Variant])
+signal SIG_hit(payload: Dictionary[StringName, Variant])
 
 
 var cooldown_sig_emit := Cooldown.new(0.2)
@@ -76,7 +76,7 @@ func _emit_signal(hit_data: HitData):
 	if cooldown_sig_emit.is_cooldown_passed(false, pp_name()):
 		cooldown_sig_emit.mark_time()
 		last_processed_hit_data_id = hit_data.get_instance_id()
-		SigUtils.safe_emit_raw(SIG_hit, {SPS.hit_data_field: hit_data})
+		SigUtils.safe_emit(SIG_hit, {SPS.hit_data_field: hit_data})
 
 
 ##

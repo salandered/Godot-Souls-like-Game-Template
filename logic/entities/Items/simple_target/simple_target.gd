@@ -41,7 +41,7 @@ func _ready() -> void:
 		hit_area.SIG_hit.connect(_on_my_area_hit)
 
 
-func _on_my_area_hit(payload: Dictionary[String, Variant]):
+func _on_my_area_hit(payload: Dictionary[StringName, Variant]):
 	var hit_damage := 10.0
 	var _r := SigUtils.safe_get_variant_payload_value(payload, SPS.hit_data_field, false)
 	if not _r.err and _r.value is HitData:

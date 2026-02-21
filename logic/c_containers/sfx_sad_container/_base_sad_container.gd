@@ -3,8 +3,8 @@ class_name BaseSADContainer
 extends RefCountedSystem
 
 
-var sad_id_to_sad: Dictionary[String, SFXAnimData]
-var anim_sfx_asp_name_to_sad: Dictionary[String, SFXAnimData]
+var sad_id_to_sad: Dictionary[StringName, SFXAnimData]
+var anim_sfx_asp_name_to_sad: Dictionary[StringName, SFXAnimData]
 
 
 ## DOCS
@@ -48,11 +48,11 @@ func _init():
 @abstract func _get_sad_list() -> Array[SFXAnimData]
 
 
-func get_by_sad_id(sad_id: String) -> SFXAnimData:
+func get_by_sad_id(sad_id: StringName) -> SFXAnimData:
 	var _r: SFXAnimData = DictUtils.safe_get_dict_key(sad_id_to_sad, sad_id, null)
 	return _r
 
-func get_by_anim_sfx_asp_name(sfx_asp_name: String) -> SFXAnimData:
+func get_by_anim_sfx_asp_name(sfx_asp_name: StringName) -> SFXAnimData:
 	## it's ok that anim ASP is not found in specific SAD container
 	var _r: SFXAnimData = DictUtils.safe_get_dict_key(anim_sfx_asp_name_to_sad, sfx_asp_name, null, WL.SILENT)
 	return _r

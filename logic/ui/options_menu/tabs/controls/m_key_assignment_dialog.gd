@@ -1,5 +1,6 @@
 extends ConfirmationDialogLogger
 
+
 const LISTENING_TEXT: String = "Listening for input..."
 const FOCUS_HERE_TEXT: String = "Focus here to assign inputs."
 const CONFIRM_INPUT_TEXT: String = "Press again to confirm..."

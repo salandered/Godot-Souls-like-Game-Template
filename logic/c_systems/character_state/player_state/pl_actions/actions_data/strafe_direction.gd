@@ -3,8 +3,8 @@ class_name StrafeDirection
 
 class _DirData:
 	var speed: float
-	var anim_id: String
-	func _init(_speed: float, _anim_id: String):
+	var anim_id: StringName
+	func _init(_speed: float, _anim_id: StringName):
 		speed = _speed
 		anim_id = _anim_id
 
@@ -13,7 +13,16 @@ var _curr_dir: Direction.Dir = Direction.Dir.NEUTRAL
 var _dir_data: Dictionary[Direction.Dir, _DirData] = {}
 
 
-func _init(speed_r: float, anim_r: String, speed_l: float, anim_l: String, speed_f: float, anim_f: String, speed_b: float, anim_b: String, anim_idle: String):
+func _init(
+	speed_r: float,
+	anim_r: StringName, 
+	speed_l: float, 
+	anim_l: StringName, 
+	speed_f: float, 
+	anim_f: StringName, 
+	speed_b: float, 
+	anim_b: StringName, 
+	anim_idle: StringName):
 	_dir_data = {
 		Direction.Dir.NEUTRAL: _DirData.new(0.0, anim_idle), # this anim probably would never play
 		Direction.Dir.FORWARD: _DirData.new(speed_f, anim_f),
@@ -39,7 +48,7 @@ func get_curr_dir() -> Direction.Dir:
 	return _curr_dir
 
 
-func get_curr_anim_id() -> String:
+func get_curr_anim_id() -> StringName:
 	return _dir_data[_curr_dir].anim_id
 
 
@@ -60,8 +69,8 @@ func get_dir_int() -> int:
 	return 0 # should not happen
 
 
-func get_all_anim_ids() -> Array[String]:
-	var anims: Array[String] = []
+func get_all_anim_ids() -> Array[StringName]:
+	var anims: Array[StringName] = []
 	for data in _dir_data.values():
 		if not data.anim_id in anims:
 			anims.append(data.anim_id)
@@ -93,6 +102,7 @@ static func __both_in_group(dir_1, dir_2, group: Array) -> bool:
 
 func pp_curr_dir() -> String:
 	return pp_dir_name(_curr_dir)
+
 
 static func pp_dir_name(dir: Direction.Dir) -> String:
 	return Direction.name_(dir)

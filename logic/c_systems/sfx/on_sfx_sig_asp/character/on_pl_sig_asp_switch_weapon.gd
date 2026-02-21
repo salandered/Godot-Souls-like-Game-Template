@@ -6,13 +6,13 @@ const SWITCH_SMITH_SWORD = preload("uid://c4hbub3v7if2p")
 const SWITCH_SMALL_PINGA = preload("uid://dgcim7fnpxwu8")
 
 
-var weapon_id_to_asp_config: Dictionary[String, ASP3DConfig] = {
+var weapon_id_to_asp_config: Dictionary[StringName, ASP3DConfig] = {
 	WeaponID.smith_sword: ASP3DConfig.new(0.0, -0.0, 5.0, 15.0, 2, 1.0, BusID.GAME_SFX, SWITCH_SMITH_SWORD, 0.12),
 	WeaponID.small_pinga_blade: ASP3DConfig.new(0.0, -0.3, 5.0, 15.0, 2, 1.0, BusID.GAME_SFX, SWITCH_SMALL_PINGA, 0.15),
 }
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	var mute: bool = false
 	var weapon_id := get_weapon_id_from_payload(payload)
 

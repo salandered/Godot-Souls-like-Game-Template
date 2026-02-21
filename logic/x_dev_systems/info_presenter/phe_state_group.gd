@@ -42,9 +42,9 @@ func _supported_signal_pairs() -> Array[Array]:
 	return sig_to_handler
 
 
-func _on_SIG_phe_state_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_phe_state_changed(payload: Dictionary[StringName, Variant]):
 	var tag := _get_SIG_string_payload(payload, SPS.tag_field, {})
-	if tag != "demo_enemy":
+	if tag != Constants.DEMO_ENEMY_TAG:
 		return
 	var h_state_data := _get_SIG_h_state_data(payload)
 	var selected_label: DynamicInfoLabel = DictUtils.safe_get_dict_key(depth_to_label, h_state_data.state_depth)
@@ -56,7 +56,7 @@ func _on_SIG_phe_state_changed(payload: Dictionary[String, Variant]):
 	selected_label.set_label_text(pp_string, dlc_all_features_preset)
 
 
-func _on_SIG_phe_state_reset(payload: Dictionary[String, Variant]):
+func _on_SIG_phe_state_reset(payload: Dictionary[StringName, Variant]):
 	var h_state_data := _get_SIG_h_state_data(payload)
 	var selected_label: DynamicInfoLabel = DictUtils.safe_get_dict_key(depth_to_label, h_state_data.state_depth)
 	if not selected_label:
@@ -67,7 +67,7 @@ func _on_SIG_phe_state_reset(payload: Dictionary[String, Variant]):
 	selected_label.set_label_text("", dlc_all_features_preset)
 		
 
-func _on_SIG_enemy_reacted_on_hit(payload: Dictionary[String, Variant]):
+func _on_SIG_enemy_reacted_on_hit(payload: Dictionary[StringName, Variant]):
 	_on_SIG_react_on_hit(phe_reaction_info, payload, _str_react_replacers, dlc_all_features_preset)
 
 

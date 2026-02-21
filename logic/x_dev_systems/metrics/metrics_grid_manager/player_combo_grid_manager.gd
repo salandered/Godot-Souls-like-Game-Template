@@ -31,7 +31,7 @@ func initialise_implementation() -> void:
 	super.initialise_implementation()
 
 
-func _on_SIG_player_combo_triggered(payload: Dictionary[String, Variant]):
+func _on_SIG_player_combo_triggered(payload: Dictionary[StringName, Variant]):
 	var _r_state := SigUtils.safe_get_string_payload_value(payload, SPS.state_name_field)
 	if _r_state.err: return
 	var _r_triggered_state := SigUtils.safe_get_string_payload_value(payload, SPS.triggered_state_field)

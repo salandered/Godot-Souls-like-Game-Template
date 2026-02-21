@@ -36,7 +36,7 @@ extends BaseEnemyCharacter
 var state_machine: BasePHEState
 
 const BREADCRUMB_SIZE = 10
-var _state_history: Array[String] = []
+var _state_history: Array[StringName] = []
 
 # TODO: some system for flags. (or alternative with events)
 # if any state works longer than fatigue, flag is raised. 
@@ -96,7 +96,7 @@ func __soft_dependencies() -> Array:
 
 @abstract func initialise_phe_char_implementation() -> void
 
-@abstract func get_initial_leaf_state_name() -> String
+@abstract func get_initial_leaf_state_name() -> StringName
 
 @abstract func get_visuals_root() -> Node3D
 
@@ -176,7 +176,7 @@ func get_current_substate_by_depth(depth: int) -> BasePHEState:
 	return state_machine.get_current_substate_by_depth(depth)
 
 
-func get_prev_state_name() -> String:
+func get_prev_state_name() -> StringName:
 	return _prev_leaf.state_name
 
 
@@ -185,7 +185,7 @@ func get_player() -> Princess:
 
 
 ## returns newly shifted previous leaf state name
-func update_curr_leaf_state(next_state: BasePHELeaf) -> String:
+func update_curr_leaf_state(next_state: BasePHELeaf) -> StringName:
 	var curr_state_name := _curr_leaf.state_name
 	var next_state_name := next_state.state_name
 
@@ -205,7 +205,7 @@ func get_curr_leaf_state() -> BasePHELeaf:
 	return _curr_leaf
 
 
-func update_state_history(state_name_: String):
+func update_state_history(state_name_: StringName):
 	_state_history.append(state_name_)
 	if _state_history.size() > BREADCRUMB_SIZE:
 		_state_history.pop_front()
@@ -261,7 +261,7 @@ func _on_death_raised() -> void:
 	angry_raised = false
 	death_raised = false
 	
-	SigUtils.safe_emit_raw_no_payload(SIG_death_raised)
+	SigUtils.safe_emit_no_payload(SIG_death_raised)
 
 	print_.prefix("camera_target.make_inactive()")
 	camera_target.make_inactive()
@@ -318,20 +318,20 @@ func __pp_state_history():
 
 ##
 
-func get_run_state_names() -> Array[String]:
+func get_run_state_names() -> Array[StringName]:
 	return []
 
-func get_dodge_state_names() -> Array[String]:
+func get_dodge_state_names() -> Array[StringName]:
 	return []
 
-func get_sprint_state_names() -> Array[String]:
+func get_sprint_state_names() -> Array[StringName]:
 	return []
 
-func get_idle_state_names() -> Array[String]:
+func get_idle_state_names() -> Array[StringName]:
 	return []
 
 
-func get_power_attacks_state_names() -> Array[String]:
+func get_power_attacks_state_names() -> Array[StringName]:
 	return [
 	   ]
 
@@ -341,7 +341,7 @@ func get_power_attacks_state_names() -> Array[String]:
 const AIR_WAVE_2 = preload("uid://cxfgvp3futm7q")
 
 
-func _on_sig_land_wave(char_glob_position: Vector3, anim: String) -> void:
+func _on_sig_land_wave(char_glob_position: Vector3, anim: StringName) -> void:
 	if not AIR_WAVE_2:
 		return
 

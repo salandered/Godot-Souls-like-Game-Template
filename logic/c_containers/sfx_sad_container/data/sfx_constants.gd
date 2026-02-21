@@ -5,46 +5,47 @@ extends RefCounted
 const anim_asp_prefix = "AAnim"
 
 
-## todo: used as but not checked
+## todo: used as ID but not checked
 class ID_:
 	## fs like
-	const footstep := "footstep"
-	const footstep_bass := "footstep_bass"
-	const footstep_light := "footstep_light"
-	const footstep_scrape := "footstep_scrape"
-	const move_noise := "move_noise"
-	const jingles := "jingles"
+	const footstep := &"footstep"
+	const footstep_bass := &"footstep_bass"
+	const footstep_light := &"footstep_light"
+	const footstep_scrape := &"footstep_scrape"
+	const move_noise := &"move_noise"
+	const jingles := &"jingles"
 	
 	##
-	const launch := "launch"
-	const land := "land"
-	const whoosh_char := "whoosh_char"
+	const launch := &"launch"
+	const land := &"land"
+	const whoosh_char := &"whoosh_char"
 
 	##
-	const react_on_hit := "react_on_hit"
+	const react_on_hit := &"react_on_hit"
 
 	## weapon
-	const whoosh_weapon := "whoosh_weapon"
-	const hit_weapon := "hit_weapon"
-	const hit_target := "hit_target"
+	const whoosh_weapon := &"whoosh_weapon"
+	const hit_weapon := &"hit_weapon"
+	const hit_target := &"hit_target"
 
 
 	## unique
-	const unique := "unique"
+	const unique := &"unique"
 	##
-	const switch_weapon := "switch_weapon"
+	const switch_weapon := &"switch_weapon"
 
 
 ## 
-const modifier_key = "modifier"
-const unique_key = "unique"
-const weapon_id_key = "weapon_id"
+const modifier_key = &"modifier"
+const unique_key = &"unique"
+const weapon_id_key = &"weapon_id"
 
 
 class Modifier:
-	const light := "light"
+	const light := &"light"
+
 
 class Unique:
-	const phase_switch := "phase_switch"
-	const accomplish := "accomplish"
-	const player_dead := "player_dead"
+	const phase_switch := &"phase_switch"
+	const accomplish := &"accomplish"
+	const player_dead := &"player_dead"

@@ -10,7 +10,7 @@ extends FighterArmWeapon
 func get_weapon_hurt_box() -> WeaponHurtBox:
 	return v_arm_weapon_hurt_box
 
-func get_weapon_id() -> String:
+func get_weapon_id() -> StringName:
 	return WeaponID.fighter_v_arm
 
 

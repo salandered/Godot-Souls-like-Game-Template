@@ -26,31 +26,6 @@ static func wait_time(min_seconds: float = 0.5, max_seconds: float = 2.0) -> flo
 	return randf_range(min_seconds, max_seconds)
 
 
-## 
-
-## Returns true if should attack based on aggression level (0.0 to 1.0)
-static func should_attack(aggression: float) -> bool:
-	return randf() < aggression
-
-## Returns random attack pattern from available attacks
-static func attack_pattern(available_attacks: Array[String]) -> String:
-	return pick_random_array(available_attacks)
-
-## Returns true if enemy should change behavior based on boredom factor
-static func should_change_behavior(boredom_threshold: float = 0.3) -> bool:
-	return randf() < boredom_threshold
-
-## Returns random state duration for state machine
-static func state_duration(min_time: float = 1.0, max_time: float = 3.0) -> float:
-	return randf_range(min_time, max_time)
-
-## Returns true if should perform special action based on distance to player
-static func distance_triggered_action(distance: float, min_distance: float, max_distance: float, probability: float = 0.2) -> bool:
-	if distance < min_distance or distance > max_distance:
-		return false
-	return randf() < probability
-
-
 ## Angle
 # region
 
@@ -126,6 +101,19 @@ static func spick_weighted(weighted_values: Dictionary[String, float]) -> String
 	
 	return pick_weighted(keys, values)
 
+
+static func snpick_weighted(weighted_values: Dictionary[StringName, float]) -> String:
+	if weighted_values.is_empty():
+		return ""
+	
+	var keys: Array[StringName] = []
+	var values: Array[float] = []
+	for key in weighted_values.keys():
+		keys.append(key)
+		values.append(weighted_values[key])
+	
+	return pick_weighted(keys, values)
+
 # endregion
 
 
@@ -153,7 +141,12 @@ static func spick_random(...elements: Array) -> String:
 	return spick_random_array(_elements)
 
 
-## returns 0 of empty
+static func snpick_random(...elements: Array) -> StringName:
+	var _elements: Array[StringName] = TypeCast.array_of_string_name(elements)
+	return _pick_random(_elements)
+
+
+## returns 0 if empty
 static func ipick_random_array(array: Array[int]) -> int:
 	if array.is_empty():
 		return 0
@@ -177,7 +170,7 @@ static func fpick_random(...elements: Array) -> float:
 	return fpick_random_array(_elements)
 
 
-static func _pick_random(array: Array):
+static func _pick_random(array: Array) -> Variant:
 	return array[randi_range(0, array.size() - 1)]
 
 # endregion

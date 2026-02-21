@@ -11,7 +11,7 @@ var __monitors: Array[PHEHelpers.MonitorFor] = [
 ]
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [
 			PHES.combat_loco,
 			PHES.combat_attacking,
@@ -31,7 +31,7 @@ func on_exit_state() -> void:
 
 # todo: swith from this primitive implementation to meta states (see player)
 var major_hit_just_received: bool = false
-var major_hit_react_state: String = ""
+var major_hit_react_state: StringName = ""
 
 func react_on_hit(hit_data: HitData) -> void:
 	var _curr_sbs := get_current_substate()
@@ -49,7 +49,7 @@ func react_on_hit(hit_data: HitData) -> void:
 		_curr_sbs.react_on_hit(hit_data)
 
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	var dist := distance_to_player()
 	
 	match current_substate.state_name:
@@ -161,7 +161,7 @@ func _phase_switch_check() -> bool:
 	return phe_feelings.is_lower_to_switch_phase()
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	_next_state = PHES.combat_loco
 	if __ELA(): _reason += "initial is combat_loco"
 

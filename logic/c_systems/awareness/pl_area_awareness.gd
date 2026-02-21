@@ -65,13 +65,13 @@ func contextualize(new_input: InputPackage) -> InputPackage:
 # }
 
 
-const TO_STRAFE_MAP: Dictionary[String, String] = {
+const TO_STRAFE_MAP: Dictionary[StringName, StringName] = {
 	PS.run: PS.strafe,
 	PS.jump_sprint: PS.dodge,
 }
 
 
-func _apply_translation(new_input: InputPackage, translation_map: Dictionary[String, String]):
+func _apply_translation(new_input: InputPackage, translation_map: Dictionary[StringName, StringName]):
 	for i in range(new_input.actions.size()):
 		var current_action := new_input.actions[i]
 		

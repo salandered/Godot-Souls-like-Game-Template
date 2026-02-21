@@ -8,7 +8,7 @@ class_name PlRequiredMarkers
 ## Using this at least we know on start up if something. it's a temporary measure.
 ## 'Required' means that SM won't work properly without anim having this marker.
 
-static var anim_to_required_marker: Dictionary[String, Array] = {
+static var anim_to_required_marker: Dictionary[StringName, Array] = {
 
 	## one time
 	# TODO: add deeath # A.death: [],

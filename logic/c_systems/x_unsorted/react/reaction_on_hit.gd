@@ -3,11 +3,11 @@ extends RefCounted
 
 
 class ReactionConfig:
-	var anim_id: String
+	var anim_id: StringName
 	var overlay_weight: float
 	var bone_mask: Array[int]
 
-	func _init(anim_id_: String, overlay_weight_: float, bone_mask_: Array[int]) -> void:
+	func _init(anim_id_: StringName, overlay_weight_: float, bone_mask_: Array[int]) -> void:
 		self.anim_id = anim_id_
 		self.overlay_weight = overlay_weight_
 		self.bone_mask = bone_mask_
@@ -16,7 +16,7 @@ class ReactionConfig:
 		return "anim_id: %s, wght: %.2f, %s" % [anim_id, overlay_weight, pp.bone_mask_(bone_mask)]
 
 
-static var attack_dir_to_enemy_overlay_anim: Dictionary[AttackDirection.Dir, String] = {
+static var attack_dir_to_enemy_overlay_anim: Dictionary[AttackDirection.Dir, StringName] = {
 	AttackDirection.Dir.LEFT: PHEA.react.react_from_L,
 	AttackDirection.Dir.RIGHT: PHEA.react.react_from_R,
 	AttackDirection.Dir.UP: PHEA.react.body_impact,
@@ -24,7 +24,7 @@ static var attack_dir_to_enemy_overlay_anim: Dictionary[AttackDirection.Dir, Str
 	AttackDirection.Dir.STAB: PHEA.react.react_gut,
 	}
 
-static var attack_dir_to_pl_overlay_anim: Dictionary[AttackDirection.Dir, String] = {
+static var attack_dir_to_pl_overlay_anim: Dictionary[AttackDirection.Dir, StringName] = {
 	AttackDirection.Dir.LEFT: A.react.react_from_L,
 	AttackDirection.Dir.RIGHT: A.react.react_from_R,
 	AttackDirection.Dir.UP: A.react.head_B_large,
@@ -35,7 +35,7 @@ static var attack_dir_to_pl_overlay_anim: Dictionary[AttackDirection.Dir, String
 
 # todo: probably states as keys, not raw animations
 ## here listed only attacks which causes interrupt states
-static var enemy_attack_to_pl_state_interruption: Dictionary[String, String] = {
+static var enemy_attack_to_pl_state_interruption: Dictionary[StringName, StringName] = {
 	PHEA.attack.attack_360_low: PS.thrown,
 	PHEA.attack.attack_up: PS.pushback,
 	PHEA.attack.power_gap_closer: PS.thrown,
@@ -51,7 +51,7 @@ static var enemy_attack_to_pl_state_interruption: Dictionary[String, String] = {
 
 
 ## here listed only attacks which causes interrupt states
-static var pl_attack_to_enemy_state_interruption: Dictionary[String, Array] = {
+static var pl_attack_to_enemy_state_interruption: Dictionary[StringName, Array] = {
 	A.attack.sword_slash_3: [PHES.Leaf.pushback, 1.0],
 	A.attack.axe_slice_1: [PHES.Leaf.pushback, 0.3],
 	A.attack.axe_slice_2: [PHES.Leaf.pushback_2, 0.4],
@@ -60,14 +60,14 @@ static var pl_attack_to_enemy_state_interruption: Dictionary[String, Array] = {
 
 
 ## only actions. If not mentioned - will be default values
-static var player_muted_action: Array[String] = [PS.Act.death, PS.Act.double, Leg.Act.double]
+static var player_muted_action: Array[StringName] = [PS.Act.death, PS.Act.double, Leg.Act.double]
 
 ## only leafes. If not mentioned - will be default values
-static var enemy_muted_states: Array[String] = [PHES.Leaf.death, PHES.Leaf.phase_switch] # PHES.Leaf.sleep] dev
+static var enemy_muted_states: Array[StringName] = [PHES.Leaf.death, PHES.Leaf.phase_switch] # PHES.Leaf.sleep] dev
 
 
 ## nullable
-static func calculate_reaction_for_pl_action(hit: HitData, curr_action: String) -> ReactionConfig:
+static func calculate_reaction_for_pl_action(hit: HitData, curr_action: StringName) -> ReactionConfig:
 	if curr_action in player_muted_action:
 		__log_("Player reaction muted. Action:", curr_action, "Hit:", hit.anim_id)
 		return null
@@ -77,7 +77,7 @@ static func calculate_reaction_for_pl_action(hit: HitData, curr_action: String) 
 	else:
 		overlay_weight = _pick_overlay_weight(hit, Constants.ENEMY_MAX_HIT_DAMAGE - 0.5)
 	
-	var anim_id_: String
+	var anim_id_: StringName
 	anim_id_ = _pick_react_anim_for_player(hit)
 
 	var bone_mask := _pick_bone_mask_for_player(hit, curr_action)
@@ -88,7 +88,7 @@ static func calculate_reaction_for_pl_action(hit: HitData, curr_action: String) 
 
 
 ## nullable
-static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: String) -> ReactionConfig:
+static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: StringName) -> ReactionConfig:
 	if curr_leaf_state in enemy_muted_states:
 		__log_("Enemy reaction muted. State:", curr_leaf_state, "Hit:", hit.anim_id)
 		return null
@@ -98,7 +98,7 @@ static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: String) 
 	else:
 		overlay_weight = _pick_overlay_weight(hit, Constants.PLAYER_MAX_HIT_DAMAGE)
 	
-	var anim_id_: String
+	var anim_id_: StringName
 	anim_id_ = _pick_react_anim_for_enemy(hit)
 
 	var bone_mask := _pick_bone_mask_for_enemy(hit, curr_leaf_state)
@@ -112,13 +112,13 @@ static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: String) 
 # region
 
 
-static func _pick_react_anim_for_enemy(hit_from_player: HitData) -> String:
+static func _pick_react_anim_for_enemy(hit_from_player: HitData) -> StringName:
 	var _anim_id = DictUtils.safe_get_dict_key(
 		attack_dir_to_enemy_overlay_anim,
 		hit_from_player.attack_dir,
 		PHEA.react.react_from_R)
 	__log_("pl attack Dir", AttackDirection.name_(hit_from_player.attack_dir), "-> Ovrl anim", _anim_id)
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 	GlobalSignal.SIG_enemy_reacted_on_hit, {
 		SPS.attack_dir_field: AttackDirection.name_(hit_from_player.attack_dir),
 		SPS.interruption_field: false,
@@ -127,13 +127,13 @@ static func _pick_react_anim_for_enemy(hit_from_player: HitData) -> String:
 	return _anim_id
 
 
-static func _pick_react_anim_for_player(hit_from_enemy: HitData) -> String:
-	var _anim_id: String = DictUtils.safe_get_dict_key(
+static func _pick_react_anim_for_player(hit_from_enemy: HitData) -> StringName:
+	var _anim_id: StringName = DictUtils.safe_get_dict_key(
 		attack_dir_to_pl_overlay_anim,
 		hit_from_enemy.attack_dir,
 		A.react.react_from_R)
 	__log_("e attack Dir", AttackDirection.name_(hit_from_enemy.attack_dir), "-> Ovrl anim", _anim_id)
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 		GlobalSignal.SIG_player_reacted_on_hit, {
 			SPS.attack_dir_field: AttackDirection.name_(hit_from_enemy.attack_dir),
 			SPS.interruption_field: false,
@@ -164,12 +164,12 @@ static func _pick_overlay_weight(hit: HitData, max_damage: float) -> float:
 
 
 ## if not mentioned - will be default
-static var enemy_state_to_bone_mask: Dictionary[String, Array] = {
+static var enemy_state_to_bone_mask: Dictionary[StringName, Array] = {
 	PHES.Leaf.combat_idle: BoneMask.get_full_body_no_root()
 	}
 
 
-static func _pick_bone_mask_for_enemy(hit: HitData, state_name: String) -> Array[int]:
+static func _pick_bone_mask_for_enemy(hit: HitData, state_name: StringName) -> Array[int]:
 	var _bone_mask: Array[int]
 	_bone_mask = DictUtils.safe_get_dict_key(enemy_state_to_bone_mask, state_name, BoneMask.get_upper_body(), WL.SILENT)
 	__log_("EState", pp.in_q(state_name), "->", pp.bone_mask_(_bone_mask))
@@ -182,7 +182,7 @@ static var player_action_to_bone_mask = {
 	}
 
 
-static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Array[int]:
+static func _pick_bone_mask_for_player(hit: HitData, action_name: StringName) -> Array[int]:
 	var _bone_mask: Array[int]
 	_bone_mask = DictUtils.safe_get_dict_key(player_action_to_bone_mask, action_name, BoneMask.get_upper_body_with_hips(), WL.SILENT)
 	__log_("PLAction", pp.in_q(action_name), "->", pp.bone_mask_(_bone_mask))
@@ -196,13 +196,13 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: String) -> Arr
 
 
 ## return "" if no reaction calculated
-static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
-	var _pl_state: String
+static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> StringName:
+	var _pl_state: StringName
 	_pl_state = DictUtils.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
 
 	if _pl_state != "":
-		SigUtils.safe_emit_raw(
+		SigUtils.safe_emit(
 			GlobalSignal.SIG_player_reacted_on_hit, {
 				SPS.attack_dir_field: AttackDirection.name_(hit_from_enemy.attack_dir),
 				SPS.interruption_field: true,
@@ -212,13 +212,13 @@ static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> String:
 	return _pl_state
 
 ## may return ""
-static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
+static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> StringName:
 	var _e_state = ""
 	if hit_from_pl.anim_id in [A.attack.stab_attack_1, A.attack.stab_attack_2]:
-		if hit_from_pl.weapon_name == WeaponID.smith_sword:
+		if hit_from_pl.weapon_id == WeaponID.smith_sword:
 			pass
 		else: # if small pinga, we push
-			_e_state = PHES.Leaf.pushback_2 if ra.chance(0.6) else ""
+			_e_state = PHES.Leaf.pushback_2 if ra.chance(0.6) else &""
 	else:
 	## usual logic
 		var _e_state_and_probability: Array
@@ -227,7 +227,7 @@ static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> String:
 		__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
 			pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))
 	if _e_state != "":
-		SigUtils.safe_emit_raw(
+		SigUtils.safe_emit(
 			GlobalSignal.SIG_enemy_reacted_on_hit, {
 				SPS.attack_dir_field: AttackDirection.name_(hit_from_pl.attack_dir),
 				SPS.interruption_field: true,

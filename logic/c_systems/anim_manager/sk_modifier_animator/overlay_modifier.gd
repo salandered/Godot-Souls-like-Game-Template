@@ -13,6 +13,11 @@ var _bone_idx_to_track: Dictionary[int, String] = {}
 var __custom_delta: CustomDelta = CustomDelta.new()
 
 
+const duration = &"duration"
+const elapsed = &"elapsed"
+const start_w = &"start_w"
+const start_hips_w = &"start_hips_w"
+
 class OverlayInstance extends RefCounted:
 	var playback: AnimPlayback
 	var timing: OverlayTiming
@@ -21,7 +26,8 @@ class OverlayInstance extends RefCounted:
 	var curr_weight: float = 0.0
 	var curr_hips_weight: float = 0.0
 
-	var forced_fade: Dictionary[String, Variant] = {}
+	# TODO: use struct
+	var forced_fade: Dictionary[StringName, Variant] = {}
 
 	func _init(playback_: AnimPlayback, timing_: OverlayTiming, bone_mask_: Array[int], speed_: float):
 		self.playback = playback_
@@ -36,10 +42,10 @@ class OverlayInstance extends RefCounted:
 
 	func start_forced_fade(fade_duration: float, current_w: float, current_hips_w: float):
 		forced_fade = {
-			"duration": max(fade_duration, 0.01), # prevents / 0
-			"elapsed": 0.0,
-			"start_w": current_w,
-			"start_hips_w": current_hips_w
+			duration: max(fade_duration, 0.01), # prevents / 0
+			elapsed: 0.0,
+			start_w: current_w,
+			start_hips_w: current_hips_w
 		}
 	func is_forced_fade_finished() -> bool:
 		return not forced_fade.is_empty() and forced_fade.elapsed >= forced_fade.duration

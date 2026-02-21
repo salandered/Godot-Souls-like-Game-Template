@@ -27,7 +27,7 @@ func _initialise_implementation() -> void:
 	_update_metric(ts_curr_sbs_4, DEF_NO_VALUE)
 
 	_char_type = DVS.CharacterType.HSM_ENEMY
-	_character = Groups.get_first_phe_bg_by_group_with_tag(self , "demo_enemy")
+	_character = Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
 	if not _character:
 		__log_warn_soft("get_first_phe_bg_by_group returned null")
 

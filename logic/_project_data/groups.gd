@@ -60,7 +60,10 @@ static func get_phe_bg_by_group(for_whom: Node) -> Array[BigGuyCharacter]:
 			filtered.append(item)
 	return filtered
 
-static func get_first_phe_bg_by_group_with_tag(for_whom: Node, tag: String) -> BigGuyCharacter:
+
+
+
+static func get_first_phe_bg_by_group_with_tag(for_whom: Node, tag: StringName) -> BigGuyCharacter:
 	var e_s := for_whom.get_tree().get_nodes_in_group(Groups.Chars.BIG_GUY)
 	for item in e_s:
 		if item is BigGuyCharacter:

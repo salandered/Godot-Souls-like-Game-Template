@@ -14,43 +14,43 @@ func is_player() -> bool:
 	return true
 
 
-func _get_actions_by_state(state: String, states_container: StatesContainer) -> Array[StatesContainer._PlActionData]:
+func _get_actions_by_state(state_name: StringName, states_container: StatesContainer) -> Array[StatesContainer._PlActionData]:
 	var result: Array[StatesContainer._PlActionData] = []
 	for action_data: StatesContainer._PlActionData in states_container.pl_action_data_list:
-		if action_data.state_name == state:
+		if action_data.state_name == state_name:
 			result.append(action_data)
 
 	for action_data: StatesContainer._PlActionData in states_container.node_to_pl_action.values():
-		if action_data.state_name == state:
+		if action_data.state_name == state_name:
 			result.append(action_data)
 	return result
 
 
-var _states: Dictionary[String, BasePlayerState]
+var _states: Dictionary[StringName, BasePlayerState]
 
-var _player_actions: Dictionary[String, PlayerAction]
+var _player_actions: Dictionary[StringName, PlayerAction]
 
-var _legs_behaviors: Dictionary[String, LegsBehavior]
+var _legs_behaviors: Dictionary[StringName, LegsBehavior]
 
-var _leg_actions: Dictionary[String, LegsAction]
+var _leg_actions: Dictionary[StringName, LegsAction]
 
 
 ## nullable
-func state_by_name(state_name: String) -> BasePlayerState:
+func state_by_name(state_name: StringName) -> BasePlayerState:
 	var _r: BasePlayerState = DictUtils.safe_get_dict_key(_states, state_name, null)
 	return _r
 
 
-func pl_action_by_name(action_name: String) -> PlayerAction:
+func pl_action_by_name(action_name: StringName) -> PlayerAction:
 	var _r: PlayerAction = DictUtils.safe_get_dict_key(_player_actions, action_name, null)
 	return _r
 
 
-func l_behavior_by_name(behavior_name: String) -> LegsBehavior:
+func l_behavior_by_name(behavior_name: StringName) -> LegsBehavior:
 	var _r: LegsBehavior = DictUtils.safe_get_dict_key(_legs_behaviors, behavior_name, null)
 	return _r
 
-func l_action_by_name(action_name: String) -> LegsAction:
+func l_action_by_name(action_name: StringName) -> LegsAction:
 	var _r: LegsAction = DictUtils.safe_get_dict_key(_leg_actions, action_name, null)
 	return _r
 
@@ -88,7 +88,7 @@ func _accept_player_states() -> void:
 
 	for child: BasePlayerState in get_descendants.player_states(_player.player_sm):
 		__log_("", "child.get_name() " + child.get_name())
-		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.get_name())
+		var state_data: StatesContainer._StateData = states_container.node_to_pl_state_data.get(child.name)
 		if not state_data:
 			__log_warn("No state data found for: " + child.get_name(), "_accept_player_states", "Will be skipped")
 			continue
@@ -160,7 +160,7 @@ func _accept_player_actions():
 	
 	for child: PlayerAction in get_descendants.player_actions(_player.player_sm):
 		__log_("pl_act", "child.get_name() " + child.get_name())
-		var action_data: StatesContainer._PlActionData = states_container.node_to_pl_action.get(child.get_name())
+		var action_data: StatesContainer._PlActionData = states_container.node_to_pl_action.get(child.name)
 		
 		_player_actions[action_data.action_name] = child
 
@@ -199,7 +199,7 @@ func _accept_legs_behaviors():
 	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsBehavior in get_descendants.legs_behaviors(get_leg_sm()):
 		__log_("", "node.get_name() " + child.get_name())
-		var behavior_data: LegBehaviorContainer._BehaviorData = leg_beh_container.node_to_l_behavior_data[child.get_name()]
+		var behavior_data: LegBehaviorContainer._BehaviorData = leg_beh_container.node_to_l_behavior_data[child.name]
 		if not behavior_data:
 			__log_warn("No behavior data found for: " + child.get_name() + " Will be skipped")
 			continue
@@ -223,7 +223,7 @@ func _accept_legs_actions():
 	var leg_beh_container := LegBehaviorContainer.new()
 	for child: LegsAction in get_descendants.legs_actions(get_leg_sm()):
 		__log_("", "node.get_name() " + child.get_name())
-		var action_data: LegBehaviorContainer._LActionData = leg_beh_container.node_to_l_action_data.get(child.get_name())
+		var action_data: LegBehaviorContainer._LActionData = leg_beh_container.node_to_l_action_data.get(child.name)
 		if not action_data:
 			__log_warn("No action data found for: " + child.get_name() + " Will be skipped")
 			continue
@@ -238,9 +238,9 @@ func _accept_legs_actions():
 			__log_error("No action_name assigned for legs action: " + child.get_name())
 
 
-func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
+func states_sort_by_priority(state_names: Array[StringName]) -> Array[StringName]:
 	# 0 means lowest
-	var _safe_sorted: Array[String]
+	var _safe_sorted: Array[StringName]
 	for item in state_names:
 		if DictUtils.safe_has_key(_states, item, WL.WARN_CRUCIAL):
 			_safe_sorted.append(item)
@@ -248,7 +248,7 @@ func states_sort_by_priority(state_names: Array[String]) -> Array[String]:
 	return _safe_sorted
 
 
-func _states_priority_sort(a: String, b: String) -> bool:
+func _states_priority_sort(a: StringName, b: StringName) -> bool:
 	if _states[a].priority > _states[b].priority:
 		return true
 	else:

@@ -10,7 +10,7 @@ var legs_sm: LegsSM # set by SM
 var combat: PlayerCombat
 var player_state: BasePlayerState # set by SM when switching
 
-var behavior_name: String
+var behavior_name: StringName
 
 var supported_actions: SupportedActions
 
@@ -120,7 +120,7 @@ func is_switch_from_unsupported_action() -> bool:
 
 # endregion
 
-func __log_decision_data(input_: InputPackage, next_action_name: String, ...additional_checks: Array):
+func __log_decision_data(input_: InputPackage, next_action_name: StringName, ...additional_checks: Array):
 	var _curr_motion_type := get_curr_action().motion_type
 	print_.lsm_beh_ch(behavior_name,
 		_curr_motion_type,

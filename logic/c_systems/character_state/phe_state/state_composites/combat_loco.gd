@@ -31,7 +31,7 @@ func initialise() -> void:
 			__will_do_monitors.append(m)
 				
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [
 			PHES.Leaf.pursue,
 			PHES.Leaf.orbit,
@@ -75,7 +75,7 @@ func on_exit_state() -> void:
 	u.reset_all(__monitors)
 
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	var dist := distance_to_player()
 
 	match current_substate.state_name:
@@ -219,7 +219,7 @@ func _all_will_do_is_done() -> bool:
 	return true
 
 
-func _distance_to_pursue_sbs(_next_state: String, _reason: String) -> VerdictPH:
+func _distance_to_pursue_sbs(_next_state: StringName, _reason: String) -> VerdictPH:
 	var dist := distance_to_player()
 	if dist > config.REAL_FAR():
 		if __ELA(): _reason += "dist > REAL_FAR"
@@ -257,7 +257,7 @@ func _distance_to_pursue_sbs(_next_state: String, _reason: String) -> VerdictPH:
 	return VerdictPH.new(_next_state, _reason)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	var _verdict := _distance_to_pursue_sbs(_next_state, _reason)
 	_next_state = _verdict.next_state
 	if __ELA(): _reason += _verdict._reason

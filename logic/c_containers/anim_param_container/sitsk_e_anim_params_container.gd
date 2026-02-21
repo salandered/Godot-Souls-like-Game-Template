@@ -35,8 +35,8 @@ const TRACK_PREFIXES: Array[String] = [
 #####################
 
 	
-func is_weapon_hurts(weapon_name: String, anim: Animation, timestamp: float) -> bool:
-	match weapon_name:
+func is_weapon_hurts(weapon_id: StringName, anim: Animation, timestamp: float) -> bool:
+	match weapon_id:
 		WeaponID.bg_aura_weapon:
 			return _is_aura_hurts(anim, timestamp)
 		_:

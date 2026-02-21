@@ -23,7 +23,7 @@ func _supported_signal_pairs() -> Array[Array]:
 	return sig_to_handler
 
 
-func _on_SIG_player_weapon_hit_data_set(payload: Dictionary[String, Variant]):
+func _on_SIG_player_weapon_hit_data_set(payload: Dictionary[StringName, Variant]):
 	# __log_("_on_SIG_player_weapon_hit_data_set", payload)
 	_on_SIG_hit_data_payload(
 		player_attack_damage,

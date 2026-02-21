@@ -9,7 +9,7 @@ var RUN_START_FOOTSTEP_VOL_DECREASE: float = 2.0
 var RUN_TIME_TO_LOWER_FOOTSTEP_VOL: float = 0.5
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	var _curr_state := get_curr_state()
 	if _curr_state == null:
 		pass

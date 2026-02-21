@@ -5,9 +5,9 @@ class_name ActionModeSwitcher
 class Preset extends RefCounted:
 	var mode_name: String
 	var speed: float
-	var anim_id: String
+	var anim_id: StringName
 
-	func _init(mode_name_: String, speed_: float, anim_id_: String):
+	func _init(mode_name_: String, speed_: float, anim_id_: StringName):
 		self.mode_name = mode_name_
 		self.speed = speed_
 		self.anim_id = anim_id_
@@ -44,7 +44,7 @@ func _get_current_preset() -> Preset:
 func get_curr_speed() -> float:
 	return _get_current_preset().speed
 
-func get_curr_anim_id() -> String:
+func get_curr_anim_id() -> StringName:
 	return _get_current_preset().anim_id
 
 # internal enum (ONE or TWO) of the current mode
@@ -80,7 +80,7 @@ func set_mode_raw(mode: MODE_NAME):
 	_curr_mode = mode
 
 
-func get_all_anim_ids() -> Array[String]:
+func get_all_anim_ids() -> Array[StringName]:
 	return [_preset_one.anim_id, _preset_two.anim_id]
 
 

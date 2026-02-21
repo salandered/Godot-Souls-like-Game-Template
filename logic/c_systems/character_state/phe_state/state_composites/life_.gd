@@ -1,7 +1,7 @@
 extends BasePHEComposite
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [
 			PHES.still_life_phase,
 			PHES.combat_phase,
@@ -30,7 +30,7 @@ func _check_started_falling(current_substate: BasePHEState) -> bool:
 	return true
 
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	## NOTE: _external_events are unique to life. Thats why here we don't immediately use match current_substate.state_name
 	var _external_events: bool = false
 	var _switch_on_same: bool = false
@@ -85,7 +85,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason, _switch_on_same, _override_commit)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	_next_state = PHES.still_life_phase
 	if __ELA(): _reason += "initial life_ state"
 	return VerdictPH.new(_next_state, _reason)

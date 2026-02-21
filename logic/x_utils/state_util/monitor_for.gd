@@ -8,14 +8,14 @@ class MonitorFor extends RefCountedSystem:
 	var _min: float
 	var _max: float
 	# state this helper monitors, static default
-	var _our_state: String
+	var _our_state: StringName
 	## DYNAMIC
 	# will monitor state for this time
 	var _duration: float = -1.0
 	## NOTE: should be updated in _process using accumulate_time()
 	var _timer: float = -1.0
 
-	func _init(min_: float, max_: float, state_name_: String) -> void:
+	func _init(min_: float, max_: float, state_name_: StringName) -> void:
 		self._min = min_
 		self._max = max_
 		self._our_state = state_name_
@@ -50,14 +50,14 @@ class MonitorFor extends RefCountedSystem:
 	## B, A
 	## A, A
 	## C, B
-	func auto_update(delta: float, curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
+	func auto_update(delta: float, curr_substate: StringName, next_substate: StringName, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		accumulate_time(delta)
 		_auto_update(curr_substate, next_substate, min_, max_, __log)
 
 
 	## override this to make monitor easier to use via auto_update
 	## implementation SHOULD auto set and reset monitor.
-	func _auto_update(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
+	func _auto_update(curr_substate: StringName, next_substate: StringName, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		pass
 
 
@@ -99,16 +99,16 @@ class MonitorFor extends RefCountedSystem:
 		if is_set():
 			_timer += delta
 
-	func _is_switch_from_our(curr_substate: String, next_substate: String) -> bool:
+	func _is_switch_from_our(curr_substate: StringName, next_substate: StringName) -> bool:
 		return curr_substate == _our_state and next_substate != _our_state
 	
-	func _is_switch_to_our(curr_substate: String, next_substate: String) -> bool:
+	func _is_switch_to_our(curr_substate: StringName, next_substate: StringName) -> bool:
 		return curr_substate != _our_state and next_substate == _our_state
 
-	func _is_switch_not_related(curr_substate: String, next_substate: String) -> bool:
+	func _is_switch_not_related(curr_substate: StringName, next_substate: StringName) -> bool:
 		return curr_substate != _our_state and next_substate != _our_state
 
-	func _is_both_are_ours(curr_substate: String, next_substate: String) -> bool:
+	func _is_both_are_ours(curr_substate: StringName, next_substate: StringName) -> bool:
 		return curr_substate == _our_state and next_substate == _our_state
 
 	func __pp_set_random() -> String:
@@ -153,19 +153,19 @@ class WillDoFor extends MonitorFor:
 	## A, A - will set if was not set (normally we already set)
 	## B, A - will set again if was already set! (normally we were reset) because it's an explicit switch.
 	## "", A - behaviour is the same as B, A
-	func _auto_set_on_switch_to(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
+	func _auto_set_on_switch_to(curr_substate: StringName, next_substate: StringName, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		if _is_switch_to_our(curr_substate, next_substate):
 			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 		elif _is_both_are_ours(curr_substate, next_substate) and not is_set():
 			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
 
-	func _auto_reset_on_switch_from(curr_substate: String, next_substate: String, __log: String = ""):
+	func _auto_reset_on_switch_from(curr_substate: StringName, next_substate: StringName, __log: String = ""):
 		if _is_switch_from_our(curr_substate, next_substate) \
 			or _is_switch_not_related(curr_substate, next_substate):
 			reset(__log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
-	func _auto_update(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
+	func _auto_update(curr_substate: StringName, next_substate: StringName, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		_auto_set_on_switch_to(curr_substate, next_substate, min_, max_, __log)
 		_auto_reset_on_switch_from(curr_substate, next_substate, __log)
 
@@ -178,16 +178,16 @@ class WillNotDoFor extends MonitorFor:
 	## A, A - will reset 
 	## A, B - will set again if was already set! (normally it doesnt happen in a row)
 	## "", A - behaviour is the same as B, A
-	func _auto_set_on_switch_from(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
+	func _auto_set_on_switch_from(curr_substate: StringName, next_substate: StringName, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		if _is_switch_from_our(curr_substate, next_substate):
 			set_random(min_, max_, __log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
-	func _auto_reset_on_switch_to(curr_substate: String, next_substate: String, __log: String = ""):
+	func _auto_reset_on_switch_to(curr_substate: StringName, next_substate: StringName, __log: String = ""):
 		if _is_switch_to_our(curr_substate, next_substate) or \
 			_is_both_are_ours(curr_substate, next_substate):
 			reset(__log + " " + pair_log(curr_substate, next_substate) if __LOG_B() else "")
 
-	func _auto_update(curr_substate: String, next_substate: String, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
+	func _auto_update(curr_substate: StringName, next_substate: StringName, min_: float = -1.0, max_: float = -1.0, __log: String = ""):
 		_auto_set_on_switch_from(curr_substate, next_substate, min_, max_, __log)
 		_auto_reset_on_switch_to(curr_substate, next_substate, __log)
 

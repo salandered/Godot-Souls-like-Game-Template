@@ -34,14 +34,14 @@ const TRACK_PREFIXES: Array[String] = [
 #####################
 
 	
-func is_weapon_hurts(weapon_name: String, anim: Animation, timestamp: float) -> bool:
-	match weapon_name:
+func is_weapon_hurts(weapon_id: StringName, anim: Animation, timestamp: float) -> bool:
+	match weapon_id:
 		WeaponID.big_pinga_blade:
 			return _is_weapon_hurts(anim, timestamp)
 		WeaponID.bg_aura_weapon:
 			return _is_aura_hurts(anim, timestamp)
 		_:
-			__log_warn("unknown weapon name " + pp.in_q(weapon_name), "is_weapon_hurts", "return false")
+			__log_warn("unknown weapon name " + pp.in_q(weapon_id), "is_weapon_hurts", "return false")
 			return false
 
 

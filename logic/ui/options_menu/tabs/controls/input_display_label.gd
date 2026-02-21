@@ -2,6 +2,7 @@ extends Label
 
 @onready var action_names := M_AppSettings.get_action_names()
 
+
 func _get_inputs_as_string() -> String:
 	var all_inputs: String = ""
 	var is_first: bool = true
@@ -13,6 +14,7 @@ func _get_inputs_as_string() -> String:
 				else:
 					all_inputs += " + " + action_name
 	return all_inputs
+
 
 func _process(_delta: float) -> void:
 	if Input.is_anything_pressed():

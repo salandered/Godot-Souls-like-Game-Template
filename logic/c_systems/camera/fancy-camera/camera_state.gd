@@ -3,7 +3,7 @@ class_name CameraState
 extends Node
 
 
-var state_name: String
+var state_name: StringName
 
 var fc: FancyCamera
 

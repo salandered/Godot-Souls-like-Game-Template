@@ -14,20 +14,20 @@ var _hit_tracker: EventThrottler
 ## While currently it's probably always has at least one weapon, 
 ##	system should be designed around the fact that it could be an empty dict.
 ## Domain wise this looks valid, e.g: character in the middle of the switching weapons, character lost its weapons etc.
-var _registered_weapons: Dictionary[String, BaseWeapon] = {} # weaponID <String> to weapon <BaseWeapon>
+var _registered_weapons: Dictionary[StringName, BaseWeapon] = {} # weaponID <StringName> to weapon <BaseWeapon>
 
 ## must be changed via activate_weapon only.
 ## can be empty.
 ## if not empty, all entries are guaranteed to be:
 ##  - unique
 ## 	- present in _registered_weapons
-var _active_weapon_ids: Array[String]
+var _active_weapon_ids: Array[StringName]
 
 
 var _hit_boxes: Array[CharacterHitbox]
 
 
-func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[String]):
+func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[StringName]):
 	_register_hit_boxes(character)
 
 	_register_weapons()
@@ -83,11 +83,11 @@ func _register_weapons():
 # region
 
 
-func get_active_weapon_ids() -> Array[String]:
+func get_active_weapon_ids() -> Array[StringName]:
 	return _active_weapon_ids
 
 
-func activate_weapon(weapon_id: String, deactivate_others: bool) -> void:
+func activate_weapon(weapon_id: StringName, deactivate_others: bool) -> void:
 	if not _registered_weapons.has(weapon_id):
 		__log_warn("trying to set active weapon which is not in registered weapons", "", "active weapons won't be changed",
 			"incoming weapon:", weapon_id, __pp_weapons_info())
@@ -105,7 +105,7 @@ func activate_weapon(weapon_id: String, deactivate_others: bool) -> void:
 	__log_("activate_weapon", "set (and activated)", pp.in_q(weapon_id), __pp_weapons_info())
 
 
-func deactivate_weapon(weapon_id: String) -> void:
+func deactivate_weapon(weapon_id: StringName) -> void:
 	if not _registered_weapons.has(weapon_id):
 		__log_warn("trying to deactivate weapon which is not in registered weapons", "", "active weapons won't be changed",
 			"incoming weapon:", weapon_id, __pp_weapons_info())
@@ -119,7 +119,7 @@ func deactivate_weapon(weapon_id: String) -> void:
 	__log_("activate_weapon", "deactivated and erased from list", pp.in_q(weapon_id), __pp_weapons_info())
 
 
-func _get_active_weapon_by_id(weapon_id: String) -> BaseWeapon:
+func _get_active_weapon_by_id(weapon_id: StringName) -> BaseWeapon:
 	if not weapon_id in get_active_weapon_ids():
 		return
 	if not _registered_weapons.has(weapon_id): # should not happen
@@ -143,7 +143,7 @@ func get_all_active_weapons() -> Array[BaseWeapon]:
 
 
 ## nullable
-func get_registered_weapon_by_id(weapon_id: String) -> BaseWeapon:
+func get_registered_weapon_by_id(weapon_id: StringName) -> BaseWeapon:
 	return DictUtils.safe_get_dict_key(_registered_weapons, weapon_id, null, WL.WARN_CRUCIAL)
 
 
@@ -180,7 +180,7 @@ func apply_hit(hit_data: HitData) -> void:
 ## ATTACK WITH ACTIVE WEAPONS
 # region
 
-func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_global_speed_scale: float, char_state_name: String) -> void:
+func set_hit_data(weapon_id: StringName, hit_damage: float, anim_id: StringName, anim_global_speed_scale: float, char_state_name: StringName) -> void:
 	var weapon := _get_active_weapon_by_id(weapon_id)
 	if not weapon:
 		return
@@ -189,12 +189,12 @@ func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_gl
 	var hit_data := HitData.new(hit_damage, weapon.get_weapon_id(), anim_id, anim_global_speed_scale, char_state_name, _attack_dir)
 	weapon.set_hit_data(hit_data)
 	if is_player():
-		SigUtils.safe_emit_raw(
+		SigUtils.safe_emit(
 			GlobalSignal.SIG_player_weapon_hit_data_set,
 			{SPS.hit_data_field: hit_data}
 		)
 	else:
-		SigUtils.safe_emit_raw(
+		SigUtils.safe_emit(
 			GlobalSignal.SIG_enemy_weapon_hit_data_set,
 			{
 				SPS.hit_data_field: hit_data,
@@ -204,7 +204,7 @@ func set_hit_data(weapon_id: String, hit_damage: float, anim_id: String, anim_gl
 	# __log_("set hit data to weapon", pp.in_q(weapon_id), hit_data)
 
 
-func update_weapon_is_attacking(weapon_id: String, is_attacking: bool) -> void:
+func update_weapon_is_attacking(weapon_id: StringName, is_attacking: bool) -> void:
 	var weapon := _get_active_weapon_by_id(weapon_id)
 	if not weapon:
 		return
@@ -216,7 +216,7 @@ func _update_is_attacking(weapon: BaseWeapon, is_attacking: bool):
 	# __log_("_update_is_attacking. is_attacking/weapon", is_attacking, weapon)
 
 
-func reset_weapon_by_id(weapon_id: String) -> void:
+func reset_weapon_by_id(weapon_id: StringName) -> void:
 	var weapon := _get_active_weapon_by_id(weapon_id)
 	if not weapon:
 		return

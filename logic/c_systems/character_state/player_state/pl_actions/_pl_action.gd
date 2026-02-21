@@ -2,7 +2,7 @@
 class_name PlayerAction
 extends BaseAction
 
-var state_name: String
+var state_name: StringName
 
 
 ## to override if needed

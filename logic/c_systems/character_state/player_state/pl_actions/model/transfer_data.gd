@@ -3,16 +3,16 @@ extends RefCounted
 class_name TranferData
 
 
-var action_name: String
-var _transfer: Dictionary[String, Variant]
+var action_name: StringName
+var _transfer: Dictionary[StringName, Variant]
 
 
-func _get_by_key(key: String) -> Variant:
+func _get_by_key(key: StringName) -> Variant:
 	return DictUtils.safe_get_dict_key(_transfer, key, null, WL.WARN_CRUCIAL)
 
 
 ## optional return
-func get_by_action_and_key(action_name_: String, key: String) -> Variant:
+func get_by_action_and_key(action_name_: StringName, key: StringName) -> Variant:
 	if action_name == action_name_:
 		var value: Variant = _get_by_key(key)
 		# __log_value(action_name_, key, value)
@@ -21,13 +21,13 @@ func get_by_action_and_key(action_name_: String, key: String) -> Variant:
 	return null
 
 
-func get_by_action(action_name_: String) -> Variant:
+func get_by_action(action_name_: StringName) -> Variant:
 	if action_name == action_name_:
 		return _transfer
 	return null
 
 
-func fill(action_name_: String, data_: Dictionary[String, Variant]):
+func fill(action_name_: StringName, data_: Dictionary[StringName, Variant]):
 	var _msg := pp.s(pp.dict_(data_) if data_ is Dictionary else "| data is not a Dict ⚠️⚠️")
 	# print_.prefix_s("TransferData💼", "fill for " + pp.in_q(action_name_) + ":\t" + _msg)
 	action_name = action_name_
@@ -39,7 +39,7 @@ func _reset():
 	_transfer = {}
 
 
-func __log_value(action_name_: String, key: String, value: Variant):
+func __log_value(action_name_: StringName, key: StringName, value: Variant):
 	var _v_msg := ""
 	if value is Dictionary:
 		_v_msg = pp.dict_(value)

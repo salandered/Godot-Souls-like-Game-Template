@@ -100,8 +100,8 @@ static func _dev_change_param(
 	param: Variant,
 	param_name: String = "some param",
 	step: float = 0.1,
-	key_a: String = RawAction.t1,
-	key_b: String = RawAction.t2,
+	key_a: StringName = RawAction.t1,
+	key_b: StringName = RawAction.t2,
 	require_ctrl_alt: bool = false
 ) -> Variant:
 	if u.is_release():

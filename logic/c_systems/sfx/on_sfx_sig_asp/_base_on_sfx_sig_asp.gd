@@ -78,7 +78,7 @@ func _init(
 
 
 ## NOTE: args should align with signal data. In our case its payload: Dictionary
-func on_signal(payload: Dictionary[String, Variant]) -> void:
+func on_signal(payload: Dictionary[StringName, Variant]) -> void:
 	if __disabled:
 		return
 	# __log_(self.sfx_type, "on_signal", "triggered")
@@ -113,7 +113,7 @@ func _asp_play(vol_pitch: VolPitch):
 @abstract func _custom_logic(
 	base_vol_db: float,
 	base_pitch: float,
-	payload: Dictionary[String, Variant]
+	payload: Dictionary[StringName, Variant]
 ) -> VolPitch
 
 
@@ -123,26 +123,26 @@ func _get_log_tag() -> String:
 ## COMMON UTILS
 # region
 
-func _logic_random_pitch(player: AudioStreamPlayer3D, payload: Dictionary[String, Variant]) -> void:
+func _logic_random_pitch(player: AudioStreamPlayer3D, payload: Dictionary[StringName, Variant]) -> void:
 	player.pitch_scale = player.pitch_scale + randf_range(-0.02, 0.02)
 
 
 ## returns "" is case of problems
-func get_modifier_from_payload(payload: Dictionary[String, Variant]) -> String:
+func get_modifier_from_payload(payload: Dictionary[StringName, Variant]) -> StringName:
 	return _get_key_from_payload(SFXConstants.modifier_key, payload)
 
 ## returns "" is case of problems
-func get_unique_from_payload(payload: Dictionary[String, Variant]) -> String:
+func get_unique_from_payload(payload: Dictionary[StringName, Variant]) -> StringName:
 	return _get_key_from_payload(SFXConstants.unique_key, payload)
 
 ## returns "" is case of problems
-func get_weapon_id_from_payload(payload: Dictionary[String, Variant]) -> String:
+func get_weapon_id_from_payload(payload: Dictionary[StringName, Variant]) -> StringName:
 	return _get_key_from_payload(SFXConstants.weapon_id_key, payload)
 
-func _get_key_from_payload(key: String, payload: Dictionary[String, Variant]):
+func _get_key_from_payload(key: StringName, payload: Dictionary[StringName, Variant]) -> StringName:
 	if payload.has(key):
 		var modifier: Variant = payload[key]
-		if modifier is String:
+		if modifier is StringName:
 			return modifier
 	return ""
 
@@ -164,7 +164,7 @@ func disable():
 
 
 func pp_name() -> String:
-	return pp.s(ObjUtils.construct_obj_pp_name(self), _get_log_tag(), pp.bus_id(asp.bus))
+	return pp.s(ObjUtils.construct_obj_pp_name(self ), _get_log_tag(), pp.bus_id(asp.bus))
 
 
 func __LOG_INDENT() -> int:

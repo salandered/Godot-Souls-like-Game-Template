@@ -37,7 +37,7 @@ func _reset_root_motion() -> void:
 ## SET ANIMATIONS TO PLAY ▶️
 
 
-func set_anim_to_play(anim_id: String, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
+func set_anim_to_play(anim_id: StringName, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	var result := AnimUtils.set_anim_to_play(_native_player,
 		_anim_container,
 		config,
@@ -90,7 +90,7 @@ func get_curr_anim_effective_duration() -> float:
 
 
 ## returns "" if no curr anim
-func get_curr_anim_id() -> String:
+func get_curr_anim_id() -> StringName:
 	if not _curr_anim:
 		return ""
 	return _curr_anim.anim_id

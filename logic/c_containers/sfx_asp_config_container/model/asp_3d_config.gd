@@ -41,7 +41,7 @@ func _init(
 	max_distance_: float = DEF_MAX_DISTANCE,
 	max_polyphony_: int = DEF_MAX_POLYPHONY,
 	panning_strength_: float = DEF_PANNING_STRENGTH,
-	bus_id_: String = DEF_BUS_ID,
+	bus_id_: StringName = DEF_BUS_ID,
 	stream_: AudioStream = null,
 	from_position_: float = 0.0
 

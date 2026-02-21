@@ -90,7 +90,7 @@ func get_composite_dvc_key() -> int:
 
 func _on_SIG_string_payload(
 	dynamic_label: DynamicInfoLabel,
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	field_name: String,
 	str_replacers: Dictionary[String, String],
 	dynamic_label_config: DynamicLabelConfig
@@ -106,7 +106,7 @@ func _on_SIG_string_payload(
 
 ## returns "" in case of problems
 func _get_SIG_string_payload(
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	field_name: String,
 	str_replacers: Dictionary[String, String],
 ) -> String:
@@ -122,7 +122,7 @@ func _on_SIG_hit_data_payload(
 	damage_label: DynamicInfoLabel,
 	speed_label: DynamicInfoLabel,
 	direction_label: DynamicInfoLabel,
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	min_dmg: float,
 	max_dmg: float,
 	dynamic_label_config: DynamicLabelConfig
@@ -156,7 +156,7 @@ func _on_SIG_hit_data_payload(
 	direction_label.set_label_text(pp_string_attack_dir, dynamic_label_config)
 
 
-func _get_SIG_h_state_data(payload: Dictionary[String, Variant]) -> SPS.HStateData:
+func _get_SIG_h_state_data(payload: Dictionary[StringName, Variant]) -> SPS.HStateData:
 	var _r := SigUtils.safe_get_variant_payload_value(payload, SPS.h_state_data_field, false)
 	if _r.err:
 		__log_warn("", "", "", payload)
@@ -170,7 +170,7 @@ func _get_SIG_h_state_data(payload: Dictionary[String, Variant]) -> SPS.HStateDa
 
 func _on_SIG_react_on_hit(
 	reaction_info: DynamicInfoLabelDouble,
-	payload: Dictionary[String, Variant],
+	payload: Dictionary[StringName, Variant],
 	_str_react_replacers_: Dictionary[String, String],
 	dynamic_label_config: DynamicLabelConfig
 ):

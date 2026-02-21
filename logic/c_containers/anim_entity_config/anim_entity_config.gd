@@ -32,7 +32,7 @@ func _ready() -> void:
 
 
 ## TODO: should be moved to separate mode, not using dev code inside Config
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 	var parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(
 		payload,
 		DVS.KeyFValueChanger

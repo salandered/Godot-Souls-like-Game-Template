@@ -6,16 +6,16 @@ enum Dir {PRIMARY, SECONDARY}
 # Initial configuration
 var _speed_primary: float
 var _speed_secondary: float
-var _anim_id_primary: String
-var _anim_id_secondary: String
+var _anim_id_primary: StringName
+var _anim_id_secondary: StringName
 
 # Current state
 var _curr_dir: Dir
 var _speed: float
-var _anim_id: String
+var _anim_id: StringName
 
 
-func _init(primary_speed: float, secondary_speed: float, primary_anim_id: String, secondary_anim_id: String) -> void:
+func _init(primary_speed: float, secondary_speed: float, primary_anim_id: StringName, secondary_anim_id: StringName) -> void:
 	_speed_primary = primary_speed
 	_speed_secondary = secondary_speed
 	_anim_id_primary = primary_anim_id
@@ -49,11 +49,11 @@ func get_curr_dir_int() -> int:
 	return 1 if _curr_dir == Dir.PRIMARY else -1
 
 
-func get_curr_anim_id() -> String:
+func get_curr_anim_id() -> StringName:
 	return _anim_id
 
 
-func get_all_anim_ids() -> Array[String]:
+func get_all_anim_ids() -> Array[StringName]:
 	return [_anim_id_primary, _anim_id_secondary]
 
 

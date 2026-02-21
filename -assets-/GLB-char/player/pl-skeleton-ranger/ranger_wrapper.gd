@@ -45,7 +45,7 @@ func _super_mat(mesh: MeshInstance3D, mat, index: int):
 			mesh.set_surface_override_material(index, mat)
 
 
-func _on_SIG_dvc_color_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_color_value_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_color_get_value_by_dvc_key(
 		payload,
 		DVS.KeyColorChanger.HAIR_COLOR
@@ -56,7 +56,7 @@ func _on_SIG_dvc_color_value_changed(payload: Dictionary[String, Variant]):
 	_super_mat(long_hair, new_mat, 0)
 
 
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
 		payload,
 		DVS.KeyBValueChanger.WEAR_HAT

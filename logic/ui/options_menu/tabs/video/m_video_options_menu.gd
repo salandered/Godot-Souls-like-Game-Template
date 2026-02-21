@@ -81,16 +81,6 @@ func _on_shadow_control_setting_changed(value: Variant) -> void:
 
 func _on_reset_button_pressed() -> void:
 	var window: Window = get_window()
-	
-	# if %DisplayModeControl.default_value is int:
-	# 	M_AppSettings.set_display_mode(%DisplayModeControl.default_value, window)
-	# else:
-	# 	__log_warn("reset problem", "DisplayModeControl")
-
-	# if %ResolutionControl.default_value is Vector2i:
-	# 	M_AppSettings.set_resolution(%ResolutionControl.default_value, window, false)
-	# else:
-	# 	__log_warn("reset problem", "ResolutionControl")
 
 	if %VSyncControl.default_value is int:
 		M_AppSettings.set_vsync(%VSyncControl.default_value, window)

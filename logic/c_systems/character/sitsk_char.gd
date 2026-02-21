@@ -8,15 +8,15 @@ class_name SittingSkCharacter
 @onready var aura_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %AuraAnimSFXSigEmitter
 
 
-func _for_init_weapon_id_to_emitter() -> Dictionary[String, BaseAnimSFXSignalEmitter]:
+func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]:
 	return {
 			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
 		}
 func _for_init_anim_list() -> BaseCharAnimList:
 	return SITSKA.new()
-func _for_init_required_markers() -> Dictionary[String, Array]:
+func _for_init_required_markers() -> Dictionary[StringName, Array]:
 	return SitSkRequiredMarkers.anim_to_required_marker
-func _for_init_active_weapon_id_list() -> Array[String]:
+func _for_init_active_weapon_id_list() -> Array[StringName]:
 	return [WeaponID.bg_aura_weapon]
 func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 	return SitSkASPConfigContainer.new()
@@ -27,7 +27,7 @@ func initialise_phe_char_implementation() -> void:
 	pass
 ##
 
-func get_initial_leaf_state_name() -> String:
+func get_initial_leaf_state_name() -> StringName:
 	return SITSKS.Leaf.sit_idle_v1
 
 
@@ -42,7 +42,7 @@ func get_node_state_container() -> PHEBaseNodeStateDataContainer:
 ##
 
 
-func get_power_attacks_state_names() -> Array[String]:
+func get_power_attacks_state_names() -> Array[StringName]:
 	return [
 		SITSKS.Leaf.sit_attack
 	   ]

@@ -6,7 +6,7 @@ func _hard_validate_implementation():
 	return self._sfx_system and self._sfx_system is BaseWeaponSFXSystem
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	var _curr_state_name := get_holder_curr_state_name()
 	if _curr_state_name in get_holder().get_power_attacks_state_names():
 		base_vol_db += 4
@@ -44,14 +44,15 @@ func get_holder_curr_state() -> BaseCharacterState:
 	return _curr_state
 
 
-func get_holder_curr_state_name() -> String:
+func get_holder_curr_state_name() -> StringName:
 	var _curr_state := get_holder().get_current_state()
 	if _curr_state == null:
 		return ""
 	else:
 		return _curr_state.state_name
 
-func get_holder_prev_state_name() -> String:
+		
+func get_holder_prev_state_name() -> StringName:
 	return get_holder().get_prev_state_name()
 
 

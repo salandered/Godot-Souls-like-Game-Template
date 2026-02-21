@@ -21,7 +21,7 @@ func nth_frame() -> int:
 
 func initialise_implementation() -> void:
 	super.initialise_implementation()
-	var _enemy := Groups.get_first_phe_bg_by_group_with_tag(self , "demo_enemy")
+	var _enemy := Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
 
 	if _enemy:
 		_e_movement = _enemy.get_e_movement()

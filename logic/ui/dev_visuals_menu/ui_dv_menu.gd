@@ -85,7 +85,7 @@ func _option_button_select_item_by_text(opt: OptionButton, text_value: String) -
 			return
 
 	
-func _on_SIG_dv_ui_control_value_changed(payload: Dictionary[String, Variant]):
+func _on_SIG_dv_ui_control_value_changed(payload: Dictionary[StringName, Variant]):
 	var parsed_payload := DVCSIGPayloadParser.parse_dvc_ui_control_value_changed(payload)
 	if not parsed_payload: return
 

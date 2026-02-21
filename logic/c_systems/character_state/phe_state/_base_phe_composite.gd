@@ -38,7 +38,7 @@ func is_ended() -> bool:
 		return works_longer_than(commitment)
 
 
-@abstract func get_supported_substates() -> Array[String]
+@abstract func get_supported_substates() -> Array[StringName]
 
 
 func _on_enter_state() -> void:
@@ -79,8 +79,8 @@ func _on_exit_state() -> void:
 func call_accumulate_time_spent(delta: float) -> void:
 	accumulate_time_spent(delta)
 
-var __state_declined: String = "x"
-var __prev_now_switch_msg: String = "xx"
+var __state_declined: StringName = "x"
+var __prev_now_switch_msg: StringName = "xx"
 ## for the top state this is called from model
 func _update(delta: float) -> void:
 	call_accumulate_time_spent(delta)
@@ -140,12 +140,12 @@ func get_current_substate_by_depth(depth: int) -> BasePHEState:
 		return null
 
 
-func get_safe_curr_sbs_name() -> String:
+func get_safe_curr_sbs_name() -> StringName:
 	if __current_substate: return __current_substate.state_name
 	return "-x-"
 
 
-func set_current_substate(next_state_name: String) -> void:
+func set_current_substate(next_state_name: StringName) -> void:
 	var _next_substate := container.get_state_by_name(next_state_name)
 	if not _next_substate:
 		__log_error(pp.s("set_current_substate: state not found", next_state_name), "", "return, not set")
@@ -160,7 +160,7 @@ func set_current_substate(next_state_name: String) -> void:
 		return
 
 	__current_substate = _next_substate
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 		GlobalSignal.SIG_phe_state_changed,
 		{
 			## changed to 
@@ -173,7 +173,7 @@ func set_current_substate(next_state_name: String) -> void:
 
 
 func reset_current_substate() -> void:
-	SigUtils.safe_emit_raw(
+	SigUtils.safe_emit(
 		GlobalSignal.SIG_phe_state_reset,
 		{
 			## reset from
@@ -209,7 +209,7 @@ func _check_substate_transition(delta: float) -> VerdictPH:
 
 
 ## not to override
-func _choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func _choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	var _initial_sbs_verdict := choose_initial_substate(_next_state, _reason)
 	if not _initial_sbs_verdict.needs_switch():
 		__log_warn_v2("returned empty verdict!", "choose_initial_substate", "return first supported sbs")
@@ -224,7 +224,7 @@ func _choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH
 ## all this args could ve been initiated inside check_substate_transition, 
 ## but this way all function implementations are more uniformed and less verbose and prone to error
 ## NOTE: for simplicity, last line should be always 'return VerdictPH.new(_next_state, _reason)'
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	if __ELA(): _reason = "default implementation"
 	return VerdictPH.new(_next_state, _reason)
 
@@ -232,12 +232,12 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 ## '_next_state' - is empty string on function entry. State will fill it and set to verdict
 ## '_reason' - is empty string on function entry. State should fill it and add to verdict reason
 ## NOTE: for simplicity, last line should be always 'return VerdictPH.new(_next_state, _reason)'
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	if __ELA(): _reason = em.crucial_x2 + "state must implement choose_initial_substate!"
 	return VerdictPH.new(_next_state, _reason)
 
 
-func _switch_substate(next_state_name: String):
+func _switch_substate(next_state_name: StringName):
 	if get_current_substate() == null:
 		if __ELA(): __log_phe("↪️", "-  x  -" + " -> " + next_state_name)
 	else:
@@ -294,7 +294,7 @@ func __log_state() -> String:
 	_r += pp.in_sq(str(state_depth))
 	_r += "-> "
 	var _curr_sbs := get_current_substate()
-	_r += _curr_sbs.state_name if _curr_sbs else "-x-"
+	_r += _curr_sbs.state_name if _curr_sbs else &"-x-"
 	return _r
 
 

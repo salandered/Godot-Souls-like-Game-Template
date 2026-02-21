@@ -2,7 +2,7 @@ extends BasePHEComposite
 class_name PHECombatAttacking
 
 
-func get_supported_substates() -> Array[String]:
+func get_supported_substates() -> Array[StringName]:
 	return [
 			PHES.Leaf.gap_closer,
 			PHES.Leaf.scare_off,
@@ -37,7 +37,7 @@ func on_enter_state() -> void:
 	to_next_iteration.turn_off()
 	
 
-func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: String, _reason: String) -> VerdictPH:
+func check_substate_transition(delta: float, current_substate: BasePHEState, _next_state: StringName, _reason: String) -> VerdictPH:
 	var _switch_on_same := false
 	var _override_commit := false
 	
@@ -62,7 +62,7 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	return VerdictPH.new(_next_state, _reason, _switch_on_same, _override_commit)
 
 
-func choose_initial_substate(_next_state: String, _reason: String) -> VerdictPH:
+func choose_initial_substate(_next_state: StringName, _reason: String) -> VerdictPH:
 	var dist := distance_to_player()
 	# prints("\\\\\\\\\\\\", dist)
 	if dist > config.GAP_CLOSER_RAD():

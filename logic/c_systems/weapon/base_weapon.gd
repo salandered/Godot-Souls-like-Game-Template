@@ -118,7 +118,7 @@ func pp_name() -> String:
 	return pp.s("🗡️ Weapon", get_weapon_id())
 
 
-@abstract func get_weapon_id() -> String
+@abstract func get_weapon_id() -> StringName
 
 
 @abstract func validate_visuals() -> void

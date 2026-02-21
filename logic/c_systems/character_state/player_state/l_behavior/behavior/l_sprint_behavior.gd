@@ -61,7 +61,7 @@ func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	return LNextActionVerdict.new(next_action_name)
 
 
-func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
+func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: StringName) -> StringName:
 	var curr_action := get_curr_action()
 	var angle_deg := rad_to_deg(pm().get_abs_angle_pl_input(input_, delta))
 
@@ -76,7 +76,7 @@ func _from_IDLE_decision(input_: InputPackage, delta: float, next_action_name: S
 	return next_action_name
 
 
-func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name: String) -> String:
+func _from_LOOP_decision(input_: InputPackage, delta: float, next_action_name: StringName) -> StringName:
 	var angle_deg := rad_to_deg(pm().get_abs_angle_pl_input(input_, delta))
 	
 	if is_pure_reverse_moving(input_):

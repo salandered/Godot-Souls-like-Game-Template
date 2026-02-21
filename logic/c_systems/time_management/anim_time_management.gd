@@ -79,7 +79,7 @@ static func works_between(start: float, finish: float, animator_manager: BaseAni
 	return false
 
 
-static func passed_marker(marker_name: String, animator_manager: BaseAnimatorManager, anim: AnimationData, self_, add_time: float = 0.0) -> bool:
+static func passed_marker(marker_name: StringName, animator_manager: BaseAnimatorManager, anim: AnimationData, self_, add_time: float = 0.0) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		__log_warn_soft("passed_marker - no time - will return false")
@@ -90,7 +90,7 @@ static func passed_marker(marker_name: String, animator_manager: BaseAnimatorMan
 	return false
 
 
-static func before_marker(marker_name: String, animator_manager: BaseAnimatorManager, anim: AnimationData, self_) -> bool:
+static func before_marker(marker_name: StringName, animator_manager: BaseAnimatorManager, anim: AnimationData, self_) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		__log_warn_soft("before_marker - no time - will return false")

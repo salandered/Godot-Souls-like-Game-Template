@@ -71,7 +71,7 @@ func works_between(start: float, finish: float) -> bool:
 	return false
 
 
-func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
+func passed_marker(marker_name: StringName, add_time: float = 0.0) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		__log_warn_local("passed_marker - no time - will return false")
@@ -82,7 +82,7 @@ func passed_marker(marker_name: String, add_time: float = 0.0) -> bool:
 	return false
 
 
-func before_marker(marker_name: String) -> bool:
+func before_marker(marker_name: StringName) -> bool:
 	var marker_time := anim.get_marker_time_by_name(marker_name)
 	if marker_time == -1:
 		__log_warn_local("before_marker - no time - will return false", )

@@ -8,7 +8,7 @@ var PITCH_BASE_VOL: float = 1.0
 var DODGE_LAND_DECREASE: float = 3.0
 
 
-func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[String, Variant]) -> VolPitch:
+func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[StringName, Variant]) -> VolPitch:
 	var pitch := PITCH_BASE_VOL
 	var vol_db := FOOTSTEP_BASE_VOL
 

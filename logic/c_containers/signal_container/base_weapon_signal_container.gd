@@ -7,9 +7,9 @@ class_name BaseWeaponSignalContainer
 
 
 ## DANGER: private, use BaseSignalContainer api
-signal SFX_whoosh_weapon(payload: Dictionary[String, Variant])
-signal SFX_hit_weapon(payload: Dictionary[String, Variant])
-signal SFX_hit_target(payload: Dictionary[String, Variant])
+signal SFX_whoosh_weapon(payload: Dictionary[StringName, Variant])
+signal SFX_hit_weapon(payload: Dictionary[StringName, Variant])
+signal SFX_hit_target(payload: Dictionary[StringName, Variant])
 
 
 func _get_signal_data_list() -> Array[SignalData]:

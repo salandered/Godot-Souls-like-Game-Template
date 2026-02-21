@@ -14,10 +14,10 @@ class_name AnimMarker
 
 
 var time: float
-var marker_name: String
+var marker_name: StringName
 
 
-func _init(time_: float, marker_name_: String) -> void:
+func _init(time_: float, marker_name_: StringName) -> void:
 	time = time_
 	marker_name = marker_name_
 

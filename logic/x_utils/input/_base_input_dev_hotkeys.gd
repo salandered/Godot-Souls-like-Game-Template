@@ -6,13 +6,19 @@ class_name BaseInputDevHotkeys
 extends NodeLogger
 
 
+@export var enable_on_init: bool = false
+
+
 func _ready() -> void:
 	if u.is_editor() or u.is_release():
-		set_process_input(false)
-		set_process_unhandled_input(false)
+		set_enabled(false)
 	else:
-		set_process_input(true)
-		set_process_unhandled_input(true)
+		set_enabled(enable_on_init)
+
+
+func set_enabled(value: bool):
+	set_process_input(value)
+	set_process_unhandled_input(value)
 
 
 func _input(event: InputEvent) -> void:
@@ -25,3 +31,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 @abstract func _input_implementation(event: InputEvent) -> void
 @abstract func _unhandled_input_implementation(event: InputEvent) -> void
+
+
+## TEMPLATE
+
+# func _unhandled_input_implementation(event: InputEvent) -> void:
+# 	pass
+
+# func _input_implementation(event: InputEvent) -> void:
+# 	pass

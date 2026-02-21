@@ -11,7 +11,7 @@ signal button_clicked(action_name: String, readable_input_name: String)
 const BUTTON_NAME_GROUP_STRING: String = "%s:%d"
 
 
-## A configurable UI widget that dynamically builds and displays a list of game actions for key remapping.
+## UI widget that dynamically builds and displays a list of game actions for key remapping.
 ## It functions as the 'view' in the input options menu, showing actions and their assigned buttons in a grid layout.
 ## Customized through the Inspector to control some layout properties.
 ## It communicates user interactions, like button clicks or errors, to a parent controller script via signals.
