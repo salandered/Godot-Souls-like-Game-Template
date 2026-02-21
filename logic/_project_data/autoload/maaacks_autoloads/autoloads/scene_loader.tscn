@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbwmrnp0af35y"]
+[gd_scene format=3 uid="uid://cbwmrnp0af35y"]
 
 [ext_resource type="Script" uid="uid://cxrcy0evb0j3l" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_scene_loader.gd" id="1_l0dhx"]
 
-[node name="SceneLoader" type="Node"]
+[node name="SceneLoader" type="Node" unique_id=124499419]
 script = ExtResource("1_l0dhx")
 loading_screen_path = "uid://bs1rf0cb545oq"

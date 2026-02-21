@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn4pa8vlswlqf"]
+[gd_scene format=3 uid="uid://bn4pa8vlswlqf"]
 
 [ext_resource type="Script" uid="uid://custha7r0uoic" path="res://logic/ui/options_menu/tabs/controls/m_key_assignment_dialog.gd" id="1_x1m6p"]
 
-[node name="KeyAssignmentDialog" type="ConfirmationDialog"]
+[node name="KeyAssignmentDialog" type="ConfirmationDialog" unique_id=552248656]
 oversampling_override = 1.0
 title = "Assign Key"
 size = Vector2i(400, 224)
@@ -13,7 +13,7 @@ dialog_text = "
 "
 script = ExtResource("1_x1m6p")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1431754096]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,13 +24,13 @@ offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InputLabel" type="Label" parent="VBoxContainer"]
+[node name="InputLabel" type="Label" parent="VBoxContainer" unique_id=2105852679]
 unique_name_in_owner = true
 layout_mode = 2
 text = "None"
 horizontal_alignment = 1
 
-[node name="InputTextEdit" type="TextEdit" parent="VBoxContainer"]
+[node name="InputTextEdit" type="TextEdit" parent="VBoxContainer" unique_id=949874406]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -43,13 +43,13 @@ drag_and_drop_selection_enabled = false
 middle_mouse_paste_enabled = false
 caret_move_on_right_click = false
 
-[node name="UnbindButton" type="Button" parent="VBoxContainer"]
+[node name="UnbindButton" type="Button" parent="VBoxContainer" unique_id=1895213646]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"DangerButton"
 text = "Clear key"
 
-[node name="DelayTimer" type="Timer" parent="."]
+[node name="DelayTimer" type="Timer" parent="." unique_id=948482297]
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true

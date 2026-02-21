@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://bh1xnmgblu2wk"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bh1xnmgblu2wk"]
 
 [ext_resource type="AudioStream" uid="uid://ddxh6lf6328dt" path="res://-assets-/SFX/sources/ui_sounds/melodic_sfx_pack_1/cursor_style_5-trimmed.wav" id="1_3p6m1"]
 

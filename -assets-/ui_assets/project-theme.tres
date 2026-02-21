@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=51 format=3 uid="uid://dngnbhs1qjqyy"]
+[gd_resource type="Theme" format=3 uid="uid://dngnbhs1qjqyy"]
 
 [ext_resource type="Texture2D" uid="uid://l3mrt1t6jqos" path="res://-assets-/ui_assets/images/image_2026-01-04_00-25-05.png" id="1_6m5w1"]
 [ext_resource type="FontVariation" uid="uid://cyjb8qf6mhiej" path="res://-assets-/ui_assets/_font/yrsa/Yrsa_font_variation.tres" id="1_cpjrn"]

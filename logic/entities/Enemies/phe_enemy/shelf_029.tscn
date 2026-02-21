@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://bkoyd0cmxeqos"]
+[gd_scene format=4 uid="uid://bkoyd0cmxeqos"]
 
 [ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres" id="1_e8n71"]
 
@@ -184,7 +184,7 @@ bind/52/name = &"LeftToes"
 bind/52/bone = -1
 bind/52/pose = Transform3D(1.0000001, 2.3609027e-07, 2.2007298e-06, 2.1950473e-06, 3.7252903e-08, 1.0000001, -1.17579475e-07, -1.0000004, 1.2665987e-07, -0.3578507, -0.16637231, 0.02945799)
 
-[node name="shelf_029" type="MeshInstance3D"]
+[node name="shelf_029" type="MeshInstance3D" unique_id=1558601725]
 layers = 64
 cast_shadow = 0
 gi_mode = 0

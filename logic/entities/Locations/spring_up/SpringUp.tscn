@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cygpfuso63mm1"]
+[gd_scene format=3 uid="uid://cygpfuso63mm1"]
 
 [ext_resource type="Script" uid="uid://bvdn2nfchygdl" path="res://logic/entities/Locations/spring_up/spring_up.gd" id="1_480uu"]
 [ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="2_yipa0"]
@@ -9,26 +9,26 @@
 [ext_resource type="AudioStream" uid="uid://qsj5r28g8ggt" path="res://-assets-/SFX/sources/rubberduck/sfx100v2_loop_ambient_03.ogg" id="6_uvdya"]
 [ext_resource type="Material" uid="uid://ccqf55ca7dygf" path="res://-assets-/materials-shared/_shaders/bullet_trail/bullet_trail_mat_t1.tres" id="8_rgtg1"]
 
-[node name="SpringUp" type="Node3D"]
+[node name="SpringUp" type="Node3D" unique_id=1222214325]
 script = ExtResource("1_480uu")
 
-[node name="MonitorPlayerEnterSignalArea" parent="." instance=ExtResource("4_yqar2")]
+[node name="MonitorPlayerEnterSignalArea" parent="." unique_id=1223738036 instance=ExtResource("4_yqar2")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22262186, 0)
 area_capsule_radius = 0.5
 area_capsule_height = 1.4
 
-[node name="InteractArea" parent="." instance=ExtResource("2_yipa0")]
+[node name="InteractArea" parent="." unique_id=1579068420 instance=ExtResource("2_yipa0")]
 unique_name_in_owner = true
 label_text = "Here would be the stairs ..."
 label_y_offset = 1.0
 area_sphere_radius = 2.5
 
-[node name="__RemoteInteractArea" type="RemoteTransform3D" parent="."]
+[node name="__RemoteInteractArea" type="RemoteTransform3D" parent="." unique_id=1732697698]
 remote_path = NodePath("../InteractArea")
 update_scale = false
 
-[node name="WHoosh1" type="AudioStreamPlayer3D" parent="."]
+[node name="WHoosh1" type="AudioStreamPlayer3D" parent="." unique_id=2107199190]
 unique_name_in_owner = true
 stream = ExtResource("4_rgtg1")
 volume_db = -8.0
@@ -36,7 +36,7 @@ max_db = -2.0
 pitch_scale = 0.7
 bus = &"game_SFX"
 
-[node name="Whoosh2" type="AudioStreamPlayer3D" parent="."]
+[node name="Whoosh2" type="AudioStreamPlayer3D" parent="." unique_id=1776069140]
 unique_name_in_owner = true
 stream = ExtResource("5_rccyt")
 volume_db = -2.0
@@ -44,7 +44,7 @@ max_db = -0.934
 pitch_scale = 0.83
 bus = &"game_SFX"
 
-[node name="BackASP" type="AudioStreamPlayer3D" parent="."]
+[node name="BackASP" type="AudioStreamPlayer3D" parent="." unique_id=1929976393]
 stream = ExtResource("6_uvdya")
 volume_db = -6.0
 unit_size = 3.5
@@ -54,8 +54,8 @@ autoplay = true
 max_distance = 12.0
 bus = &"game_SFX"
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=65318246]
 
-[node name="Flower_003" parent="Visuals" instance=ExtResource("6_rccyt")]
+[node name="Flower_003" parent="Visuals" unique_id=1269391085 instance=ExtResource("6_rccyt")]
 transform = Transform3D(1.4119998, 0, 0, 0, 1.412, 0, 0, 0, 1.412, 0, 0, 0)
 material_override = ExtResource("8_rgtg1")

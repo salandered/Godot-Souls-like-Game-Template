@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://de0vjaija8veh"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://de0vjaija8veh"]
 
 [ext_resource type="AudioStream" uid="uid://0gkdtskf0qea" path="res://-assets-/SFX/sources/pack_N2/WoodJump1_wood_crate.wav" id="1_126as"]
 [ext_resource type="AudioStream" uid="uid://8onyjbfyf13k" path="res://-assets-/SFX/sources/pack_N2/WoodJump5_wood_crate.wav" id="2_cmiff"]

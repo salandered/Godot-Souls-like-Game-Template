@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=8 format=3 uid="uid://bbg08pft25h53"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bbg08pft25h53"]
 
 [ext_resource type="Texture2D" uid="uid://bsty5hpwbosoi" path="res://-assets-/materials-shared/ground/coral_ground/lincoln_coral_ground_02_diff_2k.jpg" id="1_xt2em"]
 [ext_resource type="Texture2D" uid="uid://cxqd5xdo3ltdx" path="res://-assets-/materials-shared/ground/coral_ground/lincoln_coral_ground_02_norm_gl_2k.png" id="2_8muk7"]

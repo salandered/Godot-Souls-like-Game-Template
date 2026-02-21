@@ -1,52 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds5h558epl61c"]
+[gd_scene format=3 uid="uid://ds5h558epl61c"]
 
 [ext_resource type="PackedScene" uid="uid://dli33k4rnw14" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger.glb" id="1_r4jo3"]
 [ext_resource type="Script" uid="uid://0jwu8hvnjknj" path="res://-assets-/GLB-char/player/pl-skeleton-ranger/ranger_wrapper.gd" id="2_gsyfp"]
 
-[node name="RIG" instance=ExtResource("1_r4jo3")]
+[node name="RIG" unique_id=225563404 instance=ExtResource("1_r4jo3")]
 script = ExtResource("2_gsyfp")
 
-[node name="_mask" parent="Armature/GeneralSkeleton" index="1"]
+[node name="_mask" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="1" unique_id=129676808]
 gi_mode = 2
 
-[node name="brows" parent="Armature/GeneralSkeleton" index="2"]
+[node name="brows" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="2" unique_id=1835522673]
 cast_shadow = 0
 
-[node name="ears" parent="Armature/GeneralSkeleton" index="3"]
+[node name="ears" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="3" unique_id=1687246849]
 cast_shadow = 0
 
-[node name="eye lashes" parent="Armature/GeneralSkeleton" index="4"]
+[node name="eye lashes" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="4" unique_id=1927367169]
 cast_shadow = 0
 
-[node name="long hair" parent="Armature/GeneralSkeleton" index="5"]
+[node name="long hair" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="5" unique_id=1628455864]
 gi_mode = 2
 
-[node name="body head" parent="Armature/GeneralSkeleton" index="6"]
+[node name="body head" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="6" unique_id=873523672]
 gi_mode = 2
 
-[node name="gold ring_001" parent="Armature/GeneralSkeleton" index="7"]
+[node name="gold ring_001" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="7" unique_id=1043872534]
 cast_shadow = 0
 
-[node name="gold ring_004" parent="Armature/GeneralSkeleton" index="8"]
+[node name="gold ring_004" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="8" unique_id=1064722062]
 cast_shadow = 0
 
-[node name="gold ring_022" parent="Armature/GeneralSkeleton" index="9"]
+[node name="gold ring_022" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="9" unique_id=106557277]
 cast_shadow = 0
 
-[node name="gold ring_024" parent="Armature/GeneralSkeleton" index="10"]
+[node name="gold ring_024" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="10" unique_id=233487478]
 cast_shadow = 0
 
-[node name="k1_Bottom_0" parent="Armature/GeneralSkeleton" index="11"]
+[node name="k1_Bottom_0" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="11" unique_id=1125733939]
 layers = 65
 
-[node name="ranger boots" parent="Armature/GeneralSkeleton" index="12"]
+[node name="ranger boots" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="12" unique_id=709100598]
 gi_mode = 2
 
-[node name="ranger pants" parent="Armature/GeneralSkeleton" index="13"]
+[node name="ranger pants" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="13" unique_id=1892356099]
+visible = false
 gi_mode = 2
 
-[node name="ranger top" parent="Armature/GeneralSkeleton" index="14"]
+[node name="ranger top" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="14" unique_id=614327328]
 gi_mode = 2
 
-[node name="ranger torso" parent="Armature/GeneralSkeleton" index="15"]
+[node name="ranger torso" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(1317024925) index="15" unique_id=375521894]
 gi_mode = 2

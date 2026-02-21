@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b6tpdgol8yavy"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b6tpdgol8yavy"]
 
 [ext_resource type="Texture2D" uid="uid://l8nkm5rrxd0m" path="res://-assets-/materials-shared/wood/just_wood_dark_planks/tower-map_Wood.jpg" id="1_4eosh"]
 

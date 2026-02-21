@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bbjymfj8hwa46"]
+[gd_scene format=4 uid="uid://bbjymfj8hwa46"]
 
 [ext_resource type="Material" uid="uid://d1rn6l0bv3jxc" path="res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_Reimp.tres" id="1_8ld0f"]
 [ext_resource type="PackedScene" uid="uid://c7vyqnm6vpnbx" path="res://logic/c_systems/influence_parent/break_static_parent/BreakStaticParent.tscn" id="2_m6wrh"]
@@ -57,18 +57,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_af63u")
 
-[node name="column_002" type="StaticBody3D"]
+[node name="column_002" type="StaticBody3D" unique_id=1579152017]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1428694902]
 shape = SubResource("ConcavePolygonShape3D_i03do")
 
-[node name="column_002_visuals" type="MeshInstance3D" parent="."]
+[node name="column_002_visuals" type="MeshInstance3D" parent="." unique_id=1731778734]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26366496, 0)
 layers = 128
 mesh = SubResource("ArrayMesh_5dnl1")
-skeleton = NodePath("")
 
-[node name="BreakStaticParent2" parent="." instance=ExtResource("2_m6wrh")]
+[node name="BreakStaticParent2" parent="." unique_id=1202689903 instance=ExtResource("2_m6wrh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.079891205, 0, 0)
 shattered_column_scene = ExtResource("3_d4is4")
 

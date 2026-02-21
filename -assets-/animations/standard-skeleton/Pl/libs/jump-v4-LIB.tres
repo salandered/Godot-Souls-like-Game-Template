@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=8 format=3 uid="uid://mcxcrdwd3t2u"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://mcxcrdwd3t2u"]
 
 [ext_resource type="AudioStream" uid="uid://d3ahq7du2874o" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_land.tres" id="1_52bu6"]
 [ext_resource type="AudioStream" uid="uid://d0p7wlbl03i5r" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_launch.tres" id="2_sndq2"]

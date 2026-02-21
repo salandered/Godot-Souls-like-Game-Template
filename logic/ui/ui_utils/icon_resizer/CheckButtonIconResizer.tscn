@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://jr8327ip54xv"]
+[gd_scene format=3 uid="uid://jr8327ip54xv"]
 
 [ext_resource type="Script" path="res://logic/ui/ui_utils/icon_resizer/check_button_icon_resizer.gd" id="1_n64md"]
 
-[node name="CheckButtonIconResizer" type="Node"]
+[node name="CheckButtonIconResizer" type="Node" unique_id=2101719206]
 script = ExtResource("1_n64md")

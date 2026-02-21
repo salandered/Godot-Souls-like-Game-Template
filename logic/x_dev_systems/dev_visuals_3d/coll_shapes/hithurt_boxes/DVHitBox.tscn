@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc4l4h2cvh2ws"]
+[gd_scene format=3 uid="uid://bc4l4h2cvh2ws"]
 
 [ext_resource type="Script" uid="uid://tm07dvd0564d" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/dev_visuals_char_hitboxes.gd" id="1_aukyj"]
 
-[node name="DVHitBoxFrame" type="Node3D"]
+[node name="DVHitBoxFrame" type="Node3D" unique_id=250236707]
+visible = false
 script = ExtResource("1_aukyj")
 color_vulnerable = Color(1, 0, 0.8666667, 0.2509804)
 color_invincible = Color(0, 0.7104485, 0.26411828, 0.2509804)

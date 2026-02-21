@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4kxcjrgkejpt"]
+[gd_scene format=3 uid="uid://4kxcjrgkejpt"]
 
 [ext_resource type="Script" uid="uid://bdjasp68crsoi" path="res://logic/ui/ui_utils/dynamic_info_label/dynamic_info_label.gd" id="1_mvehj"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="2_8drye"]
@@ -21,7 +21,7 @@ border_width_left = 3
 border_width_top = 1
 border_color = Color(0.17, 0.17, 0.17, 0.08235294)
 
-[node name="DynamicInfoLabel" type="MarginContainer"]
+[node name="DynamicInfoLabel" type="MarginContainer" unique_id=1222454545]
 custom_minimum_size = Vector2(160, 0)
 offset_right = 180.0
 offset_bottom = 89.0
@@ -31,18 +31,18 @@ script = ExtResource("1_mvehj")
 title_font_size = 24
 font_size = 28
 
-[node name="PanelGradient" type="PanelContainer" parent="."]
+[node name="PanelGradient" type="PanelContainer" parent="." unique_id=1734951189]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_5uj7u")
 
-[node name="PanelBordersOnly" type="PanelContainer" parent="PanelGradient"]
+[node name="PanelBordersOnly" type="PanelContainer" parent="PanelGradient" unique_id=1751309619]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vcvme")
 
-[node name="MarginInsidePanel" type="MarginContainer" parent="PanelGradient"]
+[node name="MarginInsidePanel" type="MarginContainer" parent="PanelGradient" unique_id=1444748927]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -50,12 +50,12 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelGradient/MarginInsidePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelGradient/MarginInsidePanel" unique_id=602695234]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Title" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
+[node name="Title" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer" unique_id=980192768]
 unique_name_in_owner = true
 modulate = Color(0.67650515, 0.67650515, 0.67650515, 1)
 clip_contents = false
@@ -70,14 +70,14 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="__margin2" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
+[node name="__margin2" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer" unique_id=179678802]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/margin_top = -12
 theme_override_constants/margin_bottom = -6
 
-[node name="TitleAdditional" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin2"]
+[node name="TitleAdditional" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" unique_id=1193991582]
 unique_name_in_owner = true
 modulate = Color(0.7715464, 0.7715464, 0.7715464, 1)
 clip_contents = false
@@ -93,20 +93,20 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 2
 
-[node name="HSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer" instance=ExtResource("2_8drye")]
+[node name="HSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer" unique_id=1563480587 instance=ExtResource("2_8drye")]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer" unique_id=366621837]
 layout_mode = 2
 
-[node name="__margin" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer"]
+[node name="__margin" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" unique_id=241586409]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 2
 
-[node name="Text" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin"]
+[node name="Text" type="RichTextLabel" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" unique_id=1522643677]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -123,6 +123,6 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="__bottom_space" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer"]
+[node name="__bottom_space" type="MarginContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer" unique_id=1041846544]
 layout_mode = 2
 theme_override_constants/margin_top = 20

@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://qx7gwin4jyuw"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://qx7gwin4jyuw"]
 
 [ext_resource type="AudioStream" uid="uid://bg5aow4pbkp3q" path="res://-assets-/SFX/sources/mini fantasy/26_sword_hit_1_try.wav" id="1_adtkm"]
 

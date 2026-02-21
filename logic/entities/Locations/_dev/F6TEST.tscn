@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://de7q7oflaploe"]
+[gd_scene format=3 uid="uid://de7q7oflaploe"]
 
 [ext_resource type="PackedScene" uid="uid://ctdp8t5nsqc8q" path="res://-assets-/GLB-items/prefabs/Chair.tscn" id="1_0itnl"]
 
@@ -14,14 +14,14 @@ background_mode = 2
 sky = SubResource("Sky_rpcss")
 tonemap_mode = 2
 
-[node name="F6TEST" type="Node3D"]
+[node name="F6TEST" type="Node3D" unique_id=2052225043]
 
-[node name="Chair_1_002" parent="." instance=ExtResource("1_0itnl")]
+[node name="Chair_1_002" parent="." unique_id=956970179 instance=ExtResource("1_0itnl")]
 transform = Transform3D(0.8619302, 0, -0.507027, 0, 1, 0, 0.507027, 0, 0.8619302, 0, 0.48870766, 0.08431691)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=265778971]
 transform = Transform3D(0.55407465, 0, 0.832467, 0, 1, 0, -0.832467, 0, 0.55407465, 1.462717, 0.6991416, 1.0939426)
 current = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=122855361]
 environment = SubResource("Environment_q7m14")

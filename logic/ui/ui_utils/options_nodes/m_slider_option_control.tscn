@@ -1,22 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl416gdb1fgwr"]
+[gd_scene format=3 uid="uid://cl416gdb1fgwr"]
 
 [ext_resource type="Script" uid="uid://badmldrkr7cy1" path="res://logic/ui/ui_utils/options_nodes/m_option_control.gd" id="2_ilsxl"]
 
-[node name="OptionControl" type="HBoxContainer"]
+[node name="OptionControl" type="HBoxContainer" unique_id=770051559]
 custom_minimum_size = Vector2(0, 28)
 offset_right = 400.0
 offset_bottom = 28.0
 script = ExtResource("2_ilsxl")
 default_value = false
 
-[node name="OptionLabel" type="Label" parent="."]
+[node name="OptionLabel" type="Label" parent="." unique_id=2030463271]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = " "
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="."]
+[node name="HSlider" type="HSlider" parent="." unique_id=650381275]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_vertical = 4

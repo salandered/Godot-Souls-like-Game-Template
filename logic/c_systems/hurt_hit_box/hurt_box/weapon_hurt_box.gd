@@ -174,7 +174,7 @@ func _emit_sig(sig_id: String, payload: Dictionary[String, Variant], body: Node3
 	var key := sig_id + "_" + str(body.get_instance_id())
 	if not _sig_throttler.is_throttled(key):
 		var _sig_data := sig_container.get_by_sig_id(sig_id)
-		SigUtils.safe_emit(_sig_data, payload, false)
+		SigUtils.safe_emit_sig_data(_sig_data, payload, false)
 		_sig_throttler.record_event(key)
 
 

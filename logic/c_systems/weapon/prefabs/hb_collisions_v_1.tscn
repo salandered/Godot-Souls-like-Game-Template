@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw8ngfews2343"]
+[gd_scene format=3 uid="uid://cw8ngfews2343"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ods2k"]
 radius = 0.07519531
@@ -12,21 +12,21 @@ height = 0.18536234
 radius = 0.072265625
 height = 0.31422788
 
-[node name="hb_collisions_v1" type="Node"]
+[node name="hb_collisions_v1" type="Node" unique_id=1376172691]
 
-[node name="HurtBoxCol" type="CollisionShape3D" parent="."]
+[node name="HurtBoxCol" type="CollisionShape3D" parent="." unique_id=562755862]
 transform = Transform3D(4.208098, -0.62464863, 0.9078718, -0.7110185, -4.2769575, 0.35295862, 0.8419417, -0.48983812, -4.2395387, 0.1263331, 1.6404425, -0.9612248)
 visible = false
 shape = SubResource("CapsuleShape3D_ods2k")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
-[node name="HurtBoxCol3" type="CollisionShape3D" parent="."]
+[node name="HurtBoxCol3" type="CollisionShape3D" parent="." unique_id=30323478]
 transform = Transform3D(4.2962227, -0.70749366, 0.0891186, -0.5149221, -2.7014878, 3.3768115, -0.4932989, -3.341773, -2.7486796, 0.075651854, 1.1459115, -0.744044)
 visible = false
 shape = SubResource("CapsuleShape3D_6hf6c")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
-[node name="HurtBoxCol2" type="CollisionShape3D" parent="."]
+[node name="HurtBoxCol2" type="CollisionShape3D" parent="." unique_id=2058388464]
 transform = Transform3D(4.1779947, -0.33017457, 1.1652693, 1.0886619, -0.81024253, -4.132896, 0.5307368, 4.261103, -0.6955724, 0.18509431, 2.0829234, -1.3690958)
 visible = false
 shape = SubResource("CapsuleShape3D_u228v")

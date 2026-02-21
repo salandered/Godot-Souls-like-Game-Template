@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bumn4dqkyje6d"]
+[gd_scene format=3 uid="uid://bumn4dqkyje6d"]
 
 [ext_resource type="PackedScene" uid="uid://cexdblmpe4p00" path="res://-assets-/GLB-items/prefabs/SmallRockRigid.tscn" id="1_2k6dd"]
 
-[node name="RockPeace" type="Node3D"]
+[node name="RockPeace" type="Node3D" unique_id=1842363865]
 
-[node name="SmallRockRigid9" parent="." instance=ExtResource("1_2k6dd")]
+[node name="SmallRockRigid9" parent="." unique_id=638304283 instance=ExtResource("1_2k6dd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019423962, 0.359, 0)
 
-[node name="SmallRockRigid10" parent="." instance=ExtResource("1_2k6dd")]
+[node name="SmallRockRigid10" parent="." unique_id=1914314764 instance=ExtResource("1_2k6dd")]
 transform = Transform3D(-0.054636482, 0, 0.9985063, 0, 1, 0, -0.9985063, 0, -0.054636482, -0.30350924, 0.6757383, 0.05043876)
 
-[node name="SmallRockRigid11" parent="." instance=ExtResource("1_2k6dd")]
+[node name="SmallRockRigid11" parent="." unique_id=942948870 instance=ExtResource("1_2k6dd")]
 transform = Transform3D(0.7913516, 0, -0.6113613, 0, 1, 0, 0.6113613, 0, 0.7913516, -0.6557772, 0.34398007, 0)

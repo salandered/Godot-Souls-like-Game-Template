@@ -15,10 +15,6 @@ const FILE_PATH = "res://ui/game_state/m_game_state.gd"
 # handle the saving and loading to disk itself, but instead relies on M_GlobalState singleton 
 # to store its own state as a persistent resource.
 #
-# All functions are static and should be called directly on the class, for example:
-# M_GameState.level_reached("res://levels/level_2.tscn")
-# var levels_unlocked = M_GameState.get_levels_reached()
-
 ## Responsibilities:
 # - Tracks which levels have been reached and stores their individual states ([LevelState]).
 # - Remembers the last level played for the 'Continue' functionality.
@@ -38,11 +34,14 @@ static func get_level_state(level_state_key: String) -> M_LevelState:
 		M_GlobalState.save()
 		return new_level_state
 
+
 static func has_game_state() -> bool:
 	return M_GlobalState.has_state(STATE_NAME)
 
+
 static func get_or_create_state() -> M_GameState:
 	return M_GlobalState.get_or_create_state(STATE_NAME, FILE_PATH)
+
 
 static func get_current_level_path() -> String:
 	if not has_game_state():
@@ -50,33 +49,22 @@ static func get_current_level_path() -> String:
 	var game_state := get_or_create_state()
 	return game_state.current_level_path
 
-static func get_levels_reached() -> int:
-	if not has_game_state():
-		return 0
-	var game_state := get_or_create_state()
-	return game_state.level_states.size()
-
-static func level_reached(level_path: String) -> void:
-	var game_state := get_or_create_state()
-	game_state.current_level_path = level_path
-	game_state.continue_level_path = level_path
-	get_level_state(level_path)
-	M_GlobalState.save()
 
 static func set_current_level(level_path: String) -> void:
 	var game_state := get_or_create_state()
 	game_state.current_level_path = level_path
 	M_GlobalState.save()
 
+
 static func start_game() -> void:
-	var game_state := get_or_create_state()
-	game_state.times_played += 1
 	M_GlobalState.save()
+
 
 static func continue_game() -> void:
 	var game_state := get_or_create_state()
 	game_state.current_level_path = game_state.continue_level_path
 	M_GlobalState.save()
+
 
 static func reset() -> void:
 	var game_state := get_or_create_state()

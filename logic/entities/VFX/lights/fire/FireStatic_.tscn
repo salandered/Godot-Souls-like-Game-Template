@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bnf3bmp3nq5nq"]
+[gd_scene format=4 uid="uid://bnf3bmp3nq5nq"]
 
 [ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://logic/entities/VFX/lights/omni/FlickerOmni.tscn" id="1_gyo1q"]
 [ext_resource type="Script" uid="uid://di8a2ya3udmgp" path="res://logic/entities/VFX/lights/fire/fire_static.gd" id="2_jqjo8"]
@@ -90,7 +90,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sbcve")
 
-[node name="FireStatic" instance=ExtResource("1_gyo1q")]
+[node name="FireStatic" unique_id=1737440208 instance=ExtResource("1_gyo1q")]
 script = ExtResource("2_jqjo8")
 particles_amount = 10
 lifetime = 1.0
@@ -99,13 +99,13 @@ audio_stream = ExtResource("3_qdwx7")
 play_sound = true
 radius = 2.0
 
-[node name="OmniLight3D" parent="." index="0"]
+[node name="OmniLight3D" parent="." index="0" unique_id=1617374791]
 omni_range = 4.774
 
-[node name="__csg" parent="OmniLight3D" index="0"]
+[node name="__csg" parent="OmniLight3D" index="0" unique_id=1894849701]
 material_override = SubResource("StandardMaterial3D_yqn15")
 
-[node name="Fire" type="AudioStreamPlayer3D" parent="." index="3"]
+[node name="Fire" type="AudioStreamPlayer3D" parent="." index="3" unique_id=1171190111]
 unique_name_in_owner = true
 transform = Transform3D(1.0000001, 0, 0, 0, 0.99999964, 0, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("3_qdwx7")
@@ -118,23 +118,22 @@ max_polyphony = 2
 panning_strength = 0.5
 bus = &"game_SFX"
 
-[node name="Effect" type="Node3D" parent="." index="4"]
+[node name="Effect" type="Node3D" parent="." index="4" unique_id=1877066957]
 
-[node name="FlameGPUParticles3D" parent="Effect" index="0" instance=ExtResource("4_qdwx7")]
+[node name="FlameGPUParticles3D" parent="Effect" index="0" unique_id=444865851 instance=ExtResource("4_qdwx7")]
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.014128417, 0)
 gi_mode = 0
 amount = 10
 
-[node name="test_visual_fire" type="MeshInstance3D" parent="Effect" index="1"]
+[node name="test_visual_fire" type="MeshInstance3D" parent="Effect" index="1" unique_id=1226615135]
 transform = Transform3D(2.046, 0, 0, 0, 2.046, 0, 0, 0, 2.046, -2.2136915, -0.45511734, 0.34782207)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_lyuy6")
-skeleton = NodePath("")
 
-[node name="test_visual_base" parent="test_visuals_base" index="0"]
+[node name="test_visual_base" parent="test_visuals_base" parent_id_path=PackedInt32Array(523603604) index="0" unique_id=1411419840]
 transform = Transform3D(-0.4436743, 0, -1.1358384, 0, 1.219416, 0, 1.1358383, 0, -0.44367436, -0.11369126, 0.007882406, -1.5951779)
 
-[node name="VOSE3D" parent="." index="7"]
+[node name="VOSE3D" parent="." index="7" unique_id=157547190]
 aabb = AABB(-3, -3, -3, 6, 6, 6)

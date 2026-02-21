@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cjbmkc53iwu64"]
+[gd_scene format=4 uid="uid://cjbmkc53iwu64"]
 
 [ext_resource type="Script" uid="uid://3gwcbxmcc858" path="res://logic/entities/Items/simple_target/simple_target.gd" id="1_g7ncb"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="1_vud1n"]
@@ -141,6 +141,57 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_deekb"]
+resource_name = "rotate_on_hit_clock"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/RotatingTarget:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -5.7595863, 0), Vector3(0, -6.265732, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/RotatingTarget/Whoosh:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.099999994),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/RotatingTarget/Friction:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26666668),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/RotatingTarget/Hit:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_hrpcc"]
 resource_name = "rotate_on_hit_super"
 length = 2.0
@@ -193,57 +244,6 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_deekb"]
-resource_name = "rotate_on_hit_clock"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/RotatingTarget:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8333333, 1),
-"transitions": PackedFloat32Array(0.5, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -5.7595863, 0), Vector3(0, -6.265732, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/RotatingTarget/Whoosh:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.099999994),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/RotatingTarget/Friction:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.26666668),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/RotatingTarget/Hit:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ramhp"]
 _data = {
 &"RESET": SubResource("Animation_wnrsi"),
@@ -252,24 +252,24 @@ _data = {
 &"rotate_on_hit_super": SubResource("Animation_hrpcc")
 }
 
-[node name="SimpleTarget" type="Node3D"]
+[node name="SimpleTarget" type="Node3D" unique_id=1998518947]
 script = ExtResource("1_g7ncb")
 
-[node name="CameraTarget" parent="." instance=ExtResource("1_vud1n")]
+[node name="CameraTarget" parent="." unique_id=1923337238 instance=ExtResource("1_vud1n")]
 unique_name_in_owner = true
 transform = Transform3D(0.66925603, 0, 0, 0, 0.66925603, 0, 0, 0, 0.66925603, 0, 1.2639782, 0)
 __csg_visual = false
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=1736189500]
 
-[node name="RotatingTarget" type="MeshInstance3D" parent="Visuals"]
+[node name="RotatingTarget" type="MeshInstance3D" parent="Visuals" unique_id=84983083]
 unique_name_in_owner = true
 transform = Transform3D(0.3819422, 0, 0.0066669034, 0, 0.3820004, 0, -0.0066669034, 0, 0.3819422, 0, 1.2790871, 0)
 layers = 128
 material_override = ExtResource("6_lub8o")
 mesh = SubResource("ArrayMesh_lub8o")
 
-[node name="Whoosh" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget"]
+[node name="Whoosh" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget" unique_id=1046172884]
 unique_name_in_owner = true
 transform = Transform3D(-1.351951, 0, -2.241673, 0, 2.6177983, 0, 2.241673, 0, -1.351951, 0.25813103, -0.039551973, -0.42800766)
 stream = ExtResource("3_lub8o")
@@ -279,7 +279,7 @@ max_db = -2.0
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="Hit" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget"]
+[node name="Hit" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget" unique_id=602064142]
 unique_name_in_owner = true
 transform = Transform3D(-1.351951, 0, -2.241673, 0, 2.6177983, 0, 2.241673, 0, -1.351951, -0.22780553, -0.039551973, -0.1373893)
 stream = ExtResource("4_hrpcc")
@@ -290,7 +290,7 @@ pitch_scale = 0.77
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="Friction" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget"]
+[node name="Friction" type="AudioStreamPlayer3D" parent="Visuals/RotatingTarget" unique_id=238280534]
 unique_name_in_owner = true
 transform = Transform3D(-1.351951, 0, -2.241673, 0, 2.6177983, 0, 2.241673, 0, -1.351951, -0.17163245, -0.039551973, 0.2845842)
 stream = ExtResource("5_lub8o")
@@ -300,40 +300,38 @@ max_db = -2.0
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="StolbStatic" type="StaticBody3D" parent="Visuals"]
+[node name="StolbStatic" type="StaticBody3D" parent="Visuals" unique_id=303036035]
 
-[node name="CSGOriginalHidden" type="CSGBox3D" parent="Visuals/StolbStatic"]
+[node name="CSGOriginalHidden" type="CSGBox3D" parent="Visuals/StolbStatic" unique_id=2037818719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91305864, 0)
 visible = false
 use_collision = true
 size = Vector3(0.2295, 1.7868408, 0.22876172)
 
-[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Visuals/StolbStatic"]
+[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Visuals/StolbStatic" unique_id=2121694148]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91305864, 0)
 material_override = SubResource("StandardMaterial3D_lub8o")
 mesh = SubResource("ArrayMesh_hiuge")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/StolbStatic"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/StolbStatic" unique_id=1495807929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9062269, 0)
 shape = SubResource("CapsuleShape3D_hrpcc")
 
-[node name="HitArea" type="Area3D" parent="."]
+[node name="HitArea" type="Area3D" parent="." unique_id=1218261816]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0544726, 0)
 script = ExtResource("7_wnrsi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" unique_id=1271949500]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11282349, 0)
 shape = SubResource("CapsuleShape3D_deekb")
 debug_color = Color(0.70196074, 0.11070298, 0, 0.41960785)
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="HitArea"]
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="HitArea" unique_id=1305605794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25103688, 0)
 aabb = AABB(-1, -0.63136977, -1.0579317, 2, 1.2627395, 2.1158633)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1203957985]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_ramhp")
-}
+libraries/ = SubResource("AnimationLibrary_ramhp")

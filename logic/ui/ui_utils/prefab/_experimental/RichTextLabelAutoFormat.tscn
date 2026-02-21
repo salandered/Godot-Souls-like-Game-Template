@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://4lpu8dbtw3uv"]
+[gd_scene format=3 uid="uid://4lpu8dbtw3uv"]
 
 [ext_resource type="Script" uid="uid://cey7k0oqnexwi" path="res://logic/ui/ui_utils/prefab/_experimental/rich_text_label_auto_fmt.gd" id="1_gewca"]
 
-[node name="RichTextLabelAutoFormat" type="RichTextLabel"]
+[node name="RichTextLabelAutoFormat" type="RichTextLabel" unique_id=2082544459]
 theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true

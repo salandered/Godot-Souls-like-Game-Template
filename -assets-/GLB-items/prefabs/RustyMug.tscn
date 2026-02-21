@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://nmnjhflup70n"]
+[gd_scene format=4 uid="uid://nmnjhflup70n"]
 
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="1_5jirm"]
 
@@ -35,7 +35,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_t6kgl")
 
-[node name="Mug2" type="MeshInstance3D"]
+[node name="Mug2" type="MeshInstance3D" unique_id=1432728839]
 layers = 256
 mesh = SubResource("ArrayMesh_nsh7t")
-skeleton = NodePath("")

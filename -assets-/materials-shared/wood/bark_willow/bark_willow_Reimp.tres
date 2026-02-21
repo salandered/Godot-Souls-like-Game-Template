@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://d2ps7t077xfk8"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d2ps7t077xfk8"]
 
 [ext_resource type="Texture2D" uid="uid://c3rawax6ex0jw" path="res://-assets-/materials-shared/wood/bark_willow/island_bark_willow_diff_1k.jpg" id="1_xogmm"]
 [ext_resource type="Texture2D" uid="uid://bqhfci8wq01la" path="res://-assets-/materials-shared/wood/bark_willow/island_bark_willow_norm_gl_8k.png" id="2_1hopt"]

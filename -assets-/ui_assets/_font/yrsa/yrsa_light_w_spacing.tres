@@ -1,4 +1,4 @@
-[gd_resource type="FontVariation" load_steps=3 format=3 uid="uid://cjegrskdlmtod"]
+[gd_resource type="FontVariation" format=3 uid="uid://cjegrskdlmtod"]
 
 [ext_resource type="FontFile" uid="uid://bvq2o8lr43lkt" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-Light.ttf" id="1_t2g2g"]
 [ext_resource type="FontFile" uid="uid://bpysbhgyk4pje" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-Regular.ttf" id="2_bvc0n"]

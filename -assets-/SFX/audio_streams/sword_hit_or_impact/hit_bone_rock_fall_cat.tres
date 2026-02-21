@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://bi76gdwpvrkw7"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bi76gdwpvrkw7"]
 
 [ext_resource type="AudioStream" uid="uid://bkt3dm21uaro7" path="res://-assets-/SFX/sources/cat/hit_3_concrete_bone_rock_fall.wav" id="1_ttr6k"]
 [ext_resource type="AudioStream" uid="uid://bed7xjr2unrt3" path="res://-assets-/SFX/sources/cat/hit_4_concrete_bone_rock_fall.wav" id="2_dhsr5"]

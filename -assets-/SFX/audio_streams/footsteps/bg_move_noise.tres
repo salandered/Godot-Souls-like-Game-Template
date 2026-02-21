@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://cga1kwd4shtmo"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cga1kwd4shtmo"]
 
 [ext_resource type="AudioStream" uid="uid://bytblgac1ujfd" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Footsteps/Dirt/Dirt Walk 1.wav" id="1_o460o"]
 [ext_resource type="AudioStream" uid="uid://ps1bxfocyyw0" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Footsteps/Dirt/Dirt Walk 2.wav" id="2_4nkc4"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvbe6tl3nhj2m"]
+[gd_scene format=3 uid="uid://dvbe6tl3nhj2m"]
 
 [ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_u8e5p"]
 [ext_resource type="Script" uid="uid://ba3jiexlu53gq" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/enemy_movement_grid_manager.gd" id="2_mi0kl"]
@@ -19,54 +19,54 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="GlobalUIEnemyMovementPanel" type="MarginContainer"]
+[node name="GlobalUIEnemyMovementPanel" type="MarginContainer" unique_id=248106067]
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="MetricsGridDistributor" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("1_u8e5p")]
+[node name="MetricsGridDistributor" parent="." unique_id=57072665 node_paths=PackedStringArray("grid") instance=ExtResource("1_u8e5p")]
 unique_name_in_owner = true
 grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/UIMetricsGrid")
 
-[node name="MetricsGridManager" type="Node" parent="." node_paths=PackedStringArray("metrics_grid", "ui_container")]
+[node name="MetricsGridManager" type="Node" parent="." unique_id=1071618747 node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
 script = ExtResource("2_mi0kl")
 metrics_grid = NodePath("../MetricsGridDistributor")
 ui_container = NodePath("../VBoxContainer/MetricsPanel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1872155508]
 layout_mode = 2
 
-[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer"]
+[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer" unique_id=1298838638]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel"]
+[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel" unique_id=997874727]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hprbw")
 
-[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel"]
+[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel" unique_id=2044621348]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m"]
+[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m" unique_id=1484037791]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v"]
+[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1738393992]
 modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_tbua7")
 theme_override_font_sizes/font_size = 22
 text = "Enemy Movement"
 
-[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" instance=ExtResource("4_fx1o2")]
+[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1929653447 instance=ExtResource("4_fx1o2")]
 layout_mode = 2
 
-[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" instance=ExtResource("5_mi0kl")]
+[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1950470762 instance=ExtResource("5_mi0kl")]
 unique_name_in_owner = true
 layout_mode = 2

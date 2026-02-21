@@ -88,7 +88,7 @@ func _sfx_weapon_hit():
 	if combat and len(get_anim_active_weapon_ids()) > 0:
 		var curr_weapon := combat.get_registered_weapon_by_id(get_anim_active_weapon_ids()[0])
 		if curr_weapon:
-			SigUtils.safe_emit(
+			SigUtils.safe_emit_sig_data(
 				curr_weapon.get_signal_container().get_by_sig_id(SignalID.sfx_hit_weapon),
 				{},
 				false)

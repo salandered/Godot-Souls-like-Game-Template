@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlfv7h67kfr7f"]
+[gd_scene format=3 uid="uid://dlfv7h67kfr7f"]
 
 [ext_resource type="Texture2D" uid="uid://ovi2aqoj0bxu" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (25).png" id="1_jbj5k"]
 [ext_resource type="Texture2D" uid="uid://b3n2d7eqw32t6" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (27).png" id="2_jbj5k"]
@@ -64,7 +64,7 @@ bg_color = Color(0.61565834, 0.6357732, 0.00011758829, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rbjfo"]
 
-[node name="MinimalCheckButton" type="CheckButton"]
+[node name="MinimalCheckButton" type="CheckButton" unique_id=472494925]
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_colors/icon_normal_color = Color(0.79870105, 0.79870105, 0.79870105, 1)

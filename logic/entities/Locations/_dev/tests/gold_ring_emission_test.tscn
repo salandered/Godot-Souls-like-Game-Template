@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bxpyycad5edj"]
+[gd_scene format=4 uid="uid://bxpyycad5edj"]
 
 [ext_resource type="Texture2D" uid="uid://dh7vncqq7h0iy" path="res://-assets-/materials-shared/__pix-pal/another/rings_ImphenziaPixel-BaseColor.png" id="1_tr174"]
 [ext_resource type="Texture2D" uid="uid://ced61lgif6c6m" path="res://-assets-/materials-shared/__pix-pal/another/rings_ImphenziaPixel-Emission.png" id="2_f7o80"]
@@ -83,14 +83,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_whfcv")
 
-[node name="gold ring_032" type="MeshInstance3D"]
+[node name="gold ring_032" type="MeshInstance3D" unique_id=909477933]
 transform = Transform3D(1, 0, 0, 0, 0.99999964, 0, 0, 0, 1, 0, 0, 0)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_jhmke")
-skeleton = NodePath("")
 
-[node name="gold ring_033" type="MeshInstance3D" parent="."]
+[node name="gold ring_033" type="MeshInstance3D" parent="." unique_id=1033204107]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000005, 0, 0, 0, 1.0000001, -0.48826838, 0.040928245, -0.0005660057)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_true4")
-skeleton = NodePath("")

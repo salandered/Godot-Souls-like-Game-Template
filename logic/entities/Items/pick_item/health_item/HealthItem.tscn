@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctsqu10igrfjw"]
+[gd_scene format=3 uid="uid://ctsqu10igrfjw"]
 
 [ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_3qj1i"]
 [ext_resource type="Script" uid="uid://c7eeni577qmxv" path="res://logic/entities/Items/pick_item/health_item/health_item.gd" id="2_1aqnm"]
 [ext_resource type="Material" uid="uid://i0yd71ruqvup" path="res://-assets-/materials-shared/_shaders/pick_items/HealthItemShaderMat.tres" id="2_et513"]
 
-[node name="HealthItem" instance=ExtResource("1_3qj1i")]
+[node name="HealthItem" unique_id=520690370 instance=ExtResource("1_3qj1i")]
 script = ExtResource("2_1aqnm")
 
-[node name="RedSphere" parent="Visuals" index="0"]
+[node name="RedSphere" parent="Visuals" parent_id_path=PackedInt32Array(788798705) index="0" unique_id=1322938207]
 material_override = ExtResource("2_et513")
 
-[node name="GlowLight" parent="Visuals/RedSphere" index="1"]
+[node name="GlowLight" parent="Visuals/RedSphere" index="1" unique_id=1271204396]
 light_energy = 1.5
 shadow_opacity = 0.8
 
-[node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
+[node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2" unique_id=1913207257]
 light_color = Color(0.40495878, 0, 0.02770764, 1)
 light_energy = 1.0
 shadow_enabled = false

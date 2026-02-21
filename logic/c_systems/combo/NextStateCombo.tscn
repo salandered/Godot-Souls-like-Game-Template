@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://x0w2xi46w8ua"]
+[gd_scene format=3 uid="uid://x0w2xi46w8ua"]
 
 [ext_resource type="Script" uid="uid://b1kppcgongxye" path="res://logic/c_systems/combo/next_state_combo.gd" id="1_4bov6"]
 
-[node name="NextState" type="Node"]
+[node name="NextState" type="Node" unique_id=666960836]
 script = ExtResource("1_4bov6")

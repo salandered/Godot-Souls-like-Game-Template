@@ -9,7 +9,7 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 
 
 func on_enter_state(input) -> void:
-	SigUtils.safe_emit(
+	SigUtils.safe_emit_sig_data(
 		get_player().get_sig_container().get_by_sig_id(SignalID.sfx_unique),
 		{SFXConstants.unique_key: SFXConstants.Unique.player_dead},
 		false

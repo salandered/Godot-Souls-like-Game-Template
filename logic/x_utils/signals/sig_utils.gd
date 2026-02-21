@@ -23,7 +23,7 @@ static func __emit(signal_: Signal, with_payload: bool, payload: Dictionary):
 
 
 ## returns true if emitted
-static func safe_emit(
+static func safe_emit_sig_data(
 	signal_data: SignalData,
 	signal_payload: Dictionary[String, Variant],
 	__log: bool = false,

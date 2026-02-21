@@ -61,7 +61,7 @@ func update(input_: InputPackage, delta: float):
 		if not hit_sig_emitted:
 			hit_sig_emitted = true
 			var sig_data := get_signal_from_active_weapon(SignalID.sfx_hit_weapon)
-			SigUtils.safe_emit(sig_data, {})
+			SigUtils.safe_emit_sig_data(sig_data, {})
 
 
 var hit_sig_emitted: bool = false

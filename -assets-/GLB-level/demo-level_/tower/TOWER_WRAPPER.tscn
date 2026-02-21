@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpvdn2ol6jj2v"]
+[gd_scene format=3 uid="uid://cpvdn2ol6jj2v"]
 
 [ext_resource type="PackedScene" uid="uid://de0vy8geyumqj" path="res://-assets-/GLB-level/demo-level_/tower/tower-map.glb" id="1_65w32"]
 [ext_resource type="Material" uid="uid://b6tpdgol8yavy" path="res://-assets-/materials-shared/wood/just_wood_dark_planks/Wood_Reimp.tres" id="2_3yp7w"]
@@ -10,48 +10,48 @@ points = PackedVector3Array(-0.15686893, -0.089697525, -1.490706, -1.0785624, -0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3yp7w"]
 points = PackedVector3Array(1.8693445, -1.3979299, -5.997531, 1.0010021, -1.3928943, -5.214057, 1.6746726, -1.3878586, -6.447668, 2.0621352, 2.276274, -6.2114444, 1.1401877, -1.3932539, 6.674542, 0.05084145, -1.3932539, 4.799191, -1.1403861, -1.3928943, 3.3372302, 1.069968, 2.2712383, -5.203558, -1.1068436, 2.2712383, 3.1758113, 1.9314137, 2.2662027, -6.5093484, 0.0743525, 2.271598, 4.700764, 1.1533539, 2.271598, 6.6719174, 0.9408138, -1.3928943, 6.8871436, -0.1798805, -1.3928943, 4.977671, 0.93987346, 2.2712383, 6.8976426, -0.16953564, 2.2712383, 4.892368)
 
-[node name="TOWER2" instance=ExtResource("1_65w32")]
+[node name="TOWER2" unique_id=1373089562 instance=ExtResource("1_65w32")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="TOWER/tower itself/rock_smallC" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="TOWER/tower itself/rock_smallC" parent_id_path=PackedInt32Array(874551094) index="0" unique_id=1109799687]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TOWER/tower itself/rock_smallC/StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TOWER/tower itself/rock_smallC/StaticBody3D" index="0" unique_id=483072824]
 shape = SubResource("ConvexPolygonShape3D_2beuy")
 
-[node name="Door1Step_001" parent="TOWER/tower itself" index="4"]
+[node name="Door1Step_001" parent="TOWER/tower itself" parent_id_path=PackedInt32Array(1005556118) index="4" unique_id=2079164987]
 surface_material_override/0 = ExtResource("2_3yp7w")
 
-[node name="Candle_2_001" parent="TOWER/stupid sign/CandleStick" index="0"]
+[node name="Candle_2_001" parent="TOWER/stupid sign/CandleStick" parent_id_path=PackedInt32Array(1173783180) index="0" unique_id=1564232214]
 material_override = ExtResource("3_2beuy")
 
-[node name="Tower middle" parent="TOWER/__solid_002" index="0"]
+[node name="Tower middle" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(1733656766) index="0" unique_id=285920818]
 layers = 17
 
-[node name="Tower top" parent="TOWER/__solid_002" index="1"]
+[node name="Tower top" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(1733656766) index="1" unique_id=910467189]
 layers = 17
 
-[node name="wooden wall diagonal" parent="TOWER/__solid_002" index="2"]
+[node name="wooden wall diagonal" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(1733656766) index="2" unique_id=1691851211]
 layers = 17
 
-[node name="StaticBody3D" type="StaticBody3D" parent="TOWER/__solid_002/wooden wall diagonal" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="TOWER/__solid_002/wooden wall diagonal" index="0" unique_id=183852498]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TOWER/__solid_002/wooden wall diagonal/StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TOWER/__solid_002/wooden wall diagonal/StaticBody3D" index="0" unique_id=741096651]
 shape = SubResource("ConvexPolygonShape3D_3yp7w")
 
-[node name="tower floor_visuals" parent="TOWER/__solid_002/tower floor " index="1"]
+[node name="tower floor_visuals" parent="TOWER/__solid_002/tower floor " parent_id_path=PackedInt32Array(746271113) index="1" unique_id=202680746]
 layers = 17
 cast_shadow = 0
 
-[node name="Tower lowest_visuals" parent="TOWER/__solid_002/Tower lowest " index="1"]
+[node name="Tower lowest_visuals" parent="TOWER/__solid_002/Tower lowest " parent_id_path=PackedInt32Array(480548664) index="1" unique_id=1911860503]
 layers = 17
 
-[node name="crops_dirtDoubleRowEnd" parent="TOWER/dirt" index="0"]
+[node name="crops_dirtDoubleRowEnd" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1257016456) index="0" unique_id=1306696343]
 layers = 17
 
-[node name="crops_dirtDoubleRowCorner_001" parent="TOWER/dirt" index="1"]
+[node name="crops_dirtDoubleRowCorner_001" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1257016456) index="1" unique_id=836009711]
 layers = 17
 
-[node name="crops_dirtDoubleRowCorner_003" parent="TOWER/dirt" index="2"]
+[node name="crops_dirtDoubleRowCorner_003" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1257016456) index="2" unique_id=500622604]
 layers = 17
 
-[node name="crops_dirtDoubleRowCorner_002" parent="TOWER/dirt" index="3"]
+[node name="crops_dirtDoubleRowCorner_002" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1257016456) index="3" unique_id=392989510]
 layers = 17

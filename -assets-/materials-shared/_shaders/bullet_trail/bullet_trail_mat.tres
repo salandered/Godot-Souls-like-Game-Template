@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://b73sj7vrj0xxb"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b73sj7vrj0xxb"]
 
 [ext_resource type="Shader" uid="uid://qwtk2c42j62s" path="res://-assets-/materials-shared/_shaders/bullet_trail/bullet_shader.gdshader" id="1_107k2"]
 [ext_resource type="Texture2D" uid="uid://c6aotd57ycjnm" path="res://-assets-/materials-shared/_textures/lu_noise/T_Lu_NoiseNorm_09.png" id="2_5q08r"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://dc6v8ymj7x6m8"]
+[gd_scene format=4 uid="uid://dc6v8ymj7x6m8"]
 
 [ext_resource type="Material" uid="uid://dnu2wsj02juhf" path="res://-assets-/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres" id="1_0bhpx"]
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="2_oojt0"]
@@ -63,12 +63,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lpio2")
 
-[node name="StaticBarrel" type="StaticBody3D"]
+[node name="StaticBarrel" type="StaticBody3D" unique_id=1920746012]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1206691242]
 shape = SubResource("ConvexPolygonShape3D_tpw3c")
 
-[node name="Cylinder001_008" type="MeshInstance3D" parent="."]
+[node name="Cylinder001_008" type="MeshInstance3D" parent="." unique_id=1703347412]
 layers = 17
 mesh = SubResource("ArrayMesh_nuku2")
-skeleton = NodePath("")

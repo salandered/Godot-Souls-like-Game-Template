@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7mftvb3txlfn"]
+[gd_scene format=3 uid="uid://b7mftvb3txlfn"]
 
 [ext_resource type="PackedScene" uid="uid://crs2okm35ngtf" path="res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/wooden_balcony.glb" id="1_i4a8m"]
 
@@ -8,50 +8,50 @@ points = PackedVector3Array(-5.3477793, -3.605075, 0.1359973, -5.0585093, -3.361
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dm6pr"]
 points = PackedVector3Array(-0.74810416, -1.1334369, -0.19310775, -0.7472477, -1.2272676, -0.51369923, -0.6765041, -1.21818, 0.76928777, -0.5420399, 0.7418158, 0.7671142, -0.08708829, -0.35166508, -0.63510484, 0.33463258, -1.1395711, -0.6878899, 0.7351133, -1.2086378, -0.53543425, 0.8613555, -1.2127273, -0.41899666, 0.0734123, -1.235901, 0.17995828, -0.49322164, 1.0017248, 0.5257003, -0.20151138, 0.7579465, -0.28951806, -0.0876022, 0.8435985, -0.33686936, 1.0018151, -1.2145449, 0.63484114, -0.43926466, 0.36967337, 0.8981454, -0.45519483, 0.7306833, 0.8439631, -0.48208767, 0.95787656, 0.6776902, 0.36769193, -0.45412916, -0.61135155, 0.0030112863, 0.6854719, -0.37428463, 0.9156551, -1.1095816, -0.40890542, -0.39490005, 1.0851048, 0.47291523, -0.06721842, 0.92993176, -0.113619685, 0.1102401, 0.83860004, -0.28610256, 0.6701936, 0.85200465, 0.1874103, 0.678587, 0.63276315, 0.3982399, 0.5561132, 0.30174255, 0.5348601, -0.31936026, 0.368083, 0.8872779, 0.46978205, 0.9465169, 0.28459686, -0.28955546, 1.0582958, 0.52166384, 0.07512522, 0.67479384, -0.35239437, 0.54292375, 0.9099387, 0.11242449)
 
-[node name="wooden_balcony_WRAPPER" instance=ExtResource("1_i4a8m")]
+[node name="wooden_balcony_WRAPPER" unique_id=692081415 instance=ExtResource("1_i4a8m")]
 
-[node name="wooden wall diagonal_003" parent="Wooden balcony" index="0"]
+[node name="wooden wall diagonal_003" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="0" unique_id=1790678563]
 layers = 17
 
-[node name="fallen fragment_001" parent="Wooden balcony/wooden wall diagonal_003" index="2"]
+[node name="fallen fragment_001" parent="Wooden balcony/wooden wall diagonal_003" index="2" unique_id=1615263345]
 layers = 17
 
-[node name="Tower middle_001" parent="Wooden balcony" index="1"]
+[node name="Tower middle_001" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="1" unique_id=1143908198]
 layers = 17
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Wooden balcony/Tower middle_001" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Wooden balcony/Tower middle_001" index="0" unique_id=494000478]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wooden balcony/Tower middle_001/StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wooden balcony/Tower middle_001/StaticBody3D" index="0" unique_id=70888123]
 shape = SubResource("ConvexPolygonShape3D_0aq8w")
 
-[node name="wooden wall diagonal_002" parent="Wooden balcony" index="2"]
+[node name="wooden wall diagonal_002" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="2" unique_id=1367958969]
 layers = 17
 
-[node name="Engel_C_002_Baked_003" parent="Wooden balcony/wooden wall diagonal_002" index="0"]
+[node name="Engel_C_002_Baked_003" parent="Wooden balcony/wooden wall diagonal_002" index="0" unique_id=2111749861]
 layers = 17
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Wooden balcony/wooden wall diagonal_002/Engel_C_002_Baked_003" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Wooden balcony/wooden wall diagonal_002/Engel_C_002_Baked_003" index="0" unique_id=1029956347]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wooden balcony/wooden wall diagonal_002/Engel_C_002_Baked_003/StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wooden balcony/wooden wall diagonal_002/Engel_C_002_Baked_003/StaticBody3D" index="0" unique_id=1688525474]
 shape = SubResource("ConvexPolygonShape3D_dm6pr")
 
-[node name="wooden wall diagonal_001" parent="Wooden balcony" index="8"]
+[node name="wooden wall diagonal_001" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="8" unique_id=1064988413]
 layers = 17
 
-[node name="wooden wall diagonal_004" parent="Wooden balcony" index="9"]
+[node name="wooden wall diagonal_004" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="9" unique_id=1253021135]
 layers = 17
 
-[node name="wooden wall diagonal_005" parent="Wooden balcony" index="10"]
+[node name="wooden wall diagonal_005" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="10" unique_id=2064432079]
 layers = 17
 
-[node name="fallen fragment_009" parent="Wooden balcony" index="11"]
+[node name="fallen fragment_009" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="11" unique_id=1025942880]
 layers = 17
 
-[node name="wooden wall diagonal_006" parent="Wooden balcony" index="12"]
+[node name="wooden wall diagonal_006" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="12" unique_id=179262414]
 layers = 17
 
-[node name="wooden wall diagonal_007" parent="Wooden balcony" index="13"]
+[node name="wooden wall diagonal_007" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="13" unique_id=1363866940]
 layers = 17
 
-[node name="wooden wall diagonal_008" parent="Wooden balcony" index="15"]
+[node name="wooden wall diagonal_008" parent="Wooden balcony" parent_id_path=PackedInt32Array(1243809439) index="15" unique_id=1456364713]
 layers = 17

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b46dekni8c4fb"]
+[gd_scene format=3 uid="uid://b46dekni8c4fb"]
 
 [ext_resource type="Script" path="res://logic/ui/image_gallery/_base_class/_generic_image_gallery.gd" id="1_ssf3r"]
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="2_ywow2"]
@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssf3r"]
 bg_color = Color(0.28, 0.08400001, 0.11013331, 0.89411765)
 
-[node name="BaseImageGallery" type="Control"]
+[node name="BaseImageGallery" type="Control" unique_id=1341714438]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_ssf3r")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2008508386]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,68 +27,68 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ssf3r")
 
-[node name="GlobalContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="GlobalContainer" type="MarginContainer" parent="PanelContainer" unique_id=562018357]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_right = 60
 
-[node name="Display" type="TextureRect" parent="PanelContainer/GlobalContainer"]
+[node name="Display" type="TextureRect" parent="PanelContainer/GlobalContainer" unique_id=963872995]
 unique_name_in_owner = true
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SystemInfoContainer" type="PanelContainer" parent="PanelContainer/GlobalContainer"]
+[node name="SystemInfoContainer" type="PanelContainer" parent="PanelContainer/GlobalContainer" unique_id=1233427710]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/SystemInfoContainer"]
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/SystemInfoContainer" unique_id=9265038]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="SystemInfoLabel" type="Label" parent="PanelContainer/GlobalContainer/SystemInfoContainer/__margin"]
+[node name="SystemInfoLabel" type="Label" parent="PanelContainer/GlobalContainer/SystemInfoContainer/__margin" unique_id=1291441666]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 44
 text = "Loading image gallery ..."
 
-[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer"]
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer" unique_id=26121676]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="InfoContainer" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin"]
+[node name="InfoContainer" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin" unique_id=1873134609]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer"]
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer" unique_id=1142848453]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin" unique_id=1527748150]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="TitleContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer"]
+[node name="TitleContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer" unique_id=372059512]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TitleLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer/TitleContainer"]
+[node name="TitleLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer/TitleContainer" unique_id=857198848]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 38
@@ -98,14 +98,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="h__sep" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer" instance=ExtResource("2_ywow2")]
+[node name="h__sep" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer" unique_id=1249297248 instance=ExtResource("2_ywow2")]
 layout_mode = 2
 
-[node name="DescriptionContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer"]
+[node name="DescriptionContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer" unique_id=1386936625]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer/DescriptionContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin/InfoContainer/__margin/VBoxContainer/DescriptionContainer" unique_id=1790429512]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 26
@@ -120,37 +120,37 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="__margin2" type="MarginContainer" parent="PanelContainer/GlobalContainer"]
+[node name="__margin2" type="MarginContainer" parent="PanelContainer/GlobalContainer" unique_id=1988534643]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="AdditionalInfoContainer" type="HBoxContainer" parent="PanelContainer/GlobalContainer/__margin2"]
+[node name="AdditionalInfoContainer" type="HBoxContainer" parent="PanelContainer/GlobalContainer/__margin2" unique_id=1783212025]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="CounterContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer"]
+[node name="CounterContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer" unique_id=1633930647]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="__panel" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer"]
+[node name="__panel" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer" unique_id=257536854]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer/__panel"]
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer/__panel" unique_id=605324181]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="CounterLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer/__panel/__margin"]
+[node name="CounterLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/CounterContainer/__panel/__margin" unique_id=755300004]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 44
@@ -162,11 +162,11 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer"]
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer" unique_id=483176036]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LegendContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer"]
+[node name="LegendContainer" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer" unique_id=2133459966]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -174,19 +174,19 @@ size_flags_vertical = 4
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="__panel" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer"]
+[node name="__panel" type="PanelContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer" unique_id=1317519491]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer/__panel"]
+[node name="__margin" type="MarginContainer" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer/__panel" unique_id=1300501109]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="LegendLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer/__panel/__margin"]
+[node name="LegendLabel" type="RichTextLabel" parent="PanelContainer/GlobalContainer/__margin2/AdditionalInfoContainer/LegendContainer/__panel/__margin" unique_id=1456427105]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 22
@@ -200,9 +200,9 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="asp" type="Node" parent="."]
+[node name="asp" type="Node" parent="." unique_id=349085493]
 
-[node name="BookFlip" type="AudioStreamPlayer" parent="asp"]
+[node name="BookFlip" type="AudioStreamPlayer" parent="asp" unique_id=1246017125]
 stream = ExtResource("3_ywow2")
 volume_db = -4.0
 pitch_scale = 0.9

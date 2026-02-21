@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://gr1qg8sb48qe"]
+[gd_scene format=4 uid="uid://gr1qg8sb48qe"]
 
 [ext_resource type="Material" uid="uid://fw2tqpveasi2" path="res://-assets-/materials-shared/concrete/just_concrete/concrete_Reimp.tres" id="1_rrivn"]
 [ext_resource type="PackedScene" uid="uid://c84cgpqlpdhfg" path="res://logic/c_systems/influence_parent/create_rigid_parent/CreateRigidParent.tscn" id="2_sttqd"]
@@ -39,14 +39,13 @@ shadow_mesh = SubResource("ArrayMesh_l6j1r")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rrivn"]
 
-[node name="skeleton_hand2" type="MeshInstance3D"]
-transform = Transform3D(0.8684426, 0.4890494, -0.08147078, -0.07297495, -0.036447637, -0.9966675, -0.49038908, 0.871494, 0.0040356773, 0, 0, 0)
+[node name="skeleton_hand2" type="MeshInstance3D" unique_id=1843755831]
+transform = Transform3D(0.9340361, 0.35379413, -0.04904775, -0.046729095, -0.01509886, -0.9987934, -0.3541078, 0.93520117, 0.0024295996, 0, 0, 0)
 layers = 128
 gi_mode = 2
 mesh = SubResource("ArrayMesh_1txad")
-skeleton = NodePath("")
 
-[node name="CreateRigidParent" parent="." instance=ExtResource("2_sttqd")]
+[node name="CreateRigidParent" parent="." unique_id=1640340889 instance=ExtResource("2_sttqd")]
 fire_only_once = true
 use_geometry_center_for_mass = true
 
@@ -58,7 +57,7 @@ fire_only_once = true
 transform = Transform3D(1, 0, 1.930166e-07, 0, 1, 2.013985e-08, -6.9849193e-10, 5.122274e-08, 1.0000068, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_rrivn")
 
-[node name="SwayParent" parent="." instance=ExtResource("3_bhs1x")]
+[node name="SwayParent" parent="." unique_id=543304882 instance=ExtResource("3_bhs1x")]
 max_sway_degrees = 10.0
 preview_in_editor = true
 

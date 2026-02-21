@@ -14,6 +14,8 @@ extends NodeLogger
 func _ready() -> void:
 	if u.is_release():
 		return
+	if u.is_editor():
+		return
 	
 
 	if key_f_value == DVS.KeyFValueChanger.UNKNOWN:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxfgvp3futm7q"]
+[gd_scene format=3 uid="uid://cxfgvp3futm7q"]
 
 [ext_resource type="Material" uid="uid://cjybi26n5lih0" path="res://-assets-/materials-shared/_shaders/air_wave/air-wave-2.tres" id="1_0pem4"]
 [ext_resource type="Script" uid="uid://bnmpiwotm6xje" path="res://logic/entities/VFX/air_wave/air_wave_2.gd" id="1_dbngs"]
@@ -205,20 +205,18 @@ _data = {
 &"explode_big": SubResource("Animation_dprvv")
 }
 
-[node name="AirWave" type="Node3D"]
+[node name="AirWave" type="Node3D" unique_id=389453499]
 script = ExtResource("1_dbngs")
 
-[node name="AirWaveMesh" type="MeshInstance3D" parent="."]
+[node name="AirWaveMesh" type="MeshInstance3D" parent="." unique_id=311182777]
 unique_name_in_owner = true
 material_override = ExtResource("1_0pem4")
 mesh = SubResource("CapsuleMesh_dbngs")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_dprvv")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=475482105]
+libraries/ = SubResource("AnimationLibrary_dprvv")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=400537170]
 unique_name_in_owner = true
 transform = Transform3D(-10.165007, 0, 0, 0, -10.165007, 0, 0, 0, 1.7280512, 0, 0, -3.6539855)
 material = ExtResource("3_fkr04")

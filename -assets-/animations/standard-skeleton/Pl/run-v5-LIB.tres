@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=8 format=3 uid="uid://cdek1bb25y78y"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://cdek1bb25y78y"]
 
 [ext_resource type="AudioStream" uid="uid://781p7bt34n6c" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_1.tres" id="1_adj3n"]
 

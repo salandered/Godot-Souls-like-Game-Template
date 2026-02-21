@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dhcmqu81pishu"]
+[gd_scene format=4 uid="uid://dhcmqu81pishu"]
 
 [ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Items/simple_target/SimpleTarget.tscn" id="1_5amyc"]
 [ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_rjq7m"]
@@ -49,8 +49,7 @@ uv1_triplanar = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5amyc"]
 radius = 0.8
 
-[node name="FancyHitTarget" instance=ExtResource("1_5amyc")]
-label = ""
+[node name="FancyHitTarget" unique_id=1092191764 instance=ExtResource("1_5amyc")]
 
 [node name="CameraTarget" parent="." index="0"]
 visible = false
@@ -58,7 +57,7 @@ visible = false
 [node name="RotatingTarget" parent="Visuals" index="0"]
 material_override = SubResource("StandardMaterial3D_ol3mo")
 
-[node name="RotatingTarget2" type="MeshInstance3D" parent="Visuals/RotatingTarget" index="3"]
+[node name="RotatingTarget2" type="MeshInstance3D" parent="Visuals/RotatingTarget" index="3" unique_id=1968344727]
 unique_name_in_owner = true
 transform = Transform3D(0.7417535, 0, -0.6706728, 0, 1.0000005, 0, 0.6706728, 0, 0.7417535, 0, 0, 0)
 layers = 128
@@ -69,7 +68,7 @@ skeleton = NodePath("../..")
 [node name="CSGBakedMeshInstance3D2" parent="Visuals/StolbStatic" index="1"]
 visible = false
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Visuals/StolbStatic" index="3"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Visuals/StolbStatic" index="3" unique_id=175820934]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89172566, 0)
 material_override = SubResource("StandardMaterial3D_h16cj")
 radius = 0.15
@@ -86,5 +85,5 @@ shape = SubResource("CapsuleShape3D_5amyc")
 [node name="VisibleOnScreenEnabler3D" parent="HitArea" index="1"]
 aabb = AABB(-1.7409418, -1.0006098, -1.5619044, 3.4818835, 2.0012195, 3.1238089)
 
-[node name="TextMarker" type="Marker3D" parent="." index="4"]
+[node name="TextMarker" type="Marker3D" parent="." index="4" unique_id=1084519979]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4991872, -1.08298)

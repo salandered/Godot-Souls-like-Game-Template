@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://buxfrfnlx8dpy"]
+[gd_scene format=4 uid="uid://buxfrfnlx8dpy"]
 
 [ext_resource type="PackedScene" uid="uid://ma6cywyneshm" path="res://logic/entities/Enemies/sitting_sk/SitSkeletonAlt.tscn" id="1_7773y"]
 [ext_resource type="Texture2D" uid="uid://bsmd74v2mkb63" path="res://-assets-/materials-shared/metal/metal_8/island_metal_8_basecolor-1K.jpg" id="2_hwva5"]
@@ -57,9 +57,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[node name="SittingSkeletonAlt2" instance=ExtResource("1_7773y")]
+[node name="SittingSkeletonAlt2" unique_id=213956360 instance=ExtResource("1_7773y")]
 
-[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" index="3"]
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 533301545) index="3" unique_id=1988229000]
 bones/0/position = Vector3(-4.6473226e-05, 0, -0.0052452926)
 bones/1/position = Vector3(-3.2016174e-05, 0.61467737, 0.038719624)
 bones/1/rotation = Quaternion(-0.03481882, 0.001641309, 0.009904795, 0.9993433)
@@ -115,39 +115,39 @@ bones/50/rotation = Quaternion(-0.034697294, 0.75225645, -0.6569086, 0.03711732)
 bones/51/rotation = Quaternion(-0.07820365, 0.7337623, -0.6748684, -0.005459824)
 bones/52/rotation = Quaternion(-9.112611e-08, 0.99999964, 0.00090006005, 2.2308198e-08)
 
-[node name="Hips" parent="bones" index="0"]
+[node name="Hips" parent="bones" parent_id_path=PackedInt32Array(401276762) index="0" unique_id=351389994]
 transform = Transform3D(0.9997984, -0.019910878, 0.0025907152, 0.019682283, 0.99737906, 0.06962442, -0.003970208, -0.06955939, 0.9975699, -7.84894e-05, 0.61467737, 0.033474334)
 
-[node name="Root" parent="bones" index="1"]
+[node name="Root" parent="bones" parent_id_path=PackedInt32Array(401276762) index="1" unique_id=17020083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6473226e-05, 0, -0.0052452926)
 
-[node name="Chest" parent="bones" index="2"]
+[node name="Chest" parent="bones" parent_id_path=PackedInt32Array(401276762) index="2" unique_id=106765411]
 transform = Transform3D(0.999137, 0.041507594, 0.0015635751, -0.039795615, 0.9673554, -0.2502795, -0.011901034, 0.2500013, 0.9681724, -0.00048715097, 0.81631184, 0.02969778)
 
-[node name="LP smith sword" parent="bones/Chest/smith_sword_2" index="0"]
+[node name="LP smith sword" parent="bones/Chest/smith_sword_2" parent_id_path=PackedInt32Array(1719675894) index="0" unique_id=96033735]
 material_override = SubResource("StandardMaterial3D_ilrxj")
 
-[node name="Head" parent="bones" index="3"]
+[node name="Head" parent="bones" parent_id_path=PackedInt32Array(401276762) index="3" unique_id=980266521]
 transform = Transform3D(0.9846054, 0.10629208, -0.13875969, -0.12603815, 0.9817682, -0.14228682, 0.12110588, 0.1575855, 0.98005116, 0.02624304, 1.2133826, 0.12805061)
 
-[node name="main" parent="bones/Head" index="1" instance=ExtResource("3_uro5p")]
+[node name="main" parent="bones/Head" index="1" unique_id=289455636 instance=ExtResource("3_uro5p")]
 transform = Transform3D(0.47874472, 0.19911943, -0.022717722, -0.17504627, 0.44410485, 0.2036921, 0.097587846, -0.18023086, 0.476817, 0.035662528, 0.13062692, -0.026295036)
 
-[node name="fancy hat" parent="bones/Head/main" index="0"]
+[node name="fancy hat" parent="bones/Head/main" index="0" unique_id=230338801]
 material_override = SubResource("StandardMaterial3D_umv6k")
 
-[node name="golden bolt" parent="bones/Head" index="2" instance=ExtResource("9_h4pvu")]
+[node name="golden bolt" parent="bones/Head" index="2" unique_id=1834739777 instance=ExtResource("9_h4pvu")]
 transform = Transform3D(0.32377028, 3.547757e-08, -1.1175871e-08, -1.7666025e-08, 0.3237702, 4.656613e-09, 2.6077032e-08, 7.450581e-09, 0.32377034, 0.0026138723, -0.98820096, 0.0143478215)
 mesh = SubResource("ArrayMesh_evbqx")
 
-[node name="golden bolt2" parent="bones/Head" index="3" instance=ExtResource("9_h4pvu")]
+[node name="golden bolt2" parent="bones/Head" index="3" unique_id=1828274073 instance=ExtResource("9_h4pvu")]
 transform = Transform3D(0.2746536, -0.17094052, 0.013111671, 0.16926762, 0.27430668, 0.030519595, -0.027221933, -0.019034881, 0.32206172, 0.5913884, -0.8222275, 0.06737754)
 mesh = SubResource("ArrayMesh_evbqx")
 
-[node name="UpperChest" parent="bones" index="4"]
+[node name="UpperChest" parent="bones" parent_id_path=PackedInt32Array(401276762) index="4" unique_id=757813272]
 transform = Transform3D(0.9977336, 0.06725236, -0.0021869917, -0.06381905, 0.93549705, -0.34752306, -0.021325823, 0.34687507, 0.93766886, 0.0033187289, 0.90893966, 0.03947961)
 
-[node name="Mug2" parent="bones/UpperChest" index="0"]
+[node name="Mug2" parent="bones/UpperChest" index="0" unique_id=1785636007]
 visible = true
 
 [editable path="VisualOffset/FCS_Skeleton_working3"]

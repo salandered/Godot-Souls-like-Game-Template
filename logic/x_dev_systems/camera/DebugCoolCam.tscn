@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjbvdf08tmrpa"]
+[gd_scene format=3 uid="uid://cjbvdf08tmrpa"]
 
 [ext_resource type="Script" uid="uid://cu0cuc673iac6" path="res://logic/x_dev_systems/camera/debug_cool_cam.gd" id="1_n15ks"]
 
-[node name="DebugCoolCam" type="Camera3D"]
+[node name="DebugCoolCam" type="Camera3D" unique_id=672978954]
 current = true
 fov = 42.0
 script = ExtResource("1_n15ks")

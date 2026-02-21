@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c37c50ip2o8ol"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c37c50ip2o8ol"]
 
 [ext_resource type="AudioStream" uid="uid://bsaxp48f20puq" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/bow_impact.tres" id="4_cfdmv"]
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cijp7que1div6"]
+[gd_scene format=3 uid="uid://cijp7que1div6"]
 
 [ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.tscn" id="1_71hfd"]
 
-[node name="ShadowControl" instance=ExtResource("1_71hfd")]
+[node name="ShadowControl" unique_id=1185244674 instance=ExtResource("1_71hfd")]
 option_titles = Array[String](["<null>"])
 property_type = 0
 

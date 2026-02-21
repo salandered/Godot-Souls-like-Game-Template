@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://bjhnc512w4hog"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://bjhnc512w4hog"]
 
 [sub_resource type="Animation" id="Animation_f2wkc"]
 resource_name = "SWSlp2 O sprint end"

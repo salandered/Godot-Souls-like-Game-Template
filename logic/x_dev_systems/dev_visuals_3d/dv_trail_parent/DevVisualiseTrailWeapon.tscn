@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnynk5lys1dy8"]
+[gd_scene format=3 uid="uid://cnynk5lys1dy8"]
 
 [ext_resource type="Script" uid="uid://dbik4eh3blav0" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/dev_visualise_trail_weapon.gd" id="1_wbxeh"]
 
-[node name="DVPathWeapon" type="Node3D"]
+[node name="DVPathWeapon" type="Node3D" unique_id=375937934]
 transform = Transform3D(1.0000007, 5.9604645e-08, -7.4505806e-08, 7.4505806e-08, 1, 2.9802322e-08, -1.4901161e-08, -5.9604645e-08, 1.0000004, 0, 0, 0)
+visible = false
 script = ExtResource("1_wbxeh")
 color_mode = 1
 path_color_a = Color(1, 0.90383136, 0, 1)

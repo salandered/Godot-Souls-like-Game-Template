@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://c4uc4yxf778i2"]
+[gd_scene format=4 uid="uid://c4uc4yxf778i2"]
 
 [ext_resource type="Material" uid="uid://cj60o8d1x11in" path="res://-assets-/materials-shared/concrete/I_concrete_old/I_Concrete Old_Reimp_2k.tres" id="1_5hryt"]
 
@@ -35,8 +35,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1qdvy")
 
-[node name="Plane_012" type="MeshInstance3D"]
+[node name="Plane_012" type="MeshInstance3D" unique_id=2002497022]
 transform = Transform3D(0.91094357, 0.37852928, 0.16400422, -0.37173858, 0.92557997, -0.07149944, -0.17886366, 0.004165247, 0.983865, 0, 0, 0)
 layers = 18
 mesh = SubResource("ArrayMesh_ihi2v")
-skeleton = NodePath("")

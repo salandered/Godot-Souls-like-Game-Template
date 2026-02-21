@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=6 format=4 uid="uid://bkenbs0ugh6iy"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://bkenbs0ugh6iy"]
 
 [ext_resource type="Material" uid="uid://bbg08pft25h53" path="res://-assets-/materials-shared/ground/coral_ground/coral_ground_02_Reimp.tres" id="1_4v0ew"]
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="2_bnpgi"]

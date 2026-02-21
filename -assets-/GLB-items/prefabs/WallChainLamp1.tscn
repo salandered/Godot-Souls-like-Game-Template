@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://b82c14oyl4lci"]
+[gd_scene format=4 uid="uid://b82c14oyl4lci"]
 
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="1_dhy38"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="2_bjrr0"]
@@ -137,32 +137,28 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hjake")
 
-[node name="PropSet_5_WallChain_1_hang2" type="MeshInstance3D"]
+[node name="PropSet_5_WallChain_1_hang2" type="MeshInstance3D" unique_id=2084172642]
 transform = Transform3D(0.9983667, -0.057130147, -0.000106791034, 0.056053717, 0.97991353, -0.19138287, 0.011038377, 0.19106431, 0.98151547, 0, 0, 0)
 layers = 256
 mesh = SubResource("ArrayMesh_uwfp4")
-skeleton = NodePath("")
 
-[node name="PropSet_5_WallChain_1" type="MeshInstance3D" parent="."]
+[node name="PropSet_5_WallChain_1" type="MeshInstance3D" parent="." unique_id=318174817]
 transform = Transform3D(0.997717, 0.06743894, 0.0035343312, -0.0675307, 0.9965911, 0.04739075, -0.00032630094, -0.047521256, 0.9988699, -0.013861522, -0.02845478, -0.015266545)
 layers = 256
 mesh = SubResource("ArrayMesh_knnq4")
-skeleton = NodePath("")
 
-[node name="Lantern_Lamp_Splitted_002" type="MeshInstance3D" parent="PropSet_5_WallChain_1"]
+[node name="Lantern_Lamp_Splitted_002" type="MeshInstance3D" parent="PropSet_5_WallChain_1" unique_id=842819166]
 transform = Transform3D(0.08362996, 0.18994033, 0.9782275, -0.20762067, 0.96344423, -0.1693201, -0.9746279, -0.18894003, 0.12000834, 0.010772705, -0.9824009, 0.08148956)
 layers = 256
 mesh = SubResource("ArrayMesh_etq47")
-skeleton = NodePath("")
 
-[node name="Lantern_Lamp_glass_002" type="MeshInstance3D" parent="PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002"]
+[node name="Lantern_Lamp_glass_002" type="MeshInstance3D" parent="PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" unique_id=1769644497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7025042e-05, -4.3213367e-06, 1.8671155e-05)
 layers = 256
 gi_mode = 0
 mesh = SubResource("ArrayMesh_2iuib")
-skeleton = NodePath("")
 
-[node name="SwayParent" parent="PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" instance=ExtResource("3_gdqb0")]
+[node name="SwayParent" parent="PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" unique_id=121597266 instance=ExtResource("3_gdqb0")]
 max_sway_degrees = 1.0
 sway_speed = 1.0
 pitch_scale_change = -0.09999999999999998
@@ -170,7 +166,7 @@ max_distance = 6.0
 unit_size = 2.0
 play_chance = 0.4
 
-[node name="SwayParent" parent="PropSet_5_WallChain_1" instance=ExtResource("3_gdqb0")]
+[node name="SwayParent" parent="PropSet_5_WallChain_1" unique_id=1496049824 instance=ExtResource("3_gdqb0")]
 max_sway_degrees = 3.0
 sway_speed = 1.0
 audio_stream = ExtResource("4_sm1j4")

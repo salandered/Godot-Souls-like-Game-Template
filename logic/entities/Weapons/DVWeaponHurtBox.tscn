@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://82ivr255dcjx"]
+[gd_scene format=3 uid="uid://82ivr255dcjx"]
 
 [ext_resource type="Script" uid="uid://unoqiilk88vp" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/dev_visuals_weapon_hurtboxes.gd" id="1_8msms"]
 
-[node name="DVWeaponHurtBox" type="Node3D"]
+[node name="DVWeaponHurtBox" type="Node3D" unique_id=1260874362]
+visible = false
 script = ExtResource("1_8msms")
 color_passive = Color(0.5, 0.121757954, 0.15884066, 1)
 color_attacking = Color(0.7851237, 0.07759587, 0.14696164, 1)

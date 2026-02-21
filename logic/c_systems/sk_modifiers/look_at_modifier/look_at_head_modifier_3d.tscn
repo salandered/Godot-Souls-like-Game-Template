@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxqlawj5lv3o1"]
+[gd_scene format=3 uid="uid://cxqlawj5lv3o1"]
 
 [ext_resource type="Script" uid="uid://dn1j31a0lqg0y" path="res://logic/c_systems/sk_modifiers/look_at_modifier/look_at_head_modifier_3d.gd" id="1_71i0b"]
 
-[node name="LookAtHeadModifier3D" type="LookAtModifier3D"]
+[node name="LookAtHeadModifier3D" type="LookAtModifier3D" unique_id=523683751]
 bone_name = "Head"
 bone = 6
 duration = 0.6
@@ -16,4 +16,4 @@ secondary_limit_angle = 1.200612
 secondary_damp_threshold = 1.0
 script = ExtResource("1_71i0b")
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="." unique_id=103753808]

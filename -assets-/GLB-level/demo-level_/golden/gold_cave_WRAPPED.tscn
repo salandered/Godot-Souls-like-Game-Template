@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbwrpoygqteb0"]
+[gd_scene format=3 uid="uid://bbwrpoygqteb0"]
 
 [ext_resource type="PackedScene" uid="uid://druxsqnxe6376" path="res://-assets-/GLB-level/demo-level_/golden/gold-cave.glb" id="1_c0ayj"]
 [ext_resource type="ArrayMesh" uid="uid://b0cl825bag5a2" path="res://-assets-/GLB-items/prefabs/peaky_rock.tres" id="6_ybqe6"]
@@ -168,62 +168,62 @@ _data = {
 &"circling": SubResource("Animation_cl4uy")
 }
 
-[node name="GOLDC" instance=ExtResource("1_c0ayj")]
+[node name="GOLDC" unique_id=2056180143 instance=ExtResource("1_c0ayj")]
 
-[node name="gold cave" parent="." index="0"]
+[node name="gold cave" parent="." index="0" unique_id=1133156999]
 layers = 17
 
-[node name="gold cave_001" parent="." index="1"]
+[node name="gold cave_001" parent="." index="1" unique_id=2126383285]
 layers = 17
 cast_shadow = 0
 
-[node name="gold cave_002" parent="." index="2"]
+[node name="gold cave_002" parent="." index="2" unique_id=61892390]
 layers = 17
 
-[node name="gold cave_003" parent="." index="3"]
+[node name="gold cave_003" parent="." index="3" unique_id=1063359967]
 layers = 17
 
-[node name="gold cave_004" parent="." index="4"]
+[node name="gold cave_004" parent="." index="4" unique_id=2090795689]
 layers = 17
 
-[node name="gold cave_005" parent="." index="5"]
+[node name="gold cave_005" parent="." index="5" unique_id=649376792]
 layers = 17
 
-[node name="gold cave_012" parent="." index="6"]
+[node name="gold cave_012" parent="." index="6" unique_id=223094804]
 layers = 17
 
-[node name="Plane_013" parent="." index="8"]
+[node name="Plane_013" parent="." index="8" unique_id=1469352092]
 layers = 17
 
-[node name="Tower middle_002" parent="." index="9"]
+[node name="Tower middle_002" parent="." index="9" unique_id=790609636]
 layers = 17
 
-[node name="Cave_Rocks_C_008" parent="Tower middle_002" index="0"]
+[node name="Cave_Rocks_C_008" parent="Tower middle_002" index="0" unique_id=204651963]
 cast_shadow = 0
 
-[node name="Tower lowest_001" parent="Tower middle_002" index="1"]
+[node name="Tower lowest_001" parent="Tower middle_002" index="1" unique_id=244910434]
 layers = 17
 
-[node name="Tower middle_003" parent="." index="10"]
+[node name="Tower middle_003" parent="." index="10" unique_id=1855503421]
 layers = 17
 
-[node name="Tower lowest_002" parent="Tower middle_003" index="0"]
+[node name="Tower lowest_002" parent="Tower middle_003" index="0" unique_id=1909717373]
 layers = 17
 
-[node name="Tower lowest_003" parent="Tower middle_003" index="1"]
+[node name="Tower lowest_003" parent="Tower middle_003" index="1" unique_id=1337841687]
 layers = 17
 
-[node name="Cave_Rocks_C_001" parent="Tower middle_003/Tower lowest_003" index="0"]
+[node name="Cave_Rocks_C_001" parent="Tower middle_003/Tower lowest_003" index="0" unique_id=1604663742]
 cast_shadow = 0
 
-[node name="Cave_Rocks_C_006" parent="." index="11"]
+[node name="Cave_Rocks_C_006" parent="." index="11" unique_id=1542715653]
 cast_shadow = 0
 
-[node name="gold_sun_middle" parent="." index="12"]
+[node name="gold_sun_middle" parent="." index="12" unique_id=1547877821]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_3u0a6")
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="gold_sun_middle" index="0"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="gold_sun_middle" index="0" unique_id=809835054]
 transform = Transform3D(0.8980712, 0.21063793, 0.38613462, -0.13693658, 0.9681427, -0.2096386, -0.41799128, 0.13539445, 0.89830506, 4.173168, 3.9758148, -3.836197)
 light_color = Color(1, 0.6427364, 0.23693943, 1)
 light_energy = 50.0
@@ -233,11 +233,11 @@ distance_fade_begin = 76.25
 omni_range = 80.0
 omni_shadow_mode = 0
 
-[node name="gold_sun_outer" parent="." index="13"]
+[node name="gold_sun_outer" parent="." index="13" unique_id=2031590021]
 unique_name_in_owner = true
 transform = Transform3D(0.06756199, 0.80976903, -0.58284575, -0.8153652, -0.29185498, -0.5, -0.57499105, 0.5090131, 0.64053935, -148.57257, -39.918842, 125.52903)
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="gold_sun_outer" index="0"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="gold_sun_outer" index="0" unique_id=555877076]
 transform = Transform3D(0.16176611, -0.9750335, 0.15212366, -0.9778821, -0.17909458, -0.10803742, 0.1325846, -0.13128227, -0.982439, 0.08622742, 0.6558914, 6.433075)
 light_color = Color(1, 0.6427364, 0.23693943, 1)
 light_energy = 50.0
@@ -246,25 +246,23 @@ shadow_enabled = true
 omni_range = 60.0
 omni_shadow_mode = 0
 
-[node name="gold_sun_inner" parent="." index="14"]
+[node name="gold_sun_inner" parent="." index="14" unique_id=1436347785]
 unique_name_in_owner = true
 transform = Transform3D(0.03621304, -0.798911, -0.60035795, 0.7764963, 0.40066358, -0.4863354, 0.62908036, -0.44856396, 0.63486075, -148.01036, -40.52259, 125.6196)
 
-[node name="circling" type="Node3D" parent="." index="15"]
+[node name="circling" type="Node3D" parent="." index="15" unique_id=1396449508]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -148.78662, -40.99609, 126.97217)
 script = ExtResource("7_8gmoy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="circling" index="0"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="circling" index="0" unique_id=1160659944]
 unique_name_in_owner = true
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_8gmoy")
-}
+libraries/ = SubResource("AnimationLibrary_8gmoy")
 
-[node name="asps" type="Node3D" parent="circling" index="1"]
+[node name="asps" type="Node3D" parent="circling" index="1" unique_id=312020070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5501556, -2.1849976, 1.6507416)
 
-[node name="rail" type="AudioStreamPlayer3D" parent="circling/asps" index="0"]
+[node name="rail" type="AudioStreamPlayer3D" parent="circling/asps" index="0" unique_id=1246484531]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.917007, -2.8479996, -0.085998535)
 max_db = -3.0
@@ -273,7 +271,7 @@ max_distance = 230.0
 panning_strength = 0.9
 bus = &"game_SFX"
 
-[node name="scrape" type="AudioStreamPlayer3D" parent="circling/asps" index="1"]
+[node name="scrape" type="AudioStreamPlayer3D" parent="circling/asps" index="1" unique_id=1078247551]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6470032, 0, -0.647995)
 stream = ExtResource("9_p7r2u")
@@ -284,7 +282,7 @@ max_distance = 235.0
 panning_strength = 0.9
 bus = &"game_SFX"
 
-[node name="fire" type="AudioStreamPlayer3D" parent="circling/asps" index="2"]
+[node name="fire" type="AudioStreamPlayer3D" parent="circling/asps" index="2" unique_id=858043999]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.020996, 3.849001, -1.602005)
 stream = ExtResource("10_jl87t")
@@ -295,16 +293,16 @@ max_distance = 260.0
 panning_strength = 0.9
 bus = &"game_SFX"
 
-[node name="_Plane_016 bottom" parent="." index="20"]
+[node name="_Plane_016 bottom" parent="." index="20" unique_id=502585800]
 layers = 17
 cast_shadow = 0
 gi_mode = 1
 
-[node name="Mountain_Group_1_010" parent="." index="22"]
+[node name="Mountain_Group_1_010" parent="." index="22" unique_id=973627164]
 mesh = ExtResource("6_ybqe6")
 
-[node name="Mountain_Group_1_012" parent="." index="24"]
+[node name="Mountain_Group_1_012" parent="." index="24" unique_id=1314421230]
 cast_shadow = 0
 
-[node name="Mountain_Group_1_013" parent="." index="25"]
+[node name="Mountain_Group_1_013" parent="." index="25" unique_id=2036696733]
 cast_shadow = 0

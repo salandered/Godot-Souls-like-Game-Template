@@ -1,5 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://dekl75yqh4wml"]
+[gd_scene format=3 uid="uid://dekl75yqh4wml"]
 
 [ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://logic/ui/ui_utils/options_nodes/m_list_option_control.tscn" id="1_hecen"]
 
-[node name="OptionControl" instance=ExtResource("1_hecen")]
+[node name="OptionControl" unique_id=1650395244 instance=ExtResource("1_hecen")]

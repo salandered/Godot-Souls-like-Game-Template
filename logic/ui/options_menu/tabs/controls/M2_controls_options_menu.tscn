@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://tsu1vthvgkdg"]
+[gd_scene format=3 uid="uid://tsu1vthvgkdg"]
 
 [ext_resource type="Script" uid="uid://cu3g36kl67vg7" path="res://logic/ui/options_menu/tabs/controls/m_controls_options_menu.gd" id="1_p1dhw"]
 [ext_resource type="Script" path="res://logic/ui/ui_utils/template_scripts/m_capture_focus.gd" id="2_p2p77"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://0e65ib3cy6mf" path="res://logic/ui/options_menu/tabs/controls/reset_button.tscn" id="7_xfr20"]
 [ext_resource type="PackedScene" uid="uid://bn4pa8vlswlqf" path="res://logic/ui/options_menu/tabs/controls/key_assignment_dialog.tscn" id="8_maklv"]
 
-[node name="M_Controls_Options" type="MarginContainer"]
+[node name="M_Controls_Options" type="MarginContainer" unique_id=1024812236]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,7 +21,7 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_p1dhw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=280920397]
 custom_minimum_size = Vector2(650, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -29,15 +29,15 @@ size_flags_vertical = 0
 script = ExtResource("2_p2p77")
 search_depth = 5
 
-[node name="InputMappingContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="InputMappingContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=2058903485]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="HSeparator3" parent="VBoxContainer/InputMappingContainer" instance=ExtResource("3_cewt3")]
+[node name="HSeparator3" parent="VBoxContainer/InputMappingContainer" unique_id=1598095582 instance=ExtResource("3_cewt3")]
 layout_mode = 2
 
-[node name="XMouseSense" type="HBoxContainer" parent="VBoxContainer/InputMappingContainer"]
+[node name="XMouseSense" type="HBoxContainer" parent="VBoxContainer/InputMappingContainer" unique_id=838718483]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
@@ -50,7 +50,7 @@ label_suffix = ""
 property_type = 3
 default_value = 1.0
 
-[node name="OptionLabel" type="Label" parent="VBoxContainer/InputMappingContainer/XMouseSense"]
+[node name="OptionLabel" type="Label" parent="VBoxContainer/InputMappingContainer/XMouseSense" unique_id=1474690347]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -59,7 +59,7 @@ theme_override_font_sizes/font_size = 28
 text = "Y mouse sense"
 vertical_alignment = 1
 
-[node name="OptionLabel2" type="Label" parent="VBoxContainer/InputMappingContainer/XMouseSense"]
+[node name="OptionLabel2" type="Label" parent="VBoxContainer/InputMappingContainer/XMouseSense" unique_id=1664424830]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -67,7 +67,7 @@ theme_override_font_sizes/font_size = 28
 text = "X mouse sense"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/InputMappingContainer/XMouseSense"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/InputMappingContainer/XMouseSense" unique_id=1102289621]
 custom_minimum_size = Vector2(256, 35)
 layout_mode = 2
 size_flags_vertical = 4
@@ -78,7 +78,7 @@ value = 1.0
 tick_count = 17
 ticks_on_borders = true
 
-[node name="YMouseSense" type="HBoxContainer" parent="VBoxContainer/InputMappingContainer"]
+[node name="YMouseSense" type="HBoxContainer" parent="VBoxContainer/InputMappingContainer" unique_id=71943448]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
@@ -91,7 +91,7 @@ label_suffix = ""
 property_type = 3
 default_value = 1.0
 
-[node name="OptionLabel" type="Label" parent="VBoxContainer/InputMappingContainer/YMouseSense"]
+[node name="OptionLabel" type="Label" parent="VBoxContainer/InputMappingContainer/YMouseSense" unique_id=1522451846]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -99,14 +99,14 @@ theme_override_font_sizes/font_size = 28
 text = "Y mouse sense"
 vertical_alignment = 1
 
-[node name="OptionLabel2" type="Label" parent="VBoxContainer/InputMappingContainer/YMouseSense"]
+[node name="OptionLabel2" type="Label" parent="VBoxContainer/InputMappingContainer/YMouseSense" unique_id=1521213370]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
 text = "Y mouse sense"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/InputMappingContainer/YMouseSense"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/InputMappingContainer/YMouseSense" unique_id=766161228]
 custom_minimum_size = Vector2(256, 35)
 layout_mode = 2
 size_flags_vertical = 4
@@ -117,10 +117,10 @@ value = 1.0
 tick_count = 17
 ticks_on_borders = true
 
-[node name="HSeparator4" parent="VBoxContainer/InputMappingContainer" instance=ExtResource("3_cewt3")]
+[node name="HSeparator4" parent="VBoxContainer/InputMappingContainer" unique_id=28029069 instance=ExtResource("3_cewt3")]
 layout_mode = 2
 
-[node name="InputActionsList" parent="VBoxContainer/InputMappingContainer" instance=ExtResource("5_kk52y")]
+[node name="InputActionsList" parent="VBoxContainer/InputMappingContainer" unique_id=751571838 instance=ExtResource("5_kk52y")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(560, 480)
 layout_mode = 2
@@ -131,18 +131,18 @@ input_action_names = Array[String]([])
 readable_action_names = Array[String]([])
 action_name_map = {}
 
-[node name="HSeparator" parent="VBoxContainer/InputMappingContainer" instance=ExtResource("3_cewt3")]
+[node name="HSeparator" parent="VBoxContainer/InputMappingContainer" unique_id=420112631 instance=ExtResource("3_cewt3")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InputMappingContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/InputMappingContainer" unique_id=497418576]
 layout_mode = 2
 alignment = 1
 
-[node name="ResetButton" parent="VBoxContainer/InputMappingContainer/HBoxContainer" instance=ExtResource("7_xfr20")]
+[node name="ResetButton" parent="VBoxContainer/InputMappingContainer/HBoxContainer" unique_id=2093216717 instance=ExtResource("7_xfr20")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="KeyAssignmentDialog" parent="." instance=ExtResource("8_maklv")]
+[node name="KeyAssignmentDialog" parent="." unique_id=1186391781 instance=ExtResource("8_maklv")]
 unique_name_in_owner = true
 visible = false
 borderless = true
@@ -152,7 +152,7 @@ dialog_text = "
 "
 cancel_button_text = "  Cancel  "
 
-[node name="KeyDeletionDialog" type="ConfirmationDialog" parent="."]
+[node name="KeyDeletionDialog" type="ConfirmationDialog" parent="." unique_id=1082450157]
 oversampling_override = 1.0
 title = "Remove Key"
 position = Vector2i(0, 36)
@@ -162,19 +162,19 @@ ok_button_text = "  OK  "
 dialog_text = "   Remove KEY from ACTION?   "
 cancel_button_text = "  Cancel  "
 
-[node name="OneInputMinimumDialog" type="AcceptDialog" parent="."]
+[node name="OneInputMinimumDialog" type="AcceptDialog" parent="." unique_id=1936162146]
 oversampling_override = 1.0
 title = "Cannot Remove"
 size = Vector2i(250, 100)
 ok_button_text = "  OK  "
 
-[node name="AlreadyAssignedDialog" type="AcceptDialog" parent="."]
+[node name="AlreadyAssignedDialog" type="AcceptDialog" parent="." unique_id=1289079260]
 oversampling_override = 1.0
 title = "Already Assigned"
 size = Vector2i(398, 100)
 ok_button_text = "  OK  "
 
-[node name="ResetConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ResetConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1605950104]
 oversampling_override = 1.0
 size = Vector2i(370, 100)
 borderless = true

@@ -61,7 +61,11 @@ func __soft_validation() -> bool:
 
 func _ready() -> void:
 	if u.is_editor():
+		set_process(false)
 		return
+	else:
+		set_process(true)
+	
 	_init_delay_logic()
 	add_to_group(Groups.Environment_.LEVEL)
 

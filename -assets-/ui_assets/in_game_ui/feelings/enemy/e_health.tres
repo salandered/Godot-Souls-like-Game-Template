@@ -1,7 +1,6 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bx5fjl1q7x0eg"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bx5fjl1q7x0eg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1j0yl"]
-load_path = "res://.godot/imported/wZZNl7ooWl.png-89aee342f0b8c84824800b901ab32938.ctex"
 
 [resource]
 texture = SubResource("CompressedTexture2D_1j0yl")

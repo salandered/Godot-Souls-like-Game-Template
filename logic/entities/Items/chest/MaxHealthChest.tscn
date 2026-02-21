@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://co3heqf28d52v"]
+[gd_scene format=3 uid="uid://co3heqf28d52v"]
 
 [ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_1qxja"]
 [ext_resource type="Material" uid="uid://cgor81cloawxg" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp_red_triplanar_t1.tres" id="2_8mpq0"]
@@ -6,21 +6,21 @@
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="2_tmsue"]
 [ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/Items/pick_item/health_item/MaxHealthItem.tscn" id="3_k6ox4"]
 
-[node name="MaxHealthChest" instance=ExtResource("1_1qxja")]
+[node name="MaxHealthChest" unique_id=1665668648 instance=ExtResource("1_1qxja")]
 script = ExtResource("2_qim7j")
 item_scene = ExtResource("3_k6ox4")
 
-[node name="ChestFasteners" parent="Visuals/LidPivot/FastenersPivot" index="0"]
+[node name="ChestFasteners" parent="Visuals/LidPivot/FastenersPivot" parent_id_path=PackedInt32Array(1741603679) index="0" unique_id=306879908]
 material_override = ExtResource("2_tmsue")
 
-[node name="ChestLid" parent="Visuals/LidPivot" index="1"]
+[node name="ChestLid" parent="Visuals/LidPivot" parent_id_path=PackedInt32Array(780769632) index="1" unique_id=279129403]
 surface_material_override/0 = ExtResource("2_8mpq0")
 
-[node name="metal things" parent="Visuals/LidPivot/ChestLid" index="2"]
+[node name="metal things" parent="Visuals/LidPivot/ChestLid" index="2" unique_id=1223237223]
 material_override = ExtResource("2_tmsue")
 
-[node name="ChestMain" parent="Visuals/ChessMain" index="1"]
+[node name="ChestMain" parent="Visuals/ChessMain" parent_id_path=PackedInt32Array(1648672996) index="1" unique_id=970195091]
 material_override = ExtResource("2_8mpq0")
 
-[node name="metal things" parent="Visuals/ChessMain/ChestMain" index="0"]
+[node name="metal things" parent="Visuals/ChessMain/ChestMain" index="0" unique_id=1372549152]
 material_override = ExtResource("2_tmsue")

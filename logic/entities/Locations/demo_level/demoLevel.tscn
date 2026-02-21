@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=4 uid="uid://bm5vqmonl5jl4"]
+[gd_scene format=4 uid="uid://bm5vqmonl5jl4"]
 
 [ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/c_systems/level/demo_level.gd" id="1_skc02"]
 [ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/c_systems/weather_system/weather.gd" id="2_cfi4c"]
@@ -98,11 +98,12 @@ sky = ExtResource("3_58tqt")
 ambient_light_source = 3
 ambient_light_color = Color(0.20129895, 0.20129895, 0.20129895, 1)
 ambient_light_sky_contribution = 0.2
-ambient_light_energy = 2.0
+ambient_light_energy = 1.8
 reflected_light_source = 2
 tonemap_mode = 4
 tonemap_exposure = 1.6
 tonemap_white = 1.2
+tonemap_agx_contrast = 1.3
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true
@@ -113,8 +114,9 @@ fog_sky_affect = 0.0
 fog_height = -31.04
 fog_height_density = 0.007
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.009
+volumetric_fog_density = 0.003
 volumetric_fog_albedo = Color(0.7764706, 0.9490196, 1, 1)
+volumetric_fog_detail_spread = 3.0314324
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3y2i"]
 size = Vector3(15.666992, 6.004822, 1.3508301)
@@ -187,7 +189,7 @@ material = SubResource("ShaderMaterial_37dxq")
 size = Vector2(0.5, 0.5)
 
 [sub_resource type="FogMaterial" id="FogMaterial_ee878"]
-density = 0.1
+density = 0.05
 albedo = Color(0.90774393, 0.94392484, 1, 1)
 edge_fade = 1.13137
 
@@ -305,21 +307,21 @@ uv1_triplanar = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n5anv"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
-density = 0.2
+density = 0.12
 albedo = Color(1, 0.79680705, 0.5986477, 1)
 edge_fade = 0.33635888
 
 [sub_resource type="FogMaterial" id="FogMaterial_pulto"]
-density = 0.2
+density = 0.14
 albedo = Color(1, 0.79680705, 0.5986477, 1)
 edge_fade = 0.33635888
 
 [sub_resource type="FogMaterial" id="FogMaterial_ic71h"]
-density = 0.25
+density = 0.15
 albedo = Color(1, 0.79680705, 0.5986477, 1)
 edge_fade = 0.33635888
 
-[node name="DemoLevel" type="Node3D"]
+[node name="DemoLevel" type="Node3D" unique_id=957370326]
 script = ExtResource("1_skc02")
 level_music_tracks = Array[AudioStream]([ExtResource("2_ufk5n"), ExtResource("3_5q2id"), ExtResource("4_e70k6")])
 first_track_to_play_idx = 0
@@ -327,27 +329,27 @@ music_volume_db = -3.0
 is_background_music = true
 initialise_dv = true
 
-[node name="__dev" type="Node3D" parent="."]
+[node name="__dev" type="Node3D" parent="." unique_id=312672280]
 
-[node name="DVArea3DShapes" parent="__dev" node_paths=PackedStringArray("level") instance=ExtResource("5_4ckfe")]
+[node name="DVArea3DShapes" parent="__dev" unique_id=2087478069 node_paths=PackedStringArray("level") instance=ExtResource("5_4ckfe")]
 level = NodePath("../..")
 
-[node name="DVCharColliders" parent="__dev" node_paths=PackedStringArray("level") instance=ExtResource("6_n5anv")]
+[node name="DVCharColliders" parent="__dev" unique_id=1166255039 node_paths=PackedStringArray("level") instance=ExtResource("6_n5anv")]
 level = NodePath("../..")
 
-[node name="Weather" type="Node3D" parent="."]
+[node name="Weather" type="Node3D" parent="." unique_id=1278256673]
 script = ExtResource("2_cfi4c")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Weather"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Weather" unique_id=470716001]
 unique_name_in_owner = true
 environment = SubResource("Environment_efgc1")
 
-[node name="WeatherSystem" type="Node3D" parent="Weather" node_paths=PackedStringArray("sun_light")]
+[node name="WeatherSystem" type="Node3D" parent="Weather" unique_id=301788670 node_paths=PackedStringArray("sun_light")]
 unique_name_in_owner = true
 script = ExtResource("4_58tqt")
 sun_light = NodePath("../Sun/DirectionalSun")
 
-[node name="JawEntry" type="Area3D" parent="Weather/WeatherSystem" node_paths=PackedStringArray("weather_system")]
+[node name="JawEntry" type="Area3D" parent="Weather/WeatherSystem" unique_id=229040449 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
 transform = Transform3D(0.9330918, 0, -0.35963857, 0, 1, 0, 0.35963857, 0, 0.9330918, -62.77215, 0.95843124, 33.14416)
 script = ExtResource("6_cxdwc")
@@ -368,27 +370,28 @@ target_fog_light_color = Color(0.23524225, 0.01825156, 0, 1)
 change_vol_fog_light_color = true
 target_vol_fog_light_color = Color(0.7511804, 0.7425674, 0.7411612, 1)
 change_vol_fog_density = true
+target_vol_fog_density = 0.005
 change_direct_light = true
 target_direct_light = 0.4
 
-[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/JawEntry"]
+[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/JawEntry" unique_id=1950866714]
 transform = Transform3D(0.37887472, 0, -0.925448, 0, 1, 0, 0.925448, 0, 0.37887472, 0, 0, 0)
 shape = SubResource("BoxShape3D_i3y2i")
 debug_color = Color(0.7, 0.525, 0, 1)
 
-[node name="JawExit" type="Area3D" parent="Weather/WeatherSystem" node_paths=PackedStringArray("weather_system")]
+[node name="JawExit" type="Area3D" parent="Weather/WeatherSystem" unique_id=1613842890 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.703323, 0.7723322, 33.130947)
 script = ExtResource("6_cxdwc")
 weather_system = NodePath("..")
 restore_to_defaults = true
 
-[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/JawExit"]
+[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/JawExit" unique_id=1490219351]
 transform = Transform3D(-0.02638635, 0, -0.9996518, 0, 1, 0, 0.9996518, 0, -0.02638635, 0, 0, 0)
 shape = SubResource("BoxShape3D_skc02")
 debug_color = Color(0.7, 0.525, 0, 1)
 
-[node name="Exit2Entry" type="Area3D" parent="Weather/WeatherSystem" node_paths=PackedStringArray("weather_system")]
+[node name="Exit2Entry" type="Area3D" parent="Weather/WeatherSystem" unique_id=561821113 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
 transform = Transform3D(0.8094374, 0, -0.5872061, 0, 1, 0, 0.5872061, 0, 0.8094374, -32.100986, 1.620214, -14.599203)
 script = ExtResource("6_cxdwc")
@@ -408,27 +411,27 @@ target_fog_light_color = Color(0.5019608, 0.42749393, 0.25490198, 1)
 change_vol_fog_light_color = true
 target_vol_fog_light_color = Color(0.98039216, 0.7729314, 0.6666667, 1)
 change_vol_fog_density = true
-target_vol_fog_density = 0.025
+target_vol_fog_density = 0.02
 change_direct_light = true
 target_direct_light = 0.6
 fade_time = 0.8
 
-[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/Exit2Entry"]
+[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/Exit2Entry" unique_id=805049573]
 shape = SubResource("BoxShape3D_i3y2i")
 debug_color = Color(0.7, 0.525, 0, 1)
 
-[node name="Exit2Exit" type="Area3D" parent="Weather/WeatherSystem" node_paths=PackedStringArray("weather_system")]
+[node name="Exit2Exit" type="Area3D" parent="Weather/WeatherSystem" unique_id=827333574 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
 transform = Transform3D(0.8094374, 0, -0.5872061, 0, 1, 0, 0.5872061, 0, 0.8094374, -34.094387, 1.9935355, -11.539263)
 script = ExtResource("6_cxdwc")
 weather_system = NodePath("..")
 restore_to_defaults = true
 
-[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/Exit2Exit"]
+[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/Exit2Exit" unique_id=829405572]
 shape = SubResource("BoxShape3D_i3y2i")
 debug_color = Color(0.7, 0.525, 0, 1)
 
-[node name="LadyEntry" type="Area3D" parent="Weather/WeatherSystem" node_paths=PackedStringArray("weather_system")]
+[node name="LadyEntry" type="Area3D" parent="Weather/WeatherSystem" unique_id=1472407099 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
 transform = Transform3D(-0.10041386, 0, -0.99494576, 0, 1, 0, 0.99494576, 0, -0.10041386, -14.559504, 1.620214, 30.42221)
 script = ExtResource("6_cxdwc")
@@ -446,16 +449,15 @@ target_amb_energy = 0.4
 change_amb_sky_contribution = true
 change_fog_light_color = true
 change_vol_fog_light_color = true
-change_vol_fog_density = true
 change_direct_light = true
 target_direct_light = 0.1
 
-[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/LadyEntry"]
+[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/LadyEntry" unique_id=133127355]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.497654, 0, 0.2520733)
 shape = SubResource("BoxShape3D_tc4ti")
 debug_color = Color(0.7, 0.525, 0, 1)
 
-[node name="LadyExit" type="Area3D" parent="Weather/WeatherSystem" node_paths=PackedStringArray("weather_system")]
+[node name="LadyExit" type="Area3D" parent="Weather/WeatherSystem" unique_id=1278577295 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
 transform = Transform3D(-0.026403815, 0, -0.9996514, 0, 1, 0, 0.9996514, 0, -0.026403815, -17.356857, 1.9935355, 30.81583)
 script = ExtResource("6_cxdwc")
@@ -463,14 +465,14 @@ weather_system = NodePath("..")
 restore_to_defaults = true
 fade_time = 0.8
 
-[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/LadyExit"]
+[node name="Coll" type="CollisionShape3D" parent="Weather/WeatherSystem/LadyExit" unique_id=1629415521]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.347206, 0, 0.06199646)
 shape = SubResource("BoxShape3D_b7u3i")
 debug_color = Color(0.70196074, 0.43017352, 0, 1)
 
-[node name="Sun" type="Node3D" parent="Weather"]
+[node name="Sun" type="Node3D" parent="Weather" unique_id=1542841153]
 
-[node name="DirectionalSun" type="DirectionalLight3D" parent="Weather/Sun"]
+[node name="DirectionalSun" type="DirectionalLight3D" parent="Weather/Sun" unique_id=1542750506]
 transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
 light_color = Color(1, 0.9929813, 0.96693254, 1)
 light_volumetric_fog_energy = 1.2
@@ -480,18 +482,18 @@ shadow_opacity = 0.92
 shadow_caster_mask = 4294967293
 directional_shadow_max_distance = 150.0
 
-[node name="debug_fill_light" type="DirectionalLight3D" parent="Weather/Sun"]
+[node name="debug_fill_light" type="DirectionalLight3D" parent="Weather/Sun" unique_id=766859647]
 transform = Transform3D(1, 0, 0, 0, -0.12671839, 0.99193877, 0, -0.99193877, -0.12671839, -116.14281, 76.54146, 0)
 visible = false
 editor_only = true
 
-[node name="SunVisuals" type="Node3D" parent="Weather/Sun"]
+[node name="SunVisuals" type="Node3D" parent="Weather/Sun" unique_id=173939707]
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Weather/Sun/SunVisuals"]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Weather/Sun/SunVisuals" unique_id=148904792]
 transform = Transform3D(0.06426203, 0.97554994, -0.21017273, 0.51510996, 0.1479554, 0.8442571, 0.8547119, -0.16251603, -0.4930073, -115.25337, 83.58415, -297.97992)
 mesh = SubResource("ArrayMesh_p1nq7")
 
-[node name="__csg_original" type="CSGSphere3D" parent="Weather/Sun/SunVisuals"]
+[node name="__csg_original" type="CSGSphere3D" parent="Weather/Sun/SunVisuals" unique_id=113103694]
 transform = Transform3D(-0.16090691, 0.98416895, -0.074300125, 0.51510996, 0.14795548, 0.8442571, 0.84188527, 0.09757391, -0.5307619, -115.25337, 83.58415, -297.97992)
 visible = false
 cast_shadow = 0
@@ -502,15 +504,15 @@ rings = 8
 smooth_faces = false
 material = SubResource("ShaderMaterial_p1nq7")
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="Node" parent="." unique_id=1222997688]
 
-[node name="PauseMenuController" type="Node" parent="UI"]
+[node name="PauseMenuController" type="Node" parent="UI" unique_id=561210649]
 script = ExtResource("3_3yhff")
 pause_menu_packed = ExtResource("4_cxdwc")
 
-[node name="__TEMP" type="Node3D" parent="."]
+[node name="__TEMP" type="Node3D" parent="." unique_id=1889355620]
 
-[node name="SpotlightWindow6" type="SpotLight3D" parent="__TEMP"]
+[node name="SpotlightWindow6" type="SpotLight3D" parent="__TEMP" unique_id=56801712]
 transform = Transform3D(-0.99959093, 0.017340796, -0.022745734, -0.010845788, 0.50605255, 0.8624345, 0.026465839, 0.8623283, -0.50565743, -44.762062, 9.89364, 5.558416)
 visible = false
 light_color = Color(1, 0.98844486, 0.9537795, 1)
@@ -519,7 +521,7 @@ shadow_enabled = true
 spot_range = 40.0
 spot_angle = 40.0
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="__TEMP/SpotlightWindow6"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="__TEMP/SpotlightWindow6" unique_id=709548821]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -527,11 +529,11 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="TREE GROUP ALL" type="Node3D" parent="."]
+[node name="TREE GROUP ALL" type="Node3D" parent="." unique_id=1251983264]
 
-[node name="tree group far WRAPPER" parent="TREE GROUP ALL" instance=ExtResource("12_skc02")]
+[node name="tree group far WRAPPER" parent="TREE GROUP ALL" unique_id=1573067221 instance=ExtResource("12_skc02")]
 
-[node name="LightmapGI_TREE_GROUP" type="LightmapGI" parent="TREE GROUP ALL"]
+[node name="LightmapGI_TREE_GROUP" type="LightmapGI" parent="TREE GROUP ALL" unique_id=1028280952]
 quality = 0
 bounces = 0
 use_denoiser = false
@@ -539,7 +541,7 @@ texel_scale = 0.5
 max_texture_size = 4096
 light_data = ExtResource("23_x0u1k")
 
-[node name="SunMimicksMainForBake" type="DirectionalLight3D" parent="TREE GROUP ALL"]
+[node name="SunMimicksMainForBake" type="DirectionalLight3D" parent="TREE GROUP ALL" unique_id=24267071]
 transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
 light_color = Color(1, 0.9929813, 0.96693254, 1)
 light_volumetric_fog_energy = 0.0
@@ -550,21 +552,21 @@ shadow_opacity = 0.92
 shadow_caster_mask = 4294966274
 directional_shadow_max_distance = 150.0
 
-[node name="OccasionalASP" parent="TREE GROUP ALL" instance=ExtResource("14_f66pd")]
+[node name="OccasionalASP" parent="TREE GROUP ALL" unique_id=1817616003 instance=ExtResource("14_f66pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.31835, -0.84606934, 16.98917)
 max_distance = 15.0
 
-[node name="OccasionalASP2" parent="TREE GROUP ALL" instance=ExtResource("14_f66pd")]
+[node name="OccasionalASP2" parent="TREE GROUP ALL" unique_id=1004663079 instance=ExtResource("14_f66pd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.881294, -0.84606934, -23.544422)
 max_distance = 20.0
 
-[node name="Lincoln_ALL" type="Node3D" parent="."]
+[node name="Lincoln_ALL" type="Node3D" parent="." unique_id=482601832]
 
-[node name="LincolnLights" type="Node" parent="Lincoln_ALL"]
+[node name="LincolnLights" type="Node" parent="Lincoln_ALL" unique_id=1514468462]
 
-[node name="windows" type="Node3D" parent="Lincoln_ALL/LincolnLights"]
+[node name="windows" type="Node3D" parent="Lincoln_ALL/LincolnLights" unique_id=20968427]
 
-[node name="Supportive2" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+[node name="Supportive2" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows" unique_id=71454303]
 transform = Transform3D(1, 0, 0, 0, 0.79525137, 0.60627997, 0, -0.60627997, 0.79525137, -35.32964, 6.0470457, 51.766598)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 16.0
@@ -575,7 +577,7 @@ shadow_opacity = 0.8
 spot_range = 80.0
 spot_attenuation = 1.2
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive2"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive2" unique_id=617924440]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -583,7 +585,7 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="Supportive3" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+[node name="Supportive3" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows" unique_id=2087539059]
 transform = Transform3D(1, 0, 0, 0, 0.66523045, 0.7466382, 0, -0.7466382, 0.66523045, -25.093466, 6.0470457, 51.766598)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 12.0
@@ -593,7 +595,7 @@ shadow_opacity = 0.8
 spot_range = 80.0
 spot_attenuation = 1.2
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive3"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive3" unique_id=1758100890]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -601,7 +603,7 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="Supportive4" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+[node name="Supportive4" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows" unique_id=2019313640]
 transform = Transform3D(1, 0, 0, 0, 0.79525137, 0.60627997, 0, -0.60627997, 0.79525137, -54.889965, 6.0470457, 51.781868)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 16.0
@@ -611,7 +613,7 @@ shadow_enabled = true
 spot_range = 80.0
 spot_attenuation = 1.2
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive4"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/Supportive4" unique_id=894990452]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_tc4ti")
@@ -619,16 +621,17 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="DynamicMain" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows"]
+[node name="DynamicMain" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights/windows" unique_id=386902661]
 transform = Transform3D(1, 0, 0, 0, 0.9647277, 0.26325008, 0, -0.26325008, 0.9647277, -43.985786, 6.9874277, 56.196415)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 16.0
 light_indirect_energy = 4.0
+light_bake_mode = 1
 shadow_enabled = true
 spot_range = 85.0
 spot_angle = 34.2
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/DynamicMain"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/windows/DynamicMain" unique_id=1830274569]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_tc4ti")
@@ -636,8 +639,8 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="SpotlightWindow7" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
-transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -37.408367, 6.8591237, 9.72727)
+[node name="SpotlightWindow7" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights" unique_id=74070092]
+transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -39.146374, 6.8591237, 7.8202553)
 light_color = Color(0.9011674, 0.9749417, 1, 1)
 light_energy = 7.0
 light_indirect_energy = 12.743
@@ -646,7 +649,7 @@ spot_range = 28.0
 spot_attenuation = 1.3
 spot_angle = 21.0
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow7"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow7" unique_id=627789689]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -654,8 +657,9 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="SpotlightWindow8" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+[node name="SpotlightWindow8" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights" unique_id=1473980543]
 transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -51.57448, 6.932094, 9.72727)
+visible = false
 light_color = Color(0.8156727, 0.9897438, 1, 1)
 light_energy = 7.0
 light_indirect_energy = 12.743
@@ -664,7 +668,7 @@ spot_range = 28.0
 spot_attenuation = 1.3
 spot_angle = 21.0
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow8"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow8" unique_id=1252484105]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -672,8 +676,9 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="SpotlightWindow10" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+[node name="SpotlightWindow10" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights" unique_id=1024180259]
 transform = Transform3D(-0.9995909, 0.021355314, -0.019026894, 0.013587533, 0.9399231, 0.34111592, 0.025168452, 0.34071785, -0.9398287, -44.667824, 6.932094, 9.72727)
+visible = false
 light_color = Color(0.8156727, 0.9897438, 1, 1)
 light_energy = 7.0
 light_indirect_energy = 12.743
@@ -682,7 +687,7 @@ spot_range = 28.0
 spot_attenuation = 1.3
 spot_angle = 21.0
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow10"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow10" unique_id=5344006]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -690,8 +695,9 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="SpotlightWindow9" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights"]
+[node name="SpotlightWindow9" type="SpotLight3D" parent="Lincoln_ALL/LincolnLights" unique_id=1278733199]
 transform = Transform3D(-0.9995909, 0.021355312, -0.019026896, 0.028315207, 0.6448886, -0.763752, -0.004039935, -0.76397824, -0.6452294, -42.429733, 0.9191036, 28.27422)
+visible = false
 light_color = Color(1, 0.92979705, 0.8156863, 1)
 light_energy = 2.0
 light_volumetric_fog_energy = 2.0
@@ -700,7 +706,7 @@ shadow_enabled = true
 spot_range = 40.0
 spot_angle = 70.29
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow9"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/LincolnLights/SpotlightWindow9" unique_id=1222209027]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_ic71h")
@@ -708,110 +714,110 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="LINCOLN_WRAPPER" parent="Lincoln_ALL" instance=ExtResource("4_3yhff")]
+[node name="LINCOLN_WRAPPER" parent="Lincoln_ALL" unique_id=1992775849 instance=ExtResource("4_3yhff")]
 
-[node name="columns_WRAPPER" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("12_g0qcj")]
+[node name="columns_WRAPPER" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1343965772 instance=ExtResource("12_g0qcj")]
 
-[node name="MaxStaminaItem" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("17_r8gfm")]
+[node name="MaxStaminaItem" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1723682202 instance=ExtResource("17_r8gfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.847847, 13.406169, 13.738305)
 
-[node name="crates" type="Node3D" parent="Lincoln_ALL/LINCOLN_WRAPPER"]
+[node name="crates" type="Node3D" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1795148923]
 
-[node name="PlaceCrateSmallPile" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+[node name="PlaceCrateSmallPile" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=580465484 instance=ExtResource("18_ogmul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.482872, 13.002198, 20.55169)
 
-[node name="PlaceCrateSmallPile2" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+[node name="PlaceCrateSmallPile2" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=1220131330 instance=ExtResource("18_ogmul")]
 transform = Transform3D(0.24623784, 0, -0.96920943, 0, 1, 0, 0.96920943, 0, 0.24623784, -31.057993, 12.784196, 8.105261)
 
-[node name="PlaceCrateSmallPile4" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+[node name="PlaceCrateSmallPile4" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=1995052207 instance=ExtResource("18_ogmul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.078808, 1.1620469, -8.116451)
 
-[node name="PlaceCrateSmallPile3" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+[node name="PlaceCrateSmallPile3" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=42111730 instance=ExtResource("18_ogmul")]
 transform = Transform3D(0.24623784, 0, -0.96920943, 0, 1, 0, 0.96920943, 0, 0.24623784, -43.637768, 0.80519056, 24.584248)
 
-[node name="PlaceCrateSmallPile6" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+[node name="PlaceCrateSmallPile6" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=921122733 instance=ExtResource("18_ogmul")]
 transform = Transform3D(0.9972554, 0.058757074, 0.045048427, -0.07403887, 0.7914195, 0.60677296, 0, -0.6084429, 0.79359764, -19.272654, 3.2364779, 35.292492)
 
-[node name="PlaceCrateSmallPile5" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("18_ogmul")]
+[node name="PlaceCrateSmallPile5" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=944327359 instance=ExtResource("18_ogmul")]
 transform = Transform3D(0.9761257, 0, 0.21720636, 0, 1, 0, -0.21720636, 0, 0.9761257, -54.499054, 12.809211, 33.959675)
 
-[node name="PaleCrate4" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
+[node name="PaleCrate4" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=1311284966 instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.9091125, 0.4165505, 0, -0.41655052, 0.90911245, 0, 0, 0, 0.9999999, -54.437515, 14.077727, 37.090298)
 
-[node name="PaleCrate7" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
+[node name="PaleCrate7" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=1638994671 instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -55.105515, 14.228368, 29.910297)
 
-[node name="PaleCrate5" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
+[node name="PaleCrate5" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=1929528477 instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.9091125, 0.4165505, 0, -0.41655052, 0.90911245, 0, 0, 0, 0.9999999, -54.568424, 1.2169101, 37.16337)
 
-[node name="PaleCrate6" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" instance=ExtResource("16_tpbca")]
+[node name="PaleCrate6" parent="Lincoln_ALL/LINCOLN_WRAPPER/crates" unique_id=1542235760 instance=ExtResource("16_tpbca")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -54.227577, 2.8196163, 29.112911)
 
-[node name="Lantern_Lamp_Splitted_003" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_0rwan")]
+[node name="Lantern_Lamp_Splitted_003" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1479067744 instance=ExtResource("21_0rwan")]
 transform = Transform3D(0.5601909, 0, 0.8283635, 0, 1.0000002, 0, -0.8283635, 0, 0.5601909, -54.09066, 13.148162, 35.48949)
 
-[node name="OmniLight3D3" parent="Lincoln_ALL/LINCOLN_WRAPPER/Lantern_Lamp_Splitted_003" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3D3" parent="Lincoln_ALL/LINCOLN_WRAPPER/Lantern_Lamp_Splitted_003" unique_id=2117982817 instance=ExtResource("19_ic71h")]
 transform = Transform3D(1.0000001, 3.7252925e-09, 5.9604645e-08, -3.7252903e-09, 0.9999998, -1.7695124e-08, -5.9604645e-08, 1.7695125e-08, 1.0000001, 0, -0.2940216, 0)
 light_color = Color(0.63529414, 0.34126207, 0.21568626, 1)
 light_energy = 1.0
 light_indirect_energy = 12.0
 
-[node name="BlackHole" type="MeshInstance3D" parent="Lincoln_ALL/LINCOLN_WRAPPER/Lantern_Lamp_Splitted_003"]
+[node name="BlackHole" type="MeshInstance3D" parent="Lincoln_ALL/LINCOLN_WRAPPER/Lantern_Lamp_Splitted_003" unique_id=1476745504]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04292679, -0.19709873, 0.063482285)
 mesh = SubResource("QuadMesh_ncli4")
 skeleton = NodePath("../../SittingSkeleton")
 
-[node name="SittingSkeleton" parent="Lincoln_ALL/LINCOLN_WRAPPER" node_paths=PackedStringArray("player") instance=ExtResource("20_il31f")]
+[node name="SittingSkeleton" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=632247953 node_paths=PackedStringArray("player") instance=ExtResource("20_il31f")]
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -54.036667, 12.842042, 34.617493)
 player = NodePath("../../../Princess")
 
-[node name="MechFighter" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("34_skk2x")]
+[node name="MechFighter" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1362630926 instance=ExtResource("34_skk2x")]
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -46.728897, 13.04582, 38.806297)
 
-[node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_w0ai3")]
+[node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1018679868 instance=ExtResource("21_w0ai3")]
 transform = Transform3D(1, 0, 0, 0, 0.95444363, -0.2983912, 0, 0.2983912, 0.95444363, -19.973879, 0.91030014, 11.343478)
 
-[node name="Cylinder001_009" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("21_w0ai3")]
+[node name="Cylinder001_009" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=122577511 instance=ExtResource("21_w0ai3")]
 transform = Transform3D(1, 0, 0, 0, 0.9992339, -0.039137736, 0, 0.039137736, 0.9992339, -19.715073, 0.91030014, 10.669773)
 
-[node name="Arcbutan" parent="Lincoln_ALL/LINCOLN_WRAPPER" instance=ExtResource("22_ramam")]
+[node name="Arcbutan" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=557397230 instance=ExtResource("22_ramam")]
 transform = Transform3D(0.82387805, 0.16057931, -0.3018332, -0.11845195, 0.8727828, 0.14100802, 0.32071507, -0.09015771, 0.8274524, -20.645544, 2.1601148, 3.0348518)
 
-[node name="Rocks" type="Node3D" parent="Lincoln_ALL/LINCOLN_WRAPPER"]
+[node name="Rocks" type="Node3D" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=416896628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.076263, 1.0620633, 16.765265)
 
-[node name="SmallRockRigid" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=1797963597 instance=ExtResource("23_rqhon")]
 
-[node name="SmallRockRigid2" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid2" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=719617762 instance=ExtResource("23_rqhon")]
 transform = Transform3D(0.12121108, 0.8437631, 0.52284956, -0.5615302, 0.4926357, -0.6648263, -0.8185303, -0.21301147, 0.53351146, 0.062000275, 0.17999995, -0.44774818)
 
-[node name="SmallRockRigid3" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid3" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=1497124945 instance=ExtResource("23_rqhon")]
 transform = Transform3D(0.5369195, 0.046557635, 0.84234786, -0.20426878, 0.9759398, 0.07626112, -0.8185302, -0.21301144, 0.5335114, -7.286003, -0.5185221, -16.565748)
 
-[node name="SmallRockRigid10" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid10" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=18773344 instance=ExtResource("23_rqhon")]
 transform = Transform3D(0.5369195, 0.046557635, 0.84234786, -0.20426878, 0.9759398, 0.07626112, -0.8185302, -0.21301144, 0.5335114, -15.823006, -0.49194586, -24.626749)
 
-[node name="SmallRockRigid9" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid9" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=1689702956 instance=ExtResource("23_rqhon")]
 transform = Transform3D(-0.49661422, -0.5656637, -0.65833044, -0.5233425, 0.8002349, -0.29280812, 0.69244975, 0.19911952, -0.69344413, -7.586006, -0.311462, -16.587748)
 
-[node name="SmallRockRigid4" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid4" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=1610026433 instance=ExtResource("23_rqhon")]
 transform = Transform3D(-0.691553, 0.062382203, -0.71962696, 0, 0.99626374, 0.08636299, 0.72232574, 0.059724577, -0.6889692, 19.337957, 2.4879322, 18.730757)
 
-[node name="SmallRockRigid5" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid5" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=24841148 instance=ExtResource("23_rqhon")]
 transform = Transform3D(-0.017544089, 0.3640796, -0.9312026, 0, 0.93134594, 0.36413565, 0.9998461, 0.0063884277, -0.016339615, 13.319046, -0.30615127, -9.9027195)
 
-[node name="SmallRockRigid6" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid6" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=897592419 instance=ExtResource("23_rqhon")]
 transform = Transform3D(0.7019915, 0, -0.7121853, 0, 1, 0, 0.7121853, 0, 0.7019915, -15.693451, 11.90957, 19.931738)
 
-[node name="SmallRockRigid7" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid7" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=924552469 instance=ExtResource("23_rqhon")]
 transform = Transform3D(0.7019915, 0, -0.7121853, 0.45741245, 0.7664818, 0.4508653, 0.5458771, -0.64226604, 0.5380637, -15.767452, 12.146421, 19.552736)
 
-[node name="SmallRockRigid8" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" instance=ExtResource("23_rqhon")]
+[node name="SmallRockRigid8" parent="Lincoln_ALL/LINCOLN_WRAPPER/Rocks" unique_id=1618750595 instance=ExtResource("23_rqhon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5538864, 12.057373, 19.552736)
 
-[node name="wooden_balcony_WRAPPER" parent="Lincoln_ALL" instance=ExtResource("5_cxdwc")]
+[node name="wooden_balcony_WRAPPER" parent="Lincoln_ALL" unique_id=1155660711 instance=ExtResource("5_cxdwc")]
 
-[node name="FromLadySpecific" type="SpotLight3D" parent="Lincoln_ALL/wooden_balcony_WRAPPER"]
+[node name="FromLadySpecific" type="SpotLight3D" parent="Lincoln_ALL/wooden_balcony_WRAPPER" unique_id=1392033593]
 transform = Transform3D(0.32717925, -0.5236691, 0.7865904, -0.12690333, 0.8005143, 0.5857239, -0.9364023, -0.29145762, 0.19545631, -11.938342, 10.021086, 33.928337)
 light_color = Color(0.72360146, 0.8014959, 1, 1)
 light_energy = 13.049
@@ -823,7 +829,7 @@ spot_range = 18.118
 spot_attenuation = 1.79
 spot_angle = 88.73
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/wooden_balcony_WRAPPER/FromLadySpecific"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Lincoln_ALL/wooden_balcony_WRAPPER/FromLadySpecific" unique_id=1953329018]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_tc4ti")
@@ -831,67 +837,65 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="FogVolumeWoodenBalcony" type="FogVolume" parent="Lincoln_ALL/wooden_balcony_WRAPPER"]
+[node name="FogVolumeWoodenBalcony" type="FogVolume" parent="Lincoln_ALL/wooden_balcony_WRAPPER" unique_id=1784921036]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.056129, 3.004567, 28.664858)
 size = Vector3(13.467041, 13.36908, 14.250458)
 shape = 0
 material = SubResource("FogMaterial_ee878")
 
-[node name="DevHitTarget" parent="Lincoln_ALL/wooden_balcony_WRAPPER" instance=ExtResource("27_ivsur")]
+[node name="DevHitTarget" parent="Lincoln_ALL/wooden_balcony_WRAPPER" unique_id=108479302 instance=ExtResource("27_ivsur")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.431895, 0.41162515, 32.01375)
 
-[node name="ISLAND_WRAPPER" parent="Lincoln_ALL" instance=ExtResource("12_x0u1k")]
+[node name="ISLAND_WRAPPER" parent="Lincoln_ALL" unique_id=562019682 instance=ExtResource("12_x0u1k")]
 
-[node name="HealtChest" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("15_acr6p")]
+[node name="HealtChest" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1678075559 instance=ExtResource("15_acr6p")]
 transform = Transform3D(0.9793293, -0.07336004, 0.18850046, 0.07203774, 0.9973055, 0.013865763, -0.18900976, 0, 0.9819752, -52.03086, 0.4940672, -13.1470995)
 
-[node name="SimpleTarget3" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("18_2euvp")]
+[node name="SimpleTarget3" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=201610235 instance=ExtResource("18_2euvp")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -48.023872, 0.35142517, -13.994987)
 
-[node name="Rock_1_004_visuals" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER"]
+[node name="Rock_1_004_visuals" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=867327569]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.71704, 3.0786085, -2.9971385)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_xm4a8")
-skeleton = NodePath("")
 
-[node name="CreateRigidChild" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals" instance=ExtResource("18_xm4a8")]
+[node name="CreateRigidChild" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals" unique_id=516719388 instance=ExtResource("18_xm4a8")]
 fire_only_once = true
 
-[node name="MonitorPlEnterSigArea" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild" index="0"]
+[node name="MonitorPlEnterSigArea" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild" index="0" unique_id=575055529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2006104, 0)
 fire_only_once = true
 area_capsule_radius = 4.0
 area_capsule_height = 4.0
 
-[node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0"]
+[node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0" unique_id=1198477309]
 shape = SubResource("CapsuleShape3D_4ckfe")
 
-[node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("21_w0ai3")]
+[node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1815104359 instance=ExtResource("21_w0ai3")]
 transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
 
-[node name="SittingSkeletonAlt" parent="Lincoln_ALL/ISLAND_WRAPPER/StaticBarrel" node_paths=PackedStringArray("player") instance=ExtResource("30_ktdwm")]
+[node name="SittingSkeletonAlt" parent="Lincoln_ALL/ISLAND_WRAPPER/StaticBarrel" unique_id=1832670057 node_paths=PackedStringArray("player") instance=ExtResource("30_ktdwm")]
 transform = Transform3D(-0.9971849, 0, -0.074978635, 0, 0.9999998, 0, 0.07497863, 0, -0.99718505, -0.018268585, -0.016711235, 0.08400059)
 player = NodePath("../../../../Princess")
 
-[node name="Rock_1_004_visuals2" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER"]
+[node name="Rock_1_004_visuals2" type="MeshInstance3D" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1013672534]
 transform = Transform3D(0.43853706, 0.110105, -0.2097065, -0.22908448, 0.08507292, -0.43439338, -0.0601682, 0.47859606, 0.12546034, -53.68312, 12.605973, 34.763615)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_xm4a8")
-skeleton = NodePath("")
 
-[node name="MechFighter" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("34_skk2x")]
+[node name="MechFighter" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=751908545 instance=ExtResource("34_skk2x")]
 transform = Transform3D(-0.1917169, 0, -0.98145026, 0, 1, 0, 0.98145026, 0, -0.1917169, -45.907993, 0.5208559, -13.289304)
 
-[node name="DarkCratePile" parent="Lincoln_ALL/ISLAND_WRAPPER" instance=ExtResource("36_ncli4")]
+[node name="DarkCratePile" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1051549338 instance=ExtResource("36_ncli4")]
 transform = Transform3D(0.63517547, 0, 0.7723679, 0, 1, 0, -0.7723679, 0, 0.63517547, -49.924126, 0.49236435, -8.652672)
 
-[node name="LightmapGI_LINC" type="LightmapGI" parent="Lincoln_ALL"]
+[node name="LightmapGI_LINC" type="LightmapGI" parent="Lincoln_ALL" unique_id=1295912493]
 visible = false
 quality = 0
 bounce_indirect_energy = 2.0
 use_denoiser = false
 
-[node name="SunCopyForBake" type="DirectionalLight3D" parent="Lincoln_ALL/LightmapGI_LINC"]
+[node name="SunCopyForBake" type="DirectionalLight3D" parent="Lincoln_ALL/LightmapGI_LINC" unique_id=485288761]
 transform = Transform3D(-0.16090669, 0.98416895, -0.0743002, 0.5151101, 0.14795543, 0.8442576, 0.8418852, 0.097573906, -0.53076243, -70.86325, 27.013557, -84.05788)
 visible = false
 light_color = Color(1, 0.9929813, 0.96693254, 1)
@@ -902,94 +906,94 @@ shadow_opacity = 0.92
 shadow_caster_mask = 4294967293
 directional_shadow_max_distance = 150.0
 
-[node name="LEVERS" type="Node" parent="Lincoln_ALL"]
+[node name="LEVERS" type="Node" parent="Lincoln_ALL" unique_id=1499745840]
 
-[node name="__ui_connect_to_weather_areas" type="Node" parent="Lincoln_ALL/LEVERS"]
+[node name="__ui_connect_to_weather_areas" type="Node" parent="Lincoln_ALL/LEVERS" unique_id=913936110]
 
-[node name="LadyNightLever" parent="Lincoln_ALL/LEVERS" instance=ExtResource("21_t7vhe")]
+[node name="LadyNightLever" parent="Lincoln_ALL/LEVERS" unique_id=209158555 instance=ExtResource("21_t7vhe")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.488113, 13.495086, 24.913212)
 
-[node name="lever_base" parent="Lincoln_ALL/LEVERS/LadyNightLever/Visuals" index="0"]
+[node name="lever_base" parent="Lincoln_ALL/LEVERS/LadyNightLever/Visuals" parent_id_path=PackedInt32Array(209158555, 769223155) index="0" unique_id=2121248669]
 material_override = ExtResource("20_mq57q")
 
-[node name="lever_platform" parent="Lincoln_ALL/LEVERS/LadyNightLever/Visuals" index="1"]
+[node name="lever_platform" parent="Lincoln_ALL/LEVERS/LadyNightLever/Visuals" parent_id_path=PackedInt32Array(209158555, 769223155) index="1" unique_id=2092130470]
 material_override = ExtResource("20_mq57q")
 
-[node name="lever_handle" parent="Lincoln_ALL/LEVERS/LadyNightLever/Visuals/HandlePivot" index="0"]
+[node name="lever_handle" parent="Lincoln_ALL/LEVERS/LadyNightLever/Visuals/HandlePivot" parent_id_path=PackedInt32Array(209158555, 517220544) index="0" unique_id=222511860]
 layers = 128
 material_override = SubResource("StandardMaterial3D_bbtvy")
 
-[node name="InteractArea" parent="Lincoln_ALL/LEVERS/LadyNightLever" index="4"]
+[node name="InteractArea" parent="Lincoln_ALL/LEVERS/LadyNightLever" index="4" unique_id=2078814964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.488113, 13.741454, 24.913212)
 
-[node name="JawRedLever" parent="Lincoln_ALL/LEVERS" instance=ExtResource("21_t7vhe")]
+[node name="JawRedLever" parent="Lincoln_ALL/LEVERS" unique_id=1633135659 instance=ExtResource("21_t7vhe")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.322464, 13.489584, 24.925623)
 
-[node name="lever_base" parent="Lincoln_ALL/LEVERS/JawRedLever/Visuals" index="0"]
+[node name="lever_base" parent="Lincoln_ALL/LEVERS/JawRedLever/Visuals" parent_id_path=PackedInt32Array(1633135659, 769223155) index="0" unique_id=2121248669]
 material_override = SubResource("StandardMaterial3D_2urya")
 
-[node name="lever_platform" parent="Lincoln_ALL/LEVERS/JawRedLever/Visuals" index="1"]
+[node name="lever_platform" parent="Lincoln_ALL/LEVERS/JawRedLever/Visuals" parent_id_path=PackedInt32Array(1633135659, 769223155) index="1" unique_id=2092130470]
 material_override = SubResource("StandardMaterial3D_8eore")
 
-[node name="lever_handle" parent="Lincoln_ALL/LEVERS/JawRedLever/Visuals/HandlePivot" index="0"]
+[node name="lever_handle" parent="Lincoln_ALL/LEVERS/JawRedLever/Visuals/HandlePivot" parent_id_path=PackedInt32Array(1633135659, 517220544) index="0" unique_id=222511860]
 layers = 128
 material_override = ExtResource("24_b71br")
 
-[node name="InteractArea" parent="Lincoln_ALL/LEVERS/JawRedLever" index="4"]
+[node name="InteractArea" parent="Lincoln_ALL/LEVERS/JawRedLever" index="4" unique_id=2078814964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.322464, 13.735952, 24.925623)
 
-[node name="DefaultWeatherLever" parent="Lincoln_ALL/LEVERS" instance=ExtResource("21_t7vhe")]
+[node name="DefaultWeatherLever" parent="Lincoln_ALL/LEVERS" unique_id=1527530603 instance=ExtResource("21_t7vhe")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.713047, 13.504023, 24.904978)
 
-[node name="lever_base" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever/Visuals" index="0"]
+[node name="lever_base" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever/Visuals" parent_id_path=PackedInt32Array(1527530603, 769223155) index="0" unique_id=2121248669]
 material_override = ExtResource("28_b71br")
 
-[node name="lever_platform" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever/Visuals" index="1"]
+[node name="lever_platform" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever/Visuals" parent_id_path=PackedInt32Array(1527530603, 769223155) index="1" unique_id=2092130470]
 material_override = ExtResource("28_b71br")
 
-[node name="lever_handle" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever/Visuals/HandlePivot" index="0"]
+[node name="lever_handle" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever/Visuals/HandlePivot" parent_id_path=PackedInt32Array(1527530603, 517220544) index="0" unique_id=222511860]
 layers = 128
 
-[node name="InteractArea" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever" index="4"]
+[node name="InteractArea" parent="Lincoln_ALL/LEVERS/DefaultWeatherLever" index="4" unique_id=2078814964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.713047, 13.750391, 24.904978)
 
-[node name="Exit2WeatherLever" parent="Lincoln_ALL/LEVERS" instance=ExtResource("21_t7vhe")]
+[node name="Exit2WeatherLever" parent="Lincoln_ALL/LEVERS" unique_id=1507152150 instance=ExtResource("21_t7vhe")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.425278, 13.504023, 24.914686)
 
-[node name="lever_base" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever/Visuals" index="0"]
+[node name="lever_base" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever/Visuals" parent_id_path=PackedInt32Array(1507152150, 769223155) index="0" unique_id=2121248669]
 material_override = SubResource("StandardMaterial3D_ramam")
 
-[node name="lever_platform" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever/Visuals" index="1"]
+[node name="lever_platform" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever/Visuals" parent_id_path=PackedInt32Array(1507152150, 769223155) index="1" unique_id=2092130470]
 material_override = SubResource("StandardMaterial3D_rqhon")
 
-[node name="lever_handle" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever/Visuals/HandlePivot" index="0"]
+[node name="lever_handle" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever/Visuals/HandlePivot" parent_id_path=PackedInt32Array(1507152150, 517220544) index="0" unique_id=222511860]
 layers = 128
 material_override = ExtResource("39_y0kr0")
 
-[node name="InteractArea" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever" index="4"]
+[node name="InteractArea" parent="Lincoln_ALL/LEVERS/Exit2WeatherLever" index="4" unique_id=2078814964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.425278, 13.750391, 24.914686)
 
-[node name="__plush__" type="Node" parent="Lincoln_ALL/LEVERS"]
+[node name="__plush__" type="Node" parent="Lincoln_ALL/LEVERS" unique_id=2062766297]
 
-[node name="PlushLever" parent="Lincoln_ALL/LEVERS/__plush__" instance=ExtResource("40_y0kr0")]
+[node name="PlushLever" parent="Lincoln_ALL/LEVERS/__plush__" unique_id=921434270 instance=ExtResource("40_y0kr0")]
 transform = Transform3D(0.742, 0, 0, 0, 0.742, 0, 0, 0, 0.742, -53.829105, 12.825355, 27.064857)
 
-[node name="MiniPlush" parent="Lincoln_ALL/LEVERS/__plush__" instance=ExtResource("35_qa10r")]
+[node name="MiniPlush" parent="Lincoln_ALL/LEVERS/__plush__" unique_id=367748008 instance=ExtResource("35_qa10r")]
 unique_name_in_owner = true
 transform = Transform3D(0.012059949, 1.7344257e-10, -0.9999274, 0.05433628, 0.99852246, 0.00065534026, 0.9984499, -0.05434023, 0.01204213, -54.77609, 13.95957, 27.554564)
 float_height = 30.0
 duration = 25.0
 horizontal_drift = 10.0
 
-[node name="PlushMarker3D" type="Marker3D" parent="Lincoln_ALL/LEVERS/__plush__"]
+[node name="PlushMarker3D" type="Marker3D" parent="Lincoln_ALL/LEVERS/__plush__" unique_id=1589770607]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -74.485344, -60.09879, -223.55574)
 
-[node name="plush_factory" type="Node" parent="Lincoln_ALL/LEVERS/__plush__/PlushMarker3D"]
+[node name="plush_factory" type="Node" parent="Lincoln_ALL/LEVERS/__plush__/PlushMarker3D" unique_id=1966812091]
 unique_name_in_owner = true
 script = ExtResource("36_srek1")
 plush_scene = ExtResource("36_lne8g")
@@ -997,142 +1001,141 @@ float_height = 400.0
 duration = 60.0
 horizontal_drift = 9.0
 
-[node name="plush_column" parent="Lincoln_ALL/LEVERS/__plush__" instance=ExtResource("16_enc12")]
+[node name="plush_column" parent="Lincoln_ALL/LEVERS/__plush__" unique_id=1186049611 instance=ExtResource("16_enc12")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -53.814354, 13.463542, 27.04956)
 
-[node name="CollisionShape3D" parent="Lincoln_ALL/LEVERS/__plush__/plush_column" index="0"]
+[node name="CollisionShape3D" parent="Lincoln_ALL/LEVERS/__plush__/plush_column" index="0" unique_id=1428694902]
 transform = Transform3D(0.732, 0, 0, 0, 0.732, 0, 0, 0, 0.732, 0, 0.035331726, 0)
 
-[node name="column_002_visuals" parent="Lincoln_ALL/LEVERS/__plush__/plush_column" index="1"]
+[node name="column_002_visuals" parent="Lincoln_ALL/LEVERS/__plush__/plush_column" index="1" unique_id=1731778734]
 transform = Transform3D(0.732, 0, 0, 0, 0.732, 0, 0, 0, 0.732, 0, 0.22833443, 0)
 
-[node name="BreakableColumnArea" parent="Lincoln_ALL/LEVERS/__plush__/plush_column/BreakStaticParent2" index="0"]
+[node name="BreakableColumnArea" parent="Lincoln_ALL/LEVERS/__plush__/plush_column/BreakStaticParent2" parent_id_path=PackedInt32Array(1186049611, 1202689903) index="0" unique_id=2084725873]
 area_capsule_radius = 0.8
 
-[node name="TORCHES" type="Node3D" parent="Lincoln_ALL"]
+[node name="TORCHES" type="Node3D" parent="Lincoln_ALL" unique_id=1151121061]
 
-[node name="FireFlickerTowerEntryR" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+[node name="FireFlickerTowerEntryR" parent="Lincoln_ALL/TORCHES" unique_id=1697023893 instance=ExtResource("9_i3y2i")]
 transform = Transform3D(0.9999993, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -20.499212, 3.9543571, 8.57229)
 particles_amount = 12
 speed_scale = 0.2
-move_speed_scale = 0.1
+move_speed_scale = 0.2
 play_move_animation = true
+energy = 1.2
+add_mist = true
+mist_particles_amount = 4
+mist_particle_scale = 0.7
+__csg_editor_view = false
+
+[node name="FireFlickerTowerEntryL" parent="Lincoln_ALL/TORCHES" unique_id=2076958784 instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999993, 0, 0, 0, 1.0000005, 0, 0, 0, 0.99999994, -25.523222, 4.658056, 1.9900227)
+particles_amount = 12
+speed_scale = 0.2
+move_speed_scale = 0.18
+play_move_animation = true
+radius = 3.0
+energy = 1.0
+add_mist = true
+mist_particles_amount = 2
+mist_particle_scale = 0.6
+__csg_editor_view = false
+
+[node name="FireFlickerMainR" parent="Lincoln_ALL/TORCHES" unique_id=854191803 instance=ExtResource("9_i3y2i")]
+transform = Transform3D(0.9999993, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -24.49221, 3.9816046, 28.382576)
+particles_amount = 15
+speed_scale = 0.2
+move_speed_scale = 0.15
+play_move_animation = true
+radius = 1.8
 energy = 1.4
 add_mist = true
 mist_particles_amount = 4
 mist_particle_scale = 0.7
 __csg_editor_view = false
 
-[node name="FireFlickerTowerEntryL" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
-transform = Transform3D(0.9999993, 0, 0, 0, 1.0000005, 0, 0, 0, 0.99999994, -25.523222, 4.658056, 1.9900227)
-particles_amount = 12
-speed_scale = 0.2
-move_speed_scale = 0.1
-play_move_animation = true
-radius = 3.0
-energy = 1.2
-add_mist = true
-mist_particles_amount = 2
-mist_particle_scale = 0.6
-__csg_editor_view = false
-
-[node name="FireFlickerMainR" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
-transform = Transform3D(0.9999993, 0, 0, 0, 0.9999999, 0, 0, 0, 1, -24.49221, 3.9816046, 28.382576)
-particles_amount = 15
-speed_scale = 0.2
-move_speed_scale = 0.1
-play_move_animation = true
-radius = 1.8
-energy = 1.6
-attenuation = 1.7
-add_mist = true
-mist_particles_amount = 4
-mist_particle_scale = 0.7
-__csg_editor_view = false
-
-[node name="FireFlickerMainL" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+[node name="FireFlickerMainL" parent="Lincoln_ALL/TORCHES" unique_id=2038550847 instance=ExtResource("9_i3y2i")]
 transform = Transform3D(0.99999976, 0, 0, 0, 1.0000006, 0, 0, 0, 0.99999994, -24.315683, 3.984488, 18.617966)
 particles_amount = 15
 speed_scale = 0.2
-move_speed_scale = 0.1
+move_speed_scale = 0.14
 play_move_animation = true
-radius = 1.2
-energy = 1.8
+radius = 1.1
+energy = 1.7
 add_mist = true
 mist_particles_amount = 3
 mist_particle_scale = 0.7
 __csg_editor_view = false
 
-[node name="FireFlickerUp2" parent="Lincoln_ALL/TORCHES" instance=ExtResource("9_i3y2i")]
+[node name="FireFlickerUp2" parent="Lincoln_ALL/TORCHES" unique_id=808506348 instance=ExtResource("9_i3y2i")]
 transform = Transform3D(0.9999998, 0, 0, 0, 1.0000015, 0, 0, 0, 1.0000013, -20.011612, 8.983869, 42.806377)
 particles_amount = 12
 speed_scale = 0.2
 play_animation = false
 move_speed_scale = 0.1
 radius = 1.0
-energy = 2.0
+energy = 1.7
 add_mist = true
 mist_particles_amount = 4
 mist_particle_scale = 0.7
 __csg_editor_view = false
 
-[node name="StaminaChest" parent="Lincoln_ALL" instance=ExtResource("16_7tk7h")]
+[node name="StaminaChest" parent="Lincoln_ALL" unique_id=2010064678 instance=ExtResource("16_7tk7h")]
 transform = Transform3D(-0.99932206, 0, 0.036818214, 0, 1, 0, -0.036818214, 0, -0.99932206, -39.44538, 0.7917948, 37.367073)
 
-[node name="StaminaChest2" parent="Lincoln_ALL" instance=ExtResource("16_7tk7h")]
+[node name="StaminaChest2" parent="Lincoln_ALL" unique_id=2103104746 instance=ExtResource("16_7tk7h")]
 transform = Transform3D(-0.8605822, 0, -0.5093118, 0, 1, 0, 0.5093118, 0, -0.8605822, -22.117504, 0.96081436, 36.613945)
 
-[node name="SimpleTarget" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
+[node name="SimpleTarget" parent="Lincoln_ALL" unique_id=1095497759 instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.223186, 0.7638384, 29.09733)
 
-[node name="SimpleTarget3" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
+[node name="SimpleTarget3" parent="Lincoln_ALL" unique_id=396858546 instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -53.12312, 12.662931, 37.38992)
 
-[node name="RotatingTarget" parent="Lincoln_ALL/SimpleTarget3/Visuals" index="0"]
+[node name="RotatingTarget" parent="Lincoln_ALL/SimpleTarget3/Visuals" parent_id_path=PackedInt32Array(396858546, 1736189500) index="0" unique_id=84983083]
 material_override = ExtResource("48_y0kr0")
 
-[node name="CSGBakedMeshInstance3D2" parent="Lincoln_ALL/SimpleTarget3/Visuals/StolbStatic" index="1"]
+[node name="CSGBakedMeshInstance3D2" parent="Lincoln_ALL/SimpleTarget3/Visuals/StolbStatic" parent_id_path=PackedInt32Array(396858546, 303036035) index="1" unique_id=2121694148]
 material_override = SubResource("StandardMaterial3D_ktdwm")
 
-[node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" index="0"]
+[node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" parent_id_path=PackedInt32Array(396858546, 1218261816) index="0" unique_id=1271949500]
 shape = SubResource("CapsuleShape3D_n5anv")
 
-[node name="SimpleTarget2" parent="Lincoln_ALL" instance=ExtResource("18_2euvp")]
+[node name="SimpleTarget2" parent="Lincoln_ALL" unique_id=811927462 instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.045063, 0.5982324, 36.92067)
 
-[node name="SpringUp" parent="Lincoln_ALL" instance=ExtResource("31_2urya")]
+[node name="SpringUp" parent="Lincoln_ALL" unique_id=1234299674 instance=ExtResource("31_2urya")]
 transform = Transform3D(1, 0, 0, 0, 0.90080434, -0.43422517, 0, 0.43422517, 0.90080434, -21.54194, 7.7515965, 35.673706)
 lift_duration = 0.5
 velocity_influence = 0.1
 
-[node name="SpringUp4" parent="Lincoln_ALL" instance=ExtResource("31_2urya")]
+[node name="SpringUp4" parent="Lincoln_ALL" unique_id=1746904747 instance=ExtResource("31_2urya")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.099094, 12.672524, 40.07725)
 lift_height = 20.0
 lift_duration = 3.0
 velocity_influence = 5.0
 inertia = true
 
-[node name="InteractArea" parent="Lincoln_ALL/SpringUp4" index="1"]
+[node name="InteractArea" parent="Lincoln_ALL/SpringUp4" index="1" unique_id=1579068420]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.099094, 12.672524, 40.07725)
 label_text = "developers only!"
 
-[node name="PHEnemy" parent="Lincoln_ALL" node_paths=PackedStringArray("player") instance=ExtResource("56_ohlvg")]
+[node name="PHEnemy" parent="Lincoln_ALL" unique_id=1436221092 node_paths=PackedStringArray("player") instance=ExtResource("56_ohlvg")]
 transform = Transform3D(0.5499125, 0, -0.8352225, 0, 1, 0, 0.8352225, 0, 0.5499125, -32.080185, 0.7032569, 24.603071)
 show_ui_feelings = true
 float_ui_feelings = true
 player = NodePath("../../Princess")
 dev_tag = "demo_enemy"
 
-[node name="SpeedIncreaseChest" parent="Lincoln_ALL" instance=ExtResource("21_i3y2i")]
+[node name="SpeedIncreaseChest" parent="Lincoln_ALL" unique_id=55000678 instance=ExtResource("21_i3y2i")]
 transform = Transform3D(1, 0, 0, 0, 0.9679945, 0.25097135, 0, -0.25097135, 0.9679945, -26.175722, 11.796641, 1.0264926)
 
-[node name="Exit_2_ALL" type="Node3D" parent="."]
+[node name="Exit_2_ALL" type="Node3D" parent="." unique_id=1775742077]
 
-[node name="Exit 2_WRAPPER" parent="Exit_2_ALL" instance=ExtResource("14_xv3l7")]
+[node name="Exit 2_WRAPPER" parent="Exit_2_ALL" unique_id=1592788317 instance=ExtResource("14_xv3l7")]
 
-[node name="exit2_outer_lights" type="Node" parent="Exit_2_ALL"]
+[node name="exit2_outer_lights" type="Node" parent="Exit_2_ALL" unique_id=1600777899]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights" unique_id=2010206856]
 transform = Transform3D(0.92234164, 0.12699483, 0.3649086, -0.38589445, 0.34988967, 0.8536175, -0.019272733, -0.9281431, 0.37172443, -26.797007, 8.633946, -12.383551)
 light_color = Color(1, 0.8584718, 0.76306057, 1)
 light_energy = 10.0
@@ -1141,13 +1144,13 @@ shadow_opacity = 0.62
 spot_range = 20.0
 spot_angle = 24.49
 
-[node name="FogVolume" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D"]
+[node name="FogVolume" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D" unique_id=1679922885]
 transform = Transform3D(-0.7042374, -0.21740063, 1.0587188, 1.0319965, 0.24020302, 0.73578715, -0.321139, 1.2486548, 0.042788297, 0.3996048, -0.82188034, -6.101433)
 size = Vector3(3.2089844, 5.5202637, 5.604492)
 shape = 1
 material = SubResource("FogMaterial_dpd55")
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights" unique_id=1285661958]
 transform = Transform3D(-0.25051382, -0.85274744, -0.45832807, 0.024880776, -0.4789388, 0.87749565, -0.9677932, 0.20842122, 0.14119782, -29.591148, 8.8179455, -19.058554)
 light_color = Color(1, 0.85882354, 0.7647059, 1)
 light_energy = 10.0
@@ -1156,13 +1159,13 @@ shadow_opacity = 0.62
 spot_range = 20.0
 spot_angle = 31.08
 
-[node name="FogVolume2" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D2"]
+[node name="FogVolume2" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D2" unique_id=2134014937]
 transform = Transform3D(1.1710497, 0.43670613, 0.31942123, 0.48716438, -0.51971054, -1.0754849, -0.23539971, 1.0969455, -0.63670814, 0.1900711, 0.87464905, -6.0294333)
 size = Vector3(2.7607422, 5.5202637, 5.604492)
 shape = 1
 material = SubResource("FogMaterial_pulto")
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights" unique_id=547042348]
 transform = Transform3D(-0.20055673, -0.9660446, 0.16289507, 0.3866993, 0.07471069, 0.9191747, -0.9001337, 0.24733804, 0.35858506, -22.096582, 10.38834, -31.420443)
 light_color = Color(1, 0.85882354, 0.7647059, 1)
 light_energy = 10.0
@@ -1171,13 +1174,13 @@ shadow_opacity = 0.8
 spot_range = 20.0
 spot_angle = 31.08
 
-[node name="FogVolume3" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D3"]
+[node name="FogVolume3" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D3" unique_id=1136242490]
 transform = Transform3D(1.3185321, 0.21402234, -0.94454384, -0.9589679, 0.065345556, -1.3238606, -0.13546127, 1.6206235, 0.17811787, -0.5457573, -1.0562105, -6.9358053)
 size = Vector3(2.7607422, 5.5202637, 5.604492)
 shape = 1
 material = SubResource("FogMaterial_dpd55")
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights" unique_id=609528696]
 transform = Transform3D(-0.6128224, 0.35593227, 0.7055218, 0.77363294, 0.088261485, 0.62745684, 0.16106173, 0.93033445, -0.32944953, -19.152622, 7.7138033, -51.147045)
 light_color = Color(1, 0.85882354, 0.7647059, 1)
 light_energy = 10.0
@@ -1186,13 +1189,13 @@ shadow_opacity = 0.68
 spot_range = 20.0
 spot_angle = 31.08
 
-[node name="FogVolume3" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D4"]
+[node name="FogVolume3" type="FogVolume" parent="Exit_2_ALL/exit2_outer_lights/SpotLight3D4" unique_id=182428434]
 transform = Transform3D(1.3670951, 0.21698442, -0.87204623, -0.87050104, -0.07438764, -1.3831822, -0.22310473, 1.6198405, 0.053294748, -0.7358208, 0.07740021, -6.8609324)
 size = Vector3(2.7607422, 5.5202637, 5.604492)
 shape = 1
 material = SubResource("FogMaterial_ic71h")
 
-[node name="Spot_supportive" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+[node name="Spot_supportive" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights" unique_id=642945195]
 transform = Transform3D(-0.8659352, 0.46146393, 0.19289207, 0.19194606, -0.04951928, 0.9801554, 0.46185824, 0.88577586, -0.045695692, -21.092619, 6.285802, -50.179768)
 light_color = Color(1, 0.85882354, 0.7647059, 1)
 light_energy = 4.0
@@ -1204,7 +1207,7 @@ shadow_opacity = 0.62
 spot_attenuation = 1.8
 spot_angle = 44.3
 
-[node name="Spot_supportive_turtle" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights"]
+[node name="Spot_supportive_turtle" type="SpotLight3D" parent="Exit_2_ALL/exit2_outer_lights" unique_id=2077591377]
 transform = Transform3D(-0.8661647, 0.29193747, 0.40562454, 0.0021228455, -0.80948424, 0.58713776, 0.49975425, 0.5094191, 0.7005269, -22.600508, 5.453927, -49.42244)
 light_color = Color(1, 0.85882354, 0.7647059, 1)
 light_energy = 2.0
@@ -1214,7 +1217,7 @@ shadow_opacity = 0.62
 spot_range = 20.0
 spot_attenuation = 1.4
 
-[node name="TurtleOmni" parent="Exit_2_ALL/exit2_outer_lights" instance=ExtResource("16_0j5u0")]
+[node name="TurtleOmni" parent="Exit_2_ALL/exit2_outer_lights" unique_id=1098013381 instance=ExtResource("16_0j5u0")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -29.30958, -1.3114233, -67.30221)
 speed_scale = 0.2
 play_move_animation = true
@@ -1227,22 +1230,22 @@ volumetric_fog_energy = 5.0
 bake_mode = 1
 color = Color(1, 0.4616555, 0.28627455, 1)
 
-[node name="PuffFog3" parent="Exit_2_ALL/exit2_outer_lights/TurtleOmni" instance=ExtResource("22_7tk7h")]
+[node name="PuffFog3" parent="Exit_2_ALL/exit2_outer_lights/TurtleOmni" unique_id=1021071059 instance=ExtResource("22_7tk7h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5195868, 0)
 particle_scale = 3.0
 color_multiplier = Color(0.6357732, 0.13809621, 0.13809621, 1)
 billboard_mode = 2
 
-[node name="SpeedIncreaseChest" parent="Exit_2_ALL" instance=ExtResource("21_i3y2i")]
+[node name="SpeedIncreaseChest" parent="Exit_2_ALL" unique_id=1221455294 instance=ExtResource("21_i3y2i")]
 transform = Transform3D(-0.5058079, 0, 0.86264616, 0.15499847, 0.9837255, 0.09088251, -0.848607, 0.17967792, -0.4975761, -28.20957, 0.3915105, -51.93731)
 
-[node name="LightmapGI_EXIT" type="LightmapGI" parent="Exit_2_ALL"]
+[node name="LightmapGI_EXIT" type="LightmapGI" parent="Exit_2_ALL" unique_id=1218161265]
 quality = 0
 bounce_indirect_energy = 2.0
 use_denoiser = false
 light_data = ExtResource("20_x0u1k")
 
-[node name="PuffFog" parent="Exit_2_ALL" instance=ExtResource("22_7tk7h")]
+[node name="PuffFog" parent="Exit_2_ALL" unique_id=753248191 instance=ExtResource("22_7tk7h")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -28.025238, 0.5092061, -18.435322)
 particles_amount = 2
 lifetime = 25.0
@@ -1252,7 +1255,7 @@ color_multiplier = Color(1, 0.9220992, 0.8551318, 1)
 normal_strength = 30.0
 billboard_mode = 0
 
-[node name="PuffFog2" parent="Exit_2_ALL" instance=ExtResource("22_7tk7h")]
+[node name="PuffFog2" parent="Exit_2_ALL" unique_id=1788744035 instance=ExtResource("22_7tk7h")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -22.214067, 0.2864713, -34.67748)
 particles_amount = 2
 lifetime = 25.0
@@ -1262,15 +1265,15 @@ color_multiplier = Color(1, 0.9220992, 0.8551318, 1)
 normal_strength = 30.0
 billboard_mode = 0
 
-[node name="MaxHealthItem" parent="Exit_2_ALL" instance=ExtResource("34_dffxn")]
+[node name="MaxHealthItem" parent="Exit_2_ALL" unique_id=2071816654 instance=ExtResource("34_dffxn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.538815, 0.6746146, -49.33424)
 
-[node name="LADY_ALL" type="Node3D" parent="."]
+[node name="LADY_ALL" type="Node3D" parent="." unique_id=1359158030]
 
-[node name="LADY2" parent="LADY_ALL" instance=ExtResource("6_dpd55")]
+[node name="LADY2" parent="LADY_ALL" unique_id=1089984118 instance=ExtResource("6_dpd55")]
 transform = Transform3D(0.999, 0, 0, 0, 0.999, 0, 0, 0, 0.999, 0, 0, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpotLight3D" type="SpotLight3D" parent="LADY_ALL" unique_id=1784869049]
 transform = Transform3D(0.69896233, -0.7144002, 0.03292542, 0.38440076, 0.41412, 0.82507014, -0.6030653, -0.5640363, 0.5640703, 57.72216, 91.63352, 94.213)
 light_energy = 16.0
 light_volumetric_fog_energy = 8.4
@@ -1279,7 +1282,7 @@ spot_range = 100.0
 spot_attenuation = 0.6
 spot_angle = 26.1
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="LADY_ALL" unique_id=1762814962]
 transform = Transform3D(0.41134754, -0.7739195, -0.48149958, 0.63590187, -0.13479263, 0.7599078, -0.65301, -0.6187727, 0.43669024, 60.63816, 89.5514, 93.576)
 light_energy = 8.0
 light_volumetric_fog_energy = 8.0
@@ -1288,7 +1291,7 @@ spot_range = 120.0
 spot_attenuation = 0.9
 spot_angle = 29.15
 
-[node name="SpotRSide" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpotRSide" type="SpotLight3D" parent="LADY_ALL" unique_id=1808293427]
 transform = Transform3D(0.0026787221, -0.98423856, -0.176826, 0.63590187, -0.13479258, 0.75990784, -0.77176535, -0.11447956, 0.625518, 7.936783, 24.220222, 75.54502)
 light_energy = 6.373
 light_volumetric_fog_energy = 8.0
@@ -1297,7 +1300,7 @@ spot_range = 51.502
 spot_attenuation = 0.9
 spot_angle = 20.0
 
-[node name="SpotLSide2" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpotLSide2" type="SpotLight3D" parent="LADY_ALL" unique_id=116882084]
 transform = Transform3D(-0.4570476, -0.76600355, 0.4520466, -0.86113524, 0.50829, -0.009352757, -0.22260651, -0.39354792, -0.8919453, 41.412888, -1.9657812, -9.61257)
 light_energy = 6.373
 light_volumetric_fog_energy = 8.0
@@ -1306,7 +1309,7 @@ spot_range = 59.299
 spot_attenuation = 0.9
 spot_angle = 15.93
 
-[node name="SpotLSide3" type="SpotLight3D" parent="LADY_ALL/SpotLSide2"]
+[node name="SpotLSide3" type="SpotLight3D" parent="LADY_ALL/SpotLSide2" unique_id=2047110802]
 transform = Transform3D(0.5628458, 0.71308076, -0.41799545, 0.6775476, -0.10838048, 0.7274496, 0.47342783, -0.69265395, -0.5441478, -1.7228127, -3.4999905, -14.128685)
 light_energy = 6.373
 light_volumetric_fog_energy = 0.0
@@ -1315,7 +1318,7 @@ spot_range = 106.49268
 spot_angle = 58.64
 spot_angle_attenuation = 0.8705506
 
-[node name="SpotLeftSide" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpotLeftSide" type="SpotLight3D" parent="LADY_ALL" unique_id=174527102]
 transform = Transform3D(0.957348, 0.22165598, -0.1853469, 0.28799972, -0.7836772, 0.5503692, -0.023259513, -0.5802747, -0.81408864, 89.92616, -0.20547462, -49.234)
 light_energy = 16.0
 light_volumetric_fog_energy = 8.0
@@ -1325,7 +1328,7 @@ shadow_bias = 0.199
 spot_range = 200.0
 spot_angle = 38.7
 
-[node name="SpoCrack" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpoCrack" type="SpotLight3D" parent="LADY_ALL" unique_id=1420440215]
 transform = Transform3D(-0.5903137, 0.7220334, 0.36082906, 0.23109537, -0.27713388, 0.93262625, 0.7733853, 0.633928, -0.0032626688, 70.10097, 22.029634, 64.16664)
 light_energy = 1.373
 light_bake_mode = 1
@@ -1333,13 +1336,13 @@ spot_range = 14.914794
 spot_attenuation = 0.66
 spot_angle = 98.7
 
-[node name="LightmapGI_lady" type="LightmapGI" parent="LADY_ALL"]
+[node name="LightmapGI_lady" type="LightmapGI" parent="LADY_ALL" unique_id=371796678]
 quality = 0
 bounces = 2
 interior = true
 use_denoiser = false
 
-[node name="SpotlightWindowFromLady" type="SpotLight3D" parent="LADY_ALL"]
+[node name="SpotlightWindowFromLady" type="SpotLight3D" parent="LADY_ALL" unique_id=2128550722]
 transform = Transform3D(0.9527843, 0.28261778, -0.11103639, -0.1843893, 0.8290387, 0.52791595, 0.24125193, -0.4825161, 0.84200686, -8.192089, 7.1733356, 38.456314)
 light_color = Color(0.72360146, 0.8014959, 1, 1)
 light_energy = 8.8
@@ -1351,7 +1354,7 @@ spot_range = 17.923157
 spot_attenuation = 1.2
 spot_angle = 34.83
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="LADY_ALL/SpotlightWindowFromLady"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="LADY_ALL/SpotlightWindowFromLady" unique_id=2027800121]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_tc4ti")
@@ -1359,18 +1362,18 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="DodgeIncreaseItem" parent="LADY_ALL" instance=ExtResource("33_p81po")]
+[node name="DodgeIncreaseItem" parent="LADY_ALL" unique_id=1277888520 instance=ExtResource("33_p81po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.22028, 1.3932399, 24.202724)
 
-[node name="MOUNTAIN_VIEW_ALL" type="Node3D" parent="."]
+[node name="MOUNTAIN_VIEW_ALL" type="Node3D" parent="." unique_id=1151073010]
 
-[node name="mountain_view_WRAPPER" parent="MOUNTAIN_VIEW_ALL" instance=ExtResource("26_pulto")]
+[node name="mountain_view_WRAPPER" parent="MOUNTAIN_VIEW_ALL" unique_id=537926366 instance=ExtResource("26_pulto")]
 
-[node name="TOWER_ALL" type="Node3D" parent="."]
+[node name="TOWER_ALL" type="Node3D" parent="." unique_id=1711351114]
 
-[node name="light" type="Node3D" parent="TOWER_ALL"]
+[node name="light" type="Node3D" parent="TOWER_ALL" unique_id=1549141172]
 
-[node name="SignHelper" type="SpotLight3D" parent="TOWER_ALL/light"]
+[node name="SignHelper" type="SpotLight3D" parent="TOWER_ALL/light" unique_id=1709188423]
 transform = Transform3D(-0.4594276, 0.16420761, -0.8729045, 0.04902905, 0.9859524, 0.15966879, 0.886861, 0.03055857, -0.46102467, -10.97221, 3.7248068, 13.454908)
 light_color = Color(0.86658764, 0.47786728, 0.15973577, 1)
 light_energy = 6.157
@@ -1379,7 +1382,7 @@ shadow_enabled = true
 spot_range = 4.58
 spot_attenuation = 1.34
 
-[node name="SignHelper2" type="SpotLight3D" parent="TOWER_ALL/light"]
+[node name="SignHelper2" type="SpotLight3D" parent="TOWER_ALL/light" unique_id=299951315]
 transform = Transform3D(0.3505538, 0.8793591, -0.3222416, 0.2703489, 0.23441367, 0.93378896, 0.8966736, -0.41446093, -0.15555917, -12.639506, 3.4818974, 13.6483555)
 light_color = Color(0.90053093, 0.60595727, 0.36735252, 1)
 light_energy = 2.903
@@ -1388,7 +1391,7 @@ shadow_enabled = true
 spot_range = 5.793
 spot_attenuation = 1.12
 
-[node name="doorlight" type="SpotLight3D" parent="TOWER_ALL/light"]
+[node name="doorlight" type="SpotLight3D" parent="TOWER_ALL/light" unique_id=1424903703]
 transform = Transform3D(-0.9586063, 0.09134311, -0.26968578, -0.08145838, 0.8195828, 0.56714064, 0.2728342, 0.56563276, -0.7782166, -13.559465, 5.80163, -5.8291445)
 light_color = Color(0.98199487, 0.78115344, 0.5943271, 1)
 light_energy = 7.96
@@ -1397,7 +1400,7 @@ shadow_enabled = true
 spot_range = 17.924
 spot_angle = 45.52
 
-[node name="SpotlightCrackTower" type="SpotLight3D" parent="TOWER_ALL/light"]
+[node name="SpotlightCrackTower" type="SpotLight3D" parent="TOWER_ALL/light" unique_id=570713209]
 transform = Transform3D(0.20027314, -0.8859442, 0.41832232, -0.48501337, 0.28133094, 0.8280186, -0.8512654, -0.36872184, -0.37335175, -2.034803, 35.12547, 0.3719828)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 4.874
@@ -1408,7 +1411,7 @@ shadow_opacity = 0.94
 spot_range = 75.464
 spot_angle = 31.39
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="TOWER_ALL/light/SpotlightCrackTower"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TOWER_ALL/light/SpotlightCrackTower" unique_id=1862382968]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_tc4ti")
@@ -1416,7 +1419,7 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="SpotlightCrackTower2" type="SpotLight3D" parent="TOWER_ALL/light"]
+[node name="SpotlightCrackTower2" type="SpotLight3D" parent="TOWER_ALL/light" unique_id=428764316]
 transform = Transform3D(-0.16804881, -0.9068458, 0.38651034, -0.79383683, 0.35695305, 0.49234906, -0.5844508, -0.22408749, -0.7798731, -3.8624575, 20.621864, -7.3997974)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 9.266
@@ -1426,7 +1429,7 @@ shadow_opacity = 0.84
 spot_range = 77.463
 spot_angle = 28.17
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="TOWER_ALL/light/SpotlightCrackTower2"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="TOWER_ALL/light/SpotlightCrackTower2" unique_id=659222404]
 transform = Transform3D(2.544, 0, 0, 0, 2.544, -1.1920929e-07, 0, 1.1920929e-07, 2.544, 0, 0, 0)
 visible = false
 material_override = SubResource("StandardMaterial3D_tc4ti")
@@ -1434,7 +1437,7 @@ cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="FireFlicker2" parent="TOWER_ALL/light" instance=ExtResource("9_i3y2i")]
+[node name="FireFlicker2" parent="TOWER_ALL/light" unique_id=637334315 instance=ExtResource("9_i3y2i")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -10.831873, 4.6359453, -1.1172515)
 particles_amount = 20
 speed_scale = 0.1
@@ -1448,7 +1451,7 @@ mist_particles_amount = 3
 mist_particle_scale = 0.7
 __csg_editor_view = false
 
-[node name="FireFlicker3" parent="TOWER_ALL/light" instance=ExtResource("9_i3y2i")]
+[node name="FireFlicker3" parent="TOWER_ALL/light" unique_id=1090042539 instance=ExtResource("9_i3y2i")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -11.925663, 4.66887, 13.537092)
 particles_amount = 20
 speed_scale = 0.1
@@ -1460,56 +1463,56 @@ mist_particles_amount = 3
 mist_particle_scale = 0.7
 __csg_editor_view = false
 
-[node name="TOWER_WRAPPER" parent="TOWER_ALL" instance=ExtResource("8_50a4s")]
+[node name="TOWER_WRAPPER" parent="TOWER_ALL" unique_id=2116165621 instance=ExtResource("8_50a4s")]
 
-[node name="LightmapGI_Tower" type="LightmapGI" parent="TOWER_ALL"]
+[node name="LightmapGI_Tower" type="LightmapGI" parent="TOWER_ALL" unique_id=1505210151]
 quality = 0
 bounces = 1
 interior = true
 use_denoiser = false
 light_data = ExtResource("27_tc4ti")
 
-[node name="FogVolume2" type="FogVolume" parent="TOWER_ALL"]
+[node name="FogVolume2" type="FogVolume" parent="TOWER_ALL" unique_id=1680089538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.734108, 46.537, 5.9626637)
 size = Vector3(25.563477, 38.715324, 20.300652)
 shape = 0
 material = SubResource("FogMaterial_ee878")
 
-[node name="doors" type="Node" parent="TOWER_ALL"]
+[node name="doors" type="Node" parent="TOWER_ALL" unique_id=798897177]
 
-[node name="BaseDoor" parent="TOWER_ALL/doors" instance=ExtResource("29_pulto")]
+[node name="BaseDoor" parent="TOWER_ALL/doors" unique_id=1414574047 instance=ExtResource("29_pulto")]
 transform = Transform3D(-0.032184597, 0, -0.7071259, 0, 0.7078579, 0, 0.7071259, 0, -0.032184597, -20.07559, 0.5171592, 5.7800407)
 
-[node name="LockedDoor1" parent="TOWER_ALL/doors" instance=ExtResource("29_pulto")]
+[node name="LockedDoor1" parent="TOWER_ALL/doors" unique_id=586346480 instance=ExtResource("29_pulto")]
 transform = Transform3D(-0.97317886, 0, -0.23004974, 0, 1.0000001, 0, 0.23004971, 0, -0.973179, -13.190179, 0.23764694, -1.684826)
 initial_state = 1
 show_door = false
 
-[node name="LockedDoor2" parent="TOWER_ALL/doors" instance=ExtResource("29_pulto")]
+[node name="LockedDoor2" parent="TOWER_ALL/doors" unique_id=1255492516 instance=ExtResource("29_pulto")]
 transform = Transform3D(-0.08136451, 0, -0.99668443, 0, 1, 0, 0.99668443, 0, -0.08136451, -8.694929, -0.048536777, 3.8816266)
 initial_state = 1
 show_door = false
 
-[node name="DodgeIncreaseChest" parent="TOWER_ALL" instance=ExtResource("31_6pevu")]
+[node name="DodgeIncreaseChest" parent="TOWER_ALL" unique_id=982604633 instance=ExtResource("31_6pevu")]
 transform = Transform3D(0.87579685, -0.037323922, 0.48123464, 0.032710966, 0.9993032, 0.017974088, -0.48157018, 0, 0.8764075, -16.511654, 0.49795341, 1.5938712)
 
-[node name="DodgeIncreaseChest2" parent="TOWER_ALL" instance=ExtResource("31_6pevu")]
+[node name="DodgeIncreaseChest2" parent="TOWER_ALL" unique_id=1622139145 instance=ExtResource("31_6pevu")]
 transform = Transform3D(-0.49854836, 0, 0.8668619, 0, 1, 0, -0.8668619, 0, -0.49854836, -17.45675, 0.4788915, 9.054614)
 
-[node name="JAW_ALL" type="Node3D" parent="."]
+[node name="JAW_ALL" type="Node3D" parent="." unique_id=1912017591]
 
-[node name="LightmapGI_JAW" type="LightmapGI" parent="JAW_ALL"]
+[node name="LightmapGI_JAW" type="LightmapGI" parent="JAW_ALL" unique_id=960888756]
 quality = 0
 bounce_indirect_energy = 2.0
 use_denoiser = false
 environment_mode = 0
 light_data = ExtResource("20_p1nq7")
 
-[node name="jaw_WRAPPER" parent="JAW_ALL" instance=ExtResource("11_p1nq7")]
+[node name="jaw_WRAPPER" parent="JAW_ALL" unique_id=1588756810 instance=ExtResource("11_p1nq7")]
 
-[node name="JawLights" type="Node3D" parent="JAW_ALL"]
+[node name="JawLights" type="Node3D" parent="JAW_ALL" unique_id=29399568]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="JAW_ALL/JawLights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="JAW_ALL/JawLights" unique_id=667861655]
 transform = Transform3D(-0.72641385, -0.3674173, 0.580799, -0.05745016, 0.8746022, 0.48142555, -0.6848521, 0.31634706, -0.6564313, -74.81946, 10.00488, 32.90414)
 light_color = Color(0.7715464, 0.62008715, 0.548144, 1)
 light_energy = 25.0
@@ -1520,35 +1523,35 @@ spot_range = 70.0
 spot_angle = 33.2
 spot_angle_attenuation = 1.8660665
 
-[node name="omni" type="Node3D" parent="JAW_ALL/JawLights"]
+[node name="omni" type="Node3D" parent="JAW_ALL/JawLights" unique_id=228440504]
 
-[node name="OmniLight3D2" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3D2" parent="JAW_ALL/JawLights/omni" unique_id=852895313 instance=ExtResource("19_ic71h")]
 transform = Transform3D(-0.31819183, 0.10589319, 0.9420938, 0.07210355, 0.993567, -0.08732593, -0.94528043, 0.04014191, -0.32378018, -70.73787, 2.5838692, 31.907095)
 light_color = Color(0.6357732, 0.2862039, 0.21753846, 1)
 light_energy = 2.9
 light_indirect_energy = 12.0
 
-[node name="OmniLight3DM2Dynamic" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3DM2Dynamic" parent="JAW_ALL/JawLights/omni" unique_id=593563091 instance=ExtResource("19_ic71h")]
 transform = Transform3D(-0.36499876, -0.12922972, 0.92199546, 0.12080244, 0.9753737, 0.18453455, -0.9231374, 0.17873417, -0.3403989, -71.91378, 2.3680193, 32.212463)
 light_color = Color(0.7240258, 0.3313485, 0.25725845, 1)
 light_energy = 2.9
 light_indirect_energy = 13.93
 light_bake_mode = 2
 
-[node name="OmniLight3D4" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3D4" parent="JAW_ALL/JawLights/omni" unique_id=988776939 instance=ExtResource("19_ic71h")]
 transform = Transform3D(0.07292244, -0.024578013, 0.9970347, -0.0027570142, 0.9996875, 0.024845054, -0.9973338, -0.004560601, 0.072831884, -73.22049, 2.512988, 32.593506)
 light_color = Color(0.45926803, 0.11073974, 0.045390684, 1)
 light_energy = 3.5
 light_indirect_energy = 8.0
 
-[node name="OmniLight3D7" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3D7" parent="JAW_ALL/JawLights/omni" unique_id=2032899786 instance=ExtResource("19_ic71h")]
 transform = Transform3D(0.07292244, -0.024578013, 0.9970347, -0.0027570142, 0.9996875, 0.024845054, -0.9973338, -0.004560601, 0.072831884, -70.23935, 0.8235463, 30.890001)
 light_color = Color(1, 0.5601858, 0.47450984, 1)
 light_energy = 3.0
 light_indirect_energy = 8.0
 omni_range = 3.0
 
-[node name="OmniLight3DRRDynamic" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3DRRDynamic" parent="JAW_ALL/JawLights/omni" unique_id=907087718 instance=ExtResource("19_ic71h")]
 transform = Transform3D(0.4799255, 0.047554582, 0.8760195, -0.039463554, 0.9986893, -0.032593668, -0.8764212, -0.018928308, 0.48117316, -62.63326, 1.8005366, 31.210535)
 light_color = Color(0.85979897, 0.44376642, 0.36204574, 1)
 light_energy = 3.5
@@ -1556,19 +1559,19 @@ light_indirect_energy = 12.0
 light_bake_mode = 2
 omni_range = 6.0
 
-[node name="OmniLight3DLL" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3DLL" parent="JAW_ALL/JawLights/omni" unique_id=1547796865 instance=ExtResource("19_ic71h")]
 transform = Transform3D(-0.31819165, 0.105893135, 0.9420938, 0.0721035, 0.993567, -0.087325886, -0.9452805, 0.040141888, -0.32377997, -78.292015, 1.1871401, 34.66428)
 light_color = Color(0.8122784, 0.38416585, 0.2993, 1)
 light_energy = 2.9
 light_indirect_energy = 12.0
 
-[node name="OmniLight3D8mini2" parent="JAW_ALL/JawLights/omni" instance=ExtResource("19_ic71h")]
+[node name="OmniLight3D8mini2" parent="JAW_ALL/JawLights/omni" unique_id=2129015237 instance=ExtResource("19_ic71h")]
 transform = Transform3D(0.9547872, -0.058274988, 0.29152265, 0, 0.9805998, 0.19602057, -0.29729015, -0.18715794, 0.9362641, -82.45658, 0.2923077, 38.138245)
 light_color = Color(1, 0.5601858, 0.47450984, 1)
 light_energy = 0.677
 omni_range = 3.0
 
-[node name="StaticOmni" parent="JAW_ALL" instance=ExtResource("76_56lme")]
+[node name="StaticOmni" parent="JAW_ALL" unique_id=1420401123 instance=ExtResource("76_56lme")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, -107.56591, -0.9904119, 36.582054)
 visible = false
 radius = 4.0
@@ -1578,50 +1581,50 @@ attenuation = 1.2
 cast_shadows = false
 bake_mode = 1
 
-[node name="SecretEnemy" parent="JAW_ALL" node_paths=PackedStringArray("player") instance=ExtResource("51_5q2id")]
+[node name="SecretEnemy" parent="JAW_ALL" unique_id=725737433 node_paths=PackedStringArray("player") instance=ExtResource("51_5q2id")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.45591, -0.9653901, 36.479053)
 fire_up = true
 player = NodePath("../../Princess")
 
-[node name="PlaySecretEFight" parent="JAW_ALL" instance=ExtResource("52_e70k6")]
+[node name="PlaySecretEFight" parent="JAW_ALL" unique_id=603915301 instance=ExtResource("52_e70k6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.422104, -1.1755047, 42.49759)
 fire_only_once = true
 
-[node name="DodgeIncreaseChest" parent="JAW_ALL" instance=ExtResource("31_6pevu")]
+[node name="DodgeIncreaseChest" parent="JAW_ALL" unique_id=1600792722 instance=ExtResource("31_6pevu")]
 transform = Transform3D(0.71406955, 0, 0.70007473, 0, 1, 0, -0.70007473, 0, 0.71406955, -111.18501, -0.9342834, 33.484577)
 
-[node name="SpeedIncreaseItem" parent="JAW_ALL" instance=ExtResource("76_xu021")]
+[node name="SpeedIncreaseItem" parent="JAW_ALL" unique_id=1168116878 instance=ExtResource("76_xu021")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.079796, 0.6029885, 30.887306)
 
-[node name="GOLD_ALL" type="Node3D" parent="."]
+[node name="GOLD_ALL" type="Node3D" parent="." unique_id=1670116316]
 
-[node name="GOLDC" parent="GOLD_ALL" instance=ExtResource("10_ic71h")]
+[node name="GOLDC" parent="GOLD_ALL" unique_id=495693635 instance=ExtResource("10_ic71h")]
 
-[node name="MaxHealthItem" parent="GOLD_ALL" instance=ExtResource("34_dffxn")]
+[node name="MaxHealthItem" parent="GOLD_ALL" unique_id=1708245038 instance=ExtResource("34_dffxn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -98.15545, -4.4475145, 65.594574)
 
-[node name="Princess" parent="." instance=ExtResource("14_4oive")]
+[node name="Princess" parent="." unique_id=1491361080 instance=ExtResource("14_4oive")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.95081, 0.83701015, 22.233961)
 
-[node name="Fog" type="Node" parent="."]
+[node name="Fog" type="Node" parent="." unique_id=93166711]
 
-[node name="DeathPlane" parent="." instance=ExtResource("18_ib1an")]
+[node name="DeathPlane" parent="." unique_id=1311721517 instance=ExtResource("18_ib1an")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -26.92823, -36.414185, -30.120377)
 
-[node name="Tracks" type="Node" parent="."]
+[node name="Tracks" type="Node" parent="." unique_id=257749076]
 
-[node name="base_asp" type="AudioStreamPlayer" parent="Tracks"]
+[node name="base_asp" type="AudioStreamPlayer" parent="Tracks" unique_id=598130079]
 unique_name_in_owner = true
 stream = ExtResource("52_bbtvy")
 bus = &"_d_track_base"
 
-[node name="vibe_asp" type="AudioStreamPlayer" parent="Tracks"]
+[node name="vibe_asp" type="AudioStreamPlayer" parent="Tracks" unique_id=1132542152]
 unique_name_in_owner = true
 stream = ExtResource("53_o1prw")
 volume_db = 3.0
 bus = &"_d_track_vibe"
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=195036748]
 occluder = ExtResource("78_w0ai3")
 bake_mask = 4293918736
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv2pn65sfspf4"]
+[gd_scene format=3 uid="uid://cv2pn65sfspf4"]
 
 [ext_resource type="Script" uid="uid://b21g8b5ep56o4" path="res://logic/ui/tutorial/first_tutorial.gd" id="1_7jgb5"]
 [ext_resource type="Script" uid="uid://b14yx8dxfwjqv" path="res://logic/ui/tutorial/first_tutorial_content.gd" id="1_fek1h"]
 [ext_resource type="Script" uid="uid://dnhmrbrcgrrmj" path="res://logic/ui/tutorial/tutorial_ui.gd" id="4_7jgb5"]
 
-[node name="FirstTutorial" type="MarginContainer"]
+[node name="FirstTutorial" type="MarginContainer" unique_id=2062762207]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 1
 anchor_left = 1.0
@@ -17,25 +17,25 @@ size_flags_vertical = 0
 theme_override_constants/margin_top = 15
 script = ExtResource("1_7jgb5")
 
-[node name="__vbox" type="VBoxContainer" parent="."]
+[node name="__vbox" type="VBoxContainer" parent="." unique_id=1217985553]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="LegendPanel" type="PanelContainer" parent="__vbox"]
+[node name="LegendPanel" type="PanelContainer" parent="__vbox" unique_id=714434596]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="__margin" type="MarginContainer" parent="__vbox/LegendPanel"]
+[node name="__margin" type="MarginContainer" parent="__vbox/LegendPanel" unique_id=302547876]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="Legend" type="RichTextLabel" parent="__vbox/LegendPanel/__margin"]
+[node name="Legend" type="RichTextLabel" parent="__vbox/LegendPanel/__margin" unique_id=1869861792]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 26
@@ -48,7 +48,7 @@ text = "[b]Available tutorials[/b]
 [color=#ffffff]    [img=20x20]uid://dp2m7ljkctl4[/img] Target locking[/color]
 [color=#ffffff]    [img=20x20]uid://b6duqo7n72nd[/img] Health/stamina[/color]
 [color=#ffffff]    [img=20x20]uid://cidp1ip2hiw1f[/img] Additional info[/color]
-[color=#ffffff]    [img=20x20]uid://faceud5if8lb[/img] UI Overlay controls[/color]
+[color=#ffffff]    [img=20x20]uid://faceud5if8lb[/img] UI Dev Tools[/color]
 [hr color=web_gray]
 [i]Use [b]Up/Down[/b] arrows to scroll the tutorials[/i]
 [i]Press [b]T[/b] to toggle this panel[/i]"
@@ -56,18 +56,18 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="TutorialPanel" type="PanelContainer" parent="__vbox"]
+[node name="TutorialPanel" type="PanelContainer" parent="__vbox" unique_id=422710162]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="__margin" type="MarginContainer" parent="__vbox/TutorialPanel"]
+[node name="__margin" type="MarginContainer" parent="__vbox/TutorialPanel" unique_id=727589926]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="Controls" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="Controls" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=1166396369]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -95,7 +95,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="MechanicsOverview" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="MechanicsOverview" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=158082292]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(600, 0)
@@ -122,7 +122,7 @@ Use the [i][i]switch weapon button[/i][/i] to try different weapons. Note that y
 fit_content = true
 scroll_active = false
 
-[node name="AttackMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="AttackMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=1701112814]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)
@@ -147,7 +147,7 @@ text = "[b]Heavy attack[/b] - just press heavy [img=20x20]uid://dhhcof4kym2tu[/i
 fit_content = true
 scroll_active = false
 
-[node name="TargetLockMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="TargetLockMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=935919818]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)
@@ -165,7 +165,7 @@ In order to do so double-tap the [i][img=20x20]uid://dp2m7ljkctl4[/img] [i]targe
 fit_content = true
 scroll_active = false
 
-[node name="HealthStaminaMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="HealthStaminaMechanic" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=1065952828]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)
@@ -179,7 +179,7 @@ text = "[b]Stamina management[/b] - some moves drain stamina, while others like 
 fit_content = true
 scroll_active = false
 
-[node name="AdditionalMovementTips" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="AdditionalMovementTips" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=2022895254]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)
@@ -195,13 +195,13 @@ text = "[b]Advanced dodge[/b] - press both the [img=20x20]uid://bmwjt7mmr0hy8[/i
 fit_content = true
 scroll_active = false
 
-[node name="UIDVMenu" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin"]
+[node name="UIDVMenu" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=966005287]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "In Pause Menu you can find [img=20x20]uid://faceud5if8lb[/img] UI Overlay Controls submenu. 
+text = "In Pause Menu you can find [img=20x20]uid://faceud5if8lb[/img] UI Dev Tools submenu. 
 It controls all of the in-game UI panels, including this tutorial.
 
 Also a lot of the game mechanics can be visualised using it. To name a few:
@@ -216,10 +216,10 @@ Additional camera to show character from different sides.
 fit_content = true
 scroll_active = false
 
-[node name="TutorialUI" type="Node" parent="."]
+[node name="TutorialUI" type="Node" parent="." unique_id=684705763]
 unique_name_in_owner = true
 script = ExtResource("4_7jgb5")
 
-[node name="Content" type="Node" parent="."]
+[node name="Content" type="Node" parent="." unique_id=1741503036]
 unique_name_in_owner = true
 script = ExtResource("1_fek1h")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://p67hfjlxhimn"]
+[gd_scene format=3 uid="uid://p67hfjlxhimn"]
 
 [ext_resource type="PackedScene" uid="uid://d3omn7puwbqeg" path="res://-assets-/GLB-level/demo-level_/linkoln/mountain_view/mountain_view.glb" id="1_hqu7v"]
 [ext_resource type="Texture2D" uid="uid://lqbs41cppq84" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_diffuse.jpg" id="2_anoov"]
@@ -18,64 +18,64 @@ normal_enabled = true
 normal_scale = 0.5
 normal_texture = ExtResource("3_15uth")
 
-[node name="mountain_view_WRAPPER" instance=ExtResource("1_hqu7v")]
+[node name="mountain_view_WRAPPER" unique_id=355629390 instance=ExtResource("1_hqu7v")]
 
-[node name="Rock_007" parent="mountain view" index="0"]
+[node name="Rock_007" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="0" unique_id=885433140]
 layers = 17
 
-[node name="Rock_006" parent="mountain view" index="1"]
+[node name="Rock_006" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="1" unique_id=465957919]
 layers = 17
 
-[node name="_Plane_016" parent="mountain view" index="2"]
+[node name="_Plane_016" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="2" unique_id=34310240]
 layers = 17
 
-[node name="_Plane_003" parent="mountain view" index="3"]
-layers = 17
-cast_shadow = 0
-
-[node name="_Plane_004" parent="mountain view" index="4"]
+[node name="_Plane_003" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="3" unique_id=2051326372]
 layers = 17
 cast_shadow = 0
 
-[node name="Mountain_Group_2_003" parent="mountain view" index="5"]
-layers = 17
-
-[node name="Mountain_Group_2_004" parent="mountain view" index="6"]
+[node name="_Plane_004" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="4" unique_id=330766548]
 layers = 17
 cast_shadow = 0
 
-[node name="Tower top_001" parent="mountain view" index="7"]
+[node name="Mountain_Group_2_003" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="5" unique_id=312914525]
+layers = 17
+
+[node name="Mountain_Group_2_004" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="6" unique_id=778676198]
+layers = 17
+cast_shadow = 0
+
+[node name="Tower top_001" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="7" unique_id=748899355]
 layers = 17
 material_override = SubResource("StandardMaterial3D_tjvqw")
 
-[node name="Plane_007" parent="mountain view" index="8"]
+[node name="Plane_007" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="8" unique_id=1511701738]
 layers = 17
 cast_shadow = 0
 
-[node name="_Plane_006" parent="mountain view" index="9"]
+[node name="_Plane_006" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="9" unique_id=2091372982]
 layers = 17
 
-[node name="Mountain_Group_2_005" parent="mountain view" index="10"]
+[node name="Mountain_Group_2_005" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="10" unique_id=1383767523]
 transform = Transform3D(0.9328289, 0, -0.3603196, 0, 1, 0, 0.3603196, 0, 0.9328289, 470.9384, -201.9656, 773.97504)
 layers = 17
 cast_shadow = 0
 
-[node name="_Plane_011" parent="mountain view" index="11"]
+[node name="_Plane_011" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="11" unique_id=1352008433]
 layers = 17
 cast_shadow = 0
 
-[node name="Mountain_Group_2_002" parent="mountain view" index="12"]
+[node name="Mountain_Group_2_002" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="12" unique_id=941108872]
 layers = 17
 
-[node name="Rock_002" parent="mountain view" index="13"]
+[node name="Rock_002" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="13" unique_id=62869776]
 layers = 17
 
-[node name="Mountain_Group_2_006" parent="mountain view" index="14"]
+[node name="Mountain_Group_2_006" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="14" unique_id=1142209301]
 layers = 17
 cast_shadow = 0
 
-[node name="Rock_012" parent="mountain view" index="15"]
+[node name="Rock_012" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="15" unique_id=178757688]
 layers = 17
 
-[node name="Rock_003" parent="mountain view" index="16"]
+[node name="Rock_003" parent="mountain view" parent_id_path=PackedInt32Array(88174241) index="16" unique_id=1112709331]
 layers = 17

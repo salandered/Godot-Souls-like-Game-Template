@@ -35,8 +35,8 @@ func _ready() -> void:
 	if ui_overlay_controls_panel:
 		ui_overlay_controls_panel.visible = GlobalUIInfo.ui_overlay_controls_visible
 	
-	TextureUtils.randomize_shake_button_panel_region(menu_buttons, 350)
-	TextureUtils.randomize_button_normal_region(ui_overlay_controls_panel, 120, false)
+	ThemeUtils.randomize_shake_button_panel_region(menu_buttons, 350)
+	ThemeUtils.randomize_button_normal_region(ui_overlay_controls_panel, 120, false)
 
 
 func _handle_cancel_input() -> void:

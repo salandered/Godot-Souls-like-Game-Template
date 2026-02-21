@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn3c3saj6bsdr"]
+[gd_scene format=3 uid="uid://bn3c3saj6bsdr"]
 
 [ext_resource type="Script" uid="uid://b8cdhtxiyb2gk" path="res://logic/entities/Locations/_dev/death_plane/death_plane.gd" id="1_5krli"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gym67"]
 size = Vector3(130, 6, 130)
 
-[node name="DeathPlane" type="Area3D"]
+[node name="DeathPlane" type="Area3D" unique_id=395280983]
 script = ExtResource("1_5krli")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2026122179]
 shape = SubResource("BoxShape3D_gym67")
 debug_color = Color(0.25, 0.0925, 0.0925, 1)

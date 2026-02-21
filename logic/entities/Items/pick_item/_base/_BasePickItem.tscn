@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3xuohw6w5pf"]
+[gd_scene format=3 uid="uid://b3xuohw6w5pf"]
 
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="1_c8rud"]
 [ext_resource type="Script" path="res://logic/entities/Items/pick_item/_base/_generic_pick_item.gd" id="1_xh13q"]
@@ -344,19 +344,19 @@ _data = {
 &"pick": SubResource("Animation_wrivv")
 }
 
-[node name="BasePickItem" type="Node3D"]
+[node name="BasePickItem" type="Node3D" unique_id=94738266]
 script = ExtResource("1_xh13q")
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=788798705]
 unique_name_in_owner = true
 
-[node name="RedSphere" type="CSGSphere3D" parent="Visuals"]
+[node name="RedSphere" type="CSGSphere3D" parent="Visuals" unique_id=1322938207]
 layers = 4096
 gi_mode = 0
 radius = 0.2
 radial_segments = 8
 
-[node name="PuffFog" parent="Visuals/RedSphere" instance=ExtResource("1_c8rud")]
+[node name="PuffFog" parent="Visuals/RedSphere" unique_id=2009355783 instance=ExtResource("1_c8rud")]
 unique_name_in_owner = true
 particles_amount = 4
 lifetime = 16.0
@@ -368,7 +368,7 @@ initial_angle_min = -30.0
 initial_angle_max = 30.0
 angular_velocity = 9.0
 
-[node name="GlowLight" type="OmniLight3D" parent="Visuals/RedSphere"]
+[node name="GlowLight" type="OmniLight3D" parent="Visuals/RedSphere" unique_id=1271204396]
 unique_name_in_owner = true
 light_color = Color(0.3981701, 0, 0, 1)
 light_energy = 0.4
@@ -378,13 +378,11 @@ shadow_bias = 0.04
 shadow_opacity = 0.6
 omni_range = 2.5006006
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/RedSphere/GlowLight"]
-libraries = {
-&"": SubResource("AnimationLibrary_i6xqy")
-}
-autoplay = "flicker"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/RedSphere/GlowLight" unique_id=1220596530]
+libraries/ = SubResource("AnimationLibrary_i6xqy")
+autoplay = &"flicker"
 
-[node name="InnerSecondaryOmni" type="OmniLight3D" parent="Visuals/RedSphere"]
+[node name="InnerSecondaryOmni" type="OmniLight3D" parent="Visuals/RedSphere" unique_id=1913207257]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12500912, 0, 0)
 light_color = Color(0.7443918, 0, 0.05068845, 1)
@@ -396,10 +394,10 @@ shadow_bias = 0.04
 shadow_opacity = 0.6
 omni_range = 1.5
 
-[node name="PickSFX" type="Node3D" parent="Visuals/RedSphere"]
+[node name="PickSFX" type="Node3D" parent="Visuals/RedSphere" unique_id=1722112816]
 transform = Transform3D(1.4285716, 0, 0, 0, 1.4285716, 0, 0, 0, 1.4285716, 0, 0.0035427213, 0)
 
-[node name="PickJewelASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
+[node name="PickJewelASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX" unique_id=1061586927]
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0, -0.06115779, -0.05089996)
 stream = ExtResource("2_lbk6k")
@@ -410,7 +408,7 @@ max_distance = 9.0
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
-[node name="PickMatchASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
+[node name="PickMatchASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX" unique_id=2119167896]
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, 0.045602918, 0, 0)
 stream = ExtResource("3_6ute5")
@@ -420,7 +418,7 @@ max_distance = 9.0
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
-[node name="PickWhooshASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX"]
+[node name="PickWhooshASP" type="AudioStreamPlayer3D" parent="Visuals/RedSphere/PickSFX" unique_id=1458146441]
 unique_name_in_owner = true
 transform = Transform3D(0.7144196, 0, 0, 0, 0.7144196, 0, 0, 0, 0.7144196, -0.013224141, -0.07411059, 0)
 stream = ExtResource("4_10lsv")
@@ -430,7 +428,7 @@ max_distance = 9.0
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
-[node name="BackASP" type="AudioStreamPlayer3D" parent="."]
+[node name="BackASP" type="AudioStreamPlayer3D" parent="." unique_id=1948729028]
 unique_name_in_owner = true
 stream = ExtResource("5_tbi52")
 volume_db = -10.0
@@ -443,24 +441,21 @@ max_polyphony = 2
 bus = &"game_SFX"
 attenuation_filter_cutoff_hz = 942.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1864519877]
 root_node = NodePath("../Visuals/RedSphere/PickSFX/PickJewelASP")
-libraries = {
-&"": SubResource("AnimationLibrary_87eva")
-}
+libraries/ = SubResource("AnimationLibrary_87eva")
 
-[node name="InteractArea" parent="." instance=ExtResource("6_vaksa")]
+[node name="InteractArea" parent="." unique_id=980971986 instance=ExtResource("6_vaksa")]
 unique_name_in_owner = true
 
-[node name="__dev_visuals" type="Node3D" parent="."]
+[node name="__dev_visuals" type="Node3D" parent="." unique_id=2128260449]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24576539, 0)
 visible = false
 
-[node name="chest main" type="MeshInstance3D" parent="__dev_visuals"]
+[node name="chest main" type="MeshInstance3D" parent="__dev_visuals" unique_id=2027173517]
 gi_mode = 0
 mesh = ExtResource("8_jv5db")
-skeleton = NodePath("")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=12937117]
 remote_path = NodePath("../InteractArea")
 update_scale = false

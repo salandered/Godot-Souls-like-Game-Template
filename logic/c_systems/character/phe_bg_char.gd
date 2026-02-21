@@ -68,7 +68,7 @@ func _on_death_raised_implementation() -> void:
 		remove_fire_effect()
 
 	var sig_data := get_sig_container().get_by_sig_id(SignalID.sfx_unique)
-	SigUtils.safe_emit(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
+	SigUtils.safe_emit_sig_data(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
 
 
 const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")

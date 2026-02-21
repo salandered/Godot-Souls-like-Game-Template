@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://b82qfn51mgckx"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b82qfn51mgckx"]
 
 [ext_resource type="AudioStream" uid="uid://dquj3uy1knfw4" path="res://-assets-/SFX/sources/_mine/creak_metal_mine_2.wav" id="2_h40nd"]
 

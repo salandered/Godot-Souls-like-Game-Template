@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwpwvkdbpjo50"]
+[gd_scene format=3 uid="uid://bwpwvkdbpjo50"]
 
 [ext_resource type="Script" uid="uid://jdwlw1l5wj5a" path="res://logic/c_systems/awareness/downcast/downcast.gd" id="1_tplgi"]
 
-[node name="DownCast" type="RayCast3D"]
+[node name="DownCast" type="RayCast3D" unique_id=1099887131]
 transform = Transform3D(1, -3.72529e-09, -1.49012e-08, -3.72529e-09, 1, 0, 0, 0, 1, 0, 0, 0)
 target_position = Vector3(0, -100, 0)
 debug_shape_custom_color = Color(1.0908433, 0.1495502, 0, 0.7294118)

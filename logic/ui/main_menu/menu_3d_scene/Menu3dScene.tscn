@@ -1,6 +1,6 @@
-[gd_scene load_steps=142 format=4 uid="uid://djsyfeinr8lew"]
+[gd_scene format=4 uid="uid://djsyfeinr8lew"]
 
-[ext_resource type="Script" path="res://logic/ui/main_menu/menu_3d_scene/menu_3d_scene.gd" id="1_m6ugi"]
+[ext_resource type="Script" uid="uid://bbu6a8vu2wl7k" path="res://logic/ui/main_menu/menu_3d_scene/menu_3d_scene.gd" id="1_m6ugi"]
 [ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/materials-shared/_shaders/sky/blue_sky.tres" id="1_tyxoo"]
 [ext_resource type="PackedScene" uid="uid://bu78ylp2jroiw" path="res://logic/entities/VFX/puff/PuffExplosion.tscn" id="3_84k2w"]
 [ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres" id="4_5sy76"]
@@ -59,23 +59,23 @@ sky = ExtResource("1_tyxoo")
 ambient_light_source = 3
 ambient_light_color = Color(0.055566955, 0.20803684, 0.5271547, 1)
 tonemap_mode = 3
-tonemap_exposure = 1.15
-ssao_enabled = true
+tonemap_exposure = 1.09
 glow_enabled = true
 glow_levels/1 = 1.0
 glow_levels/4 = 1.0
 glow_levels/7 = 0.5
-glow_strength = 0.6
+glow_strength = 0.4
 glow_mix = 0.153
-glow_blend_mode = 4
 glow_hdr_threshold = 0.36
 fog_density = 0.3752
 fog_sky_affect = 0.0
 fog_height = 6.0
 fog_height_density = 0.001
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.03
+volumetric_fog_density = 0.02
 volumetric_fog_temporal_reprojection_enabled = false
+adjustment_enabled = true
+adjustment_contrast = 1.105
 
 [sub_resource type="FogMaterial" id="FogMaterial_m6ugi"]
 density = 0.005
@@ -88,8 +88,8 @@ edge_fade = 0.7578583
 noise = SubResource("FastNoiseLite_ev1nc")
 
 [sub_resource type="FogMaterial" id="FogMaterial_ev1nc"]
-density = 0.015
-emission = Color(0.827658, 0.10588235, 1, 1)
+density = 0.013
+emission = Color(0.720598, 0.13050123, 0.8617083, 1)
 edge_fade = 0.7578583
 density_texture = SubResource("NoiseTexture3D_jk1st")
 
@@ -99,8 +99,8 @@ density_texture = SubResource("NoiseTexture3D_jk1st")
 noise = SubResource("FastNoiseLite_6xg6v")
 
 [sub_resource type="FogMaterial" id="FogMaterial_e2dgj"]
-density = 0.003
-emission = Color(1.0284745, 1.695416, 2.3623576, 1)
+density = 0.004
+emission = Color(0.6907837, 1.1711645, 1.6515454, 1)
 edge_fade = 0.2973018
 density_texture = SubResource("NoiseTexture3D_gixss")
 
@@ -1636,31 +1636,32 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lx5l3")
 
-[node name="MenuScene" type="Node3D"]
+[node name="MenuScene" type="Node3D" unique_id=461083775]
 script = ExtResource("1_m6ugi")
+is_pause_menu_controller = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=471200173]
 environment = SubResource("2")
 
-[node name="FogVolume2" type="FogVolume" parent="WorldEnvironment"]
+[node name="FogVolume2" type="FogVolume" parent="WorldEnvironment" unique_id=998838525]
 transform = Transform3D(4.6402335, 0, 0, 0, 4.6402335, 0, 0, 0, 4.6402335, 1.9135638, 2.0101848, -3.1660748)
 size = Vector3(12, 8, 4)
 shape = 0
 material = SubResource("FogMaterial_m6ugi")
 
-[node name="FogVolume3" type="FogVolume" parent="WorldEnvironment"]
+[node name="FogVolume3" type="FogVolume" parent="WorldEnvironment" unique_id=1564143418]
 transform = Transform3D(4.6402335, 0, 0, 0, 4.6402335, 0, 0, 0, 4.6402335, -0.02611339, 2.0101848, 56.046387)
 size = Vector3(12, 8, 4)
 shape = 0
 material = SubResource("FogMaterial_ev1nc")
 
-[node name="FogVolume" type="FogVolume" parent="WorldEnvironment"]
+[node name="FogVolume" type="FogVolume" parent="WorldEnvironment" unique_id=22153896]
 transform = Transform3D(2.737504, 0, 0, 0, 2.737462, 0.0151935015, 0, -0.0151935015, 2.737462, -0.026341893, 1.9949663, 29.493668)
 size = Vector3(10.53418, 4.9228516, 18.563477)
 shape = 0
 material = SubResource("FogMaterial_e2dgj")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1090545165]
 transform = Transform3D(-0.86602545, -0.43301263, 0.25, -3.7252903e-09, 0.50000006, 0.86602545, -0.49999994, 0.75000006, -0.4330128, -1.4305115e-06, 5.779807, 0)
 light_color = Color(0.88143784, 0.93426746, 1, 1)
 light_energy = 0.4
@@ -1669,28 +1670,27 @@ light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_mode = 0
 
-[node name="inner_add_shadows" type="DirectionalLight3D" parent="."]
+[node name="inner_add_shadows" type="DirectionalLight3D" parent="." unique_id=3687926]
 transform = Transform3D(0.20203024, -0.32416108, 0.92417717, 0.05642263, 0.94592077, 0.31945348, -0.9777527, -0.012394756, 0.2093946, 1.628839, 3.3777657, 38.258286)
-light_color = Color(0.93447423, 0.93447423, 0.93447423, 1)
-light_energy = 0.16
-light_volumetric_fog_energy = 0.0
+light_color = Color(0.72360146, 0.72360146, 0.72360146, 1)
+light_energy = 0.12
+light_volumetric_fog_energy = 0.1
 light_specular = 0.0
 light_bake_mode = 1
 shadow_enabled = true
 shadow_caster_mask = 4294967293
-directional_shadow_mode = 1
 
-[node name="__dev_light" type="DirectionalLight3D" parent="."]
+[node name="__dev_light" type="DirectionalLight3D" parent="." unique_id=486883716]
 visible = false
 light_bake_mode = 0
 editor_only = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=837777139]
 unique_name_in_owner = true
-transform = Transform3D(0.9999066, 0.002418285, 0.013447601, 0, 0.9842124, -0.17699112, -0.0136633115, 0.1769746, 0.98412055, 0.07, 1.295, 74.16018)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07, 1.295, 37.146385)
 current = true
 
-[node name="PuffExplosion" parent="Camera3D" instance=ExtResource("3_84k2w")]
+[node name="PuffExplosion" parent="Camera3D" unique_id=1335222308 instance=ExtResource("3_84k2w")]
 transform = Transform3D(0.99999905, 0.000232324, 0.0013687462, -0.00023413636, 0.99999917, 0.0013212711, -0.0013684407, -0.0013215989, 0.9999984, 0.14581394, -0.35818672, -1.7331772)
 particles_amount = 7
 lifetime = 8.0
@@ -1702,77 +1702,69 @@ initial_angle_min = -45.0
 initial_angle_max = 45.0
 angular_velocity = 3.0
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1639113543]
 transform = Transform3D(0.96702665, 1.8621913e-07, 0.25467536, -0.030255506, 0.9929183, 0.11488232, -0.25287178, -0.11879959, 0.9601784, -0.3173411, 0.29040372, 0.97236013)
-light_color = Color(0.8196078, 0.84754694, 0.98039216, 1)
-light_energy = 3.0
+light_color = Color(0.58784807, 0.6480787, 0.9406265, 1)
+light_energy = 2.1
+light_volumetric_fog_energy = 0.5
 light_bake_mode = 1
 shadow_enabled = true
 spot_range = 6.5
 spot_attenuation = 1.5
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=1341125603]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.2029037)
 
-[node name="LINCOLN_MAIN" type="Node3D" parent="Visuals"]
+[node name="LINCOLN_MAIN" type="Node3D" parent="Visuals" unique_id=557369477]
 transform = Transform3D(0.7063659, 0, -0.7078469, -0.031295486, 0.9990222, -0.031230008, 0.70715475, 0.044212226, 0.7056752, -0.704, -1.1001282, 61.775017)
 
-[node name="bake_group_link_main" type="Node3D" parent="Visuals/LINCOLN_MAIN"]
+[node name="bake_group_link_main" type="Node3D" parent="Visuals/LINCOLN_MAIN" unique_id=1613217924]
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="lincoln__visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="lincoln__visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=154358411]
 transform = Transform3D(-0.78715074, 0, -0.6167616, 2.3283064e-09, 1, 0, 0.6167617, 0, -0.78715086, -28.463919, 5.181641, -22.279068)
 layers = 2
 mesh = SubResource("ArrayMesh_ev1nc")
-skeleton = NodePath("")
 
-[node name="lincoln FLOOR" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="lincoln FLOOR" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=605127238]
 transform = Transform3D(-0.78715074, 0, -0.61676186, -5.5879354e-09, 1, -7.450581e-09, 0.6167617, 0, -0.7871509, -28.67746, 5.181642, -22.214449)
 mesh = ExtResource("7_rqxxm")
-skeleton = NodePath("")
 
-[node name="turtle sk_010" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="turtle sk_010" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=804641466]
 transform = Transform3D(0.62224483, 0.049374558, -0.36284894, -0.08118713, 0.7162055, -0.041770145, 0.35708004, 0.076800525, 0.62280166, -15.7103405, -0.47715354, -44.305347)
 mesh = SubResource("ArrayMesh_ort2j")
-skeleton = NodePath("")
 
-[node name="column leflovers" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="column leflovers" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=217329629]
 transform = Transform3D(-0.78715074, 0, -0.61676174, -1.8626451e-09, 1, -3.7252903e-09, 0.6167617, 0, -0.78715086, -36.37394, -2.87508, 18.707119)
 
-[node name="column_011_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers"]
+[node name="column_011_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers" unique_id=603543509]
 transform = Transform3D(1, 0, 7.450581e-09, -9.313226e-10, 1, -7.450581e-09, -7.450581e-09, -7.450581e-09, 1, -39.953674, 4.254602, 16.336403)
 mesh = ExtResource("9_84k2w")
-skeleton = NodePath("")
 
-[node name="column_006_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers"]
+[node name="column_006_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers" unique_id=1658879404]
 transform = Transform3D(1, 0, 7.450581e-09, 0, 1, 0, -7.450581e-09, 0, 1, -39.74211, 4.254603, 30.808237)
 mesh = SubResource("ArrayMesh_fovki")
-skeleton = NodePath("")
 
-[node name="column_006_visuals3" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers"]
+[node name="column_006_visuals3" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers" unique_id=1621765360]
 transform = Transform3D(-0.9531238, -0.002787068, 0.3025679, 0.0237546, 0.99618226, 0.08400592, -0.30164695, 0.08725545, -0.94941854, -52.815666, 4.132534, 32.40339)
 mesh = SubResource("ArrayMesh_fovki")
-skeleton = NodePath("")
 
-[node name="column_006_visuals4" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers"]
+[node name="column_006_visuals4" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers" unique_id=1089884330]
 transform = Transform3D(0.9803992, -0.008541133, 0.19683623, 0.00875154, 0.99996257, -0.00019918382, -0.1968269, 0.0019179545, 0.98043615, -50.99997, 4.188563, 17.748398)
 mesh = SubResource("ArrayMesh_fovki")
-skeleton = NodePath("")
 
-[node name="column_006_visuals5" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers"]
+[node name="column_006_visuals5" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers" unique_id=1776858499]
 transform = Transform3D(0.060109142, 0.048850313, -0.99699587, -0.038760237, 0.99816346, 0.04657066, 0.9974387, 0.03584443, 0.06189228, -30.091862, 4.1117587, 16.937038)
 mesh = SubResource("ArrayMesh_fovki")
-skeleton = NodePath("")
 
-[node name="column_006_visuals2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers"]
+[node name="column_006_visuals2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/column leflovers" unique_id=253993159]
 transform = Transform3D(1.105412, -0.00034529902, 0.007864058, 0.00034559146, 1.10544, -4.1071326e-05, -0.00786382, 4.350394e-05, 1.1054119, -29.45446, 4.2958465, 31.04773)
 mesh = SubResource("ArrayMesh_fovki")
-skeleton = NodePath("")
 
-[node name="spots" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="spots" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=1812035150]
 transform = Transform3D(-0.84061515, -0.29073817, -0.45698726, -0.18379739, 0.94677746, -0.26425558, 0.5094944, -0.13814425, -0.8493125, -34.98897, -1.2720457, -33.81378)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/spots"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/spots" unique_id=799849244]
 transform = Transform3D(-0.29068103, -0.49077237, -0.821369, -0.16679862, -0.8193005, 0.5485663, -0.94216913, 0.29646105, 0.15629494, -37.047256, 2.2700784, 2.2974777)
 light_color = Color(0.85979897, 0.7126235, 0.8524402, 1)
 light_energy = 14.0
@@ -1782,7 +1774,7 @@ shadow_enabled = true
 spot_range = 38.534
 spot_angle = 30.67
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/spots"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/spots" unique_id=1589699384]
 transform = Transform3D(-0.16757067, -0.4707042, -0.86623186, -0.14876284, -0.8565221, 0.49420583, -0.97457147, 0.21167752, 0.07350466, -46.79935, 5.859212, -10.971388)
 light_color = Color(0.85979897, 0.7126235, 0.8524402, 1)
 light_energy = 25.0
@@ -1792,7 +1784,7 @@ shadow_enabled = true
 spot_range = 35.33
 spot_angle = 22.61
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/spots"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/spots" unique_id=1218218613]
 transform = Transform3D(-0.98116994, 0.18772703, 0.045432933, -0.040392168, -0.42945564, 0.9021841, 0.1888758, 0.88336086, 0.42895168, -0.3373661, 20.899044, 15.080633)
 light_color = Color(0.6079786, 0.7297683, 0.83264434, 1)
 light_energy = 20.0
@@ -1802,16 +1794,15 @@ shadow_enabled = true
 spot_range = 40.0
 spot_angle = 30.67
 
-[node name="torches" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="torches" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=889681744]
 transform = Transform3D(-0.78715074, 0, -0.61676174, 0, 1, 3.7252903e-09, 0.6167617, 0, -0.78715086, -28.463924, 5.181641, -22.279072)
 
-[node name="Torch_Metal_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches"]
+[node name="Torch_Metal_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches" unique_id=1054834809]
 transform = Transform3D(0.35382202, -0.08465077, -0.93147427, -0.00050006434, 0.9958788, -0.0906937, 0.9353127, 0.032555223, 0.35232148, 11.193723, -2.86032, -8.51923)
 mesh = ExtResource("13_rqxxm")
-skeleton = NodePath("")
 surface_material_override/0 = ExtResource("13_v1m0i")
 
-[node name="FireFlicker" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_004" instance=ExtResource("8_bdepm")]
+[node name="FireFlicker" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_004" unique_id=393561295 instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.99999946, 0, 7.4505806e-08, -7.450581e-09, 0.99999917, 4.703179e-08, -1.4901161e-08, -9.313226e-09, 0.9999996, 0.0020599365, 0.60695815, 0.5812378)
 particles_amount = 20
 play_sound = false
@@ -1821,13 +1812,12 @@ bake_mode = 1
 add_mist = true
 mist_particles_amount = 3
 
-[node name="Torch_Metal_007" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches"]
+[node name="Torch_Metal_007" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches" unique_id=1167066233]
 transform = Transform3D(-0.9996239, -0.017328601, -0.021272853, -0.016687341, 0.99941355, -0.029956281, 0.021779515, -0.029589891, -0.9993259, -18.755543, -3.5743694, 16.977543)
 mesh = ExtResource("13_rqxxm")
-skeleton = NodePath("")
 surface_material_override/0 = ExtResource("13_v1m0i")
 
-[node name="FireFlicker" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_007" instance=ExtResource("8_bdepm")]
+[node name="FireFlicker" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_007" unique_id=994735028 instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.99999946, 0, 7.4505806e-08, -7.450581e-09, 0.99999917, 4.703179e-08, -1.4901161e-08, -9.313226e-09, 0.9999996, 0.0020599365, 0.60695815, 0.5812378)
 particles_amount = 20
 speed_scale = 0.2
@@ -1836,13 +1826,12 @@ bake_mode = 1
 add_mist = true
 mist_particles_amount = 4
 
-[node name="Torch_Metal_008" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches"]
+[node name="Torch_Metal_008" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches" unique_id=1083731133]
 transform = Transform3D(-0.9996239, -0.017328601, -0.02127289, -0.016687341, 0.99941355, -0.029956251, 0.021779515, -0.029589903, -0.99932617, -8.342939, -3.6326942, 17.030449)
 mesh = ExtResource("13_rqxxm")
-skeleton = NodePath("")
 surface_material_override/0 = ExtResource("13_v1m0i")
 
-[node name="FireFlicker" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_008" instance=ExtResource("8_bdepm")]
+[node name="FireFlicker" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_008" unique_id=373334044 instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.99999946, 0, 7.4505806e-08, -7.450581e-09, 0.99999917, 4.703179e-08, -1.4901161e-08, -9.313226e-09, 0.9999996, 0.0020599365, 0.60695815, 0.5812378)
 particles_amount = 25
 speed_scale = 0.2
@@ -1852,18 +1841,17 @@ bake_mode = 1
 add_mist = true
 mist_particles_amount = 3
 
-[node name="PuffFog2" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_008/FireFlicker" instance=ExtResource("4_fxvr7")]
+[node name="PuffFog2" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_008/FireFlicker" unique_id=1482963682 instance=ExtResource("4_fxvr7")]
 particles_amount = 2
 lifetime = 20.0
 color_multiplier = Color(0.561098, 0.34105957, 0, 1)
 
-[node name="Torch_Metal_005" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches"]
+[node name="Torch_Metal_005" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches" unique_id=1962650384]
 transform = Transform3D(0.011615314, -0.10862329, -0.9940153, 0.0007529147, 0.9940829, -0.10862188, 0.9999324, 0.0005132668, 0.01162836, 10.991765, -2.9057493, 3.8021698)
 mesh = ExtResource("13_rqxxm")
-skeleton = NodePath("")
 surface_material_override/0 = ExtResource("13_v1m0i")
 
-[node name="FireFlicker2" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_005" instance=ExtResource("8_bdepm")]
+[node name="FireFlicker2" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/torches/Torch_Metal_005" unique_id=365998581 instance=ExtResource("8_bdepm")]
 transform = Transform3D(0.9999991, -3.7252903e-09, 7.450581e-09, 3.7252903e-09, 0.999999, 6.9849193e-09, 1.4901161e-08, -3.3993274e-08, 0.9999988, 0.0051956177, 0.69258714, 0.51432896)
 particles_amount = 20
 speed_scale = 0.15
@@ -1872,586 +1860,508 @@ bake_mode = 1
 add_mist = true
 mist_particles_amount = 4
 
-[node name="beams etc" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main"]
+[node name="beams etc" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main" unique_id=1376426373]
 transform = Transform3D(-0.78715074, 0, -0.61676174, -1.8626451e-09, 1, -3.7252903e-09, 0.6167617, 0, -0.78715086, -36.37394, -2.87508, 18.707119)
 
-[node name="Post_Reinforced_E" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Post_Reinforced_E" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=375573127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.866905, 4.4147973, 11.980324)
 mesh = SubResource("ArrayMesh_uvwvb")
-skeleton = NodePath("")
 
-[node name="Panel_Wood_D" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Panel_Wood_D" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=1906542196]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.24633, 5.8163123, 44.393654)
 mesh = SubResource("ArrayMesh_cl5kb")
-skeleton = NodePath("")
 
-[node name="Panel_Wood_D_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Panel_Wood_D_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=703034654]
 transform = Transform3D(1, 0, 0, -4.656613e-09, 1, -3.7252903e-08, 0, -3.7252903e-08, 1, -39.80635, 5.839718, 44.429005)
 mesh = SubResource("ArrayMesh_iiyd1")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=1410017767]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.513645, 1.8413376, 18.9074)
 mesh = ExtResource("44_dapr5")
-skeleton = NodePath("")
 
-[node name="Panel_Wood_D_003" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Panel_Wood_D_003" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=1398771084]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.863073, 5.8205476, 44.532265)
 mesh = SubResource("ArrayMesh_lgs2a")
-skeleton = NodePath("")
 
-[node name="engels" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="engels" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=171640874]
 
-[node name="Engel_C_002_Baked" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/engels"]
+[node name="Engel_C_002_Baked" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/engels" unique_id=1384420122]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.69731, 19.742207, 17.861979)
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="Engel_C_002_Baked_001" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/engels"]
+[node name="Engel_C_002_Baked_001" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/engels" unique_id=40527236]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.794933, 19.592167, 17.659658)
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="Engel_C_002_Baked_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/engels"]
+[node name="Engel_C_002_Baked_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/engels" unique_id=1791370446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.936752, 19.742207, 17.039177)
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="beams_001" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="beams_001" type="Node3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=50338293]
 
-[node name="Beam_C" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_C" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=306388966]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.897934, 7.6742687, 22.529074)
 mesh = SubResource("ArrayMesh_0ywfg")
-skeleton = NodePath("")
 
-[node name="Beam_C_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_C_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=1103220014]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.866684, 7.279166, 45.330452)
 mesh = SubResource("ArrayMesh_kywhu")
-skeleton = NodePath("")
 
-[node name="Beam_C_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_C_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=1782061252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.02686, 7.599718, 46.04175)
 mesh = SubResource("ArrayMesh_gen17")
-skeleton = NodePath("")
 
-[node name="Beam_D_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_D_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=1098695474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.167786, 1.6249464, 41.991295)
 mesh = SubResource("ArrayMesh_7p8ur")
-skeleton = NodePath("")
 
-[node name="Beam_D_005" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_D_005" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=1400029230]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.325531, 1.8434515, 18.950314)
 mesh = SubResource("ArrayMesh_utv8c")
-skeleton = NodePath("")
 
-[node name="Beam_D_006" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_D_006" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=1006483630]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.274807, 7.004031, 13.28011)
 mesh = SubResource("ArrayMesh_lnldl")
-skeleton = NodePath("")
 
-[node name="ropes_008" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001/Beam_D_006"]
-transform = Transform3D(0.92260295, 0.14248228, -1.8020166, -1.4747188, 1.2293196, -0.6578298, 1.0453598, 1.6084858, 0.66238606, -0.5386181, 0.21766996, 0.22724152)
+[node name="ropes_008" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001/Beam_D_006" unique_id=22065633]
+transform = Transform3D(0.922603, 0.14248201, -1.8020166, -1.4747186, 1.22932, -0.65782976, 1.0453603, 1.6084855, 0.66238606, -0.5386181, 0.21766996, 0.22724152)
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
-skeleton = NodePath("")
 
-[node name="SwayParent" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001/Beam_D_006/ropes_008" instance=ExtResource("40_d4t46")]
-max_sway_degrees = 8.0
-sway_speed = 1.2
+[node name="SwayParent" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001/Beam_D_006/ropes_008" unique_id=889106145 instance=ExtResource("40_d4t46")]
+max_sway_degrees = 9.0
+sway_speed = 1.5
 
-[node name="Beam_D_007" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_D_007" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=2043285417]
 transform = Transform3D(1, 0, 0, 4.656613e-10, 1, 3.7252903e-09, -7.450581e-09, 0, 1, -42.07569, 1.7080716, 30.764458)
 mesh = SubResource("ArrayMesh_jkbt6")
-skeleton = NodePath("")
 
-[node name="Beam_D_009" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Beam_D_009" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=316196478]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.689594, 7.3801613, 15.460881)
 mesh = SubResource("ArrayMesh_3o3j4")
-skeleton = NodePath("")
 
-[node name="Post_Reinforced_E_001_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001"]
+[node name="Post_Reinforced_E_001_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001" unique_id=560128442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.225796, 4.314823, 12.201737)
 mesh = SubResource("ArrayMesh_ousnj")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_005_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_005_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=764908818]
 transform = Transform3D(0.5561758, 0.40185308, 0.033933815, -0.40327856, 0.5544784, 0.04346481, -0.0019637272, -0.05510753, 0.6847835, -37.019978, 2.0358527, 47.422955)
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_003_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_003_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=2011169450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.560375, 2.1886768, 44.017937)
 mesh = ExtResource("20_vwaak")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_004_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_004_visuals" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=86619637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.002472, 2.443365, 44.95052)
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_003_visuals2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_003_visuals2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=1264851644]
 transform = Transform3D(0.21235076, 2.7939677e-09, 2.341944, 2.9802322e-08, 2.351554, 0, -2.341945, 0, 0.212351, -25.329485, 0.08052778, -2.018238)
 mesh = ExtResource("20_vwaak")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_004_visuals2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_004_visuals2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=781101412]
 transform = Transform3D(0.8249774, -0.5809804, -1.0175282, -0.4970553, 0.953387, -0.9473533, 1.0610551, 0.8983339, 0.3473435, -37.174675, 0.06253433, 0.87210846)
 cast_shadow = 0
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_004_visuals5" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_004_visuals5" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=130278239]
 transform = Transform3D(0.4080848, 1.0522041, 0.88307554, -0.3836182, 0.9718627, -0.9807188, -1.3190126, 0.042883337, 0.5584412, -29.234432, 1.0116987, -1.4881859)
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_004_visuals3" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc"]
+[node name="Cave_Rocks_C_004_visuals3" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc" unique_id=2031899658]
 transform = Transform3D(-0.16049293, 1.4498377, 1.3835893, -0.08121055, 0.6159721, -0.65488625, -1.9959044, -0.2409031, 0.020917937, -41.057915, 0.59792614, 1.3536501)
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="cross column" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN"]
+[node name="cross column" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN" unique_id=1213255142]
 transform = Transform3D(-0.78715074, 0, -0.6167617, -1.8626451e-09, 1, 0, 0.6167617, 0, -0.78715086, -28.463923, 5.181641, -22.279064)
 mesh = SubResource("ArrayMesh_fxvr7")
-skeleton = NodePath("")
 
-[node name="Plane_010" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN"]
+[node name="Plane_010" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN" unique_id=1365292248]
 transform = Transform3D(-0.272173, 0.013034532, 0.019078791, 0.014112882, 0.27236032, 0.015255351, -0.018295527, 0.016186403, -0.27205753, -15.021303, -1.7478329, -15.639059)
 cast_shadow = 0
 mesh = ExtResource("20_rqxxm")
-skeleton = NodePath("")
 
-[node name="skeleton" type="Node3D" parent="Visuals/LINCOLN_MAIN"]
+[node name="skeleton" type="Node3D" parent="Visuals/LINCOLN_MAIN" unique_id=1123924210]
 transform = Transform3D(-1.0909996, -0.03805531, 0.5356568, -0.050888382, 1.214811, -0.01734166, -0.53459036, -0.037975688, -1.0915253, -42.43572, -1.8290213, -39.772736)
 
-[node name="skeleton-16-07" parent="Visuals/LINCOLN_MAIN/skeleton" instance=ExtResource("16_bdepm")]
+[node name="skeleton-16-07" parent="Visuals/LINCOLN_MAIN/skeleton" unique_id=19844614 instance=ExtResource("16_bdepm")]
 unique_name_in_owner = true
 
-[node name="SkeletonMesh_004" parent="Visuals/LINCOLN_MAIN/skeleton/skeleton-16-07/Armature_009/GeneralSkeleton" index="0"]
+[node name="SkeletonMesh_004" parent="Visuals/LINCOLN_MAIN/skeleton/skeleton-16-07/Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(19844614, 729270261) index="0" unique_id=272755180]
 gi_mode = 1
 
-[node name="sitting2" parent="Visuals/LINCOLN_MAIN/skeleton" instance=ExtResource("16_ae31p")]
+[node name="sitting2" parent="Visuals/LINCOLN_MAIN/skeleton" unique_id=497119739 instance=ExtResource("16_ae31p")]
 unique_name_in_owner = true
 
-[node name="props" type="Node3D" parent="Visuals/LINCOLN_MAIN"]
+[node name="props" type="Node3D" parent="Visuals/LINCOLN_MAIN" unique_id=1269148770]
 transform = Transform3D(-0.6957185, -0.3545331, -0.6247256, 0.0086189015, 0.8655276, -0.50078714, 0.7182629, -0.35379136, -0.59910786, -22.849178, -0.29882765, -29.14718)
 
-[node name="stupid sign" type="Node3D" parent="Visuals/LINCOLN_MAIN/props"]
+[node name="stupid sign" type="Node3D" parent="Visuals/LINCOLN_MAIN/props" unique_id=1876066726]
 transform = Transform3D(1.0000001, 0, 0, -4.656613e-10, 1.0000001, 2.9802322e-08, 0, 0, 1.0000001, 0, 0, 0)
 
-[node name="Panel_Wood_D_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/stupid sign"]
+[node name="Panel_Wood_D_004" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/stupid sign" unique_id=397605623]
 mesh = SubResource("ArrayMesh_qurep")
-skeleton = NodePath("")
 
-[node name="skeleton_065" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/stupid sign/Panel_Wood_D_004"]
+[node name="skeleton_065" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/stupid sign/Panel_Wood_D_004" unique_id=1575459651]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011537552, 0, -0.2678566)
 mesh = SubResource("ArrayMesh_kf474")
-skeleton = NodePath("")
 
-[node name="Panel_Wood_D_015" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/stupid sign/Panel_Wood_D_004/skeleton_065"]
+[node name="Panel_Wood_D_015" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/stupid sign/Panel_Wood_D_004/skeleton_065" unique_id=1821948474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.046850204, 0, 0.09369087)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_21bes")
-skeleton = NodePath("")
 
-[node name="DarkCratePile" type="Node3D" parent="Visuals/LINCOLN_MAIN/props"]
+[node name="DarkCratePile" type="Node3D" parent="Visuals/LINCOLN_MAIN/props" unique_id=1172063339]
 transform = Transform3D(-0.6019693, 0.007951971, -0.79847974, 0.3731953, 0.8868255, -0.272518, 0.7059451, -0.46203628, -0.5368093, 14.819977, 0.7367058, 3.5665607)
 
-[node name="DarkCrate" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=1342833088 instance=ExtResource("21_mxlls")]
 transform = Transform3D(0.018080637, 0, -0.9998365, 0, 1, 0, 0.9998365, 0, 0.018080637, 0.22094429, 0.32688618, -0.051809788)
 freeze = true
 
-[node name="DarkCrate2" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate2" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=1382765080 instance=ExtResource("21_mxlls")]
 transform = Transform3D(0.16974513, 0, -0.98548794, 0, 1, 0, 0.98548794, 0, 0.16974513, -0.6761525, 0.32688618, -0.035587072)
 freeze = true
 
-[node name="DarkCrate3" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate3" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=218855864 instance=ExtResource("21_mxlls")]
 transform = Transform3D(0.10419868, 0, -0.9945564, 0, 1, 0, 0.9945564, 0, 0.10419868, -0.5922417, 0.95203674, -0.09711468)
 freeze = true
 
-[node name="DarkCrate4" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate4" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=423638507 instance=ExtResource("21_mxlls")]
 transform = Transform3D(0.10419868, 0, -0.9945564, 0, 1, 0, 0.9945564, 0, 0.10419868, 0.15024659, 0.95128477, -0.11054158)
 freeze = true
 
-[node name="DarkCrate5" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate5" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=797176762 instance=ExtResource("21_mxlls")]
 transform = Transform3D(-0.00013776124, 0.5674518, -0.8234067, -0.049038175, 0.8224122, 0.56677455, 0.9987968, 0.04045643, 0.0277135, 0.9590148, 0.49451292, -0.06555855)
 freeze = true
 
-[node name="DarkCrate6" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate6" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=995498805 instance=ExtResource("21_mxlls")]
 transform = Transform3D(0.770728, 0.022098517, -0.63678104, -0.0027166149, 0.9995034, 0.031398155, 0.6371586, -0.022469565, 0.7704051, -0.42229843, 1.5769106, -0.1001879)
 freeze = true
 
-[node name="DarkCrate7" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate7" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=871897143 instance=ExtResource("21_mxlls")]
 transform = Transform3D(0.99199235, 0.12582193, -0.010966092, -0.12582193, 0.9769749, -0.17230478, -0.010966003, 0.17230478, 0.9849827, 3.3030586, 0.36872074, 5.706399)
 freeze = true
 
-[node name="DarkCrate8" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" instance=ExtResource("21_mxlls")]
+[node name="DarkCrate8" parent="Visuals/LINCOLN_MAIN/props/DarkCratePile" unique_id=1655194836 instance=ExtResource("21_mxlls")]
 transform = Transform3D(1, -7.1054274e-15, -2.9802322e-08, -5.3290705e-15, 1, 1.7763568e-15, 1.1920929e-07, -7.1054274e-15, 1, 17.152132, 0.6344167, 11.321501)
 freeze = true
 
-[node name="barrel" type="Node3D" parent="Visuals/LINCOLN_MAIN/props"]
+[node name="barrel" type="Node3D" parent="Visuals/LINCOLN_MAIN/props" unique_id=1093116550]
 transform = Transform3D(1.0000001, 0, 0, -4.656613e-10, 1.0000001, 2.9802322e-08, 0, 0, 1.0000001, 5.5220213, -2.8854122, -5.44318)
 
-[node name="dark barrel" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel"]
+[node name="dark barrel" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel" unique_id=74472321]
 transform = Transform3D(1.2429409, 0.013060851, 0.003449453, -0.011697348, 1.2316874, 0.6796543, 0.0034494493, -0.7588791, 1.042576, 5.520693, -1.0704136, -0.2874298)
 mesh = SubResource("ArrayMesh_v1m0i")
-skeleton = NodePath("")
 
-[node name="dark barrel4" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel"]
+[node name="dark barrel4" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel" unique_id=1643284186]
 transform = Transform3D(1.232964, -0.19710709, -0.015729483, 0.14951515, 1.4241477, 0.5089814, -0.049984444, -0.577367, 1.1365561, 1.1350656, 12.796255, 23.262825)
 mesh = SubResource("ArrayMesh_cnb55")
-skeleton = NodePath("")
 
-[node name="dark barrel2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel"]
+[node name="dark barrel2" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel" unique_id=1282479578]
 transform = Transform3D(1.2067491, -0.29716069, -0.023205403, 0.30961508, 1.1909875, 0.6817691, -0.16462684, -0.74300694, 1.0410151, 6.531537, -0.93660164, 0.10922432)
 mesh = SubResource("ArrayMesh_84k2w")
-skeleton = NodePath("")
 
-[node name="dark barrel3" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel"]
+[node name="dark barrel3" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/barrel" unique_id=132410942]
 transform = Transform3D(0.55128163, 1.1118846, 0.069656245, 0.5016005, -0.3171196, 1.0921912, 0.99475485, -0.45628732, -0.5893353, 9.188876, 3.38165, 7.787916)
 mesh = SubResource("ArrayMesh_84k2w")
-skeleton = NodePath("")
 
-[node name="small" type="Node3D" parent="Visuals/LINCOLN_MAIN/props"]
+[node name="small" type="Node3D" parent="Visuals/LINCOLN_MAIN/props" unique_id=1730969921]
 
-[node name="skeleton_185" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="skeleton_185" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=407682469]
 transform = Transform3D(0.78048897, 0.00795198, -0.62512046, 0.2833424, 0.8868266, 0.365046, 0.55727553, -0.46203682, 0.6899047, 9.037918, 1.5048199, 4.440754)
 mesh = SubResource("ArrayMesh_rj3kv")
-skeleton = NodePath("")
 
-[node name="skeleton_186" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="skeleton_186" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=733030300]
 transform = Transform3D(1.3510553, 0.012723241, 0.8570281, -0.40553078, 1.4189239, 0.6182325, -0.75511754, -0.73925966, 1.2013749, 9.997919, -3.922636, -5.1879654)
 mesh = SubResource("ArrayMesh_rj3kv")
-skeleton = NodePath("")
 
-[node name="skeleton_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="skeleton_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=183184559]
 transform = Transform3D(0.7794933, 0.0033168257, -0.62640435, 0.11818287, 0.98125076, 0.1522616, 0.6151637, -0.19271636, 0.764485, 9.6768055, -6.0218296, -8.512674)
 mesh = SubResource("ArrayMesh_fctfc")
-skeleton = NodePath("")
 
-[node name="skeleton_003" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="skeleton_003" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=998557490]
 transform = Transform3D(1.237758, 0.14501652, -0.3838627, -0.053868964, 1.266726, 0.30484548, 0.40679055, -0.2735005, 1.2083651, 5.085644, 5.112612, 10.867205)
 mesh = SubResource("ArrayMesh_fctfc")
-skeleton = NodePath("")
 
-[node name="chain HP_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="chain HP_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=44348057]
 transform = Transform3D(1.9995067, 0.14159892, -0.2664475, 0.062441688, 1.5528188, 1.2938038, 0.29520386, -1.2875444, 1.5310661, 9.209344, 1.3245173, 2.573122)
 mesh = SubResource("ArrayMesh_1kgd6")
-skeleton = NodePath("")
 
-[node name="arm" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="arm" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=582647453]
 transform = Transform3D(0.79736036, 0.2614108, 0.54395103, -0.4637826, 0.8421472, 0.2751266, -0.38616598, -0.4716492, 0.7927325, 12.659592, -6.1145744, -3.041359)
 mesh = SubResource("ArrayMesh_qyj33")
-skeleton = NodePath("")
 
-[node name="cage_013" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="cage_013" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=1134314434]
 transform = Transform3D(0.81268793, -0.5759972, -0.0883827, -0.12878412, -0.3723762, 1.1856959, -0.57748705, -0.7277126, -0.5378262, -7.4075246, 1.229578, 3.3498669)
 mesh = SubResource("ArrayMesh_6pqm2")
-skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_v1m0i")
 
-[node name="skull" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="skull" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=315570917]
 transform = Transform3D(-0.8292311, -0.7835707, 1.1331644, -0.98521435, 1.2617692, 0.15153423, -0.9630147, -0.6161389, -1.1307724, 4.060335, -9.882332, -9.36027)
 mesh = SubResource("ArrayMesh_eqfut")
-skeleton = NodePath("")
 
-[node name="golden bolt_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="golden bolt_002" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=955836494]
 transform = Transform3D(-0.8292311, -0.7835707, 1.1331644, -0.98521435, 1.2617692, 0.15153423, -0.9630147, -0.6161389, -1.1307724, 4.060335, -9.882332, -9.36027)
 mesh = SubResource("ArrayMesh_6w7r7")
-skeleton = NodePath("")
 
-[node name="golden bolt" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small"]
+[node name="golden bolt" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/props/small" unique_id=1232603206]
 transform = Transform3D(-0.8292311, -0.7835707, 1.1331644, -0.98521435, 1.2617692, 0.15153423, -0.9630147, -0.6161389, -1.1307724, 4.060335, -9.882332, -9.36027)
 mesh = SubResource("ArrayMesh_qgr1o")
-skeleton = NodePath("")
 
-[node name="far" type="Node3D" parent="Visuals"]
+[node name="far" type="Node3D" parent="Visuals" unique_id=1874035142]
 
-[node name="LINCOLN_FAR" type="Node3D" parent="Visuals/far"]
+[node name="LINCOLN_FAR" type="Node3D" parent="Visuals/far" unique_id=995669830]
 transform = Transform3D(0.017644316, 0, -0.9998443, 0, 1, 0, 0.9998443, 0, 0.017644316, 22.643803, -6.972351, -18.499683)
 
-[node name="lincoln__visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR"]
+[node name="lincoln__visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR" unique_id=475996289]
 transform = Transform3D(-0.7870867, 0.0018942476, -0.61684084, 0.067694634, 0.9942205, -0.083324976, 0.61311805, -0.107340656, -0.78266597, -38.151943, 2.1208258, -32.85945)
 mesh = SubResource("ArrayMesh_ev1nc")
-skeleton = NodePath("")
 
-[node name="lincoln FLOOR" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals"]
+[node name="lincoln FLOOR" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals" unique_id=701068145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20794296, 0, 0.080841064)
 mesh = ExtResource("7_rqxxm")
-skeleton = NodePath("")
 
-[node name="cross column" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals"]
+[node name="cross column" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals" unique_id=483119810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8146973e-06, 0, -3.8146973e-06)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_cselw")
-skeleton = NodePath("")
 
-[node name="engels" type="Node3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals"]
+[node name="engels" type="Node3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals" unique_id=1646351778]
 transform = Transform3D(0.99999994, 7.2698705e-09, 0, 1.2235128e-09, 0.99999994, -7.854179e-09, -2.9802322e-08, -1.4681215e-10, 1, 31.505047, -8.05672, -27.383675)
 
-[node name="Engel_C_002_Baked_001" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/engels"]
+[node name="Engel_C_002_Baked_001" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/engels" unique_id=800289539]
 transform = Transform3D(0.99999994, 7.2698705e-09, 0, 1.2235128e-09, 0.99999994, -7.854179e-09, -2.9802322e-08, -1.4681215e-10, 1, -45.546833, 20.409819, 27.617317)
 cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="Engel_C_002_Baked_002" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/engels"]
+[node name="Engel_C_002_Baked_002" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/engels" unique_id=2057377621]
 transform = Transform3D(0.8004983, -0.03655266, -0.5982193, 0.06353057, 0.99769, 0.024051182, 0.5959583, -0.05725816, 0.8009713, -35.93675, 19.742205, 17.039177)
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="Engel_C_002_Baked_005" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/engels"]
+[node name="Engel_C_002_Baked_005" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/engels" unique_id=485117658]
 transform = Transform3D(0.8004983, -0.036552656, -0.5982193, 0.06353057, 0.99769, 0.02405119, 0.5959583, -0.057258155, 0.8009713, -25.898258, 19.18931, 18.59755)
 cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="beams etc" type="Node3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals"]
+[node name="beams etc" type="Node3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals" unique_id=210407403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.505049, -8.056721, -27.383673)
 
-[node name="Cave_Rocks_C_004_visuals2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/beams etc"]
+[node name="Cave_Rocks_C_004_visuals2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/beams etc" unique_id=543749859]
 transform = Transform3D(0.8249774, -0.5809804, -1.0175282, -0.4970553, 0.953387, -0.9473533, 1.0610551, 0.8983339, 0.3473435, -37.174675, 0.06253433, 0.87210846)
 cast_shadow = 0
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_004_visuals3" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/beams etc"]
+[node name="Cave_Rocks_C_004_visuals3" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR/lincoln__visuals/beams etc" unique_id=1531709198]
 transform = Transform3D(-0.16049293, 1.4498377, 1.3835893, -0.08121055, 0.6159721, -0.65488625, -1.9959044, -0.2409031, 0.020917937, -41.057915, 0.59792614, 1.3536501)
 cast_shadow = 0
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="LINCOLN_FAR2" type="Node3D" parent="Visuals/far"]
+[node name="LINCOLN_FAR2" type="Node3D" parent="Visuals/far" unique_id=730601541]
 transform = Transform3D(-0.9752151, 0, -0.22125906, 0, 1, 0, 0.22125906, 0, -0.9752151, -58.709274, -6.2834167, -65.88887)
 
-[node name="lincoln__visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2"]
+[node name="lincoln__visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=1376667544]
 transform = Transform3D(-0.82402796, 0, -0.56655055, 0, 1, 0, 0.56655055, 0, -0.82402796, -31.822834, 5.163761, -15.112087)
 mesh = SubResource("ArrayMesh_ev1nc")
-skeleton = NodePath("")
 
-[node name="lincoln FLOOR" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="lincoln FLOOR" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=137655628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20794296, 0, 0.080841064)
 mesh = ExtResource("7_rqxxm")
-skeleton = NodePath("")
 
-[node name="Node3D" type="Node3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="Node3D" type="Node3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=1057054661]
 transform = Transform3D(-0.17347395, 0.15025705, 2.2211757, -0.15025707, -2.2236183, 0.13868722, 2.2211757, -0.13868724, 0.18285644, -16.351252, -32.378696, 29.402225)
 
-[node name="cross column5" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/Node3D"]
+[node name="cross column5" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/Node3D" unique_id=876489118]
 transform = Transform3D(1.084, 0, -5.9604645e-08, -7.450581e-09, 1.0839996, 7.450581e-09, 1.7881393e-07, 7.450581e-09, 1.0840001, -5.8724165, -3.4359064, 17.396147)
 mesh = ExtResource("42_q1c2c")
-skeleton = NodePath("")
 
-[node name="cross column2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="cross column2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=692429912]
 transform = Transform3D(0.6543303, 0.90862143, 2.1777506, -0.5598159, -2.1356318, 1.0592521, 2.292334, -0.78090686, -0.36294025, 44.103218, -5.176341, 15.897022)
 mesh = ExtResource("42_q1c2c")
-skeleton = NodePath("")
 
-[node name="cross column6" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="cross column6" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=662850787]
 transform = Transform3D(0.65433, 0.9086215, 2.1777506, -0.5598159, -2.1356318, 1.0592521, 2.292334, -0.7809068, -0.3629402, 58.648796, -9.76476, 40.683937)
 mesh = ExtResource("42_q1c2c")
-skeleton = NodePath("")
 
-[node name="cross column3" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="cross column3" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=2003601499]
 transform = Transform3D(0.70302564, 0.089388244, -0.70552474, -0.2803631, 0.9465592, -0.15944327, 0.6535687, 0.30989578, 0.6905165, -2.0011292, -10.763351, 61.434776)
 mesh = ExtResource("42_q1c2c")
-skeleton = NodePath("")
 
-[node name="cross column4" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="cross column4" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=1020059015]
 transform = Transform3D(-0.032432035, -0.77271014, -0.63392997, 0.98915607, -0.11571683, 0.09044421, -0.1432437, -0.62412214, 0.768084, 10.030439, -5.8608303, 50.32963)
 mesh = ExtResource("42_q1c2c")
-skeleton = NodePath("")
 
-[node name="beams etc" type="Node3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals"]
+[node name="beams etc" type="Node3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals" unique_id=1968864937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.505049, -8.056721, -27.383673)
 
-[node name="Cave_Rocks_C_004" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc"]
+[node name="Cave_Rocks_C_004" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc" unique_id=1852577685]
 transform = Transform3D(-5.7766895, -7.5617104, 23.366215, -10.042775, 22.632545, 4.8414693, -22.41209, -8.192538, -8.192055, -23.135296, -4.9434834, 62.763638)
 mesh = ExtResource("44_dapr5")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_005" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc"]
+[node name="Cave_Rocks_C_005" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc" unique_id=1134820181]
 transform = Transform3D(-3.2162526, -0.098636836, 10.5419235, -0.13100171, 11.021116, 0.063152075, -10.541571, -0.10686585, -3.2171435, -21.484432, -4.449255, 72.929436)
 visibility_range_end = 90.0
 mesh = ExtResource("44_dapr5")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_003_visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc"]
+[node name="Cave_Rocks_C_003_visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc" unique_id=1739413853]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.560375, 2.1886768, 44.017937)
 cast_shadow = 0
 mesh = ExtResource("20_vwaak")
-skeleton = NodePath("")
 
-[node name="Cave_Rocks_C_004_visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc"]
+[node name="Cave_Rocks_C_004_visuals" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/lincoln__visuals/beams etc" unique_id=1254314749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.002472, 2.443365, 44.95052)
 cast_shadow = 0
 mesh = ExtResource("20_q1c2c")
-skeleton = NodePath("")
 
-[node name="Engel_C_002_Baked_003" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2"]
+[node name="Engel_C_002_Baked_003" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=2054979774]
 transform = Transform3D(0.6848717, 0.0144254565, 0.72852194, 0.067694604, 0.9942202, -0.08332497, -0.7255132, 0.10638397, 0.679937, -38.52057, 17.693054, -27.838825)
 cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="Engel_C_002_Baked_004" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2"]
+[node name="Engel_C_002_Baked_004" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=864191685]
 transform = Transform3D(0.6634958, 0.1353427, 0.7358377, -0.40154412, 0.89427185, 0.19758411, -0.6312973, -0.42656747, 0.64769197, -26.290722, 16.37902, -41.241154)
 cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
-skeleton = NodePath("")
 
-[node name="ropes_009" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2"]
-transform = Transform3D(-0.11641316, -0.035299037, 1.1493531, -0.77104586, 0.85943377, -0.05170094, -0.8530814, -0.7719704, -0.1101138, -41.679935, 11.982513, -86.228355)
+[node name="ropes_009" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=1188926327]
+transform = Transform3D(-0.14194316, -0.011930547, 1.1469615, -0.8019462, 0.82733166, -0.09063969, -0.8200887, -0.80696386, -0.10988467, -41.679935, 11.982513, -86.228355)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
-skeleton = NodePath("")
 
-[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/ropes_009" instance=ExtResource("40_d4t46")]
-max_sway_degrees = 2.5
+[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/ropes_009" unique_id=1499957421 instance=ExtResource("40_d4t46")]
+max_sway_degrees = 3.5
 sway_speed = 1.2
 preview_in_editor = true
 
-[node name="skeleton_hand2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/ropes_009"]
-transform = Transform3D(1.3104308, -0.5458582, 0.9694162, 0.5633292, -0.96609396, -1.3054811, 0.95936877, 1.3128823, -0.5575927, 0.35659122, -0.5122528, 0.1948626)
+[node name="skeleton_hand2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/ropes_009" unique_id=2024574688]
+transform = Transform3D(1.1154467, -0.93472785, 0.91488814, 0.2545531, -1.0242754, -1.3568422, 1.2829412, 1.0159246, -0.5262288, 0.35659122, -0.5122528, 0.1948626)
 cast_shadow = 0
 gi_mode = 2
 mesh = SubResource("ArrayMesh_1txad")
-skeleton = NodePath("")
 
-[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/ropes_009/skeleton_hand2" instance=ExtResource("40_d4t46")]
-max_sway_degrees = 10.0
+[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/ropes_009/skeleton_hand2" unique_id=2064299469 instance=ExtResource("40_d4t46")]
+max_sway_degrees = 12.0
+sway_speed = 2.2
 preview_in_editor = true
 
-[node name="trees2" parent="Visuals/far/LINCOLN_FAR2" instance=ExtResource("39_q26sa")]
+[node name="trees2" parent="Visuals/far/LINCOLN_FAR2" unique_id=510596443 instance=ExtResource("39_q26sa")]
 transform = Transform3D(1.7060015, 0, -5.9604645e-08, 0, 1.706, 0, 5.9604645e-08, 0, 1.7060015, -0.23991394, -2.233158, -34.769978)
 
-[node name="BirchTree_Dead_1_001" parent="Visuals/far/LINCOLN_FAR2/trees2" index="0"]
+[node name="BirchTree_Dead_1_001" parent="Visuals/far/LINCOLN_FAR2/trees2" index="0" unique_id=431732087]
 transform = Transform3D(0.6954374, 0, -1.5914282, 0, 1.7367433, 0, 1.5914282, 0, 0.6954374, -9.882655, 13.581102, 1.4955444)
 
-[node name="ropes_008" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="0"]
-transform = Transform3D(0.42219862, 0.9561763, 0.86787784, -1.0776422, 0.7639687, -0.31745228, -0.711458, -0.5897588, 0.9958659, -0.08106995, -0.27941322, -0.21012163)
+[node name="ropes_008" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="0" unique_id=97219943]
+transform = Transform3D(0.42219904, 0.9561763, 0.8678781, -1.0776422, 0.7639691, -0.31745222, -0.71145827, -0.58975863, 0.9958661, -0.08106995, -0.27941322, -0.21012163)
 cast_shadow = 0
 
-[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001/ropes_008" index="0"]
+[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001/ropes_008" index="0" unique_id=1389215783]
 max_sway_degrees = 6.0
 
-[node name="ropes_009" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="1"]
-transform = Transform3D(0.49443248, 0.93476, 0.8529341, -0.96048105, 0.8734206, -0.40043616, -0.8238624, -0.45727074, 0.9787188, -0.08106995, -0.27941322, -0.21012163)
+[node name="ropes_009" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="1" unique_id=1816210230]
+transform = Transform3D(0.49443263, 0.93476015, 0.8529338, -0.960481, 0.87342066, -0.4004361, -0.8238622, -0.45727062, 0.97871894, -0.08106995, -0.27941322, -0.21012163)
 cast_shadow = 0
 
-[node name="DeadTree_10_001" parent="Visuals/far/LINCOLN_FAR2/trees2" index="1"]
+[node name="DeadTree_10_001" parent="Visuals/far/LINCOLN_FAR2/trees2" index="1" unique_id=1235206994]
 transform = Transform3D(1.6837158, 0, 5.9604645e-07, 0, 1.6837149, 0, -5.9604645e-07, 0, 1.6837158, -54.477333, 13.545675, 1.3452625)
 
-[node name="ropes_006" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001" index="0"]
+[node name="ropes_006" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001" index="0" unique_id=1074372506]
 transform = Transform3D(-0.07432005, 0.55117714, 1.6908815, -0.8436544, 1.4788926, -0.5191567, -1.5656066, -0.8230916, 0.19948971, 0.5776291, -0.52367437, 0.29316902)
 cast_shadow = 0
 
-[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001/ropes_006" index="0"]
+[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001/ropes_006" index="0" unique_id=1331285325]
 max_sway_degrees = 6.0
 
-[node name="ropes_007" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001" index="1"]
+[node name="ropes_007" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001" index="1" unique_id=1744784395]
 transform = Transform3D(-0.21273719, 0.60967016, 1.9856459, -1.8130574, 0.91948503, -0.4765641, -1.0135626, -1.772736, 0.4357081, -0.8343277, -0.6998396, 0.23341751)
 cast_shadow = 0
 
-[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001/ropes_007" index="0"]
+[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001/ropes_007" index="0" unique_id=1339639586]
 max_sway_degrees = 7.0
 
-[node name="ropes_010" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001" index="2"]
+[node name="ropes_010" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001" index="2" unique_id=1952778152]
 transform = Transform3D(-0.032953277, 0.33491874, 0.94167066, -0.68382007, 0.67958033, -0.2656325, -0.7289063, -0.65268666, 0.20662977, -0.8343277, -0.6998396, 0.23341751)
 
-[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001/ropes_010" index="0"]
+[node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/DeadTree_10_001/ropes_010" index="0" unique_id=1506207653]
 ENABLED = false
 
-[node name="Dock_Bollard_Half_2" parent="Visuals/far/LINCOLN_FAR2/trees2" index="2"]
+[node name="Dock_Bollard_Half_2" parent="Visuals/far/LINCOLN_FAR2/trees2" index="2" unique_id=54734822]
 visible = false
 cast_shadow = 0
 
-[node name="BirchTree_Dead_1_002" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/trees2"]
+[node name="BirchTree_Dead_1_002" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/trees2" unique_id=232368246]
 transform = Transform3D(1.4378251, 0.11609686, 0.27426857, -0.19093956, 1.397071, 0.40960687, -0.228569, -0.43675792, 1.3831277, -32.320766, -4.5221467, -14.17296)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_motwa")
-skeleton = NodePath("")
 
-[node name="DeadTree_10_002" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/trees2"]
+[node name="DeadTree_10_002" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/trees2" unique_id=1365619223]
 transform = Transform3D(-0.95401496, 0, 1.3873554, 0, 1.6837149, 0, -1.3873554, 0, -0.95401496, -42.841682, 12.898339, 14.4475)
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_du4mm")
-skeleton = NodePath("")
 
-[node name="DeadTree_10_003" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/trees2"]
+[node name="DeadTree_10_003" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/trees2" unique_id=1978927107]
 transform = Transform3D(-0.98366934, 0.17511943, 1.3552223, -0.5367689, 1.4860935, -0.5816369, -1.2566516, -0.77185166, -0.81238586, -24.360435, -1.8289347, -10.530008)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_du4mm")
-skeleton = NodePath("")
 
-[node name="big planes" type="Node3D" parent="Visuals/far"]
+[node name="big planes" type="Node3D" parent="Visuals/far" unique_id=1989243053]
 
-[node name="Plane_009" type="MeshInstance3D" parent="Visuals/far/big planes"]
+[node name="Plane_009" type="MeshInstance3D" parent="Visuals/far/big planes" unique_id=1276317721]
 transform = Transform3D(0.7063659, 0, -0.7078469, -0.3054717, 0.90208876, -0.30483258, 0.63854074, 0.43155053, 0.6372047, 21.260933, -22.307346, -16.332232)
 cast_shadow = 0
 mesh = ExtResource("20_rqxxm")
-skeleton = NodePath("")
 
-[node name="Plane_011" type="MeshInstance3D" parent="Visuals/far/big planes"]
+[node name="Plane_011" type="MeshInstance3D" parent="Visuals/far/big planes" unique_id=2134003824]
 transform = Transform3D(0.2033942, 0.08798461, 0.15969202, -0.051308468, 0.25719517, -0.076355465, -0.1749579, 0.026859408, 0.20803925, -81.106636, -1.8877449, -5.8394623)
 cast_shadow = 0
 mesh = ExtResource("20_rqxxm")
-skeleton = NodePath("")
 
-[node name="Plane_012" type="MeshInstance3D" parent="Visuals/far/big planes"]
+[node name="Plane_012" type="MeshInstance3D" parent="Visuals/far/big planes" unique_id=1080560419]
 transform = Transform3D(-0.06730897, 0.041000515, -0.2615349, -0.023209866, 0.26790306, 0.047972143, 0.26370972, 0.034043867, -0.06253165, 117.34024, -18.415226, -14.426559)
 cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("20_rqxxm")
-skeleton = NodePath("")
 
-[node name="turtle_far" type="Node3D" parent="Visuals/far"]
+[node name="turtle_far" type="Node3D" parent="Visuals/far" unique_id=2085905087]
 transform = Transform3D(0.44664317, -0.16726065, 0.87893903, 0.36911708, 0.9293208, -0.0107229045, -0.81502306, 0.32922062, 0.4768137, 8.741472, -9.467082, -44.67506)
 
-[node name="turtle sk_007" type="MeshInstance3D" parent="Visuals/far/turtle_far"]
+[node name="turtle sk_007" type="MeshInstance3D" parent="Visuals/far/turtle_far" unique_id=448801974]
 transform = Transform3D(0.8444962, -5.8405414e-09, -0.53556156, 6.1301897e-09, 1, -1.2391093e-09, 0.53556156, -2.2366704e-09, 0.8444962, -0.15563631, 2.7517185, 0.91223335)
 mesh = SubResource("ArrayMesh_0cjq6")
-skeleton = NodePath("")
 
-[node name="turtle sk_008" type="MeshInstance3D" parent="Visuals/far/turtle_far"]
+[node name="turtle sk_008" type="MeshInstance3D" parent="Visuals/far/turtle_far" unique_id=1958419499]
 transform = Transform3D(0.84729224, -0.023027077, -0.53062737, 0.11156951, 0.98448527, 0.13542868, 0.51927626, -0.17394957, 0.8367158, -3.1282768, -0.39706802, -8.3383255)
 mesh = SubResource("ArrayMesh_fchv6")
-skeleton = NodePath("")
 
-[node name="turtle sk_009" type="MeshInstance3D" parent="Visuals/far/turtle_far"]
+[node name="turtle sk_009" type="MeshInstance3D" parent="Visuals/far/turtle_far" unique_id=147023004]
 transform = Transform3D(0.84729224, -0.023027077, -0.53062737, 0.11156951, 0.98448527, 0.13542868, 0.51927626, -0.17394957, 0.8367158, 3.6372285, 1.3757038, 0.27721596)
 mesh = SubResource("ArrayMesh_ik5o6")
-skeleton = NodePath("")
 
-[node name="turtle sk_006" type="MeshInstance3D" parent="Visuals/far/turtle_far"]
+[node name="turtle sk_006" type="MeshInstance3D" parent="Visuals/far/turtle_far" unique_id=1874379772]
 transform = Transform3D(0.8444962, -5.8405414e-09, -0.53556156, 6.1301897e-09, 1, -1.2391093e-09, 0.53556156, -2.2366704e-09, 0.8444962, 3.9241729, -0.39609528, -11.303684)
 mesh = SubResource("ArrayMesh_wtb2d")
-skeleton = NodePath("")
 
-[node name="TOWER2" type="Node3D" parent="Visuals/far"]
+[node name="TOWER2" type="Node3D" parent="Visuals/far" unique_id=911773284]
 transform = Transform3D(-0.844657, -0.09562644, -0.52669704, -0.37296766, 0.81091905, 0.45089406, 0.38399136, 0.577292, -0.7206142, 22.564423, 5.364457, -106.344124)
 
-[node name="Tower middle" type="MeshInstance3D" parent="Visuals/far/TOWER2"]
+[node name="Tower middle" type="MeshInstance3D" parent="Visuals/far/TOWER2" unique_id=647621970]
 transform = Transform3D(-0.7678542, 0, 0.64062446, 0.23891397, 0.9278558, 0.28636295, -0.59440714, 0.3729392, -0.71245795, 5.5631943, 22.706375, -30.842733)
 visibility_range_end = 95.0
 mesh = SubResource("ArrayMesh_wm02q")
-skeleton = NodePath("")
 
-[node name="Tower top" type="MeshInstance3D" parent="Visuals/far/TOWER2"]
+[node name="Tower top" type="MeshInstance3D" parent="Visuals/far/TOWER2" unique_id=1845318527]
 transform = Transform3D(0.7963244, 0.5010033, -0.33891392, 0.36595508, 0.04706925, 0.92944115, 0.48160532, -0.86416423, -0.14586277, 38.79155, 38.232075, -1.997261)
 mesh = SubResource("ArrayMesh_7wxm4")
-skeleton = NodePath("")
 
-[node name="Tracks" type="Node" parent="."]
+[node name="Tracks" type="Node" parent="." unique_id=1611492544]
 
-[node name="base_asp" type="AudioStreamPlayer" parent="Tracks"]
+[node name="base_asp" type="AudioStreamPlayer" parent="Tracks" unique_id=1674847258]
 unique_name_in_owner = true
 stream = ExtResource("41_7sgbf")
 bus = &"_d_track_base"
 
-[node name="vibe_asp" type="AudioStreamPlayer" parent="Tracks"]
+[node name="vibe_asp" type="AudioStreamPlayer" parent="Tracks" unique_id=1827816670]
 unique_name_in_owner = true
 stream = ExtResource("42_q26sa")
 volume_db = 3.0

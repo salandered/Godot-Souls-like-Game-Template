@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://unjjnf0oxr50"]
+[gd_scene format=3 uid="uid://unjjnf0oxr50"]
 
 [ext_resource type="Script" uid="uid://dks6m6de557j0" path="res://logic/c_systems/weapon/aura_weapon.gd" id="1_5akps"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_finp0"]
@@ -13,21 +13,21 @@
 radius = 2.2089844
 height = 5.5615234
 
-[node name="AuraWeapon" type="Node3D"]
+[node name="AuraWeapon" type="Node3D" unique_id=1872408643]
 script = ExtResource("1_5akps")
 
-[node name="WeaponHurtBox" parent="." instance=ExtResource("2_finp0")]
+[node name="WeaponHurtBox" parent="." unique_id=1799120110 instance=ExtResource("2_finp0")]
 unique_name_in_owner = true
 collision_layer = 16
 collision_mask = 104
 
-[node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox"]
+[node name="HurtBoxCol" type="CollisionShape3D" parent="WeaponHurtBox" unique_id=1568840575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3062575, 0)
 shape = SubResource("CapsuleShape3D_finp0")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 debug_fill = false
 
-[node name="DVWeaponHurtBox" parent="WeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("3_iwwxc")]
+[node name="DVWeaponHurtBox" parent="WeaponHurtBox" unique_id=1128515843 node_paths=PackedStringArray("weapon") instance=ExtResource("3_iwwxc")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
 visible = false
 color_passive = Color(0.57, 0.4218, 0.43661997, 0.11764706)
@@ -37,28 +37,28 @@ shader_transparency = 0.02
 shader_line_transparency = 0.25
 _char_type = 2
 
-[node name="WeaponSFXParent" type="Node3D" parent="."]
+[node name="WeaponSFXParent" type="Node3D" parent="." unique_id=52110929]
 script = ExtResource("3_rkpt4")
 
-[node name="AudioSystem" type="Node" parent="WeaponSFXParent"]
+[node name="AudioSystem" type="Node" parent="WeaponSFXParent" unique_id=765863676]
 unique_name_in_owner = true
 script = ExtResource("4_567gp")
 
-[node name="WhooshWeaponPlayer3D" type="AudioStreamPlayer3D" parent="WeaponSFXParent"]
+[node name="WhooshWeaponPlayer3D" type="AudioStreamPlayer3D" parent="WeaponSFXParent" unique_id=115342739]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27381927, 0)
 stream = ExtResource("5_cyyah")
 max_db = 1.0
 bus = &"game_SFX"
 
-[node name="HitWeaponPlayer3D" type="AudioStreamPlayer3D" parent="WeaponSFXParent"]
+[node name="HitWeaponPlayer3D" type="AudioStreamPlayer3D" parent="WeaponSFXParent" unique_id=1600862569]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29910707, 0)
 stream = ExtResource("6_xb2pm")
 max_polyphony = 4
 bus = &"game_SFX"
 
-[node name="HitTargetWeaponPlayer3D" type="AudioStreamPlayer3D" parent="WeaponSFXParent"]
+[node name="HitTargetWeaponPlayer3D" type="AudioStreamPlayer3D" parent="WeaponSFXParent" unique_id=777375438]
 unique_name_in_owner = true
 stream = ExtResource("7_rrqhb")
 max_polyphony = 4

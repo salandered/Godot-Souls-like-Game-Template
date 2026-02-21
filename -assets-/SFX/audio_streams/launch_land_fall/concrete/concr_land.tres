@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://d3ahq7du2874o"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://d3ahq7du2874o"]
 
 [ext_resource type="AudioStream" uid="uid://bwji21tnbun7y" path="res://-assets-/SFX/sources/pack_N2/ConcreteJump7_land.wav" id="3_e152u"]
 [ext_resource type="AudioStream" uid="uid://b3nfc2bn2sofu" path="res://-assets-/SFX/sources/pack_N2/ConcreteSteps 46-Audio_land_clean.wav" id="4_4o8v8"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://em4bj1qbl826"]
+[gd_scene format=3 uid="uid://em4bj1qbl826"]
 
 [ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort/distort_menu.gdshader" id="1_7v33j"]
 
@@ -23,7 +23,7 @@ shader_parameter/pop_tint = Color(0, 0, 0, 0)
 shader_parameter/vignette_intensity = 0.0
 shader_parameter/vignette_softness = 0.5
 
-[node name="ColorRect" type="ColorRect"]
+[node name="ColorRect" type="ColorRect" unique_id=83690021]
 material = SubResource("ShaderMaterial_85uok")
 anchors_preset = 15
 anchor_right = 1.0

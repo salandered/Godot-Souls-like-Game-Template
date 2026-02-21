@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dnu2wsj02juhf"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dnu2wsj02juhf"]
 
 [ext_resource type="Texture2D" uid="uid://cj1o0518vn8f6" path="res://-assets-/materials-shared/_unsorted/jaw_barrel.jpg" id="1_jmr5v"]
 

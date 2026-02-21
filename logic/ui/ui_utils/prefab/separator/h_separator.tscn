@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1m4vvgtlxkd4"]
 
-[node name="h__sep" type="HSeparator"]
+[node name="h__sep" type="HSeparator" unique_id=1019981522]
 modulate = Color(0.6561392, 0.6561392, 0.6561392, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(0, 40)

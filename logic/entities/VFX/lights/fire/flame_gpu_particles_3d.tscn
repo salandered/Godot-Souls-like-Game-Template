@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b38vfgjwpinft"]
+[gd_scene format=3 uid="uid://b38vfgjwpinft"]
 
 [ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://-assets-/materials-shared/_shaders/fire/stylized_fire.gdshader" id="1_kj2w5"]
 
@@ -61,7 +61,7 @@ color_ramp = SubResource("GradientTexture2D_ksyv0")
 [sub_resource type="QuadMesh" id="QuadMesh_jm45m"]
 size = Vector2(0.3, 0.3)
 
-[node name="FlameGPUParticles3D" type="GPUParticles3D"]
+[node name="FlameGPUParticles3D" type="GPUParticles3D" unique_id=1907991730]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_5wuj6")
 cast_shadow = 0

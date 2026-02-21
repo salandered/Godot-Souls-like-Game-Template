@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://52cmji8k38ui"]
+[gd_scene format=4 uid="uid://52cmji8k38ui"]
 
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="1_oo18x"]
 
@@ -184,7 +184,7 @@ bind/52/name = &"LeftToes"
 bind/52/bone = -1
 bind/52/pose = Transform3D(1.0000001, 2.3609027e-07, 2.2007298e-06, 2.1950473e-06, 3.7252903e-08, 1.0000001, -1.17579475e-07, -1.0000004, 1.2665987e-07, -0.3578507, -0.16637231, 0.02945799)
 
-[node name="chain HP_002" type="MeshInstance3D"]
+[node name="chain HP_002" type="MeshInstance3D" unique_id=515961709]
 layers = 64
 cast_shadow = 0
 gi_mode = 2

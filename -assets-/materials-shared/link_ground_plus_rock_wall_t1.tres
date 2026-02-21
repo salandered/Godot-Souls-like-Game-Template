@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://de8ryrf86xsq7"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://de8ryrf86xsq7"]
 
 [ext_resource type="Texture2D" uid="uid://b1ku34iimuiqp" path="res://-assets-/materials-shared/ground/I_ground088/lincoln_Ground088_2K-JPG_Color.jpg" id="1_idt3o"]
 [ext_resource type="Texture2D" uid="uid://lqbs41cppq84" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_diffuse.jpg" id="2_ariio"]

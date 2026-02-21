@@ -1,8 +1,6 @@
 class_name Credits
 extends Control
 
-signal end_reached
-
 
 ## Base class for managing a Credits screen.
 ##

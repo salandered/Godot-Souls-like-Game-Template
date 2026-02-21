@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=4 format=4 uid="uid://2rhhk5wqopcp"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://2rhhk5wqopcp"]
 
 [ext_resource type="Material" uid="uid://bpbujrrytkdj8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar.tres" id="1_bc0yy"]
 [ext_resource type="Material" uid="uid://ph1sclyavjd" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar_2.tres" id="2_d4m41"]

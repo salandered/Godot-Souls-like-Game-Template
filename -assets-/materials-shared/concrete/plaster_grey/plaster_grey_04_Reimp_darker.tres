@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bnu11nvey1bcd"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnu11nvey1bcd"]
 
 [ext_resource type="Texture2D" uid="uid://c30jwj1amgb1r" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_diff_1k.jpg" id="1_jjqeu"]
 [ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="2_jab8c"]

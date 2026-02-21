@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c2k7np4uf1726"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c2k7np4uf1726"]
 
 [ext_resource type="AudioStream" uid="uid://bd7r1x1qj66kq" path="res://-assets-/SFX/sources/cat/fire_01_loop.wav" id="1_46trl"]
 

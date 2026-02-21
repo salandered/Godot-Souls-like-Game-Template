@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8mwpcnwpicyn"]
+[gd_scene format=3 uid="uid://8mwpcnwpicyn"]
 
 [ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_te6xc"]
 [ext_resource type="Script" uid="uid://iyj2uqlcx57q" path="res://logic/entities/Items/pick_item/dodge_increase_item.gd" id="2_s30od"]
@@ -28,7 +28,7 @@ shader_parameter/displacement_amount = 0.0400000019
 shader_parameter/erosion_level = 0.48400002299
 shader_parameter/edge_glow_intensity = 1.0
 
-[node name="DodgeIncreaseItem" instance=ExtResource("1_te6xc")]
+[node name="DodgeIncreaseItem" unique_id=233935507 instance=ExtResource("1_te6xc")]
 script = ExtResource("2_s30od")
 
 [node name="RedSphere" parent="Visuals" index="0"]
@@ -40,6 +40,9 @@ color_multiplier = Color(0.3438608, 0.03172327, 0.29420254, 1)
 [node name="GlowLight" parent="Visuals/RedSphere" index="1"]
 light_color = Color(0.17254902, 0, 0.14509805, 1)
 shadow_opacity = 0.8
+
+[node name="AnimationPlayer" parent="Visuals/RedSphere/GlowLight" index="0"]
+autoplay = &"flicker"
 
 [node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
 light_color = Color(0.17254902, 0, 0.14509805, 1)

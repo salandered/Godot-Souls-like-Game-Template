@@ -38,7 +38,7 @@ func initialise(player_: Princess, combat_: PlayerCombat):
 
 func switch_weapon() -> void:
 	if get_player().is_in_attack_state():
-		SigUtils.safe_emit(get_player().switch_weapon_cant_be_done, {})
+		SigUtils.safe_emit_sig_data(get_player().switch_weapon_cant_be_done, {})
 		return
 	if not can_switch:
 		__log_("switch_weapon", "not can_switch")
@@ -50,7 +50,7 @@ func switch_weapon() -> void:
 	can_switch = false
 	_start_anim_overlay(A.equip.equip, switch_weapon_overlay_config)
 
-	SigUtils.safe_emit(get_player()._sig_container.get_by_sig_id(SignalID.sfx_switch_weapon), {SFXConstants.weapon_id_key: weapon_id})
+	SigUtils.safe_emit_sig_data(get_player()._sig_container.get_by_sig_id(SignalID.sfx_switch_weapon), {SFXConstants.weapon_id_key: weapon_id})
 
 	# TODO: get switch_dur using animation markers (already are working inside overlay modifer). 
 	#  			and use another marker instead of switch_dur / 2.0
@@ -99,7 +99,7 @@ func _input(event: InputEvent) -> void:
 		if get_player().acquired_second_weapon:
 			switch_weapon()
 		else:
-			SigUtils.safe_emit(get_player().switch_weapon_cant_be_done, {})
+			SigUtils.safe_emit_sig_data(get_player().switch_weapon_cant_be_done, {})
 	if InputUtils.is_keycode(event, KEY_Y):
 		if get_player():
 			wave()

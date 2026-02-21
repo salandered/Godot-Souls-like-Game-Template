@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://iswa4cu2ua7"]
+[gd_scene format=3 uid="uid://iswa4cu2ua7"]
 
 [ext_resource type="PackedScene" uid="uid://cc5ln800iorgc" path="res://logic/ui/ui_utils/dynamic_info_label/DoubleDynamicInfoLabel.tscn" id="1_q1wp5"]
 
@@ -15,7 +15,7 @@ color = Color(0.39138144, 0.39138144, 0.39138144, 1)
 thickness = 2
 vertical = true
 
-[node name="ReactionDoubleDynamicInfoLabel" instance=ExtResource("1_q1wp5")]
+[node name="ReactionDoubleDynamicInfoLabel" unique_id=2124854119 instance=ExtResource("1_q1wp5")]
 custom_minimum_size = Vector2(220, 0)
 offset_right = 220.0
 offset_bottom = 101.0
@@ -24,40 +24,37 @@ title_text = "Reaction to Attack"
 in_editor_label_text = "react L head"
 additional_title_text = "& Is interrupted"
 
-[node name="PanelBordersOnly" parent="PanelGradient" index="0"]
+[node name="PanelBordersOnly" parent="PanelGradient" parent_id_path=PackedInt32Array(1734951189) index="0" unique_id=1751309619]
 theme_override_styles/panel = SubResource("StyleBoxFlat_iueb4")
 
-[node name="MarginInsidePanel" parent="PanelGradient" index="1"]
+[node name="MarginInsidePanel" parent="PanelGradient" parent_id_path=PackedInt32Array(1734951189) index="1" unique_id=1444748927]
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 6
 
-[node name="Title" parent="PanelGradient/MarginInsidePanel/VBoxContainer" index="0"]
+[node name="Title" parent="PanelGradient/MarginInsidePanel/VBoxContainer" parent_id_path=PackedInt32Array(602695234) index="0" unique_id=980192768]
 text = "[b]Reaction to Attack[/b]"
 
-[node name="TitleAdditional" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0"]
+[node name="TitleAdditional" parent="PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" parent_id_path=PackedInt32Array(179678802) index="0" unique_id=1193991582]
 text = "[b]& Is interrupted[/b]"
 
-[node name="HBoxContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer" index="3"]
+[node name="HBoxContainer" parent="PanelGradient/MarginInsidePanel/VBoxContainer" parent_id_path=PackedInt32Array(602695234) index="3" unique_id=366621837]
 theme_override_constants/separation = 6
 
-[node name="__margin" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="0"]
+[node name="__margin" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="0" unique_id=241586409]
 custom_minimum_size = Vector2(150, 0)
 theme_override_constants/margin_top = 6
 
-[node name="Text" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0"]
+[node name="Text" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0" unique_id=1522643677]
 text = "react L head"
 
-[node name="VSeparator" type="VSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
+[node name="VSeparator" type="VSeparator" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1" unique_id=2052907881]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_styles/separator = SubResource("StyleBoxLine_iueb4")
 
-[node name="__margin_text_2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="2"]
+[node name="__margin_text_2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="2" unique_id=1969647740]
 custom_minimum_size = Vector2(30, 0)
 
-[node name="Text2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
-theme_override_font_sizes/normal_font_size = 28
-theme_override_font_sizes/bold_font_size = 28
-theme_override_font_sizes/italics_font_size = 28
+[node name="Text2" parent="PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0" unique_id=1308099948]
 text = "Yes"

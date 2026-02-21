@@ -1,18 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c74kjiqwgk4s4"]
+[gd_scene format=3 uid="uid://c74kjiqwgk4s4"]
 
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://logic/ui/ui_utils/options_nodes/m_toggle_option_control.tscn" id="1_w0n1a"]
 
-[node name="OptionControl" instance=ExtResource("1_w0n1a")]
+[node name="OptionControl" unique_id=1521428868 instance=ExtResource("1_w0n1a")]
 custom_minimum_size = Vector2(600, 40)
 
 [node name="OptionLabel" parent="." index="0"]
 theme_override_font_sizes/font_size = 28
 
-[node name="PanelContainer" type="PanelContainer" parent="." index="1"]
+[node name="PanelContainer" type="PanelContainer" parent="." index="1" unique_id=1814296992]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Comment" type="RichTextLabel" parent="PanelContainer" index="0"]
+[node name="Comment" type="RichTextLabel" parent="PanelContainer" index="0" unique_id=998142992]
 unique_name_in_owner = true
 modulate = Color(0.64256185, 0.64256185, 0.64256185, 1)
 layout_mode = 2

@@ -24,7 +24,7 @@ const DEF_AMB_LIGHT_ENERGY := 2.0
 const DEF_AMB_LIGHT_SKY_CONTRIBUTION := 0.2
 const DEF_FOG_LIGHT_COLOR := Color("415f80")
 const DEF_VOL_FOG_LIGHT_COLOR := Color("c6f2ff")
-const DEF_VOL_FOG_DENSITY := 0.009
+const DEF_VOL_FOG_DENSITY := 0.003
 ## sky shader
 const DEF_SHADER_SUN_SCATTER_COLOR := Color("5a95a6")
 const DEF_SHADER_TOP_COLOR := Color("603579")

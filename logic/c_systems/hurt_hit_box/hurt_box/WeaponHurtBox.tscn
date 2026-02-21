@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cylgs36pjbsga"]
+[gd_scene format=3 uid="uid://cylgs36pjbsga"]
 
 [ext_resource type="Script" uid="uid://dxs0ma76y5ioi" path="res://logic/c_systems/hurt_hit_box/hurt_box/weapon_hurt_box.gd" id="1_hb0wd"]
 
-[node name="WeaponHurtBox" type="Area3D"]
+[node name="WeaponHurtBox" type="Area3D" unique_id=930597007]
 collision_layer = 4
 script = ExtResource("1_hb0wd")

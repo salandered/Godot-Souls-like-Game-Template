@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bpcjpa0k1hem2"]
+[gd_scene format=4 uid="uid://bpcjpa0k1hem2"]
 
 [ext_resource type="Script" path="res://logic/entities/VFX/puff/_experimental/puff_fog_gpu.gd" id="1_u4dik"]
 [ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/_shaders/puff/SmokePuff.png" id="2_3e0mr"]
@@ -120,16 +120,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_s18qp")
 
-[node name="PuffFogGPU" type="Node3D"]
+[node name="PuffFogGPU" type="Node3D" unique_id=605086388]
 script = ExtResource("1_u4dik")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1171752352]
 transform = Transform3D(0.8598523, 0.25140333, -0.44435388, 0, 0.87035567, 0.49242356, 0.51054287, -0.42341155, 0.7483773, 0, 0, 0)
 visible = false
 light_energy = 3.75
 shadow_enabled = true
 
-[node name="PuffFogParticles" type="GPUParticles3D" parent="."]
+[node name="PuffFogParticles" type="GPUParticles3D" parent="." unique_id=319264835]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_2867w")
 cast_shadow = 0
@@ -139,17 +139,16 @@ lifetime = 9.0
 process_material = SubResource("ParticleProcessMaterial_ss34e")
 draw_pass_1 = SubResource("QuadMesh_3e0mr")
 
-[node name="test_visuals" type="Node3D" parent="."]
+[node name="test_visuals" type="Node3D" parent="." unique_id=503961158]
 unique_name_in_owner = true
 
-[node name="test_visual" type="MeshInstance3D" parent="test_visuals"]
+[node name="test_visual" type="MeshInstance3D" parent="test_visuals" unique_id=818608878]
 unique_name_in_owner = true
 transform = Transform3D(2.0089822, 0, 0, 0, 2.0089822, 0, 0, 0, 2.0089822, 1.4071951, -0.45511734, 1.7227342)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_7spk1")
-skeleton = NodePath("")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1450063664]
 transform = Transform3D(0.08585167, 0, 0.9963079, 0, 1, 0, -0.9963079, 0, 0.08585167, 5.9915314, 0, 0)
 current = true

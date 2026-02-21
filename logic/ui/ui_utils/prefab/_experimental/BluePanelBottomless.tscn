@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkucv6ac6xvqa"]
+[gd_scene format=3 uid="uid://dkucv6ac6xvqa"]
 
 [sub_resource type="Gradient" id="Gradient_tym6s"]
 offsets = PackedFloat32Array(0, 0.6571429, 1)
@@ -21,45 +21,45 @@ border_blend = true
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 
-[node name="BluePanelBottomless" type="MarginContainer"]
+[node name="BluePanelBottomless" type="MarginContainer" unique_id=1296845227]
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="__blue_panel" type="PanelContainer" parent="."]
+[node name="__blue_panel" type="PanelContainer" parent="." unique_id=1469105345]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_f4jnj")
 
-[node name="__blue_panel_borders" type="PanelContainer" parent="__blue_panel"]
+[node name="__blue_panel_borders" type="PanelContainer" parent="__blue_panel" unique_id=896994557]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_x47y3")
 
-[node name="__margin_in_blue_panel" type="MarginContainer" parent="__blue_panel"]
+[node name="__margin_in_blue_panel" type="MarginContainer" parent="__blue_panel" unique_id=1570120965]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 10
 
-[node name="__vbox" type="VBoxContainer" parent="__blue_panel/__margin_in_blue_panel"]
+[node name="__vbox" type="VBoxContainer" parent="__blue_panel/__margin_in_blue_panel" unique_id=1050227951]
 layout_mode = 2
 
-[node name="__margin" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+[node name="__margin" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox" unique_id=1289953467]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_top = -4
 theme_override_constants/margin_bottom = -4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin" unique_id=22232085]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin/HBoxContainer" unique_id=1639395860]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="BluePanelTitle" type="RichTextLabel" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin/HBoxContainer"]
+[node name="BluePanelTitle" type="RichTextLabel" parent="__blue_panel/__margin_in_blue_panel/__vbox/__margin/HBoxContainer" unique_id=610512268]
 unique_name_in_owner = true
 modulate = Color(0.7783351, 0.7783351, 0.7783351, 1)
 layout_mode = 2
@@ -72,11 +72,11 @@ text = "no title"
 fit_content = true
 autowrap_mode = 0
 
-[node name="__hbox" type="HBoxContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+[node name="__hbox" type="HBoxContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox" unique_id=1958497356]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="__space" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox"]
+[node name="__space" type="MarginContainer" parent="__blue_panel/__margin_in_blue_panel/__vbox" unique_id=916766507]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 50

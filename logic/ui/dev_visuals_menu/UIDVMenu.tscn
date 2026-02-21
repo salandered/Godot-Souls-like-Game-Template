@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://bed3gcu0mg3wp"]
+[gd_scene format=3 uid="uid://bed3gcu0mg3wp"]
 
 [ext_resource type="Script" uid="uid://gbfl15nd5vml" path="res://logic/ui/dev_visuals_menu/ui_dv_menu.gd" id="2_l7gs3"]
 [ext_resource type="Texture2D" uid="uid://qg53gkfhnevx" path="res://-assets-/x_icons/white/icon_parchment.png" id="3_rl0i7"]
@@ -399,7 +399,7 @@ _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"16\">
 "
 base_scale = 1.3
 
-[node name="UIOverlayControls" type="PanelContainer"]
+[node name="UIOverlayControls" type="PanelContainer" unique_id=41362728]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -417,50 +417,50 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_j1utu")
 script = ExtResource("2_l7gs3")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1144894007]
 layout_mode = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1587086562]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=16014158]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 4
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=533875280]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="RockPanelOverlay Menus" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="RockPanelOverlay Menus" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1936504433]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_tu0ee")
 
-[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus"]
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus" unique_id=2110493997]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
 
-[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus"]
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus" unique_id=81339653]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1131295363]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
 
-[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__title_panel"]
+[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__title_panel" unique_id=122165202]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -472,7 +472,7 @@ theme_override_font_sizes/font_size = 26
 text = "Overlay Info Panels"
 vertical_alignment = 1
 
-[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1528735473]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 18
@@ -480,16 +480,16 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin" unique_id=261578513]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" unique_id=2142159422]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TutorialToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/HBoxContainer" instance=ExtResource("4_rl0i7")]
+[node name="TutorialToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer/HBoxContainer" unique_id=1842710829 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -503,7 +503,7 @@ text = " Tutorial (T)"
 icon = ExtResource("3_rl0i7")
 key_panel = 100
 
-[node name="CameraNodesToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" instance=ExtResource("4_rl0i7")]
+[node name="CameraNodesToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" unique_id=2016517031 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -517,7 +517,7 @@ text = " Camera Nodes Visuals"
 icon = ExtResource("6_sb2c6")
 key_panel = 50
 
-[node name="SubviewportToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" instance=ExtResource("4_rl0i7")]
+[node name="SubviewportToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin/VBoxContainer" unique_id=1019806787 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -531,13 +531,13 @@ text = " Additional cameras"
 icon = ExtResource("9_bnb2f")
 key_panel = 51
 
-[node name="PlInput" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" instance=ExtResource("17_6y0fn")]
+[node name="PlInput" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1239068240 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Inputs Panel"
 icon_texture = ExtResource("9_h5fxf")
 icon_color = Color(0.67058825, 1, 0.9607843, 1)
 
-[node name="__rock_margin_cg4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__rock_margin_cg4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=905758199]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 18
@@ -545,14 +545,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4" unique_id=2032484228]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer" unique_id=936406041]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer" unique_id=157932285]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -563,7 +563,7 @@ theme_override_font_sizes/font_size = 18
 text = "Raw Inputs (Ctrl+I)"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer" unique_id=160033431 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -576,13 +576,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_t684l")
 text = ""
 key_panel = 20
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer/LogsPanelToggler" unique_id=492815458 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer" unique_id=544291577]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer2"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer2" unique_id=2000249361]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -593,7 +593,7 @@ theme_override_font_sizes/font_size = 18
 text = "Input Actions"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer2" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer2" unique_id=98122235 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 1
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -606,13 +606,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_3abyr")
 text = ""
 key_panel = 21
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer2/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer2/LogsPanelToggler" unique_id=965881697 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer" unique_id=843931348]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer3"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer3" unique_id=1564371350]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -623,7 +623,7 @@ theme_override_font_sizes/font_size = 18
 text = "Player Input Info"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer3" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer3" unique_id=1217126727 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 1
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -636,16 +636,16 @@ theme_override_icons/unchecked = SubResource("DPITexture_hnr1y")
 text = ""
 key_panel = 22
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer3/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg4/VBoxContainer/HBoxContainer3/LogsPanelToggler" unique_id=1141630284 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="PlInput3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" instance=ExtResource("17_6y0fn")]
+[node name="PlInput3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1737795790 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Animation & Movement"
 icon_texture = ExtResource("12_4lnee")
 icon_color = Color(1, 0.5328826, 0.9924968, 1)
 
-[node name="__rock_margin_cg5" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__rock_margin_cg5" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1402994977]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 18
@@ -653,14 +653,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5" unique_id=1595272693]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer" unique_id=909611784]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer" unique_id=881208831]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -671,7 +671,7 @@ theme_override_font_sizes/font_size = 18
 text = "Player Animator (Ctrl+U)"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer" unique_id=2117244253 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -684,13 +684,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_lj0qi")
 text = ""
 key_panel = 52
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer/LogsPanelToggler" unique_id=974919446 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer" unique_id=1180142898]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer2"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer2" unique_id=295852769]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -701,7 +701,7 @@ theme_override_font_sizes/font_size = 18
 text = "Enemy Animator"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer2" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer2" unique_id=1392008070 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -714,13 +714,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_wggtu")
 text = ""
 key_panel = 53
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer2/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer2/LogsPanelToggler" unique_id=1922091395 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer" unique_id=776570799]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer3"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer3" unique_id=1297609432]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -731,7 +731,7 @@ theme_override_font_sizes/font_size = 18
 text = "Show Player Combo"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer3" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer3" unique_id=1074851341 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 1
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -744,13 +744,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_h3cv6")
 text = ""
 key_panel = 54
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer3/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer3/LogsPanelToggler" unique_id=1165161575 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer" unique_id=1684060572]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer4"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer4" unique_id=1810553154]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -761,7 +761,7 @@ theme_override_font_sizes/font_size = 18
 text = "Enemy Movement Info"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer4" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer4" unique_id=40002419 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -774,10 +774,10 @@ theme_override_icons/unchecked = SubResource("DPITexture_3udxl")
 text = ""
 key_panel = 55
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer4/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg5/VBoxContainer/HBoxContainer4/LogsPanelToggler" unique_id=1377558244 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="__rock_margin_cg6" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__rock_margin_cg6" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=400187821]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -786,17 +786,17 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg6"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg6" unique_id=1278026602]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="PlInput5" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" instance=ExtResource("17_6y0fn")]
+[node name="PlInput5" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1747630464 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Audio"
 icon_texture = ExtResource("14_kkajs")
 icon_color = Color(1, 0.6315303, 0.8138193, 1)
 
-[node name="__rock_margin_cg8" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__rock_margin_cg8" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=162611482]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 18
@@ -804,14 +804,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8" unique_id=978549967]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer" unique_id=133681492]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer3"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer3" unique_id=97620113]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -822,7 +822,7 @@ theme_override_font_sizes/font_size = 18
 text = "Audio Bus Visualiser"
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer3" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer3" unique_id=825431746 instance=ExtResource("4_rl0i7")]
 layout_mode = 2
 size_flags_horizontal = 1
 theme_override_colors/icon_normal_color = Color(0.90053093, 0.90053093, 0.90053093, 1)
@@ -835,13 +835,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_0pt1c")
 text = ""
 key_panel = 30
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer3/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer3/LogsPanelToggler" unique_id=592361104 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer" unique_id=296142403]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer" unique_id=1451138424]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -852,7 +852,7 @@ theme_override_font_sizes/font_size = 18
 text = "Bus ID"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg8/VBoxContainer/HBoxContainer" unique_id=161241824]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -873,7 +873,7 @@ popup/item_1/id = 2
 script = ExtResource("15_fsews")
 key_value_changer = 20
 
-[node name="__rock_margin_cg7" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v"]
+[node name="__rock_margin_cg7" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v" unique_id=1692424249]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -882,36 +882,36 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg7"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelOverlay Menus/__v/__rock_margin_cg7" unique_id=1564549073]
 layout_mode = 2
 
-[node name="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("7_5uhh2")]
+[node name="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=605315487 instance=ExtResource("7_5uhh2")]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="RockPanelValueChangers2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="RockPanelValueChangers2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=81566832]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_4lnee")
 
-[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2"]
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2" unique_id=737750376]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
 
-[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2"]
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2" unique_id=2084589326]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v"]
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v" unique_id=420285719]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
 
-[node name="IconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/__title_panel" instance=ExtResource("14_krf51")]
+[node name="IconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/__title_panel" unique_id=1163261904 instance=ExtResource("14_krf51")]
 layout_mode = 2
 size_flags_horizontal = 4
 title_text = "Additional Features"
@@ -919,12 +919,12 @@ title_text_size = 26
 title_font = ExtResource("4_l7gs3")
 icon_texture = null
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v" unique_id=1102401152]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer"]
+[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer" unique_id=207827953]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 18
@@ -932,28 +932,28 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 12
 
-[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2"]
+[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2" unique_id=751385277]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v"]
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v" unique_id=1134589682]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v/PanelContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v/PanelContainer3" unique_id=322387930]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v/PanelContainer3/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v/PanelContainer3/MarginContainer" unique_id=1752368193]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="InfoText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v/PanelContainer3/MarginContainer"]
+[node name="InfoText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin2/_-v/PanelContainer3/MarginContainer" unique_id=486109899]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -971,17 +971,17 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__rock_margin_cg2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer"]
+[node name="__rock_margin_cg2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer" unique_id=1883970042]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2" unique_id=1394279973]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer"]
+[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer" unique_id=1683554047]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0.31670618, 0.31670618, 0.31670618, 1)
@@ -1003,7 +1003,7 @@ folded = true
 title = "Hot Keys"
 script = ExtResource("26_j1utu")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer" unique_id=1339373031]
 visible = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
@@ -1012,25 +1012,25 @@ theme_override_constants/margin_left = 18
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer" unique_id=32537]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PanelContainer5" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer"]
+[node name="PanelContainer5" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer" unique_id=1819643121]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5" unique_id=799069611]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer" unique_id=974301921]
 layout_mode = 2
 
-[node name="InfoText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/VBoxContainer"]
+[node name="InfoText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/VBoxContainer" unique_id=1990817153]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -1050,7 +1050,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="InfoText2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/VBoxContainer"]
+[node name="InfoText2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/VBoxContainer" unique_id=976059389]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -1069,7 +1069,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="FoldableContainer2" type="FoldableContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer"]
+[node name="FoldableContainer2" type="FoldableContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer" unique_id=2125354246]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0.31670618, 0.31670618, 0.31670618, 1)
@@ -1091,27 +1091,27 @@ folded = true
 title = "Colors"
 script = ExtResource("26_j1utu")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2" unique_id=1149156829]
 visible = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_right = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer" unique_id=117712202]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer" unique_id=1356225901]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 80
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer" unique_id=1515204545]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=641339860]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1122,11 +1122,11 @@ theme_override_font_sizes/font_size = 19
 text = "Hair Color"
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=306902332]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorPicker" type="ColorPicker" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Control"]
+[node name="ColorPicker" type="ColorPicker" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RockPanelValueChangers2/__v/VBoxContainer/__rock_margin_cg2/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Control" unique_id=1476131637]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1155,35 +1155,35 @@ presets_visible = false
 script = ExtResource("31_w3qyx")
 key_value_changer = 1
 
-[node name="VSeparator2" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("18_6vblj")]
+[node name="VSeparator2" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1723577673 instance=ExtResource("18_6vblj")]
 layout_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1028405224]
 layout_mode = 2
 
-[node name="RockPanelValueChangers" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="RockPanelValueChangers" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=1919556168]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_4lnee")
 
-[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers"]
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers" unique_id=15555019]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
 
-[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers"]
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers" unique_id=881703172]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v"]
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v" unique_id=1579653580]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
 
-[node name="IconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/__title_panel" instance=ExtResource("14_krf51")]
+[node name="IconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/__title_panel" unique_id=493173344 instance=ExtResource("14_krf51")]
 layout_mode = 2
 size_flags_horizontal = 4
 title_text = "Configuration"
@@ -1191,22 +1191,22 @@ title_text_size = 26
 title_font = ExtResource("4_l7gs3")
 icon_texture = null
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v" unique_id=413946660]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=342161889]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="SignalCG2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" instance=ExtResource("17_6y0fn")]
+[node name="SignalCG2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=881807417 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Weapon Hits"
 icon_texture = ExtResource("26_l5o0i")
 icon_color = Color(1, 0.70980394, 0.78522015, 1)
 
-[node name="__rock_margin_cg3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="__rock_margin_cg3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=1650323256]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 18
@@ -1214,17 +1214,17 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3" unique_id=665042910]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="GridContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer"]
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer" unique_id=199297388]
 layout_mode = 2
 theme_override_constants/h_separation = 9
 theme_override_constants/v_separation = 1
 columns = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=125268409]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1235,7 +1235,7 @@ theme_override_font_sizes/font_size = 18
 text = "Visualise"
 vertical_alignment = 1
 
-[node name="WeaponHitToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" instance=ExtResource("26_natrh")]
+[node name="WeaponHitToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=632893764 instance=ExtResource("26_natrh")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_icons/checked = SubResource("DPITexture_w6est")
@@ -1243,20 +1243,20 @@ theme_override_icons/unchecked = SubResource("DPITexture_pogc4")
 text = ""
 key_value_changer = 20
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/WeaponHitToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/WeaponHitToggler" unique_id=995329508 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=453201238]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 14
 
-[node name="__h4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+[node name="__h4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=525545595]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h4"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h4" unique_id=617711475]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1267,7 +1267,7 @@ theme_override_font_sizes/font_size = 18
 text = "Shaded spheres"
 vertical_alignment = 1
 
-[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h4" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h4" unique_id=379428065 instance=ExtResource("13_rl0i7")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1282,7 +1282,7 @@ Basic example:
 
 "
 
-[node name="HitShaded" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" instance=ExtResource("26_natrh")]
+[node name="HitShaded" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=1081643559 instance=ExtResource("26_natrh")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_icons/checked = SubResource("DPITexture_mr1fl")
@@ -1290,19 +1290,19 @@ theme_override_icons/unchecked = SubResource("DPITexture_fm86s")
 text = ""
 key_value_changer = 22
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/HitShaded" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/HitShaded" unique_id=497823365 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=1128745199]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="__h5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+[node name="__h5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=157906532]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h5"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h5" unique_id=683559234]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1313,7 +1313,7 @@ theme_override_font_sizes/font_size = 18
 text = "Character snapped"
 vertical_alignment = 1
 
-[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h5" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h5" unique_id=1629918800 instance=ExtResource("13_rl0i7")]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1322,7 +1322,7 @@ tooltip_text = "Weapon hit will be visualised both in global (world) space and i
 
 "
 
-[node name="WeaponHitToggler2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" instance=ExtResource("26_natrh")]
+[node name="WeaponHitToggler2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=385326488 instance=ExtResource("26_natrh")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_icons/checked = SubResource("DPITexture_v0j5n")
@@ -1330,14 +1330,14 @@ theme_override_icons/unchecked = SubResource("DPITexture_0hnyf")
 text = ""
 key_value_changer = 23
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/WeaponHitToggler2" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/WeaponHitToggler2" unique_id=1966009246 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="__h2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2"]
+[node name="__h2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=2035234775]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h2"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h2" unique_id=214733188]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1348,7 +1348,7 @@ theme_override_font_sizes/font_size = 18
 text = "All registered hits"
 vertical_alignment = 1
 
-[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h2" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/__h2" unique_id=1404538965 instance=ExtResource("13_rl0i7")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1363,7 +1363,7 @@ Basic example:
 
 "
 
-[node name="WeaponHitEveryFrameToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" instance=ExtResource("26_natrh")]
+[node name="WeaponHitEveryFrameToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2" unique_id=1733295791 instance=ExtResource("26_natrh")]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_icons/checked = SubResource("DPITexture_7qhsl")
@@ -1371,13 +1371,13 @@ theme_override_icons/unchecked = SubResource("DPITexture_0tubs")
 text = ""
 key_value_changer = 21
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/WeaponHitEveryFrameToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/GridContainer2/WeaponHitEveryFrameToggler" unique_id=1835878349 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="__h3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer"]
+[node name="__h3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer" unique_id=1440017219]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/__h3"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/__h3" unique_id=726364869]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1388,7 +1388,7 @@ theme_override_font_sizes/font_size = 18
 text = "Duration"
 vertical_alignment = 1
 
-[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/__h3" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/__h3" unique_id=1982332182 instance=ExtResource("13_rl0i7")]
 visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -1404,7 +1404,7 @@ Basic example:
 
 "
 
-[node name="HitDuration" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/__h3" instance=ExtResource("15_r2qmd")]
+[node name="HitDuration" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin_cg3/VBoxContainer/__h3" unique_id=1946983995 instance=ExtResource("15_r2qmd")]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -1415,17 +1415,17 @@ value = 3.5
 suffix = "sec"
 key_value_changer = 11
 
-[node name="__v3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="__v3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=135433470]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="DSACG" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3" instance=ExtResource("17_6y0fn")]
+[node name="DSACG" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3" unique_id=1360451686 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Dynamic Info Panels"
 icon_texture = ExtResource("16_bhxsi")
 
-[node name="__rock_margin_cg" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3"]
+[node name="__rock_margin_cg" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3" unique_id=168126989]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 18
@@ -1433,16 +1433,16 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg" unique_id=1075634657]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer" unique_id=1947291021]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer" unique_id=1678596066]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1454,7 +1454,7 @@ theme_override_font_sizes/font_size = 18
 text = "Fade out time"
 vertical_alignment = 1
 
-[node name="SpinGhostSec" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer" instance=ExtResource("15_r2qmd")]
+[node name="SpinGhostSec" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer" unique_id=1060403440 instance=ExtResource("15_r2qmd")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -1465,7 +1465,7 @@ value = 4.0
 suffix = "sec"
 key_value_changer = 10
 
-[node name="OptionName2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer"]
+[node name="OptionName2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer" unique_id=684990385]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -1477,7 +1477,7 @@ theme_override_font_sizes/font_size = 17
 text = "Vertical separation"
 vertical_alignment = 1
 
-[node name="SpinGridVSeparation" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer" instance=ExtResource("15_r2qmd")]
+[node name="SpinGridVSeparation" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__v3/__rock_margin_cg/VBoxContainer/GridContainer" unique_id=1594165062 instance=ExtResource("15_r2qmd")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -1490,13 +1490,13 @@ rounded = true
 suffix = "px"
 key_value_changer = 30
 
-[node name="PlInput4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" instance=ExtResource("17_6y0fn")]
+[node name="PlInput4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=981246609 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Movement"
 icon_texture = ExtResource("13_tb36x")
 icon_color = Color(1, 0.9841726, 0.78936666, 1)
 
-[node name="__rock_margin4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="__rock_margin4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=1700056376]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 15
@@ -1504,14 +1504,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 12
 
-[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4"]
+[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4" unique_id=863723297]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v" unique_id=1983169532]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer6"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer6" unique_id=1902279925]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1522,20 +1522,20 @@ theme_override_font_sizes/font_size = 18
 text = "Root motion vector"
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer6" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer6" unique_id=1846879892 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_wlggk")
 theme_override_icons/unchecked = SubResource("DPITexture_apcn0")
 text = ""
 key_value_changer = 46
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer6/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer6/HidePlayer" unique_id=1210007145 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v" unique_id=1945604436]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer5"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer5" unique_id=1980459228]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1546,20 +1546,20 @@ theme_override_font_sizes/font_size = 18
 text = "Player trail"
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer5" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer5" unique_id=659038466 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_ciyc4")
 theme_override_icons/unchecked = SubResource("DPITexture_n65ux")
 text = ""
 key_value_changer = 44
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer5/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer5/HidePlayer" unique_id=1691024978 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v" unique_id=238562732]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer4"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer4" unique_id=74687780]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1570,20 +1570,20 @@ theme_override_font_sizes/font_size = 18
 text = "Gravity raycast"
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer4" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer4" unique_id=280972216 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_y3n8c")
 theme_override_icons/unchecked = SubResource("DPITexture_lwm87")
 text = ""
 key_value_changer = 43
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer4/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer4/HidePlayer" unique_id=1628622319 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v" unique_id=339625770]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer2"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer2" unique_id=1410656371]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1594,22 +1594,22 @@ theme_override_font_sizes/font_size = 18
 text = "Bones direction"
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer2" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer2" unique_id=1845558850 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_yvj42")
 theme_override_icons/unchecked = SubResource("DPITexture_8n2mk")
 text = ""
 key_value_changer = 41
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer2/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin4/_-v/HBoxContainer2/HidePlayer" unique_id=1012866134 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="Add" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" instance=ExtResource("17_6y0fn")]
+[node name="Add" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=2113048719 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Collision Shapes"
 icon_color = Color(0.70980394, 0.7764706, 1, 1)
 
-[node name="__rock_margin3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="__rock_margin3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=120449551]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 15
@@ -1617,14 +1617,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 12
 
-[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3"]
+[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3" unique_id=596048900]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v" unique_id=336364461]
 layout_mode = 2
 
-[node name="OptionName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer5"]
+[node name="OptionName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer5" unique_id=655155626]
 modulate = Color(0.8462217, 0.8462217, 0.8462217, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -1641,20 +1641,20 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer5" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer5" unique_id=1803301159 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_uextg")
 theme_override_icons/unchecked = SubResource("DPITexture_skxpm")
 text = ""
 key_value_changer = 80
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer5/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer5/HidePlayer" unique_id=1824942944 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v" unique_id=1539889391]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer6"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer6" unique_id=1406667723]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1665,23 +1665,23 @@ theme_override_font_sizes/font_size = 18
 text = "Character colliders"
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer6" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer6" unique_id=1528670205 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_pfvdw")
 theme_override_icons/unchecked = SubResource("DPITexture_gpvri")
 text = ""
 key_value_changer = 81
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer6/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin3/_-v/HBoxContainer6/HidePlayer" unique_id=1802741293 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="Add2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" instance=ExtResource("17_6y0fn")]
+[node name="Add2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=1731211408 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Misc"
 icon_texture = ExtResource("24_aksyw")
 icon_color = Color(0.70980394, 0.7764706, 1, 1)
 
-[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=1792301429]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 15
@@ -1689,14 +1689,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 14
 
-[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2"]
+[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2" unique_id=91818158]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v" unique_id=298224521]
 layout_mode = 2
 
-[node name="OptionName2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6"]
+[node name="OptionName2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6" unique_id=1252519325]
 modulate = Color(0.8462217, 0.8462217, 0.8462217, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -1713,7 +1713,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6" unique_id=549265643]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1723,20 +1723,20 @@ theme_override_fonts/font = ExtResource("11_i13m4")
 theme_override_font_sizes/font_size = 18
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6" unique_id=368385889 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_f0q2p")
 theme_override_icons/unchecked = SubResource("DPITexture_7wdxh")
 text = ""
 key_value_changer = 45
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer6/HidePlayer" unique_id=1565779060 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v" unique_id=2066138194]
 layout_mode = 2
 
-[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer3"]
+[node name="OptionName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer3" unique_id=367752887]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -1747,34 +1747,34 @@ theme_override_font_sizes/font_size = 18
 text = "Wear hat (why not)"
 vertical_alignment = 1
 
-[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer3" instance=ExtResource("26_natrh")]
+[node name="HidePlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer3" unique_id=856899895 instance=ExtResource("26_natrh")]
 layout_mode = 2
 theme_override_icons/checked = SubResource("DPITexture_gcnxd")
 theme_override_icons/unchecked = SubResource("DPITexture_54c3o")
 text = ""
 key_value_changer = 42
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer3/HidePlayer" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/__rock_margin2/_-v/HBoxContainer3/HidePlayer" unique_id=925040499 instance=ExtResource("11_81oco")]
 base_scale = 1.4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer" unique_id=327874859]
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="__rock_margin_cg2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/VBoxContainer"]
+[node name="__rock_margin_cg2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/VBoxContainer" unique_id=195935848]
 visible = false
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_bottom = 20
 
-[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/VBoxContainer"]
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/VBoxContainer" unique_id=814517854]
 visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
 
-[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/VBoxContainer/__title_panel"]
+[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/RockPanelValueChangers/__v/VBoxContainer/VBoxContainer/__title_panel" unique_id=339759840]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1786,36 +1786,36 @@ theme_override_font_sizes/font_size = 26
 text = "Additional Features"
 vertical_alignment = 1
 
-[node name="VSeparator3" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("18_6vblj")]
+[node name="VSeparator3" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=362903374 instance=ExtResource("18_6vblj")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=926019748]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="RockPanelCharSpecificInfo" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="RockPanelCharSpecificInfo" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1383473932]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_145r5")
 
-[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo"]
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo" unique_id=1198535106]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
 
-[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo"]
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo" unique_id=640682871]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v"]
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v" unique_id=218074108]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
 
-[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__title_panel"]
+[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__title_panel" unique_id=315939961]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1827,7 +1827,7 @@ theme_override_font_sizes/font_size = 26
 text = "Character specific info and visuals"
 vertical_alignment = 1
 
-[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v"]
+[node name="__rock_margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v" unique_id=586150166]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -1836,29 +1836,29 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin" unique_id=518908317]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="__m_l" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer"]
+[node name="__m_l" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer" unique_id=210919884]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l" unique_id=639693233]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer" unique_id=1506278523]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="__legend" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer"]
+[node name="__legend" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer" unique_id=823204943]
 layout_mode = 2
 
-[node name="Player" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend"]
+[node name="Player" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend" unique_id=1681900104]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -1878,7 +1878,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="HSM" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend"]
+[node name="HSM" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend" unique_id=1756750414]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -1899,7 +1899,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="SE" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend"]
+[node name="SE" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/__m_l/PanelContainer/MarginContainer/__legend" unique_id=411397092]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -1920,17 +1920,17 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer" unique_id=11938092]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2" unique_id=737853869]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 2
 columns = 4
 
-[node name="RowName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=373982403]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -1950,7 +1950,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton1" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton1" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=143939142 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -1959,7 +1959,7 @@ text = ""
 key_char_t = 1
 key_char_dvt = 1
 
-[node name="CheckButton2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=202794094 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -1969,7 +1969,7 @@ icon = ExtResource("10_tgwv8")
 key_char_t = 2
 key_char_dvt = 1
 
-[node name="CheckButton3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1970147089 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -1979,7 +1979,7 @@ icon = ExtResource("11_l3dsc")
 key_char_t = 3
 key_char_dvt = 1
 
-[node name="RowName2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=719782981]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -1999,7 +1999,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1777687182 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2008,7 +2008,7 @@ text = ""
 key_char_t = 1
 key_char_dvt = 2
 
-[node name="CheckButton5" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton5" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1278230235 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2018,7 +2018,7 @@ icon = ExtResource("10_tgwv8")
 key_char_t = 2
 key_char_dvt = 2
 
-[node name="CheckButton6" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton6" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1527288704 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2028,7 +2028,7 @@ icon = ExtResource("11_l3dsc")
 key_char_t = 3
 key_char_dvt = 2
 
-[node name="RowName3" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName3" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1923729281]
 modulate = Color(0.92156863, 0.92156863, 0.92156863, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -2048,7 +2048,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton7" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton7" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=199014416 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2057,7 +2057,7 @@ text = ""
 key_char_t = 1
 key_char_dvt = 3
 
-[node name="CheckButton8" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton8" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1360686249 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2068,7 +2068,7 @@ key_char_t = 2
 key_char_dvt = 3
 tied_toggle_buttons = [NodePath("../CheckButton9")]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton8"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton8" unique_id=547287474]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 6
@@ -2085,7 +2085,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(12, 2)
 theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
 
-[node name="CheckButton9" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton9" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=2010530474 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2096,7 +2096,7 @@ key_char_t = 3
 key_char_dvt = 3
 tied_toggle_buttons = [NodePath("../CheckButton8")]
 
-[node name="RowName4" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName4" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=709328401]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -2116,7 +2116,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton10" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton10" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=64658023 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2125,7 +2125,7 @@ text = ""
 key_char_t = 1
 key_char_dvt = 4
 
-[node name="CheckButton11" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton11" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1108530620 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2136,7 +2136,7 @@ key_char_t = 2
 key_char_dvt = 4
 tied_toggle_buttons = [NodePath("../CheckButton12")]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton11"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton11" unique_id=591170398]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 6
@@ -2153,7 +2153,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(12, 2)
 theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
 
-[node name="CheckButton12" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton12" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1793744346 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2164,7 +2164,7 @@ key_char_t = 3
 key_char_dvt = 4
 tied_toggle_buttons = [NodePath("../CheckButton11")]
 
-[node name="RowName5" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName5" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=235267817]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -2184,7 +2184,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton13" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton13" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=655473016 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2194,7 +2194,7 @@ key_char_t = 1
 key_char_dvt = 5
 tied_toggle_buttons = [NodePath("../CheckButton14"), NodePath("../CheckButton15")]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton13"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton13" unique_id=2130009718]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 6
@@ -2211,7 +2211,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(12, 2)
 theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
 
-[node name="CheckButton14" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton14" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=841455801 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2222,7 +2222,7 @@ key_char_t = 2
 key_char_dvt = 5
 tied_toggle_buttons = [NodePath("../CheckButton13"), NodePath("../CheckButton15")]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton14"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton14" unique_id=1615137619]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 6
@@ -2239,7 +2239,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(12, 2)
 theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
 
-[node name="CheckButton15" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton15" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1904567291 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2250,7 +2250,7 @@ key_char_t = 3
 key_char_dvt = 5
 tied_toggle_buttons = [NodePath("../CheckButton13"), NodePath("../CheckButton14")]
 
-[node name="RowName6" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName6" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=137550826]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -2270,7 +2270,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton16" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton16" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=310187850 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2279,7 +2279,7 @@ text = ""
 key_char_t = 1
 key_char_dvt = 6
 
-[node name="CheckButton17" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton17" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1363379564 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2290,7 +2290,7 @@ key_char_t = 2
 key_char_dvt = 6
 tied_toggle_buttons = [NodePath("../CheckButton18")]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton17"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton17" unique_id=2035096829]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 6
@@ -2307,7 +2307,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(12, 2)
 theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
 
-[node name="CheckButton18" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton18" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=991007323 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2318,7 +2318,7 @@ key_char_t = 3
 key_char_dvt = 6
 tied_toggle_buttons = [NodePath("../CheckButton17")]
 
-[node name="RowName7" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName7" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=737347290]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -2338,7 +2338,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CheckButton19" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" instance=ExtResource("9_pbvab")]
+[node name="CheckButton19" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=478414939 instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2347,7 +2347,7 @@ text = ""
 key_char_t = 1
 key_char_dvt = 7
 
-[node name="CheckButton20" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton20" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1575488584 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2358,7 +2358,7 @@ key_char_t = 2
 key_char_dvt = 7
 tied_toggle_buttons = [NodePath("../CheckButton21")]
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton20"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/CheckButton20" unique_id=1329348781]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 6
@@ -2375,7 +2375,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(12, 2)
 theme_override_styles/separator = SubResource("StyleBoxTexture_sb2c6")
 
-[node name="CheckButton21" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
+[node name="CheckButton21" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1360780948 node_paths=PackedStringArray("tied_toggle_buttons") instance=ExtResource("9_pbvab")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
@@ -2386,7 +2386,7 @@ key_char_t = 3
 key_char_dvt = 7
 tied_toggle_buttons = [NodePath("../CheckButton20")]
 
-[node name="RowName8" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="RowName8" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1663611276]
 modulate = Color(0.92089695, 0.92089695, 0.92089695, 1)
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -2406,14 +2406,14 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=1575135300]
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="DVCharVCSpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/Control" instance=ExtResource("34_jjux5")]
+[node name="DVCharVCSpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/Control" unique_id=423692931 instance=ExtResource("34_jjux5")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -2425,14 +2425,14 @@ scale = Vector2(0.9, 1)
 step = 0.1
 key_value_changer = 80
 
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=2010195990]
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="DVCharVCSpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/Control2" instance=ExtResource("34_jjux5")]
+[node name="DVCharVCSpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/Control2" unique_id=938393922 instance=ExtResource("34_jjux5")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -2444,14 +2444,14 @@ scale = Vector2(0.9, 1)
 step = 0.1
 key_value_changer = 81
 
-[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer" unique_id=226355364]
 custom_minimum_size = Vector2(76, 30)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="DVCharVCSpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/Control3" instance=ExtResource("34_jjux5")]
+[node name="DVCharVCSpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/GridContainer/Control3" unique_id=687790375 instance=ExtResource("34_jjux5")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -2463,20 +2463,20 @@ scale = Vector2(0.9, 1)
 step = 0.1
 key_value_changer = 82
 
-[node name="__m_ToolTip" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2"]
+[node name="__m_ToolTip" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2" unique_id=1551805651]
 layout_mode = 2
 theme_override_constants/margin_left = -6
 theme_override_constants/margin_right = -6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip" unique_id=1577507622]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=76333430]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer2" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer2" unique_id=1044642483 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Shows info about the character's State Machine. 
 E.g.: current state name.
@@ -2484,11 +2484,11 @@ Visualizes updates by animating the previous value
 dropping down and fading out as a \"ghost\". 
 This behaviour can be configured."
 
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=1583661292]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer3" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer3" unique_id=1890451687 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Shows info about the character's attacks. 
 E.g.: amount of damage
@@ -2496,70 +2496,70 @@ Visualizes updates by animating the previous value
 dropping down and fading out as a \"ghost\". 
 This behaviour can be configured."
 
-[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=1597916943]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer4" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer4" unique_id=345240126 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Visualises trail of the character's weapons. 
 Trail is shown only if the weapon is attacking.
 Trail color depends on the attack velocity.
 (not the in game property 'attack speed')"
 
-[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=1625975811]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer5" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer5" unique_id=1878067936 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Visualises the character's hitboxes.
 Changes color while showing i-frames 
 (frames when character is invincible to attack)"
 
-[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=955638705]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer6" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer6" unique_id=1922643753 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Visualises the weapon's hitboxes."
 
-[node name="MarginContainer7" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer7" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=533733105]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer7" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer7" unique_id=867567351 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Visualises skeleton with simple shapes."
 
-[node name="MarginContainer8" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer8" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=483568903]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer8" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer8" unique_id=372283565 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Hides visial models (mesh) of the characters."
 
-[node name="MarginContainer9" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer"]
+[node name="MarginContainer9" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer" unique_id=1456145556]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
-[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer9" instance=ExtResource("13_rl0i7")]
+[node name="ToolTip4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__rock_margin/VBoxContainer/HBoxContainer2/__m_ToolTip/VBoxContainer/MarginContainer9" unique_id=11376891 instance=ExtResource("13_rl0i7")]
 layout_mode = 2
 tooltip_text = "Speed multiplier which would be applied to all animations."
 
-[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v"]
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v" unique_id=533765576]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="ConfigGroupIconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v" instance=ExtResource("17_6y0fn")]
+[node name="ConfigGroupIconTitle" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v" unique_id=1385987510 instance=ExtResource("17_6y0fn")]
 layout_mode = 2
 title_text = "Presets"
 icon_texture = ExtResource("18_idssk")
 
-[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v"]
+[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v" unique_id=1497376569]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -2568,41 +2568,41 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2" unique_id=757283491]
 layout_mode = 2
 
-[node name="__v" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer"]
+[node name="__v" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer" unique_id=930258084]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="AllOn" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v" instance=ExtResource("19_mfntv")]
+[node name="AllOn" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v" unique_id=772701186 instance=ExtResource("19_mfntv")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "All On"
 icon = null
 
-[node name="AllOff" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v" instance=ExtResource("19_mfntv")]
+[node name="AllOff" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v" unique_id=1309127898 instance=ExtResource("19_mfntv")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "All Off"
 icon = null
 
-[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v"]
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v" unique_id=1622014802]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v/PanelContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v/PanelContainer3" unique_id=782481384]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v/PanelContainer3/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v/PanelContainer3/MarginContainer" unique_id=564557388]
 layout_mode = 2
 
-[node name="InfoText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v/PanelContainer3/MarginContainer/VBoxContainer"]
+[node name="InfoText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelCharSpecificInfo/__v/__v/__rock_margin2/VBoxContainer/__v/PanelContainer3/MarginContainer/VBoxContainer" unique_id=743189651]
 modulate = Color(0.8869536, 0.8869536, 0.8869536, 1)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -2619,32 +2619,32 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_5uhh2")]
+[node name="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=590256485 instance=ExtResource("7_5uhh2")]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="RockPanelValueChangers2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="RockPanelValueChangers2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2050704573]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_t684l")
 
-[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2"]
+[node name="RockBorder" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2" unique_id=235025667]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l7gs3")
 
-[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2"]
+[node name="__v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2" unique_id=900400977]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v"]
+[node name="__title_panel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v" unique_id=1293783511]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rl0i7")
 
-[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__title_panel"]
+[node name="GTitle" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__title_panel" unique_id=1131616850]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2656,19 +2656,19 @@ theme_override_font_sizes/font_size = 26
 text = "System"
 vertical_alignment = 1
 
-[node name="__space" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v"]
+[node name="__space" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v" unique_id=835783665]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="PlInput2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v" instance=ExtResource("17_6y0fn")]
+[node name="PlInput2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v" unique_id=1676600445 instance=ExtResource("17_6y0fn")]
 visible = false
 layout_mode = 2
 title_text = "System Info"
 icon_texture = ExtResource("12_utyox")
 icon_color = Color(0.8733763, 0.8733763, 0.8733763, 1)
 
-[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v"]
+[node name="__rock_margin2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v" unique_id=1508412938]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 18
@@ -2676,21 +2676,21 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 14
 
-[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2"]
+[node name="_-v" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2" unique_id=1907876767]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v"]
+[node name="__h" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v" unique_id=833795833]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h" unique_id=464834270]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 26
 theme_override_constants/v_separation = 2
 columns = 2
 
-[node name="ColumnName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer"]
+[node name="ColumnName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=505651725]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.86658764, 0.86658764, 0.86658764, 1)
@@ -2701,7 +2701,7 @@ theme_override_font_sizes/font_size = 18
 text = " Log Panel"
 vertical_alignment = 1
 
-[node name="ColumnName2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer"]
+[node name="ColumnName2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=1112636257]
 modulate = Color(0.85979897, 0.85979897, 0.85979897, 1)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -2724,7 +2724,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" instance=ExtResource("4_rl0i7")]
+[node name="LogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=1619539778 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -2740,10 +2740,10 @@ text = "All Logs"
 icon = ExtResource("10_l5o0i")
 key_panel = 10
 
-[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/LogsPanelToggler" instance=ExtResource("11_81oco")]
+[node name="CheckButtonIconResizer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/LogsPanelToggler" unique_id=970025310 instance=ExtResource("11_81oco")]
 base_scale = 1.3
 
-[node name="LogsFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer"]
+[node name="LogsFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=1668339]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2751,10 +2751,10 @@ placeholder_text = "e.g. abc, !exclude"
 script = ExtResource("19_pbvab")
 key_value_changer = 10
 
-[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/LogsFilter"]
+[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/LogsFilter" unique_id=1012261987]
 script = ExtResource("21_l3dsc")
 
-[node name="DynamicSignalInfo" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" instance=ExtResource("4_rl0i7")]
+[node name="DynamicSignalInfo" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=2047931300 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -2769,7 +2769,7 @@ text = "Signal Info"
 icon = ExtResource("9_sb2c6")
 key_panel = 12
 
-[node name="SigFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer"]
+[node name="SigFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=1998128490]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2777,10 +2777,10 @@ placeholder_text = "e.g. abc, !exclude"
 script = ExtResource("19_pbvab")
 key_value_changer = 12
 
-[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/SigFilter"]
+[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/SigFilter" unique_id=989046552]
 script = ExtResource("21_l3dsc")
 
-[node name="ErrorLogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" instance=ExtResource("4_rl0i7")]
+[node name="ErrorLogsPanelToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=1645549208 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -2794,7 +2794,7 @@ text = "Error Logs"
 icon = ExtResource("10_6ty8s")
 key_panel = 11
 
-[node name="ErrorLogsFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer"]
+[node name="ErrorLogsFilter" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer" unique_id=483173909]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2802,28 +2802,28 @@ placeholder_text = "e.g. abc, !exclude"
 script = ExtResource("19_pbvab")
 key_value_changer = 11
 
-[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/ErrorLogsFilter"]
+[node name="RegexCheck" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h/GridContainer/ErrorLogsFilter" unique_id=280131600]
 script = ExtResource("21_l3dsc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h" unique_id=1080147326]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 6
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/__h" unique_id=1130525043]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v" instance=ExtResource("7_5uhh2")]
+[node name="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v" unique_id=876080267 instance=ExtResource("7_5uhh2")]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v" unique_id=1750250018]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="ProfilerToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer" instance=ExtResource("4_rl0i7")]
+[node name="ProfilerToggler" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer" unique_id=1377032526 instance=ExtResource("4_rl0i7")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/icon_normal_color = Color(0.92768556, 0.92768556, 0.92768556, 1)
@@ -2832,23 +2832,23 @@ text = " Profiler (F3)"
 icon = ExtResource("5_r2qmd")
 key_panel = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer" unique_id=1075666092]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2qmd")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer/PanelContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer/PanelContainer3" unique_id=1233552552]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer/PanelContainer3/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer/PanelContainer3/MarginContainer" unique_id=1334712465]
 layout_mode = 2
 
-[node name="InfoText2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer"]
+[node name="InfoText2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RockPanelValueChangers2/__v/__rock_margin2/_-v/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1004286516]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.48235294)

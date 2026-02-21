@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://ypbtd7vtqh0r"]
+[gd_scene format=4 uid="uid://ypbtd7vtqh0r"]
 
 [ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="1_0ycqg"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="2_5pd7h"]
@@ -69,14 +69,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hjake")
 
-[node name="Lantern_Lamp_Splitted_003" type="MeshInstance3D"]
+[node name="Lantern_Lamp_Splitted_003" type="MeshInstance3D" unique_id=1075224569]
 transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000001, 0, 0, 0)
 layers = 256
 mesh = SubResource("ArrayMesh_etq47")
-skeleton = NodePath("")
 
-[node name="Lantern_Lamp_glass_002" type="MeshInstance3D" parent="."]
+[node name="Lantern_Lamp_glass_002" type="MeshInstance3D" parent="." unique_id=1399647560]
 layers = 256
 gi_mode = 0
 mesh = SubResource("ArrayMesh_2iuib")
-skeleton = NodePath("")

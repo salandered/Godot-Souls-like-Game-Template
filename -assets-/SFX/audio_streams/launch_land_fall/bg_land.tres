@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c8ihx4xkkeqr2"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c8ihx4xkkeqr2"]
 
 [ext_resource type="AudioStream" uid="uid://bvdjlu8ba6ks5" path="res://-assets-/SFX/sources/tom/Wood Land.wav" id="1_3o1nw"]
 

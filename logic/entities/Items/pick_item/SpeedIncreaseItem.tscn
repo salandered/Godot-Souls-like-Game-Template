@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://mfceni724tf3"]
+[gd_scene format=3 uid="uid://mfceni724tf3"]
 
 [ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_wmi63"]
 [ext_resource type="Script" uid="uid://du1cnmpn06tvg" path="res://logic/entities/Items/pick_item/speed_increase_item.gd" id="2_hmr3n"]
 [ext_resource type="Material" uid="uid://c127ydfwy13xa" path="res://-assets-/materials-shared/_shaders/pick_items/SpeedIncreaseItem_mat.tres" id="2_nlu3s"]
 
-[node name="SpeedIncreaseItem" instance=ExtResource("1_wmi63")]
+[node name="SpeedIncreaseItem" unique_id=1123253444 instance=ExtResource("1_wmi63")]
 script = ExtResource("2_hmr3n")
 
 [node name="RedSphere" parent="Visuals" index="0"]
@@ -16,6 +16,9 @@ color_multiplier = Color(0.14705494, 0.3438608, 0.15568678, 1)
 [node name="GlowLight" parent="Visuals/RedSphere" index="1"]
 light_color = Color(0.11877642, 0.35743815, 0.068236314, 1)
 shadow_opacity = 0.8
+
+[node name="AnimationPlayer" parent="Visuals/RedSphere/GlowLight" index="0"]
+autoplay = &"flicker"
 
 [node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
 light_color = Color(0.1743907, 0.29634023, 0.089703545, 1)

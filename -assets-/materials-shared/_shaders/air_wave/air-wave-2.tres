@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cjybi26n5lih0"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cjybi26n5lih0"]
 
 [ext_resource type="Shader" uid="uid://bogbp76rv44c3" path="res://-assets-/materials-shared/_shaders/air_wave/air-wave-3.gdshader" id="1_ejxhw"]
 

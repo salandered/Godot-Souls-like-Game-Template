@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cder7q45c0ofb"]
+[gd_scene format=3 uid="uid://cder7q45c0ofb"]
 
 [ext_resource type="Script" uid="uid://djgaqmwqf0dts" path="res://logic/entities/Items/door/_generic_door.gd" id="1_g0uxx"]
 [ext_resource type="ArrayMesh" uid="uid://bddnksl7drf47" path="res://-assets-/GLB-items/door/meshes/door_Cube_034.res" id="2_gx7ph"]
@@ -211,20 +211,20 @@ _data = {
 &"open_push": SubResource("Animation_qy21r")
 }
 
-[node name="BaseDoor" type="Node3D"]
+[node name="BaseDoor" type="Node3D" unique_id=310041406]
 script = ExtResource("1_g0uxx")
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=121210267]
 unique_name_in_owner = true
 
-[node name="DoorPivot" type="Marker3D" parent="Visuals"]
+[node name="DoorPivot" type="Marker3D" parent="Visuals" unique_id=909317683]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79238665, 1.8613347, -0.040587902)
 
-[node name="DoorStatic" type="StaticBody3D" parent="Visuals/DoorPivot"]
+[node name="DoorStatic" type="StaticBody3D" parent="Visuals/DoorPivot" unique_id=1096389260]
 unique_name_in_owner = true
 
-[node name="DoorMesh" type="MeshInstance3D" parent="Visuals/DoorPivot/DoorStatic"]
+[node name="DoorMesh" type="MeshInstance3D" parent="Visuals/DoorPivot/DoorStatic" unique_id=2038817055]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.79238665, -1.8613347, 0.040587902)
 layers = 128
 gi_mode = 2
@@ -233,12 +233,12 @@ skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("3_igwfv")
 surface_material_override/1 = ExtResource("4_hbl3s")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/DoorPivot/DoorStatic"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/DoorPivot/DoorStatic" unique_id=906637563]
 transform = Transform3D(-0.99993426, 0, 0.011466474, 0, 1, 0, -0.011466474, 0, -0.99993426, 0.8162807, -0.21886885, 0.040592633)
 shape = SubResource("BoxShape3D_10s4t")
 debug_color = Color(0.55, 0.33, 0, 0.7921569)
 
-[node name="CreakASP" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+[node name="CreakASP" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic" unique_id=962937635]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041616917, 0, 0.008323461)
 stream = ExtResource("5_c3tjs")
@@ -248,7 +248,7 @@ max_db = -1.0
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="MetalASP" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+[node name="MetalASP" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic" unique_id=1558209725]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5053538, -0.5177069, 0.1835797)
 stream = ExtResource("6_446hs")
@@ -257,7 +257,7 @@ max_db = -1.0
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="WoodASP1" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+[node name="WoodASP1" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic" unique_id=745606426]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, 1.3192141, 0.067983985, 0.039561287)
 stream = ExtResource("7_xvi0d")
@@ -268,7 +268,7 @@ max_distance = 10.0
 max_polyphony = 2
 bus = &"game_SFX"
 
-[node name="WoodASP2" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic"]
+[node name="WoodASP2" type="AudioStreamPlayer3D" parent="Visuals/DoorPivot/DoorStatic" unique_id=254220577]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, 1.3192141, 0.067983985, 0.039561287)
 stream = ExtResource("7_xvi0d")
@@ -279,26 +279,24 @@ max_distance = 10.0
 max_polyphony = 2
 bus = &"game_SFX"
 
-[node name="__dev_remote_csg" type="RemoteTransform3D" parent="Visuals/DoorPivot"]
+[node name="__dev_remote_csg" type="RemoteTransform3D" parent="Visuals/DoorPivot" unique_id=965565382]
 remote_path = NodePath("../../../__csg_pivot")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xlf0u")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1064990209]
+libraries/ = SubResource("AnimationLibrary_xlf0u")
 
-[node name="dev_cam" type="Camera3D" parent="."]
+[node name="dev_cam" type="Camera3D" parent="." unique_id=688193812]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.94336176, 0.33176595, 0, -0.33176595, 0.94336176, 0, 2.733789, 2.5522053)
 current = true
 
-[node name="InteractArea" parent="." instance=ExtResource("8_fc0ar")]
+[node name="InteractArea" parent="." unique_id=1116148618 instance=ExtResource("8_fc0ar")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3363092, 0)
 label_text = "Press E to open"
 label_y_offset = 0.6
 
-[node name="__csg_pivot" type="CSGCylinder3D" parent="."]
+[node name="__csg_pivot" type="CSGCylinder3D" parent="." unique_id=1411475757]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79238665, 1.8613347, -0.040587902)
 material_override = ExtResource("8_gx7ph")
@@ -306,7 +304,7 @@ radius = 0.07080078
 height = 0.7890625
 sides = 6
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=855108397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3363092, 0)
 remote_path = NodePath("../InteractArea")
 update_scale = false

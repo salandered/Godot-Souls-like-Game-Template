@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://dnqvc318bissn"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dnqvc318bissn"]
 
 [ext_resource type="AudioStream" uid="uid://dsiirkuy2swh0" path="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Throw_01_whoosh.wav" id="1_bxixy"]
 [ext_resource type="AudioStream" uid="uid://dib3gxa3m87ck" path="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Throw_02_whoosh.wav" id="2_8ywdo"]

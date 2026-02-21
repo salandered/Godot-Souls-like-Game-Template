@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dn2fgny8wh1e"]
+[gd_scene format=3 uid="uid://dn2fgny8wh1e"]
 
 [ext_resource type="Script" uid="uid://dl0gauwff0buf" path="res://logic/x_dev_systems/ui_overlay_panels/fancy_cam_panel/global_ui_fancy_cam_panel.gd" id="1_bhnft"]
 [ext_resource type="Script" uid="uid://cbvo5ekasv1w0" path="res://logic/x_dev_systems/overlay_panel_manager/fancy_cam_panel_manager.gd" id="1_t54kf"]
@@ -34,30 +34,30 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="GlobalUIFancyCamPanel" type="MarginContainer"]
+[node name="GlobalUIFancyCamPanel" type="MarginContainer" unique_id=324286717]
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 script = ExtResource("1_bhnft")
 
-[node name="DebugFancyCamPanelManager" type="Node" parent="."]
+[node name="DebugFancyCamPanelManager" type="Node" parent="." unique_id=362045657]
 unique_name_in_owner = true
 script = ExtResource("1_t54kf")
 
-[node name="CameraMetricsGridDistributor" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("5_g1iam")]
+[node name="CameraMetricsGridDistributor" parent="." unique_id=2025625873 node_paths=PackedStringArray("grid") instance=ExtResource("5_g1iam")]
 unique_name_in_owner = true
 grid = NodePath("../VBoxContainer/CameraMetricsPanel/__panel/__m/__v/CameraMetricsGrid")
 
-[node name="CameraMetricsGridManager" type="Node" parent="." node_paths=PackedStringArray("metrics_grid", "ui_container")]
+[node name="CameraMetricsGridManager" type="Node" parent="." unique_id=1480379116 node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
 script = ExtResource("6_8rp1y")
 metrics_grid = NodePath("../CameraMetricsGridDistributor")
 ui_container = NodePath("../VBoxContainer/CameraMetricsPanel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1132790509]
 layout_mode = 2
 
-[node name="ControlsInfoPanel" type="PanelContainer" parent="VBoxContainer"]
+[node name="ControlsInfoPanel" type="PanelContainer" parent="VBoxContainer" unique_id=590768449]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -65,14 +65,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ifxon")
 
-[node name="__m" type="MarginContainer" parent="VBoxContainer/ControlsInfoPanel"]
+[node name="__m" type="MarginContainer" parent="VBoxContainer/ControlsInfoPanel" unique_id=1743062074]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
-[node name="DebugFancyCamInfoPanel" type="RichTextLabel" parent="VBoxContainer/ControlsInfoPanel/__m"]
+[node name="DebugFancyCamInfoPanel" type="RichTextLabel" parent="VBoxContainer/ControlsInfoPanel/__m" unique_id=468489882]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/paragraph_separation = 2
@@ -88,36 +88,36 @@ scroll_following = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="CameraMetricsPanel" type="MarginContainer" parent="VBoxContainer"]
+[node name="CameraMetricsPanel" type="MarginContainer" parent="VBoxContainer" unique_id=1942921784]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 
-[node name="__panel" type="PanelContainer" parent="VBoxContainer/CameraMetricsPanel"]
+[node name="__panel" type="PanelContainer" parent="VBoxContainer/CameraMetricsPanel" unique_id=1142590908]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_x2irt")
 
-[node name="__m" type="MarginContainer" parent="VBoxContainer/CameraMetricsPanel/__panel"]
+[node name="__m" type="MarginContainer" parent="VBoxContainer/CameraMetricsPanel/__panel" unique_id=880101101]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="__v" type="VBoxContainer" parent="VBoxContainer/CameraMetricsPanel/__panel/__m"]
+[node name="__v" type="VBoxContainer" parent="VBoxContainer/CameraMetricsPanel/__panel/__m" unique_id=1179630738]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v"]
+[node name="Label2" type="Label" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" unique_id=638158839]
 modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_kgmie")
 theme_override_font_sizes/font_size = 22
 text = "Camera metrics"
 
-[node name="HSeparator" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" instance=ExtResource("4_qqiq0")]
+[node name="HSeparator" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" unique_id=810332443 instance=ExtResource("4_qqiq0")]
 layout_mode = 2
 
-[node name="CameraMetricsGrid" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" instance=ExtResource("7_x2irt")]
+[node name="CameraMetricsGrid" parent="VBoxContainer/CameraMetricsPanel/__panel/__m/__v" unique_id=1664677770 instance=ExtResource("7_x2irt")]
 unique_name_in_owner = true
 layout_mode = 2

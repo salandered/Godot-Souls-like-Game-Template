@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://8kw40wxpqewf"]
+[gd_scene format=4 uid="uid://8kw40wxpqewf"]
 
 [ext_resource type="Material" uid="uid://d1rn6l0bv3jxc" path="res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_Reimp.tres" id="1_u0ulr"]
 [ext_resource type="PackedScene" uid="uid://c7vyqnm6vpnbx" path="res://logic/c_systems/influence_parent/break_static_parent/BreakStaticParent.tscn" id="2_u0ulr"]
@@ -202,25 +202,24 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3v43j")
 
-[node name="columns_WRAPPER" type="Node3D"]
+[node name="columns_WRAPPER" type="Node3D" unique_id=1303552395]
 
-[node name="__inheritence_cleared" type="Node" parent="."]
+[node name="__inheritence_cleared" type="Node" parent="." unique_id=1789502855]
 
-[node name="columns" type="Node3D" parent="."]
+[node name="columns" type="Node3D" parent="." unique_id=1293715508]
 
-[node name="column" type="StaticBody3D" parent="columns"]
+[node name="column" type="StaticBody3D" parent="columns" unique_id=2119204697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2212, 2.831244, 28.165173)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column" unique_id=798620041]
 shape = SubResource("ConcavePolygonShape3D_pscnb")
 
-[node name="column_visuals" type="MeshInstance3D" parent="columns/column"]
+[node name="column_visuals" type="MeshInstance3D" parent="columns/column" unique_id=1503242919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19391918, 1.9073486e-06)
 layers = 128
 mesh = SubResource("ArrayMesh_wxc2u")
-skeleton = NodePath("")
 
-[node name="BreakStaticParent0" parent="columns/column" instance=ExtResource("2_u0ulr")]
+[node name="BreakStaticParent0" parent="columns/column" unique_id=841688255 instance=ExtResource("2_u0ulr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109695435, 0, 0)
 shattered_column_scene = ExtResource("3_joo4i")
 
@@ -228,19 +227,18 @@ shattered_column_scene = ExtResource("3_joo4i")
 area_capsule_radius = 1.05
 area_capsule_height = 4.5
 
-[node name="column_001" type="StaticBody3D" parent="columns"]
+[node name="column_001" type="StaticBody3D" parent="columns" unique_id=196417488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.689964, 2.585049, 28.262192)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_001"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_001" unique_id=1122450203]
 shape = SubResource("ConcavePolygonShape3D_yy50t")
 
-[node name="column_001_visuals" type="MeshInstance3D" parent="columns/column_001"]
+[node name="column_001_visuals" type="MeshInstance3D" parent="columns/column_001" unique_id=1747895351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26366496, 1.9073486e-06)
 layers = 128
 mesh = SubResource("ArrayMesh_onbhe")
-skeleton = NodePath("")
 
-[node name="BreakStaticParent1" parent="columns/column_001" instance=ExtResource("2_u0ulr")]
+[node name="BreakStaticParent1" parent="columns/column_001" unique_id=1064011348 instance=ExtResource("2_u0ulr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.101364136, 0, 0)
 shattered_column_scene = ExtResource("3_joo4i")
 
@@ -248,22 +246,21 @@ shattered_column_scene = ExtResource("3_joo4i")
 area_capsule_radius = 1.05
 area_capsule_height = 4.5
 
-[node name="column_002" parent="columns" instance=ExtResource("4_44piw")]
+[node name="column_002" parent="columns" unique_id=1948994596 instance=ExtResource("4_44piw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2212, 2.7614982, 16.570322)
 
-[node name="column_003" type="StaticBody3D" parent="columns"]
+[node name="column_003" type="StaticBody3D" parent="columns" unique_id=1297030360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.705204, 2.761499, 16.570322)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_003"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_003" unique_id=1968955884]
 shape = SubResource("ConcavePolygonShape3D_q0gqt")
 
-[node name="column_003_visuals" type="MeshInstance3D" parent="columns/column_003"]
+[node name="column_003_visuals" type="MeshInstance3D" parent="columns/column_003" unique_id=1969826729]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2636652, 0)
 layers = 128
 mesh = SubResource("ArrayMesh_785ds")
-skeleton = NodePath("")
 
-[node name="BreakStaticParent3" parent="columns/column_003" instance=ExtResource("2_u0ulr")]
+[node name="BreakStaticParent3" parent="columns/column_003" unique_id=1971204605 instance=ExtResource("2_u0ulr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10203934, 0, 0)
 shattered_column_scene = ExtResource("3_joo4i")
 
@@ -271,19 +268,18 @@ shattered_column_scene = ExtResource("3_joo4i")
 area_capsule_radius = 1.05
 area_capsule_height = 4.5
 
-[node name="column_004" type="StaticBody3D" parent="columns"]
+[node name="column_004" type="StaticBody3D" parent="columns" unique_id=1084592064]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.507433, 2.5850494, 28.262194)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_004"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_004" unique_id=1026592189]
 shape = SubResource("ConcavePolygonShape3D_cf7mu")
 
-[node name="column_004_visuals" type="MeshInstance3D" parent="columns/column_004"]
+[node name="column_004_visuals" type="MeshInstance3D" parent="columns/column_004" unique_id=1650448359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0.26366496, 0)
 layers = 128
 mesh = SubResource("ArrayMesh_7epfn")
-skeleton = NodePath("")
 
-[node name="BreakStaticParent4" parent="columns/column_004" instance=ExtResource("2_u0ulr")]
+[node name="BreakStaticParent4" parent="columns/column_004" unique_id=1547084734 instance=ExtResource("2_u0ulr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116802216, 0, 0)
 shattered_column_scene = ExtResource("3_joo4i")
 
@@ -291,19 +287,18 @@ shattered_column_scene = ExtResource("3_joo4i")
 area_capsule_radius = 1.05
 area_capsule_height = 4.5
 
-[node name="column_005" type="StaticBody3D" parent="columns"]
+[node name="column_005" type="StaticBody3D" parent="columns" unique_id=1309805774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.934649, 2.7615001, 16.570322)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_005"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="columns/column_005" unique_id=1085190296]
 shape = SubResource("ConcavePolygonShape3D_qlffc")
 
-[node name="column_005_visuals" type="MeshInstance3D" parent="columns/column_005"]
+[node name="column_005_visuals" type="MeshInstance3D" parent="columns/column_005" unique_id=744809756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26366496, 0)
 layers = 128
 mesh = SubResource("ArrayMesh_kv6qr")
-skeleton = NodePath("")
 
-[node name="BreakStaticParent5" parent="columns/column_005" instance=ExtResource("2_u0ulr")]
+[node name="BreakStaticParent5" parent="columns/column_005" unique_id=1289782268 instance=ExtResource("2_u0ulr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09984398, 0, 0)
 shattered_column_scene = ExtResource("3_joo4i")
 

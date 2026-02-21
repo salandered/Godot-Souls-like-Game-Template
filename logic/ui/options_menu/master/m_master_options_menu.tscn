@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvwl11s2p0hd"]
+[gd_scene format=3 uid="uid://bvwl11s2p0hd"]
 
 [ext_resource type="Script" uid="uid://dl3boenu66g5j" path="res://logic/ui/options_menu/master/m_master_options_menu.gd" id="1_nfbal"]
 
-[node name="MasterOptionsMenu" type="Control"]
+[node name="MasterOptionsMenu" type="Control" unique_id=43749728]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_nfbal")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1272217941]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

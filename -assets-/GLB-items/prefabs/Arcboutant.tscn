@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://x7owdkpe4rdk"]
+[gd_scene format=4 uid="uid://x7owdkpe4rdk"]
 
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="1_iah6c"]
 
@@ -40,13 +40,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pc8vd")
 
-[node name="Arcbutan" type="StaticBody3D"]
+[node name="Arcbutan" type="StaticBody3D" unique_id=1454317300]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=909701254]
 shape = SubResource("ConvexPolygonShape3D_5047m")
 
-[node name="lincoln__003" type="MeshInstance3D" parent="."]
+[node name="lincoln__003" type="MeshInstance3D" parent="." unique_id=907772144]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 layers = 17
 mesh = SubResource("ArrayMesh_ja2ja")
-skeleton = NodePath("")

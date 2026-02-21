@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c46lxtwjdwf8s"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c46lxtwjdwf8s"]
 
 [ext_resource type="AudioStream" uid="uid://dfd3c0jmfbxqo" path="res://-assets-/SFX/sources/freesound_cc0/krok_lever.wav" id="1_ysqoc"]
 

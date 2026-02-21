@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0jvin82yypck"]
+[gd_scene format=3 uid="uid://d0jvin82yypck"]
 
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="2_2vggx"]
 [ext_resource type="Script" uid="uid://dwa0f2vkbmcfk" path="res://logic/ui/credits/credits/m_credits.gd" id="2_w4uay"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_73oxe"]
 
-[node name="Credits" type="Control"]
+[node name="Credits" type="Control" unique_id=1531925628]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_w4uay")
 
-[node name="CreditsLabel" type="RichTextLabel" parent="."]
+[node name="CreditsLabel" type="RichTextLabel" parent="." unique_id=503215116]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -211,9 +211,19 @@ Notes: Used in tracks: Siren Tarot.
 
 
 [b][font_size=24]Yrsa font[/font_size][/b]
-Link: [url=https://github.com/rosettatype/yrsa-rasa/]github.com/rosettatype/yrsa-rasa/[/url]
+Link: https://github.com/rosettatype/yrsa-rasa/
 License: SIL Open Font License 1.1
 Note: Used for the game UI
+
+[b][font_size=24]Noto sans font font[/font_size][/b]
+Link: https://github.com/notofonts/latin-greek-cyrillic
+License: SIL Open Font License 1.1
+Note: Used for debugging tools
+
+[b][font_size=24]JetBrains Mono[/font_size][/b]
+Link: https://github.com/JetBrains/JetBrainsMono
+License: SIL Open Font License 1.1
+Note: Used for debugging tools
 
 
 [b][font_size=24]Godot Engine Logo[/font_size][/b]

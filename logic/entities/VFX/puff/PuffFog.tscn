@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://ba71cpxy8vbng"]
+[gd_scene format=4 uid="uid://ba71cpxy8vbng"]
 
 [ext_resource type="Script" uid="uid://b1hatdvwv0m3" path="res://logic/entities/VFX/puff/puff_fog.gd" id="1_gsaac"]
 [ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/_shaders/puff/SmokePuff.png" id="2_tiixx"]
@@ -104,11 +104,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_s18qp")
 
-[node name="PuffFog" type="Node3D"]
+[node name="PuffFog" type="Node3D" unique_id=258155897]
 script = ExtResource("1_gsaac")
 particles_amount = 6
 
-[node name="PuffFogParticles" type="CPUParticles3D" parent="."]
+[node name="PuffFogParticles" type="CPUParticles3D" parent="." unique_id=2115982101]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_83p6s")
 cast_shadow = 0
@@ -127,13 +127,12 @@ scale_amount_max = 1.05
 scale_amount_curve = ExtResource("4_ako0d")
 color_ramp = ExtResource("4_bx3y5")
 
-[node name="test_visuals" type="Node3D" parent="."]
+[node name="test_visuals" type="Node3D" parent="." unique_id=1500663849]
 unique_name_in_owner = true
 
-[node name="test_visual" type="MeshInstance3D" parent="test_visuals"]
+[node name="test_visual" type="MeshInstance3D" parent="test_visuals" unique_id=61436506]
 unique_name_in_owner = true
 transform = Transform3D(2.0089822, 0, 0, 0, 2.0089822, 0, 0, 0, 2.0089822, 1.4071951, -0.45511734, 1.7227342)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_7spk1")
-skeleton = NodePath("")

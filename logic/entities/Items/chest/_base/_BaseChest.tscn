@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://ffqa0ik0plbe"]
+[gd_scene format=4 uid="uid://ffqa0ik0plbe"]
 
 [ext_resource type="Script" path="res://logic/entities/Items/chest/_base/_generic_chest.gd" id="1_fu8jp"]
 [ext_resource type="ArrayMesh" uid="uid://by3rdfdkynn6m" path="res://-assets-/GLB-items/chest health/meshes/health chest_Cube_042.res" id="4_aiw8g"]
@@ -220,30 +220,30 @@ _data = {
 &"open": SubResource("Animation_wbuji")
 }
 
-[node name="BaseChest" type="Node3D"]
+[node name="BaseChest" type="Node3D" unique_id=770476701]
 script = ExtResource("1_fu8jp")
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=1127008791]
 
-[node name="LidPivot" type="Marker3D" parent="Visuals"]
+[node name="LidPivot" type="Marker3D" parent="Visuals" unique_id=780769632]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59415305, -0.40114304)
 
-[node name="FastenersPivot" type="Marker3D" parent="Visuals/LidPivot"]
+[node name="FastenersPivot" type="Marker3D" parent="Visuals/LidPivot" unique_id=1741603679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.091192424, 0.5714147)
 
-[node name="ChestFasteners" type="MeshInstance3D" parent="Visuals/LidPivot/FastenersPivot"]
+[node name="ChestFasteners" type="MeshInstance3D" parent="Visuals/LidPivot/FastenersPivot" unique_id=306879908]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6853455, -0.17027166)
 layers = 128
 mesh = ExtResource("4_aiw8g")
 
-[node name="MetalASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/FastenersPivot/ChestFasteners"]
+[node name="MetalASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/FastenersPivot/ChestFasteners" unique_id=808100033]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 unit_size = 6.0
 max_db = -2.0
 bus = &"game_SFX"
 
-[node name="CreakASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/FastenersPivot/ChestFasteners"]
+[node name="CreakASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/FastenersPivot/ChestFasteners" unique_id=1129721143]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.297213, -0.20103118)
 stream = ExtResource("7_m0yqf")
@@ -251,69 +251,67 @@ unit_size = 6.0
 max_db = -3.0
 bus = &"game_SFX"
 
-[node name="ChestLid" type="MeshInstance3D" parent="Visuals/LidPivot"]
+[node name="ChestLid" type="MeshInstance3D" parent="Visuals/LidPivot" unique_id=279129403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59415305, 0.40114304)
 layers = 128
 mesh = SubResource("ArrayMesh_41nsj")
 
-[node name="WoodASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/ChestLid"]
+[node name="WoodASP" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/ChestLid" unique_id=2006209008]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, -0.0025598686, 0.06798403, -0.123037875)
 stream = ExtResource("4_m0yqf")
 max_db = 0.0
 bus = &"game_SFX"
 
-[node name="WoodASP2" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/ChestLid"]
+[node name="WoodASP2" type="AudioStreamPlayer3D" parent="Visuals/LidPivot/ChestLid" unique_id=1314054925]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.50163156, -0.8650814, 0, 0.8650814, -0.50163156, -0.0025598686, 0.06798403, -0.123037875)
 stream = ExtResource("7_r6xty")
 max_db = -2.0
 bus = &"game_SFX"
 
-[node name="metal things" type="MeshInstance3D" parent="Visuals/LidPivot/ChestLid"]
+[node name="metal things" type="MeshInstance3D" parent="Visuals/LidPivot/ChestLid" unique_id=1223237223]
 layers = 256
 cast_shadow = 0
 mesh = ExtResource("7_41nsj")
 
-[node name="ChessMain" type="StaticBody3D" parent="Visuals"]
+[node name="ChessMain" type="StaticBody3D" parent="Visuals" unique_id=1648672996]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/ChessMain"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/ChessMain" unique_id=478099995]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.30599675, 0)
 shape = SubResource("CapsuleShape3D_aiw8g")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
-[node name="ChestMain" type="MeshInstance3D" parent="Visuals/ChessMain"]
+[node name="ChestMain" type="MeshInstance3D" parent="Visuals/ChessMain" unique_id=970195091]
 material_override = ExtResource("4_fu8jp")
 mesh = ExtResource("6_fu8jp")
 
-[node name="metal things" type="MeshInstance3D" parent="Visuals/ChessMain/ChestMain"]
+[node name="metal things" type="MeshInstance3D" parent="Visuals/ChessMain/ChestMain" unique_id=1372549152]
 layers = 256
 cast_shadow = 0
 mesh = ExtResource("8_aiw8g")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_8er17")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2029833621]
+libraries/ = SubResource("AnimationLibrary_8er17")
 
-[node name="dev_cam" type="Camera3D" parent="."]
+[node name="dev_cam" type="Camera3D" parent="." unique_id=810216823]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.6280717, 0.77815545, 0, -0.77815545, 0.6280717, 0, 1.209666, 0.9732656)
 current = true
 
-[node name="ItemPivot" type="Marker3D" parent="."]
+[node name="ItemPivot" type="Marker3D" parent="." unique_id=526513108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26125157, 0)
 
-[node name="InteractArea" parent="." instance=ExtResource("10_qmrhd")]
+[node name="InteractArea" parent="." unique_id=965031315 instance=ExtResource("10_qmrhd")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24636853, 0)
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="InteractArea"]
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="InteractArea" unique_id=1312984992]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3382045, 0)
 aabb = AABB(-1.2554799, -1, -1, 2.5109599, 2, 2)
 enable_node_path = NodePath("")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=326104372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24636853, 0)
 remote_path = NodePath("../InteractArea")
 update_scale = false

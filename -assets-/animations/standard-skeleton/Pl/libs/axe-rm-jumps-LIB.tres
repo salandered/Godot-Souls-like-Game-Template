@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=2 format=3 uid="uid://cd0tka5e4cf03"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://cd0tka5e4cf03"]
 
 [sub_resource type="Animation" id="Animation_8twvd"]
 resource_name = "LL jump running"

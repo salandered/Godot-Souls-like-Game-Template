@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=20 format=3 uid="uid://dp5v81jmjawev"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dp5v81jmjawev"]
 
 [ext_resource type="AudioStream" uid="uid://d3ahq7du2874o" path="res://-assets-/SFX/audio_streams/launch_land_fall/concrete/concr_land.tres" id="1_bubdm"]
 [ext_resource type="AudioStream" uid="uid://qufmydm4eeq4" path="res://-assets-/SFX/audio_streams/whoosh/weapon_whoosh.tres" id="2_0node"]

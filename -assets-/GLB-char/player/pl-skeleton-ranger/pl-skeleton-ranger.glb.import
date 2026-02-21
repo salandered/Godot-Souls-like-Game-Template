@@ -39,6 +39,11 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
+"Bottom": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/kaan/new_outfit/Bottom.tres",
+"use_external/path": "uid://c2cpvmxbjx5km"
+},
 "I_Fabric029_2d1K-JPG": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://-assets-/materials-shared/fabric/I_fabric029/I_Fabric029_2d1K-JPG_Reimp.tres",
@@ -96,8 +101,8 @@ _subresources={
 },
 "material_0.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://-assets-/materials-shared/_unsorted/material_0.001.tres",
-"use_external/path": "uid://b24hnq4jdggra"
+"use_external/fallback_path": "res://-assets-/materials-shared/__pix-pal/PixPalMat.tres",
+"use_external/path": "uid://bfpcavnflxys1"
 },
 "skin.001": {
 "use_external/enabled": true,
@@ -114,15 +119,6 @@ _subresources={
 "save_to_file/enabled": false,
 "save_to_file/fallback_path": "res://-assets-/GLB-char/player/pl-skeleton-ranger/separated-meshes/RIG_Cloth_Cloth_0_004.res",
 "save_to_file/path": "uid://bk8cirmmy8r76"
-},
-"RIG_Female_Ranger_Body": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 20.0,
-"save_to_file/enabled": false,
-"save_to_file/fallback_path": "res://-assets-/GLB-char/player/pl-skeleton-ranger/separated-meshes/RIG_Female_Ranger_Body.res",
-"save_to_file/path": "uid://c0o0sdl8d7sru"
 },
 "RIG_Male_Ranger_Feet_Boots": {
 "generate/lightmap_uv": 0,
@@ -196,15 +192,6 @@ _subresources={
 "save_to_file/fallback_path": "res://-assets-/GLB-char/player/pl-skeleton-ranger/separated-meshes/RIG_Object_7_024.res",
 "save_to_file/path": "uid://edvi2a08rx"
 },
-"RIG_Object_7_025": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 20.0,
-"save_to_file/enabled": false,
-"save_to_file/fallback_path": "res://-assets-/GLB-char/player/pl-skeleton-ranger/separated-meshes/RIG_Object_7_025.res",
-"save_to_file/path": "uid://buxh1goy2p23d"
-},
 "RIG_Object_7_026": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -270,9 +257,6 @@ _subresources={
 "mesh_instance/layers": 64
 },
 "PATH:Armature/Skeleton3D/gold ring_022": {
-"mesh_instance/layers": 64
-},
-"PATH:Armature/Skeleton3D/gold ring_023": {
 "mesh_instance/layers": 64
 },
 "PATH:Armature/Skeleton3D/gold ring_024": {

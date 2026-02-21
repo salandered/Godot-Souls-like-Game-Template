@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dkav81mtgsiib"]
+[gd_scene format=4 uid="uid://dkav81mtgsiib"]
 
 [ext_resource type="PackedScene" uid="uid://d3tc5aaqi8k6q" path="res://logic/entities/VFX/lights/_base_omni/BaseOmni.tscn" id="1_jro0j"]
 [ext_resource type="Script" uid="uid://dg2vjew5w2ih8" path="res://logic/entities/VFX/lights/omni/flicker_omni.gd" id="2_auf42"]
@@ -95,7 +95,7 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_auf42"),
 &"flicker": SubResource("Animation_ij60g"),
-&"flicker_fuck": SubResource("Animation_dephg")
+&"flicker_2": SubResource("Animation_dephg")
 }
 
 [sub_resource type="Animation" id="Animation_bcn8a"]
@@ -212,7 +212,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_gxo4b")
 
-[node name="FlickerOmni" instance=ExtResource("1_jro0j")]
+[node name="FlickerOmni" unique_id=1400871837 instance=ExtResource("1_jro0j")]
 script = ExtResource("2_auf42")
 speed_scale = 1.0
 play_animation = true
@@ -226,29 +226,25 @@ apply_auto_vose_abb_now = false
 _animated_energy_strength = 6.0
 _animated_range_strength = 2.387
 
-[node name="OmniLight3D" parent="." index="0"]
+[node name="OmniLight3D" parent="." index="0" unique_id=1617374791]
 light_energy = 22.8
 omni_range = 8.5932
 
-[node name="FlickerAnimator" type="AnimationPlayer" parent="." index="2"]
+[node name="FlickerAnimator" type="AnimationPlayer" parent="." index="2" unique_id=1481799654]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_dephg")
-}
+libraries/ = SubResource("AnimationLibrary_dephg")
 
-[node name="MoveAnimator" type="AnimationPlayer" parent="." index="3"]
+[node name="MoveAnimator" type="AnimationPlayer" parent="." index="3" unique_id=1380944074]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_04rcq")
-}
+libraries/ = SubResource("AnimationLibrary_04rcq")
 
-[node name="test_visual_base" parent="test_visuals_base" index="0"]
+[node name="test_visual_base" parent="test_visuals_base" parent_id_path=PackedInt32Array(523603604) index="0" unique_id=1411419840]
 mesh = SubResource("ArrayMesh_818gi")
 
-[node name="test_visual_base2" parent="test_visuals_base" index="1"]
+[node name="test_visual_base2" parent="test_visuals_base" parent_id_path=PackedInt32Array(523603604) index="1" unique_id=628679958]
 mesh = SubResource("ArrayMesh_818gi")
 
-[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="." index="5"]
+[node name="VOSE3D" type="VisibleOnScreenEnabler3D" parent="." index="5" unique_id=157547190]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030094266, 0, 0)
 aabb = AABB(-4.6, -4.6, -4.6, 9.2, 9.2, 9.2)

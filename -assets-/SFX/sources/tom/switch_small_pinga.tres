@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://dgcim7fnpxwu8"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dgcim7fnpxwu8"]
 
 [ext_resource type="AudioStream" uid="uid://btoaj7ib0eulf" path="res://-assets-/SFX/sources/tom/Sword Attack 3.wav" id="1_68lrr"]
 

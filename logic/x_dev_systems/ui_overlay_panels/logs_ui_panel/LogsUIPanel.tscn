@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4mb7reu07in8"]
+[gd_scene format=3 uid="uid://d4mb7reu07in8"]
 
 [ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="1_35p15"]
 [ext_resource type="Script" uid="uid://cyh1lalur5xef" path="res://logic/x_dev_systems/ui_overlay_panels/logs_ui_panel/logs_ui_panel.gd" id="1_48uw4"]
@@ -29,10 +29,10 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="LogsPanel" type="VBoxContainer"]
+[node name="LogsPanel" type="VBoxContainer" unique_id=1661747351]
 script = ExtResource("1_48uw4")
 
-[node name="SignalInfoPanel" type="MarginContainer" parent="."]
+[node name="SignalInfoPanel" type="MarginContainer" parent="." unique_id=1134193906]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(600, 340)
@@ -40,18 +40,18 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="SignalInfoPanel"]
+[node name="PanelContainer" type="PanelContainer" parent="SignalInfoPanel" unique_id=909289857]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1_35p15")
 
-[node name="MarginContainer" type="MarginContainer" parent="SignalInfoPanel/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SignalInfoPanel/PanelContainer" unique_id=1532613493]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 8
 
-[node name="SigInfoLabel" type="RichTextLabel" parent="SignalInfoPanel/PanelContainer/MarginContainer"]
+[node name="SigInfoLabel" type="RichTextLabel" parent="SignalInfoPanel/PanelContainer/MarginContainer" unique_id=1055055999]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -84,7 +84,7 @@ scroll_active = false
 scroll_following = true
 vertical_alignment = 1
 
-[node name="AllLogsPanel" type="MarginContainer" parent="."]
+[node name="AllLogsPanel" type="MarginContainer" parent="." unique_id=1866855253]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(600, 340)
@@ -92,18 +92,18 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="AllLogsPanel"]
+[node name="PanelContainer" type="PanelContainer" parent="AllLogsPanel" unique_id=556997441]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r0oph")
 
-[node name="MarginContainer" type="MarginContainer" parent="AllLogsPanel/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="AllLogsPanel/PanelContainer" unique_id=1956273507]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 6
 
-[node name="AllLogsLabel" type="RichTextLabel" parent="AllLogsPanel/PanelContainer/MarginContainer"]
+[node name="AllLogsLabel" type="RichTextLabel" parent="AllLogsPanel/PanelContainer/MarginContainer" unique_id=1651432308]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/paragraph_separation = -2
@@ -135,7 +135,7 @@ scroll_active = false
 scroll_following = true
 vertical_alignment = 2
 
-[node name="ErrorLogsPanel" type="MarginContainer" parent="."]
+[node name="ErrorLogsPanel" type="MarginContainer" parent="." unique_id=473259644]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(600, 220)
@@ -143,18 +143,18 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="ErrorLogsPanel"]
+[node name="PanelContainer" type="PanelContainer" parent="ErrorLogsPanel" unique_id=549929787]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mcb6c")
 
-[node name="MarginContainer" type="MarginContainer" parent="ErrorLogsPanel/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ErrorLogsPanel/PanelContainer" unique_id=107192924]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 6
 
-[node name="ErrorLogsLabel" type="RichTextLabel" parent="ErrorLogsPanel/PanelContainer/MarginContainer"]
+[node name="ErrorLogsLabel" type="RichTextLabel" parent="ErrorLogsPanel/PanelContainer/MarginContainer" unique_id=783022569]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/paragraph_separation = -2

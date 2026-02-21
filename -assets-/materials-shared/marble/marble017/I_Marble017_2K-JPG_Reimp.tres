@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cdvhuelphoxyh"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cdvhuelphoxyh"]
 
 [ext_resource type="Texture2D" uid="uid://dy2sw0x7ytjdn" path="res://-assets-/materials-shared/marble/marble017/lever_Marble017_2K-JPG_Color.jpg" id="1_vsg2m"]
 [ext_resource type="Texture2D" uid="uid://fx0i7e885ons" path="res://-assets-/materials-shared/marble/marble017/lever_Marble017_2K-JPG_Roughness.jpg" id="2_mdon3"]

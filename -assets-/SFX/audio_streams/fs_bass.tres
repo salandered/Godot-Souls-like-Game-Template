@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://ck2lmegc237d0"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://ck2lmegc237d0"]
 
 [ext_resource type="AudioStream" uid="uid://0mweyjo5m188" path="res://-assets-/SFX/sources/kenny/impactWood_heavy_003.ogg" id="1_rv3pg"]
 [ext_resource type="AudioStream" uid="uid://brqea6kcrah65" path="res://-assets-/SFX/sources/kenny/impactWood_heavy_001.ogg" id="2_borw5"]

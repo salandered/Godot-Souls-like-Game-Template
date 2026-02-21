@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=10 format=3 uid="uid://c5u7x4aoa7o4x"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://c5u7x4aoa7o4x"]
 
 [sub_resource type="Animation" id="Animation_hat1w"]
 resource_name = "B-Fall-loop-HOK"

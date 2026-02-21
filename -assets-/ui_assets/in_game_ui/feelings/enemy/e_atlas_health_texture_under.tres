@@ -1,4 +1,4 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dvxcbl864pd1u"]
+[gd_resource type="AtlasTexture" format=3 uid="uid://dvxcbl864pd1u"]
 
 [ext_resource type="Texture2D" uid="uid://ceq6kw701fxl4" path="res://-assets-/ui_assets/images/big/red_danger_image.png" id="1_yb36p"]
 

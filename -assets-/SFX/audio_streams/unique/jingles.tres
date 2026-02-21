@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=3 format=3 uid="uid://c130xlrvi8scs"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c130xlrvi8scs"]
 
 [ext_resource type="AudioStream" uid="uid://dnt6wgrhs0bip" path="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Key_Take_01.wav" id="1_bduv1"]
 [ext_resource type="AudioStream" uid="uid://2qw2g1sbl66r" path="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Key_Take_03.wav" id="2_w357n"]

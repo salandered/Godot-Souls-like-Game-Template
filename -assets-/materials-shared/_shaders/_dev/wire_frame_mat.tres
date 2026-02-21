@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c0ppm6u2ki7fp"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c0ppm6u2ki7fp"]
 
 [ext_resource type="Shader" uid="uid://cmpsaievjrnaj" path="res://-assets-/materials-shared/_shaders/_dev/wireframe.gdshader" id="1_icik0"]
 

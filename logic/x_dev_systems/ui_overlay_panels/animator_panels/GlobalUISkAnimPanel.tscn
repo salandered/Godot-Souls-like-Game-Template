@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu21qjie1lsej"]
+[gd_scene format=3 uid="uid://bu21qjie1lsej"]
 
 [ext_resource type="Script" uid="uid://b46rhsto4pwmi" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/sk_anim_metrics_grid_manager.gd" id="3_13bar"]
 [ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="3_o558t"]
@@ -21,81 +21,81 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="GlobalUISkAnimPanel" type="MarginContainer"]
+[node name="GlobalUISkAnimPanel" type="MarginContainer" unique_id=1875363532]
 offset_right = 340.0
 offset_bottom = 61.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="MetricsGridDistributor" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("3_o558t")]
+[node name="MetricsGridDistributor" parent="." unique_id=1622377338 node_paths=PackedStringArray("grid") instance=ExtResource("3_o558t")]
 unique_name_in_owner = true
 grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer/UIMetricsGrid")
 value_label_font_size = 22
 name_label_font_size = 28
 
-[node name="MetricsGridDistributorBlendChain" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("3_o558t")]
+[node name="MetricsGridDistributorBlendChain" parent="." unique_id=1398699358 node_paths=PackedStringArray("grid") instance=ExtResource("3_o558t")]
 unique_name_in_owner = true
 grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer/UIMetricsGridBlendChain")
 value_label_font_size = 20
 name_label_font_size = 26
 
-[node name="SkAnimMetricsGridManager" type="Node" parent="." node_paths=PackedStringArray("metrics_grid", "ui_container")]
+[node name="SkAnimMetricsGridManager" type="Node" parent="." unique_id=828109018 node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
 script = ExtResource("3_13bar")
 metrics_grid = NodePath("../MetricsGridDistributor")
 ui_container = NodePath("../VBoxContainer/MetricsPanel")
 
-[node name="SkAnimMetricsGridManagerBlendChain" type="Node" parent="." node_paths=PackedStringArray("metrics_grid", "ui_container")]
+[node name="SkAnimMetricsGridManagerBlendChain" type="Node" parent="." unique_id=488349365 node_paths=PackedStringArray("metrics_grid", "ui_container")]
 unique_name_in_owner = true
 script = ExtResource("3_yhnc8")
 metrics_grid = NodePath("../MetricsGridDistributorBlendChain")
 ui_container = NodePath("../VBoxContainer/MetricsPanel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=494306404]
 layout_mode = 2
 
-[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer"]
+[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer" unique_id=1192715804]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 
-[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel"]
+[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel" unique_id=1012145341]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u1r0w")
 
-[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel"]
+[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel" unique_id=1630741573]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m"]
+[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m" unique_id=1325450659]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v"]
+[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1664080351]
 modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_ac0vq")
 theme_override_font_sizes/font_size = 22
 text = "Player Animator"
 
-[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" instance=ExtResource("8_27gpl")]
+[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1606100600 instance=ExtResource("8_27gpl")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m/__v"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1939822043]
 layout_mode = 2
 
-[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer" instance=ExtResource("5_xt1q6")]
+[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer" unique_id=563559176 instance=ExtResource("5_xt1q6")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="VSeparator2" parent="VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer" instance=ExtResource("7_jarw8")]
+[node name="VSeparator2" parent="VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer" unique_id=2140833097 instance=ExtResource("7_jarw8")]
 layout_mode = 2
 
-[node name="UIMetricsGridBlendChain" parent="VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer" instance=ExtResource("5_xt1q6")]
+[node name="UIMetricsGridBlendChain" parent="VBoxContainer/MetricsPanel/__panel/__m/__v/HBoxContainer" unique_id=91650993 instance=ExtResource("5_xt1q6")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

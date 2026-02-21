@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://ckps22kt5fds4"]
 
-[node name="BackgroundMusicPlayer" type="AudioStreamPlayer"]
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" unique_id=2003946701]
 process_mode = 3
 autoplay = true

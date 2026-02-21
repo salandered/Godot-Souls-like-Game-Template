@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=9 format=3 uid="uid://b1jhchcdia251"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://b1jhchcdia251"]
 
 [sub_resource type="Animation" id="Animation_xu0ug"]
 resource_name = "B LAND ss jump run RP"

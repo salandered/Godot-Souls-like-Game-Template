@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://v4tnxee3qucj"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://v4tnxee3qucj"]
 
 [ext_resource type="Shader" uid="uid://vgqfmf8l63h3" path="res://-assets-/materials-shared/_shaders/ui/shake_button.gdshader" id="1_xncne"]
 

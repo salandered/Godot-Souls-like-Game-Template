@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjg2if4ywp6j8"]
+[gd_scene format=3 uid="uid://cjg2if4ywp6j8"]
 
 [ext_resource type="Script" uid="uid://cu3g36kl67vg7" path="res://logic/ui/options_menu/tabs/controls/m_controls_options_menu.gd" id="2_ckbx2"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://logic/ui/ui_utils/options_nodes/m_slider_option_control.tscn" id="3_3kptd"]
 [ext_resource type="Script" uid="uid://cgvwv8js7s1jd" path="res://logic/ui/options_menu/tabs/controls/m_input_actions_list.gd" id="4_l83qi"]
 [ext_resource type="Script" uid="uid://custha7r0uoic" path="res://logic/ui/options_menu/tabs/controls/m_key_assignment_dialog.gd" id="6_a807y"]
 
-[node name="M_Controls" type="MarginContainer"]
+[node name="M_Controls" type="MarginContainer" unique_id=2115310518]
 custom_minimum_size = Vector2(305, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,14 +16,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_ckbx2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=269546834]
 layout_mode = 2
 
-[node name="MarginContainerMouse" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainerMouse" type="MarginContainer" parent="VBoxContainer" unique_id=1196401957]
 layout_mode = 2
 theme_override_constants/margin_top = 60
 
-[node name="MouseSensitivityControl" parent="VBoxContainer/MarginContainerMouse" instance=ExtResource("3_3kptd")]
+[node name="MouseSensitivityControl" parent="VBoxContainer/MarginContainerMouse" unique_id=1413039371 instance=ExtResource("3_3kptd")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -41,11 +41,11 @@ max_value = 2.0
 value = 0.25
 tick_count = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1756080677]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="M_InputActionsList" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+[node name="M_InputActionsList" type="ScrollContainer" parent="VBoxContainer/MarginContainer" unique_id=1034614784]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(560, 480)
 layout_mode = 2
@@ -54,33 +54,33 @@ follow_focus = true
 script = ExtResource("4_l83qi")
 button_minimum_size = Vector2(100, 10)
 
-[node name="ParentBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/M_InputActionsList"]
+[node name="ParentBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/M_InputActionsList" unique_id=151265818]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ActionBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/M_InputActionsList/ParentBoxContainer"]
+[node name="ActionBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/M_InputActionsList/ParentBoxContainer" unique_id=855728843]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ActionNameLabel" type="Label" parent="VBoxContainer/MarginContainer/M_InputActionsList/ParentBoxContainer/ActionBoxContainer"]
+[node name="ActionNameLabel" type="Label" parent="VBoxContainer/MarginContainer/M_InputActionsList/ParentBoxContainer/ActionBoxContainer" unique_id=1858662241]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=152520926]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="ResetButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1311900672]
 layout_mode = 2
 theme_type_variation = &"SmallButton"
 text = "Reset"
 
-[node name="KeyAssignmentDialog" type="ConfirmationDialog" parent="."]
+[node name="KeyAssignmentDialog" type="ConfirmationDialog" parent="." unique_id=958391459]
 oversampling_override = 1.0
 title = "Assign Key"
 size = Vector2i(400, 206)
@@ -90,7 +90,7 @@ dialog_text = "
 "
 script = ExtResource("6_a807y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="KeyAssignmentDialog"]
+[node name="VBoxContainer" type="VBoxContainer" parent="KeyAssignmentDialog" unique_id=344357458]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -101,13 +101,13 @@ offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InputLabel" type="Label" parent="KeyAssignmentDialog/VBoxContainer"]
+[node name="InputLabel" type="Label" parent="KeyAssignmentDialog/VBoxContainer" unique_id=1030191627]
 unique_name_in_owner = true
 layout_mode = 2
 text = "None"
 horizontal_alignment = 1
 
-[node name="InputTextEdit" type="TextEdit" parent="KeyAssignmentDialog/VBoxContainer"]
+[node name="InputTextEdit" type="TextEdit" parent="KeyAssignmentDialog/VBoxContainer" unique_id=1160105432]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -120,25 +120,25 @@ drag_and_drop_selection_enabled = false
 middle_mouse_paste_enabled = false
 caret_move_on_right_click = false
 
-[node name="DelayTimer" type="Timer" parent="KeyAssignmentDialog"]
+[node name="DelayTimer" type="Timer" parent="KeyAssignmentDialog" unique_id=1673354792]
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
 
-[node name="KeyDeletionDialog" type="ConfirmationDialog" parent="."]
+[node name="KeyDeletionDialog" type="ConfirmationDialog" parent="." unique_id=757217200]
 title = "Remove Key"
 size = Vector2i(419, 100)
 dialog_text = "Are you sure you want to remove KEY from ACTION?"
 
-[node name="OneInputMinimumDialog" type="AcceptDialog" parent="."]
+[node name="OneInputMinimumDialog" type="AcceptDialog" parent="." unique_id=184591007]
 title = "Cannot Remove"
 size = Vector2i(398, 100)
 
-[node name="AlreadyAssignedDialog" type="AcceptDialog" parent="."]
+[node name="AlreadyAssignedDialog" type="AcceptDialog" parent="." unique_id=811661807]
 title = "Already Assigned"
 size = Vector2i(398, 100)
 
-[node name="ResetConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ResetConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1477761998]
 size = Vector2i(486, 100)
 dialog_text = "Are you sure you want to reset controls back to the defaults?"
 

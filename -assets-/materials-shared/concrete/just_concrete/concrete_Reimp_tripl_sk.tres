@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bfg1q2ls5d5f4"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bfg1q2ls5d5f4"]
 
 [ext_resource type="Texture2D" uid="uid://dceeya6lxokly" path="res://-assets-/materials-shared/concrete/just_concrete/jaw_concrete01_diff.jpg" id="1_7t4rc"]
 [ext_resource type="Texture2D" uid="uid://bsh6whx1sf304" path="res://-assets-/materials-shared/concrete/just_concrete/jaw_concrete01_norm.jpg" id="2_w007f"]

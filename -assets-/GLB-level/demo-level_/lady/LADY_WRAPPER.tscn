@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcg4knuif15xl"]
+[gd_scene format=3 uid="uid://dcg4knuif15xl"]
 
 [ext_resource type="PackedScene" uid="uid://5t1oe2bcflkr" path="res://-assets-/GLB-level/demo-level_/lady/Lady.glb" id="1_y01nv"]
 [ext_resource type="AudioStream" uid="uid://bi651hoe1ib6p" path="res://-assets-/SFX/sources/400/ambient_wind_for_health_item.wav" id="2_5u74r"]
@@ -20,24 +20,24 @@ shader_parameter/specular = 0.5
 shader_parameter/roughness = 0.2
 shader_parameter/emission = Color(0, 0, 0, 1)
 
-[node name="LADY2" instance=ExtResource("1_y01nv")]
+[node name="LADY2" unique_id=1102494546 instance=ExtResource("1_y01nv")]
 
-[node name="figure of a dancer" parent="LADY" index="0"]
+[node name="figure of a dancer" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="0" unique_id=688166231]
 layers = 17
 
-[node name="Cylinder" parent="LADY/figure of a dancer" index="0"]
+[node name="Cylinder" parent="LADY/figure of a dancer" index="0" unique_id=135955186]
 layers = 17
 
-[node name="Cylinder_001" parent="LADY/figure of a dancer" index="1"]
+[node name="Cylinder_001" parent="LADY/figure of a dancer" index="1" unique_id=1292647565]
 layers = 17
 
-[node name="Cylinder_002" parent="LADY/figure of a dancer" index="2"]
+[node name="Cylinder_002" parent="LADY/figure of a dancer" index="2" unique_id=750669510]
 layers = 17
 
-[node name="Cylinder_004" parent="LADY/figure of a dancer" index="3"]
+[node name="Cylinder_004" parent="LADY/figure of a dancer" index="3" unique_id=973372299]
 layers = 17
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="LADY/figure of a dancer" index="4"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="LADY/figure of a dancer" index="4" unique_id=1631349363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.806465, 48.98455)
 stream = ExtResource("2_5u74r")
 unit_size = 40.0
@@ -47,209 +47,209 @@ max_distance = 150.0
 panning_strength = 0.7
 bus = &"game_SFX"
 
-[node name="Plane_004" parent="LADY" index="1"]
+[node name="Plane_004" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="1" unique_id=484552254]
 layers = 17
 
-[node name="Plane_002" parent="LADY" index="2"]
+[node name="Plane_002" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="2" unique_id=1433523028]
 layers = 17
 cast_shadow = 0
 
-[node name="Plane_005" parent="LADY" index="3"]
+[node name="Plane_005" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="3" unique_id=848366290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 205.85817, -118.33999, 300.2701)
 layers = 17
 material_override = SubResource("ShaderMaterial_mnnsh")
 cast_shadow = 0
 mesh = ExtResource("4_mnnsh")
 
-[node name="Post_C_3m_001" parent="LADY" index="4"]
+[node name="Post_C_3m_001" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="4" unique_id=1138866455]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_004" parent="LADY/Post_C_3m_001" index="0"]
+[node name="Post_B_Cap_004" parent="LADY/Post_C_3m_001" index="0" unique_id=636286945]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_005" parent="LADY/Post_C_3m_001" index="1"]
+[node name="Post_B_Cap_005" parent="LADY/Post_C_3m_001" index="1" unique_id=1024715218]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_C_3m" parent="LADY" index="5"]
+[node name="Post_C_3m" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="5" unique_id=1140772275]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_007" parent="LADY/Post_C_3m" index="1"]
+[node name="Post_B_Cap_007" parent="LADY/Post_C_3m" index="1" unique_id=2049977193]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_C_3m_002" parent="LADY" index="6"]
+[node name="Post_C_3m_002" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="6" unique_id=814302545]
 layers = 17
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap" parent="LADY/Post_C_3m_002" index="0"]
+[node name="Post_B_Cap" parent="LADY/Post_C_3m_002" index="0" unique_id=547964454]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_001" parent="LADY/Post_C_3m_002" index="1"]
+[node name="Post_B_Cap_001" parent="LADY/Post_C_3m_002" index="1" unique_id=1864884521]
 layers = 17
 material_override = ExtResource("5_10spf")
 
-[node name="Stair_Post_A" parent="LADY" index="7"]
+[node name="Stair_Post_A" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="7" unique_id=1344986322]
 cast_shadow = 0
 
-[node name="Plane_018" parent="LADY" index="8"]
-layers = 17
-cast_shadow = 0
-
-[node name="Post_C_3m_003" parent="LADY" index="11"]
-layers = 17
-material_override = ExtResource("5_10spf")
-
-[node name="GuardRail_C_CornerPost_B_001" parent="LADY/lady postament" index="0"]
-material_override = ExtResource("5_10spf")
-
-[node name="Ceiling_Vaulted_B" parent="LADY/lady postament" index="1"]
-layers = 17
-
-[node name="Ceiling_Vaulted_B_003" parent="LADY/lady postament" index="2"]
+[node name="Plane_018" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="8" unique_id=938248231]
 layers = 17
 cast_shadow = 0
 
-[node name="Ceiling_Vaulted_B_004" parent="LADY/lady postament" index="3"]
+[node name="Post_C_3m_003" parent="LADY" parent_id_path=PackedInt32Array(512255903) index="11" unique_id=1479559264]
+layers = 17
+material_override = ExtResource("5_10spf")
+
+[node name="GuardRail_C_CornerPost_B_001" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="0" unique_id=927157533]
+material_override = ExtResource("5_10spf")
+
+[node name="Ceiling_Vaulted_B" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="1" unique_id=691736308]
 layers = 17
 
-[node name="Ceiling_Vaulted_B_005" parent="LADY/lady postament" index="4"]
-layers = 17
-
-[node name="Ceiling_Vaulted_B_006" parent="LADY/lady postament" index="5"]
+[node name="Ceiling_Vaulted_B_003" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="2" unique_id=1561070915]
 layers = 17
 cast_shadow = 0
 
-[node name="GuardRail_C_CornerPost_B" parent="LADY/lady postament" index="6"]
+[node name="Ceiling_Vaulted_B_004" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="3" unique_id=2003351660]
+layers = 17
+
+[node name="Ceiling_Vaulted_B_005" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="4" unique_id=1866269323]
+layers = 17
+
+[node name="Ceiling_Vaulted_B_006" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="5" unique_id=798843185]
+layers = 17
+cast_shadow = 0
+
+[node name="GuardRail_C_CornerPost_B" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="6" unique_id=1127651839]
 material_override = ExtResource("5_10spf")
 
-[node name="GuardRail_C_CornerPost_B_002" parent="LADY/lady postament" index="7"]
+[node name="GuardRail_C_CornerPost_B_002" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="7" unique_id=729830580]
 material_override = ExtResource("5_10spf")
 
-[node name="Ceiling_Vaulted_B_007" parent="LADY/lady postament" index="8"]
+[node name="Ceiling_Vaulted_B_007" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="8" unique_id=686113585]
 layers = 17
 
-[node name="Ceiling_Vaulted_B_008" parent="LADY/lady postament" index="9"]
+[node name="Ceiling_Vaulted_B_008" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="9" unique_id=101321679]
 layers = 17
 
-[node name="Ceiling_Vaulted_B_009" parent="LADY/lady postament" index="10"]
+[node name="Ceiling_Vaulted_B_009" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="10" unique_id=1182370629]
 layers = 17
 
-[node name="Ambulatory_Outer_Roof_A_Side_A_001" parent="LADY/lady postament" index="11"]
+[node name="Ambulatory_Outer_Roof_A_Side_A_001" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="11" unique_id=1343655977]
 visible = false
 cast_shadow = 0
 
-[node name="Ambulatory_Outer_Roof_A_Side_A_002" parent="LADY/lady postament" index="12"]
+[node name="Ambulatory_Outer_Roof_A_Side_A_002" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="12" unique_id=872694766]
 visible = false
 
-[node name="Cube" parent="LADY/lady postament" index="13"]
+[node name="Cube" parent="LADY/lady postament" parent_id_path=PackedInt32Array(830988684) index="13" unique_id=1855041032]
 material_override = ExtResource("5_10spf")
 
-[node name="Cave_Platform_A" parent="LADY/below solid" index="0"]
+[node name="Cave_Platform_A" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="0" unique_id=1234591899]
 layers = 17
 
-[node name="Cave_Platform_A_002" parent="LADY/below solid" index="1"]
+[node name="Cave_Platform_A_002" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="1" unique_id=1339513245]
 layers = 17
 
-[node name="Cave_Platform_I_003" parent="LADY/below solid" index="2"]
+[node name="Cave_Platform_I_003" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="2" unique_id=142398283]
 layers = 17
 
-[node name="Plane_001" parent="LADY/below solid" index="3"]
+[node name="Plane_001" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="3" unique_id=1575969346]
 layers = 17
 cast_shadow = 0
 
-[node name="Plane_003" parent="LADY/below solid" index="4"]
+[node name="Plane_003" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="4" unique_id=957156184]
 layers = 17
 
-[node name="Plane_017" parent="LADY/below solid" index="6"]
+[node name="Plane_017" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="6" unique_id=1112217271]
 layers = 17
 
-[node name="Rock_005" parent="LADY/below solid" index="7"]
+[node name="Rock_005" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="7" unique_id=1932553130]
 layers = 17
 
-[node name="_Plane_015" parent="LADY/below solid" index="8"]
+[node name="_Plane_015" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="8" unique_id=1249428108]
 layers = 17
 
-[node name="Cave_Platform_I_002" parent="LADY/below solid" index="9"]
+[node name="Cave_Platform_I_002" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="9" unique_id=1442757145]
 layers = 17
 
-[node name="Rock_008" parent="LADY/below solid" index="10"]
+[node name="Rock_008" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="10" unique_id=616517490]
 layers = 17
 
-[node name="Rock_009" parent="LADY/below solid" index="11"]
+[node name="Rock_009" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="11" unique_id=1031255158]
 layers = 17
 
-[node name="Rock_010" parent="LADY/below solid" index="12"]
+[node name="Rock_010" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="12" unique_id=554410149]
 layers = 17
 
-[node name="Rock_011" parent="LADY/below solid" index="13"]
+[node name="Rock_011" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="13" unique_id=337287546]
 layers = 17
 
-[node name="old plain big_001" parent="LADY/below solid" index="14"]
+[node name="old plain big_001" parent="LADY/below solid" parent_id_path=PackedInt32Array(295476497) index="14" unique_id=1486878647]
 layers = 17
 
-[node name="Porta_MaHora_001_0_002" parent="LADY/city" index="1"]
+[node name="Porta_MaHora_001_0_002" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="1" unique_id=708599164]
 layers = 17
 
-[node name="MenlogateLow main_004" parent="LADY/city" index="2"]
+[node name="MenlogateLow main_004" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="2" unique_id=1918284340]
 layers = 17
 
-[node name="MenlogateLow main_003" parent="LADY/city" index="3"]
+[node name="MenlogateLow main_003" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="3" unique_id=394955907]
 layers = 17
 
-[node name="MenlogateLow main_002" parent="LADY/city" index="4"]
+[node name="MenlogateLow main_002" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="4" unique_id=1833320502]
 layers = 17
 
-[node name="Porta_MaHora_001_0_001" parent="LADY/city" index="5"]
+[node name="Porta_MaHora_001_0_001" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="5" unique_id=1479527175]
 layers = 17
 cast_shadow = 0
 mesh = ExtResource("5_bduqb")
 
-[node name="Porta_MaHora_001_0_003" parent="LADY/city" index="6"]
+[node name="Porta_MaHora_001_0_003" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="6" unique_id=1937041642]
 layers = 17
 cast_shadow = 0
 
-[node name="Boat_B_1" parent="LADY/city" index="8"]
+[node name="Boat_B_1" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="8" unique_id=1478265203]
 cast_shadow = 0
 
-[node name="Port_FirstAge_Level3" parent="LADY/city" index="9"]
+[node name="Port_FirstAge_Level3" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="9" unique_id=561073036]
 cast_shadow = 0
 
-[node name="WallTowers_SecondAge" parent="LADY/city" index="10"]
+[node name="WallTowers_SecondAge" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="10" unique_id=1108376464]
 layers = 17
 cast_shadow = 0
 
-[node name="Boat_B_1_001" parent="LADY/city" index="11"]
+[node name="Boat_B_1_001" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="11" unique_id=532324890]
 cast_shadow = 0
 
-[node name="Boat_B_1_002" parent="LADY/city" index="12"]
+[node name="Boat_B_1_002" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="12" unique_id=1539540128]
 cast_shadow = 0
 
-[node name="Houses_FirstAge_3_Level2" parent="LADY/city" index="13"]
+[node name="Houses_FirstAge_3_Level2" parent="LADY/city" parent_id_path=PackedInt32Array(1964174399) index="13" unique_id=1020717787]
 cast_shadow = 0
 
-[node name="Cylinder_003" parent="LADY/up solid" index="0"]
+[node name="Cylinder_003" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="0" unique_id=656687513]
 layers = 17
 mesh = ExtResource("6_xmewj")
 
-[node name="_Plane_012" parent="LADY/up solid" index="1"]
+[node name="_Plane_012" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="1" unique_id=71430098]
 layers = 17
 
-[node name="_Plane_013" parent="LADY/up solid" index="2"]
+[node name="_Plane_013" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="2" unique_id=638110982]
 layers = 17
 
-[node name="_Plane_014" parent="LADY/up solid" index="4"]
+[node name="_Plane_014" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="4" unique_id=529508683]
 layers = 17
 
-[node name="_Plane_018" parent="LADY/up solid" index="5"]
+[node name="_Plane_018" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="5" unique_id=2147032480]
 layers = 17
 
-[node name="Cylinder_006" parent="LADY/up solid" index="6"]
+[node name="Cylinder_006" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="6" unique_id=887315511]
 layers = 17
 
-[node name="_Plane_019" parent="LADY/up solid" index="7"]
+[node name="_Plane_019" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="7" unique_id=2121757482]
 layers = 17
 
-[node name="Cylinder_007" parent="LADY/up solid" index="8"]
+[node name="Cylinder_007" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="8" unique_id=968237648]
 layers = 17
 
-[node name="Cylinder_008" parent="LADY/up solid" index="9"]
+[node name="Cylinder_008" parent="LADY/up solid" parent_id_path=PackedInt32Array(1970237080) index="9" unique_id=828856719]
 layers = 17

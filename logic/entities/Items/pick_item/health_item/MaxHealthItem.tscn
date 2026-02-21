@@ -1,26 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://d051w4rmm0o7w"]
+[gd_scene format=3 uid="uid://d051w4rmm0o7w"]
 
 [ext_resource type="PackedScene" uid="uid://ctsqu10igrfjw" path="res://logic/entities/Items/pick_item/health_item/HealthItem.tscn" id="1_de005"]
 [ext_resource type="Script" uid="uid://qg1d74wckra1" path="res://logic/entities/Items/pick_item/health_item/max_health_item.gd" id="2_01wdv"]
 [ext_resource type="Material" uid="uid://c6w1lwl6iudrg" path="res://-assets-/materials-shared/_shaders/pick_items/max_health_mat.tres" id="2_ec5mp"]
 
-[node name="MaxHealthItem" instance=ExtResource("1_de005")]
+[node name="MaxHealthItem" unique_id=12282058 instance=ExtResource("1_de005")]
 script = ExtResource("2_01wdv")
 
-[node name="RedSphere" parent="Visuals" index="0"]
+[node name="RedSphere" parent="Visuals" parent_id_path=PackedInt32Array(788798705) index="0" unique_id=1322938207]
 material_override = ExtResource("2_ec5mp")
 
-[node name="PuffFog" parent="Visuals/RedSphere" index="0"]
+[node name="PuffFog" parent="Visuals/RedSphere" index="0" unique_id=2009355783]
 particles_amount = 3
 color_multiplier = Color(0.54073197, 0.065840945, 0, 1)
 angular_velocity = 20.0
 
-[node name="GlowLight" parent="Visuals/RedSphere" index="1"]
+[node name="GlowLight" parent="Visuals/RedSphere" index="1" unique_id=1271204396]
 light_energy = 3.5
 light_volumetric_fog_energy = 2.0
 
-[node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
+[node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2" unique_id=1913207257]
 light_energy = 4.0
 
-[node name="InteractArea" parent="." index="3"]
+[node name="InteractArea" parent="." index="3" unique_id=980971986]
 label_text = "Press E to increase max health"

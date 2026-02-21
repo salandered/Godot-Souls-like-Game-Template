@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://cc37235kj4384"]
+[gd_scene format=4 uid="uid://cc37235kj4384"]
 
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="1_dmagn"]
 [ext_resource type="AudioStream" uid="uid://cxy3a55req2yx" path="res://-assets-/SFX/sources/ui_sounds/kenney_ui_audio/click5.wav" id="2_nar8x"]
@@ -16,7 +16,7 @@ tags = {
 "encoder": "Lavf58.45.100"
 }
 
-[node name="ProjectUISoundController" type="Node"]
+[node name="ProjectUISoundController" type="Node" unique_id=736590623]
 script = ExtResource("1_dmagn")
 button_pressed = ExtResource("2_nar8x")
 tab_changed = ExtResource("3_fpfbd")
@@ -24,6 +24,6 @@ tab_selected = ExtResource("4_de7pg")
 slider_drag_started = ExtResource("5_ob1c6")
 slider_drag_ended = ExtResource("6_m8i65")
 
-[node name="testMusicPlayer" parent="." instance=ExtResource("7_m8i65")]
+[node name="testMusicPlayer" parent="." unique_id=1251471551 instance=ExtResource("7_m8i65")]
 stream = SubResource("AudioStreamWAV_qynsr")
 volume_db = -80.0

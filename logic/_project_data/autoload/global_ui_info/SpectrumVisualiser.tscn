@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://0prh7okfixrj"]
+[gd_scene format=3 uid="uid://0prh7okfixrj"]
 
 [ext_resource type="Script" uid="uid://dq8ww4ocpkywp" path="res://logic/x_utils/audio/dv_bus_spectrum.gd" id="1_d03cv"]
 [ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="3_3inbn"]
@@ -25,25 +25,25 @@ bg_color = Color(0.18960778, 0.22039005, 0.3099175, 0.16470589)
 border_color = Color(0.14, 0.14, 0.14, 0.42745098)
 border_blend = true
 
-[node name="SpectrumVisualiser" type="MarginContainer"]
+[node name="SpectrumVisualiser" type="MarginContainer" unique_id=1456993947]
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="GlobalPanel" type="PanelContainer" parent="."]
+[node name="GlobalPanel" type="PanelContainer" parent="." unique_id=31452957]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(600, 240)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_d03cv")
 
-[node name="MarginContainer2" type="MarginContainer" parent="GlobalPanel"]
+[node name="MarginContainer2" type="MarginContainer" parent="GlobalPanel" unique_id=1180183772]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="DVAudioBusSpectrum" type="MarginContainer" parent="GlobalPanel/MarginContainer2"]
+[node name="DVAudioBusSpectrum" type="MarginContainer" parent="GlobalPanel/MarginContainer2" unique_id=1453398945]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -54,42 +54,42 @@ motion_smoothing = 0.2828429
 bar_width_ratio = 0.6659999999999999
 colors = SubResource("Gradient_d03cv")
 
-[node name="test_sound" type="AudioStreamPlayer" parent="GlobalPanel/MarginContainer2/DVAudioBusSpectrum"]
+[node name="test_sound" type="AudioStreamPlayer" parent="GlobalPanel/MarginContainer2/DVAudioBusSpectrum" unique_id=453065101]
 bus = &"game_SFX"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GlobalPanel/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GlobalPanel/MarginContainer2" unique_id=1815940203]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer" unique_id=1591839974]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=635239600]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AudioBusTitle" type="Label" parent="GlobalPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
+[node name="AudioBusTitle" type="Label" parent="GlobalPanel/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=1392767779]
 unique_name_in_owner = true
 modulate = Color(0.7851237, 0.7851237, 0.7851237, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_3inbn")
 text = "Bus name"
 
-[node name="AudioBus" type="Label" parent="GlobalPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
+[node name="AudioBus" type="Label" parent="GlobalPanel/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=74981896]
 unique_name_in_owner = true
 layout_mode = 2
 text = "GAME_SFX"
 
-[node name="MarginContainer" type="MarginContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer" unique_id=1931887975]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="GlobalPanel/MarginContainer2/VBoxContainer" unique_id=2023664923]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3inbn")
 
-[node name="DVAudioBusPanelManager" type="Node" parent="." node_paths=PackedStringArray("spectrum", "ui_container", "auido_bus_label")]
+[node name="DVAudioBusPanelManager" type="Node" parent="." unique_id=988565441 node_paths=PackedStringArray("spectrum", "ui_container", "auido_bus_label")]
 script = ExtResource("3_mcrwn")
 spectrum = NodePath("../GlobalPanel/MarginContainer2/DVAudioBusSpectrum")
 ui_container = NodePath("../GlobalPanel")

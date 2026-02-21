@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=14 format=3 uid="uid://bxxhy44u4l6d0"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://bxxhy44u4l6d0"]
 
 [ext_resource type="AudioStream" uid="uid://781p7bt34n6c" path="res://-assets-/SFX/audio_streams/footsteps/concrete/concr_footsteps_pack_1.tres" id="1_gtnam"]
 [ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="2_ln1ct"]

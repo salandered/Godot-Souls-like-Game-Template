@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://tpy4wa8akl4b"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://tpy4wa8akl4b"]
 
 [ext_resource type="Texture2D" uid="uid://bsmd74v2mkb63" path="res://-assets-/materials-shared/metal/metal_8/island_metal_8_basecolor-1K.jpg" id="1_jk837"]
 [ext_resource type="Texture2D" uid="uid://dc5807xscau5e" path="res://-assets-/materials-shared/metal/metal_8/island_metal_8_metallic-1K.png" id="2_rypgt"]

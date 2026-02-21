@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7vyqnm6vpnbx"]
+[gd_scene format=3 uid="uid://c7vyqnm6vpnbx"]
 
 [ext_resource type="PackedScene" uid="uid://7rrr36iaavdk" path="res://logic/c_systems/influence_parent/break_static_parent/breakable_area/BreakableColumnArea.tscn" id="1_1g8f7"]
 [ext_resource type="Script" uid="uid://dgjdf4j7hl8h0" path="res://logic/c_systems/influence_parent/break_static_parent/break_static_parent.gd" id="1_wt58c"]
 
-[node name="BreakStaticParent" type="Node3D"]
+[node name="BreakStaticParent" type="Node3D" unique_id=1833366097]
 script = ExtResource("1_wt58c")
 
-[node name="BreakableColumnArea" parent="." instance=ExtResource("1_1g8f7")]
+[node name="BreakableColumnArea" parent="." unique_id=2084725873 instance=ExtResource("1_1g8f7")]
 unique_name_in_owner = true

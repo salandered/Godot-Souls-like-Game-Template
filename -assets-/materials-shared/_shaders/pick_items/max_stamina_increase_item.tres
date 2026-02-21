@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b45m67rpq6djp"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b45m67rpq6djp"]
 
 [ext_resource type="Shader" uid="uid://dva33q3vefr3d" path="res://-assets-/materials-shared/_shaders/pick_items/PickItem.gdshader" id="1_hiyth"]
 [ext_resource type="Texture2D" uid="uid://cipvtebh2e2sx" path="res://-assets-/materials-shared/_textures/paint_fragments/me_blue_cropped.jpg" id="2_87ii6"]

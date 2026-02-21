@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://u4jnfph2oxuj"]
+[gd_scene format=3 uid="uid://u4jnfph2oxuj"]
 
 [ext_resource type="Script" uid="uid://bdhplngtdnrsw" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/metrics_grid_distributor.gd" id="1_slf7m"]
 [ext_resource type="FontFile" uid="uid://dmscohqfr4mi4" path="res://-assets-/ui_assets/_font/jb_mono/JetBrainsMono-Regular.ttf" id="2_7cw5p"]
 
-[node name="MetricsGridDistributor" type="Node"]
+[node name="MetricsGridDistributor" type="Node" unique_id=1566102658]
 script = ExtResource("1_slf7m")
 value_label_mono_font = ExtResource("2_7cw5p")
 value_label_font_size = 18

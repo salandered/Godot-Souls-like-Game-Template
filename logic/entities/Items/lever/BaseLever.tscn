@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://p44femc1tyl6"]
+[gd_scene format=3 uid="uid://p44femc1tyl6"]
 
 [ext_resource type="ArrayMesh" uid="uid://c0e1vegkm7gp" path="res://-assets-/GLB-items/lever/mesh/lever_Cube_121.res" id="1_h423s"]
 [ext_resource type="Script" uid="uid://768gg74byybm" path="res://logic/entities/Items/lever/_generic_lever.gd" id="1_m0bf1"]
@@ -295,34 +295,31 @@ _data = {
 &"lever_switch": SubResource("Animation_m0bf1")
 }
 
-[node name="BaseLever" type="Node3D"]
+[node name="BaseLever" type="Node3D" unique_id=1736317030]
 script = ExtResource("1_m0bf1")
 
-[node name="Visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="." unique_id=769223155]
 unique_name_in_owner = true
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 
-[node name="lever_base" type="MeshInstance3D" parent="Visuals"]
+[node name="lever_base" type="MeshInstance3D" parent="Visuals" unique_id=2121248669]
 material_override = ExtResource("2_wu3r8")
 mesh = ExtResource("1_h423s")
-skeleton = NodePath("")
 
-[node name="lever_platform" type="MeshInstance3D" parent="Visuals"]
+[node name="lever_platform" type="MeshInstance3D" parent="Visuals" unique_id=2092130470]
 material_override = ExtResource("4_sobr5")
 mesh = ExtResource("3_wu3r8")
-skeleton = NodePath("")
 
-[node name="HandlePivot" type="Marker3D" parent="Visuals"]
+[node name="HandlePivot" type="Marker3D" parent="Visuals" unique_id=517220544]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17440508, 0)
 
-[node name="lever_handle" type="MeshInstance3D" parent="Visuals/HandlePivot"]
+[node name="lever_handle" type="MeshInstance3D" parent="Visuals/HandlePivot" unique_id=222511860]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17440508, 0)
 material_override = ExtResource("7_bvq45")
 mesh = ExtResource("2_sobr5")
-skeleton = NodePath("")
 
-[node name="AccomplishASP" type="AudioStreamPlayer3D" parent="Visuals/HandlePivot/lever_handle"]
+[node name="AccomplishASP" type="AudioStreamPlayer3D" parent="Visuals/HandlePivot/lever_handle" unique_id=692134718]
 unique_name_in_owner = true
 stream = ExtResource("11_dow2q")
 max_db = -2.66
@@ -330,15 +327,15 @@ pitch_scale = 0.65
 max_polyphony = 2
 bus = &"game_SFX"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=259632663]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1279138489]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0.103268325, -0.005098344)
 shape = SubResource("CapsuleShape3D_njx0t")
 
-[node name="ASPS" type="Node3D" parent="."]
+[node name="ASPS" type="Node3D" parent="." unique_id=1169226934]
 
-[node name="LeverRotASP" type="AudioStreamPlayer3D" parent="ASPS"]
+[node name="LeverRotASP" type="AudioStreamPlayer3D" parent="ASPS" unique_id=1205286945]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2782256, 0)
 stream = ExtResource("7_1hu8f")
@@ -348,7 +345,7 @@ pitch_scale = 0.6
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="SwitchASP" type="AudioStreamPlayer3D" parent="ASPS"]
+[node name="SwitchASP" type="AudioStreamPlayer3D" parent="ASPS" unique_id=1349399254]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31002283, 0.22258048, 0)
 stream = ExtResource("8_bvq45")
@@ -359,7 +356,7 @@ pitch_scale = 0.55
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="HitBackASP" type="AudioStreamPlayer3D" parent="ASPS"]
+[node name="HitBackASP" type="AudioStreamPlayer3D" parent="ASPS" unique_id=1516157332]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20668197, 0.23317954, 0)
 stream = ExtResource("10_o85y6")
@@ -369,7 +366,7 @@ pitch_scale = 0.6
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="StonePushASP" type="AudioStreamPlayer3D" parent="ASPS"]
+[node name="StonePushASP" type="AudioStreamPlayer3D" parent="ASPS" unique_id=964415241]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20138237, 0)
 stream = ExtResource("10_hfepl")
@@ -380,7 +377,7 @@ pitch_scale = 1.4
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="StonePushBackASP" type="AudioStreamPlayer3D" parent="ASPS"]
+[node name="StonePushBackASP" type="AudioStreamPlayer3D" parent="ASPS" unique_id=1090512471]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16163582, 0)
 stream = ExtResource("11_o85y6")
@@ -391,20 +388,18 @@ pitch_scale = 1.2
 max_distance = 10.0
 bus = &"game_SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1614567979]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_d8td6")
-}
+libraries/ = SubResource("AnimationLibrary_d8td6")
 
-[node name="InteractArea" parent="." instance=ExtResource("8_d8td6")]
+[node name="InteractArea" parent="." unique_id=2078814964 instance=ExtResource("8_d8td6")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24636853, 0)
 label_text = "Pull"
 label_y_offset = 1.0
 area_sphere_radius = 1.25
 
-[node name="__remote_interact_area" type="RemoteTransform3D" parent="."]
+[node name="__remote_interact_area" type="RemoteTransform3D" parent="." unique_id=479130742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24636853, 0)
 remote_path = NodePath("../InteractArea")
 update_scale = false

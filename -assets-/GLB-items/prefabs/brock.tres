@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://b5q0ajt586vbk"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://b5q0ajt586vbk"]
 
 [ext_resource type="Material" uid="uid://btndis7shrb28" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/Stone_03_Reimp_2k.tres" id="1_je5xs"]
 

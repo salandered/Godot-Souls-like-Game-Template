@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://br5sfmp04qmt7"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://br5sfmp04qmt7"]
 
 [ext_resource type="Texture2D" uid="uid://bjjrauscrwbnj" path="res://-assets-/materials-shared/metal/rusty_metal_04/tower-map_rusty_metal_04_diff_1k.jpg" id="1_mmvxv"]
 [ext_resource type="Texture2D" uid="uid://d20jremudy315" path="res://-assets-/materials-shared/metal/rusty_metal_04/tower-map_rusty_metal_04_metal_and_rough.png" id="2_wrjjv"]

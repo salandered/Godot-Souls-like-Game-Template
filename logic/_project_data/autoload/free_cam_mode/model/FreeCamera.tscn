@@ -1,25 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://djg3rdl82alnl"]
+[gd_scene format=3 uid="uid://djg3rdl82alnl"]
 
 [ext_resource type="Script" uid="uid://d2mbnt22qaxvm" path="res://logic/_project_data/autoload/free_cam_mode/model/free_cam.gd" id="1_tgwjn"]
 [ext_resource type="Script" uid="uid://b507eyuuql561" path="res://logic/_project_data/autoload/free_cam_mode/model/free_camera_body.gd" id="2_1yp4e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nur6f"]
 
-[node name="Camera3D" type="Camera3D"]
+[node name="Camera3D" type="Camera3D" unique_id=109853047]
 script = ExtResource("1_tgwjn")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=802490764]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13507092)
 light_energy = 4.0
 spot_range = 15.0
 spot_angle = 55.0
 
-[node name="CameraBody" type="CharacterBody3D" parent="."]
+[node name="CameraBody" type="CharacterBody3D" parent="." unique_id=1214545897]
 unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_1yp4e")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraBody" unique_id=1657604644]
 shape = SubResource("SphereShape3D_nur6f")

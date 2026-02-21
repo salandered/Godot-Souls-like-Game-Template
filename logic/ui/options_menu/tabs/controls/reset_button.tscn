@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://0e65ib3cy6mf"]
 
-[node name="ResetButton" type="Button"]
+[node name="ResetButton" type="Button" unique_id=448833718]
 size_flags_horizontal = 3
 theme_type_variation = &"DangerButton"
 text = "Reset"

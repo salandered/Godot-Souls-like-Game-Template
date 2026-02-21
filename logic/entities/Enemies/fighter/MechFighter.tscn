@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=4 uid="uid://b0eq3ihtn4wf"]
+[gd_scene format=4 uid="uid://b0eq3ihtn4wf"]
 
 [ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/c_systems/character/mech_fighter.gd" id="1_rn2eh"]
 [ext_resource type="ArrayMesh" uid="uid://cejnfcdar41gc" path="res://-assets-/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_001.res" id="1_vvmdu"]
@@ -1042,62 +1042,58 @@ _data = {
 &"idle_r": SubResource("Animation_e3krr")
 }
 
-[node name="MechFighter" type="CharacterBody3D" node_paths=PackedStringArray("container")]
+[node name="MechFighter" type="CharacterBody3D" unique_id=1917255645 node_paths=PackedStringArray("container")]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_rn2eh")
 container = NodePath("StatesContainer")
 dev_tag = "mech"
 
-[node name="CollCollider" type="CollisionShape3D" parent="."]
+[node name="CollCollider" type="CollisionShape3D" parent="." unique_id=1236334884]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8638519, 0)
 shape = SubResource("CapsuleShape3D_ulmwa")
 script = ExtResource("2_2lrnj")
 
-[node name="StaticVisuals" type="Node3D" parent="."]
+[node name="StaticVisuals" type="Node3D" parent="." unique_id=753462280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77774274, 0)
 
-[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="StaticVisuals"]
+[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="StaticVisuals" unique_id=1529540404]
 transform = Transform3D(-0.37443134, 0, 0.0065357992, 0, -0.37448835, 0, -0.0065357992, 0, -0.37443134, 0, 0.73450184, 0)
 material_override = SubResource("StandardMaterial3D_8tfb8")
 mesh = SubResource("ArrayMesh_8tfb8")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="StaticVisuals"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="StaticVisuals" unique_id=1102061231]
 transform = Transform3D(-0.44655514, 0, 0.0077947397, 0, -0.44662312, 0, -0.0077947397, 0, -0.44655514, -0.005837828, -0.11992878, 0)
 radial_segments = 16
 smooth_faces = false
 material = SubResource("StandardMaterial3D_8tfb8")
 
-[node name="Dock" type="MeshInstance3D" parent="StaticVisuals"]
+[node name="Dock" type="MeshInstance3D" parent="StaticVisuals" unique_id=1267078037]
 transform = Transform3D(1, 1.86265e-09, 0, 1.86265e-09, 1, 1.49012e-08, -3.72529e-09, 1.49012e-08, 1, 0, 0, 0)
 material_override = ExtResource("7_5a6gk")
 gi_mode = 0
 mesh = ExtResource("1_vvmdu")
-skeleton = NodePath("")
 
-[node name="VBase" type="MeshInstance3D" parent="StaticVisuals/Dock"]
+[node name="VBase" type="MeshInstance3D" parent="StaticVisuals/Dock" unique_id=1903164989]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.18687402, 0.22802818, 0.0022885976)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("2_j48cr")
-skeleton = NodePath("")
 
-[node name="HBase" type="MeshInstance3D" parent="StaticVisuals/Dock"]
+[node name="HBase" type="MeshInstance3D" parent="StaticVisuals/Dock" unique_id=1783655886]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.05298112, 0.60434496, -0.0008876382)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("3_5a6gk")
-skeleton = NodePath("")
 
-[node name="metal_things" type="MeshInstance3D" parent="StaticVisuals/Dock"]
+[node name="metal_things" type="MeshInstance3D" parent="StaticVisuals/Dock" unique_id=1118742880]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7136335e-07, -0.65119684, 7.529743e-07)
 material_override = ExtResource("9_h5g1m")
 cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("4_h5g1m")
-skeleton = NodePath("")
 
-[node name="LeverRotASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock"]
+[node name="LeverRotASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock" unique_id=580557837]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.065900505, 0.6018503, -0.0015537944)
 stream = ExtResource("8_dhaem")
@@ -1110,7 +1106,7 @@ max_polyphony = 3
 panning_strength = 0.6
 bus = &"game_SFX"
 
-[node name="HitBackASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock"]
+[node name="HitBackASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock" unique_id=2035054135]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06379232, 0.40663517, -0.004111221)
 stream = ExtResource("9_dhaem")
@@ -1122,7 +1118,7 @@ max_polyphony = 3
 panning_strength = 0.5
 bus = &"game_SFX"
 
-[node name="HitBackLightASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock"]
+[node name="HitBackLightASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock" unique_id=1956892827]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06379232, 0.40663517, -0.004111221)
 stream = ExtResource("9_dhaem")
@@ -1135,7 +1131,7 @@ max_polyphony = 3
 panning_strength = 0.5
 bus = &"game_SFX"
 
-[node name="StonePushASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock"]
+[node name="StonePushASP" type="AudioStreamPlayer3D" parent="StaticVisuals/Dock" unique_id=619846237]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007036537, 0.2509191, -0.004111221)
 stream = ExtResource("17_tu6ua")
@@ -1148,52 +1144,48 @@ max_polyphony = 3
 panning_strength = 0.6
 bus = &"game_SFX"
 
-[node name="Hitbox" parent="StaticVisuals" instance=ExtResource("35_8hc2f")]
+[node name="Hitbox" parent="StaticVisuals" unique_id=1491658631 instance=ExtResource("35_8hc2f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticVisuals/Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticVisuals/Hitbox" unique_id=1566916332]
 unique_name_in_owner = true
 transform = Transform3D(1, 4.1359356e-25, 0, 5.551129e-17, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_8hc2f")
 debug_color = Color(0.70196074, 0, 0.35231122, 0.41960785)
 
-[node name="HBaseCircle2" type="MeshInstance3D" parent="."]
+[node name="HBaseCircle2" type="MeshInstance3D" parent="." unique_id=663226617]
 transform = Transform3D(0.016667139, -0.95485455, 4.1738016e-08, 0, -4.1744375e-08, -0.955, 0.95485455, 0.016667139, -7.285437e-10, 0, 0.5029078, 0)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("12_e3krr")
-skeleton = NodePath("")
 
-[node name="HArmPivot" type="Marker3D" parent="."]
+[node name="HArmPivot" type="Marker3D" parent="." unique_id=1345144344]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3841239, 0)
 
-[node name="HBaseCircle" type="MeshInstance3D" parent="HArmPivot"]
+[node name="HBaseCircle" type="MeshInstance3D" parent="HArmPivot" unique_id=1393280355]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("12_e3krr")
-skeleton = NodePath("")
 
-[node name="HArmWeapon" type="Node3D" parent="HArmPivot"]
+[node name="HArmWeapon" type="Node3D" parent="HArmPivot" unique_id=1948156810]
 unique_name_in_owner = true
 script = ExtResource("11_p3xh5")
 
-[node name="HorArm" type="MeshInstance3D" parent="HArmPivot/HArmWeapon"]
+[node name="HorArm" type="MeshInstance3D" parent="HArmPivot/HArmWeapon" unique_id=110863937]
 transform = Transform3D(-0.007514594, 0, 0.9999719, 0, 1, 0, -0.9999719, 0, -0.007514594, -0.0021717856, -0.0026193857, -0.47666758)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("6_g7g8d")
-skeleton = NodePath("")
 
-[node name="Icosphere" type="MeshInstance3D" parent="HArmPivot/HArmWeapon/HorArm"]
+[node name="Icosphere" type="MeshInstance3D" parent="HArmPivot/HArmWeapon/HorArm" unique_id=167364790]
 transform = Transform3D(1.6379251, 0, 3.7252903e-09, 0, 1.637926, 0, -3.7252903e-09, 0, 1.6379251, 0.7325033, -0.06329739, 0.0016478302)
 material_override = ExtResource("3_h5g1m")
 gi_mode = 0
 mesh = ExtResource("4_ulmwa")
-skeleton = NodePath("")
 
-[node name="Move" type="AudioStreamPlayer3D" parent="HArmPivot/HArmWeapon/HorArm"]
+[node name="Move" type="AudioStreamPlayer3D" parent="HArmPivot/HArmWeapon/HorArm" unique_id=692104466]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 2.3283069e-09, 0, 1, 0, -2.3283069e-09, 0, 1, 0.7325033, -0.06329739, 0.0016478307)
 stream = ExtResource("14_ulmwa")
@@ -1202,16 +1194,16 @@ pitch_scale = 0.7
 panning_strength = 0.7
 bus = &"game_SFX"
 
-[node name="HArmWeaponHurtBox" parent="HArmPivot/HArmWeapon/HorArm" instance=ExtResource("16_tu6ua")]
+[node name="HArmWeaponHurtBox" parent="HArmPivot/HArmWeapon/HorArm" unique_id=1645937961 instance=ExtResource("16_tu6ua")]
 unique_name_in_owner = true
 transform = Transform3D(1.637925, 0, 3.7252903e-09, 0, 1.637926, 0, -3.7252903e-09, 0, 1.637925, 0.7325033, -0.06329739, 0.0016478307)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" unique_id=976074510]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -0.16775113, -0.017112553, 0.00022665248)
 shape = SubResource("CapsuleShape3D_8tfb8")
 debug_color = Color(0.70196074, 0, 0.19234172, 0.41960785)
 
-[node name="DevVisualiseTrailWeapon" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" instance=ExtResource("22_gk5iv")]
+[node name="DevVisualiseTrailWeapon" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" unique_id=1539694945 instance=ExtResource("22_gk5iv")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901152e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 0, 0, 0)
 visible = false
 path_color_a = Color(0.1843273, 0.62740636, 1, 1)
@@ -1219,62 +1211,58 @@ path_color_b = Color(0.5959711, 0, 1, 1)
 trail_radius = 0.02
 _char_type = 3
 
-[node name="DVWeaponHurtBox" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
+[node name="DVWeaponHurtBox" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" unique_id=1778713997 node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
 visible = false
 weapon = NodePath("../../..")
 _char_type = 3
 
-[node name="HWeaponSFXParent" parent="HArmPivot/HArmWeapon" instance=ExtResource("17_lcx2h")]
+[node name="HWeaponSFXParent" parent="HArmPivot/HArmWeapon" unique_id=1278536149 instance=ExtResource("17_lcx2h")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1689723)
 
-[node name="VArmPivot" type="Marker3D" parent="."]
+[node name="VArmPivot" type="Marker3D" parent="." unique_id=1992859303]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049800515, 0.9998338, 0)
 
-[node name="VArmWeapon" type="Node3D" parent="VArmPivot"]
+[node name="VArmWeapon" type="Node3D" parent="VArmPivot" unique_id=925396218]
 unique_name_in_owner = true
 script = ExtResource("20_jqa4j")
 
-[node name="Base" type="MeshInstance3D" parent="VArmPivot/VArmWeapon"]
+[node name="Base" type="MeshInstance3D" parent="VArmPivot/VArmWeapon" unique_id=447220658]
 transform = Transform3D(-0.10360158, 0.994619, 0, -0.994619, -0.10360158, 0, 0, 0, 1, 0.23686913, 0.012833476, 0.0063998215)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("5_ulmwa")
-skeleton = NodePath("")
 
-[node name="VArm" type="MeshInstance3D" parent="VArmPivot/VArmWeapon/Base"]
+[node name="VArm" type="MeshInstance3D" parent="VArmPivot/VArmWeapon/Base" unique_id=708365024]
 transform = Transform3D(0.99993074, -0.011762597, 0, 0.011762597, 0.99993074, 0, 0, 0, 1, -0.018228292, 0.15648073, 1.1641532e-08)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("8_py1g2")
-skeleton = NodePath("")
 
-[node name="VSpringArm" type="MeshInstance3D" parent="VArmPivot/VArmWeapon/Base/VArm"]
+[node name="VSpringArm" type="MeshInstance3D" parent="VArmPivot/VArmWeapon/Base/VArm" unique_id=428181670]
 transform = Transform3D(0.99993163, -0.011707142, 0, 0.011707142, 0.99993163, 0, 0, 0, 1, -0.012541652, 0.15097293, 1.3969839e-09)
 material_override = ExtResource("9_h5g1m")
 gi_mode = 0
 mesh = ExtResource("9_rn2eh")
-skeleton = NodePath("")
 
-[node name="Icosphere_001" type="MeshInstance3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm"]
+[node name="Icosphere_001" type="MeshInstance3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm" unique_id=514332920]
 transform = Transform3D(0.00087417493, -1.1167738, -0.1163223, -0.008392064, -0.11632564, 1.1167425, -1.1227843, 0, -0.008437509, 0.0041269064, 0.07343835, -0.007843092)
 material_override = ExtResource("3_h5g1m")
 gi_mode = 0
 mesh = ExtResource("8_h5g1m")
-skeleton = NodePath("")
 
-[node name="VArmWeaponHurtBox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm" instance=ExtResource("16_tu6ua")]
+[node name="VArmWeaponHurtBox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm" unique_id=1817854185 instance=ExtResource("16_tu6ua")]
 unique_name_in_owner = true
 transform = Transform3D(1, 1.4901161e-08, 0, -1.4901161e-08, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" unique_id=2048677033]
 transform = Transform3D(3.2240832e-09, -0.07525713, 0.99716413, -4.27196e-08, 0.99716413, 0.07525713, -1, -4.284084e-08, 2.9198866e-14, -0.0049903393, -0.116010785, 8.381903e-09)
 shape = SubResource("CapsuleShape3D_e3krr")
 debug_color = Color(0.70196074, 0, 0.19234172, 0.41960785)
 
-[node name="DevVisualiseTrailWeapon2" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" instance=ExtResource("22_gk5iv")]
+[node name="DevVisualiseTrailWeapon2" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" unique_id=1831475324 instance=ExtResource("22_gk5iv")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901152e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 0, 0, 0)
 visible = false
 path_color_a = Color(0.1843273, 0.62740636, 1, 1)
@@ -1282,13 +1270,13 @@ path_color_b = Color(0.5959711, 0, 1, 1)
 trail_radius = 0.02
 _char_type = 3
 
-[node name="DVWeaponHurtBox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
+[node name="DVWeaponHurtBox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" unique_id=1627411360 node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
 visible = false
 weapon = NodePath("../../../../..")
 _char_type = 3
 
-[node name="HMove" type="AudioStreamPlayer3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm"]
+[node name="HMove" type="AudioStreamPlayer3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm" unique_id=549132110]
 unique_name_in_owner = true
 transform = Transform3D(0.9999999, 7.450581e-09, 0, -7.450581e-09, 0.9999999, 0, 0, 0, 1, 0.0072380304, -0.08992332, 0)
 stream = ExtResource("14_ulmwa")
@@ -1298,86 +1286,84 @@ max_polyphony = 3
 panning_strength = 0.8
 bus = &"game_SFX"
 
-[node name="VArmHitbox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm" instance=ExtResource("35_8hc2f")]
+[node name="VArmHitbox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm" unique_id=370346292 instance=ExtResource("35_8hc2f")]
 transform = Transform3D(-0.08023119, -0.9967761, -1.48531605e-08, 0.9967761, -0.08023119, -1.195541e-09, -3.72529e-09, 1.49012e-08, 1, 1.0577267, -0.51247275, -0.0063998345)
 
-[node name="MiniCollisionShape3D" type="CollisionShape3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmHitbox"]
+[node name="MiniCollisionShape3D" type="CollisionShape3D" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmHitbox" unique_id=938113029]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.39759755, 1.0150574, -1.2523462e-08)
 shape = SubResource("CapsuleShape3D_ydmfp")
 debug_color = Color(0.70196074, 0, 0.38929453, 0.41960785)
 
-[node name="VWeaponSFXParent" parent="VArmPivot/VArmWeapon" instance=ExtResource("17_lcx2h")]
+[node name="VWeaponSFXParent" parent="VArmPivot/VArmWeapon" unique_id=1952424052 instance=ExtResource("17_lcx2h")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049800515, 0.3842901, -2.3379445)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1954654806]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_g7g8d")
-}
+libraries/ = SubResource("AnimationLibrary_g7g8d")
 
-[node name="AnimatorManager" type="Node" parent="AnimationPlayer" node_paths=PackedStringArray("config")]
+[node name="AnimatorManager" type="Node" parent="AnimationPlayer" unique_id=254924175 node_paths=PackedStringArray("config")]
 unique_name_in_owner = true
 script = ExtResource("23_iefnp")
 config = NodePath("../../Config")
 
-[node name="AnimParameters" type="Node" parent="AnimationPlayer"]
+[node name="AnimParameters" type="Node" parent="AnimationPlayer" unique_id=184053181]
 unique_name_in_owner = true
 script = ExtResource("24_ydmfp")
 weapon_hurts = true
 
-[node name="AnimContainer" parent="AnimationPlayer" instance=ExtResource("24_lijjc")]
+[node name="AnimContainer" parent="AnimationPlayer" unique_id=1388641240 instance=ExtResource("24_lijjc")]
 unique_name_in_owner = true
 
-[node name="AnimParamsContainer" type="Node" parent="AnimationPlayer" node_paths=PackedStringArray("parameters")]
+[node name="AnimParamsContainer" type="Node" parent="AnimationPlayer" unique_id=1247145950 node_paths=PackedStringArray("parameters")]
 unique_name_in_owner = true
 script = ExtResource("26_iefnp")
 parameters = NodePath("../AnimParameters")
 
-[node name="Target" parent="." instance=ExtResource("22_v8c2r")]
+[node name="Target" parent="." unique_id=1573071036 instance=ExtResource("22_v8c2r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2532762, 0)
 visible = false
 __csg_visual = false
 
-[node name="Combat" type="Node3D" parent="." node_paths=PackedStringArray("me", "parent_node_of_weapons")]
+[node name="Combat" type="Node3D" parent="." unique_id=1545187757 node_paths=PackedStringArray("me", "parent_node_of_weapons")]
 script = ExtResource("29_1cd74")
 me = NodePath("..")
 parent_node_of_weapons = NodePath("..")
 
-[node name="StatesContainer" type="Node" parent="."]
+[node name="StatesContainer" type="Node" parent="." unique_id=1837759715]
 script = ExtResource("25_dwfug")
 
-[node name="Idle" type="Node" parent="StatesContainer"]
+[node name="Idle" type="Node" parent="StatesContainer" unique_id=1395651412]
 script = ExtResource("31_8hc2f")
 
-[node name="AttackLR" type="Node" parent="StatesContainer"]
+[node name="AttackLR" type="Node" parent="StatesContainer" unique_id=701986977]
 script = ExtResource("32_4wtmj")
 
-[node name="AttackRL" type="Node" parent="StatesContainer"]
+[node name="AttackRL" type="Node" parent="StatesContainer" unique_id=1555119916]
 script = ExtResource("33_tss8o")
 
-[node name="AttackUp" type="Node" parent="StatesContainer"]
+[node name="AttackUp" type="Node" parent="StatesContainer" unique_id=1324070248]
 script = ExtResource("38_8tfb8")
 
-[node name="AttackDown" type="Node" parent="StatesContainer"]
+[node name="AttackDown" type="Node" parent="StatesContainer" unique_id=958400312]
 script = ExtResource("39_gk5iv")
 
-[node name="AttackStab" type="Node" parent="StatesContainer"]
+[node name="AttackStab" type="Node" parent="StatesContainer" unique_id=1413633813]
 script = ExtResource("30_iefnp")
 
-[node name="AttackLRPower" type="Node" parent="StatesContainer"]
+[node name="AttackLRPower" type="Node" parent="StatesContainer" unique_id=1821390332]
 script = ExtResource("41_24aju")
 
-[node name="AttackRLPower" type="Node" parent="StatesContainer"]
+[node name="AttackRLPower" type="Node" parent="StatesContainer" unique_id=1894526678]
 script = ExtResource("42_6xoih")
 
-[node name="AttackStabPower" type="Node" parent="StatesContainer"]
+[node name="AttackStabPower" type="Node" parent="StatesContainer" unique_id=845526024]
 script = ExtResource("43_tx1qf")
 
-[node name="LookAtCharacterMarker" parent="." instance=ExtResource("36_4wtmj")]
+[node name="LookAtCharacterMarker" parent="." unique_id=1469386608 instance=ExtResource("36_4wtmj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2972008, 0)
 
-[node name="InteractArea" parent="." instance=ExtResource("17_v8c2r")]
+[node name="InteractArea" parent="." unique_id=488796338 instance=ExtResource("17_v8c2r")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24676108, 0.55133295, 0)
 top_level = false
@@ -1385,32 +1371,32 @@ label_text = "Interact"
 label_y_offset = 1.2
 area_sphere_radius = 1.8
 
-[node name="__interact_area" type="RemoteTransform3D" parent="."]
+[node name="__interact_area" type="RemoteTransform3D" parent="." unique_id=1660907616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24676108, 0.55133295, 0)
 remote_path = NodePath("../InteractArea")
 update_scale = false
 
-[node name="__dev" type="Node3D" parent="."]
+[node name="__dev" type="Node3D" parent="." unique_id=1412039748]
 
-[node name="VisualiseHitBoxFrame2" parent="__dev" node_paths=PackedStringArray("combat") instance=ExtResource("49_6xoih")]
+[node name="VisualiseHitBoxFrame2" parent="__dev" unique_id=596870559 node_paths=PackedStringArray("combat") instance=ExtResource("49_6xoih")]
 visible = false
 color_invincible = Color(0.73760307, 0.08260098, 0.42440233, 0.2509804)
 combat = NodePath("../../Combat")
 _char_type = 3
 
-[node name="DVAreaContact" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+[node name="DVAreaContact" type="Node3D" parent="__dev" unique_id=1129482763 node_paths=PackedStringArray("char_hit_box", "character")]
 visible = false
 script = ExtResource("50_tx1qf")
 char_hit_box = NodePath("../../StaticVisuals/Hitbox")
 character = NodePath("../..")
 hard_off_snapped_hits = true
 
-[node name="DVAreaContact2" type="Node3D" parent="__dev" node_paths=PackedStringArray("char_hit_box", "character")]
+[node name="DVAreaContact2" type="Node3D" parent="__dev" unique_id=2006293222 node_paths=PackedStringArray("char_hit_box", "character")]
 visible = false
 script = ExtResource("50_tx1qf")
 char_hit_box = NodePath("../../VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmHitbox")
 character = NodePath("../..")
 
-[node name="Config" type="Node" parent="."]
+[node name="Config" type="Node" parent="." unique_id=1848593485]
 script = ExtResource("30_ydmfp")
 key_f_value = 82

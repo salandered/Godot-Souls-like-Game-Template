@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cawlo7vs3drdk"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cawlo7vs3drdk"]
 
 [ext_resource type="Texture2D" uid="uid://bkgjcuak1rf2m" path="res://-assets-/GLB-char/godot_plush/godot_plush_standing_godot_plush_basecolor.jpg" id="1_jicia"]
 

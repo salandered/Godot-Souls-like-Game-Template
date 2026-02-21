@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsawmyldebwkf"]
+[gd_scene format=3 uid="uid://dsawmyldebwkf"]
 
 [ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="1_8s11q"]
 [ext_resource type="Script" uid="uid://or385ado2a0" path="res://logic/ui/pause_menu/m_pause_menu.gd" id="1_qfpun"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://by7xhc20gshgi" path="res://logic/ui/ui_utils/prefab/buttons/PauseMenuButton.tscn" id="7_fb021"]
 [ext_resource type="PackedScene" uid="uid://bed3gcu0mg3wp" path="res://logic/ui/dev_visuals_menu/UIDVMenu.tscn" id="8_hiit0"]
 
-[node name="M_PauseMenu" type="Control"]
+[node name="M_PauseMenu" type="Control" unique_id=1373913236]
 process_mode = 3
 z_index = 10
 layout_mode = 3
@@ -25,7 +25,7 @@ ui_overlay_controls_packed_scene = ExtResource("8_hiit0")
 main_menu_scene = "uid://c66xg4go6ct4v"
 pauses_game = true
 
-[node name="BackgroundColor" type="ColorRect" parent="."]
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=796920305]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -36,7 +36,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.12549)
 
-[node name="ConfirmRestart" type="ConfirmationDialog" parent="."]
+[node name="ConfirmRestart" type="ConfirmationDialog" parent="." unique_id=383896933]
 unique_name_in_owner = true
 auto_translate_mode = 1
 oversampling_override = 1.0
@@ -47,7 +47,7 @@ ok_button_text = "  OK  "
 dialog_text = "   Restart the game?  "
 cancel_button_text = "  Cancel  "
 
-[node name="ConfirmMainMenu" type="ConfirmationDialog" parent="."]
+[node name="ConfirmMainMenu" type="ConfirmationDialog" parent="." unique_id=698998233]
 unique_name_in_owner = true
 auto_translate_mode = 1
 oversampling_override = 1.0
@@ -57,7 +57,7 @@ ok_button_text = "  OK  "
 dialog_text = "   Go back to main menu?  "
 cancel_button_text = "  Cancel  "
 
-[node name="ConfirmExit" type="ConfirmationDialog" parent="."]
+[node name="ConfirmExit" type="ConfirmationDialog" parent="." unique_id=222621731]
 unique_name_in_owner = true
 auto_translate_mode = 1
 oversampling_override = 1.0
@@ -67,10 +67,10 @@ ok_button_text = "  OK  "
 dialog_text = "  Quit?"
 cancel_button_text = "  Cancel  "
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1236428017]
 layer = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=102641694]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -86,42 +86,42 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MenuPanelContainer" type="PanelContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="MenuPanelContainer" type="PanelContainer" parent="CanvasLayer/HBoxContainer" unique_id=643157133]
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
 theme = ExtResource("1_8s11q")
 theme_override_styles/panel = ExtResource("4_kheb5")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer" unique_id=101024064]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 20
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer" unique_id=1081789195]
 layout_mode = 2
 vertical = true
 
-[node name="TitleMargin" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer"]
+[node name="TitleMargin" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer" unique_id=1682122899]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin"]
+[node name="TitleLabel" type="Label" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin" unique_id=165792745]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="HSeparator" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer" instance=ExtResource("4_w5m25")]
+[node name="HSeparator" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer" unique_id=1892814873 instance=ExtResource("4_w5m25")]
 layout_mode = 2
 
-[node name="DescriptionMargin" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer"]
+[node name="DescriptionMargin" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer" unique_id=966726487]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" unique_id=1417214708]
 modulate = Color(0.5950413, 0.5950413, 0.5950413, 1)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
@@ -133,11 +133,11 @@ bbcode_enabled = true
 text = "[i]Settings are available in main menu[/i]"
 fit_content = true
 
-[node name="MenuButtonsMargin" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer"]
+[node name="MenuButtonsMargin" type="MarginContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer" unique_id=797708738]
 layout_mode = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="MenuButtons" type="BoxContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin"]
+[node name="MenuButtons" type="BoxContainer" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin" unique_id=1025499318]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -148,16 +148,16 @@ alignment = 1
 vertical = true
 script = ExtResource("3_j5dnp")
 
-[node name="CloseButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+[node name="CloseButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=1372534508 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="RestartButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+[node name="RestartButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=1720324042 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"
 
-[node name="ShowUIOverlayControls" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+[node name="ShowUIOverlayControls" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=1810789300 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
@@ -167,17 +167,17 @@ theme_override_font_sizes/font_size = 30
 text = "  UI Dev Tools  "
 enable_shine = true
 
-[node name="OptionsButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+[node name="OptionsButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=1005987053 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Options"
 
-[node name="MainMenuButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+[node name="MainMenuButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=607767873 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
 
-[node name="ExitButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" instance=ExtResource("7_fb021")]
+[node name="ExitButton" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=924793526 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"

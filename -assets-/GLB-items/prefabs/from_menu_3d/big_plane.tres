@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dndydw8damr8"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://dndydw8damr8"]
 
 [ext_resource type="Material" uid="uid://bqgcrkjo4wtj4" path="res://-assets-/materials-shared/ground/forest_ground/forest_ground_04_Reimp.tres" id="1_pk0hm"]
 

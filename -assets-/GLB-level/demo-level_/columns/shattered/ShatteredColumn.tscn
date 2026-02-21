@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://br1lrshc0roe4"]
+[gd_scene format=4 uid="uid://br1lrshc0roe4"]
 
 [ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="2_775ns"]
 [ext_resource type="Script" path="res://logic/entities/VFX/rigid_shatter/shattered_column.gd" id="2_cjbal"]
@@ -464,116 +464,108 @@ shadow_mesh = SubResource("ArrayMesh_emgk8")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6btnd"]
 points = PackedVector3Array(0.12230325, 1.2115769, 1.2916842, 0.31522524, 1.2115769, 1.2000968, -0.92331386, 1.2475371, -0.05638075, -0.20274323, 0.42396724, 0.8473623, -0.33792454, -1.2804924, 0.50403404, -0.013897002, -1.4221703, 0.35031605, 0.54567885, 1.2115769, 0.8899381, -0.81972015, 0.55077434, -0.49005854, -0.6211939, -0.70053273, -0.3957485, 0.7763021, 1.2115769, 0.57953167, 0.81162596, 1.2115769, 0.18570662, -0.23161364, 0.018671393, -0.75665164, -0.25691766, -1.1893753, -0.76383007, 0.04299462, -1.397566, -1.2371132, 0.25663543, -1.5146394, -0.4118381, 0.07322359, -0.82761014, -1.1772102, -0.5215062, -0.16842985, -0.81977254, -0.4610482, -0.74352276, -0.7705135)
 
-[node name="ShatteredColumn" type="Node3D"]
+[node name="ShatteredColumn" type="Node3D" unique_id=1074353158]
 script = ExtResource("2_cjbal")
 
-[node name="column shattered" type="Node3D" parent="."]
+[node name="column shattered" type="Node3D" parent="." unique_id=1740006480]
 
-[node name="column shattered_000-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_000-rigid" type="RigidBody3D" parent="column shattered" unique_id=1529103949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81384265, 0.083761275, 0.26306775)
 physics_material_override = SubResource("PhysicsMaterial_mn68c")
 
-[node name="column shattered_000-rigid" type="MeshInstance3D" parent="column shattered/column shattered_000-rigid"]
+[node name="column shattered_000-rigid" type="MeshInstance3D" parent="column shattered/column shattered_000-rigid" unique_id=701714467]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_3t878")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_000-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_000-rigid" unique_id=1992096427]
 shape = SubResource("ConvexPolygonShape3D_7rk2i")
 
-[node name="column shattered_002-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_002-rigid" type="RigidBody3D" parent="column shattered" unique_id=33767976]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1040928, 2.0589228, 0.50553)
 
-[node name="column shattered_002-rigid" type="MeshInstance3D" parent="column shattered/column shattered_002-rigid"]
+[node name="column shattered_002-rigid" type="MeshInstance3D" parent="column shattered/column shattered_002-rigid" unique_id=850847899]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_dqidr")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_002-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_002-rigid" unique_id=1386387030]
 shape = SubResource("ConvexPolygonShape3D_5rl0x")
 
-[node name="column shattered_003-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_003-rigid" type="RigidBody3D" parent="column shattered" unique_id=430986411]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2032055, 2.4877484, -0.82003593)
 
-[node name="column shattered_003-rigid" type="MeshInstance3D" parent="column shattered/column shattered_003-rigid"]
+[node name="column shattered_003-rigid" type="MeshInstance3D" parent="column shattered/column shattered_003-rigid" unique_id=1694773259]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_t7m4o")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_003-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_003-rigid" unique_id=132323537]
 shape = SubResource("ConvexPolygonShape3D_1y38g")
 
-[node name="column shattered_004-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_004-rigid" type="RigidBody3D" parent="column shattered" unique_id=1786201735]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08134262, 1.9657075, 1.0975636)
 
-[node name="column shattered_004-rigid" type="MeshInstance3D" parent="column shattered/column shattered_004-rigid"]
+[node name="column shattered_004-rigid" type="MeshInstance3D" parent="column shattered/column shattered_004-rigid" unique_id=634509299]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_33fq3")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_004-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_004-rigid" unique_id=1660362671]
 shape = SubResource("ConvexPolygonShape3D_ve1c0")
 
-[node name="column shattered_005-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_005-rigid" type="RigidBody3D" parent="column shattered" unique_id=492490301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31512097, 0.038481653, 0.49261174)
 
-[node name="column shattered_005-rigid" type="MeshInstance3D" parent="column shattered/column shattered_005-rigid"]
+[node name="column shattered_005-rigid" type="MeshInstance3D" parent="column shattered/column shattered_005-rigid" unique_id=1961174642]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_1kagm")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_005-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_005-rigid" unique_id=1839014585]
 shape = SubResource("ConvexPolygonShape3D_olcfb")
 
-[node name="column shattered_006-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_006-rigid" type="RigidBody3D" parent="column shattered" unique_id=1921342256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50093967, 2.443902, -0.78596735)
 
-[node name="column shattered_006-rigid" type="MeshInstance3D" parent="column shattered/column shattered_006-rigid"]
+[node name="column shattered_006-rigid" type="MeshInstance3D" parent="column shattered/column shattered_006-rigid" unique_id=2012243092]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_13rka")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_006-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_006-rigid" unique_id=2117850895]
 shape = SubResource("ConvexPolygonShape3D_w0baq")
 
-[node name="column shattered_007-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_007-rigid" type="RigidBody3D" parent="column shattered" unique_id=904379952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58693033, -0.47514492, -0.41636825)
 
-[node name="column shattered_007-rigid" type="MeshInstance3D" parent="column shattered/column shattered_007-rigid"]
+[node name="column shattered_007-rigid" type="MeshInstance3D" parent="column shattered/column shattered_007-rigid" unique_id=1906242684]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_3u6tn")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_007-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_007-rigid" unique_id=1717505772]
 shape = SubResource("ConvexPolygonShape3D_5vu3h")
 
-[node name="column shattered_008-rigid" type="RigidBody3D" parent="column shattered"]
+[node name="column shattered_008-rigid" type="RigidBody3D" parent="column shattered" unique_id=601006136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9988512, 1.7078824, 0.43582925)
 
-[node name="column shattered_008-rigid" type="MeshInstance3D" parent="column shattered/column shattered_008-rigid"]
+[node name="column shattered_008-rigid" type="MeshInstance3D" parent="column shattered/column shattered_008-rigid" unique_id=437076021]
 layers = 128
 gi_mode = 0
 mesh = SubResource("ArrayMesh_6q6yt")
-skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_008-rigid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="column shattered/column shattered_008-rigid" unique_id=191638994]
 shape = SubResource("ConvexPolygonShape3D_6btnd")
 
-[node name="no imp" type="Node3D" parent="column shattered"]
+[node name="no imp" type="Node3D" parent="column shattered" unique_id=1097998717]
 
-[node name="OnShatterAPS3D" type="AudioStreamPlayer3D" parent="."]
+[node name="OnShatterAPS3D" type="AudioStreamPlayer3D" parent="." unique_id=1337382562]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7812991, 0)
 max_db = -1.0
 
-[node name="OnShatterAPS3D_2" type="AudioStreamPlayer3D" parent="."]
+[node name="OnShatterAPS3D_2" type="AudioStreamPlayer3D" parent="." unique_id=497445286]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0602658, 0)
 max_db = -3.0

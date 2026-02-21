@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://yv1wf8fj6a2k"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://yv1wf8fj6a2k"]
 
 [ext_resource type="Texture2D" uid="uid://cwq86lu2pf12x" path="res://-assets-/materials-shared/_textures/lu_noise/paired/T_Lu_Noise_21.png" id="1_am4h8"]
 [ext_resource type="Texture2D" uid="uid://dxsl5k4jgky1h" path="res://-assets-/materials-shared/_textures/lu_noise/T_NoiseNormal_80.png" id="2_bqne8"]

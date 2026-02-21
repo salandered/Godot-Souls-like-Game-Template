@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c4s84e8jai5tp"]
+[gd_scene format=4 uid="uid://c4s84e8jai5tp"]
 
 [ext_resource type="Script" uid="uid://v8wb46q68q4" path="res://logic/entities/Items/crate/dark_crate/dark_crate.gd" id="1_l7xcd"]
 [ext_resource type="PhysicsMaterial" uid="uid://6doppmi3hm3d" path="res://logic/entities/Items/crate/dark_crate/dark_crate_ph_mat.tres" id="1_qsoln"]
@@ -70,7 +70,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lw0xi")
 
-[node name="DarkCrate" type="RigidBody3D"]
+[node name="DarkCrate" type="RigidBody3D" unique_id=1099402023]
 mass = 1.5
 physics_material_override = ExtResource("1_qsoln")
 gravity_scale = 1.2
@@ -78,14 +78,13 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.5, 0)
 script = ExtResource("1_l7xcd")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2126927769]
 shape = SubResource("BoxShape3D_e5nct")
 
-[node name="painted crate" type="MeshInstance3D" parent="."]
+[node name="painted crate" type="MeshInstance3D" parent="." unique_id=1035468828]
 layers = 128
 gi_mode = 2
 mesh = SubResource("ArrayMesh_6aq6d")
-skeleton = NodePath("")
 
-[node name="RigidBodyASP3D" parent="." instance=ExtResource("5_7chfk")]
+[node name="RigidBodyASP3D" parent="." unique_id=1032975108 instance=ExtResource("5_7chfk")]
 unique_name_in_owner = true

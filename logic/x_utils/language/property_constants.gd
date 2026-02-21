@@ -1,4 +1,4 @@
-class_name PropC
+class_name PropC ## Stands for Propery Constants
 extends RefCounted
 
 
@@ -7,6 +7,7 @@ extends RefCounted
 ##    working with theme overrides
 ## NOTE: should be named exactly like the property.
 ##	 non underscore symbols becomes underscore
+
 
 const ASP_VOLUME_DB = "volume_db"
 const MODULATE_A = "modulate:a"
@@ -31,3 +32,7 @@ const MARGIN_LEFT = "margin_left"
 const MARGIN_RIGHT = "margin_right"
 const MARGIN_TOP = "margin_top"
 const MARGIN_BOTTOM = "margin_bottom"
+
+
+# 
+const ADD_CHILD = "add_child"

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm0tmwxfcv6e4"]
+[gd_scene format=3 uid="uid://dm0tmwxfcv6e4"]
 
 [ext_resource type="Script" uid="uid://ci6jbafk3yrb5" path="res://logic/ui/options_menu/tabs/audio/m_audio_input_option_control.gd" id="2_eebob"]
 
-[node name="AudioInputOptionControl" type="HBoxContainer"]
+[node name="AudioInputOptionControl" type="HBoxContainer" unique_id=45178004]
 visible = false
 custom_minimum_size = Vector2(0, 40)
 offset_right = 400.0
@@ -15,7 +15,7 @@ section = "AudioSettings"
 property_type = 4
 default_value = ""
 
-[node name="OptionLabel" type="Label" parent="."]
+[node name="OptionLabel" type="Label" parent="." unique_id=2086079967]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
@@ -23,7 +23,7 @@ size_flags_horizontal = 3
 text = "Input Device "
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="OptionButton" type="OptionButton" parent="." unique_id=1323503135]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

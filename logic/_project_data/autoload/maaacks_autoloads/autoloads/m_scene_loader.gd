@@ -33,12 +33,14 @@ func _check_scene_path() -> bool:
 		return false
 	return true
 
+
 func get_status() -> ResourceLoader.ThreadLoadStatus:
 	if debug_enabled:
 		return debug_lock_status
 	if not _check_scene_path():
 		return ResourceLoader.THREAD_LOAD_INVALID_RESOURCE
 	return ResourceLoader.load_threaded_get_status(_scene_path)
+
 
 func get_progress() -> float:
 	if debug_enabled:
@@ -48,6 +50,7 @@ func get_progress() -> float:
 	var progress_array: Array = []
 	ResourceLoader.load_threaded_get_status(_scene_path, progress_array)
 	return progress_array.pop_back()
+
 
 func get_resource() -> Resource:
 	if not _check_scene_path():
@@ -59,6 +62,7 @@ func get_resource() -> Resource:
 	if current_loaded_resource != null:
 		_loaded_resource = current_loaded_resource
 	return _loaded_resource
+
 
 func change_scene_to_resource() -> void:
 	if debug_enabled:
@@ -96,8 +100,10 @@ func _check_loading_screen() -> bool:
 		return false
 	return true
 
+
 func reload_current_scene() -> void:
 	get_tree().reload_current_scene()
+
 
 func load_scene(scene_path: String, in_background: bool = false) -> void:
 	M_ProjectMusicController.fade_out(2.5)
@@ -116,13 +122,16 @@ func load_scene(scene_path: String, in_background: bool = false) -> void:
 	if _check_loading_screen() and not _background_loading:
 		change_scene_to_loading_screen()
 
+
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"ui_paste"):
 		if DisplayServer.clipboard_get().hash() == _exit_hash:
 			get_tree().quit()
 
+
 func _ready() -> void:
 	set_process(false)
+
 
 func _process(_delta) -> void:
 	var status = get_status()

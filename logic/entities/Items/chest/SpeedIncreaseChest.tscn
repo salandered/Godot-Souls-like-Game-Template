@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5tsnu0lrbyel"]
+[gd_scene format=3 uid="uid://b5tsnu0lrbyel"]
 
 [ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_2sh8b"]
 [ext_resource type="Script" uid="uid://d24u4ptnmll7f" path="res://logic/entities/Items/chest/speed_increase_chest.gd" id="2_lsi57"]
@@ -53,19 +53,19 @@ detail_enabled = true
 detail_mask = ExtResource("7_h6p6h")
 detail_albedo = ExtResource("6_5vdv7")
 
-[node name="SpeedIncreaseChest" instance=ExtResource("1_2sh8b")]
+[node name="SpeedIncreaseChest" unique_id=541366714 instance=ExtResource("1_2sh8b")]
 script = ExtResource("2_lsi57")
 item_scene = ExtResource("3_dv0l8")
 
-[node name="ChestFasteners" parent="Visuals/LidPivot/FastenersPivot" index="0"]
+[node name="ChestFasteners" parent="Visuals/LidPivot/FastenersPivot" parent_id_path=PackedInt32Array(1741603679) index="0" unique_id=306879908]
 material_override = SubResource("StandardMaterial3D_5d1rf")
 
-[node name="ChestLid" parent="Visuals/LidPivot" index="1"]
+[node name="ChestLid" parent="Visuals/LidPivot" parent_id_path=PackedInt32Array(780769632) index="1" unique_id=279129403]
 material_override = SubResource("StandardMaterial3D_txqv2")
 
-[node name="ChestMain" parent="Visuals/ChessMain" index="1"]
+[node name="ChestMain" parent="Visuals/ChessMain" parent_id_path=PackedInt32Array(1648672996) index="1" unique_id=970195091]
 material_override = SubResource("StandardMaterial3D_hwyro")
 
-[node name="InteractArea" parent="." index="4"]
+[node name="InteractArea" parent="." index="4" unique_id=965031315]
 label_text = "Open"
 label_y_offset = 1.1

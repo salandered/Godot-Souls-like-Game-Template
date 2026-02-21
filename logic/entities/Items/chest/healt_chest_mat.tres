@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=8 format=3 uid="uid://3cmhbhawtjm7"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://3cmhbhawtjm7"]
 
 [ext_resource type="Texture2D" uid="uid://byrcerl6y02tm" path="res://-assets-/materials-shared/wood/rough_wood/tower-map_rough_wood_diff_1k.jpg" id="1_5dhct"]
 [ext_resource type="Texture2D" uid="uid://4y20ikq57u1q" path="res://-assets-/materials-shared/ground/I_ground088/lincoln_Ground088_2K-JPG_Color_darkest.jpg" id="2_yoihm"]

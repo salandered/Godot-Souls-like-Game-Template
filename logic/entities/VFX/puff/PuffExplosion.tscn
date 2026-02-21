@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu78ylp2jroiw"]
+[gd_scene format=3 uid="uid://bu78ylp2jroiw"]
 
 [ext_resource type="Script" uid="uid://2p87053gvdyt" path="res://logic/entities/VFX/puff/puff_explosion.gd" id="1_spofe"]
 [ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/_shaders/puff/SmokePuff.png" id="2_4x8tm"]
@@ -70,15 +70,13 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.2562814, 0.46770027, 0.7512563, 1)
 colors = PackedColorArray(0.67650515, 0.67650515, 0.67650515, 0, 1, 0.6, 0, 0.7254902, 0.81, 0.42903, 0.13770002, 0.15294118, 0.55, 0.42221668, 0.32450002, 0.47843137, 0.105469, 0.105469, 0.105469, 0)
 
-[node name="PuffExplosion" type="Node3D"]
+[node name="PuffExplosion" type="Node3D" unique_id=241938321]
 script = ExtResource("1_spofe")
 
-[node name="devPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_y0aew")
-}
+[node name="devPlayer" type="AnimationPlayer" parent="." unique_id=1155402351]
+libraries/ = SubResource("AnimationLibrary_y0aew")
 
-[node name="PuffExplosionParticles" type="CPUParticles3D" parent="."]
+[node name="PuffExplosionParticles" type="CPUParticles3D" parent="." unique_id=168858962]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_tgvgc")
 cast_shadow = 0

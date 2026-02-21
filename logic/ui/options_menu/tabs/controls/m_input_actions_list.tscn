@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxp45814v6ydv"]
+[gd_scene format=3 uid="uid://bxp45814v6ydv"]
 
 [ext_resource type="Script" uid="uid://cgvwv8js7s1jd" path="res://logic/ui/options_menu/tabs/controls/m_input_actions_list.gd" id="1_ru1po"]
 
-[node name="InputActionsList" type="ScrollContainer"]
+[node name="InputActionsList" type="ScrollContainer" unique_id=1970106930]
 custom_minimum_size = Vector2(560, 240)
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,19 +27,19 @@ action_name_map = {
 "move_up": "Move Up"
 }
 
-[node name="ParentBoxContainer" type="BoxContainer" parent="."]
+[node name="ParentBoxContainer" type="BoxContainer" parent="." unique_id=1312618976]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 vertical = true
 
-[node name="ActionBoxContainer" type="BoxContainer" parent="ParentBoxContainer"]
+[node name="ActionBoxContainer" type="BoxContainer" parent="ParentBoxContainer" unique_id=1922529050]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="ActionNameLabel" type="Label" parent="ParentBoxContainer/ActionBoxContainer"]
+[node name="ActionNameLabel" type="Label" parent="ParentBoxContainer/ActionBoxContainer" unique_id=1899347804]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28

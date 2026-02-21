@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://du67217427lki"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://du67217427lki"]
 
 [ext_resource type="AudioStream" uid="uid://2us2w8kbrxwp" path="res://-assets-/SFX/sources/mini fantasy/12_human_jump_3_whoosh.wav" id="1_rc4gb"]
 [ext_resource type="AudioStream" uid="uid://uh7rnqjucgup" path="res://-assets-/SFX/sources/mini fantasy/12_human_jump_1_whoosh.wav" id="2_cxoc6"]

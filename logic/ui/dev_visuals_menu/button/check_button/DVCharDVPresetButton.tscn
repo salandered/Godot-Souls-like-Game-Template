@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://da2gp8o4yvtc1"]
+[gd_scene format=3 uid="uid://da2gp8o4yvtc1"]
 
 [ext_resource type="FontFile" uid="uid://b3b45ricfqn2a" path="res://-assets-/ui_assets/_font/Noto_Sans/static/NotoSans-SemiBoldItalic.ttf" id="1_se45b"]
 [ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28)_or.png" id="1_yh4hi"]
@@ -102,7 +102,7 @@ bg_color = Color(0.61565834, 0.6357732, 0.00011758829, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rbjfo"]
 
-[node name="DVCharDVPresetButton" type="CheckButton"]
+[node name="DVCharDVPresetButton" type="CheckButton" unique_id=50378819]
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)

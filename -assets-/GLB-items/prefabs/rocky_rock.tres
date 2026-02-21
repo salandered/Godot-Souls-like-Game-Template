@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://8qowxkw6vux"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://8qowxkw6vux"]
 
 [ext_resource type="Material" uid="uid://dacrgdm6xn345" path="res://-assets-/materials-shared/ground/brown_mud/A brown_mud_darken_Reimp_2k.tres" id="1_8hpx4"]
 

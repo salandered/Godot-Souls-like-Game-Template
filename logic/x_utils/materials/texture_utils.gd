@@ -1,4 +1,4 @@
-class_name TextureUtils
+class_name ThemeUtils
 extends RefCountedStaticLogger
 
 
@@ -62,7 +62,9 @@ static func _create_randomized_stylebox_texture(original_style: StyleBox, debug_
 	
 	var dx := randf_range(-max_offset, max_offset)
 	# some magic
-	var dy := randf_range(-max_offset, -max_offset / 2.0) if ra.coinflip() else randf_range(max_offset / 2.0, max_offset)
+	var dy := randf_range(-max_offset, -max_offset / 2.0) \
+		if ra.coinflip() \
+		else randf_range(max_offset / 2.0, max_offset)
 	
 	var new_x := clampf(rect.position.x + dx, 0.0, tex_w - rect.size.x)
 	var new_y := clampf(rect.position.y + dy, 0.0, tex_h - rect.size.y)
@@ -80,7 +82,7 @@ static func _create_randomized_stylebox_texture(original_style: StyleBox, debug_
 # region: __LOGS
 
 static func pp_name() -> String:
-	return "TextureUtils"
+	return "ThemeUtils"
 
 static func __LOG_B() -> bool:
 	return false

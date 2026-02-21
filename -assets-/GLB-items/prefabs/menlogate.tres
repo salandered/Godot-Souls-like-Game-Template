@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://d0lr7psm52dyi"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://d0lr7psm52dyi"]
 
 [ext_resource type="Material" uid="uid://65ksa61gh8p3" path="res://-assets-/materials-shared/rocks-stone/rock_wall_08/rock_wall_08_Reimp.tres" id="1_g7fgq"]
 

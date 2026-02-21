@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://cy4p8mcuw7g44"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cy4p8mcuw7g44"]
 
 [ext_resource type="Texture2D" uid="uid://ckvbroetp76p6" path="res://-assets-/materials-shared/concrete/I_concrete_old/island_Concrete Old_diffuse.jpg" id="1_boesb"]
 [ext_resource type="Texture2D" uid="uid://4y20ikq57u1q" path="res://-assets-/materials-shared/ground/I_ground088/lincoln_Ground088_2K-JPG_Color_darkest.jpg" id="2_h6wdy"]

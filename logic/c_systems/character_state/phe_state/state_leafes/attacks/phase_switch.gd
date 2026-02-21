@@ -20,7 +20,7 @@ var _pushed_rigid_bodies: bool = false
 func on_enter_state() -> void:
 	_combat_set_hit_data()
 	
-	SigUtils.safe_emit(
+	SigUtils.safe_emit_sig_data(
 		me.get_sig_container().get_by_sig_id(SignalID.sfx_unique),
 		{SFXConstants.unique_key: SFXConstants.Unique.phase_switch},
 		false)

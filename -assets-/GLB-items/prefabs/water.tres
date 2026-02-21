@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=4 format=4 uid="uid://d1vmctg2riaj6"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://d1vmctg2riaj6"]
 
 [ext_resource type="Shader" uid="uid://7vvgrjyi5te6" path="res://-assets-/materials-shared/_shaders/unsorted/miniature_t1.gdshader" id="1_xbpmg"]
 

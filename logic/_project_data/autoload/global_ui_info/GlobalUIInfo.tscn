@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://48tejneiwq5o"]
+[gd_scene format=3 uid="uid://48tejneiwq5o"]
 
 [ext_resource type="Script" uid="uid://ho1kjt4aujxq" path="res://logic/_project_data/autoload/global_ui_info/global_ui_info.gd" id="1_ihl3n"]
 [ext_resource type="Script" uid="uid://lnnid1wo64bh" path="res://logic/x_dev_systems/ui_overlay_panels/profiler/profiler.gd" id="2_65fx7"]
@@ -53,72 +53,72 @@ color = Color(0.39138144, 0.39138144, 0.39138144, 1)
 thickness = 2
 vertical = true
 
-[node name="GlobalUIInfo" type="Node3D"]
+[node name="GlobalUIInfo" type="Node3D" unique_id=382407674]
 script = ExtResource("1_ihl3n")
 in_game_vp_scene = ExtResource("2_f4jnj")
 
-[node name="GlobalUIHotkeys" type="Node" parent="."]
+[node name="GlobalUIHotkeys" type="Node" parent="." unique_id=1823686991]
 script = ExtResource("3_p4imp")
 
-[node name="Profiler" type="Node" parent="."]
+[node name="Profiler" type="Node" parent="." unique_id=248341649]
 unique_name_in_owner = true
 script = ExtResource("2_65fx7")
 
-[node name="FreeCamUI" type="Node" parent="."]
+[node name="FreeCamUI" type="Node" parent="." unique_id=606670932]
 unique_name_in_owner = true
 script = ExtResource("5_65fx7")
 
-[node name="LogsManagers" type="Node" parent="."]
+[node name="LogsManagers" type="Node" parent="." unique_id=744163819]
 
-[node name="SigInfoManager" type="Node" parent="LogsManagers"]
+[node name="SigInfoManager" type="Node" parent="LogsManagers" unique_id=219450502]
 unique_name_in_owner = true
 script = ExtResource("5_7uhmh")
 
-[node name="AllLogPanelManager" type="Node" parent="LogsManagers"]
+[node name="AllLogPanelManager" type="Node" parent="LogsManagers" unique_id=724591320]
 unique_name_in_owner = true
 script = ExtResource("6_r0oph")
 
-[node name="ErrorLogPanelManager" type="Node" parent="LogsManagers"]
+[node name="ErrorLogPanelManager" type="Node" parent="LogsManagers" unique_id=2091636472]
 unique_name_in_owner = true
 script = ExtResource("6_mcb6c")
 
-[node name="DynamicInfoPresenters" type="Node" parent="."]
+[node name="DynamicInfoPresenters" type="Node" parent="." unique_id=653614853]
 unique_name_in_owner = true
 
-[node name="Presenter1" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
+[node name="Presenter1" type="Node" parent="DynamicInfoPresenters" unique_id=902533491 node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("5_yk2yn")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack")
 
-[node name="Presenter2" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
+[node name="Presenter2" type="Node" parent="DynamicInfoPresenters" unique_id=968241263 node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("6_7uhmh")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState")
 
-[node name="Presenter3" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
+[node name="Presenter3" type="Node" parent="DynamicInfoPresenters" unique_id=727787288 node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("7_mcb6c")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack")
 
-[node name="Presenter4" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
+[node name="Presenter4" type="Node" parent="DynamicInfoPresenters" unique_id=369375751 node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("8_xmbhh")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState")
 
-[node name="Presenter5" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
+[node name="Presenter5" type="Node" parent="DynamicInfoPresenters" unique_id=1402650543 node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("9_r0oph")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack")
 
-[node name="Presenter6" type="Node" parent="DynamicInfoPresenters" node_paths=PackedStringArray("ui_container")]
+[node name="Presenter6" type="Node" parent="DynamicInfoPresenters" unique_id=379254863 node_paths=PackedStringArray("ui_container")]
 unique_name_in_owner = true
 script = ExtResource("10_6ybb6")
 ui_container = NodePath("../../CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1731967687]
 layer = 40
 
-[node name="__global_margin" type="MarginContainer" parent="CanvasLayer"]
+[node name="__global_margin" type="MarginContainer" parent="CanvasLayer" unique_id=494525013]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -133,16 +133,16 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="TopSide" type="MarginContainer" parent="CanvasLayer/__global_margin"]
+[node name="TopSide" type="MarginContainer" parent="CanvasLayer/__global_margin" unique_id=1846381423]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide" unique_id=347649433]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xmbhh")
 
-[node name="DynamicInfoGrid" type="FlowContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer"]
+[node name="DynamicInfoGrid" type="FlowContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer" unique_id=1742592925]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -150,30 +150,30 @@ size_flags_vertical = 0
 theme_override_constants/h_separation = 14
 theme_override_constants/v_separation = 20
 
-[node name="__health_margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="__health_margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=724790715]
 custom_minimum_size = Vector2(380, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PlState" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="PlState" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=129285524]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState" unique_id=1275098231]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer" unique_id=750396133]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin" unique_id=515650419]
 layout_mode = 2
 
-[node name="CSTimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" node_paths=PackedStringArray("ts_curr_action_label", "ts_curr_state_label")]
+[node name="CSTimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=942742088 node_paths=PackedStringArray("ts_curr_action_label", "ts_curr_state_label")]
 script = ExtResource("15_16g7h")
 ts_curr_action_label = NodePath("../CATimeSpentLabel")
 ts_curr_state_label = NodePath("../CSTimeSpentLabel")
@@ -181,12 +181,12 @@ dvc_section = 30
 _char_type = 1
 _dv_type = 1
 
-[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=418804959]
 custom_minimum_size = Vector2(50, 10)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="CSTimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+[node name="CSTimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=1751846405]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(54, 0)
 layout_mode = 2
@@ -198,12 +198,12 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="____m3" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m3" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=545339685]
 custom_minimum_size = Vector2(50, 10)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="CATimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+[node name="CATimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=83232850]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -214,12 +214,12 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=2138833379]
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer"]
+[node name="BluePanelTitle" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/PanelContainer/__margin/HBoxContainer" unique_id=1073602877]
 unique_name_in_owner = true
 modulate = Color(0.7036598, 0.7036598, 0.7036598, 1)
 layout_mode = 2
@@ -237,19 +237,19 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState"]
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState" unique_id=1071908672]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="PlayerStateInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PlayerStateInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" unique_id=1045960656 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 layout_mode = 2
 in_editor_label_text = "Attack run 1"
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PlayerLegsState" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PlayerLegsState" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" unique_id=1485876271 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(80, 0)
@@ -259,7 +259,7 @@ in_editor_label_text = "sprint"
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PlayerActionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PlayerActionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" unique_id=1002337974 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
@@ -268,7 +268,7 @@ in_editor_label_text = "Fast turn 180 💨"
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PlayerReactionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" instance=ExtResource("13_yk2yn")]
+[node name="PlayerReactionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlState/__hbox" unique_id=1336679332 instance=ExtResource("13_yk2yn")]
 unique_name_in_owner = true
 layout_mode = 2
 title_font_size = 22
@@ -276,29 +276,29 @@ gradient_color_modulate = Color(1.02, 0.836, 1.317, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PlAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="PlAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=96707850]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack" unique_id=898679487]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer" unique_id=1847274692]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin" unique_id=494542229]
 layout_mode = 2
 
-[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer"]
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer" unique_id=193571941]
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer"]
+[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/PanelContainer/__margin/HBoxContainer" unique_id=1926855930]
 modulate = Color(0.7036598, 0.7036598, 0.7036598, 1)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -315,11 +315,11 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack"]
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack" unique_id=534076126]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PlayerAttackDamage" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PlayerAttackDamage" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" unique_id=1621918927 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
@@ -329,7 +329,7 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PlayerAttackSpeed" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PlayerAttackSpeed" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" unique_id=140557732 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -339,7 +339,7 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PlayerAttackDirection" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PlayerAttackDirection" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PlAttack/__hbox" unique_id=765288262 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
@@ -349,22 +349,22 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="HSMState" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="HSMState" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=242122159]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState" unique_id=1245396632]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer" unique_id=679704007]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HSMCSTimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin" node_paths=PackedStringArray("ts_curr_sbs_2", "ts_curr_sbs_3", "ts_curr_sbs_4", "ts_curr_state_label")]
+[node name="HSMCSTimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin" unique_id=104169317 node_paths=PackedStringArray("ts_curr_sbs_2", "ts_curr_sbs_3", "ts_curr_sbs_4", "ts_curr_state_label")]
 script = ExtResource("18_16g7h")
 ts_curr_sbs_2 = NodePath("../HBoxContainer/HSMCS1TimeSpentLabel")
 ts_curr_sbs_3 = NodePath("../HBoxContainer/HSMCS2TimeSpentLabel")
@@ -374,17 +374,17 @@ dvc_section = 30
 _char_type = 2
 _dv_type = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin" unique_id=658073805]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="____m3" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m3" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=892835522]
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HSMCS1TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="HSMCS1TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=318405329]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -395,13 +395,13 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="____m6" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m6" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=1217567648]
 custom_minimum_size = Vector2(25, 10)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="HSMCS2TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="HSMCS2TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=1987688844]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -412,13 +412,13 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="____m4" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m4" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=302697670]
 custom_minimum_size = Vector2(90, 10)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 
-[node name="HSMCS3TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="HSMCS3TimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=1248009086]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -429,13 +429,13 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="____m5" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m5" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=163259419]
 custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 
-[node name="HSMCSLeafTimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="HSMCSLeafTimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=423715771]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -446,13 +446,13 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=55287809]
 custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 
-[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer"]
+[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/PanelContainer/__margin/HBoxContainer" unique_id=1233047573]
 modulate = Color(0.7036598, 0.7036598, 0.7036598, 1)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -469,11 +469,11 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState"]
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState" unique_id=1029445482]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="StateInfoPheDepth2" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheDepth2" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" unique_id=556352853 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
@@ -483,7 +483,7 @@ in_editor_label_text = "Still Life"
 drop_buffer = 8.0
 fade_duration = 0.5
 
-[node name="StateInfoPheDepth3" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheDepth3" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" unique_id=1281652433 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
@@ -493,7 +493,7 @@ title_text = "Depth 2"
 drop_buffer = 8.0
 fade_duration = 0.5
 
-[node name="StateInfoPheDepth4" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheDepth4" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" unique_id=937622384 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -503,7 +503,7 @@ title_text = "Depth 3"
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="StateInfoPheLeaf" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="StateInfoPheLeaf" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" unique_id=526897304 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
@@ -513,7 +513,7 @@ gradient_color_modulate = Color(0.6578363, 1, 0.6578363, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PHEReactionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" instance=ExtResource("13_yk2yn")]
+[node name="PHEReactionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/HSMState/__hbox" unique_id=91327452 instance=ExtResource("13_yk2yn")]
 unique_name_in_owner = true
 layout_mode = 2
 title_font_size = 20
@@ -522,25 +522,25 @@ gradient_color_modulate = Color(1.02, 0.836, 1.317, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PHEAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="PHEAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=1452018894]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack" unique_id=1156109352]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer" unique_id=150334170]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin" unique_id=2123639940]
 layout_mode = 2
 
-[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer"]
+[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/PanelContainer/__margin/HBoxContainer" unique_id=948220217]
 modulate = Color(0.7036598, 0.7036598, 0.7036598, 1)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -557,11 +557,11 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack"]
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack" unique_id=495093858]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PHEAttackDamage" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PHEAttackDamage" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" unique_id=1178112795 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
@@ -571,7 +571,7 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PHEAttackSpeed" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PHEAttackSpeed" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" unique_id=2056590662 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -581,7 +581,7 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PHEAttackDirection" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="PHEAttackDirection" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/PHEAttack/__hbox" unique_id=93723322 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
@@ -591,30 +591,30 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="SEState" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="SEState" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=1262187160]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState" unique_id=98002325]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer" unique_id=408662021]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin" unique_id=759243566]
 layout_mode = 2
 
-[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m2" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer" unique_id=803990066]
 custom_minimum_size = Vector2(55, 10)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="SECSTimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+[node name="SECSTimeSpentLabel" type="Label" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer" unique_id=161453757]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(54, 0)
 layout_mode = 2
@@ -626,19 +626,19 @@ text = "23.41"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SETimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer/SECSTimeSpentLabel" node_paths=PackedStringArray("ts_curr_state_label")]
+[node name="SETimeSpentMetric" type="Node" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer/SECSTimeSpentLabel" unique_id=1819938267 node_paths=PackedStringArray("ts_curr_state_label")]
 script = ExtResource("19_bvmrs")
 ts_curr_state_label = NodePath("..")
 dvc_section = 30
 _char_type = 3
 _dv_type = 1
 
-[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+[node name="____m" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer" unique_id=1259220469]
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer"]
+[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/PanelContainer/__margin/HBoxContainer" unique_id=1710345404]
 modulate = Color(0.7036598, 0.7036598, 0.7036598, 1)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -655,11 +655,11 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState"]
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState" unique_id=695727950]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SEStateInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="SEStateInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox" unique_id=540334383 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
@@ -667,7 +667,7 @@ in_editor_label_text = "Attack Left Right"
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="SEReactionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox" instance=ExtResource("13_yk2yn")]
+[node name="SEReactionInfo" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox" unique_id=487149305 instance=ExtResource("13_yk2yn")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -679,56 +679,56 @@ gradient_color_modulate = Color(1.02, 0.836, 1.317, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="PanelGradient" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo" index="0"]
+[node name="PanelGradient" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo" index="0" unique_id=1734951189]
 self_modulate = Color(1.02, 0.836, 1.317, 1)
 
-[node name="Title" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" index="0"]
+[node name="Title" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" parent_id_path=PackedInt32Array(487149305, 602695234) index="0" unique_id=980192768]
 theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 20
 theme_override_font_sizes/italics_font_size = 20
 
-[node name="__margin2" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" index="1"]
+[node name="__margin2" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer" parent_id_path=PackedInt32Array(487149305, 602695234) index="1" unique_id=179678802]
 visible = false
 
-[node name="TitleAdditional" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0"]
+[node name="TitleAdditional" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/__margin2" index="0" unique_id=1193991582]
 theme_override_font_sizes/normal_font_size = 19
 theme_override_font_sizes/bold_font_size = 19
 theme_override_font_sizes/italics_font_size = 19
 text = "[b][/b]"
 
-[node name="Text" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" index="0"]
+[node name="Text" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin" parent_id_path=PackedInt32Array(487149305, 241586409) index="0" unique_id=1522643677]
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24
 theme_override_font_sizes/italics_font_size = 24
 
-[node name="VSeparator" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" index="1"]
+[node name="VSeparator" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(487149305, 366621837) index="1" unique_id=2052907881]
 theme_override_styles/separator = SubResource("StyleBoxLine_iueb4")
 
-[node name="Text2" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" index="0"]
+[node name="Text2" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo/PanelGradient/MarginInsidePanel/VBoxContainer/HBoxContainer/__margin_text_2" parent_id_path=PackedInt32Array(487149305, 1969647740) index="0" unique_id=1308099948]
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24
 theme_override_font_sizes/italics_font_size = 24
 text = ""
 
-[node name="SEAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid"]
+[node name="SEAttack" type="VBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid" unique_id=1872575350]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack" unique_id=729527608]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ybb6")
 
-[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer"]
+[node name="__margin" type="MarginContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer" unique_id=1398145457]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin" unique_id=66319256]
 layout_mode = 2
 
-[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer"]
+[node name="BluePanelTitle2" type="RichTextLabel" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/PanelContainer/__margin/HBoxContainer" unique_id=472644811]
 modulate = Color(0.7036598, 0.7036598, 0.7036598, 1)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -745,11 +745,11 @@ fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack"]
+[node name="__hbox" type="HBoxContainer" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack" unique_id=790519420]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SEAttackDamage" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="SEAttackDamage" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" unique_id=67289109 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
@@ -759,7 +759,7 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="SEAttackSpeed" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="SEAttackSpeed" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" unique_id=586655421 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -769,7 +769,7 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="SEAttackDirection" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" instance=ExtResource("6_o4jv4")]
+[node name="SEAttackDirection" parent="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEAttack/__hbox" unique_id=383317377 instance=ExtResource("6_o4jv4")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
@@ -779,51 +779,51 @@ gradient_color_modulate = Color(1.263, 0.8273228, 0.9286431, 1)
 drop_buffer = 2.0
 fade_duration = 0.5
 
-[node name="RightSide" type="MarginContainer" parent="CanvasLayer/__global_margin"]
+[node name="RightSide" type="MarginContainer" parent="CanvasLayer/__global_margin" unique_id=46100410]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="__vbox" type="VBoxContainer" parent="CanvasLayer/__global_margin/RightSide"]
+[node name="__vbox" type="VBoxContainer" parent="CanvasLayer/__global_margin/RightSide" unique_id=1672690800]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ProfilerPanel" type="PanelContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox"]
+[node name="ProfilerPanel" type="PanelContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox" unique_id=1553611829]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="__m" type="MarginContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel"]
+[node name="__m" type="MarginContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel" unique_id=2062611366]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="LabelContainer" type="VBoxContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m"]
+[node name="LabelContainer" type="VBoxContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m" unique_id=2000515626]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 
-[node name="ControlInfoBox" type="VBoxContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer"]
+[node name="ControlInfoBox" type="VBoxContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer" unique_id=688442329]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ProfilerControlInfo" type="Label" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer/ControlInfoBox"]
+[node name="ProfilerControlInfo" type="Label" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer/ControlInfoBox" unique_id=374526262]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7036598, 0.7036598, 0.7036598, 1)
 theme_override_font_sizes/font_size = 16
 text = "Controls Info text"
 
-[node name="HSeparator" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer/ControlInfoBox" instance=ExtResource("6_x47y3")]
+[node name="HSeparator" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer/ControlInfoBox" unique_id=2040922339 instance=ExtResource("6_x47y3")]
 layout_mode = 2
 
-[node name="space" type="MarginContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer/ControlInfoBox"]
+[node name="space" type="MarginContainer" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer/ControlInfoBox" unique_id=134537217]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="ProfilerInfo" type="Label" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer"]
+[node name="ProfilerInfo" type="Label" parent="CanvasLayer/__global_margin/RightSide/__vbox/ProfilerPanel/__m/LabelContainer" unique_id=789030422]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
@@ -831,59 +831,59 @@ text = "Profiler Info text
 ...
 ..."
 
-[node name="FirstTutorial" parent="CanvasLayer/__global_margin/RightSide/__vbox" instance=ExtResource("13_bnty7")]
+[node name="FirstTutorial" parent="CanvasLayer/__global_margin/RightSide/__vbox" unique_id=1880658345 instance=ExtResource("13_bnty7")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SpectrumVisualiser" parent="CanvasLayer/__global_margin/RightSide/__vbox" instance=ExtResource("22_45dia")]
+[node name="SpectrumVisualiser" parent="CanvasLayer/__global_margin/RightSide/__vbox" unique_id=1794596391 instance=ExtResource("22_45dia")]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="LeftSide" type="VBoxContainer" parent="CanvasLayer/__global_margin"]
+[node name="LeftSide" type="VBoxContainer" parent="CanvasLayer/__global_margin" unique_id=1916416247]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="DebugFancyCamPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("21_6ybb6")]
+[node name="DebugFancyCamPanel" parent="CanvasLayer/__global_margin/LeftSide" unique_id=556818035 instance=ExtResource("21_6ybb6")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="InputGlobalUIPanels" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("20_6ybb6")]
+[node name="InputGlobalUIPanels" parent="CanvasLayer/__global_margin/LeftSide" unique_id=8536647 instance=ExtResource("20_6ybb6")]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="GlobalUISkAnimPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("25_mgimc")]
+[node name="GlobalUISkAnimPanel" parent="CanvasLayer/__global_margin/LeftSide" unique_id=705082416 instance=ExtResource("25_mgimc")]
 layout_mode = 2
 
-[node name="GlobalUIPHEAnimPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("26_p8n4t")]
+[node name="GlobalUIPHEAnimPanel" parent="CanvasLayer/__global_margin/LeftSide" unique_id=36465494 instance=ExtResource("26_p8n4t")]
 layout_mode = 2
 
-[node name="GlobalUIEnemyMovementPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("25_xista")]
+[node name="GlobalUIEnemyMovementPanel" parent="CanvasLayer/__global_margin/LeftSide" unique_id=908814333 instance=ExtResource("25_xista")]
 layout_mode = 2
 
-[node name="GlobalUIPlayerComboPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("23_8yua4")]
+[node name="GlobalUIPlayerComboPanel" parent="CanvasLayer/__global_margin/LeftSide" unique_id=1362201665 instance=ExtResource("23_8yua4")]
 layout_mode = 2
 
-[node name="LogsPanel" parent="CanvasLayer/__global_margin/LeftSide" instance=ExtResource("17_r0oph")]
+[node name="LogsPanel" parent="CanvasLayer/__global_margin/LeftSide" unique_id=759912873 instance=ExtResource("17_r0oph")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="FreeCam" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide"]
+[node name="FreeCam" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide" unique_id=1069509275]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam" unique_id=568785627]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="margin10" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer"]
+[node name="margin10" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer" unique_id=1041186295]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -891,16 +891,16 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10" unique_id=1043474487]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="ControlsInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer"]
+[node name="ControlsInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer" unique_id=1866807957]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="Controls" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer/ControlsInfo"]
+[node name="Controls" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer/ControlsInfo" unique_id=1459961837]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -920,16 +920,16 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="HSeparator" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer" instance=ExtResource("6_x47y3")]
+[node name="HSeparator" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer" unique_id=1447030678 instance=ExtResource("6_x47y3")]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="HUDInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer"]
+[node name="HUDInfo" type="MarginContainer" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer" unique_id=1601929964]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="HUD" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer/HUDInfo"]
+[node name="HUD" type="RichTextLabel" parent="CanvasLayer/__global_margin/LeftSide/FreeCam/PanelContainer/margin10/VBoxContainer/HUDInfo" unique_id=1137810010]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -945,10 +945,10 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1428052903]
 layer = 100
 
-[node name="CursorTools" type="Node" parent="CanvasLayer2"]
+[node name="CursorTools" type="Node" parent="CanvasLayer2" unique_id=1876213618]
 script = ExtResource("30_n600l")
 cursor_texture = ExtResource("31_p4imp")
 toggle_trail_on_lanch = true

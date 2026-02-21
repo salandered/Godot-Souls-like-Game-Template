@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3xoku2an7ywo"]
+[gd_scene format=3 uid="uid://c3xoku2an7ywo"]
 
 [ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/Items/crate/dark_crate/DarkCrate.tscn" id="1_4lbtg"]
 [ext_resource type="Texture2D" uid="uid://byrcerl6y02tm" path="res://-assets-/materials-shared/wood/rough_wood/tower-map_rough_wood_diff_1k.jpg" id="2_hwchy"]
@@ -36,12 +36,12 @@ uv1_scale = Vector3(1, 1, 0.5)
 uv1_offset = Vector3(0, -1, 0)
 uv1_triplanar = true
 
-[node name="PaleCrate" instance=ExtResource("1_4lbtg")]
+[node name="PaleCrate" unique_id=1780045528 instance=ExtResource("1_4lbtg")]
 
-[node name="CollisionShape3D" parent="." index="0"]
+[node name="CollisionShape3D" parent="." index="0" unique_id=2126927769]
 shape = SubResource("BoxShape3D_hwchy")
 
-[node name="painted crate" parent="." index="1"]
+[node name="painted crate" parent="." index="1" unique_id=1035468828]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_1vpmk")
 surface_material_override/1 = SubResource("StandardMaterial3D_y5mh0")

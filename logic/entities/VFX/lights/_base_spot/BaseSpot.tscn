@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://ckrdsykj87gxe"]
+[gd_scene format=4 uid="uid://ckrdsykj87gxe"]
 
 [ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="1_2ye51"]
 [ext_resource type="Material" uid="uid://bu0168o3fng5i" path="res://-assets-/materials-shared/solid/base_light_test_visuals.tres" id="1_g8fxq"]
@@ -83,21 +83,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sbcve")
 
-[node name="BaseSpot" type="SpotLight3D"]
+[node name="BaseSpot" type="SpotLight3D" unique_id=1244659977]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 0.9999998, 0, -1.0000001, -4.371138e-08, 0, 0, 0)
 light_color = Color(1, 0.9366248, 0.8288257, 1)
 light_energy = 2.0
 spot_angle = 65.0
 script = ExtResource("1_i8ip5")
 
-[node name="__csg" type="CSGSphere3D" parent="."]
+[node name="__csg" type="CSGSphere3D" parent="." unique_id=57858468]
 unique_name_in_owner = true
 material_override = ExtResource("1_g8fxq")
 cast_shadow = 0
 gi_mode = 0
 radius = 0.1
 
-[node name="__csg2" type="CSGCylinder3D" parent="__csg"]
+[node name="__csg2" type="CSGCylinder3D" parent="__csg" unique_id=217450250]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.6517696e-08, -0.60665417)
 material_override = ExtResource("1_g8fxq")
@@ -109,7 +109,7 @@ sides = 6
 cone = true
 smooth_faces = false
 
-[node name="__csg3" type="CSGCylinder3D" parent="__csg"]
+[node name="__csg3" type="CSGCylinder3D" parent="__csg" unique_id=1405843520]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.8553625e-08, -1.5683241)
 material_override = ExtResource("1_g8fxq")
@@ -121,23 +121,21 @@ sides = 6
 cone = true
 smooth_faces = false
 
-[node name="PuffFog" parent="." instance=ExtResource("1_2ye51")]
+[node name="PuffFog" parent="." unique_id=1080296945 instance=ExtResource("1_2ye51")]
 unique_name_in_owner = true
 process_mode = 4
 visible = false
 
-[node name="__test" type="Node3D" parent="."]
+[node name="__test" type="Node3D" parent="." unique_id=2014287677]
 
-[node name="test_visual_base" type="MeshInstance3D" parent="__test"]
+[node name="test_visual_base" type="MeshInstance3D" parent="__test" unique_id=844851694]
 transform = Transform3D(-0.44367436, 0, -1.1358384, 0, 1.219416, 0, 1.1358382, 0, -0.44367436, -0.11369126, 0.007882406, -1.5951779)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_818gi")
-skeleton = NodePath("")
 
-[node name="test_visual_base2" type="MeshInstance3D" parent="__test"]
+[node name="test_visual_base2" type="MeshInstance3D" parent="__test" unique_id=938284402]
 transform = Transform3D(-0.13709536, 0, -0.35097405, 0, 0.37679952, 0, 0.35097396, 0, -0.13709538, 0.37530887, -0.07411756, -0.317178)
 visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_818gi")
-skeleton = NodePath("")

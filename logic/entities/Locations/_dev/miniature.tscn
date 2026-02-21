@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bj31r46hbvq8r"]
+[gd_scene format=4 uid="uid://bj31r46hbvq8r"]
 
 [ext_resource type="Script" uid="uid://dqgdgq7qeq67w" path="res://logic/c_systems/level/miniature.gd" id="1_310jj"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="2_7kfaw"]
@@ -164,89 +164,87 @@ shader_parameter/outer_fade_dist = 0.5
 material = SubResource("ShaderMaterial_37dxq")
 size = Vector2(10, 10)
 
-[node name="Miniature" type="Node3D"]
+[node name="Miniature" type="Node3D" unique_id=253174313]
 script = ExtResource("1_310jj")
 is_pause_menu_controller = false
 is_world_environment = false
 is_base_asp = false
 is_vibe_asp = false
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="Node" parent="." unique_id=737335832]
 
-[node name="PauseMenuController" type="Node" parent="UI"]
+[node name="PauseMenuController" type="Node" parent="UI" unique_id=165529502]
 script = ExtResource("2_7kfaw")
 pause_menu_packed = ExtResource("3_g81m6")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1749055345]
 transform = Transform3D(-0.32320273, -0.91608065, -0.23735271, -0.7050797, 0.065820366, 0.7060669, -0.63119155, 0.39555526, -0.6671831, 0.011999965, 8.590844, -5.571)
 shadow_enabled = true
 shadow_opacity = 0.68
 
-[node name="SpotLight3D" type="SpotLight3D" parent="DirectionalLight3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="DirectionalLight3D" unique_id=1403746167]
 transform = Transform3D(1, 1.4901161e-08, 8.940697e-08, 2.9802322e-08, 1, -2.9802322e-08, -1.1920929e-07, 2.9802322e-08, 1, -7.0097027, -13.045106, 10.102779)
 light_energy = 20.0
 spot_range = 50.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1650609986]
 environment = SubResource("Environment_e8ywp")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=634795351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6350665, 0)
 material_override = SubResource("StandardMaterial3D_g81m6")
 use_collision = true
 size = Vector3(27.375, 1, 26.635742)
 
-[node name="Chair_1_002" parent="." instance=ExtResource("5_e8ywp")]
+[node name="Chair_1_002" parent="." unique_id=1849876418 instance=ExtResource("5_e8ywp")]
 transform = Transform3D(-0.75246954, 0, 0.37334916, 0, 0.84, 0, -0.37334916, 0, -0.75246954, 0.034265995, 0.3017081, 7.852467)
 
-[node name="SittingSkeleton" parent="Chair_1_002" node_paths=PackedStringArray("player") instance=ExtResource("6_2qp7a")]
+[node name="SittingSkeleton" parent="Chair_1_002" unique_id=2020920052 node_paths=PackedStringArray("player") instance=ExtResource("6_2qp7a")]
 transform = Transform3D(1, 0, -2.9802322e-08, 0, 0.9999999, 0, 2.9802322e-08, 0, 1, 0, -0.44787353, 0)
 player = NodePath("../../Princess")
 
-[node name="DeathPlane" parent="." instance=ExtResource("9_gx7tx")]
+[node name="DeathPlane" parent="." unique_id=1568591419 instance=ExtResource("9_gx7tx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.98627, 0)
 
-[node name="Princess" parent="." instance=ExtResource("9_hijkx")]
+[node name="Princess" parent="." unique_id=1550969716 instance=ExtResource("9_hijkx")]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1616756440]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.725421, 0.3649335, 4.5249424)
 material_override = SubResource("StandardMaterial3D_gx7tx")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=625029724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.353653, 3.1777804, -5.745802)
 material_override = SubResource("StandardMaterial3D_hijkx")
 
-[node name="MechFighter" parent="." instance=ExtResource("9_7sswa")]
+[node name="MechFighter" parent="." unique_id=1351321746 instance=ExtResource("9_7sswa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2951033, -0.14925918, -2.7481139)
 
-[node name="Plane_008" type="MeshInstance3D" parent="."]
+[node name="Plane_008" type="MeshInstance3D" parent="." unique_id=532358860]
 transform = Transform3D(-0.11085169, 0, -0.35492176, 0, 0.37183, 0, 0.35492176, 0, -0.11085169, -8.779501, -0.7830287, 9.951901)
 layers = 18
 material_override = ExtResource("11_2edth")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_fbhqd")
-skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Plane_008"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane_008" unique_id=470058960]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_008/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_008/StaticBody3D" unique_id=386377091]
 shape = SubResource("ConcavePolygonShape3D_74okv")
 
-[node name="Plane_014" type="MeshInstance3D" parent="."]
+[node name="Plane_014" type="MeshInstance3D" parent="." unique_id=336569033]
 transform = Transform3D(0.050648514, -0.003619898, 0.15048823, 0.01905494, 0.15765505, -0.0026208602, -0.14932089, 0.018890634, 0.050710004, -12.624064, -4.2313867, 4.162142)
 layers = 18
 cast_shadow = 0
 gi_lightmap_texel_scale = 0.5
 mesh = SubResource("ArrayMesh_630wi")
-skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Plane_014"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane_014" unique_id=2128432864]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_014/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_014/StaticBody3D" unique_id=1770971967]
 shape = SubResource("ConcavePolygonShape3D_t1mu4")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1629974563]
 transform = Transform3D(-0.37058514, -0.10943634, -0.2789609, -0.039631944, 0.4576638, -0.12689249, 0.2970267, -0.0754726, -0.36497644, 27.62114, 17.347816, 47.532814)
 material_override = SubResource("ShaderMaterial_t1mu4")
 radius = 10.0
@@ -254,7 +252,7 @@ radial_segments = 24
 rings = 12
 smooth_faces = false
 
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="."]
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="." unique_id=2046852869]
 transform = Transform3D(-0.37058514, -0.10943631, -0.27896097, -0.039631944, 0.45766363, -0.12689245, 0.2970267, -0.075472556, -0.36497635, 14.056152, 16.301796, 48.8158)
 material_override = ExtResource("21_mo835")
 radius = 10.0
@@ -262,14 +260,14 @@ radial_segments = 16
 rings = 8
 smooth_faces = false
 
-[node name="CSGSphere3D4" type="CSGSphere3D" parent="."]
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="." unique_id=1422391038]
 transform = Transform3D(-1.6081884, -0.47490862, -1.2105769, -0.17198643, 1.9860722, -0.55066144, 1.2889748, -0.32751977, -1.5838486, 18.478178, 24.36078, 14.569794)
 cast_shadow = 0
 radius = 5.0
 smooth_faces = false
 material = ExtResource("21_mo835")
 
-[node name="StaticOmni" parent="." instance=ExtResource("19_w4aug")]
+[node name="StaticOmni" parent="." unique_id=685209157 instance=ExtResource("19_w4aug")]
 transform = Transform3D(-0.29812464, 0, -0.9545269, 0, 1.0000004, 0, 0.9545269, 0, -0.29812467, -18.885483, 1.7639518, 4.0338974)
 radius = 30.0
 energy = 3.0
@@ -277,12 +275,11 @@ attenuation = 0.855
 color = Color(1, 0.92980015, 0.8682848, 1)
 __csg_game_view = true
 
-[node name="BlackHole" type="MeshInstance3D" parent="."]
+[node name="BlackHole" type="MeshInstance3D" parent="." unique_id=1277990671]
 transform = Transform3D(-0.29812467, 0, -0.9545269, 0, 1, 0, 0.9545269, 0, -0.29812467, -16.34649, 10.591952, 32.30147)
 mesh = SubResource("QuadMesh_dke4c")
-skeleton = NodePath("")
 
-[node name="PHEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_2edth")]
+[node name="PHEnemy" parent="." unique_id=1988987316 node_paths=PackedStringArray("player") instance=ExtResource("16_2edth")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.271471, 0, -0.46069384)
 player = NodePath("../Princess")
 

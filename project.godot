@@ -20,14 +20,14 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="Third Person Souls-like Game Template"
-config/version="0.0.3"
+config/version="0.0.4"
 run/main_scene="uid://c66xg4go6ct4v"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://dj75kmn2opgg4"
 
 [audio]
 
-buses/default_bus_layout="uid://h34rd3knc6l3"
+buses/default_bus_layout="uid://c3avvsowlmqfp"
 
 [autoload]
 
@@ -42,7 +42,7 @@ M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoload
 GlobalSignal="*res://logic/_project_data/autoload/global_signal/global_signal.gd"
 GlobalUIInfo="*res://logic/_project_data/autoload/global_ui_info/GlobalUIInfo.tscn"
 PlayerStats="*res://logic/_project_data/autoload/player_statistic/player_stats.gd"
-Console="*res://addons/console/console.gd"
+Console="*uid://ouiu5xh1cs8n"
 
 [console]
 
@@ -74,7 +74,7 @@ movie_writer/fps=15
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/favorite_scenes/plugin.cfg", "res://addons/pixpal_tools_edited/plugin.cfg")
 
 [file_customization]
 
@@ -402,4 +402,3 @@ DEV_KP7={
 lights_and_shadows/tighter_shadow_caster_culling=false
 environment/defaults/default_clear_color=Color(0.47284538, 0.47284538, 0.47284538, 1)
 occlusion_culling/use_occlusion_culling=true
-mesh_lod/lod_change/threshold_pixels=10.0

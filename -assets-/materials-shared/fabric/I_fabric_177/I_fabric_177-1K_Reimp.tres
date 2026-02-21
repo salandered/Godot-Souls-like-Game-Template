@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cw7kd7pvhxw1c"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cw7kd7pvhxw1c"]
 
 [ext_resource type="Texture2D" uid="uid://4grbrl7ph7ci" path="res://-assets-/materials-shared/fabric/I_fabric_177/pl-skeleton-ranger_fabric_177_basecolor-1K.png" id="1_m73eh"]
 [ext_resource type="Texture2D" uid="uid://p7ctehcs5iuw" path="res://-assets-/materials-shared/fabric/I_fabric_177/pl-skeleton-ranger_fabric_177_normal-1K.png" id="2_ys07c"]

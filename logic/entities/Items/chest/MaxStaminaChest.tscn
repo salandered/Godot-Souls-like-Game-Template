@@ -1,19 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbx2piiomfbdk"]
+[gd_scene format=3 uid="uid://bbx2piiomfbdk"]
 
 [ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_n25o4"]
 [ext_resource type="Script" uid="uid://8dsl6f16eeb1" path="res://logic/entities/Items/chest/max_stamina_chest.gd" id="2_dlgnt"]
 [ext_resource type="Material" uid="uid://cdskth7nhqc5n" path="res://-assets-/materials-shared/wood/rough_wood/stamina_chest_mat.tres" id="3_3xjvw"]
 [ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/Items/pick_item/stamina_item/MaxStaminaItem.tscn" id="3_ypuni"]
 
-[node name="MaxStaminaChest" instance=ExtResource("1_n25o4")]
+[node name="MaxStaminaChest" unique_id=2011118432 instance=ExtResource("1_n25o4")]
 script = ExtResource("2_dlgnt")
 item_scene = ExtResource("3_ypuni")
 
-[node name="ChestLid" parent="Visuals/LidPivot" index="1"]
+[node name="ChestLid" parent="Visuals/LidPivot" parent_id_path=PackedInt32Array(780769632) index="1" unique_id=279129403]
 material_override = ExtResource("3_3xjvw")
 
-[node name="ChestMain" parent="Visuals/ChessMain" index="1"]
+[node name="ChestMain" parent="Visuals/ChessMain" parent_id_path=PackedInt32Array(1648672996) index="1" unique_id=970195091]
 material_override = ExtResource("3_3xjvw")
 
-[node name="InteractArea" parent="." index="4"]
+[node name="InteractArea" parent="." index="4" unique_id=965031315]
 label_y_offset = 1.0

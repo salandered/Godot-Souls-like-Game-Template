@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://byjv3t8r0rvg2"]
+[gd_scene format=3 uid="uid://byjv3t8r0rvg2"]
 
 [ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28)_or.png" id="1_gduce"]
 [ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28).png" id="2_fovls"]
@@ -102,7 +102,7 @@ bg_color = Color(0.61565834, 0.6357732, 0.00011758829, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rbjfo"]
 
-[node name="DVCharDVToggleButton" type="CheckButton"]
+[node name="DVCharDVToggleButton" type="CheckButton" unique_id=1123155907]
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)

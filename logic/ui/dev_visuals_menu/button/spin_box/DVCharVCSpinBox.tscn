@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsw22kx0eybub"]
+[gd_scene format=3 uid="uid://dsw22kx0eybub"]
 
 [ext_resource type="PackedScene" uid="uid://beqkj7gmf5s5d" path="res://logic/ui/ui_utils/prefab/buttons/SpinBoxBigger.tscn" id="1_rbx42"]
 [ext_resource type="Script" uid="uid://dsllnmgb8n35q" path="res://logic/ui/dev_visuals_menu/button/spin_box/dv_value_changer_spin_box.gd" id="2_btx1b"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_btx1b"]
 
-[node name="DVCharVCSpinBox" instance=ExtResource("1_rbx42")]
+[node name="DVCharVCSpinBox" unique_id=507603776 instance=ExtResource("1_rbx42")]
 custom_minimum_size = Vector2(0, 0)
 offset_right = 89.0
 offset_bottom = 33.0

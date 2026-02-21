@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://byh642slhv4dq"]
+[gd_scene format=4 uid="uid://byh642slhv4dq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yatwr"]
 resource_name = "Texture.006"
@@ -40,8 +40,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_h2rgl")
 
-[node name="Flower_003" type="MeshInstance3D"]
+[node name="Flower_003" type="MeshInstance3D" unique_id=439884574]
 transform = Transform3D(0.99169886, 0.123805925, -0.034719065, -0.12794654, 0.923334, -0.36205527, -0.012767297, 0.36349198, 0.93150985, 0, 0, 0)
 layers = 256
 mesh = SubResource("ArrayMesh_8tnay")
-skeleton = NodePath("")

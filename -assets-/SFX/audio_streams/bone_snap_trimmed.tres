@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://yqejdlrkriea"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://yqejdlrkriea"]
 
 [ext_resource type="AudioStream" uid="uid://vomlswpm07br" path="res://-assets-/SFX/sources/400/bone_snap_400-trimmed.wav" id="1_5tobm"]
 

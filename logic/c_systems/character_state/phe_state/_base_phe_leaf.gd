@@ -111,7 +111,7 @@ func react_on_hit(hit: HitData):
 	phe_feelings.lose_health(hit.damage)
 
 	var _sig_data := me.get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
-	SigUtils.safe_emit(_sig_data, {}, false)
+	SigUtils.safe_emit_sig_data(_sig_data, {}, false)
 
 	var react_cfg := ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
 	if not react_cfg:

@@ -6,7 +6,7 @@
 	//
 	// 
 	// godot
-	"godotTools.editorPath.godot4": "C:\\safe\\godot\\_godot_support\\_v4.5.1-stable\\Godot_v4.5.1-stable_win64.exe",
+	"godotTools.editorPath.godot4": "C:\\safe\\godot\\_godot_support\\_v4.6.1-stable\\Godot_v4.6.1-stable_win64.exe",
 	// exlude from file view
 	"files.exclude": {
 		// godot 
