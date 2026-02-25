@@ -136,7 +136,6 @@ static func _find_recursive(dir_path: String, search_prefix: String) -> String:
 	while file_name != "":
 		if dir.current_is_dir():
 			if file_name != "." and file_name != "..":
-				# Recurse
 				var found := _find_recursive(dir_path + "/" + file_name, search_prefix)
 				if found != "":
 					return found

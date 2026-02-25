@@ -2,12 +2,11 @@
 	// DYNAMIC
 	"editor.hover.enabled": "off",
 	// "editor.hover.delay": 400,
-	//
-	//
 	// 
-	// godot
+	// GODOT
 	"godotTools.editorPath.godot4": "C:\\safe\\godot\\_godot_support\\_v4.6.1-stable\\Godot_v4.6.1-stable_win64.exe",
-	// exlude from file view
+	//
+	// FILE EXCLUSION
 	"files.exclude": {
 		// godot 
 		"**/*.res": true,
@@ -16,8 +15,8 @@
 		"**/*.blend": true,
 		"**/*.glb": true,
 		// images
-		"**/*.jpg": true,
-		"**/*.png": true,
+		// "**/*.jpg": true,
+		// "**/*.png": true,
 		"**/*.png.import": true,
 		"**/*.jpg.import": true,
 		"**/*.svg.import": true,
@@ -26,9 +25,22 @@
 		"**/*.tmp": true,
 		"**/*.TMP": true,
 	},
-	// godot ends
-	// dont open file again in split view
-	"workbench.editor.revealIfOpen": true,
+	"files.watcherExclude": {
+		// Default VS Code exclusions
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/.hg/store/**": true,
+		// added as experiment
+		"**/addons/**": true,
+		"**/misc/**": true,
+		// "**/-assets-/**": true,
+	},
+	//
+	// MARKDOWN LINT
+	"editor.codeActionsOnSave": {
+		"source.fixAll.markdownlint": "explicit"
+	},
+	"markdownlint.focusMode": true,
 	//--------------------------------------------
 	//-----------🤖 FIGHTING COPILOT 🤖----------
 	//--------------------------------------------
@@ -46,32 +58,21 @@
 	// "editor.inlineSuggest.edits.allowCodeShifting": "never",
 	// "editor.inlineSuggest.edits.renderSideBySide": "never", // show inline suggestions in the same line
 	// "editor.inlineSuggest.edits.showCollapsed": true, // can be configured from UI button
-	// 
-	// Suggestions (not copilot)
+	//
+	"editor.lightbulb.enabled": "off",
+	//
+	// SUGGESTIONS (not copilot)
 	"editor.suggestSelection": "recentlyUsedByPrefix",
 	// "editor.inlineSuggest.showToolbar": "never", // listed in copilot Code completions settings
-	/* FOLDER COLORS EXAMPLE
-	"workbench.colorCustomizations": {
-	    "folderPathColor.custom1": "#FF4488",
-	    "folderPathColor.custom2": "#88ff44",
-	},
-	"folder-path-color.folders": [
-	    {
-	        "path": "frontend",
-	        "symbol": "SR",
-	        "tooltip": "Source files"
-	    },
-	]
-	*/
 	//
-	// COLORS
 	"workbench.colorCustomizations": {
 		// BUILD IN
 		"editor.findMatchBackground": "#f5eda80e", // active match (the one you’re on)
 		"editor.findMatchBorder": "#fa902ccb",
 		"editor.findMatchHighlightBackground": "#ffffff00", // all other matches
 		"editor.findMatchHighlightBorder": "#feffc686",
-		// colorful brackets
+		//
+		// COLORFUL BRACKETS
 		"editorBracketHighlight.foreground1": "#abc9ff",
 		"editorBracketHighlight.foreground2": "#fcb5fce7",
 		"editorBracketHighlight.foreground3": "#acf0a9ee",
@@ -84,8 +85,8 @@
 		// "editorError.foreground": "#fd5ca700", // ⏺ FAKE TURN OFF
 		"editorWarning.foreground": "#ffff002a", // semi-transparent yellow
 		// "editorInfo.foreground": "#ffff002a", // semi-transparent yellow
+		//
 		// ERROR LENS
-		// "#fd578177", // more gentle red
 		// "errorLens.errorForeground": "#fd578177", // 🚨 more gentle red
 		"errorLens.errorForeground": "#fd578100", // ⏺ FAKE TURN OFF
 		"errorLens.errorBackground": "#ffffff00",
@@ -93,37 +94,54 @@
 		"errorLens.warningBackground": "#ffffff00",
 		"errorLens.warningForeground": "#dba35a91",
 		"errorLens.infoBackground": "#ffffff00",
+		//
 		// BOOKMARKS
 		"bookmarks.lineBackground": "#6c6aff22", // Background color for a bookmarked line.
 		"bookmarks.lineBorder": "#ffffff00", // Border color for a bookmarked line.
 		"bookmarks.overviewRuler": "#157EFB88", // Marker color for the overview ruler.
 		//
-		// COLORFUL FOLDERS
+		// COLORFUL FOLDERS DOCS
+		/* EXAMPLE OF USAGE
+		"workbench.colorCustomizations": {
+			"folderPathColor.custom1": "#FF4488",
+			"folderPathColor.custom2": "#88ff44",
+		},
+		"folder-path-color.folders": [
+			{
+				"path": "frontend",
+				"symbol": "SR",
+				"tooltip": "Source files"
+			},
+		]
+		*/
+		// COLORFUL FOLDERS DOCS
 		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
 		"folderPathColor.utils": "#92b69fe5", // utils
 		"folderPathColor.model": "#eea6ccf6", // model accent
 		"folderPathColor.awareness": "#cdcf90", // yellow accent (awareness)
-		"folderPathColor.turquoise": "#ffa9c8", // tender enemy
+		"folderPathColor.turquoise": "#ffa9c8",
 		"folderPathColor.custom13": "#a9c5d8", // enemy
 		"folderPathColor.custom10": "#d1abe7", // states enemy
 		"folderPathColor.animation": "#d88ad8", // animation player
-		"folderPathColor.camera_green": "#94f0c5d5", //or #a4d4b2 tender green 2 # camera
+		"folderPathColor.camera_green": "#94f0c5d5", //or #a4d4b2 tender green # camera
 		"folderPathColor.white_": "#ececec", // white
 		"folderPathColor.states_blue": "#6692d4", // state blue 
 		"folderPathColor.custom11": "#f0c078d5", // orange
 		"folderPathColor.custom12": "#caeed5", // container
-		"folderPathColor.custom14": "#e49292", // red ish
+		"folderPathColor.custom14": "#e49292", // red-ish
 		"folderPathColor.orange_shade_2": "#92b9e4",
 		"folderPathColor.gray_ignore": "#9ea4ac",
 		"folderPathColor.green_shade_3": "#a4cfa3f5", // leafes
 		"folderPathColor.blue_shade_3": "#92b9e4",
-	}, // !!!!! nice color 82ddddde (also 8aa8c9 )
+	}, // !! nice color 82ddddde (also 8aa8c9)
 	//
-	// COLORFUL FOLDERS
+	// COLORFUL FOLDERS DOCS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
 	//**/components/* - Matches any folder named "components" at any depth
-	// src/**/test - Matches any "test" folder inside the "src" directory at any depth
-	// packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
+	//src/**/test - Matches any "test" folder inside the "src" directory at any depth
+	//packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
+	//
+	// COLORFUL FOLDERS
 	"folder-path-color.folders": [
 		{
 			"path": "*sad*",
@@ -191,7 +209,7 @@
 			"path": "*_history*",
 			"color": "gray_ignore"
 		},
-		// WHITY
+		// WHITE
 		{
 			"path": "*_base*",
 			"color": "white_"
@@ -290,20 +308,21 @@
 			"path": "*sfx_audio*",
 			"color": "awareness"
 		},
-		//
-		//
 	],
 	//
 	// No built in git color on files (conflict with colorful folders)
 	"git.decorations.enabled": false,
+	//
+	// UNSORTED
 	// Fighting with space indents
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": false,
-	// File view more shifted
+	// dont open file again in split view
+	"workbench.editor.revealIfOpen": true,
+	// File view tree shift
 	"workbench.tree.indent": 12,
-	// ========================
-	// Bookmarks Extension Settings
-	// ========================
+	//
+	// BOOKMARKS
 	"bookmarks.navigateThroughAllFiles": true, // Allows navigation through all files that contain bookmarks.
 	"bookmarks.wrapNavigation": true, // Allows navigation to wrap around at the first and last bookmarks in scope.
 	"bookmarks.saveBookmarksInProject": false, //true -> bookmarks are saved in the project, which is useful for version control.
@@ -601,6 +620,15 @@
 				{}
 			]
 		},
+		"(Constants.EMPTY_SNAME)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#4ec237"
+				},
+				{}
+			]
+		},
 		"(traits)(\\.)(\\w+)": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
@@ -702,6 +730,14 @@
 			]
 		},
 		"\\b(print_\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#77b2dade",
+				}
+			]
+		},
+		"\\b(print_preset\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
 			"filterLanguageRegex": "gdscript",
 			"decorations": [
 				{
@@ -890,7 +926,7 @@
 				{}
 			]
 		},
-		// EXAMPLES
+		// EXAMPLES FOR REFERENCE
 		// "(SECRET_KEY)": {
 		// 	"decorations": [
 		// 		{
@@ -908,8 +944,6 @@
 		// 		}
 		// 	]
 		// },
-		// /** awfd
-		// wad*/
 		// "(/\\*\\*[\\s\\S]*?\\*/)": {
 		// 	"decorations": [
 		// 		{
@@ -936,13 +970,15 @@
 		// },
 	},
 	//
-	/* --- COPIED FROM GLOBAL SETTINGS JIC ----  
-	May be useful for setting project from git on another machine. Uncomment if needed
-	godot specific
+	//
+	/* --- COPIED FROM GLOBAL SETTINGS (just in case)) ----  
+	// May be useful for setting project from git on another machine. Uncomment if needed
+	// godot specific
 	"workbench.colorTheme": "Godot 4",
 	"[gdscript]": {},
 	"godotTools.lsp.serverPort": 6005,
-	other
+	//
+	//other
 	"editor.fontWeight": 1,
 	"editor.foldingHighlight": false,
 	"editor.minimap.enabled": false,
@@ -957,36 +993,12 @@
 	"python.analysis.aiCodeActions": {
 		"implementAbstractClasses": true
 	},
-		
+	//
+	// also	
 	"github.copilot.nextEditSuggestions.enabled": false,
 	"editor.formatOnSave": true,
 	"workbench.statusBar.visible": false,
 	"telemetry.feedback.enabled": false,
 	*/
-	"editor.lightbulb.enabled": "off",
-	"files.watcherExclude": {
-		// Default VS Code exclusions
-		"**/.git/objects/**": true,
-		"**/.git/subtree-cache/**": true,
-		"**/.hg/store/**": true,
-		// ADDED AS EXPERIMENT
-		"**/addons/**": true,
-		"**/misc/**": true,
-		// "**/-assets-/**": true,
-	},
-	"favorites.resources": [
-		{
-			"filePath": "logic\\_tests\\unit",
-			"group": "Default"
-		},
-		{
-			"filePath": "logic\\_tests\\unit\\test_input_gatherer.gd",
-			"group": "Default"
-		},
-		{
-			"filePath": "ideas",
-			"group": "Default"
-		}
-	],
-	"favorites.sortOrder": "ASC"
+	//
 }

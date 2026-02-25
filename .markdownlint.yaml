@@ -1,0 +1,16 @@
+{ 
+    # line too long: it's fine
+    "MD013": false, # https://github.com/DavidAnson/markdownlint/blob/v0.40.0/doc/md013.md
+    # Conflict with Markdown All in One: create ToC (Also I think it's fine)
+    "MD007": false, # https://github.com/DavidAnson/markdownlint/blob/v0.40.0/doc/md007.md
+    # conflict with Markdown All in One: create ToC
+    "MD010": false, # https://github.com/DavidAnson/markdownlint/blob/v0.40.0/doc/md010.md
+    # too much
+    "MD059": false,
+    # too much
+    "MD041": false,
+    # not ready for this
+    "MD034": false,
+    # conflict with another extension
+    "MD060": false
+}

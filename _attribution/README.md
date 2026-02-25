@@ -1,10 +1,11 @@
-# Hard Tissue Game Demo
+# Third Person Souls-like Game Template
 
 ## 📖 Description
-A souls-like third person game demo made with Godot 4.5 and Blender.
 
+A souls-like third person game demo made with Godot 4 and Blender.
 
 ## Key systems
+
 Custom Animation Engine: A transparent and configurable animation system built on Godot’s SkeletonModifier3D. It supports animation blending; animation overlays; root motion/rotation, and bone masks allowing animations to play on a specific body part.
 
 Directory: `logic/c_systems/anim_manager/`
@@ -23,7 +24,6 @@ Core Architecture & Tooling: Logging System with log levels, filters and auto fo
 
 Art: Hand crafted levels, characters, props, interactable and breakable objects. Different lighting setups with fog types and particle systems, plus a dynamic weather system. CC0 3D assets were mostly used as a base but all underwent low-poly retopology, UV unwrapping and rigging (for characters) to ensure a consistent art style
 
-
 ### Key Technical Systems
 
 * **Custom Animation Modifier:** Implements a custom `SkeletonModifier3D` to handle complex animation blending and time-dilation effects efficiently.
@@ -35,16 +35,13 @@ Art: Hand crafted levels, characters, props, interactable and breakable objects.
 
 ## 🛠️ How to Download & Setup
 
-### Prerequisites
-* **Godot Engine:** Version **[Insert Version, e.g., 4.3]** or higher.
-* [Optional: Git LFS if you have large assets]
-
 ### Installation Steps
-1.  **Clone the Repository:**
-	
+
+1. **Clone the Repository:**
+
 		git clone [YOUR_REPO_LINK_HERE]
 
-2.  **Open in Godot:**
+2. **Open in Godot:**
 	* Launch the Godot Editor.
 	* Click **Import**.
 	* Navigate to the cloned folder and select the `project.godot` file.
@@ -53,21 +50,23 @@ Art: Hand crafted levels, characters, props, interactable and breakable objects.
 ---
 
 ## 📦 How to Export (Win Build)
+
 To generate a standalone executable of the demo:
 
-1.  Open the project in the Godot Editor.
-2.  Go to **Project** -> **Export...** in the top menu.
-3.  **Add a Preset:**
+1. Open the project in the Godot Editor.
+2. Go to **Project** -> **Export...** in the top menu.
+3. **Add a Preset:**
 	* Click **Add...** at the top and select your target platform (Windows, macOS, or Linux).
 	* *Note: If you haven't installed export templates, Godot will prompt you to download them.*
-4.  **Configure Settings:**
+4. **Configure Settings:**
     * Ensure **Export Path** is set to a valid folder (e.g., `builds/game.exe`).
     * Leave other settings at default for this demo.
-5.  **Build:**
+5. **Build:**
     * Click **Export Project** at the bottom of the window.
     * Uncheck "Export With Debug" if you want a release build (faster performance), or keep it checked if you want the console/profiler available.
 
 ---
 
 ## License
+
 See LICENSE.md

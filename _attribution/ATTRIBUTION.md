@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD001 MD012 MD022 MD032 MD034 -->
 # Attribution
 
 
@@ -77,7 +78,7 @@ Author: me
 
 
 #### Several environmental tracks (noise, bits, synths, melody)
-Author: me 
+Author: me
 
 
 #### Swords & Blades Sound Pack, used under CC-BY 4.0
@@ -129,14 +130,14 @@ Assets: Entrance Gates to Menlo Castle;
 
 
 #### Also the following artists or content creators
-* FairFight - https://www.youtube.com/@PointDown
-* GDQuest - https://www.gdquest.com/
-* Imphenzia - https://imphenzia.com/
-* Gord Goodwin - https://gord-goodwin.blogspot.com/
-* FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
-* pixel-boy - https://pixel-boy.itch.io/
-* Luos - https://luos.itch.io/
-* Kenney - https://kenney.nl/
+- FairFight - https://www.youtube.com/@PointDown
+- GDQuest - https://www.gdquest.com/
+- Imphenzia - https://imphenzia.com/
+- Gord Goodwin - https://gord-goodwin.blogspot.com/
+- FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
+- pixel-boy - https://pixel-boy.itch.io/
+- Luos - https://luos.itch.io/
+- Kenney - https://kenney.nl/
 
 
 #### lo.w.l
@@ -151,7 +152,7 @@ Note: Painting fragments were used for UI elements.
 
 ### Core Systems & Templates
 
- 
+
 #### Godot Game Template, used under MIT License
 ![Maaack Plugin Icon](/_attribution/maaacks_game_template/logo/logo.png)  
 Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)
@@ -159,7 +160,7 @@ Link: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Templat
 
 
 #### Godot Engine
-![Godot Engine Logo](/_attribution/godot/logo/logo_vertical_color_dark.png) 
+![Godot Engine Logo](/_attribution/godot/logo/logo_vertical_color_dark.png)
 Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)
 Link: [godotengine.org](https://godotengine.org/)
 License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.txt)
@@ -174,7 +175,7 @@ License: [MIT License](https://github.com/godotengine/godot/blob/master/LICENSE.
 Author: Found Sound Nation
 Link: [brokenorchestra.foundsoundnation.org](https://brokenorchestra.foundsoundnation.org/#about)
 License: [Custom / Royaltee free / mandatory attribution](attribution/music/broken_orchestra/sample-pack-terms.pdf)
-Attribution: 
+Attribution:
 >                                                                                                                       *Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.* 
 >                                                                                                                       *Symphony for a Broken Orchestra was commissioned by Temple Contemporary* 
 >                                                                                                                       *at The Tyler School of Art. Major support is provided by The Pew Center* 
@@ -196,6 +197,9 @@ Note: Used for debugging tools
 Link: https://github.com/JetBrains/JetBrainsMono
 License: SIL Open Font License 1.1
 Note: Used for debugging tools
+
+
+#### Portions of this project use code from GDQuest (https://www.gdquest.com/) licensed under MIT"
 
 
 #### Godot Engine Logo

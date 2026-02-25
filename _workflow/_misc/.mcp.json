@@ -1,0 +1,13 @@
+{
+	"mcpServers": {
+		"godot-mcp-docs": {
+			"command": "docker",
+			"args": [
+				"run",
+				"--rm",
+				"-i",
+				"godot-mcp-docs:local"
+			]
+		}
+	}
+}

@@ -8,12 +8,12 @@ static func error_(prefix: String, what: String = "", where: String = "", fallba
 	if not context.is_empty():
 		_msg += " | Details: " + pp.list_(context)
 	var _r := print_.parse_prefix(prefix)
-	print_.prefix("❌" + _r.prefix, _msg, _r.index)
+	print_.msg_raw("❌" + _r.prefix, _msg, _r.index)
 
 
 static func info_(prefix: String, ...parts: Array):
 	var _r := print_.parse_prefix(prefix)
-	print_.prefix(_r.prefix, pp.list_(parts), _r.index)
+	print_.msg_raw(_r.prefix, pp.list_(parts), _r.index)
 
 
 static func start_(name: String = "unnamed script"):

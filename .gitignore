@@ -27,7 +27,6 @@ mono_crash.*.json
 
 # =================== VScode
 # NOTE: Since VS code is preferable way to work with the project, '.vscode/' must be commited!
-# Besides auto files it contains custom readme with configs/info/tips
 # .vscode/
 
 # ================= PROJECT DATA
@@ -35,6 +34,7 @@ mono_crash.*.json
 misc/
 ideas/
 -adopting/
+*__private_docs/*
 
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons
