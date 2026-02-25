@@ -8,15 +8,23 @@ const LOG_INDENT_NAME = "__LOG_INDENT"
 
 
 static func for_log_(object_: Object, prefix: Variant, ...parts: Array) -> void:
-	if u.is_release():
+	if eu.is_release():
 		return
 	if ObjUtils.safe_has_method(object_, LOG_B_NAME, WL.WARN) \
 		and ObjUtils.safe_has_method(object_, PP_NAME_NAME, WL.WARN) \
 		and ObjUtils.safe_has_method(object_, LOG_INDENT_NAME, WL.WARN):
 		if object_.__LOG_B():
-			print_.prefix(pp.s(object_.pp_name(), prefix), pp.list_(parts), object_.__LOG_INDENT())
+			_LowLevelPrinter.print_msg_formatted(
+				false,
+				pp.s(object_.pp_name(), prefix),
+				pp.list_(parts),
+				object_.__LOG_INDENT())
 	else:
-		error_.warn(pp.s("ExtenderLogger only support objects with methods:", PP_NAME_NAME, LOG_B_NAME, LOG_INDENT_NAME), "", "", WL.WARN)
+		error_.warn(
+			pp.s("ExtenderLogger only support objects with methods:", PP_NAME_NAME, LOG_B_NAME, LOG_INDENT_NAME),
+			"",
+			"",
+			WL.WARN)
 
 
 static func for_log_warn_soft(object_: Object, what: String, where: String, fallback: String, context: String) -> void:

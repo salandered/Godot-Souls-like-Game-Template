@@ -1,56 +1,8 @@
-extends RefCountedStaticLogger
 class_name TypeCast
-
-
-## INTERNAL
-# region
-
-static func __print_err_msg(item: Variant, array: Array, pp_type_name: String):
-	__log_warn(pp.s("Array contains non", pp.in_q(pp_type_name), " value:", pp.in_q(item)),
-				"TypeCast",
-				"return empty array",
-				"Input array", pp.array_(array))
-
-static func __print_err_msg_dict(item: Variant, dict_: Dictionary, pp_type_name: String):
-	__log_warn(pp.s("Dictionary contains non", pp.in_q(pp_type_name), " value", pp.in_q(item)), "as a key.",
-				"TypeCast",
-				"return empty dict",
-				"Input dict", pp.dict_(dict_))
-
-
-## based on typeof. Needs TYPE enum as type_enum
-static func _safe_validate_primitive(array: Array, type_enum: int, type_log_name: String) -> Array:
-	for item in array:
-		if typeof(item) != type_enum:
-			__print_err_msg(item, array, type_log_name)
-			return []
-	return array
-
-
-## based on is_instance_of. also handles inheritance correctly (e.g. subclasses of Area3D)
-static func _safe_validate_class(array: Array, type_class: Variant, __type_log_name: String, ignore_null: bool = false) -> Array:
-	for item in array:
-		if item == null and ignore_null:
-			continue
-		if not is_instance_of(item, type_class):
-			__print_err_msg(item, array, __type_log_name)
-			return []
-	return array
-
-## Validates that all KEYS in the dictionary match the type_enum
-static func _safe_validate_dict_keys(dict: Dictionary, type_enum: int, __type_log_name: String) -> Dictionary:
-	for key in dict:
-		if typeof(key) != type_enum:
-			# Assumes __print_err_msg can handle dictionary context
-			__print_err_msg_dict(key, dict, __type_log_name)
-			return {}
-	return dict
-
-#endregion
+extends RefCountedStaticLogger
 
 
 # region: primitives
-
 
 static func array_of_string(array: Array[Variant]) -> Array[String]:
 	var list_casted: Array[String] = []
@@ -62,18 +14,15 @@ static func array_of_string_name(array: Array[Variant]) -> Array[StringName]:
 	list_casted.assign(_safe_validate_primitive(array, TYPE_STRING_NAME, "StringName"))
 	return list_casted
 
-
 static func array_of_int(array: Array[Variant]) -> Array[int]:
 	var list_casted: Array[int] = []
 	list_casted.assign(_safe_validate_primitive(array, TYPE_INT, "int"))
 	return list_casted
 
-
 static func array_of_float(array: Array[Variant]) -> Array[float]:
 	var list_casted: Array[float] = []
 	list_casted.assign(_safe_validate_primitive(array, TYPE_FLOAT, "float"))
 	return list_casted
-
 
 # endregion
 
@@ -84,7 +33,6 @@ static func array_of_objects(array: Array, ignore_null: bool = false) -> Array[O
 	var list_casted: Array[Object] = []
 	list_casted.assign(_safe_validate_class(array, Object, "Object", ignore_null))
 	return list_casted
-
 
 static func array_of_collision_shape(array: Array) -> Array[CollisionShape3D]:
 	var list_casted: Array[CollisionShape3D] = []
@@ -126,12 +74,10 @@ static func array_of_bone_attachments(array: Array) -> Array[BoneAttachment3D]:
 	list_casted.assign(_safe_validate_class(array, BoneAttachment3D, "BoneAttachment3D"))
 	return list_casted
 
-
 static func array_of_directional_light_3d(array: Array) -> Array[DirectionalLight3D]:
 	var list_casted: Array[DirectionalLight3D] = []
 	list_casted.assign(_safe_validate_class(array, DirectionalLight3D, "DirectionalLight3D"))
 	return list_casted
-
 
 static func array_of_mesh_instances(array: Array) -> Array[MeshInstance3D]:
 	var list_casted: Array[MeshInstance3D] = []
@@ -240,7 +186,6 @@ static func array_of_base_character(array: Array) -> Array[BaseCharacter]:
 	list_casted.assign(_safe_validate_class(array, BaseCharacter, "BaseCharacter"))
 	return list_casted
 
-
 # endregion
 
 
@@ -276,7 +221,7 @@ static func array_of_dv_option_button(array: Array) -> Array[DVOptionButton]:
 
 static func dict_string_name_variant(dict: Dictionary) -> Dictionary[StringName, Variant]:
 	var casted: Dictionary[StringName, Variant] = {}
-	var validated := _safe_validate_dict_keys(dict, TYPE_STRING, "String")
+	var validated := _safe_validate_dict_keys(dict, TYPE_STRING_NAME, "StringName")
 	
 	# validation returned empty but original wasn't.
 	if validated.is_empty() and not dict.is_empty():
@@ -286,8 +231,54 @@ static func dict_string_name_variant(dict: Dictionary) -> Dictionary[StringName,
 	return casted
 
 
-# region: __LOGS
+## INTERNAL
+# region
 
+## based on typeof. Needs TYPE enum as type_enum
+static func _safe_validate_primitive(array: Array, type_enum: int, type_log_name: String) -> Array:
+	for item in array:
+		if typeof(item) != type_enum:
+			__print_err_msg(item, array, type_log_name)
+			return []
+	return array
+
+
+## based on is_instance_of. also handles inheritance correctly (e.g. subclasses of Area3D)
+static func _safe_validate_class(array: Array, type_class: Variant, __type_log_name: String, ignore_null: bool = false) -> Array:
+	for item in array:
+		if item == null and ignore_null:
+			continue
+		if not is_instance_of(item, type_class):
+			__print_err_msg(item, array, __type_log_name)
+			return []
+	return array
+
+## Validates that all KEYS in the dictionary match the type_enum
+static func _safe_validate_dict_keys(dict: Dictionary, type_enum: int, __type_log_name: String) -> Dictionary:
+	for key in dict:
+		if typeof(key) != type_enum:
+			# Assumes __print_err_msg can handle dictionary context
+			__print_err_msg_dict(key, dict, __type_log_name)
+			return {}
+	return dict
+
+
+static func __print_err_msg(item: Variant, array: Array, pp_type_name: String):
+	__log_warn(pp.s("Array contains non", pp.in_q(pp_type_name), " value:", pp.in_q(item)),
+				"TypeCast",
+				"return empty array",
+				"Input array", pp.array_(array))
+
+static func __print_err_msg_dict(item: Variant, dict_: Dictionary, pp_type_name: String):
+	__log_warn(pp.s("Dictionary contains non", pp.in_q(pp_type_name), " value", pp.in_q(item)), "as a key.",
+				"TypeCast",
+				"return empty dict",
+				"Input dict", pp.dict_(dict_))
+
+#endregion
+
+
+# region: __LOGS
 
 static func pp_name() -> String:
 	return "TypeCaster"
@@ -296,6 +287,6 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

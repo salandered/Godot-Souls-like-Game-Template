@@ -1,5 +1,5 @@
-extends RefCountedStaticLogger
 class_name ValidationFramework
+extends RefCountedStaticLogger ## ValidationFramework uses LoggerFramework
 
 ## DOCS
 # region
@@ -136,7 +136,7 @@ static func __LOG_B() -> bool:
 
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_formatted(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 
 # endregion

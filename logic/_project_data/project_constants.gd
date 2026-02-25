@@ -1,4 +1,4 @@
-class_name Constants
+class_name Const
 extends RefCounted
 
 static var gravity: float = ProjectSettings.get_setting(PropC.PHYSICS_3D_DEFAULT_GRAVITY)
@@ -7,8 +7,8 @@ static var gravity: float = ProjectSettings.get_setting(PropC.PHYSICS_3D_DEFAULT
 const BIG_MEANINGLESS_NUMBER: float = 999999.8
 const BIG_MEANINGLESS_NUMBER_INT: int = 999998
 
-# todo: consider storing delta in InputPackage. and use it everywhere
-# frame dependednt and bad, but for approximate one tick here and there its fine they say
+# todo: consider storing delta in InputPackage and use it if needed
+# frame dependend and bad, but for approximate one tick if ok
 const ONE_FRAME: float = 0.016
 const THREE_FRAMES: float = ONE_FRAME * 3
 
@@ -26,10 +26,11 @@ const GENERAL_SKELETON := &"GeneralSkeleton"
 ## always for any skeleton
 const ROOT_BONE := &"Root"
 
-const BONE_TRACK_PREFIX: StringName = "%" + Constants.GENERAL_SKELETON + ":"
+const BONE_TRACK_PREFIX := "%" + GENERAL_SKELETON + ":"
 
-const ROOT_TRACK_PATH: StringName = BONE_TRACK_PREFIX + Constants.ROOT_BONE
+const ROOT_TRACK_PATH := BONE_TRACK_PREFIX + ROOT_BONE
 
+const EMPTY_SNAME := &""
 
 ## TODO: used in react on hit. Not accurate values
 const PLAYER_MAX_HIT_DAMAGE: float = 15
@@ -45,3 +46,5 @@ const SFX_ASP_BASE_BUS_ID := BusID.GAME_SFX
 ## DEV
 
 const DEMO_ENEMY_TAG = &"demo_enemy"
+
+##

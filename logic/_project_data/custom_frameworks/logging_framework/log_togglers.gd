@@ -24,14 +24,12 @@ const ANIM_CONTAINER_B := false
 const E_CONTAINER_B := false
 
 # FIGHT
-const FIGHT_B := false
-const COMBO_B := false
+const BASE_COMBAT_B := false
 const HIT_HURT_BOX_B := false
 const WEAPON_B := false
 
 # PLAYER PSM
 const PSM_B := false
-const BEHAVIOR_INTERNAL_FILTER := false
 const ACTION_ANIM_B := false
 
 # PLAYER LSM

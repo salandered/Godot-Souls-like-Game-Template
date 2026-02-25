@@ -20,7 +20,7 @@ class BoolReturn extends _BaseReturn:
 class IntReturn extends _BaseReturn:
 	var value: int
 
-	func _init(err_: bool, value_: int = Constants.BIG_MEANINGLESS_NUMBER_INT):
+	func _init(err_: bool, value_: int = Const.BIG_MEANINGLESS_NUMBER_INT):
 		super._init(err_)
 		self.value = value_
 
@@ -28,7 +28,7 @@ class IntReturn extends _BaseReturn:
 class FloatReturn extends _BaseReturn:
 	var value: float
 
-	func _init(err_: bool, value_: float = Constants.BIG_MEANINGLESS_NUMBER):
+	func _init(err_: bool, value_: float = Const.BIG_MEANINGLESS_NUMBER):
 		super._init(err_)
 		self.value = value_
 
@@ -37,6 +37,13 @@ class StringReturn extends _BaseReturn:
 	var value: String
 
 	func _init(err_: bool, value_: String = ""):
+		super._init(err_)
+		self.value = value_
+
+class SNameReturn extends _BaseReturn:
+	var value: StringName
+
+	func _init(err_: bool, value_: StringName = Const.EMPTY_SNAME):
 		super._init(err_)
 		self.value = value_
 

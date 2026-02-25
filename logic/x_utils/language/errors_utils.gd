@@ -2,6 +2,7 @@ extends RefCounted
 class_name error_
 
 
+## printer with specific detailed formatting.
 static func warn(
 		what: String,
 		where: String,
@@ -22,14 +23,15 @@ static func warn(
 		_msg += " | Details: " + pp.list_(details)
 	_msg += pp.in_sq(warn_level)
 
-	_low_level_printer._warn(_msg, warn_level)
+	print_err.msg_formatted(_msg, warn_level)
 
 
-## ERROR HELPERS
-# returns True if error caught
-# return False if it's fine
-# minimal arguments and context
-# used when expected False in all sane scenarios
+## ERROR UTILS
+# - name is positive condition
+# - treats as error if name (positive condition) is valid
+# - returns True if error caught
+# - minimal arguments and context
+# - is used when expected False
 
 
 ## allows StringName
@@ -41,28 +43,28 @@ static func empty_string(
 	if null_variant(string_, context, warn_level):
 		return true
 	if string_ is not String and string_ is not StringName:
-		_low_level_printer._warn(_err_msg("not String/StringName", context), warn_level)
+		print_err.msg_formatted(_err_msg("not String/StringName", context), warn_level)
 		return true
 	if string_.is_empty():
-		_low_level_printer._warn(_err_msg("String is empty", context), warn_level)
+		print_err.msg_formatted(_err_msg("String is empty", context), warn_level)
 		return true
 	return false
 
 
 static func empty_list(
-		list_: Variant,
-		context: String = "",
-		warn_level: StringName = WL.PUSH_ERROR,
+	list_: Variant,
+	context: String = "",
+	warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
-	if null_variant(list_, context, warn_level):
-		return true
-	if list_ is not Array and list_ is not PackedStringArray:
-		_low_level_printer._warn(_err_msg("not Array", context), warn_level)
-		return true
-	if list_.is_empty():
-		_low_level_printer._warn(_err_msg("Array is empty", context), warn_level)
-		return true
-	return false
+	return _check_list_len(list_, 0, "Array is empty", context, warn_level)
+
+
+static func one_len_list(
+	list_: Variant,
+	context: String = "",
+	warn_level: StringName = WL.PUSH_ERROR,
+) -> bool:
+	return _check_list_len(list_, 1, "Array len is one", context, warn_level)
 
 
 static func null_object(
@@ -71,7 +73,7 @@ static func null_object(
 		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if object_ == null:
-		_low_level_printer._warn(_err_msg("object is null", context), warn_level)
+		print_err.msg_formatted(_err_msg("object is null", context), warn_level)
 		return true
 	return false
 
@@ -82,7 +84,7 @@ static func null_variant(
 		warn_level: StringName = WL.PUSH_ERROR,
 ) -> bool:
 	if variant_ == null:
-		_low_level_printer._warn(_err_msg("variant_ is null", context), warn_level)
+		print_err.msg_formatted(_err_msg("variant_ is null", context), warn_level)
 		return true
 	return false
 
@@ -95,23 +97,26 @@ static func null_signal(
 		warn_level: StringName = WL.WARN_CRUCIAL,
 ) -> bool:
 	if signal_.is_null():
-		_low_level_printer._warn(_err_msg("signal_.is_null true", context), warn_level)
+		print_err.msg_formatted(_err_msg("signal_.is_null true", context), warn_level)
 		return true
 	return false
 
 
-static func len_one(
-		list_: Variant,
-		context: String = "",
-		warn_level: StringName = WL.PUSH_ERROR,
+static func _check_list_len(
+	list_: Variant,
+	target_len: int,
+	len_msg: String,
+	context: String,
+	warn_level: StringName
 ) -> bool:
 	if null_variant(list_, context, warn_level):
 		return true
-	if list_ is not Array:
-		_low_level_printer._warn(_err_msg("not Array", context), warn_level)
+	## WARNING: currently Packed Arrays are not widely used in project. But this should be extended
+	if list_ is not Array and list_ is not PackedStringArray:
+		print_err.msg_formatted(_err_msg("not Array", context), warn_level)
 		return true
-	if len(list_) != 1:
-		_low_level_printer._warn(_err_msg(pp.s("Len is not 1:", len(list_)), context), warn_level)
+	if len(list_) == target_len:
+		print_err.msg_formatted(_err_msg(len_msg, context), warn_level)
 		return true
 	return false
 

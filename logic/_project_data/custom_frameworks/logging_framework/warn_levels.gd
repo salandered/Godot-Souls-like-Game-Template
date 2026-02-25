@@ -8,7 +8,7 @@ class_name WL ## stands for Warn Level
 const SILENT := &"SILENT"
 ## looks more like a usual log print, but goes through the warn print system
 ## seems redundant but it's often when u need something between SILENT and WARN
-## advised to use in utility with "safe_" methods
+## advised to use in utilities with "safe_" methods
 const INFO := &"INFO"
 ## print with icon
 const WARN := &"WARN"

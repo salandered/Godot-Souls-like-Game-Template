@@ -1,7 +1,0 @@
-### Contains language (gd script) 'boosters'
-- some additional features which expand/change the work with code
-
-
-E.g.: 
-	- Return objects which feel like 'go style'
-	- Type casting sugar

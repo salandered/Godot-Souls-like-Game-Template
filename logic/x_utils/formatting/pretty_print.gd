@@ -1,20 +1,26 @@
-extends RefCounted
 class_name pp
+extends RefCounted
 
 
-static var cln := ": "
-static var s_cln := "; "
-static var arr := " -> "
-static var hence := " => "
-static var angle := " ∠ "
+const CLN := ":"
+const SCLN := ";"
+const ARROW := "->"
+const ANGLE := "∠"
+const EMPTY := ""
+const HYPTHEN := "-"
+const S_X := "x"
+const SPLIT := "|"
 
-static var on_ent := " on-entr↪"
-static var on_ext := " on-exit↩"
-static var on_upd := " upd"
-static var on_internal_upd := " _upd"
+const TAB := "\t"
+const TAB_X2 := "\t\t"
+
+const on_ent := "on-entr↪"
+const on_ext := "on-exit↩"
+const on_upd := "upd"
+const on_internal_upd := "_upd"
 
 
-## research, if creating packed array and then joining it is faster
+## todo: research if creating packed array and then joining it is faster
 static func s(...parts: Array) -> String:
 	var r := ""
 	for part in parts:
@@ -60,7 +66,6 @@ static func in_curl(something: Variant, spaces: bool = false) -> String:
 	var r := "{" + str(something) + "}"
 	return in_sp(r) if spaces else r
 
-
 static func in_sp(something: Variant) -> String:
 	return " " + str(something) + " "
 
@@ -85,11 +90,10 @@ static func vec3_angle_deg(a: Vector3, b: Vector3, to_str: bool = true) -> Varia
 	return r
 
 
-static func rad2deg(angle_: float, to_str: bool = true) -> Variant:
-	var r := rad_to_deg(angle_)
-	r = snapped(r, 0.01)
-	if to_str:
-		return str(r) + "°"
+static func srad2deg(angle_: float, add_symbol: bool = true) -> String:
+	var r := str(frad2deg(angle_))
+	if add_symbol:
+		return r + "°"
 	return r
 
 static func frad2deg(angle_: float) -> float:
@@ -102,6 +106,7 @@ static func frad2deg(angle_: float) -> float:
 
 static func vec3(v: Vector3) -> String:
 	return "(%3.3f %3.3f %3.3f)" % [v.x, v.y, v.z]
+
 
 static func vec2(v: Vector2) -> String:
 	return "(%4.2f %4.2f)" % [v.x, v.y]
@@ -168,13 +173,6 @@ static func array_(parts: Array, json: bool = false) -> String:
 
 # endregion
 
-static func file_load_err(err, path: String):
-	if err == OK:
-		print_.dev(path + " loaded successfully")
-	elif err == ERR_DOES_NOT_EXIST:
-		print_.dev(path + " no file found")
-	else:
-		print_.dev(path + " error loading:" + str(err))
 
 # region: domain helpers
 
@@ -189,11 +187,11 @@ static func anim_n(anim_id: StringName, no_q: bool = false) -> String:
 	return anim_name if no_q else pp.in_q(anim_name)
 
 
-static func sig(signal_data: SignalData, signal_payload: Dictionary[StringName, Variant], ) -> String:
+static func sig_data(signal_data: SignalData, signal_payload: Dictionary[StringName, Variant]) -> String:
 	if not signal_data: return ""
 	return pp.s(signal_data, "with payload", pp.dict_(signal_payload, false, false, true))
 
-static func sig_raw(signal_: Signal, signal_payload: Dictionary[StringName, Variant], ) -> String:
+static func sig(signal_: Signal, signal_payload: Dictionary[StringName, Variant]) -> String:
 	return pp.s(signal_, "with payload", pp.dict_(signal_payload, false, false, true))
 
 static func bus_id(bus_id_: StringName) -> String:
@@ -210,6 +208,7 @@ static func asp_play(asp: AudioStreamPlayer) -> String:
 		"stream", pp.in_q(asp.stream.resource_name) if asp.stream else "[-]")
 
 # endregion
+
 
 # region: inner helpers
 
@@ -262,3 +261,12 @@ static func metric_fmt(v: Variant, fmt_show_vector_len: bool = true) -> String:
 			return str(v)
 		_:
 			return str(v)
+
+
+static func file_load_err(err, path: String):
+	if err == OK:
+		print_.dev("file_load_err", path, " loaded successfully")
+	elif err == ERR_DOES_NOT_EXIST:
+		print_.dev("file_load_err", path, " no file found")
+	else:
+		print_.dev("file_load_err", path, " error loading:", str(err))
