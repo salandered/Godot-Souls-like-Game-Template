@@ -34,6 +34,6 @@ static func __LOG_B() -> bool:
 	return true
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

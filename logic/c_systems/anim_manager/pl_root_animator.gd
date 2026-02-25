@@ -56,12 +56,12 @@ func get_prev_root_rotation() -> float:
 func get_root_velocity(y_zeroed: bool = true, use_blending: bool = false, backwards: bool = false) -> Vector3:
 	var curr_playback := _get_curr_playback()
 	var curr_eff_progress := curr_playback.get_effective_time_spent()
-	if curr_eff_progress < Constants.ONE_FRAME:
-		# print_.dev("✔", "curr_eff_progress", curr_eff_progress, "< Constants.ONE_FRAME -> we at the beginning of the anim. backwards to true")
+	if curr_eff_progress < Const.ONE_FRAME:
+		# print_.dev("curr_eff_progress", curr_eff_progress, "< Const.ONE_FRAME -> we at the beginning of the anim. backwards to true")
 		backwards = true
-	elif curr_playback.anim.duration - curr_eff_progress < Constants.ONE_FRAME:
-		# print_.dev("✔", "anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
-			# "< Constants.ONE_FRAME -> we at the end f the anim. backwards to false")
+	elif curr_playback.anim.duration - curr_eff_progress < Const.ONE_FRAME:
+		# print_.dev("anim.duration - curr_eff_progress", curr_playback.anim.duration - curr_eff_progress,
+			# "< Const.ONE_FRAME -> we at the end f the anim. backwards to false")
 		backwards = false
 
 	var curr_velocity := _calculate_velocity_delta(_get_curr_playback(), BoneIdx.ROOT_0, backwards)
@@ -91,7 +91,7 @@ func _calculate_velocity_delta(playback: AnimPlayback, bone_idx: int, backwards:
 	if pos_track == -1 or playback.anim.native_anim.track_get_key_count(pos_track) <= 1:
 		return Vector3.ZERO
 	
-	var scaled_delta := _get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
+	var scaled_delta := _get_custom_delta() * full_body._get_effective_speed_scale(playback)
 	var curr_progress := playback.get_effective_time_spent()
 	var prev_progress := curr_progress - scaled_delta
 	if backwards:
@@ -111,7 +111,7 @@ func _calculate_rotation_delta(playback: AnimPlayback, bone_idx: int) -> float:
 	if rot_track == -1:
 		return 0.0
 	
-	var scaled_delta := _get_custom_delta() * full_body._EFFECTIVE_SPEED_SCALE(playback)
+	var scaled_delta := _get_custom_delta() * full_body._get_effective_speed_scale(playback)
 	var curr_progress := playback.get_effective_time_spent()
 	var prev_progress: float = max(0.0, curr_progress - scaled_delta)
 	
@@ -138,7 +138,7 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 		return 0.0
 	
 	# Sample at start and a small delta to get initial velocity
-	var sample_delta := Constants.ONE_FRAME
+	var sample_delta := Const.ONE_FRAME
 	var start_time := start_time_offset
 	if backwards:
 		start_time -= sample_delta

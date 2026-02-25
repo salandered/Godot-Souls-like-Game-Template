@@ -1,4 +1,5 @@
-class_name MathUtil
+class_name MathUtils
+extends RefCounted
 
 
 const INV_LOG_10 := 1.0 / log(10)

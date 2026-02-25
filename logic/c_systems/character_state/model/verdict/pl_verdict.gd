@@ -3,4 +3,4 @@ class_name PLVerdict
 
 
 func needs_switch() -> bool:
-	return next_state != ""
+	return next_state != Const.EMPTY_SNAME

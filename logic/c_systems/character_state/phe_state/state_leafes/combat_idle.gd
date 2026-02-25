@@ -37,7 +37,7 @@ func on_enter_state() -> void:
 
 
 func on_exit_state() -> void:
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 	get_animator_manager().reset_global_speed_scale()
 
 func update(delta: float):

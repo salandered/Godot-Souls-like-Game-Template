@@ -1,5 +1,5 @@
-extends RefCountedStaticLogger
 class_name UIUtils
+extends RefCountedStaticLogger
 
 
 static func fade_out_and_hide_for_panels(for_whom: Node, ui_panels: Array, duration: float) -> Tween:
@@ -137,6 +137,6 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

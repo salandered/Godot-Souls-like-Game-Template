@@ -81,4 +81,4 @@ var LOG_HURT_B: bool = false
 
 func __log_hurt():
 	if LOG_HURT_B:
-		print_.prefix(pp.s("// HURT", time_spent(), effective_time_spent(), get_actual_time_spent(), get_real_time_spent()))
+		print_.msg_raw(pp.s("// HURT", time_spent(), effective_time_spent(), get_actual_time_spent(), get_real_time_spent()))

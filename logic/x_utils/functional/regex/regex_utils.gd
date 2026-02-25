@@ -8,7 +8,7 @@ class RegexCompileInfo:
 	var pattern: String = ""
 
 
-static func check_regex_compile(query: String) -> RegexCompileInfo:
+static func check_regex_compile(query: String, print_error: bool = true) -> RegexCompileInfo:
 	var info := RegexCompileInfo.new()
 	
 	info.is_inverted = query.begins_with("!")
@@ -19,7 +19,7 @@ static func check_regex_compile(query: String) -> RegexCompileInfo:
 		info.is_valid = false
 	elif not info.pattern.is_empty():
 		var regex := RegEx.new()
-		if regex.compile(info.pattern) != OK:
+		if regex.compile(info.pattern, print_error) != OK:
 			info.is_valid = false
 
 	return info

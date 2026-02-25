@@ -23,7 +23,7 @@ func _init(values: Array, initial_pointer: int = 0):
 	_values = values
 
 
-## Returns the next value in the array, looping back to the start.
+## Returns the next value in the array, looping back to the start
 func get_next() -> Variant:
 	if _values.is_empty():
 		__log_warn("Cycler has no values to get", "", "return null")
@@ -33,7 +33,7 @@ func get_next() -> Variant:
 	return _pick_value()
 
 
-## Returns the current value without advancing the pointer.
+## Returns the current value without advancing the pointer
 func get_current() -> Variant:
 	if _values.is_empty():
 		__log_warn("Cycler has no values to get", "", "return null")
@@ -59,8 +59,8 @@ func get_values() -> Array:
 	return _values
 
 
-## Sets the pointer to the index of the given value.
-## Returns true if the value was found and pointer updated.
+## Sets the pointer to the index of the given value
+## Returns true if the value was found and pointer updated
 func force_cycle_to(target_value: Variant) -> bool:
 	if _values.is_empty():
 		__log_warn("Cycler is empty", "force_cycle_to")
@@ -72,7 +72,11 @@ func force_cycle_to(target_value: Variant) -> bool:
 		_pointer = index
 		return true
 	else:
-		__log_warn("Value not found in cycler", "force_cycle_to", "pointer unchanged", "Requested value", target_value)
+		__log_warn(
+			"Value not found in cycler",
+			"force_cycle_to",
+			"pointer unchanged",
+			"Requested value", target_value)
 		return false
 
 

@@ -24,7 +24,7 @@ var _min_max_max_polyphony: FMinMax = FMinMax.new(1, 16)
 const DEF_VOL_DB_CHANGE: float = 0.0
 const DEF_PITCH_CHANGE: float = 0.0
 const DEF_MAX_POLYPHONY: int = 4
-const DEF_BUS_ID: StringName = Constants.SFX_ASP_BASE_BUS_ID
+const DEF_BUS_ID: StringName = Const.SFX_ASP_BASE_BUS_ID
 
 
 func _init(
@@ -51,7 +51,7 @@ func _validate() -> void:
 	_min_max_pitch_change.clamp(pitch_change, true, "pitch_change")
 	_min_max_max_polyphony.clamp(max_polyphony, true, "max_polyphony")
 
-	if bus_id == "":
+	if bus_id == Const.EMPTY_SNAME:
 		bus_id = DEF_BUS_ID
 	if not AudioServerUtil.bus_exists(bus_id):
 		__log_warn_soft(pp.s("bus_id is unknown, using default", "provided/default", bus_id, DEF_BUS_ID))
@@ -68,7 +68,7 @@ func _validate() -> void:
 
 
 func get_result_vol() -> float:
-	return Constants.SFX_ASP_BASE_VOL_DB + vol_db_change
+	return Const.SFX_ASP_BASE_VOL_DB + vol_db_change
 
 
 func get_result_pitch() -> float:

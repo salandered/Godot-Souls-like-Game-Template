@@ -15,7 +15,6 @@ const reaction_anim_or_state_field := &"react_anim"
 const frame_field := &"frame_field"
 
 # name
-
 const state_name_field := &"state_name"
 const button_name_field := &"button_name"
 
@@ -29,7 +28,6 @@ const number_field := &"number_"
 const message_field := &"message_"
 const tag_field := &"tag_field_"
 
-
 # dvc
 const dvc_section_field = &"dvc_section_field"
 const dvc_key_field = &"dvc_key_field"
@@ -37,7 +35,6 @@ const dvc_value_field = &"dvc_value_field"
 const dvc_overlay_panel_type_field = &"overlay_panel_type"
 const dvc_char_type_field = &"dvc_char_type"
 const dvc_dv_type_field = &"dvc_dv_type"
-
 
 # combo
 const triggered_state_field = &"triggered_state_field"
@@ -49,7 +46,7 @@ const sig_payload_field := &"sig_payload"
 
 
 ## OBJECT SCHEMAS
-
+# this is closer to a real schema. In future methods like to_dict and from_dict can be added
 class HStateData:
 	var state_name: StringName
 	var state_depth: int

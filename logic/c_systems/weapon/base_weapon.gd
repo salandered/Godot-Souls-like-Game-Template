@@ -33,7 +33,6 @@ var _contact_hitbox_list: Array[CharacterHitbox] = []
 ## does it hurt right now, usually is managed by state
 var _is_attacking: bool = false
 
-
 ## manipulated by combat 
 var _hit_data: HitData = null
 
@@ -44,6 +43,9 @@ var _signal_container: BaseWeaponSignalContainer
 
 ## nullable
 var spark_marker: Marker3D
+
+## can be overriden
+var PUSH_RIGID_BODIES_FORCE: float = 6.0
 
 
 func __hard_dependencies() -> Array:
@@ -71,7 +73,7 @@ func initialise(holder: BaseStaticCharacter) -> void:
 		_weapon_hurt_box.initialise(self , _signal_container)
 	
 
-	## SFX. Here we r not logging any problems, all be logged using __soft_dependencies etc
+	## SFX. Here we rare not logging any problems, all be logged using __soft_dependencies etc
 	var _weapon_sfx := _for_init_weapon_sfx_parent()
 	if _weapon_sfx and _holder: # NOTE: without _holder no SFX
 		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)

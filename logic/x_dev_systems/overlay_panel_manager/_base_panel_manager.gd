@@ -17,14 +17,12 @@ func _enabled_on_init():
 
 
 func initialise() -> void:
-	if u.is_editor(): return
+	if eu.is_editor(): return
 
 	reset_visuals()
 
-		
-	await FrameUtils.wait_process_frames(4)
+	await FrameUtils.wait_process_frames(self , 4)
 	initialise_implementation()
-	
 	
 	if not __perform_validation(true):
 		__log_warn_soft("won't be working")
@@ -39,7 +37,7 @@ func initialise_implementation():
 
 
 func reset_visuals() -> void:
-	if u.is_editor(): return
+	if eu.is_editor(): return
 	if get_ui_panel():
 		get_ui_panel().visible = false
 

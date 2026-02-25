@@ -13,10 +13,6 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func get_character() -> BaseStaticCharacter:
-	return _character
-
-
 func _initialise_implementation() -> void:
 	super._initialise_implementation()
 	_update_metric(ts_curr_action_label, DEF_NO_VALUE)
@@ -27,13 +23,17 @@ func _initialise_implementation() -> void:
 		_character = _r_players[0] as Princess
 
 
+func get_character() -> BaseStaticCharacter:
+	return _character
+
+
 func _process_imp(delta: float):
-	var ats := get_time_spent_action()
+	var ats := _get_time_spent_action()
 	_update_metric(ts_curr_action_label, ats)
 	return
 
 
-func get_time_spent_action() -> float:
+func _get_time_spent_action() -> float:
 	if not _character: return DEF_NO_VALUE
 	var psm := _character.player_sm
 	if not psm: return DEF_NO_VALUE

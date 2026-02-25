@@ -6,6 +6,9 @@ extends BaseTextInfoPanelManager
 @onready var logs_panel: LogsUIPanel = %LogsPanel
 
 
+const COL_ERROR_MSG := "#f59c9f"
+
+
 func get_max_lines() -> int:
 	return 60
 
@@ -49,10 +52,7 @@ func _on___SIG_error_log_printed(payload: Dictionary[StringName, Variant]) -> vo
 		_append_invalid_regex_text_to_label()
 	
 	
-var col_msg := "#f59c9f"
-
-
 func _build_msg(frame: String, message: String) -> String:
-	var msg_bb := BB.color_wrap(message, col_msg)
+	var msg_bb := BB.color_wrap(message, COL_ERROR_MSG)
 
 	return pp.s(_log_prefix(frame), msg_bb)

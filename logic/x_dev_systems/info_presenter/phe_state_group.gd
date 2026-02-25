@@ -43,11 +43,11 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 func _on_SIG_phe_state_changed(payload: Dictionary[StringName, Variant]):
-	var tag := _get_SIG_string_payload(payload, SPS.tag_field, {})
-	if tag != Constants.DEMO_ENEMY_TAG:
+	var tag := _get_SIG_sname_payload(payload, SPS.tag_field)
+	if tag != Const.DEMO_ENEMY_TAG:
 		return
 	var h_state_data := _get_SIG_h_state_data(payload)
-	var selected_label: DynamicInfoLabel = DictUtils.safe_get_dict_key(depth_to_label, h_state_data.state_depth)
+	var selected_label: DynamicInfoLabel = DictUtils.safe_get_dict_key(depth_to_label, h_state_data.state_depth, null, WL.SILENT)
 	if not selected_label:
 		return
 	

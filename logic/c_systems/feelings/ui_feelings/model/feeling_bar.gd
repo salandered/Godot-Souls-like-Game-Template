@@ -15,14 +15,14 @@ extends RefCountedLogger
 ## 1. ROOT NODE (MarginContainer)
 ##    - Layout > Container Sizing:  Horizontal: Shrink Begin | Vertical: Shrink Begin
 ##    - Layout > Custom Min Size:   (0, 0)
-##    - Theme Overrides > Constants: Set margins (e.g., Top: 40, Left: 40)
+##    - Theme Overrides > Const: Set margins (e.g., Top: 40, Left: 40)
 ##    - Transform > Scale:          (1, 1) (scaling can lead to blur)
 ##
 ## 2. BAR CONTAINERS (e.g., StaminaContainer - MarginContainer)
 ##    - Layout > Custom Min Size:   x: [INITIAL_WIDTH] (e.g., 300), y: 0
 ## 	 * NOTE: This sets the visual width in Editor. Code logic uses this to calculate ratio.
 ##    - Layout > Container Sizing:  Horizontal: Shrink Begin
-##    - Theme Overrides > Constants: 0 
+##    - Theme Overrides > Const: 0 
 ##
 ## 3. THE BARS (Back, Ghost, Main - TextureProgressBar)
 ##    - Layout > Custom Min Size:   x: 0, y: [HEIGHT] (e.g., 25)
@@ -365,7 +365,7 @@ func __pp_curr_values() -> String:
 
 
 func pp_name() -> String:
-	return pp.s(tag, ObjUtils.construct_obj_pp_name(self))
+	return pp.s(tag, ObjUtils.construct_obj_pp_name(self ))
 
 
 func debug():

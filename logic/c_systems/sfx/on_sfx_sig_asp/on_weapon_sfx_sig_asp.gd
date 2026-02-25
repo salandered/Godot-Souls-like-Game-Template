@@ -47,7 +47,7 @@ func get_holder_curr_state() -> BaseCharacterState:
 func get_holder_curr_state_name() -> StringName:
 	var _curr_state := get_holder().get_current_state()
 	if _curr_state == null:
-		return ""
+		return Const.EMPTY_SNAME
 	else:
 		return _curr_state.state_name
 

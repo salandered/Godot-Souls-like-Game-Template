@@ -51,7 +51,7 @@ func hard_complete():
 
 func _to_string() -> String:
 	return "Target ∠ %s, AccRot %s, Completed %s, Dir %s" % \
-		[pp.rad2deg(target_angle), pp.rad2deg(accum_rotation), str(turn_completed), turn_direction]
+		[pp.srad2deg(target_angle), pp.srad2deg(accum_rotation), str(turn_completed), turn_direction]
 
 func to_dict() -> Dictionary[StringName, Variant]:
 	return {

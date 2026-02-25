@@ -11,12 +11,12 @@ func initialise() -> void:
 	SigUtils.safe_connect(PlayerStats.SIG_simple_target_super_rotate, _on_SIG_simple_target_super_rotate)
 
 
-var interrupted_state: StringName = ""
+var interrupted_state: StringName = Const.EMPTY_SNAME
 
 
 func _interrup_with_personal_state(state_name_: StringName, n_frames_delay: int, look_at_time: float):
-	if interrupted_state != "": return
-	await FrameUtils.wait_process_frames(n_frames_delay)
+	if interrupted_state != Const.EMPTY_SNAME: return
+	await FrameUtils.wait_process_frames(self , n_frames_delay)
 	interrupted_state = state_name_
 	var lam := me.get_look_at_manager()
 	if lam:
@@ -121,10 +121,10 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			_:
 				_next_state = ra.snpick_weighted(basic_spick_weighted)
 
-	if interrupted_state != "":
+	if interrupted_state != Const.EMPTY_SNAME:
 		if current_substate.state_name != interrupted_state:
 			_next_state = interrupted_state
-		interrupted_state = ""
+		interrupted_state = Const.EMPTY_SNAME
 
 
 	return VerdictPH.new(_next_state, _reason)

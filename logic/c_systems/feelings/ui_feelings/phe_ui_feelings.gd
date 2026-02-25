@@ -18,7 +18,6 @@ var _pulse_tween: Tween
 var _is_pulsing: bool = false
 var _is_fading_out := false
 
-
 var _prev_health: float
 
 var __UI_HARD_ENABLE: bool = false
@@ -38,6 +37,7 @@ func __soft_dependencies() -> Array:
 		_ghost_bar,
 		_back_health_bar
 	]
+
 
 func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D = null) -> void:
 	self .e_feelings = e_feelings_

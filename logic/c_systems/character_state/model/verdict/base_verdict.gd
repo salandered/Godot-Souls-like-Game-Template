@@ -6,7 +6,7 @@ var next_state: StringName
 var _reason: String
 
 
-func _init(next_state_: StringName = "", reason_: String = ""):
+func _init(next_state_: StringName = Const.EMPTY_SNAME, reason_: String = ""):
 	self.next_state = next_state_
 	self._reason = reason_
 
@@ -16,7 +16,7 @@ func get_reason() -> String:
 
 
 func reset_next_state() -> void:
-	next_state = ""
+	next_state = Const.EMPTY_SNAME
 
 
 ## Deliberately only update_reason and not a set_reason.

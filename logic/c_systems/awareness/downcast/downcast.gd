@@ -5,6 +5,7 @@ class_name DownCast
 
 @export var __log_dist: bool = false
 
+# TODO: separate Dev Visuals as a reusable raycast visualiser
 @export_group("Debug Visuals")
 @export var __show_visuals: bool = false
 @export var dv_color_hit: Color = Color.DARK_GREEN
@@ -37,7 +38,7 @@ func _process(delta: float) -> void:
 	if attachment:
 		global_position = attachment.global_position
 			
-	if __log_dist: print_.prefix("Downcast dist", pp.s(global_position.distance_to(get_collision_point())))
+	if __log_dist: print_.msg_raw("Downcast dist", pp.s(global_position.distance_to(get_collision_point())))
 
 	_process_dv_visuals()
 

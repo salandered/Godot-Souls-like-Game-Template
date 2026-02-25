@@ -158,7 +158,7 @@ func _update_blend_values():
 	if prev_overlay:
 		_calculate_overlay_weight(prev_overlay)
 		
-		# Check if we should kill prev_overlay
+		# check if we should kill prev_overlay
 		var natural_end := prev_overlay.playback.time_spent >= prev_overlay.timing.get_total_duration()
 		var forced_end := prev_overlay.is_forced_fade_finished()
 		
@@ -194,7 +194,7 @@ func _calculate_overlay_weight(instance: OverlayInstance) -> void:
 
 
 func _apply_overlay() -> void:
-	# Find all bones we need to modify from both overlays
+	# find all bones we need to modify from both overlays
 	var bones_to_modify_set: Dictionary[int, bool] = {}
 	if prev_overlay and prev_overlay.curr_weight > 0.0:
 		var mask = prev_overlay.bone_mask if not prev_overlay.bone_mask.is_empty() else default_bone_mask
@@ -213,7 +213,7 @@ func _apply_overlay() -> void:
 
 	__log_applying(bones_to_modify_set.keys())
 
-	# Loop through the combined set of bones
+	# loop through the combined set of bones
 	for bone_idx in bones_to_modify_set.keys():
 		var base_pose := skeleton.get_bone_pose(bone_idx)
 		var final_pose := base_pose # Start with the base pose
@@ -245,7 +245,7 @@ func _calculate_overlay_bone_pose(bone_idx: int, playback: AnimPlayback) -> Tran
 func _blend_pose(base_pose: Transform3D, overlay_pose: Transform3D, weight: float, hips_weight: float, bone_idx: int) -> Transform3D:
 	var final_pose := Transform3D()
 	
-	## Only blend rotation for Hips
+	## only blend rotation for Hips
 	if bone_idx == BoneIdx.HIPS_1:
 		final_pose.origin = base_pose.origin # keep base position
 		final_pose.basis = base_pose.basis.slerp(overlay_pose.basis, hips_weight)
@@ -270,7 +270,7 @@ func __log_overlay_start(bone_idx: int, base_pose: Transform3D, overlay_pose: Tr
 
 
 func __log_applying(bones_to_modify: Array[int]):
-	if u.ifr() % 60 == 0:
+	if FrameUtils.ifr() % 60 == 0:
 		var weight = curr_overlay.curr_weight if curr_overlay else (prev_overlay.curr_weight if prev_overlay else 0.0)
 		__log_("Applying overlay. Weight:", weight, "Bones:", bones_to_modify.slice(0, 5), "...")
 

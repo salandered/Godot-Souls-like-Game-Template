@@ -21,13 +21,13 @@ func _init(sad_id_: StringName, anim_sfx_asp_name_: String, signal_id_: StringNa
 	self.anim_sfx_asp_name = SFXConstants.anim_asp_prefix + anim_sfx_asp_name_
 	self.signal_id = signal_id_
 
-	if sad_id_ == "":
-		__log_error("sad_id_ is empty", "", "", self)
+	if sad_id_ == Const.EMPTY_SNAME:
+		__log_error("sad_id_ is empty", "", "", self )
 	if anim_sfx_asp_name_ == "":
-		__log_error("anim sfx stream player name is empty", "", "", self)
+		__log_error("anim sfx stream player name is empty", "", "", self )
 
-	if signal_id_ == "":
-		__log_error("signal id is empty", "", "", self)
+	if signal_id_ == Const.EMPTY_SNAME:
+		__log_error("signal id is empty", "", "", self )
 
 
 func _to_string() -> String:

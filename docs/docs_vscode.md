@@ -32,7 +32,7 @@ Of course there are downsides:
 - Code is separated from essential Godot windows like Inspector or Scene tree. This leads to lack of cool features like drag and dropping node reference as an @onready variable.
 - You don't see many of usdeful UI hints. Auto completion inside built-in code editor may show Node icons, also there would be a visual hint if a method is connected to signal via UI;
 - You [**can't**](docs_vscode.md#working-with-file-view) make any changes to file system using VSCode file view.  
-- Godot-tools LSP connection and running/debugging features are very robust, but it still adds a layer between you and the engine, which comes with some bugs and additional latency (speed of VSCode itself should compensate for it)
+- Godot-tools LSP connection and running/debugging features are very robust, but it still adds a layer between you and the engine, which comes with bugs, sync issues and additional latency (speed of VSCode itself should compensate for it)
 - Naturally godot-tools is "catching up" after the releases of the engine, not the other way around. This is noticeble when new GDScript syntax features are introduced (while it does not happen often).
 - You manage two apps instead of one. In case of working with one monitor it may become an issue.
 

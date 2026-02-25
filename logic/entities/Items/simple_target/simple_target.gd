@@ -24,9 +24,9 @@ func __hard_validation() -> bool:
 
 
 class AnimID:
-	const rotate_on_hit = "rotate_on_hit"
-	const rotate_on_hit_clock = "rotate_on_hit_clock"
-	const rotate_on_hit_super = "rotate_on_hit_super"
+	const rotate_on_hit = &"rotate_on_hit"
+	const rotate_on_hit_clock = &"rotate_on_hit_clock"
+	const rotate_on_hit_super = &"rotate_on_hit_super"
 
 
 func _ready() -> void:

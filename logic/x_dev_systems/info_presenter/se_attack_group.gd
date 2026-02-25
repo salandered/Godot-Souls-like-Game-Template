@@ -24,7 +24,7 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 func _on_SIG_se_weapon_hit_data_set(payload: Dictionary[StringName, Variant]):
-	var tag := _get_SIG_string_payload(payload, SPS.tag_field, {})
+	var tag := _get_SIG_sname_payload(payload, SPS.tag_field)
 	if tag != "mech": # temp
 		return
 	_on_SIG_hit_data_payload(

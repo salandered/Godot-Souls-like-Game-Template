@@ -1,6 +1,7 @@
 @tool
 extends RichTextLabel
 
+
 @export_multiline var plain_text: String = "":
 	set(value):
 		plain_text = value
@@ -12,10 +13,12 @@ extends RichTextLabel
 @export var icon_size: int = 20
 @export var phrase_icons: Dictionary[String, String] = {}
 
+
 func _ready():
 	bbcode_enabled = true
 	fit_content = true
 	_format_text()
+
 
 func _format_text():
 	if plain_text.is_empty():
@@ -30,7 +33,7 @@ func _format_text():
 		if " - " in line:
 			var parts := line.split(" - ", false, 1)
 			if parts.size() >= 2:
-				formatted += "[b]" + parts[0] + "[/b] - " + parts[1] + "\n"
+				formatted += BB.b_wrap(parts[0]) + " - " + parts[1] + "\n"
 			else:
 				formatted += line + "\n"
 		else:
@@ -39,13 +42,13 @@ func _format_text():
 	formatted = formatted.strip_edges()
 	
 	# Step 2a: Replace phrases with icons first
-	for phrase in phrase_icons.keys():
+	for phrase: String in phrase_icons.keys():
 		if phrase.is_empty():
 			continue
 		var icon_path := phrase_icons[phrase]
 		if ResourceLoader.exists(icon_path):
 			# Icon + italic phrase
-			var replacement := "[img=%dx%d]%s[/img] %s" % [icon_size, icon_size, icon_path, phrase]
+			var replacement := BB.image_wrap(icon_path, icon_size) + " " + phrase
 			formatted = formatted.replace(phrase, replacement)
 	
 	# Step 2b: Make remaining phrases italic (ones without icons or not in phrase_icons)
@@ -53,6 +56,6 @@ func _format_text():
 		if phrase.is_empty():
 			continue
 		# Only italicize if not already processed (check if [i] tag already exists around it)
-		if not ("[i]" + phrase + "[/i]") in formatted:
-			formatted = formatted.replace(phrase, "[i]" + phrase + "[/i]")
+		if not BB.i_wrap(phrase) in formatted:
+			formatted = formatted.replace(phrase, BB.i_wrap(phrase))
 	text = formatted

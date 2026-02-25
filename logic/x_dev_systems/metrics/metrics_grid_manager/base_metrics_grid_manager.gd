@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if not use_process: return
 	if not _metrics_grid: return
 
-	if not u.is_nth_frame(nth_frame()):
+	if not FrameUtils.is_nth_frame(nth_frame()):
 		return
 
 	_process_implementation(delta)

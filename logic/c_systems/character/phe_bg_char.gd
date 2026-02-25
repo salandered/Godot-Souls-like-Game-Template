@@ -6,7 +6,6 @@ extends PHCharacter
 
 @export var fire_up: bool = false
 
-
 @onready var _visuals_root: Node3D = $"VisualOffset/Visuals/gold parts v2"
 
 @onready var pinga_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %PingaAnimSFXSigEmitter
@@ -15,6 +14,15 @@ extends PHCharacter
 
 
 const FLICKER_FIRE = preload("uid://bnf3bmp3nq5nq")
+const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
+
+
+## INITIALISATION
+# region
+
+func initialise_phe_char_implementation():
+	add_to_group(Groups.Chars.BIG_GUY)
+	SigUtils.safe_connect(SIG_land_wave, _on_sig_land_wave)
 
 
 func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]:
@@ -29,14 +37,8 @@ func _for_init_required_markers() -> Dictionary[StringName, Array]:
 func _for_init_active_weapon_id_list() -> Array[StringName]:
 	return [WeaponID.big_pinga_blade, WeaponID.bg_aura_weapon]
 
+# endregion
 
-##
-
-func initialise_phe_char_implementation():
-	add_to_group(Groups.Chars.BIG_GUY)
-
-	SigUtils.safe_connect(SIG_land_wave, _on_sig_land_wave)
-	
 
 func get_initial_leaf_state_name() -> StringName:
 	return PHES.Leaf.sleep
@@ -58,9 +60,9 @@ func set_angry_raised():
 
 
 func _on_death_raised_implementation() -> void:
-	await FrameUtils.wait_process_frames(2)
+	await FrameUtils.wait_process_frames(self , 2)
 	
-	print_.prefix("_trigger_death_scatter()")
+	print_.msg_raw("_trigger_death_scatter()")
 	if head_off:
 		await _trigger_death_scatter(visuals)
 
@@ -71,11 +73,34 @@ func _on_death_raised_implementation() -> void:
 	SigUtils.safe_emit_sig_data(sig_data, {SFXConstants.unique_key: SFXConstants.Unique.accomplish})
 
 
-const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
+## COSMETIC EFFECTS
+# region
+
+func apply_fire_to_head():
+	if not FLICKER_FIRE or not fire_marker:
+		return
+	var fire_scene := FLICKER_FIRE.instantiate()
+	var casted: FireStatic = fire_scene
+	fire_marker.add_child(casted)
+	casted.play_animation = false
+	casted.play_move_animation = false
+	casted.energy = 2.8
+	casted.add_mist = false
 
 
+func remove_fire_effect():
+	if not fire_marker:
+		return
+	for child in fire_marker.get_children():
+		child.queue_free()
+
+
+## experimental. Trying to scatter bones as rigid bodies. Currently works with skull
 func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
-	print_.prefix_s("glob position of an enemy", self.global_position)
+	if not RIGID_SHATTER_SCRIPT:
+		return
+		
+	__log_("glob position of an enemy", self.global_position)
 	var rigids_container := Node3D.new()
 	rigids_container.name = "EnemyDebrisContainer"
 	get_tree().current_scene.add_child(rigids_container)
@@ -85,7 +110,7 @@ func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	for visual_mesh: MeshInstance3D in mesh_list:
 		if not visual_mesh.mesh:
 			continue
-		await FrameUtils.wait_one_physics_frame()
+		await FrameUtils.wait_one_physics_frame(self )
 		var physics_config := RigidPhysicsConfig.new(3.0, 1.5, 0.0, 2.5)
 		var rigid_body := RigidBodyUtils.create_rigid_body_from_mesh_instance(visual_mesh, physics_config, true)
 		if rigid_body:
@@ -100,29 +125,10 @@ func _trigger_death_scatter(mesh_list: Array[MeshInstance3D]):
 	
 	for visual_mesh: MeshInstance3D in mesh_list:
 		visual_mesh.visible = false
-	print_.prefix("end of _trigger_death_scatter")
+	__log_("end of _trigger_death_scatter")
 
+# endregion
 
-##
-
-
-func apply_fire_to_head():
-	if not FLICKER_FIRE or not fire_marker:
-		return
-	var fire_scene := FLICKER_FIRE.instantiate()
-	var casted: FireStatic = fire_scene
-	fire_marker.add_child(casted)
-	casted.play_animation = false
-	casted.play_move_animation = false
-	casted.energy = 2.8
-	casted.add_mist = false
-	# fire.position = Vector3.ZERO  # Centered on marker
-
-func remove_fire_effect():
-	if not fire_marker:
-		return
-	for child in fire_marker.get_children():
-		child.queue_free()
 
 ##
 
@@ -138,7 +144,6 @@ func get_sprint_state_names() -> Array[StringName]:
 func get_idle_state_names() -> Array[StringName]:
 	return [PHES.Leaf.combat_idle]
 
-
 func get_power_attacks_state_names() -> Array[StringName]:
 	return [
 		PHES.Leaf.scare_off,
@@ -151,35 +156,6 @@ func get_power_attacks_state_names() -> Array[StringName]:
 
 ##
 
-# func _hard_death():
-# 	await FrameUtils.wait_process_frames(5)
-# 	self.queue_free()
-
 
 func _on_monitor_player_enter_signal_area_sig_player_entered(incoming_body: Node3D) -> void:
 	set_physics_process(true)
-
-
-## DEV
-
-
-# func _input(event: InputEvent) -> void:
-# 	if u.is_release():
-# 		return
-# 	var bone_mask := BoneMask.get_upper_body()
-	# if event.is_action_pressed(RawAction.DEV_8):
-	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
-	# 	OverlayConfig.new(
-	# 		OverlayConfig.Weight.new(0.5),
-	# 		BlendConfig.new(0.12, 0.18),
-	# 		1.0,
-	# 		bone_mask
-	# 		))
-	# if event.is_action_pressed(RawAction.DEV_9):
-	# 	animator_manager.set_overlay_anim(PHEA.react.react_from_R,
-	# 	OverlayConfig.new(
-	# 		OverlayConfig.Weight.new(1.0),
-	# 		BlendConfig.new(0.2, 0.2),
-	# 		1.0,
-	# 		bone_mask
-	# 	))

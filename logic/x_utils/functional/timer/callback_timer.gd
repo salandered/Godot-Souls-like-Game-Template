@@ -1,5 +1,6 @@
-extends BaseTimer
 class_name DelayCallbackTimer
+extends BaseTimer
+
 
 var on_complete: Callable = Callable() # Optional callback
 var _has_triggered: bool = false # Prevent multiple calls to callback
@@ -27,13 +28,11 @@ func update(delta: float) -> bool:
 	return is_complete()
 
 
-## overrides
 func reset() -> void:
 	timer = 0.0
 	_has_triggered = true # no re-triggering after reset
 
 
-## overrides
 func turn_off() -> void:
 	timer = 0.0
 	duration = -1.0

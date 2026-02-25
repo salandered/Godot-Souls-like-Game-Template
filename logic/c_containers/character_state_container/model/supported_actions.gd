@@ -22,7 +22,7 @@ func _init(motion_to_action_: Dictionary[StringName, StringName], additional_act
 			action_names.append(name_)
 
 	__validation()
-	print_.lsm_beh(" _ready()", _to_string())
+	print_preset.lsm_beh(" _ready()", _to_string())
 
 
 ## mandatory method for every behavior's initial decision
@@ -30,7 +30,7 @@ func convert_to_supported(action: BaseAction) -> StringName:
 	if is_action_supported(action.action_name):
 		return action.action_name
 	else:
-		# print_.lsm_beh("", pp.in_q(action.action_name) + " is not supported. will return default supported with the same motion type")
+		# print_preset.lsm_beh("", pp.in_q(action.action_name) + " is not supported. will return default supported with the same motion type")
 		return default_by_motion(action.motion_type)
 
 

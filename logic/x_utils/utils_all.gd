@@ -1,37 +1,8 @@
+class_name tu # TemporaryUtils
 extends RefCounted
+
+
 ## All utils which don't have their separate more focused module yet
-class_name u
-
-
-## small division error, we dont care
-static func get_curr_time_ticks_sec() -> float:
-	return Time.get_ticks_msec() / 1000.0
-
-
-static func get_time_string_from_system_mm_ss() -> String:
-	var time := Time.get_time_string_from_system()
-	var mm_ss := time.right(5) if len(time) >= 5 else time
-	return mm_ss
-
-
-static func sfr(str_prefix: bool = false) -> String:
-	if not str_prefix:
-		return str(Engine.get_process_frames())
-	return pp.s("fr_n-", Engine.get_process_frames())
-
-
-static func ifr() -> int:
-	return Engine.get_process_frames()
-
-
-static func is_nth_frame(interval: int) -> bool:
-	if interval <= 1: return true
-	return ifr() % interval == 0
-
-
-static func is_nth_physics_frame(interval: int) -> bool:
-	if interval <= 1: return true
-	return Engine.get_physics_frames() % interval == 0
 
 
 static func safe_look_at(
@@ -51,7 +22,7 @@ static func safe_look_at(
 	return true
 
 
-## point_index starts with zero!
+## NOTE: point_index starts with zero
 static func get_curve_point_x(curve: Curve, point_index: int) -> float:
 	return curve.get_point_position(point_index).x
 
@@ -62,14 +33,10 @@ static func reset_all(resettable: Array):
 			item.reset()
 
 
-##
-
 static func set_all_descendant_asp_3d_default_bus(for_whom: Node3D):
 	var asps := get_descendants.audio_stream_players_3D(for_whom)
 	for asp: AudioStreamPlayer3D in asps:
-		asp.bus = Constants.SFX_ASP_BASE_BUS_ID
-
-##
+		asp.bus = Const.SFX_ASP_BASE_BUS_ID
 
 
 static func _recursive_hide(
@@ -92,18 +59,8 @@ static func hide_dev_visuals(node: Node, __log: bool = false):
 		__log
 	)
 
-##
 
-static func pause_tree_toggle(for_whom: Node) -> void:
+static func wait_seconds(for_whom: Node, duration: float) -> void:
 	if not for_whom: return
 	if not for_whom.get_tree(): return
-	for_whom.get_tree().paused = not for_whom.get_tree().paused
-
-##
-
-static func is_editor() -> bool:
-	return Engine.is_editor_hint()
-
-
-static func is_release() -> bool:
-	return not OS.is_debug_build()
+	await for_whom.get_tree().create_timer(duration).timeout

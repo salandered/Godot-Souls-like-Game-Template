@@ -3,9 +3,9 @@ extends RefCountedStaticLogger
 
 
 static func validate_anim(
-	anim_data: AnimationData, 
-	param_prefixes: Array[String], 
-	param_tracks: Array[String], 
+	anim_data: AnimationData,
+	param_prefixes: Array[String],
+	param_tracks: Array[String],
 	required_markers: Dictionary[StringName, Array]
 ) -> bool:
 	# base field validation (not null)
@@ -88,7 +88,7 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 
 # endregion

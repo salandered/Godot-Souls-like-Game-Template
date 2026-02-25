@@ -11,8 +11,9 @@ enum Dir {
 	RIGHT_B, # 5
 	LEFT,
 	LEFT_F, # 7
-	LEFT_B
+	LEFT_B # 8
 }
+
 
 static func name_(dir: Dir) -> String:
 	return Dir.find_key(dir)

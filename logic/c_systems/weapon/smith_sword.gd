@@ -16,6 +16,8 @@ var hit_sounds: Dictionary = {
 }
 
 func initialise_implementation() -> void:
+	PUSH_RIGID_BODIES_FORCE = 6.0
+	
 	_input_action_to_state = {
 		CombatAction.light_attack_pressed: PS.sword_slash_1,
 		CombatAction.heavy_attack_pressed: PS.sword_slash_3,

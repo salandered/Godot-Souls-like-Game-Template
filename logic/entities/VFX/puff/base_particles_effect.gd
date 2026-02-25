@@ -88,7 +88,7 @@ func _ready() -> void:
 	
 	_ready_implementation()
 
-	if not u.is_editor():
+	if not eu.is_editor():
 		_ready_implementation_not_editor()
 
 

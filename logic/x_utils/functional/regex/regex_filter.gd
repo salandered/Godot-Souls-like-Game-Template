@@ -1,6 +1,7 @@
 class_name RegexFilter
 extends RefCountedLogger
 
+
 var _regex := RegEx.new()
 var _cached_query: String = ""
 
@@ -11,6 +12,7 @@ enum Result {
 	NOT_PASS,
 	ERROR
 }
+
 
 ## checks if the text passes the filter query
 func apply_filter(text: String, query: String) -> Result:
@@ -31,6 +33,7 @@ func apply_filter(text: String, query: String) -> Result:
 		return Result.PASS if _info.is_inverted else Result.NOT_PASS
 	else:
 		return Result.NOT_PASS if _info.is_inverted else Result.PASS
+
 
 func _update_cache(new_query: String) -> void:
 	_cached_query = new_query

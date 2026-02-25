@@ -18,7 +18,7 @@ func initialise() -> void:
 
 
 func on_enter_state() -> void:
-	_target_duration = ra.float_range(6.0, 40.0)
+	_target_duration = ra.frange(6.0, 40.0)
 	anim = ra.pick_random(_anim_talk, _anim_talk_w_leg)
 	__log_ent("Chose anim", anim.anim_id)
 

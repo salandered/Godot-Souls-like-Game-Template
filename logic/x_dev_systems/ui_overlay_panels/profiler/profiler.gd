@@ -1,5 +1,5 @@
-extends Node
 class_name Profiler
+extends Node
 
 
 @onready var control_info: Label = %ProfilerControlInfo
@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 		DisplayServer.VSYNC_ADAPTIVE: mode_name = "Adaptive"
 		DisplayServer.VSYNC_MAILBOX: mode_name = "Mailbox"
 	
-	var mem := OS.get_static_memory_usage() / 1048576.0
+	var mem := OS.get_static_memory_usage() / 1048576.0 # magic ...
 	
 	if profiler_info:
 		profiler_info.text = "FPS: %d\nVSync: %s\nMemory: %3.0f MiB" % [fps, mode_name, mem]

@@ -1,9 +1,11 @@
-extends BaseInterpolator
 class_name FloatLinearInterpolator
+extends BaseInterpolator
+
 
 var _start_value: float
 var _target_value: float
 var _current_value: float
+
 
 ## idempotent
 func initialise(start: float, target: float, duration_: float) -> void:

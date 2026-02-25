@@ -1,14 +1,17 @@
 class_name ValueInfluencer
-extends RefCounted
+extends RefCountedLogger
 
-var _influencer_name: String
+
+var _influencer_name: String = ""
 var default_target_multiplier: float
 
 var default_blend: BlendConfig
 var current_blend: BlendConfig
 
-func _init(target_multiplier_: float = 0.8, influencer_name_: String = "not set") -> void:
-	assert(target_multiplier_ >= 0.0, "Target multiplier should be non-negative")
+
+func _init(target_multiplier_: float = 0.8, influencer_name_: String = "") -> void:
+	if target_multiplier_ < 0.0:
+		__log_warn("Target multiplier should be non-negative", "", "", target_multiplier_, influencer_name_)
 	self.default_target_multiplier = target_multiplier_
 	self._influencer_name = influencer_name_
 	self.default_blend = BlendConfig.new(0.1, 0.1)
@@ -36,7 +39,9 @@ func influence_value(value: float, timer: SimpleTimer, override_multiplier: floa
 	var result_multiplier := _get_multiplier(timer, multiplier)
 	var result := value * result_multiplier
 	
-	__log_("Val", value, "->", result, "| Mult", result_multiplier, "Elapsed", timer.get_elapsed(), "/", timer_duration)
+	__log_("Val", value, "->", result,
+		"| Mult", result_multiplier,
+		"Elapsed", timer.get_elapsed(), "/", timer_duration)
 	
 	return result
 
@@ -47,7 +52,7 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 
 	if elapsed_time < current_blend.fade_in:
 		var t := elapsed_time / current_blend.fade_in
-		var eased_t := MathUtil.ease_in_out(t)
+		var eased_t := MathUtils.ease_in_out(t)
 		var result := lerpf(1.0, target_mult, eased_t)
 		__log_("Phase: FADE_IN", "t", t, "-> eased", eased_t, "-> mult", result)
 		return result
@@ -58,7 +63,7 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 		
 	elif elapsed_time < total_duration:
 		var t := (elapsed_time - current_blend.fade_in - current_blend.hold) / current_blend.fade_out
-		var eased_t := MathUtil.ease_in_out(t)
+		var eased_t := MathUtils.ease_in_out(t)
 		var result := lerpf(target_mult, 1.0, eased_t)
 		__log_("Phase: FADE_OUT", "t", t, "-> eased", eased_t, "-> mult", result)
 		return result
@@ -68,7 +73,10 @@ func _get_multiplier(timer: SimpleTimer, target_mult: float) -> float:
 		return 1.0
 
 
-var LOG_B: bool = false
+## __LOGS
 
-func __log_(...parts: Array):
-	if LOG_B: print_.prefix("ValueInfluencer " + _influencer_name, pp.list_(parts))
+func __LOG_B() -> bool:
+	return false
+
+func pp_name() -> String:
+	return _influencer_name if _influencer_name != "" else super.pp_name()

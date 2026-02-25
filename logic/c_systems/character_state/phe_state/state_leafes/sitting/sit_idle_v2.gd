@@ -22,8 +22,8 @@ func initialise() -> void:
 
 
 func on_enter_state() -> void:
-	anim = ra.pick_weighted([_anim_freezed, _anim_usual], [0.2, 0.8])
+	anim = ra.pick_weighted({_anim_freezed: 0.2, _anim_usual: 0.8})
 	if not anim:
 		anim = _anim_usual
 
-	_target_duration = ra.float_range(4.0, 12.0)
+	_target_duration = ra.frange(4.0, 12.0)

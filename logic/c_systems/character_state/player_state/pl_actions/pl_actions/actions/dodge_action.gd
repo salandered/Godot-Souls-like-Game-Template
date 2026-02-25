@@ -60,7 +60,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	if pm().get_area_awareness().is_camera_locked() and PREV_ACTION != Leg.Act.sprint:
 		_original_dir = input_.detect_strafe_dir()
 	else:
-		_original_dir = pm().detect_dir_relative_to_facing(input_, Constants.ONE_FRAME)
+		_original_dir = pm().detect_dir_relative_to_facing(input_, Const.ONE_FRAME)
 	curr_dodge_dir.set_direction_simplified(_original_dir)
 
 	# INTERPOLATOR

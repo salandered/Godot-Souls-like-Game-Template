@@ -22,12 +22,12 @@ func __soft_dependencies() -> Array:
 
 
 class AnimID:
-	const pick = "pick"
+	const pick = &"pick"
 
 
 func _ready() -> void:
-	u.set_all_descendant_asp_3d_default_bus(self)
-	u.hide_dev_visuals(self)
+	tu.set_all_descendant_asp_3d_default_bus(self )
+	tu.hide_dev_visuals(self )
 	
 	if __perform_validation():
 		interact_area.SIG_interacted.connect(_on_my_area_interacted)

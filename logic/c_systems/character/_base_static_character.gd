@@ -13,7 +13,7 @@ var _combat: BaseCombat
 var _look_at_char_marker: LookAtCharacterMarker
 
 
-@export var dev_tag: StringName = ""
+@export var dev_tag: StringName = Const.EMPTY_SNAME
 
 ## not nullable after init
 func get_combat() -> BaseCombat:
@@ -50,7 +50,7 @@ func __soft_dependencies() -> Array:
 
 
 func _ready() -> void:
-	if not u.is_editor():
+	if not eu.is_editor():
 		_initialise_static_char()
 		initialise_static_char_implementation()
 
@@ -91,9 +91,7 @@ func _initialise_combat() -> void:
 
 
 ##
-
 @abstract func initialise_static_char_implementation() -> void
-
 
 ##
 @abstract func _for_init_native_player() -> AnimationPlayer
@@ -103,7 +101,6 @@ func _initialise_combat() -> void:
 
 ##
 @abstract func react_on_hit(hit_data: HitData) -> void
-
 @abstract func is_invincible() -> bool
 
 ##
@@ -116,8 +113,6 @@ func _initialise_combat() -> void:
 
 @abstract func is_player() -> bool
 
-
-##
 
 ## Character states.
 ## TODO: was a quick way to make SFX system work. I dont like this API here
@@ -132,4 +127,3 @@ func _initialise_combat() -> void:
 @abstract func get_idle_state_names() -> Array[StringName]
 
 @abstract func get_power_attacks_state_names() -> Array[StringName]
-#

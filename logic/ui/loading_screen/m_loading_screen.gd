@@ -1,6 +1,7 @@
 class_name M_LoadingScreen
 extends CanvasLayerLogger
 
+
 enum StallStage {STARTED, WAITING, STILL_WAITING, GIVE_UP}
 
 
@@ -68,7 +69,6 @@ func update_total_loading_progress() -> void:
 	# If jumping 10% (0.1), take 0.05s.
 	# clamp it to a minimum of 0.1s so it doesn't look too instant
 	var duration := maxf(diff * 0.3, 0.1)
-	# print_.prefix_s("~~~~", duration)
 	_progress_tween.tween_property(self , "_total_loading_progress", _scene_loading_progress, duration) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)

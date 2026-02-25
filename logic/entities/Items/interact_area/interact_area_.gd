@@ -137,7 +137,7 @@ func _can_interact() -> bool:
 	if not _is_player_inside: # probably redundant at this point
 		return false
 
-	var current_time := u.get_curr_time_ticks_sec()
+	var current_time := TimeUtils.get_curr_time_ticks_sec()
 	if not cooldown_sig_emit.is_cooldown_passed(true, pp_name()):
 		return false
 	

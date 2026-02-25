@@ -22,7 +22,7 @@ func initialise(curve: Curve, duration: float, curve_bottom_point_idx: int = -1)
 		dip_time_ratio = 0.5
 	else:
 		# correct curve_bottom_point_idx is important. usually 1 or 2. (they start from 0)
-		dip_time_ratio = u.get_curve_point_x(curve, curve_bottom_point_idx)
+		dip_time_ratio = tu.get_curve_point_x(curve, curve_bottom_point_idx)
 	# print_.note(false, "StrafeDirChange init", "note the dip_time_ratio:", dip_time_ratio)
 
 

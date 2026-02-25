@@ -74,7 +74,7 @@ func update(delta: float) -> void:
 	pass
 
 
-## Any state can signal to its parent that it's ended.
+## Any state can show its parent that it's ended.
 ## Parent state decides on what to do with this information freely (including ignoring it).
 ## But NOTE: 
 ##   - strongly recommended to use this mechanics if substate describes finite action like attack or jump.
@@ -113,10 +113,10 @@ func distance_to_player() -> float:
 	return e_movement.distance_to_player()
 
 func dist_to_player_less(number: float) -> bool:
-	return e_movement.square_distance_to_player() <= MathUtil.fpow2(number)
+	return e_movement.square_distance_to_player() <= MathUtils.fpow2(number)
 
 func dist_to_player_greater(number: float) -> bool:
-	return e_movement.square_distance_to_player() >= MathUtil.fpow2(number)
+	return e_movement.square_distance_to_player() >= MathUtils.fpow2(number)
 
 func distance_to_(target: Node3D) -> float:
 	return e_movement.distance_to_(target)
@@ -137,7 +137,7 @@ func direction_to_(target: Variant) -> Vector3:
 
 func _auto_update_monitors(__monitors: Array[PHEHelpers.MonitorFor], delta: float, curr_sbs_name: StringName, next_sbs_name: StringName, __log_context: String = ""):
 	# NOTE: out states tend to return empty string, meaning that no switch needed. Monitors are not ready for this
-	if next_sbs_name == "":
+	if next_sbs_name == Const.EMPTY_SNAME:
 		next_sbs_name = curr_sbs_name
 	for monitor in __monitors:
 		monitor.auto_update(delta, curr_sbs_name, next_sbs_name, -1, -1, __log_context)
@@ -150,22 +150,25 @@ func state_angry(state_usual: StringName, state_angry_: StringName) -> StringNam
 func fvalue_angry(value_usual_: float, value_angry_: float) -> float:
 	return value_usual_ if not me.angry_raised else value_angry_
 
+
 func svalue_angry(value_usual_: String, value_angry_: String) -> String:
 	return value_usual_ if not me.angry_raised else value_angry_
+
 
 func chance_angry(chance_usual: float, chance_angry_: float) -> float:
 	return ra.chance(fvalue_angry(chance_usual, chance_angry_))
 
 
-## 50% chance or third if angry
-func flip_w_angry(state_a: StringName, state_b: StringName, state_angry_: StringName) -> StringName:
-	if me.angry_raised: return state_angry_
+## a/b - 50% chance, c if angry
+func flip_w_angry(state_a: StringName, state_b: StringName, state_c: StringName) -> StringName:
+	if me.angry_raised: return state_c
 	return flip_state(state_a, state_b)
 
 
 ## 50% chance
 func flip_state(state_a: StringName, state_b: StringName) -> StringName:
 	return state_a if ra.coinflip() else state_b
+
 
 ## returns 'state_a' with chance 'chance' else 'state_b'
 func flip_chance(chance: float, state_a: StringName, state_b: StringName) -> StringName:
@@ -185,51 +188,47 @@ var __LOG_OVERLAY_ANIM: bool = false
 func __get_common_context() -> String:
 	var _msg := ""
 	_msg += pp.s("Pl->E", pp.round_01(distance_to_player()),
-		"∠" + pp.rad2deg(signed_angle_to_player(), true))
+		"∠" + pp.srad2deg(signed_angle_to_player()))
 	return _msg
 
-
-func __ELA() -> bool:
-	## "extra logs allowed"
-	return LogToggler.PHE_INTERNAL_FILTER_B
 
 @abstract func __log_state() -> String
 
 @abstract func __log_indent() -> int
 
 func __log_phe(...parts: Array):
-	if __ELA():
-		print_.phe_sm(__log_state(), pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_sm(__log_state(), pp.list_(parts), __log_indent())
 
 func __log_phe_choose(chose_state_: String, ...parts: Array):
-	if __ELA():
-		print_.phe_check(__log_state(), "Chose " + chose_state_ + " " + pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_check(__log_state(), "Chose " + chose_state_ + " " + pp.list_(parts), __log_indent())
 
 func __log_phe_check(...parts: Array):
-	if __ELA():
-		print_.phe_check(__log_state(), pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_check(__log_state(), pp.list_(parts), __log_indent())
 
 func __log_phe_decision(...parts: Array):
-	if __ELA():
-		print_.phe_sm(__log_state() + em.verdict, pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_sm(__log_state() + em.verdict, pp.list_(parts), __log_indent())
 
 func __log_ent(...parts: Array):
-	if __ELA():
-		print_.phe_sm(__log_state() + pp.on_ent, pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_sm(__log_state() + pp.on_ent, pp.list_(parts), __log_indent())
 
 @abstract func __log_timings() -> String
 
 func __log_ext(...parts: Array):
-	if __ELA():
-		if __LOG_EXIT: print_.phe_sm(pp.s(__log_state(), pp.on_ext, __log_timings()), pp.list_(parts), __log_indent())
+	if __LOG_B():
+		if __LOG_EXIT: print_preset.phe_sm(pp.s(__log_state(), pp.on_ext, __log_timings()), pp.list_(parts), __log_indent())
 
 func __log_phe__upd(...parts: Array):
-	if __ELA():
-		print_.phe_sm(__log_state() + pp.on_internal_upd, pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_sm(__log_state() + pp.on_internal_upd, pp.list_(parts), __log_indent())
 
 func __log_upd(...parts: Array):
-	if __ELA():
-		print_.phe_sm(__log_state() + pp.on_upd, pp.list_(parts), __log_indent())
+	if __LOG_B():
+		print_preset.phe_sm(__log_state() + pp.on_upd, pp.list_(parts), __log_indent())
 
 
 ## overrides built in log

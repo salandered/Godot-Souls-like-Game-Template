@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if u.is_editor() or not visible:
+	if eu.is_editor() or not visible:
 		return
 
 	var input_axis = Input.get_axis("ui_up", "ui_down")

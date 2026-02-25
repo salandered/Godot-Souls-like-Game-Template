@@ -1,5 +1,5 @@
 @tool
-class_name ConfigNameLabel
+class_name M_ConfigNameLabel
 extends Label
 
 
@@ -7,7 +7,6 @@ extends Label
 
 
 @export var auto_update: bool = true
-
 
 const NO_NAME_STRING: String = "Title"
 

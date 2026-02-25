@@ -18,16 +18,15 @@ func __hard_dependencies() -> Array:
 		get_character()
 	]
 
+func _initialise_implementation() -> void:
+	_update_metric(ts_curr_state_label, DEF_NO_VALUE)
 
+	
 @abstract func get_character() -> BaseStaticCharacter
 
 
 func reset_visuals() -> void:
 	pass
-
-
-func _initialise_implementation() -> void:
-	_update_metric(ts_curr_state_label, DEF_NO_VALUE)
 
 
 ## can be overriden
@@ -36,10 +35,10 @@ func nth_frame() -> int:
 
 
 func _process(delta: float) -> void:
-	if u.is_editor(): return
+	if eu.is_editor(): return
 	if not get_character(): return
 
-	if not u.is_nth_frame(nth_frame()):
+	if not FrameUtils.is_nth_frame(nth_frame()):
 		return
 	
 	_process_imp(delta)

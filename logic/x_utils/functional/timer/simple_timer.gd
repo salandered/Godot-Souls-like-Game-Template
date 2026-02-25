@@ -1,5 +1,5 @@
-extends BaseTimer
 class_name SimpleTimer
+extends BaseTimer
 
 
 ## idempotent

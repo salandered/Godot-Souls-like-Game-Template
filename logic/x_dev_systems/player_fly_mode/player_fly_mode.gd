@@ -1,10 +1,15 @@
-extends Node3D
 class_name FlyMode
-@onready var _player: Princess = $"../.."
+extends Node3D
 
+
+@export var _player: Princess
+
+
+const _TRACKING_ANGULAR_SPEED := 4.0
 
 var fly_mode_enabled := false
 var fly_speed := 5.0
+
 
 func get_player() -> Princess:
 	return _player
@@ -12,6 +17,9 @@ func get_player() -> Princess:
 
 func _process(delta: float) -> void:
 	if not fly_mode_enabled:
+		return
+
+	if not get_player():
 		return
 	
 	var result_velocity := _handle_free_fly_movement(delta)
@@ -33,19 +41,17 @@ func _rotate_towards_velocity(velocity: Vector3, delta: float) -> void:
 	if target_direction.is_zero_approx():
 		return
 
-	var _tracking_angular_speed := 4.0
-	
 	var face_direction := get_player().basis.z
 	var angle := face_direction.signed_angle_to(target_direction, Vector3.UP)
 	
-	get_player().rotate_y(clamp(angle, -_tracking_angular_speed * delta, _tracking_angular_speed * delta))
+	get_player().rotate_y(clamp(angle, -_TRACKING_ANGULAR_SPEED * delta, _TRACKING_ANGULAR_SPEED * delta))
 
 
 func _toggle_fly_mode():
-	fly_mode_enabled = !fly_mode_enabled
+	fly_mode_enabled = not fly_mode_enabled
 	if fly_mode_enabled:
 		get_player().velocity = Vector3.ZERO
-	print_.dev("*** Fly mode: ", fly_mode_enabled)
+	print_.dev("Fly mode:", fly_mode_enabled)
 
 
 func _handle_free_fly_movement(delta: float) -> Vector3:
@@ -66,6 +72,7 @@ func _handle_free_fly_movement(delta: float) -> Vector3:
 		return Vector3.ZERO
 
 	var current_speed := fly_speed
+
 	if Input.is_key_pressed(KEY_SHIFT):
 		current_speed *= 3.0
 
@@ -73,8 +80,9 @@ func _handle_free_fly_movement(delta: float) -> Vector3:
 
 
 func _input(event: InputEvent) -> void:
-	# if u.is_release(): ## ??
-	# 	return
+	if eu.is_release():
+		return
+
 	if Input.is_action_just_pressed(RawAction.DEV_fly_mode):
 		_toggle_fly_mode()
 

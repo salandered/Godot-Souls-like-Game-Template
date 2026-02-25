@@ -13,7 +13,7 @@ var start_time_offset := ActionData.StartTimeOffset.new(0.0)
 var anim: AnimationData
 
 
-var PREV_STATE: StringName = ""
+var PREV_STATE: StringName = Const.EMPTY_SNAME
 
 
 var TIME_REMAINING_TO_END := 0.0
@@ -174,13 +174,8 @@ func is_weapon_hurts(weapon_id: StringName, __log: bool = false) -> bool:
 
 ##
 
-func __ELA():
-	return true
-
+func __LOG_B():
+	return false
 
 func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
-	print_.any_action_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_STATE)
-
-
-func __LOG_B() -> bool:
-	return false
+	print_preset.any_action_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_STATE)

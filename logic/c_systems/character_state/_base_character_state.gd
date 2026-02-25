@@ -24,20 +24,20 @@ var state_name: StringName
 ##
 
 # to override
-func __ELA():
+func __LOG_B():
 	return false
 
 
 func __log_ent(...parts: Array):
-	if __ELA():
+	if __LOG_B():
 		__log_(pp.s(state_name, pp.on_ent), pp.list_(parts))
 
 
 func __log_ext(...parts: Array):
-	if __ELA():
+	if __LOG_B():
 		__log_(pp.s(state_name, pp.on_ext), pp.list_(parts))
 
 
 func __log_upd(...parts: Array):
-	if __ELA():
+	if __LOG_B():
 		__log_(pp.s(state_name, pp.on_upd), pp.list_(parts))

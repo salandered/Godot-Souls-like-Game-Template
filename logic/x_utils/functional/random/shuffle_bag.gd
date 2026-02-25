@@ -1,8 +1,9 @@
-## Usage: var my_bag = ra.Bag.new(["A", "B", "C"], true)
-##        var next_item = my_bag.pick()
-
 class_name ShuffleBag
 extends RefCountedLogger
+
+
+## Usage: var my_bag = ra.Bag.new(["A", "B", "C"], true)
+##        var next_item = my_bag.pick()
 
 
 var _source_items: Array[Variant]
@@ -16,7 +17,7 @@ func _init(items: Array, prevent_repeat_last: bool = false):
 	_prevent_repeat = prevent_repeat_last
 	
 	if _prevent_repeat and _source_items.size() < 2:
-		__log_warn_soft("prevent_repeat is true, but array size is < 2. It will function but repeats are inevitable.")
+		__log_warn_soft("prevent_repeat is true, but array size is < 2. Will work but repeats are inevitable.")
 	
 	__log_("initialized", "size:", _source_items.size(), "prevent_repeat:", _prevent_repeat)
 
@@ -33,7 +34,7 @@ func pick() -> Variant:
 	var item: Variant = _current_bag.pop_back()
 	_last_picked = item
 	
-	__log_("picked", item, "remaining:", _current_bag.size())
+	if __LOG_B(): __log_("picked", item, "remaining:", _current_bag.size())
 	return item
 
 
@@ -42,14 +43,14 @@ func pick_specific(idx: int) -> Variant:
 	if idx >= 0 and idx < _source_items.size():
 		var item: Variant = _source_items[idx]
 		_last_picked = item
-		__log_("pick_specific success", "index:", idx, "item:", item)
+		if __LOG_B(): __log_("pick_specific success", "index:", idx, "item:", item)
 		return item
 	
 	# If index is -1 (default) or out of bounds, we warn (if it looks like a mistake) and fallback
 	if idx != -1:
 		__log_warn_soft("pick_specific invalid index", str(idx), "falling back to pick()")
 	else:
-		__log_("pick_specific called with -1", "falling back to pick()")
+		if __LOG_B(): __log_("pick_specific called with -1", "falling back to pick()")
 		
 	return pick()
 
@@ -59,14 +60,14 @@ func get_bag_len() -> int:
 
 
 func _refill_and_shuffle() -> void:
-	__log_("refilling and shuffling bag...")
+	if __LOG_B(): __log_("_refill_and_shuffle", "started...")
 	_current_bag = _source_items.duplicate()
 	_current_bag.shuffle()
 
 	# Logic to prevent the new first item from matching the old last item
 	# Only works if we have at least 2 items
 	if _prevent_repeat and _source_items.size() > 1 and _last_picked != null:
-		# If the top of the new bag (which we are about to pop) is the same as the last picked...
+		# if top of the new bag (going to be popped) is the same as the last picked ...
 		if _current_bag.back() == _last_picked:
 			# ...swap it with the first element (bottom of the bag)
 			var first_item = _current_bag.pop_front()
@@ -74,11 +75,15 @@ func _refill_and_shuffle() -> void:
 			
 			_current_bag.push_back(first_item)
 			_current_bag.push_front(last_item)
-			__log_("prevent_repeat triggered", "swapped first/last items")
+
+			if __LOG_B(): __log_("_refill_and_shuffle", "prevent_repeat triggered", "swapped first/last items")
 
 
-##
-
+## __LOGS
 
 func pp_name() -> String:
-	return pp.s("👜", ObjUtils.construct_obj_pp_name(self))
+	return "👜" + super.pp_name()
+
+
+func __LOG_B() -> bool:
+	return false

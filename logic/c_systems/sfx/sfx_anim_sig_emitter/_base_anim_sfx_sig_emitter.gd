@@ -63,10 +63,10 @@ func _emit_signal_based_on_track_data(audio_track_data: AudioTrackKey, anim: Ani
 	if not signal_data:
 		return
 		
-	r_signal_payload["asp_name"] = asp_name
-	r_signal_payload["stream_name"] = audio_track_data.stream_name
-	r_signal_payload["timestamp"] = audio_track_data.timestamp
-	r_signal_payload["anim_id"] = anim.anim_id
+	r_signal_payload[&"asp_name"] = asp_name
+	r_signal_payload[&"stream_name"] = audio_track_data.stream_name
+	r_signal_payload[&"timestamp"] = audio_track_data.timestamp
+	r_signal_payload[&"anim_id"] = anim.anim_id
 	
 	emit_sfx_signal(signal_data, r_signal_payload)
 

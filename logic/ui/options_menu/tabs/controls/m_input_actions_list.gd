@@ -97,7 +97,7 @@ var last_input_readable_name
 
 
 func _ready() -> void:
-	if u.is_editor(): return
+	if eu.is_editor(): return
 	vertical = vertical
 	_set_action_box_container_size()
 	_build_assigned_input_events()

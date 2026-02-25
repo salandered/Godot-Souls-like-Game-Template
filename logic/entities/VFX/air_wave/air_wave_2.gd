@@ -4,21 +4,21 @@ class_name AirWave2
 
 @onready var __dev_csg_box_3d: CSGBox3D = %CSGBox3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
 @onready var air_wave_mesh: MeshInstance3D = %AirWaveMesh
 
+
 class AnimID:
-	const explode := "explode"
-	const big_explode := "explode_big"
+	const explode := &"explode"
+	const big_explode := &"explode_big"
 
 
-var default_anim_id := AnimID.explode
+const DEF_ANIM_ID := AnimID.explode
 
 
 func _ready() -> void:
 	self.visible = true
 	__dev_csg_box_3d.visible = false
-	__log_("ready, default anim is", default_anim_id)
+	__log_("ready, default anim is", DEF_ANIM_ID)
 
 	animation_player.animation_finished.connect(_on_animation_finished)
 

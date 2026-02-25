@@ -2,7 +2,12 @@
 class_name SigInfoManager
 extends BaseTextInfoPanelManager
 
+
 @onready var logs_panel: LogsUIPanel = %LogsPanel
+
+
+const COL_SIG := "#8b93ffff"
+const COL_PAYLOAD := "#d3d3d3ff"
 
 
 func get_max_lines() -> int:
@@ -40,12 +45,14 @@ func _filter_self_signals(sig_name: String, payload: Dictionary[StringName, Vari
 
 
 func _on___SIG_emitted(__payload: Dictionary[StringName, Variant]):
+	## parsing __payload of meta signal
 	var _r_name := SigUtils.safe_get_string_payload_value(__payload, SPS.sig_name_field)
 	if _r_name.err: return
 	var _r_w_p := SigUtils.safe_get_bool_payload_value(__payload, SPS.sig_with_payload_field)
 	if _r_w_p.err: return
 	var with_payload := _r_w_p.value
 
+	## 'payload' is a real signal payload inside the meta __payload
 	var payload: Dictionary[StringName, Variant] = {}
 	if with_payload:
 		var _r_p := SigUtils.safe_get_dict_payload_value(__payload, SPS.sig_payload_field)
@@ -68,7 +75,6 @@ func _on___SIG_emitted(__payload: Dictionary[StringName, Variant]):
 	)
 
 	if regex_result == RegexFilter.Result.PASS:
-		# BBCode message if it survived the filter
 		var final_msg := _build_msg(_r_frame.value, sig_name_str, payload_str)
 		_append_text_to_label(final_msg)
 	
@@ -76,13 +82,9 @@ func _on___SIG_emitted(__payload: Dictionary[StringName, Variant]):
 		_append_invalid_regex_text_to_label()
 
 
-var col_sig := "#8b93ffff"
-var col_payload := "#d3d3d3ff"
-
-
 func _build_msg(frame: String, sig_name: String, payload_str: String) -> String:
-	var name_bb := BB.color_wrap(sig_name, col_sig)
-	var load_bb := BB.color_wrap(BB.i_wrap("\t" + payload_str), col_payload)
+	var name_bb := BB.color_wrap(sig_name, COL_SIG)
+	var load_bb := BB.color_wrap(BB.i_wrap("\t" + payload_str), COL_PAYLOAD)
 
 	return pp.s(_log_prefix(frame),
 		name_bb, "\n",

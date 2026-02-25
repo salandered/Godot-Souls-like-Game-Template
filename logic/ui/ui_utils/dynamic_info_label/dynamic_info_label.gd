@@ -40,18 +40,6 @@ const DEF_WAIT_SEC := 1.5
 	set(value):
 		gradient_color_modulate = value
 		_update_gradient_color_modulate()
-# 481317
-
-#@export_group("Margins inside the panel")
-#@export var margin_h: int = 15:
-	#set(value):
-		#margin_h = value
-		#_update_margins()
-#
-#@export var margin_v: int = 10:
-	#set(value):
-		#margin_v = value
-		#_update_margins()
 
 
 @export_group("Prev text animation")
@@ -83,14 +71,13 @@ func _ready() -> void:
 	_update_in_editor_label_text()
 	_update_font_size()
 	_update_gradient_color_modulate()
-	#_update_margins()
 	
 	if additional_title_text == "":
 		__margin_2.visible = false
 	else:
 		__margin_2.visible = true
 		
-	if not u.is_editor():
+	if not eu.is_editor():
 		reset_text()
 
 		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed)
@@ -117,7 +104,7 @@ func _set_label_text(
 	if not dynamic_label_config:
 		dynamic_label_config = DynamicLabelConfig.new()
 
-	if not u.is_editor():
+	if not eu.is_editor():
 		if dynamic_label_config.animate_prev:
 			_spawn_ghost_text(ghosts_list, label, label.text, dynamic_label_config)
 
@@ -133,10 +120,10 @@ func _set_label_text(
 		_adjust_font_size(label, new_text)
 
 	if dynamic_label_config.in_bold:
-		new_text = "[b]" + new_text + "[/b]"
+		new_text = BB.b_wrap(new_text)
 
 	if dynamic_label_config.in_italics:
-		new_text = "[i]" + new_text + "[/i]"
+		new_text = BB.i_wrap(new_text)
 	
 
 	label.text = new_text
@@ -144,7 +131,7 @@ func _set_label_text(
 
 ## calculates font size to fit text within a specific width
 func _get_shrunk_font_size(text: String, max_width: float, base_size: int) -> int:
-	var font: Font = get_theme_font("normal_font")
+	var font: Font = get_theme_font(PropC.NORMAL_FONT)
 	
 	# width of text at the base font size
 	var text_size: Vector2 = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, base_size)
@@ -161,7 +148,6 @@ func _adjust_font_size(label: RichTextLabel, new_text: String):
 	# kinda works
 	var target_width: float = label.size.x
 	
-	
 	var new_size: int = _get_shrunk_font_size(new_text, target_width, initial_font_size)
 	
 	if label:
@@ -176,7 +162,9 @@ func _spawn_ghost_text(
 ) -> void:
 	var ghost: RichTextLabel = label.duplicate()
 	ghost.text = text_content
+
 	add_child(ghost)
+	
 	ghost.top_level = true # break canvas item relationship
 	ghost.size = label.size
 	ghost.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER
@@ -209,7 +197,7 @@ func _spawn_ghost_text(
 
 	ghosts_list.append(ghost)
 
-	# aniamted the new ghost (drop -> wait -> fade)
+	# animate the new ghost (drop -> wait -> fade)
 	var tween = create_tween()
 	
 	tween.set_parallel(true)
@@ -230,29 +218,31 @@ func _spawn_ghost_text(
 	
 	tween.tween_property(ghost, PropC.MODULATE_A, 0.0, fade_duration)
 	
-	# Cleanup
+	# cleanup
 	tween.chain().tween_callback(func():
 		ghosts_list.erase(ghost)
 		ghost.queue_free()
 	)
 
+
 ## Set export vars
 
 func _update_title() -> void:
 	if _title_label:
-		_title_label.text = "[b]" + title_text + "[/b]"
+		_title_label.text = BB.b_wrap(title_text)
 	if _title_additional_label:
-		_title_additional_label.text = "[b]" + additional_title_text + "[/b]"
+		_title_additional_label.text = BB.b_wrap(additional_title_text)
 	
 
 func _update_in_editor_label_text() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		set_label_text(in_editor_label_text)
 
 		
 func _update_gradient_color_modulate() -> void:
 	if panel_gradient:
 		panel_gradient.self_modulate = gradient_color_modulate
+
 
 func _update_font_size() -> void:
 	if _text_label:
@@ -263,11 +253,6 @@ func _update_font_size() -> void:
 		ControlUtils.rr_label_set_font_size(_title_additional_label, title_font_size - 1)
 		
 
-#func _update_margins() -> void:
-	#if margin_inside_panel:
-		#ControlUtils.margin_container_set_margins(margin_inside_panel, margin_h, margin_h, margin_v, margin_v)
-
-
 func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 	var _r := DVCSIGPayloadParser.safe_fget_value_by_dvc_key(
 		payload,
@@ -277,3 +262,9 @@ func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 
 	__log_("wait_duration updated with", _r.value, "from", wait_duration)
 	wait_duration = _r.value
+
+
+##
+
+func __LOG_B() -> bool:
+	return false

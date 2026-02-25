@@ -114,39 +114,44 @@ static func draw_temporary_sphere(
 
 
 ## cylinder mesh between two points
-static func place_cylinder_between(cylinder: MeshInstance3D, pos_a: Vector3, pos_b: Vector3, color: Color) -> void:
+static func place_cylinder_between(
+		cylinder_mi: MeshInstance3D,
+		pos_a: Vector3,
+		pos_b: Vector3,
+		color: Color
+) -> void:
 	if pos_a.is_equal_approx(pos_b):
-		cylinder.visible = false
+		cylinder_mi.visible = false
 		return
 
 	# resets scale: ensures xz (thickness) return to the original mesh radius
-	cylinder.scale = Vector3.ONE
+	cylinder_mi.scale = Vector3.ONE
 
 	# position at midpoint
-	cylinder.global_position = (pos_a + pos_b) / 2.0
+	cylinder_mi.global_position = (pos_a + pos_b) / 2.0
 	
 	# rotation
 	var up_vec := Vector3.UP
 	if abs(pos_a.direction_to(pos_b).dot(Vector3.UP)) > 0.99:
 		up_vec = Vector3.RIGHT
 	
-	u.safe_look_at(cylinder, pos_b, up_vec)
+	tu.safe_look_at(cylinder_mi, pos_b, up_vec)
 	
 	# correction for Y-up cylinder geometry to point along Z-forward vector
-	cylinder.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
+	cylinder_mi.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
 
 	# scale: modify y (length). xz remain 1.0 (constant thickness)
-	cylinder.scale.y = pos_a.distance_to(pos_b)
+	cylinder_mi.scale.y = pos_a.distance_to(pos_b)
 	
-	var mat := cylinder.material_override as StandardMaterial3D
+	var mat := cylinder_mi.material_override as StandardMaterial3D
 	if mat:
 		color.a = 1.0
 		mat.albedo_color = color
 
-	cylinder.visible = true
+	cylinder_mi.visible = true
 
 
-## cylinder connecting 'from' to 'to' (Local Space).
+## cylinder connecting 'from' to 'to' (Local Space)
 static func create_bone_like_connector(
 	from: Vector3,
 	to: Vector3,
@@ -188,7 +193,7 @@ static func create_bone_like_connector(
 	return mi
 		
 
-static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
+static func create_mi_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
 	var mesh: PrimitiveMesh = null
 	
 	if shape is BoxShape3D:
@@ -211,9 +216,9 @@ static func create_based_on_shape_3d(shape: Shape3D) -> MeshInstance3D:
 		__log_warn("shape3d is not supported", "", "", shape)
 	
 	if mesh:
-		var node = MeshInstance3D.new()
-		node.mesh = mesh
-		return node
+		var mi = MeshInstance3D.new()
+		mi.mesh = mesh
+		return mi
 		
 	return null
 
@@ -248,6 +253,6 @@ static func __LOG_B() -> bool:
 	return true
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

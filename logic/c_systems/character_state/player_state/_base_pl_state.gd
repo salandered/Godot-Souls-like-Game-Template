@@ -266,10 +266,10 @@ func on_exit_state() -> void:
 
 
 func react_on_hit(hit: HitData):
-	print_.fight(state_name, "we received a hit " + str(hit))
+	__log_(state_name, "we received a hit " + str(hit))
 	
 	if curr_global_action().is_invincible():
-		print_.fight(state_name, "we are invincible, no reaction")
+		__log_(state_name, "we are invincible, no reaction")
 		return
 
 	var _sig_data := get_player().get_sig_container().get_by_sig_id(SignalID.sfx_react_on_hit)
@@ -278,7 +278,7 @@ func react_on_hit(hit: HitData):
 	## 2 - if not, we delegate reaction behavior to curr action
 	var react_state_name := ReactionOnHit.calculate_reaction_for_pl_state(hit)
 	
-	if react_state_name != "":
+	if react_state_name != Const.EMPTY_SNAME:
 		__log_upd("hit leaded to react state", react_state_name)
 		var state := container.state_by_name(react_state_name)
 		forced_state.try_set(react_state_name, state.priority)
@@ -293,15 +293,11 @@ func react_on_hit(hit: HitData):
 # region: LOGS
 
 
-func __ELA():
+func __LOG_B():
 	return LogToggler.PSM_B
-
-func __LOG_B() -> bool:
-	return LogToggler.PSM_B
-
 
 func __log_psm_check(...parts: Array):
-	print_.psm_check_trans(state_name, pp.list_(parts))
+	print_preset.psm_check_trans(state_name, pp.list_(parts))
 
 func __log_time_spent():
 	__log_(state_name, pp.s("Time spent: state -", get_actual_time_spent(), "action - ", curr_state_action.time_spent()))

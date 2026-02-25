@@ -1,6 +1,7 @@
 class_name OccasionalAudioPlayer3D
 extends Node3D
 
+
 @export_group("Audio Configuration")
 @export var stream: AudioStream
 @export var volume_db: float = 0.0
@@ -8,7 +9,7 @@ extends Node3D
 @export var max_distance: float = 20.0
 @export var max_polyphony: int = 1
 @export var panning_strength: float = 0.5
-@export var bus: = BusID.GAME_SFX
+@export var bus := BusID.GAME_SFX
 
 @export_group("Timing Settings")
 ## Minimum time to wait between plays
@@ -24,7 +25,7 @@ extends Node3D
 @export var min_pitch: float = 0.8
 ## Maximum pitch scale
 @export var max_pitch: float = 1.2
-## If true, volume also varies slightly
+## volume varies slightly
 @export var vary_volume: bool = true
 ## Volume variance lower bound (e.g. -2.0 dB)
 @export var min_vol_offset: float = -2.0
@@ -44,7 +45,7 @@ func _ready() -> void:
 	if random_start_delay:
 		_start_timer()
 	else:
-		_on_timeout() # Play immediately then start loop
+		_on_timeout() # play immediately then start loop
 
 
 func _create_asp() -> void:
@@ -77,7 +78,7 @@ func _on_timeout() -> void:
 	if stream:
 		_play_randomized()
 	
-	# Schedule next play
+	# schedule next play
 	_start_timer()
 
 
@@ -89,7 +90,6 @@ func _play_randomized() -> void:
 		final_vol += randf_range(min_vol_offset, max_vol_offset)
 	_asp.volume_db = final_vol
 	
-	#
 	_asp.play()
 
 

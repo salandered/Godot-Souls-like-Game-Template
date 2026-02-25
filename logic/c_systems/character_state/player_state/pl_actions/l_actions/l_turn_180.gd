@@ -7,7 +7,7 @@ var speed_curve_from_apex := EaseCurveInterpolator.new()
 
 func initialise() -> void:
 	super.initialise()
-	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Const.BIG_MEANINGLESS_NUMBER)
 
 
 func on_enter_action(input_: InputPackage) -> void:

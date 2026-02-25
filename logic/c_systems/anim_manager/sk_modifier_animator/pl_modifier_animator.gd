@@ -1,5 +1,3 @@
-## WARNING: should not be called directly!
-## 			PlAnimatorManager manages all modifier animators
 class_name PlayerModifierAnimator
 extends SkeletonModifier3DSystem
 
@@ -9,37 +7,32 @@ extends SkeletonModifier3DSystem
 @onready var skeleton := get_skeleton()
 @onready var root_animator: PlayerRootAnimator = %RootAnimator
 
-var animator_name: String = "full_body"
-
 var native_animator: AnimationPlayer ## real AnimationPlayer with anim data
-
 
 var bone_mask: Array
 
-
-## for animation non related effects like slow mo
+## for animation non related effects like slow-mo
 ## note that animation may have it's own speed scale. They will be multiplied.
-# var _dev_hard_speed_scale := true # for tests
-var _dev_hard_speed_scale := false
-# var global_speed_scale := 1.0
 var global_speed_scale := 1.0
+var _dev_hard_speed_scale := false
 
 
 # region: DOCS
-# TODO: Consider "weighted blend system"
-# Maintain a list of active AnimPlaybacks, each with a weight (0.0 to 1.0)
-# when set_anim_to_play is called:
-#   - Mark all existing playbacks in the list to fade out
-#   - Add new AnimPlayback to the list with weight 0.0, marked to fade in
-# In _update_blend_values:
-#   - Decrease the weight of all fading-out playbacks towards 0.0 over the blend dur
-#   - Increase the weight of the fading-in playback towards 1.0 over the blend dur
-#   - Remove playbacks from the list when their weight reaches 0
-# In _update_skeleton:
-#   - Calculate the pose for each active playback in the list.
-#   - Calculate the total weight of all active playbacks.
-#   - Compute the final pose 
-#     (weighted average blend of all calculated poses, using their normalized weights (weight/total_weight))
+## Should not be called directly. PlAnimatorManager uses this.
+## TODO: Consider "weighted blend system"
+## Maintain a list of active AnimPlaybacks, each with a weight (0.0 to 1.0)
+## when set_anim_to_play is called:
+##   - Mark all existing playbacks in the list to fade out
+##   - Add new AnimPlayback to the list with weight 0.0, marked to fade in
+## In _update_blend_values:
+##   - Decrease the weight of all fading-out playbacks towards 0.0 over the blend dur
+##   - Increase the weight of the fading-in playback towards 1.0 over the blend dur
+##   - Remove playbacks from the list when their weight reaches 0
+## In _update_skeleton:
+##   - Calculate the pose for each active playback in the list.
+##   - Calculate the total weight of all active playbacks.
+##   - Compute the final pose 
+##     (weighted average blend of all calculated poses, using their normalized weights (weight/total_weight))
 # endregion
 
 
@@ -77,7 +70,7 @@ func initialise(native_animator_: AnimationPlayer) -> void:
 	## NOTE: root is not animated here. See PlayerRootAnimator
 	bone_mask = BoneMask.get_full_body_no_root()
 
-	# Pre-cache all bone track paths into the dictionary
+	# cache all bone track paths as a dict
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
 
@@ -103,7 +96,7 @@ func set_anim_to_play(anim: AnimationData, blend_for: float = 0, start_time_offs
 	if blend_for > 0:
 		curr_blend_playback.start(blend_for)
 
-	# print_.skm(animator_name, __log_state())
+	if __LOG_B(): __log_("set_anim_to_play", __log_state())
 
 
 var delta_: float
@@ -112,11 +105,6 @@ func _process_modification():
 	if not __validation_ok():
 		return
 		
-	# calculate custom_delta between now and the last call.
-	# __custom_delta.update()
-	# var dt = __custom_delta.delta
-	# add custom_delta to curr anim's time_spent.
-
 	delta_ = get_process_delta_time()
 	
 	_update_time(delta_)
@@ -126,14 +114,15 @@ func _process_modification():
 
 func _update_time(custom_delta: float):
 	#  update curr animation (A)
-	curr_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(curr_playback)
+	curr_playback.time_spent += custom_delta * _get_effective_speed_scale(curr_playback)
 	if curr_playback.time_spent > curr_playback.anim.duration and curr_playback.anim.is_looping:
 		curr_playback.time_spent = fmod(curr_playback.time_spent, curr_playback.anim.duration)
 
 	#  update prev animation (B)
-	if prev_playback: # curr_blend_playback.is_blending is omitted! NOTE: we use prev_playback in manager as if it still runs
+	# NOTE: curr_blend_playback.is_blending is omitted! useing prev_playback in managers as if it still runs
+	if prev_playback:
 		if prev_playback.time_spent < prev_playback.anim.duration:
-			prev_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(prev_playback)
+			prev_playback.time_spent += custom_delta * _get_effective_speed_scale(prev_playback)
 		
 		if curr_blend_playback.is_blending and prev_playback.time_spent > prev_playback.anim.duration and prev_playback.anim.is_looping:
 			prev_playback.time_spent = fmod(prev_playback.time_spent, prev_playback.anim.duration)
@@ -141,7 +130,7 @@ func _update_time(custom_delta: float):
 	# update C
 	if prev_prev_playback and prev_blend_playback.is_blending:
 		if prev_prev_playback.time_spent < prev_prev_playback.anim.duration:
-			prev_prev_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(prev_prev_playback)
+			prev_prev_playback.time_spent += custom_delta * _get_effective_speed_scale(prev_prev_playback)
 		
 		if prev_blend_playback.is_blending and prev_prev_playback.time_spent > prev_prev_playback.anim.duration and prev_prev_playback.anim.is_looping:
 			prev_prev_playback.time_spent = fmod(prev_prev_playback.time_spent, prev_prev_playback.anim.duration)
@@ -149,7 +138,7 @@ func _update_time(custom_delta: float):
 	# update D
 	if prev_prev_prev_playback and prev_prev_blend_playback.is_blending:
 		if prev_prev_prev_playback.time_spent < prev_prev_prev_playback.anim.duration:
-			prev_prev_prev_playback.time_spent += custom_delta * _EFFECTIVE_SPEED_SCALE(prev_prev_prev_playback)
+			prev_prev_prev_playback.time_spent += custom_delta * _get_effective_speed_scale(prev_prev_prev_playback)
 
 		if prev_prev_blend_playback.is_blending and prev_prev_prev_playback.time_spent > prev_prev_prev_playback.anim.duration and prev_prev_prev_playback.anim.is_looping:
 			prev_prev_prev_playback.time_spent = fmod(prev_prev_prev_playback.time_spent, prev_prev_prev_playback.anim.duration)
@@ -161,10 +150,7 @@ func _update_blend_values(custom_delta: float):
 	prev_prev_blend_playback.update(custom_delta) # twice-interrupted D->C blend
 
 
-var __print_4: bool = false
-
 func _update_skeleton(custom_delta: float):
-	__print_4 = false
 	for bone_idx in bone_mask:
 		# Pose for the newest animation (A)
 		var curr_transform := _calculate_bone_pose(bone_idx, curr_playback)
@@ -181,8 +167,7 @@ func _update_skeleton(custom_delta: float):
 
 				# D->C blend
 				if prev_prev_blend_playback.is_blending and prev_prev_prev_playback:
-					# if not __print_4: print_.dev(em.mark, "4 animations!", __log_blend_state())
-					__print_4 = true
+					if __PRINT_MAX_BLEND and __LOG_B(): print_.dev(em.mark, "4 animations!", __log_blend_state())
 					var prev_prev_prev_transform := _calculate_bone_pose(bone_idx, prev_prev_prev_playback) # Pose for D
 					# calculate D->C blend first
 					blend_base_prev = prev_prev_prev_transform.interpolate_with(prev_prev_transform, prev_prev_blend_playback.percentage)
@@ -206,7 +191,7 @@ func _calculate_bone_pose(bone_idx: int, playback: AnimPlayback) -> Transform3D:
 	)
 	
 
-func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
+func _get_effective_speed_scale(playback: AnimPlayback) -> float:
 	var r := global_speed_scale * playback.anim.speed_scale
 	if config:
 		r *= config.SPEED_SCALE_COEF
@@ -214,23 +199,26 @@ func _EFFECTIVE_SPEED_SCALE(playback: AnimPlayback) -> float:
 
 
 func set_global_speed_scale(new_scale: float):
-	# print_.skm(animator_name, "new scale set: " + str(new_scale))
 	if _dev_hard_speed_scale:
 		return
+	if __LOG_B(): __log_("set_global_speed_scale", "new scale set:", new_scale)
 	global_speed_scale = new_scale
 
 
 func reset_global_speed_scale():
 	if _dev_hard_speed_scale:
 		return
-	# print_.skm(animator_name, "scale reset to 1")
+	if __LOG_B(): __log_("reset_global_speed_scale", "scale reset to 1")
 	set_global_speed_scale(1.0)
 
 
 func get_global_speed_scale() -> float:
 	return global_speed_scale
 
-## __LOG
+
+## DEV __LOG
+
+const __PRINT_MAX_BLEND: bool = false
 
 
 func __log_state() -> String:
@@ -282,6 +270,8 @@ func __log_blend_state() -> String:
 
 
 func __LOG_B() -> bool:
+	if eu.is_release():
+		return false
 	return false
 
 func __LOG_INDENT() -> int:

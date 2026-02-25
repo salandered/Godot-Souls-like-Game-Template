@@ -1,10 +1,12 @@
 extends BaseInterpolator
+class_name FloatCurveInterpolator
+
 
 ## gets the linear progress by _get_progress() -> raw progress (0.0 to 1.0) 
 ## uses curve.sample to find the corresponding point -> eased progress (0.0 to 1.0) 
 ## uses lerp() with eased progress to find the actual value between start and target values
 ## With start = 0 and target = 1 its identical to EaseCurveInterpolator
-class_name FloatCurveInterpolator
+
 
 var start_value: float
 var target_value: float

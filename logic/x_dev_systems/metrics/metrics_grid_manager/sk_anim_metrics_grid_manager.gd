@@ -65,7 +65,7 @@ func _update_animator_metrics() -> void:
 			"%4.2f | %4.2f | %4.2f" % [
 				_animator.global_speed_scale,
 				anim_speed_scale,
-				_animator._EFFECTIVE_SPEED_SCALE(cp)],
+				_animator._get_effective_speed_scale(cp)],
 				true,
 				-2,
 				)

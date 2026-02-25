@@ -1,6 +1,7 @@
 class_name DebugText
 extends Node
 
+
 ## Spawns a floating 3D text label
 static func spawn(
 	parent: Node,

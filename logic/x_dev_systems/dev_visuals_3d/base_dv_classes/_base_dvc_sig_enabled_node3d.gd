@@ -32,13 +32,13 @@ func _enabled_on_init():
 
 
 func initialise() -> void:
-	if not u.is_editor():
+	if not eu.is_editor():
 		## wait a little before kicking in 
-		await FrameUtils.wait_process_frames(4)
+		await FrameUtils.wait_process_frames(self , 4)
 
 	_initialise_implementation_both_editor_and_game()
 
-	if u.is_editor():
+	if eu.is_editor():
 		return
 
 	## ALL FOLLOWING IS IN GAME

@@ -1,5 +1,6 @@
-extends RefCounted
 class_name PHEHelpers
+extends RefCounted
+
 
 class MonitorFor extends RefCountedSystem:
 	## STATIC

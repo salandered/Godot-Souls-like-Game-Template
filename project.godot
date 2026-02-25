@@ -31,18 +31,17 @@ buses/default_bus_layout="uid://c3avvsowlmqfp"
 
 [autoload]
 
-FreeCameraMode="*res://logic/_project_data/autoload/free_cam_mode/FreeCamMode.tscn"
-FullscreenHandler="*res://logic/ui/ui_utils/fullscreen_handler.gd"
-InputManager="*res://logic/_project_data/autoload/input_manager.gd"
-FrameUtils="*res://logic/_project_data/autoload/frame_utils.gd"
+GlobalSignal="*res://logic/_project_data/autoload/global_signal/global_signal.gd"
 M_AppConfig="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/app_config.tscn"
 M_SceneLoader="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/scene_loader.tscn"
 M_ProjectMusicController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_music_controller.tscn"
 M_ProjectUISoundController="*res://logic/_project_data/autoload/maaacks_autoloads/autoloads/project_ui_sound_controller.tscn"
-GlobalSignal="*res://logic/_project_data/autoload/global_signal/global_signal.gd"
+InputManager="*res://logic/_project_data/autoload/input_manager.gd"
+FreeCameraMode="*res://logic/_project_data/autoload/free_cam_mode/FreeCamMode.tscn"
 GlobalUIInfo="*res://logic/_project_data/autoload/global_ui_info/GlobalUIInfo.tscn"
 PlayerStats="*res://logic/_project_data/autoload/player_statistic/player_stats.gd"
 Console="*uid://ouiu5xh1cs8n"
+FullscreenHandler="*res://logic/ui/ui_utils/fullscreen_handler.gd"
 
 [console]
 
@@ -127,7 +126,7 @@ folder_colors={
 "res://logic/_project_data/game_state/": "red",
 "res://logic/c_systems/anim_manager/": "purple",
 "res://logic/c_systems/awareness/": "yellow",
-"res://logic/c_systems/camera/fancy-camera/": "teal",
+"res://logic/c_systems/camera/fancy_camera/": "teal",
 "res://logic/c_systems/character_state/phe_state/state_composites/": "blue",
 "res://logic/c_systems/character_state/phe_state/state_leafes/": "green",
 "res://logic/c_systems/character_state/player_state/pl_actions/": "orange",

@@ -29,7 +29,7 @@ func _initialise_implementation_both_editor_and_game() -> void:
 
 func _conditions_to_visualise() -> bool:
 	## no complex logic if in editor
-	if u.is_editor():
+	if eu.is_editor():
 		return true
 		
 	if not is_instance_valid(_cached_hurtbox):

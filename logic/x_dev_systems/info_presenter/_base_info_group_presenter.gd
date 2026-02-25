@@ -7,6 +7,10 @@ extends NodeSystem
 
 @export var ui_container: Container
 
+
+const START_BLUE_COLOR = Color(0.572, 0.652, 0.812, 1.0)
+const END_RED_COLOR = Color(0.867, 0.382, 0.382, 1.0)
+
 var dlc_all_features_preset := DynamicLabelConfig.new(true, true, true)
 var dlc_all_features_and_italics_preset := DynamicLabelConfig.new(true, true, true, false, true)
 
@@ -21,16 +25,16 @@ func __hard_validation() -> bool:
 
 
 func _ready():
-	if u.is_editor():
+	if eu.is_editor():
 		return
 
 	if not __perform_validation():
 		__log_warn_soft("won't be working")
 	else:
-		_ready_imp()
+		_ready_implementation()
 
 
-func _ready_imp():
+func _ready_implementation():
 	pass
 
 
@@ -88,10 +92,10 @@ func get_composite_dvc_key() -> int:
 ## ON SIG HELPERS
 # region
 
-func _on_SIG_string_payload(
+func _on_SIG_sname_payload(
 	dynamic_label: DynamicInfoLabel,
 	payload: Dictionary[StringName, Variant],
-	field_name: String,
+	field_name: StringName,
 	str_replacers: Dictionary[String, String],
 	dynamic_label_config: DynamicLabelConfig
 ):
@@ -104,18 +108,14 @@ func _on_SIG_string_payload(
 		dynamic_label.set_label_text(pp_string, dynamic_label_config)
 
 
-## returns "" in case of problems
-func _get_SIG_string_payload(
+func _get_SIG_sname_payload(
 	payload: Dictionary[StringName, Variant],
-	field_name: String,
-	str_replacers: Dictionary[String, String],
-) -> String:
-	var _r := SigUtils.safe_get_string_payload_value(payload, field_name)
+	field_name: StringName,
+) -> StringName:
+	var _r := SigUtils.safe_get_sname_payload_value(payload, field_name)
 	if not _r.err:
-		var pp_string := _r.value
-		pp_string = StrUtils.replace_text_fragments(pp_string, str_replacers)
-		return pp_string
-	return ""
+		return _r.value
+	return &""
 
 
 func _on_SIG_hit_data_payload(
@@ -177,8 +177,8 @@ func _on_SIG_react_on_hit(
 	var _r_interruption := SigUtils.safe_get_bool_payload_value(payload, SPS.interruption_field)
 	if _r_interruption.err: return
 	var interruption_pp_string = ""
-	interruption_pp_string = "[i]" + ("Yes" if _r_interruption.value else "No") + "[/i]"
-	var _r_reaction := SigUtils.safe_get_string_payload_value(payload, SPS.reaction_anim_or_state_field)
+	interruption_pp_string = BB.i_wrap("Yes" if _r_interruption.value else "No")
+	var _r_reaction := SigUtils.safe_get_sname_payload_value(payload, SPS.reaction_anim_or_state_field)
 	if _r_reaction.err: return
 	var reaction_pp_string = ""
 	reaction_pp_string = StrUtils.replace_text_fragments(_r_reaction.value, _str_react_replacers_)
@@ -189,11 +189,8 @@ func _on_SIG_react_on_hit(
 
 
 func _get_damage_color(dmg: float, min_dmg: float, max_dmg: float) -> Color:
-	var t := clampf((dmg - min_dmg) / (max_dmg - min_dmg), 0.0, 1.0)
+	var weight := clampf((dmg - min_dmg) / (max_dmg - min_dmg), 0.0, 1.0)
 	# from desaturated B to desaturated R
-	var start = Color(0.572, 0.652, 0.812, 1.0)
-	var end = Color(0.867, 0.382, 0.382, 1.0)
-	
-	return start.lerp(end, t)
+	return START_BLUE_COLOR.lerp(END_RED_COLOR, weight)
 
 # endregion

@@ -46,7 +46,7 @@ func _init(value_changed_: Signal) -> void:
 	for item in DVS.KeySValueChanger.values():
 		_s_vs_data[item] = ""
 	
-	_s_vs_data[DVS.KeySValueChanger.DV_SPECTRUM_AUDIO_BUS] = Constants.SFX_ASP_BASE_BUS_ID
+	_s_vs_data[DVS.KeySValueChanger.DV_SPECTRUM_AUDIO_BUS] = Const.SFX_ASP_BASE_BUS_ID
 
 	_data[DVS.DVSection.S_CHANGER] = _s_vs_data
 

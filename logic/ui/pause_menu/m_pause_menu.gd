@@ -19,7 +19,7 @@ var ui_overlay_controls_panel: UIDVMenu
 
 
 func _ready() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		return
 	_hide_exit_for_web()
 	_hide_options_if_unset()

@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/char/image (22).png")
+@icon("uid://dcpyrehmo4f87")
 extends PHCharacter
 class_name SittingSkCharacter
 
@@ -8,9 +8,15 @@ class_name SittingSkCharacter
 @onready var aura_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %AuraAnimSFXSigEmitter
 
 
+## INITIALISATION
+# region
+
+func initialise_phe_char_implementation() -> void:
+	pass
+
 func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]:
 	return {
-			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter
+			WeaponID.bg_aura_weapon: aura_anim_sfx_sig_emitter,
 		}
 func _for_init_anim_list() -> BaseCharAnimList:
 	return SITSKA.new()
@@ -20,11 +26,10 @@ func _for_init_active_weapon_id_list() -> Array[StringName]:
 	return [WeaponID.bg_aura_weapon]
 func _for_init_asp_config_container() -> BaseCharacterASPConfigContainer:
 	return SitSkASPConfigContainer.new()
-##
+
+# endregion
 
 
-func initialise_phe_char_implementation() -> void:
-	pass
 ##
 
 func get_initial_leaf_state_name() -> StringName:

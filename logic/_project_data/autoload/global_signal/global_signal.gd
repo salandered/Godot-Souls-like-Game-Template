@@ -2,17 +2,6 @@ extends Node
 
 ## AUTOLOAD ##
 
-## DOCS
-## - NOTE: all signals have the same payload structure Dictionary[StringName, Variant]
-##   or don't have the payload at all. 
-##   While cumbersome, it unifies all the signal handlers 
-##	 and mitigates an error when handler signature does not match the signal
-## - Use const fields for the payload keys from SPS (Signal Payload Schema)
-## - Use SigUtils for both, emitting signals and parsing their payload
-##   (also for connecting/disconnecting signals)
-
-## -------------------------------------------------------------------
-
 
 ## PLAYER EVENTS
 

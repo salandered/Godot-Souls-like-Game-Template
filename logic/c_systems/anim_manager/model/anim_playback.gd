@@ -6,7 +6,7 @@ var time_spent: float ## in sc, scaled
 ## Will start animation from a specific timestamp
 var start_offset: float ## in sc
 
-## -- DOCS: Examples of all the timelines --
+## DOCS: Examples of all the timelines
 # region: 
 ## case 1 (non loop)
 ## native anim: 0 - 1.5. length 1.5. duration 1.5

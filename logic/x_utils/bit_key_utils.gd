@@ -34,7 +34,7 @@ static func split(key: int) -> RO.Vector2iReturn:
 
 
 ## returns a debug string like "[2, 5]"
-static func to_s(key: int) -> String:
+static func pp_split_result(key: int) -> String:
 	var r := split(key)
 	if r.err:
 		return "[BitKey Error: Invalid Key %d]" % key
@@ -42,8 +42,8 @@ static func to_s(key: int) -> String:
 	return "[%d, %d]" % [r.value.x, r.value.y]
 
 
-## e.g.: BitKeyUtils.to_s_named(key, CharacterType, DevVisualsType)
-static func to_s_named(key: int, enum_a: Dictionary, enum_b: Dictionary) -> String:
+## e.g.: BitKeyUtils.pp_split_result_named(key, CharacterType, DevVisualsType)
+static func pp_split_result_named(key: int, enum_a: Dictionary, enum_b: Dictionary) -> String:
 	var r := split(key)
 	if r.err:
 		return "[BitKey Error: Invalid Key %d]" % key

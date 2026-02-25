@@ -22,7 +22,7 @@ func _initialise_visuals_imp() -> void:
 
 		var specific_mat := _get_or_create_mat_by_category(category, collider_colors)
 		
-		var mesh_inst := MeshInstanceUtils.create_based_on_shape_3d(casted.shape)
+		var mesh_inst := MeshInstanceUtils.create_mi_based_on_shape_3d(casted.shape)
 		if mesh_inst:
 			mesh_inst.material_override = specific_mat
 			casted.add_child(mesh_inst)

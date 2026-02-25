@@ -146,10 +146,11 @@ func _update_hud() -> void:
 	if _camera.get_light():
 		hud_text += pp.s("\nLight: ", _camera.get_light().visible,
 				pp.s(" | Energy: ", _camera.get_light().light_energy))
+	hud_text += "\n\n"
 	if get_tree().paused:
-		hud_text += "\n\n[i]SCENE PAUSED ⏸️[/i]"
+		hud_text += BB.i_wrap("SCENE PAUSED ⏸️")
 	else:
-		hud_text += "\n\n[i]SCENE PLAYS ⏩[/i]"
+		hud_text += BB.i_wrap("SCENE PLAYS ⏩")
 
 	GlobalUIInfo.update_free_cam_hud(hud_text)
 

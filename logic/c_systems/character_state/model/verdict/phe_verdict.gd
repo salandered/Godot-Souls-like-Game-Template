@@ -6,7 +6,7 @@ var _switch_on_same: bool = false
 var _override_commit: bool = false
 
 
-func _init(next_state_: StringName = "", reason_: String = "", switch_on_same_: bool = false, override_commit_: bool = false):
+func _init(next_state_: StringName = Const.EMPTY_SNAME, reason_: String = "", switch_on_same_: bool = false, override_commit_: bool = false):
 	self.next_state = next_state_
 	self._reason = reason_
 	set_special_flags(switch_on_same_, override_commit_)
@@ -29,7 +29,7 @@ func switch_on_same_raised() -> bool:
 
 func needs_switch() -> bool:
 	var _r: bool = false
-	if next_state != "":
+	if next_state != Const.EMPTY_SNAME:
 		_r = true
 	return _r
 

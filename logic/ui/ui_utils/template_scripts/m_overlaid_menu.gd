@@ -36,7 +36,7 @@ func _handle_cancel_input() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		_handle_cancel_input()
-		InputUtils.mark_input_handled(self)
+		InputUtils.mark_input_handled(self )
 
 
 func _on_close_button_pressed() -> void:
@@ -50,7 +50,7 @@ func _enter_tree() -> void:
 	_initial_focus_control = get_viewport().gui_get_focus_owner()
 	if _initial_focus_control:
 		_initial_focus_mode = _initial_focus_control.focus_mode
-	if u.is_editor(): return
+	if eu.is_editor(): return
 	_scene_tree.paused = pauses_game or _initial_pause_state
 	if makes_mouse_visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

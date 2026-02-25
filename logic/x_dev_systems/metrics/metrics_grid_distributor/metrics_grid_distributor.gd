@@ -5,25 +5,26 @@ extends NodeSystem
 @export var grid: GridContainer
 @export var fade_duration: float = 0.4
 
-@export_category("Color S")
-@export var modulate_name_label: Color = def_modulate_name_label
+@export_category("Color Settings")
+@export var modulate_name_label: Color = DEF_MODULATE_NAME_LABEL
 
-@export_category("Font S")
+@export_category("Font Settings")
 @export var value_label_mono_font: Font
 ## will be used if set
 @export var use_value_label_mono_font: bool = true
 @export var value_label_font_size: int = 24
 @export var name_label_font_size: int = 24
 
-@export_category("Grid S")
+@export_category("Grid Settings")
 @export var show_ghost_on_change: bool = false
 
 ## by default dim the key
-const def_modulate_name_label := Color(0.7, 0.7, 0.7)
+const DEF_MODULATE_NAME_LABEL := Color(0.7, 0.7, 0.7)
 
 # maps metric name -> value label node
 var _rows: Dictionary[String, Label] = {}
 var _fading_rows: Dictionary = {}
+
 
 func __hard_dependencies() -> Array:
 	return [
@@ -83,7 +84,7 @@ func update_metric(
 func _create_new_row(key: String, delta_font_size: int = 0) -> Label:
 	var name_label := Label.new()
 	name_label.text = key
-	name_label.modulate = modulate_name_label if modulate_name_label else def_modulate_name_label
+	name_label.modulate = modulate_name_label if modulate_name_label else DEF_MODULATE_NAME_LABEL
 
 	var value_label := Label.new()
 	if use_value_label_mono_font and value_label_mono_font:
@@ -107,7 +108,7 @@ func _spawn_ghost_change(target: Label) -> void:
 		ControlUtils.label_set_font(ghost, value_label_mono_font)
 	
 	# match font size of the specific target row
-	var target_font_size = target.get_theme_font_size("font_size")
+	var target_font_size = target.get_theme_font_size(PropC.FONT_SIZE)
 	if target_font_size > 0:
 		ControlUtils.label_set_font_size(ghost, target_font_size)
 
@@ -124,9 +125,11 @@ func _spawn_ghost_change(target: Label) -> void:
 	var tween := create_tween()
 	tween.set_parallel(true)
 	# Fade out
-	tween.tween_property(ghost, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.tween_property(ghost, PropC.MODULATE_A, 0.0, 0.8) \
+		.set_trans(Tween.TRANS_SINE) \
+		.set_ease(Tween.EASE_IN)
 	# Drift right
-	tween.tween_property(ghost, "position:x", start_pos.x + 40.0, 0.8)
+	tween.tween_property(ghost, PropC.POSITION_X, start_pos.x + 40.0, 0.8)
 	
 	tween.chain().tween_callback(ghost.queue_free)
 

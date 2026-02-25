@@ -37,8 +37,6 @@ func get_native_player() -> AnimationPlayer:
 @abstract func set_anim_to_play(anim_id: StringName, blend_for: float, start_time_offset: float) -> void
 
 
-## GET DATA
-
 ## GET CURR ANIM DATA
 
 ## Should account for all speed scales (returns real life seconds)
@@ -79,9 +77,6 @@ func get_native_player() -> AnimationPlayer:
 
 
 @abstract func get_global_speed_scale() -> float
-
-
-##
 
 
 ## __LOG

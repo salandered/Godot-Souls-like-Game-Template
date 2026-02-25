@@ -68,7 +68,7 @@ func attack_in_series_passed_marker(curr_series_number_: int, curr_sbs: BasePHEL
 		return false
 
 	if curr_sbs.passed_marker(marker_name):
-		if __ELA(): __log_upd("captured attack_in_series_passed_marker", curr_series_number_, curr_sbs.state_name, target_sbs_name_, marker_name)
+		if __LOG_B(): __log_upd("captured attack_in_series_passed_marker", curr_series_number_, curr_sbs.state_name, target_sbs_name_, marker_name)
 		return true
 
 	return false
@@ -102,20 +102,20 @@ func _is_ended() -> bool:
 	var _current_substate := get_current_substate()
 	
 	if _current_substate == null:
-		if __ELA(): __log_upd('_is_ended', "_current_substate is null", 'curr attack idx', current_attack_number, _chosen_attack_series)
+		if __LOG_B(): __log_upd('_is_ended', "_current_substate is null", 'curr attack idx', current_attack_number, _chosen_attack_series)
 		return true
 
 	if dist_to_player_greater(PL_DIST_TO_END) and condition_to_end(_current_substate):
-		if __ELA(): _reason += "dist > PL_DIST_TO_END and condition_to_end (hard stop if player is far way and we ended current attack) "
+		if __LOG_B(): _reason += "dist > PL_DIST_TO_END and condition_to_end (hard stop if player is far way and we ended current attack) "
 		_r = true
 	elif not condition_to_end(_current_substate):
-		if __ELA(): _reason += "not condition_to_end (in the middle of curr attack)"
+		if __LOG_B(): _reason += "not condition_to_end (in the middle of curr attack)"
 		_r = false
 	elif current_attack_number + 1 < _chosen_attack_series.size():
-		if __ELA(): _reason += "have more attacks to do in the combo"
+		if __LOG_B(): _reason += "have more attacks to do in the combo"
 		_r = false
 	else:
-		if __ELA(): _reason += "empty else caught, by defailt we end"
+		if __LOG_B(): _reason += "empty else caught, by defailt we end"
 	
 	if _r == true:
 		__log_upd('_is_ended', 'curr attack idx/idx+1/size %d %d %d' % [current_attack_number, current_attack_number + 1, _chosen_attack_series.size()],
@@ -142,13 +142,13 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 	
 	if condition_to_next_switch(current_substate_casted):
 		var _next_index := current_attack_number + 1
-		if __ELA(): __log_upd("attack index + 1. curr/next", current_attack_number, _next_index)
+		if __LOG_B(): __log_upd("attack index + 1. curr/next", current_attack_number, _next_index)
 		if _next_index < _chosen_attack_series.size(): # next attack exists
 			# __log_upd("gonna switch to next attack curr/next", current_attack_number, _next_index)
 			current_attack_number = _next_index
 			_next_state = _chosen_attack_series[current_attack_number]
 			var _remaining := _chosen_attack_series.size() - (current_attack_number + 1)
-			if __ELA(): _reason += pp.s("advancing attack series", "attacks remaining", _remaining)
+			if __LOG_B(): _reason += pp.s("advancing attack series", "attacks remaining", _remaining)
 			_switch_on_same = true
 			_override_commit = true
 		else:
@@ -156,11 +156,11 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			if not _series_forgotten.is_initialised():
 				# __log_error( "_series_forgotten init!")
 				_series_forgotten.initialise(0.1)
-				if __ELA(): _reason += pp.s(em.warn, "series ended! parent not switches us! wait 0.1 sec and return one more move with idx 0")
+				if __LOG_B(): _reason += pp.s(em.warn, "series ended! parent not switches us! wait 0.1 sec and return one more move with idx 0")
 				return VerdictPH.new(_next_state, _reason)
 			elif _series_forgotten.update(delta):
 				# __log_error("_series_forgotten update!")
-				if __ELA(): _reason += pp.s("0.1 passed, one more move")
+				if __LOG_B(): _reason += pp.s("0.1 passed, one more move")
 				_series_forgotten.turn_off()
 				_next_state = _chosen_attack_series[0]
 				_switch_on_same = true
@@ -188,11 +188,11 @@ func choose_initial_substate(_next_state: StringName, _reason: String) -> Verdic
 	_chosen_attack_series = pick_attack_series()
 	
 	if _chosen_attack_series.is_empty():
-		if __ELA(): _reason += "No valid combo found"
+		if __LOG_B(): _reason += "No valid combo found"
 	else:
 		current_attack_number = 0
 		_next_state = _chosen_attack_series[current_attack_number]
-		if __ELA(): _reason += "picked combo, starting with first attack"
+		if __LOG_B(): _reason += "picked combo, starting with first attack"
 	
-	if __ELA(): __log_ent("Chosen combo:", _chosen_attack_series, "| Total attacks:", _chosen_attack_series.size())
+	if __LOG_B(): __log_ent("Chosen combo:", _chosen_attack_series, "| Total attacks:", _chosen_attack_series.size())
 	return VerdictPH.new(_next_state, _reason)

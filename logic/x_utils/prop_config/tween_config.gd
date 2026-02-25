@@ -1,5 +1,6 @@
-extends RefCounted
 class_name TweenConfig
+extends RefCounted
+
 
 ## by default: fast start, smooth slowdown
 

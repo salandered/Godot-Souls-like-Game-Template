@@ -16,11 +16,9 @@ var _curr_anim: AnimationData
 func initialise_implementation():
 	if _native_player and not ignore_root_bone:
 		if set_root_bone_postponed:
-			await FrameUtils.wait_process_frames(4)
-		# print_.dev("", _native_player.root_motion_track)
-		# print_.dev("", NodePath(Constants.ROOT_TRACK_PATH))
-		# dont rely on UI setting, it will be lost on almost any change, super fragile.
-		_native_player.root_motion_track = NodePath(Constants.ROOT_TRACK_PATH)
+			await FrameUtils.wait_process_frames(self , 4)
+		# dont rely on UI setting, it's very fragile.
+		_native_player.root_motion_track = NodePath(Const.ROOT_TRACK_PATH)
 
 	if general_skeleton:
 		_reset_root_motion()
@@ -30,12 +28,11 @@ func initialise_implementation():
 
 
 func _reset_root_motion() -> void:
-	var root_bone_id := general_skeleton.find_bone(Constants.ROOT_BONE)
+	var root_bone_id := general_skeleton.find_bone(Const.ROOT_BONE)
 	general_skeleton.set_bone_pose_position(root_bone_id, Vector3.ZERO)
 	
 
 ## SET ANIMATIONS TO PLAY ▶️
-
 
 func set_anim_to_play(anim_id: StringName, blend_for: float = 0.0, start_time_offset: float = 0.0) -> void:
 	var result := AnimUtils.set_anim_to_play(_native_player,
@@ -55,7 +52,6 @@ func set_global_speed_scale(new_scale: float) -> void:
 
 
 func reset_global_speed_scale() -> void:
-	# __log_("reset_global_speed_scale to 1.0")
 	AnimUtils.reset_global_speed_scale(_native_player, config)
 
 
@@ -92,7 +88,7 @@ func get_curr_anim_effective_duration() -> float:
 ## returns "" if no curr anim
 func get_curr_anim_id() -> StringName:
 	if not _curr_anim:
-		return ""
+		return Const.EMPTY_SNAME
 	return _curr_anim.anim_id
 
 

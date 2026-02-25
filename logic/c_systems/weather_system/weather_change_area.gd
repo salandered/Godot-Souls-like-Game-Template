@@ -56,7 +56,7 @@ func __hard_dependencies() -> Array:
 
 	
 func _ready() -> void:
-	if not u.is_editor():
+	if not eu.is_editor():
 		if __perform_validation():
 			collision_mask = Collision.Masks.ONLY_PLAYER
 			body_entered.connect(_on_body_entered)

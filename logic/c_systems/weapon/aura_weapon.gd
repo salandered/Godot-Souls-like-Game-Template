@@ -9,7 +9,7 @@ class_name AuraWeapon
 
 
 func initialise_implementation() -> void:
-	pass
+	PUSH_RIGID_BODIES_FORCE = 16.0
 
 
 func validate_visuals():

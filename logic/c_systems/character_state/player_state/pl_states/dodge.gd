@@ -1,6 +1,5 @@
 extends BasePlayerState
 
-var emitted_wave: bool = false
 
 func check_transition(input_: InputPackage) -> PLVerdict:
 	if curr_state_action.passed_marker(MarkerName.ALLOWS_SWITCH_TO_ATTACK):
@@ -11,9 +10,6 @@ func check_transition(input_: InputPackage) -> PLVerdict:
 			return PLVerdict.new(PS.stab_attack_2)
 	
 	if curr_state_action.passed_marker(MarkerName.TO_RUN):
-		# if not emitted_wave:
-			# get_player().SIG_land_wave.emit(get_player().global_position, AirWave2.AnimID.big_explode)
-			# emitted_wave = true
 		if not queued_state.is_set_to(PS.dodge):
 			__log_psm_check("passed_marker TO_RUN => choosing best input")
 			var verdict := best_next_state_from_input(input_)

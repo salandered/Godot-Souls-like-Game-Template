@@ -3,14 +3,11 @@ class_name PlayerSM
 
 @onready var animator_manager: PlAnimatorManager = %AnimatorManager
 @onready var legs_sm: LegsSM = %LegsSM
-
-var _player: Princess
-
 @onready var container: PlayerStatesContainer = %StatesContainer
 
 
+var _player: Princess
 var player_movement: PlayerMovement
-
 var combat: PlayerCombat
 
 var _transfer_data: TranferData = TranferData.new()
@@ -90,36 +87,23 @@ func get_prev_action() -> BaseAction:
 
 ## returns previous action name (which was replaced with next_action)
 func update_current_action(next_action: BaseAction) -> StringName:
-	# var curr_act_name = ""
-	# if not _current_action:
-		# curr_act_name = "-none-"
-		# print_.dev(em.pin, "no _current_action. Should happen only on start up.")
-	# else:
 	var curr_act_name := _current_action.action_name
 		
 	var next_act_name := next_action.action_name
 
 	if next_act_name == Leg.Act.double:
-		# print_.dev("", "✖️ declined legs double update to curr. staying with " + curr_act_name)
+		# print_.dev("", "✖️ declined legs double update to curr. staying with",  curr_act_name)
 		return _prev_action.action_name
 	if next_act_name == PS.Act.double:
-		# print_.dev("", "✖️ declined state double update to curr. staying with " + curr_act_name)
+		# print_.dev("", "✖️ declined state double update to curr. staying with", curr_act_name)
 		return _prev_action.action_name
 
-	# if next_act_name == curr_act_name:
-		# print_.dev(em.pin, "✖️🚸 came with the same action " + curr_act_name)
-
-	# print_.dev("[[]]", pp.s(next_act_name, "is set for curr |",
-		# curr_act_name, "moved to prev"), 18)
-	
 	_prev_action = _current_action
 	_current_action = next_action
 	SigUtils.safe_emit(
 		GlobalSignal.SIG_player_action_changed,
 		{SPS.state_name_field: next_action.action_name}
 	)
-	# if _prev_action and next_act_name == _prev_action.action_name:
-		# print_.dev(em.pin, em.red_x + "new curr equal prev! " + next_act_name)
 	
 	return _prev_action.action_name
 

@@ -1,10 +1,9 @@
 extends RefCounted
 
-## TODO: should be deleted
 class_name CustomDelta
 
-
-# TODO: Unix time in millisecond, needs a better time calculation
+## TODO: should be deleted or refactored with correct time management
+# - Unix time in millisecond, needs a better time calculation
 var last_process_time: float # seconds unix from system
 var delta: float # seconds
 var now: float # seconds unix from system
@@ -27,4 +26,4 @@ func update_last_process_time() -> void:
 
 
 func _get_curr_time() -> float:
-	return Time.get_unix_time_from_system()
+	return TimeUtils.get_sys_unix_time()

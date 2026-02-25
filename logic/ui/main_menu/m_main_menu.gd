@@ -2,9 +2,9 @@ class_name M_MainMenu
 extends ControlSystem
 
 
-signal sub_menu_opened
-signal sub_menu_closed
-signal game_exited
+signal SIG_sub_menu_opened
+signal SIG_sub_menu_closed
+signal SIG_game_exited
 
 
 @export_file("*.tscn") var game_scene_path: String
@@ -12,17 +12,14 @@ signal game_exited
 @export var credits_packed_scene: PackedScene
 @export var gallery_packed_scene: PackedScene
 
-@export_group("Level Selection")
+@export_category("Level Selection")
 @export_file("*.tscn") var level_1_scene_path: String
 @export_file("*.tscn") var level_2_scene_path: String
 
-@export_group("Extra Settings")
+@export_category("Extra Settings")
 @export var initial_focus_target: Control
-@export var confirm_new_game: bool = true
-@export var signal_game_start: bool = false
-@export var signal_game_exit: bool = false
 
-@export_category("DEV")
+@export_category("DEV Settings")
 @export var __turn_on_tut_on_start: bool = true
 @export var __dev_bypass_menu_and_start_game: bool = false
 @export var __dev_bypass_menu_and_start_arena: bool = false
@@ -46,6 +43,8 @@ var sub_menu: Control
 
 const MAX_MAIN_MENU_TRACK_CUTOFF := 950
 const MAIN_MENU_TRACK_CUTOFF_HZ := 200
+const CUTOFF_HZ_DURATION = 43.0
+
 
 var _music_low_pass_filter: AudioEffectLowPassFilter
 
@@ -60,7 +59,16 @@ var _music_low_pass_filter: AudioEffectLowPassFilter
 func __hard_dependencies() -> Array:
 	return [
 		menu_container,
-		menu_buttons_box_container
+		menu_buttons_box_container,
+		options_button
+		]
+
+
+func __soft_dependencies() -> Array:
+	return [
+		exit_button,
+		credits_button,
+		menu_3d_scene
 		]
 
 
@@ -85,11 +93,11 @@ func _ready() -> void:
 	menu_3d_scene.initialise()
 	
 	if __dev_bypass_menu_and_start_game:
-		await FrameUtils.wait_process_frames(2)
+		await FrameUtils.wait_process_frames(self , 2)
 		_on_level_2_button_pressed()
 		return
 	if __dev_bypass_menu_and_start_arena:
-		await FrameUtils.wait_process_frames(2)
+		await FrameUtils.wait_process_frames(self , 2)
 		_on_level_1_button_pressed()
 		return
 
@@ -116,7 +124,12 @@ func _music_cutoff_fade_in() -> void:
 		var tween := create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(_music_low_pass_filter, "cutoff_hz", MAX_MAIN_MENU_TRACK_CUTOFF, 43.0).from(200.0)
+		tween.tween_property(
+			_music_low_pass_filter,
+			PropC.CUTOFF_HZ,
+			MAX_MAIN_MENU_TRACK_CUTOFF,
+			CUTOFF_HZ_DURATION) \
+				.from(MAIN_MENU_TRACK_CUTOFF_HZ)
 		__log_(_music_low_pass_filter, tween)
 
 
@@ -151,7 +164,12 @@ func _add_or_hide_credits() -> void:
 # endregion
 
 
-## LOAD
+func exit_game() -> void:
+	SigUtils.safe_emit_no_payload(SIG_game_exited)
+	get_tree().quit()
+
+
+## LOAD LEVEL
 # region
 
 func _load_specific_level(path: String) -> void:
@@ -168,13 +186,6 @@ func _load_specific_level(path: String) -> void:
 		GlobalUIInfo.toggle_tutorial(true)
 	
 	M_SceneLoader.load_scene(path)
-
-
-func exit_game() -> void:
-	if signal_game_exit:
-		SigUtils.safe_emit_no_payload(game_exited)
-	else:
-		get_tree().quit()
 
 
 func _reset_audio_state() -> void:
@@ -202,7 +213,7 @@ func _open_sub_menu(menu: Control) -> void:
 
 	_toggle_menu_visible(false)
 	
-	sub_menu_opened.emit()
+	SIG_sub_menu_opened.emit()
 	
 	if hide_label_container:
 		hide_label_container.hide()
@@ -217,7 +228,7 @@ func _close_sub_menu() -> void:
 	sub_menu.hide()
 	sub_menu = null
 	_toggle_menu_visible(true)
-	sub_menu_closed.emit()
+	SIG_sub_menu_closed.emit()
 
 	if hide_label_container:
 		hide_label_container.show()
@@ -249,7 +260,7 @@ func _scenery_view_input(event: InputEvent) -> void:
 			if hide_label_container.visible == false:
 				return
 			_toggle_scenery_view()
-			InputUtils.mark_input_handled(self)
+			InputUtils.mark_input_handled(self )
 
 # endregion
 
@@ -299,8 +310,7 @@ func _on_back_button_pressed() -> void:
 # endregion
 
 
-##
-
+## __LOGS
 
 func __LOG_B() -> bool:
 	return LogToggler.UI.MAIN_MENU

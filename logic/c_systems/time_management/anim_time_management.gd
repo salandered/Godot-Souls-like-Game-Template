@@ -39,7 +39,7 @@ static func time_remaining(animator_manager: BaseAnimatorManager, self_) -> floa
 		print_.note(false, "not _curr_anim, return 0.0")
 		return 0.0
 	if _curr_anim.is_looping:
-		return Constants.BIG_MEANINGLESS_NUMBER
+		return Const.BIG_MEANINGLESS_NUMBER
 
 	return _effective_duration(animator_manager) - time_spent(animator_manager, self_) # or: duration - eff time spent
 
@@ -52,7 +52,7 @@ static func direct_time_remaining(animator_manager: BaseAnimatorManager) -> floa
 		print_.note(true, "direct_time_remaining - not _curr_anim, return 0.0")
 		return 0.0
 	if _curr_anim.is_looping:
-		return Constants.BIG_MEANINGLESS_NUMBER
+		return Const.BIG_MEANINGLESS_NUMBER
 	var _r := animator_manager.get_curr_anim_effective_duration() - animator_manager.get_curr_anim_time_spent()
 	return _r
 
@@ -118,6 +118,6 @@ static func __LOG_INDENT() -> int:
 	return 16
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

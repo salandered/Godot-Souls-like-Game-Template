@@ -53,22 +53,22 @@ static func _is_commitment_done_for_non_loop_anim(state: BasePHELeaf) -> bool:
 	if _allows_switch_marker_exists:
 		# -0.1 means 0.1 before the marker is ok
 		if state.passed_marker(_allows_switch_marker_name, -0.15):
-			if state.__ELA(): _reason = "passed_marker" + _allows_switch_marker_name
+			if state.__LOG_B(): _reason = "passed_marker" + _allows_switch_marker_name
 			_result = true
 		else:
-			if state.__ELA(): _reason = "not passed_marker " + _allows_switch_marker_name
+			if state.__LOG_B(): _reason = "not passed_marker " + _allows_switch_marker_name
 			_result = false
 
 	## no marker, then check time remaining
 	else:
 		if state.time_remaining() < MIN_TIME_REMAINING:
-			if state.__ELA(): _reason = pp.s("time remaining <", MIN_TIME_REMAINING)
+			if state.__LOG_B(): _reason = pp.s("time remaining <", MIN_TIME_REMAINING)
 			_result = true
 		else:
-			if state.__ELA(): _reason = pp.s("time remaining >=", MIN_TIME_REMAINING)
+			if state.__LOG_B(): _reason = pp.s("time remaining >=", MIN_TIME_REMAINING)
 			_result = false
 
-	if state.__ELA(): __log_non_loop(_result, _reason, state)
+	if state.__LOG_B(): __log_non_loop(_result, _reason, state)
 	return _result
 
 

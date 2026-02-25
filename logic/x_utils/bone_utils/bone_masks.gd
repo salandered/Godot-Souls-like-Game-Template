@@ -2,29 +2,29 @@
 class_name BoneMask
 
 ## Docs
-## Initially used PackedInt32Array but it's not worth it. 
+## Initially used PackedInt32Array but project was not ready
 ##   - array lengths are ~50 max
 ##   - usually we use this on set up
 ##   - client code uses Array[int]
 ## Consider PackedInt32Array only in case of perf problems
 
 
-# region Spine Head etc (Bones 1-6)
+# region SPINE HEAD HIPS (Bones 1-6)
 
 static func get_head_and_neck() -> Array[int]:
 	return [BoneIdx.NECK_5, BoneIdx.HEAD_6]
 
 
 static func get_spine_chain() -> Array[int]:
-	return _range(BoneIdx.SPINE_2, BoneIdx.RIGHT_SHOULDER_7) # Spine to Head 6
+	return _range(BoneIdx.SPINE_2, BoneIdx.HEAD_6 + 1)
 
 
 static func get_spine_chain_no_head_neck() -> Array[int]:
-	return _range(BoneIdx.SPINE_2, BoneIdx.NECK_5) # Spine to 4
+	return _range(BoneIdx.SPINE_2, BoneIdx.UPPER_CHEST_4 + 1)
 
 
 static func get_torso() -> Array[int]:
-	return _range(BoneIdx.HIPS_1, BoneIdx.NECK_5) # Hips to UpperChest 4
+	return _range(BoneIdx.HIPS_1, BoneIdx.UPPER_CHEST_4 + 1)
 
 
 static func get_hips() -> Array[int]:
@@ -33,7 +33,7 @@ static func get_hips() -> Array[int]:
 # endregion
 
 
-# region Arms 
+# region ARMS 
 
 static func get_arm_full(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
@@ -44,9 +44,9 @@ static func get_arm_full(side: StringName) -> Array[int]:
 
 static func get_arm_no_fingers(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
-		return _range(BoneIdx.RIGHT_SHOULDER_7, 11) # to RightHand(10)
+		return _range(BoneIdx.RIGHT_SHOULDER_7, BoneIdx.RIGHT_HAND_10 + 1)
 	else:
-		return _range(BoneIdx.LEFT_SHOULDER_26, 30) # to LeftHand(29)
+		return _range(BoneIdx.LEFT_SHOULDER_26, BoneIdx.LEFT_HAND_29 + 1)
 
 
 static func get_fingers(side: StringName) -> Array[int]:
@@ -72,7 +72,7 @@ static func get_leg_full(side: StringName) -> Array[int]:
 	if side == Side.RIGHT:
 		return _range(45, 49) # RightUpperLeg(45) to RightToes(48)
 	else:
-		return _range(49, Constants.BONE_COUNT_53) # LeftUpperLeg(49) to LeftToes(52)
+		return _range(49, BoneIdx.LEFT_TOES_52 + 1) # LeftUpperLeg(49) to LeftToes(52)
 
 
 static func get_both_legs() -> Array[int]:
@@ -116,11 +116,11 @@ static func get_lower_body() -> Array[int]:
 
 
 static func get_full_body_with_root() -> Array[int]:
-	return _range(BoneIdx.ROOT_0, Constants.BONE_COUNT_53) # All 53 bones
+	return _range(BoneIdx.ROOT_0, BoneIdx.LEFT_TOES_52 + 1) # All 53 bones
 
 
 static func get_full_body_no_root() -> Array[int]:
-	return _range(BoneIdx.HIPS_1, Constants.BONE_COUNT_53) # Bones 1-52
+	return _range(BoneIdx.HIPS_1, BoneIdx.LEFT_TOES_52 + 1) # Bones 1-52
 
 
 # endregion
@@ -183,8 +183,7 @@ static func get_arm_with_spine_and_opposite_shoulder(side: StringName) -> Array[
 
 static func get_all_no_fingers() -> Array[int]:
 	var indices: Array[int] = []
-	indices.append_array(_range(BoneIdx.ROOT_0, 11)) # to RightHand(10)
-	indices.append_array(_range(BoneIdx.LEFT_SHOULDER_26, 30)) # to LeftHand(29)
-	# RightUpperLeg(45) to End
-	indices.append_array(_range(45, Constants.BONE_COUNT_53))
+	indices.append_array(_range(BoneIdx.ROOT_0, BoneIdx.RIGHT_HAND_10 + 1))
+	indices.append_array(_range(BoneIdx.LEFT_SHOULDER_26, BoneIdx.LEFT_HAND_29 + 1))
+	indices.append_array(_range(45, BoneIdx.LEFT_TOES_52 + 1))
 	return indices

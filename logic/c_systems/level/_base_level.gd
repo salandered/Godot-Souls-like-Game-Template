@@ -60,7 +60,7 @@ func __soft_validation() -> bool:
 
 
 func _ready() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		set_process(false)
 		return
 	else:
@@ -106,10 +106,10 @@ func _ready() -> void:
 func _init_delay_logic():
 	if not initialise_dv:
 		return
-	if u.is_release():
+	if eu.is_release():
 		return
 
-	await FrameUtils.wait_process_frames(3)
+	await FrameUtils.wait_process_frames(self , 3)
 	
 	var dvs := Groups.get_dv(self )
 	__log_("goint to initalise", len(dvs), "DV nodes")

@@ -28,7 +28,7 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 func _on_SIG_player_state_changed(payload: Dictionary[StringName, Variant]):
-	_on_SIG_string_payload(pl_state_info, payload, SPS.state_name_field, {}, dlc_all_features_preset)
+	_on_SIG_sname_payload(pl_state_info, payload, SPS.state_name_field, {}, dlc_all_features_preset)
 
 
 func _on_SIG_player_leg_beh_changed(payload: Dictionary[StringName, Variant]):
@@ -37,7 +37,7 @@ func _on_SIG_player_leg_beh_changed(payload: Dictionary[StringName, Variant]):
 
 
 func _on_SIG_player_action_changed(payload: Dictionary[StringName, Variant]):
-	_on_SIG_string_payload(pl_action_info, payload, SPS.state_name_field, _str_action_replacers, dlc_all_features_preset)
+	_on_SIG_sname_payload(pl_action_info, payload, SPS.state_name_field, _str_action_replacers, dlc_all_features_preset)
 
 
 func _on_SIG_player_reacted_on_hit(payload: Dictionary[StringName, Variant]):

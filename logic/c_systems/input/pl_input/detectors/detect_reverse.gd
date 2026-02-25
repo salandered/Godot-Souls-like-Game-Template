@@ -48,7 +48,7 @@ static func _check_overlap(
 	# FIRST FRAME: catch the initial reversal press
 	if _just_pressed_and_pressed(k_just_pressed, k_pressed):
 		var hold_duration := k_pressed.get_time_since_press(_current_time())
-		# print_.input_gathering("🕵🏻Reverse Detection FIRST FRAME", pp.s(hold_duration, MIN_REVERSE_HOLD_TIME))
+		# print_preset.input_gathering("🕵🏻Reverse Detection FIRST FRAME", pp.s(hold_duration, MIN_REVERSE_HOLD_TIME))
 		if hold_duration >= MIN_REVERSE_HOLD_TIME:
 			var from_vector: Vector2 = action_to_vector[k_pressed.raw_action]
 			var to_vector: Vector2 = action_to_vector[k_just_pressed.raw_action]
@@ -61,7 +61,7 @@ static func _check_overlap(
 	if _pressed_and_pressed(k_ex_just_pressed, k_pressed):
 		var old_key_duration := k_pressed.get_time_since_press(_current_time())
 		var new_key_duration := k_ex_just_pressed.get_time_since_press(_current_time())
-		# print_.input_gathering("🕵🏻Reverse Detection EXTENDED", pp.s(old_key_duration, MIN_REVERSE_HOLD_TIME, new_key_duration, MAX_REVERSE_OVERLAP_TIME))
+		# print_preset.input_gathering("🕵🏻Reverse Detection EXTENDED", pp.s(old_key_duration, MIN_REVERSE_HOLD_TIME, new_key_duration, MAX_REVERSE_OVERLAP_TIME))
 		# same check for k_pressed, ex just pressed key must be recent
 		if old_key_duration >= MIN_REVERSE_HOLD_TIME and new_key_duration < MAX_REVERSE_OVERLAP_TIME:
 			var from_vector: Vector2 = action_to_vector[k_pressed.raw_action]
@@ -90,7 +90,7 @@ static func _check_sequential(
 	if _just_pressed_and_not_pressed(k_just_pressed, k_not_pressed):
 		if k_not_pressed.was_released_at_least_one():
 			var time_since_release := _current_time() - k_not_pressed.last_release_time
-			# print_.input_gathering("🕵🏻Reverse Detection SEQUENTIAL", pp.s(time_since_release, SEQUENTIAL_PRESS_THRESHOLD))
+			# print_preset.input_gathering("🕵🏻Reverse Detection SEQUENTIAL", pp.s(time_since_release, SEQUENTIAL_PRESS_THRESHOLD))
 			if time_since_release <= SEQUENTIAL_PRESS_THRESHOLD:
 				var from_vector: Vector2 = action_to_vector[k_not_pressed.raw_action]
 				var to_vector: Vector2 = action_to_vector[k_just_pressed.raw_action]

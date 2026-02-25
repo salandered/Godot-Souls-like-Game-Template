@@ -12,9 +12,9 @@ extends Node3DCharacterSystem
 
 
 func _ready() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		return
-	await FrameUtils.wait_process_frames(2)
+	await FrameUtils.wait_process_frames(self , 2)
 
 	SigUtils.safe_connect_pairs([
 		[GlobalUIInfo.SIG_dvc_b_char_dv_value_changed, _on_SIG_dvc_b_char_dv_value_changed]

@@ -14,7 +14,7 @@ func on_enter_action(input_: InputPackage) -> void:
 		#    scale from velocity. The longer the vector is, the harder it is to modify it by adding a delta.
 		#    Scaling jump_direction with velocity is giving us that natural behavior of faster jumps (sprints)
 		#    being less controllable, and jumps from standing position being more volatile.
-	jump_direction = Vector3(get_player().basis.z) * clamp(pm().get_curr_velocity_len(), 1.0, Constants.BIG_MEANINGLESS_NUMBER)
+	jump_direction = Vector3(get_player().basis.z) * clamp(pm().get_curr_velocity_len(), 1.0, Const.BIG_MEANINGLESS_NUMBER)
 	jump_direction.y = 0
 
 	if pm().get_area_awareness().get_floor_distance() > 12.0 and PREV_ACTION in LOOP_LIKE_ACTIONS:

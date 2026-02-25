@@ -37,5 +37,3 @@ func get_overlay_time_left() -> float:
 	if not __validation_ok(): return -1.0
 
 	return overlay_modifier.get_time_left()
-
-##

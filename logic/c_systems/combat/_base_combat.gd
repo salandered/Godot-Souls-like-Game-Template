@@ -239,7 +239,7 @@ func __pp_weapons_info() -> String:
 
 
 func __LOG_B() -> bool:
-	return LogToggler.FIGHT_B
+	return LogToggler.BASE_COMBAT_B
 
 
 func __LOG_INDENT() -> int:

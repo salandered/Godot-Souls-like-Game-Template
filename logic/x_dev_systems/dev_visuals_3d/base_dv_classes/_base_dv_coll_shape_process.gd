@@ -56,7 +56,7 @@ func _initialise_visuals_for_shapes() -> void:
 		if not is_instance_valid(col_shape) or not col_shape.shape:
 			continue
 
-		var mesh_instance := MeshInstanceUtils.create_based_on_shape_3d(col_shape.shape)
+		var mesh_instance := MeshInstanceUtils.create_mi_based_on_shape_3d(col_shape.shape)
 		if mesh_instance:
 			mesh_instance.material_override = _shared_material
 			col_shape.add_child(mesh_instance)
@@ -76,7 +76,7 @@ func _set_visuals_color(color: Color) -> void:
 	if _shared_material is StandardMaterial3D:
 		_shared_material.albedo_color = color
 	elif _shared_material is ShaderMaterial:
-		_shared_material.set_shader_parameter("albedo", color)
+		WireFrameMat.set_albedo(_shared_material, color)
 
 
 func _delete_all_visuals() -> void:

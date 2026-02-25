@@ -50,7 +50,7 @@ func __accept_base_state(node: BasePHEState, state_data: EDC.BaseStData):
 	node.anim_params_container = me.get_anim_params_container()
 	node.config = me.config
 	# 	
-	print_.e_container("Accepted", pp.s("st name", state_data.state_name))
+	__log_("Accepted", pp.s("st name", state_data.state_name))
 
 	# store
 	_states[state_data.state_name] = node
@@ -60,7 +60,7 @@ func _accept_states():
 	## COMPOSITE
 	for descendant: get_descendants.Descendant in get_descendants.base_ph_composite_states_with_depth(self ):
 		var node: BasePHEState = descendant.node_
-		print_.e_container("", "node.get_name() " + node.get_name())
+		__log_("_accept_states", "node.get_name()", node.get_name())
 
 		var depth := descendant.depth
 
@@ -77,7 +77,7 @@ func _accept_states():
 
 	## LEAF
 	for node: BasePHELeaf in get_descendants.base_ph_leaf_states(leaf_state_pool):
-		print_.e_container("", "node.get_name() " + node.get_name())
+		__log_("_accept_states", "node.get_name()", node.get_name())
 
 		node.state_depth = -1
 		

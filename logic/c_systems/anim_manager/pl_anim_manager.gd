@@ -12,12 +12,10 @@ extends BaseSkeletonAnimatorManager
 
 
 func __hard_dependencies() -> Array:
-	var ds := super.__hard_dependencies()
-	ds.append_array([
+	return super.__hard_dependencies() + [
 		full_body,
 		root_animator
-	])
-	return ds
+	]
 
 
 func __soft_dependencies() -> Array:
@@ -76,7 +74,7 @@ func set_global_speed_scale(new_scale: float):
 	var min_speed_scale := 0.1
 	new_scale = snappedf(new_scale, 0.01)
 	if new_scale < min_speed_scale or new_scale > max_speed_scale:
-		# u.print_warn(pp.s("extreme speed scale:", new_scale, "Was:", global_speed_scale, "Will be clamped between", max_speed_scale))
+		# tu.print_warn(pp.s("extreme speed scale:", new_scale, "Was:", global_speed_scale, "Will be clamped between", max_speed_scale))
 		new_scale = clamp(new_scale, min_speed_scale, max_speed_scale)
 	
 	if absf(full_body.global_speed_scale - new_scale) > 0.001:

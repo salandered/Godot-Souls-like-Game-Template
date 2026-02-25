@@ -14,15 +14,15 @@ const SLIGHTEST_DIR_CHANGE_DURATION: float = 0.02
 
 ## TODO: this begs the question, do we need explicit idle action in strafe behavior at all?
 ## 		 since adding NEUTRAL direction, here in strafe there is lot of logic for idle.
-const ANIM_IDLE: = A.loco.idle
+const ANIM_IDLE := A.loco.idle
 
-const ANIM_L: = A.strafe.strafe_L
-const ANIM_R: = A.strafe.strafe_R
+const ANIM_L := A.strafe.strafe_L
+const ANIM_R := A.strafe.strafe_R
 const SPEED_R: float = 2.9 + 0.4
 const SPEED_L: float = 2.8 + 0.4
 
-const ANIM_F: = A.strafe.combat_run_f
-const ANIM_B: = A.strafe.combat_run_b
+const ANIM_F := A.strafe.combat_run_f
+const ANIM_B := A.strafe.combat_run_b
 const SPEED_F: float = 3.1 + 0.4
 const SPEED_B: float = 2.4 + 0.4
 
@@ -100,10 +100,10 @@ func _inherit_dodge_speed_if_same_direction():
 
 	
 func on_enter_action(input_: InputPackage) -> void:
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 
 	var _dir := input_.detect_strafe_dir()
-	print_.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + Direction.name_(_dir))
+	print_preset.lsm_action_strafe(pp.on_ent, "detected strafe dir: " + Direction.name_(_dir))
 	curr_direction.set_direction(_dir)
 	
 
@@ -130,7 +130,7 @@ func on_enter_action(input_: InputPackage) -> void:
 
 func on_exit_action() -> void:
 	get_animator_manager().reset_global_speed_scale()
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 
 
 func update(input_: InputPackage, delta: float) -> void:
@@ -181,7 +181,7 @@ func update(input_: InputPackage, delta: float) -> void:
 
 	var new_dir := input_.detect_strafe_dir()
 	if new_dir != curr_direction.get_curr_dir():
-		print_.lsm_action_strafe(pp.on_upd, pp.s("detected new dir", curr_direction.pp_curr_dir(), "=>", Direction.name_(new_dir)))
+		print_preset.lsm_action_strafe(pp.on_upd, pp.s("detected new dir", curr_direction.pp_curr_dir(), "=>", Direction.name_(new_dir)))
 	
 	match curr_direction.would_be_change_of_type(new_dir):
 		DirPairs.ChangeType.OPPOSITE:
@@ -189,25 +189,25 @@ func update(input_: InputPackage, delta: float) -> void:
 				opposite_dir_change.speed_dip_init()
 				opposite_dir_change.async_change_init(_change_dir.bind(true, new_dir, true))
 				
-				u.reset_all(_changers_cooldown)
-				print_.lsm_action_strafe("", "~~ OPPOSITE dir change and dip triggered")
+				tu.reset_all(_changers_cooldown)
+				print_preset.lsm_action_strafe("", "~~ OPPOSITE dir change and dip triggered")
 
 		DirPairs.ChangeType.SLIGHT:
 			if slight_dir_change.cooldown.update(delta):
 				slight_dir_change.speed_dip_init()
 				slight_dir_change.async_change_init(_change_dir.bind(false, new_dir, true))
 				
-				u.reset_all(_changers_cooldown)
-				print_.lsm_action_strafe("", "~~ SLIGHT dir change and dip triggered")
+				tu.reset_all(_changers_cooldown)
+				print_preset.lsm_action_strafe("", "~~ SLIGHT dir change and dip triggered")
 		
 		DirPairs.ChangeType.SLIGHTEST:
 			_change_dir(false, new_dir)
 			
-			u.reset_all(_changers_cooldown)
-			print_.lsm_action_strafe("", "~~ SLIGHTEST dir change")
+			tu.reset_all(_changers_cooldown)
+			print_preset.lsm_action_strafe("", "~~ SLIGHTEST dir change")
 
 		DirPairs.ChangeType.SAME:
-			u.reset_all(_changers_cooldown)
+			tu.reset_all(_changers_cooldown)
 
 	get_animator_manager().set_global_speed_scale(pm().get_curr_velocity_len() / CURR_SPEED)
 	# get_animator_manager().set_global_speed_scale(SPEED_MULT)
@@ -217,7 +217,7 @@ func _change_dir(is_opposite_change: bool, new_dir: Direction.Dir, from_callback
 	# upd: answer is probably no
 	var actual_new_dir := InputManager._current_input.detect_strafe_dir()
 	curr_direction.set_direction(actual_new_dir)
-	print_.lsm_action_strafe("", pp.s(
+	print_preset.lsm_action_strafe("", pp.s(
 		"from_callback is", from_callback,
 		"| _change_dir to", curr_direction.pp_curr_dir(),
 		"while initial was", Direction.name_(new_dir)))
@@ -247,7 +247,7 @@ func _switch_animation(is_opposite_change: bool):
 
 	
 	if next_anim.anim_id == curr_anim.anim_id:
-		print_.lsm_action_strafe("", "_switch_animation same anim, won't switch")
+		print_preset.lsm_action_strafe("", "_switch_animation same anim, won't switch")
 		return
 
 	if _one_anim_is_idle(curr_anim, next_anim):

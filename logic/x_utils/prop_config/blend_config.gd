@@ -1,5 +1,5 @@
-extends RefCounted
 class_name BlendConfig
+extends RefCounted
 
 
 var fade_in: float # in seconds

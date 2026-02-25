@@ -8,6 +8,13 @@ extends BasePanelManager
 var _regex_filter := RegexFilter.new()
 
 
+const COL_TIME := "#888888"
+const COL_FRAME := "#5bac7ae3"
+const COL_META_ERR := "#ff868bff"
+
+var INVALID_REGEX_TEXT := BB.color_wrap(BB.i_wrap("invalid regex"), COL_META_ERR)
+
+
 func __hard_validation() -> bool:
 	var _r = super.__hard_validation()
 	if not get_text_label():
@@ -57,21 +64,17 @@ func _apply_regex_filter(text_fragments: Array[String], dvc_section: DVS.DVSecti
 	return regex_r
 
 
-var col_meta_err := "#ff868bff"
-var invalid_regex_text := BB.color_wrap(BB.i_wrap("invalid regex"), col_meta_err)
 func _append_invalid_regex_text_to_label():
-	_append_text_to_label(invalid_regex_text)
+	_append_text_to_label(INVALID_REGEX_TEXT)
 
 
-var col_time := "#888888"
 func _format_time() -> String:
-	var time_bb := BB.color_wrap(u.get_time_string_from_system_mm_ss(), col_time)
+	var time_bb := BB.color_wrap(TimeUtils.get_time_string_from_system_mm_ss(), COL_TIME)
 	return time_bb
 
 
-var col_frame := "#5bac7ae3"
 func _format_frame(frame: Variant):
-	return BB.color_wrap("[" + str(frame) + "]", col_frame)
+	return BB.color_wrap("[" + str(frame) + "]", COL_FRAME)
 
 
 func _log_prefix(frame: Variant) -> String:

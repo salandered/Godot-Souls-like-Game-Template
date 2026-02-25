@@ -6,7 +6,7 @@ func initialise() -> void:
 	INCREASE_ROTATION = 1.1
 
 	# APEX
-	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Constants.BIG_MEANINGLESS_NUMBER)
+	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Const.BIG_MEANINGLESS_NUMBER)
 
 	blend_time.set_by_prev_action({
 		Leg.Act.sprint_to_idle: 0.4,
@@ -22,8 +22,6 @@ func on_enter_action(input_: InputPackage) -> void:
 	var _turn_dir := turn_direction_by_target_angle(_target_angle)
 	curr_turn.initialise(_target_angle, _turn_dir)
 
-
-	
 
 func update(input_: InputPackage, delta: float):
 	if not curr_turn.turn_completed:

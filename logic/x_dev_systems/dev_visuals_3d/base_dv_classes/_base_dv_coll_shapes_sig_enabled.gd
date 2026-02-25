@@ -60,6 +60,7 @@ func _initialise_visuals() -> void:
 	_initialise_visuals_imp()
 	__log_("_initialise_visuals", "count", len(_generated_nodes))
 
+
 @abstract func _initialise_visuals_imp() -> void
 
 

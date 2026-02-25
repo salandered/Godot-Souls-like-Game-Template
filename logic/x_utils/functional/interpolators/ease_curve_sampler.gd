@@ -1,6 +1,8 @@
 class_name EaseCurveSampler
 
+
 var curve: Curve
+
 
 func initialise(curve_: Curve) -> void:
 	assert(curve_)

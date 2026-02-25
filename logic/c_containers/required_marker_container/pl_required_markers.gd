@@ -11,7 +11,7 @@ class_name PlRequiredMarkers
 static var anim_to_required_marker: Dictionary[StringName, Array] = {
 
 	## one time
-	# TODO: add deeath # A.death: [],
+	# TODO: add death # A.death: [],
 
 	## loco 
 	A.loco.idle: [],

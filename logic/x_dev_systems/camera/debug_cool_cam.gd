@@ -185,7 +185,7 @@ func _mark_input_handled():
 ## TEXT INFO
 # region
 
-var pos_mode_to_icon = {
+const POS_MODE_TO_ICON = {
 	CamPosMode.TOP: "uid://d2lnia3y0gjy1",
 	CamPosMode.FRONT: "uid://hx7qx6sathf1",
 	CamPosMode.BACK: "uid://cixj0xwdexkia",
@@ -193,7 +193,7 @@ var pos_mode_to_icon = {
 	CamPosMode.RIGHT: "uid://cge33vbnhyuei",
 }
 
-var projection_to_icon = {
+const PROJECTION_TO_ICON = {
 	PROJECTION_PERSPECTIVE: "uid://bc8600hcpknd2",
 	PROJECTION_ORTHOGONAL: "uid://dygwusakuflu4",
 }
@@ -217,8 +217,8 @@ func get_status_text() -> String:
 	var zoom_val = size if projection == PROJECTION_ORTHOGONAL else fov
 	
 	# Using BB.image_20_wrap if you have that utility, otherwise remove the calls
-	var mode_icon = BB.image_20_wrap(pos_mode_to_icon.get(position_mode, ""))
-	var projection_icon = BB.image_20_wrap(projection_to_icon.get(projection, ""))
+	var mode_icon = BB.image_20_wrap(POS_MODE_TO_ICON.get(position_mode, ""))
+	var projection_icon = BB.image_20_wrap(PROJECTION_TO_ICON.get(projection, ""))
 
 	return pp.s(
 		mode_name, mode_icon, "\n",

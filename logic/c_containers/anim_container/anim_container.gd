@@ -67,7 +67,7 @@ func _accept_animations(
 		if not AnimDataValidator.validate_anim(anim, param_prefixes, param_tracks, required_markers):
 			invalid_animations.append(anim.anim_name)
 		else:
-			__log_("", anim.anim_name, "is valid")
+			__log_("_accept_animations", anim.anim_name, "is valid")
 
 	if invalid_animations.size() > 0:
 		__log_error("Found %d invalid animations: %s" % [invalid_animations.size(), ", ".join(invalid_animations)], "", "")
@@ -100,13 +100,13 @@ func __get_audio_tracks_data(native_anim: Animation, anim_id: StringName) -> Dic
 		var track_name: String = track_path.get_concatenated_names()
 		var key_count: int = native_anim.track_get_key_count(track_idx)
 
-		# __log_("[AudioEvents]", "track_idx", track_idx, "name", track_name, "keys", key_count)
+		# __log_("AudioEvents", "track_idx", track_idx, "name", track_name, "keys", key_count)
 		
 		for key_idx in key_count:
 			var timestamp: float = native_anim.track_get_key_time(track_idx, key_idx)
 			var stream: AudioStream = native_anim.audio_track_get_key_stream(track_idx, key_idx)
 			if not stream:
-				__log_error("[AudioEvents] stream is null", "", "continue", "key_idx/timestamp", key_idx, timestamp)
+				__log_error("stream is null", "AudioEvents", "continue", "key_idx/timestamp", key_idx, timestamp)
 				continue
 			
 			var start_offset: float = native_anim.audio_track_get_key_start_offset(track_idx, key_idx)
@@ -127,7 +127,7 @@ func __get_audio_tracks_data(native_anim: Animation, anim_id: StringName) -> Dic
 			result_dict[timestamp].append(audio_data)
 			audio_stream_total += 1
 			
-			# prints("[AudioEvents]", "added:", audio_data)
+			# __log_("AudioEvents", "added:", audio_data)
 	
 	if audio_track_count > 0:
 		__log_("[AudioEvents]", pp.anim_n(anim_id),
@@ -165,8 +165,7 @@ static func __get_animation_markers(animation: Animation) -> Dictionary[StringNa
 	return markers_dict
 
 
+## 
+
 func __LOG_B() -> bool:
 	return LogToggler.ANIM_CONTAINER_B
-
-func __LOG_INDENT() -> int:
-	return 0

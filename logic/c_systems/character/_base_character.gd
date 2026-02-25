@@ -13,31 +13,10 @@ var _bones: BaseCharBones
 var _visuals: BaseVisuals
 
 
-## not nullable after init
-func get_sig_container() -> BaseCharacterSignalContainer:
-	return _sig_container
+var PUSH_RIGID_BODIES_FORCE: float = 4.0
 
 
-## not nullable after init
-func get_movement() -> BaseCharacterMovement:
-	return _movement
-
-
-func get_sfx_system() -> CharacterSFXSystem:
-	return _sfx_system
-
-
-func get_look_at_manager() -> BaseLookAtManager:
-	return _look_at_manager
-
-
-func get_area_awareness() -> BaseAreaAwareness:
-	return _area_awareness
-
-
-##
-
-signal SIG_land_wave(char_glob_position: Vector3, anim: StringName)
+signal SIG_land_wave(char_glob_position: Vector3, anim_id: StringName)
 
 
 func __hard_dependencies() -> Array:
@@ -58,6 +37,9 @@ func __soft_dependencies() -> Array:
 	return super.__soft_dependencies() + ds
 
 
+## INITIALISATION
+# region
+
 func initialise_static_char_implementation() -> void:
 	# 'Moving Platfrom' from UI
 	# by default uses all, it's a known problem with RigidBodies at least (see Collision)
@@ -74,16 +56,13 @@ func initialise_static_char_implementation() -> void:
 func _initialise_common_char() -> void:
 	_sig_container = _for_init_sig_container()
 
-
 	_visuals = _for_init_visuals()
 	if _visuals:
 		_visuals.accept_model_data(self )
 
-
 	_bones = _for_init_bones()
 	if _bones:
 		_bones.accept_bones()
-	
 	
 	_initialise_area_awareness()
 
@@ -91,7 +70,6 @@ func _initialise_common_char() -> void:
 		_movement = ArrayUtils.get_only_one_or_null(get_descendants.base_character_movement(self ))
 		if _movement:
 			_movement.initialise(self , _area_awareness)
-
 
 	_initialise_char_sfx_systems()
 	
@@ -128,7 +106,6 @@ func _initialise_weapons_sfx():
 	##       for weapon we manage emitter here on character side, while its sfx system 
 	##       is managed by weapon itself. This is done because anim knowledge is on player side. 
 	##       Weapon wouldn't know when to play anim based sounds.
-	## NOTE: when character will be able to switch weapons, this part should be re-called on switch
 	var _weapon_id_to_emitter := _for_init_weapon_id_to_emitter()
 	var _weapons := _combat._get_all_registered_weapons()
 	for weapon: BaseWeapon in _weapons:
@@ -136,6 +113,29 @@ func _initialise_weapons_sfx():
 		if not error_.null_object(_emitter):
 			_emitter.initialise(weapon.get_sad_container(), weapon.get_signal_container())
 
+# endregion
+
+
+## not nullable after init
+func get_sig_container() -> BaseCharacterSignalContainer:
+	return _sig_container
+
+
+## not nullable after init
+func get_movement() -> BaseCharacterMovement:
+	return _movement
+
+
+func get_sfx_system() -> CharacterSFXSystem:
+	return _sfx_system
+
+
+func get_look_at_manager() -> BaseLookAtManager:
+	return _look_at_manager
+
+
+func get_area_awareness() -> BaseAreaAwareness:
+	return _area_awareness
 
 ##
 
@@ -143,8 +143,6 @@ func _initialise_weapons_sfx():
 ## abstract so u dont forget to use it instead of _ready()
 @abstract func initialise_base_char_implementation() -> void
 
-
-## cont
 @abstract func _for_init_sig_container() -> BaseCharacterSignalContainer
 @abstract func _for_init_sad_container() -> BaseCharacterSADContainer
 ##
@@ -162,9 +160,7 @@ func _initialise_weapons_sfx():
 # region __LOGS
 
 
-## are logs turned on. warn logs are always turned on.
 func __LOG_B() -> bool:
 	return false
-
 
 # endregion

@@ -67,16 +67,16 @@ static func label_set_font_size(label: Label, font_size: int):
 ## panel
 
 static func override_panel_alpha(panel: PanelContainer, alpha: float) -> void:
-	var style: StyleBox
+	var style_box: StyleBox
 	
-	if panel.has_theme_stylebox_override("panel"):
-		style = panel.get_theme_stylebox("panel").duplicate()
+	if panel.has_theme_stylebox_override(PropC.STYLEBOX.PANEL):
+		style_box = panel.get_theme_stylebox(PropC.STYLEBOX.PANEL).duplicate()
 	else:
-		style = panel.get_theme_stylebox("panel", "PanelContainer").duplicate()
+		style_box = panel.get_theme_stylebox(PropC.STYLEBOX.PANEL, PropC.THEME_TYPE.PANEL_CONTAINER).duplicate()
 
-	if style is StyleBoxFlat:
-		style.bg_color.a = alpha
-	elif style is StyleBoxTexture:
-		style.modulate_color.a = alpha
+	if style_box is StyleBoxFlat:
+		style_box.bg_color.a = alpha
+	elif style_box is StyleBoxTexture:
+		style_box.modulate_color.a = alpha
 
-	panel.add_theme_stylebox_override("panel", style)
+	panel.add_theme_stylebox_override(PropC.STYLEBOX.PANEL, style_box)

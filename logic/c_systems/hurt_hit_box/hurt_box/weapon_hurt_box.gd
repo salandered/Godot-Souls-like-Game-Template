@@ -74,14 +74,10 @@ func pp_name():
 	return pp.s(_char_name, _get_my_weapon().pp_name(), "🔻 HurtBox")
 
 
-# todo: what is this magic ...
-func _get_weapon_push_force() -> int:
-	var _r := 6
+func _get_weapon_push_force() -> float:
+	var _r := 6.0
 	if _get_my_weapon():
-		if _get_my_weapon().is_player():
-			_r = 6 if _get_my_weapon().get_weapon_id() != WeaponID.small_pinga_blade else 18
-		else:
-			_r = 25
+		return _get_my_weapon().PUSH_RIGID_BODIES_FORCE
 	return _r
 
 

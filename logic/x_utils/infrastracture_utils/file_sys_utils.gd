@@ -1,6 +1,7 @@
 class_name FileSystemUtils
 extends RefCounted
 
+
 ## Loads all images from a directory recursively.
 ## Set sort_files to false if you want the original file system order (often random/fastest).
 static func load_images_recursive(root_path: String, sort_files: bool = true) -> Array[Texture2D]:
@@ -23,7 +24,7 @@ static func get_image_paths_recursive(path: String) -> Array[String]:
 	
 	if dir:
 		dir.list_dir_begin()
-		var file_name = dir.get_next()
+		var file_name := dir.get_next()
 		
 		while file_name != "":
 			if dir.current_is_dir():

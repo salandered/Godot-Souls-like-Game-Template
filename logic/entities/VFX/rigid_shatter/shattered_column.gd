@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	var count: int = 0
 	
-	for shatter: RigidBody3D in get_descendants.rigid_bodies(self):
+	for shatter: RigidBody3D in get_descendants.rigid_bodies(self ):
 		__log_("setting script", RIGID_SHATTER_SCRIPT)
 		shatter.set_script(RIGID_SHATTER_SCRIPT)
 		shatter._ready()
@@ -46,7 +46,7 @@ func _ready() -> void:
 	__log_("~~", "ready of shattered column", count, "were initialised")
 	
 	
-	await FrameUtils.wait_process_frames(30)
+	await FrameUtils.wait_process_frames(self , 30)
 	_sfx_effect(false)
 
 

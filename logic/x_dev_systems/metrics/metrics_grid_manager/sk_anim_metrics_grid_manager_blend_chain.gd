@@ -83,11 +83,11 @@ func _update_animator_metrics() -> void:
 		)
 
 
-	var overlay_anim := ""
+	var overlay_anim := Const.EMPTY_SNAME
 	var co := _overlay_modifier.curr_overlay
 	if co and co.playback:
 		if co.curr_weight <= 0.0:
-			overlay_anim = ""
+			overlay_anim = Const.EMPTY_SNAME
 		else:
 			overlay_anim = co.playback.anim.anim_name
 

@@ -1,8 +1,10 @@
-extends BaseInterpolator
 ## its actually more like evaluator: just returning raw curve data
 class_name EaseCurveInterpolator
+extends BaseInterpolator
+
 
 var curve: Curve
+
 
 ## idempotent
 func initialise(curve_: Curve, duration_: float) -> void:

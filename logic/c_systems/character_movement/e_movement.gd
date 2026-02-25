@@ -15,7 +15,6 @@ func is_player() -> bool:
 
 ## PLAYER UTILS
 # region
-# #ffbea0
 func distance_to_player() -> float:
 	return get_character().global_position.distance_to(get_player().global_position)
 
@@ -56,12 +55,11 @@ func get_player_position_grounded() -> Vector3:
 ## MOVING
 # region
 
-
 func look_at_player(grounded: bool = false):
 	var target := get_player().global_position
 	if grounded:
 		target = get_player_position_grounded()
-	u.safe_look_at(get_character(), target, Vector3.UP, true)
+	tu.safe_look_at(get_character(), target, Vector3.UP, true)
 
 
 func move_rotate_towards_player(delta: float, speed_config: SpeedConfig = null):

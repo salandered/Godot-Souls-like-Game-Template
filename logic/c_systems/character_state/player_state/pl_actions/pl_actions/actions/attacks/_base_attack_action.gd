@@ -48,7 +48,7 @@ func get_active_weapon_id() -> StringName:
 	var _ids := combat.get_active_weapon_ids()
 	if len(_ids) != 1:
 		__log_warn(pp.s("currently 1 active weapon is expected for player, got", len(_ids)))
-		return ""
+		return Const.EMPTY_SNAME
 	return _ids[0]
 
 	
@@ -66,7 +66,7 @@ func _combat_set_hit_data():
 
 func _combat_update_is_attacking(__log: bool = false):
 	var _weapon_id := get_active_weapon_id()
-	if _weapon_id != "":
+	if _weapon_id != Const.EMPTY_SNAME:
 		player_sm.combat.update_weapon_is_attacking(_weapon_id, is_weapon_hurts(_weapon_id, __log))
 
 func _combat_reset():
@@ -160,4 +160,4 @@ var LOG_HURT_B: bool = false
 
 func __log_hurt():
 	if LOG_HURT_B:
-		print_.prefix(pp.s("// HURT", time_spent(), effective_time_spent(), get_actual_time_spent(), get_real_time_spent()))
+		print_.msg_raw(pp.s("// HURT", time_spent(), effective_time_spent(), get_actual_time_spent(), get_real_time_spent()))

@@ -25,16 +25,18 @@ transform = Transform3D(1, -4.3276422e-09, -1.3857027e-09, 4.327634e-09, 0.81401
 shape = SubResource("CapsuleShape3D_hj5gq")
 debug_color = Color(0.84, 0.06719998, 0.28616, 1)
 
-[node name="DevVisualisePathWeapon" parent="WeaponHurtBox" unique_id=2094793977 instance=ExtResource("3_sectu")]
-visible = false
+[node name="DVWeaponHurtBox" parent="WeaponHurtBox" unique_id=1566061248 node_paths=PackedStringArray("weapon") instance=ExtResource("4_v83gh")]
+weapon = NodePath("../..")
+_char_type = 1
+
+[node name="dv" type="Marker3D" parent="WeaponHurtBox" unique_id=946707224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.821266e-10, 0.671085, -0.10497524)
+
+[node name="DVTrailWeapon" parent="WeaponHurtBox/dv" unique_id=2094793977 instance=ExtResource("3_sectu")]
 trail_radius = 0.02
 min_velocity = 6.0
 max_velocity = 15.0
 preview_in_editor = true
-_char_type = 1
-
-[node name="DVWeaponHurtBox" parent="WeaponHurtBox" unique_id=1566061248 node_paths=PackedStringArray("weapon") instance=ExtResource("4_v83gh")]
-weapon = NodePath("../..")
 _char_type = 1
 
 [node name="Visuals" type="Node3D" parent="." unique_id=2044609896]

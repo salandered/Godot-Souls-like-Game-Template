@@ -75,7 +75,7 @@ static func calculate_reaction_for_pl_action(hit: HitData, curr_action: StringNa
 	if hit.damage < 1.0:
 		overlay_weight = 0.0
 	else:
-		overlay_weight = _pick_overlay_weight(hit, Constants.ENEMY_MAX_HIT_DAMAGE - 0.5)
+		overlay_weight = _pick_overlay_weight(hit, Const.ENEMY_MAX_HIT_DAMAGE - 0.5)
 	
 	var anim_id_: StringName
 	anim_id_ = _pick_react_anim_for_player(hit)
@@ -96,7 +96,7 @@ static func calculate_reaction_for_enemy(hit: HitData, curr_leaf_state: StringNa
 	if hit.damage < 1.0:
 		overlay_weight = 0.0
 	else:
-		overlay_weight = _pick_overlay_weight(hit, Constants.PLAYER_MAX_HIT_DAMAGE)
+		overlay_weight = _pick_overlay_weight(hit, Const.PLAYER_MAX_HIT_DAMAGE)
 	
 	var anim_id_: StringName
 	anim_id_ = _pick_react_anim_for_enemy(hit)
@@ -198,10 +198,14 @@ static func _pick_bone_mask_for_player(hit: HitData, action_name: StringName) ->
 ## return "" if no reaction calculated
 static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> StringName:
 	var _pl_state: StringName
-	_pl_state = DictUtils.safe_get_dict_key(enemy_attack_to_pl_state_interruption, hit_from_enemy.anim_id, "", WL.SILENT)
+	_pl_state = DictUtils.safe_get_dict_key(
+		enemy_attack_to_pl_state_interruption,
+		hit_from_enemy.anim_id,
+		Const.EMPTY_SNAME,
+		WL.SILENT)
 	__log_("Hit", pp.in_q(hit_from_enemy.anim_id), "-> Player State Interruption", pp.in_q(_pl_state))
 
-	if _pl_state != "":
+	if _pl_state != Const.EMPTY_SNAME:
 		SigUtils.safe_emit(
 			GlobalSignal.SIG_player_reacted_on_hit, {
 				SPS.attack_dir_field: AttackDirection.name_(hit_from_enemy.attack_dir),
@@ -213,7 +217,7 @@ static func calculate_reaction_for_pl_state(hit_from_enemy: HitData) -> StringNa
 
 ## may return ""
 static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> StringName:
-	var _e_state = ""
+	var _e_state := Const.EMPTY_SNAME
 	if hit_from_pl.anim_id in [A.attack.stab_attack_1, A.attack.stab_attack_2]:
 		if hit_from_pl.weapon_id == WeaponID.smith_sword:
 			pass
@@ -222,11 +226,15 @@ static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> StringNa
 	else:
 	## usual logic
 		var _e_state_and_probability: Array
-		_e_state_and_probability = DictUtils.safe_get_dict_key(pl_attack_to_enemy_state_interruption, hit_from_pl.anim_id, ["", 0.0], WL.SILENT)
-		_e_state = _e_state_and_probability[0] if ra.chance(_e_state_and_probability[1]) else ""
+		_e_state_and_probability = DictUtils.safe_get_dict_key(
+			pl_attack_to_enemy_state_interruption,
+			hit_from_pl.anim_id,
+			[Const.EMPTY_SNAME, 0.0],
+			WL.SILENT)
+		_e_state = _e_state_and_probability[0] if ra.chance(_e_state_and_probability[1]) else Const.EMPTY_SNAME
 		__log_("Hit", pp.in_q(hit_from_pl.anim_id), "-> Enemy State Interruption. State/probability/result",
 			pp.s(_e_state_and_probability[0], _e_state_and_probability[1], _e_state))
-	if _e_state != "":
+	if _e_state != Const.EMPTY_SNAME:
 		SigUtils.safe_emit(
 			GlobalSignal.SIG_enemy_reacted_on_hit, {
 				SPS.attack_dir_field: AttackDirection.name_(hit_from_pl.attack_dir),
@@ -240,4 +248,4 @@ static func calculate_reaction_for_enemy_state(hit_from_pl: HitData) -> StringNa
 
 static func __log_(...parts: Array):
 	if LogToggler.REACT_UTILS_B:
-		print_.prefix_s("[🗣️ReactionOnHits]", pp.list_(parts))
+		print_.msg_raw("🗣️ReactionOnHits", pp.list_(parts))

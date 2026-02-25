@@ -44,8 +44,8 @@ func on_enter_action(input_: InputPackage) -> void:
 	match PREV_ACTION:
 		PS.Act.dodge:
 			var result := _adjust_extra_speed_to_dodge_direction()
-			_speed_extra_Z = result["Z"]
-			_speed_extra_X = result["X"]
+			_speed_extra_Z = result.z
+			_speed_extra_X = result.x
 	
 	var r := calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
 	_final_extra_speed_Z = r.z
@@ -53,7 +53,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
 
 
-func _adjust_extra_speed_to_dodge_direction() -> Dictionary[String, float]:
+func _adjust_extra_speed_to_dodge_direction() -> Vector3:
 	## animator manager treats prev anim as curr because we are in on_enter_action
 	var prev_anim_id := get_animator_manager().get_curr_anim().anim_id
 	# todo: should not use animations but strafe dir
@@ -74,4 +74,4 @@ func _adjust_extra_speed_to_dodge_direction() -> Dictionary[String, float]:
 	else:
 		speed_z = 0.0
 		speed_x = 0.0
-	return {"X": speed_x, "Z": speed_z}
+	return Vector3(speed_x, 0.0, speed_z)

@@ -1,6 +1,7 @@
 class_name SimpleAudioLooper3D
 extends Node3DLogger
 
+
 @export_group("Audio Configuration")
 @export var stream: AudioStream
 @export var volume_db: float = 0.0
@@ -9,18 +10,16 @@ extends Node3DLogger
 @export var max_distance: float = 20.0
 @export var max_polyphony: int = 1
 @export var panning_strength: float = 0.5
-@export var bus: = BusID.GAME_SFX
+@export var bus := BusID.GAME_SFX
 
 @export_group("Loop Settings")
 @export var loop_enabled: bool = true
 
 ## Start time in seconds (where the loop begins)
 @export var loop_start_time: float = 0.0
-
-## End time in seconds. If set to 0.0, it uses the full stream length.
+## End time in seconds. If set to 0.0, it uses the full stream length
 @export var loop_end_time: float = 0.0
-
-## Duration of the Fade In (at start) and Fade Out (at end).
+## Duration of the Fade In (at start) and Fade Out (at end)
 @export var fade_duration: float = 1.0
 
 
@@ -69,7 +68,7 @@ func _start_loop_sequence() -> void:
 		push_warning("SimpleAudioLooper3D: Loop duration is <= 0. check start/end times.")
 		return
 
-	# Calculate safe fade times to prevent overlapping if clip is super short
+	# safe fade times to prevent overlapping if clip is super short
 	# e.g. duration 1.0s and fade 1.0s -> fade both in/out for 0.5s
 	var effective_fade_in := minf(fade_duration, play_duration / 2.0)
 	var effective_fade_out := minf(fade_duration, play_duration / 2.0)

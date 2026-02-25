@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="17_v8c2r"]
 [ext_resource type="Script" uid="uid://ddd1lik7yh6ka" path="res://logic/c_systems/weapon/fighter_weapon/v_arm_weapon.gd" id="20_jqa4j"]
 [ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualiseTrailWeapon.tscn" id="22_gk5iv"]
-[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="22_v8c2r"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy_camera/camera_target/CameraTarget.tscn" id="22_v8c2r"]
 [ext_resource type="Script" uid="uid://c2fafl8mfpxh7" path="res://logic/c_systems/anim_manager/simple_animator_manager.gd" id="23_iefnp"]
 [ext_resource type="PackedScene" uid="uid://88lj8tl6runn" path="res://logic/c_containers/anim_container/AnimContainer.tscn" id="24_lijjc"]
 [ext_resource type="Script" uid="uid://dh6rl5nvqstpj" path="res://logic/c_containers/anim_param_container/data/mech_fighter_anim_parameters.gd" id="24_ydmfp"]

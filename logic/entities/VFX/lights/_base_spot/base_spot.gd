@@ -40,8 +40,8 @@ func _ready() -> void:
 		
 	_apply_all_properties()
 
-	if not u.is_editor():
-		u.hide_dev_visuals(self )
+	if not eu.is_editor():
+		tu.hide_dev_visuals(self )
 
 
 func _apply_all_properties() -> void:
@@ -59,7 +59,7 @@ func _apply_mist() -> void:
 func _apply_debug_visuals() -> void:
 	if not __csg:
 		return
-	if u.is_editor():
+	if eu.is_editor():
 		__csg.visible = __csg_editor_view
 	else:
 		__csg.visible = __csg_game_view

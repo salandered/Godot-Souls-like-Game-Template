@@ -16,5 +16,5 @@ func _ready_implementation() -> void:
 	
 	get_particles().emitting = true
 
-	if not u.is_editor():
+	if not eu.is_editor():
 		get_particles().finished.connect(queue_free)

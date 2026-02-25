@@ -9,7 +9,7 @@ extends PHEWeapon
 
 
 func initialise_implementation() -> void:
-	return
+	PUSH_RIGID_BODIES_FORCE = 20.0
 
 
 func validate_visuals() -> void:

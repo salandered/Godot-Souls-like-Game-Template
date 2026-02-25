@@ -2,6 +2,7 @@
 class_name FireStatic
 extends FlickerOmni
 
+
 @onready var test_visual_fire: MeshInstance3D = $Effect/test_visual_fire
 
 
@@ -49,7 +50,7 @@ func get_particles() -> GPUParticles3D:
 
 
 func _apply_sound_settings():
-	var asps := get_descendants.audio_stream_players_3D(self)
+	var asps := get_descendants.audio_stream_players_3D(self )
 	if len(asps) >= 1:
 		var _asp := asps[0]
 		if play_sound and audio_stream:

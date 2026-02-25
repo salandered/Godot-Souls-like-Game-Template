@@ -3,13 +3,13 @@ class_name BoneTools
 
 
 ## soft 
-static func validate_skeleton(skeleton: Skeleton3D) -> bool: # {int: String}
+static func validate_skeleton(skeleton: Skeleton3D) -> bool:
 	if not skeleton:
 		return false
 	var bone_count := skeleton.get_bone_count()
-	if bone_count != Constants.BONE_COUNT_53:
+	if bone_count != Const.BONE_COUNT_53:
 		# soft warn
-		# print_.note(false, "bone_count != Constants.BONE_COUNT", "PlayerModifierAnimator", pp.s("we always use", Constants.BONE_COUNT, ", regardless."), bone_count)
+		# print_.note(false, "bone_count != Const.BONE_COUNT", "PlayerModifierAnimator", pp.s("we always use", Const.BONE_COUNT, ", regardless."), bone_count)
 		return false
 	return true
 
@@ -20,7 +20,7 @@ static func calculate_bone_idx_to_track(skeleton: Skeleton3D) -> Dictionary[int,
 	var full_body := BoneMask.get_full_body_with_root()
 
 	for bone_idx in full_body:
-		result[bone_idx] = Constants.BONE_TRACK_PREFIX + skeleton.get_bone_name(bone_idx)
+		result[bone_idx] = Const.BONE_TRACK_PREFIX + skeleton.get_bone_name(bone_idx)
 
 	return result
 

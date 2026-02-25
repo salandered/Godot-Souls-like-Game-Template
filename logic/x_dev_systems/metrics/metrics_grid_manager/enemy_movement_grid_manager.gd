@@ -21,7 +21,7 @@ func nth_frame() -> int:
 
 func initialise_implementation() -> void:
 	super.initialise_implementation()
-	var _enemy := Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
+	var _enemy := Groups.get_first_phe_bg_by_group_with_tag(self , Const.DEMO_ENEMY_TAG)
 
 	if _enemy:
 		_e_movement = _enemy.get_e_movement()
@@ -38,7 +38,7 @@ func _update_enemy_metrics() -> void:
 
 	var dist := e_m.distance_to_player()
 	
-	var angle_deg := float(pp.rad2deg(e_m.signed_angle_to_player(), false))
+	var angle_deg := pp.frad2deg(e_m.signed_angle_to_player())
 	
 	_metrics_grid.update_metric(
 		"Dist / Angle to Player",

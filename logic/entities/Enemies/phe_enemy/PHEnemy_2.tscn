@@ -98,7 +98,7 @@
 [ext_resource type="Script" uid="uid://dgk6yfubccslp" path="res://logic/c_systems/character_movement/e_movement.gd" id="94_e6is3"]
 [ext_resource type="PackedScene" uid="uid://cwr8dav8jomc3" path="res://logic/x_dev_systems/dev_visuals_3d/dv_skeleton/DVSkeleton.tscn" id="94_l3uka"]
 [ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/x_dev_systems/dev_visuals_3d/dv_area_contact.gd" id="95_0bllo"]
-[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="95_8u138"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy_camera/camera_target/CameraTarget.tscn" id="95_8u138"]
 [ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/c_systems/awareness/enemy_awareness.gd" id="96_asrhk"]
 [ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/c_systems/awareness/downcast/downcast.tscn" id="97_nv3pf"]
 [ext_resource type="Script" uid="uid://0c3j8t0i4rro" path="res://logic/c_systems/feelings/ui_feelings/phe_ui_feelings.gd" id="99_wlqod"]

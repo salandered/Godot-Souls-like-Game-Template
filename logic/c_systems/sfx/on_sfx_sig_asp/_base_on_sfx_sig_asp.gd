@@ -83,7 +83,7 @@ func on_signal(payload: Dictionary[StringName, Variant]) -> void:
 		return
 	# __log_(self.sfx_type, "on_signal", "triggered")
 	## dynamic values are reset on every on_signal
-	var base_vol_db := Constants.SFX_ASP_BASE_VOL_DB
+	var base_vol_db := Const.SFX_ASP_BASE_VOL_DB
 	var base_pitch := 1.0
 
 	base_vol_db += asp_config.vol_db_change
@@ -144,7 +144,7 @@ func _get_key_from_payload(key: StringName, payload: Dictionary[StringName, Vari
 		var modifier: Variant = payload[key]
 		if modifier is StringName:
 			return modifier
-	return ""
+	return Const.EMPTY_SNAME
 
 
 # endregion

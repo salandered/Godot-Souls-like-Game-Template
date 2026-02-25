@@ -27,7 +27,7 @@ func _supported_signal_pairs() -> Array[Array]:
 
 
 func _on_SIG_enemy_state_changed(payload: Dictionary[StringName, Variant]):
-	_on_SIG_string_payload(se_state_info, payload, SPS.state_name_field, _str_replacers, dlc_all_features_preset)
+	_on_SIG_sname_payload(se_state_info, payload, SPS.state_name_field, _str_replacers, dlc_all_features_preset)
 
 
 func _on_SIG_se_reacted_on_hit(payload: Dictionary[StringName, Variant]):

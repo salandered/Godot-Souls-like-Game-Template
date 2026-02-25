@@ -8,7 +8,6 @@ extends Label
 
 @export var version_prefix: String = "v"
 
-
 const NO_VERSION_STRING: String = "0.0.0"
 
 

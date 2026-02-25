@@ -62,7 +62,7 @@ func _process_after_visalisation(delta: float) -> void:
 ## try not to override but use abstract methods
 func _process(delta: float) -> void:
 	## won't be running in editor if not preview_in_editor
-	if u.is_editor() and not preview_in_editor:
+	if eu.is_editor() and not preview_in_editor:
 		return
  	
 	_process_before_visalisation(delta)

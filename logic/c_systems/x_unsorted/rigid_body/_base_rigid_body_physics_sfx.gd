@@ -99,7 +99,7 @@ func _on_body_entered(_body):
 	var impact_force := velocity_change.length()
 	__log_("", "impact_force vel_change/prev_vel/linear_vel", impact_force, velocity_change, _previous_velocity, linear_velocity)
 	
-	var current_time := u.get_curr_time_ticks_sec()
+	var current_time := TimeUtils.get_curr_time_ticks_sec()
 	if impact_force > get_impact_threshold() and (current_time -_last_sound_time) > get_sound_cooldown():
 		# scale volume by impact force
 		var volume := remap(impact_force, get_impact_threshold(), get_impact_threshold() * 3, 0.5, 1.0)

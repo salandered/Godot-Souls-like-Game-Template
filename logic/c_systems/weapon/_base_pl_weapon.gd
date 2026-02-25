@@ -26,5 +26,5 @@ func translate_combat_input_to_state(combat_actions: Array[StringName]) -> Array
 	if not combat_actions.is_empty() and _translated.is_empty():
 		__log_error(pp.s("BaseWeapon", get_weapon_id(), "has no map for actions", combat_actions, "mapping", _input_action_to_state))
 	# if not _translated.is_empty():
-		# print_.fight("PlCombat", pp.s("actions ", combat_actions, "translatedToSt", _translated))
+		# __log_("actions ", combat_actions, "translatedToSt", _translated)
 	return _translated

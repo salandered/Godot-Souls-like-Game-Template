@@ -25,10 +25,10 @@ extends BaseDVCDependentNode
 
 
 func initialise() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		return
 
-	await FrameUtils.wait_process_frames(10)
+	await FrameUtils.wait_process_frames(self , 10)
 
 	_initialise_implementation()
 

@@ -19,10 +19,10 @@ const DEF_draw_snapped_hits := true
 
 
 func initialise() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		return
 	
-	await FrameUtils.wait_process_frames(4)
+	await FrameUtils.wait_process_frames(self , 4)
 	
 	if not char_hit_box:
 		return

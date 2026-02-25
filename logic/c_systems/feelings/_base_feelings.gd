@@ -13,7 +13,7 @@ var _current_health: float
 
 
 func _ready() -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
 	else:
@@ -69,7 +69,7 @@ func check_status(status_name: String) -> bool:
 
 
 func __set_specific_health(amount: float):
-	if u.is_release():
+	if eu.is_release():
 		return
 	_current_health = amount
 

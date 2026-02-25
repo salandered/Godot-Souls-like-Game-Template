@@ -1,5 +1,6 @@
-extends RefCounted
 class_name BaseTimer
+extends RefCounted
+
 
 var duration: float = -1.0
 var timer: float = 0.0

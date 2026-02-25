@@ -46,7 +46,7 @@ func time_remaining() -> float: # ✔️
 		print_.note(false, "direct_time_remaining - not _curr_anim, return 0.0")
 		return 0.0
 	if _curr_anim.is_looping:
-		return Constants.BIG_MEANINGLESS_NUMBER
+		return Const.BIG_MEANINGLESS_NUMBER
 	return _effective_duration() - time_spent() # or: duration - eff time spent
 
 

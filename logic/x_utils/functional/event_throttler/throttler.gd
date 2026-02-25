@@ -1,18 +1,22 @@
 class_name EventThrottler
 extends RefCountedLogger
 
+
 var _THROTTLE_WINDOW: float
 var _HISTORY_WINDOW: float
 var _history: Dictionary[Variant, float] = {}
+
 
 var _last_cleanup_time: float
 var _auto_cleanup_interval: float
 
 var _pp_name: String
 var __log: bool
+
 ## NOTE: Dict key is untyped.
 ## expected that will be int if using built Godot instand_id
-## strings r also fine
+## strings are also fine
+
 
 func _init(
 		window_seconds_: float,
@@ -30,6 +34,7 @@ func _init(
 	self._pp_name = pp_name_
 	self.__log = __log__
 
+
 ## Returns 'true' if the event is "too soon" and should be skipped
 func is_throttled(key: Variant) -> bool:
 	if not key in _history:
@@ -38,12 +43,12 @@ func is_throttled(key: Variant) -> bool:
 	var last_time: float = _history[key]
 	var delta_time := _get_curr_time() - last_time
 	var _r: bool = delta_time < _THROTTLE_WINDOW
-	if _r:
+	if _r and __log:
 		__log_("throttled!" + em.mark_alt, "using", key, "and", delta_time, "vs", _THROTTLE_WINDOW)
 	return _r
 
 
-## Updates the timestamp for the given key.
+## Updates the timestamp for the given key
 func record_event(key: Variant, auto_cleanup: bool = true) -> void:
 	var now := _get_curr_time()
 	_history[key] = now
@@ -53,7 +58,7 @@ func record_event(key: Variant, auto_cleanup: bool = true) -> void:
 			_last_cleanup_time = now
 
 
-## Removes old entries to prevent memory leaks.
+## Removes old entries to prevent memory leaks
 ## Call this or use auto_cleanup
 func cleanup() -> void:
 	var now := _get_curr_time()
@@ -68,18 +73,17 @@ func cleanup() -> void:
 
 
 func _get_curr_time() -> float:
-	return u.get_curr_time_ticks_sec()
+	return TimeUtils.get_curr_time_ticks_sec()
 
 
 ## __LOGS
 # region
 
 func pp_name() -> String:
-	return pp.s(_pp_name, "Throttler") if _pp_name else ObjUtils.construct_obj_pp_name(self)
+	return pp.s(_pp_name, "Throttler") if _pp_name != "" else super.pp_name()
 
 
 func __LOG_B() -> bool:
-	# return __log
 	return false
 
 func __LOG_INDENT() -> int:

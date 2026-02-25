@@ -22,7 +22,7 @@ func nth_frame() -> int:
 
 func initialise_implementation() -> void:
 	super.initialise_implementation()
-	var _enemy := Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
+	var _enemy := Groups.get_first_phe_bg_by_group_with_tag(self , Const.DEMO_ENEMY_TAG)
 	if _enemy:
 		_animator = _enemy.get_animator_manager()
 		if _animator:
@@ -46,17 +46,17 @@ func _update_animator_metrics() -> void:
 	_metrics_grid.update_metric("Animation", pp.anim_n(anim_id, true), true, 2)
 
 
-	var overlay_anim := ""
+	var overlay_anim_name := ""
 	var co := _overlay_modifier.curr_overlay
 	if co and co.playback:
 		if co.curr_weight <= 0.0:
-			overlay_anim = ""
+			overlay_anim_name = ""
 		else:
-			overlay_anim = co.playback.anim.anim_name
+			overlay_anim_name = co.playback.anim.anim_name
 
 	_metrics_grid.update_metric(
 		"Overlay anim",
-		overlay_anim,
+		overlay_anim_name,
 		false,
 		)
 

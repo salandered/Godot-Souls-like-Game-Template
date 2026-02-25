@@ -16,10 +16,6 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func get_character() -> BaseStaticCharacter:
-	return _character
-
-
 func _initialise_implementation() -> void:
 	super._initialise_implementation()
 	_update_metric(ts_curr_sbs_2, DEF_NO_VALUE)
@@ -27,10 +23,14 @@ func _initialise_implementation() -> void:
 	_update_metric(ts_curr_sbs_4, DEF_NO_VALUE)
 
 	_char_type = DVS.CharacterType.HSM_ENEMY
-	_character = Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
+	_character = Groups.get_first_phe_bg_by_group_with_tag(self , Const.DEMO_ENEMY_TAG)
 	if not _character:
 		__log_warn_soft("get_first_phe_bg_by_group returned null")
 
+
+func get_character() -> BaseStaticCharacter:
+	return _character
+	
 
 func _process_imp(delta: float):
 	_update_metric_with_depth(ts_curr_sbs_2, 2)

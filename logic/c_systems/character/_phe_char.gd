@@ -11,17 +11,14 @@ extends BaseEnemyCharacter
 @export var push_rigid: bool = true
 @export var allow_move_and_slide: bool = true
 
-
 @onready var config: PHEConfig = %Config
 @onready var container: PHEContainer = %StatesContainer
 
 @onready var phe_feelings: PHEFeelings = $PHEFeelings
 @onready var _top: BasePHEState = %_Top
 
-
 ## anim
 @onready var native_player: AnimationPlayer = %NativePlayer
-
 
 ## sfx
 @onready var e_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %EAnimSFXSigEmitter
@@ -50,8 +47,6 @@ var visuals: Array[MeshInstance3D]
 
 var _curr_leaf: BasePHELeaf
 var _prev_leaf: BasePHELeaf
-
-var push_rigid_bodies_force: float = 8.0
 
 
 signal SIG_angry_raised
@@ -105,6 +100,7 @@ func __soft_dependencies() -> Array:
 
 func initialise_base_char_implementation() -> void:
 	super.initialise_base_char_implementation()
+	PUSH_RIGID_BODIES_FORCE = 8.0
 
 	char_type = DVS.CharacterType.HSM_ENEMY
 
@@ -129,7 +125,6 @@ func initialise_base_char_implementation() -> void:
 		_initialise_sm()
 
 
-## cont
 func _for_init_sig_container() -> BaseCharacterSignalContainer:
 	return EnemySignalContainer.new()
 func _for_init_sad_container() -> BaseCharacterSADContainer:
@@ -138,7 +133,7 @@ func _for_init_sad_container() -> BaseCharacterSADContainer:
 ## anim
 func _for_init_native_player() -> AnimationPlayer:
 	return native_player
-##
+
 func _for_init_visuals() -> BaseVisuals:
 	return null ## todo: use in enemy
 func _for_init_bones() -> BaseCharBones:
@@ -162,7 +157,7 @@ func _initialise_sm():
 	fatigue_raised = false
 	state_machine._on_enter_state()
 	if process_disabled_on_init:
-		# await FrameUtils.wait_physics_frames(2)
+		# await FrameUtils.wait_physics_frames(self, 2)
 		set_physics_process(false)
 
 
@@ -190,8 +185,7 @@ func update_curr_leaf_state(next_state: BasePHELeaf) -> StringName:
 	var next_state_name := next_state.state_name
 
 	# if next_state_name == curr_state_name:
-		# print_.phe_sm(em.pin, "✖️🚸 came with the same state " + curr_state_name)
-
+		# print_preset.phe_sm(em.pin, "✖️🚸 came with the same state " + curr_state_name)
 	# print_.dev("[[]]", pp.s(next_act_name, "is set for curr |",
 		# curr_act_name, "moved to prev"), 18)
 	
@@ -212,10 +206,10 @@ func update_state_history(state_name_: StringName):
 
 
 func _physics_process(delta: float) -> void:
-	if u.is_editor(): return
+	if eu.is_editor(): return
 	
 	super._physics_process(delta)
-	if u.is_nth_frame(10):
+	if FrameUtils.is_nth_frame(10):
 		basis = basis.orthonormalized()
 
 	state_machine._update(delta)
@@ -224,7 +218,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 	if push_rigid:
-		PushRigidBodies.push_rigid_bodies_by_char(self , push_rigid_bodies_force)
+		PushRigidBodies.push_rigid_bodies_by_char(self , PUSH_RIGID_BODIES_FORCE)
 
 	if death_raised:
 		_on_death_raised()
@@ -247,7 +241,6 @@ func is_invincible() -> bool:
 func reset_position(y_offset: float = 0.0) -> void:
 	transform.origin = _start_position
 	transform.origin.y += y_offset
-	# prints("reset_position", y_offset)
 
 
 func _on_death_raised() -> void:
@@ -263,21 +256,18 @@ func _on_death_raised() -> void:
 	
 	SigUtils.safe_emit_no_payload(SIG_death_raised)
 
-	print_.prefix("camera_target.make_inactive()")
 	camera_target.make_inactive()
-
 
 	_on_death_raised_implementation()
 	
-	await FrameUtils.wait_process_frames(5)
-	print_.prefix("coll_collider.disabled = true")
+	await FrameUtils.wait_process_frames(self , 5)
 
 	_shrink_coll_capsule()
 
 	self.collision_layer = Collision.Layers.DEBRIS_COL
 	self.collision_mask = Collision.Masks.DEBRIS_COL_MASK
 		
-	await FrameUtils.wait_process_frames(2)
+	await FrameUtils.wait_process_frames(self , 2)
 	self.set_process(false)
 	self.set_physics_process(false)
 	var _look_at_manager_: ELookAtManager = get_look_at_manager()
@@ -341,7 +331,7 @@ func get_power_attacks_state_names() -> Array[StringName]:
 const AIR_WAVE_2 = preload("uid://cxfgvp3futm7q")
 
 
-func _on_sig_land_wave(char_glob_position: Vector3, anim: StringName) -> void:
+func _on_sig_land_wave(char_glob_position: Vector3, anim_id: StringName) -> void:
 	if not AIR_WAVE_2:
 		return
 
@@ -349,4 +339,4 @@ func _on_sig_land_wave(char_glob_position: Vector3, anim: StringName) -> void:
 
 	get_tree().current_scene.add_child(wave)
 
-	wave.spawn_shockwave_at_position(char_glob_position, anim)
+	wave.spawn_shockwave_at_position(char_glob_position, anim_id)

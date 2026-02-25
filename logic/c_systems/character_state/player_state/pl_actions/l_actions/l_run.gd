@@ -53,7 +53,7 @@ func initialise() -> void:
 
 
 func on_enter_action(input_: InputPackage):
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 
 	var _inherited_speed := pm().get_curr_velocity_len()
 	speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, accel_from_idle_time)
@@ -86,7 +86,7 @@ func on_enter_action(input_: InputPackage):
 			angular_sp.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.5)
 
 func on_exit_action():
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 	get_animator_manager().reset_global_speed_scale()
 
 
@@ -156,7 +156,7 @@ func animate(): # ▶️
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if u.is_release():
+	if eu.is_release():
 		return
 	SPEED_BOOST = InputUtils._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 2, RawAction.DEV_speed_down, RawAction.DEV_speed_up, true)
 
@@ -177,11 +177,11 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 # from on enter match turn
 	# var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
 	# if raw_turn_data == null:
-		# prints(u.sfr(), "no 'turn_data' data. assuming turn completed")
+		# prints(FrameUtils.sfr(), "no 'turn_data' data. assuming turn completed")
 		# curr_turn.hard_complete()
 	# else:
 		# curr_turn.initialise_from_dict(raw_turn_data)
-		# prints(u.sfr(), " Inherited turn:", str(curr_turn))
+		# prints(FrameUtils.sfr(), " Inherited turn:", str(curr_turn))
 #--------------------------------------------
 # from update
 	# if COMPLETE_ROOT_TURN_FEATURE and not curr_turn.turn_completed:

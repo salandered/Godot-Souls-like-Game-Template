@@ -6,8 +6,8 @@ var raw_action: StringName
 var is_pressed: bool = false
 var is_just_pressed: bool = false
 var is_just_released: bool = false
-var last_press_time: float = - Constants.BIG_MEANINGLESS_NUMBER
-var last_release_time: float = - Constants.BIG_MEANINGLESS_NUMBER
+var last_press_time: float = - Const.BIG_MEANINGLESS_NUMBER
+var last_release_time: float = - Const.BIG_MEANINGLESS_NUMBER
 
 func _init(raw_action_: StringName) -> void:
 	self.raw_action = raw_action_

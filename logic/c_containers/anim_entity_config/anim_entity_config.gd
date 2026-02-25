@@ -12,9 +12,9 @@ extends NodeLogger
 
 
 func _ready() -> void:
-	if u.is_release():
+	if eu.is_release():
 		return
-	if u.is_editor():
+	if eu.is_editor():
 		return
 	
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 	if not speed_scale_coef_mutable:
 		return
 
-	await FrameUtils.wait_process_frames(6)
+	await FrameUtils.wait_process_frames(self , 6)
 	SigUtils.safe_connect_pairs([
 			[GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed],
 		])

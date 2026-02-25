@@ -270,10 +270,10 @@ var ui_overlay_controls_visible: bool = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.pause):
-		u.pause_tree_toggle(self )
+		eu.pause_tree_toggle(self )
 		InputUtils.mark_input_handled(self )
 	
-	if u.is_release(): return
+	if eu.is_release(): return
 
 	if event.is_action_pressed(RawAction.DEV_profiler):
 		profiler_mode_cycler.get_next()
@@ -293,7 +293,7 @@ func _input(event: InputEvent) -> void:
 		if not _active_subvp:
 			return
 		if _subvp_target == 1:
-			var e := Groups.get_first_phe_bg_by_group_with_tag(self , Constants.DEMO_ENEMY_TAG)
+			var e := Groups.get_first_phe_bg_by_group_with_tag(self , Const.DEMO_ENEMY_TAG)
 			if not e: return
 			_active_subvp.set_cam_target(e)
 			_subvp_target = 2

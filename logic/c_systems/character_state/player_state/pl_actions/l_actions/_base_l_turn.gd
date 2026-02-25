@@ -26,5 +26,5 @@ func __log_turn_exit() -> String:
 
 	var _final_rotation := get_player().quaternion.angle_to(initial_rotation)
 	var _error_angle := curr_turn.accum_rotation - curr_turn.target_angle
-	return pp.s("\t accum rotation", pp.rad2deg(curr_turn.accum_rotation), " fin rotation", pp.rad2deg(_final_rotation),
-		" Target:", pp.rad2deg(curr_turn.target_angle), " Error:", pp.rad2deg(_error_angle))
+	return pp.s("\t accum rotation", pp.srad2deg(curr_turn.accum_rotation), " fin rotation", pp.srad2deg(_final_rotation),
+		" Target:", pp.srad2deg(curr_turn.target_angle), " Error:", pp.srad2deg(_error_angle))

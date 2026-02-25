@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AttackDirection
+extends RefCounted
 
 
 enum Dir {

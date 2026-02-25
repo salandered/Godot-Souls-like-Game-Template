@@ -4,6 +4,8 @@ extends BaseTextInfoPanelManager
 
 @onready var logs_panel: LogsUIPanel = %LogsPanel
 
+const COL_MSG := "#e6e6e6"
+
 
 func get_max_lines() -> int:
 	return 60
@@ -32,7 +34,6 @@ func _on___SIG_all_log_printed(payload: Dictionary[StringName, Variant]) -> void
 	if _r_frame.err: return
 	var _r_msg := SigUtils.safe_get_string_payload_value(payload, SPS.message_field)
 	if _r_msg.err: return
-	
 
 	var regex_result := _apply_regex_filter(
 		[_r_msg.value],
@@ -48,10 +49,7 @@ func _on___SIG_all_log_printed(payload: Dictionary[StringName, Variant]) -> void
 		_append_invalid_regex_text_to_label()
 	
 	
-var col_msg := "#e6e6e6"
-
-
 func _build_msg(frame: String, message: String) -> String:
-	var msg_bb := BB.color_wrap(message.strip_edges(), col_msg)
+	var msg_bb := BB.color_wrap(message.strip_edges(), COL_MSG)
 
 	return pp.s(_log_prefix(frame), msg_bb)

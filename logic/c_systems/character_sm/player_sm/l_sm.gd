@@ -11,8 +11,8 @@ class_name LegsSM
 
 
 var current_behavior: LegsBehavior
-# It should belong here! _current_action is managed by the "pool" of actions. 
-# Behavior changes may or may NOT change current action.
+## It should belong here! _current_action is managed by the "pool" of actions. 
+## Behavior changes may or may NOT change current action.
 var _current_action: LegsAction
 var _prev_action: LegsAction ## curr and prev in LSM context. (LegsAction, not BaseAction)
 
@@ -35,15 +35,15 @@ func set_current_action(new_action: LegsAction):
 	var __old_prev_name := _prev_action.action_name
 	_prev_action = _current_action
 	_current_action = new_action
-	# print_.dev("[]", pp.s("curr ->", _current_action.action_name,
-		# "| prev ->", _prev_action.action_name, pp.in_br("from " + __old_prev_name)), 20)
+	# print_.dev("[]", "curr ->", _current_action.action_name,
+		# "| prev ->", _prev_action.action_name, pp.in_br("from " + __old_prev_name))
 
 
 func switch_to(next_behavior: LegsBehavior, input_: InputPackage):
 	if next_behavior == current_behavior:
-		print_.lsm_beh("", "not switching legs, same behavior: " + current_behavior.behavior_name)
+		print_preset.lsm_beh("", "not switching legs, same behavior: " + current_behavior.behavior_name)
 		return
-	print_.lsm_beh("↪️", pp.s(current_behavior.behavior_name, " => ", next_behavior.behavior_name))
+	print_preset.lsm_beh("↪️", pp.s(current_behavior.behavior_name, " => ", next_behavior.behavior_name))
 	current_behavior._on_exit_behavior()
 	current_behavior = next_behavior
 	SigUtils.safe_emit(

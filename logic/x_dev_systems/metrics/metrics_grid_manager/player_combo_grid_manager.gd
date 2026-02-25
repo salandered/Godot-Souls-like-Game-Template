@@ -32,16 +32,16 @@ func initialise_implementation() -> void:
 
 
 func _on_SIG_player_combo_triggered(payload: Dictionary[StringName, Variant]):
-	var _r_state := SigUtils.safe_get_string_payload_value(payload, SPS.state_name_field)
+	var _r_state := SigUtils.safe_get_sname_payload_value(payload, SPS.state_name_field)
 	if _r_state.err: return
-	var _r_triggered_state := SigUtils.safe_get_string_payload_value(payload, SPS.triggered_state_field)
+	var _r_triggered_state := SigUtils.safe_get_sname_payload_value(payload, SPS.triggered_state_field)
 	if _r_triggered_state.err: return
 	
 	__log_("_update_combo_metrics")
 	_update_combo_metrics(_r_state.value, _r_triggered_state.value)
 
 
-func _update_combo_metrics(curr_state: String, triggered_state: String) -> void:
+func _update_combo_metrics(curr_state: StringName, triggered_state: StringName) -> void:
 	if _combo_chain.is_empty():
 		_combo_chain = [curr_state, triggered_state]
 	else:

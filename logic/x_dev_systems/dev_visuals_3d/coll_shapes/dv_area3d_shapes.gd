@@ -27,7 +27,7 @@ func _initialise_visuals_imp() -> void:
 			var col_shape := child as CollisionShape3D
 			if not is_instance_valid(col_shape) or not col_shape.shape: continue
 			
-			var mesh_inst := MeshInstanceUtils.create_based_on_shape_3d(col_shape.shape)
+			var mesh_inst := MeshInstanceUtils.create_mi_based_on_shape_3d(col_shape.shape)
 			if mesh_inst:
 				mesh_inst.material_override = specific_mat
 				col_shape.add_child(mesh_inst)

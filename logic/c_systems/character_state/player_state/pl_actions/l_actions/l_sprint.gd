@@ -65,7 +65,7 @@ func on_enter_action(input_: InputPackage):
 		# PS.Act.dodge:
 			# angular_sp.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
 
-	print_.lsm_action(action_name + pp.on_ent, "")
+	print_preset.lsm_action(action_name + pp.on_ent, "")
 
 	
 func on_exit_action():
@@ -129,6 +129,6 @@ func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if u.is_release():
+	if eu.is_release():
 		return
 	SPEED_BOOST = InputUtils._dev_change_param(event, SPEED_BOOST, "SPEED_BOOST", 3, RawAction.DEV_speed_down, RawAction.DEV_speed_up, true)

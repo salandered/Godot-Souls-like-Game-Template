@@ -73,26 +73,18 @@ func switch_action_to(verdict: LNextActionVerdict, input_: InputPackage):
 	var next_action_name := verdict.next_action
 	
 	# VALIDATE THE SWITCH
-	if next_action_name == "":
+	if next_action_name == Const.EMPTY_SNAME:
 		__log_warn("Next action is empty str. This is normally should not happen ❌. Not switching from" + curr_action_name)
 		return
 
 	if curr_action_name == next_action_name:
 		# spams a lot
-		# print_.lsm_action("", pp.s("switch declined ✖️: same action", next_action_name))
+		# print_preset.lsm_action("", pp.s("switch declined ✖️: same action", next_action_name))
 		return
-	## hard coded tranfer, but seems like its ok, we dont have too many actions 
-	# if next_action_name == Leg.Act.sprint and curr_action_name == Leg.Act.run \
-	# 	and legs_sm.current_action.till_blend_completes() > 0.0:
-	# 	print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️:", curr_action_name, "needs time to blend from the prev one."))
-	# 	return
-	# if next_action_name != Leg.Act.double and curr_action_name != Leg.Act.double \
-	# 	and legs_sm.current_action.till_blend_completes() > 0.1: # ideally 0, but small tolerance is ok
-	# 	print_.lsm_action("", pp.s("switch to", next_action_name, "declined ✖️: current", curr_action_name, "needs time to blend from the prev one."))
-	# 	return
+
 		
 	# SWITCH
-	print_.lsm_action("↪️", "action " + curr_action_name + " => " + next_action_name)
+	print_preset.lsm_action("↪️", "action " + curr_action_name + " => " + next_action_name)
 	get_lsm_curr_action()._on_exit_action()
 	var _next_action := container.l_action_by_name(next_action_name)
 	_next_action._on_enter_action(input_)
@@ -122,7 +114,7 @@ func is_switch_from_unsupported_action() -> bool:
 
 func __log_decision_data(input_: InputPackage, next_action_name: StringName, ...additional_checks: Array):
 	var _curr_motion_type := get_curr_action().motion_type
-	print_.lsm_beh_ch(behavior_name,
+	print_preset.lsm_beh_ch(behavior_name,
 		_curr_motion_type,
 		is_moving(input_),
 		is_reverse_moving(input_),
@@ -135,16 +127,12 @@ func __log_decision_data(input_: InputPackage, next_action_name: StringName, ...
 # # region
 
 
-func __ELA() -> bool:
-	## "extra logs allowed"
-	return LogToggler.BEHAVIOR_INTERNAL_FILTER
+func __LOG_B() -> bool:
+	return LogToggler.LSM_BEH_B
 
 
 func pp_name() -> String:
 	return behavior_name
-
-func __LOG_B() -> bool:
-	return false
 
 func __LOG_INDENT() -> int:
 	return 0

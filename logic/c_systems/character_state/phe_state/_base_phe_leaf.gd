@@ -9,7 +9,7 @@ var start_time_offset := ActionData.StartTimeOffset.new(0.0)
 var y_offset_adjustment: float
 
 # see player's PREV_ACTION for a reference
-var PREV_LEAF: StringName = ""
+var PREV_LEAF: StringName = Const.EMPTY_SNAME
 
 ## non null
 var anim: AnimationData
@@ -60,7 +60,7 @@ func _on_enter_state() -> void:
 	
 ## internal
 func _on_exit_state() -> void:
-	if __ELA(): __log_ext("")
+	if __LOG_B(): __log_ext("")
 	if not __is_entered:
 		__log_error("Calling exit while not entered")
 	__is_entered = false
@@ -106,7 +106,7 @@ func works_less_than_commitment() -> bool:
 
 
 func react_on_hit(hit: HitData):
-	if __ELA(): __log_phe("react_on_hit, will lose health", pp.in_q(hit))
+	if __LOG_B(): __log_phe("react_on_hit, will lose health", pp.in_q(hit))
 	
 	phe_feelings.lose_health(hit.damage)
 
@@ -115,10 +115,10 @@ func react_on_hit(hit: HitData):
 
 	var react_cfg := ReactionOnHit.calculate_reaction_for_enemy(hit, state_name)
 	if not react_cfg:
-		if __ELA(): __log_upd("state mutes react_on_hit, ignoring")
+		if __LOG_B(): __log_upd("state mutes react_on_hit, ignoring")
 		return
 	else:
-		if __ELA(): __log_upd("Calculated react_cfg", react_cfg)
+		if __LOG_B(): __log_upd("Calculated react_cfg", react_cfg)
 	
 	var actual_overlay_weight := react_cfg.overlay_weight
 	var actual_bone_mask := react_cfg.bone_mask
@@ -162,12 +162,12 @@ func set_anim_to_play(override_blend_time: float = -1.0, override_start_time_off
 	if override_start_time_offset != -1.0:
 		_actual_start_time_offset = override_start_time_offset
 		
-	if __ELA(): __log_anim(_actual_blend_time, _actual_start_time_offset)
+	if __LOG_B(): __log_anim(_actual_blend_time, _actual_start_time_offset)
 	get_animator_manager().set_anim_to_play(anim.anim_id, _actual_blend_time, _actual_start_time_offset)
 
 
 func set_overlay_anim_to_play(overlay_anim_id: StringName, overlay_config: OverlayConfig) -> void:
-	if __ELA(): __log_overlay_anim(overlay_anim_id, overlay_config)
+	if __LOG_B(): __log_overlay_anim(overlay_anim_id, overlay_config)
 	get_animator_manager().set_overlay_anim(overlay_anim_id, overlay_config)
 
 
@@ -231,7 +231,7 @@ func is_weapon_hurts(weapon_id: StringName, __log: bool = false) -> bool:
 	_r = anim_params_container.is_weapon_hurts(weapon_id, anim.native_anim, effective_time_spent_unscaled())
 
 	if _r and __log:
-		print_.prefix("// HURT")
+		print_.msg_raw("// HURT")
 	return _r
 
 
@@ -289,10 +289,10 @@ func __log_timings() -> String:
 	return _time_msg
 
 func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
-	if __LOG_ANIM: print_.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
+	if __LOG_ANIM: print_preset.phe_anim(state_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, anim.speed_scale, PREV_LEAF)
 
 func __log_overlay_anim(overlay_anim_id: StringName, overlay_config: OverlayConfig):
-	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(state_name, overlay_anim_id, overlay_config)
+	if __LOG_OVERLAY_ANIM: print_preset.phe_overlay_anim(state_name, overlay_anim_id, overlay_config)
 
 
 # endregion

@@ -13,7 +13,7 @@ static func randomize_button_normal_region(root_node: Node, max_offset: float = 
 			continue
 		
 		# buttons use the "normal" stylebox override
-		_apply_random_displacement_to_control(btn, "normal", max_offset)
+		_apply_random_displacement_to_control(btn, PropC.STYLEBOX.NORMAL, max_offset)
 
 
 static func randomize_shake_button_panel_region(root_node: Node, max_offset: float = 100.0, only_visible: bool = true) -> void:
@@ -29,10 +29,14 @@ static func randomize_shake_button_panel_region(root_node: Node, max_offset: flo
 		if only_visible and not panel.is_visible_in_tree():
 			continue
 			
-		_apply_random_displacement_to_control(panel, "panel", max_offset)
+		_apply_random_displacement_to_control(panel, PropC.STYLEBOX.PANEL, max_offset)
 
 
-static func _apply_random_displacement_to_control(control: Control, style_name: String, max_offset: float) -> void:
+static func _apply_random_displacement_to_control(
+	control: Control,
+	style_name: StringName,
+	max_offset: float
+) -> void:
 	var current_style := control.get_theme_stylebox(style_name)
 	
 	var new_style := _create_randomized_stylebox_texture(current_style, control.name, max_offset)
@@ -71,7 +75,7 @@ static func _create_randomized_stylebox_texture(original_style: StyleBox, debug_
 	
 	new_style.region_rect = Rect2(new_x, new_y, rect.size.x, rect.size.y)
 	
-	__log_("_create_randomized_stylebox_texture",
+	if __LOG_B(): __log_("_create_randomized_stylebox_texture",
 		"Applied to", debug_name,
 		"Offset", Vector2(dx, dy),
 		"New Rect", new_style.region_rect)
@@ -88,6 +92,6 @@ static func __LOG_B() -> bool:
 	return false
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

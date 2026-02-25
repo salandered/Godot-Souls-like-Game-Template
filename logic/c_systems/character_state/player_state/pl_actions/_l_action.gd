@@ -32,7 +32,7 @@ func calculate_target_angle_by_input(input_: InputPackage) -> float:
 		# prints("\n\t target ∠:", pp.rad2deg(target_angle))
 		# prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
 	else:
-		var _signed_angle := pm().get_signed_angle_pl_input(input_, Constants.ONE_FRAME, true)
+		var _signed_angle := pm().get_signed_angle_pl_input(input_, Const.ONE_FRAME, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
 		# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
@@ -102,4 +102,4 @@ func calculate_blend_time_from_prev_anim_marker(action_name_: StringName, marker
 
 
 func __log_function(prefix: String, ...parts: Array) -> void:
-	print_.lsm_action(prefix, pp.list_(parts))
+	print_preset.lsm_action(prefix, pp.list_(parts))

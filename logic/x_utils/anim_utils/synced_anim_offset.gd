@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AnimHelpers
+extends RefCounted
 
 
 static func calculate_synced_anim_offset(
@@ -27,7 +27,7 @@ static func sync_with_loco_anim(prev_anim: AnimationData, prev_anim_progress: fl
 	var curr_l_leg_contact := prev_anim.get_marker_by_name(MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	var next_l_leg_contact := next_anim.get_marker_by_name(MarkerName.LOCO_LOOP_L_LEG_FULL_CONTACT)
 	if curr_l_leg_contact and next_l_leg_contact:
-		# __log_action("~~prev_l_leg_contact and next_l_leg_contact", prev_l_leg_contact.time, next_l_leg_contact.time)
+		# print_.dev("~~prev_l_leg_contact and next_l_leg_contact", curr_l_leg_contact.time, next_l_leg_contact.time)
 		result_offset = AnimHelpers.calculate_synced_anim_offset(
 			prev_anim_progress,
 			prev_anim.duration,
@@ -36,6 +36,7 @@ static func sync_with_loco_anim(prev_anim: AnimationData, prev_anim_progress: fl
 			next_l_leg_contact.time + next_anim_correction
 		)
 	return result_offset
+
 
 # region: future tests
 # TEST: Different durations - speed sync

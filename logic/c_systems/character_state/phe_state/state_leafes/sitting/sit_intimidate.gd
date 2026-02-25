@@ -8,4 +8,4 @@ func is_ended() -> bool:
 
 
 func on_enter_state() -> void:
-	_target_duration = ra.float_range(7.0, 20.0)
+	_target_duration = ra.frange(7.0, 20.0)

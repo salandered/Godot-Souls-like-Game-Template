@@ -7,10 +7,10 @@ const TEST_BUS_PREFIX := "_t_"
 
 
 ## Check if a bus exists by name
-static func bus_exists(bus_name: StringName, warn_level: StringName = WL.SILENT) -> bool:
+static func bus_exists(bus_name: StringName, wl: StringName = WL.SILENT) -> bool:
 	var _r := _get_bus_idx(bus_name) != -1
 	if _r == false:
-		error_.warn(pp.s("Bus not found", bus_name), "", "", warn_level)
+		error_.warn(pp.s("Bus not found", bus_name), "", "", wl)
 	return _r
 
 
@@ -113,6 +113,25 @@ static func _set_bus_mute(bus_name: StringName, muted: bool) -> void:
 		AudioServer.set_bus_mute(bus_idx, muted)
 
 
+# region: DANGER ZONE
+# called from the self, advised not to call in from anywhere else.
+
+static func __mute_all(prefix: String = "") -> void:
+	__log_(pp.s(pp_name(), "gonna mute all", __log_prefix(prefix)))
+	var bus_names := get_all_bus_names(prefix)
+	for name_ in bus_names:
+		mute_bus(name_)
+		
+
+static func __unmute_all(prefix: String = "") -> void:
+	__log_(pp.s(pp_name(), "gonna unmute all", __log_prefix(prefix)))
+	var bus_names := get_all_bus_names(prefix)
+	for name_ in bus_names:
+		unmute_bus(name_)
+
+# endregion
+
+
 ## DEV LOGS
 # region
 
@@ -135,25 +154,6 @@ static func log_buses():
 # endregion
 
 
-# region: DANGER ZONE
-# called from the self, advised not to call in from anywhere else.
-
-static func __mute_all(prefix: String = "") -> void:
-	__log_(pp.s(pp_name(), "gonna mute all", __log_prefix(prefix)))
-	var bus_names := get_all_bus_names(prefix)
-	for name_ in bus_names:
-		mute_bus(name_)
-		
-
-static func __unmute_all(prefix: String = "") -> void:
-	__log_(pp.s(pp_name(), "gonna unmute all", __log_prefix(prefix)))
-	var bus_names := get_all_bus_names(prefix)
-	for name_ in bus_names:
-		unmute_bus(name_)
-
-# endregion
-
-
 # region: __LOGS
 
 static func __log_prefix(prefix: String) -> String:
@@ -169,6 +169,6 @@ static func __LOG_INDENT() -> int:
 	return 2
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
 
 # endregion

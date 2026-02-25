@@ -7,9 +7,9 @@ func get_raw_gallery_items() -> Array[GalleryItem]:
 		GalleryItem.new("collage the beginning", BASE_PATH),
 		GalleryItem.new("collage figures", BASE_PATH,
 		"TEST TITLE",
-"[b]test description[/b] - desc
-another line
-"
+		"[b]test description[/b] - desc
+		another line
+		"
 		),
 
 	]

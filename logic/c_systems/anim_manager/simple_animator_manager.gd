@@ -74,7 +74,7 @@ func get_curr_anim_effective_duration() -> float:
 ## returns "" if no curr anim
 func get_curr_anim_id() -> StringName:
 	if not _curr_anim:
-		return ""
+		return Const.EMPTY_SNAME
 	return _curr_anim.anim_id
 
 
@@ -88,7 +88,6 @@ func get_curr_anim() -> AnimationData:
 
 
 ##
-
 
 func __LOG_B() -> bool:
 	return false

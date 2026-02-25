@@ -30,11 +30,11 @@ func __hard_validation() -> bool:
 
 
 class AnimID:
-	const lever_switch = "lever_switch"
+	const lever_switch = &"lever_switch"
 
 
 func _ready() -> void:
-	if not u.is_editor():
+	if not eu.is_editor():
 		if __perform_validation():
 			interact_area.SIG_interacted.connect(_on_my_area_interacted)
 			interact_area.set_monitor_enable(true)

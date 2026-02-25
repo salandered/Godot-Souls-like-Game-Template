@@ -18,4 +18,4 @@ func update(input_: InputPackage, delta: float):
 ## LOGS
 
 func __log_function(prefix: String, ...parts: Array) -> void:
-	print_.psm_action(prefix, pp.list_(parts))
+	print_preset.psm_action(prefix, pp.list_(parts))

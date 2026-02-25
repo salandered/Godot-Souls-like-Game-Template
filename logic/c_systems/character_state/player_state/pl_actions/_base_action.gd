@@ -29,7 +29,7 @@ var motion_type: StringName ## see MotionType
 ## excessive, but provides an extra gurantee that prev action would not change throughout 
 ## the current action (self) life cycle.
 ## => strongly recommended to use this instead of alternative ways like player_sm.get_prev_action
-var PREV_ACTION: StringName = ""
+var PREV_ACTION: StringName = Const.EMPTY_SNAME
 
 
 func get_animator_manager() -> PlAnimatorManager:
@@ -128,7 +128,7 @@ func set_overlay_anim_to_play(overlay_anim_id: StringName, overlay_config: Overl
 
 
 func _react_on_hit(hit: HitData):
-	print_.fight(action_name, "react_on_hit called")
+	__log_upd("react_on_hit called")
 	if not is_invincible():
 		feelings.lose_health(hit.damage)
 	
@@ -196,7 +196,7 @@ const LOOP_LIKE_ACTIONS = [
 func time_remaining_for_smooth_switch(next_action_name: StringName) -> float:
 	if anim.is_looping:
 		__log_warn("Will return big meaningless number: time_remaining_for_smooth_switch does not support looping anims. " + anim.anim_name)
-		return Constants.BIG_MEANINGLESS_NUMBER
+		return Const.BIG_MEANINGLESS_NUMBER
 	var action := container.l_action_by_name(next_action_name)
 	var _blend_time: float = action.blend_time.calculate_actual(action_name)
 	return max(time_remaining() - _blend_time, 0.0)
@@ -240,7 +240,7 @@ func is_weapon_hurts(weapon_id: StringName, __log: bool = false) -> bool:
 	else:
 		__log_error("unknown weapon name " + pp.in_q(weapon_id), "is_weapon_hurts", "return false", WL.WARN_CRUCIAL)
 	if _r and __log:
-		print_.prefix("// HURT")
+		print_.msg_raw("// HURT")
 	return _r
 
 
@@ -287,7 +287,7 @@ func __log_action(...parts: Array):
 
 
 func __log_anim(_actual_blend_time: float, _actual_start_time_offset: float):
-	print_.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)
+	print_preset.any_action_anim(action_name, anim.anim_name, _actual_blend_time, _actual_start_time_offset, PREV_ACTION)
 
 func __log_overlay_anim(overlay_anim_id: StringName, overlay_config: OverlayConfig):
-	if __LOG_OVERLAY_ANIM: print_.phe_overlay_anim(action_name, overlay_anim_id, overlay_config)
+	if __LOG_OVERLAY_ANIM: print_preset.phe_overlay_anim(action_name, overlay_anim_id, overlay_config)

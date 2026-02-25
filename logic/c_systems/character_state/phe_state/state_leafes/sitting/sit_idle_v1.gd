@@ -25,7 +25,7 @@ func on_enter_state() -> void:
 		anim = _anim_usual if ra.coinflip else _anim_active
 	__log_ent("Chose anim", anim.anim_id, "based on PREV_LEAF and coinflip", PREV_LEAF)
 
-	_target_duration = ra.float_range(7.0, 16.0)
+	_target_duration = ra.frange(7.0, 16.0)
 
 func is_ended() -> bool:
 	return works_longer_than(_target_duration)

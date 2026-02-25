@@ -14,7 +14,7 @@ extends NodeLogger
 @export var quick_transition_chance: float = 0.3
 
 
-var bus_name: = BusID.GAME_MUSIC
+var bus_name := BusID.GAME_MUSIC
 
 var _music_asp: AudioStreamPlayer
 var _fade_tween: Tween
@@ -60,53 +60,34 @@ func play_priority_track(
 
 	__log_("! Priority Track (Fade) !", stream.resource_path.get_file())
 	
-	# Stop the 'gap' timer so we don't accidentally start a random track
+	# stop the 'gap' timer so we don't accidentally start a random track
 	_gap_timer.stop()
 	
-	# Kill any running fade tweens (stops the previous track from fading out on its own)
+	# (stops the previous track from fading out on its own)
 	if _fade_tween: _fade_tween.kill()
 	
 	_fade_tween = create_tween()
 	
-	# Fade Out Current (only if playing)
+	# fade out current
 	if _music_asp.playing:
-		# Fade to silence
 		_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, -80.0, transition_duration)
 	
-	# Swap Stream & Start Playing (Silent)
+	# swap stream & start playing 
 	_fade_tween.tween_callback(func():
 		_music_asp.stop()
 		_music_asp.stream = stream
-		_music_asp.volume_db = -80.0 # Start at silence
+		_music_asp.volume_db = -80.0 # silence
 		_music_asp.play(from_position)
 	)
 	
-	# Fade In New Track
+	# fade in new track
 	_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, volume_override, transition_duration)
 	
-	# Schedule the "End of Track" Fade
-	# We run this in a callback because we need the track to be playing to get correct positions
+	# schedule the end
 	_fade_tween.tween_callback(func():
 		_schedule_end_of_track_fade(stream)
 	)
 
-
-## Helper to schedule the fade-out at the end of the song
-func _schedule_end_of_track_fade(stream: AudioStream) -> void:
-	var track_len = stream.get_length()
-	var current_pos = _music_asp.get_playback_position()
-	
-	# Calculate how long to wait before starting the end fade
-	# Logic: Total Length - Fade Duration - Time already elapsed
-	var time_until_fade = maxf(0.0, track_len - fade_duration - current_pos)
-	
-	# Start a new tween specifically for the end of the track
-	if _fade_tween: _fade_tween.kill()
-	_fade_tween = create_tween()
-	
-	_fade_tween.tween_interval(time_until_fade)
-	_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, -80.0, fade_duration)
-	_fade_tween.tween_callback(_on_track_fade_complete)
 
 # endregion
 
@@ -114,7 +95,23 @@ func _schedule_end_of_track_fade(stream: AudioStream) -> void:
 # INTERNAL LOGIC
 # region
 
-## Picks the next track from the bag and plays it
+
+func _schedule_end_of_track_fade(stream: AudioStream) -> void:
+	var track_len = stream.get_length()
+	var current_pos = _music_asp.get_playback_position()
+	
+	# how long to wait before starting the end fade
+	var time_until_fade = maxf(0.0, track_len - fade_duration - current_pos)
+	
+	# new tween for the end of the track
+	if _fade_tween: _fade_tween.kill()
+	_fade_tween = create_tween()
+	
+	_fade_tween.tween_interval(time_until_fade)
+	_fade_tween.tween_property(_music_asp, PropC.VOLUME_DB, -80.0, fade_duration)
+	_fade_tween.tween_callback(_on_track_fade_complete)
+
+
 func _play_next_bag_track(is_random: bool = true, first_track_to_play_idx_: int = -1) -> void:
 	var track := _select_track(is_random, first_track_to_play_idx_)
 	
@@ -125,7 +122,6 @@ func _play_next_bag_track(is_random: bool = true, first_track_to_play_idx_: int 
 	_play_stream(track, base_volume_db)
 
 
-## Core function to play ANY stream with the standard fade-out logic
 func _play_stream(track: AudioStream, vol_db: float, from_position: float = 0.0) -> void:
 	# reset state
 	_music_asp.stop()
@@ -182,11 +178,12 @@ func _on_gap_finished() -> void:
 
 # endregion
 
+
 ## __LOGS
 # region
 
 func pp_name() -> String:
-	return "🎶BackgroundMusicSys"
+	return "🎶BackgroundMusic"
 
 func __LOG_B() -> bool:
 	return true

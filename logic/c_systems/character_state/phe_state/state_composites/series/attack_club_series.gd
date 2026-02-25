@@ -6,7 +6,7 @@ func initialise() -> void:
 	PL_DIST_TO_END = 7
 
 
-var attack_series_list :Array[Array]= [
+var attack_series_list: Array[Array] = [
 		[PHES.Leaf.club_part_1],
 		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2],
 		[PHES.Leaf.club_part_1, PHES.Leaf.club_part_2, PHES.Leaf.club_part_3_4],
@@ -33,10 +33,10 @@ func pick_series_idx() -> int:
 
 func condition_to_next_switch(current_substate: BasePHELeaf) -> bool:
 	var _r := current_substate.time_remaining() < SWITCH_ANIM_BEFORE
-	# print_.dev(">>>>>>>>>>>", current_substate.time_remaining())
+	# print_.dev("condition_to_next_switch", current_substate.time_remaining())
 	if _r:
 		var _oh := current_substate.time_remaining()
-		# print_.dev("!!", pp.s("_r", _r, "current_substate.time_remaining()", current_substate.time_remaining(), "SWITCH_ANIM_BEFORE", SWITCH_ANIM_BEFORE))
+		# print_.dev("condition_to_next_switch", "_r", _r, "curr_sbs.ts", current_substate.time_remaining(), "SWITCH_ANIM_BEFORE", SWITCH_ANIM_BEFORE)
 	return _r
 	
 func condition_to_end(current_substate: BasePHELeaf) -> bool:

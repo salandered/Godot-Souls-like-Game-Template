@@ -10,7 +10,7 @@ class_name MetaState
 	var _state_priority: int
 
 	func _init() -> void:
-		_state_name = ""
+		_state_name = Const.EMPTY_SNAME
 		_state_priority = -1
 
 	func set_from_other(new_state: StringName, new_priority: int, __log: bool = false):
@@ -19,9 +19,9 @@ class_name MetaState
 		_state_priority = new_priority
 
 	func reset(__log: bool = false) -> void:
-		if _state_name != "" or _state_priority != -1:
+		if _state_name != Const.EMPTY_SNAME or _state_priority != -1:
 			if __log: __log_(pp.in_q(_state_name), pp.in_curl(_state_priority), "will be resetted")
-		_state_name = ""
+		_state_name = Const.EMPTY_SNAME
 		_state_priority = -1
 
 	func get_state_name():
@@ -34,7 +34,7 @@ class_name MetaState
 		return _state_name == another_state_name_
 
 	func is_set() -> bool:
-		return _state_name != ""
+		return _state_name != Const.EMPTY_SNAME
 
 	func try_set(new_state: StringName, new_priority: int, equal_wins: bool = true, __log: bool = false) -> void:
 		if not is_set():
@@ -63,7 +63,7 @@ class_name MetaState
 
 	# region __LOGS
 	func __pp_state(state_name_: StringName, _state_priority_: int) -> String:
-		if state_name_ == "" and _state_priority_ == -1:
+		if state_name_ == Const.EMPTY_SNAME and _state_priority_ == -1:
 			return "- x -"
 		return __pp_type() + " '%s' {%d}" % [state_name_, _state_priority_]
 	
@@ -74,7 +74,7 @@ class_name MetaState
 
 	## like Queued or Forced
 	func __log_(...parts: Array) -> void:
-		print_.prefix_s(pp.s(__pp_type(), get_instance_id()), pp.list_(parts))
+		print_.msg_raw(__pp_type(), get_instance_id(), pp.list_(parts))
 
 	func _to_string() -> String:
 		return __pp_curr_state()

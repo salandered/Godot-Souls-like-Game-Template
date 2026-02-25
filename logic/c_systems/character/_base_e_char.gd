@@ -1,6 +1,3 @@
-#@tool
-#@icon("res://-assets-/x_icons/red/icon_skull.png")
-
 @abstract
 class_name BaseEnemyCharacter
 extends BaseCharacter
@@ -8,7 +5,6 @@ extends BaseCharacter
 @export_group("Player")
 @export var player: Princess
 
-#
 var camera_target: EnemyCameraTarget
 
 
@@ -54,8 +50,9 @@ var look_at_systems_initialised: bool = false
 
 ## used for delayed initialisation
 func _physics_process(delta: float) -> void:
-	if u.is_editor(): return
-	if not look_at_systems_initialised:
+	if eu.is_editor(): return
+
+	if not look_at_systems_initialised: # bad design, redo
 		_initialise_look_at_systems()
 		look_at_systems_initialised = true
 

@@ -23,7 +23,7 @@ func _horizontally_align_popup_labels() -> void:
 
 
 func _ready() -> void:
-	if u.is_editor(): return
+	if eu.is_editor(): return
 	_update_ui()
 	_horizontally_align_popup_labels()
 

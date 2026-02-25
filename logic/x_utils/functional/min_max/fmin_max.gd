@@ -1,5 +1,5 @@
-extends RefCountedLogger
 class_name FMinMax
+extends RefCountedLogger
 
 
 var min_: float

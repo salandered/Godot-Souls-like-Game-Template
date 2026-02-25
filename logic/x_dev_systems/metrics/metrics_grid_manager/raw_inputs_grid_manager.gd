@@ -96,11 +96,11 @@ func _update_raw_input_metrics() -> void:
 
 func _handle_scroll_input(button_idx: int) -> void:
 	# store timestamp for future cleanup
-	_active_scroll[button_idx] = u.get_curr_time_ticks_sec()
+	_active_scroll[button_idx] = TimeUtils.get_curr_time_ticks_sec()
 
 
 func _cleanup_scroll_metrics() -> void:
-	var current_time := u.get_curr_time_ticks_sec()
+	var current_time := TimeUtils.get_curr_time_ticks_sec()
 	var keys_to_remove := []
 	
 	for idx in _active_scroll.keys():

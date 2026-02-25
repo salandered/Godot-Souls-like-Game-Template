@@ -10,8 +10,8 @@ extends Node3DCharacterSystem
 @export var landing_height: float = 0.6
 @export var tolerated_height: float = 0.2
 
-
 @onready var downcast: DownCast = %Downcast
+
 var _character: BaseCharacter
 
 
@@ -69,12 +69,12 @@ func floor_dist_under_landing_height(__log: bool = false) -> bool:
 
 func get_floor_distance() -> float:
 	if not __validation_ok():
-		return Constants.BIG_MEANINGLESS_NUMBER
+		return Const.BIG_MEANINGLESS_NUMBER
 	if downcast.is_colliding():
 		#__log_('-------------- colliding')
 		return downcast.global_position.distance_to(downcast.get_collision_point())
 	#__log_aware('-------------- not colliding')
-	return Constants.BIG_MEANINGLESS_NUMBER
+	return Const.BIG_MEANINGLESS_NUMBER
 
 
 # region: LOG

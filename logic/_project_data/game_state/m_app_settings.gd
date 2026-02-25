@@ -382,7 +382,7 @@ static func set_from_config_and_window(window: Window) -> void:
 
 
 static func remove_developer_actions() -> void:
-	if not u.is_release():
+	if not eu.is_release():
 		return
 
 	__log_("M_AppSettings", "Release Build detected: Purging developer actions...")
@@ -403,4 +403,4 @@ static func __LOG_INDENT() -> int:
 	return 10
 
 static func __log_(_prefix: Variant, ...parts: Array):
-	if __LOG_B(): print_.prefix(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())
+	if __LOG_B(): print_.msg_raw(pp.s(pp_name(), _prefix), pp.list_(parts), __LOG_INDENT())

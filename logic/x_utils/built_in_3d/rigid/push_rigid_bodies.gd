@@ -1,14 +1,15 @@
-extends RefCounted
 class_name PushRigidBodies
+extends RefCounted
 
 
 ## DOCS
-## "By default, a CharacterBody2D moved with move_and_slide() or move_and_collide() will not push
-## any RigidBody2D it collides with. The rigid body doesn’t react at all, and behaves just like a StaticBody"
+## "By default, a CharacterBody2D moved with move_and_slide() or move_and_collide() 
+## will not push any RigidBody2D it collides with. The rigid body doesn’t react at all, 
+## and behaves just like a StaticBody"
 ## See: https://kidscancode.org/godot_recipes/4.x/physics/character_vs_rigid/index.html
 
 
-## meant to be called nearby the move_and_slide (each frame).
+## meant to be called nearby the move_and_slide (each frame)
 static func push_rigid_bodies_by_char(character: BaseCharacter, push_force: float = 4.0):
 	for _number_of_items_body_collided_with in character.get_slide_collision_count():
 		var collision := character.get_slide_collision(_number_of_items_body_collided_with)
@@ -20,6 +21,7 @@ static func push_rigid_bodies(bodies: Array[RigidBody3D], vector: Vector3, push_
 	for body: RigidBody3D in bodies:
 		if body:
 			body.apply_central_impulse(vector * push_force)
+
 
 static func push_rigid_body(body: RigidBody3D, vector: Vector3, push_force: float = 4.0):
 	if body:
@@ -44,12 +46,10 @@ static func push_nearby_rigid_bodies(character: BaseCharacter, radius: float = 3
 		var body = item.collider
 		if body is RigidBody3D:
 			var direction = (body.global_position - character.global_position).normalized()
-			# upward component for a dramatic effect
-			direction.y += 0.3
+			direction.y += 0.3 # upward component for a dramatic effect
 			direction = direction.normalized()
 			
 			var distance = character.global_position.distance_to(body.global_position)
-			# closer objects get pushed harder
-			var falloff = 1.0 - (distance / radius)
+			var falloff = 1.0 - (distance / radius) # closer objects get pushed harder
 			
 			body.apply_central_impulse(direction * push_force * falloff)

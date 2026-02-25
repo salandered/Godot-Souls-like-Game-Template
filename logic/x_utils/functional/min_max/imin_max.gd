@@ -1,5 +1,5 @@
-extends RefCountedLogger
 class_name IMinMax
+extends RefCountedLogger
 
 
 var min_: int

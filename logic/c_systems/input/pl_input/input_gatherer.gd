@@ -22,7 +22,7 @@ var _target_lock_detector: TapDetector = TapDetector.new(DOUBLE_TAP_THRESHOLD)
 
 
 func _current_time() -> float:
-	return u.get_curr_time_ticks_sec()
+	return TimeUtils.get_curr_time_ticks_sec()
 
 func _update_key_press_timestamps() -> void:
 	var _curr_time := _current_time()
@@ -56,13 +56,13 @@ func gather_input(delta: float) -> InputPackage:
 	
 	_target_lock_detector.update(_target_lock_key, _current_time())
 	if _target_lock_detector.is_waiting_for_confirmation():
-		# print_.input_gathering("", "tap has occurred; waiting to see if it's a double tap")
+		# print_preset.input_gathering("", "tap has occurred; waiting to see if it's a double tap")
 		new_input.target_lock.tap_waiting = true
 	if _target_lock_detector.tap_happened():
-		print_.input_gathering("", "target_lock tap detected")
+		print_preset.input_gathering("", "target_lock tap detected")
 		new_input.target_lock.tap = true
 	if _target_lock_detector.double_tap_happened():
-		print_.input_gathering("", "target_lock_double_tap detected")
+		print_preset.input_gathering("", "target_lock_double_tap detected")
 		new_input.target_lock.double_tap = true
 
 	# MOVEMENT

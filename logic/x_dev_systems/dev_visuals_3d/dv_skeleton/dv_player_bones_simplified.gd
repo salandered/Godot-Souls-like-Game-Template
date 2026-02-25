@@ -9,7 +9,7 @@ var _bone_attachments: Array[BoneAttachment3D]
 
 func initialise() -> void:
 	visible = false
-	await FrameUtils.wait_process_frames(4)
+	await FrameUtils.wait_process_frames(self , 4)
 
 	SigUtils.safe_connect_pairs([
 		[GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed]

@@ -1,11 +1,10 @@
 @tool
-@icon("res://-assets-/x_icons/char/image (18).png")
+@icon("uid://dd0icn2k413ft")
 class_name MechFighter
 extends BaseStaticCharacter
 
 
 @export var _player: Princess
-
 
 @onready var h_arm_weapon: FighterHArmWeapon = %HArmWeapon
 @onready var __native_player: AnimationPlayer = %AnimationPlayer
@@ -23,12 +22,24 @@ extends BaseStaticCharacter
 @export var container: MechFighterStatesContainer
 
 
-var camera_target: EnemyCameraTarget
+const ATTACK_CHAIN: Dictionary[StringName, StringName] = {
+	## idle to default
+	MFS.idle: MFS.attack_lr,
+	## attacks
+	MFS.attack_lr: MFS.attack_rl,
+	MFS.attack_rl: MFS.attack_stab,
+	MFS.attack_stab: MFS.attack_up,
+	MFS.attack_up: MFS.attack_down,
+	MFS.attack_down: MFS.attack_stab_power,
+	MFS.attack_stab_power: MFS.attack_lr_power,
+	MFS.attack_lr_power: MFS.attack_rl_power,
+	MFS.attack_rl_power: MFS.attack_lr,
+}
 
+var camera_target: EnemyCameraTarget
 
 var _curr_state: BaseMechFighterState
 var _prev_state: BaseMechFighterState
-
 
 var queued_state: MetaState.Queued = MetaState.Queued.new()
 
@@ -56,6 +67,14 @@ func __soft_dependencies() -> Array:
 	]
 
 
+## DOCS
+## for simplicity BaseStaticCharacter logis and SM logic are both here
+## should be separated later 
+
+
+## INITIALISATION
+# region
+
 func initialise_static_char_implementation() -> void:
 	add_to_group(Groups.Chars.SIMPLE_ENEMY)
 	char_type = DVS.CharacterType.SIMPLE_ENEMY
@@ -69,7 +88,6 @@ func initialise_static_char_implementation() -> void:
 			if original_shape is not CapsuleShape3D:
 				__log_warn("shape is not CapsuleShape3D. Not supported")
 			else:
-				# Duplicate to avoid shared resource issues
 				coll_collider.shape = original_shape.duplicate()
 
 	if not __perform_validation(true):
@@ -95,15 +113,32 @@ func _for_init_anim_list() -> BaseCharAnimList:
 func _for_init_required_markers() -> Dictionary[StringName, Array]:
 	return {}
 
+# endregion
 
-##
+
+func _process(delta: float) -> void:
+	if eu.is_editor(): return
+
+	var verdict := _check_transition(delta)
+
+
+	if verdict.next_state != Const.EMPTY_SNAME:
+		__log_("Chose state", verdict.next_state, "Reason:", verdict.get_reason())
+		_switch_state(verdict.next_state)
+
+	if _curr_state:
+		_curr_state._update(delta)
+
+
+## SM
+# region
 
 func _check_transition(delta: float) -> BaseVerdict:
 	var _curr_state_name := _safe_curr_state_name()
-	if _curr_state_name == "":
-		# should not happen, but if happended, mimick idle for next decision
+	if _curr_state_name == Const.EMPTY_SNAME:
+		# should not happen, but if it did, mimic idle for next decision
 		_curr_state_name = MFS.idle
-	var _next_state := ""
+	var _next_state := Const.EMPTY_SNAME
 	var _reason := ""
 	
 	match _curr_state_name:
@@ -113,7 +148,6 @@ func _check_transition(delta: float) -> BaseVerdict:
 				queued_state.reset(__QUEUED_B)
 				_reason = "queued state"
 			else:
-				__log_("_check_transition", "nothing to do, go _set_sleep")
 				_set_sleep(true)
 		_:
 			if _curr_state.is_ended():
@@ -128,20 +162,6 @@ func _check_transition(delta: float) -> BaseVerdict:
 	return BaseVerdict.new(_next_state, _reason)
 
 
-func _process(delta: float) -> void:
-	if u.is_editor(): return
-
-	var verdict := _check_transition(delta)
-
-
-	if verdict.next_state != "":
-		__log_("Chose state", verdict.next_state, "Reason:", verdict.get_reason())
-		_switch_state(verdict.next_state)
-
-	if _curr_state:
-		_curr_state._update(delta)
-		
-
 func _set_sleep(value: bool):
 	__log_("_set_sleep 😴", value)
 	set_process(not value)
@@ -149,10 +169,10 @@ func _set_sleep(value: bool):
 
 func _switch_state(next_state_id: StringName) -> void:
 	if next_state_id == _safe_curr_state_name():
-		__log_("↪️", "attempt to switch to the same state ", pp.in_q(_safe_curr_state_name()))
+		if __LOG_B(): __log_("↪️", "attempt to switch to the same state ", pp.in_q(_safe_curr_state_name()))
 		return
 
-	__log_("↪️", pp.in_q(_curr_state.state_name if _curr_state else &"-x-"), "=>", pp.in_q(next_state_id))
+	if __LOG_B(): __log_("↪️", pp.in_q(_curr_state.state_name if _curr_state else &"-x-"), "=>", pp.in_q(next_state_id))
 	
 	_curr_state._on_exit_state()
 	_update_curr_state(next_state_id)
@@ -172,8 +192,8 @@ func _update_curr_state(next_state_id: StringName):
 		{SPS.state_name_field: _curr_state.state_name}
 	)
 
+# endregion
 
-##
 
 func get_current_state() -> BaseCharacterState:
 	return _curr_state
@@ -185,13 +205,13 @@ func get_prev_state_name() -> StringName:
 func _safe_prev_state_name() -> StringName:
 	if not _prev_state:
 		__log_warn_soft("no prev state")
-	return _prev_state.state_name if _prev_state else &""
+	return _prev_state.state_name if _prev_state else Const.EMPTY_SNAME
 
 
 func _safe_curr_state_name() -> StringName:
 	if not _curr_state:
 		__log_warn_soft("no curr state")
-	return _curr_state.state_name if _curr_state else &""
+	return _curr_state.state_name if _curr_state else Const.EMPTY_SNAME
 
 
 func react_on_hit(hit_data: HitData) -> void:
@@ -205,30 +225,13 @@ func is_invincible() -> bool:
 	return true
 
 
-var attack_chain: Dictionary[StringName, StringName] = {
-	## idle to default
-	MFS.idle: MFS.attack_lr,
-	## attacks
-	MFS.attack_lr: MFS.attack_rl,
-	MFS.attack_rl: MFS.attack_stab,
-	MFS.attack_stab: MFS.attack_up,
-	MFS.attack_up: MFS.attack_down,
-	MFS.attack_down: MFS.attack_stab_power,
-	MFS.attack_stab_power: MFS.attack_lr_power,
-	MFS.attack_lr_power: MFS.attack_rl_power,
-	MFS.attack_rl_power: MFS.attack_lr,
-}
-
-
 func _queue_next_state():
-	var state_to_queue = ""
+	var state_to_queue = Const.EMPTY_SNAME
 	
 	if _safe_curr_state_name() != MFS.idle:
-		# __log_("in idle state, won't queue")
-		# return
-		state_to_queue = DictUtils.safe_get_dict_key(attack_chain, _safe_curr_state_name(), MFS.attack_lr)
+		state_to_queue = DictUtils.safe_get_dict_key(ATTACK_CHAIN, _safe_curr_state_name(), MFS.attack_lr)
 	else:
-		state_to_queue = DictUtils.safe_get_dict_key(attack_chain, _safe_prev_state_name(), MFS.attack_lr)
+		state_to_queue = DictUtils.safe_get_dict_key(ATTACK_CHAIN, _safe_prev_state_name(), MFS.attack_lr)
 
 	_set_sleep(false)
 	
@@ -254,12 +257,10 @@ func get_sprint_state_names() -> Array[StringName]:
 	return []
 
 func get_idle_state_names() -> Array[StringName]:
-	return []
+	return [MFS.idle]
 
 func get_power_attacks_state_names() -> Array[StringName]:
-	return []
-#
-
+	return [MFS.attack_lr_power, MFS.attack_rl_power, MFS.attack_stab_power]
 
 ##
 
@@ -269,10 +270,10 @@ func is_player() -> bool:
 func get_player() -> Princess:
 	return _player
 
+
 ## __LOGS
 
 var __QUEUED_B: bool = false
-
 
 func __LOG_B() -> bool:
 	return false

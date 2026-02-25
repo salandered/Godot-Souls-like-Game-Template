@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/char/image (15).png")
+@icon("uid://ccj2f8kjhs186")
 ## i m not sure are we the princess or not, but the name stuck.
 ## sometimes when 'player' sounds too abstract 
 ## (is it main player? animation player? or audio stream player?)
@@ -8,40 +8,29 @@ class_name Princess
 extends BaseCharacter
 
 
-# camera
 @onready var fancy_camera: FancyCamera = %FancyCamera
 @onready var camera_focus: Node3D = %CameraFocus
-
-#
 @onready var visuals: PlayerVisuals = %Visuals
 @onready var skeleton: Skeleton3D = %GeneralSkeleton
 @onready var container: PlayerStatesContainer = %StatesContainer
 @onready var bones: PlayerBones = %bones
-
 @onready var feelings: PlayerFeelings = %Feelings
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
 @onready var smith_sword_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmithSwordAnimSFXSigEmitter
 @onready var small_pinga_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmallPingaAnimSFXSigEmitter
-
 @onready var native_player: AnimationPlayer = %NativeAnimator
-
-# 
 @onready var hit_box_torso: CharacterHitbox = %HitBoxTorso
+@onready var meta_sfxasp: AudioStreamPlayer = %MetaSFXASP
+
 
 @onready var _start_position := global_transform.origin
-@onready var meta_sfxasp: AudioStreamPlayer = %MetaSFXASP
 
 # dev
 @onready var __fly_mode: Node3D = $__dev/FlyMode
 
 
-var push_rigid_bodies_force: float = 4.0
-
-
 var active_weapon_id := WeaponID.smith_sword
-# var active_weapon_id := WeaponID.pl_pinga_blade
-
 
 var acquired_second_weapon: bool = true ## DANGER DEV
 
@@ -90,6 +79,7 @@ func __soft_dependencies() -> Array:
 
 
 func initialise_base_char_implementation() -> void:
+	PUSH_RIGID_BODIES_FORCE = 4.0
 	char_type = DVS.CharacterType.PLAYER
 	add_to_group(Groups.Chars.PLAYER)
 
@@ -102,8 +92,6 @@ func initialise_base_char_implementation() -> void:
 		container.accept_all_states(self , _anim_container)
 	if get_combat():
 		player_sm.initialise(self )
-
-	__dev_initialise()
 
 
 	if not __perform_validation(true):
@@ -175,7 +163,7 @@ func get_prev_state_name() -> StringName:
 func get_curr_action_name() -> StringName:
 	var action := player_sm.get_curr_action()
 	if not action:
-		return ""
+		return &""
 	return action.action_name
 
 ##
@@ -196,12 +184,12 @@ func reset_position(y_offset: float = 0.0) -> void:
 # TODO: _process or _physics_process? changed to _process: frame issues
 # TODO UPD: should be _physics_process if move_and_slide is called.
 func _process(delta: float) -> void:
-	if u.is_editor():
+	if eu.is_editor():
 		return
 	var input_ := InputManager.get_current_input()
 	update(input_, delta)
 	
-	if u.is_nth_frame(10):
+	if FrameUtils.is_nth_frame(10):
 		basis = basis.orthonormalized()
 	
 
@@ -211,7 +199,7 @@ func update(input_: InputPackage, delta: float):
 
 	player_sm.update(input_, delta)
 	move_and_slide()
-	PushRigidBodies.push_rigid_bodies_by_char(self , push_rigid_bodies_force)
+	PushRigidBodies.push_rigid_bodies_by_char(self , PUSH_RIGID_BODIES_FORCE)
 
 
 ## USED FOR SFX SYSTEM
@@ -263,81 +251,11 @@ func current_state_initial_position() -> Vector3:
 func is_in_attack_state() -> bool:
 	return player_sm.current_state is AttackState
 
-
 # endregion
-
-
-## INPUT
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(RawAction.Unstuck):
 		global_position.y += 1.2
-		print_.dev("dbg", "Unstuck: moved player up by 1.2 units")
+		print_.dev("Unstuck", "moved player up by 1.2 units")
 		InputUtils.mark_input_handled(self )
-
-	_dev_input(event)
-
-
-# region: DEV
-
-
-var debug_cams: Array[Node]
-
-var cam_i := 0
-var __collisions_enabled: bool = true
-
-func __dev_initialise():
-	if u.is_release():
-		return
-	debug_cams = get_tree().get_nodes_in_group(Groups.Dev.DEBUG_CAMERAS)
-	debug_cams.append(fancy_camera.camera)
-	cam_i = len(debug_cams) - 1
-
-
-func _dev_input(event: InputEvent) -> void:
-	if u.is_release():
-		return
-		
-	if InputUtils.is_keycode_w_ctrl(event, KEY_J):
-		var hit := HitData.new(25, "from god", PHEA.attack.sword_slide, 1.0, "test attack", AttackDirection.Dir.LEFT)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-	if InputUtils.is_keycode_w_ctrl(event, KEY_K):
-		var hit := HitData.new(24, "from god", PHEA.attack.attack_360_low, 1.0, "test attack", AttackDirection.Dir.RIGHT)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-	if InputUtils.is_keycode_w_ctrl(event, KEY_L):
-		var hit := HitData.new(24, "from god", PHEA.attack.attack_up, 1.0, "test attack", AttackDirection.Dir.UP)
-		get_combat()._last_processed_hit = hit
-		self.react_on_hit(hit)
-
-	# if event.is_action_pressed(RawAction.DEV_8):
-	# 	animator_manager.set_overlay_anim(A.react.react_from_L,
-	# 	OverlayConfig.new(
-	# 		OverlayConfig.Weight.new(0.8, 0.4),
-	# 		BlendConfig.new(),
-	# 		1.0,
-	# 		BoneMask.get_upper_body_with_hips()
-	# 		))
-	
-	# if event.is_action_pressed(RawAction.DEV_CAM_cycle):
-	# 	cam_i = (cam_i + 1) % debug_cams.size()
-	# 	print_.dev("dbg", "cam_i: " + str(cam_i))
-	# 	if debug_cams[cam_i].has_method("make_current"):
-	# 		debug_cams[cam_i].make_current()
-
-	# elif event.is_action_pressed(RawAction.DEV_CAM_cycle_prev):
-	# 	cam_i = (cam_i - 1 + debug_cams.size()) % debug_cams.size()
-	# 	print_.dev("dbg", "cam_i: " + str(cam_i))
-	# 	if debug_cams[cam_i].has_method("make_current"):
-	# 		debug_cams[cam_i].make_current()
-
-	if event.is_action_pressed(RawAction.DEV_cols):
-		__collisions_enabled = not __collisions_enabled
-		if __collisions_enabled:
-			collision_mask = Collision.Masks.PLAYER_COL_MASK
-		else:
-			collision_mask = Collision.Masks._ZERO_MASK
-
-# endregion

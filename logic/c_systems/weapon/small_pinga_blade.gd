@@ -9,6 +9,8 @@ extends BasePlayerWeapon
 
 
 func initialise_implementation() -> void:
+	PUSH_RIGID_BODIES_FORCE = 15.0
+
 	_input_action_to_state = {
 		CombatAction.light_attack_pressed: PS.axe_slice_1,
 		CombatAction.heavy_attack_pressed: PS.axe_slice_3,

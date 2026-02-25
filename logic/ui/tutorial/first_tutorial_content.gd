@@ -65,7 +65,7 @@ func _ready() -> void:
 	set_all_texts()
 
 
-	if not u.is_editor():
+	if not eu.is_editor():
 		SigUtils.safe_connect(GlobalSignal.SIG_tut_panel_switched, _on_SIG_tut_panel_switched)
 
 

@@ -50,13 +50,13 @@ func _get_curr_direction_speed() -> float:
 
 
 func on_enter_state() -> void:
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 	_choose_initial_direction()
 
 	var _inherited_speed := e_movement.get_curr_velocity_len()
-	if __ELA(): __log_ent("_inherited_speed", _inherited_speed, "would be _inherited_speed -> ", _get_curr_direction_speed())
+	if __LOG_B(): __log_ent("_inherited_speed", _inherited_speed, "would be _inherited_speed -> ", _get_curr_direction_speed())
 	_inherited_speed = clampf(_inherited_speed, _inherited_speed, 2.0)
-	if __ELA(): __log_ent("_inherited_speed clamped", _inherited_speed)
+	if __LOG_B(): __log_ent("_inherited_speed clamped", _inherited_speed)
 	speed_from_inherited.initialise(_inherited_speed, _get_curr_direction_speed(), accel_from_inherited + 1.0)
 	angular_accel.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
 	match PREV_LEAF:
@@ -65,7 +65,7 @@ func on_enter_state() -> void:
 
 
 func on_exit_state() -> void:
-	u.reset_all(_resettable)
+	tu.reset_all(_resettable)
 	get_animator_manager().reset_global_speed_scale()
 
 
@@ -94,17 +94,17 @@ func update(delta: float) -> void:
 	opposite_dir_change.async_change_update(delta)
 
 	if _one_dir_timer.update(delta) and opposite_dir_change.cooldown.update(delta):
-		if __ELA(): __log_upd("wanna change strafe dir, one dir timer time", _one_dir_timer.get_elapsed())
+		if __LOG_B(): __log_upd("wanna change strafe dir, one dir timer time", _one_dir_timer.get_elapsed())
 		opposite_dir_change.speed_dip_init()
 		opposite_dir_change.async_change_init(_change_dir.bind())
 		opposite_dir_change.cooldown.reset()
-		if __ELA(): __log_upd("OPPOSITE dir change and dip triggered")
+		if __LOG_B(): __log_upd("OPPOSITE dir change and dip triggered")
 
 	get_animator_manager().set_global_speed_scale(maxf(SPEED_MULT + fvalue_angry(0.0, 0.3), 0.5))
 
 
 func _set_up_commit_timer():
-	var _one_dir_commitment := ra.float_range(ONE_DIR_COMMIT - 4, ONE_DIR_COMMIT + 4)
+	var _one_dir_commitment := ra.frange(ONE_DIR_COMMIT - 4, ONE_DIR_COMMIT + 4)
 	_one_dir_timer.initialise(_one_dir_commitment)
 
 
@@ -120,12 +120,12 @@ func _choose_initial_direction(to_opposite: bool = false):
 
 	anim = anim_container.get_by_anim_id(curr_direction.get_curr_anim_id())
 	_set_up_commit_timer()
-	if __ELA(): __log_ent("chosen initial direction", curr_direction)
+	if __LOG_B(): __log_ent("chosen initial direction", curr_direction)
 
 
 func _change_dir() -> void:
 	curr_direction.flip_direction()
-	if __ELA(): __log_upd("_change_dir to", curr_direction.get_curr_dir())
+	if __LOG_B(): __log_upd("_change_dir to", curr_direction.get_curr_dir())
 	_set_up_commit_timer()
 	_switch_animation()
 
@@ -139,7 +139,7 @@ func _switch_animation() -> void:
 	var curr_anim := anim
 
 	if next_anim.anim_id == curr_anim.anim_id:
-		if __ELA(): print_.dev("", "_switch_animation same anim, won't switch")
+		if __LOG_B(): print_.dev("", "_switch_animation same anim, won't switch")
 		return
 		
 

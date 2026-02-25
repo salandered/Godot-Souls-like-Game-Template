@@ -57,7 +57,7 @@
 [ext_resource type="Script" uid="uid://d260ihgni0me4" path="res://logic/c_systems/character_state/phe_state/state_leafes/death.gd" id="46_arxaf"]
 [ext_resource type="Script" uid="uid://be85gmi0np8ib" path="res://logic/c_systems/character_state/phe_state/state_leafes/sitting/attacks/sit_attack.gd" id="47_5bx33"]
 [ext_resource type="Script" uid="uid://dgk6yfubccslp" path="res://logic/c_systems/character_movement/e_movement.gd" id="48_oqcpa"]
-[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy-camera/camera_target/CameraTarget.tscn" id="49_3w6ov"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy_camera/camera_target/CameraTarget.tscn" id="49_3w6ov"]
 [ext_resource type="Script" uid="uid://dv0ekd71cst42" path="res://logic/c_systems/awareness/enemy_awareness.gd" id="50_r040y"]
 [ext_resource type="PackedScene" uid="uid://bwpwvkdbpjo50" path="res://logic/c_systems/awareness/downcast/downcast.tscn" id="51_l4htf"]
 [ext_resource type="Script" uid="uid://cm4xrpdhal6dc" path="res://logic/c_containers/anim_entity_config/sitsk_config.gd" id="52_rtify"]

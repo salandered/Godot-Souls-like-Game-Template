@@ -2,6 +2,25 @@ class_name StrUtils
 extends RefCounted
 
 
+const TAB_PREFIX_CACHE: Dictionary[int, String] = {
+		0: "",
+		1: "    ",
+		2: "        ",
+		3: "            ",
+		4: "                ",
+		5: "                    ",
+		6: "                        ",
+		7: "                            ",
+		8: "                                ",
+		9: "                                    ",
+		10: "                                        ",
+		12: "                                                ",
+		14: "                                                        ",
+		16: "                                                                ",
+		20: "                                                                                ",
+	}
+
+
 static func snake_to_sentence(text: String) -> String:
 	var clean := text.replace("_", " ")
 	
@@ -27,8 +46,8 @@ static func cut_string(text: String, limit: int = 600) -> String:
 	return text.left(limit) + " ... <too long to print>"
 
 
-## awed/name -> name; 
-## awd/awdaw/name -> name; 
+## smth/name -> name; 
+## smth/sub_smth/name -> name; 
 ## ../awd/name -> name; 
 ## name -> name; 
 ## /name -> name; 
@@ -42,22 +61,8 @@ static func get_last_slash_part(raw_string: String) -> String:
 
 
 static func calculate_tab_prefix(indents: int) -> String:
-	var cache: Dictionary[int, String] = {
-		0: "",
-		1: "    ",
-		2: "        ",
-		3: "            ",
-		4: "                ",
-		5: "                    ",
-		6: "                        ",
-		7: "                            ",
-		8: "                                ",
-		10: "                                        ",
-		12: "                                                ",
-		16: "                                                                ",
-	}
-	if cache.has(indents):
-		return cache[indents]
+	if TAB_PREFIX_CACHE.has(indents):
+		return TAB_PREFIX_CACHE[indents]
 
 	var tabs_prefix := ""
 	if indents:
@@ -74,14 +79,15 @@ static func replace_text_fragments(text: String, replacers: Dictionary[String, S
 	return text
 
 
-## TODO: weird, not here
+## ------------------------------------------------
+
 
 static func pp_name_replacers(_r: String) -> String:
 	for key_word: String in _pp_replacers:
 		_r = _r.replace(key_word, _pp_replacers[key_word])
 	return _r
 
-
+## TODO: some old simplification, should be deleted
 static var _pp_replacers: Dictionary[String, String] = {
 		"Container": em.box,
 		"Player": "Pl",

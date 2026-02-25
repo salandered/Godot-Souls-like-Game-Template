@@ -1,9 +1,10 @@
-extends RefCounted
 class_name SupportedSubstates
+extends RefCounted
 
 
 var state_names: Array[StringName]
 var parent_state: StringName
+
 
 func _init(states_: Array[StringName], parent_state_: StringName):
 	self.state_names = states_
@@ -42,6 +43,6 @@ func __pp_state_not_supported(requested_name: String) -> String:
 	return _msg
 
 func __log_(...parts: Array):
-	print_.phe_sm("SupportedSbs", pp.list_(parts))
+	print_preset.phe_sm("SupportedSbs", pp.list_(parts))
 
 # endregion

@@ -71,8 +71,8 @@ extends BaseOmni
 
 
 class AnimID:
-	const flicker = "flicker_2"
-	const omni_move = "omni_move"
+	const flicker = &"flicker_2"
+	const omni_move = &"omni_move"
 
 
 func _ready_implementation() -> void:

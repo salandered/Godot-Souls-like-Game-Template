@@ -109,11 +109,11 @@ func _accept_player_states() -> void:
 		if state_data.depends_on_legs:
 			if actions.size() != 0:
 				__log_error(pp.s("Actions found for dependent state. Expected zero", child.state_name, "Actions:", actions))
-			# TODO: not default but supported? then array which is more universal. default will be choosen later
-			child.default_action_name = ""
+			# TODO: not default but supported? use array which is more universal. default will be choosen later
+			child.default_action_name = Const.EMPTY_SNAME
 		else:
 			if error_.empty_list(actions, pp.s("No actions found for state:", child.state_name)):
-				child.default_action_name = ""
+				child.default_action_name = Const.EMPTY_SNAME
 			else:
 				child.default_action_name = actions[0].action_name
 

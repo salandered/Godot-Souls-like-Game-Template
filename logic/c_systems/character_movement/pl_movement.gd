@@ -115,7 +115,7 @@ func process_input_vector_air(input_: InputPackage, delta: float, jump_direction
 	
 	# ep 6: (jump_direction + input_delta_vector * delta).limit_length(clamp(get_character().velocity.length(), 1, 999999))
 	jump_direction = (jump_direction + _input_delta_vector).limit_length(get_character().velocity.length())
-	# u.safe_look_at(_player, get_character().global_position - jump_direction)
+	# tu.safe_look_at(_player, get_character().global_position - jump_direction)
 
 	# ep 6: (player.velocity + input_delta_vector * delta).limit_length(get_character().velocity.length())
 	var new_velocity := (get_character().velocity + _input_delta_vector).limit_length(get_character().velocity.length())
@@ -155,7 +155,7 @@ func apply_root_rotation(
 	check_counter_rot: bool = false
 ) -> Dictionary[StringName, Variant]:
 	var remaining_angle := target_angle_ - accum_rot_
-	var _log_msg: String = "rem ∠ " + pp.rad2deg(remaining_angle) + ", rot delta " + pp.rad2deg(rot_delta)
+	var _log_msg: String = "rem ∠ " + pp.srad2deg(remaining_angle) + ", rot delta " + pp.srad2deg(rot_delta)
 
 	if check_counter_rot: # do we need this at all if animation is good?
 		var is_counter_rotating := (rot_delta < 0 and remaining_angle > 0) or \
@@ -171,7 +171,7 @@ func apply_root_rotation(
 	else:
 		get_character().rotate_y(rot_delta)
 		var new_rotation := accum_rot_ + rot_delta
-		# prints(u.sfr(), "applied", _log_msg)
+		# prints(FrameUtils.sfr(), "applied", _log_msg)
 		return {completed: false, accum_rot: new_rotation}
 
 
