@@ -59,7 +59,7 @@ func __soft_validation() -> bool:
 # 	return [
 #
 # 	]
-
+#
 # func __soft_dependencies() -> Array:
 # 	return [
 #
@@ -70,7 +70,7 @@ func __soft_validation() -> bool:
 # 	return super.__hard_dependencies() + [
 #
 # 	]
-
+#
 # func __soft_dependencies() -> Array:
 # 	return super.__soft_dependencies() + [
 #

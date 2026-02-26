@@ -168,7 +168,7 @@ var __sp_scale := 1.2
 
 
 func _on_dodge_increase(payload: Dictionary[StringName, Variant]) -> void:
-	# prints("_on_speed_increase", "triggered")
+	# __log_("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):
 		PEAK_SPEED_BOOST += value

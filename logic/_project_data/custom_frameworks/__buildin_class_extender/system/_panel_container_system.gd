@@ -50,3 +50,26 @@ func __soft_validation() -> bool:
 # endregion
 
 # --------------------------------------------------------------------------
+
+## TEMPLATE TO PASTE
+
+# func __hard_dependencies() -> Array:
+# 	return [
+#
+# 	]
+#
+# func __soft_dependencies() -> Array:
+# 	return [
+#
+# 	]
+
+
+# func __hard_dependencies() -> Array:
+# 	return super.__hard_dependencies() + [
+#
+# 	]
+#
+# func __soft_dependencies() -> Array:
+# 	return super.__soft_dependencies() + [
+#
+# 	]

@@ -1,4 +1,4 @@
-class_name ExtenderLogger
+class_name LoggingFramework
 extends RefCounted ## dont use Extender here :)
 
 
@@ -21,7 +21,7 @@ static func for_log_(object_: Object, prefix: Variant, ...parts: Array) -> void:
 				object_.__LOG_INDENT())
 	else:
 		error_.warn(
-			pp.s("ExtenderLogger only support objects with methods:", PP_NAME_NAME, LOG_B_NAME, LOG_INDENT_NAME),
+			pp.s("LoggingFramework only supports objects with methods:", PP_NAME_NAME, LOG_B_NAME, LOG_INDENT_NAME),
 			"",
 			"",
 			WL.WARN)
@@ -50,7 +50,7 @@ static func _for_log_warn(
 	if ObjUtils.safe_has_method(object_, PP_NAME_NAME, WL.WARN):
 		error_.warn(what, pp.s(object_.pp_name(), "|", where), fallback, warn_level, context)
 	else:
-		error_.warn(pp.s("ExtenderLogger only support objects with methods:", PP_NAME_NAME), "", "", WL.WARN)
+		error_.warn(pp.s("LoggingFramework only support objects with methods:", PP_NAME_NAME), "", "", WL.WARN)
 
 
 ## for static

@@ -87,10 +87,15 @@ extends Node3DSystem
 
 
 func __hard_dependencies() -> Array:
-	return [omni_light_3d]
+	return [
+		omni_light_3d
+	]
 
 func __soft_dependencies() -> Array:
-	return [puff_fog, __csg]
+	return [
+		puff_fog,
+		 __csg
+	]
 
 # endregion
 

@@ -14,7 +14,7 @@
 
 📜 [_attribution](../_attribution) - information about attributions, licenses and credits
 
-🎢 [_workflow](../_workflow/) - covers Blender to Godot workflow, post import script and other utilities (like `EditorScript` files)
+🎢 [_workflow](../_workflow/) - covers Blender to Godot workflow, post import script and editor-only utilities like working with images or materials
 
 💎 [assets](../-assets-/) - all assets, including meshes, animations, SFX and music
 
@@ -22,7 +22,7 @@
 
 📚 [docs](../docs/) - all documentation, including this one
 
-⚔️ [logic](../logic/) - main application code: all game systems, entities and repositories (services, scenes and containers)
+⚔️ [logic](../logic/) - main application code: infrastructure code, game systems, developer tools.
 
 ## `logic/` folder structure
 
@@ -32,17 +32,19 @@ Note that the distinction here is a work in progress. Currently I settled on thi
 
 ### 🏰 [_project_data/](../logic/_project_data)
 
-Contains core infrastructure: non-gameplay systems that keep the application running, like scene loader, audio bus management, global signals [event bus] and configuration settings.
+Contains core infrastructure: non-gameplay systems that keep the application running, like scene loader, audio bus management, global signals [event bus], custom frameworks.
 
-Note that some of these systems are based on Maaacks game template. See docs: [docs_maaacks_game_template](docs_game_systems/docs_maaacks_game_template.md)
+Some of these systems are based on Maaacks game template. See docs: [docs_maaacks_game_template](docs_game_systems/docs_maaacks_game_template.md)
+
+[Logger](docs_project_systems/docs_logging_framework) and [validation](docs_project_systems/docs_validation_framework.md) frameworks are stored here.
 
 Currently all the autoloads are also contained in this folder.
 
 ### 📦 [containers/](../logic/c_containers)
 
-Store all the data for systems and entities, and provide the access to it.
+Store all the classes that contain the data and provide the access to it.
 
-Can be seen as 'Repositories', but mostly there are read only. Probably could've been called 'Registry' or 'Catalogs'.
+Can be seen as 'Repositories', but mostly there are read-only. Probably better name would be 'Data store' or 'Registry'.
 
 All the data enums and 'json' like structures are also stored here (just a primitive data storage)
 
@@ -52,14 +54,12 @@ Core game logic (business logic): character state machines, camera management, a
 
 Word 'System' here can be seen as a Service. Systems are usually stateless and relies on `containers/`.
 
-In DDD terms it can be said that `systems/`, `containers/` and `entities/` describes the domain.
+In DDD terms it can be said that `systems/`, `containers/` and `entities/` describe the domain.
 
 ### 👸🏻 [entities/](../logic/entities)
 
-"The nouns of the game".
-
 All the characters, levels, props (like torches or levers) and items (weapons). This means scenes, some "prefabs", visuals.
-Also stores VFX effects like an aura wave or smoke particles.
+Also stores VFX effects like an aura wave or smoke effects.
 
 All non code data (basically visuals) is derived from the `assets/` folder and usually has a connection to GLB files.
 
@@ -67,22 +67,26 @@ All non code data (basically visuals) is derived from the `assets/` folder and u
 
 Contains all the menus (main menu, options menu, pause menu), theme data, elements like buttons etc.
 
-In theory this violates the structure above, because it can be split in services, data containers and entities as well. But currently this works.
+In theory this violates the structure above: can be split in services, data containers and entities. But currently this works.
 
-This group can be treats as all of the 'Control' (Godot node type) related processes and data of the application.
+This group can be treated as all of the `Control` (Godot node type) scenes and their logic.
 
 ### 🏗️ [dev_systems/](../logic/x_dev_systems)
 
 Contains developer data and tools (in contrast with business logic of the `systems/`).
 
-Examples: metrics gathering, debug visualizers, sometimes even 'mechanics', like flying player mode or additional cameras and lighting setup which can be attached to the characters.
+Examples: metrics gathering, debug visualizers, sometimes even 'mechanics', like a flying mode or additional cameras and lighting setup which can be attached to the characters.
 
 Should be stripped from the release builds.
 
 ### 🔨 [utils/](../logic/x_utils)
 
-All utilities, which are used by every other component as helpers. They tend to be very specific, i.e each one does one thing and tries to do that the best way possible and agnostic, i.e not knowing about the domain and processes
+Utilities which are used by every other component. They tend to be _specific_, i.e each one does one thing and tries to do it good and _agnostic_, i.e not knowing about the domain.
 
-Examples: helpers for working with primitive types or basic built-in nodes or technical objects like value interpolators or event throttlers.
+Examples:
 
-Sometimes they 'extend' or 'shape' we work with the code, like type casters for nested objects or return objects in 'go' style (wrappers around primitive types with an ability to return error)
+- helpers for working with primitive types
+- helpers for working with built-in nodes
+- technical utilities like value interpolators or event throttlers.
+
+Sometimes they 'extend' or 'shape' we work with the code, like safe type casters for nested objects or return objects in 'go' style (wrappers around primitive types with an ability to return error)

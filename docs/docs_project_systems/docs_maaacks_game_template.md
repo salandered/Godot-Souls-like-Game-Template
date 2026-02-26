@@ -7,17 +7,18 @@ Link: https://github.com/Maaack/Godot-Game-Template
 Quote from the template repo:
 > This package is available as both a template and a plugin, meaning it can be used to start a new project, or added to an existing project.
 
-This project was started without using this template. Switching to it functionality occurred much later, because I decided that writing everything from scratch was too slow and not effective (reinventing the wheel).
-That's why initially it was used as a plugin (addon), and that's why I decided to separate its adoption into four steps:
+This project was started without using this template. Switching to it functionality occurred later, as I have decided that writing from scratch was too slow and felt like reinventing the wheel.
+
+That's why initially it was used as a plugin (addon) with a current plan in mind:
 
 1. **Integrating its functionality as an addon.**
-   - This includes learning how it works, reusing some things and generally just see what smart people can do with Godot
+   - Learning how it works, reusing main components and generally just look at what smart people can do with Godot
 1. **Untying core functionality from the addon** and implementing to main project infrastructure logic.
    - Addon comes with examples and also sometimes different implementation of the same thing.
-   - We needed to take only parts which were reused during step 1 and also some parts which would be beneficial in the future.
+   - We needed to take only parts which were reused during step 1.
    - Result is deleting the dependency, while still relying on big unedited parts of the vanilla functionality.
-1. **Editing and shaping functionality**, deleting unnecessary things, refactoring what doesn't work for this project, etc
-   - This step comes with a catch, because as long as the project grows, "what project needs" and "what doesn't work" are assumptions and tend to be changing.
+1. **Editing and shaping functionality**: refactoring what doesn't work for this project and adding new features.
+   - Nuance is that while the rapid project growth, "what project needs" and "what doesn't work" are just assumptions which tend to change.
 1. Covering the result with tests, writing docs, and **living happily ever after**.
 
 Naturally, second and third steps are most time consuming.

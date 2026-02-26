@@ -20,21 +20,19 @@ signal SIG_land_wave(char_glob_position: Vector3, anim_id: StringName)
 
 
 func __hard_dependencies() -> Array:
-	var ds: Array[Object] = [
+	return super.__hard_dependencies() + [
 		_sig_container,
 		_movement,
 		_area_awareness,
 		# _bones, ## not ready in enemy
 		# _visuals ## not ready in enemy
 	]
-	return super.__hard_dependencies() + ds
 
 func __soft_dependencies() -> Array:
-	var ds: Array[Object] = [
+	return super.__soft_dependencies() + [
 		_sfx_system,
 		# _look_at_manager, ## not ready
 	]
-	return super.__soft_dependencies() + ds
 
 
 ## INITIALISATION

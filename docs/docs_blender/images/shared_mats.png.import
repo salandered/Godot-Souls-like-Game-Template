@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3cvr6pgxl0r7"
-path="res://.godot/imported/image copy 2.png-b95e2c3ecf91e7a11294f584c6fac134.ctex"
+uid="uid://bb70lt0hmq2es"
+path="res://.godot/imported/shared_mats.png-b7b0ec1051d4293d790387bae5ca9a0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/docs_game_systems/images/image copy 2.png"
-dest_files=["res://.godot/imported/image copy 2.png-b95e2c3ecf91e7a11294f584c6fac134.ctex"]
+source_file="res://docs/docs_blender/images/shared_mats.png"
+dest_files=["res://.godot/imported/shared_mats.png-b7b0ec1051d4293d790387bae5ca9a0b.ctex"]
 
 [params]
 

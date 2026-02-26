@@ -90,7 +90,6 @@ func _inherit_dodge_speed_if_same_direction():
 		_inherit_speed = true
 
 	if _inherit_speed:
-		# print("_inherit_speed //////////")
 		speed_from_inherited.initialise(_inherited_speed, curr_direction.get_curr_speed(), 0.3)
 		speed_mult_from_idle.initialise(accel_from_idle_curve, 0.0)
 
@@ -275,7 +274,7 @@ func _one_anim_is_idle(curr_anim: AnimationData, next_anim: AnimationData) -> bo
 
 
 func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
-	# prints("_on_speed_increase", "triggered")
+	# __log_("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):
 		SPEED_BOOST += value

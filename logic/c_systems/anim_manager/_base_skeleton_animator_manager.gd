@@ -9,12 +9,10 @@ extends BaseAnimatorManager
 
 
 func __hard_dependencies() -> Array:
-	var ds := super.__hard_dependencies()
-	ds.append_array([
+	return super.__hard_dependencies() + [
 		general_skeleton,
 		overlay_modifier
-	])
-	return ds
+	]
 
 
 ## OVERLAY

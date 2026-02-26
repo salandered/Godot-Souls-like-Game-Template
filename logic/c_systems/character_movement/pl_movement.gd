@@ -171,7 +171,7 @@ func apply_root_rotation(
 	else:
 		get_character().rotate_y(rot_delta)
 		var new_rotation := accum_rot_ + rot_delta
-		# prints(FrameUtils.sfr(), "applied", _log_msg)
+		# __log_(FrameUtils.sfr(), "applied", _log_msg)
 		return {completed: false, accum_rot: new_rotation}
 
 
@@ -240,7 +240,7 @@ func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 		var rotation_this_frame := clampf(remaining_angle, -max_rot_this_frame, max_rot_this_frame)
 		
 		get_character().rotate_y(rotation_this_frame)
-		# prints("~~~~", rotation_this_frame)
+		# __log_("~~~~", rotation_this_frame)
 
 # endregion
 

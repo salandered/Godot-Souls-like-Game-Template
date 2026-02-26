@@ -44,7 +44,7 @@ static func set_coll_shape_capsule_size(coll_shape: CollisionShape3D, rad: float
 
 
 static func pp_name() -> String:
-	return "CollShapeTranform"
+	return "CollShapeTransform"
 
 static func __LOG_B() -> bool:
 	return false

@@ -122,7 +122,7 @@ func animate(): # ▶️
 
 
 func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
-	# prints("_on_speed_increase", "triggered")
+	# __log_("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):
 		SPEED_BOOST += value

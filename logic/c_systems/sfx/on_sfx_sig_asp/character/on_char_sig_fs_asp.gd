@@ -23,8 +23,6 @@ func _custom_logic(base_vol_db: float, base_pitch: float, payload: Dictionary[St
 		elif _curr_state_name in get_character().get_run_state_names() and \
 			 not _prev_state_name in get_character().get_sprint_state_names():
 				if _curr_state.get_actual_time_spent() < RUN_TIME_TO_LOWER_FOOTSTEP_VOL:
-					# prints(em.mark_x2)
-					# base_pitch -= 0.05
 					base_vol_db -= RUN_START_FOOTSTEP_VOL_DECREASE
 
 	return VolPitch.new(base_vol_db, base_pitch)

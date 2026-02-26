@@ -3,7 +3,7 @@ class_name print_preset
 
 
 ## 🚧
-## NOTE: preset approach is being replaced by ExtenderLogger method (via class extenders)
+## NOTE: preset approach is being replaced by LoggingFramework method (via class extenders)
 ## 🚧
 
 

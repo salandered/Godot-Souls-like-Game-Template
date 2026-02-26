@@ -29,12 +29,12 @@ func calculate_target_angle_by_input(input_: InputPackage) -> float:
 	var target_angle: float
 	if input_.reverse_data.is_reversed():
 		target_angle = - PI + 0.05
-		# prints("\n\t target ∠:", pp.rad2deg(target_angle))
-		# prints("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
+		# __log_("\n\t target ∠:", pp.rad2deg(target_angle))
+		# __log_("\t Reverse type and full data", input_.reverse_data.type, input_.reverse_data)
 	else:
 		var _signed_angle := pm().get_signed_angle_pl_input(input_, Const.ONE_FRAME, true)
 		target_angle = wrapf(_signed_angle, -PI, PI)
-		# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
+		# __log_("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
 
 
@@ -42,7 +42,7 @@ func calculate_target_angle_by_target(input_: InputPackage) -> float:
 	var target_angle: float
 	var _signed_angle := pm().get_signed_angle_pl_target()
 	target_angle = wrapf(_signed_angle, -PI, PI)
-	# prints("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
+	# __log_("\n\t target ∠:", pp.rad2deg(target_angle), "t ∠ before wrapf", _signed_angle)
 	return target_angle
 
 
@@ -53,7 +53,7 @@ func turn_direction_by_target_angle(target_angle: float) -> StringName:
 		if signf(target_angle) == 0: __log_warn("Turn angle is zero; defaulting to a 'right' turn.")
 	else:
 		turn_direction = TurnData.TURN_DIR_LEFT
-	# prints("\t turn decision:", turn_direction)
+	# __log_("\t turn decision:", turn_direction)
 	return turn_direction
 
 # endregion

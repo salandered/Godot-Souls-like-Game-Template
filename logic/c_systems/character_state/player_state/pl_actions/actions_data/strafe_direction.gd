@@ -82,7 +82,7 @@ func would_be_change_of_type(new_dir: Direction.Dir) -> DirPairs.ChangeType:
 	if _curr_dir == Direction.Dir.NEUTRAL or new_dir == Direction.Dir.NEUTRAL:
 		return DirPairs.ChangeType.SAME # or SLIGHTEST
 
-	# prints(Direction.full_name_(_curr_dir), Direction.full_name_(new_dir))
+	# __log_(Direction.full_name_(_curr_dir), Direction.full_name_(new_dir))
 	var r := DirPairs.get_change_type(_curr_dir, new_dir)
 	if r == -1:
 		r = DirPairs.get_change_type(new_dir, _curr_dir)

@@ -90,10 +90,9 @@ func __get_audio_tracks_data(native_anim: Animation, anim_id: StringName) -> Dic
 
 		var track_enabled := native_anim.track_is_enabled(track_idx)
 		if track_enabled:
-			# prints("disabled", track_idx)
+			# __log_("disabled", track_idx)
 			native_anim.track_set_enabled(track_idx, false)
-		# var track_enabled_2 := native_anim.track_is_enabled(track_idx)
-		# prints("disabled ////////////", track_enabled, track_enabled_2)
+			
 		audio_track_count += 1
 		
 		var track_path: NodePath = native_anim.track_get_path(track_idx)

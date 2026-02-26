@@ -57,13 +57,11 @@ func get_animator_manager() -> PlAnimatorManager:
 
 
 func __hard_dependencies() -> Array:
-	var ds := super.__hard_dependencies()
-	ds.append_array([
+	return super.__hard_dependencies() + [
 		fancy_camera,
 		camera_focus,
 		skeleton,
-	])
-	return ds
+	]
 
 
 ## for Princess all the soft are kind of hard
@@ -182,7 +180,7 @@ func reset_position(y_offset: float = 0.0) -> void:
 
 
 # TODO: _process or _physics_process? changed to _process: frame issues
-# TODO UPD: should be _physics_process if move_and_slide is called.
+# TODO UPD WARNING: should be _physics_process if move_and_slide is called.
 func _process(delta: float) -> void:
 	if eu.is_editor():
 		return

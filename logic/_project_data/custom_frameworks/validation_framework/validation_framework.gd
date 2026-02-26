@@ -2,21 +2,8 @@ class_name ValidationFramework
 extends RefCountedStaticLogger ## ValidationFramework uses LoggerFramework
 
 ## DOCS
-# region
 ## As much logic as possible moved here, so all the extenders (like NodeSystem) don't have duplicated code.
-## NOTE: using highlight extension for colorizing validation methods in recommended. 
-## 	  See .vscode/settings.json
-##    Example:
-		# "(__hard_validation)": {
-		# 	"filterLanguageRegex": "gdscript",
-		# 	"decorations": [
-		# 		{
-		# 			"color": "#78e2a1d7",
-		# 			"fontWeight": "bold",
-		# 		},
-		# 	]
-		# },
-# endregion
+
 
 
 const __validated_NAME = "__validated"

@@ -360,6 +360,9 @@ func _get_existing_bars() -> Array[TextureProgressBar]:
 # endregion
 
 
+
+## LOGS
+
 func __pp_curr_values() -> String:
 	return pp.s("curr main value/curr ghost value", str(get_main_bar_value()), str(get_ghost_bar_value()))
 
@@ -368,14 +371,14 @@ func pp_name() -> String:
 	return pp.s(tag, ObjUtils.construct_obj_pp_name(self ))
 
 
-func debug():
-	print("\n========= DEBUG BAR STATE =========")
-	print("Main Bar | Val: ", get_main_bar_value(), " / Max: ", get_max_value())
-	print("Back Bar | Max: ", _back_bar.max_value)
-	print("Ghost Bar| Val: ", ghost_bar.value)
-	print("Container| Size X: ", container.size.x)
-	print("Container| custom min Size X: ", get_custom_min_size_x())
-	print("===================================\n")
+func __debug_bar():
+	__log_("\n========= DEBUG BAR STATE =========")
+	__log_("Main Bar | Val: ", get_main_bar_value(), " / Max: ", get_max_value())
+	__log_("Back Bar | Max: ", _back_bar.max_value)
+	__log_("Ghost Bar| Val: ", ghost_bar.value)
+	__log_("Container| Size X: ", container.size.x)
+	__log_("Container| custom min Size X: ", get_custom_min_size_x())
+	__log_("===================================\n")
 
 
 func __LOG_B() -> bool:

@@ -35,9 +35,9 @@ var state_machine: BasePHEState
 const BREADCRUMB_SIZE = 10
 var _state_history: Array[StringName] = []
 
-# TODO: some system for flags. (or alternative with events)
+# TODO: some system for flags (or alternative with events)
 # if any state works longer than fatigue, flag is raised. 
-# HSME SM than switches to the most safest state
+#  -> HSME SM than switches to the most safest state
 var fatigue_raised: bool = false
 var angry_raised: bool = false
 var death_raised: bool = false
@@ -70,7 +70,7 @@ func get_animator_manager() -> EnemyAnimatorManager:
 
 
 func __hard_dependencies() -> Array:
-	var ds: Array[Object] = [
+	return super.__hard_dependencies() + [
 		# player,
 		config,
 		container,
@@ -78,15 +78,13 @@ func __hard_dependencies() -> Array:
 		_top,
 		get_visuals_root(),
 	]
-	return super.__hard_dependencies() + ds
 
 func __soft_dependencies() -> Array:
-	var ds: Array[Object] = [
+	return super.__soft_dependencies() + [
 		coll_collider,
 		# camera_target,
 		e_anim_sfx_sig_emitter,
 		]
-	return super.__soft_dependencies() + ds
 
 
 @abstract func initialise_phe_char_implementation() -> void

@@ -58,7 +58,7 @@ func play_priority_track(
 		__log_error("play_priority_track called with null stream")
 		return
 
-	__log_("! Priority Track (Fade) !", stream.resource_path.get_file())
+	__log_("Priority Track (Fade)", stream.resource_path.get_file())
 	
 	# stop the 'gap' timer so we don't accidentally start a random track
 	_gap_timer.stop()
@@ -94,7 +94,6 @@ func play_priority_track(
 
 # INTERNAL LOGIC
 # region
-
 
 func _schedule_end_of_track_fade(stream: AudioStream) -> void:
 	var track_len = stream.get_length()

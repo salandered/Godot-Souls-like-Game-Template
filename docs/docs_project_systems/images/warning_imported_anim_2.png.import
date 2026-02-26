@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b734rd7mo7037"
-path="res://.godot/imported/Jafih97kdo.png-7cc303c93718dbab83d5c2b55d50c9f6.ctex"
+uid="uid://dcruqrriixilw"
+path="res://.godot/imported/warning_imported_anim_2.png-2a4053a734fcb34af784ccfb6b82d913.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/docs_game_systems/images/Jafih97kdo.png"
-dest_files=["res://.godot/imported/Jafih97kdo.png-7cc303c93718dbab83d5c2b55d50c9f6.ctex"]
+source_file="res://docs/docs_project_systems/images/warning_imported_anim_2.png"
+dest_files=["res://.godot/imported/warning_imported_anim_2.png-2a4053a734fcb34af784ccfb6b82d913.ctex"]
 
 [params]
 

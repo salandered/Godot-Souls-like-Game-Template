@@ -1,0 +1,1 @@
+https://github.com/jitspoe/godot-console/blob/master/LICENSE.md

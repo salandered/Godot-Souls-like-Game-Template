@@ -330,7 +330,7 @@ const DEF_Y_SENSE := 1.0
 
 static func set_x_sense(value: float) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, X_MOUSE_SENSE, value)
-	# prints("set_x_sense", value)
+	# __log_("set_x_sense", value)
 	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
 
 
@@ -346,7 +346,7 @@ static func _set_x_sense_from_config() -> void:
 
 static func set_y_sense(value: float) -> void:
 	M_PlayerConfig.set_config(INPUT_SECTION, Y_MOUSE_SENSE, value)
-	# prints("set_y_sense", value)
+	# __log_("set_y_sense", value)
 	SigUtils.safe_emit_no_payload(GlobalSignal.SIG_update_mouse_settings_for_camera)
 
 

@@ -970,6 +970,36 @@
 		// },
 	},
 	//
+	// SPELLING 
+	"cSpell.userWords": [
+		"Animatable",
+		"autoloads",
+		"BSDF",
+		"colonly",
+		"grayscale",
+		"initialisation",
+		"initialise",
+		"Keymap",
+		"Krita",
+		"maaacks",
+		"onready",
+		"pixpal",
+		"retopology",
+		"tscn",
+		"tweening",
+		"USERPROFILE",
+		"Mixamo"
+	],
+	"cSpell.enabledFileTypes": {
+		"markdown": true
+	},
+	"cSpell.words": [
+		"convcol",
+		"convcolonly",
+		"navmesh",
+		"noimp"
+	],
+	//
 	//
 	/* --- COPIED FROM GLOBAL SETTINGS (just in case)) ----  
 	// May be useful for setting project from git on another machine. Uncomment if needed

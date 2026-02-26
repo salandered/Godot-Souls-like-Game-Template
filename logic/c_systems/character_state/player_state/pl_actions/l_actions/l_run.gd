@@ -162,7 +162,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_speed_increase(payload: Dictionary[StringName, Variant]) -> void:
-	# prints("_on_speed_increase", "triggered")
+	# __log_("_on_speed_increase", "triggered")
 	var value = payload.get(SPS.amount_field)
 	if value and (value is float or value is int):
 		SPEED_BOOST += value
@@ -177,11 +177,11 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 # from on enter match turn
 	# var raw_turn_data: Variant = player_sm.get_tranfer_data_by_key("turn_data")
 	# if raw_turn_data == null:
-		# prints(FrameUtils.sfr(), "no 'turn_data' data. assuming turn completed")
+		# __log_(FrameUtils.sfr(), "no 'turn_data' data. assuming turn completed")
 		# curr_turn.hard_complete()
 	# else:
 		# curr_turn.initialise_from_dict(raw_turn_data)
-		# prints(FrameUtils.sfr(), " Inherited turn:", str(curr_turn))
+		# __log_(FrameUtils.sfr(), " Inherited turn:", str(curr_turn))
 #--------------------------------------------
 # from update
 	# if COMPLETE_ROOT_TURN_FEATURE and not curr_turn.turn_completed:

@@ -13,7 +13,7 @@ Animation may contain not only skeleton data (movement of bones), but also a lot
 
 ## Examples of data
 
-![alt text](<images/image copy 2.png>)
+![alt text](images/anim_track_1.png)
 
 ### State flow information
 
@@ -37,7 +37,8 @@ Best example in project is [player animation parameters](../../logic/c_container
 This is a very powerful way of storing animation-related data.
 
 You use timeline cursor in order to align the data with animations visuals. Example: making weapon hurt a couple ticks later means that you just drag `weapon_hurts` track key, unless it looks natural given the character pose.
-![alt text](images/Jafih97kdo.png)
+
+![alt text](images/anim_tracks_2.png)
 
 Data is being 'processed' just because it is a part of animation. At any given time you know the state of all custom tracks and animation position relative to markers.
 Thanks to several services and utility functions, such check are short and readable:
@@ -59,25 +60,26 @@ func is_weapon_hurts() -> bool:
 
 ## ⚠️ Working with imported animations
 
+> [!CAUTION]
+> You need to be constantly cautious when editing animation tracks.
+
 If animations came from GLB file (were imported), all changes made to its tracks may be lost!
-Some of the changes won't be lost on project reload (like animation markers), but they surely be silently lost if deleting `.godot` folder (which sometimes is needed because of caching and other issues). _**This means that months after the changes you will lose all the data and you will not notice it.**_
+Some of them won't be lost on project reload (like tracks), but they surely be silently lost if deleting `.godot` folder (which sometimes is needed because of caching and other issues).
+
+_**This means that months after the changes the data will be lost and you will not notice it.**_
 
 Currently I found two ways of dealing with it.
 
 1. Godot actually warns you about it and suggests the solution. You need to manually go through all the animations and make suggested changes. This approach can be not desired if you don't want to save animations to separate files.
-![alt text](<images/image copy.png>)
-![alt text](images/image.png)
-1. Break the link between the animation and it's import settings: make animation unique via **Manage Animation** button when working in **Animation Tab**.
-   1. But this means that further changes to importing settings would not affect you animation (the connection between 'source' data and you derived animation is lost).
-   2. Also note that Imported Animations warn message somehow does not disappear.
+![alt text](images/warning_imported_anim_2.png)
+![alt text](images/warning_imported_anim.png)
+1. Break the link between the animation and its import settings: make animation unique via **Manage Animation** button when working in **Animation Tab**.
+   1. This means that further changes source files would not affect you animation (the connection between GLB  and you derived animation is lost).
+   1. Also note that Imported Animations warn message may not disappear.
 
 I haven't found a way of automating any of these approaches, and also a way of 'forcing' them.
 
-One of the safety measures in project is using [Required animation markers](../../logic/c_containers/required_marker_container/pl_required_markers.gd). It fails the debug build if some common marker was missing, so at least you will know about the information loss. It does not solve the problem and also requires manual synchronization.
-
-| :warning: WARNING                                                     |
-| :-------------------------------------------------------------------- |
-| You need to be constantly cautious when editing animation tracks. |
+One of the safety measures in project is using [Required animation markers](../../logic/c_containers/required_marker_container/pl_required_markers.gd). It fails the debug build if some common marker was missing, so it's clear when the info is lost. It does not solve the problem and also requires manual synchronization.
 
 ## 💡 Tips
 

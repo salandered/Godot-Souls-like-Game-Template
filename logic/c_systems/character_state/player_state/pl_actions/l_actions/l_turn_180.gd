@@ -14,7 +14,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	speed_curve_from_apex.reset()
 	
 	initial_rotation = get_player().quaternion
-	# prints("~~~ Turn Enter: is_reversed?", input_.reverse_data.is_reversed(), "Input Vec:", input_.input_direction)
+	# __log_("~~~ Turn Enter: is_reversed?", input_.reverse_data.is_reversed(), "Input Vec:", input_.input_direction)
 	__log_ent("Initial rotation (quaternion)", initial_rotation)
 	
 	# TURN DATA

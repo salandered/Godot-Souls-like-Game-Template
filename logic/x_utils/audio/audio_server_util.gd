@@ -1,5 +1,5 @@
-extends RefCountedStaticLogger
 class_name AudioServerUtil
+extends RefCountedStaticLogger
 
 
 const DEV_BUS_PREFIX := "_d_"
@@ -141,15 +141,15 @@ static func __unmute_all(prefix: String = "") -> void:
 # 		AudioServerUtil.log_buses()
 
 static func log_buses():
-	print("\n=== LOG BUSES ===")
-	print("Output latency: ", AudioServer.get_output_latency())
-	print("Time to next mix: ", AudioServer.get_time_to_next_mix())
+	__log_("\n=== LOG BUSES ===")
+	__log_("Output latency: ", AudioServer.get_output_latency())
+	__log_("Time to next mix: ", AudioServer.get_time_to_next_mix())
 	
 	for bus_idx in AudioServer.bus_count:
 		var bus_name := AudioServer.get_bus_name(bus_idx)
 		var peak_l := AudioServer.get_bus_peak_volume_left_db(bus_idx, 0)
 		var peak_r := AudioServer.get_bus_peak_volume_right_db(bus_idx, 0)
-		print("Bus %s: L=%.2f R=%.2f" % [bus_name, peak_l, peak_r])
+		__log_("Bus %s: L=%.2f R=%.2f" % [bus_name, peak_l, peak_r])
 
 # endregion
 

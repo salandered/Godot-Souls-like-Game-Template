@@ -16,7 +16,8 @@ static func set_world_env_tonemap_exposure_from_settings(_world_env: WorldEnviro
 		var new_exposure := basic_tonemap_exposure + value_from_settings - 1.0
 		if not value_from_settings_vol_fog:
 			new_exposure += tonemap_exposure_no_vol_fog_compensation
-		__log_("set_world_env_tonemap_exposure_from_settings🎨",
+		
+		if __LOG_B(): __log_("set_world_env_tonemap_exposure_from_settings🎨",
 			"value_from_settings", pp.in_q(value_from_settings),
 			"curr_exposure", pp.in_q(curr_exposure),
 			"value_from_settings_vol_fog", pp.in_q(value_from_settings_vol_fog),
@@ -36,7 +37,7 @@ static func set_world_env_volumetric_fog_from_settings(_world_env: WorldEnvironm
 	var value_from_settings := M_AppSettings.get_volumetric_fog()
 
 	if _validate_world_env(_world_env, pp.s("set_world_env_volumetric_fog", value_from_settings)):
-		__log_("set_world_env_volumetric_fog", "value_from_settings will be set:", pp.in_q(value_from_settings))
+		if __LOG_B(): __log_("set_world_env_volumetric_fog", "value_from_settings will be set:", pp.in_q(value_from_settings))
 		_world_env.environment.volumetric_fog_enabled = value_from_settings
 		for item: FogVolume in fog_volumes_in_scene:
 			item.visible = value_from_settings

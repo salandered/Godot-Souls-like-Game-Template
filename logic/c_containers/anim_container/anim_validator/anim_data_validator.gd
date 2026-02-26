@@ -22,8 +22,8 @@ static func validate_anim(
 
 	var _required_markers: Variant = required_markers.get(anim_data.anim_id)
 	if _required_markers == null:
+		# __log_("_required_markers is null for", anim_data.anim_id)
 		pass
-		# prints("_required_markers is null for", anim_data.anim_id)
 	else:
 		for marker_name: StringName in TypeCast.array_of_string_name(_required_markers):
 			if not anim_data.does_marker_exist(marker_name):

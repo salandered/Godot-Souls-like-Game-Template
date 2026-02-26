@@ -35,11 +35,14 @@ misc/
 ideas/
 -adopting/
 *__private_docs/*
+# unit tests
+_workflow/_misc/_test/*
 
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons
 addons/*
 !addons/pixpal_tools_edited
+!addons/console
 
 
 # ================== BIG ASSETS

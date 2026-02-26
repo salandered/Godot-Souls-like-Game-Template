@@ -1,14 +1,13 @@
-# Blender: Auto creation of collision objects
+# Blender: Auto creation of collision objects 🧊 <!-- omit from toc -->
 
-- [Blender: Auto creation of collision objects](#blender-auto-creation-of-collision-objects)
-	- [Description](#description)
-	- [Steps](#steps)
-		- [Create a Reference Object](#create-a-reference-object)
-		- [Reference Object visuals](#reference-object-visuals)
-		- [Reference name](#reference-name)
-		- [Run script](#run-script)
-	- [Script documentation](#script-documentation)
-		- [Functions Explained](#functions-explained)
+- [Description](#description)
+- [Steps](#steps)
+	- [Create a Reference Object](#create-a-reference-object)
+	- [Reference Object visuals](#reference-object-visuals)
+	- [Reference name](#reference-name)
+	- [Run script](#run-script)
+- [Script documentation](#script-documentation)
+	- [Functions Explained](#functions-explained)
 
 ![alt text](<images/how it looks p2.png>)  ![alt text](<images/how it looks.png>)
 Blue objects here are result of the script.
@@ -17,11 +16,12 @@ Blue objects here are result of the script.
 
 Creates special "collision-only" child objects for every object you have selected.
 
-These objects have a duplicate of the original mesh, have specific material, modifiers, and viewport color copied from a separate, single reference object.
+These objects use duplicated original mesh and have specific material, modifiers, and viewport color copied from a separate, single reference object.
 
-Result objects are placed in a separate collection
+Result objects are placed in a separate collection.
 
 ![alt text](<images/example in blender.png>)
+
 (looks like this)
 
 ⚠️ do not share the same mesh (green triangle) from original object, this creates problems and saves almost nothing. I forgot why

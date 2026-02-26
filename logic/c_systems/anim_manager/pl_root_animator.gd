@@ -143,7 +143,7 @@ func calculate_animation_start_root_velocity(anim: AnimationData, start_time_off
 	if backwards:
 		start_time -= sample_delta
 
-	# prints("root vel", em.mark_2, start_time, start_time + sample_delta)
+	# __log_("root vel", em.mark_2, start_time, start_time + sample_delta)
 	var pos_at_start := anim.native_anim.position_track_interpolate(root_pos_track, start_time)
 	var pos_at_delta := anim.native_anim.position_track_interpolate(root_pos_track, start_time + sample_delta)
 	

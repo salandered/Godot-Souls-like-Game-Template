@@ -227,9 +227,9 @@ func is_invincible() -> bool:
 	var _r: bool = false
 	if player_sm.current_state and player_sm.current_state.state_name in PlayerConfig.invincible_states:
 		_r = anim_params_container.is_invincible(anim.native_anim, effective_time_spent())
-		# prints("anim_params_container~~~~~", _r)
+		# __log_("anim_params_container~~~~~", _r)
 
-	# prints("~~~~~", _r)
+	# __log_("~~~~~", _r)
 	return _r
 
 

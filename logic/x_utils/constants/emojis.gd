@@ -29,6 +29,7 @@ const pin = "📌"
 const note = pin
 const note_alt = "✒️"
 const pin_alt = "📍"
+const info = "ℹ️"
 const warn = "⚠️"
 const warn_x2 = "⚠️⚠️"
 const warn_mb = "🚸" # let's catch and then decide

@@ -1,0 +1,196 @@
+# Logging Framework 📋 <!-- omit from toc -->
+
+- [🧾 What it does](#-what-it-does)
+- [🎚️ Log Levels](#️-log-levels)
+- [🔌 Framework API via Extender](#-framework-api-via-extender)
+	- [Methods to Call (Logging)](#methods-to-call-logging)
+	- [Methods to Implement (Config)](#methods-to-implement-config)
+- [📞 Direct Calls (Bypassing Extender)](#-direct-calls-bypassing-extender)
+- [🎛️ Usage Examples](#️-usage-examples)
+	- [Using `NodeLogger`](#using-nodelogger)
+	- [Direct calls](#direct-calls)
+- [🧊 Static Loggers](#-static-loggers)
+	- [Static classes problem](#static-classes-problem)
+	- [Instruction](#instruction)
+	- [Usage Example](#usage-example)
+- [🤔 Ideas Behind Implementation and Trade-offs](#-ideas-behind-implementation-and-trade-offs)
+
+## 🧾 What it does
+
+The Logging Framework provides a centralized and unified approach to managing logs across the project. It offers a structured logging API for any custom class with varying levels of log granularity.
+
+Key features:
+
+- **Logging Formatting:** Logs are printed using template, which includes meta information like frame number, log level, class name.
+- **Logging Handling:** Logging can be easily toggled on or off on a per-class basis (you can also set more broad logging scopes).
+- **Friendly API:** Log API takes any number of arguments of any type in any order (using GDScript's variadic arguments).
+- **Auto-Polishing:** Certain data types are automatically formatted for readability, such as rounding float numbers or pretty-printing arrays.
+- **Optimization & Spam Prevention:** Prevents repeating the exact same message sequentially. This is especially useful for preventing `push_error` spam, which can cause severe OS stuttering or dev build crashes.
+- **Release Safety:** Basic info logs are automatically excluded from the release builds.
+
+## 🎚️ Log Levels
+
+Available warning levels, from low to high:
+
+- ⬜ `SILENT`: "Meta" level which does nothing. Use with caution.
+- 🟦 `INFO`: Basic info log message. Used for general debugging and state tracking.
+- 🟨 `WARN`: Prints a warning message with an icon.
+- 🟨 `WARN_CRUCIAL`: Prints a warning message with a prominent icon _(in docs that started sounding funny, idea is this is an error, but not `PUSH_ERROR`, probably would be renamed to ERROR)._
+- ⬛ `ASSERT`: Triggers a fast crash using GDScript `assert`. Duplicates message as if it was `WARN`.
+  - ℹ️ Intended for use only while prototyping. Discouraged even in developer builds.
+- 🟧 `PUSH_WARN`: Uses Engine-level warnings. All info about `PUSH_ERROR` applies here as well.
+- 🟥 `PUSH_ERROR`: Uses Engine-level errors. Most robust way to treat an error, in particular useful for domain-agnostic utilities as these levels provide a stack trace.
+  - ℹ️ Will still print message using all framework features like formatting.
+  - ⚠️ There is a known issue VSCode (godot-tools), when an excessive use (e.g., calling every frame) can severely stutter not only a game, but OS.
+
+## 🔌 Framework API via Extender
+
+Similar to the Validation Framework, your custom class should extend a built-in class extender (like `NodeLogger` or `NodeSystem` as any `XSystem` extender inherits the logger) to gain access to the logging API.
+
+### Methods to Call (Logging)
+
+Use these methods within your class to output logs. You do not need to manually specify the log level when using these extender methods:
+
+- 🟦 `__log_(_prefix: Variant, ...parts: Array)`: Corresponds to the `INFO` level.
+
+- 🟨 `__log_warn_soft(what: String, where: String = "", fallback: String = "", ...context: Array)`: Corresponds to the `WARN` level.
+
+- 🟧 `__log_warn(what: String, where: String = "", fallback: String = "", ...context: Array)`: Corresponds to the `PUSH_WARN` level.
+
+- 🟥 `__log_error(what: String, where: String = "", fallback: String = "", ...context: Array)`: Corresponds to the `PUSH_ERROR` level.
+
+ℹ️ Unlike the info level  `__log_`, all error logs have an additional template built into the interface.
+
+- This helps the developer to provide necessary info.
+- The structure will be pretty printed to the final message so it looks natural.
+- While sometimes cumbersome, it may save you the words, as error message usually contains these sematic points.
+- Framework auto attaches meta information to the `where` part: calling `__log_warn("oh")` is fine.
+- All the raw additional info still can be added using the last variadic argument
+
+### Methods to Implement (Config)
+
+Override these base methods in your custom class to configure the logger behavior:
+
+- `__LOG_B() -> bool`: Toggles logging on and off. Defaults to `true`.
+- `__LOG_INDENT() -> int`: Returns the number of tabs to indent the printed logs (just QoL). Defaults to `0`.
+- `pp_name() -> String`: Returns the "pretty print" name of the class used in the log template. You can override this as well. Defaults to `class_name` if it can be found.
+
+## 📞 Direct Calls (Bypassing Extender)
+
+ℹ️ Whatever API you will use, all goes through the single framework. There is only one built-in `print` call in the whole project.
+
+You can bypass the extender layer and call the formatting utilities directly.
+
+ℹ️ Looks like a zoo for historical reasons. Planned to be simplified.
+
+Using `print_`:
+
+- 🟦 `print_.msg_raw(...parts: Array)`: Prints raw messages.
+- 🟦 `print_.msg_formatted(prefix_: String, text: String = "", info_indents: int = 0)`: Prints a manually formatted message.
+
+Using `print_err`:
+
+- 🟧 `print_err.msg_formatted(msg: String, warn_level: StringName)`: Allows any log level.
+
+Using `error_`:
+
+- 🟧 `static func warn(what: String, where: String, fallback: String, warn_level: StringName = WL.PUSH_ERROR,...details: Array)`: Allows that fancy template. Usually is used in utilities.
+
+## 🎛️ Usage Examples
+
+### Using `NodeLogger`
+
+```GDscript
+class_name MusicSystem
+extends NodeLogger
+
+var bus_id := "SFX"
+var play_on_start := true
+var stream_to_volume := {
+	"footstep": 2.0,
+	"jump": - 3.0
+}
+var default_stream: AudioStream
+
+
+func _ready() -> void:
+	# info log, any args, any order
+	__log_("init", "bus_id/autoplay/stream_to_volume", bus_id, play_on_start, stream_to_volume)
+	__log_("init", "default_stream is", default_stream.resource_name, default_stream)
+	
+	if not default_stream:
+		# Will push engine Warning. 
+		# Actual message would be like: 
+		#   "⚠️💥 Problem: no stream!. Where: 🎶MusicSystem | init". Fallback: returning"
+		__log_warn("no stream!", "init", "returning")
+		return
+	if bus_id == "Master":
+		# Soft warning with minimal message. 
+		# Would just stand out from the usual logs.
+		__log_warn_soft("bus id is Master")
+		# Or adding any context as well.
+		__log_warn_soft("bus id is Master", "", "", bus_id, play_on_start, stream_to_volume)
+
+
+## LOG CONFIGURATION
+
+func pp_name() -> String:
+	return "🎶MusicSystem" # <- every log will use this
+
+func __LOG_B() -> bool:
+	return false # currently only warn/error logs are being processed
+```
+
+### Direct calls
+
+There are self explanatory :)
+
+## 🧊 Static Loggers
+
+The logging framework also supports static classes, maintaining the same principles.
+Custom static class should extend a static extender like `RefCountedStaticLogger`.
+
+### Static classes problem
+
+GDScript does not support overriding static methods. Because of this, the framework cannot dynamically resolve a subclass's static config methods (like `pp_name` or `__LOG_B`).
+This makes the current implementation for static loggers more boilerplate-heavy.
+
+ℹ️ It is planned to make it better
+
+### Instruction
+
+You need to copy-paste a specific `__LOGS` template region into your script. It explicitly defines the local configuration and the `__log_` function itself.
+
+Higher-severity logging methods (like `__log_warn`) are still inherited from the extender and can be used the same way as with non static class. Minor issue is that they won't use `pp_name`.
+
+### Usage Example
+
+```GDscript
+class_name StaticClass
+extends RefCountedStaticLogger
+
+static func hey(number: int = -1) -> void:
+	if number == -1:
+		__log_error("default number", "hey", "return")
+		return
+	
+	__log_("hey", "number is", number)
+
+# region: __LOGS
+
+static func pp_name() -> String:
+	return "StaticClass"
+
+static func __LOG_B() -> bool:
+	return false
+
+static func __log_(_prefix: Variant, ...parts: Array):
+	<from template>
+
+# endregion
+```
+
+## 🤔 Ideas Behind Implementation and Trade-offs
+
+Validation framework implementation via extenders follows the same pattern as Validation Framework.
+Read about it here here: link
