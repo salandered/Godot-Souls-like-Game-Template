@@ -3,14 +3,14 @@ extends BaseTimer
 
 
 ## idempotent
-func initialise(duration_: float) -> void:
+func initialize(duration_: float) -> void:
 	self.duration = duration_
 	self.timer = 0.0
 
 	
 ## Returns true when timer expires
 func update(delta: float) -> bool:
-	if not is_initialised(): return false
+	if not is_initialized(): return false
 	
 	if timer < duration:
 		timer += delta

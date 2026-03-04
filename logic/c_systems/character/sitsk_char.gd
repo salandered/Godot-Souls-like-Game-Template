@@ -8,10 +8,10 @@ class_name SittingSkCharacter
 @onready var aura_anim_sfx_sig_emitter: EnemyAnimSFXSignalEmitter = %AuraAnimSFXSigEmitter
 
 
-## INITIALISATION
+## INITIALIZATION
 # region
 
-func initialise_phe_char_implementation() -> void:
+func initialize_phe_char_implementation() -> void:
 	pass
 
 func _for_init_weapon_id_to_emitter() -> Dictionary[StringName, BaseAnimSFXSignalEmitter]:

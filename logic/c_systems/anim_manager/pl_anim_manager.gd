@@ -25,7 +25,7 @@ func __soft_dependencies() -> Array:
 	]
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	if _anim_container:
 		var initial_anim := _anim_container.get_by_anim_id(A.loco.idle)
 		if _native_player:
@@ -35,15 +35,15 @@ func initialise_implementation() -> void:
 		if full_body:
 			full_body.curr_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
 			full_body.prev_playback = AnimPlayback.new(initial_anim, 0.0, 0.0)
-			full_body.initialise(_native_player)
+			full_body.initialize(_native_player)
 
 	if overlay_modifier:
-		overlay_modifier.initialise()
+		overlay_modifier.initialize()
 	
 	if _begin:
-		_begin.initialise()
+		_begin.initialize()
 	if _end:
-		_end.initialise()
+		_end.initialize()
 
 
 ## SET ANIMATIONS TO PLAY ▶️

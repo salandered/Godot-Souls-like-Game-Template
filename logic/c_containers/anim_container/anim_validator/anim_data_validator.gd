@@ -1,3 +1,4 @@
+## TODO: should be moved from containers
 class_name AnimDataValidator
 extends RefCountedStaticLogger
 

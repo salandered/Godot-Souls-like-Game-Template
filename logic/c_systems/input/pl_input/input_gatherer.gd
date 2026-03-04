@@ -93,7 +93,7 @@ func gather_input(delta: float) -> InputPackage:
 			_to_run_after_sprint_timer.turn_off() # cancel timer if sprint is pressed again
 		
 		elif _sprint_key.is_just_released:
-			_to_run_after_sprint_timer.initialise(SPRINT_TO_RUN_DELAY)
+			_to_run_after_sprint_timer.initialize(SPRINT_TO_RUN_DELAY)
 			new_input.actions.append(PS.sprint) # keep sprinting for this frame
 		
 		elif _to_run_after_sprint_timer.is_in_progress():

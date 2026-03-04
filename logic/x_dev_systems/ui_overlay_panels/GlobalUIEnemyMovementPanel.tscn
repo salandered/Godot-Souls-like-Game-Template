@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dvbe6tl3nhj2m"]
 
-[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_u8e5p"]
-[ext_resource type="Script" uid="uid://ba3jiexlu53gq" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/enemy_movement_grid_manager.gd" id="2_mi0kl"]
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_u8e5p"]
+[ext_resource type="Script" uid="uid://ba3jiexlu53gq" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/enemy_movement_grid_manager.gd" id="2_mi0kl"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="3_tbua7"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_fx1o2"]
 [ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="5_mi0kl"]

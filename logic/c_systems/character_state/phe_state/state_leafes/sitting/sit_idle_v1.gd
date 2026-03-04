@@ -12,7 +12,7 @@ var _anim_usual: AnimationData
 var _anim_active: AnimationData
 
 
-func initialise() -> void:
+func initialize() -> void:
 	_anim_usual = anim_container.get_by_anim_id(ANIM_USUAL)
 	_anim_active = anim_container.get_by_anim_id(ANIM_ACTIVE)
 	blend_time.set_specific(0.4)

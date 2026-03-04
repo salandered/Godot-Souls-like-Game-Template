@@ -31,7 +31,7 @@ func get_global_speed_scale() -> float:
 			return 0.9
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	hit_damage = 24
 
 	blend_time.set_by_prev_action({

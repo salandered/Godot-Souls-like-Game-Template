@@ -1,7 +1,7 @@
 extends BasePHEAttack
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	default_sp.ANGULAR_SPEED = 1
 	sp_config = SpeedConfig.new(default_sp)
 	blend_time.set_by_prev_action({

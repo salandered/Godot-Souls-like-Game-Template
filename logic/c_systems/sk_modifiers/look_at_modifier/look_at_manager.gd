@@ -63,11 +63,11 @@ func __hard_validation() -> bool:
 	return _r
 
 
-func initialise(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void:
+func initialize(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void:
 	_my_marker = my_marker_
 
 	if target_marker_:
-		__log_("initialise", target_marker_)
+		__log_("initialize", target_marker_)
 		_target_marker = target_marker_
 
 		for modifier: LookAtHeadModifier3D in modifiers:

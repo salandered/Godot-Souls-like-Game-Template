@@ -20,11 +20,11 @@ var TIME_REMAINING_TO_END := 0.0
 
 
 ## if state needs something special to work. Would be called from states container.
-func _initialise() -> void:
-	initialise()
+func _initialize() -> void:
+	initialize()
 
 
-func initialise() -> void:
+func initialize() -> void:
 	pass
 
 

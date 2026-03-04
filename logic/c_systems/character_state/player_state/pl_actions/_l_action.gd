@@ -6,7 +6,7 @@ var legs_sm: LegsSM
 
 
 ## to override if needed
-func initialise() -> void:
+func initialize() -> void:
 	pass
 
 

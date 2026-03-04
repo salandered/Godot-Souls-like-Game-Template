@@ -5,7 +5,7 @@ class_name FighterArmWeapon
 extends BaseWeapon
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	pass
 
 

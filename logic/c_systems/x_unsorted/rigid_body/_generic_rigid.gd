@@ -6,12 +6,11 @@ func get_impact_threshold() -> float:
 	return 0.2
 
 
-
 func get_sound_cooldown() -> float:
 	return 0.2
 	
 	
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	pass
 
 

@@ -23,7 +23,7 @@ func get_by_sfx_type_id(sfx_type_id: StringName) -> ASP3DConfig:
 
 ## while there is a little amount of SFX types, we add them all
 ## implementation can skip unneeded ones, 
-## there will be deleted from the result dict with which container is initialised
+## there will be deleted from the result dict with which container is initialized
 ## and if for example weapon accidently left footstep entry, its won't affect anything as long as other systems dont wanna walking sword ...
 func _get_dict_data() -> Dictionary[StringName, ASP3DConfig]:
 	var dict_: Dictionary[StringName, ASP3DConfig] = {

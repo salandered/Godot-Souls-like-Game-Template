@@ -43,7 +43,7 @@ func _ready() -> void:
 		shatter.collision_mask = Collision.Masks.ITEM_COL_MASK
 		count += 1
 		
-	__log_("~~", "ready of shattered column", count, "were initialised")
+	__log_("~~", "ready of shattered column", count, "were initialized")
 	
 	
 	await FrameUtils.wait_process_frames(self , 30)

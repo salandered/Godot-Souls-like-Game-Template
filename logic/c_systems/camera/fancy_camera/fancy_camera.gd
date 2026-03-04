@@ -122,10 +122,10 @@ func __hard_dependencies() -> Array:
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	initialise()
+	initialize()
 
 
-func initialise() -> void:
+func initialize() -> void:
 	add_to_group(Groups.Dev.FANCY_CAM)
 
 	# SENSE
@@ -135,7 +135,7 @@ func initialise() -> void:
 	# POSITIONS INIT
 	# 1. look_at_ is always Player's chest (CameraFocus) in the Free State
 	# 2. Free State is always first state to enter 
-	# => we treat look_at_ as chest here in initialise() 
+	# => we treat look_at_ as chest here in initialize() 
 	var chest := look_at_
 
 	aim.global_position = chest.global_position # Aim to player's chest
@@ -178,7 +178,7 @@ func initialise() -> void:
 		]
 	)
 
-	__log_("", "Initialisation ended.", "Initial_boom is", __free_boom())
+	__log_("", "Initialization ended.", "Initial_boom is", __free_boom())
 	if not __perform_validation(true):
 		__log_error(pp.s("Failed to init"), "", "without camera nothing can be done")
 

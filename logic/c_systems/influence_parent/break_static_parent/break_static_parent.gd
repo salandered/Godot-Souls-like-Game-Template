@@ -39,10 +39,10 @@ var static_parent: StaticBody3D
 
 
 func _ready() -> void:
-	initialise()
+	initialize()
 
 
-func initialise() -> void:
+func initialize() -> void:
 	if __perform_validation():
 		static_parent = _find_static_parent()
 		if static_parent:

@@ -58,7 +58,7 @@ func _ready() -> void:
 	if not eu.is_editor():
 		if not __perform_validation():
 			return
-		## initialise with defaults
+		## initialize with defaults
 		restore_all_defaults(0.0)
 
 

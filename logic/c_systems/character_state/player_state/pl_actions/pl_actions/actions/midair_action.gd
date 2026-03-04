@@ -4,7 +4,7 @@ extends PlayerAction
 var jump_direction: Vector3 = Vector3.ZERO
 
 
-func initialise() -> void:
+func initialize() -> void:
 	blend_time.set_by_prev_action({
 		PS.Act.jump_sprint: 0.5
 	})

@@ -12,7 +12,7 @@ var _anim_talk: AnimationData
 var _anim_talk_w_leg: AnimationData
 
 
-func initialise() -> void:
+func initialize() -> void:
 	_anim_talk = anim_container.get_by_anim_id(ANIM_TALK)
 	_anim_talk_w_leg = anim_container.get_by_anim_id(ANIM_TALK_W_LEG)
 

@@ -201,19 +201,19 @@ static func array_of_base_dv_setting_check_button(array: Array) -> Array[BaseDVS
 	list_casted.assign(_safe_validate_class(array, BaseDVSettingCheckButton, "BaseDVSettingCheckButton"))
 	return list_casted
 
-static func array_of_dv_vc_spinbox(array: Array) -> Array[DVValueChangerSpinBox]:
-	var list_casted: Array[DVValueChangerSpinBox] = []
-	list_casted.assign(_safe_validate_class(array, DVValueChangerSpinBox, "DVValueChangerSpinBox"))
+static func array_of_dv_vc_spinbox(array: Array) -> Array[DTValueChangerSpinBox]:
+	var list_casted: Array[DTValueChangerSpinBox] = []
+	list_casted.assign(_safe_validate_class(array, DTValueChangerSpinBox, "DTValueChangerSpinBox"))
 	return list_casted
 
-static func array_of_dv_line_edit(array: Array) -> Array[DVLineEdit]:
-	var list_casted: Array[DVLineEdit] = []
-	list_casted.assign(_safe_validate_class(array, DVLineEdit, "DVLineEdit"))
+static func array_of_dv_line_edit(array: Array) -> Array[DTLineEdit]:
+	var list_casted: Array[DTLineEdit] = []
+	list_casted.assign(_safe_validate_class(array, DTLineEdit, "DTLineEdit"))
 	return list_casted
 
-static func array_of_dv_option_button(array: Array) -> Array[DVOptionButton]:
-	var list_casted: Array[DVOptionButton] = []
-	list_casted.assign(_safe_validate_class(array, DVOptionButton, "DVOptionButton"))
+static func array_of_dv_option_button(array: Array) -> Array[DTOptionButton]:
+	var list_casted: Array[DTOptionButton] = []
+	list_casted.assign(_safe_validate_class(array, DTOptionButton, "DTOptionButton"))
 	return list_casted
 
 

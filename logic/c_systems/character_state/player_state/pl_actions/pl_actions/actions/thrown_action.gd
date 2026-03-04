@@ -11,7 +11,7 @@ var speed_x_interpolator := HillInterpolator.new()
 var _boost_value := 0.0
 
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.ANGULAR_SPEED = 0.1
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.FROM_RUN, 0.0))
 
@@ -79,7 +79,7 @@ func on_enter_action(input_: InputPackage):
 	var _inherited_speed := pm().get_curr_velocity_len()
 	var _interpolator_dur := _calculate_interpolator_duration(anim)
 	
-	speed_x_interpolator.initialise(
+	speed_x_interpolator.initialize(
 		_inherited_speed + curr_throw_pack.extra_start_speed + _boost_value / 2,
 		curr_throw_pack.end_speed + _boost_value / 2,
 		curr_throw_pack.peak_speed + _boost_value * 2,

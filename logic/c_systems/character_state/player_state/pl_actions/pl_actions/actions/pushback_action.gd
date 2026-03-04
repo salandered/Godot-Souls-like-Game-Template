@@ -11,7 +11,7 @@ var _final_extra_speed_Z: float = 0.0
 var _final_extra_speed_X: float = 0.0
 
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.ANGULAR_SPEED = 2
 
 
@@ -22,7 +22,7 @@ func on_enter_action(input_: InputPackage):
 	
 	var r := calculate_extra_root_speed(DEFAULT_GLOBAL_EXTRA_SPEED_Z)
 	_final_extra_speed_Z = r.z
-	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
+	fade_interpolator.initialize(1.0, 0.0, DEFAULT_FADE_TIME)
 	
 
 func update(input_: InputPackage, delta: float):

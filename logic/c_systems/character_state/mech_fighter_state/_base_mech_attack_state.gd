@@ -9,12 +9,12 @@ var hit_damage: float = 10
 var SCALE_ROOT_FACTOR := 1.0
 
 
-func initialise() -> void:
+func initialize() -> void:
 	TIME_REMAINING_TO_END = 0.2
-	initialise_attack_state_implementation()
+	initialize_attack_state_implementation()
 
 
-func initialise_attack_state_implementation() -> void:
+func initialize_attack_state_implementation() -> void:
 	pass
 
 

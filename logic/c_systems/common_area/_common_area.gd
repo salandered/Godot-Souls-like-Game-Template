@@ -193,7 +193,7 @@ func set_monitor_enable(value: bool):
 	set_physics_process(value)
 	_set_monitor_enable_implementation(value)
 
-## can be overriden
+## can be overridden
 func _set_monitor_enable_implementation(value: bool) -> void:
 	pass
 
@@ -202,12 +202,12 @@ func _set_monitor_enable_implementation(value: bool) -> void:
 # MONITOR HANDLERS
 # region 
 
-## should not be overriden. use on_area_entered
+## should not be overridden. use on_area_entered
 func __on_area_entered(incoming_area: Area3D) -> void:
 	if MONITOR_ENABLED:
 		on_area_entered(incoming_area)
 
-## should not be overriden. use on_body_entered
+## should not be overridden. use on_body_entered
 func __on_body_entered(incoming_body: Node3D) -> void:
 	if MONITOR_ENABLED:
 		on_body_entered(incoming_body)

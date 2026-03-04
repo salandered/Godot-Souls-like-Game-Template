@@ -28,12 +28,12 @@ func accept_states(
 	self._anim_container = anim_container_
 	self._me = me_
 	_accept_states()
-	_initialise_states()
+	_initialize_states()
 
 
-func _initialise_states():
+func _initialize_states():
 	for state: BaseMechFighterState in _states.values():
-		state._initialise()
+		state._initialize()
 
 
 func _accept_states():

@@ -15,7 +15,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise_implementation(additional_data: Dictionary[StringName, Variant]) -> void:
+func initialize_implementation(additional_data: Dictionary[StringName, Variant]) -> void:
 	_character = DictUtils.safe_get_dict_key(additional_data, character_additional_data_key, null)
 
 

@@ -5,7 +5,7 @@ class_name ASPConfig
 # TODO: var mix_target: int
 ## has effect if > 0.0
 
-## Template to quickly initialise new config
+## Template to quickly initialize new config
 # var asp_config := ASPConfig.new(
 # 	ASPConfig.DEF_VOL_DB_CHANGE,
 # 	ASPConfig.DEF_PITCH_CHANGE,

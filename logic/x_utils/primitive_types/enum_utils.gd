@@ -37,7 +37,7 @@ static func get_name_safe(enum_dict: Dictionary, value: int) -> String:
 
 
 ## Returns an Array of values, excluding the key "UNKNOWN" if it exists.
-## Usage: var types = EnumUtils.get_values_excluding_unknown(DVS.CharacterType)
+## Usage: var types = EnumUtils.get_values_excluding_unknown(DTS.CharacterType)
 static func get_values_excluding_unknown(enum_dict: Dictionary) -> Array:
 	var values: Array = []
 	for key in enum_dict:

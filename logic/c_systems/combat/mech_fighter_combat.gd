@@ -6,7 +6,7 @@ class_name MechFighterCombat
 @export var parent_node_of_weapons: Node3D
 
 
-func initialise_implementation():
+func initialize_implementation():
 	pass
 
 

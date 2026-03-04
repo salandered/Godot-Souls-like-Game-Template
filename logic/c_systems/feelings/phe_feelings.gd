@@ -10,7 +10,7 @@ func is_player() -> bool:
 	return false
 
 
-func initialise():
+func initialize():
 	pass
 
 

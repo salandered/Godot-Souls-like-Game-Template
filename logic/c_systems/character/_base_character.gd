@@ -35,10 +35,10 @@ func __soft_dependencies() -> Array:
 	]
 
 
-## INITIALISATION
+## INITIALIZATION
 # region
 
-func initialise_static_char_implementation() -> void:
+func initialize_static_char_implementation() -> void:
 	# 'Moving Platfrom' from UI
 	# by default uses all, it's a known problem with RigidBodies at least (see Collision)
 	platform_floor_layers = (
@@ -47,11 +47,11 @@ func initialise_static_char_implementation() -> void:
 		Collision.Layers.OTHER_CHAR_COL
 	)
 
-	_initialise_common_char()
-	initialise_base_char_implementation()
+	_initialize_common_char()
+	initialize_base_char_implementation()
 
 
-func _initialise_common_char() -> void:
+func _initialize_common_char() -> void:
 	_sig_container = _for_init_sig_container()
 
 	_visuals = _for_init_visuals()
@@ -62,32 +62,32 @@ func _initialise_common_char() -> void:
 	if _bones:
 		_bones.accept_bones()
 	
-	_initialise_area_awareness()
+	_initialize_area_awareness()
 
 	if _area_awareness:
 		_movement = ArrayUtils.get_only_one_or_null(get_descendants.base_character_movement(self ))
 		if _movement:
-			_movement.initialise(self , _area_awareness)
+			_movement.initialize(self , _area_awareness)
 
-	_initialise_char_sfx_systems()
+	_initialize_char_sfx_systems()
 	
 	if _combat:
-		_initialise_weapons_sfx()
+		_initialize_weapons_sfx()
 
 
-func _initialise_area_awareness() -> void:
+func _initialize_area_awareness() -> void:
 	_area_awareness = ArrayUtils.get_only_one_or_null(get_descendants.base_area_awareness(self ))
 	if _area_awareness:
-		_area_awareness.initialise(self )
+		_area_awareness.initialize(self )
 
 
-func _initialise_char_sfx_systems() -> void:
+func _initialize_char_sfx_systems() -> void:
 	var asp_config_container := _for_init_asp_config_container()
 
 	_sfx_system = ArrayUtils.get_only_one_or_null(get_descendants.character_sfx_systems(self ))
 
 	if _sfx_system:
-		_sfx_system.initialise(
+		_sfx_system.initialize(
 			_sig_container,
 			asp_config_container,
 			self ,
@@ -96,10 +96,10 @@ func _initialise_char_sfx_systems() -> void:
 	
 		var sad_container := _for_init_sad_container()
 		if sad_container:
-			_for_init_anim_sfx_sig_emitter().initialise(sad_container, _sig_container)
+			_for_init_anim_sfx_sig_emitter().initialize(sad_container, _sig_container)
 
 
-func _initialise_weapons_sfx():
+func _initialize_weapons_sfx():
 	## NOTE: unlike character sfx, where sfx_system is tied to pl_anim_sfx_sig_emitter,
 	##       for weapon we manage emitter here on character side, while its sfx system 
 	##       is managed by weapon itself. This is done because anim knowledge is on player side. 
@@ -109,7 +109,7 @@ func _initialise_weapons_sfx():
 	for weapon: BaseWeapon in _weapons:
 		var _emitter: BaseAnimSFXSignalEmitter = _weapon_id_to_emitter.get(weapon.get_weapon_id())
 		if not error_.null_object(_emitter):
-			_emitter.initialise(weapon.get_sad_container(), weapon.get_signal_container())
+			_emitter.initialize(weapon.get_sad_container(), weapon.get_signal_container())
 
 # endregion
 
@@ -139,7 +139,7 @@ func get_area_awareness() -> BaseAreaAwareness:
 
 
 ## abstract so u dont forget to use it instead of _ready()
-@abstract func initialise_base_char_implementation() -> void
+@abstract func initialize_base_char_implementation() -> void
 
 @abstract func _for_init_sig_container() -> BaseCharacterSignalContainer
 @abstract func _for_init_sad_container() -> BaseCharacterSADContainer

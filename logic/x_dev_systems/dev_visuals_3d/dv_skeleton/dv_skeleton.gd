@@ -1,6 +1,6 @@
 @tool
 class_name DVSkeleton
-extends DVCSignalEnabledNode3D
+extends DTCSignalEnabledNode3D
 
 
 ## Generates a primitive representation of the skeleton.
@@ -8,7 +8,7 @@ extends DVCSignalEnabledNode3D
 ## - Head is Sphere.
 ## - Everything else gets a Box.
 
-## Adds bone attachmnets to itself
+## Adds bone attachments to itself
 
 @export var _skeleton: Skeleton3D
 
@@ -32,7 +32,7 @@ func __hard_validation() -> bool:
 	return len(_bone_attachments) > 0
 
 
-func _initialise_implementation_in_game() -> void:
+func _initialize_implementation_in_game() -> void:
 	_create_visuals()
 	__log_("_ready", "created", len(_bone_attachments))
 

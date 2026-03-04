@@ -18,7 +18,7 @@ func get_global_speed_scale() -> float:
 			return 1.0
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	hit_damage = 12
 
 

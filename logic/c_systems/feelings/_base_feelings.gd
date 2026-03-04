@@ -22,10 +22,10 @@ func _ready() -> void:
 	__log_("health", "curr health initted with max health", _current_health, get_max_health())
 	statuses = {}
 
-	initialise()
+	initialize()
 
 
-@abstract func initialise()
+@abstract func initialize()
 
 
 @abstract func get_max_health() -> float

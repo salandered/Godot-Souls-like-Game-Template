@@ -4,7 +4,7 @@ class_name EaseCurveSampler
 var curve: Curve
 
 
-func initialise(curve_: Curve) -> void:
+func initialize(curve_: Curve) -> void:
 	assert(curve_)
 	self.curve = curve_
 

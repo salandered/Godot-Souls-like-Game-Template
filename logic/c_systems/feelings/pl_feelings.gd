@@ -25,7 +25,7 @@ var regen_delay_timer := DelayCallbackTimer.new()
 var REGEN_DELAY_TIME := 0.5
 
 
-func initialise() -> void:
+func initialize() -> void:
 	_current_stamina = max_stamina
 	
 	statuses = {
@@ -54,7 +54,7 @@ func get_max_health() -> float:
 func lose_stamina(amount: float):
 	_change_stamina(-amount)
 	if amount != 0.0:
-		regen_delay_timer.initialise(REGEN_DELAY_TIME, _on_regen_delay_ended)
+		regen_delay_timer.initialize(REGEN_DELAY_TIME, _on_regen_delay_ended)
 
 
 func add_stamina(amount: float):
@@ -184,7 +184,7 @@ func _trigger_reach_zero() -> void:
 	if IN_ZERO_DRAIN: return # already was triggered
 	
 	statuses[FATIGUE_STATUS] = true
-	zero_drain_timer.initialise(ZERO_DRAIN_TIME, _on_zero_drain_ended)
+	zero_drain_timer.initialize(ZERO_DRAIN_TIME, _on_zero_drain_ended)
 	IN_ZERO_DRAIN = true
 	__log_("stamina", pp.s("set status", FATIGUE_STATUS, "and triggered zero_drain_timer with", ZERO_DRAIN_TIME))
 

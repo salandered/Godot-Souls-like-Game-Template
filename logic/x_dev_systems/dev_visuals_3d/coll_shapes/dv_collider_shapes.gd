@@ -1,14 +1,14 @@
 @tool
-class_name VisualiseColliderShapes
+class_name VisualizeColliderShapes
 extends BaseDVCollShapes
 
 
-@export var collider_colors: Dictionary[String, Color] = {
-	"default": Color.DARK_BLUE,
+@export var collider_colors: Dictionary[StringName, Color] = {
+	DEF_CATEGORY: Color.DARK_BLUE,
 }
 
 
-func _initialise_visuals_imp() -> void:
+func _initialize_visuals_implementation() -> void:
 	var char_coll_colliders := get_descendants.char_coll_colliders(level)
 	
 	for node in char_coll_colliders:
@@ -30,5 +30,5 @@ func _initialise_visuals_imp() -> void:
 			_generated_nodes.append(mesh_inst)
 
 
-func _get_coll_shape_category(casted: CollisionShape3D) -> String:
-	return "default"
+func _get_coll_shape_category(casted: CollisionShape3D) -> StringName:
+	return DEF_CATEGORY

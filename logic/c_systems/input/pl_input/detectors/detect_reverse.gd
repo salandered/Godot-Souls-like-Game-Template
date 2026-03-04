@@ -53,7 +53,7 @@ static func _check_overlap(
 			var from_vector: Vector2 = action_to_vector[k_pressed.raw_action]
 			var to_vector: Vector2 = action_to_vector[k_just_pressed.raw_action]
 
-			reverse_data.initialise(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
+			reverse_data.initialize(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
 			return true
 	
 	# SUBSEQUENT FRAMES: catch reversal while both keys held (extended window)
@@ -67,7 +67,7 @@ static func _check_overlap(
 			var from_vector: Vector2 = action_to_vector[k_pressed.raw_action]
 			var to_vector: Vector2 = action_to_vector[k_ex_just_pressed.raw_action]
 
-			reverse_data.initialise(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
+			reverse_data.initialize(from_vector, to_vector, type, 0.0, other_keys_are_pressed)
 			return true
 			
 	return false
@@ -95,7 +95,7 @@ static func _check_sequential(
 				var from_vector: Vector2 = action_to_vector[k_not_pressed.raw_action]
 				var to_vector: Vector2 = action_to_vector[k_just_pressed.raw_action]
 				
-				reverse_data.initialise(from_vector, to_vector, type, time_since_release, other_keys_are_pressed)
+				reverse_data.initialize(from_vector, to_vector, type, time_since_release, other_keys_are_pressed)
 				return true
 				
 	return false

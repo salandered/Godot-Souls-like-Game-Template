@@ -3,6 +3,8 @@ extends BasePHEComposite
 class_name BasePHEAttackSeries
 
 
+const all_the_dodges: Array[StringName] = [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
+
 var PL_DIST_TO_END := 8
 
 var _chosen_attack_series: Array[StringName] = []
@@ -17,7 +19,7 @@ var curr_series_number: int = -1
 ##			     In other words, BasePHEAttackSeries can not have BasePHEComposite as a substate.
 ##	  - Implement get_attack_series_list() which returns non empty series
 ##	  - Implement pick_series_idx. Simplest: call default_pick_series_idx()
-##    - Recommended: set config values in initialise()
+##    - Recommended: set config values in initialize()
 ##	  - NOTE: i decided to do @abstract methods and default implementation as an alternative to 
 ##            do just method and overrding it in heirs See how it goes. 
 ##            Idea is that u think of logic when creating new series, and u cant make a mistake in function name while overriding
@@ -153,9 +155,9 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 			_override_commit = true
 		else:
 			# NOTE: we don't change current_attack_number here. is_ended should be true
-			if not _series_forgotten.is_initialised():
+			if not _series_forgotten.is_initialized():
 				# __log_error( "_series_forgotten init!")
-				_series_forgotten.initialise(0.1)
+				_series_forgotten.initialize(0.1)
 				if __LOG_B(): _reason += pp.s(em.warn, "series ended! parent not switches us! wait 0.1 sec and return one more move with idx 0")
 				return VerdictPH.new(_next_state, _reason)
 			elif _series_forgotten.update(delta):

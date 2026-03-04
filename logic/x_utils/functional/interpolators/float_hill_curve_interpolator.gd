@@ -10,7 +10,7 @@ var current_value: float
 
 
 ## idempotent
-func initialise(start: float, end: float, peak: float, curve_: Curve, duration_: float) -> void:
+func initialize(start: float, end: float, peak: float, curve_: Curve, duration_: float) -> void:
 	assert(curve_)
 	self.start_value = start
 	self.end_value = end

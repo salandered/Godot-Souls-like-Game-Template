@@ -21,7 +21,7 @@ var other_keys_was_pressed: bool = false
 
 
 ## should be created only via this method
-func initialise(prev_dir_: Vector2, target_dir_: Vector2, type_: ReverseType, time_delta_: float, other_keys_was_pressed_: bool = false) -> void:
+func initialize(prev_dir_: Vector2, target_dir_: Vector2, type_: ReverseType, time_delta_: float, other_keys_was_pressed_: bool = false) -> void:
 	self._is_reversed = true
 	self.type = type_
 	self.time_delta = time_delta_

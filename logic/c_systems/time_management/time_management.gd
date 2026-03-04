@@ -11,15 +11,15 @@ var _enter_state_ticks: int
 
 
 func mark_enter_state() -> void:
-	_enter_state_ticks = Time.get_ticks_msec()
+	_enter_state_ticks = TimeUtils.get_curr_time_ticks_msec()
 	_accumulated_time = 0.0
 
 
 ## ignores pause and time_scale
 ## NOTE: needs mark_enter_state to be set beforehand
 func get_real_time_spent() -> float:
-	var now := Time.get_ticks_msec()
-	return (now - _enter_state_ticks) / 1000.0 # Convert ms to seconds
+	var now := TimeUtils.get_curr_time_ticks_msec()
+	return (now - _enter_state_ticks) / 1000.0 # ms to seconds
 
 
 ## NOTE: needs mark_enter_state to be set beforehand

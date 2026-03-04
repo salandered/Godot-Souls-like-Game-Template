@@ -31,7 +31,7 @@ func switch_from_free(found_target: Node):
 	if blend_start_hor_len < 0.05: # optional to try
 		blend_start_hor_len = 0.05
 
-	blend_timer.initialise(BLEND_DURATION)
+	blend_timer.initialize(BLEND_DURATION)
 	
 
 func update(delta: float) -> void:

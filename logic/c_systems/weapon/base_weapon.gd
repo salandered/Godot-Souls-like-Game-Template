@@ -44,7 +44,7 @@ var _signal_container: BaseWeaponSignalContainer
 ## nullable
 var spark_marker: Marker3D
 
-## can be overriden
+## can be overridden
 var PUSH_RIGID_BODIES_FORCE: float = 6.0
 
 
@@ -62,7 +62,7 @@ func __soft_dependencies() -> Array:
 	]
 
 
-func initialise(holder: BaseStaticCharacter) -> void:
+func initialize(holder: BaseStaticCharacter) -> void:
 	self._holder = holder
 	## each weapon has its own signals
 	_signal_container = BaseWeaponSignalContainer.new()
@@ -70,7 +70,7 @@ func initialise(holder: BaseStaticCharacter) -> void:
 
 	_weapon_hurt_box = get_weapon_hurt_box()
 	if _weapon_hurt_box:
-		_weapon_hurt_box.initialise(self , _signal_container)
+		_weapon_hurt_box.initialize(self , _signal_container)
 	
 
 	## SFX. Here we rare not logging any problems, all be logged using __soft_dependencies etc
@@ -78,7 +78,7 @@ func initialise(holder: BaseStaticCharacter) -> void:
 	if _weapon_sfx and _holder: # NOTE: without _holder no SFX
 		_sfx_system = _get_weapon_sfx_system(_weapon_sfx)
 		if _sfx_system:
-			_sfx_system.initialise(
+			_sfx_system.initialize(
 				_signal_container,
 				_for_init_asp_container(),
 				self ,
@@ -87,7 +87,7 @@ func initialise(holder: BaseStaticCharacter) -> void:
 
 
 	spark_marker = _find_spark_marker()
-	initialise_implementation()
+	initialize_implementation()
 	validate_visuals()
 
 
@@ -110,7 +110,7 @@ func get_holder() -> BaseStaticCharacter:
 
 
 ## additional init or validation if needed
-@abstract func initialise_implementation() -> void
+@abstract func initialize_implementation() -> void
 
 
 @abstract func get_weapon_hurt_box() -> WeaponHurtBox
@@ -220,7 +220,7 @@ func _find_spark_marker() -> Marker3D:
 	return null
 
 
-## can be overriden
+## can be overridden
 func get_spark_config() -> ParticlesConfig:
 	return ParticlesConfig.new(8, 0.3)
 

@@ -37,17 +37,17 @@ var _on_signal_asps: Array[OnSFXSigASP]
 @abstract func _get_on_signal_asps(signals: BaseSignalContainer, asp_config_container: BaseSFXASPConfigContainer) -> Array[OnSFXSigASP]
 
 
-@abstract func initialise_implementation(additional_data: Dictionary[StringName, Variant]) -> void
+@abstract func initialize_implementation(additional_data: Dictionary[StringName, Variant]) -> void
 
 
 ## should be called for any sfx system
-func initialise(
+func initialize(
 		signal_container_: BaseSignalContainer,
 		asp_config_container: BaseSFXASPConfigContainer,
 		root_of_asps: Node,
 		additional_data: Dictionary[StringName, Variant]
 	) -> void:
-	initialise_implementation(additional_data)
+	initialize_implementation(additional_data)
 	
 	var _list := _get_on_signal_asps(signal_container_, asp_config_container)
 	
@@ -64,7 +64,7 @@ func initialise(
 		__log_warn_soft("__perform_validation failed, sytem won't work", "_on_signal_asps = []")
 		_on_signal_asps = []
 	else:
-		__log_("", "initialised")
+		__log_("", "initialized")
 
 
 func _soft_validate_on_signal_asps():

@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-func initialise() -> void:
+func initialize() -> void:
 	SWITCH_ANIM_BEFORE = 0.2
 	PL_DIST_TO_END = 7
 
@@ -22,7 +22,7 @@ var pick_weight: Dictionary[int, float] = {
 		0: 0.2,
 		1: 0.4,
 		2: 0.4,
-		3: 0.2,
+		3: 0.3,
 		4: 0.05
 	}
 

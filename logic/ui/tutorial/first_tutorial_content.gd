@@ -10,7 +10,7 @@ extends NodeSystem
 @onready var target_lock_mechanic: RichTextLabel = %TargetLockMechanic
 @onready var health_stamina_mechanic: RichTextLabel = %HealthStaminaMechanic
 @onready var additional_movement_tips: RichTextLabel = %AdditionalMovementTips
-@onready var ui_dv_menu_info: RichTextLabel = %UIDVMenu
+@onready var ui_dv_tools_menu_info: RichTextLabel = %UIDevToolsMenu
 
 
 @export var refill: bool = false:
@@ -81,7 +81,7 @@ func set_all_texts():
 	_set_text_for_panel(_4_target_lock_mechanic_text, target_lock_mechanic)
 	_set_text_for_panel(_5_health_stamina_mechanic_text, health_stamina_mechanic)
 	_set_text_for_panel(_6_additional_movement_tips_text, additional_movement_tips)
-	_set_text_for_panel(_ui_overlay_controls_text, ui_dv_menu_info)
+	_set_text_for_panel(_ui_overlay_controls_text, ui_dv_tools_menu_info)
 
 
 func _set_text_for_panel(raw_text: String, label: RichTextLabel):
@@ -255,7 +255,7 @@ const _ui_overlay_controls_text = "
 In Pause Menu you can find UI Dev Tools submenu. 
 It controls all of the in-game UI panels, including this tutorial.
 
-Also a lot of the game mechanics can be visualised using it. To name a few:
+Also a lot of the game mechanics can be visualized using it. To name a few:
 [ul]
 Current state of the player or any enemy/NPC in game. 
 Information about attack type, damage or speed.

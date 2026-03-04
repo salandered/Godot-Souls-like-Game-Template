@@ -1,7 +1,7 @@
 extends BasePHELeaf
 
 
-func initialise() -> void:
+func initialize() -> void:
 	pass
 	
 	# default_sp.ANGULAR_SPEED = 2.0

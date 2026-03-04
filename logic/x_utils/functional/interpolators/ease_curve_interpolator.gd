@@ -7,7 +7,7 @@ var curve: Curve
 
 
 ## idempotent
-func initialise(curve_: Curve, duration_: float) -> void:
+func initialize(curve_: Curve, duration_: float) -> void:
 	assert(curve_)
 	self.curve = curve_
 	self.duration = duration_

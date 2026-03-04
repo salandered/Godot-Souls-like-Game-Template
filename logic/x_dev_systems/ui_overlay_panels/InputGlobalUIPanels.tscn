@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://yhhhch504iof"]
 
-[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_cyk81"]
-[ext_resource type="Script" uid="uid://0kjhaxohe1pa" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/player_inputs_grid_manager.gd" id="2_ou6f6"]
-[ext_resource type="Script" uid="uid://da0vg7cdrfb7d" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/raw_inputs_grid_manager.gd" id="3_oad8c"]
-[ext_resource type="Script" uid="uid://dm632wh7godvh" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/input_actions_grid_manager.gd" id="4_ignx5"]
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_cyk81"]
+[ext_resource type="Script" uid="uid://0kjhaxohe1pa" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/player_inputs_grid_manager.gd" id="2_ou6f6"]
+[ext_resource type="Script" uid="uid://da0vg7cdrfb7d" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/raw_inputs_grid_manager.gd" id="3_oad8c"]
+[ext_resource type="Script" uid="uid://dm632wh7godvh" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/input_actions_grid_manager.gd" id="4_ignx5"]
 [ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="5_u56et"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="6_nn8n2"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="7_vsxyn"]

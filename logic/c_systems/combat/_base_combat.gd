@@ -27,13 +27,13 @@ var _active_weapon_ids: Array[StringName]
 var _hit_boxes: Array[CharacterHitbox]
 
 
-func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[StringName]):
+func initialize(character: BaseStaticCharacter, active_weapon_id_list_to_set: Array[StringName]):
 	_register_hit_boxes(character)
 
 	_register_weapons()
 
 	for weapon: BaseWeapon in _registered_weapons.values():
-		weapon.initialise(character)
+		weapon.initialize(character)
 
 	_active_weapon_ids.clear() # just in case
 	for _id in _registered_weapons.keys():
@@ -45,17 +45,17 @@ func initialise(character: BaseStaticCharacter, active_weapon_id_list_to_set: Ar
 
 	_hit_tracker = EventThrottler.new(HIT_BUFFER_DURATION, 2.0, 3.0, "HitTracker")
 
-	initialise_implementation()
+	initialize_implementation()
 
 	if __perform_validation():
-		__log_("initialised combat", __pp_weapons_info())
+		__log_("initialized combat", __pp_weapons_info())
 
 
 func _register_hit_boxes(character: BaseStaticCharacter):
 	_hit_boxes = get_descendants.char_hit_boxes(character)
 	error_.empty_list(_hit_boxes, "usually character has at least one hit box", WL.WARN)
 	for item: CharacterHitbox in _hit_boxes:
-		item.initialise(self )
+		item.initialize(self )
 	__log_("initted", len(_hit_boxes))
 
 
@@ -72,7 +72,7 @@ func _register_weapons():
 	__log_("_register_weapons", "registered", len(_weapons_list), "weapons", _registered_weapons)
 
 
-@abstract func initialise_implementation() -> void
+@abstract func initialize_implementation() -> void
 
 
 ## nullable

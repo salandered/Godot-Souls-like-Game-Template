@@ -327,7 +327,7 @@ level_music_tracks = Array[AudioStream]([ExtResource("2_ufk5n"), ExtResource("3_
 first_track_to_play_idx = 0
 music_volume_db = -3.0
 is_background_music = true
-initialise_dv = true
+initialize_dv = true
 
 [node name="__dev" type="Node3D" parent="." unique_id=312672280]
 
@@ -773,6 +773,7 @@ player = NodePath("../../../Princess")
 
 [node name="MechFighter" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1362630926 instance=ExtResource("34_skk2x")]
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -46.728897, 13.04582, 38.806297)
+dev_tag = &"mech"
 
 [node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1018679868 instance=ExtResource("21_w0ai3")]
 transform = Transform3D(1, 0, 0, 0, 0.95444363, -0.2983912, 0, 0.2983912, 0.95444363, -19.973879, 0.91030014, 11.343478)
@@ -885,6 +886,7 @@ mesh = SubResource("ArrayMesh_xm4a8")
 
 [node name="MechFighter" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=751908545 instance=ExtResource("34_skk2x")]
 transform = Transform3D(-0.1917169, 0, -0.98145026, 0, 1, 0, 0.98145026, 0, -0.1917169, -45.907993, 0.5208559, -13.289304)
+dev_tag = &"mech"
 
 [node name="DarkCratePile" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1051549338 instance=ExtResource("36_ncli4")]
 transform = Transform3D(0.63517547, 0, 0.7723679, 0, 1, 0, -0.7723679, 0, 0.63517547, -49.924126, 0.49236435, -8.652672)
@@ -1124,7 +1126,7 @@ transform = Transform3D(0.5499125, 0, -0.8352225, 0, 1, 0, 0.8352225, 0, 0.54991
 show_ui_feelings = true
 float_ui_feelings = true
 player = NodePath("../../Princess")
-dev_tag = "demo_enemy"
+dev_tag = &"demo_enemy"
 
 [node name="SpeedIncreaseChest" parent="Lincoln_ALL" unique_id=55000678 instance=ExtResource("21_i3y2i")]
 transform = Transform3D(1, 0, 0, 0, 0.9679945, 0.25097135, 0, -0.25097135, 0.9679945, -26.175722, 11.796641, 1.0264926)

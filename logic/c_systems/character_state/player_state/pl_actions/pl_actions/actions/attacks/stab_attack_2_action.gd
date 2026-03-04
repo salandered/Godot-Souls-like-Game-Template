@@ -18,7 +18,7 @@ func get_hit_damage() -> float:
 			return hit_damage
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	hit_damage = 8
 
 	blend_time.set_by_prev_action({
@@ -50,7 +50,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	var r := calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
 	_final_extra_speed_Z = r.z
 	_final_extra_speed_X = r.x
-	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
+	fade_interpolator.initialize(1.0, 0.0, DEFAULT_FADE_TIME)
 
 
 func _adjust_extra_speed_to_dodge_direction() -> Vector3:

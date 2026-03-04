@@ -31,7 +31,7 @@ var wave_overlay_config = OverlayConfig.new(
 		)
 
 
-func initialise(player_: Princess, combat_: PlayerCombat):
+func initialize(player_: Princess, combat_: PlayerCombat):
 	self._player = player_
 	self._combat = combat_
 

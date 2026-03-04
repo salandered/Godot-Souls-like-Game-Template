@@ -5,7 +5,7 @@ var gap_config := GapJumpCalculator.new(0.2, 0.8, 2.6)
 var sp_config: SpeedConfig
 
 
-func initialise() -> void:
+func initialize() -> void:
 	TIME_REMAINING_TO_END = 0.2
 	default_sp.ANGULAR_SPEED = 1.0
 	sp_config = SpeedConfig.new(default_sp)

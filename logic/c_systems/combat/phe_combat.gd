@@ -6,7 +6,7 @@ class_name PHECombat
 @onready var bones: EnemyBones = %bones
 
 
-func initialise_implementation():
+func initialize_implementation():
 	pass
 
 

@@ -17,10 +17,10 @@ const FLICKER_FIRE = preload("uid://bnf3bmp3nq5nq")
 const RIGID_SHATTER_SCRIPT = preload("uid://cvdt0we2m7pch")
 
 
-## INITIALISATION
+## INITIALIZATION
 # region
 
-func initialise_phe_char_implementation():
+func initialize_phe_char_implementation():
 	add_to_group(Groups.Chars.BIG_GUY)
 	SigUtils.safe_connect(SIG_land_wave, _on_sig_land_wave)
 

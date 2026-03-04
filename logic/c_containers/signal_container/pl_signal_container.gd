@@ -1,5 +1,5 @@
-extends BaseCharacterSignalContainer
 class_name PlayerSignalContainer
+extends BaseCharacterSignalContainer
 
 
 signal SFX_switch_weapon(payload: Dictionary[StringName, Variant])

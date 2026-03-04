@@ -6,9 +6,9 @@ extends BasePHEAttack
 var anim_speed_bump := EaseCurveSampler.new()
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	blend_time.set_specific(0.35)
-	anim_speed_bump.initialise(scare_off_anim_speed_curve)
+	anim_speed_bump.initialize(scare_off_anim_speed_curve)
 	default_sp.ANGULAR_SPEED = 0.14
 	
 

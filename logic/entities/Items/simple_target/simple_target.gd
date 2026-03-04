@@ -35,7 +35,7 @@ func _ready() -> void:
 
 	if camera_target:
 		camera_target.label = label
-		camera_target.initialise(self )
+		camera_target.initialize(self )
 
 	if __perform_validation():
 		hit_area.SIG_hit.connect(_on_my_area_hit)

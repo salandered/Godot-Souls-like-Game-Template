@@ -29,7 +29,7 @@ func __hard_dependencies() -> Array:
 
 ## used instead of _ready. Called from base weapon. 
 ## So _my_weapon is guaranteed to be non nullable
-func initialise(my_weapon_: BaseWeapon, sig_container_: BaseWeaponSignalContainer) -> void:
+func initialize(my_weapon_: BaseWeapon, sig_container_: BaseWeaponSignalContainer) -> void:
 	self._my_weapon = my_weapon_
 	self.sig_container = sig_container_
 

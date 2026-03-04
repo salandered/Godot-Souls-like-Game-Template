@@ -55,12 +55,12 @@ var _changers_cooldown := [
 	# slightest_dir_change.cooldown
 ]
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.ANGULAR_SPEED = 8
 	curr_direction = StrafeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_F, ANIM_F, SPEED_B, ANIM_B, ANIM_IDLE)
-	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
-	slight_dir_change.initialise(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION, 2)
-	# slightest_dir_change.initialise(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
+	opposite_dir_change.initialize(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
+	slight_dir_change.initialize(slght_dir_change_curve, SLIGHT_DIR_CHANGE_DURATION, 2)
+	# slightest_dir_change.initialize(slght_dir_change_curve, SLIGHTEST_DIR_CHANGE_DURATION, 2)
 
 	var turn_180_blend_time := calculate_blend_time_from_prev_anim_marker(Leg.Act.turn_180, MarkerName.TURN_180_APEX, 0.25)
 	blend_time.set_by_prev_action({
@@ -90,12 +90,12 @@ func _inherit_dodge_speed_if_same_direction():
 		_inherit_speed = true
 
 	if _inherit_speed:
-		speed_from_inherited.initialise(_inherited_speed, curr_direction.get_curr_speed(), 0.3)
-		speed_mult_from_idle.initialise(accel_from_idle_curve, 0.0)
+		speed_from_inherited.initialize(_inherited_speed, curr_direction.get_curr_speed(), 0.3)
+		speed_mult_from_idle.initialize(accel_from_idle_curve, 0.0)
 
 	else:
-		speed_from_inherited.initialise(curr_direction.get_curr_speed(), curr_direction.get_curr_speed(), 0.0)
-		speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
+		speed_from_inherited.initialize(curr_direction.get_curr_speed(), curr_direction.get_curr_speed(), 0.0)
+		speed_mult_from_idle.initialize(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 
 	
 func on_enter_action(input_: InputPackage) -> void:
@@ -110,12 +110,12 @@ func on_enter_action(input_: InputPackage) -> void:
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
 		# Leg.Act.idle:
 			default_sp.ANGULAR_SPEED = 7
-			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
-			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.4)
+			speed_mult_from_idle.initialize(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
+			angular_sp_from_idle.initialize(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.4)
 			TURN_THRESHOLD_DEG = 181
 		
 		Leg.Act.turn_180, Leg.Act.fast_turn_180:
-			speed_mult_from_idle.initialise(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
+			speed_mult_from_idle.initialize(accel_from_idle_curve, ACCEL_FROM_IDLE_TIME)
 		PS.Act.dodge:
 			default_sp.ANGULAR_SPEED = 8
 			_inherit_dodge_speed_if_same_direction()

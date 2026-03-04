@@ -1,19 +1,19 @@
 @tool
-class_name VisualiseArea3DShapes
+class_name VisualizeArea3DShapes
 extends BaseDVCollShapes
 
 
 ## colors for different area types
-@export var area_type_colors: Dictionary[String, Color] = {
-	"InteractArea": Color.GREEN_YELLOW,
-	"WeatherChangeArea": Color.YELLOW,
-	"BreakableArea": Color.ORANGE_RED,
-	"CommonArea": Color.MEDIUM_PURPLE,
-	"default": Color.SLATE_GRAY,
+@export var area_type_colors: Dictionary[StringName, Color] = {
+	PropC.CUSTOM_CLASS_NAME.INTERACT_AREA: Color.GREEN_YELLOW,
+	PropC.CUSTOM_CLASS_NAME.WEATHER_CHANGE_AREA: Color.YELLOW,
+	PropC.CUSTOM_CLASS_NAME.BREAKABLE_AREA: Color.ORANGE_RED,
+	PropC.CUSTOM_CLASS_NAME.COMMON_AREA: Color.MEDIUM_PURPLE,
+	DEF_CATEGORY: Color.SLATE_GRAY,
 }
 
 
-func _initialise_visuals_imp() -> void:
+func _initialize_visuals_implementation() -> void:
 	var areas := get_descendants.area_3d(level)
 	
 	for node in areas:
@@ -35,20 +35,20 @@ func _initialise_visuals_imp() -> void:
 				_generated_nodes.append(mesh_inst)
 
 
-func _get_area_category(area: Area3D) -> String:
+func _get_area_category(area: Area3D) -> StringName:
 	if area is CharacterHitbox or area is WeaponHurtBox:
 		return MUTED_CATEGORY
 
 	if area is InteractArea:
-		return "InteractArea"
+		return PropC.CUSTOM_CLASS_NAME.INTERACT_AREA
 	if area is WeatherChangeArea:
-		return "WeatherChangeArea"
+		return PropC.CUSTOM_CLASS_NAME.WEATHER_CHANGE_AREA
 	if area is BreakableArea:
-		return "BreakableArea"
-	
+		return PropC.CUSTOM_CLASS_NAME.BREAKABLE_AREA
+
 	## should be in the end
 	if area is CommonArea:
-		return "CommonArea"
+		return PropC.CUSTOM_CLASS_NAME.COMMON_AREA
 
 
-	return "default"
+	return DEF_CATEGORY

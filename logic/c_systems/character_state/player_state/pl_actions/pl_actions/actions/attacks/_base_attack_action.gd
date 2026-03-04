@@ -30,14 +30,14 @@ var _final_extra_speed_Z: float = 0.0
 var _final_extra_speed_X: float = 0.0
 
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.ANGULAR_SPEED = 2
 	extra_root_speed_Z.set_specific(DEFAULT_GLOBAL_EXTRA_SPEED_Z)
-	initialise_implementation()
+	initialize_implementation()
 
 
-# to override instead of initialise
-@abstract func initialise_implementation() -> void
+# to override instead of initialize
+@abstract func initialize_implementation() -> void
 
 
 ## what weapon could be attacking in this action.
@@ -96,7 +96,7 @@ func on_enter_action(input_: InputPackage):
 	var r := calculate_extra_root_speed(_speed_extra_Z, _speed_extra_X)
 	_final_extra_speed_Z = r.z
 	_final_extra_speed_X = r.x
-	fade_interpolator.initialise(1.0, 0.0, DEFAULT_FADE_TIME)
+	fade_interpolator.initialize(1.0, 0.0, DEFAULT_FADE_TIME)
 	on_enter_attack_implementation(input_)
 	
 	

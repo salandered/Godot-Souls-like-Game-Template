@@ -2,6 +2,9 @@ extends RefCounted
 class_name ra
 
 
+## See docs: https://docs.godotengine.org/en/stable/tutorials/math/random_number_generation.html
+
+
 ## MOST BASIC
 
 static func coinflip() -> bool:

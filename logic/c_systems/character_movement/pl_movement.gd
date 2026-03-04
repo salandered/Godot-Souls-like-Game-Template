@@ -258,7 +258,7 @@ func look_at_target(delta: float, speed_config: SpeedConfig = null) -> void:
 ## In order to understand why that happened and what to do we need to either rethink the PlayerPack.
 ## (like may be a new abstract 'input' layer which knows about both: input gathering and camera data)
 ## Or rewrite current logic. I suspect same can be done easier.
-## And it's simplier to just leave this small ball of mud here.
+## And it's simpler to just leave this small ball of mud here.
 # endregion
 var __VEL_SPEED: float = 3.0
 func __velocity_by_input(input_: InputPackage, delta: float) -> Vector3:

@@ -48,7 +48,7 @@ func pm() -> PlayerMovement:
 
 ## if action needs something special to work. Would be called from states container.
 ## Reason: We rarely can rely on _ready
-@abstract func initialise() -> void
+@abstract func initialize() -> void
 
 
 func call_accumulate_time_spent(delta: float) -> void:
@@ -93,7 +93,7 @@ func on_exit_action() -> void:
 
 
 ## default implementation. Called automatically.
-## Example use cases to override: mute playing animation or overriden values for set_anim_to_play
+## Example use cases to override: mute playing animation or overridden values for set_anim_to_play
 ## NOTE: called AFTER the on_enter_action()
 ## TODO: DANGER: If an action mutes playing anim (not calling set_anim_to_play), 
 ## 		TM like time_spent() would stuck and return final values from the previous actions.
@@ -154,7 +154,7 @@ func _react_on_hit(hit: HitData):
 	react_on_hit(hit)
 
 
-## may be overriden in actions
+## may be overridden in actions
 func react_on_hit(hit: HitData):
 	pass
 
@@ -204,7 +204,7 @@ func time_remaining_for_smooth_switch(next_action_name: StringName) -> float:
 
 ## Time remaining till a moment, when current animation would be blended 100%. 
 ## This is important for the next switch considerations: if A action wants to switch the current B anim, 
-## but B is still blending from the previous C animation, there would be a noticable visual snap. 
+## but B is still blending from the previous C animation, there would be a noticeable visual snap. 
 ## Reason: C to B blend would be interrupted by B to A.
 ## Note: using actual blend duration from manager is better than rely on current action's data or desires.
 func till_blend_completes() -> float:
@@ -223,7 +223,7 @@ func allows_queue() -> bool:
 
 func is_invincible() -> bool:
 	## use container only in several states.
-	## good optimisation, but akward implementation
+	## good optimization, but akward implementation
 	var _r: bool = false
 	if player_sm.current_state and player_sm.current_state.state_name in PlayerConfig.invincible_states:
 		_r = anim_params_container.is_invincible(anim.native_anim, effective_time_spent())

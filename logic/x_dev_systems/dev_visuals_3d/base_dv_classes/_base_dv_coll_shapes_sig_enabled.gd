@@ -2,7 +2,7 @@
 
 @abstract
 class_name BaseDVCollShapes
-extends DVCSignalEnabledNode3D
+extends DTCSignalEnabledNode3D
 
 
 @export var level: BaseLevel
@@ -21,7 +21,8 @@ extends DVCSignalEnabledNode3D
 @export var use_barycentric: bool = false
 
 
-const MUTED_CATEGORY := "muted"
+const MUTED_CATEGORY := &"muted"
+const DEF_CATEGORY := &"default"
 const DEF_COLOR := Color.GRAY
 
 
@@ -36,13 +37,13 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func _initialise_implementation_in_game() -> void:
+func _initialize_implementation_in_game() -> void:
 	if not level:
 		return
 	_init_base_material()
 
 	if _base_material:
-		_initialise_visuals()
+		_initialize_visuals()
 
 
 func _init_base_material() -> void:
@@ -53,15 +54,15 @@ func _init_base_material() -> void:
 		_shared_material_as_standard()
 
 
-func _initialise_visuals() -> void:
+func _initialize_visuals() -> void:
 	_delete_all_visuals()
 	_cached_mats.clear()
 
-	_initialise_visuals_imp()
-	__log_("_initialise_visuals", "count", len(_generated_nodes))
+	_initialize_visuals_implementation()
+	__log_("_initialize_visuals", "count", len(_generated_nodes))
 
 
-@abstract func _initialise_visuals_imp() -> void
+@abstract func _initialize_visuals_implementation() -> void
 
 
 func _delete_all_visuals() -> void:
@@ -108,7 +109,7 @@ func _exit_tree() -> void:
 
 
 ## currently should be manually called from implementations
-func _get_or_create_mat_by_category(category: String, category_to_mat: Dictionary[String, Color]) -> Material:
+func _get_or_create_mat_by_category(category: StringName, category_to_mat: Dictionary[StringName, Color]) -> Material:
 	if category in _cached_mats:
 		return _cached_mats[category]
 		

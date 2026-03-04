@@ -15,7 +15,7 @@ var hit_sounds: Dictionary = {
 	# "Default": preload("res://.../hit_metal_default.wav")
 }
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	PUSH_RIGID_BODIES_FORCE = 6.0
 	
 	_input_action_to_state = {

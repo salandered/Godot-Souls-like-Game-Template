@@ -18,7 +18,7 @@ func get_max_contacts_reported_() -> int:
 ##
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	pass
 
 

@@ -5,8 +5,8 @@ extends BaseLegsTurn
 var speed_curve_from_apex := EaseCurveInterpolator.new()
 
 
-func initialise() -> void:
-	super.initialise()
+func initialize() -> void:
+	super.initialize()
 	TURN_180_APEX_TIME = anim.get_marker_time_by_name(MarkerName.TURN_180_APEX, Const.BIG_MEANINGLESS_NUMBER)
 
 
@@ -25,10 +25,10 @@ func on_enter_action(input_: InputPackage) -> void:
 		_target_angle = calculate_target_angle_by_target(input_)
 
 	var _turn_dir := turn_direction_by_target_angle(_target_angle)
-	curr_turn.initialise(_target_angle, _turn_dir)
+	curr_turn.initialize(_target_angle, _turn_dir)
 
 	# SPEED CONFIG
-	speed_curve_from_apex.initialise(accel_from_apex_curve, 0.3)
+	speed_curve_from_apex.initialize(accel_from_apex_curve, 0.3)
 
 	match PREV_ACTION:
 		Leg.Act.run:

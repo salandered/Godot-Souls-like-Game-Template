@@ -16,7 +16,7 @@ func is_ended() -> bool:
 	return works_longer_than(_target_duration)
 
 
-func initialise() -> void:
+func initialize() -> void:
 	_anim_freezed = anim_container.get_by_anim_id(ANIM_FREEZED)
 	_anim_usual = anim_container.get_by_anim_id(ANIM_USUAL)
 

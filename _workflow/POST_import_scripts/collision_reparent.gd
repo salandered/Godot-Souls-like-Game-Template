@@ -6,7 +6,7 @@ extends EditorScenePostImport
 ## what should be in blender tree:
 ##    - collection which starts with '-col'. Example: '--collisions-columns--'
 ##    - It contains objects with names equal to main meshes.
-##    - See 'auto collision workflow' in blender bible. It automates the process
+##    - See 'auto collision workflow' in docs. It automates the process on the Blender side.
 ## Export setup: 
 ##    - preserve collection structure 
 ## NOTE: script needs further polishing

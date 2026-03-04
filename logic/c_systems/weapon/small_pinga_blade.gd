@@ -8,7 +8,7 @@ extends BasePlayerWeapon
 @onready var weapon_sfx: WeaponSFXParent = $WeaponSFXParent
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	PUSH_RIGID_BODIES_FORCE = 15.0
 
 	_input_action_to_state = {

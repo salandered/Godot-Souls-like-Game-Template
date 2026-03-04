@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dn2fgny8wh1e"]
 
 [ext_resource type="Script" uid="uid://dl0gauwff0buf" path="res://logic/x_dev_systems/ui_overlay_panels/fancy_cam_panel/global_ui_fancy_cam_panel.gd" id="1_bhnft"]
-[ext_resource type="Script" uid="uid://cbvo5ekasv1w0" path="res://logic/x_dev_systems/overlay_panel_manager/fancy_cam_panel_manager.gd" id="1_t54kf"]
+[ext_resource type="Script" uid="uid://cbvo5ekasv1w0" path="res://logic/x_dev_systems/dev_tools_2d/overlay_panel_manager/fancy_cam_panel_manager.gd" id="1_t54kf"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_qqiq0"]
-[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="5_g1iam"]
-[ext_resource type="Script" uid="uid://cy3bheil2tslv" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/camera_metrics_grid_manager.gd" id="6_8rp1y"]
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="5_g1iam"]
+[ext_resource type="Script" uid="uid://cy3bheil2tslv" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/camera_metrics_grid_manager.gd" id="6_8rp1y"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="7_kgmie"]
 [ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="7_x2irt"]
 

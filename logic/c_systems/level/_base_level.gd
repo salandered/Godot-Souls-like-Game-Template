@@ -21,7 +21,7 @@ extends Node3DSystem
 
 
 @export_category("Dev Visuals")
-@export var initialise_dv: bool = false
+@export var initialize_dv: bool = false
 
 
 var _bg_music_system: BackgroundMusicSystem
@@ -43,7 +43,7 @@ var enemies: Array[PHCharacter]
 @abstract func tonemap_exposure_no_vol_fog_compensation() -> float
 
 
-@abstract func initialise() -> void
+@abstract func initialize() -> void
 
 
 func __soft_validation() -> bool:
@@ -69,8 +69,8 @@ func _ready() -> void:
 	_init_delay_logic()
 	add_to_group(Groups.Environment_.LEVEL)
 
-	if initialise_dv:
-		Groups.get_dv(self )
+	if initialize_dv:
+		Groups.get_dev_tools_nodes(self )
 	if is_pause_menu_controller: ## easier here than in __soft_validation
 		_validate_pause_menu_controller_on_init()
 	if is_world_environment: ## easier here than in __soft_validation
@@ -98,25 +98,25 @@ func _ready() -> void:
 	if is_background_music:
 		_setup_bg_music()
 
-	initialise()
+	initialize()
 
 	__perform_validation()
 
 
 func _init_delay_logic():
-	if not initialise_dv:
+	if not initialize_dv:
 		return
 	if eu.is_release():
 		return
 
 	await FrameUtils.wait_process_frames(self , 3)
 	
-	var dvs := Groups.get_dv(self )
+	var dvs := Groups.get_dev_tools_nodes(self )
 	__log_("goint to initalise", len(dvs), "DV nodes")
 	for dv in dvs:
-		if (dv is BaseDVCDependentNode or dv is BaseDVCDependentNode3D) \
-			and ObjUtils.safe_has_method(dv, "initialise"):
-			dv.initialise()
+		if (dv is BaseDTCDependentNode or dv is BaseDTCDependentNode3D) \
+			and ObjUtils.safe_has_method(dv, "initialize"):
+			dv.initialize()
 
 
 func _setup_vibe_asp():

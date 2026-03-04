@@ -8,7 +8,7 @@ var _non_moving_timer: SimpleTimer = SimpleTimer.new()
 var ANGLE_FOR_U_TURN_MIN := 110.0
 
 func _ready() -> void:
-	_non_moving_timer.initialise(TO_STOP_DELAY)
+	_non_moving_timer.initialize(TO_STOP_DELAY)
 
 
 func on_enter_behavior(input_: InputPackage):

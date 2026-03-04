@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://7m8exa0nw8iq" path="res://logic/c_systems/weapon/smith_sword.gd" id="1_q502g"]
 [ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_lfwdn"]
 [ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/Weapons/DVWeaponHurtBox.tscn" id="3_f2jwg"]
-[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualiseTrailWeapon.tscn" id="3_hddrn"]
+[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailWeapon.tscn" id="3_hddrn"]
 [ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="3_kydaq"]
 [ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/sfx/misc/weapon_sfx/WeaponSfx.tscn" id="4_oli0r"]
 [ext_resource type="AudioStream" uid="uid://dbswu1dm262sj" path="res://-assets-/SFX/audio_streams/sword_hit_or_impact/hit_sword.tres" id="5_uo4b3"]

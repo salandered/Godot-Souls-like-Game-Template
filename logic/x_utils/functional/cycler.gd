@@ -1,5 +1,5 @@
 ## to cycle through an array of values endlessly
-## make sure to initialise it as global var
+## make sure to initialize it as global var
 class_name Cycler
 extends RefCountedSystem
 
@@ -12,7 +12,7 @@ var _pointer: int
 ## if initial_pointer -1, it will be pointed at the last element
 func _init(values: Array, initial_pointer: int = 0):
 	if values.is_empty():
-		__log_warn("values is an empty array", "_init", "initialised with []")
+		__log_warn("values is an empty array", "_init", "initialized with []")
 	if initial_pointer >= 0 and initial_pointer <= len(values) - 1:
 		_pointer = initial_pointer
 	elif initial_pointer == -1:

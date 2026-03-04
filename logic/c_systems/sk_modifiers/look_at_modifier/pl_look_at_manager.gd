@@ -17,7 +17,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void:
+func initialize(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void:
 	_my_marker = my_marker_
 	if not __perform_validation():
 		__log_warn_soft("won't be working")

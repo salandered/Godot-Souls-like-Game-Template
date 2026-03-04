@@ -75,7 +75,7 @@ extends Node3DLogger
 @abstract func get_particles() -> CPUParticles3D
 @abstract func _ready_implementation() -> void
 
-## can be overriden. runs after all other _ready logic
+## can be overridden. runs after all other _ready logic
 func _ready_implementation_not_editor() -> void: return
 
 

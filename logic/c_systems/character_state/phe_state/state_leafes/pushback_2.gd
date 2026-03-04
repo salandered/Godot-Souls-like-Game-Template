@@ -6,7 +6,7 @@ var sp_config: SpeedConfig
 var SCALE_LENGTH := 1.0
 
 
-func initialise() -> void:
+func initialize() -> void:
 	sp_config = SpeedConfig.new(default_sp)
 
 

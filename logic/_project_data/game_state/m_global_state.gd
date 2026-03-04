@@ -11,7 +11,7 @@ static var current_version: String
 
 static func _log_opened() -> void:
 	if current is M_GlobalStateData:
-		current.last_unix_time_opened = int(Time.get_unix_time_from_system())
+		current.last_unix_time_opened = int(TimeUtils.get_sys_unix_time())
 
 
 static func _log_version() -> void:

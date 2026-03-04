@@ -3,7 +3,7 @@ class_name BaseStaticCharacter
 extends CharacterBody3DSystem
 
 
-var char_type: DVS.CharacterType = DVS.CharacterType.UNKNOWN
+var char_type: DTS.CharacterType = DTS.CharacterType.UNKNOWN
 
 var _anim_params_container: BaseAnimParamsContainer
 var _anim_container: AnimContainer
@@ -51,24 +51,24 @@ func __soft_dependencies() -> Array:
 
 func _ready() -> void:
 	if not eu.is_editor():
-		_initialise_static_char()
-		initialise_static_char_implementation()
+		_initialize_static_char()
+		initialize_static_char_implementation()
 
 
-func _initialise_static_char() -> void:
+func _initialize_static_char() -> void:
 	_look_at_char_marker = ArrayUtils.get_only_one_or_null(get_descendants.look_at_character_markers(self ))
 
-	_initialise_anim_systems()
+	_initialize_anim_systems()
 
-	_initialise_combat()
+	_initialize_combat()
 
 
-func _initialise_anim_systems() -> void:
+func _initialize_anim_systems() -> void:
 	_anim_params_container = ArrayUtils.get_only_one_or_null(get_descendants.base_anim_params_containers(self ))
 
-	_native_player = _for_init_native_player()
-
 	_anim_container = ArrayUtils.get_only_one_or_null(get_descendants.anim_container((self )))
+
+	_native_player = _for_init_native_player()
 
 	if _native_player and _anim_params_container:
 		_anim_container._accept_animations(
@@ -81,17 +81,17 @@ func _initialise_anim_systems() -> void:
 	if _native_player and _anim_container:
 		_anim_manager = ArrayUtils.get_only_one_or_null(get_descendants.base_anim_managers(self ))
 		if _anim_manager:
-			_anim_manager.initialise(_native_player, _anim_container)
+			_anim_manager.initialize(_native_player, _anim_container)
 
 
-func _initialise_combat() -> void:
+func _initialize_combat() -> void:
 	_combat = ArrayUtils.get_only_one_or_null(get_descendants.base_combat(self ))
 	if _combat:
-		_combat.initialise(self , _for_init_active_weapon_id_list())
+		_combat.initialize(self , _for_init_active_weapon_id_list())
 
 
 ##
-@abstract func initialise_static_char_implementation() -> void
+@abstract func initialize_static_char_implementation() -> void
 
 ##
 @abstract func _for_init_native_player() -> AnimationPlayer

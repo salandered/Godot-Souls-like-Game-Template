@@ -19,10 +19,10 @@ func is_player() -> bool:
 	return false
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	## WARNING: turned off. code should be revisited
 	debug_sight_cone = false
-	dev_initialise()
+	dev_initialize()
 
 
 func detect_player() -> Detection:
@@ -87,7 +87,7 @@ var sight_cone_visual: MeshInstance3D
 var conus_color := Color(1, 0.5, 1, 0.25)
 
 
-func dev_initialise() -> void:
+func dev_initialize() -> void:
 	if eu.is_release():
 		return
 	if debug_sight_cone:

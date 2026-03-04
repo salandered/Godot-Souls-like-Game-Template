@@ -10,7 +10,7 @@ var INCREASE_ROTATION: float = 1.0
 var TURN_180_APEX_TIME: float
 
 
-func initialise() -> void:
+func initialize() -> void:
 	if not curr_turn:
 		__log_error("no curr_turn!")
 		error_.warn("no curr_turn!", "BaseLegsTurn", "", WL.ASSERT)

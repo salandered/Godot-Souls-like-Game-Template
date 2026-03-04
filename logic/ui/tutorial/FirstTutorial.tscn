@@ -195,7 +195,7 @@ text = "[b]Advanced dodge[/b] - press both the [img=20x20]uid://bmwjt7mmr0hy8[/i
 fit_content = true
 scroll_active = false
 
-[node name="UIDVMenu" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=966005287]
+[node name="UIDevToolsMenu" type="RichTextLabel" parent="__vbox/TutorialPanel/__margin" unique_id=966005287]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(500, 0)

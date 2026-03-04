@@ -28,9 +28,9 @@ var _resettable := [
 ]
 
 
-func initialise() -> void:
+func initialize() -> void:
 	curr_direction = DualDirection.new(SPEED_R, SPEED_L, PHEA.strafe.strafe_right, PHEA.strafe.strafe_left)
-	opposite_dir_change.initialise(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
+	opposite_dir_change.initialize(dir_change_curve, OPP_DIR_CHANGE_DURATION, 2)
 	default_sp.SPEED = 5.0
 	default_sp.TURN_SPEED = 3.2
 	default_sp.ANGULAR_SPEED = 6
@@ -57,11 +57,11 @@ func on_enter_state() -> void:
 	if __LOG_B(): __log_ent("_inherited_speed", _inherited_speed, "would be _inherited_speed -> ", _get_curr_direction_speed())
 	_inherited_speed = clampf(_inherited_speed, _inherited_speed, 2.0)
 	if __LOG_B(): __log_ent("_inherited_speed clamped", _inherited_speed)
-	speed_from_inherited.initialise(_inherited_speed, _get_curr_direction_speed(), accel_from_inherited + 1.0)
-	angular_accel.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
+	speed_from_inherited.initialize(_inherited_speed, _get_curr_direction_speed(), accel_from_inherited + 1.0)
+	angular_accel.initialize(0.4, default_sp.ANGULAR_SPEED, 0.8)
 	match PREV_LEAF:
 		PHES.Leaf.combat_idle:
-			speed_mult_from_idle.initialise(accel_from_idle_curve, accel_from_idle + 1.0)
+			speed_mult_from_idle.initialize(accel_from_idle_curve, accel_from_idle + 1.0)
 
 
 func on_exit_state() -> void:
@@ -105,7 +105,7 @@ func update(delta: float) -> void:
 
 func _set_up_commit_timer():
 	var _one_dir_commitment := ra.frange(ONE_DIR_COMMIT - 4, ONE_DIR_COMMIT + 4)
-	_one_dir_timer.initialise(_one_dir_commitment)
+	_one_dir_timer.initialize(_one_dir_commitment)
 
 
 func _choose_initial_direction(to_opposite: bool = false):

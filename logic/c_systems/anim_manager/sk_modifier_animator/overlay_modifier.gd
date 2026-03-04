@@ -60,7 +60,7 @@ func __hard_dependencies() -> Array:
 		skeleton
 	]
 
-func initialise():
+func initialize():
 	BoneTools.validate_skeleton(skeleton)
 	
 	default_bone_mask = BoneMask.get_full_body_no_root()

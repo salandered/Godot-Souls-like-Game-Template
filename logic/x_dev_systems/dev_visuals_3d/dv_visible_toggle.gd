@@ -1,7 +1,7 @@
 @tool
 
 class_name DVVisibleToggle
-extends DVCSignalEnabledNode3D
+extends DTCSignalEnabledNode3D
 
 
 func _enabled_on_init():

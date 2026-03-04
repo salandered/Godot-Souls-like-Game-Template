@@ -30,7 +30,7 @@ var _resettable := [
 
 var SPEED_BOOST: float = 0.0
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.SPEED = 3.0
 	default_sp.TURN_SPEED = 2.6
 	default_sp.ANGULAR_SPEED = 14.0
@@ -56,34 +56,34 @@ func on_enter_action(input_: InputPackage):
 	tu.reset_all(_resettable)
 
 	var _inherited_speed := pm().get_curr_velocity_len()
-	speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, accel_from_idle_time)
+	speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, accel_from_idle_time)
 	
 
 	match PREV_ACTION:
 		PS.Act.thrown:
-			speed_mult_from_idle.initialise(accel_from_fall_curve, accel_from_idle_time + 0.2)
-			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
-			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
+			speed_mult_from_idle.initialize(accel_from_fall_curve, accel_from_idle_time + 0.2)
+			angular_sp_from_idle.initialize(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialize(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
 		Leg.Act.idle:
-			speed_mult_from_idle.initialise(accel_from_fall_curve, accel_from_idle_time + 0.2)
-			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
-			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
+			speed_mult_from_idle.initialize(accel_from_fall_curve, accel_from_idle_time + 0.2)
+			angular_sp_from_idle.initialize(default_sp.ANGULAR_SPEED / 4, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialize(default_sp.TURN_SPEED / 4, default_sp.TURN_SPEED, 0.5)
 		_ when PREV_ACTION in IDLE_LIKE_ACTIONS:
-			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
-			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
-			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
+			speed_mult_from_idle.initialize(accelerate_from_idle_curve, accel_from_idle_time)
+			angular_sp_from_idle.initialize(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialize(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
 		PS.Act.dodge, Leg.Act.idle_to_sprint, Leg.Act.fast_turn_180:
-			speed_mult_from_idle.initialise(accelerate_from_idle_curve, accel_from_idle_time)
-			angular_sp_from_idle.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
-			turn_sp_from_idle.initialise(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
+			speed_mult_from_idle.initialize(accelerate_from_idle_curve, accel_from_idle_time)
+			angular_sp_from_idle.initialize(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 0.5)
+			turn_sp_from_idle.initialize(default_sp.TURN_SPEED / 3, default_sp.TURN_SPEED, 0.5)
 		Leg.Act.sprint:
-			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.4)
+			speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, 0.4)
 		Leg.Act.turn_180:
-			speed_from_turn.initialise(_inherited_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
-			angular_sp.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
+			speed_from_turn.initialize(_inherited_speed + 1.5, default_sp.SPEED, accel_from_turn_curve, accel_from_turn_time)
+			angular_sp.initialize(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
 		PS.Act.landing_sprint:
-			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.5)
-			angular_sp.initialise(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.5)
+			speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, 0.5)
+			angular_sp.initialize(default_sp.ANGULAR_SPEED / 2, default_sp.ANGULAR_SPEED, 0.5)
 
 func on_exit_action():
 	tu.reset_all(_resettable)
@@ -180,7 +180,7 @@ var COMPLETE_ROOT_TURN_FEATURE: bool = false
 		# __log_(FrameUtils.sfr(), "no 'turn_data' data. assuming turn completed")
 		# curr_turn.hard_complete()
 	# else:
-		# curr_turn.initialise_from_dict(raw_turn_data)
+		# curr_turn.initialize_from_dict(raw_turn_data)
 		# __log_(FrameUtils.sfr(), " Inherited turn:", str(curr_turn))
 #--------------------------------------------
 # from update

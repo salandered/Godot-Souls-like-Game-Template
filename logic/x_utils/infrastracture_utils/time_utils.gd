@@ -2,6 +2,10 @@ class_name TimeUtils
 extends RefCounted
 
 
+static func get_curr_time_ticks_msec() -> int:
+	return Time.get_ticks_msec()
+
+
 ## small division error, usually acceptable
 static func get_curr_time_ticks_sec() -> float:
 	return Time.get_ticks_msec() / 1000.0

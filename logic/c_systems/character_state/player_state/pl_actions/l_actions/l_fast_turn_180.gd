@@ -1,8 +1,8 @@
 extends BaseLegsTurn
 
 
-func initialise() -> void:
-	super.initialise()
+func initialize() -> void:
+	super.initialize()
 	INCREASE_ROTATION = 1.1
 
 	# APEX
@@ -20,7 +20,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	# TURN DATA
 	var _target_angle := calculate_target_angle_by_input(input_)
 	var _turn_dir := turn_direction_by_target_angle(_target_angle)
-	curr_turn.initialise(_target_angle, _turn_dir)
+	curr_turn.initialize(_target_angle, _turn_dir)
 
 
 func update(input_: InputPackage, delta: float):

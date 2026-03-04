@@ -37,7 +37,7 @@ const BOLD_HEADING_STRING_REPLACEMENT = "$1[b][font_size=%d]$2[/font_size][/b]"
 func load_file(file_path) -> String:
 	var file_string = FileAccess.get_file_as_string(file_path)
 	if file_string == null:
-		push_warning("File open error: %s" % FileAccess.get_open_error())
+		print_err.msg_formatted("File open error: %s" % FileAccess.get_open_error())
 		return ""
 	return file_string
 

@@ -17,7 +17,7 @@ func __validation_ok() -> bool:
 	return __validated
 
 
-## Call inside the initialisation of ur class (usually 'initialise' or '_ready')
+## Call inside the initialization of ur class (usually 'initialize' or '_ready')
 ## Validates dependecies using
 ##   - __hard_dependencies
 ##   - __soft_dependencies

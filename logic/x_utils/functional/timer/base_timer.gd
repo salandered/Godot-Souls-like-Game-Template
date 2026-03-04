@@ -6,7 +6,7 @@ var duration: float = -1.0
 var timer: float = 0.0
 
 
-## func initialise(...) -> void
+## func initialize(...) -> void
 ## 	  - idempotent
 ##    - sets positive duration
 
@@ -15,7 +15,7 @@ var timer: float = 0.0
 ## 	  - returns true when timer expires
 
 
-## hard reset, timer needs to be initialised again
+## hard reset, timer needs to be initialized again
 func turn_off() -> void:
 	timer = 0.0
 	duration = -1.0
@@ -26,20 +26,20 @@ func reset() -> void:
 	timer = 0.0
 
 
-func is_initialised() -> bool:
+func is_initialized() -> bool:
 	if duration == -1.0:
 		return false
 	return true
 
 
 func is_complete() -> bool:
-	if not is_initialised():
+	if not is_initialized():
 		return false
 	return timer >= duration
 
 
 func is_in_progress() -> bool:
-	return is_initialised() and not is_complete()
+	return is_initialized() and not is_complete()
 
 
 func get_elapsed() -> float:
@@ -47,7 +47,7 @@ func get_elapsed() -> float:
 
 
 func get_progress() -> float:
-	if not is_initialised():
+	if not is_initialized():
 		return 0.0
 	if duration == 0.0:
 		return 0.0

@@ -21,7 +21,7 @@ const DEF_UNIT_SIZE: float = 5.0
 const DEF_MAX_DISTANCE: float = 20.0
 const DEF_PANNING_STRENGTH: float = 0.5
 
-## Template to quickly initialise new config
+## Template to quickly initialize new config
 # var asp_config := ASP3DConfig.new(
 # 	ASP3DConfig.DEF_VOL_DB_CHANGE,
 # 	ASP3DConfig.DEF_PITCH_CHANGE,

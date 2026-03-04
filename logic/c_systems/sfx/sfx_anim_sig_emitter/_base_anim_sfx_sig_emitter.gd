@@ -35,7 +35,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise(sad_container_: BaseSADContainer, signal_container_: BaseSignalContainer):
+func initialize(sad_container_: BaseSADContainer, signal_container_: BaseSignalContainer):
 	self .sad_container = sad_container_
 	self .signal_container = signal_container_
 

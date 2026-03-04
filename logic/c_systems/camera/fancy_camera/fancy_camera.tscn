@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://d2as471a20jkg" path="res://logic/x_dev_systems/dev_visuals_3d/dv_fancy_cam.gd" id="7_ncru2"]
 [ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/materials-shared/_shaders/target_dot/target_dot.gdshader" id="7_r7icc"]
 [ext_resource type="Material" uid="uid://c0ppm6u2ki7fp" path="res://-assets-/materials-shared/_shaders/_dev/wire_frame_mat.tres" id="8_euqfl"]
-[ext_resource type="PackedScene" uid="uid://bbt0g1dt6n1dd" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualiseTrailParent.tscn" id="8_nf5rl"]
+[ext_resource type="PackedScene" uid="uid://bbt0g1dt6n1dd" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailParent.tscn" id="8_nf5rl"]
 [ext_resource type="Script" uid="uid://dbeegifwps7x6" path="res://logic/x_dev_systems/dev_hotkeys/camera_hotkeys.gd" id="13_8vytl"]
 [ext_resource type="Script" uid="uid://de8ffs1h6p7dq" path="res://logic/c_systems/camera/fancy_camera/__dev/camera_sig_handler.gd" id="14_30r54"]
 
@@ -62,7 +62,6 @@ script = ExtResource("2_bu8o1")
 unique_name_in_owner = true
 
 [node name="DVFancyCam" type="Node3D" parent="CameraPivot" unique_id=1445950465]
-visible = false
 script = ExtResource("7_ncru2")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CameraPivot/DVFancyCam" unique_id=1750717389]

@@ -6,9 +6,9 @@ class_name PlayerCombat
 @onready var weapon_switcher: GestureSpawner = %WeaponSwitcher
 
 
-func initialise_implementation():
+func initialize_implementation():
 	if weapon_switcher:
-		weapon_switcher.initialise(_player, self )
+		weapon_switcher.initialize(_player, self )
 
 
 func __hard_validation() -> bool:

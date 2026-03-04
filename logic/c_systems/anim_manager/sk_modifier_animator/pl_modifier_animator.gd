@@ -60,7 +60,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise(native_animator_: AnimationPlayer) -> void:
+func initialize(native_animator_: AnimationPlayer) -> void:
 	add_to_group(Groups.Dev.SK_ANIM_MANAGER)
 
 	self.native_animator = native_animator_
@@ -74,7 +74,7 @@ func initialise(native_animator_: AnimationPlayer) -> void:
 	_bone_idx_to_track = BoneTools.calculate_bone_idx_to_track(skeleton)
 
 
-	root_animator.initialise(_bone_idx_to_track[BoneIdx.ROOT_0])
+	root_animator.initialize(_bone_idx_to_track[BoneIdx.ROOT_0])
 
 	__perform_validation(true)
 

@@ -28,13 +28,13 @@ const number_field := &"number_"
 const message_field := &"message_"
 const tag_field := &"tag_field_"
 
-# dvc
-const dvc_section_field = &"dvc_section_field"
-const dvc_key_field = &"dvc_key_field"
-const dvc_value_field = &"dvc_value_field"
-const dvc_overlay_panel_type_field = &"overlay_panel_type"
-const dvc_char_type_field = &"dvc_char_type"
-const dvc_dv_type_field = &"dvc_dv_type"
+# dtc
+const dtc_section_field = &"dtc_section_field"
+const dtc_key_field = &"dtc_key_field"
+const dtc_value_field = &"dtc_value_field"
+const dtc_overlay_panel_type_field = &"dtc_overlay_panel_type_field"
+const dtc_char_type_field = &"dtc_char_type_field"
+const dtc_dv_type_field = &"dtc_dv_type_field"
 
 # combo
 const triggered_state_field = &"triggered_state_field"

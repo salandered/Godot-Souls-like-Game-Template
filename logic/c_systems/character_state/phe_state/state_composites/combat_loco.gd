@@ -23,7 +23,7 @@ var __monitors: Array[PHEHelpers.MonitorFor] = [
 var __will_do_monitors: Array[PHEHelpers.WillDoFor]
 
 
-func initialise() -> void:
+func initialize() -> void:
 	__will_do_monitors = []
 	for m in __monitors:
 		if m is PHEHelpers.WillDoFor:

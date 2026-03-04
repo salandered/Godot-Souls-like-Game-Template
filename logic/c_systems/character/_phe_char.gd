@@ -87,7 +87,7 @@ func __soft_dependencies() -> Array:
 		]
 
 
-@abstract func initialise_phe_char_implementation() -> void
+@abstract func initialize_phe_char_implementation() -> void
 
 @abstract func get_initial_leaf_state_name() -> StringName
 
@@ -96,11 +96,11 @@ func __soft_dependencies() -> Array:
 @abstract func get_node_state_container() -> PHEBaseNodeStateDataContainer
 
 
-func initialise_base_char_implementation() -> void:
-	super.initialise_base_char_implementation()
+func initialize_base_char_implementation() -> void:
+	super.initialize_base_char_implementation()
 	PUSH_RIGID_BODIES_FORCE = 8.0
 
-	char_type = DVS.CharacterType.HSM_ENEMY
+	char_type = DTS.CharacterType.HSM_ENEMY
 
 	collision_layer = Collision.Layers.OTHER_CHAR_COL
 	collision_mask = Collision.Masks.OTHER_CHAR_COL_MASK
@@ -111,16 +111,16 @@ func initialise_base_char_implementation() -> void:
 
 	visuals = get_descendants.mesh_instances(get_visuals_root(), true)
 	if ui_feelings:
-		ui_feelings.initialise(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
+		ui_feelings.initialize(show_ui_feelings, phe_feelings, ui_marker if float_ui_feelings and ui_marker else null)
 	
 
-	initialise_phe_char_implementation()
+	initialize_phe_char_implementation()
 
 	if not __perform_validation():
 		__log_warn_soft("PHCharacter failed initalisation")
 		process_mode = PROCESS_MODE_DISABLED
 	else:
-		_initialise_sm()
+		_initialize_sm()
 
 
 func _for_init_sig_container() -> BaseCharacterSignalContainer:
@@ -144,7 +144,7 @@ func _for_init_anim_sfx_sig_emitter() -> BaseAnimSFXSignalEmitter:
 	return e_anim_sfx_sig_emitter
 
 
-func _initialise_sm():
+func _initialize_sm():
 	angry_raised = false
 	state_machine = _top
 

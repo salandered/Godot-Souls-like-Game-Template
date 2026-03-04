@@ -1,5 +1,5 @@
 extends BasePHELeaf
 
 
-func initialise() -> void:
+func initialize() -> void:
 	blend_time.set_specific(0.4)

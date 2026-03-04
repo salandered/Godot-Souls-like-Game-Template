@@ -19,7 +19,7 @@ func __hard_validation() -> bool:
 	return _root_track != ""
 
 
-func initialise(root_track: String) -> void:
+func initialize(root_track: String) -> void:
 	self._root_track = root_track
 	__perform_validation()
 

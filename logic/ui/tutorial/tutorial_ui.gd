@@ -1,5 +1,5 @@
 class_name TutorialUI
-extends Node
+extends NodeLogger
 
 
 ## assign it to node somewhere close the FirstTutorial or similar
@@ -15,7 +15,7 @@ var panel_amount: int
 
 func register_panel(key_number: int, panel: Control) -> void:
 	if key_number < 1:
-		push_error("TutorialOverlay: key_number must be >= 1")
+		__log_error("TutorialOverlay: key_number must be >= 1")
 		return
 	
 	if not panel:
@@ -29,7 +29,7 @@ func unregister_panel(key_number: int) -> void:
 	_tutorial_panels.erase(key_number)
 
 
-func initialise() -> void:
+func initialize() -> void:
 	var hidden_state := 0
 	var keys = [hidden_state] # 0 represents "No Panels Visible"
 	
@@ -89,8 +89,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		KEY_DOWN:
 			new_key = _cycler.get_next()
 			_apply_state(new_key)
-			InputUtils.mark_input_handled(self)
+			InputUtils.mark_input_handled(self )
 		KEY_UP:
 			new_key = _cycler.get_previous()
 			_apply_state(new_key)
-			InputUtils.mark_input_handled(self)
+			InputUtils.mark_input_handled(self )

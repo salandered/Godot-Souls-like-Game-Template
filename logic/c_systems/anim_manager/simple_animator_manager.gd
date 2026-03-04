@@ -12,7 +12,7 @@ var _curr_anim_start_offset: float = 0.0
 var _curr_anim: AnimationData
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	pass
 
 

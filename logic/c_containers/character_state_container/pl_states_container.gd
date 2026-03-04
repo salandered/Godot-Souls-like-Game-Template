@@ -65,22 +65,22 @@ func accept_all_states(character_: Princess, anim_container_: AnimContainer):
 	_accept_legs_actions()
 
 	# specific set ups. Analogue of _ready()
-	_initialise_pl_state()
-	_initialise_pl_actions()
-	_initialise_legs_actions()
+	_initialize_pl_state()
+	_initialize_pl_actions()
+	_initialize_legs_actions()
 
 
-func _initialise_pl_state():
+func _initialize_pl_state():
 	for state: BasePlayerState in _states.values():
-		state.initialise()
+		state.initialize()
 
-func _initialise_pl_actions():
+func _initialize_pl_actions():
 	for action: PlayerAction in _player_actions.values():
-		action.initialise()
+		action.initialize()
 
-func _initialise_legs_actions():
+func _initialize_legs_actions():
 	for action: LegsAction in _leg_actions.values():
-		action.initialise()
+		action.initialize()
 
 
 func _accept_player_states() -> void:

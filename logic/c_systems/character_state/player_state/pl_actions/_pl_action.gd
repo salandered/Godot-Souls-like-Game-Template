@@ -6,7 +6,7 @@ var state_name: StringName
 
 
 ## to override if needed
-func initialise() -> void:
+func initialize() -> void:
 	pass
 
 

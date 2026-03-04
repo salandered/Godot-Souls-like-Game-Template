@@ -16,15 +16,15 @@ func __hard_dependencies() -> Array:
 	]
 
 	
-func initialise(native_player_: AnimationPlayer, anim_container_: AnimContainer) -> void:
+func initialize(native_player_: AnimationPlayer, anim_container_: AnimContainer) -> void:
 	self._anim_container = anim_container_
 	self._native_player = native_player_
 
-	initialise_implementation()
+	initialize_implementation()
 	__perform_validation()
 
 
-@abstract func initialise_implementation() -> void
+@abstract func initialize_implementation() -> void
 
 
 func get_native_player() -> AnimationPlayer:

@@ -1,7 +1,7 @@
 extends BasePHEAttackSeries
 
 
-func initialise() -> void:
+func initialize() -> void:
 	SWITCH_ANIM_BEFORE = 0.2
 	PL_DIST_TO_END = 7
 
@@ -10,6 +10,7 @@ var attack_series_list: Array[Array] = [
 		[PHES.Leaf.attack_360_high],
 		[PHES.Leaf.attack_360_low],
 		[PHES.Leaf.attack_360_high, PHES.Leaf.attack_360_low],
+		[PHES.Leaf.attack_360_high, PHES.Leaf.attack_360_low, PHES.Leaf.attack_360_low],
 	]
 
 func get_attack_series_list() -> Array[Array]:
@@ -20,11 +21,13 @@ var pick_weight: Dictionary[int, float] = {
 		0: 0.8,
 		1: 0.01,
 		2: 0.0,
+		3: 0.01
 }
 var angry_pick_weight: Dictionary[int, float] = {
 		0: 0.1,
 		1: 0.3,
 		2: 0.7,
+		3: 0.3,
 }
 
 func pick_series_idx() -> int:

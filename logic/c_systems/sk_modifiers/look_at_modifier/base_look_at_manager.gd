@@ -9,7 +9,7 @@ var _target_marker: LookAtCharacterMarker
 var _my_marker: LookAtCharacterMarker
 
 
-@abstract func initialise(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void
+@abstract func initialize(target_marker_: LookAtCharacterMarker, my_marker_: LookAtCharacterMarker) -> void
 
 
 func __hard_dependencies() -> Array:

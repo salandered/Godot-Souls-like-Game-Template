@@ -1,5 +1,5 @@
 @tool
-extends BaseDVCDependentNode3D
+extends BaseDTCDependentNode3D
 
 ## TODO: should be deleted in favor of DVSkeleton
 ## (DVSkeleton would need some new features)
@@ -7,12 +7,12 @@ extends BaseDVCDependentNode3D
 var _bone_attachments: Array[BoneAttachment3D]
 
 
-func initialise() -> void:
+func initialize() -> void:
 	visible = false
 	await FrameUtils.wait_process_frames(self , 4)
 
 	SigUtils.safe_connect_pairs([
-		[GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed]
+		[GlobalUIInfo.SIG_dtc_bvalue_changed, _on_SIG_dtc_bvalue_changed]
 	])
 
 
@@ -20,10 +20,10 @@ func initialise() -> void:
 	set_enabled(false)
 
 
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
-	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
+func _on_SIG_dtc_bvalue_changed(payload: Dictionary[StringName, Variant]):
+	var _r := DTCSIGPayloadParser.safe_bget_value_by_dtc_key(
 		payload,
-		DVS.KeyBValueChanger.SHOW_BONES_SIMPLIFIED
+		DTS.KeyBValueChanger.SHOW_BONES_SIMPLIFIED
 		)
 	if _r.err: return
 

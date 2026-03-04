@@ -1,5 +1,5 @@
 extends BasePHEAttack
 
 
-func initialise_implementation():
+func initialize_implementation():
 	hit_damage = 15

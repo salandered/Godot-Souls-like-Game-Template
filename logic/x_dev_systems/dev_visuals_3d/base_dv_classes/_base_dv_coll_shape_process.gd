@@ -2,7 +2,7 @@
 
 @abstract
 class_name BaseDVCollShapesProcess
-extends BaseDevVisualiseProcess3D
+extends BaseDevVisualizeProcess3D
 
 
 @export_group("Material Settings")
@@ -24,10 +24,10 @@ var _generated_nodes: Array[MeshInstance3D] = []
 var _shared_material: Material
 
 
-func _initialise_implementation_in_game() -> void:
-	super._initialise_implementation_in_game()
+func _initialize_implementation_in_game() -> void:
+	super._initialize_implementation_in_game()
 	
-	_initialise_shapes()
+	_initialize_shapes()
 
 	if use_default_wireframe_mat:
 		_shared_material_as_default_mat()
@@ -35,21 +35,21 @@ func _initialise_implementation_in_game() -> void:
 	if not _shared_material:
 		_shared_material_as_standard()
 		
-	_initialise_visuals_for_shapes()
+	_initialize_visuals_for_shapes()
 	
 	if _generated_nodes.is_empty():
-		__log_warn_soft("initialised, but no shapes to manage. Shutting down")
+		__log_warn_soft("initialized, but no shapes to manage. Shutting down")
 		set_enabled(false)
 
 
 ## called before _get_shapes()
-@abstract func _initialise_shapes() -> void
+@abstract func _initialize_shapes() -> void
 
 
 @abstract func _get_shapes() -> Array[CollisionShape3D]
 
 
-func _initialise_visuals_for_shapes() -> void:
+func _initialize_visuals_for_shapes() -> void:
 	_delete_all_visuals()
 	
 	for col_shape in _get_shapes():
@@ -64,7 +64,7 @@ func _initialise_visuals_for_shapes() -> void:
 	_set_visuals_color(_get_initial_color())
 
 
-## can be overriden
+## can be overridden
 func _get_initial_color() -> Color:
 	return shader_color
 

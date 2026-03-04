@@ -80,7 +80,7 @@ func _ready() -> void:
 	if not eu.is_editor():
 		reset_text()
 
-		SigUtils.safe_connect(GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed)
+		SigUtils.safe_connect(GlobalUIInfo.SIG_dtc_fvalue_changed, _on_SIG_dtc_fvalue_changed)
 
 
 func reset_text() -> void:
@@ -253,10 +253,10 @@ func _update_font_size() -> void:
 		ControlUtils.rr_label_set_font_size(_title_additional_label, title_font_size - 1)
 		
 
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
-	var _r := DVCSIGPayloadParser.safe_fget_value_by_dvc_key(
+func _on_SIG_dtc_fvalue_changed(payload: Dictionary[StringName, Variant]):
+	var _r := DTCSIGPayloadParser.safe_fget_value_by_dtc_key(
 		payload,
-		DVS.KeyFValueChanger.GHOST_DUR_SEC
+		DTS.KeyFValueChanger.GHOST_DUR_SEC
 		)
 	if _r.err: return
 

@@ -32,29 +32,29 @@ var _presenters: Array[BaseInfoGroupPresenter]
 var profiler_mode_cycler := Cycler.new([0, 1, 2])
 
 
-var _dev_visual_config: DevVisualsConfig
+var _dev_tools_config: DevVisualsConfig
 
 
-func get_dev_visuals_config() -> DevVisualsConfig:
-	return _dev_visual_config
+func get_dev_tools_config() -> DevVisualsConfig:
+	return _dev_tools_config
 
 
 ## not used by client code
-signal _SIG_dvc_value_changed(payload: Dictionary[StringName, Variant])
-## for each section, used by client code. _SIG_dvc_value_changed is distributed into this
-signal SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[StringName, Variant])
-signal SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant])
-signal SIG_dvc_svalue_changed(payload: Dictionary[StringName, Variant])
-signal SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant])
-signal SIG_dvc_color_value_changed(payload: Dictionary[StringName, Variant])
-signal SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant])
+signal _SIG_dtc_value_changed(payload: Dictionary[StringName, Variant])
+## for each section, used by client code. _SIG_dtc_value_changed is distributed into this
+signal SIG_dtc_b_overlay_panel_value_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dtc_bvalue_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dtc_svalue_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dtc_fvalue_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dtc_color_value_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dtc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant])
 
 
 func _ready() -> void:
 	# can pause tree, but it itself should still be working
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	_dev_visual_config = DevVisualsConfig.new(_SIG_dvc_value_changed)
+	_dev_tools_config = DevVisualsConfig.new(_SIG_dtc_value_changed)
 
 
 	_presenters.clear()
@@ -72,77 +72,77 @@ func _ready() -> void:
 
 	SigUtils.safe_connect_pairs([
 		[GlobalSignal.SIG_free_cam_mode_toggled, _on_SIG_toggle_free_cam],
-		[_SIG_dvc_value_changed, _on_SIG_dvc_value_changed_distribute_signal],
-		[SIG_dvc_b_overlay_panel_value_changed, _on_SIG_dvc_op_value_changed],
-		[SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed],
-		[SIG_dvc_b_char_dv_value_changed, _on_SIG_dvc_b_char_dv_value_changed],
+		[_SIG_dtc_value_changed, _on_SIG_dtc_value_changed_distribute_signal],
+		[SIG_dtc_b_overlay_panel_value_changed, _on_SIG_dtc_op_value_changed],
+		[SIG_dtc_fvalue_changed, _on_SIG_dtc_fvalue_changed],
+		[SIG_dtc_b_char_dv_value_changed, _on_SIG_dtc_b_char_dv_value_changed],
 	])
 
 
 ## distribution sits here temporary. It should be separated class (it's not about the GlobalUIInfo)
 ## probably an autoload with BusFanOut name
-func _on_SIG_dvc_value_changed_distribute_signal(payload: Dictionary[StringName, Variant]):
-	var parsed_payload := DVCSIGPayloadParser.parse_internal_SIG_dvc_value_changed(payload)
+func _on_SIG_dtc_value_changed_distribute_signal(payload: Dictionary[StringName, Variant]):
+	var parsed_payload := DTCSIGPayloadParser.parse_internal_SIG_dtc_value_changed(payload)
 	if not parsed_payload:
 		return
 
 	var distributed_payload: Dictionary[StringName, Variant] = {
-		SPS.dvc_key_field: parsed_payload.key,
-		SPS.dvc_value_field: parsed_payload.value
+		SPS.dtc_key_field: parsed_payload.key,
+		SPS.dtc_value_field: parsed_payload.value
 	}
 	match parsed_payload.section:
-		DVS.DVSection.B_OVERLAY_PANEL:
-			SigUtils.safe_emit(SIG_dvc_b_overlay_panel_value_changed, distributed_payload)
-		DVS.DVSection.B_CHANGER:
-			SigUtils.safe_emit(SIG_dvc_bvalue_changed, distributed_payload)
-		DVS.DVSection.S_CHANGER:
-			SigUtils.safe_emit(SIG_dvc_svalue_changed, distributed_payload)
-		DVS.DVSection.F_CHANGER:
-			SigUtils.safe_emit(SIG_dvc_fvalue_changed, distributed_payload)
-		DVS.DVSection.COLOR_CHANGER:
-			SigUtils.safe_emit(SIG_dvc_color_value_changed, distributed_payload)
-		DVS.DVSection.B_CHAR_DV:
-			SigUtils.safe_emit(SIG_dvc_b_char_dv_value_changed, distributed_payload)
+		DTS.DTSection.B_OVERLAY_PANEL:
+			SigUtils.safe_emit(SIG_dtc_b_overlay_panel_value_changed, distributed_payload)
+		DTS.DTSection.B_CHANGER:
+			SigUtils.safe_emit(SIG_dtc_bvalue_changed, distributed_payload)
+		DTS.DTSection.S_CHANGER:
+			SigUtils.safe_emit(SIG_dtc_svalue_changed, distributed_payload)
+		DTS.DTSection.F_CHANGER:
+			SigUtils.safe_emit(SIG_dtc_fvalue_changed, distributed_payload)
+		DTS.DTSection.COLOR_CHANGER:
+			SigUtils.safe_emit(SIG_dtc_color_value_changed, distributed_payload)
+		DTS.DTSection.B_CHAR_DV:
+			SigUtils.safe_emit(SIG_dtc_b_char_dv_value_changed, distributed_payload)
 
 
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
-	var _r := DVCSIGPayloadParser.safe_fget_value_by_dvc_key(
+func _on_SIG_dtc_fvalue_changed(payload: Dictionary[StringName, Variant]):
+	var _r := DTCSIGPayloadParser.safe_fget_value_by_dtc_key(
 		payload,
-		DVS.KeyFValueChanger.GRID_V_SEP)
+		DTS.KeyFValueChanger.GRID_V_SEP)
 	if _r.err: return
 	var new_value: int = int(_r.value)
 	ControlUtils.flow_container_set_v_separation(dynamic_info_grid, new_value)
 	__log_("dynamic_info_grid updated with v_separation", new_value)
 
 
-func _on_SIG_dvc_op_value_changed(payload: Dictionary[StringName, Variant]):
-	var _parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
+func _on_SIG_dtc_op_value_changed(payload: Dictionary[StringName, Variant]):
+	var _parsed_payload := DTCSIGPayloadParser.parse_untyped_dtc_value_changed(payload)
 	if not _parsed_payload or _parsed_payload.value is not bool: return
 	var toggle := _parsed_payload.value as bool
 	
 	match _parsed_payload.key:
-		DVS.KeyBOverlayPanel.TUT:
-			_toggle_tutorial_from_dvc(toggle)
-		DVS.KeyBOverlayPanel.PROFILER:
+		DTS.KeyBOverlayPanel.TUT:
+			_toggle_tutorial_from_dtc(toggle)
+		DTS.KeyBOverlayPanel.PROFILER:
 			update_profiler_mode(0 if toggle else 2)
-		DVS.KeyBOverlayPanel.SUBVIEWPORT:
-			_toggle_in_game_subvp_from_dvc(toggle)
-		DVS.KeyBOverlayPanel.SIG_LOG:
+		DTS.KeyBOverlayPanel.SUBVIEWPORT:
+			_toggle_in_game_subvp_from_dtc(toggle)
+		DTS.KeyBOverlayPanel.SIG_LOG:
 			__SIG_DEBUG = toggle
-		DVS.KeyBOverlayPanel.ALL_LOG:
+		DTS.KeyBOverlayPanel.ALL_LOG:
 			__ALL_LOG = toggle
-		DVS.KeyBOverlayPanel.ERROR_LOG:
+		DTS.KeyBOverlayPanel.ERROR_LOG:
 			__ERROR_LOG = toggle
 
 
-func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
-	__log_("_on_SIG_dvc_b_char_dv_value_changed", payload)
-	var _r := DVCSIGPayloadParser.parse_dvc_b_char_dv_value_changed(payload)
+func _on_SIG_dtc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
+	__log_("_on_SIG_dtc_b_char_dv_value_changed", payload)
+	var _r := DTCSIGPayloadParser.parse_dtc_b_char_dv_value_changed(payload)
 	if not _r: return
 	var toggle := _r.value_as_bool
 
 	for item in _presenters:
-		if item.get_composite_dvc_key() == _r.key:
+		if item.get_composite_dtc_key() == _r.key:
 			item.set_enabled(toggle)
 			return
 
@@ -151,7 +151,7 @@ func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant
 # region
 
 
-func _toggle_in_game_subvp_from_dvc(value: bool) -> void:
+func _toggle_in_game_subvp_from_dtc(value: bool) -> void:
 	var level = Groups.get_level_by_group(self )
 	var player := Groups.get_player_by_group(self )
 	if not level or not player:
@@ -163,12 +163,12 @@ func _toggle_in_game_subvp_from_dvc(value: bool) -> void:
 			__log_warn("not in_game_vp_scene")
 			return
 		if _active_subvp:
-			__log_("_toggle_in_game_subvp_from_dvc", "_active_subvp is already active")
+			__log_("_toggle_in_game_subvp_from_dtc", "_active_subvp is already active")
 			return
 
 		var _scene = in_game_vp_scene.instantiate()
 		if not _scene is InGameSubViewport:
-			__log_warn("not _scene is InGameSubViewport", "_toggle_in_game_subvp_from_dvc")
+			__log_warn("not _scene is InGameSubViewport", "_toggle_in_game_subvp_from_dtc")
 			return
 		_active_subvp = _scene
 		
@@ -239,7 +239,7 @@ func _on_SIG_toggle_free_cam(payload: Dictionary[StringName, Variant]):
 ## FIRST TUTORIAL UI
 # region
 
-func _toggle_tutorial_from_dvc(toggle: bool):
+func _toggle_tutorial_from_dtc(toggle: bool):
 	if not first_tutorial:
 		return
 	
@@ -247,7 +247,7 @@ func _toggle_tutorial_from_dvc(toggle: bool):
 
 
 func toggle_tutorial(toggle: bool):
-	_dev_visual_config.set_value(DVS.DVSection.B_OVERLAY_PANEL, DVS.KeyBOverlayPanel.TUT, toggle)
+	_dev_tools_config.set_value(DTS.DTSection.B_OVERLAY_PANEL, DTS.KeyBOverlayPanel.TUT, toggle)
 	
 
 func is_tut_visible() -> bool:
@@ -281,9 +281,9 @@ func _input(event: InputEvent) -> void:
 		## currently we need to update config instead of changing it which triggers the UI update.
 		## this is because config supports profiler as a bool value, while here we iterate through the different modes
 		## legacy issue, should be solved via saving not boolean profiler in config
-		_dev_visual_config.set_value(
-			DVS.DVSection.B_OVERLAY_PANEL,
-			DVS.KeyBOverlayPanel.PROFILER,
+		_dev_tools_config.set_value(
+			DTS.DTSection.B_OVERLAY_PANEL,
+			DTS.KeyBOverlayPanel.PROFILER,
 			true if profiler_mode_cycler.get_current() in [0, 1] else false,
 			false ## dont spawn signal
 			)

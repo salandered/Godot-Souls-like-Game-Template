@@ -24,7 +24,7 @@ class AllowedAngle:
 		self.cut = _cut
 
 
-func initialise(character: BaseCharacter, area_awareness: BaseAreaAwareness):
+func initialize(character: BaseCharacter, area_awareness: BaseAreaAwareness):
 	self._character = character
 	self._area_awareness = area_awareness
 
@@ -73,7 +73,7 @@ func direction_to_(target: Variant) -> Vector3:
 	elif target is Vector3:
 		return get_character().global_position.direction_to(target)
 	else:
-		push_error("Invalid target type for direction_to_")
+		__log_error("Invalid target type for direction_to_")
 		return Vector3.ZERO
 
 # endregion

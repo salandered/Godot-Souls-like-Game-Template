@@ -13,11 +13,11 @@ var DURATION: float
 var dip_time_ratio: float
 
 
-func initialise(curve: Curve, duration: float, curve_bottom_point_idx: int = -1):
+func initialize(curve: Curve, duration: float, curve_bottom_point_idx: int = -1):
 	speed_dip_curve = curve
 	DURATION = duration
 
-	cooldown.initialise(DURATION) # probably safer to use same time as in async_change
+	cooldown.initialize(DURATION) # probably safer to use same time as in async_change
 	if curve_bottom_point_idx == -1:
 		dip_time_ratio = 0.5
 	else:
@@ -38,11 +38,11 @@ func async_change_update(delta: float):
 
 
 func async_change_init(callback: Callable):
-	async_change.initialise(DURATION * dip_time_ratio, callback)
+	async_change.initialize(DURATION * dip_time_ratio, callback)
 
 
 func speed_dip_init():
-	speed_dip.initialise(speed_dip_curve, DURATION)
+	speed_dip.initialize(speed_dip_curve, DURATION)
 
 
 func reset():

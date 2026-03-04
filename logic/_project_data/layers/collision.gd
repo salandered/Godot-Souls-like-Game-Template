@@ -27,7 +27,7 @@ extends RefCounted
 ## TROUBLESHOOTING
 # region
 ## CHECKLIST for any issue
-## 	- make sure collision_mask/collision_layer are not overriden for the same object from different places
+## 	- make sure collision_mask/collision_layer are not overridden for the same object from different places
 ## ISSUE your character sometimes inexplicably speeding up when pushing a RigidBody
 ## 	Reason: CharacterBody node has logic to ensure the character stays stationary on moving platforms, 
 ##          and when you collide into the rigidbody object it ends up being counted as a moving platform. 

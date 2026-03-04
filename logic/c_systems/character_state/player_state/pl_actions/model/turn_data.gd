@@ -23,7 +23,7 @@ func _ready() -> void:
 	add_to_group(Groups.Dev.DV_LEG_TURN)
 
 ## idempotent
-func initialise(angle: float, turn_direction_: StringName):
+func initialize(angle: float, turn_direction_: StringName):
 	target_angle = angle
 	turn_direction = turn_direction_
 	accum_rotation = 0.0
@@ -35,7 +35,7 @@ func update(turn_completed_: bool, accum_rotation_: float, ):
 	turn_completed = turn_completed_
 	accum_rotation = accum_rotation_
 
-func initialise_from_dict(data: Dictionary[StringName, Variant]):
+func initialize_from_dict(data: Dictionary[StringName, Variant]):
 	target_angle = data.get(TARGET_ANGLE_DICT, 0.0)
 	accum_rotation = data.get(ACCUM_ROTATION_DICT, 0.0)
 	turn_completed = data.get(TURN_COMPLETED_DICT, false)

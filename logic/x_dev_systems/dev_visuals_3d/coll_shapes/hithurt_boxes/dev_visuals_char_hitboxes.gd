@@ -1,5 +1,5 @@
 @tool
-class_name DevVisualiseCharHitBoxes
+class_name DevVisualizeCharHitBoxes
 extends BaseDVCollShapesProcess
 
 
@@ -20,7 +20,7 @@ func __hard_dependencies() -> Array:
 		]
 
 
-func _initialise_shapes() -> void:
+func _initialize_shapes() -> void:
 	if not combat:
 		return
 
@@ -40,7 +40,7 @@ func _get_shapes() -> Array[CollisionShape3D]:
 	return _shapes
 
 
-func _process_visualisation(_delta: float) -> void:
+func _process_visualization(_delta: float) -> void:
 	## every frame obviously
 	_update_color()
 
@@ -60,5 +60,5 @@ func _is_invincible() -> bool:
 	return character_.is_invincible() if character_ else false
 
 
-func _conditions_to_visualise() -> bool:
+func _conditions_to_visualize() -> bool:
 	return true

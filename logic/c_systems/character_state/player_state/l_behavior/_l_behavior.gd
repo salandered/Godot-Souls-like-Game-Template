@@ -51,7 +51,7 @@ func _on_enter_behavior(input_: InputPackage):
 	on_enter_behavior(input_)
 
 
-## usualy is overriden
+## usualy is overridden
 ## behaviors with one supported action should not override 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:
 	if len(supported_actions.action_names) > 1:

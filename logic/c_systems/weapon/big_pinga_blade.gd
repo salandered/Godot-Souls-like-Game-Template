@@ -8,7 +8,7 @@ extends PHEWeapon
 @onready var weapon_sfx: WeaponSFXParent = $WeaponSFXParent
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	PUSH_RIGID_BODIES_FORCE = 20.0
 
 

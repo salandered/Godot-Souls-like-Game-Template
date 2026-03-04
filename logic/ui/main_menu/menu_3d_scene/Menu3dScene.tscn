@@ -43,7 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dtc40sais1cn8" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Metalness-Metal047B_2K-JPG_Roughness.png" id="28_8j8f3"]
 [ext_resource type="Texture2D" uid="uid://435ii5qoi0tx" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_NormalGL.jpg" id="29_mxe67"]
 [ext_resource type="Material" uid="uid://cw7kd7pvhxw1c" path="res://-assets-/materials-shared/fabric/I_fabric_177/I_fabric_177-1K_Reimp.tres" id="39_ep8ck"]
-[ext_resource type="PackedScene" uid="uid://bvih5ow1gqv5d" path="res://-assets-/GLB-level/demo-level_/island/TreesWithRopes.tscn" id="39_q26sa"]
+[ext_resource type="PackedScene" uid="uid://bvih5ow1gqv5d" path="res://-assets-/GLB-items/prefabs/TreesWithRopes.tscn" id="39_q26sa"]
 [ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="40_d4t46"]
 [ext_resource type="Material" uid="uid://d2ps7t077xfk8" path="res://-assets-/materials-shared/wood/bark_willow/bark_willow_Reimp.tres" id="40_onri0"]
 [ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="41_7sgbf"]
@@ -1924,7 +1924,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.274807, 7.004031, 13.2801
 mesh = SubResource("ArrayMesh_lnldl")
 
 [node name="ropes_008" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001/Beam_D_006" unique_id=22065633]
-transform = Transform3D(0.922603, 0.14248201, -1.8020166, -1.4747186, 1.22932, -0.65782976, 1.0453603, 1.6084855, 0.66238606, -0.5386181, 0.21766996, 0.22724152)
+transform = Transform3D(0.9226031, 0.14248186, -1.8020166, -1.4747185, 1.2293203, -0.65782976, 1.0453606, 1.6084853, 0.66238606, -0.5386181, 0.21766996, 0.22724152)
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
@@ -2225,7 +2225,7 @@ cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
 
 [node name="ropes_009" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=1188926327]
-transform = Transform3D(-0.14194316, -0.011930547, 1.1469615, -0.8019462, 0.82733166, -0.09063969, -0.8200887, -0.80696386, -0.10988467, -41.679935, 11.982513, -86.228355)
+transform = Transform3D(-0.13742365, -0.023531595, 1.1473324, -0.8494767, 0.7790017, -0.08577027, -0.7715666, -0.85347134, -0.10992021, -41.679935, 11.982513, -86.228355)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
 
@@ -2235,7 +2235,7 @@ sway_speed = 1.2
 preview_in_editor = true
 
 [node name="skeleton_hand2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/ropes_009" unique_id=2024574688]
-transform = Transform3D(1.1154467, -0.93472785, 0.91488814, 0.2545531, -1.0242754, -1.3568422, 1.2829412, 1.0159246, -0.5262288, 0.35659122, -0.5122528, 0.1948626)
+transform = Transform3D(1.2253507, -0.7114178, 0.9733231, 0.43222484, -1.0363206, -1.3016065, 1.1254574, 1.1725543, -0.5598396, 0.35659122, -0.5122528, 0.1948626)
 cast_shadow = 0
 gi_mode = 2
 mesh = SubResource("ArrayMesh_1txad")
@@ -2252,14 +2252,14 @@ transform = Transform3D(1.7060015, 0, -5.9604645e-08, 0, 1.706, 0, 5.9604645e-08
 transform = Transform3D(0.6954374, 0, -1.5914282, 0, 1.7367433, 0, 1.5914282, 0, 0.6954374, -9.882655, 13.581102, 1.4955444)
 
 [node name="ropes_008" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="0" unique_id=97219943]
-transform = Transform3D(0.42219904, 0.9561763, 0.8678781, -1.0776422, 0.7639691, -0.31745222, -0.71145827, -0.58975863, 0.9958661, -0.08106995, -0.27941322, -0.21012163)
+transform = Transform3D(0.42219904, 0.9561764, 0.86787814, -1.0776422, 0.7639692, -0.31745225, -0.71145827, -0.5897587, 0.9958662, -0.08106995, -0.27941322, -0.21012163)
 cast_shadow = 0
 
 [node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001/ropes_008" index="0" unique_id=1389215783]
 max_sway_degrees = 6.0
 
 [node name="ropes_009" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="1" unique_id=1816210230]
-transform = Transform3D(0.49443263, 0.93476015, 0.8529338, -0.960481, 0.87342066, -0.4004361, -0.8238622, -0.45727062, 0.97871894, -0.08106995, -0.27941322, -0.21012163)
+transform = Transform3D(0.49443272, 0.9347602, 0.8529338, -0.960481, 0.8734207, -0.4004361, -0.8238623, -0.4572706, 0.978719, -0.08106995, -0.27941322, -0.21012163)
 cast_shadow = 0
 
 [node name="DeadTree_10_001" parent="Visuals/far/LINCOLN_FAR2/trees2" index="1" unique_id=1235206994]

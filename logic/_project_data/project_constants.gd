@@ -8,7 +8,7 @@ const BIG_MEANINGLESS_NUMBER: float = 999999.8
 const BIG_MEANINGLESS_NUMBER_INT: int = 999998
 
 # todo: consider storing delta in InputPackage and use it if needed
-# frame dependend and bad, but for approximate one tick if ok
+# frame dependent and bad, but for approximate one tick if ok
 const ONE_FRAME: float = 0.016
 const THREE_FRAMES: float = ONE_FRAME * 3
 

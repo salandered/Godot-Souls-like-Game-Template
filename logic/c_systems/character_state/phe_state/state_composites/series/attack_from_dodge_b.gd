@@ -1,15 +1,12 @@
 extends BasePHEAttackSeries
 
 
-var all_the_dodges: Array[StringName] = [PHES.Leaf.dodge_R, PHES.Leaf.dodge_L, PHES.Leaf.dodge_F, PHES.Leaf.dodge_B]
-
-
-func initialise() -> void:
+func initialize() -> void:
 	SWITCH_ANIM_BEFORE = 0.3
 	PL_DIST_TO_END = 10
 
 
-var attack_series_list :Array[Array]= [
+var attack_series_list: Array[Array] = [
 		[PHES.Leaf.dodge_B, PHES.Leaf.attack_360_low],
 		[PHES.Leaf.dodge_B, PHES.Leaf.sword_slide],
 		[PHES.Leaf.dodge_B, PHES.Leaf.dodge_B, PHES.Leaf.gap_closer],

@@ -4,7 +4,7 @@ var momentum_preservation := 1.05
 var is_landed := false
 
 
-func initialise() -> void:
+func initialize() -> void:
 	start_time_offset.set_specific(anim.get_marker_time_by_name(MarkerName.JUMP.LAND_START, 0.05))
 
 	default_sp.ANGULAR_SPEED = 2.0

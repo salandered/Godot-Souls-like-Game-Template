@@ -9,7 +9,7 @@ var _anim_light: AnimationData
 var _anim_hard: AnimationData
 
 
-func initialise() -> void:
+func initialize() -> void:
 	_anim_light = anim_container.get_by_anim_id(ANIM_LIGHT)
 	_anim_hard = anim_container.get_by_anim_id(ANIM_HARD)
 

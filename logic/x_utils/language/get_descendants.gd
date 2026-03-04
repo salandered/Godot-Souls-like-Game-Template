@@ -164,25 +164,25 @@ static func anim_container(node: Node, only_one: bool = true) -> Array:
 	var r := _get_descendants_filtered(node, func(n): return n is AnimContainer, only_one)
 	return r
 
-static func dev_visualise_trail_weapon(node: Node, only_one: bool = false) -> Array:
-	var r := _get_descendants_filtered(node, func(n): return n is DevVisualiseTrailWeapon, only_one)
+static func dev_visualize_trail_weapon(node: Node, only_one: bool = false) -> Array:
+	var r := _get_descendants_filtered(node, func(n): return n is DevVisualizeTrailWeapon, only_one)
 	return r
 
-static func dev_visualise_trail_weapon_one_or_null(node: Node) -> DevVisualiseTrailWeapon:
-	var r := dev_visualise_trail_weapon(node, true)
-	if len(r) > 0 and r[0] is DevVisualiseTrailWeapon:
+static func dev_visualize_trail_weapon_one_or_null(node: Node) -> DevVisualizeTrailWeapon:
+	var r := dev_visualize_trail_weapon(node, true)
+	if len(r) > 0 and r[0] is DevVisualizeTrailWeapon:
 		return r[0]
 	return null
 
-static func dev_visualise_trail_one_or_null(node: Node) -> DevVisualiseTrail:
-	var r := _get_descendants_filtered(node, func(n): return n is DevVisualiseTrail, true)
-	if len(r) > 0 and r[0] is DevVisualiseTrail:
+static func dev_visualize_trail_one_or_null(node: Node) -> DevVisualizeTrail:
+	var r := _get_descendants_filtered(node, func(n): return n is DevVisualizeTrail, true)
+	if len(r) > 0 and r[0] is DevVisualizeTrail:
 		return r[0]
 	return null
 
-static func dev_visualise_char_hit_boxes_one_or_null(node: Node) -> DevVisualiseCharHitBoxes:
-	var r := _get_descendants_filtered(node, func(n): return n is DevVisualiseCharHitBoxes, true)
-	if len(r) > 0 and r[0] is DevVisualiseCharHitBoxes:
+static func dev_visualize_char_hit_boxes_one_or_null(node: Node) -> DevVisualizeCharHitBoxes:
+	var r := _get_descendants_filtered(node, func(n): return n is DevVisualizeCharHitBoxes, true)
+	if len(r) > 0 and r[0] is DevVisualizeCharHitBoxes:
 		return r[0]
 	return null
 
@@ -255,16 +255,16 @@ static func base_dv_setting_check_button(node: Node) -> Array[BaseDVSettingCheck
 	var r := _get_descendants_filtered(node, func(n): return n is BaseDVSettingCheckButton)
 	return TypeCast.array_of_base_dv_setting_check_button(r)
 
-static func dv_vc_spinbox(node: Node) -> Array[DVValueChangerSpinBox]:
-	var r := _get_descendants_filtered(node, func(n): return n is DVValueChangerSpinBox)
+static func dv_vc_spinbox(node: Node) -> Array[DTValueChangerSpinBox]:
+	var r := _get_descendants_filtered(node, func(n): return n is DTValueChangerSpinBox)
 	return TypeCast.array_of_dv_vc_spinbox(r)
 
-static func dv_line_edit(node: Node) -> Array[DVLineEdit]:
-	var r := _get_descendants_filtered(node, func(n): return n is DVLineEdit)
+static func dv_line_edit(node: Node) -> Array[DTLineEdit]:
+	var r := _get_descendants_filtered(node, func(n): return n is DTLineEdit)
 	return TypeCast.array_of_dv_line_edit(r)
 
-static func dv_option_button(node: Node) -> Array[DVOptionButton]:
-	var r := _get_descendants_filtered(node, func(n): return n is DVOptionButton)
+static func dv_option_button(node: Node) -> Array[DTOptionButton]:
+	var r := _get_descendants_filtered(node, func(n): return n is DTOptionButton)
 	return TypeCast.array_of_dv_option_button(r)
 
 # endregion

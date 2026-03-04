@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bu21qjie1lsej"]
 
-[ext_resource type="Script" uid="uid://b46rhsto4pwmi" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/sk_anim_metrics_grid_manager.gd" id="3_13bar"]
-[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="3_o558t"]
-[ext_resource type="Script" uid="uid://btcofemj5f8nj" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/sk_anim_metrics_grid_manager_blend_chain.gd" id="3_yhnc8"]
+[ext_resource type="Script" uid="uid://b46rhsto4pwmi" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/sk_anim_metrics_grid_manager.gd" id="3_13bar"]
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="3_o558t"]
+[ext_resource type="Script" uid="uid://btcofemj5f8nj" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/sk_anim_metrics_grid_manager_blend_chain.gd" id="3_yhnc8"]
 [ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="5_xt1q6"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="7_ac0vq"]
 [ext_resource type="PackedScene" uid="uid://c2qjq1f0ubmt5" path="res://logic/ui/ui_utils/prefab/separator/v_separator_2.tscn" id="7_jarw8"]

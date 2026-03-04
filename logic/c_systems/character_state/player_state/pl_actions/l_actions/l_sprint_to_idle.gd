@@ -19,7 +19,7 @@ func on_enter_action(input_: InputPackage) -> void:
 	var _inherited_speed := pm().get_curr_velocity_len()
 	var rm_start_speed := get_animator_manager().calculate_animation_start_root_velocity(anim)
 	extra_speed = max(0.0, _inherited_speed - rm_start_speed)
-	fade_interpolator.initialise(1.0, 0.0, fade_time)
+	fade_interpolator.initialize(1.0, 0.0, fade_time)
 
 	# __log_ent(
 	# 	"inheritedSp: %.2f, startOffset: %.2f, AnimRMStartSp: %.2f, ExtraSp: %.2f" %

@@ -1,0 +1,88 @@
+@tool
+
+@abstract
+class_name BasePanelManager
+extends BaseDTCDependentNode
+
+
+func __hard_validation() -> bool:
+	if not get_ui_panel():
+		return false
+	return true
+
+
+## can be overridden
+func _enabled_on_init():
+	return false
+
+
+func initialize() -> void:
+	if eu.is_editor(): return
+
+	reset_visuals()
+
+	await FrameUtils.wait_process_frames(self , 4)
+	initialize_implementation()
+	
+	if not __perform_validation(true):
+		__log_warn_soft("won't be working")
+	else:
+		set_enabled(_enabled_on_init())
+		SigUtils.safe_connect(GlobalUIInfo.SIG_dtc_b_overlay_panel_value_changed, _enable_via_sig)
+
+
+## called before validation
+func initialize_implementation():
+	pass
+
+
+func reset_visuals() -> void:
+	if eu.is_editor(): return
+	if get_ui_panel():
+		get_ui_panel().visible = false
+
+
+@abstract func get_ui_panel() -> Container
+
+
+@abstract func _supported_signal_pairs() -> Array[Array]
+
+
+@abstract func get_dtc_op_key() -> DTS.KeyBOverlayPanel
+
+
+func _enable_via_sig(payload: Dictionary[StringName, Variant]) -> void:
+	var _r := DTCSIGPayloadParser.safe_bget_value_by_dtc_key(
+		payload,
+		get_dtc_op_key()
+		)
+	if _r.err: return
+	
+	set_enabled(_r.value)
+
+
+func set_enabled(value: bool):
+	if not __validation_ok():
+		__log_warn_soft("validation failed, can't be enabled")
+		return
+
+	__log_("set_enabled", value)
+
+	if get_ui_panel():
+		get_ui_panel().visible = value
+
+	var pairs := _supported_signal_pairs()
+	if value:
+		SigUtils.safe_connect_pairs(pairs)
+	else:
+		SigUtils.safe_disconnect_pairs(pairs)
+
+
+func is_panel_visible() -> bool:
+	if not __validation_ok():
+		return false
+	
+	if not get_ui_panel():
+		return false
+		
+	return get_ui_panel().visible

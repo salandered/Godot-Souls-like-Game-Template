@@ -68,7 +68,7 @@ func _input_implementation(event: InputEvent) -> void:
 
 	# var debug_cams: Array[Node]
 	# var cam_i := 0
-	# func __dev_initialise():
+	# func __dev_initialize():
 	# 	if eu.is_release():
 	# 		return
 	# 	debug_cams = get_tree().get_nodes_in_group(Groups.Dev.DEBUG_CAMERAS)

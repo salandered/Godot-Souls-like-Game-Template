@@ -20,7 +20,7 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise_implementation(additional_data: Dictionary[StringName, Variant]) -> void:
+func initialize_implementation(additional_data: Dictionary[StringName, Variant]) -> void:
 	_weapon = DictUtils.safe_get_dict_key(additional_data, weapon_additional_data_key, null)
 
 

@@ -1,0 +1,102 @@
+@tool
+@icon("uid://sboavald7fvc")
+
+@abstract
+class_name DTCSignalEnabledNode
+extends BaseDTCDependentNode
+
+
+@export var react_to_dvc_signal: bool = true
+@export var dvc_section: DTS.DTSection = DTS.DTSection.UNKNOWN
+
+
+@export_group("B_CHANGER S")
+## used if dvc_section B_CHANGER
+@export var _key_b_value_changer: DTS.KeyBValueChanger = DTS.KeyBValueChanger.UNKNOWN
+
+@export_group("B_CHAR_DV S")
+## used if dvc_section B_CHAR_DV
+@export var _char_type: DTS.CharacterType = DTS.CharacterType.UNKNOWN
+@export var _dv_type: DTS.CharDVType = DTS.CharDVType.UNKNOWN
+
+
+## INITIALIZATION
+# region
+
+
+func initialize() -> void:
+	if eu.is_editor():
+		return
+
+	await FrameUtils.wait_process_frames(self , 10)
+
+	_initialize_implementation()
+
+	if not __perform_validation(true):
+		__log_warn_soft("won't be working")
+		__shut_down()
+		return
+
+
+	if react_to_dvc_signal:
+		var sig_pair_to_connect: Array = []
+		match dvc_section:
+			DTS.DTSection.B_CHAR_DV:
+				if _char_type == DTS.CharacterType.UNKNOWN or _dv_type == DTS.CharDVType.UNKNOWN:
+					__log_warn_soft("looks like u forgot to specify _char_type or _dv_type", "", "", _char_type, _dv_type)
+				sig_pair_to_connect = [GlobalUIInfo.SIG_dtc_b_char_dv_value_changed, _on_SIG_dtc_b_char_dv_value_changed]
+			DTS.DTSection.B_CHANGER:
+				if _key_b_value_changer == DTS.KeyBValueChanger.UNKNOWN:
+					__log_warn_soft("looks like u forgot to specify _key_b_value_changer", "", "", _key_b_value_changer)
+				sig_pair_to_connect = [GlobalUIInfo.SIG_dtc_bvalue_changed, _on_SIG_dtc_bvalue_changed]
+			_:
+				__log_warn_soft("looks like u forgot to specify dvc_section", "", "", dvc_section)
+
+		SigUtils.safe_connect_pairs([
+			sig_pair_to_connect
+		])
+	
+	set_enabled(false) # disable on start
+
+# endregion
+
+
+func set_enabled(value: bool):
+	if value:
+		process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func __shut_down():
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+
+## called before the validation
+func _initialize_implementation() -> void:
+	pass
+
+
+# endregion
+
+
+## SIG
+
+func _on_SIG_dtc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
+	var parsed_payload := DTCSIGPayloadParser.parse_dtc_b_char_dv_value_changed(payload)
+	if not parsed_payload:
+		return
+	if parsed_payload.char_type != _char_type:
+		return
+	if parsed_payload.char_dv_type != _dv_type:
+		return
+
+	set_enabled(parsed_payload.value_as_bool)
+	
+
+func _on_SIG_dtc_bvalue_changed(payload: Dictionary[StringName, Variant]):
+	var _r := DTCSIGPayloadParser.safe_bget_value_by_dtc_key(payload, _key_b_value_changer)
+	if _r.err:
+		return
+
+	set_enabled(_r.value)

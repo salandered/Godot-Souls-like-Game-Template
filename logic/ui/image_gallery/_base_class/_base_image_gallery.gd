@@ -38,7 +38,7 @@ var _raw_gallery_items: Array[GalleryItem] = []
 var populated_gallery_items: Array[GalleryItem] = []
 var curr_item_idx: int = 0
 
-var _is_gallery_initialised: bool = false
+var _is_gallery_initialized: bool = false
 
 var _ui_layer_visible: bool = true
 
@@ -107,10 +107,10 @@ func _ready():
 	populated_gallery_items.clear()
 
 	# defer execution to let the UI draw laoding label before the freeze starts
-	call_deferred("_initialise_gallery")
+	call_deferred("_initialize_gallery")
 
 
-func _initialise_gallery():
+func _initialize_gallery():
 	for item: GalleryItem in get_raw_gallery_items():
 		if not item:
 			__log_warn_soft("item is null in get_raw_gallery_items")
@@ -131,15 +131,15 @@ func _initialise_gallery():
 
 
 	if not error_.empty_list(populated_gallery_items, "populated_gallery_items", WL.WARN):
-		__log_("_initialise_gallery", len(populated_gallery_items), "gallery items are populated and ready")
-		_is_gallery_initialised = true
+		__log_("_initialize_gallery", len(populated_gallery_items), "gallery items are populated and ready")
+		_is_gallery_initialized = true
 		set_system_info_container_visible(false)
 		set_counter_container_visible(true)
 		set_legend_container_visible(true)
 		image_display.visible = true
 		update_display()
 	else:
-		_is_gallery_initialised = false
+		_is_gallery_initialized = false
 		set_system_info_container_visible(true)
 		set_system_info_text("Gallery Error: No matching files found.")
 
@@ -148,8 +148,8 @@ func _initialise_gallery():
 
 ## public API
 
-func is_gallery_initialised() -> bool:
-	return _is_gallery_initialised
+func is_gallery_initialized() -> bool:
+	return _is_gallery_initialized
 
 ##
 
@@ -251,7 +251,7 @@ func set_legend_container_visible(value: bool):
 ##
 
 func _apply_ui_visibility():
-	# system_info_container is always hidden after the initialisation
+	# system_info_container is always hidden after the initialization
 	set_counter_container_visible(_ui_layer_visible)
 	set_legend_container_visible(_ui_layer_visible)
 	
@@ -285,22 +285,22 @@ func _update_global_margins(value: int) -> void:
 ## Input
 
 func _input(event):
-	if not is_visible_in_tree() or not _is_gallery_initialised:
+	if not is_visible_in_tree() or not _is_gallery_initialized:
 		return
 
 	match InputUtils.get_keycode(event):
 		KEY_D, KEY_RIGHT:
 			change_item(1)
 			_play_book_flip()
-			InputUtils.mark_input_handled(self)
+			InputUtils.mark_input_handled(self )
 		KEY_A, KEY_LEFT:
 			change_item(-1)
 			_play_book_flip()
-			InputUtils.mark_input_handled(self)
+			InputUtils.mark_input_handled(self )
 		KEY_0, KEY_KP_0:
 			_ui_layer_visible = not _ui_layer_visible
 			_apply_ui_visibility()
-			InputUtils.mark_input_handled(self)
+			InputUtils.mark_input_handled(self )
 
 
 func _play_book_flip() -> void:

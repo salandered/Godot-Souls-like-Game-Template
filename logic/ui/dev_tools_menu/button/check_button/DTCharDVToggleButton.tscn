@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://byjv3t8r0rvg2"]
+
+[ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28)_or.png" id="1_gduce"]
+[ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28).png" id="2_fovls"]
+[ext_resource type="Texture2D" uid="uid://d0o265dhve8kq" path="res://-assets-/x_icons/white/icon_face.png" id="3_5qdn8"]
+[ext_resource type="Script" uid="uid://cwya2337khsxy" path="res://logic/ui/dev_tools_menu/button/check_button/dt_char_dv_toggle_button.gd" id="4_qfat6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8ro"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.29110003, 0.41, 0.39414668, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19606547, 0.2759742, 0.26368055, 0.8666667)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.49803922)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ib10h"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.72, 0.48024002, 0.3312, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.32, 0.19136001, 0.10559999, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.4117474, 0.11035965, 0, 0.36078432)
+shadow_offset = Vector2(-2, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8xjt"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.38481855, 0.5, 0.48513788, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19606547, 0.2759742, 0.26368055, 0.8666667)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.49803922)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81w05"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.7443918, 0.51956654, 0.3819869, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.32, 0.19136001, 0.10559999, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.4117474, 0.11035965, 0, 0.36078432)
+shadow_offset = Vector2(-2, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kn7pl"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.61565834, 0.6357732, 0.00011758829, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gvgfj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b7gm3"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_upv4f"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nbae8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6pm6x"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rbjfo"]
+
+[node name="DVCharDVToggleButton" type="CheckButton" unique_id=1123155907]
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.79870105, 0.79870105, 0.79870105, 1)
+theme_override_colors/icon_focus_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_hover_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/icon_disabled_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_4m8ro")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ib10h")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j8xjt")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_81w05")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_kn7pl")
+theme_override_icons/checked = ExtResource("1_gduce")
+theme_override_icons/unchecked = ExtResource("2_fovls")
+theme_override_icons/checked_disabled = SubResource("PlaceholderTexture2D_gvgfj")
+theme_override_icons/unchecked_disabled = SubResource("PlaceholderTexture2D_b7gm3")
+theme_override_icons/checked_mirrored = SubResource("PlaceholderTexture2D_upv4f")
+theme_override_icons/unchecked_mirrored = SubResource("PlaceholderTexture2D_nbae8")
+theme_override_icons/checked_disabled_mirrored = SubResource("PlaceholderTexture2D_6pm6x")
+theme_override_icons/unchecked_disabled_mirrored = SubResource("PlaceholderTexture2D_rbjfo")
+text = "Player"
+icon = ExtResource("3_5qdn8")
+script = ExtResource("4_qfat6")
+dv_section = 30

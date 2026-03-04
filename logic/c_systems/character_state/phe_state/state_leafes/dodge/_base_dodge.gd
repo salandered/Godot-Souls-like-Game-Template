@@ -9,10 +9,10 @@ var SCALE_LENGTH := 1.0
 
 
 ## DOCS:
-##   DANGER: implementation must not use initialise, but initialise_implementation()
+##   DANGER: implementation must not use initialize, but initialize_implementation()
 
 
-func initialise() -> void:
+func initialize() -> void:
 	TIME_REMAINING_TO_END = 0.2
 	default_sp.ANGULAR_SPEED = 2
 	sp_config = SpeedConfig.new(default_sp)
@@ -26,11 +26,11 @@ func initialise() -> void:
 		PHES.Leaf.dodge_L: from_run,
 	})
 
-	initialise_implementation()
+	initialize_implementation()
 
 
-# to override instead of initialise
-func initialise_implementation():
+# to override instead of initialize
+func initialize_implementation():
 	pass
 
 

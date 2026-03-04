@@ -11,7 +11,7 @@ class_name FirstTutorial
 @onready var _4_target_lock_mechanic: RichTextLabel = %"TargetLockMechanic"
 @onready var _5_health_stamina_mechanic: RichTextLabel = %"HealthStaminaMechanic"
 @onready var _6_additional_movement_tips: RichTextLabel = %"AdditionalMovementTips"
-@onready var ui_overlay_controls: RichTextLabel = %UIDVMenu
+@onready var _7_ui_overlay_controls: RichTextLabel = %UIDevToolsMenu
 
 
 func __hard_dependencies() -> Array:
@@ -34,10 +34,10 @@ func _ready():
 			tutorial_ui.register_panel(5, _5_health_stamina_mechanic)
 		if _6_additional_movement_tips:
 			tutorial_ui.register_panel(6, _6_additional_movement_tips)
-		if ui_overlay_controls:
-			tutorial_ui.register_panel(7, ui_overlay_controls)
+		if _7_ui_overlay_controls:
+			tutorial_ui.register_panel(7, _7_ui_overlay_controls)
 		
-		tutorial_ui.initialise()
+		tutorial_ui.initialize()
 	
 	if legend:
 		legend.show()

@@ -22,16 +22,16 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func initialise(character_: BaseCharacter):
+func initialize(character_: BaseCharacter):
 	_character = character_
 
 
 	__perform_validation()
 
-	initialise_implementation()
+	initialize_implementation()
 
 
-func initialise_implementation():
+func initialize_implementation():
 	pass
 
 

@@ -12,20 +12,20 @@ var SCALE_ROOT_FACTOR := 1.0
 
 
 ## DOCS:
-##   WARNING: implementation must not use initialise, but initialise_implementation()
+##   WARNING: implementation must not use initialize, but initialize_implementation()
 ##            i made it @abstract so it's easier to follow this pattern.
 ##            All weapons must set at least their hit_damage, anyway
 ##  Implementations must use combat methods in case of overrding base state methods       
 
 
-func initialise() -> void:
+func initialize() -> void:
 	TIME_REMAINING_TO_END = 0.2
 	default_sp.ANGULAR_SPEED = 1
 	sp_config = SpeedConfig.new(default_sp)
-	initialise_implementation()
+	initialize_implementation()
 
 
-@abstract func initialise_implementation() -> void
+@abstract func initialize_implementation() -> void
 
 
 var default_attack_weapons: Array[StringName] = [WeaponID.big_pinga_blade]

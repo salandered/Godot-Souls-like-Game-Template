@@ -5,7 +5,7 @@ class_name DownCast
 
 @export var __log_dist: bool = false
 
-# TODO: separate Dev Visuals as a reusable raycast visualiser
+
 @export_group("Debug Visuals")
 @export var __show_visuals: bool = false
 @export var dv_color_hit: Color = Color.DARK_GREEN
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 	set_visuals_enabled(false)
 	SigUtils.safe_connect_pairs([
-			[GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed],
+			[GlobalUIInfo.SIG_dtc_bvalue_changed, _on_SIG_dtc_bvalue_changed],
 		])
 
 
@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 	_process_dv_visuals()
 
 
+# TODO: separate Dev Visuals as a reusable raycast visualizer
 func _process_dv_visuals() -> void:
 	if not __show_visuals:
 		return
@@ -98,8 +99,8 @@ func set_visuals_enabled(value: bool):
 	if _shaft: _shaft.visible = value
 
 
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
-	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(payload, DVS.KeyBValueChanger.DOWNCAST)
+func _on_SIG_dtc_bvalue_changed(payload: Dictionary[StringName, Variant]):
+	var _r := DTCSIGPayloadParser.safe_bget_value_by_dtc_key(payload, DTS.KeyBValueChanger.DOWNCAST)
 	if _r.err:
 		return
 

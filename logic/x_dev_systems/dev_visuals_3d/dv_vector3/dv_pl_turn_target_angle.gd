@@ -1,6 +1,6 @@
 @tool
 class_name DVTurnTargetAngle
-extends BaseDevVisualiseVector3
+extends BaseDevVisualizeVector3
 
 @export var vector_length := 1.5
 @export var character: BaseCharacter
@@ -14,13 +14,13 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func _initialise_implementation_in_game() -> void:
-	super._initialise_implementation_in_game()
+func _initialize_implementation_in_game() -> void:
+	super._initialize_implementation_in_game()
 	
 	_turn_data = Groups.get_first_leg_turn_by_group(self )
 
 
-func _conditions_to_visualise() -> bool:
+func _conditions_to_visualize() -> bool:
 	if not _turn_data or _turn_data.turn_completed:
 		reset_visuals()
 		return false

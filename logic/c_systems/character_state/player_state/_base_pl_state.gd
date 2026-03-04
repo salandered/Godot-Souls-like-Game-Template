@@ -67,7 +67,7 @@ func pm() -> PlayerMovement:
 
 
 ## to override if needed.
-func initialise() -> void:
+func initialize() -> void:
 	pass
 
 # CHECK TRANSITION
@@ -97,7 +97,7 @@ func _check_transition(input_: InputPackage) -> PLVerdict:
 	return check_transition(input_)
 
 
-## can be overriden
+## can be overridden
 func check_transition(input_: InputPackage) -> PLVerdict:
 	if curr_global_action().time_remaining() <= 0.0:
 		__log_psm_check("[default check]", "time_remaining < 0 and non looping => choosing best input")
@@ -186,7 +186,7 @@ func update(input_: InputPackage, delta: float):
 	pass
 
 
-# looks like can be overriden. Test usage in Run
+# looks like can be overridden. Test usage in Run
 func choose_default_action() -> StringName:
 	return default_action_name
 

@@ -15,7 +15,7 @@ var curve: Curve
 
 
 ## idempotent
-func initialise(start: float, target: float, curve_: Curve, duration_: float) -> void:
+func initialize(start: float, target: float, curve_: Curve, duration_: float) -> void:
 	assert(curve_)
 	self.start_value = start
 	self.target_value = target

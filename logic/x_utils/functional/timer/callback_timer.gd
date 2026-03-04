@@ -7,7 +7,7 @@ var _has_triggered: bool = false # Prevent multiple calls to callback
 
 
 ## idempotent
-func initialise(duration_: float, callback: Callable = Callable()) -> void:
+func initialize(duration_: float, callback: Callable = Callable()) -> void:
 	self.duration = duration_
 	self.timer = 0.0
 	self.on_complete = callback
@@ -16,7 +16,7 @@ func initialise(duration_: float, callback: Callable = Callable()) -> void:
 
 ## Returns true when timer expires
 func update(delta: float) -> bool:
-	if not is_initialised(): return false
+	if not is_initialized(): return false
 
 	if timer < duration:
 		timer += delta

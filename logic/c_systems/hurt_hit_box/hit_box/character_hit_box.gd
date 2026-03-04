@@ -87,7 +87,7 @@ func __hard_validation() -> bool:
 	return _r
 
 
-func initialise(combat_: BaseCombat) -> void:
+func initialize(combat_: BaseCombat) -> void:
 	self._combat = combat_
 	collision_layer = Collision.Layers.HITBOX_AREA
 	collision_mask = Collision.Masks.HITBOX_AREA_MASK

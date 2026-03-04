@@ -3,12 +3,12 @@ extends BasePHEAttackSeries
 class_name PHEAttackPickSingleSeries
 
 
-func initialise() -> void:
+func initialize() -> void:
 	SWITCH_ANIM_BEFORE = 0.2
 	PL_DIST_TO_END = 7
 
 
-var attack_series_list :Array[Array]= [
+var attack_series_list: Array[Array] = [
 		[PHES.Leaf.attack_up], # 0
 		[PHES.Leaf.attack_down], # 1
 		[PHES.Leaf.attack_up, PHES.Leaf.attack_down], # 2
@@ -31,11 +31,11 @@ var pick_weight: Dictionary[int, float] = {
 		}
 var angry_pick_weight: Dictionary[int, float] = {
 			0: 0.9,
-			1: 0.0,
+			1: 0.05,
 			2: 0.5,
-			3: 0.0,
+			3: 0.05,
 			4: 0.3,
-			5: 0.01
+			5: 0.05
 	}
 	
 func pick_series_idx() -> int:

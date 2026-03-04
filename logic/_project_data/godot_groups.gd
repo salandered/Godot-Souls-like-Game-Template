@@ -16,7 +16,7 @@ class Dev:
 	const camera_mode_toggle = "camera_mode_toggle"
 	const FANCY_CAM = "fancy_cam"
 	const SK_ANIM_MANAGER = "SK_ANIM_MANAGER"
-	const DEV_VISUALS = "DEV_VISUALS"
+	const DEV_TOOLS = "DEV_TOOLS"
 	const DV_LEG_TURN = "DV_LEG_TURN"
 
 
@@ -100,6 +100,6 @@ static func get_first_leg_turn_by_group(for_whom: Node) -> TurnData:
 	return _r as TurnData
 
 
-static func get_dv(for_whom: Node) -> Array[Node]:
-	var dvs := for_whom.get_tree().get_nodes_in_group(Groups.Dev.DEV_VISUALS)
-	return dvs
+static func get_dev_tools_nodes(for_whom: Node) -> Array[Node]:
+	var dts := for_whom.get_tree().get_nodes_in_group(Groups.Dev.DEV_TOOLS)
+	return dts

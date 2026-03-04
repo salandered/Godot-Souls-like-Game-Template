@@ -34,7 +34,7 @@ signal _SIG_player_speed_increase(payload: Dictionary[StringName, Variant])
 signal _SIG_player_dodge_increase(payload: Dictionary[StringName, Variant])
 
 ## SYSTEM GLOBAL UI
-signal SIG_dv_ui_control_value_changed(payload: Dictionary[StringName, Variant])
+signal SIG_dt_ui_control_value_changed(payload: Dictionary[StringName, Variant])
 
 signal SIG_free_cam_mode_toggled(payload: Dictionary[StringName, Variant])
 signal SIG_toggle_camera_coll(payload: Dictionary[StringName, Variant])

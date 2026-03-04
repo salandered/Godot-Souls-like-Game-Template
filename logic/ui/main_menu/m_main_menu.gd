@@ -72,7 +72,7 @@ func __soft_dependencies() -> Array:
 		]
 
 
-## INITIALISATION
+## INITIALIZATION
 # region
 
 func _ready() -> void:
@@ -90,7 +90,7 @@ func _ready() -> void:
 	
 	ThemeUtils.randomize_shake_button_panel_region(menu_buttons_box_container, 450)
 	
-	menu_3d_scene.initialise()
+	menu_3d_scene.initialize()
 	
 	if __dev_bypass_menu_and_start_game:
 		await FrameUtils.wait_process_frames(self , 2)

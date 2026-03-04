@@ -29,4 +29,3 @@ class Act:
 	# const walk_start := "la_action_walk_start✏️"
 	# const turn_90_to_run := "la_turn_90_to_run_R ↪🏃" # from idle
 	# const l_action_jump_start := "la_action_jump_start"
-	# const l_action_midair := "la_action_midair"

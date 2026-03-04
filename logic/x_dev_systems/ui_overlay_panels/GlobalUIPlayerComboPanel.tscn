@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://hnekq1nistan"]
 
-[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_5lavm"]
-[ext_resource type="Script" uid="uid://cmbgx5lbcmc6n" path="res://logic/x_dev_systems/metrics/metrics_grid_manager/player_combo_grid_manager.gd" id="2_co164"]
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_5lavm"]
+[ext_resource type="Script" uid="uid://cmbgx5lbcmc6n" path="res://logic/x_dev_systems/dev_tools_2d/ui_metrics/metrics_grid_manager/player_combo_grid_manager.gd" id="2_co164"]
 [ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="3_co164"]
 [ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="3_imfaw"]
 [ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_x5u8a"]

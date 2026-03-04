@@ -3,7 +3,7 @@ extends RefCounted
 class_name DefaultSpeedConfig
 
 
-## meant to be overriden if action uses them
+## meant to be overridden if action uses them
 var SPEED: float = 2.0
 
 ## how fast the character moves forward while rotating

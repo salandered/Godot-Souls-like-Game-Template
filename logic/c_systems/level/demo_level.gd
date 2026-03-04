@@ -18,7 +18,7 @@ func tonemap_exposure_no_vol_fog_compensation() -> float:
 	return 0.1
 
 
-func initialise() -> void:
+func initialize() -> void:
 	for item: RigidBody3D in get_descendants.rigid_bodies(self ):
 		item.collision_layer = Collision.Layers.ITEM_COL
 		item.collision_mask = Collision.Masks.ITEM_COL_MASK

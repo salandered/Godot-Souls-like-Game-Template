@@ -1,7 +1,7 @@
 extends BasePlayerState
 
 
-func initialise() -> void:
+func initialize() -> void:
 	APPLY_GRAVITY = false
 
 func check_transition(input_: InputPackage) -> PLVerdict:

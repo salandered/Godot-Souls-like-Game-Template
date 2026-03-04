@@ -46,9 +46,9 @@ func check_substate_transition(delta: float, current_substate: BasePHEState, _ne
 		return VerdictPH.new(_next_state, _reason)
 	else:
 		if __LOG_B(): _reason += pp.s("attack is ended. we wait several frames and launch next iteration |")
-		if not to_next_iteration.is_initialised():
+		if not to_next_iteration.is_initialized():
 			if __LOG_B(): _reason += pp.s("we set a timer, while return empty verdict | ")
-			to_next_iteration.initialise(0.05)
+			to_next_iteration.initialize(0.05)
 			return VerdictPH.new(_next_state, _reason)
 		elif to_next_iteration.update(delta):
 			to_next_iteration.turn_off()
@@ -88,7 +88,7 @@ func choose_initial_substate(_next_state: StringName, _reason: String) -> Verdic
 			PHES.attack_from_dodge_b: fvalue_angry(0.1, 0.5),
 			PHES.Leaf.scare_off: fvalue_angry(0.6, 0.1),
 			PHES.attack_pick_single: fvalue_angry(0.3, 0.3),
-			PHES.attack_360_series: fvalue_angry(0.0, 0.5),
+			PHES.attack_360_series: fvalue_angry(0.0, 0.4),
 			}
 		)
 	return VerdictPH.new(_next_state, _reason)

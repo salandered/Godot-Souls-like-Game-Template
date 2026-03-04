@@ -11,7 +11,7 @@ var _resettable := [
 ]
 
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.ANGULAR_SPEED = 1.5
 
 
@@ -33,7 +33,7 @@ func on_enter_state() -> void:
 			anim = anim_container.get_by_anim_id(PHEA.loco.combat_idle)
 			default_sp.ANGULAR_SPEED = 2 - 0.8
 
-	angular_accel.initialise(0.2, default_sp.ANGULAR_SPEED, 0.5)
+	angular_accel.initialize(0.2, default_sp.ANGULAR_SPEED, 0.5)
 
 
 func on_exit_state() -> void:

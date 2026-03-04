@@ -34,7 +34,7 @@ func _handle_cancel_input() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(&"ui_cancel"):
 		_handle_cancel_input()
 		InputUtils.mark_input_handled(self )
 

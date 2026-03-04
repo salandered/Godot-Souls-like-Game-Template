@@ -13,7 +13,7 @@ var angular_sp := FloatLinearInterpolator.new()
 
 var SPEED_BOOST: float = 0.0
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.SPEED = 5.0
 	default_sp.TURN_SPEED = 3.2
 	default_sp.ANGULAR_SPEED = 10
@@ -36,34 +36,34 @@ func on_enter_action(input_: InputPackage):
 	angular_sp.reset()
 	
 	var _inherited_speed := pm().get_curr_velocity_len()
-	speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, accel_time_from_slow)
+	speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, accel_time_from_slow)
 	
 	match PREV_ACTION:
 		Leg.Act.idle_to_sprint:
 			var _root_vel_speed: Variant = player_sm.get_tranfer_data_by_key("root_vel_speed")
 			if _root_vel_speed == null:
 				__log_error("_root_vel_speed is null", "", "")
-				speed_from_inherited.initialise(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
+				speed_from_inherited.initialize(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
 			elif _root_vel_speed is float:
 				__log_action("_root_vel_speed / _inherited_speed", _root_vel_speed, _inherited_speed)
-				speed_from_inherited.initialise(_root_vel_speed + 0.4, default_sp.SPEED, 0.4)
+				speed_from_inherited.initialize(_root_vel_speed + 0.4, default_sp.SPEED, 0.4)
 			else:
 				__log_error("_root_vel_speed is not float", "", "")
-				speed_from_inherited.initialise(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
+				speed_from_inherited.initialize(_inherited_speed + 1.0, default_sp.SPEED, 0.4)
 				
 		Leg.Act.run:
-			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.4)
+			speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, 0.4)
 		Leg.Act.fast_turn_180:
 			__log_action("_inherited_speed", _inherited_speed)
-			speed_from_turn.initialise(_inherited_speed, default_sp.SPEED, accel_from_turn_curve, accel_time_from_turn)
-			angular_sp.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
+			speed_from_turn.initialize(_inherited_speed, default_sp.SPEED, accel_from_turn_curve, accel_time_from_turn)
+			angular_sp.initialize(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
 		PS.Act.landing_sprint, PS.Act.dodge:
-			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 1.0)
-			angular_sp.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
+			speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, 1.0)
+			angular_sp.initialize(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
 		Leg.Act.strafe:
-			speed_from_inherited.initialise(_inherited_speed, default_sp.SPEED, 0.3)
+			speed_from_inherited.initialize(_inherited_speed, default_sp.SPEED, 0.3)
 		# PS.Act.dodge:
-			# angular_sp.initialise(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
+			# angular_sp.initialize(default_sp.ANGULAR_SPEED / 3, default_sp.ANGULAR_SPEED, 1.0)
 
 	print_preset.lsm_action(action_name + pp.on_ent, "")
 

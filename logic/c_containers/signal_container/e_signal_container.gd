@@ -1,5 +1,5 @@
-extends BaseCharacterSignalContainer
 class_name EnemySignalContainer
+extends BaseCharacterSignalContainer
 
 
 signal SFX_jingles(payload: Dictionary[StringName, Variant])

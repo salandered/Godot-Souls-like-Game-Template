@@ -13,7 +13,7 @@ var _curr_anim_start_offset: float = 0.0
 var _curr_anim: AnimationData
 
 
-func initialise_implementation():
+func initialize_implementation():
 	if _native_player and not ignore_root_bone:
 		if set_root_bone_postponed:
 			await FrameUtils.wait_process_frames(self , 4)
@@ -24,7 +24,7 @@ func initialise_implementation():
 		_reset_root_motion()
 	
 	if overlay_modifier:
-		overlay_modifier.initialise()
+		overlay_modifier.initialize()
 
 
 func _reset_root_motion() -> void:

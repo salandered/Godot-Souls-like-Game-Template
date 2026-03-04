@@ -25,12 +25,12 @@ func get_state_by_name(state_name: StringName) -> BasePHEState:
 func accept_states(node_state_container_: PHEBaseNodeStateDataContainer):
 	self._node_state_container = node_state_container_
 	_accept_states()
-	_initialise_states()
+	_initialize_states()
 
 
-func _initialise_states():
+func _initialize_states():
 	for state: BasePHEState in _states.values():
-		state._initialise()
+		state._initialize()
 
 
 func __accept_base_state(node: BasePHEState, state_data: EDC.BaseStData):
@@ -49,7 +49,7 @@ func __accept_base_state(node: BasePHEState, state_data: EDC.BaseStData):
 	node.e_movement = me.get_e_movement()
 	node.anim_params_container = me.get_anim_params_container()
 	node.config = me.config
-	# 	
+	
 	__log_("Accepted", pp.s("st name", state_data.state_name))
 
 	# store

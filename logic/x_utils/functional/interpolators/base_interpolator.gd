@@ -7,7 +7,7 @@ var duration: float = -1.0
 var timer: float = 0.0
 
 
-## should have initialise()
+## should have initialize()
 ## 	  - idempotent
 ##    - sets positive duration
 
@@ -20,20 +20,20 @@ func reset() -> void:
 	duration = -1.0
 
 
-func is_initialised() -> bool:
+func is_initialized() -> bool:
 	if duration == -1.0:
 		return false
 	return true
 
 
 func is_complete() -> bool:
-	if not is_initialised():
+	if not is_initialized():
 		return false
 	return timer >= duration
 
 
 func is_in_progress() -> bool:
-	return is_initialised() and not is_complete()
+	return is_initialized() and not is_complete()
 
 
 func _get_progress() -> float:

@@ -2,7 +2,7 @@
 @icon("uid://fg14dl1y5rwc")
 
 class_name DVHitBoxAreaContact
-extends BaseDVCDependentNode3D
+extends BaseDTCDependentNode3D
 
 
 @export var char_hit_box: CharacterHitbox
@@ -18,7 +18,7 @@ const DEF_SHADED := BaseMaterial3D.SHADING_MODE_PER_PIXEL
 const DEF_draw_snapped_hits := true
 
 
-func initialise() -> void:
+func initialize() -> void:
 	if eu.is_editor():
 		return
 	
@@ -31,8 +31,8 @@ func initialise() -> void:
 		return
 
 	SigUtils.safe_connect_pairs([
-			[GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed],
-			[GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed],
+			[GlobalUIInfo.SIG_dtc_bvalue_changed, _on_SIG_dtc_bvalue_changed],
+			[GlobalUIInfo.SIG_dtc_fvalue_changed, _on_SIG_dtc_fvalue_changed],
 			[char_hit_box.SIG_incoming_weapon_contacted, _on_SIG_incoming_weapon_contacted]
 		])
 
@@ -118,40 +118,40 @@ func _draw_secondary_hit(my_area: Area3D, hit_pos: Vector3, draw_both_levels: bo
 	)
 
 
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
+func _on_SIG_dtc_fvalue_changed(payload: Dictionary[StringName, Variant]):
 	if not char_hit_box:
 		return
-	var parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(payload)
+	var parsed_payload := DTCSIGPayloadParser.parse_untyped_dtc_value_changed(payload)
 	if not parsed_payload or not parsed_payload.value is float:
 		return
-	var dvc_key := parsed_payload.key
+	var dtc_key := parsed_payload.key
 	var value := parsed_payload.value as float
 
-	match dvc_key:
-		DVS.KeyFValueChanger.WEAPON_HIT_DUR:
-			# __log_("_on_SIG_dvc_bvalue_changed", "WEAPON_HIT_DUR", value, typeof(value))
+	match dtc_key:
+		DTS.KeyFValueChanger.WEAPON_HIT_DUR:
+			# __log_("_on_SIG_dtc_bvalue_changed", "WEAPON_HIT_DUR", value, typeof(value))
 			duration = value
 			# __log_("duration", duration)
 
 			
-func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
+func _on_SIG_dtc_bvalue_changed(payload: Dictionary[StringName, Variant]):
 	if not char_hit_box:
 		return
-	var parsed_payload := DVCSIGPayloadParser.parse_b_dvc_value_changed(payload)
+	var parsed_payload := DTCSIGPayloadParser.parse_b_dtc_value_changed(payload)
 	if not parsed_payload:
 		return
-	var dvc_key := parsed_payload.key
+	var dtc_key := parsed_payload.key
 	var toggle := parsed_payload.value_as_bool
-	match dvc_key:
-		DVS.KeyBValueChanger.WEAPON_HIT:
+	match dtc_key:
+		DTS.KeyBValueChanger.WEAPON_HIT:
 			char_hit_box.emit_on_attacking_wp = toggle
-		DVS.KeyBValueChanger.WEAPON_HIT_EVERY_FRAME:
+		DTS.KeyBValueChanger.WEAPON_HIT_EVERY_FRAME:
 			char_hit_box.emit_on_attacking_wp_every_frame = toggle
 
-		DVS.KeyBValueChanger.WEAPON_HIT_SHADED:
+		DTS.KeyBValueChanger.WEAPON_HIT_SHADED:
 			var _shading_mode := BaseMaterial3D.SHADING_MODE_PER_PIXEL if toggle else BaseMaterial3D.SHADING_MODE_UNSHADED
 			shading_mode = _shading_mode
-		DVS.KeyBValueChanger.WEAPON_HIT_SNAPPED_HITS:
+		DTS.KeyBValueChanger.WEAPON_HIT_SNAPPED_HITS:
 			draw_snapped_hits = toggle
 	
 

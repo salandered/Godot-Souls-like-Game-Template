@@ -18,7 +18,7 @@ static func _init() -> void:
 static func _save_config_file() -> void:
 	var save_error: int = config_file.save(CONFIG_FILE_LOCATION)
 	if save_error:
-		push_error("save config file failed with error %d" % save_error)
+		__log_error("save config file failed with error %d" % save_error)
 
 static func load_config_file() -> void:
 	if config_file != null:
@@ -28,7 +28,7 @@ static func load_config_file() -> void:
 	if load_error:
 		var save_error: int = config_file.save(CONFIG_FILE_LOCATION)
 		if save_error:
-			push_error("save config file failed with error %d" % save_error)
+			__log_error("save config file failed with error %d" % save_error)
 
 static func set_config(section: String, key: String, value) -> void:
 	load_config_file()

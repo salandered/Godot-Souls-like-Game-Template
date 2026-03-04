@@ -8,7 +8,7 @@ class_name AuraWeapon
 @onready var _weapon_hurt_box_: WeaponHurtBox = %WeaponHurtBox
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	PUSH_RIGID_BODIES_FORCE = 16.0
 
 

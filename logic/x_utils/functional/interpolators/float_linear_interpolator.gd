@@ -8,7 +8,7 @@ var _current_value: float
 
 
 ## idempotent
-func initialise(start: float, target: float, duration_: float) -> void:
+func initialize(start: float, target: float, duration_: float) -> void:
 	self._start_value = start
 	self._target_value = target
 	self._current_value = start

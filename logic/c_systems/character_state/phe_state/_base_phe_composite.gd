@@ -17,17 +17,17 @@ func validate_substate_depth(parent_depth: int) -> bool:
 	return state_depth - parent_depth == 1
 
 
-func _initialise() -> void:
-	initialise()
+func _initialize() -> void:
+	initialize()
 
-	# after usual initialise
+	# after usual initialize
 	supported_substates = SupportedSubstates.new(
 		get_supported_substates(),
 		state_name
 	)
 	
 
-func initialise() -> void:
+func initialize() -> void:
 	pass
 
 
@@ -217,7 +217,7 @@ func _choose_initial_substate(_next_state: StringName, _reason: String) -> Verdi
 	return _initial_sbs_verdict
 
 
-## usually overriden
+## usually overridden
 ## 'current_substate' - to work with to make a decisions. NOTE: guaranteed to be not null!
 ## '_next_state' - is empty string on function entry. State will fill it and set to verdict
 ## '_reason' - is empty string on function entry. State should fill it and add to verdict reason

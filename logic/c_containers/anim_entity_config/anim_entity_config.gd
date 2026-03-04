@@ -4,11 +4,10 @@ class_name AnimatableEntityConfig
 extends NodeLogger
 
 
-## 
 @export var SPEED_SCALE_COEF: float = 1.0
 @export var speed_scale_coef_mutable: bool = true
 
-@export var key_f_value: DVS.KeyFValueChanger = DVS.KeyFValueChanger.UNKNOWN
+@export var key_f_value: DTS.KeyFValueChanger = DTS.KeyFValueChanger.UNKNOWN
 
 
 func _ready() -> void:
@@ -18,7 +17,7 @@ func _ready() -> void:
 		return
 	
 
-	if key_f_value == DVS.KeyFValueChanger.UNKNOWN:
+	if key_f_value == DTS.KeyFValueChanger.UNKNOWN:
 		return
 
 	if not speed_scale_coef_mutable:
@@ -26,24 +25,24 @@ func _ready() -> void:
 
 	await FrameUtils.wait_process_frames(self , 6)
 	SigUtils.safe_connect_pairs([
-			[GlobalUIInfo.SIG_dvc_fvalue_changed, _on_SIG_dvc_fvalue_changed],
+			[GlobalUIInfo.SIG_dtc_fvalue_changed, _on_SIG_dtc_fvalue_changed],
 		])
 	__log_("safe_connect_pairs")
 
 
 ## TODO: should be moved to separate mode, not using dev code inside Config
-func _on_SIG_dvc_fvalue_changed(payload: Dictionary[StringName, Variant]):
-	var parsed_payload := DVCSIGPayloadParser.parse_untyped_dvc_value_changed(
+func _on_SIG_dtc_fvalue_changed(payload: Dictionary[StringName, Variant]):
+	var parsed_payload := DTCSIGPayloadParser.parse_untyped_dtc_value_changed(
 		payload,
-		DVS.KeyFValueChanger
+		DTS.KeyFValueChanger
 		)
 	if not parsed_payload or not parsed_payload.value is float:
 		return
-	var dvc_key := parsed_payload.key
+	var dtc_key := parsed_payload.key
 	var value := parsed_payload.value as float
-	match dvc_key:
+	match dtc_key:
 		key_f_value:
-			__log_("_on_SIG_dvc_fvalue_changed", key_f_value, value, typeof(value))
+			__log_("_on_SIG_dtc_fvalue_changed", key_f_value, value, typeof(value))
 			SPEED_SCALE_COEF = value
 			__log_("SPEED_SCALE_COEF", SPEED_SCALE_COEF)
 

@@ -36,14 +36,14 @@ func get_max_contacts_reported_() -> int:
 
 func _ready():
 	_find_asp()
-	_initialise_asp()
-	_initialise_coll_layer()
+	_initialize_asp()
+	_initialize_coll_layer()
 
 	contact_monitor = true
 	max_contacts_reported = get_max_contacts_reported_()
 	body_entered.connect(_on_body_entered)
 
-	initialise_implementation()
+	initialize_implementation()
 
 
 func _find_asp():
@@ -62,7 +62,7 @@ func _find_asp():
 		self.add_child(_sfx_asp)
 
 
-func _initialise_asp():
+func _initialize_asp():
 	var asp_config := get_asp_config()
 	if asp_config == null:
 		__log_("no asp_config provided, using default one")
@@ -74,18 +74,18 @@ func _initialise_asp():
 		_sfx_asp.stream = DEFAULT_IMPACT_STREAM
 	_base_volume_db = _sfx_asp.volume_db
 
-	__log_("_initialise_asp", "using config", asp_config, "stream is", str(_sfx_asp.stream) if _sfx_asp.stream else "[-]")
+	__log_("_initialize_asp", "using config", asp_config, "stream is", str(_sfx_asp.stream) if _sfx_asp.stream else "[-]")
 
 
 ## base layer for RigidBody. Implementation may override if needed
-func _initialise_coll_layer():
+func _initialize_coll_layer():
 	collision_layer = Collision.Layers.ITEM_COL
 	collision_mask = Collision.Masks.ITEM_COL_MASK
 
 
 @abstract func get_asp_config() -> ASP3DConfig
 
-@abstract func initialise_implementation() -> void
+@abstract func initialize_implementation() -> void
 
 
 func _physics_process(_delta):

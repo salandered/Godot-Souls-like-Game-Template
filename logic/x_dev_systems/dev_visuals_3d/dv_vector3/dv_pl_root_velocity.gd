@@ -1,6 +1,6 @@
 @tool
 class_name DVPlayerRootVelocity
-extends BaseDevVisualiseVector3
+extends BaseDevVisualizeVector3
 
 
 var _animator: PlayerModifierAnimator
@@ -12,8 +12,8 @@ func __hard_dependencies() -> Array:
 	]
 
 
-func _initialise_implementation_in_game() -> void:
-	super._initialise_implementation_in_game()
+func _initialize_implementation_in_game() -> void:
+	super._initialize_implementation_in_game()
 	
 	_animator = Groups.get_first_pl_mod_animator_by_group(self )
 

@@ -39,7 +39,7 @@ func __soft_dependencies() -> Array:
 	]
 
 
-func initialise(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D = null) -> void:
+func initialize(enable_ui: bool, e_feelings_: PHEFeelings, anchor_node_: Node3D = null) -> void:
 	self .e_feelings = e_feelings_
 	self._anchor_3d = anchor_node_
 	self.__UI_HARD_ENABLE = enable_ui

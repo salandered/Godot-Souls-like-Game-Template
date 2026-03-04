@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://b0eq3ihtn4wf"]
 
-[ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/c_systems/character/mech_fighter.gd" id="1_rn2eh"]
+[ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/c_systems/character/mech_fighter_char.gd" id="1_rn2eh"]
 [ext_resource type="ArrayMesh" uid="uid://cejnfcdar41gc" path="res://-assets-/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_001.res" id="1_vvmdu"]
 [ext_resource type="Script" uid="uid://u2ifm4auvm52" path="res://logic/c_systems/x_unsorted/char_coll_collider.gd" id="2_2lrnj"]
 [ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_hhdky"]
@@ -28,7 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://xnugux0jw08e" path="res://-assets-/SFX/sources/400/stone_push_medium.wav" id="17_tu6ua"]
 [ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="17_v8c2r"]
 [ext_resource type="Script" uid="uid://ddd1lik7yh6ka" path="res://logic/c_systems/weapon/fighter_weapon/v_arm_weapon.gd" id="20_jqa4j"]
-[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualiseTrailWeapon.tscn" id="22_gk5iv"]
+[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailWeapon.tscn" id="22_gk5iv"]
 [ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy_camera/camera_target/CameraTarget.tscn" id="22_v8c2r"]
 [ext_resource type="Script" uid="uid://c2fafl8mfpxh7" path="res://logic/c_systems/anim_manager/simple_animator_manager.gd" id="23_iefnp"]
 [ext_resource type="PackedScene" uid="uid://88lj8tl6runn" path="res://logic/c_containers/anim_container/AnimContainer.tscn" id="24_lijjc"]

@@ -1,7 +1,7 @@
 extends BaseMechAttackState
 
 
-func initialise_attack_state_implementation() -> void:
+func initialize_attack_state_implementation() -> void:
 	hit_damage = 24
 
 

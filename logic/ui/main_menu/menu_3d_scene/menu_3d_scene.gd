@@ -44,7 +44,7 @@ func tonemap_exposure_no_vol_fog_compensation() -> float:
 	return 0.3
 
 
-func initialise():
+func initialize():
 	camera_3d.current = true
 	_sit_skeleton()
 

@@ -6,7 +6,7 @@ extends Label
 func _get_inputs_as_string() -> String:
 	var all_inputs: String = ""
 	var is_first: bool = true
-	for action_name in action_names:
+	for action_name: StringName in action_names:
 			if Input.is_action_pressed(action_name):
 				if is_first:
 					is_first = false

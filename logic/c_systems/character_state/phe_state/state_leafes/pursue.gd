@@ -30,7 +30,7 @@ var _slow_angry_preset := ActionModeSwitcher.Preset.new(SLOW, 1.7 + 0.4, ANIM_SL
 
 var curr_mode: ActionModeSwitcher
 
-func initialise() -> void:
+func initialize() -> void:
 	default_sp.ANGULAR_SPEED = 2.5
 	
 	blend_time.set_by_prev_action({
@@ -96,8 +96,8 @@ func on_enter_state() -> void:
 	var _inherited_speed := e_movement.get_curr_velocity_len()
 	if __LOG_B(): __log_ent("_inherited_speed, speed will be ", _inherited_speed, "->", curr_mode.get_curr_speed())
 
-	speed_from_inherited.initialise(_inherited_speed, curr_mode.get_curr_speed(), 0.4)
-	angular_sp.initialise(0.4, default_sp.ANGULAR_SPEED, 0.8)
+	speed_from_inherited.initialize(_inherited_speed, curr_mode.get_curr_speed(), 0.4)
+	angular_sp.initialize(0.4, default_sp.ANGULAR_SPEED, 0.8)
 
 
 func on_exit_state() -> void:
@@ -133,7 +133,7 @@ func _on_mode_switch():
 	if __LOG_B(): __log_upd("Switching pursue curr_mode to", curr_mode.get_curr_mode_name(), "speed from", e_movement.get_curr_velocity_len(), "to", curr_mode.get_curr_speed(), "over 0.3")
 	_switch_animation()
 	# to smooth the speed change
-	speed_from_mode_change.initialise(e_movement.get_curr_velocity_len(), curr_mode.get_curr_speed(), 0.3)
+	speed_from_mode_change.initialize(e_movement.get_curr_velocity_len(), curr_mode.get_curr_speed(), 0.3)
 	
 
 func _switch_animation():

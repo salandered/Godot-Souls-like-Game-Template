@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(&"ui_cancel"):
 		if not pause_menu_packed:
 			__log_warn("no pause_menu_packed", "M_PauseMenuController", "")
 			return

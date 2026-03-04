@@ -28,7 +28,7 @@ func is_player() -> bool:
 	return true
 
 
-func initialise(player: Princess) -> void:
+func initialize(player: Princess) -> void:
 	self._player = player
 	self.combat = player.get_combat()
 	self.player_movement = player.get_pl_movement()
@@ -112,7 +112,7 @@ func react_on_hit(hit_data: HitData) -> void:
 	if not current_state:
 		__log_warn("no _curr_state", "player sm", "no hit applied, it's lost", hit_data)
 		return
-	hit_timer.initialise(0.4)
+	hit_timer.initialize(0.4)
 	current_state.react_on_hit(hit_data)
 
 

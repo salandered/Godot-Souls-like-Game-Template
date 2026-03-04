@@ -2,12 +2,12 @@
 @icon("uid://bw1sr77shmixu")
 
 class_name DVFancyCam
-extends BaseDVCDependentNode3D
+extends BaseDTCDependentNode3D
 
 
 var _flying_label: Label3D
 var _csg_nodes: Array[CSGPrimitive3D]
-var _dv_trail: DevVisualiseTrail
+var _dv_trail: DevVisualizeTrail
 
 
 var _flying_label_toggle: bool = false
@@ -21,7 +21,7 @@ func __soft_dependencies() -> Array:
 	]
 
 
-func initialise() -> void:
+func initialize() -> void:
 	if eu.is_editor():
 		return
 
@@ -35,13 +35,13 @@ func initialise() -> void:
 	toggle_flying_label_visible(false)
 
 
-	_dv_trail = get_descendants.dev_visualise_trail_one_or_null(self )
+	_dv_trail = get_descendants.dev_visualize_trail_one_or_null(self )
 	toggle_dv_trail_visible(false)
 
 
 	if __perform_validation():
 		SigUtils.safe_connect_pairs([
-			[GlobalUIInfo.SIG_dvc_b_overlay_panel_value_changed, _on_SIG_dvc_b_overlay_panel_value_changed],
+			[GlobalUIInfo.SIG_dtc_b_overlay_panel_value_changed, _on_SIG_dtc_b_overlay_panel_value_changed],
 		])
 
 	set_enabled(false)
@@ -67,25 +67,25 @@ func toggle_dv_trail_visible(toggle: bool):
 		_dv_trail.set_enabled(toggle)
 
 
-func _on_SIG_dvc_b_overlay_panel_value_changed(payload: Dictionary[StringName, Variant]):
-	__log_("_on_SIG_dvc_value_changed_section_char_dv", payload)
-	var r_toggle := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
+func _on_SIG_dtc_b_overlay_panel_value_changed(payload: Dictionary[StringName, Variant]):
+	__log_("_on_SIG_dtc_value_changed_section_char_dv", payload)
+	var r_toggle := DTCSIGPayloadParser.safe_bget_value_by_dtc_key(
 		payload,
-		DVS.KeyBOverlayPanel.CAM_NODES
+		DTS.KeyBOverlayPanel.CAM_NODES
 		)
 	if r_toggle.err: return
 	set_enabled(r_toggle.value)
 	
 
-## TODO: should be redesigned, right now every camera node has this scrip attached and process inputs
+## TODO: should be separated! every camera node has this scrip attached and process inputs
 ## -> here not marking input as handled - (several instances)
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	match InputUtils.get_keycode(event):
 		KEY_L:
-			__log_("_input", KEY_L)
+			# __log_("_input", KEY_L)
 			toggle_flying_label_visible(not _flying_label_toggle)
 		KEY_T:
-			__log_("_input", KEY_T)
+			# __log_("_input", KEY_T)
 			toggle_dv_trail_visible(not _dv_trail_toggle)
 
 

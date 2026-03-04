@@ -9,7 +9,7 @@ func get_anim_active_weapon_ids() -> Array[StringName]:
 	return attack_weapons
 
 
-func initialise_implementation() -> void:
+func initialize_implementation() -> void:
 	blend_time.set_specific(0.35)
 	hit_damage = 40.0
 	default_attack_weapons = [WeaponID.bg_aura_weapon]

@@ -65,7 +65,7 @@ func _start_loop_sequence() -> void:
 	var play_duration := valid_end_time - loop_start_time
 	
 	if play_duration <= 0.0:
-		push_warning("SimpleAudioLooper3D: Loop duration is <= 0. check start/end times.")
+		__log_error("SimpleAudioLooper3D: Loop duration is <= 0. check start/end times.")
 		return
 
 	# safe fade times to prevent overlapping if clip is super short

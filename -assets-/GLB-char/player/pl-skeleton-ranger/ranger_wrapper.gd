@@ -12,28 +12,20 @@ class_name RangerWrapper
 
 
 const TILE_BLACK_PLASTIC = preload("uid://lg6qj8wpa5va")
-
 const HEALTH_ITEM_SHADER_MAT = preload("uid://i0yd71ruqvup")
-
-# const TRIM_RAIL_PIPE = preload("uid://bs2jei6uvq271")
 const FLAT_EMITTER_RED = preload("uid://dauxox1fd0gtl")
-# const HEALTH_ITEM_MAT = preload("uid://yv1wf8fj6a2k")
-# const CYCLES_GLOW_ORANGE = preload("uid://chilr0f8o2xm5")
 
 
 func _ready() -> void:
 		SigUtils.safe_connect_pairs([
-		[GlobalUIInfo.SIG_dvc_color_value_changed, _on_SIG_dvc_color_value_changed],
-		[GlobalUIInfo.SIG_dvc_bvalue_changed, _on_SIG_dvc_bvalue_changed],
+		[GlobalUIInfo.SIG_dtc_color_value_changed, _on_SIG_dvc_color_value_changed],
+		[GlobalUIInfo.SIG_dtc_bvalue_changed, _on_SIG_dvc_bvalue_changed],
 	])
 
 
 func super_mats():
 	# _super_mat(long_hair, TRIM_RAIL_PIPE, 0)
-	# _super_mat(ranger_torso, HEALTH_ITEM_MAT, 0)
 	_super_mat(ranger_torso, TILE_BLACK_PLASTIC, 2)
-	# _super_mat(ranger_pants, HEALTH_ITEM_MAT, 2)
-	# _super_mat(ranger_boots, HEALTH_ITEM_MAT, 0)
 	_super_mat(ranger_boots, TILE_BLACK_PLASTIC, 2)
 	_super_mat(ranger_top, TILE_BLACK_PLASTIC, 1)
 	# _super_mat(_mask, CYCLES_GLOW_ORANGE, 0)
@@ -46,9 +38,9 @@ func _super_mat(mesh: MeshInstance3D, mat, index: int):
 
 
 func _on_SIG_dvc_color_value_changed(payload: Dictionary[StringName, Variant]):
-	var _r := DVCSIGPayloadParser.safe_color_get_value_by_dvc_key(
+	var _r := DTCSIGPayloadParser.safe_color_get_value_by_dtc_key(
 		payload,
-		DVS.KeyColorChanger.HAIR_COLOR
+		DTS.KeyColorChanger.HAIR_COLOR
 	)
 	if _r.err: return
 
@@ -57,9 +49,9 @@ func _on_SIG_dvc_color_value_changed(payload: Dictionary[StringName, Variant]):
 
 
 func _on_SIG_dvc_bvalue_changed(payload: Dictionary[StringName, Variant]):
-	var _r := DVCSIGPayloadParser.safe_bget_value_by_dvc_key(
+	var _r := DTCSIGPayloadParser.safe_bget_value_by_dtc_key(
 		payload,
-		DVS.KeyBValueChanger.WEAR_HAT
+		DTS.KeyBValueChanger.WEAR_HAT
 	)
 	if _r.err: return
 

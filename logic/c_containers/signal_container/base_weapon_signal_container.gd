@@ -1,5 +1,5 @@
-extends BaseSignalContainer
 class_name BaseWeaponSignalContainer
+extends BaseSignalContainer
 
 
 ## NOTE: treated as not an abstract class for simplicity 

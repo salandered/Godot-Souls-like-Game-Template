@@ -11,7 +11,7 @@ const POWER = "power"
 var _sfx_weapon_hit_emitted: bool = false
 
 
-func initialise_implementation():
+func initialize_implementation():
 	default_sp.ANGULAR_SPEED = 1.0
 	sp_config = SpeedConfig.new(default_sp)
 	

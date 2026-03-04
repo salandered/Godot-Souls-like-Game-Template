@@ -16,7 +16,7 @@ var _non_moving_timer: SimpleTimer = SimpleTimer.new()
 var _reason: String = ""
 
 func _ready() -> void:
-	_non_moving_timer.initialise(TO_STOP_DELAY)
+	_non_moving_timer.initialize(TO_STOP_DELAY)
 
 
 func choose_action(input_: InputPackage, delta: float) -> LNextActionVerdict:

@@ -76,3 +76,11 @@ const AUDIO_DRIVER_ENABLE_INPUT = "audio/driver/enable_input"
 class PROPERTY_LIST:
 	const NAME = "name"
 	const CLASS_NAME = "class_name"
+
+
+## CUSTOM CLASS NAMES
+class CUSTOM_CLASS_NAME:
+	const INTERACT_AREA = &"InteractArea"
+	const WEATHER_CHANGE_AREA = &"WeatherChangeArea"
+	const BREAKABLE_AREA = &"BreakableArea"
+	const COMMON_AREA = &"CommonArea"

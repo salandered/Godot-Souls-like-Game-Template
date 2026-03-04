@@ -6,9 +6,9 @@ class_name BaseVisuals
 extends Node3DCharacterSystem
 
 
-@export var _char_type: DVS.CharacterType = DVS.CharacterType.UNKNOWN
+@export var _char_type: DTS.CharacterType = DTS.CharacterType.UNKNOWN
 
-@export var _dv_type: DVS.CharDVType = DVS.CharDVType.HIDE_MESH_VISUALS
+@export var _dv_type: DTS.CharDVType = DTS.CharDVType.HIDE_MESH_VISUALS
 
 
 func _ready() -> void:
@@ -17,12 +17,12 @@ func _ready() -> void:
 	await FrameUtils.wait_process_frames(self , 2)
 
 	SigUtils.safe_connect_pairs([
-		[GlobalUIInfo.SIG_dvc_b_char_dv_value_changed, _on_SIG_dvc_b_char_dv_value_changed]
+		[GlobalUIInfo.SIG_dtc_b_char_dv_value_changed, _on_SIG_dtc_b_char_dv_value_changed]
 	])
 
 
-func _on_SIG_dvc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
-	var parsed_payload := DVCSIGPayloadParser.parse_dvc_b_char_dv_value_changed(payload)
+func _on_SIG_dtc_b_char_dv_value_changed(payload: Dictionary[StringName, Variant]):
+	var parsed_payload := DTCSIGPayloadParser.parse_dtc_b_char_dv_value_changed(payload)
 	if not parsed_payload:
 		return
 	if parsed_payload.char_type != _char_type:

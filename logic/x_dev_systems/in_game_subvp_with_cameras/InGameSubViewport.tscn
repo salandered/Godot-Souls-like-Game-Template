@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b6qeel3fnf216"]
 
 [ext_resource type="Script" uid="uid://com6yrv7n27kf" path="res://logic/x_dev_systems/in_game_subvp_with_cameras/in_game_sub_viewport.gd" id="1_oyy5i"]
-[ext_resource type="PackedScene" uid="uid://cjbvdf08tmrpa" path="res://logic/x_dev_systems/camera/DebugCoolCam.tscn" id="2_cbl1c"]
+[ext_resource type="PackedScene" uid="uid://cjbvdf08tmrpa" path="res://logic/x_dev_systems/dev_dynamic_camera/DevDynamicCam.tscn" id="2_cbl1c"]
 [ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://-assets-/ui_assets/themes/panel/blue_panel.tres" id="3_a0v5g"]
 
 [node name="InGameSubViewport" type="Node" unique_id=1523509107]

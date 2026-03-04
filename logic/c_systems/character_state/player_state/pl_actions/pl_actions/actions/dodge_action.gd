@@ -34,7 +34,7 @@ var second_dodge: bool = false
 
 var upper_body_mask: Array[int]
 
-func initialise() -> void:
+func initialize() -> void:
 	curr_dodge_dir = DodgeDirection.new(SPEED_R, ANIM_R, SPEED_L, ANIM_L, SPEED_R, ANIM_F, SPEED_L, ANIM_B)
 	blend_time.set_by_prev_action({
 		Leg.Act.run: 0.1, # or 0.1?
@@ -96,7 +96,7 @@ func on_enter_action(input_: InputPackage) -> void:
 		PEAK_SPEED -= 2.0
 		END_SPEED -= 0.3
 
-	speed_x_interpolator.initialise(
+	speed_x_interpolator.initialize(
 		_inherited_speed + END_SPEED_BOOST,
 		END_SPEED + END_SPEED_BOOST,
 		PEAK_SPEED + PEAK_SPEED_BOOST,

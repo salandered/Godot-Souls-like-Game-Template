@@ -15,7 +15,7 @@ func __soft_dependencies() -> Array:
 	]
 
 
-func initialise(assigned_parent: Node3D) -> void:
+func initialize(assigned_parent: Node3D) -> void:
 	self._assigned_parent = assigned_parent
 	add_to_group(Groups.Environment_.TARGETABLE) # only for EnemyCameraTarget
 	
@@ -23,7 +23,7 @@ func initialise(assigned_parent: Node3D) -> void:
 	ui_marker.global_position.y += Y_ui_marker_shift
 	#ui_marker_visual.visible = false
 	
-	dev_initialise()
+	dev_initialize()
 	__perform_validation()
 	
 
@@ -44,7 +44,7 @@ func make_active() -> void:
 @export var __csg_visual: bool = true
 @onready var look_at_visual: MeshInstance3D = %LookAtVisual
 
-func dev_initialise():
+func dev_initialize():
 	if eu.is_release():
 		if look_at_visual:
 			look_at_visual.visible = false

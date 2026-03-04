@@ -1,7 +1,7 @@
 extends BasePHEComposite
 
 
-func initialise() -> void:
+func initialize() -> void:
 	SigUtils.safe_connect(PlayerStats.SIG_dodge_combo_achieved, _on_SIG_dodge_combo_achieved)
 	SigUtils.safe_connect(PlayerStats.SIG_power_combo_achieved, _on_SIG_power_combo_achieved)
 	SigUtils.safe_connect(PlayerStats.SIG_thrown, _on_SIG_thrown)
@@ -81,9 +81,6 @@ func get_supported_substates() -> Array[StringName]:
 		SITSKS.Leaf.cheer,
 		SITSKS.Leaf.disapprove,
 		SITSKS.Leaf.thumb_up,
-		## stand
-		# SITSKS.Leaf.cheer_stand,
-		# SITSKS.Leaf.clap_stand,
 	]
 
 
