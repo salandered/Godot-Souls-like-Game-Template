@@ -13,7 +13,7 @@
 Follow official [docs](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#formatting).
 
 > [!IMPORTANT]
-> UPD: I need to try this: [gdscript_formatter](https://www.gdquest.com/library/gdscript_formatter/)
+> UPD: New official formatter: [gdscript_formatter](https://www.gdquest.com/library/gdscript_formatter/)
 
 **Godot-tools** does not support all the necessary formatting, so it sometimes hard to to follow the official docs.
 E.g:

@@ -51,7 +51,18 @@ Collection exporters are recommended to use.
 
 **Apply Modifiers** - usually should be checked: they represent the 'final' state of the blender data.
 
-**Flatten Object Hierarchy** - usually unchecked, that way collection hierarchy will be preserved in Godot node tree
+**Full collection Hierarchy** - usually checked, this way collection hierarchy will be preserved in Godot node tree.
+
+**Images**
+* Use default option in case images should be fully exported, e.g. when new material is planned to be added to Godot.
+* ℹ️ use **None** in case images are not needed. This is usually the case because material library is maintained on the Godot side: see [sharing-materials](docs_blender_godot_workflow.md#sharing-materials)
+  
+![alt text](images/export_mats.png)
+
+💡 **Action filter** is useful for exporting animations.
+
+
+Wrapper
 
 ### Using suffixes
 

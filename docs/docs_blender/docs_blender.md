@@ -6,13 +6,14 @@
 	- [Texture baking](#texture-baking)
 	- [Rigging fingers](#rigging-fingers)
 	- [Root rotation: baking hips rotation to root bone](#root-rotation-baking-hips-rotation-to-root-bone)
+	- [Weight painting tips](#weight-painting-tips)
 	- [See also](#see-also)
 - [👨‍🔧 Troubleshooting](#-troubleshooting)
 
 ## Blender - Godot workflow 🍊💙
 
 > [!NOTE]
-> See docs [here](docs_blender_workflow.md)
+> See docs [here](docs_blender_godot_workflow.md)
 
 ## 🧩 Recommended blender addons
 
@@ -45,6 +46,11 @@ Some of them are paid.
 - more flexible gizmo than a built-in one
 - allows to use small gizmo on a 3D cursor
 - Luna is the most minimalistic option
+
+**Rokoko (Animation Retarget)** - https://support.rokoko.com/hc/en-us/articles/4410463492241-How-to-install-the-Blender-plugin
+
+- Plugin which is used for Rokoko motion capture.
+- Somehow it has Rokoko agnostic feature for animation retargetting, which we use,
 
 **QoL:**
 
@@ -106,9 +112,13 @@ Anim works also as expected (global anim rotation could've been changed after al
 1. Bake action (`Hips` still selected in **Pose mode**)
    - similar to the first bake
 
+### Weight painting tips
+
+Description to come
+
 ### See also
 
-See also instructions inside [Blender-Godot workflow docs](docs_blender_workflow.md)
+See also instructions inside [Blender-Godot workflow docs](docs_blender_godot_workflow.md)
 
 ## 👨‍🔧 Troubleshooting
 

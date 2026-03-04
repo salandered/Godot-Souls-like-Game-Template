@@ -5,73 +5,71 @@
 	- [Methods to Implement](#methods-to-implement)
 	- [Methods to Call](#methods-to-call)
 - [🎛️ Usage Examples](#️-usage-examples)
-	- [Simplest usage with one hard dependency](#simplest-usage-with-one-hard-dependency)
+	- [Simplest usage (one dependency)](#simplest-usage-one-dependency)
 	- [Custom validation](#custom-validation)
 	- [Blocking important functions](#blocking-important-functions)
 	- [Disabling process](#disabling-process)
 	- [Nested Custom Classes](#nested-custom-classes)
 - [🦾 Real examples](#-real-examples)
 - [💡 Tips](#-tips)
-- [🤔 Ideas Behind Implementation and Trade-offs](#-ideas-behind-implementation-and-trade-offs)
-	- [Why this is acceptable](#why-this-is-acceptable)
+- [🤔 About implementation and trade offs](#-about-implementation-and-trade-offs)
+	- [Why I think it is acceptable](#why-i-think-it-is-acceptable)
 	- [Alternative via composition](#alternative-via-composition)
-		- [Problems](#problems)
-		- [Future Proofing](#future-proofing)
+		- [Problems of the alternative](#problems-of-the-alternative)
+		- [Switching to composition](#switching-to-composition)
 
 ## 🧾 What it does
 
-The Validation Framework:
-
-- **Runs dependency validation** and any custom validation for any custom class used in code. (in Godot it means all the files except for may be `EditorScript`).
+- **Runs dependency validation** and any custom validation for any custom class used in code (in Godot it means all the files except for may be `EditorScript`).
 - **Persists the validation result** and produces API for a custom class to check the validation result
-- It also can automatically disable the node if validation is failed.
+- It also can auto disable the node if validation is failed.
 
-It evaluates both "hard" (critical) and "soft" (optional) dependencies and also any custom logic that custom class might need.
+It checks both "hard" and "soft" (optional) dependencies and also any custom logic that custom class might need.
 
-Validation part is meant to run on initialisation of any class (e.g. inside `_ready`)
+Validation part is meant to run on initialization (e.g. inside `_ready`)
 
-Result of validation can be accessed any time, e.g. you can add a check of your `_process` function or public api of the class.
+Result of validation is persisted as a class attribute, meaning that class may add safety checks in important methods like public API or built-in methods like `_process`.
 
-This makes validation centralized and unified for any component, and makes system fault tolerant:
+It makes the the system more fault tolerant:
 
-- any failed component knows about it and "embraces" the situation.
-- framework itself tolerates any possible error and prints all the gathered info.
+- Any failed component knows about it and "embraces" the situation.
+- Framework itself tolerates any possible error and prints all the gathered info.
 
 ## 🔌 Framework API
 
-To use the framework, your custom class should extend a so-called "built-in class extender" (e.g. `NodeSystem`) rather than a base Godot class (like `Node`) directly. This extender provides the validation API and base methods to implement which will be used for validation.
+Custom class should extend a so-called "built-in class extender" (like `NodeSystem`) instead of the base Godot class (like `Node`). Extender provides the validation API and base methods to implement which will be used for validation.
 
-Custom class may choose which methods to implement based on its needs.
-Currently it can fully ignore framework functionality, while it's planned in the future to force framework usage.
+- Custom class may choose which methods to implement based on its needs.
+- Currently class may fully ignore framework functionality, while it's planned in the future to force the usage.
 
 ### Methods to Implement
 
-Class defines its dependencies and things to validate by overriding the following methods:
+Class defines its validation needs by implementing (overriding) following methods:
 
-- `__hard_dependencies() -> Array`: Returns an array of critical objects that must not be null.
+- `__hard_dependencies() -> Array`: An array of critical objects that must not be null.
 
-- `__soft_dependencies() -> Array`: Returns an array of optional objects.
+- `__soft_dependencies() -> Array`: An array of optional objects.
 
-- `__hard_validation() -> bool`: Returns a boolean based on critical custom logic checks.
+- `__hard_validation() -> bool`: Any critical validation logic.
 
-- `__soft_validation() -> bool`: Returns a boolean based on optional custom logic checks.
+- `__soft_validation() -> bool`: Any optional validation logic.
 
 ### Methods to Call
 
-You should call these methods from your custom class:
+Custom class calls:
 
-- `__perform_validation(process_disable_on_fail: bool = false) -> bool`: Performs the actual validation. Implemented methods will be implicitly used. Call this inside your initialization method (like `_ready` or `initialise`). It returns the result and also persists it so custom class can access it later.
+- `__perform_validation(process_disable_on_fail: bool = false) -> bool`: Performs the actual validation. Implemented methods like `__hard_dependencies()` will be implicitly used. Call this inside your initialization method (like `_ready`). Return value is a validation result. Side effect: validation result is also persisted.
 
-- `__validation_ok() -> bool`: Returns the result of the `__validated` flag. Use this in your `_process` or public API methods to ensure the custom class is safe to be used.
+- `__validation_ok() -> bool`: Returns the validation result. Call this as a safety check in critical class methods like `_process` or public API.
 
-NOTE: failing of soft dependencies or soft validation results in successful validation, but all the problems will be listed in logs.
+ℹ️ failing of soft validation results in successful result, but all the problems will be shown in logs using [warning level](docs_logging_framework.md#️-log-levels)
 
 ## 🎛️ Usage Examples
 
-### Simplest usage with one hard dependency
+### Simplest usage (one dependency)
 
 ```GDScript
-class_name MyCustomSystem
+class_name MarkerManager
 extends NodeSystem
 
 var required_marker: Marker3D
@@ -81,7 +79,7 @@ func __hard_dependencies() -> Array:
 
 func _ready_() -> void:
 	if not __perform_validation():
-		print("MyCustomSystem dependencies are not met, won't be working)
+		print("dependencies are not met, won't be working")
 		return
 	...
 ```
@@ -95,20 +93,17 @@ func __hard_validation() -> bool:
 
 ### Blocking important functions
 
-This makes any other system around `MyCustomSystem` fault tolerant.
-
 ```GDScript
 func _process(delta: float) -> void:
 	if not __validation_ok():
 		return
 	...
 
-## public api
 func move_marker(): 
 	if not __validation_ok():
 		print("sorry can't do that")
 		return
-	required_marker.position.y += 10
+	...
 ```
 
 ### Disabling process
@@ -117,21 +112,21 @@ func move_marker():
 func _ready_() -> void:
 	if not __perform_validation():
 		set_process(false)
-		print("MyCustomSystem dependencies are not met, won't be working at all)
+		print("dependencies are not met, won't be working at all")
 		return
 
 func _ready_() -> void:
 	if not __perform_validation(true): # <- OR auto disabling process  
-		print("MyCustomSystem dependencies are not met, won't be working at all)
+		print("dependencies are not met, won't be working at all")
 		return
 ```
 
 ### Nested Custom Classes
 
-Append your new dependencies using `super`:
+Append new dependencies using `super`:
 
 ```GDscript
-class_name MyCustomSystem
+class_name BaseMarkerManager
 extends NodeSystem
 
 var required_marker: Marker3D
@@ -140,8 +135,8 @@ func __hard_dependencies() -> Array:
 	return [required_marker]
 
 
-class_name DerivedCustomSystem
-extends MyCustomSystem
+class_name DerivedMarkerManager
+extends BaseMarkerManager
 
 var another_marker: Marker3D
 
@@ -156,12 +151,12 @@ func __hard_dependencies() -> Array:
 They can be found anywhere in project, e.g:
 
 - [_common_area](../logic/c_systems/common_area/_common_area.gd)
-- [dv_bus_spectrum](../logic/x_dev_systems/audio_visualiser/dv_bus_spectrum.gd)
+- [dv_bus_spectrum](../logic/x_dev_systems/audio_visualizer/dv_bus_spectrum.gd)
 - [pl_char](../logic/c_systems/character/pl_char.gd)
 
 ## 💡 Tips
 
-**Syntax Highlighting:** It is highly recommended to use the `vscode-highlight` extension to colorize validation methods (like `__hard_validation`) so they stand out in the editor.
+**Syntax Highlighting:** Recommended to use code highlighting extension to colorize validation methods (like `__hard_validation`) so they stand out in the editor. See more in `docs_vscode.md`
 
 Example:
 
@@ -184,39 +179,40 @@ How it looks:
 ![alt text](images/vf_highlight.png)
 ![alt text](images/vf_highlight_3.png)
 
-## 🤔 Ideas Behind Implementation and Trade-offs
+## 🤔 About implementation and trade offs
 
-I haven't found an easy way to inject framework methods into most common Godot types like `Node` (if this can be done at all). Because of this, we must create a specific extender class for every base node type we plan to use for custom classes (e.g., `NodeSystem`, `Node3DSystem`, `Area3DSystem`).
-We cannot simply make a `Node` extender and use it inside a `Node3D` custom class.
+I haven't found an easy way to inject framework methods into most basic types like `Node` (if this can be done at all). This means that we can't use a `Node` extender for let's say `Area3D` custom class.
 
-This leads to the **major drawback**: the duplication of the framework API across multiple extenders.
+Because of this, a specific extender is created for any built-in type that we plan to use: `NodeSystem`, `Node3DSystem`, `Area3DSystem`, etc.
+
+This leads to the **major drawback**: the duplication of the multiple extenders.
 
 ![alt text](images/extenders.png)
 
-### Why this is acceptable
+### Why I think it is acceptable
 
-- The extender code is identical across types, meaning a change to one leads to copy-pasting to the others. While awkward, this is primitive work and can be managed via strict project guidelines.
-- The framework is low-level infrastructural code. Changes are infrequent, making the redundancy and additional maintenance steps more tolerable.
-- `ValidationFramework` class contains all the heavy lifting and actual logic. Extender's code acts purely as a "duplicated facade" pointing to that single source of truth.
+- The extender code is identical across types: a change to one leads to copy-pasting to the others. While awkward, this is primitive work and can be managed as a project guideline.
+- The framework is `low-level` infrastructural code. Changes are rare, making the redundancy and an additional maintenance step more tolerable.
+- `ValidationFramework` class contains all the heavy lifting and actual logic. Extender's code acts more like a "duplicated facade". This is actual DRY: actual knowledge is not duplicated.
 
 ### Alternative via composition
 
-Another approach would be using composition (e.g., `var validation_framework: ValidationFramework`) or a global Singleton (autoload). This would allow any class to access the framework directly without needing an extender layer.
+Alternative would be using composition (e.g., `var validation_framework: ValidationFramework` as a custom class dependency) or a Singleton (autoload). Then any class may access the framework directly without needing an extender layer.
 
-This approach offers a clearer entity relationship in strict OOP terms: the custom class *depends* on the framework, whereas the current approach makes it seem like the custom class *derives* from the framework.
+Another advantage here is a clearer OOP relationship: custom class _depends_ on the framework, not _derives_ from it (but we already mentioned, it actually derives the extender facade).
 
-The custom class would still define methods like `__hard_dependencies` and manually call something like `validation_framework.perform_validation(self)`.
+Custom class would still define methods like `__hard_dependencies` and manually call framework API like this: `validation_framework.perform_validation(self)`.
 
-#### Problems
+#### Problems of the alternative
 
-- **Error Prevention:** With composition, a typo in the `__hard_dependencies` function name would make it useless. The current inheritance approach provides auto completion because you override the base class method. By implementing a base method, developers know their `__hard_dependencies` function is part of a rigid structure, not just dangling, unreferenced code.
-  - ℹ️ It is planned to make base methods `@abstract`, making it impossible to misspell or forget the implementation.
+- **Error prevention:** A typo in the `__hard_dependencies` name would make it useless and dangerous (it would seem like it works). While by implementing a base method, developer knows that `__hard_dependencies` function is a part of a rigid structure thanks to IDE functionality: auto completion, function docs, clicking on a mehtod leads to the base method.  
+  - ℹ️ IDE QoL may seem like it's not enough. It is planned to make base methods `@abstract`, which would make a mistake impossible.
 
-- **Enforcement:** Composition makes it difficult to force every custom class to use the framework. With the current approach, we could add a call to `__perform_validation` inside `_ready` enforcing its use in the project
+- **Framework enforcement:** Composition makes it difficult to force the framework usage. While with the current approach, we could add a call to `__perform_validation` inside the extender's `_ready`.
   - ℹ️ It is planned for some critical systems.
 
-- **Extensibility:** Extenders give us a unified place to add more shared infrastructural logic beyond just validation, such as logging framework (link to come).
+- **Extensibility:** Extenders give us a unified place to add more infra logic. Not only for validation framework: see logging framework (link to come).
 
-#### Future Proofing
+#### Switching to composition
 
-If we ever need to switch to a composition model, the transition would be very easy. The `ValidationFramework` already operates by taking the custom class instance (`self`) as a parameter to process validations. Core validation logic is already fully decoupled from the custom classes and the extender layers.
+If we ever would need to switch to the composition approach, the transition would be very easy. Core validation logic is already decoupled from extender layers: framework already operates by taking the custom class instance (`self`) and all implemented custom class methods are ready as is.

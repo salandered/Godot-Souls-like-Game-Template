@@ -30,31 +30,21 @@
 		"**/.git/objects/**": true,
 		"**/.git/subtree-cache/**": true,
 		"**/.hg/store/**": true,
-		// added as experiment
+		// optional
 		"**/addons/**": true,
 		"**/misc/**": true,
 		// "**/-assets-/**": true,
 	},
-	//
-	// MARKDOWN LINT
-	"editor.codeActionsOnSave": {
-		"source.fixAll.markdownlint": "explicit"
-	},
-	"markdownlint.focusMode": true,
 	//--------------------------------------------
 	//-----------🤖 FIGHTING COPILOT 🤖----------
 	//--------------------------------------------
-	// Only show code actions on non-empty lines (the old behaviour of code actions): "editor.lightbulb.enabled": "onCode"
 	// "github.copilot.editor.enableCodeActions": false, // no yellow stars
-	// configured in keybindings.json
-	// "editor.inlineSuggest.enabled": true,
-	//
-	// Code completions settings
-	// "github.copilot.enable": true,
+	// "editor.inlineSuggest.enabled": true, // 🚩 NOTE: currently is configured via keybindings.json
+	// "github.copilot.enable": false,
 	// "editor.inlineSuggest.syntaxHighlightingEnabled": false,
 	//
 	// NES settings
-	// "github.copilot.nextEditSuggestions.enabled": true,
+	// "github.copilot.nextEditSuggestions.enabled": false,
 	// "editor.inlineSuggest.edits.allowCodeShifting": "never",
 	// "editor.inlineSuggest.edits.renderSideBySide": "never", // show inline suggestions in the same line
 	// "editor.inlineSuggest.edits.showCollapsed": true, // can be configured from UI button
@@ -63,7 +53,7 @@
 	//
 	// SUGGESTIONS (not copilot)
 	"editor.suggestSelection": "recentlyUsedByPrefix",
-	// "editor.inlineSuggest.showToolbar": "never", // listed in copilot Code completions settings
+	// "editor.inlineSuggest.showToolbar": "never", 
 	//
 	"workbench.colorCustomizations": {
 		// BUILD IN
@@ -80,7 +70,6 @@
 		"editorBracketHighlight.foreground5": "#ffabae",
 		"editorBracketHighlight.foreground6": "#abfff9",
 		// color of wave like underline
-		// "#fd5ca75b", // semi-transparent red
 		"editorError.foreground": "#fd5ca75b", // 🚨 semi-transparent red
 		// "editorError.foreground": "#fd5ca700", // ⏺ FAKE TURN OFF
 		"editorWarning.foreground": "#ffff002a", // semi-transparent yellow
@@ -100,8 +89,8 @@
 		"bookmarks.lineBorder": "#ffffff00", // Border color for a bookmarked line.
 		"bookmarks.overviewRuler": "#157EFB88", // Marker color for the overview ruler.
 		//
-		// COLORFUL FOLDERS DOCS
-		/* EXAMPLE OF USAGE
+		// COLORFUL FOLDERS
+		/* DOCS: EXAMPLE OF USAGE
 		"workbench.colorCustomizations": {
 			"folderPathColor.custom1": "#FF4488",
 			"folderPathColor.custom2": "#88ff44",
@@ -114,7 +103,6 @@
 			},
 		]
 		*/
-		// COLORFUL FOLDERS DOCS
 		"folderPathColor.dark_misc": "#c3c78d", // dark misc yellow
 		"folderPathColor.utils": "#92b69fe5", // utils
 		"folderPathColor.model": "#eea6ccf6", // model accent
@@ -133,15 +121,704 @@
 		"folderPathColor.gray_ignore": "#9ea4ac",
 		"folderPathColor.green_shade_3": "#a4cfa3f5", // leafes
 		"folderPathColor.blue_shade_3": "#92b9e4",
-	}, // !! nice color 82ddddde (also 8aa8c9)
+	}, // note to myself - nice color 82ddddde (also 8aa8c9)
 	//
-	// COLORFUL FOLDERS DOCS
+	//
+	// UNSORTED
+	"editor.insertSpaces": false, // Fighting with space indents
+	"editor.detectIndentation": false,
+	"workbench.editor.revealIfOpen": true, // don't open file again in split view
+	"workbench.tree.indent": 12, // File view tree shift
+	//
+	//
+	// MARKDOWN LINT
+	"editor.codeActionsOnSave": {
+		"source.fixAll.markdownlint": "explicit"
+	},
+	"markdownlint.focusMode": true,
+	//
+	//
+	// SPELLING 
+	"cSpell.ignoreRegExpList": [
+		"uid://[a-zA-Z0-9]+"
+	],
+	"cSpell.enabledFileTypes": {
+		"markdown": true
+	},
+	"cSpell.words": [
+		"Animatable",
+		"autoloads",
+		"bget",
+		"BSDF",
+		"bvalue",
+		"COEF",
+		"colonly",
+		"convcol",
+		"convcolonly",
+		"DVCSIG",
+		"elif",
+		"fget",
+		"grayscale",
+		"hitboxes",
+		"Interactable",
+		"Keymap",
+		"Krita",
+		"Lightmap",
+		"maaacks",
+		"Mixamo",
+		"mult",
+		"navmesh",
+		"noimp",
+		"occludee",
+		"Occluder",
+		"occluders",
+		"onready",
+		"pixpal",
+		"playthrough",
+		"renamings",
+		"retopology",
+		"sget",
+		"sname",
+		"spinboxes",
+		"SUBVIEWPORT",
+		"subvp",
+		"svalue",
+		"tscn",
+		"tweening",
+		"UIDT",
+		"USERPROFILE"
+	],
+	//
+	//
+	// BOOKMARKS
+	"bookmarks.navigateThroughAllFiles": true,
+	"bookmarks.wrapNavigation": true,
+	"bookmarks.saveBookmarksInProject": false,
+	"bookmarks.showCommandsInContextMenu": true,
+	"bookmarks.experimental.enableNewStickyEngine": true,
+	"bookmarks.keepBookmarksOnLineDelete": false,
+	"bookmarks.useWorkaroundForFormatters": false,
+	"bookmarks.sideBar.expanded": false,
+	"bookmarks.sideBar.countBadge": "all",
+	"bookmarks.multicursor.toggleMode": "allLinesAtOnce",
+	"bookmarks.label.suggestion": "dontUse",
+	//
+	//
+	// 🔴🟠🟡🟢🔵🟣
+	// HIGHLIGHT EXTENSION
+	"highlight.regexes": {
+		// -- IMPORTANT -- 
+		// Godot tools fixes
+		"(?<!\\w)(@abstract)(?!\\w)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ebc47c"
+				}
+			]
+		},
+		// comment regions are highlighted
+		"(# region)(.*)": {
+			"decorations": [
+				{
+					"color": "#eba0eb80", // for '# region:'
+					// "fontStyle": "italic"
+				},
+				// {
+				// "color": "#808080", // optionally for the text after it
+				// "fontStyle": "italic"
+				// }
+			]
+		},
+		// Default `match` case `_:` is more prominent
+		"\\b(_:)(?=\\r?\\n)": {
+			"decorations": [
+				{
+					// "color": "#fff346",
+					"fontWeight": "bold",
+					"backgroundColor": "#3b5552",
+					// "borderRadius": "2px", // Give the box rounded corners
+					// "border": "1px dashed #68fff786" // A solid border
+				},
+			]
+		},
+		// VALIDATION FRAMEWORK
+		"(__hard_dependencies)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		"(__soft_dependencies)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#b4e278d7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"(__hard_validation)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"(__soft_validation)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#b4e278d7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"(__validated)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"(__perform_validation)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		"\\b(__validation_ok\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#78e2a1d7",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		// LOGGING FRAMEWORK
+		"\\b(__log_[a-zA-Z0-9_]*)(?=\\s*\\()": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#77b2dade",
+				}
+			]
+		},
+		"\\b(error_\\.[a-zA-Z0-9_()]*)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9a686d2",
+					"fontStyle": "italic"
+				}
+			]
+		},
+		"\\b(_reason\\s*\\+?=\\s*.*)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#82b1ddd2",
+					"fontStyle": "italic"
+				}
+			]
+		},
+		"\\b(print_\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#77b2dade",
+				}
+			]
+		},
+		"\\b(print_preset\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#77b2dade",
+				}
+			]
+		},
+		// Engine helpers
+		"(is_release\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ff5fca",
+					"backgroundColor": "#06423fa6",
+					"fontWeight": "bold",
+					// "borderRadius": "2px", // Give the box rounded corners
+					// "border": "1px solid #caa495d7" // A solid border
+				}
+			]
+		},
+		"(is_editor\\(\\))": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#dfd793",
+					"backgroundColor": "#58176b71",
+					"fontWeight": "bold",
+				}
+			]
+		},
+		// Warn (log) levels 
+		"\\b(WL\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#f5a382",
+					"fontStyle": "italic"
+				},
+				{}
+			]
+		},
+		// Built in functions like `_process` more prominent (also some custom, common to project)
+		"(?<=func\\s_?)(physics_process)(?=\\()": { // func _physics_process(...)
+			"decorations": [
+				{
+					"textDecoration": "underline double",
+				},
+			]
+		},
+		"(?<=func\\s_?)(process)(?=\\()": { // func _physics_process(...)
+			"decorations": [
+				{
+					"textDecoration": "underline double",
+				},
+			]
+		},
+		"(?<=func\\s_?)(initialize)(?=\\()": {
+			"decorations": [
+				{
+					"textDecoration": "underline wavy #5ec4d8b2",
+				},
+			]
+		},
+		"(?<=func\\s_?)(initialize_implementation)(?=\\()": {
+			"decorations": [
+				{
+					"textDecoration": "underline wavy #5ec4d8b2",
+				},
+			]
+		},
+		"(?<=func\\s_?)(update)(?=\\()": { // func update(...)
+			"decorations": [
+				{
+					"textDecoration": "underline double",
+				},
+			]
+		},
+		"(on_enter_\\w+)(?=\\()": { // func _on_enter_something() or func on_enter_something()
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		"(on_exit_\\w+)(?=\\()": { // ex (?<=func\\s_?)(on_exit_\\w+)(?=\\()
+			"decorations": [
+				{
+					"textDecoration": "underline #f0c078d5",
+				},
+			]
+		},
+		// -- IMPORTANT ENDS -- 
+		// -- QOL (popular enums or constants) --
+		"\\b(SigUtils)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5c9dff",
+				}
+			]
+		},
+		"(RawAction)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#84db6fd7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"\\b(BusID\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#fff784"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"(Constants.EMPTY_SNAME)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#4ec237"
+				},
+				{}
+			]
+		},
+		"(SignalName\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5ea6f8"
+				},
+				{}
+			]
+		},
+		// -- QOL ENDS --
+		// -- JUST RANDOM HELPERS --
+		"\\b(A\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(SEA\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(PHEA\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(SIG)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5c9dff",
+				}
+			]
+		},
+		"\\b(PropC)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#FFEEA1E5",
+					"fontWeight": "bold"
+				}
+			]
+		},
+		"\\b(true_b)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5afd5ad7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"\\b(false_b)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#569294d7",
+					"fontWeight": "bold",
+				},
+			]
+		},
+		"\\b(PS\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				},
+				{
+					// "color": "#FFEEA1E5",
+				}
+			]
+		},
+		"\\b(PS.Act\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#68c3f8"
+				},
+				{}
+			]
+		},
+		"\\b(Leg\\.Beh\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#c9ad79f3"
+				},
+				{}
+			]
+		},
+		"\\b(Leg\\.Act\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9d08ce3"
+				},
+			]
+		},
+		"(PlayerState\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				},
+				{}
+			]
+		},
+		"(PHES\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#5da9ff"
+				},
+				{}
+			]
+		},
+		"\\b(PHES\\.Leaf\\.)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#99f5bcee"
+				},
+			]
+		},
+		"(BasePHE)(Leaf)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					// first group
+				},
+				{
+					"color": "#99f5bcee"
+				}
+			]
+		},
+		"(BasePHE)(Composite)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					// first group
+				},
+				{
+					"color": "#99d8f5ee"
+				}
+			]
+		},
+		"(traits)(\\.)(\\w+)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#d1d1d1d7",
+					"fontWeight": "bold",
+					// invalid but works
+					"textDecoration": "underline"
+				},
+				{}
+			]
+		},
+		"(stamina)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#91acf7ee"
+				},
+				{}
+			]
+		},
+		"(health)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#a1e4a1e7"
+				},
+				{}
+			]
+		},
+		"\\b(curr_overlay)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9c582f3"
+				},
+				{}
+			]
+		},
+		"\\b(prev_overlay)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#8bb8f1fa"
+				},
+				{}
+			]
+		},
+		"\\b(curr_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9c582f3"
+				},
+				{}
+			]
+		},
+		"\\b(prev_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#8bb8f1fa"
+				},
+				{}
+			]
+		},
+		"\\b(prev_prev_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#eca593f3"
+				},
+				{}
+			]
+		},
+		"\\b(prev_prev_prev_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#fc6e6ef3"
+				},
+				{}
+			]
+		},
+		"\\b(prev_prev_blend_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#eca593f3"
+				},
+				{}
+			]
+		},
+		"\\b(prev_blend_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#8bb8f1fa"
+				},
+				{}
+			]
+		},
+		"\\b(curr_blend_playback)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#e9c582f3"
+				},
+				{}
+			]
+		},
+		"\\b(curr_global_action)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ecc893",
+					"fontWeight": "bold",
+				},
+				{}
+			]
+		},
+		"\\b(curr_state_action)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#96c3eeec",
+					"fontWeight": "bold",
+				},
+				{}
+			]
+		},
+		"(combat)": {
+			"filterLanguageRegex": "gdscript",
+			"decorations": [
+				{
+					"color": "#ff9b8ef8",
+					// "fontWeight": "bold",
+				},
+				{}
+			]
+		},
+		/* EXAMPLES FOR REFERENCE
+		"(SECRET_KEY)": {
+			"decorations": [
+				{
+					"color": "#FF4444", // red
+					"outline": "1px solid #FF0000", // 1px solid red outline
+				}
+			]
+		},
+		"(TODO:|FIXME:)": {
+			"decorations": [
+				{
+					"backgroundColor": "#FFA500", // orange color
+					"color": "#1E1E1E", // Dark text color
+					"fontWeight": "bold"
+				}
+			]
+		},
+		"(something) {
+			"decorations": [
+				{
+					"color": "#222a33",
+					"borderRadius": "4px", // rounded corners
+					"border": "1px solid #FFA500" // solid border
+					// "border": "1px solid rgba(255, 255, 255, 0.2)" // solid border
+				},
+		"(SUCCESS)": {
+			"decorations": [
+				{
+					"color": "#00FF00", // Bright green text
+					"fontWeight": "bolder",
+					"textDecoration": "underline double #FFA500" // wavy green underline
+				}
+			]
+		}, 
+		*/
+	},
+	//
+	//
+	// 🟥🟪🟦🟩🟨🟧
+	// COLORFUL FOLDERS
+	//
+	// DOCS
 	// Predefined color names: blue, magenta, red, cyan, green, yellow.
 	//**/components/* - Matches any folder named "components" at any depth
 	//src/**/test - Matches any "test" folder inside the "src" directory at any depth
 	//packages/*-utils - Matches folders like "packages/common-utils" or "packages/math-utils
 	//
-	// COLORFUL FOLDERS
+	// No built in git color on files (conflict with colorful folders)
+	"git.decorations.enabled": false,
+	//
 	"folder-path-color.folders": [
 		{
 			"path": "*sad*",
@@ -178,7 +855,7 @@
 			"path": "*feelings.gd",
 			"color": "turquoise",
 		},
-		// ANIM (NOT PLAYER)
+		// ANIMATION
 		{
 			"path": "*anim.gd",
 			"color": "custom11"
@@ -288,10 +965,6 @@
 			"path": "logic/c_systems/sk_modifiers",
 			"color": "animation"
 		},
-		// {
-		// 	"path": "*anim*",
-		// 	"color": "custom11"
-		// },
 		{
 			"path": "*_animator*",
 			"color": "animation"
@@ -310,698 +983,8 @@
 		},
 	],
 	//
-	// No built in git color on files (conflict with colorful folders)
-	"git.decorations.enabled": false,
 	//
-	// UNSORTED
-	// Fighting with space indents
-	"editor.insertSpaces": false,
-	"editor.detectIndentation": false,
-	// dont open file again in split view
-	"workbench.editor.revealIfOpen": true,
-	// File view tree shift
-	"workbench.tree.indent": 12,
-	//
-	// BOOKMARKS
-	"bookmarks.navigateThroughAllFiles": true, // Allows navigation through all files that contain bookmarks.
-	"bookmarks.wrapNavigation": true, // Allows navigation to wrap around at the first and last bookmarks in scope.
-	"bookmarks.saveBookmarksInProject": false, //true -> bookmarks are saved in the project, which is useful for version control.
-	// Path to another image to be shown as a bookmark icon (16x16 px).
-	// "bookmarks.gutterIconPath": "",
-	// Enables bookmarks commands to be displayed on the editor context menu.
-	"bookmarks.showCommandsInContextMenu": true,
-	"bookmarks.experimental.enableNewStickyEngine": true, // Enables the new Sticky engine for improved source change detections and undo operations.
-	"bookmarks.keepBookmarksOnLineDelete": false, // If a line with a bookmark is deleted, this keeps the bookmark on the next available line.
-	// Workaround for formatters (like Prettier) that break the Sticky engine.
-	// Can be turned off if `experimental.enableNewStickyEngine` is true.
-	"bookmarks.useWorkaroundForFormatters": false,
-	"bookmarks.sideBar.expanded": false, // if the Bookmarks side bar should start expanded.
-	// the count badge on the Bookmark icon in the Activity Bar.
-	// `all` shows the total count, `files` shows the number of files with bookmarks.
-	"bookmarks.sideBar.countBadge": "all",
-	"bookmarks.multicursor.toggleMode": "allLinesAtOnce", // how multi-cursor toggles handle bookmarked lines.
-	"bookmarks.label.suggestion": "dontUse", // how labels are suggested when creating bookmarks.
-	//
-	// HIGHLIGHT EXTENSION
-	"highlight.regexes": {
-		// Highlight every instance of "A." (e.g., A.my_static_method)
-		"\\b(A\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(SEA\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(PHEA\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(SIG)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5c9dff",
-				}
-			]
-		},
-		"\\b(PropC)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#FFEEA1E5",
-					"fontWeight": "bold"
-				}
-			]
-		},
-		"\\b(SigUtils)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5c9dff",
-				}
-			]
-		},
-		"(RawAction)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#84db6fd7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"\\b(true_b)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5afd5ad7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"\\b(false_b)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#569294d7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"(__hard_dependencies)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#78e2a1d7",
-					"fontWeight": "bold",
-				}
-			]
-		},
-		"(__soft_dependencies)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#b4e278d7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"(__hard_validation)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#78e2a1d7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"(__soft_validation)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#b4e278d7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"(__validated)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#78e2a1d7",
-					"fontWeight": "bold",
-				},
-			]
-		},
-		"(__perform_validation)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#78e2a1d7",
-					"fontWeight": "bold",
-				}
-			]
-		},
-		"\\b(__validation_ok\\(\\))": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#78e2a1d7",
-					"fontWeight": "bold",
-				}
-			]
-		},
-		"(is_release\\(\\))": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#ff5fca",
-					"backgroundColor": "#06423fa6",
-					"fontWeight": "bold",
-					// "borderRadius": "2px", // Give the box rounded corners
-					// "border": "1px solid #caa495d7" // A solid border
-				}
-			]
-		},
-		"(is_editor\\(\\))": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#dfd793",
-					"backgroundColor": "#58176b71",
-					"fontWeight": "bold",
-				}
-			]
-		},
-		"\\b(PS\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5da9ff"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(BusID\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#fff784"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(PS.Act\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#68c3f8"
-				},
-				{}
-			]
-		},
-		"\\b(Leg\\.Beh\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#c9ad79f3"
-				},
-				{}
-			]
-		},
-		"\\b(Leg\\.Act\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#e9d08ce3"
-				},
-			]
-		},
-		"(PlayerState\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5da9ff"
-				},
-				{}
-			]
-		},
-		"(SEState\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5da9ff"
-				},
-				{}
-			]
-		},
-		"(PHES\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5da9ff"
-				},
-				{}
-			]
-		},
-		"\\b(PHES\\.Leaf\\.)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#99f5bcee"
-				},
-			]
-		},
-		"(BasePHE)(Leaf)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					// first group
-				},
-				{
-					"color": "#99f5bcee"
-				}
-			]
-		},
-		"(BasePHE)(Composite)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					// first group
-				},
-				{
-					"color": "#99d8f5ee"
-				}
-			]
-		},
-		"(SignalName\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#5ea6f8"
-				},
-				{}
-			]
-		},
-		"(Constants.EMPTY_SNAME)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#4ec237"
-				},
-				{}
-			]
-		},
-		"(traits)(\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#d1d1d1d7",
-					"fontWeight": "bold",
-					// invalid but works
-					"textDecoration": "underline"
-				},
-				{}
-			]
-		},
-		"\\b(_:)(?=\\r?\\n)": {
-			"decorations": [
-				{
-					// "color": "#fff346",
-					"fontWeight": "bold",
-					"backgroundColor": "#3b5552",
-					// "borderRadius": "2px", // Give the box rounded corners
-					// "border": "1px dashed #68fff786" // A solid border
-				},
-			]
-		},
-		"(?<=func\\s_?)(initialise)(?=\\()": {
-			"decorations": [
-				{
-					// "color": "#5ec4d8b2",
-					"textDecoration": "underline wavy #5ec4d8b2",
-				},
-			]
-		},
-		"(?<=func\\s_?)(initialise_implementation)(?=\\()": {
-			"decorations": [
-				{
-					// "color": "#5ec4d8b2",
-					"textDecoration": "underline wavy #5ec4d8b2",
-				},
-			]
-		},
-		"(?<=func\\s_?)(physics_process)(?=\\()": { // func _physics_process(...)
-			"decorations": [
-				{
-					"textDecoration": "underline double",
-				},
-			]
-		},
-		"(?<=func\\s_?)(process)(?=\\()": { // func _physics_process(...)
-			"decorations": [
-				{
-					"textDecoration": "underline double",
-				},
-			]
-		},
-		"(?<=func\\s_?)(update)(?=\\()": { // func update(...)
-			"decorations": [
-				{
-					"textDecoration": "underline double",
-				},
-			]
-		},
-		"(on_enter_\\w+)(?=\\()": { // func _on_enter_something() or func on_enter_something()
-			"decorations": [
-				{
-					"textDecoration": "underline #f0c078d5",
-				},
-			]
-		},
-		"(on_exit_\\w+)(?=\\()": { // ex (?<=func\\s_?)(on_exit_\\w+)(?=\\()
-			"decorations": [
-				{
-					"textDecoration": "underline #f0c078d5",
-				},
-			]
-		},
-		"\\b(__log_[a-zA-Z0-9_]*)(?=\\s*\\()": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#77b2dade",
-				}
-			]
-		},
-		"\\b(error_\\.[a-zA-Z0-9_()]*)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#e9a686d2",
-					"fontStyle": "italic"
-				}
-			]
-		},
-		"\\b(_reason\\s*\\+?=\\s*.*)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#82b1ddd2",
-					"fontStyle": "italic"
-				}
-			]
-		},
-		"\\b(print_\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#77b2dade",
-				}
-			]
-		},
-		"\\b(print_preset\\.[a-zA-Z_]\\w*)(?=\\s*\\()": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#77b2dade",
-				}
-			]
-		},
-		"(# region)(.*)": {
-			"decorations": [
-				{
-					"color": "#eba0eb80", // Style for '# region:'
-					// "fontStyle": "italic"
-				},
-				// {
-				// "color": "#808080", // Style for the text after it
-				// "fontStyle": "italic"
-				// }
-			]
-		},
-		"(stamina)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#91acf7ee"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"(health)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#a1e4a1e7"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(curr_overlay)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#e9c582f3"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(prev_overlay)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#8bb8f1fa"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(curr_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#e9c582f3"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(prev_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#8bb8f1fa"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(prev_prev_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#eca593f3"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(prev_prev_prev_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#fc6e6ef3"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(prev_prev_blend_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#eca593f3"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(prev_blend_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#8bb8f1fa"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(curr_blend_playback)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#e9c582f3"
-				},
-				{
-					// "color": "#FFEEA1E5",
-				}
-			]
-		},
-		"\\b(curr_global_action)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#ecc893",
-					"fontWeight": "bold",
-				},
-				{}
-			]
-		},
-		"\\b(curr_state_action)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#96c3eeec",
-					"fontWeight": "bold",
-				},
-				{}
-			]
-		},
-		"(combat)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#ff9b8ef8",
-					// "fontWeight": "bold",
-				},
-				{}
-			]
-		},
-		"(?<!\\w)(@abstract)(?!\\w)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#ebc47c"
-				}
-			]
-		},
-		"\\b(WL\\.)(\\w+)": {
-			"filterLanguageRegex": "gdscript",
-			"decorations": [
-				{
-					"color": "#f5a382",
-					"fontStyle": "italic"
-				},
-				{}
-			]
-		},
-		// EXAMPLES FOR REFERENCE
-		// "(SECRET_KEY)": {
-		// 	"decorations": [
-		// 		{
-		// 			"color": "#FF4444", // Make the text itself red
-		// 			"outline": "1px solid #FF0000", // Add a 1px solid red outline
-		// 		}
-		// 	]
-		// },
-		// "(TODO:|FIXME:)": {
-		// 	"decorations": [
-		// 		{
-		// 			"backgroundColor": "#FFA500", // An orange color
-		// 			"color": "#1E1E1E", // Dark text color for contrast
-		// 			"fontWeight": "bold"
-		// 		}
-		// 	]
-		// },
-		// "(/\\*\\*[\\s\\S]*?\\*/)": {
-		// 	"decorations": [
-		// 		{
-		// 			"color": "#222a33",
-		// 			// "backgroundColor": "#aff3ff",
-		// 			"borderRadius": "4px", // Give the box rounded corners
-		// 			"border": "1px solid #FFA500" // A solid border
-		// 		},
-		// 		// {
-		// 		// 			"borderRadius": "4px", // Give the box rounded corners
-		// 		// 			"border": "1px solid rgba(255, 255, 255, 0.2)" // A solid border
-		// 		// 		}
-		// 	]
-		// },
-		// "(SUCCESS)": {
-		// 	"decorations": [
-		// 		{
-		// 			"color": "#00FF00", // Bright green text
-		// 			"fontWeight": "bolder",
-		// 			"letterSpacing": "2px", // Space out the letters
-		// 			"textDecoration": "underline double #FFA500" // A wavy green underline
-		// 		}
-		// 	]
-		// },
-	},
-	//
-	// SPELLING 
-	"cSpell.userWords": [
-		"Animatable",
-		"autoloads",
-		"BSDF",
-		"colonly",
-		"grayscale",
-		"initialisation",
-		"initialise",
-		"Keymap",
-		"Krita",
-		"maaacks",
-		"onready",
-		"pixpal",
-		"retopology",
-		"tscn",
-		"tweening",
-		"USERPROFILE",
-		"Mixamo"
-	],
-	"cSpell.enabledFileTypes": {
-		"markdown": true
-	},
-	"cSpell.words": [
-		"convcol",
-		"convcolonly",
-		"navmesh",
-		"noimp"
-	],
-	//
-	//
-	/* --- COPIED FROM GLOBAL SETTINGS (just in case)) ----  
+	/* COPIED FROM GLOBAL SETTINGS
 	// May be useful for setting project from git on another machine. Uncomment if needed
 	// godot specific
 	"workbench.colorTheme": "Godot 4",
@@ -1025,7 +1008,6 @@
 	},
 	//
 	// also	
-	"github.copilot.nextEditSuggestions.enabled": false,
 	"editor.formatOnSave": true,
 	"workbench.statusBar.visible": false,
 	"telemetry.feedback.enabled": false,

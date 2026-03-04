@@ -1,8 +1,8 @@
-# 🗃️ Folder structure <!-- omit from toc -->
+# Folder structure 🗃️ <!-- omit from toc -->
 
 - [Main folders](#main-folders)
 - [`logic/` folder structure](#logic-folder-structure)
-	- [🏰 \_project\_data/](#-_project_data)
+	- [🏰 project\_data/](#-project_data)
 	- [📦 containers/](#-containers)
 	- [🧠 systems/](#-systems)
 	- [👸🏻 entities/](#-entities)
@@ -30,15 +30,18 @@ The primary directory for all application code, with the exception of the `_work
 
 Note that the distinction here is a work in progress. Currently I settled on this structure.
 
-### 🏰 [_project_data/](../logic/_project_data)
+### 🏰 [project_data/](../logic/_project_data)
 
 Contains core infrastructure: non-gameplay systems that keep the application running, like scene loader, audio bus management, global signals [event bus], custom frameworks.
 
-Some of these systems are based on Maaacks game template. See docs: [docs_maaacks_game_template](docs_game_systems/docs_maaacks_game_template.md)
+Some of these systems are based on Maaacks game template. See docs: [maaacks-game-template-adoption](docs_project_systems/docs_godot_engine_instructions.md#-maaacks-game-template-adoption)
 
 [Logger](docs_project_systems/docs_logging_framework) and [validation](docs_project_systems/docs_validation_framework.md) frameworks are stored here.
 
 Currently all the autoloads are also contained in this folder.
+
+> [!NOTE]
+> Is a mix of **Infrastructure** and  **Application** (Service) **layer** in DDD terms.
 
 ### 📦 [containers/](../logic/c_containers)
 
@@ -54,14 +57,16 @@ Core game logic (business logic): character state machines, camera management, a
 
 Word 'System' here can be seen as a Service. Systems are usually stateless and relies on `containers/`.
 
-In DDD terms it can be said that `systems/`, `containers/` and `entities/` describe the domain.
+> [!NOTE]
+> You can think of `systems/` and `containers/` as a **domain layer**
 
 ### 👸🏻 [entities/](../logic/entities)
 
-All the characters, levels, props (like torches or levers) and items (weapons). This means scenes, some "prefabs", visuals.
-Also stores VFX effects like an aura wave or smoke effects.
+All the characters scenes, levels, props (like torches or levers) and items (weapons). Also stores VFX effects like an aura wave or smoke effects. Packed scenes, some "prefabs", visuals.
 
 All non code data (basically visuals) is derived from the `assets/` folder and usually has a connection to GLB files.
+
+Code part is minimal and usually is tied to `systems/`.
 
 ### 🖥️ [ui/](../logic/ui)
 

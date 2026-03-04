@@ -12,5 +12,8 @@
     # not ready for this
     "MD034": false,
     # conflict with another extension
-    "MD060": false
+    "MD060": false,
+    # using inline html for things like this:
+    # https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections
+    "MD033": false
 }

@@ -199,7 +199,8 @@ License: SIL Open Font License 1.1
 Note: Used for debugging tools
 
 
-#### Portions of this project use code from GDQuest (https://www.gdquest.com/) licensed under MIT"
+#### GDQuest
+Attribution: Portions of this project use code from GDQuest (https://www.gdquest.com/) licensed under MIT"
 
 
 #### Godot Engine Logo
