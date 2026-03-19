@@ -15,14 +15,14 @@ Follow official [docs](https://docs.godotengine.org/en/stable/tutorials/scriptin
 > [!IMPORTANT]
 > UPD: New official formatter: [gdscript_formatter](https://www.gdquest.com/library/gdscript_formatter/)
 
-**Godot-tools** does not support all the necessary formatting, so it sometimes hard to to follow the official docs.
+**Godot-tools** does not support all the necessary formatting, so it sometimes hard to follow the official docs.
 E.g:
 
 - Does note make 2 empty lines padding between functions (uses 1 line)
 - Ignores indentations like [this](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#indentation) (both good and bad will be passed)
 - Has bugs. Examples:
   - Recently started to add redundant space like this: `call_func(self )` [link](https://github.com/godotengine/godot-vscode-plugin/issues/972)
-  - Some problem with `@abstract` keyword for inner classes, [see meta state code](../logic/c_systems/character_sm/player_sm/model/_meta_state.gd)
+  - Some problem with `@abstract` keyword for inner classes, [see meta state code](../logic/systems/character_sm/player_sm/model/_meta_state.gd)
 
 ## Naming conventions
 

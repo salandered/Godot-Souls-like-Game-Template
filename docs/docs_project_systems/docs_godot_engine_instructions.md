@@ -145,4 +145,4 @@ In the middle of the step three.
 ### What that means
 
 Code is a mix and match of the original code and custom additions/refactoring.
-Most of the architectural 'rails' are still the original ideas (and some of them will be staying this way, while some components, most notably UI options menu functionality is planned to be fully rewritten)
+Most of the architectural 'rails' are still the original ideas (and some of them will be staying this way, while some components, most notably UI options menu functionality is planned to be fully rewritten).

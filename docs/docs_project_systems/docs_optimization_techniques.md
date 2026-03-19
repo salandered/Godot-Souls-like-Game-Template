@@ -1,4 +1,4 @@
-# Optimization techniques 📈 <!-- omit from toc -->
+# Optimization techniques 📉 <!-- omit from toc -->
 
 - [👩🏻‍💻 Code level](#-code-level)
 	- [🧵 Thread usage](#-thread-usage)

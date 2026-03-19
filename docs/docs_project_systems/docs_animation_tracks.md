@@ -30,7 +30,7 @@ Example: in running animation there is a SFXFootstep track which has key at fram
 ## How it is stored
 
 Either animation markers or addition tracks are used. Additional tracks usually are `property tracks`, which animate some primitive variable (parameters).
-Best example in project is [player animation parameters](../../logic/c_containers/anim_param_container/data/pl_anim_parameters.gd). It also contains in depth description of parameters and mechanics that they support.
+Best example in project is [player animation parameters](../../logic/containers/anim_param_container/data/pl_anim_parameters.gd). It also contains in depth description of parameters and mechanics that they support.
 
 ## Why
 
@@ -79,7 +79,7 @@ Currently I found two ways of dealing with it.
 
 I haven't found a way of automating any of these approaches, and also a way of 'forcing' them.
 
-One of the safety measures in project is using [Required animation markers](../../logic/c_containers/required_marker_container/pl_required_markers.gd). It fails the debug build if some common marker was missing, so it's clear when the info is lost. It does not solve the problem and also requires manual synchronization.
+One of the safety measures in project is using [Required animation markers](../../logic/containers/required_marker_container/pl_required_markers.gd). It fails the debug build if some common marker was missing, so it's clear when the info is lost. It does not solve the problem and also requires manual synchronization.
 
 ## 💡 Tips
 

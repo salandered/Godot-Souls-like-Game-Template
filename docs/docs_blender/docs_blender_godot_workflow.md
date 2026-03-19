@@ -47,7 +47,7 @@ Collection exporters are recommended to use.
 
 ## ⚙️ Exporter settings
 
-**Export path** - somewhere inside project assets folder, like this: [-assets-/GLB-level/](../-assets-/GLB-level).
+**Export path** - somewhere inside project assets folder, like this: [assets/GLB-level/](../assets/GLB-level).
 
 **Apply Modifiers** - usually should be checked: they represent the 'final' state of the blender data.
 
@@ -77,7 +77,7 @@ We currently use:
 ## 🏔️ Materials
 
 > [!NOTE]
-> Shared material library located [here](../../-assets-/materials-shared/)
+> Shared material library located [here](../../assets/materials-shared/)
 
 ### 'Real life' materials
 

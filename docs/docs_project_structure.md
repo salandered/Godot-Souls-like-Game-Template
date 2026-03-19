@@ -16,7 +16,7 @@
 
 🎢 [_workflow](../_workflow/) - covers Blender to Godot workflow, post import script and editor-only utilities like working with images or materials
 
-💎 [assets](../-assets-/) - all assets, including meshes, animations, SFX and music
+💎 [assets](../assets/) - all assets, including meshes, animations, SFX and music
 
 🔧 [addons](../addons/) - all third party addons, if they were changed (vanilla addons are not committed)
 
@@ -43,7 +43,7 @@ Currently all the autoloads are also contained in this folder.
 > [!NOTE]
 > Is a mix of **Infrastructure** and  **Application** (Service) **layer** in DDD terms.
 
-### 📦 [containers/](../logic/c_containers)
+### 📦 [containers/](../logic/containers)
 
 Store all the classes that contain the data and provide the access to it.
 
@@ -51,7 +51,7 @@ Can be seen as 'Repositories', but mostly there are read-only. Probably better n
 
 All the data enums and 'json' like structures are also stored here (just a primitive data storage)
 
-### 🧠 [systems/](../logic/c_systems)
+### 🧠 [systems/](../logic/systems)
 
 Core game logic (business logic): character state machines, camera management, all the possible mechanics. Biggest component of the project.
 
@@ -76,7 +76,7 @@ In theory this violates the structure above: can be split in services, data cont
 
 This group can be treated as all of the `Control` (Godot node type) scenes and their logic.
 
-### 🏗️ [dev_systems/](../logic/x_dev_systems)
+### 🏗️ [dev_systems/](../logic/systems_dev)
 
 Contains developer data and tools (in contrast with business logic of the `systems/`).
 
@@ -84,7 +84,7 @@ Examples: metrics gathering, debug visualizers, sometimes even 'mechanics', like
 
 Should be stripped from the release builds.
 
-### 🔨 [utils/](../logic/x_utils)
+### 🔨 [utils/](../logic/utils)
 
 Utilities which are used by every other component. They tend to be _specific_, i.e each one does one thing and tries to do it good and _agnostic_, i.e not knowing about the domain.
 

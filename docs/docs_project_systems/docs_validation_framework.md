@@ -20,7 +20,7 @@
 
 ## 🧾 What it does
 
-- **Runs dependency validation** and any custom validation for any custom class used in code (in Godot it means all the files except for may be `EditorScript`).
+- **Runs dependency validation** and any custom validation for derived classes (in Godot it means all the files except for may be `EditorScript`).
 - **Persists the validation result** and produces API for a custom class to check the validation result
 - It also can auto disable the node if validation is failed.
 
@@ -150,9 +150,9 @@ func __hard_dependencies() -> Array:
 
 They can be found anywhere in project, e.g:
 
-- [_common_area](../logic/c_systems/common_area/_common_area.gd)
-- [dv_bus_spectrum](../logic/x_dev_systems/audio_visualizer/dv_bus_spectrum.gd)
-- [pl_char](../logic/c_systems/character/pl_char.gd)
+- [_common_area](../logic/systems/common_area/_common_area.gd)
+- [dv_bus_spectrum](../logic/systems_dev/audio_visualizer/dv_bus_spectrum.gd)
+- [pl_char](../logic/systems/character/pl_char.gd)
 
 ## 💡 Tips
 

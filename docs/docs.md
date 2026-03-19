@@ -39,7 +39,7 @@ Anything can be used I guess. I use **Krita** version 5.x and **ImageMagic**
 
 Essentials:
 
-- [docs_signal_architecture ☄️](docs_project_systems/docs_signal_architecture.md)
+- [docs_signals ☄️](docs_project_systems/docs_signals.md)
 - [docs_validation_framework 🛡️](docs_project_systems/docs_validation_framework.md)
 - [docs_godot_engine_instructions 💙](docs_project_systems/docs_godot_engine_instructions.md)
 - [docs_optimization_techniques 📈](docs_project_systems/docs_optimization_techniques.md)
@@ -74,9 +74,8 @@ Not using AI for writing domain code, but secondary activities are fine.
 
 In particular, it's useful to set up read-only MCP server with latest Godot docs and use the AI as a 'librarian'.
 
-All the instructions are in this repo: [Godot MCP Docs](https://github.com/Nihilantropy/godot-mcp-docs).
+Instructions can be found here: [Godot MCP Docs](https://github.com/Nihilantropy/godot-mcp-docs).
 
-- Godot/GDScript are not the most popular tools, and it shows in search results ([poorly](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/l7ziuhs/) [indexed](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/lg11lwj/)) and the AI training.
-- "Raw" AI tend to mix all Godot versions including Godot 3 or early 4.x (i.e that variadic arguments are not supported)
+"Raw" AI chats tend to mix Godot versions including Godot 3 and early 4.x (i.e they don't know that variadic arguments are supported). Godot/GDScript are not relatively popular, it shows in the AI training (and [search](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/l7ziuhs/) [results](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/lg11lwj/)).
 
 ℹ️ It is not recommended to use MCP servers which expose _**write access**_ to OS, Godot or any other application.
