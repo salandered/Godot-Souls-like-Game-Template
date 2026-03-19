@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dpu5xo3l668xm"]
+
+[ext_resource type="Texture2D" uid="uid://dmsl8h4hncrg4" path="res://assets/materials-shared/_baked/mines/exit_2_Mine_Carts_1k_Diffuse.png" id="1_fjv6i"]
+
+[resource]
+resource_name = "Mine_Carts"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_fjv6i")
+metallic = 1.0
+metallic_texture_channel = 2
+roughness_texture_channel = 1

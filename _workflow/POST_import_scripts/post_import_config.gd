@@ -11,7 +11,7 @@ const COLLISION_COLLECTION_PREFIXES: Array[String] = ["--col", "-- col", "-col",
 
 const REIMP_SUFFIX: String = "_Reimp"
 
-const BASE_MAT_PATH: String = "res://-assets-/materials-shared/"
+const BASE_MAT_PATH: String = "res://assets/materials-shared/"
 
 
 ## case insensitive

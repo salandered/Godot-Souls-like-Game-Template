@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://du0luatg5m34"]
+
+[ext_resource type="Script" uid="uid://27klmnyxkdl" path="res://logic/systems_dev/test_usage/signal_test.gd" id="1_rrwyd"]
+[ext_resource type="Script" uid="uid://tx6taxnadc65" path="res://logic/systems_dev/test_usage/signal_test_2.gd" id="2_3qjfd"]
+
+[node name="SignalTests" type="Node3D" unique_id=1242306377]
+
+[node name="SignalTest" type="Node" parent="." unique_id=1813483356]
+script = ExtResource("1_rrwyd")
+
+[node name="SignalTest2" type="Node" parent="." unique_id=1440122249]
+script = ExtResource("2_3qjfd")

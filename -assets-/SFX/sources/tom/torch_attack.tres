@@ -1,9 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cgc4yvwa21hc4"]
-
-[ext_resource type="AudioStream" uid="uid://khh6aptmhxfm" path="res://-assets-/SFX/sources/tom/Torch Attack Strike 1.wav" id="1_hdep1"]
-[ext_resource type="AudioStream" uid="uid://b8mtvrgm5k2i6" path="res://-assets-/SFX/sources/tom/Torch Attack Strike 2.wav" id="2_q0y2d"]
-
-[resource]
-streams_count = 2
-stream_0/stream = ExtResource("1_hdep1")
-stream_1/stream = ExtResource("2_q0y2d")

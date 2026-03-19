@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://clchluho2atww" path="res://logic/_project_data/autoload/free_cam_mode/free_cam_mode.gd" id="1_too2x"]
 [ext_resource type="PackedScene" uid="uid://djg3rdl82alnl" path="res://logic/_project_data/autoload/free_cam_mode/model/FreeCamera.tscn" id="2_w2kw0"]
-[ext_resource type="Script" uid="uid://dy310887u1fil" path="res://logic/x_dev_systems/dev_hotkeys/free_cam_mode_hotkeys.gd" id="3_y1c54"]
+[ext_resource type="Script" uid="uid://dy310887u1fil" path="res://logic/systems_dev/dev_hotkeys/free_cam_mode_hotkeys.gd" id="3_y1c54"]
 
 [node name="FreeCam" type="Node3D" unique_id=1240652516]
 process_mode = 3
 script = ExtResource("1_too2x")
 camera_packed_scene = ExtResource("2_w2kw0")
 mouse_sensitivity = 0.001
+pause_on_enter = true
 
 [node name="HotKeys" type="Node" parent="." unique_id=2063346306]
 unique_name_in_owner = true

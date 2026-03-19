@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d738n1n61f7i"]
 
 [ext_resource type="Script" uid="uid://cqtyggy4gcrd0" path="res://logic/ui/ui_utils/prefab/container_icon_title/container_icon_title.gd" id="1_mnk0r"]
-[ext_resource type="Texture2D" uid="uid://bovchw35k1ski" path="res://-assets-/x_icons/white/interface/icon_circle.png" id="2_50vm0"]
-[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="3_ebvix"]
+[ext_resource type="Texture2D" uid="uid://bovchw35k1ski" path="res://assets/x_icons/white/interface/icon_circle.png" id="2_50vm0"]
+[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://assets/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="3_ebvix"]
 
 [node name="IconTitle" type="MarginContainer" unique_id=1102677386]
 offset_left = 2.0

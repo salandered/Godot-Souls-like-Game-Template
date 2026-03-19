@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://em4bj1qbl826"]
 
-[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://-assets-/materials-shared/_shaders/distort/distort_menu.gdshader" id="1_7v33j"]
+[ext_resource type="Shader" uid="uid://bcrqdporo1fr5" path="res://assets/materials-shared/_shaders/distort/distort_menu.gdshader" id="1_7v33j"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y57hi"]
 

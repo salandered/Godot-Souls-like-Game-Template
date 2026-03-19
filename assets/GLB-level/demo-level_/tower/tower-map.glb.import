@@ -1,0 +1,294 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://de0vy8geyumqj"
+path="res://.godot/imported/tower-map.glb-c908e4fd5cccc21c458f8f6a2e90d88b.scn"
+
+[deps]
+
+source_file="res://assets/GLB-level/demo-level_/tower/tower-map.glb"
+dest_files=["res://.godot/imported/tower-map.glb-c908e4fd5cccc21c458f8f6a2e90d88b.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=2
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"ArmA.004": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/leg_arm_kaan/ArmA.004.tres",
+"use_external/path": "uid://lv3kael16gmw"
+},
+"B Stone Dirt Wall 02": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/rocks-stone/stone_dirt_wall/B Stone Dirt Wall 02_Reimp_2k.tres",
+"use_external/path": "uid://doed0kwtng7wd"
+},
+"DoorType1_2": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/door_type/DoorType1_2_Reimp.tres",
+"use_external/path": "uid://dftuwv5xo7lmd"
+},
+"Leg.004": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/leg_arm_kaan/Leg.004.tres",
+"use_external/path": "uid://hljkkqxxfv41"
+},
+"MI_Trim_Props.003": {
+"use_external/enabled": true,
+"use_external/fallback_path": "",
+"use_external/path": ""
+},
+"MinesTrim": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres",
+"use_external/path": "uid://bb06udlb6phmw"
+},
+"PixPalMat": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/x_unsorted/PixPalMat.tres",
+"use_external/path": "uid://kn3mf76stt08"
+},
+"RustedMetal": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/metal/rusted_metal_matte/RustedMetal.tres",
+"use_external/path": "uid://c4woejym2ayly"
+},
+"Wood": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/wood/just_wood_dark_planks/Wood_Reimp.tres",
+"use_external/path": "uid://b6tpdgol8yavy"
+},
+"plaster_grey_04": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/concrete/plaster_grey/plaster_grey_04_Reimp.tres",
+"use_external/path": "uid://bckdjikwxv1hs"
+},
+"roots": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/ground/roots/roots_Reimp.tres",
+"use_external/path": "uid://denerlosoam1l"
+},
+"rough_wood": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/wood/rough_wood/rough_wood_Reimp.tres",
+"use_external/path": "uid://bghuokc5hqupa"
+},
+"rusty_metal_04": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres",
+"use_external/path": "uid://dg8l1frc3mysp"
+}
+},
+"meshes": {
+"TOWER_1_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_1_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_1_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_Circle": {
+"generate/lightmap_uv": 0,
+"generate/lods": 1,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_Circle_002": {
+"generate/lightmap_uv": 2,
+"generate/lods": 1,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_Circle_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 1,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_Cube_209": {
+"generate/lightmap_uv": 0,
+"generate/lods": 1,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_SkeletonMesh_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_SkeletonMesh_050": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_SkeletonMesh_185": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"TOWER_SkeletonMesh_187": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+}
+},
+"nodes": {
+"PATH:TOWER/Torch_Metal_001": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/Torch_Metal_003": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/Torch_Metal_009": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/Torch_Metal_010": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/Torch_Metal_011": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/CandleStick": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/CandleStick/Candle_2_001": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_005": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_006": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_008": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_009": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_010": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_011": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_012": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_014": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/Panel_Wood_D_015": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/golden bolt": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/golden bolt_001": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/golden bolt_002": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/golden bolt_004": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/golden bolt_006": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/Panel_Wood_D_004/skeleton_065": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/under_wait/skeleton_185": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/under_wait/skeleton_185/Object_156_001": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/under_wait/skeleton_185/skeleton_002": {
+"mesh_instance/layers": 256
+},
+"PATH:TOWER/stupid sign/under_wait/skeleton_185/skeleton_048": {
+"mesh_instance/layers": 256
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

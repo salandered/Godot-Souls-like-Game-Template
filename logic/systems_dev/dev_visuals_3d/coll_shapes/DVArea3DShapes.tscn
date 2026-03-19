@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://rqlyc5qjitju"]
+
+[ext_resource type="Script" uid="uid://b1e4mcxspiy2t" path="res://logic/systems_dev/dev_visuals_3d/coll_shapes/dv_area3d_shapes.gd" id="1_4557r"]
+
+[node name="DVArea3DShapes" type="Node3D" unique_id=296384811]
+visible = false
+script = ExtResource("1_4557r")
+area_type_colors = Dictionary[StringName, Color]({
+&"BreakableArea": Color(1, 0.27058825, 0, 1),
+&"CommonArea": Color(0.5764706, 0.4392157, 0.85882354, 1),
+&"InteractArea": Color(0.46521696, 0.7104485, 0.08423235, 1),
+&"WeatherChangeArea": Color(1, 1, 0, 1),
+&"default": Color(0.4392157, 0.5019608, 0.5647059, 1)
+})
+shader_color = Color(0.041679263, 0.57467526, 0.041679263, 1)
+dvc_section = 10
+_key_b_value_changer = 80

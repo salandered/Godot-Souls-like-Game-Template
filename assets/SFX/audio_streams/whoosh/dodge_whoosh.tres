@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://dfn8yjds0ntkf"]
+
+[ext_resource type="AudioStream" uid="uid://uh7rnqjucgup" path="res://assets/SFX/sources/mini fantasy/12_human_jump_1_whoosh.wav" id="1_xvnb4"]
+[ext_resource type="AudioStream" uid="uid://m57qi3rs2kkp" path="res://assets/SFX/sources/mini fantasy/12_human_jump_2_whoosh.wav" id="2_m33ll"]
+[ext_resource type="AudioStream" uid="uid://2us2w8kbrxwp" path="res://assets/SFX/sources/mini fantasy/12_human_jump_3_whoosh.wav" id="3_jxjqh"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.05
+random_volume_offset_db = 2.0
+streams_count = 3
+stream_0/stream = ExtResource("1_xvnb4")
+stream_1/stream = ExtResource("2_m33ll")
+stream_2/stream = ExtResource("3_jxjqh")

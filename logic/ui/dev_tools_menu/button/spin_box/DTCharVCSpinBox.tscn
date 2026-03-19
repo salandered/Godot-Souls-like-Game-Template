@@ -27,7 +27,7 @@ step = 0.05
 value = 1.0
 script = ExtResource("2_btx1b")
 
-[node name="PanelContainer" parent="." index="2"]
+[node name="PanelContainer" parent="." index="2" unique_id=2090949142]
 visible = false
 anchors_preset = -1
 anchor_left = 0.786

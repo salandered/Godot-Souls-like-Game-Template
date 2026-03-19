@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://hnekq1nistan"]
+
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/systems_dev/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_5lavm"]
+[ext_resource type="Script" uid="uid://cmbgx5lbcmc6n" path="res://logic/systems_dev/dev_tools_2d/ui_metrics/metrics_grid_manager/player_combo_grid_manager.gd" id="2_co164"]
+[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://assets/ui_assets/themes/panel/blue_panel.tres" id="3_co164"]
+[ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://assets/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="3_imfaw"]
+[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_x5u8a"]
+[ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="5_xjiyq"]
+
+[node name="GlobalUIPlayerComboPanel" type="MarginContainer" unique_id=530140416]
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="MetricsGridDistributor" parent="." unique_id=2117432437 node_paths=PackedStringArray("grid") instance=ExtResource("1_5lavm")]
+unique_name_in_owner = true
+grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/UIMetricsGrid")
+value_label_font_size = 20
+
+[node name="MetricsGridManager" type="Node" parent="." unique_id=426837286 node_paths=PackedStringArray("metrics_grid", "ui_container")]
+unique_name_in_owner = true
+script = ExtResource("2_co164")
+metrics_grid = NodePath("../MetricsGridDistributor")
+ui_container = NodePath("../VBoxContainer/MetricsPanel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1819531106]
+layout_mode = 2
+
+[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer" unique_id=647205014]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1300, 0)
+layout_mode = 2
+
+[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel" unique_id=1138798406]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_co164")
+
+[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel" unique_id=1073361922]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m" unique_id=998270563]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1218314877]
+modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_imfaw")
+theme_override_font_sizes/font_size = 22
+text = "Player Combo"
+
+[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1584730865 instance=ExtResource("4_x5u8a")]
+layout_mode = 2
+
+[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=764507353 instance=ExtResource("5_xjiyq")]
+unique_name_in_owner = true
+layout_mode = 2

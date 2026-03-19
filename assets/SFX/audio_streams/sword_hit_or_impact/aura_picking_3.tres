@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://wwwrajhmr0qm"]
+
+[ext_resource type="AudioStream" uid="uid://bk1mj18rmugtn" path="res://assets/SFX/sources/tom/Fireball 2_aura impact.wav" id="1_x1dq8"]
+[ext_resource type="AudioStream" uid="uid://dxe1hmkafsod5" path="res://assets/SFX/sources/tom/Fireball 3_aura_impact.wav" id="2_pt06c"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("1_x1dq8")
+stream_1/stream = ExtResource("2_pt06c")

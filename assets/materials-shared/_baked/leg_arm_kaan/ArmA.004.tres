@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://lv3kael16gmw"]
+
+[ext_resource type="Texture2D" uid="uid://cdbvwpc1m8p6n" path="res://assets/materials-shared/_baked/leg_arm_kaan/tower-map_Image_10.png" id="1_nhbsg"]
+[ext_resource type="Texture2D" uid="uid://dmrnm7euf8wod" path="res://assets/materials-shared/_baked/leg_arm_kaan/tower-map_Image_11.png" id="2_cqmh2"]
+[ext_resource type="Texture2D" uid="uid://bk2wotax4sf6a" path="res://assets/materials-shared/_baked/leg_arm_kaan/tower-map_Image_12.png" id="3_3uhti"]
+
+[resource]
+resource_name = "ArmA.004"
+cull_mode = 2
+albedo_texture = ExtResource("1_nhbsg")
+metallic = 1.0
+metallic_texture = ExtResource("2_cqmh2")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_cqmh2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_3uhti")
+ao_enabled = true
+ao_texture = ExtResource("2_cqmh2")

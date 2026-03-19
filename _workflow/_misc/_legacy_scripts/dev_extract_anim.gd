@@ -36,10 +36,10 @@ const LOOP_KEYWORDS := ["idle", "run", "sprint", "jog", "walk", "strafe", "loop"
 const NOT_LOOP_KEYWORDS := ["jump", "land", "start", "end", "turn", "180", "90", "roll"] # priority over LOOP_KEYWORDS
 # ---
 
-# "res://-assets-/animations/GLB-packed/"
-const SOURCE_GLB_PATH := "res://-assets-/animations/GLB-packed/axe/" # basic_packs
-#const SOURCE_GLB_PATH := "res://-assets-/animations/GLB-packed/from_IR/" 
-const TARGET_ROOT_FOLDER := "res://-assets-/animations/standard-skeleton/"
+# "res://assets/animations/GLB-packed/"
+const SOURCE_GLB_PATH := "res://assets/animations/GLB-packed/axe/" # basic_packs
+#const SOURCE_GLB_PATH := "res://assets/animations/GLB-packed/from_IR/" 
+const TARGET_ROOT_FOLDER := "res://assets/animations/standard-skeleton/"
 const ANIMATION_PLAYER_PATH := "AnimationPlayer"
 var glb_path: String = SOURCE_GLB_PATH + SOURCE_GLB_NAME + ".glb"
 var target_dir := TARGET_ROOT_FOLDER.path_join(SOURCE_GLB_NAME)

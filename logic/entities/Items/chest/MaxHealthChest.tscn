@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://co3heqf28d52v"]
 
-[ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_1qxja"]
-[ext_resource type="Material" uid="uid://cgor81cloawxg" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp_red_triplanar_t1.tres" id="2_8mpq0"]
-[ext_resource type="Script" uid="uid://cjtmeesll4ykm" path="res://logic/entities/Items/chest/max_health_chest.gd" id="2_qim7j"]
-[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="2_tmsue"]
-[ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/Items/pick_item/health_item/MaxHealthItem.tscn" id="3_k6ox4"]
+[ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/items/chest/_base/_BaseChest.tscn" id="1_1qxja"]
+[ext_resource type="Material" uid="uid://cgor81cloawxg" path="res://assets/materials-shared/wood/rough_wood/rough_wood_Reimp_red_triplanar_t1.tres" id="2_8mpq0"]
+[ext_resource type="Script" uid="uid://cjtmeesll4ykm" path="res://logic/entities/items/chest/max_health_chest.gd" id="2_qim7j"]
+[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://assets/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="2_tmsue"]
+[ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/items/pick_item/health_item/MaxHealthItem.tscn" id="3_k6ox4"]
 
 [node name="MaxHealthChest" unique_id=1665668648 instance=ExtResource("1_1qxja")]
 script = ExtResource("2_qim7j")

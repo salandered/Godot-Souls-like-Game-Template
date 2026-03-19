@@ -1,7 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cntg7xya48dal"]
-
-[ext_resource type="AudioStream" uid="uid://bqj7ucl8o864x" path="res://-assets-/SFX/sources/sword and blade/Sword Impact 02_phase_switch.wav" id="1_eca05"]
-
-[resource]
-streams_count = 1
-stream_0/stream = ExtResource("1_eca05")

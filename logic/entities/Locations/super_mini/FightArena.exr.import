@@ -3,7 +3,7 @@
 importer="2d_array_texture"
 type="CompressedTexture2DArray"
 uid="uid://6fr2feev3iia"
-path.bptc="res://.godot/imported/FightArena.exr-b5821f50d3c530b6e656924cf9103ac2.bptc.ctexarray"
+path.bptc="res://.godot/imported/FightArena.exr-b122eb6f0c03a539eb3afd2dc82e8720.bptc.ctexarray"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://logic/entities/Locations/super_mini/FightArena.exr"
-dest_files=["res://.godot/imported/FightArena.exr-b5821f50d3c530b6e656924cf9103ac2.bptc.ctexarray"]
+source_file="res://logic/entities/locations/super_mini/FightArena.exr"
+dest_files=["res://.godot/imported/FightArena.exr-b122eb6f0c03a539eb3afd2dc82e8720.bptc.ctexarray"]
 
 [params]
 

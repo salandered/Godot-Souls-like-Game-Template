@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dvbe6tl3nhj2m"]
+
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/systems_dev/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_u8e5p"]
+[ext_resource type="Script" uid="uid://ba3jiexlu53gq" path="res://logic/systems_dev/dev_tools_2d/ui_metrics/metrics_grid_manager/enemy_movement_grid_manager.gd" id="2_mi0kl"]
+[ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://assets/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="3_tbua7"]
+[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_fx1o2"]
+[ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="5_mi0kl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hprbw"]
+bg_color = Color(0.29634023, 0.101396844, 0.1275947, 0.3254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.17416309, 0.07058823, 0.19607842, 0.49019608)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="GlobalUIEnemyMovementPanel" type="MarginContainer" unique_id=248106067]
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="MetricsGridDistributor" parent="." unique_id=57072665 node_paths=PackedStringArray("grid") instance=ExtResource("1_u8e5p")]
+unique_name_in_owner = true
+grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/UIMetricsGrid")
+
+[node name="MetricsGridManager" type="Node" parent="." unique_id=1071618747 node_paths=PackedStringArray("metrics_grid", "ui_container")]
+unique_name_in_owner = true
+script = ExtResource("2_mi0kl")
+metrics_grid = NodePath("../MetricsGridDistributor")
+ui_container = NodePath("../VBoxContainer/MetricsPanel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1872155508]
+layout_mode = 2
+
+[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer" unique_id=1298838638]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel" unique_id=997874727]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hprbw")
+
+[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel" unique_id=2044621348]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m" unique_id=1484037791]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1738393992]
+modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tbua7")
+theme_override_font_sizes/font_size = 22
+text = "Enemy Movement"
+
+[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1929653447 instance=ExtResource("4_fx1o2")]
+layout_mode = 2
+
+[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1950470762 instance=ExtResource("5_mi0kl")]
+unique_name_in_owner = true
+layout_mode = 2

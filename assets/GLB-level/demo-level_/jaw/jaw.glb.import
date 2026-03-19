@@ -1,0 +1,185 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://qakd5u1rhraj"
+path="res://.godot/imported/jaw.glb-6ac82f3a1c3247070a27a0e70d003996.scn"
+
+[deps]
+
+source_file="res://assets/GLB-level/demo-level_/jaw/jaw.glb"
+dest_files=["res://.godot/imported/jaw.glb-6ac82f3a1c3247070a27a0e70d003996.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=2
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"A brown_mud_darken": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/ground/brown_mud/A brown_mud_darken_Reimp_2k.tres",
+"use_external/path": "uid://dacrgdm6xn345"
+},
+"I_Metal048C_2K-JPG": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_darker.tres",
+"use_external/path": "uid://bur1bh2j826ri"
+},
+"I_metal_8-ZpW": {
+"use_external/enabled": true,
+"use_external/fallback_path": "",
+"use_external/path": "uid://bqpbb5c6r4cji"
+},
+"Mug_2": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/mug_2/Mug_2_Reimp.tres",
+"use_external/path": "uid://biyh4e5a5g431"
+},
+"baked_barrel_temp": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
+},
+"concrete": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/concrete/just_concrete/concrete_Reimp.tres",
+"use_external/path": "uid://fw2tqpveasi2"
+},
+"lichen_rock": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres",
+"use_external/path": "uid://o0bn285hpysy"
+},
+"plastered_stone_wall": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/concrete/plastered_stone_wall/plastered_stone_wall_Reimp.tres",
+"use_external/path": "uid://c7677w3d6vvpk"
+}
+},
+"meshes": {
+"jaw_Plane_087": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"jaw_super mini cave": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"jaw_super mini cave_001": {
+"generate/lightmap_uv": 1,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+}
+},
+"nodes": {
+"PATH:jaw/jaw props/Cylinder001/Kettle_001": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/Mug": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/Rope_1": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/Rope_1_001": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/Lantern_Lamp_006": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/Lantern_Lamp_Splitted": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/Lantern_Lamp_Splitted/Lantern_Lamp_glass": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_003": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_003/Lantern_Lamp_glass_003": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_004": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_004/Lantern_Lamp_glass_004": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_005": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_005/Lantern_Lamp_glass_005": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_003": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002/Lantern_Lamp_glass_002": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001/Lantern_Lamp_Splitted_001": {
+"mesh_instance/layers": 256
+},
+"PATH:jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001/Lantern_Lamp_Splitted_001/Lantern_Lamp_glass_001": {
+"mesh_instance/layers": 256
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=0

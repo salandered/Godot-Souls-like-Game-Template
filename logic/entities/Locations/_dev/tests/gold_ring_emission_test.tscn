@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://bxpyycad5edj"]
 
-[ext_resource type="Texture2D" uid="uid://dh7vncqq7h0iy" path="res://-assets-/materials-shared/__pix-pal/another/rings_ImphenziaPixel-BaseColor.png" id="1_tr174"]
-[ext_resource type="Texture2D" uid="uid://ced61lgif6c6m" path="res://-assets-/materials-shared/__pix-pal/another/rings_ImphenziaPixel-Emission.png" id="2_f7o80"]
-[ext_resource type="Texture2D" uid="uid://mbm8mvh4lwqb" path="res://-assets-/materials-shared/__pix-pal/another/rings_ImphenziaPixel-Attributes.png" id="3_pf51e"]
+[ext_resource type="Texture2D" uid="uid://dh7vncqq7h0iy" path="res://assets/materials-shared/__pix-pal/another/rings_ImphenziaPixel-BaseColor.png" id="1_tr174"]
+[ext_resource type="Texture2D" uid="uid://ced61lgif6c6m" path="res://assets/materials-shared/__pix-pal/another/rings_ImphenziaPixel-Emission.png" id="2_f7o80"]
+[ext_resource type="Texture2D" uid="uid://mbm8mvh4lwqb" path="res://assets/materials-shared/__pix-pal/another/rings_ImphenziaPixel-Attributes.png" id="3_pf51e"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="4_47krp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4aspr"]

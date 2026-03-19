@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/lever/icon_lever.png")
+@icon("res://assets/x_icons/lever/icon_lever.png")
 
 @abstract
 class_name BaseLever

@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dwiur47lj262s"]
+
+[ext_resource type="Texture2D" uid="uid://ceq6kw701fxl4" path="res://assets/ui_assets/images/big/red_danger_image.png" id="1_pb1cd"]
+
+[resource]
+content_margin_left = 10.0
+content_margin_right = 10.0
+texture = ExtResource("1_pb1cd")
+region_rect = Rect2(5.5, 36.71791, 647, 77.78209)
+modulate_color = Color(0.9999996, 0.7756998, 0.76168317, 1)

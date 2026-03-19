@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bwihqll2ru8vl"]
+
+[ext_resource type="AudioStream" uid="uid://cxvur0x2dv6yn" path="res://assets/SFX/sources/400/cork_stabbed_friction.wav" id="1_831hq"]
+
+[resource]
+random_pitch = 1.1
+random_volume_offset_db = 0.2
+streams_count = 1
+stream_0/stream = ExtResource("1_831hq")

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bkoyd0cmxeqos"]
 
-[ext_resource type="Material" uid="uid://da67u180dattb" path="res://-assets-/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres" id="1_e8n71"]
+[ext_resource type="Material" uid="uid://da67u180dattb" path="res://assets/materials-shared/metal/old_bronze/I_old_bronze-4d1K.tres" id="1_e8n71"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tspl8"]
 resource_name = "Visuals_Mesh_030"

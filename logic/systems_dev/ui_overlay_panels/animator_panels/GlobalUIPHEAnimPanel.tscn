@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b04cbf8ooig7d"]
+
+[ext_resource type="PackedScene" uid="uid://u4jnfph2oxuj" path="res://logic/systems_dev/dev_tools_2d/ui_metrics/metrics_grid_distributor/MetricsGridDistributor.tscn" id="1_n6v2a"]
+[ext_resource type="Script" uid="uid://cxwkwooa8f10" path="res://logic/systems_dev/dev_tools_2d/ui_metrics/metrics_grid_manager/e_anim_metrics_grid_manager.gd" id="2_n6v2a"]
+[ext_resource type="FontFile" uid="uid://dlvulfh8tsdqb" path="res://assets/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-MediumItalic.ttf" id="3_aygrb"]
+[ext_resource type="PackedScene" uid="uid://hel0ts8yi8bf" path="res://logic/ui/ui_utils/prefab/separator/minimal_h_separator.tscn" id="4_tw4o3"]
+[ext_resource type="PackedScene" uid="uid://d0un7pn3o12lt" path="res://logic/ui/ui_utils/prefab/UIMetricsGrid.tscn" id="5_fnjs1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6v2a"]
+bg_color = Color(0.2392157, 0.054901958, 0.21541828, 0.3254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.072000004, 0.16800001, 0.38431373)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="GlobalUIPHEAnimPanel" type="MarginContainer" unique_id=360935066]
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="MetricsGridDistributor" parent="." unique_id=909488249 node_paths=PackedStringArray("grid") instance=ExtResource("1_n6v2a")]
+unique_name_in_owner = true
+grid = NodePath("../VBoxContainer/MetricsPanel/__panel/__m/__v/UIMetricsGrid")
+
+[node name="MetricsGridManager" type="Node" parent="." unique_id=1167556330 node_paths=PackedStringArray("metrics_grid", "ui_container")]
+unique_name_in_owner = true
+script = ExtResource("2_n6v2a")
+metrics_grid = NodePath("../MetricsGridDistributor")
+ui_container = NodePath("../VBoxContainer/MetricsPanel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=741933449]
+layout_mode = 2
+
+[node name="MetricsPanel" type="MarginContainer" parent="VBoxContainer" unique_id=860174363]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="__panel" type="PanelContainer" parent="VBoxContainer/MetricsPanel" unique_id=466453185]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n6v2a")
+
+[node name="__m" type="MarginContainer" parent="VBoxContainer/MetricsPanel/__panel" unique_id=118814256]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="__v" type="VBoxContainer" parent="VBoxContainer/MetricsPanel/__panel/__m" unique_id=1129171459]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1751384163]
+modulate = Color(0.75686276, 0.75686276, 0.75686276, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_aygrb")
+theme_override_font_sizes/font_size = 22
+text = "Enemy Animator"
+
+[node name="HSeparator" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=939680565 instance=ExtResource("4_tw4o3")]
+layout_mode = 2
+
+[node name="UIMetricsGrid" parent="VBoxContainer/MetricsPanel/__panel/__m/__v" unique_id=1873101634 instance=ExtResource("5_fnjs1")]
+unique_name_in_owner = true
+layout_mode = 2

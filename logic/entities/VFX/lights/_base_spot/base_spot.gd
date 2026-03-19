@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/copper/icon_light_bulb.png")
+@icon("res://assets/x_icons/copper/icon_light_bulb.png")
 
 class_name BaseSpot
 extends SpotLight3DSystem

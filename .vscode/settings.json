@@ -50,7 +50,7 @@
 	// "editor.inlineSuggest.edits.showCollapsed": true, // can be configured from UI button
 	//
 	"editor.lightbulb.enabled": "off",
-	//
+	"editor.snippets.codeActions.enabled": false,
 	// SUGGESTIONS (not copilot)
 	"editor.suggestSelection": "recentlyUsedByPrefix",
 	// "editor.inlineSuggest.showToolbar": "never", 

@@ -39,7 +39,7 @@ const states_db_scene_path := scenes_path + "states_database.tscn"
 var anim_name := lib + result_anim_name
 var backend_anim_name := lib + result_backend_anim_name
 const SKELETON_NAME := "GeneralSkeleton"
-const ANIMATION_FOLDER = "res://-assets-/animations/Ready Animations/"
+const ANIMATION_FOLDER = "res://assets/animations/Ready Animations/"
 
 var CREATE_BACKUPS := true
 var BACKUP_FOLDER = ANIMATION_FOLDER + "_backups/"

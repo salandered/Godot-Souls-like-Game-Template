@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ctsqu10igrfjw"]
 
-[ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_3qj1i"]
-[ext_resource type="Script" uid="uid://c7eeni577qmxv" path="res://logic/entities/Items/pick_item/health_item/health_item.gd" id="2_1aqnm"]
-[ext_resource type="Material" uid="uid://i0yd71ruqvup" path="res://-assets-/materials-shared/_shaders/pick_items/HealthItemShaderMat.tres" id="2_et513"]
+[ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/items/pick_item/_base/_BasePickItem.tscn" id="1_3qj1i"]
+[ext_resource type="Script" uid="uid://c7eeni577qmxv" path="res://logic/entities/items/pick_item/health_item/health_item.gd" id="2_1aqnm"]
+[ext_resource type="Material" uid="uid://i0yd71ruqvup" path="res://assets/materials-shared/_shaders/pick_items/HealthItemShaderMat.tres" id="2_et513"]
 
 [node name="HealthItem" unique_id=520690370 instance=ExtResource("1_3qj1i")]
 script = ExtResource("2_1aqnm")

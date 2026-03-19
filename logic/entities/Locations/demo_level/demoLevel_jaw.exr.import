@@ -3,7 +3,7 @@
 importer="2d_array_texture"
 type="CompressedTexture2DArray"
 uid="uid://8dy3ujhq3f68"
-path.bptc="res://.godot/imported/demoLevel_jaw.exr-e0f1845891870ff750ab14b222b234e6.bptc.ctexarray"
+path.bptc="res://.godot/imported/demoLevel_jaw.exr-78058fd2eab161b551ed30875c2aadf4.bptc.ctexarray"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://logic/entities/Locations/demo_level/demoLevel_jaw.exr"
-dest_files=["res://.godot/imported/demoLevel_jaw.exr-e0f1845891870ff750ab14b222b234e6.bptc.ctexarray"]
+source_file="res://logic/entities/locations/demo_level/demoLevel_jaw.exr"
+dest_files=["res://.godot/imported/demoLevel_jaw.exr-78058fd2eab161b551ed30875c2aadf4.bptc.ctexarray"]
 
 [params]
 

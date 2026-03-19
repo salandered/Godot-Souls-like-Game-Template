@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dvqw0ufia7yrx"]
 
-[ext_resource type="Script" uid="uid://dw25fqj5fbht4" path="res://logic/entities/Items/interact_area/interact_area_.gd" id="1_ekt48"]
-[ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/VFX/label/3DOnTopLabel.tscn" id="2_obo7c"]
+[ext_resource type="Script" uid="uid://dw25fqj5fbht4" path="res://logic/entities/items/interact_area/interact_area_.gd" id="1_ekt48"]
+[ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/vfx/label/3DOnTopLabel.tscn" id="2_obo7c"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_obo7c"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_gpw26"]
 radius = 2.0
 
 [node name="InteractArea" type="Area3D" unique_id=747710948]
@@ -18,6 +18,6 @@ fixed_size = false
 text = "Press E to interact"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=545925843]
-shape = SubResource("SphereShape3D_obo7c")
+shape = SubResource("SphereShape3D_gpw26")
 debug_color = Color(0, 0.7, 0.33833334, 0.7529412)
 debug_fill = false

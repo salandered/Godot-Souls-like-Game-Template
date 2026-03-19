@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bb06udlb6phmw"]
+
+[ext_resource type="Texture2D" uid="uid://dioeffl5khbis" path="res://assets/materials-shared/_baked/mines/exit_2_MineTrim_1k_Diffuse.png" id="1_4i8cr"]
+[ext_resource type="Texture2D" uid="uid://df1ghfat404rr" path="res://assets/materials-shared/_baked/mines/exit_2_MineTrim_1k_Metalness.png-MineTrim_1k_Roughness.png" id="2_nqjnt"]
+[ext_resource type="Texture2D" uid="uid://dpndxkf6jvegc" path="res://assets/materials-shared/_baked/mines/exit_2_MineTrim_1k_Normal.png" id="3_8vgdl"]
+
+[resource]
+resource_name = "MinesTrim.004"
+cull_mode = 2
+albedo_texture = ExtResource("1_4i8cr")
+metallic = 1.0
+metallic_texture = ExtResource("2_nqjnt")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_nqjnt")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_8vgdl")

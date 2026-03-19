@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-const ROOT_DIR = "res://-assets-/materials-shared/"
+const ROOT_DIR = "res://assets/materials-shared/"
 const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "tga", "bmp", "webp"]
 const IGNORE_WORDS = ["pixel", "pixpal", "lut"]
 

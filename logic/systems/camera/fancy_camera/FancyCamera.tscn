@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://dl7w5h28u6d36"]
+
+[ext_resource type="Script" uid="uid://cpfh86vdgd0ep" path="res://logic/systems/camera/fancy_camera/fancy_camera.gd" id="1_16fd4"]
+[ext_resource type="Script" uid="uid://bib68l3buxn3j" path="res://logic/systems/camera/fancy_camera/camera_movement.gd" id="2_bu8o1"]
+[ext_resource type="Script" uid="uid://cdvueio120xey" path="res://logic/systems/camera/fancy_camera/locked_state.gd" id="2_cq342"]
+[ext_resource type="Script" uid="uid://b5a0md5rbbh2b" path="res://logic/systems/camera/fancy_camera/free_state.gd" id="3_wpkwu"]
+[ext_resource type="Script" uid="uid://coti6yrfuins6" path="res://logic/systems/camera/fancy_camera/camera_target/camera_socket.gd" id="5_sttfw"]
+[ext_resource type="PackedScene" uid="uid://1y8q87d5o0mg" path="res://logic/entities/vfx/label/3DOnTopLabel.tscn" id="5_u7x54"]
+[ext_resource type="Material" uid="uid://def5pgnboedqm" path="res://assets/materials-shared/solid/banana.tres" id="5_v1xt6"]
+[ext_resource type="PackedScene" uid="uid://ocst26s6nlk0" path="res://logic/entities/vfx/target_circle/TargetCircle.tscn" id="6_tlnea"]
+[ext_resource type="Script" uid="uid://d2as471a20jkg" path="res://logic/systems_dev/dev_visuals_3d/dv_fancy_cam.gd" id="7_ncru2"]
+[ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://assets/materials-shared/_shaders/target_dot/target_dot.gdshader" id="7_r7icc"]
+[ext_resource type="Material" uid="uid://c0ppm6u2ki7fp" path="res://assets/materials-shared/_shaders/_dev/wire_frame_mat.tres" id="8_euqfl"]
+[ext_resource type="PackedScene" uid="uid://bbt0g1dt6n1dd" path="res://logic/systems_dev/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailParent.tscn" id="8_nf5rl"]
+[ext_resource type="Script" uid="uid://dbeegifwps7x6" path="res://logic/systems_dev/dev_hotkeys/camera_hotkeys.gd" id="13_8vytl"]
+[ext_resource type="Script" uid="uid://de8ffs1h6p7dq" path="res://logic/systems/camera/fancy_camera/__dev/camera_sig_handler.gd" id="14_30r54"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lptl"]
+albedo_color = Color(1, 0.16, 0.174, 1)
+metallic = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1xt6"]
+transparency = 1
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.18223934, 0.30370012, 0.6154072, 0.8235294)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6recs"]
+albedo_color = Color(0.55, 0.18149999, 0.18149999, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e4lf"]
+transparency = 1
+depth_draw_mode = 1
+disable_fog = true
+albedo_color = Color(0.08845007, 0.61, 0.061000016, 0.57254905)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7x54"]
+render_priority = 0
+shader = ExtResource("7_r7icc")
+shader_parameter/color = Color(1, 0.75, 0.97916675, 0.44313726)
+shader_parameter/ring_radius = 0.05
+shader_parameter/ring_thickness = 0.02
+
+[node name="FancyCamera" type="Node" unique_id=1635078102]
+script = ExtResource("1_16fd4")
+
+[node name="States" type="Node" parent="." unique_id=731309610]
+
+[node name="LockedCamera" type="Node" parent="States" unique_id=994849101]
+unique_name_in_owner = true
+script = ExtResource("2_cq342")
+
+[node name="FreeCamera" type="Node" parent="States" unique_id=782166258]
+unique_name_in_owner = true
+script = ExtResource("3_wpkwu")
+
+[node name="CameraMovement" type="Node" parent="." unique_id=1202644012]
+unique_name_in_owner = true
+script = ExtResource("2_bu8o1")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=245450765]
+unique_name_in_owner = true
+
+[node name="DVFancyCam" type="Node3D" parent="CameraPivot" unique_id=1445950465]
+visible = false
+script = ExtResource("7_ncru2")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CameraPivot/DVFancyCam" unique_id=1750717389]
+transform = Transform3D(0.5715179, 0, 0, 0, 0.46703714, 0, 0, 0, 0.2439214, 0, 0, 0)
+material_override = ExtResource("5_v1xt6")
+size = Vector3(0.289307, 0.341797, 0.743164)
+
+[node name="3DOnTopLabel" parent="CameraPivot/DVFancyCam" unique_id=544512244 instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05937399, -0.054739326)
+fixed_size = false
+modulate = Color(0.6900825, 0.6570229, 0.46303803, 1)
+text = "Pivot"
+font_size = 32
+
+[node name="Aim" type="Node3D" parent="." unique_id=1200751098]
+unique_name_in_owner = true
+
+[node name="DVFancyCam" type="Node3D" parent="Aim" unique_id=1447143837]
+visible = false
+script = ExtResource("7_ncru2")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Aim/DVFancyCam" unique_id=552983533]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7lptl")
+radius = 0.2
+smooth_faces = false
+
+[node name="3DOnTopLabel" parent="Aim/DVFancyCam" unique_id=1759440731 instance=ExtResource("5_u7x54")]
+fixed_size = false
+modulate = Color(0.6018299, 0.39194763, 0.39194763, 1)
+text = "Aim"
+font_size = 28
+
+[node name="DevVisualiseTrailParent" parent="Aim/DVFancyCam" unique_id=649884314 instance=ExtResource("8_nf5rl")]
+path_color_a = Color(1, 0.28297502, 0.3235457, 1)
+path_color_b = Color(0.9529412, 0.43979633, 0.31372547, 1)
+trail_radius = 0.02
+trail_duration = 1.4
+fade_duration = 0.2
+update_interval_seconds = 0.1
+react_to_dvc_signal = false
+
+[node name="PlayerCamera" type="Camera3D" parent="." unique_id=334779972]
+unique_name_in_owner = true
+transform = Transform3D(-1, 8.986408e-09, -8.695968e-08, 0, 0.9947028, 0.10279253, 8.742278e-08, 0.10279253, -0.9947028, 0, 1.62121, -3.1620932)
+current = true
+fov = 62.0
+far = 2000.0
+
+[node name="DVFancyCam" type="Node3D" parent="PlayerCamera" unique_id=1475110864]
+visible = false
+script = ExtResource("7_ncru2")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="PlayerCamera/DVFancyCam" unique_id=1545095194]
+transform = Transform3D(0.546933, 8.881784e-16, 1.2079227e-13, 6.217249e-15, 0.5266066, 7.450581e-09, -4.6185278e-14, -7.450581e-09, 0.6501762, 5.684342e-14, 0.0021176338, -0.008347034)
+material_override = SubResource("StandardMaterial3D_v1xt6")
+
+[node name="CSGrot" type="CSGBox3D" parent="PlayerCamera/DVFancyCam" unique_id=1855333626]
+transform = Transform3D(0.13047306, 1.110223e-16, 1.314504e-13, 1.9984014e-15, 0.12197108, 8.940697e-08, -1.5099033e-14, -3.5390258e-08, 0.5918997, 8.526513e-14, 0.026120424, -0.29560614)
+material_override = SubResource("StandardMaterial3D_6recs")
+
+[node name="3DOnTopLabel" parent="PlayerCamera/DVFancyCam" unique_id=1770931835 instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, -1.15463195e-14, 1.1368684e-13, 1.15463195e-14, 1, 1.4901161e-08, -8.526513e-14, -1.4901161e-08, 1, 0.0030351353, -0.024086952, 0.25007987)
+fixed_size = false
+modulate = Color(0.4862745, 0.51987696, 0.6509804, 1)
+text = "Camera
+"
+font_size = 29
+
+[node name="Marker3D" type="Marker3D" parent="PlayerCamera/DVFancyCam" unique_id=963431288]
+transform = Transform3D(1, -1.15463195e-14, 1.4921397e-13, 1.15463195e-14, 1, 1.4901161e-08, -8.526513e-14, -1.4901161e-08, 1, 0.0030351079, -0.055303574, 0.5521512)
+
+[node name="DevVisualiseTrailParent" parent="PlayerCamera/DVFancyCam/Marker3D" unique_id=1320521628 instance=ExtResource("8_nf5rl")]
+transform = Transform3D(1.0000007, 5.960466e-08, -7.450593e-08, 7.450579e-08, 1, 1.4901161e-08, -1.4901076e-08, -4.4703484e-08, 1.0000004, -0.0030351565, -0.0011863708, -0.0055134296)
+path_color_a = Color(0, 0.099858284, 1, 1)
+path_color_b = Color(0, 0.49513865, 1, 1)
+update_interval_seconds = 0.1
+react_to_dvc_signal = false
+
+[node name="CameraSocket" type="Node3D" parent="." unique_id=906834854]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3441956, -2.6694846)
+script = ExtResource("5_sttfw")
+
+[node name="test" type="Camera3D" parent="CameraSocket" unique_id=1383089498 groups=["debug_cameras"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78106)
+
+[node name="DVFancyCam" type="Node3D" parent="CameraSocket" unique_id=1604882335]
+visible = false
+script = ExtResource("7_ncru2")
+
+[node name="CSGSocket" type="CSGSphere3D" parent="CameraSocket/DVFancyCam" unique_id=95660546]
+unique_name_in_owner = true
+transform = Transform3D(0.281739, 0, -1.7763568e-15, 0, 0.281739, 0, 1.7763568e-15, 0, 0.281739, 0, 0, 0)
+material_overlay = ExtResource("8_euqfl")
+radius = 0.7
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
+
+[node name="CSGMetki" type="Node3D" parent="CameraSocket/DVFancyCam" unique_id=934636502]
+transform = Transform3D(0.39459243, 0, -3.5527137e-15, 0, 0.39459243, 0, 3.5527137e-15, 0, 0.39459243, 0, 0, 0)
+
+[node name="CSGSocket1" type="CSGSphere3D" parent="CameraSocket/DVFancyCam/CSGMetki" unique_id=1180562923]
+unique_name_in_owner = true
+transform = Transform3D(0.20524, -3.5527137e-15, 9.038306e-16, 7.842982e-16, 1.4452165e-08, -0.23652, 0, 0.33062702, 1.0338618e-08, 0.0006943893, 0.0063159466, -0.61978245)
+radius = 0.7
+radial_segments = 5
+rings = 3
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
+
+[node name="CSGSocket5" type="CSGSphere3D" parent="CameraSocket/DVFancyCam/CSGMetki" unique_id=1366831784]
+unique_name_in_owner = true
+transform = Transform3D(0.20524, -1.0658141e-14, 9.038306e-16, 7.842982e-16, 1.4452165e-08, -0.23652, 0, 0.33062705, 1.0338618e-08, 0.00069428305, 0.0063159466, 0.59531164)
+radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
+
+[node name="CSGSocket3" type="CSGSphere3D" parent="CameraSocket/DVFancyCam/CSGMetki" unique_id=2013371305]
+unique_name_in_owner = true
+transform = Transform3D(-0.0017193999, -0.330616, -1.7763568e-15, 0.20523298, -0.0027698297, 0, 1.3877788e-17, 0, 0.23652, 0.6630574, 0.015276194, 0)
+material_overlay = ExtResource("8_euqfl")
+radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
+
+[node name="CSGSocket4" type="CSGSphere3D" parent="CameraSocket/DVFancyCam/CSGMetki" unique_id=1531658177]
+unique_name_in_owner = true
+transform = Transform3D(-0.0017193999, -0.330616, -1.7763568e-15, 0.20523298, -0.0027698297, 0, 1.3877788e-17, 0, 0.23652, -0.647399, 0.015276194, 0)
+radius = 0.7
+radial_segments = 6
+rings = 5
+smooth_faces = false
+material = SubResource("StandardMaterial3D_3e4lf")
+
+[node name="3DOnTopLabel2" parent="CameraSocket/DVFancyCam" unique_id=1802058774 instance=ExtResource("5_u7x54")]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0.006101136, -0.0018091202, -0.05548525)
+fixed_size = false
+modulate = Color(0.56576514, 1, 0.6630156, 1)
+text = "Socket"
+font_size = 38
+outline_size = 10
+
+[node name="CircleTarget" parent="." unique_id=1778854997 instance=ExtResource("6_tlnea")]
+unique_name_in_owner = true
+visible = false
+material_override = SubResource("ShaderMaterial_u7x54")
+
+[node name="__dev" type="Node" parent="." unique_id=1056316747]
+
+[node name="HotKeys" type="Node" parent="__dev" unique_id=192471823 node_paths=PackedStringArray("camera")]
+script = ExtResource("13_8vytl")
+camera = NodePath("../..")
+enable_on_init = true
+
+[node name="CameraSigHandler" type="Node" parent="__dev" unique_id=1894817907 node_paths=PackedStringArray("camera")]
+script = ExtResource("14_30r54")
+camera = NodePath("../..")

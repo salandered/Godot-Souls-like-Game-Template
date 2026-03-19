@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqj7ucl8o864x"
+path="res://.godot/imported/Sword Impact 02_phase_switch.wav-12801c249067d1b4eaab7d2679c0ecb5.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/sword and blade/Sword Impact 02_phase_switch.wav"
+dest_files=["res://.godot/imported/Sword Impact 02_phase_switch.wav-12801c249067d1b4eaab7d2679c0ecb5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

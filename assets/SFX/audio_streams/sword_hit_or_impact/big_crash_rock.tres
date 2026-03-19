@@ -1,0 +1,7 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cre4k58suo6da"]
+
+[ext_resource type="AudioStream" uid="uid://cws5f6m1nee42" path="res://assets/SFX/sources/freesound_cc0/_discofield_stone-crash_rock_fall.wav" id="1_vhr6g"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_vhr6g")

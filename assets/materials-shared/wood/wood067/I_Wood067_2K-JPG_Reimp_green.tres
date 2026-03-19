@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c4vlerv4i007h"]
+
+[ext_resource type="Texture2D" uid="uid://djckyt0vft5yn" path="res://assets/materials-shared/wood/wood067/lever_Wood067_2K-JPG_Color.jpg" id="1_odjy3"]
+[ext_resource type="Texture2D" uid="uid://dh0tf4rvpql3f" path="res://assets/materials-shared/wood/wood067/lever_Wood067_2K-JPG_NormalGL.jpg" id="2_n5vfy"]
+[ext_resource type="Texture2D" uid="uid://dp5il10avlqn7" path="res://assets/materials-shared/wood/wood067/lever_Wood067_2K-JPG_Roughness.jpg" id="3_vmbcw"]
+
+[resource]
+resource_name = "I_Wood067_2K-JPG"
+cull_mode = 2
+albedo_color = Color(0.5326972, 0.86045045, 0.880165, 1)
+albedo_texture = ExtResource("1_odjy3")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_vmbcw")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("2_n5vfy")

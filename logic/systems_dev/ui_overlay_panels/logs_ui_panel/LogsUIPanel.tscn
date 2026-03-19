@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://d4mb7reu07in8"]
+
+[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://assets/ui_assets/themes/panel/blue_panel.tres" id="1_35p15"]
+[ext_resource type="Script" uid="uid://cyh1lalur5xef" path="res://logic/systems_dev/ui_overlay_panels/logs_ui_panel/logs_ui_panel.gd" id="1_48uw4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0oph"]
+bg_color = Color(0.180933, 0.180933, 0.180933, 0.43137255)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.07167115, 0.12394311, 0.19451028, 0.49019608)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcb6c"]
+bg_color = Color(0.1882353, 0.10109806, 0.054901954, 0.43137255)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.07167115, 0.12394311, 0.19451028, 0.49019608)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="LogsPanel" type="VBoxContainer" unique_id=1661747351]
+script = ExtResource("1_48uw4")
+
+[node name="SignalInfoPanel" type="MarginContainer" parent="." unique_id=1134193906]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(600, 340)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="SignalInfoPanel" unique_id=909289857]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_35p15")
+
+[node name="MarginContainer" type="MarginContainer" parent="SignalInfoPanel/PanelContainer" unique_id=1532613493]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="SigInfoLabel" type="RichTextLabel" parent="SignalInfoPanel/PanelContainer/MarginContainer" unique_id=1055055999]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme_override_constants/paragraph_separation = -2
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+bbcode_enabled = true
+text = "  05:25:21   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:21   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.667 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:22   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:22   [color=#8b93ffff] SIG_player_state_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'idle'  
+ 
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  "
+scroll_active = false
+scroll_following = true
+vertical_alignment = 1
+
+[node name="AllLogsPanel" type="MarginContainer" parent="." unique_id=1866855253]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(600, 340)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="AllLogsPanel" unique_id=556997441]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r0oph")
+
+[node name="MarginContainer" type="MarginContainer" parent="AllLogsPanel/PanelContainer" unique_id=1956273507]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="AllLogsLabel" type="RichTextLabel" parent="AllLogsPanel/PanelContainer/MarginContainer" unique_id=1651432308]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/paragraph_separation = -2
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+bbcode_enabled = true
+text = "  05:25:21   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:21   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.667 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:22   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:22   [color=#8b93ffff] SIG_player_state_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'idle'  
+ 
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  "
+scroll_active = false
+scroll_following = true
+vertical_alignment = 2
+
+[node name="ErrorLogsPanel" type="MarginContainer" parent="." unique_id=473259644]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(600, 220)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="ErrorLogsPanel" unique_id=549929787]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mcb6c")
+
+[node name="MarginContainer" type="MarginContainer" parent="ErrorLogsPanel/PanelContainer" unique_id=107192924]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="ErrorLogsLabel" type="RichTextLabel" parent="ErrorLogsPanel/PanelContainer/MarginContainer" unique_id=783022569]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/paragraph_separation = -2
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+bbcode_enabled = true
+text = "  05:25:21   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:21   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.667 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:22   [color=#8b93ffff] SFX_footstep  
+ [color=#d3d3d3ff] 	 'asp_name' : 'AAnimFS' 'stream_name' : '' 'timestamp' : 0.267 'anim_id' : 'run-v5-LIB/AA-B-Jog-Forward-v2'  
+ 
+ 05:25:22   [color=#8b93ffff] SIG_player_state_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'idle'  
+ 
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  
+ 05:25:22   [color=#8b93ffff] SIG_player_action_changed  
+ [color=#d3d3d3ff] 	 'state_name' : 'la_idle🧍'  "
+scroll_active = false
+scroll_following = true
+vertical_alignment = 2

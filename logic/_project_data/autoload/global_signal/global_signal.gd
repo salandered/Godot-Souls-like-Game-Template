@@ -6,8 +6,8 @@ extends Node
 ## PLAYER EVENTS
 
 signal SIG_player_state_changed(payload: Dictionary[StringName, Variant])
-signal SIG_player_leg_beh_changed(payload: Dictionary[StringName, Variant])
 signal SIG_player_action_changed(payload: Dictionary[StringName, Variant])
+signal SIG_player_leg_beh_changed(payload: Dictionary[StringName, Variant])
 signal SIG_player_weapon_hit_data_set(payload: Dictionary[StringName, Variant])
 signal SIG_player_reacted_on_hit(payload: Dictionary[StringName, Variant])
 signal SIG_player_combo_triggered(payload: Dictionary[StringName, Variant])

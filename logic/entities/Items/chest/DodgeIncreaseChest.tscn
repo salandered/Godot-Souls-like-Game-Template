@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bydwaf8keh4gq"]
 
-[ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_cn6fl"]
-[ext_resource type="Script" uid="uid://dxdde5pnmu255" path="res://logic/entities/Items/chest/dodge_increase_chest.gd" id="2_bpwhl"]
-[ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/Items/pick_item/DodgeIncreaseItem.tscn" id="3_520wc"]
-[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="3_bkf8g"]
+[ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/items/chest/_base/_BaseChest.tscn" id="1_cn6fl"]
+[ext_resource type="Script" uid="uid://dxdde5pnmu255" path="res://logic/entities/items/chest/dodge_increase_chest.gd" id="2_bpwhl"]
+[ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/items/pick_item/DodgeIncreaseItem.tscn" id="3_520wc"]
+[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://assets/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="3_bkf8g"]
 
 [node name="DodgeIncreaseChest" unique_id=1999785252 instance=ExtResource("1_cn6fl")]
 script = ExtResource("2_bpwhl")

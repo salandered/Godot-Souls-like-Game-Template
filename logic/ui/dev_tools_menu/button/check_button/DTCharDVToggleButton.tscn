@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://byjv3t8r0rvg2"]
 
-[ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28)_or.png" id="1_gduce"]
-[ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://-assets-/ui_assets/ui_icons/green_checkbox/image (28).png" id="2_fovls"]
-[ext_resource type="Texture2D" uid="uid://d0o265dhve8kq" path="res://-assets-/x_icons/white/icon_face.png" id="3_5qdn8"]
+[ext_resource type="Texture2D" uid="uid://d4gqx5jg2iqj0" path="res://assets/ui_assets/ui_icons/green_checkbox/image (28)_or.png" id="1_gduce"]
+[ext_resource type="Texture2D" uid="uid://dj8e18mrg8mmo" path="res://assets/ui_assets/ui_icons/green_checkbox/image (28).png" id="2_fovls"]
+[ext_resource type="Texture2D" uid="uid://d0o265dhve8kq" path="res://assets/x_icons/white/icon_face.png" id="3_5qdn8"]
 [ext_resource type="Script" uid="uid://cwya2337khsxy" path="res://logic/ui/dev_tools_menu/button/check_button/dt_char_dv_toggle_button.gd" id="4_qfat6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8ro"]

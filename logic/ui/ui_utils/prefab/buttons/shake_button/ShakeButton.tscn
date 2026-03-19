@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ywnsfktql2ke"]
 
 [ext_resource type="Script" uid="uid://bdgsui4a376w1" path="res://logic/ui/ui_utils/prefab/buttons/shake_button/shake_button.gd" id="1_patol"]
-[ext_resource type="Material" uid="uid://v4tnxee3qucj" path="res://-assets-/materials-shared/_shaders/ui/shake_button_shader.tres" id="2_onsys"]
-[ext_resource type="StyleBox" uid="uid://djmsyd6dx03an" path="res://-assets-/ui_assets/themes/buttons/pause_menu_button_style.tres" id="3_patol"]
+[ext_resource type="Material" uid="uid://v4tnxee3qucj" path="res://assets/materials-shared/_shaders/ui/shake_button_shader.tres" id="2_onsys"]
+[ext_resource type="StyleBox" uid="uid://djmsyd6dx03an" path="res://assets/ui_assets/themes/buttons/pause_menu_button_style.tres" id="3_patol"]
 
 [node name="ShakeButton" type="Button" unique_id=515924255]
 custom_minimum_size = Vector2(160, 50)

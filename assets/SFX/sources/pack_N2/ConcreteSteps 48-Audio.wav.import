@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://hi4uhrqklyhc"
+path="res://.godot/imported/ConcreteSteps 48-Audio.wav-42841c9b572ca8d1cdca4023c21f7e86.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/pack_N2/ConcreteSteps 48-Audio.wav"
+dest_files=["res://.godot/imported/ConcreteSteps 48-Audio.wav-42841c9b572ca8d1cdca4023c21f7e86.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

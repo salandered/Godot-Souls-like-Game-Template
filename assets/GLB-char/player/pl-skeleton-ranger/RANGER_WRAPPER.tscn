@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://ds5h558epl61c"]
+
+[ext_resource type="PackedScene" uid="uid://dli33k4rnw14" path="res://assets/GLB-char/player/pl-skeleton-ranger/pl-skeleton-ranger.glb" id="1_r4jo3"]
+[ext_resource type="Script" uid="uid://0jwu8hvnjknj" path="res://assets/GLB-char/player/pl-skeleton-ranger/ranger_wrapper.gd" id="2_gsyfp"]
+
+[node name="RIG" unique_id=225563404 instance=ExtResource("1_r4jo3")]
+script = ExtResource("2_gsyfp")
+
+[node name="_mask" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="1" unique_id=698714041]
+gi_mode = 2
+
+[node name="brows" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="2" unique_id=205342069]
+cast_shadow = 0
+
+[node name="ears" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="3" unique_id=556921817]
+cast_shadow = 0
+
+[node name="eye lashes" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="4" unique_id=675918038]
+cast_shadow = 0
+
+[node name="long hair" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="5" unique_id=648235371]
+gi_mode = 2
+
+[node name="body head" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="6" unique_id=1443342283]
+gi_mode = 2
+
+[node name="gold ring_001" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="7" unique_id=815422463]
+cast_shadow = 0
+
+[node name="gold ring_004" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="8" unique_id=767916587]
+cast_shadow = 0
+
+[node name="gold ring_022" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="9" unique_id=1982881152]
+cast_shadow = 0
+
+[node name="gold ring_024" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="10" unique_id=1159581776]
+cast_shadow = 0
+
+[node name="k1_Bottom_0" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="11" unique_id=231068581]
+layers = 65
+
+[node name="ranger boots" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="12" unique_id=838820499]
+gi_mode = 2
+
+[node name="ranger pants" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="13" unique_id=1733998777]
+visible = false
+gi_mode = 2
+
+[node name="ranger top" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="14" unique_id=473013843]
+gi_mode = 2
+
+[node name="ranger torso" parent="Armature/GeneralSkeleton" parent_id_path=PackedInt32Array(472564249) index="15" unique_id=1385980168]
+gi_mode = 2

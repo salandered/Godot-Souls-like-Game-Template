@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://ma6cywyneshm"]
 
-[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/Enemies/sitting_sk/SitSkeleton.tscn" id="1_b3xnv"]
-[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://-assets-/GLB-items/smith_sword/smith_sword_2.glb" id="2_bru3o"]
-[ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="3_pq6ti"]
+[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/enemies/sitting_sk/SitSkeleton.tscn" id="1_b3xnv"]
+[ext_resource type="PackedScene" uid="uid://bkce37055ly6h" path="res://assets/GLB-items/smith_sword/smith_sword_2.glb" id="2_bru3o"]
+[ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://assets/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="3_pq6ti"]
 
 [node name="SittingSkeletonAlt" unique_id=1121187202 instance=ExtResource("1_b3xnv")]
 
-[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 533301545) index="3" unique_id=1988229000]
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 1545046897) index="3" unique_id=1939009076]
 bones/1/position = Vector3(8.523741e-07, 0.61344856, 0.038631536)
 bones/1/rotation = Quaternion(0.0012724398, 0.001516921, 0.008307821, 0.9999636)
 bones/2/rotation = Quaternion(0.090888806, 0.0012778057, -0.013529199, 0.99576837)
@@ -74,7 +74,7 @@ external_skeleton = NodePath("../../VisualOffset/FCS_Skeleton_working3/FCS_Skele
 [node name="smith_sword_2" parent="bones/Chest" index="0" unique_id=1719675894 instance=ExtResource("2_bru3o")]
 transform = Transform3D(-0.90358466, -0.16460502, -0.031649113, -0.10634719, 0.42884463, 0.8058191, -0.12956369, 0.7959639, -0.44069892, 0.016812224, -0.13595784, -0.337363)
 
-[node name="LP smith sword" parent="bones/Chest/smith_sword_2" index="0" unique_id=96033735]
+[node name="LP smith sword" parent="bones/Chest/smith_sword_2" index="0" unique_id=965108305]
 material_override = ExtResource("3_pq6ti")
 
 [node name="Head" parent="bones" parent_id_path=PackedInt32Array(401276762) index="3" unique_id=980266521]

@@ -1,7 +1,7 @@
 @tool
 extends EditorScenePostImport
 
-const BASE_MAT_PATH = "res://-assets-/materials-shared/"
+const BASE_MAT_PATH = "res://assets/materials-shared/"
 
 
 var COL_REPARENT: bool = true

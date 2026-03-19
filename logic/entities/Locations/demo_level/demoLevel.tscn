@@ -1,95 +1,95 @@
 [gd_scene format=4 uid="uid://bm5vqmonl5jl4"]
 
-[ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/c_systems/level/demo_level.gd" id="1_skc02"]
-[ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/c_systems/weather_system/weather.gd" id="2_cfi4c"]
-[ext_resource type="AudioStream" uid="uid://bl571xwx3focd" path="res://-assets-/music/back/back_synth.mp3" id="2_ufk5n"]
+[ext_resource type="Script" uid="uid://bsxsj0vc8sldu" path="res://logic/systems/level/demo_level.gd" id="1_skc02"]
+[ext_resource type="Script" uid="uid://cndcm3macqhx5" path="res://logic/systems/weather_system/weather.gd" id="2_cfi4c"]
+[ext_resource type="AudioStream" uid="uid://bl571xwx3focd" path="res://assets/music/back/back_synth.mp3" id="2_ufk5n"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://logic/ui/pause_menu/m_pause_menu_controller.gd" id="3_3yhff"]
-[ext_resource type="AudioStream" uid="uid://b3mvk1hw0imcv" path="res://-assets-/music/back/back_melody.mp3" id="3_5q2id"]
-[ext_resource type="Sky" uid="uid://cyfaw7ih7lbww" path="res://-assets-/materials-shared/_shaders/sky/level_sky.tres" id="3_58tqt"]
-[ext_resource type="PackedScene" uid="uid://sq53nltxquwd" path="res://-assets-/GLB-level/demo-level_/linkoln/LINCOLN_WRAPPER.tscn" id="4_3yhff"]
-[ext_resource type="Script" uid="uid://c1n8jqoagewpu" path="res://logic/c_systems/weather_system/weather_system.gd" id="4_58tqt"]
+[ext_resource type="AudioStream" uid="uid://b3mvk1hw0imcv" path="res://assets/music/back/back_melody.mp3" id="3_5q2id"]
+[ext_resource type="Sky" uid="uid://cyfaw7ih7lbww" path="res://assets/materials-shared/_shaders/sky/level_sky.tres" id="3_58tqt"]
+[ext_resource type="PackedScene" uid="uid://sq53nltxquwd" path="res://assets/GLB-level/demo-level_/linkoln/LINCOLN_WRAPPER.tscn" id="4_3yhff"]
+[ext_resource type="Script" uid="uid://c1n8jqoagewpu" path="res://logic/systems/weather_system/weather_system.gd" id="4_58tqt"]
 [ext_resource type="PackedScene" uid="uid://dsawmyldebwkf" path="res://logic/ui/pause_menu/m_pause_menu.tscn" id="4_cxdwc"]
-[ext_resource type="AudioStream" uid="uid://ccekjehf2plqo" path="res://-assets-/music/back/back_together.mp3" id="4_e70k6"]
-[ext_resource type="PackedScene" uid="uid://rqlyc5qjitju" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/DVArea3DShapes.tscn" id="5_4ckfe"]
-[ext_resource type="PackedScene" uid="uid://b7mftvb3txlfn" path="res://-assets-/GLB-level/demo-level_/linkoln/wooden_balcony/wooden_balcony_WRAPPED.tscn" id="5_cxdwc"]
-[ext_resource type="Script" uid="uid://blo5xcfvelvlt" path="res://logic/c_systems/weather_system/weather_change_area.gd" id="6_cxdwc"]
-[ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://-assets-/GLB-level/demo-level_/lady/LADY_WRAPPER.tscn" id="6_dpd55"]
-[ext_resource type="PackedScene" uid="uid://cl4hklj8yd2ns" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/DVCharColliders.tscn" id="6_n5anv"]
-[ext_resource type="Shader" uid="uid://bk6avam5bgjd7" path="res://-assets-/materials-shared/_shaders/sun/sun_shader.gdshader" id="7_ic71h"]
-[ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://-assets-/GLB-level/demo-level_/tower/TOWER_WRAPPER.tscn" id="8_50a4s"]
-[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/VFX/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
-[ext_resource type="PackedScene" uid="uid://bbwrpoygqteb0" path="res://-assets-/GLB-level/demo-level_/golden/gold_cave_WRAPPED.tscn" id="10_ic71h"]
-[ext_resource type="Shader" uid="uid://b78scouypslqj" path="res://-assets-/materials-shared/_shaders/unsorted/34001_t2.gdshader" id="10_o8cuj"]
-[ext_resource type="PackedScene" uid="uid://clc3tlv23rgge" path="res://-assets-/GLB-level/demo-level_/jaw/jaw_WRAPPED.tscn" id="11_p1nq7"]
-[ext_resource type="PackedScene" uid="uid://8kw40wxpqewf" path="res://-assets-/GLB-level/demo-level_/columns/columns_WRAPPER.tscn" id="12_g0qcj"]
-[ext_resource type="PackedScene" uid="uid://dj7eifk52p3xo" path="res://-assets-/GLB-level/demo-level_/tree_far/tree_group_far_WRAPPER.tscn" id="12_skc02"]
-[ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://-assets-/GLB-level/demo-level_/island/ISLAND_WRAPPER.tscn" id="12_x0u1k"]
-[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/Player/Princess_2.tscn" id="14_4oive"]
-[ext_resource type="PackedScene" uid="uid://8r0kocxxiwnj" path="res://-assets-/GLB-level/demo-level_/exit_2/ghost_asp.tscn" id="14_f66pd"]
-[ext_resource type="PackedScene" uid="uid://dentl7bp7qpyv" path="res://-assets-/GLB-level/demo-level_/exit_2/exit_2_WRAPPER.tscn" id="14_xv3l7"]
-[ext_resource type="PackedScene" uid="uid://cvorqwtm6njov" path="res://logic/entities/Items/chest/HealthChest.tscn" id="15_acr6p"]
-[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://logic/entities/VFX/lights/omni/FlickerOmni.tscn" id="16_0j5u0"]
-[ext_resource type="PackedScene" uid="uid://bbx2piiomfbdk" path="res://logic/entities/Items/chest/MaxStaminaChest.tscn" id="16_7tk7h"]
-[ext_resource type="PackedScene" uid="uid://bbjymfj8hwa46" path="res://-assets-/GLB-level/demo-level_/columns/single_break_column.tscn" id="16_enc12"]
-[ext_resource type="PackedScene" uid="uid://c3xoku2an7ywo" path="res://logic/entities/Items/crate/pale_crate/PaleCrate.tscn" id="16_tpbca"]
-[ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/Items/pick_item/stamina_item/MaxStaminaItem.tscn" id="17_r8gfm"]
-[ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="17_vdq0p"]
-[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Items/simple_target/SimpleTarget.tscn" id="18_2euvp"]
-[ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/Locations/_dev/death_plane/DeathPlane.tscn" id="18_ib1an"]
-[ext_resource type="PackedScene" uid="uid://ooxbod7gnngy" path="res://logic/entities/Items/crate/PaleCrateSmallPile.tscn" id="18_ogmul"]
-[ext_resource type="PackedScene" uid="uid://c84cgpqlpdhfg" path="res://logic/c_systems/influence_parent/create_rigid_parent/CreateRigidParent.tscn" id="18_xm4a8"]
-[ext_resource type="PackedScene" uid="uid://cb8440hmbojbd" path="res://logic/entities/VFX/lights/omni/lamp_omni.tscn" id="19_ic71h"]
-[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/Enemies/sitting_sk/SitSkeleton.tscn" id="20_il31f"]
-[ext_resource type="Material" uid="uid://db4r2nwkf8uiy" path="res://-assets-/materials-shared/marble/marble017/I_Marble017_blue_rough.tres" id="20_mq57q"]
-[ext_resource type="LightmapGIData" uid="uid://dfmhg74arht76" path="res://logic/entities/Locations/demo_level/demoLevel_jaw.lmbake" id="20_p1nq7"]
-[ext_resource type="LightmapGIData" uid="uid://bkskkpav1e8r2" path="res://logic/entities/Locations/demo_level/demoLevel_exit2.lmbake" id="20_x0u1k"]
-[ext_resource type="PackedScene" uid="uid://ypbtd7vtqh0r" path="res://-assets-/GLB-items/prefabs/LanternLamp.tscn" id="21_0rwan"]
-[ext_resource type="Texture2D" uid="uid://dhejrjgt7g5bl" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_diff_1k.jpg" id="21_eqdq1"]
-[ext_resource type="PackedScene" uid="uid://b5tsnu0lrbyel" path="res://logic/entities/Items/chest/SpeedIncreaseChest.tscn" id="21_i3y2i"]
-[ext_resource type="Texture2D" uid="uid://c30jwj1amgb1r" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_diff_1k.jpg" id="21_s0ho0"]
-[ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/Items/lever/BaseLever.tscn" id="21_t7vhe"]
-[ext_resource type="PackedScene" uid="uid://dc6v8ymj7x6m8" path="res://-assets-/GLB-items/prefabs/StaticBarrel.tscn" id="21_w0ai3"]
-[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="22_7tk7h"]
-[ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="22_b71br"]
-[ext_resource type="PackedScene" uid="uid://x7owdkpe4rdk" path="res://-assets-/GLB-items/prefabs/Arcboutant.tscn" id="22_ramam"]
-[ext_resource type="Texture2D" uid="uid://upig8xl42awq" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_norm_gl.png" id="22_rvsi0"]
-[ext_resource type="Texture2D" uid="uid://dmf72m3hhbnyg" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_rough_1k.png" id="23_2urya"]
-[ext_resource type="PackedScene" uid="uid://cexdblmpe4p00" path="res://-assets-/GLB-items/prefabs/SmallRockRigid.tscn" id="23_rqhon"]
-[ext_resource type="Texture2D" uid="uid://disfcn4k2nd2l" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_rough.png" id="23_s0ho0"]
-[ext_resource type="LightmapGIData" uid="uid://cp1oob1d7payd" path="res://logic/entities/Locations/demo_level/demoLevel_tree_group.lmbake" id="23_x0u1k"]
-[ext_resource type="Material" uid="uid://cxm12dtohd4dt" path="res://-assets-/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_rough.tres" id="24_b71br"]
-[ext_resource type="PackedScene" uid="uid://p67hfjlxhimn" path="res://-assets-/GLB-level/demo-level_/linkoln/mountain_view/mountain_view_WRAPPER.tscn" id="26_pulto"]
-[ext_resource type="PackedScene" uid="uid://dhcmqu81pishu" path="res://logic/entities/Items/simple_target/FancyHitTarget.tscn" id="27_ivsur"]
-[ext_resource type="LightmapGIData" uid="uid://dngekh46ei6ch" path="res://logic/entities/Locations/demo_level/demoLevel_tower.lmbake" id="27_tc4ti"]
-[ext_resource type="Material" uid="uid://dpd6ypkn8dd5a" path="res://-assets-/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_lighter_cleaner_Trip.tres" id="28_b71br"]
-[ext_resource type="PackedScene" uid="uid://cder7q45c0ofb" path="res://logic/entities/Items/door/_BaseDoor.tscn" id="29_pulto"]
-[ext_resource type="PackedScene" uid="uid://ma6cywyneshm" path="res://logic/entities/Enemies/sitting_sk/SitSkeletonAlt.tscn" id="30_ktdwm"]
-[ext_resource type="PackedScene" uid="uid://cygpfuso63mm1" path="res://logic/entities/Locations/spring_up/SpringUp.tscn" id="31_2urya"]
-[ext_resource type="PackedScene" uid="uid://bydwaf8keh4gq" path="res://logic/entities/Items/chest/DodgeIncreaseChest.tscn" id="31_6pevu"]
-[ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/Items/pick_item/DodgeIncreaseItem.tscn" id="33_p81po"]
-[ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/Items/pick_item/health_item/MaxHealthItem.tscn" id="34_dffxn"]
-[ext_resource type="PackedScene" uid="uid://b0eq3ihtn4wf" path="res://logic/entities/Enemies/fighter/MechFighter.tscn" id="34_skk2x"]
-[ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://logic/c_systems/x_unsorted/plush/MiniPlush.tscn" id="35_qa10r"]
-[ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="36_g5qky"]
-[ext_resource type="PackedScene" uid="uid://0isjovhfn8l7" path="res://logic/c_systems/x_unsorted/plush/BiggestPlush.tscn" id="36_lne8g"]
-[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Items/crate/DarkCratePile.tscn" id="36_ncli4"]
-[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://logic/c_systems/x_unsorted/plush/plush_factory.gd" id="36_srek1"]
-[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="37_y0kr0"]
-[ext_resource type="Texture2D" uid="uid://cyp17qtrm6vla" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_rough_2k.png" id="38_w0ai3"]
-[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="39_y0kr0"]
-[ext_resource type="PackedScene" uid="uid://5qsnihdrfj0g" path="res://logic/entities/Items/lever/plush_lever/PlushLever.tscn" id="40_y0kr0"]
-[ext_resource type="Material" uid="uid://eu8dehglyfef" path="res://-assets-/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp.tres" id="48_y0kr0"]
-[ext_resource type="Texture2D" uid="uid://bjhdivhfve55k" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Color.jpg" id="49_w0ai3"]
-[ext_resource type="Texture2D" uid="uid://dtc40sais1cn8" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Metalness-Metal047B_2K-JPG_Roughness.png" id="50_ramam"]
-[ext_resource type="PackedScene" uid="uid://bjw0lhombik4c" path="res://logic/entities/Enemies/phe_enemy/SecretEnemy.tscn" id="51_5q2id"]
-[ext_resource type="Texture2D" uid="uid://435ii5qoi0tx" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_NormalGL.jpg" id="51_rqhon"]
-[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="52_bbtvy"]
-[ext_resource type="PackedScene" uid="uid://br0ld6w6es8le" path="res://logic/entities/Items/interact_area/MonitorPlayerEnterSignalArea.tscn" id="52_e70k6"]
-[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/back/back_bits.mp3" id="53_o1prw"]
-[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/Enemies/phe_enemy/PHEnemy_2.tscn" id="56_ohlvg"]
-[ext_resource type="PackedScene" uid="uid://53le0wkw6bvm" path="res://logic/entities/VFX/lights/omni/StaticOmni.tscn" id="76_56lme"]
-[ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/Items/pick_item/SpeedIncreaseItem.tscn" id="76_xu021"]
-[ext_resource type="ArrayOccluder3D" uid="uid://b4u3jdp2rv8f2" path="res://logic/entities/Locations/demo_level/demoLevel.occ" id="78_w0ai3"]
+[ext_resource type="AudioStream" uid="uid://ccekjehf2plqo" path="res://assets/music/back/back_together.mp3" id="4_e70k6"]
+[ext_resource type="PackedScene" uid="uid://rqlyc5qjitju" path="res://logic/systems_dev/dev_visuals_3d/coll_shapes/DVArea3DShapes.tscn" id="5_4ckfe"]
+[ext_resource type="PackedScene" uid="uid://b7mftvb3txlfn" path="res://assets/GLB-level/demo-level_/linkoln/wooden_balcony/wooden_balcony_WRAPPED.tscn" id="5_cxdwc"]
+[ext_resource type="Script" uid="uid://blo5xcfvelvlt" path="res://logic/systems/weather_system/weather_change_area.gd" id="6_cxdwc"]
+[ext_resource type="PackedScene" uid="uid://dcg4knuif15xl" path="res://assets/GLB-level/demo-level_/lady/LADY_WRAPPER.tscn" id="6_dpd55"]
+[ext_resource type="PackedScene" uid="uid://cl4hklj8yd2ns" path="res://logic/systems_dev/dev_visuals_3d/coll_shapes/DVCharColliders.tscn" id="6_n5anv"]
+[ext_resource type="Shader" uid="uid://bk6avam5bgjd7" path="res://assets/materials-shared/_shaders/sun/sun_shader.gdshader" id="7_ic71h"]
+[ext_resource type="PackedScene" uid="uid://cpvdn2ol6jj2v" path="res://assets/GLB-level/demo-level_/tower/TOWER_WRAPPER.tscn" id="8_50a4s"]
+[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/vfx/lights/fire/FireStatic_.tscn" id="9_i3y2i"]
+[ext_resource type="PackedScene" uid="uid://bbwrpoygqteb0" path="res://assets/GLB-level/demo-level_/golden/gold_cave_WRAPPED.tscn" id="10_ic71h"]
+[ext_resource type="Shader" uid="uid://b78scouypslqj" path="res://assets/materials-shared/_shaders/unsorted/34001_t2.gdshader" id="10_o8cuj"]
+[ext_resource type="PackedScene" uid="uid://clc3tlv23rgge" path="res://assets/GLB-level/demo-level_/jaw/jaw_WRAPPED.tscn" id="11_p1nq7"]
+[ext_resource type="PackedScene" uid="uid://8kw40wxpqewf" path="res://assets/GLB-level/demo-level_/columns/columns_WRAPPER.tscn" id="12_g0qcj"]
+[ext_resource type="PackedScene" uid="uid://dj7eifk52p3xo" path="res://assets/GLB-level/demo-level_/tree_far/tree_group_far_WRAPPER.tscn" id="12_skc02"]
+[ext_resource type="PackedScene" uid="uid://1wkmqiqm0s6h" path="res://assets/GLB-level/demo-level_/island/ISLAND_WRAPPER.tscn" id="12_x0u1k"]
+[ext_resource type="PackedScene" uid="uid://6frxc6smds67" path="res://logic/entities/player/Princess.tscn" id="14_4oive"]
+[ext_resource type="PackedScene" uid="uid://8r0kocxxiwnj" path="res://assets/GLB-level/demo-level_/exit_2/ghost_asp.tscn" id="14_f66pd"]
+[ext_resource type="PackedScene" uid="uid://dentl7bp7qpyv" path="res://assets/GLB-level/demo-level_/exit_2/exit_2_WRAPPER.tscn" id="14_xv3l7"]
+[ext_resource type="PackedScene" uid="uid://cvorqwtm6njov" path="res://logic/entities/items/chest/HealthChest.tscn" id="15_acr6p"]
+[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://logic/entities/vfx/lights/omni/FlickerOmni.tscn" id="16_0j5u0"]
+[ext_resource type="PackedScene" uid="uid://bbx2piiomfbdk" path="res://logic/entities/items/chest/MaxStaminaChest.tscn" id="16_7tk7h"]
+[ext_resource type="PackedScene" uid="uid://bbjymfj8hwa46" path="res://assets/GLB-level/demo-level_/columns/single_break_column.tscn" id="16_enc12"]
+[ext_resource type="PackedScene" uid="uid://c3xoku2an7ywo" path="res://logic/entities/items/crate/pale_crate/PaleCrate.tscn" id="16_tpbca"]
+[ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/items/pick_item/stamina_item/MaxStaminaItem.tscn" id="17_r8gfm"]
+[ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://assets/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="17_vdq0p"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/items/simple_target/SimpleTarget.tscn" id="18_2euvp"]
+[ext_resource type="PackedScene" uid="uid://bn3c3saj6bsdr" path="res://logic/entities/locations/_dev/death_plane/DeathPlane.tscn" id="18_ib1an"]
+[ext_resource type="PackedScene" uid="uid://ooxbod7gnngy" path="res://logic/entities/items/crate/PaleCrateSmallPile.tscn" id="18_ogmul"]
+[ext_resource type="PackedScene" uid="uid://c84cgpqlpdhfg" path="res://logic/systems/influence_parent/create_rigid_parent/CreateRigidParent.tscn" id="18_xm4a8"]
+[ext_resource type="PackedScene" uid="uid://cb8440hmbojbd" path="res://logic/entities/vfx/lights/omni/lamp_omni.tscn" id="19_ic71h"]
+[ext_resource type="PackedScene" uid="uid://dbo7xvsas7guf" path="res://logic/entities/enemies/sitting_sk/SitSkeleton.tscn" id="20_il31f"]
+[ext_resource type="Material" uid="uid://db4r2nwkf8uiy" path="res://assets/materials-shared/marble/marble017/I_Marble017_blue_rough.tres" id="20_mq57q"]
+[ext_resource type="LightmapGIData" uid="uid://dfmhg74arht76" path="res://logic/entities/locations/demo_level/demoLevel_jaw.lmbake" id="20_p1nq7"]
+[ext_resource type="LightmapGIData" uid="uid://bkskkpav1e8r2" path="res://logic/entities/locations/demo_level/demoLevel_exit2.lmbake" id="20_x0u1k"]
+[ext_resource type="PackedScene" uid="uid://ypbtd7vtqh0r" path="res://assets/GLB-items/prefabs/LanternLamp.tscn" id="21_0rwan"]
+[ext_resource type="Texture2D" uid="uid://dhejrjgt7g5bl" path="res://assets/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_diff_1k.jpg" id="21_eqdq1"]
+[ext_resource type="PackedScene" uid="uid://b5tsnu0lrbyel" path="res://logic/entities/items/chest/SpeedIncreaseChest.tscn" id="21_i3y2i"]
+[ext_resource type="Texture2D" uid="uid://c30jwj1amgb1r" path="res://assets/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_diff_1k.jpg" id="21_s0ho0"]
+[ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/items/lever/BaseLever.tscn" id="21_t7vhe"]
+[ext_resource type="PackedScene" uid="uid://dc6v8ymj7x6m8" path="res://assets/GLB-items/prefabs/StaticBarrel.tscn" id="21_w0ai3"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/vfx/puff/PuffFog.tscn" id="22_7tk7h"]
+[ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://assets/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="22_b71br"]
+[ext_resource type="PackedScene" uid="uid://x7owdkpe4rdk" path="res://assets/GLB-items/prefabs/Arcboutant.tscn" id="22_ramam"]
+[ext_resource type="Texture2D" uid="uid://upig8xl42awq" path="res://assets/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_norm_gl.png" id="22_rvsi0"]
+[ext_resource type="Texture2D" uid="uid://dmf72m3hhbnyg" path="res://assets/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_rough_1k.png" id="23_2urya"]
+[ext_resource type="PackedScene" uid="uid://cexdblmpe4p00" path="res://assets/GLB-items/prefabs/SmallRockRigid.tscn" id="23_rqhon"]
+[ext_resource type="Texture2D" uid="uid://disfcn4k2nd2l" path="res://assets/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_rough.png" id="23_s0ho0"]
+[ext_resource type="LightmapGIData" uid="uid://cp1oob1d7payd" path="res://logic/entities/locations/demo_level/demoLevel_tree_group.lmbake" id="23_x0u1k"]
+[ext_resource type="Material" uid="uid://cxm12dtohd4dt" path="res://assets/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp_rough.tres" id="24_b71br"]
+[ext_resource type="PackedScene" uid="uid://p67hfjlxhimn" path="res://assets/GLB-level/demo-level_/linkoln/mountain_view/mountain_view_WRAPPER.tscn" id="26_pulto"]
+[ext_resource type="PackedScene" uid="uid://dhcmqu81pishu" path="res://logic/entities/items/simple_target/FancyHitTarget.tscn" id="27_ivsur"]
+[ext_resource type="LightmapGIData" uid="uid://dngekh46ei6ch" path="res://logic/entities/locations/demo_level/demoLevel_tower.lmbake" id="27_tc4ti"]
+[ext_resource type="Material" uid="uid://dpd6ypkn8dd5a" path="res://assets/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_lighter_cleaner_Trip.tres" id="28_b71br"]
+[ext_resource type="PackedScene" uid="uid://cder7q45c0ofb" path="res://logic/entities/items/door/_BaseDoor.tscn" id="29_pulto"]
+[ext_resource type="PackedScene" uid="uid://ma6cywyneshm" path="res://logic/entities/enemies/sitting_sk/SitSkeletonAlt.tscn" id="30_ktdwm"]
+[ext_resource type="PackedScene" uid="uid://cygpfuso63mm1" path="res://logic/entities/locations/spring_up/SpringUp.tscn" id="31_2urya"]
+[ext_resource type="PackedScene" uid="uid://bydwaf8keh4gq" path="res://logic/entities/items/chest/DodgeIncreaseChest.tscn" id="31_6pevu"]
+[ext_resource type="PackedScene" uid="uid://8mwpcnwpicyn" path="res://logic/entities/items/pick_item/DodgeIncreaseItem.tscn" id="33_p81po"]
+[ext_resource type="PackedScene" uid="uid://d051w4rmm0o7w" path="res://logic/entities/items/pick_item/health_item/MaxHealthItem.tscn" id="34_dffxn"]
+[ext_resource type="PackedScene" uid="uid://b0eq3ihtn4wf" path="res://logic/entities/enemies/fighter/MechFighter.tscn" id="34_skk2x"]
+[ext_resource type="PackedScene" uid="uid://c5ck7rl8v5gfr" path="res://logic/systems/x_unsorted/plush/MiniPlush.tscn" id="35_qa10r"]
+[ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="36_g5qky"]
+[ext_resource type="PackedScene" uid="uid://0isjovhfn8l7" path="res://logic/systems/x_unsorted/plush/BiggestPlush.tscn" id="36_lne8g"]
+[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/items/crate/DarkCratePile.tscn" id="36_ncli4"]
+[ext_resource type="Script" uid="uid://n2ickogbm25d" path="res://logic/systems/x_unsorted/plush/plush_factory.gd" id="36_srek1"]
+[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="37_y0kr0"]
+[ext_resource type="Texture2D" uid="uid://cyp17qtrm6vla" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_rough_2k.png" id="38_w0ai3"]
+[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://assets/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="39_y0kr0"]
+[ext_resource type="PackedScene" uid="uid://5qsnihdrfj0g" path="res://logic/entities/items/lever/plush_lever/PlushLever.tscn" id="40_y0kr0"]
+[ext_resource type="Material" uid="uid://eu8dehglyfef" path="res://assets/materials-shared/metal/I_metal_048/I_Metal048C_2K-JPG_Reimp.tres" id="48_y0kr0"]
+[ext_resource type="Texture2D" uid="uid://bjhdivhfve55k" path="res://assets/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Color.jpg" id="49_w0ai3"]
+[ext_resource type="Texture2D" uid="uid://dtc40sais1cn8" path="res://assets/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Metalness-Metal047B_2K-JPG_Roughness.png" id="50_ramam"]
+[ext_resource type="PackedScene" uid="uid://bjw0lhombik4c" path="res://logic/entities/enemies/phe_enemy/SecretEnemy.tscn" id="51_5q2id"]
+[ext_resource type="Texture2D" uid="uid://435ii5qoi0tx" path="res://assets/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_NormalGL.jpg" id="51_rqhon"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://assets/music/back/back_noise.mp3" id="52_bbtvy"]
+[ext_resource type="PackedScene" uid="uid://br0ld6w6es8le" path="res://logic/entities/items/interact_area/MonitorPlayerEnterSignalArea.tscn" id="52_e70k6"]
+[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://assets/music/back/back_bits.mp3" id="53_o1prw"]
+[ext_resource type="PackedScene" uid="uid://bqpo1nisx0ycs" path="res://logic/entities/enemies/phe_enemy/PHEnemy.tscn" id="56_ohlvg"]
+[ext_resource type="PackedScene" uid="uid://53le0wkw6bvm" path="res://logic/entities/vfx/lights/omni/StaticOmni.tscn" id="76_56lme"]
+[ext_resource type="PackedScene" uid="uid://mfceni724tf3" path="res://logic/entities/items/pick_item/SpeedIncreaseItem.tscn" id="76_xu021"]
+[ext_resource type="ArrayOccluder3D" uid="uid://b4u3jdp2rv8f2" path="res://logic/entities/locations/demo_level/demoLevel.occ" id="78_w0ai3"]
 
 [sub_resource type="Environment" id="Environment_efgc1"]
 background_mode = 2
@@ -225,7 +225,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pijfo")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ckfe"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e3j1m"]
 radius = 2.0
 height = 4.0
 
@@ -304,7 +304,7 @@ normal_enabled = true
 normal_texture = ExtResource("51_rqhon")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n5anv"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rcnpn"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_dpd55"]
 density = 0.12
@@ -773,7 +773,6 @@ player = NodePath("../../../Princess")
 
 [node name="MechFighter" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1362630926 instance=ExtResource("34_skk2x")]
 transform = Transform3D(0.56019086, 0, 0.82836354, 0, 1, 0, -0.82836354, 0, 0.56019086, -46.728897, 13.04582, 38.806297)
-dev_tag = &"mech"
 
 [node name="Cylinder001_008" parent="Lincoln_ALL/LINCOLN_WRAPPER" unique_id=1018679868 instance=ExtResource("21_w0ai3")]
 transform = Transform3D(1, 0, 0, 0, 0.95444363, -0.2983912, 0, 0.2983912, 0.95444363, -19.973879, 0.91030014, 11.343478)
@@ -870,7 +869,7 @@ area_capsule_radius = 4.0
 area_capsule_height = 4.0
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/ISLAND_WRAPPER/Rock_1_004_visuals/CreateRigidChild/MonitorPlEnterSigArea" index="0" unique_id=1198477309]
-shape = SubResource("CapsuleShape3D_4ckfe")
+shape = SubResource("CapsuleShape3D_e3j1m")
 
 [node name="StaticBarrel" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1815104359 instance=ExtResource("21_w0ai3")]
 transform = Transform3D(0.9998237, 0.018778667, 1.4898536e-08, -0.018778667, 0.9998237, -2.798236e-10, -1.4901163e-08, -2.220446e-16, 1, -55.109894, 0.58644915, -9.590033)
@@ -886,7 +885,6 @@ mesh = SubResource("ArrayMesh_xm4a8")
 
 [node name="MechFighter" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=751908545 instance=ExtResource("34_skk2x")]
 transform = Transform3D(-0.1917169, 0, -0.98145026, 0, 1, 0, 0.98145026, 0, -0.1917169, -45.907993, 0.5208559, -13.289304)
-dev_tag = &"mech"
 
 [node name="DarkCratePile" parent="Lincoln_ALL/ISLAND_WRAPPER" unique_id=1051549338 instance=ExtResource("36_ncli4")]
 transform = Transform3D(0.63517547, 0, 0.7723679, 0, 1, 0, -0.7723679, 0, 0.63517547, -49.924126, 0.49236435, -8.652672)
@@ -1100,7 +1098,7 @@ material_override = ExtResource("48_y0kr0")
 material_override = SubResource("StandardMaterial3D_ktdwm")
 
 [node name="CollisionShape3D" parent="Lincoln_ALL/SimpleTarget3/HitArea" parent_id_path=PackedInt32Array(396858546, 1218261816) index="0" unique_id=1271949500]
-shape = SubResource("CapsuleShape3D_n5anv")
+shape = SubResource("CapsuleShape3D_rcnpn")
 
 [node name="SimpleTarget2" parent="Lincoln_ALL" unique_id=811927462 instance=ExtResource("18_2euvp")]
 transform = Transform3D(-0.0068416498, 0, -0.9999766, 0, 1, 0, 0.9999766, 0, -0.0068416498, -54.045063, 0.5982324, 36.92067)
@@ -1397,7 +1395,7 @@ spot_attenuation = 1.12
 transform = Transform3D(-0.9586063, 0.09134311, -0.26968578, -0.08145838, 0.8195828, 0.56714064, 0.2728342, 0.56563276, -0.7782166, -13.559465, 5.80163, -5.8291445)
 light_color = Color(0.98199487, 0.78115344, 0.5943271, 1)
 light_energy = 7.96
-light_volumetric_fog_energy = 8.747
+light_volumetric_fog_energy = 4.0
 shadow_enabled = true
 spot_range = 17.924
 spot_angle = 45.52

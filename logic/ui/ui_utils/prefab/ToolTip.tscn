@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqq0d6ohueuo5"]
 
-[ext_resource type="Texture2D" uid="uid://d3g0sgo7lx37i" path="res://-assets-/ui_assets/ui_icons/info_icon/flair_small_info.png" id="1_vb4ov"]
+[ext_resource type="Texture2D" uid="uid://d3g0sgo7lx37i" path="res://assets/ui_assets/ui_icons/info_icon/flair_small_info.png" id="1_vb4ov"]
 
 [node name="ToolTip" type="MarginContainer" unique_id=1542087070]
 custom_minimum_size = Vector2(40, 40)

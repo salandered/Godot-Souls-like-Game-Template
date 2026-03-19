@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://do7j5bx781tal"]
+
+[ext_resource type="Texture2D" uid="uid://dhejrjgt7g5bl" path="res://assets/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_diff_1k.jpg" id="1_y38i3"]
+[ext_resource type="Texture2D" uid="uid://disfcn4k2nd2l" path="res://assets/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_rough.png" id="2_hvplc"]
+[ext_resource type="Texture2D" uid="uid://upig8xl42awq" path="res://assets/materials-shared/rocks-stone/seaside_rock/tower-map_seaside_rock_norm_gl.png" id="3_bldda"]
+
+[resource]
+resource_name = "seaside_rock.003"
+cull_mode = 2
+albedo_texture = ExtResource("1_y38i3")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_hvplc")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_bldda")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bskycdnpq8ea1"
+path="res://.godot/imported/ConcreteSteps 24-Audio_land_subtle.wav-c5a9eec28b600d49b6008e81784bd4a0.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/pack_N2/ConcreteSteps 24-Audio_land_subtle.wav"
+dest_files=["res://.godot/imported/ConcreteSteps 24-Audio_land_subtle.wav-c5a9eec28b600d49b6008e81784bd4a0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

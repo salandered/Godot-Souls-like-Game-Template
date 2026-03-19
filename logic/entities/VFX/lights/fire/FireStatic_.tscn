@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://bnf3bmp3nq5nq"]
 
-[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://logic/entities/VFX/lights/omni/FlickerOmni.tscn" id="1_gyo1q"]
-[ext_resource type="Script" uid="uid://di8a2ya3udmgp" path="res://logic/entities/VFX/lights/fire/fire_static.gd" id="2_jqjo8"]
-[ext_resource type="AudioStream" uid="uid://cv6knp2vadwvf" path="res://-assets-/SFX/sources/fantasy_pack_by_tom_music/Torch/torch.tres" id="3_qdwx7"]
-[ext_resource type="PackedScene" uid="uid://b38vfgjwpinft" path="res://logic/entities/VFX/lights/fire/flame_gpu_particles_3d.tscn" id="4_qdwx7"]
-[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="5_is5lk"]
-[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="6_w4q5a"]
-[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://-assets-/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="7_elwu4"]
+[ext_resource type="PackedScene" uid="uid://dkav81mtgsiib" path="res://logic/entities/vfx/lights/omni/FlickerOmni.tscn" id="1_gyo1q"]
+[ext_resource type="Script" uid="uid://di8a2ya3udmgp" path="res://logic/entities/vfx/lights/fire/fire_static.gd" id="2_jqjo8"]
+[ext_resource type="AudioStream" uid="uid://cv6knp2vadwvf" path="res://assets/SFX/sources/fantasy_pack_by_tom_music/Torch/torch.tres" id="3_qdwx7"]
+[ext_resource type="PackedScene" uid="uid://b38vfgjwpinft" path="res://logic/entities/vfx/lights/fire/flame_gpu_particles_3d.tscn" id="4_qdwx7"]
+[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://assets/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="5_is5lk"]
+[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://assets/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="6_w4q5a"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://assets/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="7_elwu4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqn15"]
 albedo_color = Color(0.948957, 0.0198181, 1.15514e-06, 1)

@@ -1,30 +1,27 @@
 [gd_scene format=3 uid="uid://mfceni724tf3"]
 
-[ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/Items/pick_item/_base/_BasePickItem.tscn" id="1_wmi63"]
-[ext_resource type="Script" uid="uid://du1cnmpn06tvg" path="res://logic/entities/Items/pick_item/speed_increase_item.gd" id="2_hmr3n"]
-[ext_resource type="Material" uid="uid://c127ydfwy13xa" path="res://-assets-/materials-shared/_shaders/pick_items/SpeedIncreaseItem_mat.tres" id="2_nlu3s"]
+[ext_resource type="PackedScene" uid="uid://b3xuohw6w5pf" path="res://logic/entities/items/pick_item/_base/_BasePickItem.tscn" id="1_wmi63"]
+[ext_resource type="Script" uid="uid://du1cnmpn06tvg" path="res://logic/entities/items/pick_item/speed_increase_item.gd" id="2_hmr3n"]
+[ext_resource type="Material" uid="uid://c127ydfwy13xa" path="res://assets/materials-shared/_shaders/pick_items/SpeedIncreaseItem_mat.tres" id="2_nlu3s"]
 
 [node name="SpeedIncreaseItem" unique_id=1123253444 instance=ExtResource("1_wmi63")]
 script = ExtResource("2_hmr3n")
 
-[node name="RedSphere" parent="Visuals" index="0"]
+[node name="RedSphere" parent="Visuals" parent_id_path=PackedInt32Array(788798705) index="0" unique_id=1322938207]
 material_override = ExtResource("2_nlu3s")
 
-[node name="PuffFog" parent="Visuals/RedSphere" index="0"]
+[node name="PuffFog" parent="Visuals/RedSphere" index="0" unique_id=2009355783]
 color_multiplier = Color(0.14705494, 0.3438608, 0.15568678, 1)
 
-[node name="GlowLight" parent="Visuals/RedSphere" index="1"]
+[node name="GlowLight" parent="Visuals/RedSphere" index="1" unique_id=1271204396]
 light_color = Color(0.11877642, 0.35743815, 0.068236314, 1)
 shadow_opacity = 0.8
 
-[node name="AnimationPlayer" parent="Visuals/RedSphere/GlowLight" index="0"]
-autoplay = &"flicker"
-
-[node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2"]
+[node name="InnerSecondaryOmni" parent="Visuals/RedSphere" index="2" unique_id=1913207257]
 light_color = Color(0.1743907, 0.29634023, 0.089703545, 1)
 light_energy = 1.0
 shadow_enabled = false
 shadow_opacity = 0.8
 
-[node name="InteractArea" parent="." index="3"]
+[node name="InteractArea" parent="." index="3" unique_id=980971986]
 label_text = "Permanently increases running speed"

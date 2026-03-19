@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/chest/icon_chest_3.png")
+@icon("res://assets/x_icons/chest/icon_chest_3.png")
 
 @abstract
 class_name BaseChest

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bfg1q2ls5d5f4"]
+
+[ext_resource type="Texture2D" uid="uid://dceeya6lxokly" path="res://assets/materials-shared/concrete/just_concrete/jaw_concrete01_diff.jpg" id="1_7t4rc"]
+[ext_resource type="Texture2D" uid="uid://bsh6whx1sf304" path="res://assets/materials-shared/concrete/just_concrete/jaw_concrete01_norm.jpg" id="2_w007f"]
+
+[resource]
+resource_name = "concrete"
+cull_mode = 2
+albedo_texture = ExtResource("1_7t4rc")
+metallic = 0.65
+roughness = 0.88
+normal_enabled = true
+normal_texture = ExtResource("2_w007f")
+uv1_scale = Vector3(3, 3, 3)

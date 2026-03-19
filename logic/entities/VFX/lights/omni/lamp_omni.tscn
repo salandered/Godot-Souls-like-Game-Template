@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cb8440hmbojbd"]
 
-[ext_resource type="Script" uid="uid://5wqh4g0kya2l" path="res://logic/entities/VFX/lights/omni/lamp_omni.gd" id="1_jaswb"]
+[ext_resource type="Script" uid="uid://5wqh4g0kya2l" path="res://logic/entities/vfx/lights/omni/lamp_omni.gd" id="1_jaswb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m15wo"]
 albedo_color = Color(0.9073196, 0.33066475, 0.012101801, 1)

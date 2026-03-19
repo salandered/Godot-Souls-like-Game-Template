@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bu78ylp2jroiw"]
 
-[ext_resource type="Script" uid="uid://2p87053gvdyt" path="res://logic/entities/VFX/puff/puff_explosion.gd" id="1_spofe"]
-[ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://-assets-/materials-shared/_shaders/puff/SmokePuff.png" id="2_4x8tm"]
-[ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://-assets-/materials-shared/_shaders/puff/SmokePuffNormals.png" id="3_2a6te"]
+[ext_resource type="Script" uid="uid://2p87053gvdyt" path="res://logic/entities/vfx/puff/puff_explosion.gd" id="1_spofe"]
+[ext_resource type="Texture2D" uid="uid://bb6a2c0n7pgsk" path="res://assets/materials-shared/_shaders/puff/SmokePuff.png" id="2_4x8tm"]
+[ext_resource type="Texture2D" uid="uid://crq55yidge8wt" path="res://assets/materials-shared/_shaders/puff/SmokePuffNormals.png" id="3_2a6te"]
 
 [sub_resource type="Animation" id="Animation_odwyp"]
 length = 0.001
@@ -43,7 +43,7 @@ _data = {
 &"explosion": SubResource("Animation_sfsol")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgvgc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f0ac"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_4x8tm")
@@ -78,7 +78,7 @@ libraries/ = SubResource("AnimationLibrary_y0aew")
 
 [node name="PuffExplosionParticles" type="CPUParticles3D" parent="." unique_id=168858962]
 unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_tgvgc")
+material_override = SubResource("StandardMaterial3D_0f0ac")
 cast_shadow = 0
 amount = 10
 lifetime = 9.0

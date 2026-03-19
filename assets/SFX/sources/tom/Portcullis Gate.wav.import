@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dpef175e8dyx3"
+path="res://.godot/imported/Portcullis Gate.wav-6b174bb8787209b111a8a5f33617553c.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/tom/Portcullis Gate.wav"
+dest_files=["res://.godot/imported/Portcullis Gate.wav-6b174bb8787209b111a8a5f33617553c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

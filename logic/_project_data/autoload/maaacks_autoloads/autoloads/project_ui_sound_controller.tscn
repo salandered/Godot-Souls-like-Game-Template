@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://cc37235kj4384"]
 
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://logic/_project_data/autoload/maaacks_autoloads/autoloads/m_ui_sound_controller.gd" id="1_dmagn"]
-[ext_resource type="AudioStream" uid="uid://cxy3a55req2yx" path="res://-assets-/SFX/sources/ui_sounds/kenney_ui_audio/click5.wav" id="2_nar8x"]
-[ext_resource type="AudioStream" uid="uid://273m3jxltolf" path="res://-assets-/SFX/sources/ui_sounds/kenney_ui_audio/click2.wav" id="3_fpfbd"]
-[ext_resource type="AudioStream" uid="uid://c1ptcpq26be55" path="res://-assets-/SFX/sources/ui_sounds/kenney_ui_audio/click1.wav" id="4_de7pg"]
-[ext_resource type="AudioStream" uid="uid://gfthpsq8k0a8" path="res://-assets-/SFX/sources/ui_sounds/kenney_ui_audio/mouseclick1.wav" id="5_ob1c6"]
-[ext_resource type="AudioStream" uid="uid://x84bxvc0gdut" path="res://-assets-/SFX/sources/ui_sounds/kenney_ui_audio/mouserelease1.wav" id="6_m8i65"]
+[ext_resource type="AudioStream" uid="uid://cxy3a55req2yx" path="res://assets/SFX/sources/ui_sounds/kenney_ui_audio/click5.wav" id="2_nar8x"]
+[ext_resource type="AudioStream" uid="uid://273m3jxltolf" path="res://assets/SFX/sources/ui_sounds/kenney_ui_audio/click2.wav" id="3_fpfbd"]
+[ext_resource type="AudioStream" uid="uid://c1ptcpq26be55" path="res://assets/SFX/sources/ui_sounds/kenney_ui_audio/click1.wav" id="4_de7pg"]
+[ext_resource type="AudioStream" uid="uid://gfthpsq8k0a8" path="res://assets/SFX/sources/ui_sounds/kenney_ui_audio/mouseclick1.wav" id="5_ob1c6"]
+[ext_resource type="AudioStream" uid="uid://x84bxvc0gdut" path="res://assets/SFX/sources/ui_sounds/kenney_ui_audio/mouserelease1.wav" id="6_m8i65"]
 [ext_resource type="PackedScene" uid="uid://ckps22kt5fds4" path="res://logic/ui/ui_utils/prefab/background_music_player/m_background_music_player.tscn" id="7_m8i65"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_qynsr"]

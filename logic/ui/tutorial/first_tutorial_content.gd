@@ -70,9 +70,7 @@ func _ready() -> void:
 
 
 func set_all_texts():
-	__log_("set_all_texts")
-
-
+	# __log_("set_all_texts")
 	_update_legend_pointer(0)
 
 	_set_text_for_panel(_1_controls_text, controls)

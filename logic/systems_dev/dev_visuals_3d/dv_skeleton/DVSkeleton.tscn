@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cwr8dav8jomc3"]
+
+[ext_resource type="Script" uid="uid://dxdifoj4pjbmp" path="res://logic/systems_dev/dev_visuals_3d/dv_skeleton/dv_skeleton.gd" id="1_w6drn"]
+
+[node name="DVSkeleton" type="Node3D" unique_id=273870830]
+visible = false
+script = ExtResource("1_w6drn")
+dvc_section = 30
+_dv_type = 6

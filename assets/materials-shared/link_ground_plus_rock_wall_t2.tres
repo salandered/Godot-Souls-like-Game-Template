@@ -1,0 +1,34 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://rwgcbaklappr"]
+
+[ext_resource type="Texture2D" uid="uid://lqbs41cppq84" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_diffuse.jpg" id="1_chtvh"]
+[ext_resource type="Texture2D" uid="uid://celat1icwbuso" path="res://assets/materials-shared/ground/I_ground088/lincoln_Ground088_2K-JPG_Color_darker_t3.jpg" id="2_coc31"]
+[ext_resource type="Texture2D" uid="uid://cse07e6hekthq" path="res://assets/materials-shared/ground/I_ground088/lincoln_Ground088_2K-JPG_NormalGL.jpg" id="3_qq4tr"]
+[ext_resource type="Texture2D" uid="uid://dq7riu3q2gteb" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_normal.png" id="4_pfeff"]
+[ext_resource type="Texture2D" uid="uid://c6vpppa7k0w6s" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_roughness.png" id="5_jqsb6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vu8dt"]
+frequency = 0.0029
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0j8eg"]
+noise = SubResource("FastNoiseLite_vu8dt")
+seamless = true
+in_3d_space = true
+
+[resource]
+resource_name = "B Stone Dirt Wall 02"
+cull_mode = 2
+albedo_color = Color(0.6900825, 0.6900825, 0.6900825, 1)
+albedo_texture = ExtResource("1_chtvh")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("5_jqsb6")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("4_pfeff")
+detail_enabled = true
+detail_mask = SubResource("NoiseTexture2D_0j8eg")
+detail_albedo = ExtResource("2_coc31")
+detail_normal = ExtResource("3_qq4tr")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true

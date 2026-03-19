@@ -12,7 +12,7 @@ size_flags_vertical = 4
 value = 16.0
 script = ExtResource("2_ol2wd")
 
-[node name="PanelContainer" parent="." index="2"]
+[node name="PanelContainer" parent="." index="2" unique_id=2090949142]
 anchors_preset = -1
 anchor_left = 0.721
 offset_left = 3.0379944

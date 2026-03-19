@@ -1,9 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b8lrrs0hiocin"]
-
-[ext_resource type="AudioStream" uid="uid://du0wt3yssvgun" path="res://-assets-/SFX/sources/rubberduck/bfh1_rock_falling_01_rock_imp.ogg" id="1_xoi5e"]
-[ext_resource type="AudioStream" uid="uid://c8glqn58q4lba" path="res://-assets-/SFX/sources/rubberduck/bfh1_rock_falling_02_rock_imp.ogg" id="2_fhj8e"]
-
-[resource]
-streams_count = 2
-stream_0/stream = ExtResource("1_xoi5e")
-stream_1/stream = ExtResource("2_fhj8e")

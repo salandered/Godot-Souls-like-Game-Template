@@ -19,4 +19,4 @@ These assets remain the property of their respective creators and are
 used here in accordance with their licenses.
 
 For a full list of third-party assets, their authors, and specific
-license terms, please refer to `ATTRIBUTION.md` and `_attribution/` folder.
+license terms, please refer to [_attribution/ATTRIBUTION.md](_attribution/ATTRIBUTION.md) and `_attribution/` folder.

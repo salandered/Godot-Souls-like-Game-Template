@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ywnsfktql2ke" path="res://logic/ui/ui_utils/prefab/buttons/shake_button/ShakeButton.tscn" id="1_df6r8"]
 [ext_resource type="Script" uid="uid://byfhla5dtd1lq" path="res://logic/ui/ui_utils/prefab/buttons/shake_button/main_menu_button.gd" id="2_0f27d"]
-[ext_resource type="Shader" uid="uid://vgqfmf8l63h3" path="res://-assets-/materials-shared/_shaders/ui/shake_button.gdshader" id="3_v2ku8"]
+[ext_resource type="Shader" uid="uid://vgqfmf8l63h3" path="res://assets/materials-shared/_shaders/ui/shake_button.gdshader" id="3_v2ku8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lprb4"]
 resource_local_to_scene = true

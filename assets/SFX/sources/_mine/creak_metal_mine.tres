@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b82qfn51mgckx"]
+
+[ext_resource type="AudioStream" uid="uid://dquj3uy1knfw4" path="res://assets/SFX/sources/_mine/creak_metal_mine_2.wav" id="2_h40nd"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.1
+random_volume_offset_db = 0.5
+streams_count = 1
+stream_0/stream = ExtResource("2_h40nd")

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bnsqyg700uslx"]
 
-[ext_resource type="Script" uid="uid://oert1ycfce2e" path="res://logic/c_systems/weapon/small_pinga_blade.gd" id="1_4lwst"]
-[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_hp6fq"]
-[ext_resource type="PackedScene" uid="uid://c3objh8m5a340" path="res://-assets-/GLB-items/pinga/pinga_WRAP.tscn" id="3_4lwst"]
-[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailWeapon.tscn" id="3_sectu"]
-[ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/Weapons/DVWeaponHurtBox.tscn" id="4_v83gh"]
-[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/sfx/misc/weapon_sfx/WeaponSfx.tscn" id="8_lf1yp"]
+[ext_resource type="Script" uid="uid://oert1ycfce2e" path="res://logic/systems/weapon/small_pinga_blade.gd" id="1_4lwst"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="2_hp6fq"]
+[ext_resource type="PackedScene" uid="uid://c3objh8m5a340" path="res://assets/GLB-items/pinga/pinga_WRAP.tscn" id="3_4lwst"]
+[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/systems_dev/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailWeapon.tscn" id="3_sectu"]
+[ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/weapons/DVWeaponHurtBox.tscn" id="4_v83gh"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/systems/sfx/misc/weapon_sfx/WeaponSfx.tscn" id="8_lf1yp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hj5gq"]
 radius = 0.13183594
@@ -46,7 +46,7 @@ transform = Transform3D(-0.9858583, 0.15841751, -0.054660767, 0.04585822, -0.058
 [node name="pinga" parent="Visuals" unique_id=1191962029 instance=ExtResource("3_4lwst")]
 transform = Transform3D(0.3378276, 0.107636906, -0.021659067, -0.106799394, 0.3384105, 0.015958529, 0.025469685, -0.008665182, 0.3542015, -0.035487555, 0.008225516, 0.66388947)
 
-[node name="Pinga_002" parent="Visuals/pinga" index="0" unique_id=1867788422]
+[node name="Pinga_002" parent="Visuals/pinga" index="0" unique_id=1553899506]
 transform = Transform3D(1.4716088, 0, -2.3283064e-10, -2.9802322e-08, 1.069838, -1.8626451e-09, 1.1641532e-09, -1.8626451e-09, 0.99393284, -0.02337616, -0.003706716, 0.0052189827)
 
 [node name="WeaponSFXParent" parent="." unique_id=1469093506 instance=ExtResource("8_lf1yp")]

@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/GLB-char/godot_plush/"
+const TARGET_FOLDER = "res://assets/GLB-char/godot_plush/"
 
 ## WARNING: only jpg and png supported. And use lower case
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]

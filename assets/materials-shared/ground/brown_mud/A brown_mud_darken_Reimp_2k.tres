@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dacrgdm6xn345"]
+
+[ext_resource type="Texture2D" uid="uid://cxkjorq23chdm" path="res://assets/materials-shared/ground/brown_mud/jaw_brown_mud_02_diff_2k.jpg" id="1_kc7dv"]
+[ext_resource type="Texture2D" uid="uid://jiicot3bfupr" path="res://assets/materials-shared/ground/brown_mud/jaw_brown_mud_02_norm_gl_2k.png" id="2_81xb7"]
+[ext_resource type="Texture2D" uid="uid://bjfij0sfhc6j6" path="res://assets/materials-shared/ground/brown_mud/jaw_brown_mud_02_rough_2k.png" id="3_m68dy"]
+
+[resource]
+resource_name = "A brown_mud_darken"
+cull_mode = 2
+albedo_texture = ExtResource("1_kc7dv")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_m68dy")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("2_81xb7")

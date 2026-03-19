@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-const TARGET_FOLDER = "res://-assets-/GLB-char/player/pl-skeleton-ranger/"
+const TARGET_FOLDER = "res://assets/GLB-char/player/pl-skeleton-ranger/"
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
 
 ## WARNING WIP

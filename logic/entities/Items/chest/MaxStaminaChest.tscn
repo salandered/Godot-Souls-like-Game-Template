@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bbx2piiomfbdk"]
 
-[ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/Items/chest/_base/_BaseChest.tscn" id="1_n25o4"]
-[ext_resource type="Script" uid="uid://8dsl6f16eeb1" path="res://logic/entities/Items/chest/max_stamina_chest.gd" id="2_dlgnt"]
-[ext_resource type="Material" uid="uid://cdskth7nhqc5n" path="res://-assets-/materials-shared/wood/rough_wood/stamina_chest_mat.tres" id="3_3xjvw"]
-[ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/Items/pick_item/stamina_item/MaxStaminaItem.tscn" id="3_ypuni"]
+[ext_resource type="PackedScene" uid="uid://ffqa0ik0plbe" path="res://logic/entities/items/chest/_base/_BaseChest.tscn" id="1_n25o4"]
+[ext_resource type="Script" uid="uid://8dsl6f16eeb1" path="res://logic/entities/items/chest/max_stamina_chest.gd" id="2_dlgnt"]
+[ext_resource type="Material" uid="uid://cdskth7nhqc5n" path="res://assets/materials-shared/wood/rough_wood/stamina_chest_mat.tres" id="3_3xjvw"]
+[ext_resource type="PackedScene" uid="uid://b1errn8gj2ojs" path="res://logic/entities/items/pick_item/stamina_item/MaxStaminaItem.tscn" id="3_ypuni"]
 
 [node name="MaxStaminaChest" unique_id=2011118432 instance=ExtResource("1_n25o4")]
 script = ExtResource("2_dlgnt")

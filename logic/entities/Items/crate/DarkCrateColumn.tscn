@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1htm7ggp351s"]
 
-[ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/Items/crate/dark_crate/DarkCrate.tscn" id="1_4i2b4"]
+[ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/items/crate/dark_crate/DarkCrate.tscn" id="1_4i2b4"]
 
 [node name="DarkCrateColumn" type="Node3D" unique_id=550677047]
 

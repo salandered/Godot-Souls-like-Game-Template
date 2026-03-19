@@ -6,7 +6,7 @@
 option_titles = Array[String](["<null>"])
 property_type = 0
 
-[node name="OptionButton" parent="." index="1"]
+[node name="OptionButton" parent="." index="1" unique_id=606305197]
 theme_override_font_sizes/font_size = 26
 selected = 0
 item_count = 1

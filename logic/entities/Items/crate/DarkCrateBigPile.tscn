@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1glwn1vbeqan"]
 
-[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/Items/crate/DarkCratePile.tscn" id="2_0635w"]
-[ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/Items/crate/dark_crate/DarkCrate.tscn" id="3_0635w"]
+[ext_resource type="PackedScene" uid="uid://0y1ud2u3avhq" path="res://logic/entities/items/crate/DarkCratePile.tscn" id="2_0635w"]
+[ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/items/crate/dark_crate/DarkCrate.tscn" id="3_0635w"]
 
 [node name="DarkCrateBigPile" type="Node3D" unique_id=1157409574]
 

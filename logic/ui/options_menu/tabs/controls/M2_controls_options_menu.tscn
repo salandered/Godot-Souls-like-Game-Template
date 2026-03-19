@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1m4vvgtlxkd4" path="res://logic/ui/ui_utils/prefab/separator/h_separator.tscn" id="3_cewt3"]
 [ext_resource type="Script" uid="uid://badmldrkr7cy1" path="res://logic/ui/ui_utils/options_nodes/m_option_control.gd" id="4_p1dhw"]
 [ext_resource type="PackedScene" uid="uid://bxp45814v6ydv" path="res://logic/ui/options_menu/tabs/controls/m_input_actions_list.tscn" id="5_kk52y"]
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="6_31mkr"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://assets/ui_assets/project-theme.tres" id="6_31mkr"]
 [ext_resource type="PackedScene" uid="uid://0e65ib3cy6mf" path="res://logic/ui/options_menu/tabs/controls/reset_button.tscn" id="7_xfr20"]
 [ext_resource type="PackedScene" uid="uid://bn4pa8vlswlqf" path="res://logic/ui/options_menu/tabs/controls/key_assignment_dialog.tscn" id="8_maklv"]
 
@@ -74,7 +74,7 @@ size_flags_vertical = 4
 min_value = 0.2
 max_value = 1.8
 step = 0.1
-value = 1.0
+value = 0.8
 tick_count = 17
 ticks_on_borders = true
 
@@ -113,7 +113,7 @@ size_flags_vertical = 4
 min_value = 0.2
 max_value = 1.8
 step = 0.1
-value = 1.0
+value = 0.8
 tick_count = 17
 ticks_on_borders = true
 

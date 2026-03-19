@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1vjcin7c3dbx"]
 
-[ext_resource type="FontFile" uid="uid://kbtmts7xnunh" path="res://-assets-/ui_assets/_font/Noto_Sans/static/NotoSans-SemiBold.ttf" id="1_w03tr"]
+[ext_resource type="FontFile" uid="uid://kbtmts7xnunh" path="res://assets/ui_assets/_font/Noto_Sans/static/NotoSans-SemiBold.ttf" id="1_w03tr"]
 [ext_resource type="Script" uid="uid://cd5vdp2hax38d" path="res://logic/ui/dev_tools_menu/button/check_button/dt_overlay_panel_toggle_button.gd" id="2_sx1bm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8ro"]

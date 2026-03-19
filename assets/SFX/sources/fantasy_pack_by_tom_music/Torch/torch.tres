@@ -1,0 +1,7 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cv6knp2vadwvf"]
+
+[ext_resource type="AudioStream" uid="uid://dpua25xqxwtyn" path="res://assets/SFX/sources/fantasy_pack_by_tom_music/Torch/Torch Loop_reimp.wav" id="1_fpnqi"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_fpnqi")

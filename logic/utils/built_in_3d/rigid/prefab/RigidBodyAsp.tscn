@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b1y2ritroboty"]
+
+[ext_resource type="AudioStream" uid="uid://de0vjaija8veh" path="res://assets/SFX/audio_streams/sword_hit_or_impact/wood_fs/wood_crate_impact_1_fs.tres" id="1_h1ae4"]
+
+[node name="RigidBodyASP3D" type="AudioStreamPlayer3D" unique_id=593326954]
+stream = ExtResource("1_h1ae4")

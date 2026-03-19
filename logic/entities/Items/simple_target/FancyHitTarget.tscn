@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://dhcmqu81pishu"]
 
-[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/Items/simple_target/SimpleTarget.tscn" id="1_5amyc"]
-[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_rjq7m"]
-[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="3_x5pj0"]
-[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="4_f5nbs"]
-[ext_resource type="Texture2D" uid="uid://dhg5fx7g7xn6i" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Base Color.jpg" id="5_302p6"]
-[ext_resource type="Texture2D" uid="uid://cbvppwracogs7" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Normal.jpg" id="6_fhiph"]
-[ext_resource type="Texture2D" uid="uid://fbuekhrl3hcj" path="res://-assets-/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Roughness.png" id="7_8tbi4"]
+[ext_resource type="PackedScene" uid="uid://cjbmkc53iwu64" path="res://logic/entities/items/simple_target/SimpleTarget.tscn" id="1_5amyc"]
+[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://assets/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_rjq7m"]
+[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://assets/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="3_x5pj0"]
+[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://assets/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="4_f5nbs"]
+[ext_resource type="Texture2D" uid="uid://dhg5fx7g7xn6i" path="res://assets/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Base Color.jpg" id="5_302p6"]
+[ext_resource type="Texture2D" uid="uid://cbvppwracogs7" path="res://assets/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Normal.jpg" id="6_fhiph"]
+[ext_resource type="Texture2D" uid="uid://fbuekhrl3hcj" path="res://assets/materials-shared/rocks-stone/stone03_iconic/lady_2_Stone03_Roughness.png" id="7_8tbi4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ol3mo"]
 resource_name = "I_Metal048C_2K-JPG"
@@ -46,15 +46,15 @@ normal_enabled = true
 normal_texture = ExtResource("6_fhiph")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5amyc"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_548uv"]
 radius = 0.8
 
 [node name="FancyHitTarget" unique_id=1092191764 instance=ExtResource("1_5amyc")]
 
-[node name="CameraTarget" parent="." index="0"]
+[node name="CameraTarget" parent="." index="0" unique_id=1923337238]
 visible = false
 
-[node name="RotatingTarget" parent="Visuals" index="0"]
+[node name="RotatingTarget" parent="Visuals" parent_id_path=PackedInt32Array(1736189500) index="0" unique_id=84983083]
 material_override = SubResource("StandardMaterial3D_ol3mo")
 
 [node name="RotatingTarget2" type="MeshInstance3D" parent="Visuals/RotatingTarget" index="3" unique_id=1968344727]
@@ -65,10 +65,10 @@ material_override = SubResource("StandardMaterial3D_ol3mo")
 mesh = SubResource("ArrayMesh_lub8o")
 skeleton = NodePath("../..")
 
-[node name="CSGBakedMeshInstance3D2" parent="Visuals/StolbStatic" index="1"]
+[node name="CSGBakedMeshInstance3D2" parent="Visuals/StolbStatic" parent_id_path=PackedInt32Array(303036035) index="1" unique_id=2121694148]
 visible = false
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Visuals/StolbStatic" index="3" unique_id=175820934]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Visuals/StolbStatic" parent_id_path=PackedInt32Array(303036035) index="3" unique_id=175820934]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89172566, 0)
 material_override = SubResource("StandardMaterial3D_h16cj")
 radius = 0.15
@@ -76,13 +76,13 @@ height = 1.8
 sides = 6
 smooth_faces = false
 
-[node name="HitArea" parent="." index="2"]
+[node name="HitArea" parent="." index="2" unique_id=1218261816]
 area_capsule_radius = 0.8
 
-[node name="CollisionShape3D" parent="HitArea" index="0"]
-shape = SubResource("CapsuleShape3D_5amyc")
+[node name="CollisionShape3D" parent="HitArea" index="0" unique_id=1271949500]
+shape = SubResource("CapsuleShape3D_548uv")
 
-[node name="VisibleOnScreenEnabler3D" parent="HitArea" index="1"]
+[node name="VisibleOnScreenEnabler3D" parent="HitArea" index="1" unique_id=1305605794]
 aabb = AABB(-1.7409418, -1.0006098, -1.5619044, 3.4818835, 2.0012195, 3.1238089)
 
 [node name="TextMarker" type="Marker3D" parent="." index="4" unique_id=1084519979]

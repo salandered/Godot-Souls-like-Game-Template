@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ocst26s6nlk0"]
 
-[ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://-assets-/materials-shared/_shaders/target_dot/target_dot.gdshader" id="1_waik0"]
-[ext_resource type="Script" uid="uid://crodcsgmvhjye" path="res://logic/entities/VFX/target_circle/target_circle.gd" id="2_qat87"]
+[ext_resource type="Shader" uid="uid://dmypny7avti23" path="res://assets/materials-shared/_shaders/target_dot/target_dot.gdshader" id="1_waik0"]
+[ext_resource type="Script" uid="uid://crodcsgmvhjye" path="res://logic/entities/vfx/target_circle/target_circle.gd" id="2_qat87"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qat87"]
 render_priority = 0

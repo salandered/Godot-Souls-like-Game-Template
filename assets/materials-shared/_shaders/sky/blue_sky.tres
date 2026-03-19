@@ -1,0 +1,20 @@
+[gd_resource type="Sky" format=3 uid="uid://df2qeu4tqf5k7"]
+
+[ext_resource type="Shader" uid="uid://b0k4ri16wet0n" path="res://assets/materials-shared/_shaders/sky/sky.gdshader" id="1_eoj6m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0e2s7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vdg3s"]
+noise = SubResource("FastNoiseLite_0e2s7")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gu028"]
+shader = ExtResource("1_eoj6m")
+shader_parameter/clouds_sampler = SubResource("NoiseTexture2D_vdg3s")
+shader_parameter/top_color = Color(0.43890208, 0.09244741, 0.4082339, 1)
+shader_parameter/bottom_color = Color(0.4276935, 0.05781009, 0.43890208, 1)
+shader_parameter/sun_scatter = Color(0.8122784, 0.6849422, 0.59844977, 1)
+shader_parameter/star_stength = 5.0
+
+[resource]
+sky_material = SubResource("ShaderMaterial_gu028")

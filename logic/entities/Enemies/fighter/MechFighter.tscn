@@ -1,56 +1,56 @@
 [gd_scene format=4 uid="uid://b0eq3ihtn4wf"]
 
-[ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/c_systems/character/mech_fighter_char.gd" id="1_rn2eh"]
-[ext_resource type="ArrayMesh" uid="uid://cejnfcdar41gc" path="res://-assets-/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_001.res" id="1_vvmdu"]
-[ext_resource type="Script" uid="uid://u2ifm4auvm52" path="res://logic/c_systems/x_unsorted/char_coll_collider.gd" id="2_2lrnj"]
-[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_hhdky"]
-[ext_resource type="ArrayMesh" uid="uid://1vgny2neg4o" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_003.res" id="2_j48cr"]
-[ext_resource type="ArrayMesh" uid="uid://dyuidj0yy4qnp" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_007.res" id="3_5a6gk"]
-[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="3_bbt0d"]
-[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="3_h5g1m"]
-[ext_resource type="ArrayMesh" uid="uid://cobxar4y5ssx7" path="res://-assets-/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_003.res" id="4_h5g1m"]
-[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://-assets-/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="4_mi1dw"]
-[ext_resource type="ArrayMesh" uid="uid://bcjshjgvs2rmb" path="res://-assets-/GLB-items/fighter/mesh/fighter_Sphere_001.res" id="4_ulmwa"]
-[ext_resource type="ArrayMesh" uid="uid://viak0saml7xy" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_004.res" id="5_ulmwa"]
-[ext_resource type="ArrayMesh" uid="uid://ifwxg867dj6w" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_006.res" id="6_g7g8d"]
-[ext_resource type="Material" uid="uid://x2fm5k6b66w1" path="res://-assets-/materials-shared/_baked/dock_trim/DockTrim_wooddock_Reimp.tres" id="7_5a6gk"]
-[ext_resource type="AudioStream" uid="uid://c46lxtwjdwf8s" path="res://-assets-/SFX/sources/freesound_cc0/lever.tres" id="8_dhaem"]
-[ext_resource type="ArrayMesh" uid="uid://dtjnsbodcnps7" path="res://-assets-/GLB-items/fighter/mesh/fighter_Sphere.res" id="8_h5g1m"]
-[ext_resource type="ArrayMesh" uid="uid://dlk2i3co08e6y" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_008.res" id="8_py1g2"]
-[ext_resource type="AudioStream" uid="uid://dvoifaco1xcyv" path="res://-assets-/SFX/sources/cat/hit_3_4.tres" id="9_dhaem"]
-[ext_resource type="Material" uid="uid://corbh7usys0xj" path="res://-assets-/materials-shared/metal/I_metal_025/I_Metal025_1K-JPG_Reimp.tres" id="9_h5g1m"]
-[ext_resource type="ArrayMesh" uid="uid://dt6bn4oe5n2oq" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_010.res" id="9_rn2eh"]
-[ext_resource type="Script" uid="uid://oc24hyyjbm2u" path="res://logic/c_systems/weapon/fighter_weapon/h_arm_weapon.gd" id="11_p3xh5"]
-[ext_resource type="ArrayMesh" uid="uid://b7e3u0niafaq0" path="res://-assets-/GLB-items/fighter/mesh/fighter_Cylinder_002.res" id="12_e3krr"]
-[ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://-assets-/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="14_ulmwa"]
-[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/c_systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="16_tu6ua"]
-[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/c_systems/sfx/misc/weapon_sfx/WeaponSfx.tscn" id="17_lcx2h"]
-[ext_resource type="AudioStream" uid="uid://xnugux0jw08e" path="res://-assets-/SFX/sources/400/stone_push_medium.wav" id="17_tu6ua"]
-[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="17_v8c2r"]
-[ext_resource type="Script" uid="uid://ddd1lik7yh6ka" path="res://logic/c_systems/weapon/fighter_weapon/v_arm_weapon.gd" id="20_jqa4j"]
-[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailWeapon.tscn" id="22_gk5iv"]
-[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/c_systems/camera/fancy_camera/camera_target/CameraTarget.tscn" id="22_v8c2r"]
-[ext_resource type="Script" uid="uid://c2fafl8mfpxh7" path="res://logic/c_systems/anim_manager/simple_animator_manager.gd" id="23_iefnp"]
-[ext_resource type="PackedScene" uid="uid://88lj8tl6runn" path="res://logic/c_containers/anim_container/AnimContainer.tscn" id="24_lijjc"]
-[ext_resource type="Script" uid="uid://dh6rl5nvqstpj" path="res://logic/c_containers/anim_param_container/data/mech_fighter_anim_parameters.gd" id="24_ydmfp"]
-[ext_resource type="Script" uid="uid://c1b8giocxxp1w" path="res://logic/c_containers/character_state_container/mech_fighter_states_container.gd" id="25_dwfug"]
-[ext_resource type="Script" uid="uid://dk2f14cwqg2eg" path="res://logic/c_containers/anim_param_container/mf_anim_params_container.gd" id="26_iefnp"]
-[ext_resource type="Script" uid="uid://bre6dwffv56ex" path="res://logic/c_systems/combat/mech_fighter_combat.gd" id="29_1cd74"]
-[ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/Weapons/DVWeaponHurtBox.tscn" id="29_6xoih"]
-[ext_resource type="Script" uid="uid://cfpmsm0e5gcop" path="res://logic/c_systems/character_state/mech_fighter_state/attack_stab.gd" id="30_iefnp"]
-[ext_resource type="Script" uid="uid://bl2ppbmrs0uqd" path="res://logic/c_containers/anim_entity_config/anim_entity_config.gd" id="30_ydmfp"]
-[ext_resource type="Script" uid="uid://c63s00fg7rk65" path="res://logic/c_systems/character_state/mech_fighter_state/idle.gd" id="31_8hc2f"]
-[ext_resource type="Script" uid="uid://b7fejeqqc57jp" path="res://logic/c_systems/character_state/mech_fighter_state/attack_lr.gd" id="32_4wtmj"]
-[ext_resource type="Script" uid="uid://bh8lt0qs6c3hj" path="res://logic/c_systems/character_state/mech_fighter_state/attack_rl.gd" id="33_tss8o"]
-[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/c_systems/hurt_hit_box/hit_box/HitBox.tscn" id="35_8hc2f"]
-[ext_resource type="PackedScene" uid="uid://c12h0eq5aqu80" path="res://logic/c_systems/sk_modifiers/look_at_modifier/prefab/look_at_character_marker.tscn" id="36_4wtmj"]
-[ext_resource type="Script" uid="uid://g40uy8ok4gru" path="res://logic/c_systems/character_state/mech_fighter_state/attack_up.gd" id="38_8tfb8"]
-[ext_resource type="Script" uid="uid://d33bwyyj27ksj" path="res://logic/c_systems/character_state/mech_fighter_state/attack_down.gd" id="39_gk5iv"]
-[ext_resource type="Script" uid="uid://dirvb0rrpsrl6" path="res://logic/c_systems/character_state/mech_fighter_state/attack_lr_power.gd" id="41_24aju"]
-[ext_resource type="Script" uid="uid://ddqblhwmfi6tj" path="res://logic/c_systems/character_state/mech_fighter_state/attack_rl_power.gd" id="42_6xoih"]
-[ext_resource type="Script" uid="uid://b7lb3yvq3q4bg" path="res://logic/c_systems/character_state/mech_fighter_state/attack_stab_power.gd" id="43_tx1qf"]
-[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/x_dev_systems/dev_visuals_3d/coll_shapes/hithurt_boxes/DVHitBox.tscn" id="49_6xoih"]
-[ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/x_dev_systems/dev_visuals_3d/dv_area_contact.gd" id="50_tx1qf"]
+[ext_resource type="Script" uid="uid://bhcuyios7nxxe" path="res://logic/systems/character/mech_fighter_char.gd" id="1_rn2eh"]
+[ext_resource type="ArrayMesh" uid="uid://cejnfcdar41gc" path="res://assets/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_001.res" id="1_vvmdu"]
+[ext_resource type="Script" uid="uid://u2ifm4auvm52" path="res://logic/systems/x_unsorted/char_coll_collider.gd" id="2_2lrnj"]
+[ext_resource type="Texture2D" uid="uid://daruvebg2l7qu" path="res://assets/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Color.jpg" id="2_hhdky"]
+[ext_resource type="ArrayMesh" uid="uid://1vgny2neg4o" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_003.res" id="2_j48cr"]
+[ext_resource type="ArrayMesh" uid="uid://dyuidj0yy4qnp" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_007.res" id="3_5a6gk"]
+[ext_resource type="Texture2D" uid="uid://dh211wxh6h22f" path="res://assets/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_Metalness-Metal048C_2K-JPG_Roughness.png" id="3_bbt0d"]
+[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://assets/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="3_h5g1m"]
+[ext_resource type="ArrayMesh" uid="uid://cobxar4y5ssx7" path="res://assets/GLB-items/fighter/mesh/fighter_Dock_Bollard_2_003.res" id="4_h5g1m"]
+[ext_resource type="Texture2D" uid="uid://ca51a4ol7qlri" path="res://assets/materials-shared/metal/I_metal_048/jaw_Metal048C_2K-JPG_NormalGL.jpg" id="4_mi1dw"]
+[ext_resource type="ArrayMesh" uid="uid://bcjshjgvs2rmb" path="res://assets/GLB-items/fighter/mesh/fighter_Sphere_001.res" id="4_ulmwa"]
+[ext_resource type="ArrayMesh" uid="uid://viak0saml7xy" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_004.res" id="5_ulmwa"]
+[ext_resource type="ArrayMesh" uid="uid://ifwxg867dj6w" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_006.res" id="6_g7g8d"]
+[ext_resource type="Material" uid="uid://x2fm5k6b66w1" path="res://assets/materials-shared/_baked/dock_trim/DockTrim_wooddock_Reimp.tres" id="7_5a6gk"]
+[ext_resource type="AudioStream" uid="uid://c46lxtwjdwf8s" path="res://assets/SFX/sources/freesound_cc0/lever.tres" id="8_dhaem"]
+[ext_resource type="ArrayMesh" uid="uid://dtjnsbodcnps7" path="res://assets/GLB-items/fighter/mesh/fighter_Sphere.res" id="8_h5g1m"]
+[ext_resource type="ArrayMesh" uid="uid://dlk2i3co08e6y" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_008.res" id="8_py1g2"]
+[ext_resource type="AudioStream" uid="uid://dvoifaco1xcyv" path="res://assets/SFX/sources/cat/hit_3_4.tres" id="9_dhaem"]
+[ext_resource type="Material" uid="uid://corbh7usys0xj" path="res://assets/materials-shared/metal/I_metal_025/I_Metal025_1K-JPG_Reimp.tres" id="9_h5g1m"]
+[ext_resource type="ArrayMesh" uid="uid://dt6bn4oe5n2oq" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_010.res" id="9_rn2eh"]
+[ext_resource type="Script" uid="uid://oc24hyyjbm2u" path="res://logic/systems/weapon/fighter_weapon/h_arm_weapon.gd" id="11_p3xh5"]
+[ext_resource type="ArrayMesh" uid="uid://b7e3u0niafaq0" path="res://assets/GLB-items/fighter/mesh/fighter_Cylinder_002.res" id="12_e3krr"]
+[ext_resource type="AudioStream" uid="uid://dfn8yjds0ntkf" path="res://assets/SFX/audio_streams/whoosh/dodge_whoosh.tres" id="14_ulmwa"]
+[ext_resource type="PackedScene" uid="uid://cylgs36pjbsga" path="res://logic/systems/hurt_hit_box/hurt_box/WeaponHurtBox.tscn" id="16_tu6ua"]
+[ext_resource type="PackedScene" uid="uid://d02imm333vy7t" path="res://logic/systems/sfx/misc/weapon_sfx/WeaponSfx.tscn" id="17_lcx2h"]
+[ext_resource type="AudioStream" uid="uid://xnugux0jw08e" path="res://assets/SFX/sources/400/stone_push_medium.wav" id="17_tu6ua"]
+[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/items/interact_area/InteractArea.tscn" id="17_v8c2r"]
+[ext_resource type="Script" uid="uid://ddd1lik7yh6ka" path="res://logic/systems/weapon/fighter_weapon/v_arm_weapon.gd" id="20_jqa4j"]
+[ext_resource type="PackedScene" uid="uid://cnynk5lys1dy8" path="res://logic/systems_dev/dev_visuals_3d/dv_trail_parent/DevVisualizeTrailWeapon.tscn" id="22_gk5iv"]
+[ext_resource type="PackedScene" uid="uid://bc030ubgkaf18" path="res://logic/systems/camera/fancy_camera/camera_target/CameraTarget.tscn" id="22_v8c2r"]
+[ext_resource type="Script" uid="uid://c2fafl8mfpxh7" path="res://logic/systems/anim_manager/simple_animator_manager.gd" id="23_iefnp"]
+[ext_resource type="PackedScene" uid="uid://88lj8tl6runn" path="res://logic/containers/anim_container/AnimContainer.tscn" id="24_lijjc"]
+[ext_resource type="Script" uid="uid://dh6rl5nvqstpj" path="res://logic/containers/anim_param_container/data/mech_fighter_anim_parameters.gd" id="24_ydmfp"]
+[ext_resource type="Script" uid="uid://c1b8giocxxp1w" path="res://logic/containers/character_state_container/mech_fighter_states_container.gd" id="25_dwfug"]
+[ext_resource type="Script" uid="uid://dk2f14cwqg2eg" path="res://logic/containers/anim_param_container/mf_anim_params_container.gd" id="26_iefnp"]
+[ext_resource type="Script" uid="uid://bre6dwffv56ex" path="res://logic/systems/combat/mech_fighter_combat.gd" id="29_1cd74"]
+[ext_resource type="PackedScene" uid="uid://82ivr255dcjx" path="res://logic/entities/weapons/DVWeaponHurtBox.tscn" id="29_6xoih"]
+[ext_resource type="Script" uid="uid://cfpmsm0e5gcop" path="res://logic/systems/character_state/mech_fighter_state/attack_stab.gd" id="30_iefnp"]
+[ext_resource type="Script" uid="uid://bl2ppbmrs0uqd" path="res://logic/containers/anim_entity_config/anim_entity_config.gd" id="30_ydmfp"]
+[ext_resource type="Script" uid="uid://c63s00fg7rk65" path="res://logic/systems/character_state/mech_fighter_state/idle.gd" id="31_8hc2f"]
+[ext_resource type="Script" uid="uid://b7fejeqqc57jp" path="res://logic/systems/character_state/mech_fighter_state/attack_lr.gd" id="32_4wtmj"]
+[ext_resource type="Script" uid="uid://bh8lt0qs6c3hj" path="res://logic/systems/character_state/mech_fighter_state/attack_rl.gd" id="33_tss8o"]
+[ext_resource type="PackedScene" uid="uid://chjl1d5amktti" path="res://logic/systems/hurt_hit_box/hit_box/HitBox.tscn" id="35_8hc2f"]
+[ext_resource type="PackedScene" uid="uid://c12h0eq5aqu80" path="res://logic/systems/sk_modifiers/look_at_modifier/prefab/look_at_character_marker.tscn" id="36_4wtmj"]
+[ext_resource type="Script" uid="uid://g40uy8ok4gru" path="res://logic/systems/character_state/mech_fighter_state/attack_up.gd" id="38_8tfb8"]
+[ext_resource type="Script" uid="uid://d33bwyyj27ksj" path="res://logic/systems/character_state/mech_fighter_state/attack_down.gd" id="39_gk5iv"]
+[ext_resource type="Script" uid="uid://dirvb0rrpsrl6" path="res://logic/systems/character_state/mech_fighter_state/attack_lr_power.gd" id="41_24aju"]
+[ext_resource type="Script" uid="uid://ddqblhwmfi6tj" path="res://logic/systems/character_state/mech_fighter_state/attack_rl_power.gd" id="42_6xoih"]
+[ext_resource type="Script" uid="uid://b7lb3yvq3q4bg" path="res://logic/systems/character_state/mech_fighter_state/attack_stab_power.gd" id="43_tx1qf"]
+[ext_resource type="PackedScene" uid="uid://bc4l4h2cvh2ws" path="res://logic/systems_dev/dev_visuals_3d/coll_shapes/hithurt_boxes/DVHitBox.tscn" id="49_6xoih"]
+[ext_resource type="Script" uid="uid://byhc8kay2nrak" path="res://logic/systems_dev/dev_visuals_3d/dv_area_contact.gd" id="50_tx1qf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ulmwa"]
 radius = 0.4243164
@@ -1047,7 +1047,7 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_rn2eh")
 container = NodePath("StatesContainer")
-dev_tag = "mech"
+dev_tag = &"mech"
 
 [node name="CollCollider" type="CollisionShape3D" parent="." unique_id=1236334884]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8638519, 0)
@@ -1205,7 +1205,6 @@ debug_color = Color(0.70196074, 0, 0.19234172, 0.41960785)
 
 [node name="DevVisualiseTrailWeapon" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" unique_id=1539694945 instance=ExtResource("22_gk5iv")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901152e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 0, 0, 0)
-visible = false
 path_color_a = Color(0.1843273, 0.62740636, 1, 1)
 path_color_b = Color(0.5959711, 0, 1, 1)
 trail_radius = 0.02
@@ -1213,7 +1212,6 @@ _char_type = 3
 
 [node name="DVWeaponHurtBox" parent="HArmPivot/HArmWeapon/HorArm/HArmWeaponHurtBox" unique_id=1778713997 node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
-visible = false
 weapon = NodePath("../../..")
 _char_type = 3
 
@@ -1264,7 +1262,6 @@ debug_color = Color(0.70196074, 0, 0.19234172, 0.41960785)
 
 [node name="DevVisualiseTrailWeapon2" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" unique_id=1831475324 instance=ExtResource("22_gk5iv")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901152e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 0, 0, 0)
-visible = false
 path_color_a = Color(0.1843273, 0.62740636, 1, 1)
 path_color_b = Color(0.5959711, 0, 1, 1)
 trail_radius = 0.02
@@ -1272,7 +1269,6 @@ _char_type = 3
 
 [node name="DVWeaponHurtBox" parent="VArmPivot/VArmWeapon/Base/VArm/VSpringArm/VArmWeaponHurtBox" unique_id=1627411360 node_paths=PackedStringArray("weapon") instance=ExtResource("29_6xoih")]
 transform = Transform3D(1.0000007, -7.4505756e-08, 1.4901153e-08, 7.4505806e-08, 1, 5.960466e-08, -1.4901161e-08, -5.9604638e-08, 1.0000004, 7.585536e-10, 1.9208789, 0.10181132)
-visible = false
 weapon = NodePath("../../../../..")
 _char_type = 3
 
@@ -1379,7 +1375,6 @@ update_scale = false
 [node name="__dev" type="Node3D" parent="." unique_id=1412039748]
 
 [node name="VisualiseHitBoxFrame2" parent="__dev" unique_id=596870559 node_paths=PackedStringArray("combat") instance=ExtResource("49_6xoih")]
-visible = false
 color_invincible = Color(0.73760307, 0.08260098, 0.42440233, 0.2509804)
 combat = NodePath("../../Combat")
 _char_type = 3

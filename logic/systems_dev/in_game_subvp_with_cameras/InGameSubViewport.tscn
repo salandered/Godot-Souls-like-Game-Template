@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://b6qeel3fnf216"]
+
+[ext_resource type="Script" uid="uid://com6yrv7n27kf" path="res://logic/systems_dev/in_game_subvp_with_cameras/in_game_sub_viewport.gd" id="1_oyy5i"]
+[ext_resource type="PackedScene" uid="uid://cjbvdf08tmrpa" path="res://logic/systems_dev/dev_dynamic_camera/DevDynamicCam.tscn" id="2_cbl1c"]
+[ext_resource type="StyleBox" uid="uid://cto31d0f5ef80" path="res://assets/ui_assets/themes/panel/blue_panel.tres" id="3_a0v5g"]
+
+[node name="InGameSubViewport" type="Node" unique_id=1523509107]
+script = ExtResource("1_oyy5i")
+
+[node name="SubViewContainer" type="MarginContainer" parent="." unique_id=1332668632]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="__vbox" type="VBoxContainer" parent="SubViewContainer" unique_id=1929317061]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="SmallCamsContainer" type="HBoxContainer" parent="SubViewContainer/__vbox" unique_id=214391059]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="__sv_container2" type="SubViewportContainer" parent="SubViewContainer/__vbox/SmallCamsContainer" unique_id=653672771]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+stretch = true
+
+[node name="SmallTopDownSVP" type="SubViewport" parent="SubViewContainer/__vbox/SmallCamsContainer/__sv_container2" unique_id=1256667588]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(400, 200)
+render_target_update_mode = 4
+
+[node name="SmallTopDown" parent="SubViewContainer/__vbox/SmallCamsContainer/__sv_container2/SmallTopDownSVP" unique_id=1344136996 instance=ExtResource("2_cbl1c")]
+unique_name_in_owner = true
+projection = 1
+distance_to_target = 4.0
+smooth_speed = 15.0
+
+[node name="__sv_container3" type="SubViewportContainer" parent="SubViewContainer/__vbox/SmallCamsContainer" unique_id=1963853946]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+stretch = true
+
+[node name="SmallLeftSVP" type="SubViewport" parent="SubViewContainer/__vbox/SmallCamsContainer/__sv_container3" unique_id=1794047915]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(400, 200)
+render_target_update_mode = 4
+
+[node name="SmallLeft" parent="SubViewContainer/__vbox/SmallCamsContainer/__sv_container3/SmallLeftSVP" unique_id=479391677 instance=ExtResource("2_cbl1c")]
+unique_name_in_owner = true
+projection = 1
+distance_to_target = 4.0
+position_mode = 4
+smooth_speed = 15.0
+
+[node name="__sv_container" type="SubViewportContainer" parent="SubViewContainer/__vbox" unique_id=198753636]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+stretch = true
+
+[node name="RightSubViewport" type="SubViewport" parent="SubViewContainer/__vbox/__sv_container" unique_id=1800018879]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(800, 880)
+render_target_update_mode = 4
+
+[node name="DebugCoolCam" parent="SubViewContainer/__vbox/__sv_container/RightSubViewport" unique_id=1180498528 instance=ExtResource("2_cbl1c")]
+unique_name_in_owner = true
+
+[node name="InfoContainer" type="MarginContainer" parent="SubViewContainer" unique_id=947463564]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewContainer/InfoContainer" unique_id=1709380553]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewContainer/InfoContainer/VBoxContainer" unique_id=1423549656]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="__blue_panel" type="PanelContainer" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer" unique_id=1285585051]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_a0v5g")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer/__blue_panel" unique_id=1104034214]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="CamStateLabel" type="RichTextLabel" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer/__blue_panel/MarginContainer" unique_id=959964940]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/paragraph_separation = -2
+bbcode_enabled = true
+text = "[b]Arrows[/b] - Dist/Move
+[b]Shift + Arrows[/b] - Pan Offset
+[b]Ctrl + Arrows[/b] - FOV/Size
+[b]Tab[/b] - Cycle Mode
+[b]C[/b] - Toggle Projection"
+fit_content = true
+scroll_active = false
+
+[node name="__blue_panel2" type="PanelContainer" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer" unique_id=1913327997]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_a0v5g")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer/__blue_panel2" unique_id=142250939]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="ControlsInfoLabel" type="RichTextLabel" parent="SubViewContainer/InfoContainer/VBoxContainer/HBoxContainer/__blue_panel2/MarginContainer" unique_id=809158876]
+unique_name_in_owner = true
+modulate = Color(0.83264434, 0.83264434, 0.83264434, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/paragraph_separation = -2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+text = "[b]Arrows Up/Down[/b] - distance to target
+[b]Shift + Arrows[/b] - offset
+[b]Ctrl + Arrows Up/Down[/b] - FOV
+[b]Tab[/b] - cycle position
+[b]C[/b] - toggle Projection
+[b]R[/b] - toggle Rotation Follow
+[b]V[/b] - toggle Smoothing
+[b]Arrows Left/Right[/b] - smooth speed
+[b]G[/b] - change target to enemy"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1

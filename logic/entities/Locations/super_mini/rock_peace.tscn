@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bumn4dqkyje6d"]
 
-[ext_resource type="PackedScene" uid="uid://cexdblmpe4p00" path="res://-assets-/GLB-items/prefabs/SmallRockRigid.tscn" id="1_2k6dd"]
+[ext_resource type="PackedScene" uid="uid://cexdblmpe4p00" path="res://assets/GLB-items/prefabs/SmallRockRigid.tscn" id="1_2k6dd"]
 
 [node name="RockPeace" type="Node3D" unique_id=1842363865]
 

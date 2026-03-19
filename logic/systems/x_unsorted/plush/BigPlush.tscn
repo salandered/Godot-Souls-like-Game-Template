@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b3jabsewrnc2e"]
+
+[ext_resource type="PackedScene" uid="uid://0isjovhfn8l7" path="res://logic/systems/x_unsorted/plush/BiggestPlush.tscn" id="1_472rk"]
+
+[node name="BigPlush" unique_id=757452124 instance=ExtResource("1_472rk")]
+
+[node name="lp" parent="." index="0" unique_id=1681926834]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="FlickerOmni" parent="." index="1" unique_id=1120862619]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 0, 9.544245, 0)
+radius = 15.0
+energy = 12.0
+volumetric_fog_energy = 8.0
+__csg_editor_view = false

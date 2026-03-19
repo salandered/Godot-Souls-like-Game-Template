@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dgkn42tpvmre7"]
+
+[ext_resource type="PackedScene" uid="uid://cq5cohe44whos" path="res://assets/GLB-char/skeleton-16-07/skeleton-16-07.glb" id="1_f6gpe"]
+[ext_resource type="Script" uid="uid://bn41wjbnkk4o8" path="res://assets/GLB-char/skeleton-16-07/skeleton_16_07_wrapper.gd" id="2_df77m"]
+[ext_resource type="Material" uid="uid://ijjpo7bw8mgt" path="res://assets/materials-shared/concrete/I_concrete005/I_Concrete005_darker_05k.tres" id="3_acojj"]
+
+[node name="skeleton-16-07" unique_id=2145459578 instance=ExtResource("1_f6gpe")]
+script = ExtResource("2_df77m")
+
+[node name="SkeletonMesh_004" parent="Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(1440444569) index="0" unique_id=1542699535]
+surface_material_override/0 = ExtResource("3_acojj")

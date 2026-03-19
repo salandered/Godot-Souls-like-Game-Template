@@ -3,7 +3,7 @@ class_name BaseImageGallery
 extends ControlSystem
 
 
-const BASE_PATH := "res://-assets-/ui_assets/gallery/"
+const BASE_PATH := "res://assets/ui_assets/gallery/"
 const MISC_PATH := BASE_PATH + "misc/"
 
 

@@ -1,13 +1,13 @@
 [{
 "name": "1",
 "scenes": [{
-&"custom_texture": "res://-assets-/x_icons/copper/icon_color_correction.png",
-&"scene": "res://-assets-/GLB-level/minimal-arena/column/ShatteredColumn.tscn"
+&"custom_texture": "res://assets/x_icons/copper/icon_color_correction.png",
+&"scene": "res://assets/GLB-level/minimal-arena/column/ShatteredColumn.tscn"
 }, {
-&"custom_texture": "res://-assets-/x_icons/x_unsorted/fire_ball_icon.png",
+&"custom_texture": "res://assets/x_icons/x_unsorted/fire_ball_icon.png",
 &"scene": "res://logic/Locations/lights/FlickerFire.tscn"
 }, {
-&"custom_texture": "res://-assets-/x_icons/yellow/icon_bell.png",
+&"custom_texture": "res://assets/x_icons/yellow/icon_bell.png",
 &"scene": "res://logic/Locations/lights/FlickerOmni.tscn"
 }]
 }]

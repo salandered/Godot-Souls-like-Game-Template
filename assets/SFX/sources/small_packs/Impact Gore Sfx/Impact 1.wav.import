@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://db1ykx3ep4rp2"
+path="res://.godot/imported/Impact 1.wav-f932f7e56fb447c38e950b49933c36f5.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/small_packs/Impact Gore Sfx/Impact 1.wav"
+dest_files=["res://.godot/imported/Impact 1.wav-f932f7e56fb447c38e950b49933c36f5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

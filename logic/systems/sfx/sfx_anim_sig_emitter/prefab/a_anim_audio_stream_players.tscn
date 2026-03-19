@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b487iwhx7b6ui"]
+
+[ext_resource type="Script" uid="uid://b2i35cgti1d4r" path="res://logic/systems/sfx/sfx_anim_sig_emitter/prefab/a_anim_audio_stream_players.gd" id="1_hkr0e"]
+
+[node name="AAnimAudioStreamPlayers" type="Node3D" unique_id=702380387]
+script = ExtResource("1_hkr0e")
+
+[node name="AAnimFS" type="AudioStreamPlayer3D" parent="." unique_id=520734037]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimFSLight" type="AudioStreamPlayer3D" parent="." unique_id=292237963]
+unique_name_in_owner = true
+volume_db = -15.0
+max_polyphony = 2
+
+[node name="AAnimFSScrape" type="AudioStreamPlayer3D" parent="." unique_id=1167556885]
+unique_name_in_owner = true
+volume_db = -12.0
+max_polyphony = 2
+
+[node name="AAnimWH" type="AudioStreamPlayer3D" parent="." unique_id=1297839799]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimWHWeapon" type="AudioStreamPlayer3D" parent="." unique_id=1214934613]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimLand" type="AudioStreamPlayer3D" parent="." unique_id=1589749899]
+unique_name_in_owner = true
+max_polyphony = 2
+
+[node name="AAnimLaunch" type="AudioStreamPlayer3D" parent="." unique_id=117075267]
+unique_name_in_owner = true
+max_polyphony = 2

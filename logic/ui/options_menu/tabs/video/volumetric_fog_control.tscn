@@ -5,7 +5,7 @@
 [node name="OptionControl" unique_id=1521428868 instance=ExtResource("1_w0n1a")]
 custom_minimum_size = Vector2(600, 40)
 
-[node name="OptionLabel" parent="." index="0"]
+[node name="OptionLabel" parent="." index="0" unique_id=1402980967]
 theme_override_font_sizes/font_size = 28
 
 [node name="PanelContainer" type="PanelContainer" parent="." index="1" unique_id=1814296992]
@@ -25,5 +25,5 @@ fit_content = true
 scroll_active = false
 vertical_alignment = 1
 
-[node name="CheckButton" parent="." index="2"]
+[node name="CheckButton" parent="." index="2" unique_id=249084418]
 theme_type_variation = &""

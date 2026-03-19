@@ -1,0 +1,156 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dhq7cq02w2beg"
+path="res://.godot/imported/lincoln.glb-dc4da97162948836a465e36f36678a5e.scn"
+
+[deps]
+
+source_file="res://assets/GLB-level/demo-level_/linkoln/lincoln.glb"
+dest_files=["res://.godot/imported/lincoln.glb-dc4da97162948836a465e36f36678a5e.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=2
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"Engel_C_Baked": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/engel/Engel_C_Baked_Reimp.tres",
+"use_external/path": "uid://cl8xvgflj5omt"
+},
+"I_Ground088_2K-JPG": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/ground/I_ground088/I_Ground088_2K-JPG_Reimp_2k.tres",
+"use_external/path": "uid://b501ccskj67vi"
+},
+"MI_Trim_Props_sweet": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://-assets-/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
+},
+"MinesTrim": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres",
+"use_external/path": "uid://bb06udlb6phmw"
+},
+"baked_barrel_temp": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/_baked/baked_barrel_temp/baked_barrel_temp_Reimp.tres",
+"use_external/path": "uid://dnu2wsj02juhf"
+},
+"damaged_concrete_columns": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres",
+"use_external/path": "uid://d167u66aqmq84"
+},
+"damaged_concrete_columns_lighter_cleaner": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/concrete/damaged_concrete/damaged_concrete_columns_lighter_cleaner_Reimp.tres",
+"use_external/path": "uid://cij8qltchxrj"
+}
+},
+"meshes": {
+"lincoln_Object_0_057": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"lincoln_Object_0_064": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+},
+"lincoln_Object_0_079": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+}
+},
+"nodes": {
+"PATH:lincoln/Flower_002": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/beams etc/Panel_Wood_D": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/Chair_1_001": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/Fence1_001": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/Fence1_002": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/Kettle_002": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/Mug_002": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/candlestick 4_002": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/roof/candlestick 4_002/Candle_1_001": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/torches/Torch_Metal_002": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/torches/Torch_Metal_004": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/torches/Torch_Metal_005": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/torches/Torch_Metal_006": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/torches/Torch_Metal_007": {
+"mesh_instance/layers": 256
+},
+"PATH:lincoln/torches/Torch_Metal_008": {
+"mesh_instance/layers": 256
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=0

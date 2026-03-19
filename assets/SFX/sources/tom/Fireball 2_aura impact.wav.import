@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bk1mj18rmugtn"
+path="res://.godot/imported/Fireball 2_aura impact.wav-7b7763cc86ef91351df0f590f0a2ad0e.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/tom/Fireball 2_aura impact.wav"
+dest_files=["res://.godot/imported/Fireball 2_aura impact.wav-7b7763cc86ef91351df0f590f0a2ad0e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

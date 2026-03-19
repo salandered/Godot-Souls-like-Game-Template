@@ -1,0 +1,84 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://gdmnwyhgplmg"
+path="res://.godot/imported/lever.glb-20118912d89961ba22673e708d7ddee1.scn"
+
+[deps]
+
+source_file="res://assets/GLB-items/lever/lever.glb"
+dest_files=["res://.godot/imported/lever.glb-20118912d89961ba22673e708d7ddee1.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=false
+meshes/create_shadow_meshes=true
+meshes/light_baking=0
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path="uid://ctc35noi1onhx"
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"I_Marble017_2K-JPG": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials-shared/marble/marble017/I_Marble017_2K-JPG_Reimp.tres",
+"use_external/path": "uid://cdvhuelphoxyh"
+}
+},
+"meshes": {
+"lever_Cube_121": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/GLB-items/lever/mesh/lever_Cube_121.res",
+"save_to_file/path": "uid://c0e1vegkm7gp"
+},
+"lever_Cube_128": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/GLB-items/lever/mesh/lever_Cube_128.res",
+"save_to_file/path": "uid://u4ogo27uaq7s"
+},
+"lever_object1_331": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/GLB-items/lever/mesh/lever_object1_331.res",
+"save_to_file/path": "uid://c64i6tyuniq2q"
+}
+},
+"nodes": {
+"PATH:lever/lever_handle": {
+"mesh_instance/layers": 128
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

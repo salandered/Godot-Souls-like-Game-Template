@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/red/icon_particle.png")
+@icon("res://assets/x_icons/red/icon_particle.png")
 @abstract
 class_name BaseParticlesEffectGPU
 extends Node3DLogger

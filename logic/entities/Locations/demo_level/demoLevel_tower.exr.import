@@ -3,7 +3,7 @@
 importer="2d_array_texture"
 type="CompressedTexture2DArray"
 uid="uid://cdf8ew53elk4h"
-path.bptc="res://.godot/imported/demoLevel_tower.exr-c01f83a3bf84007076f44c04ec0b2046.bptc.ctexarray"
+path.bptc="res://.godot/imported/demoLevel_tower.exr-6e943e1d96936471a3f3b1ca2c29f6cb.bptc.ctexarray"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://logic/entities/Locations/demo_level/demoLevel_tower.exr"
-dest_files=["res://.godot/imported/demoLevel_tower.exr-c01f83a3bf84007076f44c04ec0b2046.bptc.ctexarray"]
+source_file="res://logic/entities/locations/demo_level/demoLevel_tower.exr"
+dest_files=["res://.godot/imported/demoLevel_tower.exr-6e943e1d96936471a3f3b1ca2c29f6cb.bptc.ctexarray"]
 
 [params]
 

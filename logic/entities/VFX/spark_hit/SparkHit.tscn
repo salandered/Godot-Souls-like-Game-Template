@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://fohkachkfkuq"]
 
-[ext_resource type="Script" uid="uid://ckpf4grcfas0q" path="res://logic/entities/VFX/spark_hit/spark_hit.gd" id="1_b08nd"]
-[ext_resource type="Texture2D" uid="uid://w5lhqhhpwtdk" path="res://logic/entities/VFX/spark_hit/muzzle_04.png" id="2_clqww"]
+[ext_resource type="Script" uid="uid://ckpf4grcfas0q" path="res://logic/entities/vfx/spark_hit/spark_hit.gd" id="1_b08nd"]
+[ext_resource type="Texture2D" uid="uid://w5lhqhhpwtdk" path="res://logic/entities/vfx/spark_hit/muzzle_04.png" id="2_clqww"]
 
 [sub_resource type="Gradient" id="Gradient_b08nd"]
 offsets = PackedFloat32Array(0, 0.5446623, 1)

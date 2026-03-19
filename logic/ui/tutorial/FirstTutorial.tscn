@@ -204,7 +204,7 @@ bbcode_enabled = true
 text = "In Pause Menu you can find [img=20x20]uid://faceud5if8lb[/img] UI Dev Tools submenu. 
 It controls all of the in-game UI panels, including this tutorial.
 
-Also a lot of the game mechanics can be visualised using it. To name a few:
+Also a lot of the game mechanics can be visualized using it. To name a few:
 [ul]
 Current state of the player or any enemy/NPC in game. 
 Information about attack type, damage or speed.

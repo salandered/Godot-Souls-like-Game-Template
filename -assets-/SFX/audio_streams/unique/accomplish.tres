@@ -1,7 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b51cbgqh3orc7"]
-
-[ext_resource type="AudioStream" uid="uid://cl1jjdek2ps10" path="res://-assets-/SFX/sources/Medieval Adventure Sound Effect/SFX_Drop_Object_02_accomplish.wav" id="1_ynlrj"]
-
-[resource]
-streams_count = 1
-stream_0/stream = ExtResource("1_ynlrj")

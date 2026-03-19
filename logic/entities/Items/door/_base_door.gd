@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/door/door-yellow.png")
+@icon("res://assets/x_icons/door/door-yellow.png")
 
 @abstract
 class_name BaseDoor

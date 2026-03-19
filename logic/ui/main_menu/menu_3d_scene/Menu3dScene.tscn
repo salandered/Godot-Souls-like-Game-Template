@@ -1,56 +1,56 @@
 [gd_scene format=4 uid="uid://djsyfeinr8lew"]
 
 [ext_resource type="Script" uid="uid://bbu6a8vu2wl7k" path="res://logic/ui/main_menu/menu_3d_scene/menu_3d_scene.gd" id="1_m6ugi"]
-[ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://-assets-/materials-shared/_shaders/sky/blue_sky.tres" id="1_tyxoo"]
-[ext_resource type="PackedScene" uid="uid://bu78ylp2jroiw" path="res://logic/entities/VFX/puff/PuffExplosion.tscn" id="3_84k2w"]
-[ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://-assets-/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres" id="4_5sy76"]
-[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/VFX/puff/PuffFog.tscn" id="4_fxvr7"]
-[ext_resource type="Material" uid="uid://bbg08pft25h53" path="res://-assets-/materials-shared/ground/coral_ground/coral_ground_02_Reimp.tres" id="5_mukqq"]
-[ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://-assets-/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="6_m6ugi"]
-[ext_resource type="Material" uid="uid://b501ccskj67vi" path="res://-assets-/materials-shared/ground/I_ground088/I_Ground088_2K-JPG_Reimp_2k.tres" id="7_3pcna"]
-[ext_resource type="ArrayMesh" uid="uid://bkenbs0ugh6iy" path="res://-assets-/GLB-items/prefabs/from_menu_3d/linc_floor.tres" id="7_rqxxm"]
-[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/VFX/lights/fire/FireStatic_.tscn" id="8_bdepm"]
-[ext_resource type="ArrayMesh" uid="uid://2rhhk5wqopcp" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mesh.tres" id="9_84k2w"]
-[ext_resource type="Material" uid="uid://d1q5vhtpj00ri" path="res://-assets-/materials-shared/concrete/I_concrete005/I_Concrete005_4d1K-JPG.tres" id="10_fxvr7"]
-[ext_resource type="Material" uid="uid://bpbujrrytkdj8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar.tres" id="10_v1m0i"]
-[ext_resource type="Material" uid="uid://ph1sclyavjd" path="res://-assets-/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar_2.tres" id="11_cnb55"]
-[ext_resource type="Material" uid="uid://do7j5bx781tal" path="res://-assets-/materials-shared/rocks-stone/seaside_rock/seaside_rock_Reimp.tres" id="11_v1m0i"]
+[ext_resource type="Sky" uid="uid://df2qeu4tqf5k7" path="res://assets/materials-shared/_shaders/sky/blue_sky.tres" id="1_tyxoo"]
+[ext_resource type="PackedScene" uid="uid://bu78ylp2jroiw" path="res://logic/entities/vfx/puff/PuffExplosion.tscn" id="3_84k2w"]
+[ext_resource type="Material" uid="uid://o0bn285hpysy" path="res://assets/materials-shared/rocks-stone/lichen_rock/lichen_rock_Reimp.tres" id="4_5sy76"]
+[ext_resource type="PackedScene" uid="uid://ba71cpxy8vbng" path="res://logic/entities/vfx/puff/PuffFog.tscn" id="4_fxvr7"]
+[ext_resource type="Material" uid="uid://bbg08pft25h53" path="res://assets/materials-shared/ground/coral_ground/coral_ground_02_Reimp.tres" id="5_mukqq"]
+[ext_resource type="Material" uid="uid://d167u66aqmq84" path="res://assets/materials-shared/concrete/damaged_concrete/concrete_floor_damaged_Reimp.tres" id="6_m6ugi"]
+[ext_resource type="Material" uid="uid://b501ccskj67vi" path="res://assets/materials-shared/ground/I_ground088/I_Ground088_2K-JPG_Reimp_2k.tres" id="7_3pcna"]
+[ext_resource type="ArrayMesh" uid="uid://bkenbs0ugh6iy" path="res://assets/GLB-items/prefabs/from_menu_3d/linc_floor.tres" id="7_rqxxm"]
+[ext_resource type="PackedScene" uid="uid://bnf3bmp3nq5nq" path="res://logic/entities/vfx/lights/fire/FireStatic_.tscn" id="8_bdepm"]
+[ext_resource type="ArrayMesh" uid="uid://2rhhk5wqopcp" path="res://assets/GLB-items/prefabs/from_menu_3d/broken_column_mesh.tres" id="9_84k2w"]
+[ext_resource type="Material" uid="uid://d1q5vhtpj00ri" path="res://assets/materials-shared/concrete/I_concrete005/I_Concrete005_4d1K-JPG.tres" id="10_fxvr7"]
+[ext_resource type="Material" uid="uid://bpbujrrytkdj8" path="res://assets/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar.tres" id="10_v1m0i"]
+[ext_resource type="Material" uid="uid://ph1sclyavjd" path="res://assets/GLB-items/prefabs/from_menu_3d/broken_column_mat_triplanar_2.tres" id="11_cnb55"]
+[ext_resource type="Material" uid="uid://do7j5bx781tal" path="res://assets/materials-shared/rocks-stone/seaside_rock/seaside_rock_Reimp.tres" id="11_v1m0i"]
 [ext_resource type="Material" uid="uid://d2sac0o84lqtd" path="res://addons/pixpal_tools_edited/PixPal/Materials/M_PixPal.tres" id="12_cnb55"]
-[ext_resource type="ArrayMesh" uid="uid://sx0unsid5rov" path="res://-assets-/GLB-items/prefabs/from_menu_3d/torch.tres" id="13_rqxxm"]
-[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://-assets-/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="13_v1m0i"]
-[ext_resource type="PackedScene" uid="uid://ta367bodbhjs" path="res://-assets-/animations/GLB-packed/single_/sitting_WRAPPER.tscn" id="16_ae31p"]
-[ext_resource type="PackedScene" uid="uid://dgkn42tpvmre7" path="res://-assets-/GLB-char/skeleton-16-07/skeleton_16_07_WRAPPER.tscn" id="16_bdepm"]
-[ext_resource type="ArrayMesh" uid="uid://yr3g5wlrv7hd" path="res://-assets-/GLB-items/prefabs/from_menu_3d/engel_mesh.tres" id="17_rqxxm"]
-[ext_resource type="Texture2D" uid="uid://5esc5e5uadne" path="res://-assets-/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_Color.jpg" id="17_uvwvb"]
-[ext_resource type="Material" uid="uid://bb06udlb6phmw" path="res://-assets-/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres" id="17_wsm5k"]
-[ext_resource type="Texture2D" uid="uid://d26s43r0igrpa" path="res://-assets-/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_NormalGL.jpg" id="18_cl5kb"]
-[ext_resource type="Texture2D" uid="uid://c30jwj1amgb1r" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_diff_1k.jpg" id="18_ur5qw"]
-[ext_resource type="Texture2D" uid="uid://dmf72m3hhbnyg" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_rough_1k.png" id="19_0yewr"]
-[ext_resource type="Texture2D" uid="uid://bfr2x6kb4xgmn" path="res://-assets-/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_Roughness.png" id="19_iiyd1"]
-[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="19_ur5qw"]
-[ext_resource type="Texture2D" uid="uid://maqt7oy12atx" path="res://-assets-/materials-shared/different/I_gold/BigGuy_4d1K-Metallic_gold_Base Color.jpg" id="20_fxvr7"]
-[ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://-assets-/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="20_mxlls"]
-[ext_resource type="ArrayMesh" uid="uid://vl5nmpou8kp8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/rock_004.tres" id="20_q1c2c"]
-[ext_resource type="ArrayMesh" uid="uid://dndydw8damr8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/big_plane.tres" id="20_rqxxm"]
-[ext_resource type="ArrayMesh" uid="uid://dhywsci8e3at8" path="res://-assets-/GLB-items/prefabs/from_menu_3d/rock_003.tres" id="20_vwaak"]
-[ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/Items/crate/dark_crate/DarkCrate.tscn" id="21_mxlls"]
-[ext_resource type="Texture2D" uid="uid://dgibr3j3vvstd" path="res://-assets-/materials-shared/different/I_gold/BigGuy_4d1K-Metallic_gold_Metallic-4d1K-Metallic_gold_Roughness.png" id="21_v1m0i"]
-[ext_resource type="Material" uid="uid://doed0kwtng7wd" path="res://-assets-/materials-shared/rocks-stone/stone_dirt_wall/B Stone Dirt Wall 02_Reimp_2k.tres" id="24_gde5t"]
-[ext_resource type="Texture2D" uid="uid://chn55ov0jxub4" path="res://-assets-/materials-shared/wood/dark_wooden_planks/lincoln_dark_wooden_planks_diff_1k.jpg" id="24_jk378"]
-[ext_resource type="Texture2D" uid="uid://deojgeuf1mgt1" path="res://-assets-/materials-shared/wood/dark_wooden_planks/lincoln_dark_wooden_planks_norm_gl_1k.png" id="25_j1oot"]
-[ext_resource type="Texture2D" uid="uid://dipbpx2djqis6" path="res://-assets-/materials-shared/wood/dark_wooden_planks/lincoln_dark_wooden_planks_rough_1k.png" id="26_3bb0u"]
-[ext_resource type="Texture2D" uid="uid://bjhdivhfve55k" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Color.jpg" id="27_bo0yb"]
-[ext_resource type="Texture2D" uid="uid://dtc40sais1cn8" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Metalness-Metal047B_2K-JPG_Roughness.png" id="28_8j8f3"]
-[ext_resource type="Texture2D" uid="uid://435ii5qoi0tx" path="res://-assets-/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_NormalGL.jpg" id="29_mxe67"]
-[ext_resource type="Material" uid="uid://cw7kd7pvhxw1c" path="res://-assets-/materials-shared/fabric/I_fabric_177/I_fabric_177-1K_Reimp.tres" id="39_ep8ck"]
-[ext_resource type="PackedScene" uid="uid://bvih5ow1gqv5d" path="res://-assets-/GLB-items/prefabs/TreesWithRopes.tscn" id="39_q26sa"]
-[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/c_systems/influence_parent/sway_parent/SwayParent.tscn" id="40_d4t46"]
-[ext_resource type="Material" uid="uid://d2ps7t077xfk8" path="res://-assets-/materials-shared/wood/bark_willow/bark_willow_Reimp.tres" id="40_onri0"]
-[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://-assets-/music/back/back_noise.mp3" id="41_7sgbf"]
-[ext_resource type="Material" uid="uid://fw2tqpveasi2" path="res://-assets-/materials-shared/concrete/just_concrete/concrete_Reimp.tres" id="41_d4t46"]
-[ext_resource type="ArrayMesh" uid="uid://i1rljxk8omlu" path="res://-assets-/GLB-items/prefabs/from_menu_3d/cross_column.tres" id="42_q1c2c"]
-[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://-assets-/music/back/back_bits.mp3" id="42_q26sa"]
-[ext_resource type="ArrayMesh" uid="uid://wm1ajr5gjyuk" path="res://-assets-/GLB-items/prefabs/from_menu_3d/rock_005.tres" id="44_dapr5"]
+[ext_resource type="ArrayMesh" uid="uid://sx0unsid5rov" path="res://assets/GLB-items/prefabs/from_menu_3d/torch.tres" id="13_rqxxm"]
+[ext_resource type="Material" uid="uid://tpy4wa8akl4b" path="res://assets/materials-shared/metal/metal_8/I_metal_8-ZpW_Reimp.tres" id="13_v1m0i"]
+[ext_resource type="PackedScene" uid="uid://ta367bodbhjs" path="res://assets/animations/GLB-packed/single_/sitting_WRAPPER.tscn" id="16_ae31p"]
+[ext_resource type="PackedScene" uid="uid://dgkn42tpvmre7" path="res://assets/GLB-char/skeleton-16-07/skeleton_16_07_WRAPPER.tscn" id="16_bdepm"]
+[ext_resource type="ArrayMesh" uid="uid://yr3g5wlrv7hd" path="res://assets/GLB-items/prefabs/from_menu_3d/engel_mesh.tres" id="17_rqxxm"]
+[ext_resource type="Texture2D" uid="uid://5esc5e5uadne" path="res://assets/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_Color.jpg" id="17_uvwvb"]
+[ext_resource type="Material" uid="uid://bb06udlb6phmw" path="res://assets/materials-shared/_baked/mines/MinesTrim_Reimp_1k.tres" id="17_wsm5k"]
+[ext_resource type="Texture2D" uid="uid://d26s43r0igrpa" path="res://assets/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_NormalGL.jpg" id="18_cl5kb"]
+[ext_resource type="Texture2D" uid="uid://c30jwj1amgb1r" path="res://assets/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_diff_1k.jpg" id="18_ur5qw"]
+[ext_resource type="Texture2D" uid="uid://dmf72m3hhbnyg" path="res://assets/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_rough_1k.png" id="19_0yewr"]
+[ext_resource type="Texture2D" uid="uid://bfr2x6kb4xgmn" path="res://assets/materials-shared/concrete/I_concrete005/BigGuy_Concrete005_4d1K_Roughness.png" id="19_iiyd1"]
+[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://assets/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="19_ur5qw"]
+[ext_resource type="Texture2D" uid="uid://maqt7oy12atx" path="res://assets/materials-shared/different/I_gold/BigGuy_4d1K-Metallic_gold_Base Color.jpg" id="20_fxvr7"]
+[ext_resource type="Texture2D" uid="uid://cyaeiceuotrit" path="res://assets/materials-shared/concrete/plaster_grey/tower-map_plaster_grey_04_norm_4k.png" id="20_mxlls"]
+[ext_resource type="ArrayMesh" uid="uid://vl5nmpou8kp8" path="res://assets/GLB-items/prefabs/from_menu_3d/rock_004.tres" id="20_q1c2c"]
+[ext_resource type="ArrayMesh" uid="uid://dndydw8damr8" path="res://assets/GLB-items/prefabs/from_menu_3d/big_plane.tres" id="20_rqxxm"]
+[ext_resource type="ArrayMesh" uid="uid://dhywsci8e3at8" path="res://assets/GLB-items/prefabs/from_menu_3d/rock_003.tres" id="20_vwaak"]
+[ext_resource type="PackedScene" uid="uid://c4s84e8jai5tp" path="res://logic/entities/items/crate/dark_crate/DarkCrate.tscn" id="21_mxlls"]
+[ext_resource type="Texture2D" uid="uid://dgibr3j3vvstd" path="res://assets/materials-shared/different/I_gold/BigGuy_4d1K-Metallic_gold_Metallic-4d1K-Metallic_gold_Roughness.png" id="21_v1m0i"]
+[ext_resource type="Material" uid="uid://doed0kwtng7wd" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/B Stone Dirt Wall 02_Reimp_2k.tres" id="24_gde5t"]
+[ext_resource type="Texture2D" uid="uid://chn55ov0jxub4" path="res://assets/materials-shared/wood/dark_wooden_planks/lincoln_dark_wooden_planks_diff_1k.jpg" id="24_jk378"]
+[ext_resource type="Texture2D" uid="uid://deojgeuf1mgt1" path="res://assets/materials-shared/wood/dark_wooden_planks/lincoln_dark_wooden_planks_norm_gl_1k.png" id="25_j1oot"]
+[ext_resource type="Texture2D" uid="uid://dipbpx2djqis6" path="res://assets/materials-shared/wood/dark_wooden_planks/lincoln_dark_wooden_planks_rough_1k.png" id="26_3bb0u"]
+[ext_resource type="Texture2D" uid="uid://bjhdivhfve55k" path="res://assets/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Color.jpg" id="27_bo0yb"]
+[ext_resource type="Texture2D" uid="uid://dtc40sais1cn8" path="res://assets/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_Metalness-Metal047B_2K-JPG_Roughness.png" id="28_8j8f3"]
+[ext_resource type="Texture2D" uid="uid://435ii5qoi0tx" path="res://assets/materials-shared/metal/metal047/lever_Metal047B_2K-JPG_NormalGL.jpg" id="29_mxe67"]
+[ext_resource type="Material" uid="uid://cw7kd7pvhxw1c" path="res://assets/materials-shared/fabric/I_fabric_177/I_fabric_177-1K_Reimp.tres" id="39_ep8ck"]
+[ext_resource type="PackedScene" uid="uid://bvih5ow1gqv5d" path="res://assets/GLB-items/prefabs/TreesWithRopes.tscn" id="39_q26sa"]
+[ext_resource type="PackedScene" uid="uid://c871jlhb5ea5t" path="res://logic/systems/influence_parent/sway_parent/SwayParent.tscn" id="40_d4t46"]
+[ext_resource type="Material" uid="uid://d2ps7t077xfk8" path="res://assets/materials-shared/wood/bark_willow/bark_willow_Reimp.tres" id="40_onri0"]
+[ext_resource type="AudioStream" uid="uid://b8rdtkim2j1n7" path="res://assets/music/back/back_noise.mp3" id="41_7sgbf"]
+[ext_resource type="Material" uid="uid://fw2tqpveasi2" path="res://assets/materials-shared/concrete/just_concrete/concrete_Reimp.tres" id="41_d4t46"]
+[ext_resource type="ArrayMesh" uid="uid://i1rljxk8omlu" path="res://assets/GLB-items/prefabs/from_menu_3d/cross_column.tres" id="42_q1c2c"]
+[ext_resource type="AudioStream" uid="uid://bf6md2bw7rl04" path="res://assets/music/back/back_bits.mp3" id="42_q26sa"]
+[ext_resource type="ArrayMesh" uid="uid://wm1ajr5gjyuk" path="res://assets/GLB-items/prefabs/from_menu_3d/rock_005.tres" id="44_dapr5"]
 
 [sub_resource type="Environment" id="2"]
 background_mode = 2
@@ -1924,7 +1924,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.274807, 7.004031, 13.2801
 mesh = SubResource("ArrayMesh_lnldl")
 
 [node name="ropes_008" type="MeshInstance3D" parent="Visuals/LINCOLN_MAIN/bake_group_link_main/beams etc/beams_001/Beam_D_006" unique_id=22065633]
-transform = Transform3D(0.9226031, 0.14248186, -1.8020166, -1.4747185, 1.2293203, -0.65782976, 1.0453606, 1.6084853, 0.66238606, -0.5386181, 0.21766996, 0.22724152)
+transform = Transform3D(0.92260313, 0.14248183, -1.8020166, -1.4747183, 1.2293204, -0.65782976, 1.0453607, 1.6084852, 0.66238606, -0.5386181, 0.21766996, 0.22724152)
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
@@ -1989,7 +1989,7 @@ transform = Transform3D(-1.0909996, -0.03805531, 0.5356568, -0.050888382, 1.2148
 [node name="skeleton-16-07" parent="Visuals/LINCOLN_MAIN/skeleton" unique_id=19844614 instance=ExtResource("16_bdepm")]
 unique_name_in_owner = true
 
-[node name="SkeletonMesh_004" parent="Visuals/LINCOLN_MAIN/skeleton/skeleton-16-07/Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(19844614, 729270261) index="0" unique_id=272755180]
+[node name="SkeletonMesh_004" parent="Visuals/LINCOLN_MAIN/skeleton/skeleton-16-07/Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(19844614, 1440444569) index="0" unique_id=1542699535]
 gi_mode = 1
 
 [node name="sitting2" parent="Visuals/LINCOLN_MAIN/skeleton" unique_id=497119739 instance=ExtResource("16_ae31p")]
@@ -2225,7 +2225,7 @@ cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
 
 [node name="ropes_009" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=1188926327]
-transform = Transform3D(-0.13742365, -0.023531595, 1.1473324, -0.8494767, 0.7790017, -0.08577027, -0.7715666, -0.85347134, -0.10992021, -41.679935, 11.982513, -86.228355)
+transform = Transform3D(-0.15608887, 0.0067201294, 1.1451644, -0.7796298, 0.8459408, -0.11122976, -0.83882314, -0.7874958, -0.109712504, -41.679935, 11.982513, -86.228355)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
 
@@ -2235,7 +2235,7 @@ sway_speed = 1.2
 preview_in_editor = true
 
 [node name="skeleton_hand2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/ropes_009" unique_id=2024574688]
-transform = Transform3D(1.2253507, -0.7114178, 0.9733231, 0.43222484, -1.0363206, -1.3016065, 1.1254574, 1.1725543, -0.5598396, 0.35659122, -0.5122528, 0.1948626)
+transform = Transform3D(1.2578071, -0.7475838, 0.9022181, 0.4136638, -0.95508105, -1.3680865, 1.0962484, 1.2181534, -0.5189411, 0.35659122, -0.5122528, 0.1948626)
 cast_shadow = 0
 gi_mode = 2
 mesh = SubResource("ArrayMesh_1txad")
@@ -2252,14 +2252,14 @@ transform = Transform3D(1.7060015, 0, -5.9604645e-08, 0, 1.706, 0, 5.9604645e-08
 transform = Transform3D(0.6954374, 0, -1.5914282, 0, 1.7367433, 0, 1.5914282, 0, 0.6954374, -9.882655, 13.581102, 1.4955444)
 
 [node name="ropes_008" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="0" unique_id=97219943]
-transform = Transform3D(0.42219904, 0.9561764, 0.86787814, -1.0776422, 0.7639692, -0.31745225, -0.71145827, -0.5897587, 0.9958662, -0.08106995, -0.27941322, -0.21012163)
+transform = Transform3D(0.42219904, 0.9561764, 0.86787814, -1.0776422, 0.7639692, -0.31745225, -0.7114582, -0.58975863, 0.9958663, -0.08106995, -0.27941322, -0.21012163)
 cast_shadow = 0
 
 [node name="SwayParent" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001/ropes_008" index="0" unique_id=1389215783]
 max_sway_degrees = 6.0
 
 [node name="ropes_009" parent="Visuals/far/LINCOLN_FAR2/trees2/BirchTree_Dead_1_001" index="1" unique_id=1816210230]
-transform = Transform3D(0.49443272, 0.9347602, 0.8529338, -0.960481, 0.8734207, -0.4004361, -0.8238623, -0.4572706, 0.978719, -0.08106995, -0.27941322, -0.21012163)
+transform = Transform3D(0.49443284, 0.9347602, 0.8529338, -0.9604809, 0.8734209, -0.4004361, -0.8238623, -0.4572706, 0.978719, -0.08106995, -0.27941322, -0.21012163)
 cast_shadow = 0
 
 [node name="DeadTree_10_001" parent="Visuals/far/LINCOLN_FAR2/trees2" index="1" unique_id=1235206994]

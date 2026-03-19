@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bpbujrrytkdj8"]
+
+[ext_resource type="Texture2D" uid="uid://cpy5lf1xmmye1" path="res://assets/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_diff_1k.jpg" id="1_5pvkx"]
+[ext_resource type="Texture2D" uid="uid://c1o50ahd70gar" path="res://assets/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_norm_gl_1k.png" id="2_kksrv"]
+[ext_resource type="Texture2D" uid="uid://qtw56h0g5j5u" path="res://assets/materials-shared/concrete/damaged_concrete/shattered_column_damaged_concrete_floor_rough_1k.png" id="3_tgvbb"]
+
+[resource]
+resource_name = "damaged_concrete_columns"
+cull_mode = 2
+albedo_texture = ExtResource("1_5pvkx")
+roughness_texture = ExtResource("3_tgvbb")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("2_kksrv")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true

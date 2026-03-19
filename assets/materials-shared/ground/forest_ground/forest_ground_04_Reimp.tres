@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bqgcrkjo4wtj4"]
+
+[ext_resource type="Texture2D" uid="uid://c3ucx38wb85uk" path="res://assets/materials-shared/ground/forest_ground/mats_forest_ground_04_diff_2k.jpg" id="1_atjg4"]
+[ext_resource type="Texture2D" uid="uid://dxgwhl6nucfcb" path="res://assets/materials-shared/ground/forest_ground/mats_forest_ground_04_norm_gl_2k.png" id="2_oixr1"]
+[ext_resource type="Texture2D" uid="uid://cefqjavsuopqs" path="res://assets/materials-shared/ground/forest_ground/mats_forest_ground_04_rough_2k.png" id="3_c8nko"]
+
+[resource]
+resource_name = "I_forest_ground_4d1K"
+cull_mode = 2
+albedo_texture = ExtResource("1_atjg4")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_c8nko")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("2_oixr1")

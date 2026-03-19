@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cder7q45c0ofb"]
 
-[ext_resource type="Script" uid="uid://djgaqmwqf0dts" path="res://logic/entities/Items/door/_generic_door.gd" id="1_g0uxx"]
-[ext_resource type="ArrayMesh" uid="uid://bddnksl7drf47" path="res://-assets-/GLB-items/door/meshes/door_Cube_034.res" id="2_gx7ph"]
-[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://-assets-/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="3_igwfv"]
-[ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://-assets-/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="4_hbl3s"]
-[ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://-assets-/SFX/sources/400/creaky_door_short_for_chest.wav" id="5_c3tjs"]
-[ext_resource type="AudioStream" uid="uid://bscq7k6x1b2hu" path="res://-assets-/SFX/sources/400/lock_quick.wav" id="6_446hs"]
-[ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://-assets-/SFX/sources/pack_N2/WoodSteps 119-Audio.wav" id="7_xvi0d"]
-[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/Items/interact_area/InteractArea.tscn" id="8_fc0ar"]
-[ext_resource type="Material" uid="uid://c8d72o45y8lge" path="res://-assets-/materials-shared/solid/P/_P col connections_Reimp.tres" id="8_gx7ph"]
+[ext_resource type="Script" uid="uid://djgaqmwqf0dts" path="res://logic/entities/items/door/_generic_door.gd" id="1_g0uxx"]
+[ext_resource type="ArrayMesh" uid="uid://bddnksl7drf47" path="res://assets/GLB-items/door/meshes/door_Cube_034.res" id="2_gx7ph"]
+[ext_resource type="Material" uid="uid://bghuokc5hqupa" path="res://assets/materials-shared/wood/rough_wood/rough_wood_Reimp.tres" id="3_igwfv"]
+[ext_resource type="Material" uid="uid://dg8l1frc3mysp" path="res://assets/materials-shared/metal/rusty_metal_04/rusty_metal_04_Reimp.tres" id="4_hbl3s"]
+[ext_resource type="AudioStream" uid="uid://dhapeasepn2om" path="res://assets/SFX/sources/400/creaky_door_short_for_chest.wav" id="5_c3tjs"]
+[ext_resource type="AudioStream" uid="uid://bscq7k6x1b2hu" path="res://assets/SFX/sources/400/lock_quick.wav" id="6_446hs"]
+[ext_resource type="AudioStream" uid="uid://coonklavk23a0" path="res://assets/SFX/sources/pack_N2/WoodSteps 119-Audio.wav" id="7_xvi0d"]
+[ext_resource type="PackedScene" uid="uid://dvqw0ufia7yrx" path="res://logic/entities/items/interact_area/InteractArea.tscn" id="8_fc0ar"]
+[ext_resource type="Material" uid="uid://c8d72o45y8lge" path="res://assets/materials-shared/solid/P/_P col connections_Reimp.tres" id="8_gx7ph"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_10s4t"]
 size = Vector3(1.4769135, 2.7642212, 0.123046875)

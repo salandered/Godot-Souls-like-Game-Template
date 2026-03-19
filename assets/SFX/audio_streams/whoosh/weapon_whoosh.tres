@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://qufmydm4eeq4"]
+
+[ext_resource type="AudioStream" uid="uid://da388ouuot5ns" path="res://assets/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/SFX_Swing_Sword_01_whoosh.wav" id="1_26amg"]
+[ext_resource type="AudioStream" uid="uid://rycwumtqxrcr" path="res://assets/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/SFX_Whoosh_Sword_01.wav" id="2_giti2"]
+[ext_resource type="AudioStream" uid="uid://de2bc5oofjve5" path="res://assets/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/SFX_Whoosh_Sword_02.wav" id="3_r6eh5"]
+[ext_resource type="AudioStream" uid="uid://bdwyca7xipoof" path="res://assets/SFX/sources/Medieval Adventure Sound Effect/pack_sword_whoosh/SFX_Whoosh_Sword_03.wav" id="4_h5n8s"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_26amg")
+stream_1/stream = ExtResource("2_giti2")
+stream_2/stream = ExtResource("3_r6eh5")
+stream_3/stream = ExtResource("4_h5n8s")

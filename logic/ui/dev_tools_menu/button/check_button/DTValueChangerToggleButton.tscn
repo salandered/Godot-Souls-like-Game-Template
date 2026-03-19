@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://on53sh8aiutr"]
 
-[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://-assets-/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="1_nqmb1"]
+[ext_resource type="FontFile" uid="uid://dewsv0pa0fyww" path="res://assets/ui_assets/_font/yrsa/Yrsa-source/static/Yrsa-SemiBold.ttf" id="1_nqmb1"]
 [ext_resource type="Script" uid="uid://c0v8nrb0yfkpc" path="res://logic/ui/dev_tools_menu/button/check_button/dt_value_changer_toggle_button.gd" id="2_nqmb1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8ro"]

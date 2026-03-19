@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://p67hfjlxhimn"]
+
+[ext_resource type="PackedScene" uid="uid://d3omn7puwbqeg" path="res://assets/GLB-level/demo-level_/linkoln/mountain_view/mountain_view.glb" id="1_hqu7v"]
+[ext_resource type="Texture2D" uid="uid://lqbs41cppq84" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_diffuse.jpg" id="2_anoov"]
+[ext_resource type="Texture2D" uid="uid://dq7riu3q2gteb" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_normal.png" id="3_15uth"]
+[ext_resource type="Texture2D" uid="uid://c6vpppa7k0w6s" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_roughness.png" id="4_anha6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjvqw"]
+resource_name = "B Stone Dirt Wall 02"
+cull_mode = 2
+albedo_color = Color(0.7240258, 0.7240258, 0.7240258, 1)
+albedo_texture = ExtResource("2_anoov")
+metallic = 0.42
+metallic_texture_channel = 2
+roughness_texture = ExtResource("4_anha6")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_15uth")
+
+[node name="mountain_view_WRAPPER" unique_id=355629390 instance=ExtResource("1_hqu7v")]
+
+[node name="Rock_007" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="0" unique_id=401344059]
+layers = 17
+
+[node name="Rock_006" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="1" unique_id=1624676951]
+layers = 17
+
+[node name="_Plane_016" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="2" unique_id=553905593]
+layers = 17
+
+[node name="_Plane_003" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="3" unique_id=1215415429]
+layers = 17
+cast_shadow = 0
+
+[node name="_Plane_004" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="4" unique_id=477740323]
+layers = 17
+cast_shadow = 0
+
+[node name="Mountain_Group_2_003" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="5" unique_id=1511011963]
+layers = 17
+
+[node name="Mountain_Group_2_004" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="6" unique_id=2039899669]
+layers = 17
+cast_shadow = 0
+
+[node name="Tower top_001" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="7" unique_id=390724509]
+layers = 17
+material_override = SubResource("StandardMaterial3D_tjvqw")
+
+[node name="Plane_007" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="8" unique_id=1172882020]
+layers = 17
+cast_shadow = 0
+
+[node name="_Plane_006" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="9" unique_id=1094442850]
+layers = 17
+
+[node name="Mountain_Group_2_005" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="10" unique_id=1426807435]
+transform = Transform3D(0.9328289, 0, -0.3603196, 0, 1, 0, 0.3603196, 0, 0.9328289, 470.9384, -201.9656, 773.97504)
+layers = 17
+cast_shadow = 0
+
+[node name="_Plane_011" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="11" unique_id=2043802627]
+layers = 17
+cast_shadow = 0
+
+[node name="Mountain_Group_2_002" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="12" unique_id=1396582436]
+layers = 17
+
+[node name="Rock_002" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="13" unique_id=318282085]
+layers = 17
+
+[node name="Mountain_Group_2_006" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="14" unique_id=447915080]
+layers = 17
+cast_shadow = 0
+
+[node name="Rock_012" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="15" unique_id=1512812690]
+layers = 17
+
+[node name="Rock_003" parent="mountain view" parent_id_path=PackedInt32Array(678264155) index="16" unique_id=2104513124]
+layers = 17

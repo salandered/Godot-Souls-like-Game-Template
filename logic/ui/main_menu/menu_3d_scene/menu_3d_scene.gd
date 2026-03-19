@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/level/icon_level_purple.png")
+@icon("res://assets/x_icons/level/icon_level_purple.png")
 
 class_name Menu3DLevel
 extends BaseLevel

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://de7q7oflaploe"]
 
-[ext_resource type="PackedScene" uid="uid://ctdp8t5nsqc8q" path="res://-assets-/GLB-items/prefabs/Chair.tscn" id="1_0itnl"]
+[ext_resource type="PackedScene" uid="uid://ctdp8t5nsqc8q" path="res://assets/GLB-items/prefabs/Chair.tscn" id="1_0itnl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ln6ww"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

@@ -1,15 +1,15 @@
 [gd_scene format=4 uid="uid://buxfrfnlx8dpy"]
 
-[ext_resource type="PackedScene" uid="uid://ma6cywyneshm" path="res://logic/entities/Enemies/sitting_sk/SitSkeletonAlt.tscn" id="1_7773y"]
-[ext_resource type="Texture2D" uid="uid://bsmd74v2mkb63" path="res://-assets-/materials-shared/metal/metal_8/island_metal_8_basecolor-1K.jpg" id="2_hwva5"]
-[ext_resource type="Texture2D" uid="uid://dc5807xscau5e" path="res://-assets-/materials-shared/metal/metal_8/island_metal_8_metallic-1K.png" id="3_eb0gy"]
-[ext_resource type="PackedScene" uid="uid://qn43mj8gblfw" path="res://-assets-/GLB-items/prefabs/fancy_hat.glb" id="3_uro5p"]
-[ext_resource type="Texture2D" uid="uid://co386ma5tt5f2" path="res://-assets-/materials-shared/metal/metal_8/island_metal_8_normal-1K.png" id="4_3wqao"]
-[ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="6_12uuj"]
-[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="7_hgwus"]
-[ext_resource type="Texture2D" uid="uid://cyp17qtrm6vla" path="res://-assets-/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_rough_2k.png" id="8_hy5hd"]
-[ext_resource type="PackedScene" uid="uid://26tjpalhthxp" path="res://logic/entities/Enemies/phe_enemy/golden_bolt.tscn" id="9_h4pvu"]
-[ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="10_oq18v"]
+[ext_resource type="PackedScene" uid="uid://ma6cywyneshm" path="res://logic/entities/enemies/sitting_sk/SitSkeletonAlt.tscn" id="1_7773y"]
+[ext_resource type="Texture2D" uid="uid://bsmd74v2mkb63" path="res://assets/materials-shared/metal/metal_8/island_metal_8_basecolor-1K.jpg" id="2_hwva5"]
+[ext_resource type="Texture2D" uid="uid://dc5807xscau5e" path="res://assets/materials-shared/metal/metal_8/island_metal_8_metallic-1K.png" id="3_eb0gy"]
+[ext_resource type="PackedScene" uid="uid://qn43mj8gblfw" path="res://assets/GLB-items/prefabs/fancy_hat.glb" id="3_uro5p"]
+[ext_resource type="Texture2D" uid="uid://co386ma5tt5f2" path="res://assets/materials-shared/metal/metal_8/island_metal_8_normal-1K.png" id="4_3wqao"]
+[ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="6_12uuj"]
+[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="7_hgwus"]
+[ext_resource type="Texture2D" uid="uid://cyp17qtrm6vla" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_rough_2k.png" id="8_hy5hd"]
+[ext_resource type="PackedScene" uid="uid://26tjpalhthxp" path="res://logic/entities/enemies/phe_enemy/golden_bolt.tscn" id="9_h4pvu"]
+[ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://assets/materials-shared/different/I_gold/I_gold-4d1K.tres" id="10_oq18v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilrxj"]
 resource_name = "I_metal_8-ZpW-1K"
@@ -59,7 +59,7 @@ blend_shape_mode = 0
 
 [node name="SittingSkeletonAlt2" unique_id=213956360 instance=ExtResource("1_7773y")]
 
-[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 533301545) index="3" unique_id=1988229000]
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 1545046897) index="3" unique_id=1939009076]
 bones/0/position = Vector3(-4.6473226e-05, 0, -0.0052452926)
 bones/1/position = Vector3(-3.2016174e-05, 0.61467737, 0.038719624)
 bones/1/rotation = Quaternion(-0.03481882, 0.001641309, 0.009904795, 0.9993433)
@@ -124,7 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6473226e-05, 0, -0.0052452
 [node name="Chest" parent="bones" parent_id_path=PackedInt32Array(401276762) index="2" unique_id=106765411]
 transform = Transform3D(0.999137, 0.041507594, 0.0015635751, -0.039795615, 0.9673554, -0.2502795, -0.011901034, 0.2500013, 0.9681724, -0.00048715097, 0.81631184, 0.02969778)
 
-[node name="LP smith sword" parent="bones/Chest/smith_sword_2" parent_id_path=PackedInt32Array(1719675894) index="0" unique_id=96033735]
+[node name="LP smith sword" parent="bones/Chest/smith_sword_2" parent_id_path=PackedInt32Array(1719675894) index="0" unique_id=965108305]
 material_override = SubResource("StandardMaterial3D_ilrxj")
 
 [node name="Head" parent="bones" parent_id_path=PackedInt32Array(401276762) index="3" unique_id=980266521]
@@ -133,7 +133,7 @@ transform = Transform3D(0.9846054, 0.10629208, -0.13875969, -0.12603815, 0.98176
 [node name="main" parent="bones/Head" index="1" unique_id=289455636 instance=ExtResource("3_uro5p")]
 transform = Transform3D(0.47874472, 0.19911943, -0.022717722, -0.17504627, 0.44410485, 0.2036921, 0.097587846, -0.18023086, 0.476817, 0.035662528, 0.13062692, -0.026295036)
 
-[node name="fancy hat" parent="bones/Head/main" index="0" unique_id=230338801]
+[node name="fancy hat" parent="bones/Head/main" index="0" unique_id=1987376170]
 material_override = SubResource("StandardMaterial3D_umv6k")
 
 [node name="golden bolt" parent="bones/Head" index="2" unique_id=1834739777 instance=ExtResource("9_h4pvu")]

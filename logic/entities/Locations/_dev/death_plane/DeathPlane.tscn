@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bn3c3saj6bsdr"]
 
-[ext_resource type="Script" uid="uid://b8cdhtxiyb2gk" path="res://logic/entities/Locations/_dev/death_plane/death_plane.gd" id="1_5krli"]
+[ext_resource type="Script" uid="uid://b8cdhtxiyb2gk" path="res://logic/entities/locations/_dev/death_plane/death_plane.gd" id="1_5krli"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gym67"]
 size = Vector3(130, 6, 130)

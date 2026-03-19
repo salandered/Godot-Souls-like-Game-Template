@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0jvin82yypck"]
 
-[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://-assets-/ui_assets/project-theme.tres" id="2_2vggx"]
+[ext_resource type="Theme" uid="uid://dngnbhs1qjqyy" path="res://assets/ui_assets/project-theme.tres" id="2_2vggx"]
 [ext_resource type="Script" uid="uid://dwa0f2vkbmcfk" path="res://logic/ui/credits/credits/m_credits.gd" id="2_w4uay"]
 [ext_resource type="Script" uid="uid://cc2wtqasev7le" path="res://logic/ui/credits/scripts/credits_label.gd" id="2_xn4wy"]
 
@@ -27,7 +27,8 @@ focus_mode = 2
 theme = ExtResource("2_2vggx")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_73oxe")
 bbcode_enabled = true
-text = "[center]
+text = "[center][b][font_size=64]Attribution[/font_size][/b]
+
 
 
 [b][font_size=32]this game demo[/font_size][/b]
@@ -105,7 +106,7 @@ Author: me
 
 
 [b][font_size=24]Several environmental tracks (noise, bits, synths, melody)[/font_size][/b]
-Author: me 
+Author: me
 
 
 [b][font_size=24]Swords & Blades Sound Pack, used under CC-BY 4.0[/font_size][/b]
@@ -157,14 +158,14 @@ Assets: Entrance Gates to Menlo Castle;
 
 
 [b][font_size=24]Also the following artists or content creators[/font_size][/b]
-* FairFight - https://www.youtube.com/@PointDown
-* GDQuest - https://www.gdquest.com/
-* Imphenzia - https://imphenzia.com/
-* Gord Goodwin - https://gord-goodwin.blogspot.com/
-* FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
-* pixel-boy - https://pixel-boy.itch.io/
-* Luos - https://luos.itch.io/
-* Kenney - https://kenney.nl/
+- FairFight - https://www.youtube.com/@PointDown
+- GDQuest - https://www.gdquest.com/
+- Imphenzia - https://imphenzia.com/
+- Gord Goodwin - https://gord-goodwin.blogspot.com/
+- FR3NKD - https://fr3nkd.gumroad.com/l/vhfvy
+- pixel-boy - https://pixel-boy.itch.io/
+- Luos - https://luos.itch.io/
+- Kenney - https://kenney.nl/
 
 
 [b][font_size=24]lo.w.l[/font_size][/b]
@@ -179,7 +180,7 @@ Note: Painting fragments were used for UI elements.
 
 [b][font_size=32]Core Systems & Templates[/font_size][/b]
 
- 
+
 [b][font_size=24]Godot Game Template, used under MIT License[/font_size][/b]
 [img=140x140]res:///_attribution/maaacks_game_template/logo/logo.png[/img]  
 Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]
@@ -187,7 +188,7 @@ Link: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Temp
 
 
 [b][font_size=24]Godot Engine[/font_size][/b]
-[img=140x140]res:///_attribution/godot/logo/logo_vertical_color_dark.png[/img] 
+[img=140x140]res:///_attribution/godot/logo/logo_vertical_color_dark.png[/img]
 Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]
 Link: [url=https://godotengine.org/]godotengine.org[/url]
 License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]
@@ -202,7 +203,7 @@ License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT L
 Author: Found Sound Nation
 Link: [url=https://brokenorchestra.foundsoundnation.org/#about]brokenorchestra.foundsoundnation.org[/url]
 License: [url=attribution/music/broken_orchestra/sample-pack-terms.pdf]Custom / Royaltee free / mandatory attribution[/url]
-Attribution: 
+Attribution:
 [indent][left][color=#dddddd]                                                                                                                      [i]Audio samples provided by Found Sound Nation and Symphony For A Broken Orchestra.[/i] [/color][/left][/indent]
 [indent][left][color=#dddddd]                                                                                                                      [i]Symphony for a Broken Orchestra was commissioned by Temple Contemporary[/i] [/color][/left][/indent]
 [indent][left][color=#dddddd]                                                                                                                      [i]at The Tyler School of Art. Major support is provided by The Pew Center[/i] [/color][/left][/indent]
@@ -224,6 +225,10 @@ Note: Used for debugging tools
 Link: https://github.com/JetBrains/JetBrainsMono
 License: SIL Open Font License 1.1
 Note: Used for debugging tools
+
+
+[b][font_size=24]GDQuest[/font_size][/b]
+Attribution: Portions of this project use code from GDQuest (https://www.gdquest.com/) licensed under MIT\"
 
 
 [b][font_size=24]Godot Engine Logo[/font_size][/b]

@@ -1,9 +1,0 @@
-[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://yqejdlrkriea"]
-
-[ext_resource type="AudioStream" uid="uid://vomlswpm07br" path="res://-assets-/SFX/sources/400/bone_snap_400-trimmed.wav" id="1_5tobm"]
-
-[resource]
-random_pitch = 1.4
-random_volume_offset_db = 2.0
-streams_count = 1
-stream_0/stream = ExtResource("1_5tobm")

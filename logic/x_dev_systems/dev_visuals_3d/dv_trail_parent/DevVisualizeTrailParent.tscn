@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bbt0g1dt6n1dd"]
-
-[ext_resource type="Script" uid="uid://kos6tfjuvwij" path="res://logic/x_dev_systems/dev_visuals_3d/dv_trail_parent/dev_visualize_trail.gd" id="1_a7npu"]
-
-[node name="DevVisualiseTrailParent" type="Node3D" unique_id=1095978518]
-transform = Transform3D(1.0000007, 5.9604645e-08, -7.4505806e-08, 7.4505806e-08, 1, 2.9802322e-08, -1.4901161e-08, -5.9604645e-08, 1.0000004, 0, 0, 0)
-visible = false
-script = ExtResource("1_a7npu")

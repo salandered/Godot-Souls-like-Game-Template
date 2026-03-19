@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://r4bjtqqba0s8"]
+
+[ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="1_vvesx"]
+[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="2_ax8cw"]
+[ext_resource type="Texture2D" uid="uid://cyp17qtrm6vla" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_rough_2k.png" id="3_c7te7"]
+
+[resource]
+resource_name = "dirt_aerial_02"
+cull_mode = 2
+albedo_color = Color(0.71178013, 0.70621544, 0.8258557, 1)
+albedo_texture = ExtResource("1_vvesx")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_c7te7")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("2_ax8cw")

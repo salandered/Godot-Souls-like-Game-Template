@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://doed0kwtng7wd"]
+
+[ext_resource type="Texture2D" uid="uid://lqbs41cppq84" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_diffuse.jpg" id="1_nvpja"]
+[ext_resource type="Texture2D" uid="uid://dq7riu3q2gteb" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_normal.png" id="2_ed7a2"]
+[ext_resource type="Texture2D" uid="uid://c6vpppa7k0w6s" path="res://assets/materials-shared/rocks-stone/stone_dirt_wall/tower-map_Stone Dirt Wall 02_roughness.png" id="3_scl5c"]
+
+[resource]
+resource_name = "B Stone Dirt Wall 02"
+cull_mode = 2
+albedo_texture = ExtResource("1_nvpja")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_scl5c")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2_ed7a2")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xexqcox8txwj"
+path="res://.godot/imported/WoodSteps 37-Audio_sword_wood_impact.wav-435a4e532481f1e83da5bceb9024bc3b.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/pack_N2/WoodSteps 37-Audio_sword_wood_impact.wav"
+dest_files=["res://.godot/imported/WoodSteps 37-Audio_sword_wood_impact.wav-435a4e532481f1e83da5bceb9024bc3b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

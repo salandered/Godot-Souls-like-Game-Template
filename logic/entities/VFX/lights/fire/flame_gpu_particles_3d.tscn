@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b38vfgjwpinft"]
 
-[ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://-assets-/materials-shared/_shaders/fire/stylized_fire.gdshader" id="1_kj2w5"]
+[ext_resource type="Shader" uid="uid://8rivkkwuteop" path="res://assets/materials-shared/_shaders/fire/stylized_fire.gdshader" id="1_kj2w5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yjxgb"]
 

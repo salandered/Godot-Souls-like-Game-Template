@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c127ydfwy13xa"]
+
+[ext_resource type="Shader" uid="uid://dva33q3vefr3d" path="res://assets/materials-shared/_shaders/pick_items/PickItem.gdshader" id="1_0c06n"]
+[ext_resource type="Texture2D" uid="uid://cd246udyst88v" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_diff_2k.jpg" id="2_knmut"]
+[ext_resource type="Texture2D" uid="uid://clirr4rvphamx" path="res://assets/materials-shared/ground/dirt_aerial/exit_2_dirt_aerial_02_norm_gl_2k.png" id="3_qqkak"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n22u3"]
+frequency = 0.0013
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4txb4"]
+noise = SubResource("FastNoiseLite_n22u3")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0c06n")
+shader_parameter/albedo_texture = ExtResource("2_knmut")
+shader_parameter/normal_texture = ExtResource("3_qqkak")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_4txb4")
+shader_parameter/normal_strength = 1.4370000682575
+shader_parameter/rim_color = Color(0.18576618, 0.2759742, 0.17610103, 1)
+shader_parameter/rim_power = 5.2030002233925
+shader_parameter/scroll_speed = Vector2(0.06, 0.05)
+shader_parameter/noise_scroll_speed = Vector2(0.2, 0.2)
+shader_parameter/displacement_amount = 0.0400000019
+shader_parameter/erosion_level = 0.4410000209475
+shader_parameter/edge_glow_intensity = 1.0

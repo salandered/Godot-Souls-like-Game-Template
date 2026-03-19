@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://26tjpalhthxp"]
 
-[ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://-assets-/materials-shared/different/I_gold/I_gold-4d1K.tres" id="1_6spbl"]
+[ext_resource type="Material" uid="uid://dei55lmfe1qki" path="res://assets/materials-shared/different/I_gold/I_gold-4d1K.tres" id="1_6spbl"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qh8dr"]
 resource_name = "Visuals_Object_2_007"

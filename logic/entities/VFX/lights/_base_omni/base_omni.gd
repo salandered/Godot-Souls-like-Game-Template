@@ -1,5 +1,5 @@
 @tool
-@icon("res://-assets-/x_icons/yellow/icon_light_bulb.png")
+@icon("res://assets/x_icons/yellow/icon_light_bulb.png")
 
 @abstract
 class_name BaseOmni

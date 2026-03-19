@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cpwr70hfgrwdx"
+path="res://.godot/imported/Collect_Dirt_3_thrown_impact_whoosh.wav-661094f4d803e7f20e92fd6889663ad1.sample"
+
+[deps]
+
+source_file="res://assets/SFX/sources/WAV round/Collect_Dirt_3_thrown_impact_whoosh.wav"
+dest_files=["res://.godot/imported/Collect_Dirt_3_thrown_impact_whoosh.wav-661094f4d803e7f20e92fd6889663ad1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

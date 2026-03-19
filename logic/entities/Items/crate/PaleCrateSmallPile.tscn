@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ooxbod7gnngy"]
 
-[ext_resource type="PackedScene" uid="uid://c3xoku2an7ywo" path="res://logic/entities/Items/crate/pale_crate/PaleCrate.tscn" id="1_4qaqu"]
+[ext_resource type="PackedScene" uid="uid://c3xoku2an7ywo" path="res://logic/entities/items/crate/pale_crate/PaleCrate.tscn" id="1_4qaqu"]
 
 [node name="PlaceCrateSmallPile" type="Node3D" unique_id=2041079009]
 

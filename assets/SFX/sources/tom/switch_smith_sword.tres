@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://c4hbub3v7if2p"]
+
+[ext_resource type="AudioStream" uid="uid://b2mkgmhdjcx00" path="res://assets/SFX/sources/tom/Sword Attack 2.wav" id="1_uwwy8"]
+
+[resource]
+random_pitch = 1.05
+random_volume_offset_db = 0.2
+streams_count = 1
+stream_0/stream = ExtResource("1_uwwy8")

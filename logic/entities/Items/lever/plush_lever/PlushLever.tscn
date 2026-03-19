@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://5qsnihdrfj0g"]
 
-[ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/Items/lever/BaseLever.tscn" id="1_dit4f"]
-[ext_resource type="Texture2D" uid="uid://bkgjcuak1rf2m" path="res://-assets-/GLB-char/godot_plush/godot_plush_standing_godot_plush_basecolor.jpg" id="2_iball"]
-[ext_resource type="Script" uid="uid://c3ya1vb3aggg1" path="res://logic/entities/Items/lever/plush_lever/plush_lever.gd" id="2_rv8o6"]
-[ext_resource type="Shader" uid="uid://vyrogqfxi8ja" path="res://-assets-/materials-shared/_shaders/shell/shell_shader.gdshader" id="4_c3e30"]
+[ext_resource type="PackedScene" uid="uid://p44femc1tyl6" path="res://logic/entities/items/lever/BaseLever.tscn" id="1_dit4f"]
+[ext_resource type="Texture2D" uid="uid://bkgjcuak1rf2m" path="res://assets/GLB-char/godot_plush/godot_plush_standing_godot_plush_basecolor.jpg" id="2_iball"]
+[ext_resource type="Script" uid="uid://c3ya1vb3aggg1" path="res://logic/entities/items/lever/plush_lever/plush_lever.gd" id="2_rv8o6"]
+[ext_resource type="Shader" uid="uid://vyrogqfxi8ja" path="res://assets/materials-shared/_shaders/shell/shell_shader.gdshader" id="4_c3e30"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3f5ri"]
 resource_name = "godot_plush"
@@ -30,7 +30,7 @@ fractal_octaves = 1
 noise = SubResource("FastNoiseLite_4kwk8")
 seamless = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqwoq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ff4co"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_c3e30")
@@ -50,7 +50,7 @@ material_override = SubResource("StandardMaterial3D_3f5ri")
 material_override = SubResource("StandardMaterial3D_nstuy")
 
 [node name="lever_handle" parent="Visuals/HandlePivot" parent_id_path=PackedInt32Array(517220544) index="0" unique_id=222511860]
-material_override = SubResource("ShaderMaterial_mqwoq")
+material_override = SubResource("ShaderMaterial_ff4co")
 
 [node name="InteractArea" parent="." index="4" unique_id=2078814964]
 label_text = ""
