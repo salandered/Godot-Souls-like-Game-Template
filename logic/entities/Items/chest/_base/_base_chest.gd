@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/chest/icon_chest_3.png")
-
 @abstract
 class_name BaseChest
 extends Node3DSystem
@@ -38,20 +35,19 @@ class AnimID:
 
 
 func _ready() -> void:
-	if not eu.is_editor():
-		if __perform_validation():
-			var _item := item_scene.instantiate()
-			if _item is not BasePickItem:
-				__log_warn("_item is not BasePickItem")
-				item = null
-			else:
-				item = _item
-				add_child(item)
-				item.global_position = item_pivot.global_position
-				item.set_interact_area_monitor_enable(false)
+	if __perform_validation():
+		var _item := item_scene.instantiate()
+		if _item is not BasePickItem:
+			__log_warn("_item is not BasePickItem")
+			item = null
+		else:
+			item = _item
+			add_child(item)
+			item.global_position = item_pivot.global_position
+			item.set_interact_area_monitor_enable(false)
 
-			animation_player.animation_finished.connect(_on_animation_finished)
-			interact_area.SIG_interacted.connect(_on_my_area_interacted)
+		animation_player.animation_finished.connect(_on_animation_finished)
+		interact_area.SIG_interacted.connect(_on_my_area_interacted)
 
 
 func __hard_validation() -> bool:

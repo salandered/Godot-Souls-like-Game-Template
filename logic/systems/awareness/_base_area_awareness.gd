@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/yellow/icon_visibility.png")
-
 @abstract
 class_name BaseAreaAwareness
 extends Node3DCharacterSystem

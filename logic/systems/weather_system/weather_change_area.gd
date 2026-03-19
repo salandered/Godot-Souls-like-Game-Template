@@ -1,4 +1,3 @@
-@tool
 class_name WeatherChangeArea
 extends Area3DSystem
 

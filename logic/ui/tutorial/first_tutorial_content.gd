@@ -64,7 +64,6 @@ const italics_phrases: Array[String] = [
 func _ready() -> void:
 	set_all_texts()
 
-
 	if not eu.is_editor():
 		SigUtils.safe_connect(GlobalSignal.SIG_tut_panel_switched, _on_SIG_tut_panel_switched)
 

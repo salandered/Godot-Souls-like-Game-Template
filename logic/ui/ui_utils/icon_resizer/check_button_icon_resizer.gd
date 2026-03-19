@@ -1,6 +1,7 @@
 @tool
-extends NodeLogger
 class_name CheckButtonIconResizer
+extends NodeLogger
+
 
 @export_range(0.1, 3.0, 0.1) var base_scale: float = 1.0:
 	set(value):

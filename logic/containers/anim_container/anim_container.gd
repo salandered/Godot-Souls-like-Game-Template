@@ -1,6 +1,3 @@
-@tool
-@icon("uid://de45upgkelpba") ## icon grid
-
 class_name AnimContainer
 extends BaseAnimContainer
 

@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/lever/icon_lever.png")
-
 @abstract
 class_name BaseLever
 extends Node3DSystem
@@ -34,10 +31,9 @@ class AnimID:
 
 
 func _ready() -> void:
-	if not eu.is_editor():
-		if __perform_validation():
-			interact_area.SIG_interacted.connect(_on_my_area_interacted)
-			interact_area.set_monitor_enable(true)
+	if __perform_validation():
+		interact_area.SIG_interacted.connect(_on_my_area_interacted)
+		interact_area.set_monitor_enable(true)
 
 
 func _switch_lever():

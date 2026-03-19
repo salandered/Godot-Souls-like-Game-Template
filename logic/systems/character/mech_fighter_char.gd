@@ -1,5 +1,3 @@
-@tool
-@icon("uid://dd0icn2k413ft")
 class_name MechFighter
 extends BaseStaticCharacter
 

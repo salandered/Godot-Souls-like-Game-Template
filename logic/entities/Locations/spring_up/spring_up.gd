@@ -1,7 +1,6 @@
-@tool
-@icon("uid://dxsslmwb8skjn")
 class_name SpringUp
 extends Node3DSystem
+
 
 @export var lift_height: float = 6.0
 @export var lift_duration: float = 0.4 # How many seconds the lift takes
@@ -13,19 +12,24 @@ extends Node3DSystem
 @onready var whoosh_1: AudioStreamPlayer3D = %WHoosh1
 @onready var whoosh_2: AudioStreamPlayer3D = %Whoosh2
 
+
 var _target_player: Princess
 var _time_elapsed: float = 0.0
 var _start_y: float = 0.0
+var _current_target_height: float = 0.0
+
 
 func __hard_dependencies() -> Array:
 	return [monitor_player_enter_signal_area]
 
+
 func __soft_dependencies() -> Array:
 	return [interact_area, whoosh_1, whoosh_2]
 
+
 func _ready() -> void:
 	set_physics_process(false)
-	if eu.is_editor(): return
+
 	if __perform_validation():
 		monitor_player_enter_signal_area.SIG_player_entered.connect(on_player_entered)
 
@@ -54,8 +58,6 @@ func on_player_entered(incoming_body: Node3D):
 	
 	set_physics_process(true)
 	_play_spring_effects()
-
-var _current_target_height: float = 0.0
 
 
 func _physics_process(delta: float) -> void:

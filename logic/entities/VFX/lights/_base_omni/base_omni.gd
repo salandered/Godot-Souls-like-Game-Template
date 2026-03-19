@@ -107,7 +107,6 @@ func _ready() -> void:
 	_ready_implementation()
 
 	if not eu.is_editor():
-		#test_visuals_base.visible = false
 		tu.hide_dev_visuals(self )
 		_ready_implementation_non_editor()
 

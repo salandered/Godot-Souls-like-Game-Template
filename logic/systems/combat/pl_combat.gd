@@ -1,6 +1,7 @@
-@tool
-extends BaseCombat
 class_name PlayerCombat
+extends BaseCombat
+
+
 @onready var _player: Princess = $".."
 @onready var bones: PlayerBones = %bones
 @onready var weapon_switcher: GestureSpawner = %WeaponSwitcher

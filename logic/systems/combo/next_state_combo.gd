@@ -1,4 +1,3 @@
-@tool
 extends Combo_
 
 class_name NextStateCombo

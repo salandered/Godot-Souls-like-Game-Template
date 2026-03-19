@@ -1,4 +1,3 @@
-@tool
 class_name WeatherSystem
 extends Node3DSystem
 

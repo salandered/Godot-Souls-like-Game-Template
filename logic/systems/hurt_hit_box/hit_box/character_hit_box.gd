@@ -1,8 +1,6 @@
-@tool
-@icon("res://assets/x_icons/red/hit_box_3d.svg")
-extends Area3DCharacterSystem
 ## Area which CAN BE damaged. Opposed to an area which DAMAGES.
 class_name CharacterHitbox
+extends Area3DCharacterSystem
 
 ## TODO: use CommonArea framework
 

@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/red/icon_sword.png")
-
 @abstract
 class_name BaseWeapon
 ## TODO: probably weapon should not be character system.

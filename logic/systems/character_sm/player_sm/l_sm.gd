@@ -1,8 +1,5 @@
-@tool
-@icon("res://assets/x_icons/node-colors/orange-2.png")
-
-extends Node
 class_name LegsSM
+extends Node
 
 @export var container: PlayerStatesContainer
 @export var player_sm: PlayerSM

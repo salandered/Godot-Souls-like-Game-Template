@@ -1,7 +1,6 @@
-@tool
-@icon("res://assets/x_icons/red/icon_sword.png")
-extends PHEWeapon
 class_name AuraWeapon
+extends PHEWeapon
+
 
 @onready var weapon_sfx: WeaponSFXParent = $WeaponSFXParent
 

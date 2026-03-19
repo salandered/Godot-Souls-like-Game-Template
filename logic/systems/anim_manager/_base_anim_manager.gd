@@ -1,5 +1,3 @@
-@tool
-@icon("res://assets/x_icons/node-colors/purple.png")
 @abstract
 class_name BaseAnimatorManager
 extends NodeSystem

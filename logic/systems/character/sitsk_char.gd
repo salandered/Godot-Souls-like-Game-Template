@@ -1,5 +1,3 @@
-@tool
-@icon("uid://dcpyrehmo4f87")
 extends PHCharacter
 class_name SittingSkCharacter
 

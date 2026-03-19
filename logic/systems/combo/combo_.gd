@@ -1,5 +1,3 @@
-@tool
-@icon("res://assets/x_icons/white/icon_propeller.png")
 @abstract
 class_name Combo_
 extends NodeLogger

@@ -1,6 +1,5 @@
-@tool
-extends BaseCombat
 class_name MechFighterCombat
+extends BaseCombat
 
 @export var me: MechFighter
 @export var parent_node_of_weapons: Node3D

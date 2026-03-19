@@ -49,10 +49,9 @@ Follow official [docs](https://docs.godotengine.org/en/stable/tutorials/scriptin
    - any dev/debug methods which are not part of the business logic _(while we try to separate them from main files entirely)_
    - **Logger Framework** methods _(least important)_
 
-ℹ️ Note about the [class declaration](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#class-declaration): `@tool` keyword is often used just to make an icon
+ℹ️ Note about the [class declaration](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#class-declaration): `@tool` keyword is sometimes used in order to make an icon
 
-- It helps with readability (Godot UI) greatly
-- Probably is a bad practice: engine tries to run them all in editor (being blocked by utilities).
+- It helps with readability, but probably is a bad practice: engine tries to run such scripts in editor
 - => Unfortunately should be deleted in the future.
 
 ## Static Typing

@@ -1,5 +1,3 @@
-@tool
-
 class_name PlAnimatorManager
 extends BaseSkeletonAnimatorManager
 

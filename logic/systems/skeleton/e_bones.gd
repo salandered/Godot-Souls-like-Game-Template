@@ -1,6 +1,5 @@
-@tool
-extends BaseCharBones
 class_name EnemyBones
+extends BaseCharBones
 
 @export var general_skeleton: Skeleton3D
 

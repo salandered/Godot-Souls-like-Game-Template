@@ -1,6 +1,3 @@
-@tool
-@icon("uid://dhhcof4kym2tu") ## icon sword
-
 @abstract
 class_name BaseCombat
 extends NodeCharacterSystem

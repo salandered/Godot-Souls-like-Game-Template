@@ -1,4 +1,3 @@
-@tool
 @abstract
 class_name BaseSkeletonAnimatorManager
 extends BaseAnimatorManager

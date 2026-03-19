@@ -8,6 +8,7 @@ extends BaseInputDevHotkeys
 func _unhandled_input_implementation(event: InputEvent) -> void:
 	pass
 
+
 func _input_implementation(event: InputEvent) -> void:
 	if not FreeCameraMode._enabled:
 		return

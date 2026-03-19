@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/level/icon_level_turquois.png")
-
 class_name Miniature
 extends BaseLevel
 

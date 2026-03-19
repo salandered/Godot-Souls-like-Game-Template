@@ -1,6 +1,6 @@
-@tool
-extends BaseCharBones
 class_name PlayerBones
+extends BaseCharBones
+
 
 @onready var right_wrist_marker: Marker3D = $RightWrist/Marker3D
 @onready var general_skeleton: Skeleton3D = %GeneralSkeleton
@@ -13,5 +13,5 @@ class_name PlayerBones
 
 # TODO: flying head without eyes
 func accept_bones() -> void:
-	for child: BoneAttachment3D in get_descendants.bone_attachments(self):
+	for child: BoneAttachment3D in get_descendants.bone_attachments(self ):
 		child.set_external_skeleton(general_skeleton.get_path())

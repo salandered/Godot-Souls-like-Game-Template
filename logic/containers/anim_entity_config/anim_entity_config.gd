@@ -1,5 +1,3 @@
-@tool
-@icon("res://assets/x_icons/white/icon_gear.png")
 class_name AnimatableEntityConfig
 extends NodeLogger
 

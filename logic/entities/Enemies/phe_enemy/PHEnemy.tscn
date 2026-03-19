@@ -1166,7 +1166,6 @@ script = ExtResource("2_e1y0y")
 
 [node name="PHEFeelings" type="Node" parent="." unique_id=1672623549]
 unique_name_in_owner = true
-process_mode = 4
 script = ExtResource("3_yfa0f")
 MAX_HEALTH = 100.0
 

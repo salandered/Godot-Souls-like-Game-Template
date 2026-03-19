@@ -1,6 +1,3 @@
-@tool
-@icon("uid://cur4l8lp3y58c")
-
 class_name MiniArena
 extends BaseLevel
 

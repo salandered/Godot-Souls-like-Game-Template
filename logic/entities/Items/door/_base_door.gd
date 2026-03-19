@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/door/door-yellow.png")
-
 @abstract
 class_name BaseDoor
 extends Node3DSystem
@@ -47,13 +44,12 @@ func _ready() -> void:
 	if visuals:
 		visuals.visible = show_door
 
-	if not eu.is_editor():
-		if __csg_pivot:
-			__csg_pivot.visible = false
+	if __csg_pivot:
+		__csg_pivot.visible = false
 
-		if __perform_validation():
-			animation_player.animation_finished.connect(_on_animation_finished)
-			interact_area.SIG_interacted.connect(_on_my_area_interacted)
+	if __perform_validation():
+		animation_player.animation_finished.connect(_on_animation_finished)
+		interact_area.SIG_interacted.connect(_on_my_area_interacted)
 
 
 func __hard_validation() -> bool:

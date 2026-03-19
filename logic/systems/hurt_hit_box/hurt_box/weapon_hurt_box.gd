@@ -1,10 +1,7 @@
-@tool
-@icon("res://assets/x_icons/red/comet-red.svg")
-extends Area3DSystem
-
 ## Weapon area which DAMAGES.
 ## HitBox registers collision with it and uses _my_weapon for calculations
 class_name WeaponHurtBox
+extends Area3DSystem
 
 
 ## not nullable

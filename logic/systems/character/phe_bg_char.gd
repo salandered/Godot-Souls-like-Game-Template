@@ -1,5 +1,3 @@
-@tool
-@icon("res://assets/x_icons/char/image (23).png")
 class_name BigGuyCharacter
 extends PHCharacter
 

@@ -1,5 +1,3 @@
-@tool
-
 class_name EnemyAnimatorManager
 extends BaseSkeletonAnimatorManager
 

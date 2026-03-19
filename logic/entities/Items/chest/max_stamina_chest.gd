@@ -1,3 +1,2 @@
-@tool
+class_name MaxStaminaChest
 extends BaseChest
-class_name MaxtaminaChest

@@ -1,5 +1,3 @@
-@tool
-
 @abstract
 class_name FighterArmWeapon
 extends BaseWeapon

@@ -1,3 +1,2 @@
-@tool
-extends BaseChest
 class_name SpeedIncreaseChest
+extends BaseChest

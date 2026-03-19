@@ -1,6 +1,5 @@
-@tool
-extends BaseFeelings
 class_name PHEFeelings
+extends BaseFeelings
 
 
 @export var MAX_HEALTH: float = 200

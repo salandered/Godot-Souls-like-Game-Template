@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/white/icon_heart.png")
-
 @abstract
 class_name BaseFeelings
 extends NodeCharacterSystem
@@ -13,11 +10,6 @@ var _current_health: float
 
 
 func _ready() -> void:
-	if eu.is_editor():
-		process_mode = Node.PROCESS_MODE_DISABLED
-		return
-	else:
-		process_mode = Node.PROCESS_MODE_INHERIT
 	_current_health = get_max_health()
 	__log_("health", "curr health initted with max health", _current_health, get_max_health())
 	statuses = {}

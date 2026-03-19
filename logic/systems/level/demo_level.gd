@@ -1,6 +1,3 @@
-@tool
-@icon("res://assets/x_icons/level/icon_level_blue_alt.png")
-
 class_name DemoLevel
 extends BaseLevel
 

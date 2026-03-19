@@ -1,5 +1,3 @@
-@tool
-@icon("uid://ccj2f8kjhs186")
 ## i m not sure are we the princess or not, but the name stuck.
 ## sometimes when 'player' sounds too abstract 
 ## (is it main player? animation player? or audio stream player?)

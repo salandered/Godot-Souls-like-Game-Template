@@ -1,4 +1,3 @@
-@tool
 extends BaseVisuals
 class_name PlayerVisuals
 

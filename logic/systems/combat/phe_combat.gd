@@ -1,6 +1,5 @@
-@tool
-extends BaseCombat
 class_name PHECombat
+extends BaseCombat
 
 @onready var me: PHCharacter = $".."
 @onready var bones: EnemyBones = %bones

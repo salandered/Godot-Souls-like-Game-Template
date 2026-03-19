@@ -1,4 +1,3 @@
-@tool
 extends BaseAreaAwareness
 class_name PlayerAreaAwareness
 
