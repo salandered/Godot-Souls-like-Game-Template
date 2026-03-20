@@ -18,6 +18,10 @@ var sig_container: BaseWeaponSignalContainer
 var _sig_throttler: EventThrottler
 var _overlapping_obj_throttler: EventThrottler
 
+
+const SPARK_HIT = preload("uid://fohkachkfkuq")
+
+
 func __hard_dependencies() -> Array:
 	return [
 		_my_weapon
@@ -104,8 +108,6 @@ func _on_body_or_area_entered(body: Node3D) -> void:
 func _apply_sfx_hit_to_my_weapon(body: Node3D):
 	_emit_sig(SignalID.sfx_hit_weapon, {}, body)
 
-const SPARK_HIT = preload("uid://fohkachkfkuq")
-
 
 func _apply_sparks_to_my_weapon(body: Node3D):
 	if not _my_weapon.spark_marker or not SPARK_HIT:
@@ -132,7 +134,7 @@ func _apply_sfx_hit_target(body: Node3D):
 	if body is Area3D: # including CharacterHitbox (will manage on its own)
 		return
 
-	## CHARACTERBODY
+	## CHARACTER BODY
 	if body is CharacterBody3D:
 		return
 	

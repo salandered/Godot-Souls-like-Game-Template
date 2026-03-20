@@ -31,12 +31,9 @@ mono_crash.*.json
 
 # ================= PROJECT DATA
 # Project non essentials
-misc/
-ideas/
--adopting/
 *__private_docs/*
 # unit tests
-_workflow/_misc/_test/*
+**/_workflow/_misc/_test/*
 
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons
