@@ -952,7 +952,5 @@ layer = 100
 [node name="CursorTools" type="Node" parent="CanvasLayerCursor" unique_id=1876213618]
 script = ExtResource("30_n600l")
 cursor_texture = ExtResource("31_p4imp")
-bigger_size_on_lanch = true
-trail_on_lanch = true
 
 [editable path="CanvasLayer/__global_margin/TopSide/PanelContainer/DynamicInfoGrid/SEState/__hbox/SEReactionInfo"]

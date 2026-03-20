@@ -38,6 +38,7 @@ mono_crash.*.json
 # ================== ADDONS
 # Ignore full folder but not self written addons or edited third party addons
 addons/*
+InstanceDockSceneData.txt
 !addons/pixpal_tools_edited
 !addons/console
 

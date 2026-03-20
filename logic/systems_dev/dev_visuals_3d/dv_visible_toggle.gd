@@ -5,4 +5,4 @@ extends DTCSignalEnabledNode3D
 
 
 func _enabled_on_init():
-	return true
+	return false

@@ -18,7 +18,7 @@ var MOUSE_WHEEL := [
 ]
 
 
-## stores when mouse wheel scroll was registered: button indes -> timestamp
+## stores when mouse wheel scroll was registered: button index -> timestamp
 var _active_scroll: Dictionary[int, float] = {}
 var _scroll_display_duration: float = 0.25
 

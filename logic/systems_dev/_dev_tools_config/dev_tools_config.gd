@@ -26,7 +26,7 @@ func _init(value_changed_: Signal) -> void:
 	var _panel_data: Dictionary[DTS.KeyBOverlayPanel, bool] = {}
 	for item in DTS.KeyBOverlayPanel.values():
 		_panel_data[item] = false
-	_panel_data[DTS.KeyBOverlayPanel.RAW_INPUT] = true
+	_panel_data[DTS.KeyBOverlayPanel.RAW_INPUT] = false
 
 	_data[DTS.DTSection.B_OVERLAY_PANEL] = _panel_data
 
@@ -37,7 +37,7 @@ func _init(value_changed_: Signal) -> void:
 		_b_vc_data[item] = false
 	_b_vc_data[DTS.KeyBValueChanger.WEAPON_HIT_SHADED] = DVHitBoxAreaContact.DEF_SHADED == BaseMaterial3D.SHADING_MODE_PER_PIXEL
 	_b_vc_data[DTS.KeyBValueChanger.WEAPON_HIT_SNAPPED_HITS] = DVHitBoxAreaContact.DEF_draw_snapped_hits
-	_b_vc_data[DTS.KeyBValueChanger.PLAYER_LIGHTS] = true
+	_b_vc_data[DTS.KeyBValueChanger.PLAYER_LIGHTS] = false
 	
 	_data[DTS.DTSection.B_CHANGER] = _b_vc_data
 

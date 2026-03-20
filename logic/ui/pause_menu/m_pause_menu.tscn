@@ -159,7 +159,7 @@ text = "Restart"
 
 [node name="ShowUIOverlayControls" parent="CanvasLayer/HBoxContainer/MenuPanelContainer/MarginContainer/BoxContainer/MenuButtonsMargin/MenuButtons" unique_id=1810789300 instance=ExtResource("7_fb021")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(220, 50)
+custom_minimum_size = Vector2(260, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6315303, 0.87781894, 1, 1)
 theme_override_colors/font_focus_color = Color(0.6313726, 0.8784314, 1, 1)
