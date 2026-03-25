@@ -13,7 +13,7 @@ Animation may contain not only skeleton data (movement of bones), but also a lot
 
 ## Examples of data
 
-![alt text](images/anim_track_1.png)
+![alt text](images/anim_track_1.jpg)
 
 ### State flow information
 
@@ -38,7 +38,7 @@ This is a very powerful way of storing animation-related data.
 
 You use timeline cursor in order to align the data with animations visuals. Example: making weapon hurt a couple ticks later means that you just drag `weapon_hurts` track key, unless it looks natural given the character pose.
 
-![alt text](images/anim_tracks_2.png)
+![alt text](images/anim_tracks_2.jpg)
 
 Data is being 'processed' just because it is a part of animation. At any given time you know the state of all custom tracks and animation position relative to markers.
 Thanks to several services and utility functions, such check are short and readable:

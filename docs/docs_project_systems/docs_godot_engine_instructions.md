@@ -111,7 +111,7 @@ Since wrapper is essentially an inherited scene, it also allows any write operat
 
 Example with added collisions for inherited nodes and an addition of completely new `SwayParent` nodes: they would imitate that rope props are swaying in the wind. Here `tree` node was a collection in Blender.
 
-![alt text](images/tree_rope.png)
+![alt text](images/tree_rope.jpg)
 
 ## 🦋 Maaacks game template adoption
 

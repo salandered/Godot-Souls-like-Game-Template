@@ -13,6 +13,7 @@ extends BaseCharacter
 @onready var container: PlayerStatesContainer = %StatesContainer
 @onready var bones: PlayerBones = %bones
 @onready var feelings: PlayerFeelings = %Feelings
+@onready var ui_feelings: PlUIFeelings = %UIFeelings
 @onready var player_sm: PlayerSM = %PlayerSM
 @onready var pl_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %PlayerAnimSFXSigEmitter
 @onready var smith_sword_anim_sfx_sig_emitter: PlayerAnimSFXSignalEmitter = %SmithSwordAnimSFXSigEmitter

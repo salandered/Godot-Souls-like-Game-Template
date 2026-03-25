@@ -115,9 +115,8 @@ modulate = Color(0.8025197, 0.8025197, 0.8025197, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("14_gmoc3")
 theme_override_font_sizes/font_size = 24
-text = "Demo of main mechanics and developer tools. 
-Features custom made characters, levels and music. 
-Made with Godot"
+text = "A demonstration of the souls-like game's core mechanics and developer tools.
+Includes custom-designed characters, levels, and music."
 horizontal_alignment = 1
 vertical_alignment = 1
 

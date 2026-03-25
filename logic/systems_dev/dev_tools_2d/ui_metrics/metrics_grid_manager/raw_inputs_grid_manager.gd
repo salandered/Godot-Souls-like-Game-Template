@@ -28,7 +28,7 @@ func get_dtc_op_key() -> DTS.KeyBOverlayPanel:
 
 
 func _enabled_on_init():
-	return true
+	return false
 
 
 func _input(event: InputEvent) -> void:

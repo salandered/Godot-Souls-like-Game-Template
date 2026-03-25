@@ -1,6 +1,9 @@
 class_name PlUIFeelings
 extends NodeSystem
 
+
+@onready var feelings_container: MarginContainer = %FeelingsContainer
+
 @onready var _health_bar: TextureProgressBar = %HealthBar
 @onready var _health_ghost: TextureProgressBar = %GhostHealthBar
 @onready var _health_back: TextureProgressBar = %BackHealthBar
@@ -10,7 +13,6 @@ extends NodeSystem
 @onready var _stamina_ghost: TextureProgressBar = %GhostStaminaBar
 @onready var _stamina_back: TextureProgressBar = %BackStaminaBar
 @onready var _stamina_container: MarginContainer = %StaminaContainer
-
 @onready var pl_feelings: PlayerFeelings = %Feelings
 
 

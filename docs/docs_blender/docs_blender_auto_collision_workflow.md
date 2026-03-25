@@ -10,7 +10,7 @@
 - [Blender script documentation](#blender-script-documentation)
 	- [Functions Explained](#functions-explained)
 
-![alt text](<images/how it looks p2.png>)  ![alt text](<images/how it looks.png>)
+![alt text](<images/how it looks p2.jpg>)  ![alt text](<images/how it looks.jpg>)
 
 Blue objects here represent the result of the script on Blender side.
 

@@ -36,7 +36,16 @@ func _unhandled_input_implementation(event: InputEvent) -> void:
 		_player.get_combat()._last_processed_hit = hit
 		_player.react_on_hit(hit)
 
-	
+
+	## FEELING UI
+	if not _player.ui_feelings:
+		return
+	if not _player.ui_feelings.feelings_container:
+		return
+	if InputUtils.is_keycode_w_ctrl_alt(event, KEY_9):
+		_player.ui_feelings.feelings_container.visible = not _player.ui_feelings.feelings_container.visible
+
+
 	## OVERLAY
 	# if event.is_action_pressed(RawAction.DEV_8):
 	# 	animator_manager.set_overlay_anim(A.react.react_from_L,

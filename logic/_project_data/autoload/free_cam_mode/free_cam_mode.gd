@@ -178,11 +178,11 @@ func _input(event: InputEvent) -> void:
 		_toggle_camera_mode(not is_active)
 		InputUtils.mark_input_handled(self )
 		return
-	if event.is_action_pressed(RawAction.UI_escape):
-		if is_active:
-			_toggle_camera_mode(not is_active)
-			InputUtils.mark_input_handled(self )
-			return
+	# if event.is_action_pressed(RawAction.UI_escape):
+	# 	if is_active:
+	# 		_toggle_camera_mode(not is_active)
+	# 		InputUtils.mark_input_handled(self )
+	# 		return
 
 	if not is_active:
 		return

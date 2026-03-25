@@ -507,6 +507,7 @@ material = SubResource("ShaderMaterial_p1nq7")
 [node name="UI" type="Node" parent="." unique_id=1222997688]
 
 [node name="PauseMenuController" type="Node" parent="UI" unique_id=561210649]
+process_mode = 3
 script = ExtResource("3_3yhff")
 pause_menu_packed = ExtResource("4_cxdwc")
 
@@ -625,7 +626,6 @@ radius = 0.1
 transform = Transform3D(1, 0, 0, 0, 0.9647277, 0.26325008, 0, -0.26325008, 0.9647277, -43.985786, 6.9874277, 56.196415)
 light_color = Color(1, 0.98844486, 0.9537795, 1)
 light_energy = 16.0
-light_indirect_energy = 4.0
 light_bake_mode = 1
 shadow_enabled = true
 spot_range = 85.0
@@ -1125,6 +1125,102 @@ show_ui_feelings = true
 float_ui_feelings = true
 player = NodePath("../../Princess")
 dev_tag = &"demo_enemy"
+
+[node name="PHEnemy2" parent="Lincoln_ALL" unique_id=769926683 node_paths=PackedStringArray("player") instance=ExtResource("56_ohlvg")]
+transform = Transform3D(0.9985715, 0, 0.053434074, 0, 1, 0, -0.053434074, 0, 0.9985715, -44.778446, 0.7032569, -5.793316)
+fire_up = true
+float_ui_feelings = true
+player = NodePath("../../Princess")
+dev_tag = &"demo_enemy"
+
+[node name="PHEFeelings" parent="Lincoln_ALL/PHEnemy2" index="3" unique_id=1672623549]
+MAX_HEALTH = 1000.0
+PHASE_SWITCH_HP_TRESHOLD = 0.96
+
+[node name="Root" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="0" unique_id=1963996720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0008087158, 0, 1.4439688)
+
+[node name="Hips" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="1" unique_id=727464586]
+transform = Transform3D(0.58402276, -0.11730913, -0.80321616, -0.018528838, 0.9873181, -0.1576695, 0.8115259, 0.10696524, 0.5744426, -0.0076408386, 1.7938077, 1.4826384)
+
+[node name="RightWrist" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="2" unique_id=1548925166]
+transform = Transform3D(0.15090378, -0.86807895, 0.47293487, 0.91003555, -0.06485963, -0.4094251, 0.38608742, 0.49217123, 0.78019494, -0.7279053, 1.9085627, 1.0968256)
+
+[node name="LegL" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="3" unique_id=1011928799]
+transform = Transform3D(0.9282828, 0.09065167, 0.36065698, 0.12760082, -0.9885987, -0.07994175, 0.34929815, 0.120228685, -0.92926633, 0.16608429, 1.1952856, 2.3200955)
+
+[node name="LegR" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="4" unique_id=1042209276]
+transform = Transform3D(0.022056937, 0.19954172, 0.979641, -0.47153315, -0.8619685, 0.18618998, 0.88157225, -0.4660401, 0.0750781, -0.5503006, 1.062104, 0.9445381)
+
+[node name="--test" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="5" unique_id=270763135]
+transform = Transform3D(0.8966788, -0.4426759, 0.0028748736, 0.035873417, 0.06619191, -0.99715155, 0.44122595, 0.89424664, 0.075233646, 0.2320137, 0.21526569, 2.5945644)
+
+[node name="Head" parent="Lincoln_ALL/PHEnemy2/bones" parent_id_path=PackedInt32Array(769926683, 1940515577) index="6" unique_id=1239880921]
+transform = Transform3D(0.9670421, -0.07821378, -0.2423056, 0.036938846, 0.98467875, -0.1704212, 0.2519225, 0.15585396, 0.955115, -0.19166565, 2.8572025, 1.6498384)
+
+[node name="PHEnemy3" parent="Lincoln_ALL" unique_id=2103212831 node_paths=PackedStringArray("player") instance=ExtResource("56_ohlvg")]
+transform = Transform3D(0.9985715, 0, 0.053434074, 0, 1, 0, -0.053434074, 0, 0.9985715, -48.032864, 0.7032569, -3.7390838)
+fire_up = true
+float_ui_feelings = true
+player = NodePath("../../Princess")
+dev_tag = &"demo_enemy"
+
+[node name="PHEFeelings" parent="Lincoln_ALL/PHEnemy3" index="3" unique_id=1672623549]
+MAX_HEALTH = 1000.0
+PHASE_SWITCH_HP_TRESHOLD = 0.96
+
+[node name="Root" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="0" unique_id=1963996720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0008049011, 0, 1.4439688)
+
+[node name="Hips" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="1" unique_id=727464586]
+transform = Transform3D(0.58402276, -0.11730913, -0.80321616, -0.018528838, 0.9873181, -0.1576695, 0.8115259, 0.10696524, 0.5744426, -0.0076408386, 1.7938077, 1.4826384)
+
+[node name="RightWrist" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="2" unique_id=1548925166]
+transform = Transform3D(0.15090378, -0.86807895, 0.47293487, 0.91003555, -0.06485963, -0.4094251, 0.38608742, 0.49217123, 0.78019494, -0.7279091, 1.9085627, 1.0968256)
+
+[node name="LegL" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="3" unique_id=1011928799]
+transform = Transform3D(0.9282828, 0.09065167, 0.36065698, 0.12760082, -0.9885987, -0.07994175, 0.34929815, 0.120228685, -0.92926633, 0.16608047, 1.1952856, 2.3200955)
+
+[node name="LegR" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="4" unique_id=1042209276]
+transform = Transform3D(0.022056937, 0.19954172, 0.979641, -0.47153315, -0.8619685, 0.18618998, 0.88157225, -0.4660401, 0.0750781, -0.5503044, 1.062104, 0.9445381)
+
+[node name="--test" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="5" unique_id=270763135]
+transform = Transform3D(0.8966788, -0.4426759, 0.0028748736, 0.035873417, 0.06619191, -0.99715155, 0.44122595, 0.89424664, 0.075233646, 0.23200989, 0.21526569, 2.5945644)
+
+[node name="Head" parent="Lincoln_ALL/PHEnemy3/bones" parent_id_path=PackedInt32Array(2103212831, 1940515577) index="6" unique_id=1239880921]
+transform = Transform3D(0.9670421, -0.07821378, -0.2423056, 0.036938846, 0.98467875, -0.1704212, 0.2519225, 0.15585396, 0.955115, -0.19167328, 2.8572025, 1.6498384)
+
+[node name="PHEnemy4" parent="Lincoln_ALL" unique_id=1518647710 node_paths=PackedStringArray("player") instance=ExtResource("56_ohlvg")]
+transform = Transform3D(0.9985715, 0, 0.053434074, 0, 1, 0, -0.053434074, 0, 0.9985715, -44.31121, 0.7032569, -2.8063753)
+fire_up = true
+float_ui_feelings = true
+player = NodePath("../../Princess")
+dev_tag = &"demo_enemy"
+
+[node name="PHEFeelings" parent="Lincoln_ALL/PHEnemy4" index="3" unique_id=1672623549]
+MAX_HEALTH = 1000.0
+PHASE_SWITCH_HP_TRESHOLD = 0.96
+
+[node name="Root" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="0" unique_id=1963996720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0008049011, 0, 1.4439683)
+
+[node name="Hips" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="1" unique_id=727464586]
+transform = Transform3D(0.58402276, -0.11730913, -0.80321616, -0.018528838, 0.9873181, -0.1576695, 0.8115259, 0.10696524, 0.5744426, -0.0076408386, 1.7938077, 1.4826381)
+
+[node name="RightWrist" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="2" unique_id=1548925166]
+transform = Transform3D(0.15090378, -0.86807895, 0.47293487, 0.91003555, -0.06485963, -0.4094251, 0.38608742, 0.49217123, 0.78019494, -0.7279053, 1.9085627, 1.0968251)
+
+[node name="LegL" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="3" unique_id=1011928799]
+transform = Transform3D(0.9282828, 0.09065167, 0.36065698, 0.12760082, -0.9885987, -0.07994175, 0.34929815, 0.120228685, -0.92926633, 0.16608047, 1.1952856, 2.3200953)
+
+[node name="LegR" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="4" unique_id=1042209276]
+transform = Transform3D(0.022056937, 0.19954172, 0.979641, -0.47153315, -0.8619685, 0.18618998, 0.88157225, -0.4660401, 0.0750781, -0.5503006, 1.062104, 0.94453764)
+
+[node name="--test" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="5" unique_id=270763135]
+transform = Transform3D(0.8966788, -0.4426759, 0.0028748736, 0.035873417, 0.06619191, -0.99715155, 0.44122595, 0.89424664, 0.075233646, 0.23200989, 0.21526569, 2.594564)
+
+[node name="Head" parent="Lincoln_ALL/PHEnemy4/bones" parent_id_path=PackedInt32Array(1518647710, 1940515577) index="6" unique_id=1239880921]
+transform = Transform3D(0.9670421, -0.07821378, -0.2423056, 0.036938846, 0.98467875, -0.1704212, 0.2519225, 0.15585396, 0.955115, -0.19166565, 2.8572025, 1.649838)
 
 [node name="SpeedIncreaseChest" parent="Lincoln_ALL" unique_id=55000678 instance=ExtResource("21_i3y2i")]
 transform = Transform3D(1, 0, 0, 0, 0.9679945, 0.25097135, 0, -0.25097135, 0.9679945, -26.175722, 11.796641, 1.0264926)
@@ -1647,3 +1743,6 @@ bake_mask = 4293918736
 [editable path="Lincoln_ALL/LEVERS/__plush__/plush_column/BreakStaticParent2"]
 [editable path="Lincoln_ALL/SimpleTarget3"]
 [editable path="Lincoln_ALL/SpringUp4"]
+[editable path="Lincoln_ALL/PHEnemy2"]
+[editable path="Lincoln_ALL/PHEnemy3"]
+[editable path="Lincoln_ALL/PHEnemy4"]

@@ -42,7 +42,7 @@ Essentials:
 - [docs_signals ☄️](docs_project_systems/docs_signals.md)
 - [docs_validation_framework 🛡️](docs_project_systems/docs_validation_framework.md)
 - [docs_godot_engine_instructions 💙](docs_project_systems/docs_godot_engine_instructions.md)
-- [docs_optimization_techniques 📈](docs_project_systems/docs_optimization_techniques.md)
+- [docs_optimization_techniques 📉](docs_project_systems/docs_optimization_techniques.md)
 
 ## 📘 Code conventions and best practices
 

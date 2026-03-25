@@ -156,7 +156,7 @@ Currently `Occluder layer` is **5**:
 
 Occluder mesh setting would be:
 
-![alt text](images/culling/occ_layer.png)
+![alt text](images/culling/occ_layer.jpg)
 
 ### Which meshes should be occluders
 
@@ -174,7 +174,7 @@ Several ways are possible.
 
 #### How it looks
 
-![alt text](images/culling/level_occl.png)
+![alt text](images/culling/level_occl.jpg)
 
 ## 🕹️ Disabling node processing
 
@@ -209,11 +209,11 @@ Many objects in project use this node, sometimes with additional QoL features li
 <br>
 Fire node (used for torches):
 
-![alt text](images/vosn/fire_usual.png)
+![alt text](images/vosn/fire_usual.jpg)
 
 VisibleOnScreenNotifier3D cube around the fire node:
 
-![alt text](images/vosn/fire_vosn.png)
+![alt text](images/vosn/fire_vosn.jpg)
 
 Fire node settings: we can set cube size or auto calculate it using the omni light radius (part of the fire scene).
 
