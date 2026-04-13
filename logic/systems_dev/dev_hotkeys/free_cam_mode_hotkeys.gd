@@ -23,6 +23,7 @@ func _input_implementation(event: InputEvent) -> void:
 	_handle_fov_input(camera, event)
 	_handle_light_toggle(camera, event)
 	_handle_light_energy_input(camera, event)
+	_handle_cinematic_toggle(event)
 
 
 func _handle_mouse_wheel(event: InputEvent) -> void:
@@ -74,3 +75,9 @@ func _handle_light_toggle(camera: FreeCamera, event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_L:
 		camera.get_light().visible = not camera.get_light().visible
 		InputUtils.mark_input_handled(self )
+
+
+func _handle_cinematic_toggle(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_C:
+		FreeCameraMode.cinematic_mode = not FreeCameraMode.cinematic_mode
+		InputUtils.mark_input_handled(self)

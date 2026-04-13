@@ -10,6 +10,17 @@ extends Node3DSystem
 
 @onready var hot_keys: BaseInputDevHotkeys = %HotKeys
 
+
+## cinematic mode
+@export var cinematic_mode: bool = false
+@export var cinematic_acceleration: float = 4.0
+@export var cinematic_rotation_speed: float = 7.0
+
+var _velocity := Vector3.ZERO
+var _target_rotation := Vector3.ZERO
+##
+
+
 var _camera: FreeCamera
 
 var _cached_camera: Camera3D
@@ -101,25 +112,57 @@ var _mouse_motion := Vector2.ZERO
 
 
 func move_camera(delta: float):
+	if cinematic_mode:
+		_move_cinematic(delta)
+	else:
+		_move_rigid(delta)
+		_sync_cinematic_state()
+
+
+func _sync_cinematic_state() -> void:
+	_target_rotation = _camera.global_transform.basis.get_euler()
+	_velocity = Vector3.ZERO
+
+
+func _move_rigid(delta: float):
 	var movement := _get_keyboard_movement_vector()
 	
-	# rotation based on mouse movement
 	if _mouse_motion != Vector2.ZERO:
 		var rotation_input := -_mouse_motion.x * mouse_sensitivity
 		var tilt_input := -_mouse_motion.y * mouse_sensitivity
 		
 		var euler_rotation := _camera.global_transform.basis.get_euler()
 		euler_rotation.x += tilt_input
-		# limit vertical rotation
 		euler_rotation.x = clamp(euler_rotation.x, -PI / 2 + 0.01, PI / 2 - 0.01)
 		euler_rotation.y += rotation_input
 		_camera.global_transform.basis = Basis.from_euler(euler_rotation)
 		
-		# reset mouse motion for next frame
 		_mouse_motion = Vector2.ZERO
 	
-	# movement
 	_camera.global_position += _camera.global_transform.basis * movement * delta * _get_current_movement_speed()
+
+
+func _move_cinematic(delta: float):
+	var movement := _get_keyboard_movement_vector()
+	
+	if _mouse_motion != Vector2.ZERO:
+		var rotation_input := -_mouse_motion.x * mouse_sensitivity
+		var tilt_input := -_mouse_motion.y * mouse_sensitivity
+		
+		_target_rotation.x += tilt_input
+		_target_rotation.x = clamp(_target_rotation.x, -PI / 2 + 0.01, PI / 2 - 0.01)
+		_target_rotation.y += rotation_input
+		
+		_mouse_motion = Vector2.ZERO
+		
+	var current_euler := _camera.global_transform.basis.get_euler()
+	current_euler.x = lerp_angle(current_euler.x, _target_rotation.x, cinematic_rotation_speed * delta)
+	current_euler.y = lerp_angle(current_euler.y, _target_rotation.y, cinematic_rotation_speed * delta)
+	_camera.global_transform.basis = Basis.from_euler(current_euler)
+	
+	var target_velocity := _camera.global_transform.basis * movement * _get_current_movement_speed()
+	_velocity = _velocity.lerp(target_velocity, cinematic_acceleration * delta)
+	_camera.global_position += _velocity * delta
 
 
 func _get_current_movement_speed() -> float:
@@ -137,11 +180,12 @@ func _get_current_movement_speed() -> float:
 func _update_hud() -> void:
 	var pos := _camera.global_position
 	var rot := _camera.rotation_degrees
-	var hud_text := "POS:  %.1f, %.1f, %.1f\nROT:  %.1f, %.1f\nSPD:  %.1f\nFOV:  %.0f" % [
+	var hud_text := "POS:  %.1f, %.1f, %.1f\nROT:  %.1f, %.1f\nSPD:  %.1f\nFOV:  %.0f\nCINEMATIC: %s" % [
 		pos.x, pos.y, pos.z,
 		rot.x, rot.y,
 		camera_speed,
-		_camera.fov
+		_camera.fov,
+		"ON" if cinematic_mode else "OFF"
 	]
 	if _camera.get_light():
 		hud_text += pp.s("\nLight: ", _camera.get_light().visible,

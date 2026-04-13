@@ -15,5 +15,7 @@
     "MD060": false,
     # using inline html for things like this:
     # https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections
-    "MD033": false
+    "MD033": false,
+    
+    "MD036": false
 }

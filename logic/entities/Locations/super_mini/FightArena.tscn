@@ -690,10 +690,10 @@ pause_menu_packed = ExtResource("12_frhvg")
 transform = Transform3D(0.7463843, 0.26150516, 1.5575589, 0.09791709, 1.711756, -0.33431605, -1.5763205, 0.23015217, 0.7167341, -24.872158, 5.9395423, 16.432268)
 
 [node name="PropSet_5_WallChain_1" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang2" index="0" unique_id=318174817]
-transform = Transform3D(0.9621944, -0.27233854, 0.0035372032, 0.27234185, 0.9618873, -0.02452228, 0.0032759742, 0.024558546, 0.99969226, -0.013861522, -0.02845478, -0.015266545)
+transform = Transform3D(0.97456396, -0.22407909, 0.0035380444, 0.22410505, 0.97450024, -0.011171388, -0.00094455143, 0.011680133, 0.99993056, -0.013861522, -0.02845478, -0.015266545)
 
 [node name="Lantern_Lamp_Splitted_002" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang2/PropSet_5_WallChain_1" index="0" unique_id=842819166]
-transform = Transform3D(0.0917178, 0.29459715, 0.95120907, -0.09935751, 0.9531763, -0.28562582, -0.9908147, -0.068312906, 0.11669374, 0.051190376, -0.9800582, 0.0934515)
+transform = Transform3D(0.12736332, 0.24771336, 0.9604244, 0.021737454, 0.96738094, -0.25238997, -0.9916168, 0.053022493, 0.11782427, 0.051190376, -0.9800582, 0.0934515)
 
 [node name="SwayParent" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang2/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="1" unique_id=121597266]
 transform = Transform3D(0.43654612, 0.0055689923, 0.15607107, 0.0008867942, 0.46324873, -0.019010201, -0.15616792, 0.01819785, 0.43616742, 1.4460735, 1.3251395, 3.8779736)
@@ -710,10 +710,10 @@ preview_in_editor = true
 transform = Transform3D(1.0057465, 0.12524946, -0.467721, -0.18489945, 1.0958766, -0.10413038, 0.44750696, 0.17129941, 1.0081524, -7.977156, 3.6842396, -0.07673445)
 
 [node name="PropSet_5_WallChain_1" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang5" index="0" unique_id=318174817]
-transform = Transform3D(0.90466756, -0.42610183, 0.0035373701, 0.42606854, 0.904411, -0.022483177, 0.006380889, 0.021846993, 0.99973994, -0.013861522, -0.02845478, -0.015266545)
+transform = Transform3D(0.92476654, -0.3805166, 0.0035381145, 0.3805328, 0.9247219, -0.009131826, 0.0002030398, 0.009791191, 0.999951, -0.013861522, -0.02845478, -0.015266545)
 
 [node name="Lantern_Lamp_Splitted_002" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang5/PropSet_5_WallChain_1" index="0" unique_id=842819166]
-transform = Transform3D(0.08181663, 0.2722257, 0.9587487, -0.14504516, 0.95498383, -0.2587793, -0.986036, -0.11788941, 0.117618695, 0.010772705, -0.9824009, 0.08148956)
+transform = Transform3D(0.10859693, 0.23840533, 0.96507484, -0.054404244, 0.9707862, -0.23369457, -0.99259555, -0.02712565, 0.118394785, 0.010772705, -0.9824009, 0.08148956)
 
 [node name="SwayParent" parent="Visuals/Castle/props/PropSet_5_WallChain_1_hang5/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="1" unique_id=121597266]
 transform = Transform3D(0.43654612, 0.0055689923, 0.15607107, 0.0008867942, 0.46324873, -0.019010201, -0.15616792, 0.01819785, 0.43616742, 1.4460735, 1.3251395, 3.8779736)
@@ -1118,13 +1118,16 @@ shape = SubResource("ConcavePolygonShape3D_akjwb")
 [node name="targets" type="Node3D" parent="Visuals/OldProps" unique_id=654923245]
 
 [node name="DevHitTarget" parent="Visuals/OldProps/targets" unique_id=577510375 instance=ExtResource("48_fdocf")]
-transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.42274475, 7.8833694, 0.0895949, 11.305098)
+transform = Transform3D(0.42274475, 0, -0.9062488, 0, 1, 0, 0.9062488, 0, 0.42274475, 17.094896, 0.08959514, 6.5271425)
 
 [node name="Target3" parent="Visuals/OldProps/targets" unique_id=133699884 instance=ExtResource("49_grbeb")]
 transform = Transform3D(-0.8328634, 0, -0.5534787, 0, 1, 0, 0.5534787, 0, -0.8328634, -7.3618555, -0.23896098, 19.983622)
 
 [node name="Target4" parent="Visuals/OldProps/targets" unique_id=918419528 instance=ExtResource("49_grbeb")]
 transform = Transform3D(-0.8328634, 0, -0.5534787, 0, 1, 0, 0.5534787, 0, -0.8328634, -2.2248049, -0.23896098, 20.161592)
+
+[node name="Target5" parent="Visuals/OldProps/targets" unique_id=1998518947 instance=ExtResource("49_grbeb")]
+transform = Transform3D(-0.8328634, 0, -0.5534787, 0, 1, 0, 0.5534787, 0, -0.8328634, 7.730162, -0.006041527, 10.951317)
 
 [node name="JustColumns" type="Node3D" parent="Visuals/OldProps" unique_id=1837967503]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.53088, -1.703414, -51.601074)

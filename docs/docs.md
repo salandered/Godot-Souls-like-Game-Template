@@ -31,7 +31,7 @@ VSCode is used with **godot-tools** plugin.
 
 ### Image editors
 
-Anything can be used I guess. I use **Krita** version 5.x and **ImageMagic**
+Anything can be used I guess. I use **Krita** version 5.x and **ImageMagick**
 
 ## ✍️ Instructions
 
@@ -62,7 +62,7 @@ Follows [official docs](https://docs.godotengine.org/en/stable/tutorials/best_pr
 
 Scene resources ([.tscn](https://docs.godotengine.org/en/stable/engine_details/file_formats/tscn.html#tscn-file-format)) are saved using **PascalCase**. That means that saved scene name equals to its root node name.
 
-- It seemed natural and improves file system readability, but also [a bad practice](https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html#case-sensitivity).
+- It seemed natural and improved file system readability, but also [a bad practice](https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html#case-sensitivity).
 - => It is planned to switch to **snake_case**
 
 > [!TIP]
@@ -76,6 +76,6 @@ In particular, it's useful to set up read-only MCP server with latest Godot docs
 
 Instructions can be found here: [Godot MCP Docs](https://github.com/Nihilantropy/godot-mcp-docs).
 
-"Raw" AI chats tend to mix Godot versions including Godot 3 and early 4.x (i.e they don't know that variadic arguments are supported). Godot/GDScript are not relatively popular, it shows in the AI training (and [search](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/l7ziuhs/) [results](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/lg11lwj/)).
+"Raw" AI chats tend to mix Godot versions including Godot 3 and early 4.x (i.e they don't know that variadic arguments are supported). Godot/GDScript are not particularly popular, it shows in the AI training (and [search](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/l7ziuhs/) [results](https://www.reddit.com/r/godot/comments/1bdfh5q/comment/lg11lwj/)).
 
 ℹ️ It is not recommended to use MCP servers which expose _**write access**_ to OS, Godot or any other application.

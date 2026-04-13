@@ -19,7 +19,9 @@ const controls_text := "[b]WASD[/b] - Move
 [b]Wheel up/down[/b] - Change speed
 [b]Wheel up/down + RMB[/b] - Change FOV
 [b]Wheel up/down + LMB[/b] - Change light energy
+[b]C[/b] - Cinematic mode (smooth)
 [i]NumPad 0 - Toggle ui modes[/i]
+[b]F9[/b] - Turn off 
 "
 
 func _ready() -> void:

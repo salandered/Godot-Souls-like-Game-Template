@@ -33,7 +33,7 @@ File format - GLB (glTF 2.0)\
 
 - Godot [recommends](https://docs.godotengine.org/en/4.4/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html#exporting-gltf-2-0-files-from-blender-recommended) this.
 
-You can also importing .blend files [directly](https://docs.godotengine.org/en/4.4/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html#importing-blend-files-directly-within-godot)
+You can also import .blend files [directly](https://docs.godotengine.org/en/4.4/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html#importing-blend-files-directly-within-godot)
 
 - I didn't like this, every save leads to scene update. This is a feature but with the big blender projects this means that Godot is constantly "not available"
 
@@ -42,8 +42,8 @@ You can also importing .blend files [directly](https://docs.godotengine.org/en/4
 Collection exporters are recommended to use.
 
 - One Blender scene would be split into several collections, each one corresponding to separate GLB file. This makes exporting and then importing in Godot faster and more flexible.
-- Exporter may have different settings, i.e collection with level does not have animation data, while character skeleton does.
-- Such exporter are persistent, their settings are saved in a `.blend` file.
+- Each exporter may have different settings, i.e collection with level does not have animation data, while character skeleton does.
+- Such exporters are persistent, their settings are saved in a `.blend` file.
 
 ## ⚙️ Exporter settings
 
@@ -54,15 +54,13 @@ Collection exporters are recommended to use.
 **Full collection Hierarchy** - usually checked, this way collection hierarchy will be preserved in Godot node tree.
 
 **Images**
-* Use default option in case images should be fully exported, e.g. when new material is planned to be added to Godot.
-* ℹ️ use **None** in case images are not needed. This is usually the case because material library is maintained on the Godot side: see [sharing-materials](docs_blender_godot_workflow.md#sharing-materials)
+
+- Use default option in case images should be fully exported, e.g. when new material is planned to be added to Godot.
+- ℹ️ use **None** in case images are not needed. This is usually the case because material library is maintained on the Godot side: see [sharing-materials](docs_blender_godot_workflow.md#sharing-materials)
   
 ![alt text](images/export_mats.png)
 
 💡 **Action filter** is useful for exporting animations.
-
-
-Wrapper
 
 ### Using suffixes
 
@@ -101,17 +99,17 @@ For flexibility between Blender and Godot we use [Imphenzia PixPal](https://imph
 
 ![alt text](images/pixpal.png)
 
-Downside is that by design it does not support gradient colors, also color would be hard to change in Godot, because it is tied to UV map, which you set up in Blender.
+Downside is that by design it does not support gradient colors, also color would be hard to change in Godot, because it is tied to a UV map, which you set up in Blender.
 
 Shader logic is recreated in Godot using addon [gd-pixpal-tools-addon](https://github.com/Flynsarmy/gd-pixpal-tools-addon).
 
-ℹ️ This repo contains this addon since changed were made to it. It auto detects pixpal materials in GLB files and switches them to prepared 'godotic' pixpal shader.
+ℹ️ This repo contains this addon since changes were made to it. It auto detects pixpal materials in GLB files and switches them to prepared 'godotic' pixpal shader.
 
 Of course a standard Godot materials with solid `albedo` can be used, but then it wouldn't be a part of Blender-Godot workflow.
 
 ### Sharing materials
 
-Post import script [material_reimport.gd](../_workflow/POST_import_scripts/material_reimport.gd) saves materials and then reuses them. That way shared material library is naturally being maintained.
+Post import script [material_reimport.gd](../_workflow/POST_import_scripts/material_reimport.gd) saves materials and then reuses them. That way shared material library naturally maintains itself.
 
 It also arranges them into categories using keywords:
 
@@ -148,11 +146,11 @@ Verification
 ### Problem: Grayscale Maps vs. GLB Spec
 
 It's common that CC0 PBR materials use separate grayscale images for Roughness and Metallic.
-While glTF/GLB expects them to be packed into a single image (called ORM):
+But glTF/GLB expects them to be packed into a single image (called ORM):
 
 > glTF expects the metallic values to be encoded in the blue (B🔵) channel, and roughness to be encoded in the green (G🟢)
 
-If you created material in blender using an addon like **NodeWrangler**, material is not following this convention.
+If you created a material in blender using an addon like **NodeWrangler**, the material does not follow this convention.
 Blender (quote) "attempts to adapt", and Godot creates a wrong Standard Material:
 
 ![alt text](images/wrong_st_mat.png)
@@ -167,7 +165,7 @@ See also [official blender docs](https://docs.blender.org/manual/en/latest/addon
 As I see it, the "right" way to solve this is to 'merge' Metallic and Roughness images (optionally Occlusion as well, as a R🔴 channel) using image editor. Then changing the material (shader graph) on the Blender side.
 
 - This way we follow the spec and all is fine.
-- But it is hard to automate: we need a script for merging images (probably can be done with **ImageMagick** tool), also python script on Blender side which will rearrange the shader. Every new downloaded materials should be processed using this steps before working with it.
+- But it is hard to automate: we need a script for merging images (probably can be done with **ImageMagick** tool), also python script on Blender side which will rearrange the shader. Every new downloaded material should be processed using this steps before working with it.
 
 #### Our solution
 
@@ -177,4 +175,4 @@ Simpler solution is to make a fix on Godot side using post import script. Script
 
 ℹ️ Currently this approach is used in the project: see [material_reimport.gd](../_workflow/POST_import_scripts/material_reimport.gd).
 
-Script many things: e.g. it also saves 'fixed' materials and reuses them later, if it sees the same mat for newly imported GLB.
+Script does many things, for example, it also saves 'fixed' materials and reuses them later, if it sees the same mat in newly imported GLB.

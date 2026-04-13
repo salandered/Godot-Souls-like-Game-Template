@@ -1,6 +1,5 @@
 # Blender 🍊 <!-- omit from toc -->
 
-- [Blender - Godot workflow 🍊💙](#blender---godot-workflow-)
 - [🧩 Recommended blender addons](#-recommended-blender-addons)
 - [✍️ Instructions](#️-instructions)
 	- [Texture baking](#texture-baking)
@@ -10,10 +9,8 @@
 	- [See also](#see-also)
 - [👨‍🔧 Troubleshooting](#-troubleshooting)
 
-## Blender - Godot workflow 🍊💙
-
 > [!NOTE]
-> See docs [here](docs_blender_godot_workflow.md)
+> Blender - Godot workflow is covered here:  [docs_blender_godot_workflow 🍊💙](docs_blender_godot_workflow.md)
 
 ## 🧩 Recommended blender addons
 
@@ -24,13 +21,13 @@ Some of them are paid.
 - good alternative for working with topology, while finicky
 - in particular, helped me to learn about manual low poly retopology
 - Edge Loop - can be helpful
-- Killer feature: Smooth brush. Works like a Smooth brush in Sculpt, but in Edit mode. Tender and reliable
+- Killer feature: Smooth brush. Works like a Smooth brush in Sculpt, but in Edit mode. Very reliable
 
 **Import Mixamo - Root Motion** - <https://extensions.blender.org/add-ons/import-mixamo-root-motion/>
 
 - necessary for working with Mixamo animations
 - supports auto creation of Root bone and baking root motion to it from the hips
-- make readable action names and bone names
+- makes readable action names and bone names
 - recently updated and probably supports baking root rotation (currently I use the instruction below)
 
 **[BAM] AutoMat** <https://extensions.blender.org/add-ons/bam/>
@@ -49,8 +46,7 @@ Some of them are paid.
 
 **Rokoko (Animation Retarget)** - https://support.rokoko.com/hc/en-us/articles/4410463492241-How-to-install-the-Blender-plugin
 
-- Plugin which is used for Rokoko motion capture.
-- Somehow it has Rokoko agnostic feature for animation retargetting, which we use,
+- I use it for animation retargetting (plugin allows it without requiring any Rokoko specific setup)
 
 **QoL:**
 
@@ -73,7 +69,7 @@ Needs more testing. Also **QuickBaker** is probably good.
 
 - switch to `normal`
 - pivot point to `active element`
-- select three finger parts (active is the closest to the wrist, not the tip) (phalanx)
+- select three finger parts (active is the closest to the wrist, not the tip) (phalanges)
 - Scale to 0 by x: shortcut is: **"S, X, 0"**
 
 ℹ️ Details: https://youtu.be/dXElhdXgFD8?si=9EuM3ocMYxnd6wec&t=719
@@ -100,7 +96,7 @@ This is needed for turn animations, like U-turn (turn 180)
    - Channel: all or rotation. By default was all and it worked
 
 **Validation**: `Root` rotates according to animation. No crazy fast movement.
-Anim works also as expected (global anim rotation could've been changed after alt P)
+Anim works also as expected (although global anim rotation could've been changed after alt P, it's fine)
 
 1. Parent `Hips` to `Root` (as they were)
      - **Edit mode** -> select `Hips`, select `Root` -> Ctrl+P -> Keep offset
