@@ -17,10 +17,8 @@
 	- [Enemy (NPC) Implementation](#enemy-npc-implementation)
 	- [Simple Entities](#simple-entities)
 
-
 > [!NOTE]
 > See also [docs_animation_tracks.md](docs_animation_tracks.md)
-
 
 ## Intro
 

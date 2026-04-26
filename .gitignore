@@ -4,6 +4,7 @@
 .import/
 export.cfg
 export_credentials.cfg
+export_presets.cfg
 **.tmp
 
 # ================== PYTHON
@@ -31,7 +32,7 @@ mono_crash.*.json
 
 # ================= PROJECT DATA
 # Project non essentials
-*__private_docs/*
+__private*/
 # unit tests
 **/_workflow/_misc/_test/*
 

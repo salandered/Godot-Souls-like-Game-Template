@@ -5,7 +5,7 @@
 
 ### this game demo
 Author: me
-License: All Rights Reserved
+License: See LICENSE file
 
 
 
