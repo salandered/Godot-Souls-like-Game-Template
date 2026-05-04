@@ -10,13 +10,13 @@ points = PackedVector3Array(-0.74810416, -1.1334369, -0.19310775, -0.7472477, -1
 
 [node name="wooden_balcony_WRAPPER" unique_id=692081415 instance=ExtResource("1_i4a8m")]
 
-[node name="wooden wall diagonal_003" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="0" unique_id=944415916]
+[node name="wooden wall diagonal_003" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="0" unique_id=1448803589]
 layers = 17
 
-[node name="fallen fragment_001" parent="Wooden balcony/wooden wall diagonal_003" index="2" unique_id=200715472]
+[node name="fallen fragment_001" parent="Wooden balcony/wooden wall diagonal_003" index="2" unique_id=164822443]
 layers = 17
 
-[node name="Tower middle_001" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="1" unique_id=431055687]
+[node name="Tower middle_001" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="1" unique_id=1942802147]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wooden balcony/Tower middle_001" index="0" unique_id=494000478]
@@ -24,10 +24,10 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wooden balcony/Tower middle_001/StaticBody3D" index="0" unique_id=70888123]
 shape = SubResource("ConvexPolygonShape3D_0aq8w")
 
-[node name="wooden wall diagonal_002" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="2" unique_id=1026122691]
+[node name="wooden wall diagonal_002" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="2" unique_id=63202500]
 layers = 17
 
-[node name="Engel_C_002_Baked_003" parent="Wooden balcony/wooden wall diagonal_002" index="0" unique_id=2105069255]
+[node name="Engel_C_002_Baked_003" parent="Wooden balcony/wooden wall diagonal_002" index="0" unique_id=806283772]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wooden balcony/wooden wall diagonal_002/Engel_C_002_Baked_003" index="0" unique_id=1029956347]
@@ -35,23 +35,23 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wooden balcony/wooden wall diagonal_002/Engel_C_002_Baked_003/StaticBody3D" index="0" unique_id=1688525474]
 shape = SubResource("ConvexPolygonShape3D_dm6pr")
 
-[node name="wooden wall diagonal_001" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="8" unique_id=147379896]
+[node name="wooden wall diagonal_001" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="8" unique_id=899627393]
 layers = 17
 
-[node name="wooden wall diagonal_004" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="9" unique_id=2046585906]
+[node name="wooden wall diagonal_004" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="9" unique_id=1462673321]
 layers = 17
 
-[node name="wooden wall diagonal_005" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="10" unique_id=1607749803]
+[node name="wooden wall diagonal_005" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="10" unique_id=559412979]
 layers = 17
 
-[node name="fallen fragment_009" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="11" unique_id=508523459]
+[node name="fallen fragment_009" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="11" unique_id=284546445]
 layers = 17
 
-[node name="wooden wall diagonal_006" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="12" unique_id=46573963]
+[node name="wooden wall diagonal_006" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="12" unique_id=277426371]
 layers = 17
 
-[node name="wooden wall diagonal_007" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="13" unique_id=1833255672]
+[node name="wooden wall diagonal_007" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="13" unique_id=873224780]
 layers = 17
 
-[node name="wooden wall diagonal_008" parent="Wooden balcony" parent_id_path=PackedInt32Array(2082261180) index="15" unique_id=452794064]
+[node name="wooden wall diagonal_008" parent="Wooden balcony" parent_id_path=PackedInt32Array(1934190258) index="15" unique_id=1809401255]
 layers = 17

@@ -77,40 +77,40 @@ shadow_mesh = SubResource("ArrayMesh_cjibr")
 
 [node name="jaw2" unique_id=1083921563 instance=ExtResource("1_5oygl")]
 
-[node name="fossil-dolphin-(jaw)-150k" parent="jaw" parent_id_path=PackedInt32Array(1453289964) index="0" unique_id=2009733324]
+[node name="fossil-dolphin-(jaw)-150k" parent="jaw" parent_id_path=PackedInt32Array(1213084506) index="0" unique_id=556242203]
 layers = 17
 
-[node name="jaw plane first" parent="jaw/fossil-dolphin-(jaw)-150k" index="0" unique_id=109545912]
+[node name="jaw plane first" parent="jaw/fossil-dolphin-(jaw)-150k" index="0" unique_id=1668648852]
 layers = 17
 
-[node name="gold cave_006" parent="jaw" parent_id_path=PackedInt32Array(1453289964) index="3" unique_id=2120928716]
+[node name="gold cave_006" parent="jaw" parent_id_path=PackedInt32Array(1213084506) index="3" unique_id=180311751]
 layers = 17
 
-[node name="gold cave_009" parent="jaw" parent_id_path=PackedInt32Array(1453289964) index="4" unique_id=27578607]
+[node name="gold cave_009" parent="jaw" parent_id_path=PackedInt32Array(1213084506) index="4" unique_id=610437762]
 layers = 17
 
-[node name="gold cave_011" parent="jaw" parent_id_path=PackedInt32Array(1453289964) index="6" unique_id=603450268]
+[node name="gold cave_011" parent="jaw" parent_id_path=PackedInt32Array(1213084506) index="6" unique_id=416787352]
 layers = 17
 
-[node name="_Plane_001" parent="jaw" parent_id_path=PackedInt32Array(1453289964) index="7" unique_id=2098206943]
+[node name="_Plane_001" parent="jaw" parent_id_path=PackedInt32Array(1213084506) index="7" unique_id=1675170834]
 layers = 17
 
-[node name="_Plane_002" parent="jaw" parent_id_path=PackedInt32Array(1453289964) index="8" unique_id=2116214029]
+[node name="_Plane_002" parent="jaw" parent_id_path=PackedInt32Array(1213084506) index="8" unique_id=2076035058]
 layers = 17
 
-[node name="turtle sk_010" parent="jaw/tunnel" parent_id_path=PackedInt32Array(400823531) index="0" unique_id=1690266128]
+[node name="turtle sk_010" parent="jaw/tunnel" parent_id_path=PackedInt32Array(2061202546) index="0" unique_id=1554623161]
 layers = 17
 
-[node name="super mini cave wall_visuals" parent="jaw/tunnel/super mini cave wall" parent_id_path=PackedInt32Array(190800894) index="1" unique_id=1062448068]
+[node name="super mini cave wall_visuals" parent="jaw/tunnel/super mini cave wall" parent_id_path=PackedInt32Array(1822328112) index="1" unique_id=697088459]
 layers = 17
 
-[node name="super mini cave plane_visuals" parent="jaw/tunnel/super mini cave plane " parent_id_path=PackedInt32Array(491165844) index="1" unique_id=1565244847]
+[node name="super mini cave plane_visuals" parent="jaw/tunnel/super mini cave plane " parent_id_path=PackedInt32Array(1661351459) index="1" unique_id=14692842]
 layers = 17
 
-[node name="Lantern_Lamp_Splitted_003" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002" parent_id_path=PackedInt32Array(1165960540) index="0" unique_id=2017301469]
+[node name="Lantern_Lamp_Splitted_003" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002" parent_id_path=PackedInt32Array(1513842026) index="0" unique_id=1773132911]
 transform = Transform3D(-0.41350403, 0.8905, 0.18979876, -0.34988305, 0.037041046, -0.9360606, -0.84059256, -0.45347223, 0.29625434, -0.14691067, -0.3124954, -0.11313331)
 
-[node name="Lantern_Lamp_glass_003" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_003" index="0" unique_id=575084335]
+[node name="Lantern_Lamp_glass_003" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_003" index="0" unique_id=863108731]
 gi_mode = 0
 
 [node name="SwayParent" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_003" index="1" unique_id=697146872 instance=ExtResource("2_kk3nw")]
@@ -122,10 +122,10 @@ max_distance = 6.0
 unit_size = 2.0
 play_chance = 0.4
 
-[node name="Lantern_Lamp_Splitted_004" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002" parent_id_path=PackedInt32Array(1165960540) index="1" unique_id=509522545]
+[node name="Lantern_Lamp_Splitted_004" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002" parent_id_path=PackedInt32Array(1513842026) index="1" unique_id=332861563]
 transform = Transform3D(-0.4204999, 0.8961481, 0.14177105, 0.040635686, 0.17470244, -0.9837824, -0.9063822, -0.4079195, -0.109877914, -0.25752783, -1.6542902, -0.010174274)
 
-[node name="Lantern_Lamp_glass_004" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_004" index="0" unique_id=1763876195]
+[node name="Lantern_Lamp_glass_004" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_004" index="0" unique_id=1915718800]
 gi_mode = 0
 
 [node name="SwayParent" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_004" index="1" unique_id=1302770869 instance=ExtResource("2_kk3nw")]
@@ -137,10 +137,10 @@ max_distance = 6.0
 unit_size = 2.0
 play_chance = 0.4
 
-[node name="Lantern_Lamp_Splitted_005" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002" parent_id_path=PackedInt32Array(1165960540) index="2" unique_id=1589360750]
+[node name="Lantern_Lamp_Splitted_005" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002" parent_id_path=PackedInt32Array(1513842026) index="2" unique_id=1251108845]
 transform = Transform3D(-0.49592197, 0.8663346, -0.059377335, 0.01295663, -0.060988363, -0.9980544, -0.8682703, -0.4957265, 0.019020695, -0.013964176, -2.895694, -0.06910777)
 
-[node name="Lantern_Lamp_glass_005" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_005" index="0" unique_id=1859008156]
+[node name="Lantern_Lamp_glass_005" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_005" index="0" unique_id=928868603]
 gi_mode = 0
 
 [node name="SwayParent" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_002/Lantern_Lamp_Splitted_005" index="1" unique_id=1339303808 instance=ExtResource("2_kk3nw")]
@@ -152,13 +152,13 @@ max_distance = 6.0
 unit_size = 2.0
 play_chance = 0.4
 
-[node name="PropSet_5_WallChain_1" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang" parent_id_path=PackedInt32Array(279534262) index="0" unique_id=988330877]
+[node name="PropSet_5_WallChain_1" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang" parent_id_path=PackedInt32Array(1309219138) index="0" unique_id=2090811025]
 transform = Transform3D(0.997717, 0.06743894, 0.0035343312, -0.0675307, 0.9965911, 0.04739075, -0.00032630094, -0.047521256, 0.9988699, -0.013861522, -0.02845478, -0.015266545)
 
-[node name="Lantern_Lamp_Splitted_002" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1" index="0" unique_id=1219271244]
+[node name="Lantern_Lamp_Splitted_002" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1" index="0" unique_id=1535096094]
 transform = Transform3D(0.08362996, 0.18994033, 0.9782275, -0.20762067, 0.96344423, -0.1693201, -0.9746279, -0.18894003, 0.12000834, 0.010772705, -0.9824009, 0.08148956)
 
-[node name="Lantern_Lamp_glass_002" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="0" unique_id=958772729]
+[node name="Lantern_Lamp_glass_002" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="0" unique_id=1258009752]
 gi_mode = 0
 
 [node name="SwayParent" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_1_hang/PropSet_5_WallChain_1/Lantern_Lamp_Splitted_002" index="1" unique_id=1264706512 instance=ExtResource("2_kk3nw")]
@@ -179,16 +179,16 @@ max_distance = 6.0
 unit_size = 2.0
 play_chance = 0.4
 
-[node name="Lantern_Lamp_glass" parent="jaw/jaw props/lamps_chains/Lantern_Lamp_Splitted" parent_id_path=PackedInt32Array(1233712276) index="0" unique_id=865061379]
+[node name="Lantern_Lamp_glass" parent="jaw/jaw props/lamps_chains/Lantern_Lamp_Splitted" parent_id_path=PackedInt32Array(1857969469) index="0" unique_id=1918425464]
 gi_mode = 0
 
-[node name="PropSet_5_WallChain_1_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang" parent_id_path=PackedInt32Array(86898505) index="0" unique_id=1258443]
+[node name="PropSet_5_WallChain_1_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang" parent_id_path=PackedInt32Array(2107512917) index="0" unique_id=696413523]
 transform = Transform3D(0.99929035, -0.037667483, 9.417234e-10, 0.037636265, 0.99846214, -0.040705346, 0.001533267, 0.04067646, 0.9991712, -0.0061841607, -0.04221773, -0.028017849)
 
-[node name="Lantern_Lamp_Splitted_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001" index="0" unique_id=965818609]
+[node name="Lantern_Lamp_Splitted_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001" index="0" unique_id=850014057]
 transform = Transform3D(0.3542317, 0.12297763, 0.92703605, -0.26602796, 0.9636095, -0.026176866, -0.89652026, -0.23734488, 0.3740566, -0.0072043985, -0.9510093, 0.06953961)
 
-[node name="Lantern_Lamp_glass_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001/Lantern_Lamp_Splitted_001" index="0" unique_id=1436115542]
+[node name="Lantern_Lamp_glass_001" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001/Lantern_Lamp_Splitted_001" index="0" unique_id=1465325376]
 gi_mode = 0
 
 [node name="SwayParent" parent="jaw/jaw props/lamps_chains/PropSet_5_WallChain_hang/PropSet_5_WallChain_1_001/Lantern_Lamp_Splitted_001" index="1" unique_id=1726932930 instance=ExtResource("2_kk3nw")]
@@ -208,44 +208,44 @@ max_distance = 6.0
 unit_size = 2.0
 play_chance = 0.4
 
-[node name="_Plane_005" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(219739487) index="0" unique_id=27437971]
+[node name="_Plane_005" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(925248501) index="0" unique_id=1326095539]
 layers = 17
 
-[node name="Mountain_Group_1_017" parent="jaw/mountain outer/_Plane_005" index="0" unique_id=1918284645]
+[node name="Mountain_Group_1_017" parent="jaw/mountain outer/_Plane_005" index="0" unique_id=276332928]
 layers = 17
 
-[node name="Mountain_Group_1_021" parent="jaw/mountain outer/_Plane_005" index="2" unique_id=1432389981]
+[node name="Mountain_Group_1_021" parent="jaw/mountain outer/_Plane_005" index="2" unique_id=6778191]
 layers = 17
 
-[node name="Mountain_Group_1_023" parent="jaw/mountain outer/_Plane_005" index="4" unique_id=1778946366]
+[node name="Mountain_Group_1_023" parent="jaw/mountain outer/_Plane_005" index="4" unique_id=1393281386]
 layers = 17
 
-[node name="_Plane_007" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(219739487) index="1" unique_id=1990273181]
+[node name="_Plane_007" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(925248501) index="1" unique_id=1453396267]
 layers = 17
 
-[node name="_Plane_010" parent="jaw/mountain outer/_Plane_007" index="0" unique_id=1460099139]
+[node name="_Plane_010" parent="jaw/mountain outer/_Plane_007" index="0" unique_id=1214678257]
 layers = 17
 
-[node name="gold cave_013" parent="jaw/mountain outer/_Plane_007" index="1" unique_id=772068583]
+[node name="gold cave_013" parent="jaw/mountain outer/_Plane_007" index="1" unique_id=1521285442]
 layers = 17
 
-[node name="Mountain_Group_1_018" parent="jaw/mountain outer/_Plane_007" index="3" unique_id=324243100]
+[node name="Mountain_Group_1_018" parent="jaw/mountain outer/_Plane_007" index="3" unique_id=410314599]
 layers = 17
 
-[node name="Mountain_Group_1_019" parent="jaw/mountain outer/_Plane_007" index="4" unique_id=29031849]
+[node name="Mountain_Group_1_019" parent="jaw/mountain outer/_Plane_007" index="4" unique_id=219207488]
 layers = 17
 
-[node name="_Plane_009" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(219739487) index="2" unique_id=1477543437]
+[node name="_Plane_009" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(925248501) index="2" unique_id=1476413457]
 layers = 17
 
-[node name="_Plane_008" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(219739487) index="3" unique_id=1107847778]
+[node name="_Plane_008" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(925248501) index="3" unique_id=161052521]
 layers = 17
 mesh = ExtResource("4_c2rp6")
 
-[node name="Mountain_Group_1_030" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(219739487) index="4" unique_id=1196583814]
+[node name="Mountain_Group_1_030" parent="jaw/mountain outer" parent_id_path=PackedInt32Array(925248501) index="4" unique_id=409879498]
 layers = 17
 
-[node name="Cisterna" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="0" unique_id=1036093533]
+[node name="Cisterna" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="0" unique_id=335087587]
 transform = Transform3D(0.71382713, 0, 0.7003219, 0, 1, 0, -0.7003219, 0, 0.71382713, -105.68129, 1.4578722, 37.439735)
 layers = 17
 
@@ -254,10 +254,10 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/Cisterna/StaticBody3D" index="0" unique_id=216658871]
 shape = SubResource("ConcavePolygonShape3D_hc18n")
 
-[node name="tunnel_cisterna" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="1" unique_id=748124727]
+[node name="tunnel_cisterna" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="1" unique_id=2033167479]
 layers = 17
 
-[node name="tooth" parent="jaw/room/tunnel_cisterna" index="0" unique_id=1038286641]
+[node name="tooth" parent="jaw/room/tunnel_cisterna" index="0" unique_id=410039604]
 transform = Transform3D(-0.31931448, 0.6926282, 0.6467644, -0.39313433, 0.5241735, -0.7554387, -0.86225486, -0.49548775, 0.1049197, 5.9479523, -1.1411201, 3.925457)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/tunnel_cisterna/tooth" index="0" unique_id=979657360]
@@ -265,7 +265,7 @@ transform = Transform3D(-0.31931448, 0.6926282, 0.6467644, -0.39313433, 0.524173
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/tunnel_cisterna/tooth/StaticBody3D" index="0" unique_id=970205376]
 shape = SubResource("ConvexPolygonShape3D_npnbk")
 
-[node name="tunnel stairs" parent="jaw/room/tunnel_cisterna" index="1" unique_id=783671167]
+[node name="tunnel stairs" parent="jaw/room/tunnel_cisterna" index="1" unique_id=226653982]
 layers = 17
 material_override = ExtResource("4_hc18n")
 
@@ -274,7 +274,7 @@ material_override = ExtResource("4_hc18n")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/tunnel_cisterna/tunnel stairs/StaticBody3D" index="0" unique_id=363841383]
 shape = SubResource("ConvexPolygonShape3D_vnfxq")
 
-[node name="tunnel-cisterna-entry-platform" parent="jaw/room/tunnel_cisterna" index="2" unique_id=571681031]
+[node name="tunnel-cisterna-entry-platform" parent="jaw/room/tunnel_cisterna" index="2" unique_id=378721703]
 layers = 17
 material_override = ExtResource("4_hc18n")
 
@@ -288,7 +288,7 @@ shape = SubResource("ConvexPolygonShape3D_xmifj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/tunnel_cisterna/StaticBody3D" index="0" unique_id=781010041]
 shape = SubResource("ConcavePolygonShape3D_xmifj")
 
-[node name="Rock_1_005" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="2" unique_id=834414912]
+[node name="Rock_1_005" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="2" unique_id=386509367]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/Rock_1_005" index="0" unique_id=667477421]
@@ -296,7 +296,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/Rock_1_005/StaticBody3D" index="0" unique_id=1397644772]
 shape = SubResource("ConcavePolygonShape3D_v5bby")
 
-[node name="Rock_1_007" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="3" unique_id=812762994]
+[node name="Rock_1_007" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="3" unique_id=1356942580]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/Rock_1_007" index="0" unique_id=1405441648]
@@ -304,7 +304,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/Rock_1_007/StaticBody3D" index="0" unique_id=601739863]
 shape = SubResource("ConvexPolygonShape3D_v1rpm")
 
-[node name="Rock_1_008" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="4" unique_id=1355682422]
+[node name="Rock_1_008" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="4" unique_id=385115040]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/Rock_1_008" index="0" unique_id=1728530556]
@@ -312,7 +312,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/Rock_1_008/StaticBody3D" index="0" unique_id=135228945]
 shape = SubResource("ConvexPolygonShape3D_mb8qr")
 
-[node name="Rock_1_010" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="5" unique_id=499344059]
+[node name="Rock_1_010" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="5" unique_id=103104487]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/Rock_1_010" index="0" unique_id=311394699]
@@ -320,7 +320,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/Rock_1_010/StaticBody3D" index="0" unique_id=839588576]
 shape = SubResource("ConvexPolygonShape3D_c2rp6")
 
-[node name="Rock_1_009" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="6" unique_id=483730496]
+[node name="Rock_1_009" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="6" unique_id=816128770]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/Rock_1_009" index="0" unique_id=659764824]
@@ -328,10 +328,10 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jaw/room/Rock_1_009/StaticBody3D" index="0" unique_id=1336209102]
 shape = SubResource("ConvexPolygonShape3D_nj5h7")
 
-[node name="Rock_1_006" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="7" unique_id=153939240]
+[node name="Rock_1_006" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="7" unique_id=703837920]
 layers = 17
 
-[node name="Rock_1_011" parent="jaw/room" parent_id_path=PackedInt32Array(1439883856) index="8" unique_id=2052332484]
+[node name="Rock_1_011" parent="jaw/room" parent_id_path=PackedInt32Array(1771777121) index="8" unique_id=1070558962]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="jaw/room/Rock_1_011" index="0" unique_id=443299796]

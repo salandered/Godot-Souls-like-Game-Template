@@ -46,7 +46,7 @@ transform = Transform3D(-0.9858583, 0.15841751, -0.054660767, 0.04585822, -0.058
 [node name="pinga" parent="Visuals" unique_id=1191962029 instance=ExtResource("3_4lwst")]
 transform = Transform3D(0.3378276, 0.107636906, -0.021659067, -0.106799394, 0.3384105, 0.015958529, 0.025469685, -0.008665182, 0.3542015, -0.035487555, 0.008225516, 0.66388947)
 
-[node name="Pinga_002" parent="Visuals/pinga" index="0" unique_id=1553899506]
+[node name="Pinga_002" parent="Visuals/pinga" index="0" unique_id=1378298128]
 transform = Transform3D(1.4716088, 0, -2.3283064e-10, -2.9802322e-08, 1.069838, -1.8626451e-09, 1.1641532e-09, -1.8626451e-09, 0.99393284, -0.02337616, -0.003706716, 0.0052189827)
 
 [node name="WeaponSFXParent" parent="." unique_id=1469093506 instance=ExtResource("8_lf1yp")]

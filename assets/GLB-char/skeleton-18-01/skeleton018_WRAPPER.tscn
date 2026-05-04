@@ -5,32 +5,32 @@
 
 [node name="FCS_Skeleton_working2" unique_id=90861150 instance=ExtResource("1_w8c3g")]
 
-[node name="Arm" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="0" unique_id=1918380732]
+[node name="Arm" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="0" unique_id=660293339]
 material_override = ExtResource("2_2l1ue")
 
-[node name="cage" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="1" unique_id=1155238530]
+[node name="cage" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="1" unique_id=1133871322]
 material_override = ExtResource("2_2l1ue")
 
-[node name="Leg" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="2" unique_id=1976681053]
+[node name="Leg" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="2" unique_id=1082729567]
 material_override = ExtResource("2_2l1ue")
 
-[node name="pelvis" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="3" unique_id=1348085962]
+[node name="pelvis" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="3" unique_id=1668215683]
 material_override = ExtResource("2_2l1ue")
 
-[node name="shoulder" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="4" unique_id=2089055548]
+[node name="shoulder" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="4" unique_id=1973147540]
 material_override = ExtResource("2_2l1ue")
 
-[node name="SkeletonMesh_050" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="5" unique_id=1723127059]
+[node name="SkeletonMesh_050" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="5" unique_id=333179580]
 material_override = ExtResource("2_2l1ue")
 
-[node name="SkeletonMesh_067" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="6" unique_id=1938281725]
+[node name="SkeletonMesh_067" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="6" unique_id=668581811]
 material_override = ExtResource("2_2l1ue")
 
-[node name="SkeletonMesh_183" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="7" unique_id=1212238981]
+[node name="SkeletonMesh_183" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="7" unique_id=1242859361]
 material_override = ExtResource("2_2l1ue")
 
-[node name="SkeletonMesh_184" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="8" unique_id=920525345]
+[node name="SkeletonMesh_184" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="8" unique_id=1414382351]
 material_override = ExtResource("2_2l1ue")
 
-[node name="SkeletonMesh_202" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1939009076) index="9" unique_id=125334240]
+[node name="SkeletonMesh_202" parent="FCS_Skeleton_working/Armature_013/GeneralSkeleton" parent_id_path=PackedInt32Array(1977161791) index="9" unique_id=1286089632]
 material_override = ExtResource("2_2l1ue")

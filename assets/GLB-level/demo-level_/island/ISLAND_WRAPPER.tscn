@@ -52,115 +52,115 @@ points = PackedVector3Array(4.187168, -4.288119, 18.032625, 4.431896, -4.252377,
 
 [node name="island2" unique_id=1360672563 instance=ExtResource("1_8iv8n")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/dead_tree_trunk_003" parent_id_path=PackedInt32Array(418041684) index="0" unique_id=1882779309]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/dead_tree_trunk_003" parent_id_path=PackedInt32Array(1363480348) index="0" unique_id=1882779309]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/dead_tree_trunk_003/StaticBody3D" index="0" unique_id=1501261713]
 shape = SubResource("ConvexPolygonShape3D_rx8fw")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/dead_tree_trunk_004" parent_id_path=PackedInt32Array(1810767744) index="0" unique_id=1909176723]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/dead_tree_trunk_004" parent_id_path=PackedInt32Array(723592239) index="0" unique_id=1909176723]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/dead_tree_trunk_004/StaticBody3D" index="0" unique_id=815504688]
 shape = SubResource("ConvexPolygonShape3D_31nwr")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_b_LOD0" parent_id_path=PackedInt32Array(1298003876) index="0" unique_id=964205105]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_b_LOD0" parent_id_path=PackedInt32Array(1752676852) index="0" unique_id=964205105]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/bark_debris_01_b_LOD0/StaticBody3D" index="0" unique_id=767003636]
 shape = SubResource("ConvexPolygonShape3D_1h4ut")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_b_LOD0_001" parent_id_path=PackedInt32Array(596138670) index="0" unique_id=2137673471]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_b_LOD0_001" parent_id_path=PackedInt32Array(1106700577) index="0" unique_id=2137673471]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/bark_debris_01_b_LOD0_001/StaticBody3D" index="0" unique_id=2042459286]
 shape = SubResource("ConvexPolygonShape3D_q8t8y")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_d_LOD0" parent_id_path=PackedInt32Array(341101267) index="0" unique_id=1392112643]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_d_LOD0" parent_id_path=PackedInt32Array(1977841958) index="0" unique_id=1392112643]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/bark_debris_01_d_LOD0/StaticBody3D" index="0" unique_id=1301391393]
 shape = SubResource("ConvexPolygonShape3D_r54ji")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_d_LOD0_002" parent_id_path=PackedInt32Array(1453412153) index="0" unique_id=1325952651]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/bark_debris_01_d_LOD0_002" parent_id_path=PackedInt32Array(1133291619) index="0" unique_id=1325952651]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/bark_debris_01_d_LOD0_002/StaticBody3D" index="0" unique_id=199379943]
 shape = SubResource("ConvexPolygonShape3D_v28hn")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Rock_1" parent_id_path=PackedInt32Array(1229866103) index="0" unique_id=304077664]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Rock_1" parent_id_path=PackedInt32Array(169032136) index="0" unique_id=304077664]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/Rock_1/StaticBody3D" index="0" unique_id=2035558259]
 shape = SubResource("ConvexPolygonShape3D_7kj06")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Chair_1" parent_id_path=PackedInt32Array(1673814703) index="0" unique_id=2032000037]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Chair_1" parent_id_path=PackedInt32Array(1527451854) index="0" unique_id=2032000037]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/Chair_1/StaticBody3D" index="0" unique_id=2081680301]
 shape = SubResource("ConvexPolygonShape3D_xuol8")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Rock_1_003" parent_id_path=PackedInt32Array(1597046008) index="0" unique_id=97690515]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Rock_1_003" parent_id_path=PackedInt32Array(1359162422) index="0" unique_id=97690515]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/Rock_1_003/StaticBody3D" index="0" unique_id=1272726064]
 shape = SubResource("ConvexPolygonShape3D_5reim")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/lincoln__003" parent_id_path=PackedInt32Array(1349182032) index="0" unique_id=768659981]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/lincoln__003" parent_id_path=PackedInt32Array(1072800305) index="0" unique_id=768659981]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/lincoln__003/StaticBody3D" index="0" unique_id=585298484]
 shape = SubResource("ConvexPolygonShape3D_065km")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/lincoln__005" parent_id_path=PackedInt32Array(1951625951) index="0" unique_id=101293016]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/lincoln__005" parent_id_path=PackedInt32Array(687489106) index="0" unique_id=101293016]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/lincoln__005/StaticBody3D" index="0" unique_id=2125596264]
 shape = SubResource("ConvexPolygonShape3D_mydu6")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Cylinder001_002" parent_id_path=PackedInt32Array(1765775144) index="0" unique_id=1516042441]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/Cylinder001_002" parent_id_path=PackedInt32Array(1748641223) index="0" unique_id=1516042441]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/Cylinder001_002/StaticBody3D" index="0" unique_id=201759249]
 shape = SubResource("ConvexPolygonShape3D_editj")
 
-[node name="ropes_008" parent="island2/debris/trees/BirchTree_Dead_1_001" parent_id_path=PackedInt32Array(1464302700) index="0" unique_id=72709849]
+[node name="ropes_008" parent="island2/debris/trees/BirchTree_Dead_1_001" parent_id_path=PackedInt32Array(776591079) index="0" unique_id=1194265812]
 transform = Transform3D(0.32980442, 0.69646865, 0.6373072, -0.7716665, 0.5877754, -0.24300386, -0.5438381, -0.41164488, 0.7312925, -0.08106995, -0.27941346, -0.21012211)
 
 [node name="SwayParent" parent="island2/debris/trees/BirchTree_Dead_1_001/ropes_008" index="0" unique_id=2029712488 instance=ExtResource("2_5reim")]
 sway_speed = 1.5
 
-[node name="ropes_009" parent="island2/debris/trees/BirchTree_Dead_1_001" parent_id_path=PackedInt32Array(1464302700) index="1" unique_id=105975444]
+[node name="ropes_009" parent="island2/debris/trees/BirchTree_Dead_1_001" parent_id_path=PackedInt32Array(776591079) index="1" unique_id=658440798]
 transform = Transform3D(0.36393344, 0.6880425, 0.6278137, -0.70697486, 0.64289284, -0.29474637, -0.6064149, -0.33658043, 0.7203989, -0.08106995, -0.27941346, -0.21012211)
 
 [node name="SwayParent" parent="island2/debris/trees/BirchTree_Dead_1_001/ropes_009" index="0" unique_id=1603913123 instance=ExtResource("2_5reim")]
 max_sway_degrees = 9.0
 sway_speed = 2.2
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/trees/BirchTree_Dead_1_001" parent_id_path=PackedInt32Array(1464302700) index="2" unique_id=1932023096]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/trees/BirchTree_Dead_1_001" parent_id_path=PackedInt32Array(776591079) index="2" unique_id=1932023096]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/trees/BirchTree_Dead_1_001/StaticBody3D" index="0" unique_id=1857626987]
 shape = SubResource("ConcavePolygonShape3D_gffpp")
 
-[node name="ropes_006" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(1189253855) index="0" unique_id=342749632]
+[node name="ropes_006" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(204455626) index="0" unique_id=243779666]
 transform = Transform3D(-0.06501397, 0.3086853, 0.9489396, -0.5301205, 0.79497975, -0.2949226, -0.84542596, -0.5222266, 0.11195562, 0.5776291, -0.5236745, 0.29316807)
 
 [node name="SwayParent" parent="island2/debris/trees/DeadTree_10_001/ropes_006" index="0" unique_id=1186040999 instance=ExtResource("2_5reim")]
 max_sway_degrees = 6.0
 sway_speed = 1.2
 
-[node name="ropes_007" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(1189253855) index="1" unique_id=327730536]
+[node name="ropes_007" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(204455626) index="1" unique_id=977274735]
 transform = Transform3D(-0.10320664, 0.29664573, 0.9493944, -0.85990834, 0.45310703, -0.23505573, -0.49990556, -0.8406516, 0.20832458, -0.8343277, -0.6998396, 0.23341751)
 
 [node name="SwayParent" parent="island2/debris/trees/DeadTree_10_001/ropes_007" index="0" unique_id=645224120 instance=ExtResource("2_5reim")]
 max_sway_degrees = 4.0
 sway_speed = 1.5
 
-[node name="ropes_010" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(1189253855) index="2" unique_id=278158969]
+[node name="ropes_010" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(204455626) index="2" unique_id=1439563480]
 transform = Transform3D(-0.032953277, 0.33491874, 0.94167066, -0.68382007, 0.67958033, -0.2656325, -0.7289063, -0.65268666, 0.20662977, -0.8343277, -0.6998396, 0.23341751)
 
 [node name="SwayParent" parent="island2/debris/trees/DeadTree_10_001/ropes_010" index="0" unique_id=1783144170 instance=ExtResource("2_5reim")]
 max_sway_degrees = 7.0
 
-[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(1189253855) index="3" unique_id=1813155654]
+[node name="StaticBody3D" type="StaticBody3D" parent="island2/debris/trees/DeadTree_10_001" parent_id_path=PackedInt32Array(204455626) index="3" unique_id=1813155654]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="island2/debris/trees/DeadTree_10_001/StaticBody3D" index="0" unique_id=848896699]
 shape = SubResource("ConcavePolygonShape3D_pysol")
 
-[node name="island" parent="island2/__solid" parent_id_path=PackedInt32Array(436328850) index="0" unique_id=1418749981]
+[node name="island" parent="island2/__solid" parent_id_path=PackedInt32Array(943079677) index="0" unique_id=117008834]
 layers = 17
 surface_material_override/0 = ExtResource("2_78gke")
 surface_material_override/2 = ExtResource("4_6mi7e")
 
-[node name="turtle sk_011" parent="island2/__solid" parent_id_path=PackedInt32Array(436328850) index="1" unique_id=1995505783]
+[node name="turtle sk_011" parent="island2/__solid" parent_id_path=PackedInt32Array(943079677) index="1" unique_id=1154286324]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="island2/__solid/turtle sk_011" index="0" unique_id=2054700361]

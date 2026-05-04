@@ -6,8 +6,8 @@
 [node name="pinga" unique_id=1591729035 instance=ExtResource("1_ymeom")]
 script = ExtResource("2_84yaq")
 
-[node name="Pinga_002" parent="." index="0" unique_id=1553899506]
+[node name="Pinga_002" parent="." index="0" unique_id=1378298128]
 gi_mode = 2
 
-[node name="chain HP_003" parent="Pinga_002" index="0" unique_id=1105008719]
+[node name="chain HP_003" parent="Pinga_002" index="0" unique_id=1092063400]
 gi_mode = 2

@@ -7,5 +7,5 @@
 [node name="skeleton-16-07" unique_id=2145459578 instance=ExtResource("1_f6gpe")]
 script = ExtResource("2_df77m")
 
-[node name="SkeletonMesh_004" parent="Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(1440444569) index="0" unique_id=1542699535]
+[node name="SkeletonMesh_004" parent="Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(1580400989) index="0" unique_id=1188732497]
 surface_material_override/0 = ExtResource("3_acojj")

@@ -1989,7 +1989,7 @@ transform = Transform3D(-1.0909996, -0.03805531, 0.5356568, -0.050888382, 1.2148
 [node name="skeleton-16-07" parent="Visuals/LINCOLN_MAIN/skeleton" unique_id=19844614 instance=ExtResource("16_bdepm")]
 unique_name_in_owner = true
 
-[node name="SkeletonMesh_004" parent="Visuals/LINCOLN_MAIN/skeleton/skeleton-16-07/Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(19844614, 1440444569) index="0" unique_id=1542699535]
+[node name="SkeletonMesh_004" parent="Visuals/LINCOLN_MAIN/skeleton/skeleton-16-07/Armature_009/GeneralSkeleton" parent_id_path=PackedInt32Array(19844614, 1580400989) index="0" unique_id=1188732497]
 gi_mode = 1
 
 [node name="sitting2" parent="Visuals/LINCOLN_MAIN/skeleton" unique_id=497119739 instance=ExtResource("16_ae31p")]
@@ -2225,7 +2225,7 @@ cast_shadow = 0
 mesh = ExtResource("17_rqxxm")
 
 [node name="ropes_009" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2" unique_id=1188926327]
-transform = Transform3D(-0.15608887, 0.0067201294, 1.1451644, -0.7796298, 0.8459408, -0.11122976, -0.83882314, -0.7874958, -0.109712504, -41.679935, 11.982513, -86.228355)
+transform = Transform3D(-0.16680408, 0.023349237, 1.143434, -0.7559505, 0.86485916, -0.1279386, -0.8582109, -0.76634467, -0.10954673, -41.679935, 11.982513, -86.228355)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_wim1f")
 
@@ -2235,7 +2235,7 @@ sway_speed = 1.2
 preview_in_editor = true
 
 [node name="skeleton_hand2" type="MeshInstance3D" parent="Visuals/far/LINCOLN_FAR2/ropes_009" unique_id=2024574688]
-transform = Transform3D(1.2578071, -0.7475838, 0.9022181, 0.4136638, -0.95508105, -1.3680865, 1.0962484, 1.2181534, -0.5189411, 0.35659122, -0.5122528, 0.1948626)
+transform = Transform3D(1.1392554, -0.96747774, 0.84914184, 0.24810024, -0.94764715, -1.4125755, 1.2631313, 1.0587307, -0.48841253, 0.35659122, -0.5122528, 0.1948626)
 cast_shadow = 0
 gi_mode = 2
 mesh = SubResource("ArrayMesh_1txad")

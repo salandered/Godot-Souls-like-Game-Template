@@ -59,7 +59,7 @@ blend_shape_mode = 0
 
 [node name="SittingSkeletonAlt2" unique_id=213956360 instance=ExtResource("1_7773y")]
 
-[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 1545046897) index="3" unique_id=1939009076]
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 1377951039) index="3" unique_id=1977161791]
 bones/0/position = Vector3(-4.6473226e-05, 0, -0.0052452926)
 bones/1/position = Vector3(-3.2016174e-05, 0.61467737, 0.038719624)
 bones/1/rotation = Quaternion(-0.03481882, 0.001641309, 0.009904795, 0.9993433)
@@ -124,7 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6473226e-05, 0, -0.0052452
 [node name="Chest" parent="bones" parent_id_path=PackedInt32Array(401276762) index="2" unique_id=106765411]
 transform = Transform3D(0.999137, 0.041507594, 0.0015635751, -0.039795615, 0.9673554, -0.2502795, -0.011901034, 0.2500013, 0.9681724, -0.00048715097, 0.81631184, 0.02969778)
 
-[node name="LP smith sword" parent="bones/Chest/smith_sword_2" parent_id_path=PackedInt32Array(1719675894) index="0" unique_id=965108305]
+[node name="LP smith sword" parent="bones/Chest/smith_sword_2" parent_id_path=PackedInt32Array(1719675894) index="0" unique_id=858258241]
 material_override = SubResource("StandardMaterial3D_ilrxj")
 
 [node name="Head" parent="bones" parent_id_path=PackedInt32Array(401276762) index="3" unique_id=980266521]
@@ -133,7 +133,7 @@ transform = Transform3D(0.9846054, 0.10629208, -0.13875969, -0.12603815, 0.98176
 [node name="main" parent="bones/Head" index="1" unique_id=289455636 instance=ExtResource("3_uro5p")]
 transform = Transform3D(0.47874472, 0.19911943, -0.022717722, -0.17504627, 0.44410485, 0.2036921, 0.097587846, -0.18023086, 0.476817, 0.035662528, 0.13062692, -0.026295036)
 
-[node name="fancy hat" parent="bones/Head/main" index="0" unique_id=1987376170]
+[node name="fancy hat" parent="bones/Head/main" index="0" unique_id=1250930082]
 material_override = SubResource("StandardMaterial3D_umv6k")
 
 [node name="golden bolt" parent="bones/Head" index="2" unique_id=1834739777 instance=ExtResource("9_h4pvu")]

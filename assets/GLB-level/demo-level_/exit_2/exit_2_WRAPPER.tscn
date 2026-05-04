@@ -71,7 +71,7 @@ points = PackedVector3Array(3.1415567, -0.7427833, 4.69913, 3.1049314, 0.0605249
 
 [node name="Exit 22" unique_id=1499418664 instance=ExtResource("1_1yag1")]
 
-[node name="main 1 T_001" parent="Exit 2" parent_id_path=PackedInt32Array(2092260411) index="0" unique_id=248806603]
+[node name="main 1 T_001" parent="Exit 2" parent_id_path=PackedInt32Array(343247509) index="0" unique_id=1959819973]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/main 1 T_001" index="0" unique_id=1984049886]
@@ -79,29 +79,29 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/main 1 T_001/StaticBody3D" index="0" unique_id=1433049091]
 shape = SubResource("ConvexPolygonShape3D_2s1n0")
 
-[node name="main 1 T_003" parent="Exit 2" parent_id_path=PackedInt32Array(2092260411) index="1" unique_id=354084174]
+[node name="main 1 T_003" parent="Exit 2" parent_id_path=PackedInt32Array(343247509) index="1" unique_id=372977295]
 layers = 17
 cast_shadow = 0
 
-[node name="CollisionShape3D" parent="Exit 2/--collisions-exit2--/cave plane " parent_id_path=PackedInt32Array(361128395) index="0" unique_id=1546264355]
+[node name="CollisionShape3D" parent="Exit 2/--collisions-exit2--/cave plane " parent_id_path=PackedInt32Array(1102628644) index="0" unique_id=1245737742]
 debug_color = Color(0, 0.36166665, 0.7, 0.6784314)
 
-[node name="CollisionShape3D" parent="Exit 2/--collisions-exit2--/cave plane _001" parent_id_path=PackedInt32Array(557234050) index="0" unique_id=1545367769]
+[node name="CollisionShape3D" parent="Exit 2/--collisions-exit2--/cave plane _001" parent_id_path=PackedInt32Array(2102639689) index="0" unique_id=1835206025]
 debug_color = Color(0, 0.36166665, 0.7, 0.6784314)
 
-[node name="OccasionalASP" parent="Exit 2/--collisions-exit2--/main 2 T wall /CollisionShape3D" parent_id_path=PackedInt32Array(1385031153) index="0" unique_id=364477304 instance=ExtResource("2_awn3o")]
+[node name="OccasionalASP" parent="Exit 2/--collisions-exit2--/main 2 T wall /CollisionShape3D" parent_id_path=PackedInt32Array(1497225723) index="0" unique_id=364477304 instance=ExtResource("2_awn3o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.937256, -3.8859367, 7.241802)
 
-[node name="OccasionalASP2" parent="Exit 2/--collisions-exit2--/main 2 T wall /CollisionShape3D" parent_id_path=PackedInt32Array(1385031153) index="1" unique_id=525206094 instance=ExtResource("2_awn3o")]
+[node name="OccasionalASP2" parent="Exit 2/--collisions-exit2--/main 2 T wall /CollisionShape3D" parent_id_path=PackedInt32Array(1497225723) index="1" unique_id=525206094 instance=ExtResource("2_awn3o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.636673, -3.8859367, 36.82168)
 
-[node name="OccasionalASP3" parent="Exit 2/--collisions-exit2--/main 2 T wall /CollisionShape3D" parent_id_path=PackedInt32Array(1385031153) index="2" unique_id=604531144 instance=ExtResource("2_awn3o")]
+[node name="OccasionalASP3" parent="Exit 2/--collisions-exit2--/main 2 T wall /CollisionShape3D" parent_id_path=PackedInt32Array(1497225723) index="2" unique_id=604531144 instance=ExtResource("2_awn3o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.138737, -3.8859367, -39.787792)
 
-[node name="Rock_4_003" parent="Exit 2/turtle_001/turtle sk_007" parent_id_path=PackedInt32Array(355595502) index="0" unique_id=1048076132]
+[node name="Rock_4_003" parent="Exit 2/turtle_001/turtle sk_007" parent_id_path=PackedInt32Array(711932628) index="0" unique_id=14642411]
 layers = 17
 
-[node name="Rock_4_005" parent="Exit 2/turtle_001/turtle sk_007" parent_id_path=PackedInt32Array(355595502) index="1" unique_id=2051260394]
+[node name="Rock_4_005" parent="Exit 2/turtle_001/turtle sk_007" parent_id_path=PackedInt32Array(711932628) index="1" unique_id=1443672502]
 transform = Transform3D(0.3488915, -0.31660876, -0.88206214, -0.7857694, -0.6117562, -0.09121911, -0.5107263, 0.7249229, -0.46221787, 4.153265, 1.2681112, 9.845501)
 layers = 17
 
@@ -115,10 +115,10 @@ shape = SubResource("ConvexPolygonShape3D_1yag1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/turtle_001/turtle sk_007/Rock_4_005/StaticBody3D2" index="0" unique_id=1726910014]
 shape = SubResource("ConvexPolygonShape3D_3n3pu")
 
-[node name="turtle sk_009" parent="Exit 2/turtle_001/turtle sk_007" parent_id_path=PackedInt32Array(355595502) index="3" unique_id=1964212970]
+[node name="turtle sk_009" parent="Exit 2/turtle_001/turtle sk_007" parent_id_path=PackedInt32Array(711932628) index="3" unique_id=227705514]
 transform = Transform3D(0.9756085, -0.21916892, 0.012362158, 0.19842854, 0.9045683, 0.37733576, -0.09388268, -0.36567897, 0.9259941, 2.0623894, -0.8788786, -1.568058)
 
-[node name="Rock_4_001" parent="Exit 2/props_001" parent_id_path=PackedInt32Array(1023554258) index="0" unique_id=1683245766]
+[node name="Rock_4_001" parent="Exit 2/props_001" parent_id_path=PackedInt32Array(787097950) index="0" unique_id=2129679927]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Rock_4_001" index="0" unique_id=2036731661]
@@ -126,57 +126,57 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Rock_4_001/StaticBody3D" index="0" unique_id=961617828]
 shape = SubResource("ConvexPolygonShape3D_8wk30")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Rock_4_002" parent_id_path=PackedInt32Array(1189820715) index="0" unique_id=2017927060]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Rock_4_002" parent_id_path=PackedInt32Array(1849115088) index="0" unique_id=2017927060]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Rock_4_002/StaticBody3D" index="0" unique_id=960620702]
 shape = SubResource("ConvexPolygonShape3D_0t4us")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Rock_4_004" parent_id_path=PackedInt32Array(645609404) index="0" unique_id=1159276568]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Rock_4_004" parent_id_path=PackedInt32Array(2078308633) index="0" unique_id=1159276568]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Rock_4_004/StaticBody3D" index="0" unique_id=1739804835]
 shape = SubResource("ConvexPolygonShape3D_f6cjj")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Bag_002" parent_id_path=PackedInt32Array(546675622) index="0" unique_id=1857182598]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Bag_002" parent_id_path=PackedInt32Array(332023342) index="0" unique_id=1857182598]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Bag_002/StaticBody3D" index="0" unique_id=144007094]
 shape = SubResource("ConvexPolygonShape3D_i6sq0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Bag_003" parent_id_path=PackedInt32Array(601037135) index="0" unique_id=1514844302]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Bag_003" parent_id_path=PackedInt32Array(1102386767) index="0" unique_id=1514844302]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Bag_003/StaticBody3D" index="0" unique_id=1174520226]
 shape = SubResource("ConvexPolygonShape3D_qryyw")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/SM_Brazier_002_M_Metal_01_0" parent_id_path=PackedInt32Array(1587140698) index="0" unique_id=1418558097]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/SM_Brazier_002_M_Metal_01_0" parent_id_path=PackedInt32Array(721724830) index="0" unique_id=1418558097]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/SM_Brazier_002_M_Metal_01_0/StaticBody3D" index="0" unique_id=1875861577]
 shape = SubResource("ConvexPolygonShape3D_45a75")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Cylinder001_004" parent_id_path=PackedInt32Array(436159984) index="0" unique_id=532149256]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Cylinder001_004" parent_id_path=PackedInt32Array(1148247244) index="0" unique_id=532149256]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Cylinder001_004/StaticBody3D" index="0" unique_id=467093416]
 shape = SubResource("ConvexPolygonShape3D_kohdx")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Cylinder001_005" parent_id_path=PackedInt32Array(1865490889) index="0" unique_id=756845503]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/Cylinder001_005" parent_id_path=PackedInt32Array(959451435) index="0" unique_id=756845503]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/Cylinder001_005/StaticBody3D" index="0" unique_id=1107780512]
 shape = SubResource("ConvexPolygonShape3D_awn3o")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA/Mine_Cart_BA_001" parent_id_path=PackedInt32Array(69230296) index="0" unique_id=1854031953]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA/Mine_Cart_BA_001" parent_id_path=PackedInt32Array(120405461) index="0" unique_id=1854031953]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/carts/Mine_Cart_BA/Mine_Cart_BA_001/StaticBody3D" index="0" unique_id=1766632484]
 shape = SubResource("ConvexPolygonShape3D_qvkmt")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA" parent_id_path=PackedInt32Array(2089801422) index="2" unique_id=467554680]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA" parent_id_path=PackedInt32Array(471846245) index="2" unique_id=467554680]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/carts/Mine_Cart_BA/StaticBody3D" index="0" unique_id=813404885]
 shape = SubResource("ConvexPolygonShape3D_rdjpr")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_002" parent_id_path=PackedInt32Array(1778817937) index="1" unique_id=481572518]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_002" parent_id_path=PackedInt32Array(1978722672) index="1" unique_id=481572518]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_002/StaticBody3D" index="0" unique_id=496187329]
 shape = SubResource("ConvexPolygonShape3D_htism")
 
-[node name="Mine_Cart_BA_003" parent="Exit 2/props_001/carts" parent_id_path=PackedInt32Array(1064755584) index="3" unique_id=423296312]
+[node name="Mine_Cart_BA_003" parent="Exit 2/props_001/carts" parent_id_path=PackedInt32Array(2114324643) index="3" unique_id=1582692947]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_003" index="0" unique_id=361340870]
@@ -184,18 +184,18 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_003/StaticBody3D" index="0" unique_id=272533075]
 shape = SubResource("ConvexPolygonShape3D_ky83g")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_004" parent_id_path=PackedInt32Array(2051560289) index="0" unique_id=2143595915]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_004" parent_id_path=PackedInt32Array(2091953497) index="0" unique_id=2143595915]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/props_001/carts/Mine_Cart_BA_004/StaticBody3D" index="0" unique_id=1668903625]
 shape = SubResource("ConvexPolygonShape3D_tvrk7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/skeletons/sitting one " parent_id_path=PackedInt32Array(1702269642) index="0" unique_id=811355661]
+[node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/skeletons/sitting one " parent_id_path=PackedInt32Array(942403546) index="0" unique_id=811355661]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/skeletons/sitting one /StaticBody3D" index="0" unique_id=456269863]
 shape = SubResource("ConvexPolygonShape3D_icq2n")
 
-[node name="skeleton_hand" parent="Exit 2/skeletons" parent_id_path=PackedInt32Array(1893909249) index="4" unique_id=37271877]
-transform = Transform3D(0.8400971, 0.54161227, -0.029874712, -0.0063432734, -0.045262117, -0.9989549, -0.54239845, 0.83940876, -0.034588993, -22.110262, 5.721225, -33.169796)
+[node name="skeleton_hand" parent="Exit 2/skeletons" parent_id_path=PackedInt32Array(341456969) index="4" unique_id=961622497]
+transform = Transform3D(0.9060654, 0.42313677, 0.0002182079, 9.0808884e-05, 0.0003212413, -0.9999998, -0.42313683, 0.90606546, 0.00025264118, -22.110262, 5.721225, -33.169796)
 gi_mode = 2
 
 [node name="CreateRigidParent" parent="Exit 2/skeletons/skeleton_hand" index="0" unique_id=484663685 instance=ExtResource("2_3n3pu")]
@@ -215,7 +215,7 @@ max_sway_degrees = 12.0
 sway_speed = 2.5
 preview_in_editor = true
 
-[node name="mini sand bulb" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1373341108) index="0" unique_id=2022400697]
+[node name="mini sand bulb" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1790428304) index="0" unique_id=1478019127]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/sand bulbs/mini sand bulb" index="0" unique_id=159446029]
@@ -223,10 +223,10 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/sand bulbs/mini sand bulb/StaticBody3D" index="0" unique_id=891574286]
 shape = SubResource("ConvexPolygonShape3D_7k0gd")
 
-[node name="Rock_004" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1373341108) index="2" unique_id=655118247]
+[node name="Rock_004" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1790428304) index="2" unique_id=1550889364]
 layers = 17
 
-[node name="Cave_Rocks_C_009" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1373341108) index="3" unique_id=1959789539]
+[node name="Cave_Rocks_C_009" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1790428304) index="3" unique_id=1953427510]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/sand bulbs/Cave_Rocks_C_009" index="0" unique_id=928649979]
@@ -234,7 +234,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/sand bulbs/Cave_Rocks_C_009/StaticBody3D" index="0" unique_id=2018509396]
 shape = SubResource("ConvexPolygonShape3D_c3gg2")
 
-[node name="bulb" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1373341108) index="4" unique_id=1680934047]
+[node name="bulb" parent="Exit 2/sand bulbs" parent_id_path=PackedInt32Array(1790428304) index="4" unique_id=220197475]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Exit 2/sand bulbs/bulb" index="0" unique_id=391335572]
@@ -242,25 +242,25 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit 2/sand bulbs/bulb/StaticBody3D" index="0" unique_id=384925845]
 shape = SubResource("ConvexPolygonShape3D_64l6c")
 
-[node name="big sand bulb_visuals" parent="Exit 2/sand bulbs/big sand bulb" parent_id_path=PackedInt32Array(1842569788) index="1" unique_id=2018821006]
+[node name="big sand bulb_visuals" parent="Exit 2/sand bulbs/big sand bulb" parent_id_path=PackedInt32Array(279925276) index="1" unique_id=1918710732]
 layers = 17
 
-[node name="turtle sk_025" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="0" unique_id=160326341]
+[node name="turtle sk_025" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="0" unique_id=846953415]
 layers = 17
 
-[node name="main 2 T" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="1" unique_id=1301897474]
+[node name="main 2 T" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="1" unique_id=407495881]
 layers = 17
 
-[node name="main 3 T" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="2" unique_id=1482109132]
+[node name="main 3 T" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="2" unique_id=2083724197]
 layers = 17
 
-[node name="main 3 T_002" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="3" unique_id=85357350]
+[node name="main 3 T_002" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="3" unique_id=448724087]
 layers = 17
 
-[node name="main one floor" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="4" unique_id=1980357551]
+[node name="main one floor" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="4" unique_id=1620079624]
 layers = 17
 
-[node name="Menlogate deco_001" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="5" unique_id=2120262238]
+[node name="Menlogate deco_001" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="5" unique_id=1878844401]
 layers = 17
 mesh = ExtResource("5_tvrk7")
 
@@ -273,13 +273,13 @@ max_distance = 50.0
 panning_strength = 0.2
 bus = &"game_SFX"
 
-[node name="MenlogateLow main" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="6" unique_id=1595952445]
+[node name="MenlogateLow main" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="6" unique_id=1441392855]
 layers = 17
 
-[node name="road back T" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(570569847) index="7" unique_id=907657234]
+[node name="road back T" parent="Exit 2/__solid_003" parent_id_path=PackedInt32Array(285253585) index="7" unique_id=419918041]
 layers = 17
 
-[node name="main 1 T_visuals" parent="Exit 2/__solid_003/main 1 T" parent_id_path=PackedInt32Array(64578379) index="1" unique_id=657375053]
+[node name="main 1 T_visuals" parent="Exit 2/__solid_003/main 1 T" parent_id_path=PackedInt32Array(1312796784) index="1" unique_id=20837631]
 layers = 17
 
 [editable path="Exit 2/skeletons/skeleton_hand/CreateRigidParent"]

@@ -282,5 +282,6 @@ mesh = SubResource("QuadMesh_dke4c")
 [node name="PHEnemy" parent="." unique_id=1988987316 node_paths=PackedStringArray("player") instance=ExtResource("16_2edth")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.271471, 0, -0.46069384)
 player = NodePath("../Princess")
+dev_tag = &"demo_enemy"
 
 [editable path="DeathPlane"]

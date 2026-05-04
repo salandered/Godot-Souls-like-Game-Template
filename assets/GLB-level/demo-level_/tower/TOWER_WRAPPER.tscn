@@ -12,24 +12,24 @@ points = PackedVector3Array(1.8693445, -1.3979299, -5.997531, 1.0010021, -1.3928
 
 [node name="TOWER2" unique_id=1373089562 instance=ExtResource("1_65w32")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="TOWER/tower itself/rock_smallC" parent_id_path=PackedInt32Array(1589815402) index="0" unique_id=1109799687]
+[node name="StaticBody3D" type="StaticBody3D" parent="TOWER/tower itself/rock_smallC" parent_id_path=PackedInt32Array(1231093617) index="0" unique_id=1109799687]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TOWER/tower itself/rock_smallC/StaticBody3D" index="0" unique_id=483072824]
 shape = SubResource("ConvexPolygonShape3D_2beuy")
 
-[node name="Door1Step_001" parent="TOWER/tower itself" parent_id_path=PackedInt32Array(2079231213) index="4" unique_id=114346386]
+[node name="Door1Step_001" parent="TOWER/tower itself" parent_id_path=PackedInt32Array(1618620595) index="4" unique_id=1640797755]
 surface_material_override/0 = ExtResource("2_3yp7w")
 
-[node name="Candle_2_001" parent="TOWER/stupid sign/CandleStick" parent_id_path=PackedInt32Array(469504172) index="0" unique_id=1488112699]
+[node name="Candle_2_001" parent="TOWER/stupid sign/CandleStick" parent_id_path=PackedInt32Array(1275278431) index="0" unique_id=330933186]
 material_override = ExtResource("3_2beuy")
 
-[node name="Tower middle" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(2061207238) index="0" unique_id=220363586]
+[node name="Tower middle" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(2007237854) index="0" unique_id=1338705066]
 layers = 17
 
-[node name="Tower top" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(2061207238) index="1" unique_id=1476113801]
+[node name="Tower top" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(2007237854) index="1" unique_id=115487899]
 layers = 17
 
-[node name="wooden wall diagonal" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(2061207238) index="2" unique_id=2099495561]
+[node name="wooden wall diagonal" parent="TOWER/__solid_002" parent_id_path=PackedInt32Array(2007237854) index="2" unique_id=2001865507]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="TOWER/__solid_002/wooden wall diagonal" index="0" unique_id=183852498]
@@ -37,21 +37,21 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TOWER/__solid_002/wooden wall diagonal/StaticBody3D" index="0" unique_id=741096651]
 shape = SubResource("ConvexPolygonShape3D_3yp7w")
 
-[node name="tower floor_visuals" parent="TOWER/__solid_002/tower floor " parent_id_path=PackedInt32Array(295566538) index="1" unique_id=629803311]
+[node name="tower floor_visuals" parent="TOWER/__solid_002/tower floor " parent_id_path=PackedInt32Array(1191469543) index="1" unique_id=1402871855]
 layers = 17
 cast_shadow = 0
 
-[node name="Tower lowest_visuals" parent="TOWER/__solid_002/Tower lowest " parent_id_path=PackedInt32Array(1471165887) index="1" unique_id=1656841950]
+[node name="Tower lowest_visuals" parent="TOWER/__solid_002/Tower lowest " parent_id_path=PackedInt32Array(1128266226) index="1" unique_id=1136085735]
 layers = 17
 
-[node name="crops_dirtDoubleRowEnd" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1133680547) index="0" unique_id=1377503940]
+[node name="crops_dirtDoubleRowEnd" parent="TOWER/dirt" parent_id_path=PackedInt32Array(529011868) index="0" unique_id=2001002582]
 layers = 17
 
-[node name="crops_dirtDoubleRowCorner_001" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1133680547) index="1" unique_id=1348168176]
+[node name="crops_dirtDoubleRowCorner_001" parent="TOWER/dirt" parent_id_path=PackedInt32Array(529011868) index="1" unique_id=2072268142]
 layers = 17
 
-[node name="crops_dirtDoubleRowCorner_003" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1133680547) index="2" unique_id=1472918862]
+[node name="crops_dirtDoubleRowCorner_003" parent="TOWER/dirt" parent_id_path=PackedInt32Array(529011868) index="2" unique_id=958061477]
 layers = 17
 
-[node name="crops_dirtDoubleRowCorner_002" parent="TOWER/dirt" parent_id_path=PackedInt32Array(1133680547) index="3" unique_id=444582788]
+[node name="crops_dirtDoubleRowCorner_002" parent="TOWER/dirt" parent_id_path=PackedInt32Array(529011868) index="3" unique_id=89860983]
 layers = 17

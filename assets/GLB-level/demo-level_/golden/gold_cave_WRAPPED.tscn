@@ -170,56 +170,56 @@ _data = {
 
 [node name="GOLDC" unique_id=2056180143 instance=ExtResource("1_c0ayj")]
 
-[node name="gold cave" parent="." index="0" unique_id=386829431]
+[node name="gold cave" parent="." index="0" unique_id=1496658637]
 layers = 17
 
-[node name="gold cave_001" parent="." index="1" unique_id=561840884]
+[node name="gold cave_001" parent="." index="1" unique_id=1516798343]
 layers = 17
 cast_shadow = 0
 
-[node name="gold cave_002" parent="." index="2" unique_id=771973751]
+[node name="gold cave_002" parent="." index="2" unique_id=1915239107]
 layers = 17
 
-[node name="gold cave_003" parent="." index="3" unique_id=1655865707]
+[node name="gold cave_003" parent="." index="3" unique_id=1688563733]
 layers = 17
 
-[node name="gold cave_004" parent="." index="4" unique_id=1183838481]
+[node name="gold cave_004" parent="." index="4" unique_id=60739347]
 layers = 17
 
-[node name="gold cave_005" parent="." index="5" unique_id=773078223]
+[node name="gold cave_005" parent="." index="5" unique_id=1262793208]
 layers = 17
 
-[node name="gold cave_012" parent="." index="6" unique_id=1300757741]
+[node name="gold cave_012" parent="." index="6" unique_id=336712298]
 layers = 17
 
-[node name="Plane_013" parent="." index="8" unique_id=584384679]
+[node name="Plane_013" parent="." index="8" unique_id=768364559]
 layers = 17
 
-[node name="Tower middle_002" parent="." index="9" unique_id=167142275]
+[node name="Tower middle_002" parent="." index="9" unique_id=1745308159]
 layers = 17
 
-[node name="Cave_Rocks_C_008" parent="Tower middle_002" index="0" unique_id=590737370]
+[node name="Cave_Rocks_C_008" parent="Tower middle_002" index="0" unique_id=555476756]
 cast_shadow = 0
 
-[node name="Tower lowest_001" parent="Tower middle_002" index="1" unique_id=1867049588]
+[node name="Tower lowest_001" parent="Tower middle_002" index="1" unique_id=1473343347]
 layers = 17
 
-[node name="Tower middle_003" parent="." index="10" unique_id=2012029109]
+[node name="Tower middle_003" parent="." index="10" unique_id=836447640]
 layers = 17
 
-[node name="Tower lowest_002" parent="Tower middle_003" index="0" unique_id=1689554742]
+[node name="Tower lowest_002" parent="Tower middle_003" index="0" unique_id=617472899]
 layers = 17
 
-[node name="Tower lowest_003" parent="Tower middle_003" index="1" unique_id=1028022765]
+[node name="Tower lowest_003" parent="Tower middle_003" index="1" unique_id=1461174244]
 layers = 17
 
-[node name="Cave_Rocks_C_001" parent="Tower middle_003/Tower lowest_003" index="0" unique_id=939255400]
+[node name="Cave_Rocks_C_001" parent="Tower middle_003/Tower lowest_003" index="0" unique_id=988305549]
 cast_shadow = 0
 
-[node name="Cave_Rocks_C_006" parent="." index="11" unique_id=351069838]
+[node name="Cave_Rocks_C_006" parent="." index="11" unique_id=1049385782]
 cast_shadow = 0
 
-[node name="gold_sun_middle" parent="." index="12" unique_id=656491785]
+[node name="gold_sun_middle" parent="." index="12" unique_id=822900442]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_3u0a6")
 
@@ -233,7 +233,7 @@ distance_fade_begin = 76.25
 omni_range = 80.0
 omni_shadow_mode = 0
 
-[node name="gold_sun_outer" parent="." index="13" unique_id=1475887221]
+[node name="gold_sun_outer" parent="." index="13" unique_id=512790208]
 unique_name_in_owner = true
 transform = Transform3D(0.06756199, 0.80976903, -0.58284575, -0.8153652, -0.29185498, -0.5, -0.57499105, 0.5090131, 0.64053935, -148.57257, -39.918842, 125.52903)
 
@@ -246,7 +246,7 @@ shadow_enabled = true
 omni_range = 60.0
 omni_shadow_mode = 0
 
-[node name="gold_sun_inner" parent="." index="14" unique_id=269572824]
+[node name="gold_sun_inner" parent="." index="14" unique_id=132812849]
 unique_name_in_owner = true
 transform = Transform3D(0.03621304, -0.798911, -0.60035795, 0.7764963, 0.40066358, -0.4863354, 0.62908036, -0.44856396, 0.63486075, -148.01036, -40.52259, 125.6196)
 
@@ -293,16 +293,16 @@ max_distance = 260.0
 panning_strength = 0.9
 bus = &"game_SFX"
 
-[node name="_Plane_016 bottom" parent="." index="20" unique_id=65276084]
+[node name="_Plane_016 bottom" parent="." index="20" unique_id=1309148015]
 layers = 17
 cast_shadow = 0
 gi_mode = 1
 
-[node name="Mountain_Group_1_010" parent="." index="22" unique_id=594391386]
+[node name="Mountain_Group_1_010" parent="." index="22" unique_id=525450170]
 mesh = ExtResource("6_ybqe6")
 
-[node name="Mountain_Group_1_012" parent="." index="24" unique_id=2020726078]
+[node name="Mountain_Group_1_012" parent="." index="24" unique_id=1121768742]
 cast_shadow = 0
 
-[node name="Mountain_Group_1_013" parent="." index="25" unique_id=1196865344]
+[node name="Mountain_Group_1_013" parent="." index="25" unique_id=1497151211]
 cast_shadow = 0

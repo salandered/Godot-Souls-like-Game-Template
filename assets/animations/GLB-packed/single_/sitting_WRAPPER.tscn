@@ -6,7 +6,7 @@
 [node name="sitting" unique_id=1816271383 instance=ExtResource("1_a8il3")]
 script = ExtResource("2_jmtx7")
 
-[node name="GeneralSkeleton" parent="Armature" parent_id_path=PackedInt32Array(1254917254) index="0" unique_id=1255804570]
+[node name="GeneralSkeleton" parent="Armature" parent_id_path=PackedInt32Array(1457442785) index="0" unique_id=1203919629]
 bones/1/position = Vector3(0.0020100938, 0.7106193, -0.030511452)
 bones/1/rotation = Quaternion(0.061658658, -0.025463708, -0.028338123, 0.99736995)
 bones/2/rotation = Quaternion(0.08976429, -0.009615814, 0.0033722164, 0.99591094)

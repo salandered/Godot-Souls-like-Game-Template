@@ -22,19 +22,19 @@ shader_parameter/emission = Color(0, 0, 0, 1)
 
 [node name="LADY2" unique_id=1102494546 instance=ExtResource("1_y01nv")]
 
-[node name="figure of a dancer" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="0" unique_id=393584863]
+[node name="figure of a dancer" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="0" unique_id=1426719839]
 layers = 17
 
-[node name="Cylinder" parent="LADY/figure of a dancer" index="0" unique_id=1373384164]
+[node name="Cylinder" parent="LADY/figure of a dancer" index="0" unique_id=1890671165]
 layers = 17
 
-[node name="Cylinder_001" parent="LADY/figure of a dancer" index="1" unique_id=1433840039]
+[node name="Cylinder_001" parent="LADY/figure of a dancer" index="1" unique_id=1150882491]
 layers = 17
 
-[node name="Cylinder_002" parent="LADY/figure of a dancer" index="2" unique_id=687907120]
+[node name="Cylinder_002" parent="LADY/figure of a dancer" index="2" unique_id=1348106184]
 layers = 17
 
-[node name="Cylinder_004" parent="LADY/figure of a dancer" index="3" unique_id=1766753546]
+[node name="Cylinder_004" parent="LADY/figure of a dancer" index="3" unique_id=630272519]
 layers = 17
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="LADY/figure of a dancer" index="4" unique_id=1631349363]
@@ -47,209 +47,209 @@ max_distance = 150.0
 panning_strength = 0.7
 bus = &"game_SFX"
 
-[node name="Plane_004" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="1" unique_id=1437823882]
+[node name="Plane_004" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="1" unique_id=904759108]
 layers = 17
 
-[node name="Plane_002" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="2" unique_id=2087235925]
+[node name="Plane_002" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="2" unique_id=753038322]
 layers = 17
 cast_shadow = 0
 
-[node name="Plane_005" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="3" unique_id=116368145]
+[node name="Plane_005" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="3" unique_id=2008968916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 205.85817, -118.33999, 300.2701)
 layers = 17
 material_override = SubResource("ShaderMaterial_mnnsh")
 cast_shadow = 0
 mesh = ExtResource("4_mnnsh")
 
-[node name="Post_C_3m_001" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="4" unique_id=697574307]
+[node name="Post_C_3m_001" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="4" unique_id=1813383675]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_004" parent="LADY/Post_C_3m_001" index="0" unique_id=1983891755]
+[node name="Post_B_Cap_004" parent="LADY/Post_C_3m_001" index="0" unique_id=1223443481]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_005" parent="LADY/Post_C_3m_001" index="1" unique_id=1583643772]
+[node name="Post_B_Cap_005" parent="LADY/Post_C_3m_001" index="1" unique_id=569008682]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_C_3m" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="5" unique_id=579196717]
+[node name="Post_C_3m" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="5" unique_id=1035046156]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_007" parent="LADY/Post_C_3m" index="1" unique_id=637998904]
+[node name="Post_B_Cap_007" parent="LADY/Post_C_3m" index="1" unique_id=1212366750]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_C_3m_002" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="6" unique_id=1246315724]
+[node name="Post_C_3m_002" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="6" unique_id=1460398787]
 layers = 17
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap" parent="LADY/Post_C_3m_002" index="0" unique_id=290004009]
+[node name="Post_B_Cap" parent="LADY/Post_C_3m_002" index="0" unique_id=59161057]
 material_override = ExtResource("5_10spf")
 
-[node name="Post_B_Cap_001" parent="LADY/Post_C_3m_002" index="1" unique_id=712280295]
+[node name="Post_B_Cap_001" parent="LADY/Post_C_3m_002" index="1" unique_id=48825740]
 layers = 17
 material_override = ExtResource("5_10spf")
 
-[node name="Stair_Post_A" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="7" unique_id=1381100676]
+[node name="Stair_Post_A" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="7" unique_id=2026717249]
 cast_shadow = 0
 
-[node name="Plane_018" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="8" unique_id=1869240539]
-layers = 17
-cast_shadow = 0
-
-[node name="Post_C_3m_003" parent="LADY" parent_id_path=PackedInt32Array(34613206) index="11" unique_id=1843303801]
-layers = 17
-material_override = ExtResource("5_10spf")
-
-[node name="GuardRail_C_CornerPost_B_001" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="0" unique_id=1995032876]
-material_override = ExtResource("5_10spf")
-
-[node name="Ceiling_Vaulted_B" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="1" unique_id=1367673116]
-layers = 17
-
-[node name="Ceiling_Vaulted_B_003" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="2" unique_id=649866493]
+[node name="Plane_018" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="8" unique_id=182883091]
 layers = 17
 cast_shadow = 0
 
-[node name="Ceiling_Vaulted_B_004" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="3" unique_id=1333543225]
+[node name="Post_C_3m_003" parent="LADY" parent_id_path=PackedInt32Array(1963206885) index="11" unique_id=1371762232]
+layers = 17
+material_override = ExtResource("5_10spf")
+
+[node name="GuardRail_C_CornerPost_B_001" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="0" unique_id=430525808]
+material_override = ExtResource("5_10spf")
+
+[node name="Ceiling_Vaulted_B" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="1" unique_id=1674757775]
 layers = 17
 
-[node name="Ceiling_Vaulted_B_005" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="4" unique_id=380751284]
-layers = 17
-
-[node name="Ceiling_Vaulted_B_006" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="5" unique_id=517350657]
+[node name="Ceiling_Vaulted_B_003" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="2" unique_id=301080482]
 layers = 17
 cast_shadow = 0
 
-[node name="GuardRail_C_CornerPost_B" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="6" unique_id=1963152823]
+[node name="Ceiling_Vaulted_B_004" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="3" unique_id=1982716348]
+layers = 17
+
+[node name="Ceiling_Vaulted_B_005" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="4" unique_id=830290886]
+layers = 17
+
+[node name="Ceiling_Vaulted_B_006" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="5" unique_id=907499598]
+layers = 17
+cast_shadow = 0
+
+[node name="GuardRail_C_CornerPost_B" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="6" unique_id=528560017]
 material_override = ExtResource("5_10spf")
 
-[node name="GuardRail_C_CornerPost_B_002" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="7" unique_id=1595632486]
+[node name="GuardRail_C_CornerPost_B_002" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="7" unique_id=473353717]
 material_override = ExtResource("5_10spf")
 
-[node name="Ceiling_Vaulted_B_007" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="8" unique_id=1487132176]
+[node name="Ceiling_Vaulted_B_007" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="8" unique_id=619541206]
 layers = 17
 
-[node name="Ceiling_Vaulted_B_008" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="9" unique_id=1764057971]
+[node name="Ceiling_Vaulted_B_008" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="9" unique_id=520338043]
 layers = 17
 
-[node name="Ceiling_Vaulted_B_009" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="10" unique_id=298804551]
+[node name="Ceiling_Vaulted_B_009" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="10" unique_id=742362635]
 layers = 17
 
-[node name="Ambulatory_Outer_Roof_A_Side_A_001" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="11" unique_id=11167665]
+[node name="Ambulatory_Outer_Roof_A_Side_A_001" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="11" unique_id=1498415883]
 visible = false
 cast_shadow = 0
 
-[node name="Ambulatory_Outer_Roof_A_Side_A_002" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="12" unique_id=881762408]
+[node name="Ambulatory_Outer_Roof_A_Side_A_002" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="12" unique_id=231284884]
 visible = false
 
-[node name="Cube" parent="LADY/lady postament" parent_id_path=PackedInt32Array(191384862) index="13" unique_id=1022662399]
+[node name="Cube" parent="LADY/lady postament" parent_id_path=PackedInt32Array(1174191997) index="13" unique_id=1437079748]
 material_override = ExtResource("5_10spf")
 
-[node name="Cave_Platform_A" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="0" unique_id=1618591890]
+[node name="Cave_Platform_A" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="0" unique_id=148075731]
 layers = 17
 
-[node name="Cave_Platform_A_002" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="1" unique_id=1464993418]
+[node name="Cave_Platform_A_002" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="1" unique_id=1179478112]
 layers = 17
 
-[node name="Cave_Platform_I_003" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="2" unique_id=312541187]
+[node name="Cave_Platform_I_003" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="2" unique_id=1726958756]
 layers = 17
 
-[node name="Plane_001" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="3" unique_id=590970796]
+[node name="Plane_001" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="3" unique_id=1834776274]
 layers = 17
 cast_shadow = 0
 
-[node name="Plane_003" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="4" unique_id=1927246945]
+[node name="Plane_003" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="4" unique_id=1063321173]
 layers = 17
 
-[node name="Plane_017" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="6" unique_id=254130865]
+[node name="Plane_017" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="6" unique_id=69201767]
 layers = 17
 
-[node name="Rock_005" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="7" unique_id=2126063407]
+[node name="Rock_005" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="7" unique_id=5408630]
 layers = 17
 
-[node name="_Plane_015" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="8" unique_id=891482877]
+[node name="_Plane_015" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="8" unique_id=1995525182]
 layers = 17
 
-[node name="Cave_Platform_I_002" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="9" unique_id=980621366]
+[node name="Cave_Platform_I_002" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="9" unique_id=965326196]
 layers = 17
 
-[node name="Rock_008" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="10" unique_id=559695825]
+[node name="Rock_008" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="10" unique_id=1367240415]
 layers = 17
 
-[node name="Rock_009" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="11" unique_id=501831444]
+[node name="Rock_009" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="11" unique_id=19153056]
 layers = 17
 
-[node name="Rock_010" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="12" unique_id=2128248870]
+[node name="Rock_010" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="12" unique_id=470403033]
 layers = 17
 
-[node name="Rock_011" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="13" unique_id=527746063]
+[node name="Rock_011" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="13" unique_id=1522870425]
 layers = 17
 
-[node name="old plain big_001" parent="LADY/below solid" parent_id_path=PackedInt32Array(1474436639) index="14" unique_id=51685618]
+[node name="old plain big_001" parent="LADY/below solid" parent_id_path=PackedInt32Array(1924975302) index="14" unique_id=410547870]
 layers = 17
 
-[node name="Porta_MaHora_001_0_002" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="1" unique_id=1501788775]
+[node name="Porta_MaHora_001_0_002" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="1" unique_id=1332853728]
 layers = 17
 
-[node name="MenlogateLow main_004" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="2" unique_id=1148813484]
+[node name="MenlogateLow main_004" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="2" unique_id=2019247948]
 layers = 17
 
-[node name="MenlogateLow main_003" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="3" unique_id=2138818755]
+[node name="MenlogateLow main_003" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="3" unique_id=974983468]
 layers = 17
 
-[node name="MenlogateLow main_002" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="4" unique_id=1095455726]
+[node name="MenlogateLow main_002" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="4" unique_id=520515565]
 layers = 17
 
-[node name="Porta_MaHora_001_0_001" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="5" unique_id=48438242]
+[node name="Porta_MaHora_001_0_001" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="5" unique_id=2117563837]
 layers = 17
 cast_shadow = 0
 mesh = ExtResource("5_bduqb")
 
-[node name="Porta_MaHora_001_0_003" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="6" unique_id=843765780]
+[node name="Porta_MaHora_001_0_003" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="6" unique_id=1639021940]
 layers = 17
 cast_shadow = 0
 
-[node name="Boat_B_1" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="8" unique_id=1770169859]
+[node name="Boat_B_1" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="8" unique_id=1417452606]
 cast_shadow = 0
 
-[node name="Port_FirstAge_Level3" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="9" unique_id=485728352]
+[node name="Port_FirstAge_Level3" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="9" unique_id=418788255]
 cast_shadow = 0
 
-[node name="WallTowers_SecondAge" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="10" unique_id=1092903789]
+[node name="WallTowers_SecondAge" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="10" unique_id=2081806034]
 layers = 17
 cast_shadow = 0
 
-[node name="Boat_B_1_001" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="11" unique_id=555530762]
+[node name="Boat_B_1_001" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="11" unique_id=2118237712]
 cast_shadow = 0
 
-[node name="Boat_B_1_002" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="12" unique_id=107784033]
+[node name="Boat_B_1_002" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="12" unique_id=379017333]
 cast_shadow = 0
 
-[node name="Houses_FirstAge_3_Level2" parent="LADY/city" parent_id_path=PackedInt32Array(1845266108) index="13" unique_id=884899025]
+[node name="Houses_FirstAge_3_Level2" parent="LADY/city" parent_id_path=PackedInt32Array(960982601) index="13" unique_id=106357601]
 cast_shadow = 0
 
-[node name="Cylinder_003" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="0" unique_id=1843410882]
+[node name="Cylinder_003" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="0" unique_id=1489582973]
 layers = 17
 mesh = ExtResource("6_xmewj")
 
-[node name="_Plane_012" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="1" unique_id=1775325651]
+[node name="_Plane_012" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="1" unique_id=329062402]
 layers = 17
 
-[node name="_Plane_013" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="2" unique_id=452100760]
+[node name="_Plane_013" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="2" unique_id=449332883]
 layers = 17
 
-[node name="_Plane_014" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="4" unique_id=1860544171]
+[node name="_Plane_014" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="4" unique_id=1239164970]
 layers = 17
 
-[node name="_Plane_018" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="5" unique_id=1224450084]
+[node name="_Plane_018" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="5" unique_id=621044205]
 layers = 17
 
-[node name="Cylinder_006" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="6" unique_id=2045577038]
+[node name="Cylinder_006" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="6" unique_id=1409621649]
 layers = 17
 
-[node name="_Plane_019" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="7" unique_id=1363915053]
+[node name="_Plane_019" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="7" unique_id=252491506]
 layers = 17
 
-[node name="Cylinder_007" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="8" unique_id=704106706]
+[node name="Cylinder_007" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="8" unique_id=1166183315]
 layers = 17
 
-[node name="Cylinder_008" parent="LADY/up solid" parent_id_path=PackedInt32Array(65817588) index="9" unique_id=1847071930]
+[node name="Cylinder_008" parent="LADY/up solid" parent_id_path=PackedInt32Array(864696404) index="9" unique_id=1643781362]
 layers = 17

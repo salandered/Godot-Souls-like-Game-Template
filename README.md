@@ -5,6 +5,7 @@
 - [Key features](#key-features)
 - [Project documentation](#project-documentation)
 - [How to Download \& Setup](#how-to-download--setup)
+- [Attribution](#attribution)
 - [License](#license)
 
 ---
@@ -122,6 +123,12 @@ Launch [Godot v4.6.1](https://godotengine.org/download/windows/) or later:
 - Wait for the project initialization
 
 Hit **F5**.
+
+## Attribution
+
+This project is inspired by [Cats-Godot4-Modular-Souls-like-Template](https://github.com/catprisbrey/Cats-Godot4-Modular-Souls-like-Template) and [Godot_Universal-Controller-tutorial](https://github.com/Gab-ani/Godot_Universal-Controller-tutorial).
+
+See also [ATTRIBUTION.md](_attribution/ATTRIBUTION.md)
 
 ## License
 

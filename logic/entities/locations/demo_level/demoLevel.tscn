@@ -433,7 +433,7 @@ debug_color = Color(0.7, 0.525, 0, 1)
 
 [node name="LadyEntry" type="Area3D" parent="Weather/WeatherSystem" unique_id=1472407099 node_paths=PackedStringArray("weather_system")]
 unique_name_in_owner = true
-transform = Transform3D(-0.10041386, 0, -0.99494576, 0, 1, 0, 0.99494576, 0, -0.10041386, -14.559504, 1.620214, 30.42221)
+transform = Transform3D(-0.10041366, -0.001989674, -0.9949438, -0.00019979085, 0.99999803, -0.0019796179, 0.99494576, 0, -0.10041386, -14.559504, 1.620214, 30.42221)
 script = ExtResource("6_cxdwc")
 weather_system = NodePath("..")
 change_sun_scatter_color = true
@@ -449,6 +449,8 @@ target_amb_energy = 0.4
 change_amb_sky_contribution = true
 change_fog_light_color = true
 change_vol_fog_light_color = true
+change_vol_fog_density = true
+target_vol_fog_density = 0.015
 change_direct_light = true
 target_direct_light = 0.1
 

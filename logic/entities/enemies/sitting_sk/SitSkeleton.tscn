@@ -222,7 +222,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1968594, 0)
 
 [node name="FCS_Skeleton_working3" parent="VisualOffset" unique_id=2009219110 instance=ExtResource("8_0gb3n")]
 
-[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 1545046897) index="3" unique_id=1939009076]
+[node name="GeneralSkeleton" parent="VisualOffset/FCS_Skeleton_working3/FCS_Skeleton_working/Armature_013" parent_id_path=PackedInt32Array(2009219110, 1377951039) index="3" unique_id=1977161791]
 bones/1/position = Vector3(-0.0006257853, 0.5737995, -0.014100149)
 bones/1/rotation = Quaternion(-0.0010856661, 0.022109471, 0.032187846, 0.9992367)
 bones/2/rotation = Quaternion(0.05498478, -0.025565367, 0.0025405819, 0.99815667)

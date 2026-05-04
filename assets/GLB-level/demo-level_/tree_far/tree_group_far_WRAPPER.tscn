@@ -125,39 +125,39 @@ shadow_mesh = SubResource("ArrayMesh_a8f7e")
 
 [node name="tree group far WRAPPER" unique_id=1670385893 instance=ExtResource("1_ghkh7")]
 
-[node name="BirchTree_Dead_1_007" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="0" unique_id=1515004706]
+[node name="BirchTree_Dead_1_007" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="0" unique_id=1952013854]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="bark_debris_01_d_LOD0_004" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="1" unique_id=1656002961]
+[node name="bark_debris_01_d_LOD0_004" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="1" unique_id=1194226796]
 layers = 18
 
-[node name="Resource_Gold_2" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="2" unique_id=1869445632]
+[node name="Resource_Gold_2" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="2" unique_id=2071292795]
 layers = 18
 
-[node name="BirchTree_Dead_1_008" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="3" unique_id=321738967]
+[node name="BirchTree_Dead_1_008" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="3" unique_id=1224598163]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="BirchTree_Dead_1_009" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="4" unique_id=1671153903]
+[node name="BirchTree_Dead_1_009" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="4" unique_id=748153788]
 layers = 2
 
-[node name="BirchTree_Dead_1_010" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="5" unique_id=1817639010]
-layers = 2
-cast_shadow = 0
-gi_mode = 0
-
-[node name="BirchTree_Dead_1_011" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="6" unique_id=1722517392]
+[node name="BirchTree_Dead_1_010" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="5" unique_id=1980722192]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="bark_debris_01_d_LOD0_005" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="7" unique_id=1692236232]
+[node name="BirchTree_Dead_1_011" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="6" unique_id=697269634]
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+
+[node name="bark_debris_01_d_LOD0_005" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="7" unique_id=962902445]
 layers = 18
 
-[node name="bark_debris_01_d_LOD0_006" type="MeshInstance3D" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="8" unique_id=714007552]
+[node name="bark_debris_01_d_LOD0_006" type="MeshInstance3D" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="8" unique_id=714007552]
 transform = Transform3D(0.2992182, -0.83518565, 0.461447, 0.35626692, 0.5464169, 0.75795937, -0.8851792, -0.062396884, 0.46104702, -86.77947, -2.6258802, 5.677374)
 layers = 18
 mesh = SubResource("ArrayMesh_cd8ep")
@@ -172,126 +172,126 @@ transform = Transform3D(-0.21768898, 0.080188036, -0.9727198, -0.598905, -0.7979
 layers = 17
 mesh = SubResource("ArrayMesh_rxyr3")
 
-[node name="bark_debris_01_d_LOD0_007" type="MeshInstance3D" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="9" unique_id=999631612]
+[node name="bark_debris_01_d_LOD0_007" type="MeshInstance3D" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="9" unique_id=999631612]
 transform = Transform3D(-0.021527514, -0.019569308, -0.99957705, -0.31424654, -0.9490028, 0.025347, -0.94909734, 0.31465924, 0.0142801255, -94.17026, -1.8139119, 4.6715164)
 layers = 18
 mesh = SubResource("ArrayMesh_cd8ep")
 
-[node name="BirchTree_Dead_1_012" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="10" unique_id=33810580]
+[node name="BirchTree_Dead_1_012" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="10" unique_id=1627953241]
 layers = 2
 
-[node name="Resource_Gold_2_004" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="11" unique_id=1131679099]
+[node name="Resource_Gold_2_004" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="11" unique_id=1822642204]
 layers = 18
 
-[node name="BirchTree_Dead_1_002" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="12" unique_id=553227599]
+[node name="BirchTree_Dead_1_002" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="12" unique_id=646342396]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="Resource_Gold_2_001" parent="tree group far" parent_id_path=PackedInt32Array(1395099497) index="13" unique_id=838770609]
+[node name="Resource_Gold_2_001" parent="tree group far" parent_id_path=PackedInt32Array(1478411982) index="13" unique_id=2004486508]
 layers = 18
 cast_shadow = 0
 
-[node name="DeadTree_10_004" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="0" unique_id=1392317993]
+[node name="DeadTree_10_004" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="0" unique_id=1950713756]
 layers = 2
 
-[node name="DeadTree_10_016" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="1" unique_id=1816115220]
+[node name="DeadTree_10_016" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="1" unique_id=162061683]
 layers = 2
 
-[node name="DeadTree_10_019" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="2" unique_id=928915439]
+[node name="DeadTree_10_019" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="2" unique_id=1391710431]
 layers = 2
 
-[node name="DeadTree_10_021" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="3" unique_id=534223677]
+[node name="DeadTree_10_021" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="3" unique_id=1951788993]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="DeadTree_10_024" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="4" unique_id=79581609]
+[node name="DeadTree_10_024" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="4" unique_id=1031240870]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="DeadTree_10_026" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="5" unique_id=89647251]
+[node name="DeadTree_10_026" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="5" unique_id=705341541]
 layers = 2
 
-[node name="DeadTree_10_029" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="6" unique_id=324582323]
+[node name="DeadTree_10_029" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="6" unique_id=2127516528]
 layers = 2
 cast_shadow = 0
 
-[node name="DeadTree_10_030" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="7" unique_id=97546187]
+[node name="DeadTree_10_030" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="7" unique_id=405766690]
 layers = 2
 
-[node name="DeadTree_10_031" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="8" unique_id=1464979582]
+[node name="DeadTree_10_031" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="8" unique_id=600224810]
 layers = 2
 
-[node name="DeadTree_10_034" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(1298141531) index="9" unique_id=665938998]
+[node name="DeadTree_10_034" parent="tree group far/dead tree" parent_id_path=PackedInt32Array(943549852) index="9" unique_id=1503706597]
 layers = 2
 cast_shadow = 0
 gi_mode = 0
 
-[node name="turtle sk_012" parent="tree group far/turtles" parent_id_path=PackedInt32Array(306640795) index="0" unique_id=14934230]
+[node name="turtle sk_012" parent="tree group far/turtles" parent_id_path=PackedInt32Array(1936894991) index="0" unique_id=1417162479]
 layers = 2
 
-[node name="turtle sk_016" parent="tree group far/turtles" parent_id_path=PackedInt32Array(306640795) index="1" unique_id=1799525387]
+[node name="turtle sk_016" parent="tree group far/turtles" parent_id_path=PackedInt32Array(1936894991) index="1" unique_id=1668228935]
 layers = 18
 
-[node name="turtle sk_020" parent="tree group far/turtles/turtle sk_016" index="0" unique_id=800119473]
+[node name="turtle sk_020" parent="tree group far/turtles/turtle sk_016" index="0" unique_id=1969472545]
 layers = 2
 
-[node name="turtle sk_021" parent="tree group far/turtles/turtle sk_016" index="1" unique_id=758251977]
+[node name="turtle sk_021" parent="tree group far/turtles/turtle sk_016" index="1" unique_id=1813610559]
 layers = 2
 
-[node name="turtle sk_017" parent="tree group far/turtles" parent_id_path=PackedInt32Array(306640795) index="2" unique_id=1673044922]
+[node name="turtle sk_017" parent="tree group far/turtles" parent_id_path=PackedInt32Array(1936894991) index="2" unique_id=749150283]
 layers = 2
 
-[node name="turtle sk_019" parent="tree group far/turtles" parent_id_path=PackedInt32Array(306640795) index="3" unique_id=111409850]
+[node name="turtle sk_019" parent="tree group far/turtles" parent_id_path=PackedInt32Array(1936894991) index="3" unique_id=1338897180]
 layers = 18
 
-[node name="turtle sk_001" parent="tree group far/turtles" parent_id_path=PackedInt32Array(306640795) index="4" unique_id=744312899]
+[node name="turtle sk_001" parent="tree group far/turtles" parent_id_path=PackedInt32Array(1936894991) index="4" unique_id=142567080]
 layers = 18
 
-[node name="old plain big" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="0" unique_id=2001970401]
+[node name="old plain big" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="0" unique_id=1364820490]
 layers = 18
 cast_shadow = 0
 surface_material_override/0 = ExtResource("5_rxyr3")
 
-[node name="Plane_009" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="1" unique_id=1471266460]
+[node name="Plane_009" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="1" unique_id=798709267]
 layers = 18
 cast_shadow = 0
 
-[node name="Plane_008" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="2" unique_id=1250723288]
+[node name="Plane_008" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="2" unique_id=1257122037]
 layers = 18
 cast_shadow = 0
 
-[node name="Plane_010" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="3" unique_id=440473695]
+[node name="Plane_010" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="3" unique_id=1476282050]
 layers = 18
 
-[node name="Plane_012" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="4" unique_id=845082693 instance=ExtResource("5_3ifqb")]
+[node name="Plane_012" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="4" unique_id=845082693 instance=ExtResource("5_3ifqb")]
 transform = Transform3D(0.9109435, 0.37852928, 0.16400424, -0.37173858, 0.92557997, -0.07149944, -0.17886366, 0.004165251, 0.98386496, -97.04648, 3.1734467, -11.455543)
 
-[node name="Mountain_Group_1_015" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="5" unique_id=1061274781]
+[node name="Mountain_Group_1_015" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="5" unique_id=894003890]
 layers = 18
 
-[node name="Plane_011" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="6" unique_id=54786137]
-layers = 18
-cast_shadow = 0
-
-[node name="Plane_014" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="7" unique_id=281569594]
+[node name="Plane_011" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="6" unique_id=1164906590]
 layers = 18
 cast_shadow = 0
-gi_lightmap_texel_scale = 0.5
 
-[node name="Plane_015" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="8" unique_id=1499475813]
+[node name="Plane_014" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="7" unique_id=691299983]
 layers = 18
 cast_shadow = 0
 gi_lightmap_texel_scale = 0.5
 
-[node name="Plane_016" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="9" unique_id=774303575]
+[node name="Plane_015" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="8" unique_id=1566610189]
+layers = 18
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.5
+
+[node name="Plane_016" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="9" unique_id=289764771]
 layers = 18
 cast_shadow = 0
 
-[node name="turtle sk cover outer" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="10" unique_id=837446470]
+[node name="turtle sk cover outer" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="10" unique_id=1475876450]
 layers = 18
 
-[node name="side cover" parent="tree group far/all planes" parent_id_path=PackedInt32Array(430414626) index="11" unique_id=1353559074]
+[node name="side cover" parent="tree group far/all planes" parent_id_path=PackedInt32Array(1305498815) index="11" unique_id=2056090511]
 layers = 18

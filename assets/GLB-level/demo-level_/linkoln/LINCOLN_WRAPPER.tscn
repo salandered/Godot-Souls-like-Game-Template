@@ -170,10 +170,10 @@ points = PackedVector3Array(-0.8961407, 0.464724, -0.07064277, -0.8660111, -0.47
 
 [node name="LINCOLN" unique_id=1641321735 instance=ExtResource("1_urs8r")]
 
-[node name="Flower_002" parent="lincoln" parent_id_path=PackedInt32Array(801721057) index="0" unique_id=1890286218]
+[node name="Flower_002" parent="lincoln" parent_id_path=PackedInt32Array(762515526) index="0" unique_id=1774947601]
 visible = false
 
-[node name="lever_platform_002" parent="lincoln" parent_id_path=PackedInt32Array(801721057) index="3" unique_id=940548789]
+[node name="lever_platform_002" parent="lincoln" parent_id_path=PackedInt32Array(762515526) index="3" unique_id=916971546]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/lever_platform_002" index="0" unique_id=2131088001]
@@ -181,30 +181,30 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/lever_platform_002/StaticBody3D" index="0" unique_id=727735362]
 shape = SubResource("ConcavePolygonShape3D_j1nsy")
 
-[node name="CollisionShape3D" parent="lincoln/--collisions lincoln--/Capsule " parent_id_path=PackedInt32Array(847595829) index="0" unique_id=881931311]
+[node name="CollisionShape3D" parent="lincoln/--collisions lincoln--/Capsule " parent_id_path=PackedInt32Array(1839890981) index="0" unique_id=658816408]
 visible = false
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Post_Reinforced_E_001" parent_id_path=PackedInt32Array(1502965186) index="0" unique_id=586940578]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Post_Reinforced_E_001" parent_id_path=PackedInt32Array(1674276437) index="0" unique_id=586940578]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Post_Reinforced_E_001/StaticBody3D" index="0" unique_id=1810566143]
 shape = SubResource("ConvexPolygonShape3D_vm7w3")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_003" parent_id_path=PackedInt32Array(1230298601) index="0" unique_id=1462922709]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_003" parent_id_path=PackedInt32Array(486439042) index="0" unique_id=1462922709]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_003/StaticBody3D" index="0" unique_id=776112188]
 shape = SubResource("ConvexPolygonShape3D_rhekc")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_004" parent_id_path=PackedInt32Array(787660002) index="0" unique_id=649026086]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_004" parent_id_path=PackedInt32Array(1534393732) index="0" unique_id=649026086]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_004/StaticBody3D" index="0" unique_id=2036294290]
 shape = SubResource("ConvexPolygonShape3D_5mlcs")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_005" parent_id_path=PackedInt32Array(1773808734) index="0" unique_id=2020589266]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_005" parent_id_path=PackedInt32Array(779021612) index="0" unique_id=2020589266]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_005/StaticBody3D" index="0" unique_id=497086407]
 shape = SubResource("ConvexPolygonShape3D_yqln5")
 
-[node name="Cave_Rocks_C_006" type="MeshInstance3D" parent="lincoln/beams etc" parent_id_path=PackedInt32Array(1397536581) index="5" unique_id=1156906552]
+[node name="Cave_Rocks_C_006" type="MeshInstance3D" parent="lincoln/beams etc" parent_id_path=PackedInt32Array(826105247) index="5" unique_id=1156906552]
 transform = Transform3D(1.242, 0, 0, 0, 1.242, 0, 0, 0, 1.242, -27.397894, 0.9684205, 40.505867)
 mesh = SubResource("ArrayMesh_kwhnf")
 
@@ -213,7 +213,7 @@ mesh = SubResource("ArrayMesh_kwhnf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_006/StaticBody3D" index="0" unique_id=1294422813]
 shape = SubResource("ConvexPolygonShape3D_yqln5")
 
-[node name="Cave_Rocks_C_008" type="MeshInstance3D" parent="lincoln/beams etc" parent_id_path=PackedInt32Array(1397536581) index="6" unique_id=825712631]
+[node name="Cave_Rocks_C_008" type="MeshInstance3D" parent="lincoln/beams etc" parent_id_path=PackedInt32Array(826105247) index="6" unique_id=825712631]
 transform = Transform3D(-0.22548404, 1.1301981, 0.27574292, 0.7154488, 0.35619825, -0.87491757, -0.9173412, 0, -0.75014, -26.250086, 0.9584274, 40.688644)
 mesh = SubResource("ArrayMesh_kwhnf")
 
@@ -222,27 +222,27 @@ mesh = SubResource("ArrayMesh_kwhnf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_008/StaticBody3D" index="0" unique_id=180619464]
 shape = SubResource("ConvexPolygonShape3D_yqln5")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Post_Reinforced_E_002" parent_id_path=PackedInt32Array(1114844682) index="0" unique_id=2022163338]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Post_Reinforced_E_002" parent_id_path=PackedInt32Array(379575674) index="0" unique_id=2022163338]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Post_Reinforced_E_002/StaticBody3D" index="0" unique_id=672256372]
 shape = SubResource("ConvexPolygonShape3D_5k7my")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Post_Reinforced_E_003" parent_id_path=PackedInt32Array(134869825) index="0" unique_id=349461498]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Post_Reinforced_E_003" parent_id_path=PackedInt32Array(665462029) index="0" unique_id=349461498]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Post_Reinforced_E_003/StaticBody3D" index="0" unique_id=2112443010]
 shape = SubResource("ConvexPolygonShape3D_sqwyp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_010" parent_id_path=PackedInt32Array(610198234) index="0" unique_id=1825082357]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_010" parent_id_path=PackedInt32Array(1375062880) index="0" unique_id=1825082357]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_010/StaticBody3D" index="0" unique_id=358373063]
 shape = SubResource("ConvexPolygonShape3D_y1amq")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_007" parent_id_path=PackedInt32Array(526605103) index="0" unique_id=1271905569]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/Cave_Rocks_C_007" parent_id_path=PackedInt32Array(1432510509) index="0" unique_id=1271905569]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/Cave_Rocks_C_007/StaticBody3D" index="0" unique_id=794293137]
 shape = SubResource("ConvexPolygonShape3D_15n6n")
 
-[node name="Engel_C_002_Baked" parent="lincoln/beams etc/engels" parent_id_path=PackedInt32Array(55310060) index="0" unique_id=1184539976]
+[node name="Engel_C_002_Baked" parent="lincoln/beams etc/engels" parent_id_path=PackedInt32Array(403773005) index="0" unique_id=1669253633]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.313576, 15.493373, 17.62982)
 layers = 17
 mesh = ExtResource("3_drg2k")
@@ -252,7 +252,7 @@ mesh = ExtResource("3_drg2k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/engels/Engel_C_002_Baked/StaticBody3D" index="0" unique_id=527780092]
 shape = SubResource("ConvexPolygonShape3D_sqvx7")
 
-[node name="Engel_C_002_Baked_001" parent="lincoln/beams etc/engels" parent_id_path=PackedInt32Array(55310060) index="1" unique_id=447143067]
+[node name="Engel_C_002_Baked_001" parent="lincoln/beams etc/engels" parent_id_path=PackedInt32Array(403773005) index="1" unique_id=936163349]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.52025, 15.3718405, 17.575794)
 layers = 17
 mesh = ExtResource("3_drg2k")
@@ -262,7 +262,7 @@ mesh = ExtResource("3_drg2k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/engels/Engel_C_002_Baked_001/StaticBody3D" index="0" unique_id=1116521017]
 shape = SubResource("ConvexPolygonShape3D_j1nsy")
 
-[node name="Engel_C_002_Baked_002" parent="lincoln/beams etc/engels" parent_id_path=PackedInt32Array(55310060) index="2" unique_id=2131305033]
+[node name="Engel_C_002_Baked_002" parent="lincoln/beams etc/engels" parent_id_path=PackedInt32Array(403773005) index="2" unique_id=1434854275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.414642, 15.493373, 17.115301)
 layers = 17
 mesh = ExtResource("3_drg2k")
@@ -272,12 +272,12 @@ mesh = ExtResource("3_drg2k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/engels/Engel_C_002_Baked_002/StaticBody3D" index="0" unique_id=77720089]
 shape = SubResource("ConvexPolygonShape3D_vox6e")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/beams_001/Beam_C_004" parent_id_path=PackedInt32Array(946825895) index="0" unique_id=1951125508]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/beams etc/beams_001/Beam_C_004" parent_id_path=PackedInt32Array(70701695) index="0" unique_id=1951125508]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/beams etc/beams_001/Beam_C_004/StaticBody3D" index="0" unique_id=570370510]
 shape = SubResource("ConvexPolygonShape3D_i0rkv")
 
-[node name="column_007" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1088516663) index="0" unique_id=1581141840]
+[node name="column_007" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1083011687) index="0" unique_id=1137515106]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/column leflovers/column_007" index="0" unique_id=1226518044]
@@ -285,7 +285,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/column leflovers/column_007/StaticBody3D" index="0" unique_id=838595939]
 shape = SubResource("ConvexPolygonShape3D_0kd1h")
 
-[node name="column_008" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1088516663) index="1" unique_id=284712313]
+[node name="column_008" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1083011687) index="1" unique_id=786980478]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/column leflovers/column_008" index="0" unique_id=194586077]
@@ -293,7 +293,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/column leflovers/column_008/StaticBody3D" index="0" unique_id=1241952972]
 shape = SubResource("ConvexPolygonShape3D_0rlki")
 
-[node name="column_009" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1088516663) index="2" unique_id=1294985328]
+[node name="column_009" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1083011687) index="2" unique_id=411988181]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/column leflovers/column_009" index="0" unique_id=2037836572]
@@ -301,7 +301,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/column leflovers/column_009/StaticBody3D" index="0" unique_id=281978257]
 shape = SubResource("ConvexPolygonShape3D_2i1wv")
 
-[node name="column_010" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1088516663) index="3" unique_id=665329172]
+[node name="column_010" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1083011687) index="3" unique_id=428081576]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/column leflovers/column_010" index="0" unique_id=550102164]
@@ -309,7 +309,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/column leflovers/column_010/StaticBody3D" index="0" unique_id=802992117]
 shape = SubResource("ConvexPolygonShape3D_4cx58")
 
-[node name="column_011" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1088516663) index="4" unique_id=1524643169]
+[node name="column_011" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1083011687) index="4" unique_id=1408252173]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/column leflovers/column_011" index="0" unique_id=1019079413]
@@ -317,7 +317,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/column leflovers/column_011/StaticBody3D" index="0" unique_id=2082647370]
 shape = SubResource("ConvexPolygonShape3D_apeb3")
 
-[node name="column_006" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1088516663) index="5" unique_id=233509423]
+[node name="column_006" parent="lincoln/column leflovers" parent_id_path=PackedInt32Array(1083011687) index="5" unique_id=2012001391]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/column leflovers/column_006" index="0" unique_id=773895444]
@@ -325,30 +325,30 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/column leflovers/column_006/StaticBody3D" index="0" unique_id=1329837476]
 shape = SubResource("ConvexPolygonShape3D_brnxu")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/Cylinder001_006" parent_id_path=PackedInt32Array(1317037124) index="0" unique_id=562780491]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/Cylinder001_006" parent_id_path=PackedInt32Array(2003958890) index="0" unique_id=562780491]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/Cylinder001_006/StaticBody3D" index="0" unique_id=1544029497]
 shape = SubResource("ConvexPolygonShape3D_28s8f")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/Cylinder001_007" parent_id_path=PackedInt32Array(46248862) index="0" unique_id=1782871646]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/Cylinder001_007" parent_id_path=PackedInt32Array(759917916) index="0" unique_id=1782871646]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/Cylinder001_007/StaticBody3D" index="0" unique_id=1107827184]
 shape = SubResource("ConvexPolygonShape3D_tpw3c")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/Cave_Rocks_C" parent_id_path=PackedInt32Array(146090289) index="0" unique_id=1791208981]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/Cave_Rocks_C" parent_id_path=PackedInt32Array(1263817509) index="0" unique_id=1791208981]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/Cave_Rocks_C/StaticBody3D" index="0" unique_id=310580923]
 shape = SubResource("ConvexPolygonShape3D_bys8s")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/lincoln__001" parent_id_path=PackedInt32Array(672087328) index="0" unique_id=1151721447]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/lincoln__001" parent_id_path=PackedInt32Array(1590425143) index="0" unique_id=1151721447]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/lincoln__001/StaticBody3D" index="0" unique_id=67347986]
 shape = SubResource("ConvexPolygonShape3D_5047m")
 
-[node name="left wing_001" parent="lincoln/props" parent_id_path=PackedInt32Array(335763135) index="4" unique_id=1874037662]
+[node name="left wing_001" parent="lincoln/props" parent_id_path=PackedInt32Array(1347466966) index="4" unique_id=801448159]
 layers = 17
 
-[node name="left wing_002" parent="lincoln/props" parent_id_path=PackedInt32Array(335763135) index="5" unique_id=1332687075]
+[node name="left wing_002" parent="lincoln/props" parent_id_path=PackedInt32Array(1347466966) index="5" unique_id=25893403]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/left wing_002" index="0" unique_id=1867957680]
@@ -356,10 +356,10 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/left wing_002/StaticBody3D" index="0" unique_id=614194855]
 shape = SubResource("ConvexPolygonShape3D_s13eq")
 
-[node name="lincoln__002" parent="lincoln/props" parent_id_path=PackedInt32Array(335763135) index="6" unique_id=1840239041]
+[node name="lincoln__002" parent="lincoln/props" parent_id_path=PackedInt32Array(1347466966) index="6" unique_id=1006656330]
 layers = 17
 
-[node name="lincoln__006" parent="lincoln/props" parent_id_path=PackedInt32Array(335763135) index="8" unique_id=187377959]
+[node name="lincoln__006" parent="lincoln/props" parent_id_path=PackedInt32Array(1347466966) index="8" unique_id=466813340]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/lincoln__006" index="0" unique_id=1512194969]
@@ -367,7 +367,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/lincoln__006/StaticBody3D" index="0" unique_id=1273496578]
 shape = SubResource("ConvexPolygonShape3D_drg2k")
 
-[node name="lincoln__007" parent="lincoln/props" parent_id_path=PackedInt32Array(335763135) index="9" unique_id=1582810482]
+[node name="lincoln__007" parent="lincoln/props" parent_id_path=PackedInt32Array(1347466966) index="9" unique_id=1105672837]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/lincoln__007" index="0" unique_id=194888182]
@@ -375,7 +375,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/lincoln__007/StaticBody3D" index="0" unique_id=1196551857]
 shape = SubResource("ConvexPolygonShape3D_0cjk1")
 
-[node name="lincoln__008" parent="lincoln/props" parent_id_path=PackedInt32Array(335763135) index="10" unique_id=864611970]
+[node name="lincoln__008" parent="lincoln/props" parent_id_path=PackedInt32Array(1347466966) index="10" unique_id=260773217]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/props/lincoln__008" index="0" unique_id=2103291613]
@@ -383,21 +383,21 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/props/lincoln__008/StaticBody3D" index="0" unique_id=2032652645]
 shape = SubResource("ConvexPolygonShape3D_jmqg6")
 
-[node name="lincoln FLOOR" parent="lincoln/__solid_001" parent_id_path=PackedInt32Array(603164780) index="0" unique_id=559976861]
+[node name="lincoln FLOOR" parent="lincoln/__solid_001" parent_id_path=PackedInt32Array(1646635589) index="0" unique_id=493888867]
 layers = 17
 mesh = ExtResource("4_0cjk1")
 surface_material_override/1 = SubResource("StandardMaterial3D_fiv4i")
 
-[node name="cross column" parent="lincoln/__solid_001" parent_id_path=PackedInt32Array(603164780) index="1" unique_id=384919807]
+[node name="cross column" parent="lincoln/__solid_001" parent_id_path=PackedInt32Array(1646635589) index="1" unique_id=662580586]
 layers = 17
 
-[node name="left wing" parent="lincoln/__solid_001" parent_id_path=PackedInt32Array(603164780) index="2" unique_id=1699348900]
+[node name="left wing" parent="lincoln/__solid_001" parent_id_path=PackedInt32Array(1646635589) index="2" unique_id=1383461450]
 layers = 17
 
-[node name="lincoln__visuals" parent="lincoln/__solid_001/lincoln_ " parent_id_path=PackedInt32Array(1339865772) index="1" unique_id=1618380490]
+[node name="lincoln__visuals" parent="lincoln/__solid_001/lincoln_ " parent_id_path=PackedInt32Array(263622146) index="1" unique_id=375124109]
 layers = 17
 
-[node name="Chair_1_001" parent="lincoln/roof" parent_id_path=PackedInt32Array(264371947) index="2" unique_id=1492966288]
+[node name="Chair_1_001" parent="lincoln/roof" parent_id_path=PackedInt32Array(1447856422) index="2" unique_id=1823792777]
 material_override = ExtResource("2_sqvx7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/roof/Chair_1_001" index="0" unique_id=1603531710]
@@ -405,15 +405,15 @@ material_override = ExtResource("2_sqvx7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/roof/Chair_1_001/StaticBody3D" index="0" unique_id=733778310]
 shape = SubResource("ConcavePolygonShape3D_vox6e")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/roof/Fence1_001" parent_id_path=PackedInt32Array(690963211) index="0" unique_id=1645451665]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/roof/Fence1_001" parent_id_path=PackedInt32Array(16753394) index="0" unique_id=1645451665]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/roof/Fence1_001/StaticBody3D" index="0" unique_id=1778883962]
 shape = SubResource("ConvexPolygonShape3D_m88l6")
 
-[node name="Candle_1_001" parent="lincoln/roof/candlestick 4_002" parent_id_path=PackedInt32Array(1355763212) index="0" unique_id=1745407814]
+[node name="Candle_1_001" parent="lincoln/roof/candlestick 4_002" parent_id_path=PackedInt32Array(1088852129) index="0" unique_id=1154747729]
 material_override = ExtResource("3_j1nsy")
 
-[node name="Engel_C_002_Baked_004" parent="lincoln/roof" parent_id_path=PackedInt32Array(264371947) index="5" unique_id=2004662845]
+[node name="Engel_C_002_Baked_004" parent="lincoln/roof" parent_id_path=PackedInt32Array(1447856422) index="5" unique_id=865879461]
 layers = 17
 
 [node name="StaticBody3D" type="StaticBody3D" parent="lincoln/roof/Engel_C_002_Baked_004" index="0" unique_id=2127886926]
@@ -422,7 +422,7 @@ layers = 17
 transform = Transform3D(1, 0, 2.9802322e-08, -3.7252903e-09, 0.99999994, 0, 0, 0, 0.99999994, 0.029874802, -0.0051116943, 0.01403594)
 shape = SubResource("ConvexPolygonShape3D_wf6dg")
 
-[node name="Engel_C_002_Baked_005" parent="lincoln/roof" parent_id_path=PackedInt32Array(264371947) index="6" unique_id=561514414]
+[node name="Engel_C_002_Baked_005" parent="lincoln/roof" parent_id_path=PackedInt32Array(1447856422) index="6" unique_id=1560016694]
 transform = Transform3D(-0.04423511, -0.99367845, 0.10318191, 0.9588214, -0.07123184, -0.274932, 0.2805438, 0.08677138, 0.95591104, -22.141665, 13.522039, 2.1095788)
 layers = 17
 
@@ -431,7 +431,7 @@ layers = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/roof/Engel_C_002_Baked_005/StaticBody3D" index="0" unique_id=1754192854]
 shape = SubResource("ConvexPolygonShape3D_o5we2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/roof/Fence1_002" parent_id_path=PackedInt32Array(1687933568) index="0" unique_id=204118270]
+[node name="StaticBody3D" type="StaticBody3D" parent="lincoln/roof/Fence1_002" parent_id_path=PackedInt32Array(870469135) index="0" unique_id=204118270]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="lincoln/roof/Fence1_002/StaticBody3D" index="0" unique_id=343953894]
 shape = SubResource("ConvexPolygonShape3D_368j3")
